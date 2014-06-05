@@ -14,7 +14,7 @@ namespace Rezolver.Tests
         public void ANullForObject()
         {
             IRezolverContainer r = new RezolverContainer();
-            r.Register((object)null, typeof(object));
+            r.Register(new SimpleTarget((object)null), typeof(object));
 				//how do we verify that it worked?
 				//we have to retrieve it!
 				var o = r.Fetch(typeof(object));
@@ -77,6 +77,12 @@ namespace Rezolver.Tests
 				Assert.AreEqual(IntFunc, r.Fetch(typeof(object)));
 		  }
 
-		  
+		  [TestMethod]
+		  public void AFuncForObject_ReturningItsResult()
+		  {
+				IRezolverContainer r = new RezolverContainer();
+				r.Register(IntFunc.AsRezolverDelegate(), typeof(object));
+				Assert.AreEqual(IntFuncReturn, r.Fetch(typeof(object)));
+		  }
     }
 }

@@ -5,10 +5,19 @@ using System.Text;
 
 namespace Rezolver
 {
-    public interface IRezolverContainer
-    {
-        void Register(object obj, Type type);
+	 public interface IRezolverContainer
+	 {
+		  void Register(IRezolveTarget target, Type type);
 
-		  object Fetch(Type type);
+		  IRezolveTarget Fetch(Type type);
+	 }
+
+	 public static class IRezolverContainerExtensions
+	 {
+		  public static void Register(IRezolverContainer container, object obj, Type type)
+		  {
+				container.MustNotBeNull("container");
+				//container.Register(new SimpleResolveTarget())
+		  }
 	 }
 }

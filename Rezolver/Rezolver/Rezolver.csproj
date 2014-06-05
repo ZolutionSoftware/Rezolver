@@ -38,9 +38,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Extensions\System\DelegateExtensions.cs" />
+    <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IRezolverContainer.cs" />
+    <Compile Include="IRezolveTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RezolverContainer.cs" />
+    <Compile Include="SimpleTarget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
