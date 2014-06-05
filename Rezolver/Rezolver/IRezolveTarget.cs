@@ -7,5 +7,8 @@ namespace Rezolver
 {
 	 public interface IRezolveTarget
 	 {
+		  object GetObject();
+
+		  bool SupportsType(Type type);
 	 }
 }

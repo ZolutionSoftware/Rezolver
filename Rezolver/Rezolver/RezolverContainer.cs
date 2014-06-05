@@ -5,22 +5,26 @@ using System.Text;
 
 namespace Rezolver
 {
-    public class RezolverContainer : IRezolverContainer
-    {
-		  private Type _t;
-		  private object _obj;
+	 public class RezolverContainer : IRezolverContainer
+	 {
+		  private Type _type;
+		  private IRezolveTarget _target;
 
-        public void Register(object obj, Type type)
-        {
-				_obj = obj;
-				_t = type;
-        }
-
-
-		  public object Fetch(Type type)
+		  public void Register(IRezolveTarget target, Type type)
 		  {
-				if (_t.Equals(type))
-					 return _obj;
+				if (target.SupportsType(type))
+				{
+					 _target = target;
+					 _type = type;
+				}
+				else
+					 throw new ArgumentException(string.Format(Resources.Exceptions.TargetDoesntSupportType_Format, type), "target");
+		  }
+
+		  public IRezolveTarget Fetch(Type type)
+		  {
+				if (_type.Equals(type))
+					 return _target;
 				else
 					 return null;
 		  }
