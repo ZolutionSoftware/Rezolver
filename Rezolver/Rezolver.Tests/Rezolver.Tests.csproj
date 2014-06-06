@@ -50,9 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Classes\SimpleType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasicRegistrationTests.cs" />
     <Compile Include="ObjectTargetTests.cs" />
+    <Compile Include="DelegateTargetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">

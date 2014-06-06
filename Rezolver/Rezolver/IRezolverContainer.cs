@@ -11,13 +11,4 @@ namespace Rezolver
 
 		  IRezolveTarget Fetch(Type type);
 	 }
-
-	 public static class IRezolverContainerExtensions
-	 {
-		  public static void Register(IRezolverContainer container, object obj, Type type = null)
-		  {
-				container.MustNotBeNull("container");
-				//container.Register(new SimpleResolveTarget())
-		  }
-	 }
 }

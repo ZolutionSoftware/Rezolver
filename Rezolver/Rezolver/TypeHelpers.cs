@@ -14,6 +14,8 @@ namespace Rezolver
 
 		internal static bool AreCompatible(Type from, Type to)
 		{
+			from.MustNotBeNull("from");
+			to.MustNotBeNull("to");
 			//this is checking whether it's possible to do a runtime cast between the
 			//two types.  Now, this is more than just reference casting - as the runtime
 			//will support 'int? a = null' for example, or 'int? a = 1' for example.

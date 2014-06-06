@@ -41,6 +41,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IRezolverContainer.cs" />
@@ -53,6 +54,7 @@
       <DependentUpon>Exceptions.resx</DependentUpon>
     </Compile>
     <Compile Include="RezolverContainer.cs" />
+    <Compile Include="RezolveTargetBase.cs" />
     <Compile Include="TypeHelpers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
