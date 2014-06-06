@@ -120,4 +120,7 @@
   <data name="TargetDoesntSupportType_Format" xml:space="preserve">
     <value>The target does not support the type {0}</value>
   </data>
+  <data name="TargetIsNullButTypeIsNotNullable_Format" xml:space="preserve">
+    <value>The type {0} is not a nullable type</value>
+  </data>
 </root>

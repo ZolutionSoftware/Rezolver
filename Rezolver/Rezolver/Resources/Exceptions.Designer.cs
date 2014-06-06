@@ -68,5 +68,14 @@ namespace Rezolver.Resources {
                 return ResourceManager.GetString("TargetDoesntSupportType_Format", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type {0} is not a nullable type.
+        /// </summary>
+        internal static string TargetIsNullButTypeIsNotNullable_Format {
+            get {
+                return ResourceManager.GetString("TargetIsNullButTypeIsNotNullable_Format", resourceCulture);
+            }
+        }
     }
 }

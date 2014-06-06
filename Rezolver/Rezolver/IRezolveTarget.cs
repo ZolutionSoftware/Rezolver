@@ -5,10 +5,12 @@ using System.Text;
 
 namespace Rezolver
 {
-	 public interface IRezolveTarget
-	 {
-		  object GetObject();
+	public interface IRezolveTarget
+	{
+		bool SupportsType(Type type);
 
-		  bool SupportsType(Type type);
-	 }
+		object GetObject();
+		Type DeclaredType { get; }
+
+	}
 }
