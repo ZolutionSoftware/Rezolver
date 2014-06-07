@@ -55,6 +55,7 @@
     <Compile Include="BasicRegistrationTests.cs" />
     <Compile Include="ObjectTargetTests.cs" />
     <Compile Include="DelegateTargetTests.cs" />
+    <Compile Include="LazyTargetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">

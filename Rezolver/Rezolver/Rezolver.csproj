@@ -46,6 +46,7 @@
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IRezolverContainer.cs" />
     <Compile Include="IRezolveTarget.cs" />
+    <Compile Include="LazyTarget.cs" />
     <Compile Include="ObjectTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Exceptions.Designer.cs">

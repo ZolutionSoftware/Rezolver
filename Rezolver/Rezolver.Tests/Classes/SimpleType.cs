@@ -11,7 +11,7 @@ namespace Rezolver.Tests.Classes
 	{
 		private static int _instanceCount = 0;
 
-		public static int InstannceCount
+		public static int InstanceCount
 		{
 			get
 			{

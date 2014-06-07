@@ -38,8 +38,14 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldCreateNewInstanceEachCall()
 		{
-			IRezolveTarget target = new DelegateTarget<SimpleType>(() => new SimpleType);
-			int currentInstances = SimpleType.InstannceCount;
+			IRezolveTarget target = new DelegateTarget<SimpleType>(() => new SimpleType());
+			int currentInstances = SimpleType.InstanceCount;
+			var result = target.GetObject();
+			Assert.AreEqual(currentInstances + 1, SimpleType.InstanceCount);
+			var result2 = target.GetObject();
+			Assert.AreEqual(currentInstances + 2, SimpleType.InstanceCount);
 		}
+
+
 	}
 }
