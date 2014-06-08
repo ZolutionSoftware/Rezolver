@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Rezolver
 {
-	public class LazyTarget : IRezolveTarget
+	public class SingletonTarget : IRezolveTarget
 	{
 		private readonly Lazy<object> _lazyTarget;
 		private IRezolveTarget _innerTarget;
 
-		public LazyTarget(IRezolveTarget innerTarget)
+		public SingletonTarget(IRezolveTarget innerTarget)
 		{
 			innerTarget.MustNotBeNull("innerTarget");
 			// TODO: Complete member initialization

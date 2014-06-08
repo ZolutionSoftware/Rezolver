@@ -86,5 +86,14 @@ namespace Rezolver.Resources {
                 return ResourceManager.GetString("TargetIsNullButTypeIsNotNullable_Format", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type {0} has already been registered.
+        /// </summary>
+        internal static string TypeIsAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("TypeIsAlreadyRegistered", resourceCulture);
+            }
+        }
     }
 }

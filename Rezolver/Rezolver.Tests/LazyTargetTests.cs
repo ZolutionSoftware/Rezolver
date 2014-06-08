@@ -12,19 +12,19 @@ namespace Rezolver.Tests
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void ShouldNotAllowNullInnerTarget()
 		{
-			IRezolveTarget target = new LazyTarget(null);
+			IRezolveTarget target = new SingletonTarget(null);
 		}
 		[TestMethod]
 		public void ShouldWrapObjectTarget()
 		{
-			IRezolveTarget target = new LazyTarget(new ObjectTarget(1));
+			IRezolveTarget target = new SingletonTarget(new ObjectTarget(1));
 			Assert.AreEqual(1, target.GetObject());
 		}
 
 		[TestMethod]
 		public void ShouldOnlyCreateOneInstanceFromFuncTarget()
 		{
-			IRezolveTarget target = new LazyTarget(new DelegateTarget<Classes.SimpleType>(() => new Classes.SimpleType()));
+			IRezolveTarget target = new SingletonTarget(new DelegateTarget<Classes.SimpleType>(() => new Classes.SimpleType()));
 			int instanceCount = Classes.SimpleType.InstanceCount;
 			var i2 = target.GetObject();
 			int instanceCount2 = SimpleType.InstanceCount;

@@ -5,6 +5,10 @@ using System.Text;
 
 namespace Rezolver
 {
+	/// <summary>
+	/// Implements IRezolveTarget using factory function delegates.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class DelegateTarget<T> : RezolveTargetBase
 	{
 		private readonly Type _declaredType;

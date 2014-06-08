@@ -126,4 +126,7 @@
   <data name="TargetIsNullButTypeIsNotNullable_Format" xml:space="preserve">
     <value>The type {0} is not a nullable type</value>
   </data>
+  <data name="TypeIsAlreadyRegistered" xml:space="preserve">
+    <value>The type {0} has already been registered</value>
+  </data>
 </root>
