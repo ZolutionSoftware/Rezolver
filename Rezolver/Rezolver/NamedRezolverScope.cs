@@ -2,20 +2,14 @@
 
 namespace Rezolver.Tests
 {
-	public class NamedRezolverScope : RezolverScope, INamedRezolverScope
+	public class NamedRezolverScope : ChildRezolverScope, INamedRezolverScope
 	{
-		private readonly IRezolverScope _parentScope;
 		private readonly string _name;
 
-		public NamedRezolverScope(IRezolverScope parentScope, string name)
+		public NamedRezolverScope(IRezolverScope parentScope, string name) 
+			: base(parentScope)
 		{
-			_parentScope = parentScope;
 			_name = name;
-		}
-
-		public IRezolverScope ParentScope
-		{
-			get { return _parentScope; }
 		}
 
 		public string Name
