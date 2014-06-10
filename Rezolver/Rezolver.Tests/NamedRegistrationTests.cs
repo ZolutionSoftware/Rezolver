@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Rezolver.Tests
 {
@@ -31,6 +32,17 @@ namespace Rezolver.Tests
 			Assert.AreEqual(target1, target1B);
 			Assert.AreEqual(target2, target2B);
 			
+		}
+
+		[TestMethod]
+		public void ShouldSupportHierarchicalNaming()
+		{
+			IRezolverScope scope = new RezolverScope();
+			INamedRezolverScope childScope = scope.GetNamedScope("parent/child", true);
+			Assert.IsNotNull(childScope);
+			Assert.AreEqual("child", childScope.Name);
+			INamedRezolverScope parentScope = scope.GetNamedScope("parent", false);
+			Assert.AreEqual("parent", parentScope.Name);
 		}
 	}
 }

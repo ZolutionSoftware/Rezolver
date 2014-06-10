@@ -29,12 +29,7 @@ namespace Rezolver
 			if (name != null)
 			{
 				//get the named scope.  If it doesn't exist, create one.
-				INamedRezolverScope namedScope;
-				lock (_namedScopesLocker)
-				{
-					if(!_namedScopes.TryGetValue(name, out namedScope))
-						_namedScopes[name] = namedScope = CreateNamedScope(name, target, type);
-				}
+				var namedScope = GetOrCreateNamedScope(target, type, name);
 				//note here we don't pass the name through.
 				//when we support named scopes, we would be lopping off the first item in a hierarchical name to allow for the recursion.
 				namedScope.Register(target, type);
@@ -59,6 +54,43 @@ namespace Rezolver
 				throw new ArgumentException(string.Format(Resources.Exceptions.TargetDoesntSupportType_Format, type), "target");
 		}
 
+		protected virtual INamedRezolverScope GetOrCreateNamedScope(IRezolveTarget target, Type type, string name)
+		{
+			//TODO: test that whitespace is stripped from front and back of whole string and individual names
+			var nameHierarchy = name.Split("/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+			if(nameHierarchy.Length == 0)
+				throw new ArgumentException("Name must not be empty");
+			INamedRezolverScope namedScope;
+			lock (_namedScopesLocker)
+			{
+				if (!_namedScopes.TryGetValue(name, out namedScope))
+					_namedScopes[name] = namedScope = CreateNamedScope(name, target, type);
+			}
+			return namedScope;
+		}
+
+		/// <summary>
+		/// Retrieves a scope matching the given name.  Returns null if no scope exists.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		protected internal INamedRezolverScope GetNamedScopeInternal(string name)
+		{
+			INamedRezolverScope toReturn;
+			lock (_namedScopesLocker)
+			{
+				_namedScopes.TryGetValue(name, out toReturn);
+			}
+			return toReturn;
+		}
+
+		/// <summary>
+		/// Called to create a new instance of a Named Scope with the given name, optionally for the given target and type.
+		/// </summary>
+		/// <param name="name">The name of the scope to create.</param>
+		/// <param name="target">Optional - a target that is to be added to the named scope after creation.</param>
+		/// <param name="type">Optional - the type for which a target will added after creation.</param>
+		/// <returns></returns>
 		protected virtual INamedRezolverScope CreateNamedScope(string name, IRezolveTarget target, Type type)
 		{
 			//base class simply creates a NamedRezolverScope
@@ -84,6 +116,18 @@ namespace Rezolver
 			{
 				IRezolveTarget target;
 				return _targets.TryGetValue(type, out target) ? target : null;
+			}
+		}
+
+		public INamedRezolverScope GetNamedScope(string name, bool create = false)
+		{
+			if (create)
+			{
+				return GetOrCreateNamedScope(null, null, name);
+			}
+			else
+			{
+				return GetNamedScopeInternal(name);
 			}
 		}
 	}
