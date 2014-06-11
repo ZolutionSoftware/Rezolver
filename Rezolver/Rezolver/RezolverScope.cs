@@ -8,6 +8,7 @@ namespace Rezolver
 {
 	public class RezolverScope : IRezolverScope
 	{
+		//TODO: extract an abstract base implementation of this class that does away with the dictionary and lockers, with extension points in place of those to allow for future expansion.
 		#region immediate type entries
 
 		private readonly object _targetsLocker = new object();
