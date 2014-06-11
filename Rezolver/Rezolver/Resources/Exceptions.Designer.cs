@@ -70,6 +70,15 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The path {0} is invalid.  All path steps must contain non-whitespace characters and be at least one character in length.
+        /// </summary>
+        internal static string PathIsInvalid {
+            get {
+                return ResourceManager.GetString("PathIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The target does not support the type {0}.
         /// </summary>
         internal static string TargetDoesntSupportType_Format {

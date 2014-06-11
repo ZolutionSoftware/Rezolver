@@ -120,6 +120,9 @@
   <data name="DeclaredTypeIsNotCompatible_Format" xml:space="preserve">
     <value>The declared type {0} is not compatible with the type {1}</value>
   </data>
+  <data name="PathIsInvalid" xml:space="preserve">
+    <value>The path {0} is invalid.  All path steps must contain non-whitespace characters and be at least one character in length</value>
+  </data>
   <data name="TargetDoesntSupportType_Format" xml:space="preserve">
     <value>The target does not support the type {0}</value>
   </data>

@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AssertEx.cs" />
     <Compile Include="Classes\SimpleType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasicScopeTests.cs" />
