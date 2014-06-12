@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -25,9 +24,11 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldCreateMultiStepPathFromString()
 		{
-			RezolverScopePath path = new RezolverScopePath("parent/child");
-			Assert.AreEqual("parent/child", path.Path);
-			Assert.IsTrue("parent/child".Split('/').SequenceEqual(path.Items));
+			RezolverScopePath path = new RezolverScopePath("parent.child");
+			Assert.AreEqual("parent.child", path.Path);
+			Assert.IsTrue(path.MoveNext());
+			Assert.AreEqual("parent", path.CurrentItem);
+			Assert.IsTrue("parent.child".Split('.').SequenceEqual(path));
 		}
 
 		[TestMethod]
@@ -38,9 +39,9 @@ namespace Rezolver.Tests
 				" ",
 				" a",
 				"a ",
-				"a/ ",
-				"a/ b",
-				"a/ /b",
+				"a. ",
+				"a. b",
+				"a. .b",
 			};
 
 			AssertEx.Throws<ArgumentException>().ForEach(testArgs, s => new RezolverScopePath(s));
@@ -49,9 +50,9 @@ namespace Rezolver.Tests
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentException))]
-		public void ShouldNotAllowDoubleSlash()
+		public void ShouldNotAllowDoubleSeparator()
 		{
-			RezolverScopePath path = new RezolverScopePath("a//b");
+			RezolverScopePath path = new RezolverScopePath("a..b");
 
 		}
 

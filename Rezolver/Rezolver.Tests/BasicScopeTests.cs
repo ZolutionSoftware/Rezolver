@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rezolver;
 using Rezolver.Tests.Classes;
 
 namespace Rezolver.Tests

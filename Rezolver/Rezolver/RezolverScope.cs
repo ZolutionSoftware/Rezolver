@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Rezolver.Tests;
 
 namespace Rezolver
 {
@@ -120,15 +117,15 @@ namespace Rezolver
 			}
 		}
 
-		public INamedRezolverScope GetNamedScope(string name, bool create = false)
+		public INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false)
 		{
 			if (create)
 			{
-				return GetOrCreateNamedScope(null, null, name);
+				return GetOrCreateNamedScope(null, null, path);
 			}
 			else
 			{
-				return GetNamedScopeInternal(name);
+				return GetNamedScopeInternal(path);
 			}
 		}
 	}

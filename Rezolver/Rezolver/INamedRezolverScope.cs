@@ -1,4 +1,4 @@
-﻿namespace Rezolver.Tests
+﻿namespace Rezolver
 {
 	public interface INamedRezolverScope : IChildRezolverScope
 	{

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Rezolver.Tests
 {
@@ -12,7 +10,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget target = new ObjectTarget("hello world");
 			IRezolverScope scope = new RezolverScope();
-			scope.Register(target, name: "name");
+			scope.Register(target, path: "name");
 			var target2 = scope.Fetch(typeof (string), "name");
 			Assert.AreEqual(target, target2);
 
@@ -24,8 +22,8 @@ namespace Rezolver.Tests
 			IRezolveTarget target1 = new ObjectTarget("hello world");
 			IRezolveTarget target2 = new ObjectTarget("hello universe");
 			IRezolverScope scope = new RezolverScope();
-			scope.Register(target1, name: "string 1");
-			scope.Register(target2, name: "string 2");
+			scope.Register(target1, path: "string 1");
+			scope.Register(target2, path: "string 2");
 			var target1B = scope.Fetch(typeof (string), name: "string 1");
 			var target2B = scope.Fetch(typeof (string), name: "string 2");
 
@@ -38,10 +36,10 @@ namespace Rezolver.Tests
 		public void ShouldSupportHierarchicalNaming()
 		{
 			IRezolverScope scope = new RezolverScope();
-			INamedRezolverScope childScope = scope.GetNamedScope("parent/child", true);
+			INamedRezolverScope childScope = scope.GetNamedScope("parent.child", create: true);
 			Assert.IsNotNull(childScope);
 			Assert.AreEqual("child", childScope.Name);
-			INamedRezolverScope parentScope = scope.GetNamedScope("parent", false);
+			INamedRezolverScope parentScope = scope.GetNamedScope("parent", create: false);
 			Assert.AreEqual("parent", parentScope.Name);
 		}
 	}
