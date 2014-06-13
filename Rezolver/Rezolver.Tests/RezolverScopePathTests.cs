@@ -15,6 +15,13 @@ namespace Rezolver.Tests
 		}
 
 		[TestMethod]
+		public void ShouldCreateFromStringImplicit()
+		{
+			RezolverScopePath path = "parent.child";
+			Assert.AreEqual("parent.child", path.Path);
+		}
+
+		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void ShouldNotAllowNullPath()
 		{
@@ -43,8 +50,10 @@ namespace Rezolver.Tests
 			Assert.AreEqual("child", path.Next);
 			path.MoveNext();
 			Assert.AreEqual("grandchild", path.Next);
-			Assert.IsFalse(path.MoveNext());
+			Assert.IsTrue(path.MoveNext());
 			Assert.IsNull(path.Next);
+			Assert.IsFalse(path.MoveNext());
+
 		}
 
 		[TestMethod]
@@ -70,7 +79,6 @@ namespace Rezolver.Tests
 		{
 			RezolverScopePath path = new RezolverScopePath("a..b");
 		}
-
 
 	}
 }

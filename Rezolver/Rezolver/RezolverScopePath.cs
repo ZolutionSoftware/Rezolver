@@ -102,7 +102,7 @@ namespace Rezolver
 
 				if (_currentItem < 0)
 					return _next = Items[0];
-				else if (_currentItem >= Items.Length)
+				else if (_currentItem >= Items.Length - 1)
 					return null;
 				return _next = Items[_currentItem + 1];
 			}

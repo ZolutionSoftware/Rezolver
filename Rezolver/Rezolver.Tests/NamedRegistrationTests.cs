@@ -22,10 +22,10 @@ namespace Rezolver.Tests
 			IRezolveTarget target1 = new ObjectTarget("hello world");
 			IRezolveTarget target2 = new ObjectTarget("hello universe");
 			IRezolverScope scope = new RezolverScope();
-			scope.Register(target1, path: "string 1");
-			scope.Register(target2, path: "string 2");
-			var target1B = scope.Fetch(typeof (string), name: "string 1");
-			var target2B = scope.Fetch(typeof (string), name: "string 2");
+			scope.Register(target1, path: "string1");
+			scope.Register(target2, path: "string2");
+			var target1B = scope.Fetch(typeof (string), name: "string1");
+			var target2B = scope.Fetch(typeof (string), name: "string2");
 
 			Assert.AreEqual(target1, target1B);
 			Assert.AreEqual(target2, target2B);
