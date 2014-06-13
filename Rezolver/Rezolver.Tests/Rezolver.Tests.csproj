@@ -66,6 +66,8 @@
     <Compile Include="NamedRezolverScopeTests.cs" />
     <Compile Include="ChildRezolverTests.cs" />
     <Compile Include="RezolverScopePathTests.cs" />
+    <Compile Include="OpenGenericTests.cs" />
+    <Compile Include="ObjectTargetClosedGenericTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">

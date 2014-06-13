@@ -2,6 +2,12 @@
 
 namespace Rezolver
 {
+	/// <summary>
+	/// Implements IRezolveTarget by wrapping a single instance.
+	/// 
+	/// Note that, while that effectively makes this target a singleton, there is a special type for a singleton target
+	/// which is used to decorate any other target.
+	/// </summary>
 	public class ObjectTarget : RezolveTargetBase
 	{
 		private readonly object _object;
