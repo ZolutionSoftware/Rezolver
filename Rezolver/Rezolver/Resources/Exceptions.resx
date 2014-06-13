@@ -132,4 +132,7 @@
   <data name="TypeIsAlreadyRegistered" xml:space="preserve">
     <value>The type {0} has already been registered</value>
   </data>
+	<data name="PathIsAtEnd" xml:space="preserve">
+    <value>path's Next must not be null - pass path as null once it's reached the last item</value>
+  </data>
 </root>

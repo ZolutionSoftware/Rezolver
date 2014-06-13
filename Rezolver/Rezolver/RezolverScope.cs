@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -20,14 +21,17 @@ namespace Rezolver
  
 		#endregion
 
-		public void Register(IRezolveTarget target, Type type = null, string name = null)
+		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
 		{
 			//TODO: Support name hierarchies by splitting the name by forward-slash and recursively creating a named-scope tree.
 
-			if (name != null)
+			if (path != null)
 			{
+				if (path.Next == null)
+					throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
+
 				//get the named scope.  If it doesn't exist, create one.
-				var namedScope = GetOrCreateNamedScope(target, type, name);
+				var namedScope = GetOrCreateNamedScope(target, type, path);
 				//note here we don't pass the name through.
 				//when we support named scopes, we would be lopping off the first item in a hierarchical name to allow for the recursion.
 				namedScope.Register(target, type);
@@ -52,17 +56,18 @@ namespace Rezolver
 				throw new ArgumentException(string.Format(Resources.Exceptions.TargetDoesntSupportType_Format, type), "target");
 		}
 
-		protected virtual INamedRezolverScope GetOrCreateNamedScope(IRezolveTarget target, Type type, string name)
+		protected virtual INamedRezolverScope GetOrCreateNamedScope(IRezolveTarget target, Type type, RezolverScopePath path)
 		{
-			//TODO: test that whitespace is stripped from front and back of whole string and individual names
-			var nameHierarchy = name.Split("/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-			if(nameHierarchy.Length == 0)
-				throw new ArgumentException("Name must not be empty");
 			INamedRezolverScope namedScope;
 			lock (_namedScopesLocker)
 			{
-				if (!_namedScopes.TryGetValue(name, out namedScope))
-					_namedScopes[name] = namedScope = CreateNamedScope(name, target, type);
+				if (!_namedScopes.TryGetValue(path.Next, out namedScope))
+					_namedScopes[path.Next] = namedScope = CreateNamedScope(path.Next, target, type);
+				//then walk to the next part of the path and create it if need be
+				if(path.MoveNext())
+				{
+					return namedScope.GetNamedScope(path, true);
+				}
 			}
 			return namedScope;
 		}
@@ -85,7 +90,8 @@ namespace Rezolver
 		/// <summary>
 		/// Called to create a new instance of a Named Scope with the given name, optionally for the given target and type.
 		/// </summary>
-		/// <param name="name">The name of the scope to create.</param>
+		/// <param name="name">The name of the scope to be created.  Please note - this could be being created
+		/// as part of a wider path of scopes.</param>
 		/// <param name="target">Optional - a target that is to be added to the named scope after creation.</param>
 		/// <param name="type">Optional - the type for which a target will added after creation.</param>
 		/// <returns></returns>

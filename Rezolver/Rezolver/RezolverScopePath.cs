@@ -14,18 +14,18 @@ namespace Rezolver
 	public class RezolverScopePath
 	{
 		public const string DefaultPathSeparator = ".";
-		private static readonly Regex _rxNoWhitespace = new Regex(@"\s");
+		private static readonly Regex RxNoWhitespace = new Regex(@"\s");
 
 		public string Path { get; private set; }
 		public string PathSeparator { get; private set; }
 
 		private string[] Items { get; set; }
 
-		public string CurrentItem
+		public string Current
 		{
 			get
 			{
-				if(_currentItem <0 || _currentItem >= Items.Length)
+				if (_currentItem < 0 || _currentItem >= Items.Length)
 					throw new InvalidOperationException(/*TODO: add resourced exception*/);
 				return Items[_currentItem];
 			}
@@ -36,9 +36,11 @@ namespace Rezolver
 		/// </summary>
 		private int _currentItem = -1;
 
+		private string _next;
+
 		public RezolverScopePath(string path, string pathSeparator = null)
 		{
-			PathSeparator = pathSeparator ?? DefaultPathSeparator; 
+			PathSeparator = pathSeparator ?? DefaultPathSeparator;
 			path.MustNotBeNull("path");
 			Path = path;
 
@@ -47,9 +49,9 @@ namespace Rezolver
 			{
 				if (string.IsNullOrWhiteSpace(item))
 					throw new ArgumentException(Resources.Exceptions.PathIsInvalid, "path");
-				if(item.Length == 0)
+				if (item.Length == 0)
 					throw new ArgumentException(Resources.Exceptions.PathIsInvalid, "path");
-				if(_rxNoWhitespace.IsMatch(item))
+				if (RxNoWhitespace.IsMatch(item))
 					throw new ArgumentException(Resources.Exceptions.PathIsInvalid, "path");
 			}
 
@@ -84,9 +86,26 @@ namespace Rezolver
 		//{
 		//	return GetEnumerator();
 		//}
+
 		public bool MoveNext()
 		{
+			//invalidate next
+			_next = null;
 			return ++_currentItem < Items.Length;
+		}
+
+		public string Next
+		{
+			get
+			{
+				if (_next != null) return _next;
+
+				if (_currentItem < 0)
+					return _next = Items[0];
+				else if (_currentItem >= Items.Length)
+					return null;
+				return _next = Items[_currentItem + 1];
+			}
 		}
 	}
 }
