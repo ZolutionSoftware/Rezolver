@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace Rezolver
 {
 	public interface IRezolveTarget
 	{
 		bool SupportsType(Type type);
-		object GetObject();
+		Expression CreateExpression(IRezolverScope scope, Type targetType = null);
 		Type DeclaredType { get; }
 	}
 }

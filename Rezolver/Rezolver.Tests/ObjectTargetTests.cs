@@ -5,20 +5,20 @@ using System.Collections.Generic;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class ObjectTargetTests
+	public class ObjectTargetTests : TestsBase
 	{
 		[TestMethod]
 		public void ShouldWrapNull()
 		{
 			IRezolveTarget target = new ObjectTarget(null);
-			Assert.IsNull(target.GetObject());
+			Assert.IsNull(GetValueFromTarget<object>(target));
 		}
 
 		[TestMethod]
 		public void ShouldWrapNonNull()
 		{
 			IRezolveTarget target = new ObjectTarget("Hello world");
-			Assert.AreEqual("Hello world", target.GetObject());
+			Assert.AreEqual("Hello world", GetValueFromTarget<string>(target));
 		}
 
 		[TestMethod]
@@ -26,8 +26,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget target = new ObjectTarget(1, typeof(int?));
 			Assert.IsTrue(target.SupportsType(typeof(int?)));
-			Assert.AreEqual((int?)1, target.GetObject());
-
+			Assert.AreEqual((int?)1, GetValueFromTarget<int?>(target));
 		}
 
 		[TestMethod]
@@ -37,8 +36,8 @@ namespace Rezolver.Tests
 			IRezolveTarget target2 = new ObjectTarget("hello world", typeof(object));
 
 			string expected = "hello world";
-			Assert.AreEqual(expected, target.GetObject());
-			Assert.AreEqual(expected, target2.GetObject());
+			Assert.AreEqual(expected, GetValueFromTarget<IEnumerable<char>>(target));
+			Assert.AreEqual(expected, GetValueFromTarget<object>(target));
 		}
 
 		[TestMethod]
@@ -70,7 +69,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget target = (1).AsObjectTarget(typeof(object));
 			Assert.AreEqual(typeof(object), target.DeclaredType);
-			Assert.AreEqual((object)1, target.GetObject());
+			Assert.AreEqual((object)1, GetValueFromTarget(target));
 		}
 	}
 }

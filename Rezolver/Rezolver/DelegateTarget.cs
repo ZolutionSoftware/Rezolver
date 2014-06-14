@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace Rezolver
 {
@@ -22,9 +23,10 @@ namespace Rezolver
 			_declaredType = declaredType ?? typeof(T);
 		}
 
-		public override object GetObject()
+		public override Expression CreateExpression(IRezolverScope scope, Type targetType = null)
 		{
-			return _factory();
+			throw new NotImplementedException();
+
 		}
 
 		public override Type DeclaredType

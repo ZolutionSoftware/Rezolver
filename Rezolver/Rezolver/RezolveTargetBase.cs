@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace Rezolver
 {
@@ -11,7 +12,7 @@ namespace Rezolver
 			return TypeHelpers.AreCompatible(DeclaredType, type);
 		}
 
-		public abstract object GetObject();
+		public abstract Expression CreateExpression(IRezolverScope scope, Type targetType = null);
 
 		public abstract Type DeclaredType
 		{

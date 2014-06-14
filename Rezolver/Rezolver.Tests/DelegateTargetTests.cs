@@ -5,7 +5,7 @@ using Rezolver.Tests.Classes;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class DelegateTargetTests
+	public class DelegateTargetTests : TestsBase
 	{
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
@@ -23,7 +23,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget target = new DelegateTarget<int>(() => 1);
 			Assert.IsTrue(target.SupportsType(typeof(int)));
-			Assert.AreEqual(1, target.GetObject());
+			Assert.AreEqual(1, GetValueFromTarget(target));
 		}
 
 		[TestMethod]
@@ -31,7 +31,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget target = new DelegateTarget<object>(() => 1);
 			Assert.IsTrue(target.SupportsType(typeof(object)));
-			Assert.AreEqual(1, target.GetObject());
+			Assert.AreEqual(1, GetValueFromTarget(target));
 		}
 
 		[TestMethod]
@@ -39,9 +39,9 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget target = new DelegateTarget<SimpleType>(() => new SimpleType());
 			int currentInstances = SimpleType.InstanceCount;
-			var result = target.GetObject();
+			var result = GetValueFromTarget(target);
 			Assert.AreEqual(currentInstances + 1, SimpleType.InstanceCount);
-			var result2 = target.GetObject();
+			var result2 = GetValueFromTarget(target);
 			Assert.AreEqual(currentInstances + 2, SimpleType.InstanceCount);
 		}
 

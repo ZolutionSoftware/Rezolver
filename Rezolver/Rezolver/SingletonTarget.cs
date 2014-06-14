@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Threading;
 
 namespace Rezolver
@@ -12,24 +13,21 @@ namespace Rezolver
 	/// </summary>
 	public class SingletonTarget : IRezolveTarget
 	{
-		private readonly Lazy<object> _lazyTarget;
 		private IRezolveTarget _innerTarget;
+		private Func<IRezolverScope, Type, Expression> _createExpressionDelegate;  
 
 		public SingletonTarget(IRezolveTarget innerTarget)
 		{
-			
-
 			innerTarget.MustNotBeNull("innerTarget");
-			// TODO: Complete member initialization
 			this._innerTarget = innerTarget;
 			//if the passed target is another Singleton target, then import its lazy target reference
 			//to this one rather than wrapping it in another one.
 			SingletonTarget singletonTarget = innerTarget as SingletonTarget;
 
 			if (singletonTarget != null)
-				_lazyTarget = singletonTarget._lazyTarget;
+				_createExpressionDelegate = CreateExpressionFromInnerSingleton;
 			else
-				_lazyTarget = new Lazy<object>(() => _innerTarget.GetObject());
+				_createExpressionDelegate = CreateExpressionFromInner;
 		}
 
 		public bool SupportsType(Type type)
@@ -37,9 +35,19 @@ namespace Rezolver
 			return _innerTarget.SupportsType(type);
 		}
 
-		public object GetObject()
+		private Expression CreateExpressionFromInnerSingleton(IRezolverScope scope, Type targetType)
 		{
-			return _lazyTarget.Value;
+			return ((SingletonTarget) _innerTarget).CreateExpression(scope, targetType);
+		}
+
+		private Expression CreateExpressionFromInner(IRezolverScope scope, Type targetType)
+		{
+			throw new NotImplementedException("expression should wrap a Lazy instance");
+		}
+
+		public Expression CreateExpression(IRezolverScope scope, Type targetType = null)
+		{
+			return _createExpressionDelegate(scope, targetType);
 		}
 
 		public Type DeclaredType
