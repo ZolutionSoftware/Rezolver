@@ -40,8 +40,10 @@ namespace Rezolver
 
 		public override Expression CreateExpression(IRezolverScope scope, Type targetType = null)
 		{
-			throw new NotImplementedException();
+			if(targetType != null && !SupportsType(targetType))
+				throw new ArgumentException(string.Format(Resources.Exceptions.TargetDoesntSupportType_Format, targetType),	"targetType");
 
+			return Expression.Constant(_object, targetType ?? DeclaredType);
 		}
 
 		public override Type DeclaredType

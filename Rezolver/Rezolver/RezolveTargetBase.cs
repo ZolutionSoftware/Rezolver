@@ -6,7 +6,7 @@ namespace Rezolver
 	public abstract class RezolveTargetBase : IRezolveTarget
 	{
 
-		public bool SupportsType(Type type)
+		public virtual bool SupportsType(Type type)
 		{
 			type.MustNotBeNull("type");
 			return TypeHelpers.AreCompatible(DeclaredType, type);
