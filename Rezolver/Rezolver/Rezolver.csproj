@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChildRezolverScope.cs" />
+    <Compile Include="ConstructorTarget.cs" />
     <Compile Include="DelegateTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="INamedRezolverScope.cs" />
     <Compile Include="IRezolverScope.cs" />
     <Compile Include="IRezolveTarget.cs" />
+    <Compile Include="MethodCallExtractor.cs" />
     <Compile Include="NamedRezolverScope.cs" />
     <Compile Include="RezolverScopePath.cs" />
     <Compile Include="SingletonTarget.cs" />

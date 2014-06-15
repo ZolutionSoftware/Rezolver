@@ -30,7 +30,7 @@ namespace Rezolver
 						throw new ArgumentException(string.Format(Resources.Exceptions.TargetIsNullButTypeIsNotNullable_Format, declaredType), "declaredType");
 				}
 				else if (!TypeHelpers.AreCompatible(_object.GetType(), declaredType))
-					throw new ArgumentException(string.Format("", _object.GetType(), declaredType), "declaredType");
+					throw new ArgumentException(string.Format(Resources.Exceptions.DeclaredTypeIsNotCompatible_Format, declaredType, _object.GetType()), "declaredType");
 
 				_declaredType = declaredType;
 			}

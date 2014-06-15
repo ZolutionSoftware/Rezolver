@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Rezolver
 {
@@ -10,7 +11,8 @@ namespace Rezolver
 	public class DelegateTarget<T> : RezolveTargetBase
 	{
 		private readonly Type _declaredType;
-		private readonly Func<T> _factory;	
+		private readonly Func<T> _factory;
+
 		public DelegateTarget(Func<T> factory, Type declaredType = null)
 		{
 			factory.MustNotBeNull("factory");
@@ -23,10 +25,10 @@ namespace Rezolver
 			_declaredType = declaredType ?? typeof(T);
 		}
 
-		public override Expression CreateExpression(IRezolverScope scope, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
 		{
-			throw new NotImplementedException();
-
+			Expression<Func<T>> e = () => _factory();
+			return Expression.Convert(e.Body, targetType ?? DeclaredType);
 		}
 
 		public override Type DeclaredType

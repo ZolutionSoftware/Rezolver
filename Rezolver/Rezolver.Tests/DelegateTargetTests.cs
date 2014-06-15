@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rezolver.Tests.Classes;
 
@@ -44,7 +46,5 @@ namespace Rezolver.Tests
 			var result2 = GetValueFromTarget(target);
 			Assert.AreEqual(currentInstances + 2, SimpleType.InstanceCount);
 		}
-
-
 	}
 }

@@ -69,6 +69,8 @@
     <Compile Include="OpenGenericTests.cs" />
     <Compile Include="ObjectTargetClosedGenericTests.cs" />
     <Compile Include="TestsBase.cs" />
+    <Compile Include="ExpressionReaderTests.cs" />
+    <Compile Include="ConstructorTargetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">
