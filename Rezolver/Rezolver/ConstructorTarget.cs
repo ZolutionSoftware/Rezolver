@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -6,19 +7,15 @@ namespace Rezolver
 {
 	public class ConstructorTarget : RezolveTargetBase
 	{
-		private readonly Type[] EmptyTypes = new Type[0];
+		private static readonly Type[] EmptyTypes = new Type[0];
 
 		private readonly Type _declaredType;
-		private readonly ConstructorInfo _ctor;
+		protected readonly ConstructorInfo _ctor;
 
-		public ConstructorTarget(Type declaredType)
+		private ConstructorTarget(Type declaredType, ConstructorInfo ctor)
 		{
-			declaredType.MustNotBeNull("declaredType");
 			_declaredType = declaredType;
-			//conduct search for default constructor straight away.  Chuck an exception if not found.
-			_ctor = declaredType.GetConstructor(EmptyTypes);
-			if(_ctor == null)
-				throw new ArgumentException(string.Format("The type {0} has no default constructor", declaredType),  "declaredType");
+			_ctor = ctor;
 		}
 
 		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
@@ -30,5 +27,31 @@ namespace Rezolver
 		{
 			get { return _declaredType; }
 		}
+
+		public static ConstructorTarget For<T>()
+		{
+			return For(typeof (T));
+		}
+
+		internal static ConstructorTarget For(Type declaredType)
+		{
+			var ctor = declaredType.GetConstructor(EmptyTypes);
+			if (ctor == null)
+			{
+				ctor = declaredType.GetConstructors().FirstOrDefault(c => c.GetParameters().All(p => p.IsOptional));
+				if(ctor == null)
+					throw new ArgumentException(string.Format("The type {0} has no default constructor, nor any constructors where all the parameters are optional.", declaredType), "declaredType");
+			}
+			//TODO: parameter bindings will need to be added to this.
+			return new ConstructorTarget(declaredType, ctor);
+		}
 	}
+
+	//public class ConstructorTarget<T> : ConstructorTarget
+	//{
+	//	public ConstructorTarget(Expression<Func<T>> newExpr)
+	//	{
+	//		newExpr.MustNotBeNull("newExpr");
+	//	}
+	//}
 }
