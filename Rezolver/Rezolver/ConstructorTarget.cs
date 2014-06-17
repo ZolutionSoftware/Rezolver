@@ -11,16 +11,24 @@ namespace Rezolver
 
 		private readonly Type _declaredType;
 		protected readonly ConstructorInfo _ctor;
+		private readonly ParameterBinding[] _parameterBindings;
 
-		private ConstructorTarget(Type declaredType, ConstructorInfo ctor)
+		private ConstructorTarget(Type declaredType, ConstructorInfo ctor, params ParameterBinding[] parameterBindings)
 		{
 			_declaredType = declaredType;
 			_ctor = ctor;
+			_parameterBindings = parameterBindings ?? ParameterBinding.None;
 		}
 
 		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
 		{
-			return Expression.Convert(Expression.New(_ctor), targetType ?? DeclaredType);
+			if (_parameterBindings.Length == 0)
+				return Expression.Convert(Expression.New(_ctor), targetType ?? DeclaredType);
+			else
+				return Expression.Convert(
+					Expression.New(_ctor, _parameterBindings.Select(pb => pb.Target.CreateExpression(scope))),
+					targetType ?? DeclaredType);
+
 		}
 
 		public override Type DeclaredType
@@ -36,22 +44,16 @@ namespace Rezolver
 		internal static ConstructorTarget For(Type declaredType)
 		{
 			var ctor = declaredType.GetConstructor(EmptyTypes);
+			ParameterBinding[] parameterBindings = null;
 			if (ctor == null)
 			{
 				ctor = declaredType.GetConstructors().FirstOrDefault(c => c.GetParameters().All(p => p.IsOptional));
 				if(ctor == null)
 					throw new ArgumentException(string.Format("The type {0} has no default constructor, nor any constructors where all the parameters are optional.", declaredType), "declaredType");
+				parameterBindings = DeriveParameterBindings(ctor);
 			}
-			//TODO: parameter bindings will need to be added to this.
-			return new ConstructorTarget(declaredType, ctor);
+
+			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
 	}
-
-	//public class ConstructorTarget<T> : ConstructorTarget
-	//{
-	//	public ConstructorTarget(Expression<Func<T>> newExpr)
-	//	{
-	//		newExpr.MustNotBeNull("newExpr");
-	//	}
-	//}
 }

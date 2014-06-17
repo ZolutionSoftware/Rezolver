@@ -71,6 +71,7 @@
     <Compile Include="TestsBase.cs" />
     <Compile Include="ExpressionReaderTests.cs" />
     <Compile Include="ConstructorTargetTests.cs" />
+    <Compile Include="DefaultTargetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">

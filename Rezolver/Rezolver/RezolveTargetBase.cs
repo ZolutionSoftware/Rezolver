@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
+using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -38,7 +40,7 @@ namespace Rezolver
 		public virtual Expression CreateExpression(IRezolverScope scope, Type targetType = null)
 		{
 			if (targetType != null && !SupportsType(targetType))
-				throw new ArgumentException(string.Format(Resources.Exceptions.TargetDoesntSupportType_Format, targetType),
+				throw new ArgumentException(String.Format(Exceptions.TargetDoesntSupportType_Format, targetType),
 					"targetType");
 			return CreateExpressionBase(scope, targetType);
 		}
@@ -46,6 +48,33 @@ namespace Rezolver
 		public abstract Type DeclaredType
 		{
 			get;
+		}
+
+		/// <summary>
+		/// Automatically derives parameter bindings for the passed method
+		/// </summary>
+		/// <param name="method"></param>
+		/// <returns></returns>
+		protected static ParameterBinding[] DeriveParameterBindings(MethodBase method)
+		{
+			method.MustNotBeNull("method");
+			var parameters = method.GetParameters();
+			ParameterBinding[] toReturn = new ParameterBinding[parameters.Length];
+			int current = 0;
+			ParameterBinding binding = null;
+			foreach (var parameter in parameters)
+			{
+				if (parameter.IsOptional)
+				{
+					object defaultValue = null;
+					if((parameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault)
+						binding = new ParameterBinding(parameter, parameter.DefaultValue.AsObjectTarget(parameter.ParameterType));
+					else
+						binding = new ParameterBinding(parameter, new DefaultTarget(parameter.ParameterType));
+				}
+				toReturn[current++] = binding;
+			}
+			return toReturn;
 		}
 	}
 }
