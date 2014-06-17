@@ -135,4 +135,10 @@
 	<data name="PathIsAtEnd" xml:space="preserve">
     <value>path's Next must not be null - pass path as null once it's reached the last item</value>
   </data>
+	<data name="LambdBodyIsNotNewExpressionFormat" xml:space="preserve">
+    <value>The body of the lambda "{0}" is not a NewExpression</value>
+  </data>
+	<data name="NoDefaultOrAllOptionalConstructorFormat" xml:space="preserve">
+    <value>The type {0} has no default constructor, nor any constructors where all the parameters are optional.</value>
+  </data>
 </root>

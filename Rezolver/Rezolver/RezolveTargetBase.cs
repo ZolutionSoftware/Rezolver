@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Rezolver.Resources;
@@ -54,6 +57,7 @@ namespace Rezolver
 		/// Automatically derives parameter bindings for the passed method
 		/// </summary>
 		/// <param name="method"></param>
+		/// <param name="arguments"></param>
 		/// <returns></returns>
 		protected static ParameterBinding[] DeriveParameterBindings(MethodBase method)
 		{
@@ -75,6 +79,13 @@ namespace Rezolver
 				toReturn[current++] = binding;
 			}
 			return toReturn;
+		}
+
+		protected static ParameterBinding[] ConvertToParameterBindings(ParameterInfo[] parameters, IEnumerable<Expression> expressions)
+		{
+			parameters.MustNotBeNull("parameters");
+			expressions.MustNotBeNull("expressions");
+			var bindings = expressions.Select(e => )
 		}
 	}
 }

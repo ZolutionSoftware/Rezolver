@@ -61,5 +61,13 @@ namespace Rezolver.Tests
 			var result = GetValueFromTarget<ConstructorWithDefaults>(target);
 			Assert.AreEqual(ConstructorWithDefaults.ExpectedValue, result.Value);
 		}
+
+		//this test now moves into specifically selecting a constructor and extracting the parameter bindings directly
+		//from the caller.  We get to automatically deriving parameter bindings for required parameters later.
+		[TestMethod]
+		public void ShouldAllowAllConstructorParametersToBeProvided()
+		{
+			var target = ConstructorTarget.For<NoDefaultConstructor>(newExpr: (IRezolverScope scope) => new NoDefaultConstructor(1));
+		}
 	}
 }

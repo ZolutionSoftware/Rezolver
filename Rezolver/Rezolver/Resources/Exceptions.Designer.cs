@@ -70,6 +70,24 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The body of the lambda &quot;{0}&quot; is not a NewExpression.
+        /// </summary>
+        internal static string LambdBodyIsNotNewExpressionFormat {
+            get {
+                return ResourceManager.GetString("LambdBodyIsNotNewExpressionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The type {0} has no default constructor, nor any constructors where all the parameters are optional..
+        /// </summary>
+        internal static string NoDefaultOrAllOptionalConstructorFormat {
+            get {
+                return ResourceManager.GetString("NoDefaultOrAllOptionalConstructorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to path&apos;s Next must not be null - pass path as null once it&apos;s reached the last item.
         /// </summary>
         internal static string PathIsAtEnd {

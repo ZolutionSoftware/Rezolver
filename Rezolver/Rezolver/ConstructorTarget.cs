@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -36,23 +39,47 @@ namespace Rezolver
 			get { return _declaredType; }
 		}
 
-		public static ConstructorTarget For<T>()
+		public static ConstructorTarget For<T>(Expression<Func<IRezolverScope, T>> newExpr = null)
 		{
-			return For(typeof (T));
-		}
-
-		internal static ConstructorTarget For(Type declaredType)
-		{
-			var ctor = declaredType.GetConstructor(EmptyTypes);
-			ParameterBinding[] parameterBindings = null;
-			if (ctor == null)
+			NewExpression newExprBody = null;
+			if (newExpr != null)
 			{
-				ctor = declaredType.GetConstructors().FirstOrDefault(c => c.GetParameters().All(p => p.IsOptional));
-				if(ctor == null)
-					throw new ArgumentException(string.Format("The type {0} has no default constructor, nor any constructors where all the parameters are optional.", declaredType), "declaredType");
-				parameterBindings = DeriveParameterBindings(ctor);
+				newExprBody = newExpr.Body as NewExpression;
+				if(newExprBody == null)
+					throw new ArgumentException(string.Format(Exceptions.LambdBodyIsNotNewExpressionFormat, newExpr), "newExpr");
 			}
 
+			return For(typeof(T), newExprBody);
+		}
+
+		internal static ConstructorTarget For(Type declaredType, NewExpression newExpr = null)
+		{
+			ConstructorInfo ctor = null;
+			ParameterBinding[] parameterBindings = null;
+
+			if (newExpr == null)
+			{
+				ctor = declaredType.GetConstructor(EmptyTypes);
+
+				if (ctor == null)
+				{
+					ctor = declaredType.GetConstructors().FirstOrDefault(c => c.GetParameters().All(p => p.IsOptional));
+					if (ctor == null)
+						throw new ArgumentException(
+							string.Format(
+								Exceptions.NoDefaultOrAllOptionalConstructorFormat,
+								declaredType), "declaredType");
+					
+				}
+			}
+			else
+			{
+				ctor = newExpr.Constructor;
+				parameterBindings = ConvertToParameterBindings(ctor.GetParameters(), newExpr.Arguments);
+			}
+
+			if(parameterBindings == null)
+				parameterBindings = DeriveParameterBindings(ctor);
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
 	}
