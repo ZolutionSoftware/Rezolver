@@ -78,5 +78,12 @@ namespace Rezolver.Tests
 			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
 			Assert.AreNotSame(result, result2);
 		}
+
+		[TestMethod]
+		public void ShouldAllowAConstructorParameterToBeExplicitlyRezolved()
+		{
+			//this is where the action starts to heat up!
+			//var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Fetch())
+		}
 	}
 }
