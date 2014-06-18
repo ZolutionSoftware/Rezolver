@@ -45,6 +45,7 @@
     <Compile Include="ConstructorTarget.cs" />
     <Compile Include="DefaultTarget.cs" />
     <Compile Include="DelegateTarget.cs" />
+    <Compile Include="ExpressionTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IChildRezolverScope.cs" />

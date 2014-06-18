@@ -75,7 +75,9 @@ namespace Rezolver
 			else
 			{
 				ctor = newExpr.Constructor;
-				parameterBindings = ConvertToParameterBindings(ctor.GetParameters(), newExpr.Arguments);
+				parameterBindings = ctor.GetParameters()
+					.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, new ExpressionTarget(expression))).ToArray();
+
 			}
 
 			if(parameterBindings == null)

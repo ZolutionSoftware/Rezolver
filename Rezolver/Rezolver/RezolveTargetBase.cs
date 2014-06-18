@@ -70,7 +70,6 @@ namespace Rezolver
 			{
 				if (parameter.IsOptional)
 				{
-					object defaultValue = null;
 					if((parameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault)
 						binding = new ParameterBinding(parameter, parameter.DefaultValue.AsObjectTarget(parameter.ParameterType));
 					else
@@ -79,13 +78,6 @@ namespace Rezolver
 				toReturn[current++] = binding;
 			}
 			return toReturn;
-		}
-
-		protected static ParameterBinding[] ConvertToParameterBindings(ParameterInfo[] parameters, IEnumerable<Expression> expressions)
-		{
-			parameters.MustNotBeNull("parameters");
-			expressions.MustNotBeNull("expressions");
-			var bindings = expressions.Select(e => )
 		}
 	}
 }

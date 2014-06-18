@@ -31,6 +31,7 @@ namespace Rezolver.Tests
 
 		private class NoDefaultConstructor : ConstructorTestClass
 		{
+			public const int ExpectedValue = 100;
 			public NoDefaultConstructor(int value)
 			{
 				Value = value;
@@ -43,6 +44,8 @@ namespace Rezolver.Tests
 			var target = ConstructorTarget.For<DefaultConstructor>();
 			var result = GetValueFromTarget<DefaultConstructor>(target);
 			Assert.AreEqual(DefaultConstructor.ExpectedValue, result.Value);
+			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
+			Assert.AreNotSame(result, result2);
 		}
 
 		[TestMethod]
@@ -60,6 +63,8 @@ namespace Rezolver.Tests
 			var target = ConstructorTarget.For<ConstructorWithDefaults>();
 			var result = GetValueFromTarget<ConstructorWithDefaults>(target);
 			Assert.AreEqual(ConstructorWithDefaults.ExpectedValue, result.Value);
+			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
+			Assert.AreNotSame(result, result2);
 		}
 
 		//this test now moves into specifically selecting a constructor and extracting the parameter bindings directly
@@ -67,7 +72,11 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldAllowAllConstructorParametersToBeProvided()
 		{
-			var target = ConstructorTarget.For<NoDefaultConstructor>(newExpr: (IRezolverScope scope) => new NoDefaultConstructor(1));
+			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
+			var result = GetValueFromTarget<NoDefaultConstructor>(target);
+			Assert.AreEqual(NoDefaultConstructor.ExpectedValue, result.Value);
+			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
+			Assert.AreNotSame(result, result2);
 		}
 	}
 }
