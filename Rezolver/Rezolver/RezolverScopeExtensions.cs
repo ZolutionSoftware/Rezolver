@@ -21,34 +21,29 @@ namespace Rezolver
 			throw new NotImplementedException(Exceptions.NotRuntimeMethod);
 		}
 
-		public static T Rezolve<T>(this IRezolverScope scope, string name = null)
+		public static T Rezolve<T>(this IRezolverScope scope, string name)
 		{
 			throw new NotImplementedException(Exceptions.NotRuntimeMethod);
 		}
 
 		public static RezolveCallExpressionInfo ExtractRezolveCall(Expression e)
 		{
-			MethodCallExpression methodExpr = e as MethodCallExpression;
-			if (methodExpr != null)
-			{
-				if (methodExpr.Method.IsGenericMethod)
-				{
-					var match = RezolveMethods.SingleOrDefault(m => m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
-					if (match != null)
-					{
-						//by the number of the parameters we know if a string is being passed
-						var nameParameter = match.GetParameters().FirstOrDefault(pi => pi.ParameterType == typeof (string));
+			var methodExpr = e as MethodCallExpression;
 
-						if (nameParameter != null)
-						{
-							//extract the expression being passed as the argument to the name parameter.
-						}
+			if (methodExpr == null || !methodExpr.Method.IsGenericMethod) 
+				return null;
 
-					}
-				}
-			}
+			var match = RezolveMethods.SingleOrDefault(m => m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
 
-			return null;
+			if (match == null) 
+				return null;
+
+			//by the number of the parameters we know if a string is being passed
+			var nameParameter = methodExpr.Method.GetParameters().FirstOrDefault(pi => pi.ParameterType == typeof (string));
+
+			return nameParameter != null 
+				? new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], methodExpr.Arguments[1]) 
+				: new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], null);
 		}
 
 		public class RezolveCallExpressionInfo

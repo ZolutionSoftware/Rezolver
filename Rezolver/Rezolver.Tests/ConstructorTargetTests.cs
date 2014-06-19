@@ -83,6 +83,8 @@ namespace Rezolver.Tests
 		public void ShouldAllowAConstructorParameterToBeExplicitlyRezolved()
 		{
 			//this is where the action starts to heat up!
+			//if we can get explicitly resolved arguments to work, then we can get easily get
+			//automatically injected arguments - by simply emitting the correct expression to do the same.
 			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>()));
 		}
 	}

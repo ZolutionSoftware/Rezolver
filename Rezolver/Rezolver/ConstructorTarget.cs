@@ -75,14 +75,49 @@ namespace Rezolver
 			else
 			{
 				ctor = newExpr.Constructor;
-				parameterBindings = ctor.GetParameters()
-					.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, new ExpressionTarget(expression))).ToArray();
+				parameterBindings = ParameterBindings(newExpr, ctor).ToArray();
 
 			}
 
 			if(parameterBindings == null)
 				parameterBindings = DeriveParameterBindings(ctor);
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
+		}
+
+		private static IEnumerable<ParameterBinding> ParameterBindings(NewExpression newExpr)
+		{
+			return newExpr.Constructor.GetParameters()
+				.Zip(newExpr.Arguments, (info, expression) =>
+				{
+					RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCallArg =
+						RezolverScopeExtensions.ExtractRezolveCall(expression);
+
+					return new ParameterBinding(info,
+						rezolveCallArg != null
+							? new RezolvedTarget(rezolveCallArg)
+							: new ExpressionTarget(expression));
+				}).ToArray();
+		}
+	}
+
+	internal class RezolvedTarget : RezolveTargetBase
+	{
+		private readonly RezolverScopeExtensions.RezolveCallExpressionInfo _rezolveCall;
+		private Type _declaredType;
+
+		public RezolvedTarget(RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCall)
+		{
+			_rezolveCall = rezolveCall;
+		}
+
+		public override Type DeclaredType
+		{
+			get { return _rezolveCall.Type; }
+		}
+
+		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
+		{
+			return null; //TOFO: buil the expression,
 		}
 	}
 }
