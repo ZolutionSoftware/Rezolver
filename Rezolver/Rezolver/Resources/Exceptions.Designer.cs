@@ -88,6 +88,15 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This method is not to be called at run-time - it is only used for static expression analysis in building rezolver scopes..
+        /// </summary>
+        internal static string NotRuntimeMethod {
+            get {
+                return ResourceManager.GetString("NotRuntimeMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to path&apos;s Next must not be null - pass path as null once it&apos;s reached the last item.
         /// </summary>
         internal static string PathIsAtEnd {

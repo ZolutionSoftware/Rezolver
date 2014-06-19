@@ -51,6 +51,7 @@
     <Compile Include="IChildRezolverScope.cs" />
     <Compile Include="INamedRezolverScope.cs" />
     <Compile Include="IRezolverScope.cs" />
+    <Compile Include="RezolverScopeExtensions.cs" />
     <Compile Include="IRezolveTarget.cs" />
     <Compile Include="MethodCallExtractor.cs" />
     <Compile Include="NamedRezolverScope.cs" />

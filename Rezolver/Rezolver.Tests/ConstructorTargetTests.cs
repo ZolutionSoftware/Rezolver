@@ -83,7 +83,7 @@ namespace Rezolver.Tests
 		public void ShouldAllowAConstructorParameterToBeExplicitlyRezolved()
 		{
 			//this is where the action starts to heat up!
-			//var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Fetch())
+			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>()));
 		}
 	}
 }

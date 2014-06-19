@@ -141,4 +141,7 @@
 	<data name="NoDefaultOrAllOptionalConstructorFormat" xml:space="preserve">
     <value>The type {0} has no default constructor, nor any constructors where all the parameters are optional.</value>
   </data>
+	<data name="NotRuntimeMethod" xml:space="preserve">
+    <value>This method is not to be called at run-time - it is only used for static expression analysis in building rezolver scopes.</value>
+  </data>
 </root>
