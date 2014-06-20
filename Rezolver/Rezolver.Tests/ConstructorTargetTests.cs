@@ -95,5 +95,18 @@ namespace Rezolver.Tests
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 			scopeMock.VerifyAll();
 		}
+
+		[TestMethod]
+		public void ShouldAutoRezolveAConstructor()
+		{
+			//basically the same as above - except this doesn't provide the constructor call explicitly.
+			var target = ConstructorTarget.For<NoDefaultConstructor>();
+			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
+			var scopeMock = new Mock<IRezolverScope>();
+			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget);
+			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
+			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
+			scopeMock.VerifyAll();
+		}
 	}
 }

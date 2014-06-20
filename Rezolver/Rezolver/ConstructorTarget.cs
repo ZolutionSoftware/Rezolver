@@ -99,32 +99,4 @@ namespace Rezolver
 				}).ToArray();
 		}
 	}
-
-	/// <summary>
-	/// Represents a target that is rezolved during expression building 
-	/// </summary>
-	internal class RezolvedTarget : RezolveTargetBase
-	{
-		private readonly RezolverScopeExtensions.RezolveCallExpressionInfo _rezolveCall;
-
-		public RezolvedTarget(RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCall)
-		{
-			_rezolveCall = rezolveCall;
-		}
-
-		public override Type DeclaredType
-		{
-			get { return _rezolveCall.Type; }
-		}
-
-		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
-		{
-			scope.MustNotBeNull("scope");
-			//basic - without supporting a name
-			var resolvedTarget = scope.Fetch(_rezolveCall.Type, null);
-			if(resolvedTarget == null)
-				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _rezolveCall.Type));
-			return Expression.Convert(resolvedTarget.CreateExpression(scope), targetType ?? _rezolveCall.Type);
-		}
-	}
 }
