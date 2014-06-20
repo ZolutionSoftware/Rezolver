@@ -79,5 +79,12 @@ namespace Rezolver
 			}
 			return toReturn;
 		}
+
+		protected static ParameterBinding[] DeriveAutoParameterBindings(MethodBase method)
+		{
+			method.MustNotBeNull("method");
+			var parameters = method.GetParameters();
+			return parameters.Select(pi => new ParameterBinding(pi, new RezolvedTarget(pi.ParameterType))).ToArray();
+		}
 	}
 }

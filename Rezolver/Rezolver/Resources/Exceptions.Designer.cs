@@ -79,11 +79,29 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More than one constructor for {0} qualifies as a target for Auto construction.
+        /// </summary>
+        internal static string MoreThanOneConstructorFormat {
+            get {
+                return ResourceManager.GetString("MoreThanOneConstructorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type {0} has no default constructor, nor any constructors where all the parameters are optional..
         /// </summary>
         internal static string NoDefaultOrAllOptionalConstructorFormat {
             get {
                 return ResourceManager.GetString("NoDefaultOrAllOptionalConstructorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No public constructors declared on the type {0}.
+        /// </summary>
+        internal static string NoPublicConstructorsDefinedFormat {
+            get {
+                return ResourceManager.GetString("NoPublicConstructorsDefinedFormat", resourceCulture);
             }
         }
         

@@ -14,28 +14,38 @@ namespace Rezolver
 	/// 
 	/// But since I'm not at the container level (yet), I can't do that.
 	/// </summary>
-	internal class RezolvedTarget : RezolveTargetBase
+	public class RezolvedTarget : RezolveTargetBase
 	{
-		private readonly RezolverScopeExtensions.RezolveCallExpressionInfo _rezolveCall;
+		//private readonly RezolverScopeExtensions.RezolveCallExpressionInfo _rezolveCall;
+		private readonly Type _resolveType;
+		private readonly Expression _resolveNameExpression;
 
-		public RezolvedTarget(RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCall)
+		internal RezolvedTarget(RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCall)
 		{
-			_rezolveCall = rezolveCall;
+			_resolveType = rezolveCall.Type;
+			_resolveNameExpression = rezolveCall.Name;
+		}
+
+		public RezolvedTarget(Type type, Expression name = null)
+		{
+			type.MustNotBeNull("type");
+			_resolveType = type;
+			_resolveNameExpression = name;
 		}
 
 		public override Type DeclaredType
 		{
-			get { return _rezolveCall.Type; }
+			get { return _resolveType; }
 		}
 
 		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
 		{
 			scope.MustNotBeNull("scope");
 			//basic - without supporting a name
-			var resolvedTarget = scope.Fetch(_rezolveCall.Type, null);
+			var resolvedTarget = scope.Fetch(_resolveType, null);
 			if(resolvedTarget == null)
-				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _rezolveCall.Type));
-			return Expression.Convert(resolvedTarget.CreateExpression(scope), targetType ?? _rezolveCall.Type);
+				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
+			return Expression.Convert(resolvedTarget.CreateExpression(scope), targetType ?? _resolveType);
 		}
 	}
 }

@@ -147,4 +147,10 @@
 	<data name="UnableToResolveTypeFromScopeFormat" xml:space="preserve">
     <value>Unable to resolve type {0} from scope</value>
   </data>
+	<data name="NoPublicConstructorsDefinedFormat" xml:space="preserve">
+    <value>No public constructors declared on the type {0}</value>
+  </data>
+	<data name="MoreThanOneConstructorFormat" xml:space="preserve">
+    <value>More than one constructor for {0} qualifies as a target for Auto construction</value>
+  </data>
 </root>

@@ -39,13 +39,38 @@ namespace Rezolver
 			get { return _declaredType; }
 		}
 
+		public static ConstructorTarget Auto<T>()
+		{
+			return Auto(typeof(T));
+		}
+
+		public static ConstructorTarget Auto(Type declaredType)
+		{
+			//conduct a very simple search for the constructor with the most parameters
+			declaredType.MustNotBeNull("declaredType");
+
+			var ctorGroups = declaredType.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+				.GroupBy(c => c.GetParameters().Length)
+				.OrderByDescending(g => g.Key).ToArray();
+
+			if (ctorGroups.Length == 0)
+				throw new ArgumentException(
+					string.Format(Exceptions.NoPublicConstructorsDefinedFormat, declaredType), "declaredType");
+			//get the first group - if there's more than one constructor then we can't choose.
+			var ctorsWithMostParams = ctorGroups[0].ToArray();
+			if (ctorsWithMostParams.Length > 1)
+				throw new ArgumentException(
+					string.Format(Exceptions.MoreThanOneConstructorFormat, declaredType));
+			return new ConstructorTarget(declaredType, ctorsWithMostParams[0], DeriveAutoParameterBindings(ctorsWithMostParams[0]));
+		}
+
 		public static ConstructorTarget For<T>(Expression<Func<IRezolverScope, T>> newExpr = null)
 		{
 			NewExpression newExprBody = null;
 			if (newExpr != null)
 			{
 				newExprBody = newExpr.Body as NewExpression;
-				if(newExprBody == null)
+				if (newExprBody == null)
 					throw new ArgumentException(string.Format(Exceptions.LambdBodyIsNotNewExpressionFormat, newExpr), "newExpr");
 			}
 
@@ -69,7 +94,6 @@ namespace Rezolver
 							string.Format(
 								Exceptions.NoDefaultOrAllOptionalConstructorFormat,
 								declaredType), "declaredType");
-					
 				}
 			}
 			else
@@ -79,7 +103,7 @@ namespace Rezolver
 
 			}
 
-			if(parameterBindings == null)
+			if (parameterBindings == null)
 				parameterBindings = DeriveParameterBindings(ctor);
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
