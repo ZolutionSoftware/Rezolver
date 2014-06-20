@@ -140,5 +140,14 @@ namespace Rezolver.Resources {
                 return ResourceManager.GetString("TypeIsAlreadyRegistered", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve type {0} from scope.
+        /// </summary>
+        internal static string UnableToResolveTypeFromScopeFormat {
+            get {
+                return ResourceManager.GetString("UnableToResolveTypeFromScopeFormat", resourceCulture);
+            }
+        }
     }
 }

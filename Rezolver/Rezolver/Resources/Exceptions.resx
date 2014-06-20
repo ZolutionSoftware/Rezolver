@@ -144,4 +144,7 @@
 	<data name="NotRuntimeMethod" xml:space="preserve">
     <value>This method is not to be called at run-time - it is only used for static expression analysis in building rezolver scopes.</value>
   </data>
+	<data name="UnableToResolveTypeFromScopeFormat" xml:space="preserve">
+    <value>Unable to resolve type {0} from scope</value>
+  </data>
 </root>

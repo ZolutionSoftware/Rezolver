@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Rezolver.Tests
 {
@@ -31,6 +32,7 @@ namespace Rezolver.Tests
 
 		private class NoDefaultConstructor : ConstructorTestClass
 		{
+			public const int ExpectedRezolvedValue = 101;
 			public const int ExpectedValue = 100;
 			public NoDefaultConstructor(int value)
 			{
@@ -86,6 +88,12 @@ namespace Rezolver.Tests
 			//if we can get explicitly resolved arguments to work, then we can get easily get
 			//automatically injected arguments - by simply emitting the correct expression to do the same.
 			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>()));
+			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
+			var scopeMock = new Mock<IRezolverScope>();
+			scopeMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
+			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
+			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
+			scopeMock.VerifyAll();
 		}
 	}
 }

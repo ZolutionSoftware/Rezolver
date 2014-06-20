@@ -75,7 +75,7 @@ namespace Rezolver
 			else
 			{
 				ctor = newExpr.Constructor;
-				parameterBindings = ParameterBindings(newExpr, ctor).ToArray();
+				parameterBindings = ExtractParameterBindings(newExpr).ToArray();
 
 			}
 
@@ -84,7 +84,7 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
 
-		private static IEnumerable<ParameterBinding> ParameterBindings(NewExpression newExpr)
+		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr)
 		{
 			return newExpr.Constructor.GetParameters()
 				.Zip(newExpr.Arguments, (info, expression) =>
@@ -94,16 +94,18 @@ namespace Rezolver
 
 					return new ParameterBinding(info,
 						rezolveCallArg != null
-							? new RezolvedTarget(rezolveCallArg)
+							? (IRezolveTarget)new RezolvedTarget(rezolveCallArg)
 							: new ExpressionTarget(expression));
 				}).ToArray();
 		}
 	}
 
+	/// <summary>
+	/// Represents a target that is rezolved during expression building 
+	/// </summary>
 	internal class RezolvedTarget : RezolveTargetBase
 	{
 		private readonly RezolverScopeExtensions.RezolveCallExpressionInfo _rezolveCall;
-		private Type _declaredType;
 
 		public RezolvedTarget(RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCall)
 		{
@@ -117,7 +119,12 @@ namespace Rezolver
 
 		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
 		{
-			return null; //TOFO: buil the expression,
+			scope.MustNotBeNull("scope");
+			//basic - without supporting a name
+			var resolvedTarget = scope.Fetch(_rezolveCall.Type, null);
+			if(resolvedTarget == null)
+				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _rezolveCall.Type));
+			return Expression.Convert(resolvedTarget.CreateExpression(scope), targetType ?? _rezolveCall.Type);
 		}
 	}
 }
