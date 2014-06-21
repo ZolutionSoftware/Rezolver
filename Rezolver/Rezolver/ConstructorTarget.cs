@@ -16,7 +16,7 @@ namespace Rezolver
 		protected readonly ConstructorInfo _ctor;
 		private readonly ParameterBinding[] _parameterBindings;
 
-		private ConstructorTarget(Type declaredType, ConstructorInfo ctor, params ParameterBinding[] parameterBindings)
+		public ConstructorTarget(Type declaredType, ConstructorInfo ctor, params ParameterBinding[] parameterBindings)
 		{
 			_declaredType = declaredType;
 			_ctor = ctor;

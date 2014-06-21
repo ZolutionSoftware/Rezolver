@@ -18,8 +18,4 @@ namespace System.Linq.Expressions
 		}
 
 	}
-
-	public interface IRezolveTargetAdapter
-	{
-	}
 }

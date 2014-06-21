@@ -49,6 +49,7 @@
     <Compile Include="ExpressionTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\Linq\Expressions\ExpressionExtensions.cs" />
+    <Compile Include="IRezolveTargetAdapter.cs" />
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IChildRezolverScope.cs" />
     <Compile Include="INamedRezolverScope.cs" />
