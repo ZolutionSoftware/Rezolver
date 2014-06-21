@@ -5,9 +5,9 @@ using Rezolver.Resources;
 namespace Rezolver
 {
 	/// <summary>
-	/// Represents a target that is rezolved during expression building - i.e. bound early.  
+	/// Represents a target that is rezolved during expression building.
 	/// 
-	/// That is, a target is located from the scope that is supplied to thee CreateExpression method,
+	/// That is, a target is located from the scope that is supplied to the CreateExpression method,
 	/// and that target is then used to donate the expression.
 	/// 
 	/// There should perhaps also be a late-bound version of this, which takes a container instead of a scope.
@@ -16,7 +16,6 @@ namespace Rezolver
 	/// </summary>
 	public class RezolvedTarget : RezolveTargetBase
 	{
-		//private readonly RezolverScopeExtensions.RezolveCallExpressionInfo _rezolveCall;
 		private readonly Type _resolveType;
 		private readonly Expression _resolveNameExpression;
 
@@ -26,7 +25,13 @@ namespace Rezolver
 			_resolveNameExpression = rezolveCall.Name;
 		}
 
-		public RezolvedTarget(Type type, Expression name = null)
+		public RezolvedTarget(Type type, string name = null)
+			: this(type, name != null ? Expression.Constant(name) : null)
+		{
+
+		}
+
+		public RezolvedTarget(Type type, Expression name)
 		{
 			type.MustNotBeNull("type");
 			_resolveType = type;

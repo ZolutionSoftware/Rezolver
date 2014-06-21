@@ -52,39 +52,5 @@ namespace Rezolver
 		{
 			get;
 		}
-
-		/// <summary>
-		/// Automatically derives parameter bindings for the passed method
-		/// </summary>
-		/// <param name="method"></param>
-		/// <param name="arguments"></param>
-		/// <returns></returns>
-		protected static ParameterBinding[] DeriveParameterBindings(MethodBase method)
-		{
-			method.MustNotBeNull("method");
-			var parameters = method.GetParameters();
-			ParameterBinding[] toReturn = new ParameterBinding[parameters.Length];
-			int current = 0;
-			ParameterBinding binding = null;
-			foreach (var parameter in parameters)
-			{
-				if (parameter.IsOptional)
-				{
-					if((parameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault)
-						binding = new ParameterBinding(parameter, parameter.DefaultValue.AsObjectTarget(parameter.ParameterType));
-					else
-						binding = new ParameterBinding(parameter, new DefaultTarget(parameter.ParameterType));
-				}
-				toReturn[current++] = binding;
-			}
-			return toReturn;
-		}
-
-		protected static ParameterBinding[] DeriveAutoParameterBindings(MethodBase method)
-		{
-			method.MustNotBeNull("method");
-			var parameters = method.GetParameters();
-			return parameters.Select(pi => new ParameterBinding(pi, new RezolvedTarget(pi.ParameterType))).ToArray();
-		}
 	}
 }

@@ -25,13 +25,8 @@ namespace Rezolver
 
 		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
 		{
-			if (_parameterBindings.Length == 0)
-				return Expression.Convert(Expression.New(_ctor), targetType ?? DeclaredType);
-			else
-				return Expression.Convert(
-					Expression.New(_ctor, _parameterBindings.Select(pb => pb.Target.CreateExpression(scope))),
-					targetType ?? DeclaredType);
-
+			return Expression.Convert(Expression.New(_ctor,
+				_parameterBindings.Select(pb => pb.Target.CreateExpression(scope))), targetType ?? DeclaredType);
 		}
 
 		public override Type DeclaredType
@@ -61,7 +56,7 @@ namespace Rezolver
 			if (ctorsWithMostParams.Length > 1)
 				throw new ArgumentException(
 					string.Format(Exceptions.MoreThanOneConstructorFormat, declaredType));
-			return new ConstructorTarget(declaredType, ctorsWithMostParams[0], DeriveAutoParameterBindings(ctorsWithMostParams[0]));
+			return new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]));
 		}
 
 		public static ConstructorTarget For<T>(Expression<Func<IRezolverScope, T>> newExpr = null)
@@ -104,7 +99,7 @@ namespace Rezolver
 			}
 
 			if (parameterBindings == null)
-				parameterBindings = DeriveParameterBindings(ctor);
+				parameterBindings = ParameterBinding.DeriveDefaultParameterBindings(ctor);
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
 
@@ -113,13 +108,15 @@ namespace Rezolver
 			return newExpr.Constructor.GetParameters()
 				.Zip(newExpr.Arguments, (info, expression) =>
 				{
-					RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCallArg =
-						RezolverScopeExtensions.ExtractRezolveCall(expression);
-
-					return new ParameterBinding(info,
-						rezolveCallArg != null
-							? (IRezolveTarget)new RezolvedTarget(rezolveCallArg)
-							: new ExpressionTarget(expression));
+					//RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCallArg =
+					//	RezolverScopeExtensions.ExtractRezolveCall(expression);
+					//return new ParameterBinding(info,
+						
+					//	rezolveCallArg != null
+					//		? (IRezolveTarget)new RezolvedTarget(rezolveCallArg)
+					//		: new ExpressionTarget(expression));
+					//TODO: get this bit working - Need a general purpose expression adapter, whose responsibility it is to turn expressions into targets.
+					return new ParameterBinding(info, expression.AsRezolveTarget());
 				}).ToArray();
 		}
 	}
