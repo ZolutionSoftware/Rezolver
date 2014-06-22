@@ -59,7 +59,7 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]));
 		}
 
-		public static ConstructorTarget For<T>(Expression<Func<IRezolverScope, T>> newExpr = null)
+		public static ConstructorTarget For<T>(Expression<Func<IRezolverScope, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			NewExpression newExprBody = null;
 			if (newExpr != null)
@@ -69,10 +69,10 @@ namespace Rezolver
 					throw new ArgumentException(string.Format(Exceptions.LambdBodyIsNotNewExpressionFormat, newExpr), "newExpr");
 			}
 
-			return For(typeof(T), newExprBody);
+			return For(typeof(T), newExprBody, adapter);
 		}
 
-		internal static ConstructorTarget For(Type declaredType, NewExpression newExpr = null)
+		internal static ConstructorTarget For(Type declaredType, NewExpression newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			ConstructorInfo ctor = null;
 			ParameterBinding[] parameterBindings = null;
@@ -94,7 +94,7 @@ namespace Rezolver
 			else
 			{
 				ctor = newExpr.Constructor;
-				parameterBindings = ExtractParameterBindings(newExpr).ToArray();
+				parameterBindings = ExtractParameterBindings(newExpr, adapter).ToArray();
 
 			}
 
@@ -103,21 +103,10 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
 
-		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr)
+		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr, IRezolveTargetAdapter adapter = null)
 		{
 			return newExpr.Constructor.GetParameters()
-				.Zip(newExpr.Arguments, (info, expression) =>
-				{
-					//RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCallArg =
-					//	RezolverScopeExtensions.ExtractRezolveCall(expression);
-					//return new ParameterBinding(info,
-						
-					//	rezolveCallArg != null
-					//		? (IRezolveTarget)new RezolvedTarget(rezolveCallArg)
-					//		: new ExpressionTarget(expression));
-					//TODO: get this bit working - Need a general purpose expression adapter, whose responsibility it is to turn expressions into targets.
-					return new ParameterBinding(info, expression.AsRezolveTarget());
-				}).ToArray();
+				.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, adapter.ConvertToTarget(expression))).ToArray();
 		}
 	}
 }

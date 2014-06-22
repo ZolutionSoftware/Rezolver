@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Rezolver.Tests
@@ -10,6 +6,12 @@ namespace Rezolver.Tests
 	[TestClass]
 	public class RezolveTargetAdapterTests
 	{
+		public class Foo
+		{
+			internal Foo()
+			{
+			}
+		}
 		[TestMethod]
 		public void ShouldAdaptToObjectTarget()
 		{
@@ -20,70 +22,30 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldAdaptToConstructorTarget()
 		{
-
-		}
-	}
-
-	public class RezolveTargetAdapter : ExpressionVisitor, IRezolveTargetAdapter
-	{
-		public IRezolveTarget ConvertToTarget(Expression expression)
-		{
-			var visitor = new TargetFactoryVisitor();
-			return visitor.BuildTarget(expression);
+			IRezolveTargetAdapter adapter = new RezolveTargetAdapter();
+			Assert.IsInstanceOfType(adapter.ConvertToTarget(Expression.New(typeof(Foo))), typeof(ConstructorTarget));
 		}
 
-		public class TargetFactoryVisitor : ExpressionVisitor
+		[TestMethod]
+		public void ShouldWorkOnLambdaBodyToFetchObjectTarget()
 		{
-			public TargetFactoryVisitor()
-			{
+			IRezolveTargetAdapter adapter = new RezolveTargetAdapter();
+			Assert.IsInstanceOfType(adapter.ConvertToTarget(() => 0), typeof(ObjectTarget));
 
-			}
-
-			public IRezolveTarget BuildTarget(Expression expression)
-			{
-				var result = Visit(expression) as RezolveTargetExpression;
-				if (result != null)
-					return result.Target;
-				return null;
-			}
-
-			protected override Expression VisitConstant(ConstantExpression node)
-			{
-				return new RezolveTargetExpression(new ObjectTarget(node.Value, node.Type));
-			}
-
-			protected override Expression VisitNew(NewExpression node)
-			{
-				var parameters = node.Constructor.GetParameters();
-				return new RezolveTargetExpression(new ConstructorTarget(node.Type, node.Constructor,
-					node.Arguments.Select((pExp, i) => new ParameterBinding(parameters[i], BuildTarget(node))).ToArray()));
-			}
-
-			public override Expression Visit(Expression node)
-			{
-				var result = base.Visit(node);
-				return result;
-			}
-		}
-	}
-
-	/// <summary>
-	/// Makes it possible to mix expressions and targets.
-	/// 
-	/// Note that this *fake* expression typee does not compile.
-	/// </summary>
-	public class RezolveTargetExpression : Expression
-	{
-		private readonly IRezolveTarget _target;
-
-		public RezolveTargetExpression(IRezolveTarget target)
-		{
-			_target = target;
 		}
 
-		public IRezolveTarget Target
+		[TestMethod]
+		public void ShouldWorkOnLambdaBodyToFetchConstructorTarget()
 		{
-			get { return _target; }
+			IRezolveTargetAdapter adapter = new RezolveTargetAdapter();
+			Assert.IsInstanceOfType(adapter.ConvertToTarget(() => new Foo()), typeof(ConstructorTarget));
+		}
+
+		[TestMethod]
+		public void ShouldIdentifyRezolveCall()
+		{
+			IRezolveTargetAdapter adapter = new RezolveTargetAdapter();
+			Assert.IsInstanceOfType(adapter.ConvertToTarget((scope) => scope.Rezolve<int>()), typeof(RezolvedTarget));
 		}
 	}
 }

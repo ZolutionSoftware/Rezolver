@@ -1,5 +1,4 @@
-﻿using System.Runtime.Remoting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Rezolver.Tests 
 {

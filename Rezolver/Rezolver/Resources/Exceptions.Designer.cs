@@ -88,6 +88,15 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No constructor has been set on the NewExpression - this is not allowed..
+        /// </summary>
+        internal static string NoConstructorSetOnNewExpression {
+            get {
+                return ResourceManager.GetString("NoConstructorSetOnNewExpression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type {0} has no default constructor, nor any constructors where all the parameters are optional..
         /// </summary>
         internal static string NoDefaultOrAllOptionalConstructorFormat {

@@ -61,6 +61,8 @@
     <Compile Include="NamedRezolverScope.cs" />
     <Compile Include="ParameterBinding.cs" />
     <Compile Include="RezolverScopePath.cs" />
+    <Compile Include="RezolveTargetAdapter.cs" />
+    <Compile Include="RezolveTargetExpression.cs" />
     <Compile Include="SingletonTarget.cs" />
     <Compile Include="ObjectTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

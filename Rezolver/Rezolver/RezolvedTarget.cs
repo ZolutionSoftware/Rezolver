@@ -19,7 +19,7 @@ namespace Rezolver
 		private readonly Type _resolveType;
 		private readonly Expression _resolveNameExpression;
 
-		internal RezolvedTarget(RezolverScopeExtensions.RezolveCallExpressionInfo rezolveCall)
+		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
 		{
 			_resolveType = rezolveCall.Type;
 			_resolveNameExpression = rezolveCall.Name;
