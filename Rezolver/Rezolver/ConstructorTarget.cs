@@ -106,7 +106,7 @@ namespace Rezolver
 		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr, IRezolveTargetAdapter adapter = null)
 		{
 			return newExpr.Constructor.GetParameters()
-				.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, adapter.ConvertToTarget(expression))).ToArray();
+				.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, adapter.GetRezolveTarget(expression))).ToArray();
 		}
 	}
 }

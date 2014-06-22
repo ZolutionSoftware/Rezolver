@@ -10,12 +10,6 @@ namespace Rezolver
 {
 	public static class RezolverScopeExtensions
 	{
-		internal static readonly MethodInfo[] RezolveMethods =
-		{
-			MethodCallExtractor.ExtractCalledMethod((IRezolverScope scope) => Rezolve<int>(scope)).GetGenericMethodDefinition()
-			, MethodCallExtractor.ExtractCalledMethod((IRezolverScope scope) => Rezolve<int>(scope, null)).GetGenericMethodDefinition()
-		};
-
 		public static T Rezolve<T>(this IRezolverScope scope)
 		{
 			throw new NotImplementedException(Exceptions.NotRuntimeMethod);

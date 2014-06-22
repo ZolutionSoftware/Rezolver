@@ -19,6 +19,8 @@ namespace Rezolver
 		private readonly Type _resolveType;
 		private readonly Expression _resolveNameExpression;
 
+		public Expression Name { get { return _resolveNameExpression; } }
+
 		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
 		{
 			_resolveType = rezolveCall.Type;
