@@ -49,12 +49,14 @@
     <Compile Include="ExpressionTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\Linq\Expressions\ExpressionExtensions.cs" />
+    <Compile Include="IRezolverContainer.cs" />
     <Compile Include="IRezolveTargetAdapter.cs" />
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IChildRezolverScope.cs" />
     <Compile Include="INamedRezolverScope.cs" />
     <Compile Include="IRezolverScope.cs" />
     <Compile Include="RezolvedTarget.cs" />
+    <Compile Include="RezolverContainer.cs" />
     <Compile Include="RezolverScopeExtensions.cs" />
     <Compile Include="IRezolveTarget.cs" />
     <Compile Include="MethodCallExtractor.cs" />

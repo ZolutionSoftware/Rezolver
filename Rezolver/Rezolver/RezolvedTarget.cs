@@ -17,27 +17,27 @@ namespace Rezolver
 	public class RezolvedTarget : RezolveTargetBase
 	{
 		private readonly Type _resolveType;
-		private readonly Expression _resolveNameExpression;
+		private readonly IRezolveTarget _resolveNameTarget;
 
-		public Expression Name { get { return _resolveNameExpression; } }
+		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 
 		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
 		{
 			_resolveType = rezolveCall.Type;
-			_resolveNameExpression = rezolveCall.Name;
+			_resolveNameTarget = rezolveCall.Name;
 		}
 
 		public RezolvedTarget(Type type, string name = null)
-			: this(type, name != null ? Expression.Constant(name) : null)
+			: this(type, name != null ? name.AsObjectTarget() : null)
 		{
 
 		}
 
-		public RezolvedTarget(Type type, Expression name)
+		public RezolvedTarget(Type type, IRezolveTarget name)
 		{
 			type.MustNotBeNull("type");
 			_resolveType = type;
-			_resolveNameExpression = name;
+			_resolveNameTarget = name;
 		}
 
 		public override Type DeclaredType

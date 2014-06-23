@@ -33,6 +33,7 @@ namespace Rezolver.Tests
 		private class NoDefaultConstructor : ConstructorTestClass
 		{
 			public const int ExpectedRezolvedValue = 101;
+			public const int ExpectedComplexRezolveCall = 102;
 			public const int ExpectedValue = 100;
 			public NoDefaultConstructor(int value)
 			{
@@ -107,9 +108,28 @@ namespace Rezolver.Tests
 			var target = ConstructorTarget.Auto<NoDefaultConstructor>();
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var scopeMock = new Mock<IRezolverScope>();
-			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget);
+			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
+			scopeMock.VerifyAll();
+		}
+
+		[TestMethod]
+		public void ShouldRezolveTheStringArgumentForARezolveCall()
+		{
+			//complicated test, this.  And, yes, it's largely pointless - but it
+			//proves that our expression parsing is recursive and can handle complex constructs
+			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>(scope.Rezolve<string>())));
+			var intTarget = NoDefaultConstructor.ExpectedComplexRezolveCall.AsObjectTarget();
+			const string rezolveName = "ThisIsComplicated";
+			var stringTarget = rezolveName.AsObjectTarget();
+			var scopeMock = new Mock<IRezolverScope>();
+			scopeMock.Setup(s => s.Fetch(typeof(string), null)).Returns(stringTarget).Verifiable();
+			scopeMock.Setup(s => s.Fetch(typeof(int), rezolveName)).Returns(intTarget).Verifiable();
+			//so the expression demands that a new instance of NoDefaultConstructor is built. with an
+			//integer constructor argument that is, in turn, resolved by a name which is also resolved.
+			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
+			Assert.AreEqual(NoDefaultConstructor.ExpectedComplexRezolveCall, result.Value);
 			scopeMock.VerifyAll();
 		}
 	}
