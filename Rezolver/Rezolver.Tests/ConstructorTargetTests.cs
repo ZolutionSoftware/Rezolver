@@ -87,7 +87,11 @@ namespace Rezolver.Tests
 			//this is where the action starts to heat up!
 			//if we can get explicitly resolved arguments to work, then we can get easily get
 			//automatically injected arguments - by simply emitting the correct expression to do the same.
-			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>()));
+			//note that we pass the RezolveTargetAdapter singleton instance here to ensure consistent expression
+			//parsing.  However - note that if any tests in the RezolveTargetAdapterTests suite are failing, then
+			//tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget's
+			//integration with the default adapter here.
+			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>()), RezolveTargetAdapter.Instance);
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var scopeMock = new Mock<IRezolverScope>();
 			scopeMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);

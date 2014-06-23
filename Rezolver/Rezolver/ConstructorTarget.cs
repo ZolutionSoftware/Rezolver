@@ -94,7 +94,7 @@ namespace Rezolver
 			else
 			{
 				ctor = newExpr.Constructor;
-				parameterBindings = ExtractParameterBindings(newExpr, adapter).ToArray();
+				parameterBindings = ExtractParameterBindings(newExpr, adapter ?? RezolveTargetAdapter.Default).ToArray();
 
 			}
 
@@ -103,7 +103,7 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
 
-		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr, IRezolveTargetAdapter adapter = null)
+		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr, IRezolveTargetAdapter adapter)
 		{
 			return newExpr.Constructor.GetParameters()
 				.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, adapter.GetRezolveTarget(expression))).ToArray();

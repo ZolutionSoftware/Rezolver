@@ -1,3 +1,4 @@
+using System;
 using System.Linq.Expressions;
 
 namespace Rezolver
@@ -13,14 +14,19 @@ namespace Rezolver
 		//to produce a proper 'compilable' expression tree
 		private readonly IRezolveTarget _target;
 
-		public RezolveTargetExpression(IRezolveTarget target)
-		{
-			_target = target;
-		}
-
 		public IRezolveTarget Target
 		{
 			get { return _target; }
+		}
+
+		public override Type Type
+		{
+			get { return _target.DeclaredType; }
+		}
+
+		public RezolveTargetExpression(IRezolveTarget target)
+		{
+			_target = target;
 		}
 	}
 }
