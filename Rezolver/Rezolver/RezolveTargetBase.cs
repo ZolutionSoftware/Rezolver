@@ -16,6 +16,12 @@ namespace Rezolver
 		/// <summary>
 		/// Abstract method called to create the expression - this is called by <see cref="CreateExpression"/> after the
 		/// <paramref name="targetType"/> has been validated, if provided.
+		/// 
+		/// Note - if your implementation needs to support dynamic Rezolve operations from the container that is passed
+		/// to an IRezolverContainer's Rezolve method, use <see cref="ExpressionHelper.DynamicContainerParam"/> as the target
+		/// expression.
+		/// 
+		/// You can also use the <see cref="ExpressionHelper.GetDynamicRezolveCall"/> method to help build such expressions.
 		/// </summary>
 		/// <param name="scope"></param>
 		/// <param name="targetType"></param>
@@ -37,8 +43,8 @@ namespace Rezolver
 		/// Virtual method implementing IRezolveTarget.CreateExpression.  Rather than overriding this method,
 		/// your starting point is to implement the abstract method <see cref="CreateExpressionBase"/>.
 		/// </summary>
-		/// <param name="scope"></param>
-		/// <param name="targetType"></param>
+		/// <param name="scope">The scope in which this target is perform compile-time rezolve operations.</param>
+		/// <param name="targetType">The target type of the expression.</param>
 		/// <returns></returns>
 		public virtual Expression CreateExpression(IRezolverScope scope, Type targetType = null)
 		{

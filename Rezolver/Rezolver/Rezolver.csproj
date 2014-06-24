@@ -46,6 +46,7 @@
     <Compile Include="ConstructorTarget.cs" />
     <Compile Include="DefaultTarget.cs" />
     <Compile Include="DelegateTarget.cs" />
+    <Compile Include="ExpressionHelper.cs" />
     <Compile Include="ExpressionTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\Linq\Expressions\ExpressionExtensions.cs" />

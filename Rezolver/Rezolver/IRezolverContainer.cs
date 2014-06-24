@@ -11,6 +11,6 @@ namespace Rezolver
 	/// </summary>
 	public interface IRezolverContainer : IRezolverScope
 	{
-		object Rezolve(Type type, string name = null, IRezolverScope dynamicScope = null);
+		object Rezolve(Type type, string name = null, IRezolverContainer dynamicContainer	 = null);
 	}
 }

@@ -44,5 +44,17 @@ namespace Rezolver
 			var visitor = new MethodCallExtractor(expr);
 			return visitor.CalledMethod;
 		}
+
+		public static MethodInfo ExtractCalledMethod<TResult>(Expression<Func<TResult>> expr)
+		{
+			var visitor = new MethodCallExtractor(expr);
+			return visitor.CalledMethod;
+		}
+
+		public static MethodInfo ExtractCalledMethod<TInstance, TResult>(Expression<Func<TInstance, TResult>> expr)
+		{
+			var visitor = new MethodCallExtractor(expr);
+			return visitor.CalledMethod;
+		}
 	}
 }

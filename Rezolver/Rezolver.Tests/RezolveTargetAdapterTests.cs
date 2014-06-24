@@ -61,10 +61,10 @@ namespace Rezolver.Tests
 			//oh the irony - because the adapter is intended to identify targets in the expression,
 			//a constantexpression is not preserved, but is turned into an ObjectTarget which will later
 			//*build* a ConstantExpression.
-			RezolveTargetExpression nameExpr = result2.Name as RezolveTargetExpression;
-			Assert.IsNotNull(nameExpr);
-			Assert.IsInstanceOfType(nameExpr.Target, typeof(ObjectTarget));
-			Assert.AreEqual("name", GetValueFromTarget(nameExpr.Target));
+			IRezolveTarget nameTarget = result2.Name as IRezolveTarget;
+			Assert.IsNotNull(nameTarget);
+			Assert.IsInstanceOfType(nameTarget, typeof(ObjectTarget));
+			Assert.AreEqual("name", GetValueFromTarget(nameTarget));
 		}
 
 		[TestMethod]
@@ -78,9 +78,9 @@ namespace Rezolver.Tests
 			Assert.IsInstanceOfType(result, typeof(RezolvedTarget));
 			RezolvedTarget result2 = (RezolvedTarget)result;
 			Assert.IsNotNull(result2.Name);
-			RezolveTargetExpression nameExpr = result2.Name as RezolveTargetExpression;
+			IRezolveTarget nameTarget = result2.Name as IRezolveTarget;
 
-			Assert.AreEqual(typeof(string), nameExpr.Type);
+			Assert.AreEqual(typeof(string), nameTarget.DeclaredType);
 		}
 
 		[TestMethod]

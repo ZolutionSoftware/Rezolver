@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace Rezolver
@@ -15,15 +16,20 @@ namespace Rezolver
 			_scope = scope;
 		}
 
-		public object Rezolve(Type type, string name = null, IRezolverScope dynamicScope = null)
+		public object Rezolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
 		{
 			var target = _scope.Fetch(type, name);
 			if (target != null)
 			{
-				ParameterExpression scopeParamExp = Expression.Parameter(typeof (IRezolverScope), "scope");
-
-				var dlg = Expression.Lambda<Func<IRezolverScope, object>>() target.CreateExpression(scopeParamExp)
+				var factoryExp = Expression.Lambda<Func<IRezolverContainer, object>>(target.CreateExpression(_scope, type),
+					ExpressionHelper.DynamicContainerParam);
+#if DEBUG
+				Debug.WriteLine("RezolverContainer is Compiling lambda \"{0}\" for type {1}", factoryExp, type);
+#endif
+				var dlg = factoryExp.Compile();
+				return dlg(dynamicContainer);
 			}
+			throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format(", name \"{0}\"", name) : ""));
 		}
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
