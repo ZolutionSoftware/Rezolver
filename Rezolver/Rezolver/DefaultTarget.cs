@@ -13,10 +13,10 @@ namespace Rezolver
 			_declaredType = type;
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
 		{
 			return targetType != null && targetType != DeclaredType
-				?(Expression)Expression.Convert(Expression.Default(DeclaredType), targetType)
+				? (Expression)Expression.Convert(Expression.Default(DeclaredType), targetType)
 				: Expression.Default(DeclaredType);
 		}
 

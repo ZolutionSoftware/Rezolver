@@ -8,7 +8,7 @@ namespace Rezolver.Tests
 	public class RezolverContainerTests
 	{
 		[TestMethod]
-		public void ShouldRezoleAnInt()
+		public void ShouldRezolveAnInt()
 		{
 			var scopeMock = new Mock<IRezolverScope>();
 			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(1.AsObjectTarget());

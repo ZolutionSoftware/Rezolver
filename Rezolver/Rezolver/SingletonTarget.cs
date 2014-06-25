@@ -14,7 +14,7 @@ namespace Rezolver
 	public class SingletonTarget : IRezolveTarget
 	{
 		private IRezolveTarget _innerTarget;
-		private Func<IRezolverScope, Type, Expression> _createExpressionDelegate;  
+		private Func<IRezolverContainer, Type, Expression> _createExpressionDelegate;  
 		//this is the most naive implementation of this class - bake a lazy into this singleton,
 		//initialise it with a delegate built from the inner target's expression, and then this
 		//one's expression simply returns this lazy's value.
@@ -41,22 +41,22 @@ namespace Rezolver
 			return _innerTarget.SupportsType(type);
 		}
 
-		private Expression CreateExpressionFromInnerSingleton(IRezolverScope scope, Type targetType)
+		private Expression CreateExpressionFromInnerSingleton(IRezolverContainer containerScope, Type targetType)
 		{
-			return ((SingletonTarget) _innerTarget).CreateExpression(scope, targetType);
+			return ((SingletonTarget) _innerTarget).CreateExpression(containerScope, targetType: targetType);
 		}
 
-		private Expression CreateExpressionFromInner(IRezolverScope scope, Type targetType)
+		private Expression CreateExpressionFromInner(IRezolverContainer scope, Type targetType)
 		{
 			if(_lazy == null)
-				_lazy = new Lazy<object>(Expression.Lambda<Func<object>>(_innerTarget.CreateExpression(scope, typeof(object))).Compile());
+				_lazy = new Lazy<object>(Expression.Lambda<Func<object>>(_innerTarget.CreateExpression(scope, targetType: typeof(object))).Compile());
 			Expression<Func<object>> e = () => _lazy.Value;
 			return Expression.Convert(e.Body, targetType ?? DeclaredType);
 		}
 
-		public Expression CreateExpression(IRezolverScope scope, Type targetType = null)
+		public Expression CreateExpression(IRezolverContainer containerScope, Type targetType = null)
 		{
-			return _createExpressionDelegate(scope, targetType);
+			return _createExpressionDelegate(containerScope, targetType);
 		}
 
 		public Type DeclaredType

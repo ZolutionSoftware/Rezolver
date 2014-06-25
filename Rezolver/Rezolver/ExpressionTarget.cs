@@ -16,7 +16,7 @@ namespace Rezolver
 			_expression = expression;
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
 		{
 			return _expression;
 		}

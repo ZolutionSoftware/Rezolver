@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.Tests", "Rezolver.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56482AC2-4C3C-4F54-9C48-93E1AA53A8FC}"
 	ProjectSection(SolutionItems) = preProject
+		.editorConfig = .editorConfig
 		..\.gitignore = ..\.gitignore
 		DesignNotes.md = DesignNotes.md
 		..\README.md = ..\README.md
