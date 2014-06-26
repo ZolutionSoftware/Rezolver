@@ -37,13 +37,13 @@ namespace Rezolver
 				//that's provided to the CreateExpression call.  Instead, passing that container is deferred
 				//until we execute the the delegate itself.  To support such dynamic scoping, a target must simply
 				//reference the parameter expression ExpressionHelper.DynamicContainerParam.
-				var factoryExp = Expression.Lambda<Func<IRezolverContainer, object>>(
-					Expression.Convert(target.CreateExpression(this, targetType: type), typeof(object)),
-					ExpressionHelper.DynamicContainerParam);
+				var factoryExp = ExpressionHelper.GetLambdaForTarget(this, type, target);
 #if DEBUG
 				Debug.WriteLine("RezolverContainer is Compiling lambda \"{0}\" for type {1}", factoryExp, type);
 #endif
 				var dlg = factoryExp.Compile();
+
+				//TODO: implement caching.  Probably want to abstract that away so that on more 'capable' platforms we can use ConcurrentDictionary
 				return dlg(dynamicContainer);
 			}
 			throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format(", name \"{0}\"", name) : ""));

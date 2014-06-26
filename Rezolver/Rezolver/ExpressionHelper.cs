@@ -6,7 +6,7 @@ namespace Rezolver
 {
 	/// <summary>
 	/// This static class contains methods and properties to aid in building expressions suitable to be used in
-	/// building IRezolverContainer factory delegates.
+	/// building IRezolverContainer factory delegates from IRezolveTarget.
 	/// </summary>
 	public static class ExpressionHelper
 	{
@@ -19,7 +19,7 @@ namespace Rezolver
 			"containerScope");
 
 		public static readonly MethodInfo RezolveContainerRezolveMethod = MethodCallExtractor.ExtractCalledMethod(
-			(IRezolverContainer container) => container.Rezolve(null, null, null));
+			(IRezolverContainer container) => container.Rezolve(null, null, null);
 
 		/// <summary>
 		/// Returns a MethodCallExpression invoked on the <see cref="DynamicContainerParam"/> (which is used by all 
@@ -45,6 +45,19 @@ namespace Rezolver
 						Expression.Constant(targetType), 
 						name,
 						Expression.Constant(null, typeof (IRezolverContainer))), targetType);
+		}
+
+		public static Expression<Func<IRezolverContainer, object>> GetLambdaForTarget(IRezolverContainer scopeContainer, Type type, IRezolveTarget target)
+		{
+			return Expression.Lambda<Func<IRezolverContainer, object>>(
+				Expression.Convert(target.CreateExpression(scopeContainer, targetType: type), typeof(object)),
+				DynamicContainerParam);
+		}
+
+		public static Func<IRezolverContainer, object> GetFactoryForTarget(IRezolverContainer scopeContainer, Type type,
+			IRezolveTarget target)
+		{
+			return GetLambdaForTarget(scopeContainer, type, target).Compile();
 		}
 	}
 }

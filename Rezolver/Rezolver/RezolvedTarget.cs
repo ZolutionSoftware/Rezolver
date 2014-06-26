@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Xml.Serialization;
 using Rezolver.Resources;
 
 namespace Rezolver
@@ -50,39 +51,47 @@ namespace Rezolver
 		{
 			scopeContainer.MustNotBeNull("scope");
 
-			
 			if (_resolveNameTarget != null)
 			{
-				
+				//I think in this case, we *have* to defer to a dynamic resolve call on the scopeContainer in addition to 
+				//intrinsic dynamic container because we can't know if the name target reprents a single value, or something which
+				//produces lots of different values based on ambient environments.
+				//There is the minority case for ObjectTarget and probably SingletonTarget,  which will always produce the 
+				//same instance.
 			}
-			//basic - without supporting a name
+			
 			var resolvedTarget = scopeContainer.Fetch(_resolveType, null);
 
-			//var rezolvedHelper = new RezolvedHelper(targetType ?? DeclaredType, resolvedTarget, _resolveNameTarget);
+			//TODO: Build this target's lambda and compile it to be passed as a constructor parameter to the LateBounddRezolver
 
+			//var rezolvedHelper = new RezolvedHelper(targetType ?? DeclaredType, resolvedTarget, _resolveNameTarget);
+			
 			if(resolvedTarget == null)
 				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
 			return Expression.Convert(resolvedTarget.CreateExpression(scopeContainer, currentTargets: currentTargets), targetType ?? _resolveType);
 		}
 
-		//protected internal class RezolvedHelper
-		//{
-		//	private readonly Type _type;
-		//	private readonly IRezolveTarget _resolvedTarget;
-		//	private readonly IRezolveTarget _resolveNameTarget;
+		protected internal class LateBoundRezolveCall<TTarget>
+		{
+			private readonly Func<TTarget> _compiledResultFactory;
+			private readonly Func<string> _nameFactory;
 
-		//	public RezolvedHelper(Type type, IRezolveTarget resolvedTarget, IRezolveTarget resolveNameTarget)
-		//	{
-		//		_type = type;
-		//		_resolvedTarget = resolvedTarget;
-		//		_resolveNameTarget = resolveNameTarget;
-		//	}
+			public LateBoundRezolveCall(Func<TTarget> compiledResultFactory, Func<string> name)
+			{
+				_compiledResultFactory = compiledResultFactory;
+				_nameFactory = name;
+			}
 
-		//	private T GetObject<T>(IRezolverContainer containerScope, bool hasDefault, T defaultObject)
-		//	{
-		//		if(containerScope != null && containerScope.)
-		//	}
-		//}
+			//note - when this call is made, the dynamic scope is the one that's passed
+			private TTarget Resolve(IRezolverContainer dynamicScope)
+			{
+				var nameResult = _nameFactory();
+				if (dynamicScope != null && dynamicScope.CanResolve(typeof (TTarget), _nameFactory))
+				{
+					return (TTarget)dynamicScope.Rezolve(typeof(TTarget), _name);
+				}
+			}
+		}
 	}
 
 
