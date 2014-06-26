@@ -156,4 +156,7 @@
 	<data name="NoConstructorSetOnNewExpression" xml:space="preserve">
     <value>No constructor has been set on the NewExpression - this is not allowed.</value>
   </data>
+	<data name="CyclicDependencyDetectedInTargetFormat" xml:space="preserve">
+    <value>Cyclic dependency detected in targets - current target of type {0} with DeclaredType of {1} has tried to include itself in its expression.</value>
+  </data>
 </root>

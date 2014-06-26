@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -25,7 +26,7 @@ namespace Rezolver
 			_declaredType = declaredType ?? typeof(T);
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			Expression<Func<T>> e = () => _factory();
 			return Expression.Convert(e.Body, targetType ?? DeclaredType);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Rezolver.Resources;
 
@@ -45,7 +46,7 @@ namespace Rezolver
 			get { return _resolveType; }
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			scopeContainer.MustNotBeNull("scope");
 
@@ -61,7 +62,7 @@ namespace Rezolver
 
 			if(resolvedTarget == null)
 				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
-			return Expression.Convert(resolvedTarget.CreateExpression(scopeContainer), targetType ?? _resolveType);
+			return Expression.Convert(resolvedTarget.CreateExpression(scopeContainer, currentTargets: currentTargets), targetType ?? _resolveType);
 		}
 
 		//protected internal class RezolvedHelper

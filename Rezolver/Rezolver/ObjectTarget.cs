@@ -1,4 +1,5 @@
 ﻿﻿using System;
+﻿using System.Collections.Generic;
 ﻿using System.Linq.Expressions;
 
 namespace Rezolver
@@ -38,7 +39,7 @@ namespace Rezolver
 				_declaredType = _object == null ? typeof(object) : _object.GetType();	
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			return Expression.Constant(_object, targetType ?? DeclaredType);
 		}
