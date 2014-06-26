@@ -49,7 +49,7 @@ namespace Rezolver
 		{
 			scopeContainer.MustNotBeNull("scope");
 
-			//the decision here is whether we resolve through the container or grab an expression from the scope underlying
+			
 			if (_resolveNameTarget != null)
 			{
 				
@@ -57,31 +57,31 @@ namespace Rezolver
 			//basic - without supporting a name
 			var resolvedTarget = scopeContainer.Fetch(_resolveType, null);
 
-			var rezolvedHelper = new RezolvedHelper(targetType ?? DeclaredType, resolvedTarget, _resolveNameTarget);
+			//var rezolvedHelper = new RezolvedHelper(targetType ?? DeclaredType, resolvedTarget, _resolveNameTarget);
 
-			//if(resolvedTarget == null)
-			//	throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
+			if(resolvedTarget == null)
+				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
 			return Expression.Convert(resolvedTarget.CreateExpression(scopeContainer), targetType ?? _resolveType);
 		}
 
-		protected internal class RezolvedHelper
-		{
-			private readonly Type _type;
-			private readonly IRezolveTarget _resolvedTarget;
-			private readonly IRezolveTarget _resolveNameTarget;
+		//protected internal class RezolvedHelper
+		//{
+		//	private readonly Type _type;
+		//	private readonly IRezolveTarget _resolvedTarget;
+		//	private readonly IRezolveTarget _resolveNameTarget;
 
-			public RezolvedHelper(Type type, IRezolveTarget resolvedTarget, IRezolveTarget resolveNameTarget)
-			{
-				_type = type;
-				_resolvedTarget = resolvedTarget;
-				_resolveNameTarget = resolveNameTarget;
-			}
+		//	public RezolvedHelper(Type type, IRezolveTarget resolvedTarget, IRezolveTarget resolveNameTarget)
+		//	{
+		//		_type = type;
+		//		_resolvedTarget = resolvedTarget;
+		//		_resolveNameTarget = resolveNameTarget;
+		//	}
 
-			private T GetObject<T>(IRezolverContainer containerScope, bool hasDefault, T defaultObject)
-			{
-				if(containerScope != null && containerScope.)
-			}
-		}
+		//	private T GetObject<T>(IRezolverContainer containerScope, bool hasDefault, T defaultObject)
+		//	{
+		//		if(containerScope != null && containerScope.)
+		//	}
+		//}
 	}
 
 

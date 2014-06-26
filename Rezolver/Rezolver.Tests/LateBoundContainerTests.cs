@@ -1,35 +1,14 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class RezolverContainerTests
+	public class LateBoundContainerTests : TestsBase
 	{
 		[TestMethod]
-		public void ShouldRezolveAnInt()
-		{
-			var scopeMock = new Mock<IRezolverScope>();
-			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(1.AsObjectTarget());
-
-			IRezolverContainer container = new RezolverContainer(scopeMock.Object);
-			var result = container.Rezolve(typeof (int));
-			Assert.AreEqual(1, result);
-		}
-
-		private class TypeWithConstructorArg
-		{
-			public int Value { get; private set; }
-
-			public TypeWithConstructorArg(int value)
-			{
-				Value = value;
-			}
-		}
-
-		[TestMethod]
-		public void ShouldRezolveFromDynamicContainer()
+		public void ShouldRezolveFromDyanmicContainer()
 		{
 			//this is using constructorTarget with a prescribed new expression
 			var scope1Mock = new Mock<IRezolverScope>();

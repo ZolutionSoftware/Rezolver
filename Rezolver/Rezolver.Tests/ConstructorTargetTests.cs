@@ -94,7 +94,7 @@ namespace Rezolver.Tests
 			//integration with the default adapter here.
 			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>()), RezolveTargetAdapter.Instance);
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-			var scopeMock = new Mock<IRezolverScope>();
+			var scopeMock = new Mock<IRezolverContainer>();
 			scopeMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -107,7 +107,7 @@ namespace Rezolver.Tests
 			//basically the same as above - except this doesn't provide the constructor call explicitly.
 			var target = ConstructorTarget.Auto<NoDefaultConstructor>();
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-			var scopeMock = new Mock<IRezolverScope>();
+			var scopeMock = new Mock<IRezolverContainer>();
 			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -123,7 +123,7 @@ namespace Rezolver.Tests
 			var intTarget = NoDefaultConstructor.ExpectedComplexRezolveCall.AsObjectTarget();
 			const string rezolveName = "ThisIsComplicated";
 			var stringTarget = rezolveName.AsObjectTarget();
-			var scopeMock = new Mock<IRezolverScope>();
+			var scopeMock = new Mock<IRezolverContainer>();
 			scopeMock.Setup(s => s.Fetch(typeof(string), null)).Returns(stringTarget).Verifiable();
 			scopeMock.Setup(s => s.Fetch(typeof(int), rezolveName)).Returns(intTarget).Verifiable();
 			//so the expression demands that a new instance of NoDefaultConstructor is built. with an
