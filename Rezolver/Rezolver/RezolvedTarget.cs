@@ -17,27 +17,27 @@ namespace Rezolver
 	public class RezolvedTarget : RezolveTargetBase
 	{
 		private readonly Type _resolveType;
-		private readonly Expression _resolveNameExpression;
+		private readonly IRezolveTarget _resolveNameTarget;
 
-		public Expression Name { get { return _resolveNameExpression; } }
+		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 
 		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
 		{
 			_resolveType = rezolveCall.Type;
-			_resolveNameExpression = rezolveCall.Name;
+			_resolveNameTarget = rezolveCall.Name;
 		}
 
 		public RezolvedTarget(Type type, string name = null)
-			: this(type, name != null ? Expression.Constant(name) : null)
+			: this(type, name != null ? name.AsObjectTarget() : null)
 		{
 
 		}
 
-		public RezolvedTarget(Type type, Expression name)
+		public RezolvedTarget(Type type, IRezolveTarget name)
 		{
 			type.MustNotBeNull("type");
 			_resolveType = type;
-			_resolveNameExpression = name;
+			_resolveNameTarget = name;
 		}
 
 		public override Type DeclaredType
@@ -45,14 +45,44 @@ namespace Rezolver
 			get { return _resolveType; }
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
 		{
-			scope.MustNotBeNull("scope");
+			scopeContainer.MustNotBeNull("scope");
+
+			
+			if (_resolveNameTarget != null)
+			{
+				
+			}
 			//basic - without supporting a name
-			var resolvedTarget = scope.Fetch(_resolveType, null);
+			var resolvedTarget = scopeContainer.Fetch(_resolveType, null);
+
+			//var rezolvedHelper = new RezolvedHelper(targetType ?? DeclaredType, resolvedTarget, _resolveNameTarget);
+
 			if(resolvedTarget == null)
 				throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
-			return Expression.Convert(resolvedTarget.CreateExpression(scope), targetType ?? _resolveType);
+			return Expression.Convert(resolvedTarget.CreateExpression(scopeContainer), targetType ?? _resolveType);
 		}
+
+		//protected internal class RezolvedHelper
+		//{
+		//	private readonly Type _type;
+		//	private readonly IRezolveTarget _resolvedTarget;
+		//	private readonly IRezolveTarget _resolveNameTarget;
+
+		//	public RezolvedHelper(Type type, IRezolveTarget resolvedTarget, IRezolveTarget resolveNameTarget)
+		//	{
+		//		_type = type;
+		//		_resolvedTarget = resolvedTarget;
+		//		_resolveNameTarget = resolveNameTarget;
+		//	}
+
+		//	private T GetObject<T>(IRezolverContainer containerScope, bool hasDefault, T defaultObject)
+		//	{
+		//		if(containerScope != null && containerScope.)
+		//	}
+		//}
 	}
+
+
 }

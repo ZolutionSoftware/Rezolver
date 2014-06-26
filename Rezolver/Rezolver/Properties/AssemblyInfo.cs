@@ -5,11 +5,11 @@ using System.Reflection;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Rezolver")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("High performance portable IOC container for .Net")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Zolution Software Ltd")]
 [assembly: AssemblyProduct("Rezolver")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©Zolution Software 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]

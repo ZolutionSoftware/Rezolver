@@ -23,10 +23,10 @@ namespace Rezolver
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
 		{
 			return Expression.Convert(Expression.New(_ctor,
-				_parameterBindings.Select(pb => pb.Target.CreateExpression(scope))), targetType ?? DeclaredType);
+				_parameterBindings.Select(pb => pb.Target.CreateExpression(scopeContainer))), targetType ?? DeclaredType);
 		}
 
 		public override Type DeclaredType

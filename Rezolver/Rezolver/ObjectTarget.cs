@@ -38,7 +38,7 @@ namespace Rezolver
 				_declaredType = _object == null ? typeof(object) : _object.GetType();	
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverScope scope, Type targetType = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null)
 		{
 			return Expression.Constant(_object, targetType ?? DeclaredType);
 		}

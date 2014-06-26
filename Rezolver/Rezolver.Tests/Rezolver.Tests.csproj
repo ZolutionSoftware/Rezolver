@@ -73,6 +73,8 @@
     <Compile Include="ConstructorTargetTests.cs" />
     <Compile Include="DefaultTargetTests.cs" />
     <Compile Include="RezolveTargetAdapterTests.cs" />
+    <Compile Include="RezolverContainerTests.cs" />
+    <Compile Include="LateBoundContainerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">

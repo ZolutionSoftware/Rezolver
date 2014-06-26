@@ -21,9 +21,9 @@ namespace Rezolver
 		internal class RezolveCallExpressionInfo
 		{
 			public Type Type { get; private set; }
-			public Expression Name { get; private set; }
+			public IRezolveTarget Name { get; private set; }
 
-			internal RezolveCallExpressionInfo(Type type, Expression name)
+			internal RezolveCallExpressionInfo(Type type, IRezolveTarget name)
 			{
 				Type = type;
 				Name = name;
@@ -95,7 +95,7 @@ namespace Rezolver
 			//note below - firing the Visit method again for the parameter, which allows us to use Rezolve operations
 			//for the parameters.
 			return nameParameter != null
-				? new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], Visit(methodExpr.Arguments[1]))
+				? new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], GetRezolveTarget(methodExpr.Arguments[1]))
 				: new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], null);
 		}
 
