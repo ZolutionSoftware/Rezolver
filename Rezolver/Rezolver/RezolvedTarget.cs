@@ -52,7 +52,7 @@ namespace Rezolver
 		{
 			scopeContainer.MustNotBeNull("scope");
 			
-			var resolvedTarget = scopeContainer.Fetch(_resolveType, null);
+			var resolvedTarget = scopeContainer.Fetch(DeclaredType, null);
 
 			Func<object> compiledRezolveCall = null;
 			Func<string> compiledNameCall = null;
@@ -60,6 +60,8 @@ namespace Rezolver
 			if (resolvedTarget != null)
 			{
 				var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, resolvedTarget, currentTargets);
+				//do not pass a dynamic container to the factory - because this particular expression is only intended
+				//to work on this scope, not the dynaamic one.
 				compiledRezolveCall = () => toCall(null);
 			}
 
@@ -73,7 +75,7 @@ namespace Rezolver
 				var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, _resolveNameTarget, currentTargets);
 				compiledNameCall = () => (string)toCall(null);
 			}
-			var helper = new LateBoundRezolveCall(targetType, compiledRezolveCall, compiledNameCall);
+			var helper = new LateBoundRezolveCall(targetType ?? DeclaredType, compiledRezolveCall, compiledNameCall);
 			var methodCall = MethodCallExtractor.ExtractCalledMethod(() => helper.Resolve(null));
 				
 			return Expression.Convert(Expression.Call(Expression.Constant(helper), methodCall, ExpressionHelper.DynamicContainerParam), targetType ?? _resolveType);
@@ -100,7 +102,7 @@ namespace Rezolver
 					var name = _nameFactory != null ? _nameFactory() : null;
 					if (dynamicScope.CanResolve(_targetType, name))
 					{
-						return dynamicScope.Rezolve(_targetType, _nameFactory());
+						return dynamicScope.Rezolve(_targetType, name);
 					}
 				}
 				if(_compiledResultFactory == null)
