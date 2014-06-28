@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.Versioning;
 using System.Xml.Serialization;
 using Rezolver.Resources;
@@ -51,11 +52,11 @@ namespace Rezolver
 		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			scopeContainer.MustNotBeNull("scope");
-			
+
 			var resolvedTarget = scopeContainer.Fetch(DeclaredType, null);
 
 			Func<object> compiledRezolveCall = null;
-			Func<string> compiledNameCall = null;
+			Func<IRezolverContainer, string> compiledNameCall = null;
 
 			if (resolvedTarget != null)
 			{
@@ -72,22 +73,102 @@ namespace Rezolver
 				//produces lots of different values based on ambient environments.
 				//There is the minority case for ObjectTarget and probably SingletonTarget,  which will always produce the 
 				//same instance, but there's no reliable way - apart from a type test - to determine that.
+				//TODO: make this call generic after Resolve<T> has been added to the IRezolverContainer
 				var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, _resolveNameTarget, currentTargets);
-				compiledNameCall = () => (string)toCall(null);
+
+				compiledNameCall = (dynamicScope) => (string)toCall(dynamicScope);
+
 			}
 			var helper = new LateBoundRezolveCall(targetType ?? DeclaredType, compiledRezolveCall, compiledNameCall);
-			var methodCall = MethodCallExtractor.ExtractCalledMethod(() => helper.Resolve(null));
-				
-			return Expression.Convert(Expression.Call(Expression.Constant(helper), methodCall, ExpressionHelper.DynamicContainerParam), targetType ?? _resolveType);
+			//only one way to do this - do all the checks now so that minimal decisions are made when the resolve operation
+			//is called.
+			Func<IRezolverContainer, object> lateBoundFounc;
+			var finalType = targetType ?? DeclaredType;
+			if (compiledNameCall != null)
+			{
+				if (compiledRezolveCall != null)
+				{
+					lateBoundFounc = (dynamicScope) =>
+					{
+						if (dynamicScope != null)
+						{
+							var name = compiledNameCall(dynamicScope);
+							if (dynamicScope.CanResolve(finalType, name))
+							{
+								return dynamicScope.Rezolve(finalType, name);
+							}
+						}
+						return compiledRezolveCall();
+					};
+				}
+				else
+				{
+					///same as above, but an exception is thrown if the dynamic scope can't resolve
+					lateBoundFounc = (dynamicScope) =>
+					{
+						if (dynamicScope != null)
+						{
+							var name = compiledNameCall(dynamicScope);
+							if (dynamicScope.CanResolve(finalType, name))
+							{
+								return dynamicScope.Rezolve(finalType, name);
+							}
+						}
+						throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, finalType));
+					};
+				}
+			}
+			else
+			{
+				if (compiledRezolveCall != null)
+				{
+
+					lateBoundFounc = (dynamicScope) =>
+					{
+						if (dynamicScope != null)
+						{
+							if (dynamicScope.CanResolve(finalType, null))
+							{
+								return dynamicScope.Rezolve(finalType, null);
+							}
+						}
+
+						return compiledRezolveCall();
+					};
+				}
+				else
+				{
+					lateBoundFounc =
+						(dynamicScope) =>
+						{
+							if (dynamicScope != null)
+							{
+								if (dynamicScope.CanResolve(finalType, null))
+								{
+									return dynamicScope.Rezolve(finalType, null);
+								}
+							}
+
+							throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, finalType));
+						};
+				}
+			}
+
+			return Expression.Convert(
+				/*Expression.Call(Expression.Constant(helper), LateBoundRezolveCall.ResolveMethodInfo, ExpressionHelper.DynamicContainerParam)*/
+				Expression.Call(Expression.Constant(lateBoundFounc), lateBoundFounc.GetType().GetMethod("Invoke"), ExpressionHelper.DynamicContainerParam), targetType ?? _resolveType);
 		}
 
 		protected internal class LateBoundRezolveCall
 		{
+			public static readonly MethodInfo ResolveMethodInfo =
+				MethodCallExtractor.ExtractCalledMethod((LateBoundRezolveCall call) => call.Resolve(null));
+
 			private readonly Type _targetType;
 			private readonly Func<object> _compiledResultFactory;
-			private readonly Func<string> _nameFactory;
+			private readonly Func<IRezolverContainer, string> _nameFactory;
 
-			public LateBoundRezolveCall(Type targetType, Func<object> compiledResultFactory, Func<string> name)
+			public LateBoundRezolveCall(Type targetType, Func<object> compiledResultFactory, Func<IRezolverContainer, string> name)
 			{
 				_targetType = targetType;
 				_compiledResultFactory = compiledResultFactory;
@@ -99,17 +180,19 @@ namespace Rezolver
 			{
 				if (dynamicScope != null)
 				{
-					var name = _nameFactory != null ? _nameFactory() : null;
+					var name = _nameFactory != null ? _nameFactory(dynamicScope) : null;
 					if (dynamicScope.CanResolve(_targetType, name))
 					{
 						return dynamicScope.Rezolve(_targetType, name);
 					}
 				}
-				if(_compiledResultFactory == null)
+				if (_compiledResultFactory == null)
 					throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _targetType));
 
-				return _compiledResultFactory;
+				return _compiledResultFactory();
 			}
+
+
 		}
 	}
 }

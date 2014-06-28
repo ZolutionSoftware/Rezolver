@@ -11,7 +11,22 @@ namespace Rezolver
 	/// </summary>
 	public interface IRezolverContainer : IRezolverScope
 	{
+		/// <summary>
+		/// Standard version of the CanResolve operation.
+		/// </summary>
+		/// <param name="type"></param>
+		/// <param name="name"></param>
+		/// <param name="dynamicContainer"></param>
+		/// <returns></returns>
 		bool CanResolve(Type type, string name = null, IRezolverContainer dynamicContainer = null);
+		/// <summary>
+		/// Generic version of the CanResolve operation
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="name"></param>
+		/// <param name="dynamicContainer"></param>
+		/// <returns></returns>
+		bool CanResolve<T>(string name = null, IRezolverContainer dynamicContainer = null);
 		/// <summary>
 		/// Resolves an object of the given type, optionally with the given name, using the optional
 		/// dynamic container for any late-bound resolve calls.

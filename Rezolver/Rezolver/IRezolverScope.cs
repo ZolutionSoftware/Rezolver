@@ -22,6 +22,8 @@ namespace Rezolver
 		/// <param name="name">Optional.  The named scope or scopes to be searched.</param>
 		/// <returns></returns>
 		IRezolveTarget Fetch(Type type, string name = null);
+		IRezolveTarget Fetch<T>(string name = null);
+		
 
 		/// <summary>
 		/// Retrieves, after optionally creating, a named scope from this scope.
@@ -31,5 +33,8 @@ namespace Rezolver
 		///   want it/them to be created.</param>
 		/// <returns>Null if no scope is found.  Otherwise the scope that was found or created.</returns>
 		INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false);
+
+		
+
 	}
 }

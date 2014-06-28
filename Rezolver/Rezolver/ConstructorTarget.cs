@@ -26,7 +26,7 @@ namespace Rezolver
 		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			return Expression.Convert(Expression.New(_ctor,
-				_parameterBindings.Select(pb => pb.Target.CreateExpression(scopeContainer, targetType: null))), targetType ?? DeclaredType);
+				_parameterBindings.Select(pb => pb.Target.CreateExpression(scopeContainer, targetType: null, currentTargets: currentTargets))), targetType ?? DeclaredType);
 		}
 
 		public override Type DeclaredType

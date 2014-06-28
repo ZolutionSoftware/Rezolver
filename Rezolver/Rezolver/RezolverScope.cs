@@ -79,6 +79,12 @@ namespace Rezolver
 			return _targets.TryGetValue(type, out target) ? target : null;
 		}
 
+		public IRezolveTarget Fetch<T>(string name = null)
+		{
+			return Fetch(typeof (T), name);
+		}
+
+
 		public INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false)
 		{
 			if(!path.MoveNext())
