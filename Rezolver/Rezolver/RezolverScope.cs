@@ -42,11 +42,11 @@ namespace Rezolver
 			if (target.SupportsType(type))
 			{
 				if (_targets.ContainsKey(type))
-					throw new ArgumentException(string.Format(Resources.Exceptions.TypeIsAlreadyRegistered, type), "type");
+					throw new ArgumentException(string.Format(Exceptions.TypeIsAlreadyRegistered, type), "type");
 				_targets[type] = target;
 			}
 			else
-				throw new ArgumentException(string.Format(Resources.Exceptions.TargetDoesntSupportType_Format, type), "target");
+				throw new ArgumentException(string.Format(Exceptions.TargetDoesntSupportType_Format, type), "target");
 		}
 
 		/// <summary>
@@ -88,7 +88,7 @@ namespace Rezolver
 		public INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false)
 		{
 			if(!path.MoveNext())
-				throw new ArgumentException(Resources.Exceptions.PathIsAtEnd, "path");
+				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
 
 			INamedRezolverScope namedScope;
 

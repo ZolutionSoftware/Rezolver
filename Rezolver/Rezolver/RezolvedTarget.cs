@@ -53,18 +53,8 @@ namespace Rezolver
 		{
 			scopeContainer.MustNotBeNull("scope");
 
-			var resolvedTarget = scopeContainer.Fetch(DeclaredType, null);
-
 			Func<object> compiledRezolveCall = null;
 			Func<IRezolverContainer, string> compiledNameCall = null;
-
-			if (resolvedTarget != null)
-			{
-				var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, resolvedTarget, currentTargets);
-				//do not pass a dynamic container to the factory - because this particular expression is only intended
-				//to work on this scope, not the dynaamic one.
-				compiledRezolveCall = () => toCall(null);
-			}
 
 			if (_resolveNameTarget != null)
 			{
@@ -77,9 +67,18 @@ namespace Rezolver
 				var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, _resolveNameTarget, currentTargets);
 
 				compiledNameCall = (dynamicScope) => (string)toCall(dynamicScope);
-
 			}
-			var helper = new LateBoundRezolveCall(targetType ?? DeclaredType, compiledRezolveCall, compiledNameCall);
+
+			var resolvedTarget = scopeContainer.Fetch(DeclaredType, compiledNameCall != null ? compiledNameCall(null) : null);
+
+			if (resolvedTarget != null)
+			{
+				var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, resolvedTarget, currentTargets);
+				//do not pass a dynamic container to the factory - because this particular expression is only intended
+				//to work on this scope, not the dynaamic one.
+				compiledRezolveCall = () => toCall(null);
+			}
+			//var helper = new LateBoundRezolveCall(targetType ?? DeclaredType, compiledRezolveCall, compiledNameCall);
 			//only one way to do this - do all the checks now so that minimal decisions are made when the resolve operation
 			//is called.
 			Func<IRezolverContainer, object> lateBoundFounc;

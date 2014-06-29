@@ -51,8 +51,8 @@ namespace Rezolver.Tests
 			int expected = -1;
 			containerMock.Setup(c => c.Rezolve(typeof(int), null, null)).Returns(expected);
 			RezolverContainer container = new RezolverContainer(scope1Mock.Object);
-
-			Assert.AreEqual(expected, container.Rezolve(typeof(int), dynamicContainer: containerMock.Object));
+			var result = container.Rezolve(typeof (int) /*, dynamicContainer: containerMock.Object*/);
+			Assert.AreEqual(expected, result);
 		}
 
 		[TestMethod]

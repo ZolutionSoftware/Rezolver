@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -21,7 +22,7 @@ namespace Rezolver
 			if (declaredType != null)
 			{
 				if (!TypeHelpers.AreCompatible(typeof(T), declaredType))
-					throw new ArgumentException(string.Format(Resources.Exceptions.DeclaredTypeIsNotCompatible_Format, declaredType, typeof(T)));
+					throw new ArgumentException(string.Format(Exceptions.DeclaredTypeIsNotCompatible_Format, declaredType, typeof(T)));
 			}
 			_declaredType = declaredType ?? typeof(T);
 		}

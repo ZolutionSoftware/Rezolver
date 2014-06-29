@@ -25,7 +25,7 @@ namespace Rezolver
 		public SingletonTarget(IRezolveTarget innerTarget)
 		{
 			innerTarget.MustNotBeNull("innerTarget");
-			this._innerTarget = innerTarget;
+			_innerTarget = innerTarget;
 			//if the passed target is another Singleton target, then import its lazy target reference
 			//to this one rather than wrapping it in another one.
 			SingletonTarget singletonTarget = innerTarget as SingletonTarget;

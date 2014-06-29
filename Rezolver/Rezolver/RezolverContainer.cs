@@ -11,91 +11,27 @@ namespace Rezolver
 	{
 		#region nested cach stuff
 
-
-		public class CacheKey : IEquatable<CacheKey>
+		public RezolverCache RezolverCache
 		{
-			private readonly Type _type;
-			private readonly string _name;
-
-			public Type Type { get { return _type; } }
-			public string Name { get { return _name; } }
-
-			public CacheKey(Type type, string name)
-			{
-				_type = type;
-				_name = name;
-			}
-
-			public override int GetHashCode()
-			{
-				return _type.GetHashCode() ^ (_name != null ? _name.GetHashCode() : 0);
-			}
-
-			public override bool Equals(object obj)
-			{
-				return Equals(obj as CacheKey);
-			}
-
-			public bool Equals(CacheKey other)
-			{
-				if (other != null)
-				{
-					return _type == other._type && _name == other._name;
-				}
-				return false;
-			}
+			get { return _rezolverCache; }
 		}
 
-		public class CacheEntry
-		{
-			private readonly Func<IRezolverContainer, object> _factory;
-			public static readonly CacheEntry Miss = new CacheEntry();
-
-			public bool IsMiss
-			{
-				get { return Miss == this; }
-			}
-
-			public Func<IRezolverContainer, object> Factory
-			{
-				get { return _factory; }
-			}
-
-
-			private CacheEntry()
-			{
-			}
-
-
-			public CacheEntry(Func<IRezolverContainer, object> factory)
-			{
-				_factory = factory;
-			}
-		}
-
-		private Dictionary<CacheKey, CacheEntry> _cache = new Dictionary<CacheKey, CacheEntry>();
-		private CacheEntry GetCacheEntry(CacheKey key, Func<Type, string, Func<IRezolverContainer, object>> getFactory)
-		{
-			CacheEntry toReturn;
-
-			if (_cache.TryGetValue(key, out toReturn))
-				return toReturn;
-			return _cache[key] = new CacheEntry(getFactory(key.Type, key.Name));
-		}
 		//TODO: implement a second cache for entries with no name.
 		#endregion 
 
 		private readonly IRezolverScope _scope;
+		private readonly RezolverCache _rezolverCache;
 
 		public RezolverContainer(IRezolverScope scope)
 		{
 			//TODO: check for null scope.
 			_scope = scope;
+			_rezolverCache = new RezolverCache();
 		}
 
 		public bool CanResolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
 		{
-			return !GetCacheEntry(new CacheKey(type, name), CreateFactoryFunc).IsMiss;
+			return RezolverCache.GetFactory(type, CreateFactoryFunc, name) != null;
 		}
 
 		public bool CanResolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
@@ -108,12 +44,11 @@ namespace Rezolver
 			if (dynamicContainer != null && dynamicContainer.CanResolve(type, name))
 				return dynamicContainer.Rezolve(type, name);
 
-			var entry = GetCacheEntry(new CacheKey(type, name), CreateFactoryFunc);
-
-			if (entry.IsMiss)
+			var factory = RezolverCache.GetFactory(type, CreateFactoryFunc, name);
+			if (factory == null)
 				throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
 
-			return entry.Factory(dynamicContainer);
+			return factory(dynamicContainer);
 		}
 
 		private Func<IRezolverContainer, object> CreateFactoryFunc(Type type, string name)

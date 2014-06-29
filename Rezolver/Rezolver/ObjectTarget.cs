@@ -1,6 +1,7 @@
 ﻿﻿using System;
 ﻿using System.Collections.Generic;
 ﻿using System.Linq.Expressions;
+﻿using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -28,10 +29,10 @@ namespace Rezolver
 				if (_object == null)
 				{
 					if (!TypeHelpers.CanBeNull(declaredType))
-						throw new ArgumentException(string.Format(Resources.Exceptions.TargetIsNullButTypeIsNotNullable_Format, declaredType), "declaredType");
+						throw new ArgumentException(string.Format(Exceptions.TargetIsNullButTypeIsNotNullable_Format, declaredType), "declaredType");
 				}
 				else if (!TypeHelpers.AreCompatible(_object.GetType(), declaredType))
-					throw new ArgumentException(string.Format(Resources.Exceptions.DeclaredTypeIsNotCompatible_Format, declaredType, _object.GetType()), "declaredType");
+					throw new ArgumentException(string.Format(Exceptions.DeclaredTypeIsNotCompatible_Format, declaredType, _object.GetType()), "declaredType");
 
 				_declaredType = declaredType;
 			}

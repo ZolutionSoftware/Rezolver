@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -48,11 +49,11 @@ namespace Rezolver
 			foreach (var item in items)
 			{
 				if (string.IsNullOrWhiteSpace(item))
-					throw new ArgumentException(Resources.Exceptions.PathIsInvalid, "path");
+					throw new ArgumentException(Exceptions.PathIsInvalid, "path");
 				if (item.Length == 0)
-					throw new ArgumentException(Resources.Exceptions.PathIsInvalid, "path");
+					throw new ArgumentException(Exceptions.PathIsInvalid, "path");
 				if (RxNoWhitespace.IsMatch(item))
-					throw new ArgumentException(Resources.Exceptions.PathIsInvalid, "path");
+					throw new ArgumentException(Exceptions.PathIsInvalid, "path");
 			}
 
 			Items = items;
