@@ -129,8 +129,8 @@ namespace Rezolver.Tests
 
 			scopeMock.Setup(s => s.Fetch(typeof(string), null)).Returns(stringTarget).Verifiable();
 			scopeMock.Setup(s => s.Fetch(typeof(int), rezolveName)).Returns(intTarget).Verifiable();
-			//scopeMock.Setup(s => s.Rezolve(typeof(string), null, null)).Returns(rezolveName).Verifiable();
-			//scopeMock.Setup(s => s.Rezolve(typeof(int), rezolveName, null)).Returns(NoDefaultConstructor.ExpectedComplexRezolveCall).Verifiable();
+			//scopeMock.Setup(s => s.Resolve(typeof(string), null, null)).Returns(rezolveName).Verifiable();
+			//scopeMock.Setup(s => s.Resolve(typeof(int), rezolveName, null)).Returns(NoDefaultConstructor.ExpectedComplexRezolveCall).Verifiable();
 			//so the expression demands that a new instance of NoDefaultConstructor is built. with an
 			//integer constructor argument that is, in turn, resolved by a name which is also resolved.
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);

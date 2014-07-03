@@ -15,7 +15,7 @@ namespace Rezolver.Tests
 			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(1.AsObjectTarget());
 
 			IRezolverContainer container = new RezolverContainer(scopeMock.Object);
-			var result = container.Rezolve(typeof (int));
+			var result = container.Resolve(typeof (int));
 			Assert.AreEqual(1, result);
 		}
 
@@ -49,9 +49,9 @@ namespace Rezolver.Tests
 			var containerMock = new Mock<IRezolverContainer>();
 			containerMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 			int expected = -1;
-			containerMock.Setup(c => c.Rezolve(typeof(int), null, null)).Returns(expected);
+			containerMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
 			RezolverContainer container = new RezolverContainer(scope1Mock.Object);
-			var result = container.Rezolve(typeof (int) /*, dynamicContainer: containerMock.Object*/);
+			var result = container.Resolve(typeof (int) /*, dynamicContainer: containerMock.Object*/);
 			Assert.AreEqual(expected, result);
 		}
 
@@ -68,16 +68,18 @@ namespace Rezolver.Tests
 			//this mocks a dynamically defined container that an application creates in response to transient information only
 			var containerMock = new Mock<IRezolverContainer>();
 			int expected = -1;
-			containerMock.Setup(c => c.Rezolve(typeof(int), null, null)).Returns(expected);
+			containerMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
 			containerMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 
 			//this represents building an application's statically defined, or bootstrapped, IOC container
 			RezolverContainer container = new RezolverContainer(scope1Mock.Object);
 
-			var result = (TypeWithConstructorArg)container.Rezolve(typeof (TypeWithConstructorArg), dynamicContainer: containerMock.Object);
+			var result = (TypeWithConstructorArg)container.Resolve(typeof (TypeWithConstructorArg), dynamicContainer: containerMock.Object);
 			Assert.IsNotNull(result);
 
 			Assert.AreEqual(expected, result.Value);
 		}
+
+
 	}
 }

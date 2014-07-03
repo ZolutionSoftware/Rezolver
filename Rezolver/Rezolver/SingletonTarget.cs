@@ -37,7 +37,7 @@ namespace Rezolver
 			//can't create the lazy until we get a scope on the first CreateExpression call
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			return _createExpressionDelegate(scopeContainer, targetType, currentTargets);
 		}
@@ -52,7 +52,7 @@ namespace Rezolver
 			if(_lazy == null)
 				_lazy = new Lazy<object>(Expression.Lambda<Func<object>>(_innerTarget.CreateExpression(scope, targetType: typeof(object), currentTargets: currentTargets)).Compile());
 			Expression<Func<object>> e = () => _lazy.Value;
-			return Expression.Convert(e.Body, targetType ?? DeclaredType);
+			return e.Body;
 		}
 
 		public override Type DeclaredType

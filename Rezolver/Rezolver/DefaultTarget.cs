@@ -14,11 +14,9 @@ namespace Rezolver
 			_declaredType = type;
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
-			return targetType != null && targetType != DeclaredType
-				? (Expression)Expression.Convert(Expression.Default(DeclaredType), targetType)
-				: Expression.Default(DeclaredType);
+			return Expression.Default(DeclaredType);
 		}
 
 		public override Type DeclaredType

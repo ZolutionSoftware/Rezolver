@@ -39,10 +39,10 @@ namespace Rezolver
 			throw new NotImplementedException();
 		}
 
-		public object Rezolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
+		public object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
 		{
 			if (dynamicContainer != null && dynamicContainer.CanResolve(type, name))
-				return dynamicContainer.Rezolve(type, name);
+				return dynamicContainer.Resolve(type, name);
 
 			var factory = RezolverCache.GetFactory(type, CreateFactoryFunc, name);
 			if (factory == null)
@@ -59,7 +59,7 @@ namespace Rezolver
 			{
 				//slight issue here - if the target expression returns value type, then we're forcing a box/unbox
 				//on this delegate and when it's called for the caller.
-				//this perhaps could be fixed with a generic version of Rezolve
+				//this perhaps could be fixed with a generic version of Resolve
 
 				//notice that despite the dynamic container being passed to this method, it's not the scope
 				//that's provided to the CreateExpression call.  Instead, passing that container is deferred
@@ -93,6 +93,11 @@ namespace Rezolver
 			if (create) throw new NotSupportedException();
 
 			return _scope.GetNamedScope(path, false);
+		}
+
+		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

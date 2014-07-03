@@ -20,10 +20,10 @@ namespace Rezolver.Tests
 			var containerMock = new Mock<IRezolverContainer>();
 			containerMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 			int expected = -1;
-			containerMock.Setup(c => c.Rezolve(typeof(int), null, null)).Returns(expected);
+			containerMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
 			RezolverContainer container = new RezolverContainer(scope1Mock.Object);
 
-			Assert.AreEqual(expected, container.Rezolve(typeof(int), dynamicContainer: containerMock.Object));
+			Assert.AreEqual(expected, container.Resolve(typeof(int), dynamicContainer: containerMock.Object));
 		}
 	}
 }

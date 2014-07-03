@@ -92,7 +92,7 @@ namespace Rezolver
 			//by the number of the parameters we know if a string is being passed
 			var nameParameter = methodExpr.Method.GetParameters().FirstOrDefault(pi => pi.ParameterType == typeof(string));
 
-			//note below - firing the Visit method again for the parameter, which allows us to use Rezolve operations
+			//note below - firing the Visit method again for the parameter, which allows us to use Resolve operations
 			//for the parameters.
 			return nameParameter != null
 				? new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], GetRezolveTarget(methodExpr.Arguments[1]))

@@ -38,6 +38,15 @@ namespace Rezolver
 		/// should not resolve aagainst this dynamic scope directly - it is only to be used
 		/// when late-inding a secondary or tertiary (ad nauseam) dependency.</param>
 		/// <returns></returns>
-		object Rezolve(Type type, string name = null, IRezolverContainer dynamicContainer = null);
+		object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="name"></param>
+		/// <param name="dynamicContainer"></param>
+		/// <returns></returns>
+		T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null);
 	}
 }
