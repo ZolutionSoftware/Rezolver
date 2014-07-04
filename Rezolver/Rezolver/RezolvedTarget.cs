@@ -162,7 +162,11 @@ namespace Rezolver
 			}
 			else
 			{
-				var resolvedTarget = scopeContainer.Fetch(_resolveType, null);
+
+				string name = _resolveNameTarget != null
+					? new RezolverTargetCompiler().CompileStatic<string>(_resolveNameTarget, scopeContainer, currentTargets)()
+					: null;
+				var resolvedTarget = scopeContainer.Fetch(_resolveType, name);
 				if (resolvedTarget == null)
 					throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
 				return resolvedTarget.CreateExpression(scopeContainer, targetType: targetType, currentTargets: currentTargets);

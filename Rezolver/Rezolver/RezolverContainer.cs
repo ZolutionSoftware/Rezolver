@@ -17,7 +17,7 @@ namespace Rezolver
 		}
 
 		//TODO: implement a second cache for entries with no name.
-		#endregion 
+		#endregion
 
 		private readonly IRezolverScope _scope;
 		private readonly RezolverCache _rezolverCache;
@@ -26,29 +26,79 @@ namespace Rezolver
 		{
 			//TODO: check for null scope.
 			_scope = scope;
-			_rezolverCache = new RezolverCache();
+			_rezolverCache = new RezolverCache(this, new RezolverTargetCompiler());
 		}
 
 		public bool CanResolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
 		{
-			return RezolverCache.GetFactory(type, CreateFactoryFunc, name) != null;
+			//TODO: Change this to refer to the cache (once I've figured out how to do it based on the new compiler)
+			return _scope.Fetch(type, name) != null;
+			//return RezolverCache.GetFactory(type, CreateFactoryFunc, name) != null;
 		}
 
 		public bool CanResolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
 		{
-			throw new NotImplementedException();
+			//TODO: And again - change this to refer to the cache
+			return _scope.Fetch<T>(name) != null;
 		}
 
-		public object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
+		public object Resolve(Type type, IRezolverContainer dynamicContainer, string name = null)
 		{
-			if (dynamicContainer != null && dynamicContainer.CanResolve(type, name))
-				return dynamicContainer.Resolve(type, name);
+			//I actually wonder whether this should chain up to the dynamic container on the caller's
+			//behalf or not - the caller could just do it themselves.
+			if (dynamicContainer != null)
+			{
+				if (dynamicContainer.CanResolve(type, name))
+					return dynamicContainer.Resolve(type, name);
 
-			var factory = RezolverCache.GetFactory(type, CreateFactoryFunc, name);
+				var factory = RezolverCache.GetDynamicFactory(type, (t, n) => _scope.Fetch(t, n), name);
+				if (factory == null)
+					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
+
+				return factory(dynamicContainer);
+			}
+			else
+			{
+				var factory = RezolverCache.GetStaticFactory(type, (t, n) => _scope.Fetch(t, n), name);
+				if (factory == null)
+					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
+
+				return factory();
+			}
+		}
+
+		public object Resolve(Type type, string name = null)
+		{
+			var factory = RezolverCache.GetStaticFactory(type, (t, n) => _scope.Fetch(t, n), name);
 			if (factory == null)
 				throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
 
-			return factory(dynamicContainer);
+			return factory();
+		}
+
+		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
+		{
+			//I actually wonder whether this should chain up to the dynamic container on the caller's
+			//behalf or not - the caller could just do it themselves.
+			if (dynamicContainer != null)
+			{
+				if (dynamicContainer.CanResolve<T>(name))
+					return dynamicContainer.Resolve<T>(name);
+
+				var factory = RezolverCache.GetDynamicFactory<T>((t, n) => _scope.Fetch(t, n), name);
+				if (factory == null)
+					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
+
+				return factory(dynamicContainer);
+			}
+			else
+			{
+				var factory = RezolverCache.GetStaticFactory<T>((t, n) => _scope.Fetch(t, n), name);
+				if (factory == null)
+					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
+
+				return factory();
+			}
 		}
 
 		private Func<IRezolverContainer, object> CreateFactoryFunc(Type type, string name)
@@ -84,7 +134,7 @@ namespace Rezolver
 
 		public IRezolveTarget Fetch<T>(string name = null)
 		{
-			return _scope.Fetch(typeof (T), name);
+			return _scope.Fetch(typeof(T), name);
 		}
 
 		public INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false)
@@ -95,9 +145,6 @@ namespace Rezolver
 			return _scope.GetNamedScope(path, false);
 		}
 
-		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
-		{
-			throw new NotImplementedException();
-		}
+
 	}
 }
