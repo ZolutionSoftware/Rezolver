@@ -30,7 +30,6 @@ namespace Rezolver
 
 		public bool HasFactory(Type type, string name = null)
 		{
-			CacheEntry toCheck;
 			return name != null
 				? _namedCacheEntries.ContainsKey(new CacheKey(type, name))
 				: _typeOnlyCacheEntries.ContainsKey(type);
@@ -38,38 +37,30 @@ namespace Rezolver
 
 		public Func<object> GetStaticFactory(Type type, string name = null)
 		{
-			CacheEntry cacheEntry = name == null
+			return (name == null
 				? GetCacheEntry(type)
-				: GetCacheEntry(new CacheKey(type, name));
-
-			return cacheEntry != null ? cacheEntry.StaticFactory : null;
+				: GetCacheEntry(new CacheKey(type, name))).StaticFactory;
 		}
 
 		public Func<IRezolverContainer, object> GetDynamicFactory(Type type, string name = null)
 		{
-			CacheEntry cacheEntry = name == null
+			return (name == null
 				? GetCacheEntry(type)
-				: GetCacheEntry(new CacheKey(type, name));
-
-			return cacheEntry != null ? cacheEntry.DynamicFactory : null;
+				: GetCacheEntry(new CacheKey(type, name))).DynamicFactory;
 		}
 
 		public Func<T> GetStaticFactory<T>(string name = null)
 		{
-			var cacheEntry = (name == null
-				? GetCacheEntry(typeof(T))
-				: GetCacheEntry(new CacheKey(typeof(T), name))) as CacheEntry<T>;
-
-			return cacheEntry != null ? cacheEntry.StrongStaticFactory : null;
+			return ((CacheEntry<T>) (name == null
+				? GetCacheEntry(typeof (T))
+				: GetCacheEntry(new CacheKey(typeof (T), name)))).StrongStaticFactory;
 		}
 
 		public Func<IRezolverContainer, T> GetDynamicFactory<T>(string name = null)
 		{
-			var cacheEntry = (name == null
+			return ((CacheEntry<T>)(name == null
 				? GetCacheEntry(typeof(T))
-				: GetCacheEntry(new CacheKey(typeof(T), name))) as CacheEntry<T>;
-
-			return cacheEntry != null ? cacheEntry.StrongDynamicFactory : null;
+				: GetCacheEntry(new CacheKey(typeof(T), name)))).StrongDynamicFactory;
 		}
 
 		private CacheEntry GetCacheEntry(Type type)
@@ -82,8 +73,8 @@ namespace Rezolver
 			if (target != null)
 				return _typeOnlyCacheEntries[type] = CacheEntry.MakeCacheEntry(type, target, _container, _compiler,
 					ExpressionHelper.DynamicContainerParam);
-			else
-				return _typeOnlyCacheEntries[type] = CacheEntry.MakeCacheMiss(type);
+			
+			return _typeOnlyCacheEntries[type] = CacheEntry.MakeCacheMiss(type);
 		}
 
 		private CacheEntry GetCacheEntry(CacheKey key)
@@ -97,27 +88,24 @@ namespace Rezolver
 				return
 					_namedCacheEntries[key] =
 						CacheEntry.MakeCacheEntry(key.Type, target, _container, _compiler, ExpressionHelper.DynamicContainerParam);
-			else
-				return _namedCacheEntries[key] = CacheEntry.MakeCacheMiss(key.Type);
+			
+			return _namedCacheEntries[key] = CacheEntry.MakeCacheMiss(key.Type);
 		}
 
 		public struct CacheKey : IEquatable<CacheKey>
 		{
-			private readonly Type _type;
-			private readonly string _name;
-
-			public Type Type { get { return _type; } }
-			public string Name { get { return _name; } }
+			public readonly Type Type;
+			public readonly string Name;
 
 			public CacheKey(Type type, string name)
 			{
-				_type = type;
-				_name = name;
+				Type = type;
+				Name = name;
 			}
 
 			public override int GetHashCode()
 			{
-				return _type.GetHashCode() ^ (_name != null ? _name.GetHashCode() : 0);
+				return Type.GetHashCode() ^ (Name != null ? Name.GetHashCode() : 0);
 			}
 
 			public override bool Equals(object obj)
@@ -129,17 +117,17 @@ namespace Rezolver
 
 			public bool Equals(CacheKey other)
 			{
-				return _type == other._type && _name == other._name;
+				return Type == other.Type && Name == other.Name;
 			}
 
 			public static bool operator ==(CacheKey left, CacheKey right)
 			{
-				return left._type == right._type && left._name == right._name;
+				return left.Type == right.Type && left.Name == right.Name;
 			}
 
 			public static bool operator !=(CacheKey left, CacheKey right)
 			{
-				return left._type != right._type || left._name != right._name;
+				return left.Type != right.Type || left.Name != right.Name;
 			}
 		}
 
@@ -159,8 +147,8 @@ namespace Rezolver
 			//but you should be aware that a static container will simply ignore any dynamic
 			//container that's passed to it when executed.
 
-			private readonly Func<object> _staticFactory;
-			private readonly Func<IRezolverContainer, object> _dynamicFactory;
+			public readonly Func<object> StaticFactory;
+			public readonly Func<IRezolverContainer, object> DynamicFactory;
 			private readonly bool _isMiss;
 
 			private static readonly MethodInfo MakeCacheEntryStaticGeneric = typeof(CacheEntry).GetMethods(BindingFlags.Public | BindingFlags.Static)
@@ -171,27 +159,17 @@ namespace Rezolver
 				get { return _isMiss; }
 			}
 
-			public Func<object> StaticFactory
-			{
-				get { return _staticFactory; }
-			}
-
-			public Func<IRezolverContainer, object> DynamicFactory
-			{
-				get { return _dynamicFactory; }
-			}
-
 			protected CacheEntry(Type target)
 			{
 				_isMiss = true;
-				_staticFactory = () => ResolveFailure(target);
-				_dynamicFactory = (container) => ResolveFailureDynamic(target, container);
+				StaticFactory = () => ResolveFailure(target);
+				DynamicFactory = (container) => ResolveFailureDynamic(target, container);
 			}
 
 			public CacheEntry(Func<object> staticFactory, Func<IRezolverContainer, object> dynamicFactory)
 			{
-				_staticFactory = staticFactory;
-				_dynamicFactory = dynamicFactory;
+				StaticFactory = staticFactory;
+				DynamicFactory = dynamicFactory;
 			}
 
 			private static object ResolveFailure(Type type)
@@ -242,20 +220,10 @@ namespace Rezolver
 
 		public class CacheEntry<TTarget> : CacheEntry
 		{
-			private readonly Func<TTarget> _strongStaticFactory;
-			private readonly Func<IRezolverContainer, TTarget> _strongDynamicFactory;
+			public readonly Func<TTarget> StrongStaticFactory;
+			public readonly Func<IRezolverContainer, TTarget> StrongDynamicFactory;
 
 			public static readonly CacheEntry<TTarget> Miss = new CacheEntry<TTarget>();
-
-			public Func<TTarget> StrongStaticFactory
-			{
-				get { return _strongStaticFactory; }
-			}
-
-			public Func<IRezolverContainer, TTarget> StrongDynamicFactory
-			{
-				get { return _strongDynamicFactory; }
-			}
 
 			/// <summary>
 			/// Used only to create a cache miss - all of the faactories exposed by this entry will 
@@ -265,8 +233,8 @@ namespace Rezolver
 			{
 				//TODO: Make cache entry delegates in CacheMiss type throw exceptions so upstream callers don't have
 				//to check for null/IsMiss - they can simply call the delegates.
-				_strongStaticFactory = ResolveFailure;
-				_strongDynamicFactory = ResolveFailureDynamic;
+				StrongStaticFactory = ResolveFailure;
+				StrongDynamicFactory = ResolveFailureDynamic;
 			}
 
 			private static TTarget ResolveFailure()
@@ -284,8 +252,8 @@ namespace Rezolver
 				Func<object> staticFactory, Func<IRezolverContainer, object> dynamicFactory)
 				: base(staticFactory, dynamicFactory)
 			{
-				_strongStaticFactory = strongStaticFactory;
-				_strongDynamicFactory = strongDynamicFactory;
+				StrongStaticFactory = strongStaticFactory;
+				StrongDynamicFactory = strongDynamicFactory;
 			}
 
 			public static CacheEntry<TTarget> CreateMiss()

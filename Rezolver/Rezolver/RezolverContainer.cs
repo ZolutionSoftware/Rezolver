@@ -16,7 +16,6 @@ namespace Rezolver
 			get { return _rezolverCache; }
 		}
 
-		//TODO: implement a second cache for entries with no name.
 		#endregion
 
 		private readonly IRezolverScope _scope;
@@ -51,20 +50,10 @@ namespace Rezolver
 				if (dynamicContainer.CanResolve(type, name))
 					return dynamicContainer.Resolve(type, name);
 
-				//var factory = RezolverCache.GetDynamicFactory(type, name);
-				//if (factory == null)
-				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
-
-				//return factory(dynamicContainer);
 				return RezolverCache.GetDynamicFactory(type, name)(dynamicContainer);
 			}
 			else
 			{
-				//var factory = RezolverCache.GetStaticFactory(type, name);
-				//if (factory == null)
-				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
-
-				//return factory();
 				return RezolverCache.GetStaticFactory(type, name)();
 			}
 		}
@@ -78,20 +67,10 @@ namespace Rezolver
 				if (dynamicContainer.CanResolve<T>(name))
 					return dynamicContainer.Resolve<T>(name);
 
-				//var factory = RezolverCache.GetDynamicFactory<T>(name);
-				//if (factory == null)
-				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
-
-				//return factory(dynamicContainer);
 				return RezolverCache.GetDynamicFactory<T>(name)(dynamicContainer);
 			}
 			else
 			{
-				//var factory = RezolverCache.GetStaticFactory<T>(name);
-				//if (factory == null)
-				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
-
-				//return factory();
 				return RezolverCache.GetStaticFactory<T>(name)();
 			}
 		}
