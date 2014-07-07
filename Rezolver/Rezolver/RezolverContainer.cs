@@ -42,7 +42,7 @@ namespace Rezolver
 			return _scope.Fetch<T>(name) != null;
 		}
 
-		public object Resolve(Type type, IRezolverContainer dynamicContainer, string name = null)
+		public object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
 		{
 			//I actually wonder whether this should chain up to the dynamic container on the caller's
 			//behalf or not - the caller could just do it themselves.
@@ -51,29 +51,22 @@ namespace Rezolver
 				if (dynamicContainer.CanResolve(type, name))
 					return dynamicContainer.Resolve(type, name);
 
-				var factory = RezolverCache.GetDynamicFactory(type, (t, n) => _scope.Fetch(t, n), name);
-				if (factory == null)
-					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
+				//var factory = RezolverCache.GetDynamicFactory(type, name);
+				//if (factory == null)
+				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
 
-				return factory(dynamicContainer);
+				//return factory(dynamicContainer);
+				return RezolverCache.GetDynamicFactory(type, name)(dynamicContainer);
 			}
 			else
 			{
-				var factory = RezolverCache.GetStaticFactory(type, (t, n) => _scope.Fetch(t, n), name);
-				if (factory == null)
-					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
+				//var factory = RezolverCache.GetStaticFactory(type, name);
+				//if (factory == null)
+				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
 
-				return factory();
+				//return factory();
+				return RezolverCache.GetStaticFactory(type, name)();
 			}
-		}
-
-		public object Resolve(Type type, string name = null)
-		{
-			var factory = RezolverCache.GetStaticFactory(type, (t, n) => _scope.Fetch(t, n), name);
-			if (factory == null)
-				throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", type, name != null ? string.Format("with name \"{0}\"", name) : ""));
-
-			return factory();
 		}
 
 		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
@@ -85,19 +78,21 @@ namespace Rezolver
 				if (dynamicContainer.CanResolve<T>(name))
 					return dynamicContainer.Resolve<T>(name);
 
-				var factory = RezolverCache.GetDynamicFactory<T>((t, n) => _scope.Fetch(t, n), name);
-				if (factory == null)
-					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
+				//var factory = RezolverCache.GetDynamicFactory<T>(name);
+				//if (factory == null)
+				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
 
-				return factory(dynamicContainer);
+				//return factory(dynamicContainer);
+				return RezolverCache.GetDynamicFactory<T>(name)(dynamicContainer);
 			}
 			else
 			{
-				var factory = RezolverCache.GetStaticFactory<T>((t, n) => _scope.Fetch(t, n), name);
-				if (factory == null)
-					throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
+				//var factory = RezolverCache.GetStaticFactory<T>(name);
+				//if (factory == null)
+				//	throw new ArgumentException(string.Format("No target could be found for the type {0}{1}", typeof(T), name != null ? string.Format("with name \"{0}\"", name) : ""));
 
-				return factory();
+				//return factory();
+				return RezolverCache.GetStaticFactory<T>(name)();
 			}
 		}
 

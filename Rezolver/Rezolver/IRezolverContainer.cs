@@ -33,15 +33,13 @@ namespace Rezolver
 		/// dynamic container for any late-bound resolve calls.
 		/// </summary>
 		/// <param name="type">Required. The type of the dependency to be resolved.</param>
+		/// <param name="name">Optional.  The name of the dependency to be resolved.</param>
 		/// <param name="dynamicContainer">Optional.  A dynamic scope to be used in performing 
 		///   additional resolve calls triggered from the underlying scope's expression.  This container
 		///   should not resolve aagainst this dynamic scope directly - it is only to be used
 		///   when late-inding a secondary or tertiary (ad nauseam) dependency.</param>
-		/// <param name="name">Optional.  The name of the dependency to be resolved.</param>
 		/// <returns></returns>
-		object Resolve(Type type, IRezolverContainer dynamicContainer, string name = null);
-
-		object Resolve(Type type, string name = null);
+		object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null);
 
 		/// <summary>
 		/// 
