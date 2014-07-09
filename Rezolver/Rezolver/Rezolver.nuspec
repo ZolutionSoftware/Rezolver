@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Rezolver</id>
-    <version>0.1.0-alpha-1</version>
+    <version>0.1.0-alpha-2</version>
     <title>Rezolver</title>
     <authors>Zolution Software Ltd</authors>
     <owners>LordZoltan</owners>
@@ -15,5 +15,7 @@
     <copyright>Copyright Zolution Software Ltd 2014</copyright>
     <tags>ioc di portable</tags>
   </metadata>
-	
+	<files>
+		<file src="bin\Release\rezolver.*" target="lib\portable-net45+sl50+win+wp80" />
+	</files>
 </package>

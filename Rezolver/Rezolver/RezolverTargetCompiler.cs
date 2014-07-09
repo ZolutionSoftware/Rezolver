@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace Rezolver
@@ -26,8 +27,16 @@ namespace Rezolver
 		/// <returns>A delegate that, when executed, returns the object that is resolved by the target.</returns>
 		public virtual Func<object> CompileStatic(IRezolveTarget target, IRezolverContainer containerScope, Type targetType = null, Stack<IRezolveTarget> targetStack = null)
 		{
+#if DEBUG
+			var expression =
+				Expression.Lambda<Func<object>>(target.CreateExpression(containerScope, targetType: typeof (object),
+					currentTargets: targetStack));
+			Debug.WriteLine("Compiling Func<object> from static lambda {0} for target type {1}", expression, targetType != null ? targetType.Name : "[null]");
+			return expression.Compile();
+#else
 			return
 				Expression.Lambda<Func<object>>(target.CreateExpression(containerScope, targetType: typeof(object), currentTargets: targetStack)).Compile();
+#endif
 		}
 
 		/// <summary>
@@ -46,9 +55,17 @@ namespace Rezolver
 		/// <returns>A strongly typed delegate that, when executed, returns the object that is resolved by the target.</returns>
 		public virtual Func<TTarget> CompileStatic<TTarget>(IRezolveTarget target, IRezolverContainer containerScope, Stack<IRezolveTarget> targetStack = null)
 		{
+#if DEBUG
+			var expression =
+				Expression.Lambda<Func<TTarget>>(target.CreateExpression(containerScope, targetType: typeof (TTarget),
+					currentTargets: targetStack));
+			Debug.WriteLine("Compiling Func<{0}> from static lambda {1}", typeof(TTarget), expression);
+			return expression.Compile();
+#else
 			return
 				Expression.Lambda<Func<TTarget>>(target.CreateExpression(containerScope, targetType: typeof(TTarget),
 					currentTargets: targetStack)).Compile();
+#endif
 		}
 
 		/// <summary>
@@ -72,9 +89,18 @@ namespace Rezolver
 		public virtual Func<IRezolverContainer, object> CompileDynamic(IRezolveTarget target, IRezolverContainer containerScope, ParameterExpression dynamicContainerExpression, 
 			Type targetType = null, Stack<IRezolveTarget> targetStack = null)
 		{
+#if DEBUG
+			var expression =
+				Expression.Lambda<Func<IRezolverContainer, object>>(
+					target.CreateExpression(containerScope, targetType: typeof (object),
+						dynamicContainerExpression: dynamicContainerExpression, currentTargets: targetStack), dynamicContainerExpression);
+			Debug.WriteLine("Compiling Func<IRezolverContainer, object> from dynamic lambda {0} for target type {1}", expression, targetType != null ? targetType.Name : "[null]");
+			return expression.Compile();
+#else
 			return
 				Expression.Lambda<Func<IRezolverContainer, object>>(target.CreateExpression(containerScope, targetType: typeof(object),
 					dynamicContainerExpression: dynamicContainerExpression, currentTargets: targetStack), dynamicContainerExpression).Compile();
+#endif
 		}
 
 		/// <summary>
@@ -97,10 +123,18 @@ namespace Rezolver
 		public virtual Func<IRezolverContainer, TTarget> CompileDynamic<TTarget>(IRezolveTarget target, IRezolverContainer containerScope,
 			ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack = null)
 		{
+#if DEBUG
+			var expression = Expression.Lambda<Func<IRezolverContainer, TTarget>>(target.CreateExpression(containerScope,
+				targetType: typeof (TTarget),
+				dynamicContainerExpression: dynamicContainerExpression, currentTargets: targetStack), dynamicContainerExpression);
+			Debug.WriteLine("Compiling Func<IRezolverContainer, {0}> from dynamic lambda {1}", typeof(TTarget), expression);
+			return expression.Compile();
+#else
 			return
 				Expression.Lambda<Func<IRezolverContainer, TTarget>>(target.CreateExpression(containerScope,
 					targetType: typeof (TTarget),
 					dynamicContainerExpression: dynamicContainerExpression, currentTargets: targetStack), dynamicContainerExpression).Compile();
+#endif
 		}
 	}
 }

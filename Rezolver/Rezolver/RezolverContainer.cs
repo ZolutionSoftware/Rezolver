@@ -52,10 +52,8 @@ namespace Rezolver
 
 				return RezolverCache.GetDynamicFactory(type, name)(dynamicContainer);
 			}
-			else
-			{
-				return RezolverCache.GetStaticFactory(type, name)();
-			}
+
+			return RezolverCache.GetStaticFactory(type, name)();
 		}
 
 		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
@@ -69,10 +67,8 @@ namespace Rezolver
 
 				return RezolverCache.GetDynamicFactory<T>(name)(dynamicContainer);
 			}
-			else
-			{
-				return RezolverCache.GetStaticFactory<T>(name)();
-			}
+
+			return RezolverCache.GetStaticFactory<T>(name)();
 		}
 
 		private Func<IRezolverContainer, object> CreateFactoryFunc(Type type, string name)
