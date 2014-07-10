@@ -164,7 +164,7 @@ namespace Rezolver
 			{
 
 				string name = _resolveNameTarget != null
-					? new RezolverTargetCompiler().CompileStatic<string>(_resolveNameTarget, scopeContainer, currentTargets)()
+					? new RezolveTargetCompiler().CompileStatic<string>(_resolveNameTarget, scopeContainer, currentTargets)()
 					: null;
 				var resolvedTarget = scopeContainer.Fetch(_resolveType, name);
 				if (resolvedTarget == null)

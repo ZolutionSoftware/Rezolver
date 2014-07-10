@@ -52,14 +52,13 @@
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\Linq\Expressions\ExpressionExtensions.cs" />
     <Compile Include="IRezolverContainer.cs" />
-    <Compile Include="IRezolverTargetCompiler.cs" />
+    <Compile Include="IRezolveTargetCompiler.cs" />
     <Compile Include="IRezolveTargetAdapter.cs" />
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IChildRezolverScope.cs" />
     <Compile Include="INamedRezolverScope.cs" />
     <Compile Include="IRezolverScope.cs" />
     <Compile Include="RezolvedTarget.cs" />
-    <Compile Include="RezolverCache.cs" />
     <Compile Include="RezolverContainer.cs" />
     <Compile Include="RezolverScopeExtensions.cs" />
     <Compile Include="IRezolveTarget.cs" />
@@ -67,7 +66,7 @@
     <Compile Include="NamedRezolverScope.cs" />
     <Compile Include="ParameterBinding.cs" />
     <Compile Include="RezolverScopePath.cs" />
-    <Compile Include="RezolverTargetCompiler.cs" />
+    <Compile Include="RezolveTargetCompiler.cs" />
     <Compile Include="RezolveTargetAdapter.cs" />
     <Compile Include="RezolveTargetExpression.cs" />
     <Compile Include="SingletonTarget.cs" />

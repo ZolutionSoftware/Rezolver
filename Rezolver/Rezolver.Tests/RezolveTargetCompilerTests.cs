@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -22,7 +23,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldCompileObjectTargetToObjectFunc()
 		{
-			IRezolverTargetCompiler compiler = new RezolverTargetCompiler();
+			IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
 			Func<object> func = compiler.CompileStatic(StringObjectTarget, Mock.Of<IRezolverContainer>(), 
 				targetType: (Type)null, targetStack: null);
 			Assert.IsNotNull(func);
@@ -32,7 +33,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldCompileObjectTargetToStringFunc()
 		{
-			IRezolverTargetCompiler compiler = new RezolverTargetCompiler();
+			IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
 			Func<string> func = compiler.CompileStatic<string>(StringObjectTarget, Mock.Of<IRezolverContainer>(),
 				targetStack: null);
 			Assert.IsNotNull(func);
@@ -45,16 +46,17 @@ namespace Rezolver.Tests
 		[ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
 		public void ShouldNotCompileObjectTargetToIntFunc()
 		{
-			IRezolverTargetCompiler compiler = new RezolverTargetCompiler();
+			IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
 			Func<object> func = compiler.CompileStatic(StringObjectTarget, Mock.Of<IRezolverContainer>(),
 				targetType: typeof (int), targetStack: null);
+			Debug.WriteLine(func);
 		}
 
 		[TestMethod]
 		[ExpectedException(typeof (Exception), AllowDerivedTypes = true)]
 		public void ShouldNotCompiledObjectTargetToIntFunc_Generic()
 		{
-			IRezolverTargetCompiler compiler = new RezolverTargetCompiler();
+			IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
 			Func<int> func = compiler.CompileStatic<int>(StringObjectTarget, Mock.Of<IRezolverContainer>());
 		}
 
@@ -96,7 +98,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldCompileDynamicTestTargetToObjectFunc()
 		{
-			IRezolverTargetCompiler compiler = new RezolverTargetCompiler();
+			IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
 			var inputDynamicContainer = Mock.Of<IRezolverContainer>();
 			var defaultContainer = Mock.Of<IRezolverContainer>();
 
@@ -111,7 +113,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldCompileDynamicTestTargetToIRezolverContainerFunc()
 		{
-			IRezolverTargetCompiler compiler = new RezolverTargetCompiler();
+			IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
 			var inputDynamicContainer = Mock.Of<IRezolverContainer>();
 			var defaultContainer = Mock.Of<IRezolverContainer>();
 
@@ -124,5 +126,35 @@ namespace Rezolver.Tests
 		}
 
 		//TODO: add a compiler log?
+
+		
+	}
+
+
+
+	public class SpecialRezolveTargetCompiler : IRezolveTargetCompiler
+	{
+		public Func<object> CompileStatic(IRezolveTarget target, IRezolverContainer containerScope, Type targetType = null,
+			Stack<IRezolveTarget> targetStack = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Func<TTarget> CompileStatic<TTarget>(IRezolveTarget target, IRezolverContainer containerScope, Stack<IRezolveTarget> targetStack = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Func<IRezolverContainer, object> CompileDynamic(IRezolveTarget target, IRezolverContainer containerScope,
+			ParameterExpression dynamicContainerExpression, Type targetType = null, Stack<IRezolveTarget> targetStack = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Func<IRezolverContainer, TTarget> CompileDynamic<TTarget>(IRezolveTarget target, IRezolverContainer containerScope,
+			ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack = null)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
