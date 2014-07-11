@@ -104,19 +104,42 @@ namespace Rezolver
 
 		protected internal interface ICacheEntry
 		{
-			Func<object> StaticFactory { get; }
-			Func<IRezolverContainer, object> DynamicFactory { get; }
+			ICompiledRezolveTarget CompiledTarget { get; }
 		}
 
 		protected class CacheEntry<TTarget> : ICacheEntry
 		{
-			public bool IsMiss { get; private set; }
-			public static readonly CacheEntry<TTarget> Miss = new CacheEntry<TTarget>();
+			private class MissingCompiledTarget : ICompiledRezolveTarget<TTarget>
+			{
+				object ICompiledRezolveTarget.GetObject()
+				{
+					return GetObject();
+				}
 
-			public Func<object> StaticFactory { get; private set; }
-			public Func<IRezolverContainer, object> DynamicFactory { get; private set; }
-			public Func<TTarget> StrongStaticFactory { get; private set; }
-			public Func<IRezolverContainer, TTarget> StrongDynamicFactory { get; private set; }
+				public TTarget GetObjectDynamic(IRezolverContainer dynamicContainer)
+				{
+					if (dynamicContainer != null)
+						return dynamicContainer.Resolve<TTarget>();
+					throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
+				}
+
+				public TTarget GetObject()
+				{
+					throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
+				}
+
+				object ICompiledRezolveTarget.GetObjectDynamic(IRezolverContainer dynamicContainer)
+				{
+					return GetObjectDynamic(dynamicContainer);
+				}
+			}
+
+			public bool IsMiss { get; private set; }
+
+			ICompiledRezolveTarget ICacheEntry.CompiledTarget { get { return CompiledTarget; } }
+			public ICompiledRezolveTarget<TTarget> CompiledTarget { get; private set; } 
+
+			public static readonly CacheEntry<TTarget> Miss = new CacheEntry<TTarget>();
 
 			///// <summary>
 			///// Used only to create a cache miss - all of the faactories exposed by this entry will 
@@ -124,56 +147,12 @@ namespace Rezolver
 			///// </summary>
 			public CacheEntry()
 			{
-				//TODO: Make cache entry delegates in CacheMiss type throw exceptions so upstream callers don't have
-				//to check for null/_isMiss - they can simply call the delegates.
-				StaticFactory = () => ResolveFailure(typeof(TTarget));
-				DynamicFactory = (container) => ResolveFailureDynamic(typeof(TTarget), container);
-				StrongStaticFactory = ResolveFailure;
-				StrongDynamicFactory = ResolveFailureDynamic;
 				IsMiss = true;
 			}
 
-			public CacheEntry(Func<TTarget> strongStaticFactory, Func<IRezolverContainer, TTarget> strongDynamicFactory,
-				Func<object> staticFactory, Func<IRezolverContainer, object> dynamicFactory)
+			public CacheEntry(ICompiledRezolveTarget<TTarget> compiledTarget)
 			{
-				StaticFactory = staticFactory;
-				DynamicFactory = dynamicFactory;
-				StrongStaticFactory = strongStaticFactory;
-				StrongDynamicFactory = strongDynamicFactory;
-			}
-
-			public static CacheEntry<TTarget> CreateMiss()
-			{
-				return new CacheEntry<TTarget>()
-				{
-					StaticFactory = () => ResolveFailure(typeof(TTarget)),
-					DynamicFactory = (container) => ResolveFailureDynamic(typeof(TTarget), container),
-					StrongStaticFactory = ResolveFailure,
-					StrongDynamicFactory = ResolveFailureDynamic,
-					IsMiss = true
-				};
-			}
-
-			private static object ResolveFailure(Type type)
-			{
-				//TODO: Localise this string
-				throw new InvalidOperationException(string.Format("Could not resolve type {0}", type));
-			}
-
-			private static object ResolveFailureDynamic(Type type, IRezolverContainer container)
-			{
-				throw new InvalidOperationException(string.Format("Could not resolve type {0}", type));
-			}
-
-			private static TTarget ResolveFailure()
-			{
-				//TODO: Localise this string
-				throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
-			}
-
-			private static TTarget ResolveFailureDynamic(IRezolverContainer container)
-			{
-				throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
+				CompiledTarget = compiledTarget;
 			}
 		}
 
@@ -199,7 +178,7 @@ namespace Rezolver
 			get { return _compiler; }
 		}
 
-		public RezolverContainer(IRezolverScope scope)
+		public RezolverContainer(IRezolverScope scope, IRezolveTargetCompiler compiler = null)
 		{
 			//TODO: check for null scope.
 			_scope = scope;
@@ -228,6 +207,7 @@ namespace Rezolver
 				if (dynamicContainer.CanResolve(type, name))
 					return dynamicContainer.Resolve(type, name);
 
+
 				return ExecuteDynamicFactory(type, name, dynamicContainer);
 			}
 
@@ -238,14 +218,14 @@ namespace Rezolver
 		{
 			return (name == null
 				? GetCacheEntry(type)
-				: GetCacheEntry(new CacheKey(type, name))).StaticFactory();
+				: GetCacheEntry(new CacheKey(type, name))).CompiledTarget.GetObject();
 		}
 
 		private object ExecuteDynamicFactory(Type type, string name, IRezolverContainer dynamicContainer)
 		{
 			return (name == null
 				? GetCacheEntry(type)
-				: GetCacheEntry(new CacheKey(type, name))).DynamicFactory(dynamicContainer);
+				: GetCacheEntry(new CacheKey(type, name))).CompiledTarget.GetObjectDynamic(dynamicContainer);
 		}
 
 		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
@@ -267,14 +247,14 @@ namespace Rezolver
 		{
 			return ((CacheEntry<T>) (name == null
 				? GetCacheEntry(typeof (T))
-				: GetCacheEntry(new CacheKey(typeof (T), name)))).StrongStaticFactory();
+				: GetCacheEntry(new CacheKey(typeof (T), name)))).CompiledTarget.GetObject();
 		}
 
 		private T ExecuteStrongDynamicFactory<T>(string name, IRezolverContainer dynamicContainer)
 		{
 			return ((CacheEntry<T>) (name == null
 				? GetCacheEntry(typeof (T))
-				: GetCacheEntry(new CacheKey(typeof (T), name)))).StrongDynamicFactory(dynamicContainer);
+				: GetCacheEntry(new CacheKey(typeof (T), name)))).CompiledTarget.StrongDynamicFactory(dynamicContainer);
 		}
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
@@ -333,5 +313,27 @@ namespace Rezolver
 
 		#endregion
 
+	}
+
+	public static class RezolveTargetCompiler
+	{
+		private static IRezolveTargetCompiler _default;
+
+		private class StubCompiler : IRezolveTargetCompiler
+		{
+			public static readonly StubCompiler Instance = new StubCompiler();
+
+			public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope,
+				ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack)
+			{
+				throw new NotImplementedException("You must set the RezolveTargetCompiler.Default to a non-null reference to a compiler if you intend to use the system default rezolver compiler.");
+			}
+		}
+
+		public static IRezolveTargetCompiler Default
+		{
+			get { return _default ?? StubCompiler.Instance; }
+			set { _default = value; }
+		}
 	}
 }

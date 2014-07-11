@@ -43,6 +43,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICompiledRezolveTarget.cs" />
     <Compile Include="ChildRezolverScope.cs" />
     <Compile Include="ConstructorTarget.cs" />
     <Compile Include="DefaultTarget.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="ExpressionTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\Linq\Expressions\ExpressionExtensions.cs" />
+    <Compile Include="ICompiledRezolveTarget`1.cs" />
     <Compile Include="IRezolverContainer.cs" />
     <Compile Include="IRezolveTargetCompiler.cs" />
     <Compile Include="IRezolveTargetAdapter.cs" />
@@ -66,7 +68,7 @@
     <Compile Include="NamedRezolverScope.cs" />
     <Compile Include="ParameterBinding.cs" />
     <Compile Include="RezolverScopePath.cs" />
-    <Compile Include="RezolveTargetCompiler.cs" />
+    <Compile Include="RezolveTargetDelegateCompiler.cs" />
     <Compile Include="RezolveTargetAdapter.cs" />
     <Compile Include="RezolveTargetExpression.cs" />
     <Compile Include="SingletonTarget.cs" />

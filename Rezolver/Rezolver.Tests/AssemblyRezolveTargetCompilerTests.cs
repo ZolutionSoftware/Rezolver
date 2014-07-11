@@ -161,18 +161,6 @@ namespace Rezolver.Tests
 		ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope, ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack);
 	}
 
-	public interface ICompiledRezolveTarget
-	{
-		object GetObject();
-		object GetObjectDynamic(IRezolverContainer dynamicContainer);
-	}
-
-	public interface ICompiledRezolveTarget<out T> : ICompiledRezolveTarget
-	{
-		new T GetObject();
-		new T GetObjectDynamic(IRezolverContainer dynamicContainer);
-	}
-
 	public class AssemblyRezolveTargetCompiler : IRezolveTargetCompiler2
 	{
 		private static int _assemblyCounter = 0;
