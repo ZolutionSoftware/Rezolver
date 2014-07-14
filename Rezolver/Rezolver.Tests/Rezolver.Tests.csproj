@@ -68,6 +68,7 @@
     <Compile Include="RezolverScopePathTests.cs" />
     <Compile Include="OpenGenericTests.cs" />
     <Compile Include="ObjectTargetClosedGenericTests.cs" />
+    <Compile Include="RezolveTargetCompilerTestsBase.cs" />
     <Compile Include="TestsBase.cs" />
     <Compile Include="ExpressionReaderTests.cs" />
     <Compile Include="ConstructorTargetTests.cs" />
@@ -76,10 +77,14 @@
     <Compile Include="RezolverContainerTests.cs" />
     <Compile Include="LateBoundContainerTests.cs" />
     <Compile Include="RezolverContainerTests_Generic.cs" />
-    <Compile Include="RezolveTargetCompilerTests.cs" />
-    <Compile Include="AssemblyRezolveTargetCompilerTests.cs" />
+    <Compile Include="RezolveTargetDelegateCompilerTests.cs" />
+    <Compile Include="AssemblyRezolveTargetDelegateCompilerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">
+      <Project>{1d178059-53a1-4637-a192-74e18bcc54c0}</Project>
+      <Name>Rezolver.Advanced</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">
       <Project>{53870BD3-88EA-404D-8AB2-9BCB7040F1F6}</Project>
       <Name>Rezolver</Name>

@@ -12,6 +12,10 @@ namespace Rezolver
 	public interface IRezolverContainer : IRezolverScope
 	{
 		/// <summary>
+		/// Provides access to the compiler used by this containerm allowing you to inherit it.
+		/// </summary>
+		IRezolveTargetCompiler Compiler { get; }
+		/// <summary>
 		/// Standard version of the CanResolve operation.
 		/// </summary>
 		/// <param name="type"></param>

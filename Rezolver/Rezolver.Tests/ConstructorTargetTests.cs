@@ -127,15 +127,15 @@ namespace Rezolver.Tests
 			//scopeMock.Setup(s => s.CanResolve(typeof (int), rezolveName, null)).Returns(true).Verifiable();
 			//scopeMock.Setup(s => s.CanResolve(typeof (string), null, null)).Returns(true).Verifiable();
 
-			scopeMock.Setup(s => s.Fetch(typeof(string), null)).Returns(stringTarget).Verifiable();
-			scopeMock.Setup(s => s.Fetch(typeof(int), rezolveName)).Returns(intTarget).Verifiable();
+			scopeMock.Setup(s => s.Fetch(typeof (string), null)).Returns(stringTarget);
+			scopeMock.Setup(s => s.Fetch(typeof (int), rezolveName)).Returns(intTarget);
+			scopeMock.Setup(s => s.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			//scopeMock.Setup(s => s.Resolve(typeof(string), null, null)).Returns(rezolveName).Verifiable();
 			//scopeMock.Setup(s => s.Resolve(typeof(int), rezolveName, null)).Returns(NoDefaultConstructor.ExpectedComplexRezolveCall).Verifiable();
 			//so the expression demands that a new instance of NoDefaultConstructor is built. with an
 			//integer constructor argument that is, in turn, resolved by a name which is also resolved.
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedComplexRezolveCall, result.Value);
-			scopeMock.VerifyAll();
 		}
 	}
 }

@@ -7,60 +7,59 @@ using System.Reflection;
 
 namespace Rezolver
 {
-	using MakeCacheEntryDelegate = Func<IRezolveTarget, RezolverContainer, RezolverContainer.ICacheEntry>;
 	/// <summary>
 	/// </summary>
 	public class RezolverContainer : IRezolverContainer
 	{
 		#region nested cache types
 
-		private static readonly MethodInfo MakeCacheEntryStaticGeneric = typeof(RezolverContainer).GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
-			.SingleOrDefault(mi => mi.Name == "MakeCacheEntry" && mi.IsGenericMethod);
+		//private static readonly MethodInfo MakeCacheEntryStaticGeneric = typeof(RezolverContainer).GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+		//	.SingleOrDefault(mi => mi.Name == "MakeCacheEntry" && mi.IsGenericMethod);
 
 		//note here - the signature of the static container is the same as the dynamic one, 
 		//but you should be aware that a static container will simply ignore any dynamic
 		//container that's passed to it when executed.
 
-		private static readonly
-				Dictionary<Type, Lazy<MakeCacheEntryDelegate>>
-				LateBoundCacheEntryLookup =
-					new Dictionary
-						<Type, Lazy<MakeCacheEntryDelegate>>();
+		//private static readonly
+		//		Dictionary<Type, Lazy<MakeCacheEntryDelegate>>
+		//		LateBoundCacheEntryLookup =
+		//			new Dictionary
+		//				<Type, Lazy<MakeCacheEntryDelegate>>();
 
 		private static readonly
-			Dictionary<Type, ICacheEntry>
-			CacheMisses = new Dictionary<Type, ICacheEntry>();
+			Dictionary<Type, ICompiledRezolveTarget>
+			CacheMisses = new Dictionary<Type, ICompiledRezolveTarget>();
 
-		private static ICacheEntry MakeCacheEntry(Type returnType, IRezolveTarget target, RezolverContainer container)
+		//private static ICacheEntry MakeCacheEntry(Type returnType, IRezolveTarget target, RezolverContainer container)
+		//{
+		//	Lazy<MakeCacheEntryDelegate> lazy = null;
+		//	//TODO: add a lock.
+		//	if (!LateBoundCacheEntryLookup.TryGetValue(returnType, out lazy))
+		//	{
+		//		LateBoundCacheEntryLookup[returnType] = lazy = new Lazy<MakeCacheEntryDelegate>(
+		//			() => (MakeCacheEntryDelegate)Delegate.CreateDelegate(typeof(MakeCacheEntryDelegate),
+		//				MakeCacheEntryStaticGeneric.MakeGenericMethod(returnType)));
+		//	}
+
+		//	return lazy.Value(target, container);
+		//}
+
+		//private static ICacheEntry MakeCacheEntry<TTarget>(IRezolveTarget target, RezolverContainer container)
+		//{
+		//	//yup - compiling every version that we might need in advance.
+		//	return new CacheEntry<TTarget>(container.Compiler.CompileStatic<TTarget>(target, container), container.Compiler.CompileDynamic<TTarget>(target, container, dynamicContainerExpression: ExpressionHelper.DynamicContainerParam),
+		//		container.Compiler.CompileStatic(target, container, typeof(TTarget)), container.Compiler.CompileDynamic(target, container, dynamicContainerExpression: ExpressionHelper.DynamicContainerParam, targetType: typeof(TTarget)));
+		//}
+
+		private static ICompiledRezolveTarget MakeCacheMiss(Type target)
 		{
-			Lazy<MakeCacheEntryDelegate> lazy = null;
-			//TODO: add a lock.
-			if (!LateBoundCacheEntryLookup.TryGetValue(returnType, out lazy))
-			{
-				LateBoundCacheEntryLookup[returnType] = lazy = new Lazy<MakeCacheEntryDelegate>(
-					() => (MakeCacheEntryDelegate)Delegate.CreateDelegate(typeof(MakeCacheEntryDelegate),
-						MakeCacheEntryStaticGeneric.MakeGenericMethod(returnType)));
-			}
-
-			return lazy.Value(target, container);
-		}
-
-		private static ICacheEntry MakeCacheEntry<TTarget>(IRezolveTarget target, RezolverContainer container)
-		{
-			//yup - compiling every version that we might need in advance.
-			return new CacheEntry<TTarget>(container.Compiler.CompileStatic<TTarget>(target, container), container.Compiler.CompileDynamic<TTarget>(target, container, dynamicContainerExpression: ExpressionHelper.DynamicContainerParam),
-				container.Compiler.CompileStatic(target, container, typeof(TTarget)), container.Compiler.CompileDynamic(target, container, dynamicContainerExpression: ExpressionHelper.DynamicContainerParam, targetType: typeof(TTarget)));
-		}
-
-		private static ICacheEntry MakeCacheMiss(Type target)
-		{
-			ICacheEntry result = null;
+			ICompiledRezolveTarget result = null;
 
 			if (CacheMisses.TryGetValue(target, out result))
 				return result;
 
-			Type cacheMissType = typeof(CacheEntry<>).MakeGenericType(target);
-			return CacheMisses[target] = (ICacheEntry)Activator.CreateInstance(cacheMissType);
+			Type cacheMissType = typeof(MissingCompiledTarget<>).MakeGenericType(target);
+			return CacheMisses[target] = (ICompiledRezolveTarget)Activator.CreateInstance(cacheMissType);
 		}
 
 		protected struct CacheKey : IEquatable<CacheKey>
@@ -102,57 +101,28 @@ namespace Rezolver
 			}
 		}
 
-		protected internal interface ICacheEntry
+		private class MissingCompiledTarget<TTarget> : ICompiledRezolveTarget<TTarget>
 		{
-			ICompiledRezolveTarget CompiledTarget { get; }
-		}
-
-		protected class CacheEntry<TTarget> : ICacheEntry
-		{
-			private class MissingCompiledTarget : ICompiledRezolveTarget<TTarget>
+			object ICompiledRezolveTarget.GetObject()
 			{
-				object ICompiledRezolveTarget.GetObject()
-				{
-					return GetObject();
-				}
-
-				public TTarget GetObjectDynamic(IRezolverContainer dynamicContainer)
-				{
-					if (dynamicContainer != null)
-						return dynamicContainer.Resolve<TTarget>();
-					throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
-				}
-
-				public TTarget GetObject()
-				{
-					throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
-				}
-
-				object ICompiledRezolveTarget.GetObjectDynamic(IRezolverContainer dynamicContainer)
-				{
-					return GetObjectDynamic(dynamicContainer);
-				}
+				return GetObject();
 			}
 
-			public bool IsMiss { get; private set; }
-
-			ICompiledRezolveTarget ICacheEntry.CompiledTarget { get { return CompiledTarget; } }
-			public ICompiledRezolveTarget<TTarget> CompiledTarget { get; private set; } 
-
-			public static readonly CacheEntry<TTarget> Miss = new CacheEntry<TTarget>();
-
-			///// <summary>
-			///// Used only to create a cache miss - all of the faactories exposed by this entry will 
-			///// throw an exception if executed.
-			///// </summary>
-			public CacheEntry()
+			public TTarget GetObjectDynamic(IRezolverContainer dynamicContainer)
 			{
-				IsMiss = true;
+				if (dynamicContainer != null)
+					return dynamicContainer.Resolve<TTarget>();
+				throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
 			}
 
-			public CacheEntry(ICompiledRezolveTarget<TTarget> compiledTarget)
+			public TTarget GetObject()
 			{
-				CompiledTarget = compiledTarget;
+				throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
+			}
+
+			object ICompiledRezolveTarget.GetObjectDynamic(IRezolverContainer dynamicContainer)
+			{
+				return GetObjectDynamic(dynamicContainer);
 			}
 		}
 
@@ -165,15 +135,15 @@ namespace Rezolver
 		/// <summary>
 		/// This cache is for factories resolved by type only
 		/// </summary>
-		private readonly Dictionary<Type, ICacheEntry> _typeOnlyCacheEntries = new Dictionary<Type, ICacheEntry>();
+		private readonly Dictionary<Type, ICompiledRezolveTarget> _typeOnlyCacheEntries = new Dictionary<Type, ICompiledRezolveTarget>();
 		/// <summary>
 		/// This cache is for factories resolved by type and name
 		/// </summary>
-		private readonly Dictionary<CacheKey, ICacheEntry> _namedCacheEntries = new Dictionary<CacheKey, ICacheEntry>();
+		private readonly Dictionary<CacheKey, ICompiledRezolveTarget> _namedCacheEntries = new Dictionary<CacheKey, ICompiledRezolveTarget>();
 
 		private readonly IRezolveTargetCompiler _compiler;
 
-		private IRezolveTargetCompiler Compiler
+		public IRezolveTargetCompiler Compiler
 		{
 			get { return _compiler; }
 		}
@@ -182,7 +152,7 @@ namespace Rezolver
 		{
 			//TODO: check for null scope.
 			_scope = scope;
-			_compiler = RezolveTargetCompiler.Default;
+			_compiler = compiler ?? RezolveTargetCompiler.Default;
 		}
 
 		public bool CanResolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
@@ -207,25 +177,37 @@ namespace Rezolver
 				if (dynamicContainer.CanResolve(type, name))
 					return dynamicContainer.Resolve(type, name);
 
-
-				return ExecuteDynamicFactory(type, name, dynamicContainer);
+				//let's try it without the type only cache
+				return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObjectDynamic(dynamicContainer);
 			}
 
-			return ExecuteStaticFactory(type, name);
+			return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObject();
 		}
 
-		private object ExecuteStaticFactory(Type type, string name)
+		private ICompiledRezolveTarget GetCompiledRezolveTarget(CacheKey key)
 		{
-			return (name == null
-				? GetCacheEntry(type)
-				: GetCacheEntry(new CacheKey(type, name))).CompiledTarget.GetObject();
+			ICompiledRezolveTarget toReturn;
+			if (_namedCacheEntries.TryGetValue(key, out toReturn))
+				return toReturn;
+			var target = Fetch(key.Type, key.Name);
+
+			if (target != null)
+				return _namedCacheEntries[key] = Compiler.CompileTarget(target, this, ExpressionHelper.DynamicContainerParam, null);
+
+			return _namedCacheEntries[key] = MakeCacheMiss(key.Type);
 		}
 
-		private object ExecuteDynamicFactory(Type type, string name, IRezolverContainer dynamicContainer)
+		private ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
 		{
-			return (name == null
-				? GetCacheEntry(type)
-				: GetCacheEntry(new CacheKey(type, name))).CompiledTarget.GetObjectDynamic(dynamicContainer);
+			ICompiledRezolveTarget toReturn;
+			if (_typeOnlyCacheEntries.TryGetValue(type, out toReturn))
+				return toReturn;
+			var target = Fetch(type);
+
+			if (target != null)
+				return _typeOnlyCacheEntries[type] = Compiler.CompileTarget(target, this, ExpressionHelper.DynamicContainerParam, null);
+
+			return _typeOnlyCacheEntries[type] = MakeCacheMiss(type);
 		}
 
 		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
@@ -237,24 +219,12 @@ namespace Rezolver
 				if (dynamicContainer.CanResolve<T>(name))
 					return dynamicContainer.Resolve<T>(name);
 
-				return ExecuteStrongDynamicFactory<T>(name, dynamicContainer);
+				return
+					((ICompiledRezolveTarget<T>) GetCompiledRezolveTarget(new CacheKey(typeof (T), name))).GetObjectDynamic(
+						dynamicContainer);
 			}
 
-			return ExecuteStrongStaticFactory<T>(name);
-		}
-
-		private T ExecuteStrongStaticFactory<T>(string name)
-		{
-			return ((CacheEntry<T>) (name == null
-				? GetCacheEntry(typeof (T))
-				: GetCacheEntry(new CacheKey(typeof (T), name)))).CompiledTarget.GetObject();
-		}
-
-		private T ExecuteStrongDynamicFactory<T>(string name, IRezolverContainer dynamicContainer)
-		{
-			return ((CacheEntry<T>) (name == null
-				? GetCacheEntry(typeof (T))
-				: GetCacheEntry(new CacheKey(typeof (T), name)))).CompiledTarget.StrongDynamicFactory(dynamicContainer);
+			return ((ICompiledRezolveTarget<T>)GetCompiledRezolveTarget(new CacheKey(typeof(T), name))).GetObject();
 		}
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
@@ -280,39 +250,6 @@ namespace Rezolver
 
 			return _scope.GetNamedScope(path, false);
 		}
-
-		#region caching implementation
-
-		private ICacheEntry GetCacheEntry(Type type)
-		{
-			ICacheEntry toReturn;
-			if (_typeOnlyCacheEntries.TryGetValue(type, out toReturn))
-				return toReturn;
-			var target = Fetch(type, null);
-
-			if (target != null)
-				return _typeOnlyCacheEntries[type] = MakeCacheEntry(type, target, this);
-
-			return _typeOnlyCacheEntries[type] = MakeCacheMiss(type);
-		}
-
-		private ICacheEntry GetCacheEntry(CacheKey key)
-		{
-			ICacheEntry toReturn;
-			if (_namedCacheEntries.TryGetValue(key, out toReturn))
-				return toReturn;
-			var target = Fetch(key.Type, key.Name);
-
-			if (target != null)
-				return
-					_namedCacheEntries[key] =
-						MakeCacheEntry(key.Type, target, this);
-
-			return _namedCacheEntries[key] = MakeCacheMiss(key.Type);
-		}
-
-		#endregion
-
 	}
 
 	public static class RezolveTargetCompiler

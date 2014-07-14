@@ -14,7 +14,7 @@ namespace Rezolver.Tests
 			var scopeMock = new Mock<IRezolverScope>();
 			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(1.AsObjectTarget());
 
-			IRezolverContainer container = new RezolverContainer(scopeMock.Object);
+			IRezolverContainer container = new RezolverContainer(scopeMock.Object, new RezolveTargetDelegateCompiler());
 			var result = container.Resolve(typeof (int));
 			Assert.AreEqual(1, result);
 		}
@@ -50,7 +50,7 @@ namespace Rezolver.Tests
 			containerMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 			int expected = -1;
 			containerMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
-			RezolverContainer container = new RezolverContainer(scope1Mock.Object);
+			RezolverContainer container = new RezolverContainer(scope1Mock.Object, new RezolveTargetDelegateCompiler());
 			var result = container.Resolve(typeof (int) /*, dynamicContainer: containerMock.Object*/);
 			Assert.AreEqual(expected, result);
 		}
@@ -72,7 +72,7 @@ namespace Rezolver.Tests
 			containerMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 
 			//this represents building an application's statically defined, or bootstrapped, IOC container
-			RezolverContainer container = new RezolverContainer(scope1Mock.Object);
+			RezolverContainer container = new RezolverContainer(scope1Mock.Object, new RezolveTargetDelegateCompiler());
 
 			var result = (TypeWithConstructorArg)container.Resolve(typeof (TypeWithConstructorArg), dynamicContainer: containerMock.Object);
 			Assert.IsNotNull(result);

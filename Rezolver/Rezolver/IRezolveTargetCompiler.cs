@@ -24,6 +24,6 @@ namespace Rezolver
 		/// <returns>A compiled target that produces the object represented by <paramref name="target"/> via multiple
 		/// different method.</returns>
 		ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope,
-			ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack);
+			ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> targetStack = null);
 	}
 }
