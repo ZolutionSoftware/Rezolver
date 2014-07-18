@@ -14,7 +14,7 @@ using Moq;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class AssemblyRezolveTargetDelegateCompilerTests : RezolveTargetDelegateCompilerTests
+	public class AssemblyRezolveTargetCompilerTests : RezolveTargetCompilerTestsBase
 	{
 		protected override IRezolveTargetCompiler CreateCompiler()
 		{
@@ -31,14 +31,13 @@ namespace Rezolver.Tests
 		}
 
 		[TestMethod]
-		public void ShouldCompileCompiledTarget()
+		public void NaiveBenchmark()
 		{
 			IRezolveTargetCompiler compiler = new AssemblyRezolveTargetCompiler();
 
 			ConstructorTarget constructorTarget = ConstructorTarget.Auto<ToRezolve>();
 			var rezolverContainer = Mock.Of<IRezolverContainer>();
 			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  rezolverContainer, ExpressionHelper.DynamicContainerParam, null);
-			ICompiledRezolveTarget<ToRezolve> target2 = (ICompiledRezolveTarget<ToRezolve>)target;
 
 			ToRezolve.InstanceCount = 0; 
 			var toRezolve = (ToRezolve)target.GetObject();
@@ -108,29 +107,6 @@ namespace Rezolver.Tests
 			GC.Collect(2);
 			GC.WaitForFullGCComplete();
 
-			counter = counterStart;
-			s.Restart();
-			while (counter-- != 0)
-			{
-				benchResult2 = target2.GetObject();
-			}
-			s.Stop();
-			Console.WriteLine("Create via interface (ToRezolve) took {0}ms", s.Elapsed.TotalMilliseconds);
-			ToRezolve.InstanceCount = 0;
-			GC.Collect(2);
-			GC.WaitForFullGCComplete();
-
-			counter = counterStart;
-			s.Restart();
-			while (counter-- != 0)
-			{
-				benchResult2 = target2.GetObjectDynamic(null);
-			}
-			s.Stop();
-			Console.WriteLine("Create via interface (ToRezolve/with container) took {0}ms", s.Elapsed.TotalMilliseconds);
-			ToRezolve.InstanceCount = 0;
-			GC.Collect(2);
-			GC.WaitForFullGCComplete();
 			//--------------
 
 			counter = counterStart;

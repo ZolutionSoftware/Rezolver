@@ -78,7 +78,7 @@
     <Compile Include="LateBoundContainerTests.cs" />
     <Compile Include="RezolverContainerTests_Generic.cs" />
     <Compile Include="RezolveTargetDelegateCompilerTests.cs" />
-    <Compile Include="AssemblyRezolveTargetDelegateCompilerTests.cs" />
+    <Compile Include="AssemblyRezolveTargetCompilerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">

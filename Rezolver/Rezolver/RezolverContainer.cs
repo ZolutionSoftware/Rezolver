@@ -58,8 +58,9 @@ namespace Rezolver
 			if (CacheMisses.TryGetValue(target, out result))
 				return result;
 
-			Type cacheMissType = typeof(MissingCompiledTarget<>).MakeGenericType(target);
-			return CacheMisses[target] = (ICompiledRezolveTarget)Activator.CreateInstance(cacheMissType);
+			//Type cacheMissType = typeof(MissingCompiledTarget<>).MakeGenericType(target);
+			return CacheMisses[target] = new MissingCompiledTarget(target);
+				//(ICompiledRezolveTarget)Activator.CreateInstance(cacheMissType);
 		}
 
 		protected struct CacheKey : IEquatable<CacheKey>
@@ -101,14 +102,21 @@ namespace Rezolver
 			}
 		}
 
-		private class MissingCompiledTarget<TTarget> : ICompiledRezolveTarget<TTarget>
+		private class MissingCompiledTarget/*<TTarget>*/ : ICompiledRezolveTarget/*<TTarget>*/
 		{
-			object ICompiledRezolveTarget.GetObject()
+			private readonly Type _type;
+
+			public MissingCompiledTarget(Type type)
 			{
-				return GetObject();
+				_type = type;
 			}
 
-			public TTarget GetObjectDynamic(IRezolverContainer dynamicContainer)
+			public object GetObject()
+			{
+				throw new InvalidOperationException(string.Format("Could not resolve type {0}", _type));
+			}
+
+			/*public TTarget GetObjectDynamic(IRezolverContainer dynamicContainer)
 			{
 				if (dynamicContainer != null)
 					return dynamicContainer.Resolve<TTarget>();
@@ -118,11 +126,11 @@ namespace Rezolver
 			public TTarget GetObject()
 			{
 				throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
-			}
+			}*/
 
-			object ICompiledRezolveTarget.GetObjectDynamic(IRezolverContainer dynamicContainer)
+			public object GetObjectDynamic(IRezolverContainer dynamicContainer)
 			{
-				return GetObjectDynamic(dynamicContainer);
+				throw new InvalidOperationException(string.Format("Could not resolve type {0}", _type));
 			}
 		}
 
@@ -178,6 +186,10 @@ namespace Rezolver
 					return dynamicContainer.Resolve(type, name);
 
 				//let's try it without the type only cache
+				/* return (name == null ?
+					 GetCompiledRezolveTarget(type)
+					 : GetCompiledRezolveTarget(new CacheKey(type, name))).GetObjectDynamic(dynamicContainer); 
+				 */
 				return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObjectDynamic(dynamicContainer);
 			}
 
@@ -202,7 +214,7 @@ namespace Rezolver
 			ICompiledRezolveTarget toReturn;
 			if (_typeOnlyCacheEntries.TryGetValue(type, out toReturn))
 				return toReturn;
-			var target = Fetch(type);
+				var target = Fetch(type);
 
 			if (target != null)
 				return _typeOnlyCacheEntries[type] = Compiler.CompileTarget(target, this, ExpressionHelper.DynamicContainerParam, null);
@@ -220,11 +232,11 @@ namespace Rezolver
 					return dynamicContainer.Resolve<T>(name);
 
 				return
-					((ICompiledRezolveTarget<T>) GetCompiledRezolveTarget(new CacheKey(typeof (T), name))).GetObjectDynamic(
+					(T)GetCompiledRezolveTarget(new CacheKey(typeof (T), name)).GetObjectDynamic(
 						dynamicContainer);
 			}
 
-			return ((ICompiledRezolveTarget<T>)GetCompiledRezolveTarget(new CacheKey(typeof(T), name))).GetObject();
+			return (T)GetCompiledRezolveTarget(new CacheKey(typeof(T), name)).GetObject();
 		}
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)

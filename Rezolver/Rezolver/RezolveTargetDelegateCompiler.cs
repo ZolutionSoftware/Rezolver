@@ -12,42 +12,42 @@ namespace Rezolver
 	{
 		public static readonly IRezolveTargetCompiler Default = new RezolveTargetDelegateCompiler();
 
-		public class DelegatingCompiledRezolveTarget<T> : ICompiledRezolveTarget<T>
+		public class DelegatingCompiledRezolveTarget/*<T>*/ : ICompiledRezolveTarget/*<T>*/
 		{
 			private readonly Func<object> _getObjectDelegate;
 			private readonly Func<IRezolverContainer, object> _getObjectDynamicDelegate;
-			private readonly Func<T> _getObjectStrongDelegate;
-			private readonly Func<IRezolverContainer, T> _getObjectStrongDynamicDelegate;
+			//private readonly Func<T> _getObjectStrongDelegate;
+			//private readonly Func<IRezolverContainer, T> _getObjectStrongDynamicDelegate;
 
 			public DelegatingCompiledRezolveTarget(Func<object> getObjectDelegate,
-				Func<IRezolverContainer, object> getObjectDynamicDelegate,
-				Func<T> getObjectStrongDelegate, Func<IRezolverContainer, T> getObjectStrongDynamicDelegate)
+				Func<IRezolverContainer, object> getObjectDynamicDelegate/*,
+				Func<T> getObjectStrongDelegate, Func<IRezolverContainer, T> getObjectStrongDynamicDelegate*/)
 			{
 				_getObjectDelegate = getObjectDelegate;
 				_getObjectDynamicDelegate = getObjectDynamicDelegate;
-				_getObjectStrongDelegate = getObjectStrongDelegate;
-				_getObjectStrongDynamicDelegate = getObjectStrongDynamicDelegate;
+				//_getObjectStrongDelegate = getObjectStrongDelegate;
+				//_getObjectStrongDynamicDelegate = getObjectStrongDynamicDelegate;
 			}
 
-			object ICompiledRezolveTarget.GetObject()
+			public object GetObject()
 			{
 				return _getObjectDelegate();
 			}
 
-			object ICompiledRezolveTarget.GetObjectDynamic(IRezolverContainer dynamicContainer)
+			public object GetObjectDynamic(IRezolverContainer dynamicContainer)
 			{
 				return _getObjectDynamicDelegate(dynamicContainer);
 			}
 
-			public T GetObject()
-			{
-				return _getObjectStrongDelegate();
-			}
+			//public T GetObject()
+			//{
+			//	return _getObjectStrongDelegate();
+			//}
 
-			public T GetObjectDynamic(IRezolverContainer dynamicContainer)
-			{
-				return _getObjectStrongDynamicDelegate(dynamicContainer);
-			}
+			//public T GetObjectDynamic(IRezolverContainer dynamicContainer)
+			//{
+			//	return _getObjectStrongDynamicDelegate(dynamicContainer);
+			//}
 		}
 
 		private static readonly MethodInfo CompileStaticGeneric = typeof (RezolveTargetDelegateCompiler).GetMethods(BindingFlags.Instance |
@@ -69,13 +69,13 @@ namespace Rezolver
 			ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> targetStack = null)
 		{
 			//it doesn't have to be lightning quick, this.
-			return (ICompiledRezolveTarget)Activator.CreateInstance(typeof (DelegatingCompiledRezolveTarget<>).MakeGenericType(target.DeclaredType),
+			return new DelegatingCompiledRezolveTarget(
 				CompileStatic(target, containerScope,  targetStack: targetStack),
-				CompileDynamic(target, containerScope, dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam, targetStack: targetStack),
+				CompileDynamic(target, containerScope, dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam, targetStack: targetStack)/*,
 				CompileStaticGeneric.MakeGenericMethod(target.DeclaredType)
 					.Invoke(this, new object[] {target, containerScope, targetStack}),
 				CompileDynamicGeneric.MakeGenericMethod(target.DeclaredType)
-					.Invoke(this, new object[] {target, containerScope, dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam, targetStack})
+					.Invoke(this, new object[] {target, containerScope, dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam, targetStack})*/
 				);
 		}
 
