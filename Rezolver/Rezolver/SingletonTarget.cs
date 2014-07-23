@@ -15,7 +15,7 @@ namespace Rezolver
 	public class SingletonTarget : RezolveTargetBase
 	{
 		private IRezolveTarget _innerTarget;
-		private Func<IRezolverContainer, Type, Stack<IRezolveTarget>, Expression> _createExpressionDelegate;  
+		private Func<IRezolverContainer, Type, ParameterExpression, Stack<IRezolveTarget>, Expression> _createExpressionDelegate;  
 		//this is the most naive implementation of this class - bake a lazy into this singleton,
 		//initialise it with a delegate built from the inner target's expression, and then this
 		//one's expression simply returns this lazy's value.
@@ -39,20 +39,28 @@ namespace Rezolver
 
 		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
-			return _createExpressionDelegate(scopeContainer, targetType, currentTargets);
+			return _createExpressionDelegate(scopeContainer, targetType, dynamicContainerExpression, currentTargets);
 		}
 
-		private Expression CreateExpressionFromInnerSingleton(IRezolverContainer containerScope, Type targetType, Stack<IRezolveTarget> currentTargets = null)
+		private Expression CreateExpressionFromInnerSingleton(IRezolverContainer containerScope, Type targetType, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			return ((SingletonTarget) _innerTarget).CreateExpression(containerScope, targetType: targetType, currentTargets: currentTargets);
 		}
 
-		private Expression CreateExpressionFromInner(IRezolverContainer scope, Type targetType, Stack<IRezolveTarget> currentTargets = null)
+		private Expression CreateExpressionFromInner(IRezolverContainer scope, Type targetType, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
-			if(_lazy == null)
-				_lazy = new Lazy<object>(Expression.Lambda<Func<object>>(_innerTarget.CreateExpression(scope, targetType: typeof(object), currentTargets: currentTargets)).Compile());
-			Expression<Func<object>> e = () => _lazy.Value;
-			return e.Body;
+			//BUG: This will not honour dynamic containers being passed at runtime as it's not being forwarded to the lazy.
+			//The only solution to this will be to create a class dynamically which creates the lazy in the dynamic code.  I think.
+			if (_lazy == null)
+			{
+				var target = scope.Compiler.CompileTarget(_innerTarget, scope, dynamicContainerExpression, currentTargets);
+				_lazy = new Lazy<object>(target.GetObject);
+			}
+			//	_lazy = new Lazy<object>(Expression.Lambda<Func<object>>(_innerTarget.CreateExpression(scope, targetType: typeof(object), currentTargets: currentTargets)).Compile());
+			//Expression<Func<object>> e = () => _lazy.Value;
+			//return e.Body;
+
+			return Expression.Property(Expression.Constant(_lazy), "Value");
 		}
 
 		public override Type DeclaredType

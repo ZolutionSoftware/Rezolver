@@ -16,9 +16,16 @@ namespace Rezolver.Tests
 	[TestClass]
 	public class AssemblyRezolveTargetCompilerTests : RezolveTargetCompilerTestsBase
 	{
-		protected override IRezolveTargetCompiler CreateCompiler()
+		protected override IRezolveTargetCompiler CreateCompilerBase()
 		{
 			return new AssemblyRezolveTargetCompiler();
+		}
+
+		protected override void ReleaseCompiler(IRezolveTargetCompiler compiler)
+		{
+			AssemblyRezolveTargetCompiler compiler2 = compiler as AssemblyRezolveTargetCompiler;
+
+			compiler2.AssemblyBuilder.Save(compiler2.AssemblyBuilder.GetName().Name + ".dll");
 		}
 
 		public class ToRezolve
@@ -33,7 +40,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void NaiveBenchmark()
 		{
-			IRezolveTargetCompiler compiler = new AssemblyRezolveTargetCompiler();
+			IRezolveTargetCompiler compiler = CreateCompiler();
 
 			ConstructorTarget constructorTarget = ConstructorTarget.Auto<ToRezolve>();
 			var rezolverContainer = Mock.Of<IRezolverContainer>();

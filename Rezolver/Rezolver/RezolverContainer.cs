@@ -186,14 +186,16 @@ namespace Rezolver
 					return dynamicContainer.Resolve(type, name);
 
 				//let's try it without the type only cache
-				/* return (name == null ?
+				return (name == null ?
 					 GetCompiledRezolveTarget(type)
 					 : GetCompiledRezolveTarget(new CacheKey(type, name))).GetObjectDynamic(dynamicContainer); 
-				 */
-				return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObjectDynamic(dynamicContainer);
+				//return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObjectDynamic(dynamicContainer);
 			}
 
-			return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObject();
+			return (name == null ?
+					 GetCompiledRezolveTarget(type)
+					 : GetCompiledRezolveTarget(new CacheKey(type, name))).GetObject(); 
+			//return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObject();
 		}
 
 		private ICompiledRezolveTarget GetCompiledRezolveTarget(CacheKey key)

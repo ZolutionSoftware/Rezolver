@@ -15,14 +15,21 @@ namespace Rezolver
 		private int _targetCounter = 0;
 		private readonly AssemblyBuilder _assemblyBuilder;
 		private readonly ModuleBuilder _moduleBuilder;
+		private readonly string _assemblyModuleName;
+
+		public AssemblyBuilder AssemblyBuilder
+		{
+			get { return _assemblyBuilder; }
+		}
 
 		public AssemblyRezolveTargetCompiler()
 		{
+			_assemblyModuleName = string.Format("Rezolver.Dynamic{0}", ++_assemblyCounter);
 			_assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName(
-				string.Format("Rezolver.AssemblyRezolveTargetCompiler.Compiled{0}, Culture=neutral, Version=0.0.0.0",
-					++_assemblyCounter)), AssemblyBuilderAccess.RunAndCollect);
+				string.Format("{0}, Culture=neutral, Version=0.0.0.0",
+					_assemblyModuleName)), AssemblyBuilderAccess.RunAndSave);
 
-			_moduleBuilder = _assemblyBuilder.DefineDynamicModule("DefaultModule");
+			_moduleBuilder = _assemblyBuilder.DefineDynamicModule(_assemblyModuleName, _assemblyModuleName + ".dll");
 		}
 
 		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope,
