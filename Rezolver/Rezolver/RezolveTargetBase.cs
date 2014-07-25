@@ -70,10 +70,10 @@ namespace Rezolver
 				var result = CreateExpressionBase(containerScope, targetType: targetType, dynamicContainerExpression: dynamicContainerExpression, currentTargets: currentTargets);
 				if (targetType != null)
 				{
-					if (targetType != DeclaredType || targetType != result.Type)
+					if (!targetType.IsAssignableFrom(DeclaredType) || !targetType.IsAssignableFrom(result.Type))
 						return Expression.Convert(result, targetType);
 				}
-				else if (DeclaredType != result.Type)
+				else if (!DeclaredType.IsAssignableFrom(result.Type))
 					return Expression.Convert(result, DeclaredType);
 
 				return result;

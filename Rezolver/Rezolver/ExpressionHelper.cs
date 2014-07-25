@@ -13,7 +13,7 @@ namespace Rezolver
 	public static class ExpressionHelper
 	{
 		/// <summary>
-		/// This parameter expression is to be used by all targets and containers in this library to perform late binding 
+		/// This parameter expression is to be used by all targets and containers in this library by default to perform late binding 
 		/// to a container provided at run time when a caller is trying to resolve something through a delegate built from
 		/// a target.
 		/// </summary>

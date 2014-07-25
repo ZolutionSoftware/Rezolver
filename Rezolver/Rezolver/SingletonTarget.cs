@@ -56,9 +56,6 @@ namespace Rezolver
 				var target = scope.Compiler.CompileTarget(_innerTarget, scope, dynamicContainerExpression, currentTargets);
 				_lazy = new Lazy<object>(target.GetObject);
 			}
-			//	_lazy = new Lazy<object>(Expression.Lambda<Func<object>>(_innerTarget.CreateExpression(scope, targetType: typeof(object), currentTargets: currentTargets)).Compile());
-			//Expression<Func<object>> e = () => _lazy.Value;
-			//return e.Body;
 
 			return Expression.Property(Expression.Constant(_lazy), "Value");
 		}

@@ -23,6 +23,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldOnlyCreateOneInstanceFromFuncTarget()
 		{
+
 			IRezolveTarget target = new SingletonTarget(new DelegateTarget<Classes.SimpleType>(() => new Classes.SimpleType()));
 			int instanceCount = Classes.SimpleType.InstanceCount;
 			var i2 = GetValueFromTarget(target);

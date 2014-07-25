@@ -85,7 +85,7 @@ namespace Rezolver
 			var expression =
 				Expression.Lambda<Func<object>>(target.CreateExpression(containerScope, targetType: typeof (object),
 					currentTargets: targetStack));
-			Debug.WriteLine("Compiling Func<object> from static lambda {0} for target type {1}", expression, targetType != null ? targetType.Name : "[null]");
+			Debug.WriteLine("Compiling Func<object> from static lambda {0} for target type {1}", expression, "System.Object");
 			return expression.Compile();
 #else
 			return

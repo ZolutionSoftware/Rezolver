@@ -6,6 +6,7 @@ using System.Diagnostics.PerformanceData;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,16 +17,35 @@ namespace Rezolver.Tests
 	[TestClass]
 	public class AssemblyRezolveTargetCompilerTests : RezolveTargetCompilerTestsBase
 	{
-		protected override IRezolveTargetCompiler CreateCompilerBase()
+		protected override IRezolveTargetCompiler CreateCompilerBase(string callingMethod)
 		{
-			return new AssemblyRezolveTargetCompiler();
+			//if((callingMethod ?? string.Empty).StartsWith("shouldcompiledynamic", StringComparison.OrdinalIgnoreCase))
+
+			return new AssemblyRezolveTargetCompiler(AssemblyRezolveTargetCompiler.CreateAssemblyBuilder(AssemblyBuilderAccess.RunAndSave));
+		}
+
+		protected void LogMethodCall([CallerMemberName] string methodName = null)
+		{
+			Debug.WriteLine("{0} called", (object) methodName);
 		}
 
 		protected override void ReleaseCompiler(IRezolveTargetCompiler compiler)
 		{
 			AssemblyRezolveTargetCompiler compiler2 = compiler as AssemblyRezolveTargetCompiler;
 
-			compiler2.AssemblyBuilder.Save(compiler2.AssemblyBuilder.GetName().Name + ".dll");
+
+			string assemblyFileName = compiler2.AssemblyBuilder.GetName().Name + ".dll";
+
+			try
+			{
+
+				compiler2.AssemblyBuilder.Save(assemblyFileName);
+				Debug.WriteLine("Saved {0}", (object)assemblyFileName);
+			}
+			catch (Exception)
+			{
+				Debug.WriteLine("Failed to save {0}", (object) assemblyFileName);
+			}
 		}
 
 		public class ToRezolve
@@ -35,6 +55,12 @@ namespace Rezolver.Tests
 			{
 				InstanceCount++;
 			}
+		}
+
+		[TestMethod]
+		public void notest()
+		{
+			
 		}
 
 		[TestMethod]

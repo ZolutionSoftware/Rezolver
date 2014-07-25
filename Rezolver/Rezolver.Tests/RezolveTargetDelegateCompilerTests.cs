@@ -11,7 +11,7 @@ namespace Rezolver.Tests
 	[TestClass]
 	public class RezolveTargetDelegateCompilerTests : RezolveTargetCompilerTestsBase
 	{
-		protected override IRezolveTargetCompiler CreateCompilerBase()
+		protected override IRezolveTargetCompiler CreateCompilerBase(string callingMethod)
 		{
 			return new RezolveTargetDelegateCompiler();
 		}
