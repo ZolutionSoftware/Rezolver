@@ -57,11 +57,6 @@ namespace Rezolver.Tests
 			}
 		}
 
-		[TestMethod]
-		public void notest()
-		{
-			
-		}
 
 		[TestMethod]
 		public void NaiveBenchmark()

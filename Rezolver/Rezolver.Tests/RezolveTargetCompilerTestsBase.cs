@@ -8,112 +8,41 @@ using Moq;
 
 namespace Rezolver.Tests
 {
-	public abstract class RezolveTargetCompilerTestsBase
+	public abstract partial class RezolveTargetCompilerTestsBase
 	{
-		public interface ITransient
-		{
-		}
-
-		public class Transient : ITransient
-		{
-			public static int Counter = 0;
-
-			public Transient()
-			{
-				++Counter;
-			}
-		}
-
-		public interface ISingleton { }
-
-		public class Singleton : ISingleton
-		{
-			public static int Counter = 0;
-
-			public Singleton()
-			{
-				++Counter;
-			}
-		}
-
-		public interface IComposite
-		{
-			ISingleton Singleton { get; }
-			ITransient Transient { get; }
-		}
-
-		public class Composite : IComposite
-		{
-			private readonly ISingleton _singleton;
-			private readonly ITransient _transient;
-
-			public Composite(ISingleton singleton, ITransient transient)
-			{
-				_singleton = singleton;
-				_transient = transient;
-			}
-
-			public ISingleton Singleton
-			{
-				get { return _singleton; }
-			}
-
-			public ITransient Transient
-			{
-				get { return _transient; }
-			}
-		}
-
-		private readonly Lazy<ObjectTarget> _stringObjectTarget = new Lazy<ObjectTarget>(() => StringForObjectTarget.AsObjectTarget());
-		private const string StringForObjectTarget = "hello";
-
-		private ObjectTarget StringObjectTarget
-		{
-			get { return _stringObjectTarget.Value; }
-		}
-
-		protected abstract IRezolveTargetCompiler CreateCompilerBase(string callingMethod);
-		protected abstract void ReleaseCompiler(IRezolveTargetCompiler compiler);
-
-		private IRezolveTargetCompiler _currentCompiler;
-
-		protected IRezolveTargetCompiler CreateCompiler([CallerMemberName]string callingMethod = null)
-		{
-			return _currentCompiler = CreateCompilerBase(callingMethod);
-		}
-
 		[TestCleanup]
 		public void TestCleanup()
 		{
-			if(_currentCompiler != null)
+			if (_currentCompiler != null)
 				ReleaseCompiler(_currentCompiler);
 		}
 
-		protected IRezolverContainer CreateContainerScopeMock(IRezolveTargetCompiler compiler)
-		{
-			Assert.IsNotNull(compiler, "The compiler must be passed when setting up the container mock for this test");
-			var mock = new Mock<IRezolverContainer>();
-			mock.Setup(c => c.Compiler).Returns(compiler);
-			return mock.Object;
-		}
-
 		[TestMethod]
-		public void ShouldCompileObjectTargetToObjectFunc()
+		public void ShouldCompileStringObjectTarget()
 		{
 			var compiler = CreateCompiler();
-			ICompiledRezolveTarget target = compiler.CompileTarget(StringObjectTarget, CreateContainerScopeMock(compiler), ExpressionHelper.DynamicContainerParam, null);
+			var target = compiler.CompileTarget(_stringObjectTarget.Value, CreateContainerScopeMock(compiler));
 			Assert.IsNotNull(target);
 			Assert.AreEqual(StringForObjectTarget, target.GetObject());
 		}
-		
-		[TestMethod]
-		public void ShouldCompileObjectTargetToStringFunc()
-		{
-			IRezolveTargetCompiler compiler = CreateCompiler();
-			var target = compiler.CompileTarget(StringObjectTarget, CreateContainerScopeMock(compiler), ExpressionHelper.DynamicContainerParam, null);
-			Assert.IsNotNull(target);
-			Assert.AreEqual(StringForObjectTarget, target.GetObject());
 
+		[TestMethod]
+		public void ShouldCompileIntObjectTarget()
+		{
+			var compiler = CreateCompiler();
+			var target = compiler.CompileTarget(_intObjectTarget.Value, CreateContainerScopeMock(compiler));
+			Assert.IsNotNull(target);
+			Assert.AreEqual(IntForObjectTarget, target.GetObject());
+
+		}
+
+		[TestMethod]
+		public void ShouldCompileNullableIntObjectTarget()
+		{
+			var compiler = CreateCompiler();
+			var target = compiler.CompileTarget(_nullableIntObjectTarget.Value, CreateContainerScopeMock(compiler));
+			Assert.IsNotNull(target);
+			Assert.AreEqual(NullableIntForObjectTarget, target.GetObject());
 		}
 
 		[TestMethod]
@@ -177,63 +106,15 @@ namespace Rezolver.Tests
 			Assert.AreEqual(++lastTransientCount, Transient.Counter);
 		}
 
-		//[TestMethod]
-		////as long as this chucks an exception it's fine - not going to 
-		////mandate what type of exception is raised.
-		//[ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
-		//public void ShouldNotCompileObjectTargetToIntFunc()
-		//{
-		//	IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
-		//	Func<object> func = compiler.CompileTarget();
-		//	Debug.WriteLine(func);
-		//}
 
-		//[TestMethod]
-		//[ExpectedException(typeof (Exception), AllowDerivedTypes = true)]
-		//public void ShouldNotCompiledObjectTargetToIntFunc_Generic()
-		//{
-		//	IRezolveTargetCompiler compiler = new RezolveTargetCompiler();
-		//	Func<int> func = compiler.CompileStatic<int>(StringObjectTarget, CreateContainerScopeMock(compiler));
-		//}
-
-		/// <summary>
-		/// Special test target for the dynamic tests - returns the dynamic container that is passed
-		/// into the delegate that is built from the target, or a default if that dynamic container is
-		/// passed as null.
-		/// </summary>
-		public class DynamicTestTarget : IRezolveTarget
+		[TestMethod]
+		public void ShouldCompileSuperComplexConstructorTarget()
 		{
-			private readonly IRezolverContainer _defaultContainer;
+			IRezolveTargetCompiler compiler = CreateCompiler();
+			var mockContainer = new Mock<IRezolverContainer>();
+			mockContainer.Setup(r => r.Compiler).Returns(compiler);
 
-			public DynamicTestTarget(IRezolverContainer defaultContainer)
-			{
-				_defaultContainer = defaultContainer;
-			}
-
-			public bool SupportsType(Type type)
-			{
-				return type.IsAssignableFrom(typeof(IRezolverContainer));
-			}
-
-			public Expression CreateExpression(IRezolverContainer containerScope, Type targetType = null,
-				ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
-			{
-				//this method isn't always called with a dynamicContainerExpression passed
-				if(targetType != null && !SupportsType(targetType))
-					throw new ArgumentException(string.Format("Type not supported: {0}", targetType));
-				if (dynamicContainerExpression != null)
-				{
-					return Expression.Coalesce(Expression.Convert(dynamicContainerExpression, targetType ?? DeclaredType),
-						Expression.Convert(Expression.Constant(_defaultContainer, typeof(IRezolverContainer)), targetType ?? DeclaredType));
-				}
-				
-				return Expression.Convert(Expression.Constant(_defaultContainer, typeof(IRezolverContainer)), targetType ?? DeclaredType);
-			}
-
-			public Type DeclaredType
-			{
-				get { return typeof(IRezolverContainer); }
-			}
+			AddIntObjectTargetToScopeMock(mockContainer);
 		}
 
 		[TestMethod]
