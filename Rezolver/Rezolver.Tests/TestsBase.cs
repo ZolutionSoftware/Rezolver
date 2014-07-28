@@ -9,13 +9,20 @@ namespace Rezolver.Tests
 	{
 		protected static T GetValueFromTarget<T>(IRezolveTarget target, IRezolverContainer scope = null, IRezolverContainer dynamicScope = null)
 		{
-			return (T)((ExpressionHelper.GetFactoryForTarget(scope ?? Mock.Of<IRezolverContainer>(), typeof (T), target))(dynamicScope));
+			return (T)new RezolveTargetDelegateCompiler().CompileTarget(target, scope ?? CreateCompilerMock()).GetObject();
+		}
+
+		private static IRezolverContainer CreateCompilerMock()
+		{
+			var scopeMock = new Mock<IRezolverContainer>();
+			scopeMock.Setup(s => s.Compiler).Returns(new RezolveTargetDelegateCompiler());
+
+			return scopeMock.Object;
 		}
 
 		protected static object GetValueFromTarget(IRezolveTarget target, IRezolverContainer scope = null, IRezolverContainer dynamicScope = null)
 		{
-			return (object) (ExpressionHelper.GetFactoryForTarget(scope ?? Mock.Of<IRezolverContainer>(), null, target))(dynamicScope);
-			//return CompileTargetExpression(target, scope).DynamicInvoke(null);
+			return new RezolveTargetDelegateCompiler().CompileTarget(target, scope ?? CreateCompilerMock(), null, null).GetObject();
 		}
 	}
 }

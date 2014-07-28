@@ -12,21 +12,16 @@ namespace Rezolver
 	{
 		public static readonly IRezolveTargetCompiler Default = new RezolveTargetDelegateCompiler();
 
-		public class DelegatingCompiledRezolveTarget/*<T>*/ : ICompiledRezolveTarget/*<T>*/
+		public class DelegatingCompiledRezolveTarget : ICompiledRezolveTarget
 		{
 			private readonly Func<object> _getObjectDelegate;
 			private readonly Func<IRezolverContainer, object> _getObjectDynamicDelegate;
-			//private readonly Func<T> _getObjectStrongDelegate;
-			//private readonly Func<IRezolverContainer, T> _getObjectStrongDynamicDelegate;
 
 			public DelegatingCompiledRezolveTarget(Func<object> getObjectDelegate,
-				Func<IRezolverContainer, object> getObjectDynamicDelegate/*,
-				Func<T> getObjectStrongDelegate, Func<IRezolverContainer, T> getObjectStrongDynamicDelegate*/)
+				Func<IRezolverContainer, object> getObjectDynamicDelegate)
 			{
 				_getObjectDelegate = getObjectDelegate;
 				_getObjectDynamicDelegate = getObjectDynamicDelegate;
-				//_getObjectStrongDelegate = getObjectStrongDelegate;
-				//_getObjectStrongDynamicDelegate = getObjectStrongDynamicDelegate;
 			}
 
 			public object GetObject()
@@ -38,16 +33,6 @@ namespace Rezolver
 			{
 				return _getObjectDynamicDelegate(dynamicContainer);
 			}
-
-			//public T GetObject()
-			//{
-			//	return _getObjectStrongDelegate();
-			//}
-
-			//public T GetObjectDynamic(IRezolverContainer dynamicContainer)
-			//{
-			//	return _getObjectStrongDynamicDelegate(dynamicContainer);
-			//}
 		}
 
 		private static readonly MethodInfo CompileStaticGeneric = typeof (RezolveTargetDelegateCompiler).GetMethods(BindingFlags.Instance |
@@ -71,11 +56,7 @@ namespace Rezolver
 			//it doesn't have to be lightning quick, this.
 			return new DelegatingCompiledRezolveTarget(
 				CompileStatic(target, containerScope,  targetStack: targetStack),
-				CompileDynamic(target, containerScope, dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam, targetStack: targetStack)/*,
-				CompileStaticGeneric.MakeGenericMethod(target.DeclaredType)
-					.Invoke(this, new object[] {target, containerScope, targetStack}),
-				CompileDynamicGeneric.MakeGenericMethod(target.DeclaredType)
-					.Invoke(this, new object[] {target, containerScope, dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam, targetStack})*/
+				CompileDynamic(target, containerScope, dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam, targetStack: targetStack)
 				);
 		}
 

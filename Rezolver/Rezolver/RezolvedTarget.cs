@@ -23,6 +23,9 @@ namespace Rezolver
 		private readonly Type _resolveType;
 		private readonly IRezolveTarget _resolveNameTarget;
 
+		private static readonly MethodInfo ContainerResolveMethod =
+			MethodCallExtractor.ExtractCalledMethod((IRezolverContainer c) => c.Resolve(typeof (object), null, null));
+
 		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 
 		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
@@ -57,7 +60,8 @@ namespace Rezolver
 			if (dynamicContainerExpression != null)
 			{
 				Func<object> compiledRezolveCall = null;
-				Func<IRezolverContainer, string> compiledNameCall = null;
+				ICompiledRezolveTarget compiledNameCall = null;
+				//Func<IRezolverContainer, string> compiledNameCall = null;
 
 				if (_resolveNameTarget != null)
 				{
@@ -67,12 +71,14 @@ namespace Rezolver
 					//There is the minority case for ObjectTarget and probably SingletonTarget,  which will always produce the 
 					//same instance, but there's no reliable way - apart from a type test - to determine that.
 					//TODO: make this call generic after Resolve<T> has been added to the IRezolverContainer
-					var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, _resolveNameTarget, currentTargets);
+					compiledNameCall = scopeContainer.Compiler.CompileTarget(_resolveNameTarget, scopeContainer, dynamicContainerExpression,
+						currentTargets);
+					//var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, _resolveNameTarget, currentTargets);
 
-					compiledNameCall = (dynamicScope) => (string)toCall(dynamicScope);
+					//compiledNameCall = (dynamicScope) => (string)toCall(dynamicScope);
 				}
 
-				var resolvedTarget = scopeContainer.Fetch(DeclaredType, compiledNameCall != null ? compiledNameCall(null) : null);
+				var resolvedTarget = scopeContainer.Fetch(DeclaredType, compiledNameCall != null ? (string)compiledNameCall.GetObject() : null);
 
 				if (resolvedTarget != null)
 				{
@@ -94,7 +100,7 @@ namespace Rezolver
 						{
 							if (dynamicScope != null)
 							{
-								var name = compiledNameCall(dynamicScope);
+								var name = (string)compiledNameCall.GetObjectDynamic(dynamicScope);
 								if (dynamicScope.CanResolve(finalType, name))
 								{
 									return dynamicScope.Resolve(finalType, name);
@@ -110,7 +116,7 @@ namespace Rezolver
 						{
 							if (dynamicScope != null)
 							{
-								var name = compiledNameCall(dynamicScope);
+								var name = (string)compiledNameCall.GetObjectDynamic(dynamicScope);
 								if (dynamicScope.CanResolve(finalType, name))
 								{
 									return dynamicScope.Resolve(finalType, name);
@@ -168,7 +174,13 @@ namespace Rezolver
 					: null;
 				var resolvedTarget = scopeContainer.Fetch(_resolveType, name);
 				if (resolvedTarget == null)
-					throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
+					//when null, we simply emit a call back into the rezolver to be executed at runtime which should throw an exception
+					return
+						Expression.Convert(
+							Expression.Call(Expression.Constant(scopeContainer, typeof (IRezolverContainer)), ContainerResolveMethod,
+								new Expression[] { Expression.Constant(_resolveType, typeof(Type)), Expression.Constant(name, typeof(string)), Expression.Constant(null, typeof(IRezolverContainer)) }), targetType ?? DeclaredType);
+
+					//throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
 				return resolvedTarget.CreateExpression(scopeContainer, targetType: targetType, currentTargets: currentTargets);
 			}
 		}
