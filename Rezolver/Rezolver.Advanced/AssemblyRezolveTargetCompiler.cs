@@ -166,10 +166,10 @@ namespace Rezolver
 			var ilgen = methodBuilder.GetILGenerator();
 			ilgen.Emit(OpCodes.Ldarg_1);
 			ilgen.EmitCall(OpCodes.Call, staticGetObjectDynamicMethod, new Type[0]);
+
 			if (staticGetObjectDynamicMethod.ReturnType.IsValueType)
 				ilgen.Emit(OpCodes.Box);
-			//else
-			//	ilgen.Emit(OpCodes.Castclass, typeof(object));
+			
 			ilgen.Emit(OpCodes.Ret);
 			return methodBuilder;
 		}
