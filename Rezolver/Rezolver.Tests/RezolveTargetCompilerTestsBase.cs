@@ -49,8 +49,7 @@ namespace Rezolver.Tests
 		public void ShouldCompileConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<Transient>(), CreateContainerScopeMock(compiler),
-				ExpressionHelper.DynamicContainerParam, null);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<Transient>(), CreateContainerScopeMock(compiler));
 			Assert.IsNotNull(target);
 			var lastCount = Transient.Counter;
 			var result = target.GetObject();
@@ -82,13 +81,9 @@ namespace Rezolver.Tests
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			//need a special mock for this
-			var mockContainer = new Mock<IRezolverContainer>();
-			mockContainer.Setup(r => r.Compiler).Returns(compiler);
-			mockContainer.Setup(r => r.Fetch(typeof (ISingleton), null))
-				.Returns(new SingletonTarget(ConstructorTarget.Auto<Singleton>()));
-			mockContainer.Setup(r => r.Fetch(typeof (ITransient), null))
-				.Returns(ConstructorTarget.Auto<Transient>());
-
+			var mockContainer = CreateDefaultMockContainer(compiler);
+			AddSingletonTargetToScopeMock(mockContainer);
+			AddTransientTargetToScopeMock(mockContainer);
 			var target = compiler.CompileTarget(ConstructorTarget.Auto<Composite>(), mockContainer.Object);
 			Assert.IsNotNull(target);
 			var lastSingletonCount = Singleton.Counter = 0;
@@ -106,15 +101,34 @@ namespace Rezolver.Tests
 			Assert.AreEqual(++lastTransientCount, Transient.Counter);
 		}
 
-
 		[TestMethod]
 		public void ShouldCompileSuperComplexConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var mockContainer = new Mock<IRezolverContainer>();
-			mockContainer.Setup(r => r.Compiler).Returns(compiler);
+			var mockContainer = CreateDefaultMockContainer(compiler);
 
 			AddIntObjectTargetToScopeMock(mockContainer);
+			AddNullableIntTargetToScopeMock(mockContainer);
+			AddStringTargetToScopeMock(mockContainer);
+			AddTransientTargetToScopeMock(mockContainer);
+			AddSingletonTargetToScopeMock(mockContainer);
+			AddCompositeTargetToScopeMock(mockContainer);
+
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<SuperComplex>(), mockContainer.Object);
+			Assert.IsNotNull(target);
+			var result = target.GetObject();
+			Assert.IsInstanceOfType(result, typeof (SuperComplex));
+			var result2 = (ISuperComplex)result;
+			Assert.AreEqual(IntForObjectTarget, result2.Int);
+			Assert.AreEqual(NullableIntForObjectTarget, result2.NullableInt);
+			Assert.AreEqual(StringForObjectTarget, result2.String);
+			Assert.IsNotNull(result2.Transient);
+			Assert.IsNotNull(result2.Singleton);
+			Assert.IsNotNull(result2.Composite);
+			Assert.IsNotNull(result2.Composite.Transient);
+			Assert.AreNotSame(result2.Transient, result2.Composite.Transient);
+			Assert.IsNotNull(result2.Composite.Singleton);
+			Assert.AreSame(result2.Singleton, result2.Composite.Singleton);
 		}
 
 		[TestMethod]
