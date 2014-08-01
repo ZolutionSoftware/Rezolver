@@ -46,7 +46,60 @@ namespace Rezolver.Tests
 		}
 
 		[TestMethod]
-		public void ShouldCompileConstructorTarget()
+		public void ShouldCompileRequiresIntConstructorTarget()
+		{
+			IRezolveTargetCompiler compiler = CreateCompiler();
+			var container = CreateDefaultMockForContainer(compiler);
+			AddIntTargetToScopeMock(container);
+
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), container.Object);
+			var result = target.GetObject();
+			Assert.IsInstanceOfType(result, typeof (RequiresInt));
+			Assert.AreEqual(IntForObjectTarget, ((IRequiresInt) result).Int);
+		}
+
+		[TestMethod]
+		public void ShouldCompileRequiresNullableIntConstructorTarget()
+		{
+			IRezolveTargetCompiler compiler = CreateCompiler();
+			var container = CreateDefaultMockForContainer(compiler);
+			AddNullableIntTargetToScopeMock(container);
+
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), container.Object);
+			var result = target.GetObject();
+			Assert.IsInstanceOfType(result, typeof(RequiresNullableInt));
+			Assert.AreEqual(NullableIntForObjectTarget, ((IRequiresNullableInt)result).NullableInt);
+		}
+
+		[TestMethod]
+		public void ShouldCompileRequiresIntConstructorTarget_WithNullable()
+		{
+			IRezolveTargetCompiler compiler = CreateCompiler();
+			var container = CreateDefaultMockForContainer(compiler);
+			//I think we should be able to register a nullable int for an int
+			AddNullableIntTargetToScopeMock(container, typeof(int));
+
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), container.Object);
+			var result = target.GetObject();
+			Assert.IsInstanceOfType(result, typeof(RequiresInt));
+			Assert.AreEqual(NullableIntForObjectTarget, ((IRequiresInt)result).Int);
+		}
+
+		[TestMethod]
+		public void ShouldCompileRequiresNullableIntConstructorTarget_WithInt()
+		{
+			IRezolveTargetCompiler compiler = CreateCompiler();
+			var container = CreateDefaultMockForContainer(compiler);
+			AddIntTargetToScopeMock(container, typeof(int?));
+
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), container.Object);
+			var result = target.GetObject();
+			Assert.IsInstanceOfType(result, typeof(RequiresNullableInt));
+			Assert.AreEqual(IntForObjectTarget, ((IRequiresNullableInt)result).NullableInt);
+		}
+
+		[TestMethod]
+		public void ShouldCompileTransientConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			var target = compiler.CompileTarget(ConstructorTarget.Auto<Transient>(), CreateContainerScopeMock(compiler));
@@ -59,7 +112,7 @@ namespace Rezolver.Tests
 		}
 
 		[TestMethod]
-		public void ShouldCompileConstructorTargetAsSingleton()
+		public void ShouldCompileSingletonConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			var target = compiler.CompileTarget(new SingletonTarget(ConstructorTarget.Auto<Singleton>()),
@@ -81,7 +134,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			//need a special mock for this
-			var mockContainer = CreateDefaultMockContainer(compiler);
+			var mockContainer = CreateDefaultMockForContainer(compiler);
 			AddSingletonTargetToScopeMock(mockContainer);
 			AddTransientTargetToScopeMock(mockContainer);
 			var target = compiler.CompileTarget(ConstructorTarget.Auto<Composite>(), mockContainer.Object);
@@ -105,9 +158,9 @@ namespace Rezolver.Tests
 		public void ShouldCompileSuperComplexConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var mockContainer = CreateDefaultMockContainer(compiler);
+			var mockContainer = CreateDefaultMockForContainer(compiler);
 
-			AddIntObjectTargetToScopeMock(mockContainer);
+			AddIntTargetToScopeMock(mockContainer);
 			AddNullableIntTargetToScopeMock(mockContainer);
 			AddStringTargetToScopeMock(mockContainer);
 			AddTransientTargetToScopeMock(mockContainer);

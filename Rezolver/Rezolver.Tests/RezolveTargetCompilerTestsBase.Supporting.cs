@@ -21,6 +21,9 @@ namespace Rezolver.Tests
 			new Lazy<ObjectTarget>(() => NullableIntForObjectTarget.AsObjectTarget());
 		private static readonly int? NullableIntForObjectTarget = 1;
 
+		private readonly Lazy<ConstructorTarget> _requiresIntTarget
+			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<RequiresInt>);
+
 		private readonly Lazy<ConstructorTarget> _transientConstructorTarget
 			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<Transient>);
 
@@ -51,7 +54,7 @@ namespace Rezolver.Tests
 			return mock.Object;
 		}
 
-		protected Mock<IRezolverContainer> CreateDefaultMockContainer(IRezolveTargetCompiler compiler)
+		protected Mock<IRezolverContainer> CreateDefaultMockForContainer(IRezolveTargetCompiler compiler)
 		{
 			var mockContainer = new Mock<IRezolverContainer>();
 			AddCompilerToScopeMock(mockContainer, compiler);
@@ -71,7 +74,7 @@ namespace Rezolver.Tests
 			mock.Setup(r => r.Fetch(forType, null)).Returns(target);
 		}
 
-		protected void AddIntObjectTargetToScopeMock(Mock<IRezolverContainer> mock, Type forType = null)
+		protected void AddIntTargetToScopeMock(Mock<IRezolverContainer> mock, Type forType = null)
 		{
 			AddTargetToScopeMock(mock, forType ?? typeof (int), _intObjectTarget.Value);
 		}

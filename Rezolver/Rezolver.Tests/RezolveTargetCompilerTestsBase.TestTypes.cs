@@ -23,6 +23,36 @@ namespace Rezolver.Tests
 			}
 		}
 
+		public interface IRequiresInt
+		{
+			int Int { get; }
+		}
+
+		public class RequiresInt : IRequiresInt
+		{
+			public RequiresInt(int @int)
+			{
+				Int = @int;
+			}
+
+			public int Int { get; private set; }
+		}
+
+		public interface IRequiresNullableInt
+		{
+			int? NullableInt { get; }
+		}
+
+		public class RequiresNullableInt : IRequiresNullableInt
+		{
+			public int? NullableInt { get; private set; }
+
+			public RequiresNullableInt(int? nullableInt)
+			{
+				NullableInt = nullableInt;
+			}
+		}
+
 		public interface ISingleton { }
 
 		public class Singleton : ISingleton

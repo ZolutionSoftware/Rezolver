@@ -58,7 +58,7 @@ namespace Rezolver
 	{
 		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null)
 		{
-			return new ObjectTarget(obj, declaredType);
+			return new ObjectTarget(obj, declaredType ?? typeof(T));
 		}
 	}
 }
