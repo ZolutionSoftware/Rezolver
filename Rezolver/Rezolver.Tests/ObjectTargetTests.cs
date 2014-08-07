@@ -22,16 +22,6 @@ namespace Rezolver.Tests
 		}
 
 		[TestMethod]
-		public void ShouldDeclareTypeAsNullable()
-		{
-			
-			Nullable<int> ii;
-			int? i = null;
-			IRezolveTarget target = new ObjectTarget(i);
-			Assert.AreEqual(typeof (int?), target.DeclaredType);
-		}
-
-		[TestMethod]
 		public void ShouldWrapNullableWithNonNullable()
 		{
 			IRezolveTarget target = new ObjectTarget(1, typeof(int?));

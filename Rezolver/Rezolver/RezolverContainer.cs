@@ -2,54 +2,98 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Rezolver
 {
+	public abstract class RezolverContainerBase : IRezolverContainer
+	{
+		protected RezolverContainerBase()
+		{
+		}
+
+		protected RezolverContainerBase(IRezolverScope scope, IRezolveTargetCompiler compiler = null)
+		{
+			_scope = scope;
+			_compiler = compiler;
+		}
+
+		private IRezolveTargetCompiler _compiler;
+		public virtual IRezolveTargetCompiler Compiler
+		{
+			get { return _compiler; }
+			protected set
+			{
+				if (_compiler != null)
+					throw new InvalidOperationException("Once the compiler is set, it cannot be changed.");
+				_compiler = value;
+			}
+		}
+
+		private IRezolverScope _scope;
+		protected virtual IRezolverScope Scope
+		{
+			get { return _scope; }
+			set
+			{
+				if (_scope != null)
+					throw new InvalidOperationException("Once the scope has been set, it cannot be changed.");
+				_scope = value;
+			}
+		}
+
+		public abstract object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null);
+
+		public abstract T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null);
+
+		public abstract IRezolverContainer CreateLifetimeContainer();
+
+		public virtual bool CanResolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
+		{
+			//TODO: Change this to refer to the cache (once I've figured out how to do it based on the new compiler)
+			return Scope.Fetch(type, name) != null;
+		}
+
+		public virtual bool CanResolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
+		{
+			//TODO: And again - change this to refer to the cache
+			return Scope.Fetch<T>(name) != null;
+		}
+
+		public virtual void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
+		{
+			//you are not allowed to register targets directly into a container
+			throw new NotSupportedException();
+		}
+
+		public virtual IRezolveTarget Fetch(Type type, string name = null)
+		{
+			return Scope.Fetch(type, name);
+		}
+
+		public virtual IRezolveTarget Fetch<T>(string name = null)
+		{
+			return Scope.Fetch(typeof(T), name);
+		}
+
+		public virtual INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false)
+		{
+			//if the caller potentially wants a new named scope, we don't support the call.
+			if (create) throw new NotSupportedException();
+
+			return Scope.GetNamedScope(path, false);
+		}
+	}
+
 	/// <summary>
 	/// </summary>
-	public class RezolverContainer : IRezolverContainer
+	public class RezolverContainer : RezolverContainerBase
 	{
 		#region nested cache types
-
-		//private static readonly MethodInfo MakeCacheEntryStaticGeneric = typeof(RezolverContainer).GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
-		//	.SingleOrDefault(mi => mi.Name == "MakeCacheEntry" && mi.IsGenericMethod);
-
-		//note here - the signature of the static container is the same as the dynamic one, 
-		//but you should be aware that a static container will simply ignore any dynamic
-		//container that's passed to it when executed.
-
-		//private static readonly
-		//		Dictionary<Type, Lazy<MakeCacheEntryDelegate>>
-		//		LateBoundCacheEntryLookup =
-		//			new Dictionary
-		//				<Type, Lazy<MakeCacheEntryDelegate>>();
 
 		private static readonly
 			Dictionary<Type, ICompiledRezolveTarget>
 			CacheMisses = new Dictionary<Type, ICompiledRezolveTarget>();
-
-		//private static ICacheEntry MakeCacheEntry(Type returnType, IRezolveTarget target, RezolverContainer container)
-		//{
-		//	Lazy<MakeCacheEntryDelegate> lazy = null;
-		//	//TODO: add a lock.
-		//	if (!LateBoundCacheEntryLookup.TryGetValue(returnType, out lazy))
-		//	{
-		//		LateBoundCacheEntryLookup[returnType] = lazy = new Lazy<MakeCacheEntryDelegate>(
-		//			() => (MakeCacheEntryDelegate)Delegate.CreateDelegate(typeof(MakeCacheEntryDelegate),
-		//				MakeCacheEntryStaticGeneric.MakeGenericMethod(returnType)));
-		//	}
-
-		//	return lazy.Value(target, container);
-		//}
-
-		//private static ICacheEntry MakeCacheEntry<TTarget>(IRezolveTarget target, RezolverContainer container)
-		//{
-		//	//yup - compiling every version that we might need in advance.
-		//	return new CacheEntry<TTarget>(container.Compiler.CompileStatic<TTarget>(target, container), container.Compiler.CompileDynamic<TTarget>(target, container, dynamicContainerExpression: ExpressionHelper.DynamicContainerParam),
-		//		container.Compiler.CompileStatic(target, container, typeof(TTarget)), container.Compiler.CompileDynamic(target, container, dynamicContainerExpression: ExpressionHelper.DynamicContainerParam, targetType: typeof(TTarget)));
-		//}
 
 		private static ICompiledRezolveTarget MakeCacheMiss(Type target)
 		{
@@ -58,9 +102,7 @@ namespace Rezolver
 			if (CacheMisses.TryGetValue(target, out result))
 				return result;
 
-			//Type cacheMissType = typeof(MissingCompiledTarget<>).MakeGenericType(target);
 			return CacheMisses[target] = new MissingCompiledTarget(target);
-				//(ICompiledRezolveTarget)Activator.CreateInstance(cacheMissType);
 		}
 
 		protected struct CacheKey : IEquatable<CacheKey>
@@ -116,18 +158,6 @@ namespace Rezolver
 				throw new InvalidOperationException(string.Format("Could not resolve type {0}", _type));
 			}
 
-			/*public TTarget GetObjectDynamic(IRezolverContainer dynamicContainer)
-			{
-				if (dynamicContainer != null)
-					return dynamicContainer.Resolve<TTarget>();
-				throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
-			}
-
-			public TTarget GetObject()
-			{
-				throw new InvalidOperationException(string.Format("Could not resolve type {0}", typeof(TTarget)));
-			}*/
-
 			public object GetObjectDynamic(IRezolverContainer dynamicContainer)
 			{
 				throw new InvalidOperationException(string.Format("Could not resolve type {0}", _type));
@@ -137,10 +167,6 @@ namespace Rezolver
 		#endregion
 
 		/// <summary>
-		/// scope from which this container is built
-		/// </summary>
-		private readonly IRezolverScope _scope;
-		/// <summary>
 		/// This cache is for factories resolved by type only
 		/// </summary>
 		private readonly Dictionary<Type, ICompiledRezolveTarget> _typeOnlyCacheEntries = new Dictionary<Type, ICompiledRezolveTarget>();
@@ -148,35 +174,15 @@ namespace Rezolver
 		/// This cache is for factories resolved by type and name
 		/// </summary>
 		private readonly Dictionary<CacheKey, ICompiledRezolveTarget> _namedCacheEntries = new Dictionary<CacheKey, ICompiledRezolveTarget>();
-
-		private readonly IRezolveTargetCompiler _compiler;
-
-		public IRezolveTargetCompiler Compiler
-		{
-			get { return _compiler; }
-		}
+		
 
 		public RezolverContainer(IRezolverScope scope, IRezolveTargetCompiler compiler = null)
+			: base(scope, compiler)
 		{
-			//TODO: check for null scope.
-			_scope = scope;
-			_compiler = compiler ?? RezolveTargetCompiler.Default;
+			
 		}
 
-		public bool CanResolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
-		{
-			//TODO: Change this to refer to the cache (once I've figured out how to do it based on the new compiler)
-			return _scope.Fetch(type, name) != null;
-			//return RezolverCache.GetFactory(type, CreateFactoryFunc, name) != null;
-		}
-
-		public bool CanResolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
-		{
-			//TODO: And again - change this to refer to the cache
-			return _scope.Fetch<T>(name) != null;
-		}
-
-		public object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
+		public override object Resolve(Type type, string name = null, IRezolverContainer dynamicContainer = null)
 		{
 			//I actually wonder whether this should chain up to the dynamic container on the caller's
 			//behalf or not - the caller could just do it themselves.
@@ -189,13 +195,11 @@ namespace Rezolver
 				return (name == null ?
 					 GetCompiledRezolveTarget(type)
 					 : GetCompiledRezolveTarget(new CacheKey(type, name))).GetObjectDynamic(dynamicContainer); 
-				//return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObjectDynamic(dynamicContainer);
 			}
 
 			return (name == null ?
 					 GetCompiledRezolveTarget(type)
 					 : GetCompiledRezolveTarget(new CacheKey(type, name))).GetObject(); 
-			//return GetCompiledRezolveTarget(new CacheKey(type, name)).GetObject();
 		}
 
 		private ICompiledRezolveTarget GetCompiledRezolveTarget(CacheKey key)
@@ -224,7 +228,7 @@ namespace Rezolver
 			return _typeOnlyCacheEntries[type] = MakeCacheMiss(type);
 		}
 
-		public T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
+		public override T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null)
 		{
 			//I actually wonder whether this should chain up to the dynamic container on the caller's
 			//behalf or not - the caller could just do it themselves.
@@ -241,50 +245,9 @@ namespace Rezolver
 			return (T)GetCompiledRezolveTarget(new CacheKey(typeof(T), name)).GetObject();
 		}
 
-		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
+		public override IRezolverContainer CreateLifetimeContainer()
 		{
-			//you are not allowed to register targets directly into a container
-			throw new NotSupportedException();
-		}
-
-		public IRezolveTarget Fetch(Type type, string name = null)
-		{
-			return _scope.Fetch(type, name);
-		}
-
-		public IRezolveTarget Fetch<T>(string name = null)
-		{
-			return _scope.Fetch(typeof(T), name);
-		}
-
-		public INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false)
-		{
-			//if the caller potentially wants a new named scopee, wwe don't support the call.
-			if (create) throw new NotSupportedException();
-
-			return _scope.GetNamedScope(path, false);
-		}
-	}
-
-	public static class RezolveTargetCompiler
-	{
-		private static IRezolveTargetCompiler _default;
-
-		private class StubCompiler : IRezolveTargetCompiler
-		{
-			public static readonly StubCompiler Instance = new StubCompiler();
-
-			public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope,
-				ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack)
-			{
-				throw new NotImplementedException("You must set the RezolveTargetCompiler.Default to a non-null reference to a compiler if you intend to use the system default rezolver compiler.");
-			}
-		}
-
-		public static IRezolveTargetCompiler Default
-		{
-			get { return _default ?? StubCompiler.Instance; }
-			set { _default = value; }
+			throw new NotImplementedException();
 		}
 	}
 }

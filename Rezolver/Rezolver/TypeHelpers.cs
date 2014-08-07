@@ -20,6 +20,9 @@ namespace Rezolver
 			if (to.IsAssignableFrom(from))
 				return true;
 
+			Type nulledType = null;
+			return IsNullableType(@from, out nulledType) && to.IsAssignableFrom(nulledType);
+
 			//if (to.IsValueType)
 			//{
 			//	if (type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
@@ -27,13 +30,11 @@ namespace Rezolver
 			//	return false;
 			//}
 			//return true;
-
-			return false;
 		}
 
 		internal static bool IsNullableType(Type type)
 		{
-			return type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
+			return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 		}
 
 		internal static bool IsNullableType(Type type, out Type nulledType)
@@ -43,7 +44,7 @@ namespace Rezolver
 			if(!type.IsGenericType)
 				return false;
 			var genType = type.GetGenericTypeDefinition();
-			if (!genType.Equals(typeof(Nullable<>)))
+			if (genType != typeof(Nullable<>))
 				return false;
 
 			nulledType = type.GetGenericArguments()[0];

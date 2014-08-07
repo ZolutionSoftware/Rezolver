@@ -53,5 +53,7 @@ namespace Rezolver
 		/// <param name="dynamicContainer"></param>
 		/// <returns></returns>
 		T Resolve<T>(string name = null, IRezolverContainer dynamicContainer = null);
+
+		IRezolverContainer CreateLifetimeContainer();
 	}
 }

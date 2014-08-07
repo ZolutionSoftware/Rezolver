@@ -81,6 +81,7 @@
     <Compile Include="RezolverContainerTests_Generic.cs" />
     <Compile Include="RezolveTargetDelegateCompilerTests.cs" />
     <Compile Include="AssemblyRezolveTargetCompilerTests.cs" />
+    <Compile Include="LifeTimeRezolverContainerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">
