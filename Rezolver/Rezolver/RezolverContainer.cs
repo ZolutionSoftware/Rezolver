@@ -132,7 +132,7 @@ namespace Rezolver
 			return (T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObject();
 		}
 
-		public virtual IRezolverContainer CreateLifetimeContainer()
+		public virtual ILifetimeRezolverContainer CreateLifetimeContainer()
 		{
 			return new LifetimeRezolverContainer(this);
 		}
