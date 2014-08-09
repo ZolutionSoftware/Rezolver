@@ -94,5 +94,29 @@ namespace Rezolver.Tests
 			Assert.IsTrue(instance.Disposed);
 			Assert.AreEqual(1, instance.DisposeCount);
 		}
+
+		[TestMethod]
+		public void ShouldDisposeNestedScopeFirst()
+		{
+			var mockContainer = CreateMock();
+			int totalDisposeCount = DisposableType.TotalDisposeCount;
+			ITestDisposable instance = null;
+			ITestDisposable instance2 = null;
+			using (var lifetime = mockContainer.Object.CreateLifetimeContainer())
+			{
+				instance = (ITestDisposable)lifetime.Resolve(typeof (ITestDisposable));
+				using (var lifetime2 = mockContainer.Object.CreateLifetimeContainer())
+				{
+					instance2 = (ITestDisposable) lifetime2.Resolve(typeof (ITestDisposable));
+				}
+				Assert.IsTrue(instance2.Disposed);
+				Assert.IsFalse(instance.Disposed);
+			}
+			Assert.IsTrue(instance.Disposed);
+			Assert.AreEqual(1, instance.DisposeCount);
+			Assert.AreEqual(1, instance2.DisposeCount);
+			Assert.AreEqual(totalDisposeCount + 2, DisposableType.TotalDisposeCount);
+
+		}
 	}
 }

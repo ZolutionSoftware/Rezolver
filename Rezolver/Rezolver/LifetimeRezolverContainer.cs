@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Rezolver
 {
 	public class LifetimeRezolverContainer : CachingRezolverContainer, ILifetimeRezolverContainer
 	{
+		private List<ILifetimeRezolverContainer> _childContainers;
 		private Dictionary<RezolverKey, List<IDisposable>> _disposables;
 
 		public override IRezolveTargetCompiler Compiler
@@ -28,6 +30,7 @@ namespace Rezolver
 		private readonly IRezolverContainer _parentContainer;
 		public LifetimeRezolverContainer(IRezolverContainer parentContainer)
 		{
+			_childContainers = new List<ILifetimeRezolverContainer>();
 			_parentContainer = parentContainer;
 			_disposables = new Dictionary<RezolverKey, List<IDisposable>>();
 			_disposing = _disposed = false;
@@ -77,7 +80,9 @@ namespace Rezolver
 			//parent scope.
 
 			//this implementation - calling the base - will not do for both cases.
-			return base.CreateLifetimeContainer();
+			var toReturn = base.CreateLifetimeContainer();
+			_childContainers.Add(toReturn);
+			return toReturn;
 		}
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly", Justification="The object has no finalizer")]
@@ -86,6 +91,11 @@ namespace Rezolver
 			if (_disposed || _disposing)
 				return;
 			_disposing = true;
+			foreach (var child in _childContainers)
+			{
+				child.Dispose();
+			}
+
 			foreach (var kvp in _disposables)
 			{
 				foreach (var disposable in kvp.Value)
@@ -93,6 +103,8 @@ namespace Rezolver
 					disposable.Dispose();
 				}
 			}
+			_disposed = true;
+			_disposing = false;
 		}
 	}
 }
