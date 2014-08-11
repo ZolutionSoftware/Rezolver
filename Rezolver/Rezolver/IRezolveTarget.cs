@@ -19,15 +19,15 @@ namespace Rezolver
 		/// might be expected to handle a dynamic container being passed to it at run time to enable dynamic per-target overriding
 		/// from other containers.
 		/// </summary>
-		/// <param name="containerScope">The rezolver container that defines the scope in which this expression
-		///   is being built.  Note that this is a 'compile-time' scope and should be used during expression-building
+		/// <param name="rezolver">The rezolver container that defines the Builder in which this expression
+		///   is being built.  Note that this is a 'compile-time' Builder and should be used during expression-building
 		///   time to resolve any other targets that might be required </param>
 		/// <param name="targetType"></param>
-		/// <param name="dynamicContainerExpression">If this is non-null, then the returned expression should cater for the 
+		/// <param name="dynamicRezolverExpression">If this is non-null, then the returned expression should cater for the 
 		/// fact that a dynamic container will be passed to any delegate built from this expression at run time.</param>
 		/// <param name="currentTargets"></param>
 		/// <returns></returns>
-		Expression CreateExpression(IRezolverContainer containerScope, Type targetType = null, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null);
+		Expression CreateExpression(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null);
 		Type DeclaredType { get; }
 	}
 }

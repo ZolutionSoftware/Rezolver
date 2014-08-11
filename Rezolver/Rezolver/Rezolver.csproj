@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICompiledRezolveTarget.cs" />
-    <Compile Include="ChildRezolverScope.cs" />
+    <Compile Include="ChildRezolverBuilder.cs" />
     <Compile Include="ConstructorTarget.cs" />
     <Compile Include="DefaultTarget.cs" />
     <Compile Include="DelegateTarget.cs" />
@@ -52,22 +52,21 @@
     <Compile Include="ExpressionTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\Linq\Expressions\ExpressionExtensions.cs" />
-    <Compile Include="ICompiledRezolveTarget`1.cs" />
-    <Compile Include="ILifetimeRezolverContainer.cs" />
-    <Compile Include="IRezolverContainer.cs" />
+    <Compile Include="ILifetimeRezolver.cs" />
+    <Compile Include="IRezolver.cs" />
     <Compile Include="IRezolveTargetCompiler.cs" />
     <Compile Include="IRezolveTargetAdapter.cs" />
     <Compile Include="Extensions\System\MustBeExtensions.cs" />
-    <Compile Include="IChildRezolverScope.cs" />
-    <Compile Include="INamedRezolverScope.cs" />
-    <Compile Include="IRezolverScope.cs" />
-    <Compile Include="LifetimeRezolverContainer.cs" />
+    <Compile Include="IChildRezolverBuilder.cs" />
+    <Compile Include="INamedRezolverBuilder.cs" />
+    <Compile Include="IRezolverBuilder.cs" />
+    <Compile Include="LifetimeRezolver.cs" />
     <Compile Include="RezolvedTarget.cs" />
-    <Compile Include="RezolverContainer.cs" />
+    <Compile Include="Rezolver.cs" />
     <Compile Include="RezolverScopeExtensions.cs" />
     <Compile Include="IRezolveTarget.cs" />
     <Compile Include="MethodCallExtractor.cs" />
-    <Compile Include="NamedRezolverScope.cs" />
+    <Compile Include="NamedRezolverBuilder.cs" />
     <Compile Include="ParameterBinding.cs" />
     <Compile Include="RezolverScopePath.cs" />
     <Compile Include="RezolveTargetCompiler.cs" />
@@ -82,7 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Exceptions.resx</DependentUpon>
     </Compile>
-    <Compile Include="RezolverScope.cs" />
+    <Compile Include="RezolverBuilder.cs" />
     <Compile Include="RezolveTargetBase.cs" />
     <Compile Include="TypeHelpers.cs" />
   </ItemGroup>

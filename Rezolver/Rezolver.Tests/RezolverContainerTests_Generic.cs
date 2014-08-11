@@ -10,9 +10,9 @@ namespace Rezolver.Tests
 		//[TestMethod]
 		//public void TestMethod1()
 		//{
-		//	Mock<IRezolverScope> scopeMock = new Mock<IRezolverScope>();
+		//	Mock<IRezolverBuilder> scopeMock = new Mock<IRezolverBuilder>();
 		//	scopeMock.Setup(s => s.Fetch<int>(null)).Returns(1.AsObjectTarget()).Verifiable();
-		//	RezolverContainer container = new RezolverContainer(scopeMock.Object);
+		//	Rezolver container = new Rezolver(scopeMock.Object);
 		//	int i = container.Resolve<int>((string) null);
 		//	Assert.AreEqual(1, i);
 

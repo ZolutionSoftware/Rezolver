@@ -9,9 +9,9 @@ namespace Rezolver.Tests
 		public void ShouldSupportNamedRegistration()
 		{
 			IRezolveTarget target = new ObjectTarget("hello world");
-			IRezolverScope scope = new RezolverScope();
-			scope.Register(target, path: "name");
-			var target2 = scope.Fetch(typeof (string), "name");
+			IRezolverBuilder builder = new RezolverBuilder();
+			builder.Register(target, path: "name");
+			var target2 = builder.Fetch(typeof (string), "name");
 			Assert.AreEqual(target, target2);
 
 		}
@@ -21,11 +21,11 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget target1 = new ObjectTarget("hello world");
 			IRezolveTarget target2 = new ObjectTarget("hello universe");
-			IRezolverScope scope = new RezolverScope();
-			scope.Register(target1, path: "string1");
-			scope.Register(target2, path: "string2");
-			var target1B = scope.Fetch(typeof (string), name: "string1");
-			var target2B = scope.Fetch(typeof (string), name: "string2");
+			IRezolverBuilder builder = new RezolverBuilder();
+			builder.Register(target1, path: "string1");
+			builder.Register(target2, path: "string2");
+			var target1B = builder.Fetch(typeof (string), name: "string1");
+			var target2B = builder.Fetch(typeof (string), name: "string2");
 
 			Assert.AreEqual(target1, target1B);
 			Assert.AreEqual(target2, target2B);
@@ -35,12 +35,12 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldSupportHierarchicalNaming()
 		{
-			IRezolverScope scope = new RezolverScope();
-			INamedRezolverScope childScope = scope.GetNamedScope("parent.child", create: true);
-			Assert.IsNotNull(childScope);
-			Assert.AreEqual("child", childScope.Name);
-			INamedRezolverScope parentScope = scope.GetNamedScope("parent", create: false);
-			Assert.AreEqual("parent", parentScope.Name);
+			IRezolverBuilder builder = new RezolverBuilder();
+			INamedRezolverBuilder childBuilder = builder.GetNamedScope("parent.child", create: true);
+			Assert.IsNotNull(childBuilder);
+			Assert.AreEqual("child", childBuilder.Name);
+			INamedRezolverBuilder parentBuilder = builder.GetNamedScope("parent", create: false);
+			Assert.AreEqual("parent", parentBuilder.Name);
 		}
 	}
 }

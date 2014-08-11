@@ -26,8 +26,8 @@ namespace Rezolver.Tests
 
 	public class SpecialRezolveTargetCompiler : IRezolveTargetCompiler
 	{
-		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope,
-			ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack)
+		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver scope,
+			ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
 		{
 			throw new NotImplementedException();
 		}

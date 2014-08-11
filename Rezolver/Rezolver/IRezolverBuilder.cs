@@ -2,7 +2,7 @@
 
 namespace Rezolver
 {
-	public interface IRezolverScope
+	public interface IRezolverBuilder
 	{
 		/// <summary>
 		/// Registers a target, optionally for a particular target type and optionally
@@ -16,23 +16,23 @@ namespace Rezolver
 		void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null);
 		/// <summary>
 		/// Searches for a target for a particular type and optionally
-		/// under a particular named scope (or scopes).
+		/// under a particular named Builder (or scopes).
 		/// </summary>
 		/// <param name="type">Required.  The type to be searched.</param>
-		/// <param name="name">Optional.  The named scope or scopes to be searched.</param>
+		/// <param name="name">Optional.  The named Builder or scopes to be searched.</param>
 		/// <returns></returns>
 		IRezolveTarget Fetch(Type type, string name = null);
 		IRezolveTarget Fetch<T>(string name = null);
 		
 
 		/// <summary>
-		/// Retrieves, after optionally creating, a named scope from this scope.
+		/// Retrieves, after optionally creating, a named Builder from this Builder.
 		/// </summary>
-		/// <param name="path">Required.  The path of the scope to be retrieved or created.</param>
-		/// <param name="create">If the scope(s) do/does not exist, this parameter is used to specify whether you
+		/// <param name="path">Required.  The path of the Builder to be retrieved or created.</param>
+		/// <param name="create">If the Builder(s) do/does not exist, this parameter is used to specify whether you
 		///   want it/them to be created.</param>
-		/// <returns>Null if no scope is found.  Otherwise the scope that was found or created.</returns>
-		INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false);
+		/// <returns>Null if no Builder is found.  Otherwise the Builder that was found or created.</returns>
+		INamedRezolverBuilder GetNamedScope(RezolverScopePath path, bool create = false);
 
 		
 

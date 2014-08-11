@@ -19,8 +19,8 @@ namespace Rezolver
 		{
 			public static readonly StubCompiler Instance = new StubCompiler();
 
-			public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope,
-				ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack)
+			public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver scope,
+				ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
 			{
 				throw new NotImplementedException("You must set the RezolveTargetCompiler.Default to a non-null reference to a compiler if you intend to use the system default rezolver compiler.");
 			}

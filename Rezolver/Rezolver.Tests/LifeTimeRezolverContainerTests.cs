@@ -37,10 +37,10 @@ namespace Rezolver.Tests
 			}
 		}
 
-		private static Mock<IRezolverContainer> CreateMock()
+		private static Mock<IRezolver> CreateMock()
 		{
-			Mock<IRezolverContainer> parentContainerMock = new Mock<IRezolverContainer>();
-			parentContainerMock.Setup(c => c.CreateLifetimeContainer()).Returns(() => new LifetimeRezolverContainer(parentContainerMock.Object));
+			Mock<IRezolver> parentContainerMock = new Mock<IRezolver>();
+			parentContainerMock.Setup(c => c.CreateLifetimeContainer()).Returns(() => new LifetimeRezolver(parentContainerMock.Object));
 			parentContainerMock.Setup(c => c.Resolve(typeof(ITestDisposable), null, null)).Returns(() => new DisposableType());
 			return parentContainerMock;
 		}
@@ -48,7 +48,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldDisposeOnceOly()
 		{
-			Mock<IRezolverContainer> parentContainerMock = CreateMock();
+			Mock<IRezolver> parentContainerMock = CreateMock();
 			ITestDisposable instance = null;
 			using (var lifetime = parentContainerMock.Object.CreateLifetimeContainer())
 			{
@@ -113,6 +113,29 @@ namespace Rezolver.Tests
 				Assert.IsFalse(instance.Disposed);
 			}
 			Assert.IsTrue(instance.Disposed);
+			Assert.AreEqual(1, instance.DisposeCount);
+			Assert.AreEqual(1, instance2.DisposeCount);
+			Assert.AreEqual(totalDisposeCount + 2, DisposableType.TotalDisposeCount);
+		}
+
+		[TestMethod]
+		public void ShouldAutoDisposeNestedScope()
+		{
+			var mockContainer = CreateMock();
+			int totalDisposeCount = DisposableType.TotalDisposeCount;
+			ITestDisposable instance = null;
+			ITestDisposable instance2 = null;
+			using (var lifetime = mockContainer.Object.CreateLifetimeContainer())
+			{
+				instance = (ITestDisposable) lifetime.Resolve(typeof (ITestDisposable));
+				//create an inner scope but don't dispose it - it should be auto-disposed by the
+				//parent scope when it is disposed.
+				var lifetime2 = lifetime.CreateLifetimeContainer();
+				instance2 = (ITestDisposable)lifetime2.Resolve(typeof (ITestDisposable));
+			}
+
+			Assert.IsTrue(instance.Disposed);
+			Assert.IsTrue(instance2.Disposed);
 			Assert.AreEqual(1, instance.DisposeCount);
 			Assert.AreEqual(1, instance2.DisposeCount);
 			Assert.AreEqual(totalDisposeCount + 2, DisposableType.TotalDisposeCount);

@@ -23,10 +23,10 @@ namespace Rezolver
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			return Expression.New(_ctor,
-				_parameterBindings.Select(pb => pb.Target.CreateExpression(scopeContainer, targetType: pb.Parameter.ParameterType, dynamicContainerExpression: dynamicContainerExpression, currentTargets: currentTargets)));
+				_parameterBindings.Select(pb => pb.Target.CreateExpression(rezolver, targetType: pb.Parameter.ParameterType, dynamicRezolverExpression: dynamicRezolverExpression, currentTargets: currentTargets)));
 		}
 
 		public override Type DeclaredType
@@ -59,7 +59,7 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]));
 		}
 
-		public static ConstructorTarget For<T>(Expression<Func<IRezolverScope, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
+		public static ConstructorTarget For<T>(Expression<Func<IRezolverBuilder, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			NewExpression newExprBody = null;
 			if (newExpr != null)

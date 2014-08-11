@@ -11,10 +11,10 @@ namespace Rezolver
 	/// <summary>
 	/// Represents a target that is rezolved during expression building.
 	/// 
-	/// That is, a target is located from the scope that is supplied to the CreateExpression method,
+	/// That is, a target is located from the rezolver that is supplied to the CreateExpression method,
 	/// and that target is then used to donate the expression.
 	/// 
-	/// There should perhaps also be a late-bound version of this, which takes a container instead of a scope.
+	/// There should perhaps also be a late-bound version of this, which takes a container instead of a Builder.
 	/// 
 	/// But since I'm not at the container level (yet), I can't do that.
 	/// </summary>
@@ -24,7 +24,7 @@ namespace Rezolver
 		private readonly IRezolveTarget _resolveNameTarget;
 
 		private static readonly MethodInfo ContainerResolveMethod =
-			MethodCallExtractor.ExtractCalledMethod((IRezolverContainer c) => c.Resolve(typeof (object), null, null));
+			MethodCallExtractor.ExtractCalledMethod((IRezolver c) => c.Resolve(typeof (object), null, null));
 
 		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 
@@ -52,45 +52,43 @@ namespace Rezolver
 			get { return _resolveType; }
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			//TODO: Change how the expression is built based on whether a dynamiccontainerparameter expression is passed in
-			scopeContainer.MustNotBeNull("scope");
+			rezolver.MustNotBeNull("Builder");
 
-			if (dynamicContainerExpression != null)
+			if (dynamicRezolverExpression != null)
 			{
 				Func<object> compiledRezolveCall = null;
 				ICompiledRezolveTarget compiledNameCall = null;
-				//Func<IRezolverContainer, string> compiledNameCall = null;
+
+				//TODO: reuse the passed rezolver's compiler.  Or, could we even re use the rezolver to get the compiled target?
 
 				if (_resolveNameTarget != null)
 				{
-					//I think in this case, we *have* to defer to a dynamic resolve call on the scopeContainer in addition to 
+					//I think in this case, we *have* to defer to a dynamic resolve call on the rezolver in addition to 
 					//intrinsic dynamic container because we can't know if the name target reprents a single value, or something which
 					//produces lots of different values based on ambient environments.
 					//There is the minority case for ObjectTarget and probably SingletonTarget,  which will always produce the 
 					//same instance, but there's no reliable way - apart from a type test - to determine that.
-					//TODO: make this call generic after Resolve<T> has been added to the IRezolverContainer
-					compiledNameCall = scopeContainer.Compiler.CompileTarget(_resolveNameTarget, scopeContainer, dynamicContainerExpression,
+					//TODO: make this call generic after Resolve<T> has been added to the IRezolver
+					compiledNameCall = rezolver.Compiler.CompileTarget(_resolveNameTarget, rezolver, dynamicRezolverExpression,
 						currentTargets);
-					//var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, _resolveNameTarget, currentTargets);
-
-					//compiledNameCall = (dynamicScope) => (string)toCall(dynamicScope);
 				}
 
-				var resolvedTarget = scopeContainer.Fetch(DeclaredType, compiledNameCall != null ? (string)compiledNameCall.GetObject() : null);
+				var resolvedTarget = rezolver.Fetch(DeclaredType, compiledNameCall != null ? (string)compiledNameCall.GetObject() : null);
 
 				if (resolvedTarget != null)
 				{
-					var toCall = ExpressionHelper.GetFactoryForTarget(scopeContainer, targetType, resolvedTarget, currentTargets);
+					var toCall = ExpressionHelper.GetFactoryForTarget(rezolver, targetType, resolvedTarget, currentTargets);
 					//do not pass a dynamic container to the factory - because this particular expression is only intended
-					//to work on this scope, not the dynaamic one.
+					//to work on this Builder, not the dynaamic one.
 					compiledRezolveCall = () => toCall(null);
 				}
 				//var helper = new LateBoundRezolveCall(targetType ?? DeclaredType, compiledRezolveCall, compiledNameCall);
 				//only one way to do this - do all the checks now so that minimal decisions are made when the resolve operation
 				//is called.
-				Func<IRezolverContainer, object> lateBoundFounc;
+				Func<IRezolver, object> lateBoundFounc;
 				var finalType = targetType ?? DeclaredType;
 				if (compiledNameCall != null)
 				{
@@ -111,7 +109,7 @@ namespace Rezolver
 					}
 					else
 					{
-						///same as above, but an exception is thrown if the dynamic scope can't resolve
+						//same as above, but an exception is thrown if the dynamic Builder can't resolve
 						lateBoundFounc = (dynamicScope) =>
 						{
 							if (dynamicScope != null)
@@ -164,24 +162,24 @@ namespace Rezolver
 
 				return
 					Expression.Call(Expression.Constant(lateBoundFounc), lateBoundFounc.GetType().GetMethod("Invoke"),
-						dynamicContainerExpression);
+						dynamicRezolverExpression);
 			}
 			else
 			{
 
 				string name = _resolveNameTarget != null
-					? (string)scopeContainer.Compiler.CompileTarget(_resolveNameTarget, scopeContainer,null,currentTargets).GetObject()
+					? (string)rezolver.Compiler.CompileTarget(_resolveNameTarget, rezolver,null,currentTargets).GetObject()
 					: null;
-				var resolvedTarget = scopeContainer.Fetch(_resolveType, name);
+				var resolvedTarget = rezolver.Fetch(_resolveType, name);
 				if (resolvedTarget == null)
 					//when null, we simply emit a call back into the rezolver to be executed at runtime which should throw an exception
 					return
 						Expression.Convert(
-							Expression.Call(Expression.Constant(scopeContainer, typeof (IRezolverContainer)), ContainerResolveMethod,
-								new Expression[] { Expression.Constant(_resolveType, typeof(Type)), Expression.Constant(name, typeof(string)), Expression.Constant(null, typeof(IRezolverContainer)) }), targetType ?? DeclaredType);
+							Expression.Call(Expression.Constant(rezolver, typeof (IRezolver)), ContainerResolveMethod,
+								new Expression[] { Expression.Constant(_resolveType, typeof(Type)), Expression.Constant(name, typeof(string)), Expression.Constant(null, typeof(IRezolver)) }), targetType ?? DeclaredType);
 
 					//throw new InvalidOperationException(string.Format(Exceptions.UnableToResolveTypeFromScopeFormat, _resolveType));
-				return resolvedTarget.CreateExpression(scopeContainer, targetType: targetType, currentTargets: currentTargets);
+				return resolvedTarget.CreateExpression(rezolver, targetType: targetType, currentTargets: currentTargets);
 			}
 		}
 
@@ -192,17 +190,17 @@ namespace Rezolver
 
 			private readonly Type _targetType;
 			private readonly Func<object> _compiledResultFactory;
-			private readonly Func<IRezolverContainer, string> _nameFactory;
+			private readonly Func<IRezolver, string> _nameFactory;
 
-			public LateBoundRezolveCall(Type targetType, Func<object> compiledResultFactory, Func<IRezolverContainer, string> name)
+			public LateBoundRezolveCall(Type targetType, Func<object> compiledResultFactory, Func<IRezolver, string> name)
 			{
 				_targetType = targetType;
 				_compiledResultFactory = compiledResultFactory;
 				_nameFactory = name;
 			}
 
-			//note - when this call is made, the dynamic scope is the one that's passed
-			public object Resolve(IRezolverContainer dynamicScope)
+			//note - when this call is made, the dynamic Builder is the one that's passed
+			public object Resolve(IRezolver dynamicScope)
 			{
 				if (dynamicScope != null)
 				{

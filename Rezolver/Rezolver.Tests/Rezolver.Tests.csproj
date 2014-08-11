@@ -58,13 +58,13 @@
     <Compile Include="AssertEx.cs" />
     <Compile Include="Classes\SimpleType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BasicScopeTests.cs" />
+    <Compile Include="BasicBuilderTests.cs" />
     <Compile Include="ObjectTargetTests.cs" />
     <Compile Include="DelegateTargetTests.cs" />
     <Compile Include="LazyTargetTests.cs" />
     <Compile Include="NamedRegistrationTests.cs" />
     <Compile Include="NamedRezolverScopeTests.cs" />
-    <Compile Include="ChildRezolverTests.cs" />
+    <Compile Include="ChildRezolverBuilderTests.cs" />
     <Compile Include="RezolverScopePathTests.cs" />
     <Compile Include="OpenGenericTests.cs" />
     <Compile Include="ObjectTargetClosedGenericTests.cs" />

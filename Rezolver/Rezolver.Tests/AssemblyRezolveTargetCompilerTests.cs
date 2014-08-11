@@ -64,8 +64,8 @@ namespace Rezolver.Tests
 			IRezolveTargetCompiler compiler = CreateCompiler();
 
 			ConstructorTarget constructorTarget = ConstructorTarget.Auto<ToRezolve>();
-			var rezolverContainer = Mock.Of<IRezolverContainer>();
-			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  rezolverContainer, ExpressionHelper.DynamicContainerParam, null);
+			var rezolverContainer = Mock.Of<IRezolver>();
+			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  rezolverContainer, ExpressionHelper.DynamicRezolverParam, null);
 
 			ToRezolve.InstanceCount = 0; 
 			var toRezolve = (ToRezolve)target.GetObject();
@@ -79,7 +79,7 @@ namespace Rezolver.Tests
 			Assert.AreNotSame(toRezolve, toRezolve2);
 			var delegateCompiler = new RezolveTargetDelegateCompiler();
 			var del
-			 = delegateCompiler.CompileTarget(constructorTarget, rezolverContainer, ExpressionHelper.DynamicContainerParam, null);
+			 = delegateCompiler.CompileTarget(constructorTarget, rezolverContainer, ExpressionHelper.DynamicRezolverParam, null);
 
 			object benchResult = null;
 			ToRezolve benchResult2 = null;

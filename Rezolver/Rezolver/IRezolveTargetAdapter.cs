@@ -28,7 +28,7 @@ namespace Rezolver
 		}
 
 		public static IRezolveTarget GetRezolveTarget<T>(this IRezolveTargetAdapter adapter,
-			Expression<Func<IRezolverScope, T>> expression)
+			Expression<Func<IRezolverBuilder, T>> expression)
 		{
 			adapter.MustNotBeNull("adapter");
 			expression.MustNotBeNull("expression");

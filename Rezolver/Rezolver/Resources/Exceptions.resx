@@ -142,10 +142,10 @@
     <value>The type {0} has no default constructor, nor any constructors where all the parameters are optional.</value>
   </data>
 	<data name="NotRuntimeMethod" xml:space="preserve">
-    <value>This method is not to be called at run-time - it is only used for static expression analysis in building rezolver scopes.</value>
+    <value>This method is not to be called at run-time - it is only used for static expression analysis in building rezolver Builders.</value>
   </data>
 	<data name="UnableToResolveTypeFromScopeFormat" xml:space="preserve">
-    <value>Unable to resolve type {0} from scope</value>
+    <value>Unable to resolve type {0} from Builder</value>
   </data>
 	<data name="NoPublicConstructorsDefinedFormat" xml:space="preserve">
     <value>No public constructors declared on the type {0}</value>

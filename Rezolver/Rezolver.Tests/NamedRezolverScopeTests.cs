@@ -8,8 +8,8 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldSupportName()
 		{
-			INamedRezolverScope scope = new NamedRezolverScope(Moq.Mock.Of<IRezolverScope>(), "name");
-			Assert.AreEqual("name", scope.Name);
+			INamedRezolverBuilder builder = new NamedRezolverBuilder(Moq.Mock.Of<IRezolverBuilder>(), "name");
+			Assert.AreEqual("name", builder.Name);
 		}
 	}
 }

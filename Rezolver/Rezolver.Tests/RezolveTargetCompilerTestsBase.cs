@@ -117,7 +117,7 @@ namespace Rezolver.Tests
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			var target = compiler.CompileTarget(new SingletonTarget(ConstructorTarget.Auto<Singleton>()),
 				CreateContainerScopeMock(compiler),
-				ExpressionHelper.DynamicContainerParam, null);
+				ExpressionHelper.DynamicRezolverParam, null);
 			Assert.IsNotNull(target);
 
 			var lastCount = Singleton.Counter = 0;
@@ -191,7 +191,7 @@ namespace Rezolver.Tests
 			var inputDynamicContainer = CreateContainerScopeMock(compiler);
 			var defaultContainer = CreateContainerScopeMock(compiler);
 
-			var target = compiler.CompileTarget(new DynamicTestTarget(defaultContainer), CreateContainerScopeMock(compiler), ExpressionHelper.DynamicContainerParam, null);
+			var target = compiler.CompileTarget(new DynamicTestTarget(defaultContainer), CreateContainerScopeMock(compiler), ExpressionHelper.DynamicRezolverParam, null);
 
 			Assert.IsNotNull(target);
 			Assert.AreSame(defaultContainer, target.GetObjectDynamic(null));
@@ -206,7 +206,7 @@ namespace Rezolver.Tests
 			var defaultContainer = CreateContainerScopeMock(compiler);
 
 			var target = compiler.CompileTarget(new DynamicTestTarget(defaultContainer),
-				CreateContainerScopeMock(compiler), ExpressionHelper.DynamicContainerParam, null);
+				CreateContainerScopeMock(compiler), ExpressionHelper.DynamicRezolverParam, null);
 
 			Assert.IsNotNull(target);
 			Assert.AreSame(defaultContainer, target.GetObjectDynamic(null));

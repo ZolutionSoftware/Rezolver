@@ -28,7 +28,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldRegisterAsOpenGeneric()
 		{
-			var r = new RezolverScope();
+			var r = new RezolverBuilder();
 			//r.Register();
 		}
 	}

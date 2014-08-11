@@ -27,7 +27,7 @@ namespace Rezolver
 			_declaredType = declaredType ?? typeof(T);
 		}
 
-		protected override Expression CreateExpressionBase(IRezolverContainer scopeContainer, Type targetType = null, ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
 			Expression<Func<T>> e = () => _factory();
 			return e.Body;

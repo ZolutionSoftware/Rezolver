@@ -8,13 +8,13 @@ namespace Rezolver.Tests
 	/// Tests whether the core engine will accept an object or function for a target type
 	/// </summary>
 	[TestClass]
-	public class BasicScopeTests
+	public class BasicBuilderTests
 	{
 		[TestMethod]
 		public void ShouldRegisterNullObjectTarget()
 		{
 			IRezolveTarget t = new ObjectTarget(null);
-			IRezolverScope r = new RezolverScope();
+			IRezolverBuilder r = new RezolverBuilder();
 			r.Register(t, type: typeof(object));
 			var t2 = r.Fetch(typeof(object));
 			Assert.AreSame(t, t2);
@@ -28,7 +28,7 @@ namespace Rezolver.Tests
 		public void ShouldNotRegisterIfTypesDontMatch()
 		{
 			IRezolveTarget t = new ObjectTarget("hello world");
-			IRezolverScope r = new RezolverScope();
+			IRezolverBuilder r = new RezolverBuilder();
 			r.Register(t, type: typeof(int));
 		}
 
@@ -36,7 +36,7 @@ namespace Rezolver.Tests
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void ShouldNotAllowNullTypeOnFetch()
 		{
-			IRezolverScope r = new RezolverScope();
+			IRezolverBuilder r = new RezolverBuilder();
 			r.Fetch(null);
 		}
 
@@ -44,7 +44,7 @@ namespace Rezolver.Tests
 		public void ShouldRegisterForImplicitType()
 		{
 			IRezolveTarget t = new ObjectTarget("hello word");
-			IRezolverScope container = new RezolverScope();
+			IRezolverBuilder container = new RezolverBuilder();
 			container.Register(t);
 			var t2 = container.Fetch(typeof(string));
 			Assert.AreSame(t, t2);
@@ -53,7 +53,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldSupportTwoRegistrations()
 		{
-			IRezolverScope container = new RezolverScope();
+			IRezolverBuilder container = new RezolverBuilder();
 			var simpleType = new SimpleType();
 
 			IRezolveTarget target1 = "hello world".AsObjectTarget();

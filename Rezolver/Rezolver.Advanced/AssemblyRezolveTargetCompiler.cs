@@ -43,16 +43,16 @@ namespace Rezolver
 			_moduleBuilder = _assemblyBuilder.DefineDynamicModule(_assemblyModuleName, _assemblyModuleName + ".dll");
 		}
 
-		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolverContainer containerScope,
-			ParameterExpression dynamicContainerExpression, Stack<IRezolveTarget> targetStack)
+		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver scope,
+			ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
 		{
 			var typeBuilder = _moduleBuilder.DefineType(string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter));
 
 			typeBuilder.AddInterfaceImplementation(typeof(ICompiledRezolveTarget));
 
 
-			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, containerScope, targetStack, typeBuilder, typeof(object));
-			var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, containerScope, targetStack, typeBuilder, dynamicContainerExpression, typeof(object));
+			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, scope, targetStack, typeBuilder, typeof(object));
+			var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, scope, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
 
 			var methodBuilder = CreateInstance_GetObjectMethod(typeBuilder, staticGetObjectStaticMethod, "GetObject");
 			typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObject"));
@@ -161,7 +161,7 @@ namespace Rezolver
 			MethodBuilder methodBuilder = typeBuilder.DefineMethod(methodName,
 				MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, CallingConventions.HasThis,
 				typeof(object),
-				new[] { typeof(IRezolverContainer) });
+				new[] { typeof(IRezolver) });
 
 			var ilgen = methodBuilder.GetILGenerator();
 			ilgen.Emit(OpCodes.Ldarg_1);
@@ -192,15 +192,15 @@ namespace Rezolver
 			return methodBuilder;
 		}
 
-		private MethodBuilder CreateStatic_GetObjectDynamicMethod(IRezolveTarget target, IRezolverContainer containerScope, Stack<IRezolveTarget> targetStack,
-			TypeBuilder typeBuilder, ParameterExpression dynamicContainerExpression, Type targetType = null)
+		private MethodBuilder CreateStatic_GetObjectDynamicMethod(IRezolveTarget target, IRezolver scope, Stack<IRezolveTarget> targetStack,
+			TypeBuilder typeBuilder, ParameterExpression dynamicRezolverExpression, Type targetType = null)
 		{
 			targetType = targetType ?? target.DeclaredType;
 
 
-			var toBuild = target.CreateExpression(containerScope, targetType: targetType,
+			var toBuild = target.CreateExpression(scope, targetType: targetType,
 				currentTargets: targetStack,
-				dynamicContainerExpression: dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam);
+				dynamicRezolverExpression: dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam);
 
 			//now we have to rewrite the expression to life all constants out and feed them in from an additional
 			//parameter that we also dynamically compile.
@@ -209,16 +209,16 @@ namespace Rezolver
 				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, targetType, new Type[0]);
 
 			Expression.Lambda(rewriter.LiftConstants(),
-				dynamicContainerExpression ?? ExpressionHelper.DynamicContainerParam).CompileToMethod(toReturn);
+				dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam).CompileToMethod(toReturn);
 			return toReturn;
 		}
 
-		private MethodBuilder CreateStatic_GetObjectStaticMethod(IRezolveTarget target, IRezolverContainer containerScope,
+		private MethodBuilder CreateStatic_GetObjectStaticMethod(IRezolveTarget target, IRezolver scope,
 			Stack<IRezolveTarget> targetStack, TypeBuilder typeBuilder, Type targetType = null)
 		{
 			targetType = targetType ?? target.DeclaredType;
 
-			var toBuild = target.CreateExpression(containerScope, targetType: targetType, currentTargets: targetStack);
+			var toBuild = target.CreateExpression(scope, targetType: targetType, currentTargets: targetStack);
 
 			//now we have to rewrite the expression to life all constants out and feed them in from an additional
 			//parameter that we also dynamically compile.

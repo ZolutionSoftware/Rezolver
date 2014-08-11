@@ -4,7 +4,7 @@ using Rezolver.Resources;
 
 namespace Rezolver
 {
-	public class RezolverScope : IRezolverScope
+	public class RezolverBuilder : IRezolverBuilder
 	{
 		//TODO: extract an abstract base implementation of this class that does away with the dictionary, with extension points in place of those to allow for future expansion.
 		#region immediate type entries
@@ -15,20 +15,20 @@ namespace Rezolver
 
 		#region named child scopes
 
-		private readonly Dictionary<string, INamedRezolverScope> _namedScopes = new Dictionary<string, INamedRezolverScope>();
+		private readonly Dictionary<string, INamedRezolverBuilder> _namedScopes = new Dictionary<string, INamedRezolverBuilder>();
 
 		#endregion
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
 		{
-			//TODO: Support name hierarchies by splitting the name by forward-slash and recursively creating a named-scope tree.
+			//TODO: Support name hierarchies by splitting the name by forward-slash and recursively creating a named-Builder tree.
 
 			if (path != null)
 			{
 				if (path.Next == null)
 					throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
 
-				//get the named scope.  If it doesn't exist, create one.
+				//get the named Builder.  If it doesn't exist, create one.
 				var namedScope = GetNamedScope(path, true);
 				//note here we don't pass the name through.
 				//when we support named scopes, we would be lopping off the first item in a hierarchical name to allow for the recursion.
@@ -50,16 +50,16 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Called to create a new instance of a Named Scope with the given name, optionally for the given target and type.
+		/// Called to create a new instance of a Named Builder with the given name, optionally for the given target and type.
 		/// </summary>
-		/// <param name="name">The name of the scope to be created.  Please note - this could be being created
+		/// <param name="name">The name of the Builder to be created.  Please note - this could be being created
 		/// as part of a wider path of scopes.</param>
-		/// <param name="target">Optional - a target that is to be added to the named scope after creation.</param>
+		/// <param name="target">Optional - a target that is to be added to the named Builder after creation.</param>
 		/// <returns></returns>
-		protected virtual INamedRezolverScope CreateNamedScope(string name, IRezolveTarget target)
+		protected virtual INamedRezolverBuilder CreateNamedScope(string name, IRezolveTarget target)
 		{
-			//base class simply creates a NamedRezolverScope
-			return new NamedRezolverScope(this, name);
+			//base class simply creates a NamedRezolverBuilder
+			return new NamedRezolverBuilder(this, name);
 		}
 
 		public IRezolveTarget Fetch(Type type, string name)
@@ -68,11 +68,11 @@ namespace Rezolver
 
 			if (name != null)
 			{
-				INamedRezolverScope namedScope;
-				_namedScopes.TryGetValue(name, out namedScope);
+				INamedRezolverBuilder namedBuilder;
+				_namedScopes.TryGetValue(name, out namedBuilder);
 
 				// ReSharper disable once PossibleNullReferenceException
-				return _namedScopes == null ? null : namedScope.Fetch(type);
+				return _namedScopes == null ? null : namedBuilder.Fetch(type);
 			}
 
 			IRezolveTarget target;
@@ -85,21 +85,21 @@ namespace Rezolver
 		}
 
 
-		public INamedRezolverScope GetNamedScope(RezolverScopePath path, bool create = false)
+		public INamedRezolverBuilder GetNamedScope(RezolverScopePath path, bool create = false)
 		{
 			if(!path.MoveNext())
 				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
 
-			INamedRezolverScope namedScope;
+			INamedRezolverBuilder namedBuilder;
 
-			if (!_namedScopes.TryGetValue(path.Current, out namedScope))
+			if (!_namedScopes.TryGetValue(path.Current, out namedBuilder))
 			{
 				if (!create)
 					return null;
-				_namedScopes[path.Current] = namedScope = CreateNamedScope(path.Current, null);
+				_namedScopes[path.Current] = namedBuilder = CreateNamedScope(path.Current, null);
 			}
 			//then walk to the next part of the path and create it if need be
-			return path.Next != null ? namedScope.GetNamedScope(path, true) : namedScope;
+			return path.Next != null ? namedBuilder.GetNamedScope(path, true) : namedBuilder;
 		}
 	}
 }

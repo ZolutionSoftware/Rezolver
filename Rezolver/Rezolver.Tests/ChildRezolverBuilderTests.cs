@@ -4,22 +4,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class ChildRezolverTests
+	public class ChildRezolverBuilderTests
 	{
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void MustNotAllowNullParent()
 		{
-			IChildRezolverScope scope = new ChildRezolverScope(null);
+			IChildRezolverBuilder builder = new ChildRezolverBuilder(null);
 
 		}
 
 		[TestMethod]
 		public void MustCopyParent()
 		{
-			var parent = new RezolverScope();
-			IChildRezolverScope childScope = new ChildRezolverScope(parent);
-			Assert.AreEqual(parent, childScope.ParentScope);
+			var parent = new RezolverBuilder();
+			IChildRezolverBuilder childBuilder = new ChildRezolverBuilder(parent);
+			Assert.AreEqual(parent, childBuilder.ParentBuilder);
 		}
 	}
 }

@@ -138,36 +138,36 @@ namespace Rezolver.Tests
 		/// </summary>
 		public class DynamicTestTarget : IRezolveTarget
 		{
-			private readonly IRezolverContainer _defaultContainer;
+			private readonly IRezolver _default;
 
-			public DynamicTestTarget(IRezolverContainer defaultContainer)
+			public DynamicTestTarget(IRezolver @default)
 			{
-				_defaultContainer = defaultContainer;
+				_default = @default;
 			}
 
 			public bool SupportsType(Type type)
 			{
-				return type.IsAssignableFrom(typeof(IRezolverContainer));
+				return type.IsAssignableFrom(typeof(IRezolver));
 			}
 
-			public Expression CreateExpression(IRezolverContainer containerScope, Type targetType = null,
-				ParameterExpression dynamicContainerExpression = null, Stack<IRezolveTarget> currentTargets = null)
+			public Expression CreateExpression(IRezolver rezolver, Type targetType = null,
+				ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
 			{
-				//this method isn't always called with a dynamicContainerExpression passed
+				//this method isn't always called with a dynamicRezolverExpression passed
 				if (targetType != null && !SupportsType(targetType))
 					throw new ArgumentException(string.Format("Type not supported: {0}", targetType));
-				if (dynamicContainerExpression != null)
+				if (dynamicRezolverExpression != null)
 				{
-					return Expression.Coalesce(Expression.Convert(dynamicContainerExpression, targetType ?? DeclaredType),
-						Expression.Convert(Expression.Constant(_defaultContainer, typeof(IRezolverContainer)), targetType ?? DeclaredType));
+					return Expression.Coalesce(Expression.Convert(dynamicRezolverExpression, targetType ?? DeclaredType),
+						Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), targetType ?? DeclaredType));
 				}
 
-				return Expression.Convert(Expression.Constant(_defaultContainer, typeof(IRezolverContainer)), targetType ?? DeclaredType);
+				return Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), targetType ?? DeclaredType);
 			}
 
 			public Type DeclaredType
 			{
-				get { return typeof(IRezolverContainer); }
+				get { return typeof(IRezolver); }
 			}
 		}
 	}

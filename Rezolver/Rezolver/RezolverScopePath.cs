@@ -8,7 +8,7 @@ using Rezolver.Resources;
 namespace Rezolver
 {
 	/// <summary>
-	/// Represents a path to a named rezolver scope.  Optimised for walking the path in both directions after creation.
+	/// Represents a path to a named rezolver Builder.  Optimised for walking the path in both directions after creation.
 	/// 
 	/// Please note - this class is not thread-safe.
 	/// </summary>

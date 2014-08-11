@@ -16,9 +16,9 @@ namespace Rezolver
 		/// Executing this method at runtime will always throw a <see cref="NotImplementedException"/>
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="scope"></param>
+		/// <param name="builder"></param>
 		/// <returns></returns>
-		public static T Rezolve<T>(this IRezolverScope scope)
+		public static T Rezolve<T>(this IRezolverBuilder builder)
 		{
 			throw new NotImplementedException(Exceptions.NotRuntimeMethod);
 		}
@@ -29,10 +29,10 @@ namespace Rezolver
 		/// Executing this method at runtime will always throw a <see cref="NotImplementedException"/>
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="scope"></param>
+		/// <param name="builder"></param>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public static T Rezolve<T>(this IRezolverScope scope, string name)
+		public static T Rezolve<T>(this IRezolverBuilder builder, string name)
 		{
 			throw new NotImplementedException(Exceptions.NotRuntimeMethod);
 		}

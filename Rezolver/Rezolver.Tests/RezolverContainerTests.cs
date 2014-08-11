@@ -11,10 +11,10 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldRezolveAnInt()
 		{
-			var scopeMock = new Mock<IRezolverScope>();
+			var scopeMock = new Mock<IRezolverBuilder>();
 			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(1.AsObjectTarget());
 
-			IRezolverContainer container = new RezolverContainer(scopeMock.Object, new RezolveTargetDelegateCompiler());
+			IRezolver container = new Rezolver(scopeMock.Object, new RezolveTargetDelegateCompiler());
 			var result = container.Resolve(typeof (int));
 			Assert.AreEqual(1, result);
 		}
@@ -43,15 +43,15 @@ namespace Rezolver.Tests
 
 
 			//this is using constructorTarget with a prescribed new expression
-			var scope1Mock = new Mock<IRezolverScope>();
+			var scope1Mock = new Mock<IRezolverBuilder>();
 			scope1Mock.Setup(s => s.Fetch(typeof(int), null)).Returns(new RezolvedTarget(typeof(int)));
 
-			var containerMock = new Mock<IRezolverContainer>();
+			var containerMock = new Mock<IRezolver>();
 			containerMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 			int expected = -1;
 			containerMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
-			RezolverContainer container = new RezolverContainer(scope1Mock.Object, new RezolveTargetDelegateCompiler());
-			var result = container.Resolve(typeof (int) /*, dynamicContainer: containerMock.Object*/);
+			Rezolver container = new Rezolver(scope1Mock.Object, new RezolveTargetDelegateCompiler());
+			var result = container.Resolve(typeof (int) /*, @dynamic: containerMock.Object*/);
 			Assert.AreEqual(expected, result);
 		}
 
@@ -60,21 +60,21 @@ namespace Rezolver.Tests
 		{
 
 			//this is using constructorTarget with a prescribed new expression
-			var scope1Mock = new Mock<IRezolverScope>();
+			var scope1Mock = new Mock<IRezolverBuilder>();
 			scope1Mock.Setup(s => s.Fetch(typeof(TypeWithConstructorArg), null)).Returns(ConstructorTarget.Auto<TypeWithConstructorArg>());
 
-			//the thing being that the underlying scope does not know how too resolve an integer without
+			//the thing being that the underlying Builder does not know how too resolve an integer without
 			//being passed a dynamic container at call-time.
 			//this mocks a dynamically defined container that an application creates in response to transient information only
-			var containerMock = new Mock<IRezolverContainer>();
+			var containerMock = new Mock<IRezolver>();
 			int expected = -1;
 			containerMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
 			containerMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 
 			//this represents building an application's statically defined, or bootstrapped, IOC container
-			RezolverContainer container = new RezolverContainer(scope1Mock.Object, new RezolveTargetDelegateCompiler());
+			Rezolver container = new Rezolver(scope1Mock.Object, new RezolveTargetDelegateCompiler());
 
-			var result = (TypeWithConstructorArg)container.Resolve(typeof (TypeWithConstructorArg), dynamicContainer: containerMock.Object);
+			var result = (TypeWithConstructorArg)container.Resolve(typeof (TypeWithConstructorArg), dynamic: containerMock.Object);
 			Assert.IsNotNull(result);
 
 			Assert.AreEqual(expected, result.Value);
