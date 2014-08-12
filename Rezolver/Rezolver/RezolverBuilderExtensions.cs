@@ -8,7 +8,7 @@ using Rezolver.Resources;
 
 namespace Rezolver
 {
-	public static class RezolverScopeExtensions
+	public static class RezolverBuilderExtensions
 	{
 		/// <summary>
 		/// This extension mmethod is used only for helping to build IRezolveTarget instances from expressions.

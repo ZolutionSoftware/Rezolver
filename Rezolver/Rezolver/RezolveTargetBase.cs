@@ -17,11 +17,9 @@ namespace Rezolver
 		/// Abstract method called to create the expression - this is called by <see cref="CreateExpression"/> after the
 		/// <paramref name="targetType"/> has been validated, if provided.
 		/// 
-		/// Note - if your implementation needs to support dynamic Resolve operations from the container that is passed
-		/// to an IRezolver's Resolve method, use <see cref="ExpressionHelper.DynamicRezolverParam"/> as the target
-		/// expression.
-		/// 
-		/// You can also use the <see cref="ExpressionHelper.GetDynamicRezolveCall"/> method to help build such expressions.
+		/// Note - if your implementation needs to support dynamic Resolve operations from the rezolver that is passed
+		/// to an IRezolver's Resolve method, you can use the <see cref="ExpressionHelper.DynamicRezolverParam"/> property,
+		/// all the default implementations of this class (and others) use that by default.
 		/// </summary>
 		/// <param name="rezolver"></param>
 		/// <param name="targetType"></param>

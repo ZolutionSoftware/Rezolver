@@ -64,8 +64,8 @@ namespace Rezolver.Tests
 			IRezolveTargetCompiler compiler = CreateCompiler();
 
 			ConstructorTarget constructorTarget = ConstructorTarget.Auto<ToRezolve>();
-			var rezolverContainer = Mock.Of<IRezolver>();
-			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  rezolverContainer, ExpressionHelper.DynamicRezolverParam, null);
+			var rezolver = Mock.Of<IRezolver>();
+			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  rezolver, ExpressionHelper.DynamicRezolverParam, null);
 
 			ToRezolve.InstanceCount = 0; 
 			var toRezolve = (ToRezolve)target.GetObject();
@@ -79,7 +79,7 @@ namespace Rezolver.Tests
 			Assert.AreNotSame(toRezolve, toRezolve2);
 			var delegateCompiler = new RezolveTargetDelegateCompiler();
 			var del
-			 = delegateCompiler.CompileTarget(constructorTarget, rezolverContainer, ExpressionHelper.DynamicRezolverParam, null);
+			 = delegateCompiler.CompileTarget(constructorTarget, rezolver, ExpressionHelper.DynamicRezolverParam, null);
 
 			object benchResult = null;
 			ToRezolve benchResult2 = null;
@@ -130,7 +130,7 @@ namespace Rezolver.Tests
 				benchResult = target.GetObjectDynamic(null);
 			}
 			s.Stop();
-			Console.WriteLine("Create via interface impl (object/with container) took {0}ms", s.Elapsed.TotalMilliseconds);
+			Console.WriteLine("Create via interface impl (object/with rezolver) took {0}ms", s.Elapsed.TotalMilliseconds);
 			ToRezolve.InstanceCount = 0;
 			GC.Collect(2);
 			GC.WaitForFullGCComplete();

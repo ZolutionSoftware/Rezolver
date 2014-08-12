@@ -75,7 +75,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldAllowAllConstructorParametersToBeProvided()
 		{
-			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
+			var target = ConstructorTarget.For(builder => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
 			var result = GetValueFromTarget<NoDefaultConstructor>(target);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedValue, result.Value);
 			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
@@ -92,13 +92,13 @@ namespace Rezolver.Tests
 			//parsing.  However - note that if any tests in the RezolveTargetAdapterTests suite are failing, then
 			//tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget's
 			//integration with the default adapter here.
-			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>()), RezolveTargetAdapter.Instance);
+			var target = ConstructorTarget.For(builder => new NoDefaultConstructor(builder.Rezolve<int>()), RezolveTargetAdapter.Instance);
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-			var scopeMock = new Mock<IRezolver>();
-			scopeMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
-			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
+			var rezolverMock = new Mock<IRezolver>();
+			rezolverMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
+			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
-			scopeMock.VerifyAll();
+			rezolverMock.VerifyAll();
 		}
 
 		[TestMethod]
@@ -107,11 +107,11 @@ namespace Rezolver.Tests
 			//basically the same as above - except this doesn't provide the constructor call explicitly.
 			var target = ConstructorTarget.Auto<NoDefaultConstructor>();
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-			var scopeMock = new Mock<IRezolver>();
-			scopeMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
-			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
+			var rezolverMock = new Mock<IRezolver>();
+			rezolverMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
+			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
-			scopeMock.VerifyAll();
+			rezolverMock.VerifyAll();
 		}
 
 		[TestMethod]
@@ -119,22 +119,22 @@ namespace Rezolver.Tests
 		{
 			//complicated test, this.  And, yes, it's largely pointless - but it
 			//proves that our expression parsing is recursive and can handle complex constructs
-			var target = ConstructorTarget.For(scope => new NoDefaultConstructor(scope.Rezolve<int>(scope.Rezolve<string>())));
+			var target = ConstructorTarget.For(builder => new NoDefaultConstructor(builder.Rezolve<int>(builder.Rezolve<string>())));
 			var intTarget = NoDefaultConstructor.ExpectedComplexRezolveCall.AsObjectTarget();
 			const string rezolveName = "ThisIsComplicated";
 			var stringTarget = rezolveName.AsObjectTarget();
-			var scopeMock = new Mock<IRezolver>();
+			var rezolverMock = new Mock<IRezolver>();
 			//scopeMock.Setup(s => s.CanResolve(typeof (int), rezolveName, null)).Returns(true).Verifiable();
 			//scopeMock.Setup(s => s.CanResolve(typeof (string), null, null)).Returns(true).Verifiable();
 
-			scopeMock.Setup(s => s.Fetch(typeof (string), null)).Returns(stringTarget);
-			scopeMock.Setup(s => s.Fetch(typeof (int), rezolveName)).Returns(intTarget);
-			scopeMock.Setup(s => s.Compiler).Returns(new RezolveTargetDelegateCompiler());
+			rezolverMock.Setup(s => s.Fetch(typeof (string), null)).Returns(stringTarget);
+			rezolverMock.Setup(s => s.Fetch(typeof (int), rezolveName)).Returns(intTarget);
+			rezolverMock.Setup(s => s.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			//scopeMock.Setup(s => s.Resolve(typeof(string), null, null)).Returns(rezolveName).Verifiable();
 			//scopeMock.Setup(s => s.Resolve(typeof(int), rezolveName, null)).Returns(NoDefaultConstructor.ExpectedComplexRezolveCall).Verifiable();
 			//so the expression demands that a new instance of NoDefaultConstructor is built. with an
 			//integer constructor argument that is, in turn, resolved by a name which is also resolved.
-			var result = GetValueFromTarget<NoDefaultConstructor>(target, scopeMock.Object);
+			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedComplexRezolveCall, result.Value);
 		}
 	}

@@ -43,6 +43,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachingRezolver.cs" />
     <Compile Include="ICompiledRezolveTarget.cs" />
     <Compile Include="ChildRezolverBuilder.cs" />
     <Compile Include="ConstructorTarget.cs" />
@@ -52,7 +53,7 @@
     <Compile Include="ExpressionTarget.cs" />
     <Compile Include="Extensions\System\DelegateExtensions.cs" />
     <Compile Include="Extensions\System\Linq\Expressions\ExpressionExtensions.cs" />
-    <Compile Include="ILifetimeRezolver.cs" />
+    <Compile Include="ILifetimeScopeRezolver.cs" />
     <Compile Include="IRezolver.cs" />
     <Compile Include="IRezolveTargetCompiler.cs" />
     <Compile Include="IRezolveTargetAdapter.cs" />
@@ -60,15 +61,15 @@
     <Compile Include="IChildRezolverBuilder.cs" />
     <Compile Include="INamedRezolverBuilder.cs" />
     <Compile Include="IRezolverBuilder.cs" />
-    <Compile Include="LifetimeRezolver.cs" />
+    <Compile Include="LifetimeScopeRezolver.cs" />
     <Compile Include="RezolvedTarget.cs" />
     <Compile Include="Rezolver.cs" />
-    <Compile Include="RezolverScopeExtensions.cs" />
+    <Compile Include="RezolverBuilderExtensions.cs" />
     <Compile Include="IRezolveTarget.cs" />
     <Compile Include="MethodCallExtractor.cs" />
     <Compile Include="NamedRezolverBuilder.cs" />
     <Compile Include="ParameterBinding.cs" />
-    <Compile Include="RezolverScopePath.cs" />
+    <Compile Include="RezolverPath.cs" />
     <Compile Include="RezolveTargetCompiler.cs" />
     <Compile Include="RezolveTargetDelegateCompiler.cs" />
     <Compile Include="RezolveTargetAdapter.cs" />

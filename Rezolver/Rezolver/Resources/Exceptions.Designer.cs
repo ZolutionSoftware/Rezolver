@@ -178,11 +178,11 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to resolve type {0} from Builder.
+        ///   Looks up a localized string similar to Unable to resolve type {0} from builder.
         /// </summary>
-        internal static string UnableToResolveTypeFromScopeFormat {
+        internal static string UnableToResolveTypeFromBuilderFormat {
             get {
-                return ResourceManager.GetString("UnableToResolveTypeFromScopeFormat", resourceCulture);
+                return ResourceManager.GetString("UnableToResolveTypeFromBuilderFormat", resourceCulture);
             }
         }
     }

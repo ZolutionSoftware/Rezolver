@@ -32,9 +32,9 @@ namespace Rezolver
 
 		internal static readonly MethodInfo[] RezolveMethods =
 		{
-			MethodCallExtractor.ExtractCalledMethod((IRezolverBuilder scope) => scope.Rezolve<int>()).GetGenericMethodDefinition()
+			MethodCallExtractor.ExtractCalledMethod((IRezolverBuilder builder) => builder.Rezolve<int>()).GetGenericMethodDefinition()
 			,
-			MethodCallExtractor.ExtractCalledMethod((IRezolverBuilder scope) => scope.Rezolve<int>(null))
+			MethodCallExtractor.ExtractCalledMethod((IRezolverBuilder builder) => builder.Rezolve<int>(null))
 				.GetGenericMethodDefinition()
 		};
 

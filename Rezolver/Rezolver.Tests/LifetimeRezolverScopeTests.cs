@@ -5,7 +5,7 @@ using Moq;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class LifetimeRezolverContainerTests
+	public class LifetimeRezolverScopeTests
 	{
 		public interface ITestDisposable : IDisposable
 		{
@@ -39,18 +39,30 @@ namespace Rezolver.Tests
 
 		private static Mock<IRezolver> CreateMock()
 		{
-			Mock<IRezolver> parentContainerMock = new Mock<IRezolver>();
-			parentContainerMock.Setup(c => c.CreateLifetimeContainer()).Returns(() => new LifetimeRezolver(parentContainerMock.Object));
-			parentContainerMock.Setup(c => c.Resolve(typeof(ITestDisposable), null, null)).Returns(() => new DisposableType());
-			return parentContainerMock;
+			Mock<IRezolver> parentRezolverMock = new Mock<IRezolver>();
+			parentRezolverMock.Setup(c => c.CreateLifetimeScope()).Returns(() => new LifetimeScopeRezolver(parentRezolverMock.Object));
+			parentRezolverMock.Setup(c => c.Resolve(typeof(ITestDisposable), null, null)).Returns(() => new DisposableType());
+			return parentRezolverMock;
+		}
+
+		[TestMethod]
+		public void ShouldAllowInstanceToBeRegisteredAndDisposed()
+		{
+			var rezolverMock = Mock.Of<IRezolver>();
+
+			ITestDisposable disposable = null;
+			using (var scope = new LifetimeScopeRezolver(rezolverMock))
+			{
+				scope.Add(disposable = new DisposableType());
+			}
 		}
 
 		[TestMethod]
 		public void ShouldDisposeOnceOly()
 		{
-			Mock<IRezolver> parentContainerMock = CreateMock();
+			Mock<IRezolver> parentRezolverMock = CreateMock();
 			ITestDisposable instance = null;
-			using (var lifetime = parentContainerMock.Object.CreateLifetimeContainer())
+			using (var lifetime = parentRezolverMock.Object.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable) lifetime.Resolve(typeof (ITestDisposable));
 			}
@@ -66,7 +78,7 @@ namespace Rezolver.Tests
 			int totalInstanceCount = DisposableType.TotalDisposeCount;
 			ITestDisposable instance = null;
 			ITestDisposable instance2 = null;
-			using(var lifetime = mockContainer.Object.CreateLifetimeContainer())
+			using(var lifetime = mockContainer.Object.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
 				instance2 = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
@@ -85,9 +97,9 @@ namespace Rezolver.Tests
 		{
 			var mockContainer = CreateMock();
 			ITestDisposable instance = null;
-			using(var lifetime = mockContainer.Object.CreateLifetimeContainer())
+			using(var lifetime = mockContainer.Object.CreateLifetimeScope())
 			{
-				var lifetime2 = lifetime.CreateLifetimeContainer();
+				var lifetime2 = lifetime.CreateLifetimeScope();
 				instance = (ITestDisposable)lifetime2.Resolve(typeof(ITestDisposable));
 			}
 
@@ -102,10 +114,10 @@ namespace Rezolver.Tests
 			int totalDisposeCount = DisposableType.TotalDisposeCount;
 			ITestDisposable instance = null;
 			ITestDisposable instance2 = null;
-			using (var lifetime = mockContainer.Object.CreateLifetimeContainer())
+			using (var lifetime = mockContainer.Object.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable)lifetime.Resolve(typeof (ITestDisposable));
-				using (var lifetime2 = mockContainer.Object.CreateLifetimeContainer())
+				using (var lifetime2 = mockContainer.Object.CreateLifetimeScope())
 				{
 					instance2 = (ITestDisposable) lifetime2.Resolve(typeof (ITestDisposable));
 				}
@@ -125,12 +137,12 @@ namespace Rezolver.Tests
 			int totalDisposeCount = DisposableType.TotalDisposeCount;
 			ITestDisposable instance = null;
 			ITestDisposable instance2 = null;
-			using (var lifetime = mockContainer.Object.CreateLifetimeContainer())
+			using (var lifetime = mockContainer.Object.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable) lifetime.Resolve(typeof (ITestDisposable));
 				//create an inner scope but don't dispose it - it should be auto-disposed by the
 				//parent scope when it is disposed.
-				var lifetime2 = lifetime.CreateLifetimeContainer();
+				var lifetime2 = lifetime.CreateLifetimeScope();
 				instance2 = (ITestDisposable)lifetime2.Resolve(typeof (ITestDisposable));
 			}
 

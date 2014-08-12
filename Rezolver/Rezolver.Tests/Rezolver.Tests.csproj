@@ -65,7 +65,7 @@
     <Compile Include="NamedRegistrationTests.cs" />
     <Compile Include="NamedRezolverScopeTests.cs" />
     <Compile Include="ChildRezolverBuilderTests.cs" />
-    <Compile Include="RezolverScopePathTests.cs" />
+    <Compile Include="RezolverPathTests.cs" />
     <Compile Include="OpenGenericTests.cs" />
     <Compile Include="ObjectTargetClosedGenericTests.cs" />
     <Compile Include="RezolveTargetCompilerTestsBase.cs" />
@@ -76,12 +76,12 @@
     <Compile Include="ConstructorTargetTests.cs" />
     <Compile Include="DefaultTargetTests.cs" />
     <Compile Include="RezolveTargetAdapterTests.cs" />
-    <Compile Include="RezolverContainerTests.cs" />
-    <Compile Include="LateBoundContainerTests.cs" />
-    <Compile Include="RezolverContainerTests_Generic.cs" />
+    <Compile Include="RezolverTests.cs" />
+    <Compile Include="DynamicRezolverTests.cs" />
+    <Compile Include="RezolverTests_Generic.cs" />
     <Compile Include="RezolveTargetDelegateCompilerTests.cs" />
     <Compile Include="AssemblyRezolveTargetCompilerTests.cs" />
-    <Compile Include="LifeTimeRezolverContainerTests.cs" />
+    <Compile Include="LifetimeRezolverScopeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">

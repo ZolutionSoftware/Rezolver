@@ -85,29 +85,20 @@ namespace Rezolver
 		{
 		}
 
-		//protected RezolverBase(IRezolverBuilder Builder, IRezolveTargetCompiler compiler = null)
-		//{
-		//	_builder = Builder;
-		//	_compiler = compiler;
-		//}
-
 		public abstract IRezolveTargetCompiler Compiler { get; }
 
 		protected abstract IRezolverBuilder Builder { get; }
 
-		public virtual object Resolve(Type type, string name = null, IRezolver @dynamic = null)
+		public virtual object Resolve(Type type, string name = null, IRezolver dynamicRezolver = null)
 		{
-			//I actually wonder whether this should chain up to the dynamic container on the caller's
-			//behalf or not - the caller could just do it themselves.
-			if (dynamic != null)
+			if (dynamicRezolver != null)
 			{
-				if (dynamic.CanResolve(type, name))
-					return dynamic.Resolve(type, name);
+				if (dynamicRezolver.CanResolve(type, name))
+					return dynamicRezolver.Resolve(type, name);
 
-				//let's try it without the type only cache
 				return (name == null ?
 					 GetCompiledRezolveTarget(type)
-					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObjectDynamic(dynamic);
+					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObjectDynamic(dynamicRezolver);
 			}
 
 			return (name == null ?
@@ -117,8 +108,6 @@ namespace Rezolver
 
 		public virtual T Resolve<T>(string name = null, IRezolver @dynamic = null)
 		{
-			//I actually wonder whether this should chain up to the dynamic container on the caller's
-			//behalf or not - the caller could just do it themselves.
 			if (dynamic != null)
 			{
 				if (dynamic.CanResolve<T>(name))
@@ -132,9 +121,16 @@ namespace Rezolver
 			return (T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObject();
 		}
 
-		public virtual ILifetimeRezolver CreateLifetimeContainer()
+		public virtual ILifetimeScopeRezolver CreateLifetimeScope()
 		{
-			return new LifetimeRezolver(this);
+			return new LifetimeScopeRezolver(this);
+		}
+
+		public ICompiledRezolveTarget FetchCompiled(Type type, string name)
+		{
+			return (name == null ?
+					 GetCompiledRezolveTarget(type)
+					 : GetCompiledRezolveTarget(new RezolverKey(type, name)));
 		}
 
 		public virtual bool CanResolve(Type type, string name = null, IRezolver @dynamic = null)
@@ -149,9 +145,9 @@ namespace Rezolver
 			return Builder.Fetch<T>(name) != null;
 		}
 
-		public virtual void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
+		public virtual void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
-			//you are not allowed to register targets directly into a container by default
+			//you are not allowed to register targets directly into a rezolver by default
 			throw new NotSupportedException();
 		}
 
@@ -165,17 +161,16 @@ namespace Rezolver
 			return Builder.Fetch(typeof(T), name);
 		}
 
-		public virtual INamedRezolverBuilder GetNamedScope(RezolverScopePath path, bool create = false)
+		public virtual INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
 			//if the caller potentially wants a new named Builder, we don't support the call.
 			if (create) throw new NotSupportedException();
 
-			return Builder.GetNamedScope(path, false);
+			return Builder.GetNamedBuilder(path, false);
 		}
 
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolverKey key)
 		{
-			ICompiledRezolveTarget toReturn;
 			var target = Fetch(key.Type, key.Name);
 
 			if (target != null)
@@ -185,43 +180,13 @@ namespace Rezolver
 		}
 
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
-		{
-			ICompiledRezolveTarget toReturn;
-			
+		{			
 			var target = Fetch(type);
 
 			if (target != null)
 				return Compiler.CompileTarget(target, this, ExpressionHelper.DynamicRezolverParam, null);
 
 			return GetMissingTarget(type);
-		}
-	}
-
-	public abstract class CachingRezolver : RezolverBase
-	{
-		/// <summary>
-		/// This cache is for factories resolved by type only
-		/// </summary>
-		private readonly Dictionary<Type, ICompiledRezolveTarget> _typeOnlyCacheEntries = new Dictionary<Type, ICompiledRezolveTarget>();
-		/// <summary>
-		/// This cache is for factories resolved by type and name
-		/// </summary>
-		private readonly Dictionary<RezolverKey, ICompiledRezolveTarget> _namedCacheEntries = new Dictionary<CachingRezolver.RezolverKey, ICompiledRezolveTarget>();
-
-		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolverKey key)
-		{
-			ICompiledRezolveTarget toReturn;
-			if (_namedCacheEntries.TryGetValue(key, out toReturn))
-				return toReturn;
-			return _namedCacheEntries[key] = base.GetCompiledRezolveTarget(key);
-		}
-
-		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
-		{
-			ICompiledRezolveTarget toReturn;
-			if (_typeOnlyCacheEntries.TryGetValue(type, out toReturn))
-				return toReturn;
-			return _typeOnlyCacheEntries[type] = base.GetCompiledRezolveTarget(type);
 		}
 	}
 

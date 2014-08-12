@@ -7,7 +7,7 @@ namespace Rezolver
 	/// <summary>
 	/// Holds a reference to the default compiler for this application.
 	/// 
-	/// Unless you explicitly pass compilers to your containers, you will need to 
+	/// Unless you explicitly pass compilers to your rezolvers, you will need to 
 	/// set the <see cref="Default"/> property of this class to the compiler that
 	/// you wish to use by default.
 	/// </summary>
@@ -19,10 +19,10 @@ namespace Rezolver
 		{
 			public static readonly StubCompiler Instance = new StubCompiler();
 
-			public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver scope,
+			public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver rezolver,
 				ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
 			{
-				throw new NotImplementedException("You must set the RezolveTargetCompiler.Default to a non-null reference to a compiler if you intend to use the system default rezolver compiler.");
+				throw new NotImplementedException("You must set the RezolveTargetCompiler.Default to a reference to a compiler if you intend to use the system default rezolver compiler.");
 			}
 		}
 

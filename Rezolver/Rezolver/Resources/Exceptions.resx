@@ -132,31 +132,31 @@
   <data name="TypeIsAlreadyRegistered" xml:space="preserve">
     <value>The type {0} has already been registered</value>
   </data>
-	<data name="PathIsAtEnd" xml:space="preserve">
+  <data name="PathIsAtEnd" xml:space="preserve">
     <value>path's Next must not be null - pass path as null once it's reached the last item</value>
   </data>
-	<data name="LambdBodyIsNotNewExpressionFormat" xml:space="preserve">
+  <data name="LambdBodyIsNotNewExpressionFormat" xml:space="preserve">
     <value>The body of the lambda "{0}" is not a NewExpression</value>
   </data>
-	<data name="NoDefaultOrAllOptionalConstructorFormat" xml:space="preserve">
+  <data name="NoDefaultOrAllOptionalConstructorFormat" xml:space="preserve">
     <value>The type {0} has no default constructor, nor any constructors where all the parameters are optional.</value>
   </data>
-	<data name="NotRuntimeMethod" xml:space="preserve">
+  <data name="NotRuntimeMethod" xml:space="preserve">
     <value>This method is not to be called at run-time - it is only used for static expression analysis in building rezolver Builders.</value>
   </data>
-	<data name="UnableToResolveTypeFromScopeFormat" xml:space="preserve">
-    <value>Unable to resolve type {0} from Builder</value>
+  <data name="UnableToResolveTypeFromBuilderFormat" xml:space="preserve">
+    <value>Unable to resolve type {0} from builder</value>
   </data>
-	<data name="NoPublicConstructorsDefinedFormat" xml:space="preserve">
+  <data name="NoPublicConstructorsDefinedFormat" xml:space="preserve">
     <value>No public constructors declared on the type {0}</value>
   </data>
-	<data name="MoreThanOneConstructorFormat" xml:space="preserve">
+  <data name="MoreThanOneConstructorFormat" xml:space="preserve">
     <value>More than one constructor for {0} qualifies as a target for Auto construction</value>
   </data>
-	<data name="NoConstructorSetOnNewExpression" xml:space="preserve">
+  <data name="NoConstructorSetOnNewExpression" xml:space="preserve">
     <value>No constructor has been set on the NewExpression - this is not allowed.</value>
   </data>
-	<data name="CyclicDependencyDetectedInTargetFormat" xml:space="preserve">
+  <data name="CyclicDependencyDetectedInTargetFormat" xml:space="preserve">
     <value>Cyclic dependency detected in targets - current target of type {0} with DeclaredType of {1} has tried to include itself in its expression.</value>
   </data>
 </root>

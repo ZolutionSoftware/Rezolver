@@ -43,7 +43,7 @@ namespace Rezolver
 			_moduleBuilder = _assemblyBuilder.DefineDynamicModule(_assemblyModuleName, _assemblyModuleName + ".dll");
 		}
 
-		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver scope,
+		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver rezolver,
 			ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
 		{
 			var typeBuilder = _moduleBuilder.DefineType(string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter));
@@ -51,8 +51,8 @@ namespace Rezolver
 			typeBuilder.AddInterfaceImplementation(typeof(ICompiledRezolveTarget));
 
 
-			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, scope, targetStack, typeBuilder, typeof(object));
-			var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, scope, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
+			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, rezolver, targetStack, typeBuilder, typeof(object));
+			var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, rezolver, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
 
 			var methodBuilder = CreateInstance_GetObjectMethod(typeBuilder, staticGetObjectStaticMethod, "GetObject");
 			typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObject"));

@@ -42,18 +42,18 @@ namespace Rezolver
 			return _createExpressionDelegate(rezolver, targetType, dynamicRezolverExpression, currentTargets);
 		}
 
-		private Expression CreateExpressionFromInnerSingleton(IRezolver scope, Type targetType, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		private Expression CreateExpressionFromInnerSingleton(IRezolver rezolver, Type targetType, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
-			return ((SingletonTarget) _innerTarget).CreateExpression(scope, targetType: targetType, currentTargets: currentTargets);
+			return ((SingletonTarget) _innerTarget).CreateExpression(rezolver, targetType: targetType, currentTargets: currentTargets);
 		}
 
-		private Expression CreateExpressionFromInner(IRezolver scope, Type targetType, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		private Expression CreateExpressionFromInner(IRezolver rezolver, Type targetType, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
 		{
-			//BUG: This will not honour dynamic containers being passed at runtime as it's not being forwarded to the lazy.
+			//BUG: This will not honour dynamic rezolver being passed at runtime as it's not being forwarded to the lazy.
 			//The only solution to this will be to create a class dynamically which creates the lazy in the dynamic code.  I think.
 			if (_lazy == null)
 			{
-				var target = scope.Compiler.CompileTarget(_innerTarget, scope, dynamicRezolverExpression, currentTargets);
+				var target = rezolver.Compiler.CompileTarget(_innerTarget, rezolver, dynamicRezolverExpression, currentTargets);
 				_lazy = new Lazy<object>(target.GetObject);
 			}
 

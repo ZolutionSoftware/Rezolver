@@ -13,13 +13,13 @@ namespace Rezolver
 
 		#endregion
 
-		#region named child scopes
+		#region named child builders
 
-		private readonly Dictionary<string, INamedRezolverBuilder> _namedScopes = new Dictionary<string, INamedRezolverBuilder>();
+		private readonly Dictionary<string, INamedRezolverBuilder> _namedBuilders = new Dictionary<string, INamedRezolverBuilder>();
 
 		#endregion
 
-		public void Register(IRezolveTarget target, Type type = null, RezolverScopePath path = null)
+		public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
 			//TODO: Support name hierarchies by splitting the name by forward-slash and recursively creating a named-Builder tree.
 
@@ -29,10 +29,10 @@ namespace Rezolver
 					throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
 
 				//get the named Builder.  If it doesn't exist, create one.
-				var namedScope = GetNamedScope(path, true);
+				var builder = GetNamedBuilder(path, true);
 				//note here we don't pass the name through.
 				//when we support named scopes, we would be lopping off the first item in a hierarchical name to allow for the recursion.
-				namedScope.Register(target, type);
+				builder.Register(target, type);
 				return;
 			}
 
@@ -56,7 +56,7 @@ namespace Rezolver
 		/// as part of a wider path of scopes.</param>
 		/// <param name="target">Optional - a target that is to be added to the named Builder after creation.</param>
 		/// <returns></returns>
-		protected virtual INamedRezolverBuilder CreateNamedScope(string name, IRezolveTarget target)
+		protected virtual INamedRezolverBuilder CreateNamedBuilder(string name, IRezolveTarget target)
 		{
 			//base class simply creates a NamedRezolverBuilder
 			return new NamedRezolverBuilder(this, name);
@@ -69,10 +69,10 @@ namespace Rezolver
 			if (name != null)
 			{
 				INamedRezolverBuilder namedBuilder;
-				_namedScopes.TryGetValue(name, out namedBuilder);
+				_namedBuilders.TryGetValue(name, out namedBuilder);
 
 				// ReSharper disable once PossibleNullReferenceException
-				return _namedScopes == null ? null : namedBuilder.Fetch(type);
+				return _namedBuilders == null ? null : namedBuilder.Fetch(type);
 			}
 
 			IRezolveTarget target;
@@ -85,21 +85,21 @@ namespace Rezolver
 		}
 
 
-		public INamedRezolverBuilder GetNamedScope(RezolverScopePath path, bool create = false)
+		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
 			if(!path.MoveNext())
 				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
 
 			INamedRezolverBuilder namedBuilder;
 
-			if (!_namedScopes.TryGetValue(path.Current, out namedBuilder))
+			if (!_namedBuilders.TryGetValue(path.Current, out namedBuilder))
 			{
 				if (!create)
 					return null;
-				_namedScopes[path.Current] = namedBuilder = CreateNamedScope(path.Current, null);
+				_namedBuilders[path.Current] = namedBuilder = CreateNamedBuilder(path.Current, null);
 			}
 			//then walk to the next part of the path and create it if need be
-			return path.Next != null ? namedBuilder.GetNamedScope(path, true) : namedBuilder;
+			return path.Next != null ? namedBuilder.GetNamedBuilder(path, true) : namedBuilder;
 		}
 	}
 }

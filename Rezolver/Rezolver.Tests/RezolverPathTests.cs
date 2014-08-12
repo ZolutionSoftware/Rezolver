@@ -4,19 +4,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class RezolverScopePathTests
+	public class RezolverPathTests
 	{
 		[TestMethod]
 		public void ShouldCreateFromString()
 		{
-			RezolverScopePath path = new RezolverScopePath("parent");
+			RezolverPath path = new RezolverPath("parent");
 			Assert.AreEqual("parent", path.Path);
 		}
 
 		[TestMethod]
 		public void ShouldCreateFromStringImplicit()
 		{
-			RezolverScopePath path = "parent.child";
+			RezolverPath path = "parent.child";
 			Assert.AreEqual("parent.child", path.Path);
 		}
 
@@ -24,13 +24,13 @@ namespace Rezolver.Tests
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void ShouldNotAllowNullPath()
 		{
-			RezolverScopePath path = new RezolverScopePath(null);
+			RezolverPath path = new RezolverPath(null);
 		}
 
 		[TestMethod]
 		public void ShouldCreateMultiStepPathFromString()
 		{
-			RezolverScopePath path = new RezolverScopePath("parent.child");
+			RezolverPath path = new RezolverPath("parent.child");
 			Assert.AreEqual("parent.child", path.Path);
 			Assert.IsTrue(path.MoveNext());
 			Assert.AreEqual("parent", path.Current);
@@ -42,7 +42,7 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldAllowPeekingNextPathItem()
 		{
-			RezolverScopePath path = new RezolverScopePath("parent.child.grandchild");
+			RezolverPath path = new RezolverPath("parent.child.grandchild");
 			//before walking starts, the next item should be the first
 			Assert.AreEqual("parent", path.Next);
 			path.MoveNext();
@@ -68,7 +68,7 @@ namespace Rezolver.Tests
 				"a. .b",
 			};
 
-			AssertEx.Throws<ArgumentException>().ForEach(testArgs, s => new RezolverScopePath(s));
+			AssertEx.Throws<ArgumentException>().ForEach(testArgs, s => new RezolverPath(s));
 
 		}
 
@@ -76,7 +76,7 @@ namespace Rezolver.Tests
 		[ExpectedException(typeof(ArgumentException))]
 		public void ShouldNotAllowDoubleSeparator()
 		{
-			RezolverScopePath path = new RezolverScopePath("a..b");
+			RezolverPath path = new RezolverPath("a..b");
 		}
 
 	}

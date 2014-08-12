@@ -46,67 +46,67 @@ namespace Rezolver.Tests
 			return _currentCompiler = CreateCompilerBase(callingMethod);
 		}
 
-		protected IRezolver CreateContainerScopeMock(IRezolveTargetCompiler compiler)
+		protected IRezolver CreateRezolverMock(IRezolveTargetCompiler compiler)
 		{
-			Assert.IsNotNull(compiler, "The compiler must be passed when setting up the container mock for this test");
+			Assert.IsNotNull(compiler, "The compiler must be passed when setting up the rezolver mock for this test");
 			var mock = new Mock<IRezolver>();
 			mock.Setup(c => c.Compiler).Returns(compiler);
 			return mock.Object;
 		}
 
-		protected Mock<IRezolver> CreateDefaultMockForContainer(IRezolveTargetCompiler compiler)
+		protected Mock<IRezolver> CreateDefaultMockForRezolver(IRezolveTargetCompiler compiler)
 		{
-			var mockContainer = new Mock<IRezolver>();
-			AddCompilerToScopeMock(mockContainer, compiler);
-			mockContainer.Setup(c => c.Resolve(It.IsAny<Type>(), null, null)).Callback<Type, string, IRezolver>(
+			var mock = new Mock<IRezolver>();
+			AddCompilerToRezolverMock(mock, compiler);
+			mock.Setup(c => c.Resolve(It.IsAny<Type>(), null, null)).Callback<Type, string, IRezolver>(
 				(t, s, c) => { throw new InvalidOperationException(string.Format("Type {0} not mocked", t)); });
-			return mockContainer;
+			return mock;
 		}
 
-		protected void AddCompilerToScopeMock(Mock<IRezolver> mock, IRezolveTargetCompiler compiler)
+		protected void AddCompilerToRezolverMock(Mock<IRezolver> mock, IRezolveTargetCompiler compiler)
 		{
 			mock.Setup(r => r.Compiler).Returns(compiler);
 		}
 
-		protected void AddTargetToScopeMock(Mock<IRezolver> mock, Type forType, IRezolveTarget target)
+		protected void AddTargetToRezolverMock(Mock<IRezolver> mock, Type forType, IRezolveTarget target)
 		{
 			forType = forType ?? typeof(int);
 			mock.Setup(r => r.Fetch(forType, null)).Returns(target);
 		}
 
-		protected void AddIntTargetToScopeMock(Mock<IRezolver> mock, Type forType = null)
+		protected void AddIntTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
-			AddTargetToScopeMock(mock, forType ?? typeof (int), _intObjectTarget.Value);
+			AddTargetToRezolverMock(mock, forType ?? typeof (int), _intObjectTarget.Value);
 		}
 
-		protected void AddNullableIntTargetToScopeMock(Mock<IRezolver> mock, Type forType = null)
+		protected void AddNullableIntTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
-			AddTargetToScopeMock(mock, forType ?? typeof (int?), _nullableIntObjectTarget.Value);
+			AddTargetToRezolverMock(mock, forType ?? typeof (int?), _nullableIntObjectTarget.Value);
 		}
 
-		protected void AddStringTargetToScopeMock(Mock<IRezolver> mock, Type forType = null)
+		protected void AddStringTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
-			AddTargetToScopeMock(mock, forType ?? typeof (string), _stringObjectTarget.Value);
+			AddTargetToRezolverMock(mock, forType ?? typeof (string), _stringObjectTarget.Value);
 		}
 
-		protected void AddTransientTargetToScopeMock(Mock<IRezolver> mock, Type forType = null)
+		protected void AddTransientTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
-			AddTargetToScopeMock(mock, forType ?? typeof (ITransient), _transientConstructorTarget.Value);
+			AddTargetToRezolverMock(mock, forType ?? typeof (ITransient), _transientConstructorTarget.Value);
 		}
 
-		protected void AddSingletonTargetToScopeMock(Mock<IRezolver> mock, Type forType = null)
+		protected void AddSingletonTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
-			AddTargetToScopeMock(mock, forType ?? typeof(ISingleton), _singletonConstructorTarget.Value);
+			AddTargetToRezolverMock(mock, forType ?? typeof(ISingleton), _singletonConstructorTarget.Value);
 		}
 
-		protected void AddCompositeTargetToScopeMock(Mock<IRezolver> mock, Type forType = null)
+		protected void AddCompositeTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
-			AddTargetToScopeMock(mock, forType ?? typeof (IComposite), _compositeConstructorTarget.Value);
+			AddTargetToRezolverMock(mock, forType ?? typeof (IComposite), _compositeConstructorTarget.Value);
 		}
 
-		protected void AddSuperComplexTargetToScopeMock(Mock<IRezolver> mock, Type forType = null)
+		protected void AddSuperComplexTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
-			AddTargetToScopeMock(mock, forType ?? typeof(ISuperComplex), _superComplexConstructorTarget.Value);
+			AddTargetToRezolverMock(mock, forType ?? typeof(ISuperComplex), _superComplexConstructorTarget.Value);
 		}
 	}
 }

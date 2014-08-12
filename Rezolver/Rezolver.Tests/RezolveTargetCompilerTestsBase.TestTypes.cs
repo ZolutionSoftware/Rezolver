@@ -132,8 +132,8 @@ namespace Rezolver.Tests
 		}
 
 		/// <summary>
-		/// Special test target for the dynamic tests - returns the dynamic container that is passed
-		/// into the delegate that is built from the target, or a default if that dynamic container is
+		/// Special test target for the dynamic tests - returns the dynamic rezolver that is passed
+		/// into the delegate that is built from the target, or a default if that dynamic rezolver is
 		/// passed as null.
 		/// </summary>
 		public class DynamicTestTarget : IRezolveTarget

@@ -36,10 +36,10 @@ namespace Rezolver.Tests
 		public void ShouldSupportHierarchicalNaming()
 		{
 			IRezolverBuilder builder = new RezolverBuilder();
-			INamedRezolverBuilder childBuilder = builder.GetNamedScope("parent.child", create: true);
+			INamedRezolverBuilder childBuilder = builder.GetNamedBuilder("parent.child", create: true);
 			Assert.IsNotNull(childBuilder);
 			Assert.AreEqual("child", childBuilder.Name);
-			INamedRezolverBuilder parentBuilder = builder.GetNamedScope("parent", create: false);
+			INamedRezolverBuilder parentBuilder = builder.GetNamedBuilder("parent", create: false);
 			Assert.AreEqual("parent", parentBuilder.Name);
 		}
 	}

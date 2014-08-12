@@ -44,24 +44,24 @@ namespace Rezolver.Tests
 		public void ShouldRegisterForImplicitType()
 		{
 			IRezolveTarget t = new ObjectTarget("hello word");
-			IRezolverBuilder container = new RezolverBuilder();
-			container.Register(t);
-			var t2 = container.Fetch(typeof(string));
+			IRezolverBuilder rezolverBuilder = new RezolverBuilder();
+			rezolverBuilder.Register(t);
+			var t2 = rezolverBuilder.Fetch(typeof(string));
 			Assert.AreSame(t, t2);
 		}
 
 		[TestMethod]
 		public void ShouldSupportTwoRegistrations()
 		{
-			IRezolverBuilder container = new RezolverBuilder();
+			IRezolverBuilder builder = new RezolverBuilder();
 			var simpleType = new SimpleType();
 
 			IRezolveTarget target1 = "hello world".AsObjectTarget();
 			IRezolveTarget target2 = new SimpleType().AsObjectTarget();
-			container.Register(target1);
-			container.Register(target2);
-			Assert.AreEqual(target1, container.Fetch(typeof(string)));
-			Assert.AreEqual(target2, container.Fetch(typeof (SimpleType)));
+			builder.Register(target1);
+			builder.Register(target2);
+			Assert.AreEqual(target1, builder.Fetch(typeof(string)));
+			Assert.AreEqual(target2, builder.Fetch(typeof (SimpleType)));
 		}
 
 

@@ -12,7 +12,7 @@ namespace Rezolver
 	/// 
 	/// Please note - this class is not thread-safe.
 	/// </summary>
-	public class RezolverScopePath
+	public class RezolverPath
 	{
 		public const string DefaultPathSeparator = ".";
 		private static readonly Regex RxNoWhitespace = new Regex(@"\s");
@@ -39,7 +39,7 @@ namespace Rezolver
 
 		private string _next;
 
-		public RezolverScopePath(string path, string pathSeparator = null)
+		public RezolverPath(string path, string pathSeparator = null)
 		{
 			PathSeparator = pathSeparator ?? DefaultPathSeparator;
 			path.MustNotBeNull("path");
@@ -59,7 +59,7 @@ namespace Rezolver
 			Items = items;
 		}
 
-		public RezolverScopePath(RezolverScopePath source)
+		public RezolverPath(RezolverPath source)
 		{
 			source.MustNotBeNull("source");
 			Path = source.Path;
@@ -68,25 +68,15 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Creates a ResolverScopePath from the given string, using the default
+		/// Creates a ResolverPath from the given string, using the default
 		/// path separator.
 		/// </summary>
 		/// <param name="source"></param>
 		/// <returns></returns>
-		public static implicit operator RezolverScopePath(string source)
+		public static implicit operator RezolverPath(string source)
 		{
-			return new RezolverScopePath(source);
+			return new RezolverPath(source);
 		}
-
-		//public IEnumerator<string> GetEnumerator()
-		//{
-		//	return Items.AsEnumerable().GetEnumerator();
-		//}
-
-		//IEnumerator IEnumerable.GetEnumerator()
-		//{
-		//	return GetEnumerator();
-		//}
 
 		public bool MoveNext()
 		{

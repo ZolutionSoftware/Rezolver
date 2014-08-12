@@ -1,37 +1,34 @@
 Rezolver Design Notes
 =====================
 
-My idea at the moment is that Rezolver will be made up of two main components:
+Much of the design for this framework is as you would expect from all IOC containers:
 
-- The Rezolver Container
-- The Rezolver
+IRezolver interface
+-------------------
+The container, once it has been built.  It is from this that you obtain instances of
+objects (possibly named).  The entry point for an IOC call.
 
-Rezolver Container
-------------------
+IRezolverBuilder interface
+--------------------------
+As the name suggests, an instance of this interface contains all the type registrations
+that will then be used to create an IRezolver.
 
-This will be responsible for holding the registration of factories (an abstraction of different methods of building an object)
-against target types and, optionally, names.
+IRezolveTarget
+--------------
+The core of Rezolver is dynamic code generation through expressions.  This type is used
+to produce those expressions for the different methods by which objects
+can be resolved.
 
-A Rezolver Container will have a parent and children.  Child containers are always named, however, it'll be possible to use a container as a factory
-for a type or types so that you can define a local scope.  Named containers, clearly, define a named scope.
+ICompiledRezolveTarget
+----------------------
+An IRezolveTarget is compiled into one of these.  The methods on this type
+produce the actual instances that are resolved by an IRezolver.
 
-A container is not responsible for creating objects - that's the Rezolver's job - the container simply provides the means by which to do it.
+IRezolveTargetCompiler
+----------------------
+Responsible for creating ICompiledRezolveTarget instances from an IRezolveTarget - required
+by IRezolver to turn targets into code.
 
-The premise here is that there will ultimately be multiple ways to build a Rezolver Container - but the underlying implementation will remain the
-same (ideally) across all platforms.
-
-A key feature of Rezolver containers will be that you will be able to enhance an existing container with additional entries based on ambient information
-(e.g. the current controller in an MVC request) without destroying any existing containers.
-
-Rezolver
---------
-
-Given a particular container, the Rezolver's job is to respond to requests to find the means by which to create a given instance type, and
-then create that object in the optimal way.
-
-It is at this level that we would look to implement disposable rezolvers which track all the IDisposable objects that they create.
-
-The more I think about it, the more I wonder how possible it will be to split the functionality in this way, or indeed whether it's worthwhile.
-A big part of me says that it is, but then I start thinking about things like caching and I start to wonder how possible it will be (I'm thinking 
-that the caching needs to be done at the container level).
-
+There are two compilers - a core portable one which builds delegates from expressions, 
+and one which builds dynamically compiled implementations of ICompiledRezolveTargets.
+The second is the fastest and most efficient, but is unable to execute non-public code.

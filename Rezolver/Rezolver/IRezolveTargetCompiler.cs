@@ -5,26 +5,27 @@ using System.Linq.Expressions;
 namespace Rezolver
 {
 	/// <summary>
-	/// Interface for an object that compiles delegates from IRezolveTarget instances.
+	/// Interface for an object that produces ICompiledRezolveTarget instances from IRezolveTarget instances.
 	/// </summary>
 	public interface IRezolveTargetCompiler
 	{
 		///<summary>
 		/// Creates and builds a compiled target for the passed rezolve target which can then be used to 
-		/// fetch the object(s) it produces.
+		/// create/obtain the object(s) it produces.
 		/// </summary>
 		/// <param name="target">The target to be compiled.</param>
-		/// <param name="scope">The Builder within which this target is to be compiled - this will be used
-		/// to look up any other targets to be used as dependencies for the statically compiled delegate.</param>
-		/// <param name="dynamicRezolverExpression">When this is the expression to be used to represent the
-		/// dynamic container parameter used in the dynamic rezolve calls.  If null, then a default
-		/// should be used if required - the <see cref="ExpressionHelper.DynamicRezolverParam"/></param>
-		/// <param name="targetStack">Optional - if this compilation is taking place as part of a wider compilation
-		/// then this is used to pass the stack of targets that are already compiling.  Generally you will pass this
-		/// as null.</param>
-		/// <returns>A compiled target that produces the object represented by <paramref name="target"/> via multiple
-		/// different method.</returns>
-		ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver scope,
-			ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> targetStack = null);
+		/// <param name="rezolver">The rezolver that defines the Builder in which this expression
+		///   is being built.  Note that this is a 'compile-time' Builder and should be used during expression-building
+		///   time to resolve any other targets that might be required for the statically compiled expression.</param>
+		/// <param name="dynamicRezolverExpression">Optional. Used to define the parameter expression to be used in 
+		/// the code compiled into the resulting target that represents the dynamic rezolver that is passed to the
+		/// <see cref="ICompiledRezolveTarget.GetObjectDynamic"/> method.</param>
+		/// <param name="currentTargets">Optional. A stack of targets that are currently being compiled - used to help detect
+		/// circular dependencies between targets.</param>
+		/// <returns>A compiled target that produces the object represented by <paramref name="target"/>.</returns>
+		ICompiledRezolveTarget CompileTarget(IRezolveTarget target, 
+			IRezolver rezolver,
+			ParameterExpression dynamicRezolverExpression = null, 
+			Stack<IRezolveTarget> targetStack = null);
 	}
 }
