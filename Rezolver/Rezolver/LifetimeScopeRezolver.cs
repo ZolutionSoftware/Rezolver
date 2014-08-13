@@ -42,9 +42,10 @@ namespace Rezolver
 			//I think targets need to compile a special version of their code which
 			//accepts a lifetime Builder (and optionally a dynamically supplied rezolver), so that
 			//the target itself has full control over how it creates its object under
-			//lifetime scopes.  This method would then be implemented similarly to
-			//how the base method is done - i.e. fetching the compiled target and 
-			//executing it.
+			//lifetime scopes (and whether the object gets added to them).  This method would 
+			//then be implemented similarly to how the base method is done - i.e. fetching 
+			//the compiled target and executing it.
+
 			//This would allow for the implementation of a scoped singleton, but 
 			//the implementation would not be trivial, as it would need to query
 			//the incoming scope to see if an instance already existed.
@@ -105,7 +106,7 @@ namespace Rezolver
 			_disposing = false;
 		}
 
-		public void Add(IDisposable disposable)
+		public void AddToScope(IDisposable disposable)
 		{
 			disposable.MustNotBeNull("disposable");
 			TrackDisposable(new RezolverKey(disposable.GetType(), null), disposable);

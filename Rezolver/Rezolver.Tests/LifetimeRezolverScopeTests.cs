@@ -53,7 +53,19 @@ namespace Rezolver.Tests
 			ITestDisposable disposable = null;
 			using (var scope = new LifetimeScopeRezolver(rezolverMock))
 			{
-				scope.Add(disposable = new DisposableType());
+				scope.AddToScope(disposable = new DisposableType());
+			}
+			Assert.IsTrue(disposable.Disposed);
+		}
+
+		[TestMethod]
+		public void ShouldConfirmNoInstanceAlreadyRegistered()
+		{
+			var rezolverMock = Mock.Of<IRezolver>();
+
+			using (var scope = new LifetimeScopeRezolver(rezolverMock))
+			{
+				
 			}
 		}
 
