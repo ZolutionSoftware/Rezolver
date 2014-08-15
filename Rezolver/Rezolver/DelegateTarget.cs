@@ -27,8 +27,10 @@ namespace Rezolver
 			_declaredType = declaredType ?? typeof(T);
 		}
 
-		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(CompileContext context)
 		{
+			//TODO: This doesn't forward the rezolve context, and it should, which would mean changing how
+			//this code is compiled.
 			Expression<Func<T>> e = () => _factory();
 			return e.Body;
 		}

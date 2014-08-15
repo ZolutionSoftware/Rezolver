@@ -33,6 +33,12 @@ namespace Rezolver
 			{
 				return _getObjectDynamicDelegate(dynamic);
 			}
+
+			public object GetObject(RezolveContext context)
+			{
+
+				throw new NotImplementedException();
+			}
 		}
 
 		private static readonly MethodInfo CompileStaticGeneric = typeof (RezolveTargetDelegateCompiler).GetMethods(BindingFlags.Instance |
@@ -58,6 +64,12 @@ namespace Rezolver
 				CompileStatic(target, rezolver,  targetStack: targetStack),
 				CompileDynamic(target, rezolver, dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam, targetStack: targetStack)
 				);
+		}
+
+		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
+		{
+#error this needs to be implemented
+			throw new NotImplementedException();
 		}
 
 		private Func<object> CompileStatic(IRezolveTarget target, IRezolver rezolver, Type targetType = null, Stack<IRezolveTarget> targetStack = null)

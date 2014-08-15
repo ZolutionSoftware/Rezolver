@@ -31,37 +31,9 @@ namespace Rezolver
 		/// <param name="currentTargets">Optional. A stack of targets that are currently being compiled - used to help detect
 		/// circular dependencies between targets.</param>
 		/// <returns></returns>
-		Expression CreateExpression(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null);
+		//Expression CreateExpression(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null);
 
-		Expression CreateExpression(IRezolver rezolver, ICompileContext context);
+		Expression CreateExpression(CompileContext context);
 		Type DeclaredType { get; }
-	}
-
-	public class RezolveContext
-	{
-		public static RezolveContext EmptyContext = new RezolveContext();
-
-		public RezolveContext(string name = null, IRezolver dynamicRezolver = null, ILifetimeScopeRezolver scope = null)
-		{
-
-		}
-
-		public RezolveContext() : this(null, null, null)
-		{
-
-		}
-
-		public string Name { get; private set; }
-		public IRezolver DynamicRezolver { get; private set; }
-		public ILifetimeScopeRezolver Scope { get; private set; }
-	}
-
-	public interface ICompileContext
-	{
-		Type TargetType { get; }
-		ParameterExpression RezolveNameParameter { get; }
-		ParameterExpression DynamicRezolverParameter { get; }
-		ParameterExpression LifetimeScopeParameter { get; }
-		Stack<IRezolveTarget> CurrentTargets { get; }
 	}
 }

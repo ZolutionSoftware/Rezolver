@@ -15,7 +15,7 @@ namespace Rezolver
 	public class SingletonTarget : RezolveTargetBase
 	{
 		private IRezolveTarget _innerTarget;
-		private Func<IRezolver, Type, ParameterExpression, Stack<IRezolveTarget>, Expression> _createExpressionDelegate;  
+		private Func<CompileContext, Expression> _createExpressionDelegate;  
 		//this is the most naive implementation of this class - bake a lazy into this singleton,
 		//initialise it with a delegate built from the inner target's expression, and then this
 		//one's expression simply returns this lazy's value.
@@ -37,23 +37,23 @@ namespace Rezolver
 			//can't create the lazy until we get a Builder on the first CreateExpression call
 		}
 
-		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			return _createExpressionDelegate(rezolver, targetType, dynamicRezolverExpression, currentTargets);
+			return _createExpressionDelegate(context);
 		}
 
-		private Expression CreateExpressionFromInnerSingleton(IRezolver rezolver, Type targetType, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		private Expression CreateExpressionFromInnerSingleton(CompileContext context)
 		{
-			return ((SingletonTarget) _innerTarget).CreateExpression(rezolver, targetType: targetType, currentTargets: currentTargets);
+			return ((SingletonTarget) _innerTarget).CreateExpression(context);
 		}
 
-		private Expression CreateExpressionFromInner(IRezolver rezolver, Type targetType, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		private Expression CreateExpressionFromInner(CompileContext context)
 		{
 			//BUG: This will not honour dynamic rezolver being passed at runtime as it's not being forwarded to the lazy.
 			//The only solution to this will be to create a class dynamically which creates the lazy in the dynamic code.  I think.
 			if (_lazy == null)
 			{
-				var target = rezolver.Compiler.CompileTarget(_innerTarget, rezolver, dynamicRezolverExpression, currentTargets);
+				var target = context.Rezolver.Compiler.CompileTarget(_innerTarget, context);
 				_lazy = new Lazy<object>(target.GetObject);
 			}
 

@@ -23,10 +23,11 @@ namespace Rezolver
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
 		}
 
-		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			return Expression.New(_ctor,
-				_parameterBindings.Select(pb => pb.Target.CreateExpression(rezolver, targetType: pb.Parameter.ParameterType, dynamicRezolverExpression: dynamicRezolverExpression, currentTargets: currentTargets)));
+				_parameterBindings.Select(pb => pb.Target.CreateExpression(new CompileContext(context, pb.Parameter.ParameterType))));
+
 		}
 
 		public override Type DeclaredType

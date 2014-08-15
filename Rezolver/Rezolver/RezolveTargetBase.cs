@@ -26,7 +26,9 @@ namespace Rezolver
 		/// <param name="dynamicRezolverExpression"></param>
 		/// <param name="currentTargets"></param>
 		/// <returns></returns>
-		protected abstract Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null);
+
+
+		protected abstract Expression CreateExpressionBase(CompileContext context);
 
 		/// <summary>
 		/// 
@@ -48,25 +50,19 @@ namespace Rezolver
 		/// <param name="dynamicRezolverExpression"></param>
 		/// <param name="currentTargets"></param>
 		/// <returns></returns>
-		public virtual Expression CreateExpression(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		public virtual Expression CreateExpression(CompileContext context)
 		{
-			if (targetType != null && !SupportsType(targetType))
-				throw new ArgumentException(String.Format(Exceptions.TargetDoesntSupportType_Format, targetType),
+			if (context.TargetType != null && !SupportsType(context.TargetType))
+				throw new ArgumentException(String.Format(Exceptions.TargetDoesntSupportType_Format, context.TargetType),
 					"targetType");
-			if (currentTargets != null)
-			{
-				if (currentTargets.Contains(this))
-					throw new InvalidOperationException(string.Format(Exceptions.CyclicDependencyDetectedInTargetFormat, GetType(), DeclaredType));
-			}
-			else
-				currentTargets = new Stack<IRezolveTarget>();
 
-			currentTargets.Push(this);
+			if(!context.PushCompileStack(this))
+					throw new InvalidOperationException(string.Format(Exceptions.CyclicDependencyDetectedInTargetFormat, GetType(), DeclaredType));
 
 			try
 			{
-				var result = CreateExpressionBase(rezolver, targetType: targetType, dynamicRezolverExpression: dynamicRezolverExpression, currentTargets: currentTargets);
-				Type convertType = targetType ?? DeclaredType;
+				var result = CreateExpressionBase(context);
+				Type convertType = context.TargetType ?? DeclaredType;
 
 				if (convertType == typeof(object) && result.Type.IsValueType 
 					|| !convertType.IsAssignableFrom(DeclaredType) 
@@ -77,7 +73,7 @@ namespace Rezolver
 			}
 			finally
 			{
-				currentTargets.Pop();
+				context.PopCompileStack();
 			}
 		}
 

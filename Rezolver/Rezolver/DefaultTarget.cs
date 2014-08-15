@@ -14,7 +14,7 @@ namespace Rezolver
 			_declaredType = type;
 		}
 
-		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			return Expression.Default(DeclaredType);
 		}

@@ -79,6 +79,11 @@ namespace Rezolver
 			{
 				throw new InvalidOperationException(String.Format("Could not resolve type {0}", _type));
 			}
+
+			public object GetObject(RezolveContext context)
+			{
+				throw new InvalidOperationException(String.Format("Could not resolve type {0}", _type));
+			}
 		}
 
 		protected RezolverBase()
@@ -174,7 +179,7 @@ namespace Rezolver
 			var target = Fetch(key.Type, key.Name);
 
 			if (target != null)
-				return Compiler.CompileTarget(target, this, ExpressionHelper.DynamicRezolverParam, null);
+				return Compiler.CompileTarget(target, new CompileContext(this, key.Type));
 
 			return GetMissingTarget(key.Type);
 		}
@@ -184,7 +189,7 @@ namespace Rezolver
 			var target = Fetch(type);
 
 			if (target != null)
-				return Compiler.CompileTarget(target, this, ExpressionHelper.DynamicRezolverParam, null);
+				return Compiler.CompileTarget(target, new CompileContext(this, type));
 
 			return GetMissingTarget(type);
 		}

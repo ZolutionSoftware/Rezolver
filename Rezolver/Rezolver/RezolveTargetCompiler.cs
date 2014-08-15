@@ -24,6 +24,11 @@ namespace Rezolver
 			{
 				throw new NotImplementedException("You must set the RezolveTargetCompiler.Default to a reference to a compiler if you intend to use the system default rezolver compiler.");
 			}
+
+			public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
+			{
+				throw new NotImplementedException("You must set the RezolveTargetCompiler.Default to a reference to a compiler if you intend to use the system default rezolver compiler.");
+			}
 		}
 
 		public static IRezolveTargetCompiler Default

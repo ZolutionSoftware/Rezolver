@@ -4,5 +4,6 @@
 	{
 		object GetObject();
 		object GetObjectDynamic(IRezolver @dynamic);
+		object GetObject(RezolveContext context);
 	}
 }

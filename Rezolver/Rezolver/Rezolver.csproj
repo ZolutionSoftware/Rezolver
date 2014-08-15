@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachingRezolver.cs" />
+    <Compile Include="CompileContext.cs" />
     <Compile Include="ICompiledRezolveTarget.cs" />
     <Compile Include="ChildRezolverBuilder.cs" />
     <Compile Include="ConstructorTarget.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="INamedRezolverBuilder.cs" />
     <Compile Include="IRezolverBuilder.cs" />
     <Compile Include="LifetimeScopeRezolver.cs" />
+    <Compile Include="RezolveContext.cs" />
     <Compile Include="RezolvedTarget.cs" />
     <Compile Include="Rezolver.cs" />
     <Compile Include="RezolverBuilderExtensions.cs" />

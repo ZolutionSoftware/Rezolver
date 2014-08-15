@@ -40,9 +40,9 @@ namespace Rezolver
 				_declaredType = _object == null ? typeof(object) : _object.GetType();	
 		}
 
-		protected override Expression CreateExpressionBase(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
+		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			return Expression.Constant(_object, targetType ?? DeclaredType);
+			return Expression.Constant(_object, context.TargetType ?? DeclaredType);
 		}
 
 		public override Type DeclaredType
