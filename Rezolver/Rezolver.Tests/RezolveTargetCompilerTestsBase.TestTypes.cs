@@ -169,6 +169,17 @@ namespace Rezolver.Tests
 			{
 				get { return typeof(IRezolver); }
 			}
+
+
+			public Expression CreateExpression(CompileContext context)
+			{
+				//this method isn't always called with a dynamicRezolverExpression passed
+				if (context.TargetType != null && !SupportsType(context.TargetType))
+					throw new ArgumentException(string.Format("Type not supported: {0}", context.TargetType));
+
+					return Expression.Coalesce(Expression.Convert(context.ContextDynamicRezolverPropertyExpression, context.TargetType ?? DeclaredType),
+						Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), context.TargetType ?? DeclaredType));
+			}
 		}
 	}
 }

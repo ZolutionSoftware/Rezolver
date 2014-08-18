@@ -103,12 +103,12 @@ namespace Rezolver
 
 				return (name == null ?
 					 GetCompiledRezolveTarget(type)
-					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObjectDynamic(dynamicRezolver);
+					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObject(new RezolveContext(name, dynamicRezolver));
 			}
 
 			return (name == null ?
 					 GetCompiledRezolveTarget(type)
-					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObject();
+					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObject(new RezolveContext(name));
 		}
 
 		public virtual T Resolve<T>(string name = null, IRezolver @dynamic = null)
@@ -119,11 +119,12 @@ namespace Rezolver
 					return dynamic.Resolve<T>(name);
 
 				return
-					(T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObjectDynamic(
-						dynamic);
+					(T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObject(
+						new RezolveContext(name, dynamic));
 			}
 
-			return (T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObject();
+			return (T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObject(
+				new RezolveContext(name));
 		}
 
 		public virtual ILifetimeScopeRezolver CreateLifetimeScope()

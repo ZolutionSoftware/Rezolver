@@ -1,9 +1,16 @@
-﻿namespace Rezolver
+﻿using System;
+namespace Rezolver
 {
 	public interface ICompiledRezolveTarget
 	{
-		object GetObject();
-		object GetObjectDynamic(IRezolver @dynamic);
 		object GetObject(RezolveContext context);
+	}
+
+	public static class ICompiledRezolveTargetExtensions
+	{
+		public static object GetObject(this ICompiledRezolveTarget target)
+		{
+			return target.GetObject(RezolveContext.EmptyContext);
+		}
 	}
 }

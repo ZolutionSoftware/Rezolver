@@ -37,6 +37,39 @@ namespace Rezolver
 
 		private readonly Stack<IRezolveTarget> _compilingTargets;
 
+		private MemberExpression _contextDynamicRezolverPropertyExpression;
+		/// <summary>
+		/// Returns an expression that representss reading the Rezolver property of the <see cref="RezolveContextParameter"/> to aid in 
+		/// code generation.
+		/// </summary>
+		public MemberExpression ContextDynamicRezolverPropertyExpression
+		{
+			get
+			{
+				if(_contextDynamicRezolverPropertyExpression == null)
+				{
+					_contextDynamicRezolverPropertyExpression = Expression.Property(RezolveContextParameter, "DynamicRezolver");
+				}
+				return _contextDynamicRezolverPropertyExpression;
+			}
+		}
+
+		private MemberExpression _contextScopePropertyExpression;
+		/// <summary>
+		/// Returns an expression that represents reading the Scope property of the <see cref="RezolveContext"/>
+		/// </summary>
+		public MemberExpression ContextScopePropertyExpression
+		{
+			get
+			{
+				if (_contextScopePropertyExpression == null)
+					_contextScopePropertyExpression = Expression.Property(RezolveContextParameter, "Scope");
+				return _contextScopePropertyExpression;
+			}
+		}
+
+		//TODO: add property expression getters for the other properties on RezolveContext.
+
 		/// <summary>
 		/// An enumerable representing the current stack of targets that are being compiled.
 		/// 

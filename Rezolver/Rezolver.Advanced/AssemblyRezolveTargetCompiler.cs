@@ -43,26 +43,48 @@ namespace Rezolver
 			_moduleBuilder = _assemblyBuilder.DefineDynamicModule(_assemblyModuleName, _assemblyModuleName + ".dll");
 		}
 
-		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver rezolver,
-			ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
+		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
 		{
 			var typeBuilder = _moduleBuilder.DefineType(string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter));
 
 			typeBuilder.AddInterfaceImplementation(typeof(ICompiledRezolveTarget));
 
 
-			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, rezolver, targetStack, typeBuilder, typeof(object));
-			var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, rezolver, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
+			//var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, rezolver, targetStack, typeBuilder, typeof(object));
+			//var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, rezolver, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
+			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, context, typeBuilder);
+
 
 			var methodBuilder = CreateInstance_GetObjectMethod(typeBuilder, staticGetObjectStaticMethod, "GetObject");
 			typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObject"));
 
-			methodBuilder = CreateInstance_GetObjectDynamicMethod(typeBuilder, staticGetObjectDynamicMethod, "GetObjectDynamic");
-			typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObjectDynamic"));
+			//methodBuilder = CreateInstance_GetObjectDynamicMethod(typeBuilder, staticGetObjectDynamicMethod, "GetObjectDynamic");
+			//typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObjectDynamic"));
 
 			var type = typeBuilder.CreateType();
 			return (ICompiledRezolveTarget)Activator.CreateInstance(type);
 		}
+
+		//public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver rezolver,
+		//	ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
+		//{
+		//	var typeBuilder = _moduleBuilder.DefineType(string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter));
+
+		//	typeBuilder.AddInterfaceImplementation(typeof(ICompiledRezolveTarget));
+
+
+		//	var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, rezolver, targetStack, typeBuilder, typeof(object));
+		//	var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, rezolver, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
+
+		//	var methodBuilder = CreateInstance_GetObjectMethod(typeBuilder, staticGetObjectStaticMethod, "GetObject");
+		//	typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObject"));
+
+		//	methodBuilder = CreateInstance_GetObjectDynamicMethod(typeBuilder, staticGetObjectDynamicMethod, "GetObjectDynamic");
+		//	typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObjectDynamic"));
+
+		//	var type = typeBuilder.CreateType();
+		//	return (ICompiledRezolveTarget)Activator.CreateInstance(type);
+		//}
 
 		private class ConstantRewriter : ExpressionVisitor
 		{
@@ -192,39 +214,40 @@ namespace Rezolver
 			return methodBuilder;
 		}
 
-		private MethodBuilder CreateStatic_GetObjectDynamicMethod(IRezolveTarget target, IRezolver scope, Stack<IRezolveTarget> targetStack,
-			TypeBuilder typeBuilder, ParameterExpression dynamicRezolverExpression, Type targetType = null)
+		//private MethodBuilder CreateStatic_GetObjectDynamicMethod(IRezolveTarget target, IRezolver scope, Stack<IRezolveTarget> targetStack,
+		//	TypeBuilder typeBuilder, ParameterExpression dynamicRezolverExpression, Type targetType = null)
+		//{
+		//	targetType = targetType ?? target.DeclaredType;
+
+
+		//	var toBuild = target.CreateExpression(scope, targetType: targetType,
+		//		currentTargets: targetStack,
+		//		dynamicRezolverExpression: dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam);
+
+		//	//now we have to rewrite the expression to life all constants out and feed them in from an additional
+		//	//parameter that we also dynamically compile.
+		//	var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
+		//	MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectDynamic",
+		//		MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, targetType, new Type[0]);
+
+		//	Expression.Lambda(rewriter.LiftConstants(),
+		//		dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam).CompileToMethod(toReturn);
+		//	return toReturn;
+		//}
+
+		private MethodBuilder CreateStatic_GetObjectStaticMethod(IRezolveTarget target, CompileContext context, TypeBuilder typeBuilder)
 		{
-			targetType = targetType ?? target.DeclaredType;
+			//targetType = context.TargetType ?? target.DeclaredType;
+			if (context.TargetType == null)
+				context = new CompileContext(context, target.DeclaredType);
 
-
-			var toBuild = target.CreateExpression(scope, targetType: targetType,
-				currentTargets: targetStack,
-				dynamicRezolverExpression: dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam);
-
-			//now we have to rewrite the expression to life all constants out and feed them in from an additional
-			//parameter that we also dynamically compile.
-			var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
-			MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectDynamic",
-				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, targetType, new Type[0]);
-
-			Expression.Lambda(rewriter.LiftConstants(),
-				dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam).CompileToMethod(toReturn);
-			return toReturn;
-		}
-
-		private MethodBuilder CreateStatic_GetObjectStaticMethod(IRezolveTarget target, IRezolver scope,
-			Stack<IRezolveTarget> targetStack, TypeBuilder typeBuilder, Type targetType = null)
-		{
-			targetType = targetType ?? target.DeclaredType;
-
-			var toBuild = target.CreateExpression(scope, targetType: targetType, currentTargets: targetStack);
+			var toBuild = target.CreateExpression(context);
 
 			//now we have to rewrite the expression to life all constants out and feed them in from an additional
 			//parameter that we also dynamically compile.
 			var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
 			MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectStatic",
-				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, targetType, new Type[0]);
+				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, context.TargetType, new Type[0]);
 			Expression.Lambda(rewriter.LiftConstants()).CompileToMethod(toReturn);
 			return toReturn;
 		}

@@ -23,12 +23,6 @@ namespace Rezolver
 		/// <param name="currentTargets">Optional. A stack of targets that are currently being compiled - used to help detect
 		/// circular dependencies between targets.</param>
 		/// <returns>A compiled target that produces the object represented by <paramref name="target"/>.</returns>
-		[Obsolete("This will be removed in favour of the CompileContext version", true)]
-		ICompiledRezolveTarget CompileTarget(IRezolveTarget target, 
-			IRezolver rezolver,
-			ParameterExpression dynamicRezolverExpression = null, 
-			Stack<IRezolveTarget> targetStack = null);
-
 		ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context);
 	}
 }

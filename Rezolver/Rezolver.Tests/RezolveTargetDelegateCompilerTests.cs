@@ -31,5 +31,11 @@ namespace Rezolver.Tests
 		{
 			throw new NotImplementedException();
 		}
+
+
+		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

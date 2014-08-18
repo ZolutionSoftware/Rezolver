@@ -49,12 +49,13 @@ namespace Rezolver
 
 		private Expression CreateExpressionFromInner(CompileContext context)
 		{
-			//BUG: This will not honour dynamic rezolver being passed at runtime as it's not being forwarded to the lazy.
-			//The only solution to this will be to create a class dynamically which creates the lazy in the dynamic code.  I think.
+			//BUG: the newed rezolvecontext being passed beloww is completely wrong
+			//I need to build the delegate being passed to the lazy dynamically from the compile context's
+			//rezolvecontext parameter expression.
 			if (_lazy == null)
 			{
 				var target = context.Rezolver.Compiler.CompileTarget(_innerTarget, context);
-				_lazy = new Lazy<object>(target.GetObject);
+				_lazy = new Lazy<object>(() => target.GetObject(new RezolveContext()));
 			}
 
 			return Expression.Property(Expression.Constant(_lazy), "Value");

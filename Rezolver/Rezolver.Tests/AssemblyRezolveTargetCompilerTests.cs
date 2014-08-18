@@ -65,21 +65,16 @@ namespace Rezolver.Tests
 
 			ConstructorTarget constructorTarget = ConstructorTarget.Auto<ToRezolve>();
 			var rezolver = Mock.Of<IRezolver>();
-			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  rezolver, ExpressionHelper.DynamicRezolverParam, null);
+			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  new CompileContext(rezolver));
 
-			ToRezolve.InstanceCount = 0; 
-			var toRezolve = (ToRezolve)target.GetObject();
+			ToRezolve.InstanceCount = 0;
+			var toRezolve = (ToRezolve)target.GetObject(RezolveContext.EmptyContext);
 			Assert.AreEqual(1, ToRezolve.InstanceCount);
 			Assert.IsNotNull(toRezolve);
 
-			var toRezolve2 = (ToRezolve) target.GetObjectDynamic(null);
-			Assert.AreEqual(2, ToRezolve.InstanceCount);
-			Assert.IsNotNull(toRezolve2);
-
-			Assert.AreNotSame(toRezolve, toRezolve2);
 			var delegateCompiler = new RezolveTargetDelegateCompiler();
 			var del
-			 = delegateCompiler.CompileTarget(constructorTarget, rezolver, ExpressionHelper.DynamicRezolverParam, null);
+			 = delegateCompiler.CompileTarget(constructorTarget, new CompileContext(rezolver));
 
 			object benchResult = null;
 			ToRezolve benchResult2 = null;
@@ -115,7 +110,7 @@ namespace Rezolver.Tests
 			s.Restart();
 			while (counter-- != 0)
 			{
-				benchResult = target.GetObject();
+				benchResult = target.GetObject(RezolveContext.EmptyContext);
 			}
 			s.Stop();
 			Console.WriteLine("Create via interface (object) took {0}ms", s.Elapsed.TotalMilliseconds);
@@ -123,17 +118,6 @@ namespace Rezolver.Tests
 			GC.Collect(2);
 			GC.WaitForFullGCComplete();
 
-			counter = counterStart;
-			s.Restart();
-			while (counter-- != 0)
-			{
-				benchResult = target.GetObjectDynamic(null);
-			}
-			s.Stop();
-			Console.WriteLine("Create via interface impl (object/with rezolver) took {0}ms", s.Elapsed.TotalMilliseconds);
-			ToRezolve.InstanceCount = 0;
-			GC.Collect(2);
-			GC.WaitForFullGCComplete();
 
 			//--------------
 
@@ -141,7 +125,7 @@ namespace Rezolver.Tests
 			s.Restart();
 			while (counter-- != 0)
 			{
-				benchResult = del.GetObject();
+				benchResult = del.GetObject(RezolveContext.EmptyContext);
 			}
 			s.Stop();
 			Console.WriteLine("Create via delegate (object) took {0}ms", s.Elapsed.TotalMilliseconds);

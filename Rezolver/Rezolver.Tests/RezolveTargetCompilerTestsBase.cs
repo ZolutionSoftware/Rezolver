@@ -21,16 +21,26 @@ namespace Rezolver.Tests
 		public void ShouldCompileStringObjectTarget()
 		{
 			var compiler = CreateCompiler();
-			var target = compiler.CompileTarget(_stringObjectTarget.Value, CreateRezolverMock(compiler));
+			var target = compiler.CompileTarget(_stringObjectTarget.Value, CreateCompileContext(compiler));
 			Assert.IsNotNull(target);
 			Assert.AreEqual(StringForObjectTarget, target.GetObject());
+		}
+
+		private CompileContext CreateCompileContext(IRezolveTargetCompiler compiler)
+		{
+			return new CompileContext(CreateRezolverMock(compiler));
+		}
+
+		private CompileContext CreateCompileContext(IRezolver rezolver)
+		{
+			return new CompileContext(rezolver);
 		}
 
 		[TestMethod]
 		public void ShouldCompileIntObjectTarget()
 		{
 			var compiler = CreateCompiler();
-			var target = compiler.CompileTarget(_intObjectTarget.Value, CreateRezolverMock(compiler));
+			var target = compiler.CompileTarget(_intObjectTarget.Value, CreateCompileContext(compiler));
 			Assert.IsNotNull(target);
 			Assert.AreEqual(IntForObjectTarget, target.GetObject());
 
@@ -40,7 +50,7 @@ namespace Rezolver.Tests
 		public void ShouldCompileNullableIntObjectTarget()
 		{
 			var compiler = CreateCompiler();
-			var target = compiler.CompileTarget(_nullableIntObjectTarget.Value, CreateRezolverMock(compiler));
+			var target = compiler.CompileTarget(_nullableIntObjectTarget.Value, CreateCompileContext(compiler));
 			Assert.IsNotNull(target);
 			Assert.AreEqual(NullableIntForObjectTarget, target.GetObject());
 		}
@@ -52,7 +62,7 @@ namespace Rezolver.Tests
 			var rezolver = CreateDefaultMockForRezolver(compiler);
 			AddIntTargetToRezolverMock(rezolver);
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), rezolver.Object);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), CreateCompileContext(rezolver.Object));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof (RequiresInt));
 			Assert.AreEqual(IntForObjectTarget, ((IRequiresInt) result).Int);
@@ -65,7 +75,7 @@ namespace Rezolver.Tests
 			var rezolver = CreateDefaultMockForRezolver(compiler);
 			AddNullableIntTargetToRezolverMock(rezolver);
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), rezolver.Object);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), CreateCompileContext(rezolver.Object));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof(RequiresNullableInt));
 			Assert.AreEqual(NullableIntForObjectTarget, ((IRequiresNullableInt)result).NullableInt);
@@ -79,7 +89,7 @@ namespace Rezolver.Tests
 			//I think we should be able to register a nullable int for an int
 			AddNullableIntTargetToRezolverMock(rezolver, typeof(int));
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), rezolver.Object);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), CreateCompileContext(rezolver.Object));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof(RequiresInt));
 			Assert.AreEqual(NullableIntForObjectTarget, ((IRequiresInt)result).Int);
@@ -92,7 +102,7 @@ namespace Rezolver.Tests
 			var rezolver = CreateDefaultMockForRezolver(compiler);
 			AddIntTargetToRezolverMock(rezolver, typeof(int?));
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), rezolver.Object);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), CreateCompileContext(rezolver.Object));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof(RequiresNullableInt));
 			Assert.AreEqual(IntForObjectTarget, ((IRequiresNullableInt)result).NullableInt);
@@ -102,7 +112,7 @@ namespace Rezolver.Tests
 		public void ShouldCompileTransientConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<Transient>(), CreateRezolverMock(compiler));
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<Transient>(), CreateCompileContext(compiler));
 			Assert.IsNotNull(target);
 			var lastCount = Transient.Counter;
 			var result = target.GetObject();
@@ -116,8 +126,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			var target = compiler.CompileTarget(new SingletonTarget(ConstructorTarget.Auto<Singleton>()),
-				CreateRezolverMock(compiler),
-				ExpressionHelper.DynamicRezolverParam, null);
+				CreateCompileContext(compiler));
 			Assert.IsNotNull(target);
 
 			var lastCount = Singleton.Counter = 0;
@@ -137,7 +146,7 @@ namespace Rezolver.Tests
 			var rezolverMock = CreateDefaultMockForRezolver(compiler);
 			AddSingletonTargetToRezolverMock(rezolverMock);
 			AddTransientTargetToRezolverMock(rezolverMock);
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<Composite>(), rezolverMock.Object);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<Composite>(), CreateCompileContext(rezolverMock.Object));
 			Assert.IsNotNull(target);
 			var lastSingletonCount = Singleton.Counter = 0;
 			var lastTransientCount = Transient.Counter;
@@ -167,7 +176,7 @@ namespace Rezolver.Tests
 			AddSingletonTargetToRezolverMock(rezolverMock);
 			AddCompositeTargetToRezolverMock(rezolverMock);
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<SuperComplex>(), rezolverMock.Object);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<SuperComplex>(), CreateCompileContext(rezolverMock.Object));
 			Assert.IsNotNull(target);
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof (SuperComplex));
@@ -191,11 +200,11 @@ namespace Rezolver.Tests
 			var inputDynamicRezolver = CreateRezolverMock(compiler);
 			var defaultRezolver = CreateRezolverMock(compiler);
 
-			var target = compiler.CompileTarget(new DynamicTestTarget(defaultRezolver), CreateRezolverMock(compiler), ExpressionHelper.DynamicRezolverParam, null);
+			var target = compiler.CompileTarget(new DynamicTestTarget(defaultRezolver), CreateCompileContext(compiler));
 
 			Assert.IsNotNull(target);
-			Assert.AreSame(defaultRezolver, target.GetObjectDynamic(null));
-			Assert.AreSame(inputDynamicRezolver, target.GetObjectDynamic(inputDynamicRezolver));
+			Assert.AreSame(defaultRezolver, target.GetObject());
+			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(dynamicRezolver: inputDynamicRezolver)));
 		}
 
 		[TestMethod]
@@ -206,11 +215,11 @@ namespace Rezolver.Tests
 			var defaultRezolver = CreateRezolverMock(compiler);
 
 			var target = compiler.CompileTarget(new DynamicTestTarget(defaultRezolver),
-				CreateRezolverMock(compiler), ExpressionHelper.DynamicRezolverParam, null);
+				CreateCompileContext(CreateRezolverMock(compiler)));
 
 			Assert.IsNotNull(target);
-			Assert.AreSame(defaultRezolver, target.GetObjectDynamic(null));
-			Assert.AreSame(inputDynamicRezolver, target.GetObjectDynamic(inputDynamicRezolver));
+			Assert.AreSame(defaultRezolver, target.GetObject());
+			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(dynamicRezolver: inputDynamicRezolver)));
 		}
 	}
 }
