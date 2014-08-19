@@ -11,7 +11,9 @@ namespace Rezolver
 
 		public RezolveContext(string name = null, IRezolver dynamicRezolver = null, ILifetimeScopeRezolver scope = null)
 		{
-
+			Name = name;
+			DynamicRezolver = dynamicRezolver;
+			Scope = scope;
 		}
 
 		public RezolveContext()

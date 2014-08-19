@@ -202,12 +202,13 @@ namespace Rezolver
 			MethodBuilder methodBuilder = typeBuilder.DefineMethod(methodName,
 				MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, CallingConventions.HasThis,
 				typeof(object),
-				new Type[0]);
+				new[] { typeof(RezolveContext) });
 
 			var ilgen = methodBuilder.GetILGenerator();
+			ilgen.Emit(OpCodes.Ldarg_1);
 			ilgen.EmitCall(OpCodes.Call, staticGetObjectStaticMethod, new Type[0]);
 			if (staticGetObjectStaticMethod.ReturnType.IsValueType)
-				ilgen.Emit(OpCodes.Box);
+				ilgen.Emit(OpCodes.Box, staticGetObjectStaticMethod.ReturnType);
 			//else
 			//	ilgen.Emit(OpCodes.Castclass, typeof (object));
 			ilgen.Emit(OpCodes.Ret);
@@ -248,7 +249,7 @@ namespace Rezolver
 			var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
 			MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectStatic",
 				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, context.TargetType, new Type[0]);
-			Expression.Lambda(rewriter.LiftConstants()).CompileToMethod(toReturn);
+			Expression.Lambda(rewriter.LiftConstants(), context.RezolveContextParameter).CompileToMethod(toReturn);
 			return toReturn;
 		}
 	}

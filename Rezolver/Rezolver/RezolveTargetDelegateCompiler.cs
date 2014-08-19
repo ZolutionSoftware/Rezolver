@@ -23,7 +23,6 @@ namespace Rezolver
 
 			public object GetObject(RezolveContext context)
 			{
-
 				return _getObjectDelegate(context);
 			}
 		}
@@ -32,12 +31,12 @@ namespace Rezolver
 		{
 #if DEBUG
 			var expression =
-				Expression.Lambda<Func<RezolveContext, object>>(target.CreateExpression(context));
+				Expression.Lambda<Func<RezolveContext, object>>(target.CreateExpression(new CompileContext(context, typeof(object))), context.RezolveContextParameter);
 			Debug.WriteLine("Compiling Func<RezolveContext, object> from static lambda {0} for target type {1}", expression, "System.Object");
 			return new DelegatingCompiledRezolveTarget(expression.Compile());
 #else
 			return new DelegatingCompiledRezolveTarget(
-				Expression.Lambda<Func<RezolveContext, object>>(target.CreateExpression(context)).Compile());
+				Expression.Lambda<Func<RezolveContext, object>>(target.CreateExpression(new CompileContext(context, typeof(object))), context.RezolveContextParameter).Compile());
 #endif
 		}
 	}

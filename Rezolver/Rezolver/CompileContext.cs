@@ -126,7 +126,7 @@ namespace Rezolver
 		{
 			toCompile.MustNotBeNull("toCompile");
 
-			if(_compilingTargets.Contains(toCompile))
+			if(!_compilingTargets.Contains(toCompile))
 			{
 				_compilingTargets.Push(toCompile);
 				return true;
