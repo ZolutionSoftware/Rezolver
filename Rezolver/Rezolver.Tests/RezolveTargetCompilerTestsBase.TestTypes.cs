@@ -177,12 +177,6 @@ namespace Rezolver.Tests
 				if (context.TargetType != null && !SupportsType(context.TargetType))
 					throw new ArgumentException(string.Format("Type not supported: {0}", context.TargetType));
 
-				//return Expression.Condition(
-				//	Expression.ReferenceEqual(context.RezolveContextParameter, Expression.Default(typeof(IRezolver))),
-				//	/*iftrue*/
-				//	/*iffalse*/
-				//	);
-
 				return Expression.Coalesce(Expression.Convert(context.ContextDynamicRezolverPropertyExpression, context.TargetType ?? DeclaredType),
 					Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), context.TargetType ?? DeclaredType));
 			}

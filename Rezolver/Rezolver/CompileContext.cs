@@ -37,10 +37,29 @@ namespace Rezolver
 
 		private readonly Stack<IRezolveTarget> _compilingTargets;
 
+		private bool _enableDynamicRezolver;
+		/// <summary>
+		/// If true, then rezolve targets that generate code which needs to resolve 
+		/// additional dependencies from a rezolver should take into account any dynamic rezolver that might be passed in 
+		/// the RezolveContext to the built code at runtime.  The target can use the <see cref="ContextDynamicRezolverPropertyExpression"/>
+		/// for this purpose.  True is the default.  If you do not intend to use dynamic rezolvers you can switch this off,
+		/// and you'll get a small performance improvement in some situations (around 20% improvement).
+		/// </summary>
+		public bool EnableDynamicRezolver
+		{
+			get
+			{
+				return _enableDynamicRezolver;
+			}
+		}
+
+
 		private MemberExpression _contextDynamicRezolverPropertyExpression;
 		/// <summary>
-		/// Returns an expression that representss reading the Rezolver property of the <see cref="RezolveContextParameter"/> to aid in 
+		/// Returns an expression that represents reading the Rezolver property of the <see cref="RezolveContextParameter"/> to aid in 
 		/// code generation.
+		/// 
+		/// Note that this is always non-null, even if <see cref="EnableDynamicRezolver"/> is false.
 		/// </summary>
 		public MemberExpression ContextDynamicRezolverPropertyExpression
 		{
@@ -84,6 +103,7 @@ namespace Rezolver
 			_compilingTargets = parentContext._compilingTargets;
 			_rezolveContextParameter = parentContext._rezolveContextParameter;
 			_rezolver = parentContext._rezolver;
+			_enableDynamicRezolver = parentContext._enableDynamicRezolver;
 		}
 
 		/// <summary>
@@ -93,8 +113,17 @@ namespace Rezolver
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType"/> property.</param>
 		/// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/>
 		/// <param name="compilingTargets">Optional.  Allows you to seed the stack of compiling targets from creation.</param>
+		/// <param name="enableDynamicRezolver">Optional.  If true, then rezolve targets that generate code which needs to resolve 
+		/// additional dependencies from a rezolver should take into account any dynamic rezolver that might be passed in 
+		/// the RezolveContext to the built code at runtime.  The target can use the <see cref="ContextDynamicRezolverPropertyExpression"/>
+		/// for this purpose.  True is the default.  If you do not intend to use dynamic rezolvers you can switch this off,
+		/// and you'll get a small performance improvement in some situations (around 20% improvement).</param>
 		/// property.</param>
-		public CompileContext(IRezolver rezolver, Type targetType = null, ParameterExpression rezolveContextParameter = null, IEnumerable<IRezolveTarget> compilingTargets = null)
+		public CompileContext(IRezolver rezolver, 
+			Type targetType = null, 
+			ParameterExpression rezolveContextParameter = null, 
+			IEnumerable<IRezolveTarget> compilingTargets = null,
+			bool enableDynamicRezolver = true)
 		{
 			rezolver.MustNotBeNull("rezolver");
 
@@ -102,6 +131,7 @@ namespace Rezolver
 			_targetType = targetType;
 			_rezolveContextParameter = rezolveContextParameter;
 			_compilingTargets = new Stack<IRezolveTarget>(compilingTargets ?? Enumerable.Empty<IRezolveTarget>());
+			_enableDynamicRezolver = enableDynamicRezolver;
 		}
 
 		/// <summary>

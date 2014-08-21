@@ -18,6 +18,17 @@ namespace Rezolver
 		/// </summary>
 		private readonly Dictionary<RezolverKey, ICompiledRezolveTarget> _namedCacheEntries = new Dictionary<RezolverKey, ICompiledRezolveTarget>();
 
+		protected CachingRezolver()
+		{
+
+		}
+
+		protected CachingRezolver(bool enableDynamicRezolvers = DefaultEnableDynamicRezolvers)
+			: base(enableDynamicRezolvers)
+		{
+
+		}
+
 		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolverKey key)
 		{
 			ICompiledRezolveTarget toReturn;
