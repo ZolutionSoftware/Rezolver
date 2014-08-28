@@ -4,6 +4,10 @@ using System.Linq.Expressions;
 
 namespace Rezolver
 {
+	/// <summary>
+	/// A target that simply creates a default instance of a given type.  I.e. the same
+	/// as doing default(type) in C#.
+	/// </summary>
 	public class DefaultTarget : RezolveTargetBase
 	{
 		private readonly Type _declaredType;

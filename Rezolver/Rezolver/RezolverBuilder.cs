@@ -72,7 +72,7 @@ namespace Rezolver
 				_namedBuilders.TryGetValue(name, out namedBuilder);
 
 				// ReSharper disable once PossibleNullReferenceException
-				return _namedBuilders == null ? null : namedBuilder.Fetch(type);
+				return namedBuilder == null ? null : namedBuilder.Fetch(type);
 			}
 
 			IRezolveTarget target;
@@ -81,9 +81,8 @@ namespace Rezolver
 
 		public IRezolveTarget Fetch<T>(string name = null)
 		{
-			return Fetch(typeof (T), name);
+			return Fetch(typeof(T), name);
 		}
-
 
 		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{

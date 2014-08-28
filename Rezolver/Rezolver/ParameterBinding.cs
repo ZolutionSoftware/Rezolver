@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Rezolver
@@ -52,9 +53,9 @@ namespace Rezolver
 				if (parameter.IsOptional)
 				{
 					if((parameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault)
-						binding = new ParameterBinding(parameter, parameter.DefaultValue.AsObjectTarget(parameter.ParameterType));
+						binding = new ParameterBinding(parameter, new ExpressionTarget(Expression.Constant(parameter.DefaultValue, parameter.ParameterType)));
 					else
-						binding = new ParameterBinding(parameter, new DefaultTarget(parameter.ParameterType));
+						binding = new ParameterBinding(parameter, new ExpressionTarget(Expression.Default(parameter.ParameterType)));
 				}
 				toReturn[current++] = binding;
 			}

@@ -6,7 +6,7 @@ using Moq;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class RezolverTests
+	public class DefaultRezolverTests
 	{
 		[TestMethod]
 		public void ShouldRezolveAnInt()
@@ -14,7 +14,7 @@ namespace Rezolver.Tests
 			var builderMock = new Mock<IRezolverBuilder>();
 			builderMock.Setup(s => s.Fetch(typeof(int), null)).Returns(1.AsObjectTarget());
 
-			IRezolver rezolver = new Rezolver(builderMock.Object, new RezolveTargetDelegateCompiler());
+			IRezolver rezolver = new DefaultRezolver(builderMock.Object, new RezolveTargetDelegateCompiler());
 			var result = rezolver.Resolve(typeof (int));
 			Assert.AreEqual(1, result);
 		}
@@ -49,8 +49,8 @@ namespace Rezolver.Tests
 			var rezolverMock = new Mock<IRezolver>();
 			rezolverMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 			int expected = -1;
-			rezolverMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
-			Rezolver rezolver = new Rezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());
+			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(expected);
+			DefaultRezolver rezolver = new DefaultRezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());
 			var result = rezolver.Resolve(typeof (int) /*, @dynamic: containerMock.Object*/);
 			Assert.AreEqual(expected, result);
 		}
@@ -68,13 +68,14 @@ namespace Rezolver.Tests
 			//this mocks a dynamically defined container that an application creates in response to transient information only
 			var rezolverMock = new Mock<IRezolver>();
 			int expected = -1;
-			rezolverMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
-			rezolverMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
+			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(() => expected);
+			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType != typeof(int)))).Throws<InvalidOperationException>();
+			rezolverMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(() => true);
 
 			//this represents building an application's statically defined, or bootstrapped, IOC container
-			Rezolver rezolver = new Rezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());
+			DefaultRezolver rezolver = new DefaultRezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());
 
-			var result = (TypeWithConstructorArg)rezolver.Resolve(typeof (TypeWithConstructorArg), dynamicRezolver: rezolverMock.Object);
+			var result = (TypeWithConstructorArg)rezolver.Resolve(typeof (TypeWithConstructorArg), rezolverMock.Object);
 			Assert.IsNotNull(result);
 
 			Assert.AreEqual(expected, result.Value);

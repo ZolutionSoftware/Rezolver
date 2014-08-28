@@ -23,7 +23,10 @@ namespace Rezolver
 			MethodCallExtractor.ExtractCalledMethod((IRezolver c) => c.CanResolve(typeof(object), null, null));
 
 		private static readonly MethodInfo RezolverResolveMethod =
-			MethodCallExtractor.ExtractCalledMethod((IRezolver c) => c.Resolve(typeof (object), null, null));
+			MethodCallExtractor.ExtractCalledMethod((IRezolver c) => c.Resolve(null));
+
+		private static readonly ConstructorInfo RezolveContextCtor =
+			MethodCallExtractor.ExtractConstructorCall(() => new RezolveContext((Type)null, (string)null, (IRezolver)null, (ILifetimeScopeRezolver)null));
 
 		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 
@@ -68,11 +71,11 @@ namespace Rezolver
 			Expression nameExpr = _resolveNameTarget != null 
 				? _resolveNameTarget.CreateExpression(nameContext) : Expression.Constant(null, typeof(string));
 			//we also need to compile this name for static use.
-			ICompiledRezolveTarget nameCompiled = 
-				context.Rezolver.Compiler.CompileTarget(_resolveNameTarget ?? new DefaultTarget(typeof(string)),  nameContext);
+			ICompiledRezolveTarget nameCompiled = _resolveNameTarget != null ?
+				context.Rezolver.Compiler.CompileTarget(_resolveNameTarget,  nameContext) : null;
 
 			//now we try and fetch the target from the rezolver that is passed in the context
-			var staticTarget = context.Rezolver.Fetch(DeclaredType, (string)nameCompiled.GetObject(RezolveContext.EmptyContext));
+			var staticTarget = context.Rezolver.Fetch(DeclaredType, nameCompiled != null ? (string)nameCompiled.GetObject(RezolveContext.EmptyContext) : null);
 
 			var finalType = context.TargetType ?? DeclaredType;
 			var finaltypeExpr = Expression.Constant(finalType, typeof(Type));
@@ -88,7 +91,7 @@ namespace Rezolver
 				//to generate an exception saying that the dependency couldn't be found.
 				//unless, of course, some naughty person has snuck in an additional registration
 				//into the rezolver after compilation has been done ;)
-				staticExpr = Expression.Call(Expression.Constant(context.Rezolver), RezolverResolveMethod, Expression.Constant(DeclaredType), nameExpr, nullRezolverExpr);
+				staticExpr = Expression.Call(Expression.Constant(context.Rezolver), RezolverResolveMethod, context.RezolveContextParameter); //Expression.Constant(DeclaredType), nameExpr, nullRezolverExpr);
 			}
 
 			//although for compilation purposes an expresson returning a derived type is allowed,
@@ -103,7 +106,9 @@ namespace Rezolver
 				var dynamicCanRezolveCallExpr = Expression.Call(context.ContextDynamicRezolverPropertyExpression, RezolverCanResolveMethod, finaltypeExpr, nameExpr, nullRezolverExpr);
 				//represents a call to the Resolve method of the fynamic rezolver passed to the code when executed.  Note
 				//that the return value will be converted to the exact final type of this target.
-				var dynamicRezolveCallExpr = Expression.Convert(Expression.Call(context.ContextDynamicRezolverPropertyExpression, RezolverResolveMethod, finaltypeExpr, nameExpr, nullRezolverExpr), finalType);
+				var newRezolveContextExpr = Expression.New(RezolveContextCtor, finaltypeExpr, nameExpr, context.ContextDynamicRezolverPropertyExpression, context.ContextScopePropertyExpression);
+
+				var dynamicRezolveCallExpr = Expression.Convert(Expression.Call(context.ContextDynamicRezolverPropertyExpression, RezolverResolveMethod, newRezolveContextExpr), finalType);
 				
 				//this is the code that we generate when dynamic rezolvers are supported.
 				//return rezolveContext.DynamicRezolver != null && rezolveContext.DynamicRezolver.CanResolve(finalType) 

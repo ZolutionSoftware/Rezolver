@@ -45,7 +45,8 @@ namespace Rezolver
 
 		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
 		{
-			var typeBuilder = _moduleBuilder.DefineType(string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter));
+			var temp = string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter);
+			var typeBuilder = _moduleBuilder.DefineType(temp);
 
 			typeBuilder.AddInterfaceImplementation(typeof(ICompiledRezolveTarget));
 

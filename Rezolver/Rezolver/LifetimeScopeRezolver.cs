@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading;
 
 namespace Rezolver
@@ -7,13 +8,21 @@ namespace Rezolver
 	public class LifetimeScopeRezolver : CachingRezolver, ILifetimeScopeRezolver
 	{
 		private List<ILifetimeScopeRezolver> _children;
-		private Dictionary<RezolverKey, List<IDisposable>> _disposables;
+		private Dictionary<RezolveContext, List<IDisposable>> _disposables;
+
+		public ILifetimeScopeRezolver ParentScope
+		{
+			get
+			{
+				return _parentScope;
+			}
+		}
 
 		public override IRezolveTargetCompiler Compiler
 		{
 			get
 			{
-				return _parent.Compiler;
+				return _rezolver.Compiler;
 			}
 		}
 
@@ -21,55 +30,53 @@ namespace Rezolver
 		{
 			get
 			{
-				return _parent;
+				return _rezolver;
 			}
 		}
 
 		private bool _disposing;
 		private bool _disposed;
-		private readonly IRezolver _parent;
-		public LifetimeScopeRezolver(IRezolver parent)
+		private readonly IRezolver _rezolver;
+		private readonly ILifetimeScopeRezolver _parentScope;
+		public LifetimeScopeRezolver(IRezolver rezolver)
 		{
 			_children = new List<ILifetimeScopeRezolver>();
-			_parent = parent;
-			_disposables = new Dictionary<RezolverKey, List<IDisposable>>();
+			_rezolver = rezolver;
+			_disposables = new Dictionary<RezolveContext, List<IDisposable>>();
 			_disposing = _disposed = false;
 		}
-
-		public override object Resolve(Type type, string name = null, IRezolver dynamicRezolver = null)
+		public LifetimeScopeRezolver(ILifetimeScopeRezolver parentScope, IRezolver rezolver = null)
+			: this(rezolver ?? (IRezolver)parentScope)
 		{
-			var result = _parent.Resolve(type, name, dynamicRezolver);
-			//I think targets need to compile a special version of their code which
-			//accepts a lifetime Builder (and optionally a dynamically supplied rezolver), so that
-			//the target itself has full control over how it creates its object under
-			//lifetime scopes (and whether the object gets added to them).  This method would 
-			//then be implemented similarly to how the base method is done - i.e. fetching 
-			//the compiled target and executing it.
+			_parentScope = parentScope;
+		}
 
-			//This would allow for the implementation of a scoped singleton, but 
-			//the implementation would not be trivial, as it would need to query
-			//the incoming scope to see if an instance already existed.
-			//This will mean an extension of the ILifetimeScopeRezolver interface
-			//to support explicit registration and fetching of instances - in parallel
-			//to the basic functionality of resolving new instances.
-			TrackDisposable(new RezolverKey(type, name), result as IDisposable);
+		public override object Resolve(RezolveContext context)
+		{
+			var result = base.Resolve(context);
+			TrackDisposable(result as IDisposable, context);
 			return result;
 		}
 
-		private void TrackDisposable(RezolverKey rezolverKey, IDisposable obj)
+		public override T Resolve<T>(RezolveContext context)
+		{
+			var result = base.Resolve<T>(context);
+			TrackDisposable(result as IDisposable, context);
+			return result;
+		}
+
+		private void TrackDisposable(IDisposable obj, RezolveContext context)
 		{
 			if (obj == null)
 				return;
 			List<IDisposable> instanceList = null;
-			if (!_disposables.TryGetValue(rezolverKey, out instanceList))
-				_disposables[rezolverKey] = instanceList = new List<IDisposable>();
+			if (!_disposables.TryGetValue(context, out instanceList))
+			{
+				var keyContext = new RezolveContext(context.RequestedType, context.Name);
+				_disposables[keyContext] = instanceList = new List<IDisposable>();
+			}
 
 			instanceList.Add(obj);
-		}
-
-		public override T Resolve<T>(string name = null, IRezolver @dynamic = null)
-		{
-			return _parent.Resolve<T>(name, dynamic);
 		}
 
 		public override ILifetimeScopeRezolver CreateLifetimeScope()
@@ -79,7 +86,7 @@ namespace Rezolver
 			//however, limited-lifetime targets - i.e. scoped singletons - SHOULD be tracked by parent scopes,
 			//and any child scopes that request the same object should receive the one created from the 
 			//parent Builder.
-			var toReturn = new LifetimeScopeRezolver(_parent);
+			var toReturn = new LifetimeScopeRezolver(this, _rezolver);
 			_children.Add(toReturn);
 			return toReturn;
 		}
@@ -106,10 +113,21 @@ namespace Rezolver
 			_disposing = false;
 		}
 
-		public void AddToScope(IDisposable disposable)
+		public void AddToScope(IDisposable disposable, RezolveContext context = null)
 		{
 			disposable.MustNotBeNull("disposable");
-			TrackDisposable(new RezolverKey(disposable.GetType(), null), disposable);
+			TrackDisposable(disposable, context ?? new RezolveContext(disposable.GetType()));
+		}
+
+
+		public IEnumerable<IDisposable> GetFromScope(RezolveContext context)
+		{
+			context.MustNotBeNull("context");
+			List<IDisposable> instanceList = null;
+			_disposables.TryGetValue(context, out instanceList);
+
+			//important to return a read-only collection here to avoid modification
+			return new ReadOnlyCollection<IDisposable>(instanceList);
 		}
 	}
 }

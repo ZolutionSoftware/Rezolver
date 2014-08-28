@@ -97,7 +97,6 @@ namespace Rezolver.Tests
 			var rezolverMock = new Mock<IRezolver>();
 			var compiler = new RezolveTargetDelegateCompiler();
 			rezolverMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
-			rezolverMock.Setup(s => s.Compiler).Returns(compiler);
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 			rezolverMock.VerifyAll();
@@ -111,7 +110,6 @@ namespace Rezolver.Tests
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var rezolverMock = new Mock<IRezolver>();
 			rezolverMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
-			rezolverMock.Setup(s => s.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 			rezolverMock.VerifyAll();

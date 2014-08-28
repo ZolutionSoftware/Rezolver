@@ -58,8 +58,8 @@ namespace Rezolver.Tests
 		{
 			var mock = new Mock<IRezolver>();
 			AddCompilerToRezolverMock(mock, compiler);
-			mock.Setup(c => c.Resolve(It.IsAny<Type>(), null, null)).Callback<Type, string, IRezolver>(
-				(t, s, c) => { throw new InvalidOperationException(string.Format("Type {0} not mocked", t)); });
+			mock.Setup(c => c.Resolve(It.IsAny<RezolveContext>())).Callback<RezolveContext>(
+				(r) => { throw new InvalidOperationException(string.Format("Type {0} not mocked", r.RequestedType)); });
 			return mock;
 		}
 

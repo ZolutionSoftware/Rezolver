@@ -27,44 +27,44 @@ namespace Rezolver
 			return MissingTargets[target] = new MissingCompiledTarget(target);
 		}
 
-		protected struct RezolverKey : IEquatable<RezolverKey>
-		{
-			public readonly Type Type;
-			public readonly string Name;
+		//protected struct RezolverKey : IEquatable<RezolverKey>
+		//{
+		//	public readonly Type Type;
+		//	public readonly string Name;
 
-			public RezolverKey(Type type, string name)
-			{
-				Type = type;
-				Name = name;
-			}
+		//	public RezolverKey(Type type, string name)
+		//	{
+		//		Type = type;
+		//		Name = name;
+		//	}
 
-			public override int GetHashCode()
-			{
-				return Type.GetHashCode() ^ (Name != null ? Name.GetHashCode() : 0);
-			}
+		//	public override int GetHashCode()
+		//	{
+		//		return Type.GetHashCode() ^ (Name != null ? Name.GetHashCode() : 0);
+		//	}
 
-			public override bool Equals(object obj)
-			{
-				if (obj == null || !(obj is RezolverKey))
-					return false;
-				return Equals((RezolverKey)obj);
-			}
+		//	public override bool Equals(object obj)
+		//	{
+		//		if (obj == null || !(obj is RezolverKey))
+		//			return false;
+		//		return Equals((RezolverKey)obj);
+		//	}
 
-			public bool Equals(RezolverKey other)
-			{
-				return Type == other.Type && Name == other.Name;
-			}
+		//	public bool Equals(RezolverKey other)
+		//	{
+		//		return Type == other.Type && Name == other.Name;
+		//	}
 
-			public static bool operator ==(RezolverKey left, RezolverKey right)
-			{
-				return left.Type == right.Type && left.Name == right.Name;
-			}
+		//	public static bool operator ==(RezolverKey left, RezolverKey right)
+		//	{
+		//		return left.Type == right.Type && left.Name == right.Name;
+		//	}
 
-			public static bool operator !=(RezolverKey left, RezolverKey right)
-			{
-				return left.Type != right.Type || left.Name != right.Name;
-			}
-		}
+		//	public static bool operator !=(RezolverKey left, RezolverKey right)
+		//	{
+		//		return left.Type != right.Type || left.Name != right.Name;
+		//	}
+		//}
 
 		protected class MissingCompiledTarget : ICompiledRezolveTarget
 		{
@@ -73,16 +73,6 @@ namespace Rezolver
 			public MissingCompiledTarget(Type type)
 			{
 				_type = type;
-			}
-
-			public object GetObject()
-			{
-				throw new InvalidOperationException(String.Format("Could not resolve type {0}", _type));
-			}
-
-			public object GetObjectDynamic(IRezolver @dynamic)
-			{
-				throw new InvalidOperationException(String.Format("Could not resolve type {0}", _type));
 			}
 
 			public object GetObject(RezolveContext context)
@@ -113,42 +103,52 @@ namespace Rezolver
 
 		protected abstract IRezolverBuilder Builder { get; }
 
-		public virtual object Resolve(Type type, string name = null, IRezolver dynamicRezolver = null)
+		public virtual object Resolve(RezolveContext context)
 		{
-			//short-circuiting after checking not null on the dynamic rezolver since
-			//the majority case is that they will be enabled but quite often a dynamic
-			//rezolver will not be passed anyway - therefore most of the time the boolean 
-			//check will be redundant.
-			if (dynamicRezolver != null && _enableDynamicRezolvers)
+			if (context.DynamicRezolver != null && _enableDynamicRezolvers && context.DynamicRezolver != this)
 			{
-				if (dynamicRezolver.CanResolve(type, name))
-					return dynamicRezolver.Resolve(type, name);
-
-				return (name == null ?
-					 GetCompiledRezolveTarget(type)
-					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObject(new RezolveContext(name, dynamicRezolver));
+				if (context.DynamicRezolver.CanResolve(context.RequestedType, context.Name))
+					return context.DynamicRezolver.Resolve(context);
 			}
-
-			return (name == null ?
-					 GetCompiledRezolveTarget(type)
-					 : GetCompiledRezolveTarget(new RezolverKey(type, name))).GetObject(new RezolveContext(name));
+			return GetCompiledRezolveTarget(context).GetObject(context);
 		}
 
-		public virtual T Resolve<T>(string name = null, IRezolver @dynamic = null)
+		public virtual T Resolve<T>(RezolveContext context)
 		{
-			if (dynamic != null && _enableDynamicRezolvers)
+			if (context.DynamicRezolver != null && _enableDynamicRezolvers && context.DynamicRezolver != this)
 			{
-				if (dynamic.CanResolve<T>(name))
-					return dynamic.Resolve<T>(name);
-
-				return
-					(T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObject(
-						new RezolveContext(name, dynamic));
+				if (context.DynamicRezolver.CanResolve(context.RequestedType, context.Name))
+					return context.DynamicRezolver.Resolve<T>(context);
 			}
-
-			return (T)GetCompiledRezolveTarget(new RezolverKey(typeof(T), name)).GetObject(
-				new RezolveContext(name));
+			return (T)GetCompiledRezolveTarget(context).GetObject(context);
 		}
+
+		//public virtual object Resolve(Type type, string name = null, IRezolver dynamicRezolver = null)
+		//{
+		//	//short-circuiting after checking not null on the dynamic rezolver since
+		//	//the majority case is that they will be enabled but quite often a dynamic
+		//	//rezolver will not be passed anyway - therefore most of the time the boolean 
+		//	//check will be redundant.
+		//	if (dynamicRezolver != null && _enableDynamicRezolvers)
+		//	{
+		//		if (dynamicRezolver.CanResolve(type, name))
+		//			return dynamicRezolver.Resolve(type, name);
+		//	}
+		//	RezolveContext context = new RezolveContext(type, name, dynamicRezolver, this as ILifetimeScopeRezolver);
+		//	return GetCompiledRezolveTarget(context).GetObject(context);
+		//}
+
+		//public virtual T Resolve<T>(string name = null, IRezolver @dynamic = null)
+		//{
+		//	RezolveContext context = new RezolveContext(typeof(T), name, @dynamic, this as ILifetimeScopeRezolver);
+		//	if (dynamic != null && _enableDynamicRezolvers)
+		//	{
+		//		if (dynamic.CanResolve<T>(name))
+		//			return dynamic.Resolve<T>(name);
+		//	}
+
+		//	return (T)GetCompiledRezolveTarget(context).GetObject(context);
+		//}
 
 		public virtual ILifetimeScopeRezolver CreateLifetimeScope()
 		{
@@ -157,9 +157,10 @@ namespace Rezolver
 
 		public ICompiledRezolveTarget FetchCompiled(Type type, string name)
 		{
-			return (name == null ?
-					 GetCompiledRezolveTarget(type)
-					 : GetCompiledRezolveTarget(new RezolverKey(type, name)));
+			return GetCompiledRezolveTarget(new RezolveContext(type, name, null, this as ILifetimeScopeRezolver));
+			//return (name == null ?
+			//		 GetCompiledRezolveTarget(type)
+			//		 : GetCompiledRezolveTarget(new RezolverKey(type, name)));
 		}
 
 		public virtual bool CanResolve(Type type, string name = null, IRezolver @dynamic = null)
@@ -198,24 +199,37 @@ namespace Rezolver
 			return Builder.GetNamedBuilder(path, false);
 		}
 
-		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolverKey key)
+		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
-			var target = Fetch(key.Type, key.Name);
-
+			IRezolveTarget target = Fetch(context.RequestedType, context.Name);
+			
 			if (target != null)
-				return Compiler.CompileTarget(target, new CompileContext(this, key.Type, enableDynamicRezolver: _enableDynamicRezolvers));
+				return Compiler.CompileTarget(target, new CompileContext(this, context.RequestedType, enableDynamicRezolver: _enableDynamicRezolvers));
 
-			return GetMissingTarget(key.Type);
+			return GetMissingTarget(context.RequestedType);
 		}
 
-		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
-		{
-			var target = Fetch(type);
+		//protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolverKey key)
+		//{
+		//	var target = Fetch(key.Type, key.Name);
 
-			if (target != null)
-				return Compiler.CompileTarget(target, new CompileContext(this, type, enableDynamicRezolver: _enableDynamicRezolvers));
+		//	if (target != null)
+		//		return Compiler.CompileTarget(target, new CompileContext(this, key.Type, enableDynamicRezolver: _enableDynamicRezolvers));
 
-			return GetMissingTarget(type);
-		}
+		//	return GetMissingTarget(key.Type);
+		//}
+
+		//protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
+		//{
+		//	var target = Fetch(type);
+
+		//	if (target != null)
+		//		return Compiler.CompileTarget(target, new CompileContext(this, type, enableDynamicRezolver: _enableDynamicRezolvers));
+
+		//	return GetMissingTarget(type);
+		//}
+
+
+		
 	}
 }

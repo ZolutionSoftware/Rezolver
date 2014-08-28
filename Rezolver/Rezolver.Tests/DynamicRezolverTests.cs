@@ -20,10 +20,11 @@ namespace Rezolver.Tests
 			var rezolverMock = new Mock<IRezolver>();
 			rezolverMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
 			int expected = -1;
-			rezolverMock.Setup(c => c.Resolve(typeof(int), null, null)).Returns(expected);
-			Rezolver rezolver = new Rezolver(builderMock.Object);
+			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int))))
+				.Returns(expected);
+			DefaultRezolver rezolver = new DefaultRezolver(builderMock.Object);
 
-			Assert.AreEqual(expected, rezolver.Resolve(typeof(int), dynamicRezolver: rezolverMock.Object));
+			Assert.AreEqual(expected, rezolver.Resolve(typeof(int), rezolverMock.Object));
 		}
 	}
 }

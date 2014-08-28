@@ -97,6 +97,15 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to More than one matching disposable object was found in the scope.
+        /// </summary>
+        internal static string MoreThanOneDisposableFoundInScope {
+            get {
+                return ResourceManager.GetString("MoreThanOneDisposableFoundInScope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No constructor has been set on the NewExpression - this is not allowed..
         /// </summary>
         internal static string NoConstructorSetOnNewExpression {

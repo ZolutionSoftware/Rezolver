@@ -159,4 +159,7 @@
   <data name="CyclicDependencyDetectedInTargetFormat" xml:space="preserve">
     <value>Cyclic dependency detected in targets - current target of type {0} with DeclaredType of {1} has tried to include itself in its expression.</value>
   </data>
+  <data name="MoreThanOneDisposableFoundInScope" xml:space="preserve">
+    <value>More than one matching disposable object was found in the scope</value>
+  </data>
 </root>

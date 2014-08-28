@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -37,16 +39,49 @@ namespace Rezolver.Tests
 			}
 		}
 
+		private static EndlessProducer<T> MakeEndlessProducer<T>(Func<T> producerFunc)
+		{
+			return new EndlessProducer<T>(producerFunc);
+		}
+
+		public class EndlessProducer<T>
+		{
+			private readonly IEnumerator<T> _enumerator;
+			public EndlessProducer(Func<T> producerFunc)
+			{
+				_enumerator = MakeEnumerable(producerFunc).GetEnumerator();
+			}
+
+			public T Next()
+			{
+				_enumerator.MoveNext();
+				return _enumerator.Current;
+			}
+
+			private IEnumerable<T> MakeEnumerable(Func<T> producerFunc)
+			{
+				while (true)
+				{
+					yield return producerFunc();
+				}
+			}
+		}
+
 		private static Mock<IRezolver> CreateMock()
 		{
 			Mock<IRezolver> parentRezolverMock = new Mock<IRezolver>();
+			var producer1 = MakeEndlessProducer(() => new DisposableType());
+			Expression<Func<DisposableType>> e = () => producer1.Next();
+
 			parentRezolverMock.Setup(c => c.CreateLifetimeScope()).Returns(() => new LifetimeScopeRezolver(parentRezolverMock.Object));
-			parentRezolverMock.Setup(c => c.Resolve(typeof(ITestDisposable), null, null)).Returns(() => new DisposableType());
+			parentRezolverMock.Setup(c => c.Fetch(typeof(ITestDisposable), null)).Returns(new ExpressionTarget(e.Body));
+			parentRezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(ITestDisposable)))).Returns(producer1.Next);
+			parentRezolverMock.Setup(c => c.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			return parentRezolverMock;
 		}
 
 		[TestMethod]
-		public void ShouldAllowInstanceToBeRegisteredAndDisposed()
+		public void ShouldAllowInstanceToBeRegisteredWithoutContextAndDisposed()
 		{
 			var rezolverMock = Mock.Of<IRezolver>();
 
@@ -59,13 +94,19 @@ namespace Rezolver.Tests
 		}
 
 		[TestMethod]
+		public void ShouldAllowInstanceToBeRegisteredWithContextAndDisposed()
+		{
+			Assert.Fail("Not yet written");
+		}
+
+		[TestMethod]
 		public void ShouldConfirmNoInstanceAlreadyRegistered()
 		{
 			var rezolverMock = Mock.Of<IRezolver>();
 
 			using (var scope = new LifetimeScopeRezolver(rezolverMock))
 			{
-				
+				Assert.Fail("Not yet written");
 			}
 		}
 

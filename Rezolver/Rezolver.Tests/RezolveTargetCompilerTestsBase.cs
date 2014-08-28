@@ -204,7 +204,7 @@ namespace Rezolver.Tests
 
 			Assert.IsNotNull(target);
 			Assert.AreSame(defaultRezolver, target.GetObject());
-			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(dynamicRezolver: inputDynamicRezolver)));
+			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(typeof(IRezolver), inputDynamicRezolver)));
 		}
 
 		[TestMethod]
@@ -219,7 +219,7 @@ namespace Rezolver.Tests
 
 			Assert.IsNotNull(target);
 			Assert.AreSame(defaultRezolver, target.GetObject());
-			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(dynamicRezolver: inputDynamicRezolver)));
+			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(typeof(IRezolver), inputDynamicRezolver)));
 		}
 	}
 }

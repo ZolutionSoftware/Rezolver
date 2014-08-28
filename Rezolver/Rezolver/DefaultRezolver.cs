@@ -8,9 +8,9 @@ namespace Rezolver
 {
 	/// <summary>
 	/// </summary>
-	public class Rezolver : CachingRezolver
+	public class DefaultRezolver : CachingRezolver
 	{
-		public Rezolver(IRezolverBuilder builder, IRezolveTargetCompiler compiler = null, bool enableDynamicRezolvers = DefaultEnableDynamicRezolvers)
+		public DefaultRezolver(IRezolverBuilder builder, IRezolveTargetCompiler compiler = null, bool enableDynamicRezolvers = DefaultEnableDynamicRezolvers)
 			: base(enableDynamicRezolvers)
 		{
 			_builder = builder;

@@ -76,7 +76,7 @@
     <Compile Include="ConstructorTargetTests.cs" />
     <Compile Include="DefaultTargetTests.cs" />
     <Compile Include="RezolveTargetAdapterTests.cs" />
-    <Compile Include="RezolverTests.cs" />
+    <Compile Include="DefaultRezolverTests.cs" />
     <Compile Include="DynamicRezolverTests.cs" />
     <Compile Include="RezolverTests_Generic.cs" />
     <Compile Include="RezolveTargetDelegateCompilerTests.cs" />

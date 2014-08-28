@@ -12,11 +12,13 @@ namespace Rezolver
 		/// <summary>
 		/// This cache is for factories resolved by type only
 		/// </summary>
-		private readonly Dictionary<Type, ICompiledRezolveTarget> _typeOnlyCacheEntries = new Dictionary<Type, ICompiledRezolveTarget>();
+		//private readonly Dictionary<Type, ICompiledRezolveTarget> _typeOnlyCacheEntries = new Dictionary<Type, ICompiledRezolveTarget>();
 		/// <summary>
 		/// This cache is for factories resolved by type and name
 		/// </summary>
-		private readonly Dictionary<RezolverKey, ICompiledRezolveTarget> _namedCacheEntries = new Dictionary<RezolverKey, ICompiledRezolveTarget>();
+		//private readonly Dictionary<RezolverKey, ICompiledRezolveTarget> _namedCacheEntries = new Dictionary<RezolverKey, ICompiledRezolveTarget>();
+
+		private readonly Dictionary<RezolveContext, ICompiledRezolveTarget> _entries = new Dictionary<RezolveContext, ICompiledRezolveTarget>();
 
 		protected CachingRezolver()
 		{
@@ -29,20 +31,23 @@ namespace Rezolver
 
 		}
 
-		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolverKey key)
+		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
 			ICompiledRezolveTarget toReturn;
-			if (_namedCacheEntries.TryGetValue(key, out toReturn))
+			if (_entries.TryGetValue(context, out toReturn))
 				return toReturn;
-			return _namedCacheEntries[key] = base.GetCompiledRezolveTarget(key);
+			//create a new context to use as the key which doesn't hold on to any dynamic rezolver
+			//or lifetime scope.
+			var keyContext = new RezolveContext(context.RequestedType, context.Name);
+			return _entries[context] = base.GetCompiledRezolveTarget(context);
 		}
 
-		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
-		{
-			ICompiledRezolveTarget toReturn;
-			if (_typeOnlyCacheEntries.TryGetValue(type, out toReturn))
-				return toReturn;
-			return _typeOnlyCacheEntries[type] = base.GetCompiledRezolveTarget(type);
-		}
+		//protected override ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
+		//{
+		//	ICompiledRezolveTarget toReturn;
+		//	if (_typeOnlyCacheEntries.TryGetValue(type, out toReturn))
+		//		return toReturn;
+		//	return _typeOnlyCacheEntries[type] = base.GetCompiledRezolveTarget(type);
+		//}
 	}
 }
