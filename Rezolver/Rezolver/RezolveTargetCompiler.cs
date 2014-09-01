@@ -31,6 +31,9 @@ namespace Rezolver
 			}
 		}
 
+		/// <summary>
+		/// The default compiler to be used by rezolvers when they are not explicitly provided one.
+		/// </summary>
 		public static IRezolveTargetCompiler Default
 		{
 			get { return _default ?? StubCompiler.Instance; }

@@ -87,6 +87,18 @@ namespace Rezolver
 			}
 		}
 
+		//private MemberExpression _contextRootContextPropertyExpression;
+
+		//public MemberExpression ContextRootContextPropertyExpression
+		//{
+		//	get
+		//	{
+		//		if (_contextRootContextPropertyExpression == null)
+		//			_contextRootContextPropertyExpression = Expression.Property(RezolveContextParameter, "RootContext");
+		//		return _contextRootContextPropertyExpression;
+		//	}
+		//}
+
 		//TODO: add property expression getters for the other properties on RezolveContext.
 
 		/// <summary>

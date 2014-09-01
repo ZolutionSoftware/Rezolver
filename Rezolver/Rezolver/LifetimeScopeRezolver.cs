@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -8,7 +9,7 @@ namespace Rezolver
 	public class LifetimeScopeRezolver : CachingRezolver, ILifetimeScopeRezolver
 	{
 		private List<ILifetimeScopeRezolver> _children;
-		private Dictionary<RezolveContext, List<IDisposable>> _disposables;
+		private Dictionary<RezolveContext, List<object>> _objects;
 
 		public ILifetimeScopeRezolver ParentScope
 		{
@@ -40,9 +41,12 @@ namespace Rezolver
 		private readonly ILifetimeScopeRezolver _parentScope;
 		public LifetimeScopeRezolver(IRezolver rezolver)
 		{
+			rezolver.MustNotBeNull("rezolver");
+			//TODO: add the ability to specify that a GC is to be performed
+			//when this scope is disposed?
 			_children = new List<ILifetimeScopeRezolver>();
 			_rezolver = rezolver;
-			_disposables = new Dictionary<RezolveContext, List<IDisposable>>();
+			_objects = new Dictionary<RezolveContext, List<object>>();
 			_disposing = _disposed = false;
 		}
 		public LifetimeScopeRezolver(ILifetimeScopeRezolver parentScope, IRezolver rezolver = null)
@@ -53,30 +57,27 @@ namespace Rezolver
 
 		public override object Resolve(RezolveContext context)
 		{
-			var result = base.Resolve(context);
-			TrackDisposable(result as IDisposable, context);
+			if (context.Scope == null)
+				context = context.CreateNew(this); //ensure this scope is added to the context
+			var result = _rezolver.Resolve(context);
+			if(result is IDisposable)
+				TrackObject(result, context);
 			return result;
 		}
 
-		public override T Resolve<T>(RezolveContext context)
-		{
-			var result = base.Resolve<T>(context);
-			TrackDisposable(result as IDisposable, context);
-			return result;
-		}
-
-		private void TrackDisposable(IDisposable obj, RezolveContext context)
+		private void TrackObject(object obj, RezolveContext context)
 		{
 			if (obj == null)
 				return;
-			List<IDisposable> instanceList = null;
-			if (!_disposables.TryGetValue(context, out instanceList))
+			List<object> instanceList = null;
+			if (!_objects.TryGetValue(context, out instanceList))
 			{
 				var keyContext = new RezolveContext(context.RequestedType, context.Name);
-				_disposables[keyContext] = instanceList = new List<IDisposable>();
+				_objects[keyContext] = instanceList = new List<object>();
 			}
-
-			instanceList.Add(obj);
+			//but slow this, but hopefully there won't be loads of them...
+			if(!instanceList.Any(o => object.ReferenceEquals(o, obj)))
+				instanceList.Add(obj);
 		}
 
 		public override ILifetimeScopeRezolver CreateLifetimeScope()
@@ -102,32 +103,37 @@ namespace Rezolver
 				child.Dispose();
 			}
 
-			foreach (var kvp in _disposables)
+			foreach (var kvp in _objects)
 			{
-				foreach (var disposable in kvp.Value)
+				foreach (var disposable in kvp.Value.OfType<IDisposable>())
 				{
 					disposable.Dispose();
 				}
 			}
+			_children.Clear();
+			_objects.Clear();
 			_disposed = true;
 			_disposing = false;
 		}
 
-		public void AddToScope(IDisposable disposable, RezolveContext context = null)
+		public void AddToScope(object obj, RezolveContext context = null)
 		{
-			disposable.MustNotBeNull("disposable");
-			TrackDisposable(disposable, context ?? new RezolveContext(disposable.GetType()));
+			obj.MustNotBeNull("obj");
+			TrackObject(obj, context ?? new RezolveContext(obj.GetType()));
 		}
 
 
-		public IEnumerable<IDisposable> GetFromScope(RezolveContext context)
+		public IEnumerable<object> GetFromScope(RezolveContext context)
 		{
 			context.MustNotBeNull("context");
-			List<IDisposable> instanceList = null;
-			_disposables.TryGetValue(context, out instanceList);
-
-			//important to return a read-only collection here to avoid modification
-			return new ReadOnlyCollection<IDisposable>(instanceList);
+			List<object> instanceList = null;
+			if (_objects.TryGetValue(context, out instanceList))
+			{
+				//important to return a read-only collection here to avoid modification
+				return new ReadOnlyCollection<object>(instanceList);
+			}
+			else
+				return Enumerable.Empty<object>();
 		}
 	}
 }

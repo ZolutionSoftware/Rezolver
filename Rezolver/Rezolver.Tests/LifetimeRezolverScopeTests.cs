@@ -96,18 +96,30 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldAllowInstanceToBeRegisteredWithContextAndDisposed()
 		{
-			Assert.Fail("Not yet written");
+			var rezolverMock = Mock.Of<IRezolver>();
+			ITestDisposable disposable = null;
+			using(var scope = new LifetimeScopeRezolver(rezolverMock))
+			{
+				scope.AddToScope(disposable = new DisposableType(), new RezolveContext(typeof(ITestDisposable)));
+			}
+			Assert.IsTrue(disposable.Disposed);
 		}
 
 		[TestMethod]
 		public void ShouldConfirmNoInstanceAlreadyRegistered()
 		{
 			var rezolverMock = Mock.Of<IRezolver>();
-
+			ITestDisposable disposable = null;
+			var context = new RezolveContext(typeof(DisposableType));
 			using (var scope = new LifetimeScopeRezolver(rezolverMock))
 			{
-				Assert.Fail("Not yet written");
+				scope.AddToScope(disposable = new DisposableType(), context);
+
+				var returned = scope.GetSingleFromScope(context);
+				Assert.AreSame(disposable, returned);
 			}
+
+			Assert.IsTrue(disposable.Disposed);
 		}
 
 		[TestMethod]

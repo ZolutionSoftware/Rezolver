@@ -27,7 +27,6 @@ namespace Rezolver
 		{
 			return Expression.New(_ctor,
 				_parameterBindings.Select(pb => pb.Target.CreateExpression(new CompileContext(context, pb.Parameter.ParameterType))));
-
 		}
 
 		public override Type DeclaredType

@@ -47,7 +47,7 @@ namespace Rezolver.Tests
 			builder1Mock.Setup(s => s.Fetch(typeof(int), null)).Returns(new RezolvedTarget(typeof(int)));
 
 			var rezolverMock = new Mock<IRezolver>();
-			rezolverMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(true);
+			rezolverMock.Setup(c => c.CanResolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(true);
 			int expected = -1;
 			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(expected);
 			DefaultRezolver rezolver = new DefaultRezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());
@@ -70,7 +70,7 @@ namespace Rezolver.Tests
 			int expected = -1;
 			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(() => expected);
 			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType != typeof(int)))).Throws<InvalidOperationException>();
-			rezolverMock.Setup(c => c.CanResolve(typeof(int), null, null)).Returns(() => true);
+			rezolverMock.Setup(c => c.CanResolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(() => true);
 
 			//this represents building an application's statically defined, or bootstrapped, IOC container
 			DefaultRezolver rezolver = new DefaultRezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());

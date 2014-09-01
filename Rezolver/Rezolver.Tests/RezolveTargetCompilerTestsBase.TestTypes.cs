@@ -93,6 +93,8 @@ namespace Rezolver.Tests
 			}
 		}
 
+		
+
 		/// <summary>
 		/// interface for the type that will be used to test the registration and compilation of all the different target types.
 		/// </summary>
@@ -180,6 +182,11 @@ namespace Rezolver.Tests
 				return Expression.Coalesce(Expression.Convert(context.ContextDynamicRezolverPropertyExpression, context.TargetType ?? DeclaredType),
 					Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), context.TargetType ?? DeclaredType));
 			}
+		}
+		
+		public class ScopedSingletonTestClass
+		{
+
 		}
 	}
 }

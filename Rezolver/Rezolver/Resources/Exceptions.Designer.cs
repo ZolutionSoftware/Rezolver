@@ -97,11 +97,11 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to More than one matching disposable object was found in the scope.
+        ///   Looks up a localized string similar to More than one matching object was found in the scope.
         /// </summary>
-        internal static string MoreThanOneDisposableFoundInScope {
+        internal static string MoreThanOneObjectFoundInScope {
             get {
-                return ResourceManager.GetString("MoreThanOneDisposableFoundInScope", resourceCulture);
+                return ResourceManager.GetString("MoreThanOneObjectFoundInScope", resourceCulture);
             }
         }
         
@@ -156,6 +156,15 @@ namespace Rezolver.Resources {
         internal static string PathIsInvalid {
             get {
                 return ResourceManager.GetString("PathIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A lifetime scope is required for a scoped singleton.
+        /// </summary>
+        internal static string ScopedSingletonRequiresAScope {
+            get {
+                return ResourceManager.GetString("ScopedSingletonRequiresAScope", resourceCulture);
             }
         }
         

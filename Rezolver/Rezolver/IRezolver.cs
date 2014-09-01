@@ -22,15 +22,9 @@ namespace Rezolver
 		/// <param name="name"></param>
 		/// <param name="dynamic"></param>
 		/// <returns></returns>
-		bool CanResolve(Type type, string name = null, IRezolver @dynamic = null);
-		/// <summary>
-		/// Generic version of the CanResolve operation
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="name"></param>
-		/// <param name="dynamic"></param>
-		/// <returns></returns>
-		bool CanResolve<T>(string name = null, IRezolver @dynamic = null);
+		//bool CanResolve(Type type, string name = null, IRezolver @dynamic = null);
+
+		bool CanResolve(RezolveContext context);
 
 		/// <summary>
 		/// Resolves an object of the given type, optionally with the given name, using the optional
@@ -43,7 +37,6 @@ namespace Rezolver
 		/// here instead of from this rezolver.</param>
 		/// <returns></returns>
 		object Resolve(RezolveContext context);
-		T Resolve<T>(RezolveContext context);
 
 		/// <summary>
 		/// Called to create a lifetime scope that will track, and dispose of, any 
@@ -54,8 +47,11 @@ namespace Rezolver
 
 		//TODO: I think we need this in the IRezolver interface so that we can more explictly share
 		//compiled code between rezolvers.
-		ICompiledRezolveTarget FetchCompiled(Type type, string name);
+		ICompiledRezolveTarget FetchCompiled(RezolveContext context);
 	}
+
+	//note - I've gone the overload route instead of default parameters to aid runtime optimisation
+	//in the case of one or two parameters only being required.  Believe me, it does make a difference.
 
 	public static class IRezolverExtensions
 	{
@@ -73,27 +69,27 @@ namespace Rezolver
 		{
 			return rezolver.Resolve(new RezolveContext(requestedType, dynamicRezolver));
 		}
-		[Obsolete("temporary error", true)]
+
 		public static object Resolve(this IRezolver rezolver, Type requestedType, string name, IRezolver dynamicRezolver)
 		{
 			return rezolver.Resolve(new RezolveContext(requestedType, name, dynamicRezolver));
 		}
-		[Obsolete("temporary error", true)]
+		
 		public static object Resolve(this IRezolver rezolver, Type requestedType, ILifetimeScopeRezolver scope)
 		{
 			return rezolver.Resolve(new RezolveContext(requestedType, scope));
 		}
-		[Obsolete("temporary error", true)]
+		
 		public static object Resolve(this IRezolver rezolver, Type requestedType, string name, ILifetimeScopeRezolver scope)
 		{
 			return rezolver.Resolve(new RezolveContext(requestedType, name, scope));
 		}
-		[Obsolete("temporary error", true)]
+		
 		public static object Resolve(this IRezolver rezolver, Type requestedType, IRezolver dynamicRezolver, ILifetimeScopeRezolver scope)
 		{
 			return rezolver.Resolve(new RezolveContext(requestedType, dynamicRezolver, scope));
 		}
-		[Obsolete("temporary error", true)]
+		
 		public static object Resolve(this IRezolver rezolver, Type requestedType, string name, IRezolver dynamicRezolver, ILifetimeScopeRezolver scope)
 		{
 			return rezolver.Resolve(new RezolveContext(requestedType, name, dynamicRezolver, scope));

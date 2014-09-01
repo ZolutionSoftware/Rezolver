@@ -20,7 +20,7 @@ namespace Rezolver
 		private IRezolveTargetCompiler _compiler;
 		public override IRezolveTargetCompiler Compiler
 		{
-			get { return _compiler; }
+			get { return _compiler ?? RezolveTargetCompiler.Default; }
 		}
 
 		private IRezolverBuilder _builder;

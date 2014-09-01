@@ -36,6 +36,10 @@ namespace Rezolver.Tests
 		private readonly Lazy<ConstructorTarget> _superComplexConstructorTarget
 			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<SuperComplex>);
 
+		private readonly Lazy<ConstructorTarget> _scopedSingletonTestTypeConstructorTarget
+			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<ScopedSingletonTestClass>);
+
+
 		protected abstract IRezolveTargetCompiler CreateCompilerBase(string callingMethod);
 		protected abstract void ReleaseCompiler(IRezolveTargetCompiler compiler);
 
@@ -107,6 +111,11 @@ namespace Rezolver.Tests
 		protected void AddSuperComplexTargetToRezolverMock(Mock<IRezolver> mock, Type forType = null)
 		{
 			AddTargetToRezolverMock(mock, forType ?? typeof(ISuperComplex), _superComplexConstructorTarget.Value);
+		}
+
+		protected void AddScopedSingletonTestTypeToRezolverMock(Mock<IRezolver> mock, Type forType = null)
+		{
+			AddTargetToRezolverMock(mock, forType ?? typeof(ScopedSingletonTestClass), _scopedSingletonTestTypeConstructorTarget.Value);
 		}
 	}
 }
