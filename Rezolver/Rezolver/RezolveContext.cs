@@ -6,11 +6,74 @@ using System.Text;
 namespace Rezolver
 {
 	/// <summary>
-	/// Context of a call to an IRezolver's Resolve method.
+	/// Context of a call to an IRezolver's Resolve method.  The rezolver is included
+	/// in the context to allow IRezolveTarget-generated code to refer back to the rezolver.
+	/// 
+	/// This also allows us to retarget compiled targets at other rezolvers (e.g. child rezolvers
+	/// that override existing registrations or define new ones).
 	/// </summary>
 	public class RezolveContext : IEquatable<RezolveContext>
 	{
-		public static RezolveContext EmptyContext = new RezolveContext();
+		public static RezolveContext EmptyContext = new RezolveContext(null);
+
+		private class StubRezolver : IRezolver
+		{
+			private static StubRezolver _instance = new StubRezolver();
+
+			public static StubRezolver Instance
+			{
+				get
+				{
+					return _instance;
+				}
+			}
+
+			public IRezolveTargetCompiler Compiler
+			{
+				get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
+			}
+
+			public bool CanResolve(RezolveContext context)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public object Resolve(RezolveContext context)
+			{
+				context.MustNotBeNull("context");
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public ILifetimeScopeRezolver CreateLifetimeScope()
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public ICompiledRezolveTarget FetchCompiled(RezolveContext context)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public IRezolveTarget Fetch(Type type, string name = null)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public IRezolveTarget Fetch<T>(string name = null)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+		}
 
 		private Type _requestedType;
 		public Type RequestedType { get { return _requestedType; } private set { _requestedType = value; } }
@@ -18,92 +81,50 @@ namespace Rezolver
 		private string _name;
 		public string Name { get { return _name; } private set { _name = value; } }
 
-		private IRezolver _dynamicRezolver;
-		public IRezolver DynamicRezolver { get { return _dynamicRezolver; } private set { _dynamicRezolver = value; } }
+		private IRezolver _rezolver;
+
+		/// <summary>
+		/// The rezolver for this context.
+		/// </summary>
+		public IRezolver Rezolver { get { return _rezolver; } private set { _rezolver = value; } }
 
 		private ILifetimeScopeRezolver _scope;
 		public ILifetimeScopeRezolver Scope { get { return _scope; } private set { _scope = value; } }
 
-		//private RezolveContext _rootContext;
-		///// <summary>
-		///// Returns the root RezolveContext for a resolve operation.  The root context is the one that
-		///// is initially created at the start of a resolve call, and is used to obtain the initial lifetime scope
-		///// and dynammic rezolver that are to be used for the whole resolve operation.
-		///// </summary>
-		//public RezolveContext RootContext
-		//{
-		//	get
-		//	{
-		//		return _rootContext ?? this;
-		//	}
-		//	private set
-		//	{
-		//		_rootContext = value;
-		//	}
-		//}
-
-		public RezolveContext(Type requestedType)
+		public RezolveContext(IRezolver rezolver, Type requestedType)
+			: this(rezolver)
 		{
 			RequestedType = requestedType;
 		}
 
-		public RezolveContext(Type requestedType, string name)
+		public RezolveContext(IRezolver rezolver, Type requestedType, string name)
+			: this(rezolver)
 		{
 			RequestedType = requestedType;
 			Name = name;
 		}
 
-		public RezolveContext(Type requestedType, IRezolver dynamicRezolver)
-		{
-			RequestedType = requestedType;
-			DynamicRezolver = dynamicRezolver;
-		}
-
-		public RezolveContext(Type requestedType, string name, IRezolver dynamicRezolver)
-		{
-			RequestedType = requestedType;
-			Name = name;
-			DynamicRezolver = dynamicRezolver;
-		}
-
-		public RezolveContext(Type requestedType, ILifetimeScopeRezolver scope)
+		public RezolveContext(IRezolver rezolver, Type requestedType, ILifetimeScopeRezolver scope)
+			: this(rezolver)
 		{
 			RequestedType = requestedType;
 			Scope = scope;
 		}
 
-		public RezolveContext(Type requestedType, string name, ILifetimeScopeRezolver scope)
+		public RezolveContext(IRezolver rezolver, Type requestedType, string name, ILifetimeScopeRezolver scope)
+			: this(rezolver)
 		{
 			RequestedType = requestedType;
 			Name = name;
 			Scope = scope;
 		}
 
-		public RezolveContext(Type requestedType, IRezolver dynamicRezolver, ILifetimeScopeRezolver scope)
+		private RezolveContext(IRezolver rezolver)
 		{
-			RequestedType = requestedType;
-			DynamicRezolver = dynamicRezolver;
-			Scope = scope;
+			_rezolver = rezolver ?? StubRezolver.Instance;
 		}
 
-		/// <summary>
-		/// Constructs a new instance of the <see cref="RezolveContext"/> class.
-		/// </summary>
-		/// <param name="requestedType">The type of object requested from the Resolve operation.</param>
-		/// <param name="name">The name, if any of the type requested from the Resolve operation.</param>
-		/// <param name="dynamicRezolver">If a rezolver is passed into a resolve call then you pass it here.</param>
-		/// <param name="scope">Any lifetime scope that is currently effective.  Objects which need to be registered
-		/// into a lifetime scope will use this as their target scope.</param>
-		public RezolveContext(Type requestedType, string name, IRezolver dynamicRezolver, ILifetimeScopeRezolver scope)
-		{
-			RequestedType = requestedType;
-			Name = name;
-			DynamicRezolver = dynamicRezolver;
-			Scope = scope;
-		}
-
-		public RezolveContext()
-			: this(null, null, null, null)
+		private RezolveContext()
 		{
 
 		}
@@ -145,8 +166,8 @@ namespace Rezolver
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = DynamicRezolver,
-				Name = Name,
+				Rezolver = Rezolver,
+				Name = null, //name is part of the object's identity - so should be nulled when changing the type
 				RequestedType = requestedType,
 				Scope = Scope
 			};
@@ -156,29 +177,29 @@ namespace Rezolver
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = DynamicRezolver,
+				Rezolver = Rezolver,
 				Name = name,
 				RequestedType = requestedType,
 				Scope = Scope
 			};
 		}
 
-		public RezolveContext CreateNew(Type requestedType, IRezolver dynamicRezolver)
+		public RezolveContext CreateNew(IRezolver rezolver, Type requestedType)
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = dynamicRezolver,
-				Name = Name,
+				Rezolver = rezolver,
+				Name = null,
 				RequestedType = requestedType,
 				Scope = Scope
 			};
 		}
 
-		public RezolveContext CreateNew(Type requestedType, string name, IRezolver dynamicRezolver)
+		public RezolveContext CreateNew(IRezolver rezolver, Type requestedType, string name)
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = dynamicRezolver,
+				Rezolver = Rezolver,
 				Name = name,
 				RequestedType = requestedType,
 				Scope = Scope
@@ -189,8 +210,8 @@ namespace Rezolver
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = DynamicRezolver,
-				Name = Name,
+				Rezolver = Rezolver,
+				Name = null,
 				RequestedType = requestedType,
 				Scope = scope
 			};
@@ -200,29 +221,29 @@ namespace Rezolver
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = DynamicRezolver,
+				Rezolver = Rezolver,
 				Name = name,
 				RequestedType = requestedType,
 				Scope = scope
 			};
 		}
 
-		public RezolveContext CreateNew(Type requestedType, IRezolver dynamicRezolver, ILifetimeScopeRezolver scope)
+		public RezolveContext CreateNew(IRezolver rezolver, Type requestedType, ILifetimeScopeRezolver scope)
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = dynamicRezolver,
-				Name = Name,
+				Rezolver = rezolver,
+				Name = null,
 				RequestedType = requestedType,
 				Scope = scope
 			};
 		}
 
-		public RezolveContext CreateNew(IRezolver dynamicRezolver)
+		public RezolveContext CreateNew(IRezolver rezolver)
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = dynamicRezolver,
+				Rezolver = rezolver,
 				Name = Name,
 				RequestedType = RequestedType,
 				Scope = Scope
@@ -233,7 +254,18 @@ namespace Rezolver
 		{
 			return new RezolveContext()
 			{
-				DynamicRezolver = DynamicRezolver,
+				Rezolver = Rezolver,
+				Name = Name,
+				RequestedType = RequestedType,
+				Scope = scope
+			};
+		}
+
+		public RezolveContext CreateNew(IRezolver rezolver, ILifetimeScopeRezolver scope)
+		{
+			return new RezolveContext()
+			{
+				Rezolver = rezolver ?? Rezolver, //can't have a null rezolver
 				Name = Name,
 				RequestedType = RequestedType,
 				Scope = scope

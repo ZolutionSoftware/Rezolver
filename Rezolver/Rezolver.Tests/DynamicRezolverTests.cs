@@ -25,7 +25,7 @@ namespace Rezolver.Tests
 				.Returns(expected);
 			DefaultRezolver rezolver = new DefaultRezolver(builderMock.Object);
 
-			Assert.AreEqual(expected, rezolver.Resolve(typeof(int), rezolverMock.Object));
+			Assert.AreEqual(expected, rezolver.Resolve(typeof(int)));
 		}
 
 		public class Bug_Dependency

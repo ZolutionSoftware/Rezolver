@@ -17,7 +17,9 @@ namespace Rezolver
 			Dictionary<Type, ICompiledRezolveTarget>
 			MissingTargets = new Dictionary<Type, ICompiledRezolveTarget>();
 		
-		private static ICompiledRezolveTarget GetMissingTarget(Type target)
+
+
+		protected static ICompiledRezolveTarget GetMissingTarget(Type target)
 		{
 			ICompiledRezolveTarget result = null;
 
@@ -25,6 +27,11 @@ namespace Rezolver
 				return result;
 
 			return MissingTargets[target] = new MissingCompiledTarget(target);
+		}
+
+		protected bool IsMissingTarget(ICompiledRezolveTarget target)
+		{
+			return target is MissingCompiledTarget;
 		}
 
 		protected class MissingCompiledTarget : ICompiledRezolveTarget
@@ -42,22 +49,8 @@ namespace Rezolver
 			}
 		}
 
-		private readonly bool _enableDynamicRezolvers;
-
 		protected RezolverBase()
-			: this(DefaultEnableDynamicRezolvers)
 		{
-		}
-
-		/// <summary>
-		/// Use this constructor to explicitly enable or disable dynamic rezolvers
-		/// in the code that is generated for this rezolver, and in this rezolver
-		/// in general.
-		/// </summary>
-		/// <param name="enableDynamicRezolvers"></param>
-		protected RezolverBase(bool enableDynamicRezolvers = DefaultEnableDynamicRezolvers)
-		{
-			_enableDynamicRezolvers = enableDynamicRezolvers;
 		}
 
 		public abstract IRezolveTargetCompiler Compiler { get; }
@@ -66,13 +59,6 @@ namespace Rezolver
 
 		public virtual object Resolve(RezolveContext context)
 		{
-			if (context.DynamicRezolver != null 
-				&& _enableDynamicRezolvers 
-				&& context.DynamicRezolver != this)
-			{
-				if (context.DynamicRezolver.CanResolve(context))
-					return context.DynamicRezolver.Resolve(context);
-			}
 			return GetCompiledRezolveTarget(context).GetObject(context);
 		}
 
@@ -83,7 +69,10 @@ namespace Rezolver
 
 		public ICompiledRezolveTarget FetchCompiled(RezolveContext context)
 		{
-			return GetCompiledRezolveTarget(context.CreateNew(context.Scope == null ? this as ILifetimeScopeRezolver : context.Scope));
+			//note that this rezolver is fixed as the rezolver in the compile context - regardless of the
+			//one passed in.  This is important.
+			//note also that this rezolver is only passed as scope if the context doesn't already have one.
+			return GetCompiledRezolveTarget(context.CreateNew(this, context.Scope == null ? this as ILifetimeScopeRezolver : context.Scope));
 		}
 
 		public virtual bool CanResolve(RezolveContext context)
@@ -121,8 +110,13 @@ namespace Rezolver
 			IRezolveTarget target = Fetch(context.RequestedType, context.Name);
 			
 			if (target != null)
-				return Compiler.CompileTarget(target, new CompileContext(this, context.RequestedType, enableDynamicRezolver: _enableDynamicRezolvers));
+				return Compiler.CompileTarget(target, new CompileContext(this, context.RequestedType));
 
+			return GetFallbackCompiledRezolveTarget(context);
+		}
+
+		protected virtual ICompiledRezolveTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
+		{
 			return GetMissingTarget(context.RequestedType);
 		}		
 	}

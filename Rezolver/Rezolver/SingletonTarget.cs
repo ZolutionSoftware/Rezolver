@@ -55,7 +55,7 @@ namespace Rezolver
 			if (_lazy == null)
 			{
 				var target = context.Rezolver.Compiler.CompileTarget(_innerTarget, context);
-				_lazy = new Lazy<object>(() => target.GetObject(new RezolveContext()));
+				_lazy = new Lazy<object>(() => target.GetObject(new RezolveContext(context.Rezolver, context.TargetType)));
 			}
 
 			return Expression.Property(Expression.Constant(_lazy), "Value");

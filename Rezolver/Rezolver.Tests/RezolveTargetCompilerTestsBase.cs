@@ -204,7 +204,7 @@ namespace Rezolver.Tests
 
 			Assert.IsNotNull(target);
 			Assert.AreSame(defaultRezolver, target.GetObject());
-			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(typeof(IRezolver), inputDynamicRezolver)));
+			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(defaultRezolver, typeof(IRezolver))));
 		}
 
 		[TestMethod]
@@ -219,7 +219,7 @@ namespace Rezolver.Tests
 
 			Assert.IsNotNull(target);
 			Assert.AreSame(defaultRezolver, target.GetObject());
-			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(typeof(IRezolver), inputDynamicRezolver)));
+			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(defaultRezolver, typeof(IRezolver))));
 		}
 
 		[TestMethod]
@@ -236,15 +236,15 @@ namespace Rezolver.Tests
 
 			using(var scope = new LifetimeScopeRezolver(rezolverMock.Object))
 			{
-				target.GetObject(new RezolveContext(typeof(ScopedSingletonTestClass), scope));
+				target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
 
-				obj1 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(typeof(ScopedSingletonTestClass), scope));
-				obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(typeof(ScopedSingletonTestClass), scope));
+				obj1 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
+				obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
 				Assert.IsNotNull(obj1);
 				Assert.AreSame(obj1, obj2);
 				using (var scope2 = scope.CreateLifetimeScope())
 				{
-					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(typeof(ScopedSingletonTestClass), scope2));
+					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope2));
 
 					Assert.AreSame(obj1, obj2);
 				}
@@ -252,7 +252,7 @@ namespace Rezolver.Tests
 				//create another top-level scope - this should create a new instance
 				using (var siblingScope = new LifetimeScopeRezolver(rezolverMock.Object))
 				{
-					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(typeof(ScopedSingletonTestClass), siblingScope));
+					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), siblingScope));
 					Assert.AreNotSame(obj1, obj2);
 				}
 			}

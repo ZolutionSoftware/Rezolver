@@ -25,12 +25,6 @@ namespace Rezolver
 
 		}
 
-		protected CachingRezolver(bool enableDynamicRezolvers = DefaultEnableDynamicRezolvers)
-			: base(enableDynamicRezolvers)
-		{
-
-		}
-
 		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
 			ICompiledRezolveTarget toReturn;
@@ -38,16 +32,8 @@ namespace Rezolver
 				return toReturn;
 			//create a new context to use as the key which doesn't hold on to any dynamic rezolver
 			//or lifetime scope.
-			var keyContext = new RezolveContext(context.RequestedType, context.Name);
+			var keyContext = new RezolveContext(null, context.RequestedType, context.Name);
 			return _entries[context] = base.GetCompiledRezolveTarget(context);
 		}
-
-		//protected override ICompiledRezolveTarget GetCompiledRezolveTarget(Type type)
-		//{
-		//	ICompiledRezolveTarget toReturn;
-		//	if (_typeOnlyCacheEntries.TryGetValue(type, out toReturn))
-		//		return toReturn;
-		//	return _typeOnlyCacheEntries[type] = base.GetCompiledRezolveTarget(type);
-		//}
 	}
 }

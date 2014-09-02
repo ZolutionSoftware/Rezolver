@@ -100,7 +100,7 @@ namespace Rezolver.Tests
 			ITestDisposable disposable = null;
 			using(var scope = new LifetimeScopeRezolver(rezolverMock))
 			{
-				scope.AddToScope(disposable = new DisposableType(), new RezolveContext(typeof(ITestDisposable)));
+				scope.AddToScope(disposable = new DisposableType(), new RezolveContext(rezolverMock, typeof(ITestDisposable)));
 			}
 			Assert.IsTrue(disposable.Disposed);
 		}
@@ -110,7 +110,7 @@ namespace Rezolver.Tests
 		{
 			var rezolverMock = Mock.Of<IRezolver>();
 			ITestDisposable disposable = null;
-			var context = new RezolveContext(typeof(DisposableType));
+			var context = new RezolveContext(rezolverMock, typeof(DisposableType));
 			using (var scope = new LifetimeScopeRezolver(rezolverMock))
 			{
 				scope.AddToScope(disposable = new DisposableType(), context);

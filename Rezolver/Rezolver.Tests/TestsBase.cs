@@ -9,7 +9,11 @@ namespace Rezolver.Tests
 	{
 		protected static T GetValueFromTarget<T>(IRezolveTarget target, IRezolver rezolver = null, IRezolver dynamicRezolver = null)
 		{
-			return (T)new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(rezolver ?? CreateRezolverMock())).GetObject();
+			var compiledTarget = new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(rezolver ?? CreateRezolverMock()));
+			if (rezolver == null)
+				return (T)compiledTarget.GetObject();
+			else
+				return (T)compiledTarget.GetObject(new RezolveContext(rezolver, typeof(T)));
 		}
 
 		private static IRezolver CreateRezolverMock()

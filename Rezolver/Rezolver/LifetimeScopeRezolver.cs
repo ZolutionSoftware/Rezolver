@@ -72,7 +72,7 @@ namespace Rezolver
 			List<object> instanceList = null;
 			if (!_objects.TryGetValue(context, out instanceList))
 			{
-				var keyContext = new RezolveContext(context.RequestedType, context.Name);
+				var keyContext = new RezolveContext(null, context.RequestedType, context.Name);
 				_objects[keyContext] = instanceList = new List<object>();
 			}
 			//but slow this, but hopefully there won't be loads of them...
@@ -119,7 +119,7 @@ namespace Rezolver
 		public void AddToScope(object obj, RezolveContext context = null)
 		{
 			obj.MustNotBeNull("obj");
-			TrackObject(obj, context ?? new RezolveContext(obj.GetType()));
+			TrackObject(obj, context ?? new RezolveContext(null, obj.GetType()));
 		}
 
 

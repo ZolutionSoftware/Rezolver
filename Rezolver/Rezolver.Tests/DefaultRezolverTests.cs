@@ -66,16 +66,14 @@ namespace Rezolver.Tests
 			//the thing being that the underlying Builder does not know how too resolve an integer without
 			//being passed a dynamic container at call-time.
 			//this mocks a dynamically defined container that an application creates in response to transient information only
-			var rezolverMock = new Mock<IRezolver>();
+			var builder2Mock = new Mock<IRezolverBuilder>();
 			int expected = -1;
-			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(() => expected);
-			rezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType != typeof(int)))).Throws<InvalidOperationException>();
-			rezolverMock.Setup(c => c.CanResolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(() => true);
-
+			builder2Mock.Setup(s => s.Fetch(typeof(int), null)).Returns(expected.AsObjectTarget());
 			//this represents building an application's statically defined, or bootstrapped, IOC container
 			DefaultRezolver rezolver = new DefaultRezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());
+			CombinedRezolver dynamicRezolver = new CombinedRezolver(rezolver, builder2Mock.Object, rezolver.Compiler);
 
-			var result = (TypeWithConstructorArg)rezolver.Resolve(typeof (TypeWithConstructorArg), rezolverMock.Object);
+			var result = (TypeWithConstructorArg)dynamicRezolver.Resolve(typeof (TypeWithConstructorArg));
 			Assert.IsNotNull(result);
 
 			Assert.AreEqual(expected, result.Value);

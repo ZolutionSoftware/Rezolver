@@ -57,42 +57,22 @@ namespace Rezolver
 	{
 		public static object Resolve(this IRezolver rezolver, Type type)
 		{
-			return rezolver.Resolve(new RezolveContext(type));
+			return rezolver.Resolve(new RezolveContext(rezolver, type));
 		}
 
 		public static object Resolve(this IRezolver rezolver, Type type, string name)
 		{
-			return rezolver.Resolve(new RezolveContext(type, name));
-		}
-
-		public static object Resolve(this IRezolver rezolver, Type requestedType, IRezolver dynamicRezolver)
-		{
-			return rezolver.Resolve(new RezolveContext(requestedType, dynamicRezolver));
-		}
-
-		public static object Resolve(this IRezolver rezolver, Type requestedType, string name, IRezolver dynamicRezolver)
-		{
-			return rezolver.Resolve(new RezolveContext(requestedType, name, dynamicRezolver));
+			return rezolver.Resolve(new RezolveContext(rezolver, type, name));
 		}
 		
 		public static object Resolve(this IRezolver rezolver, Type requestedType, ILifetimeScopeRezolver scope)
 		{
-			return rezolver.Resolve(new RezolveContext(requestedType, scope));
+			return rezolver.Resolve(new RezolveContext(rezolver, requestedType, scope));
 		}
 		
 		public static object Resolve(this IRezolver rezolver, Type requestedType, string name, ILifetimeScopeRezolver scope)
 		{
-			return rezolver.Resolve(new RezolveContext(requestedType, name, scope));
-		}
-		
-		public static object Resolve(this IRezolver rezolver, Type requestedType, IRezolver dynamicRezolver, ILifetimeScopeRezolver scope)
-		{
-			return rezolver.Resolve(new RezolveContext(requestedType, dynamicRezolver, scope));
-		}
-		
-		public static object Resolve(this IRezolver rezolver, Type requestedType, string name, IRezolver dynamicRezolver, ILifetimeScopeRezolver scope)
-		{
-			return rezolver.Resolve(new RezolveContext(requestedType, name, dynamicRezolver, scope));
+			return rezolver.Resolve(new RezolveContext(rezolver, requestedType, name, scope));
 		}
 	}
 }
