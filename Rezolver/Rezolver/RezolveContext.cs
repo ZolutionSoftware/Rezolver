@@ -14,11 +14,11 @@ namespace Rezolver
 	/// </summary>
 	public class RezolveContext : IEquatable<RezolveContext>
 	{
-		public static RezolveContext EmptyContext = new RezolveContext(null);
+		public static readonly RezolveContext EmptyContext = new RezolveContext(null);
 
 		private class StubRezolver : IRezolver
 		{
-			private static StubRezolver _instance = new StubRezolver();
+			private static readonly StubRezolver _instance = new StubRezolver();
 
 			public static StubRezolver Instance
 			{
@@ -39,6 +39,12 @@ namespace Rezolver
 			}
 
 			public object Resolve(RezolveContext context)
+			{
+				context.MustNotBeNull("context");
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
+
+			public bool TryResolve(RezolveContext context, out object result)
 			{
 				context.MustNotBeNull("context");
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
@@ -130,7 +136,7 @@ namespace Rezolver
 
 		public override int GetHashCode()
 		{
-			return RequestedType.GetHashCode() ^ (Name != null ? Name.GetHashCode() : 0);
+			return _requestedType.GetHashCode() ^ (_name != null ? _name.GetHashCode() : 0);
 		}
 
 		public override bool Equals(object obj)
@@ -142,17 +148,17 @@ namespace Rezolver
 
 		public bool Equals(RezolveContext other)
 		{
-			return RequestedType == other.RequestedType && Name == other.Name;
+			return object.ReferenceEquals(this, other) || _requestedType == other._requestedType && _name == other._name;
 		}
 
 		public static bool operator ==(RezolveContext left, RezolveContext right)
 		{
-			return object.ReferenceEquals(left, right) || (left.RequestedType == right.RequestedType && left.Name == right.Name);
+			return object.ReferenceEquals(left, right) || (left._requestedType == right._requestedType && left._name == right._name);
 		}
 
 		public static bool operator !=(RezolveContext left, RezolveContext right)
 		{
-			return !object.ReferenceEquals(left, right) && (left.RequestedType != right.RequestedType || left.Name != right.Name);
+			return !object.ReferenceEquals(left, right) && (left._requestedType != right._requestedType || left._name != right._name);
 		}
 
 		/// <summary>

@@ -32,6 +32,10 @@ namespace Rezolver
 		private static readonly MethodInfo ContextNewContextMethod = 
 			MethodCallExtractor.ExtractCalledMethod((RezolveContext context) => context.CreateNew((Type)null, (string)null));
 
+		//this one cannot be obtained via expression extraction - as it uses an output parameter and there's no way of
+		//modelling that to the compiler.
+		private static readonly MethodInfo RezolverTryResolveMethod = typeof(IRezolver).GetMethod("TryResolve");
+
 		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 
 		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
@@ -127,9 +131,8 @@ namespace Rezolver
 			List<Expression> blockExpressions = new List<Expression>();
 			if(setNewContextFirst)
 				blockExpressions.Add(setNewContextLocal);
-			{
-				useContextRezolverIfCanExpr = Expression.Block(finalType, new[] {newContextLocal}, setNewContextLocal, useContextRezolverIfCanExpr);
-			}
+			else
+				useContextRezolverIfCanExpr = Expression.Block(finalType, new[] { newContextLocal }, setNewContextLocal, useContextRezolverIfCanExpr);
 
 			blockExpressions.Add(Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
 				staticExpr,

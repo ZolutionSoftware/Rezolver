@@ -23,7 +23,7 @@ namespace Rezolver
 			return MissingTargets[target] = new MissingCompiledTarget(target);
 		}
 
-		protected bool IsMissingTarget(ICompiledRezolveTarget target)
+		protected static bool IsMissingTarget(ICompiledRezolveTarget target)
 		{
 			return target is MissingCompiledTarget;
 		}
@@ -54,6 +54,21 @@ namespace Rezolver
 		public virtual object Resolve(RezolveContext context)
 		{
 			return GetCompiledRezolveTarget(context).GetObject(context);
+		}
+
+		public virtual bool TryResolve(RezolveContext context, out object result)
+		{
+			var target = GetCompiledRezolveTarget(context);
+			if (!IsMissingTarget(target))
+			{
+				result = target.GetObject(context);
+				return true;
+			}
+			else
+			{
+				result = null;
+				return false;
+			}
 		}
 
 		public virtual ILifetimeScopeRezolver CreateLifetimeScope()

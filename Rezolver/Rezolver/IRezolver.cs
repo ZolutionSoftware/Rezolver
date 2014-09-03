@@ -39,6 +39,14 @@ namespace Rezolver
 		object Resolve(RezolveContext context);
 
 		/// <summary>
+		/// Merges the CanResolve and Resolve operations into one call.
+		/// </summary>
+		/// <param name="context"></param>
+		/// <param name="result"></param>
+		/// <returns></returns>
+		bool TryResolve(RezolveContext context, out object result);
+
+		/// <summary>
 		/// Called to create a lifetime scope that will track, and dispose of, any 
 		/// disposable objects that are created.
 		/// </summary>

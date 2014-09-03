@@ -147,12 +147,16 @@ namespace Rezolver
 
 			protected override Expression VisitConstant(ConstantExpression node)
 			{
-				//var helperBuilder = _constantProviderTypeBuilder.Value;
-				//create a field on the type with the same type as the constant, with a dynamic name
-				var field = _helperTypeBuilder.Value.DefineField(string.Format("_c{0}", ++_constantCounter), node.Type, FieldAttributes.Public | FieldAttributes.Static);
-				var mapping = new ConstantFieldMapping() { Field = field, Original = node };
-				_mappings.Add(mapping);
+				ConstantFieldMapping mapping = _mappings.FirstOrDefault(cfm => object.ReferenceEquals(cfm.Original, node) || (object.ReferenceEquals(cfm.Original.Value, node.Value) && cfm.Original.Type == node.Type));
 
+				if (mapping == null)
+				{
+					//var helperBuilder = _constantProviderTypeBuilder.Value;
+					//create a field on the type with the same type as the constant, with a dynamic name
+					var field = _helperTypeBuilder.Value.DefineField(string.Format("_c{0}", ++_constantCounter), node.Type, FieldAttributes.Public | FieldAttributes.Static);
+					mapping = new ConstantFieldMapping() { Field = field, Original = node };
+					_mappings.Add(mapping);
+				}
 				return new ConstantExpressionToReplace(mapping);
 			}
 
