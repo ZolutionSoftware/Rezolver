@@ -15,10 +15,9 @@ namespace Rezolver
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="first"></param>
-		/// <param name="second">Note, you can pass null - in which case this instance
-		/// simply acts as a proxy for the first rezolver.</param>
-		public CombinedRezolver(IRezolver inner, IRezolverBuilder builder, IRezolveTargetCompiler compiler) 
+		/// <param name="inner">The inner rezolver that this one combines with.  Any dependencies not served
+		/// by the new combined rezolver's own registry will be sought from this rezolver.</param>
+		public CombinedRezolver(IRezolver inner, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null) 
 			: base(builder, compiler)
 		{
 			inner.MustNotBeNull("inner");

@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace Rezolver
 {
+	//TODO: reimplement this as a combined rezolver - there's no need to override caching rezolver any more.
 	public class LifetimeScopeRezolver : CachingRezolver, ILifetimeScopeRezolver
 	{
 		private List<ILifetimeScopeRezolver> _children;
@@ -136,4 +137,6 @@ namespace Rezolver
 				return Enumerable.Empty<object>();
 		}
 	}
+
+	
 }

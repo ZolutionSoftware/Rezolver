@@ -11,7 +11,7 @@ namespace Rezolver.Tests
 		{
 			var compiledTarget = new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(rezolver ?? CreateRezolverMock()));
 			if (rezolver == null)
-				return (T)compiledTarget.GetObject();
+				return (T)compiledTarget.GetObject(new RezolveContext(CreateRezolverMock(), typeof(T)));
 			else
 				return (T)compiledTarget.GetObject(new RezolveContext(rezolver, typeof(T)));
 		}
@@ -26,7 +26,7 @@ namespace Rezolver.Tests
 
 		protected static object GetValueFromTarget(IRezolveTarget target, IRezolver scope = null, IRezolver dynamicScope = null)
 		{
-			return new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(scope ?? CreateRezolverMock())).GetObject();
+			return new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(scope ?? CreateRezolverMock())).GetObject(new RezolveContext(CreateRezolverMock(), null));
 		}
 	}
 }

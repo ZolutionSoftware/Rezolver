@@ -86,10 +86,14 @@ namespace Rezolver
 
 			//now we try and fetch the target from the rezolver that is passed in the context
 			var staticTarget = context.Rezolver.Fetch(DeclaredType, nameCompiled != null ? (string)nameCompiled.GetObject(new RezolveContext(context.Rezolver, _resolveNameTarget.DeclaredType)) : null);
-			var thisRezolver = Expression.Constant(context.Rezolver);
+			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IRezolver));
 			var finalType = context.TargetType ?? DeclaredType;
 			var finalTypeExpr = Expression.Constant(finalType, typeof(Type));
-			
+
+			var newContextLocal = Expression.Parameter(typeof(RezolveContext), "newContext");
+			var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, finalTypeExpr, nameExpr);
+			var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
+			bool setNewContextFirst = false;
 			Expression staticExpr = null;
 			if (staticTarget != null)
 				staticExpr = staticTarget.CreateExpression(context);
@@ -100,20 +104,18 @@ namespace Rezolver
 				//to generate an exception saying that the dependency couldn't be found.
 				//unless, of course, some naughty person has snuck in an additional registration
 				//into the rezolver after compilation has been done ;)
-				staticExpr = Expression.Call(thisRezolver, RezolverResolveMethod, context.RezolveContextParameter);
+				setNewContextFirst = true;
+				staticExpr = Expression.Call(thisRezolver, RezolverResolveMethod, newContextLocal);
 			}
 
 			if (staticExpr.Type != finalType)
 				staticExpr = Expression.Convert(staticExpr, finalType);
 			
-			var newContextLocal = Expression.Parameter(typeof(RezolveContext), "newContext");
-			var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, finalTypeExpr, nameExpr);
-			var useContextRezolverIfCanExpr = Expression.Block(finalType, new[] { newContextLocal },
-				Expression.Assign(newContextLocal, newContextExpr),
-				Expression.Condition(Expression.Call(context.ContextRezolverPropertyExpression, RezolverCanResolveMethod, newContextLocal),
+		
+			Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextRezolverPropertyExpression, RezolverCanResolveMethod, newContextLocal),
 					Expression.Convert(Expression.Call(context.ContextRezolverPropertyExpression, RezolverResolveMethod, newContextLocal), finalType),
 					staticExpr
-				));
+				);
 
 //#if DEBUG
 //			var expression = Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
@@ -122,9 +124,21 @@ namespace Rezolver
 //			Debug.WriteLine("RezolvedTarget expression for {0}: {1}", finalType, expression);
 //			return expression;
 //#else
-			return Expression.IfThenElse(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
+			List<Expression> blockExpressions = new List<Expression>();
+			if(setNewContextFirst)
+				blockExpressions.Add(setNewContextLocal);
+			{
+				useContextRezolverIfCanExpr = Expression.Block(finalType, new[] {newContextLocal}, setNewContextLocal, useContextRezolverIfCanExpr);
+			}
+
+			blockExpressions.Add(Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
 				staticExpr,
-				useContextRezolverIfCanExpr);
+				useContextRezolverIfCanExpr));
+
+			if (blockExpressions.Count == 1)
+				return blockExpressions[0];
+			else
+				return Expression.Block(finalType, new[] { newContextLocal }, blockExpressions);
 //#endif
 		}
 	}

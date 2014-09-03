@@ -19,8 +19,6 @@ namespace Rezolver.Tests
 	{
 		protected override IRezolveTargetCompiler CreateCompilerBase(string callingMethod)
 		{
-			//if((callingMethod ?? string.Empty).StartsWith("shouldcompiledynamic", StringComparison.OrdinalIgnoreCase))
-
 			return new AssemblyRezolveTargetCompiler(AssemblyRezolveTargetCompiler.CreateAssemblyBuilder(AssemblyBuilderAccess.RunAndSave));
 		}
 

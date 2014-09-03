@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AssertEx.cs" />
     <Compile Include="Classes\SimpleType.cs" />
+    <Compile Include="ICompiledRezolveTargetExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BasicBuilderTests.cs" />
     <Compile Include="ObjectTargetTests.cs" />
@@ -78,7 +79,7 @@
     <Compile Include="DefaultTargetTests.cs" />
     <Compile Include="RezolveTargetAdapterTests.cs" />
     <Compile Include="DefaultRezolverTests.cs" />
-    <Compile Include="DynamicRezolverTests.cs" />
+    <Compile Include="CombinedRezolverTests.cs" />
     <Compile Include="RezolverTests_Generic.cs" />
     <Compile Include="RezolveTargetDelegateCompilerTests.cs" />
     <Compile Include="AssemblyRezolveTargetCompilerTests.cs" />

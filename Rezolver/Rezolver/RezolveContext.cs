@@ -91,6 +91,8 @@ namespace Rezolver
 		private ILifetimeScopeRezolver _scope;
 		public ILifetimeScopeRezolver Scope { get { return _scope; } private set { _scope = value; } }
 
+		private RezolveContext() { }
+
 		public RezolveContext(IRezolver rezolver, Type requestedType)
 			: this(rezolver)
 		{
@@ -124,10 +126,7 @@ namespace Rezolver
 			_rezolver = rezolver ?? StubRezolver.Instance;
 		}
 
-		private RezolveContext()
-		{
 
-		}
 
 		public override int GetHashCode()
 		{

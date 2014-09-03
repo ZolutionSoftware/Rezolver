@@ -6,11 +6,11 @@ namespace Rezolver
 		object GetObject(RezolveContext context);
 	}
 
-	public static class ICompiledRezolveTargetExtensions
-	{
-		public static object GetObject(this ICompiledRezolveTarget target)
-		{
-			return target.GetObject(RezolveContext.EmptyContext);
-		}
-	}
+	//public static class ICompiledRezolveTargetExtensions
+	//{
+	//	public static object GetObject(this ICompiledRezolveTarget target)
+	//	{
+	//		return target.GetObject(RezolveContext.EmptyContext);
+	//	}
+	//}
 }

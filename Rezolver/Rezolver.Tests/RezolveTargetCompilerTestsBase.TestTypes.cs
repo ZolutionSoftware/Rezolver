@@ -132,57 +132,6 @@ namespace Rezolver.Tests
 			public ISingleton Singleton { get; private set; }
 			public IComposite Composite { get; private set; }
 		}
-
-		/// <summary>
-		/// Special test target for the dynamic tests - returns the dynamic rezolver that is passed
-		/// into the delegate that is built from the target, or a default if that dynamic rezolver is
-		/// passed as null.
-		/// </summary>
-		public class DynamicTestTarget : IRezolveTarget
-		{
-			private readonly IRezolver _default;
-
-			public DynamicTestTarget(IRezolver @default)
-			{
-				_default = @default;
-			}
-
-			public bool SupportsType(Type type)
-			{
-				return type.IsAssignableFrom(typeof(IRezolver));
-			}
-
-			public Expression CreateExpression(IRezolver rezolver, Type targetType = null,
-				ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null)
-			{
-				//this method isn't always called with a dynamicRezolverExpression passed
-				if (targetType != null && !SupportsType(targetType))
-					throw new ArgumentException(string.Format("Type not supported: {0}", targetType));
-				if (dynamicRezolverExpression != null)
-				{
-					return Expression.Coalesce(Expression.Convert(dynamicRezolverExpression, targetType ?? DeclaredType),
-						Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), targetType ?? DeclaredType));
-				}
-
-				return Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), targetType ?? DeclaredType);
-			}
-
-			public Type DeclaredType
-			{
-				get { return typeof(IRezolver); }
-			}
-
-
-			public Expression CreateExpression(CompileContext context)
-			{
-				//this method isn't always called with a dynamicRezolverExpression passed
-				if (context.TargetType != null && !SupportsType(context.TargetType))
-					throw new ArgumentException(string.Format("Type not supported: {0}", context.TargetType));
-
-				return Expression.Coalesce(Expression.Convert(context.ContextRezolverPropertyExpression, context.TargetType ?? DeclaredType),
-					Expression.Convert(Expression.Constant(_default, typeof(IRezolver)), context.TargetType ?? DeclaredType));
-			}
-		}
 		
 		public class ScopedSingletonTestClass
 		{

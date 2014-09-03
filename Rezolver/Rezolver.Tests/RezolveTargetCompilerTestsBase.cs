@@ -23,7 +23,7 @@ namespace Rezolver.Tests
 			var compiler = CreateCompiler();
 			var target = compiler.CompileTarget(_stringObjectTarget.Value, CreateCompileContext(compiler));
 			Assert.IsNotNull(target);
-			Assert.AreEqual(StringForObjectTarget, target.GetObject());
+			Assert.AreEqual(StringForObjectTarget, target.GetObject(new RezolveContext(Mock.Of<IRezolver>(), typeof(string))));
 		}
 
 		private CompileContext CreateCompileContext(IRezolveTargetCompiler compiler)
@@ -42,7 +42,7 @@ namespace Rezolver.Tests
 			var compiler = CreateCompiler();
 			var target = compiler.CompileTarget(_intObjectTarget.Value, CreateCompileContext(compiler));
 			Assert.IsNotNull(target);
-			Assert.AreEqual(IntForObjectTarget, target.GetObject());
+			Assert.AreEqual(IntForObjectTarget, target.GetObject(new RezolveContext(Mock.Of<IRezolver>(), typeof(int))));
 
 		}
 
@@ -191,35 +191,6 @@ namespace Rezolver.Tests
 			Assert.AreNotSame(result2.Transient, result2.Composite.Transient);
 			Assert.IsNotNull(result2.Composite.Singleton);
 			Assert.AreSame(result2.Singleton, result2.Composite.Singleton);
-		}
-
-		[TestMethod]
-		public void ShouldCompileDynamicTestTargetToObjectFunc()
-		{
-			IRezolveTargetCompiler compiler = CreateCompiler();
-			var inputDynamicRezolver = CreateRezolverMock(compiler);
-			var defaultRezolver = CreateRezolverMock(compiler);
-
-			var target = compiler.CompileTarget(new DynamicTestTarget(defaultRezolver), CreateCompileContext(compiler));
-
-			Assert.IsNotNull(target);
-			Assert.AreSame(defaultRezolver, target.GetObject());
-			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(defaultRezolver, typeof(IRezolver))));
-		}
-
-		[TestMethod]
-		public void ShouldCompileDynamicTestTargetToIRezolverContainerFunc()
-		{
-			IRezolveTargetCompiler compiler = CreateCompiler();
-			var inputDynamicRezolver = CreateRezolverMock(compiler);
-			var defaultRezolver = CreateRezolverMock(compiler);
-
-			var target = compiler.CompileTarget(new DynamicTestTarget(defaultRezolver),
-				CreateCompileContext(CreateRezolverMock(compiler)));
-
-			Assert.IsNotNull(target);
-			Assert.AreSame(defaultRezolver, target.GetObject());
-			Assert.AreSame(inputDynamicRezolver, target.GetObject(new RezolveContext(defaultRezolver, typeof(IRezolver))));
 		}
 
 		[TestMethod]

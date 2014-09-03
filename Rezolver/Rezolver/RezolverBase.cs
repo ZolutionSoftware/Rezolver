@@ -7,12 +7,6 @@ namespace Rezolver
 {
 	public abstract class RezolverBase : IRezolver
 	{
-		/// <summary>
-		/// The default for wwhether dynamic rezolvers are enabled or not in any rezolvers that inherit
-		/// from this base class.
-		/// </summary>
-		public const bool DefaultEnableDynamicRezolvers = true;
-
 		private static readonly
 			Dictionary<Type, ICompiledRezolveTarget>
 			MissingTargets = new Dictionary<Type, ICompiledRezolveTarget>();
