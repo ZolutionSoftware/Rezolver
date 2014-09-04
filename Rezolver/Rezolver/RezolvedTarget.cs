@@ -94,7 +94,7 @@ namespace Rezolver
 			var finalType = context.TargetType ?? DeclaredType;
 			var finalTypeExpr = Expression.Constant(finalType, typeof(Type));
 
-			var newContextLocal = Expression.Parameter(typeof(RezolveContext), "newContext");
+			var newContextLocal = context.GetOrAddSharedLocal(typeof(RezolveContext), "newContext");
 			var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, finalTypeExpr, nameExpr);
 			var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
 			bool setNewContextFirst = false;
@@ -141,7 +141,7 @@ namespace Rezolver
 			if (blockExpressions.Count == 1)
 				return blockExpressions[0];
 			else
-				return Expression.Block(finalType, new[] { newContextLocal }, blockExpressions);
+				return Expression.Block(finalType, blockExpressions);
 //#endif
 		}
 	}

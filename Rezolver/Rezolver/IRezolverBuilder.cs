@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Rezolver
 {
 	public interface IRezolverBuilder
 	{
+		/// <summary>
+		/// Allows a caller to introspect all the registrations that have been added to this builder.
+		/// </summary>
+		IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations { get; }
 		/// <summary>
 		/// Registers a target, optionally for a particular target type and optionally
 		/// under a particular name.

@@ -26,7 +26,7 @@ namespace Rezolver
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			return Expression.New(_ctor,
-				_parameterBindings.Select(pb => pb.Target.CreateExpression(new CompileContext(context, pb.Parameter.ParameterType))));
+				_parameterBindings.Select(pb => pb.Target.CreateExpression(new CompileContext(context, pb.Parameter.ParameterType, true))));
 		}
 
 		public override Type DeclaredType

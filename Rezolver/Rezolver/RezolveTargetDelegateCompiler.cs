@@ -28,14 +28,19 @@ namespace Rezolver
 
 		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
 		{
+			context = new CompileContext(context, typeof(object), false);
+			var baseExpression = target.CreateExpression(context);
+			var sharedLocals = context.SharedLocals.ToArray();
+			if(sharedLocals.Length != 0)
+				baseExpression = Expression.Block(baseExpression.Type, sharedLocals, baseExpression);
 #if DEBUG
 			var expression =
-				Expression.Lambda<Func<RezolveContext, object>>(target.CreateExpression(new CompileContext(context, typeof(object))), context.RezolveContextParameter);
+				Expression.Lambda<Func<RezolveContext, object>>(baseExpression, context.RezolveContextParameter);
 			Debug.WriteLine("Compiling Func<RezolveContext, object> from static lambda {0} for target type {1}", expression, "System.Object");
 			return new DelegatingCompiledRezolveTarget(expression.Compile());
 #else
 			return new DelegatingCompiledRezolveTarget(
-				Expression.Lambda<Func<RezolveContext, object>>(target.CreateExpression(new CompileContext(context, typeof(object))), context.RezolveContextParameter).Compile());
+				Expression.Lambda<Func<RezolveContext, object>>(baseExpression, context.RezolveContextParameter).Compile());
 #endif
 		}
 	}

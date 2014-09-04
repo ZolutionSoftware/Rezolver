@@ -79,6 +79,11 @@ namespace Rezolver
 			{
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
+
+			public IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations
+			{
+				get { throw new NotImplementedException(); }
+			}
 		}
 
 		private Type _requestedType;

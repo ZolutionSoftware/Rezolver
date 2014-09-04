@@ -4,6 +4,7 @@ using Rezolver.Resources;
 
 namespace Rezolver
 {
+	using RegistrationEntry = KeyValuePair<RezolveContext, IRezolveTarget>;
 	public class RezolverBuilder : IRezolverBuilder
 	{
 		//TODO: extract an abstract base implementation of this class that does away with the dictionary, with extension points in place of those to allow for future expansion.
@@ -18,6 +19,8 @@ namespace Rezolver
 		private readonly Dictionary<string, INamedRezolverBuilder> _namedBuilders = new Dictionary<string, INamedRezolverBuilder>();
 
 		#endregion
+
+
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
@@ -86,7 +89,7 @@ namespace Rezolver
 
 		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
-			if(!path.MoveNext())
+			if (!path.MoveNext())
 				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
 
 			INamedRezolverBuilder namedBuilder;
@@ -99,6 +102,50 @@ namespace Rezolver
 			}
 			//then walk to the next part of the path and create it if need be
 			return path.Next != null ? namedBuilder.GetNamedBuilder(path, true) : namedBuilder;
+		}
+
+		public IEnumerable<RegistrationEntry> AllRegistrations
+		{
+			get
+			{
+				return new RezolverBuilderWalker(this);
+			}
+		}
+
+		private class RezolverBuilderWalker : IEnumerable<RegistrationEntry>
+		{
+			private RezolverBuilder _builder;
+			private IEnumerator<RegistrationEntry> _enumerator;
+			public RezolverBuilderWalker(RezolverBuilder builder)
+			{
+				_builder = builder;
+				_enumerator = Enumerate().GetEnumerator();
+			}
+
+			private IEnumerable<RegistrationEntry> Enumerate()
+			{
+				foreach (var registration in _builder._targets)
+				{
+					yield return new RegistrationEntry(new RezolveContext(null, registration.Key), registration.Value);
+				}
+				foreach (var namedBuilderEntry in _builder._namedBuilders)
+				{
+					foreach (var registration in namedBuilderEntry.Value.AllRegistrations)
+					{
+						yield return new RegistrationEntry(registration.Key.CreateNew(registration.Key.RequestedType, namedBuilderEntry.Key + RezolverPath.DefaultPathSeparator + registration.Key.Name), registration.Value);
+					}
+				}
+			}
+
+			public IEnumerator<RegistrationEntry> GetEnumerator()
+			{
+				return Enumerate().GetEnumerator();
+			}	
+
+			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
 		}
 	}
 }

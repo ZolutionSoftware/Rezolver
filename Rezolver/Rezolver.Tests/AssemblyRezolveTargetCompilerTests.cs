@@ -55,7 +55,6 @@ namespace Rezolver.Tests
 			}
 		}
 
-
 		[TestMethod]
 		public void NaiveBenchmark()
 		{

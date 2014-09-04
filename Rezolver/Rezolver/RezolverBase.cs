@@ -51,6 +51,8 @@ namespace Rezolver
 
 		protected abstract IRezolverBuilder Builder { get; }
 
+
+
 		public virtual object Resolve(RezolveContext context)
 		{
 			return GetCompiledRezolveTarget(context).GetObject(context);
@@ -127,6 +129,11 @@ namespace Rezolver
 		protected virtual ICompiledRezolveTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
 		{
 			return GetMissingTarget(context.RequestedType);
-		}		
+		}
+
+		public IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations
+		{
+			get { return Builder.AllRegistrations; }
+		}
 	}
 }

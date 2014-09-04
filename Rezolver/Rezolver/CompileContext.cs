@@ -84,13 +84,38 @@ namespace Rezolver
 		/// </summary>
 		public IEnumerable<IRezolveTarget> CompilingTargets { get { return _compilingTargets.ToArray(); } }
 
-		private CompileContext(CompileContext parentContext)
+		private Dictionary<Type, Dictionary<string, ParameterExpression>> _sharedLocals;
+
+		/// <summary>
+		/// Shared locals are expressions that targets add to the compile context as they are compiled,
+		/// enabling them to generate code that references local variables.  The concept of them being shared
+		/// is that once a target's compiled code is finished executing, another target's code is free to use
+		/// it for itself.  This is typically done amongst different instances of the same type of 
+		/// IRezolveTarget implementation.
+		/// </summary>
+		public IEnumerable<ParameterExpression> SharedLocals
+		{
+			get
+			{
+				foreach(var kvp in _sharedLocals)
+				{
+					foreach(var kvp2 in kvp.Value)
+					{
+						yield return kvp2.Value;
+					}
+				}
+			}
+		}
+
+
+		private CompileContext(CompileContext parentContext, bool inheritLocals)
 		{
 			parentContext.MustNotBeNull("parentContext");
 
 			_compilingTargets = parentContext._compilingTargets;
 			_rezolveContextParameter = parentContext._rezolveContextParameter;
 			_rezolver = parentContext._rezolver;
+			_sharedLocals = inheritLocals ? parentContext._sharedLocals : new Dictionary<Type, Dictionary<string, ParameterExpression>>();
 		}
 
 		/// <summary>
@@ -117,6 +142,7 @@ namespace Rezolver
 			_targetType = targetType;
 			_rezolveContextParameter = rezolveContextParameter;
 			_compilingTargets = new Stack<IRezolveTarget>(compilingTargets ?? Enumerable.Empty<IRezolveTarget>());
+			_sharedLocals = new Dictionary<Type, Dictionary<string, ParameterExpression>>();
 		}
 
 		/// <summary>
@@ -124,10 +150,41 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="parentContext">Used to seed the compilation stack, rezolver and rezolve context parameter properties.</param>
 		/// <param name="targetType">The target type that is expected to be compiled.</param>
-		public CompileContext(CompileContext parentContext, Type targetType = null)
-			: this(parentContext)
+		/// <param name="inheritLocals">If true, then the <see cref="SharedLocals"/> for this context will be shared
+		/// from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
+		/// false, however if you are chaining multiple targets' expressions together you will need to pass true.</param>
+		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritLocals = false)
+			: this(parentContext, inheritLocals)
 		{
 			_targetType = targetType;
+		}
+
+		private Dictionary<Type, Dictionary<string, ParameterExpression>> CloneSharedLocals(Dictionary<Type, Dictionary<string, ParameterExpression>> source)
+		{
+			Dictionary<Type, Dictionary<string, ParameterExpression>> toReturn = new Dictionary<Type,Dictionary<string,ParameterExpression>>();
+			Dictionary<string, ParameterExpression> newDictionary;
+			foreach(var kvp in source)
+			{
+				newDictionary = new Dictionary<string, ParameterExpression>();
+				foreach(var kvp2 in kvp.Value)
+				{
+					newDictionary[kvp2.Key] = kvp2.Value;
+				}
+				toReturn[kvp.Key] = newDictionary;
+			}
+
+			return toReturn;
+		}
+
+		public ParameterExpression GetOrAddSharedLocal(Type type, string name)
+		{
+			ParameterExpression toReturn;
+			Dictionary<string, ParameterExpression> targetDictionary;
+			if (!_sharedLocals.TryGetValue(type, out targetDictionary))
+				_sharedLocals[type] = targetDictionary = new Dictionary<string, ParameterExpression>();
+			if (!targetDictionary.TryGetValue(name, out toReturn))
+				targetDictionary[name] = toReturn = Expression.Parameter(type, name);
+			return toReturn;
 		}
 
 		/// <summary>

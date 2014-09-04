@@ -17,6 +17,22 @@ namespace Rezolver
 		private ModuleBuilder _moduleBuilder;
 		private readonly string _assemblyModuleName;
 
+		private sealed class StaticInvoker : ICompiledRezolveTarget
+		{
+			private Func<RezolveContext, object> _targetMethod;
+
+			public StaticInvoker(MethodInfo targetMethod)
+			{
+				_targetMethod = (Func<RezolveContext, object>)Delegate.CreateDelegate(typeof(Func<RezolveContext, object>), targetMethod);
+			}
+
+			public object GetObject(RezolveContext context)
+			{
+				return _targetMethod(context);
+				//return _targetMethod.Invoke(context);
+			}
+		}
+
 		public AssemblyBuilder AssemblyBuilder
 		{
 			get { return _assemblyBuilder; }
@@ -30,7 +46,8 @@ namespace Rezolver
 					++_assemblyCounter)), assemblyBuilderAccess);
 		}
 
-		public AssemblyRezolveTargetCompiler() : this(CreateAssemblyBuilder())
+		public AssemblyRezolveTargetCompiler()
+			: this(CreateAssemblyBuilder())
 		{
 
 		}
@@ -40,7 +57,21 @@ namespace Rezolver
 			if (assemblyBuilder == null) throw new ArgumentNullException("assemblyBuilder");
 			_assemblyModuleName = assemblyBuilder.GetName().Name;
 			_assemblyBuilder = assemblyBuilder;
-			_moduleBuilder = _assemblyBuilder.DefineDynamicModule(_assemblyModuleName, _assemblyModuleName + ".dll");
+			try
+			{
+				_moduleBuilder = _assemblyBuilder.DefineDynamicModule(_assemblyModuleName, _assemblyModuleName + ".dll");
+			}
+			catch (NotSupportedException)
+			{
+				_moduleBuilder = _assemblyBuilder.DefineDynamicModule(_assemblyModuleName);
+			}
+		}
+
+		public AssemblyRezolveTargetCompiler(ModuleBuilder moduleBuilder)
+		{
+			_assemblyModuleName = moduleBuilder.Name;
+			_assemblyBuilder = ((AssemblyBuilder)moduleBuilder.Assembly);
+			_moduleBuilder = moduleBuilder;
 		}
 
 		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
@@ -48,44 +79,34 @@ namespace Rezolver
 			var temp = string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter);
 			var typeBuilder = _moduleBuilder.DefineType(temp);
 
-			typeBuilder.AddInterfaceImplementation(typeof(ICompiledRezolveTarget));
+			//when there's no target type or if it's a value type, then the 
+			//delegate binding won't work because a box operation is required
+			// when it's a reference type it doesn't matter.
+			if ((context.TargetType ?? target.DeclaredType).IsValueType)
+				context = new CompileContext(context, typeof(object), false);
+			else
+				context = new CompileContext(context, context.TargetType, false);
 
-
-			//var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, rezolver, targetStack, typeBuilder, typeof(object));
-			//var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, rezolver, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
 			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, context, typeBuilder);
 
-
-			var methodBuilder = CreateInstance_GetObjectMethod(typeBuilder, staticGetObjectStaticMethod, "GetObject");
-			typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObject"));
-
-			//methodBuilder = CreateInstance_GetObjectDynamicMethod(typeBuilder, staticGetObjectDynamicMethod, "GetObjectDynamic");
-			//typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObjectDynamic"));
-
 			var type = typeBuilder.CreateType();
-			return (ICompiledRezolveTarget)Activator.CreateInstance(type);
+
+			return new StaticInvoker(type.GetMethod("GetObjectStatic", BindingFlags.NonPublic | BindingFlags.Static));
 		}
 
-		//public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, IRezolver rezolver,
-		//	ParameterExpression dynamicRezolverExpression, Stack<IRezolveTarget> targetStack)
-		//{
-		//	var typeBuilder = _moduleBuilder.DefineType(string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter));
+		internal void CompileTargetToMethod(IRezolveTarget target, CompileContext context, MethodBuilder methodBuilder)
+		{
+			var toBuild = target.CreateExpression(context);
 
-		//	typeBuilder.AddInterfaceImplementation(typeof(ICompiledRezolveTarget));
-
-
-		//	var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, rezolver, targetStack, typeBuilder, typeof(object));
-		//	var staticGetObjectDynamicMethod = CreateStatic_GetObjectDynamicMethod(target, rezolver, targetStack, typeBuilder, dynamicRezolverExpression, typeof(object));
-
-		//	var methodBuilder = CreateInstance_GetObjectMethod(typeBuilder, staticGetObjectStaticMethod, "GetObject");
-		//	typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObject"));
-
-		//	methodBuilder = CreateInstance_GetObjectDynamicMethod(typeBuilder, staticGetObjectDynamicMethod, "GetObjectDynamic");
-		//	typeBuilder.DefineMethodOverride(methodBuilder, typeof(ICompiledRezolveTarget).GetMethod("GetObjectDynamic"));
-
-		//	var type = typeBuilder.CreateType();
-		//	return (ICompiledRezolveTarget)Activator.CreateInstance(type);
-		//}
+			//now we have to rewrite the expression to life all constants out and feed them in from an additional
+			//parameter that we also dynamically compile.
+			var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
+			var rewritten = rewriter.LiftConstants();
+			var sharedLocals = context.SharedLocals.ToArray();
+			if (sharedLocals.Length != 0)
+				rewritten = Expression.Block(rewritten.Type, sharedLocals, rewritten);
+			Expression.Lambda(rewriter.LiftConstants(), context.RezolveContextParameter).CompileToMethod(methodBuilder);
+		}
 
 		private class ConstantRewriter : ExpressionVisitor
 		{
@@ -127,7 +148,7 @@ namespace Rezolver
 				get { return _mappings.Count > 0 ? _helperType.Value : null; }
 			}
 
-			public IEnumerable<ConstantFieldMapping> Mappings { get { return _mappings; } } 
+			public IEnumerable<ConstantFieldMapping> Mappings { get { return _mappings; } }
 
 			public ConstantRewriter(ModuleBuilder parentModuleBuilder, Expression e)
 			{
@@ -196,7 +217,7 @@ namespace Rezolver
 
 			if (staticGetObjectDynamicMethod.ReturnType.IsValueType)
 				ilgen.Emit(OpCodes.Box);
-			
+
 			ilgen.Emit(OpCodes.Ret);
 			return methodBuilder;
 		}
@@ -220,41 +241,15 @@ namespace Rezolver
 			return methodBuilder;
 		}
 
-		//private MethodBuilder CreateStatic_GetObjectDynamicMethod(IRezolveTarget target, IRezolver scope, Stack<IRezolveTarget> targetStack,
-		//	TypeBuilder typeBuilder, ParameterExpression dynamicRezolverExpression, Type targetType = null)
-		//{
-		//	targetType = targetType ?? target.DeclaredType;
-
-
-		//	var toBuild = target.CreateExpression(scope, targetType: targetType,
-		//		currentTargets: targetStack,
-		//		dynamicRezolverExpression: dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam);
-
-		//	//now we have to rewrite the expression to life all constants out and feed them in from an additional
-		//	//parameter that we also dynamically compile.
-		//	var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
-		//	MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectDynamic",
-		//		MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, targetType, new Type[0]);
-
-		//	Expression.Lambda(rewriter.LiftConstants(),
-		//		dynamicRezolverExpression ?? ExpressionHelper.DynamicRezolverParam).CompileToMethod(toReturn);
-		//	return toReturn;
-		//}
-
 		private MethodBuilder CreateStatic_GetObjectStaticMethod(IRezolveTarget target, CompileContext context, TypeBuilder typeBuilder)
 		{
 			//targetType = context.TargetType ?? target.DeclaredType;
 			if (context.TargetType == null)
 				context = new CompileContext(context, target.DeclaredType);
-
-			var toBuild = target.CreateExpression(context);
-
-			//now we have to rewrite the expression to life all constants out and feed them in from an additional
-			//parameter that we also dynamically compile.
-			var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
 			MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectStatic",
 				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, context.TargetType, new Type[0]);
-			Expression.Lambda(rewriter.LiftConstants(), context.RezolveContextParameter).CompileToMethod(toReturn);
+
+			CompileTargetToMethod(target, context, toReturn);
 			return toReturn;
 		}
 	}
