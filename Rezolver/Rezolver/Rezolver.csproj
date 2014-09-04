@@ -76,6 +76,7 @@
     <Compile Include="ParameterBinding.cs" />
     <Compile Include="RezolverPath.cs" />
     <Compile Include="RezolveTargetCompiler.cs" />
+    <Compile Include="RezolveTargetCompilerHelper.cs" />
     <Compile Include="RezolveTargetDelegateCompiler.cs" />
     <Compile Include="RezolveTargetAdapter.cs" />
     <Compile Include="RezolveTargetExpression.cs" />

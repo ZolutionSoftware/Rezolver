@@ -66,7 +66,9 @@ namespace Rezolver
 			{
 				newExprBody = newExpr.Body as NewExpression;
 				if (newExprBody == null)
-					throw new ArgumentException(string.Format(Exceptions.LambdBodyIsNotNewExpressionFormat, newExpr), "newExpr");
+					throw new ArgumentException(string.Format(Exceptions.LambdaBodyIsNotNewExpressionFormat, newExpr), "newExpr");
+				else if (newExprBody.Type != typeof(T))
+					throw new ArgumentException(string.Format(Exceptions.LambdaBodyNewExpressionIsWrongTypeFormat, newExpr, typeof(T)), "newExpr");
 			}
 
 			return For(typeof(T), newExprBody, adapter);

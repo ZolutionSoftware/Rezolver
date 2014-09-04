@@ -105,7 +105,9 @@ namespace Rezolver
 			var sharedLocals = context.SharedLocals.ToArray();
 			if (sharedLocals.Length != 0)
 				rewritten = Expression.Block(rewritten.Type, sharedLocals, rewritten);
-			Expression.Lambda(rewriter.LiftConstants(), context.RezolveContextParameter).CompileToMethod(methodBuilder);
+			rewritten = rewritten.Optimise();
+
+			Expression.Lambda(rewritten, context.RezolveContextParameter).CompileToMethod(methodBuilder);
 		}
 
 		private class ConstantRewriter : ExpressionVisitor
@@ -203,6 +205,8 @@ namespace Rezolver
 				return base.VisitExtension(node);
 			}
 		}
+
+		
 
 		private MethodBuilder CreateInstance_GetObjectDynamicMethod(TypeBuilder typeBuilder, MethodBuilder staticGetObjectDynamicMethod, string methodName)
 		{

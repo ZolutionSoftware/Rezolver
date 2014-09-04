@@ -33,6 +33,7 @@ namespace Rezolver
 			var sharedLocals = context.SharedLocals.ToArray();
 			if(sharedLocals.Length != 0)
 				baseExpression = Expression.Block(baseExpression.Type, sharedLocals, baseExpression);
+			baseExpression = baseExpression.Optimise();
 #if DEBUG
 			var expression =
 				Expression.Lambda<Func<RezolveContext, object>>(baseExpression, context.RezolveContextParameter);

@@ -81,9 +81,18 @@ namespace Rezolver.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The body of the lambda &quot;{0}&quot; is not a NewExpression.
         /// </summary>
-        internal static string LambdBodyIsNotNewExpressionFormat {
+        internal static string LambdaBodyIsNotNewExpressionFormat {
             get {
-                return ResourceManager.GetString("LambdBodyIsNotNewExpressionFormat", resourceCulture);
+                return ResourceManager.GetString("LambdaBodyIsNotNewExpressionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The expression {0} does not represent calling a constructor of the type {1}.
+        /// </summary>
+        internal static string LambdaBodyNewExpressionIsWrongTypeFormat {
+            get {
+                return ResourceManager.GetString("LambdaBodyNewExpressionIsWrongTypeFormat", resourceCulture);
             }
         }
         

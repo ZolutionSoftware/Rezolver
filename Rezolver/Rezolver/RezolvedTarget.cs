@@ -132,7 +132,7 @@ namespace Rezolver
 			if(setNewContextFirst)
 				blockExpressions.Add(setNewContextLocal);
 			else
-				useContextRezolverIfCanExpr = Expression.Block(finalType, new[] { newContextLocal }, setNewContextLocal, useContextRezolverIfCanExpr);
+				useContextRezolverIfCanExpr = Expression.Block(finalType, setNewContextLocal, useContextRezolverIfCanExpr);
 
 			blockExpressions.Add(Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
 				staticExpr,

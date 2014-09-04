@@ -135,7 +135,7 @@
   <data name="PathIsAtEnd" xml:space="preserve">
     <value>path's Next must not be null - pass path as null once it's reached the last item</value>
   </data>
-  <data name="LambdBodyIsNotNewExpressionFormat" xml:space="preserve">
+  <data name="LambdaBodyIsNotNewExpressionFormat" xml:space="preserve">
     <value>The body of the lambda "{0}" is not a NewExpression</value>
   </data>
   <data name="NoDefaultOrAllOptionalConstructorFormat" xml:space="preserve">
@@ -164,5 +164,8 @@
   </data>
   <data name="ScopedSingletonRequiresAScope" xml:space="preserve">
     <value>A lifetime scope is required for a scoped singleton</value>
+  </data>
+  <data name="LambdaBodyNewExpressionIsWrongTypeFormat" xml:space="preserve">
+    <value>The expression {0} does not represent calling a constructor of the type {1}</value>
   </data>
 </root>

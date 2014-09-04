@@ -163,6 +163,22 @@ namespace Rezolver.Tests
 			Assert.AreEqual(++lastTransientCount, Transient.Counter);
 		}
 
+		//private static RezolveTargetCompilerTestsBase.Composite GetObjectStatic(RezolveContext context)
+		//{
+		//	RezolveContext context3;
+		//	RezolveContext context4;
+		//	return new RezolveTargetCompilerTestsBase.Composite((context.Rezolver != ConstantHelper1._c1) 
+		//		? (!context.Rezolver.CanResolve(context3 = context.CreateNew(ConstantHelper1._c3, ConstantHelper1._c4)) 
+		//			? ((RezolveTargetCompilerTestsBase.ISingleton)ConstantHelper1._c2.Value) 
+		//			: ((RezolveTargetCompilerTestsBase.ISingleton)context.Rezolver.Resolve(context3))) 
+		//		: ((RezolveTargetCompilerTestsBase.ISingleton)ConstantHelper1._c2.Value), 
+		//	(context.Rezolver != ConstantHelper1._c1) 
+		//		? (!context.Rezolver.CanResolve(context4 = context.CreateNew(ConstantHelper1._c5, ConstantHelper1._c4)) 
+		//			? ((RezolveTargetCompilerTestsBase.ITransient)new RezolveTargetCompilerTestsBase.Transient()) 
+		//			: ((RezolveTargetCompilerTestsBase.ITransient)context.Rezolver.Resolve(context4))) 
+		//		: ((RezolveTargetCompilerTestsBase.ITransient)new RezolveTargetCompilerTestsBase.Transient()));
+		//}
+
 		[TestMethod]
 		public void ShouldCompileSuperComplexConstructorTarget()
 		{
