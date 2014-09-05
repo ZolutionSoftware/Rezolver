@@ -13,6 +13,45 @@ namespace Rezolver
 	/// </summary>
 	public class CompileContext
 	{
+		/// <summary>
+		/// Key for a shared expression used during expression tree generation
+		/// </summary>
+		public class SharedExpressionKey : IEquatable<SharedExpressionKey>
+		{
+			public Type RequestingType { get; private set; }
+			public Type TargetType { get; private set; }
+			public string Name { get; private set; }
+
+			public SharedExpressionKey(Type targetType, string name, Type requestingType = null)
+			{
+				targetType.MustNotBeNull("targetType");
+				name.MustNotBeNull("name");
+				TargetType = targetType;
+				Name = name;
+				RequestingType = requestingType;
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj == null)
+					return false;
+				return base.Equals(obj as SharedExpressionKey);
+			}
+
+			public override int GetHashCode()
+			{
+				return TargetType.GetHashCode() ^
+					Name.GetHashCode() ^
+					(RequestingType != null ? RequestingType.GetHashCode() : 0);
+			}
+
+			public bool Equals(SharedExpressionKey other)
+			{
+				return object.ReferenceEquals(this, other) ||
+					(RequestingType == other.RequestingType && TargetType == other.TargetType && Name == other.Name);
+			}
+		}
+
 		private readonly IRezolver _rezolver;
 		/// <summary>
 		/// The rezolver that is considered the current compilation 'scope' for the purposes of looking up additional
@@ -84,38 +123,36 @@ namespace Rezolver
 		/// </summary>
 		public IEnumerable<IRezolveTarget> CompilingTargets { get { return _compilingTargets.ToArray(); } }
 
-		private Dictionary<Type, Dictionary<string, ParameterExpression>> _sharedLocals;
+		private Dictionary<SharedExpressionKey, Expression> _sharedExpressions;
 
 		/// <summary>
-		/// Shared locals are expressions that targets add to the compile context as they are compiled,
-		/// enabling them to generate code that references local variables.  The concept of them being shared
-		/// is that once a target's compiled code is finished executing, another target's code is free to use
-		/// it for itself.  This is typically done amongst different instances of the same type of 
-		/// IRezolveTarget implementation.
+		/// Shared expressions are expressions that targets add to the compile context as they are compiled,
+		/// enabling them to generate code which is both more efficient at runtime (e.g. avoiding the creation of
+		/// redundant locals for blocks which can reuse a pre-existing local) and that can be more efficiently rewritten 
+		/// - due to the reuse of identical expression references for things like conditional checks and so on.
+		/// 
+		/// A compiler MUST handle the case where this enumerable contains ParameterExpressions, as they will need
+		/// to be added as local variables to an all-encompassing BlockExpression around the root of an expression tree 
+		/// that is to be compiled.
 		/// </summary>
-		public IEnumerable<ParameterExpression> SharedLocals
+		public IEnumerable<Expression> SharedExpressions
 		{
 			get
 			{
-				foreach(var kvp in _sharedLocals)
-				{
-					foreach(var kvp2 in kvp.Value)
-					{
-						yield return kvp2.Value;
-					}
-				}
+				return _sharedExpressions.Values;
 			}
 		}
 
 
-		private CompileContext(CompileContext parentContext, bool inheritLocals)
+
+		private CompileContext(CompileContext parentContext, bool inheritSharedExpressions)
 		{
 			parentContext.MustNotBeNull("parentContext");
 
 			_compilingTargets = parentContext._compilingTargets;
 			_rezolveContextParameter = parentContext._rezolveContextParameter;
 			_rezolver = parentContext._rezolver;
-			_sharedLocals = inheritLocals ? parentContext._sharedLocals : new Dictionary<Type, Dictionary<string, ParameterExpression>>();
+			_sharedExpressions = inheritSharedExpressions ? parentContext._sharedExpressions : new Dictionary<SharedExpressionKey, Expression>();
 		}
 
 		/// <summary>
@@ -142,7 +179,7 @@ namespace Rezolver
 			_targetType = targetType;
 			_rezolveContextParameter = rezolveContextParameter;
 			_compilingTargets = new Stack<IRezolveTarget>(compilingTargets ?? Enumerable.Empty<IRezolveTarget>());
-			_sharedLocals = new Dictionary<Type, Dictionary<string, ParameterExpression>>();
+			_sharedExpressions = new Dictionary<SharedExpressionKey, Expression>();
 		}
 
 		/// <summary>
@@ -150,11 +187,11 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="parentContext">Used to seed the compilation stack, rezolver and rezolve context parameter properties.</param>
 		/// <param name="targetType">The target type that is expected to be compiled.</param>
-		/// <param name="inheritLocals">If true, then the <see cref="SharedLocals"/> for this context will be shared
+		/// <param name="inheritSharedExpressions">If true, then the <see cref="SharedExpressions"/> for this context will be shared
 		/// from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
 		/// false, however if you are chaining multiple targets' expressions together you will need to pass true.</param>
-		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritLocals = false)
-			: this(parentContext, inheritLocals)
+		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false)
+			: this(parentContext, inheritSharedExpressions)
 		{
 			_targetType = targetType;
 		}
@@ -176,14 +213,33 @@ namespace Rezolver
 			return toReturn;
 		}
 
-		public ParameterExpression GetOrAddSharedLocal(Type type, string name)
+		/// <summary>
+		/// Retrieves
+		/// </summary>
+		/// <param name="type"></param>
+		/// <param name="name"></param>
+		/// <param name="requestingType"></param>
+		/// <returns></returns>
+		public ParameterExpression GetOrAddSharedLocal(Type type, string name, Type requestingType = null)
 		{
-			ParameterExpression toReturn;
-			Dictionary<string, ParameterExpression> targetDictionary;
-			if (!_sharedLocals.TryGetValue(type, out targetDictionary))
-				_sharedLocals[type] = targetDictionary = new Dictionary<string, ParameterExpression>();
-			if (!targetDictionary.TryGetValue(name, out toReturn))
-				targetDictionary[name] = toReturn = Expression.Parameter(type, name);
+			try { 
+			return (ParameterExpression)GetOrAddSharedExpression(type, name, () => Expression.Parameter(type, name), requestingType);
+				}
+			catch(InvalidCastException)
+			{
+				throw new InvalidOperationException("Cannot add ParameterExpression: A shared expression of a different expression type has already been added with the same parameters.");
+			}
+		}
+
+		public Expression GetOrAddSharedExpression(Type type, string name, Func<Expression> expressionFactory, Type requestingType = null)
+		{
+			type.MustNotBeNull("type");
+			expressionFactory.MustNotBeNull("expressionFactory");
+			Expression toReturn;
+			//if this is 
+			SharedExpressionKey key = new SharedExpressionKey(type, name, requestingType);
+			if (!_sharedExpressions.TryGetValue(key, out toReturn))
+				_sharedExpressions[key] = toReturn = expressionFactory();
 			return toReturn;
 		}
 

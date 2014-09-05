@@ -77,9 +77,9 @@ namespace Rezolver
 			//the target belongs.
 
 			//this is the underlying expression to use for the name in the compiled code
-			var nameContext = new CompileContext(context, typeof(string));
+			var nameContext = new CompileContext(context, typeof(string), true);
 			Expression nameExpr = _resolveNameTarget != null 
-				? _resolveNameTarget.CreateExpression(nameContext) : Expression.Constant(null, typeof(string));
+				? _resolveNameTarget.CreateExpression(nameContext) : Expression.Default(typeof(string));
 			//we also need to compile this name for static use.
 			ICompiledRezolveTarget nameCompiled = _resolveNameTarget != null ?
 				context.Rezolver.Compiler.CompileTarget(_resolveNameTarget,  nameContext) : null;
@@ -134,9 +134,13 @@ namespace Rezolver
 			else
 				useContextRezolverIfCanExpr = Expression.Block(finalType, setNewContextLocal, useContextRezolverIfCanExpr);
 
-			blockExpressions.Add(Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
+			//note the use of the shared expression here - which enables an advanced optimisation specifically connected with
+			//conditionals
+			blockExpressions.Add(Expression.Condition(context.GetOrAddSharedExpression(typeof(bool), "IsSameRezolver", () => Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver), this.GetType()),
 				staticExpr,
 				useContextRezolverIfCanExpr));
+
+
 
 			if (blockExpressions.Count == 1)
 				return blockExpressions[0];

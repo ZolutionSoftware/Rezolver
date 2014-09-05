@@ -19,7 +19,7 @@ namespace Rezolver
 			{
 				if (node.NodeType == ExpressionType.Convert &&
 					node.Type == node.Operand.Type ||
-					(!node.Type.IsValueType && node.Type.IsAssignableFrom(node.Operand.Type)))
+					(!node.Operand.Type.IsValueType && node.Type.IsAssignableFrom(node.Operand.Type)))
 					return node.Operand;
 
 				return base.VisitUnary(node);

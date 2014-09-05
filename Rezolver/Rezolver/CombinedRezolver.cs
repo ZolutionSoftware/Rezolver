@@ -18,7 +18,7 @@ namespace Rezolver
 		/// <param name="inner">The inner rezolver that this one combines with.  Any dependencies not served
 		/// by the new combined rezolver's own registry will be sought from this rezolver.</param>
 		public CombinedRezolver(IRezolver inner, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null) 
-			: base(builder, compiler)
+			: base(builder, compiler ?? inner.Compiler)
 		{
 			inner.MustNotBeNull("inner");
 			_inner = inner;
