@@ -56,16 +56,16 @@ namespace Rezolver
 				throw new ArgumentException(String.Format(Exceptions.TargetDoesntSupportType_Format, context.TargetType),
 					"targetType");
 
-			if(!context.PushCompileStack(this))
-					throw new InvalidOperationException(string.Format(Exceptions.CyclicDependencyDetectedInTargetFormat, GetType(), DeclaredType));
+			if (!context.PushCompileStack(this))
+				throw new InvalidOperationException(string.Format(Exceptions.CyclicDependencyDetectedInTargetFormat, GetType(), DeclaredType));
 
 			try
 			{
 				var result = CreateExpressionBase(context);
 				Type convertType = context.TargetType ?? DeclaredType;
 
-				if (convertType == typeof(object) && result.Type.IsValueType 
-					|| !convertType.IsAssignableFrom(DeclaredType) 
+				if (convertType == typeof(object) && result.Type.IsValueType
+					|| !convertType.IsAssignableFrom(DeclaredType)
 					|| !convertType.IsAssignableFrom(result.Type))
 					return Expression.Convert(result, convertType);
 

@@ -47,6 +47,7 @@
     <Compile Include="CachingRezolver.cs" />
     <Compile Include="CombinedRezolver.cs" />
     <Compile Include="CompileContext.cs" />
+    <Compile Include="ConditionalRewriter.cs" />
     <Compile Include="ICompiledRezolveTarget.cs" />
     <Compile Include="ChildRezolverBuilder.cs" />
     <Compile Include="ConstructorTarget.cs" />
