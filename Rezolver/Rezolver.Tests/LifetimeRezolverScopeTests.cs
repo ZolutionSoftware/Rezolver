@@ -125,9 +125,11 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldDisposeOnceOly()
 		{
-			Mock<IRezolver> parentRezolverMock = CreateMock();
-			ITestDisposable instance = null;
-			using (var lifetime = parentRezolverMock.Object.CreateLifetimeScope())
+			DefaultRezolver parentRezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+
+			parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
+			ITestDisposable instance;
+			using (var lifetime = parentRezolver.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable) lifetime.Resolve(typeof (ITestDisposable));
 			}
@@ -139,11 +141,13 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldDisposeTwoInstances()
 		{
-			var mockContainer = CreateMock();
+			DefaultRezolver parentRezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+
+			parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
 			int totalInstanceCount = DisposableType.TotalDisposeCount;
 			ITestDisposable instance = null;
 			ITestDisposable instance2 = null;
-			using(var lifetime = mockContainer.Object.CreateLifetimeScope())
+			using(var lifetime = parentRezolver.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
 				instance2 = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
@@ -160,9 +164,11 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldDisposeNestedScope()
 		{
-			var mockContainer = CreateMock();
+			DefaultRezolver parentRezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+
+			parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
 			ITestDisposable instance = null;
-			using(var lifetime = mockContainer.Object.CreateLifetimeScope())
+			using(var lifetime = parentRezolver.CreateLifetimeScope())
 			{
 				var lifetime2 = lifetime.CreateLifetimeScope();
 				instance = (ITestDisposable)lifetime2.Resolve(typeof(ITestDisposable));
@@ -175,14 +181,16 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldDisposeNestedScopeFirst()
 		{
-			var mockContainer = CreateMock();
+			DefaultRezolver parentRezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+
+			parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
 			int totalDisposeCount = DisposableType.TotalDisposeCount;
 			ITestDisposable instance = null;
 			ITestDisposable instance2 = null;
-			using (var lifetime = mockContainer.Object.CreateLifetimeScope())
+			using (var lifetime = parentRezolver.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable)lifetime.Resolve(typeof (ITestDisposable));
-				using (var lifetime2 = mockContainer.Object.CreateLifetimeScope())
+				using (var lifetime2 = lifetime.CreateLifetimeScope())
 				{
 					instance2 = (ITestDisposable) lifetime2.Resolve(typeof (ITestDisposable));
 				}
@@ -198,11 +206,13 @@ namespace Rezolver.Tests
 		[TestMethod]
 		public void ShouldAutoDisposeNestedScope()
 		{
-			var mockContainer = CreateMock();
+			DefaultRezolver parentRezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+
+			parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
 			int totalDisposeCount = DisposableType.TotalDisposeCount;
 			ITestDisposable instance = null;
 			ITestDisposable instance2 = null;
-			using (var lifetime = mockContainer.Object.CreateLifetimeScope())
+			using (var lifetime = parentRezolver.CreateLifetimeScope())
 			{
 				instance = (ITestDisposable) lifetime.Resolve(typeof (ITestDisposable));
 				//create an inner scope but don't dispose it - it should be auto-disposed by the

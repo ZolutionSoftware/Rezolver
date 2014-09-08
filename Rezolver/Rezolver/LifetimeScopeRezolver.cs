@@ -7,7 +7,7 @@ using System.Threading;
 namespace Rezolver
 {
 	//TODO: reimplement this as a combined rezolver - there's no need to override caching rezolver any more.
-	public class LifetimeScopeRezolver : CachingRezolver, ILifetimeScopeRezolver
+	public class LifetimeScopeRezolver : CombinedRezolver, ILifetimeScopeRezolver
 	{
 		private List<ILifetimeScopeRezolver> _children;
 		private Dictionary<RezolveContext, List<object>> _objects;
@@ -20,33 +20,15 @@ namespace Rezolver
 			}
 		}
 
-		public override IRezolveTargetCompiler Compiler
-		{
-			get
-			{
-				return _rezolver.Compiler;
-			}
-		}
-
-		protected override IRezolverBuilder Builder
-		{
-			get
-			{
-				return _rezolver;
-			}
-		}
-
 		private bool _disposing;
 		private bool _disposed;
-		private readonly IRezolver _rezolver;
 		private readonly ILifetimeScopeRezolver _parentScope;
-		public LifetimeScopeRezolver(IRezolver rezolver)
+		public LifetimeScopeRezolver(IRezolver inner, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null) 
+			: base(inner, builder, compiler)
 		{
-			rezolver.MustNotBeNull("rezolver");
 			//TODO: add the ability to specify that a GC is to be performed
 			//when this scope is disposed?
 			_children = new List<ILifetimeScopeRezolver>();
-			_rezolver = rezolver;
 			_objects = new Dictionary<RezolveContext, List<object>>();
 			_disposing = _disposed = false;
 		}
@@ -60,8 +42,9 @@ namespace Rezolver
 		{
 			if (context.Scope == null)
 				context = context.CreateNew(this); //ensure this scope is added to the context
-			var result = _rezolver.Resolve(context);
-			if(result is IDisposable)
+			var result = base.Resolve(context);
+			//if the object is destined for this scope, then track it.
+			if(result is IDisposable && object.ReferenceEquals(this, context.Scope))
 				TrackObject(result, context);
 			return result;
 		}
@@ -76,7 +59,7 @@ namespace Rezolver
 				var keyContext = new RezolveContext(null, context.RequestedType, context.Name);
 				_objects[keyContext] = instanceList = new List<object>();
 			}
-			//but slow this, but hopefully there won't be loads of them...
+			//bit slow this, but hopefully there won't be loads of them...
 			if(!instanceList.Any(o => object.ReferenceEquals(o, obj)))
 				instanceList.Add(obj);
 		}
@@ -88,7 +71,7 @@ namespace Rezolver
 			//however, limited-lifetime targets - i.e. scoped singletons - SHOULD be tracked by parent scopes,
 			//and any child scopes that request the same object should receive the one created from the 
 			//parent Builder.
-			var toReturn = new LifetimeScopeRezolver(this, _rezolver);
+			var toReturn = new LifetimeScopeRezolver(this);
 			_children.Add(toReturn);
 			return toReturn;
 		}

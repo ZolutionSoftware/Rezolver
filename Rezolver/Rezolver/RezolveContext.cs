@@ -84,6 +84,12 @@ namespace Rezolver
 			{
 				get { throw new NotImplementedException(); }
 			}
+
+
+			public ILifetimeScopeRezolver CreateLifetimeScope(IRezolver overridingRezolver)
+			{
+				throw new NotImplementedException();
+			}
 		}
 
 		private Type _requestedType;

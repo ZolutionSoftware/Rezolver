@@ -51,8 +51,6 @@ namespace Rezolver
 
 		protected abstract IRezolverBuilder Builder { get; }
 
-
-
 		public virtual object Resolve(RezolveContext context)
 		{
 			return GetCompiledRezolveTarget(context).GetObject(context);

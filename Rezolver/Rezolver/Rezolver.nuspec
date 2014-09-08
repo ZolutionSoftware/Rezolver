@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Rezolver</id>
-    <version>0.1.0-alpha-2</version>
+    <version>0.2.0-alpha-1</version>
     <title>Rezolver</title>
     <authors>Zolution Software Ltd</authors>
     <owners>LordZoltan</owners>
@@ -17,5 +17,6 @@
   </metadata>
 	<files>
 		<file src="bin\Release\rezolver.*" target="lib\portable-net45+sl50+win+wp80" />
+		<file src="..\Rezolver.Advanced\bin\Release\Rezolver.Advanced.*" target="lib\net45" />
 	</files>
 </package>

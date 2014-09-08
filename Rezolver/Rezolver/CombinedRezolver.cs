@@ -33,10 +33,5 @@ namespace Rezolver
 		{
 			return _inner.FetchCompiled(context);
 		}
- 
-		public override object Resolve(RezolveContext context)
-		{
-			return base.Resolve(context);
-		}
 	}
 }
