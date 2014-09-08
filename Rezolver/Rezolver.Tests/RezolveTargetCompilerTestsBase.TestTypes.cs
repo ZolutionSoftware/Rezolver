@@ -93,7 +93,10 @@ namespace Rezolver.Tests
 			}
 		}
 
-		
+		public class HasProperty
+		{
+			public IRequiresInt RequiresInt { get; set; }
+		}
 
 		/// <summary>
 		/// interface for the type that will be used to test the registration and compilation of all the different target types.

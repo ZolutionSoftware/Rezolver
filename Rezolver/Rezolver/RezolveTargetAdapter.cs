@@ -114,13 +114,40 @@ namespace Rezolver
 
 		protected override Expression VisitNew(NewExpression node)
 		{
-			var ctor = node.Constructor;// ?? node.Type.GetConstructor(Type.EmptyTypes);
-			if (ctor == null)
-				throw new ArgumentException(Exceptions.NoConstructorSetOnNewExpression, "node");
+			//var ctor = node.Constructor;// ?? node.Type.GetConstructor(Type.EmptyTypes);
+			//if (ctor == null)
+			//	throw new ArgumentException(Exceptions.NoConstructorSetOnNewExpression, "node");
 
-			var parameters = ctor.GetParameters();
-			return new RezolveTargetExpression(new ConstructorTarget(node.Type, node.Constructor,
-				node.Arguments.Select((pExp, i) => new ParameterBinding(parameters[i], GetRezolveTarget(node))).ToArray()));
+			//var parameters = ctor.GetParameters();
+			//return new RezolveTargetExpression(new ConstructorTarget(node.Type, node.Constructor,
+			//	node.Arguments.Select((pExp, i) => new ParameterBinding(parameters[i], GetRezolveTarget(node))).ToArray()));
+			return new RezolveTargetExpression(ConstructorTarget.For(node.Type, node, this));
+		}
+
+		protected override Expression VisitMemberInit(MemberInitExpression node)
+		{
+			var constructorTarget = ConstructorTarget.For(node.Type, node.NewExpression, this);
+			return new RezolveTargetExpression(new ExpressionTarget(c => {
+				return Expression.MemberInit(
+					((NewExpression)constructorTarget.CreateExpression(new CompileContext(c, node.Type))), 
+					node.Bindings.Select(mb => VisitMemberBinding(mb)));
+			}, node.Type, this));
+			//return base.VisitMemberInit(node);
+		}
+
+		protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)
+		{
+			return base.VisitMemberAssignment(node);
+		}
+
+		protected override MemberListBinding VisitMemberListBinding(MemberListBinding node)
+		{
+			return base.VisitMemberListBinding(node);
+		}
+
+		protected override MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
+		{
+			return base.VisitMemberMemberBinding(node);
 		}
 
 		protected override Expression VisitLambda<T>(Expression<T> node)

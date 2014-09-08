@@ -7,6 +7,8 @@ namespace Rezolver.Tests
 	[TestClass]
 	public class ConstructorTargetTests : TestsBase
 	{
+		//these tests will only work with the delegate compiler
+
 		private class ConstructorTestClass
 		{
 			public int Value { get; protected set; }
@@ -41,6 +43,11 @@ namespace Rezolver.Tests
 			{
 				Value = value;
 			}
+		}
+
+		private class HasProperty
+		{
+			public int Value { get; set; }
 		}
 
 		[TestMethod]
@@ -164,6 +171,26 @@ namespace Rezolver.Tests
 		public static int ReturnsInt(int input)
 		{
 			return NoDefaultConstructor.ExpectedDynamicExpressionMultiplier * input;
+		}
+
+		[TestMethod]
+		public void ShouldAllowAPropertyToBeSet()
+		{
+			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register(c => new HasProperty() { Value = 1 });
+
+			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
+			Assert.AreEqual(1, result.Value);
+		}
+
+		[TestMethod]
+		public void ShouldAllowAPropertyToBeResolved()
+		{
+			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register((10).AsObjectTarget());
+			rezolver.Register(c => new HasProperty() { Value = c.Resolve<int>() });
+			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
+			Assert.AreEqual(10, result.Value);
 		}
 	}
 }

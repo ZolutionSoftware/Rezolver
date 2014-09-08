@@ -125,6 +125,20 @@ namespace Rezolver.Tests
 		}
 
 		[TestMethod]
+		public void ShouldCompileConstructorCallWithPropertyResolved()
+		{
+			DefaultRezolver rezolver = new DefaultRezolver(compiler: CreateCompiler());
+			rezolver.Register(_intObjectTarget.Value);
+			rezolver.Register(ConstructorTarget.Auto<RequiresInt>(), typeof(IRequiresInt));
+			rezolver.Register(c => new HasProperty() { RequiresInt = c.Resolve<IRequiresInt>() });
+
+			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
+			Assert.IsNotNull(result.RequiresInt);
+
+			Assert.AreEqual(IntForObjectTarget, result.RequiresInt.Int);
+		}
+
+		[TestMethod]
 		public void ShouldCompileTransientConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();

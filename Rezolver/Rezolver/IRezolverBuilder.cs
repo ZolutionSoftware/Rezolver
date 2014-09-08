@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Rezolver
 {
@@ -38,5 +39,16 @@ namespace Rezolver
 		///   want it/them to be created.</param>
 		/// <returns>Null if no Builder is found.  Otherwise the Builder that was found or created.</returns>
 		INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false);
+	}
+
+	public static class RezolverBuilderExtensions
+	{
+		public static void Register<T>(this IRezolverBuilder builder, Expression<Func<RezolveContextExpressionHelper, T>> expression, Type type = null, RezolverPath path = null, IRezolveTargetAdapter adapter = null)
+		{
+			builder.MustNotBeNull("builder");
+			expression.MustNotBeNull("expression");
+			var target = (adapter ?? RezolveTargetAdapter.Default).GetRezolveTarget(expression);
+			builder.Register(target, type ?? typeof(T), path);
+		}
 	}
 }
