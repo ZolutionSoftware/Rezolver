@@ -67,10 +67,10 @@
     <Compile Include="IRezolverBuilder.cs" />
     <Compile Include="LifetimeScopeRezolver.cs" />
     <Compile Include="RezolveContext.cs" />
+    <Compile Include="RezolveContextExpressionHelper.cs" />
     <Compile Include="RezolvedTarget.cs" />
     <Compile Include="DefaultRezolver.cs" />
     <Compile Include="RezolverBase.cs" />
-    <Compile Include="RezolverBuilderExtensions.cs" />
     <Compile Include="IRezolveTarget.cs" />
     <Compile Include="MethodCallExtractor.cs" />
     <Compile Include="NamedRezolverBuilder.cs" />

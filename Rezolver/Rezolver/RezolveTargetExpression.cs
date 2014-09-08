@@ -5,8 +5,6 @@ namespace Rezolver
 {
 	/// <summary>
 	/// Makes it possible to mix expressions and targets.
-	/// 
-	/// Note that this *fake* expression type does not compile - any expression tree with one of these
 	/// </summary>
 	public class RezolveTargetExpression : Expression
 	{
@@ -22,6 +20,24 @@ namespace Rezolver
 		public override Type Type
 		{
 			get { return _target.DeclaredType; }
+		}
+		public override ExpressionType NodeType
+		{
+			get
+			{
+				return ExpressionType.Extension;
+			}
+		}
+		public override bool CanReduce
+		{
+			get
+			{
+				return true;
+			}
+		}
+		public override Expression Reduce()
+		{
+			throw new NotSupportedException("RezolveTargetExpression must be rewritten as a bona-fide expression before walking the expression tree for any other purpose");
 		}
 
 		public RezolveTargetExpression(IRezolveTarget target)

@@ -47,14 +47,14 @@ namespace Rezolver.Tests
 		public void ShouldIdentifyRezolveCall()
 		{
 			IRezolveTargetAdapter adapter = RezolveTargetAdapter.Instance;
-			Assert.IsInstanceOfType(adapter.GetRezolveTarget((scope) => scope.Rezolve<int>()), typeof(RezolvedTarget));
+			Assert.IsInstanceOfType(adapter.GetRezolveTarget((helper) => helper.Resolve<int>()), typeof(RezolvedTarget));
 		}
 
 		[TestMethod]
 		public void ShouldIdentifyRezolveCallWithStringParameter()
 		{
 			IRezolveTargetAdapter adapter = RezolveTargetAdapter.Instance;
-			var result = adapter.GetRezolveTarget((scope) => scope.Rezolve<int>("name"));
+			var result = adapter.GetRezolveTarget((helper) => helper.Resolve<int>("name"));
 			Assert.IsInstanceOfType(result, typeof(RezolvedTarget));
 			RezolvedTarget result2 = (RezolvedTarget) result;
 			Assert.IsNotNull(result2.Name);
@@ -74,7 +74,7 @@ namespace Rezolver.Tests
 			//this is a whacky concept - resolving a string to be used as the name
 			//for another resolve call.  The point being that an IRezolverAdapter implementation
 			//should be recursive in itss treatment of expressions.
-			var result = adapter.GetRezolveTarget((scope) => scope.Rezolve<int>(scope.Rezolve<string>()));
+			var result = adapter.GetRezolveTarget((helper) => helper.Resolve<int>(helper.Resolve<string>()));
 			Assert.IsInstanceOfType(result, typeof(RezolvedTarget));
 			RezolvedTarget result2 = (RezolvedTarget)result;
 			Assert.IsNotNull(result2.Name);

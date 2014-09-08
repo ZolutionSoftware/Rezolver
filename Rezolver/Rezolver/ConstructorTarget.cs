@@ -59,7 +59,7 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]));
 		}
 
-		public static ConstructorTarget For<T>(Expression<Func<IRezolverBuilder, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
+		public static ConstructorTarget For<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			NewExpression newExprBody = null;
 			if (newExpr != null)

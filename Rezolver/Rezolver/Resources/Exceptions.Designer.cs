@@ -142,7 +142,7 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method is not to be called at run-time - it is only used for static expression analysis in building rezolver Builders..
+        ///   Looks up a localized string similar to This method is not to be called at run-time - it is only used for static expression analysis in creating IRezolveTargets for an IRezolveBuilder.
         /// </summary>
         internal static string NotRuntimeMethod {
             get {

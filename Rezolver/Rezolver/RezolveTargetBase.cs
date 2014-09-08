@@ -13,6 +13,25 @@ namespace Rezolver
 	/// </summary>
 	public abstract class RezolveTargetBase : IRezolveTarget
 	{
+		private class RezolveTargetExpressionRewriter : ExpressionVisitor
+		{
+			readonly CompileContext _sourceCompileContext;
+
+			public RezolveTargetExpressionRewriter(CompileContext context)
+			{
+				_sourceCompileContext = context;
+			}
+			public override Expression Visit(Expression node)
+			{
+				RezolveTargetExpression re = node as RezolveTargetExpression;
+				if(re != null)
+				{
+					return re.Target.CreateExpression(new CompileContext(_sourceCompileContext, re.Type, true));
+				}
+				return base.Visit(node);
+			}
+		}
+
 		/// <summary>
 		/// Abstract method called to create the expression - this is called by <see cref="CreateExpression"/> after the
 		/// <paramref name="targetType"/> has been validated, if provided.
@@ -69,7 +88,10 @@ namespace Rezolver
 					|| !convertType.IsAssignableFrom(result.Type))
 					return Expression.Convert(result, convertType);
 
-				return result;
+				//now have to rewrite any RezolveTargetExpression objects that are in the tree
+				return new RezolveTargetExpressionRewriter(context).Visit(result);
+
+				//return result;
 			}
 			finally
 			{

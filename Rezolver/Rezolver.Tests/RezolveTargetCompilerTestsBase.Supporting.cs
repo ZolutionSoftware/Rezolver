@@ -17,6 +17,8 @@ namespace Rezolver.Tests
 		private readonly Lazy<ObjectTarget> _intObjectTarget = new Lazy<ObjectTarget>(() => IntForObjectTarget.AsObjectTarget());
 		private const int IntForObjectTarget = 2;
 
+		private const int MultipleForIntObjectTarget = 5;
+
 		private readonly Lazy<ObjectTarget> _nullableIntObjectTarget =
 			new Lazy<ObjectTarget>(() => NullableIntForObjectTarget.AsObjectTarget());
 		private static readonly int? NullableIntForObjectTarget = 1;

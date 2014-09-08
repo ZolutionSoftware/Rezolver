@@ -32,9 +32,9 @@ namespace Rezolver
 
 		internal static readonly MethodInfo[] RezolveMethods =
 		{
-			MethodCallExtractor.ExtractCalledMethod((IRezolverBuilder builder) => builder.Rezolve<int>()).GetGenericMethodDefinition()
+			MethodCallExtractor.ExtractCalledMethod((RezolveContextExpressionHelper builder) => builder.Resolve<int>()).GetGenericMethodDefinition()
 			,
-			MethodCallExtractor.ExtractCalledMethod((IRezolverBuilder builder) => builder.Rezolve<int>(null))
+			MethodCallExtractor.ExtractCalledMethod((RezolveContextExpressionHelper builder) => builder.Resolve<int>(null))
 				.GetGenericMethodDefinition()
 		};
 
@@ -95,7 +95,7 @@ namespace Rezolver
 			//note below - firing the Visit method again for the parameter, which allows us to use Resolve operations
 			//for the parameters.
 			return nameParameter != null
-				? new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], GetRezolveTarget(methodExpr.Arguments[1]))
+				? new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], GetRezolveTarget(methodExpr.Arguments[0]))
 				: new RezolveCallExpressionInfo(methodExpr.Method.GetGenericArguments()[0], null);
 		}
 
@@ -138,6 +138,14 @@ namespace Rezolver
 			if (rezolveCall != null)
 				return new RezolveTargetExpression(new RezolvedTarget(rezolveCall));
 			return base.VisitMethodCall(node);
+		}
+
+		public override Expression Visit(Expression node)
+		{
+			var result = base.Visit(node);
+			if (!(result is RezolveTargetExpression))
+				return new RezolveTargetExpression(new ExpressionTarget(result));
+			return result;
 		}
 	}
 }
