@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -51,6 +52,11 @@ namespace Rezolver
 			}
 
 			return memberBindings.ToArray();
+		}
+
+		public MemberBinding CreateMemberBinding(CompileContext context)
+		{
+			return Expression.Bind(Member, Target.CreateExpression(new CompileContext(context, MemberType, true)));
 		}
 	}
 }

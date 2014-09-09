@@ -24,22 +24,22 @@ namespace Rezolver.Tests
 		private static readonly int? NullableIntForObjectTarget = 1;
 
 		private readonly Lazy<ConstructorTarget> _requiresIntTarget
-			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<RequiresInt>);
+			= new Lazy<ConstructorTarget>(() => ConstructorTarget.Auto<RequiresInt>());
 
 		private readonly Lazy<ConstructorTarget> _transientConstructorTarget
-			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<Transient>);
+			= new Lazy<ConstructorTarget>(() => ConstructorTarget.Auto<Transient>());
 
 		private readonly Lazy<SingletonTarget> _singletonConstructorTarget
 			= new Lazy<SingletonTarget>(() => new SingletonTarget(ConstructorTarget.Auto<Singleton>()));
 
 		private readonly Lazy<ConstructorTarget> _compositeConstructorTarget
-			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<Composite>);
+			= new Lazy<ConstructorTarget>(() => ConstructorTarget.Auto<Composite>());
 
 		private readonly Lazy<ConstructorTarget> _superComplexConstructorTarget
-			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<SuperComplex>);
+			= new Lazy<ConstructorTarget>(() => ConstructorTarget.Auto<SuperComplex>());
 
 		private readonly Lazy<ConstructorTarget> _scopedSingletonTestTypeConstructorTarget
-			= new Lazy<ConstructorTarget>(ConstructorTarget.Auto<ScopedSingletonTestClass>);
+			= new Lazy<ConstructorTarget>(() => ConstructorTarget.Auto<ScopedSingletonTestClass>());
 
 
 		protected abstract IRezolveTargetCompiler CreateCompilerBase(string callingMethod);

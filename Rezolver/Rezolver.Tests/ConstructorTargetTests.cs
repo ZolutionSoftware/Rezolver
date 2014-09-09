@@ -50,6 +50,37 @@ namespace Rezolver.Tests
 			public int Value { get; set; }
 		}
 
+		private class HasField
+		{
+			public string StringField;
+		}
+
+		private class ShouldIgnorePropertyAndField{
+			private int IgnoredField;
+			public int GetIgnoredField(){
+				return IgnoredField;
+			}
+
+			private int _ignoredProperty1;
+			//ignorede as it's readonly
+			public int IgnoredProperty1 { get { return _ignoredProperty1; } }
+
+			public int IgnoredProperty2 { get; private set; }
+
+			public ShouldIgnorePropertyAndField()
+			{
+				IgnoredField = 1;
+				_ignoredProperty1 = 2;
+				IgnoredProperty2 = 3;
+			}
+		}
+
+		private class NestedPropertiesAndFields
+		{
+			public HasProperty Field_HasProperty;
+			public HasField Property_HasField { get; set; }
+		}
+
 		[TestMethod]
 		public void ShouldAutomaticallyFindDefaultConstructor()
 		{
@@ -191,6 +222,56 @@ namespace Rezolver.Tests
 			rezolver.Register(c => new HasProperty() { Value = c.Resolve<int>() });
 			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
 			Assert.AreEqual(10, result.Value);
+		}
+
+		[TestMethod]
+		public void ShouldAutoDiscoverProperties()
+		{
+			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register((25).AsObjectTarget());
+			rezolver.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
+			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
+			Assert.AreEqual(25, result.Value);
+		}
+
+		[TestMethod]
+		public void ShouldAutoDiscoverFields()
+		{
+			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register("Hello world".AsObjectTarget());
+			rezolver.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
+			var result = (HasField)rezolver.Resolve(typeof(HasField));
+			Assert.AreEqual("Hello world", result.StringField);
+		}
+
+		[TestMethod]
+		public void ShouldIgnoreFieldsAndProperties()
+		{
+			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register((100).AsObjectTarget());
+			rezolver.Register(ConstructorTarget.Auto<ShouldIgnorePropertyAndField>(DefaultPropertyBindingBehaviour.Instance));
+			var result = (ShouldIgnorePropertyAndField)rezolver.Resolve(typeof(ShouldIgnorePropertyAndField));
+			Assert.AreEqual(1, result.GetIgnoredField());
+			Assert.AreEqual(2, result.IgnoredProperty1);
+			Assert.AreEqual(3, result.IgnoredProperty2);
+		}
+
+		[TestMethod]
+		public void ShouldChainAutoDiscoveredPropertiesAndFields()
+		{
+			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register("hello universe".AsObjectTarget());
+			rezolver.Register((500).AsObjectTarget());
+			rezolver.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
+			rezolver.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
+			rezolver.Register(ConstructorTarget.Auto<NestedPropertiesAndFields>(DefaultPropertyBindingBehaviour.Instance));
+
+			var result = (NestedPropertiesAndFields)rezolver.Resolve(typeof(NestedPropertiesAndFields));
+
+			Assert.IsNotNull(result.Field_HasProperty);
+			Assert.IsNotNull(result.Property_HasField);
+			Assert.AreEqual(500, result.Field_HasProperty.Value);
+			Assert.AreEqual("hello universe", result.Property_HasField.StringField);
 		}
 	}
 }
