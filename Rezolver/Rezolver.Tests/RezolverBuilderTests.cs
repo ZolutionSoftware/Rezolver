@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Rezolver.Tests.Classes;
 
 namespace Rezolver.Tests
@@ -8,7 +9,7 @@ namespace Rezolver.Tests
 	/// Tests whether the core engine will accept an object or function for a target type
 	/// </summary>
 	[TestClass]
-	public class BasicBuilderTests
+	public class RezolverBuilderTests
 	{
 		[TestMethod]
 		public void ShouldRegisterNullObjectTarget()
@@ -64,6 +65,35 @@ namespace Rezolver.Tests
 			Assert.AreEqual(target2, builder.Fetch(typeof (SimpleType)));
 		}
 
+		private interface IGenericTest<T>
+		{
 
+		}
+
+		[TestMethod]
+		public void ShouldSupportRegisteringOpenGenericAndFetchingAsClosed()
+		{
+			IRezolverBuilder builder = new RezolverBuilder();
+			var targetMock = new Mock<IRezolveTarget>();
+			targetMock.Setup(m => m.DeclaredType).Returns(typeof(IGenericTest<>));
+			targetMock.Setup(m => m.SupportsType(It.IsAny<Type>())).Returns((Type t) => {
+				if(t == typeof(IGenericTest<>))
+					return true;
+				if(t.IsGenericType)
+				{
+					if(t.GetGenericTypeDefinition() == typeof(IGenericTest<>))
+						return true;
+				}
+
+				return t == typeof(object);
+			});
+			var mockInstance = targetMock.Object;
+			builder.Register(mockInstance);
+			///this should be trivial
+			var fetched = builder.Fetch(typeof(IGenericTest<>));
+			Assert.AreSame(mockInstance, fetched);
+			var fetchedClosed = builder.Fetch(typeof(IGenericTest<int>));
+			Assert.AreSame(mockInstance, fetchedClosed);
+		}
 	}
 }

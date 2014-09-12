@@ -39,12 +39,12 @@ namespace Rezolver
 			get { return _declaredType; }
 		}
 
-		public static ConstructorTarget Auto<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static IRezolveTarget Auto<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			return Auto(typeof(T), propertyBindingBehaviour);
 		}
 
-		public static ConstructorTarget Auto(Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static IRezolveTarget Auto(Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			//conduct a very simple search for the constructor with the most parameters
 			declaredType.MustNotBeNull("declaredType");
@@ -62,13 +62,13 @@ namespace Rezolver
 				throw new ArgumentException(
 					string.Format(Exceptions.MoreThanOneConstructorFormat, declaredType));
 
+			var baseTarget = new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]));
 			if (propertyBindingBehaviour != null)
-				return new ConstructorWithPropertiesTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]), propertyBindingBehaviour.GetPropertyBindings(declaredType));
-			else
-				return new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]));
+				return new ConstructorWithPropertiesTarget(baseTarget, propertyBindingBehaviour.GetPropertyBindings(declaredType));
+			return baseTarget;
 		}
 
-		public static ConstructorTarget For<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
+		public static IRezolveTarget For<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			NewExpression newExprBody = null;
 			if (newExpr != null)
@@ -83,7 +83,7 @@ namespace Rezolver
 			return For(typeof(T), newExprBody, adapter);
 		}
 
-		internal static ConstructorTarget For(Type declaredType, NewExpression newExpr = null, IRezolveTargetAdapter adapter = null)
+		internal static IRezolveTarget For(Type declaredType, NewExpression newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			ConstructorInfo ctor = null;
 			ParameterBinding[] parameterBindings = null;

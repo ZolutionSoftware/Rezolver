@@ -79,7 +79,12 @@ namespace Rezolver
 			}
 
 			IRezolveTarget target;
-			return _targets.TryGetValue(type, out target) ? target : null;
+			var result = _targets.TryGetValue(type, out target);
+			if(!result && type.IsGenericType)
+			{
+				result = _targets.TryGetValue(type.GetGenericTypeDefinition(), out target);
+			}
+			return target;
 		}
 
 		public IRezolveTarget Fetch<T>(string name = null)

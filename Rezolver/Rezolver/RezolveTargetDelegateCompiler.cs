@@ -28,9 +28,10 @@ namespace Rezolver
 
 		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
 		{
-			context = new CompileContext(context, typeof(object), false);
+			context = new CompileContext(context, context.TargetType, false);
 			var toBuild = target.CreateExpression(context);
-
+			if (toBuild.Type != typeof(object))
+				toBuild = Expression.Convert(toBuild, typeof(object));
 			//if we have shared conditionals, then we want to try and reorder them as the intention
 			//of the use of shared expressions is to consolidate them into one.  We do this on the boolean
 			//expressions that might be used as tests for conditionals

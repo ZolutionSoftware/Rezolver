@@ -7,9 +7,9 @@ namespace Rezolver.Tests
 {
 	public class TestsBase
 	{
-		protected static T GetValueFromTarget<T>(IRezolveTarget target, IRezolver rezolver = null, IRezolver dynamicRezolver = null)
+		protected static T GetValueFromTarget<T>(IRezolveTarget target, IRezolver rezolver = null)
 		{
-			var compiledTarget = new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(rezolver ?? CreateRezolverMock()));
+			var compiledTarget = new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(rezolver ?? CreateRezolverMock(), typeof(T)));
 			if (rezolver == null)
 				return (T)compiledTarget.GetObject(new RezolveContext(CreateRezolverMock(), typeof(T)));
 			else
@@ -24,9 +24,10 @@ namespace Rezolver.Tests
 			return scopeMock.Object;
 		}
 
-		protected static object GetValueFromTarget(IRezolveTarget target, IRezolver scope = null, IRezolver dynamicScope = null)
+		protected static object GetValueFromTarget(IRezolveTarget target, IRezolver rezolver = null, Type targetType = null)
 		{
-			return new RezolveTargetDelegateCompiler().CompileTarget(target, new CompileContext(scope ?? CreateRezolverMock())).GetObject(new RezolveContext(CreateRezolverMock(), null));
+			return new RezolveTargetDelegateCompiler().CompileTarget(target, 
+				new CompileContext(rezolver ?? CreateRezolverMock())).GetObject(new RezolveContext(CreateRezolverMock(), targetType));
 		}
 	}
 }

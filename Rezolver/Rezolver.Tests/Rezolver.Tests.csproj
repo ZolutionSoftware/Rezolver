@@ -60,7 +60,7 @@
     <Compile Include="Classes\SimpleType.cs" />
     <Compile Include="ICompiledRezolveTargetExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BasicBuilderTests.cs" />
+    <Compile Include="RezolverBuilderTests.cs" />
     <Compile Include="ObjectTargetTests.cs" />
     <Compile Include="DelegateTargetTests.cs" />
     <Compile Include="LazyTargetTests.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="NamedRezolverScopeTests.cs" />
     <Compile Include="ChildRezolverBuilderTests.cs" />
     <Compile Include="RezolverPathTests.cs" />
-    <Compile Include="OpenGenericTests.cs" />
+    <Compile Include="GenericConstructorTargetTests.cs" />
     <Compile Include="ObjectTargetClosedGenericTests.cs" />
     <Compile Include="RezolveTargetCompilerTestsBase.cs" />
     <Compile Include="RezolveTargetCompilerTestsBase.Supporting.cs" />

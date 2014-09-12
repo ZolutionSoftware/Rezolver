@@ -60,7 +60,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 
-			ConstructorTarget constructorTarget = ConstructorTarget.Auto<ToRezolve>();
+			IRezolveTarget constructorTarget = ConstructorTarget.Auto<ToRezolve>();
 			var rezolver = Mock.Of<IRezolver>();
 			ICompiledRezolveTarget target = compiler.CompileTarget(constructorTarget,  new CompileContext(rezolver));
 
