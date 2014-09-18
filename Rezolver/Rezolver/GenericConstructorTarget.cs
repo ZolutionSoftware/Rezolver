@@ -17,25 +17,36 @@ namespace Rezolver
 		/// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
 		public GenericConstructorTarget(Type genericType)
 		{
+			if (!genericType.IsGenericTypeDefinition)
+				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Partially open generics are not yet supported, and for fully closed generics, use ConstructorTarget");
 			_genericType = genericType;
 		}
 
 		public override bool SupportsType(Type type)
 		{
-			if (!base.SupportsType(type))
-			{
-				//scenario - requested type is a closed generic built from this target's open generic
-				if (!type.IsGenericType)
-					return false;
+			if (base.SupportsType(type))
+				return true;
 
-				var genericType = type.GetGenericTypeDefinition();
-				if (genericType == DeclaredType)
-					return true;
-				if (DeclaredType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == genericType))
-					return true;
+			//scenario - requested type is a closed generic built from this target's open generic
+			if (!type.IsGenericType)
 				return false;
+
+			var genericType = type.GetGenericTypeDefinition();
+			if (genericType == DeclaredType)
+				return true;
+
+			if (!genericType.IsInterface)
+			{
+				var bases = TypeHelpers.GetAllBases(DeclaredType);
+				var matchedBase = bases.FirstOrDefault(b => b.IsGenericType && b.GetGenericTypeDefinition() == genericType);
+				if (matchedBase != null)
+					return true;
 			}
-			return true;
+			//TODO: tighten this up to handle the proposed partially open type
+			else if (DeclaredType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == genericType))
+				return true;
+
+			return false;
 		}
 
 		protected override System.Linq.Expressions.Expression CreateExpressionBase(CompileContext context)
@@ -61,40 +72,9 @@ namespace Rezolver
 			else
 			{
 				if (expectedType.IsInterface && expectedType.IsGenericType)
-				{
-					//find the required interface among the declared type's interfaces.
-					var mappedInterface = DeclaredType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == genericType);
-					if (mappedInterface != null)
-					{
-						var interfaceTypeParams = mappedInterface.GetGenericArguments();
-						var typeParamPositions = DeclaredType
-							.GetGenericArguments()
-							.Select(t =>
-								new
-								{
-									DeclaredTypeParamPosition = t.GenericParameterPosition,
-									Type = t,
-									//the projection here allows us to get the index of the base interface's generic type parameter
-									//It is required because using the GenericParameterPosition property simply returns the index of the 
-									//type in our declared type, as the type is passed down into the interfaces from the open generic
-									//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
-  								//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
-									MappedTo = interfaceTypeParams.Select((Type tt, int i) => 
-										new { Type = tt, InterfaceTypeParameterPosition = i }).FirstOrDefault(tt => tt.Type == t)
-								}).OrderBy(r => r.MappedTo != null ? r.MappedTo.InterfaceTypeParameterPosition : int.MinValue).ToArray();
-						if (typeParamPositions.All(r => r.MappedTo != null))
-						{
-							suppliedTypeArguments = expectedType.GetGenericArguments();
-							finalTypeArguments = new Type[typeParamPositions.Length];
-							foreach (var typeParam in typeParamPositions)
-							{
-								finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedTypeArguments[typeParam.MappedTo.InterfaceTypeParameterPosition];
-							}
-						}
-					}
-				}
+					finalTypeArguments = MapGenericParameters(expectedType, DeclaredType);
 
-				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null))
+				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
 					throw new ArgumentException("Unable to complete generic target, not enough information from CompileContext", "context");
 			}
 
@@ -104,6 +84,82 @@ namespace Rezolver
 			var target = ConstructorTarget.Auto(typeToBuild);
 
 			return target.CreateExpression(context);
+		}
+
+		private Type[] MapGenericParameters(Type requestedType, Type targetType)
+		{
+			var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
+			Type[] finalTypeArguments = targetType.GetGenericArguments();
+			var mappedInterface = targetType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+			if (mappedInterface != null)
+			{
+				var interfaceTypeParams = mappedInterface.GetGenericArguments();
+				var typeParamPositions = targetType
+					.GetGenericArguments()
+					.Select(t =>
+					{
+						var mapping = DeepSearchTypeParameterMapping(null, mappedInterface, t);
+
+						//if the mapping is not found, but one or more of the interface type parameters are generic, then 
+						//it's possible that one of those has been passed the type parameter.
+						//the problem with that, fromm our point of view, however, is how then 
+
+						return new
+						{
+							DeclaredTypeParamPosition = t.GenericParameterPosition,
+							Type = t,
+							//the projection here allows us to get the index of the base interface's generic type parameter
+							//It is required because using the GenericParameterPosition property simply returns the index of the 
+							//type in our declared type, as the type is passed down into the interfaces from the open generic
+							//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
+							//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
+							MappedTo = mapping
+						};
+					}).OrderBy(r => r.MappedTo != null ? r.MappedTo[0] : int.MinValue).ToArray();
+
+				var suppliedTypeArguments = requestedType.GetGenericArguments();
+				Type suppliedArg = null;
+				foreach (var typeParam in typeParamPositions.Where(p => p.MappedTo != null))
+				{
+					suppliedArg = suppliedTypeArguments[typeParam.MappedTo[0]];
+					foreach (var index in typeParam.MappedTo.Skip(1))
+					{
+						suppliedArg = suppliedArg.GetGenericArguments()[index];
+					}
+					finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
+				}
+			}
+			return finalTypeArguments;
+		}
+
+		/// <summary>
+		/// returns a series of type parameter indexes from the baseType parameter which can be used to derive
+		/// the concrete type parameter to be used in a target type, given a fully-closed generic type as the model
+		/// </summary>
+		/// <param name="previousTypeParameterPositions"></param>
+		/// <param name="candidateTypeParameter"></param>
+		/// <param name="targetTypeParameter"></param>
+		/// <returns></returns>
+		private int[] DeepSearchTypeParameterMapping(Stack<int> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
+		{
+			if (baseTypeParameter == targetTypeParameter)
+				return previousTypeParameterPositions.ToArray();
+			if (previousTypeParameterPositions == null)
+				previousTypeParameterPositions = new Stack<int>();
+			if (baseTypeParameter.IsGenericType)
+			{
+				var args = baseTypeParameter.GetGenericArguments();
+				int[] result = null;
+				for (int f = 0; f < args.Length; f++)
+				{
+					previousTypeParameterPositions.Push(f);
+					result = DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
+					previousTypeParameterPositions.Pop();
+					if (result != null)
+						return result;
+				}
+			}
+			return null;
 		}
 
 		//private Type MapInterfaceTypeParameter(Type theParameter, Type theBaseType, int targetParameterPosition)

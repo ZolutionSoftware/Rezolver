@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Rezolver
 {
@@ -49,6 +50,17 @@ namespace Rezolver
 
 			nulledType = type.GetGenericArguments()[0];
 			return true;
+		}
+
+		internal static IEnumerable<Type> GetAllBases(Type t)
+		{
+			t.MustNotBeNull("t");
+			var baseType = t.BaseType;
+			while(baseType != null)
+			{
+				yield return baseType;
+				baseType = baseType.BaseType;
+			}
 		}
 	}
 }

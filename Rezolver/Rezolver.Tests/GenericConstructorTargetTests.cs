@@ -185,7 +185,6 @@ namespace Rezolver.Tests
 			}
 		}
 
-		[Obsolete("yet to be implemented", true)]
 		public class DerivedGeneric<T> : Generic<T>
 		{
 			public DerivedGeneric(T value) : base(value) { }
@@ -361,14 +360,16 @@ namespace Rezolver.Tests
 			//we need three dependencies registered - the inner T, an IGenericA<> and 
 			//an IGeneric<IGenericA<T>>.
 			rezolver.Register((25).AsObjectTarget());
-			rezolver.Register(GenericConstructorTarget.Auto(typeof(GenericA<>)), typeof(IGenericA<>));
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
 			//note here - using MakeGenericType is the only way to get a reference to a type like IFoo<IFoo<>> because
 			//supply an open generic as a type parameter to a generic is not valid.
-			rezolver.Register(GenericConstructorTarget.Auto(typeof(GenericGeneric<>)), typeof(IGeneric<>).MakeGenericType(typeof(IGenericA<>)));
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(GenericGeneric<>)), typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
 
-			var result = (IGeneric<IGenericA<int>>)rezolver.Resolve(typeof(IGeneric<IGenericA<int>>));
+			var result = (IGeneric<IGeneric<int>>)rezolver.Resolve(typeof(IGeneric<IGeneric<int>>));
 
 			Assert.AreEqual(25, result.Value.Value);
+			Assert.IsInstanceOfType(result, typeof(GenericGeneric<int>));
+			Assert.IsInstanceOfType(result.Value, typeof(Generic<int>));
 		}
 
 		[TestMethod]
@@ -458,106 +459,14 @@ namespace Rezolver.Tests
 			Assert.AreEqual("hello reversed interface", result.Value2);
 		}
 
-		private class GenericImplementsNested<T> : IGeneric<IEnumerable<T>>
-		{
-			public IEnumerable<T> Value
-			{
-				get { throw new NotImplementedException(); }
-			}
-		}
-
 		[TestMethod]
-		public void ShouldMapSimpleParameter()
+		public void ShouldResolveGenericTypeByABase()
 		{
-			var mappings = MapGenericParameters(typeof(IGeneric<int>), typeof(Generic<>));
-
-			Assert.IsTrue(new[] { typeof(int) }.SequenceEqual(mappings));
-		}
-
-		[TestMethod]
-		public void ShouldMapParameterFromNestedInterface()
-		{
-			var mappings = MapGenericParameters(typeof(IGeneric<IEnumerable<int>>), typeof(GenericImplementsNested<>));
-			Type[] expected = new[] { typeof(int) };
-			Console.WriteLine("Expected: {0}", string.Join(", ", expected.Select(t => t.ToString())));
-			Console.WriteLine("Result: {0}", string.Join(", ", mappings.Select(t => t.ToString())));
-
-			Assert.IsTrue(expected.SequenceEqual(mappings));
-		}
-
-		private Type[] MapGenericParameters(Type requestedType, Type targetType)
-		{
-			var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
-			Type[] finalTypeArguments = targetType.GetGenericArguments();
-			var mappedInterface = targetType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
-			if (mappedInterface != null)
-			{
-				var interfaceTypeParams = mappedInterface.GetGenericArguments();
-				var typeParamPositions = targetType
-					.GetGenericArguments()
-					.Select(t =>{
-						var mapping = DeepSearchTypeParameterMapping(null, mappedInterface, t);
-							
-						//if the mapping is not found, but one or more of the interface type parameters are generic, then 
-						//it's possible that one of those has been passed the type parameter.
-						//the problem with that, fromm our point of view, however, is how then 
-						
-						return new
-						{
-							DeclaredTypeParamPosition = t.GenericParameterPosition,
-							Type = t,
-							//the projection here allows us to get the index of the base interface's generic type parameter
-							//It is required because using the GenericParameterPosition property simply returns the index of the 
-							//type in our declared type, as the type is passed down into the interfaces from the open generic
-							//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
-							//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
-							MappedTo = mapping
-						};
-					}).OrderBy(r => r.MappedTo != null ? r.MappedTo[0] : int.MinValue).ToArray();
-
-				var suppliedTypeArguments = requestedType.GetGenericArguments();
-				Type suppliedArg = null;
-				foreach (var typeParam in typeParamPositions.Where(p => p.MappedTo != null))
-				{
-					suppliedArg = suppliedTypeArguments[typeParam.MappedTo[0]];
-					foreach(var index in typeParam.MappedTo.Skip(1))
-					{
-						suppliedArg = suppliedArg.GetGenericArguments()[index];
-					}
-					finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
-				}
-			}
-			return finalTypeArguments;
-		}
-
-		/// <summary>
-		/// returns a series of type parameter indexes from the baseType parameter which can be used to derive
-		/// the concrete type parameter to be used in a target type, given a fully-closed generic type as the model
-		/// </summary>
-		/// <param name="previousTypeParameterPositions"></param>
-		/// <param name="candidateTypeParameter"></param>
-		/// <param name="targetTypeParameter"></param>
-		/// <returns></returns>
-		private int[] DeepSearchTypeParameterMapping(Stack<int> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
-		{
-			if (baseTypeParameter == targetTypeParameter)
-				return previousTypeParameterPositions.ToArray();
-			if (previousTypeParameterPositions == null)
-				previousTypeParameterPositions = new Stack<int>();
-			if (baseTypeParameter.IsGenericType)
-			{
-				var args = baseTypeParameter.GetGenericArguments();
-				int[] result = null;
-				for (int f = 0; f < args.Length; f++)
-				{
-					previousTypeParameterPositions.Push(f);
-					result = DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
-					previousTypeParameterPositions.Pop();
-					if (result != null)
-						return result;
-				}
-			}
-			return null;
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((90).AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric<>)), typeof(Generic<>));
+			var result = (Generic<int>)rezolver.Resolve(typeof(Generic<int>));
+			Assert.AreEqual(90, result.Value);
 		}
 	}
 }
