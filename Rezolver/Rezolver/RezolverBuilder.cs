@@ -4,6 +4,7 @@ using Rezolver.Resources;
 
 namespace Rezolver
 {
+	using System.Linq;
 	using RegistrationEntry = KeyValuePair<RezolveContext, IRezolveTarget>;
 	public class RezolverBuilder : IRezolverBuilder
 	{
@@ -82,7 +83,12 @@ namespace Rezolver
 			var result = _targets.TryGetValue(type, out target);
 			if(!result && type.IsGenericType)
 			{
-				result = _targets.TryGetValue(type.GetGenericTypeDefinition(), out target);
+				//generate a generic type list for searching
+				foreach(var searchType in DeriveGenericTypeSearchList(type))
+				{
+					if (_targets.TryGetValue(searchType, out target))
+						return target;
+				}
 			}
 			return target;
 		}
@@ -151,6 +157,46 @@ namespace Rezolver
 			{
 				return GetEnumerator();
 			}
+		}
+
+		public IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
+		{
+			//using an iteratoor method is the best for performance, but fetching type
+			//registrations from a rezolver builder is an operation that, so long as a caching
+			//resolver is used, shouldn't be repeated often.
+
+			//yield return type;
+
+			if (!type.IsGenericType || type.IsGenericTypeDefinition)
+			{
+				yield return type;
+				yield break;
+			}
+
+			//for every generic type, there is a least two versions - the closed and the open
+			//when you consider, then, that a generic parameter might also be a generic
+			var typeParams = type.GetGenericArguments();
+			var typeParamSearchLists = typeParams.Select(t => DeriveGenericTypeSearchList(t).ToArray()).ToArray();
+			var genericType = type.GetGenericTypeDefinition();
+
+			foreach (var combination in CartesianProduct(typeParamSearchLists))
+			{
+				yield return genericType.MakeGenericType(combination.ToArray());
+			}
+			yield return genericType;
+		}
+
+		static IEnumerable<IEnumerable<T>> CartesianProduct<T>
+		(IEnumerable<IEnumerable<T>> sequences)
+		{
+			IEnumerable<IEnumerable<T>> emptyProduct =
+				new[] { Enumerable.Empty<T>() };
+			return sequences.Aggregate(
+				emptyProduct,
+				(accumulator, sequence) =>
+					from accseq in accumulator
+					from item in sequence
+					select accseq.Concat(new[] { item }));
 		}
 	}
 }

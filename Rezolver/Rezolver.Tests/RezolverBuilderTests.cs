@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Rezolver.Tests.Classes;
@@ -70,6 +72,16 @@ namespace Rezolver.Tests
 
 		}
 
+		private class GenericTest<T> : IGenericTest<T>
+		{
+
+		}
+
+		public class GenericGenericTest<T> : IGenericTest<IGenericTest<T>>
+		{
+			//complex scenario - implementing an interface that wraps another generic interface with the supplied type parameter
+		}
+
 		[TestMethod]
 		public void ShouldSupportRegisteringOpenGenericAndFetchingAsClosed()
 		{
@@ -95,5 +107,48 @@ namespace Rezolver.Tests
 			var fetchedClosed = builder.Fetch(typeof(IGenericTest<int>));
 			Assert.AreSame(mockInstance, fetchedClosed);
 		}
+
+		[TestMethod]
+		public void ShouldSupportRegisteringAndRetrievingGenericWithGenericParameter()
+		{
+			IRezolverBuilder builder = new RezolverBuilder();
+			var target = GenericConstructorTarget.Auto(typeof(GenericTest<>));
+			builder.Register(target, typeof(IGenericTest<>));
+			var fetched = builder.Fetch(typeof(IGenericTest<IGenericTest<int>>));
+			Assert.AreSame(target, fetched);
+		}
+
+		[TestMethod]
+		public void ShouldSupportRegisteringAndRetrievingGenericWithAsymmetricGenericBase()
+		{
+			//can't think what else to call this scenario!
+			IRezolverBuilder builder = new RezolverBuilder();
+			var target = GenericConstructorTarget.Auto(typeof(GenericGenericTest<>));
+			builder.Register(target, typeof(IGenericTest<>));
+			var fetched = builder.Fetch(typeof(IGenericTest<IGenericTest<int>>));
+			Assert.AreSame(target, fetched);
+		}
+
+		[TestMethod]
+		public void ShouldSupportRegisteringAndRetrievingGenericWithAsymmetricGenericBase2()
+		{
+			//subtle different between how this one is registered versus the previous test
+			IRezolverBuilder builder = new RezolverBuilder();
+			var target = GenericConstructorTarget.Auto(typeof(GenericGenericTest<>));
+			builder.Register(target, typeof(IGenericTest<>).MakeGenericType(typeof(IGenericTest<>)));
+			var fetched = builder.Fetch(typeof(IGenericTest<IGenericTest<int>>));
+			Assert.AreSame(target, fetched);
+		}
+
+		//[TestMethod]
+		//public void ShouldComputeGenericTypeSearchList()
+		//{
+		//	var targetType = typeof(IEnumerable<>).MakeGenericType(typeof(IEnumerable<int>));
+		//	var expectedSequence = new[] { typeof(IEnumerable<IEnumerable<int>>), 
+		//	typeof(IEnumerable<>).MakeGenericType(typeof(IEnumerable<>)), typeof(IEnumerable<>)};
+
+		//	var sequence = DeriveGenericTypeSearchList(targetType).ToArray();
+		//	Assert.IsTrue(sequence.SequenceEqual(expectedSequence));
+		//}
 	}
 }

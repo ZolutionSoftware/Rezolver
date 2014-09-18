@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -59,6 +60,21 @@ namespace Rezolver.Tests
 			T Value { get; }
 		}
 
+		/// <summary>
+		/// alternative IGeneric-like interface used to simplify the nested open generic scenario
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		public interface IGenericA<T>
+		{
+			T Value { get; }
+		}
+
+		public interface IGeneric2<T, U> : IGeneric<U>
+		{
+			T Value1 { get; }
+			U Value2 { get; }
+		}
+
 		public class GenericNoCtor<T> : IGeneric<T>
 		{
 			public T Value { get; set; }
@@ -76,6 +92,138 @@ namespace Rezolver.Tests
 			public T Value
 			{
 				get { return _value; }
+			}
+		}
+
+		public class GenericA<T> : IGenericA<T>
+		{
+			private T _value;
+
+			public GenericA(T value)
+			{
+				_value = value;
+			}
+
+			public T Value
+			{
+				get { return _value; }
+			}
+		}
+
+		/// <summary>
+		/// this is pretty hideous - but might be something that needs to be supported
+		/// 
+		/// pushes the discovery of type parameters by forcing unwrap another nested generic type parameter.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		public class GenericGeneric<T> : IGeneric<IGeneric<T>>
+		{
+
+			public IGeneric<T> Value
+			{
+				get;
+				private set;
+			}
+
+			public GenericGeneric(IGeneric<T> value)
+			{
+				Value = value;
+			}
+		}
+
+		public class Generic2<T, U> : IGeneric2<T, U>
+		{
+			public Generic2(T value1, U value2)
+			{
+				Value1 = value1;
+				Value2 = value2;
+			}
+
+			public T Value1
+			{
+				get;
+				private set;
+			}
+
+			public U Value2
+			{
+				get;
+				private set;
+			}
+
+			//explicit implementation of IGeneric<U>
+			U IGeneric<U>.Value
+			{
+				get { return Value2; }
+			}
+		}
+
+		public class Generic2Reversed<T, U> : IGeneric2<U, T>
+		{
+			public Generic2Reversed(T value2, U value1)
+			{
+				Value1 = value1;
+				Value2 = value2;
+			}
+
+			public U Value1
+			{
+				get;
+				private set;
+			}
+
+			public T Value2
+			{
+				get;
+				private set;
+			}
+
+			//explicit implementation of IGeneric<T>
+			T IGeneric<T>.Value
+			{
+				get { return Value2; }
+			}
+		}
+
+		[Obsolete("yet to be implemented", true)]
+		public class DerivedGeneric<T> : Generic<T>
+		{
+			public DerivedGeneric(T value) : base(value) { }
+		}
+
+		public class HasGenericDependency
+		{
+			public Generic<int> Dependency { get; private set; }
+			public HasGenericDependency(Generic<int> dependency)
+			{
+				Dependency = dependency;
+			}
+		}
+
+		public class HasOpenGenericDependency<T>
+		{
+			public Generic<T> Dependency { get; private set; }
+			public HasOpenGenericDependency(Generic<T> dependency)
+			{
+				Dependency = dependency;
+			}
+		}
+
+		public class HasGenericInterfaceDependency
+		{
+			public IGeneric<int> Dependency { get; private set; }
+			public HasGenericInterfaceDependency(IGeneric<int> dependency)
+			{
+				Dependency = dependency;
+			}
+		}
+
+		public class HasOpenGenericInterfaceDependency<T>
+		{
+			public IGeneric<T> Dependency { get; private set; }
+			public HasOpenGenericInterfaceDependency(IGeneric<T> dependency)
+			{
+				Dependency = dependency;
 			}
 		}
 
@@ -138,15 +286,6 @@ namespace Rezolver.Tests
 		//now test that the target should work when used as the target of a dependency look up
 		//just going to use the DefaultRezolver for this as it's far easier to setup the test.
 
-		public class HasGenericDependency
-		{
-			public Generic<int> Dependency { get; private set; }
-			public HasGenericDependency(Generic<int> dependency)
-			{
-				Dependency = dependency;
-			}
-		}
-
 		[TestMethod]
 		public void ShouldRezolveAClosedGenericDependency()
 		{
@@ -179,14 +318,6 @@ namespace Rezolver.Tests
 			Assert.AreEqual(0, result.Value.Value);
 		}
 
-		public class HasOpenGenericDependency<T>
-		{
-			public Generic<T> Dependency { get; set; }
-			public HasOpenGenericDependency(Generic<T> dependency)
-			{
-				Dependency = dependency;
-			}
-		}
 
 		//this one is the open generic nested dependency check
 
@@ -219,81 +350,214 @@ namespace Rezolver.Tests
 			Assert.AreEqual(20, result.Value);
 		}
 
-		public class GenericConstructorTarget : RezolveTargetBase
+		[TestMethod]
+		public void ShouldRezolveGenericViaGenericInterface()
 		{
-			private Type _genericType;
+			//first version of this test - where the nested generic interface is different
+			//to the outer generic interface.  At the time of writing, making it the same causes
+			//a circular dependency - see Bug #7
 
-			/// <summary>
-			/// 
-			/// </summary>
-			/// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-			public GenericConstructorTarget(Type genericType)
+			IRezolver rezolver = CreateADefaultRezolver();
+			//we need three dependencies registered - the inner T, an IGenericA<> and 
+			//an IGeneric<IGenericA<T>>.
+			rezolver.Register((25).AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(GenericA<>)), typeof(IGenericA<>));
+			//note here - using MakeGenericType is the only way to get a reference to a type like IFoo<IFoo<>> because
+			//supply an open generic as a type parameter to a generic is not valid.
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(GenericGeneric<>)), typeof(IGeneric<>).MakeGenericType(typeof(IGenericA<>)));
+
+			var result = (IGeneric<IGenericA<int>>)rezolver.Resolve(typeof(IGeneric<IGenericA<int>>));
+
+			Assert.AreEqual(25, result.Value.Value);
+		}
+
+		[TestMethod]
+		public void ShouldResolveClosedGenericViaInterfaceDependency()
+		{
+			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register((30).AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
+			rezolver.Register(ConstructorTarget.Auto<HasGenericInterfaceDependency>());
+			var result = (HasGenericInterfaceDependency)rezolver.Resolve(typeof(HasGenericInterfaceDependency));
+			Assert.IsNotNull(result.Dependency);
+			Assert.AreEqual(30, result.Dependency.Value);
+		}
+
+		[TestMethod]
+		public void ShouldResolveOpenGenericViaInterfaceDependency()
+		{
+			IRezolver rezolver = CreateADefaultRezolver();
+			rezolver.Register((40).AsObjectTarget());
+			rezolver.Register((50d).AsObjectTarget(typeof(double?))); //will that work?
+			rezolver.Register("hello interface generics!".AsObjectTarget());
+			//now register the IGeneric<T>
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(HasOpenGenericInterfaceDependency<>)));
+			var resultWithInt = (HasOpenGenericInterfaceDependency<int>)rezolver.Resolve(typeof(HasOpenGenericInterfaceDependency<int>));
+			var resultWithNullableDouble = (HasOpenGenericInterfaceDependency<double?>)rezolver.Resolve(typeof(HasOpenGenericInterfaceDependency<double?>));
+			var resultWithString = (HasOpenGenericInterfaceDependency<string>)rezolver.Resolve(typeof(HasOpenGenericInterfaceDependency<string>));
+			Assert.IsNotNull(resultWithInt);
+			Assert.IsNotNull(resultWithNullableDouble);
+			Assert.IsNotNull(resultWithString);
+			Assert.IsNotNull(resultWithInt.Dependency);
+			Assert.IsNotNull(resultWithNullableDouble.Dependency);
+			Assert.IsNotNull(resultWithString.Dependency);
+			Assert.AreEqual(40, resultWithInt.Dependency.Value);
+			Assert.AreEqual(50, resultWithNullableDouble.Dependency.Value);
+			Assert.AreEqual("hello interface generics!", resultWithString.Dependency.Value);
+		}
+
+		//now on to the multiple type parameters
+		//first by direct type
+		[TestMethod]
+		public void ShouldResolveGenericTypeWith2Parameters()
+		{
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((60).AsObjectTarget());
+			rezolver.Register("hello multiple".AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic2<,>)));
+			var result = (Generic2<int, string>)rezolver.Resolve(typeof(Generic2<int, string>));
+			Assert.AreEqual(60, result.Value1);
+			Assert.AreEqual("hello multiple", result.Value2);
+
+			var result2 = (Generic2<string, int>)rezolver.Resolve(typeof(Generic2<string, int>));
+			Assert.AreEqual("hello multiple", result2.Value1);
+			Assert.AreEqual(60, result2.Value2);
+		}
+
+		//TODO: resolve by base (DerivedGeneric<T>) and then probably using reversed parameters also.
+		[TestMethod]
+		public void ShouldResolveGenericTypeWith2ParametersByInterface()
+		{
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((70).AsObjectTarget());
+			rezolver.Register("hello multiple interface".AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic2<,>)), typeof(IGeneric2<,>));
+			var result = (IGeneric2<int, string>)rezolver.Resolve(typeof(IGeneric2<int, string>));
+			Assert.AreEqual(70, result.Value1);
+			Assert.AreEqual("hello multiple interface", result.Value2);
+
+			var result2 = (IGeneric2<string, int>)rezolver.Resolve(typeof(IGeneric2<string, int>));
+			Assert.AreEqual("hello multiple interface", result2.Value1);
+			Assert.AreEqual(70, result2.Value2);
+		}
+
+		[TestMethod]
+		public void ShouldResolveGenericTypeWith2ReverseParametersByInterface()
+		{
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((80).AsObjectTarget());
+			rezolver.Register("hello reversed interface".AsObjectTarget());
+			//the thing here being that the type parameters for IGeneric2 are swapped in Generic2Reversed,
+			//so we're testing that the engine can identify that and map the parameters from IGeneric2
+			//back to the type parameters that should be passed to Generic2Reversed
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic2Reversed<,>)), typeof(IGeneric2<,>));
+			var result = (IGeneric2<int, string>)rezolver.Resolve(typeof(IGeneric2<int, string>));
+			Assert.IsInstanceOfType(result, typeof(Generic2Reversed<string, int>));
+			Assert.AreEqual(80, result.Value1);
+			Assert.AreEqual("hello reversed interface", result.Value2);
+		}
+
+		private class GenericImplementsNested<T> : IGeneric<IEnumerable<T>>
+		{
+			public IEnumerable<T> Value
 			{
-				_genericType = genericType;
+				get { throw new NotImplementedException(); }
 			}
+		}
 
-			public override bool SupportsType(Type type)
+		[TestMethod]
+		public void ShouldMapSimpleParameter()
+		{
+			var mappings = MapGenericParameters(typeof(IGeneric<int>), typeof(Generic<>));
+
+			Assert.IsTrue(new[] { typeof(int) }.SequenceEqual(mappings));
+		}
+
+		[TestMethod]
+		public void ShouldMapParameterFromNestedInterface()
+		{
+			var mappings = MapGenericParameters(typeof(IGeneric<IEnumerable<int>>), typeof(GenericImplementsNested<>));
+			Type[] expected = new[] { typeof(int) };
+			Console.WriteLine("Expected: {0}", string.Join(", ", expected.Select(t => t.ToString())));
+			Console.WriteLine("Result: {0}", string.Join(", ", mappings.Select(t => t.ToString())));
+
+			Assert.IsTrue(expected.SequenceEqual(mappings));
+		}
+
+		private Type[] MapGenericParameters(Type requestedType, Type targetType)
+		{
+			var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
+			Type[] finalTypeArguments = targetType.GetGenericArguments();
+			var mappedInterface = targetType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+			if (mappedInterface != null)
 			{
-				if (!base.SupportsType(type))
+				var interfaceTypeParams = mappedInterface.GetGenericArguments();
+				var typeParamPositions = targetType
+					.GetGenericArguments()
+					.Select(t =>{
+						var mapping = DeepSearchTypeParameterMapping(null, mappedInterface, t);
+							
+						//if the mapping is not found, but one or more of the interface type parameters are generic, then 
+						//it's possible that one of those has been passed the type parameter.
+						//the problem with that, fromm our point of view, however, is how then 
+						
+						return new
+						{
+							DeclaredTypeParamPosition = t.GenericParameterPosition,
+							Type = t,
+							//the projection here allows us to get the index of the base interface's generic type parameter
+							//It is required because using the GenericParameterPosition property simply returns the index of the 
+							//type in our declared type, as the type is passed down into the interfaces from the open generic
+							//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
+							//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
+							MappedTo = mapping
+						};
+					}).OrderBy(r => r.MappedTo != null ? r.MappedTo[0] : int.MinValue).ToArray();
+
+				var suppliedTypeArguments = requestedType.GetGenericArguments();
+				Type suppliedArg = null;
+				foreach (var typeParam in typeParamPositions.Where(p => p.MappedTo != null))
 				{
-					//scenario - requested type is a closed generic built from this target's open generic
-					if (!type.IsGenericType)
-						return false;
-
-					var genericType = type.GetGenericTypeDefinition();
-					return genericType == DeclaredType;
+					suppliedArg = suppliedTypeArguments[typeParam.MappedTo[0]];
+					foreach(var index in typeParam.MappedTo.Skip(1))
+					{
+						suppliedArg = suppliedArg.GetGenericArguments()[index];
+					}
+					finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
 				}
-				return true;
 			}
+			return finalTypeArguments;
+		}
 
-			protected override System.Linq.Expressions.Expression CreateExpressionBase(CompileContext context)
+		/// <summary>
+		/// returns a series of type parameter indexes from the baseType parameter which can be used to derive
+		/// the concrete type parameter to be used in a target type, given a fully-closed generic type as the model
+		/// </summary>
+		/// <param name="previousTypeParameterPositions"></param>
+		/// <param name="candidateTypeParameter"></param>
+		/// <param name="targetTypeParameter"></param>
+		/// <returns></returns>
+		private int[] DeepSearchTypeParameterMapping(Stack<int> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
+		{
+			if (baseTypeParameter == targetTypeParameter)
+				return previousTypeParameterPositions.ToArray();
+			if (previousTypeParameterPositions == null)
+				previousTypeParameterPositions = new Stack<int>();
+			if (baseTypeParameter.IsGenericType)
 			{
-				//always create a constructor target from new
-				//basically this class simply acts as a factory for other constructor targets.
-
-				var expectedType = context.TargetType;
-				if (expectedType == null)
-					throw new ArgumentException("GenericConstructorTarget requires a concrete to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", "context");
-				if (!expectedType.IsGenericType)
-					throw new ArgumentException("The compile context requested an instance of a non-generic type to be built.", "context");
-
-				var genericType = expectedType.GetGenericTypeDefinition();
-				Type[] suppliedTypeArguments = Type.EmptyTypes;
-				if (genericType == DeclaredType)
+				var args = baseTypeParameter.GetGenericArguments();
+				int[] result = null;
+				for (int f = 0; f < args.Length; f++)
 				{
-					//will need, at some point to map the type arguments of this target to the type arguments supplied,
-					//but, for the moment, no.
-					suppliedTypeArguments = expectedType.GetGenericArguments();
+					previousTypeParameterPositions.Push(f);
+					result = DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
+					previousTypeParameterPositions.Pop();
+					if (result != null)
+						return result;
 				}
-
-				//make the generic type
-				var typeToBuild = DeclaredType.MakeGenericType(suppliedTypeArguments);
-				//construct the constructortarget
-				var target = ConstructorTarget.Auto(typeToBuild);
-
-				return target.CreateExpression(context);
 			}
-
-			public override System.Type DeclaredType
-			{
-				get { return _genericType; }
-			}
-
-
-			//in order for this to work, we're going to need a dummy type that we can use, because
-			//you can't pass open generics as type parameters.
-			public static GenericConstructorTarget Auto<TGeneric>()
-			{
-				throw new NotImplementedException();
-			}
-
-			internal static IRezolveTarget Auto(Type type)
-			{
-				//I might relax this constraint later - since we could implement partially open generics.
-				if (!type.IsGenericTypeDefinition)
-					throw new ArgumentException("The passed type must be an open generic type");
-				return new GenericConstructorTarget(type);
-			}
+			return null;
 		}
 	}
 }

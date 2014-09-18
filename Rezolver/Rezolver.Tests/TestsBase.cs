@@ -29,5 +29,10 @@ namespace Rezolver.Tests
 			return new RezolveTargetDelegateCompiler().CompileTarget(target, 
 				new CompileContext(rezolver ?? CreateRezolverMock())).GetObject(new RezolveContext(CreateRezolverMock(), targetType));
 		}
+
+		protected static DefaultRezolver CreateADefaultRezolver()
+		{
+			return new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+		}
 	}
 }
