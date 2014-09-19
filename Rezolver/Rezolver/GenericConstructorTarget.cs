@@ -71,7 +71,7 @@ namespace Rezolver
 			}
 			else
 			{
-				if (expectedType.IsInterface && expectedType.IsGenericType)
+				if (expectedType.IsGenericType)
 					finalTypeArguments = MapGenericParameters(expectedType, DeclaredType);
 
 				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
@@ -90,15 +90,18 @@ namespace Rezolver
 		{
 			var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
 			Type[] finalTypeArguments = targetType.GetGenericArguments();
-			var mappedInterface = targetType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
-			if (mappedInterface != null)
+			//check whether it's a base or an interface
+			var mappedBase = requestedTypeGenericDefinition.IsInterface ?
+				targetType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
+				: TypeHelpers.GetAllBases(targetType).SingleOrDefault(b => b.IsGenericType && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+			if (mappedBase != null)
 			{
-				var interfaceTypeParams = mappedInterface.GetGenericArguments();
+				var baseTypeParams = mappedBase.GetGenericArguments();
 				var typeParamPositions = targetType
 					.GetGenericArguments()
 					.Select(t =>
 					{
-						var mapping = DeepSearchTypeParameterMapping(null, mappedInterface, t);
+						var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
 
 						//if the mapping is not found, but one or more of the interface type parameters are generic, then 
 						//it's possible that one of those has been passed the type parameter.

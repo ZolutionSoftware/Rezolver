@@ -9,51 +9,8 @@ namespace Rezolver.Tests
 	[TestClass]
 	public class GenericConstructorTargetTests : TestsBase
 	{
-		#region diagnostic stuff
-		private string GetTypeReportString(Type type)
-		{
-			var genericArgs = type.GetGenericArguments() ?? Type.EmptyTypes;
-			return string.Format("{0}<{1}>:", type.Name, string.Join(", ", genericArgs.Select(typeParam => string.Format("({0}{1})", typeParam.IsGenericParameter ? "*" : "", typeParam.Name))));
-		}
-
-		private void WriteType(Type type, string typeType)
-		{
-			Console.WriteLine("{0} {1}", typeType, GetTypeReportString(type));
-			var interfaces = type.GetInterfaces();
-			if (interfaces.Length != 0)
-			{
-				Console.WriteLine("Interfaces for {0}: ", type);
-				foreach (var i in interfaces)
-				{
-					WriteType(i, "Interface");
-				}
-			}
-			if (type.BaseType != null && type.BaseType != typeof(object))
-				WriteType(type.BaseType, "Base");
-		}
-
-		//[TestMethod]
-		public void ShouldBuildTypeParameterMap()
-		{
-			var types = new[] { typeof(IBaseInterface<>), typeof(IDerivedInterface<,>), typeof(IFinalInterface<,,>),
-				typeof(BaseInterfaceClass<>), typeof(DerivedInterfaceClass<,>), typeof(FinalInterfaceClass<,,>) };
-
-			foreach (var type in types)
-			{
-				WriteType(type, "Type");
-				Console.Write("----------------------------------------------");
-				Console.WriteLine();
-			}
-
-		}
-		#endregion
-
-		public interface IBaseInterface<T1> { }
-		public interface IDerivedInterface<Ta, Tb> : IBaseInterface<Tb> { }
-		public interface IFinalInterface<Tx, Ty, Tz> : IDerivedInterface<Tz, Ty> { }
-		public class BaseInterfaceClass<Ta1> : IBaseInterface<Ta1> { }
-		public class DerivedInterfaceClass<Taa, Tab> : BaseInterfaceClass<Taa>, IDerivedInterface<Taa, Tab> { }
-		public class FinalInterfaceClass<Tax, Tay, Taz> : DerivedInterfaceClass<Tay, Tax>, IFinalInterface<Tax, Tay, Tay> { }
+		//please note - each and every generic is using uniquely named generic types to ensure that no false positives
+		//are reported in the tests.
 
 		public interface IGeneric<T>
 		{
@@ -64,47 +21,47 @@ namespace Rezolver.Tests
 		/// alternative IGeneric-like interface used to simplify the nested open generic scenario
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		public interface IGenericA<T>
+		public interface IGenericA<TA>
 		{
-			T Value { get; }
+			TA Value { get; }
 		}
 
-		public interface IGeneric2<T, U> : IGeneric<U>
+		public interface IGeneric2<T2, U2> : IGeneric<U2>
 		{
-			T Value1 { get; }
-			U Value2 { get; }
+			T2 Value1 { get; }
+			U2 Value2 { get; }
 		}
 
-		public class GenericNoCtor<T> : IGeneric<T>
+		public class GenericNoCtor<T3> : IGeneric<T3>
 		{
-			public T Value { get; set; }
+			public T3 Value { get; set; }
 		}
 
-		public class Generic<T> : IGeneric<T>
+		public class Generic<T4> : IGeneric<T4>
 		{
-			private T _value;
+			private T4 _value;
 
-			public Generic(T value)
+			public Generic(T4 value)
 			{
 				_value = value;
 			}
 
-			public T Value
+			public T4 Value
 			{
 				get { return _value; }
 			}
 		}
 
-		public class GenericA<T> : IGenericA<T>
+		public class GenericA<TA2> : IGenericA<TA2>
 		{
-			private T _value;
+			private TA2 _value;
 
-			public GenericA(T value)
+			public GenericA(TA2 value)
 			{
 				_value = value;
 			}
 
-			public T Value
+			public TA2 Value
 			{
 				get { return _value; }
 			}
@@ -115,79 +72,103 @@ namespace Rezolver.Tests
 		/// 
 		/// pushes the discovery of type parameters by forcing unwrap another nested generic type parameter.
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		public class GenericGeneric<T> : IGeneric<IGeneric<T>>
+		/// <typeparam name="T5"></typeparam>
+		public class GenericGeneric<T5> : IGeneric<IGeneric<T5>>
 		{
 
-			public IGeneric<T> Value
+			public IGeneric<T5> Value
 			{
 				get;
 				private set;
 			}
 
-			public GenericGeneric(IGeneric<T> value)
+			public GenericGeneric(IGeneric<T5> value)
 			{
 				Value = value;
 			}
 		}
 
-		public class Generic2<T, U> : IGeneric2<T, U>
+		public class Generic2<T6, U3> : IGeneric2<T6, U3>
 		{
-			public Generic2(T value1, U value2)
+			public Generic2(T6 value1, U3 value2)
 			{
 				Value1 = value1;
 				Value2 = value2;
 			}
 
-			public T Value1
+			public T6 Value1
 			{
 				get;
 				private set;
 			}
 
-			public U Value2
+			public U3 Value2
 			{
 				get;
 				private set;
 			}
 
 			//explicit implementation of IGeneric<U>
-			U IGeneric<U>.Value
+			U3 IGeneric<U3>.Value
 			{
 				get { return Value2; }
 			}
 		}
 
-		public class Generic2Reversed<T, U> : IGeneric2<U, T>
+		public class DerivedGeneric2<T7, U4> : Generic2<T7, U4> {
+			public DerivedGeneric2(T7 value1, U4 value2) : base(value1, value2) { }
+		}
+
+		public class DoubleDerivedGeneric2<T8, U5> : DerivedGeneric2<T8, U5>
 		{
-			public Generic2Reversed(T value2, U value1)
+			public DoubleDerivedGeneric2(T8 value1, U5 value2) : base(value1, value2) { }
+		}
+
+		public class Generic2Reversed<T9, U6> : IGeneric2<U6, T9>
+		{
+			public Generic2Reversed(T9 value2, U6 value1)
 			{
 				Value1 = value1;
 				Value2 = value2;
 			}
 
-			public U Value1
+			public U6 Value1
 			{
 				get;
 				private set;
 			}
 
-			public T Value2
+			public T9 Value2
 			{
 				get;
 				private set;
 			}
 
 			//explicit implementation of IGeneric<T>
-			T IGeneric<T>.Value
+			T9 IGeneric<T9>.Value
 			{
 				get { return Value2; }
 			}
 		}
 
-		public class DerivedGeneric<T> : Generic<T>
+		public class DerivedGeneric2Reversed<T10, U7> : Generic2<U7, T10>
 		{
-			public DerivedGeneric(T value) : base(value) { }
+			public DerivedGeneric2Reversed(T10 value1, U7 value2) : base(value2, value1) { }
+		}
+
+		public class DoubleDerivedGeneric2Reversed<T11, U8> : DerivedGeneric2Reversed<T11, U8>
+		{
+			public DoubleDerivedGeneric2Reversed(T11 value1, U8 value2) : base(value1, value2) { }
+		}
+
+		public class DerivedGeneric<T12> : Generic<T12>
+		{
+			public DerivedGeneric(T12 value) : base(value) { }
+		}
+
+		public class DoubleDeriveGeneric<T13> : DerivedGeneric<T13>
+		{
+			public DoubleDeriveGeneric(T13 value) : base(value) { }
 		}
 
 		public class HasGenericDependency
@@ -199,10 +180,10 @@ namespace Rezolver.Tests
 			}
 		}
 
-		public class HasOpenGenericDependency<T>
+		public class HasOpenGenericDependency<T14>
 		{
-			public Generic<T> Dependency { get; private set; }
-			public HasOpenGenericDependency(Generic<T> dependency)
+			public Generic<T14> Dependency { get; private set; }
+			public HasOpenGenericDependency(Generic<T14> dependency)
 			{
 				Dependency = dependency;
 			}
@@ -217,10 +198,10 @@ namespace Rezolver.Tests
 			}
 		}
 
-		public class HasOpenGenericInterfaceDependency<T>
+		public class HasOpenGenericInterfaceDependency<T15>
 		{
-			public IGeneric<T> Dependency { get; private set; }
-			public HasOpenGenericInterfaceDependency(IGeneric<T> dependency)
+			public IGeneric<T15> Dependency { get; private set; }
+			public HasOpenGenericInterfaceDependency(IGeneric<T15> dependency)
 			{
 				Dependency = dependency;
 			}
@@ -468,5 +449,68 @@ namespace Rezolver.Tests
 			var result = (Generic<int>)rezolver.Resolve(typeof(Generic<int>));
 			Assert.AreEqual(90, result.Value);
 		}
+
+		[TestMethod]
+		public void ShouldResolveGenericTypeByABaseOfABase()
+		{
+			//testing that the type parameter mapping will walk the inheritance treee correctly
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((100).AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(DoubleDeriveGeneric<>)), typeof(Generic<>));
+			var result = (Generic<int>)rezolver.Resolve(typeof(Generic<int>));
+			Assert.AreEqual(100, result.Value);
+		}
+
+		[TestMethod]
+		public void ShouldResolveGenericWithTwoParametersByABase()
+		{
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((110).AsObjectTarget());
+			rezolver.Register("Hello double parameter base".AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2<,>)), typeof(Generic2<,>));
+			var result = (Generic2<int, string>)rezolver.Resolve(typeof(Generic2<int, string>));
+			Assert.AreEqual(110, result.Value1);
+			Assert.AreEqual("Hello double parameter base", result.Value2);
+		}
+
+		[TestMethod]
+		public void ShouldResolveGenericWithTwoParametersByABaseOfABase()
+		{
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((120).AsObjectTarget());
+			rezolver.Register("Hello double parameter base of a base".AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2<,>)), typeof(Generic2<,>));
+			var result = (Generic2<int, string>)rezolver.Resolve(typeof(Generic2<int, string>));
+			Assert.AreEqual(120, result.Value1);
+			Assert.AreEqual("Hello double parameter base of a base", result.Value2);
+		}
+
+		[TestMethod]
+		public void ShouldResolveGenericWithTwoParametersReversedByItsBase()
+		{
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((130).AsObjectTarget());
+			rezolver.Register("Hello double parameter reversed base".AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2Reversed<,>)), typeof(Generic2<,>));
+			var result = (Generic2<int, string>)rezolver.Resolve(typeof(Generic2<int, string>));
+			Assert.IsInstanceOfType(result, typeof(DerivedGeneric2Reversed<string, int>));
+			Assert.AreEqual(130, result.Value1);
+			Assert.AreEqual("Hello double parameter reversed base", result.Value2);
+		}
+
+		[TestMethod]
+		public void ShouldResolveGenericWithTwoParametersReversedByABaseOfItsBase()
+		{
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register((140).AsObjectTarget());
+			rezolver.Register("Hello double parameter reversed base of a base".AsObjectTarget());
+			rezolver.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2Reversed<,>)), typeof(Generic2<,>));
+			var result = (Generic2<int, string>)rezolver.Resolve(typeof(Generic2<int, string>));
+			Assert.IsInstanceOfType(result, typeof(DoubleDerivedGeneric2Reversed<string, int>));
+			Assert.AreEqual(140, result.Value1);
+			Assert.AreEqual("Hello double parameter reversed base of a base", result.Value2);
+		}
+
+		//should we be thinking about covariance?
 	}
 }
