@@ -90,6 +90,12 @@ namespace Rezolver
 			{
 				throw new NotImplementedException();
 			}
+
+
+			public void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type type = null, RezolverPath path = null, bool append = true)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
 		}
 
 		private Type _requestedType;

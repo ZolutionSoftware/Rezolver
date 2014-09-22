@@ -86,6 +86,7 @@
     <Compile Include="LifetimeRezolverScopeTests.cs" />
     <Compile Include="ScopedSingletonTargetTests.cs" />
     <Compile Include="ConditionalRewriterTest.cs" />
+    <Compile Include="MultipleRegistrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">

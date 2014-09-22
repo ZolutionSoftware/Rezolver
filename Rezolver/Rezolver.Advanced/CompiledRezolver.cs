@@ -128,6 +128,11 @@ namespace Rezolver
 			throw new NotSupportedException();
 		}
 
+		public void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type type = null, RezolverPath path = null, bool append = true)
+		{
+			throw new NotSupportedException();
+		}
+
 		public IRezolveTarget Fetch(Type type, string name = null)
 		{
 			throw new NotSupportedException();

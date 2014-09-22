@@ -96,6 +96,11 @@ namespace Rezolver
 			Builder.Register(target, type, path);
 		}
 
+		public void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type type = null, RezolverPath path = null, bool append = true)
+		{
+			Builder.RegisterMultiple(targets, type, path, append);
+		}
+
 		public virtual IRezolveTarget Fetch(Type type, string name = null)
 		{
 			return Builder.Fetch(type, name);

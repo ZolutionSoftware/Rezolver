@@ -21,6 +21,15 @@ namespace Rezolver
 		/// new named rezolvers could be created to accommodate the registration.</param>
 		void Register(IRezolveTarget target, Type type = null, RezolverPath path = null);
 		/// <summary>
+		/// Called to register multiple rezolve targets against a shared contract, optionally replacing any 
+		/// existing registration(s) or extending them.  In the case of a builder that is a child of another, 
+		/// </summary>
+		/// <param name="targets"></param>
+		/// <param name="commonServiceType"></param>
+		/// <param name="path"></param>
+		/// <param name="append"></param>
+		void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type commonServiceType = null, RezolverPath path = null, bool append=true);
+		/// <summary>
 		/// Searches for a target for a particular type and optionally
 		/// under a particular named Builder.
 		/// </summary>
@@ -50,5 +59,14 @@ namespace Rezolver
 			var target = (adapter ?? RezolveTargetAdapter.Default).GetRezolveTarget(expression);
 			builder.Register(target, type ?? typeof(T), path);
 		}
+
+		//public static void RegisterMultiple(this IRezolverBuilder builder, Type targetType = null, RezolverPath path = null, bool append = true, params IRezolveTarget[] targets)
+		//{
+		//	builder.MustNotBeNull("builder");
+		//	targets.MustNotBeNull("targets");
+		//	if (targets.Length == 0)
+		//		throw new ArgumentException("You must provide at least one target to be registered", "targets");
+		//	builder.RegisterMultiple(((IEnumerable<IRezolveTarget>)targets), targetType, path, append);
+		//}
 	}
 }

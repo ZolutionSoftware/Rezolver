@@ -140,15 +140,28 @@ namespace Rezolver.Tests
 			Assert.AreSame(target, fetched);
 		}
 
-		//[TestMethod]
-		//public void ShouldComputeGenericTypeSearchList()
-		//{
-		//	var targetType = typeof(IEnumerable<>).MakeGenericType(typeof(IEnumerable<int>));
-		//	var expectedSequence = new[] { typeof(IEnumerable<IEnumerable<int>>), 
-		//	typeof(IEnumerable<>).MakeGenericType(typeof(IEnumerable<>)), typeof(IEnumerable<>)};
+		public interface IMultipleRegistration
+		{
 
-		//	var sequence = DeriveGenericTypeSearchList(targetType).ToArray();
-		//	Assert.IsTrue(sequence.SequenceEqual(expectedSequence));
-		//}
+		}
+
+		public class MultipleRegistration1 : IMultipleRegistration 
+		{
+		}
+
+		public class MultipleRegistration2 : IMultipleRegistration
+		{
+		}
+
+		[TestMethod]
+		public void ShouldSupportRegisteringMultipleImplementationsOfTheSameType()
+		{
+			IRezolverBuilder builder = new RezolverBuilder();
+			builder.RegisterMultiple(new[] { ConstructorTarget.Auto<MultipleRegistration1>(), ConstructorTarget.Auto<MultipleRegistration1>()}, typeof(IMultipleRegistration));
+			//builder.RegisterMultiple(ConstructorTarget.Auto<MultipleRegistration2>(), targetType: typeof(IMultipleRegistration));
+
+			var fetched = builder.Fetch(typeof(IEnumerable<IMultipleRegistration>));
+			Assert.IsNotNull(fetched);
+		}
 	}
 }

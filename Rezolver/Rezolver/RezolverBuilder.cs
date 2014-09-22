@@ -4,7 +4,9 @@ using Rezolver.Resources;
 
 namespace Rezolver
 {
+	using System.Collections.ObjectModel;
 	using System.Linq;
+	using System.Linq.Expressions;
 	using RegistrationEntry = KeyValuePair<RezolveContext, IRezolveTarget>;
 	public class RezolverBuilder : IRezolverBuilder
 	{
@@ -21,7 +23,59 @@ namespace Rezolver
 
 		#endregion
 
+		private class MultipleRezolveTarget : RezolveTargetBase
+		{
+			private List<IRezolveTarget> _targets;
+			private Type _commonServiceType;
 
+			public static Type MakeTargetType(Type commonServiceType)
+			{
+				return commonServiceType.MakeArrayType();
+			}
+
+			public static Type MakeEnumerableType(Type commonServiceType)
+			{
+				return typeof(IEnumerable<>).MakeGenericType(commonServiceType);
+			}
+
+			public MultipleRezolveTarget(IEnumerable<IRezolveTarget> targets, Type commonServiceType)
+			{
+				_targets = new List<IRezolveTarget>(targets);
+				_commonServiceType = commonServiceType;
+				//TODO: potentially add some discovery of a shared contract/base type if declaredType is null.
+			}
+
+			public void AddTargets(IEnumerable<IRezolveTarget> targets, bool replace)
+			{
+				if (replace)
+					_targets.Clear();
+				_targets.AddRange(targets);
+			}
+
+			protected override System.Linq.Expressions.Expression CreateExpressionBase(CompileContext context)
+			{
+				return Expression.NewArrayInit(_commonServiceType, _targets.Select(t => t.CreateExpression(new CompileContext(context, _commonServiceType, true))));
+			}
+
+			public override bool SupportsType(Type type)
+			{
+				if (base.SupportsType(type))
+					return true;
+
+				//we also support:
+				//List<[DeclaredType]>
+				//Collection<[DeclaredType]>
+				//IEnumerable<[DeclaredType]>
+				return type == typeof(List<>).MakeGenericType(_commonServiceType)
+					|| type == typeof(Collection<>).MakeGenericType(_commonServiceType)
+					|| type == typeof(IEnumerable<>).MakeGenericType(_commonServiceType);
+			}
+
+			public override Type DeclaredType
+			{
+				get { return MakeTargetType(_commonServiceType); }
+			}
+		}
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
@@ -53,6 +107,52 @@ namespace Rezolver
 				throw new ArgumentException(string.Format(Exceptions.TargetDoesntSupportType_Format, type), "target");
 		}
 
+		public void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type commonServiceType = null, RezolverPath path = null, bool append = true)
+		{
+			targets.MustNotBeNull("targets");
+			var targetArray = targets.ToArray();
+			if (targets.Any(t => t == null))
+				throw new ArgumentException("All targets must be non-null", "targets");
+
+			if (path != null)
+			{
+				if (path.Next == null)
+					throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
+
+				//get the named Builder.  If it doesn't exist, create one.
+				var builder = GetNamedBuilder(path, true);
+				//note here we don't pass the name through.
+				//when we support named scopes, we would be lopping off the first item in a hierarchical name to allow for the recursion.
+				builder.RegisterMultiple(targets, commonServiceType);
+				return;
+			}
+
+			//for now I'm going to take the common type from the first target.
+			if (commonServiceType == null)
+			{
+				commonServiceType = targetArray[0].DeclaredType;
+			}
+
+			if (targetArray.All(t => t.SupportsType(commonServiceType)))
+			{
+				IRezolveTarget existing = null;
+				MultipleRezolveTarget multipleTarget = null;
+				Type targetType = MultipleRezolveTarget.MakeEnumerableType(commonServiceType);
+
+				if (_targets.TryGetValue(targetType, out existing))
+				{
+					multipleTarget = existing as MultipleRezolveTarget;
+					if (multipleTarget == null)
+						throw new ArgumentException(string.Format(Exceptions.TypeIsAlreadyRegistered, commonServiceType), "type");
+					multipleTarget.AddTargets(targets, !append);
+				}
+				else
+					_targets[targetType] = multipleTarget = new MultipleRezolveTarget(targets, commonServiceType);
+			}
+			else
+				throw new ArgumentException(string.Format(Exceptions.TargetDoesntSupportType_Format, commonServiceType), "target");
+		}
+
 		/// <summary>
 		/// Called to create a new instance of a Named Builder with the given name, optionally for the given target and type.
 		/// </summary>
@@ -81,10 +181,10 @@ namespace Rezolver
 
 			IRezolveTarget target;
 			var result = _targets.TryGetValue(type, out target);
-			if(!result && type.IsGenericType)
+			if (!result && type.IsGenericType)
 			{
 				//generate a generic type list for searching
-				foreach(var searchType in DeriveGenericTypeSearchList(type))
+				foreach (var searchType in DeriveGenericTypeSearchList(type))
 				{
 					if (_targets.TryGetValue(searchType, out target))
 						return target;
@@ -151,7 +251,7 @@ namespace Rezolver
 			public IEnumerator<RegistrationEntry> GetEnumerator()
 			{
 				return Enumerate().GetEnumerator();
-			}	
+			}
 
 			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 			{
