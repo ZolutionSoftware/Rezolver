@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">
-      <Project>{53870bd3-88ea-404d-8ab2-9bcb7040f1f6}</Project>
+      <Project>{53870BD3-88EA-404D-8AB2-9BCB7040F1F6}</Project>
       <Name>Rezolver</Name>
     </ProjectReference>
   </ItemGroup>

@@ -82,5 +82,25 @@ namespace Rezolver
 		{
 			return rezolver.Resolve(new RezolveContext(rezolver, requestedType, name, scope));
 		}
+
+		public static bool TryResolve(this IRezolver rezolver, Type type, out object result)
+		{
+			return rezolver.TryResolve(new RezolveContext(rezolver, type), out result);
+		}
+
+		public static bool TryResolve(this IRezolver rezolver, Type type, string name, out object result)
+		{
+			return rezolver.TryResolve(new RezolveContext(rezolver, type, name), out result);
+		}
+
+		public static bool TryResolve(this IRezolver rezolver, Type type, ILifetimeScopeRezolver scope, out object result)
+		{
+			return rezolver.TryResolve(new RezolveContext(rezolver, type, scope), out result);
+		}
+
+		public static bool TryResolve(this IRezolver rezolver, Type type, string name, ILifetimeScopeRezolver scope, out object result)
+		{
+			return rezolver.TryResolve(new RezolveContext(rezolver, type, name, scope), out result);
+		}
 	}
 }

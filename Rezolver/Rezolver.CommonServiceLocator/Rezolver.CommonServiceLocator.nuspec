@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Rezolver</id>
-    <version>0.3.1.1</version>
+    <id>Rezolver.CommonServiceLocator</id>
+    <version>1.0</version>
     <title>Rezolver</title>
     <authors>Zolution Software Ltd</authors>
     <owners>LordZoltan</owners>
@@ -15,9 +15,8 @@
     <copyright>Copyright Zolution Software Ltd 2014</copyright>
     <tags>ioc di portable</tags>
   </metadata>
+	TODO: Dependency on CommonServiceLocator package.
 	<files>
-		<file src="bin\Release\rezolver.*" target="lib\portable-net45+sl50+win+wp80" />
-		<file src="bin\Release\rezolver.*" target="lib\net45" />
-		<file src="..\Rezolver.Advanced\bin\Release\Rezolver.Advanced.*" target="lib\net45" />
+		<file src="bin\Release\rezolver.commonservicelocator.**" target="lib\portable-net45+sl50+win+wp80" />
 	</files>
 </package>
