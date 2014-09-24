@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.Advanced", "Rezolv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.CommonServiceLocator", "Rezolver.CommonServiceLocator\Rezolver.CommonServiceLocator.csproj", "{CE8F94D0-0FE1-416F-8F06-4BB01302F6FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.Mvc5", "Rezolver.Mvc5\Rezolver.Mvc5.csproj", "{894B72F8-DF08-47C4-BC4A-64EF48777AB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{CE8F94D0-0FE1-416F-8F06-4BB01302F6FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE8F94D0-0FE1-416F-8F06-4BB01302F6FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE8F94D0-0FE1-416F-8F06-4BB01302F6FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{894B72F8-DF08-47C4-BC4A-64EF48777AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{894B72F8-DF08-47C4-BC4A-64EF48777AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{894B72F8-DF08-47C4-BC4A-64EF48777AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{894B72F8-DF08-47C4-BC4A-64EF48777AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

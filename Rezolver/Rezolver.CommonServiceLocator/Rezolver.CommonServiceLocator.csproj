@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="package.bat" />
     <None Include="packages.config" />
     <None Include="Rezolver.CommonServiceLocator.nuspec">
       <SubType>Designer</SubType>

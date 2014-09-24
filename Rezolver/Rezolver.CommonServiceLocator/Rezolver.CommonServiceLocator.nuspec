@@ -1,22 +1,22 @@
-<?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>Rezolver.CommonServiceLocator</id>
-    <version>1.0</version>
-    <title>Rezolver</title>
-    <authors>Zolution Software Ltd</authors>
-    <owners>LordZoltan</owners>
-    <!--<licenseUrl>http://</licenseUrl>-->
-    <projectUrl>https://github.com/LordZoltan/Rezolver</projectUrl>
-    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>High performance portable IOC container for .Net</description>
-    <releaseNotes>Early, but usable, build.  Rich registration API is not present yet, but Constructors, IEnumerables, Properties, Generics and Child containers are all supported.</releaseNotes>
-    <copyright>Copyright Zolution Software Ltd 2014</copyright>
-    <tags>ioc di portable</tags>
-  </metadata>
-	TODO: Dependency on CommonServiceLocator package.
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Rezolver.CommonServiceLocator</id>
+        <version>1.0</version>
+        <title>Rezolver Common Service Locator implementation</title>
+        <authors>Zolution Software Ltd</authors>
+        <owners>LordZoltan</owners>
+        <projectUrl>https://github.com/LordZoltan/Rezolver</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>High performance portable IOC container for .Net</description>
+        <releaseNotes>Early, but usable, build.  Rich registration API is not present yet, but Constructors, IEnumerables, Properties, Generics and Child containers are all supported.</releaseNotes>
+        <copyright>Copyright Zolution Software Ltd 2014</copyright>
+        <tags>ioc di portable</tags>
+        <dependencies>
+            <dependency id="Rezolver" version="0.3.1.2" />
+        </dependencies>
+    </metadata>
 	<files>
-		<file src="bin\Release\rezolver.commonservicelocator.**" target="lib\portable-net45+sl50+win+wp80" />
+		<file src="bin\Release\rezolver.commonservicelocator.*" target="lib\portable-net45+sl50+win+wp80" />
 	</files>
 </package>
