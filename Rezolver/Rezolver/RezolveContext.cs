@@ -70,11 +70,6 @@ namespace Rezolver
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 
-			public IRezolveTarget Fetch<T>(string name = null)
-			{
-				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
-			}
-
 			public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 			{
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));

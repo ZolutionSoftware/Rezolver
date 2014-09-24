@@ -36,9 +36,7 @@ namespace Rezolver
 		/// <param name="type">Required.  The type to be searched.</param>
 		/// <param name="name">Optional.  The named builder to be searched.</param>
 		/// <returns></returns>
-		IRezolveTarget Fetch(Type type, string name = null);
-		IRezolveTarget Fetch<T>(string name = null);
-		
+		IRezolveTarget Fetch(Type type, string name = null);		
 
 		/// <summary>
 		/// Retrieves, after optionally creating, a named Builder from this Builder.
@@ -48,6 +46,14 @@ namespace Rezolver
 		///   want it/them to be created.</param>
 		/// <returns>Null if no Builder is found.  Otherwise the Builder that was found or created.</returns>
 		INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false);
+		/// <summary>
+		/// Searches for the best-matched named child builder, or none if not applicable.
+		/// 
+		/// No creation on the fly is supported, obviously.
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path);
 	}
 
 	public static class RezolverBuilderExtensions

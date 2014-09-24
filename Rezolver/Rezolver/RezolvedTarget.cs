@@ -89,7 +89,13 @@ namespace Rezolver
 			//target, or throw an exception.
 
 			//now we try and fetch the target from the rezolver that is passed in the context
-			var staticTarget = context.Rezolver.Fetch(DeclaredType, nameCompiled != null ? (string)nameCompiled.GetObject(new RezolveContext(context.Rezolver, _resolveNameTarget.DeclaredType)) : null);
+			var nameStatic = nameCompiled != null ? (string)nameCompiled.GetObject(new RezolveContext(context.Rezolver, _resolveNameTarget.DeclaredType)) : null;
+			var staticTarget = context.Rezolver.Fetch(DeclaredType, nameStatic);
+			if(staticTarget == null && nameStatic == null)
+			{
+				IChildRezolverBuilder childBuilder = context.Rezolver.
+				var parent = context.Rezolver.Pare
+			}
 			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IRezolver));
 			var finalType = context.TargetType ?? DeclaredType;
 			var finalTypeExpr = Expression.Constant(finalType, typeof(Type));

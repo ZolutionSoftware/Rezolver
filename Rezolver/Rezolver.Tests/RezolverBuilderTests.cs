@@ -21,9 +21,6 @@ namespace Rezolver.Tests
 			r.Register(t, type: typeof(object));
 			var t2 = r.Fetch(typeof(object));
 			Assert.AreSame(t, t2);
-
-			var t3 = r.Fetch<object>();
-			Assert.AreSame(t, t3);
 		}
 
 		[TestMethod]

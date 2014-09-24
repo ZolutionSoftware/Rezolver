@@ -98,5 +98,12 @@ namespace Rezolver
 				return _next = Items[_currentItem + 1];
 			}
 		}
+
+		public override string ToString()
+		{
+			if (Next != null)
+				return string.Join(PathSeparator, Items.Skip(_currentItem + 1));
+			return "";
+		}
 	}
 }

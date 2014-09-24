@@ -106,11 +106,6 @@ namespace Rezolver
 			return Builder.Fetch(type, name);
 		}
 
-		public virtual IRezolveTarget Fetch<T>(string name = null)
-		{
-			return Builder.Fetch(typeof(T), name);
-		}
-
 		public virtual INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
 			//if the caller potentially wants a new named Builder, we don't support the call.

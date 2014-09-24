@@ -193,11 +193,6 @@ namespace Rezolver
 			return target;
 		}
 
-		public IRezolveTarget Fetch<T>(string name = null)
-		{
-			return Fetch(typeof(T), name);
-		}
-
 		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
 			if (!path.MoveNext())
@@ -213,6 +208,23 @@ namespace Rezolver
 			}
 			//then walk to the next part of the path and create it if need be
 			return path.Next != null ? namedBuilder.GetNamedBuilder(path, true) : namedBuilder;
+		}
+
+		public INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path)
+		{
+			//retrieves the last builder found along the path supplied.  If the path is a.b.c and
+			//we only get to a.b, then you'll get the a.b builder.
+			//If the method returns null, then this builder doesn't have a first-level child with the name.
+			if (!path.MoveNext())
+				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
+
+			INamedRezolverBuilder namedBuilder;
+
+			if (!_namedBuilders.TryGetValue(path.Current, out namedBuilder))
+				return null;
+			
+			//then walk to the next part of the path and carry on
+			return path.Next != null ? namedBuilder.GetBestNamedBuilder(path) : namedBuilder;
 		}
 
 		public IEnumerable<RegistrationEntry> AllRegistrations
@@ -259,7 +271,7 @@ namespace Rezolver
 			}
 		}
 
-		public IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
+		private IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
 		{
 			//using an iteratoor method is the best for performance, but fetching type
 			//registrations from a rezolver builder is an operation that, so long as a caching

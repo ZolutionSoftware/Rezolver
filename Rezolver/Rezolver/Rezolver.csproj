@@ -73,6 +73,7 @@
     <Compile Include="INamedRezolverBuilder.cs" />
     <Compile Include="IRezolverBuilder.cs" />
     <Compile Include="LifetimeScopeRezolver.cs" />
+    <Compile Include="LoggingRezolver.cs" />
     <Compile Include="PropertyOrFieldBinding.cs" />
     <Compile Include="RezolveContext.cs" />
     <Compile Include="RezolveContextExpressionHelper.cs" />

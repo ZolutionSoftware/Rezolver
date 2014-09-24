@@ -138,11 +138,6 @@ namespace Rezolver
 			throw new NotSupportedException();
 		}
 
-		public IRezolveTarget Fetch<T>(string name = null)
-		{
-			throw new NotSupportedException();
-		}
-
 		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
 			throw new NotSupportedException();

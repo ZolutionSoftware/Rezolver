@@ -6,7 +6,10 @@ namespace Rezolver
 	/// The final compiled rezolver built from an IRezolverBuilder
 	/// Note that the interface also implements the IRezolverBuilder interface in order that it
 	/// can provide both concrete instances and the means by which to build them, in order to 
-	/// allow separate rezolvers to chain.
+	/// allow separate rezolvers to chain.  Rezolvers are not expected to implement IRezolverBuilder directly,
+	/// however, they are expected to proxy the inner <see cref="Builder"/> - however consumers looking to 
+	/// get registrations of a rezolver should always do it through the rezolver, in case of any special logic
+	/// being applied outside of the builder itself.
 	/// </summary>
 	public interface IRezolver : IRezolverBuilder
 	{
