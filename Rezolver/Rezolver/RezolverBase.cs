@@ -49,7 +49,7 @@ namespace Rezolver
 
 		public abstract IRezolveTargetCompiler Compiler { get; }
 
-		protected abstract IRezolverBuilder Builder { get; }
+		public abstract IRezolverBuilder Builder { get; }
 
 		public virtual object Resolve(RezolveContext context)
 		{
@@ -90,33 +90,9 @@ namespace Rezolver
 			return Builder.Fetch(context.RequestedType, context.Name) != null;
 		}
 
-		public virtual void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
-		{
-			//you are not allowed to register targets directly into a rezolver by default
-			Builder.Register(target, type, path);
-		}
-
-		public void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type type = null, RezolverPath path = null, bool append = true)
-		{
-			Builder.RegisterMultiple(targets, type, path, append);
-		}
-
-		public virtual IRezolveTarget Fetch(Type type, string name = null)
-		{
-			return Builder.Fetch(type, name);
-		}
-
-		public virtual INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
-		{
-			//if the caller potentially wants a new named Builder, we don't support the call.
-			if (create) throw new NotSupportedException();
-
-			return Builder.GetNamedBuilder(path, false);
-		}
-
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
-			IRezolveTarget target = Fetch(context.RequestedType, context.Name);
+			IRezolveTarget target = Builder.Fetch(context.RequestedType, context.Name);
 			
 			if (target != null)
 				return Compiler.CompileTarget(target, new CompileContext(this, context.RequestedType));
@@ -127,11 +103,6 @@ namespace Rezolver
 		protected virtual ICompiledRezolveTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
 		{
 			return GetMissingTarget(context.RequestedType);
-		}
-
-		public IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations
-		{
-			get { return Builder.AllRegistrations; }
 		}
 	}
 }

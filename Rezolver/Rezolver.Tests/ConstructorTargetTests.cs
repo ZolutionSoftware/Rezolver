@@ -135,8 +135,10 @@ namespace Rezolver.Tests
 			var target = ConstructorTarget.For(context => new NoDefaultConstructor(context.Resolve<int>()), RezolveTargetAdapter.Instance);
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var rezolverMock = new Mock<IRezolver>();
+			var builderMock = new Mock<IRezolverBuilder>();
 			var compiler = new RezolveTargetDelegateCompiler();
-			rezolverMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
+			builderMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
+			rezolverMock.Setup(s => s.Builder).Returns(builderMock.Object);
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 			rezolverMock.VerifyAll();
@@ -148,8 +150,10 @@ namespace Rezolver.Tests
 			//basically the same as above - except this doesn't provide the constructor call explicitly.
 			var target = ConstructorTarget.Auto<NoDefaultConstructor>();
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
+			var builderMock = new Mock<IRezolverBuilder>();
 			var rezolverMock = new Mock<IRezolver>();
-			rezolverMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
+			builderMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
+			rezolverMock.Setup(s => s.Builder).Returns(builderMock.Object);
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 			rezolverMock.VerifyAll();
@@ -164,13 +168,12 @@ namespace Rezolver.Tests
 			var intTarget = NoDefaultConstructor.ExpectedComplexNamedRezolveCall.AsObjectTarget();
 			const string rezolveName = "ThisIsComplicated";
 			var stringTarget = rezolveName.AsObjectTarget();
-			
+			var builderMock = new Mock<IRezolverBuilder>();
 			var rezolverMock = new Mock<IRezolver>();
-			//scopeMock.Setup(s => s.CanResolve(typeof (int), rezolveName, null)).Returns(true).Verifiable();
-			//scopeMock.Setup(s => s.CanResolve(typeof (string), null, null)).Returns(true).Verifiable();
 
-			rezolverMock.Setup(s => s.Fetch(typeof (string), null)).Returns(stringTarget);
-			rezolverMock.Setup(s => s.Fetch(typeof (int), rezolveName)).Returns(intTarget);
+			builderMock.Setup(s => s.Fetch(typeof (string), null)).Returns(stringTarget);
+			builderMock.Setup(s => s.Fetch(typeof(int), rezolveName)).Returns(intTarget);
+			rezolverMock.Setup(s => s.Builder).Returns(builderMock.Object);
 			rezolverMock.Setup(s => s.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			//scopeMock.Setup(s => s.Resolve(typeof(string), null, null)).Returns(rezolveName).Verifiable();
 			//scopeMock.Setup(s => s.Resolve(typeof(int), rezolveName, null)).Returns(NoDefaultConstructor.ExpectedComplexRezolveCall).Verifiable();

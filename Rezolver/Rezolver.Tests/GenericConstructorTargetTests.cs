@@ -234,8 +234,10 @@ namespace Rezolver.Tests
 		public void ShouldCreateAGenericClass()
 		{
 			//use a rezolver mock for cross-referencing the int parameter
+			var builderMock = new Mock<IRezolverBuilder>();
 			var rezolverMock = new Mock<IRezolver>();
-			rezolverMock.Setup(r => r.Fetch(typeof(int), It.IsAny<string>())).Returns((1).AsObjectTarget());
+			builderMock.Setup(r => r.Fetch(typeof(int), It.IsAny<string>())).Returns((1).AsObjectTarget());
+			rezolverMock.Setup(r => r.Builder).Returns(builderMock.Object);
 			rezolverMock.Setup(r => r.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			IRezolveTarget t = GenericConstructorTarget.Auto(typeof(Generic<>));
 			Assert.IsNotNull(t);

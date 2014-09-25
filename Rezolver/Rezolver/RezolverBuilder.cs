@@ -166,20 +166,25 @@ namespace Rezolver
 			return new NamedRezolverBuilder(this, name);
 		}
 
-		public IRezolveTarget Fetch(Type type, string name)
+		public virtual IRezolveTarget Fetch(Type type, string name)
 		{
 			type.MustNotBeNull("type");
-
+			IRezolveTarget target;
 			if (name != null)
 			{
-				INamedRezolverBuilder namedBuilder;
-				_namedBuilders.TryGetValue(name, out namedBuilder);
-
-				// ReSharper disable once PossibleNullReferenceException
-				return namedBuilder == null ? null : namedBuilder.Fetch(type);
+				var namedBuilder = GetBestNamedBuilder(name);
+				if (namedBuilder != null)
+				{
+					return namedBuilder.Fetch(type);
+					//while(target == null && ((namedBuilder = namedBuilder.ParentBuilder as INamedRezolverBuilder) != null))
+					//{
+					//	target = parentNamedBuilder.Fetch(type);
+					//}
+					//if (target != null)
+					//	return target;
+				}
 			}
 
-			IRezolveTarget target;
 			var result = _targets.TryGetValue(type, out target);
 			if (!result && type.IsGenericType)
 			{
@@ -221,8 +226,10 @@ namespace Rezolver
 			INamedRezolverBuilder namedBuilder;
 
 			if (!_namedBuilders.TryGetValue(path.Current, out namedBuilder))
-				return null;
-			
+				return this as INamedRezolverBuilder; //if this is a named builder that we've descended to, then 
+																							//this is the best match.  A route RezolverBuilder (if using
+																							//the default types) will return null here.
+
 			//then walk to the next part of the path and carry on
 			return path.Next != null ? namedBuilder.GetBestNamedBuilder(path) : namedBuilder;
 		}
@@ -273,11 +280,9 @@ namespace Rezolver
 
 		private IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
 		{
-			//using an iteratoor method is the best for performance, but fetching type
+			//using an iterator method is not the best for performance, but fetching type
 			//registrations from a rezolver builder is an operation that, so long as a caching
 			//resolver is used, shouldn't be repeated often.
-
-			//yield return type;
 
 			if (!type.IsGenericType || type.IsGenericTypeDefinition)
 			{
@@ -301,6 +306,7 @@ namespace Rezolver
 		static IEnumerable<IEnumerable<T>> CartesianProduct<T>
 		(IEnumerable<IEnumerable<T>> sequences)
 		{
+			//thank you Eric Lippert...
 			IEnumerable<IEnumerable<T>> emptyProduct =
 				new[] { Enumerable.Empty<T>() };
 			return sequences.Aggregate(

@@ -33,6 +33,11 @@ namespace Rezolver
 				get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
 			}
 
+			public IRezolverBuilder Builder
+			{
+				get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
+			}
+
 			public bool CanResolve(RezolveContext context)
 			{
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
@@ -65,31 +70,9 @@ namespace Rezolver
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 
-			public IRezolveTarget Fetch(Type type, string name = null)
-			{
-				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
-			}
-
-			public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
-			{
-				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
-			}
-
-			public IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations
-			{
-				get { throw new NotImplementedException(); }
-			}
-
-
 			public ILifetimeScopeRezolver CreateLifetimeScope(IRezolver overridingRezolver)
 			{
 				throw new NotImplementedException();
-			}
-
-
-			public void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type type = null, RezolverPath path = null, bool append = true)
-			{
-				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 		}
 

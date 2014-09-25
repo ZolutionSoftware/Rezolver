@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Rezolver
 {
@@ -11,22 +13,30 @@ namespace Rezolver
 	/// get registrations of a rezolver should always do it through the rezolver, in case of any special logic
 	/// being applied outside of the builder itself.
 	/// </summary>
-	public interface IRezolver : IRezolverBuilder
+	public interface IRezolver
 	{
+		/// <summary>
+		/// Provides access to the builder for this rezolver - so that registrations can be added to the rezolver after
+		/// conostruction.  It is not a requirement of a rezolver to use a builder to act as source of registrations, therefore 
+		/// if a builder is not applicable to this instance, either return a stub instance that always returns notargets, or
+		/// throw a NotSupportException.
+		/// </summary>
+		IRezolverBuilder Builder { get; }
 		/// <summary>
 		/// Provides access to the compiler used by this rezolver in turning IRezolveTargets into
 		/// ICompiledRezolveTargets.
 		/// </summary>
 		IRezolveTargetCompiler Compiler { get; }
 		/// <summary>
-		/// Standard version of the CanResolve operation.
+		/// Returns true if a resolve operation for the given context will succeed.
+		/// 
+		/// If you're going to be calling resoolve immediately afterwards, consider using the TryResolve method instead, 
+		/// which allows you to check and obtain the result at the same time.
 		/// </summary>
 		/// <param name="type"></param>
 		/// <param name="name"></param>
 		/// <param name="dynamic"></param>
 		/// <returns></returns>
-		//bool CanResolve(Type type, string name = null, IRezolver @dynamic = null);
-
 		bool CanResolve(RezolveContext context);
 
 		/// <summary>
@@ -104,6 +114,70 @@ namespace Rezolver
 		public static bool TryResolve(this IRezolver rezolver, Type type, string name, ILifetimeScopeRezolver scope, out object result)
 		{
 			return rezolver.TryResolve(new RezolveContext(rezolver, type, name, scope), out result);
+		}
+
+		//registration extensions - wrap around the resolver's Builder object
+
+		/// <summary>
+		/// Registers a target, optionally for a particular target type and optionally
+		/// under a particular name.
+		/// </summary>
+		/// <param name="target">Required.  The target to be registereed</param>
+		/// <param name="type">Optional.  The type thee target is to be registered against, if different
+		/// from the declared type on the <paramref name="target"/></param>
+		/// <param name="path">Optional.  The path under which this target is to be registered.  One or more
+		/// new named rezolvers could be created to accommodate the registration.</param>
+		public static void Register(this IRezolver rezolver, IRezolveTarget target, Type type = null, RezolverPath path = null)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			try
+			{
+				if (rezolver.Builder == null)
+					throw new ArgumentException("rezolver's Builder property must be non-null");
+			}
+			catch(NotSupportedException ex)
+			{
+				throw new ArgumentException("rezolver does not registration through its IRezolverBuilder", ex);
+			}
+			rezolver.Builder.Register(target, type, path);
+		}
+
+		/// <summary>
+		/// Called to register multiple rezolve targets against a shared contract, optionally replacing any 
+		/// existing registration(s) or extending them.  In the case of a builder that is a child of another, 
+		/// </summary>
+		/// <param name="targets"></param>
+		/// <param name="commonServiceType"></param>
+		/// <param name="path"></param>
+		/// <param name="append"></param>
+		public static void RegisterMultiple(this IRezolver rezolver, IEnumerable<IRezolveTarget> targets, Type commonServiceType = null, RezolverPath path = null, bool append = true)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			try
+			{
+				if (rezolver.Builder == null)
+					throw new ArgumentException("rezolver's Builder property must be non-null");
+			}
+			catch (NotSupportedException ex)
+			{
+				throw new ArgumentException("rezolver does not registration through its IRezolverBuilder", ex);
+			}
+			rezolver.Builder.RegisterMultiple(targets, commonServiceType, path, append);
+		}
+
+		public static void Register<T>(this IRezolver rezolver, Expression<Func<RezolveContextExpressionHelper, T>> expression, Type type = null, RezolverPath path = null, IRezolveTargetAdapter adapter = null)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			try
+			{
+				if (rezolver.Builder == null)
+					throw new ArgumentException("rezolver's Builder property must be non-null");
+			}
+			catch (NotSupportedException ex)
+			{
+				throw new ArgumentException("rezolver does not registration through its IRezolverBuilder", ex);
+			}
+			rezolver.Builder.Register<T>(expression, type, path, adapter);
 		}
 	}
 }

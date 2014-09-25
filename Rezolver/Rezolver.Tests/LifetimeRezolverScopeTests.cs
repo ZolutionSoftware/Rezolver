@@ -72,11 +72,13 @@ namespace Rezolver.Tests
 			Mock<IRezolver> parentRezolverMock = new Mock<IRezolver>();
 			var producer1 = MakeEndlessProducer(() => new DisposableType());
 			Expression<Func<DisposableType>> e = () => producer1.Next();
+			Mock<IRezolverBuilder> builderMock = new Mock<IRezolverBuilder>();
 
 			parentRezolverMock.Setup(c => c.CreateLifetimeScope()).Returns(() => new LifetimeScopeRezolver(parentRezolverMock.Object));
-			parentRezolverMock.Setup(c => c.Fetch(typeof(ITestDisposable), null)).Returns(new ExpressionTarget(e.Body));
+			builderMock.Setup(c => c.Fetch(typeof(ITestDisposable), null)).Returns(new ExpressionTarget(e.Body));
 			parentRezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(ITestDisposable)))).Returns(producer1.Next);
 			parentRezolverMock.Setup(c => c.Compiler).Returns(new RezolveTargetDelegateCompiler());
+			parentRezolverMock.Setup(c => c.Builder).Returns(builderMock.Object);
 			return parentRezolverMock;
 		}
 

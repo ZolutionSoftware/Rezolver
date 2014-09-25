@@ -36,6 +36,11 @@ namespace Rezolver.Tests
 			return new CompileContext(rezolver);
 		}
 
+		private CompileContext CreateCompileContext(Mocks mocks)
+		{
+			return new CompileContext(mocks.RezolverMock.Object);
+		}
+
 		[TestMethod]
 		public void ShouldCompileIntObjectTarget()
 		{
@@ -59,10 +64,10 @@ namespace Rezolver.Tests
 		public void ShouldCompileRequiresIntConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var rezolver = CreateDefaultMockForRezolver(compiler);
-			AddIntTargetToRezolverMock(rezolver);
+			var mocks = CreateDefaultMockForRezolver(compiler);
+			AddIntTargetToMocks(mocks);
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), CreateCompileContext(rezolver.Object));
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), CreateCompileContext(mocks));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof (RequiresInt));
 			Assert.AreEqual(IntForObjectTarget, ((IRequiresInt) result).Int);
@@ -72,10 +77,10 @@ namespace Rezolver.Tests
 		public void ShouldCompileRequiresNullableIntConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var rezolver = CreateDefaultMockForRezolver(compiler);
-			AddNullableIntTargetToRezolverMock(rezolver);
+			var mocks = CreateDefaultMockForRezolver(compiler);
+			AddNullableIntTargetToMocks(mocks);
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), CreateCompileContext(rezolver.Object));
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), CreateCompileContext(mocks));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof(RequiresNullableInt));
 			Assert.AreEqual(NullableIntForObjectTarget, ((IRequiresNullableInt)result).NullableInt);
@@ -85,11 +90,11 @@ namespace Rezolver.Tests
 		public void ShouldCompileRequiresIntConstructorTarget_WithNullable()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var rezolver = CreateDefaultMockForRezolver(compiler);
+			var mocks = CreateDefaultMockForRezolver(compiler);
 			//I think we should be able to register a nullable int for an int
-			AddNullableIntTargetToRezolverMock(rezolver, typeof(int));
+			AddNullableIntTargetToMocks(mocks, typeof(int));
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), CreateCompileContext(rezolver.Object));
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresInt>(), CreateCompileContext(mocks));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof(RequiresInt));
 			Assert.AreEqual(NullableIntForObjectTarget, ((IRequiresInt)result).Int);
@@ -99,10 +104,10 @@ namespace Rezolver.Tests
 		public void ShouldCompileRequiresNullableIntConstructorTarget_WithInt()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var rezolver = CreateDefaultMockForRezolver(compiler);
-			AddIntTargetToRezolverMock(rezolver, typeof(int?));
+			var mocks = CreateDefaultMockForRezolver(compiler);
+			AddIntTargetToMocks(mocks, typeof(int?));
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), CreateCompileContext(rezolver.Object));
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>(), CreateCompileContext(mocks));
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof(RequiresNullableInt));
 			Assert.AreEqual(IntForObjectTarget, ((IRequiresNullableInt)result).NullableInt);
@@ -173,10 +178,10 @@ namespace Rezolver.Tests
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			//need a special mock for this
-			var rezolverMock = CreateDefaultMockForRezolver(compiler);
-			AddSingletonTargetToRezolverMock(rezolverMock);
-			AddTransientTargetToRezolverMock(rezolverMock);
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<Composite>(), CreateCompileContext(rezolverMock.Object));
+			var mocks = CreateDefaultMockForRezolver(compiler);
+			AddSingletonTargetToMocks(mocks);
+			AddTransientTargetToMocks(mocks);
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<Composite>(), CreateCompileContext(mocks));
 			Assert.IsNotNull(target);
 			var lastSingletonCount = Singleton.Counter = 0;
 			var lastTransientCount = Transient.Counter;
@@ -197,16 +202,16 @@ namespace Rezolver.Tests
 		public void ShouldCompileSuperComplexConstructorTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var rezolverMock = CreateDefaultMockForRezolver(compiler);
+			var mocks = CreateDefaultMockForRezolver(compiler);
 
-			AddIntTargetToRezolverMock(rezolverMock);
-			AddNullableIntTargetToRezolverMock(rezolverMock);
-			AddStringTargetToRezolverMock(rezolverMock);
-			AddTransientTargetToRezolverMock(rezolverMock);
-			AddSingletonTargetToRezolverMock(rezolverMock);
-			AddCompositeTargetToRezolverMock(rezolverMock);
+			AddIntTargetToMocks(mocks);
+			AddNullableIntTargetToMocks(mocks);
+			AddStringTargetToMocks(mocks);
+			AddTransientTargetToMocks(mocks);
+			AddSingletonTargetToMocks(mocks);
+			AddCompositeTargetToMocks(mocks);
 
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<SuperComplex>(), CreateCompileContext(rezolverMock.Object));
+			var target = compiler.CompileTarget(ConstructorTarget.Auto<SuperComplex>(), CreateCompileContext(mocks));
 			Assert.IsNotNull(target);
 			var result = target.GetObject();
 			Assert.IsInstanceOfType(result, typeof (SuperComplex));
@@ -227,36 +232,38 @@ namespace Rezolver.Tests
 		public void ShouldCompileScopedSingletonTarget()
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
-			var rezolverMock = CreateDefaultMockForRezolver(compiler);
-			rezolverMock.Setup(r => r.CreateLifetimeScope()).Returns(() => new LifetimeScopeRezolver(rezolverMock.Object));
+			var mocks = CreateDefaultMockForRezolver(compiler);
+			mocks.RezolverMock.Setup(r => r.CreateLifetimeScope()).Returns(() => new LifetimeScopeRezolver(mocks.RezolverMock.Object));
 
-			var target = compiler.CompileTarget(new ScopedSingletonTarget(ConstructorTarget.Auto<ScopedSingletonTestClass>()), CreateCompileContext(rezolverMock.Object)); ;
+			var target = compiler.CompileTarget(new ScopedSingletonTarget(ConstructorTarget.Auto<ScopedSingletonTestClass>()), CreateCompileContext(mocks)); ;
 
 			ScopedSingletonTestClass obj1;
 			ScopedSingletonTestClass obj2;
 
-			using(var scope = new LifetimeScopeRezolver(rezolverMock.Object))
+			using(var scope = new LifetimeScopeRezolver(mocks.RezolverMock.Object))
 			{
-				target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
+				target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
 
-				obj1 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
-				obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
+				obj1 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
+				obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
 				Assert.IsNotNull(obj1);
 				Assert.AreSame(obj1, obj2);
 				using (var scope2 = scope.CreateLifetimeScope())
 				{
-					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), scope2));
+					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope2));
 
 					Assert.AreSame(obj1, obj2);
 				}
 
 				//create another top-level scope - this should create a new instance
-				using (var siblingScope = new LifetimeScopeRezolver(rezolverMock.Object))
+				using (var siblingScope = new LifetimeScopeRezolver(mocks.RezolverMock.Object))
 				{
-					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(rezolverMock.Object, typeof(ScopedSingletonTestClass), siblingScope));
+					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), siblingScope));
 					Assert.AreNotSame(obj1, obj2);
 				}
 			}
 		}
+
+		public Mock<IRezolverBuilder> rezolver { get; set; }
 	}
 }

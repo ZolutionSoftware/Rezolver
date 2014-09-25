@@ -23,7 +23,7 @@ namespace Rezolver
 		}
 
 		private IRezolverBuilder _builder;
-		protected override IRezolverBuilder Builder
+		public override IRezolverBuilder Builder
 		{
 			get { return _builder; }
 		}

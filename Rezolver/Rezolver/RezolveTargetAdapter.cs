@@ -150,6 +150,13 @@ namespace Rezolver
 			return base.VisitMemberMemberBinding(node);
 		}
 
+		protected override Expression VisitParameter(ParameterExpression node)
+		{
+			if (node.Type == typeof(RezolveContextExpressionHelper))
+				return new RezolveContextPlaceholderExpression(node);
+			return base.VisitParameter(node);
+		}
+
 		protected override Expression VisitLambda<T>(Expression<T> node)
 		{
 			//we can't do anything special with lambdas - we just work over the body.  This enables

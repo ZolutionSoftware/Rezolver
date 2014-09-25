@@ -23,10 +23,19 @@ namespace Rezolver
 			}
 			public override Expression Visit(Expression node)
 			{
-				RezolveTargetExpression re = node as RezolveTargetExpression;
-				if(re != null)
+				if (node != null)
 				{
-					return re.Target.CreateExpression(new CompileContext(_sourceCompileContext, re.Type, true));
+					if (node.NodeType == ExpressionType.Extension)
+					{
+						RezolveTargetExpression re = node as RezolveTargetExpression;
+						if (re != null)
+						{
+							return re.Target.CreateExpression(new CompileContext(_sourceCompileContext, re.Type, true));
+						}
+						RezolveContextPlaceholderExpression pe = node as RezolveContextPlaceholderExpression;
+						if (pe != null)
+							return _sourceCompileContext.RezolveContextParameter;
+					}
 				}
 				return base.Visit(node);
 			}

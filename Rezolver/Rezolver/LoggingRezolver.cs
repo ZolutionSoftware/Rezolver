@@ -62,34 +62,11 @@ namespace Rezolver
 			return base.CreateLifetimeScope();
 		}
 
-		public override IRezolveTarget Fetch(Type type, string name = null)
-		{
-			var result = base.Fetch(type, name);
-			this.Log("Fetch returning target {0} for Type: {1}, Name: {2}", result != null ? result.GetType().ToString() : "[null]", type, name ?? "[null]");
-			return result;
-		}
-
 		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
 			var result = base.GetCompiledRezolveTarget(context);
 			this.LogWithContext("GetCompiledRezolveTarget returning compiled target {{0}} for context {0}", context, result != null ? result.GetType().ToString() : "[null]");
 			return result;
-		}
-
-		public override void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
-		{
-
-			try
-			{
-				base.Register(target, type, path);
-				this.Log("Registered target {0} for Type: {1}, Path: {2}", target.GetType(), type != null ? type : target.DeclaredType, path);
-			}
-			catch (Exception ex)
-			{
-				this.Log("Registration failed for target {0} for Type: {1}, Path: {2}. Exception Type: {3}, Message: \"{4}\"",
-					target.GetType(), type != null ? type : target.DeclaredType, path, ex.GetType(), ex.Message);
-				throw;
-			}
 		}
 
 		public override object Resolve(RezolveContext context)
