@@ -25,7 +25,7 @@ namespace Rezolver
 			//note that the name is not passed back up - that could cause untold
 			//stack overflow issues!
 			if (result == null && _parentBuilder != null)
-				return _parentBuilder.Fetch(type);
+				return _parentBuilder.Fetch(type, name);
 			return result;
 		}
 	}

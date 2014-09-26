@@ -130,5 +130,25 @@ namespace Rezolver.Tests
 			Assert.IsNotNull(result.Foo);
 			Assert.AreEqual("fixed", result.Foo.Name);
 		}
+
+		[TestMethod]
+		public void UnnamedObjectResolveByNameShouldGetNamedDependency()
+		{
+			//here we register a foo by name but an unnamed bar.  We then
+			// create a bar by the name, and it should get the named dependency.
+			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register(ConstructorTarget.For<Foo>(c => new Foo("hello named dependency selection")), path: "name1");
+			rezolver.Register(ConstructorTarget.For<Foo>(c => new Foo("should not get called")));
+			rezolver.Register(ConstructorTarget.Auto<Bar>());
+			//reguest a named instance of Bar, even though we never registered one, only the default.
+			//we're using the namme to select the dependency.
+			var result = (Bar)rezolver.Resolve(typeof(Bar), "name1");
+			Assert.IsNotNull(result.Foo);
+			Assert.AreEqual("hello named dependency selection", result.Foo.Name);
+			//and then just to prove the point, request an unnamed Bar, and one with a name which doesn't match
+			var resultBase = (Bar)rezolver.Resolve(typeof(Bar));
+			Assert.IsNotNull(resultBase.Foo);
+			Assert.AreEqual("should not get called", resultBase.Foo.Name);
+		}
 	}
 }

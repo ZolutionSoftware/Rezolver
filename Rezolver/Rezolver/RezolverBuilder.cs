@@ -23,6 +23,43 @@ namespace Rezolver
 
 		#endregion
 
+
+		private class RezolverBuilderWalker : IEnumerable<RegistrationEntry>
+		{
+			private RezolverBuilder _builder;
+			private IEnumerator<RegistrationEntry> _enumerator;
+			public RezolverBuilderWalker(RezolverBuilder builder)
+			{
+				_builder = builder;
+				_enumerator = Enumerate().GetEnumerator();
+			}
+
+			private IEnumerable<RegistrationEntry> Enumerate()
+			{
+				foreach (var registration in _builder._targets)
+				{
+					yield return new RegistrationEntry(new RezolveContext(null, registration.Key), registration.Value);
+				}
+				foreach (var namedBuilderEntry in _builder._namedBuilders)
+				{
+					foreach (var registration in namedBuilderEntry.Value.AllRegistrations)
+					{
+						yield return new RegistrationEntry(registration.Key.CreateNew(registration.Key.RequestedType, namedBuilderEntry.Key + RezolverPath.DefaultPathSeparator + registration.Key.Name), registration.Value);
+					}
+				}
+			}
+
+			public IEnumerator<RegistrationEntry> GetEnumerator()
+			{
+				return Enumerate().GetEnumerator();
+			}
+
+			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
+		}
+
 		private class MultipleRezolveTarget : RezolveTargetBase
 		{
 			private List<IRezolveTarget> _targets;
@@ -176,12 +213,6 @@ namespace Rezolver
 				if (namedBuilder != null)
 				{
 					return namedBuilder.Fetch(type);
-					//while(target == null && ((namedBuilder = namedBuilder.ParentBuilder as INamedRezolverBuilder) != null))
-					//{
-					//	target = parentNamedBuilder.Fetch(type);
-					//}
-					//if (target != null)
-					//	return target;
 				}
 			}
 
@@ -242,41 +273,6 @@ namespace Rezolver
 			}
 		}
 
-		private class RezolverBuilderWalker : IEnumerable<RegistrationEntry>
-		{
-			private RezolverBuilder _builder;
-			private IEnumerator<RegistrationEntry> _enumerator;
-			public RezolverBuilderWalker(RezolverBuilder builder)
-			{
-				_builder = builder;
-				_enumerator = Enumerate().GetEnumerator();
-			}
-
-			private IEnumerable<RegistrationEntry> Enumerate()
-			{
-				foreach (var registration in _builder._targets)
-				{
-					yield return new RegistrationEntry(new RezolveContext(null, registration.Key), registration.Value);
-				}
-				foreach (var namedBuilderEntry in _builder._namedBuilders)
-				{
-					foreach (var registration in namedBuilderEntry.Value.AllRegistrations)
-					{
-						yield return new RegistrationEntry(registration.Key.CreateNew(registration.Key.RequestedType, namedBuilderEntry.Key + RezolverPath.DefaultPathSeparator + registration.Key.Name), registration.Value);
-					}
-				}
-			}
-
-			public IEnumerator<RegistrationEntry> GetEnumerator()
-			{
-				return Enumerate().GetEnumerator();
-			}
-
-			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-			{
-				return GetEnumerator();
-			}
-		}
 
 		private IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
 		{
