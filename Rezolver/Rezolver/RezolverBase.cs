@@ -93,9 +93,16 @@ namespace Rezolver
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
 			IRezolveTarget target = Builder.Fetch(context.RequestedType, context.Name);
-			
+
 			if (target != null)
-				return Compiler.CompileTarget(target, new CompileContext(this, context.RequestedType));
+			{
+				//note that if a name was passed we're grabbing the best matching named builder to use for resolving
+				//dependencies.
+				return Compiler.CompileTarget(target,
+					new CompileContext(this, 
+						context.RequestedType, 
+						dependencyBuilder: context.Name != null ? Builder.GetBestNamedBuilder(context.Name) : null));
+			}
 
 			return GetFallbackCompiledRezolveTarget(context);
 		}

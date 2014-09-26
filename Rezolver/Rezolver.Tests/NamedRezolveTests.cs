@@ -104,5 +104,31 @@ namespace Rezolver.Tests
 			var result = (Bar)rezolver.Resolve(typeof(Bar), "name1.name2");
 			Assert.IsNull(result.Foo.Name);
 		}
+		
+		//name-local registrations
+		[TestMethod]
+		public void NamedObjectShouldResolveLocalDependency1()
+		{
+			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register(ConstructorTarget.For<Foo>(c => new Foo(c.Name)), path: "name1");
+			rezolver.Register(ConstructorTarget.Auto<Bar>(), path: "name1");
+
+			var result = (Bar)rezolver.Resolve(typeof(Bar), "name1");
+			Assert.IsNotNull(result.Foo);
+			Assert.AreEqual("name1", result.Foo.Name);
+		}
+
+		[TestMethod]
+		public void NamedObjectShouldResolveLocalDependencyThatOverridesUnnamed()
+		{
+			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			rezolver.Register(ConstructorTarget.For<Foo>(c => new Foo(c.Name)));
+			rezolver.Register(ConstructorTarget.For<Foo>(c => new Foo("fixed")), path: "name1");
+			rezolver.Register(ConstructorTarget.Auto<Bar>(), path: "name1");
+
+			var result = (Bar)rezolver.Resolve(typeof(Bar), "name1");
+			Assert.IsNotNull(result.Foo);
+			Assert.AreEqual("fixed", result.Foo.Name);
+		}
 	}
 }

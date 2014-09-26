@@ -90,7 +90,7 @@ namespace Rezolver
 
 			//now we try and fetch the target from the rezolver that is passed in the context
 			var nameStatic = nameCompiled != null ? (string)nameCompiled.GetObject(new RezolveContext(context.Rezolver, _resolveNameTarget.DeclaredType)) : null;
-			var staticTarget = context.Rezolver.Builder.Fetch(DeclaredType, nameStatic);
+			var staticTarget = context.DependencyBuilder.Fetch(DeclaredType, nameStatic);
 			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IRezolver));
 			var finalType = context.TargetType ?? DeclaredType;
 			var finalTypeExpr = Expression.Constant(finalType, typeof(Type));

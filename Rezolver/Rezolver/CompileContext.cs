@@ -54,12 +54,23 @@ namespace Rezolver
 
 		private readonly IRezolver _rezolver;
 		/// <summary>
-		/// The rezolver that is considered the current compilation 'scope' for the purposes of looking up additional
-		/// dependencies for the code being compiled.  Note that this is not necessarily the same as the rezolver that
-		/// might be passed in the RezolveContext to the generated code at runtime, as compiled targets might be retargeted
-		/// to other rezolvers for dependency resolution.
+		/// The rezolver that is considered the current compilation 'scope'.  You should not use this to look up other targets
+		/// for dependency resolution - for that, you should use the DependencyBuilder, as this will follow any name hierarchies
+		/// within the rezolver itself.
 		/// </summary>
 		public IRezolver Rezolver { get { return _rezolver; } }
+
+
+		private IRezolverBuilder _dependencyBuilder;
+		/// <summary>
+		/// This is the root builder that should be used for any compile-time lookups of dependencies of IRezolveTargets.
+		/// 
+		/// Unless the application is using named targets, this will always be equal to the <see cref="Rezolver"/>'s builder.
+		/// If named targets are being used, then this could be a named child of that rezolver's builder.
+		/// 
+		/// This allows you to create overrides of root objects and/or dependencies on a per-name basis within a single resolver.
+		/// </summary>
+		public IRezolverBuilder DependencyBuilder { get { return _dependencyBuilder ?? _rezolver.Builder; } }
 
 		private readonly Type _targetType;
 		/// <summary>
@@ -152,6 +163,7 @@ namespace Rezolver
 			_compilingTargets = parentContext._compilingTargets;
 			_rezolveContextParameter = parentContext._rezolveContextParameter;
 			_rezolver = parentContext._rezolver;
+			_dependencyBuilder = parentContext._dependencyBuilder;
 			_sharedExpressions = inheritSharedExpressions ? parentContext._sharedExpressions : new Dictionary<SharedExpressionKey, Expression>();
 		}
 
@@ -162,20 +174,21 @@ namespace Rezolver
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType"/> property.</param>
 		/// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/>
 		/// <param name="compilingTargets">Optional.  Allows you to seed the stack of compiling targets from creation.</param>
-		/// <param name="enableDynamicRezolver">Optional.  If true, then rezolve targets that generate code which needs to resolve 
-		/// additional dependencies from a rezolver should take into account any dynamic rezolver that might be passed in 
-		/// the RezolveContext to the built code at runtime.  The target can use the <see cref="ContextRezolverPropertyExpression"/>
-		/// for this purpose.  True is the default.  If you do not intend to use dynamic rezolvers you can switch this off,
-		/// and you'll get a small performance improvement in some situations (around 20% improvement).</param>
-		/// property.</param>
+		/// <param name="dependencyBuilder">Optional.  If the search for an object's dependency targets should be routed to a 
+		/// different builder than the one which built the <see cref="Rezolver"/> then pass it here.  Typically this is done
+		/// when a named object is requested - if a named builder with that name exists within the rezolver's builder,
+		/// then it is passed here so that you can have both named first-class objects, but also override unnamed objects'
+		/// dependencies with named entries.</param>
 		public CompileContext(IRezolver rezolver, 
 			Type targetType = null, 
 			ParameterExpression rezolveContextParameter = null, 
-			IEnumerable<IRezolveTarget> compilingTargets = null)
+			IEnumerable<IRezolveTarget> compilingTargets = null,
+			IRezolverBuilder dependencyBuilder = null)
 		{
 			rezolver.MustNotBeNull("rezolver");
 
 			_rezolver = rezolver;
+			_dependencyBuilder = dependencyBuilder;
 			_targetType = targetType;
 			_rezolveContextParameter = rezolveContextParameter;
 			_compilingTargets = new Stack<IRezolveTarget>(compilingTargets ?? Enumerable.Empty<IRezolveTarget>());
