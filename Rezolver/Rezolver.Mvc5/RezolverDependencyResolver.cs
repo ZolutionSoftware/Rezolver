@@ -24,6 +24,9 @@ namespace Rezolver
 		}
 
 		private readonly IRezolver _rezolver;
+
+		public IRezolver Rezolver { get { return _rezolver; } }
+
 		public RezolverDependencyResolver(IRezolver rezolver)
 		{
 			if (rezolver == null)

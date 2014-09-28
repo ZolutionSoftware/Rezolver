@@ -3,31 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rezolver.Examples.Mvc.Models;
 
 namespace Rezolver.Examples.Mvc.Controllers
 {
 	public class HomeController : Controller
 	{
-		private string _message;
-		public HomeController(string message)
+		private MessagesModel _messagesModel;
+		public HomeController()
 		{
-			_message = message;
+			_messagesModel = new MessagesModel() { MainMessage = "Default Message from Code", OriginalRezolveName = null };
+		}
+		public HomeController(MessagesModel messagesModel)
+		{
+			_messagesModel = messagesModel;
 		}
 		public ActionResult Index()
 		{
-			return View((object)_message);
+			ViewBag.Message = _messagesModel.MainMessage;
+			ViewBag.OriginalResolveName = _messagesModel.OriginalRezolveName;
+
+			return View();
 		}
 
 		public ActionResult About()
 		{
-			ViewBag.Message = "Your application description page.";
+			//ViewBag.Message = _messagesModel.MainMessage;
+			//ViewBag.OriginalResolveName = _messagesModel.OriginalRezolveName;
 
 			return View();
 		}
 
 		public ActionResult Contact()
 		{
-			ViewBag.Message = "Your contact page.";
+			//ViewBag.Message = _messagesModel.MainMessage;
+			//ViewBag.OriginalResolveName = _messagesModel.OriginalRezolveName;
 
 			return View();
 		}

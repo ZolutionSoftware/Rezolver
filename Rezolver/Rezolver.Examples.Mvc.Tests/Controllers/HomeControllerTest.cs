@@ -16,7 +16,7 @@ namespace Rezolver.Examples.Mvc.Tests.Controllers
 		public void Index()
 		{
 			// Arrange
-			HomeController controller = new HomeController("hello");
+			HomeController controller = new HomeController();
 
 			// Act
 			ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +29,7 @@ namespace Rezolver.Examples.Mvc.Tests.Controllers
 		public void About()
 		{
 			// Arrange
-			HomeController controller = new HomeController("hello");
+			HomeController controller = new HomeController();
 
 			// Act
 			ViewResult result = controller.About() as ViewResult;
@@ -42,7 +42,7 @@ namespace Rezolver.Examples.Mvc.Tests.Controllers
 		public void Contact()
 		{
 			// Arrange
-			HomeController controller = new HomeController("hello");
+			HomeController controller = new HomeController();
 
 			// Act
 			ViewResult result = controller.Contact() as ViewResult;

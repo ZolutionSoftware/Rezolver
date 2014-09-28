@@ -10,16 +10,18 @@ namespace Rezolver
 		private static Type[] EmptyTypes = new Type[0];
 
 		private Type _genericType;
+		private IPropertyBindingBehaviour _propertyBindingBehaviour;
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-		public GenericConstructorTarget(Type genericType)
+		public GenericConstructorTarget(Type genericType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			if (!genericType.IsGenericTypeDefinition)
 				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Partially open generics are not yet supported, and for fully closed generics, use ConstructorTarget");
 			_genericType = genericType;
+			_propertyBindingBehaviour = propertyBindingBehaviour;
 		}
 
 		public override bool SupportsType(Type type)
@@ -81,7 +83,7 @@ namespace Rezolver
 			//make the generic type
 			var typeToBuild = DeclaredType.MakeGenericType(finalTypeArguments);
 			//construct the constructortarget
-			var target = ConstructorTarget.Auto(typeToBuild);
+			var target = ConstructorTarget.Auto(typeToBuild, _propertyBindingBehaviour);
 
 			return target.CreateExpression(context);
 		}
@@ -165,25 +167,22 @@ namespace Rezolver
 			return null;
 		}
 
-		//private Type MapInterfaceTypeParameter(Type theParameter, Type theBaseType, int targetParameterPosition)
-		//{
-		//	var initialMatch = theBaseType.GetGenericArguments().Select((Type tt, int i) => 
-		//								new { Type = tt, InterfaceTypeParameterPosition = i }).FirstOrDefault(tt => tt.Type == theParameter)	;
-
 		public override System.Type DeclaredType
 		{
 			get { return _genericType; }
 		}
 
 
-		//in order for this to work, we're going to need a dummy type that we can use, because
-		//you can't pass open generics as type parameters.
-		public static GenericConstructorTarget Auto<TGeneric>()
+		//in order for this to be callable in all cases, we're going to need a dummy type that we can use, because
+		//you can't pass open generics as type parameters.  That dummy type 
+		public static GenericConstructorTarget Auto<TGeneric>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
-			throw new NotImplementedException();
+			if (!typeof(TGeneric).IsGenericTypeDefinition)
+				throw new InvalidOperationException("The passed type must be an open generic type");
+			return new GenericConstructorTarget(typeof(TGeneric), propertyBindingBehaviour);
 		}
 
-		public static IRezolveTarget Auto(Type type)
+		public static IRezolveTarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			//I might relax this constraint later - since we could implement partially open generics.
 			if (!type.IsGenericTypeDefinition)

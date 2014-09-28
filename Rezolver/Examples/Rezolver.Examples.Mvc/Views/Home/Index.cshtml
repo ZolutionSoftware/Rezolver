@@ -1,5 +1,4 @@
-﻿@model string
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
 
@@ -12,6 +11,6 @@
 <div class="row">
     <div class="col-md-4">
         <p>The message below is injected into the controller via the dependency resolver:</p>
-			<p>@Model</p>
+			<p>@ViewBag.Message</p>
     </div>
 </div>

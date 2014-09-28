@@ -150,5 +150,23 @@ namespace Rezolver.Tests
 			Assert.IsNotNull(resultBase.Foo);
 			Assert.AreEqual("should not get called", resultBase.Foo.Name);
 		}
+
+		[TestMethod]
+		public void WhenFallingBackShouldUseTheOriginalName()
+		{
+			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			//so here we have an object with a name requesting another named dependency which
+			//doesn't exist under that object, but sits under the root
+			//but notice that when we check the name value that's in the Foo object it'll be the
+			//name that was used to resolve the Bar object, because that's the name that's passed from context.
+			//the only reason the name would be dependency.name2 would be if, for some reason, it had to late-bind
+			//that dependency instead of resolving it at compile time.
+			rezolver.Register(ConstructorTarget.For<Foo>(c => new Foo(c.Name)), path: "dependency.name2");
+			rezolver.Register(ConstructorTarget.For<Bar>(c => new Bar(c.Resolve<Foo>("dependency.name2"))), path: "name1.name2");
+			var result = (Bar)rezolver.Resolve(typeof(Bar), "name1.name2");
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Foo);
+			Assert.AreEqual("name1.name2", result.Foo.Name);
+		}
 	}
 }

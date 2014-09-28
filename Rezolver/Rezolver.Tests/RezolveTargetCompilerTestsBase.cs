@@ -135,7 +135,7 @@ namespace Rezolver.Tests
 			DefaultRezolver rezolver = new DefaultRezolver(compiler: CreateCompiler());
 			rezolver.Register(_intObjectTarget.Value);
 			rezolver.Register(ConstructorTarget.Auto<RequiresInt>(), typeof(IRequiresInt));
-			rezolver.Register(c => new HasProperty() { RequiresInt = c.Resolve<IRequiresInt>() });
+			rezolver.RegisterExpression(c => new HasProperty() { RequiresInt = c.Resolve<IRequiresInt>() });
 
 			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
 			Assert.IsNotNull(result.RequiresInt);

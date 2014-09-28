@@ -211,7 +211,7 @@ namespace Rezolver.Tests
 		public void ShouldAllowAPropertyToBeSet()
 		{
 			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
-			rezolver.Register(c => new HasProperty() { Value = 1 });
+			rezolver.RegisterExpression(c => new HasProperty() { Value = 1 });
 
 			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
 			Assert.AreEqual(1, result.Value);
@@ -222,7 +222,7 @@ namespace Rezolver.Tests
 		{
 			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
 			rezolver.Register((10).AsObjectTarget());
-			rezolver.Register(c => new HasProperty() { Value = c.Resolve<int>() });
+			rezolver.RegisterExpression(c => new HasProperty() { Value = c.Resolve<int>() });
 			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
 			Assert.AreEqual(10, result.Value);
 		}

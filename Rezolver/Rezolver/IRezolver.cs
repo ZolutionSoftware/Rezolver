@@ -119,6 +119,24 @@ namespace Rezolver
 		//registration extensions - wrap around the resolver's Builder object
 
 		/// <summary>
+		/// Method which validates that a rezolver can take registrations through a builder.
+		/// </summary>
+		/// <param name="rezolver"></param>
+		/// <param name="parameterName"></param>
+		private static void RezolverMustHaveBuilder(IRezolver rezolver, string parameterName = "rezolver")
+		{
+			try
+			{
+				if (rezolver.Builder == null)
+					throw new ArgumentException("rezolver's Builder property must be non-null", parameterName);
+			}
+			catch (NotSupportedException ex)
+			{
+				throw new ArgumentException("rezolver does not support registration through its IRezolverBuilder", ex);
+			}
+		}
+
+		/// <summary>
 		/// Registers a target, optionally for a particular target type and optionally
 		/// under a particular name.
 		/// </summary>
@@ -130,17 +148,10 @@ namespace Rezolver
 		public static void Register(this IRezolver rezolver, IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
 			rezolver.MustNotBeNull("rezolver");
-			try
-			{
-				if (rezolver.Builder == null)
-					throw new ArgumentException("rezolver's Builder property must be non-null");
-			}
-			catch(NotSupportedException ex)
-			{
-				throw new ArgumentException("rezolver does not registration through its IRezolverBuilder", ex);
-			}
+			RezolverMustHaveBuilder(rezolver);
 			rezolver.Builder.Register(target, type, path);
 		}
+
 
 		/// <summary>
 		/// Called to register multiple rezolve targets against a shared contract, optionally replacing any 
@@ -153,31 +164,121 @@ namespace Rezolver
 		public static void RegisterMultiple(this IRezolver rezolver, IEnumerable<IRezolveTarget> targets, Type commonServiceType = null, RezolverPath path = null, bool append = true)
 		{
 			rezolver.MustNotBeNull("rezolver");
-			try
-			{
-				if (rezolver.Builder == null)
-					throw new ArgumentException("rezolver's Builder property must be non-null");
-			}
-			catch (NotSupportedException ex)
-			{
-				throw new ArgumentException("rezolver does not registration through its IRezolverBuilder", ex);
-			}
+			RezolverMustHaveBuilder(rezolver);
 			rezolver.Builder.RegisterMultiple(targets, commonServiceType, path, append);
 		}
 
-		public static void Register<T>(this IRezolver rezolver, Expression<Func<RezolveContextExpressionHelper, T>> expression, Type type = null, RezolverPath path = null, IRezolveTargetAdapter adapter = null)
+		/// <summary>
+		/// Called to register a generic expression to be used to produce an instance.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="rezolver"></param>
+		/// <param name="expression"></param>
+		/// <param name="type"></param>
+		/// <param name="path"></param>
+		/// <param name="adapter"></param>
+		public static void RegisterExpression<T>(this IRezolver rezolver, Expression<Func<RezolveContextExpressionHelper, T>> expression, Type type = null, RezolverPath path = null, IRezolveTargetAdapter adapter = null)
 		{
 			rezolver.MustNotBeNull("rezolver");
-			try
-			{
-				if (rezolver.Builder == null)
-					throw new ArgumentException("rezolver's Builder property must be non-null");
-			}
-			catch (NotSupportedException ex)
-			{
-				throw new ArgumentException("rezolver does not registration through its IRezolverBuilder", ex);
-			}
+			RezolverMustHaveBuilder(rezolver);
 			rezolver.Builder.Register<T>(expression, type, path, adapter);
+		}
+
+		//now for the fancy extension methods that shortcut the targets - note these probably all need to be duplicated for IRezolverBuilder too
+
+		/// <summary>
+		/// Registers an instance of an object to be used for a particular type.  If you don't pass a type, then 
+		/// the type of the object as given by the type parameter T is used.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="rezolver"></param>
+		/// <param name="obj"></param>
+		/// <param name="type"></param>
+		/// <param name="path"></param>
+		public static void RegisterObject<T>(this IRezolver rezolver, T obj, Type type = null, RezolverPath path = null)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			RezolverMustHaveBuilder(rezolver);
+			rezolver.Builder.Register(obj.AsObjectTarget(type));
+		}
+
+		/// <summary>
+		/// Registers a type to be created by the Rezolver.  The registration will auto-bind a constructor (most greedy) on the type
+		/// and optionally bind any properties/fields on the new object, dependding on the IPropertyBindingBehaviour object passed.
+		/// 
+		/// Note that this method supports open generics.
+		/// </summary>
+		/// <typeparam name="TObject"></typeparam>
+		/// <param name="rezolver"></param>
+		/// <param name="path"></param>
+		/// <param name="propertyBindingBehaviour"></param>
+		public static void RegisterType<TObject>(this IRezolver rezolver, RezolverPath path = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			RezolverMustHaveBuilder(rezolver);
+
+			if (typeof(TObject).IsGenericTypeDefinition)
+				rezolver.Builder.Register(GenericConstructorTarget.Auto<TObject>(propertyBindingBehaviour), path: path);
+			else
+				rezolver.Builder.Register(ConstructorTarget.Auto<TObject>(propertyBindingBehaviour), path: path);
+		}
+
+		/// <summary>
+		/// Registers a type to be created by the Rezolver when a particular service type is request.  The registration will auto-bind a 
+		/// constructor (most greedy) on the type and optionally bind any properties/fields on the new object, dependding on the 
+		/// IPropertyBindingBehaviour object passed.
+		/// 
+		/// Note that this method supports open generics.
+		/// </summary>
+		/// <typeparam name="TObject"></typeparam>
+		/// <typeparam name="TService"></typeparam>
+		/// <param name="rezolver"></param>
+		/// <param name="path"></param>
+		/// <param name="propertyBindingBehaviour"></param>
+		public static void RegisterType<TObject, TService>(this IRezolver rezolver, RezolverPath path = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			RezolverMustHaveBuilder(rezolver);
+
+			if (typeof(TObject).IsGenericTypeDefinition)
+				rezolver.Builder.Register(GenericConstructorTarget.Auto<TObject>(propertyBindingBehaviour), type: typeof(TService), path: path);
+			else
+				rezolver.Builder.Register(ConstructorTarget.Auto<TObject>(propertyBindingBehaviour), type: typeof(TService), path: path);
+		}
+
+		public static void RegisterType(this IRezolver rezolver, Type objectType, RezolverPath path = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			objectType.MustNotBeNull("objectType");
+			RezolverMustHaveBuilder(rezolver);
+
+			if (objectType.IsGenericTypeDefinition)
+				rezolver.Builder.Register(GenericConstructorTarget.Auto(objectType, propertyBindingBehaviour), path: path);
+			else
+				rezolver.Builder.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour), path: path);
+		}
+
+		/// <summary>
+		/// Registers a type to be created by the Rezolver when a particular service type is request.  The registration will auto-bind a 
+		/// constructor (most greedy) on the type and optionally bind any properties/fields on the new object, dependding on the 
+		/// IPropertyBindingBehaviour object passed.
+		/// 
+		/// Note that this method supports open generics.
+		/// </summary>
+		/// <param name="rezolver"></param>
+		/// <param name="path"></param>
+		/// <param name="propertyBindingBehaviour"></param>
+		public static void RegisterType(this IRezolver rezolver, Type objectType, Type serviceType, RezolverPath path = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		{
+			rezolver.MustNotBeNull("rezolver");
+			objectType.MustNotBeNull("objectType");
+			serviceType.MustNotBeNull("serviceType");
+			RezolverMustHaveBuilder(rezolver);
+
+			if (objectType.IsGenericTypeDefinition)
+				rezolver.Builder.Register(GenericConstructorTarget.Auto(objectType, propertyBindingBehaviour), type: serviceType, path: path);
+			else
+				rezolver.Builder.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour), type: serviceType, path: path);
 		}
 	}
 }

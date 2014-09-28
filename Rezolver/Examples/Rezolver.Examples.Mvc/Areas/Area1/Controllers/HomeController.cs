@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Rezolver.Examples.Mvc.Models;
 
 namespace Rezolver.Examples.Mvc.Areas.Area1.Controllers
 {
     public class HomeController : Controller
     {
-			private const string DefaultMessage = "Hello A1rea Default";
-			private string _message = DefaultMessage;
+			private const string DefaultMessage = "Hello Area Default";
+			private MessagesModel _messagesModel = new MessagesModel() { MainMessage = DefaultMessage, OriginalRezolveName = "NotResolved" };
 			public HomeController() { }
-			public HomeController(string message)
+			public HomeController(MessagesModel messagesModel)
 			{
-				_message = message ?? DefaultMessage; 
+				_messagesModel = messagesModel;
 			}
         // GET: Area1/Home
         public ActionResult Index()
         {
-            return View((object)_message);
+					ViewBag.Message = _messagesModel.MainMessage;
+					ViewBag.OriginalRezolveName = _messagesModel.OriginalRezolveName;
+          return View();
         }
     }
 }

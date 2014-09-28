@@ -13,8 +13,7 @@ namespace Rezolver.Examples.Mvc
     {
         protected void Application_Start()
         {
-					//here you will have to pass the current MVC dependency resolver, cast as IRezolver
-            AreaRegistration.RegisterAllAreas(DependencyResolver.Current as IRezolver);
+            AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
