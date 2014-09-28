@@ -73,8 +73,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RezolverDependencyResolver.cs" />
+    <Compile Include="RezolvingAreaRegistration.cs" />
     <Compile Include="RezolvingControllerActivator.cs" />
-    <Compile Include="RezolvingControllerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">

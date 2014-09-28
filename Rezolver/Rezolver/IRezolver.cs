@@ -199,7 +199,7 @@ namespace Rezolver
 		{
 			rezolver.MustNotBeNull("rezolver");
 			RezolverMustHaveBuilder(rezolver);
-			rezolver.Builder.Register(obj.AsObjectTarget(type));
+			rezolver.Builder.Register(obj.AsObjectTarget(type), type, path);
 		}
 
 		/// <summary>

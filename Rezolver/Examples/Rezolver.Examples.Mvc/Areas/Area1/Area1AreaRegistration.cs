@@ -2,7 +2,7 @@
 
 namespace Rezolver.Examples.Mvc.Areas.Area1
 {
-	public class Area1AreaRegistration : AreaRegistration
+	public class Area1AreaRegistration : RezolvingAreaRegistration
 	{
 		public override string AreaName
 		{
@@ -12,13 +12,12 @@ namespace Rezolver.Examples.Mvc.Areas.Area1
 			}
 		}
 
-		public override void RegisterArea(AreaRegistrationContext context)
+		public override void RegisterArea(AreaRegistrationContext context, IRezolver rezolver)
 		{
-			var rezolverDepRezolver = DependencyResolver.Current as RezolverDependencyResolver;
-			if(rezolverDepRezolver != null)
+			if(rezolver != null)
 			{
-				rezolverDepRezolver.Rezolver.RegisterObject("hello area1 rezolver!", path: AreaName);
-				rezolverDepRezolver.Rezolver.RegisterType<Controllers.HomeController>(path: AreaName);
+				rezolver.RegisterObject("hello area1 rezolver!", path: AreaName);
+				rezolver.RegisterType<Controllers.HomeController>(path: AreaName);
 			}
 			//can register 
 			context.MapRoute(

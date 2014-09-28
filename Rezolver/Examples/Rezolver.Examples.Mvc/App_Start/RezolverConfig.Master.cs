@@ -10,7 +10,7 @@ using Rezolver.Examples.Mvc.Models;
 
 namespace Rezolver.Examples.Mvc.App_Start
 {
-	public static class RezolverConfig
+	public static partial class RezolverConfig
 	{
 		public static void Start()
 		{
