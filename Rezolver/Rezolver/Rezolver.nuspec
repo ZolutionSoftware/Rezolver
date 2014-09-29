@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Rezolver</id>
-    <version>0.3.1.2</version>
+    <version>0.3.2</version>
     <title>Rezolver</title>
     <authors>Zolution Software Ltd</authors>
     <owners>LordZoltan</owners>
@@ -11,7 +11,7 @@
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>High performance portable IOC container for .Net</description>
-    <releaseNotes>Early, but usable, build.  Rich registration API is not present yet, but Constructors, IEnumerables, Properties, Generics and Child containers are all supported.</releaseNotes>
+    <releaseNotes>Better API for registering directly against the resolver, and named instances (with fallback) fully supported.  First release supporting MVC integration (separate package)</releaseNotes>
     <copyright>Copyright Zolution Software Ltd 2014</copyright>
     <tags>ioc di portable</tags>
   </metadata>

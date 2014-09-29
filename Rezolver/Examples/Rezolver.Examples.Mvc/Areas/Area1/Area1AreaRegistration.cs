@@ -17,7 +17,7 @@ namespace Rezolver.Examples.Mvc.Areas.Area1
 			if(rezolver != null)
 			{
 				rezolver.RegisterObject("hello area1 rezolver!", path: AreaName);
-				rezolver.RegisterType<Controllers.HomeController>(path: AreaName);
+				rezolver.RegisterType<Controllers.HomeController>();
 			}
 			//can register 
 			context.MapRoute(

@@ -28,16 +28,16 @@ namespace Rezolver.Examples.Mvc.Controllers
 
 		public ActionResult About()
 		{
-			//ViewBag.Message = _messagesModel.MainMessage;
-			//ViewBag.OriginalResolveName = _messagesModel.OriginalRezolveName;
+			ViewBag.Message = _messagesModel.MainMessage;
+			ViewBag.OriginalResolveName = _messagesModel.OriginalRezolveName;
 
 			return View();
 		}
 
 		public ActionResult Contact()
 		{
-			//ViewBag.Message = _messagesModel.MainMessage;
-			//ViewBag.OriginalResolveName = _messagesModel.OriginalRezolveName;
+			ViewBag.Message = _messagesModel.MainMessage;
+			ViewBag.OriginalResolveName = _messagesModel.OriginalRezolveName;
 
 			return View();
 		}

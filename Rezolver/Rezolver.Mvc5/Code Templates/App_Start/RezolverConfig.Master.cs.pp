@@ -4,11 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Rezolver.Examples.Mvc.Models;
+using Rezolver;
 
-[assembly: PreApplicationStartMethod(typeof(Rezolver.Examples.Mvc.App_Start.RezolverConfig), "Start")]
+[assembly: PreApplicationStartMethod(typeof($rootnamespace$.App_Start.RezolverConfig), "Start")]
 
-namespace Rezolver.Examples.Mvc.App_Start
+namespace $rootnamespace$.App_Start
 {
 	public static partial class RezolverConfig
 	{
@@ -18,7 +18,7 @@ namespace Rezolver.Examples.Mvc.App_Start
 			//to each rezolver that you create.  The CreateDefaultRezolverTargetCompiler method is found
 			//in the RezolverConfig.ToEdit.cs
 			RezolveTargetCompiler.Default = CreateDefaultRezolveTargetCompiler();
-			var resolver = CreateAndConfigureRezolver();
+			var resolver = CreateAndConfigureRezolver();			
 			DependencyResolver.SetResolver(CreateDependencyResolverInstance(resolver));
 		}
 	}

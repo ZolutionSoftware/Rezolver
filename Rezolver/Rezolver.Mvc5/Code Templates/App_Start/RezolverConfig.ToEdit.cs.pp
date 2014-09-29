@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Rezolver.Examples.Mvc.Models;
+using Rezolver;
 
-namespace Rezolver.Examples.Mvc.App_Start
+namespace $rootnamespace$.App_Start
 {
 	public static partial class RezolverConfig
 	{
@@ -40,6 +40,7 @@ namespace Rezolver.Examples.Mvc.App_Start
 			ConfigureRezolver(rezolver);
 
 			return rezolver;
+			//when this method returns, the rezolver it creates is set as the MVC dependency resolver
 		}
 
 #if DEBUG
@@ -64,11 +65,17 @@ namespace Rezolver.Examples.Mvc.App_Start
 
 		public static void ConfigureRezolver(IRezolver rezolver)
 		{
+			//instructs MVC to use rezolver as the controller activator.
 			rezolver.RegisterType<RezolvingControllerActivator, IControllerActivator>();
-			rezolver.RegisterObject("Hello rezolver!");
-			rezolver.RegisterType<Rezolver.Examples.Mvc.Controllers.HomeController>();
-			rezolver.RegisterExpression(c => new MessagesModel() { MainMessage = c.Resolve<string>(), OriginalRezolveName = c.Name });
+		
+			//TODO: add more registrations here
 
+			//Note: if you are using areas, you can obtain the inner resolver from the MVC 
+			//DependencyResolver.Current property in your area's RegisterArea method after casting 
+			//to RezolverDependencyRezolver.
+			//Equally, you could simply change usage of the AreaRegistration class
+			//to RezolvingAreaRegistration - it has an alternate RegisterArea abstract method that 
+			//accepts the IRezolver as a parameter.
 		}
 	}
 }
