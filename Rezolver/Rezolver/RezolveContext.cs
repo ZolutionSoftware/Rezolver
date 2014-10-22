@@ -74,6 +74,11 @@ namespace Rezolver
 			{
 				throw new NotImplementedException();
 			}
+
+			object IServiceProvider.GetService(Type serviceType)
+			{
+				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+			}
 		}
 
 		private Type _requestedType;

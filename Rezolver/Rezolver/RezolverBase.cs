@@ -111,5 +111,10 @@ namespace Rezolver
 		{
 			return GetMissingTarget(context.RequestedType);
 		}
+
+		object IServiceProvider.GetService(Type serviceType)
+		{
+			return this.Resolve(serviceType);
+		}
 	}
 }

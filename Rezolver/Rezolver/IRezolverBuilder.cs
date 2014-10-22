@@ -58,6 +58,7 @@ namespace Rezolver
 
 	public static class RezolverBuilderExtensions
 	{
+		//TODO: get parity with the extension methods that I've added for IRezolver that wrap around its Builder property.
 		public static void Register<T>(this IRezolverBuilder builder, Expression<Func<RezolveContextExpressionHelper, T>> expression, Type type = null, RezolverPath path = null, IRezolveTargetAdapter adapter = null)
 		{
 			builder.MustNotBeNull("builder");

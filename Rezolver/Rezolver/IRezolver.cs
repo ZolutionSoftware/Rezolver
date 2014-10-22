@@ -13,7 +13,7 @@ namespace Rezolver
 	/// get registrations of a rezolver should always do it through the rezolver, in case of any special logic
 	/// being applied outside of the builder itself.
 	/// </summary>
-	public interface IRezolver
+	public interface IRezolver : IServiceProvider
 	{
 		/// <summary>
 		/// Provides access to the builder for this rezolver - so that registrations can be added to the rezolver after
@@ -96,6 +96,26 @@ namespace Rezolver
 			return rezolver.Resolve(new RezolveContext(rezolver, requestedType, name, scope));
 		}
 
+		public static TObject Resolve<TObject>(this IRezolver rezolver)
+		{
+			return (TObject)rezolver.Resolve(typeof(TObject));
+		}
+
+		public static TObject Resolve<TObject>(this IRezolver rezolver, string name)
+		{
+			return (TObject)rezolver.Resolve(typeof(TObject), name);
+		}
+
+		public static TObject Resolve<TObject>(this IRezolver rezolver, ILifetimeScopeRezolver scope)
+		{
+			return (TObject)rezolver.Resolve(typeof(TObject), scope);
+		}
+
+		public static TObject Resolve<TObject>(this IRezolver rezolver, string name, ILifetimeScopeRezolver scope)
+		{
+			return (TObject)rezolver.Resolve(typeof(TObject), name, scope);
+		}
+
 		public static bool TryResolve(this IRezolver rezolver, Type type, out object result)
 		{
 			return rezolver.TryResolve(new RezolveContext(rezolver, type), out result);
@@ -115,6 +135,51 @@ namespace Rezolver
 		{
 			return rezolver.TryResolve(new RezolveContext(rezolver, type, name, scope), out result);
 		}
+
+		public static bool TryResolve<TObject>(this IRezolver rezolver, out TObject result)
+		{
+			object oResult;
+			var success = rezolver.TryResolve(out oResult);
+			if (success)
+				result = (TObject)oResult;
+			else
+				result = default(TObject);
+			return success;
+		}
+
+		public static bool TryResolve<TObject>(this IRezolver rezolver, string name, out TObject result)
+		{
+			object oResult;
+			var success = rezolver.TryResolve(name, out oResult);
+			if (success)
+				result = (TObject)oResult;
+			else
+				result = default(TObject);
+			return success;
+		}
+
+		public static bool TryResolve<TObject>(this IRezolver rezolver, ILifetimeScopeRezolver scope, out TObject result)
+		{
+			object oResult;
+			var success = rezolver.TryResolve(scope, out oResult);
+			if (success)
+				result = (TObject)oResult;
+			else
+				result = default(TObject);
+			return success;
+		}
+
+		public static bool TryResolve<TObject>(this IRezolver rezolver, string name, ILifetimeScopeRezolver scope, out TObject result)
+		{
+			object oResult;
+			var success = rezolver.TryResolve(name, scope, out oResult);
+			if (success)
+				result = (TObject)oResult;
+			else
+				result = default(TObject);
+			return success;
+		}
+
 
 		//registration extensions - wrap around the resolver's Builder object
 
@@ -279,6 +344,20 @@ namespace Rezolver
 				rezolver.Builder.Register(GenericConstructorTarget.Auto(objectType, propertyBindingBehaviour), type: serviceType, path: path);
 			else
 				rezolver.Builder.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour), type: serviceType, path: path);
+		}
+
+		/// <summary>
+		/// Batch-registers multiple targets with different contracts.  Basically, this is like calling Register(IRezolveTarget) multiple times, but with an 
+		/// enumerable.
+		/// </summary>
+		/// <param name="rezolver"></param>
+		/// <param name="targets"></param>
+		public static void RegisterAll(this IRezolver rezolver, IEnumerable<IRezolveTarget> targets)
+		{
+			foreach (var target in targets)
+			{
+				rezolver.Register(target);
+			}
 		}
 	}
 }
