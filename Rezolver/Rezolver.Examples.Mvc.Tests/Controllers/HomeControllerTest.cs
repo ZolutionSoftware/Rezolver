@@ -35,7 +35,7 @@ namespace Rezolver.Examples.Mvc.Tests.Controllers
 			ViewResult result = controller.About() as ViewResult;
 
 			// Assert
-			Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+			Assert.AreEqual("Default Message from Code", result.ViewBag.Message);
 		}
 
 		[TestMethod]

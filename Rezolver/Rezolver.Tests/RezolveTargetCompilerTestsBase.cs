@@ -264,6 +264,15 @@ namespace Rezolver.Tests
 			}
 		}
 
-		public Mock<IRezolverBuilder> rezolver { get; set; }
+		public static int IntForStaticExpression = 15;
+		[TestMethod]
+		public void ShouldCompileTargetForStaticProperty()
+		{
+			IRezolveTargetCompiler compiler = CreateCompiler();
+
+			var target = compiler.CompileTarget(RezolveTargetAdapter.Default.GetRezolveTarget(c => IntForStaticExpression), CreateCompileContext(CreateDefaultMockForRezolver(compiler)));
+			int result = (int)target.GetObject();
+			Assert.AreEqual(IntForStaticExpression, result);
+		}
 	}
 }
