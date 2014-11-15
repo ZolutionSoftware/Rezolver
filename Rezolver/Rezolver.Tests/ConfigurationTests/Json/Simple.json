@@ -1,0 +1,15 @@
+﻿{
+	"rezolve": [
+		{ "System.Int32": 10 },
+		{ "UnitTestProject2.RequiresInt": { "target": "$self" } },
+		{ "UnitTestProject2.IRequiresInt": { "target": "UnitTestProject2.RequiresInt" } },
+		{
+			"type": { "name": "System.Collections.Generic.IEnumerable", "args": [ "System.Int32" ] },
+			"value": [ 1, 2, 3 ]
+		},
+		{
+			"types": [ "System.Object", "System.String" ],
+			"value": "Hello world"
+		}
+	]
+}
