@@ -8,10 +8,16 @@ using System.Text;
 
 namespace Rezolver.Configuration.Json
 {
-	
 	[JsonConverter(typeof(JsonConfigurationConverter))]
 	public class JsonConfiguration : IConfiguration
 	{
+		/// <summary>
+		/// The typename to use on a type entry when you want to register a constructor target directly for the type that is registered.
+		/// E.g. { 'MyNamespace.Foo' : { 'type' : "$self' } }
+		/// Which registers MyNamespace.Foo with a constructor target that binds to the same type.
+		/// </summary>
+		public const string AutoConstructorType = "$self";
+
 		public string FileName
 		{
 			get;

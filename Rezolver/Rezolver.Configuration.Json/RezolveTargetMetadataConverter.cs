@@ -43,7 +43,7 @@ namespace Rezolver.Configuration.Json
 					}
 				case JsonToken.StartArray:
 					{
-
+						throw new NotImplementedException("arrays are not yet implemented");
 					}
 				case JsonToken.StartObject:
 					{

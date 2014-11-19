@@ -98,9 +98,9 @@ namespace Rezolver.Configuration.Json
 				reader.Read();
 			}
 
-			IRezolveTargetMetadata meta = serializer.Deserialize<IRezolveTargetMetadata>(reader);
-
-			return new TypeRegistrationEntry(regTypes, meta, startPos.ToConfigurationLineInfo(lineInfo));
+			RezolveTargetMetadataWrapper wrappedMeta = serializer.Deserialize<RezolveTargetMetadataWrapper>(reader);
+			//and then unwrap the meta data for the target types
+			return new TypeRegistrationEntry(regTypes, wrappedMeta.UnwrapMetadata(regTypes), startPos.ToConfigurationLineInfo(lineInfo));
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

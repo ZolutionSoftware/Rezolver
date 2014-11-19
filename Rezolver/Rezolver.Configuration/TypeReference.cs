@@ -21,8 +21,7 @@ namespace Rezolver.Configuration
 			get { return _genericArguments ?? NoGenericArguments; }
 		}
 
-		public TypeReference(string typeName, params ITypeReference[] genericArguments
-			)
+		public TypeReference(string typeName, params ITypeReference[] genericArguments)
 		{
 			if (string.IsNullOrWhiteSpace(typeName))
 				throw new ArgumentException("string cannot be null, empty or all whitespace", "typeName");
