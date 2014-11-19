@@ -17,8 +17,12 @@ namespace Rezolver.Configuration.Json
 		public virtual JsonSerializerSettings CreateJsonSerializerSettings()
 		{
 			var toReturn = (JsonConvert.DefaultSettings ?? (() => new JsonSerializerSettings()))();
+			//using special converters to handle the loading of the Json.  They are mapped to interface
+			//types so that we can branch the serialization code to create specialised versions of 
+			//configuration entries or target metadata depending on the content of the JSON.
 			toReturn.Converters.Add(new TypeReferenceConverter());
 			toReturn.Converters.Add(new ConfigurationEntryConverter());
+			toReturn.Converters.Add(new RezolveTargetMetadataConverter());
 			return toReturn;
 		}
 

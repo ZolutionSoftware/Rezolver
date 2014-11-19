@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Configuration;
 
 namespace Rezolver.Configuration.Json
 {
@@ -28,9 +29,9 @@ namespace Rezolver.Configuration.Json
 			if (reader.TokenType == JsonToken.StartObject)
 			{
 				if (!reader.Read())
-					throw new InvalidOperationException(lineInfo.FormatMessageForThisLine("End of file before reading property name"));
+					throw new JsonConfigurationException("End of file before reading property name", reader);
 				if (reader.TokenType != JsonToken.PropertyName)
-					throw new InvalidOperationException(lineInfo.FormatMessageForThisLine("Unexpected token type '{0}', expected '{1}'", reader.TokenType, JsonToken.PropertyName));
+					throw new JsonConfigurationException(JsonToken.PropertyName, reader);
 
 				//depending on the value we change what we create
 				//'type' will generate a more complex type name object,
@@ -38,7 +39,7 @@ namespace Rezolver.Configuration.Json
 				string propName = reader.Value as string;
 
 				if (string.IsNullOrWhiteSpace(propName))
-					throw new InvalidOperationException(lineInfo.FormatMessageForThisLine("Property name cannot be null, empty or whitespace"));
+					throw new JsonConfigurationException("Property name cannot be null, empty or whitespace", reader);
 
 				//determine the type of nodes that we have here
 				if (propName.StartsWith("$"))
@@ -53,10 +54,8 @@ namespace Rezolver.Configuration.Json
 				}
 			}
 			else
-				throw new InvalidOperationException(lineInfo.FormatMessageForThisLine("Unexpected token type '{0}', expected '{1}'", reader.TokenType, JsonToken.StartObject));
+				throw new JsonConfigurationException(JsonToken.StartObject, reader);
 
-			if (reader.TokenType == JsonToken.EndObject)
-				reader.Read();
 			return toReturn;
 		}
 
@@ -66,51 +65,42 @@ namespace Rezolver.Configuration.Json
 
 			var startPos = lineInfo.Capture();
 
-			ITypeReference[] targetTypes = null;
-
+			ITypeReference[] regTypes = null;
+			bool expectValueProperty = false;
 			if ("type".Equals(propName, StringComparison.OrdinalIgnoreCase))
 			{
 				//move to the content
 				reader.Read();
-				targetTypes = new[] { serializer.Deserialize<TypeReference>(reader) };
+				regTypes = new[] { serializer.Deserialize<TypeReference>(reader) };
+				expectValueProperty = true;
 			}
 			else if ("types".Equals(propName, StringComparison.OrdinalIgnoreCase))
 			{
+				//move to the content
 				reader.Read();
-				targetTypes = serializer.Deserialize<TypeReference[]>(reader);
+				regTypes = serializer.Deserialize<TypeReference[]>(reader);
+				expectValueProperty = true;
 			}
 			else
 			{
-				targetTypes = new[] { new TypeReference(propName) };
+				regTypes = new[] { new TypeReference(propName) };
+				if (!reader.Read())
+					throw new JsonConfigurationException(lineInfo.FormatMessageForThisLine("End of file before entry target property value"), reader);
 			}
 
-			if (!reader.Read())
-				throw new InvalidOperationException(lineInfo.FormatMessageForThisLine("End of file before reading property value"));
-
-			IRezolveTargetMetadata meta = null;
-
-			switch (reader.TokenType)
+			if(expectValueProperty)
 			{
-				//in the case of simple types, we bake them as objects for an object target
-				case JsonToken.Boolean:
-				case JsonToken.Bytes:
-				case JsonToken.Date:
-				case JsonToken.Float:
-				case JsonToken.Integer:
-				case JsonToken.String:
-					{
-						meta = new ObjectTargetMetadata(reader.Value, reader.ValueType);
-						reader.Read();
-						break;
-					}
-				case JsonToken.StartObject:
-					{
-						var o = JObject.ReadFrom(reader);
-						break;
-					}
+				reader.Read();
+				if (reader.TokenType != JsonToken.PropertyName)
+					throw new JsonConfigurationException(JsonToken.PropertyName, reader);
+				if (!"value".Equals(reader.Value))
+					throw new JsonConfigurationException(string.Format("Unexpected property '{0}', expected 'value'", reader.Value as string), reader);
+				reader.Read();
 			}
 
-			return new TypeRegistrationEntry(targetTypes, meta, startPos.ToConfigurationLineInfo(lineInfo));
+			IRezolveTargetMetadata meta = serializer.Deserialize<IRezolveTargetMetadata>(reader);
+
+			return new TypeRegistrationEntry(regTypes, meta, startPos.ToConfigurationLineInfo(lineInfo));
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

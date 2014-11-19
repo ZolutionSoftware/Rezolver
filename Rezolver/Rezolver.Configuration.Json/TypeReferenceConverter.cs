@@ -16,7 +16,7 @@ namespace Rezolver.Configuration.Json
 		/// </summary>
 		private class JsonTypeReference
 		{
-			[JsonProperty("type")]
+			[JsonProperty("name")]
 			public string TypeName
 			{
 				get;

@@ -38,11 +38,13 @@
   <ItemGroup>
     <Compile Include="ConfigurationEntryConverter.cs" />
     <Compile Include="JsonConfiguration.cs" />
+    <Compile Include="JsonConfigurationException.cs" />
     <Compile Include="JsonConfigurationLineInfo.cs" />
     <Compile Include="JsonConfigurationParser.cs" />
-    <Compile Include="ObjectTargetMetadata.cs" />
     <Compile Include="JsonLineInfoExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RezolveTargetMetadataConverter.cs" />
+    <Compile Include="RezolveTargetMetadataWrapper.cs" />
     <Compile Include="StubJsonLineInfo.cs" />
     <Compile Include="TypeReferenceConverter.cs" />
   </ItemGroup>
