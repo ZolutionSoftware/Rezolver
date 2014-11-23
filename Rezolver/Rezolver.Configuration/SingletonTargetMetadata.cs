@@ -5,13 +5,8 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-	public class SingletonTargetMetadata : RezolveTargetMetadataBase
+	public class SingletonTargetMetadata : RezolveTargetMetadataBase, Rezolver.Configuration.ISingletonTargetMetadata
 	{
-		public RezolveTargetMetadataType Type
-		{
-			get { return RezolveTargetMetadataType.Singleton; }
-		}
-
 		/// <summary>
 		/// If true, then the singleton object should be scope-compatible, i.e. with a lifetime limited
 		/// to the lifetime of an external scope rather than to the AppDomain's lifetime.

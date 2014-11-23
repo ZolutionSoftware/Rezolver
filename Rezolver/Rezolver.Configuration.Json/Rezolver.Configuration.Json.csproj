@@ -42,6 +42,7 @@
     <Compile Include="JsonConfigurationLineInfo.cs" />
     <Compile Include="JsonConfigurationParser.cs" />
     <Compile Include="JsonLineInfoExtensions.cs" />
+    <Compile Include="LazyJsonObjectTargetMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RezolveTargetMetadataConverter.cs" />
     <Compile Include="RezolveTargetMetadataWrapper.cs" />

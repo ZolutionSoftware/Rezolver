@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-	public class ConstructorTargetMetadata : RezolveTargetMetadataBase
+	public class ConstructorTargetMetadata : RezolveTargetMetadataBase, Rezolver.Configuration.IConstructorTargetMetadata
 	{
 		private ITypeReference[] _typesToBuild;
 

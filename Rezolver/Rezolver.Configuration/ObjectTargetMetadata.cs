@@ -5,27 +5,35 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-	public class ObjectTargetMetadata : RezolveTargetMetadataBase
+	public class ObjectTargetMetadata : RezolveTargetMetadataBase, IObjectTargetMetadata
 	{
-		private readonly Func<object> _valueProvider;
+		private readonly Func<Type, object> _valueProvider;
 		private readonly Type _type;
+
+		public RezolveTargetMetadataType Type
+		{
+			get { return RezolveTargetMetadataType.Object; }
+		}
+
 		public ObjectTargetMetadata(object obj, Type type = null)
 			: base(RezolveTargetMetadataType.Object)
 		{
-			_valueProvider = () => obj;
+			_valueProvider = (t) => obj;
 			_type = type;
 		}
 
-		public ObjectTargetMetadata(Func<object> valueProvider, Type type = null)
+		public ObjectTargetMetadata(Func<Type, object> valueProvider, Type type = null)
 			: base(RezolveTargetMetadataType.Object)
 		{
 			_valueProvider = valueProvider;
 			_type = type;
 		}
 
-		public RezolveTargetMetadataType Type
+		public virtual object GetObject(Type type)
 		{
-			get { return RezolveTargetMetadataType.Object; }
+			if (type == null) throw new ArgumentNullException("type");
+
+			return _valueProvider(type);
 		}
 	}
 

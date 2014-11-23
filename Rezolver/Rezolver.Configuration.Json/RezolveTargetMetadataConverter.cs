@@ -43,7 +43,13 @@ namespace Rezolver.Configuration.Json
 					}
 				case JsonToken.StartArray:
 					{
-						throw new NotImplementedException("arrays are not yet implemented");
+						JArray a = JArray.ReadFrom(reader) as JArray;
+
+						//create an object target metadata that will create an object on demand from the 
+						//array
+						meta = CreateDeferredJsonDeserializerTarget(a, serializer);
+						reader.Read();
+						break;
 					}
 				case JsonToken.StartObject:
 					{
@@ -55,6 +61,11 @@ namespace Rezolver.Configuration.Json
 						//create a JObject first, analyse the contents and then build the target meta
 						//if it has a 'target' member, then it's a constructor target
 						meta = LoadTargetMetadata(o, serializer);
+						reader.Read();
+						break;
+					}
+				case JsonToken.Comment:
+					{
 						reader.Read();
 						break;
 					}
@@ -70,35 +81,35 @@ namespace Rezolver.Configuration.Json
 
 		private IRezolveTargetMetadata LoadTargetMetadata(JObject jObject/*, ITypeReference[] regTypes*/, JsonSerializer serializer)
 		{
-			if (!jObject.HasValues)
-				throw new JsonConfigurationException("An empty object is not allowed here", jObject);
+			//if (!jObject.HasValues)
+			//	throw new JsonConfigurationException("An empty object is not allowed here", jObject);
 
-			JObject tempChildObject = jObject["scopedSingleton"] as JObject;
+			JObject tempChildObject = jObject["$scopedSingleton"] as JObject;
 
 			//by default, singletons are baked using '{ singleton : { target } }'
 			//so we look for a property called either, and then use its actual value (which MUST be an object)
 			//as the inner object.
 			if (tempChildObject != null)
 				return new SingletonTargetMetadata(LoadTargetMetadata(tempChildObject, serializer), true);
-			else if ((tempChildObject = jObject["singleton"] as JObject) != null)
+			else if ((tempChildObject = jObject["$singleton"] as JObject) != null)
 				return new SingletonTargetMetadata(LoadTargetMetadata(tempChildObject, serializer), false);
 
 			//see if there's a 'construct' property.  If so, then we have a constructortarget call
-			var constructTarget = jObject["construct"];
+			var tempTarget = jObject["$construct"];
 
 			ITypeReference[] targetType;
 
-			if (constructTarget != null)
+			if (tempTarget != null)
 			{
-				if (constructTarget is JArray)
-					targetType = constructTarget.ToObject<TypeReference[]>(serializer);
-				else if (constructTarget is JObject)
-					targetType = new[] { constructTarget.ToObject<TypeReference>(serializer) };
-				else if (constructTarget is JValue)
+				if (tempTarget is JArray)
+					targetType = tempTarget.ToObject<TypeReference[]>(serializer);
+				else if (tempTarget is JObject)
+					targetType = new[] { tempTarget.ToObject<TypeReference>(serializer) };
+				else if (tempTarget is JValue)
 				{
-					string typeString = (string)constructTarget;
+					string typeString = (string)tempTarget;
 					if (string.IsNullOrWhiteSpace(typeString))
-						throw new JsonConfigurationException("Target, if a string, must not be null, empty or whitespace", constructTarget);
+						throw new JsonConfigurationException("Target, if a string, must not be null, empty or whitespace", tempTarget);
 
 					//if ("$self".Equals(typeString, StringComparison.OrdinalIgnoreCase))
 					//	targetType = regTypes;	//we will allow multiple types to be specified for constructor target.  Thinking 
@@ -112,7 +123,26 @@ namespace Rezolver.Configuration.Json
 				return new ConstructorTargetMetadata(targetType);
 			}
 
-			throw new JsonConfigurationException("Unsupported target", jObject);
+			//now see if there's a 'multi' property.  If so, then we have a an instruction to register multiple
+			//targets against one set of type registrations.
+			tempTarget = jObject["$multi"];
+
+			if(tempTarget != null)
+			{
+				throw new NotImplementedException("Multi registration is not yet supported.");
+			}
+
+			//otherwise, we return an object target that will construct an instance of the requested type
+			//from the raw Json.  This allows developers to implement Json Conversion for types specifically
+			//for the purposes of reading from rezolver configuration 
+			return CreateDeferredJsonDeserializerTarget(jObject, serializer);
+
+			//throw new JsonConfigurationException("Unsupported target", jObject);
+		}
+
+		private static IRezolveTargetMetadata CreateDeferredJsonDeserializerTarget(JToken jToken, JsonSerializer serializer)
+		{
+			return new LazyJsonObjectTargetMetadata(jToken, serializer);
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

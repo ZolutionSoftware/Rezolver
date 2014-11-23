@@ -41,17 +41,7 @@ namespace Rezolver.Configuration.Json
 				if (string.IsNullOrWhiteSpace(propName))
 					throw new JsonConfigurationException("Property name cannot be null, empty or whitespace", reader);
 
-				//determine the type of nodes that we have here
-				if (propName.StartsWith("$"))
-				{
-					reader.Read();
-					reader.Skip();
-					return null;
-				}
-				else
-				{
-					toReturn = LoadTypeRegistrationEntry(reader, serializer, lineInfo, propName);
-				}
+				toReturn = LoadTypeRegistrationEntry(reader, serializer, lineInfo, propName);
 			}
 			else
 				throw new JsonConfigurationException(JsonToken.StartObject, reader);

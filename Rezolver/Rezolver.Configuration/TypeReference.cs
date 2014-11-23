@@ -8,6 +8,31 @@ namespace Rezolver.Configuration
 	public class TypeReference : TypeReferenceBase
 	{
 		public static readonly ITypeReference[] NoGenericArguments = new ITypeReference[0];
+		
+		private static readonly ITypeReference _openGenericTypeArgument = new TypeReference("#TArg#");
+
+		/// <summary>
+		/// The one-and-only open generic argument instance.
+		/// 
+		/// The only way to fetch a non-derived TypeReference that returns true for <see cref="IsOpenGenericTypeArgument"/>
+		/// is to use the reference from this field.
+		/// </summary>
+		public static ITypeReference OpenGenericTypeArgument
+		{
+			get
+			{
+				return _openGenericTypeArgument;
+			}
+		}
+
+
+		public override bool IsOpenGenericTypeArgument
+		{
+			get
+			{
+				return object.ReferenceEquals(OpenGenericTypeArgument, this);
+			}
+		}
 
 		private readonly string _typeName;
 		public override string TypeName

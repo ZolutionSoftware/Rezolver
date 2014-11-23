@@ -19,5 +19,32 @@ namespace Rezolver.Configuration
 		{
 			get;
 		}
+
+		public abstract bool IsOpenGenericTypeArgument
+		{
+			get;
+		}
+
+		/// <summary>
+		/// Produces a string representation of the type name, including generic arguments.
+		/// 
+		/// Please note - this is not intended to produce a typename that can be fed to System.Type.GetType, even if 
+		/// occasionally it does.
+		/// </summary>
+		public override string ToString()
+		{
+			if (GenericArguments == null || GenericArguments.Length == 0)
+				return FormatTypeName(TypeName);
+
+			return string.Format("{0}[{1}]", FormatTypeName(TypeName), string.Join(", ", GenericArguments.Select(t => t ?? new TypeReference("null"))));
+		}
+
+		private string FormatTypeName(string typeName)
+		{
+			if (typeName.Contains(","))
+				return string.Concat("[", typeName, "]");
+			else
+				return typeName;
+		}
 	}
 }

@@ -41,16 +41,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationAdapter.cs" />
     <Compile Include="ConfigurationEntryBase.cs" />
+    <Compile Include="ConfigurationError.cs" />
+    <Compile Include="ConfigurationException.cs" />
     <Compile Include="ConstructorTargetMetadata.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="IConfigurationError.cs" />
     <Compile Include="IConfigurationExtensionEntry.cs" />
     <Compile Include="IConfigurationLineInfo.cs" />
     <Compile Include="IConfiguration.cs" />
     <Compile Include="IConfigurationAdapter.cs" />
     <Compile Include="IConfigurationEntry.cs" />
+    <Compile Include="IConstructorTargetMetadata.cs" />
+    <Compile Include="IObjectTargetMetadata.cs" />
     <Compile Include="IRezolveTargetMetadata.cs" />
     <Compile Include="IRezolveTargetMetadataExtension.cs" />
+    <Compile Include="ISingletonTargetMetadata.cs" />
     <Compile Include="ITypeReference.cs" />
     <Compile Include="ITypeRegistrationEntry.cs" />
     <Compile Include="ObjectTargetMetadata.cs" />

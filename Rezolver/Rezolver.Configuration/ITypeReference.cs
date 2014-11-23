@@ -29,5 +29,17 @@ namespace Rezolver.Configuration
 		/// a non-generic type definition, in which case type resolution will likely fail.
 		/// </summary>
 		ITypeReference[] GenericArguments { get; }
+		/// <summary>
+		/// True if this type represents an open generic argument - this is how to explicitly reference an open generic type in a type reference:
+		/// you specify a base type, then have one or more open generic arguments specified in the GenericArguments array.  If all are
+		/// open generic arguments, then you have created a reference to the fully open generic type.
+		/// 
+		/// You only need to provide all-open arguments if the base <see cref="TypeName"/> could be ambiguous between a non generic and generic type,
+		/// or there are multiple generic types with the same base name.
+		/// 
+		/// Equally, you can do this to create references to partially open generics, which may or may not be supported by the adapter or
+		/// the target that is built.
+		/// </summary>
+		bool IsOpenGenericTypeArgument { get; }
 	}
 }
