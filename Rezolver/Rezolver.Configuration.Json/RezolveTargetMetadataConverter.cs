@@ -115,7 +115,7 @@ namespace Rezolver.Configuration.Json
 					//	targetType = regTypes;	//we will allow multiple types to be specified for constructor target.  Thinking 
 					////that so long as there's only one concrete class in the list, then we can be 'clever'
 					//else
-						targetType = new[] { new TypeReference(typeString) };	//otherwise deserialise the type reference
+						targetType = new[] { new TypeReference(typeString, ((IJsonLineInfo)tempTarget).ToConfigurationLineInfo() )};	//otherwise deserialise the type reference
 				}
 				else
 					throw new JsonConfigurationException("Unable to determine target type for Constructor Target metadata", jObject);

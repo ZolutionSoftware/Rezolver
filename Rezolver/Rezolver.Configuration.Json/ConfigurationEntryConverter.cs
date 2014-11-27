@@ -72,10 +72,11 @@ namespace Rezolver.Configuration.Json
 				expectValueProperty = true;
 			}
 			else
-			{
-				regTypes = new[] { new TypeReference(propName) };
+			{		
+				//read ahead so we know where the type reference ends
 				if (!reader.Read())
 					throw new JsonConfigurationException(lineInfo.FormatMessageForThisLine("End of file before entry target property value"), reader);
+				regTypes = new[] { new TypeReference(propName, startPos.ToConfigurationLineInfo(lineInfo)) };
 			}
 
 			if(expectValueProperty)

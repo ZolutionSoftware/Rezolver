@@ -1,4 +1,7 @@
 ﻿{
+	"assemblies": [ 
+
+	],
 	"rezolve": [
 		{ "System.Int32": 10 },
 		{ "UnitTestProject2.RequiresInt": { "$construct": "$self" } },

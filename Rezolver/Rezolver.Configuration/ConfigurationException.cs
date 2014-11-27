@@ -8,12 +8,21 @@ namespace Rezolver.Configuration
 	public class ConfigurationException : Exception
 	{
 		private readonly IConfiguration _configuration;
-		private readonly List<IConfigurationError> _errors;
+		private readonly IConfigurationError[] _errors;
 
-		public ConfigurationException(IConfiguration configuration, List<IConfigurationError> errors)
+		public ConfigurationException(ConfigurationAdapterContext context)
+			: this(context.Configuration, context.Errors)
 		{
+
+		}
+
+		public ConfigurationException(IConfiguration configuration, IEnumerable<IConfigurationError> errors)
+		{
+			if (configuration == null)
+				throw new ArgumentNullException("configuration");
+
 			this._configuration = configuration;
-			this._errors = errors;
+			this._errors = (errors ?? Enumerable.Empty<IConfigurationError>()).ToArray();
 		}
 
 		private string _message = null;
@@ -26,10 +35,10 @@ namespace Rezolver.Configuration
 					string fileName = _configuration != null && !string.IsNullOrWhiteSpace(_configuration.FileName) ?
 						_configuration.FileName : "[Unknown file]";
 
-					if (_errors != null && _errors.Count > 0)
+					if (_errors != null && _errors.Length > 0)
 					{
 						StringBuilder sb = new StringBuilder();
-						sb.AppendFormat("{0} error(s) found in {1}",  _errors.Count, fileName);
+						sb.AppendFormat("{0} error(s) found in {1}",  _errors.Length, fileName);
 						sb.AppendLine();
 						int counter = 1;
 						foreach (var error in _errors)

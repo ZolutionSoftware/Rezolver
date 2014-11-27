@@ -5,15 +5,11 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
+	/// <summary>
+	/// Implementation of the IConfigurationAdapter.
+	/// </summary>
 	public class ConfigurationAdapter : IConfigurationAdapter
 	{
-		private class RezolverBuilderRegistration
-		{
-			public List<Type> TargetTypes { get; set; }
-
-			public IRezolveTarget Target { get; set; }
-		}
-
 		public ConfigurationAdapter() { }
 		/// <summary>
 		/// Attempts to create an IRezolverBuilder instance from the passed configuration object.
@@ -34,30 +30,36 @@ namespace Rezolver.Configuration
 			}
 
 			IRezolverBuilder toReturn = CreateBuilderInstance(configuration);
-			List<IConfigurationError> errors = new List<IConfigurationError>();
-			var entries = ParseTypeRegistrationEntries(configuration, errors);
-			if (errors.Count != 0)
-				throw new ConfigurationException(configuration, errors);
 
-			foreach(var entry in entries)
+			ConfigurationAdapterContext context = CreateContext(configuration);
+
+			TransformEntriesToInstructions(context);
+
+			if (context.ErrorCount != 0)
+				throw new ConfigurationException(context);
+
+			foreach (var instruction in context.Instructions)
 			{
-				foreach(var targetType in entry.TargetTypes)
+
+				try
 				{
-					try
-					{
-						toReturn.Register(entry.Target, targetType);
-					}
-					catch (Exception ex)
-					{
-						errors.Add(new ConfigurationError(ex, null));
-					}
+					instruction.Apply(toReturn);
+				}
+				catch (Exception ex)
+				{
+					context.AddError(new ConfigurationError(ex, null));
 				}
 			}
 
-			if (errors.Count != 0)
-				throw new ConfigurationException(configuration, errors);
+			if (context.ErrorCount != 0)
+				throw new ConfigurationException(configuration, context.Errors);
 
 			return toReturn;
+		}
+
+		protected virtual ConfigurationAdapterContext CreateContext(IConfiguration configuration)
+		{
+			return new ConfigurationAdapterContext(configuration);
 		}
 
 		/// <summary>
@@ -75,104 +77,144 @@ namespace Rezolver.Configuration
 			return new RezolverBuilder();
 		}
 
-		private List<RezolverBuilderRegistration> ParseTypeRegistrationEntries(IConfiguration configuration, List<IConfigurationError> errorsTarget)
+		/// <summary>
+		/// Called to project the configuration entries that are in configuration within the passed context into instructions.
+		/// 
+		/// Each instruction that is created is added into the context.
+		/// </summary>
+		/// <param name="context"></param>
+		/// <returns></returns>
+		protected virtual void TransformEntriesToInstructions(ConfigurationAdapterContext context)
 		{
-			List<RezolverBuilderRegistration> toReturn = new List<RezolverBuilderRegistration>();
-			List<Type> targetTypes = null;
-			foreach (var entry in configuration.Entries.OfType<ITypeRegistrationEntry>())
+			List<RezolverBuilderInstruction> toReturn = new List<RezolverBuilderInstruction>();
+			foreach (var entry in context.Configuration.Entries)
 			{
-				if (!TryParseTypeReferences(entry.Types, entry, errorsTarget, out targetTypes))
-					continue; //can't proceed, but any errors will have been placed in errorsTarget
-
-				var target = CreateTarget(configuration, entry, entry.TargetMetadata, targetTypes, errorsTarget);
-
-				if (target != null)
-				{
-					toReturn.Add(new RezolverBuilderRegistration() { Target = target, TargetTypes = targetTypes });
-				}
+				var instruction = TransformEntry(entry, context);
+				if (instruction != null)
+					context.AppendInstruction(instruction);
 			}
-
-			return toReturn;
 		}
 
-		private IRezolveTarget CreateTarget(IConfiguration configuration, IConfigurationLineInfo lineInfo, IRezolveTargetMetadata metadata, List<Type> targetTypes, List<IConfigurationError> errorsTarget)
+		/// <summary>
+		/// Called to transform a configuration entry into an instruction that will later be performed on the rezolver builder that
+		/// is constructed by the configuration adapter.
+		/// </summary>
+		/// <param name="entry"></param>
+		/// <param name="context"></param>
+		/// <returns></returns>
+		protected virtual RezolverBuilderInstruction TransformEntry(IConfigurationEntry entry, ConfigurationAdapterContext context)
+		{
+			if (entry.Type == ConfigurationEntryType.TypeRegistration)
+			{
+				return TransformTypeRegistrationEntry(entry, context);
+			}
+			else
+				context.AddError(new ConfigurationError(string.Format("Unsupported ConfigurationEntryType: {0}", entry.Type), entry));
+
+			return null;
+		}
+
+		protected virtual RezolverBuilderInstruction TransformTypeRegistrationEntry(IConfigurationEntry entry, ConfigurationAdapterContext context)
+		{
+			ITypeRegistrationEntry typeRegistrationEntry = entry as ITypeRegistrationEntry;
+			if (typeRegistrationEntry == null)
+			{
+				context.AddError(new ConfigurationError("ITypeRegistrationEntry was expected", entry));
+				return null;
+			}
+			List<Type> targetTypes;
+
+			if (!TryParseTypeReferences(typeRegistrationEntry.Types, context, out targetTypes))
+				return null; //can't proceed, but any errors will have been placed in errorsTarget
+
+			var target = CreateTarget(typeRegistrationEntry.TargetMetadata, entry, targetTypes, context);
+
+			if (target != null)
+			{
+				return new TypeRegistrationInstruction(targetTypes, target, entry);
+			}
+			return null;
+		}
+
+		private IRezolveTarget CreateTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
 			//TODO: I don't really like the pattern I have here.  Should have something more like
 			switch (metadata.Type)
 			{
 				case RezolveTargetMetadataType.Constructor:
 					{
-						IConstructorTargetMetadata constructorMeta = metadata as IConstructorTargetMetadata;
-						if (constructorMeta == null)
-							errorsTarget.Add(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Constructor, typeof(IConstructorTargetMetadata), metadata.GetType(), lineInfo));
-						else
-							return CreateConstructorTarget(configuration, lineInfo, constructorMeta, targetTypes, errorsTarget);
-						break;
+						return CreateConstructorTarget(metadata, lineInfo, targetTypes, context);
 					}
 				case RezolveTargetMetadataType.Object:
 					{
-						IObjectTargetMetadata objectMeta = metadata as IObjectTargetMetadata;
-						if (objectMeta == null)
-							errorsTarget.Add(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Object, typeof(IObjectTargetMetadata), metadata.GetType(), lineInfo));
-						else
-							return CreateObjectTarget(configuration, lineInfo, objectMeta, targetTypes, errorsTarget);
-						break;
+						return CreateObjectTarget(metadata, lineInfo, targetTypes, context);
 					}
 				case RezolveTargetMetadataType.Singleton:
 					{
-						ISingletonTargetMetadata singletonMeta = metadata as ISingletonTargetMetadata;
-						if (singletonMeta == null)
-							errorsTarget.Add(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Singleton, typeof(ISingletonTargetMetadata), metadata.GetType(), lineInfo));
-						else
-							return CreateSingletonTarget(configuration, lineInfo, singletonMeta, targetTypes, errorsTarget);
-						break;
+						return CreateSingletonTarget(metadata, lineInfo, targetTypes, context);
 					}
 				case RezolveTargetMetadataType.Extension:
 					{
-						//double-check that the metadata has IRezolveTargetMetadataExtension interface
-						IRezolveTargetMetadataExtension extensionMeta = metadata as IRezolveTargetMetadataExtension;
-						if (extensionMeta == null)
-							errorsTarget.Add(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Singleton, typeof(ISingletonTargetMetadata), metadata.GetType(), lineInfo));
-						else
-							return CreateExtensionTarget(configuration, lineInfo, extensionMeta, targetTypes, errorsTarget);
-						break;
+						return CreateExtensionTarget(metadata, lineInfo, targetTypes, context);
 					}
 			}
 
 			return null;
 		}
 
-		private IRezolveTarget CreateExtensionTarget(IConfiguration configuration, IConfigurationLineInfo lineInfo, IRezolveTargetMetadataExtension extensionMeta, List<Type> targetTypes, List<IConfigurationError> errorsTarget)
+		private IRezolveTarget CreateExtensionTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
-			throw new NotImplementedException();
+			//double-check that the metadata has IRezolveTargetMetadataExtension interface
+			IRezolveTargetMetadataExtension extensionMeta = metadata as IRezolveTargetMetadataExtension;
+			if (extensionMeta == null)
+			{
+				context.AddError(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Singleton, typeof(ISingletonTargetMetadata), metadata.GetType(), lineInfo));
+				return null;
+			}
+
+			throw new NotSupportedException("Extension metadata cannot currently be transformed by the default configuration adapter.");
 		}
 
-		private IRezolveTarget CreateSingletonTarget(IConfiguration configuration, IConfigurationLineInfo lineInfo, ISingletonTargetMetadata singletonMeta, List<Type> targetTypes, List<IConfigurationError> errorsTarget)
+		private IRezolveTarget CreateSingletonTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
-			throw new NotImplementedException();
+			ISingletonTargetMetadata singletonMeta = metadata as ISingletonTargetMetadata;
+			if (singletonMeta == null)
+			{
+				context.AddError(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Singleton, typeof(ISingletonTargetMetadata), metadata.GetType(), lineInfo));
+				return null;
+			}
+
+			throw new NotImplementedException("Not finished implementing singleton targets yet.");
 		}
 
-		private IRezolveTarget CreateObjectTarget(IConfiguration configuration, IConfigurationLineInfo lineInfo, IObjectTargetMetadata metadata, List<Type> targetTypes, List<IConfigurationError> errorsTarget)
+		private IRezolveTarget CreateObjectTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
+			IObjectTargetMetadata objectMeta = metadata as IObjectTargetMetadata;
+			if (objectMeta == null)
+			{
+				context.AddError(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Object, typeof(IObjectTargetMetadata), metadata.GetType(), lineInfo));
+				return null;
+			}
+
 			//all the types in the list must have a common base which is in the list.
 			var commonBase = targetTypes.FirstOrDefault(t => targetTypes.All(tt => tt != t || t.IsAssignableFrom(tt)));
 
 			if (commonBase == null)
 			{
-				errorsTarget.Add(new ConfigurationError("If multiple types are provided for a target, they must all be part of a common hierarchy", lineInfo));
+				context.AddError(new ConfigurationError("If multiple types are provided for a target, they must all be part of a common hierarchy", lineInfo));
 				return null;
 			}
 
 			//find the first type that the object target metadata object will dish out
 			List<IConfigurationError> tempErrors = new List<IConfigurationError>();
 			object theObject = null;
-			foreach(var type in targetTypes)
+			foreach (var type in targetTypes)
 			{
 				try
 				{
-					theObject = metadata.GetObject(type);
+					theObject = objectMeta.GetObject(type);
 				}
-				catch(ArgumentException aex)
+				catch (ArgumentException aex)
 				{
 					tempErrors.Add(new ConfigurationError(aex.Message, lineInfo));
 				}
@@ -180,22 +222,27 @@ namespace Rezolver.Configuration
 
 			//can't check for null on the theObject because it's a valid return.  But, if every
 			//target type we tried yielded an error, then it's broke...
-			if(tempErrors.Count == targetTypes.Count)
+			if (tempErrors.Count == targetTypes.Count)
 			{
-				errorsTarget.AddRange(tempErrors);
+				context.AddErrors(tempErrors);
+				return null;
 			}
 
 			return new ObjectTarget(theObject);
 		}
 
-		private IRezolveTarget CreateConstructorTarget(IConfiguration configuration, IConfigurationLineInfo lineInfo, IConstructorTargetMetadata metadata, List<Type> targetTypes, List<IConfigurationError> errorsTarget)
+		private IRezolveTarget CreateConstructorTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
+			IConstructorTargetMetadata constructorMeta = metadata as IConstructorTargetMetadata;
+			if (constructorMeta == null)
+				context.AddError(ConfigurationError.UnexpectedMetadataType(RezolveTargetMetadataType.Constructor, typeof(IConstructorTargetMetadata), metadata.GetType(), lineInfo));
+
 			//note that we don't validate the metadata's types are compatible with the target types - this should already be handled
 			//by any IRezolverBuilder implementation.
 			List<Type> typesToBuild;
 			Type typeToBuild = null;
 			//translate the target's types to build
-			if(!TryParseTypeReferences(metadata.TypesToBuild, lineInfo, errorsTarget, out typesToBuild))
+			if (!TryParseTypeReferences(constructorMeta.TypesToBuild, context, out typesToBuild))
 				return null;
 
 			if (typesToBuild.Count > 1)
@@ -203,9 +250,9 @@ namespace Rezolver.Configuration
 				//all the types in the list must have a common base which is in the list.
 				var commonBase = typesToBuild.FirstOrDefault(t => typesToBuild.All(tt => tt != t || t.IsAssignableFrom(tt)));
 
-				if(commonBase == null)
+				if (commonBase == null)
 				{
-					errorsTarget.Add(new ConfigurationError("If multiple types are provided for a constructor target, they must all be part of a common hierarchy", lineInfo));
+					context.AddError(new ConfigurationError("If multiple types are provided for a constructor target, they must all be part of a common hierarchy", lineInfo));
 					return null;
 				}
 
@@ -215,7 +262,7 @@ namespace Rezolver.Configuration
 
 				if (mostDerived.Length == 0)
 				{
-					errorsTarget.Add(new ConfigurationError("Couldn't identify a most-derived type to be built from the list of target types", lineInfo));
+					context.AddError(new ConfigurationError("Couldn't identify a most-derived type to be built from the list of target types", lineInfo));
 					return null;
 				}
 				else if (mostDerived.Length > 1)
@@ -224,7 +271,7 @@ namespace Rezolver.Configuration
 					var nonAbstracts = typesToBuild.Where(t => t.IsClass && !t.IsAbstract).ToArray();
 					if (nonAbstracts.Length > 1)
 					{
-						errorsTarget.Add(new ConfigurationError("More than one non-abstract class type provided in target types - can't automatically choose which one to build", lineInfo));
+						context.AddError(new ConfigurationError("More than one non-abstract class type provided in target types - can't automatically choose which one to build", lineInfo));
 						return null;
 					}
 					else
@@ -242,14 +289,14 @@ namespace Rezolver.Configuration
 				return ConstructorTarget.Auto(typeToBuild);
 		}
 
-		protected virtual bool TryParseTypeReference(ITypeReference typeReference, IConfigurationLineInfo lineInfo, List<IConfigurationError> errorsTarget, out Type type)
+		protected virtual bool TryParseTypeReference(ITypeReference typeReference, ConfigurationAdapterContext context, out Type type)
 		{
 			type = null;
 			Type baseType = System.Type.GetType(typeReference.TypeName, false);
 			if (baseType == null)
 			{
-				//kick off some overridable fallbaack procedure
-				errorsTarget.Add(ConfigurationError.UnresolvedType(typeReference.TypeName, lineInfo));
+				//kick off some overridable fallback procedure
+				context.AddError(ConfigurationError.UnresolvedType(typeReference));
 				return false;
 			}
 
@@ -259,7 +306,7 @@ namespace Rezolver.Configuration
 			return true;
 		}
 
-		protected bool TryParseTypeReferences(IEnumerable<ITypeReference> typeReferences, IConfigurationLineInfo lineInfo, List<IConfigurationError> errorsTarget, out List<Type> types)
+		protected bool TryParseTypeReferences(IEnumerable<ITypeReference> typeReferences, ConfigurationAdapterContext context, out List<Type> types)
 		{
 			bool result = true;
 			Type tempType;
@@ -267,7 +314,7 @@ namespace Rezolver.Configuration
 			types = tempTypes;
 			foreach (var typeRef in typeReferences)
 			{
-				if (!TryParseTypeReference(typeRef, lineInfo, errorsTarget, out tempType))
+				if (!TryParseTypeReference(typeRef, context, out tempType))
 					result = false;
 				else
 					tempTypes.Add(tempType);

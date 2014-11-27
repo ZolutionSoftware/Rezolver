@@ -10,6 +10,30 @@ namespace Rezolver.Configuration
 	/// </summary>
 	public abstract class TypeReferenceBase : ITypeReference
 	{
+		public int? StartLineNo
+		{
+			get;
+			private set;
+		}
+
+		public int? StartLinePos
+		{
+			get;
+			private set;
+		}
+
+		public int? EndLineNo
+		{
+			get;
+			private set;
+		}
+
+		public int? EndLinePos
+		{
+			get;
+			private set;
+		}
+
 		public abstract string TypeName
 		{
 			get;
@@ -25,6 +49,19 @@ namespace Rezolver.Configuration
 			get;
 		}
 
+		protected TypeReferenceBase() { }
+
+		protected TypeReferenceBase(IConfigurationLineInfo lineInfo)
+		{
+			if (lineInfo != null)
+			{
+				StartLineNo = lineInfo.StartLineNo;
+				StartLinePos = lineInfo.StartLinePos;
+				EndLineNo = lineInfo.EndLineNo;
+				EndLinePos = lineInfo.EndLinePos;
+			}
+		}
+
 		/// <summary>
 		/// Produces a string representation of the type name, including generic arguments.
 		/// 
@@ -36,7 +73,7 @@ namespace Rezolver.Configuration
 			if (GenericArguments == null || GenericArguments.Length == 0)
 				return FormatTypeName(TypeName);
 
-			return string.Format("{0}[{1}]", FormatTypeName(TypeName), string.Join(", ", GenericArguments.Select(t => t ?? new TypeReference("null"))));
+			return string.Format("{0}[{1}]", FormatTypeName(TypeName), string.Join(", ", GenericArguments.Select(t => t ?? new TypeReference("null", null))));
 		}
 
 		private string FormatTypeName(string typeName)
@@ -46,5 +83,6 @@ namespace Rezolver.Configuration
 			else
 				return typeName;
 		}
+
 	}
 }

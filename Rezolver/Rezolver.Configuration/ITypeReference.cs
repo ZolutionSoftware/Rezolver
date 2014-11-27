@@ -13,7 +13,7 @@ namespace Rezolver.Configuration
 	/// An IConfigurationAdapter instance will need to resolve the actual runtime type from this when registering
 	/// targets from a configuration file.
 	/// </summary>
-	public interface ITypeReference
+	public interface ITypeReference : IConfigurationLineInfo
 	{
 		/// <summary>
 		/// The root type name.

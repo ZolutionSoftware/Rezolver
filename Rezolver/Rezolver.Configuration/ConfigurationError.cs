@@ -56,6 +56,11 @@ namespace Rezolver.Configuration
 			}
 		}
 
+		public static ConfigurationError UnresolvedType(ITypeReference typeReference)
+		{
+			return new ConfigurationError(string.Format("Could not resolve type \"{0}\"", typeReference.TypeName), typeReference);
+		}
+
 		public static ConfigurationError UnresolvedType(string typeName, IConfigurationLineInfo lineInfo)
 		{
 			return new ConfigurationError(string.Format("Could not resolve type \"{0}\"", typeName), lineInfo);

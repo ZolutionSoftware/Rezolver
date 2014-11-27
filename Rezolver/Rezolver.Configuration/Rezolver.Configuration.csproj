@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationAdapter.cs" />
+    <Compile Include="ConfigurationAdapterContext.cs" />
     <Compile Include="ConfigurationEntryBase.cs" />
     <Compile Include="ConfigurationError.cs" />
     <Compile Include="ConfigurationException.cs" />
@@ -61,12 +62,14 @@
     <Compile Include="ITypeReference.cs" />
     <Compile Include="ITypeRegistrationEntry.cs" />
     <Compile Include="ObjectTargetMetadata.cs" />
+    <Compile Include="RezolverBuilderInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RezolveTargetMetadataBase.cs" />
     <Compile Include="SingletonTargetMetadata.cs" />
     <Compile Include="TypeReference.cs" />
     <Compile Include="TypeReferenceBase.cs" />
     <Compile Include="TypeRegistrationEntry.cs" />
+    <Compile Include="TypeRegistrationInstruction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

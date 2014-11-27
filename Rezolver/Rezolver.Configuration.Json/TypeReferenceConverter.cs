@@ -45,15 +45,20 @@ namespace Rezolver.Configuration.Json
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			IJsonLineInfo lineInfo = (reader as IJsonLineInfo) ?? StubJsonLineInfo.Instance;
+
+			var startLine = lineInfo.Capture();
+
 			if (reader.TokenType == JsonToken.String)
 			{
-				return new TypeReference(reader.Value as string);
+				//note - line information for this will have the same start and end line/pos
+				return new TypeReference(reader.Value as string, startLine.ToConfigurationLineInfo(lineInfo));
 			}
 			else if (reader.TokenType == JsonToken.StartObject)
 			{
 				var temp = new JsonTypeReference();
 				serializer.Populate(reader, temp);
-				return new TypeReference(temp.TypeName, temp.GenericArguments);
+				return new TypeReference(temp.TypeName, startLine.ToConfigurationLineInfo(lineInfo), temp.GenericArguments);
 			}
 			else throw new InvalidOperationException(((reader as IJsonLineInfo) ?? StubJsonLineInfo.Instance).FormatMessageForThisLine("Invalid Type Reference"));
 		}

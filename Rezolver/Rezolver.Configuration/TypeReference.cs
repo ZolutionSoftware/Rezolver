@@ -9,7 +9,7 @@ namespace Rezolver.Configuration
 	{
 		public static readonly ITypeReference[] NoGenericArguments = new ITypeReference[0];
 		
-		private static readonly ITypeReference _openGenericTypeArgument = new TypeReference("#TArg#");
+		private static readonly ITypeReference _openGenericTypeArgument = new TypeReference("#TArg#", null);
 
 		/// <summary>
 		/// The one-and-only open generic argument instance.
@@ -46,7 +46,13 @@ namespace Rezolver.Configuration
 			get { return _genericArguments ?? NoGenericArguments; }
 		}
 
-		public TypeReference(string typeName, params ITypeReference[] genericArguments)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="typeName"></param>
+		/// <param name="lineInfo">Optional.</param>
+		/// <param name="genericArguments"></param>
+		public TypeReference(string typeName, IConfigurationLineInfo lineInfo, params ITypeReference[] genericArguments)
 		{
 			if (string.IsNullOrWhiteSpace(typeName))
 				throw new ArgumentException("string cannot be null, empty or all whitespace", "typeName");
