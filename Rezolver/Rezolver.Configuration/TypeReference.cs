@@ -53,6 +53,7 @@ namespace Rezolver.Configuration
 		/// <param name="lineInfo">Optional.</param>
 		/// <param name="genericArguments"></param>
 		public TypeReference(string typeName, IConfigurationLineInfo lineInfo, params ITypeReference[] genericArguments)
+			: base(lineInfo)
 		{
 			if (string.IsNullOrWhiteSpace(typeName))
 				throw new ArgumentException("string cannot be null, empty or all whitespace", "typeName");

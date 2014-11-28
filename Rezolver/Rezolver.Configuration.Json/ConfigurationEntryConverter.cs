@@ -28,20 +28,9 @@ namespace Rezolver.Configuration.Json
 			IConfigurationEntry toReturn = null;
 			if (reader.TokenType == JsonToken.StartObject)
 			{
-				if (!reader.Read())
-					throw new JsonConfigurationException("End of file before reading property name", reader);
-				if (reader.TokenType != JsonToken.PropertyName)
-					throw new JsonConfigurationException(JsonToken.PropertyName, reader);
+				var startPos = lineInfo.Capture();
 
-				//depending on the value we change what we create
-				//'type' will generate a more complex type name object,
-				//anything else will be treated as a straight type name.
-				string propName = reader.Value as string;
-
-				if (string.IsNullOrWhiteSpace(propName))
-					throw new JsonConfigurationException("Property name cannot be null, empty or whitespace", reader);
-
-				toReturn = LoadTypeRegistrationEntry(reader, serializer, lineInfo, propName);
+				toReturn = LoadConfigurationEntry(reader, startPos, lineInfo, serializer);
 			}
 			else
 				throw new JsonConfigurationException(JsonToken.StartObject, reader);
@@ -49,12 +38,44 @@ namespace Rezolver.Configuration.Json
 			return toReturn;
 		}
 
-		ITypeRegistrationEntry LoadTypeRegistrationEntry(JsonReader reader, JsonSerializer serializer, IJsonLineInfo lineInfo, string propName = null)
+		/// <summary>
+		/// parses the 
+		/// </summary>
+		/// <param name="?"></param>
+		/// <param name="startPos"></param>
+		/// <param name="lineInfo"></param>
+		/// <param name="serializer"></param>
+		/// <returns></returns>
+		private IConfigurationEntry LoadConfigurationEntry(JsonReader reader, IJsonLineInfo startPos, IJsonLineInfo lineInfo, JsonSerializer serializer)
+		{
+			if (!reader.Read())
+				throw new JsonConfigurationException("End of file before reading property name", reader);
+			if (reader.TokenType != JsonToken.PropertyName)
+				throw new JsonConfigurationException(JsonToken.PropertyName, reader);
+
+			//depending on the value we change what we create
+			//'type' will generate a more complex type name object,
+			//anything else will be treated as a straight type name.
+			string propName = reader.Value as string;
+
+			if (string.IsNullOrWhiteSpace(propName))
+				throw new JsonConfigurationException("Property name cannot be null, empty or whitespace", reader);
+
+			return LoadTypeRegistrationEntry(reader, serializer, startPos, lineInfo, propName);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="reader"></param>
+		/// <param name="serializer"></param>
+		/// <param name="startPos">Position at which the type registration entry commence parsing</param>
+		/// <param name="lineInfo">Provides access to the current line/column position that the reader is at</param>
+		/// <param name="propName"></param>
+		/// <returns></returns>
+		ITypeRegistrationEntry LoadTypeRegistrationEntry(JsonReader reader, JsonSerializer serializer, IJsonLineInfo startPos, IJsonLineInfo lineInfo, string propName = null)
 		{
 			if (propName == null) propName = reader.Value as string;
-
-			var startPos = lineInfo.Capture();
-
 			ITypeReference[] regTypes = null;
 			bool expectValueProperty = false;
 			if ("type".Equals(propName, StringComparison.OrdinalIgnoreCase))
@@ -72,14 +93,14 @@ namespace Rezolver.Configuration.Json
 				expectValueProperty = true;
 			}
 			else
-			{		
+			{
 				//read ahead so we know where the type reference ends
 				if (!reader.Read())
 					throw new JsonConfigurationException(lineInfo.FormatMessageForThisLine("End of file before entry target property value"), reader);
 				regTypes = new[] { new TypeReference(propName, startPos.ToConfigurationLineInfo(lineInfo)) };
 			}
 
-			if(expectValueProperty)
+			if (expectValueProperty)
 			{
 				reader.Read();
 				if (reader.TokenType != JsonToken.PropertyName)
