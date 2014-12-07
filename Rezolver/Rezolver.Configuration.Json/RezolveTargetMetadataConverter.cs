@@ -37,7 +37,15 @@ namespace Rezolver.Configuration.Json
 				case JsonToken.Integer:
 				case JsonToken.String:
 					{
-						meta = new ObjectTargetMetadata(reader.Value, reader.ValueType);
+						JValue value = JValue.ReadFrom(reader) as JValue;
+						//have to create a lazy target here - because otherwise value literals will be 
+						//added to the rezolverbuilder using the type that Json.Net gives them, but that's not
+						//always correct.  Integers read using the JsonReader, for example, are read as Int64,
+						//which is no good when you want to read the value as Int32 - you can't cast, you have
+						//to convert.  Which is no good for us.  Using a lazy means we can use Json.Net's own
+						//handling for this - e.g. taking an integer token and reading it as an Int16 or Int32 
+						//will 'just work'.
+						meta = new LazyJsonObjectTargetMetadata(value, serializer);
 						reader.Read();
 						break;
 					}

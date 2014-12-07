@@ -62,9 +62,18 @@ namespace Rezolver.Tests.ConfigurationTests.Json {
         
         /// <summary>
         ///   Looks up a localized string similar to {
-        ///
-        ///}
-        ///.
+        ///	&quot;assemblies&quot;: [
+        ///		// in here go any assembly names of assemblies to be loaded before processing takes place
+        ///	],
+        ///	&quot;using&quot;: [ 
+        ///		// in here go any namespaces you&apos;re importing - just like a C# using
+        ///	],
+        ///	&quot;rezolve&quot;: [
+        ///		{ &quot;System.Int32&quot;: 10 },
+        ///		{ &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot;: { &quot;$construct&quot;: &quot;$self&quot; } },
+        ///		{ &quot;Rezolver.Tests.ConfigurationTests.IRequiresInt&quot;: { &quot;$construct&quot;: &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot; } },
+        ///		{
+        ///			&quot;type&quot;: { &quot;name&quot;: &quot;System.Collections.Generic [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Simple {
             get {

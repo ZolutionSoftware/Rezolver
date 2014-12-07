@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rezolver.Configuration;
 using Rezolver.Configuration.Json;
+using System.Collections.Generic;
 
 namespace Rezolver.Tests.ConfigurationTests.Json
 {
 	[TestClass]
 	public class JsonConfigurationTests
 	{
+		//TODO: flesh out these tests a bit more.  Need to be far more granular and focused.
+
+		//at the moment I've just created a file with some cool stuff in it and testhing that it works.
+
 		[TestMethod]
 		public void ShouldCreateJsonConfigurationFromJsonString()
 		{
@@ -28,6 +34,14 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			var builder = adapter.CreateBuilder(configuration);
 
 			Assert.IsInstanceOfType(builder, typeof(IRezolverBuilder));
+
+			var rezolver = new DefaultRezolver(builder, new AssemblyRezolveTargetCompiler());
+			var str = rezolver.Resolve<string>();
+			Assert.AreEqual("Hello world", str);
+			var en = rezolver.Resolve<IEnumerable<int>>();
+			Assert.IsNotNull(en);
+			Assert.IsTrue(en.SequenceEqual(new[] { 1, 2, 3 }));
+
 		}
 	}
 }

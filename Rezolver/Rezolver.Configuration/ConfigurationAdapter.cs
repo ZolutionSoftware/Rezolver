@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Rezolver.Configuration
@@ -10,7 +11,40 @@ namespace Rezolver.Configuration
 	/// </summary>
 	public class ConfigurationAdapter : IConfigurationAdapter
 	{
-		public ConfigurationAdapter() { }
+		protected class ConfigurationEntryProcessOrderer : IComparer<IConfigurationEntry>
+		{
+			public int Compare(IConfigurationEntry x, IConfigurationEntry y)
+			{
+				//basically - we prioritise assembly reference entries over namespace entries, and
+				//namespace entries over type reference entries.
+				return GetSortPos(x.Type).CompareTo(GetSortPos(y.Type));
+			}
+
+			private int GetSortPos(ConfigurationEntryType type)
+			{
+				switch (type)
+				{
+					case ConfigurationEntryType.AssemblyReference:
+						return 0;
+					case ConfigurationEntryType.NamespaceImport:
+						return 1;
+					default:
+						return 2;
+				}
+			}
+		}
+
+		private readonly IConfigurationAdapterContextFactory _contextFactory;
+
+		/// <summary>
+		/// Creates a new instance of the <see cref="ConfigurationAdapter"/> class.
+		/// </summary>
+		/// <param name="contextFactory">The factory that is, by default, used to create a new 
+		/// context to be used while transforming an IConfiguration instance.</param>
+		public ConfigurationAdapter(IConfigurationAdapterContextFactory contextFactory = null) 
+		{
+			_contextFactory = contextFactory ?? ConfigurationAdapterContextFactory.Default;
+		}
 		/// <summary>
 		/// Attempts to create an IRezolverBuilder instance from the passed configuration object.
 		/// 
@@ -47,7 +81,7 @@ namespace Rezolver.Configuration
 				}
 				catch (Exception ex)
 				{
-					context.AddError(new ConfigurationError(ex, null));
+					context.AddError(new ConfigurationError(ex, instruction.Entry));
 				}
 			}
 
@@ -57,9 +91,16 @@ namespace Rezolver.Configuration
 			return toReturn;
 		}
 
+		/// <summary>
+		/// Creates the context that will be used while the passed configuration is processed.
+		/// 
+		/// The default implementation forwards this call onto the context factory that was supplied on construction.
+		/// </summary>
+		/// <param name="configuration"></param>
+		/// <returns></returns>
 		protected virtual ConfigurationAdapterContext CreateContext(IConfiguration configuration)
 		{
-			return new ConfigurationAdapterContext(configuration);
+			return _contextFactory.CreateContext(this, configuration);
 		}
 
 		/// <summary>
@@ -87,7 +128,8 @@ namespace Rezolver.Configuration
 		protected virtual void TransformEntriesToInstructions(ConfigurationAdapterContext context)
 		{
 			List<RezolverBuilderInstruction> toReturn = new List<RezolverBuilderInstruction>();
-			foreach (var entry in context.Configuration.Entries)
+			//we have to do certain entries first
+			foreach (var entry in context.Configuration.Entries.OrderBy(e => e, new ConfigurationEntryProcessOrderer()))
 			{
 				var instruction = TransformEntry(entry, context);
 				if (instruction != null)
@@ -108,9 +150,39 @@ namespace Rezolver.Configuration
 			{
 				return TransformTypeRegistrationEntry(entry, context);
 			}
+			else if (entry.Type == ConfigurationEntryType.AssemblyReference)
+			{
+				return TransformAssemblyReferenceEntry(entry, context);
+			}
 			else
 				context.AddError(new ConfigurationError(string.Format("Unsupported ConfigurationEntryType: {0}", entry.Type), entry));
 
+			return null;
+		}
+
+		/// <summary>
+		/// The default behaviour is not to return an instruction (just return null), but to attempt to convert the entry
+		/// to an IAssemblyReferenceEntry, and pass that to the current context as an assembly reference to be added.
+		/// 
+		/// Thus, we pass the responsibility of parsing the assembly reference on to the context.
+		/// 
+		/// The function signature still allows the returning of an instruction, however, in case derived classes want to tie
+		/// this operation to an action being performed on the RezolverBuilder.
+		/// </summary>
+		/// <param name="entry"></param>
+		/// <param name="context"></param>
+		/// <returns></returns>
+		protected virtual RezolverBuilderInstruction TransformAssemblyReferenceEntry(IConfigurationEntry entry, ConfigurationAdapterContext context)
+		{
+			//no instruction to append here - we simply add the assembly to the context
+			IAssemblyReferenceEntry assemblyReferenceEntry = entry as IAssemblyReferenceEntry;
+			if (assemblyReferenceEntry == null)
+			{
+				context.AddError(new ConfigurationError("IAssemblyReferenceEntry was expected", entry));
+				return null;
+			}
+			//if this operation fails, then one or more errors is expected to be added to the context.
+			context.AddAssemblyReference(assemblyReferenceEntry);
 			return null;
 		}
 
@@ -292,18 +364,44 @@ namespace Rezolver.Configuration
 		protected virtual bool TryParseTypeReference(ITypeReference typeReference, ConfigurationAdapterContext context, out Type type)
 		{
 			type = null;
-			Type baseType = System.Type.GetType(typeReference.TypeName, false);
-			if (baseType == null)
+			try
 			{
-				//kick off some overridable fallback procedure
-				context.AddError(ConfigurationError.UnresolvedType(typeReference));
+				Type baseType = context.ResolveType(typeReference.TypeName, typeReference.GenericArguments == null ? (int?)null : typeReference.GenericArguments.Length);
+				if (baseType == null)
+				{
+					context.AddError(ConfigurationError.UnresolvedType(typeReference));
+					return false;
+				}
+
+				//now process any generics
+				if (typeReference.GenericArguments != null && typeReference.GenericArguments.Length != 0)
+				{
+					//it is possible that the resolved type is not generic, even though we told the context
+					//to find us a generic type definition with a certain number of parameters.
+					//Certainly the default implementation of the context will not do this, but since it's
+					//functionality is almost entirely virtual, a derived class could misbehave.  This is
+					//part of the reason for the catch-all Exception handler that wraps this code.
+					Type[] typeParameters = new Type[typeReference.GenericArguments.Length];
+					for (int f = 0; f < typeReference.GenericArguments.Length; f++)
+					{
+						//if any of these fail, then errors will be added directly to the context, leaving us
+						//free simply to return false.
+						if(!TryParseTypeReference(typeReference.GenericArguments[f], context, out typeParameters[f]))
+							return false;
+					}
+
+					type = baseType.MakeGenericType(typeParameters);
+				}
+				else
+					type = baseType;
+
+				return true;
+			}
+			catch(Exception ex) // yeah, okay: catch-all is bad, but I think it's relevant here.
+			{
+				context.AddError(new ConfigurationError(ex, typeReference));
 				return false;
 			}
-
-			//todo: process generics
-
-			type = baseType;
-			return true;
 		}
 
 		protected bool TryParseTypeReferences(IEnumerable<ITypeReference> typeReferences, ConfigurationAdapterContext context, out List<Type> types)

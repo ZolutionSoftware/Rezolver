@@ -8,8 +8,15 @@ using Rezolver.Configuration;
 
 namespace Rezolver.Configuration.Json
 {
+	/// <summary>
+	/// JSON converter for IConfigurationEntry
+	/// 
+	/// The converter defaults to looking for type registrations; to enable it to look for a different entry type,
+	/// you must instruct Json.Net to create an instance of it using the constructor that accepts a ConfigurationEntryType
+	/// </summary>
 	public class ConfigurationEntryConverter : JsonConverter
 	{
+		private readonly ConfigurationEntryType _expectedType;
 		public override bool CanWrite
 		{
 			get
@@ -17,37 +24,79 @@ namespace Rezolver.Configuration.Json
 				return false;
 			}
 		}
+
+		public ConfigurationEntryConverter()
+			: this(ConfigurationEntryType.TypeRegistration)
+		{
+
+		}
+
+		public ConfigurationEntryConverter(ConfigurationEntryType expectedType)
+		{
+			_expectedType = expectedType;
+		}
+
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(IConfigurationEntry) == objectType;
+			switch(_expectedType)
+			{
+				case ConfigurationEntryType.TypeRegistration:
+					return typeof(ITypeRegistrationEntry) == objectType || typeof(IConfigurationEntry) == objectType;
+				case ConfigurationEntryType.AssemblyReference:
+					return typeof(IAssemblyReferenceEntry) == objectType || typeof(IConfigurationEntry) == objectType;
+				case ConfigurationEntryType.Extension:
+					return typeof(IConfigurationExtensionEntry) == objectType || typeof(IConfigurationEntry) == objectType;
+				default:
+					return false;
+			}
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			IJsonLineInfo lineInfo = (reader as IJsonLineInfo) ?? StubJsonLineInfo.Instance;
-			IConfigurationEntry toReturn = null;
-			if (reader.TokenType == JsonToken.StartObject)
+			switch(_expectedType)
 			{
-				var startPos = lineInfo.Capture();
-
-				toReturn = LoadConfigurationEntry(reader, startPos, lineInfo, serializer);
+				case ConfigurationEntryType.TypeRegistration:
+					return LoadTypeRegistrationEntry(reader, serializer, lineInfo);
+				case ConfigurationEntryType.AssemblyReference:
+					return LoadAssemblyReferenceEntry(reader, serializer, lineInfo);
+				default:
+					throw new NotSupportedException(string.Format("Cannot currently deserialise an entry type of {0} from JSON", _expectedType));
 			}
-			else
-				throw new JsonConfigurationException(JsonToken.StartObject, reader);
+		}
 
-			return toReturn;
+		IConfigurationEntry LoadAssemblyReferenceEntry(JsonReader reader, JsonSerializer serializer, IJsonLineInfo lineInfo)
+		{
+			IJsonLineInfo startPos = lineInfo.Capture();
+			
+			if (reader.TokenType != JsonToken.String)
+				throw new JsonConfigurationException(JsonToken.String, reader);
+			string assemblyName = reader.Value as string;
+			//reader.Read();
+			try{
+				return new AssemblyReferenceEntry(assemblyName, startPos.ToConfigurationLineInfo(lineInfo));
+			}
+			catch(ArgumentException)
+			{
+				throw new JsonConfigurationException("The assembly name is not valid", reader);
+			}
 		}
 
 		/// <summary>
-		/// parses the 
+		/// 
 		/// </summary>
-		/// <param name="?"></param>
-		/// <param name="startPos"></param>
-		/// <param name="lineInfo"></param>
+		/// <param name="reader"></param>
 		/// <param name="serializer"></param>
+		/// <param name="startPos">Position at which the type registration entry commence parsing</param>
+		/// <param name="lineInfo">Provides access to the current line/column position that the reader is at</param>
+		/// <param name="propName"></param>
 		/// <returns></returns>
-		private IConfigurationEntry LoadConfigurationEntry(JsonReader reader, IJsonLineInfo startPos, IJsonLineInfo lineInfo, JsonSerializer serializer)
+		IConfigurationEntry LoadTypeRegistrationEntry(JsonReader reader, JsonSerializer serializer, IJsonLineInfo lineInfo)
 		{
+			IJsonLineInfo startPos = lineInfo.Capture();
+			if (reader.TokenType != JsonToken.StartObject)
+				throw new JsonConfigurationException(JsonToken.StartObject, reader);
+
 			if (!reader.Read())
 				throw new JsonConfigurationException("End of file before reading property name", reader);
 			if (reader.TokenType != JsonToken.PropertyName)
@@ -61,20 +110,6 @@ namespace Rezolver.Configuration.Json
 			if (string.IsNullOrWhiteSpace(propName))
 				throw new JsonConfigurationException("Property name cannot be null, empty or whitespace", reader);
 
-			return LoadTypeRegistrationEntry(reader, serializer, startPos, lineInfo, propName);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="reader"></param>
-		/// <param name="serializer"></param>
-		/// <param name="startPos">Position at which the type registration entry commence parsing</param>
-		/// <param name="lineInfo">Provides access to the current line/column position that the reader is at</param>
-		/// <param name="propName"></param>
-		/// <returns></returns>
-		ITypeRegistrationEntry LoadTypeRegistrationEntry(JsonReader reader, JsonSerializer serializer, IJsonLineInfo startPos, IJsonLineInfo lineInfo, string propName = null)
-		{
 			if (propName == null) propName = reader.Value as string;
 			ITypeReference[] regTypes = null;
 			bool expectValueProperty = false;

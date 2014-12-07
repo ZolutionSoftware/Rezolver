@@ -21,7 +21,8 @@ namespace Rezolver.Configuration.Json
 			//types so that we can branch the serialization code to create specialised versions of 
 			//configuration entries or target metadata depending on the content of the JSON.
 			toReturn.Converters.Add(new TypeReferenceConverter());
-			toReturn.Converters.Add(new ConfigurationEntryConverter());
+			toReturn.Converters.Add(new ConfigurationEntryConverter(ConfigurationEntryType.TypeRegistration));
+			toReturn.Converters.Add(new ConfigurationEntryConverter(ConfigurationEntryType.AssemblyReference));
 			toReturn.Converters.Add(new RezolveTargetMetadataConverter());
 			return toReturn;
 		}

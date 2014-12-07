@@ -40,6 +40,14 @@ namespace Rezolver.Configuration.Json
 			{
 				[JsonProperty("rezolve")]
 				public IConfigurationEntry[] RezolveEntries { get; set; }
+
+				/// <summary>
+				/// Note this property has an explicit JsonConverter to tell the serializer to deserialize assembly references.
+				/// </summary>
+				[JsonProperty("assemblies")]
+				public IAssemblyReferenceEntry[] Assemblies { get; set; }
+				[JsonProperty("using")]
+				public IConfigurationEntry[] NamespaceImports { get; set; }
 			}
 
 			public override bool CanWrite
@@ -58,7 +66,7 @@ namespace Rezolver.Configuration.Json
 			{
 				var proxy = serializer.Deserialize<ConfigurationProxy>(reader);
 
-				return new JsonConfiguration(proxy.RezolveEntries);
+				return new JsonConfiguration(proxy.RezolveEntries.Concat(proxy.Assemblies).Concat(proxy.NamespaceImports).ToArray());
 			}
 
 			public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

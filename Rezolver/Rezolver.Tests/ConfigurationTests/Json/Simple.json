@@ -1,11 +1,14 @@
 ﻿{
 	"assemblies": [
-
+		"Rezolver.Tests"
+	],
+	"using": [ 
+		
 	],
 	"rezolve": [
 		{ "System.Int32": 10 },
-		{ "UnitTestProject2.RequiresInt": { "$construct": "$self" } },
-		{ "UnitTestProject2.IRequiresInt": { "$construct": "UnitTestProject2.RequiresInt" } },
+		{ "Rezolver.Tests.ConfigurationTests.RequiresInt": { "$construct": "$self" } },
+		{ "Rezolver.Tests.ConfigurationTests.IRequiresInt": { "$construct": "Rezolver.Tests.ConfigurationTests.RequiresInt" } },
 		{
 			"type": { "name": "System.Collections.Generic.IEnumerable", "args": [ "System.Int32" ] },
 			"value": [ 1, 2, 3 ]
