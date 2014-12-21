@@ -1,7 +1,4 @@
 ﻿{
-	"assemblies": [
-		"Rezolver.Tests"
-	],
 	"rezolve": [
 		{ "System.Int32": 10 },
 		{ "Rezolver.Tests.ConfigurationTests.RequiresInt": { "$construct": "$self" } },

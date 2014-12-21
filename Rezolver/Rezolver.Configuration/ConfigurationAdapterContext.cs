@@ -22,11 +22,6 @@ namespace Rezolver.Configuration
 
 		}
 
-		private static readonly Assembly[] _defaultReferences = new[] {
-			typeof(int).Assembly,
-			typeof(Stack<>).Assembly,
-			typeof(HashSet<>).Assembly
-		};
 		private static readonly string[] _emptyNamespace = new[] { "" };
 
 		private readonly Dictionary<string, Type> _boundTypes;
@@ -86,13 +81,27 @@ namespace Rezolver.Configuration
 			_references = new Dictionary<string, Assembly>();
 			_using = new HashSet<string>();
 		}
-		public ConfigurationAdapterContext(IConfiguration configuration)
+		/// <summary>
+		/// Constructs a new instance of the <see cref="ConfigurationAdapterContext"/> class.
+		/// </summary>
+		/// <param name="configuration">Required. The configuration that is being processed by the adapter for which this
+		/// context is being constructed</param>
+		/// <param name="defaultAssemblyReferences">Optional. Default set of assemblies that are to be searched for types
+		/// when type references are processed.</param>
+		public ConfigurationAdapterContext(IConfiguration configuration, IEnumerable<Assembly> defaultAssemblyReferences = null)
 			: this()
 		{
 			if (configuration == null)
 				throw new ArgumentNullException("configuration");
 
+			defaultAssemblyReferences = defaultAssemblyReferences ?? Enumerable.Empty<Assembly>();
+
 			this._configuration = configuration;
+			//import the default references
+			foreach(var reference in defaultAssemblyReferences.Where(a => a != null))
+			{
+				_references[reference.FullName] = reference;
+			}
 		}
 
 		public void AddError(IConfigurationError error)
@@ -266,22 +275,6 @@ namespace Rezolver.Configuration
 				AddAssemblyReferenceBase(a);
 			}
 		}
-
-		protected virtual IEnumerable<Assembly> GetDefaultAssemblyReferences()
-		{
-			return _defaultReferences;
-		}
-
-		/// <summary>
-		/// Called to add the default set of referenced assemblies to this context.
-		/// 
-		/// In addition to overriding this method directly, a derived type can extend this list 
-		/// simply by overriding the GetDefaultAssemblyReferences method.
-		/// </summary>
-		public virtual void AddDefaultAssemblyReferences()
-		{
-			AddAssemblyReferences(GetDefaultAssemblyReferences());
-		} 
 
 		/// <summary>
 		/// Gets an enumerable of all the assemblies that are referenced by this configuration file.

@@ -7,10 +7,38 @@ using System.Text;
 namespace Rezolver.Configuration
 {
 	/// <summary>
-	/// Implementation of the IConfigurationAdapter.
+	/// Standard implementation of the <see cref="IConfigurationAdapter"/> interface.
 	/// </summary>
 	public class ConfigurationAdapter : IConfigurationAdapter
 	{
+		private static IConfigurationAdapterContextFactory _defaultContextFactory = ConfigurationAdapterContextFactory.Instance;
+
+		/// <summary>
+		/// Gets or sets the default context factory.  The uninitialised default is <see cref="ConfigurationAdapterContextFactory.Instance"/>.
+		/// 
+		/// Note - this can never be a null reference.
+		/// </summary>
+		/// <value>The default context factory.</value>
+		/// <exception cref="System.ArgumentNullException">If you try to set the property to null.</exception>
+		public static IConfigurationAdapterContextFactory DefaultContextFactory
+		{
+			get
+			{
+				return _defaultContextFactory;
+			}
+			set
+			{
+				if (value == null) throw new ArgumentNullException("value");
+				_defaultContextFactory = value;
+			}
+		}
+
+		/// <summary>
+		/// Used by the <see cref="ConfigurationAdapter"/> class to sort configuration entries for processing.
+		/// 
+		/// It ensures that Assembly Reference entries are given priority, followed by Namespace Imports, and then
+		/// finally all the rest.
+		/// </summary>
 		protected class ConfigurationEntryProcessOrderer : IComparer<IConfigurationEntry>
 		{
 			public int Compare(IConfigurationEntry x, IConfigurationEntry y)
@@ -36,14 +64,23 @@ namespace Rezolver.Configuration
 
 		private readonly IConfigurationAdapterContextFactory _contextFactory;
 
+		protected IConfigurationAdapterContextFactory ContextFactory
+		{
+			get
+			{
+				return _contextFactory;
+			}
+		}
+
 		/// <summary>
 		/// Creates a new instance of the <see cref="ConfigurationAdapter"/> class.
 		/// </summary>
 		/// <param name="contextFactory">The factory that is, by default, used to create a new 
-		/// context to be used while transforming an IConfiguration instance.</param>
+		/// context to be used while transforming an IConfiguration instance.  If you pass null, then
+		/// the <see cref="DefaultContextFactory"/> will be used.</param>
 		public ConfigurationAdapter(IConfigurationAdapterContextFactory contextFactory = null) 
 		{
-			_contextFactory = contextFactory ?? ConfigurationAdapterContextFactory.Default;
+			_contextFactory = contextFactory ?? DefaultContextFactory;
 		}
 		/// <summary>
 		/// Attempts to create an IRezolverBuilder instance from the passed configuration object.
@@ -67,7 +104,7 @@ namespace Rezolver.Configuration
 
 			ConfigurationAdapterContext context = CreateContext(configuration);
 
-			TransformEntriesToInstructions(context);
+			AppendInstructions(context);
 
 			if (context.ErrorCount != 0)
 				throw new ConfigurationException(context);
@@ -104,28 +141,26 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// Called to construct the instance of the IRezolverBuilder into which registrations are to be loaded.
-		/// 
-		/// No parsing of the configuration is to be done here (except, perhaps, if the actual implementation of IRezolverBuilder that
-		/// is used id dependant on, say, the type of configuration object.
-		/// 
-		/// The base behaviour is simply to create an instance of RezolverBuilder.
+		/// Called to construct the instance of the <see cref="IRezolverBuilder"/> into which registrations are to be loaded.
 		/// </summary>
-		/// <param name="configuration"></param>
-		/// <returns></returns>
+		/// <remarks>
+		/// No parsing of the configuration is to be done here (except, perhaps, if the actual implementation of 
+		/// <see cref="IRezolverBuilder"/> that is used is dependant upon, say, the type of configuration object.
+		/// 
+		/// The base behaviour is simply to create an instance of <see cref="RezolverBuilder"/>.
+		/// </remarks>
+		/// <param name="configuration">The configuration instance for which a builder is to be created.</param>
 		protected virtual IRezolverBuilder CreateBuilderInstance(IConfiguration configuration)
 		{
 			return new RezolverBuilder();
 		}
 
 		/// <summary>
-		/// Called to project the configuration entries that are in configuration within the passed context into instructions.
-		/// 
-		/// Each instruction that is created is added into the context.
+		/// Called to add instructions into the context from the configuration entries in the configuration within the passed context.
 		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
-		protected virtual void TransformEntriesToInstructions(ConfigurationAdapterContext context)
+		/// <param name="context">The context for this operation - provides access to the configuration whose entries are to be processed,
+		/// and acts as the target for the processing instructions.</param>
+		protected virtual void AppendInstructions(ConfigurationAdapterContext context)
 		{
 			List<RezolverBuilderInstruction> toReturn = new List<RezolverBuilderInstruction>();
 			//we have to do certain entries first
@@ -138,12 +173,14 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// Called to transform a configuration entry into an instruction that will later be performed on the rezolver builder that
+		/// Called to transform a configuration entry into an instruction that will later be performed on the builder that
 		/// is constructed by the configuration adapter.
 		/// </summary>
-		/// <param name="entry"></param>
-		/// <param name="context"></param>
-		/// <returns></returns>
+		/// <param name="entry">The entry to be transformed into an instruction.</param>
+		/// <param name="context">The context for the operation.</param>
+		/// <returns>An instance of <see cref="RezolverBuilderInstruction"/> if successful, otherwise null.
+		/// 
+		/// If errors occur, they are added to the context.</returns>
 		protected virtual RezolverBuilderInstruction TransformEntry(IConfigurationEntry entry, ConfigurationAdapterContext context)
 		{
 			if (entry.Type == ConfigurationEntryType.TypeRegistration)
@@ -161,17 +198,20 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// The default behaviour is not to return an instruction (just return null), but to attempt to convert the entry
-		/// to an IAssemblyReferenceEntry, and pass that to the current context as an assembly reference to be added.
-		/// 
-		/// Thus, we pass the responsibility of parsing the assembly reference on to the context.
+		/// Transforms an <see cref="IConfigurationEntry"/> with a <see cref="IConfigurationEntry.Type"/> of 
+		/// <see cref="ConfigurationEntryType.AssemblyReference"/> by attempting to convert the entry
+		/// to an <see cref="IAssemblyReferenceEntry"/>, and then passing that to the current context as an assembly reference to be added.
+		/// </summary>
+		/// <remarks>
+		/// The default behaviour of this method is not to return anything - instead the entry is passed to the context to be
+		/// treated as an Assembly Reference.  
 		/// 
 		/// The function signature still allows the returning of an instruction, however, in case derived classes want to tie
-		/// this operation to an action being performed on the RezolverBuilder.
-		/// </summary>
-		/// <param name="entry"></param>
-		/// <param name="context"></param>
-		/// <returns></returns>
+		/// this operation to an action being performed on the <see cref="IRezolverBuilder"/> later on.
+		/// </remarks>
+		/// <param name="entry">The entry to be processed.</param>
+		/// <param name="context">The context for the operation</param>
+		/// <returns>The default implementation returns null</returns>
 		protected virtual RezolverBuilderInstruction TransformAssemblyReferenceEntry(IConfigurationEntry entry, ConfigurationAdapterContext context)
 		{
 			//no instruction to append here - we simply add the assembly to the context
@@ -186,6 +226,22 @@ namespace Rezolver.Configuration
 			return null;
 		}
 
+		/// <summary>
+		/// Transforms an <see cref="IConfigurationEntry"/> with a <see cref="IConfigurationEntry.Type"/> of 
+		/// <see cref="ConfigurationEntryType.TypeRegistration"/> into a <see cref="RezolverBuilderInstruction"/>.
+		/// </summary>
+		/// <remarks>The default behaviour is to:
+		/// <list type="number">
+		/// <item><description>Attempt to convert the entry to an <see cref="ITypeRegistrationEntry"/></description></item>
+		/// <item><description>Parsing its type references in <see cref="ITypeRegistrationEntry.Types"/></description></item>
+		/// <item><description>Constructing an <see cref="IRezolveTarget"/> from the entry's <see cref="ITypeRegistrationEntry.TargetMetadata"/> through
+		/// a call to <see cref="CreateTarget"/>.</description></item>
+		/// <item><description>If that returns a non-null target, then a <see cref="TypeRegistrationInstruction"/> is created and returned.</description></item>
+		/// </list>
+		/// </remarks>
+		/// <param name="entry">The entry to be transformed.</param>
+		/// <param name="context">The context for the operation.</param>
+		/// <returns>If the entry can be converted into a <see cref="RezolverBuilderInstruction"/>, then an instance of that type, otherwise null.</returns>
 		protected virtual RezolverBuilderInstruction TransformTypeRegistrationEntry(IConfigurationEntry entry, ConfigurationAdapterContext context)
 		{
 			ITypeRegistrationEntry typeRegistrationEntry = entry as ITypeRegistrationEntry;
@@ -208,9 +264,17 @@ namespace Rezolver.Configuration
 			return null;
 		}
 
-		private IRezolveTarget CreateTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
+		/// <summary>
+		/// Called to create an <see cref="T:Rezolver.IRezolveTarget"/> from the passed <paramref name="metadata"/>.
+		/// </summary>
+		/// <param name="metadata">The metadata describing the type of target to be created.</param>
+		/// <param name="lineInfo">Contains information about where in the configuration file the metadata is being referenced.</param>
+		/// <param name="targetTypes">The target types for the target when it is added to an <see cref="IRezolverBuilder"/>.</param>
+		/// <param name="context">The context for the operation.</param>
+		/// <returns>An instance of an <see cref="IRezolveTarget"/> if one can be created from the passed metadata, otherwise null.</returns>
+		protected virtual IRezolveTarget CreateTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
-			//TODO: I don't really like the pattern I have here.  Should have something more like
+			//TODO: I don't really like the pattern I have here.  Should have something more like a visitor or somesuch.
 			switch (metadata.Type)
 			{
 				case RezolveTargetMetadataType.Constructor:
@@ -234,7 +298,17 @@ namespace Rezolver.Configuration
 			return null;
 		}
 
-		private IRezolveTarget CreateExtensionTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
+		/// <summary>
+		/// Called by <see cref="CreateTarget"/> if the metadata's <see cref="IRezolveTargetMetadata.Type"/> is equal to
+		/// <see cref="RezolveTargetMetadataType.Extension"/>.  The base implementation always throws a <see cref="System.NotSupportedException"/>.
+		/// </summary>
+		/// <param name="metadata">See <see cref="CreateTarget"/>.</param>
+		/// <param name="lineInfo">See <see cref="CreateTarget"/>.</param>
+		/// <param name="targetTypes">See <see cref="CreateTarget"/>.</param>
+		/// <param name="context">See <see cref="CreateTarget"/>.</param>
+		/// <returns>See <see cref="CreateTarget"/>.</returns>
+		/// <exception cref="System.NotSupportedException">Extension metadata cannot currently be transformed by the default configuration adapter.</exception>
+		protected virtual IRezolveTarget CreateExtensionTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
 			//double-check that the metadata has IRezolveTargetMetadataExtension interface
 			IRezolveTargetMetadataExtension extensionMeta = metadata as IRezolveTargetMetadataExtension;
@@ -247,7 +321,17 @@ namespace Rezolver.Configuration
 			throw new NotSupportedException("Extension metadata cannot currently be transformed by the default configuration adapter.");
 		}
 
-		private IRezolveTarget CreateSingletonTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
+		/// <summary>
+		/// Called by <see cref="CreateTarget" /> if the metadata's <see cref="IRezolveTargetMetadata.Type" /> is equal to
+		/// <see cref="RezolveTargetMetadataType.Singleton" />.  The base implementation always throws a <see cref="System.NotImplementedException" />.
+		/// </summary>
+		/// <param name="metadata">See <see cref="CreateTarget" />.</param>
+		/// <param name="lineInfo">See <see cref="CreateTarget" />.</param>
+		/// <param name="targetTypes">See <see cref="CreateTarget" />.</param>
+		/// <param name="context">See <see cref="CreateTarget" />.</param>
+		/// <returns>See <see cref="CreateTarget" />.</returns>
+		/// <exception cref="System.NotImplementedException">Not finished implementing singleton targets yet.</exception>		
+		protected virtual IRezolveTarget CreateSingletonTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
 			ISingletonTargetMetadata singletonMeta = metadata as ISingletonTargetMetadata;
 			if (singletonMeta == null)
@@ -259,7 +343,22 @@ namespace Rezolver.Configuration
 			throw new NotImplementedException("Not finished implementing singleton targets yet.");
 		}
 
-		private IRezolveTarget CreateObjectTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
+		/// <summary>
+		/// Called by <see cref="CreateTarget"/> if the metadata's <see cref="IRezolveTargetMetadata.Type"/> is equal to
+		/// <see cref="RezolveTargetMetadataType.Object"/>.
+		/// </summary>
+		/// <param name="metadata">See <see cref="CreateTarget"/>.</param>
+		/// <param name="lineInfo">See <see cref="CreateTarget"/>.</param>
+		/// <param name="targetTypes">See <see cref="CreateTarget"/>.</param>
+		/// <param name="context">See <see cref="CreateTarget"/>.</param>
+		/// <returns>See <see cref="CreateTarget"/>.</returns>
+		/// <remarks>After converting the <paramref name="metadata"/> into an <see cref="IObjectTargetMetadata"/> instance,
+		/// the base implementation looks for the first type in <paramref name="targetTypes"/> that the metadata will support
+		/// when that the type is passed to the <see cref="IObjectTargetMetadata.GetObject"/> method.
+		/// 
+		/// As soon as a type yields a return value from that method, without an <see cref="ArgumentException"/> being thrown, then that
+		/// return value will be used as the value to wrapped in an <see cref="ObjectTarget"/> and returned.</remarks>
+		protected virtual IRezolveTarget CreateObjectTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
 			IObjectTargetMetadata objectMeta = metadata as IObjectTargetMetadata;
 			if (objectMeta == null)
@@ -285,6 +384,7 @@ namespace Rezolver.Configuration
 				try
 				{
 					theObject = objectMeta.GetObject(type);
+					break;
 				}
 				catch (ArgumentException aex)
 				{
@@ -303,7 +403,20 @@ namespace Rezolver.Configuration
 			return new ObjectTarget(theObject);
 		}
 
-		private IRezolveTarget CreateConstructorTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
+		/// <summary>
+		/// Called by <see cref="CreateTarget"/> if the metadata's <see cref="IRezolveTargetMetadata.Type"/> is equal to
+		/// <see cref="RezolveTargetMetadataType.Constructor"/>.
+		/// </summary>
+		/// <param name="metadata">See <see cref="CreateTarget"/>.</param>
+		/// <param name="lineInfo">See <see cref="CreateTarget"/>.</param>
+		/// <param name="targetTypes">See <see cref="CreateTarget"/>.</param>
+		/// <param name="context">See <see cref="CreateTarget"/>.</param>
+		/// <returns>See <see cref="CreateTarget"/>.</returns>
+		/// <remarks>After converting the <paramref name="metadata"/> into an <see cref="IConstructorTargetMetadata"/> instance,
+		/// the method attempts to identify the type that is to be build by the constructor target.  If found, then a <see cref="ConstructorTarget"/>
+		/// or <see cref="GenericConstructorTarget"/> is created depending on whether the target type is generic or not.  Note - a closed generic type
+		/// will be handled by a <see cref="ConstructorTarget"/>.</remarks>
+		protected virtual IRezolveTarget CreateConstructorTarget(IRezolveTargetMetadata metadata, IConfigurationLineInfo lineInfo, List<Type> targetTypes, ConfigurationAdapterContext context)
 		{
 			IConstructorTargetMetadata constructorMeta = metadata as IConstructorTargetMetadata;
 			if (constructorMeta == null)
@@ -361,6 +474,16 @@ namespace Rezolver.Configuration
 				return ConstructorTarget.Auto(typeToBuild);
 		}
 
+		/// <summary>
+		/// Attempts to convert the passed <paramref name="typeReference" /> into a <see cref="System.Type"/>.
+		/// 
+		/// Errors are added to the <paramref name="context"/> if the method returns false.
+		/// </summary>
+		/// <param name="typeReference">The type reference.</param>
+		/// <param name="context">The context for the operation.</param>
+		/// <param name="type">The type that is identified, if successful.</param>
+		/// <returns><c>true</c> if the type reference is successfully parsed, <c>false</c> otherwise (with errors being added
+		/// to the <paramref name="context"/>).</returns>
 		protected virtual bool TryParseTypeReference(ITypeReference typeReference, ConfigurationAdapterContext context, out Type type)
 		{
 			type = null;
@@ -404,6 +527,17 @@ namespace Rezolver.Configuration
 			}
 		}
 
+		/// <summary>
+		/// Tries to parse all type references, returning an overall success flag, with successfully parsed types being added to a list that
+		/// is returned in the <paramref name="types"/> output parameter.
+		/// </summary>
+		/// <param name="typeReferences">The type references.</param>
+		/// <param name="context">The context for the operation.</param>
+		/// <param name="types">Receives the types that are parsed.  Note that if the method returns true, 
+		/// then this list will contain the same number of types as there are references in <paramref name="typeReferences"/>, in the same order.
+		/// If the method returns false, however, then the number of results in this list is undefined and you will not be able to marry up the input
+		/// type reference to its output type.</param>
+		/// <returns><c>true</c> if all type references could be parsed, otherwise <c>false</c>.</returns>
 		protected bool TryParseTypeReferences(IEnumerable<ITypeReference> typeReferences, ConfigurationAdapterContext context, out List<Type> types)
 		{
 			bool result = true;

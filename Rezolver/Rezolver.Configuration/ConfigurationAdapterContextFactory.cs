@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Rezolver.Configuration
 {
 	/// <summary>
-	/// The standard implementation of the IConfigurationAdapterContextFactory interface, and one which
+	/// The standard Singleton implementation of the IConfigurationAdapterContextFactory interface, and one which
 	/// you can use as the starting point of your own factory.
 	/// 
 	/// By default, it creates a new instance of the ConfigurationAdapterContext class (using the virtual method
@@ -14,42 +15,52 @@ namespace Rezolver.Configuration
 	/// </summary>
 	public class ConfigurationAdapterContextFactory : IConfigurationAdapterContextFactory
 	{
-		private static readonly ConfigurationAdapterContextFactory _default = new ConfigurationAdapterContextFactory();
-		/// <summary>
-		/// The default context factory.  This is used automatically by the ConfigurationAdapter class if no explicit
-		/// factory is passed to it on construction.
-		/// </summary>
-		public static ConfigurationAdapterContextFactory Default { get { return _default; } }
+		private static readonly ConfigurationAdapterContextFactory _instance = new ConfigurationAdapterContextFactory();
+
+		private static readonly Assembly[] _defaultReferences = new[] {
+			typeof(int).Assembly,
+			typeof(Stack<>).Assembly,
+			typeof(HashSet<>).Assembly
+		};
 
 		/// <summary>
-		/// Creation of new instances of this class, outside of the <see cref="Default"/> instance, is only through inheritance.
+		/// The one and only instance of this context factory.  Note that this is also the default application-wide context factory that is
+		/// used by the standard <see cref="ConfigurationAdapter"/> class when converting configuration data into rezolvers (by virtue
+		/// of the <see cref="ConfigurationAdapter.DefaultContextFactory"/> property, which you can change).
+		/// </summary>
+		public static ConfigurationAdapterContextFactory Instance {
+			get { return _instance; }
+		}
+
+		/// <summary>
+		/// Creation of new instances of this class, outside of the <see cref="Instance"/> instance, is only through inheritance.
 		/// </summary>
 		protected ConfigurationAdapterContextFactory() { }
 
 		/// <summary>
-		/// Implements the <see cref="IConfigurationAdapterContextFactory"/> method of the same name.
+		/// Gets the assemblies that are to be used for new contexts as the default set of references.
+		/// 
+		/// The base behaviour is to add mscorlib, System and System.Core although, depending on the target platform,
+		/// the list might be less.
 		/// </summary>
-		/// <param name="adapter"></param>
-		/// <param name="configuration"></param>
 		/// <returns></returns>
-		public virtual ConfigurationAdapterContext CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+		protected virtual IEnumerable<Assembly> GetDefaultAssemblyReferences()
 		{
-			var toReturn = CreateConfigurationAdapterContextInstance(adapter, configuration);
-			toReturn.AddDefaultAssemblyReferences();
-			return toReturn;
+			return _defaultReferences;
 		}
 
 		/// <summary>
-		/// Called by <see cref="CreateContext"/> to create an instance of the <see cref="ConfigurationAdapterContext"/> class.
+		/// Implements the <see cref="IConfigurationAdapterContextFactory"/> method of the same name.
 		/// 
-		/// Override this if you want to customise the exact type of context that is created by the factory.
+		/// The base behaviour is to create an instance of the <see cref="ConfigurationAdapterContext"/> class, passing
+		/// the configuration and the default set of assembly references returned by <see cref="GetDefaultAssemblyReferences"/>.
 		/// </summary>
-		/// <param name="adapter">The adapter for which the context is being created.</param>
-		/// <param name="configuration">The configuration object that's being processed by the adapter.</param>
-		/// <returns>A new instance of the <see cref="ConfigurationAdapterContext"/> class.</returns>
-		protected virtual ConfigurationAdapterContext CreateConfigurationAdapterContextInstance(ConfigurationAdapter adapter, IConfiguration configuration)
+		/// <param name="adapter">The adapter.</param>
+		/// <param name="configuration">The configuration.</param>
+		/// <returns></returns>
+		public virtual ConfigurationAdapterContext CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
 		{
-			return new ConfigurationAdapterContext(configuration);
+			return new ConfigurationAdapterContext(configuration, GetDefaultAssemblyReferences());
 		}
 	}
 }

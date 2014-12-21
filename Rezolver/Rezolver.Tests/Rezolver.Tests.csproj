@@ -65,6 +65,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JsonTestResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ConfigurationTests\Json\AdvancedJsonConfigurationTests.cs" />
+    <Compile Include="ConfigurationTests\Json\JsonConfigurationTestsBase.cs" />
     <Compile Include="ConfigurationTests\RequiresInt.cs" />
     <Compile Include="ICompiledRezolveTargetExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +104,10 @@
       <Project>{1d178059-53a1-4637-a192-74e18bcc54c0}</Project>
       <Name>Rezolver.Advanced</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Rezolver.Configuration.Advanced\Rezolver.Configuration.Advanced.csproj">
+      <Project>{97210bd8-1dc1-4355-8871-7b7594bf8b2b}</Project>
+      <Name>Rezolver.Configuration.Advanced</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rezolver.Configuration.Json\Rezolver.Configuration.Json.csproj">
       <Project>{c653d356-4337-4502-97e6-c8cf79807405}</Project>
       <Name>Rezolver.Configuration.Json</Name>
@@ -117,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ConfigurationTests\Json\Simple.json" />
+    <EmbeddedResource Include="ConfigurationTests\Json\Advanced.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
