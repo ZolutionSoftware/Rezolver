@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rezolver.Configuration.Json;
 using Rezolver.Configuration;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Rezolver.Tests.ConfigurationTests.Json
 {
@@ -13,6 +14,18 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		protected override IConfigurationAdapter CreateAdapter()
 		{
 			return new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
+		}
+
+		protected override string PreProcess(string json)
+		{
+			var config = JObject.Parse(json);
+			if (config.Remove("assemblies"))
+			{
+				Console.WriteLine("Removed 'assemblies' property from configuration json for advanced test");
+				return config.ToString();
+			}
+
+			return base.PreProcess(json);
 		}
 
 		[TestMethod]

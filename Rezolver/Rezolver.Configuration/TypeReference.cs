@@ -57,7 +57,7 @@ namespace Rezolver.Configuration
 		{
 			if (string.IsNullOrWhiteSpace(typeName))
 				throw new ArgumentException("string cannot be null, empty or all whitespace", "typeName");
-			if (genericArguments.Any(t => t == null))
+			if (genericArguments != null && genericArguments.Any(t => t == null))
 				throw new ArgumentException("all type references passed as generic arguments must be non-null", "genericArguments");
 
 			_typeName = typeName;
