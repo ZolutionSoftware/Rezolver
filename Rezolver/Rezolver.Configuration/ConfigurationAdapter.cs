@@ -340,7 +340,8 @@ namespace Rezolver.Configuration
 				return null;
 			}
 
-			throw new NotImplementedException("Not finished implementing singleton targets yet.");
+			return singletonMeta.Scoped ? (IRezolveTarget)new ScopedSingletonTarget(CreateTarget(singletonMeta.Inner, lineInfo, targetTypes, context))
+				: new SingletonTarget(CreateTarget(singletonMeta.Inner, lineInfo, targetTypes, context));
 		}
 
 		/// <summary>

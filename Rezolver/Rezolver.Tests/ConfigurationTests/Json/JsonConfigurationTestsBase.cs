@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rezolver.Configuration.Json;
 using Rezolver.Configuration;
 using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace Rezolver.Tests.ConfigurationTests.Json
 {
@@ -83,7 +84,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		[TestMethod]
 		public void ShouldRezolveRequiresNothing_1()
 		{
-			//fiirst way of doing type references (as per last two types) for the registration - 
+			//first way of doing type references (as per last two types) for the registration - 
 			//use the type name as the property name, with it's value being the target (the { "$construct" : ... } bit)
 			string json = @"
 {
@@ -124,7 +125,6 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		}
 
 		[TestMethod]
-
 		public void ShouldRezolveRequiresNothing_3()
 		{
 			//third way of doing this - an explicit type member, with the value being an object that
@@ -149,6 +149,119 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			int lastInstanceNumber = RequiresNothing.LastInstanceNumber;
 			var instance = rezolver.Resolve<RequiresNothing>();
 			Assert.AreEqual(lastInstanceNumber + 1, instance.InstanceNumber);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveRequiresInt()
+		{
+			//I'm not doing the same three examples as above here - that's already been tested.
+			//however I am registering an entry for IRequiresInt, but building an instance of RequiresInt
+			string json = @"
+{
+	""assemblies"":[""Rezolver.Tests"" ],
+	""rezolve"": [
+		{ ""System.Int32"": 105 },
+		{ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"" : { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" } }
+	]
+}
+";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
+			Assert.AreEqual(105, requiresInt.IntValue);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveRequiresIntByTwoTypes()
+		{
+			//this time registering RequiresInt against both RequiresInt type and the interface
+			//notice this time the use of 'types' instead of 'type'.  This accepts an array of type references which,
+			//as mentioned in an earlier test, can be a literal string specifying a type name, or a construct such 
+			//as { "name": "[typename]", "args": [ {type_reference}, ... ] }
+			string json = @"{
+	""assemblies"":[""Rezolver.Tests"" ],
+	""rezolve"": [
+		{ ""System.Int32"": 110 },
+		{ 
+			""types"": [ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"", ""Rezolver.Tests.ConfigurationTests.RequiresInt"" ],
+			""value"": { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" }
+		}
+	]
+}";
+
+			var rezolver = ParseConfigurationAndBuild(json);
+			IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
+			RequiresInt requiresInt2 = rezolver.Resolve<RequiresInt>();
+
+			Assert.AreEqual(requiresInt.IntValue, requiresInt2.IntValue);
+			Assert.AreEqual(110, requiresInt.IntValue);
+			//however, they shouldn't be the same instance:
+			Assert.AreNotSame(requiresInt, requiresInt2);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveSingletonRequiresIntByTwoTypes()
+		{
+			//as you can guess by the last assert in the previous test - this does the same
+			//again, except this time, it's expected that we get the same instance for both rezolve calls.
+			//singletons are easy - just take the value entry that you typically put, and wrap it in a { "$singleton": /* original value */ }
+			string json = @"{
+	""assemblies"":[""Rezolver.Tests"" ],
+	""rezolve"": [
+		{ ""System.Int32"": 115 },
+		{ 
+			""types"": [ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"", ""Rezolver.Tests.ConfigurationTests.RequiresInt"" ],
+			""value"": { ""$singleton"" : { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" } }
+		}
+	]
+}";
+
+			var rezolver = ParseConfigurationAndBuild(json);
+			IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
+			RequiresInt requiresInt2 = rezolver.Resolve<RequiresInt>();
+
+			Assert.AreEqual(115, requiresInt.IntValue);
+			//however, they shouldn't be the same instance:
+			Assert.AreSame(requiresInt, requiresInt2);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfStrings()
+		{
+			//here, an array of strings can be provided by a literal string array in the JSON.
+
+			string json = @"{
+	""assemblies"":[""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{ ""System.String[]"" : [ ""Hello World0"", ""Hello World1"", ""Hello World2"" ] }
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			string[] array = rezolver.Resolve<string[]>();
+			Assert.IsNotNull(array);
+			Assert.AreEqual(3, array.Length);
+			Assert.IsTrue(Enumerable.Range(0, 3).Select(i => string.Format("Hello World{0}", i)).SequenceEqual(array));
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfIRequiresNothing()
+		{
+			string json = @"{
+	""assemblies"":[""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{ ""Rezolver.Tests.ConfigurationTests.IRequiresNothing[]"" : 
+			[ 
+				{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+				{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+				{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }
+			] 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IRequiresNothing[] array = rezolver.Resolve<IRequiresNothing[]>();
+			Assert.IsNotNull(array);
+			Assert.AreEqual(3, array.Length);
+			Assert.AreEqual(3, array.Select(r => r.InstanceNumber).Distinct().ToArray().Length);
 		}
 	}
 }
