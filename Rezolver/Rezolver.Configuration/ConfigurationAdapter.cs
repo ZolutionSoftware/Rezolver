@@ -236,7 +236,7 @@ namespace Rezolver.Configuration
 		/// <item><description>Parsing its type references in <see cref="ITypeRegistrationEntry.Types"/></description></item>
 		/// <item><description>Constructing an <see cref="IRezolveTarget"/> from the entry's <see cref="ITypeRegistrationEntry.TargetMetadata"/> through
 		/// a call to <see cref="CreateTarget"/>.</description></item>
-		/// <item><description>If that returns a non-null target, then a <see cref="TypeRegistrationInstruction"/> is created and returned.</description></item>
+		/// <item><description>If that returns a non-null target, then a <see cref="RegisterInstruction"/> is created and returned.</description></item>
 		/// </list>
 		/// </remarks>
 		/// <param name="entry">The entry to be transformed.</param>
@@ -255,11 +255,35 @@ namespace Rezolver.Configuration
 			if (!TryParseTypeReferences(typeRegistrationEntry.Types, context, out targetTypes))
 				return null; //can't proceed, but any errors will have been placed in errorsTarget
 
-			var target = CreateTarget(typeRegistrationEntry.TargetMetadata, entry, targetTypes, context);
-
-			if (target != null)
+			if (typeRegistrationEntry.IsMultipleRegistration)
 			{
-				return new TypeRegistrationInstruction(targetTypes, target, entry);
+				List<IRezolveTarget> targets = null;
+				//a multiple registration should have a MetadataList as its TargetMetadata
+				//if it doesn't, then we'll just take the one, of course
+				if (typeRegistrationEntry.TargetMetadata.Type == RezolveTargetMetadataType.MetadataList)
+				{
+					IRezolveTargetMetadataList metadataList = typeRegistrationEntry.TargetMetadata as IRezolveTargetMetadataList;
+					if (metadataList != null)
+						targets = new List<IRezolveTarget>(metadataList.Targets.Select(t => CreateTarget(t, entry, targetTypes, context)));
+					else
+					{
+						context.AddError(new ConfigurationError("Multiple registration target metadata has type 'MetadataList' but is not an instance of IRezolveTargetMetadataList - the configuration parser has produced an invalid configuration entry", entry));
+						return null;
+					}
+				}
+				else
+					targets = new List<IRezolveTarget>() { CreateTarget(typeRegistrationEntry.TargetMetadata, entry, targetTypes, context) };
+
+				return new RegisterMultipleInstruction(targetTypes, targets, entry);
+			}
+			else
+			{
+				var target = CreateTarget(typeRegistrationEntry.TargetMetadata, entry, targetTypes, context);
+
+				if (target != null)
+				{
+					return new RegisterInstruction(targetTypes, target, entry);
+				}
 			}
 			return null;
 		}

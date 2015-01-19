@@ -51,6 +51,7 @@
     <Compile Include="ConfigurationAdapterContextFactory.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IAssemblyReferenceEntry.cs" />
+    <Compile Include="IRezolveTargetMetadataList.cs" />
     <Compile Include="IConfigurationAdapterContextFactory.cs" />
     <Compile Include="IConfigurationError.cs" />
     <Compile Include="IConfigurationExtensionEntry.cs" />
@@ -65,15 +66,17 @@
     <Compile Include="ISingletonTargetMetadata.cs" />
     <Compile Include="ITypeReference.cs" />
     <Compile Include="ITypeRegistrationEntry.cs" />
+    <Compile Include="RegisterMultipleInstruction.cs" />
     <Compile Include="ObjectTargetMetadata.cs" />
     <Compile Include="RezolverBuilderInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RezolveTargetMetadataBase.cs" />
+    <Compile Include="RezolveTargetMetadataList.cs" />
     <Compile Include="SingletonTargetMetadata.cs" />
     <Compile Include="TypeReference.cs" />
     <Compile Include="TypeReferenceBase.cs" />
     <Compile Include="TypeRegistrationEntry.cs" />
-    <Compile Include="TypeRegistrationInstruction.cs" />
+    <Compile Include="RegisterInstruction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,6 +4,7 @@ using Rezolver.Configuration.Json;
 using Rezolver.Configuration;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Rezolver.Tests.ConfigurationTests.Json
 {
@@ -230,7 +231,6 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			//here, an array of strings can be provided by a literal string array in the JSON.
 
 			string json = @"{
-	""assemblies"":[""Rezolver.Tests"" ],	
 	""rezolve"" : [
 		{ ""System.String[]"" : [ ""Hello World0"", ""Hello World1"", ""Hello World2"" ] }
 	]
@@ -243,23 +243,55 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		}
 
 		[TestMethod]
-		public void ShouldRezolveArrayOfIRequiresNothing()
+		public void ShouldRezolveEnumerableOfStringsViaMultiRegistration()
 		{
+			//so instead of registering an array - we're registering a bunch of strings as a multiple registration
+			//this then means they are retrievable as an IEnumerable<string>
 			string json = @"{
-	""assemblies"":[""Rezolver.Tests"" ],	
 	""rezolve"" : [
-		{ ""Rezolver.Tests.ConfigurationTests.IRequiresNothing[]"" : 
-			[ 
-				{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
-				{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
-				{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }
-			] 
+		{ 
+			""System.String"" : {
+				""$multiple"": [ ""Hello Multiple0"", ""Hello Multiple1"", ""Hello Multiple2"" ] 
+			}
 		}
 	]
 }";
 			var rezolver = ParseConfigurationAndBuild(json);
-			IRequiresNothing[] array = rezolver.Resolve<IRequiresNothing[]>();
-			Assert.IsNotNull(array);
+			IEnumerable<string> multiple = rezolver.Resolve<IEnumerable<string>>();
+			Assert.IsNotNull(multiple);
+			var array = multiple.ToArray();
+			Assert.AreEqual(3, array.Length); ;
+			Assert.IsTrue(Enumerable.Range(0, 3).Select(i => string.Format("Hello Multiple{0}", i)).SequenceEqual(array));
+		}
+
+		[TestMethod]
+		public void ShouldRezolveEnumerableOfIRequiresNothingViaMultiRegistration()
+		{
+			//there's a way of doing this which binds to the array/enumerable type or whatever, and then 
+			//create the underlying array inline within JSON - however it's likely to require implementing
+			//JSON serialization.
+			//this test shows instead how we specify element type, instruct the parser that we intend to register
+			//multiple targets against that, and then the caller will simply request IEnumerable<type>
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""Rezolver.Tests.ConfigurationTests.IRequiresNothing"" :
+			{ 
+				""$multiple"" :
+				[ 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }
+				]
+			} 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IEnumerable<IRequiresNothing> multiple = rezolver.Resolve<IEnumerable<IRequiresNothing>>();
+			Assert.IsNotNull(multiple);
+			var array = multiple.ToArray();
 			Assert.AreEqual(3, array.Length);
 			Assert.AreEqual(3, array.Select(r => r.InstanceNumber).Distinct().ToArray().Length);
 		}

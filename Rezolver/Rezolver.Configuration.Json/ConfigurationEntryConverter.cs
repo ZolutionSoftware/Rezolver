@@ -113,6 +113,7 @@ namespace Rezolver.Configuration.Json
 			if (propName == null) propName = reader.Value as string;
 			ITypeReference[] regTypes = null;
 			bool expectValueProperty = false;
+			bool isMultipleRegistration = false;
 			if ("type".Equals(propName, StringComparison.OrdinalIgnoreCase))
 			{
 				//move to the content
@@ -147,7 +148,17 @@ namespace Rezolver.Configuration.Json
 
 			RezolveTargetMetadataWrapper wrappedMeta = serializer.Deserialize<RezolveTargetMetadataWrapper>(reader);
 			//and then unwrap the meta data for the target types
-			return new TypeRegistrationEntry(regTypes, wrappedMeta.UnwrapMetadata(regTypes), startPos.ToConfigurationLineInfo(lineInfo));
+			var unwrapped = wrappedMeta.UnwrapMetadata(regTypes);
+
+			//if we get a metadata list, then the configuration is instructing us to do a multiple registration.
+			//that is, a multi registration of type T will mean that we will later resolve IEnumerable<T>
+			//to register an array directly we will need a new metadata type of 'array' (or similar) which will then 
+			//require a MetadataList inside it so that we can push that logic one step further away.  That said, we'd also
+			//need a new rezolvetarget for that.
+			if (unwrapped.Type == RezolveTargetMetadataType.MetadataList)
+				isMultipleRegistration = true;
+
+			return new TypeRegistrationEntry(regTypes, unwrapped, isMultipleRegistration, startPos.ToConfigurationLineInfo(lineInfo));
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

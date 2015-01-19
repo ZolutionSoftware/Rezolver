@@ -36,26 +36,60 @@ namespace Rezolver.Configuration.Json
 		/// <returns></returns>
 		public virtual IRezolveTargetMetadata UnwrapMetadata(ITypeReference[] forTargetTypes)
 		{
+			IRezolveTargetMetadata result = null;
 			if (_wrapped.Type == RezolveTargetMetadataType.Extension)
-			{
-				RezolveTargetMetadataWrapper wrapper = _wrapped as RezolveTargetMetadataWrapper;
-				if (wrapper != null)
-					return wrapper.UnwrapMetadata(forTargetTypes);
-			}
+				result = UnwrapExtensionMetadata(_wrapped, forTargetTypes);
 			else if (_wrapped.Type == RezolveTargetMetadataType.Constructor)
+				result = UnwrapConstructorMetadata(_wrapped, forTargetTypes);
+			else if (_wrapped.Type == RezolveTargetMetadataType.MetadataList)
+				result = UnwrapMetadataList(_wrapped, forTargetTypes);
+
+			return result ?? _wrapped;
+		}
+		protected virtual IRezolveTargetMetadata UnwrapExtensionMetadata(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
+		{
+			RezolveTargetMetadataWrapper wrapper = meta as RezolveTargetMetadataWrapper;
+			if (wrapper != null)
+				return wrapper.UnwrapMetadata(forTargetTypes);
+			return null;
+		}
+
+		protected virtual IRezolveTargetMetadata UnwrapConstructorMetadata(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
+		{
+			IConstructorTargetMetadata ctorMetadata = meta as IConstructorTargetMetadata;
+			if (ctorMetadata != null)
 			{
-				ConstructorTargetMetadata ctorMetadata = _wrapped as ConstructorTargetMetadata;
-				if(ctorMetadata != null)
-				{
-					//have to re-write the constructor metadata if the type reference is equal to '$self' as that's
-					//a special token used in JSON configuration loading to shortcut registering a type as itself.
-					if (ctorMetadata.TypesToBuild.Length == 1 && ctorMetadata.TypesToBuild[0].TypeName == JsonConfiguration.AutoConstructorType)
-						return new ConstructorTargetMetadata(forTargetTypes);
-				}
-				
+				//have to re-write the constructor metadata if the type reference is equal to '$self' as that's
+				//a special token used in JSON configuration loading to short cut registering a type as itself.
+				//this is going to get more involved if we start doing special constructor parameter bindings or
+				//propety bindings.
+				if (ctorMetadata.TypesToBuild.Length == 1 && ctorMetadata.TypesToBuild[0].TypeName == JsonConfiguration.AutoConstructorType)
+					return new ConstructorTargetMetadata(forTargetTypes);
 			}
 
-			return _wrapped;
+			return null;
 		}
+
+		protected virtual IRezolveTargetMetadataList UnwrapMetadataList(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
+		{
+			//have to unwrap the outer list, and all the inner items, if applicable
+			IRezolveTargetMetadataList list = _wrapped as IRezolveTargetMetadataList;
+			if (list != null)
+			{
+				return new RezolveTargetMetadataList(list.Targets.Select(t => UnwrapMetadataIfNecessary(t, forTargetTypes)));
+			}
+			return null;
+		}
+
+		private IRezolveTargetMetadata UnwrapMetadataIfNecessary(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
+		{
+			RezolveTargetMetadataWrapper wrapper = meta as RezolveTargetMetadataWrapper;
+			if (wrapper != null)
+				return wrapper.UnwrapMetadata(forTargetTypes);
+			else
+				return meta;
+		}
+
+
 	}
 }

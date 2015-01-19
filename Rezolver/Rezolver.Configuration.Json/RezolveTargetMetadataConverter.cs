@@ -119,11 +119,7 @@ namespace Rezolver.Configuration.Json
 					if (string.IsNullOrWhiteSpace(typeString))
 						throw new JsonConfigurationException("Target, if a string, must not be null, empty or whitespace", tempTarget);
 
-					//if ("$self".Equals(typeString, StringComparison.OrdinalIgnoreCase))
-					//	targetType = regTypes;	//we will allow multiple types to be specified for constructor target.  Thinking 
-					////that so long as there's only one concrete class in the list, then we can be 'clever'
-					//else
-						targetType = new[] { new TypeReference(typeString, ((IJsonLineInfo)tempTarget).ToConfigurationLineInfo() )};	//otherwise deserialise the type reference
+					targetType = new[] { new TypeReference(typeString, ((IJsonLineInfo)tempTarget).ToConfigurationLineInfo() )};	//otherwise deserialise the type reference
 				}
 				else
 					throw new JsonConfigurationException("Unable to determine target type for Constructor Target metadata", jObject);
@@ -131,13 +127,21 @@ namespace Rezolver.Configuration.Json
 				return new ConstructorTargetMetadata(targetType);
 			}
 
-			//now see if there's a 'multi' property.  If so, then we have a an instruction to register multiple
-			//targets against one set of type registrations.
-			tempTarget = jObject["$multi"];
+			//now see if there's a 'multiple' property.  if so, it's a special case target metadata object which instructs the parser
+			//to read an array of nested metadata objects.  If this is specified as an object to be registered as a TypeConfigurationEntry,
+			//then it will cause the list of targets to be grouped together as a multiple registration.
+			tempTarget = jObject["$multiple"];
 
 			if(tempTarget != null)
 			{
-				throw new NotImplementedException("Multi registration is not yet supported.");
+				if (tempTarget is JArray)
+				{
+					var targets = tempTarget.Select(t => t.ToObject<RezolveTargetMetadataWrapper>(serializer)); 
+					// = tempTarget.ToObject<RezolveTargetMetadataWrapper[]>(serializer);
+					return new RezolveTargetMetadataList(targets);
+				}
+				else
+					throw new JsonConfigurationException("Expected an array of target metadata entries for multiple registration", tempTarget);
 			}
 
 			//otherwise, we return an object target that will construct an instance of the requested type
@@ -148,7 +152,7 @@ namespace Rezolver.Configuration.Json
 			//throw new JsonConfigurationException("Unsupported target", jObject);
 		}
 
-		private static IRezolveTargetMetadata CreateDeferredJsonDeserializerTarget(JToken jToken, JsonSerializer serializer)
+		private static IRezolveTargetMetadata	CreateDeferredJsonDeserializerTarget(JToken jToken, JsonSerializer serializer)
 		{
 			return new LazyJsonObjectTargetMetadata(jToken, serializer);
 		}

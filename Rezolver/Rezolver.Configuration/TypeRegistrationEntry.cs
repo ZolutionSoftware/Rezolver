@@ -8,10 +8,10 @@ namespace Rezolver.Configuration
 	public class TypeRegistrationEntry : ConfigurationEntryBase, Rezolver.Configuration.ITypeRegistrationEntry
 	{
 		public ITypeReference[] Types { get; private set; }
-
+		public bool IsMultipleRegistration { get; private set; }
 		public IRezolveTargetMetadata TargetMetadata { get; private set; }
 
-		public TypeRegistrationEntry(ITypeReference[] types, IRezolveTargetMetadata targetMetadata, IConfigurationLineInfo lineInfo = null)
+		public TypeRegistrationEntry(ITypeReference[] types, IRezolveTargetMetadata targetMetadata, bool isMultipleRegistration, IConfigurationLineInfo lineInfo = null)
 			: base(ConfigurationEntryType.TypeRegistration, lineInfo)
 
 		{
@@ -22,6 +22,7 @@ namespace Rezolver.Configuration
 
 			Types = types;
 			TargetMetadata = targetMetadata;
+			IsMultipleRegistration = isMultipleRegistration;
 		}
 	}
 }
