@@ -103,6 +103,7 @@
     <Compile Include="ConditionalRewriterTest.cs" />
     <Compile Include="MultipleRegistrationTests.cs" />
     <Compile Include="NamedRezolveTests.cs" />
+    <Compile Include="ListTargetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">

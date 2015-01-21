@@ -295,5 +295,47 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			Assert.AreEqual(3, array.Length);
 			Assert.AreEqual(3, array.Select(r => r.InstanceNumber).Distinct().ToArray().Length);
 		}
+
+		[TestMethod]
+		public void ShouldRezolveEnumerableOfStringViaDirectRegistration()
+		{
+			//bakes a literal string array as a target for enumerable of strings.
+			string json = @"{
+	""rezolve"" : [
+		{ 
+			""type"" : { ""name"" : ""System.Collections.Generic.IEnumerable"", ""args"" : [ ""System.String"" ] },
+			""value"": [ ""Hello Generic0"", ""Hello Generic1"", ""Hello Generic2"" ] 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IEnumerable<string> strings = rezolver.Resolve<IEnumerable<string>>();
+			Assert.IsNotNull(strings);
+			var array = strings.ToArray();
+			Assert.AreEqual(3, array.Length);
+			Assert.IsTrue(Enumerable.Range(0, 3).Select(i => string.Format("Hello Generic{0}", i)).SequenceEqual(array));
+		}
+
+		[TestMethod]
+		public void ShouldRezolveEnumerableOfIRequiresNothingViaDirectRegistration()
+		{
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""type"" : { ""name"" : ""System.Collections.Generic.IEnumerable"", ""args"" : [ ""Rezolver.Tests.ConfigurationTests.IRequiresNothing"" ] },
+			""value"" : 
+			{ 
+				""$multiple"" :
+				[ 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }
+				]
+			} 
+		}
+	]
+}";
+		}
 	}
 }

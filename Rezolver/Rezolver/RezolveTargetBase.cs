@@ -43,26 +43,21 @@ namespace Rezolver
 
 		/// <summary>
 		/// Abstract method called to create the expression - this is called by <see cref="CreateExpression"/> after the
-		/// <paramref name="targetType"/> has been validated, if provided.
+		/// target type has been validated, if provided.
 		/// 
 		/// Note - if your implementation needs to support dynamic Resolve operations from the rezolver that is passed
 		/// to an IRezolver's Resolve method, you can use the <see cref="ExpressionHelper.DynamicRezolverParam"/> property,
 		/// all the default implementations of this class (and others) use that by default.
 		/// </summary>
-		/// <param name="rezolver"></param>
-		/// <param name="targetType"></param>
-		/// <param name="dynamicRezolverExpression"></param>
-		/// <param name="currentTargets"></param>
+		/// <param name="context">The current compile context</param>
 		/// <returns></returns>
-
-
 		protected abstract Expression CreateExpressionBase(CompileContext context);
 
 		/// <summary>
-		/// 
+		/// Called to check whether a target can create an expression that builds an instance of the given <paramref name="type" />.
 		/// </summary>
-		/// <param name="type"></param>
-		/// <returns></returns>
+		/// <param name="type">Required</param>
+		/// <returns><c>true</c> if this target supports the given type, <c>false</c> otherwise.</returns>
 		public virtual bool SupportsType(Type type)
 		{
 			type.MustNotBeNull("type");
@@ -73,10 +68,7 @@ namespace Rezolver
 		/// Virtual method implementing IRezolveTarget.CreateExpression.  Rather than overriding this method,
 		/// your starting point is to implement the abstract method <see cref="CreateExpressionBase"/>.
 		/// </summary>
-		/// <param name="rezolver">The Builder in which this target is perform compile-time rezolve operations.</param>
-		/// <param name="targetType">The target type of the expression.</param>
-		/// <param name="dynamicRezolverExpression"></param>
-		/// <param name="currentTargets"></param>
+		/// <param name="context">The current compile context</param>
 		/// <returns></returns>
 		public virtual Expression CreateExpression(CompileContext context)
 		{
@@ -108,6 +100,10 @@ namespace Rezolver
 			}
 		}
 
+		/// <summary>
+		/// Gets the declared type of object that is constructed by this target.  This will be the return type of
+		/// any expression built by <see cref="CreateExpression"/> unless otherwise instructed to build a different type.
+		/// </summary>
 		public abstract Type DeclaredType
 		{
 			get;
