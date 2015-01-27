@@ -64,14 +64,21 @@ namespace Rezolver.Configuration
 		/// </summary>
 		Singleton = 3,
 		/// <summary>
-		/// Describes a list of IRezolveTargetMetadata instances.
+		/// A list or array whose items are individually specified as resolve targets and eventually loaded into 
+		/// a ListTarget.  This enables configuration files to hand-crank a list directly and when multiple registration
+		/// is not applicable.
+		/// </summary>
+		List = 4, 
+		/// <summary>
+		/// Describes a list of IRezolveTargetMetadata instances - to be used for metadata objects that require multiple
+		/// metadata objects.
 		/// 
 		/// Can be created to feed a multiple instance registration
 		/// for a single type (e.g. registering multiple instances of IFoo to a rezolver, so that you can resolve all
 		/// of them by resolving IEnumerable&lt;IFoo&gt;), or simply as a collection of targets that are to be used to build an 
 		/// array that is to be passed as a constructor argument or property.
 		/// </summary>
-		MetadataList = 4,
+		MetadataList = 5,
 		/// <summary>
 		/// A custom metadata - the instance should also have the interface IRezolveTargetMetadataExtension
 		/// </summary>

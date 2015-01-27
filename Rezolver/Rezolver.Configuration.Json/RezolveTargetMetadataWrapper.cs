@@ -41,6 +41,8 @@ namespace Rezolver.Configuration.Json
 				result = UnwrapExtensionMetadata(_wrapped, forTargetTypes);
 			else if (_wrapped.Type == RezolveTargetMetadataType.Constructor)
 				result = UnwrapConstructorMetadata(_wrapped, forTargetTypes);
+			else if (_wrapped.Type == RezolveTargetMetadataType.List)
+				result = UnwrapListMetadata(_wrapped, forTargetTypes);
 			else if (_wrapped.Type == RezolveTargetMetadataType.MetadataList)
 				result = UnwrapMetadataList(_wrapped, forTargetTypes);
 
@@ -68,6 +70,11 @@ namespace Rezolver.Configuration.Json
 			}
 
 			return null;
+		}
+
+		protected virtual IRezolveTargetMetadata UnwrapListMetadata(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
+		{
+
 		}
 
 		protected virtual IRezolveTargetMetadataList UnwrapMetadataList(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)

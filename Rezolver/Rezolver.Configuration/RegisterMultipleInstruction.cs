@@ -15,13 +15,13 @@ namespace Rezolver.Configuration
 		/// <summary>
 		/// The types that the target will be registered with
 		/// </summary>
-		public List<Type> TargetTypes { get; private set; }
+		public IEnumerable<Type> TargetTypes { get; private set; }
 
 		/// <summary>
-		/// Gets the targets hat'll be used for the registration.
+		/// Gets the targets that'll be used for the registration.
 		/// </summary>
 		/// <value>The targets.</value>
-		public List<IRezolveTarget> Targets { get; private set; }
+		public IEnumerable<IRezolveTarget> Targets { get; private set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RegisterMultipleInstruction" /> class.
@@ -45,17 +45,21 @@ namespace Rezolver.Configuration
 		/// or
 		/// All targets in list must be non-null;targets
 		/// </exception>
-		public RegisterMultipleInstruction(List<Type> targetTypes, List<IRezolveTarget> targets, IConfigurationEntry entry)
+		public RegisterMultipleInstruction(IEnumerable<Type> targetTypes, IEnumerable<IRezolveTarget> targets, IConfigurationEntry entry)
 			: base(entry)
 		{
 			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
-			if (targetTypes.Count == 0) throw new ArgumentException("List must contain one or more types", "targetTypes");
+
+			Type[] typesArray = targetTypes.ToArray();
+			if (typesArray.Length == 0) throw new ArgumentException("List must contain one or more types", "targetTypes");
 			if (targetTypes.Any(t => t == null)) throw new ArgumentException("All types in list must be non-null", "targetTypes");
 			if (targets == null) throw new ArgumentNullException("targets");
-			if (targets.Count == 0) throw new ArgumentException("List must contain one or more targets", "targets");
+
+			IRezolveTarget[] targetsArray = targets.ToArray();
+			if (targetsArray.Length == 0) throw new ArgumentException("List must contain one or more targets", "targets");
 			if (targets.Any(t => t == null)) throw new ArgumentException("All targets in list must be non-null", "targets");
-			TargetTypes = targetTypes;
-			Targets = targets;
+			TargetTypes = typesArray;
+			Targets = targetsArray;
 		}
 		public override void Apply(IRezolverBuilder builder)
 		{

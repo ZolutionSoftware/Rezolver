@@ -14,7 +14,7 @@ namespace Rezolver.Configuration
 		/// <summary>
 		/// The types that the target will be registered with
 		/// </summary>
-		public List<Type> TargetTypes { get; private set; }
+		public IEnumerable<Type> TargetTypes { get; private set; }
 		/// <summary>
 		/// The target that is to be registered.
 		/// </summary>
@@ -36,15 +36,17 @@ namespace Rezolver.Configuration
 		/// or
 		/// All types in list must be non-null;targetTypes
 		/// </exception>
-		public RegisterInstruction(List<Type> targetTypes, IRezolveTarget target, IConfigurationEntry entry)
+		public RegisterInstruction(IEnumerable<Type> targetTypes, IRezolveTarget target, IConfigurationEntry entry)
 			: base(entry)
 		{
 			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
-			if (targetTypes.Count == 0) throw new ArgumentException("List must contain one or more types", "targetTypes");
+
+			Type[] typesArray = targetTypes.ToArray();
+			if (typesArray.Length == 0) throw new ArgumentException("List must contain one or more types", "targetTypes");
 			if (targetTypes.Any(t => t == null)) throw new ArgumentException("All types in list must be non-null", "targetTypes");
 			if (target == null) throw new ArgumentNullException("target");
 
-			TargetTypes = targetTypes;
+			TargetTypes = typesArray;
 			Target = target;
 		}
 

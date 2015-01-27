@@ -251,7 +251,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 	""rezolve"" : [
 		{ 
 			""System.String"" : {
-				""$multiple"": [ ""Hello Multiple0"", ""Hello Multiple1"", ""Hello Multiple2"" ] 
+				""$targets"": [ ""Hello Multiple0"", ""Hello Multiple1"", ""Hello Multiple2"" ] 
 			}
 		}
 	]
@@ -278,7 +278,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		{
 			""Rezolver.Tests.ConfigurationTests.IRequiresNothing"" :
 			{ 
-				""$multiple"" :
+				""$targets"" :
 				[ 
 					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
 					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
@@ -317,16 +317,17 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		}
 
 		[TestMethod]
-		public void ShouldRezolveEnumerableOfIRequiresNothingViaDirectRegistration()
+		public void ShouldRezolveArrayOfRequiresNothingViaDirectRegistration()
 		{
 			string json = @"{
 	""assemblies"":[ ""Rezolver.Tests"" ],	
 	""rezolve"" : [
 		{
-			""type"" : { ""name"" : ""System.Collections.Generic.IEnumerable"", ""args"" : [ ""Rezolver.Tests.ConfigurationTests.IRequiresNothing"" ] },
+			""type"" : { ""name"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"", ""array"": true },
 			""value"" : 
 			{ 
-				""$multiple"" :
+				""$array"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"",
+				""values"" : 
 				[ 
 					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
 					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
@@ -336,6 +337,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		}
 	]
 }";
+			var rezolver = ParseConfigurationAndBuild(json);
 		}
 	}
 }

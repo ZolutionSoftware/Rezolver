@@ -102,7 +102,7 @@ namespace Rezolver.Configuration.Json
 			else if ((tempChildObject = jObject["$singleton"] as JObject) != null)
 				return new SingletonTargetMetadata(LoadTargetMetadata(tempChildObject, serializer), false);
 
-			//see if there's a 'construct' property.  If so, then we have a constructortarget call
+			//see if there's a 'construct' property.  If so, then we have a constructor target call
 			var tempTarget = jObject["$construct"];
 
 			ITypeReference[] targetType;
@@ -117,39 +117,64 @@ namespace Rezolver.Configuration.Json
 				{
 					string typeString = (string)tempTarget;
 					if (string.IsNullOrWhiteSpace(typeString))
-						throw new JsonConfigurationException("Target, if a string, must not be null, empty or whitespace", tempTarget);
+						throw new JsonConfigurationException("Target, if a string, must not be null, empty or white space", tempTarget);
 
 					targetType = new[] { new TypeReference(typeString, ((IJsonLineInfo)tempTarget).ToConfigurationLineInfo() )};	//otherwise deserialise the type reference
 				}
 				else
 					throw new JsonConfigurationException("Unable to determine target type for Constructor Target metadata", jObject);
-
+				//TODO: add specific constructor argument matching (but if you specify one you have to specify all)
+				//and the ability to set properties.  Although, the current constructor target doesn't yet support that either.
 				return new ConstructorTargetMetadata(targetType);
 			}
 
-			//now see if there's a 'multiple' property.  if so, it's a special case target metadata object which instructs the parser
+			//now see if there's a '$targets' property.  if so, it's a special case target metadata object which instructs the parser
 			//to read an array of nested metadata objects.  If this is specified as an object to be registered as a TypeConfigurationEntry,
 			//then it will cause the list of targets to be grouped together as a multiple registration.
-			tempTarget = jObject["$multiple"];
+			tempTarget = jObject["$targets"];
 
 			if(tempTarget != null)
-			{
-				if (tempTarget is JArray)
-				{
-					var targets = tempTarget.Select(t => t.ToObject<RezolveTargetMetadataWrapper>(serializer)); 
-					// = tempTarget.ToObject<RezolveTargetMetadataWrapper[]>(serializer);
-					return new RezolveTargetMetadataList(targets);
-				}
-				else
-					throw new JsonConfigurationException("Expected an array of target metadata entries for multiple registration", tempTarget);
-			}
+				return CreateTargetMetadataList(tempTarget, serializer);
+
+			bool isArray = false;
+			tempTarget = jObject["$array"];
+			if (tempTarget != null)
+				isArray = true;
+			else
+				tempTarget = jObject["$list"];
+
+			if (tempTarget != null)
+				return CreateListTargetMetadata(jObject, tempTarget, isArray, serializer);
+
 
 			//otherwise, we return an object target that will construct an instance of the requested type
 			//from the raw Json.  This allows developers to implement Json Conversion for types specifically
-			//for the purposes of reading from rezolver configuration 
+			//for the purposes of reading from rezolver configuration - note, however, that when doing this it's
+			//not possible to 
 			return CreateDeferredJsonDeserializerTarget(jObject, serializer);
 
 			//throw new JsonConfigurationException("Unsupported target", jObject);
+		}
+
+		private IRezolveTargetMetadata CreateListTargetMetadata(JToken jObject, JToken elementTypeToken, bool isArray, JsonSerializer serializer)
+		{
+			ITypeReference elementType = elementTypeToken.ToObject<TypeReference>();
+			var values = jObject["values"] as JArray;
+			if (values == null)
+				throw new JsonConfigurationException("Expected array property 'values' for List/Array target metadata", jObject);
+			var valuesMetadataList = CreateTargetMetadataList(values, serializer);
+			return new ListTargetMetadata(elementType, valuesMetadataList, isArray);
+		}
+
+		private IRezolveTargetMetadataList CreateTargetMetadataList(JToken tempTarget, JsonSerializer serializer)
+		{
+			if (tempTarget is JArray)
+			{
+				var targets = tempTarget.Select(t => t.ToObject<RezolveTargetMetadataWrapper>(serializer));
+				return new RezolveTargetMetadataList(targets);
+			}
+			else
+				throw new JsonConfigurationException("Expected an array of target metadata entries", tempTarget);
 		}
 
 		private static IRezolveTargetMetadata	CreateDeferredJsonDeserializerTarget(JToken jToken, JsonSerializer serializer)

@@ -12,7 +12,7 @@ namespace Rezolver.Configuration.Json
 	/// requested type from a JToken.  Some more work might be required here
 	/// to 
 	/// </summary>
-	public class LazyJsonObjectTargetMetadata : IObjectTargetMetadata
+	public class LazyJsonObjectTargetMetadata : ObjectTargetMetadataBase
 	{
 		private readonly object _locker = new object();
 		private object _object;
@@ -25,7 +25,7 @@ namespace Rezolver.Configuration.Json
 			_serializer = serializer;
 		}
 
-		public object GetObject(Type type)
+		public override object GetObject(Type type)
 		{
 			if (type == null) throw new ArgumentNullException("type");
 
@@ -47,11 +47,6 @@ namespace Rezolver.Configuration.Json
 				}
 			}
 			return _object;
-		}
-
-		public RezolveTargetMetadataType Type
-		{
-			get { return RezolveTargetMetadataType.Object; }
 		}
 	}
 }

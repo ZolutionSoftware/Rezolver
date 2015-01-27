@@ -51,6 +51,8 @@
     <Compile Include="ConfigurationAdapterContextFactory.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IAssemblyReferenceEntry.cs" />
+    <Compile Include="IListTargetMetadata.cs" />
+    <Compile Include="IObjectTargetMetadata.cs" />
     <Compile Include="IRezolveTargetMetadataList.cs" />
     <Compile Include="IConfigurationAdapterContextFactory.cs" />
     <Compile Include="IConfigurationError.cs" />
@@ -60,12 +62,13 @@
     <Compile Include="IConfigurationAdapter.cs" />
     <Compile Include="IConfigurationEntry.cs" />
     <Compile Include="IConstructorTargetMetadata.cs" />
-    <Compile Include="IObjectTargetMetadata.cs" />
     <Compile Include="IRezolveTargetMetadata.cs" />
     <Compile Include="IRezolveTargetMetadataExtension.cs" />
     <Compile Include="ISingletonTargetMetadata.cs" />
     <Compile Include="ITypeReference.cs" />
     <Compile Include="ITypeRegistrationEntry.cs" />
+    <Compile Include="ListTargetMetadata.cs" />
+    <Compile Include="ObjectTargetMetadataBase.cs" />
     <Compile Include="RegisterMultipleInstruction.cs" />
     <Compile Include="ObjectTargetMetadata.cs" />
     <Compile Include="RezolverBuilderInstruction.cs" />

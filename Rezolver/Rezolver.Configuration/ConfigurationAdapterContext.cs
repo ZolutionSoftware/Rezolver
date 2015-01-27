@@ -30,7 +30,19 @@ namespace Rezolver.Configuration
 		private readonly IConfiguration _configuration;
 		private readonly List<IConfigurationError> _errors;
 		private readonly List<RezolverBuilderInstruction> _instructions;
+		private readonly IConfigurationAdapter _adapter;
 
+		public IConfigurationAdapter Adapter
+		{
+			get
+			{
+				return _adapter;
+			}
+		}
+		/// <summary>
+		/// Gets the configuration that is being processed by the adapter that is working within this context.
+		/// </summary>
+		/// <value>The configuration.</value>
 		public IConfiguration Configuration
 		{
 			get
@@ -64,7 +76,7 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// Retrieves a snapshot of the instructions currently present in the contex.
+		/// Retrieves a snapshot of the instructions currently present in the context.
 		/// </summary>
 		public IEnumerable<RezolverBuilderInstruction> Instructions
 		{
@@ -88,15 +100,17 @@ namespace Rezolver.Configuration
 		/// context is being constructed</param>
 		/// <param name="defaultAssemblyReferences">Optional. Default set of assemblies that are to be searched for types
 		/// when type references are processed.</param>
-		public ConfigurationAdapterContext(IConfiguration configuration, IEnumerable<Assembly> defaultAssemblyReferences = null)
+		public ConfigurationAdapterContext(IConfigurationAdapter adapter, IConfiguration configuration, IEnumerable<Assembly> defaultAssemblyReferences = null)
 			: this()
 		{
+			if (adapter == null)
+				throw new ArgumentNullException("adapter");
 			if (configuration == null)
 				throw new ArgumentNullException("configuration");
 
 			defaultAssemblyReferences = defaultAssemblyReferences ?? Enumerable.Empty<Assembly>();
-
-			this._configuration = configuration;
+			_adapter = adapter;
+			_configuration = configuration;
 			//import the default references
 			foreach(var reference in defaultAssemblyReferences.Where(a => a != null))
 			{
@@ -371,5 +385,89 @@ namespace Rezolver.Configuration
 			return typeof(UnresolvedType) == found ? null : found;
 		}
 
+
+		/// <summary>
+		/// Attempts to convert the passed <paramref name="typeReference" /> into a <see cref="System.Type"/>.
+		/// 
+		/// Errors are added to the <paramref name="context"/> if the method returns false.
+		/// </summary>
+		/// <param name="typeReference">The type reference.</param>
+		/// <param name="context">The context for the operation.</param>
+		/// <param name="type">The type that is identified, if successful.</param>
+		/// <returns><c>true</c> if the type reference is successfully parsed, <c>false</c> otherwise (with errors being added
+		/// to the <paramref name="context"/>).</returns>
+		public virtual bool TryParseTypeReference(ITypeReference typeReference, out Type type)
+		{
+			type = null;
+			try
+			{
+				Type baseType = ResolveType(typeReference.TypeName, typeReference.GenericArguments == null ? (int?)null : typeReference.GenericArguments.Length);
+				if (baseType == null)
+				{
+					AddError(ConfigurationError.UnresolvedType(typeReference));
+					return false;
+				}
+
+				//now process any generics
+				if (typeReference.GenericArguments != null && typeReference.GenericArguments.Length != 0)
+				{
+					//it is possible that the resolved type is not generic, even though we told the context
+					//to find us a generic type definition with a certain number of parameters.
+					//Certainly the default implementation of the context will not do this, but since it's
+					//functionality is almost entirely virtual, a derived class could misbehave.  This is
+					//part of the reason for the catch-all Exception handler that wraps this code.
+					Type[] typeParameters = new Type[typeReference.GenericArguments.Length];
+					for (int f = 0; f < typeReference.GenericArguments.Length; f++)
+					{
+						//if any of these fail, then errors will be added directly to the context, leaving us
+						//free simply to return false.
+						if (!TryParseTypeReference(typeReference.GenericArguments[f], out typeParameters[f]))
+							return false;
+					}
+
+					type = baseType.MakeGenericType(typeParameters);
+				}
+				else
+					type = baseType;
+
+				if (typeReference.IsArray)
+					type = type.MakeArrayType();
+
+				return true;
+			}
+			catch (Exception ex) // yeah, okay: catch-all is bad, but I think it's relevant here.
+			{
+				AddError(new ConfigurationError(ex, typeReference));
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Tries to parse all type references, returning an overall success flag, with successfully parsed types being added to a list that
+		/// is returned in the <paramref name="types"/> output parameter.
+		/// </summary>
+		/// <param name="typeReferences">The type references.</param>
+		/// <param name="context">The context for the operation.</param>
+		/// <param name="types">Receives the types that are parsed.  Note that if the method returns true, 
+		/// then this list will contain the same number of types as there are references in <paramref name="typeReferences"/>, in the same order.
+		/// If the method returns false, however, then the number of results in this list is undefined and you will not be able to marry up the input
+		/// type reference to its output type.</param>
+		/// <returns><c>true</c> if all type references could be parsed, otherwise <c>false</c>.</returns>
+		public bool TryParseTypeReferences(IEnumerable<ITypeReference> typeReferences, out Type[] types)
+		{
+			bool result = true;
+			Type tempType;
+			List<Type> tempTypes = new List<Type>();
+			foreach (var typeRef in typeReferences)
+			{
+				if (!TryParseTypeReference(typeRef, out tempType))
+					result = false;
+				else
+					tempTypes.Add(tempType);
+			}
+			types = tempTypes.ToArray();
+
+			return result;
+		}
 	}
 }
