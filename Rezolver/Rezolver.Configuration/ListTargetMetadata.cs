@@ -61,7 +61,7 @@ namespace Rezolver.Configuration
 			if (!context.TryParseTypeReference(ElementType, out elementType))
 				return null;
 
-			return new ListTarget(elementType, Items.CreateRezolveTargets(targetTypes, context, entry));
+			return new ListTarget(elementType, Items.CreateRezolveTargets(targetTypes, context, entry), IsArray);
 		}
 	}
 }

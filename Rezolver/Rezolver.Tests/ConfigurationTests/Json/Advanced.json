@@ -1,7 +1,7 @@
 ﻿{
 	"rezolve": [
 		{ "System.Int32": 10 },
-		{ "Rezolver.Tests.ConfigurationTests.RequiresInt": { "$construct": "$self" } },
+		{ "Rezolver.Tests.ConfigurationTests.RequiresInt": { "$construct": "$auto" } },
 		{ "Rezolver.Tests.ConfigurationTests.IRequiresInt": { "$construct": "Rezolver.Tests.ConfigurationTests.RequiresInt" } },
 		{
 			"type": { "name": "System.Collections.Generic.IEnumerable", "args": [ "System.Int32" ] },

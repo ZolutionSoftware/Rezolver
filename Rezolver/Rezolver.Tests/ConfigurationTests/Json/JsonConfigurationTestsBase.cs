@@ -91,7 +91,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 {
 	""assemblies"": [ ""Rezolver.Tests"" ],
 	""rezolve"" : [
-		{ ""Rezolver.Tests.ConfigurationTests.RequiresNothing"" : { ""$construct"" : ""$self"" } }
+		{ ""Rezolver.Tests.ConfigurationTests.RequiresNothing"" : { ""$construct"" : ""$auto"" } }
 	]
 }";
 			var rezolver = ParseConfigurationAndBuild(json);
@@ -100,7 +100,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			Assert.AreEqual(lastInstanceNumber + 1, instance.InstanceNumber);
 		}
 
-		
+
 		[TestMethod]
 		public void ShouldRezolveRequiresNothing_2()
 		{
@@ -114,7 +114,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 	""rezolve"" : [
 		{
 			""type"": ""Rezolver.Tests.ConfigurationTests.RequiresNothing"",
-			""value"": { ""$construct"" : ""$self"" } 
+			""value"": { ""$construct"" : ""$auto"" } 
 		}
 	]
 }";
@@ -141,7 +141,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 	""rezolve"" : [
 		{
 			""type"": { ""name"": ""Rezolver.Tests.ConfigurationTests.RequiresNothing"" },
-			""value"": { ""$construct"" : ""$self"" } 
+			""value"": { ""$construct"" : ""$auto"" } 
 		}
 	]
 }";
@@ -338,6 +338,77 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 	]
 }";
 			var rezolver = ParseConfigurationAndBuild(json);
+			int instanceNumber = RequiresNothing.LastInstanceNumber;
+			RequiresNothing[] result = rezolver.Resolve<RequiresNothing[]>();
+			Assert.IsNotNull(result);
+			Assert.AreEqual(3, result.Length);
+			Assert.AreEqual(instanceNumber + 3, RequiresNothing.LastInstanceNumber);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfRequiresNothingUsingAutoViaDirectRegistration()
+		{
+			//demonstrates how you can use the $auto typename in a $construct call to inherit the 
+			///type name from the array's element type.
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""type"" : { ""name"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"", ""array"": true },
+			""value"" : 
+			{ 
+				""$array"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"",
+				""values"" : 
+				[ 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }
+				]
+			} 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			int instanceNumber = RequiresNothing.LastInstanceNumber;
+			RequiresNothing[] result = rezolver.Resolve<RequiresNothing[]>();
+			Assert.IsNotNull(result);
+			Assert.AreEqual(3, result.Length);
+			Assert.AreEqual(instanceNumber + 3, RequiresNothing.LastInstanceNumber);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfRequiresNothingUsingAuto2ViaDirectRegistration()
+		{
+			//demonstrates how you can use the $auto typename, first in the $array property to inherit
+			//the element type of an explicit array type specified as the type of a registration. 
+			//and then again in the $construct call to inherit the type name from the array's element type.
+
+			//note it's imperative that the type of the registration is explicitly marked as 'array = true',
+			//so do not use 'Type[]'
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""type"" : { ""name"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"", ""array"": true },
+			""value"" : 
+			{ 
+				""$array"" : ""$auto"",
+				""values"" : 
+				[ 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }
+				]
+			} 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			int instanceNumber = RequiresNothing.LastInstanceNumber;
+			RequiresNothing[] result = rezolver.Resolve<RequiresNothing[]>();
+			Assert.IsNotNull(result);
+			Assert.AreEqual(3, result.Length);
+			Assert.AreEqual(instanceNumber + 3, RequiresNothing.LastInstanceNumber);
 		}
 	}
 }

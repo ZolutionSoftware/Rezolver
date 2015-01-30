@@ -29,6 +29,13 @@ namespace Rezolver.Configuration.Json
 				get;
 				set;
 			}
+
+			[JsonProperty("array")]
+			public bool IsArray
+			{
+				get;
+				set;
+			}
 		}
 
 		public override bool CanWrite
@@ -58,7 +65,7 @@ namespace Rezolver.Configuration.Json
 			{
 				var temp = new JsonTypeReference();
 				serializer.Populate(reader, temp);
-				return new TypeReference(temp.TypeName, startLine.ToConfigurationLineInfo(lineInfo), temp.GenericArguments);
+				return new TypeReference(temp.TypeName, startLine.ToConfigurationLineInfo(lineInfo), temp.IsArray, temp.GenericArguments);
 			}
 			else throw new InvalidOperationException(((reader as IJsonLineInfo) ?? StubJsonLineInfo.Instance).FormatMessageForThisLine("Invalid Type Reference"));
 		}

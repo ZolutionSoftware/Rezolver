@@ -82,7 +82,7 @@ namespace Rezolver.Configuration.Json
 			}
 
 			//we wrap the target because we have to allow rewriting targets after they're deserialized in isolation.
-			//constructor targets - for example - support the '$self' type name, but because the types being registered are not
+			//constructor targets - for example - support the '$auto' type name, but because the types being registered are not
 			//known when deserialising the target, we have to have a second-shot
 			return new RezolveTargetMetadataWrapper(meta);
 		}
@@ -158,7 +158,7 @@ namespace Rezolver.Configuration.Json
 
 		private IRezolveTargetMetadata CreateListTargetMetadata(JToken jObject, JToken elementTypeToken, bool isArray, JsonSerializer serializer)
 		{
-			ITypeReference elementType = elementTypeToken.ToObject<TypeReference>();
+			ITypeReference elementType = elementTypeToken.ToObject<TypeReference>(serializer);
 			var values = jObject["values"] as JArray;
 			if (values == null)
 				throw new JsonConfigurationException("Expected array property 'values' for List/Array target metadata", jObject);
