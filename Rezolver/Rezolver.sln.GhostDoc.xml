@@ -1,0 +1,49 @@
+<GhostDoc>
+  <SpellChecker>
+    <IncludeExtensions>
+    </IncludeExtensions>
+    <IgnoreExtensions>
+    </IgnoreExtensions>
+    <IgnoreFiles>
+    </IgnoreFiles>
+  </SpellChecker>
+<HelpConfigurations selected="HelpFile">
+  <HelpConfiguration name="HelpFile">
+    <OutputPath>..\Help</OutputPath>
+    <HelpFileName>Rezolver</HelpFileName>
+    <ImageFolderPath />
+    <HtmlFormats>
+      <HtmlHelp>true</HtmlHelp>
+      <MSHelpViewer>false</MSHelpViewer>
+      <MSHelp2>false</MSHelp2>
+      <Website>true</Website>
+    </HtmlFormats>
+    <IncludeScopes>
+      <Public>true</Public>
+      <Internal>false</Internal>
+      <Protected>true</Protected>
+      <Private>false</Private>
+      <Inherited>true</Inherited>
+      <InheritedFromReferences>true</InheritedFromReferences>
+      <EnableTags>false</EnableTags>
+      <TagList />
+    </IncludeScopes>
+    <ResolveCrefLinks>true</ResolveCrefLinks>
+    <HeaderText />
+    <FooterText>Rezolver is Copyright Andras Zoltan 2014</FooterText>
+    <ConceptualContent>
+      <ContentLayout />
+      <MediaContent />
+    </ConceptualContent>
+    <SelectedProjects>
+      <SelectedProject>Rezolver</SelectedProject>
+      <SelectedProject>Rezolver.Advanced</SelectedProject>
+      <SelectedProject>Rezolver.Configuration</SelectedProject>
+      <SelectedProject>Rezolver.Configuration.Json</SelectedProject>
+      <SelectedProject>Rezolver.Configuration.Advanced</SelectedProject>
+      <SelectedProject>Rezolver.CommonServiceLocator</SelectedProject>
+      <SelectedProject>Rezolver.Mvc5</SelectedProject>
+    </SelectedProjects>
+  </HelpConfiguration>
+</HelpConfigurations>
+</GhostDoc>
