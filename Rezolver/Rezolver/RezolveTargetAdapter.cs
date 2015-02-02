@@ -177,7 +177,7 @@ namespace Rezolver
 		public override Expression Visit(Expression node)
 		{
 			var result = base.Visit(node);
-			if (!(result is RezolveTargetExpression))
+			if (result != null && !(result is RezolveTargetExpression))
 				return new RezolveTargetExpression(new ExpressionTarget(result));
 			return result;
 		}

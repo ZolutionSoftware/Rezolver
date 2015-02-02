@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Rezolver.Tests</RootNamespace>
     <AssemblyName>Rezolver.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -18,6 +18,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -58,6 +63,16 @@
   <ItemGroup>
     <Compile Include="AssertEx.cs" />
     <Compile Include="Classes\SimpleType.cs" />
+    <Compile Include="ConfigurationTests\Json\JsonConfigurationTests.cs" />
+    <Compile Include="ConfigurationTests\Json\JsonTestResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JsonTestResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationTests\Json\AdvancedJsonConfigurationTests.cs" />
+    <Compile Include="ConfigurationTests\Json\JsonConfigurationTestsBase.cs" />
+    <Compile Include="ConfigurationTests\RequiresInt.cs" />
+    <Compile Include="ConfigurationTests\RequiresNothing.cs" />
     <Compile Include="ICompiledRezolveTargetExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RezolverBuilderTests.cs" />
@@ -88,11 +103,24 @@
     <Compile Include="ConditionalRewriterTest.cs" />
     <Compile Include="MultipleRegistrationTests.cs" />
     <Compile Include="NamedRezolveTests.cs" />
+    <Compile Include="ListTargetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">
       <Project>{1d178059-53a1-4637-a192-74e18bcc54c0}</Project>
       <Name>Rezolver.Advanced</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rezolver.Configuration.Advanced\Rezolver.Configuration.Advanced.csproj">
+      <Project>{97210bd8-1dc1-4355-8871-7b7594bf8b2b}</Project>
+      <Name>Rezolver.Configuration.Advanced</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rezolver.Configuration.Json\Rezolver.Configuration.Json.csproj">
+      <Project>{c653d356-4337-4502-97e6-c8cf79807405}</Project>
+      <Name>Rezolver.Configuration.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rezolver.Configuration\Rezolver.Configuration.csproj">
+      <Project>{4a04478b-20b9-452b-8398-53d5be91fa76}</Project>
+      <Name>Rezolver.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj">
       <Project>{53870BD3-88EA-404D-8AB2-9BCB7040F1F6}</Project>
@@ -100,7 +128,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ConfigurationTests\Json\Simple.json" />
+    <EmbeddedResource Include="ConfigurationTests\Json\Advanced.json" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConfigurationTests\Json\JsonTestResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>JsonTestResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
