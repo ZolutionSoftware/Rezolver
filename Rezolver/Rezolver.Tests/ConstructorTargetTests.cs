@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Net;
+using System.Collections.Generic;
 
 namespace Rezolver.Tests
 {
@@ -275,6 +277,22 @@ namespace Rezolver.Tests
 			Assert.IsNotNull(result.Property_HasField);
 			Assert.AreEqual(500, result.Field_HasProperty.Value);
 			Assert.AreEqual("hello universe", result.Property_HasField.StringField);
+		}
+
+		[TestMethod]
+		public void ShouldBindExplicitParameters()
+		{
+			var example = new System.Net.NetworkCredential("hello", "world");
+			var userName = "username".AsObjectTarget();
+			var password = "password".AsObjectTarget();
+			var args = new Dictionary<string, IRezolveTarget>();
+			args["userName"] = userName;
+			args["password"] = password;
+			var target = ConstructorTarget.WithArgs<NetworkCredential>(args);
+			var result = GetValueFromTarget<NetworkCredential>(target);
+
+			Assert.AreEqual("username", result.UserName);
+			Assert.AreEqual("password", result.Password);
 		}
 	}
 }

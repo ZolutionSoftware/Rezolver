@@ -21,6 +21,17 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
+		/// Gets the declared type of the object that will be created by an IRezolveTarget created by
+		/// this metadata.  Note - this isn't always known, or always fixed, since configuration systems
+		/// will allow developers to avoid being specific about the types that are to be built.
+		/// </summary>
+		/// <value>The type of the declared.</value>
+		public abstract ITypeReference DeclaredType
+		{
+			get;
+		}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="RezolveTargetMetadataBase"/> class.
 		/// </summary>
 		/// <param name="type">The type of target.</param>
@@ -65,14 +76,13 @@ namespace Rezolver.Configuration
 			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
 			if (targetTypes.Length == 0) throw new ArgumentException("Array must contain at least one target type", "targetTypes");
 			if (targetTypes.Any(t => t == null)) throw new ArgumentException("All items in the array must be non-null", "targetTypes");
-			{
-				var commonBase = targetTypes.FirstOrDefault(t => targetTypes.All(tt => tt != t || t.IsAssignableFrom(tt)));
 
-				if (commonBase == null)
-				{
-					context.AddError(new ConfigurationError("If multiple types are provided for a target, they must all be part of a common hierarchy", entry));
-					return null;
-				}
+			var commonBase = targetTypes.FirstOrDefault(t => targetTypes.All(tt => tt != t || t.IsAssignableFrom(tt)));
+
+			if (commonBase == null)
+			{
+				context.AddError(new ConfigurationError("If multiple types are provided for a target, they must all be part of a common hierarchy", entry));
+				return null;
 			}
 
 			return CreateRezolveTargetBase(targetTypes, context, entry);
@@ -91,5 +101,25 @@ namespace Rezolver.Configuration
 		/// <param name="entry">The entry.</param>
 		/// <returns>IRezolveTarget.</returns>
 		protected abstract IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry);
+
+		public virtual IRezolveTargetMetadata Bind(ITypeReference[] targetTypes)
+		{
+			if (!DeclaredType.IsUnbound)
+				return this;
+
+			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
+			if (targetTypes.Length == 0) throw new ArgumentException("Array must contain at least one target type", "targetTypes");
+			if (targetTypes.Any(t => t == null)) throw new ArgumentException("All items in the array must be non-null", "targetTypes");
+
+			return BindBase(targetTypes);
+		}
+
+		/// <summary>
+		/// Creates a new instance (clone) of this metadata that's bound to the target types (although, typically, you'll only ever pick the first target type that
+		/// is in the array).  Only ever called if <see cref="DeclaredType"/> is unbound
+		/// </summary>
+		/// <param name="targetTypes">The target types.</param>
+		/// <returns>IRezolveTargetMetadata.</returns>
+		protected abstract IRezolveTargetMetadata BindBase(params ITypeReference[] targetTypes);
 	}
 }

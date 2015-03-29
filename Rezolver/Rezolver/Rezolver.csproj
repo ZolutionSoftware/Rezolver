@@ -28,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DocumentationFile>bin\Debug\Rezolver.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -38,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DocumentationFile>bin\Release\Rezolver.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->

@@ -15,6 +15,26 @@ namespace Rezolver.Configuration
 		/// </summary>
 		RezolveTargetMetadataType Type { get; }
 
+
+		/// <summary>
+		/// Gets the declared type of the object that will be created by an IRezolveTarget created by
+		/// this metadata.  Note - this isn't always known, or always fixed, since configuration systems
+		/// will allow developers to avoid being specific about the types that are to be built.
+		/// </summary>
+		/// <value>The type of the declared.</value>
+		ITypeReference DeclaredType { get; }
+
+		/// <summary>
+		/// Creates a new instance of this metadata (i.e. a clone) that is bound to the specified target types.
+		/// This is invoked if <see cref="DeclaredType"/> represents the <see cref="TypeReeference.Unbound"/> type reference.
+		/// </summary>
+		/// <param name="targetTypes">The target types.  Ideally there'd only be one of these, but since type registrations
+		/// can target multiple types - we need to be able to pass all of them.  An implementation should seek the best possible
+		/// type from the array, although in practise - given that there's no ConfigurationAdapterContext to aid in the parsing
+		/// of the type names, the first type in the array is typically fine to use.</param>
+		/// <returns>IRezolveTargetMetadata.</returns>
+		IRezolveTargetMetadata Bind(params ITypeReference[] targetTypes);
+
 		/// <summary>
 		/// Creates the rezolve target, optionally customised for the given target type(s), based on the given context.
 		/// If the <paramref name="entry"/> is passed, then it indicates the configuration entry for which the targets are being built.

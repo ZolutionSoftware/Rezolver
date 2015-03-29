@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,15 @@ namespace Rezolver.Configuration.Json
 				get;
 				set;
 			}
+
+			[JsonIgnore]
+			public bool IsUnbound
+			{
+				get
+				{
+					return JsonConfiguration.UnboundType == TypeName;
+				}
+			}
 		}
 
 		public override bool CanWrite
@@ -59,13 +69,13 @@ namespace Rezolver.Configuration.Json
 			if (reader.TokenType == JsonToken.String)
 			{
 				//note - line information for this will have the same start and end line/pos
-				return new TypeReference(reader.Value as string, startLine.ToConfigurationLineInfo(lineInfo));
+				return new TypeReference(reader.Value as string, startLine.ToConfigurationLineInfo(lineInfo), false, JsonConfiguration.UnboundType.Equals(reader.Value));
 			}
 			else if (reader.TokenType == JsonToken.StartObject)
 			{
 				var temp = new JsonTypeReference();
 				serializer.Populate(reader, temp);
-				return new TypeReference(temp.TypeName, startLine.ToConfigurationLineInfo(lineInfo), temp.IsArray, temp.GenericArguments);
+				return new TypeReference(temp.TypeName, startLine.ToConfigurationLineInfo(lineInfo), temp.IsArray, temp.IsUnbound, temp.GenericArguments);
 			}
 			else throw new InvalidOperationException(((reader as IJsonLineInfo) ?? StubJsonLineInfo.Instance).FormatMessageForThisLine("Invalid Type Reference"));
 		}

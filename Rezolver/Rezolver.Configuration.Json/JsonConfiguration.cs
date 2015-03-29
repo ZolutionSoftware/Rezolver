@@ -38,7 +38,7 @@ namespace Rezolver.Configuration.Json
 		/// Is also used - where supported - to refer to a type from a parent object which you want to reference, but without having to
 		/// specify the whole typename.
 		/// </summary>
-		public const string AutoConstructorType = "$auto";
+		public const string UnboundType = "$auto";
 
 		/// <summary>
 		/// Gets the name of the file.

@@ -15,6 +15,8 @@ namespace Rezolver.Configuration
 		
 		private static readonly ITypeReference _openGenericTypeArgument = new TypeReference("#TArg#", null);
 
+		private static readonly ITypeReference _unbound = new TypeReference("#auto#", null, false, true);
+
 		/// <summary>
 		/// The one-and-only open generic argument instance.
 		/// The only way to fetch a non-derived TypeReference that returns true for <see cref="IsOpenGenericTypeArgument" />
@@ -29,6 +31,21 @@ namespace Rezolver.Configuration
 			}
 		}
 
+		/// <summary>
+		/// A static Unbound TypeReference that can be used in cases where a simple instance of an unbound type is required.
+		/// 
+		/// 
+		/// You can also, of course, create explicitly unbound type references using the greediest constructor on this type.
+		/// </summary>
+		/// <value>The unbound.</value>
+		public static ITypeReference Unbound
+		{
+			get
+			{
+				return _unbound;
+			}
+		}
+
 
 		/// <summary>
 		/// Gets a value indicating whether this instance represents an open generic type argument (e.g. the 'T' from List&lt;T&gt;).
@@ -39,6 +56,19 @@ namespace Rezolver.Configuration
 			get
 			{
 				return object.ReferenceEquals(OpenGenericTypeArgument, this);
+			}
+		}
+
+		private readonly bool _isUnbound;
+		/// <summary>
+		/// Gets a value indicating whether this instance represents the <see cref="Unbound"/> special type reference.
+		/// </summary>
+		/// <value><c>true</c> if this instance is unbound; otherwise, <c>false</c>.</value>
+		public override bool IsUnbound
+		{
+			get
+			{
+				return _isUnbound;
 			}
 		}
 
@@ -78,6 +108,21 @@ namespace Rezolver.Configuration
 		}
 
 		public TypeReference(string typeName, IConfigurationLineInfo lineInfo, bool isArray, params ITypeReference[] genericArguments)
+			: this(typeName, lineInfo, isArray, false, genericArguments)
+		{
+			
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TypeReference"/> class, allowing you to create an explicitly 'unbound' type,
+		/// which is expected to be replaced by whichever type is required by another component, later.
+		/// </summary>
+		/// <param name="typeName">Name of the type.</param>
+		/// <param name="lineInfo">The line information.</param>
+		/// <param name="isArray">if set to <c>true</c> [is array].</param>
+		/// <param name="isUnbound">if set to <c>true</c> [is unbound].</param>
+		/// <param name="genericArguments">The generic arguments.</param>
+		public TypeReference(string typeName, IConfigurationLineInfo lineInfo, bool isArray, bool isUnbound, params ITypeReference[] genericArguments)
 			: base(lineInfo)
 		{
 			if (string.IsNullOrWhiteSpace(typeName))
@@ -88,6 +133,7 @@ namespace Rezolver.Configuration
 			_typeName = typeName;
 			_genericArguments = genericArguments;
 			_isArray = isArray;
+			_isUnbound = isUnbound;
 		}
 	}
 }

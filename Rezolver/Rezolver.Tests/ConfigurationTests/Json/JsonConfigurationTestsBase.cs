@@ -410,5 +410,26 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			Assert.AreEqual(3, result.Length);
 			Assert.AreEqual(instanceNumber + 3, RequiresNothing.LastInstanceNumber);
 		}
+
+		[TestMethod]
+		public void BindConstructorOfNetworkCredentials(){
+			string json = @"{
+			""rezolve"" : [ 
+			{
+				""System.Net.NetworkCredential"": {
+					""$construct"": ""$auto"",
+					""$args"": {
+						""$sig"": [ ""System.String"", ""System.String"" ],
+						""userName"": ""username"",
+						""password"": ""password""
+					}
+				}
+			}
+		 ]}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			var result = rezolver.Resolve<System.Net.NetworkCredential>();
+			Assert.AreEqual("username", result.UserName);
+			Assert.AreEqual("password", result.Password);
+		}
 	}
 }

@@ -122,7 +122,10 @@ namespace Rezolver.Configuration
 		{
 			if (error == null)
 				throw new ArgumentNullException("error");
-
+#if DEBUG
+			if (System.Diagnostics.Debugger.IsAttached)
+				System.Diagnostics.Debugger.Break();
+#endif
 			_errors.Add(error);
 		}
 
@@ -130,6 +133,11 @@ namespace Rezolver.Configuration
 		{
 			if (errors == null)
 				throw new ArgumentNullException("errors");
+
+#if DEBUG
+			if (System.Diagnostics.Debugger.IsAttached)
+				System.Diagnostics.Debugger.Break();
+#endif
 
 			_errors.AddRange(errors);
 		}
@@ -398,7 +406,16 @@ namespace Rezolver.Configuration
 		/// to the <paramref name="context"/>).</returns>
 		public virtual bool TryParseTypeReference(ITypeReference typeReference, out Type type)
 		{
+			if (typeReference is RuntimeTypeReference)
+			{
+				//RuntimeTypeReference is a special case ITypeReference that can be built directly from
+				//a known Type.  In this case, we simply uncrack the type that's being wrapped by the instance.
+				type = ((RuntimeTypeReference)typeReference).RuntimeType;
+				return true;
+			}
+
 			type = null;
+
 			try
 			{
 				Type baseType = ResolveType(typeReference.TypeName, typeReference.GenericArguments == null ? (int?)null : typeReference.GenericArguments.Length);

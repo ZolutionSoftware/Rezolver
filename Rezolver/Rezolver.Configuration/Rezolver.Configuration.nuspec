@@ -1,26 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
-		<id>Rezolver.Mvc5</id>
-		<version>1.0.1</version>
-		<title>Rezolver (MVC 5 integration)</title>
+		<id>Rezolver.Configuration</id>
+		<version>1.0.0</version>
+		<title>Rezolver (configuration framework)</title>
 		<authors>Zolution Software Ltd</authors>
 		<owners>LordZoltan</owners>
 		<projectUrl>https://github.com/LordZoltan/Rezolver</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Asp.Net MVC 5 Integration for Rezolver</description>
+		<description>The framework for building Rezolver builders and containers from configuration.</description>
 		<releaseNotes></releaseNotes>
 		<copyright>Copyright Zolution Software Ltd 2014</copyright>
 		<tags>ioc di portable</tags>
 		<dependencies>
 			<dependency id="Rezolver" version="0.4.1" />
-			<dependency id="Microsoft.AspNet.Mvc" version="5.2" />
-			<dependency id="WebActivatorEx" version="2.0.5" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Code Templates\**\*.*" target="content" />
-		<file src="bin\Release\Rezolver.Mvc5.dll" target="lib\net45\Rezolver.Mvc5.dll" />
-		<file src="bin\Release\Rezolver.Mvc5.pdb" target="lib\net45\Rezolver.Mvc5.pdb" />
+		<file src="bin\Release\Rezolver.Configuration.*" target="lib\portable-net45+sl50+win+wp80" />
+		<file src="bin\Release\Rezolver.Configuration.*" target="lib\net45" />
+		<file src="..\Rezolver.Configuration.Advanced\bin\Release\Rezolver.Configuration.Advanced.*" target="lib\net45" />
 	</files>
 </package>

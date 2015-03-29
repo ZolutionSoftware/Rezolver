@@ -102,6 +102,15 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
+		/// Gets a value indicating whether this instance represents a type that is to be late-bound for a specific target type.
+		/// </summary>
+		/// <value><c>true</c> if this instance is unbound; otherwise, <c>false</c>.</value>
+		public abstract bool IsUnbound
+		{
+			get;
+		}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="TypeReferenceBase"/> class.
 		/// </summary>
 		protected TypeReferenceBase() { }

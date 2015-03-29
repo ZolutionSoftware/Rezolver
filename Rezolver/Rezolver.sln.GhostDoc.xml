@@ -13,7 +13,7 @@
     <HelpFileName>Rezolver</HelpFileName>
     <ImageFolderPath />
     <HtmlFormats>
-      <HtmlHelp>true</HtmlHelp>
+      <HtmlHelp>false</HtmlHelp>
       <MSHelpViewer>false</MSHelpViewer>
       <MSHelp2>false</MSHelp2>
       <Website>true</Website>
@@ -30,7 +30,7 @@
     </IncludeScopes>
     <ResolveCrefLinks>true</ResolveCrefLinks>
     <HeaderText />
-    <FooterText>Rezolver is Copyright Andras Zoltan 2014</FooterText>
+    <FooterText>Rezolver is Copyright Zolution Software Ltd 2014 onwards</FooterText>
     <ConceptualContent>
       <ContentLayout />
       <MediaContent />
@@ -39,8 +39,8 @@
       <SelectedProject>Rezolver</SelectedProject>
       <SelectedProject>Rezolver.Advanced</SelectedProject>
       <SelectedProject>Rezolver.Configuration</SelectedProject>
-      <SelectedProject>Rezolver.Configuration.Json</SelectedProject>
       <SelectedProject>Rezolver.Configuration.Advanced</SelectedProject>
+      <SelectedProject>Rezolver.Configuration.Json</SelectedProject>
       <SelectedProject>Rezolver.CommonServiceLocator</SelectedProject>
       <SelectedProject>Rezolver.Mvc5</SelectedProject>
     </SelectedProjects>

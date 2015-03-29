@@ -12,6 +12,9 @@ namespace Rezolver
 		private readonly Dictionary<RezolveContext, ICompiledRezolveTarget> _entries = new Dictionary<RezolveContext, ICompiledRezolveTarget>();
 		private readonly Dictionary<Type, ICompiledRezolveTarget> _typeOnlyEntries = new Dictionary<Type, ICompiledRezolveTarget>();
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="CachingRezolver"/> class.
+		/// </summary>
 		protected CachingRezolver()
 		{
 

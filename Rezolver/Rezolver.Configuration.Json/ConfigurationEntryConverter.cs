@@ -146,9 +146,9 @@ namespace Rezolver.Configuration.Json
 				reader.Read();
 			}
 
-			RezolveTargetMetadataWrapper wrappedMeta = serializer.Deserialize<RezolveTargetMetadataWrapper>(reader);
+			IRezolveTargetMetadata meta = serializer.Deserialize<IRezolveTargetMetadata>(reader);
 			//and then unwrap the meta data for the target types
-			var unwrapped = wrappedMeta.UnwrapMetadata(regTypes);
+			var unwrapped = meta.Bind(regTypes);
 
 			//if we get a metadata list, then the configuration is instructing us to do a multiple registration.
 			//that is, a multi registration of type T will mean that we will later resolve IEnumerable<T>

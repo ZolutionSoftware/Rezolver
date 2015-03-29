@@ -11,12 +11,18 @@ namespace Rezolver.Configuration.Json
 	/// Of little practical use outside of the Json configuration library, unless you are creating your
 	/// own metadata types which need the Unwrap semantics
 	/// </summary>
+	[Obsolete("no longer required", true)]
 	public class RezolveTargetMetadataWrapper : RezolveTargetMetadataBase, IRezolveTargetMetadataExtension
 	{
 		public const string ExtensionTypeName = "#JSONWRAPPER#";
 		public string ExtensionType
 		{
 			get { return ExtensionTypeName; }
+		}
+
+		public override ITypeReference DeclaredType
+		{
+			get { throw new NotImplementedException(); }
 		}
 
 		private readonly IRezolveTargetMetadata _wrapped;
@@ -26,6 +32,11 @@ namespace Rezolver.Configuration.Json
 		{
 			// TODO: Complete member initialization
 			this._wrapped = wrapped;
+		}
+
+		protected override IRezolveTargetMetadata BindBase(params ITypeReference[] targetTypes)
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -66,7 +77,7 @@ namespace Rezolver.Configuration.Json
 				//or referring back to a type that's in scope at a given point in a file.
 				//this is going to get more involved if we start doing special constructor parameter bindings or
 				//propety bindings.
-				if (ctorMetadata.TypesToBuild.Length == 1 && ctorMetadata.TypesToBuild[0].TypeName == JsonConfiguration.AutoConstructorType)
+				if (ctorMetadata.TypesToBuild.Length == 1 && ctorMetadata.TypesToBuild[0].TypeName == JsonConfiguration.UnboundType)
 					return new ConstructorTargetMetadata(forTargetTypes);
 			}
 
@@ -83,7 +94,7 @@ namespace Rezolver.Configuration.Json
 			if(listMetadata != null)
 			{
 				ITypeReference elementType = listMetadata.ElementType;
-				if(elementType != null && listMetadata.ElementType.TypeName == JsonConfiguration.AutoConstructorType)
+				if(elementType != null && listMetadata.ElementType.TypeName == JsonConfiguration.UnboundType)
 				{
 
 					var forArrayType = forTargetTypes.FirstOrDefault(t => t.IsArray);
@@ -126,8 +137,6 @@ namespace Rezolver.Configuration.Json
 			else
 				return meta;
 		}
-
-
 
 		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{

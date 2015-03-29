@@ -15,6 +15,12 @@ namespace Rezolver
 	/// </summary>
 	public interface IRezolveTarget
 	{
+		/// <summary>
+		/// Returns a boolean indicating whether the target is able to produce an instance of, or an instance
+		/// that is compatible with, the passed <paramref name="type"/>.
+		/// </summary>
+		/// <param name="type">The type.</param>
+		/// <returns><c>true</c> if <paramref name="type"/> is supported, <c>false</c> otherwise.</returns>
 		bool SupportsType(Type type);
 
 		/// <summary>
@@ -22,18 +28,14 @@ namespace Rezolver
 		/// might be expected to handle a dynamic rezolver being passed to it at run time to enable dynamic per-target overriding
 		/// from other rezolvers.
 		/// </summary>
-		/// <param name="rezolver">The rezolver that defines the Builder in which this expression
-		///   is being built.  Note that this is a 'compile-time' Builder and should be used during expression-building
-		///   time to resolve any other targets that might be required for the statically compiled expression.</param>
-		/// <param name="targetType">The type of object that the compiled expression is expected to produce.</param>
-		/// <param name="dynamicRezolverExpression">Optional. If this is non-null, then the returned expression should cater for the 
-		/// fact that a dynamic rezolver could be passed to any function built from this expression at run time.</param>
-		/// <param name="currentTargets">Optional. A stack of targets that are currently being compiled - used to help detect
-		/// circular dependencies between targets.</param>
+		/// <param name="context">The current compile context</param>
 		/// <returns></returns>
-		//Expression CreateExpression(IRezolver rezolver, Type targetType = null, ParameterExpression dynamicRezolverExpression = null, Stack<IRezolveTarget> currentTargets = null);
-
 		Expression CreateExpression(CompileContext context);
+		/// <summary>
+		/// Gets the static type produced by this target, when executing the expression returned from a call to 
+		/// <see cref="CreateExpression"/> without providing your own explicit type to be returned.
+		/// </summary>
+		/// <value>The type of the declared.</value>
 		Type DeclaredType { get; }
 	}
 }

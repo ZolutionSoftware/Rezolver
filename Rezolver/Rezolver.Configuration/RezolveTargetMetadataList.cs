@@ -9,6 +9,21 @@ namespace Rezolver.Configuration
 	{
 		private readonly List<IRezolveTargetMetadata> _targets;
 
+		public override ITypeReference DeclaredType
+		{
+			get { throw new NotSupportedException(); }
+		}
+
+		public override IRezolveTargetMetadata Bind(ITypeReference[] targetTypes)
+		{
+			return new RezolveTargetMetadataList(Targets.Select(t => t.Bind(targetTypes)));
+		}
+
+		protected override IRezolveTargetMetadata BindBase(ITypeReference[] targetTypes)
+		{
+			throw new NotImplementedException();
+		}
+
 		public RezolveTargetMetadataList()
 			: this(null)
 		{

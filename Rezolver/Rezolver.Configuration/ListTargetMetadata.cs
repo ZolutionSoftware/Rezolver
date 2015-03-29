@@ -20,6 +20,25 @@ namespace Rezolver.Configuration
 			get;
 			private set;
 		}
+
+		public override ITypeReference DeclaredType
+		{
+			get
+			{
+				if (ElementType.IsUnbound)
+					return ElementType;
+
+				if (IsArray)
+				{
+					return new TypeReference(ElementType.TypeName, ElementType, true, ElementType.GenericArguments);
+				}
+				else
+				{
+					return new TypeReference(typeof(List<>).AssemblyQualifiedName, ElementType, ElementType);
+				}
+			}
+		}
+
 		/// <summary>
 		/// Gets the metadata for the targets that will be used for the items that'll be returned
 		/// in the Array or List that will be created by the <see cref="ListTarget" /> created from this metadata.
@@ -62,6 +81,43 @@ namespace Rezolver.Configuration
 				return null;
 
 			return new ListTarget(elementType, Items.CreateRezolveTargets(targetTypes, context, entry), IsArray);
+		}
+
+		public override IRezolveTargetMetadata Bind(ITypeReference[] targetTypes)
+		{
+			//this ALWAYS forces a bind on the inner targets, regardless of whether this object's
+			//declared type is unbound or not - that's because this object might not be unbound,
+			//but the inner targets might be.
+
+			//little bit annoying - have to duplicate the argument check here.
+			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
+			if (targetTypes.Length == 0) throw new ArgumentException("Array must contain at least one target type", "targetTypes");
+			if (targetTypes.Any(t => t == null)) throw new ArgumentException("All items in the array must be non-null", "targetTypes");
+
+			//look at lifting the code for this from the Json project's RezolverMetadataWrapper
+			var forArrayType = targetTypes.FirstOrDefault(t => t.IsArray);
+
+			ITypeReference newElementType = ElementType;
+			//if for an array, then the type to be used is just the type reference from the target types
+			//but without the array flag.  If it's a list, then it's not really possible, because we can't reliably identify
+			//that the target type is List<T>, or a type derived from it, till we actually start parsing typenames.
+			if (forArrayType != null && IsArray)
+			{
+				//we set the element type of the returned list to be equal to forArrayType, but without the IsArray flag set to true.
+				newElementType = new TypeReference(forArrayType.TypeName, forArrayType, forArrayType.GenericArguments);
+			}
+
+			var boundList = Items.Bind(new[] { newElementType }) as IRezolveTargetMetadataList;
+
+			if (boundList == null)
+				throw new InvalidOperationException("The Items metadata failed to bind a new metadata list - this indicates a bad implementation");
+
+			return new ListTargetMetadata(newElementType, boundList, IsArray);
+		}
+
+		protected override IRezolveTargetMetadata BindBase(ITypeReference[] targetTypes)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

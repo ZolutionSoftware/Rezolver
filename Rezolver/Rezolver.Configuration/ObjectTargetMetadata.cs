@@ -17,6 +17,11 @@ namespace Rezolver.Configuration
 	public class ObjectTargetMetadata : ObjectTargetMetadataBase, IObjectTargetMetadata
 	{
 		private readonly Func<Type, object> _valueProvider;
+		private readonly ITypeReference _declaredType;
+		public override ITypeReference DeclaredType
+		{
+			get { throw new NotImplementedException(); }
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ObjectTargetMetadata"/> class.
@@ -25,6 +30,7 @@ namespace Rezolver.Configuration
 		public ObjectTargetMetadata(object obj)
 		{
 			_valueProvider = (t) => obj;
+			_declaredType = obj == null ? TypeReference.Unbound : new RuntimeTypeReference(obj.GetType());
 		}
 
 		/// <summary>
@@ -32,8 +38,16 @@ namespace Rezolver.Configuration
 		/// </summary>
 		/// <param name="valueProvider">The value provider that will be called.</param>
 		public ObjectTargetMetadata(Func<Type, object> valueProvider)
+			: this(valueProvider, TypeReference.Unbound)
+		{
+			//can't know the object type in advance - since the factory could produce different
+			//instances based on the type passed at runtime.
+		}
+
+		private ObjectTargetMetadata(Func<Type, object> valueProvider, ITypeReference declaredType)
 		{
 			_valueProvider = valueProvider;
+			_declaredType = declaredType;
 		}
 
 		/// <summary>
@@ -53,6 +67,16 @@ namespace Rezolver.Configuration
 			//note - no guarantee is made that the returned object is actually compatible
 			//with the given type.
 			return _valueProvider(type);
+		}
+
+		protected override IRezolveTargetMetadata BindBase(ITypeReference[] targetTypes)
+		{
+			//the concept of an unbound ObjectTargetMetadata is a little odd, given that behind it is supposed
+			//to be an object instance.  However, since we have the factory callback, it's just possible that
+			//this one instance could produce lots of different types of object based on what's requested.
+			if (targetTypes.Length != 1)
+				throw new ArgumentException("Must only have one unambiguous target type for this target to bind to");
+			return new ObjectTargetMetadata(_valueProvider, targetTypes[0]);
 		}
 	}
 }

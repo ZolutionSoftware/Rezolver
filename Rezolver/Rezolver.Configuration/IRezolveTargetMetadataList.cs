@@ -7,6 +7,13 @@ namespace Rezolver.Configuration
 {
 	/// <summary>
 	/// Represents a list of IRezolveTargetMetadata instances - for when you want to register multiple targets against a single type.
+	/// 
+	/// Note - although the interface IRezolveTargetMetadata is included by this interface, instances are not expected to be able to
+	/// create a single target through the CreateRezolveTarget method - because by definition, multiple targets are produced by this.
+	/// 
+	/// Use the CreateRezolveTargets method instead.
+	/// The Bind method, however, will be expected to produce a new instance of the implementing type if any underlying targets
+	/// are not bound to a specific type.
 	/// </summary>
 	public interface IRezolveTargetMetadataList : IRezolveTargetMetadata
 	{
