@@ -286,7 +286,7 @@ namespace Rezolver
 				yield break;
 			}
 
-			//for every generic type, there is a least two versions - the closed and the open
+			//for every generic type, there is at least two versions - the closed and the open
 			//when you consider, then, that a generic parameter might also be a generic
 			var typeParams = TypeHelpers.GetGenericArguments(type);
 			var typeParamSearchLists = typeParams.Select(t => DeriveGenericTypeSearchList(t).ToArray()).ToArray();

@@ -41,5 +41,17 @@ namespace Rezolver.Configuration
 		/// the target that is built.
 		/// </summary>
 		bool IsOpenGenericTypeArgument { get; }
+
+		/// <summary>
+		/// Gets a value indicating whether this instance represents a type that is to be late-bound for a specific target type.
+		/// </summary>
+		/// <value><c>true</c> if this instance is unbound; otherwise, <c>false</c>.</value>
+		bool IsUnbound { get; }
+		/// <summary>
+		/// Gets a value indicating whether the type ultimately represented by this instance is an array of the
+		/// type described by the rest of this instance's properties.
+		/// </summary>
+		/// <value><c>true</c> if this instance represents an array type; otherwise, <c>false</c>.</value>
+		bool IsArray { get; }
 	}
 }

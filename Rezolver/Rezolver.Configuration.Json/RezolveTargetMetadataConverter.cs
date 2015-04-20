@@ -21,7 +21,7 @@ namespace Rezolver.Configuration.Json
 		}
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(RezolveTargetMetadataWrapper).Equals(objectType);
+			return typeof(IRezolveTargetMetadata).Equals(objectType);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -63,9 +63,6 @@ namespace Rezolver.Configuration.Json
 					{
 						JObject o = JObject.ReadFrom(reader) as JObject;
 
-						if (o == null)
-							throw new JsonConfigurationException("Invalid JSON object", reader);
-
 						//create a JObject first, analyse the contents and then build the target meta
 						//if it has a 'target' member, then it's a constructor target
 						meta = LoadTargetMetadata(o, serializer);
@@ -82,9 +79,9 @@ namespace Rezolver.Configuration.Json
 			}
 
 			//we wrap the target because we have to allow rewriting targets after they're deserialized in isolation.
-			//constructor targets - for example - support the '$self' type name, but because the types being registered are not
+			//constructor targets - for example - support the '$auto' type name, but because the types being registered are not
 			//known when deserialising the target, we have to have a second-shot
-			return new RezolveTargetMetadataWrapper(meta);
+			return meta;
 		}
 
 		private IRezolveTargetMetadata LoadTargetMetadata(JObject jObject/*, ITypeReference[] regTypes*/, JsonSerializer serializer)
@@ -102,7 +99,7 @@ namespace Rezolver.Configuration.Json
 			else if ((tempChildObject = jObject["$singleton"] as JObject) != null)
 				return new SingletonTargetMetadata(LoadTargetMetadata(tempChildObject, serializer), false);
 
-			//see if there's a 'construct' property.  If so, then we have a constructortarget call
+			//see if there's a 'construct' property.  If so, then we have a constructor target call
 			var tempTarget = jObject["$construct"];
 
 			ITypeReference[] targetType;
@@ -111,44 +108,90 @@ namespace Rezolver.Configuration.Json
 			{
 				if (tempTarget is JArray)
 					targetType = tempTarget.ToObject<TypeReference[]>(serializer);
-				else if (tempTarget is JObject)
+				else if (tempTarget is JObject || tempTarget is JValue)
 					targetType = new[] { tempTarget.ToObject<TypeReference>(serializer) };
-				else if (tempTarget is JValue)
-				{
-					string typeString = (string)tempTarget;
-					if (string.IsNullOrWhiteSpace(typeString))
-						throw new JsonConfigurationException("Target, if a string, must not be null, empty or whitespace", tempTarget);
-
-					//if ("$self".Equals(typeString, StringComparison.OrdinalIgnoreCase))
-					//	targetType = regTypes;	//we will allow multiple types to be specified for constructor target.  Thinking 
-					////that so long as there's only one concrete class in the list, then we can be 'clever'
-					//else
-						targetType = new[] { new TypeReference(typeString, ((IJsonLineInfo)tempTarget).ToConfigurationLineInfo() )};	//otherwise deserialise the type reference
-				}
 				else
 					throw new JsonConfigurationException("Unable to determine target type for Constructor Target metadata", jObject);
+				
+				tempTarget = jObject["$args"];
+				IDictionary<string, IRezolveTargetMetadata> args = null;
+				ITypeReference[] sigTypes = null;
 
-				return new ConstructorTargetMetadata(targetType);
+				if (tempTarget != null)
+				{
+					//see if there is a specific signature to be matched.  This will simply be an array of type references
+					//if the file contains this, then only an exact match will work.
+					var sig = tempTarget["$sig"];
+
+					if (sig != null)
+					{
+						sigTypes = sig.ToObject<TypeReference[]>(serializer);
+						//prune this $sig property out of the object so it's not read as a parameter.
+						//slightly counter-intuitively, this involves removing the parent of this value - because
+						//we have the array from '$sig: [array]', and we need the '$sig' bit.
+						sig.Parent.Remove();
+					}
+
+					args = new Dictionary<string, IRezolveTargetMetadata>();
+					foreach(var prop in tempTarget.Children().OfType<JProperty>())
+					{
+						args[prop.Name] = prop.Value.ToObject<IRezolveTargetMetadata>(serializer);
+					}
+				}
+				//todo: pass the arguments over - altering constructortargetmetadata appropriately, so that it both exposes any arguments (as a dictionary)
+				//and then alters how it creates the constructortarget to handle arguments being passed.
+				return new ConstructorTargetMetadata(targetType, sigTypes, args);
 			}
 
-			//now see if there's a 'multi' property.  If so, then we have a an instruction to register multiple
-			//targets against one set of type registrations.
-			tempTarget = jObject["$multi"];
+			//now see if there's a '$targets' property.  if so, it's a special case target metadata object which instructs the parser
+			//to read an array of nested metadata objects.  If this is specified as an object to be registered as a TypeConfigurationEntry,
+			//then it will cause the list of targets to be grouped together as a multiple registration.
+			tempTarget = jObject["$targets"];
 
 			if(tempTarget != null)
-			{
-				throw new NotImplementedException("Multi registration is not yet supported.");
-			}
+				return CreateTargetMetadataList(tempTarget, serializer);
+
+			bool isArray = false;
+			tempTarget = jObject["$array"];
+			if (tempTarget != null)
+				isArray = true;
+			else
+				tempTarget = jObject["$list"];
+
+			if (tempTarget != null)
+				return CreateListTargetMetadata(jObject, tempTarget, isArray, serializer);
 
 			//otherwise, we return an object target that will construct an instance of the requested type
 			//from the raw Json.  This allows developers to implement Json Conversion for types specifically
-			//for the purposes of reading from rezolver configuration 
+			//for the purposes of reading from rezolver configuration - note, however, that when doing this it's
+			//not possible to 
 			return CreateDeferredJsonDeserializerTarget(jObject, serializer);
 
 			//throw new JsonConfigurationException("Unsupported target", jObject);
 		}
 
-		private static IRezolveTargetMetadata CreateDeferredJsonDeserializerTarget(JToken jToken, JsonSerializer serializer)
+		private IRezolveTargetMetadata CreateListTargetMetadata(JToken jObject, JToken elementTypeToken, bool isArray, JsonSerializer serializer)
+		{
+			ITypeReference elementType = elementTypeToken.ToObject<TypeReference>(serializer);
+			var values = jObject["values"] as JArray;
+			if (values == null)
+				throw new JsonConfigurationException("Expected array property 'values' for List/Array target metadata", jObject);
+			var valuesMetadataList = CreateTargetMetadataList(values, serializer);
+			return new ListTargetMetadata(elementType, valuesMetadataList, isArray);
+		}
+
+		private IRezolveTargetMetadataList CreateTargetMetadataList(JToken tempTarget, JsonSerializer serializer)
+		{
+			if (tempTarget is JArray)
+			{
+				var targets = tempTarget.Select(t => t.ToObject<IRezolveTargetMetadata>(serializer));
+				return new RezolveTargetMetadataList(targets);
+			}
+			else
+				throw new JsonConfigurationException("Expected an array of target metadata entries", tempTarget);
+		}
+
+		private static IRezolveTargetMetadata	CreateDeferredJsonDeserializerTarget(JToken jToken, JsonSerializer serializer)
 		{
 			return new LazyJsonObjectTargetMetadata(jToken, serializer);
 		}

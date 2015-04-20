@@ -32,10 +32,13 @@ namespace Rezolver.Configuration.Json
 	{
 		/// <summary>
 		/// The typename to use on a type entry when you want to register a constructor target directly for the type that is registered.
-		/// E.g. { 'MyNamespace.Foo' : { 'type' : "$self' } }
+		/// E.g. { 'MyNamespace.Foo' : { 'type' : "$auto' } }
 		/// Which registers MyNamespace.Foo with a constructor target that binds to the same type.
+		/// 
+		/// Is also used - where supported - to refer to a type from a parent object which you want to reference, but without having to
+		/// specify the whole typename.
 		/// </summary>
-		public const string AutoConstructorType = "$self";
+		public const string UnboundType = "$auto";
 
 		/// <summary>
 		/// Gets the name of the file.

@@ -31,7 +31,10 @@ namespace Rezolver.Configuration
 			Trace.WriteLine(string.Concat("[AdvancedConfigurationAdapterContextFactory]: ", string.Format(format, formatArgs)));
 		}
 #else
-		static partial void Log(string format, params object[] formatArgs);
+		static void Log(string format, params object[] formatArgs)
+		{
+
+		}
 #endif
 
 		private static readonly IConfigurationAdapterContextFactory _instance = new AdvancedConfigurationAdapterContextFactory();
@@ -65,6 +68,11 @@ namespace Rezolver.Configuration
 					{
 						Log("Probing {0}", path);
 						toReturn.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
+					}
+					else
+					{
+						Log("Probing {0}", path);
+						toReturn.Add(path);
 					}
 				}
 			}

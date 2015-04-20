@@ -82,6 +82,43 @@ namespace Rezolver
 			return For(typeof(T), newExprBody, adapter);
 		}
 
+		public static IRezolveTarget WithArgs<T>(IDictionary<string, IRezolveTarget> args)
+		{
+			args.MustNotBeNull("args");
+
+			return WithArgsInternal(typeof(T), args);
+		}
+
+		public static IRezolveTarget WithArgs(Type declaredType, IDictionary<string, IRezolveTarget> args)
+		{
+			declaredType.MustNotBeNull("declaredType");
+			args.MustNotBeNull("args");
+
+			return WithArgsInternal(declaredType, args);
+		}
+
+		public static IRezolveTarget WithArgs(Type declaredType, ConstructorInfo ctor, IDictionary<string, IRezolveTarget> args)
+		{
+			declaredType.MustNotBeNull("declaredType");
+			ctor.MustNotBeNull("ctor");
+			args.MustNotBeNull("args");
+
+			ParameterBinding[] bindings = null;
+
+			if (!ParameterBinding.BindMethod(ctor, args, out bindings))
+				throw new ArgumentException("Cannot bind constructor with supplied arguments", "args");
+
+			return new ConstructorTarget(declaredType, ctor, bindings);
+		}
+
+		internal static IRezolveTarget WithArgsInternal(Type declaredType, IDictionary<string, IRezolveTarget> args)
+		{
+			MethodBase ctor = null;
+			var bindings = ParameterBinding.BindOverload(declaredType.GetConstructors(BindingFlags.Public | BindingFlags.Instance), args, out ctor);
+
+			return new ConstructorTarget(declaredType, (ConstructorInfo)ctor, bindings);
+		}
+
 		internal static IRezolveTarget For(Type declaredType, NewExpression newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			ConstructorInfo ctor = null;

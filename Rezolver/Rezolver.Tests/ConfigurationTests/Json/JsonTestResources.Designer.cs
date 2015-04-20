@@ -70,7 +70,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json {
         ///	],
         ///	&quot;rezolve&quot;: [
         ///		{ &quot;System.Int32&quot;: 10 },
-        ///		{ &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot;: { &quot;$construct&quot;: &quot;$self&quot; } },
+        ///		{ &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot;: { &quot;$construct&quot;: &quot;$auto&quot; } },
         ///		{ &quot;Rezolver.Tests.ConfigurationTests.IRequiresInt&quot;: { &quot;$construct&quot;: &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot; } },
         ///		{
         ///			&quot;type&quot;: { &quot;name&quot;: &quot;System.Collections.Generic.IEnumerable&quot;, &quot;args&quot;: [ &quot;System.Int32&quot; ] },
@@ -96,7 +96,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json {
         ///	],
         ///	&quot;rezolve&quot;: [
         ///		{ &quot;System.Int32&quot;: 10 },
-        ///		{ &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot;: { &quot;$construct&quot;: &quot;$self&quot; } },
+        ///		{ &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot;: { &quot;$construct&quot;: &quot;$auto&quot; } },
         ///		{ &quot;Rezolver.Tests.ConfigurationTests.IRequiresInt&quot;: { &quot;$construct&quot;: &quot;Rezolver.Tests.ConfigurationTests.RequiresInt&quot; } },
         ///		{
         ///			&quot;type&quot;: { &quot;name&quot;: &quot;System.Collections.Generic.IEnumerable&quot;, &quot;args&quot;: [ &quot;System.Int32&quot; ] },

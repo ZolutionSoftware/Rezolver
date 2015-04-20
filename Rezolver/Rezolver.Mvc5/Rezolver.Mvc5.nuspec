@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>Rezolver.Mvc5</id>
-		<version>1.0</version>
+		<version>1.0.1.1</version>
 		<title>Rezolver (MVC 5 integration)</title>
 		<authors>Zolution Software Ltd</authors>
 		<owners>LordZoltan</owners>
@@ -13,7 +13,7 @@
 		<copyright>Copyright Zolution Software Ltd 2014</copyright>
 		<tags>ioc di portable</tags>
 		<dependencies>
-			<dependency id="Rezolver" version="0.3.2" />
+			<dependency id="Rezolver" version="0.4.1" />
 			<dependency id="Microsoft.AspNet.Mvc" version="5.2" />
 			<dependency id="WebActivatorEx" version="2.0.5" />
 		</dependencies>

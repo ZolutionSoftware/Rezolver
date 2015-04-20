@@ -28,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DocumentationFile>bin\Debug\Rezolver.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -38,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DocumentationFile>bin\Release\Rezolver.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CachingRezolver.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="INamedRezolverBuilder.cs" />
     <Compile Include="IRezolverBuilder.cs" />
     <Compile Include="LifetimeScopeRezolver.cs" />
+    <Compile Include="ListTarget.cs" />
     <Compile Include="LoggingRezolver.cs" />
     <Compile Include="PropertyOrFieldBinding.cs" />
     <Compile Include="RezolveContext.cs" />

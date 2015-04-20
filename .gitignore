@@ -175,4 +175,9 @@ FakesAssemblies/
 
 # nuget packages
 *.nupkg
+
+# code analysis files
 *.crdata
+
+#ghostdoc help project output
+Help/

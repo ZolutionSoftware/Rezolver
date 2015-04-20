@@ -60,7 +60,7 @@ namespace Rezolver.Configuration
 		/// <returns></returns>
 		public virtual ConfigurationAdapterContext CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
 		{
-			return new ConfigurationAdapterContext(configuration, GetDefaultAssemblyReferences());
+			return new ConfigurationAdapterContext(adapter, configuration, GetDefaultAssemblyReferences());
 		}
 	}
 }

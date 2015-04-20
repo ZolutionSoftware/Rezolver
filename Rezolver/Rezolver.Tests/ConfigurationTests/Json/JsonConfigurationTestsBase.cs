@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rezolver.Configuration.Json;
 using Rezolver.Configuration;
 using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Rezolver.Tests.ConfigurationTests.Json
 {
@@ -83,13 +85,13 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		[TestMethod]
 		public void ShouldRezolveRequiresNothing_1()
 		{
-			//fiirst way of doing type references (as per last two types) for the registration - 
+			//first way of doing type references (as per last two types) for the registration - 
 			//use the type name as the property name, with it's value being the target (the { "$construct" : ... } bit)
 			string json = @"
 {
 	""assemblies"": [ ""Rezolver.Tests"" ],
 	""rezolve"" : [
-		{ ""Rezolver.Tests.ConfigurationTests.RequiresNothing"" : { ""$construct"" : ""$self"" } }
+		{ ""Rezolver.Tests.ConfigurationTests.RequiresNothing"" : { ""$construct"" : ""$auto"" } }
 	]
 }";
 			var rezolver = ParseConfigurationAndBuild(json);
@@ -98,7 +100,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			Assert.AreEqual(lastInstanceNumber + 1, instance.InstanceNumber);
 		}
 
-		
+
 		[TestMethod]
 		public void ShouldRezolveRequiresNothing_2()
 		{
@@ -112,7 +114,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 	""rezolve"" : [
 		{
 			""type"": ""Rezolver.Tests.ConfigurationTests.RequiresNothing"",
-			""value"": { ""$construct"" : ""$self"" } 
+			""value"": { ""$construct"" : ""$auto"" } 
 		}
 	]
 }";
@@ -124,7 +126,6 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		}
 
 		[TestMethod]
-
 		public void ShouldRezolveRequiresNothing_3()
 		{
 			//third way of doing this - an explicit type member, with the value being an object that
@@ -140,7 +141,7 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 	""rezolve"" : [
 		{
 			""type"": { ""name"": ""Rezolver.Tests.ConfigurationTests.RequiresNothing"" },
-			""value"": { ""$construct"" : ""$self"" } 
+			""value"": { ""$construct"" : ""$auto"" } 
 		}
 	]
 }";
@@ -149,6 +150,286 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			int lastInstanceNumber = RequiresNothing.LastInstanceNumber;
 			var instance = rezolver.Resolve<RequiresNothing>();
 			Assert.AreEqual(lastInstanceNumber + 1, instance.InstanceNumber);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveRequiresInt()
+		{
+			//I'm not doing the same three examples as above here - that's already been tested.
+			//however I am registering an entry for IRequiresInt, but building an instance of RequiresInt
+			string json = @"
+{
+	""assemblies"":[""Rezolver.Tests"" ],
+	""rezolve"": [
+		{ ""System.Int32"": 105 },
+		{ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"" : { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" } }
+	]
+}
+";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
+			Assert.AreEqual(105, requiresInt.IntValue);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveRequiresIntByTwoTypes()
+		{
+			//this time registering RequiresInt against both RequiresInt type and the interface
+			//notice this time the use of 'types' instead of 'type'.  This accepts an array of type references which,
+			//as mentioned in an earlier test, can be a literal string specifying a type name, or a construct such 
+			//as { "name": "[typename]", "args": [ {type_reference}, ... ] }
+			string json = @"{
+	""assemblies"":[""Rezolver.Tests"" ],
+	""rezolve"": [
+		{ ""System.Int32"": 110 },
+		{ 
+			""types"": [ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"", ""Rezolver.Tests.ConfigurationTests.RequiresInt"" ],
+			""value"": { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" }
+		}
+	]
+}";
+
+			var rezolver = ParseConfigurationAndBuild(json);
+			IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
+			RequiresInt requiresInt2 = rezolver.Resolve<RequiresInt>();
+
+			Assert.AreEqual(requiresInt.IntValue, requiresInt2.IntValue);
+			Assert.AreEqual(110, requiresInt.IntValue);
+			//however, they shouldn't be the same instance:
+			Assert.AreNotSame(requiresInt, requiresInt2);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveSingletonRequiresIntByTwoTypes()
+		{
+			//as you can guess by the last assert in the previous test - this does the same
+			//again, except this time, it's expected that we get the same instance for both rezolve calls.
+			//singletons are easy - just take the value entry that you typically put, and wrap it in a { "$singleton": /* original value */ }
+			string json = @"{
+	""assemblies"":[""Rezolver.Tests"" ],
+	""rezolve"": [
+		{ ""System.Int32"": 115 },
+		{ 
+			""types"": [ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"", ""Rezolver.Tests.ConfigurationTests.RequiresInt"" ],
+			""value"": { ""$singleton"" : { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" } }
+		}
+	]
+}";
+
+			var rezolver = ParseConfigurationAndBuild(json);
+			IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
+			RequiresInt requiresInt2 = rezolver.Resolve<RequiresInt>();
+
+			Assert.AreEqual(115, requiresInt.IntValue);
+			//however, they shouldn't be the same instance:
+			Assert.AreSame(requiresInt, requiresInt2);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfStrings()
+		{
+			//here, an array of strings can be provided by a literal string array in the JSON.
+
+			string json = @"{
+	""rezolve"" : [
+		{ ""System.String[]"" : [ ""Hello World0"", ""Hello World1"", ""Hello World2"" ] }
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			string[] array = rezolver.Resolve<string[]>();
+			Assert.IsNotNull(array);
+			Assert.AreEqual(3, array.Length);
+			Assert.IsTrue(Enumerable.Range(0, 3).Select(i => string.Format("Hello World{0}", i)).SequenceEqual(array));
+		}
+
+		[TestMethod]
+		public void ShouldRezolveEnumerableOfStringsViaMultiRegistration()
+		{
+			//so instead of registering an array - we're registering a bunch of strings as a multiple registration
+			//this then means they are retrievable as an IEnumerable<string>
+			string json = @"{
+	""rezolve"" : [
+		{ 
+			""System.String"" : {
+				""$targets"": [ ""Hello Multiple0"", ""Hello Multiple1"", ""Hello Multiple2"" ] 
+			}
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IEnumerable<string> multiple = rezolver.Resolve<IEnumerable<string>>();
+			Assert.IsNotNull(multiple);
+			var array = multiple.ToArray();
+			Assert.AreEqual(3, array.Length); ;
+			Assert.IsTrue(Enumerable.Range(0, 3).Select(i => string.Format("Hello Multiple{0}", i)).SequenceEqual(array));
+		}
+
+		[TestMethod]
+		public void ShouldRezolveEnumerableOfIRequiresNothingViaMultiRegistration()
+		{
+			//there's a way of doing this which binds to the array/enumerable type or whatever, and then 
+			//create the underlying array inline within JSON - however it's likely to require implementing
+			//JSON serialization.
+			//this test shows instead how we specify element type, instruct the parser that we intend to register
+			//multiple targets against that, and then the caller will simply request IEnumerable<type>
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""Rezolver.Tests.ConfigurationTests.IRequiresNothing"" :
+			{ 
+				""$targets"" :
+				[ 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }
+				]
+			} 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IEnumerable<IRequiresNothing> multiple = rezolver.Resolve<IEnumerable<IRequiresNothing>>();
+			Assert.IsNotNull(multiple);
+			var array = multiple.ToArray();
+			Assert.AreEqual(3, array.Length);
+			Assert.AreEqual(3, array.Select(r => r.InstanceNumber).Distinct().ToArray().Length);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveEnumerableOfStringViaDirectRegistration()
+		{
+			//bakes a literal string array as a target for enumerable of strings.
+			string json = @"{
+	""rezolve"" : [
+		{ 
+			""type"" : { ""name"" : ""System.Collections.Generic.IEnumerable"", ""args"" : [ ""System.String"" ] },
+			""value"": [ ""Hello Generic0"", ""Hello Generic1"", ""Hello Generic2"" ] 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			IEnumerable<string> strings = rezolver.Resolve<IEnumerable<string>>();
+			Assert.IsNotNull(strings);
+			var array = strings.ToArray();
+			Assert.AreEqual(3, array.Length);
+			Assert.IsTrue(Enumerable.Range(0, 3).Select(i => string.Format("Hello Generic{0}", i)).SequenceEqual(array));
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfRequiresNothingViaDirectRegistration()
+		{
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""type"" : { ""name"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"", ""array"": true },
+			""value"" : 
+			{ 
+				""$array"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"",
+				""values"" : 
+				[ 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }, 
+					{ ""$construct"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing""  }
+				]
+			} 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			int instanceNumber = RequiresNothing.LastInstanceNumber;
+			RequiresNothing[] result = rezolver.Resolve<RequiresNothing[]>();
+			Assert.IsNotNull(result);
+			Assert.AreEqual(3, result.Length);
+			Assert.AreEqual(instanceNumber + 3, RequiresNothing.LastInstanceNumber);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfRequiresNothingUsingAutoViaDirectRegistration()
+		{
+			//demonstrates how you can use the $auto typename in a $construct call to inherit the 
+			///type name from the array's element type.
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""type"" : { ""name"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"", ""array"": true },
+			""value"" : 
+			{ 
+				""$array"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"",
+				""values"" : 
+				[ 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }
+				]
+			} 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			int instanceNumber = RequiresNothing.LastInstanceNumber;
+			RequiresNothing[] result = rezolver.Resolve<RequiresNothing[]>();
+			Assert.IsNotNull(result);
+			Assert.AreEqual(3, result.Length);
+			Assert.AreEqual(instanceNumber + 3, RequiresNothing.LastInstanceNumber);
+		}
+
+		[TestMethod]
+		public void ShouldRezolveArrayOfRequiresNothingUsingAuto2ViaDirectRegistration()
+		{
+			//demonstrates how you can use the $auto typename, first in the $array property to inherit
+			//the element type of an explicit array type specified as the type of a registration. 
+			//and then again in the $construct call to inherit the type name from the array's element type.
+
+			//note it's imperative that the type of the registration is explicitly marked as 'array = true',
+			//so do not use 'Type[]'
+			string json = @"{
+	""assemblies"":[ ""Rezolver.Tests"" ],	
+	""rezolve"" : [
+		{
+			""type"" : { ""name"" : ""Rezolver.Tests.ConfigurationTests.RequiresNothing"", ""array"": true },
+			""value"" : 
+			{ 
+				""$array"" : ""$auto"",
+				""values"" : 
+				[ 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }, 
+					{ ""$construct"" : ""$auto""  }
+				]
+			} 
+		}
+	]
+}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			int instanceNumber = RequiresNothing.LastInstanceNumber;
+			RequiresNothing[] result = rezolver.Resolve<RequiresNothing[]>();
+			Assert.IsNotNull(result);
+			Assert.AreEqual(3, result.Length);
+			Assert.AreEqual(instanceNumber + 3, RequiresNothing.LastInstanceNumber);
+		}
+
+		[TestMethod]
+		public void BindConstructorOfNetworkCredentials(){
+			string json = @"{
+			""rezolve"" : [ 
+			{
+				""System.Net.NetworkCredential"": {
+					""$construct"": ""$auto"",
+					""$args"": {
+						""$sig"": [ ""System.String"", ""System.String"" ],
+						""userName"": ""username"",
+						""password"": ""password""
+					}
+				}
+			}
+		 ]}";
+			var rezolver = ParseConfigurationAndBuild(json);
+			var result = rezolver.Resolve<System.Net.NetworkCredential>();
+			Assert.AreEqual("username", result.UserName);
+			Assert.AreEqual("password", result.Password);
 		}
 	}
 }

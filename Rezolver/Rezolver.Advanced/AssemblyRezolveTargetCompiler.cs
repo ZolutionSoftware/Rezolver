@@ -8,6 +8,13 @@ using System.Text;
 
 namespace Rezolver
 {
+	/// <summary>
+	/// Implementation of the <see cref="IRezolveTargetCompiler"/> which compiles dynamic code to an assembly (which can, potentially, be saved to disk).
+	/// 
+	/// Suitable for environments that support the full .Net profile.
+	/// 
+	/// Generally, the performance of a rezolver built using this compiler will be better than one that uses the <see cref="RezolveTargetDelegateCompiler"/>.
+	/// </summary>
 	public class AssemblyRezolveTargetCompiler : IRezolveTargetCompiler
 	{
 		private static int _assemblyCounter = 0;
@@ -33,11 +40,21 @@ namespace Rezolver
 			}
 		}
 
+		/// <summary>
+		/// Gets the assembly builder whose dynamic assembly is receiving the dynamically generated code.
+		/// </summary>
+		/// <value>The assembly builder.</value>
 		public AssemblyBuilder AssemblyBuilder
 		{
 			get { return _assemblyBuilder; }
 		}
 
+		/// <summary>
+		/// Shortcut method for creating an assembly builder that is suitable for use with an <see cref="AssemblyRezolveTargetCompiler"/>, but
+		/// with the supplied access settings (e.g. if you want to be able to save the assembly).
+		/// </summary>
+		/// <param name="assemblyBuilderAccess">The assembly builder access.</param>
+		/// <returns>An AssemblyBuilder instance that can be passed to the <see cref="AssemblyRezolveTargetCompiler"/> constructor.</returns>
 		public static AssemblyBuilder CreateAssemblyBuilder(
 			AssemblyBuilderAccess assemblyBuilderAccess = AssemblyBuilderAccess.RunAndCollect)
 		{
@@ -46,12 +63,20 @@ namespace Rezolver
 					++_assemblyCounter)), assemblyBuilderAccess);
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AssemblyRezolveTargetCompiler"/> class.
+		/// </summary>
 		public AssemblyRezolveTargetCompiler()
 			: this(CreateAssemblyBuilder())
 		{
 
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AssemblyRezolveTargetCompiler"/> class.
+		/// </summary>
+		/// <param name="assemblyBuilder">The assembly builder into which the dynamically generated code will be compiled.</param>
+		/// <exception cref="System.ArgumentNullException">assemblyBuilder is <c>null</c></exception>
 		public AssemblyRezolveTargetCompiler(AssemblyBuilder assemblyBuilder)
 		{
 			if (assemblyBuilder == null) throw new ArgumentNullException("assemblyBuilder");
@@ -67,6 +92,11 @@ namespace Rezolver
 			}
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AssemblyRezolveTargetCompiler"/> class.
+		/// </summary>
+		/// <param name="moduleBuilder">The module builder - if the assembly builder is already being used for something else 
+		/// and you want the dynamic code for the rezolver to be compiled into a specific module within that assembly.</param>
 		public AssemblyRezolveTargetCompiler(ModuleBuilder moduleBuilder)
 		{
 			_assemblyModuleName = moduleBuilder.Name;
@@ -74,6 +104,13 @@ namespace Rezolver
 			_moduleBuilder = moduleBuilder;
 		}
 
+		/// <summary>
+		/// Creates and builds a compiled target for the passed rezolve target which can then be used to
+		/// create/obtain the object(s) it produces.
+		/// </summary>
+		/// <param name="target">The target to be compiled.</param>
+		/// <param name="context">The current compilation context.</param>
+		/// <returns>A compiled target that produces the object represented by <paramref name="target" />.</returns>
 		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
 		{
 			var temp = string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter);

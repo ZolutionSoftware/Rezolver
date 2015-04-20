@@ -10,7 +10,7 @@ namespace Rezolver.Tests.ConfigurationTests
 	{
 		int InstanceNumber { get; }
 	}
-	public class RequiresNothing
+	public class RequiresNothing : IRequiresNothing
 	{
 		private static int _lastInstanceNumber = 0;
 

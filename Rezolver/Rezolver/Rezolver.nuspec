@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Rezolver</id>
-    <version>0.3.3</version>
+    <version>0.4.1.1</version>
     <title>Rezolver</title>
     <authors>Zolution Software Ltd</authors>
     <owners>LordZoltan</owners>
@@ -11,7 +11,7 @@
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>High performance portable IOC container for .Net</description>
-    <releaseNotes>Added IServiceProvider interface to IRezolver as it's a core interface supported on the same frameworks.  Also added some more extension methods to IRezolver.</releaseNotes>
+    <releaseNotes>Now supports configuration (see the Rezolver.Configuration* packages)</releaseNotes>
     <copyright>Copyright Zolution Software Ltd 2014</copyright>
     <tags>ioc di portable</tags>
   </metadata>
