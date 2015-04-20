@@ -282,7 +282,7 @@ namespace Rezolver
 			rezolver.MustNotBeNull("rezolver");
 			RezolverMustHaveBuilder(rezolver);
 
-			if (typeof(TObject).IsGenericTypeDefinition)
+			if (TypeHelpers.IsGenericTypeDefinition(typeof(TObject)))
 				rezolver.Builder.Register(GenericConstructorTarget.Auto<TObject>(propertyBindingBehaviour), path: path);
 			else
 				rezolver.Builder.Register(ConstructorTarget.Auto<TObject>(propertyBindingBehaviour), path: path);
@@ -305,7 +305,7 @@ namespace Rezolver
 			rezolver.MustNotBeNull("rezolver");
 			RezolverMustHaveBuilder(rezolver);
 
-			if (typeof(TObject).IsGenericTypeDefinition)
+			if (TypeHelpers.IsGenericTypeDefinition(typeof(TObject)))
 				rezolver.Builder.Register(GenericConstructorTarget.Auto<TObject>(propertyBindingBehaviour), type: typeof(TService), path: path);
 			else
 				rezolver.Builder.Register(ConstructorTarget.Auto<TObject>(propertyBindingBehaviour), type: typeof(TService), path: path);
@@ -317,7 +317,7 @@ namespace Rezolver
 			objectType.MustNotBeNull("objectType");
 			RezolverMustHaveBuilder(rezolver);
 
-			if (objectType.IsGenericTypeDefinition)
+			if (TypeHelpers.IsGenericTypeDefinition(objectType))
 				rezolver.Builder.Register(GenericConstructorTarget.Auto(objectType, propertyBindingBehaviour), path: path);
 			else
 				rezolver.Builder.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour), path: path);
@@ -340,7 +340,7 @@ namespace Rezolver
 			serviceType.MustNotBeNull("serviceType");
 			RezolverMustHaveBuilder(rezolver);
 
-			if (objectType.IsGenericTypeDefinition)
+			if (TypeHelpers.IsGenericTypeDefinition(objectType))
 				rezolver.Builder.Register(GenericConstructorTarget.Auto(objectType, propertyBindingBehaviour), type: serviceType, path: path);
 			else
 				rezolver.Builder.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour), type: serviceType, path: path);

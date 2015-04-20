@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Xml.Linq;
 
 namespace Rezolver.Tests
 {
@@ -11,7 +12,7 @@ namespace Rezolver.Tests
 			public ThrowsException()
 			{
 
-			}
+            }
 
 			public ThrowsException(Action a, string message = null)
 			{

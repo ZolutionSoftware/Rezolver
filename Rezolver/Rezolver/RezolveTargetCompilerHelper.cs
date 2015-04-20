@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 
 namespace Rezolver
@@ -19,7 +20,7 @@ namespace Rezolver
 			{
 				if (node.NodeType == ExpressionType.Convert &&
 					node.Type == node.Operand.Type ||
-					(!node.Operand.Type.IsValueType && node.Type.IsAssignableFrom(node.Operand.Type)))
+					(!TypeHelpers.IsValueType(node.Operand.Type) && node.Type.IsAssignableFrom(node.Operand.Type)))
 					return node.Operand;
 
 				return base.VisitUnary(node);

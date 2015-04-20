@@ -62,7 +62,6 @@ namespace Rezolver
 			public ConditionalRewritePart Mode;
 		}
 
-		bool _rewritten = false;
 		int _rewriteCount = 0;
 		private Expression _expression;
 		private IEnumerable<Expression> _candidateTests;
@@ -159,7 +158,6 @@ namespace Rezolver
 				var matching = currentRewrite.GroupInfo.Group.FirstOrDefault(e => object.ReferenceEquals(e.Expression, node));
 				if (matching != null)
 				{
-					_rewritten = true;
 					++_rewriteCount;
 					switch (currentRewrite.Mode)
 					{

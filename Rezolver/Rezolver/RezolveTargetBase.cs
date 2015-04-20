@@ -92,7 +92,7 @@ namespace Rezolver
 				var result = CreateExpressionBase(context);
 				Type convertType = context.TargetType ?? DeclaredType;
 
-				if (convertType == typeof(object) && result.Type.IsValueType
+				if (convertType == typeof(object) && TypeHelpers.IsValueType(result.Type)
 					|| !convertType.IsAssignableFrom(DeclaredType)
 					|| !convertType.IsAssignableFrom(result.Type))
 					return Expression.Convert(result, convertType);

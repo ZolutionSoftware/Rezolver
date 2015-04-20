@@ -1,0 +1,37 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<# 
+	XDocument doc = null;
+	using(var s = System.IO.File.OpenRead(this.Host.ResolvePath(@"Exceptions.resx")))
+	{
+		doc = XDocument.Load(s);
+	}
+#>
+
+namespace Rezolver.Resources
+{
+#if ASPNETCORE50
+	/// <summary>
+	/// Produced by a text template from the Resx file used by the original Rezolver library.
+	///	This is here to provide pseudo-resourced exception messages in english only, until
+	/// the localisation story is complete for vNext projects.
+	/// </summary>
+	internal static class Exceptions
+	{
+<# foreach(var data in doc.Root.Elements("data")) { #>
+		internal static string <#= (string)data.Attribute("name") #>
+		{
+			get { return @"<#= ((string)data.Element("value")).Replace("\"", "\"\"") #>"; }
+		}
+<# } #>
+	}
+#endif	
+}

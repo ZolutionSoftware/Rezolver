@@ -217,7 +217,7 @@ namespace Rezolver
 			}
 
 			var result = _targets.TryGetValue(type, out target);
-			if (!result && type.IsGenericType)
+			if (!result && TypeHelpers.IsGenericType(type))
 			{
 				//generate a generic type list for searching
 				foreach (var searchType in DeriveGenericTypeSearchList(type))
@@ -280,7 +280,7 @@ namespace Rezolver
 			//registrations from a rezolver builder is an operation that, so long as a caching
 			//resolver is used, shouldn't be repeated often.
 
-			if (!type.IsGenericType || type.IsGenericTypeDefinition)
+			if (!TypeHelpers.IsGenericType(type) || TypeHelpers.IsGenericTypeDefinition(type))
 			{
 				yield return type;
 				yield break;
@@ -288,7 +288,7 @@ namespace Rezolver
 
 			//for every generic type, there is a least two versions - the closed and the open
 			//when you consider, then, that a generic parameter might also be a generic
-			var typeParams = type.GetGenericArguments();
+			var typeParams = TypeHelpers.GetGenericArguments(type);
 			var typeParamSearchLists = typeParams.Select(t => DeriveGenericTypeSearchList(t).ToArray()).ToArray();
 			var genericType = type.GetGenericTypeDefinition();
 

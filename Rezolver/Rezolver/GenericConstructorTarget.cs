@@ -18,7 +18,7 @@ namespace Rezolver
 		/// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
 		public GenericConstructorTarget(Type genericType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
-			if (!genericType.IsGenericTypeDefinition)
+			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
 				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Partially open generics are not yet supported, and for fully closed generics, use ConstructorTarget");
 			_genericType = genericType;
 			_propertyBindingBehaviour = propertyBindingBehaviour;
@@ -30,22 +30,22 @@ namespace Rezolver
 				return true;
 
 			//scenario - requested type is a closed generic built from this target's open generic
-			if (!type.IsGenericType)
+			if (!TypeHelpers.IsGenericType(type))
 				return false;
 
 			var genericType = type.GetGenericTypeDefinition();
 			if (genericType == DeclaredType)
 				return true;
 
-			if (!genericType.IsInterface)
+			if (!TypeHelpers.IsInterface(genericType))
 			{
 				var bases = TypeHelpers.GetAllBases(DeclaredType);
-				var matchedBase = bases.FirstOrDefault(b => b.IsGenericType && b.GetGenericTypeDefinition() == genericType);
+				var matchedBase = bases.FirstOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == genericType);
 				if (matchedBase != null)
 					return true;
 			}
 			//TODO: tighten this up to handle the proposed partially open type
-			else if (DeclaredType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == genericType))
+			else if (TypeHelpers.GetInterfaces(DeclaredType).Any(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == genericType))
 				return true;
 
 			return false;
@@ -59,7 +59,7 @@ namespace Rezolver
 			var expectedType = context.TargetType;
 			if (expectedType == null)
 				throw new ArgumentException("GenericConstructorTarget requires a concrete to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", "context");
-			if (!expectedType.IsGenericType)
+			if (!TypeHelpers.IsGenericType(expectedType))
 				throw new ArgumentException("The compile context requested an instance of a non-generic type to be built.", "context");
 
 			var genericType = expectedType.GetGenericTypeDefinition();
@@ -69,11 +69,11 @@ namespace Rezolver
 			{
 				//will need, at some point to map the type arguments of this target to the type arguments supplied,
 				//but, for the moment, no.
-				finalTypeArguments = expectedType.GetGenericArguments();
+				finalTypeArguments = TypeHelpers.GetGenericArguments(expectedType);
 			}
 			else
 			{
-				if (expectedType.IsGenericType)
+				if (TypeHelpers.IsGenericType(expectedType))
 					finalTypeArguments = MapGenericParameters(expectedType, DeclaredType);
 
 				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
@@ -91,16 +91,15 @@ namespace Rezolver
 		private Type[] MapGenericParameters(Type requestedType, Type targetType)
 		{
 			var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
-			Type[] finalTypeArguments = targetType.GetGenericArguments();
+			Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(targetType);
 			//check whether it's a base or an interface
-			var mappedBase = requestedTypeGenericDefinition.IsInterface ?
-				targetType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-				: TypeHelpers.GetAllBases(targetType).SingleOrDefault(b => b.IsGenericType && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+			var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
+				TypeHelpers.GetInterfaces(targetType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
+				: TypeHelpers.GetAllBases(targetType).SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
 			if (mappedBase != null)
 			{
-				var baseTypeParams = mappedBase.GetGenericArguments();
-				var typeParamPositions = targetType
-					.GetGenericArguments()
+				var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);
+				var typeParamPositions = TypeHelpers.GetGenericArguments(targetType)
 					.Select(t =>
 					{
 						var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
@@ -122,14 +121,14 @@ namespace Rezolver
 						};
 					}).OrderBy(r => r.MappedTo != null ? r.MappedTo[0] : int.MinValue).ToArray();
 
-				var suppliedTypeArguments = requestedType.GetGenericArguments();
+				var suppliedTypeArguments = TypeHelpers.GetGenericArguments(requestedType);
 				Type suppliedArg = null;
 				foreach (var typeParam in typeParamPositions.Where(p => p.MappedTo != null))
 				{
 					suppliedArg = suppliedTypeArguments[typeParam.MappedTo[0]];
 					foreach (var index in typeParam.MappedTo.Skip(1))
 					{
-						suppliedArg = suppliedArg.GetGenericArguments()[index];
+						suppliedArg = TypeHelpers.GetGenericArguments(suppliedArg)[index];
 					}
 					finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
 				}
@@ -151,9 +150,9 @@ namespace Rezolver
 				return previousTypeParameterPositions.ToArray();
 			if (previousTypeParameterPositions == null)
 				previousTypeParameterPositions = new Stack<int>();
-			if (baseTypeParameter.IsGenericType)
+			if (TypeHelpers.IsGenericType(baseTypeParameter))
 			{
-				var args = baseTypeParameter.GetGenericArguments();
+				var args = TypeHelpers.GetGenericArguments(baseTypeParameter);
 				int[] result = null;
 				for (int f = 0; f < args.Length; f++)
 				{
@@ -177,7 +176,7 @@ namespace Rezolver
 		//you can't pass open generics as type parameters.  That dummy type 
 		public static GenericConstructorTarget Auto<TGeneric>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
-			if (!typeof(TGeneric).IsGenericTypeDefinition)
+			if (!TypeHelpers.IsGenericTypeDefinition(typeof(TGeneric)))
 				throw new InvalidOperationException("The passed type must be an open generic type");
 			return new GenericConstructorTarget(typeof(TGeneric), propertyBindingBehaviour);
 		}
@@ -185,7 +184,7 @@ namespace Rezolver
 		public static IRezolveTarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			//I might relax this constraint later - since we could implement partially open generics.
-			if (!type.IsGenericTypeDefinition)
+			if (!TypeHelpers.IsGenericTypeDefinition(type))
 				throw new ArgumentException("The passed type must be an open generic type");
 			return new GenericConstructorTarget(type);
 		}

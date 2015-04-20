@@ -10,11 +10,6 @@ namespace Rezolver.Configuration
 		private readonly Func<Type, object> _valueProvider;
 		private readonly Type _type;
 
-		public RezolveTargetMetadataType Type
-		{
-			get { return RezolveTargetMetadataType.Object; }
-		}
-
 		public ObjectTargetMetadata(object obj, Type type = null)
 			: base(RezolveTargetMetadataType.Object)
 		{

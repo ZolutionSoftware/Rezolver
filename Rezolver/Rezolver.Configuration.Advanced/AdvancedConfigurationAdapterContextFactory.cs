@@ -23,7 +23,7 @@ namespace Rezolver.Configuration
 	/// This class, on the other hand, is targeted at environments where these APIs are available, and should effectively remove
 	/// the need to add any references at all, meaning a configuration file can use shorter type names.
 	/// </remarks>
-	public class AdvancedConfigurationAdapterContextFactory : ConfigurationAdapterContextFactory
+	public partial class AdvancedConfigurationAdapterContextFactory : ConfigurationAdapterContextFactory
 	{
 #if DEBUG && TRACE
 		static void Log(string format, params object[] formatArgs)
@@ -40,7 +40,7 @@ namespace Rezolver.Configuration
 		/// Gets the one and only instance of the <see cref="AdvancedConfigurationAdapterContextFactory"/>.
 		/// </summary>
 		/// <value>The instance.</value>
-		public static IConfigurationAdapterContextFactory Instance { get { return _instance; } }
+		public static new IConfigurationAdapterContextFactory Instance { get { return _instance; } }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AdvancedConfigurationAdapterContextFactory"/> class.
