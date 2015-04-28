@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -50,6 +50,7 @@
     <Compile Include="DefaultPropertyBindingBehaviour.cs" />
     <Compile Include="GenericConstructorTarget.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ICloneable.cs" />
     <Compile Include="ICompiledRezolveTarget.cs" />
     <Compile Include="ChildRezolverBuilder.cs" />
     <Compile Include="ConstructorTarget.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="IChildRezolverBuilder.cs" />
     <Compile Include="INamedRezolverBuilder.cs" />
     <Compile Include="IRezolverBuilder.cs" />
+    <Compile Include="IRezolveTargetEntry.cs" />
     <Compile Include="LifetimeScopeRezolver.cs" />
     <Compile Include="ListTarget.cs" />
     <Compile Include="LoggingRezolver.cs" />

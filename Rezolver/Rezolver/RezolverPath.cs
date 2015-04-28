@@ -12,7 +12,7 @@ namespace Rezolver
 	/// 
 	/// Please note - this class is not thread-safe.
 	/// </summary>
-	public class RezolverPath
+	public sealed class RezolverPath : ICloneable
 	{
 		public const string DefaultPathSeparator = ".";
 		private static readonly Regex RxNoWhitespace = new Regex(@"\s");
@@ -104,6 +104,20 @@ namespace Rezolver
 			if (Next != null)
 				return string.Join(PathSeparator, Items.Skip(_currentItem + 1));
 			return "";
+		}
+
+		/// <summary>
+		/// creates a clone of this path, reset to the start.
+		/// </summary>
+		/// <returns></returns>
+		public RezolverPath Clone()
+		{
+			return new RezolverPath(this);
+		}
+
+		object ICloneable.Clone()
+		{
+			return Clone();
 		}
 	}
 }

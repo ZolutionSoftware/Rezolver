@@ -78,5 +78,10 @@ namespace Rezolver
 				toReturnVar
 			);
 		}
+
+		public override bool SupportsType(Type type)
+		{
+			return _innerTarget.SupportsType(type);
+		}
 	}
 }

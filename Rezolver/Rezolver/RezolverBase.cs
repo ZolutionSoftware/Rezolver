@@ -114,7 +114,10 @@ namespace Rezolver
 
 		object IServiceProvider.GetService(Type serviceType)
 		{
-			return this.Resolve(serviceType);
+			//IServiceProvider should return null if not found - so we use TryResolve.
+			object toReturn = null;
+			this.TryResolve(serviceType, out toReturn);
+			return toReturn;
 		}
 	}
 }

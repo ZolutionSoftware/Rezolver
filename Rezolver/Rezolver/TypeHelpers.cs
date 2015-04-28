@@ -115,6 +115,19 @@ namespace Rezolver
 			return true;
 		}
 
+		internal static bool IsEnumerableType(Type type, out Type elementType)
+		{
+			elementType = null;
+			if (!IsGenericType(type))
+				return false;
+			var genDef = type.GetGenericTypeDefinition();
+			if (genDef != typeof(IEnumerable<>))
+				return false;
+
+			elementType = type.GetGenericArguments()[0];
+			return true;
+		}
+
 		internal static IEnumerable<Type> GetAllBases(Type t)
 		{
 			t.MustNotBeNull("t");

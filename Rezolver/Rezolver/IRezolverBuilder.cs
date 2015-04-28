@@ -15,7 +15,7 @@ namespace Rezolver
 		/// under a particular name.
 		/// </summary>
 		/// <param name="target">Required.  The target to be registereed</param>
-		/// <param name="type">Optional.  The type thee target is to be registered against, if different
+		/// <param name="type">Optional.  The type the target is to be registered against, if different
 		/// from the declared type on the <paramref name="target"/></param>
 		/// <param name="path">Optional.  The path under which this target is to be registered.  One or more
 		/// new named rezolvers could be created to accommodate the registration.</param>
@@ -28,6 +28,7 @@ namespace Rezolver
 		/// <param name="commonServiceType"></param>
 		/// <param name="path"></param>
 		/// <param name="append"></param>
+		[Obsolete("Multiple registration is no implicit when calling Register multiple times with the same type")]
 		void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type commonServiceType = null, RezolverPath path = null, bool append=true);
 		/// <summary>
 		/// Searches for a target for a particular type and optionally

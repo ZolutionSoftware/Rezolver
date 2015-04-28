@@ -42,6 +42,11 @@ namespace Rezolver
 			return _createExpressionDelegate(context);
 		}
 
+		public override bool SupportsType(Type type)
+		{
+			return _innerTarget.SupportsType(type);
+		}
+
 		private Expression CreateExpressionFromInnerSingleton(CompileContext context)
 		{
 			return ((SingletonTarget) _innerTarget).CreateExpression(context);

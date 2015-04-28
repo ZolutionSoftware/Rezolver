@@ -8,6 +8,11 @@ namespace Rezolver
 	using System.Linq;
 	using System.Linq.Expressions;
 	using RegistrationEntry = KeyValuePair<RezolveContext, IRezolveTarget>;
+
+	/// <summary>
+	/// Stores the underlying registrations used by an <see cref="IRezolver"/> instance (assuming a conforming
+	/// implementation).
+	/// </summary>
 	public class RezolverBuilder : IRezolverBuilder
 	{
 		//TODO: extract an abstract base implementation of this class that does away with the dictionary, with extension points in place of those to allow for future expansion.
@@ -116,7 +121,7 @@ namespace Rezolver
 
 		public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
-			//TODO: Support name hierarchies by splitting the name by forward-slash and recursively creating a named-Builder tree.
+
 
 			if (path != null)
 			{
@@ -258,8 +263,8 @@ namespace Rezolver
 
 			if (!_namedBuilders.TryGetValue(path.Current, out namedBuilder))
 				return this as INamedRezolverBuilder; //if this is a named builder that we've descended to, then 
-																							//this is the best match.  A route RezolverBuilder (if using
-																							//the default types) will return null here.
+													  //this is the best match.  A route RezolverBuilder (if using
+													  //the default types) will return null here.
 
 			//then walk to the next part of the path and carry on
 			return path.Next != null ? namedBuilder.GetBestNamedBuilder(path) : namedBuilder;

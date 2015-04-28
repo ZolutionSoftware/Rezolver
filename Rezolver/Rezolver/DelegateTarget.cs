@@ -21,7 +21,7 @@ namespace Rezolver
 			_factory = factory;
 			if (declaredType != null)
 			{
-				if (!TypeHelpers.AreCompatible(typeof(T), declaredType))
+				if (!TypeHelpers.AreCompatible(typeof(T), declaredType) && !TypeHelpers.AreCompatible(declaredType, typeof(T)))
 					throw new ArgumentException(string.Format(Exceptions.DeclaredTypeIsNotCompatible_Format, declaredType, typeof(T)));
 			}
 			_declaredType = declaredType ?? typeof(T);
@@ -31,8 +31,11 @@ namespace Rezolver
 		{
 			//TODO: This doesn't forward the rezolve context, and it should, which would mean changing how
 			//this code is compiled.
-			Expression<Func<T>> e = () => _factory();
-			return e.Body;
+
+			//have to pull the _factory member local otherwise it's seen as a member access, which
+			//explodes in the full-blown Dynamic Assembly scenario, but it's private.
+			//var factoryLocal = _factory;
+			return Expression.Invoke(Expression.Constant(_factory));
 		}
 
 		public override Type DeclaredType
