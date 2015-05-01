@@ -139,7 +139,7 @@ namespace Rezolver.Tests
 			var rezolverMock = new Mock<IRezolver>();
 			var builderMock = new Mock<IRezolverBuilder>();
 			var compiler = new RezolveTargetDelegateCompiler();
-			builderMock.Setup(s => s.Fetch(typeof (int), null)).Returns(intTarget);
+			builderMock.Setup(s => s.Fetch(typeof (int), null)).Returns(CreateRezolverEntryForTarget(intTarget, typeof(int)));
 			rezolverMock.Setup(s => s.Builder).Returns(builderMock.Object);
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -154,7 +154,7 @@ namespace Rezolver.Tests
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var builderMock = new Mock<IRezolverBuilder>();
 			var rezolverMock = new Mock<IRezolver>();
-			builderMock.Setup(s => s.Fetch(typeof(int), null)).Returns(intTarget).Verifiable();
+			builderMock.Setup(s => s.Fetch(typeof(int), null)).Returns(CreateRezolverEntryForTarget(intTarget, typeof(int))).Verifiable();
 			rezolverMock.Setup(s => s.Builder).Returns(builderMock.Object);
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolverMock.Object);
 			Assert.AreEqual(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -173,8 +173,8 @@ namespace Rezolver.Tests
 			var builderMock = new Mock<IRezolverBuilder>();
 			var rezolverMock = new Mock<IRezolver>();
 
-			builderMock.Setup(s => s.Fetch(typeof (string), null)).Returns(stringTarget);
-			builderMock.Setup(s => s.Fetch(typeof(int), rezolveName)).Returns(intTarget);
+			builderMock.Setup(s => s.Fetch(typeof (string), null)).Returns(CreateRezolverEntryForTarget(stringTarget, typeof(string)));
+			builderMock.Setup(s => s.Fetch(typeof(int), rezolveName)).Returns(CreateRezolverEntryForTarget(intTarget, typeof(int)));
 			rezolverMock.Setup(s => s.Builder).Returns(builderMock.Object);
 			rezolverMock.Setup(s => s.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			//scopeMock.Setup(s => s.Resolve(typeof(string), null, null)).Returns(rezolveName).Verifiable();

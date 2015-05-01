@@ -47,6 +47,7 @@
     <Compile Include="ConditionalRewriter.cs" />
     <Compile Include="ConstructorWithPropertiesTarget.cs" />
     <Compile Include="DefaultPropertyBindingBehaviour.cs" />
+    <Compile Include="Extensions\System\Collections\Generic\ListExtensions.cs" />
     <Compile Include="GenericConstructorTarget.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICloneable.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="RezolveTargetCompilerHelper.cs" />
     <Compile Include="RezolveTargetDelegateCompiler.cs" />
     <Compile Include="RezolveTargetAdapter.cs" />
+    <Compile Include="RezolveTargetEntry.cs" />
     <Compile Include="RezolveTargetExpression.cs" />
     <Compile Include="ScopedSingletonTarget.cs" />
     <Compile Include="SingletonTarget.cs" />

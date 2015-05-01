@@ -168,4 +168,10 @@
   <data name="LambdaBodyNewExpressionIsWrongTypeFormat" xml:space="preserve">
     <value>The expression {0} does not represent calling a constructor of the type {1}</value>
   </data>
+  <data name="TargetReturnedNullExpressionFormat" xml:space="preserve">
+    <value>Target of type {0} returned a null expression for context {1} - implementation is invalid, targets must never return a null expression.</value>
+  </data>
+  <data name="RezolverTargetEntryHasBeenRealised" xml:space="preserve">
+    <value>No more targets can be added to this entry</value>
+  </data>
 </root>

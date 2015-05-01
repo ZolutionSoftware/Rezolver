@@ -169,6 +169,15 @@ namespace Rezolver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No more targets can be added to this entry.
+        /// </summary>
+        internal static string RezolverTargetEntryHasBeenRealised {
+            get {
+                return ResourceManager.GetString("RezolverTargetEntryHasBeenRealised", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A lifetime scope is required for a scoped singleton.
         /// </summary>
         internal static string ScopedSingletonRequiresAScope {
@@ -192,6 +201,15 @@ namespace Rezolver.Resources {
         internal static string TargetIsNullButTypeIsNotNullable_Format {
             get {
                 return ResourceManager.GetString("TargetIsNullButTypeIsNotNullable_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target of type {0} returned a null expression for context {1} - implementation is invalid, targets must never return a null expression..
+        /// </summary>
+        internal static string TargetReturnedNullExpressionFormat {
+            get {
+                return ResourceManager.GetString("TargetReturnedNullExpressionFormat", resourceCulture);
             }
         }
         

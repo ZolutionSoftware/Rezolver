@@ -12,7 +12,7 @@ namespace Rezolver.Tests
 			IRezolverBuilder builder = new RezolverBuilder();
 			builder.Register(target, path: "name");
 			var target2 = builder.Fetch(typeof (string), "name");
-			Assert.AreEqual(target, target2);
+			Assert.AreSame(target, target2.DefaultTarget);
 
 		}
 
@@ -27,8 +27,8 @@ namespace Rezolver.Tests
 			var target1B = builder.Fetch(typeof (string), name: "string1");
 			var target2B = builder.Fetch(typeof (string), name: "string2");
 
-			Assert.AreEqual(target1, target1B);
-			Assert.AreEqual(target2, target2B);
+			Assert.AreSame(target1, target1B.DefaultTarget);
+			Assert.AreSame(target2, target2B.DefaultTarget);
 			
 		}
 

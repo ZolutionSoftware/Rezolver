@@ -18,7 +18,7 @@ namespace Rezolver
 			get { return _parentBuilder; }
 		}
 
-		public override IRezolveTarget Fetch(Type type, string name)
+		public override IRezolveTargetEntry Fetch(Type type, string name)
 		{
 			var result = base.Fetch(type, name);
 			//ascend the tree of rezolver builders looking for a type matching.

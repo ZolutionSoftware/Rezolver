@@ -9,7 +9,7 @@ using Moq;
 
 namespace Rezolver.Tests
 {
-	public abstract partial class RezolveTargetCompilerTestsBase
+	public abstract partial class RezolveTargetCompilerTestsBase : TestsBase
 	{
 		private readonly Lazy<ObjectTarget> _stringObjectTarget = new Lazy<ObjectTarget>(() => StringForObjectTarget.AsObjectTarget());
 		private const string StringForObjectTarget = "hello";
@@ -92,7 +92,7 @@ namespace Rezolver.Tests
 		protected void AddTargetToMocks(Mocks mocks, Type forType, IRezolveTarget target)
 		{
 			forType = forType ?? typeof(int);
-			mocks.BuilderMock.Setup(r => r.Fetch(forType, null)).Returns(target);
+			mocks.BuilderMock.Setup(r => r.Fetch(forType, null)).Returns(CreateRezolverEntryForTarget(target, forType));
 		}
 
 		protected void AddIntTargetToMocks(Mocks mock, Type forType = null)

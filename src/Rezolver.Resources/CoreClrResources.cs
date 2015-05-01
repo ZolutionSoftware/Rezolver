@@ -78,6 +78,14 @@ namespace Rezolver.Resources
 		{
 			get { return @"The expression {0} does not represent calling a constructor of the type {1}"; }
 		}
+		internal static string TargetReturnedNullExpressionFormat
+		{
+			get { return @"Target of type {0} returned a null expression for context {1} - implementation is invalid, targets must never return a null expression."; }
+		}
+		internal static string RezolverTargetEntryHasBeenRealised
+		{
+			get { return @"No more targets can be added to this entry"; }
+		}
 	}
 //#endif	
 }

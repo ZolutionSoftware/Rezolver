@@ -441,7 +441,7 @@ namespace Rezolver
 		{
 			rezolver.MustNotBeNull("rezolver");
 			RezolverMustHaveBuilder(rezolver);
-			rezolver.Builder.RegisterMultiple(targets, commonServiceType, path, append);
+			rezolver.Builder.RegisterMultiple(targets, commonServiceType, path);
 		}
 
 		/// <summary>

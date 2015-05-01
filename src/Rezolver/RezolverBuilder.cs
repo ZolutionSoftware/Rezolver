@@ -18,7 +18,7 @@ namespace Rezolver
 		//TODO: extract an abstract base implementation of this class that does away with the dictionary, with extension points in place of those to allow for future expansion.
 		#region immediate type entries
 
-		private readonly Dictionary<Type, IRezolveTarget> _targets = new Dictionary<Type, IRezolveTarget>();
+		private readonly Dictionary<Type, IRezolveTargetEntry> _targets = new Dictionary<Type, IRezolveTargetEntry>();
 
 		#endregion
 
@@ -141,58 +141,24 @@ namespace Rezolver
 
 			if (target.SupportsType(type))
 			{
-				if (_targets.ContainsKey(type))
-					throw new ArgumentException(string.Format(Exceptions.TypeIsAlreadyRegistered, type), "type");
-				_targets[type] = target;
+				IRezolveTargetEntry entry = null;
+				if(_targets.TryGetValue(type, out entry))
+				{
+					entry.AddTarget(target);
+				}
+				else
+				{
+					entry = CreateEntry(type, target);
+					_targets[type] = entry;
+				}
 			}
 			else
 				throw new ArgumentException(string.Format(Exceptions.TargetDoesntSupportType_Format, type), "target");
 		}
 
-		public void RegisterMultiple(IEnumerable<IRezolveTarget> targets, Type commonServiceType = null, RezolverPath path = null, bool append = true)
+		protected virtual IRezolveTargetEntry CreateEntry(Type type, params IRezolveTarget[] targets)
 		{
-			targets.MustNotBeNull("targets");
-			var targetArray = targets.ToArray();
-			if (targets.Any(t => t == null))
-				throw new ArgumentException("All targets must be non-null", "targets");
-
-			if (path != null)
-			{
-				if (path.Next == null)
-					throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
-
-				//get the named Builder.  If it doesn't exist, create one.
-				var builder = GetNamedBuilder(path, true);
-				//note here we don't pass the name through.
-				//when we support named scopes, we would be lopping off the first item in a hierarchical name to allow for the recursion.
-				builder.RegisterMultiple(targets, commonServiceType);
-				return;
-			}
-
-			//for now I'm going to take the common type from the first target.
-			if (commonServiceType == null)
-			{
-				commonServiceType = targetArray[0].DeclaredType;
-			}
-
-			if (targetArray.All(t => t.SupportsType(commonServiceType)))
-			{
-				IRezolveTarget existing = null;
-				MultipleRezolveTarget multipleTarget = null;
-				Type targetType = MultipleRezolveTarget.MakeEnumerableType(commonServiceType);
-
-				if (_targets.TryGetValue(targetType, out existing))
-				{
-					multipleTarget = existing as MultipleRezolveTarget;
-					if (multipleTarget == null)
-						throw new ArgumentException(string.Format(Exceptions.TypeIsAlreadyRegistered, commonServiceType), "type");
-					multipleTarget.AddTargets(targets, !append);
-				}
-				else
-					_targets[targetType] = multipleTarget = new MultipleRezolveTarget(targets, commonServiceType);
-			}
-			else
-				throw new ArgumentException(string.Format(Exceptions.TargetDoesntSupportType_Format, commonServiceType), "target");
+			return new RezolveTargetEntry(type, targets);
 		}
 
 		/// <summary>
@@ -208,10 +174,10 @@ namespace Rezolver
 			return new NamedRezolverBuilder(this, name);
 		}
 
-		public virtual IRezolveTarget Fetch(Type type, string name)
+		public virtual IRezolveTargetEntry Fetch(Type type, string name)
 		{
 			type.MustNotBeNull("type");
-			IRezolveTarget target;
+			IRezolveTargetEntry entry;
 			if (name != null)
 			{
 				var namedBuilder = GetBestNamedBuilder(name);
@@ -221,17 +187,22 @@ namespace Rezolver
 				}
 			}
 
-			var result = _targets.TryGetValue(type, out target);
+			var result = _targets.TryGetValue(type, out entry);
 			if (!result && TypeHelpers.IsGenericType(type))
 			{
 				//generate a generic type list for searching
 				foreach (var searchType in DeriveGenericTypeSearchList(type))
 				{
-					if (_targets.TryGetValue(searchType, out target))
-						return target;
+					if (_targets.TryGetValue(searchType, out entry))
+						return entry;
 				}
+
+				//If we still don't find anything, then we see if the type is IEnumerable<T>.
+				//If it is, we look for the T (we recurse, though to keep the logic simple)
+				if (type.GetGenericTypeDefinition().Equals(typeof(IEnumerable<>)))
+					return Fetch(TypeHelpers.GetGenericArguments(type)[0], name);
 			}
-			return target;
+			return entry;
 		}
 
 		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)

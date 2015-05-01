@@ -109,6 +109,9 @@ namespace Rezolver
 				staticExpr = Expression.Call(thisRezolver, RezolverResolveMethod, newContextLocal);
 			}
 
+			if (staticExpr == null)
+				throw new InvalidOperationException(string.Format(Resources.Exceptions.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
+
 			if (staticExpr.Type != finalType)
 				staticExpr = Expression.Convert(staticExpr, finalType);
 			

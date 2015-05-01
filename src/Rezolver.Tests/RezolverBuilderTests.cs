@@ -20,7 +20,7 @@ namespace Rezolver.Tests
 			IRezolverBuilder r = new RezolverBuilder();
 			r.Register(t, type: typeof(object));
 			var t2 = r.Fetch(typeof(object));
-			Assert.AreSame(t, t2);
+			Assert.AreSame(t, t2.DefaultTarget);
 		}
 
 		[TestMethod]
@@ -47,7 +47,7 @@ namespace Rezolver.Tests
 			IRezolverBuilder rezolverBuilder = new RezolverBuilder();
 			rezolverBuilder.Register(t);
 			var t2 = rezolverBuilder.Fetch(typeof(string));
-			Assert.AreSame(t, t2);
+			Assert.AreSame(t, t2.DefaultTarget);
 		}
 
 		[TestMethod]
@@ -60,8 +60,8 @@ namespace Rezolver.Tests
 			IRezolveTarget target2 = new SimpleType().AsObjectTarget();
 			builder.Register(target1);
 			builder.Register(target2);
-			Assert.AreEqual(target1, builder.Fetch(typeof(string)));
-			Assert.AreEqual(target2, builder.Fetch(typeof (SimpleType)));
+			Assert.AreSame(target1, builder.Fetch(typeof(string)).DefaultTarget);
+			Assert.AreSame(target2, builder.Fetch(typeof (SimpleType)).DefaultTarget);
 		}
 
 		private interface IGenericTest<T>
@@ -100,9 +100,9 @@ namespace Rezolver.Tests
 			builder.Register(mockInstance);
 			///this should be trivial
 			var fetched = builder.Fetch(typeof(IGenericTest<>));
-			Assert.AreSame(mockInstance, fetched);
+			Assert.AreSame(mockInstance, fetched.DefaultTarget);
 			var fetchedClosed = builder.Fetch(typeof(IGenericTest<int>));
-			Assert.AreSame(mockInstance, fetchedClosed);
+			Assert.AreSame(mockInstance, fetchedClosed.DefaultTarget);
 		}
 
 		[TestMethod]
@@ -112,7 +112,7 @@ namespace Rezolver.Tests
 			var target = GenericConstructorTarget.Auto(typeof(GenericTest<>));
 			builder.Register(target, typeof(IGenericTest<>));
 			var fetched = builder.Fetch(typeof(IGenericTest<IGenericTest<int>>));
-			Assert.AreSame(target, fetched);
+			Assert.AreSame(target, fetched.DefaultTarget);
 		}
 
 		[TestMethod]
@@ -123,7 +123,7 @@ namespace Rezolver.Tests
 			var target = GenericConstructorTarget.Auto(typeof(GenericGenericTest<>));
 			builder.Register(target, typeof(IGenericTest<>));
 			var fetched = builder.Fetch(typeof(IGenericTest<IGenericTest<int>>));
-			Assert.AreSame(target, fetched);
+			Assert.AreSame(target, fetched.DefaultTarget);
 		}
 
 		[TestMethod]
@@ -134,7 +134,7 @@ namespace Rezolver.Tests
 			var target = GenericConstructorTarget.Auto(typeof(GenericGenericTest<>));
 			builder.Register(target, typeof(IGenericTest<>).MakeGenericType(typeof(IGenericTest<>)));
 			var fetched = builder.Fetch(typeof(IGenericTest<IGenericTest<int>>));
-			Assert.AreSame(target, fetched);
+			Assert.AreSame(target, fetched.DefaultTarget);
 		}
 
 		public interface IMultipleRegistration

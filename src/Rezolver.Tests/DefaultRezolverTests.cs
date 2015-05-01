@@ -6,13 +6,13 @@ using Moq;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class DefaultRezolverTests
+	public class DefaultRezolverTests : TestsBase
 	{
 		[TestMethod]
 		public void ShouldRezolveAnInt()
 		{
 			var builderMock = new Mock<IRezolverBuilder>();
-			builderMock.Setup(s => s.Fetch(typeof(int), null)).Returns(1.AsObjectTarget());
+			builderMock.Setup(s => s.Fetch(typeof(int), null)).Returns(CreateRezolverEntryForTarget(1.AsObjectTarget(), typeof(int)));
 
 			IRezolver rezolver = new DefaultRezolver(builderMock.Object, new RezolveTargetDelegateCompiler());
 			var result = rezolver.Resolve(typeof (int));
@@ -44,7 +44,7 @@ namespace Rezolver.Tests
 
 			//this is using constructorTarget with a prescribed new expression
 			var builder1Mock = new Mock<IRezolverBuilder>();
-			builder1Mock.Setup(s => s.Fetch(typeof(int), null)).Returns(new RezolvedTarget(typeof(int)));
+			builder1Mock.Setup(s => s.Fetch(typeof(int), null)).Returns(CreateRezolverEntryForTarget(new RezolvedTarget(typeof(int)), typeof(int)));
 
 			var rezolverMock = new Mock<IRezolver>();
 			rezolverMock.Setup(c => c.CanResolve(It.Is((RezolveContext r) => r.RequestedType == typeof(int)))).Returns(true);
@@ -61,14 +61,14 @@ namespace Rezolver.Tests
 
 			//this is using constructorTarget with a prescribed new expression
 			var builder1Mock = new Mock<IRezolverBuilder>();
-			builder1Mock.Setup(s => s.Fetch(typeof(TypeWithConstructorArg), null)).Returns(ConstructorTarget.Auto<TypeWithConstructorArg>());
+			builder1Mock.Setup(s => s.Fetch(typeof(TypeWithConstructorArg), null)).Returns(CreateRezolverEntryForTarget(ConstructorTarget.Auto<TypeWithConstructorArg>(), typeof(TypeWithConstructorArg)));
 
 			//the thing being that the underlying Builder does not know how too resolve an integer without
 			//being passed a dynamic container at call-time.
 			//this mocks a dynamically defined container that an application creates in response to transient information only
 			var builder2Mock = new Mock<IRezolverBuilder>();
 			int expected = -1;
-			builder2Mock.Setup(s => s.Fetch(typeof(int), null)).Returns(expected.AsObjectTarget());
+			builder2Mock.Setup(s => s.Fetch(typeof(int), null)).Returns(CreateRezolverEntryForTarget(expected.AsObjectTarget(), typeof(int)));
 			//this represents building an application's statically defined, or bootstrapped, IOC container
 			DefaultRezolver rezolver = new DefaultRezolver(builder1Mock.Object, new RezolveTargetDelegateCompiler());
 			CombinedRezolver dynamicRezolver = new CombinedRezolver(rezolver, builder2Mock.Object, rezolver.Compiler);

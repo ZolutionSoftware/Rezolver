@@ -7,7 +7,7 @@ using Moq;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class LifetimeRezolverScopeTests
+	public class LifetimeRezolverScopeTests : TestsBase
 	{
 		public interface ITestDisposable : IDisposable
 		{
@@ -75,7 +75,7 @@ namespace Rezolver.Tests
 			Mock<IRezolverBuilder> builderMock = new Mock<IRezolverBuilder>();
 
 			parentRezolverMock.Setup(c => c.CreateLifetimeScope()).Returns(() => new LifetimeScopeRezolver(parentRezolverMock.Object));
-			builderMock.Setup(c => c.Fetch(typeof(ITestDisposable), null)).Returns(new ExpressionTarget(e.Body));
+			builderMock.Setup(c => c.Fetch(typeof(ITestDisposable), null)).Returns(CreateRezolverEntryForTarget(new ExpressionTarget(e.Body), typeof(ITestDisposable)));
 			parentRezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(ITestDisposable)))).Returns(producer1.Next);
 			parentRezolverMock.Setup(c => c.Compiler).Returns(new RezolveTargetDelegateCompiler());
 			parentRezolverMock.Setup(c => c.Builder).Returns(builderMock.Object);
