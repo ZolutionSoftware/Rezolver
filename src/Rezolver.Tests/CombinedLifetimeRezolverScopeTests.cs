@@ -7,7 +7,7 @@ using Moq;
 namespace Rezolver.Tests
 {
 	[TestClass]
-	public class LifetimeRezolverScopeTests : TestsBase
+	public class CombinedLifetimeRezolverScopeTests : TestsBase
 	{
 		public interface ITestDisposable : IDisposable
 		{
@@ -74,7 +74,7 @@ namespace Rezolver.Tests
 			Expression<Func<DisposableType>> e = () => producer1.Next();
 			Mock<IRezolverBuilder> builderMock = new Mock<IRezolverBuilder>();
 
-			parentRezolverMock.Setup(c => c.CreateLifetimeScope()).Returns(() => new LifetimeScopeRezolver(parentRezolverMock.Object));
+			parentRezolverMock.Setup(c => c.CreateLifetimeScope()).Returns(() => new CombinedLifetimeScopeRezolver(parentRezolverMock.Object));
 			builderMock.Setup(c => c.Fetch(typeof(ITestDisposable), null)).Returns(CreateRezolverEntryForTarget(new ExpressionTarget(e.Body), typeof(ITestDisposable)));
 			parentRezolverMock.Setup(c => c.Resolve(It.Is((RezolveContext r) => r.RequestedType == typeof(ITestDisposable)))).Returns(producer1.Next);
 			parentRezolverMock.Setup(c => c.Compiler).Returns(new RezolveTargetDelegateCompiler());
@@ -88,7 +88,7 @@ namespace Rezolver.Tests
 			var rezolverMock = Mock.Of<IRezolver>();
 
 			ITestDisposable disposable = null;
-			using (var scope = new LifetimeScopeRezolver(rezolverMock))
+			using (var scope = new CombinedLifetimeScopeRezolver(rezolverMock))
 			{
 				scope.AddToScope(disposable = new DisposableType());
 			}
@@ -100,7 +100,7 @@ namespace Rezolver.Tests
 		{
 			var rezolverMock = Mock.Of<IRezolver>();
 			ITestDisposable disposable = null;
-			using(var scope = new LifetimeScopeRezolver(rezolverMock))
+			using(var scope = new CombinedLifetimeScopeRezolver(rezolverMock))
 			{
 				scope.AddToScope(disposable = new DisposableType(), new RezolveContext(rezolverMock, typeof(ITestDisposable)));
 			}
@@ -113,7 +113,7 @@ namespace Rezolver.Tests
 			var rezolverMock = Mock.Of<IRezolver>();
 			ITestDisposable disposable = null;
 			var context = new RezolveContext(rezolverMock, typeof(DisposableType));
-			using (var scope = new LifetimeScopeRezolver(rezolverMock))
+			using (var scope = new CombinedLifetimeScopeRezolver(rezolverMock))
 			{
 				scope.AddToScope(disposable = new DisposableType(), context);
 

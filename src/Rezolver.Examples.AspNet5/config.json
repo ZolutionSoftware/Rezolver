@@ -1,12 +1,10 @@
 {
-    "Data": {
-        "DefaultConnection": { 
-            "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-Rezolver.Examples.AspNet5-e2e35648-0852-4acf-9099-dc381a57f757;Trusted_Connection=True;MultipleActiveResultSets=true"
-        }
-    },
-    "EntityFramework": {
-        "ApplicationDbContext": {
-            "ConnectionString": "Data:DefaultConnection:ConnectionString"
-        }
+  "AppSettings": {
+    "SiteTitle": "Rezolver.Examples.AspNet5"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-Rezolver.Examples.AspNet5-eddc875c-a9ca-47eb-bc74-46e975c4c686;Trusted_Connection=True;MultipleActiveResultSets=true"
     }
+  }
 }

@@ -2,7 +2,7 @@
 
 namespace Rezolver.Resources
 {
-//#if ASPNETCORE50 || ASPNET50
+//#if DNXCORE50 || ASPNET50
 	/// <summary>
 	/// Produced by a text template from the Resx file used by the original Rezolver library.
 	///	This is here to provide pseudo-resourced exception messages in english only, until

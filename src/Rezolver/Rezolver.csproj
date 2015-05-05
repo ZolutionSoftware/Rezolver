@@ -47,7 +47,9 @@
     <Compile Include="ConditionalRewriter.cs" />
     <Compile Include="ConstructorWithPropertiesTarget.cs" />
     <Compile Include="DefaultPropertyBindingBehaviour.cs" />
-    <Compile Include="Extensions\System\Collections\Generic\ListExtensions.cs" />
+    <Compile Include="Extensions\System\Collections\Concurrent\ConcurrentBag`1cs.cs" />
+    <Compile Include="Extensions\System\Collections\Concurrent\ConcurrentDictionary`2.cs" />
+    <Compile Include="Extensions\System\Collections\Generic\ReadOnlyEnumerableExtensions.cs" />
     <Compile Include="GenericConstructorTarget.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICloneable.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="INamedRezolverBuilder.cs" />
     <Compile Include="IRezolverBuilder.cs" />
     <Compile Include="IRezolveTargetEntry.cs" />
-    <Compile Include="LifetimeScopeRezolver.cs" />
+    <Compile Include="CombinedLifetimeScopeRezolver.cs" />
     <Compile Include="ListTarget.cs" />
     <Compile Include="LoggingRezolver.cs" />
     <Compile Include="PropertyOrFieldBinding.cs" />

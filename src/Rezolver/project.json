@@ -1,63 +1,51 @@
 {
-	"description": "Rezolver for CoreCLR - supports vNext Core and Full frameworks, Net45 and Net46",
-	"version": "0.5.1-alpha",
-	"authors": [ "Andras Zoltan" ],
-	"dependencies": {
+    "description": "Rezolver for CoreCLR - supports vNext Core and Full frameworks, Net45 and Net46",
+    "version": "0.5.2-alpha",
+    "authors": [ "Andras Zoltan" ],
+    "dependencies": {
 
-	},
-	"code": [ "**/*.cs", "../Rezolver.Resources/CoreClrResources.cs" ],
+    },
+    "compile": [ "**/*.cs", "../Rezolver.Resources/CoreClrResources.cs" ],
 
-	"frameworks": {
-		"aspnet50": {
-			"frameworkAssemblies": {
-				"System": "4.0.0.0",
-				"System.Core": "4.0.0.0",
-				"System.Xml.Linq": "4.0.0.0",
-				"System.Xml": "4.0.0.0",
-				"System.Linq": "4.0.0.0"
-			}
-		},
-		"aspnetcore50": {
-			"dependencies": {
-				"System.ComponentModel": "4.0.0-beta-22605",
-				"System.Diagnostics.Debug": "4.0.10-beta-22605",
-				"System.Diagnostics.Tools": "4.0.0-beta-22605",
-				"System.Runtime": "4.0.20-beta-22605",
-				"System.Reflection": "4.0.10-beta-22605",
-				"System.Reflection.Extensions": "4.0.0-beta-22605",
-				"System.Reflection.Primitives": "4.0.0-beta-22605",
-				"System.Reflection.TypeExtensions": "4.0.0-beta-22605",
-				"System.Linq": "4.0.0-beta-22605",
-				"System.Linq.Expressions": "4.0.0-beta-22605",
-				"System.Collections": "4.0.10-beta-22605",
-				"System.Collections.Concurrent": "4.0.10-beta-22605",
-				"System.Resources.ResourceManager": "4.0.0-beta-22605",
-				"System.Text.RegularExpressions": "4.0.10-beta-22605"
-			}
-		},
-		"net45": {
-			"dependencies": {
-				//"Rezolver.Resources": { "type": "build", "version": "" }
-			},
-			"frameworkAssemblies": {
-				"System": "4.0.0.0",
-				"System.Core": "4.0.0.0",
-				"System.Xml.Linq": "4.0.0.0",
-				"System.Xml": "4.0.0.0",
-				"System.Linq": "4.0.0.0"
-			}
-		},
-		"net46": {
-			"dependencies": {
-				//"Rezolver.Resources": { "type": "build", "version": "" }
-			},
-			"frameworkAssemblies": {
-				"System": "4.0.0.0",
-				"System.Core": "4.0.0.0",
-				"System.Xml.Linq": "4.0.0.0",
-				"System.Xml": "4.0.0.0",
-				"System.Linq": "4.0.0.0"
-			}
-		}
-	}
+    "frameworks": {
+        "dnx451": {
+            "frameworkAssemblies": {
+                "System": "4.0.0.0",
+                "System.Core": "4.0.0.0",
+                "System.Xml.Linq": "4.0.0.0",
+                "System.Xml": "4.0.0.0",
+                "System.Linq": "4.0.0.0"
+            }
+        },
+        "dnxcore50": {
+            "dependencies": {
+                "System.ComponentModel": "4.0.0-beta-22816",
+                "System.Diagnostics.Debug": "4.0.10-beta-22816",
+                "System.Diagnostics.Tools": "4.0.0-beta-22816",
+                "System.Runtime": "4.0.20-beta-22816",
+                "System.Reflection": "4.0.10-beta-22816",
+                "System.Reflection.Extensions": "4.0.0-beta-22816",
+                "System.Reflection.Primitives": "4.0.0-beta-22816",
+                "System.Reflection.TypeExtensions": "4.0.0-beta-22816",
+                "System.Linq": "4.0.0-beta-22816",
+                "System.Linq.Expressions": "4.0.10-beta-22816",
+                "System.Collections": "4.0.10-beta-22816",
+                "System.Collections.Concurrent": "4.0.10-beta-22816",
+                "System.Resources.ResourceManager": "4.0.0-beta-22816",
+                "System.Text.RegularExpressions": "4.0.10-beta-22816"
+            }
+        },
+        "net45": {
+            "dependencies": {
+                //"Rezolver.Resources": { "type": "build", "version": "" }
+            },
+            "frameworkAssemblies": {
+                "System": "4.0.0.0",
+                "System.Core": "4.0.0.0",
+                "System.Xml.Linq": "4.0.0.0",
+                "System.Xml": "4.0.0.0",
+                "System.Linq": "4.0.0.0"
+            }
+        }
+    }
 }

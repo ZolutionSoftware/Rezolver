@@ -15,8 +15,10 @@ namespace Rezolver
 	/// tracks disposable objects.  To force a scope to track an instance, regardless of whether it's
 	/// dispoable or not, you can call <see cref="AddToScope"/>.
 	/// 
-	/// This is how the default ScopedSingletonTarget works - if an object isn't a disposable, it
-	/// is explicitly added to the scope passed to it at runtime.
+	/// This is how the default ScopedSingletonTarget works - if an object with this lifetime isn't a 
+    /// disposable, it is explicitly added to the scope passed to it at runtime, and then when an instance
+    /// is subsequently requested, the code compiled by the scoped singleton will search the current scope,
+    /// for an existing instance, before creating one.
 	/// </summary>
 	public interface ILifetimeScopeRezolver : IRezolver, IDisposable
 	{
@@ -41,7 +43,7 @@ namespace Rezolver
 		/// The method never returns null.
 		/// </summary>
 		/// <param name="context">Required - the context whose properties will be used to find matching
-		/// disposables.</param>
+		/// objects.</param>
 		/// <returns></returns>
 		IEnumerable<object> GetFromScope(RezolveContext context);		
 	}

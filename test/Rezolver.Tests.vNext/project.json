@@ -1,21 +1,22 @@
 {
     "version": "1.0.0-*",
     "dependencies": {
-		"Rezolver": "0.5.1-alpha",
-		"xunit": "2.1.0-beta1-*",
-        "xunit.runner.aspnet": "2.1.0-beta1-*"
+        "Rezolver": "0.5.2-alpha",
+        
+        "xunit":  "2.1.0-*",
+        "xunit.runner.dnx": "2.1.0-*"
     },
-	 "commands": {
-        "test": "xunit.runner.aspnet"
+    "commands": {
+        "test": "xunit.runner.dnx"
     },
     "frameworks": {
-        "aspnet50": {
+        "dnx451": {
             "dependencies": {
             }
         },
-        "aspnetcore50": {
+        "dnxcore50": {
             "dependencies": {
-                "System.Runtime": "4.0.20-beta-22523"
+                "System.Runtime": "4.0.20-beta-22816"
             }
         }
     }

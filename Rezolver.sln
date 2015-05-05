@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver", "src\Rezolver\Rezolver.csproj", "{53870BD3-88EA-404D-8AB2-9BCB7040F1F6}"
 EndProject
@@ -40,11 +40,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.Examples", "src\Re
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vNext", "vNext", "{1FC03E1D-1D42-462A-9113-76A0F69EE0DF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver", "src\Rezolver\Rezolver.kproj", "{07626F9C-06A6-498D-ADE1-BC24D2790B7C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver", "src\Rezolver\Rezolver.xproj", "{07626F9C-06A6-498D-ADE1-BC24D2790B7C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Examples.AspNet5", "src\Rezolver.Examples.AspNet5\Rezolver.Examples.AspNet5.kproj", "{AC7A3F4D-1600-4D0D-84A8-9666B357777B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.vNext", "test\Rezolver.Tests.vNext\Rezolver.Tests.vNext.xproj", "{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.vNext", "test\Rezolver.Tests.vNext\Rezolver.Tests.vNext.kproj", "{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Examples.AspNet5", "src\Rezolver.Examples.AspNet5\Rezolver.Examples.AspNet5.xproj", "{329D0891-A838-4C2C-8763-9349900CD58D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,14 +104,14 @@ Global
 		{07626F9C-06A6-498D-ADE1-BC24D2790B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07626F9C-06A6-498D-ADE1-BC24D2790B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07626F9C-06A6-498D-ADE1-BC24D2790B7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC7A3F4D-1600-4D0D-84A8-9666B357777B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC7A3F4D-1600-4D0D-84A8-9666B357777B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC7A3F4D-1600-4D0D-84A8-9666B357777B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC7A3F4D-1600-4D0D-84A8-9666B357777B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329D0891-A838-4C2C-8763-9349900CD58D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329D0891-A838-4C2C-8763-9349900CD58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329D0891-A838-4C2C-8763-9349900CD58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329D0891-A838-4C2C-8763-9349900CD58D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,7 +121,7 @@ Global
 		{AEE8E143-EBC6-4C77-B1FF-825315A74DC3} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
 		{C72C6B4A-C2D6-4810-BA43-2EB16C7E5D95} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
 		{07626F9C-06A6-498D-ADE1-BC24D2790B7C} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
-		{AC7A3F4D-1600-4D0D-84A8-9666B357777B} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
+		{329D0891-A838-4C2C-8763-9349900CD58D} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
 	EndGlobalSection
 EndGlobal

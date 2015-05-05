@@ -5,21 +5,21 @@ using System.Text;
 
 namespace System.Collections.Generic
 {
-	public static class ListExtensions
+	public static class ReadOnlyEnumerableExtensions
 	{
-#if PORTABLE
+//#if PORTABLE
 		private class ReadOnlyCollection<T> : IList<T>
 		{
-			private IList<T> _list;
-			public ReadOnlyCollection(IList<T> list)
+			private T[] _range;
+			public ReadOnlyCollection(IEnumerable<T> range)
 			{
-				_list = list;
+				_range = range.ToArray();
 			}
 			public T this[int index]
 			{
 				get
 				{
-					return _list[index];
+					return _range[index];
 				}
 
 				set
@@ -32,7 +32,7 @@ namespace System.Collections.Generic
 			{
 				get
 				{
-					return _list.Count;
+					return _range.Length;
 				}
 			}
 
@@ -56,22 +56,22 @@ namespace System.Collections.Generic
 
 			public bool Contains(T item)
 			{
-				return _list.Contains(item);
+				return _range.Contains(item);
 			}
 
 			public void CopyTo(T[] array, int arrayIndex)
 			{
-				_list.CopyTo(array, arrayIndex);
+				_range.CopyTo(array, arrayIndex);
 			}
 
 			public IEnumerator<T> GetEnumerator()
 			{
-				return _list.GetEnumerator();
+				return _range.Cast<T>().GetEnumerator();
 			}
 
 			public int IndexOf(T item)
 			{
-				return _list.IndexOf(item);
+                return Array.IndexOf(_range, item, 0, _range.Length);
 			}
 
 			public void Insert(int index, T item)
@@ -95,11 +95,11 @@ namespace System.Collections.Generic
 			}
 		}
 
-		public static IEnumerable<T> AsReadOnly<T>(this IList<T> list)
+		public static IList<T> AsReadOnly<T>(this IEnumerable<T> range)
 		{
-			list.MustNotBeNull(nameof(list));
-			return new ReadOnlyCollection<T>(list);
+			range.MustNotBeNull(nameof(range));
+			return new ReadOnlyCollection<T>(range);
 		}
-#endif
+//#endif
 	}
 }

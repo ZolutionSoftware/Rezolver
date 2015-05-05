@@ -6,7 +6,9 @@ using System.Text;
 namespace Rezolver
 {
 	/// <summary>
-	/// Combines a new rezolver with an existing one.
+	/// Combines a new rezolver with an existing one.  Note that any compiled targets produced by the
+    /// existing rezolver are retained, but can be overriden by any similar targets registered directly in 
+    /// this one - including those that are used by other compiled targets from the inner one.  
 	/// </summary>
 	public class CombinedRezolver : DefaultRezolver
 	{

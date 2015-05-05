@@ -7,11 +7,9 @@ namespace Rezolver
 {
 	public abstract class RezolverBase : IRezolver
 	{
-		private static readonly
-			Dictionary<Type, ICompiledRezolveTarget>
-			MissingTargets = new Dictionary<Type, ICompiledRezolveTarget>();
-		
-
+#error use concurrentdictionary for this.
+        private static readonly
+			Dictionary<Type, ICompiledRezolveTarget> MissingTargets = new Dictionary<Type, ICompiledRezolveTarget>();
 
 		protected static ICompiledRezolveTarget GetMissingTarget(Type target)
 		{
@@ -73,7 +71,7 @@ namespace Rezolver
 
 		public virtual ILifetimeScopeRezolver CreateLifetimeScope()
 		{
-			return new LifetimeScopeRezolver(this);
+			return new CombinedLifetimeScopeRezolver(this);
 		}
 
 		public ICompiledRezolveTarget FetchCompiled(RezolveContext context)

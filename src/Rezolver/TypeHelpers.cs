@@ -15,7 +15,7 @@ namespace Rezolver
 	{
 		internal static bool IsGenericType(Type type)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			return type.GetTypeInfo().IsGenericType;
 #else
 			return type.IsGenericType;
@@ -24,7 +24,7 @@ namespace Rezolver
 
 		internal static bool IsGenericTypeDefinition(Type type)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			return type.GetTypeInfo().IsGenericTypeDefinition;
 #else
 			return type.IsGenericTypeDefinition;
@@ -33,7 +33,7 @@ namespace Rezolver
 
 		internal static bool IsValueType(Type type)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			return type.GetTypeInfo().IsValueType;
 #else
 			return type.IsValueType;
@@ -42,7 +42,7 @@ namespace Rezolver
 
 		internal static Type BaseType(Type type)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			return type.GetTypeInfo().BaseType;
 #else
 			return type.BaseType;
@@ -71,7 +71,7 @@ namespace Rezolver
 
 		internal static bool IsInterface(Type type)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			return type.GetTypeInfo().IsInterface;
 #else
 			return type.IsInterface;
@@ -80,7 +80,7 @@ namespace Rezolver
 
 		internal static IEnumerable<Type> GetInterfaces(Type type)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			return type.GetTypeInfo().ImplementedInterfaces;
 #else
 			return type.GetInterfaces();
@@ -89,7 +89,7 @@ namespace Rezolver
 
 		internal static Type[] GetGenericArguments(Type type)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			return type.GetTypeInfo().GenericTypeArguments;
 #else
 			return type.GetGenericArguments();
