@@ -15,9 +15,106 @@ namespace Rezolver
 	/// 
 	/// Generally, the performance of a rezolver built using this compiler will be better than one that uses the <see cref="RezolveTargetDelegateCompiler"/>.
 	/// </summary>
-	public class AssemblyRezolveTargetCompiler : IRezolveTargetCompiler
+	public class AssemblyRezolveTargetCompiler : RezolveTargetCompilerBase
 	{
-		private static int _assemblyCounter = 0;
+
+        private class ConstantRewriter : ExpressionVisitor
+        {
+            public class ConstantFieldMapping
+            {
+                public FieldInfo Field;
+                public ConstantExpression Original;
+            }
+
+            public class ConstantExpressionToReplace : Expression
+            {
+                public ConstantFieldMapping Mapping { get; private set; }
+
+                public ConstantExpressionToReplace(ConstantFieldMapping mapping)
+                {
+                    Mapping = mapping;
+                }
+
+                public override ExpressionType NodeType
+                {
+                    get { return ExpressionType.Extension; }
+                }
+
+                public override Type Type
+                {
+                    get { return Mapping.Original.Type; }
+                }
+            }
+
+            private static int _helperTypeCounter = 0;
+            private readonly List<ConstantFieldMapping> _mappings = new List<ConstantFieldMapping>();
+            private readonly Expression _e;
+            private int _constantCounter = 0;
+            private readonly Lazy<TypeBuilder> _helperTypeBuilder;
+            private readonly Lazy<Type> _helperType;
+
+            public Type HelperType
+            {
+                get { return _mappings.Count > 0 ? _helperType.Value : null; }
+            }
+
+            public IEnumerable<ConstantFieldMapping> Mappings { get { return _mappings; } }
+
+            public ConstantRewriter(ModuleBuilder parentModuleBuilder, Expression e)
+            {
+                _e = e;
+                _helperTypeBuilder = new Lazy<TypeBuilder>(() => parentModuleBuilder.DefineType(string.Format("ConstantHelper{0}", ++_helperTypeCounter)));
+                _helperType = new Lazy<Type>(() => _helperTypeBuilder.Value.CreateType());
+            }
+
+            public Expression LiftConstants()
+            {
+                //rewrite the expression twice if constants are to be lifted
+                var expr = Visit(_e);
+                if (_mappings.Count != 0)
+                    return Visit(expr);
+                return _e;
+            }
+
+            protected override Expression VisitConstant(ConstantExpression node)
+            {
+                ConstantFieldMapping mapping = _mappings.FirstOrDefault(cfm => object.ReferenceEquals(cfm.Original, node) || (object.ReferenceEquals(cfm.Original.Value, node.Value) && cfm.Original.Type == node.Type));
+
+                if (mapping == null)
+                {
+                    //var helperBuilder = _constantProviderTypeBuilder.Value;
+                    //create a field on the type with the same type as the constant, with a dynamic name
+                    var field = _helperTypeBuilder.Value.DefineField(string.Format("_c{0}", ++_constantCounter), node.Type, FieldAttributes.Public | FieldAttributes.Static);
+                    mapping = new ConstantFieldMapping() { Field = field, Original = node };
+                    _mappings.Add(mapping);
+                }
+                return new ConstantExpressionToReplace(mapping);
+            }
+
+            protected override Expression VisitExtension(Expression node)
+            {
+                var replacementExpr = node as ConstantExpressionToReplace;
+
+                if (replacementExpr != null)
+                {
+                    var helperType = HelperType;
+                    if (helperType != null)
+                    {
+                        //fetch the actual field from the compiled type
+                        var compiledField = helperType.GetField(replacementExpr.Mapping.Field.Name);
+                        //write that back to the mapping
+                        replacementExpr.Mapping.Field = compiledField;
+                        //copy the value from the constant to the static field
+                        compiledField.SetValue(null, replacementExpr.Mapping.Original.Value);
+                        //return an expression representing reading that field.
+                        return Expression.Field(null, compiledField);
+                    }
+                }
+                return base.VisitExtension(node);
+            }
+        }
+
+        private static int _assemblyCounter = 0;
 
 		private int _targetCounter = 0;
 		private readonly AssemblyBuilder _assemblyBuilder;
@@ -111,7 +208,7 @@ namespace Rezolver
 		/// <param name="target">The target to be compiled.</param>
 		/// <param name="context">The current compilation context.</param>
 		/// <returns>A compiled target that produces the object represented by <paramref name="target" />.</returns>
-		public ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
+		public override ICompiledRezolveTarget CompileTarget(IRezolveTarget target, CompileContext context)
 		{
 			var temp = string.Format("Target_{0}_{1}", target.DeclaredType.Name, ++_targetCounter);
 			var typeBuilder = _moduleBuilder.DefineType(temp);
@@ -131,181 +228,35 @@ namespace Rezolver
 			return new StaticInvoker(type.GetMethod("GetObjectStatic", BindingFlags.NonPublic | BindingFlags.Static));
 		}
 
-		internal void CompileTargetToMethod(IRezolveTarget target, CompileContext context, MethodBuilder methodBuilder)
-		{
-			var toBuild = target.CreateExpression(context);
+        protected override Expression GetLambdaBody(IRezolveTarget target, CompileContext context)
+        {
+            var toReturn = base.GetLambdaBody(target, context);
+            //now we have to rewrite the expression to life all constants out and feed them in from an additional
+            //parameter that we also dynamically compile.
+            var rewriter = new ConstantRewriter(_moduleBuilder, toReturn);
+            return rewriter.LiftConstants();
+        }
 
-			//if we have shared conditionals, then we want to try and reorder them as the intention
-			//of the use of shared expressions is to consolidate them into one.  We do this on the boolean
-			//expressions that might be used as tests for conditionals
-			var sharedConditionalTests = context.SharedExpressions.Where(e => e.Type == typeof(Boolean)).ToArray();
-			if (sharedConditionalTests.Length != 0)
-				toBuild = new ConditionalRewriter(toBuild, sharedConditionalTests).Rewrite();
+        protected override ICompiledRezolveTarget CompileTargetBase(IRezolveTarget target, Expression toCompile, CompileContext context)
+        {
+            throw new NotImplementedException("This method should never be called - compilation via this class should be conducted through the overriden version of CompileTarget");
+        }
 
-			//now we have to rewrite the expression to life all constants out and feed them in from an additional
-			//parameter that we also dynamically compile.
-			var rewriter = new ConstantRewriter(_moduleBuilder, toBuild);
-			toBuild = rewriter.LiftConstants();
+        internal void CompileTargetToMethod(IRezolveTarget target, CompileContext context, MethodBuilder methodBuilder)
+        {
+            Expression.Lambda(GetLambdaBody(target, context), context.RezolveContextParameter).CompileToMethod(methodBuilder);
+        }
 
-			toBuild = toBuild.Optimise();
+        private MethodBuilder CreateStatic_GetObjectStaticMethod(IRezolveTarget target, CompileContext context, TypeBuilder typeBuilder)
+        {
+            //targetType = context.TargetType ?? target.DeclaredType;
+            if (context.TargetType == null)
+                context = new CompileContext(context, target.DeclaredType, true);
+            MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectStatic",
+                MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, context.TargetType, new Type[0]);
 
-			//shared locals are local variables generated by targets that would normally be duplicated
-			//if multiple targets of the same type are used in one compiled target.  By sharing them,
-			//they reduce the size of the stack required for any generated code, but in turn 
-			//the compiler is required to lift them out and add them to an all-encompassing BlockExpression
-			//surrounding all the code - otherwise they won't be in scope.
-			var sharedLocals = context.SharedExpressions.OfType<ParameterExpression>().ToArray();
-			if (sharedLocals.Length != 0)
-				toBuild = Expression.Block(toBuild.Type, sharedLocals, toBuild);
-
-			Expression.Lambda(toBuild, context.RezolveContextParameter).CompileToMethod(methodBuilder);
-		}
-
-		private class ConstantRewriter : ExpressionVisitor
-		{
-			public class ConstantFieldMapping
-			{
-				public FieldInfo Field;
-				public ConstantExpression Original;
-			}
-
-			public class ConstantExpressionToReplace : Expression
-			{
-				public ConstantFieldMapping Mapping { get; private set; }
-
-				public ConstantExpressionToReplace(ConstantFieldMapping mapping)
-				{
-					Mapping = mapping;
-				}
-
-				public override ExpressionType NodeType
-				{
-					get { return ExpressionType.Extension; }
-				}
-
-				public override Type Type
-				{
-					get { return Mapping.Original.Type; }
-				}
-			}
-
-			private static int _helperTypeCounter = 0;
-			private readonly List<ConstantFieldMapping> _mappings = new List<ConstantFieldMapping>();
-			private readonly Expression _e;
-			private int _constantCounter = 0;
-			private readonly Lazy<TypeBuilder> _helperTypeBuilder;
-			private readonly Lazy<Type> _helperType;
-
-			public Type HelperType
-			{
-				get { return _mappings.Count > 0 ? _helperType.Value : null; }
-			}
-
-			public IEnumerable<ConstantFieldMapping> Mappings { get { return _mappings; } }
-
-			public ConstantRewriter(ModuleBuilder parentModuleBuilder, Expression e)
-			{
-				_e = e;
-				_helperTypeBuilder = new Lazy<TypeBuilder>(() => parentModuleBuilder.DefineType(string.Format("ConstantHelper{0}", ++_helperTypeCounter)));
-				_helperType = new Lazy<Type>(() => _helperTypeBuilder.Value.CreateType());
-			}
-
-			public Expression LiftConstants()
-			{
-				//rewrite the expression twice if constants are to be lifted
-				var expr = Visit(_e);
-				if (_mappings.Count != 0)
-					return Visit(expr);
-				return _e;
-			}
-
-			protected override Expression VisitConstant(ConstantExpression node)
-			{
-				ConstantFieldMapping mapping = _mappings.FirstOrDefault(cfm => object.ReferenceEquals(cfm.Original, node) || (object.ReferenceEquals(cfm.Original.Value, node.Value) && cfm.Original.Type == node.Type));
-
-				if (mapping == null)
-				{
-					//var helperBuilder = _constantProviderTypeBuilder.Value;
-					//create a field on the type with the same type as the constant, with a dynamic name
-					var field = _helperTypeBuilder.Value.DefineField(string.Format("_c{0}", ++_constantCounter), node.Type, FieldAttributes.Public | FieldAttributes.Static);
-					mapping = new ConstantFieldMapping() { Field = field, Original = node };
-					_mappings.Add(mapping);
-				}
-				return new ConstantExpressionToReplace(mapping);
-			}
-
-			protected override Expression VisitExtension(Expression node)
-			{
-				var replacementExpr = node as ConstantExpressionToReplace;
-
-				if (replacementExpr != null)
-				{
-					var helperType = HelperType;
-					if (helperType != null)
-					{
-						//fetch the actual field from the compiled type
-						var compiledField = helperType.GetField(replacementExpr.Mapping.Field.Name);
-						//write that back to the mapping
-						replacementExpr.Mapping.Field = compiledField;
-						//copy the value from the constant to the static field
-						compiledField.SetValue(null, replacementExpr.Mapping.Original.Value);
-						//return an expression representing reading that field.
-						return Expression.Field(null, compiledField);
-					}
-				}
-				return base.VisitExtension(node);
-			}
-		}
-
-		
-
-		private MethodBuilder CreateInstance_GetObjectDynamicMethod(TypeBuilder typeBuilder, MethodBuilder staticGetObjectDynamicMethod, string methodName)
-		{
-			MethodBuilder methodBuilder = typeBuilder.DefineMethod(methodName,
-				MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, CallingConventions.HasThis,
-				typeof(object),
-				new[] { typeof(IRezolver) });
-
-			var ilgen = methodBuilder.GetILGenerator();
-			ilgen.Emit(OpCodes.Ldarg_1);
-			ilgen.EmitCall(OpCodes.Call, staticGetObjectDynamicMethod, new Type[0]);
-
-			if (staticGetObjectDynamicMethod.ReturnType.IsValueType)
-				ilgen.Emit(OpCodes.Box);
-
-			ilgen.Emit(OpCodes.Ret);
-			return methodBuilder;
-		}
-
-		private static MethodBuilder CreateInstance_GetObjectMethod(TypeBuilder typeBuilder,
-			MethodBuilder staticGetObjectStaticMethod, string methodName)
-		{
-			MethodBuilder methodBuilder = typeBuilder.DefineMethod(methodName,
-				MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, CallingConventions.HasThis,
-				typeof(object),
-				new[] { typeof(RezolveContext) });
-
-			var ilgen = methodBuilder.GetILGenerator();
-			ilgen.Emit(OpCodes.Ldarg_1);
-			ilgen.EmitCall(OpCodes.Call, staticGetObjectStaticMethod, new Type[0]);
-			if (staticGetObjectStaticMethod.ReturnType.IsValueType)
-				ilgen.Emit(OpCodes.Box, staticGetObjectStaticMethod.ReturnType);
-			//else
-			//	ilgen.Emit(OpCodes.Castclass, typeof (object));
-			ilgen.Emit(OpCodes.Ret);
-			return methodBuilder;
-		}
-
-		private MethodBuilder CreateStatic_GetObjectStaticMethod(IRezolveTarget target, CompileContext context, TypeBuilder typeBuilder)
-		{
-			//targetType = context.TargetType ?? target.DeclaredType;
-			if (context.TargetType == null)
-				context = new CompileContext(context, target.DeclaredType);
-			MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectStatic",
-				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, context.TargetType, new Type[0]);
-
-			CompileTargetToMethod(target, context, toReturn);
-			return toReturn;
-		}
-	}
+            CompileTargetToMethod(target, context, toReturn);
+            return toReturn;
+        }
+    }
 }

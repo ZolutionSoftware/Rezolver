@@ -1,14 +1,26 @@
-using System;
-using System.Linq;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading;
-using System.Collections.Concurrent;
+using System.Linq;
+using System.Text;
 
 namespace Rezolver
 {
-    //TODO: reimplement this as a combined rezolver - there's no need to override caching rezolver any more.
-    public class CombinedLifetimeScopeRezolver : CombinedRezolver, ILifetimeScopeRezolver
+    /// <summary>
+    /// Extends the DefaultRezolver to implement lifetime scoping.
+    /// 
+    /// If you want your root rezolver to act as a lifetime scope, then you should use this
+    /// class instead of using <see cref="DefaultRezolver"/>
+    /// </summary>
+    /// <remarks>The implementation of this class is very similar to the <see cref="CombinedLifetimeScopeRezolver"/>,
+    /// The main difference being that that class can accept additional registrations independent of those
+    /// in the rezolver that it's created from, whereas with this class, it *is* the rezolver.
+    /// 
+    /// This type is therefore suited only for standalone Rezolvers for which you want lifetime scoping
+    /// and disposable handling; whereas the <see cref="CombinedLifetimeScopeRezolver"/> is primarily
+    /// suited for use as a child lifetime scope for another rezolver.</remarks>
+    public class DefaultLifetimeScopeRezolver : DefaultRezolver, ILifetimeScopeRezolver
     {
         private ConcurrentBag<ILifetimeScopeRezolver> _children;
         private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;
@@ -17,49 +29,25 @@ namespace Rezolver
         {
             get
             {
-                return _parentScope;
+                return null;
             }
         }
 
         private bool _disposed;
-        private readonly ILifetimeScopeRezolver _parentScope;
-        public CombinedLifetimeScopeRezolver(IRezolver inner, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null)
-            : base(inner, builder, compiler)
+        public DefaultLifetimeScopeRezolver(IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null, bool registerToBuilder = true)
+            : base(builder, compiler, registerToBuilder)
         {
             _children = new ConcurrentBag<ILifetimeScopeRezolver>();
             _objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
             _disposed = false;
         }
-
-        public CombinedLifetimeScopeRezolver(ILifetimeScopeRezolver parentScope, IRezolver rezolver = null)
-            : this(rezolver ?? (IRezolver)parentScope)
-        {
-            _parentScope = parentScope;
-        }
-
-        //public override object Resolve(RezolveContext context)
-        //{
-        //    var result = base.Resolve(context);
-        //    //if the object is destined for this scope, then track it.
-        //    if (result is IDisposable && object.ReferenceEquals(this, context.Scope))
-        //        TrackObject(result, context);
-        //    return result;
-        //}
-
-        //public override bool TryResolve(RezolveContext context, out object result)
-        //{
-        //    var success = base.TryResolve(context, out result);
-        //    if (success && result is IDisposable && object.ReferenceEquals(this, context.Scope))
-        //        TrackObject(result, context);
-        //    return success;
-        //}
-
+        
         private void TrackObject(object obj, RezolveContext context)
         {
             if (obj == null)
                 return;
             ConcurrentBag<object> instances = _objects.GetOrAdd(
-                new RezolveContext(null, context.RequestedType, context.Name), 
+                new RezolveContext(null, context.RequestedType, context.Name),
                 c => new ConcurrentBag<object>());
 
             //bit slow this, but hopefully there won't be loads of them...
@@ -96,7 +84,7 @@ namespace Rezolver
             if (disposing)
             {
                 ILifetimeScopeRezolver child = null;
-                while(_children.TryTake(out child))
+                while (_children.TryTake(out child))
                 {
                     child.Dispose();
                 }
@@ -105,7 +93,7 @@ namespace Rezolver
                 IDisposable disposableObj = null;
                 foreach (var kvp in _objects)
                 {
-                    while(kvp.Value.TryTake(out obj))
+                    while (kvp.Value.TryTake(out obj))
                     {
                         disposableObj = obj as IDisposable;
                         if (disposableObj != null)
@@ -136,6 +124,4 @@ namespace Rezolver
                 return Enumerable.Empty<object>();
         }
     }
-
-
 }

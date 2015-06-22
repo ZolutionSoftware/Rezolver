@@ -104,6 +104,7 @@
     <Compile Include="MultipleRegistrationTests.cs" />
     <Compile Include="NamedRezolveTests.cs" />
     <Compile Include="ListTargetTests.cs" />
+    <Compile Include="ScopeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Advanced\Rezolver.Advanced.csproj">

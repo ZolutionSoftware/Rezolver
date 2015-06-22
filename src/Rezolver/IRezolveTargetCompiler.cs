@@ -5,7 +5,8 @@ using System.Linq.Expressions;
 namespace Rezolver
 {
 	/// <summary>
-	/// Interface for an object that produces <see cref="ICompiledRezolveTarget"/> instances from <see cref="IRezolveTarget"/> instances.
+	/// Interface for an object that produces <see cref="ICompiledRezolveTarget"/> instances from <see cref="IRezolveTarget"/> instances,
+    /// and that can build Lambda expressions for the same targets
 	/// </summary>
 	public interface IRezolveTargetCompiler
 	{

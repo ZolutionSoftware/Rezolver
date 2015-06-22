@@ -154,9 +154,27 @@ namespace Rezolver
 			}
 		}
 
+        private readonly bool _suppressScopeTracking;
 
+        /// <summary>
+        /// If true, then any target that is compiling within this scope should not generate any runtime code to fetch the
+        /// object from, or track the object in, the current scope.
+        /// </summary>
+        /// <remarks>This is currently used, for example, by wrapper targets that generate their own
+        /// scope tracking code (specifically, the <see cref="SingletonTarget"/> and <see cref="ScopedSingletonTarget"/>.
+        /// 
+        /// It's therefore very important that any custom <see cref="IRezolveTarget"/> implementations honour this flag in their
+        /// implementation of <see cref="IRezolveTarget.CreateExpression(CompileContext)"/>.  The <see cref="RezolveTargetBase"/>
+        /// class does honour this flag.</remarks>
+        public bool SuppressScopeTracking
+        {
+            get
+            {
+                return _suppressScopeTracking;
+            }
+        }
 
-		private CompileContext(CompileContext parentContext, bool inheritSharedExpressions)
+		private CompileContext(CompileContext parentContext, bool inheritSharedExpressions, bool suppressScopeTracking)
 		{
 			parentContext.MustNotBeNull("parentContext");
 
@@ -165,6 +183,7 @@ namespace Rezolver
 			_rezolver = parentContext._rezolver;
 			_dependencyBuilder = parentContext._dependencyBuilder;
 			_sharedExpressions = inheritSharedExpressions ? parentContext._sharedExpressions : new Dictionary<SharedExpressionKey, Expression>();
+            _suppressScopeTracking = suppressScopeTracking;
 		}
 
 		/// <summary>
@@ -172,7 +191,7 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="rezolver">Required. Will be set into the <see cref="Rezolver"/> property.</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType"/> property.</param>
-		/// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/>
+		/// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/></param>
 		/// <param name="compilingTargets">Optional.  Allows you to seed the stack of compiling targets from creation.</param>
 		/// <param name="dependencyBuilder">Optional.  If the search for an object's dependency targets should be routed to a 
 		/// different builder than the one which built the <see cref="Rezolver"/> then pass it here.  Typically this is done
@@ -203,8 +222,8 @@ namespace Rezolver
 		/// <param name="inheritSharedExpressions">If true, then the <see cref="SharedExpressions"/> for this context will be shared
 		/// from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
 		/// false, however if you are chaining multiple targets' expressions together you will need to pass true.</param>
-		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false)
-			: this(parentContext, inheritSharedExpressions)
+		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false, bool suppressScopeTrackingExpressions = false)
+			: this(parentContext, inheritSharedExpressions, suppressScopeTrackingExpressions)
 		{
 			_targetType = targetType;
 		}

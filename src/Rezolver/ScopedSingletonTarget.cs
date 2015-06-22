@@ -14,6 +14,9 @@ namespace Rezolver
 	/// each of which you wish to have separate single instances of a given object (such as a database connection),
 	/// then the ScopeSingletonTarget is for you.
 	/// </summary>
+    /// <remarks>Any codde produced by this target, or a class inheriting from this
+    /// target, is expected to operate on the current scope directly, rather than relying on it
+    /// to track objects for it.</remarks>
 	public class ScopedSingletonTarget : RezolveTargetBase
 	{
 		private MethodInfo _scopeGetSingle
@@ -55,12 +58,10 @@ namespace Rezolver
 			//used to search the scope and its parent scopes for an instance of an object that satisfies the rezolve context.
 			var convertFromScope = Expression.Convert(localVar, actualType);
 
-			var staticExpr = _innerTarget.CreateExpression(context);
+            var staticExpr = _innerTarget.CreateExpression(new CompileContext(context, context.TargetType, inheritSharedExpressions: true, suppressScopeTrackingExpressions: true));
 			if(staticExpr.Type != actualType)
 				staticExpr = Expression.Convert(staticExpr, actualType);
-
-			//now we're ready
-			//possible bug?  Using Coalesce, but what if
+            
 			return Expression.Block(actualType,
  				new[] { localVar, toReturnVar },
 				Expression.IfThen(isScopeNull, throwArgException),
@@ -79,7 +80,14 @@ namespace Rezolver
 			);
 		}
 
-		public override bool SupportsType(Type type)
+        protected override Expression CreateScopeTrackingExpression(CompileContext context, Expression expression)
+        {
+            //overrides this to prevent the base scope tracking expression being generated - it's not needed because
+            //the code produced by this target does itss own scope tracking.
+            return expression;
+        }
+
+        public override bool SupportsType(Type type)
 		{
 			return _innerTarget.SupportsType(type);
 		}

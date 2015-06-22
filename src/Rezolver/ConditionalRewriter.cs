@@ -152,7 +152,7 @@ namespace Rezolver
 				}
 				return base.VisitConditional(node);
 			}
-			else if (_currentStage == RewriteStages.RewritingConditionals)
+			else if (_currentStage == RewriteStages.RewritingConditionals && _currentlyRewriting.Count != 0)
 			{
 				var currentRewrite = _currentlyRewriting.Peek();
 				var matching = currentRewrite.GroupInfo.Group.FirstOrDefault(e => object.ReferenceEquals(e.Expression, node));

@@ -57,8 +57,13 @@ namespace Rezolver
 		{
 			get { return _resolveType; }
 		}
-
-		protected override Expression CreateExpressionBase(CompileContext context)
+        protected override Expression CreateScopeTrackingExpression(CompileContext context, Expression expression)
+        {
+            // makes no sense to force the result of this target to be tracked in a scope, since
+            //it's a call to a rezolver anyway.
+            return expression;
+        }
+        protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			//we get the expression for the name that is to be rezolved.  That could be null.  If not, 
 			//then we have that to bake in the generated code.

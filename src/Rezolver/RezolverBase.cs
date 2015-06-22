@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,18 +8,14 @@ namespace Rezolver
 {
 	public abstract class RezolverBase : IRezolver
 	{
-#error use concurrentdictionary for this.
         private static readonly
-			Dictionary<Type, ICompiledRezolveTarget> MissingTargets = new Dictionary<Type, ICompiledRezolveTarget>();
+			ConcurrentDictionary<Type, Lazy<ICompiledRezolveTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledRezolveTarget>>();
 
 		protected static ICompiledRezolveTarget GetMissingTarget(Type target)
 		{
 			ICompiledRezolveTarget result = null;
 
-			if (MissingTargets.TryGetValue(target, out result))
-				return result;
-
-			return MissingTargets[target] = new MissingCompiledTarget(target);
+            return MissingTargets.GetOrAdd(target, t => new Lazy<ICompiledRezolveTarget>(() => new MissingCompiledTarget(t))).Value;
 		}
 
 		protected static bool IsMissingTarget(ICompiledRezolveTarget target)

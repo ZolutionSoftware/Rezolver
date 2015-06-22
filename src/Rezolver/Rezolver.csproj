@@ -33,7 +33,7 @@
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
@@ -41,9 +41,11 @@
     <DocumentationFile>bin\Release\Rezolver.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BlockExpressionLocalsRewriter.cs" />
     <Compile Include="CachingRezolver.cs" />
     <Compile Include="CombinedRezolver.cs" />
     <Compile Include="CompileContext.cs" />
+    <Compile Include="CompiledRezolveTargetBase.cs" />
     <Compile Include="ConditionalRewriter.cs" />
     <Compile Include="ConstructorWithPropertiesTarget.cs" />
     <Compile Include="DefaultPropertyBindingBehaviour.cs" />
@@ -73,8 +75,10 @@
     <Compile Include="IRezolverBuilder.cs" />
     <Compile Include="IRezolveTargetEntry.cs" />
     <Compile Include="CombinedLifetimeScopeRezolver.cs" />
+    <Compile Include="DefaultLifetimeScopeRezolver.cs" />
     <Compile Include="ListTarget.cs" />
     <Compile Include="LoggingRezolver.cs" />
+    <Compile Include="NewExpressionToMemberInitRewriter.cs" />
     <Compile Include="PropertyOrFieldBinding.cs" />
     <Compile Include="RezolveContext.cs" />
     <Compile Include="RezolveContextExpressionHelper.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="ParameterBinding.cs" />
     <Compile Include="RezolverPath.cs" />
     <Compile Include="RezolveTargetCompiler.cs" />
+    <Compile Include="RezolveTargetCompilerBase.cs" />
     <Compile Include="RezolveTargetCompilerHelper.cs" />
     <Compile Include="RezolveTargetDelegateCompiler.cs" />
     <Compile Include="RezolveTargetAdapter.cs" />

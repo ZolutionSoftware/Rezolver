@@ -38,13 +38,13 @@ namespace Rezolver
 			else
 			{
 				var nestedExpression = _nestedTarget.CreateExpression(new CompileContext(context, _nestedTarget.DeclaredType, true));
-				var newExpression = nestedExpression as NewExpression;
-
-				if (newExpression == null)
-					throw new InvalidOperationException(string.Format("Nested ConstructorTarget must create a NewExpression to be used with this type, but created an instance of {0}", nestedExpression.GetType()));
-
-				return Expression.MemberInit((NewExpression)newExpression,
-					_propertyBindings.Select(b => b.CreateMemberBinding(new CompileContext(context, b.MemberType, true))));
+                //have to locate the NewExpression constructed by the inner target and then rewrite it as
+                //a MemberInitExpression with the given property bindings.  Note - if the expression created
+                //by the ConstructorTarget is surrounded with any non-standard funny stuff - i.e. anything that
+                //could require a NewExpression, then this code won't work.  Points to the possibility that we
+                //might need some additional funkiness to allow code such as this to do its thing.
+                return new NewExpressionMemberInitRewriter(null,
+                    _propertyBindings.Select(b => b.CreateMemberBinding(new CompileContext(context, b.MemberType, true)))).Visit(nestedExpression);
 			}
 		}
 
