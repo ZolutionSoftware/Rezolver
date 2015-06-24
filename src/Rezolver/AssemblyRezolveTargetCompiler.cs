@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Rezolver
 {
-#if !DNXCORE50
+#if !DOTNET
 	/// <summary>
 	/// Implementation of the <see cref="IRezolveTargetCompiler"/> which compiles dynamic code to an assembly (which can, potentially, be saved to disk).
 	/// 

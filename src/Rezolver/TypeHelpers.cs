@@ -15,8 +15,8 @@ namespace Rezolver
 	{
 		internal static bool IsGenericType(Type type)
 		{
-#if DNXCORE50
-			return type.GetTypeInfo().IsGenericType;
+#if DOTNET
+            return type.GetTypeInfo().IsGenericType;
 #else
 			return type.IsGenericType;
 #endif
@@ -24,8 +24,8 @@ namespace Rezolver
 
 		internal static bool IsGenericTypeDefinition(Type type)
 		{
-#if DNXCORE50
-			return type.GetTypeInfo().IsGenericTypeDefinition;
+#if DOTNET
+            return type.GetTypeInfo().IsGenericTypeDefinition;
 #else
 			return type.IsGenericTypeDefinition;
 #endif
@@ -33,8 +33,8 @@ namespace Rezolver
 
 		internal static bool IsValueType(Type type)
 		{
-#if DNXCORE50
-			return type.GetTypeInfo().IsValueType;
+#if DOTNET
+            return type.GetTypeInfo().IsValueType;
 #else
 			return type.IsValueType;
 #endif
@@ -42,8 +42,8 @@ namespace Rezolver
 
 		internal static Type BaseType(Type type)
 		{
-#if DNXCORE50
-			return type.GetTypeInfo().BaseType;
+#if DOTNET
+            return type.GetTypeInfo().BaseType;
 #else
 			return type.BaseType;
 #endif
@@ -71,8 +71,8 @@ namespace Rezolver
 
 		internal static bool IsInterface(Type type)
 		{
-#if DNXCORE50
-			return type.GetTypeInfo().IsInterface;
+#if DOTNET
+            return type.GetTypeInfo().IsInterface;
 #else
 			return type.IsInterface;
 #endif
@@ -80,8 +80,8 @@ namespace Rezolver
 
 		internal static IEnumerable<Type> GetInterfaces(Type type)
 		{
-#if DNXCORE50
-			return type.GetTypeInfo().ImplementedInterfaces;
+#if DOTNET
+            return type.GetTypeInfo().ImplementedInterfaces;
 #else
 			return type.GetInterfaces();
 #endif
@@ -89,8 +89,8 @@ namespace Rezolver
 
 		internal static Type[] GetGenericArguments(Type type)
 		{
-#if DNXCORE50
-			return type.GetTypeInfo().GenericTypeArguments;
+#if DOTNET
+            return type.GetTypeInfo().GenericTypeArguments;
 #else
 			return type.GetGenericArguments();
 #endif

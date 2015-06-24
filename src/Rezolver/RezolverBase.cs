@@ -13,8 +13,6 @@ namespace Rezolver
 
 		protected static ICompiledRezolveTarget GetMissingTarget(Type target)
 		{
-			ICompiledRezolveTarget result = null;
-
             return MissingTargets.GetOrAdd(target, t => new Lazy<ICompiledRezolveTarget>(() => new MissingCompiledTarget(t))).Value;
 		}
 

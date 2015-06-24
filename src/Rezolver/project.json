@@ -1,13 +1,23 @@
 {
     "description": "Rezolver for CoreCLR - supports vNext Core and Full frameworks, Net45 and Net46",
-    "version": "0.5.2-alpha-5",
+    "version": "0.5.2-alpha-7",
+    "tags": [ "ioc", "di", "portable", "rezolver" ],
     "authors": [ "Andras Zoltan" ],
     "dependencies": {
 
     },
     "compile": [ "**/*.cs", "../Rezolver.Resources/CoreClrResources.cs" ],
-    
+
     "frameworks": {
+        "net45": {
+            "frameworkAssemblies": {
+                "System": "4.0.0.0",
+                "System.Core": "4.0.0.0",
+                "System.Xml.Linq": "4.0.0.0",
+                "System.Xml": "4.0.0.0",
+                "System.Linq": "4.0.0.0"
+            }
+        },
         "dnx451": {
             "frameworkAssemblies": {
                 "System": "4.0.0.0",
@@ -17,7 +27,7 @@
                 "System.Linq": "4.0.0.0"
             }
         },
-        "dnxcore50": {
+        "dotnet": {
             "dependencies": {
                 "System.ComponentModel": "4.0.0-beta-22816",
                 "System.Diagnostics.Debug": "4.0.10-beta-22816",
@@ -32,19 +42,8 @@
                 "System.Collections": "4.0.10-beta-22816",
                 "System.Collections.Concurrent": "4.0.10-beta-22816",
                 "System.Resources.ResourceManager": "4.0.0-beta-22816",
-                "System.Text.RegularExpressions": "4.0.10-beta-22816"
-            }
-        },
-        "net45": {
-            "dependencies": {
-                //"Rezolver.Resources": { "type": "build", "version": "" }
-            },
-            "frameworkAssemblies": {
-                "System": "4.0.0.0",
-                "System.Core": "4.0.0.0",
-                "System.Xml.Linq": "4.0.0.0",
-                "System.Xml": "4.0.0.0",
-                "System.Linq": "4.0.0.0"
+                "System.Text.RegularExpressions": "4.0.10-beta-22816",
+                "System.Threading": "4.0.10-beta-22816"
             }
         }
     }

@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		src\.editorConfig = src\.editorConfig
 		.gitignore = .gitignore
 		src\DesignNotes.md = src\DesignNotes.md
+		global.json = global.json
 		src\packageall.bat = src\packageall.bat
 		README.md = README.md
 	EndProjectSection
@@ -45,6 +46,8 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.vNext", "test\Rezolver.Tests.vNext\Rezolver.Tests.vNext.xproj", "{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Examples.AspNet5", "src\Rezolver.Examples.AspNet5\Rezolver.Examples.AspNet5.xproj", "{329D0891-A838-4C2C-8763-9349900CD58D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Framework.DependencyInjection.Rezolver", "src\Microsoft.Framework.DependencyInjection.Rezolver\Microsoft.Framework.DependencyInjection.Rezolver.xproj", "{726DC4D6-9064-45B4-9EFD-A18AA779AC34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +115,10 @@ Global
 		{329D0891-A838-4C2C-8763-9349900CD58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{329D0891-A838-4C2C-8763-9349900CD58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{329D0891-A838-4C2C-8763-9349900CD58D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,5 +130,6 @@ Global
 		{07626F9C-06A6-498D-ADE1-BC24D2790B7C} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
 		{329D0891-A838-4C2C-8763-9349900CD58D} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
+		{726DC4D6-9064-45B4-9EFD-A18AA779AC34} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
 	EndGlobalSection
 EndGlobal
