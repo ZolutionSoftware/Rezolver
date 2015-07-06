@@ -99,7 +99,6 @@
     <Compile Include="RezolveTargetDelegateCompilerTests.cs" />
     <Compile Include="AssemblyRezolveTargetCompilerTests.cs" />
     <Compile Include="CombinedLifetimeRezolverScopeTests.cs" />
-    <Compile Include="ScopedSingletonTargetTests.cs" />
     <Compile Include="ConditionalRewriterTest.cs" />
     <Compile Include="MultipleRegistrationTests.cs" />
     <Compile Include="NamedRezolveTests.cs" />

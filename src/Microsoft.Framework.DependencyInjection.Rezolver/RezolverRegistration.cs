@@ -114,7 +114,7 @@ namespace Microsoft.Framework.DependencyInjection.Rezolver
                         target = new SingletonTarget(target);
                         break;
                     case ServiceLifetime.Scoped:
-                        target = new ScopedSingletonTarget(target);
+                        target = new ScopedTarget(target);
                         break;
                 }
             }

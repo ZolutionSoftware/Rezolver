@@ -89,7 +89,7 @@ namespace Rezolver.Configuration.Json
 			//if (!jObject.HasValues)
 			//	throw new JsonConfigurationException("An empty object is not allowed here", jObject);
 
-			JObject tempChildObject = jObject["$scopedSingleton"] as JObject;
+			JObject tempChildObject = jObject["$scoped"] as JObject;
 
 			//by default, singletons are baked using '{ singleton : { target } }'
 			//so we look for a property called either, and then use its actual value (which MUST be an object)

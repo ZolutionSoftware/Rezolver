@@ -161,7 +161,7 @@ namespace Rezolver
         /// object from, or track the object in, the current scope.
         /// </summary>
         /// <remarks>This is currently used, for example, by wrapper targets that generate their own
-        /// scope tracking code (specifically, the <see cref="SingletonTarget"/> and <see cref="ScopedSingletonTarget"/>.
+        /// scope tracking code (specifically, the <see cref="SingletonTarget"/> and <see cref="ScopedTarget"/>.
         /// 
         /// It's therefore very important that any custom <see cref="IRezolveTarget"/> implementations honour this flag in their
         /// implementation of <see cref="IRezolveTarget.CreateExpression(CompileContext)"/>.  The <see cref="RezolveTargetBase"/>

@@ -18,7 +18,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget t = new ObjectTarget(null);
 			IRezolverBuilder r = new RezolverBuilder();
-			r.Register(t, type: typeof(object));
+			r.Register(t, serviceType: typeof(object));
 			var t2 = r.Fetch(typeof(object));
 			Assert.AreSame(t, t2.DefaultTarget);
 		}
@@ -29,7 +29,7 @@ namespace Rezolver.Tests
 		{
 			IRezolveTarget t = new ObjectTarget("hello world");
 			IRezolverBuilder r = new RezolverBuilder();
-			r.Register(t, type: typeof(int));
+			r.Register(t, serviceType: typeof(int));
 		}
 
 		[TestMethod]

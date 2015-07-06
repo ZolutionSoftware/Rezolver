@@ -52,7 +52,6 @@ namespace Rezolver
 
         private static readonly MethodInfo ICompiledRezolveTarget_GetObject = MethodCallExtractor.ExtractCalledMethod((ICompiledRezolveTarget t) => t.GetObject(null));
         private static readonly ConstructorInfo LazyObject_Ctor = MethodCallExtractor.ExtractConstructorCall(() => new Lazy<object>(() => (object)null));
-        private static readonly MethodInfo Scope_GetScopeRootMethod = MethodCallExtractor.ExtractCalledMethod(() => ILifetimeScopeRezolverExtensions.GetScopeRoot(null));
 
 		private IRezolveTarget _innerTarget;
         //might seem silly - but we need a stateless locking mechanism over the lazy to ensure we only ever create one.
@@ -88,7 +87,7 @@ namespace Rezolver
 
         protected override Expression CreateScopeSelectionExpression(CompileContext context, Expression expression)
         {
-            return Expression.Call(Scope_GetScopeRootMethod, context.ContextScopePropertyExpression);
+            return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
         }
         
         protected override Expression CreateExpressionBase(CompileContext context)
@@ -157,4 +156,21 @@ namespace Rezolver
 			get { return _innerTarget.DeclaredType; }
 		}
 	}
+
+    /// <summary>
+    /// Extension method(s) to convert targets into singleton targets.
+    /// </summary>
+    public static class IRezolveTargetSingletonExtensions
+    {
+        /// <summary>
+        /// Constructs a <see cref="SingletonTarget"/> that wraps the target on which the method is invoked.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static SingletonTarget Singleton(this IRezolveTarget target)
+        {
+            target.MustNotBeNull(nameof(target));
+            return new SingletonTarget(target);
+        }
+    }
 }

@@ -13,12 +13,22 @@ namespace Rezolver
 	/// </summary>
 	public static class ExpressionHelper
 	{
-		/// <summary>
-		/// This parameter expression is to be used by all targets and rezolvers in this library by default to perform late binding 
-		/// to a rezolver provided at run time when a caller is trying to resolve something through code built from
-		/// a target.
-		/// </summary>
-		public static readonly ParameterExpression DynamicRezolverParam = Expression.Parameter(typeof (IRezolver), "dynamicRezolver");
+        /// <summary>
+        /// A MethodInfo object representing the <see cref="LifetimeScopeRezolverExtensions.GetScopeRoot(ILifetimeScopeRezolver)"/> method - to aid in code generation
+        /// where the target scope for tracking an object is the root scope, not the current scope.
+        /// </summary>
+        public static readonly MethodInfo Scope_GetScopeRootMethod = MethodCallExtractor.ExtractCalledMethod(() => LifetimeScopeRezolverExtensions.GetScopeRoot(null));
+
+        /// <summary>
+        /// A MethodInfo object representing the generic definition <see cref="LifetimeScopeRezolverExtensions.GetOrAdd{T}(ILifetimeScopeRezolver, RezolveContext, Func{RezolveContext, T}, bool, bool)"/>
+        /// </summary>
+        public static readonly MethodInfo Scope_GetOrAddGenericMethod = MethodCallExtractor.ExtractCalledMethod(() => LifetimeScopeRezolverExtensions.GetOrAdd<object>(null, null, null, false)).GetGenericMethodDefinition();
+        /// <summary>
+        /// This parameter expression is to be used by all targets and rezolvers in this library by default to perform late binding 
+        /// to a rezolver provided at run time when a caller is trying to resolve something through code built from
+        /// a target.
+        /// </summary>
+        public static readonly ParameterExpression DynamicRezolverParam = Expression.Parameter(typeof (IRezolver), "dynamicRezolver");
 		public static readonly ParameterExpression RezolverNameParameter = Expression.Parameter(typeof(string), "name");
 
 		public static readonly ParameterExpression RezolveContextParameter = Expression.Parameter(typeof(RezolveContext), "context");
@@ -93,6 +103,26 @@ namespace Rezolver
         internal static Expression<Func<RezolveContext, object>> GetResolveLambdaForExpression(Expression toCompile, CompileContext context)
         {
             return Expression.Lambda<Func<RezolveContext, object>>(toCompile, context.RezolveContextParameter);
+        }
+
+        /// <summary>
+        /// Returns an expression that represents a call to the <see cref="Scope_GetScopeRootMethod"/> extension method on the scope of the 
+        /// RezolveContext passed to a compiled object target.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static Expression Make_Scope_GetScopeRootCallExpression(CompileContext context)
+        {
+            return Expression.Call(Scope_GetScopeRootMethod, context.ContextScopePropertyExpression);
+        }
+
+        public static Expression Make_Scope_GetOrAddCallExpression(CompileContext context, Type objectType, LambdaExpression factoryExpression, Expression iDisposableOnly = null)
+        {
+            return Expression.Call(Scope_GetOrAddGenericMethod.MakeGenericMethod(objectType),
+                context.ContextScopePropertyExpression,
+                context.RezolveContextParameter,
+                factoryExpression,
+                iDisposableOnly ?? Expression.Constant(true));
         }
     }
 }

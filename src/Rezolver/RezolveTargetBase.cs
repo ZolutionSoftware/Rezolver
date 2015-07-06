@@ -46,7 +46,7 @@ namespace Rezolver
         /// </summary>
         private static readonly MethodInfo ILifetimeScopeRezolver_AddObject = MethodCallExtractor.ExtractCalledMethod((ILifetimeScopeRezolver s) => s.AddToScope(null, null));
         private static readonly MethodInfo ILifetimeScopeRezolver_TrackIfScopedAndDisposableAndReturnGeneric =
-            MethodCallExtractor.ExtractCalledMethod(() => ILifetimeScopeRezolverExtensions.TrackIfScopedAndDisposableAndReturn<object>(null, null)).GetGenericMethodDefinition();
+            MethodCallExtractor.ExtractCalledMethod(() => LifetimeScopeRezolverExtensions.TrackIfScopedAndDisposableAndReturn<object>(null, null)).GetGenericMethodDefinition();
 
         /// <summary>
         /// If false (the default) then any expression produced by <see cref="CreateExpressionBase(CompileContext)"/> will be automatically 
@@ -101,7 +101,7 @@ namespace Rezolver
         /// can override the <see cref="SuppressScopeTracking"/> property, and return false.  It can also be suppressed on a per-compilation
         /// basis by setting the <see cref="CompileContext.SuppressScopeTracking"/> property of the <paramref name="context"/> to true.
         /// 
-        /// This is something that the <see cref="ScopedSingletonTarget"/> does on its nested target, since by definition it generates
+        /// This is something that the <see cref="ScopedTarget"/> does on its nested target, since by definition it generates
         /// its own explicit scope tracking code.
         /// 
         /// If the target simply needs to select a different scope from the current (at the time <see cref="IRezolver.Resolve(RezolveContext)"/> 

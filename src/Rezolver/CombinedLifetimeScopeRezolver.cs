@@ -37,23 +37,6 @@ namespace Rezolver
             _parentScope = parentScope;
         }
 
-        //public override object Resolve(RezolveContext context)
-        //{
-        //    var result = base.Resolve(context);
-        //    //if the object is destined for this scope, then track it.
-        //    if (result is IDisposable && object.ReferenceEquals(this, context.Scope))
-        //        TrackObject(result, context);
-        //    return result;
-        //}
-
-        //public override bool TryResolve(RezolveContext context, out object result)
-        //{
-        //    var success = base.TryResolve(context, out result);
-        //    if (success && result is IDisposable && object.ReferenceEquals(this, context.Scope))
-        //        TrackObject(result, context);
-        //    return success;
-        //}
-
         private void TrackObject(object obj, RezolveContext context)
         {
             if (obj == null)

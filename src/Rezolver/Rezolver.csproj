@@ -90,6 +90,11 @@
     <Compile Include="MethodCallExtractor.cs" />
     <Compile Include="NamedRezolverBuilder.cs" />
     <Compile Include="ParameterBinding.cs" />
+    <Compile Include="IRezolverBuilder.RegisterExtensions.cs" />
+    <Compile Include="IRezolverBuilder.ObjectExtensions.cs" />
+    <Compile Include="IRezolverBuilder.SingletonExtensions.cs" />
+    <Compile Include="IRezolver.ResolveExtensions.cs" />
+    <Compile Include="IRezolver.RegisterExtensions.cs" />
     <Compile Include="RezolverPath.cs" />
     <Compile Include="RezolveTargetCompiler.cs" />
     <Compile Include="RezolveTargetCompilerBase.cs" />
@@ -98,7 +103,7 @@
     <Compile Include="RezolveTargetAdapter.cs" />
     <Compile Include="RezolveTargetEntry.cs" />
     <Compile Include="RezolveTargetExpression.cs" />
-    <Compile Include="ScopedSingletonTarget.cs" />
+    <Compile Include="ScopedTarget.cs" />
     <Compile Include="SingletonTarget.cs" />
     <Compile Include="ObjectTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,10 +112,12 @@
     <Compile Include="TypeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILifetimeScopeRezolver.ScopeExtensions.cs" />
     <None Include="package.bat" />
     <None Include="Rezolver.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <Compile Include="IRezolverBuilder.ScopedExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
