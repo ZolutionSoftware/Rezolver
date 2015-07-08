@@ -1,5 +1,5 @@
 ﻿{
-    "version": "0.5.2-alpha-8",
+    "version": "0.5.2-alpha-902",
     "description": "Rezolver adapter for the Microsoft.Framework.DependencyInjection abstractions",
     "authors": [ "Andras Zoltan" ],
     "tags": [ "rezolver", "ioc", "di" ],
@@ -8,7 +8,7 @@
 
     "dependencies": {
         "Microsoft.Framework.DependencyInjection": "1.0.0-*",
-        "Rezolver": "0.5.2-alpha-7"
+        "Rezolver": "0.5.2-alpha-*"
     },
 
     "frameworks": {

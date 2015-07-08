@@ -6,10 +6,16 @@ using System.Linq.Expressions;
 
 namespace Rezolver
 {
+    /// <summary>
+    /// Default implementation of the <see cref="IRezolveTargetEntry"/> interface.
+    /// 
+    /// Supports multiple targets registered under one entry, with the last of those
+    /// targets to be registered being treated as the default target.
+    /// </summary>
 	public class RezolveTargetEntry : IRezolveTargetEntry
 	{
 		private readonly Type _registeredType;
-		private readonly IRezolveTarget _defaultTarget;
+		private IRezolveTarget _defaultTarget;
 		private ListTarget _listTarget;
 		private List<IRezolveTarget> _targets;
 
@@ -21,7 +27,7 @@ namespace Rezolver
 				throw new ArgumentException("All targets must be non-null", nameof(targets));
 
 			_registeredType = registeredType;
-			_defaultTarget = targets[0];
+			_defaultTarget = targets[targets.Length - 1];
 			_targets = new List<IRezolveTarget>(targets);
 		}
 
@@ -51,8 +57,11 @@ namespace Rezolver
 
 		public void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
 		{
-			if (!checkForDuplicates || !_targets.Contains(target))
-				_targets.Add(target);
+            if (!checkForDuplicates || !_targets.Contains(target))
+            {
+                _targets.Add(target);
+                _defaultTarget = target;
+            }
 		}
 
 		public Expression CreateExpression(CompileContext context)

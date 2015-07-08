@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45+sl50+win+wpa81+wp80": {
+      "wrappedProject": "../../Rezolver.Resources/Rezolver.Resources.csproj",
+      "bin": {
+        "assembly": "../../Rezolver.Resources/obj/{configuration}/Rezolver.Resources.dll",
+        "pdb": "../../Rezolver.Resources/obj/{configuration}/Rezolver.Resources.pdb"
+      }
+    }
+  }
+}

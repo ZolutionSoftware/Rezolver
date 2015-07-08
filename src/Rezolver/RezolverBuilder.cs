@@ -12,6 +12,9 @@ namespace Rezolver
 	/// <summary>
 	/// Stores the underlying registrations used by an <see cref="IRezolver"/> instance (assuming a conforming
 	/// implementation).
+    /// 
+    /// This is the builder type used by default for the <see cref="DefaultRezolver"/> and <see cref="DefaultLifetimeScopeRezolver"/> when you don't
+    /// supply an instance of an <see cref="IRezolverBuiler"/> explicitly on construction.
 	/// </summary>
 	public class RezolverBuilder : IRezolverBuilder
 	{
@@ -27,7 +30,6 @@ namespace Rezolver
 		private readonly Dictionary<string, INamedRezolverBuilder> _namedBuilders = new Dictionary<string, INamedRezolverBuilder>();
 
 		#endregion
-
 
 		private class RezolverBuilderWalker : IEnumerable<RegistrationEntry>
 		{
@@ -65,64 +67,60 @@ namespace Rezolver
 			}
 		}
 
-		private class MultipleRezolveTarget : RezolveTargetBase
+        private class EnumerableFallbackTargetEntry : IRezolveTargetEntry
+        {
+            private readonly Type _elementType;
+            private readonly Type _enumerableType;
+
+            public EnumerableFallbackTargetEntry(Type elementType)
+            {
+                _elementType = elementType;
+                _enumerableType = typeof(IEnumerable<>).MakeGenericType(_elementType);
+            }
+
+            public Type DeclaredType
+            {
+                get
+                {
+                    return typeof(IEnumerable<>).MakeGenericType(_elementType);
+                }
+            }
+
+            public IRezolveTarget DefaultTarget
+            {
+                get
+                {
+                    return this;
+                }
+            }
+
+            public IEnumerable<IRezolveTarget> Targets
+            {
+                get
+                {
+                    return new[] { this };
+                }
+            }
+
+            public Expression CreateExpression(CompileContext context)
+            {
+                return Expression.Call(
+                    MethodCallExtractor.ExtractCalledMethod(() => Enumerable.Empty<object>()).GetGenericMethodDefinition().MakeGenericMethod(_elementType));
+            }
+
+            public bool SupportsType(Type type)
+            {
+                return type.Equals(_enumerableType);
+            }
+
+            public void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
-			private List<IRezolveTarget> _targets;
-			private Type _commonServiceType;
-
-			public static Type MakeTargetType(Type commonServiceType)
-			{
-				return commonServiceType.MakeArrayType();
-			}
-
-			public static Type MakeEnumerableType(Type commonServiceType)
-			{
-				return typeof(IEnumerable<>).MakeGenericType(commonServiceType);
-			}
-
-			public MultipleRezolveTarget(IEnumerable<IRezolveTarget> targets, Type commonServiceType)
-			{
-				_targets = new List<IRezolveTarget>(targets);
-				_commonServiceType = commonServiceType;
-				//TODO: potentially add some discovery of a shared contract/base type if declaredType is null.
-			}
-
-			public void AddTargets(IEnumerable<IRezolveTarget> targets, bool replace)
-			{
-				if (replace)
-					_targets.Clear();
-				_targets.AddRange(targets);
-			}
-
-			protected override System.Linq.Expressions.Expression CreateExpressionBase(CompileContext context)
-			{
-				return Expression.NewArrayInit(_commonServiceType, _targets.Select(t => t.CreateExpression(new CompileContext(context, _commonServiceType, true))));
-			}
-
-			public override bool SupportsType(Type type)
-			{
-				if (base.SupportsType(type))
-					return true;
-
-				//we also support:
-				//List<[DeclaredType]>
-				//Collection<[DeclaredType]>
-				//IEnumerable<[DeclaredType]>
-				return type == typeof(List<>).MakeGenericType(_commonServiceType)
-					|| type == typeof(Collection<>).MakeGenericType(_commonServiceType)
-					|| type == typeof(IEnumerable<>).MakeGenericType(_commonServiceType);
-			}
-
-			public override Type DeclaredType
-			{
-				get { return MakeTargetType(_commonServiceType); }
-			}
-		}
-
-		public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
-		{
-
-
 			if (path != null)
 			{
 				if (path.Next == null)
@@ -197,10 +195,18 @@ namespace Rezolver
 						return entry;
 				}
 
-				//If we still don't find anything, then we see if the type is IEnumerable<T>.
-				//If it is, we look for the T (we recurse, though to keep the logic simple)
-				if (type.GetGenericTypeDefinition().Equals(typeof(IEnumerable<>)))
-					return Fetch(TypeHelpers.GetGenericArguments(type)[0], name);
+                //If we still don't find anything, then we see if the type is IEnumerable<T>.
+                //If it is, we look for the T (we recurse, though to keep the logic simple)
+                if (type.GetGenericTypeDefinition().Equals(typeof(IEnumerable<>)))
+                {
+                    Type elementType = TypeHelpers.GetGenericArguments(type)[0];
+                    entry = Fetch(elementType, name);
+
+                    //because it's an enumerable the caller is after, we return an entry that
+                    //will return an empty enumerable of the requested type.
+                    if(entry == null)
+                        return new EnumerableFallbackTargetEntry(elementType);
+                }
 			}
 			return entry;
 		}
