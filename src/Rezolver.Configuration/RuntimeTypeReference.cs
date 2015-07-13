@@ -20,9 +20,9 @@ namespace Rezolver.Configuration
 		{
 			get
 			{
-				if (RuntimeType.IsGenericType)
+				if (TypeHelpers.IsGenericType(RuntimeType))
 				{
-					return RuntimeType.GetGenericArguments().Select(t => new RuntimeTypeReference(t)).ToArray();
+					return TypeHelpers.GetGenericArguments(RuntimeType).Select(t => new RuntimeTypeReference(t)).ToArray();
 				}
 				else
 					return TypeReference.NoGenericArguments;
@@ -32,7 +32,7 @@ namespace Rezolver.Configuration
 		public bool IsOpenGenericTypeArgument
 		{
 			//this isn't *quite* right, but I think it'll do for most cases.  Await bug report, fix if required.
-			get { return RuntimeType.IsGenericParameter && RuntimeType.DeclaringType.IsGenericTypeDefinition; }
+			get { return RuntimeType.IsGenericParameter && TypeHelpers.IsGenericTypeDefinition(RuntimeType.DeclaringType); }
 		}
 
 		public bool IsUnbound

@@ -1,0 +1,38 @@
+﻿{
+    "version": "1.0.1-alpha-102",
+    "description": "Shared source for Rezolver projects",
+    "authors": [ "Andras Zoltan" ],
+    "tags": [ "rezolver" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "shared": "**/*.cs",
+
+    "frameworks": {
+        "net45": {
+            "frameworkAssemblies": {
+                "System": "4.0.0.0",
+                "System.Core": "4.0.0.0",
+                "System.Linq": "4.0.0.0",
+                "Microsoft.CSharp": "4.0.0.0"
+            }
+        },
+        "dnx451": {
+            "frameworkAssemblies": {
+                "System": "4.0.0.0",
+                "System.Core": "4.0.0.0",
+                "System.Linq": "4.0.0.0",
+                "Microsoft.CSharp": "4.0.0.0"
+            }
+        },
+        "dotnet": {
+            "dependencies": {
+                "System.Runtime": "4.0.20-beta-*",
+                "System.Linq": "4.0.0-beta-*",
+                "System.Collections": "4.0.10-beta-*",
+                "System.Collections.Concurrent": "4.0.10-beta-*",
+                "Microsoft.CSharp": "4.0.0-beta-*"
+            }
+        }
+    }
+}

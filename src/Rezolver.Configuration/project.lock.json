@@ -3,55 +3,6 @@
   "version": -9996,
   "targets": {
     ".NETFramework,Version=v4.5": {
-      "Microsoft.Framework.DependencyInjection/1.0.0-beta6-11584": {
-        "dependencies": {
-          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6-11584"
-        },
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/net45/Microsoft.Framework.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Framework.DependencyInjection.dll": {}
-        }
-      },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6-11584": {
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
-        }
-      },
-      "Microsoft.Framework.DependencyInjection.Rezolver/0.5.2-alpha-902": {
-        "dependencies": {
-          "Microsoft.Framework.DependencyInjection": "1.0.0-beta6-11563",
-          "Rezolver": "0.5.2-alpha-901"
-        },
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/net45/Microsoft.Framework.DependencyInjection.Rezolver.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Framework.DependencyInjection.Rezolver.dll": {}
-        }
-      },
       "Rezolver/0.5.2-alpha-902": {
         "frameworkAssemblies": [
           "System",
@@ -71,55 +22,6 @@
       }
     },
     "DNX,Version=v4.5.1": {
-      "Microsoft.Framework.DependencyInjection/1.0.0-beta6-11584": {
-        "dependencies": {
-          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6-11584"
-        },
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.dll": {}
-        }
-      },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6-11584": {
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
-        }
-      },
-      "Microsoft.Framework.DependencyInjection.Rezolver/0.5.2-alpha-902": {
-        "dependencies": {
-          "Microsoft.Framework.DependencyInjection": "1.0.0-beta6-11563",
-          "Rezolver": "0.5.2-alpha-901"
-        },
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.Rezolver.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.Rezolver.dll": {}
-        }
-      },
       "Rezolver/0.5.2-alpha-902": {
         "frameworkAssemblies": [
           "System",
@@ -163,50 +65,6 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.CSharp.dll": {}
-        }
-      },
-      "Microsoft.Framework.DependencyInjection/1.0.0-beta6-11584": {
-        "dependencies": {
-          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6-11584",
-          "System.Collections": "4.0.10-beta-23109",
-          "System.Collections.Concurrent": "4.0.10-beta-23109",
-          "System.Threading": "4.0.10-beta-23109",
-          "System.Threading.Tasks": "4.0.10-beta-23109"
-        },
-        "compile": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.dll": {}
-        }
-      },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6-11584": {
-        "dependencies": {
-          "System.ComponentModel": "4.0.0-beta-23109",
-          "System.Diagnostics.Debug": "4.0.10-beta-23109",
-          "System.Globalization": "4.0.10-beta-23109",
-          "System.Linq": "4.0.0-beta-23109",
-          "System.Linq.Expressions": "4.0.10-beta-23109",
-          "System.Reflection": "4.0.10-beta-23109",
-          "System.Resources.ResourceManager": "4.0.0-beta-23109"
-        },
-        "compile": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
-        }
-      },
-      "Microsoft.Framework.DependencyInjection.Rezolver/0.5.2-alpha-902": {
-        "dependencies": {
-          "Microsoft.Framework.DependencyInjection": "1.0.0-beta6-11563",
-          "Rezolver": "0.5.2-alpha-901"
-        },
-        "compile": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Rezolver.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/Microsoft.Framework.DependencyInjection.Rezolver.dll": {}
         }
       },
       "Rezolver/0.5.2-alpha-902": {
@@ -524,52 +382,6 @@
         "ref/wpa81/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
-      ]
-    },
-    "Microsoft.Framework.DependencyInjection/1.0.0-beta6-11584": {
-      "serviceable": true,
-      "sha512": "rVdU4y21KfHsBtq96vFxuKdWyKHS/pzwlBgl4TM1QjZcIamjG40Ob6FbLwiqRGFVvLTE3Fwm7tl74sG7Vb8BIA==",
-      "files": [
-        "Microsoft.Framework.DependencyInjection.1.0.0-beta6-11584.nupkg",
-        "Microsoft.Framework.DependencyInjection.1.0.0-beta6-11584.nupkg.sha512",
-        "Microsoft.Framework.DependencyInjection.nuspec",
-        "repo.json",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.dll",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.xml",
-        "lib/dotnet/Microsoft.Framework.DependencyInjection.dll",
-        "lib/dotnet/Microsoft.Framework.DependencyInjection.xml",
-        "lib/net45/Microsoft.Framework.DependencyInjection.dll",
-        "lib/net45/Microsoft.Framework.DependencyInjection.xml"
-      ]
-    },
-    "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6-11584": {
-      "serviceable": true,
-      "sha512": "UZxtjB+FFQ6PNHIB1mK2gxJL+JWARlvyJnf+wOfmA8u7ADQ1Z3oLM0dYF7SWdqfqZKdhDXopQpXUO62hF1KrJw==",
-      "files": [
-        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta6-11584.nupkg",
-        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta6-11584.nupkg.sha512",
-        "Microsoft.Framework.DependencyInjection.Abstractions.nuspec",
-        "repo.json",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.xml",
-        "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll",
-        "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.xml",
-        "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.dll",
-        "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.xml"
-      ]
-    },
-    "Microsoft.Framework.DependencyInjection.Rezolver/0.5.2-alpha-902": {
-      "sha512": "7pPznONKiH7oqtGsyYbJ4j3dbWB1aoTRu7s/YPeDThAEw41/RWeGDEBm9vyOJ4VEgK/uJ4P8J6BvS6JItXleQw==",
-      "files": [
-        "Microsoft.Framework.DependencyInjection.Rezolver.0.5.2-alpha-902.nupkg",
-        "Microsoft.Framework.DependencyInjection.Rezolver.0.5.2-alpha-902.nupkg.sha512",
-        "Microsoft.Framework.DependencyInjection.Rezolver.nuspec",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.Rezolver.dll",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.Rezolver.xml",
-        "lib/dotnet/Microsoft.Framework.DependencyInjection.Rezolver.dll",
-        "lib/dotnet/Microsoft.Framework.DependencyInjection.Rezolver.xml",
-        "lib/net45/Microsoft.Framework.DependencyInjection.Rezolver.dll",
-        "lib/net45/Microsoft.Framework.DependencyInjection.Rezolver.xml"
       ]
     },
     "Rezolver/0.5.2-alpha-902": {
@@ -1447,11 +1259,29 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.Framework.DependencyInjection >= 1.0.0-*",
-      "Rezolver >= 0.5.2-alpha-*"
+      "Rezolver >= 0.5.2-alpha-*",
+      "Rezolver.Shared >= 1.0.1-*"
     ],
-    ".NETFramework,Version=v4.5": [],
-    "DNX,Version=v4.5.1": [],
-    ".NETPlatform,Version=v5.0": []
+    ".NETFramework,Version=v4.5": [
+      "fx/System >= 4.0.0.0",
+      "fx/System.Core >= 4.0.0.0",
+      "fx/System.Linq >= 4.0.0.0"
+    ],
+    "DNX,Version=v4.5.1": [
+      "fx/System >= 4.0.0.0",
+      "fx/System.Core >= 4.0.0.0",
+      "fx/System.Linq >= 4.0.0.0"
+    ],
+    ".NETPlatform,Version=v5.0": [
+      "System.Runtime >= 4.0.20-beta-*",
+      "System.Reflection >= 4.0.10-beta-*",
+      "System.Reflection.Primitives >= 4.0.0-beta-*",
+      "System.Reflection.TypeExtensions >= 4.0.0-beta-*",
+      "System.Linq >= 4.0.0-beta-*",
+      "System.Linq.Expressions >= 4.0.10-beta-*",
+      "System.Collections >= 4.0.10-beta-*",
+      "System.Collections.Concurrent >= 4.0.10-beta-*",
+      "System.Threading >= 4.0.10-beta-*"
+    ]
   }
 }

@@ -42,7 +42,7 @@ namespace Rezolver.Tests.vNext
 
 			var entry = builder.Fetch(typeof(RezolverBuilderTests_Multiple), null);
 
-			Assert.Same(targets[0], entry.DefaultTarget);
+			Assert.Same(targets[2], entry.DefaultTarget);
         }
 
 		[Fact]

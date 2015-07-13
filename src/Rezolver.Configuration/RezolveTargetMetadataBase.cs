@@ -77,7 +77,7 @@ namespace Rezolver.Configuration
 			if (targetTypes.Length == 0) throw new ArgumentException("Array must contain at least one target type", "targetTypes");
 			if (targetTypes.Any(t => t == null)) throw new ArgumentException("All items in the array must be non-null", "targetTypes");
 
-			var commonBase = targetTypes.FirstOrDefault(t => targetTypes.All(tt => tt != t || t.IsAssignableFrom(tt)));
+			var commonBase = targetTypes.FirstOrDefault(t => targetTypes.All(tt => tt != t || TypeHelpers.IsAssignableFrom(t, tt)));
 
 			if (commonBase == null)
 			{

@@ -96,6 +96,42 @@ namespace Rezolver
 #endif
 		}
 
+        internal static bool IsAbstract(Type type)
+        {
+#if DOTNET
+            return type.GetTypeInfo().IsAbstract;
+#else
+            return type.IsAbstract;
+#endif
+        }
+
+        internal static bool IsClass(Type type)
+        {
+#if DOTNET
+            return type.GetTypeInfo().IsClass;
+#else
+            return type.IsClass;
+#endif
+        }
+
+        internal static bool IsAssignableFrom(Type to, Type from)
+        {
+#if DOTNET
+            return to.GetTypeInfo().IsAssignableFrom(from.GetTypeInfo());
+#else
+            return to.IsAssignableFrom(from);
+#endif
+        }
+
+        internal static Assembly GetAssembly(Type type)
+        {
+#if DOTNET
+            return type.GetTypeInfo().Assembly;
+#else
+            return type.Assembly;
+#endif
+        }
+
 		internal static bool IsNullableType(Type type)
 		{
 			return IsGenericType(type) && type.GetGenericTypeDefinition() == typeof(Nullable<>);

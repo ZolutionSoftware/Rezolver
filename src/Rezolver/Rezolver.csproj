@@ -41,6 +41,12 @@
     <DocumentationFile>bin\Release\Rezolver.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Rezolver.Shared\Extensions\System\MustBeExtensions.cs">
+      <Link>Extensions\System\MustBeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Rezolver.Shared\TypeHelpers.cs">
+      <Link>TypeHelpers.cs</Link>
+    </Compile>
     <Compile Include="BlockExpressionLocalsRewriter.cs" />
     <Compile Include="CachingRezolver.cs" />
     <Compile Include="CombinedRezolver.cs" />
@@ -69,7 +75,6 @@
     <Compile Include="IRezolver.cs" />
     <Compile Include="IRezolveTargetCompiler.cs" />
     <Compile Include="IRezolveTargetAdapter.cs" />
-    <Compile Include="Extensions\System\MustBeExtensions.cs" />
     <Compile Include="IChildRezolverBuilder.cs" />
     <Compile Include="INamedRezolverBuilder.cs" />
     <Compile Include="IRezolverBuilder.cs" />
@@ -109,7 +114,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RezolverBuilder.cs" />
     <Compile Include="RezolveTargetBase.cs" />
-    <Compile Include="TypeHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILifetimeScopeRezolver.ScopeExtensions.cs" />

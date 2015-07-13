@@ -250,8 +250,13 @@ namespace Rezolver.Configuration
 			Assembly toAdd = null;
 			try
 			{
-				toAdd = Assembly.Load(entry.AssemblyName);
-			}
+#if DOTNET
+                toAdd = Assembly.Load(new AssemblyName(entry.AssemblyName));
+#else
+                toAdd = Assembly.Load(entry.AssemblyName);
+#endif
+
+            }
 			catch (Exception ex)
 			{
 				AddError(new ConfigurationError(ex, entry));
@@ -356,21 +361,25 @@ namespace Rezolver.Configuration
 						//and look in each referenced assembly
 						foreach (var a in GetReferencedAssemblies())
 						{
-							found = a.GetType(t, false);
+#if DOTNET
+                            found = a.GetType(t, false, false);
+#else
+                            found = a.GetType(t, false);
+#endif
 
-							if (found != null && !foundTypes.Contains(found))
+                            if (found != null && !foundTypes.Contains(found))
 								foundTypes.Add(found);
 						}
 					}
 
 					if (expectedParamCount > 0)
 					{
-						foundTypes.RemoveAll(t => !t.IsGenericTypeDefinition || t.GetGenericArguments().Length != genericParameterCount);
+						foundTypes.RemoveAll(t => !TypeHelpers.IsGenericTypeDefinition(t) || t.GetGenericArguments().Length != genericParameterCount);
 					}
 					else if (expectedParamCount == 0)
 					{
 						//strip out generic types as we didn't want them
-						foundTypes.RemoveAll(t => t.IsGenericTypeDefinition);
+						foundTypes.RemoveAll(t => TypeHelpers.IsGenericTypeDefinition(t));
 					}
 
 					//todo filter according to generic/non-generic expected.

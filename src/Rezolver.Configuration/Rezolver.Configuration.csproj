@@ -30,19 +30,18 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Rezolver.Configuration.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\Rezolver\Rezolver.csproj">
-      <Project>{53870bd3-88ea-404d-8ab2-9bcb7040f1f6}</Project>
-      <Name>Rezolver</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="..\Rezolver.Shared\Extensions\System\MustBeExtensions.cs">
+      <Link>Extensions\System\MustBeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Rezolver.Shared\TypeHelpers.cs">
+      <Link>TypeHelpers.cs</Link>
+    </Compile>
     <Compile Include="AssemblyReferenceEntry.cs" />
     <Compile Include="ConfigurationAdapter.cs" />
     <Compile Include="ConfigurationAdapterContext.cs" />
@@ -90,6 +89,13 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rezolver\Rezolver.csproj">
+      <Project>{53870bd3-88ea-404d-8ab2-9bcb7040f1f6}</Project>
+      <Name>Rezolver</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

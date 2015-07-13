@@ -18,9 +18,9 @@ namespace Rezolver.Configuration
 		private static readonly ConfigurationAdapterContextFactory _instance = new ConfigurationAdapterContextFactory();
 
 		private static readonly Assembly[] _defaultReferences = new[] {
-			typeof(int).Assembly,
-			typeof(Stack<>).Assembly,
-			typeof(HashSet<>).Assembly
+			TypeHelpers.GetAssembly(typeof(int)),
+            TypeHelpers.GetAssembly(typeof(Stack<>)),
+            TypeHelpers.GetAssembly(typeof(HashSet<>))
 		};
 
 		/// <summary>

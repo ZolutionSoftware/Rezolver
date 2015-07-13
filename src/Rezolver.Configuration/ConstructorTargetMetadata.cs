@@ -114,7 +114,7 @@ namespace Rezolver.Configuration
 				else if (mostDerived.Length > 1)
 				{
 					//get all non-abstract class types
-					var nonAbstracts = typesToBuild.Where(t => t.IsClass && !t.IsAbstract).ToArray();
+					var nonAbstracts = typesToBuild.Where(t => TypeHelpers.IsClass(t) && TypeHelpers.IsAbstract(t)).ToArray();
 					if (nonAbstracts.Length > 1)
 					{
 						context.AddError(new ConfigurationError("More than one non-abstract class type provided in target types - can't automatically choose which one to build", entry));
@@ -131,7 +131,7 @@ namespace Rezolver.Configuration
 
 			if (_arguments == null)
 			{
-				if (typeToBuild.IsGenericTypeDefinition)
+				if (TypeHelpers.IsGenericTypeDefinition(typeToBuild))
 					return GenericConstructorTarget.Auto(typeToBuild);
 				else
 					return ConstructorTarget.Auto(typeToBuild);
