@@ -1,6 +1,7 @@
 {
     "projects": [
         "src",
+        "src/Examples",
         "wrap"
     ],
     "sdk": {

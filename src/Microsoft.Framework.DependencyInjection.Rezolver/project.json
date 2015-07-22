@@ -7,7 +7,7 @@
     "licenseUrl": "",
 
     "dependencies": {
-        "Microsoft.Framework.DependencyInjection": "1.0.0-*",
+        "Microsoft.Framework.DependencyInjection": "1.0.0-beta5",
         "Rezolver": "0.5.2-alpha-*"
     },
 

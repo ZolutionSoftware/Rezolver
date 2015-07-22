@@ -44,8 +44,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver", "src\Rezolver\Re
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.vNext", "test\Rezolver.Tests.vNext\Rezolver.Tests.vNext.xproj", "{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Examples.AspNet5", "src\Rezolver.Examples.AspNet5\Rezolver.Examples.AspNet5.xproj", "{329D0891-A838-4C2C-8763-9349900CD58D}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Framework.DependencyInjection.Rezolver", "src\Microsoft.Framework.DependencyInjection.Rezolver\Microsoft.Framework.DependencyInjection.Rezolver.xproj", "{726DC4D6-9064-45B4-9EFD-A18AA779AC34}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Configuration", "src\Rezolver.Configuration\Rezolver.Configuration.xproj", "{05F52AEE-AB5B-4008-8B00-6CA2B58CAC48}"
@@ -53,6 +51,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver", "src\Rezolver\Rezolver.csproj", "{53870BD3-88EA-404D-8AB2-9BCB7040F1F6}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Shared", "src\Rezolver.Shared\Rezolver.Shared.xproj", "{66414675-EDCC-454F-81B7-9DA02CAF5D2B}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Examples.AspNet5", "src\Examples\Rezolver.Examples.AspNet5\Rezolver.Examples.AspNet5.xproj", "{37E0DB09-E7C9-4343-883D-3D1FDD3ACA40}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Examples.Console", "src\Examples\Rezolver.Examples.Console\Rezolver.Examples.Console.xproj", "{7EA2458D-11E5-4C10-B1B8-0339E3BCD130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,10 +114,6 @@ Global
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{329D0891-A838-4C2C-8763-9349900CD58D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{329D0891-A838-4C2C-8763-9349900CD58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{329D0891-A838-4C2C-8763-9349900CD58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{329D0891-A838-4C2C-8763-9349900CD58D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -132,6 +130,14 @@ Global
 		{66414675-EDCC-454F-81B7-9DA02CAF5D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66414675-EDCC-454F-81B7-9DA02CAF5D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66414675-EDCC-454F-81B7-9DA02CAF5D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37E0DB09-E7C9-4343-883D-3D1FDD3ACA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37E0DB09-E7C9-4343-883D-3D1FDD3ACA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37E0DB09-E7C9-4343-883D-3D1FDD3ACA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37E0DB09-E7C9-4343-883D-3D1FDD3ACA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA2458D-11E5-4C10-B1B8-0339E3BCD130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA2458D-11E5-4C10-B1B8-0339E3BCD130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA2458D-11E5-4C10-B1B8-0339E3BCD130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA2458D-11E5-4C10-B1B8-0339E3BCD130}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,9 +148,10 @@ Global
 		{C72C6B4A-C2D6-4810-BA43-2EB16C7E5D95} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
 		{07626F9C-06A6-498D-ADE1-BC24D2790B7C} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
-		{329D0891-A838-4C2C-8763-9349900CD58D} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
 		{05F52AEE-AB5B-4008-8B00-6CA2B58CAC48} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
 		{66414675-EDCC-454F-81B7-9DA02CAF5D2B} = {1FC03E1D-1D42-462A-9113-76A0F69EE0DF}
+		{37E0DB09-E7C9-4343-883D-3D1FDD3ACA40} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
+		{7EA2458D-11E5-4C10-B1B8-0339E3BCD130} = {91F29D0A-0864-4336-97FF-E46C60FB1EA2}
 	EndGlobalSection
 EndGlobal
