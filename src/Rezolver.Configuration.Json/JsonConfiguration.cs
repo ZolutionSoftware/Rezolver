@@ -19,9 +19,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-/// <summary>
-/// The Json namespace.
-/// </summary>
 namespace Rezolver.Configuration.Json
 {
 	/// <summary>
