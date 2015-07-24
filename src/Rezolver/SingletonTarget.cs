@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -20,12 +21,13 @@ namespace Rezolver
         /// </summary>
         private class SingletonTargetLazyInitialiser : ICompiledRezolveTarget
         {
-            private SingletonTarget _target;
             private Func<RezolveContext, Lazy<object>> _lazyFactory;
+            private Lazy<object> _lazy;
+
+            //internal Lazy<object> Lazy {  get { return _lazy; } }
 
             internal SingletonTargetLazyInitialiser(SingletonTarget target, Func<RezolveContext, Lazy<object>> lazyFactory)
             {
-                _target = target;
                 _lazyFactory = lazyFactory;
             }
 
@@ -37,16 +39,13 @@ namespace Rezolver
             /// <returns></returns>
             object ICompiledRezolveTarget.GetObject(RezolveContext context)
             {
-                lock (_target._lazyLocker)
+                if(_lazy == null)
                 {
-                    //there's a small chance of multiple lazys being constructed here and a 
-                    //smaller chance of more than one being invoked - if multiple threads try to 
-                    //invoke one of these against the same SingletonTarget at the same time
-                    if (_target._lazy == null)
-                        _target._lazy = _lazyFactory(context);
+                    //here - if we create more than one lazy, it's not a big deal.  *Executing* two
+                    //different ones is a big deal.
+                    Interlocked.CompareExchange(ref _lazy, _lazyFactory(context), null);
                 }
-
-                return _target._lazy.Value;
+                return _lazy.Value;
             }
         }
 
@@ -54,13 +53,7 @@ namespace Rezolver
         private static readonly ConstructorInfo LazyObject_Ctor = MethodCallExtractor.ExtractConstructorCall(() => new Lazy<object>(() => (object)null));
 
 		private IRezolveTarget _innerTarget;
-        //might seem silly - but we need a stateless locking mechanism over the lazy to ensure we only ever create one.
-        //because the creation of our singleton instances is parameterised by RezolveContext, we can't use another lazy,
-        //so we resort to using the lock mechanism.  As it is, the chances of creating two separate instances from two 
-        //different lazy objects for the same target are very small - but since the chance is there, it's worth coding it
-        //away.
-        private readonly object _lazyLocker = new object();
-		private Lazy<object> _lazy;
+        private readonly ConcurrentDictionary<Type, SingletonTargetLazyInitialiser> _initialisers = new ConcurrentDictionary<Type, SingletonTargetLazyInitialiser>();
 
         /// <summary>
         /// Overrides the base class to ensure that automatic generation of the scope tracking code by RezolveTargetBase is disabled.
@@ -106,24 +99,22 @@ namespace Rezolver
             //child back to root would actually be a good thing to do in general anyway, so should therefore just
             //be done.
 
-            //if the lazy has already been constructed, then simply returning an expression that reads its value.
-            if(_lazy != null)
-            {
-                return Expression.Property(Expression.Constant(_lazy), "Value");
-            }
-            else
+            SingletonTargetLazyInitialiser initialiser = null;
+
+            if (!_initialisers.TryGetValue(context.TargetType ?? _innerTarget.DeclaredType, out initialiser))
             {
                 //if our inner target is also a singleton, we just chain straight through to its own CreateExpression
                 //call.  Note that if this is the case, our own lazy will never be constructed and the code will always
                 //fall into this branch.
                 if (_innerTarget is SingletonTarget)
                     return _innerTarget.CreateExpression(context);
-                else
+
+                initialiser = _initialisers.GetOrAdd(context.TargetType ?? _innerTarget.DeclaredType, t =>
                 {
                     //get the underlying expression for the target that is to be turned into a singleton - but disable the
                     //generation of any scope-tracking code.
                     var innerExpression = ExpressionHelper.GetLambdaBodyForTarget(_innerTarget,
-                        new CompileContext(context, context.TargetType, inheritSharedExpressions: true, suppressScopeTrackingExpressions: true));
+                        new CompileContext(context, t, inheritSharedExpressions: true, suppressScopeTrackingExpressions: true));
                     //generate our scope tracking expression.
                     var scopeTracking = CreateScopeTrackingExpression(context, innerExpression);
 
@@ -138,13 +129,16 @@ namespace Rezolver
                         Expression.Lambda(Expression.Convert(scopeTracking, typeof(object)))), context.RezolveContextParameter);
                     var lazyLambda = (Func<RezolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
                     //now we create and capture an instance of the SingletonTargetLazyInitialiser class, passing our
-                    //dynamically constructed delegate along with this target - and emit a call to its
-                    //GetObject implementation
-                    return Expression.Call(Expression.Constant(new SingletonTargetLazyInitialiser(this, lazyLambda), typeof(ICompiledRezolveTarget)), 
-                        ICompiledRezolveTarget_GetObject, context.RezolveContextParameter);
-                }
-            }            
-		}
+                    //dynamically constructed delegate along with this target
+                    return new SingletonTargetLazyInitialiser(this, lazyLambda);
+                    //return Expression.Call(Expression.Constant(new SingletonTargetLazyInitialiser(this, lazyLambda), typeof(ICompiledRezolveTarget)),
+                    //    ICompiledRezolveTarget_GetObject, context.RezolveContextParameter);
+                });
+            }
+            return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledRezolveTarget)),
+                   ICompiledRezolveTarget_GetObject, context.RezolveContextParameter);
+            //return Expression.Property(Expression.Constant(initialiser.Lazy), "Value");
+        }
 
 		public override bool SupportsType(Type type)
 		{
