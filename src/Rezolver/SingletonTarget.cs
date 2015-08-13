@@ -86,9 +86,9 @@ namespace Rezolver
         protected override Expression CreateExpressionBase(CompileContext context)
 		{
             //this isn't quite right, imho.  One singleton target should technically be able to create
-            //more than one instance, if that target is in a RezolverBuilder that is, in turn, used to 
-            //build more than one top-level rezolver (a permitted use case).
-            //The way this code is written, however, the singleton will only ever create one instance and,
+            //more than one instance of a given concrete type, if that target is in a RezolverBuilder that is, 
+						//in turn, used to build more than one top-level rezolver (a permitted use case).
+            //The way this code is written, however, the singleton will only ever create one instance of a type and,
             //in a cruel twist, will only ever belong to one scope (if applicable).
             //to fix this will mean being able to easily identify different rezolver trees from each other,
             //and creating one instance for each unique tree.  This isn't even possible at the moment, because

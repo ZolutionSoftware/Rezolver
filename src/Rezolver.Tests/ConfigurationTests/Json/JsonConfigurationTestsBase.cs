@@ -202,6 +202,21 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 		[TestMethod]
 		public void ShouldRezolveSingletonRequiresIntByTwoTypes()
 		{
+			//TODO: implement aliasing as an extension method on the IRezolverBuilderExtensions class - RegisterAlias
+			//What will it do?
+			//It will take a target type and a registration type - and it will create a RezolvedTarget that rezolves an instance of the target type,
+			//but then register it against the registration type.
+			//Why do we need it?
+			//In this test (and the other on that currently fails), the intention is to register a singleton once for multiple types, ensuring that only
+			//one instance is shared between all target types.  This cannot currently be done because the singleton (rightly) creates a single instance for
+			//each type that it receives a request for.  By implementing aliasing, we can use the same singleton for multiple types, but only one of those
+			//registrations will point to that singleton.  All the others will represents a recursion back into the rezolver to resolve against that one
+			//singleton.
+			//After doing that, what next?
+			//Head over to RegisterInstruction.cs in the configuration project and use the new extension method for hierarchies of related types (from line 57).
+			//There is no need to implement this logic anywhere else, as people using the builder directly can choose to use alising or not.  It's really for
+			//the configuration scenario.
+
 			//as you can guess by the last assert in the previous test - this does the same
 			//again, except this time, it's expected that we get the same instance for both rezolve calls.
 			//singletons are easy - just take the value entry that you typically put, and wrap it in a { "$singleton": /* original value */ }
@@ -221,7 +236,6 @@ namespace Rezolver.Tests.ConfigurationTests.Json
 			RequiresInt requiresInt2 = rezolver.Resolve<RequiresInt>();
 
 			Assert.AreEqual(115, requiresInt.IntValue);
-			//however, they shouldn't be the same instance:
 			Assert.AreSame(requiresInt, requiresInt2);
 		}
 
