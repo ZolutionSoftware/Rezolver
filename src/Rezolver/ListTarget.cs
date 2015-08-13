@@ -133,10 +133,9 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Gets the declared type of object that is constructed by this target.  This will be the return type of
-		/// any expression built by <see cref="CreateExpression" /> unless otherwise instructed to build a different type.
+		/// Implementation of the abstract property from the base.  This will always return either a type equal to an array of <see cref="ElementType"/>,
+		/// or <see cref="List{T}"/> with <see cref="ElementType"/> as the generic parameter.  This is controlled by the <see cref="AsArray"/> property.
 		/// </summary>
-		/// <value>The type of the declared.</value>
 		public override Type DeclaredType
 		{
 			get

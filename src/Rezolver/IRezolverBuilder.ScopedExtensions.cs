@@ -42,10 +42,10 @@ namespace Rezolver
         /// is called.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="objectType"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)</param>
-        /// <param name="serviceType"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)</param>
-        /// <param name="path"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)</param>
-        /// <param name="propertyBindingBehaviour"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)</param>
+        /// <param name="objectType"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)" /></param>
+        /// <param name="serviceType"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)" /></param>
+        /// <param name="path"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)" /></param>
+        /// <param name="propertyBindingBehaviour"><see cref="RegisterType(IRezolverBuilder, Type, Type, RezolverPath, IPropertyBindingBehaviour)" /></param>
         public static void RegisterScoped(this IRezolverBuilder builder, Type objectType, Type serviceType = null, RezolverPath path = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
         {
             builder.MustNotBeNull(nameof(builder));

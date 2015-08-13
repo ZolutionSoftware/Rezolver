@@ -131,7 +131,7 @@ namespace Rezolver
 		{
 			_rezolver = rezolver ?? StubRezolver.Instance;
             //automatically inherit the rezolver as this context's scope, if it's of the correct type.
-            ///note - all the other constructors chain to this one.  Note that other constructors
+            //note - all the other constructors chain to this one.  Note that other constructors
             //might supply a separate scope in addition, which will overwrite the scope set here.
             _scope = rezolver as ILifetimeScopeRezolver;
 		}

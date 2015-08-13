@@ -11,7 +11,7 @@ namespace Rezolver.Configuration
 	/// you can use as the starting point of your own factory.
 	/// 
 	/// By default, it creates a new instance of the ConfigurationAdapterContext class (using the virtual method
-	/// <see cref="CreateConfigurationAdapterContextInstance"/>, and then instructs it to add its default assembly references.
+	/// <see cref="CreateContext(ConfigurationAdapter, IConfiguration)"/>, and then instructs it to add its default assembly references.
 	/// </summary>
 	public class ConfigurationAdapterContextFactory : IConfigurationAdapterContextFactory
 	{

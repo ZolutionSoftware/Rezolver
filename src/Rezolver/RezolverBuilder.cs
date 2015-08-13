@@ -12,9 +12,9 @@ namespace Rezolver
 	/// <summary>
 	/// Stores the underlying registrations used by an <see cref="IRezolver"/> instance (assuming a conforming
 	/// implementation).
-    /// 
-    /// This is the builder type used by default for the <see cref="DefaultRezolver"/> and <see cref="DefaultLifetimeScopeRezolver"/> when you don't
-    /// supply an instance of an <see cref="IRezolverBuiler"/> explicitly on construction.
+	/// 
+	/// This is the builder type used by default for the <see cref="DefaultRezolver"/> and <see cref="DefaultLifetimeScopeRezolver"/> when you don't
+	/// supply an instance of an <see cref="IRezolverBuilder"/> explicitly on construction.
 	/// </summary>
 	public class RezolverBuilder : IRezolverBuilder
 	{
@@ -67,59 +67,59 @@ namespace Rezolver
 			}
 		}
 
-        private class EnumerableFallbackTargetEntry : IRezolveTargetEntry
-        {
-            private readonly Type _elementType;
-            private readonly Type _enumerableType;
+		private class EnumerableFallbackTargetEntry : IRezolveTargetEntry
+		{
+			private readonly Type _elementType;
+			private readonly Type _enumerableType;
 
-            public EnumerableFallbackTargetEntry(Type elementType)
-            {
-                _elementType = elementType;
-                _enumerableType = typeof(IEnumerable<>).MakeGenericType(_elementType);
-            }
+			public EnumerableFallbackTargetEntry(Type elementType)
+			{
+				_elementType = elementType;
+				_enumerableType = typeof(IEnumerable<>).MakeGenericType(_elementType);
+			}
 
-            public Type DeclaredType
-            {
-                get
-                {
-                    return typeof(IEnumerable<>).MakeGenericType(_elementType);
-                }
-            }
+			public Type DeclaredType
+			{
+				get
+				{
+					return typeof(IEnumerable<>).MakeGenericType(_elementType);
+				}
+			}
 
-            public IRezolveTarget DefaultTarget
-            {
-                get
-                {
-                    return this;
-                }
-            }
+			public IRezolveTarget DefaultTarget
+			{
+				get
+				{
+					return this;
+				}
+			}
 
-            public IEnumerable<IRezolveTarget> Targets
-            {
-                get
-                {
-                    return new[] { this };
-                }
-            }
+			public IEnumerable<IRezolveTarget> Targets
+			{
+				get
+				{
+					return new[] { this };
+				}
+			}
 
-            public Expression CreateExpression(CompileContext context)
-            {
-                return Expression.Call(
-                    MethodCallExtractor.ExtractCalledMethod(() => Enumerable.Empty<object>()).GetGenericMethodDefinition().MakeGenericMethod(_elementType));
-            }
+			public Expression CreateExpression(CompileContext context)
+			{
+				return Expression.Call(
+						MethodCallExtractor.ExtractCalledMethod(() => Enumerable.Empty<object>()).GetGenericMethodDefinition().MakeGenericMethod(_elementType));
+			}
 
-            public bool SupportsType(Type type)
-            {
-                return type.Equals(_enumerableType);
-            }
+			public bool SupportsType(Type type)
+			{
+				return type.Equals(_enumerableType);
+			}
 
-            public void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
-            {
-                throw new NotImplementedException();
-            }
-        }
+			public void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
+			{
+				throw new NotImplementedException();
+			}
+		}
 
-        public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
+		public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
 			if (path != null)
 			{
@@ -140,7 +140,7 @@ namespace Rezolver
 			if (target.SupportsType(type))
 			{
 				IRezolveTargetEntry entry = null;
-				if(_targets.TryGetValue(type, out entry))
+				if (_targets.TryGetValue(type, out entry))
 				{
 					entry.AddTarget(target);
 				}
@@ -195,18 +195,18 @@ namespace Rezolver
 						return entry;
 				}
 
-                //If we still don't find anything, then we see if the type is IEnumerable<T>.
-                //If it is, we look for the T (we recurse, though to keep the logic simple)
-                if (type.GetGenericTypeDefinition().Equals(typeof(IEnumerable<>)))
-                {
-                    Type elementType = TypeHelpers.GetGenericArguments(type)[0];
-                    entry = Fetch(elementType, name);
+				//If we still don't find anything, then we see if the type is IEnumerable<T>.
+				//If it is, we look for the T (we recurse, though to keep the logic simple)
+				if (type.GetGenericTypeDefinition().Equals(typeof(IEnumerable<>)))
+				{
+					Type elementType = TypeHelpers.GetGenericArguments(type)[0];
+					entry = Fetch(elementType, name);
 
-                    //because it's an enumerable the caller is after, we return an entry that
-                    //will return an empty enumerable of the requested type.
-                    if(entry == null)
-                        return new EnumerableFallbackTargetEntry(elementType);
-                }
+					//because it's an enumerable the caller is after, we return an entry that
+					//will return an empty enumerable of the requested type.
+					if (entry == null)
+						return new EnumerableFallbackTargetEntry(elementType);
+				}
 			}
 			return entry;
 		}
@@ -240,8 +240,8 @@ namespace Rezolver
 
 			if (!_namedBuilders.TryGetValue(path.Current, out namedBuilder))
 				return this as INamedRezolverBuilder; //if this is a named builder that we've descended to, then 
-													  //this is the best match.  A route RezolverBuilder (if using
-													  //the default types) will return null here.
+																							//this is the best match.  A route RezolverBuilder (if using
+																							//the default types) will return null here.
 
 			//then walk to the next part of the path and carry on
 			return path.Next != null ? namedBuilder.GetBestNamedBuilder(path) : namedBuilder;

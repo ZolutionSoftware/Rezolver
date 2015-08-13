@@ -34,10 +34,12 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Attempts to bind all publicly writable instance properties of the given type
-		/// with RezolveTargets.
+		/// Static factory method that creates bindings for all publicly writable instance properties (and, optionally, fields) of the given type.
+        /// Each property/field is bound to a <see cref="RezolvedTarget"/> instance - meaning that, at runtime, values for those properties or fields 
+        /// will be resolved from the container by type.
 		/// </summary>
-		/// <param name="type"></param>
+		/// <param name="type">The type whose properties (and, optionally, publicly writable fields) are to be bound.</param>
+        /// <param name="includeFields">If true, then publicly writable fields will be bound.</param>
 		/// <returns></returns>
 		public static PropertyOrFieldBinding[] DeriveAutoPropertyBinding(Type type, bool includeFields = false)
 		{
@@ -54,6 +56,12 @@ namespace Rezolver
 			return memberBindings.ToArray();
 		}
 
+        /// <summary>
+        /// Method for creating a Linq Expression MemberBinding object for the <see cref="Member"/>, to the expression produced by 
+        /// the <see cref="Target"/> object's <see cref="IRezolveTarget.CreateExpression(CompileContext)"/> method.
+        /// </summary>
+        /// <param name="context">The <see cref="CompileContext"/> under which the generated expression will be compiled.</param>
+        /// <returns></returns>
 		public MemberBinding CreateMemberBinding(CompileContext context)
 		{
 			return Expression.Bind(Member, Target.CreateExpression(new CompileContext(context, MemberType, true)));

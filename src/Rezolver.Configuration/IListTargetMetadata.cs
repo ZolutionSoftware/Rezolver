@@ -19,7 +19,7 @@ namespace Rezolver.Configuration
 		IRezolveTargetMetadataList Items { get; }
 
 		/// <summary>
-		/// Maps to the <see cref="ListTarget.IsArray"/> property.  If true, then an array of <see cref="ElementType"/>
+		/// Maps to the <see cref="ListTarget.AsArray"/> property.  If true, then an array of <see cref="ElementType"/>
 		/// will be created, otherwise a List&lt;<see cref="ElementType"/>&gt; will be created by the ListTarget
 		/// created from this metadata.
 		/// </summary>

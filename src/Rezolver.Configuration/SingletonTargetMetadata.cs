@@ -55,15 +55,13 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// Called by <see cref="CreateRezolveTarget" /> to create the rezolve target that will be registered into the <see cref="IRezolverBuilder" />
-		/// currently being built (available on the <paramref name="context" />)
-		/// If an error occurs, you indicate that by adding to the <paramref name="context" />'s errors collection, and return null.
-		/// You can also throw an exception, which will be caught and added to the errors collection for you.
+		/// Implementation of the abstract method from the base class of the same name.
+		/// 
+		/// If <see cref="Scoped"/> is true, then this creates a new <see cref="ScopedTarget"/>; if false, it creates a new <see cref="SingletonTarget"/>
 		/// </summary>
 		/// <param name="targetTypes">The target types.</param>
 		/// <param name="context">The context.</param>
 		/// <param name="entry">The entry.</param>
-		/// <returns>IRezolveTarget.</returns>
 		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			return Scoped ? (IRezolveTarget)new ScopedTarget(Inner.CreateRezolveTarget(targetTypes, context, entry))

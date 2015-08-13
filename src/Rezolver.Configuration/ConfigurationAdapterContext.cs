@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-	/// <summary>
-	/// This class is used to store the intermediate state for the default <see cref="IConfigurationAdapter"/>
-	/// implementation's (<see cref="ConfigurationAdapter"/>) parsing 
-	/// operation on an IConfiguration instance.  If you are extending the default adapter you
-	/// might need also to extend this class to ensure any additional state you require is maintained.
-	/// </summary>
-	public class ConfigurationAdapterContext
+    /// <summary>
+    /// This class is used to store the intermediate state for the default <see cref="IConfigurationAdapter"/>
+    /// implementation's (<see cref="ConfigurationAdapter"/>) parsing 
+    /// operation on an <see cref="IConfiguration"/> instance.  If you are extending the default adapter you
+    /// might need also to extend this class to ensure any additional state you require is maintained.
+    /// </summary>
+    public class ConfigurationAdapterContext
 	{
 		/// <summary>
 		/// Used as a sentinel type by the <see cref="ResolveType"/> method when the type search fails.
@@ -93,14 +93,15 @@ namespace Rezolver.Configuration
 			_references = new Dictionary<string, Assembly>();
 			_using = new HashSet<string>();
 		}
-		/// <summary>
-		/// Constructs a new instance of the <see cref="ConfigurationAdapterContext"/> class.
-		/// </summary>
-		/// <param name="configuration">Required. The configuration that is being processed by the adapter for which this
-		/// context is being constructed</param>
-		/// <param name="defaultAssemblyReferences">Optional. Default set of assemblies that are to be searched for types
-		/// when type references are processed.</param>
-		public ConfigurationAdapterContext(IConfigurationAdapter adapter, IConfiguration configuration, IEnumerable<Assembly> defaultAssemblyReferences = null)
+        /// <summary>
+        /// Constructs a new instance of the <see cref="ConfigurationAdapterContext"/> class.
+        /// </summary>
+        /// <param name="adapter">The adapter that will create the <see cref="IRezolverBuilder"/> from the configuration.</param>
+        /// <param name="configuration">Required. The configuration that is being processed by the adapter for which this
+        /// context is being constructed</param>
+        /// <param name="defaultAssemblyReferences">Optional. Default set of assemblies that are to be searched for types
+        /// when type references are processed.</param>
+        public ConfigurationAdapterContext(IConfigurationAdapter adapter, IConfiguration configuration, IEnumerable<Assembly> defaultAssemblyReferences = null)
 			: this()
 		{
 			if (adapter == null)
@@ -324,7 +325,7 @@ namespace Rezolver.Configuration
 		/// <param name="genericParameterCount">Used as a hint when multiple versions of the same type exist with open generic parameters
 		/// and potentially with no generic parameters.  Null means that either a generic or non-generic type can match. Zero means that
 		/// only a non-generic type (or a closed generic type) can match.  Any other positive value means that only an open generic type
-		/// with that exact number of parameters can match.
+		/// with that exact number of parameters can match.</param>
 		/// <returns>A Type reference if the type is located, otherwise null.</returns>
 		/// <exception cref="System.Reflection.AmbiguousMatchException">If more than one type could be matched with the given name,
 		/// typically due to namespace imports being used and more than type being available which has the same </exception>
@@ -406,13 +407,12 @@ namespace Rezolver.Configuration
 		/// <summary>
 		/// Attempts to convert the passed <paramref name="typeReference" /> into a <see cref="System.Type"/>.
 		/// 
-		/// Errors are added to the <paramref name="context"/> if the method returns false.
+		/// Errors are added to this context's <see cref="Errors"/> if the method returns false.
 		/// </summary>
 		/// <param name="typeReference">The type reference.</param>
-		/// <param name="context">The context for the operation.</param>
 		/// <param name="type">The type that is identified, if successful.</param>
 		/// <returns><c>true</c> if the type reference is successfully parsed, <c>false</c> otherwise (with errors being added
-		/// to the <paramref name="context"/>).</returns>
+		/// to the <see cref="Errors"/> collection).</returns>
 		public virtual bool TryParseTypeReference(ITypeReference typeReference, out Type type)
 		{
 			if (typeReference is RuntimeTypeReference)
@@ -473,8 +473,7 @@ namespace Rezolver.Configuration
 		/// is returned in the <paramref name="types"/> output parameter.
 		/// </summary>
 		/// <param name="typeReferences">The type references.</param>
-		/// <param name="context">The context for the operation.</param>
-		/// <param name="types">Receives the types that are parsed.  Note that if the method returns true, 
+        /// <param name="types">Receives the types that are parsed.  Note that if the method returns true, 
 		/// then this list will contain the same number of types as there are references in <paramref name="typeReferences"/>, in the same order.
 		/// If the method returns false, however, then the number of results in this list is undefined and you will not be able to marry up the input
 		/// type reference to its output type.</param>

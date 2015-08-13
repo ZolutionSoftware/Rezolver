@@ -222,8 +222,12 @@ namespace Rezolver
 		/// <param name="inheritSharedExpressions">If true, then the <see cref="SharedExpressions"/> for this context will be shared
 		/// from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
 		/// false, however if you are chaining multiple targets' expressions together you will need to pass true.</param>
-		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false, bool suppressScopeTrackingExpressions = false)
-			: this(parentContext, inheritSharedExpressions, suppressScopeTrackingExpressions)
+        /// <param name="suppressScopeTracking">If true, then any expressions constructed from <see cref="IRezolveTarget"/> objects
+        /// should not contain automatically generated code to track objects in an enclosing scope.  The default is false.  This is 
+        /// typically only enabled when one target is explicitly using expressions created from other targets, and has its own
+        /// scope tracking code, or expects to be surrounded by automatically generated scope tracking code itself.</param>
+		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false, bool suppressScopeTracking = false)
+			: this(parentContext, inheritSharedExpressions, suppressScopeTracking)
 		{
 			_targetType = targetType;
 		}

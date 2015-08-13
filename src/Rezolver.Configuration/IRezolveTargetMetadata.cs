@@ -26,7 +26,7 @@ namespace Rezolver.Configuration
 
 		/// <summary>
 		/// Creates a new instance of this metadata (i.e. a clone) that is bound to the specified target types.
-		/// This is invoked if <see cref="DeclaredType"/> represents the <see cref="TypeReeference.Unbound"/> type reference.
+		/// This is invoked if <see cref="DeclaredType"/> represents the <see cref="TypeReference.Unbound"/> type reference.
 		/// </summary>
 		/// <param name="targetTypes">The target types.  Ideally there'd only be one of these, but since type registrations
 		/// can target multiple types - we need to be able to pass all of them.  An implementation should seek the best possible

@@ -41,10 +41,13 @@ namespace Rezolver.Configuration.Json
 
 		/// <summary>
 		/// Unwraps the metadata contained within this wrapper for the passed target types in readiness to 
-		/// be pushed into an IConfigurationEntry
+		/// be pushed into an IConfigurationEntry.  Note - if the metadata can't be unwrapped, then the method
+        /// will simply return this instance.
 		/// </summary>
-		/// <param name="forEntry"></param>
+		/// <param name="forTargetTypes">Type references that the unwrapped metadata should support.</param>
 		/// <returns></returns>
+        /// <remarks>Unwrapping is the process whereby a type declared for registration is back-referenced using the '$auto' unbound
+        /// type name in configuration for, say a constructor target or similar.</remarks>
 		public virtual IRezolveTargetMetadata UnwrapMetadata(ITypeReference[] forTargetTypes)
 		{
 			IRezolveTargetMetadata result = null;
@@ -59,6 +62,16 @@ namespace Rezolver.Configuration.Json
 
 			return result ?? _wrapped;
 		}
+
+        /// <summary>
+        /// Special case version of <see cref="UnwrapMetadata(ITypeReference[])"/> for metadata with the type <see cref="RezolveTargetMetadataType.Extension"/>.
+        /// 
+        /// The base implementation supports instances of the <see cref="RezolveTargetMetadataWrapper"/> type only - and simply chain the call through to its
+        /// UnwrapMetadata method.
+        /// </summary>
+        /// <param name="meta"></param>
+        /// <param name="forTargetTypes"></param>
+        /// <returns></returns>
 		protected virtual IRezolveTargetMetadata UnwrapExtensionMetadata(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
 		{
 			RezolveTargetMetadataWrapper wrapper = meta as RezolveTargetMetadataWrapper;
@@ -67,6 +80,12 @@ namespace Rezolver.Configuration.Json
 			return null;
 		}
 
+        /// <summary>
+        /// Unwraps an <see cref="IConstructorTargetMetadata"/> object by binding it to the <paramref name="forTargetTypes"/>.
+        /// </summary>
+        /// <param name="meta"></param>
+        /// <param name="forTargetTypes"></param>
+        /// <returns></returns>
 		protected virtual IRezolveTargetMetadata UnwrapConstructorMetadata(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
 		{
 			IConstructorTargetMetadata ctorMetadata = meta as IConstructorTargetMetadata;
@@ -84,6 +103,12 @@ namespace Rezolver.Configuration.Json
 			return null;
 		}
 
+        /// <summary>
+        /// Unwraps a list metadata (and any inner target metadata) for the target types.
+        /// </summary>
+        /// <param name="meta"></param>
+        /// <param name="forTargetTypes"></param>
+        /// <returns></returns>
 		protected virtual IRezolveTargetMetadata UnwrapListMetadata(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
 		{
 			//when unwrapping a list - the '$auto' virtual type reference can be used by inner targets 
@@ -115,6 +140,13 @@ namespace Rezolver.Configuration.Json
 			return null;
 		}
 
+        /// <summary>
+        /// Unwraps a series of metadata objects stored in the list (passed in the <paramref name="meta"/> parameter) for the target types,
+        /// returning another metadata list containing the unwrapped metadata objects.
+        /// </summary>
+        /// <param name="meta"></param>
+        /// <param name="forTargetTypes"></param>
+        /// <returns></returns>
 		protected IRezolveTargetMetadataList UnwrapMetadataList(IRezolveTargetMetadata meta, ITypeReference[] forTargetTypes)
 		{
 			//have to unwrap the outer list, and all the inner items, if applicable
@@ -124,6 +156,13 @@ namespace Rezolver.Configuration.Json
 			return null;
 		}
 
+        /// <summary>
+        /// Strongly-typed virtual method for unwrapping metadata lists (invoked by <see cref="UnwrapMetadataList(IRezolveTargetMetadata, ITypeReference[])"/> after 
+        /// confirming that the metadata passed to it is of the correct type.
+        /// </summary>
+        /// <param name="listMeta"></param>
+        /// <param name="forTargetTypes"></param>
+        /// <returns></returns>
 		protected virtual IRezolveTargetMetadataList UnwrapMetadataList(IRezolveTargetMetadataList listMeta, ITypeReference[] forTargetTypes)
 		{
 			return new RezolveTargetMetadataList(listMeta.Targets.Select(t => UnwrapMetadataIfNecessary(t, forTargetTypes)));
@@ -138,6 +177,15 @@ namespace Rezolver.Configuration.Json
 				return meta;
 		}
 
+        /// <summary>
+        /// Implementation of <see cref="CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)"/>, except this implementation always
+        /// throws a <see cref="NotSupportedException"/>, because it must be unwrapped (through a call to <see cref="UnwrapMetadata(ITypeReference[])"/>) before 
+        /// it can be used to create an <see cref="IRezolveTarget"/>.
+        /// </summary>
+        /// <param name="targetTypes"></param>
+        /// <param name="context"></param>
+        /// <param name="entry"></param>
+        /// <returns></returns>
 		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			throw new NotSupportedException("This metadata must be unwrapped for a specific set of target types - it is not possible to create a target from a wrapped metadata.");

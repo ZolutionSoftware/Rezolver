@@ -26,7 +26,7 @@ namespace Rezolver
 		IEnumerable<IRezolveTarget> Targets { get; }
 		/// <summary>
 		/// Adds a target to this entry, optionally checking first to see if it already exists.   If the
-		/// check is enabled (var <paramref name="checkkForDuplicates"/>) then the target will not be added.
+		/// check is enabled (var <paramref name="checkForDuplicates"/>) then the target will not be added.
 		/// </summary>
 		/// <param name="target"></param>
 		/// <param name="checkForDuplicates"></param>

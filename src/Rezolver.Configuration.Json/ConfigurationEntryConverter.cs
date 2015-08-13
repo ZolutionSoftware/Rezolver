@@ -87,9 +87,7 @@ namespace Rezolver.Configuration.Json
 		/// </summary>
 		/// <param name="reader"></param>
 		/// <param name="serializer"></param>
-		/// <param name="startPos">Position at which the type registration entry commence parsing</param>
 		/// <param name="lineInfo">Provides access to the current line/column position that the reader is at</param>
-		/// <param name="propName"></param>
 		/// <returns></returns>
 		IConfigurationEntry LoadTypeRegistrationEntry(JsonReader reader, JsonSerializer serializer, IJsonLineInfo lineInfo)
 		{

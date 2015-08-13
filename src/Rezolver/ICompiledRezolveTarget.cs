@@ -13,7 +13,7 @@ namespace Rezolver
 	public interface ICompiledRezolveTarget
 	{
 		/// <summary>
-		/// Called to get/create an object, potentially using the passed <see cref="context"/> to aid resolve additional dependencies.
+		/// Called to get/create an object, potentially using the passed <paramref name="context"/> to aid resolve additional dependencies.
 		/// </summary>
 		/// <param name="context">The current rezolve context.</param>
 		/// <returns>The object that is constructed.  The return value can legitimately be null.</returns>

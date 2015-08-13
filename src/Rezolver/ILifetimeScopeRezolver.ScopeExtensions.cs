@@ -19,10 +19,6 @@ namespace Rezolver
         /// are to be searched.</param>
         /// <param name="context">Required.  The context whose properties will be used to find the
         /// matching disposable.</param>
-        /// <param name="searchAncestors">Pass true to continue searching all parent scopes until one or 
-        /// more matches are found.  In this mode, an InvalidOperationException is thrown if any of the parent
-        /// scopes contain more than one match.</param>
-        /// <returns>The matched object or null if one is not found.</returns>
         public static object GetSingleFromScope(this ILifetimeScopeRezolver scope, RezolveContext context)
         {
             scope.MustNotBeNull("scope");

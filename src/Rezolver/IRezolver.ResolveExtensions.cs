@@ -180,7 +180,7 @@ namespace Rezolver
         /// of the master.</param>
         /// <param name="result">Received the value, or a reference to the instance, that is resolved if the operation is successful.</param>
         /// <returns><c>true</c> if the object was resolved, <c>false</c> otherwise.</returns>
-        /// <remarks>For more detail on the <paramref name="type"/> parameter, see one of the non-generic <see cref="Resolve"/> 
+        /// <remarks>For more detail on the <paramref name="type"/> parameter, see <see cref="Resolve(IRezolver, Type, ILifetimeScopeRezolver)"/> 
         /// overloads</remarks>
         public static bool TryResolve(this IRezolver rezolver, Type type, ILifetimeScopeRezolver scope, out object result)
         {
@@ -203,7 +203,7 @@ namespace Rezolver
         /// of the master.</param>
         /// <param name="result">Received the value, or a reference to the instance, that is resolved if the operation is successful.</param>
         /// <returns><c>true</c> if the object was resolved, <c>false</c> otherwise.</returns>
-        /// <remarks>For more detail on the <paramref name="type"/> parameter, see one of the non-generic <see cref="Resolve"/> 
+        /// <remarks>For more detail on the <paramref name="type"/> parameter, see <see cref="Resolve(IRezolver, Type, string, ILifetimeScopeRezolver)"/> 
         /// overloads</remarks>
         public static bool TryResolve(this IRezolver rezolver, Type type, string name, ILifetimeScopeRezolver scope, out object result)
         {

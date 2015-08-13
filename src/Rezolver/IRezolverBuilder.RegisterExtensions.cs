@@ -50,7 +50,6 @@ namespace Rezolver
         /// <param name="commonServiceType">Optional - instead of determining the common service type automatically,
         /// you can provide it in advance through this parameter.  Note that all targets must support this type.</param>
         /// <param name="path">Optional path under which this registration is to be made.</param>
-        /// <param name="append"></param>
         public static void RegisterMultiple(this IRezolverBuilder builder, IEnumerable<IRezolveTarget> targets, Type commonServiceType = null, RezolverPath path = null)
         {
             targets.MustNotBeNull("targets");

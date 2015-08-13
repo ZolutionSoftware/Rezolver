@@ -236,7 +236,7 @@ namespace Rezolver.Configuration
 		/// <item><description>Attempt to convert the entry to an <see cref="ITypeRegistrationEntry"/></description></item>
 		/// <item><description>Parsing its type references in <see cref="ITypeRegistrationEntry.Types"/></description></item>
 		/// <item><description>Constructing an <see cref="IRezolveTarget"/> from the entry's <see cref="ITypeRegistrationEntry.TargetMetadata"/> through
-		/// a call to <see cref="CreateTarget"/>.</description></item>
+		/// a call to its <see cref="IRezolveTargetMetadata.CreateRezolveTarget(Type[], ConfigurationAdapterContext, IConfigurationEntry)"/> method.</description></item>
 		/// <item><description>If that returns a non-null target, then a <see cref="RegisterInstruction"/> is created and returned.</description></item>
 		/// </list>
 		/// </remarks>

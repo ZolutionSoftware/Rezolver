@@ -93,6 +93,7 @@ namespace Rezolver
         /// <param name="obj"></param>
         /// <param name="type"></param>
         /// <param name="path"></param>
+        /// <param name="suppressScopeTracking"></param>
         public static void RegisterObject<T>(this IRezolver rezolver, T obj, Type type = null, RezolverPath path = null, bool suppressScopeTracking = true)
         {
             rezolver.MustNotBeNull("rezolver");

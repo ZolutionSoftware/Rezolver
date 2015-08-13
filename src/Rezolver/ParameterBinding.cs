@@ -88,7 +88,7 @@ namespace Rezolver
 			if (methods.Length == 0) throw new ArgumentException("The methods array must contain at least one item", "methods");
 
 			//notice that the list is ordered most-greedy first.  This means that given a choice between two methods where the only difference
-			///is a bunch of optional arguments in one, then that one will win out.
+			//is a bunch of optional arguments in one, then that one will win out.
 			var candidates = methods.Select(m => {
 				ParameterBinding[] bindings;
 				BindMethod(m, args, out bindings);
