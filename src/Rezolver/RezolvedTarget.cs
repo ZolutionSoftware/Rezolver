@@ -25,7 +25,7 @@ namespace Rezolver
 		private static readonly ConstructorInfo RezolveContextCtor =
 			MethodCallExtractor.ExtractConstructorCall(() => new RezolveContext((IRezolver)null, (Type)null, (string)null, (ILifetimeScopeRezolver)null));
 
-		private static readonly MethodInfo ContextNewContextMethod = 
+		private static readonly MethodInfo ContextNewContextMethod =
 			MethodCallExtractor.ExtractCalledMethod((RezolveContext context) => context.CreateNew((Type)null, (string)null));
 
 		//this one cannot be obtained via expression extraction - as it uses an output parameter and there's no way of
@@ -57,13 +57,18 @@ namespace Rezolver
 		{
 			get { return _resolveType; }
 		}
-        protected override Expression CreateScopeTrackingExpression(CompileContext context, Expression expression)
-        {
-            // makes no sense to force the result of this target to be tracked in a scope, since
-            //it's a call to a rezolver anyway.
-            return expression;
-        }
-        protected override Expression CreateExpressionBase(CompileContext context)
+
+		/// <summary>
+		/// Always returns true - we never wrap calls to a rezolver inside a scope tracking expression.
+		/// </summary>
+		protected override bool SuppressScopeTracking
+		{
+			get
+			{
+				return true;
+			}
+		}
+		protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			//we get the expression for the name that is to be rezolved.  That could be null.  If not, 
 			//then we have that to bake in the generated code.
@@ -79,11 +84,11 @@ namespace Rezolver
 
 			//this is the underlying expression to use for the name in the compiled code
 			var nameContext = new CompileContext(context, typeof(string), true);
-			Expression nameExpr = _resolveNameTarget != null 
+			Expression nameExpr = _resolveNameTarget != null
 				? _resolveNameTarget.CreateExpression(nameContext) : Expression.Default(typeof(string));
 			//we also need to compile this name for static use.
 			ICompiledRezolveTarget nameCompiled = _resolveNameTarget != null ?
-				context.Rezolver.Compiler.CompileTarget(_resolveNameTarget,  nameContext) : null;
+				context.Rezolver.Compiler.CompileTarget(_resolveNameTarget, nameContext) : null;
 
 			//this needs to do a check to see if the inbound rezolver is different to the one we've got here
 			//if it is, then we will defer to a resolve call on that rezolver.  Otherwise we will use the static
@@ -119,22 +124,22 @@ namespace Rezolver
 
 			if (staticExpr.Type != finalType)
 				staticExpr = Expression.Convert(staticExpr, finalType);
-			
-		
+
+
 			Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextRezolverPropertyExpression, RezolverCanResolveMethod, newContextLocal),
 					Expression.Convert(Expression.Call(context.ContextRezolverPropertyExpression, RezolverResolveMethod, newContextLocal), finalType),
 					staticExpr
 				);
 
-//#if DEBUG
-//			var expression = Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
-//				staticExpr,
-//				useContextRezolverIfCanExpr);
-//			Debug.WriteLine("RezolvedTarget expression for {0}: {1}", finalType, expression);
-//			return expression;
-//#else
+			//#if DEBUG
+			//			var expression = Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
+			//				staticExpr,
+			//				useContextRezolverIfCanExpr);
+			//			Debug.WriteLine("RezolvedTarget expression for {0}: {1}", finalType, expression);
+			//			return expression;
+			//#else
 			List<Expression> blockExpressions = new List<Expression>();
-			if(setNewContextFirst)
+			if (setNewContextFirst)
 				blockExpressions.Add(setNewContextLocal);
 			else
 				useContextRezolverIfCanExpr = Expression.Block(finalType, setNewContextLocal, useContextRezolverIfCanExpr);
@@ -151,7 +156,7 @@ namespace Rezolver
 				return blockExpressions[0];
 			else
 				return Expression.Block(finalType, blockExpressions);
-//#endif
+			//#endif
 		}
 	}
 }

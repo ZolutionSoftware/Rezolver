@@ -6,8 +6,8 @@ using Xunit;
 
 namespace Rezolver.Tests.vNext
 {
-    public class RezolverBuilderTests_Multiple
-    {
+	public class RezolverBuilderTests_Multiple
+	{
 		class FakeTarget : IRezolveTarget
 		{
 			public Type DeclaredType
@@ -30,12 +30,12 @@ namespace Rezolver.Tests.vNext
 		}
 
 		[Fact]
-        public void ShouldFetchDefault()
-        {
+		public void ShouldFetchDefault()
+		{
 			RezolverBuilder builder = new RezolverBuilder();
 			var targets = Enumerable.Range(0, 3).Select(i => new FakeTarget()).ToArray();
 
-			foreach(var target in targets)
+			foreach (var target in targets)
 			{
 				builder.Register(target, typeof(RezolverBuilderTests_Multiple));
 			}
@@ -43,7 +43,7 @@ namespace Rezolver.Tests.vNext
 			var entry = builder.Fetch(typeof(RezolverBuilderTests_Multiple), null);
 
 			Assert.Same(targets[2], entry.DefaultTarget);
-        }
+		}
 
 		[Fact]
 		public void ShouldFetchIEnumerableForSingleRegistration()
@@ -56,5 +56,5 @@ namespace Rezolver.Tests.vNext
 
 			Assert.Same(target, entry.DefaultTarget);
 		}
-    }
+	}
 }

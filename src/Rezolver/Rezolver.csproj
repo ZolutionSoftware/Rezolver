@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="BlockExpressionLocalsRewriter.cs" />
     <Compile Include="CachingRezolver.cs" />
+    <Compile Include="ChangeTypeTarget.cs" />
     <Compile Include="CombinedRezolver.cs" />
     <Compile Include="CompileContext.cs" />
     <Compile Include="CompiledRezolveTargetBase.cs" />
