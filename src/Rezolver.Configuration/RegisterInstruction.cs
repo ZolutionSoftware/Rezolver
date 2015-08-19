@@ -52,13 +52,20 @@ namespace Rezolver.Configuration
 
 		/// <summary>
 		/// The implementation will register the target for the given types.
+		/// 
+		/// In the case of multiple types, the target is registered directly against that type,
+		/// and aliases are registered for all the others.
 		/// </summary>
 		/// <param name="builder"></param>
 		public override void Apply(IRezolverBuilder builder)
 		{
-			foreach (var type in TargetTypes)
+			var primaryType = TargetTypes.First();
+
+			builder.Register(Target, primaryType);
+			
+			foreach (var alias in TargetTypes.Skip(1))
 			{
-				builder.Register(Target, type);
+				builder.RegisterAlias(alias, primaryType);
 			}
 		}
 	}

@@ -98,16 +98,18 @@ namespace Rezolver
 			var nameStatic = nameCompiled != null ? (string)nameCompiled.GetObject(new RezolveContext(context.Rezolver, _resolveNameTarget.DeclaredType)) : null;
 			var staticTarget = context.DependencyBuilder.Fetch(DeclaredType, nameStatic);
 			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IRezolver));
-			var finalType = context.TargetType ?? DeclaredType;
-			var finalTypeExpr = Expression.Constant(finalType, typeof(Type));
+			//I did have a line that used 'context.TargetType ?? DeclaredType' but I changed this because the 
+			//RezolvedTarget should know in advance which type it is that's being resolved, and that shouldn't 
+			//change after creation.  It also fixed the initial set of bugs I had with resolving aliases.
+			var declaredTypeExpr = Expression.Constant(DeclaredType, typeof(Type));
 
 			var newContextLocal = context.GetOrAddSharedLocal(typeof(RezolveContext), "newContext");
-			var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, finalTypeExpr, nameExpr);
+			var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, declaredTypeExpr, nameExpr);
 			var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
 			bool setNewContextFirst = false;
 			Expression staticExpr = null;
 			if (staticTarget != null)
-				staticExpr = staticTarget.CreateExpression(context);
+				staticExpr = staticTarget.CreateExpression(new CompileContext(context, DeclaredType, true)); //need a new context here to change the resolve type to our declared type.
 			else
 			{
 				//represents a call back into the rezolver passed in the context to this method
@@ -122,27 +124,20 @@ namespace Rezolver
 			if (staticExpr == null)
 				throw new InvalidOperationException(string.Format(Resources.Exceptions.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
 
-			if (staticExpr.Type != finalType)
-				staticExpr = Expression.Convert(staticExpr, finalType);
+			if (staticExpr.Type != DeclaredType)
+				staticExpr = Expression.Convert(staticExpr, DeclaredType);
 
 
 			Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextRezolverPropertyExpression, RezolverCanResolveMethod, newContextLocal),
-					Expression.Convert(Expression.Call(context.ContextRezolverPropertyExpression, RezolverResolveMethod, newContextLocal), finalType),
+					Expression.Convert(Expression.Call(context.ContextRezolverPropertyExpression, RezolverResolveMethod, newContextLocal), DeclaredType),
 					staticExpr
 				);
 
-			//#if DEBUG
-			//			var expression = Expression.Condition(Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver),
-			//				staticExpr,
-			//				useContextRezolverIfCanExpr);
-			//			Debug.WriteLine("RezolvedTarget expression for {0}: {1}", finalType, expression);
-			//			return expression;
-			//#else
 			List<Expression> blockExpressions = new List<Expression>();
 			if (setNewContextFirst)
 				blockExpressions.Add(setNewContextLocal);
 			else
-				useContextRezolverIfCanExpr = Expression.Block(finalType, setNewContextLocal, useContextRezolverIfCanExpr);
+				useContextRezolverIfCanExpr = Expression.Block(DeclaredType, setNewContextLocal, useContextRezolverIfCanExpr);
 
 			//note the use of the shared expression here - which enables an advanced optimisation specifically connected with
 			//conditionals
@@ -150,12 +145,10 @@ namespace Rezolver
 				staticExpr,
 				useContextRezolverIfCanExpr));
 
-
-
 			if (blockExpressions.Count == 1)
 				return blockExpressions[0];
 			else
-				return Expression.Block(finalType, blockExpressions);
+				return Expression.Block(DeclaredType, blockExpressions);
 			//#endif
 		}
 	}

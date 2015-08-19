@@ -196,13 +196,26 @@ namespace Rezolver
 		}
 
 		/// <summary>
+		/// Generic version of <see cref="RegisterAlias{TAlias, TAliased}(IRezolverBuilder, RezolverPath, RezolverPath)"/>, see that method for more.
+		/// </summary>
+		/// <typeparam name="TAlias">Type being registered as an alias to another type</typeparam>
+		/// <typeparam name="TAliased">The target type of the alias.</typeparam>
+		/// <param name="builder"><see cref="RegisterAlias{TAlias, TAliased}(IRezolverBuilder, RezolverPath, RezolverPath)"/></param>
+		/// <param name="aliasPath"><see cref="RegisterAlias{TAlias, TAliased}(IRezolverBuilder, RezolverPath, RezolverPath)"/></param>
+		/// <param name="aliasedPath"><see cref="RegisterAlias{TAlias, TAliased}(IRezolverBuilder, RezolverPath, RezolverPath)"/></param>
+		public static void RegisterAlias<TAlias, TAliased>(this IRezolverBuilder builder, RezolverPath aliasPath = null, RezolverPath aliasedPath = null)
+		{
+			RegisterAlias(builder, typeof(TAlias), typeof(TAliased), aliasPath, aliasedPath);
+		}
+
+		/// <summary>
 		/// Registers an alias for one type and path to another type and path.
 		/// 
 		/// The created entry will effectively represent a second Resolve call into the container for the aliased type.
 		/// </summary>
-		/// <typeparam name="TAlias">The type to be registered as an alias</typeparam>
-		/// <typeparam name="TAliased">The type being aliased.</typeparam>
 		/// <param name="builder">The builder in which the alias is to be registered</param>
+		/// <param name="aliasType">The type to be registered as an alias</param>
+		/// <param name="aliasedType">The type being aliased.</param>
 		/// <param name="aliasPath">Optional. The path under which the alias will be registered.</param>
 		/// <param name="aliasedPath">Optional. The path that is to be used when searching for the aliased target.</param>
 		/// <remarks>Use this when it's important that a given target type is always served through the same compiled target, even when the consumer
@@ -211,20 +224,20 @@ namespace Rezolver
 		/// 
 		/// If you register the singleton against TAliased, then register an alias for TAlias, then regardless of which type that is requested, it'll
 		/// always be the same instance that is served.</remarks>
-		public static void RegisterAlias<TAlias, TAliased>(this IRezolverBuilder builder, RezolverPath aliasPath = null, RezolverPath aliasedPath = null)
+		public static void RegisterAlias(this IRezolverBuilder builder, Type aliasType, Type aliasedType, RezolverPath aliasPath = null, RezolverPath aliasedPath = null)
 		{
 			builder.MustNotBeNull(nameof(builder));
-			typeof(TAlias).MustNot(t => t == typeof(TAliased), "The aliased type and alias must be different", nameof(TAlias));
-			IRezolveTarget target = new RezolvedTarget(typeof(TAliased), aliasedPath != null ? aliasedPath.ToString() : null);
+			aliasType.MustNot(t => t == aliasedType, "The aliased type and alias must be different", nameof(aliasType));
+			IRezolveTarget target = new RezolvedTarget(aliasedType, aliasedPath != null ? aliasedPath.ToString() : null);
 			//if there's no implicit conversion to our alias type from the aliased type, but there is
 			//the other way around, then we need to stick in an explicit change of type, otherwise the registration will
 			//fail.  This does, unfortunately, give rise to the situation where we could be performing an invalid cast - but that
 			//will come out in the wash at runtime.
-			if (!TypeHelpers.IsAssignableFrom(typeof(TAlias), typeof(TAliased)) &&
-				TypeHelpers.IsAssignableFrom(typeof(TAliased), typeof(TAlias)))
-				target = new ChangeTypeTarget(target, typeof(TAlias));
+			if (!TypeHelpers.IsAssignableFrom(aliasType, aliasedType) &&
+				TypeHelpers.IsAssignableFrom(aliasedType, aliasType))
+				target = new ChangeTypeTarget(target, aliasType);
 
-			builder.Register(target, typeof(TAlias), aliasPath);
+			builder.Register(target, aliasType, aliasPath);
 		}
   }
 }

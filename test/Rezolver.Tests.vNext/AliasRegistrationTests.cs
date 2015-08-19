@@ -63,10 +63,12 @@ namespace Rezolver.Tests.vNext
 
 			var container = new DefaultRezolver(builder);
 			var first = container.Resolve<SingletonTest>();
-			var second = container.Resolve<ISingletonTest>();
+			var second = container.Resolve<SingletonTest>();
+			var third = container.Resolve<ISingletonTest>();
 
 			Assert.Equal(SingletonTest.LastCounter, first.ThisCounter);
 			Assert.Equal(first.ThisCounter, second.ThisCounter);
+			Assert.Equal(second.ThisCounter, third.ThisCounter);
 
 			Assert.Same(first, second);
 		}
