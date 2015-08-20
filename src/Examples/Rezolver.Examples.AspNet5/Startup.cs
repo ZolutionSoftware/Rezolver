@@ -40,11 +40,11 @@ namespace Rezolver.Examples.AspNet5
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
             // services.AddWebApiConventions();
 
-            var provider = services.BuildServiceProvider();
+            var baseProvider = services.BuildServiceProvider();
 
             //see the Asp.Net MVC 6 sample in github - early resolving of the application environment
             //enables us to see if we have a rezolver.json file.
-            var appEnv = provider.GetRequiredService<IApplicationEnvironment>();
+            var appEnv = baseProvider.GetRequiredService<IApplicationEnvironment>();
             //note - the code below does not work for DNX451, because the assembly target compiler produces compiled
             //code that is denied access to at least one constructor that is being used by the standard set of service registrations
 //            IRezolveTargetCompiler compiler = null;
@@ -58,10 +58,10 @@ namespace Rezolver.Examples.AspNet5
 
             rezolver.Populate(services);
 
-            provider = rezolver;
+            //provider = rezolver;
 
 
-            return provider;
+            return rezolver;
         }
 
         // Configure is called after ConfigureServices is called.
