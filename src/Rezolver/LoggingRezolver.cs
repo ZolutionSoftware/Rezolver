@@ -14,54 +14,12 @@ namespace Rezolver
 		void Exception(int reqId, Exception ex);
 	}
 
-	public class LoggingLifetimeScopeResolver : LoggingRezolver, ILifetimeScopeRezolver
-	{
-		public LoggingLifetimeScopeResolver(ILifetimeScopeRezolver innerRezolver, IRezolverLogger logger)
-			: base(innerRezolver, logger)
-		{
-			
-		}
-
-		public ILifetimeScopeRezolver ParentScope
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public void AddToScope(object obj, RezolveContext context = null)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Dispose()
-		{
-			GC.SuppressFinalize(this);
-			Dispose(true);
-		}
-
-		protected virtual bool Dispose(bool disposing)
-		{
-
-		}
-
-		public IEnumerable<object> GetFromScope(RezolveContext context)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
 	public class LoggingRezolver : IRezolver
 	{
 		private readonly IRezolver _innerRezolver;
-		private readonly IRezolverLogger _logger;
 
-		public LoggingRezolver(IRezolver innerRezolver, IRezolverLogger logger)
-		{
-			_innerRezolver = innerRezolver;
-			_logger = logger;
-		}
+		protected IRezolverLogger Logger { get; private set; }
+
 
 		public IRezolverBuilder Builder
 		{
@@ -79,9 +37,23 @@ namespace Rezolver
 			}
 		}
 
+		public LoggingRezolver(IRezolver innerRezolver, IRezolverLogger logger)
+		{
+			_innerRezolver = innerRezolver;
+			Logger = logger;
+		}
+
+		/// <summary>
+		/// Log a call to a method with 
+		/// </summary>
+		/// <typeparam name="TResult"></typeparam>
+		/// <param name="call"></param>
+		/// <param name="context"></param>
+		/// <param name="methodName"></param>
+		/// <returns></returns>
 		protected TResult LogCallWithResult<TResult>(Func<IRezolver, TResult> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
 		{
-			var reqId = _logger.CallStart(context, methodName);
+			var reqId = Logger.CallStart(context, methodName);
 
 			TResult result;
 
@@ -91,12 +63,29 @@ namespace Rezolver
 			}
 			catch(Exception ex)
 			{
-				_logger.Exception(reqId, ex);
+				Logger.Exception(reqId, ex);
 				throw;
 			}
 
-			_logger.CallResult(reqId, result);
+			Logger.CallResult(reqId, result);
 			return result;
+		}
+
+		protected void LogCall(Action<IRezolver> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
+		{
+			var reqId = Logger.CallStart(context, methodName);
+
+			try
+			{
+				call(_innerRezolver);
+			}
+			catch (Exception ex)
+			{
+				Logger.Exception(reqId, ex);
+				throw;
+			}
+
+			Logger.CallEnd(reqId);
 		}
 
 		public bool CanResolve(RezolveContext context)
@@ -106,27 +95,114 @@ namespace Rezolver
 
 		public ILifetimeScopeRezolver CreateLifetimeScope()
 		{
-			return LogCallWithResult(r => new )
+			return LogCallWithResult(r => new LoggingLifetimeScopeResolver(r.CreateLifetimeScope(), Logger));
 		}
 
 		public ICompiledRezolveTarget FetchCompiled(RezolveContext context)
 		{
-			throw new NotImplementedException();
+			return LogCallWithResult(r => r.FetchCompiled(context));
 		}
 
 		public object GetService(Type serviceType)
 		{
-			throw new NotImplementedException();
+			return LogCallWithResult(r => r.GetService(serviceType));
 		}
 
 		public object Resolve(RezolveContext context)
 		{
-			throw new NotImplementedException();
+			return LogCallWithResult(r => r.Resolve(context));
 		}
 
 		public bool TryResolve(RezolveContext context, out object result)
 		{
-			throw new NotImplementedException();
+			object tempResult = null;
+			var @return = LogCallWithResult(r => r.TryResolve(context, out tempResult));
+			result = tempResult;
+			return @return;
+		}
+	}
+
+	public class LoggingLifetimeScopeResolver : LoggingRezolver, ILifetimeScopeRezolver
+	{
+		private bool _disposed;
+
+		/// <summary>
+		/// note - you'd expect this to be the same as the inner rezolver's parent, but it won't be, because of the way
+		/// that this class decorates the inner rezolver.  In order for this to surface the correct parent, it has to be passed through,
+		/// and it is expected to be a Logging wrapper of the parent of the inner rezolver.
+		/// 
+		/// Note also, not always set...
+		/// </summary>
+		private readonly ILifetimeScopeRezolver _parentScope;
+		private readonly ILifetimeScopeRezolver _innerScopeRezolver;
+
+		public LoggingLifetimeScopeResolver(ILifetimeScopeRezolver innerRezolver, IRezolverLogger logger, ILifetimeScopeRezolver parentScope = null)
+			: base(innerRezolver, logger)
+		{
+			_parentScope = parentScope;
+			_innerScopeRezolver = innerRezolver;
+		}
+
+		public ILifetimeScopeRezolver ParentScope
+		{
+			get
+			{
+				return _parentScope;
+			}
+		}
+
+		protected TResult LogCallWithResult<TResult>(Func<ILifetimeScopeRezolver, TResult> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
+		{
+			var reqId = Logger.CallStart(context, methodName);
+
+			TResult result;
+
+			try
+			{
+				result = call(_innerScopeRezolver);
+			}
+			catch (Exception ex)
+			{
+				Logger.Exception(reqId, ex);
+				throw;
+			}
+
+			Logger.CallResult(reqId, result);
+			return result;
+		}
+
+		protected void LogCall(Action<ILifetimeScopeRezolver> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
+		{
+
+		}
+
+		public void AddToScope(object obj, RezolveContext context = null)
+		{
+			//LogCall()
+		}
+
+		public void Dispose()
+		{
+			GC.SuppressFinalize(this);
+			Dispose(true);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (_disposed)
+				return;
+
+			if (disposing)
+			{
+				_innerScopeRezolver.Dispose();
+			}
+
+			_disposed = true;
+		}
+
+		public IEnumerable<object> GetFromScope(RezolveContext context)
+		{
+			return LogCallWithResult(r => r.GetFromScope(context), context);
 		}
 	}
 

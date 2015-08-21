@@ -48,7 +48,7 @@ namespace Rezolver
 			//conduct a very simple search for the constructor with the most parameters
 			declaredType.MustNotBeNull("declaredType");
 
-			var ctorGroups = declaredType.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+			var ctorGroups = TypeHelpers.GetConstructors(declaredType)
 				.GroupBy(c => c.GetParameters().Length)
 				.OrderByDescending(g => g.Key).ToArray();
 
@@ -114,7 +114,7 @@ namespace Rezolver
 		internal static IRezolveTarget WithArgsInternal(Type declaredType, IDictionary<string, IRezolveTarget> args)
 		{
 			MethodBase ctor = null;
-			var bindings = ParameterBinding.BindOverload(declaredType.GetConstructors(BindingFlags.Public | BindingFlags.Instance), args, out ctor);
+			var bindings = ParameterBinding.BindOverload(TypeHelpers.GetConstructors(declaredType), args, out ctor);
 
 			return new ConstructorTarget(declaredType, (ConstructorInfo)ctor, bindings);
 		}
@@ -126,11 +126,11 @@ namespace Rezolver
 
 			if (newExpr == null)
 			{
-				ctor = declaredType.GetConstructor(EmptyTypes);
+				ctor = TypeHelpers.GetConstructor(declaredType, EmptyTypes);
 
 				if (ctor == null)
 				{
-					ctor = declaredType.GetConstructors().FirstOrDefault(c => c.GetParameters().All(p => p.IsOptional));
+					ctor = TypeHelpers.GetConstructors(declaredType).FirstOrDefault(c => c.GetParameters().All(p => p.IsOptional));
 					if (ctor == null)
 						throw new ArgumentException(
 							string.Format(

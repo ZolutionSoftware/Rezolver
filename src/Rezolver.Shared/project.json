@@ -17,7 +17,7 @@
                 "Microsoft.CSharp": "4.0.0.0"
             }
         },
-        "dnx451": {
+        "netcore45": {
             "frameworkAssemblies": {
                 "System": "4.0.0.0",
                 "System.Core": "4.0.0.0",

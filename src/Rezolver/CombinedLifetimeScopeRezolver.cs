@@ -55,11 +55,6 @@ namespace Rezolver
 
         public override ILifetimeScopeRezolver CreateLifetimeScope()
         {
-            //interesting thing here - is how to handle nested scopes.  A nested lifetime Builder
-            //should, in general, track objects it creates, and they should NOT be tracked by parent scopes.
-            //however, limited-lifetime targets - i.e. scoped singletons - SHOULD be tracked by parent scopes,
-            //and any child scopes that request the same object should receive the one created from the 
-            //parent Builder.
             var toReturn = new CombinedLifetimeScopeRezolver(this);
             _children.Add(toReturn);
             return toReturn;
