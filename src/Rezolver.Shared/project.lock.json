@@ -4,6 +4,7 @@
   "targets": {
     ".NETFramework,Version=v4.5": {},
     ".NETCore,Version=v4.5": {},
+    "WindowsPhoneApp,Version=v8.1": {},
     ".NETPlatform,Version=v5.0": {
       "Microsoft.CSharp/4.0.0-beta-23109": {
         "dependencies": {
@@ -1038,6 +1039,16 @@
       "fx/System.Reflection.Extensions >= 4.0.0.0",
       "fx/System.Reflection.Primitives >= 4.0.0.0",
       "fx/System.Runtime >= 4.0.0.0",
+      "fx/Microsoft.CSharp >= 4.0.0.0"
+    ],
+    "WindowsPhoneApp,Version=v8.1": [
+      "fx/System >= 4.0.0.0",
+      "fx/System.Core >= 4.0.0.0",
+      "fx/System.Linq >= 4.0.0.0",
+      "fx/System.Reflection >= 4.0.0.0",
+      "fx/System.Reflection.Extensions >= 4.0.0.0",
+      "fx/System.Reflection.Primitives >= 4.0.0.0",
+      "fx/System.Runtime >= 4.0.10.0",
       "fx/Microsoft.CSharp >= 4.0.0.0"
     ],
     ".NETPlatform,Version=v5.0": [

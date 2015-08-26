@@ -130,10 +130,10 @@ namespace Rezolver
 		private RezolveContext(IRezolver rezolver)
 		{
 			_rezolver = rezolver ?? StubRezolver.Instance;
-            //automatically inherit the rezolver as this context's scope, if it's of the correct type.
-            //note - all the other constructors chain to this one.  Note that other constructors
-            //might supply a separate scope in addition, which will overwrite the scope set here.
-            _scope = rezolver as ILifetimeScopeRezolver;
+			//automatically inherit the rezolver as this context's scope, if it's of the correct type.
+			//note - all the other constructors chain to this one.  Note that other constructors
+			//might supply a separate scope in addition, which will overwrite the scope set here.
+			_scope = rezolver as ILifetimeScopeRezolver;
 		}
 
 
@@ -157,14 +157,14 @@ namespace Rezolver
 
 		public static bool operator ==(RezolveContext left, RezolveContext right)
 		{
-            //TODO: missing left/right null checking before descending into deep comparison here.  Possible NullReferenceException
-			return object.ReferenceEquals(left, right) || (left._requestedType == right._requestedType && left._name == right._name);
+			//TODO: missing left/right null checking before descending into deep comparison here.  Possible NullReferenceException
+			return object.ReferenceEquals(left, right) || (left != null && right != null && (left._requestedType == right._requestedType && left._name == right._name));
 		}
 
 		public static bool operator !=(RezolveContext left, RezolveContext right)
 		{
-            //TODO: missing left/right null checking before descending into deep comparison here.  Possible NullReferenceException
-            return !object.ReferenceEquals(left, right) && (left._requestedType != right._requestedType || left._name != right._name);
+			//TODO: missing left/right null checking before descending into deep comparison here.  Possible NullReferenceException
+			return !object.ReferenceEquals(left, right) && (left._requestedType != right._requestedType || left._name != right._name);
 		}
 
 		/// <summary>

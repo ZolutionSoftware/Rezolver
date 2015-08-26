@@ -80,6 +80,7 @@
     <Compile Include="ILifetimeScopeRezolver.cs" />
     <Compile Include="IPropertyBindingBehaviour.cs" />
     <Compile Include="IRezolver.cs" />
+    <Compile Include="IRezolverLogger.cs" />
     <Compile Include="IRezolveTargetCompiler.cs" />
     <Compile Include="IRezolveTargetAdapter.cs" />
     <Compile Include="IChildRezolverBuilder.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="CombinedLifetimeScopeRezolver.cs" />
     <Compile Include="DefaultLifetimeScopeRezolver.cs" />
     <Compile Include="ListTarget.cs" />
+    <Compile Include="LoggingLifetimeScopeRezolver.cs" />
     <Compile Include="LoggingRezolver.cs" />
     <Compile Include="NewExpressionToMemberInitRewriter.cs" />
     <Compile Include="PropertyOrFieldBinding.cs" />

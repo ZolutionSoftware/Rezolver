@@ -18,7 +18,7 @@
       }
     },
     "netcore45": {
-      "compilationOptions": { "define": [ "DOTNET" ]},
+      "compilationOptions": { "define": [ "DOTNET" ] },
       "frameworkAssemblies": {
         "System": "4.0.0.0",
         "System.Core": "4.0.0.0",
@@ -27,6 +27,19 @@
         "System.Reflection.Extensions": "4.0.0.0",
         "System.Reflection.Primitives": "4.0.0.0",
         "System.Runtime": "4.0.0.0",
+        "Microsoft.CSharp": "4.0.0.0"
+      }
+    },
+    "wpa81": {
+      "compilationOptions": { "define": [ "DOTNET" ] },
+      "frameworkAssemblies": {
+        "System": "4.0.0.0",
+        "System.Core": "4.0.0.0",
+        "System.Linq": "4.0.0.0",
+        "System.Reflection": "4.0.0.0",
+        "System.Reflection.Extensions": "4.0.0.0",
+        "System.Reflection.Primitives": "4.0.0.0",
+        "System.Runtime": "4.0.10.0",
         "Microsoft.CSharp": "4.0.0.0"
       }
     },
