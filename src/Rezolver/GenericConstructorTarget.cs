@@ -46,7 +46,7 @@ namespace Rezolver
 
             if (!TypeHelpers.IsInterface(genericType))
             {
-                var bases = TypeHelpers.GetAllBases(DeclaredType);
+                var bases = DeclaredType.GetAllBases();
                 var matchedBase = bases.FirstOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == genericType);
                 if (matchedBase != null)
                     return true;
@@ -107,7 +107,7 @@ namespace Rezolver
             //check whether it's a base or an interface
             var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
                 TypeHelpers.GetInterfaces(targetType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-                : TypeHelpers.GetAllBases(targetType).SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+                : targetType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
             if (mappedBase != null)
             {
                 var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);

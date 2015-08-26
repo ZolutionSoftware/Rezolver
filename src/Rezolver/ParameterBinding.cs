@@ -108,7 +108,7 @@ namespace Rezolver
 		{
 			bindings = null;
 			var temp = method.GetParameters().Select(p => new ParameterBinding(p, GetArgValue(p, args))).ToArray();
-			if(temp.All(pb => pb.Target != null && pb.Parameter.ParameterType.IsAssignableFrom(pb.Target.DeclaredType)))
+			if(temp.All(pb => pb.Target != null && TypeHelpers.IsAssignableFrom(pb.Parameter.ParameterType, pb.Target.DeclaredType)))
 			{
 				bindings = temp;
 				return true;

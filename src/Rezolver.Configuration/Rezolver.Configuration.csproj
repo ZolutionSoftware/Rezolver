@@ -39,6 +39,9 @@
     <Compile Include="..\Rezolver.Shared\Extensions\System\MustBeExtensions.cs">
       <Link>Extensions\System\MustBeExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Rezolver.Shared\TypeExtensions.cs">
+      <Link>TypeExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Rezolver.Shared\TypeHelpers.cs">
       <Link>TypeHelpers.cs</Link>
     </Compile>

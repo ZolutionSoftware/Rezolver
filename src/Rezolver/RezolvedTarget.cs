@@ -30,7 +30,7 @@ namespace Rezolver
 
 		//this one cannot be obtained via expression extraction - as it uses an output parameter and there's no way of
 		//modelling that to the compiler.
-		private static readonly MethodInfo RezolverTryResolveMethod = typeof(IRezolver).GetMethod("TryResolve");
+		private static readonly MethodInfo RezolverTryResolveMethod = TypeHelpers.GetMethod(typeof(IRezolver),"TryResolve");
 
 		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 

@@ -363,7 +363,7 @@ namespace Rezolver.Configuration
 						foreach (var a in GetReferencedAssemblies())
 						{
 #if DOTNET
-                            found = a.GetType(t, false, false);
+                            found = a.GetType(t);
 #else
                             found = a.GetType(t, false);
 #endif
@@ -375,7 +375,7 @@ namespace Rezolver.Configuration
 
 					if (expectedParamCount > 0)
 					{
-						foundTypes.RemoveAll(t => !TypeHelpers.IsGenericTypeDefinition(t) || t.GetGenericArguments().Length != genericParameterCount);
+						foundTypes.RemoveAll(t => !TypeHelpers.IsGenericTypeDefinition(t) || TypeHelpers.GetGenericArguments(t).Length != genericParameterCount);
 					}
 					else if (expectedParamCount == 0)
 					{

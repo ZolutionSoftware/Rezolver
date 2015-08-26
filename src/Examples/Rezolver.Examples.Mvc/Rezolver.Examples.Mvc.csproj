@@ -302,10 +302,6 @@
       <Project>{894b72f8-df08-47c4-bc4a-64ef48777ab4}</Project>
       <Name>Rezolver.Mvc5</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Rezolver\Rezolver.csproj">
-      <Project>{53870bd3-88ea-404d-8ab2-9bcb7040f1f6}</Project>
-      <Name>Rezolver</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

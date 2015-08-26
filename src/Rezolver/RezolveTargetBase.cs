@@ -174,8 +174,8 @@ namespace Rezolver
 				Type convertType = context.TargetType ?? DeclaredType;
 
 				if (convertType == typeof(object) && TypeHelpers.IsValueType(result.Type)
-					|| !convertType.IsAssignableFrom(DeclaredType)
-					|| !convertType.IsAssignableFrom(result.Type))
+					|| !TypeHelpers.IsAssignableFrom(convertType, DeclaredType)
+					|| !TypeHelpers.IsAssignableFrom(convertType, result.Type))
 					return Expression.Convert(result, convertType);
 
                 result = new RezolveTargetExpressionRewriter(context).Visit(result);

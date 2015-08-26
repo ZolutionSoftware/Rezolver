@@ -58,12 +58,31 @@
           "lib/dotnet/System.Collections.Concurrent.dll": {}
         }
       },
+      "System.ComponentModel/4.0.0-beta-23109": {
+        "dependencies": {
+          "System.Runtime": "4.0.20-beta-23109"
+        },
+        "compile": {
+          "ref/dotnet/System.ComponentModel.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.ComponentModel.dll": {}
+        }
+      },
       "System.Diagnostics.Debug/4.0.10-beta-23109": {
         "dependencies": {
           "System.Runtime": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Diagnostics.Debug.dll": {}
+        }
+      },
+      "System.Diagnostics.Tools/4.0.0-beta-23109": {
+        "dependencies": {
+          "System.Runtime": "4.0.0-beta-23109"
+        },
+        "compile": {
+          "ref/dotnet/System.Diagnostics.Tools.dll": {}
         }
       },
       "System.Diagnostics.Tracing/4.0.20-beta-23109": {
@@ -118,10 +137,10 @@
           "lib/dotnet/System.Linq.dll": {}
         }
       },
-      "System.Linq.Expressions/4.0.0-beta-23109": {
+      "System.Linq.Expressions/4.0.10-beta-23109": {
         "dependencies": {
-          "System.Reflection": "4.0.0-beta-23109",
-          "System.Runtime": "4.0.0-beta-23109"
+          "System.Runtime": "4.0.0-beta-23109",
+          "System.Reflection": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Linq.Expressions.dll": {}
@@ -228,6 +247,22 @@
           "ref/dotnet/System.Text.Encoding.dll": {}
         }
       },
+      "System.Text.RegularExpressions/4.0.10-beta-23109": {
+        "dependencies": {
+          "System.Runtime": "4.0.20-beta-23109",
+          "System.Resources.ResourceManager": "4.0.0-beta-23109",
+          "System.Collections": "4.0.10-beta-23109",
+          "System.Globalization": "4.0.10-beta-23109",
+          "System.Runtime.Extensions": "4.0.10-beta-23109",
+          "System.Threading": "4.0.10-beta-23109"
+        },
+        "compile": {
+          "ref/dotnet/System.Text.RegularExpressions.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/System.Text.RegularExpressions.dll": {}
+        }
+      },
       "System.Threading/4.0.10-beta-23109": {
         "dependencies": {
           "System.Runtime": "4.0.0-beta-23109",
@@ -328,6 +363,38 @@
         "ref/net46/_._"
       ]
     },
+    "System.ComponentModel/4.0.0-beta-23109": {
+      "serviceable": true,
+      "sha512": "JFzHUvX28tQbud0c9AP+SFeOroBG9x7tgc0OYu0Z5nQotnIiwP5nHXq9DoK3N2y0MoRUt8jy2FwkRMAYgiQuNQ==",
+      "files": [
+        "System.ComponentModel.4.0.0-beta-23109.nupkg",
+        "System.ComponentModel.4.0.0-beta-23109.nupkg.sha512",
+        "System.ComponentModel.nuspec",
+        "lib/dotnet/System.ComponentModel.dll",
+        "lib/net45/_._",
+        "lib/netcore50/System.ComponentModel.dll",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/System.ComponentModel.dll",
+        "ref/dotnet/System.ComponentModel.xml",
+        "ref/dotnet/de/System.ComponentModel.xml",
+        "ref/dotnet/es/System.ComponentModel.xml",
+        "ref/dotnet/fr/System.ComponentModel.xml",
+        "ref/dotnet/it/System.ComponentModel.xml",
+        "ref/dotnet/ja/System.ComponentModel.xml",
+        "ref/dotnet/ko/System.ComponentModel.xml",
+        "ref/dotnet/ru/System.ComponentModel.xml",
+        "ref/dotnet/zh-hans/System.ComponentModel.xml",
+        "ref/dotnet/zh-hant/System.ComponentModel.xml",
+        "ref/net45/_._",
+        "ref/netcore50/System.ComponentModel.dll",
+        "ref/netcore50/System.ComponentModel.xml",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._"
+      ]
+    },
     "System.Diagnostics.Debug/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "woJsNwCtAqYac5zp+6Wy40HAp7kYr8zhaFvHl3gECjQf+VGeGYaHgDV1ATVcyMG1h6XvmX0wtmD5Qds51CRJoA==",
@@ -351,6 +418,39 @@
         "ref/dotnet/zh-hant/System.Diagnostics.Debug.xml",
         "ref/net46/_._",
         "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Debug.dll"
+      ]
+    },
+    "System.Diagnostics.Tools/4.0.0-beta-23109": {
+      "serviceable": true,
+      "sha512": "6tFdP3p3SV6DZOagwW5ThfUF+zp5pUIyW4CY2K4B2RxV6HGVyY/8J2EuZGrcEP3wdO5fXnb9MmdOZa5Tn01Hmg==",
+      "files": [
+        "System.Diagnostics.Tools.4.0.0-beta-23109.nupkg",
+        "System.Diagnostics.Tools.4.0.0-beta-23109.nupkg.sha512",
+        "System.Diagnostics.Tools.nuspec",
+        "lib/DNXCore50/System.Diagnostics.Tools.dll",
+        "lib/net45/_._",
+        "lib/netcore50/System.Diagnostics.Tools.dll",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/System.Diagnostics.Tools.dll",
+        "ref/dotnet/System.Diagnostics.Tools.xml",
+        "ref/dotnet/de/System.Diagnostics.Tools.xml",
+        "ref/dotnet/es/System.Diagnostics.Tools.xml",
+        "ref/dotnet/fr/System.Diagnostics.Tools.xml",
+        "ref/dotnet/it/System.Diagnostics.Tools.xml",
+        "ref/dotnet/ja/System.Diagnostics.Tools.xml",
+        "ref/dotnet/ko/System.Diagnostics.Tools.xml",
+        "ref/dotnet/ru/System.Diagnostics.Tools.xml",
+        "ref/dotnet/zh-hans/System.Diagnostics.Tools.xml",
+        "ref/dotnet/zh-hant/System.Diagnostics.Tools.xml",
+        "ref/net45/_._",
+        "ref/netcore50/System.Diagnostics.Tools.dll",
+        "ref/netcore50/System.Diagnostics.Tools.xml",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Tools.dll"
       ]
     },
     "System.Diagnostics.Tracing/4.0.20-beta-23109": {
@@ -512,17 +612,17 @@
         "ref/wpa81/_._"
       ]
     },
-    "System.Linq.Expressions/4.0.0-beta-23109": {
-      "sha512": "VAdRrUrNAfopTE2xDDadt7RV7Mq+FUHRj0qz4BadZCiIkLMAiVxRAj7SW8hOhcLjnvyQnwse3gE+qngr+/1ddA==",
+    "System.Linq.Expressions/4.0.10-beta-23109": {
+      "serviceable": true,
+      "sha512": "cy+sQJW809QnFHIXt5Y/If45u362gwiNqHldnJS70l7VCjyR4Bo3UgZMZl+bowSupWxqXk69cwCQhRUyFu2hVw==",
       "files": [
-        "License.rtf",
-        "System.Linq.Expressions.4.0.0-beta-23109.nupkg",
-        "System.Linq.Expressions.4.0.0-beta-23109.nupkg.sha512",
+        "runtime.json",
+        "System.Linq.Expressions.4.0.10-beta-23109.nupkg",
+        "System.Linq.Expressions.4.0.10-beta-23109.nupkg.sha512",
         "System.Linq.Expressions.nuspec",
-        "lib/net45/_._",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
+        "lib/DNXCore50/System.Linq.Expressions.dll",
+        "lib/net46/_._",
+        "lib/netcore50/System.Linq.Expressions.dll",
         "ref/dotnet/System.Linq.Expressions.dll",
         "ref/dotnet/System.Linq.Expressions.xml",
         "ref/dotnet/de/System.Linq.Expressions.xml",
@@ -534,21 +634,8 @@
         "ref/dotnet/ru/System.Linq.Expressions.xml",
         "ref/dotnet/zh-hans/System.Linq.Expressions.xml",
         "ref/dotnet/zh-hant/System.Linq.Expressions.xml",
-        "ref/net45/_._",
-        "ref/netcore50/System.Linq.Expressions.dll",
-        "ref/netcore50/System.Linq.Expressions.xml",
-        "ref/netcore50/de/System.Linq.Expressions.xml",
-        "ref/netcore50/es/System.Linq.Expressions.xml",
-        "ref/netcore50/fr/System.Linq.Expressions.xml",
-        "ref/netcore50/it/System.Linq.Expressions.xml",
-        "ref/netcore50/ja/System.Linq.Expressions.xml",
-        "ref/netcore50/ko/System.Linq.Expressions.xml",
-        "ref/netcore50/ru/System.Linq.Expressions.xml",
-        "ref/netcore50/zh-hans/System.Linq.Expressions.xml",
-        "ref/netcore50/zh-hant/System.Linq.Expressions.xml",
-        "ref/win8/_._",
-        "ref/wp80/_._",
-        "ref/wpa81/_._"
+        "ref/net46/_._",
+        "runtimes/win8-aot/lib/netcore50/System.Linq.Expressions.dll"
       ]
     },
     "System.ObjectModel/4.0.10-beta-23109": {
@@ -861,6 +948,29 @@
         "ref/wpa81/_._"
       ]
     },
+    "System.Text.RegularExpressions/4.0.10-beta-23109": {
+      "serviceable": true,
+      "sha512": "F+tfzB34KhZnjS3ActdL57CQVD9oYGhAZm8AREL+KvbJTh1Y8/tlyCyI2xoH6KdJzIPcXC50yu4OkHNbpcutEw==",
+      "files": [
+        "System.Text.RegularExpressions.4.0.10-beta-23109.nupkg",
+        "System.Text.RegularExpressions.4.0.10-beta-23109.nupkg.sha512",
+        "System.Text.RegularExpressions.nuspec",
+        "lib/dotnet/System.Text.RegularExpressions.dll",
+        "lib/net46/_._",
+        "ref/dotnet/System.Text.RegularExpressions.dll",
+        "ref/dotnet/System.Text.RegularExpressions.xml",
+        "ref/dotnet/de/System.Text.RegularExpressions.xml",
+        "ref/dotnet/es/System.Text.RegularExpressions.xml",
+        "ref/dotnet/fr/System.Text.RegularExpressions.xml",
+        "ref/dotnet/it/System.Text.RegularExpressions.xml",
+        "ref/dotnet/ja/System.Text.RegularExpressions.xml",
+        "ref/dotnet/ko/System.Text.RegularExpressions.xml",
+        "ref/dotnet/ru/System.Text.RegularExpressions.xml",
+        "ref/dotnet/zh-hans/System.Text.RegularExpressions.xml",
+        "ref/dotnet/zh-hant/System.Text.RegularExpressions.xml",
+        "ref/net46/_._"
+      ]
+    },
     "System.Threading/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "TSViw+K20yh9DmwzZpvuCUc2m2ju1eVAJ10pTw2gB/aP4kkrX2nGf4A9BkwkxupPXFA2OtO9LbbEqdp4YbBnjQ==",
@@ -924,13 +1034,28 @@
       "fx/System >= 4.0.0.0",
       "fx/System.Core >= 4.0.0.0",
       "fx/System.Linq >= 4.0.0.0",
+      "fx/System.Reflection >= 4.0.0.0",
+      "fx/System.Reflection.Extensions >= 4.0.0.0",
+      "fx/System.Reflection.Primitives >= 4.0.0.0",
+      "fx/System.Runtime >= 4.0.0.0",
       "fx/Microsoft.CSharp >= 4.0.0.0"
     ],
     ".NETPlatform,Version=v5.0": [
-      "System.Runtime >= 4.0.20-beta-*",
-      "System.Linq >= 4.0.0-beta-*",
       "System.Collections >= 4.0.10-beta-*",
       "System.Collections.Concurrent >= 4.0.10-beta-*",
+      "System.ComponentModel >= 4.0.0-beta-*",
+      "System.Diagnostics.Debug >= 4.0.10-beta-*",
+      "System.Diagnostics.Tools >= 4.0.0-beta-*",
+      "System.Linq >= 4.0.0-beta-*",
+      "System.Linq.Expressions >= 4.0.10-beta-*",
+      "System.Reflection >= 4.0.10-beta-*",
+      "System.Reflection.Extensions >= 4.0.0-beta-*",
+      "System.Reflection.Primitives >= 4.0.0-beta-*",
+      "System.Reflection.TypeExtensions >= 4.0.0-beta-*",
+      "System.Resources.ResourceManager >= 4.0.0-beta-*",
+      "System.Runtime >= 4.0.20-beta-*",
+      "System.Text.RegularExpressions >= 4.0.10-beta-*",
+      "System.Threading >= 4.0.10-beta-*",
       "Microsoft.CSharp >= 4.0.0-beta-*"
     ]
   }

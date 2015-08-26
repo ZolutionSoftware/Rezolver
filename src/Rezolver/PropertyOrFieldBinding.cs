@@ -44,12 +44,11 @@ namespace Rezolver
 		public static PropertyOrFieldBinding[] DeriveAutoPropertyBinding(Type type, bool includeFields = false)
 		{
 			//note - the canwrite and GetSetMethod check in the predicate 
-			var memberBindings = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-				.Where(p => p.CanWrite && p.GetSetMethod() != null)
+			var memberBindings = type.GetInstanceProperties().PubliclyWritable()
 				.Select(p => new PropertyOrFieldBinding(p, new RezolvedTarget(p.PropertyType)));
 			if(includeFields)
 			{
-				memberBindings = memberBindings.Concat(type.GetFields(BindingFlags.Instance | BindingFlags.Public)
+				memberBindings = memberBindings.Concat(type.GetPublicInstanceFields()
 					.Select(m => new PropertyOrFieldBinding(m, new RezolvedTarget(m.FieldType))));
 			}
 

@@ -15,7 +15,7 @@ namespace System
 		/// <param name="paramName">Name of the parameter.</param>
 		/// <exception cref="System.ArgumentNullException">If <paramref name="obj"/> is null.</exception>
 		[DebuggerStepThrough]
-		public static void MustNotBeNull<T>(this T obj, string paramName = null) where T : class
+		internal static void MustNotBeNull<T>(this T obj, string paramName = null) where T : class
 		{
 			if (obj == null)
 				throw new ArgumentNullException(paramName);
@@ -31,7 +31,7 @@ namespace System
 		/// <param name="message">Optional - message to be included in the ArgumentException that is raised.</param>
 		/// <param name="paramName">Optional (but desirable) - name of the parameter to the function requesting validation.</param>
 		[DebuggerStepThrough]
-		public static void MustNot<T>(this T obj, Func<T, bool> predicate, string message = null, string paramName = null)
+		internal static void MustNot<T>(this T obj, Func<T, bool> predicate, string message = null, string paramName = null)
 		{
 			predicate.MustNotBeNull(nameof(predicate));
 			if (predicate(obj))

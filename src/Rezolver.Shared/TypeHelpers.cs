@@ -50,10 +50,6 @@ namespace Rezolver
 #endif
 		}
 
-		internal static bool CanBeNull(Type type)
-		{
-			return !IsValueType(type) || IsNullableType(type);
-		}
 
 		internal static bool AreCompatible(Type from, Type to)
 		{
@@ -67,7 +63,7 @@ namespace Rezolver
 				return true;
 
 			Type nulledType = null;
-			return IsNullableType(@from, out nulledType) && IsAssignableFrom(to, nulledType);
+			return @from.IsNullableType(out nulledType) && IsAssignableFrom(to, nulledType);
 		}
 
 		internal static bool IsInterface(Type type)
@@ -142,7 +138,7 @@ namespace Rezolver
 		internal static ConstructorInfo GetConstructor(Type type, Type[] types)
 		{
 #if DOTNET
-			return GetConstructors(type).Where(c => c.GetParameters().SequenceEqual(types));
+			return GetConstructors(type).Where(c => c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)).SingleOrDefault();
 #else
 			return type.GetConstructor(types);
 #endif
@@ -163,76 +159,31 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Gets all public instance fields declared on the type.
+		/// Gets a public instance method whose name matches that passed - regardless
+		/// of signature.
+		/// 
+		/// Note - if there is more than one method with this name, then an exception occurs.
+		/// 
+		/// If there is no method with this name, the method returns null.
 		/// </summary>
-		/// <param name="type"></param>
+		/// <param name="type">The type whose methods are to be searched.</param>
+		/// <param name="methodName">The name of the public instance method that is sought.</param>
 		/// <returns></returns>
-		internal static FieldInfo[] GetPublicFields(Type type)
+		internal static MethodInfo GetMethod(Type type, string methodName)
 		{
 #if DOTNET
-			return type.GetTypeInfo().DeclaredFields.Where(f => !f.IsStatic && f.IsPublic).ToArray();
-#else
-			return type.GetFields(BindingFlags.Instance | BindingFlags.Public);
-#endif
-		}
-
-		/// <summary>
-		/// Gets all publicly readable and/or writable instance properties 
-		/// </summary>
-		/// <param name="type"></param>
-		/// <returns></returns>
-		internal static PropertyInfo[] GetPublicProperties(Type type)
-		{
-#if DOTNET
-			return type.GetTypeInfo().DeclaredProperties.Where(p => 
-				(p.GetMethod != null && p.GetMethod.IsPublic && !p.GetMethod.IsStatic) ||
-				(p.SetMethod != null && p.SetMethod.IsPublic && !p.SetMethod.IsStatic)).ToArray();
-#else
-			return type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-#endif
-		}
-
-		internal static bool IsNullableType(Type type)
-		{
-			return IsGenericType(type) && type.GetGenericTypeDefinition() == typeof(Nullable<>);
-		}
-
-		internal static bool IsNullableType(Type type, out Type nulledType)
-		{
-			nulledType = null;
-
-			if (!IsGenericType(type))
-				return false;
-			var genType = type.GetGenericTypeDefinition();
-			if (genType != typeof(Nullable<>))
-				return false;
-
-			nulledType = GetGenericArguments(type)[0];
-			return true;
-		}
-
-		internal static bool IsEnumerableType(Type type, out Type elementType)
-		{
-			elementType = null;
-			if (!IsGenericType(type))
-				return false;
-			var genDef = type.GetGenericTypeDefinition();
-			if (genDef != typeof(IEnumerable<>))
-				return false;
-
-			elementType = GetGenericArguments(type)[0];
-			return true;
-		}
-
-		internal static IEnumerable<Type> GetAllBases(Type t)
-		{
-			t.MustNotBeNull("t");
-			var baseType = BaseType(t);
-			while (baseType != null)
+			//can't use GetDeclaredMethod because it does public and non-public methods, instance and static.
+			try
 			{
-				yield return baseType;
-				baseType = BaseType(baseType);
+				return type.GetTypeInfo().DeclaredMethods.Where(m => m.IsPublic && !m.IsStatic && m.Name == methodName).SingleOrDefault();
 			}
+			catch(InvalidOperationException ioex)
+			{
+				throw new InvalidOperationException($"More than one method on the type {type} found with the name {methodName}", ioex);
+			}
+#else
+			return type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+#endif
 		}
 	}
 }

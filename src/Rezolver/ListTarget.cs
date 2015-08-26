@@ -71,7 +71,7 @@ namespace Rezolver
 				{
 					if (DeclaredType == typeof(List<>).MakeGenericType(ElementType))
 					{
-						_listConstructor = DeclaredType.GetConstructor(new[] { typeof(IEnumerable<>).MakeGenericType(ElementType) });
+						_listConstructor = TypeHelpers.GetConstructor(DeclaredType, new[] { typeof(IEnumerable<>).MakeGenericType(ElementType) });
 						if (_listConstructor == null)
 							throw new InvalidOperationException(string.Format("Fatal error: Could not get IEnumerable<{0}> constructor for List<{0}>", ElementType));
 					}

@@ -6,9 +6,10 @@ using System.Text;
 
 namespace Rezolver
 {
+
 	public interface IRezolverLogger
 	{
-		int CallStart(RezolveContext context = null, [CallerMemberName]string method = null);
+		int CallStart(object callee, dynamic arguments, [CallerMemberName]string method = null);
 		void CallResult<TResult>(int reqId, TResult result);
 		void CallEnd(int reqId);
 		void Exception(int reqId, Exception ex);
@@ -51,12 +52,12 @@ namespace Rezolver
 		/// <param name="context"></param>
 		/// <param name="methodName"></param>
 		/// <returns></returns>
-		protected TResult LogCallWithResult<TResult>(Func<IRezolver, TResult> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
+		protected TResult LogCallWithResult<TResult>(Func<IRezolver, TResult> call, dynamic arguments = null, [CallerMemberName]string methodName = null)
 		{
-			var reqId = Logger.CallStart(context, methodName);
+			var reqId = Logger.CallStart(this, arguments, methodName);
 
 			TResult result;
-
+			
 			try
 			{
 				result = call(_innerRezolver);
@@ -71,9 +72,9 @@ namespace Rezolver
 			return result;
 		}
 
-		protected void LogCall(Action<IRezolver> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
+		protected void LogCall(Action<IRezolver> call, dynamic arguments = null, [CallerMemberName]string methodName = null)
 		{
-			var reqId = Logger.CallStart(context, methodName);
+			var reqId = Logger.CallStart(this, arguments, methodName);
 
 			try
 			{
@@ -100,23 +101,23 @@ namespace Rezolver
 
 		public ICompiledRezolveTarget FetchCompiled(RezolveContext context)
 		{
-			return LogCallWithResult(r => r.FetchCompiled(context));
+			return LogCallWithResult(r => r.FetchCompiled(context), new { context = context });
 		}
 
 		public object GetService(Type serviceType)
 		{
-			return LogCallWithResult(r => r.GetService(serviceType));
+			return LogCallWithResult(r => r.GetService(serviceType), new { serviceType = serviceType });
 		}
 
 		public object Resolve(RezolveContext context)
 		{
-			return LogCallWithResult(r => r.Resolve(context));
+			return LogCallWithResult(r => r.Resolve(context), new { context = context });
 		}
 
 		public bool TryResolve(RezolveContext context, out object result)
 		{
 			object tempResult = null;
-			var @return = LogCallWithResult(r => r.TryResolve(context, out tempResult));
+			var @return = LogCallWithResult(r => r.TryResolve(context, out tempResult), new { context = context });
 			result = tempResult;
 			return @return;
 		}
@@ -151,9 +152,9 @@ namespace Rezolver
 			}
 		}
 
-		protected TResult LogCallWithResult<TResult>(Func<ILifetimeScopeRezolver, TResult> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
+		protected TResult LogCallWithResult<TResult>(Func<ILifetimeScopeRezolver, TResult> call, dynamic arguments = null, [CallerMemberName]string methodName = null)
 		{
-			var reqId = Logger.CallStart(context, methodName);
+			var reqId = Logger.CallStart(this, arguments, methodName);
 
 			TResult result;
 
@@ -171,14 +172,26 @@ namespace Rezolver
 			return result;
 		}
 
-		protected void LogCall(Action<ILifetimeScopeRezolver> call, RezolveContext context = null, [CallerMemberName]string methodName = null)
+		protected void LogCall(Action<ILifetimeScopeRezolver> call, dynamic arguments = null, [CallerMemberName]string methodName = null)
 		{
+			var reqId = Logger.CallStart(this, arguments, methodName);
 
+			try
+			{
+				call(_innerScopeRezolver);
+			}
+			catch (Exception ex)
+			{
+				Logger.Exception(reqId, ex);
+				throw;
+			}
+
+			Logger.CallEnd(reqId);
 		}
 
 		public void AddToScope(object obj, RezolveContext context = null)
 		{
-			//LogCall()
+			LogCall(r => r.AddToScope(obj, context), new { obj = obj, context = context });
 		}
 
 		public void Dispose()
@@ -202,7 +215,7 @@ namespace Rezolver
 
 		public IEnumerable<object> GetFromScope(RezolveContext context)
 		{
-			return LogCallWithResult(r => r.GetFromScope(context), context);
+			return LogCallWithResult(r => r.GetFromScope(context), new { context = context });
 		}
 	}
 

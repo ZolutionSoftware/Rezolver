@@ -94,7 +94,7 @@ namespace Rezolver.Configuration
 			if (typesToBuild.Length > 1)
 			{
 				//all the types in the list must have a common base which is in the list.
-				var commonBase = typesToBuild.FirstOrDefault(t => typesToBuild.All(tt => tt != t || t.IsAssignableFrom(tt)));
+				var commonBase = typesToBuild.FirstOrDefault(t => typesToBuild.All(tt => tt != t || TypeHelpers.IsAssignableFrom(t, tt)));
 
 				if (commonBase == null)
 				{
@@ -104,7 +104,7 @@ namespace Rezolver.Configuration
 
 				//now get most derived.  Defined as one type which cannot be assigned from any of the others.
 				//if there is more than one of these, then we error unless only one of them is a non-interface, non-abstract type.
-				var mostDerived = typesToBuild.Where(t => typesToBuild.All(tt => tt != t || !t.IsAssignableFrom(tt))).ToArray();
+				var mostDerived = typesToBuild.Where(t => typesToBuild.All(tt => tt != t || !TypeHelpers.IsAssignableFrom(t, tt))).ToArray();
 
 				if (mostDerived.Length == 0)
 				{
@@ -147,7 +147,7 @@ namespace Rezolver.Configuration
 				if(!context.TryParseTypeReferences(SignatureTypes, out ctorParamTypes))
 					return null;
 
-				constructors = new[] { typeToBuild.GetConstructor(ctorParamTypes) };
+				constructors = new[] { TypeHelpers.GetConstructor(typeToBuild, ctorParamTypes) };
 				if(constructors[0] == null)
 				{
 					context.AddError(new ConfigurationError(string.Format("Could not locate a constructor with the signature ({0}) on the type {1}", string.Join(", ", ctorParamTypes.Select(t => t.FullName), typeToBuild.FullName)), entry));
@@ -156,7 +156,7 @@ namespace Rezolver.Configuration
 			}
 			else
 			{
-				constructors = typeToBuild.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+				constructors = TypeHelpers.GetConstructors(typeToBuild);
 			}
 
 			//we need to look for constructors that have parameters with names that are found in the dictionary
@@ -194,7 +194,11 @@ namespace Rezolver.Configuration
 					return null;
 
 				return new { constructor = c, bindings = bindings };
-			}).Where(cb => cb != null && cb.bindings.All(b => (b.argument != null && b.argumentType != null && b.parameter.ParameterType.IsAssignableFrom(b.argumentType)) || b.parameter.IsOptional))
+			}).Where(cb => cb != null 
+				&& cb.bindings.All(b => (b.argument != null 
+													&& b.argumentType != null 
+													&& TypeHelpers.IsAssignableFrom(b.parameter.ParameterType, b.argumentType)) 
+												|| b.parameter.IsOptional))
 			.OrderByDescending(cb => cb.bindings.Length).ToArray();
 
 			//candidates now contains only those constructors where all the arguments were used up,

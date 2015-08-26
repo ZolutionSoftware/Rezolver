@@ -52,14 +52,13 @@ namespace Rezolver
 
 		protected virtual IEnumerable<FieldInfo> GetBindableFields(Type type)
 		{
-			return TypeHelpers.GetPublicFields(type);
+			return type.GetPublicInstanceFields();
 		}
 
 		protected virtual IEnumerable<PropertyInfo> GetBindableProperties(Type type)
 		{
 			//slightly 
-			return TypeHelpers.GetPublicProperties(type)
-				.Where(p => p.CanWrite && p.SetMethod() != null);
+			return type.GetInstanceProperties().PubliclyWritable();
 		}
 	}
 }
