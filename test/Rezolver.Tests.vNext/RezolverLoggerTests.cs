@@ -91,6 +91,11 @@ namespace Rezolver.Tests.vNext
 			{
 				Console.WriteLine($"Exception called for reqId {reqId}.  Exception: { ex?.Message }");
 			}
+
+			public void Message(string message)
+			{
+				Console.WriteLine($"Message: {message}");
+			}
 		}
 
 		private class RequiresInt

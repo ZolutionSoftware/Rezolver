@@ -92,6 +92,7 @@
     <Compile Include="ListTarget.cs" />
     <Compile Include="LoggingLifetimeScopeRezolver.cs" />
     <Compile Include="LoggingRezolver.cs" />
+    <Compile Include="LoggingRezolverBuilder.cs" />
     <Compile Include="NewExpressionToMemberInitRewriter.cs" />
     <Compile Include="PropertyOrFieldBinding.cs" />
     <Compile Include="RezolveContext.cs" />
