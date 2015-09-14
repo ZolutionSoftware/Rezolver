@@ -164,7 +164,7 @@ namespace Rezolver
 		public static bool operator !=(RezolveContext left, RezolveContext right)
 		{
 			//TODO: missing left/right null checking before descending into deep comparison here.  Possible NullReferenceException
-			return !object.ReferenceEquals(left, right) && (left._requestedType != right._requestedType || left._name != right._name);
+			return !object.ReferenceEquals(left, right) || ((left != null) != (right != null) || left._requestedType != right._requestedType || left._name != right._name);
 		}
 
 		/// <summary>
