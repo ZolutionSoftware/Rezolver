@@ -64,7 +64,7 @@ namespace Rezolver
 				(p.GetMethod != null && !p.GetMethod.IsStatic) ||
 				(p.SetMethod != null && !p.SetMethod.IsStatic)).ToArray();
 #else
-			return type.GetProperties(BindingFlags.Instance);
+			return type.GetProperties(BindingFlags.Instance | BindingFlags.Public| BindingFlags.NonPublic);
 #endif
 
 		}
@@ -76,7 +76,7 @@ namespace Rezolver
 				(p.GetMethod != null && p.GetMethod.IsStatic) ||
 				(p.SetMethod != null && p.SetMethod.IsStatic)).ToArray();
 #else
-			return type.GetProperties(BindingFlags.Static);
+			return type.GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
 #endif
 		}
 

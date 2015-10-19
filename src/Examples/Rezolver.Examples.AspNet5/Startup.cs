@@ -13,9 +13,52 @@ using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.Runtime;
 using Microsoft.Framework.DependencyInjection.Rezolver;
+using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace Rezolver.Examples.AspNet5
 {
+	class DebugTraceRezolverLogger : IRezolverLogger
+	{
+		private readonly CallTrackingRezolverLogger _inner;
+		public DebugTraceRezolverLogger(CallTrackingRezolverLogger inner)
+		{
+			_inner = inner;
+		}
+
+		public void CallEnd(int reqId)
+		{
+			_inner.CallEnd(reqId);
+			Debug.WriteLine($"{reqId} ended", "Rezolver");
+		}
+
+		public void CallResult<TResult>(int reqId, TResult result)
+		{
+			_inner.CallResult(reqId, result);
+			Debug.WriteLine($"{reqId} ended with result: {(result == null ? "null" : result.ToString())}", "Rezolver");
+		}
+
+		public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
+		{
+			var callId = _inner.CallStart(callee, arguments, method);
+			var loggedCall = _inner.GetCall(callId);
+
+			Debug.WriteLine($"{callId} started.  Target: {loggedCall.Callee}, Method: {loggedCall.Method}. Arguments: { string.Join(", ", loggedCall.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) }", "Rezolver");
+			return callId;
+		}
+
+		public void Exception(int reqId, Exception ex)
+		{
+			_inner.Exception(reqId, ex);
+		}
+
+		public void Message(string message)
+		{
+			_inner.Message(message);
+			Debug.WriteLine(message, "Rezolver");
+		}
+	}
+
     public class Startup
     {
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
@@ -54,7 +97,7 @@ namespace Rezolver.Examples.AspNet5
 //            compiler = new RezolveTargetDelegateCompiler();
 //#endif
             //so we forced to use the default compiler, which compiles to in-memory delegates
-            var rezolver = new DefaultLifetimeScopeRezolver();
+            var rezolver = new LoggingLifetimeScopeResolver(new DebugTraceRezolverLogger(new CallTrackingRezolverLogger()));
 
             rezolver.Populate(services);
 

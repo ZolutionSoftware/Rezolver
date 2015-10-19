@@ -1,25 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Rezolver
 {
-	public class LoggingLifetimeScopeResolver : DefaultLifetimeScopeRezolver
+	public class LoggingCombinedLifetimeScopeRezolver : CombinedLifetimeScopeRezolver
 	{
-		private bool _disposed;
-	
-		protected IRezolverLogger Logger { get; private set; }
-
-		public LoggingLifetimeScopeResolver(IRezolverLogger logger, 
+		public IRezolverLogger Logger { get; private set; }
+		public LoggingCombinedLifetimeScopeRezolver(IRezolverLogger logger, 
+			IRezolver inner, 
 			IRezolverBuilder builder = null,
-			IRezolveTargetCompiler compiler = null, 
-			ILifetimeScopeRezolver parentScope = null, 
-			bool registerToBuilder = true)
-			: base(builder: builder ?? new LoggingRezolverBuilder(logger), compiler: compiler, registerToBuilder:registerToBuilder)
+			IRezolveTargetCompiler compiler = null)
+			: this(logger, null, inner, builder, compiler)
 		{
-			logger.MustNotBeNull(nameof(logger));
+
+		}
+
+		public LoggingCombinedLifetimeScopeRezolver(IRezolverLogger logger, 
+			ILifetimeScopeRezolver parentScope, 
+			IRezolver inner = null, 
+			IRezolverBuilder builder = null, 
+			IRezolveTargetCompiler compiler = null)
+			: base(parentScope, inner, builder ?? new LoggingRezolverBuilder(logger), compiler)
+		{
 			Logger = logger;
 		}
 
@@ -30,11 +34,13 @@ namespace Rezolver
 
 		protected override ILifetimeScopeRezolver CreateLifetimeScopeInstance()
 		{
-			return new LoggingCombinedLifetimeScopeRezolver(Logger, this);
+			return Logger.LogCallWithResult(this, () => base.CreateLifetimeScopeInstance());
 		}
+
 		public override ILifetimeScopeRezolver CreateLifetimeScope()
 		{
-			return Logger.LogCallWithResult(this, () => new LoggingLifetimeScopeResolver(Logger));
+			//TODO: change this to a LoggingCombinedLifetimeScopeRezolver
+			return Logger.LogCallWithResult(this, () => base.CreateLifetimeScope());
 		}
 
 		public override ICompiledRezolveTarget FetchCompiled(RezolveContext context)
@@ -47,12 +53,12 @@ namespace Rezolver
 			return Logger.LogCallWithResult(this, () => base.GetService(serviceType), new { serviceType = serviceType });
 		}
 
-		public object Resolve(RezolveContext context)
+		public override object Resolve(RezolveContext context)
 		{
 			return Logger.LogCallWithResult(this, () => base.Resolve(context), new { context = context });
 		}
 
-		public bool TryResolve(RezolveContext context, out object result)
+		public override bool TryResolve(RezolveContext context, out object result)
 		{
 			object tempResult = null;
 			var @return = Logger.LogCallWithResult(this, () => base.TryResolve(context, out tempResult), new { context = context });
@@ -68,6 +74,16 @@ namespace Rezolver
 		public override IEnumerable<object> GetFromScope(RezolveContext context)
 		{
 			return Logger.LogCallWithResult(this, () => base.GetFromScope(context), new { context = context });
+		}
+
+		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
+		{
+			return Logger.LogCallWithResult(this, () => base.GetCompiledRezolveTarget(context), new { context = context });
+		}
+
+		protected override ICompiledRezolveTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
+		{
+			return Logger.LogCallWithResult(this, () => base.GetFallbackCompiledRezolveTarget(context), new { context = context });
 		}
 	}
 }

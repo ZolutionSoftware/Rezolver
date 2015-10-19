@@ -10,18 +10,18 @@ namespace System.Reflection
 		public static IEnumerable<PropertyInfo> PubliclyWritable(this IEnumerable<PropertyInfo> properties)
 		{
 #if DOTNET
-			return properties.Where(p => p.CanWrite && p.SetMethod.IsPublic);
+			return properties.Where(p => p.CanWrite && p.SetMethod != null && p.SetMethod.IsPublic);
 #else
-			return properties.Where(p => p.CanWrite && p.GetSetMethod().IsPublic);
+			return properties.Where(p => p.CanWrite && p.GetSetMethod() != null && p.GetSetMethod().IsPublic);
 #endif
 		}
 
 		public static IEnumerable<PropertyInfo> PubliclyReadable(this IEnumerable<PropertyInfo> properties)
 		{
 #if DOTNET
-			return properties.Where(p => p.CanRead && p.GetMethod.IsPublic);
+			return properties.Where(p => p.CanRead && p.GetMethod != null && p.GetMethod.IsPublic);
 #else
-			return properties.Where(p => p.CanRead && p.GetGetMethod().IsPublic);
+			return properties.Where(p => p.CanWrite && p.GetGetMethod() != null && p.GetGetMethod().IsPublic);
 #endif
 		}
 	}

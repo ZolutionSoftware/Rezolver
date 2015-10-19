@@ -7,113 +7,123 @@ using System.Collections.Concurrent;
 
 namespace Rezolver
 {
-    //TODO: reimplement this as a combined rezolver - there's no need to override caching rezolver any more.
-    public class CombinedLifetimeScopeRezolver : CombinedRezolver, ILifetimeScopeRezolver
-    {
-        private ConcurrentBag<ILifetimeScopeRezolver> _children;
-        private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;
+	public class CombinedLifetimeScopeRezolver : CombinedRezolver, ILifetimeScopeRezolver
+	{
+		private ConcurrentBag<ILifetimeScopeRezolver> _children;
+		private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;
 
-        public ILifetimeScopeRezolver ParentScope
-        {
-            get
-            {
-                return _parentScope;
-            }
-        }
+		public ILifetimeScopeRezolver ParentScope
+		{
+			get
+			{
+				return _parentScope;
+			}
+		}
 
-        private bool _disposed;
-        private readonly ILifetimeScopeRezolver _parentScope;
-        public CombinedLifetimeScopeRezolver(IRezolver inner, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null)
-            : base(inner, builder, compiler)
-        {
-            _children = new ConcurrentBag<ILifetimeScopeRezolver>();
-            _objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
-            _disposed = false;
-        }
+		private bool _disposed;
+		private readonly ILifetimeScopeRezolver _parentScope;
+		public CombinedLifetimeScopeRezolver(IRezolver inner, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null)
+				: this(null, inner, builder: builder, compiler: compiler)
+		{ 
+			
+		}
 
-        public CombinedLifetimeScopeRezolver(ILifetimeScopeRezolver parentScope, IRezolver rezolver = null)
-            : this(rezolver ?? (IRezolver)parentScope)
-        {
-            _parentScope = parentScope;
-        }
+		public CombinedLifetimeScopeRezolver(ILifetimeScopeRezolver parentScope, IRezolver inner = null, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null)
+				: base(inner ?? parentScope, builder: builder, compiler: compiler)
 
-        private void TrackObject(object obj, RezolveContext context)
-        {
-            if (obj == null)
-                return;
-            ConcurrentBag<object> instances = _objects.GetOrAdd(
-                new RezolveContext(null, context.RequestedType, context.Name), 
-                c => new ConcurrentBag<object>());
+		{
+			_parentScope = parentScope;
+			_children = new ConcurrentBag<ILifetimeScopeRezolver>();
+			_objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
+			_disposed = false;
+		}
 
-            //bit slow this, but hopefully there won't be loads of them...
-            //note that there'll be a memory overhead with this, certainly in portable,
-            //as under the hood the internal implementation realises the enumerable as an array
-            //before returning its enumerator.
-            if (!instances.Any(o => object.ReferenceEquals(o, obj)))
-                instances.Add(obj);
-        }
+		private void TrackObject(object obj, RezolveContext context)
+		{
+			if (obj == null)
+				return;
+			ConcurrentBag<object> instances = _objects.GetOrAdd(
+					new RezolveContext(null, context.RequestedType, context.Name),
+					c => new ConcurrentBag<object>());
 
-        public override ILifetimeScopeRezolver CreateLifetimeScope()
-        {
-            var toReturn = new CombinedLifetimeScopeRezolver(this);
-            _children.Add(toReturn);
-            return toReturn;
-        }
+			//bit slow this, but hopefully there won't be loads of them...
+			//note that there'll be a memory overhead with this, certainly in portable,
+			//as under the hood the internal implementation realises the enumerable as an array
+			//before returning its enumerator.
+			if (!instances.Any(o => object.ReferenceEquals(o, obj)))
+				instances.Add(obj);
+		}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+		/// <summary>
+		/// Have to re-implement this method because it binds to a different version of the constructor (for the moment)
+		/// </summary>
+		/// <returns></returns>
+		protected override ILifetimeScopeRezolver CreateLifetimeScopeInstance()
+		{
+			return new CombinedLifetimeScopeRezolver(this);
+		}
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposed)
-                return;
+		public override ILifetimeScopeRezolver CreateLifetimeScope()
+		{
+			var toReturn = CreateLifetimeScopeInstance();
+			_children.Add(toReturn);
+			return toReturn;
+		}
 
-            if (disposing)
-            {
-                ILifetimeScopeRezolver child = null;
-                while(_children.TryTake(out child))
-                {
-                    child.Dispose();
-                }
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
 
-                object obj = null;
-                IDisposable disposableObj = null;
-                foreach (var kvp in _objects)
-                {
-                    while(kvp.Value.TryTake(out obj))
-                    {
-                        disposableObj = obj as IDisposable;
-                        if (disposableObj != null)
-                            disposableObj.Dispose();
-                    }
-                }
-                _objects.Clear();
-            }
-            _disposed = true;
-        }
+		protected virtual void Dispose(bool disposing)
+		{
+			if (_disposed)
+				return;
 
-        public void AddToScope(object obj, RezolveContext context = null)
-        {
-            obj.MustNotBeNull("obj");
-            TrackObject(obj, context ?? new RezolveContext(null, obj.GetType()));
-        }
+			if (disposing)
+			{
+				ILifetimeScopeRezolver child = null;
+				while (_children.TryTake(out child))
+				{
+					child.Dispose();
+				}
 
-        public IEnumerable<object> GetFromScope(RezolveContext context)
-        {
-            context.MustNotBeNull("context");
-            ConcurrentBag<object> instances = null;
-            if (_objects.TryGetValue(context, out instances))
-            {
-                //important to return a read-only collection here to avoid modification
-                return new ReadOnlyCollection<object>(instances.ToArray());
-            }
-            else
-                return Enumerable.Empty<object>();
-        }
-    }
+				object obj = null;
+				IDisposable disposableObj = null;
+				foreach (var kvp in _objects)
+				{
+					while (kvp.Value.TryTake(out obj))
+					{
+						disposableObj = obj as IDisposable;
+						if (disposableObj != null)
+							disposableObj.Dispose();
+					}
+				}
+				_objects.Clear();
+			}
+			_disposed = true;
+		}
+
+		public virtual void AddToScope(object obj, RezolveContext context = null)
+		{
+			obj.MustNotBeNull("obj");
+			TrackObject(obj, context ?? new RezolveContext(null, obj.GetType()));
+		}
+
+		public virtual IEnumerable<object> GetFromScope(RezolveContext context)
+		{
+			context.MustNotBeNull("context");
+			ConcurrentBag<object> instances = null;
+			if (_objects.TryGetValue(context, out instances))
+			{
+				//important to return a read-only collection here to avoid modification
+				return new ReadOnlyCollection<object>(instances.ToArray());
+			}
+			else
+				return Enumerable.Empty<object>();
+		}
+	}
 
 
 }

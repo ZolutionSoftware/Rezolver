@@ -5,44 +5,46 @@ using System.Text;
 
 namespace Rezolver
 {
-	public class LoggingRezolverBuilder : IRezolverBuilder
+	public class LoggingRezolverBuilder : RezolverBuilder
 	{
+		public IRezolverLogger Logger { get; private set; }
 		/// <summary>
 		/// Creates a new instance that wraps around the passed IRezolverBuilder.
 		/// </summary>
-		/// <param name="inner">The builder to wrapped.</param>
 		/// <param name="logger">The logger that is to receive logging calls from this instance.</param>
-		public LoggingRezolverBuilder(IRezolverBuilder inner, IRezolverLogger logger)
+		public LoggingRezolverBuilder(IRezolverLogger logger)
 		{
-
+			Logger = logger;
 		}
 
-		public IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations
+		protected override IRezolveTargetEntry CreateEntry(Type type, params IRezolveTarget[] targets)
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
+			return Logger.LogCallWithResult(this, () => base.CreateEntry(type, targets), new { type = type, targets = targets });
 		}
 
-		public IRezolveTargetEntry Fetch(Type type, string name = null)
+		protected override INamedRezolverBuilder CreateNamedBuilder(string name, IRezolveTarget target)
 		{
-			throw new NotImplementedException();
+			return base.CreateNamedBuilder(name, target);
 		}
 
-		public INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path)
+		public override IRezolveTargetEntry Fetch(Type type, string name)
 		{
-			throw new NotImplementedException();
+			return base.Fetch(type, name);
 		}
 
-		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
+		public override INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path)
 		{
-			throw new NotImplementedException();
+			return base.GetBestNamedBuilder(path);
 		}
 
-		public void Register(IRezolveTarget target, Type serviceType = null, RezolverPath path = null)
+		public override INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
-			throw new NotImplementedException();
+			return base.GetNamedBuilder(path, create);
+		}
+
+		public override void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
+		{
+			base.Register(target, type, path);
 		}
 	}
 }

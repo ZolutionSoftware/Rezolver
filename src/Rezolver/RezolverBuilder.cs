@@ -119,7 +119,7 @@ namespace Rezolver
 			}
 		}
 
-		public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
+		public virtual void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
 		{
 			if (path != null)
 			{
@@ -211,7 +211,7 @@ namespace Rezolver
 			return entry;
 		}
 
-		public INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
+		public virtual INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
 		{
 			if (!path.MoveNext())
 				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
@@ -228,7 +228,7 @@ namespace Rezolver
 			return path.Next != null ? namedBuilder.GetNamedBuilder(path, true) : namedBuilder;
 		}
 
-		public INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path)
+		public virtual INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path)
 		{
 			//retrieves the last builder found along the path supplied.  If the path is a.b.c and
 			//we only get to a.b, then you'll get the a.b builder.

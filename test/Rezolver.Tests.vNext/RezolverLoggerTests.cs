@@ -80,7 +80,7 @@ namespace Rezolver.Tests.vNext
 				Console.WriteLine($"CallResult called for reqId {reqId}, result: {(result == null ? "null" : result.ToString())}");
 			}
 
-			public int CallStart(object callee, dynamic arguments, [CallerMemberName] string method = null)
+			public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
 			{
 				int thisReqId = ++_lastReqID;
 				Console.WriteLine($"CallStart called on object {callee} for method {method}. Arguments? {(arguments != null ? "Yes" : "No")}.  ReqId: {thisReqId}");
@@ -111,11 +111,15 @@ namespace Rezolver.Tests.vNext
 		public void ShouldRecordRezolverCall()
 		{
 			var logger = new TestLogger();
-			var loggingRezolver = new LoggingRezolver(new TestRezolverBase(), logger);
+			var loggingRezolver = new LoggingDefaultRezolver(logger);
 
-			loggingRezolver.Resolve(typeof(int));
+			try
+			{
+				loggingRezolver.Resolve(typeof(int));
+			}
+			catch (InvalidOperationException) { /* expected - no registrations */ }
 
-			Assert.Equal(1, logger.RequestCount);
+			Assert.NotEqual(0, logger.RequestCount);
 		}
 
 		[Fact]
@@ -126,7 +130,7 @@ namespace Rezolver.Tests.vNext
 
 			//If bugs do start to show up 
 			var logger = new TestLogger();
-			var loggingRezolver = new LoggingRezolver(new DefaultRezolver(), logger);
+			var loggingRezolver = new LoggingDefaultRezolver(logger);
 
 			loggingRezolver.RegisterObject(10);
 			loggingRezolver.RegisterType<RequiresInt>();

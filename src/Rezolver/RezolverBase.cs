@@ -8,7 +8,7 @@ namespace Rezolver
 {
 	public abstract class RezolverBase : IRezolver
 	{
-        private static readonly
+		private static readonly
 			ConcurrentDictionary<Type, Lazy<ICompiledRezolveTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledRezolveTarget>>();
 
 		protected static ICompiledRezolveTarget GetMissingTarget(Type target)
@@ -64,12 +64,21 @@ namespace Rezolver
 			}
 		}
 
-		public virtual ILifetimeScopeRezolver CreateLifetimeScope()
+		/// <summary>
+		/// Called to create the instance that is returned by <see cref="CreateLifetimeScope"/>
+		/// </summary>
+		/// <returns></returns>
+		protected virtual ILifetimeScopeRezolver CreateLifetimeScopeInstance()
 		{
 			return new CombinedLifetimeScopeRezolver(this);
 		}
 
-		public ICompiledRezolveTarget FetchCompiled(RezolveContext context)
+		public virtual ILifetimeScopeRezolver CreateLifetimeScope()
+		{
+			return CreateLifetimeScopeInstance();
+		}
+
+		public virtual ICompiledRezolveTarget FetchCompiled(RezolveContext context)
 		{
 			//note that this rezolver is fixed as the rezolver in the compile context - regardless of the
 			//one passed in.  This is important.
@@ -106,6 +115,16 @@ namespace Rezolver
 		}
 
 		object IServiceProvider.GetService(Type serviceType)
+		{
+			return GetService(serviceType);
+		}
+
+		/// <summary>
+		/// protected virtual implementation of IServiceProvider.GetService.
+		/// </summary>
+		/// <param name="serviceType"></param>
+		/// <returns></returns>
+		protected virtual object GetService(Type serviceType)
 		{
 			//IServiceProvider should return null if not found - so we use TryResolve.
 			object toReturn = null;

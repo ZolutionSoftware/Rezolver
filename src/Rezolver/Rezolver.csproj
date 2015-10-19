@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="BlockExpressionLocalsRewriter.cs" />
     <Compile Include="CachingRezolver.cs" />
+    <Compile Include="CallTrackingRezolverLogger.cs" />
     <Compile Include="ChangeTypeTarget.cs" />
     <Compile Include="CombinedRezolver.cs" />
     <Compile Include="CompileContext.cs" />
@@ -90,8 +91,10 @@
     <Compile Include="CombinedLifetimeScopeRezolver.cs" />
     <Compile Include="DefaultLifetimeScopeRezolver.cs" />
     <Compile Include="ListTarget.cs" />
+    <Compile Include="LoggedRezolverCall.cs" />
+    <Compile Include="LoggingCombinedLifetimeScopeRezolver.cs" />
+    <Compile Include="LoggingDefaultRezolver.cs" />
     <Compile Include="LoggingLifetimeScopeRezolver.cs" />
-    <Compile Include="LoggingRezolver.cs" />
     <Compile Include="LoggingRezolverBuilder.cs" />
     <Compile Include="NewExpressionToMemberInitRewriter.cs" />
     <Compile Include="PropertyOrFieldBinding.cs" />

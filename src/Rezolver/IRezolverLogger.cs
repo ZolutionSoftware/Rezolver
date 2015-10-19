@@ -26,7 +26,7 @@ namespace Rezolver
 	/// for the standard rezolver types that can be swapped in in order to receive logging messages.
 	/// </summary>
 	/// <remarks>
-	/// To log from a <see cref="DefaultRezolver"/>, swap it with <see cref="LoggingRezolver"/>
+	/// To log from a <see cref="DefaultRezolver"/>, swap it with <see cref="LoggingDefaultRezolver"/>
 	/// To log from a <see cref="DefaultLifetimeScopeRezolver"/>, swap it with <see cref="LoggingLifetimeScopeResolver"/>
 	/// To log from a <see cref="RezolverBuilder"/>, swap it with <see cref="LoggingRezolverBuilder"/>
 	/// 
@@ -43,7 +43,8 @@ namespace Rezolver
 		/// <param name="arguments"></param>
 		/// <param name="method"></param>
 		/// <returns></returns>
-		int CallStart(object callee, dynamic arguments, [CallerMemberName]string method = null);
+		int CallStart(object callee, object arguments, [CallerMemberName]string method = null);
+
 		/// <summary>
 		/// Records the termination of the function call that was originally given the id <paramref name="callId"/>, along with the 
 		/// result that was returned from the function.
@@ -69,5 +70,53 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="message"></param>
 		void Message(string message);
+	}
+
+	public static class IRezolverLoggerExtensions
+	{
+		/// <summary>
+		/// Log a call to a method with 
+		/// </summary>
+		/// <typeparam name="TResult"></typeparam>
+		/// <param name="call"></param>
+		/// <param name="context"></param>
+		/// <param name="methodName"></param>
+		/// <returns></returns>
+		public static TResult LogCallWithResult<TResult>(this IRezolverLogger logger, object callee, Func<TResult> call, object arguments = null, [CallerMemberName]string methodName = null)
+		{
+			var reqId = logger.CallStart(callee, arguments, methodName);
+
+			TResult result;
+
+			try
+			{
+				result = call();
+			}
+			catch (Exception ex)
+			{
+				logger.Exception(reqId, ex);
+				throw;
+			}
+
+			logger.CallResult(reqId, result);
+			return result;
+		}
+
+		public static void LogCall(this IRezolverLogger logger, object callee, Action call, object arguments = null, [CallerMemberName]string methodName = null)
+		{
+			var reqId = logger.CallStart(callee, arguments, methodName);
+
+			try
+			{
+				call();
+			}
+			catch (Exception ex)
+			{
+				logger.Exception(reqId, ex);
+				throw;
+			}
+
+			logger.CallEnd(reqId);
+		}
 	}
 }
