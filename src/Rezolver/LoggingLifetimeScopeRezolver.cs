@@ -34,7 +34,7 @@ namespace Rezolver
 		}
 		public override ILifetimeScopeRezolver CreateLifetimeScope()
 		{
-			return Logger.LogCallWithResult(this, () => new LoggingLifetimeScopeResolver(Logger));
+			return Logger.LogCallWithResult(this, () => base.CreateLifetimeScope());
 		}
 
 		public override ICompiledRezolveTarget FetchCompiled(RezolveContext context)

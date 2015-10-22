@@ -94,7 +94,17 @@ namespace Rezolver
 				{
 					return new KeyValuePair<string, string>(p.Name, $"(Exception {ex.GetType()} occurred");
 				}
-			});
+			}).Concat(arguments.GetType().GetInstanceFields().Public().Select(f =>
+			{
+				try
+				{
+					return new KeyValuePair<string, string>(f.Name, FormatObjectString(f.GetValue(arguments), true));
+				}
+				catch (Exception ex)
+				{
+					return new KeyValuePair<string, string>(f.Name, $"(Exception {ex.GetType()} occurred");
+				}
+			}));
 		}
 
 		private string FormatObjectString(object callee, bool includeValue = false)

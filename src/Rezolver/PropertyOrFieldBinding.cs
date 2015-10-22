@@ -48,7 +48,7 @@ namespace Rezolver
 				.Select(p => new PropertyOrFieldBinding(p, new RezolvedTarget(p.PropertyType)));
 			if(includeFields)
 			{
-				memberBindings = memberBindings.Concat(type.GetPublicInstanceFields()
+				memberBindings = memberBindings.Concat(type.GetInstanceFields().Public()
 					.Select(m => new PropertyOrFieldBinding(m, new RezolvedTarget(m.FieldType))));
 			}
 

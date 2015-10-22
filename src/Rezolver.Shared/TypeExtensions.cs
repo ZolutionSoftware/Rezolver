@@ -48,12 +48,12 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		internal static FieldInfo[] GetPublicInstanceFields(this Type type)
+		internal static FieldInfo[] GetInstanceFields(this Type type)
 		{
 #if DOTNET
-			return type.GetTypeInfo().DeclaredFields.Where(f => !f.IsStatic && f.IsPublic).ToArray();
+			return type.GetTypeInfo().DeclaredFields.Where(f => !f.IsStatic).ToArray();
 #else
-			return type.GetFields(BindingFlags.Instance | BindingFlags.Public);
+			return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 #endif
 		}
 

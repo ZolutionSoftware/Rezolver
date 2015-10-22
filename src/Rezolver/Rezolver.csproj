@@ -44,6 +44,9 @@
     <Compile Include="..\Rezolver.Shared\Extensions\System\MustBeExtensions.cs">
       <Link>Extensions\System\MustBeExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Rezolver.Shared\Extensions\System\Reflection\FieldInfoEnumerableExtensions.cs">
+      <Link>Extensions\System\Reflection\FieldInfoEnumerableExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Rezolver.Shared\Extensions\System\Reflection\PropertyInfoEnumerableExtensions.cs">
       <Link>Extensions\System\Reflection\PropertyInfoEnumerableExtensions.cs</Link>
     </Compile>

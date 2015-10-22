@@ -1132,7 +1132,7 @@
           "lib/dnx451/Microsoft.Framework.Logging.dll": {}
         }
       },
-      "Microsoft.Framework.Logging.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.Logging.Abstractions/1.0.0-beta6": {
         "frameworkAssemblies": [
           "mscorlib",
           "System",
@@ -1161,6 +1161,23 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.Framework.Logging.Console.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging.Debug/1.0.0-beta6": {
+        "dependencies": {
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta6"
+        },
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Logging.Debug.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Logging.Debug.dll": {}
         }
       },
       "Microsoft.Framework.OptionsModel/1.0.0-beta5": {
@@ -2428,16 +2445,16 @@
           "lib/dotnet/Microsoft.Framework.Logging.dll": {}
         }
       },
-      "Microsoft.Framework.Logging.Abstractions/1.0.0-beta5": {
+      "Microsoft.Framework.Logging.Abstractions/1.0.0-beta6": {
         "dependencies": {
-          "System.Collections": "4.0.10-beta-23019",
-          "System.Collections.Concurrent": "4.0.10-beta-23019",
-          "System.Linq": "4.0.0-beta-23019",
-          "System.Globalization": "4.0.10-beta-23019",
-          "System.Reflection": "4.0.10-beta-23019",
-          "System.Runtime": "4.0.20-beta-23019",
-          "System.Runtime.Extensions": "4.0.10-beta-23019",
-          "System.Runtime.InteropServices": "4.0.20-beta-23019"
+          "System.Collections": "4.0.10-beta-23109",
+          "System.Collections.Concurrent": "4.0.10-beta-23109",
+          "System.Linq": "4.0.0-beta-23109",
+          "System.Globalization": "4.0.10-beta-23109",
+          "System.Reflection": "4.0.10-beta-23109",
+          "System.Runtime": "4.0.20-beta-23109",
+          "System.Runtime.Extensions": "4.0.10-beta-23109",
+          "System.Runtime.InteropServices": "4.0.20-beta-23109"
         },
         "compile": {
           "lib/dotnet/Microsoft.Framework.Logging.Abstractions.dll": {}
@@ -2459,6 +2476,20 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Framework.Logging.Console.dll": {}
+        }
+      },
+      "Microsoft.Framework.Logging.Debug/1.0.0-beta6": {
+        "dependencies": {
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta6",
+          "System.Collections": "4.0.10-beta-23109",
+          "System.Globalization": "4.0.10-beta-23109",
+          "System.Linq": "4.0.0-beta-23109"
+        },
+        "compile": {
+          "lib/dotnet/Microsoft.Framework.Logging.Debug.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/Microsoft.Framework.Logging.Debug.dll": {}
         }
       },
       "Microsoft.Framework.OptionsModel/1.0.0-beta5": {
@@ -4736,13 +4767,14 @@
         "lib/net45/Microsoft.Framework.Logging.xml"
       ]
     },
-    "Microsoft.Framework.Logging.Abstractions/1.0.0-beta5": {
+    "Microsoft.Framework.Logging.Abstractions/1.0.0-beta6": {
       "serviceable": true,
-      "sha512": "roTRT5h5eSEIS1on9K4M+IhI/YD1vXDpslXXebmxWqRN+9TbAd2xc/j5KgAOZd0hBem1R5rPiiBkBnNa+FSeBA==",
+      "sha512": "2wMEtQlwOcMunmryFHoX0CdL+fwbEELk90xztNH0GxvXYFCXcmWymbba9AzTna6qqFMZBJfvMtTo2Cf/kWfRyQ==",
       "files": [
-        "Microsoft.Framework.Logging.Abstractions.1.0.0-beta5.nupkg",
-        "Microsoft.Framework.Logging.Abstractions.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.Logging.Abstractions.1.0.0-beta6.nupkg",
+        "Microsoft.Framework.Logging.Abstractions.1.0.0-beta6.nupkg.sha512",
         "Microsoft.Framework.Logging.Abstractions.nuspec",
+        "repo.json",
         "lib/dnx451/Microsoft.Framework.Logging.Abstractions.dll",
         "lib/dnx451/Microsoft.Framework.Logging.Abstractions.xml",
         "lib/dotnet/Microsoft.Framework.Logging.Abstractions.dll",
@@ -4764,6 +4796,21 @@
         "lib/dotnet/Microsoft.Framework.Logging.Console.xml",
         "lib/net45/Microsoft.Framework.Logging.Console.dll",
         "lib/net45/Microsoft.Framework.Logging.Console.xml"
+      ]
+    },
+    "Microsoft.Framework.Logging.Debug/1.0.0-beta6": {
+      "sha512": "BtotWCp8OK94G4W87qiXhbPetv1N8Pet1utPV1LbPmzuQCtwzJcZiboB8YvjYc9jpM6muRvtywq+1zKdTxpX8w==",
+      "files": [
+        "Microsoft.Framework.Logging.Debug.1.0.0-beta6.nupkg",
+        "Microsoft.Framework.Logging.Debug.1.0.0-beta6.nupkg.sha512",
+        "Microsoft.Framework.Logging.Debug.nuspec",
+        "repo.json",
+        "lib/dnx451/Microsoft.Framework.Logging.Debug.dll",
+        "lib/dnx451/Microsoft.Framework.Logging.Debug.xml",
+        "lib/dotnet/Microsoft.Framework.Logging.Debug.dll",
+        "lib/dotnet/Microsoft.Framework.Logging.Debug.xml",
+        "lib/net45/Microsoft.Framework.Logging.Debug.dll",
+        "lib/net45/Microsoft.Framework.Logging.Debug.xml"
       ]
     },
     "Microsoft.Framework.OptionsModel/1.0.0-beta5": {
@@ -6404,6 +6451,7 @@
       "Microsoft.Framework.CodeGenerators.Mvc >= 1.0.0-beta5",
       "Microsoft.Framework.Logging >= 1.0.0-beta5",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta5",
+      "Microsoft.Framework.Logging.Debug >= 1.0.0-beta5",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta5",
       "Rezolver >= 0.5.2-alpha-*",
       "Microsoft.Framework.DependencyInjection.Rezolver >= 0.5.2-alpha-*"

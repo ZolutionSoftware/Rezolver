@@ -52,7 +52,7 @@ namespace Rezolver
 
 		protected virtual IEnumerable<FieldInfo> GetBindableFields(Type type)
 		{
-			return type.GetPublicInstanceFields();
+			return type.GetInstanceFields().Public();
 		}
 
 		protected virtual IEnumerable<PropertyInfo> GetBindableProperties(Type type)
