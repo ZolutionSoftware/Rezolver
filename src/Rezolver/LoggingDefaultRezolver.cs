@@ -11,6 +11,20 @@ namespace Rezolver
 	/// </summary>
 	public class LoggingDefaultRezolver : DefaultRezolver
 	{
+		private static int _loggingRezolverID = 1;
+
+		internal static int GetNextLoggingRezolverID()
+		{
+			return ++_loggingRezolverID;
+		}
+
+		private readonly int _id = GetNextLoggingRezolverID();
+
+		public override string ToString()
+		{
+			return $"(#{_id} {GetType().Name})";
+		}
+
 		protected IRezolverLogger Logger { get; private set; }
 
 

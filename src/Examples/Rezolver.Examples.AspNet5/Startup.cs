@@ -15,6 +15,9 @@ using Microsoft.Framework.Runtime;
 using Microsoft.Framework.DependencyInjection.Rezolver;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using System.Reflection;
+using Microsoft.AspNet.Mvc.Core;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace Rezolver.Examples.AspNet5
 {
@@ -42,10 +45,21 @@ namespace Rezolver.Examples.AspNet5
 
 		public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
 		{
+			if (arguments != null)
+			{
+				RezolveContext context = null;
+				var property = arguments.GetType().GetRuntimeProperties().FirstOrDefault(p => p.Name == "context");
+				if (property != null)
+					context = (RezolveContext)property.GetValue(arguments);
+
+				if (context != null && context.RequestedType == typeof(IEnumerable<IActionInvokerProvider>) && method == "Resolve")
+					Debugger.Break();
+			}
+
 			var callId = _inner.CallStart(callee, arguments, method);
 			var loggedCall = _inner.GetCall(callId);
 
-			_logger.LogInformation($"->#{callId} {loggedCall.Method} with args: { string.Join(", ", loggedCall.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) } on {loggedCall.Callee}", "Rezolver");
+			_logger.LogInformation($"->#{callId} {loggedCall.Method}({ string.Join(", ", loggedCall.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) }) on {loggedCall.Callee}", "Rezolver");
 			return callId;
 		}
 
@@ -148,9 +162,9 @@ namespace Rezolver.Examples.AspNet5
 									name: "default",
 									template: "{controller=Home}/{action=Index}/{id?}");
 
-							// Uncomment the following line to add a route for porting Web API 2 controllers.
-							// routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
-						});
+				// Uncomment the following line to add a route for porting Web API 2 controllers.
+				// routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+			});
 		}
 	}
 }

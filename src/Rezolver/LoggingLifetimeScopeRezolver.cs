@@ -8,6 +8,13 @@ namespace Rezolver
 {
 	public class LoggingLifetimeScopeResolver : DefaultLifetimeScopeRezolver
 	{
+		private readonly int _id = LoggingDefaultRezolver.GetNextLoggingRezolverID();
+
+		public override string ToString()
+		{
+			return $"(#{_id} {GetType().Name})";
+		}
+
 		private bool _disposed;
 	
 		protected IRezolverLogger Logger { get; private set; }

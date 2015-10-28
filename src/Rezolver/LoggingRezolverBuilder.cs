@@ -7,6 +7,20 @@ namespace Rezolver
 {
 	public class LoggingRezolverBuilder : RezolverBuilder
 	{
+		private static int _loggingBuilderID = 1;
+
+		internal static int GetNextLoggingBuilderID()
+		{
+			return ++_loggingBuilderID;
+		}
+
+		private readonly int _id = GetNextLoggingBuilderID();
+
+		public override string ToString()
+		{
+			return $"(#{_id} {GetType().Name})";
+		}
+
 		public IRezolverLogger Logger { get; private set; }
 		/// <summary>
 		/// Creates a new instance that wraps around the passed IRezolverBuilder.

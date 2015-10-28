@@ -136,7 +136,23 @@ namespace Rezolver
 			_scope = rezolver as ILifetimeScopeRezolver;
 		}
 
+		public override string ToString()
+		{
+			List<string> parts = new List<string>();
 
+			parts.Add($"Type: {RequestedType}");
+			if (!string.IsNullOrWhiteSpace(Name)) parts.Add($"Name: {Name}");
+			parts.Add($"Rezolver: {Rezolver}");
+			if (Scope != null)
+			{
+				if (Scope == Rezolver)
+					parts[parts.Count - 1] = $"Scope Rezolver: {Scope}";
+				else
+					parts.Add($"Scope: {Scope}");
+			}
+
+			return $"({string.Join(", ", parts)})";
+		}
 
 		public override int GetHashCode()
 		{
@@ -150,21 +166,38 @@ namespace Rezolver
 			return Equals(obj as RezolveContext);
 		}
 
-		public bool Equals(RezolveContext other)
+		public virtual bool Equals(RezolveContext other)
 		{
 			return object.ReferenceEquals(this, other) || _requestedType == other._requestedType && _name == other._name;
 		}
 
 		public static bool operator ==(RezolveContext left, RezolveContext right)
 		{
-			//TODO: missing left/right null checking before descending into deep comparison here.  Possible NullReferenceException
-			return object.ReferenceEquals(left, right) || (left != null && right != null && (left._requestedType == right._requestedType && left._name == right._name));
+			//same ref - yes
+			if (object.ReferenceEquals(left, right))
+				return true;
+			//one is null, the other not - short-circuit
+			//have to be careful not to do left == null or right == null here or we stackoverflow...
+			if (object.ReferenceEquals(null, left) != object.ReferenceEquals(null, right))
+				return false;
+			//now standard equality check on type/name
+			return left._requestedType == right._requestedType && left._name == right._name;
 		}
 
 		public static bool operator !=(RezolveContext left, RezolveContext right)
 		{
-			//TODO: missing left/right null checking before descending into deep comparison here.  Possible NullReferenceException
-			return !object.ReferenceEquals(left, right) || ((left != null) != (right != null) || left._requestedType != right._requestedType || left._name != right._name);
+			//same reference
+			if (object.ReferenceEquals(left, right))
+				return false;
+			//one is null, the other isn't - short-circuit
+			//have to be careful not to do left == null or right == null here or we stackoverflow ...
+			if (object.ReferenceEquals(null, left) != object.ReferenceEquals(null, right))
+				return true;
+			//now standard inequality check on type/name
+			return left._requestedType != right._requestedType || left._name != right._name;
+
+			//TODO: Going to need to think of a way to bring in user-defined equalities in here - for those
+			//contexts where the registration does 'interesting' things with the context.
 		}
 
 		/// <summary>
