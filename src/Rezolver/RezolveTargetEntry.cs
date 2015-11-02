@@ -19,6 +19,8 @@ namespace Rezolver
 		private ListTarget _listTarget;
 		private List<IRezolveTarget> _targets;
 
+		public virtual bool UseFallback { get { return false; } }
+
 		public RezolveTargetEntry(Type registeredType, params IRezolveTarget[] targets)
 		{
 			registeredType.MustNotBeNull(nameof(registeredType));

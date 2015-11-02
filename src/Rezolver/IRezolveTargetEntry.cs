@@ -35,5 +35,10 @@ namespace Rezolver
 		/// an instance has been issued from this builder, then adding more items to it would give
 		/// inconsistent behaviour.</exception>
 		void AddTarget(IRezolveTarget target, bool checkForDuplicates = false);
+		/// <summary>
+		/// If true, then the resolver should consult its fallback for an alternative instead of using this
+		/// entry.
+		/// </summary>
+		bool UseFallback { get; }
 	}
 }

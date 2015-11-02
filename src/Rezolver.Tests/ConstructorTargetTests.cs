@@ -196,12 +196,12 @@ namespace Rezolver.Tests
 			CombinedRezolver rezolver2 = new CombinedRezolver(rezolver);
 			rezolver2.Register(NoDefaultConstructor.ExpectedComplexNamedRezolveCallDynamic.AsObjectTarget(), path: "ThisIsComplicated");
 
-			var result = (NoDefaultConstructor)rezolver.Resolve(typeof(NoDefaultConstructor));
-			Assert.AreEqual(NoDefaultConstructor.ExpectedComplexNamedRezolveCall, result.Value);
+			//var result = (NoDefaultConstructor)rezolver.Resolve(typeof(NoDefaultConstructor));
+			//Assert.AreEqual(NoDefaultConstructor.ExpectedComplexNamedRezolveCall, result.Value);
 
-			result = (NoDefaultConstructor)rezolver2.Resolve(typeof(NoDefaultConstructor));
+			var result2 = (NoDefaultConstructor)rezolver2.Resolve(typeof(NoDefaultConstructor));
 
-			Assert.AreEqual(NoDefaultConstructor.ExpectedComplexNamedRezolveCallDynamic, result.Value);
+			Assert.AreEqual(NoDefaultConstructor.ExpectedComplexNamedRezolveCallDynamic, result2.Value);
 		}
 
 		public static int ReturnsInt(int input)

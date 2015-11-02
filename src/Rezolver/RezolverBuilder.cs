@@ -102,6 +102,14 @@ namespace Rezolver
 				}
 			}
 
+			public bool UseFallback
+			{
+				get
+				{
+					return true;
+				}
+			}
+
 			public Expression CreateExpression(CompileContext context)
 			{
 				return Expression.Call(

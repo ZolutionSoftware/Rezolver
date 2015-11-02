@@ -34,12 +34,20 @@ namespace Rezolver
 		}
 
 		private bool _disposed;
+
+		public event EventHandler Disposing;
+
 		public DefaultLifetimeScopeRezolver(IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null, bool registerToBuilder = true)
 				: base(builder, compiler, registerToBuilder)
 		{
 			_children = new ConcurrentBag<ILifetimeScopeRezolver>();
 			_objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
 			_disposed = false;
+		}
+
+		protected void OnDisposing()
+		{
+			Disposing?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void TrackObject(object obj, RezolveContext context)

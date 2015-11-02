@@ -13,7 +13,7 @@ namespace Rezolver
 
 		protected static ICompiledRezolveTarget GetMissingTarget(Type target)
 		{
-            return MissingTargets.GetOrAdd(target, t => new Lazy<ICompiledRezolveTarget>(() => new MissingCompiledTarget(t))).Value;
+			return MissingTargets.GetOrAdd(target, t => new Lazy<ICompiledRezolveTarget>(() => new MissingCompiledTarget(t))).Value;
 		}
 
 		protected static bool IsMissingTarget(ICompiledRezolveTarget target)
@@ -83,7 +83,7 @@ namespace Rezolver
 			//note that this rezolver is fixed as the rezolver in the compile context - regardless of the
 			//one passed in.  This is important.
 			//note also that this rezolver is only passed as scope if the context doesn't already have one.
-			return GetCompiledRezolveTarget(context.CreateNew(this, context.Scope == null ? this as ILifetimeScopeRezolver : context.Scope));
+			return GetCompiledRezolveTarget(context.CreateNew(this, context.Scope ?? (this as ILifetimeScopeRezolver)));
 		}
 
 		public virtual bool CanResolve(RezolveContext context)
@@ -94,19 +94,44 @@ namespace Rezolver
 
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
-			IRezolveTarget target = Builder.Fetch(context.RequestedType, context.Name);
+			//IRezolveTarget target = Builder.Fetch(context.RequestedType, context.Name);
 
-			if (target != null)
+			//if (target != null)
+			//{
+			//	//note that if a name was passed we're grabbing the best matching named builder to use for resolving
+			//	//dependencies.
+			//	return Compiler.CompileTarget(target,
+			//		new CompileContext(this,
+			//			context.RequestedType,
+			//			dependencyBuilder: context.Name != null ? Builder.GetBestNamedBuilder(context.Name) : null));
+			//}
+
+			//return GetFallbackCompiledRezolveTarget(context);
+
+			//CODE BELOW FIXES ISSUE BUT CAUSES ANOTHER TEST (TO DO WITH DYNAMIC RESOLVING) TO FAIL
+			//CODE ABOVE (THE ORIGINAL) STILL WORKS FOR THAT TEST.
+			IRezolveTargetEntry target = Builder.Fetch(context.RequestedType, context.Name);
+
+			if (target == null)
+				return GetFallbackCompiledRezolveTarget(context);
+
+			//if the entry advises us to fall back if possible, then we'll see what we get from the 
+			//fallback operation.  If it's NOT the missing target, then we'll use that instead
+			if (target.UseFallback)
 			{
-				//note that if a name was passed we're grabbing the best matching named builder to use for resolving
-				//dependencies.
-				return Compiler.CompileTarget(target,
-					new CompileContext(this, 
-						context.RequestedType, 
-						dependencyBuilder: context.Name != null ? Builder.GetBestNamedBuilder(context.Name) : null));
+				var fallback = GetFallbackCompiledRezolveTarget(context);
+				if (!IsMissingTarget(fallback))
+					return fallback;
 			}
 
-			return GetFallbackCompiledRezolveTarget(context);
+
+			//note that if a name was passed we're grabbing the best matching named builder to use for resolving
+			//dependencies.
+			return Compiler.CompileTarget(target,
+				new CompileContext(this,
+					context.RequestedType,
+					dependencyBuilder: context.Name != null ? Builder.GetBestNamedBuilder(context.Name) : null));
+
 		}
 
 		protected virtual ICompiledRezolveTarget GetFallbackCompiledRezolveTarget(RezolveContext context)

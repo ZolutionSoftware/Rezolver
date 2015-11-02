@@ -45,16 +45,16 @@ namespace Rezolver.Examples.AspNet5
 
 		public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
 		{
-			if (arguments != null)
-			{
-				RezolveContext context = null;
-				var property = arguments.GetType().GetRuntimeProperties().FirstOrDefault(p => p.Name == "context");
-				if (property != null)
-					context = (RezolveContext)property.GetValue(arguments);
+			//if (arguments != null)
+			//{
+			//	RezolveContext context = null;
+			//	var property = arguments.GetType().GetRuntimeProperties().FirstOrDefault(p => p.Name == "context");
+			//	if (property != null)
+			//		context = (RezolveContext)property.GetValue(arguments);
 
-				if (context != null && context.RequestedType == typeof(IEnumerable<IActionInvokerProvider>) && method == "Resolve")
-					Debugger.Break();
-			}
+			//	if (context != null && context.RequestedType == typeof(IEnumerable<IActionInvokerProvider>) && method == "Resolve")
+			//		Debugger.Break();
+			//}
 
 			var callId = _inner.CallStart(callee, arguments, method);
 			var loggedCall = _inner.GetCall(callId);

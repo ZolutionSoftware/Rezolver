@@ -45,6 +45,13 @@ namespace Rezolver
 		/// <param name="context">Required - the context whose properties will be used to find matching
 		/// objects.</param>
 		/// <returns></returns>
-		IEnumerable<object> GetFromScope(RezolveContext context);		
+		IEnumerable<object> GetFromScope(RezolveContext context);
+
+		/// <summary>
+		/// This event is fired before the scope disposes
+		/// 
+		/// This is primarily for infrastructure purposes, and not intended to be used from your code.
+		/// </summary>
+		event EventHandler Disposing;
 	}
 }

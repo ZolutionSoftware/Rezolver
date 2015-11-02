@@ -71,7 +71,7 @@ namespace Rezolver
 		/// <returns>An <see cref="ILifetimeScopeRezolver"/> instance that will use this resolver to resolve objects,
 		/// but which will impose its own lifetime restrictions on those instances.</returns>
 		ILifetimeScopeRezolver CreateLifetimeScope();
-
+		
 		/// <summary>
 		/// Fetches the compiled target for the given context.
 		/// 
