@@ -64,18 +64,12 @@ namespace Rezolver
 			}
 		}
 
-		/// <summary>
-		/// Called to create the instance that is returned by <see cref="CreateLifetimeScope"/>
-		/// </summary>
-		/// <returns></returns>
-		protected virtual ILifetimeScopeRezolver CreateLifetimeScopeInstance()
-		{
-			return new CombinedLifetimeScopeRezolver(this);
-		}
-
 		public virtual ILifetimeScopeRezolver CreateLifetimeScope()
 		{
-			return CreateLifetimeScopeInstance();
+			//optimistic implementation of this method - attempts a safe cast to ILifetimeScopeRezolver of itself
+			//so that types derived from this class that are ILifetimeScopeRezolver instances do not need
+			//to reimplement this method.
+			return new CombinedLifetimeScopeRezolver(this as ILifetimeScopeRezolver, this);
 		}
 
 		public virtual ICompiledRezolveTarget FetchCompiled(RezolveContext context)
@@ -94,22 +88,6 @@ namespace Rezolver
 
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
-			//IRezolveTarget target = Builder.Fetch(context.RequestedType, context.Name);
-
-			//if (target != null)
-			//{
-			//	//note that if a name was passed we're grabbing the best matching named builder to use for resolving
-			//	//dependencies.
-			//	return Compiler.CompileTarget(target,
-			//		new CompileContext(this,
-			//			context.RequestedType,
-			//			dependencyBuilder: context.Name != null ? Builder.GetBestNamedBuilder(context.Name) : null));
-			//}
-
-			//return GetFallbackCompiledRezolveTarget(context);
-
-			//CODE BELOW FIXES ISSUE BUT CAUSES ANOTHER TEST (TO DO WITH DYNAMIC RESOLVING) TO FAIL
-			//CODE ABOVE (THE ORIGINAL) STILL WORKS FOR THAT TEST.
 			IRezolveTargetEntry target = Builder.Fetch(context.RequestedType, context.Name);
 
 			if (target == null)

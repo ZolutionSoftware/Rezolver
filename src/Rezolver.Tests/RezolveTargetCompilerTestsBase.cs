@@ -233,14 +233,14 @@ namespace Rezolver.Tests
 		{
 			IRezolveTargetCompiler compiler = CreateCompiler();
 			var mocks = CreateDefaultMockForRezolver(compiler);
-			mocks.RezolverMock.Setup(r => r.CreateLifetimeScope()).Returns(() => new CombinedLifetimeScopeRezolver(mocks.RezolverMock.Object));
+			mocks.RezolverMock.Setup(r => r.CreateLifetimeScope()).Returns(() => new CombinedLifetimeScopeRezolver(null, inner: mocks.RezolverMock.Object));
 
 			var target = compiler.CompileTarget(new ScopedTarget(ConstructorTarget.Auto<ScopedSingletonTestClass>()), CreateCompileContext(mocks)); ;
 
 			ScopedSingletonTestClass obj1;
 			ScopedSingletonTestClass obj2;
 
-			using(var scope = new CombinedLifetimeScopeRezolver(mocks.RezolverMock.Object))
+			using(var scope = new CombinedLifetimeScopeRezolver(null, inner: mocks.RezolverMock.Object))
 			{
 				target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
 

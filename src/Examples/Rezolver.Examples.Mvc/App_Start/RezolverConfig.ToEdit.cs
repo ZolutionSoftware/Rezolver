@@ -6,12 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using Rezolver.Examples.Mvc.Models;
 using System.Runtime.CompilerServices;
+using Rezolver.Diagnostics;
 
 namespace Rezolver.Examples.Mvc.App_Start
 {
 	public static partial class RezolverConfig
 	{
-		class DebugTraceRezolverLogger : IRezolverLogger
+		class DebugTraceRezolverLogger : ICallTracker
 		{
 			private readonly CallTrackingRezolverLogger _inner;
 			public DebugTraceRezolverLogger(CallTrackingRezolverLogger inner)

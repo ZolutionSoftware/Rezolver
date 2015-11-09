@@ -2,7 +2,7 @@
     "version": "1.0.0-*",
     "dependencies": {
         "Rezolver": "0.5.2-*",
-
+        "Rezolver.Diagnostics": "1.0.0-*",
         "xunit": "2.1.0-beta3-*",
         "xunit.runner.dnx": "2.1.0-beta3-*"
 
@@ -11,7 +11,6 @@
         "test": "xunit.runner.dnx"
     },
     "frameworks": {
-        "dnx451": { },
         "dnxcore50": {
             "dependencies": {
                 "System.Runtime": "4.0.20-beta-*"

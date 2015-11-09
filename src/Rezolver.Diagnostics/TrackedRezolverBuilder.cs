@@ -3,37 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Rezolver
+namespace Rezolver.Diagnostics
 {
-	public class LoggingRezolverBuilder : RezolverBuilder
-	{
-		private static int _loggingBuilderID = 1;
-
-		internal static int GetNextLoggingBuilderID()
-		{
-			return ++_loggingBuilderID;
-		}
-
-		private readonly int _id = GetNextLoggingBuilderID();
+	public class TrackedRezolverBuilder : RezolverBuilder
+	{ 
+		private readonly int _id = TrackingUtils.NextBuilderID();
 
 		public override string ToString()
 		{
 			return $"(#{_id} {GetType().Name})";
 		}
 
-		public IRezolverLogger Logger { get; private set; }
+		public ICallTracker Logger { get; private set; }
 		/// <summary>
 		/// Creates a new instance that wraps around the passed IRezolverBuilder.
 		/// </summary>
 		/// <param name="logger">The logger that is to receive logging calls from this instance.</param>
-		public LoggingRezolverBuilder(IRezolverLogger logger)
+		public TrackedRezolverBuilder(ICallTracker logger)
 		{
 			Logger = logger;
 		}
 
 		protected override IRezolveTargetEntry CreateEntry(Type type, params IRezolveTarget[] targets)
 		{
-			return Logger.LogCallWithResult(this, () => base.CreateEntry(type, targets), new { type = type, targets = targets });
+			return Logger.TrackCall(this, () => base.CreateEntry(type, targets), new { type = type, targets = targets });
 		}
 
 		protected override INamedRezolverBuilder CreateNamedBuilder(string name, IRezolveTarget target)

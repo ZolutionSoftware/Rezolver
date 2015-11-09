@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace System.Reflection
 {
-	public static class FieldInfoEnumerableExtensions
+	internal static class FieldInfoEnumerableExtensions
 	{
 		public static IEnumerable<FieldInfo> Public(this IEnumerable<FieldInfo> fields)
 		{

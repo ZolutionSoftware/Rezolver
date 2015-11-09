@@ -115,6 +115,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\artifacts\bin\Rezolver\Debug\net45\Rezolver.dll</HintPath>
     </Reference>
+    <Reference Include="Rezolver.Diagnostics">
+      <HintPath>..\..\..\artifacts\bin\Rezolver.Diagnostics\Debug\net45\Rezolver.Diagnostics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />

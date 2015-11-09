@@ -21,7 +21,7 @@ using Microsoft.CSharp.RuntimeBinder;
 
 namespace Rezolver.Examples.AspNet5
 {
-	class AspNetLogger : IRezolverLogger
+	class AspNetLogger : ICallTracker
 	{
 		private readonly CallTrackingRezolverLogger _inner;
 		private readonly ILogger _logger;

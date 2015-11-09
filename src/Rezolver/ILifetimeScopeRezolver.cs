@@ -52,6 +52,6 @@ namespace Rezolver
 		/// 
 		/// This is primarily for infrastructure purposes, and not intended to be used from your code.
 		/// </summary>
-		event EventHandler Disposing;
+		event EventHandler Disposed;
 	}
 }

@@ -4,19 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace Rezolver
+namespace Rezolver.Diagnostics
 {
 	/// <summary>
-	/// Represents a call that has been logged by an IRezolverLogger.
+	/// Represents a call to a method on an object that has been tracked by an ICallTracker.
+	/// 
+	/// Note that the class is not thread-safe.  You should only enumerate/evaluate this object from your
+	/// code when it's complete.
 	/// </summary>
-	public class LoggedRezolverCall
+	public class TrackedCall
 	{
-		public LoggedRezolverCall(int id, object callee, object arguments, string method, LoggedRezolverCall parent = null)
+		public TrackedCall(int id, object callee, object arguments, string method, TrackedCall parent = null)
 		{
 			Callee = FormatObjectString(callee);
 			Arguments = GetArgumentsStrings(arguments).ToArray();
 			Timestamp = DateTime.UtcNow;
-			ChildCalls = new List<LoggedRezolverCall>();
+			ChildCalls = new List<TrackedCall>();
 			Parent = parent;
 			ID = id;
 			Method = method;
@@ -32,7 +35,7 @@ namespace Rezolver
 
 		public string Method { get; private set; }
 
-		public LoggedRezolverCall Parent { get; private set; }
+		public TrackedCall Parent { get; private set; }
 		public int ID { get; private set; }
 
 		public DateTime Timestamp { get; private set; }
@@ -55,7 +58,7 @@ namespace Rezolver
 			}
 		}
 
-		public List<LoggedRezolverCall> ChildCalls { get; private set; }
+		public List<TrackedCall> ChildCalls { get; private set; }
 
 		public void Ended(object result = null)
 		{

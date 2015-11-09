@@ -9,7 +9,6 @@ namespace Rezolver
 {
 	public class CombinedLifetimeScopeRezolver : CombinedRezolver, ILifetimeScopeRezolver
 	{
-		private ConcurrentBag<ILifetimeScopeRezolver> _children;
 		private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;
 
 		public ILifetimeScopeRezolver ParentScope
@@ -22,20 +21,40 @@ namespace Rezolver
 
 		private bool _disposed;
 		private readonly ILifetimeScopeRezolver _parentScope;
-		public CombinedLifetimeScopeRezolver(IRezolver inner, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null)
-				: this(null, inner, builder: builder, compiler: compiler)
-		{ 
-			
-		}
 
+		public event EventHandler Disposed;
+
+		/// <summary>
+		/// Constructs a new instance of the CombinedLifetimeScopeRezolver class.
+		/// </summary>
+		/// <param name="parentScope">Can be null, but if it is, then <paramref name="inner"/> must be supplied</param>
+		/// <param name="inner">Can be null, but if it is, then <paramref name="parentScope"/> must be supplied</param>
+		/// <param name="builder"></param>
+		/// <param name="compiler"></param>
 		public CombinedLifetimeScopeRezolver(ILifetimeScopeRezolver parentScope, IRezolver inner = null, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null)
 				: base(inner ?? parentScope, builder: builder, compiler: compiler)
-
 		{
 			_parentScope = parentScope;
-			_children = new ConcurrentBag<ILifetimeScopeRezolver>();
 			_objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
 			_disposed = false;
+
+			if (_parentScope != null)
+				_parentScope.Disposed += ParentScope_Disposed;
+		}
+
+		private void ParentScope_Disposed(object sender, EventArgs e)
+		{
+			//when a parent scope is disposed, this scope must also be disposed.
+			Dispose();
+		}
+
+		protected void OnDisposed()
+		{
+			try
+			{
+				Disposed?.Invoke(this, EventArgs.Empty);
+			}
+			catch (Exception) { } //don't want an exception here to break anything
 		}
 
 		private void TrackObject(object obj, RezolveContext context)
@@ -54,22 +73,6 @@ namespace Rezolver
 				instances.Add(obj);
 		}
 
-		/// <summary>
-		/// Have to re-implement this method because it binds to a different version of the constructor (for the moment)
-		/// </summary>
-		/// <returns></returns>
-		protected override ILifetimeScopeRezolver CreateLifetimeScopeInstance()
-		{
-			return new CombinedLifetimeScopeRezolver(this);
-		}
-
-		public override ILifetimeScopeRezolver CreateLifetimeScope()
-		{
-			var toReturn = CreateLifetimeScopeInstance();
-			_children.Add(toReturn);
-			return toReturn;
-		}
-
 		public void Dispose()
 		{
 			Dispose(true);
@@ -83,12 +86,6 @@ namespace Rezolver
 
 			if (disposing)
 			{
-				ILifetimeScopeRezolver child = null;
-				while (_children.TryTake(out child))
-				{
-					child.Dispose();
-				}
-
 				object obj = null;
 				IDisposable disposableObj = null;
 				foreach (var kvp in _objects)
@@ -101,6 +98,7 @@ namespace Rezolver
 					}
 				}
 				_objects.Clear();
+				OnDisposed();
 			}
 			_disposed = true;
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -59,7 +60,7 @@ namespace Rezolver.Tests.vNext
 			}
 		}
 
-		private class TestLogger : IRezolverLogger
+		private class TestLogger : ICallTracker
 		{
 			private int _lastReqID = 0;
 
@@ -92,9 +93,24 @@ namespace Rezolver.Tests.vNext
 				Console.WriteLine($"Exception called for reqId {reqId}.  Exception: { ex?.Message }");
 			}
 
+			public TrackedCall GetCall(int callID)
+			{
+				throw new NotImplementedException();
+			}
+
+			public TrackedCallGraph GetCompletedCalls()
+			{
+				throw new NotImplementedException();
+			}
+
 			public void Message(string message)
 			{
 				Console.WriteLine($"Message: {message}");
+			}
+
+			public void Message(int callID, string message)
+			{
+				throw new NotImplementedException();
 			}
 		}
 
@@ -111,7 +127,7 @@ namespace Rezolver.Tests.vNext
 		public void ShouldRecordRezolverCall()
 		{
 			var logger = new TestLogger();
-			var loggingRezolver = new LoggingDefaultRezolver(logger);
+			var loggingRezolver = new TrackedDefaultRezolver(logger);
 
 			try
 			{
@@ -130,7 +146,7 @@ namespace Rezolver.Tests.vNext
 
 			//If bugs do start to show up 
 			var logger = new TestLogger();
-			var loggingRezolver = new LoggingDefaultRezolver(logger);
+			var loggingRezolver = new TrackedDefaultRezolver(logger);
 
 			loggingRezolver.RegisterObject(10);
 			loggingRezolver.RegisterType<RequiresInt>();

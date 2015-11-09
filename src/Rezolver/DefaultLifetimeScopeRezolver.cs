@@ -22,7 +22,6 @@ namespace Rezolver
 	/// suited for use as a child lifetime scope for another rezolver.</remarks>
 	public class DefaultLifetimeScopeRezolver : DefaultRezolver, ILifetimeScopeRezolver
 	{
-		private ConcurrentBag<ILifetimeScopeRezolver> _children;
 		private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;
 
 		public ILifetimeScopeRezolver ParentScope
@@ -35,19 +34,22 @@ namespace Rezolver
 
 		private bool _disposed;
 
-		public event EventHandler Disposing;
+		public event EventHandler Disposed;
 
 		public DefaultLifetimeScopeRezolver(IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null, bool registerToBuilder = true)
 				: base(builder, compiler, registerToBuilder)
 		{
-			_children = new ConcurrentBag<ILifetimeScopeRezolver>();
 			_objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
 			_disposed = false;
 		}
 
-		protected void OnDisposing()
+		protected void OnDisposed()
 		{
-			Disposing?.Invoke(this, EventArgs.Empty);
+			try
+			{
+				Disposed?.Invoke(this, EventArgs.Empty);
+			}
+			catch (Exception) { } //really don't want upstream exceptions affecting this
 		}
 
 		private void TrackObject(object obj, RezolveContext context)
@@ -66,24 +68,6 @@ namespace Rezolver
 				instances.Add(obj);
 		}
 
-		protected override ILifetimeScopeRezolver CreateLifetimeScopeInstance()
-		{
-			//have to re-implement this because it binds to a different version of the constructor
-			//than the base class does.
-			return new CombinedLifetimeScopeRezolver(this);
-		}
-		public override ILifetimeScopeRezolver CreateLifetimeScope()
-		{
-			//interesting thing here - is how to handle nested scopes.  A nested lifetime Builder
-			//should, in general, track objects it creates, and they should NOT be tracked by parent scopes.
-			//however, limited-lifetime targets - i.e. scoped singletons - SHOULD be tracked by parent scopes,
-			//and any child scopes that request the same object should receive the one created from the 
-			//parent Builder.
-			var toReturn = CreateLifetimeScopeInstance();
-			_children.Add(toReturn);
-			return toReturn;
-		}
-
 		public void Dispose()
 		{
 			Dispose(true);
@@ -97,12 +81,6 @@ namespace Rezolver
 
 			if (disposing)
 			{
-				ILifetimeScopeRezolver child = null;
-				while (_children.TryTake(out child))
-				{
-					child.Dispose();
-				}
-
 				object obj = null;
 				IDisposable disposableObj = null;
 				foreach (var kvp in _objects)
@@ -115,7 +93,9 @@ namespace Rezolver
 					}
 				}
 				_objects.Clear();
+				OnDisposed();
 			}
+
 			_disposed = true;
 		}
 
