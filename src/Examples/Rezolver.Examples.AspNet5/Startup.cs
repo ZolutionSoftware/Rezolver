@@ -33,6 +33,7 @@ namespace Rezolver.Examples.AspNet5
 		public void Ended(TrackedCall call)
 		{
 			_logger.LogInformation($"<-#{call.ID} ended");
+			//if the request doesn't have a parent, then write the whole thing out to disk....
 		}
 
 		public void Exception(TrackedCall call)
@@ -98,7 +99,8 @@ namespace Rezolver.Examples.AspNet5
 			//            compiler = new RezolveTargetDelegateCompiler();
 			//#endif
 			//so we forced to use the default compiler, which compiles to in-memory delegates
-			var rezolver = new TrackedLifetimeScopeResolver(LoggingCallTracker.Default);
+			//var rezolver = new TrackedLifetimeScopeResolver(LoggingCallTracker.Default);
+			var rezolver = new DefaultLifetimeScopeRezolver();
 			rezolver.Populate(services);
 
 			//provider = rezolver;

@@ -38,6 +38,30 @@ namespace Rezolver.Diagnostics
 		ConcurrentDictionary<int, TrackedCall> _callsInProgress = new ConcurrentDictionary<int, TrackedCall>();
 		ConcurrentBag<string> _messages = new ConcurrentBag<string>();
 
+		private bool _retainCompletedCalls;
+		/// <summary>
+		/// Controls whether calls that are completed are retained after they are finished.
+		/// 
+		/// The default is false, which ensures that call tracking can be enabled without placing a potentially large memory overhead
+		/// on the application.
+		/// 
+		/// When false, the GetCompletedCalls method will always return nothing.
+		/// </summary>
+		public bool RetainCompletedCalls
+		{
+			get
+			{
+				return _retainCompletedCalls;
+			}
+			set
+			{
+				_retainCompletedCalls = value;
+				if (!_retainCompletedCalls)
+				{
+					_calls.Clear();
+				}
+			}
+		}
 
 		/// <summary>
 		/// Each thread gets its own stack of calls.
@@ -78,7 +102,8 @@ namespace Rezolver.Diagnostics
 				if (_callsInProgress.TryRemove(completed.ID, out removed))
 					break;
 			}
-			if (removed != null && completed.Parent == null)
+
+			if (_retainCompletedCalls && removed != null && completed.Parent == null)
 			{
 
 				counter = 5;
