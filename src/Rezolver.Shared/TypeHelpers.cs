@@ -87,7 +87,10 @@ namespace Rezolver
 		internal static Type[] GetGenericArguments(Type type)
 		{
 #if DOTNET
-            return type.GetTypeInfo().GenericTypeArguments;
+			//the new TypeInfo system doesn't return parameters and arguments for Generic Types and their Definitions via the same
+			//property as before.  So we need to know whether it's a generic type or generic type definition in order to get the
+			//correct list.
+			return type.IsConstructedGenericType ? type.GetTypeInfo().GenericTypeArguments : type.GetTypeInfo().GenericTypeParameters;
 #else
 			return type.GetGenericArguments();
 #endif
@@ -152,7 +155,7 @@ namespace Rezolver
 		internal static ConstructorInfo[] GetConstructors(Type type)
 		{
 #if DOTNET
-			return type.GetTypeInfo().DeclaredMethods.Where(c => c.IsConstructor && c.IsPublic).Cast<ConstructorInfo>().ToArray();
+			return type.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic).Cast<ConstructorInfo>().ToArray();
 #else
 			return type.GetConstructors();
 #endif

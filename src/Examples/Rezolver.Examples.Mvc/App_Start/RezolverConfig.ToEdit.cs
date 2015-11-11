@@ -12,44 +12,31 @@ namespace Rezolver.Examples.Mvc.App_Start
 {
 	public static partial class RezolverConfig
 	{
-		class DebugTraceRezolverLogger : ICallTracker
+		class DebugTraceLoggingTarget : ILoggingTarget
 		{
-			private readonly CallTrackingRezolverLogger _inner;
-			public DebugTraceRezolverLogger(CallTrackingRezolverLogger inner)
+			public void Ended(TrackedCall call)
 			{
-				_inner = inner;
+				Debug.WriteLine($"<-#{call.ID} ended", "Rezolver");
 			}
 
-			public void CallEnd(int reqId)
+			public void Exception(TrackedCall call)
 			{
-				_inner.CallEnd(reqId);
-				Debug.WriteLine($"{reqId} ended", "Rezolver");
+				Debug.WriteLine($"!#{call.ID} {call.Exception}", "Rezolver");
 			}
 
-			public void CallResult<TResult>(int reqId, TResult result)
+			public void Message(string message, TrackedCall call)
 			{
-				_inner.CallResult(reqId, result);
-				Debug.WriteLine($"{reqId} ended with result: {(result == null ? "null" : result.ToString())}", "Rezolver");
+				Debug.WriteLine($"#{call.ID} {message}");
 			}
 
-			public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
+			public void Result(TrackedCall call)
 			{
-				var callId = _inner.CallStart(callee, arguments, method);
-				var loggedCall = _inner.GetCall(callId);
-
-				Debug.WriteLine($"{callId} started.  Target: {loggedCall.Callee}, Method: {loggedCall.Method}. Arguments: { string.Join(", ", loggedCall.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) }", "Rezolver");
-				return callId;
+				Debug.WriteLine($"<-#{call.ID} result: { call.Result }");
 			}
 
-			public void Exception(int reqId, Exception ex)
+			public void Started(TrackedCall call)
 			{
-				_inner.Exception(reqId, ex);
-			}
-
-			public void Message(string message)
-			{
-				_inner.Message(message);
-				Debug.WriteLine(message, "Rezolver");
+				Debug.WriteLine($"->#{call.ID} {call.Method}({ string.Join(", ", call.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) }) on {call.Callee}");
 			}
 		}
 
@@ -67,11 +54,12 @@ namespace Rezolver.Examples.Mvc.App_Start
 			//Most applications probably don't need change it.
 			IRezolver rezolver = null;
 
+			LoggingCallTracker.Default.AddTargets(new DebugTraceLoggingTarget());
 			//note that we're not passing a builder to these resolvers on creation - registrations
 			//will be done directly into them.
 #if DEBUG
 			//this resolver logs nearly all calls to the debug output
-			rezolver = new LoggingDefaultRezolver(new DebugTraceRezolverLogger(new CallTrackingRezolverLogger()));
+			rezolver = new TrackedDefaultRezolver(LoggingCallTracker.Default);
 #else
 			rezolver = new DefaultRezolver();
 #endif

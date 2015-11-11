@@ -57,8 +57,10 @@ namespace Rezolver.Diagnostics
 			TrackedCall call = PopOrGetIncompleteCall(callID);
 
 			if (call != null)
+			{
 				call.Ended();
-			CallComplete(call);
+				CallComplete(call);
+			}
 		}
 
 		/// <summary>
@@ -115,15 +117,17 @@ namespace Rezolver.Diagnostics
 		{
 			var call = PopOrGetIncompleteCall(callID);
 			if (call != null)
+			{
 				call.Ended(result);
-			CallComplete(call);
+				CallComplete(call);
+			}
 		}
 
 		public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
 		{
 			int callID = _nextCallID++;
 			var newCall = new TrackedCall(callID, callee, arguments, method, _currentCallStack.Count != 0 ? _currentCallStack.Peek() : null);
-			_calls.TryAdd(callID, newCall);  //should think about handling when it can't
+			_callsInProgress.TryAdd(callID, newCall);  //should think about handling when it can't
 			_currentCallStack.Push(newCall);
 			return callID;
 		}
@@ -132,8 +136,10 @@ namespace Rezolver.Diagnostics
 		{
 			var call = PopOrGetIncompleteCall(callID);
 			if (call != null)
+			{
 				call.EndedWithException(ex);
-			CallComplete(call);
+				CallComplete(call);
+			}
 		}
 
 		public void Message(int callID, string message)

@@ -17,6 +17,7 @@
     "Microsoft.Framework.Logging.Debug": "1.0.0-beta5",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta5",
     "Rezolver": "0.5.2-alpha-*",
+    "Rezolver.Diagnostics": "1.0.0-alpha-*",
     "Microsoft.Framework.DependencyInjection.Rezolver": "0.5.2-alpha-*" 
   },
 

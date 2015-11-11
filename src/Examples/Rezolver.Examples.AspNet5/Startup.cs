@@ -18,64 +18,43 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.AspNet.Mvc.Core;
 using Microsoft.CSharp.RuntimeBinder;
+using Rezolver.Diagnostics;
 
 namespace Rezolver.Examples.AspNet5
 {
-	class AspNetLogger : ICallTracker
+	class AspNetLoggerTarget : ILoggingTarget
 	{
-		private readonly CallTrackingRezolverLogger _inner;
-		private readonly ILogger _logger;
-		public AspNetLogger(CallTrackingRezolverLogger inner, ILogger logger)
+		ILogger _logger;
+		public AspNetLoggerTarget(ILogger logger)
 		{
 			_logger = logger;
-			_inner = inner;
 		}
 
-		public void CallEnd(int reqId)
+		public void Ended(TrackedCall call)
 		{
-			_inner.CallEnd(reqId);
-			_logger.LogInformation($"<-#{reqId} ended");
+			_logger.LogInformation($"<-#{call.ID} ended");
 		}
 
-		public void CallResult<TResult>(int reqId, TResult result)
+		public void Exception(TrackedCall call)
 		{
-			_inner.CallResult(reqId, result);
-			_logger.LogInformation($"<-#{reqId} result: {(result == null ? "null" : result.ToString())}", "Rezolver");
+			_logger.LogError($"!#{call.ID} {call.Exception}");
 		}
 
-		public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
+		public void Message(string message, TrackedCall call)
 		{
-			//if (arguments != null)
-			//{
-			//	RezolveContext context = null;
-			//	var property = arguments.GetType().GetRuntimeProperties().FirstOrDefault(p => p.Name == "context");
-			//	if (property != null)
-			//		context = (RezolveContext)property.GetValue(arguments);
-
-			//	if (context != null && context.RequestedType == typeof(IEnumerable<IActionInvokerProvider>) && method == "Resolve")
-			//		Debugger.Break();
-			//}
-
-			var callId = _inner.CallStart(callee, arguments, method);
-			var loggedCall = _inner.GetCall(callId);
-
-			_logger.LogInformation($"->#{callId} {loggedCall.Method}({ string.Join(", ", loggedCall.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) }) on {loggedCall.Callee}", "Rezolver");
-			return callId;
+			_logger.LogInformation($"#{call.ID} {message}");
 		}
 
-		public void Exception(int reqId, Exception ex)
+		public void Result(TrackedCall call)
 		{
-			_inner.Exception(reqId, ex);
-			_logger.LogInformation($"!#{reqId} Exception of type {ex.GetType()}: {ex.Message}");
+			_logger.LogInformation($"<-#{call.ID} result: { call.Result }");
 		}
 
-		public void Message(string message)
+		public void Started(TrackedCall call)
 		{
-			_inner.Message(message);
-			_logger.LogInformation(message, "Rezolver");
+			_logger.LogInformation($"->#{call.ID} {call.Method}({ string.Join(", ", call.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) }) on {call.Callee}");
 		}
 	}
-
 	public class Startup
 	{
 		public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
@@ -99,7 +78,6 @@ namespace Rezolver.Examples.AspNet5
 			// Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
 			// You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
 			// services.AddWebApiConventions();
-
 			var baseProvider = services.BuildServiceProvider();
 
 			//see the Asp.Net MVC 6 sample in github - early resolving of the application environment
@@ -110,7 +88,7 @@ namespace Rezolver.Examples.AspNet5
 			loggerFactory.AddDebug(LogLevel.Verbose);
 
 			var logger = loggerFactory.CreateLogger("Rezolver");
-
+			LoggingCallTracker.Default.AddTargets(new AspNetLoggerTarget(logger));
 			//note - the code below does not work for DNX451, because the assembly target compiler produces compiled
 			//code that is denied access to at least one constructor that is being used by the standard set of service registrations
 			//            IRezolveTargetCompiler compiler = null;
@@ -120,7 +98,7 @@ namespace Rezolver.Examples.AspNet5
 			//            compiler = new RezolveTargetDelegateCompiler();
 			//#endif
 			//so we forced to use the default compiler, which compiles to in-memory delegates
-			var rezolver = new LoggingLifetimeScopeResolver(new AspNetLogger(new CallTrackingRezolverLogger(), logger));
+			var rezolver = new TrackedLifetimeScopeResolver(LoggingCallTracker.Default);
 			rezolver.Populate(services);
 
 			//provider = rezolver;
