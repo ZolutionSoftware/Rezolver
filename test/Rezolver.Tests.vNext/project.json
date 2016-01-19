@@ -1,20 +1,17 @@
 {
-    "version": "1.0.0-*",
-    "dependencies": {
-        "Rezolver": "0.5.2-*",
-        "Rezolver.Diagnostics": "1.0.0-*",
-        "xunit": "2.1.0-beta3-*",
-        "xunit.runner.dnx": "2.1.0-beta3-*"
+  "version": "1.0.0-*",
+  "dependencies": {
+    "Rezolver.Diagnostics": "1.0.0-alpha-*",
+    "xunit": "2.1.0",
+    "xunit.runner.dnx": "2.1.0-rc1-build204"
 
-    },
-    "commands": {
-        "test": "xunit.runner.dnx"
-    },
-    "frameworks": {
-        "dnxcore50": {
-            "dependencies": {
-                "System.Runtime": "4.0.20-beta-*"
-            }
-        }
+  },
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
+  "frameworks": {
+    "dnx451": {
+
     }
+  }
 }

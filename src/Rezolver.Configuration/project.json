@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.1-alpha-902",
+  "version": "1.0.10-alpha-1",
   "description": "Core configuration framework for Rezolver. Provides the abstractions and infrastructure for configuration adapters.",
   "authors": [ "Andras Zoltan" ],
   "tags": [ "rezolver" ],
@@ -7,42 +7,23 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "Rezolver": "0.5.2-alpha-*",
+    "Rezolver": "1.0.0-alpha-*",
     "Rezolver.Shared": {
-      "version": "1.0.1-*",
+      "version": "1.0.10-alpha-*",
       "type": "build"
     }
   },
 
   "frameworks": {
-    "net45": {
+    "dnx451": { },
+    "net451": {
       "frameworkAssemblies": {
-        "Microsoft.CSharp": "4.0.0.0",
-        "System": "4.0.0.0",
-        "System.Core": "4.0.0.0",
-        "System.Linq": "4.0.0.0"
+
       }
     },
-    "netcore45": {
-      "compilationOptions": { "define": [ "DOTNET" ] },
-      "frameworkAssemblies": {
-        "Microsoft.CSharp": "4.0.0.0",
-        "System": "4.0.0.0",
-        "System.Core": "4.0.0.0",
-        "System.Linq": "4.0.0.0"
-      }
-    },
-    "dotnet": {
-      "dependencies": {
-        "System.Runtime": "4.0.20-beta-*",
-        "System.Reflection": "4.0.10-beta-*",
-        "System.Reflection.Primitives": "4.0.0-beta-*",
-        "System.Reflection.TypeExtensions": "4.0.0-beta-*",
-        "System.Linq": "4.0.0-beta-*",
-        "System.Linq.Expressions": "4.0.10-beta-*",
-        "System.Collections": "4.0.10-beta-*",
-        "System.Collections.Concurrent": "4.0.10-beta-*",
-        "System.Threading": "4.0.10-beta-*"
+    "dotnet5.4": {
+      "compilationOptions": {
+        "define": [ "DOTNET" ]
       }
     }
   }

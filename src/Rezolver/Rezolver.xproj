@@ -26,8 +26,5 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<ProduceOutputsOnBuild>True</ProduceOutputsOnBuild>
 	</PropertyGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\Rezolver.Resources\Rezolver.Resources.csproj" />
-	</ItemGroup>
 	<Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" />
 </Project>

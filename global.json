@@ -1,12 +1,12 @@
 {
-    "projects": [
-        "src",
-        "src/Examples",
-        "wrap"
-    ],
-    "sdk": {
-        "version": "1.0.0-beta5",
-        "runtime": "coreclr",
-        "architecture": "x86"
-    }
+  "projects": [
+    "src",
+    "wrap",
+    "test"
+  ],
+  "sdk": {
+    "version": "1.0.0-rc1-update1",
+    "architecture": "x86",
+    "runtime": "coreclr"
+  }
 }

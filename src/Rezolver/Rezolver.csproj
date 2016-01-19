@@ -69,7 +69,6 @@
     <Compile Include="Extensions\System\Collections\Concurrent\ConcurrentDictionary`2.cs" />
     <Compile Include="Extensions\System\Collections\Generic\ReadOnlyEnumerableExtensions.cs" />
     <Compile Include="GenericConstructorTarget.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICloneable.cs" />
     <Compile Include="ICompiledRezolveTarget.cs" />
     <Compile Include="ChildRezolverBuilder.cs" />
