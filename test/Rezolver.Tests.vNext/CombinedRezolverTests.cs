@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Rezolver.Tests.vNext
 {
-	public class CombinedRezolverTests
+	public class CombinedRezolverTests : TestsBase
 	{
 		[Fact]
 		public void ShouldRezolveFromBaseRezolver()
@@ -21,6 +21,35 @@ namespace Rezolver.Tests.vNext
 
 
 			Assert.Equal(expectedInt, rezolver2.Resolve(typeof(int)));
+		}
+
+		private class TypeWithConstructorArg
+		{
+			public int Value { get; private set; }
+
+			public TypeWithConstructorArg(int value)
+			{
+				Value = value;
+			}
+		}
+
+		[Fact]
+		public void ShouldRezolveIntDependencyFromBaseRezolver()
+		{
+			//this is using constructorTarget with a prescribed new expression
+			var rezolver = CreateADefaultRezolver();
+			rezolver.RegisterType<TypeWithConstructorArg>();
+
+			//the thing being that the underlying Builder does not know how too resolve an integer without
+			//being passed a dynamic container at call-time.
+			//this mocks a dynamically defined container that an application creates in response to transient information only
+			int expected = -1;
+			CombinedRezolver dynamicRezolver = new CombinedRezolver(rezolver);
+			dynamicRezolver.RegisterObject(expected);
+
+			var result = (TypeWithConstructorArg)dynamicRezolver.Resolve(typeof(TypeWithConstructorArg));
+			Assert.NotNull(result);
+			Assert.Equal(expected, result.Value);
 		}
 
 		public class Bug_Dependency
@@ -64,6 +93,6 @@ namespace Rezolver.Tests.vNext
 
 			Assert.NotNull(result);
 			Assert.NotEmpty(result);
-		}
+		}		
 	}
 }
