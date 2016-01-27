@@ -11,7 +11,7 @@ The process is taking a while as we cope with alterationis to the pre-release fr
 Dev branch notes
 ================
 
-Next test suite to port - DefaultTargetTests.
+Next test suite to port - LazyTargetTests.
 
 Features
 --------
