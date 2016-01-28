@@ -38,12 +38,15 @@ namespace Rezolver.Tests.vNext
 		[Fact]
 		public void ShouldCreateNewInstanceEachCall()
 		{
-			IRezolveTarget target = new DelegateTarget<InstanceCountingType>(() => new InstanceCountingType());
-			int currentInstances = InstanceCountingType.InstanceCount;
-			var result = GetValueFromTarget(target);
-			Assert.Equal(currentInstances + 1, InstanceCountingType.InstanceCount);
-			var result2 = GetValueFromTarget(target);
-			Assert.Equal(currentInstances + 2, InstanceCountingType.InstanceCount);
+			using (var session = InstanceCountingType.NewSession())
+			{
+				IRezolveTarget target = new DelegateTarget<InstanceCountingType>(() => new InstanceCountingType());
+				int currentInstances = InstanceCountingType.InstanceCount;
+				var result = GetValueFromTarget(target);
+				Assert.Equal(currentInstances + 1, InstanceCountingType.InstanceCount);
+				var result2 = GetValueFromTarget(target);
+				Assert.Equal(currentInstances + 2, InstanceCountingType.InstanceCount);
+			}
 		}
 	}
 }
