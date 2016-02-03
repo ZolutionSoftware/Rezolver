@@ -8,7 +8,9 @@ using System.Collections.Generic;
 namespace Rezolver
 {
     /// <summary>
-    /// Default implementation of the IRezolveTargetAdapter interface is also an ExpressionVisitor.
+    /// Default implementation of the IRezolveTargetAdapter interface.
+		/// 
+		/// Also an ExpressionVisitor.
     /// 
     /// Also, its <see cref="Default" /> property serves as the reference to the default adapter used by the 
     /// system to convert expressions into IRezolveTarget instances.
@@ -115,13 +117,6 @@ namespace Rezolver
 
         protected override Expression VisitNew(NewExpression node)
         {
-            //var ctor = node.Constructor;// ?? node.Type.GetConstructor(Type.EmptyTypes);
-            //if (ctor == null)
-            //	throw new ArgumentException(Exceptions.NoConstructorSetOnNewExpression, "node");
-
-            //var parameters = ctor.GetParameters();
-            //return new RezolveTargetExpression(new ConstructorTarget(node.Type, node.Constructor,
-            //	node.Arguments.Select((pExp, i) => new ParameterBinding(parameters[i], GetRezolveTarget(node))).ToArray()));
             return new RezolveTargetExpression(ConstructorTarget.For(node.Type, node, this));
         }
 
@@ -138,11 +133,7 @@ namespace Rezolver
                 //that is put around nearly all expressions produced by RezolveTargetBase implementations. 
                 var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
                 return rewriter.Visit(ctorTargetExpr);
-                //return Expression.MemberInit(
-                //    ((NewExpression)constructorTarget.CreateExpression(new CompileContext(c, node.Type))),
-                //    node.Bindings.Select(mb => VisitMemberBinding(mb)));
             }, node.Type, this));
-            //return base.VisitMemberInit(node);
         }
 
         protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)

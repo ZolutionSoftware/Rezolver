@@ -44,7 +44,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver", "src\Rezolver\Re
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.vNext", "test\Rezolver.Tests.vNext\Rezolver.Tests.vNext.xproj", "{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Extensions.DependencyInjection.Rezolver", "src\Microsoft.Framework.DependencyInjection.Rezolver\Microsoft.Extensions.DependencyInjection.Rezolver.xproj", "{726DC4D6-9064-45B4-9EFD-A18AA779AC34}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Extensions.DependencyInjection.Rezolver", "src\Microsoft.Extensions.DependencyInjection.Rezolver\Microsoft.Extensions.DependencyInjection.Rezolver.xproj", "{726DC4D6-9064-45B4-9EFD-A18AA779AC34}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Configuration", "src\Rezolver.Configuration\Rezolver.Configuration.xproj", "{05F52AEE-AB5B-4008-8B00-6CA2B58CAC48}"
 EndProject

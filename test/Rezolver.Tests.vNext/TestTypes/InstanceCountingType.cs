@@ -16,7 +16,7 @@ namespace Rezolver.Tests.vNext.TestTypes
 	/// been constructed.
 	/// 
 	/// In order to ensure consistency in the InstanceCount property for the current test
-	/// and type reuse across multiple tests, you must can an exclusive lock on the underlying
+	/// and type reuse across multiple tests, you must take an exclusive lock on the underlying
 	/// counter by creating a new session by calling NewSession, and then disposing of it. 
 	/// </summary>
 	public class InstanceCountingType
