@@ -1,24 +1,20 @@
-﻿using System;
+﻿using Rezolver.Tests.vNext.TestTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Rezolver.Tests.vNext.Compilation
 {
-    public abstract partial class RezolveTargetCompilerTestsBase
-    {
+	public abstract partial class RezolveTargetCompilerTestsBase
+	{
 		public interface ITransient
 		{
 		}
 
-		public class Transient : ITransient
+		public sealed class Transient : InstanceCountingTypeBase<Transient>, ITransient
 		{
-			public static int Counter = 0;
 
-			public Transient()
-			{
-				++Counter;
-			}
 		}
 
 		public interface IRequiresInt
@@ -53,13 +49,12 @@ namespace Rezolver.Tests.vNext.Compilation
 
 		public interface ISingleton { }
 
-		public class Singleton : ISingleton
+		//intended to be used as a singleton during compilation tests.
+		public sealed class Singleton : InstanceCountingTypeBase<Singleton>, ISingleton
 		{
-			public static int Counter = 0;
-
 			public Singleton()
 			{
-				++Counter;
+
 			}
 		}
 
@@ -134,7 +129,7 @@ namespace Rezolver.Tests.vNext.Compilation
 			public IComposite Composite { get; private set; }
 		}
 
-		public class ScopedSingletonTestClass
+		public class ScopedSingletonTestClass : InstanceCountingTypeBase<ScopedSingletonTestClass>
 		{
 
 		}

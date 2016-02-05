@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Tests.vNext.TestTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,9 +16,10 @@ namespace Rezolver.Tests.vNext.Compilation
 		//Look in the sub-files .Supporting.cs and .TestTypes.cs for the rest.
 
 		//NOTES ON THE TESTS 
-		//Most of these tests focus on one type of IRezolveTarget implementation to be compiled. That target 
-		//is created directly and passed to the compiler directly.  
-		//But a CompileContext is then created which passes the in-scope Rezolver to the compiler for dependency lookup.
+		//Most of these tests focus on one type of IRezolveTarget implementation to be compiled *and* executed afterwards. 
+		//That target is created directly and passed to the compiler directly.
+		//But a CompileContext is then created which passes the in-scope Rezolver to the compiler for dependency lookup -
+		//that Rezolver will have other targets required for the main target to compile correctly registered within.
 
 		//Where expression-based targets are being compiled (not as dependencies) then the framework's default 
 		//RezolveTargetAdapter class is used directly through the RezolveTargetAdapter.Instance property, rather 
@@ -50,7 +52,7 @@ namespace Rezolver.Tests.vNext.Compilation
 		{
 			AddIntTarget();
 			var target = CompileTarget(ConstructorTarget.Auto<RequiresInt>());
-			var result = target.GetObject(CreateRezolveContext<RequiresInt>());
+			var result = target.GetObject(CreateRezolveContext<IRequiresInt>());
 			Assert.IsType<RequiresInt>(result);
 			Assert.Equal(IntForObjectTarget, ((RequiresInt)result).Int);
 		}
@@ -60,7 +62,7 @@ namespace Rezolver.Tests.vNext.Compilation
 		{
 			AddNullableIntTarget();
 			var target = CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>());
-			var result = target.GetObject(CreateRezolveContext<RequiresNullableInt>());
+			var result = target.GetObject(CreateRezolveContext<IRequiresNullableInt>());
 			Assert.IsType<RequiresNullableInt>(result);
 			Assert.Equal(NullableIntForObjectTarget, ((RequiresNullableInt)result).NullableInt);
 		}
@@ -71,7 +73,7 @@ namespace Rezolver.Tests.vNext.Compilation
 			AddIntTarget(typeof(int?));
 
 			var target = CompileTarget(ConstructorTarget.Auto<RequiresNullableInt>());
-			var result = target.GetObject(CreateRezolveContext<RequiresNullableInt>());
+			var result = target.GetObject(CreateRezolveContext<IRequiresNullableInt>());
 			Assert.IsType<RequiresNullableInt>(result);
 			Assert.Equal(IntForObjectTarget, ((RequiresNullableInt)result).NullableInt);
 		}
@@ -83,7 +85,7 @@ namespace Rezolver.Tests.vNext.Compilation
 			AddNullableIntTarget(typeof(int));
 
 			var target = CompileTarget(ConstructorTarget.Auto<RequiresInt>());
-			var result = target.GetObject(CreateRezolveContext<RequiresInt>());
+			var result = target.GetObject(CreateRezolveContext<IRequiresInt>());
 			Assert.IsType<RequiresInt>(result);
 			Assert.Equal(NullableIntForObjectTarget, ((IRequiresInt)result).Int);
 		}
@@ -106,7 +108,7 @@ namespace Rezolver.Tests.vNext.Compilation
 			//tests whether the compiler can handle calling the static method above with an
 			//injected integer input argument.
 			var target = CompileTarget(RezolveTargetAdapter.Instance.GetRezolveTarget(c => new RequiresInt(MultiplyAnInt(c.Resolve<int>()))));
-			var result = target.GetObject(CreateRezolveContext<RequiresInt>());
+			var result = target.GetObject(CreateRezolveContext<IRequiresInt>());
 			Assert.IsType<RequiresInt>(result);
 			Assert.Equal(IntForObjectTarget * MultipleForIntObjectTarget, ((RequiresInt)result).Int);
 		}
@@ -126,112 +128,108 @@ namespace Rezolver.Tests.vNext.Compilation
 		[Fact]
 		public void ShouldCompileTransientConstructorTarget()
 		{
-			//TODO: This test won't work as written because XUnit runner overlaps tests.
-			var target = CompileTarget(ConstructorTarget.Auto<Transient>());
-			var lastCount = Transient.Counter;
-			var result = target.GetObject(CreateRezolveContext<Transient>());
-			Assert.NotNull(result);
-			Assert.IsType<Transient>(result);
-			Assert.Equal(lastCount + 1, Transient.Counter);
+			using (var session = Transient.NewSession())
+			{
+				var target = CompileTarget(ConstructorTarget.Auto<Transient>());
+				var result = target.GetObject(CreateRezolveContext<ITransient>());
+				Assert.NotNull(result);
+				Assert.IsType<Transient>(result);
+				//second call must create a new instance.
+				var result2 = target.GetObject(CreateRezolveContext<ITransient>());
+				//don't bother re-checking not null/type etc.
+				Assert.Equal(session.InitialInstanceCount + 2, Transient.InstanceCount);
+			}
 		}
 
 		[Fact]
 		public void ShouldCompileSingletonConstructorTarget()
 		{
-			IRezolveTargetCompiler compiler = GetCompiler();
-			var target = compiler.CompileTarget(new SingletonTarget(ConstructorTarget.Auto<Singleton>()),
-				CreateCompileContext(compiler));
-			Assert.NotNull(target);
+			using (var session = Singleton.NewSession())
+			{
+				var target = CompileTarget(ConstructorTarget.Auto<Singleton>().Singleton());
+				var result = target.GetObject(CreateRezolveContext<ISingleton>());
+				var result2 = target.GetObject(CreateRezolveContext<ISingleton>());
 
-			var lastCount = Singleton.Counter = 0;
-			var result = target.GetObject();
-			Assert.NotNull(result);
-			Assert.IsInstanceOfType(result, typeof(Singleton));
-			Assert.Equal(lastCount + 1, Singleton.Counter);
-			var result2 = target.GetObject();
-			Assert.Equal(lastCount + 1, Singleton.Counter);
+				Assert.NotNull(result);
+				Assert.IsType<Singleton>(result);
+				Assert.Same(result, result2);
+			}
 		}
 
 		[Fact]
 		public void ShouldCompileCompositeConstructorTarget()
 		{
-			IRezolveTargetCompiler compiler = GetCompiler();
-			//need a special mock for this
-			var mocks = CreateDefaultMockForRezolver(compiler);
-			AddSingletonTargetToMocks(mocks);
-			AddTransientTargetToMocks(mocks);
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<Composite>(), CreateCompileContext(mocks));
-			Assert.NotNull(target);
-			var lastSingletonCount = Singleton.Counter = 0;
-			var lastTransientCount = Transient.Counter;
-			var result = target.GetObject();
-			Assert.IsInstanceOfType(result, typeof(Composite));
-			var result2 = (IComposite)result;
-			Assert.IsInstanceOfType(result2.Singleton, typeof(Singleton));
-			Assert.IsInstanceOfType(result2.Transient, typeof(Transient));
-			Assert.Equal(++lastSingletonCount, Singleton.Counter);
-			Assert.Equal(++lastTransientCount, Transient.Counter);
-			var result3 = target.GetObject();
-			Assert.AreNotSame(result, result3);
-			Assert.Equal(lastSingletonCount, Singleton.Counter); //this one shouldn't increment
-			Assert.Equal(++lastTransientCount, Transient.Counter);
+			using (ITestSession singletonSession = Singleton.NewSession(),
+													transientSession = Transient.NewSession())
+			{
+				AddSingletonTarget();
+				AddTransientTarget();
+				var target = CompileTarget(ConstructorTarget.Auto<Composite>());
+				var result = target.GetObject(CreateRezolveContext<IComposite>());
+				Assert.IsType<Composite>(result);
+				var result2 = (IComposite)result;
+				Assert.Equal(singletonSession.InitialInstanceCount + 1, Singleton.InstanceCount);
+				Assert.Equal(transientSession.InitialInstanceCount + 1, Transient.InstanceCount);
+				
+				var result3 = target.GetObject(CreateRezolveContext<IComposite>());
+				Assert.NotSame(result, result3);
+				Assert.Equal(singletonSession.InitialInstanceCount + 1, Singleton.InstanceCount); //this one shouldn't increment
+				Assert.Equal(transientSession.InitialInstanceCount + 2, Transient.InstanceCount);
+			}
 		}
 
 		[Fact]
 		public void ShouldCompileSuperComplexConstructorTarget()
 		{
-			IRezolveTargetCompiler compiler = GetCompiler();
-			var mocks = CreateDefaultMockForRezolver(compiler);
+			AddIntTarget();
+			AddNullableIntTarget();
+			AddStringTarget();
+			AddTransientTarget();
+			AddSingletonTarget();
+			AddCompositeTarget();
 
-			AddIntTargetToMocks(mocks);
-			AddNullableIntTargetToMocks(mocks);
-			AddStringTargetToMocks(mocks);
-			AddTransientTargetToMocks(mocks);
-			AddSingletonTargetToMocks(mocks);
-			AddCompositeTargetToMocks(mocks);
-
-			var target = compiler.CompileTarget(ConstructorTarget.Auto<SuperComplex>(), CreateCompileContext(mocks));
-			Assert.NotNull(target);
-			var result = target.GetObject();
-			Assert.IsInstanceOfType(result, typeof(SuperComplex));
-			var result2 = (ISuperComplex)result;
-			Assert.Equal(IntForObjectTarget, result2.Int);
-			Assert.Equal(NullableIntForObjectTarget, result2.NullableInt);
-			Assert.Equal(StringForObjectTarget, result2.String);
-			Assert.NotNull(result2.Transient);
-			Assert.NotNull(result2.Singleton);
-			Assert.NotNull(result2.Composite);
-			Assert.NotNull(result2.Composite.Transient);
-			Assert.AreNotSame(result2.Transient, result2.Composite.Transient);
-			Assert.NotNull(result2.Composite.Singleton);
-			Assert.AreSame(result2.Singleton, result2.Composite.Singleton);
+			using (ITestSession singletonSession = Singleton.NewSession(),
+													transientSession = Transient.NewSession())
+			{
+				var target = CompileTarget(ConstructorTarget.Auto<SuperComplex>());
+				var result = target.GetObject(CreateRezolveContext<ISuperComplex>());
+				Assert.IsType<SuperComplex>(result);
+				var result2 = (ISuperComplex)result;
+				Assert.Equal(IntForObjectTarget, result2.Int);
+				Assert.Equal(NullableIntForObjectTarget, result2.NullableInt);
+				Assert.Equal(StringForObjectTarget, result2.String);
+				Assert.NotNull(result2.Transient);
+				Assert.NotNull(result2.Singleton);
+				Assert.NotNull(result2.Composite);
+				Assert.NotNull(result2.Composite.Transient);
+				Assert.NotSame(result2.Transient, result2.Composite.Transient);
+				Assert.NotNull(result2.Composite.Singleton);
+				Assert.Same(result2.Singleton, result2.Composite.Singleton);
+			}
 		}
 
 		[Fact]
 		public void ShouldCompileScopedSingletonTarget()
 		{
-			IRezolveTargetCompiler compiler = GetCompiler();
-			var mocks = CreateDefaultMockForRezolver(compiler);
-			mocks.RezolverMock.Setup(r => r.CreateLifetimeScope()).Returns(() => new CombinedLifetimeScopeRezolver(null, inner: mocks.RezolverMock.Object));
-
-			var target = compiler.CompileTarget(new ScopedTarget(ConstructorTarget.Auto<ScopedSingletonTestClass>()), CreateCompileContext(mocks)); ;
-
-			ScopedSingletonTestClass obj1;
-			ScopedSingletonTestClass obj2;
-
-			using (var scope = new CombinedLifetimeScopeRezolver(null, inner: mocks.RezolverMock.Object))
+			using (var session = ScopedSingletonTestClass.NewSession())
 			{
-				target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
+				var target = CompileTarget(ConstructorTarget.Auto<ScopedSingletonTestClass>().Scoped()); ;
 
-				obj1 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
-				obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope));
-				Assert.NotNull(obj1);
-				Assert.AreSame(obj1, obj2);
-				using (var scope2 = scope.CreateLifetimeScope())
+				ScopedSingletonTestClass obj1;
+				ScopedSingletonTestClass obj2;
+
+				using (var scope = GetRezolver().CreateLifetimeScope())
 				{
-					obj2 = (ScopedSingletonTestClass)target.GetObject(new RezolveContext(mocks.RezolverMock.Object, typeof(ScopedSingletonTestClass), scope2));
+					obj1 = (ScopedSingletonTestClass)target.GetObject(CreateRezolveContext<ScopedSingletonTestClass>(scope));
+					obj2 = (ScopedSingletonTestClass)target.GetObject(CreateRezolveContext<ScopedSingletonTestClass>(scope));
+					Assert.NotNull(obj1);
+					Assert.Same(obj1, obj2);
+					using (var scope2 = scope.CreateLifetimeScope())
+					{
+						obj2 = (ScopedSingletonTestClass)target.GetObject(CreateRezolveContext<ScopedSingletonTestClass>(scope2));
 
-					Assert.AreNotSame(obj1, obj2);
+						Assert.NotSame(obj1, obj2);
+					}
 				}
 			}
 		}
@@ -240,10 +238,8 @@ namespace Rezolver.Tests.vNext.Compilation
 		[Fact]
 		public void ShouldCompileTargetForStaticProperty()
 		{
-			IRezolveTargetCompiler compiler = GetCompiler();
-
-			var target = compiler.CompileTarget(RezolveTargetAdapter.Default.GetRezolveTarget(c => IntForStaticExpression), CreateCompileContext(CreateDefaultMockForRezolver(compiler)));
-			int result = (int)target.GetObject();
+			var target = CompileTarget(RezolveTargetAdapter.Instance.GetRezolveTarget(c => IntForStaticExpression));
+			int result = (int)target.GetObject(CreateRezolveContext<int>());
 			Assert.Equal(IntForStaticExpression, result);
 		}
 	}

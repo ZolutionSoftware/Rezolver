@@ -93,14 +93,14 @@ namespace Rezolver.Tests.vNext.Compilation
 			return result;
 		}
 
-		protected RezolveContext CreateRezolveContext(Type rezolveType, [CallerMemberName]string callingMethod = null)
+		protected RezolveContext CreateRezolveContext(Type rezolveType, ILifetimeScopeRezolver scope = null, [CallerMemberName]string callingMethod = null)
 		{
-			return new RezolveContext(GetRezolver(callingMethod), rezolveType);
+			return new RezolveContext(GetRezolver(callingMethod), rezolveType, scope);
 		}
 
-		protected RezolveContext CreateRezolveContext<TRezolve>([CallerMemberName]string callingMethod = null)
+		protected RezolveContext CreateRezolveContext<TRezolve>(ILifetimeScopeRezolver scope = null, [CallerMemberName]string callingMethod = null)
 		{
-			return CreateRezolveContext(typeof(TRezolve), callingMethod);
+			return CreateRezolveContext(typeof(TRezolve), scope, callingMethod);
 		}
 
 		protected CompileContext CreateCompileContext([CallerMemberName]string callingMethod = null)
