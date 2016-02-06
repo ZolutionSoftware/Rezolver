@@ -140,7 +140,7 @@ namespace Rezolver.Configuration.Json
 			/// <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
 			public override bool CanConvert(Type objectType)
 			{
-				return typeof(JsonConfiguration).IsAssignableFrom(objectType);
+				return TypeHelpers.IsAssignableFrom(typeof(JsonConfiguration), objectType);
 			}
 
 			/// <summary>

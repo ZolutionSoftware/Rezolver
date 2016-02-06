@@ -16,6 +16,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -181,3 +182,6 @@ FakesAssemblies/
 
 #ghostdoc help project output
 Help/
+
+#dynamically 
+test/Rezolver.Tests.vNext/_TestAssemblies

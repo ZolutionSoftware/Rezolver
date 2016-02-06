@@ -1,0 +1,34 @@
+﻿{
+  "description": "Json configuration implementation for Rezolver",
+  "version": "1.0.10-alpha-1",
+  "tags": [ "ioc", "di", "portable", "rezolver", "configuration", "json" ],
+  "projectUrl": "http://www.zolution.co.uk/Rezolver",
+  "authors": [ "Andras Zoltan" ],
+  "dependencies": {
+    "Rezolver.Configuration": "1.0.10-*",
+    "Rezolver.Shared": {
+      "version": "1.0.10-*"
+    },
+    "Newtonsoft.Json": "8.0.2"
+  },
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+       
+      }
+    },
+    "net451": {
+      "frameworkAssemblies": {
+       
+      }
+    },
+    "dotnet5.4": {
+      "compilationOptions": {
+        "define": [ "DOTNET" ]
+      },
+      "dependencies": {
+       
+      }
+    }
+  }
+}

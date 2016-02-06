@@ -55,13 +55,14 @@ namespace Rezolver
 		/// with the supplied access settings (e.g. if you want to be able to save the assembly).
 		/// </summary>
 		/// <param name="assemblyBuilderAccess">The assembly builder access.</param>
+		/// <param name="dir">If supplied, then it's the base directory that will be used when saving the dynamic dll.</param>
 		/// <returns>An AssemblyBuilder instance that can be passed to the <see cref="AssemblyRezolveTargetCompiler"/> constructor.</returns>
 		public static AssemblyBuilder CreateAssemblyBuilder(
-			AssemblyBuilderAccess assemblyBuilderAccess = AssemblyBuilderAccess.RunAndCollect)
+			AssemblyBuilderAccess assemblyBuilderAccess = AssemblyBuilderAccess.RunAndCollect, string dir = null)
 		{
 			return AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName(
 				string.Format("Rezolver.Dynamic{0}, Culture=neutral, Version=0.0.0.0",
-					++_assemblyCounter)), assemblyBuilderAccess);
+					++_assemblyCounter)), assemblyBuilderAccess, dir);
 		}
 
 		/// <summary>
