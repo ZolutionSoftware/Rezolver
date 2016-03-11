@@ -9,6 +9,51 @@ namespace Rezolver
 {
 	public class ConstructorTarget : RezolveTargetBase
 	{
+		/// <summary>
+		/// A target that helps a constructor target bind to the best matching constructor on a type
+		/// given a rezolver's configured services.
+		/// 
+		/// The target doesn't actually bind to a constructor until it's first called, and when it does,
+		/// it does it based on the configured services of the rezolver that's in scope when the expression is
+		/// first requested (so that's either creating an expression to give to another target, or to be compiled
+		/// for its own compiled target).
+		/// </summary>
+		private class BestMatchConstructorTarget : RezolveTargetBase
+		{
+			private readonly IPropertyBindingBehaviour _propertyBindingBehaviour;
+
+			private readonly Type _declaredType;
+			public override Type DeclaredType
+			{
+				get { return _declaredType; }
+			}
+
+			private readonly object _locker = new object();
+			private IRezolveTarget _wrapped = null;
+
+			public BestMatchConstructorTarget(Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+			{
+				declaredType.MustNotBeNull(nameof(declaredType));
+				_declaredType = declaredType;
+				_propertyBindingBehaviour = propertyBindingBehaviour;
+			}
+
+			protected override Expression CreateExpressionBase(CompileContext context)
+			{
+				//only resolve the constructor once.
+				if (_wrapped == null)
+				{
+					lock (_locker)
+					{
+						if (_wrapped == null)
+							_wrapped = ConstructorTarget.Auto(context.DependencyBuilder, _declaredType, _propertyBindingBehaviour);
+					}
+				}
+				return _wrapped.CreateExpression(context);
+			}
+		}
+
+
 		private static readonly Type[] EmptyTypes = new Type[0];
 
 		private readonly Type _declaredType;
@@ -48,23 +93,64 @@ namespace Rezolver
 			//conduct a very simple search for the constructor with the most parameters
 			declaredType.MustNotBeNull("declaredType");
 
-			var ctorGroups = TypeHelpers.GetConstructors(declaredType)
-				.GroupBy(c => c.GetParameters().Length)
-				.OrderByDescending(g => g.Key).ToArray();
-
-			if (ctorGroups.Length == 0)
-				throw new ArgumentException(
-					string.Format(Exceptions.NoPublicConstructorsDefinedFormat, declaredType), "declaredType");
+			IGrouping<int, ConstructorInfo>[] ctorGroups = GetPublicConstructorGroups(declaredType);
 			//get the first group - if there's more than one constructor then we can't choose.
 			var ctorsWithMostParams = ctorGroups[0].ToArray();
 			if (ctorsWithMostParams.Length > 1)
 				throw new ArgumentException(
 					string.Format(Exceptions.MoreThanOneConstructorFormat, declaredType));
 
-			var baseTarget = new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.DeriveAutoParameterBindings(ctorsWithMostParams[0]));
+			var baseTarget = new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.BindWithRezolvedArguments(ctorsWithMostParams[0]));
 			if (propertyBindingBehaviour != null)
 				return new ConstructorWithPropertiesTarget(baseTarget, propertyBindingBehaviour.GetPropertyBindings(declaredType));
 			return baseTarget;
+		}
+
+		private static IGrouping<int, ConstructorInfo>[] GetPublicConstructorGroups(Type declaredType)
+		{
+			var ctorGroups = TypeHelpers.GetConstructors(declaredType)
+							.GroupBy(c => c.GetParameters().Length)
+							.OrderByDescending(g => g.Key).ToArray();
+
+			if (ctorGroups.Length == 0)
+				throw new ArgumentException(
+					string.Format(Exceptions.NoPublicConstructorsDefinedFormat, declaredType), "declaredType");
+			return ctorGroups;
+		}
+
+		/// <summary>
+		/// This overload restricts the target to binding the best constructor whose arguments can actually be resolved
+		/// from the <see cref="IRezolverBuilder"/> that you pass as the argument.
+		/// 
+		/// This overrides the default behaviour, which is to select the constructor with the most arguments.
+		/// 
+		/// Note - if the target that is created is to be registered in the builder with a path, then you must pass that path in the <paramref name="targetName"/>
+		/// argument, otherwise you will get inconsistent results.
+		/// </summary>
+		/// <param name="dependencyLookup">The builder that will be used to look for </param>
+		/// <param name="declaredType"></param>
+		/// <param name="propertyBindingBehaviour"></param>
+		/// <returns></returns>
+		public static IRezolveTarget Auto(IRezolverBuilder dependencyLookup, Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null, string targetName = null)
+		{
+			dependencyLookup.MustNotBeNull("dependencyLookup");
+			declaredType.MustNotBeNull("declaredType");
+
+			var ctorGroups = GetPublicConstructorGroups(declaredType);
+
+			//search all ctor groups, attempting to match each parameter to a rezolve target
+			//this is slightly cut down version of what's done by the RezolvedTarget, and not quite as clever:
+			//it only considers the current IRezolverBuilder.
+			var firstGroupWithMatch = ctorGroups.Select(g => new { paramCount = g.Key, matches = g.Select(c => {
+				var parameters = c.GetParameters();
+				return new { constructor = c, bindings = parameters.Select(p => new {
+					parameter = p, binding = dependencyLookup.Fetch(p.ParameterType, targetName)
+				}).ToArray() };
+			}) }).FirstOrDefault(g => g.matches.Any(m => m.bindings.Length == 0 ? true : m.bindings.All(b => b.binding != null)));
+
+			var matchesArray = firstGroupWithMatch.matches.ToArray();
+
+			throw new NotImplementedException();
 		}
 
 		public static IRezolveTarget For<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr = null, IRezolveTargetAdapter adapter = null)

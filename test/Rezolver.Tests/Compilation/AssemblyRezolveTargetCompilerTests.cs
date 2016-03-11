@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Compilation
 {
+#if !DOTNET
 	public class AssemblyRezolveTargetCompilerTests : RezolveTargetCompilerTestsBase
 	{
 		private static string _baseOutputDir;
@@ -40,4 +41,5 @@ namespace Rezolver.Tests.Compilation
 			}
 		}
 	}
+#endif
 }

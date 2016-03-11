@@ -64,7 +64,7 @@ namespace Rezolver
 			return toReturn;
 		}
 
-		public static ParameterBinding[] DeriveAutoParameterBindings(MethodBase method)
+		public static ParameterBinding[] BindWithRezolvedArguments(MethodBase method)
 		{
 			method.MustNotBeNull("method");
 			var parameters = method.GetParameters();

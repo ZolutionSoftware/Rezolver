@@ -68,7 +68,7 @@ namespace Rezolver.Tests.Configuration
 
 			Assert.IsType<RezolverBuilder>(builder);
 
-			var rezolver = new DefaultRezolver(builder, new AssemblyRezolveTargetCompiler());
+			var rezolver = new DefaultRezolver(builder, new RezolveTargetDelegateCompiler());
 			var str = rezolver.Resolve<string>();
 			Assert.Equal("Hello world", str);
 			var en = rezolver.Resolve<IEnumerable<int>>();

@@ -6,13 +6,19 @@
   "authors": [ "Andras Zoltan" ],
   "dependencies": {
     "Rezolver": "1.0.0-alpha-*",
-    "Rezolver.Shared": "1.0.10-alpha-*"
+    "Rezolver.Shared": {
+      "version": "1.0.10-alpha-*",
+      "type": "build"
+    }
   },
   "frameworks": {
     "dnx451": {
 
     },
     "net451": {
+    },
+    "net46": {
+
     },
     "dotnet5.4": {
       "compilationOptions": {

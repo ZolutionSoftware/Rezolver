@@ -25,24 +25,17 @@ namespace Rezolver
 		{
 			if (context.Name == null)
 			{
-                return _typeOnlyEntries.GetOrAdd(context.RequestedType, t => new Lazy<ICompiledRezolveTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
-				//if (_typeOnlyEntries.TryGetValue(context.RequestedType, out toReturn))
-				//	return toReturn;
+				return _typeOnlyEntries.GetOrAdd(context.RequestedType, t => new Lazy<ICompiledRezolveTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
 
-				//return _typeOnlyEntries[context.RequestedType] = base.GetCompiledRezolveTarget(context);
 			}
 			else
 			{
-                Lazy<ICompiledRezolveTarget> lazy;
+				Lazy<ICompiledRezolveTarget> lazy;
 				if (_entries.TryGetValue(context, out lazy))
 					return lazy.Value;
 
-                return _entries.GetOrAdd(new RezolveContext(null, context.RequestedType, context.Name),
-                    c => new Lazy<ICompiledRezolveTarget>(() => base.GetCompiledRezolveTarget(c))).Value;
-                //create a new context to use as the key which doesn't hold on to any dynamic rezolver
-                //or lifetime scope.
-    //            var keyContext = new RezolveContext(null, context.RequestedType, context.Name);
-				//return _entries[context] = base.GetCompiledRezolveTarget(context);
+				return _entries.GetOrAdd(new RezolveContext(null, context.RequestedType, context.Name),
+						c => new Lazy<ICompiledRezolveTarget>(() => base.GetCompiledRezolveTarget(c))).Value;
 			}
 		}
 	}

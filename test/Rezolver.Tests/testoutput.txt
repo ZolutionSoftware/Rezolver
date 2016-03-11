@@ -1,0 +1,764 @@
+xUnit.net DNX Runner (32-bit DNX 4.5.1)
+  Discovering: Rezolver.Tests
+  Discovered:  Rezolver.Tests
+  Starting:    Rezolver.Tests
+3302 Date in ticks: 1041736567290000000
+CallStart called on object (#1 TrackedDefaultRezolver) for method Resolve. Arguments? Yes.  ReqId: 1
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveRequiresIntByTwoTypes:
+{
+	"assemblies":["Rezolver.Tests" ],
+	"rezolve": [
+		{ "System.Int32": 110 },
+		{ 
+			"types": [ "Rezolver.Tests.TestTypes.IRequiresInt", "Rezolver.Tests.TestTypes.RequiresInt" ],
+			"value": { "$construct": "Rezolver.Tests.TestTypes.RequiresInt" }
+		}
+	]
+}
+CallStart called on object (#1 TrackedDefaultRezolver) for method GetCompiledRezolveTarget. Arguments? Yes.  ReqId: 2
+CallResult called for reqId 2, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 1, result: Rezolver.Tests.RezolverLoggerTests+RequiresInt
+CallStart called on object (#1 TrackedDefaultRezolver) for method CreateLifetimeScope. Arguments? No.  ReqId: 3
+CallStart called on object (#1 TrackedRezolverBuilder) for method CreateEntry. Arguments? Yes.  ReqId: 4
+CallResult called for reqId 4, result: Rezolver.RezolveTargetEntry
+CallResult called for reqId 3, result: (#2 TrackedCombinedLifetimeScopeRezolver)
+CallStart called on object (#2 TrackedCombinedLifetimeScopeRezolver) for method Resolve. Arguments? Yes.  ReqId: 5
+CallStart called on object (#2 TrackedCombinedLifetimeScopeRezolver) for method GetCompiledRezolveTarget. Arguments? Yes.  ReqId: 6
+CallStart called on object (#2 TrackedCombinedLifetimeScopeRezolver) for method GetFallbackCompiledRezolveTarget. Arguments? Yes.  ReqId: 7
+CallStart called on object (#1 TrackedDefaultRezolver) for method FetchCompiled. Arguments? Yes.  ReqId: 8
+CallStart called on object (#1 TrackedDefaultRezolver) for method GetCompiledRezolveTarget. Arguments? Yes.  ReqId: 9
+CallResult called for reqId 9, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 8, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 7, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 6, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallStart called on object (#2 TrackedCombinedLifetimeScopeRezolver) for method CanResolve. Arguments? Yes.  ReqId: 10
+CallStart called on object (#1 TrackedDefaultRezolver) for method CanResolve. Arguments? Yes.  ReqId: 11
+CallResult called for reqId 11, result: True
+CallResult called for reqId 10, result: True
+CallStart called on object (#2 TrackedCombinedLifetimeScopeRezolver) for method Resolve. Arguments? Yes.  ReqId: 12
+CallStart called on object (#2 TrackedCombinedLifetimeScopeRezolver) for method GetCompiledRezolveTarget. Arguments? Yes.  ReqId: 13
+CallStart called on object (#2 TrackedCombinedLifetimeScopeRezolver) for method GetFallbackCompiledRezolveTarget. Arguments? Yes.  ReqId: 14
+CallStart called on object (#1 TrackedDefaultRezolver) for method FetchCompiled. Arguments? Yes.  ReqId: 15
+CallStart called on object (#1 TrackedDefaultRezolver) for method GetCompiledRezolveTarget. Arguments? Yes.  ReqId: 16
+CallResult called for reqId 16, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 15, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 14, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 13, result: Rezolver.RezolveTargetDelegateCompiler+DelegatingCompiledRezolveTarget
+CallResult called for reqId 12, result: 10
+CallResult called for reqId 5, result: Rezolver.Tests.RezolverLoggerTests+RequiresInt
+CallStart called on object (#3 TrackedDefaultRezolver) for method Resolve. Arguments? Yes.  ReqId: 1
+CallStart called on object (#3 TrackedDefaultRezolver) for method GetCompiledRezolveTarget. Arguments? Yes.  ReqId: 2
+CallStart called on object (#3 TrackedDefaultRezolver) for method GetFallbackCompiledRezolveTarget. Arguments? Yes.  ReqId: 3
+CallResult called for reqId 3, result: Rezolver.RezolverBase+MissingCompiledTarget
+CallResult called for reqId 2, result: Rezolver.RezolverBase+MissingCompiledTarget
+Exception called for reqId 1.  Exception: Could not resolve type System.Int32
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveInstanceCountingType_3:
+{
+  "rezolve": [
+    {
+      "type": {
+        "name": "Rezolver.Tests.TestTypes.InstanceCountingType"
+      },
+      "value": {
+        "$construct": "$auto"
+      }
+    }
+  ]
+}
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveSingletonRequiresIntByTwoTypes:
+{
+  "rezolve": [
+    {
+      "System.Int32": 115
+    },
+    {
+      "types": [
+        "Rezolver.Tests.TestTypes.IRequiresInt",
+        "Rezolver.Tests.TestTypes.RequiresInt"
+      ],
+      "value": {
+        "$singleton": {
+          "$construct": "Rezolver.Tests.TestTypes.RequiresInt"
+        }
+      }
+    }
+  ]
+}
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveInt:
+
+	{
+		"rezolve": [
+			{ "System.Int32": 1 }
+		] 
+	}
+
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.BindConstructorOfNetworkCredentials:
+{
+  "rezolve": [
+    {
+      "System.Net.NetworkCredential": {
+        "$construct": "$auto",
+        "$args": {
+          "$sig": [
+            "System.String",
+            "System.String"
+          ],
+          "userName": "username",
+          "password": "password"
+        }
+      }
+    }
+  ]
+}
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(157,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveInstanceCountingType_3()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveEnumerableOfStringViaDirectRegistration:
+{
+	"rezolve" : [
+		{ 
+			"type" : { "name" : "System.Collections.Generic.IEnumerable", "args" : [ "System.String" ] },
+			"value": [ "Hello Generic0", "Hello Generic1", "Hello Generic2" ] 
+		}
+	]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(242,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveSingletonRequiresIntByTwoTypes()
+        ----- Inner Stack Trace -----
+        
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+Removed 'assemblies' property from configuration json for advanced test
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(65,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveInt()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveArrayOfInstanceCountingTypeUsingAutoViaDirectRegistration:
+{
+  "rezolve": [
+    {
+      "type": {
+        "name": "Rezolver.Tests.TestTypes.InstanceCountingType",
+        "array": true
+      },
+      "value": {
+        "$array": "Rezolver.Tests.TestTypes.InstanceCountingType",
+        "values": [
+          {
+            "$construct": "$auto"
+          },
+          {
+            "$construct": "$auto"
+          },
+          {
+            "$construct": "$auto"
+          }
+        ]
+      }
+    }
+  ]
+}
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveEnumerableOfStringsViaMultiRegistration:
+{
+	"rezolve" : [
+		{ 
+			"System.String" : {
+				"$targets": [ "Hello Multiple0", "Hello Multiple1", "Hello Multiple2" ] 
+			}
+		}
+	]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(462,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.BindConstructorOfNetworkCredentials()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveArrayOfInstanceCountingTypeViaDirectRegistration:
+{
+	"assemblies":[ "Rezolver.Tests" ],	
+	"rezolve" : [
+		{
+			"type" : { "name" : "Rezolver.Tests.TestTypes.InstanceCountingType", "array": true },
+			"value" : 
+			{ 
+				"$array" : "Rezolver.Tests.TestTypes.InstanceCountingType",
+				"values" : 
+				[ 
+					{ "$construct" : "Rezolver.Tests.TestTypes.InstanceCountingType"  }, 
+					{ "$construct" : "Rezolver.Tests.TestTypes.InstanceCountingType"  }, 
+					{ "$construct" : "Rezolver.Tests.TestTypes.InstanceCountingType"  }
+				]
+			} 
+		}
+	]
+}
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveEnumerableOfStringsViaMultiRegistration:
+{
+	"rezolve" : [
+		{ 
+			"System.String" : {
+				"$targets": [ "Hello Multiple0", "Hello Multiple1", "Hello Multiple2" ] 
+			}
+		}
+	]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(400,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveArrayOfInstanceCountingTypeUsingAutoViaDirectRegistration()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveInstanceCountingType_3:
+
+{
+	"assemblies": [ "Rezolver.Tests" ],
+	"rezolve" : [
+		{
+			"type": { "name": "Rezolver.Tests.TestTypes.InstanceCountingType" },
+			"value": { "$construct" : "$auto" } 
+		}
+	]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveSingletonRequiresIntByTwoTypes:
+{
+	"assemblies":["Rezolver.Tests" ],
+	"rezolve": [
+		{ "System.Int32": 115 },
+		{ 
+			"types": [ "Rezolver.Tests.TestTypes.IRequiresInt", "Rezolver.Tests.TestTypes.RequiresInt" ],
+			"value": { "$singleton" : { "$construct": "Rezolver.Tests.TestTypes.RequiresInt" } }
+		}
+	]
+}
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(281,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveEnumerableOfStringsViaMultiRegistration()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveArrayOfStrings:
+{
+	"rezolve" : [
+		{ "System.String[]" : [ "Hello World0", "Hello World1", "Hello World2" ] }
+	]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\AdvancedJsonConfigurationTests.cs(59,0): at Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.AdapterShouldBuildRezolverBuilder()
+        ----- Inner Stack Trace -----
+        
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveRequiresInt:
+{
+  "rezolve": [
+    {
+      "System.Int32": 105
+    },
+    {
+      "Rezolver.Tests.TestTypes.IRequiresInt": {
+        "$construct": "Rezolver.Tests.TestTypes.RequiresInt"
+      }
+    }
+  ]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(260,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveArrayOfStrings()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveInt:
+
+	{
+		"rezolve": [
+			{ "System.Int32": 1 }
+		] 
+	}
+
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveEnumerableOfInstanceCountingTypeViaMultiRegistration:
+{
+  "rezolve": [
+    {
+      "Rezolver.Tests.TestTypes.InstanceCountingType": {
+        "$targets": [
+          {
+            "$construct": "Rezolver.Tests.TestTypes.InstanceCountingType"
+          },
+          {
+            "$construct": "Rezolver.Tests.TestTypes.InstanceCountingType"
+          },
+          {
+            "$construct": "Rezolver.Tests.TestTypes.InstanceCountingType"
+          }
+        ]
+      }
+    }
+  ]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(177,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveRequiresInt()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveEnumerableOfInstanceCountingTypeViaMultiRegistration:
+{
+	"assemblies":[ "Rezolver.Tests" ],	
+	"rezolve" : [
+		{
+			"Rezolver.Tests.TestTypes.InstanceCountingType" :
+			{ 
+				"$targets" :
+				[ 
+					{ "$construct" : "Rezolver.Tests.TestTypes.InstanceCountingType"  }, 
+					{ "$construct" : "Rezolver.Tests.TestTypes.InstanceCountingType"  }, 
+					{ "$construct" : "Rezolver.Tests.TestTypes.InstanceCountingType"  }
+				]
+			} 
+		}
+	]
+}
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveString:
+
+{
+	"rezolve": [
+		{ "System.String": "Hello World!" }
+	]
+}
+
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveArrayOfInstanceCountingTypeUsingAuto2ViaDirectRegistration:
+{
+	"assemblies":[ "Rezolver.Tests" ],	
+	"rezolve" : [
+		{
+			"type" : { "name" : "Rezolver.Tests.TestTypes.InstanceCountingType", "array": true },
+			"value" : 
+			{ 
+				"$array" : "$auto",
+				"values" : 
+				[ 
+					{ "$construct" : "$auto"  }, 
+					{ "$construct" : "$auto"  }, 
+					{ "$construct" : "$auto"  }
+				]
+			} 
+		}
+	]
+}
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(315,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveEnumerableOfInstanceCountingTypeViaMultiRegistration()
+        ----- Inner Stack Trace -----
+        
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveRequiresIntByTwoTypes:
+{
+  "rezolve": [
+    {
+      "System.Int32": 110
+    },
+    {
+      "types": [
+        "Rezolver.Tests.TestTypes.IRequiresInt",
+        "Rezolver.Tests.TestTypes.RequiresInt"
+      ],
+      "value": {
+        "$construct": "Rezolver.Tests.TestTypes.RequiresInt"
+      }
+    }
+  ]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveArrayOfStrings:
+{
+	"rezolve" : [
+		{ "System.String[]" : [ "Hello World0", "Hello World1", "Hello World2" ] }
+	]
+}
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(82,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveString()
+        ----- Inner Stack Trace -----
+        
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveArrayOfInstanceCountingTypeViaDirectRegistration:
+{
+  "rezolve": [
+    {
+      "type": {
+        "name": "Rezolver.Tests.TestTypes.InstanceCountingType",
+        "array": true
+      },
+      "value": {
+        "$array": "Rezolver.Tests.TestTypes.InstanceCountingType",
+        "values": [
+          {
+            "$construct": "Rezolver.Tests.TestTypes.InstanceCountingType"
+          },
+          {
+            "$construct": "Rezolver.Tests.TestTypes.InstanceCountingType"
+          },
+          {
+            "$construct": "Rezolver.Tests.TestTypes.InstanceCountingType"
+          }
+        ]
+      }
+    }
+  ]
+}
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveRequiresInt:
+
+{
+	"assemblies":["Rezolver.Tests" ],
+	"rezolve": [
+		{ "System.Int32": 105 },
+		{ "Rezolver.Tests.TestTypes.IRequiresInt" : { "$construct": "Rezolver.Tests.TestTypes.RequiresInt" } }
+	]
+}
+
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveString:
+
+{
+	"rezolve": [
+		{ "System.String": "Hello World!" }
+	]
+}
+
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(200,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveRequiresIntByTwoTypes()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveInstanceCountingType_2:
+
+{
+	"assemblies": [ "Rezolver.Tests" ],
+	"rezolve" : [
+		{
+			"type": "Rezolver.Tests.TestTypes.InstanceCountingType",
+			"value": { "$construct" : "$auto" } 
+		}
+	]
+}
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.BindConstructorOfNetworkCredentials:
+{
+			"assemblies": ["System.Net.Primitives"],
+			"rezolve" : [ 
+			{
+				"System.Net.NetworkCredential": {
+					"$construct": "$auto",
+					"$args": {
+						"$sig": [ "System.String", "System.String" ],
+						"userName": "username",
+						"password": "password"
+					}
+				}
+			}
+		 ]}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveInstanceCountingType_2:
+{
+  "rezolve": [
+    {
+      "type": "Rezolver.Tests.TestTypes.InstanceCountingType",
+      "value": {
+        "$construct": "$auto"
+      }
+    }
+  ]
+}
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(367,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveArrayOfInstanceCountingTypeViaDirectRegistration()
+        ----- Inner Stack Trace -----
+        
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveArrayOfInstanceCountingTypeUsingAuto2ViaDirectRegistration:
+{
+  "rezolve": [
+    {
+      "type": {
+        "name": "Rezolver.Tests.TestTypes.InstanceCountingType",
+        "array": true
+      },
+      "value": {
+        "$array": "$auto",
+        "values": [
+          {
+            "$construct": "$auto"
+          },
+          {
+            "$construct": "$auto"
+          },
+          {
+            "$construct": "$auto"
+          }
+        ]
+      }
+    }
+  ]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(128,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveInstanceCountingType_2()
+        ----- Inner Stack Trace -----
+        
+Removed 'assemblies' property from configuration json for advanced test
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveInstanceCountingType_1:
+{
+  "rezolve": [
+    {
+      "Rezolver.Tests.TestTypes.InstanceCountingType": {
+        "$construct": "$auto"
+      }
+    }
+  ]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(437,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveArrayOfInstanceCountingTypeUsingAuto2ViaDirectRegistration()
+        ----- Inner Stack Trace -----
+        
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.AdvancedJsonConfigurationTests.ShouldRezolveEnumerableOfStringViaDirectRegistration:
+{
+	"rezolve" : [
+		{ 
+			"type" : { "name" : "System.Collections.Generic.IEnumerable", "args" : [ "System.String" ] },
+			"value": [ "Hello Generic0", "Hello Generic1", "Hello Generic2" ] 
+		}
+	]
+}
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveArrayOfInstanceCountingTypeUsingAutoViaDirectRegistration:
+{
+	"assemblies":[ "Rezolver.Tests" ],	
+	"rezolve" : [
+		{
+			"type" : { "name" : "Rezolver.Tests.TestTypes.InstanceCountingType", "array": true },
+			"value" : 
+			{ 
+				"$array" : "Rezolver.Tests.TestTypes.InstanceCountingType",
+				"values" : 
+				[ 
+					{ "$construct" : "$auto"  }, 
+					{ "$construct" : "$auto"  }, 
+					{ "$construct" : "$auto"  }
+				]
+			} 
+		}
+	]
+}
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(101,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveInstanceCountingType_1()
+        ----- Inner Stack Trace -----
+        
+      Rezolver.Configuration.ConfigurationException : 1 error(s) found in [Unknown file]
+      1 - (2:41-2:41) - Could not load file or assembly 'System.Net.Primitives' or one of its dependencies. The system cannot find the file specified.
+      
+      Stack Trace:
+Attempting to parse JSON configuration for test Rezolver.Tests.Configuration.JsonConffigurationTests.ShouldRezolveInstanceCountingType_1:
+
+{
+	"assemblies": [ "Rezolver.Tests" ],
+	"rezolve" : [
+		{ "Rezolver.Tests.TestTypes.InstanceCountingType" : { "$construct" : "$auto" } }
+	]
+}
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(110,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(462,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.BindConstructorOfNetworkCredentials()
+      System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      ---- System.BadImageFormatException : Could not load file or assembly 'dnx.clr.dll' or one of its dependencies. The module was expected to contain an assembly manifest.
+      Stack Trace:
+           at System.Reflection.AssemblyName.nGetFileInformation(String s)
+           at System.Reflection.AssemblyName.GetAssemblyName(String assemblyFile)
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(105,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<>c.<GetDeployedAssemblyNamesFromPath>b__7_0(FileInfo fi)
+           at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(87,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.<GetDeployedAssemblyNames>d__6.MoveNext()
+        E:\Github\Rezolver\src\Rezolver.Configuration.Json\AdvancedConfigurationAdapterContextFactory.cs(142,0): at Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapterContextFactory.cs(63,0): at Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(140,0): at Rezolver.Configuration.ConfigurationAdapter.CreateContext(IConfiguration configuration)
+        E:\Github\Rezolver\src\Rezolver.Configuration\ConfigurationAdapter.cs(105,0): at Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(IConfiguration configuration)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(30,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ParseConfigurationAndBuild(String json, String testName)
+        E:\Github\Rezolver\test\Rezolver.Tests\Configuration\JsonConfigurationTestsBase.cs(336,0): at Rezolver.Tests.Configuration.JsonConfigurationTestsBase.ShouldRezolveEnumerableOfStringViaDirectRegistration()
+        ----- Inner Stack Trace -----
+        
+  Finished:    Rezolver.Tests
+=== TEST EXECUTION SUMMARY ===
+   Rezolver.Tests  Total: 209, Errors: 0, Failed: 18, Skipped: 0, Time: 0.317s

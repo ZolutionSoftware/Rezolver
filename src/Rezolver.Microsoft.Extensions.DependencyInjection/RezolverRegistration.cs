@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection.Rezolver
+namespace Rezolver.Microsoft.Extensions.DependencyInjection
 {
     // This project can output the Class library as a NuGet Package.
     // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
@@ -120,24 +121,6 @@ namespace Microsoft.Extensions.DependencyInjection.Rezolver
             }
 
             return target;
-
-            /*
-            namespace Microsoft.Framework.DependencyInjection.Tests
-{
-    public class RezolverContainerTests : ScopingContainerTestBase
-    {
-        protected override IServiceProvider CreateContainer()
-        {
-            var rezolver = new DefaultLifetimeScopeRezolver();
-
-            rezolver.Populate(TestServices.DefaultServices());
-
-            return rezolver.Resolve<IServiceProvider>();
-        }
-    }
-}
-
-            */
         }
     }
 }

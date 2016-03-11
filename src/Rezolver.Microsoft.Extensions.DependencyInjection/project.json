@@ -7,13 +7,12 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-*",
     "Rezolver": "1.0.0-alpha-*"
   },
 
   "frameworks": {
     "dnx451": { },
-    "net451": { },
     "dotnet5.4": {
       "compilationOptions": {
         "define": [ "DOTNET" ]

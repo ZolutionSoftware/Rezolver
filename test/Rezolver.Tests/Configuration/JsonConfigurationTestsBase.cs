@@ -49,7 +49,7 @@ namespace Rezolver.Tests.Configuration
 
 		protected virtual DefaultRezolver CreateRezolver(IRezolverBuilder builder)
 		{
-			return new DefaultRezolver(builder, new AssemblyRezolveTargetCompiler());
+			return new DefaultRezolver(builder, new RezolveTargetDelegateCompiler());
 		}
 
 		[Fact]
@@ -446,6 +446,7 @@ namespace Rezolver.Tests.Configuration
 		public void BindConstructorOfNetworkCredentials()
 		{
 			string json = @"{
+			""assemblies"": [""System.Net.Primitives""],
 			""rezolve"" : [ 
 			{
 				""System.Net.NetworkCredential"": {

@@ -1,16 +1,16 @@
-{
+﻿{
   "version": "1.0.0-*",
-  "description": "Corer unit tests for Rezolver, including the configuration framework.  They're not perfect, but they cover most of the core scenarios.",
+  "description": "Rezolver.Microsoft.DependencyInjection.Tests Class Library",
   "authors": [ "Andras" ],
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
 
   "dependencies": {
-    "Rezolver.Configuration.Json": "1.0.10-*",
-    "Rezolver.Diagnostics": "1.0.0-alpha-*",
     "xunit": "2.1.0",
-    "xunit.runner.dnx": "2.1.0-rc1-build204"
+    "xunit.runner.dnx": "2.1.0-rc1-build204",
+    "Rezolver.Microsoft.Extensions.DependencyInjection": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection.Specification.Tests": "1.0.0-*"
   },
   "commands": {
     "test": "xunit.runner.dnx"

@@ -6,13 +6,13 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-    /// <summary>
-    /// This class is used to store the intermediate state for the default <see cref="IConfigurationAdapter"/>
-    /// implementation's (<see cref="ConfigurationAdapter"/>) parsing 
-    /// operation on an <see cref="IConfiguration"/> instance.  If you are extending the default adapter you
-    /// might need also to extend this class to ensure any additional state you require is maintained.
-    /// </summary>
-    public class ConfigurationAdapterContext
+	/// <summary>
+	/// This class is used to store the intermediate state for the default <see cref="IConfigurationAdapter"/>
+	/// implementation's (<see cref="ConfigurationAdapter"/>) parsing 
+	/// operation on an <see cref="IConfiguration"/> instance.  If you are extending the default adapter you
+	/// might need also to extend this class to ensure any additional state you require is maintained.
+	/// </summary>
+	public class ConfigurationAdapterContext
 	{
 		/// <summary>
 		/// Used as a sentinel type by the <see cref="ResolveType"/> method when the type search fails.
@@ -93,16 +93,16 @@ namespace Rezolver.Configuration
 			_references = new Dictionary<string, Assembly>();
 			_using = new HashSet<string>();
 		}
-        /// <summary>
-        /// Constructs a new instance of the <see cref="ConfigurationAdapterContext"/> class.
-        /// </summary>
-        /// <param name="adapter">The adapter that will create the <see cref="IRezolverBuilder"/> from the configuration.</param>
-        /// <param name="configuration">Required. The configuration that is being processed by the adapter for which this
-        /// context is being constructed</param>
-        /// <param name="defaultAssemblyReferences">Optional. Default set of assemblies that are to be searched for types
-        /// when type references are processed.</param>
-        public ConfigurationAdapterContext(IConfigurationAdapter adapter, IConfiguration configuration, IEnumerable<Assembly> defaultAssemblyReferences = null)
-			: this()
+		/// <summary>
+		/// Constructs a new instance of the <see cref="ConfigurationAdapterContext"/> class.
+		/// </summary>
+		/// <param name="adapter">The adapter that will create the <see cref="IRezolverBuilder"/> from the configuration.</param>
+		/// <param name="configuration">Required. The configuration that is being processed by the adapter for which this
+		/// context is being constructed</param>
+		/// <param name="defaultAssemblyReferences">Optional. Default set of assemblies that are to be searched for types
+		/// when type references are processed.</param>
+		public ConfigurationAdapterContext(IConfigurationAdapter adapter, IConfiguration configuration, IEnumerable<Assembly> defaultAssemblyReferences = null)
+	: this()
 		{
 			if (adapter == null)
 				throw new ArgumentNullException("adapter");
@@ -113,7 +113,7 @@ namespace Rezolver.Configuration
 			_adapter = adapter;
 			_configuration = configuration;
 			//import the default references
-			foreach(var reference in defaultAssemblyReferences.Where(a => a != null))
+			foreach (var reference in defaultAssemblyReferences.Where(a => a != null))
 			{
 				_references[reference.FullName] = reference;
 			}
@@ -252,12 +252,13 @@ namespace Rezolver.Configuration
 			try
 			{
 #if DOTNET
-                toAdd = Assembly.Load(new AssemblyName(entry.AssemblyName));
+				toAdd = Assembly.Load(new AssemblyName(entry.AssemblyName));
 #else
-                toAdd = Assembly.Load(entry.AssemblyName);
+				toAdd = Assembly.Load(entry.AssemblyName);
+				
 #endif
 
-            }
+			}
 			catch (Exception ex)
 			{
 				AddError(new ConfigurationError(ex, entry));
@@ -297,8 +298,8 @@ namespace Rezolver.Configuration
 				throw new ArgumentNullException("assemblies");
 			if (assemblies.Any(a => a == null))
 				throw new ArgumentException("All assemblies must be non-null", "assemblies");
-			
-			foreach(var a in assemblies)
+
+			foreach (var a in assemblies)
 			{
 				AddAssemblyReferenceBase(a);
 			}
@@ -363,12 +364,12 @@ namespace Rezolver.Configuration
 						foreach (var a in GetReferencedAssemblies())
 						{
 #if DOTNET
-                            found = a.GetType(t);
+							found = a.GetType(t);
 #else
-                            found = a.GetType(t, false);
+							found = a.GetType(t, false);
 #endif
 
-                            if (found != null && !foundTypes.Contains(found))
+							if (found != null && !foundTypes.Contains(found))
 								foundTypes.Add(found);
 						}
 					}
@@ -473,7 +474,7 @@ namespace Rezolver.Configuration
 		/// is returned in the <paramref name="types"/> output parameter.
 		/// </summary>
 		/// <param name="typeReferences">The type references.</param>
-        /// <param name="types">Receives the types that are parsed.  Note that if the method returns true, 
+		/// <param name="types">Receives the types that are parsed.  Note that if the method returns true, 
 		/// then this list will contain the same number of types as there are references in <paramref name="typeReferences"/>, in the same order.
 		/// If the method returns false, however, then the number of results in this list is undefined and you will not be able to marry up the input
 		/// type reference to its output type.</param>

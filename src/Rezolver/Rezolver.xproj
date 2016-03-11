@@ -8,8 +8,8 @@
 	<PropertyGroup Label="Globals">
 		<ProjectGuid>07626f9c-06a6-498d-ade1-bc24d2790b7c</ProjectGuid>
 		<RootNamespace>Rezolver</RootNamespace>
-		<BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-		<OutputPath Condition="'$(OutputPath)'=='' ">..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
+		<BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\..\\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+		<OutputPath Condition="'$(OutputPath)'=='' ">..\..\\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
 	</PropertyGroup>
 	<PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<AssemblyName>Rezolver</AssemblyName>

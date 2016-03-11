@@ -159,6 +159,15 @@ namespace Rezolver.Tests
 		}
 
 		[Fact]
+		public void ShouldBindConstructorJIT()
+		{
+			//instead of binding the constructor with the most parameters, it'll bind the constructor just-in-time based
+			//on the services that are actually available from the container when the target is compiled.
+
+
+		}
+
+		[Fact]
 		public void ShouldRezolveTheStringArgumentForARezolveCall()
 		{
 			//complicated test, this.  And, yes, it's largely pointless - but it

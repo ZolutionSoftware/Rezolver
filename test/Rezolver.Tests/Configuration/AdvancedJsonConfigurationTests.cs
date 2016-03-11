@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json.Linq;
 using Rezolver.Configuration;
 using Rezolver.Configuration.Json;
 using System;
@@ -9,8 +10,10 @@ using Xunit;
 
 namespace Rezolver.Tests.Configuration
 {
+
 	public class AdvancedJsonConfigurationTests : JsonConfigurationTestsBase
 	{
+#if !DOTNET
 		protected override IConfigurationAdapter CreateAdapter()
 		{
 			return new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
@@ -65,5 +68,6 @@ namespace Rezolver.Tests.Configuration
 			Assert.True(en.SequenceEqual(new[] { 1, 2, 3 }));
 
 		}
+#endif
 	}
 }

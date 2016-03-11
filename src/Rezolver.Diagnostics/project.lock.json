@@ -46,6 +46,28 @@
         ]
       }
     },
+    ".NETFramework,Version=v4.6": {
+      "Rezolver/1.0.0-alpha-1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "dependencies": {
+          "Rezolver.Shared": "1.0.10"
+        },
+        "frameworkAssemblies": [
+          "System.ComponentModel"
+        ]
+      },
+      "Rezolver.Shared/1.0.10-alpha-1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "frameworkAssemblies": [
+          "System.Linq",
+          "System.Reflection",
+          "System.Reflection.Extensions",
+          "System.Reflection.Primitives"
+        ]
+      }
+    },
     ".NETPlatform,Version=v5.4": {
       "Microsoft.CSharp/4.0.1-beta-23516": {
         "type": "package",
@@ -441,6 +463,50 @@
       "Rezolver.Shared/1.0.10-alpha-1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
+        "frameworkAssemblies": [
+          "System.Linq",
+          "System.Reflection",
+          "System.Reflection.Extensions",
+          "System.Reflection.Primitives"
+        ]
+      }
+    },
+    ".NETFramework,Version=v4.6/win7-x86": {
+      "Rezolver/1.0.0-alpha-1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "dependencies": {
+          "Rezolver.Shared": "1.0.10"
+        },
+        "frameworkAssemblies": [
+          "System.ComponentModel"
+        ]
+      },
+      "Rezolver.Shared/1.0.10-alpha-1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "frameworkAssemblies": [
+          "System.Linq",
+          "System.Reflection",
+          "System.Reflection.Extensions",
+          "System.Reflection.Primitives"
+        ]
+      }
+    },
+    ".NETFramework,Version=v4.6/win7-x64": {
+      "Rezolver/1.0.0-alpha-1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "dependencies": {
+          "Rezolver.Shared": "1.0.10"
+        },
+        "frameworkAssemblies": [
+          "System.ComponentModel"
+        ]
+      },
+      "Rezolver.Shared/1.0.10-alpha-1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
         "frameworkAssemblies": [
           "System.Linq",
           "System.Reflection",
@@ -2132,6 +2198,7 @@
     ],
     "DNX,Version=v4.5.1": [],
     ".NETFramework,Version=v4.5.1": [],
+    ".NETFramework,Version=v4.6": [],
     ".NETPlatform,Version=v5.4": []
   }
 }

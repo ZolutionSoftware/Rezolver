@@ -1,12 +1,13 @@
 {
-  "description": "Rezolver for CoreCLR - supports vNext Core and Full frameworks, Net45 and Net46",
+  "description": "Rezolver - A new dependency injection framework",
   "version": "1.0.0-alpha-1",
   "tags": [ "ioc", "di", "portable", "rezolver" ],
   "projectUrl": "http://www.zolution.co.uk/Rezolver",
   "authors": [ "Andras Zoltan" ],
   "dependencies": {
     "Rezolver.Shared": {
-      "version": "1.0.10-*"
+      "version": "1.0.10-*",
+      "type": "build"
     }
   },
   "frameworks": {
@@ -16,6 +17,11 @@
       }
     },
     "net451": {
+      "frameworkAssemblies": {
+        "System.ComponentModel": "4.0.0.0"
+      }
+    },
+    "net46": {
       "frameworkAssemblies": {
         "System.ComponentModel": "4.0.0.0"
       }

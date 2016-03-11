@@ -8,7 +8,8 @@
   "dependencies": {
     "Rezolver":  "1.0.0-alpha-*",
     "Rezolver.Shared": {
-      "version": "1.0.10-alpha-*"
+      "version": "1.0.10-alpha-*",
+      "type": "build"
     }
   },
   "frameworks": {
@@ -16,6 +17,9 @@
       
     },
     "net451": {
+
+    },
+    "net46": {
 
     },
     "dotnet5.4": {
