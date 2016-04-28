@@ -46,7 +46,10 @@ namespace Rezolver
 					lock (_locker)
 					{
 						if (_wrapped == null)
-							_wrapped = ConstructorTarget.Auto(context.DependencyBuilder, _declaredType, _propertyBindingBehaviour);
+						{
+
+						}
+							//_wrapped = ConstructorTarget.Auto(context.DependencyBuilder, _declaredType, _propertyBindingBehaviour, context.);
 					}
 				}
 				return _wrapped.CreateExpression(context);
@@ -153,6 +156,13 @@ namespace Rezolver
 			throw new NotImplementedException();
 		}
 
+		/// <summary>
+		/// Constructs an IRezolver
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="newExpr"></param>
+		/// <param name="adapter"></param>
+		/// <returns></returns>
 		public static IRezolveTarget For<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
 		{
 			NewExpression newExprBody = null;
@@ -166,6 +176,11 @@ namespace Rezolver
 			}
 
 			return For(typeof(T), newExprBody, adapter);
+		}
+
+		public static IRezolveTarget Best<T>(IPropertyBindingBehaviour propertyBindingBehaviour)
+		{
+			return new BestMatchConstructorTarget(typeof(T), propertyBindingBehaviour);
 		}
 
 		public static IRezolveTarget WithArgs<T>(IDictionary<string, IRezolveTarget> args)

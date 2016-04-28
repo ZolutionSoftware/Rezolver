@@ -6,10 +6,12 @@ using System.Reflection;
 namespace Rezolver
 {
 	/// <summary>
-	/// Represents a target that is rezolved during expression building and/or at rezolve time.
+	/// Represents a target that is rezolved dynamically at run time, or statically at compile time.
 	/// 
-	/// That is, a target is located from the rezolver that is supplied to the CreateExpression method,
-	/// and that target is then used to donate the expression.
+	/// This is the most common way that we bind constructor parameters, for example - i.e. 'I want an
+	/// IService instance - go get it'.
+	/// 
+	/// The class will statically 
 	/// </summary>
 	public class RezolvedTarget : RezolveTargetBase
 	{
@@ -68,6 +70,23 @@ namespace Rezolver
 				return true;
 			}
 		}
+
+		/// <summary>
+		/// Returns true or false based on whether this target will be able to resolve
+		/// an object from the context that is passed.  Note - it's a way of dry-running
+		/// the resolve operation before compiling the expression.
+		/// 
+		/// Please note, also, that it only works statically.  I.e. - if the dependency builder
+		/// in context cannot resolve the type, then this method returns false - it will not take 
+		/// into account dynamic fallback to the run time resolver.
+		/// </summary>
+		/// <param name="context"></param>
+		/// <returns></returns>
+		public virtual bool CanResolve(CompileContext context)
+		{
+
+		}
+
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			//we get the expression for the name that is to be rezolved.  That could be null.  If not, 
@@ -141,7 +160,9 @@ namespace Rezolver
 
 			//note the use of the shared expression here - which enables an advanced optimisation specifically connected with
 			//conditionals
-			blockExpressions.Add(Expression.Condition(context.GetOrAddSharedExpression(typeof(bool), "IsSameRezolver", () => Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver), this.GetType()),
+			blockExpressions.Add(Expression.Condition(context.GetOrAddSharedExpression(typeof(bool), 
+					"IsSameRezolver", 
+					() => Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver), this.GetType()),
 				staticExpr,
 				useContextRezolverIfCanExpr));
 

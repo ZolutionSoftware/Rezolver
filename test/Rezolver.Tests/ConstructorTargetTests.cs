@@ -47,6 +47,24 @@ namespace Rezolver.Tests
 			}
 		}
 
+		private class NoDefaultConstructor2 : ConstructorTestClass
+		{
+			public const int ExpectedBestValue = 1001;
+			public const string ExpectedDefaultMessage = "Default Message";
+			public string Message { get; protected set; }
+			public NoDefaultConstructor2(int value)
+				: this(value, ExpectedDefaultMessage)
+			{
+
+			}
+
+			public NoDefaultConstructor2(int value, string message)
+			{
+				Value = value;
+				Message = message;
+			}
+		}
+
 		private class HasProperty
 		{
 			public int Value { get; set; }
@@ -164,7 +182,14 @@ namespace Rezolver.Tests
 			//instead of binding the constructor with the most parameters, it'll bind the constructor just-in-time based
 			//on the services that are actually available from the container when the target is compiled.
 
-
+			var target = ConstructorTarget.Best<NoDefaultConstructor2>();
+			var intTarget = NoDefaultConstructor2.ExpectedBestValue.AsObjectTarget();
+			var rezolver = CreateADefaultRezolver();
+			rezolver.Register(intTarget);
+			rezolver.Register(target);
+			var result = rezolver.Resolve<NoDefaultConstructor2>();
+			Assert.Equal(NoDefaultConstructor2.ExpectedBestValue, result.Value);
+			Assert.Equal(NoDefaultConstructor2.ExpectedDefaultMessage, result.Message);
 		}
 
 		[Fact]
