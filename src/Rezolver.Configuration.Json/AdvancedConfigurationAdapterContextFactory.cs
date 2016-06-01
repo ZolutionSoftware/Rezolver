@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Configuration.Json
 {
-#if !DOTNET5_4
+#if !DOTNET
 	/// <summary>
 	/// An advanced factory which automatically loads and references all assemblies that are deployed in the 
 	/// application's base directory and any subfolders determined by the <see cref="System.AppDomain"/>'s SetupInformation's

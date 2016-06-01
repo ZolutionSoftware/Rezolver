@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -19,12 +18,12 @@ namespace Rezolver
 
 		public T Resolve<T>()
 		{
-			throw new NotImplementedException(Exceptions.NotRuntimeMethod);
+			throw new NotImplementedException(ExceptionResources.NotRuntimeMethod);
 		}
 
 		public T Resolve<T>(string name)
 		{
-			throw new NotImplementedException(Exceptions.NotRuntimeMethod);
+			throw new NotImplementedException(ExceptionResources.NotRuntimeMethod);
 		}
 	}
 }

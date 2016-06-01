@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -157,7 +156,7 @@ namespace Rezolver
 				}
 			}
 			else
-				throw new ArgumentException(string.Format(Exceptions.TargetDoesntSupportType_Format, type), "target");
+				throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, type), "target");
 		}
 
 		protected virtual IRezolveTargetEntry CreateEntry(Type type, params IRezolveTarget[] targets)

@@ -3,10 +3,5 @@
     "src",
     "wrap",
     "test"
-  ],
-  "sdk": {
-    "version": "1.0.0-rc1-update1",
-    "architecture": "x86",
-    "runtime": "coreclr"
-  }
+  ]
 }

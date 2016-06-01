@@ -1,8 +1,10 @@
 ﻿{
   "version": "1.0.10-alpha-1",
   "description": "Core configuration framework for Rezolver. Provides the abstractions and infrastructure for configuration adapters.",
-  "tags": [ "ioc", "di", "portable", "rezolver", "configuration" ],
-  "projectUrl": "http://www.zolution.co.uk/Rezolver",
+  "packOptions": {
+    "tags": [ "ioc", "di", "portable", "rezolver", "configuration" ],
+    "projectUrl": "http://www.zolution.co.uk/Rezolver"
+  },
   "authors": [ "Andras Zoltan" ],
   "dependencies": {
     "Rezolver": "1.0.0-alpha-*",
@@ -12,21 +14,15 @@
     }
   },
   "frameworks": {
-    "dnx451": {
-
+    "netstandard1.5": {
+      "buildOptions": {
+        "define": [ "DOTNET" ]
+      }
     },
     "net451": {
     },
     "net46": {
 
-    },
-    "dotnet5.4": {
-      "compilationOptions": {
-        "define": [ "DOTNET" ]
-      },
-      "dependencies": {
-
-      }
     }
   }
 }

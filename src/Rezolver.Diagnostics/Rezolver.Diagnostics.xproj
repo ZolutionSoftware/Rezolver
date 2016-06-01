@@ -8,8 +8,6 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>d37b7add-4f9e-417b-beaa-8c4a4d1b4930</ProjectGuid>
     <RootNamespace>Rezolver.Diagnostics</RootNamespace>
-    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\..\\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <OutputPath Condition="'$(OutputPath)'=='' ">..\..\\artifacts\obj\$(MSBuildProjectName)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>

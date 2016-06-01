@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -110,7 +109,7 @@ namespace Rezolver
 			var ctorsWithMostParams = ctorGroups[0].ToArray();
 			if (ctorsWithMostParams.Length > 1)
 				throw new ArgumentException(
-					string.Format(Exceptions.MoreThanOneConstructorFormat, declaredType));
+					string.Format(ExceptionResources.MoreThanOneConstructorFormat, declaredType));
 
 			var baseTarget = new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.BindWithRezolvedArguments(ctorsWithMostParams[0]));
 			if (propertyBindingBehaviour != null)
@@ -126,7 +125,7 @@ namespace Rezolver
 
 			if (ctorGroups.Length == 0)
 				throw new ArgumentException(
-					string.Format(Exceptions.NoPublicConstructorsDefinedFormat, declaredType), "declaredType");
+					string.Format(ExceptionResources.NoPublicConstructorsDefinedFormat, declaredType), "declaredType");
 			return ctorGroups;
 		}
 
@@ -190,9 +189,9 @@ namespace Rezolver
 			{
 				newExprBody = newExpr.Body as NewExpression;
 				if (newExprBody == null)
-					throw new ArgumentException(string.Format(Exceptions.LambdaBodyIsNotNewExpressionFormat, newExpr), "newExpr");
+					throw new ArgumentException(string.Format(ExceptionResources.LambdaBodyIsNotNewExpressionFormat, newExpr), "newExpr");
 				else if (newExprBody.Type != typeof(T))
-					throw new ArgumentException(string.Format(Exceptions.LambdaBodyNewExpressionIsWrongTypeFormat, newExpr, typeof(T)), "newExpr");
+					throw new ArgumentException(string.Format(ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat, newExpr, typeof(T)), "newExpr");
 			}
 
 			return For(typeof(T), newExprBody, adapter);
@@ -255,7 +254,7 @@ namespace Rezolver
 					if (ctor == null)
 						throw new ArgumentException(
 							string.Format(
-								Exceptions.NoDefaultOrAllOptionalConstructorFormat,
+								ExceptionResources.NoDefaultOrAllOptionalConstructorFormat,
 								declaredType), "declaredType");
 				}
 			}

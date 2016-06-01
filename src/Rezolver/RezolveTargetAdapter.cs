@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Rezolver.Resources;
 using System.Collections.Generic;
 
 namespace Rezolver

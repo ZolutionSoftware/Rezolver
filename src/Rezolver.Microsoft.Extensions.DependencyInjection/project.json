@@ -2,21 +2,24 @@
   "version": "1.0.0-alpha-1",
   "description": "Rezolver adapter for the Microsoft.Extensions.DependencyInjection abstractions",
   "authors": [ "Andras Zoltan" ],
-  "tags": [ "rezolver", "ioc", "di" ],
-  "projectUrl": "http://www.zolution.co.uk/Rezolver",
-  "licenseUrl": "",
-
+  "packOptions": {
+    "tags": [ "rezolver", "ioc", "di" ],
+    "projectUrl": "http://www.zolution.co.uk/Rezolver",
+    "licenseUrl": ""
+  },
   "dependencies": {
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
     "Rezolver": "1.0.0-alpha-*"
   },
 
   "frameworks": {
-    "dnx451": { },
-    "dotnet5.4": {
-      "compilationOptions": {
-        "define": [ "DOTNET" ]
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Runtime": "4.0.10.0"
       }
+    },
+    "netstandard1.5": {
+      "buildOptions": { "define": [ "DOTNET" ] }
     }
   }
 }

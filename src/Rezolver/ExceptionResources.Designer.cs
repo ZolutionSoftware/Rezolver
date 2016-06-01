@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rezolver.Resources {
+namespace Rezolver {
     using System;
     using System.Reflection;
     
@@ -22,23 +22,23 @@ namespace Rezolver.Resources {
     // with the /str option, or rebuild your VS project.
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Exceptions {
+    public class ExceptionResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
-        internal Exceptions() {
+        internal ExceptionResources() {
         }
         
         /// <summary>
         ///    Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rezolver.Resources.Exceptions", typeof(Exceptions).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Rezolver.ExceptionResources", typeof(ExceptionResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,7 +50,7 @@ namespace Rezolver.Resources {
         ///    resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -62,7 +62,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to Cyclic dependency detected in targets - current target of type {0} with DeclaredType of {1} has tried to include itself in its expression..
         /// </summary>
-        internal static string CyclicDependencyDetectedInTargetFormat {
+        public static string CyclicDependencyDetectedInTargetFormat {
             get {
                 return ResourceManager.GetString("CyclicDependencyDetectedInTargetFormat", resourceCulture);
             }
@@ -71,7 +71,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The declared type {0} is not compatible with the type {1}.
         /// </summary>
-        internal static string DeclaredTypeIsNotCompatible_Format {
+        public static string DeclaredTypeIsNotCompatible_Format {
             get {
                 return ResourceManager.GetString("DeclaredTypeIsNotCompatible_Format", resourceCulture);
             }
@@ -80,7 +80,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The body of the lambda &quot;{0}&quot; is not a NewExpression.
         /// </summary>
-        internal static string LambdaBodyIsNotNewExpressionFormat {
+        public static string LambdaBodyIsNotNewExpressionFormat {
             get {
                 return ResourceManager.GetString("LambdaBodyIsNotNewExpressionFormat", resourceCulture);
             }
@@ -89,7 +89,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The expression {0} does not represent calling a constructor of the type {1}.
         /// </summary>
-        internal static string LambdaBodyNewExpressionIsWrongTypeFormat {
+        public static string LambdaBodyNewExpressionIsWrongTypeFormat {
             get {
                 return ResourceManager.GetString("LambdaBodyNewExpressionIsWrongTypeFormat", resourceCulture);
             }
@@ -98,7 +98,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to More than one constructor for {0} qualifies as a target for Auto construction.
         /// </summary>
-        internal static string MoreThanOneConstructorFormat {
+        public static string MoreThanOneConstructorFormat {
             get {
                 return ResourceManager.GetString("MoreThanOneConstructorFormat", resourceCulture);
             }
@@ -107,7 +107,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to More than one matching object was found in the scope.
         /// </summary>
-        internal static string MoreThanOneObjectFoundInScope {
+        public static string MoreThanOneObjectFoundInScope {
             get {
                 return ResourceManager.GetString("MoreThanOneObjectFoundInScope", resourceCulture);
             }
@@ -116,7 +116,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to No constructor has been set on the NewExpression - this is not allowed..
         /// </summary>
-        internal static string NoConstructorSetOnNewExpression {
+        public static string NoConstructorSetOnNewExpression {
             get {
                 return ResourceManager.GetString("NoConstructorSetOnNewExpression", resourceCulture);
             }
@@ -125,7 +125,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The type {0} has no default constructor, nor any constructors where all the parameters are optional..
         /// </summary>
-        internal static string NoDefaultOrAllOptionalConstructorFormat {
+        public static string NoDefaultOrAllOptionalConstructorFormat {
             get {
                 return ResourceManager.GetString("NoDefaultOrAllOptionalConstructorFormat", resourceCulture);
             }
@@ -134,7 +134,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to No public constructors declared on the type {0}.
         /// </summary>
-        internal static string NoPublicConstructorsDefinedFormat {
+        public static string NoPublicConstructorsDefinedFormat {
             get {
                 return ResourceManager.GetString("NoPublicConstructorsDefinedFormat", resourceCulture);
             }
@@ -143,7 +143,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to This method is not to be called at run-time - it is only used for static expression analysis in creating IRezolveTargets for an IRezolveBuilder.
         /// </summary>
-        internal static string NotRuntimeMethod {
+        public static string NotRuntimeMethod {
             get {
                 return ResourceManager.GetString("NotRuntimeMethod", resourceCulture);
             }
@@ -152,7 +152,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to path&apos;s Next must not be null - pass path as null once it&apos;s reached the last item.
         /// </summary>
-        internal static string PathIsAtEnd {
+        public static string PathIsAtEnd {
             get {
                 return ResourceManager.GetString("PathIsAtEnd", resourceCulture);
             }
@@ -161,7 +161,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The path {0} is invalid.  All path steps must contain non-whitespace characters and be at least one character in length.
         /// </summary>
-        internal static string PathIsInvalid {
+        public static string PathIsInvalid {
             get {
                 return ResourceManager.GetString("PathIsInvalid", resourceCulture);
             }
@@ -170,7 +170,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to No more targets can be added to this entry.
         /// </summary>
-        internal static string RezolverTargetEntryHasBeenRealised {
+        public static string RezolverTargetEntryHasBeenRealised {
             get {
                 return ResourceManager.GetString("RezolverTargetEntryHasBeenRealised", resourceCulture);
             }
@@ -179,7 +179,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to A lifetime scope is required for a scoped singleton.
         /// </summary>
-        internal static string ScopedSingletonRequiresAScope {
+        public static string ScopedSingletonRequiresAScope {
             get {
                 return ResourceManager.GetString("ScopedSingletonRequiresAScope", resourceCulture);
             }
@@ -188,7 +188,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The target does not support the type {0}.
         /// </summary>
-        internal static string TargetDoesntSupportType_Format {
+        public static string TargetDoesntSupportType_Format {
             get {
                 return ResourceManager.GetString("TargetDoesntSupportType_Format", resourceCulture);
             }
@@ -197,7 +197,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The type {0} is not a nullable type.
         /// </summary>
-        internal static string TargetIsNullButTypeIsNotNullable_Format {
+        public static string TargetIsNullButTypeIsNotNullable_Format {
             get {
                 return ResourceManager.GetString("TargetIsNullButTypeIsNotNullable_Format", resourceCulture);
             }
@@ -206,7 +206,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to Target of type {0} returned a null expression for context {1} - implementation is invalid, targets must never return a null expression..
         /// </summary>
-        internal static string TargetReturnedNullExpressionFormat {
+        public static string TargetReturnedNullExpressionFormat {
             get {
                 return ResourceManager.GetString("TargetReturnedNullExpressionFormat", resourceCulture);
             }
@@ -215,7 +215,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to The type {0} has already been registered.
         /// </summary>
-        internal static string TypeIsAlreadyRegistered {
+        public static string TypeIsAlreadyRegistered {
             get {
                 return ResourceManager.GetString("TypeIsAlreadyRegistered", resourceCulture);
             }
@@ -224,7 +224,7 @@ namespace Rezolver.Resources {
         /// <summary>
         ///    Looks up a localized string similar to Unable to resolve type {0} from builder.
         /// </summary>
-        internal static string UnableToResolveTypeFromBuilderFormat {
+        public static string UnableToResolveTypeFromBuilderFormat {
             get {
                 return ResourceManager.GetString("UnableToResolveTypeFromBuilderFormat", resourceCulture);
             }

@@ -1,5 +1,4 @@
-﻿using Rezolver.Resources;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -83,7 +82,7 @@ namespace Rezolver
 				}
 			}
 			else
-				throw new ArgumentException(string.Format(Exceptions.TargetDoesntSupportType_Format, commonServiceType), "target");
+				throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, commonServiceType), "target");
 		}
 
 		/// <summary>

@@ -1,5 +1,4 @@
-﻿using Rezolver.Resources;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,8 +13,6 @@ namespace Rezolver
 	/// </summary>
 	public class RezolveTargetEntry : IRezolveTargetEntry
 	{
-		private readonly IRezolverBuilder _parentBuilder;
-		private readonly Type _registeredType;
 		private IRezolveTarget _defaultTarget;
 		private ListTarget _listTarget;
 		private List<IRezolveTarget> _targets;
@@ -87,7 +84,7 @@ namespace Rezolver
 			if (SupportsType(context.TargetType, out match))
 				return match.CreateExpression(context);
 
-			throw new ArgumentException(String.Format(Exceptions.TargetDoesntSupportType_Format, context.TargetType),
+			throw new ArgumentException(String.Format(ExceptionResources.TargetDoesntSupportType_Format, context.TargetType),
 					nameof(context.TargetType));
 		}
 

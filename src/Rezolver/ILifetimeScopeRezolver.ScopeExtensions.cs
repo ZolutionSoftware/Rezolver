@@ -1,5 +1,4 @@
-﻿using Rezolver.Resources;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,7 +33,7 @@ namespace Rezolver
             {
                 result = enumerator.Current;
                 if (enumerator.MoveNext())
-                    throw new InvalidOperationException(Exceptions.MoreThanOneObjectFoundInScope);
+                    throw new InvalidOperationException(ExceptionResources.MoreThanOneObjectFoundInScope);
             }
 
             return result;

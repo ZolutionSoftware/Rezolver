@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Rezolver.Resources;
 
 namespace Rezolver
 {
@@ -162,11 +161,11 @@ namespace Rezolver
 		public virtual Expression CreateExpression(CompileContext context)
 		{
 			if (context.TargetType != null && !SupportsType(context.TargetType))
-				throw new ArgumentException(String.Format(Exceptions.TargetDoesntSupportType_Format, context.TargetType),
+				throw new ArgumentException(String.Format(ExceptionResources.TargetDoesntSupportType_Format, context.TargetType),
 					"targetType");
 
 			if (!context.PushCompileStack(this))
-				throw new InvalidOperationException(string.Format(Exceptions.CyclicDependencyDetectedInTargetFormat, GetType(), DeclaredType));
+				throw new InvalidOperationException(string.Format(ExceptionResources.CyclicDependencyDetectedInTargetFormat, GetType(), DeclaredType));
 
 			try
 			{

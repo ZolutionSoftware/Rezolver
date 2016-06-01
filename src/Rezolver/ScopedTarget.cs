@@ -48,7 +48,7 @@ namespace Rezolver
             //prevents the scoped object from doing what it's supposed to do.
             var isScopeNull = Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(ILifetimeScopeRezolver)));
             var throwArgException = Expression.Throw(Expression.New(_argExceptionCtor,
-                Expression.Property(null, typeof(Resources.Exceptions), "ScopedSingletonRequiresAScope"),
+                Expression.Property(null, typeof(ExceptionResources), "ScopedSingletonRequiresAScope"),
                 Expression.Constant(context.RezolveContextParameter.Name ?? "context")));
 
             var actualType = context.TargetType ?? DeclaredType;

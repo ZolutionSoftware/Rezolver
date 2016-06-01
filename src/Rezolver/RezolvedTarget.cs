@@ -121,7 +121,7 @@ namespace Rezolver
 			}
 
 			if (staticExpr == null)
-				throw new InvalidOperationException(string.Format(Resources.Exceptions.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
+				throw new InvalidOperationException(string.Format(ExceptionResources.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
 
 			if (staticExpr.Type != DeclaredType)
 				staticExpr = Expression.Convert(staticExpr, DeclaredType);

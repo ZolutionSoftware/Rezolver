@@ -2,9 +2,11 @@
   "version": "1.0.0-alpha-200",
   "description": "Diagnostics and logging classes for Rezolver",
   "authors": [ "Andras" ],
-  "tags": [ "ioc", "di", "portable", "rezolver", "logging" ],
-  "projectUrl": "http://www.zolution.co.uk/Rezolver",
-  "licenseUrl": "",
+  "packOptions": {
+    "tags": [ "ioc", "di", "portable", "rezolver", "logging" ],
+    "projectUrl": "http://www.zolution.co.uk/Rezolver",
+    "licenseUrl": ""
+  },
   "dependencies": {
     "Rezolver":  "1.0.0-alpha-*",
     "Rezolver.Shared": {
@@ -13,17 +15,14 @@
     }
   },
   "frameworks": {
-    "dnx451": {
-      
-    },
     "net451": {
 
     },
     "net46": {
 
     },
-    "dotnet5.4": {
-      "compilationOptions": {
+    "netstandard1.5": {
+      "buildOptions": {
         "define": [ "DOTNET" ]
       }
     }

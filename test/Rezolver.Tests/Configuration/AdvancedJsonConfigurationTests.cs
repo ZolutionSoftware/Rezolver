@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.PlatformAbstractions;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Rezolver.Configuration;
 using Rezolver.Configuration.Json;
 using System;
