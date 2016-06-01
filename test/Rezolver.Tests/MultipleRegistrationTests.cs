@@ -46,7 +46,7 @@ namespace Rezolver.Tests
 				builder.Register(target, typeof(MultipleRegistrationTests));
 			}
 
-			var entry = builder.Fetch(typeof(MultipleRegistrationTests), null);
+			var entry = builder.Fetch(typeof(MultipleRegistrationTests));
 
 			Assert.Same(targets[2], entry.DefaultTarget);
 		}
@@ -58,7 +58,7 @@ namespace Rezolver.Tests
 			var target = new FakeTarget();
 			builder.Register(target, typeof(MultipleRegistrationTests));
 
-			var entry = builder.Fetch(typeof(IEnumerable<MultipleRegistrationTests>), null);
+			var entry = builder.Fetch(typeof(IEnumerable<MultipleRegistrationTests>));
 
 			Assert.Same(target, entry.DefaultTarget);
 		}

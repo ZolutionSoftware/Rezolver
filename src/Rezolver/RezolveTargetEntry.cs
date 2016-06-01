@@ -6,14 +6,15 @@ using System.Linq.Expressions;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Default implementation of the <see cref="IRezolveTargetEntry"/> interface.
-    /// 
-    /// Supports multiple targets registered under one entry, with the last of those
-    /// targets to be registered being treated as the default target.
-    /// </summary>
+	/// <summary>
+	/// Default implementation of the <see cref="IRezolveTargetEntry"/> interface.
+	/// 
+	/// Supports multiple targets registered under one entry, with the last of those
+	/// targets to be registered being treated as the default target.
+	/// </summary>
 	public class RezolveTargetEntry : IRezolveTargetEntry
 	{
+		private readonly IRezolverBuilder _parentBuilder;
 		private readonly Type _registeredType;
 		private IRezolveTarget _defaultTarget;
 		private ListTarget _listTarget;
@@ -21,24 +22,11 @@ namespace Rezolver
 
 		public virtual bool UseFallback { get { return false; } }
 
-		public RezolveTargetEntry(Type registeredType, params IRezolveTarget[] targets)
-		{
-			registeredType.MustNotBeNull(nameof(registeredType));
-			targets.MustNotBeNull(nameof(targets));
-			if (targets.Any(t => t == null))
-				throw new ArgumentException("All targets must be non-null", nameof(targets));
-
-			_registeredType = registeredType;
-			_defaultTarget = targets[targets.Length - 1];
-			_targets = new List<IRezolveTarget>(targets);
-		}
+		
 
 		public Type DeclaredType
 		{
-			get
-			{
-				return _registeredType;
-			}
+			get { return DefaultTarget.DeclaredType; }
 		}
 
 		public IRezolveTarget DefaultTarget
@@ -57,13 +45,38 @@ namespace Rezolver
 			}
 		}
 
-		public void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
+		public IRezolverBuilder ParentBuilder
 		{
-            if (!checkForDuplicates || !_targets.Contains(target))
-            {
-                _targets.Add(target);
-                _defaultTarget = target;
-            }
+			get; 
+		}
+
+		public Type RegisteredType
+		{
+			get; 
+		}
+
+		public RezolveTargetEntry(IRezolverBuilder parentBuilder, Type registeredType, params IRezolveTarget[] targets)
+		{
+			parentBuilder.MustNotBeNull(nameof(parentBuilder));
+			registeredType.MustNotBeNull(nameof(registeredType));
+			targets.MustNotBeNull(nameof(targets));
+			targets.MustNot(t => t.Length == 0, "targets must not be empty", nameof(targets));
+			if (targets.Any(t => t == null))
+				throw new ArgumentException("All targets must be non-null", nameof(targets));
+
+			ParentBuilder = parentBuilder;
+			RegisteredType = registeredType;
+			_defaultTarget = targets[targets.Length - 1];
+			_targets = new List<IRezolveTarget>(targets);
+		}
+
+		public virtual void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
+		{
+			if (!checkForDuplicates || !_targets.Contains(target))
+			{
+				_targets.Add(target);
+				_defaultTarget = target;
+			}
 		}
 
 		public Expression CreateExpression(CompileContext context)
@@ -71,7 +84,7 @@ namespace Rezolver
 			//here it will depend on the type in the compile context (once fully implemented, of course)
 			//only way to figure that out is to find out which target supports the incoming type
 			IRezolveTarget match = null;
-			if(SupportsType(context.TargetType, out match))
+			if (SupportsType(context.TargetType, out match))
 				return match.CreateExpression(context);
 
 			throw new ArgumentException(String.Format(Exceptions.TargetDoesntSupportType_Format, context.TargetType),
@@ -126,9 +139,9 @@ namespace Rezolver
 			return false;
 		}
 
-		private ListTarget CreateListTarget()
+		protected ListTarget CreateListTarget()
 		{
-			return new ListTarget(DeclaredType, _targets, true);
+			return new ListTarget(RegisteredType, _targets, true);
 		}
 	}
 }

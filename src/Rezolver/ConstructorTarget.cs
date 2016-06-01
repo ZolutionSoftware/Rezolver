@@ -49,7 +49,7 @@ namespace Rezolver
 						{
 
 						}
-							//_wrapped = ConstructorTarget.Auto(context.DependencyBuilder, _declaredType, _propertyBindingBehaviour, context.);
+						//_wrapped = ConstructorTarget.Auto(context.DependencyBuilder, _declaredType, _propertyBindingBehaviour, context.);
 					}
 				}
 				return _wrapped.CreateExpression(context);
@@ -91,10 +91,19 @@ namespace Rezolver
 			return Auto(typeof(T), propertyBindingBehaviour);
 		}
 
+		/// <summary>
+		/// Creates a target that will create a new concrete
+		/// </summary>
+		/// <param name="declaredType"></param>
+		/// <param name="propertyBindingBehaviour"></param>
+		/// <returns></returns>
 		public static IRezolveTarget Auto(Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			//conduct a very simple search for the constructor with the most parameters
 			declaredType.MustNotBeNull("declaredType");
+
+			if (TypeHelpers.IsGenericTypeDefinition(declaredType))
+				return new GenericConstructorTarget(declaredType, propertyBindingBehaviour);
 
 			IGrouping<int, ConstructorInfo>[] ctorGroups = GetPublicConstructorGroups(declaredType);
 			//get the first group - if there's more than one constructor then we can't choose.
@@ -134,7 +143,7 @@ namespace Rezolver
 		/// <param name="declaredType"></param>
 		/// <param name="propertyBindingBehaviour"></param>
 		/// <returns></returns>
-		public static IRezolveTarget Auto(IRezolverBuilder dependencyLookup, Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null, string targetName = null)
+		public static IRezolveTarget Auto(IRezolverBuilder dependencyLookup, Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			dependencyLookup.MustNotBeNull("dependencyLookup");
 			declaredType.MustNotBeNull("declaredType");
@@ -144,12 +153,23 @@ namespace Rezolver
 			//search all ctor groups, attempting to match each parameter to a rezolve target
 			//this is slightly cut down version of what's done by the RezolvedTarget, and not quite as clever:
 			//it only considers the current IRezolverBuilder.
-			var firstGroupWithMatch = ctorGroups.Select(g => new { paramCount = g.Key, matches = g.Select(c => {
-				var parameters = c.GetParameters();
-				return new { constructor = c, bindings = parameters.Select(p => new {
-					parameter = p, binding = dependencyLookup.Fetch(p.ParameterType, targetName)
-				}).ToArray() };
-			}) }).FirstOrDefault(g => g.matches.Any(m => m.bindings.Length == 0 ? true : m.bindings.All(b => b.binding != null)));
+			var firstGroupWithMatch = ctorGroups.Select(g => new
+			{
+				paramCount = g.Key,
+				matches = g.Select(c =>
+				{
+					var parameters = c.GetParameters();
+					return new
+					{
+						constructor = c,
+						bindings = parameters.Select(p => new
+						{
+							parameter = p,
+							binding = dependencyLookup.Fetch(p.ParameterType)
+						}).ToArray()
+					};
+				})
+			}).FirstOrDefault(g => g.matches.Any(m => m.bindings.Length == 0 ? true : m.bindings.All(b => b.binding != null)));
 
 			var matchesArray = firstGroupWithMatch.matches.ToArray();
 
@@ -178,7 +198,7 @@ namespace Rezolver
 			return For(typeof(T), newExprBody, adapter);
 		}
 
-		public static IRezolveTarget Best<T>(IPropertyBindingBehaviour propertyBindingBehaviour)
+		public static IRezolveTarget Best<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			return new BestMatchConstructorTarget(typeof(T), propertyBindingBehaviour);
 		}

@@ -83,12 +83,12 @@ namespace Rezolver
 		public virtual bool CanResolve(RezolveContext context)
 		{
 			//TODO: Change this to refer to the cache (once I've figured out how to do it based on the new compiler)
-			return Builder.Fetch(context.RequestedType, context.Name) != null;
+			return Builder.Fetch(context.RequestedType) != null;
 		}
 
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
-			IRezolveTargetEntry target = Builder.Fetch(context.RequestedType, context.Name);
+			IRezolveTargetEntry target = Builder.Fetch(context.RequestedType);
 
 			if (target == null)
 				return GetFallbackCompiledRezolveTarget(context);
@@ -107,8 +107,7 @@ namespace Rezolver
 			//dependencies.
 			return Compiler.CompileTarget(target,
 				new CompileContext(this,
-					context.RequestedType,
-					dependencyBuilder: context.Name != null ? Builder.GetBestNamedBuilder(context.Name) : null));
+					context.RequestedType));
 
 		}
 

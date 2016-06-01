@@ -159,7 +159,7 @@ namespace Rezolver.Tests
 			var target = ConstructorTarget.For(context => new NoDefaultConstructor(context.Resolve<int>()), RezolveTargetAdapter.Instance);
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var rezolver = CreateADefaultRezolver();
-			rezolver.Register(CreateRezolverEntryForTarget(intTarget, typeof(int)));
+			rezolver.Register(intTarget, typeof(int));
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolver);
 			Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 		}
@@ -171,7 +171,7 @@ namespace Rezolver.Tests
 			var target = ConstructorTarget.Auto<NoDefaultConstructor>();
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var rezolver = CreateADefaultRezolver();
-			rezolver.Register(CreateRezolverEntryForTarget(intTarget, typeof(int)));
+			rezolver.Register(intTarget, typeof(int));
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolver);
 			Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 		}
@@ -190,43 +190,6 @@ namespace Rezolver.Tests
 			var result = rezolver.Resolve<NoDefaultConstructor2>();
 			Assert.Equal(NoDefaultConstructor2.ExpectedBestValue, result.Value);
 			Assert.Equal(NoDefaultConstructor2.ExpectedDefaultMessage, result.Message);
-		}
-
-		[Fact]
-		public void ShouldRezolveTheStringArgumentForARezolveCall()
-		{
-			//complicated test, this.  And, yes, it's largely pointless - but it
-			//proves that our expression parsing is recursive and can handle complex constructs
-			var target = ConstructorTarget.For(context => new NoDefaultConstructor(context.Resolve<int>(context.Resolve<string>())));
-			var intTarget = NoDefaultConstructor.ExpectedComplexNamedRezolveCall.AsObjectTarget();
-			const string rezolveName = "ThisIsComplicated";
-			var stringTarget = rezolveName.AsObjectTarget();
-			var rezolver = CreateADefaultRezolver();
-			rezolver.Register(CreateRezolverEntryForTarget(stringTarget, typeof(string)));
-			rezolver.Register(CreateRezolverEntryForTarget(intTarget, typeof(int)));
-			//so the expression demands that a new instance of NoDefaultConstructor is built. with an
-			//integer constructor argument that is, in turn, resolved by a name which is also resolved.
-			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolver);
-			Assert.Equal(NoDefaultConstructor.ExpectedComplexNamedRezolveCall, result.Value);
-		}
-
-		[Fact]
-		public void ShouldRezolveTheStringArgumentForARezolveCallFromDynamicRezolver()
-		{
-			//unlike the above test, this uses a real rezolver and combined rezolver
-			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
-			rezolver.Register(ConstructorTarget.For(context => new NoDefaultConstructor(context.Resolve<int>(context.Resolve<string>()))));
-			rezolver.Register("ThisIsComplicated".AsObjectTarget());
-			rezolver.Register(NoDefaultConstructor.ExpectedComplexNamedRezolveCall.AsObjectTarget(), path: "ThisIsComplicated");
-			CombinedRezolver rezolver2 = new CombinedRezolver(rezolver);
-			rezolver2.Register(NoDefaultConstructor.ExpectedComplexNamedRezolveCallDynamic.AsObjectTarget(), path: "ThisIsComplicated");
-
-			//var result = (NoDefaultConstructor)rezolver.Resolve(typeof(NoDefaultConstructor));
-			//Assert.Equal(NoDefaultConstructor.ExpectedComplexNamedRezolveCall, result.Value);
-
-			var result2 = (NoDefaultConstructor)rezolver2.Resolve(typeof(NoDefaultConstructor));
-
-			Assert.Equal(NoDefaultConstructor.ExpectedComplexNamedRezolveCallDynamic, result2.Value);
 		}
 
 		public static int ReturnsInt(int input)

@@ -65,7 +65,7 @@ namespace Rezolver
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 
-			public void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
+			public void Register(IRezolveTarget target, Type type = null)
 			{
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
@@ -83,9 +83,6 @@ namespace Rezolver
 
 		private Type _requestedType;
 		public Type RequestedType { get { return _requestedType; } private set { _requestedType = value; } }
-
-		private string _name;
-		public string Name { get { return _name; } private set { _name = value; } }
 
 		private IRezolver _rezolver;
 
@@ -105,25 +102,10 @@ namespace Rezolver
 			RequestedType = requestedType;
 		}
 
-		public RezolveContext(IRezolver rezolver, Type requestedType, string name)
-			: this(rezolver)
-		{
-			RequestedType = requestedType;
-			Name = name;
-		}
-
 		public RezolveContext(IRezolver rezolver, Type requestedType, ILifetimeScopeRezolver scope)
 			: this(rezolver)
 		{
 			RequestedType = requestedType;
-			Scope = scope;
-		}
-
-		public RezolveContext(IRezolver rezolver, Type requestedType, string name, ILifetimeScopeRezolver scope)
-			: this(rezolver)
-		{
-			RequestedType = requestedType;
-			Name = name;
 			Scope = scope;
 		}
 
@@ -141,7 +123,6 @@ namespace Rezolver
 			List<string> parts = new List<string>();
 
 			parts.Add($"Type: {RequestedType}");
-			if (!string.IsNullOrWhiteSpace(Name)) parts.Add($"Name: {Name}");
 			parts.Add($"Rezolver: {Rezolver}");
 			if (Scope != null)
 			{
@@ -156,7 +137,7 @@ namespace Rezolver
 
 		public override int GetHashCode()
 		{
-			return _requestedType.GetHashCode() ^ (_name != null ? _name.GetHashCode() : 0);
+			return _requestedType.GetHashCode();
 		}
 
 		public override bool Equals(object obj)
@@ -168,7 +149,7 @@ namespace Rezolver
 
 		public virtual bool Equals(RezolveContext other)
 		{
-			return object.ReferenceEquals(this, other) || _requestedType == other._requestedType && _name == other._name;
+			return object.ReferenceEquals(this, other) || _requestedType == other._requestedType;
 		}
 
 		public static bool operator ==(RezolveContext left, RezolveContext right)
@@ -181,7 +162,7 @@ namespace Rezolver
 			if (object.ReferenceEquals(null, left) != object.ReferenceEquals(null, right))
 				return false;
 			//now standard equality check on type/name
-			return left._requestedType == right._requestedType && left._name == right._name;
+			return left._requestedType == right._requestedType;
 		}
 
 		public static bool operator !=(RezolveContext left, RezolveContext right)
@@ -194,7 +175,7 @@ namespace Rezolver
 			if (object.ReferenceEquals(null, left) != object.ReferenceEquals(null, right))
 				return true;
 			//now standard inequality check on type/name
-			return left._requestedType != right._requestedType || left._name != right._name;
+			return left._requestedType != right._requestedType;
 
 			//TODO: Going to need to think of a way to bring in user-defined equalities in here - for those
 			//contexts where the registration does 'interesting' things with the context.
@@ -211,18 +192,6 @@ namespace Rezolver
 			return new RezolveContext()
 			{
 				Rezolver = Rezolver,
-				Name = null, //name is part of the object's identity - so should be nulled when changing the type
-				RequestedType = requestedType,
-				Scope = Scope
-			};
-		}
-
-		public RezolveContext CreateNew(Type requestedType, string name)
-		{
-			return new RezolveContext()
-			{
-				Rezolver = Rezolver,
-				Name = name,
 				RequestedType = requestedType,
 				Scope = Scope
 			};
@@ -233,18 +202,6 @@ namespace Rezolver
 			return new RezolveContext()
 			{
 				Rezolver = rezolver,
-				Name = null,
-				RequestedType = requestedType,
-				Scope = Scope
-			};
-		}
-
-		public RezolveContext CreateNew(IRezolver rezolver, Type requestedType, string name)
-		{
-			return new RezolveContext()
-			{
-				Rezolver = Rezolver,
-				Name = name,
 				RequestedType = requestedType,
 				Scope = Scope
 			};
@@ -255,18 +212,6 @@ namespace Rezolver
 			return new RezolveContext()
 			{
 				Rezolver = Rezolver,
-				Name = null,
-				RequestedType = requestedType,
-				Scope = scope
-			};
-		}
-
-		public RezolveContext CreateNew(Type requestedType, string name, ILifetimeScopeRezolver scope)
-		{
-			return new RezolveContext()
-			{
-				Rezolver = Rezolver,
-				Name = name,
 				RequestedType = requestedType,
 				Scope = scope
 			};
@@ -277,7 +222,6 @@ namespace Rezolver
 			return new RezolveContext()
 			{
 				Rezolver = rezolver,
-				Name = null,
 				RequestedType = requestedType,
 				Scope = scope
 			};
@@ -288,7 +232,6 @@ namespace Rezolver
 			return new RezolveContext()
 			{
 				Rezolver = rezolver,
-				Name = Name,
 				RequestedType = RequestedType,
 				Scope = Scope
 			};
@@ -299,7 +242,6 @@ namespace Rezolver
 			return new RezolveContext()
 			{
 				Rezolver = Rezolver,
-				Name = Name,
 				RequestedType = RequestedType,
 				Scope = scope
 			};
@@ -310,7 +252,6 @@ namespace Rezolver
 			return new RezolveContext()
 			{
 				Rezolver = rezolver ?? Rezolver, //can't have a null rezolver
-				Name = Name,
 				RequestedType = RequestedType,
 				Scope = scope
 			};

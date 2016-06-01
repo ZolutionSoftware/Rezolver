@@ -25,12 +25,6 @@ namespace Rezolver
 
 		#endregion
 
-		#region named child builders
-
-		private readonly Dictionary<string, INamedRezolverBuilder> _namedBuilders = new Dictionary<string, INamedRezolverBuilder>();
-
-		#endregion
-
 		private class RezolverBuilderWalker : IEnumerable<RegistrationEntry>
 		{
 			private RezolverBuilder _builder;
@@ -46,13 +40,6 @@ namespace Rezolver
 				foreach (var registration in _builder._targets)
 				{
 					yield return new RegistrationEntry(new RezolveContext(null, registration.Key), registration.Value);
-				}
-				foreach (var namedBuilderEntry in _builder._namedBuilders)
-				{
-					foreach (var registration in namedBuilderEntry.Value.AllRegistrations)
-					{
-						yield return new RegistrationEntry(registration.Key.CreateNew(registration.Key.RequestedType, namedBuilderEntry.Key + RezolverPath.DefaultPathSeparator + registration.Key.Name), registration.Value);
-					}
 				}
 			}
 
@@ -72,10 +59,11 @@ namespace Rezolver
 			private readonly Type _elementType;
 			private readonly Type _enumerableType;
 
-			public EnumerableFallbackTargetEntry(Type elementType)
+			public EnumerableFallbackTargetEntry(IRezolverBuilder parentBuilder, Type elementType)
 			{
 				_elementType = elementType;
 				_enumerableType = typeof(IEnumerable<>).MakeGenericType(_elementType);
+				ParentBuilder = parentBuilder;
 			}
 
 			public Type DeclaredType
@@ -110,6 +98,19 @@ namespace Rezolver
 				}
 			}
 
+			public IRezolverBuilder ParentBuilder
+			{
+				get;
+			}
+
+			public Type RegisteredType
+			{
+				get
+				{
+					return DeclaredType;
+				}
+			}
+
 			public Expression CreateExpression(CompileContext context)
 			{
 				return Expression.Call(
@@ -127,35 +128,32 @@ namespace Rezolver
 			}
 		}
 
-		public virtual void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
+		public virtual void Register(IRezolveTarget target, Type type = null)
 		{
-			if (path != null)
-			{
-				if (path.Next == null)
-					throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
-
-				//get the named Builder.  If it doesn't exist, create one.
-				var builder = GetNamedBuilder(path, true);
-				//note here we don't pass the name through.
-				//when we support named scopes, we would be lopping off the first item in a hierarchical name to allow for the recursion.
-				builder.Register(target, type);
-				return;
-			}
-
 			if (type == null)
 				type = target.DeclaredType;
 
 			if (target.SupportsType(type))
 			{
 				IRezolveTargetEntry entry = null;
-				if (_targets.TryGetValue(type, out entry))
+				_targets.TryGetValue(type, out entry);
+				var decoratorTarget = target as DecoratorTarget;
+					//(hopefully) temporary hack
+				if (decoratorTarget == null)
 				{
-					entry.AddTarget(target);
+					if (entry != null)
+					{
+						entry.AddTarget(target);
+					}
+					else
+					{
+						_targets[type] = CreateEntry(type, target); ;
+					}
 				}
 				else
 				{
-					entry = CreateEntry(type, target);
-					_targets[type] = entry;
+					//note we always 
+					_targets[type] = new DecoratingEntry(decoratorTarget, entry);
 				}
 			}
 			else
@@ -164,35 +162,14 @@ namespace Rezolver
 
 		protected virtual IRezolveTargetEntry CreateEntry(Type type, params IRezolveTarget[] targets)
 		{
-			return new RezolveTargetEntry(type, targets);
+			return new RezolveTargetEntry(this, type, targets);
 		}
 
-		/// <summary>
-		/// Called to create a new instance of a Named Builder with the given name, optionally for the given target and type.
-		/// </summary>
-		/// <param name="name">The name of the Builder to be created.  Please note - this could be being created
-		/// as part of a wider path of scopes.</param>
-		/// <param name="target">Optional - a target that is to be added to the named Builder after creation.</param>
-		/// <returns></returns>
-		protected virtual INamedRezolverBuilder CreateNamedBuilder(string name, IRezolveTarget target)
-		{
-			//base class simply creates a NamedRezolverBuilder
-			return new NamedRezolverBuilder(this, name);
-		}
-
-		public virtual IRezolveTargetEntry Fetch(Type type, string name)
+		public virtual IRezolveTargetEntry Fetch(Type type)
 		{
 			type.MustNotBeNull("type");
 			IRezolveTargetEntry entry;
-			if (name != null)
-			{
-				var namedBuilder = GetBestNamedBuilder(name);
-				if (namedBuilder != null)
-				{
-					return namedBuilder.Fetch(type);
-				}
-			}
-
+			
 			var result = _targets.TryGetValue(type, out entry);
 			if (!result && TypeHelpers.IsGenericType(type))
 			{
@@ -208,51 +185,15 @@ namespace Rezolver
 				if (type.GetGenericTypeDefinition().Equals(typeof(IEnumerable<>)))
 				{
 					Type elementType = TypeHelpers.GetGenericArguments(type)[0];
-					entry = Fetch(elementType, name);
+					entry = Fetch(elementType);
 
 					//because it's an enumerable the caller is after, we return an entry that
 					//will return an empty enumerable of the requested type.
 					if (entry == null)
-						return new EnumerableFallbackTargetEntry(elementType);
+						return new EnumerableFallbackTargetEntry(this, elementType);
 				}
 			}
 			return entry;
-		}
-
-		public virtual INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
-		{
-			if (!path.MoveNext())
-				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
-
-			INamedRezolverBuilder namedBuilder;
-
-			if (!_namedBuilders.TryGetValue(path.Current, out namedBuilder))
-			{
-				if (!create)
-					return null;
-				_namedBuilders[path.Current] = namedBuilder = CreateNamedBuilder(path.Current, null);
-			}
-			//then walk to the next part of the path and create it if need be
-			return path.Next != null ? namedBuilder.GetNamedBuilder(path, true) : namedBuilder;
-		}
-
-		public virtual INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path)
-		{
-			//retrieves the last builder found along the path supplied.  If the path is a.b.c and
-			//we only get to a.b, then you'll get the a.b builder.
-			//If the method returns null, then this builder doesn't have a first-level child with the name.
-			if (!path.MoveNext())
-				throw new ArgumentException(Exceptions.PathIsAtEnd, "path");
-
-			INamedRezolverBuilder namedBuilder;
-
-			if (!_namedBuilders.TryGetValue(path.Current, out namedBuilder))
-				return this as INamedRezolverBuilder; //if this is a named builder that we've descended to, then 
-																							//this is the best match.  A route RezolverBuilder (if using
-																							//the default types) will return null here.
-
-			//then walk to the next part of the path and carry on
-			return path.Next != null ? namedBuilder.GetBestNamedBuilder(path) : namedBuilder;
 		}
 
 		public IEnumerable<RegistrationEntry> AllRegistrations
@@ -262,7 +203,6 @@ namespace Rezolver
 				return new RezolverBuilderWalker(this);
 			}
 		}
-
 
 		private IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
 		{
@@ -302,5 +242,7 @@ namespace Rezolver
 					from item in sequence
 					select accseq.Concat(new[] { item }));
 		}
+
+		
 	}
 }

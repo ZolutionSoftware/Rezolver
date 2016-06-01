@@ -57,7 +57,7 @@ namespace Rezolver
 			if (obj == null)
 				return;
 			ConcurrentBag<object> instances = _objects.GetOrAdd(
-					new RezolveContext(null, context.RequestedType, context.Name),
+					new RezolveContext(null, context.RequestedType),
 					c => new ConcurrentBag<object>());
 
 			//bit slow this, but hopefully there won't be loads of them...

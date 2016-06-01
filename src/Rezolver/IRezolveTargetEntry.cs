@@ -15,6 +15,14 @@ namespace Rezolver
 	public interface IRezolveTargetEntry : IRezolveTarget
 	{
 		/// <summary>
+		/// The builder to which this entry belongs
+		/// </summary>
+		IRezolverBuilder ParentBuilder { get; }
+		/// <summary>
+		/// The type that this entry was registered against in its parent builder.
+		/// </summary>
+		Type RegisteredType { get; }
+		/// <summary>
 		/// The default target that is to be executed when a single instance of the registered type
 		/// is requested.
 		/// </summary>

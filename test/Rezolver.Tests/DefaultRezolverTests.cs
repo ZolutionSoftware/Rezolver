@@ -14,13 +14,9 @@ namespace Rezolver.Tests
 		public void ShouldRezolveAnInt()
 		{
 			var rezolver = CreateADefaultRezolver();
-			rezolver.Register(CreateRezolverEntryForTarget(1.AsObjectTarget(), typeof(int)));
+			rezolver.Register(1.AsObjectTarget(), typeof(int));
 			var result = rezolver.Resolve(typeof(int));
 			Assert.Equal(1, result);
 		}
-
-		
-
-		
 	}
 }

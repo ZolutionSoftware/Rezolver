@@ -52,40 +52,6 @@ namespace Rezolver.Tests
 		}
 
 		[Fact]
-		public void ShouldIdentifyRezolveCallWithStringParameter()
-		{
-			IRezolveTargetAdapter adapter = RezolveTargetAdapter.Instance;
-			var result = adapter.GetRezolveTarget((helper) => helper.Resolve<int>("name"));
-			Assert.IsType<RezolvedTarget>(result);
-			RezolvedTarget result2 = (RezolvedTarget)result;
-			Assert.NotNull(result2.Name);
-			//because the adapter is intended to identify targets in the expression,
-			//a constantexpression is not preserved, but is turned into an ObjectTarget which will later
-			//*build* a ConstantExpression.  This level of indirection is required so we can support more
-			//advanced voodoo on all aspects of our expressions (such as rezolved string parameters)
-			//that scenario is, in fact, tested in the next test :)
-			IRezolveTarget nameTarget = result2.Name as IRezolveTarget;
-			Assert.NotNull(nameTarget);
-			Assert.IsType<ObjectTarget>(nameTarget);
-			Assert.Equal("name", GetValueFromTarget(nameTarget));
-		}
-
-		[Fact]
-		public void ShouldIdentifyRezolveCallWithNestedRezolveCallAsStringParameter()
-		{
-			IRezolveTargetAdapter adapter = RezolveTargetAdapter.Instance;
-			//this is a whacky concept - resolving a string to be used as the name
-			//for another resolve call.  The point being that an IRezolverAdapter implementation
-			//should be recursive in its treatment of expressions.
-			var result = adapter.GetRezolveTarget((helper) => helper.Resolve<int>(helper.Resolve<string>()));
-			Assert.IsType<RezolvedTarget>(result);
-			RezolvedTarget result2 = (RezolvedTarget)result;
-			Assert.NotNull(result2.Name);
-			Assert.IsType<RezolvedTarget>(result2.Name);
-			Assert.Equal(typeof(string), result2.Name.DeclaredType);
-		}
-
-		[Fact]
 		public void ShouldHaveDefaultTargetAdapter()
 		{
 			Assert.NotNull(RezolveTargetAdapter.Default);

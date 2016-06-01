@@ -20,11 +20,10 @@ namespace Rezolver
         /// <param name="serviceType">The service type against which this object is to be registered, if different
         /// from <typeparamref name="T"/>.</param>
         /// <param name="suppressScopeTracking"></param>
-        /// <param name="path">Same as <see cref="IRezolverBuilder.Register(IRezolveTarget, Type, RezolverPath)"/></param>
-        public static void RegisterObject<T>(this IRezolverBuilder builder, T obj, Type serviceType = null, RezolverPath path = null, bool suppressScopeTracking = true)
+        public static void RegisterObject<T>(this IRezolverBuilder builder, T obj, Type serviceType = null, bool suppressScopeTracking = true)
         {
             builder.MustNotBeNull(nameof(builder));
-            builder.Register(obj.AsObjectTarget(serviceType, suppressScopeTracking: suppressScopeTracking), serviceType, path);
+            builder.Register(obj.AsObjectTarget(serviceType, suppressScopeTracking: suppressScopeTracking), serviceType);
         }
     }
 }

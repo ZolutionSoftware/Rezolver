@@ -445,8 +445,8 @@ namespace Rezolver.Tests.Configuration
 		[Fact]
 		public void BindConstructorOfNetworkCredentials()
 		{
+			//binding a constructor explicitly - using a type from the .Net framework
 			string json = @"{
-			""assemblies"": [""System.Net.Primitives""],
 			""rezolve"" : [ 
 			{
 				""System.Net.NetworkCredential"": {

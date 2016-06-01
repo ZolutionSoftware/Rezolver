@@ -29,29 +29,15 @@ namespace Rezolver.Diagnostics
 			return Logger.TrackCall(this, () => base.CreateEntry(type, targets), new { type = type, targets = targets });
 		}
 
-		protected override INamedRezolverBuilder CreateNamedBuilder(string name, IRezolveTarget target)
+		
+		public override IRezolveTargetEntry Fetch(Type type)
 		{
-			return base.CreateNamedBuilder(name, target);
+			return base.Fetch(type);
 		}
 
-		public override IRezolveTargetEntry Fetch(Type type, string name)
+		public override void Register(IRezolveTarget target, Type type = null)
 		{
-			return base.Fetch(type, name);
-		}
-
-		public override INamedRezolverBuilder GetBestNamedBuilder(RezolverPath path)
-		{
-			return base.GetBestNamedBuilder(path);
-		}
-
-		public override INamedRezolverBuilder GetNamedBuilder(RezolverPath path, bool create = false)
-		{
-			return base.GetNamedBuilder(path, create);
-		}
-
-		public override void Register(IRezolveTarget target, Type type = null, RezolverPath path = null)
-		{
-			base.Register(target, type, path);
+			base.Register(target, type);
 		}
 	}
 }

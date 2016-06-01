@@ -25,16 +25,14 @@ namespace Rezolver
 			MethodCallExtractor.ExtractCalledMethod((IRezolver c) => c.Resolve(null));
 
 		private static readonly ConstructorInfo RezolveContextCtor =
-			MethodCallExtractor.ExtractConstructorCall(() => new RezolveContext((IRezolver)null, (Type)null, (string)null, (ILifetimeScopeRezolver)null));
+			MethodCallExtractor.ExtractConstructorCall(() => new RezolveContext((IRezolver)null, (Type)null, (ILifetimeScopeRezolver)null));
 
 		private static readonly MethodInfo ContextNewContextMethod =
-			MethodCallExtractor.ExtractCalledMethod((RezolveContext context) => context.CreateNew((Type)null, (string)null));
+			MethodCallExtractor.ExtractCalledMethod((RezolveContext context) => context.CreateNew((Type)null));
 
 		//this one cannot be obtained via expression extraction - as it uses an output parameter and there's no way of
 		//modelling that to the compiler.
 		private static readonly MethodInfo RezolverTryResolveMethod = TypeHelpers.GetMethod(typeof(IRezolver),"TryResolve");
-
-		public IRezolveTarget Name { get { return _resolveNameTarget; } }
 
 		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
 		{
@@ -42,17 +40,10 @@ namespace Rezolver
 			_resolveNameTarget = rezolveCall.Name;
 		}
 
-		public RezolvedTarget(Type type, string name = null)
-			: this(type, name != null ? name.AsObjectTarget() : null)
-		{
-
-		}
-
-		public RezolvedTarget(Type type, IRezolveTarget name)
+		public RezolvedTarget(Type type)
 		{
 			type.MustNotBeNull("type");
 			_resolveType = type;
-			_resolveNameTarget = name;
 		}
 
 		public override Type DeclaredType
@@ -84,14 +75,11 @@ namespace Rezolver
 		/// <returns></returns>
 		public virtual bool CanResolve(CompileContext context)
 		{
-
+			throw new NotImplementedException();
 		}
 
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			//we get the expression for the name that is to be rezolved.  That could be null.  If not, 
-			//then we have that to bake in the generated code.
-
 			//get the expression for the object that would be resolved statically.  If there is none,
 			//then we emit a call back into the rezolver that's passed in the context.
 
@@ -101,21 +89,13 @@ namespace Rezolver
 			//that.  Only do this, though, if that rezolver is different to the one to which
 			//the target belongs.
 
-			//this is the underlying expression to use for the name in the compiled code
-			var nameContext = new CompileContext(context, typeof(string), true);
-			Expression nameExpr = _resolveNameTarget != null
-				? _resolveNameTarget.CreateExpression(nameContext) : Expression.Default(typeof(string));
-			//we also need to compile this name for static use.
-			ICompiledRezolveTarget nameCompiled = _resolveNameTarget != null ?
-				context.Rezolver.Compiler.CompileTarget(_resolveNameTarget, nameContext) : null;
-
 			//this needs to do a check to see if the inbound rezolver is different to the one we've got here
 			//if it is, then we will defer to a resolve call on that rezolver.  Otherwise we will use the static
 			//target, or throw an exception.
 
 			//now we try and fetch the target from the rezolver that is passed in the context
-			var nameStatic = nameCompiled != null ? (string)nameCompiled.GetObject(new RezolveContext(context.Rezolver, _resolveNameTarget.DeclaredType)) : null;
-			var staticTarget = context.DependencyBuilder.Fetch(DeclaredType, nameStatic);
+			var staticTarget = context.Fetch(DeclaredType);
+			//TODO: This should be a shared expression
 			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IRezolver));
 			//I did have a line that used 'context.TargetType ?? DeclaredType' but I changed this because the 
 			//RezolvedTarget should know in advance which type it is that's being resolved, and that shouldn't 
@@ -123,7 +103,7 @@ namespace Rezolver
 			var declaredTypeExpr = Expression.Constant(DeclaredType, typeof(Type));
 
 			var newContextLocal = context.GetOrAddSharedLocal(typeof(RezolveContext), "newContext");
-			var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, declaredTypeExpr, nameExpr);
+			var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, declaredTypeExpr);
 			var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
 			bool setNewContextFirst = false;
 			Expression staticExpr = null;

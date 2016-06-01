@@ -9,9 +9,14 @@ namespace Rezolver
 	/// <summary>
 	/// Represents the context in which a target is being compiled.
 	/// 
+	/// The class implements the <see cref="IRezolverBuilder"/> interface also to facilitate
+	/// dependency lookups during compilation time.
+	/// 
+	/// THIS CLASS IS NOT THREAD-SAFE
+	/// 
 	/// TODO: Wondering if RezolveContext should be passed into the CompileContext...  Everything tells me it should.
 	/// </summary>
-	public class CompileContext
+	public class CompileContext : IRezolverBuilder
 	{
 		/// <summary>
 		/// Key for a shared expression used during expression tree generation
@@ -52,25 +57,31 @@ namespace Rezolver
 			}
 		}
 
-		private readonly IRezolver _rezolver;
 		/// <summary>
-		/// The rezolver that is considered the current compilation 'scope'.  You should not use this to look up other targets
-		/// for dependency resolution - for that, you should use the DependencyBuilder, as this will follow any name hierarchies
-		/// within the rezolver itself.
+		/// The rezolver that is considered the current compilation 'scope'.
+		/// 
+		/// You should not use this to look up other targets
+		/// for dependency resolution - for that, you should use the DependencyBuilder
 		/// </summary>
-		public IRezolver Rezolver { get { return _rezolver; } }
+		public IRezolver Rezolver { get; }
 
-
-		private IRezolverBuilder _dependencyBuilder;
+		private Expression _rezolverExpression;
 		/// <summary>
-		/// This is the root builder that should be used for any compile-time lookups of dependencies of IRezolveTargets.
-		/// 
-		/// Unless the application is using named targets, this will always be equal to the <see cref="Rezolver"/>'s builder.
-		/// If named targets are being used, then this could be a named child of that rezolver's builder.
-		/// 
-		/// This allows you to create overrides of root objects and/or dependencies on a per-name basis within a single resolver.
+		/// Represents an expression that equals the <see cref="Rezolver"/> that belongs to this context.
 		/// </summary>
-		public IRezolverBuilder DependencyBuilder { get { return _dependencyBuilder ?? _rezolver.Builder; } }
+		public Expression RezolverExpression {
+			get
+			{
+				if (_rezolverExpression == null)
+					_rezolverExpression = Expression.Constant(Rezolver, typeof(IRezolver));
+				return _rezolverExpression;
+			}
+			private set
+			{
+				//class can overwrite this value itself if needs be
+				_rezolverExpression = value;
+			}
+		}
 
 		private readonly Type _targetType;
 		/// <summary>
@@ -79,6 +90,7 @@ namespace Rezolver
 		public Type TargetType { get { return _targetType; } }
 
 		private readonly ParameterExpression _rezolveContextParameter;
+
 		/// <summary>
 		/// A expression to be used to bind to the RezolveContext that will be passed to the generated code at runtime.
 		/// 
@@ -94,16 +106,18 @@ namespace Rezolver
 
 		private MemberExpression _contextRezolverPropertyExpression;
 		/// <summary>
-		/// Returns an expression that represents reading the Rezolver property of the <see cref="RezolveContextParameter"/> to aid in 
-		/// code generation.
+		/// Returns an expression that represents reading the Rezolver property of the <see cref="RezolveContextParameter"/> 
+		/// to aid in code generation.
 		/// 
-		/// Note that this is always non-null.
+		/// This IS NOT the same as the <see cref="RezolverExpression"/> property.
+		/// 
+		/// This is always non-null.
 		/// </summary>
 		public MemberExpression ContextRezolverPropertyExpression
 		{
 			get
 			{
-				if(_contextRezolverPropertyExpression == null)
+				if (_contextRezolverPropertyExpression == null)
 				{
 					_contextRezolverPropertyExpression = Expression.Property(RezolveContextParameter, "Rezolver");
 				}
@@ -132,7 +146,7 @@ namespace Rezolver
 		/// 
 		/// The underlying stack is not exposed through this enumerable.
 		/// </summary>
-		public IEnumerable<IRezolveTarget> CompilingTargets { get { return _compilingTargets.ToArray(); } }
+		public IEnumerable<IRezolveTarget> CompilingTargets { get { return _compilingTargets.AsReadOnly(); } }
 
 		private Dictionary<SharedExpressionKey, Expression> _sharedExpressions;
 
@@ -154,36 +168,54 @@ namespace Rezolver
 			}
 		}
 
-        private readonly bool _suppressScopeTracking;
+		private readonly bool _suppressScopeTracking;
 
-        /// <summary>
-        /// If true, then any target that is compiling within this scope should not generate any runtime code to fetch the
-        /// object from, or track the object in, the current scope.
-        /// </summary>
-        /// <remarks>This is currently used, for example, by wrapper targets that generate their own
-        /// scope tracking code (specifically, the <see cref="SingletonTarget"/> and <see cref="ScopedTarget"/>.
-        /// 
-        /// It's therefore very important that any custom <see cref="IRezolveTarget"/> implementations honour this flag in their
-        /// implementation of <see cref="IRezolveTarget.CreateExpression(CompileContext)"/>.  The <see cref="RezolveTargetBase"/>
-        /// class does honour this flag.</remarks>
-        public bool SuppressScopeTracking
-        {
-            get
-            {
-                return _suppressScopeTracking;
-            }
-        }
+		/// <summary>
+		/// If true, then any target that is compiling within this scope should not generate any runtime code to fetch the
+		/// object from, or track the object in, the current scope.
+		/// </summary>
+		/// <remarks>This is currently used, for example, by wrapper targets that generate their own
+		/// scope tracking code (specifically, the <see cref="SingletonTarget"/> and <see cref="ScopedTarget"/>.
+		/// 
+		/// It's therefore very important that any custom <see cref="IRezolveTarget"/> implementations honour this flag in their
+		/// implementation of <see cref="IRezolveTarget.CreateExpression(CompileContext)"/>.  The <see cref="RezolveTargetBase"/>
+		/// class does honour this flag.</remarks>
+		public bool SuppressScopeTracking
+		{
+			get
+			{
+				return _suppressScopeTracking;
+			}
+		}
+
+		public IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations
+		{
+			get
+			{
+				return _rezolverBuilder.AllRegistrations;
+			}
+		}
+
+		/// <summary>
+		/// This is the IRezolverBuilder through which dependencies are resolved.
+		/// Note that this class implements IRezolverBuilder by proxying this instance, 
+		/// which is, by default, created as a child rezolver builder of the one that
+		/// is attached to the <see cref="Rezolver"/>
+		/// </summary>
+		private IRezolverBuilder _rezolverBuilder;
 
 		private CompileContext(CompileContext parentContext, bool inheritSharedExpressions, bool suppressScopeTracking)
 		{
 			parentContext.MustNotBeNull("parentContext");
 
+			Rezolver = parentContext.Rezolver;
+			RezolverExpression = parentContext.RezolverExpression;
 			_compilingTargets = parentContext._compilingTargets;
 			_rezolveContextParameter = parentContext._rezolveContextParameter;
-			_rezolver = parentContext._rezolver;
-			_dependencyBuilder = parentContext._dependencyBuilder;
+			
+			_rezolverBuilder = new ChildRezolverBuilder(parentContext._rezolverBuilder);
 			_sharedExpressions = inheritSharedExpressions ? parentContext._sharedExpressions : new Dictionary<SharedExpressionKey, Expression>();
-            _suppressScopeTracking = suppressScopeTracking;
+			_suppressScopeTracking = suppressScopeTracking;
 		}
 
 		/// <summary>
@@ -193,21 +225,23 @@ namespace Rezolver
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType"/> property.</param>
 		/// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/></param>
 		/// <param name="compilingTargets">Optional.  Allows you to seed the stack of compiling targets from creation.</param>
-		/// <param name="dependencyBuilder">Optional.  If the search for an object's dependency targets should be routed to a 
-		/// different builder than the one which built the <see cref="Rezolver"/> then pass it here.  Typically this is done
-		/// when a named object is requested - if a named builder with that name exists within the rezolver's builder,
-		/// then it is passed here so that you can have both named first-class objects, but also override unnamed objects'
-		/// dependencies with named entries.</param>
-		public CompileContext(IRezolver rezolver, 
-			Type targetType = null, 
-			ParameterExpression rezolveContextParameter = null, 
+		/// <param name="dependencyBuilder">Optional.  By default, this class implements <see cref="IRezolverBuilder"/> by wrapping
+		/// a child rezolver of the one that is attached to the <paramref name="rezolver"/> that you pass on construction.
+		/// 
+		/// To override that behaviour, you can pass a different builder here.
+		/// 
+		/// You can, for example, disable the child rezolver creation by explicitly passing the <see cref="IRezolver.Builder"/>
+		/// property of the <paramref name="rezolver"/> parameter.</param>
+		public CompileContext(IRezolver rezolver,
+			Type targetType = null,
+			ParameterExpression rezolveContextParameter = null,
 			IEnumerable<IRezolveTarget> compilingTargets = null,
 			IRezolverBuilder dependencyBuilder = null)
 		{
 			rezolver.MustNotBeNull("rezolver");
 
-			_rezolver = rezolver;
-			_dependencyBuilder = dependencyBuilder;
+			Rezolver = rezolver;
+			_rezolverBuilder = dependencyBuilder ?? new ChildRezolverBuilder(Rezolver.Builder);
 			_targetType = targetType;
 			_rezolveContextParameter = rezolveContextParameter;
 			_compilingTargets = new Stack<IRezolveTarget>(compilingTargets ?? Enumerable.Empty<IRezolveTarget>());
@@ -222,31 +256,14 @@ namespace Rezolver
 		/// <param name="inheritSharedExpressions">If true, then the <see cref="SharedExpressions"/> for this context will be shared
 		/// from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
 		/// false, however if you are chaining multiple targets' expressions together you will need to pass true.</param>
-        /// <param name="suppressScopeTracking">If true, then any expressions constructed from <see cref="IRezolveTarget"/> objects
-        /// should not contain automatically generated code to track objects in an enclosing scope.  The default is false.  This is 
-        /// typically only enabled when one target is explicitly using expressions created from other targets, and has its own
-        /// scope tracking code, or expects to be surrounded by automatically generated scope tracking code itself.</param>
+		/// <param name="suppressScopeTracking">If true, then any expressions constructed from <see cref="IRezolveTarget"/> objects
+		/// should not contain automatically generated code to track objects in an enclosing scope.  The default is false.  This is 
+		/// typically only enabled when one target is explicitly using expressions created from other targets, and has its own
+		/// scope tracking code, or expects to be surrounded by automatically generated scope tracking code itself.</param>
 		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false, bool suppressScopeTracking = false)
 			: this(parentContext, inheritSharedExpressions, suppressScopeTracking)
 		{
 			_targetType = targetType;
-		}
-
-		private Dictionary<Type, Dictionary<string, ParameterExpression>> CloneSharedLocals(Dictionary<Type, Dictionary<string, ParameterExpression>> source)
-		{
-			Dictionary<Type, Dictionary<string, ParameterExpression>> toReturn = new Dictionary<Type,Dictionary<string,ParameterExpression>>();
-			Dictionary<string, ParameterExpression> newDictionary;
-			foreach(var kvp in source)
-			{
-				newDictionary = new Dictionary<string, ParameterExpression>();
-				foreach(var kvp2 in kvp.Value)
-				{
-					newDictionary[kvp2.Key] = kvp2.Value;
-				}
-				toReturn[kvp.Key] = newDictionary;
-			}
-
-			return toReturn;
 		}
 
 		/// <summary>
@@ -258,12 +275,13 @@ namespace Rezolver
 		/// <returns></returns>
 		public ParameterExpression GetOrAddSharedLocal(Type type, string name, Type requestingType = null)
 		{
-			try { 
-			return (ParameterExpression)GetOrAddSharedExpression(type, name, () => Expression.Parameter(type, name), requestingType);
-				}
-			catch(InvalidCastException)
+			try
 			{
-				throw new InvalidOperationException("Cannot add ParameterExpression: A shared expression of a different expression type has already been added with the same parameters.");
+				return (ParameterExpression)GetOrAddSharedExpression(type, name, () => Expression.Parameter(type, name), requestingType);
+			}
+			catch (InvalidCastException)
+			{
+				throw new InvalidOperationException("Cannot add ParameterExpression: A shared expression of a different type has already been added with the same type and name.");
 			}
 		}
 
@@ -290,7 +308,7 @@ namespace Rezolver
 		{
 			toCompile.MustNotBeNull("toCompile");
 
-			if(!_compilingTargets.Contains(toCompile))
+			if (!_compilingTargets.Contains(toCompile))
 			{
 				_compilingTargets.Push(toCompile);
 				return true;
@@ -317,6 +335,16 @@ namespace Rezolver
 		public IRezolveTarget PopCompileStack()
 		{
 			return _compilingTargets.Pop();
+		}
+
+		public void Register(IRezolveTarget target, Type serviceType = null)
+		{
+			_rezolverBuilder.Register(target, serviceType);
+		}
+
+		public IRezolveTargetEntry Fetch(Type type)
+		{
+			return _rezolverBuilder.Fetch(type);
 		}
 	}
 }

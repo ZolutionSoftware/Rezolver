@@ -25,10 +25,5 @@ namespace Rezolver.Tests
 		{
 			return new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
 		}
-
-		protected static IRezolveTargetEntry CreateRezolverEntryForTarget(IRezolveTarget target, Type registeredType)
-		{
-			return new RezolveTargetEntry(registeredType, target);
-		}
 	}
 }
