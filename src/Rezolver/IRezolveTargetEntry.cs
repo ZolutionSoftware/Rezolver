@@ -48,5 +48,20 @@ namespace Rezolver
 		/// entry.
 		/// </summary>
 		bool UseFallback { get; }
+		/// <summary>
+		/// ONLY called by rezolver builder classes, when an entry is attached to a builder by being passed 
+		/// directly to <see cref="IRezolverBuilder.Register(IRezolveTarget, Type)"/>, optionally replacing
+		/// an existing entry registered for the same type.
+		/// 
+		/// Note that after this has been called once, the entry is considered to be attached to the builder
+		/// that the <paramref name="replacing"/> entry was attached to, and the method cannot be called again.
+		/// </summary>
+		/// <param name="parentBuilder">Required - the builder that this entry is being attached to.</param>
+		/// <param name="replacing">The original entry that is replaced by this entry, if applicable</param>
+		/// <exception cref="ArgumentNullException">If <paramref name="parentBuilder"/> is null.</exception>
+		/// <exception cref="InvalidOperationException">If the entry has previously been attached to another
+		/// <see cref="IRezolverBuilder"/> instance.</exception>
+		/// <exception cref="NotSupportedException">If the implementation does not support this operation</exception>
+		void Attach(IRezolverBuilder parentBuilder, IRezolveTargetEntry replacing = null);
 	}
 }

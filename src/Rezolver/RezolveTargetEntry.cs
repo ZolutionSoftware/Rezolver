@@ -138,7 +138,12 @@ namespace Rezolver
 
 		protected ListTarget CreateListTarget()
 		{
-			return new ListTarget(RegisteredType, _targets, true);
+			return new ListTarget(RegisteredType, Targets, true);
+		}
+
+		public void Attach(IRezolverBuilder parentBuilder, IRezolveTargetEntry existing = null)
+		{
+			throw new NotSupportedException("This entry must be created with a parent, the Attach operation is not supported");
 		}
 	}
 }

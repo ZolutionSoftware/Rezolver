@@ -125,50 +125,67 @@ namespace Rezolver
 			{
 				throw new NotImplementedException();
 			}
+
+			public void Attach(IRezolverBuilder parentBuilder, IRezolveTargetEntry existing)
+			{
+				throw new NotImplementedException();
+			}
 		}
 
 		public virtual void Register(IRezolveTarget target, Type type = null)
 		{
-			if (type == null)
-				type = target.DeclaredType;
+			target.MustNotBeNull(nameof(target));
+			IRezolveTargetEntry existing = null;
+			IRezolveTargetEntry entry = target as IRezolveTargetEntry;
 
-			if (target.SupportsType(type))
+			if (entry != null)
 			{
-				IRezolveTargetEntry entry = null;
-				_targets.TryGetValue(type, out entry);
-				var decoratorTarget = target as DecoratorTarget;
-					//(hopefully) temporary hack
-				if (decoratorTarget == null)
+				//when a target also implements the IRezolveTargetEntry interface, then we grab any existing
+				//entry, call the new entry's Replace method and, if that executes without error, 
+				//then we write the entry directly into the type registry
+				_targets.TryGetValue(entry.RegisteredType, out existing);
+				try
 				{
-					if (entry != null)
-					{
-						entry.AddTarget(target);
-					}
-					else
-					{
-						_targets[type] = CreateEntry(type, target); ;
-					}
+					entry.Attach(this, existing);
+					_targets[entry.RegisteredType] = entry;
 				}
-				else
+				catch (InvalidOperationException ioex)
 				{
-					//note we always 
-					_targets[type] = new DecoratingEntry(decoratorTarget, entry);
+					throw new ArgumentException("Cannot register this target, it has already been registered on another builder", nameof(target), ioex);
+				}
+				catch(NotSupportedException nsex)
+				{
+					throw new ArgumentException($"The type { target.GetType() } does not support the Attach operation", nameof(target), nsex);
 				}
 			}
 			else
-				throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, type), "target");
-		}
+			{
+				if (type == null)
+					type = target.DeclaredType;
 
-		protected virtual IRezolveTargetEntry CreateEntry(Type type, params IRezolveTarget[] targets)
-		{
-			return new RezolveTargetEntry(this, type, targets);
+				_targets.TryGetValue(type, out existing);
+
+				if (target.SupportsType(type))
+				{
+					if (existing != null)
+					{
+						existing.AddTarget(target);
+					}
+					else
+					{
+						_targets[type] = new RezolveTargetEntry(this, type, target);
+					}
+				}
+				else
+					throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, type), "target");
+			}
 		}
 
 		public virtual IRezolveTargetEntry Fetch(Type type)
 		{
 			type.MustNotBeNull("type");
 			IRezolveTargetEntry entry;
-			
+
 			var result = _targets.TryGetValue(type, out entry);
 			if (!result && TypeHelpers.IsGenericType(type))
 			{
@@ -242,6 +259,6 @@ namespace Rezolver
 					select accseq.Concat(new[] { item }));
 		}
 
-		
+
 	}
 }
