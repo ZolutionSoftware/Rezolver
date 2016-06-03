@@ -24,7 +24,7 @@ namespace Rezolver.Diagnostics
 			Logger = logger;
 		}
 
-		public override IRezolveTargetEntry Fetch(Type type)
+		public override IRezolveTarget Fetch(Type type)
 		{
 			return base.Fetch(type);
 		}

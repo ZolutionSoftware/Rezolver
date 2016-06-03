@@ -62,23 +62,9 @@ namespace Rezolver
 
 			if (targetArray.All(t => t.SupportsType(commonServiceType)))
 			{
-				IRezolveTargetEntry existing = builder.Fetch(commonServiceType);
-				//MultipleRezolveTarget multipleTarget = null;
-				//Type targetType = MultipleRezolveTarget.MakeEnumerableType(commonServiceType);
-
-				if (existing != null)
+				foreach (var target in targets)
 				{
-					foreach (var target in targets)
-					{
-						existing.AddTarget(target);
-					}
-				}
-				else
-				{
-					foreach (var target in targets)
-					{
-						builder.Register(target, commonServiceType);
-					}
+					builder.Register(target, commonServiceType);
 				}
 			}
 			else
@@ -221,5 +207,5 @@ namespace Rezolver
 			builder.MustNotBeNull(nameof(builder));
 			builder.Register(new DecoratorTarget(typeof(TDecorated), typeof(TDecorator)));
 		}
-  }
+	}
 }

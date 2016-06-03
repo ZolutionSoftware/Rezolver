@@ -16,7 +16,7 @@ namespace Rezolver.Tests
 			IRezolverBuilder r = new RezolverBuilder();
 			r.Register(t, serviceType: typeof(object));
 			var t2 = r.Fetch(typeof(object));
-			Assert.Same(t, t2.DefaultTarget);
+			Assert.Same(t, t2);
 		}
 
 		[Fact]
@@ -41,7 +41,7 @@ namespace Rezolver.Tests
 			IRezolverBuilder rezolverBuilder = new RezolverBuilder();
 			rezolverBuilder.Register(t);
 			var t2 = rezolverBuilder.Fetch(typeof(string));
-			Assert.Same(t, t2.DefaultTarget);
+			Assert.Same(t, t2);
 		}
 
 		[Fact]
@@ -54,8 +54,8 @@ namespace Rezolver.Tests
 			IRezolveTarget target2 = new SimpleType().AsObjectTarget();
 			builder.Register(target1);
 			builder.Register(target2);
-			Assert.Same(target1, builder.Fetch(typeof(string)).DefaultTarget);
-			Assert.Same(target2, builder.Fetch(typeof(SimpleType)).DefaultTarget);
+			Assert.Same(target1, builder.Fetch(typeof(string)));
+			Assert.Same(target2, builder.Fetch(typeof(SimpleType)));
 		}
 
 		[Fact]
@@ -66,9 +66,9 @@ namespace Rezolver.Tests
       builder.Register(target, typeof(IGeneric<>));
 			///this should be trivial
 			var fetched = builder.Fetch(typeof(IGeneric<>));
-			Assert.Same(target, fetched.DefaultTarget);
+			Assert.Same(target, fetched);
 			var fetchedClosed = builder.Fetch(typeof(IGeneric<int>));
-			Assert.Same(target, fetchedClosed.DefaultTarget);
+			Assert.Same(target, fetchedClosed);
 		}
 
 		[Fact]
@@ -78,7 +78,7 @@ namespace Rezolver.Tests
 			var target = GenericConstructorTarget.Auto(typeof(Generic<>));
 			builder.Register(target, typeof(IGeneric<>));
 			var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
-			Assert.Same(target, fetched.DefaultTarget);
+			Assert.Same(target, fetched);
 		}
 
 		[Fact]
@@ -89,7 +89,7 @@ namespace Rezolver.Tests
 			var target = GenericConstructorTarget.Auto(typeof(GenericGeneric<>));
 			builder.Register(target, typeof(IGeneric<>));
 			var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
-			Assert.Same(target, fetched.DefaultTarget);
+			Assert.Same(target, fetched);
 		}
 
 		[Fact]
@@ -101,7 +101,7 @@ namespace Rezolver.Tests
 			var target = GenericConstructorTarget.Auto(typeof(GenericGeneric<>));
 			builder.Register(target, typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
 			var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
-			Assert.Same(target, fetched.DefaultTarget);
+			Assert.Same(target, fetched);
 		}
 
 		public interface IMultipleRegistration
@@ -121,7 +121,6 @@ namespace Rezolver.Tests
 
 			var fetched = builder.Fetch(typeof(IEnumerable<IMultipleRegistration>));
 			Assert.NotNull(fetched);
-			Assert.Equal(2, fetched.Targets.Count());
 		}
 	}
 }

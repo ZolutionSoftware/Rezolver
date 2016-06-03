@@ -8,10 +8,6 @@ namespace Rezolver
 	public interface IRezolverBuilder
 	{
 		/// <summary>
-		/// Allows a caller to introspect all the registrations that have been added to this builder.
-		/// </summary>
-		IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations { get; }
-		/// <summary>
 		/// Registers a target, optionally for a particular target type.
 		/// </summary>
 		/// <param name="target">Required.  The target to be registereed</param>
@@ -23,6 +19,6 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="type">Required.  The type to be searched.</param>
 		/// <returns></returns>
-		IRezolveTargetEntry Fetch(Type type);		
+		IRezolveTarget Fetch(Type type);		
 	}
 }

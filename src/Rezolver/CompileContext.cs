@@ -188,14 +188,6 @@ namespace Rezolver
 			}
 		}
 
-		public IEnumerable<KeyValuePair<RezolveContext, IRezolveTarget>> AllRegistrations
-		{
-			get
-			{
-				return _rezolverBuilder.AllRegistrations;
-			}
-		}
-
 		/// <summary>
 		/// This is the IRezolverBuilder through which dependencies are resolved.
 		/// Note that this class implements IRezolverBuilder by proxying this instance, 
@@ -342,7 +334,7 @@ namespace Rezolver
 			_rezolverBuilder.Register(target, serviceType);
 		}
 
-		public IRezolveTargetEntry Fetch(Type type)
+		public IRezolveTarget Fetch(Type type)
 		{
 			return _rezolverBuilder.Fetch(type);
 		}

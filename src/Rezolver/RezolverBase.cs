@@ -88,7 +88,7 @@ namespace Rezolver
 
 		protected virtual ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
-			IRezolveTargetEntry target = Builder.Fetch(context.RequestedType);
+			IRezolveTarget target = Builder.Fetch(context.RequestedType);
 
 			if (target == null)
 				return GetFallbackCompiledRezolveTarget(context);

@@ -66,6 +66,11 @@ namespace Rezolver
 			}
 		}
 
+		public virtual bool UseFallback
+		{
+			get { return false; }
+		}
+
 		/// <summary>
 		/// Abstract method called to create the expression - this is called by <see cref="CreateExpression"/> after the
 		/// target type has been validated, if provided.

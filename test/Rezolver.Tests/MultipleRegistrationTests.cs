@@ -12,59 +12,6 @@ namespace Rezolver.Tests
 	/// </summary>
 	public class MultipleRegistrationTests : TestsBase
 	{
-		//first half of the tests do registration
-
-		class FakeTarget : IRezolveTarget
-		{
-			public Type DeclaredType
-			{
-				get
-				{
-					return typeof(MultipleRegistrationTests);
-				}
-			}
-
-			public Expression CreateExpression(CompileContext context)
-			{
-				return null;
-			}
-
-			public bool SupportsType(Type type)
-			{
-				return true;
-			}
-		}
-
-		[Fact]
-		public void ShouldFetchDefault()
-		{
-			RezolverBuilder builder = new RezolverBuilder();
-			var targets = Enumerable.Range(0, 3).Select(i => new FakeTarget()).ToArray();
-
-			foreach (var target in targets)
-			{
-				builder.Register(target, typeof(MultipleRegistrationTests));
-			}
-
-			var entry = builder.Fetch(typeof(MultipleRegistrationTests));
-
-			Assert.Same(targets[2], entry.DefaultTarget);
-		}
-
-		[Fact]
-		public void ShouldFetchIEnumerableForSingleRegistration()
-		{
-			RezolverBuilder builder = new RezolverBuilder();
-			var target = new FakeTarget();
-			builder.Register(target, typeof(MultipleRegistrationTests));
-
-			var entry = builder.Fetch(typeof(IEnumerable<MultipleRegistrationTests>));
-
-			Assert.Same(target, entry.DefaultTarget);
-		}
-
-		//this half does resolving
-
 		public interface IService
 		{
 
