@@ -107,7 +107,7 @@ namespace Rezolver.Tests.Compilation
 			AddIntTarget();
 			//tests whether the compiler can handle calling the static method above with an
 			//injected integer input argument.
-			var target = CompileTarget(RezolveTargetAdapter.Instance.GetRezolveTarget(c => new RequiresInt(MultiplyAnInt(c.Resolve<int>()))));
+			var target = CompileTarget(TargetAdapter.Instance.CreateTarget(c => new RequiresInt(MultiplyAnInt(c.Resolve<int>()))));
 			var result = target.GetObject(CreateRezolveContext<IRequiresInt>());
 			Assert.IsType<RequiresInt>(result);
 			Assert.Equal(IntForObjectTarget * MultipleForIntObjectTarget, ((RequiresInt)result).Int);
@@ -118,7 +118,7 @@ namespace Rezolver.Tests.Compilation
 		{
 			AddIntTarget();
 			AddTarget(ConstructorTarget.Auto<RequiresInt>(), typeof(IRequiresInt));
-			var target = CompileTarget(RezolveTargetAdapter.Instance.GetRezolveTarget(c => new HasProperty() { RequiresInt = c.Resolve<IRequiresInt>() }));
+			var target = CompileTarget(TargetAdapter.Instance.CreateTarget(c => new HasProperty() { RequiresInt = c.Resolve<IRequiresInt>() }));
 			var result = target.GetObject(CreateRezolveContext<HasProperty>());
 			Assert.IsType<HasProperty>(result);
 			Assert.NotNull(((HasProperty)result).RequiresInt);
@@ -238,7 +238,7 @@ namespace Rezolver.Tests.Compilation
 		[Fact]
 		public void ShouldCompileTargetForStaticProperty()
 		{
-			var target = CompileTarget(RezolveTargetAdapter.Instance.GetRezolveTarget(c => IntForStaticExpression));
+			var target = CompileTarget(TargetAdapter.Instance.CreateTarget(c => IntForStaticExpression));
 			int result = (int)target.GetObject(CreateRezolveContext<int>());
 			Assert.Equal(IntForStaticExpression, result);
 		}

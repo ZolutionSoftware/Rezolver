@@ -6,7 +6,7 @@ using System.Text;
 namespace Rezolver.Configuration
 {
 	/// <summary>
-	/// The basic workhorse of a parsed configuration - an instruction to register a target in an IRezolverBuilder instance
+	/// The basic workhorse of a parsed configuration - an instruction to register a target in an IRezolveTargetContainer instance
 	/// against one or more types with a given name.
 	/// </summary>
 	public class RegisterInstruction : RezolverBuilderInstruction
@@ -18,7 +18,7 @@ namespace Rezolver.Configuration
 		/// <summary>
 		/// The target that is to be registered.
 		/// </summary>
-		public IRezolveTarget Target { get; private set; }
+		public ITarget Target { get; private set; }
 
 		/// <summary>
 		/// Constructs a new instance of the <see cref="RegisterInstruction" /> class.
@@ -36,7 +36,7 @@ namespace Rezolver.Configuration
 		/// or
 		/// All types in list must be non-null;targetTypes
 		/// </exception>
-		public RegisterInstruction(IEnumerable<Type> targetTypes, IRezolveTarget target, IConfigurationEntry entry)
+		public RegisterInstruction(IEnumerable<Type> targetTypes, ITarget target, IConfigurationEntry entry)
 			: base(entry)
 		{
 			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
@@ -57,7 +57,7 @@ namespace Rezolver.Configuration
 		/// and aliases are registered for all the others.
 		/// </summary>
 		/// <param name="builder"></param>
-		public override void Apply(IRezolverBuilder builder)
+		public override void Apply(ITargetContainer builder)
 		{
 			var primaryType = TargetTypes.First();
 

@@ -12,12 +12,12 @@ namespace Rezolver
 	/// types that are ultimately supported by the implementation based on the targets that have
 	/// been added to it.
 	/// </summary>
-	public interface IRezolveTargetEntry : IRezolveTarget
+	public interface IRezolveTargetEntry : ITarget
 	{
 		/// <summary>
 		/// The builder to which this entry belongs
 		/// </summary>
-		IRezolverBuilder ParentBuilder { get; }
+		ITargetContainer ParentBuilder { get; }
 		/// <summary>
 		/// The type that this entry was registered against in its parent builder.
 		/// </summary>
@@ -26,12 +26,12 @@ namespace Rezolver
 		/// The default target that is to be executed when a single instance of the registered type
 		/// is requested.
 		/// </summary>
-		IRezolveTarget DefaultTarget { get; }
+		ITarget DefaultTarget { get; }
 		/// <summary>
 		/// A collection of targets that are to be used when an IEnumerable or other supported collection
 		/// type of the registered type is requested.
 		/// </summary>
-		IEnumerable<IRezolveTarget> Targets { get; }
+		IEnumerable<ITarget> Targets { get; }
 		/// <summary>
 		/// Adds a target to this entry, optionally checking first to see if it already exists.   If the
 		/// check is enabled (var <paramref name="checkForDuplicates"/>) then the target will not be added.
@@ -42,7 +42,7 @@ namespace Rezolver
 		/// rendered its <see cref="Targets"/> enumerable immutable after having been compiled - i.e. if 
 		/// an instance has been issued from this builder, then adding more items to it would give
 		/// inconsistent behaviour.</exception>
-		void AddTarget(IRezolveTarget target, bool checkForDuplicates = false);
+		void AddTarget(ITarget target, bool checkForDuplicates = false);
 		/// <summary>
 		/// If true, then the resolver should consult its fallback for an alternative instead of using this
 		/// entry.
@@ -50,7 +50,7 @@ namespace Rezolver
 		bool UseFallback { get; }
 		/// <summary>
 		/// ONLY called by rezolver builder classes, when an entry is attached to a builder by being passed 
-		/// directly to <see cref="IRezolverBuilder.Register(IRezolveTarget, Type)"/>, optionally replacing
+		/// directly to <see cref="ITargetContainer.Register(ITarget, Type)"/>, optionally replacing
 		/// an existing entry registered for the same type.
 		/// 
 		/// Note that after this has been called once, the entry is considered to be attached to the builder
@@ -60,8 +60,8 @@ namespace Rezolver
 		/// <param name="replacing">The original entry that is replaced by this entry, if applicable</param>
 		/// <exception cref="ArgumentNullException">If <paramref name="parentBuilder"/> is null.</exception>
 		/// <exception cref="InvalidOperationException">If the entry has previously been attached to another
-		/// <see cref="IRezolverBuilder"/> instance.</exception>
+		/// <see cref="ITargetContainer"/> instance.</exception>
 		/// <exception cref="NotSupportedException">If the implementation does not support this operation</exception>
-		void Attach(IRezolverBuilder parentBuilder, IRezolveTargetEntry replacing = null);
+		void Attach(ITargetContainer parentBuilder, IRezolveTargetEntry replacing = null);
 	}
 }

@@ -30,6 +30,6 @@ namespace Rezolver.Configuration
 		/// builder.
 		/// </summary>
 		/// <param name="builder"></param>
-		public abstract void Apply(IRezolverBuilder builder);
+		public abstract void Apply(ITargetContainer builder);
 	}
 }

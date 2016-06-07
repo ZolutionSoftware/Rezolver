@@ -11,11 +11,11 @@ namespace Rezolver.Tests
 		[Fact]
 		public void AliasShouldWorkForBaseTypes()
 		{
-			RezolverBuilder builder = new RezolverBuilder();
+			Builder builder = new Builder();
 			builder.RegisterObject(1);
 			builder.RegisterAlias<object, int>();
 
-			var container = new DefaultRezolver(builder);
+			var container = new Container(builder);
 
 			object o = container.Resolve<object>();
 
@@ -25,11 +25,11 @@ namespace Rezolver.Tests
 		[Fact]
 		public void AliasShouldWorkForDerivedTypes()
 		{
-			RezolverBuilder builder = new RezolverBuilder();
+			Builder builder = new Builder();
 			builder.RegisterObject(1, typeof(object));
 			builder.RegisterAlias<int, object>();
 
-			var container = new DefaultRezolver(builder);
+			var container = new Container(builder);
 			int i = container.Resolve<int>();
 
 			Assert.Equal(1, i);
@@ -57,11 +57,11 @@ namespace Rezolver.Tests
 		[Fact]
 		public void AliasShouldYieldSameSingleton()
 		{
-			RezolverBuilder builder = new RezolverBuilder();
+			Builder builder = new Builder();
 			builder.RegisterSingleton<SingletonTest>();
 			builder.RegisterAlias<ISingletonTest, SingletonTest>();
 
-			var container = new DefaultRezolver(builder);
+			var container = new Container(builder);
 			var first = container.Resolve<SingletonTest>();
 			var second = container.Resolve<SingletonTest>();
 			var third = container.Resolve<ISingletonTest>();

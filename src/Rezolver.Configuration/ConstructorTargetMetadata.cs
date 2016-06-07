@@ -80,10 +80,10 @@ namespace Rezolver.Configuration
 			_signatureTypes = signatureTypes;
 		}
 
-		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
+		protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			//note that we don't validate the metadata's types are compatible with the target types - this should already be handled
-			//by any IRezolverBuilder implementation.
+			//by any IRezolveTargetContainer implementation.
 			Type[] typesToBuild;
 			Type typeToBuild = null;
 			

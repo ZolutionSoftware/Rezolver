@@ -11,21 +11,21 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldWrapNull()
 		{
-			IRezolveTarget target = new ObjectTarget(null);
+			ITarget target = new ObjectTarget(null);
 			Assert.Null(GetValueFromTarget<object>(target));
 		}
 
 		[Fact]
 		public void ShouldWrapNonNull()
 		{
-			IRezolveTarget target = new ObjectTarget("Hello world");
+			ITarget target = new ObjectTarget("Hello world");
 			Assert.Equal("Hello world", GetValueFromTarget<string>(target));
 		}
 
 		[Fact]
 		public void ShouldWrapNullableWithNonNullable()
 		{
-			IRezolveTarget target = new ObjectTarget(1, typeof(int?));
+			ITarget target = new ObjectTarget(1, typeof(int?));
 			Assert.True(target.SupportsType(typeof(int?)));
 			Assert.Equal((int?)1, GetValueFromTarget<int?>(target));
 		}
@@ -33,8 +33,8 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAllowAnyBaseAsTargetType()
 		{
-			IRezolveTarget target = new ObjectTarget("hello world", typeof(IEnumerable<char>));
-			IRezolveTarget target2 = new ObjectTarget("hello world", typeof(object));
+			ITarget target = new ObjectTarget("hello world", typeof(IEnumerable<char>));
+			ITarget target2 = new ObjectTarget("hello world", typeof(object));
 
 			string expected = "hello world";
 			Assert.Equal(expected, GetValueFromTarget<IEnumerable<char>>(target));
@@ -50,14 +50,14 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldRequireTypeParamInSupportsType()
 		{
-			IRezolveTarget target = new ObjectTarget("Hello world");
+			ITarget target = new ObjectTarget("Hello world");
 			Assert.Throws<ArgumentNullException>(() => target.SupportsType(null));
 		}
 
 		[Fact]
 		public void Extension_ShouldDeriveDeclaredType()
 		{
-			IRezolveTarget target = (1).AsObjectTarget();
+			ITarget target = (1).AsObjectTarget();
 
 			Assert.Equal(typeof(int), target.DeclaredType);
 			Assert.True(target.SupportsType(typeof(int)));
@@ -66,7 +66,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void Extension_ShouldAllowBaseType()
 		{
-			IRezolveTarget target = (1).AsObjectTarget(typeof(object));
+			ITarget target = (1).AsObjectTarget(typeof(object));
 			Assert.Equal(typeof(object), target.DeclaredType);
 			Assert.Equal((object)1, GetValueFromTarget(target));
 		}
@@ -108,7 +108,7 @@ namespace Rezolver.Tests
 		public void ShouldNotDisposeByDefault()
 		{
 			var myDisposable = new MyDisposable();
-			using (var rezolver = new DefaultLifetimeScopeRezolver())
+			using (var rezolver = new ScopedContainer())
 			{
 				rezolver.RegisterObject(myDisposable);
 				var instance = rezolver.Resolve<MyDisposable>();
@@ -123,7 +123,7 @@ namespace Rezolver.Tests
 			var myDisposable = new MyDisposable();
 			//test targeted specifically at a piece of functionality I currently know not to work.
 			//an objecttarget should behave like a SingletonTarget in terms of how it tracks in a scope.
-			using (var rezolver = new DefaultLifetimeScopeRezolver())
+			using (var rezolver = new ScopedContainer())
 			{
 				rezolver.RegisterObject(myDisposable, suppressScopeTracking: false);
 				using (var childScope = rezolver.CreateLifetimeScope())

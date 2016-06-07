@@ -10,7 +10,7 @@ namespace Rezolver
 	/// By default, scope tracking is disabled (since the caller owns the object, not the Rezolver framework)).  If it's
 	/// enabled, then scope tracking behaves exactly the same as <see cref="SingletonTarget"/>.
 	/// </summary>
-	public class ObjectTarget : RezolveTargetBase
+	public class ObjectTarget : TargetBase
 	{
 		private readonly object _object;
 		private readonly Type _declaredType;
@@ -85,7 +85,7 @@ namespace Rezolver
 	public static class ObjectTargetExtensions
 	{
 		/// <summary>
-		/// Wraps the instance on which this is invoked as an <see cref="ObjectTarget"/> that can be registered into an <see cref="IRezolverBuilder"/>.
+		/// Wraps the instance on which this is invoked as an <see cref="ObjectTarget"/> that can be registered into an <see cref="ITargetContainer"/>.
 		/// 
 		/// The parameters are direct analogues of the parameters on the type's constructor (see <see cref="ObjectTarget.ObjectTarget(object, Type, bool)"/>).
 		/// </summary>

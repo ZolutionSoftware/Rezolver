@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rezolver.Diagnostics
 {
-	public class TrackedRezolverBuilder : RezolverBuilder
+	public class TrackedRezolverBuilder : Builder
 	{ 
 		private readonly int _id = TrackingUtils.NextBuilderID();
 
@@ -16,7 +16,7 @@ namespace Rezolver.Diagnostics
 
 		public ICallTracker Logger { get; private set; }
 		/// <summary>
-		/// Creates a new instance that wraps around the passed IRezolverBuilder.
+		/// Creates a new instance that wraps around the passed IRezolveTargetContainer.
 		/// </summary>
 		/// <param name="logger">The logger that is to receive logging calls from this instance.</param>
 		public TrackedRezolverBuilder(ICallTracker logger)
@@ -24,12 +24,12 @@ namespace Rezolver.Diagnostics
 			Logger = logger;
 		}
 
-		public override IRezolveTarget Fetch(Type type)
+		public override ITarget Fetch(Type type)
 		{
 			return base.Fetch(type);
 		}
 
-		public override void Register(IRezolveTarget target, Type type = null)
+		public override void Register(ITarget target, Type type = null)
 		{
 			base.Register(target, type);
 		}

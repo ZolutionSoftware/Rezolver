@@ -11,7 +11,7 @@ namespace System.Linq.Expressions
 	public static class ExpressionExtensions
 	{
 
-		public static IRezolveTarget AsRezolveTarget(this Expression expression, IRezolveTargetAdapter adapter = null)
+		public static ITarget AsRezolveTarget(this Expression expression, ITargetAdapter adapter = null)
 		{
 			throw new NotImplementedException();
 

@@ -13,7 +13,7 @@ namespace Rezolver
 
 		public MemberInfo Member { get; private set; }
 
-		public IRezolveTarget Target { get; private set; }
+		public ITarget Target { get; private set; }
 
 		public Type MemberType
 		{
@@ -27,7 +27,7 @@ namespace Rezolver
 			}
 		}
 
-		public PropertyOrFieldBinding(MemberInfo member, IRezolveTarget target)
+		public PropertyOrFieldBinding(MemberInfo member, ITarget target)
 		{
 			Member = member;
 			Target = target;
@@ -57,7 +57,7 @@ namespace Rezolver
 
         /// <summary>
         /// Method for creating a Linq Expression MemberBinding object for the <see cref="Member"/>, to the expression produced by 
-        /// the <see cref="Target"/> object's <see cref="IRezolveTarget.CreateExpression(CompileContext)"/> method.
+        /// the <see cref="Target"/> object's <see cref="ITarget.CreateExpression(CompileContext)"/> method.
         /// </summary>
         /// <param name="context">The <see cref="CompileContext"/> under which the generated expression will be compiled.</param>
         /// <returns></returns>

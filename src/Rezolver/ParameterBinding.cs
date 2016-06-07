@@ -20,7 +20,7 @@ namespace Rezolver
 		/// <summary>
 		/// The rezolve target that will provide the argument to the parameter when an expression is built.
 		/// </summary>
-		public IRezolveTarget Target { get; private set; }
+		public ITarget Target { get; private set; }
 
 		/// <summary>
 		/// Constructs a new instance of the <see cref="ParameterBinding"/> class.
@@ -28,7 +28,7 @@ namespace Rezolver
 		/// <param name="parameter">Required - the parameter being bound</param>
 		/// <param name="target">Optional - the argument supplied for the parameter.  Note - if this is null,
 		/// then technically the parameter binding is invalid.</param>
-		public ParameterBinding(ParameterInfo parameter, IRezolveTarget target)
+		public ParameterBinding(ParameterInfo parameter, ITarget target)
 		{
 			Parameter = parameter;
 			Target = target;
@@ -81,7 +81,7 @@ namespace Rezolver
 		/// <param name="args">The arguments.</param>
 		/// <param name="resolvedMethod">The resolved method.</param>
 		/// <returns>ParameterBinding[].</returns>
-		public static ParameterBinding[] BindOverload(MethodBase[] methods, IDictionary<string, IRezolveTarget> args, out MethodBase resolvedMethod)
+		public static ParameterBinding[] BindOverload(MethodBase[] methods, IDictionary<string, ITarget> args, out MethodBase resolvedMethod)
 		{
 			resolvedMethod = null;
 			methods.MustNotBeNull("methods");
@@ -104,7 +104,7 @@ namespace Rezolver
 			return candidates[0].bindings;
 		}
 
-		public static bool BindMethod(MethodBase method, IDictionary<string, IRezolveTarget> args, out ParameterBinding[] bindings)
+		public static bool BindMethod(MethodBase method, IDictionary<string, ITarget> args, out ParameterBinding[] bindings)
 		{
 			bindings = null;
 			var temp = method.GetParameters().Select(p => new ParameterBinding(p, GetArgValue(p, args))).ToArray();
@@ -116,9 +116,9 @@ namespace Rezolver
 			return false;
 		}
 
-		private static IRezolveTarget GetArgValue(ParameterInfo p, IDictionary<string, IRezolveTarget> args)
+		private static ITarget GetArgValue(ParameterInfo p, IDictionary<string, ITarget> args)
 		{
-			IRezolveTarget argValue = null;
+			ITarget argValue = null;
 			if (args.TryGetValue(p.Name, out argValue))
 				return argValue;
 			else if (p.IsOptional)

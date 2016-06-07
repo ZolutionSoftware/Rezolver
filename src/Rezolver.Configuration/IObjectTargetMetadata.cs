@@ -7,7 +7,7 @@ namespace Rezolver.Configuration
 	public interface IObjectTargetMetadata : IRezolveTargetMetadata
 	{
 		/// <summary>
-		/// Called to get the object that will be registered in the IRezolverBuilder to be returned when a
+		/// Called to get the object that will be registered in the IRezolveTargetContainer to be returned when a
 		/// caller requests one of its registered types. The method can construct an object anew everytime it is
 		/// called, or it can always return the same instance; this behaviour is implementation-dependant.
 		/// </summary>

@@ -6,10 +6,10 @@ using System.Text;
 namespace Rezolver.Configuration
 {
 	/// <summary>
-	/// Creates an IRezolverBuilder instance from an IConfiguration instance.
+	/// Creates an IRezolveTargetContainer instance from an IConfiguration instance.
 	/// </summary>
 	public interface IConfigurationAdapter
 	{
-		IRezolverBuilder CreateBuilder(IConfiguration configuration);
+		ITargetContainer CreateBuilder(IConfiguration configuration);
 	}
 }

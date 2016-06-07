@@ -10,9 +10,9 @@ namespace Rezolver
 	{
 		//TODO: Add override for NodeType so that we can use it in the future in the precompile stage for rezolve targets
 		//to produce a proper 'compilable' expression tree
-		private readonly IRezolveTarget _target;
+		private readonly ITarget _target;
 
-		public IRezolveTarget Target
+		public ITarget Target
 		{
 			get { return _target; }
 		}
@@ -40,7 +40,7 @@ namespace Rezolver
 			throw new NotSupportedException("RezolveTargetExpression must be rewritten as a bona-fide expression before walking the expression tree for any other purpose");
 		}
 
-		public RezolveTargetExpression(IRezolveTarget target)
+		public RezolveTargetExpression(ITarget target)
 		{
 			_target = target;
 		}

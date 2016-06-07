@@ -17,7 +17,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldWrapObjectTarget()
 		{
-			IRezolveTarget target = new SingletonTarget(new ObjectTarget(1));
+			ITarget target = new SingletonTarget(new ObjectTarget(1));
 			Assert.Equal(1, GetValueFromTarget(target));
 		}
 
@@ -26,7 +26,7 @@ namespace Rezolver.Tests
 		{
 			using (var session = InstanceCountingType.NewSession())
 			{
-				IRezolveTarget target = new SingletonTarget(new DelegateTarget<InstanceCountingType>(() => new InstanceCountingType()));
+				ITarget target = new SingletonTarget(new DelegateTarget<InstanceCountingType>(() => new InstanceCountingType()));
 				int instanceCount = InstanceCountingType.InstanceCount;
 				var i2 = GetValueFromTarget(target);
 				int instanceCount2 = InstanceCountingType.InstanceCount;

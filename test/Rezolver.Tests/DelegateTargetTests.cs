@@ -22,7 +22,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldSupportAndReturnInt()
 		{
-			IRezolveTarget target = new DelegateTarget<int>(() => 1);
+			ITarget target = new DelegateTarget<int>(() => 1);
 			Assert.True(target.SupportsType(typeof(int)));
 			Assert.Equal(1, GetValueFromTarget(target));
 		}
@@ -30,7 +30,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldSupportAndReturnObject()
 		{
-			IRezolveTarget target = new DelegateTarget<object>(() => 1);
+			ITarget target = new DelegateTarget<object>(() => 1);
 			Assert.True(target.SupportsType(typeof(object)));
 			Assert.Equal(1, GetValueFromTarget(target));
 		}
@@ -40,7 +40,7 @@ namespace Rezolver.Tests
 		{
 			using (var session = InstanceCountingType.NewSession())
 			{
-				IRezolveTarget target = new DelegateTarget<InstanceCountingType>(() => new InstanceCountingType());
+				ITarget target = new DelegateTarget<InstanceCountingType>(() => new InstanceCountingType());
 				int currentInstances = InstanceCountingType.InstanceCount;
 				var result = GetValueFromTarget(target);
 				Assert.Equal(currentInstances + 1, InstanceCountingType.InstanceCount);

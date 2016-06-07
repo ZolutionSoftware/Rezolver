@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rezolver.Diagnostics
 {
-	public class TrackedCombinedLifetimeScopeRezolver : CombinedLifetimeScopeRezolver
+	public class TrackedCombinedLifetimeScopeRezolver : OverridingScopedContainer
 	{
 		private readonly int _id = TrackingUtils.NextRezolverID();
 
@@ -17,26 +17,26 @@ namespace Rezolver.Diagnostics
 		protected internal ICallTracker Logger { get; private set; }
 
 		internal TrackedCombinedLifetimeScopeRezolver(TrackedCombinedLifetimeScopeRezolver parent,
-			IRezolverBuilder builder = null,
-			IRezolveTargetCompiler compiler = null) 
+			ITargetContainer builder = null,
+			ITargetCompiler compiler = null) 
 			: this(parent.Logger, parent, builder: builder, compiler: compiler)
 		{
 
 		}
 
 		internal TrackedCombinedLifetimeScopeRezolver(TrackedLifetimeScopeResolver parent,
-			IRezolverBuilder builder = null,
-			IRezolveTargetCompiler compiler = null)
+			ITargetContainer builder = null,
+			ITargetCompiler compiler = null)
 			: this(parent.Logger, parent, builder: builder, compiler: compiler)
 		{
 
 		}
 
 		public TrackedCombinedLifetimeScopeRezolver(ICallTracker logger, 
-			ILifetimeScopeRezolver parentScope, 
-			IRezolver inner = null, 
-			IRezolverBuilder builder = null, 
-			IRezolveTargetCompiler compiler = null)
+			IScopedContainer parentScope, 
+			IContainer inner = null, 
+			ITargetContainer builder = null, 
+			ITargetCompiler compiler = null)
 			: base(parentScope, inner, builder ?? new TrackedRezolverBuilder(logger), compiler)
 		{
 			Logger = logger;
@@ -47,13 +47,13 @@ namespace Rezolver.Diagnostics
 			return Logger.TrackCall(this, () => base.CanResolve(context), context);
 		}
 
-		public override ILifetimeScopeRezolver CreateLifetimeScope()
+		public override IScopedContainer CreateLifetimeScope()
 		{
 			//TODO: change this to a LoggingCombinedLifetimeScopeRezolver
 			return Logger.TrackCall(this, () => new TrackedCombinedLifetimeScopeRezolver(this));
 		}
 
-		public override ICompiledRezolveTarget FetchCompiled(RezolveContext context)
+		public override ICompiledTarget FetchCompiled(RezolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
 		}
@@ -86,12 +86,12 @@ namespace Rezolver.Diagnostics
 			return Logger.TrackCall(this, () => base.GetFromScope(context), new { context = context });
 		}
 
-		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
+		protected override ICompiledTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.GetCompiledRezolveTarget(context), new { context = context });
 		}
 
-		protected override ICompiledRezolveTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
+		protected override ICompiledTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.GetFallbackCompiledRezolveTarget(context), new { context = context });
 		}

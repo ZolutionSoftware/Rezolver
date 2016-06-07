@@ -20,7 +20,7 @@ namespace Rezolver.Tests
 			//only ever creating the one instance of any generic, so 2nd and subsequent calls would get the instance that was first
 			//created, regardless of whether the generic types were the same!
 			var target = GenericConstructorTarget.Auto(typeof(TestGenericType<>)).Singleton();
-			var r = new DefaultRezolver();
+			var r = new Container();
 			r.Register(target);
 
 			var t = r.Resolve(typeof(TestGenericType<string>));
@@ -41,7 +41,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldMapFromConcreteTypeToInterface()
 		{
-			var r = new DefaultRezolver();
+			var r = new Container();
 			r.RegisterType(typeof(Generic<>), typeof(IGeneric<>));
 			r.RegisterObject(1);
 

@@ -180,13 +180,13 @@ namespace Rezolver.Configuration.Json
         /// <summary>
         /// Implementation of <see cref="CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)"/>, except this implementation always
         /// throws a <see cref="NotSupportedException"/>, because it must be unwrapped (through a call to <see cref="UnwrapMetadata(ITypeReference[])"/>) before 
-        /// it can be used to create an <see cref="IRezolveTarget"/>.
+        /// it can be used to create an <see cref="ITarget"/>.
         /// </summary>
         /// <param name="targetTypes"></param>
         /// <param name="context"></param>
         /// <param name="entry"></param>
         /// <returns></returns>
-		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
+		protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			throw new NotSupportedException("This metadata must be unwrapped for a specific set of target types - it is not possible to create a target from a wrapped metadata.");
 		}

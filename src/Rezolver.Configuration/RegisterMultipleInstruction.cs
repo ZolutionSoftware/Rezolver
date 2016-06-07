@@ -7,7 +7,7 @@ namespace Rezolver.Configuration
 {
 	/// <summary>
 	/// Similar to the <see cref="RegisterInstruction"/> except this specifically wraps the 
-	/// <see cref="IRezolverBuilderExtensions.RegisterMultiple(IRezolverBuilder, IEnumerable{IRezolveTarget}, Type, RezolverPath)"/>
+	/// <see cref="ITargetContainerExtensions.RegisterMultiple(ITargetContainer, IEnumerable{ITarget}, Type, RezolverPath)"/>
 	/// method.  Construction is largely identical, except where in the aforementioned class you pass a single target, here you
 	/// pass multiple targets in a list.
 	/// </summary>
@@ -22,7 +22,7 @@ namespace Rezolver.Configuration
 		/// Gets the targets that'll be used for the registration.
 		/// </summary>
 		/// <value>The targets.</value>
-		public IEnumerable<IRezolveTarget> Targets { get; private set; }
+		public IEnumerable<ITarget> Targets { get; private set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RegisterMultipleInstruction" /> class.
@@ -46,7 +46,7 @@ namespace Rezolver.Configuration
 		/// or
 		/// All targets in list must be non-null;targets
 		/// </exception>
-		public RegisterMultipleInstruction(IEnumerable<Type> targetTypes, IEnumerable<IRezolveTarget> targets, IConfigurationEntry entry)
+		public RegisterMultipleInstruction(IEnumerable<Type> targetTypes, IEnumerable<ITarget> targets, IConfigurationEntry entry)
 			: base(entry)
 		{
 			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
@@ -56,13 +56,13 @@ namespace Rezolver.Configuration
 			if (targetTypes.Any(t => t == null)) throw new ArgumentException("All types in list must be non-null", "targetTypes");
 			if (targets == null) throw new ArgumentNullException("targets");
 
-			IRezolveTarget[] targetsArray = targets.ToArray();
+			ITarget[] targetsArray = targets.ToArray();
 			if (targetsArray.Length == 0) throw new ArgumentException("List must contain one or more targets", "targets");
 			if (targets.Any(t => t == null)) throw new ArgumentException("All targets in list must be non-null", "targets");
 			TargetTypes = typesArray;
 			Targets = targetsArray;
 		}
-		public override void Apply(IRezolverBuilder builder)
+		public override void Apply(ITargetContainer builder)
 		{
 			//the registration occurs against potentially multiple types, but each individual target will
 			//yield a unique object, even if that target is a singleton.

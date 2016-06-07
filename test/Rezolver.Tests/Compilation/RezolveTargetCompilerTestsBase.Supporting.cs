@@ -22,31 +22,31 @@ namespace Rezolver.Tests.Compilation
 			new Lazy<ObjectTarget>(() => NullableIntForObjectTarget.AsObjectTarget());
 		private static readonly int? NullableIntForObjectTarget = 1;
 
-		private readonly Lazy<IRezolveTarget> _requiresIntTarget
-			= new Lazy<IRezolveTarget>(() => ConstructorTarget.Auto<RequiresInt>());
+		private readonly Lazy<ITarget> _requiresIntTarget
+			= new Lazy<ITarget>(() => ConstructorTarget.Auto<RequiresInt>());
 
-		private readonly Lazy<IRezolveTarget> _transientConstructorTarget
-			= new Lazy<IRezolveTarget>(() => ConstructorTarget.Auto<Transient>());
+		private readonly Lazy<ITarget> _transientConstructorTarget
+			= new Lazy<ITarget>(() => ConstructorTarget.Auto<Transient>());
 
 		private readonly Lazy<SingletonTarget> _singletonConstructorTarget
 			= new Lazy<SingletonTarget>(() => new SingletonTarget(ConstructorTarget.Auto<Singleton>()));
 
-		private readonly Lazy<IRezolveTarget> _compositeConstructorTarget
-			= new Lazy<IRezolveTarget>(() => ConstructorTarget.Auto<Composite>());
+		private readonly Lazy<ITarget> _compositeConstructorTarget
+			= new Lazy<ITarget>(() => ConstructorTarget.Auto<Composite>());
 
-		private readonly Lazy<IRezolveTarget> _superComplexConstructorTarget
-			= new Lazy<IRezolveTarget>(() => ConstructorTarget.Auto<SuperComplex>());
+		private readonly Lazy<ITarget> _superComplexConstructorTarget
+			= new Lazy<ITarget>(() => ConstructorTarget.Auto<SuperComplex>());
 
-		private readonly Lazy<IRezolveTarget> _scopedSingletonTestTypeConstructorTarget
-			= new Lazy<IRezolveTarget>(() => ConstructorTarget.Auto<ScopedSingletonTestClass>());
+		private readonly Lazy<ITarget> _scopedSingletonTestTypeConstructorTarget
+			= new Lazy<ITarget>(() => ConstructorTarget.Auto<ScopedSingletonTestClass>());
 
 
-		protected abstract IRezolveTargetCompiler CreateCompilerBase(string callingMethod);
-		protected abstract void ReleaseCompiler(IRezolveTargetCompiler compiler);
+		protected abstract ITargetCompiler CreateCompilerBase(string callingMethod);
+		protected abstract void ReleaseCompiler(ITargetCompiler compiler);
 
-		private IRezolveTargetCompiler _compiler;
-		private IRezolverBuilder _currentBuilder;
-		private IRezolver _currentRezolver;
+		private ITargetCompiler _compiler;
+		private ITargetContainer _currentBuilder;
+		private IContainer _currentRezolver;
 
 		public RezolveTargetCompilerTestsBase()
 		{
@@ -59,22 +59,22 @@ namespace Rezolver.Tests.Compilation
 				ReleaseCompiler(_compiler);
 		}
 
-		protected IRezolveTargetCompiler GetCompiler([CallerMemberName]string callingMethod = null)
+		protected ITargetCompiler GetCompiler([CallerMemberName]string callingMethod = null)
 		{
 			if (_compiler != null) return _compiler;
 			return _compiler = CreateCompilerBase(callingMethod);
 		}
 
-		protected IRezolver GetRezolver([CallerMemberName]string callingMethod = null)
+		protected IContainer GetRezolver([CallerMemberName]string callingMethod = null)
 		{
 			if (_currentRezolver != null) return _currentRezolver;
-			return _currentRezolver = new DefaultRezolver(GetDefaultBuilder(callingMethod), GetCompiler(callingMethod));
+			return _currentRezolver = new Container(GetDefaultBuilder(callingMethod), GetCompiler(callingMethod));
 		}
 
-		protected IRezolverBuilder GetDefaultBuilder([CallerMemberName]string callingMethod = null)
+		protected ITargetContainer GetDefaultBuilder([CallerMemberName]string callingMethod = null)
 		{
 			if (_currentBuilder != null) return _currentBuilder;
-			return _currentBuilder = new RezolverBuilder();
+			return _currentBuilder = new Builder();
 		}
 
 		/// <summary>
@@ -85,19 +85,19 @@ namespace Rezolver.Tests.Compilation
 		/// </summary>
 		/// <param name="target"></param>
 		/// <returns></returns>
-		protected ICompiledRezolveTarget CompileTarget(IRezolveTarget target, [CallerMemberName]string callingMethod = null)
+		protected ICompiledTarget CompileTarget(ITarget target, [CallerMemberName]string callingMethod = null)
 		{
 			var result = GetCompiler(callingMethod).CompileTarget(target, CreateCompileContext(callingMethod));
 			Assert.NotNull(result);
 			return result;
 		}
 
-		protected RezolveContext CreateRezolveContext(Type rezolveType, ILifetimeScopeRezolver scope = null, [CallerMemberName]string callingMethod = null)
+		protected RezolveContext CreateRezolveContext(Type rezolveType, IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
 		{
 			return new RezolveContext(GetRezolver(callingMethod), rezolveType, scope);
 		}
 
-		protected RezolveContext CreateRezolveContext<TRezolve>(ILifetimeScopeRezolver scope = null, [CallerMemberName]string callingMethod = null)
+		protected RezolveContext CreateRezolveContext<TRezolve>(IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
 		{
 			return CreateRezolveContext(typeof(TRezolve), scope, callingMethod);
 		}
@@ -147,7 +147,7 @@ namespace Rezolver.Tests.Compilation
 			GetRezolver(callingMethod).Register(_scopedSingletonTestTypeConstructorTarget.Value, forType ?? typeof(ScopedSingletonTestClass));
 		}
 
-		protected void AddTarget(IRezolveTarget target, Type forType = null, [CallerMemberName]string callingMethod = null)
+		protected void AddTarget(ITarget target, Type forType = null, [CallerMemberName]string callingMethod = null)
 		{
 			Assert.NotNull(target);
 			GetRezolver(callingMethod).Register(target, forType);

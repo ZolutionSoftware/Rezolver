@@ -12,10 +12,10 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldDecorateDecoratedType()
 		{
-			RezolverBuilder builder = new RezolverBuilder();
+			Builder builder = new Builder();
 			builder.RegisterType<DecoratedType, IDecorated>();
 			builder.RegisterDecorator<DecoratorType, IDecorated>();
-			var rezolver = new DefaultRezolver(builder);
+			var rezolver = new Container(builder);
 			var result = rezolver.Resolve<IDecorated>();
 			Assert.IsType<DecoratorType>(result);
 			//yes, we've checked the type - but we also need to check the 
@@ -27,10 +27,10 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldDecorateDecoratedTypeAddedAfterDecorator()
 		{
-			RezolverBuilder builder = new RezolverBuilder();
+			Builder builder = new Builder();
 			builder.RegisterDecorator<DecoratorType, IDecorated>();
 			builder.RegisterType<DecoratedType, IDecorated>();
-			var rezolver = new DefaultRezolver(builder);
+			var rezolver = new Container(builder);
 			var result = rezolver.Resolve<IDecorated>();
 			Assert.IsType<DecoratorType>(result);
 
@@ -41,12 +41,12 @@ namespace Rezolver.Tests
 		public void ShouldDecorateDecorator()
 		{
 			//see if stacking multiple decorators works.
-			RezolverBuilder builder = new RezolverBuilder();
+			Builder builder = new Builder();
 			builder.RegisterType<DecoratedType, IDecorated>();
 			builder.RegisterDecorator<DecoratorType, IDecorated>();
 			builder.RegisterDecorator<AnotherDecoratorType, IDecorated>();
 
-			var rezolver = new DefaultRezolver(builder);
+			var rezolver = new Container(builder);
 			var result = rezolver.Resolve<IDecorated>();
 			Assert.IsType<AnotherDecoratorType>(result);
 
@@ -56,11 +56,11 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldUseGenericDecorator()
 		{
-			RezolverBuilder builder = new RezolverBuilder();
+			Builder builder = new Builder();
 			builder.RegisterType<StringHandler, IHandler<string>>();
 			builder.RegisterType<DoubleHandler, IHandler<double>>();
 			builder.Register(new DecoratorTarget(typeof(IHandler<>), typeof(GenericDecoratingHandler<>)));
-			var rezolver = new DefaultRezolver(builder);
+			var rezolver = new Container(builder);
 			var result = rezolver.Resolve<IHandler<string>>();
 			Assert.IsType<GenericDecoratingHandler<string>>(result);
 		}

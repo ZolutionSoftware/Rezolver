@@ -13,9 +13,9 @@ namespace Rezolver
 	/// </summary>
 	public class RezolveTargetEntry : IRezolveTargetEntry
 	{
-		private IRezolveTarget _defaultTarget;
+		private ITarget _defaultTarget;
 		private ListTarget _listTarget;
-		private List<IRezolveTarget> _targets;
+		private List<ITarget> _targets;
 
 		public virtual bool UseFallback { get { return false; } }
 
@@ -26,7 +26,7 @@ namespace Rezolver
 			get { return DefaultTarget.DeclaredType; }
 		}
 
-		public IRezolveTarget DefaultTarget
+		public ITarget DefaultTarget
 		{
 			get
 			{
@@ -34,7 +34,7 @@ namespace Rezolver
 			}
 		}
 
-		public IEnumerable<IRezolveTarget> Targets
+		public IEnumerable<ITarget> Targets
 		{
 			get
 			{
@@ -42,7 +42,7 @@ namespace Rezolver
 			}
 		}
 
-		public IRezolverBuilder ParentBuilder
+		public ITargetContainer ParentBuilder
 		{
 			get; 
 		}
@@ -52,7 +52,7 @@ namespace Rezolver
 			get; 
 		}
 
-		public RezolveTargetEntry(IRezolverBuilder parentBuilder, Type registeredType, params IRezolveTarget[] targets)
+		public RezolveTargetEntry(ITargetContainer parentBuilder, Type registeredType, params ITarget[] targets)
 		{
 			parentBuilder.MustNotBeNull(nameof(parentBuilder));
 			registeredType.MustNotBeNull(nameof(registeredType));
@@ -64,10 +64,10 @@ namespace Rezolver
 			ParentBuilder = parentBuilder;
 			RegisteredType = registeredType;
 			_defaultTarget = targets[targets.Length - 1];
-			_targets = new List<IRezolveTarget>(targets);
+			_targets = new List<ITarget>(targets);
 		}
 
-		public virtual void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
+		public virtual void AddTarget(ITarget target, bool checkForDuplicates = false)
 		{
 			if (!checkForDuplicates || !_targets.Contains(target))
 			{
@@ -80,7 +80,7 @@ namespace Rezolver
 		{
 			//here it will depend on the type in the compile context (once fully implemented, of course)
 			//only way to figure that out is to find out which target supports the incoming type
-			IRezolveTarget match = null;
+			ITarget match = null;
 			if (SupportsType(context.TargetType, out match))
 				return match.CreateExpression(context);
 
@@ -92,11 +92,11 @@ namespace Rezolver
 		{
 			//either the type is equal to the type that was used for the individual item.
 			//or it could be an IEnumerable of that type.
-			IRezolveTarget match = null;
+			ITarget match = null;
 			return SupportsType(type, out match);
 		}
 
-		private bool SupportsType(Type type, out IRezolveTarget match)
+		private bool SupportsType(Type type, out ITarget match)
 		{
 			match = null;
 			//either the type is equal to the type that was used for the individual item.
@@ -141,7 +141,7 @@ namespace Rezolver
 			return new ListTarget(RegisteredType, Targets, true);
 		}
 
-		public void Attach(IRezolverBuilder parentBuilder, IRezolveTargetEntry existing = null)
+		public void Attach(ITargetContainer parentBuilder, IRezolveTargetEntry existing = null)
 		{
 			throw new NotSupportedException("This entry must be created with a parent, the Attach operation is not supported");
 		}

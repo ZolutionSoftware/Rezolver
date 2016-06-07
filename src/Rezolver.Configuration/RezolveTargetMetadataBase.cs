@@ -70,7 +70,7 @@ namespace Rezolver.Configuration
 		/// or
 		/// All items in the array must be non-null;targetTypes
 		/// </exception>
-		public virtual IRezolveTarget CreateRezolveTarget(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry = null)
+		public virtual ITarget CreateRezolveTarget(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry = null)
 		{
 			if (context == null) throw new ArgumentNullException("context");
 			if (targetTypes == null) throw new ArgumentNullException("targetTypes");
@@ -89,7 +89,7 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// Called by <see cref="CreateRezolveTarget"/> to create the rezolve target that will be registered into the <see cref="IRezolverBuilder"/>
+		/// Called by <see cref="CreateRezolveTarget"/> to create the rezolve target that will be registered into the <see cref="ITargetContainer"/>
 		/// currently being built (available on the <paramref name="context"/>)
 		/// 
 		/// If an error occurs, you indicate that by adding to the <paramref name="context"/>'s errors collection, and return null.
@@ -100,7 +100,7 @@ namespace Rezolver.Configuration
 		/// <param name="context">The context.</param>
 		/// <param name="entry">The entry.</param>
 		/// <returns>IRezolveTarget.</returns>
-		protected abstract IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry);
+		protected abstract ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry);
 
 		public virtual IRezolveTargetMetadata Bind(ITypeReference[] targetTypes)
 		{

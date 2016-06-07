@@ -35,6 +35,6 @@ namespace Rezolver.Configuration
 		/// at all, but it helps provide additional context that might be of use when generating the rezolve target.</param>
 		/// <param name="context">The context.</param>
 		/// <param name="entry">If provided, this is a reference to the configuration entry for which this target is being built.</param>
-		IEnumerable<IRezolveTarget> CreateRezolveTargets(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry);
+		IEnumerable<ITarget> CreateRezolveTargets(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry);
 	}
 }

@@ -9,7 +9,7 @@ namespace Rezolver.Diagnostics
 	/// <summary>
 	/// A rezolver that logs all calls through the IRezolver interface to aid debugging.
 	/// </summary>
-	public class TrackedDefaultRezolver : DefaultRezolver
+	public class TrackedDefaultRezolver : Container
 	{
 		private readonly int _id = TrackingUtils.NextRezolverID();
 
@@ -21,7 +21,7 @@ namespace Rezolver.Diagnostics
 		protected internal ICallTracker Tracker { get; private set; }
 
 
-		public TrackedDefaultRezolver(ICallTracker logger, IRezolverBuilder builder = null, IRezolveTargetCompiler compiler = null, bool registerToBuilder = true) :
+		public TrackedDefaultRezolver(ICallTracker logger, ITargetContainer builder = null, ITargetCompiler compiler = null, bool registerToBuilder = true) :
 			base(builder: builder, compiler: compiler, registerToBuilder: registerToBuilder)
 		{
 			Tracker = logger;
@@ -32,12 +32,12 @@ namespace Rezolver.Diagnostics
 			return Tracker.TrackCall(this, () => base.CanResolve(context), context);
 		}
 
-		public override ILifetimeScopeRezolver CreateLifetimeScope()
+		public override IScopedContainer CreateLifetimeScope()
 		{
 			return Tracker.TrackCall(this, () => new TrackedCombinedLifetimeScopeRezolver(Tracker, null, this));
 		}
 
-		public override ICompiledRezolveTarget FetchCompiled(RezolveContext context)
+		public override ICompiledTarget FetchCompiled(RezolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
 		}
@@ -60,12 +60,12 @@ namespace Rezolver.Diagnostics
 			return @return;
 		}
 
-		protected override ICompiledRezolveTarget GetCompiledRezolveTarget(RezolveContext context)
+		protected override ICompiledTarget GetCompiledRezolveTarget(RezolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.GetCompiledRezolveTarget(context), new { context = context });
 		}
 
-		protected override ICompiledRezolveTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
+		protected override ICompiledTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.GetFallbackCompiledRezolveTarget(context), new { context = context });
 		}

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rezolver
 {
-	public class GenericConstructorTarget : RezolveTargetBase
+	public class GenericConstructorTarget : TargetBase
 	{
 		private static Type[] EmptyTypes = new Type[0];
 
@@ -188,17 +188,18 @@ namespace Rezolver
 
 
 		/// <summary>
-		/// Equivalent of <see cref="ConstructorTarget.Auto{T}(IPropertyBindingBehaviour)"/> for generic type definitions (note - NOT
+		/// Equivalent of <see cref="ConstructorTarget.Auto{T}(IPropertyBindingBehaviour)"/> for generic type definitions although,
+		/// note that it's not possible to bind this generic method in C# directly from source code.
 		/// </summary>
 		/// <typeparam name="TGeneric"></typeparam>
 		/// <param name="propertyBindingBehaviour"></param>
 		/// <returns></returns>
-		public static IRezolveTarget Auto<TGeneric>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Auto<TGeneric>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			return Auto(typeof(TGeneric), propertyBindingBehaviour);
 		}
 
-		public static IRezolveTarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			//I might relax this constraint later - since we could implement partially open generics.
 			if (!TypeHelpers.IsGenericTypeDefinition(type))

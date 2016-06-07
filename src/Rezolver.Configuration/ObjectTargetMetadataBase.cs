@@ -11,7 +11,7 @@ namespace Rezolver.Configuration
 	public abstract class ObjectTargetMetadataBase : RezolveTargetMetadataBase, IObjectTargetMetadata
 	{
 		public ObjectTargetMetadataBase() : base(RezolveTargetMetadataType.Object) { }
-		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
+		protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			//find the first type that the object target metadata object will dish out
 			List<IConfigurationError> tempErrors = new List<IConfigurationError>();
@@ -41,7 +41,7 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// Called to get the object that will be registered in the IRezolverBuilder to be returned when a
+		/// Called to get the object that will be registered in the IRezolveTargetContainer to be returned when a
 		/// caller requests one of its registered types. The method can construct an object anew everytime it is
 		/// called, or it can always return the same instance; this behaviour is implementation-dependant.
 		/// </summary>

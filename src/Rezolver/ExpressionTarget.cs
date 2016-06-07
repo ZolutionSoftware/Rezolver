@@ -7,19 +7,19 @@ namespace Rezolver
 	/// <summary>
 	/// A generic target for all expressions not explicitly supported by a particular target.
 	/// </summary>
-	public class ExpressionTarget : RezolveTargetBase
+	public class ExpressionTarget : TargetBase
 	{
 		private readonly Expression _expression;
 		private readonly Type _declaredType;//used only when a factory is used.
 		private readonly Func<CompileContext, Expression> _expressionFactory;
 
-		public ExpressionTarget(Expression expression, IRezolveTargetAdapter adapter = null)
+		public ExpressionTarget(Expression expression, ITargetAdapter adapter = null)
 		{
 			//TODO: null check
 			_expression = expression;
 		}
 
-		public ExpressionTarget(Func<CompileContext, Expression> expressionFactory, Type declaredType, IRezolveTargetAdapter adapter = null)
+		public ExpressionTarget(Func<CompileContext, Expression> expressionFactory, Type declaredType, ITargetAdapter adapter = null)
 		{
 			_expressionFactory = expressionFactory;
 			_declaredType = declaredType;

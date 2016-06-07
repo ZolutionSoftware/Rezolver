@@ -8,7 +8,7 @@ namespace Rezolver
 	/// A target that simply creates a default instance of a given type.  I.e. the same
 	/// as doing default(type) in C#.
 	/// </summary>
-	public class DefaultTarget : RezolveTargetBase
+	public class DefaultTarget : TargetBase
 	{
 		private readonly Type _declaredType;
 

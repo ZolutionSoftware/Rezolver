@@ -16,7 +16,7 @@ namespace Rezolver
 	{
 		public static readonly RezolveContext EmptyContext = new RezolveContext(null);
 
-		private class StubRezolver : IRezolver
+		private class StubRezolver : IContainer
 		{
 			private static readonly StubRezolver _instance = new StubRezolver();
 
@@ -28,12 +28,12 @@ namespace Rezolver
 				}
 			}
 
-			public IRezolveTargetCompiler Compiler
+			public ITargetCompiler Compiler
 			{
 				get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
 			}
 
-			public IRezolverBuilder Builder
+			public ITargetContainer Builder
 			{
 				get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
 			}
@@ -55,22 +55,22 @@ namespace Rezolver
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 
-			public ILifetimeScopeRezolver CreateLifetimeScope()
+			public IScopedContainer CreateLifetimeScope()
 			{
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 
-			public ICompiledRezolveTarget FetchCompiled(RezolveContext context)
+			public ICompiledTarget FetchCompiled(RezolveContext context)
 			{
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 
-			public void Register(IRezolveTarget target, Type type = null)
+			public void Register(ITarget target, Type type = null)
 			{
 				throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
 			}
 
-			public ILifetimeScopeRezolver CreateLifetimeScope(IRezolver overridingRezolver)
+			public IScopedContainer CreateLifetimeScope(IContainer overridingRezolver)
 			{
 				throw new NotImplementedException();
 			}
@@ -84,38 +84,38 @@ namespace Rezolver
 		private Type _requestedType;
 		public Type RequestedType { get { return _requestedType; } private set { _requestedType = value; } }
 
-		private IRezolver _rezolver;
+		private IContainer _rezolver;
 
 		/// <summary>
 		/// The rezolver for this context.
 		/// </summary>
-		public IRezolver Rezolver { get { return _rezolver; } private set { _rezolver = value; } }
+		public IContainer Rezolver { get { return _rezolver; } private set { _rezolver = value; } }
 
-		private ILifetimeScopeRezolver _scope;
-		public ILifetimeScopeRezolver Scope { get { return _scope; } private set { _scope = value; } }
+		private IScopedContainer _scope;
+		public IScopedContainer Scope { get { return _scope; } private set { _scope = value; } }
 
 		private RezolveContext() { }
 
-		public RezolveContext(IRezolver rezolver, Type requestedType)
+		public RezolveContext(IContainer rezolver, Type requestedType)
 			: this(rezolver)
 		{
 			RequestedType = requestedType;
 		}
 
-		public RezolveContext(IRezolver rezolver, Type requestedType, ILifetimeScopeRezolver scope)
+		public RezolveContext(IContainer rezolver, Type requestedType, IScopedContainer scope)
 			: this(rezolver)
 		{
 			RequestedType = requestedType;
 			Scope = scope;
 		}
 
-		private RezolveContext(IRezolver rezolver)
+		private RezolveContext(IContainer rezolver)
 		{
 			_rezolver = rezolver ?? StubRezolver.Instance;
 			//automatically inherit the rezolver as this context's scope, if it's of the correct type.
 			//note - all the other constructors chain to this one.  Note that other constructors
 			//might supply a separate scope in addition, which will overwrite the scope set here.
-			_scope = rezolver as ILifetimeScopeRezolver;
+			_scope = rezolver as IScopedContainer;
 		}
 
 		public override string ToString()
@@ -197,7 +197,7 @@ namespace Rezolver
 			};
 		}
 
-		public RezolveContext CreateNew(IRezolver rezolver, Type requestedType)
+		public RezolveContext CreateNew(IContainer rezolver, Type requestedType)
 		{
 			return new RezolveContext()
 			{
@@ -207,7 +207,7 @@ namespace Rezolver
 			};
 		}
 
-		public RezolveContext CreateNew(Type requestedType, ILifetimeScopeRezolver scope)
+		public RezolveContext CreateNew(Type requestedType, IScopedContainer scope)
 		{
 			return new RezolveContext()
 			{
@@ -217,7 +217,7 @@ namespace Rezolver
 			};
 		}
 
-		public RezolveContext CreateNew(IRezolver rezolver, Type requestedType, ILifetimeScopeRezolver scope)
+		public RezolveContext CreateNew(IContainer rezolver, Type requestedType, IScopedContainer scope)
 		{
 			return new RezolveContext()
 			{
@@ -227,7 +227,7 @@ namespace Rezolver
 			};
 		}
 
-		public RezolveContext CreateNew(IRezolver rezolver)
+		public RezolveContext CreateNew(IContainer rezolver)
 		{
 			return new RezolveContext()
 			{
@@ -237,7 +237,7 @@ namespace Rezolver
 			};
 		}
 
-		public RezolveContext CreateNew(ILifetimeScopeRezolver scope)
+		public RezolveContext CreateNew(IScopedContainer scope)
 		{
 			return new RezolveContext()
 			{
@@ -247,7 +247,7 @@ namespace Rezolver
 			};
 		}
 
-		public RezolveContext CreateNew(IRezolver rezolver, ILifetimeScopeRezolver scope)
+		public RezolveContext CreateNew(IContainer rezolver, IScopedContainer scope)
 		{
 			return new RezolveContext()
 			{

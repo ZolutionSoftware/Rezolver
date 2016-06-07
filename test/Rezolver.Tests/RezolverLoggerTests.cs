@@ -10,9 +10,9 @@ namespace Rezolver.Tests
 {
 	public class RezolverLoggerTests
 	{
-		private class TestRezolverBase : IRezolver
+		private class TestRezolverBase : IContainer
 		{
-			public virtual IRezolverBuilder Builder
+			public virtual ITargetContainer Builder
 			{
 				get
 				{
@@ -20,7 +20,7 @@ namespace Rezolver.Tests
 				}
 			}
 
-			public virtual IRezolveTargetCompiler Compiler
+			public virtual ITargetCompiler Compiler
 			{
 				get
 				{
@@ -33,12 +33,12 @@ namespace Rezolver.Tests
 				return false;
 			}
 
-			public virtual ILifetimeScopeRezolver CreateLifetimeScope()
+			public virtual IScopedContainer CreateLifetimeScope()
 			{
 				return null;
 			}
 
-			public virtual ICompiledRezolveTarget FetchCompiled(RezolveContext context)
+			public virtual ICompiledTarget FetchCompiled(RezolveContext context)
 			{
 				return null;
 			}

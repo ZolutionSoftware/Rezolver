@@ -156,7 +156,7 @@ namespace Rezolver.Tests
 			//parsing.  However - note that if any tests in the RezolveTargetAdapterTests suite are failing, then
 			//tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget's
 			//integration with the default adapter here.
-			var target = ConstructorTarget.For(context => new NoDefaultConstructor(context.Resolve<int>()), RezolveTargetAdapter.Instance);
+			var target = ConstructorTarget.For(context => new NoDefaultConstructor(context.Resolve<int>()), TargetAdapter.Instance);
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var rezolver = CreateADefaultRezolver();
 			rezolver.Register(intTarget, typeof(int));
@@ -200,7 +200,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAllowAPropertyToBeSet()
 		{
-			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			Container rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.RegisterExpression(c => new HasProperty() { Value = 1 });
 
 			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
@@ -210,7 +210,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAllowAPropertyToBeResolved()
 		{
-			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			Container rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register((10).AsObjectTarget());
 			rezolver.RegisterExpression(c => new HasProperty() { Value = c.Resolve<int>() });
 			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
@@ -220,7 +220,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAutoDiscoverProperties()
 		{
-			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			Container rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register((25).AsObjectTarget());
 			rezolver.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
 			var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
@@ -230,7 +230,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAutoDiscoverFields()
 		{
-			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			Container rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register("Hello world".AsObjectTarget());
 			rezolver.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
 			var result = (HasField)rezolver.Resolve(typeof(HasField));
@@ -240,7 +240,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldIgnoreFieldsAndProperties()
 		{
-			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			Container rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register((100).AsObjectTarget());
 			rezolver.Register(ConstructorTarget.Auto<ShouldIgnorePropertyAndField>(DefaultPropertyBindingBehaviour.Instance));
 			var result = (ShouldIgnorePropertyAndField)rezolver.Resolve(typeof(ShouldIgnorePropertyAndField));
@@ -252,7 +252,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldChainAutoDiscoveredPropertiesAndFields()
 		{
-			DefaultRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			Container rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register("hello universe".AsObjectTarget());
 			rezolver.Register((500).AsObjectTarget());
 			rezolver.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
@@ -273,7 +273,7 @@ namespace Rezolver.Tests
 			var example = new System.Net.NetworkCredential("hello", "world");
 			var userName = "username".AsObjectTarget();
 			var password = "password".AsObjectTarget();
-			var args = new Dictionary<string, IRezolveTarget>();
+			var args = new Dictionary<string, ITarget>();
 			args["userName"] = userName;
 			args["password"] = password;
 			var target = ConstructorTarget.WithArgs<NetworkCredential>(args);

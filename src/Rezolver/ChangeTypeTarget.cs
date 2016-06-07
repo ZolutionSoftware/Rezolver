@@ -13,7 +13,7 @@ namespace Rezolver
 	/// 
 	/// Its use is rare.
 	/// </summary>
-	public class ChangeTypeTarget : RezolveTargetBase
+	public class ChangeTypeTarget : TargetBase
 	{
 		/// <summary>
 		/// The target type for the conversion.
@@ -41,14 +41,14 @@ namespace Rezolver
 		/// <summary>
 		/// The target whose type will be changed to <see cref="_targetType"/>.
 		/// </summary>
-		public IRezolveTarget InnerTarget { get; private set; }
+		public ITarget InnerTarget { get; private set; }
 		
 		/// <summary>
 		/// Creates a new instance of the <see cref="ChangeTypeTarget"/> class.
 		/// </summary>
 		/// <param name="innerTarget">Required.  See <see cref="InnerTarget"/></param>
 		/// <param name="targetType">Required.  See <see cref="_targetType"/></param>
-		public ChangeTypeTarget(IRezolveTarget innerTarget, Type targetType)
+		public ChangeTypeTarget(ITarget innerTarget, Type targetType)
 		{
 			innerTarget.MustNotBeNull(nameof(innerTarget));
 			targetType.MustNotBeNull(nameof(targetType));

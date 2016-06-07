@@ -12,7 +12,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldCreateGenericNoCtorClass()
 		{
-			IRezolveTarget t = GenericConstructorTarget.Auto(typeof(GenericNoCtor<>));
+			ITarget t = GenericConstructorTarget.Auto(typeof(GenericNoCtor<>));
 			Assert.NotNull(t);
 			Assert.Equal(typeof(GenericNoCtor<>), t.DeclaredType);
 			//try and build an instance 
@@ -26,7 +26,7 @@ namespace Rezolver.Tests
 		{
 			//similar test to above, but we're testing that it works when you put the target inside the
 			//default resolver.
-			var rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			var rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(GenericNoCtor<>)));
 			var instance = (GenericNoCtor<int>)rezolver.Resolve(typeof(GenericNoCtor<int>));
 			Assert.NotNull(instance);
@@ -38,7 +38,7 @@ namespace Rezolver.Tests
 			//typical pattern already 
 			var rezolver = CreateADefaultRezolver();
 			rezolver.RegisterObject(1);
-			IRezolveTarget t = GenericConstructorTarget.Auto(typeof(Generic<>));
+			ITarget t = GenericConstructorTarget.Auto(typeof(Generic<>));
 			Assert.NotNull(t);
 			Assert.Equal(typeof(Generic<>), t.DeclaredType);
 			var instance = GetValueFromTarget<Generic<int>>(t, rezolver);
@@ -50,7 +50,7 @@ namespace Rezolver.Tests
 		public void ShouldRezolveAGenericClass()
 		{
 			//in this one, using DefaultRezolver, we're going to test a few parameter types
-			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			IContainer rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
 			rezolver.Register((2).AsObjectTarget());
 			rezolver.Register((3).AsObjectTarget(typeof(int?)));
@@ -70,7 +70,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldRezolveAClosedGenericDependency()
 		{
-			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			IContainer rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
 			rezolver.Register((2).AsObjectTarget());
 			rezolver.Register(ConstructorTarget.Auto<HasGenericDependency>());
@@ -88,7 +88,7 @@ namespace Rezolver.Tests
 			//generic.
 			//note that this isn't the most complicated it can get, however: that would be using
 			//the type argument as a type argument to another open generic dependency.  That one is on it's way.
-			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			IContainer rezolver = new Container(compiler: new TargetDelegateCompiler());
 
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(GenericNoCtor<>)));
@@ -105,7 +105,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldResolveNestedeOpenGenericDependency()
 		{
-			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			IContainer rezolver = new Container(compiler: new TargetDelegateCompiler());
 
 			rezolver.Register((10).AsObjectTarget());
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
@@ -122,7 +122,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldResolveGenericViaInterface()
 		{
-			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			IContainer rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register((20).AsObjectTarget());
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
 
@@ -138,7 +138,7 @@ namespace Rezolver.Tests
 			//to the outer generic interface.  At the time of writing, making it the same causes
 			//a circular dependency - see Bug #7
 
-			IRezolver rezolver = CreateADefaultRezolver();
+			IContainer rezolver = CreateADefaultRezolver();
 			//we need three dependencies registered - the inner T, an IGenericA<> and 
 			//an IGeneric<IGenericA<T>>.
 			rezolver.Register((25).AsObjectTarget());
@@ -157,7 +157,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldResolveClosedGenericViaInterfaceDependency()
 		{
-			IRezolver rezolver = new DefaultRezolver(compiler: new RezolveTargetDelegateCompiler());
+			IContainer rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register((30).AsObjectTarget());
 			rezolver.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
 			rezolver.Register(ConstructorTarget.Auto<HasGenericInterfaceDependency>());
@@ -169,7 +169,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldResolveOpenGenericViaInterfaceDependency()
 		{
-			IRezolver rezolver = CreateADefaultRezolver();
+			IContainer rezolver = CreateADefaultRezolver();
 			rezolver.Register((40).AsObjectTarget());
 			rezolver.Register((50d).AsObjectTarget(typeof(double?))); //will that work?
 			rezolver.Register("hello interface generics!".AsObjectTarget());

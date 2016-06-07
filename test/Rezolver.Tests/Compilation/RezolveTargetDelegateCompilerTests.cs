@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Compilation
 {
-	public class RezolveTargetDelegateCompilerTests : RezolveTargetCompilerTestsBase
+	public class TargetDelegateCompilerTests : RezolveTargetCompilerTestsBase
 	{
-		protected override IRezolveTargetCompiler CreateCompilerBase(string callingMethod)
+		protected override ITargetCompiler CreateCompilerBase(string callingMethod)
 		{
-			return new RezolveTargetDelegateCompiler();
+			return new TargetDelegateCompiler();
 		}
 
-		protected override void ReleaseCompiler(IRezolveTargetCompiler compiler)
+		protected override void ReleaseCompiler(ITargetCompiler compiler)
 		{
 			
 		}

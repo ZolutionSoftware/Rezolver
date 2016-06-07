@@ -16,7 +16,7 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldResolveEmptyEnumerableOfMissingService()
         {
-            DefaultRezolver rezolver = new DefaultRezolver();
+            Container rezolver = new Container();
             var result = rezolver.Resolve<IEnumerable<MissingService>>();
         }
     }

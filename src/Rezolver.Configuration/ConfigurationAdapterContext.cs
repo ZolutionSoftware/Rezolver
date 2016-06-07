@@ -96,7 +96,7 @@ namespace Rezolver.Configuration
 		/// <summary>
 		/// Constructs a new instance of the <see cref="ConfigurationAdapterContext"/> class.
 		/// </summary>
-		/// <param name="adapter">The adapter that will create the <see cref="IRezolverBuilder"/> from the configuration.</param>
+		/// <param name="adapter">The adapter that will create the <see cref="ITargetContainer"/> from the configuration.</param>
 		/// <param name="configuration">Required. The configuration that is being processed by the adapter for which this
 		/// context is being constructed</param>
 		/// <param name="defaultAssemblyReferences">Optional. Default set of assemblies that are to be searched for types

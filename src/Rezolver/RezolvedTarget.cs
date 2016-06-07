@@ -13,28 +13,28 @@ namespace Rezolver
 	/// 
 	/// The class will statically 
 	/// </summary>
-	public class RezolvedTarget : RezolveTargetBase
+	public class RezolvedTarget : TargetBase
 	{
 		private readonly Type _resolveType;
-		private readonly IRezolveTarget _resolveNameTarget;
+		private readonly ITarget _resolveNameTarget;
 
 		private static readonly MethodInfo RezolverCanResolveMethod =
-			MethodCallExtractor.ExtractCalledMethod((IRezolver c) => c.CanResolve(null));
+			MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.CanResolve(null));
 
 		private static readonly MethodInfo RezolverResolveMethod =
-			MethodCallExtractor.ExtractCalledMethod((IRezolver c) => c.Resolve(null));
+			MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
 
 		private static readonly ConstructorInfo RezolveContextCtor =
-			MethodCallExtractor.ExtractConstructorCall(() => new RezolveContext((IRezolver)null, (Type)null, (ILifetimeScopeRezolver)null));
+			MethodCallExtractor.ExtractConstructorCall(() => new RezolveContext((IContainer)null, (Type)null, (IScopedContainer)null));
 
 		private static readonly MethodInfo ContextNewContextMethod =
 			MethodCallExtractor.ExtractCalledMethod((RezolveContext context) => context.CreateNew((Type)null));
 
 		//this one cannot be obtained via expression extraction - as it uses an output parameter and there's no way of
 		//modelling that to the compiler.
-		private static readonly MethodInfo RezolverTryResolveMethod = TypeHelpers.GetMethod(typeof(IRezolver),"TryResolve");
+		private static readonly MethodInfo RezolverTryResolveMethod = TypeHelpers.GetMethod(typeof(IContainer),"TryResolve");
 
-		internal RezolvedTarget(RezolveTargetAdapter.RezolveCallExpressionInfo rezolveCall)
+		internal RezolvedTarget(TargetAdapter.RezolveCallExpressionInfo rezolveCall)
 		{
 			_resolveType = rezolveCall.Type;
 			_resolveNameTarget = rezolveCall.Name;
@@ -96,7 +96,7 @@ namespace Rezolver
 			//now we try and fetch the target from the rezolver that is passed in the context
 			var staticTarget = context.Fetch(DeclaredType);
 			//TODO: This should be a shared expression
-			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IRezolver));
+			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IContainer));
 			//I did have a line that used 'context.TargetType ?? DeclaredType' but I changed this because the 
 			//RezolvedTarget should know in advance which type it is that's being resolved, and that shouldn't 
 			//change after creation.  It also fixed the initial set of bugs I had with resolving aliases.

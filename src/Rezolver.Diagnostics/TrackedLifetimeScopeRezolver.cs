@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Rezolver.Diagnostics
 {
-	public class TrackedLifetimeScopeResolver : DefaultLifetimeScopeRezolver
+	public class TrackedLifetimeScopeResolver : ScopedContainer
 	{
 		private readonly int _id = TrackingUtils.NextRezolverID();
 
@@ -20,9 +20,9 @@ namespace Rezolver.Diagnostics
 		protected internal ICallTracker Logger { get; private set; }
 
 		public TrackedLifetimeScopeResolver(ICallTracker logger, 
-			IRezolverBuilder builder = null,
-			IRezolveTargetCompiler compiler = null, 
-			ILifetimeScopeRezolver parentScope = null, 
+			ITargetContainer builder = null,
+			ITargetCompiler compiler = null, 
+			IScopedContainer parentScope = null, 
 			bool registerToBuilder = true)
 			: base(builder: builder ?? new TrackedRezolverBuilder(logger), compiler: compiler, registerToBuilder:registerToBuilder)
 		{
@@ -35,12 +35,12 @@ namespace Rezolver.Diagnostics
 			return Logger.TrackCall(this, () => base.CanResolve(context), context);
 		}
 		
-		public override ILifetimeScopeRezolver CreateLifetimeScope()
+		public override IScopedContainer CreateLifetimeScope()
 		{
 			return Logger.TrackCall(this, () => new TrackedCombinedLifetimeScopeRezolver(this));
 		}
 
-		public override ICompiledRezolveTarget FetchCompiled(RezolveContext context)
+		public override ICompiledTarget FetchCompiled(RezolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
 		}

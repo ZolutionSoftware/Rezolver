@@ -14,14 +14,14 @@ namespace Rezolver
     /// the code generated from the expression it produces is executed only once for each lifetime scope.
     /// 
     /// Outside of that, the target generates wrapper code that forcibly caches the instance that is produced (whether
-    /// it's IDiposable or not) into the current scope's cache (using <see cref="ILifetimeScopeRezolver.AddToScope(object, RezolveContext)"/>)
-    /// and retrieves previous instances from that scope (using <see cref="ILifetimeScopeRezolver.GetFromScope(RezolveContext)"/>.</remarks>
-    public class ScopedTarget : RezolveTargetBase
+    /// it's IDiposable or not) into the current scope's cache (using <see cref="IScopedContainer.AddToScope(object, RezolveContext)"/>)
+    /// and retrieves previous instances from that scope (using <see cref="IScopedContainer.GetFromScope(RezolveContext)"/>.</remarks>
+    public class ScopedTarget : TargetBase
     {
         private ConstructorInfo _argExceptionCtor
             = MethodCallExtractor.ExtractConstructorCall(() => new ArgumentException("", ""));
 
-        private IRezolveTarget _innerTarget;
+        private ITarget _innerTarget;
 
         public override Type DeclaredType
         {
@@ -36,7 +36,7 @@ namespace Rezolver
             }
         }
 
-        public ScopedTarget(IRezolveTarget innerTarget)
+        public ScopedTarget(ITarget innerTarget)
         {
             innerTarget.MustNotBeNull("innerTarget");
             _innerTarget = innerTarget;
@@ -46,7 +46,7 @@ namespace Rezolver
         {
             //if the lifetime scope is null then throw an exception, because the lack of a scope 
             //prevents the scoped object from doing what it's supposed to do.
-            var isScopeNull = Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(ILifetimeScopeRezolver)));
+            var isScopeNull = Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IScopedContainer)));
             var throwArgException = Expression.Throw(Expression.New(_argExceptionCtor,
                 Expression.Property(null, typeof(ExceptionResources), "ScopedSingletonRequiresAScope"),
                 Expression.Constant(context.RezolveContextParameter.Name ?? "context")));
@@ -81,7 +81,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static ScopedTarget Scoped(this IRezolveTarget target)
+        public static ScopedTarget Scoped(this ITarget target)
         {
             target.MustNotBeNull(nameof(target));
             return new ScopedTarget(target);

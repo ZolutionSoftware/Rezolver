@@ -17,7 +17,7 @@ namespace Rezolver.Tests.Configuration
 	/// </summary>
 	public abstract class JsonConfigurationTestsBase
 	{
-		protected DefaultRezolver ParseConfigurationAndBuild(string json, [CallerMemberName]string testName = null)
+		protected Container ParseConfigurationAndBuild(string json, [CallerMemberName]string testName = null)
 		{
 			JsonConfigurationParser parser = CreateParser();
 			//gives us the chance to hack the JSON string for derived tests.
@@ -47,9 +47,9 @@ namespace Rezolver.Tests.Configuration
 			return new ConfigurationAdapter();
 		}
 
-		protected virtual DefaultRezolver CreateRezolver(IRezolverBuilder builder)
+		protected virtual Container CreateRezolver(ITargetContainer builder)
 		{
-			return new DefaultRezolver(builder, new RezolveTargetDelegateCompiler());
+			return new Container(builder, new TargetDelegateCompiler());
 		}
 
 		[Fact]
@@ -210,7 +210,7 @@ namespace Rezolver.Tests.Configuration
 		[Fact]
 		public void ShouldRezolveSingletonRequiresIntByTwoTypes()
 		{
-			//TODO: implement aliasing as an extension method on the IRezolverBuilderExtensions class - RegisterAlias
+			//TODO: implement aliasing as an extension method on the IRezolveTargetContainerExtensions class - RegisterAlias
 			//What will it do?
 			//It will take a target type and a registration type - and it will create a RezolvedTarget that rezolves an instance of the target type,
 			//but then register it against the registration type.

@@ -27,10 +27,10 @@ namespace Rezolver.Diagnostics
 	/// An implementation of this interface is expected to be both thread-aware and thread-safe, in that calls that are being
 	/// tracked should be expected to be coming from multiple threads.
 	/// 
-	/// To track calls to a <see cref="DefaultRezolver"/>, swap it with <see cref="TrackedDefaultRezolver"/>
-	/// To track calls to a <see cref="DefaultLifetimeScopeRezolver"/>, swap it with <see cref="TrackedLifetimeScopeResolver"/>
-	/// To track calls to a <see cref="CombinedLifetimeScopeRezolver"/>, swap it with <see cref="TrackedCombinedLifetimeScopeRezolver"/>
-	/// To track calls to a <see cref="RezolverBuilder"/>, swap it with <see cref="TrackedRezolverBuilder"/>
+	/// To track calls to a <see cref="Container"/>, swap it with <see cref="TrackedDefaultRezolver"/>
+	/// To track calls to a <see cref="ScopedContainer"/>, swap it with <see cref="TrackedLifetimeScopeResolver"/>
+	/// To track calls to a <see cref="OverridingScopedContainer"/>, swap it with <see cref="TrackedCombinedLifetimeScopeRezolver"/>
+	/// To track calls to a <see cref="Builder"/>, swap it with <see cref="TrackedRezolverBuilder"/>
 	/// 
 	/// Each of these types requires a reference to this interface that will receive tracking calls for each suitable method or operation.
 	/// </remarks>

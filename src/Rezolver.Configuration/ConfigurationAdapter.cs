@@ -83,24 +83,24 @@ namespace Rezolver.Configuration
 			_contextFactory = contextFactory ?? DefaultContextFactory;
 		}
 		/// <summary>
-		/// Attempts to create an IRezolverBuilder instance from the passed configuration object.
+		/// Attempts to create an IRezolveTargetContainer instance from the passed configuration object.
 		/// 
 		/// If the operation succeeds, then a builder will be returned, which you can then use to construct a new
 		/// Rezolver.  If the operation fails, then a <see cref="ConfigurationException"/> will be thrown.
 		/// </summary>
 		/// <param name="configuration">The parsed configuration to be loaded.</param>
-		/// <returns>An IRezolverBuilder instance ready to be used to construct a new IRezolver.</returns>
+		/// <returns>An IRezolveTargetContainer instance ready to be used to construct a new IRezolver.</returns>
 		/// <exception cref="ConfigurationException">If any part of the passed configuration is invalid (e.g.
 		/// bad type references) or cannot be handled by this adapter (e.g. custom IConfigurationEntry instances or
 		/// custom IRezolveTargetMetadata instances).</exception>
-		public virtual IRezolverBuilder CreateBuilder(IConfiguration configuration)
+		public virtual ITargetContainer CreateBuilder(IConfiguration configuration)
 		{
 			if (configuration == null)
 			{
 				throw new ArgumentNullException("configuration");
 			}
 
-			IRezolverBuilder toReturn = CreateBuilderInstance(configuration);
+			ITargetContainer toReturn = CreateBuilderInstance(configuration);
 
 			ConfigurationAdapterContext context = CreateContext(configuration);
 
@@ -141,18 +141,18 @@ namespace Rezolver.Configuration
 		}
 
 		/// <summary>
-		/// Called to construct the instance of the <see cref="IRezolverBuilder"/> into which registrations are to be loaded.
+		/// Called to construct the instance of the <see cref="ITargetContainer"/> into which registrations are to be loaded.
 		/// </summary>
 		/// <remarks>
 		/// No parsing of the configuration is to be done here (except, perhaps, if the actual implementation of 
-		/// <see cref="IRezolverBuilder"/> that is used is dependant upon, say, the type of configuration object.
+		/// <see cref="ITargetContainer"/> that is used is dependant upon, say, the type of configuration object.
 		/// 
-		/// The base behaviour is simply to create an instance of <see cref="RezolverBuilder"/>.
+		/// The base behaviour is simply to create an instance of <see cref="Builder"/>.
 		/// </remarks>
 		/// <param name="configuration">The configuration instance for which a builder is to be created.</param>
-		protected virtual IRezolverBuilder CreateBuilderInstance(IConfiguration configuration)
+		protected virtual ITargetContainer CreateBuilderInstance(IConfiguration configuration)
 		{
-			return new RezolverBuilder();
+			return new Builder();
 		}
 
 		/// <summary>
@@ -208,7 +208,7 @@ namespace Rezolver.Configuration
 		/// treated as an Assembly Reference.  
 		/// 
 		/// The function signature still allows the returning of an instruction, however, in case derived classes want to tie
-		/// this operation to an action being performed on the <see cref="IRezolverBuilder"/> later on.
+		/// this operation to an action being performed on the <see cref="ITargetContainer"/> later on.
 		/// </remarks>
 		/// <param name="entry">The entry to be processed.</param>
 		/// <param name="context">The context for the operation</param>
@@ -235,7 +235,7 @@ namespace Rezolver.Configuration
 		/// <list type="number">
 		/// <item><description>Attempt to convert the entry to an <see cref="ITypeRegistrationEntry"/></description></item>
 		/// <item><description>Parsing its type references in <see cref="ITypeRegistrationEntry.Types"/></description></item>
-		/// <item><description>Constructing an <see cref="IRezolveTarget"/> from the entry's <see cref="ITypeRegistrationEntry.TargetMetadata"/> through
+		/// <item><description>Constructing an <see cref="ITarget"/> from the entry's <see cref="ITypeRegistrationEntry.TargetMetadata"/> through
 		/// a call to its <see cref="IRezolveTargetMetadata.CreateRezolveTarget(System.Type[], ConfigurationAdapterContext, IConfigurationEntry)"/> method.</description></item>
 		/// <item><description>If that returns a non-null target, then a <see cref="RegisterInstruction"/> is created and returned.</description></item>
 		/// </list>
@@ -258,14 +258,14 @@ namespace Rezolver.Configuration
 
 			if (typeRegistrationEntry.IsMultipleRegistration)
 			{
-				List<IRezolveTarget> targets = null;
+				List<ITarget> targets = null;
 				//a multiple registration should have a MetadataList as its TargetMetadata
 				//if it doesn't, then we'll just take the one, of course
 				IRezolveTargetMetadataList metadataList = typeRegistrationEntry.TargetMetadata as IRezolveTargetMetadataList;
 				if (metadataList != null)
-					targets = new List<IRezolveTarget>(metadataList.Targets.Select(t => t.CreateRezolveTarget(targetTypes, context)));
+					targets = new List<ITarget>(metadataList.Targets.Select(t => t.CreateRezolveTarget(targetTypes, context)));
 				else
-					targets = new List<IRezolveTarget>() { typeRegistrationEntry.TargetMetadata.CreateRezolveTarget(targetTypes, context, entry) };
+					targets = new List<ITarget>() { typeRegistrationEntry.TargetMetadata.CreateRezolveTarget(targetTypes, context, entry) };
 
 				return new RegisterMultipleInstruction(targetTypes, targets, entry);
 			}

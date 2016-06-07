@@ -22,7 +22,7 @@ namespace Rezolver
 	/// 
 	/// You can control whether the created instance is an array or a List&lt;T&gt; with the 'asArray' boolean constructor argument.
 	/// </remarks>
-	public class ListTarget : RezolveTargetBase
+	public class ListTarget : TargetBase
 	{
 		/// <summary>
 		/// Gets the declared type of each element in the array or list that will be constructed.
@@ -38,10 +38,21 @@ namespace Rezolver
 		}
 
 		/// <summary>
+		/// Returns true if the <see cref="Items"/> enumerable is empty.
+		/// </summary>
+		public override bool UseFallback
+		{
+			get
+			{
+				return !Items.Any();
+			}
+		}
+
+		/// <summary>
 		/// Gets the rezolve targets that will build each individual item in the resulting list or array.
 		/// </summary>
 		/// <value>The items.</value>
-		public IEnumerable<IRezolveTarget> Items
+		public IEnumerable<ITarget> Items
 		{
 			get;
 			private set;
@@ -97,7 +108,7 @@ namespace Rezolver
 		/// All targets in the items enumerable must be non-null;items
 		/// or
 		/// All targets in the items enumerable must support the element type <paramref name="elementType"/></exception>
-		public ListTarget(Type elementType, IEnumerable<IRezolveTarget> items, bool asArray = false)
+		public ListTarget(Type elementType, IEnumerable<ITarget> items, bool asArray = false)
 		{
 			if (elementType == null)
 				throw new ArgumentNullException("elementType");

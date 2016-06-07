@@ -41,12 +41,12 @@ namespace Rezolver.Configuration
 			get { return _targets; }
 		}
 
-		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
+		protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			throw new NotSupportedException("Cannot create a single target from a metadata list.  Please call CreateRezolveTargets");
 		}
 
-		public IEnumerable<IRezolveTarget> CreateRezolveTargets(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
+		public IEnumerable<ITarget> CreateRezolveTargets(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			if (context == null) throw new ArgumentNullException("context");
 

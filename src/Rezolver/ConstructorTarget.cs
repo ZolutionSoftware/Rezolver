@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Rezolver
 {
-	public class ConstructorTarget : RezolveTargetBase
+	public class ConstructorTarget : TargetBase
 	{
 		/// <summary>
 		/// A target that helps a constructor target bind to the best matching constructor on a type
@@ -17,7 +17,7 @@ namespace Rezolver
 		/// first requested (so that's either creating an expression to give to another target, or to be compiled
 		/// for its own compiled target).
 		/// </summary>
-		private class BestMatchConstructorTarget : RezolveTargetBase
+		private class BestMatchConstructorTarget : TargetBase
 		{
 			private readonly IPropertyBindingBehaviour _propertyBindingBehaviour;
 
@@ -28,7 +28,7 @@ namespace Rezolver
 			}
 
 			private readonly object _locker = new object();
-			private IRezolveTarget _wrapped = null;
+			private ITarget _wrapped = null;
 
 			public BestMatchConstructorTarget(Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 			{
@@ -62,9 +62,9 @@ namespace Rezolver
 		protected readonly ConstructorInfo _ctor;
 		private readonly ParameterBinding[] _parameterBindings;
 
-		public ConstructorTarget(Type declaredType, ConstructorInfo ctor, params ParameterBinding[] parameterBindings)
+		public ConstructorTarget(Type type, ConstructorInfo ctor, params ParameterBinding[] parameterBindings)
 		{
-			_declaredType = declaredType;
+			_declaredType = type;
 			_ctor = ctor;
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
 		}
@@ -85,35 +85,39 @@ namespace Rezolver
 			get { return _declaredType; }
 		}
 
-		public static IRezolveTarget Auto<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Auto<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			return Auto(typeof(T), propertyBindingBehaviour);
 		}
 
 		/// <summary>
-		/// Creates a target that will create a new concrete
+		/// Creates a target that will create a new concrete instance of the <paramref name="type"/>.
+		/// 
+		/// Note - if the type is a generic type definition, t
 		/// </summary>
-		/// <param name="declaredType"></param>
+		/// <param name="type"></param>
 		/// <param name="propertyBindingBehaviour"></param>
 		/// <returns></returns>
-		public static IRezolveTarget Auto(Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			//conduct a very simple search for the constructor with the most parameters
-			declaredType.MustNotBeNull("declaredType");
+			type.MustNotBeNull(nameof(type));
+			type.MustNot(t => TypeHelpers.IsInterface(t), "Type must not be an interface", nameof(type));
+			type.MustNot(t => TypeHelpers.IsAbstract(t), "Type must not be abstract", nameof(type));
 
-			if (TypeHelpers.IsGenericTypeDefinition(declaredType))
-				return new GenericConstructorTarget(declaredType, propertyBindingBehaviour);
+			if (TypeHelpers.IsGenericTypeDefinition(type))
+				return new GenericConstructorTarget(type, propertyBindingBehaviour);
 
-			IGrouping<int, ConstructorInfo>[] ctorGroups = GetPublicConstructorGroups(declaredType);
+			IGrouping<int, ConstructorInfo>[] ctorGroups = GetPublicConstructorGroups(type);
 			//get the first group - if there's more than one constructor then we can't choose.
 			var ctorsWithMostParams = ctorGroups[0].ToArray();
 			if (ctorsWithMostParams.Length > 1)
 				throw new ArgumentException(
-					string.Format(ExceptionResources.MoreThanOneConstructorFormat, declaredType));
+					string.Format(ExceptionResources.MoreThanOneConstructorFormat, type));
 
-			var baseTarget = new ConstructorTarget(declaredType, ctorsWithMostParams[0], ParameterBinding.BindWithRezolvedArguments(ctorsWithMostParams[0]));
+			var baseTarget = new ConstructorTarget(type, ctorsWithMostParams[0], ParameterBinding.BindWithRezolvedArguments(ctorsWithMostParams[0]));
 			if (propertyBindingBehaviour != null)
-				return new ConstructorWithPropertiesTarget(baseTarget, propertyBindingBehaviour.GetPropertyBindings(declaredType));
+				return new ConstructorWithPropertiesTarget(baseTarget, propertyBindingBehaviour.GetPropertyBindings(type));
 			return baseTarget;
 		}
 
@@ -131,7 +135,7 @@ namespace Rezolver
 
 		/// <summary>
 		/// This overload restricts the target to binding the best constructor whose arguments can actually be resolved
-		/// from the <see cref="IRezolverBuilder"/> that you pass as the argument.
+		/// from the <see cref="ITargetContainer"/> that you pass as the argument.
 		/// 
 		/// This overrides the default behaviour, which is to select the constructor with the most arguments.
 		/// 
@@ -139,19 +143,19 @@ namespace Rezolver
 		/// argument, otherwise you will get inconsistent results.
 		/// </summary>
 		/// <param name="dependencyLookup">The builder that will be used to look for </param>
-		/// <param name="declaredType"></param>
+		/// <param name="type"></param>
 		/// <param name="propertyBindingBehaviour"></param>
 		/// <returns></returns>
-		public static IRezolveTarget Auto(IRezolverBuilder dependencyLookup, Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Auto(ITargetContainer dependencyLookup, Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
-			dependencyLookup.MustNotBeNull("dependencyLookup");
-			declaredType.MustNotBeNull("declaredType");
+			dependencyLookup.MustNotBeNull(nameof(dependencyLookup));
+			type.MustNotBeNull(nameof(type));
 
-			var ctorGroups = GetPublicConstructorGroups(declaredType);
+			var ctorGroups = GetPublicConstructorGroups(type);
 
 			//search all ctor groups, attempting to match each parameter to a rezolve target
 			//this is slightly cut down version of what's done by the RezolvedTarget, and not quite as clever:
-			//it only considers the current IRezolverBuilder.
+			//it only considers the current IRezolveTargetContainer.
 			var firstGroupWithMatch = ctorGroups.Select(g => new
 			{
 				paramCount = g.Key,
@@ -182,7 +186,7 @@ namespace Rezolver
 		/// <param name="newExpr"></param>
 		/// <param name="adapter"></param>
 		/// <returns></returns>
-		public static IRezolveTarget For<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr = null, IRezolveTargetAdapter adapter = null)
+		public static ITarget For<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr = null, ITargetAdapter adapter = null)
 		{
 			NewExpression newExprBody = null;
 			if (newExpr != null)
@@ -197,19 +201,19 @@ namespace Rezolver
 			return For(typeof(T), newExprBody, adapter);
 		}
 
-		public static IRezolveTarget Best<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Best<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			return new BestMatchConstructorTarget(typeof(T), propertyBindingBehaviour);
 		}
 
-		public static IRezolveTarget WithArgs<T>(IDictionary<string, IRezolveTarget> args)
+		public static ITarget WithArgs<T>(IDictionary<string, ITarget> args)
 		{
 			args.MustNotBeNull("args");
 
 			return WithArgsInternal(typeof(T), args);
 		}
 
-		public static IRezolveTarget WithArgs(Type declaredType, IDictionary<string, IRezolveTarget> args)
+		public static ITarget WithArgs(Type declaredType, IDictionary<string, ITarget> args)
 		{
 			declaredType.MustNotBeNull("declaredType");
 			args.MustNotBeNull("args");
@@ -217,7 +221,7 @@ namespace Rezolver
 			return WithArgsInternal(declaredType, args);
 		}
 
-		public static IRezolveTarget WithArgs(Type declaredType, ConstructorInfo ctor, IDictionary<string, IRezolveTarget> args)
+		public static ITarget WithArgs(Type declaredType, ConstructorInfo ctor, IDictionary<string, ITarget> args)
 		{
 			declaredType.MustNotBeNull("declaredType");
 			ctor.MustNotBeNull("ctor");
@@ -231,7 +235,7 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctor, bindings);
 		}
 
-		internal static IRezolveTarget WithArgsInternal(Type declaredType, IDictionary<string, IRezolveTarget> args)
+		internal static ITarget WithArgsInternal(Type declaredType, IDictionary<string, ITarget> args)
 		{
 			MethodBase ctor = null;
 			var bindings = ParameterBinding.BindOverload(TypeHelpers.GetConstructors(declaredType), args, out ctor);
@@ -239,7 +243,7 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, (ConstructorInfo)ctor, bindings);
 		}
 
-		internal static IRezolveTarget For(Type declaredType, NewExpression newExpr = null, IRezolveTargetAdapter adapter = null)
+		internal static ITarget For(Type declaredType, NewExpression newExpr = null, ITargetAdapter adapter = null)
 		{
 			ConstructorInfo ctor = null;
 			ParameterBinding[] parameterBindings = null;
@@ -261,7 +265,7 @@ namespace Rezolver
 			else
 			{
 				ctor = newExpr.Constructor;
-				parameterBindings = ExtractParameterBindings(newExpr, adapter ?? RezolveTargetAdapter.Default).ToArray();
+				parameterBindings = ExtractParameterBindings(newExpr, adapter ?? TargetAdapter.Default).ToArray();
 
 			}
 
@@ -270,10 +274,10 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctor, parameterBindings);
 		}
 
-		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr, IRezolveTargetAdapter adapter)
+		private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr, ITargetAdapter adapter)
 		{
 			return newExpr.Constructor.GetParameters()
-				.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, adapter.GetRezolveTarget(expression))).ToArray();
+				.Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, adapter.CreateTarget(expression))).ToArray();
 		}
 	}
 }

@@ -48,6 +48,6 @@ namespace Rezolver.Configuration
 		/// against which this target will be registered.
 		/// Please note - this doesn't mean that the target that is returned will become the target of the registration.  It might be that the
 		/// target is one that is used by a parent target that will become the target of the registration.</param>
-		IRezolveTarget CreateRezolveTarget(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry = null);
+		ITarget CreateRezolveTarget(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry = null);
 	}
 }

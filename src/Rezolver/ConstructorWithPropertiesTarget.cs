@@ -10,7 +10,7 @@ namespace Rezolver
 	/// <summary>
 	/// Wraps a constructor target so that properties can be bound also.
 	/// </summary>
-	public class ConstructorWithPropertiesTarget : RezolveTargetBase
+	public class ConstructorWithPropertiesTarget : TargetBase
 	{
 		PropertyOrFieldBinding[] _propertyBindings;
 		ConstructorTarget _nestedTarget;

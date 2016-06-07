@@ -13,7 +13,7 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection.Tests
 	{
 		protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
 		{
-			return new DefaultLifetimeScopeRezolver().Populate(serviceCollection);
+			return new ScopedContainer().Populate(serviceCollection);
 		}
 	}
 }

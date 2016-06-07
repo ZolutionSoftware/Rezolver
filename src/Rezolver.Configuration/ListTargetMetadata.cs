@@ -73,7 +73,7 @@ namespace Rezolver.Configuration
 			IsArray = isArray;
 		}
 
-		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
+		protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
 			Type elementType;
 

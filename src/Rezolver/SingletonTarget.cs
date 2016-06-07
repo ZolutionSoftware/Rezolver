@@ -11,7 +11,7 @@ namespace Rezolver
 	/// Decorates any IRezolveTarget instance inside a lazily-initialised instance which will only ever
 	/// create the target object once.
 	/// </summary>
-	public class SingletonTarget : RezolveTargetBase
+	public class SingletonTarget : TargetBase
 	{
         /// <summary>
         /// Used in ensuring the correct construction and scope tracking of a singleton instance.
@@ -19,7 +19,7 @@ namespace Rezolver
         /// Implements the ICompiledRezolveTarget interface for the single case of creating a lazy on demand (from the
         /// first RezolveContext that's passed to its GetObject method, and returning its value.
         /// </summary>
-        private class SingletonTargetLazyInitialiser : ICompiledRezolveTarget
+        private class SingletonTargetLazyInitialiser : ICompiledTarget
         {
             private Func<RezolveContext, Lazy<object>> _lazyFactory;
             private Lazy<object> _lazy;
@@ -37,7 +37,7 @@ namespace Rezolver
             /// </summary>
             /// <param name="context"></param>
             /// <returns></returns>
-            object ICompiledRezolveTarget.GetObject(RezolveContext context)
+            object ICompiledTarget.GetObject(RezolveContext context)
             {
                 if(_lazy == null)
                 {
@@ -49,10 +49,10 @@ namespace Rezolver
             }
         }
 
-        private static readonly MethodInfo ICompiledRezolveTarget_GetObject = MethodCallExtractor.ExtractCalledMethod((ICompiledRezolveTarget t) => t.GetObject(null));
+        private static readonly MethodInfo ICompiledRezolveTarget_GetObject = MethodCallExtractor.ExtractCalledMethod((ICompiledTarget t) => t.GetObject(null));
         private static readonly ConstructorInfo LazyObject_Ctor = MethodCallExtractor.ExtractConstructorCall(() => new Lazy<object>(() => (object)null));
 
-		private IRezolveTarget _innerTarget;
+		private ITarget _innerTarget;
         private readonly ConcurrentDictionary<Type, SingletonTargetLazyInitialiser> _initialisers = new ConcurrentDictionary<Type, SingletonTargetLazyInitialiser>();
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Rezolver
         /// Constructs a new instance of the <see cref="SingletonTarget"/> class.
         /// </summary>
         /// <param name="innerTarget">The target whose result (when compiled) is to be used as the singleton instance.</param>
-        public SingletonTarget(IRezolveTarget innerTarget)
+        public SingletonTarget(ITarget innerTarget)
 		{
 			innerTarget.MustNotBeNull("innerTarget");
 			_innerTarget = innerTarget;
@@ -135,7 +135,7 @@ namespace Rezolver
                     //    ICompiledRezolveTarget_GetObject, context.RezolveContextParameter);
                 });
             }
-            return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledRezolveTarget)),
+            return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledTarget)),
                    ICompiledRezolveTarget_GetObject, context.RezolveContextParameter);
             //return Expression.Property(Expression.Constant(initialiser.Lazy), "Value");
         }
@@ -161,7 +161,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static SingletonTarget Singleton(this IRezolveTarget target)
+        public static SingletonTarget Singleton(this ITarget target)
         {
             target.MustNotBeNull(nameof(target));
             return new SingletonTarget(target);

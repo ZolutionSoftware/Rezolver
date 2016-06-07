@@ -9,7 +9,7 @@ namespace Rezolver
 	/// Implements IRezolveTarget using factory function delegates.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class DelegateTarget<T> : RezolveTargetBase
+	public class DelegateTarget<T> : TargetBase
 	{
 		private readonly Type _declaredType;
 		private readonly Func<T> _factory;

@@ -62,9 +62,9 @@ namespace Rezolver.Configuration
 		/// <param name="targetTypes">The target types.</param>
 		/// <param name="context">The context.</param>
 		/// <param name="entry">The entry.</param>
-		protected override IRezolveTarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
+		protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)
 		{
-			return Scoped ? (IRezolveTarget)new ScopedTarget(Inner.CreateRezolveTarget(targetTypes, context, entry))
+			return Scoped ? (ITarget)new ScopedTarget(Inner.CreateRezolveTarget(targetTypes, context, entry))
 				: new SingletonTarget(Inner.CreateRezolveTarget(targetTypes, context, entry));
 		}
 	}

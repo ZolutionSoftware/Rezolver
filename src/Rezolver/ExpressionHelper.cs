@@ -14,13 +14,13 @@ namespace Rezolver
 	public static class ExpressionHelper
 	{
 		/// <summary>
-		/// A MethodInfo object representing the <see cref="LifetimeScopeRezolverExtensions.GetScopeRoot(ILifetimeScopeRezolver)"/> method - to aid in code generation
+		/// A MethodInfo object representing the <see cref="LifetimeScopeRezolverExtensions.GetScopeRoot(IScopedContainer)"/> method - to aid in code generation
 		/// where the target scope for tracking an object is the root scope, not the current scope.
 		/// </summary>
 		public static readonly MethodInfo Scope_GetScopeRootMethod = MethodCallExtractor.ExtractCalledMethod(() => LifetimeScopeRezolverExtensions.GetScopeRoot(null));
 
 		/// <summary>
-		/// A MethodInfo object representing the generic definition <see cref="LifetimeScopeRezolverExtensions.GetOrAdd{T}(ILifetimeScopeRezolver, RezolveContext, Func{RezolveContext, T}, bool, bool)"/>
+		/// A MethodInfo object representing the generic definition <see cref="LifetimeScopeRezolverExtensions.GetOrAdd{T}(IScopedContainer, RezolveContext, Func{RezolveContext, T}, bool, bool)"/>
 		/// </summary>
 		public static readonly MethodInfo Scope_GetOrAddGenericMethod = MethodCallExtractor.ExtractCalledMethod(() => LifetimeScopeRezolverExtensions.GetOrAdd<object>(null, null, null, false)).GetGenericMethodDefinition();
 		/// <summary>
@@ -28,7 +28,7 @@ namespace Rezolver
 		/// to a rezolver provided at run time when a caller is trying to resolve something through code built from
 		/// a target.
 		/// </summary>
-		public static readonly ParameterExpression DynamicRezolverParam = Expression.Parameter(typeof(IRezolver), "dynamicRezolver");
+		public static readonly ParameterExpression DynamicRezolverParam = Expression.Parameter(typeof(IContainer), "dynamicRezolver");
 		public static readonly ParameterExpression RezolverNameParameter = Expression.Parameter(typeof(string), "name");
 
 		public static readonly ParameterExpression RezolveContextParameter = Expression.Parameter(typeof(RezolveContext), "context");
@@ -44,8 +44,8 @@ namespace Rezolver
 		/// <param name="target"></param>
 		/// <param name="context"></param>
 		/// <returns></returns>
-		/// <remarks>Note that the <see cref="RezolveTargetCompilerBase"/> abstract class uses this method to get the expression tree
-		/// for a target that is to be compiled, and the <see cref="RezolveTargetDelegateCompiler"/> uses that expression tree
+		/// <remarks>Note that the <see cref="TargetCompilerBase"/> abstract class uses this method to get the expression tree
+		/// for a target that is to be compiled, and the <see cref="TargetDelegateCompiler"/> uses that expression tree
 		/// as-is.
 		/// 
 		/// Note, however, that some compilers might override this behaviour, or rewrite the generated expression more - in which case
@@ -54,10 +54,10 @@ namespace Rezolver
 		/// This method, therefore, is exposed to provide a surefire way to generate a whole lambda that can be compiled into an in-memory delegate
 		/// for re-use in other targets and scenarios.
 		/// 
-		/// The SingletonTarget, for example, uses this method during its own <see cref="IRezolveTarget.CreateExpression(CompileContext)"/>
+		/// The SingletonTarget, for example, uses this method during its own <see cref="ITarget.CreateExpression(CompileContext)"/>
 		/// implementation to get a nested lambda for the wrapped target, so that it can dynamically construct a Lazy whose factory
 		/// method is the code we'd normally produce for a target.</remarks>
-		public static Expression GetLambdaBodyForTarget(IRezolveTarget target, CompileContext context)
+		public static Expression GetLambdaBodyForTarget(ITarget target, CompileContext context)
 		{
 			context = new CompileContext(context, context.TargetType, true, context.SuppressScopeTracking);
 			var toBuild = target.CreateExpression(context);
@@ -87,7 +87,7 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// First gets the lambda body using <see cref="GetLambdaBodyForTarget(IRezolveTarget, CompileContext)"/>, then
+		/// First gets the lambda body using <see cref="GetLambdaBodyForTarget(ITarget, CompileContext)"/>, then
 		/// passes that as the body for the returned expression, using also the <see cref="CompileContext.RezolveContextParameter"/>
 		/// <see cref="ParameterExpression"/> from the <paramref name="context"/> parameter as the expression for the RezolveContext that's
 		/// passed to the compiled method when invoked.
@@ -95,7 +95,7 @@ namespace Rezolver
 		/// <param name="target"></param>
 		/// <param name="context"></param>
 		/// <returns></returns>
-		public static Expression<Func<RezolveContext, object>> GetResolveLambdaForTarget(IRezolveTarget target, CompileContext context)
+		public static Expression<Func<RezolveContext, object>> GetResolveLambdaForTarget(ITarget target, CompileContext context)
 		{
 			return GetResolveLambdaForExpression(GetLambdaBodyForTarget(target, context), context);
 		}

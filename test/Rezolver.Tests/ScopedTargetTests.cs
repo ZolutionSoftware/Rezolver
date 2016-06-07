@@ -23,7 +23,7 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldCreateOneInstanceOfScopedService()
         {
-            var resolver = new DefaultLifetimeScopeRezolver();
+            var resolver = new ScopedContainer();
             resolver.RegisterScoped<ScopedObject>();
 
             var instance1 = resolver.Resolve<ScopedObject>();
@@ -37,7 +37,7 @@ namespace Rezolver.Tests
         {
             //using block here is not really needed, of course, as we're not 
             //creating a disposable.
-            using (var resolver = new DefaultLifetimeScopeRezolver())
+            using (var resolver = new ScopedContainer())
             {
                 resolver.RegisterScoped<ScopedObject>();
 

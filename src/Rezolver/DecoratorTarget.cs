@@ -12,7 +12,7 @@ namespace Rezolver
 	/// <remarks>Implementation note: the class implements both IRezolveTarget and IRezolveTargetEntry, which is
 	/// detected by the RezolverBuilder-deriving classes so that the internal registrations of targets against types
 	/// can be manipulated correctly to support these types of scenarios.</remarks>
-	public class DecoratorTarget : RezolveTargetBase, IRezolveTargetEntry
+	public class DecoratorTarget : TargetBase, IRezolveTargetEntry
 	{
 		private class DecoratorTargetProxyEntry : IRezolveTargetEntry
 		{
@@ -31,7 +31,7 @@ namespace Rezolver
 				}
 			}
 
-			public IRezolveTarget DefaultTarget
+			public ITarget DefaultTarget
 			{
 				get
 				{
@@ -39,7 +39,7 @@ namespace Rezolver
 				}
 			}
 
-			public IRezolverBuilder ParentBuilder
+			public ITargetContainer ParentBuilder
 			{
 				get
 				{
@@ -55,7 +55,7 @@ namespace Rezolver
 				}
 			}
 
-			public IEnumerable<IRezolveTarget> Targets
+			public IEnumerable<ITarget> Targets
 			{
 				get
 				{
@@ -71,12 +71,12 @@ namespace Rezolver
 				}
 			}
 
-			public void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
+			public void AddTarget(ITarget target, bool checkForDuplicates = false)
 			{
 				_entry.AddTarget(target, checkForDuplicates);
 			}
 
-			public void Attach(IRezolverBuilder parentBuilder, IRezolveTargetEntry replacing = null)
+			public void Attach(ITargetContainer parentBuilder, IRezolveTargetEntry replacing = null)
 			{
 				//only thing that doesn't get forwarded.  Why?  because of the way we
 				//implement decoration during compilation - i.e. with additional registrations
@@ -106,7 +106,7 @@ namespace Rezolver
 		/// </summary>
 		public override Type DeclaredType { get; }
 
-		public IRezolverBuilder ParentBuilder
+		public ITargetContainer ParentBuilder
 		{
 			get; private set;
 		}
@@ -119,7 +119,7 @@ namespace Rezolver
 			}
 		}
 
-		public IRezolveTarget DefaultTarget
+		public ITarget DefaultTarget
 		{
 			get
 			{
@@ -132,7 +132,7 @@ namespace Rezolver
 		/// Implements the property by returning transient copies of this decorator with individual 
 		/// targets from the decorated entry's <see cref="IRezolveTargetEntry.Targets"/> enumerable.
 		/// </summary>
-		public IEnumerable<IRezolveTarget> Targets
+		public IEnumerable<ITarget> Targets
 		{
 			get
 			{
@@ -171,11 +171,11 @@ namespace Rezolver
 
 		}
 
-		public void AddTarget(IRezolveTarget target, bool checkForDuplicates = false)
+		public void AddTarget(ITarget target, bool checkForDuplicates = false)
 		{
 			ThrowIfInvalid();
 			//TODO: Consider adding the CreateEntry metehod back into the RezolverBuilder class and 
-			//then extracting it to the IRezolverBuilder interface so it can be called here.
+			//then extracting it to the IRezolveTargetContainer interface so it can be called here.
 			if (_decorated == null)
 				_decorated = new RezolveTargetEntry(ParentBuilder, RegisteredType, target);
 			else
@@ -187,7 +187,7 @@ namespace Rezolver
 
 		private IRezolveTargetEntry _decorated;
 
-		public void Attach(IRezolverBuilder parentBuilder, IRezolveTargetEntry existing)
+		public void Attach(ITargetContainer parentBuilder, IRezolveTargetEntry existing)
 		{
 			parentBuilder.MustNotBeNull(nameof(parentBuilder));
 			//allow multiple attaches to the same builder.
@@ -218,7 +218,7 @@ namespace Rezolver
 		/// <param name="parentBuilder"></param>
 		/// <param name="decorated"></param>
 		/// <param name="decoratorType"></param>
-		private DecoratorTarget(DecoratorTarget source, IRezolveTarget singleTarget)
+		private DecoratorTarget(DecoratorTarget source, ITarget singleTarget)
 		{
 			DecoratedType = source.DecoratedType;
 			DeclaredType = source.DeclaredType;
