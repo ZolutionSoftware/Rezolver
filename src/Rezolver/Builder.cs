@@ -23,21 +23,7 @@ namespace Rezolver
 			if (!target.SupportsType(type))
 				throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, type), "target");
 
-			ITargetContainer container = null;
-			//if the type we're registering is a generic type, then we use a generic container and register it inside that
-			if (TypeHelpers.IsGenericType(type))
-			{
-				var genericTypeDef = type.GetGenericTypeDefinition();
-				container = _targets.FetchContainer(genericTypeDef);
-				if (container == null)
-					_targets.RegisterContainer(genericTypeDef, container = new GenericTargetContainer(genericTypeDef));
-				
-				container.Register(target, type);
-			}
-			else
-			{
-				_targets.Register(target, type);
-			}
+			_targets.Register(target, type);
 		}
 
 		/// <summary>
@@ -49,30 +35,17 @@ namespace Rezolver
 		/// <returns></returns>
 		public ITargetContainer FetchContainer(Type type)
 		{
-			if (TypeHelpers.IsGenericType(type))
-				return _targets.FetchContainer(type.GetGenericTypeDefinition());
-
 			return _targets.FetchContainer(type);
 		}
 
 		public virtual ITarget Fetch(Type type)
 		{
-			type.MustNotBeNull(nameof(type));
-
-			ITargetContainer entry = FetchContainer(type);
-			if (entry != null)
-				return entry.Fetch(type);
-			return null;
+			return _targets.Fetch(type);
 		}
 
 		public virtual IEnumerable<ITarget> FetchAll(Type type)
 		{
-			type.MustNotBeNull(nameof(type));
-
-			var entry = FetchContainer(type);
-			if (entry != null)
-				return entry.FetchAll(type);
-			return Enumerable.Empty<ITarget>();
+			return _targets.FetchAll(type);
 		}
 
 		public void RegisterContainer(Type type, ITargetContainer container)
@@ -82,9 +55,9 @@ namespace Rezolver
 			_targets.RegisterContainer(type, container);
 		}
 
-		public ITargetContainerOwner CombineWith(ITargetContainerOwner existing, Type type)
+		public ITargetContainer CombineWith(ITargetContainer existing, Type type)
 		{
-			throw new NotSupportedException("The builder type cannot be inserted into another container");
+			throw new NotSupportedException();
 		}
 
 		public Builder(bool autoRezolveIEnumerable = true)

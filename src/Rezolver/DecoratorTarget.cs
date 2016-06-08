@@ -12,8 +12,10 @@ namespace Rezolver
 	/// <remarks>Implementation note: the class implements both IRezolveTarget and IRezolveTargetEntry, which is
 	/// detected by the RezolverBuilder-deriving classes so that the internal registrations of targets against types
 	/// can be manipulated correctly to support these types of scenarios.</remarks>
-	public class DecoratorTarget : TargetBase, IRezolveTargetEntry
+	public class DecoratorTarget : TargetBase, ITargetContainer
 	{
+		private TargetListContainer _innerList;
+		private ITargetContainer _decoratedContainer;
 		private class DecoratorTargetProxyEntry : IRezolveTargetEntry
 		{
 			
@@ -94,7 +96,6 @@ namespace Rezolver
 			}
 		}
 
-		private bool _isAttached;
 		/// <summary>
 		/// The type that is decorated by this target.
 		/// 
@@ -105,11 +106,6 @@ namespace Rezolver
 		/// The type that will be created, decorating the <see cref="DecoratedType"/>
 		/// </summary>
 		public override Type DeclaredType { get; }
-
-		public ITargetContainer ParentBuilder
-		{
-			get; private set;
-		}
 
 		public Type RegisteredType
 		{
@@ -143,23 +139,9 @@ namespace Rezolver
 				}
 			}
 		}
-
-		public bool UseFallback
-		{
-			get
-			{
-				return false;
-			}
-		}
-		private void ThrowIfInvalid()
-		{
-			if (ParentBuilder == null)
-				throw new InvalidOperationException("This target cannot be used until Attach has been called");
-		}
-
+				
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			ThrowIfInvalid();
 			//TODO: This does not honour IEnumerables yet
 			var newContext = new CompileContext(context, inheritSharedExpressions: true);
 			//have to proxy the decorated entry so that the Attach operation that the registration
@@ -173,7 +155,6 @@ namespace Rezolver
 
 		public void AddTarget(ITarget target, bool checkForDuplicates = false)
 		{
-			ThrowIfInvalid();
 			//TODO: Consider adding the CreateEntry metehod back into the RezolverBuilder class and 
 			//then extracting it to the IRezolveTargetContainer interface so it can be called here.
 			if (_decorated == null)
@@ -204,7 +185,28 @@ namespace Rezolver
 			_decorated = existing;
 		}
 
-		
+		public void Register(ITarget target, Type serviceType = null)
+		{
+			if (_decoratedContainer == null) _decoratedContainer = new TargetListContainer(DecoratedType);
+			_decoratedContainer.Register(target, serviceType);
+		}
+
+		public ITarget Fetch(Type type)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<ITarget> FetchAll(Type type)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ITargetContainer CombineWith(ITargetContainer existing, Type type)
+		{
+			_decoratedContainer = existing;
+			return this;
+		}
+
 		public DecoratorTarget(Type decoratedType, Type decoratorType)
 		{
 			decoratedType.MustNotBeNull(nameof(decoratedType));

@@ -63,6 +63,11 @@ namespace Rezolver
 			return TargetsList.AsReadOnly();
 		}
 
+		public ITargetContainer CombineWith(ITargetContainer existing, Type type)
+		{
+			throw new NotSupportedException();
+		}
+
 		public ITarget this[int index]
 		{
 			get

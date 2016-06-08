@@ -11,14 +11,20 @@ namespace Rezolver
 	/// </summary>
 	/// <remarks>
 	/// This type is not thread-safe
+	/// 
+	/// Note that for generic type, a special container is registered first against the 
+	/// open generic version of the type, with concrete (closed) generics being registered within
+	/// that.
 	/// </remarks>
 	public class TargetDictionaryContainer : ITargetContainer, ITargetContainerOwner
 	{
-		private readonly Dictionary<Type, ITargetContainer> _targets = new Dictionary<Type, ITargetContainer>();
+		private readonly Dictionary<Type, ITargetContainer> _targets 
+			= new Dictionary<Type, ITargetContainer>();
 
 		public IEnumerable<Type> AllRegisteredTypes { get { return _targets.Keys; } }
 		public virtual ITarget Fetch(Type type)
 		{
+			type.MustNotBeNull(nameof(type));
 			var container = FetchContainer(type);
 			if (container == null) return null;
 			return container.Fetch(type);
@@ -26,13 +32,15 @@ namespace Rezolver
 
 		public virtual IEnumerable<ITarget> FetchAll(Type type)
 		{
+			type.MustNotBeNull(nameof(type));
 			var container = FetchContainer(type);
 			if (container == null) return Enumerable.Empty<ITarget>();
 			return container.FetchAll(type);
 		}
 
 		/// <summary>
-		/// Obtains a child container which was previously registered by the passed <paramref name="type"/>.
+		/// Obtains a child container that was previously registered by the passed
+		/// <paramref name="type"/>.
 		/// 
 		/// Returns null if no entry is found.
 		/// </summary>
@@ -40,51 +48,44 @@ namespace Rezolver
 		/// <returns></returns>
 		public virtual ITargetContainer FetchContainer(Type type)
 		{
-			ITargetContainer toReturn;
-			_targets.TryGetValue(type, out toReturn);
+			type.MustNotBeNull(nameof(type));
+			ITargetContainer toReturn = null;
+			if (TypeHelpers.IsGenericType(type))
+				_targets.TryGetValue(type.GetGenericTypeDefinition(), out toReturn);
+			else
+				_targets.TryGetValue(type, out toReturn);
+
 			return toReturn;
 		}
 
 		public virtual void RegisterContainer(Type type, ITargetContainer container)
 		{
+			type.MustNotBeNull(nameof(type));
+			container.MustNotBeNull(nameof(container));
 			ITargetContainer existing;
 			_targets.TryGetValue(type, out existing);
-			//if there is already another container registered, we have to decide which one becomes
-			//registered and which one becomes the new child.
+			//if there is already another container registered, we attempt to combine the two, prioritising
+			//the new container over the old one but trying the reverse operation if that fails.
 			if (existing != null)
 			{
-				var existingAsOwner = existing as ITargetContainerOwner;
-				var containerAsOwner = container as ITargetContainerOwner;
-				//decision is based on which of the two containers are container owners, i.e, capable
-				//of storing other containers.
-				//if the existing one is, but the new one isn't, then the new one gets added to the existing
-				//if the existing one isn't, but the new one is, then the existing one gets added to the new one 
-				//	and the new one replaces the existing one - using the Replace
-				//if they both are, then we use the 
-				if (containerAsOwner != null)
+				//ask the 'new' one how it wishes to be combined with the other or, if that doesn't support
+				//combining, then try the existing container and see if that can.
+				//If neither can (NotSupportedException is expected here) then this 
+				//operation fails.
+				try
 				{
-					if (existingAsOwner != null)
-					{
-						//both are container owners, so ask the 'new' one how it wishes to be combined with the other.
-						_targets[type] = containerAsOwner.CombineWith(existingAsOwner, type);
-					}
-					else
-					{
-						//new container replaces the old one, and the old one is registered to the new one
-						//under the registration type
-						containerAsOwner.RegisterContainer(type, existing);
-						_targets[type] = container;
-					}
+					_targets[type] = container.CombineWith(existing, type);
 				}
-				else
+				catch(NotSupportedException)
 				{
-					if (existingAsOwner != null)
+					try
 					{
-						existingAsOwner.RegisterContainer(type, container);
+						_targets[type] = existing.CombineWith(container, type);
 					}
-					else
-						//this is only temporary I think - until we have a scenario where we do need to do this.
-						throw new ArgumentException("A container is already registered for this type", nameof(type));
+					catch (NotSupportedException)
+					{
+						throw new ArgumentException($"Cannot register the container because a container has already been registered for the type { type } and neither container supports the CombineWith operation");
+					}
 				}
 			}
 			else //no existing container - simply add it in.
@@ -96,21 +97,57 @@ namespace Rezolver
 			target.MustNotBeNull(nameof(target));
 			serviceType = serviceType ?? target.DeclaredType;
 
-			ITargetContainer container = null;
-
-			_targets.TryGetValue(serviceType, out container);
-
-			if (container != null)
-				container.Register(target, serviceType);
+			if (target is ITargetContainer)
+			{
+				RegisterContainer(serviceType, (ITargetContainer)target);
+			}
 			else
-				_targets[serviceType] = CreateContainer(target, serviceType);
+			{
+				ITargetContainer container = FetchContainer(serviceType);
+				if(container == null)
+					container = CreateContainer(serviceType, target);
+
+				container.Register(target, serviceType);
+			}
 		}
 
-		protected virtual ITargetContainer CreateContainer(ITarget target, Type serviceType)
+		/// <summary>
+		/// Called by <see cref="Register(ITarget, Type)"/> to create and register the container 
+		/// instance most suited for the passed target.  For most types, the base implementation 
+		/// will create a <see cref="TargetListContainer"/>.
+		/// 
+		/// For generic types, it call <see cref="CreateGenericTypeDefContainer( Type,ITarget)"/>, 
+		/// passing the generic type definition (open generic) of that generic instead.
+		/// <param name="serviceType"></param>
+		/// <param name="target">The initial target for which the container is being created.
+		/// Can be null.  Note - the function is not expected to add this target to the new
+		/// container.</param>
+		/// <returns></returns>
+		protected virtual ITargetContainer CreateContainer(Type serviceType, ITarget target)
 		{
-			return new TargetListContainer(serviceType, target);
+			ITargetContainer created = null;
+			if (TypeHelpers.IsGenericType(serviceType))
+			{
+				serviceType = serviceType.GetGenericTypeDefinition();
+				created = CreateGenericTypeDefContainer(serviceType, target);
+			}
+			else
+				created = new TargetListContainer(serviceType);
+
+			RegisterContainer(serviceType, created);
+			return created;
 		}
 
+		/// <summary>
+		/// Called by the base implementation of <see cref="CreateContainer( Type,ITarget)"/>
+		/// </summary>
+		/// <param name="genericTypeDefinition">Will be an open generic type (generic type definition)</param>
+		/// <param name="target">The initial target for which the container is being constructed</param>
+		/// <returns>The base implementation always creates an instance of <see cref="CreateGenericTypeDefContainer( Type,ITarget)"/></returns>
+		protected virtual ITargetContainer CreateGenericTypeDefContainer(Type genericTypeDefinition, ITarget target)
+		{
+			return new GenericTargetContainer(genericTypeDefinition);
+		}
 
 		/// <summary>
 		/// Always adds this container into the <paramref name="existing"/> container as a child.
@@ -118,10 +155,9 @@ namespace Rezolver
 		/// <param name="existing"></param>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		public virtual ITargetContainerOwner CombineWith(ITargetContainerOwner existing, Type type)
+		public virtual ITargetContainer CombineWith(ITargetContainer existing, Type type)
 		{
-			existing.RegisterContainer(type, this);
-			return existing;
+			throw new NotSupportedException();
 		}
 	}
 }

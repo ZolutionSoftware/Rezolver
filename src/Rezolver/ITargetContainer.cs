@@ -24,6 +24,20 @@ namespace Rezolver
 		/// <param name="type">Required.  The type to be searched.</param>
 		/// <returns></returns>
 		ITarget Fetch(Type type);
-		IEnumerable<ITarget> FetchAll(Type type);	
+		IEnumerable<ITarget> FetchAll(Type type);
+
+		/// <summary>
+		/// If supported by the implementation, this gets the container that represents the result of combining this container to an <paramref name="existing"/> container as part of a
+		/// registration inside another <see cref="ITargetContainerOwner"/>.
+		/// 
+		/// Used most frequently in implementations of <see cref="ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)"/> when a container owner is already registered
+		/// against the type, and a new container owner is then registered against the same type.
+		/// </summary>
+		/// <param name="existing">The existing <see cref="ITargetContainer"/> instance that this instance is to be combined with</param>
+		/// <param name="type">The type that the combined container owner will be registered under.</param>
+		/// <returns></returns>
+		/// <exception cref="System.NotSupportedException">If this container doesn't support being combined with the other.
+		/// </exception>
+		ITargetContainer CombineWith(ITargetContainer existing, Type type);
 	}
 }
