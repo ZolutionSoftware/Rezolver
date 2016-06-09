@@ -53,16 +53,16 @@ namespace Rezolver.Tests
 			Assert.Equal("OMG: Hello World", result.DoSomething());
 		}
 
-		[Fact]
-		public void ShouldUseGenericDecorator()
-		{
-			Builder builder = new Builder();
-			builder.RegisterType<StringHandler, IHandler<string>>();
-			builder.RegisterType<DoubleHandler, IHandler<double>>();
-			builder.Register(new DecoratorTarget(typeof(IHandler<>), typeof(GenericDecoratingHandler<>)));
-			var rezolver = new Container(builder);
-			var result = rezolver.Resolve<IHandler<string>>();
-			Assert.IsType<GenericDecoratingHandler<string>>(result);
-		}
+		//[Fact]
+		//public void ShouldUseGenericDecorator()
+		//{
+		//	Builder builder = new Builder();
+		//	builder.RegisterType<StringHandler, IHandler<string>>();
+		//	builder.RegisterType<DoubleHandler, IHandler<double>>();
+		//	builder.Register(new DecoratorTarget(typeof(IHandler<>), typeof(GenericDecoratingHandler<>)));
+		//	var rezolver = new Container(builder);
+		//	var result = rezolver.Resolve<IHandler<string>>();
+		//	Assert.IsType<GenericDecoratingHandler<string>>(result);
+		//}
 	}
 }

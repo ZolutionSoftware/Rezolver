@@ -343,5 +343,10 @@ namespace Rezolver
 		{
 			return _rezolverBuilder.FetchAll(type);
 		}
+
+		public ITargetContainer CombineWith(ITargetContainer existing, Type type)
+		{
+			throw new NotSupportedException();
+		}
 	}
 }

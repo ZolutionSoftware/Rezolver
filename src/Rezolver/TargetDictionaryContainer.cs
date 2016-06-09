@@ -18,7 +18,7 @@ namespace Rezolver
 	/// </remarks>
 	public class TargetDictionaryContainer : ITargetContainer, ITargetContainerOwner
 	{
-		private readonly Dictionary<Type, ITargetContainer> _targets 
+		private readonly Dictionary<Type, ITargetContainer> _targets
 			= new Dictionary<Type, ITargetContainer>();
 
 		public IEnumerable<Type> AllRegisteredTypes { get { return _targets.Keys; } }
@@ -49,12 +49,8 @@ namespace Rezolver
 		public virtual ITargetContainer FetchContainer(Type type)
 		{
 			type.MustNotBeNull(nameof(type));
-			ITargetContainer toReturn = null;
-			if (TypeHelpers.IsGenericType(type))
-				_targets.TryGetValue(type.GetGenericTypeDefinition(), out toReturn);
-			else
-				_targets.TryGetValue(type, out toReturn);
-
+			ITargetContainer toReturn;
+			_targets.TryGetValue(type, out toReturn);
 			return toReturn;
 		}
 
@@ -62,6 +58,7 @@ namespace Rezolver
 		{
 			type.MustNotBeNull(nameof(type));
 			container.MustNotBeNull(nameof(container));
+
 			ITargetContainer existing;
 			_targets.TryGetValue(type, out existing);
 			//if there is already another container registered, we attempt to combine the two, prioritising
@@ -76,7 +73,7 @@ namespace Rezolver
 				{
 					_targets[type] = container.CombineWith(existing, type);
 				}
-				catch(NotSupportedException)
+				catch (NotSupportedException)
 				{
 					try
 					{
@@ -97,18 +94,11 @@ namespace Rezolver
 			target.MustNotBeNull(nameof(target));
 			serviceType = serviceType ?? target.DeclaredType;
 
-			if (target is ITargetContainer)
-			{
-				RegisterContainer(serviceType, (ITargetContainer)target);
-			}
-			else
-			{
-				ITargetContainer container = FetchContainer(serviceType);
-				if(container == null)
-					container = CreateContainer(serviceType, target);
+			ITargetContainer container = FetchContainer(serviceType);
+			if (container == null)
+				container = CreateContainer(serviceType, target);
 
-				container.Register(target, serviceType);
-			}
+			container.Register(target, serviceType);
 		}
 
 		/// <summary>
@@ -125,29 +115,13 @@ namespace Rezolver
 		/// <returns></returns>
 		protected virtual ITargetContainer CreateContainer(Type serviceType, ITarget target)
 		{
-			ITargetContainer created = null;
-			if (TypeHelpers.IsGenericType(serviceType))
-			{
-				serviceType = serviceType.GetGenericTypeDefinition();
-				created = CreateGenericTypeDefContainer(serviceType, target);
-			}
-			else
-				created = new TargetListContainer(serviceType);
+			var created = new TargetListContainer(serviceType);
 
 			RegisterContainer(serviceType, created);
 			return created;
 		}
 
-		/// <summary>
-		/// Called by the base implementation of <see cref="CreateContainer( Type,ITarget)"/>
-		/// </summary>
-		/// <param name="genericTypeDefinition">Will be an open generic type (generic type definition)</param>
-		/// <param name="target">The initial target for which the container is being constructed</param>
-		/// <returns>The base implementation always creates an instance of <see cref="CreateGenericTypeDefContainer( Type,ITarget)"/></returns>
-		protected virtual ITargetContainer CreateGenericTypeDefContainer(Type genericTypeDefinition, ITarget target)
-		{
-			return new GenericTargetContainer(genericTypeDefinition);
-		}
+	
 
 		/// <summary>
 		/// Always adds this container into the <paramref name="existing"/> container as a child.

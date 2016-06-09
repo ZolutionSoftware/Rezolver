@@ -202,10 +202,10 @@ namespace Rezolver
 			builder.Register(target, aliasType);
 		}
 
-		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainer builder)
+		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainerOwner builder)
 		{
 			builder.MustNotBeNull(nameof(builder));
-			builder.Register(new DecoratorTarget(typeof(TDecorated), typeof(TDecorator)));
+			builder.RegisterContainer(typeof(TDecorated), new DecoratorTarget(typeof(TDecorator), typeof(TDecorated)));
 		}
 	}
 }
