@@ -207,5 +207,14 @@ namespace Rezolver
 			builder.MustNotBeNull(nameof(builder));
 			builder.RegisterContainer(typeof(TDecorated), new DecoratorTarget(typeof(TDecorator), typeof(TDecorated)));
 		}
+
+		public static void RegisterDecorator(this ITargetContainerOwner builder, Type decoratorType, Type decoratedType)
+		{
+			builder.MustNotBeNull(nameof(builder));
+			decoratorType.MustNotBeNull(nameof(decoratorType));
+			decoratedType.MustNotBeNull(nameof(decoratedType));
+
+			builder.RegisterContainer(decoratedType, new DecoratorTarget(decoratorType, decoratedType));
+		}
 	}
 }

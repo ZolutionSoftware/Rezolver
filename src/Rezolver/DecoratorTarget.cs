@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
+	/// <summary>
+	/// Implements decoration in an <see cref="ITargetContainer"/>
+	/// </summary>
 	public class DecoratorTarget : ITargetContainer
 	{
 		private class DecoratingTarget : TargetBase
@@ -21,21 +24,28 @@ namespace Rezolver
 			private Type _decoratorType;
 			private ITarget _decorated;
 			private Type _type;
+			private ITarget _innerTarget;
 
 			public DecoratingTarget(Type decoratorType, ITarget decorated, Type type)
 			{
 				_decoratorType = decoratorType;
 				_decorated = decorated;
 				_type = type;
+				//TODO: Allow a constructor to be supplied explicitly and potentially with parameter bindings
+				_innerTarget = ConstructorTarget.Auto(_decoratorType);
 			}
 
 			protected override Expression CreateExpressionBase(CompileContext context)
 			{
 				var newContext = new CompileContext(context, inheritSharedExpressions: true);
 				newContext.Register(_decorated, _type);
-				var ctorTarget = ConstructorTarget.Auto(_decoratorType);
-				var expr = ctorTarget.CreateExpression(newContext);
+				var expr = _innerTarget.CreateExpression(newContext);
 				return expr;
+			}
+
+			public override bool SupportsType(Type type)
+			{
+				return _innerTarget.SupportsType(type);
 			}
 		}
 
@@ -77,9 +87,22 @@ namespace Rezolver
 
 		public void Register(ITarget target, Type serviceType = null)
 		{
-			if (_inner == null) _inner = new TargetListContainer(serviceType, target);
-			else
-				_inner.Register(target, serviceType);
+			if (_inner == null)
+			{
+				//similar logic to the Builder class here - if the type we're decorating is a generic 
+				//then we will use a GenericTargetContainer.  Otherwise, we'll use a TargetListContainer
+				if (TypeHelpers.IsGenericType(_decoratedType))
+				{
+					_inner = new GenericTargetContainer(
+						TypeHelpers.IsGenericTypeDefinition(_decoratedType) ?
+							_decoratedType
+							: _decoratedType.GetGenericTypeDefinition());
+				}
+				else
+					_inner = new TargetListContainer(serviceType);
+			}
+
+			_inner.Register(target, serviceType);
 		}
 	}
 }

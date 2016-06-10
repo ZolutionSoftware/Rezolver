@@ -243,8 +243,10 @@ namespace Rezolver
 		/// <summary>
 		/// Creates a new CompileContext using an existing one as a template.
 		/// </summary>
-		/// <param name="parentContext">Used to seed the compilation stack, rezolver and rezolve context parameter properties.</param>
-		/// <param name="targetType">The target type that is expected to be compiled.</param>
+		/// <param name="parentContext">Used to seed the compilation stack, rezolver, rezolve context parameter and optionally
+		/// the target type (if you pass null for <paramref name="targetType"/>.</param>
+		/// <param name="targetType">The target type that is expected to be compiled, or null to inherit
+		/// the <paramref name="parentContext"/>'s <see cref="CompileContext.TargetType"/> property.</param>
 		/// <param name="inheritSharedExpressions">If true, then the <see cref="SharedExpressions"/> for this context will be shared
 		/// from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
 		/// false, however if you are chaining multiple targets' expressions together you will need to pass true.</param>
@@ -255,7 +257,7 @@ namespace Rezolver
 		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false, bool suppressScopeTracking = false)
 			: this(parentContext, inheritSharedExpressions, suppressScopeTracking)
 		{
-			_targetType = targetType;
+			_targetType = targetType ?? parentContext.TargetType;
 		}
 
 		/// <summary>
