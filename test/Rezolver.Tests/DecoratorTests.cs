@@ -127,6 +127,20 @@ namespace Rezolver.Tests
 			Assert.Equal("((This is a string: Hello World) Decorated) Decorated again :)", result.Handle("Hello World"));
 		}
 
+		public void ShouldDecorateOnlyOneClosedGeneric()
+		{
+			Builder builder = new Builder();
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
+			builder.RegisterDecorator<GenericDecoratingHandler<string>, IHandler<string>>();
+			var rezolver = new Container(builder);
+			var result1 = rezolver.Resolve<IHandler<string>>();
+			var result2 = rezolver.Resolve<IHandler<double>>();
+
+			Assert.IsType<DoubleHandler>(result2);
+			Assert.IsType<GenericDecoratingHandler<string>>(result1);
+		}
+
 		[Fact]
 		public void ShouldInjectAdditionalDecoratorForOneClosedGeneric()
 		{
@@ -148,6 +162,35 @@ namespace Rezolver.Tests
 			Assert.IsType<GenericDecoratingHandler<string>>(result2);
 			var handled = result2.Handle("Hello World");
 			Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
+		}
+
+		[Fact]
+		public void ShouldInjectAdditionDecorateForOneClosedGenericAddedBeforeRegistrations()
+		{
+			//as above, but checking that it works when the decorators are applied first
+			Builder builder = new Builder();
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
+
+			var rezolver = new Container(builder);
+			var result = rezolver.Resolve<IHandler<double>>();
+			var result2 = rezolver.Resolve<IHandler<string>>();
+			Assert.IsType<GenericDecoratingHandler<double>>(result);
+			Assert.IsType<GenericDecoratingHandler<string>>(result2);
+			var handled = result2.Handle("Hello World");
+			Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
+		}
+
+		[Fact]
+		public void ShouldDecorateGenericHandler()
+		{
+			Builder builder = new Builder();
+			builder.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			var rezolver = new Container(builder);
+			Assert.IsType<GenericDecoratingHandler<string>>(rezolver.Resolve<IHandler<string>>());
 		}
 	}
 }

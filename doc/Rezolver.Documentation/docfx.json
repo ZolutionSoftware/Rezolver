@@ -10,7 +10,7 @@
           "exclude": [
             "**/obj/**",
             "**/bin/**",
-            "_site/**"
+            "learn-rezolver/**"
           ]
         }
       ],
@@ -35,7 +35,7 @@
         ],
         "exclude": [
           "obj/**",
-          "_site/**"
+          "learn-rezolver/**"
         ]
       }
     ],
@@ -46,7 +46,7 @@
         ],
         "exclude": [
           "obj/**",
-          "_site/**"
+          "learn-rezolver/**"
         ]
       }
     ],
@@ -57,11 +57,11 @@
         ],
         "exclude": [
           "obj/**",
-          "_site/**"
+          "learn-rezolver/**"
         ]
       }
     ],
-    "dest": "_site",
+    "dest": "learn-rezolver",
     "template": [
       "default"
     ]
