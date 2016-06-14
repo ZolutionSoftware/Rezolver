@@ -9,7 +9,7 @@ namespace Rezolver
 	/// <summary>
 	/// Implements decoration in an <see cref="ITargetContainer"/>
 	/// </summary>
-	public class DecoratorTarget : ITargetContainer
+	public class DecoratorTarget : ITargetContainerOwner
 	{
 		private class DecoratingTarget : TargetBase
 		{
@@ -58,6 +58,23 @@ namespace Rezolver
 			_decoratorType = decoratorType;
 			_decoratedType = decoratedType;
 		}
+
+		private void EnsureInnerContainer()
+		{
+			if (_inner != null) return;
+			//similar logic to the Builder class here - if the type we're decorating is a generic 
+			//then we will use a GenericTargetContainer.  Otherwise, we'll use a TargetListContainer
+			if (TypeHelpers.IsGenericType(_decoratedType))
+			{
+				_inner = new GenericTargetContainer(
+					TypeHelpers.IsGenericTypeDefinition(_decoratedType) ?
+						_decoratedType
+						: _decoratedType.GetGenericTypeDefinition());
+			}
+			else
+				_inner = new TargetListContainer(_decoratedType);
+		}
+
 		public ITargetContainer CombineWith(ITargetContainer existing, Type type)
 		{
 			if (_inner != null)
@@ -87,22 +104,26 @@ namespace Rezolver
 
 		public void Register(ITarget target, Type serviceType = null)
 		{
-			if (_inner == null)
-			{
-				//similar logic to the Builder class here - if the type we're decorating is a generic 
-				//then we will use a GenericTargetContainer.  Otherwise, we'll use a TargetListContainer
-				if (TypeHelpers.IsGenericType(_decoratedType))
-				{
-					_inner = new GenericTargetContainer(
-						TypeHelpers.IsGenericTypeDefinition(_decoratedType) ?
-							_decoratedType
-							: _decoratedType.GetGenericTypeDefinition());
-				}
-				else
-					_inner = new TargetListContainer(serviceType);
-			}
+			EnsureInnerContainer();
 
 			_inner.Register(target, serviceType);
+		}
+
+		public ITargetContainer FetchContainer(Type type)
+		{
+			EnsureInnerContainer();
+			if (_inner is ITargetContainerOwner)
+				return ((ITargetContainerOwner)_inner).FetchContainer(type);
+			throw new InvalidOperationException("This decorator must be decorating another owner, or be decorating a generic type");
+		}
+
+		public void RegisterContainer(Type type, ITargetContainer container)
+		{
+			EnsureInnerContainer();
+			if (_inner is ITargetContainerOwner)
+				((ITargetContainerOwner)_inner).RegisterContainer(type, container);
+			else
+				throw new InvalidOperationException("This decorator must be decorating another owner, or be decorating a generic type");
 		}
 	}
 }

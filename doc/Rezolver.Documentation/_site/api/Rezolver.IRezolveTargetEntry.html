@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IRezolveTargetEntry
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IRezolveTargetEntry
+   ">
+    <meta name="generator" content="docfx 2.0.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
+              
+              <h1 id="Rezolver_IRezolveTargetEntry" data-uid="Rezolver.IRezolveTargetEntry">Interface IRezolveTargetEntry
+              </h1>
+              <div class="markdown level0 summary"><p>Records one or more IRezolveTargets that have been registered against a given type.</p>
+<p>Also implements the IRezolveTarget interface so that you can request targets for the different
+types that are ultimately supported by the implementation based on the targets that have
+been added to it.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Rezolver</h6>
+              <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
+              <h5 id="Rezolver_IRezolveTargetEntry_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public interface IRezolveTargetEntry : ITarget</code></pre>
+              </div>
+              <h3 id="properties">Properties
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_DefaultTarget.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.DefaultTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_IRezolveTargetEntry_DefaultTarget" data-uid="Rezolver.IRezolveTargetEntry.DefaultTarget">DefaultTarget</h4>
+              <div class="markdown level1 summary"><p>The default target that is to be executed when a single instance of the registered type
+is requested.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">ITarget DefaultTarget { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_ParentBuilder.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.ParentBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_IRezolveTargetEntry_ParentBuilder" data-uid="Rezolver.IRezolveTargetEntry.ParentBuilder">ParentBuilder</h4>
+              <div class="markdown level1 summary"><p>The builder to which this entry belongs</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">ITargetContainer ParentBuilder { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_RegisteredType.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.RegisteredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_IRezolveTargetEntry_RegisteredType" data-uid="Rezolver.IRezolveTargetEntry.RegisteredType">RegisteredType</h4>
+              <div class="markdown level1 summary"><p>The type that this entry was registered against in its parent builder.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">Type RegisteredType { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_Targets.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.Targets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_IRezolveTargetEntry_Targets" data-uid="Rezolver.IRezolveTargetEntry.Targets">Targets</h4>
+              <div class="markdown level1 summary"><p>A collection of targets that are to be used when an IEnumerable or other supported collection
+type of the registered type is requested.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">IEnumerable&lt;ITarget&gt; Targets { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_IRezolveTargetEntry_UseFallback" data-uid="Rezolver.IRezolveTargetEntry.UseFallback">UseFallback</h4>
+              <div class="markdown level1 summary"><p>If true, then the resolver should consult its fallback for an alternative instead of using this
+entry.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">bool UseFallback { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_AddTarget_Rezolver_ITarget_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_IRezolveTargetEntry_AddTarget_Rezolver_ITarget_System_Boolean_" data-uid="Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget,System.Boolean)">AddTarget(ITarget, Boolean)</h4>
+              <div class="markdown level1 summary"><p>Adds a target to this entry, optionally checking first to see if it already exists.   If the
+check is enabled (var <em>checkForDuplicates</em>) then the target will not be added.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">void AddTarget(ITarget target, bool checkForDuplicates = false)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><em>target</em></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><em>checkForDuplicates</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.InvalidOperationException</span></td>
+                    <td><p>An implementation can throw this if it has
+rendered its <a class="xref" href="Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_Targets">Targets</a> enumerable immutable after having been compiled - i.e. if 
+an instance has been issued from this builder, then adding more items to it would give
+inconsistent behaviour.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_Attach_Rezolver_ITargetContainer_Rezolver_IRezolveTargetEntry_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer%2CRezolver.IRezolveTargetEntry)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_IRezolveTargetEntry_Attach_Rezolver_ITargetContainer_Rezolver_IRezolveTargetEntry_" data-uid="Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer,Rezolver.IRezolveTargetEntry)">Attach(ITargetContainer, IRezolveTargetEntry)</h4>
+              <div class="markdown level1 summary"><p>ONLY called by rezolver builder classes, when an entry is attached to a builder by being passed 
+directly to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>, optionally replacing
+an existing entry registered for the same type.</p>
+<p>Note that after this has been called once, the entry is considered to be attached to the builder
+that the <em>replacing</em> entry was attached to, and the method cannot be called again.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">void Attach(ITargetContainer parentBuilder, IRezolveTargetEntry replacing = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><em>parentBuilder</em></td>
+                    <td><p>Required - the builder that this entry is being attached to.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry">IRezolveTargetEntry</a></td>
+                    <td><em>replacing</em></td>
+                    <td><p>The original entry that is replaced by this entry, if applicable</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentNullException</span></td>
+                    <td><p>If <em>parentBuilder</em> is null.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.InvalidOperationException</span></td>
+                    <td><p>If the entry has previously been attached to another</p>
+<p><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.NotSupportedException</span></td>
+                    <td><p>If the implementation does not support this operation</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+            </nav>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2015-2016 Microsoft<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

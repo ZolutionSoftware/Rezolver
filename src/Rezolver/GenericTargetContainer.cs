@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
-	internal class GenericTargetContainer : TargetDictionaryContainer
+	public class GenericTargetContainer : TargetDictionaryContainer
 	{
 		private readonly Type _genericType;
 		private TargetListContainer _targets;

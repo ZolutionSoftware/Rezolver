@@ -40,9 +40,9 @@ namespace Rezolver
 		/// is called.
 		/// </summary>
 		/// <param name="builder"></param>
-		/// <param name="objectType"><see cref="RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</param>
-		/// <param name="serviceType"><see cref="RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</param>
-		/// <param name="propertyBindingBehaviour"><see cref="RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</param>
+		/// <param name="objectType"><see cref="RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)" /></param>
+		/// <param name="serviceType"><see cref="RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)" /></param>
+		/// <param name="propertyBindingBehaviour"><see cref="RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)" /></param>
 		public static void RegisterSingleton(this ITargetContainer builder, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			builder.MustNotBeNull(nameof(builder));

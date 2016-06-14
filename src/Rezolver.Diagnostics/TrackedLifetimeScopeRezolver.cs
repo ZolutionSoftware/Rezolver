@@ -50,12 +50,12 @@ namespace Rezolver.Diagnostics
 			return Logger.TrackCall(this, () => base.GetService(serviceType), new { serviceType = serviceType });
 		}
 
-		public object Resolve(RezolveContext context)
+		public override object Resolve(RezolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.Resolve(context), new { context = context });
 		}
 
-		public bool TryResolve(RezolveContext context, out object result)
+		public override bool TryResolve(RezolveContext context, out object result)
 		{
 			object tempResult = null;
 			var @return = Logger.TrackCall(this, () => base.TryResolve(context, out tempResult), new { context = context });

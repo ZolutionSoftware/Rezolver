@@ -21,7 +21,16 @@ namespace Rezolver
 		private readonly Dictionary<Type, ITargetContainer> _targets
 			= new Dictionary<Type, ITargetContainer>();
 
-		public IEnumerable<Type> AllRegisteredTypes { get { return _targets.Keys; } }
+		/// <summary>
+		/// Implementation of <see cref="ITargetContainer.Fetch(Type)"/>.
+		/// </summary>
+		/// <param name="type">The type whose default target is to be retrieved.</param>
+		/// <returns>A single target representing the last target registered against the 
+		/// <paramref name="type"/>, or, null if no target is found.</returns>
+		/// <remarks>Note - in scenarios where you are chaining multiple containers, then
+		/// you should consult the return value's <see cref="ITarget.UseFallback"/> property
+		/// if the method returns non-null because, if true, then it's an instruction to
+		/// use a parent container's result for the same type.</remarks>
 		public virtual ITarget Fetch(Type type)
 		{
 			type.MustNotBeNull(nameof(type));
@@ -30,6 +39,12 @@ namespace Rezolver
 			return container.Fetch(type);
 		}
 
+		/// <summary>
+		/// Implementation of <see cref="ITargetContainer.FetchAll(Type)"/>
+		/// </summary>
+		/// <param name="type">The type whose targets are to be retrieved.</param>
+		/// <returns>A non-null enumerable containing the targets that match the type, or an
+		/// empty enumerable if the type is not registered.</returns>
 		public virtual IEnumerable<ITarget> FetchAll(Type type)
 		{
 			type.MustNotBeNull(nameof(type));
@@ -54,6 +69,18 @@ namespace Rezolver
 			return toReturn;
 		}
 
+		/// <summary>
+		/// Implementation of <see cref="ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)" />
+		/// </summary>
+		/// <param name="type"></param>
+		/// <param name="container"></param>
+		/// <remarks>This container implementation actually stores containers against the types that targets are registered
+		/// against, rather than simply storing a dictionary of targets.  This method allows you to add your own containers
+		/// against type (instead of the default, which is <see cref="TargetListContainer"/>) so you can plug in some advanced
+		/// behaviour into this container.
+		/// 
+		/// For example, decorators are not actually <see cref="ITarget"/> implementations but specialised <see cref="ITargetContainer"/>
+		/// instances into which the 'standard' targets are registered.</remarks>
 		public virtual void RegisterContainer(Type type, ITargetContainer container)
 		{
 			type.MustNotBeNull(nameof(type));
@@ -89,6 +116,15 @@ namespace Rezolver
 				_targets[type] = container;
 		}
 
+		/// <summary>
+		/// Implementation of <see cref="ITargetContainer.Register(ITarget, Type)"/>.
+		/// </summary>
+		/// <param name="target">The target to be registered</param>
+		/// <param name="serviceType"></param>
+		/// <remarks>This implementation creates an <see cref="ITargetContainer"/> for the <paramref name="serviceType"/> 
+		/// with a call to the protected method <see cref="CreateContainer(Type, ITarget)"/> if one doesn't exist 
+		/// (it calls <see cref="FetchContainer(Type)"/> to check for existence),
+		/// and then chains to its <see cref="ITargetContainer.Register(ITarget, Type)"/> method.</remarks>
 		public virtual void Register(ITarget target, Type serviceType = null)
 		{
 			target.MustNotBeNull(nameof(target));
@@ -103,11 +139,9 @@ namespace Rezolver
 
 		/// <summary>
 		/// Called by <see cref="Register(ITarget, Type)"/> to create and register the container 
-		/// instance most suited for the passed target.  For most types, the base implementation 
-		/// will create a <see cref="TargetListContainer"/>.
-		/// 
-		/// For generic types, it call <see cref="CreateGenericTypeDefContainer( Type,ITarget)"/>, 
-		/// passing the generic type definition (open generic) of that generic instead.
+		/// instance most suited for the passed target.  The base implementation 
+		/// always creates a <see cref="TargetListContainer"/>, capable of storing multiple targets
+		/// against a single type.</summary>
 		/// <param name="serviceType"></param>
 		/// <param name="target">The initial target for which the container is being created.
 		/// Can be null.  Note - the function is not expected to add this target to the new

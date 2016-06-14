@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D4FCB75-E5DF-4E2D-9A23-BE53FF3B0FB6}"
 	ProjectSection(SolutionItems) = preProject
@@ -31,6 +31,24 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Microsoft.Extensions.DependencyInjection.Tests", "test\Rezolver.Microsoft.DependencyInjection.Tests\Rezolver.Microsoft.Extensions.DependencyInjection.Tests.xproj", "{8E28B05B-C9DA-4F59-8108-44519816FD02}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Microsoft.Extensions.DependencyInjection", "src\Rezolver.Microsoft.Extensions.DependencyInjection\Rezolver.Microsoft.Extensions.DependencyInjection.xproj", "{726DC4D6-9064-45B4-9EFD-A18AA779AC34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.Documentation", "doc\Rezolver.Documentation\Rezolver.Documentation.csproj", "{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{44C7026C-38E6-4229-B8B8-B4CC557DA409}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{9008F17A-2132-4889-91FA-7BD0415D33D4}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\ConfigureWebServer.ps1 = PublishScripts\Scripts\ConfigureWebServer.ps1
+		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{E01CDE3E-5C5F-4FA4-8CD2-5BE4B29E0987}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Templates\Rezolver.Documentation.json = PublishScripts\Templates\Rezolver.Documentation.json
+		PublishScripts\Templates\Rezolver.Documentation.param.dev.json = PublishScripts\Templates\Rezolver.Documentation.param.dev.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +88,10 @@ Global
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,5 +105,9 @@ Global
 		{28DD4C74-DC5C-41FC-95DA-B2D0C593234B} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 		{8E28B05B-C9DA-4F59-8108-44519816FD02} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 		{726DC4D6-9064-45B4-9EFD-A18AA779AC34} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
+		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E} = {73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}
+		{44C7026C-38E6-4229-B8B8-B4CC557DA409} = {73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}
+		{9008F17A-2132-4889-91FA-7BD0415D33D4} = {44C7026C-38E6-4229-B8B8-B4CC557DA409}
+		{E01CDE3E-5C5F-4FA4-8CD2-5BE4B29E0987} = {44C7026C-38E6-4229-B8B8-B4CC557DA409}
 	EndGlobalSection
 EndGlobal

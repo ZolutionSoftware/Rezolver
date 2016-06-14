@@ -19,11 +19,17 @@ namespace Rezolver
 		/// from the <see cref="ITarget.DeclaredType"/> of the <paramref name="target"/></param>
 		void Register(ITarget target, Type serviceType = null);
 		/// <summary>
-		/// Searches for the target for a particular type
+		/// Retrieves the default target for a particular type, or null if no target is registered against that type.
 		/// </summary>
-		/// <param name="type">Required.  The type to be searched.</param>
-		/// <returns></returns>
+		/// <param name="type">Required.  The type whose <see cref="ITarget"/> is to be retrieved.</param>
+		/// <returns>The default target for the given <paramref name="type"/>, or null if no target is found.</returns>
 		ITarget Fetch(Type type);
+		/// <summary>
+		/// Retrieves an enumerable of all targets that are registered for a particular <paramref name="type"/>.
+		/// </summary>
+		/// <param name="type">Required.  The type whose <see cref="ITarget"/>s are to be retrieved.</param>
+		/// <returns>An enumerable containing all the targets which have been registered against the given
+		/// <paramref name="type"/>, or an empty enumerable if no targets have been registered.S</returns>
 		IEnumerable<ITarget> FetchAll(Type type);
 
 		/// <summary>

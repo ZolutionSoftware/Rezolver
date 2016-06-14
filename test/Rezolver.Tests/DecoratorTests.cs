@@ -56,6 +56,8 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldCreateEnumerableOfDecoratedObjects()
 		{
+			//this test check that requesting an IEnumerable of T gives you
+			//an enumerable of decorated T
 			Builder builder = new Builder();
 			builder.RegisterType<DecoratedType, IDecorated>();
 			builder.RegisterType<DecoratedType2, IDecorated>();
@@ -70,6 +72,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldCreateEnumerableOfDecoratedObjectsAddedAfterDecorator()
 		{
+			//this test is the same as above, except the decorator is registered first.
 			Builder builder = new Builder();
 			builder.RegisterDecorator<DecoratorType, IDecorated>();
 			builder.RegisterType<DecoratedType, IDecorated>();
@@ -116,13 +119,35 @@ namespace Rezolver.Tests
 		{
 			Builder builder = new Builder();
 			builder.RegisterType<StringHandler, IHandler<string>>();
-			builder.RegisterType<DoubleHandler, IHandler<double>>();
 			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
 			builder.RegisterDecorator(typeof(GenericDecoratingHandler2<>), typeof(IHandler<>));
 			var rezolver = new Container(builder);
 			var result = rezolver.Resolve<IHandler<string>>();
 			Assert.IsType<GenericDecoratingHandler2<string>>(result);
 			Assert.Equal("((This is a string: Hello World) Decorated) Decorated again :)", result.Handle("Hello World"));
+		}
+
+		[Fact]
+		public void ShouldInjectAdditionalDecoratorForOneClosedGeneric()
+		{
+			//in this test we register an open generic decorator
+			//and then register another decorator specialised for string.
+			//when we get a handler for the double type, we should get only one decorator
+			//when we get a handler for the string type, we should get the two decorators - the open generic
+			//decorator wrapping the specialised decorator, wrapping the string handler.
+			Builder builder = new Builder();
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
+
+			var rezolver = new Container(builder);
+			var result = rezolver.Resolve<IHandler<double>>();
+			var result2 = rezolver.Resolve<IHandler<string>>();
+			Assert.IsType<GenericDecoratingHandler<double>>(result);
+			Assert.IsType<GenericDecoratingHandler<string>>(result2);
+			var handled = result2.Handle("Hello World");
+			Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
 		}
 	}
 }
