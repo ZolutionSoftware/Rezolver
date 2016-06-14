@@ -1,3 +1,9 @@
+# Rezolver API reference
 
-# PLACEHOLDER
-TODO: Add .NET projects to *src* folder and run `docfx` to generate a **REAL** *API Documentation*!
+Looking for documentation on individual classes or methods in the Rezolver project?  You've come to the right
+place!
+
+Two crucial classes to look at are:
+
+- [](xref:Rezolver.Builder)
+- [](xref:Rezolver.Container)
