@@ -10,12 +10,7 @@ namespace Rezolver
 	{
 		/// <summary>
 		/// A target that helps a constructor target bind to the best matching constructor on a type
-		/// given a rezolver's configured services.
-		/// 
-		/// The target doesn't actually bind to a constructor until it's first called, and when it does,
-		/// it does it based on the configured services of the rezolver that's in scope when the expression is
-		/// first requested (so that's either creating an expression to give to another target, or to be compiled
-		/// for its own compiled target).
+		/// given a CompileContext's registered targets.
 		/// </summary>
 		private class BestMatchConstructorTarget : TargetBase
 		{
@@ -39,8 +34,46 @@ namespace Rezolver
 
 			protected override Expression CreateExpressionBase(CompileContext context)
 			{
-				throw new NotImplementedException("This needs to be implemented");
-#error implement this!
+				//note - this is quite an expensive operation in the worst case, as it has to bind speculatively all constructors
+				//on the target type.
+
+				//get every constructor and get a set of parameter bindings in which we either resolve an argument (if it can be 
+				//resolved from the context) or use the parameter's default value if it is an optional parameter (we filter out
+				//any constructors where any parameter cannot be succesfully bound).
+				//group the result by the total number of parameters for which we will be able to resolve an argument from the context,
+				//in descending order.
+				//note that we don't filter out the parameterless constructor.
+				var ctorsWithBindingsGrouped = GetPublicConstructorGroups(DeclaredType).SelectMany(g =>
+				{
+					return g.Select(ci => new { ctor = ci, bindings = ParameterBinding.BindWithRezolvedOrOptionalDefault(ci, context) }).ToArray();
+				}).Where(a => a.bindings.Length == 0 || a.bindings.All(b => b.IsValid)).ToArray()
+					.GroupBy(a => a.bindings.Count(b => !b.IsDefault))
+					.OrderByDescending(g => g.Key).ToArray();
+
+				//No constructors for which we could bind all parameters with either a mix of resolved or default arguments.
+				if(ctorsWithBindingsGrouped.Length == 0)
+					throw new InvalidOperationException(string.Format(ExceptionResources.NoApplicableConstructorForContextFormat, _declaredType));
+
+				//get all the constructors with the most bound parameters.
+				var mostBound = ctorsWithBindingsGrouped[0].ToArray();
+				var toBind = mostBound[0];
+				//of these, if there's more than one then we try to find one where we are binding the fewest default arguments.
+				if (mostBound.Length > 1)
+				{
+					var fewestDefaultBindings = mostBound.GroupBy(a => a.bindings.Count(b => b.IsDefault)).OrderBy(g => g.Key).First().ToArray();
+					if (fewestDefaultBindings.Length > 1)
+						throw new InvalidOperationException(string.Format(ExceptionResources.MoreThanOneBestConstructorFormat, _declaredType));
+					else
+						toBind = fewestDefaultBindings[0];
+				}
+				
+				var baseTarget = new ConstructorTarget(_declaredType, toBind.ctor, toBind.bindings);
+				ITarget target = null;
+				if (_propertyBindingBehaviour != null)
+					target = new ConstructorWithPropertiesTarget(baseTarget, _propertyBindingBehaviour.GetPropertyBindings(_declaredType));
+				else
+					target = baseTarget;
+				return target.CreateExpression(context);
 			}
 		}
 
@@ -146,7 +179,12 @@ namespace Rezolver
 
 		public static ITarget Best<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
-			return new BestMatchConstructorTarget(typeof(T), propertyBindingBehaviour);
+			return Best(typeof(T), propertyBindingBehaviour);
+		}
+
+		public static ITarget Best(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		{
+			return new BestMatchConstructorTarget(type, propertyBindingBehaviour);
 		}
 
 		public static ITarget WithArgs<T>(IDictionary<string, ITarget> args)

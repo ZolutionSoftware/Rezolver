@@ -186,6 +186,10 @@ enabled, then scope tracking behaves exactly the same as <a class="xref" href="R
                   <h4><a class="xref" href="Rezolver.ObjectTargetExtensions.html#Rezolver_ObjectTargetExtensions">ObjectTargetExtensions</a></h4>
                   <section><p>Extension method(s)</p>
 </section>
+                  <h4><a class="xref" href="Rezolver.OptionalParameterTarget.html#Rezolver_OptionalParameterTarget">OptionalParameterTarget</a></h4>
+                  <section><p>Used specifically when binding arguments to method parameters when a parameter is optional and its
+default value is to be used when binding to it.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer">OverridingContainer</a></h4>
                   <section><p>An  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> which can override the resolve operations of another.  This is useful when you have a 
 core application-wide container, with some objects being customised based on some ambient information,
@@ -213,10 +217,9 @@ but others are free to use it also.</p>
 into a Resolve call.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a></h4>
-                  <section><p>Represents a target that is rezolved dynamically at run time, or statically at compile time.</p>
+                  <section><p>Represents a target that is rezolved dynamically at resolve-time, or statically at compile time.</p>
 <p>This is the most common way that we bind constructor parameters, for example - i.e. &#39;I want an
 IService instance - go get it&#39;.</p>
-<p>The class will statically </p>
 </section>
                   <h4><a class="xref" href="Rezolver.RezolveTargetAdapterExtensions.html#Rezolver_RezolveTargetAdapterExtensions">RezolveTargetAdapterExtensions</a></h4>
                   <section></section>

@@ -235,66 +235,6 @@
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ConstructorTarget_Auto_Rezolver_ITargetContainer_System_Type_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ConstructorTarget.Auto(Rezolver.ITargetContainer%2CSystem.Type%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              
-              <h4 id="Rezolver_ConstructorTarget_Auto_Rezolver_ITargetContainer_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.ConstructorTarget.Auto(Rezolver.ITargetContainer,System.Type,Rezolver.IPropertyBindingBehaviour)">Auto(ITargetContainer, Type, IPropertyBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>This overload restricts the target to binding the best constructor whose arguments can actually be resolved
-from the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> that you pass as the argument.</p>
-<p>This overrides the default behaviour, which is to select the constructor with the most arguments.</p>
-<p>Note - if the target that is created is to be registered in the builder with a path, then you must pass that path in the <em>targetName</em>
-argument, otherwise you will get inconsistent results.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto(ITargetContainer dependencyLookup, Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td><em>dependencyLookup</em></td>
-                    <td><p>The builder that will be used to look for </p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="xref">System.Type</span></td>
-                    <td><em>type</em></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
-                    <td><em>propertyBindingBehaviour</em></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ConstructorTarget.Auto(System.Type%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
@@ -399,6 +339,55 @@ argument, otherwise you will get inconsistent results.</p>
                 <tbody>
                   <tr>
                     <td><em>T</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ConstructorTarget_Best_System_Type_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ConstructorTarget.Best(System.Type%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_ConstructorTarget_Best_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.ConstructorTarget.Best(System.Type,Rezolver.IPropertyBindingBehaviour)">Best(Type, IPropertyBindingBehaviour)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static ITarget Best(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Type</span></td>
+                    <td><em>type</em></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><em>propertyBindingBehaviour</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                 </tbody>

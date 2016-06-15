@@ -60,6 +60,7 @@ namespace Rezolver.Tests
 
 			public NoDefaultConstructor2(int value, string message)
 			{
+				if (message == null) throw new ArgumentNullException(nameof(message));
 				Value = value;
 				Message = message;
 			}

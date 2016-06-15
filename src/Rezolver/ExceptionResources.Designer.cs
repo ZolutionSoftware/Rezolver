@@ -96,6 +96,15 @@ namespace Rezolver {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to More than one constructor for {0} found that can be bound with the most parameters from the current context.
+        /// </summary>
+        public static string MoreThanOneBestConstructorFormat {
+            get {
+                return ResourceManager.GetString("MoreThanOneBestConstructorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to More than one constructor for {0} qualifies as a target for Auto construction.
         /// </summary>
         public static string MoreThanOneConstructorFormat {
@@ -110,6 +119,15 @@ namespace Rezolver {
         public static string MoreThanOneObjectFoundInScope {
             get {
                 return ResourceManager.GetString("MoreThanOneObjectFoundInScope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to No constructor found on the type {0} which can be satisfied by the CompileContext.
+        /// </summary>
+        public static string NoApplicableConstructorForContextFormat {
+            get {
+                return ResourceManager.GetString("NoApplicableConstructorForContextFormat", resourceCulture);
             }
         }
         

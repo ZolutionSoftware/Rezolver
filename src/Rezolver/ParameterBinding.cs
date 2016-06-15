@@ -18,9 +18,24 @@ namespace Rezolver
 		/// </summary>
 		public ParameterInfo Parameter { get; private set; }
 		/// <summary>
-		/// The rezolve target that will provide the argument to the parameter when an expression is built.
+		/// The target that will provide the argument to the parameter when an expression is built.
+		/// 
+		/// If null, then the parameter is not bound and <see cref="IsValid"/> will be <c>false</c>.
 		/// </summary>
 		public ITarget Target { get; private set; }
+
+		/// <summary>
+		/// Gets a boolean indicating whether the parameter binding is valid
+		/// 
+		/// Ultimately, this returns true if <see cref="Target"/> is non-null.
+		/// </summary>
+		public bool IsValid {  get { return Target != null; } }
+
+		/// <summary>
+		/// Gets a boolean indicating whether the parameter will be bound using the parameter's
+		/// default value (if it is an Optional parameter).
+		/// </summary>
+		public bool IsDefault {  get { return Target is OptionalParameterTarget; } }
 
 		/// <summary>
 		/// Constructs a new instance of the <see cref="ParameterBinding"/> class.
@@ -40,6 +55,8 @@ namespace Rezolver
 		/// 
 		/// This is not *incredibly* useful except in cases where you simply want to bind a method or constructor
 		/// without requiring any resolved instances/values.
+		/// 
+		/// TODO: Review this - because the implementation is wrong and I'm not sure that it's actually of any use.
 		/// </summary>
 		/// <param name="method"></param>
 		/// <returns></returns>
@@ -53,17 +70,48 @@ namespace Rezolver
 			foreach (var parameter in parameters)
 			{
 				if (parameter.IsOptional)
-				{
-					if((parameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault)
-						binding = new ParameterBinding(parameter, new ExpressionTarget(Expression.Constant(parameter.DefaultValue, parameter.ParameterType)));
-					else
-						binding = new ParameterBinding(parameter, new ExpressionTarget(Expression.Default(parameter.ParameterType)));
-				}
+					binding = new ParameterBinding(parameter, new OptionalParameterTarget(parameter));
+				else
+					binding = new ParameterBinding(parameter, new ExpressionTarget(Expression.Default(parameter.ParameterType)));
 				toReturn[current++] = binding;
 			}
 			return toReturn;
 		}
 
+		/// <summary>
+		/// This is a compile-time helper method which produces a binding for each parameter where arguments that can be resolved 
+		/// from the passed <paramref name="context"/> will be bound with <see cref="RezolvedTarget"/>s, and those which cannot, 
+		/// but which are optional, will be bound with <see cref="OptionalParameterTarget"/>s.
+		/// 
+		/// If the parameter is not optional, and no target can be resolved, then an invalid binding will be returned for that parameter.
+		/// </summary>
+		/// <param name="method">Required - the method whose parameters are to be bound.</param>
+		/// <param name="context">Required - the current compile context which will be used to test whether arguments can be resolved
+		/// at compile time.  If they can, then the associated parameter will be bound with a <see cref="RezolvedTarget"/>.</param>
+		/// <returns></returns>
+		public static ParameterBinding[] BindWithRezolvedOrOptionalDefault(MethodBase method, CompileContext context)
+		{
+			method.MustNotBeNull(nameof(method));
+			context.MustNotBeNull(nameof(context));
+			return method.GetParameters().Select(pi =>
+			{
+				RezolvedTarget temp = new RezolvedTarget(pi.ParameterType);
+				if (temp.CanResolve(context))
+					return new ParameterBinding(pi, temp);
+				if (pi.IsOptional)
+					return new ParameterBinding(pi, new OptionalParameterTarget(pi));
+
+				//return a default binding.
+				return new ParameterBinding(pi, null);
+			}).ToArray();
+		}
+
+		/// <summary>
+		/// Creates parameter bindings for each parameter in the passed method where each value will be resolved from 
+		/// the RezolveContext that is active when the code is eventually compiled.
+		/// </summary>
+		/// <param name="method"></param>
+		/// <returns></returns>
 		public static ParameterBinding[] BindWithRezolvedArguments(MethodBase method)
 		{
 			method.MustNotBeNull("method");
@@ -89,7 +137,8 @@ namespace Rezolver
 
 			//notice that the list is ordered most-greedy first.  This means that given a choice between two methods where the only difference
 			//is a bunch of optional arguments in one, then that one will win out.
-			var candidates = methods.Select(m => {
+			var candidates = methods.Select(m =>
+			{
 				ParameterBinding[] bindings;
 				BindMethod(m, args, out bindings);
 
@@ -108,7 +157,7 @@ namespace Rezolver
 		{
 			bindings = null;
 			var temp = method.GetParameters().Select(p => new ParameterBinding(p, GetArgValue(p, args))).ToArray();
-			if(temp.All(pb => pb.Target != null && TypeHelpers.IsAssignableFrom(pb.Parameter.ParameterType, pb.Target.DeclaredType)))
+			if (temp.All(pb => pb.Target != null && TypeHelpers.IsAssignableFrom(pb.Parameter.ParameterType, pb.Target.DeclaredType)))
 			{
 				bindings = temp;
 				return true;
@@ -116,12 +165,9 @@ namespace Rezolver
 			return false;
 		}
 
-		private static ITarget GetArgValue(ParameterInfo p, IDictionary<string, ITarget> args)
+		private static ITarget GetDefaultValueTargetIfOptional(ParameterInfo p)
 		{
-			ITarget argValue = null;
-			if (args.TryGetValue(p.Name, out argValue))
-				return argValue;
-			else if (p.IsOptional)
+			if (p.IsOptional)
 			{
 				//now check to see if a default is supplied in the IL with the method
 				if ((p.Attributes & ParameterAttributes.HasDefault) ==
@@ -132,6 +178,15 @@ namespace Rezolver
 			}
 
 			return null;
+		}
+
+		private static ITarget GetArgValue(ParameterInfo p, IDictionary<string, ITarget> args)
+		{
+			ITarget argValue = null;
+			if (args.TryGetValue(p.Name, out argValue))
+				return argValue;
+
+			return GetDefaultValueTargetIfOptional(p);
 		}
 	}
 }
