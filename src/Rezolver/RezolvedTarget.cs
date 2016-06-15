@@ -6,17 +6,14 @@ using System.Reflection;
 namespace Rezolver
 {
 	/// <summary>
-	/// Represents a target that is rezolved dynamically at run time, or statically at compile time.
+	/// Represents a target that is rezolved dynamically at resolve-time, or statically at compile time.
 	/// 
 	/// This is the most common way that we bind constructor parameters, for example - i.e. 'I want an
 	/// IService instance - go get it'.
-	/// 
-	/// The class will statically 
 	/// </summary>
 	public class RezolvedTarget : TargetBase
 	{
 		private readonly Type _resolveType;
-		private readonly ITarget _resolveNameTarget;
 
 		private static readonly MethodInfo RezolverCanResolveMethod =
 			MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.CanResolve(null));
@@ -33,12 +30,6 @@ namespace Rezolver
 		//this one cannot be obtained via expression extraction - as it uses an output parameter and there's no way of
 		//modelling that to the compiler.
 		private static readonly MethodInfo RezolverTryResolveMethod = TypeHelpers.GetMethod(typeof(IContainer),"TryResolve");
-
-		internal RezolvedTarget(TargetAdapter.RezolveCallExpressionInfo rezolveCall)
-		{
-			_resolveType = rezolveCall.Type;
-			_resolveNameTarget = rezolveCall.Name;
-		}
 
 		public RezolvedTarget(Type type)
 		{
@@ -75,7 +66,8 @@ namespace Rezolver
 		/// <returns></returns>
 		public virtual bool CanResolve(CompileContext context)
 		{
-			throw new NotImplementedException();
+			context.MustNotBeNull(nameof(context));
+			return context.Fetch(_resolveType) != null;
 		}
 
 		protected override Expression CreateExpressionBase(CompileContext context)

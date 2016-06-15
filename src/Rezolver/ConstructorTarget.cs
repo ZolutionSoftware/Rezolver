@@ -39,19 +39,8 @@ namespace Rezolver
 
 			protected override Expression CreateExpressionBase(CompileContext context)
 			{
-				//only resolve the constructor once.
-				if (_wrapped == null)
-				{
-					lock (_locker)
-					{
-						if (_wrapped == null)
-						{
-
-						}
-						//_wrapped = ConstructorTarget.Auto(context.DependencyBuilder, _declaredType, _propertyBindingBehaviour, context.);
-					}
-				}
-				return _wrapped.CreateExpression(context);
+				throw new NotImplementedException("This needs to be implemented");
+#error implement this!
 			}
 		}
 
@@ -131,52 +120,6 @@ namespace Rezolver
 				throw new ArgumentException(
 					string.Format(ExceptionResources.NoPublicConstructorsDefinedFormat, declaredType), "declaredType");
 			return ctorGroups;
-		}
-
-		/// <summary>
-		/// This overload restricts the target to binding the best constructor whose arguments can actually be resolved
-		/// from the <see cref="ITargetContainer"/> that you pass as the argument.
-		/// 
-		/// This overrides the default behaviour, which is to select the constructor with the most arguments.
-		/// 
-		/// Note - if the target that is created is to be registered in the builder with a path, then you must pass that path in the <paramref name="targetName"/>
-		/// argument, otherwise you will get inconsistent results.
-		/// </summary>
-		/// <param name="dependencyLookup">The builder that will be used to look for </param>
-		/// <param name="type"></param>
-		/// <param name="propertyBindingBehaviour"></param>
-		/// <returns></returns>
-		public static ITarget Auto(ITargetContainer dependencyLookup, Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
-		{
-			dependencyLookup.MustNotBeNull(nameof(dependencyLookup));
-			type.MustNotBeNull(nameof(type));
-
-			var ctorGroups = GetPublicConstructorGroups(type);
-
-			//search all ctor groups, attempting to match each parameter to a rezolve target
-			//this is slightly cut down version of what's done by the RezolvedTarget, and not quite as clever:
-			//it only considers the current IRezolveTargetContainer.
-			var firstGroupWithMatch = ctorGroups.Select(g => new
-			{
-				paramCount = g.Key,
-				matches = g.Select(c =>
-				{
-					var parameters = c.GetParameters();
-					return new
-					{
-						constructor = c,
-						bindings = parameters.Select(p => new
-						{
-							parameter = p,
-							binding = dependencyLookup.Fetch(p.ParameterType)
-						}).ToArray()
-					};
-				})
-			}).FirstOrDefault(g => g.matches.Any(m => m.bindings.Length == 0 ? true : m.bindings.All(b => b.binding != null)));
-
-			var matchesArray = firstGroupWithMatch.matches.ToArray();
-
-			throw new NotImplementedException();
 		}
 
 		/// <summary>
