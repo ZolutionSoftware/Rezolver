@@ -22,10 +22,7 @@ namespace Rezolver
 	{
 		internal static readonly MethodInfo[] RezolveMethods =
 		{
-						MethodCallExtractor.ExtractCalledMethod((RezolveContextExpressionHelper builder) => builder.Resolve<int>()).GetGenericMethodDefinition()
-						,
-						MethodCallExtractor.ExtractCalledMethod((RezolveContextExpressionHelper builder) => builder.Resolve<int>(null))
-								.GetGenericMethodDefinition()
+						MethodCallExtractor.ExtractCalledMethod((RezolveContextExpressionHelper helper) => helper.Resolve<int>()).GetGenericMethodDefinition()
 				};
 
 		/// <summary>
@@ -97,12 +94,12 @@ namespace Rezolver
 
 		protected override Expression VisitNew(NewExpression node)
 		{
-			return new RezolveTargetExpression(ConstructorTarget.For(node.Type, node, this));
+			return new RezolveTargetExpression(ConstructorTarget.FromNewExpression(node.Type, node, this));
 		}
 
 		protected override Expression VisitMemberInit(MemberInitExpression node)
 		{
-			var constructorTarget = ConstructorTarget.For(node.Type, node.NewExpression, this);
+			var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, this);
 			return new RezolveTargetExpression(new ExpressionTarget(c =>
 			{
 				var ctorTargetExpr = constructorTarget.CreateExpression(new CompileContext(c, node.Type));

@@ -31,6 +31,12 @@ namespace Rezolver
 		}
 
 		public ParameterInfo MethodParameter { get; }
+		/// <summary>
+		/// Constructs a new instance of the <see cref="OptionalParameterTarget"/> class.
+		/// </summary>
+		/// <param name="methodParameter">Required - parameter to which this target will be bound.
+		/// 
+		/// Its <see cref="ParameterInfo.IsOptional"/> property must be <c>true</c>.</param>
 		public OptionalParameterTarget(ParameterInfo methodParameter)
 		{
 			methodParameter.MustNotBeNull(nameof(methodParameter));

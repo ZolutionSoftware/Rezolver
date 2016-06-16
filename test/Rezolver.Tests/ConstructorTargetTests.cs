@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Tests.TestTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,117 +8,16 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-    public class ConstructorTargetTests : TestsBase
-    {
-		//these tests will only work with the delegate compiler
-
-		private class ConstructorTestClass
-		{
-			public int Value { get; protected set; }
-		}
-
-		private class DefaultConstructor : ConstructorTestClass
-		{
-			public const int ExpectedValue = -1;
-			public DefaultConstructor()
-			{
-				Value = ExpectedValue;
-			}
-		}
-
-		private class ConstructorWithDefaults : ConstructorTestClass
-		{
-			public const int ExpectedValue = 1;
-			public ConstructorWithDefaults(int value = ExpectedValue)
-			{
-				Value = value;
-			}
-		}
-
-		private class NoDefaultConstructor : ConstructorTestClass
-		{
-			public const int ExpectedRezolvedValue = 101;
-			public const int ExpectedComplexNamedRezolveCall = 102;
-			public const int ExpectedComplexNamedRezolveCallDynamic = 103;
-			public const int ExpectedValue = 100;
-			public const int ExpectedDynamicExpressionMultiplier = 5;
-			public NoDefaultConstructor(int value)
-			{
-				Value = value;
-			}
-		}
-
-		private class NoDefaultConstructor2 : ConstructorTestClass
-		{
-			public const int ExpectedBestValue = 1001;
-			public const string ExpectedDefaultMessage = "Default Message";
-			public string Message { get; protected set; }
-			public NoDefaultConstructor2(int value)
-				: this(value, ExpectedDefaultMessage)
-			{
-
-			}
-
-			public NoDefaultConstructor2(int value, string message)
-			{
-				if (message == null) throw new ArgumentNullException(nameof(message));
-				Value = value;
-				Message = message;
-			}
-		}
-
-		private class HasProperty
-		{
-			public int Value { get; set; }
-		}
-
-		private class HasField
-		{
-			public string StringField;
-		}
-
-		private class ShouldIgnorePropertyAndField
-		{
-			private int IgnoredField;
-			public int GetIgnoredField()
-			{
-				return IgnoredField;
-			}
-
-			private int _ignoredProperty1;
-			//ignorede as it's readonly
-			public int IgnoredProperty1 { get { return _ignoredProperty1; } }
-
-			public int IgnoredProperty2 { get; private set; }
-
-			public ShouldIgnorePropertyAndField()
-			{
-				IgnoredField = 1;
-				_ignoredProperty1 = 2;
-				IgnoredProperty2 = 3;
-			}
-		}
-
-		private class NestedPropertiesAndFields
-		{
-			public HasProperty Field_HasProperty;
-			public HasField Property_HasField { get; set; }
-		}
-
+	public class ConstructorTargetTests : TestsBase
+	{
 		[Fact]
 		public void ShouldAutomaticallyFindDefaultConstructor()
 		{
-			var target = ConstructorTarget.For<DefaultConstructor>();
+			var target = ConstructorTarget.Auto<DefaultConstructor>();
 			var result = GetValueFromTarget<DefaultConstructor>(target);
 			Assert.Equal(DefaultConstructor.ExpectedValue, result.Value);
-			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
+			var result2 = GetValueFromTarget<NoExplicitConstructor>(target);
 			Assert.NotSame(result, result2);
-		}
-
-		[Fact]
-		public void ShouldThrowArgumentExceptionIfNoDefaultConstructor()
-		{
-			Assert.Throws<ArgumentException>(() => ConstructorTarget.For<NoDefaultConstructor>());
 		}
 
 		[Fact]
@@ -125,10 +25,10 @@ namespace Rezolver.Tests
 		{
 			//This test demonstrates whether a constructor with all-default parameters will be treated equally
 			//to a default constructor if no default constructor is present on the type.
-			var target = ConstructorTarget.For<ConstructorWithDefaults>();
+			var target = ConstructorTarget.Auto<ConstructorWithDefaults>();
 			var result = GetValueFromTarget<ConstructorWithDefaults>(target);
 			Assert.Equal(ConstructorWithDefaults.ExpectedValue, result.Value);
-			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
+			var result2 = GetValueFromTarget<NoExplicitConstructor>(target);
 			Assert.NotSame(result, result2);
 		}
 
@@ -137,10 +37,10 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAllowAllConstructorParametersToBeProvided()
 		{
-			var target = ConstructorTarget.For(builder => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
+			var target = ConstructorTarget.FromNewExpression(builder => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
 			var result = GetValueFromTarget<NoDefaultConstructor>(target);
 			Assert.Equal(NoDefaultConstructor.ExpectedValue, result.Value);
-			var result2 = GetValueFromTarget<ConstructorTestClass>(target);
+			var result2 = GetValueFromTarget<NoExplicitConstructor>(target);
 			Assert.NotSame(result, result2);
 		}
 
@@ -157,14 +57,13 @@ namespace Rezolver.Tests
 			//parsing.  However - note that if any tests in the RezolveTargetAdapterTests suite are failing, then
 			//tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget's
 			//integration with the default adapter here.
-			var target = ConstructorTarget.For(context => new NoDefaultConstructor(context.Resolve<int>()), TargetAdapter.Instance);
+			var target = ConstructorTarget.FromNewExpression(context => new NoDefaultConstructor(context.Resolve<int>()), TargetAdapter.Instance);
 			var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
 			var rezolver = CreateADefaultRezolver();
 			rezolver.Register(intTarget, typeof(int));
 			var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolver);
 			Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
 		}
-
 		[Fact]
 		public void ShouldAutoRezolveAConstructor()
 		{
@@ -243,8 +142,8 @@ namespace Rezolver.Tests
 		{
 			Container rezolver = new Container(compiler: new TargetDelegateCompiler());
 			rezolver.Register((100).AsObjectTarget());
-			rezolver.Register(ConstructorTarget.Auto<ShouldIgnorePropertyAndField>(DefaultPropertyBindingBehaviour.Instance));
-			var result = (ShouldIgnorePropertyAndField)rezolver.Resolve(typeof(ShouldIgnorePropertyAndField));
+			rezolver.RegisterType<IgnoredPropertyAndField>(DefaultPropertyBindingBehaviour.Instance);
+			var result = rezolver.Resolve<IgnoredPropertyAndField>();
 			Assert.Equal(1, result.GetIgnoredField());
 			Assert.Equal(2, result.IgnoredProperty1);
 			Assert.Equal(3, result.IgnoredProperty2);

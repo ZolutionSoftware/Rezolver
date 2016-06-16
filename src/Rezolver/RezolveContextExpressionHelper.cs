@@ -20,10 +20,5 @@ namespace Rezolver
 		{
 			throw new NotImplementedException(ExceptionResources.NotRuntimeMethod);
 		}
-
-		public T Resolve<T>(string name)
-		{
-			throw new NotImplementedException(ExceptionResources.NotRuntimeMethod);
-		}
 	}
 }

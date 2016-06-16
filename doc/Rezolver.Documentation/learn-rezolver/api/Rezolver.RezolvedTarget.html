@@ -71,7 +71,9 @@
               
               <h1 id="Rezolver_RezolvedTarget" data-uid="Rezolver.RezolvedTarget">Class RezolvedTarget
               </h1>
-              <div class="markdown level0 summary"><p>Represents a target that is rezolved dynamically at resolve-time, or statically at compile time.</p>
+              <div class="markdown level0 summary"><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>, or dynamically 
+(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> when </p>
+<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> is called.</p>
 <p>This is the most common way that we bind constructor parameters, for example - i.e. &#39;I want an
 IService instance - go get it&#39;.</p>
 </div>
@@ -130,19 +132,33 @@ IService instance - go get it&#39;.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class RezolvedTarget : TargetBase, ITarget</code></pre>
               </div>
+              <h5 id="Rezolver_RezolvedTarget_remarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>The concept of compile-time resolving is what is typically implemented by most other IOC containers - at
+compile time, a target is resolved for a given type and, if found, its expression is used.  If it&#39;s not found, 
+then an error occurs.</p>
+<p>Rezolver does this, but goes further when the target can&#39;t be resolved at compile-time - in this case, it will emit 
+a call back into the current <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> to try and dynamically resolve 
+the value that is required.</p>
+<p>Furthermore, the code it produces in either case also checks that the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> that is active at
+resolve-time is the same one (if applicable) that was active during compile-time.  If it isn&#39;t, then it&#39;ll automatically 
+defer resolving of the value to that container</p>
+</div>
               <h3 id="constructors">Constructors
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_RezolvedTarget__ctor_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.RezolvedTarget.%23ctor(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_RezolvedTarget__ctor_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.RezolvedTarget.%23ctor(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_RezolvedTarget__ctor_System_Type_" data-uid="Rezolver.RezolvedTarget.#ctor(System.Type)">RezolvedTarget(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 id="Rezolver_RezolvedTarget__ctor_System_Type_Rezolver_ITarget_" data-uid="Rezolver.RezolvedTarget.#ctor(System.Type,Rezolver.ITarget)">RezolvedTarget(Type, ITarget)</h4>
+              <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> for the given <em>type</em> which will attempt to 
+resolve a value at compile time and/or resolve-time and, if it can&#39;t, will either use the <em>fallbackTarget</em>
+or will throw an exception.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public RezolvedTarget(Type type)</code></pre>
+                <pre><code class="lang-csharp hljs">public RezolvedTarget(Type type, ITarget fallbackTarget = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -157,7 +173,15 @@ IService instance - go get it&#39;.</p>
                   <tr>
                     <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
-                    <td></td>
+                    <td><p>Required.  The type to be resolved</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><em>fallbackTarget</em></td>
+                    <td><p>Optional.  The target to be used if the value cannot be resolved at either compile time or 
+resolve-time.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -169,7 +193,8 @@ IService instance - go get it&#39;.</p>
               </span>
               
               <h4 id="Rezolver_RezolvedTarget_DeclaredType" data-uid="Rezolver.RezolvedTarget.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>The type that will be resolved</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
@@ -236,6 +261,8 @@ the resolve operation before compiling the expression.</p>
 <p>Please note, also, that it only works statically.  I.e. - if the dependency builder
 in context cannot resolve the type, then this method returns false - it will not take 
 into account dynamic fallback to the run time resolver.</p>
+<p>TODO: This might be removed as the functionality for which it was added might no longer be
+needed.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -280,7 +307,9 @@ into account dynamic fallback to the run time resolver.</p>
               </span>
               
               <h4 id="Rezolver_RezolvedTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.RezolvedTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a>.
+Constructs the expression.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">

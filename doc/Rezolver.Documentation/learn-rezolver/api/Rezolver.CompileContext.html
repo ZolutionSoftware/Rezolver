@@ -75,7 +75,6 @@
 <p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to facilitate
 dependency lookups during compilation time.</p>
 <p>THIS CLASS IS NOT THREAD-SAFE</p>
-<p>TODO: Wondering if RezolveContext should be passed into the CompileContext...  Everything tells me it should.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -267,10 +266,10 @@ property of the <em>rezolver</em> parameter.</p>
               </span>
               
               <h4 id="Rezolver_CompileContext_ContextRezolverPropertyExpression" data-uid="Rezolver.CompileContext.ContextRezolverPropertyExpression">ContextRezolverPropertyExpression</h4>
-              <div class="markdown level1 summary"><p>Returns an expression that represents reading the Rezolver property of the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a> 
+              <div class="markdown level1 summary"><p>Returns an expression that represents reading the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Rezolver">Rezolver</a> property of the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a> 
 to aid in code generation.</p>
 <p>This IS NOT the same as the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolverExpression">RezolverExpression</a> property.</p>
-<p>This is always non-null.</p>
+<p>Always non-null.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>

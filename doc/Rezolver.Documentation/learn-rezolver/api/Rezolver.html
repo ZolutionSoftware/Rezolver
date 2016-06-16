@@ -102,7 +102,6 @@ are present in its parent.</p>
 <p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to facilitate
 dependency lookups during compilation time.</p>
 <p>THIS CLASS IS NOT THREAD-SAFE</p>
-<p>TODO: Wondering if RezolveContext should be passed into the CompileContext...  Everything tells me it should.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey">CompileContext.SharedExpressionKey</a></h4>
                   <section><p>Key for a shared expression used during expression tree generation</p>
@@ -117,7 +116,11 @@ in multiple places throughout that expression tree. Those duplicated conditional
 are moved further up the expression tree into one conditional.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a></h4>
-                  <section></section>
+                  <section><p>The most common target used for building new objects.  Represents binding to a type&#39;s constructor with zero or more
+arguments supplied by other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
+<p>In addition to using the <span class="xref">Rezolver.ConstructorTarget.</span> constructor
+you can also use the factory methods - such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto<t>(IPropertyBindingBehaviour)</t></a> and <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Best__1_Rezolver_IPropertyBindingBehaviour_">Best<t>(IPropertyBindingBehaviour)</t></a>.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.ConstructorWithPropertiesTarget.html#Rezolver_ConstructorWithPropertiesTarget">ConstructorWithPropertiesTarget</a></h4>
                   <section><p>Wraps a constructor target so that properties can be bound also.</p>
 </section>
@@ -217,7 +220,9 @@ but others are free to use it also.</p>
 into a Resolve call.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a></h4>
-                  <section><p>Represents a target that is rezolved dynamically at resolve-time, or statically at compile time.</p>
+                  <section><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>, or dynamically 
+(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> when </p>
+<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> is called.</p>
 <p>This is the most common way that we bind constructor parameters, for example - i.e. &#39;I want an
 IService instance - go get it&#39;.</p>
 </section>

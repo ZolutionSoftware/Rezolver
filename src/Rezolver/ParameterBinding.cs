@@ -50,35 +50,6 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Automatically derives default parameter bindings for the passed method.  This typically means default values
-		/// for optional parameters and type defaults (0, null etc) for any required parameters.
-		/// 
-		/// This is not *incredibly* useful except in cases where you simply want to bind a method or constructor
-		/// without requiring any resolved instances/values.
-		/// 
-		/// TODO: Review this - because the implementation is wrong and I'm not sure that it's actually of any use.
-		/// </summary>
-		/// <param name="method"></param>
-		/// <returns></returns>
-		public static ParameterBinding[] DeriveDefaultParameterBindings(MethodBase method)
-		{
-			method.MustNotBeNull("method");
-			var parameters = method.GetParameters();
-			ParameterBinding[] toReturn = new ParameterBinding[parameters.Length];
-			int current = 0;
-			ParameterBinding binding = null;
-			foreach (var parameter in parameters)
-			{
-				if (parameter.IsOptional)
-					binding = new ParameterBinding(parameter, new OptionalParameterTarget(parameter));
-				else
-					binding = new ParameterBinding(parameter, new ExpressionTarget(Expression.Default(parameter.ParameterType)));
-				toReturn[current++] = binding;
-			}
-			return toReturn;
-		}
-
-		/// <summary>
 		/// This is a compile-time helper method which produces a binding for each parameter where arguments that can be resolved 
 		/// from the passed <paramref name="context"/> will be bound with <see cref="RezolvedTarget"/>s, and those which cannot, 
 		/// but which are optional, will be bound with <see cref="OptionalParameterTarget"/>s.
@@ -107,8 +78,9 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Creates parameter bindings for each parameter in the passed method where each value will be resolved from 
-		/// the RezolveContext that is active when the code is eventually compiled.
+		/// Creates parameter bindings for each parameter in the passed method where each value will be resolved.
+		/// 
+		/// For any optional parameters - their default values will be used as a fallback.
 		/// </summary>
 		/// <param name="method"></param>
 		/// <returns></returns>
@@ -116,7 +88,13 @@ namespace Rezolver
 		{
 			method.MustNotBeNull("method");
 			var parameters = method.GetParameters();
-			return parameters.Select(pi => new ParameterBinding(pi, new RezolvedTarget(pi.ParameterType))).ToArray();
+			return parameters.Select(pi =>
+				new ParameterBinding(pi, BindRezolvedArgument(pi))).ToArray();
+		}
+
+		private static RezolvedTarget BindRezolvedArgument(ParameterInfo pi)
+		{
+			return new RezolvedTarget(pi.ParameterType, pi.IsOptional ? new OptionalParameterTarget(pi) : null);
 		}
 
 		/// <summary>

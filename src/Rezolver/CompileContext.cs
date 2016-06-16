@@ -13,8 +13,6 @@ namespace Rezolver
 	/// dependency lookups during compilation time.
 	/// 
 	/// THIS CLASS IS NOT THREAD-SAFE
-	/// 
-	/// TODO: Wondering if RezolveContext should be passed into the CompileContext...  Everything tells me it should.
 	/// </summary>
 	public class CompileContext : ITargetContainer
 	{
@@ -106,12 +104,12 @@ namespace Rezolver
 
 		private MemberExpression _contextRezolverPropertyExpression;
 		/// <summary>
-		/// Returns an expression that represents reading the Rezolver property of the <see cref="RezolveContextParameter"/> 
+		/// Returns an expression that represents reading the <see cref="RezolveContext.Rezolver"/> property of the <see cref="RezolveContextParameter"/> 
 		/// to aid in code generation.
 		/// 
 		/// This IS NOT the same as the <see cref="RezolverExpression"/> property.
 		/// 
-		/// This is always non-null.
+		/// Always non-null.
 		/// </summary>
 		public MemberExpression ContextRezolverPropertyExpression
 		{
@@ -138,8 +136,6 @@ namespace Rezolver
 				return _contextScopePropertyExpression;
 			}
 		}
-
-		//TODO: add property expression getters for the other properties on RezolveContext.
 
 		/// <summary>
 		/// An enumerable representing the current stack of targets that are being compiled.
@@ -189,9 +185,9 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// This is the IRezolveTargetContainer through which dependencies are resolved.
-		/// Note that this class implements IRezolveTargetContainer by proxying this instance, 
-		/// which is, by default, created as a child rezolver builder of the one that
+		/// This is the ITargetContainer through which dependencies are resolved.
+		/// Note that this class implements ITargetContainer by proxying this instance, 
+		/// which is, by default, created as a child container of the one that
 		/// is attached to the <see cref="Rezolver"/>
 		/// </summary>
 		private ITargetContainer _rezolverBuilder;

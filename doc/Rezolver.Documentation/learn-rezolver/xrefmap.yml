@@ -362,13 +362,18 @@ references:
   href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_DeclaredType
   commentId: P:Rezolver.ConstructorTarget.DeclaredType
   fullName: Rezolver.ConstructorTarget.DeclaredType
-- uid: Rezolver.ConstructorTarget.For``1(Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},Rezolver.ITargetAdapter)
-  name: For<T>(Expression<Func<RezolveContextExpressionHelper, T>>, ITargetAdapter)
-  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_For__1_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___Rezolver_ITargetAdapter_
-  commentId: M:Rezolver.ConstructorTarget.For``1(Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},Rezolver.ITargetAdapter)
-  name.vb: For(Of T)(Expression(Of Func(Of RezolveContextExpressionHelper, T)), ITargetAdapter)
-  fullName: Rezolver.ConstructorTarget.For<T>(Expression<System.Func<Rezolver.RezolveContextExpressionHelper, T>>, Rezolver.ITargetAdapter)
-  fullName.vb: Rezolver.ConstructorTarget.For(Of T)(Expression(Of System.Func(Of Rezolver.RezolveContextExpressionHelper, T)), Rezolver.ITargetAdapter)
+- uid: Rezolver.ConstructorTarget.FromNewExpression(System.Type,NewExpression,Rezolver.ITargetAdapter)
+  name: FromNewExpression(Type, NewExpression, ITargetAdapter)
+  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression_System_Type_NewExpression_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.ConstructorTarget.FromNewExpression(System.Type,NewExpression,Rezolver.ITargetAdapter)
+  fullName: Rezolver.ConstructorTarget.FromNewExpression(System.Type, NewExpression, Rezolver.ITargetAdapter)
+- uid: Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},Rezolver.ITargetAdapter)
+  name: FromNewExpression<T>(Expression<Func<RezolveContextExpressionHelper, T>>, ITargetAdapter)
+  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},Rezolver.ITargetAdapter)
+  name.vb: FromNewExpression(Of T)(Expression(Of Func(Of RezolveContextExpressionHelper, T)), ITargetAdapter)
+  fullName: Rezolver.ConstructorTarget.FromNewExpression<T>(Expression<System.Func<Rezolver.RezolveContextExpressionHelper, T>>, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.ConstructorTarget.FromNewExpression(Of T)(Expression(Of System.Func(Of Rezolver.RezolveContextExpressionHelper, T)), Rezolver.ITargetAdapter)
 - uid: Rezolver.ConstructorTarget.WithArgs(System.Type,ConstructorInfo,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})
   name: WithArgs(Type, ConstructorInfo, IDictionary<String, ITarget>)
   href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_WithArgs_System_Type_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__
@@ -1141,46 +1146,6 @@ references:
   name.vb: TryResolve(Of TObject)(IContainer, IScopedContainer, ByRef TObject)
   fullName: Rezolver.IRezolverExtensions.TryResolve<TObject>(Rezolver.IContainer, Rezolver.IScopedContainer, out TObject)
   fullName.vb: Rezolver.IRezolverExtensions.TryResolve(Of TObject)(Rezolver.IContainer, Rezolver.IScopedContainer, ByRef TObject)
-- uid: Rezolver.IRezolveTargetEntry
-  name: IRezolveTargetEntry
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry
-  commentId: T:Rezolver.IRezolveTargetEntry
-  fullName: Rezolver.IRezolveTargetEntry
-- uid: Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget,System.Boolean)
-  name: AddTarget(ITarget, Boolean)
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_AddTarget_Rezolver_ITarget_System_Boolean_
-  commentId: M:Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget,System.Boolean)
-  fullName: Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget, System.Boolean)
-- uid: Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer,Rezolver.IRezolveTargetEntry)
-  name: Attach(ITargetContainer, IRezolveTargetEntry)
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_Attach_Rezolver_ITargetContainer_Rezolver_IRezolveTargetEntry_
-  commentId: M:Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer,Rezolver.IRezolveTargetEntry)
-  fullName: Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer, Rezolver.IRezolveTargetEntry)
-- uid: Rezolver.IRezolveTargetEntry.DefaultTarget
-  name: DefaultTarget
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_DefaultTarget
-  commentId: P:Rezolver.IRezolveTargetEntry.DefaultTarget
-  fullName: Rezolver.IRezolveTargetEntry.DefaultTarget
-- uid: Rezolver.IRezolveTargetEntry.ParentBuilder
-  name: ParentBuilder
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_ParentBuilder
-  commentId: P:Rezolver.IRezolveTargetEntry.ParentBuilder
-  fullName: Rezolver.IRezolveTargetEntry.ParentBuilder
-- uid: Rezolver.IRezolveTargetEntry.RegisteredType
-  name: RegisteredType
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_RegisteredType
-  commentId: P:Rezolver.IRezolveTargetEntry.RegisteredType
-  fullName: Rezolver.IRezolveTargetEntry.RegisteredType
-- uid: Rezolver.IRezolveTargetEntry.Targets
-  name: Targets
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_Targets
-  commentId: P:Rezolver.IRezolveTargetEntry.Targets
-  fullName: Rezolver.IRezolveTargetEntry.Targets
-- uid: Rezolver.IRezolveTargetEntry.UseFallback
-  name: UseFallback
-  href: api/Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry_UseFallback
-  commentId: P:Rezolver.IRezolveTargetEntry.UseFallback
-  fullName: Rezolver.IRezolveTargetEntry.UseFallback
 - uid: Rezolver.IRezolveTargetScopingExtensions
   name: IRezolveTargetScopingExtensions
   href: api/Rezolver.IRezolveTargetScopingExtensions.html#Rezolver_IRezolveTargetScopingExtensions
@@ -1760,11 +1725,6 @@ references:
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_BindWithRezolvedOrOptionalDefault_MethodBase_Rezolver_CompileContext_
   commentId: M:Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase,Rezolver.CompileContext)
   fullName: Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase, Rezolver.CompileContext)
-- uid: Rezolver.ParameterBinding.DeriveDefaultParameterBindings(MethodBase)
-  name: DeriveDefaultParameterBindings(MethodBase)
-  href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_DeriveDefaultParameterBindings_MethodBase_
-  commentId: M:Rezolver.ParameterBinding.DeriveDefaultParameterBindings(MethodBase)
-  fullName: Rezolver.ParameterBinding.DeriveDefaultParameterBindings(MethodBase)
 - uid: Rezolver.ParameterBinding.IsDefault
   name: IsDefault
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_IsDefault
@@ -1942,13 +1902,6 @@ references:
   name.vb: Resolve(Of T)()
   fullName: Rezolver.RezolveContextExpressionHelper.Resolve<T>()
   fullName.vb: Rezolver.RezolveContextExpressionHelper.Resolve(Of T)()
-- uid: Rezolver.RezolveContextExpressionHelper.Resolve``1(System.String)
-  name: Resolve<T>(String)
-  href: api/Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper_Resolve__1_System_String_
-  commentId: M:Rezolver.RezolveContextExpressionHelper.Resolve``1(System.String)
-  name.vb: Resolve(Of T)(String)
-  fullName: Rezolver.RezolveContextExpressionHelper.Resolve<T>(System.String)
-  fullName.vb: Rezolver.RezolveContextExpressionHelper.Resolve(Of T)(System.String)
 - uid: Rezolver.RezolveContextPlaceholderExpression
   name: RezolveContextPlaceholderExpression
   href: api/Rezolver.RezolveContextPlaceholderExpression.html#Rezolver_RezolveContextPlaceholderExpression
@@ -1984,11 +1937,11 @@ references:
   href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget
   commentId: T:Rezolver.RezolvedTarget
   fullName: Rezolver.RezolvedTarget
-- uid: Rezolver.RezolvedTarget.#ctor(System.Type)
-  name: RezolvedTarget(Type)
-  href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget__ctor_System_Type_
-  commentId: M:Rezolver.RezolvedTarget.#ctor(System.Type)
-  fullName: Rezolver.RezolvedTarget.RezolvedTarget(System.Type)
+- uid: Rezolver.RezolvedTarget.#ctor(System.Type,Rezolver.ITarget)
+  name: RezolvedTarget(Type, ITarget)
+  href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget__ctor_System_Type_Rezolver_ITarget_
+  commentId: M:Rezolver.RezolvedTarget.#ctor(System.Type,Rezolver.ITarget)
+  fullName: Rezolver.RezolvedTarget.RezolvedTarget(System.Type, Rezolver.ITarget)
 - uid: Rezolver.RezolvedTarget.CanResolve(Rezolver.CompileContext)
   name: CanResolve(CompileContext)
   href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_CanResolve_Rezolver_CompileContext_
@@ -2028,73 +1981,6 @@ references:
   name.vb: CreateTarget(Of T)(ITargetAdapter, Expression(Of Func(Of RezolveContextExpressionHelper, T)))
   fullName: Rezolver.RezolveTargetAdapterExtensions.CreateTarget<T>(Rezolver.ITargetAdapter, Expression<System.Func<Rezolver.RezolveContextExpressionHelper, T>>)
   fullName.vb: Rezolver.RezolveTargetAdapterExtensions.CreateTarget(Of T)(Rezolver.ITargetAdapter, Expression(Of System.Func(Of Rezolver.RezolveContextExpressionHelper, T)))
-- uid: Rezolver.RezolveTargetEntry
-  name: RezolveTargetEntry
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry
-  commentId: T:Rezolver.RezolveTargetEntry
-  fullName: Rezolver.RezolveTargetEntry
-- uid: Rezolver.RezolveTargetEntry.#ctor(Rezolver.ITargetContainer,System.Type,Rezolver.ITarget[])
-  name: RezolveTargetEntry(ITargetContainer, Type, ITarget[])
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry__ctor_Rezolver_ITargetContainer_System_Type_Rezolver_ITarget___
-  commentId: M:Rezolver.RezolveTargetEntry.#ctor(Rezolver.ITargetContainer,System.Type,Rezolver.ITarget[])
-  name.vb: RezolveTargetEntry(ITargetContainer, Type, ITarget())
-  fullName: Rezolver.RezolveTargetEntry.RezolveTargetEntry(Rezolver.ITargetContainer, System.Type, Rezolver.ITarget[])
-  fullName.vb: Rezolver.RezolveTargetEntry.RezolveTargetEntry(Rezolver.ITargetContainer, System.Type, Rezolver.ITarget())
-- uid: Rezolver.RezolveTargetEntry.AddTarget(Rezolver.ITarget,System.Boolean)
-  name: AddTarget(ITarget, Boolean)
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_AddTarget_Rezolver_ITarget_System_Boolean_
-  commentId: M:Rezolver.RezolveTargetEntry.AddTarget(Rezolver.ITarget,System.Boolean)
-  fullName: Rezolver.RezolveTargetEntry.AddTarget(Rezolver.ITarget, System.Boolean)
-- uid: Rezolver.RezolveTargetEntry.Attach(Rezolver.ITargetContainer,Rezolver.IRezolveTargetEntry)
-  name: Attach(ITargetContainer, IRezolveTargetEntry)
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_Attach_Rezolver_ITargetContainer_Rezolver_IRezolveTargetEntry_
-  commentId: M:Rezolver.RezolveTargetEntry.Attach(Rezolver.ITargetContainer,Rezolver.IRezolveTargetEntry)
-  fullName: Rezolver.RezolveTargetEntry.Attach(Rezolver.ITargetContainer, Rezolver.IRezolveTargetEntry)
-- uid: Rezolver.RezolveTargetEntry.CreateExpression(Rezolver.CompileContext)
-  name: CreateExpression(CompileContext)
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_CreateExpression_Rezolver_CompileContext_
-  commentId: M:Rezolver.RezolveTargetEntry.CreateExpression(Rezolver.CompileContext)
-  fullName: Rezolver.RezolveTargetEntry.CreateExpression(Rezolver.CompileContext)
-- uid: Rezolver.RezolveTargetEntry.CreateListTarget
-  name: CreateListTarget()
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_CreateListTarget
-  commentId: M:Rezolver.RezolveTargetEntry.CreateListTarget
-  fullName: Rezolver.RezolveTargetEntry.CreateListTarget()
-- uid: Rezolver.RezolveTargetEntry.DeclaredType
-  name: DeclaredType
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_DeclaredType
-  commentId: P:Rezolver.RezolveTargetEntry.DeclaredType
-  fullName: Rezolver.RezolveTargetEntry.DeclaredType
-- uid: Rezolver.RezolveTargetEntry.DefaultTarget
-  name: DefaultTarget
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_DefaultTarget
-  commentId: P:Rezolver.RezolveTargetEntry.DefaultTarget
-  fullName: Rezolver.RezolveTargetEntry.DefaultTarget
-- uid: Rezolver.RezolveTargetEntry.ParentBuilder
-  name: ParentBuilder
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_ParentBuilder
-  commentId: P:Rezolver.RezolveTargetEntry.ParentBuilder
-  fullName: Rezolver.RezolveTargetEntry.ParentBuilder
-- uid: Rezolver.RezolveTargetEntry.RegisteredType
-  name: RegisteredType
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_RegisteredType
-  commentId: P:Rezolver.RezolveTargetEntry.RegisteredType
-  fullName: Rezolver.RezolveTargetEntry.RegisteredType
-- uid: Rezolver.RezolveTargetEntry.SupportsType(System.Type)
-  name: SupportsType(Type)
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_SupportsType_System_Type_
-  commentId: M:Rezolver.RezolveTargetEntry.SupportsType(System.Type)
-  fullName: Rezolver.RezolveTargetEntry.SupportsType(System.Type)
-- uid: Rezolver.RezolveTargetEntry.Targets
-  name: Targets
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_Targets
-  commentId: P:Rezolver.RezolveTargetEntry.Targets
-  fullName: Rezolver.RezolveTargetEntry.Targets
-- uid: Rezolver.RezolveTargetEntry.UseFallback
-  name: UseFallback
-  href: api/Rezolver.RezolveTargetEntry.html#Rezolver_RezolveTargetEntry_UseFallback
-  commentId: P:Rezolver.RezolveTargetEntry.UseFallback
-  fullName: Rezolver.RezolveTargetEntry.UseFallback
 - uid: Rezolver.RezolveTargetExpression
   name: RezolveTargetExpression
   href: api/Rezolver.RezolveTargetExpression.html#Rezolver_RezolveTargetExpression
