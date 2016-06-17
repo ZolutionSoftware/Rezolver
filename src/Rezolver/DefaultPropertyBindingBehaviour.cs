@@ -17,7 +17,7 @@ namespace Rezolver
 			}
 		}
 
-		public virtual PropertyOrFieldBinding[] GetPropertyBindings(Type type)
+		public virtual PropertyOrFieldBinding[] GetPropertyBindings(CompileContext context, Type type)
 		{
 			//find all publicly writable properties and public fields, emit 
 			return BindProperties(type, GetBindableProperties(type))

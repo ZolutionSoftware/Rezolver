@@ -47,21 +47,6 @@ namespace Rezolver
 		private readonly ITarget _fallbackTarget;	
 
 		/// <summary>
-		/// Creates a new <see cref="RezolvedTarget"/> for the given <paramref name="type"/> which will attempt to 
-		/// resolve a value at compile time and/or resolve-time and, if it can't, will either use the <paramref name="fallbackTarget"/>
-		/// or will throw an exception.
-		/// </summary>
-		/// <param name="type">Required.  The type to be resolved</param>
-		/// <param name="fallbackTarget">Optional.  The target to be used if the value cannot be resolved at either compile time or 
-		/// resolve-time.</param>
-		public RezolvedTarget(Type type, ITarget fallbackTarget = null)
-		{
-			type.MustNotBeNull("type");
-			_resolveType = type;
-			_fallbackTarget = fallbackTarget;
-		}
-
-		/// <summary>
 		/// The type that will be resolved
 		/// </summary>
 		public override Type DeclaredType
@@ -81,23 +66,63 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Returns true or false based on whether this target will be able to resolve
-		/// an object from the context that is passed.  Note - it's a way of dry-running
-		/// the resolve operation before compiling the expression.
-		/// 
-		/// Please note, also, that it only works statically.  I.e. - if the dependency builder
-		/// in context cannot resolve the type, then this method returns false - it will not take 
-		/// into account dynamic fallback to the run time resolver.
-		/// 
-		/// TODO: This might be removed as the functionality for which it was added might no longer be
-		/// needed.
+		/// Gets the target that this <see cref="RezolvedTarget"/> will fallback to if a satisfactory target cannot be found
+		/// at compile time.
 		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
-		public virtual bool CanResolve(CompileContext context)
+		/// <remarks>The <see cref="ITarget.UseFallback"/> property is also used to determine whether this will be 
+		/// used.  If the target resolved from the <see cref="CompileContext"/> has its <see cref="ITarget.UseFallback"/>
+		/// property set to true, and this property is non-null for this target, then this target will be used.
+		/// 
+		/// Note also that extension containers such as <see cref="OverridingContainer"/> also have the ability to override
+		/// the use of this fallback if they successfully resolve the type.
+		/// </remarks>
+		public ITarget FallbackTarget
+		{
+			get
+			{
+				return _fallbackTarget;
+			}
+		}
+
+		/// <summary>
+		/// Creates a new <see cref="RezolvedTarget"/> for the given <paramref name="type"/> which will attempt to 
+		/// resolve a value at compile time and/or resolve-time and, if it can't, will either use the <paramref name="fallbackTarget"/>
+		/// or will throw an exception.
+		/// </summary>
+		/// <param name="type">Required.  The type to be resolved</param>
+		/// <param name="fallbackTarget">Optional.  The target to be used if the value cannot be resolved at either compile time or 
+		/// resolve-time.</param>
+		public RezolvedTarget(Type type, ITarget fallbackTarget = null)
+		{
+			type.MustNotBeNull("type");
+			_resolveType = type;
+			_fallbackTarget = fallbackTarget;
+		}
+
+		
+
+		/// <summary>
+		/// Attempts to obtain the target that this <see cref="RezolvedTarget"/> resolves to for the given <see cref="CompileContext"/>.
+		/// 
+		/// Used in the implementation of <see cref="CreateExpressionBase(CompileContext)"/> but also available to consumers to enable
+		/// checking of RezolvedTargets to see if they'll succeed at compile time (useful when late-binding overloaded constructors, 
+		/// for example).
+		/// </summary>
+		/// <param name="context">The context from which a target is to be resolved.</param>
+		/// <returns>The target resolved by this target - could be the <see cref="FallbackTarget"/>, could be null.</returns>
+		/// <remarks>The target that is returned depends both on the <paramref name="context"/> passed and also whether 
+		/// a <see cref="FallbackTarget"/> has been provided to this target.</remarks>
+		public virtual ITarget Resolve(CompileContext context)
 		{
 			context.MustNotBeNull(nameof(context));
-			return context.Fetch(_resolveType) != null;
+
+			var fromContext = context.Fetch(_resolveType);
+			if (fromContext == null)
+				return _fallbackTarget; //might still be null of course
+			else if (fromContext.UseFallback)
+				return _fallbackTarget ?? fromContext;
+
+			return fromContext;
 		}
 
 		/// <summary>
@@ -121,13 +146,10 @@ namespace Rezolver
 			//if it is, then we will defer to a resolve call on that rezolver.  Otherwise we will use the static
 			//target, or throw an exception.
 
-			//now we try and fetch the target from the rezolver that is passed in the context
-			var staticTarget = context.Fetch(DeclaredType);
+			//try to resolve the target from the context.  Note this could resolve the fallback target.
+			var staticTarget = Resolve(context);
 			//TODO: This should be a shared expression
 			var thisRezolver = Expression.Constant(context.Rezolver, typeof(IContainer));
-			//I did have a line that used 'context.TargetType ?? DeclaredType' but I changed this because the 
-			//RezolvedTarget should know in advance which type it is that's being resolved, and that shouldn't 
-			//change after creation.  It also fixed the initial set of bugs I had with resolving aliases.
 			var declaredTypeExpr = Expression.Constant(DeclaredType, typeof(Type));
 
 			var newContextLocal = context.GetOrAddSharedLocal(typeof(RezolveContext), "newContext");
@@ -135,15 +157,12 @@ namespace Rezolver
 			var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
 			bool setNewContextFirst = false;
 			Expression staticExpr = null;
-			Expression defaultExpr = _fallbackTarget != null ? _fallbackTarget.CreateExpression(new CompileContext(context, DeclaredType, true)) : null;
 			if (staticTarget != null)
 			{
 				staticExpr = staticTarget.CreateExpression(new CompileContext(context, DeclaredType, true)); //need a new context here to change the resolve type to our declared type.
 				if (staticExpr == null)
 					throw new InvalidOperationException(string.Format(ExceptionResources.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
 			}
-			else if (defaultExpr != null)
-				staticExpr = defaultExpr; //if no target found then use the fallback
 			else
 			{
 				//if no fallback call back into the rezolver passed in the context to this method
@@ -158,6 +177,7 @@ namespace Rezolver
 			if (staticExpr.Type != DeclaredType)
 				staticExpr = Expression.Convert(staticExpr, DeclaredType);
 
+			//Equivalent to (RezolveContext r) => r.Resolver.CanResolve(type) ? r.Resolver.Resolve<DeclaredType>() : <<staticExpr>>
 			Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextRezolverPropertyExpression, RezolverCanResolveMethod, newContextLocal),
 					Expression.Convert(Expression.Call(context.ContextRezolverPropertyExpression, RezolverResolveMethod, newContextLocal), DeclaredType),
 					staticExpr
@@ -181,7 +201,6 @@ namespace Rezolver
 				return blockExpressions[0];
 			else
 				return Expression.Block(DeclaredType, blockExpressions);
-			//#endif
 		}
 	}
 }

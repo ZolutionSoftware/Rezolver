@@ -33,6 +33,10 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <returns><c>true</c> if <paramref name="type"/> is supported, <c>false</c> otherwise.</returns>
+		/// <remarks>It is strongly suggested that you use this method to check whether the target can construct
+		/// an instance of a given type rather than performing any type checking yourself on the 
+		/// <see cref="DeclaredType"/>, because an <see cref="ITarget"/> might be able to support a much wider
+		/// range of types other than just those which are directly compatible with its <see cref="DeclaredType"/>.</remarks>
 		bool SupportsType(Type type);
 		/// <summary>
 		/// Called to create the expression that will produce the object that is resolved by this target.  The expression

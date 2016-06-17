@@ -245,6 +245,12 @@ that is compatible with, the passed <em>type</em>.</p>
                   </tr>
                 </tbody>
               </table>
+              <h5 id="Rezolver_ITarget_SupportsType_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>It is strongly suggested that you use this method to check whether the target can construct
+an instance of a given type rather than performing any type checking yourself on the </p>
+<p><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>, because an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> might be able to support a much wider
+range of types other than just those which are directly compatible with its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+</div>
             </article>
           </div>
           

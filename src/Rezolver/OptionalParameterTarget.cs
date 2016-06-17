@@ -30,6 +30,14 @@ namespace Rezolver
 			}
 		}
 
+		public override bool UseFallback
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public ParameterInfo MethodParameter { get; }
 		/// <summary>
 		/// Constructs a new instance of the <see cref="OptionalParameterTarget"/> class.

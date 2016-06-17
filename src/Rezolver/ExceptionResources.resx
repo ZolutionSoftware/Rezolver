@@ -178,6 +178,9 @@
     <value>No constructor found on the type {0} which can be satisfied by the CompileContext</value>
   </data>
   <data name="MoreThanOneBestConstructorFormat" xml:space="preserve">
-    <value>More than one constructor for {0} found that can be bound with the most parameters from the current context</value>
+    <value>More than one constructor for {0} found that could be bound from the current context.
+
+Possible candidates:
+{1}</value>
   </data>
 </root>

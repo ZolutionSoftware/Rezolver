@@ -316,18 +316,13 @@ references:
   href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget
   commentId: T:Rezolver.ConstructorTarget
   fullName: Rezolver.ConstructorTarget
-- uid: Rezolver.ConstructorTarget.#ctor(System.Type,ConstructorInfo,Rezolver.ParameterBinding[])
-  name: ConstructorTarget(Type, ConstructorInfo, ParameterBinding[])
-  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_ParameterBinding___
-  commentId: M:Rezolver.ConstructorTarget.#ctor(System.Type,ConstructorInfo,Rezolver.ParameterBinding[])
-  name.vb: ConstructorTarget(Type, ConstructorInfo, ParameterBinding())
-  fullName: Rezolver.ConstructorTarget.ConstructorTarget(System.Type, ConstructorInfo, Rezolver.ParameterBinding[])
-  fullName.vb: Rezolver.ConstructorTarget.ConstructorTarget(System.Type, ConstructorInfo, Rezolver.ParameterBinding())
-- uid: Rezolver.ConstructorTarget._ctor
-  name: _ctor
-  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor
-  commentId: F:Rezolver.ConstructorTarget._ctor
-  fullName: Rezolver.ConstructorTarget._ctor
+- uid: Rezolver.ConstructorTarget.#ctor(System.Type,ConstructorInfo,Rezolver.IPropertyBindingBehaviour,Rezolver.ParameterBinding[])
+  name: ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])
+  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_IPropertyBindingBehaviour_Rezolver_ParameterBinding___
+  commentId: M:Rezolver.ConstructorTarget.#ctor(System.Type,ConstructorInfo,Rezolver.IPropertyBindingBehaviour,Rezolver.ParameterBinding[])
+  name.vb: ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding())
+  fullName: Rezolver.ConstructorTarget.ConstructorTarget(System.Type, ConstructorInfo, Rezolver.IPropertyBindingBehaviour, Rezolver.ParameterBinding[])
+  fullName.vb: Rezolver.ConstructorTarget.ConstructorTarget(System.Type, ConstructorInfo, Rezolver.IPropertyBindingBehaviour, Rezolver.ParameterBinding())
 - uid: Rezolver.ConstructorTarget.Auto(System.Type,Rezolver.IPropertyBindingBehaviour)
   name: Auto(Type, IPropertyBindingBehaviour)
   href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour_
@@ -602,11 +597,11 @@ references:
   href: api/Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour_GetBindableProperties_System_Type_
   commentId: M:Rezolver.DefaultPropertyBindingBehaviour.GetBindableProperties(System.Type)
   fullName: Rezolver.DefaultPropertyBindingBehaviour.GetBindableProperties(System.Type)
-- uid: Rezolver.DefaultPropertyBindingBehaviour.GetPropertyBindings(System.Type)
-  name: GetPropertyBindings(Type)
-  href: api/Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour_GetPropertyBindings_System_Type_
-  commentId: M:Rezolver.DefaultPropertyBindingBehaviour.GetPropertyBindings(System.Type)
-  fullName: Rezolver.DefaultPropertyBindingBehaviour.GetPropertyBindings(System.Type)
+- uid: Rezolver.DefaultPropertyBindingBehaviour.GetPropertyBindings(Rezolver.CompileContext,System.Type)
+  name: GetPropertyBindings(CompileContext, Type)
+  href: api/Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour_GetPropertyBindings_Rezolver_CompileContext_System_Type_
+  commentId: M:Rezolver.DefaultPropertyBindingBehaviour.GetPropertyBindings(Rezolver.CompileContext,System.Type)
+  fullName: Rezolver.DefaultPropertyBindingBehaviour.GetPropertyBindings(Rezolver.CompileContext, System.Type)
 - uid: Rezolver.DefaultPropertyBindingBehaviour.Instance
   name: Instance
   href: api/Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour_Instance
@@ -1006,11 +1001,11 @@ references:
   href: api/Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour
   commentId: T:Rezolver.IPropertyBindingBehaviour
   fullName: Rezolver.IPropertyBindingBehaviour
-- uid: Rezolver.IPropertyBindingBehaviour.GetPropertyBindings(System.Type)
-  name: GetPropertyBindings(Type)
-  href: api/Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour_GetPropertyBindings_System_Type_
-  commentId: M:Rezolver.IPropertyBindingBehaviour.GetPropertyBindings(System.Type)
-  fullName: Rezolver.IPropertyBindingBehaviour.GetPropertyBindings(System.Type)
+- uid: Rezolver.IPropertyBindingBehaviour.GetPropertyBindings(Rezolver.CompileContext,System.Type)
+  name: GetPropertyBindings(CompileContext, Type)
+  href: api/Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour_GetPropertyBindings_Rezolver_CompileContext_System_Type_
+  commentId: M:Rezolver.IPropertyBindingBehaviour.GetPropertyBindings(Rezolver.CompileContext,System.Type)
+  fullName: Rezolver.IPropertyBindingBehaviour.GetPropertyBindings(Rezolver.CompileContext, System.Type)
 - uid: Rezolver.IRezolverExtensions
   name: IRezolverExtensions
   href: api/Rezolver.IRezolverExtensions.html#Rezolver_IRezolverExtensions
@@ -1626,6 +1621,11 @@ references:
   href: api/Rezolver.OptionalParameterTarget.html#Rezolver_OptionalParameterTarget_SuppressScopeTracking
   commentId: P:Rezolver.OptionalParameterTarget.SuppressScopeTracking
   fullName: Rezolver.OptionalParameterTarget.SuppressScopeTracking
+- uid: Rezolver.OptionalParameterTarget.UseFallback
+  name: UseFallback
+  href: api/Rezolver.OptionalParameterTarget.html#Rezolver_OptionalParameterTarget_UseFallback
+  commentId: P:Rezolver.OptionalParameterTarget.UseFallback
+  fullName: Rezolver.OptionalParameterTarget.UseFallback
 - uid: Rezolver.OverridingContainer
   name: OverridingContainer
   href: api/Rezolver.OverridingContainer.html#Rezolver_OverridingContainer
@@ -1725,11 +1725,6 @@ references:
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_BindWithRezolvedOrOptionalDefault_MethodBase_Rezolver_CompileContext_
   commentId: M:Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase,Rezolver.CompileContext)
   fullName: Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase, Rezolver.CompileContext)
-- uid: Rezolver.ParameterBinding.IsDefault
-  name: IsDefault
-  href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_IsDefault
-  commentId: P:Rezolver.ParameterBinding.IsDefault
-  fullName: Rezolver.ParameterBinding.IsDefault
 - uid: Rezolver.ParameterBinding.IsValid
   name: IsValid
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_IsValid
@@ -1745,6 +1740,11 @@ references:
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Parameter
   commentId: P:Rezolver.ParameterBinding.Parameter
   fullName: Rezolver.ParameterBinding.Parameter
+- uid: Rezolver.ParameterBinding.Resolve(Rezolver.CompileContext)
+  name: Resolve(CompileContext)
+  href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Resolve_Rezolver_CompileContext_
+  commentId: M:Rezolver.ParameterBinding.Resolve(Rezolver.CompileContext)
+  fullName: Rezolver.ParameterBinding.Resolve(Rezolver.CompileContext)
 - uid: Rezolver.ParameterBinding.Target
   name: Target
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Target
@@ -1942,11 +1942,6 @@ references:
   href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget__ctor_System_Type_Rezolver_ITarget_
   commentId: M:Rezolver.RezolvedTarget.#ctor(System.Type,Rezolver.ITarget)
   fullName: Rezolver.RezolvedTarget.RezolvedTarget(System.Type, Rezolver.ITarget)
-- uid: Rezolver.RezolvedTarget.CanResolve(Rezolver.CompileContext)
-  name: CanResolve(CompileContext)
-  href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_CanResolve_Rezolver_CompileContext_
-  commentId: M:Rezolver.RezolvedTarget.CanResolve(Rezolver.CompileContext)
-  fullName: Rezolver.RezolvedTarget.CanResolve(Rezolver.CompileContext)
 - uid: Rezolver.RezolvedTarget.CreateExpressionBase(Rezolver.CompileContext)
   name: CreateExpressionBase(CompileContext)
   href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_CreateExpressionBase_Rezolver_CompileContext_
@@ -1957,6 +1952,16 @@ references:
   href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_DeclaredType
   commentId: P:Rezolver.RezolvedTarget.DeclaredType
   fullName: Rezolver.RezolvedTarget.DeclaredType
+- uid: Rezolver.RezolvedTarget.FallbackTarget
+  name: FallbackTarget
+  href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_FallbackTarget
+  commentId: P:Rezolver.RezolvedTarget.FallbackTarget
+  fullName: Rezolver.RezolvedTarget.FallbackTarget
+- uid: Rezolver.RezolvedTarget.Resolve(Rezolver.CompileContext)
+  name: Resolve(CompileContext)
+  href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_Resolve_Rezolver_CompileContext_
+  commentId: M:Rezolver.RezolvedTarget.Resolve(Rezolver.CompileContext)
+  fullName: Rezolver.RezolvedTarget.Resolve(Rezolver.CompileContext)
 - uid: Rezolver.RezolvedTarget.SuppressScopeTracking
   name: SuppressScopeTracking
   href: api/Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_SuppressScopeTracking

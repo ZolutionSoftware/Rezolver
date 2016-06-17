@@ -73,7 +73,7 @@
               </h1>
               <div class="markdown level0 summary"><p>The most common target used for building new objects.  Represents binding to a type&#39;s constructor with zero or more
 arguments supplied by other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
-<p>In addition to using the <span class="xref">Rezolver.ConstructorTarget.</span> constructor
+<p>In addition to using the <see cref="!:ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, ParameterBinding[])"></see> constructor
 you can also use the factory methods - such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto<t>(IPropertyBindingBehaviour)</t></a> and <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Best__1_Rezolver_IPropertyBindingBehaviour_">Best<t>(IPropertyBindingBehaviour)</t></a>.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
@@ -138,15 +138,15 @@ you can also use the factory methods - such as <a class="xref" href="Rezolver.Co
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_ParameterBinding___.md&amp;value=---%0Auid%3A%20Rezolver.ConstructorTarget.%23ctor(System.Type%2CConstructorInfo%2CRezolver.ParameterBinding%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_IPropertyBindingBehaviour_Rezolver_ParameterBinding___.md&amp;value=---%0Auid%3A%20Rezolver.ConstructorTarget.%23ctor(System.Type%2CConstructorInfo%2CRezolver.IPropertyBindingBehaviour%2CRezolver.ParameterBinding%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_ParameterBinding___" data-uid="Rezolver.ConstructorTarget.#ctor(System.Type,ConstructorInfo,Rezolver.ParameterBinding[])">ConstructorTarget(Type, ConstructorInfo, ParameterBinding[])</h4>
+              <h4 id="Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_IPropertyBindingBehaviour_Rezolver_ParameterBinding___" data-uid="Rezolver.ConstructorTarget.#ctor(System.Type,ConstructorInfo,Rezolver.IPropertyBindingBehaviour,Rezolver.ParameterBinding[])">ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ConstructorTarget(Type type, ConstructorInfo ctor, params ParameterBinding[] parameterBindings)</code></pre>
+                <pre><code class="lang-csharp hljs">public ConstructorTarget(Type type, ConstructorInfo ctor, IPropertyBindingBehaviour propertyBindingBehaviour, ParameterBinding[] parameterBindings)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -169,37 +169,13 @@ you can also use the factory methods - such as <a class="xref" href="Rezolver.Co
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding">ParameterBinding</a>[]</td>
-                    <td><em>parameterBindings</em></td>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><em>propertyBindingBehaviour</em></td>
                     <td></td>
                   </tr>
-                </tbody>
-              </table>
-              <h3 id="fields">Fields
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ConstructorTarget__ctor.md&amp;value=---%0Auid%3A%20Rezolver.ConstructorTarget._ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              
-              <h4 id="Rezolver_ConstructorTarget__ctor" data-uid="Rezolver.ConstructorTarget._ctor">_ctor</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected readonly ConstructorInfo _ctor</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
                   <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">ConstructorInfo</span></td>
+                    <td><a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding">ParameterBinding</a>[]</td>
+                    <td><em>parameterBindings</em></td>
                     <td></td>
                   </tr>
                 </tbody>

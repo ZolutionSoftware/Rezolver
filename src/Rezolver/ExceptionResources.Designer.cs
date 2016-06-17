@@ -96,7 +96,10 @@ namespace Rezolver {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to More than one constructor for {0} found that can be bound with the most parameters from the current context.
+        ///    Looks up a localized string similar to More than one constructor for {0} found that could be bound from the current context.
+        ///
+        ///Possible candidates:
+        ///{1}.
         /// </summary>
         public static string MoreThanOneBestConstructorFormat {
             get {

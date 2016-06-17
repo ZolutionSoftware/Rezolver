@@ -118,11 +118,8 @@ are moved further up the expression tree into one conditional.</p>
                   <h4><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a></h4>
                   <section><p>The most common target used for building new objects.  Represents binding to a type&#39;s constructor with zero or more
 arguments supplied by other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
-<p>In addition to using the <span class="xref">Rezolver.ConstructorTarget.</span> constructor
+<p>In addition to using the <see cref="!:ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, ParameterBinding[])"></see> constructor
 you can also use the factory methods - such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto<t>(IPropertyBindingBehaviour)</t></a> and <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Best__1_Rezolver_IPropertyBindingBehaviour_">Best<t>(IPropertyBindingBehaviour)</t></a>.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.ConstructorWithPropertiesTarget.html#Rezolver_ConstructorWithPropertiesTarget">ConstructorWithPropertiesTarget</a></h4>
-                  <section><p>Wraps a constructor target so that properties can be bound also.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></h4>
                   <section></section>
@@ -305,8 +302,7 @@ an object that can resolve dependencies or locate services - for example, it is 
 (see <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a>) be used to store the core type registrations from which this resolver will be built.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></h4>
-                  <section><p>Describes a type which discovers auto-binds properties to a rezolve context for 
-the purposes of building a ConstructorTarget</p>
+                  <section><p>Describes a type which discovers property/field bindings</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></h4>
                   <section><p>A rezolver that&#39;s also a lifetime scope - that is, it&#39;s disposable,

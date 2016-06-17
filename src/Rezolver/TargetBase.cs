@@ -187,8 +187,6 @@ namespace Rezolver
 				//add the boilerplate to add this object produced to the current scope.
 				if (!SuppressScopeTracking && !context.SuppressScopeTracking)
 				{
-					//now have to rewrite any RezolveTargetExpression objects that are in the tree, and then wrap that
-					//in the (probable) boilerplate that will push the generated object into the scope
 					result = CreateScopeTrackingExpression(context, result);
 				}
 

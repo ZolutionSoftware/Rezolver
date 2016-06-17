@@ -18,9 +18,7 @@ namespace Rezolver
 		/// </summary>
 		public ParameterInfo Parameter { get; private set; }
 		/// <summary>
-		/// The target that will provide the argument to the parameter when an expression is built.
-		/// 
-		/// If null, then the parameter is not bound and <see cref="IsValid"/> will be <c>false</c>.
+		/// The initial target that was bound to this parameter.
 		/// </summary>
 		public ITarget Target { get; private set; }
 
@@ -32,21 +30,33 @@ namespace Rezolver
 		public bool IsValid {  get { return Target != null; } }
 
 		/// <summary>
-		/// Gets a boolean indicating whether the parameter will be bound using the parameter's
-		/// default value (if it is an Optional parameter).
-		/// </summary>
-		public bool IsDefault {  get { return Target is OptionalParameterTarget; } }
-
-		/// <summary>
 		/// Constructs a new instance of the <see cref="ParameterBinding"/> class.
 		/// </summary>
 		/// <param name="parameter">Required - the parameter being bound</param>
-		/// <param name="target">Optional - the argument supplied for the parameter.  Note - if this is null,
-		/// then technically the parameter binding is invalid.</param>
-		public ParameterBinding(ParameterInfo parameter, ITarget target)
+		/// <param name="target">Optional - the argument supplied for the parameter.</param>
+		public ParameterBinding(ParameterInfo parameter, ITarget target = null)
 		{
 			Parameter = parameter;
-			Target = target;
+			Target = target ?? BindRezolvedArgument(parameter);
+		}
+		
+		/// <summary>
+		/// Fetch the target that would be bound to this parameter given the passed <see cref="CompileContext"/>
+		/// </summary>
+		/// <param name="context">The current compile context - a new one is created for the <see cref="Parameter"/> type</param>
+		/// <returns>The target that should be used for the parameter, or null if no target could be found.
+		/// 
+		/// Note that if the returned target's <see cref="ITarget.UseFallback"/> property is set to <c>true</c>,
+		/// then it means either the parameter's default value is being used, or that the target fetched from the 
+		/// target container in the context is a stub (e.g. empty enumerable)</returns>
+		public virtual ITarget Resolve(CompileContext context)
+		{
+			var target = Target;
+
+			if (target is RezolvedTarget)
+				return ((RezolvedTarget)target).Resolve(new CompileContext(context, Parameter.ParameterType, inheritSharedExpressions: true));
+
+			return target;
 		}
 
 		/// <summary>
@@ -64,17 +74,18 @@ namespace Rezolver
 		{
 			method.MustNotBeNull(nameof(method));
 			context.MustNotBeNull(nameof(context));
-			return method.GetParameters().Select(pi =>
-			{
-				RezolvedTarget temp = new RezolvedTarget(pi.ParameterType);
-				if (temp.CanResolve(context))
-					return new ParameterBinding(pi, temp);
-				if (pi.IsOptional)
-					return new ParameterBinding(pi, new OptionalParameterTarget(pi));
+			return method.GetParameters().Select(pi => new ParameterBinding(pi)
+			/*{
 
-				//return a default binding.
-				return new ParameterBinding(pi, null);
-			}).ToArray();
+				//RezolvedTarget temp = new RezolvedTarget(pi.ParameterType);
+				//if (temp.CanResolve(context))
+				//	return new ParameterBinding(pi, temp);
+				//if (pi.IsOptional)
+				//	return new ParameterBinding(pi, new OptionalParameterTarget(pi));
+
+				////return a default binding.
+				//return new ParameterBinding(pi, null);
+			}*/).ToArray();
 		}
 
 		/// <summary>
@@ -143,28 +154,14 @@ namespace Rezolver
 			return false;
 		}
 
-		private static ITarget GetDefaultValueTargetIfOptional(ParameterInfo p)
-		{
-			if (p.IsOptional)
-			{
-				//now check to see if a default is supplied in the IL with the method
-				if ((p.Attributes & ParameterAttributes.HasDefault) ==
-						ParameterAttributes.HasDefault)
-					return new ObjectTarget(p.DefaultValue, p.ParameterType);  //use the supplied default
-				else
-					return new DefaultTarget(p.ParameterType); //use the FastDefault method
-			}
-
-			return null;
-		}
-
 		private static ITarget GetArgValue(ParameterInfo p, IDictionary<string, ITarget> args)
 		{
 			ITarget argValue = null;
 			if (args.TryGetValue(p.Name, out argValue))
 				return argValue;
-
-			return GetDefaultValueTargetIfOptional(p);
+			if (p.IsOptional)
+				return new OptionalParameterTarget(p);
+			return null;
 		}
 	}
 }

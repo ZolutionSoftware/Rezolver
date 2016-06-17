@@ -6,17 +6,17 @@ using System.Text;
 namespace Rezolver
 {
 	/// <summary>
-	/// Describes a type which discovers auto-binds properties to a rezolve context for 
-	/// the purposes of building a ConstructorTarget
+	/// Describes a type which discovers property/field bindings
 	/// </summary>
 	public interface IPropertyBindingBehaviour
 	{
 		/// <summary>
-		/// Retrieves the property and/or field bindings for the given type
+		/// Retrieves the property and/or field bindings for the given type based on the given <see cref="CompileContext"/>
 		/// </summary>
+		/// <param name="context"></param>
 		/// <param name="type"></param>
 		/// <returns></returns>
-		PropertyOrFieldBinding[] GetPropertyBindings(Type type);
+		PropertyOrFieldBinding[] GetPropertyBindings(CompileContext context, Type type);
 	}
 
 }
