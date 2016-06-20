@@ -133,11 +133,8 @@ namespace Rezolver
 			//is a bunch of optional arguments in one, then that one will win out.
 			var candidates = methods.Select(m =>
 			{
-				ParameterBinding[] bindings;
-				BindMethod(m, args, out bindings);
-
-				return new { method = m, bindings = bindings };
-			}).Where(mp => mp.bindings != null).OrderByDescending(mp => mp.bindings.Length).ToArray();
+				return new { method = m, bindings = BindMethod(m, args) };
+			}).OrderByDescending(mp => mp.bindings.Length).ToArray();
 
 			if (candidates.Length == 0)
 				throw new InvalidOperationException("None of the methods could be bound to the supplied arguments");
@@ -147,25 +144,26 @@ namespace Rezolver
 			return candidates[0].bindings;
 		}
 
-		public static bool BindMethod(MethodBase method, IDictionary<string, ITarget> args, out ParameterBinding[] bindings)
+		/// <summary>
+		/// Matches named targets in <paramref name="args"/> to parameters on the passed <paramref name="method"/>,
+		/// creating default <see cref="ParameterBinding"/>s for any parameters for which named targets cannot be found.
+		/// </summary>
+		/// <param name="method"></param>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		public static ParameterBinding[] BindMethod(MethodBase method, IDictionary<string, ITarget> args)
 		{
-			bindings = null;
-			var temp = method.GetParameters().Select(p => new ParameterBinding(p, GetArgValue(p, args))).ToArray();
-			if (temp.All(pb => pb.Target != null && pb.Target.SupportsType(pb.Parameter.ParameterType)))
-			{
-				bindings = temp;
-				return true;
-			}
-			return false;
+			//TODO: Create logic in here to provide the option only to bind the method if each of the parameters
+			//in the method has a matching named entry in the args dictionary AND that there are no additional
+			//args NOT matched by parameters.  In this case, the method would return null.
+			return method.GetParameters().Select(p => new ParameterBinding(p, GetNamedArgTarget(p, args))).ToArray();
 		}
 
-		private static ITarget GetArgValue(ParameterInfo p, IDictionary<string, ITarget> args)
+		private static ITarget GetNamedArgTarget(ParameterInfo p, IDictionary<string, ITarget> args)
 		{
 			ITarget argValue = null;
 			if (args.TryGetValue(p.Name, out argValue))
 				return argValue;
-			if (p.IsOptional)
-				return new OptionalParameterTarget(p);
 			return null;
 		}
 	}

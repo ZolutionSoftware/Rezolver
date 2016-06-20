@@ -340,18 +340,6 @@ references:
   name.vb: Auto(Of T)(IPropertyBindingBehaviour)
   fullName: Rezolver.ConstructorTarget.Auto<T>(Rezolver.IPropertyBindingBehaviour)
   fullName.vb: Rezolver.ConstructorTarget.Auto(Of T)(Rezolver.IPropertyBindingBehaviour)
-- uid: Rezolver.ConstructorTarget.Best(System.Type,Rezolver.IPropertyBindingBehaviour)
-  name: Best(Type, IPropertyBindingBehaviour)
-  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Best_System_Type_Rezolver_IPropertyBindingBehaviour_
-  commentId: M:Rezolver.ConstructorTarget.Best(System.Type,Rezolver.IPropertyBindingBehaviour)
-  fullName: Rezolver.ConstructorTarget.Best(System.Type, Rezolver.IPropertyBindingBehaviour)
-- uid: Rezolver.ConstructorTarget.Best``1(Rezolver.IPropertyBindingBehaviour)
-  name: Best<T>(IPropertyBindingBehaviour)
-  href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Best__1_Rezolver_IPropertyBindingBehaviour_
-  commentId: M:Rezolver.ConstructorTarget.Best``1(Rezolver.IPropertyBindingBehaviour)
-  name.vb: Best(Of T)(IPropertyBindingBehaviour)
-  fullName: Rezolver.ConstructorTarget.Best<T>(Rezolver.IPropertyBindingBehaviour)
-  fullName.vb: Rezolver.ConstructorTarget.Best(Of T)(Rezolver.IPropertyBindingBehaviour)
 - uid: Rezolver.ConstructorTarget.CreateExpressionBase(Rezolver.CompileContext)
   name: CreateExpressionBase(CompileContext)
   href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_CreateExpressionBase_Rezolver_CompileContext_
@@ -1706,13 +1694,13 @@ references:
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding__ctor_ParameterInfo_Rezolver_ITarget_
   commentId: M:Rezolver.ParameterBinding.#ctor(ParameterInfo,Rezolver.ITarget)
   fullName: Rezolver.ParameterBinding.ParameterBinding(ParameterInfo, Rezolver.ITarget)
-- uid: Rezolver.ParameterBinding.BindMethod(MethodBase,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.ParameterBinding[]@)
-  name: BindMethod(MethodBase, IDictionary<String, ITarget>, out ParameterBinding[])
-  href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_BindMethod_MethodBase_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_ParameterBinding____
-  commentId: M:Rezolver.ParameterBinding.BindMethod(MethodBase,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.ParameterBinding[]@)
-  name.vb: BindMethod(MethodBase, IDictionary(Of String, ITarget), ByRef ParameterBinding())
-  fullName: Rezolver.ParameterBinding.BindMethod(MethodBase, System.Collections.Generic.IDictionary<System.String, Rezolver.ITarget>, out Rezolver.ParameterBinding[])
-  fullName.vb: Rezolver.ParameterBinding.BindMethod(MethodBase, System.Collections.Generic.IDictionary(Of System.String, Rezolver.ITarget), ByRef Rezolver.ParameterBinding())
+- uid: Rezolver.ParameterBinding.BindMethod(MethodBase,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})
+  name: BindMethod(MethodBase, IDictionary<String, ITarget>)
+  href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_BindMethod_MethodBase_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__
+  commentId: M:Rezolver.ParameterBinding.BindMethod(MethodBase,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})
+  name.vb: BindMethod(MethodBase, IDictionary(Of String, ITarget))
+  fullName: Rezolver.ParameterBinding.BindMethod(MethodBase, System.Collections.Generic.IDictionary<System.String, Rezolver.ITarget>)
+  fullName.vb: Rezolver.ParameterBinding.BindMethod(MethodBase, System.Collections.Generic.IDictionary(Of System.String, Rezolver.ITarget))
 - uid: Rezolver.ParameterBinding.BindOverload(MethodBase[],System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},MethodBase@)
   name: BindOverload(MethodBase[], IDictionary<String, ITarget>, out MethodBase)
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_BindOverload_MethodBase___System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__MethodBase__

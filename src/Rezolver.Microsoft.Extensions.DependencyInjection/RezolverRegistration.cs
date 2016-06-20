@@ -92,7 +92,7 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection
 				}
 				else
 				{
-					target = ConstructorTarget.Best(service.ImplementationType);
+					target = ConstructorTarget.Auto(service.ImplementationType);
 				}
 			}
 			else if (service.ImplementationInstance != null)

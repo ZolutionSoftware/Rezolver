@@ -10,8 +10,8 @@ namespace Rezolver
 	/// The most common target used for building new objects.  Represents binding to a type's constructor with zero or more
 	/// arguments supplied by other <see cref="ITarget"/>s.
 	/// 
-	/// In addition to using the <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, ParameterBinding[])"/> constructor
-	/// you can also use the factory methods - such as <see cref="Auto{T}(IPropertyBindingBehaviour)"/> and <see cref="Best{T}(IPropertyBindingBehaviour)"/>.
+	/// In addition to using the <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/> constructor
+	/// you can also use the factory methods - such as <see cref="Auto{T}(IPropertyBindingBehaviour)"/>.
 	/// </summary>
 	public class ConstructorTarget : TargetBase
 	{
@@ -109,13 +109,19 @@ namespace Rezolver
 				}
 			}
 		}
-		
-		private static readonly Type[] EmptyTypes = new Type[0];
 
 		private readonly Type _declaredType;
 		private readonly ConstructorInfo _ctor;
 		private readonly ParameterBinding[] _parameterBindings;
 		private IPropertyBindingBehaviour _propertyBindingBehaviour;
+		/// <summary>
+		/// used when named parameter bindings are supplied on construction via the static factory methods, but without 
+		/// a specific constructor
+		/// 
+		/// The class will perform a late-bound lookup through each of the possible bindings to find the best before
+		/// creating the expression.
+		/// </summary>
+		private readonly IDictionary<string, ITarget> _suppliedArgs;
 
 		/// <summary>
 		/// 
@@ -130,6 +136,16 @@ namespace Rezolver
 			_ctor = ctor;
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
 			_propertyBindingBehaviour = propertyBindingBehaviour;
+			_suppliedArgs = new Dictionary<string, ITarget>();
+		}
+
+		private ConstructorTarget(Type type, ConstructorInfo ctor, IPropertyBindingBehaviour propertyBindingBehaviour, IDictionary<string, ITarget> suppliedArgs)
+		{
+			_declaredType = type;
+			_ctor = ctor;
+			_parameterBindings = ParameterBinding.None;
+			_propertyBindingBehaviour = propertyBindingBehaviour;
+			_suppliedArgs = suppliedArgs;
 		}
 
 		protected override Expression CreateExpressionBase(CompileContext context)
@@ -142,6 +158,7 @@ namespace Rezolver
 				//have to go searching for the best constructor match for the current context,
 				//which will also give us our arguments
 				var publicCtorGroups = GetPublicConstructorGroups(DeclaredType);
+				//var possibleBindingsGrouped = publicCtorGroups.Select(g => g.Select(ci => new BoundConstructorTarget(ci, ParameterBinding.BindMethod(ci))));
 				var ctorsWithBindingsGrouped = publicCtorGroups.Select(g =>
 					g.Select(ci => new
 					{
@@ -149,7 +166,7 @@ namespace Rezolver
 						//filtered collection of parameter bindings along with the actual ITarget that is resolved for each
 						//NOTE: we're using the default behaviour of ParameterBinding here which is to auto-resolve an argument
 						//value or to use the parameter's default if it is optional.
-						bindings = ci.GetParameters().Select(pi => new ParameterBinding(pi))
+						bindings = ParameterBinding.BindMethod(ci, _suppliedArgs)// ci.GetParameters().Select(pi => new ParameterBinding(pi))
 							.Select(pb => new { Parameter = pb, RezolvedArg = pb.Resolve(context) })
 							.Where(bp => bp.RezolvedArg != null).ToArray()
 						//(ABOVE) only include bindings where a target was found - means we can quickly
@@ -204,7 +221,7 @@ namespace Rezolver
 			{
 				//just need to generate the bound parameters - nice and easy
 				//because the constructor was provided up-front, we don't check whether the target can be resolved
-				boundArgs = ParameterBinding.BindWithRezolvedArguments(ctor);
+				boundArgs = ParameterBinding.BindMethod(ctor, _suppliedArgs);// ParameterBinding.BindWithRezolvedArguments(ctor);
 			}
 			else
 				boundArgs = _parameterBindings;
@@ -246,7 +263,7 @@ namespace Rezolver
 			if (TypeHelpers.IsGenericTypeDefinition(type))
 				return new GenericConstructorTarget(type, propertyBindingBehaviour);
 
-			return new ConstructorTarget(type, null, propertyBindingBehaviour, null);
+			return new ConstructorTarget(type, null, propertyBindingBehaviour, (ParameterBinding[])null);
 		}
 
 		private static IGrouping<int, ConstructorInfo>[] GetPublicConstructorGroups(Type declaredType)
@@ -301,16 +318,6 @@ namespace Rezolver
 			return new ConstructorTarget(declaredType, ctor, null, parameterBindings);
 		}
 
-		public static ITarget Best<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
-		{
-			return Best(typeof(T), propertyBindingBehaviour);
-		}
-
-		public static ITarget Best(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
-		{
-			return new ConstructorTarget(type, null, propertyBindingBehaviour, null);
-		}
-
 		public static ITarget WithArgs<T>(IDictionary<string, ITarget> args)
 		{
 			args.MustNotBeNull("args");
@@ -332,10 +339,7 @@ namespace Rezolver
 			ctor.MustNotBeNull("ctor");
 			args.MustNotBeNull("args");
 
-			ParameterBinding[] bindings = null;
-
-			if (!ParameterBinding.BindMethod(ctor, args, out bindings))
-				throw new ArgumentException("Cannot bind constructor with supplied arguments", "args");
+			ParameterBinding[] bindings = ParameterBinding.BindMethod(ctor, args);
 
 			return new ConstructorTarget(declaredType, ctor, null, bindings);
 		}
@@ -343,9 +347,9 @@ namespace Rezolver
 		internal static ITarget WithArgsInternal(Type declaredType, IDictionary<string, ITarget> args)
 		{
 			MethodBase ctor = null;
-			var bindings = ParameterBinding.BindOverload(TypeHelpers.GetConstructors(declaredType), args, out ctor);
+			//var bindings = ParameterBinding.BindOverload(TypeHelpers.GetConstructors(declaredType), args, out ctor);
 
-			return new ConstructorTarget(declaredType, (ConstructorInfo)ctor, null, bindings);
+			return new ConstructorTarget(declaredType, (ConstructorInfo)ctor, null, args);
 		}
 
 

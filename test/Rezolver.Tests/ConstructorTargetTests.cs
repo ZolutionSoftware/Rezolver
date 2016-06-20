@@ -82,7 +82,7 @@ namespace Rezolver.Tests
 			//instead of binding the constructor with the most parameters, it'll bind the constructor just-in-time based
 			//on the services that are actually available from the container when the target is compiled.
 
-			var target = ConstructorTarget.Best<NoDefaultConstructor2>();
+			var target = ConstructorTarget.Auto<NoDefaultConstructor2>();
 			var intTarget = NoDefaultConstructor2.ExpectedBestValue.AsObjectTarget();
 			var rezolver = CreateADefaultRezolver();
 			rezolver.Register(intTarget);
