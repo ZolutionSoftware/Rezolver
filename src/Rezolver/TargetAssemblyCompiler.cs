@@ -122,9 +122,9 @@ namespace Rezolver
 			//delegate binding won't work because a box operation is required
 			// when it's a reference type it doesn't matter.
 			if ((context.TargetType ?? target.DeclaredType).IsValueType)
-				context = new CompileContext(context, typeof(object), false);
+				context = new CompileContext(context, typeof(object), inheritSharedExpressions: false);
 			else
-				context = new CompileContext(context, context.TargetType, false);
+				context = new CompileContext(context, context.TargetType, inheritSharedExpressions: false);
 
 			var staticGetObjectStaticMethod = CreateStatic_GetObjectStaticMethod(target, context, typeBuilder);
 
@@ -302,7 +302,7 @@ namespace Rezolver
 		{
 			//targetType = context.TargetType ?? target.DeclaredType;
 			if (context.TargetType == null)
-				context = new CompileContext(context, target.DeclaredType);
+				context = new CompileContext(context, target.DeclaredType, inheritSharedExpressions: false);
 			MethodBuilder toReturn = typeBuilder.DefineMethod("GetObjectStatic",
 				MethodAttributes.Private | MethodAttributes.Static, CallingConventions.Standard, context.TargetType, new Type[0]);
 

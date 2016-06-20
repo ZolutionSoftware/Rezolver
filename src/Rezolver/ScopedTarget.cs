@@ -54,7 +54,7 @@ namespace Rezolver
             var actualType = context.TargetType ?? DeclaredType;
 
             var lambdaBody = ExpressionHelper.GetLambdaBodyForTarget(_innerTarget,
-                new CompileContext(context, actualType, inheritSharedExpressions: true, suppressScopeTracking: true));
+                context.New(actualType, suppressScopeTracking: true));
 
             return Expression.Block(
                 Expression.IfThen(isScopeNull, throwArgException),

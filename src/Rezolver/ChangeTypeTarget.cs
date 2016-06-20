@@ -59,7 +59,7 @@ namespace Rezolver
 
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			var baseExpression = InnerTarget.CreateExpression(new CompileContext(context, InnerTarget.DeclaredType, true, false));
+			var baseExpression = InnerTarget.CreateExpression(context.New(InnerTarget.DeclaredType));
 			return Expression.Convert(baseExpression, _targetType);
 		}
 	}

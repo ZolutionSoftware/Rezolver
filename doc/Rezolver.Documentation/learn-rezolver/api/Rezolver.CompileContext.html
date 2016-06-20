@@ -125,7 +125,7 @@ dependency lookups during compilation time.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false, bool suppressScopeTracking = false)</code></pre>
+                <pre><code class="lang-csharp hljs">public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -154,9 +154,9 @@ the <em>parentContext</em>&#39;s <a class="xref" href="Rezolver.CompileContext.h
                   <tr>
                     <td><span class="xref">System.Boolean</span></td>
                     <td><em>inheritSharedExpressions</em></td>
-                    <td><p>If true, then the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_SharedExpressions">SharedExpressions</a> for this context will be shared
-from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
-false, however if you are chaining multiple targets&#39; expressions together you will need to pass true.</p>
+                    <td><p>If true (the default), then the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_SharedExpressions">SharedExpressions</a> for this context will be shared
+from the parent context - meaning that any new additions will be added back to the parent context again.  This is the most common
+behaviour when chaining multiple targets&#39; expressions together.  Passing false for this parameter is only required in rare situations.</p>
 </td>
                   </tr>
                   <tr>
@@ -813,6 +813,67 @@ to also add it to the stack.</p>
                   </tr>
                 </tbody>
               </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.New(System.Type%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.New(System.Type,System.Boolean,System.Boolean)">New(Type, Boolean, Boolean)</h4>
+              <div class="markdown level1 summary"><p>Spawns a new context for the passed <em>targetType</em>, with everything else being inherited from this context by default.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public CompileContext New(Type targetType, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Type</span></td>
+                    <td><em>targetType</em></td>
+                    <td><p>Required.  The type to be compiled.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><em>inheritSharedExpressions</em></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><em>suppressScopeTracking</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><p>A new <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This is a convenience method which simply wraps the <span class="xref">Rezolver.CompileContext.</span> constructor,
+except in this method the <em>targetType</em> is required.</p>
+</div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_PopCompileStack.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.PopCompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>

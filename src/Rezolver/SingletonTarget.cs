@@ -114,7 +114,7 @@ namespace Rezolver
                     //get the underlying expression for the target that is to be turned into a singleton - but disable the
                     //generation of any scope-tracking code.
                     var innerExpression = ExpressionHelper.GetLambdaBodyForTarget(_innerTarget,
-                        new CompileContext(context, t, inheritSharedExpressions: true, suppressScopeTracking: true));
+                        context.New(t, suppressScopeTracking: true));
                     //generate our scope tracking expression.
                     var scopeTracking = CreateScopeTrackingExpression(context, innerExpression);
 

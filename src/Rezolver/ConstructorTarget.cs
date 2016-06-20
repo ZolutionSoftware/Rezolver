@@ -15,25 +15,6 @@ namespace Rezolver
 	/// </summary>
 	public class ConstructorTarget : TargetBase
 	{
-		private class BoundArgument
-		{
-			public ParameterInfo Parameter { get; }
-			public ITarget Argument { get; }
-
-			public BoundArgument(ParameterInfo parameter, ITarget argument)
-			{
-				Parameter = parameter;
-				Argument = argument;
-			}
-
-			public Expression CreateExpression(CompileContext parentContext)
-			{
-				//note - we don't switch off scope tracking here - it's up to the individual targets to determine if they need 
-				//to do that.
-				return Argument.CreateExpression(new CompileContext(parentContext, Parameter.ParameterType, inheritSharedExpressions: true));
-			}
-		}
-
 		//note - neither of these two classes inherit from TargetBase because that class performs lots 
 		//of unnecessary checks that don't apply to these because we always create boundconstructortargets from 
 		//within the ConstructorTarget's CreateExpressionBase - so they effectively inherit it's TargetBase
@@ -56,17 +37,17 @@ namespace Rezolver
 			}
 
 			private readonly ConstructorInfo _ctor;
-			private readonly BoundArgument[] _boundArgs;
+			private readonly ParameterBinding[] _boundArgs;
 
-			public BoundConstructorTarget(ConstructorInfo ctor, params BoundArgument[] boundArgs)
+			public BoundConstructorTarget(ConstructorInfo ctor, params ParameterBinding[] boundArgs)
 			{
 				_ctor = ctor;
-				_boundArgs = boundArgs ?? new BoundArgument[0];
+				_boundArgs = boundArgs ?? ParameterBinding.None;
 			}
 
 			public Expression CreateExpression(CompileContext context)
 			{
-				return Expression.New(_ctor, _boundArgs.Select(t => t.CreateExpression(context)));
+				return Expression.New(_ctor, _boundArgs.Select(a => a.CreateExpression(context)));
 			}
 
 			public bool SupportsType(Type type)
@@ -104,14 +85,14 @@ namespace Rezolver
 					return _nestedTarget.CreateExpression(context);
 				else
 				{
-					var nestedExpression = _nestedTarget.CreateExpression(new CompileContext(context, _nestedTarget.DeclaredType, true));
+					var nestedExpression = _nestedTarget.CreateExpression(context.New(_nestedTarget.DeclaredType));
 					//have to locate the NewExpression constructed by the inner target and then rewrite it as
 					//a MemberInitExpression with the given property bindings.  Note - if the expression created
 					//by the ConstructorTarget is surrounded with any non-standard funny stuff - i.e. anything that
 					//could require a NewExpression, then this code won't work.  Points to the possibility that we
 					//might need some additional funkiness to allow code such as this to do its thing.
 					return new NewExpressionMemberInitRewriter(null,
-							_propertyBindings.Select(b => b.CreateMemberBinding(new CompileContext(context, b.MemberType, true)))).Visit(nestedExpression);
+							_propertyBindings.Select(b => b.CreateMemberBinding(context.New(b.MemberType)))).Visit(nestedExpression);
 				}
 			}
 
@@ -128,83 +109,7 @@ namespace Rezolver
 				}
 			}
 		}
-		/// <summary>
-		/// A target that helps a constructor target bind to the best matching constructor on a type
-		/// given a CompileContext's registered targets.
-		/// </summary>
-		private class BestMatchConstructorTarget : TargetBase
-		{
-			private readonly IPropertyBindingBehaviour _propertyBindingBehaviour;
-
-			private readonly Type _declaredType;
-			public override Type DeclaredType
-			{
-				get { return _declaredType; }
-			}
-
-			private readonly object _locker = new object();
-			private ITarget _wrapped = null;
-
-			public BestMatchConstructorTarget(Type declaredType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
-			{
-				declaredType.MustNotBeNull(nameof(declaredType));
-				_declaredType = declaredType;
-				_propertyBindingBehaviour = propertyBindingBehaviour;
-			}
-
-			protected override Expression CreateExpressionBase(CompileContext context)
-			{
-				var ctorsWithBindingsGrouped = GetPublicConstructorGroups(DeclaredType).Select(g =>
-					g.Select(ci => new
-					{
-						ctor = ci,
-						//filtered collection of parameter bindings along with the actual ITarget that is resolved for each
-						//NOTE: we're using the default behaviour of ParameterBinding here which is to auto-resolve an argument
-						//value or to use the parameter's default if it is optional.
-						bindings = ci.GetParameters().Select(pi => new ParameterBinding(pi))
-							.Select(pb => new BoundArgument(pb.Parameter, pb.Resolve(context)))
-							.Where(bp => bp.Argument != null).ToArray()
-						//(ABOVE) only include bindings where a target was found - means we can quickly
-						//determine if all parameters are bound by checking the array length is equal to the
-						//number of parameters on the constructor itself (BELOW)
-					}).Where(a => a.bindings.Length == g.Key).ToArray()
-				).Where(a => a.Length > 0).ToArray(); //filter to where there is at least one successfully bound constructor
-				
-				//No constructors for which we could bind all parameters with either a mix of resolved or default arguments.
-				if (ctorsWithBindingsGrouped.Length == 0)
-					throw new InvalidOperationException(string.Format(ExceptionResources.NoApplicableConstructorForContextFormat, _declaredType));
-
-				//get the greediest constructors with successfully bound parameters.
-				var mostBound = ctorsWithBindingsGrouped[0];
-				//get the first result
-				var toBind = mostBound[0];
-				//if there is only one, then we can move on to code generation.
-				
-				if (mostBound.Length > 1)
-				{
-					//the question now is one of disambiguation: 
-					//choose the one with the fewest number of targets with ITarget.UseFallback set to true
-					//if we still can't disambiguate, then we have an exception.
-					var fewestFallback = mostBound.GroupBy(a => a.bindings.Count(b => b.Argument.UseFallback)).FirstOrDefault().ToArray();
-					if (fewestFallback.Length > 1)
-						throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneBestConstructorFormat, DeclaredType, string.Join(", ", fewestFallback.Select(a => a.ctor))));
-					toBind = fewestFallback[0];
-				}
-
-				//TODO: change this to supply the rezolved targets to the constructor
-				//also, consider creating a child class which has no search semantics at all - which simply takes the 
-				//type/constructor and targets for the parameters (in order) and emits an expression for that only.
-				var baseTarget = new BoundConstructorTarget(toBind.ctor, toBind.bindings);
-				ITarget target = null;
-				if (_propertyBindingBehaviour != null)
-					target = new MemberInitialiserTarget(baseTarget, _propertyBindingBehaviour.GetPropertyBindings(context, _declaredType));
-				else
-					target = baseTarget;
-				//we force scope tracking off because our base class will generate it for us
-				return target.CreateExpression(new CompileContext(context, inheritSharedExpressions: true, suppressScopeTracking: true));
-			}
-		}
-
+		
 		private static readonly Type[] EmptyTypes = new Type[0];
 
 		private readonly Type _declaredType;
@@ -230,7 +135,7 @@ namespace Rezolver
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			ConstructorInfo ctor = _ctor;
-			BoundArgument[] boundArgs = new BoundArgument[0];
+			ParameterBinding[] boundArgs = ParameterBinding.None;
 
 			if (ctor == null)
 			{
@@ -245,8 +150,8 @@ namespace Rezolver
 						//NOTE: we're using the default behaviour of ParameterBinding here which is to auto-resolve an argument
 						//value or to use the parameter's default if it is optional.
 						bindings = ci.GetParameters().Select(pi => new ParameterBinding(pi))
-							.Select(pb => new { Parameter = pb, BoundArg = new BoundArgument(pb.Parameter, pb.Resolve(context)) })
-							.Where(bp => bp.BoundArg.Argument != null).ToArray()
+							.Select(pb => new { Parameter = pb, RezolvedArg = pb.Resolve(context) })
+							.Where(bp => bp.RezolvedArg != null).ToArray()
 						//(ABOVE) only include bindings where a target was found - means we can quickly
 						//determine if all parameters are bound by checking the array length is equal to the
 						//number of parameters on the constructor itself (BELOW)
@@ -254,7 +159,9 @@ namespace Rezolver
 				).Where(a => a.Length > 0).ToArray(); //filter to where there is at least one successfully bound constructor
 
 				//No constructors for which we could bind all parameters with either a mix of resolved or default arguments.
-				//so we'll auto-bind to the constructor with the most parameters - if there is one
+				//so we'll auto-bind to the constructor with the most parameters - if there is one - leaving the application
+				//with the responsibility of ensuring that the correct registrations are made in the target container, or 
+				//in the container supplied at resolve-time, to satisfy the constructor's dependencies.
 				if (ctorsWithBindingsGrouped.Length == 0)
 				{
 					if (publicCtorGroups.Length != 0)
@@ -265,45 +172,42 @@ namespace Rezolver
 						else
 						{
 							ctor = mostGreedy[0];
-							boundArgs = ParameterBinding.BindWithRezolvedArguments(ctor).Select(pb => new BoundArgument(pb.Parameter, pb.Target)).ToArray();
+							boundArgs = ParameterBinding.BindWithRezolvedArguments(ctor).ToArray();
 						}
 					}
 					else
 						throw new InvalidOperationException(string.Format(ExceptionResources.NoApplicableConstructorForContextFormat, _declaredType));
 				}
-				else
+				else //managed to bind at least constructor up front to registered targets or defaults
 				{
-
 					//get the greediest constructors with successfully bound parameters.
 					var mostBound = ctorsWithBindingsGrouped[0];
 					//get the first result
 					var toBind = mostBound[0];
-					//if there is only one, then we can move on to code generation.
-
+					//if there is only one, then we can move on to code generation
 					if (mostBound.Length > 1)
 					{
 						//the question now is one of disambiguation: 
 						//choose the one with the fewest number of targets with ITarget.UseFallback set to true
 						//if we still can't disambiguate, then we have an exception.
-						var fewestFallback = mostBound.GroupBy(a => a.bindings.Count(b => b.BoundArg.Argument.UseFallback)).FirstOrDefault().ToArray();
+						var fewestFallback = mostBound.GroupBy(a => a.bindings.Count(b => b.RezolvedArg.UseFallback)).FirstOrDefault().ToArray();
 						if (fewestFallback.Length > 1)
 							throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneBestConstructorFormat, DeclaredType, string.Join(", ", fewestFallback.Select(a => a.ctor))));
 						toBind = fewestFallback[0];
 					}
 					ctor = toBind.ctor;
-					boundArgs = toBind.bindings.Select(a => new BoundArgument(a.Parameter.Parameter, a.Parameter.Target)).ToArray();
+					boundArgs = toBind.bindings.Select(a => a.Parameter).ToArray();
 				}
 			}
 			//we allow for no parameter bindings to be provided on construction, and have them dynamically determined
 			else if (_parameterBindings.Length == 0 && ctor.GetParameters().Length != 0)
 			{
 				//just need to generate the bound parameters - nice and easy
-				var tempBindings = ParameterBinding.BindWithRezolvedArguments(ctor);
 				//because the constructor was provided up-front, we don't check whether the target can be resolved
-				boundArgs = tempBindings.Select(pb => new BoundArgument(pb.Parameter, pb.Target)).ToArray();
+				boundArgs = ParameterBinding.BindWithRezolvedArguments(ctor);
 			}
 			else
-				boundArgs = _parameterBindings.Select(pb => new BoundArgument(pb.Parameter, pb.Target)).ToArray();
+				boundArgs = _parameterBindings;
 
 			BoundConstructorTarget baseTarget = new BoundConstructorTarget(ctor, boundArgs);
 			ITarget target = null;
@@ -311,8 +215,7 @@ namespace Rezolver
 				target = new MemberInitialiserTarget(baseTarget, _propertyBindingBehaviour.GetPropertyBindings(context, _declaredType));
 			else
 				target = baseTarget;
-			//we force scope tracking off because our base class will generate it for us
-			return target.CreateExpression(new CompileContext(context, inheritSharedExpressions: true, suppressScopeTracking: true));
+			return target.CreateExpression(context);
 		}
 
 		public override Type DeclaredType

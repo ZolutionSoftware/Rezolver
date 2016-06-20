@@ -37,6 +37,7 @@ namespace Rezolver
 
 			protected override Expression CreateExpressionBase(CompileContext context)
 			{
+				//create a new context in order to create a new ChildBuilder into which we can register targets for look up
 				var newContext = new CompileContext(context, inheritSharedExpressions: true);
 				newContext.Register(_decorated, _type);
 				var expr = _innerTarget.CreateExpression(newContext);

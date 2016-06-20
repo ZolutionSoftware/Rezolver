@@ -179,6 +179,11 @@ references:
   href: api/Rezolver.CompileContext.html#Rezolver_CompileContext_IsCompiling_Rezolver_ITarget_
   commentId: M:Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)
   fullName: Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)
+- uid: Rezolver.CompileContext.New(System.Type,System.Boolean,System.Boolean)
+  name: New(Type, Boolean, Boolean)
+  href: api/Rezolver.CompileContext.html#Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_
+  commentId: M:Rezolver.CompileContext.New(System.Type,System.Boolean,System.Boolean)
+  fullName: Rezolver.CompileContext.New(System.Type, System.Boolean, System.Boolean)
 - uid: Rezolver.CompileContext.PopCompileStack
   name: PopCompileStack()
   href: api/Rezolver.CompileContext.html#Rezolver_CompileContext_PopCompileStack
@@ -1725,6 +1730,11 @@ references:
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_BindWithRezolvedOrOptionalDefault_MethodBase_Rezolver_CompileContext_
   commentId: M:Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase,Rezolver.CompileContext)
   fullName: Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase, Rezolver.CompileContext)
+- uid: Rezolver.ParameterBinding.CreateExpression(Rezolver.CompileContext)
+  name: CreateExpression(CompileContext)
+  href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_CreateExpression_Rezolver_CompileContext_
+  commentId: M:Rezolver.ParameterBinding.CreateExpression(Rezolver.CompileContext)
+  fullName: Rezolver.ParameterBinding.CreateExpression(Rezolver.CompileContext)
 - uid: Rezolver.ParameterBinding.IsValid
   name: IsValid
   href: api/Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_IsValid

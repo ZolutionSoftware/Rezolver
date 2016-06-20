@@ -159,7 +159,7 @@ namespace Rezolver
 			Expression staticExpr = null;
 			if (staticTarget != null)
 			{
-				staticExpr = staticTarget.CreateExpression(new CompileContext(context, DeclaredType, true)); //need a new context here to change the resolve type to our declared type.
+				staticExpr = staticTarget.CreateExpression(context.New(DeclaredType)); //need a new context here to change the resolve type to our declared type.
 				if (staticExpr == null)
 					throw new InvalidOperationException(string.Format(ExceptionResources.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
 			}

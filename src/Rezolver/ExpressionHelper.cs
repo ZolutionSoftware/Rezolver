@@ -59,6 +59,7 @@ namespace Rezolver
 		/// method is the code we'd normally produce for a target.</remarks>
 		public static Expression GetLambdaBodyForTarget(ITarget target, CompileContext context)
 		{
+			//not entirely sure why we're creating a new context here.
 			context = new CompileContext(context, context.TargetType, true, context.SuppressScopeTracking);
 			var toBuild = target.CreateExpression(context);
 			if (toBuild.Type != typeof(object))

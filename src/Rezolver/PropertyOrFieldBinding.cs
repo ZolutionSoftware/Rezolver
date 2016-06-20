@@ -63,7 +63,7 @@ namespace Rezolver
         /// <returns></returns>
 		public MemberBinding CreateMemberBinding(CompileContext context)
 		{
-			return Expression.Bind(Member, Target.CreateExpression(new CompileContext(context, MemberType, true)));
+			return Expression.Bind(Member, Target.CreateExpression(context.New(MemberType)));
 		}
 	}
 }

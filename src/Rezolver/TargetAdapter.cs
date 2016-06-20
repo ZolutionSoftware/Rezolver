@@ -102,7 +102,7 @@ namespace Rezolver
 			var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, this);
 			return new RezolveTargetExpression(new ExpressionTarget(c =>
 			{
-				var ctorTargetExpr = constructorTarget.CreateExpression(new CompileContext(c, node.Type));
+				var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
 
 							//the goal here, then, is to find the new expression for this type and replace it 
 							//with a memberinit equivalent to the one we visited.  Although the constructor target produces 

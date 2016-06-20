@@ -49,14 +49,30 @@ namespace Rezolver
 		/// Note that if the returned target's <see cref="ITarget.UseFallback"/> property is set to <c>true</c>,
 		/// then it means either the parameter's default value is being used, or that the target fetched from the 
 		/// target container in the context is a stub (e.g. empty enumerable)</returns>
+		/// <remarks>During compilation - you should not use the target returned by this function as a direct
+		/// part of your expression tree - you should </remarks>
 		public virtual ITarget Resolve(CompileContext context)
 		{
 			var target = Target;
 
 			if (target is RezolvedTarget)
-				return ((RezolvedTarget)target).Resolve(new CompileContext(context, Parameter.ParameterType, inheritSharedExpressions: true));
+				return ((RezolvedTarget)target).Resolve(context.New(Parameter.ParameterType));
 
 			return target;
+		}
+
+		/// <summary>
+		/// Helper method for getting the expression from the <see cref="Target"/> for the <see cref="Parameter"/>'s
+		/// <see cref="ParameterInfo.ParameterType"/>.  Takes care of setting the correct
+		/// <see cref="CompileContext.TargetType"/> in a new context built from the <paramref name="context"/> you pass.
+		/// </summary>
+		/// <param name="context">The current context for the object being built whose method or constructor parameter
+		/// is being bound.</param>
+		/// <returns>The expression built by <see cref="Target"/> for the <see cref="Parameter"/>'s
+		/// <see cref="ParameterInfo.ParameterType"/>.</returns>
+		public Expression CreateExpression(CompileContext context)
+		{
+			return Target.CreateExpression(context.New(Parameter.ParameterType));
 		}
 
 		/// <summary>
@@ -74,18 +90,7 @@ namespace Rezolver
 		{
 			method.MustNotBeNull(nameof(method));
 			context.MustNotBeNull(nameof(context));
-			return method.GetParameters().Select(pi => new ParameterBinding(pi)
-			/*{
-
-				//RezolvedTarget temp = new RezolvedTarget(pi.ParameterType);
-				//if (temp.CanResolve(context))
-				//	return new ParameterBinding(pi, temp);
-				//if (pi.IsOptional)
-				//	return new ParameterBinding(pi, new OptionalParameterTarget(pi));
-
-				////return a default binding.
-				//return new ParameterBinding(pi, null);
-			}*/).ToArray();
+			return method.GetParameters().Select(pi => new ParameterBinding(pi)).ToArray();
 		}
 
 		/// <summary>
@@ -146,7 +151,7 @@ namespace Rezolver
 		{
 			bindings = null;
 			var temp = method.GetParameters().Select(p => new ParameterBinding(p, GetArgValue(p, args))).ToArray();
-			if (temp.All(pb => pb.Target != null && TypeHelpers.IsAssignableFrom(pb.Parameter.ParameterType, pb.Target.DeclaredType)))
+			if (temp.All(pb => pb.Target != null && pb.Target.SupportsType(pb.Parameter.ParameterType)))
 			{
 				bindings = temp;
 				return true;

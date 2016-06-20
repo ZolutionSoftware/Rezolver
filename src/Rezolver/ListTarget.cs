@@ -135,7 +135,7 @@ namespace Rezolver
 			//either way we're always going to be building an array.  If AsArray is true, we'll just return that, 
 			//otherwise we pass that to a List<T> constructor.
 			var arrayExpr = Expression.NewArrayInit(ElementType,
-				Items.Select(t => t.CreateExpression(new CompileContext(context, ElementType, true))));
+				Items.Select(t => t.CreateExpression(context.New(ElementType))));
 
 			if (AsArray)
 				return arrayExpr;

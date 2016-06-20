@@ -29,7 +29,7 @@ namespace Rezolver
 						RezolveTargetExpression re = node as RezolveTargetExpression;
 						if (re != null)
 						{
-							return re.Target.CreateExpression(new CompileContext(_sourceCompileContext, re.Type, true));
+							return re.Target.CreateExpression(_sourceCompileContext.New(re.Type));
 						}
 						RezolveContextPlaceholderExpression pe = node as RezolveContextPlaceholderExpression;
 						if (pe != null)

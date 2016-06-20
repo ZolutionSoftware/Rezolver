@@ -243,17 +243,32 @@ namespace Rezolver
 		/// the target type (if you pass null for <paramref name="targetType"/>.</param>
 		/// <param name="targetType">The target type that is expected to be compiled, or null to inherit
 		/// the <paramref name="parentContext"/>'s <see cref="CompileContext.TargetType"/> property.</param>
-		/// <param name="inheritSharedExpressions">If true, then the <see cref="SharedExpressions"/> for this context will be shared
-		/// from the parent context - meaning that any new additions will be added back to the parent context again.  The default is
-		/// false, however if you are chaining multiple targets' expressions together you will need to pass true.</param>
+		/// <param name="inheritSharedExpressions">If true (the default), then the <see cref="SharedExpressions"/> for this context will be shared
+		/// from the parent context - meaning that any new additions will be added back to the parent context again.  This is the most common
+		/// behaviour when chaining multiple targets' expressions together.  Passing false for this parameter is only required in rare situations.</param>
 		/// <param name="suppressScopeTracking">If true, then any expressions constructed from <see cref="ITarget"/> objects
 		/// should not contain automatically generated code to track objects in an enclosing scope.  The default is false.  This is 
 		/// typically only enabled when one target is explicitly using expressions created from other targets, and has its own
 		/// scope tracking code, or expects to be surrounded by automatically generated scope tracking code itself.</param>
-		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = false, bool suppressScopeTracking = false)
+		public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)
 			: this(parentContext, inheritSharedExpressions, suppressScopeTracking)
 		{
 			_targetType = targetType ?? parentContext.TargetType;
+		}
+
+		/// <summary>
+		/// Spawns a new context for the passed <paramref name="targetType"/>, with everything else being inherited from this context by default.
+		/// </summary>
+		/// <param name="targetType">Required.  The type to be compiled.</param>
+		/// <param name="inheritSharedExpressions"></param>
+		/// <param name="suppressScopeTracking"></param>
+		/// <returns>A new <see cref="CompileContext"/></returns>
+		/// <remarks>This is a convenience method which simply wraps the <see cref="CompileContext.CompileContext(CompileContext, Type, bool, bool)"/> constructor,
+		/// except in this method the <paramref name="targetType"/> is required.</remarks>
+		public CompileContext New(Type targetType, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)
+		{
+			targetType.MustNotBeNull(nameof(targetType));
+			return new CompileContext(this, targetType, inheritSharedExpressions: inheritSharedExpressions, suppressScopeTracking: suppressScopeTracking);
 		}
 
 		/// <summary>
