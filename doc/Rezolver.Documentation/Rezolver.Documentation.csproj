@@ -89,35 +89,8 @@
     <Content Include="favicon-32x32.png" />
     <Content Include="favicon-96x96.png" />
     <Content Include="favicon.ico" />
+    <Content Include="Gruntfile.js" />
     <Content Include="learn-rezolver\.manifest" />
-    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="learn-rezolver\manifest.json" />
-    <Content Include="learn-rezolver\search-stopwords.json" />
-    <Content Include="learn-rezolver\xrefmap.yml" />
-    <Content Include="manifest.json" />
-    <None Include="packages.config" />
-    <None Include="toc.yml" />
-    <None Include="index.md" />
-    <None Include="docfx.json" />
-    <None Include="articles\intro.md" />
-    <None Include="api\index.md" />
-    <None Include="articles\details1.md" />
-    <None Include="articles\details2.md" />
-    <None Include="articles\details3.md" />
-    <None Include="articles\toc.yml" />
-    <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy.pubxml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="images\exampleunittest.PNG" />
     <Content Include="learn-rezolver\api\index.html" />
     <Content Include="learn-rezolver\api\Rezolver.Builder.html" />
     <Content Include="learn-rezolver\api\Rezolver.CachingContainerBase.html" />
@@ -164,6 +137,7 @@
     <Content Include="learn-rezolver\api\Rezolver.MethodCallExtractor.html" />
     <Content Include="learn-rezolver\api\Rezolver.ObjectTarget.html" />
     <Content Include="learn-rezolver\api\Rezolver.ObjectTargetExtensions.html" />
+    <Content Include="learn-rezolver\api\Rezolver.OptionalParameterTarget.html" />
     <Content Include="learn-rezolver\api\Rezolver.OverridingContainer.html" />
     <Content Include="learn-rezolver\api\Rezolver.OverridingScopedContainer.html" />
     <Content Include="learn-rezolver\api\Rezolver.ParameterBinding.html" />
@@ -201,11 +175,17 @@
     <Content Include="learn-rezolver\articles\details3.html" />
     <Content Include="learn-rezolver\articles\intro.html" />
     <Content Include="learn-rezolver\articles\toc.html" />
-    <Content Include="learn-rezolver\favicon.ico" />
+    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="learn-rezolver\images\exampleunittest.PNG" />
+    <Content Include="learn-rezolver\images\logo.png" />
     <Content Include="learn-rezolver\index.html" />
-    <Content Include="learn-rezolver\logo.svg" />
+    <Content Include="learn-rezolver\manifest.json" />
+    <Content Include="learn-rezolver\rz_square_white_on_orange_32x32.png" />
+    <Content Include="learn-rezolver\search-stopwords.json" />
     <Content Include="learn-rezolver\styles\docfx.css" />
     <Content Include="learn-rezolver\styles\docfx.js" />
     <Content Include="learn-rezolver\styles\docfx.vendor.css" />
@@ -215,6 +195,34 @@
     <Content Include="learn-rezolver\styles\main.js" />
     <Content Include="learn-rezolver\styles\search-worker.js" />
     <Content Include="learn-rezolver\toc.html" />
+    <Content Include="learn-rezolver\xrefmap.yml" />
+    <Content Include="manifest.json" />
+    <Content Include="package.json" />
+    <None Include="packages.config" />
+    <Content Include="styles\bootstrap-rezolver.css" />
+    <Content Include="styles\bootstrap-rezolver.debug.css" />
+    <Content Include="styles\bootstrap-rezolver.less" />
+    <Content Include="styles\bootstrap-rezolver.debug.css.map" />
+    <Content Include="styles\bootstrap-variables-rezolver.less" />
+    <None Include="toc.yml" />
+    <None Include="index.md" />
+    <None Include="docfx.json" />
+    <None Include="articles\intro.md" />
+    <None Include="api\index.md" />
+    <None Include="articles\details1.md" />
+    <None Include="articles\details2.md" />
+    <None Include="articles\details3.md" />
+    <None Include="articles\toc.yml" />
+    <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\exampleunittest.PNG" />
     <Content Include="mstile-144x144.png" />
     <Content Include="mstile-150x150.png" />
     <Content Include="mstile-310x150.png" />

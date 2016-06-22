@@ -1,0 +1,17 @@
+{
+  "name": "rezolver.documentation",
+  "version": "1.0.0",
+  "description": "Documentation site for Rezolver",
+  "keywords": [
+    "rezolver",
+    "documentation"
+  ],
+  "author": "zolution",
+  "private": true,
+  "dependencies": 
+  {
+    "grunt": "^1.0.1",
+    "grunt-contrib-less": "^1.3.0",
+    "less-plugin-autoprefix": "^1.5.1"
+  }
+}

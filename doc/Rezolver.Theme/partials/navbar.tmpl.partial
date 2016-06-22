@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="{{_rel}}index.html">
-        <img id="logo" class="svg" src="{{_rel}}rz_square_white_on_orange_32x32.png" alt="{{_appName}}" >
+        <img id="logo" src="{{_rel}}images/logo.png" alt="{{_appName}}" width="50px" height="50px" >
       </a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
