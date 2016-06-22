@@ -50,6 +50,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		PublishScripts\Templates\Rezolver.Documentation.param.dev.json = PublishScripts\Templates\Rezolver.Documentation.param.dev.json
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Rezolver.Theme", "doc\Rezolver.Theme\", "{1CC97C5A-ACFB-487A-A46F-E7AFB59ED44B}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_34862"
+		Debug.AspNetCompiler.PhysicalPath = "doc\Rezolver.Theme\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_34862\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_34862"
+		Release.AspNetCompiler.PhysicalPath = "doc\Rezolver.Theme\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_34862\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "34862"
+		SlnRelativePath = "doc\Rezolver.Theme\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +113,9 @@ Global
 		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CC97C5A-ACFB-487A-A46F-E7AFB59ED44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CC97C5A-ACFB-487A-A46F-E7AFB59ED44B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CC97C5A-ACFB-487A-A46F-E7AFB59ED44B}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,5 +133,6 @@ Global
 		{44C7026C-38E6-4229-B8B8-B4CC557DA409} = {73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}
 		{9008F17A-2132-4889-91FA-7BD0415D33D4} = {44C7026C-38E6-4229-B8B8-B4CC557DA409}
 		{E01CDE3E-5C5F-4FA4-8CD2-5BE4B29E0987} = {44C7026C-38E6-4229-B8B8-B4CC557DA409}
+		{1CC97C5A-ACFB-487A-A46F-E7AFB59ED44B} = {73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}
 	EndGlobalSection
 EndGlobal

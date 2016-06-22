@@ -141,8 +141,6 @@ namespace Rezolver.Tests.Configuration
 				//this is the most verbose way to provide a type reference in a json configuration file, and
 				//can be used both to describe the type against which a target will be registered, but also
 				//the type to build, e.g. as the value for the $construct property of a target.
-				//second way of doing this - an explicit 'type' member with a string value, 
-				//and a value member with the target object
 				string json = @"
 {
 	""assemblies"": [ ""Rezolver.Tests"" ],

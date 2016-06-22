@@ -63,7 +63,8 @@
     ],
     "dest": "learn-rezolver",
     "template": [
-      "default"
+      "default",
+      "../Rezolver.Theme"
     ]
   }
 }

@@ -67,6 +67,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <Content Include="android-chrome-144x144.png" />
+    <Content Include="android-chrome-192x192.png" />
+    <Content Include="android-chrome-36x36.png" />
+    <Content Include="android-chrome-48x48.png" />
+    <Content Include="android-chrome-72x72.png" />
+    <Content Include="android-chrome-96x96.png" />
+    <Content Include="apple-touch-icon-114x114.png" />
+    <Content Include="apple-touch-icon-120x120.png" />
+    <Content Include="apple-touch-icon-144x144.png" />
+    <Content Include="apple-touch-icon-152x152.png" />
+    <Content Include="apple-touch-icon-180x180.png" />
+    <Content Include="apple-touch-icon-57x57.png" />
+    <Content Include="apple-touch-icon-60x60.png" />
+    <Content Include="apple-touch-icon-72x72.png" />
+    <Content Include="apple-touch-icon-76x76.png" />
+    <Content Include="apple-touch-icon-precomposed.png" />
+    <Content Include="apple-touch-icon.png" />
+    <Content Include="browserconfig.xml" />
+    <Content Include="favicon-16x16.png" />
+    <Content Include="favicon-32x32.png" />
+    <Content Include="favicon-96x96.png" />
+    <Content Include="favicon.ico" />
     <Content Include="learn-rezolver\.manifest" />
     <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="learn-rezolver\fonts\glyphicons-halflings-regular.ttf" />
@@ -75,6 +97,7 @@
     <Content Include="learn-rezolver\manifest.json" />
     <Content Include="learn-rezolver\search-stopwords.json" />
     <Content Include="learn-rezolver\xrefmap.yml" />
+    <Content Include="manifest.json" />
     <None Include="packages.config" />
     <None Include="toc.yml" />
     <None Include="index.md" />
@@ -192,6 +215,12 @@
     <Content Include="learn-rezolver\styles\main.js" />
     <Content Include="learn-rezolver\styles\search-worker.js" />
     <Content Include="learn-rezolver\toc.html" />
+    <Content Include="mstile-144x144.png" />
+    <Content Include="mstile-150x150.png" />
+    <Content Include="mstile-310x150.png" />
+    <Content Include="mstile-310x310.png" />
+    <Content Include="mstile-70x70.png" />
+    <Content Include="safari-pinned-tab.svg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
