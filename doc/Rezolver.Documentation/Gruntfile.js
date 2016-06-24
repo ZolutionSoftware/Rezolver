@@ -13,11 +13,12 @@ module.exports = function (grunt) {
                     ]
                 },
                 files: {
-                    'styles/bootstrap-rezolver.debug.css': 'styles/bootstrap-rezolver.less'
+                    'styles/site.debug.css': 'styles/site.less'
                 }
             },
             prod: {
                 options: {
+                    sourceMap: true,
                     compress: true,
                     relativeUrls: true,
                     plugins: [
@@ -25,7 +26,7 @@ module.exports = function (grunt) {
                     ]
                 },
                 files: {
-                    'styles/bootstrap-rezolver.css': 'styles/bootstrap-rezolver.less'
+                    'styles/site.css': 'styles/site.less'
                 }
             }
         }

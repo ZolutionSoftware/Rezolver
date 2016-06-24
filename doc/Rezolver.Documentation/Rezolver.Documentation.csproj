@@ -199,11 +199,13 @@
     <Content Include="manifest.json" />
     <Content Include="package.json" />
     <None Include="packages.config" />
-    <Content Include="styles\bootstrap-rezolver.css" />
-    <Content Include="styles\bootstrap-rezolver.debug.css" />
     <Content Include="styles\bootstrap-rezolver.less" />
-    <Content Include="styles\bootstrap-rezolver.debug.css.map" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
+    <Content Include="styles\site.css" />
+    <Content Include="styles\site.debug.css" />
+    <Content Include="styles\site.less" />
+    <Content Include="styles\site.css.map" />
+    <Content Include="styles\site.debug.css.map" />
     <None Include="toc.yml" />
     <None Include="index.md" />
     <None Include="docfx.json" />
