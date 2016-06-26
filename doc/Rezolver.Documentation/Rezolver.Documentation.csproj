@@ -198,6 +198,7 @@
     <Content Include="learn-rezolver\xrefmap.yml" />
     <Content Include="manifest.json" />
     <Content Include="package.json" />
+    <Content Include="bower.json" />
     <None Include="packages.config" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
