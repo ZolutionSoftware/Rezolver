@@ -199,6 +199,8 @@
     <Content Include="manifest.json" />
     <Content Include="package.json" />
     <Content Include="bower.json" />
+    <Content Include="docfx-globalMetadata.json" />
+    <Content Include="learn-rezolver\styles\docfx.css.ignore" />
     <None Include="packages.config" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
