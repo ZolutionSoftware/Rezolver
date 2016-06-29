@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class ConfigurationAdapterContextFactory
+   </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class ConfigurationAdapterContextFactory
+   ">
+  	<meta name="generator" content="docfx 2.0.1.0">
+  	
+  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  	<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  	<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  	<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  	<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  	<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  	<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  	<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  	<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  	<link rel="manifest" href="../../manifest.json">
+  	<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  	<meta name="msapplication-TileColor" content="#da532c">
+  	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  	<meta name="theme-color" content="#ffffff">
+  	<link rel="stylesheet" href="../../styles/site.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	<meta property="docfx:rel" content="../">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" src="../images/logo.png" alt="" width="50px" height="50px">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
+              
+              <h1 id="Rezolver_Configuration_ConfigurationAdapterContextFactory" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory">Class ConfigurationAdapterContextFactory
+              </h1>
+              <div class="markdown level0 summary"><p>The standard Singleton implementation of the IConfigurationAdapterContextFactory interface, and one which
+you can use as the starting point of your own factory.</p>
+<p>By default, it creates a new instance of the ConfigurationAdapterContext class (using the virtual method</p>
+<p><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_">CreateContext(ConfigurationAdapter, IConfiguration)</a>, and then instructs it to add its default assembly references.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">ConfigurationAdapterContextFactory</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Rezolver.Configuration</h6>
+              <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
+              <h5 id="Rezolver_Configuration_ConfigurationAdapterContextFactory_syntax" class="hsyntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public class ConfigurationAdapterContextFactory : IConfigurationAdapterContextFactory</code></pre>
+              </div>
+              <hr>
+              <h3 id="constructors">Constructors
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory__ctor.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory__ctor" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.#ctor">ConfigurationAdapterContextFactory()</h4>
+              <div class="markdown level1 summary"><p>Creation of new instances of this class, outside of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance">Instance</a> instance, is only through inheritance.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">protected ConfigurationAdapterContextFactory()</code></pre>
+              </div>
+              <hr>
+              <h3 id="properties">Properties
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance">Instance</h4>
+              <div class="markdown level1 summary"><p>The one and only instance of this context factory.  Note that this is also the default application-wide context factory that is
+used by the standard <a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter">ConfigurationAdapter</a> class when converting configuration data into rezolvers (by virtue
+of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_DefaultContextFactory">DefaultContextFactory</a> property, which you can change).</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static ConfigurationAdapterContextFactory Instance { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory">ConfigurationAdapterContextFactory</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter%2CRezolver.Configuration.IConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter,Rezolver.Configuration.IConfiguration)">CreateContext(ConfigurationAdapter, IConfiguration)</h4>
+              <div class="markdown level1 summary"><p>Implements the <a class="xref" href="Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory">IConfigurationAdapterContextFactory</a> method of the same name.</p>
+<p>The base behaviour is to create an instance of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a> class, passing
+the configuration and the default set of assembly references returned by <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences">GetDefaultAssemblyReferences()</a>.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public virtual ConfigurationAdapterContext CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter">ConfigurationAdapter</a></td>
+                    <td><em>adapter</em></td>
+                    <td><p>The adapter.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
+                    <td><em>configuration</em></td>
+                    <td><p>The configuration.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="implements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_">CreateContext(ConfigurationAdapter, IConfiguration)</a></div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences">GetDefaultAssemblyReferences()</h4>
+              <div class="markdown level1 summary"><p>Gets the assemblies that are to be used for new contexts as the default set of references.</p>
+<p>The base behaviour is to add mscorlib, System and System.Core although, depending on the target platform,
+the list might be less.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Assembly&gt; GetDefaultAssemblyReferences()</code></pre>
+              </div>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Assembly</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+            </nav>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

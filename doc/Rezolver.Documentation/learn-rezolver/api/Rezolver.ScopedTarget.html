@@ -144,17 +144,18 @@
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_ScopedTarget_syntax">Syntax</h5>
+              <h5 id="Rezolver_ScopedTarget_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class ScopedTarget : TargetBase, ITarget</code></pre>
               </div>
-              <h5 id="Rezolver_ScopedTarget_remarks"><strong>Remarks</strong></h5>
+              <h5 id="Rezolver_ScopedTarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>On its own, this target doesn&#39;t do anything - it&#39;s designed to wrap another target such that
 the code generated from the expression it produces is executed only once for each lifetime scope.</p>
 <p>Outside of that, the target generates wrapper code that forcibly caches the instance that is produced (whether
 it&#39;s IDiposable or not) into the current scope&#39;s cache (using <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">AddToScope(Object, RezolveContext)</a>)
 and retrieves previous instances from that scope (using <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_RezolveContext_">GetFromScope(RezolveContext)</a>.</p>
 </div>
+              <hr>
               <h3 id="constructors">Constructors
               </h3>
               <span class="small pull-right mobile-hide">
@@ -186,6 +187,7 @@ and retrieves previous instances from that scope (using <a class="xref" href="Re
                   </tr>
                 </tbody>
               </table>
+              <hr>
               <h3 id="properties">Properties
               </h3>
               <span class="small pull-right mobile-hide">
@@ -246,6 +248,7 @@ and retrieves previous instances from that scope (using <a class="xref" href="Re
               </table>
               <h5 class="overrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">SuppressScopeTracking</a></div>
+              <hr>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">

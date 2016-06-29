@@ -107,11 +107,11 @@ an object that can resolve dependencies or locate services - for example, it is 
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_IContainer_syntax">Syntax</h5>
+              <h5 id="Rezolver_IContainer_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IContainer : IServiceProvider</code></pre>
               </div>
-              <h5 id="Rezolver_IContainer_remarks"><strong>Remarks</strong></h5>
+              <h5 id="Rezolver_IContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>If an implementation is indeed using the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> to build a set of registrations from which objects will be created, 
 then that implementation should, also, allow for new registrations to be added to the builder throughout the lifetime of the </p>
 <p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.</p>
@@ -120,6 +120,7 @@ then make some modification to the builder which can causes Type &#39;X&#39; to 
 of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> are free to treat the a dependency graph of an object of a resolved type (not necessarily the objects themselves,
 but the types of objects that are resolved and how they, in turn, are built) as fixed after the first resolve operation is done.</p>
 </div>
+              <hr>
               <h3 id="properties">Properties
               </h3>
               <span class="small pull-right mobile-hide">
@@ -182,6 +183,7 @@ ICompiledRezolveTargets.</p>
                   </tr>
                 </tbody>
               </table>
+              <hr>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">

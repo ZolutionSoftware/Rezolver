@@ -316,6 +316,1625 @@ references:
   href: api/Rezolver.ConditionalRewriter.html#Rezolver_ConditionalRewriter_VisitConditional_ConditionalExpression_
   commentId: M:Rezolver.ConditionalRewriter.VisitConditional(ConditionalExpression)
   fullName: Rezolver.ConditionalRewriter.VisitConditional(ConditionalExpression)
+- uid: Rezolver.Configuration
+  name: Rezolver.Configuration
+  href: api/Rezolver.Configuration.html#Rezolver_Configuration
+  commentId: N:Rezolver.Configuration
+  fullName: Rezolver.Configuration
+- uid: Rezolver.Configuration.AssemblyReferenceEntry
+  name: AssemblyReferenceEntry
+  href: api/Rezolver.Configuration.AssemblyReferenceEntry.html#Rezolver_Configuration_AssemblyReferenceEntry
+  commentId: T:Rezolver.Configuration.AssemblyReferenceEntry
+  fullName: Rezolver.Configuration.AssemblyReferenceEntry
+- uid: Rezolver.Configuration.AssemblyReferenceEntry.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo)
+  name: AssemblyReferenceEntry(String, IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.AssemblyReferenceEntry.html#Rezolver_Configuration_AssemblyReferenceEntry__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.AssemblyReferenceEntry.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.AssemblyReferenceEntry.AssemblyReferenceEntry(System.String, Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.AssemblyReferenceEntry.AssemblyName
+  name: AssemblyName
+  href: api/Rezolver.Configuration.AssemblyReferenceEntry.html#Rezolver_Configuration_AssemblyReferenceEntry_AssemblyName
+  commentId: P:Rezolver.Configuration.AssemblyReferenceEntry.AssemblyName
+  fullName: Rezolver.Configuration.AssemblyReferenceEntry.AssemblyName
+- uid: Rezolver.Configuration.ConfigurationAdapter
+  name: ConfigurationAdapter
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter
+  commentId: T:Rezolver.Configuration.ConfigurationAdapter
+  fullName: Rezolver.Configuration.ConfigurationAdapter
+- uid: Rezolver.Configuration.ConfigurationAdapter.#ctor(Rezolver.Configuration.IConfigurationAdapterContextFactory)
+  name: ConfigurationAdapter(IConfigurationAdapterContextFactory)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter__ctor_Rezolver_Configuration_IConfigurationAdapterContextFactory_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.#ctor(Rezolver.Configuration.IConfigurationAdapterContextFactory)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.ConfigurationAdapter(Rezolver.Configuration.IConfigurationAdapterContextFactory)
+- uid: Rezolver.Configuration.ConfigurationAdapter.AppendInstructions(Rezolver.Configuration.ConfigurationAdapterContext)
+  name: AppendInstructions(ConfigurationAdapterContext)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_AppendInstructions_Rezolver_Configuration_ConfigurationAdapterContext_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.AppendInstructions(Rezolver.Configuration.ConfigurationAdapterContext)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.AppendInstructions(Rezolver.Configuration.ConfigurationAdapterContext)
+- uid: Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer
+  name: ConfigurationAdapter.ConfigurationEntryProcessOrderer
+  href: api/Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer.html#Rezolver_Configuration_ConfigurationAdapter_ConfigurationEntryProcessOrderer
+  commentId: T:Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer
+  fullName: Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer
+- uid: Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer.Compare(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.IConfigurationEntry)
+  name: Compare(IConfigurationEntry, IConfigurationEntry)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer.html#Rezolver_Configuration_ConfigurationAdapter_ConfigurationEntryProcessOrderer_Compare_Rezolver_Configuration_IConfigurationEntry_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer.Compare(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.IConfigurationEntry)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.ConfigurationEntryProcessOrderer.Compare(Rezolver.Configuration.IConfigurationEntry, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.ConfigurationAdapter.ContextFactory
+  name: ContextFactory
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_ContextFactory
+  commentId: P:Rezolver.Configuration.ConfigurationAdapter.ContextFactory
+  fullName: Rezolver.Configuration.ConfigurationAdapter.ContextFactory
+- uid: Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)
+  name: CreateBuilder(IConfiguration)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_CreateBuilder_Rezolver_Configuration_IConfiguration_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)
+- uid: Rezolver.Configuration.ConfigurationAdapter.CreateBuilderInstance(Rezolver.Configuration.IConfiguration)
+  name: CreateBuilderInstance(IConfiguration)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_CreateBuilderInstance_Rezolver_Configuration_IConfiguration_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.CreateBuilderInstance(Rezolver.Configuration.IConfiguration)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.CreateBuilderInstance(Rezolver.Configuration.IConfiguration)
+- uid: Rezolver.Configuration.ConfigurationAdapter.CreateContext(Rezolver.Configuration.IConfiguration)
+  name: CreateContext(IConfiguration)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_CreateContext_Rezolver_Configuration_IConfiguration_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.CreateContext(Rezolver.Configuration.IConfiguration)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.CreateContext(Rezolver.Configuration.IConfiguration)
+- uid: Rezolver.Configuration.ConfigurationAdapter.DefaultContextFactory
+  name: DefaultContextFactory
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_DefaultContextFactory
+  commentId: P:Rezolver.Configuration.ConfigurationAdapter.DefaultContextFactory
+  fullName: Rezolver.Configuration.ConfigurationAdapter.DefaultContextFactory
+- uid: Rezolver.Configuration.ConfigurationAdapter.TransformAssemblyReferenceEntry(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.ConfigurationAdapterContext)
+  name: TransformAssemblyReferenceEntry(IConfigurationEntry, ConfigurationAdapterContext)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_TransformAssemblyReferenceEntry_Rezolver_Configuration_IConfigurationEntry_Rezolver_Configuration_ConfigurationAdapterContext_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.TransformAssemblyReferenceEntry(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.ConfigurationAdapterContext)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.TransformAssemblyReferenceEntry(Rezolver.Configuration.IConfigurationEntry, Rezolver.Configuration.ConfigurationAdapterContext)
+- uid: Rezolver.Configuration.ConfigurationAdapter.TransformEntry(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.ConfigurationAdapterContext)
+  name: TransformEntry(IConfigurationEntry, ConfigurationAdapterContext)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_TransformEntry_Rezolver_Configuration_IConfigurationEntry_Rezolver_Configuration_ConfigurationAdapterContext_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.TransformEntry(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.ConfigurationAdapterContext)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.TransformEntry(Rezolver.Configuration.IConfigurationEntry, Rezolver.Configuration.ConfigurationAdapterContext)
+- uid: Rezolver.Configuration.ConfigurationAdapter.TransformTypeRegistrationEntry(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.ConfigurationAdapterContext)
+  name: TransformTypeRegistrationEntry(IConfigurationEntry, ConfigurationAdapterContext)
+  href: api/Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_TransformTypeRegistrationEntry_Rezolver_Configuration_IConfigurationEntry_Rezolver_Configuration_ConfigurationAdapterContext_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapter.TransformTypeRegistrationEntry(Rezolver.Configuration.IConfigurationEntry,Rezolver.Configuration.ConfigurationAdapterContext)
+  fullName: Rezolver.Configuration.ConfigurationAdapter.TransformTypeRegistrationEntry(Rezolver.Configuration.IConfigurationEntry, Rezolver.Configuration.ConfigurationAdapterContext)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext
+  name: ConfigurationAdapterContext
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext
+  commentId: T:Rezolver.Configuration.ConfigurationAdapterContext
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.#ctor(Rezolver.Configuration.IConfigurationAdapter,Rezolver.Configuration.IConfiguration,System.Collections.Generic.IEnumerable{Assembly})
+  name: ConfigurationAdapterContext(IConfigurationAdapter, IConfiguration, IEnumerable<Assembly>)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext__ctor_Rezolver_Configuration_IConfigurationAdapter_Rezolver_Configuration_IConfiguration_System_Collections_Generic_IEnumerable_Assembly__
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.#ctor(Rezolver.Configuration.IConfigurationAdapter,Rezolver.Configuration.IConfiguration,System.Collections.Generic.IEnumerable{Assembly})
+  name.vb: ConfigurationAdapterContext(IConfigurationAdapter, IConfiguration, IEnumerable(Of Assembly))
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.ConfigurationAdapterContext(Rezolver.Configuration.IConfigurationAdapter, Rezolver.Configuration.IConfiguration, System.Collections.Generic.IEnumerable<Assembly>)
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.ConfigurationAdapterContext(Rezolver.Configuration.IConfigurationAdapter, Rezolver.Configuration.IConfiguration, System.Collections.Generic.IEnumerable(Of Assembly))
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.Adapter
+  name: Adapter
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_Adapter
+  commentId: P:Rezolver.Configuration.ConfigurationAdapterContext.Adapter
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.Adapter
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReference(Assembly)
+  name: AddAssemblyReference(Assembly)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_AddAssemblyReference_Assembly_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReference(Assembly)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReference(Assembly)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReference(Rezolver.Configuration.IAssemblyReferenceEntry)
+  name: AddAssemblyReference(IAssemblyReferenceEntry)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_AddAssemblyReference_Rezolver_Configuration_IAssemblyReferenceEntry_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReference(Rezolver.Configuration.IAssemblyReferenceEntry)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReference(Rezolver.Configuration.IAssemblyReferenceEntry)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferenceBase(Assembly)
+  name: AddAssemblyReferenceBase(Assembly)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_AddAssemblyReferenceBase_Assembly_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferenceBase(Assembly)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferenceBase(Assembly)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferences(System.Collections.Generic.IEnumerable{Assembly})
+  name: AddAssemblyReferences(IEnumerable<Assembly>)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_AddAssemblyReferences_System_Collections_Generic_IEnumerable_Assembly__
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferences(System.Collections.Generic.IEnumerable{Assembly})
+  name.vb: AddAssemblyReferences(IEnumerable(Of Assembly))
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferences(System.Collections.Generic.IEnumerable<Assembly>)
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferences(System.Collections.Generic.IEnumerable(Of Assembly))
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.AddError(Rezolver.Configuration.IConfigurationError)
+  name: AddError(IConfigurationError)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_AddError_Rezolver_Configuration_IConfigurationError_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.AddError(Rezolver.Configuration.IConfigurationError)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.AddError(Rezolver.Configuration.IConfigurationError)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.AddErrors(System.Collections.Generic.IEnumerable{Rezolver.Configuration.IConfigurationError})
+  name: AddErrors(IEnumerable<IConfigurationError>)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_AddErrors_System_Collections_Generic_IEnumerable_Rezolver_Configuration_IConfigurationError__
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.AddErrors(System.Collections.Generic.IEnumerable{Rezolver.Configuration.IConfigurationError})
+  name.vb: AddErrors(IEnumerable(Of IConfigurationError))
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.AddErrors(System.Collections.Generic.IEnumerable<Rezolver.Configuration.IConfigurationError>)
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.AddErrors(System.Collections.Generic.IEnumerable(Of Rezolver.Configuration.IConfigurationError))
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.AppendInstruction(Rezolver.Configuration.RezolverBuilderInstruction)
+  name: AppendInstruction(RezolverBuilderInstruction)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_AppendInstruction_Rezolver_Configuration_RezolverBuilderInstruction_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.AppendInstruction(Rezolver.Configuration.RezolverBuilderInstruction)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.AppendInstruction(Rezolver.Configuration.RezolverBuilderInstruction)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.Configuration
+  name: Configuration
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_Configuration
+  commentId: P:Rezolver.Configuration.ConfigurationAdapterContext.Configuration
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.Configuration
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.ErrorCount
+  name: ErrorCount
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_ErrorCount
+  commentId: P:Rezolver.Configuration.ConfigurationAdapterContext.ErrorCount
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.ErrorCount
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.Errors
+  name: Errors
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_Errors
+  commentId: P:Rezolver.Configuration.ConfigurationAdapterContext.Errors
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.Errors
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.GetNamespacePrefixedTypeNames(System.String)
+  name: GetNamespacePrefixedTypeNames(String)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_GetNamespacePrefixedTypeNames_System_String_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.GetNamespacePrefixedTypeNames(System.String)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.GetNamespacePrefixedTypeNames(System.String)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.GetReferencedAssemblies
+  name: GetReferencedAssemblies()
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_GetReferencedAssemblies
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.GetReferencedAssemblies
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.GetReferencedAssemblies()
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.GetUsingNamespaces
+  name: GetUsingNamespaces()
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_GetUsingNamespaces
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.GetUsingNamespaces
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.GetUsingNamespaces()
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.InsertAfter(Rezolver.Configuration.RezolverBuilderInstruction,Rezolver.Configuration.RezolverBuilderInstruction)
+  name: InsertAfter(RezolverBuilderInstruction, RezolverBuilderInstruction)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_InsertAfter_Rezolver_Configuration_RezolverBuilderInstruction_Rezolver_Configuration_RezolverBuilderInstruction_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.InsertAfter(Rezolver.Configuration.RezolverBuilderInstruction,Rezolver.Configuration.RezolverBuilderInstruction)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.InsertAfter(Rezolver.Configuration.RezolverBuilderInstruction, Rezolver.Configuration.RezolverBuilderInstruction)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.InsertBefore(Rezolver.Configuration.RezolverBuilderInstruction,Rezolver.Configuration.RezolverBuilderInstruction)
+  name: InsertBefore(RezolverBuilderInstruction, RezolverBuilderInstruction)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_InsertBefore_Rezolver_Configuration_RezolverBuilderInstruction_Rezolver_Configuration_RezolverBuilderInstruction_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.InsertBefore(Rezolver.Configuration.RezolverBuilderInstruction,Rezolver.Configuration.RezolverBuilderInstruction)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.InsertBefore(Rezolver.Configuration.RezolverBuilderInstruction, Rezolver.Configuration.RezolverBuilderInstruction)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeAfter(System.Collections.Generic.IEnumerable{Rezolver.Configuration.RezolverBuilderInstruction},Rezolver.Configuration.RezolverBuilderInstruction)
+  name: InsertRangeAfter(IEnumerable<RezolverBuilderInstruction>, RezolverBuilderInstruction)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_InsertRangeAfter_System_Collections_Generic_IEnumerable_Rezolver_Configuration_RezolverBuilderInstruction__Rezolver_Configuration_RezolverBuilderInstruction_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeAfter(System.Collections.Generic.IEnumerable{Rezolver.Configuration.RezolverBuilderInstruction},Rezolver.Configuration.RezolverBuilderInstruction)
+  name.vb: InsertRangeAfter(IEnumerable(Of RezolverBuilderInstruction), RezolverBuilderInstruction)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeAfter(System.Collections.Generic.IEnumerable<Rezolver.Configuration.RezolverBuilderInstruction>, Rezolver.Configuration.RezolverBuilderInstruction)
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeAfter(System.Collections.Generic.IEnumerable(Of Rezolver.Configuration.RezolverBuilderInstruction), Rezolver.Configuration.RezolverBuilderInstruction)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeBefore(System.Collections.Generic.IEnumerable{Rezolver.Configuration.RezolverBuilderInstruction},Rezolver.Configuration.RezolverBuilderInstruction)
+  name: InsertRangeBefore(IEnumerable<RezolverBuilderInstruction>, RezolverBuilderInstruction)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_InsertRangeBefore_System_Collections_Generic_IEnumerable_Rezolver_Configuration_RezolverBuilderInstruction__Rezolver_Configuration_RezolverBuilderInstruction_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeBefore(System.Collections.Generic.IEnumerable{Rezolver.Configuration.RezolverBuilderInstruction},Rezolver.Configuration.RezolverBuilderInstruction)
+  name.vb: InsertRangeBefore(IEnumerable(Of RezolverBuilderInstruction), RezolverBuilderInstruction)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeBefore(System.Collections.Generic.IEnumerable<Rezolver.Configuration.RezolverBuilderInstruction>, Rezolver.Configuration.RezolverBuilderInstruction)
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeBefore(System.Collections.Generic.IEnumerable(Of Rezolver.Configuration.RezolverBuilderInstruction), Rezolver.Configuration.RezolverBuilderInstruction)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.Instructions
+  name: Instructions
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_Instructions
+  commentId: P:Rezolver.Configuration.ConfigurationAdapterContext.Instructions
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.Instructions
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.ResolveType(System.String,System.Nullable{System.Int32})
+  name: ResolveType(String, Nullable<Int32>)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_ResolveType_System_String_System_Nullable_System_Int32__
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.ResolveType(System.String,System.Nullable{System.Int32})
+  name.vb: ResolveType(String, Nullable(Of Int32))
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.ResolveType(System.String, System.Nullable<System.Int32>)
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.ResolveType(System.String, System.Nullable(Of System.Int32))
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReference(Rezolver.Configuration.ITypeReference,System.Type@)
+  name: TryParseTypeReference(ITypeReference, out Type)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_TryParseTypeReference_Rezolver_Configuration_ITypeReference_System_Type__
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReference(Rezolver.Configuration.ITypeReference,System.Type@)
+  name.vb: TryParseTypeReference(ITypeReference, ByRef Type)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReference(Rezolver.Configuration.ITypeReference, out System.Type)
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReference(Rezolver.Configuration.ITypeReference, ByRef System.Type)
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReferences(System.Collections.Generic.IEnumerable{Rezolver.Configuration.ITypeReference},System.Type[]@)
+  name: TryParseTypeReferences(IEnumerable<ITypeReference>, out Type[])
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_TryParseTypeReferences_System_Collections_Generic_IEnumerable_Rezolver_Configuration_ITypeReference__System_Type____
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReferences(System.Collections.Generic.IEnumerable{Rezolver.Configuration.ITypeReference},System.Type[]@)
+  name.vb: TryParseTypeReferences(IEnumerable(Of ITypeReference), ByRef Type())
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReferences(System.Collections.Generic.IEnumerable<Rezolver.Configuration.ITypeReference>, out System.Type[])
+  fullName.vb: Rezolver.Configuration.ConfigurationAdapterContext.TryParseTypeReferences(System.Collections.Generic.IEnumerable(Of Rezolver.Configuration.ITypeReference), ByRef System.Type())
+- uid: Rezolver.Configuration.ConfigurationAdapterContext.UnresolvedType
+  name: ConfigurationAdapterContext.UnresolvedType
+  href: api/Rezolver.Configuration.ConfigurationAdapterContext.UnresolvedType.html#Rezolver_Configuration_ConfigurationAdapterContext_UnresolvedType
+  commentId: T:Rezolver.Configuration.ConfigurationAdapterContext.UnresolvedType
+  fullName: Rezolver.Configuration.ConfigurationAdapterContext.UnresolvedType
+- uid: Rezolver.Configuration.ConfigurationAdapterContextFactory
+  name: ConfigurationAdapterContextFactory
+  href: api/Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory
+  commentId: T:Rezolver.Configuration.ConfigurationAdapterContextFactory
+  fullName: Rezolver.Configuration.ConfigurationAdapterContextFactory
+- uid: Rezolver.Configuration.ConfigurationAdapterContextFactory.#ctor
+  name: ConfigurationAdapterContextFactory()
+  href: api/Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory__ctor
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContextFactory.#ctor
+  fullName: Rezolver.Configuration.ConfigurationAdapterContextFactory.ConfigurationAdapterContextFactory()
+- uid: Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter,Rezolver.Configuration.IConfiguration)
+  name: CreateContext(ConfigurationAdapter, IConfiguration)
+  href: api/Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter,Rezolver.Configuration.IConfiguration)
+  fullName: Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter, Rezolver.Configuration.IConfiguration)
+- uid: Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences
+  name: GetDefaultAssemblyReferences()
+  href: api/Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences
+  commentId: M:Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences
+  fullName: Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+- uid: Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance
+  name: Instance
+  href: api/Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance
+  commentId: P:Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance
+  fullName: Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance
+- uid: Rezolver.Configuration.ConfigurationEntryBase
+  name: ConfigurationEntryBase
+  href: api/Rezolver.Configuration.ConfigurationEntryBase.html#Rezolver_Configuration_ConfigurationEntryBase
+  commentId: T:Rezolver.Configuration.ConfigurationEntryBase
+  fullName: Rezolver.Configuration.ConfigurationEntryBase
+- uid: Rezolver.Configuration.ConfigurationEntryBase.#ctor(Rezolver.Configuration.ConfigurationEntryType,Rezolver.Configuration.IConfigurationLineInfo)
+  name: ConfigurationEntryBase(ConfigurationEntryType, IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.ConfigurationEntryBase.html#Rezolver_Configuration_ConfigurationEntryBase__ctor_Rezolver_Configuration_ConfigurationEntryType_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.ConfigurationEntryBase.#ctor(Rezolver.Configuration.ConfigurationEntryType,Rezolver.Configuration.IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.ConfigurationEntryBase.ConfigurationEntryBase(Rezolver.Configuration.ConfigurationEntryType, Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.ConfigurationEntryBase.EndLineNo
+  name: EndLineNo
+  href: api/Rezolver.Configuration.ConfigurationEntryBase.html#Rezolver_Configuration_ConfigurationEntryBase_EndLineNo
+  commentId: P:Rezolver.Configuration.ConfigurationEntryBase.EndLineNo
+  fullName: Rezolver.Configuration.ConfigurationEntryBase.EndLineNo
+- uid: Rezolver.Configuration.ConfigurationEntryBase.EndLinePos
+  name: EndLinePos
+  href: api/Rezolver.Configuration.ConfigurationEntryBase.html#Rezolver_Configuration_ConfigurationEntryBase_EndLinePos
+  commentId: P:Rezolver.Configuration.ConfigurationEntryBase.EndLinePos
+  fullName: Rezolver.Configuration.ConfigurationEntryBase.EndLinePos
+- uid: Rezolver.Configuration.ConfigurationEntryBase.StartLineNo
+  name: StartLineNo
+  href: api/Rezolver.Configuration.ConfigurationEntryBase.html#Rezolver_Configuration_ConfigurationEntryBase_StartLineNo
+  commentId: P:Rezolver.Configuration.ConfigurationEntryBase.StartLineNo
+  fullName: Rezolver.Configuration.ConfigurationEntryBase.StartLineNo
+- uid: Rezolver.Configuration.ConfigurationEntryBase.StartLinePos
+  name: StartLinePos
+  href: api/Rezolver.Configuration.ConfigurationEntryBase.html#Rezolver_Configuration_ConfigurationEntryBase_StartLinePos
+  commentId: P:Rezolver.Configuration.ConfigurationEntryBase.StartLinePos
+  fullName: Rezolver.Configuration.ConfigurationEntryBase.StartLinePos
+- uid: Rezolver.Configuration.ConfigurationEntryBase.Type
+  name: Type
+  href: api/Rezolver.Configuration.ConfigurationEntryBase.html#Rezolver_Configuration_ConfigurationEntryBase_Type
+  commentId: P:Rezolver.Configuration.ConfigurationEntryBase.Type
+  fullName: Rezolver.Configuration.ConfigurationEntryBase.Type
+- uid: Rezolver.Configuration.ConfigurationEntryType
+  name: ConfigurationEntryType
+  href: api/Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType
+  commentId: T:Rezolver.Configuration.ConfigurationEntryType
+  fullName: Rezolver.Configuration.ConfigurationEntryType
+- uid: Rezolver.Configuration.ConfigurationEntryType.AssemblyReference
+  name: AssemblyReference
+  href: api/Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType_AssemblyReference
+  commentId: F:Rezolver.Configuration.ConfigurationEntryType.AssemblyReference
+  fullName: Rezolver.Configuration.ConfigurationEntryType.AssemblyReference
+- uid: Rezolver.Configuration.ConfigurationEntryType.Extension
+  name: Extension
+  href: api/Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType_Extension
+  commentId: F:Rezolver.Configuration.ConfigurationEntryType.Extension
+  fullName: Rezolver.Configuration.ConfigurationEntryType.Extension
+- uid: Rezolver.Configuration.ConfigurationEntryType.NamedBuilder
+  name: NamedBuilder
+  href: api/Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType_NamedBuilder
+  commentId: F:Rezolver.Configuration.ConfigurationEntryType.NamedBuilder
+  fullName: Rezolver.Configuration.ConfigurationEntryType.NamedBuilder
+- uid: Rezolver.Configuration.ConfigurationEntryType.NamespaceImport
+  name: NamespaceImport
+  href: api/Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType_NamespaceImport
+  commentId: F:Rezolver.Configuration.ConfigurationEntryType.NamespaceImport
+  fullName: Rezolver.Configuration.ConfigurationEntryType.NamespaceImport
+- uid: Rezolver.Configuration.ConfigurationEntryType.TypeRegistration
+  name: TypeRegistration
+  href: api/Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType_TypeRegistration
+  commentId: F:Rezolver.Configuration.ConfigurationEntryType.TypeRegistration
+  fullName: Rezolver.Configuration.ConfigurationEntryType.TypeRegistration
+- uid: Rezolver.Configuration.ConfigurationEntryType.Unknown
+  name: Unknown
+  href: api/Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType_Unknown
+  commentId: F:Rezolver.Configuration.ConfigurationEntryType.Unknown
+  fullName: Rezolver.Configuration.ConfigurationEntryType.Unknown
+- uid: Rezolver.Configuration.ConfigurationError
+  name: ConfigurationError
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError
+  commentId: T:Rezolver.Configuration.ConfigurationError
+  fullName: Rezolver.Configuration.ConfigurationError
+- uid: Rezolver.Configuration.ConfigurationError.#ctor(System.Exception,Rezolver.Configuration.IConfigurationLineInfo)
+  name: ConfigurationError(Exception, IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError__ctor_System_Exception_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.ConfigurationError.#ctor(System.Exception,Rezolver.Configuration.IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.ConfigurationError.ConfigurationError(System.Exception, Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.ConfigurationError.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo)
+  name: ConfigurationError(String, IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.ConfigurationError.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.ConfigurationError.ConfigurationError(System.String, Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.ConfigurationError.ErrorMessage
+  name: ErrorMessage
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_ErrorMessage
+  commentId: P:Rezolver.Configuration.ConfigurationError.ErrorMessage
+  fullName: Rezolver.Configuration.ConfigurationError.ErrorMessage
+- uid: Rezolver.Configuration.ConfigurationError.ErrorMessageWithLineInfo
+  name: ErrorMessageWithLineInfo
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_ErrorMessageWithLineInfo
+  commentId: P:Rezolver.Configuration.ConfigurationError.ErrorMessageWithLineInfo
+  fullName: Rezolver.Configuration.ConfigurationError.ErrorMessageWithLineInfo
+- uid: Rezolver.Configuration.ConfigurationError.Exception
+  name: Exception
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_Exception
+  commentId: P:Rezolver.Configuration.ConfigurationError.Exception
+  fullName: Rezolver.Configuration.ConfigurationError.Exception
+- uid: Rezolver.Configuration.ConfigurationError.IsException
+  name: IsException
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_IsException
+  commentId: P:Rezolver.Configuration.ConfigurationError.IsException
+  fullName: Rezolver.Configuration.ConfigurationError.IsException
+- uid: Rezolver.Configuration.ConfigurationError.LineInfo
+  name: LineInfo
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_LineInfo
+  commentId: P:Rezolver.Configuration.ConfigurationError.LineInfo
+  fullName: Rezolver.Configuration.ConfigurationError.LineInfo
+- uid: Rezolver.Configuration.ConfigurationError.UnexpectedMetadataType(Rezolver.Configuration.RezolveTargetMetadataType,System.Type,System.Type,Rezolver.Configuration.IConfigurationLineInfo)
+  name: UnexpectedMetadataType(RezolveTargetMetadataType, Type, Type, IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_UnexpectedMetadataType_Rezolver_Configuration_RezolveTargetMetadataType_System_Type_System_Type_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.ConfigurationError.UnexpectedMetadataType(Rezolver.Configuration.RezolveTargetMetadataType,System.Type,System.Type,Rezolver.Configuration.IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.ConfigurationError.UnexpectedMetadataType(Rezolver.Configuration.RezolveTargetMetadataType, System.Type, System.Type, Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.ConfigurationError.UnresolvedType(Rezolver.Configuration.ITypeReference)
+  name: UnresolvedType(ITypeReference)
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_UnresolvedType_Rezolver_Configuration_ITypeReference_
+  commentId: M:Rezolver.Configuration.ConfigurationError.UnresolvedType(Rezolver.Configuration.ITypeReference)
+  fullName: Rezolver.Configuration.ConfigurationError.UnresolvedType(Rezolver.Configuration.ITypeReference)
+- uid: Rezolver.Configuration.ConfigurationError.UnresolvedType(System.String,Rezolver.Configuration.IConfigurationLineInfo)
+  name: UnresolvedType(String, IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.ConfigurationError.html#Rezolver_Configuration_ConfigurationError_UnresolvedType_System_String_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.ConfigurationError.UnresolvedType(System.String,Rezolver.Configuration.IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.ConfigurationError.UnresolvedType(System.String, Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.ConfigurationException
+  name: ConfigurationException
+  href: api/Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException
+  commentId: T:Rezolver.Configuration.ConfigurationException
+  fullName: Rezolver.Configuration.ConfigurationException
+- uid: Rezolver.Configuration.ConfigurationException.#ctor(Rezolver.Configuration.ConfigurationAdapterContext)
+  name: ConfigurationException(ConfigurationAdapterContext)
+  href: api/Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException__ctor_Rezolver_Configuration_ConfigurationAdapterContext_
+  commentId: M:Rezolver.Configuration.ConfigurationException.#ctor(Rezolver.Configuration.ConfigurationAdapterContext)
+  fullName: Rezolver.Configuration.ConfigurationException.ConfigurationException(Rezolver.Configuration.ConfigurationAdapterContext)
+- uid: Rezolver.Configuration.ConfigurationException.#ctor(Rezolver.Configuration.IConfiguration,System.Collections.Generic.IEnumerable{Rezolver.Configuration.IConfigurationError})
+  name: ConfigurationException(IConfiguration, IEnumerable<IConfigurationError>)
+  href: api/Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException__ctor_Rezolver_Configuration_IConfiguration_System_Collections_Generic_IEnumerable_Rezolver_Configuration_IConfigurationError__
+  commentId: M:Rezolver.Configuration.ConfigurationException.#ctor(Rezolver.Configuration.IConfiguration,System.Collections.Generic.IEnumerable{Rezolver.Configuration.IConfigurationError})
+  name.vb: ConfigurationException(IConfiguration, IEnumerable(Of IConfigurationError))
+  fullName: Rezolver.Configuration.ConfigurationException.ConfigurationException(Rezolver.Configuration.IConfiguration, System.Collections.Generic.IEnumerable<Rezolver.Configuration.IConfigurationError>)
+  fullName.vb: Rezolver.Configuration.ConfigurationException.ConfigurationException(Rezolver.Configuration.IConfiguration, System.Collections.Generic.IEnumerable(Of Rezolver.Configuration.IConfigurationError))
+- uid: Rezolver.Configuration.ConfigurationException.Message
+  name: Message
+  href: api/Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException_Message
+  commentId: P:Rezolver.Configuration.ConfigurationException.Message
+  fullName: Rezolver.Configuration.ConfigurationException.Message
+- uid: Rezolver.Configuration.ConstructorTargetMetadata
+  name: ConstructorTargetMetadata
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata
+  commentId: T:Rezolver.Configuration.ConstructorTargetMetadata
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata
+- uid: Rezolver.Configuration.ConstructorTargetMetadata.#ctor(Rezolver.Configuration.ITypeReference[],Rezolver.Configuration.ITypeReference[],System.Collections.Generic.IDictionary{System.String,Rezolver.Configuration.IRezolveTargetMetadata})
+  name: ConstructorTargetMetadata(ITypeReference[], ITypeReference[], IDictionary<String, IRezolveTargetMetadata>)
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata__ctor_Rezolver_Configuration_ITypeReference___Rezolver_Configuration_ITypeReference___System_Collections_Generic_IDictionary_System_String_Rezolver_Configuration_IRezolveTargetMetadata__
+  commentId: M:Rezolver.Configuration.ConstructorTargetMetadata.#ctor(Rezolver.Configuration.ITypeReference[],Rezolver.Configuration.ITypeReference[],System.Collections.Generic.IDictionary{System.String,Rezolver.Configuration.IRezolveTargetMetadata})
+  name.vb: ConstructorTargetMetadata(ITypeReference(), ITypeReference(), IDictionary(Of String, IRezolveTargetMetadata))
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata.ConstructorTargetMetadata(Rezolver.Configuration.ITypeReference[], Rezolver.Configuration.ITypeReference[], System.Collections.Generic.IDictionary<System.String, Rezolver.Configuration.IRezolveTargetMetadata>)
+  fullName.vb: Rezolver.Configuration.ConstructorTargetMetadata.ConstructorTargetMetadata(Rezolver.Configuration.ITypeReference(), Rezolver.Configuration.ITypeReference(), System.Collections.Generic.IDictionary(Of System.String, Rezolver.Configuration.IRezolveTargetMetadata))
+- uid: Rezolver.Configuration.ConstructorTargetMetadata.Arguments
+  name: Arguments
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata_Arguments
+  commentId: P:Rezolver.Configuration.ConstructorTargetMetadata.Arguments
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata.Arguments
+- uid: Rezolver.Configuration.ConstructorTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.ConstructorTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.ConstructorTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.ConstructorTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.ConstructorTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargetBase(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata.CreateRezolveTargetBase(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.ConstructorTargetMetadata.CreateRezolveTargetBase(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.ConstructorTargetMetadata.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata_DeclaredType
+  commentId: P:Rezolver.Configuration.ConstructorTargetMetadata.DeclaredType
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata.DeclaredType
+- uid: Rezolver.Configuration.ConstructorTargetMetadata.SignatureTypes
+  name: SignatureTypes
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata_SignatureTypes
+  commentId: P:Rezolver.Configuration.ConstructorTargetMetadata.SignatureTypes
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata.SignatureTypes
+- uid: Rezolver.Configuration.ConstructorTargetMetadata.TypesToBuild
+  name: TypesToBuild
+  href: api/Rezolver.Configuration.ConstructorTargetMetadata.html#Rezolver_Configuration_ConstructorTargetMetadata_TypesToBuild
+  commentId: P:Rezolver.Configuration.ConstructorTargetMetadata.TypesToBuild
+  fullName: Rezolver.Configuration.ConstructorTargetMetadata.TypesToBuild
+- uid: Rezolver.Configuration.IAssemblyReferenceEntry
+  name: IAssemblyReferenceEntry
+  href: api/Rezolver.Configuration.IAssemblyReferenceEntry.html#Rezolver_Configuration_IAssemblyReferenceEntry
+  commentId: T:Rezolver.Configuration.IAssemblyReferenceEntry
+  fullName: Rezolver.Configuration.IAssemblyReferenceEntry
+- uid: Rezolver.Configuration.IAssemblyReferenceEntry.AssemblyName
+  name: AssemblyName
+  href: api/Rezolver.Configuration.IAssemblyReferenceEntry.html#Rezolver_Configuration_IAssemblyReferenceEntry_AssemblyName
+  commentId: P:Rezolver.Configuration.IAssemblyReferenceEntry.AssemblyName
+  fullName: Rezolver.Configuration.IAssemblyReferenceEntry.AssemblyName
+- uid: Rezolver.Configuration.IConfiguration
+  name: IConfiguration
+  href: api/Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration
+  commentId: T:Rezolver.Configuration.IConfiguration
+  fullName: Rezolver.Configuration.IConfiguration
+- uid: Rezolver.Configuration.IConfiguration.Entries
+  name: Entries
+  href: api/Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration_Entries
+  commentId: P:Rezolver.Configuration.IConfiguration.Entries
+  fullName: Rezolver.Configuration.IConfiguration.Entries
+- uid: Rezolver.Configuration.IConfiguration.FileName
+  name: FileName
+  href: api/Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration_FileName
+  commentId: P:Rezolver.Configuration.IConfiguration.FileName
+  fullName: Rezolver.Configuration.IConfiguration.FileName
+- uid: Rezolver.Configuration.IConfigurationAdapter
+  name: IConfigurationAdapter
+  href: api/Rezolver.Configuration.IConfigurationAdapter.html#Rezolver_Configuration_IConfigurationAdapter
+  commentId: T:Rezolver.Configuration.IConfigurationAdapter
+  fullName: Rezolver.Configuration.IConfigurationAdapter
+- uid: Rezolver.Configuration.IConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)
+  name: CreateBuilder(IConfiguration)
+  href: api/Rezolver.Configuration.IConfigurationAdapter.html#Rezolver_Configuration_IConfigurationAdapter_CreateBuilder_Rezolver_Configuration_IConfiguration_
+  commentId: M:Rezolver.Configuration.IConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)
+  fullName: Rezolver.Configuration.IConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)
+- uid: Rezolver.Configuration.IConfigurationAdapterContextFactory
+  name: IConfigurationAdapterContextFactory
+  href: api/Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory
+  commentId: T:Rezolver.Configuration.IConfigurationAdapterContextFactory
+  fullName: Rezolver.Configuration.IConfigurationAdapterContextFactory
+- uid: Rezolver.Configuration.IConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter,Rezolver.Configuration.IConfiguration)
+  name: CreateContext(ConfigurationAdapter, IConfiguration)
+  href: api/Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_
+  commentId: M:Rezolver.Configuration.IConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter,Rezolver.Configuration.IConfiguration)
+  fullName: Rezolver.Configuration.IConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter, Rezolver.Configuration.IConfiguration)
+- uid: Rezolver.Configuration.IConfigurationEntry
+  name: IConfigurationEntry
+  href: api/Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry
+  commentId: T:Rezolver.Configuration.IConfigurationEntry
+  fullName: Rezolver.Configuration.IConfigurationEntry
+- uid: Rezolver.Configuration.IConfigurationEntry.Type
+  name: Type
+  href: api/Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry_Type
+  commentId: P:Rezolver.Configuration.IConfigurationEntry.Type
+  fullName: Rezolver.Configuration.IConfigurationEntry.Type
+- uid: Rezolver.Configuration.IConfigurationError
+  name: IConfigurationError
+  href: api/Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError
+  commentId: T:Rezolver.Configuration.IConfigurationError
+  fullName: Rezolver.Configuration.IConfigurationError
+- uid: Rezolver.Configuration.IConfigurationError.ErrorMessage
+  name: ErrorMessage
+  href: api/Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError_ErrorMessage
+  commentId: P:Rezolver.Configuration.IConfigurationError.ErrorMessage
+  fullName: Rezolver.Configuration.IConfigurationError.ErrorMessage
+- uid: Rezolver.Configuration.IConfigurationError.ErrorMessageWithLineInfo
+  name: ErrorMessageWithLineInfo
+  href: api/Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError_ErrorMessageWithLineInfo
+  commentId: P:Rezolver.Configuration.IConfigurationError.ErrorMessageWithLineInfo
+  fullName: Rezolver.Configuration.IConfigurationError.ErrorMessageWithLineInfo
+- uid: Rezolver.Configuration.IConfigurationError.LineInfo
+  name: LineInfo
+  href: api/Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError_LineInfo
+  commentId: P:Rezolver.Configuration.IConfigurationError.LineInfo
+  fullName: Rezolver.Configuration.IConfigurationError.LineInfo
+- uid: Rezolver.Configuration.IConfigurationExtensionEntry
+  name: IConfigurationExtensionEntry
+  href: api/Rezolver.Configuration.IConfigurationExtensionEntry.html#Rezolver_Configuration_IConfigurationExtensionEntry
+  commentId: T:Rezolver.Configuration.IConfigurationExtensionEntry
+  fullName: Rezolver.Configuration.IConfigurationExtensionEntry
+- uid: Rezolver.Configuration.IConfigurationExtensionEntry.ExtensionType
+  name: ExtensionType
+  href: api/Rezolver.Configuration.IConfigurationExtensionEntry.html#Rezolver_Configuration_IConfigurationExtensionEntry_ExtensionType
+  commentId: P:Rezolver.Configuration.IConfigurationExtensionEntry.ExtensionType
+  fullName: Rezolver.Configuration.IConfigurationExtensionEntry.ExtensionType
+- uid: Rezolver.Configuration.IConfigurationLineInfo
+  name: IConfigurationLineInfo
+  href: api/Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo
+  commentId: T:Rezolver.Configuration.IConfigurationLineInfo
+  fullName: Rezolver.Configuration.IConfigurationLineInfo
+- uid: Rezolver.Configuration.IConfigurationLineInfo.EndLineNo
+  name: EndLineNo
+  href: api/Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo_EndLineNo
+  commentId: P:Rezolver.Configuration.IConfigurationLineInfo.EndLineNo
+  fullName: Rezolver.Configuration.IConfigurationLineInfo.EndLineNo
+- uid: Rezolver.Configuration.IConfigurationLineInfo.EndLinePos
+  name: EndLinePos
+  href: api/Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo_EndLinePos
+  commentId: P:Rezolver.Configuration.IConfigurationLineInfo.EndLinePos
+  fullName: Rezolver.Configuration.IConfigurationLineInfo.EndLinePos
+- uid: Rezolver.Configuration.IConfigurationLineInfo.StartLineNo
+  name: StartLineNo
+  href: api/Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo_StartLineNo
+  commentId: P:Rezolver.Configuration.IConfigurationLineInfo.StartLineNo
+  fullName: Rezolver.Configuration.IConfigurationLineInfo.StartLineNo
+- uid: Rezolver.Configuration.IConfigurationLineInfo.StartLinePos
+  name: StartLinePos
+  href: api/Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo_StartLinePos
+  commentId: P:Rezolver.Configuration.IConfigurationLineInfo.StartLinePos
+  fullName: Rezolver.Configuration.IConfigurationLineInfo.StartLinePos
+- uid: Rezolver.Configuration.IConstructorTargetMetadata
+  name: IConstructorTargetMetadata
+  href: api/Rezolver.Configuration.IConstructorTargetMetadata.html#Rezolver_Configuration_IConstructorTargetMetadata
+  commentId: T:Rezolver.Configuration.IConstructorTargetMetadata
+  fullName: Rezolver.Configuration.IConstructorTargetMetadata
+- uid: Rezolver.Configuration.IConstructorTargetMetadata.Arguments
+  name: Arguments
+  href: api/Rezolver.Configuration.IConstructorTargetMetadata.html#Rezolver_Configuration_IConstructorTargetMetadata_Arguments
+  commentId: P:Rezolver.Configuration.IConstructorTargetMetadata.Arguments
+  fullName: Rezolver.Configuration.IConstructorTargetMetadata.Arguments
+- uid: Rezolver.Configuration.IConstructorTargetMetadata.SignatureTypes
+  name: SignatureTypes
+  href: api/Rezolver.Configuration.IConstructorTargetMetadata.html#Rezolver_Configuration_IConstructorTargetMetadata_SignatureTypes
+  commentId: P:Rezolver.Configuration.IConstructorTargetMetadata.SignatureTypes
+  fullName: Rezolver.Configuration.IConstructorTargetMetadata.SignatureTypes
+- uid: Rezolver.Configuration.IConstructorTargetMetadata.TypesToBuild
+  name: TypesToBuild
+  href: api/Rezolver.Configuration.IConstructorTargetMetadata.html#Rezolver_Configuration_IConstructorTargetMetadata_TypesToBuild
+  commentId: P:Rezolver.Configuration.IConstructorTargetMetadata.TypesToBuild
+  fullName: Rezolver.Configuration.IConstructorTargetMetadata.TypesToBuild
+- uid: Rezolver.Configuration.IListTargetMetadata
+  name: IListTargetMetadata
+  href: api/Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata
+  commentId: T:Rezolver.Configuration.IListTargetMetadata
+  fullName: Rezolver.Configuration.IListTargetMetadata
+- uid: Rezolver.Configuration.IListTargetMetadata.ElementType
+  name: ElementType
+  href: api/Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata_ElementType
+  commentId: P:Rezolver.Configuration.IListTargetMetadata.ElementType
+  fullName: Rezolver.Configuration.IListTargetMetadata.ElementType
+- uid: Rezolver.Configuration.IListTargetMetadata.IsArray
+  name: IsArray
+  href: api/Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata_IsArray
+  commentId: P:Rezolver.Configuration.IListTargetMetadata.IsArray
+  fullName: Rezolver.Configuration.IListTargetMetadata.IsArray
+- uid: Rezolver.Configuration.IListTargetMetadata.Items
+  name: Items
+  href: api/Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata_Items
+  commentId: P:Rezolver.Configuration.IListTargetMetadata.Items
+  fullName: Rezolver.Configuration.IListTargetMetadata.Items
+- uid: Rezolver.Configuration.IObjectTargetMetadata
+  name: IObjectTargetMetadata
+  href: api/Rezolver.Configuration.IObjectTargetMetadata.html#Rezolver_Configuration_IObjectTargetMetadata
+  commentId: T:Rezolver.Configuration.IObjectTargetMetadata
+  fullName: Rezolver.Configuration.IObjectTargetMetadata
+- uid: Rezolver.Configuration.IObjectTargetMetadata.GetObject(System.Type)
+  name: GetObject(Type)
+  href: api/Rezolver.Configuration.IObjectTargetMetadata.html#Rezolver_Configuration_IObjectTargetMetadata_GetObject_System_Type_
+  commentId: M:Rezolver.Configuration.IObjectTargetMetadata.GetObject(System.Type)
+  fullName: Rezolver.Configuration.IObjectTargetMetadata.GetObject(System.Type)
+- uid: Rezolver.Configuration.IRezolveTargetMetadata
+  name: IRezolveTargetMetadata
+  href: api/Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata
+  commentId: T:Rezolver.Configuration.IRezolveTargetMetadata
+  fullName: Rezolver.Configuration.IRezolveTargetMetadata
+- uid: Rezolver.Configuration.IRezolveTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])
+  name: Bind(ITypeReference[])
+  href: api/Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_Bind_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.IRezolveTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])
+  name.vb: Bind(ITypeReference())
+  fullName: Rezolver.Configuration.IRezolveTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.IRezolveTargetMetadata.Bind(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.IRezolveTargetMetadata.CreateRezolveTarget(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTarget(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_CreateRezolveTarget_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.IRezolveTargetMetadata.CreateRezolveTarget(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTarget(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.IRezolveTargetMetadata.CreateRezolveTarget(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.IRezolveTargetMetadata.CreateRezolveTarget(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.IRezolveTargetMetadata.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_DeclaredType
+  commentId: P:Rezolver.Configuration.IRezolveTargetMetadata.DeclaredType
+  fullName: Rezolver.Configuration.IRezolveTargetMetadata.DeclaredType
+- uid: Rezolver.Configuration.IRezolveTargetMetadata.Type
+  name: Type
+  href: api/Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_Type
+  commentId: P:Rezolver.Configuration.IRezolveTargetMetadata.Type
+  fullName: Rezolver.Configuration.IRezolveTargetMetadata.Type
+- uid: Rezolver.Configuration.IRezolveTargetMetadataExtension
+  name: IRezolveTargetMetadataExtension
+  href: api/Rezolver.Configuration.IRezolveTargetMetadataExtension.html#Rezolver_Configuration_IRezolveTargetMetadataExtension
+  commentId: T:Rezolver.Configuration.IRezolveTargetMetadataExtension
+  fullName: Rezolver.Configuration.IRezolveTargetMetadataExtension
+- uid: Rezolver.Configuration.IRezolveTargetMetadataExtension.ExtensionType
+  name: ExtensionType
+  href: api/Rezolver.Configuration.IRezolveTargetMetadataExtension.html#Rezolver_Configuration_IRezolveTargetMetadataExtension_ExtensionType
+  commentId: P:Rezolver.Configuration.IRezolveTargetMetadataExtension.ExtensionType
+  fullName: Rezolver.Configuration.IRezolveTargetMetadataExtension.ExtensionType
+- uid: Rezolver.Configuration.IRezolveTargetMetadataList
+  name: IRezolveTargetMetadataList
+  href: api/Rezolver.Configuration.IRezolveTargetMetadataList.html#Rezolver_Configuration_IRezolveTargetMetadataList
+  commentId: T:Rezolver.Configuration.IRezolveTargetMetadataList
+  fullName: Rezolver.Configuration.IRezolveTargetMetadataList
+- uid: Rezolver.Configuration.IRezolveTargetMetadataList.CreateRezolveTargets(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargets(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.IRezolveTargetMetadataList.html#Rezolver_Configuration_IRezolveTargetMetadataList_CreateRezolveTargets_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.IRezolveTargetMetadataList.CreateRezolveTargets(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargets(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.IRezolveTargetMetadataList.CreateRezolveTargets(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.IRezolveTargetMetadataList.CreateRezolveTargets(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.IRezolveTargetMetadataList.Targets
+  name: Targets
+  href: api/Rezolver.Configuration.IRezolveTargetMetadataList.html#Rezolver_Configuration_IRezolveTargetMetadataList_Targets
+  commentId: P:Rezolver.Configuration.IRezolveTargetMetadataList.Targets
+  fullName: Rezolver.Configuration.IRezolveTargetMetadataList.Targets
+- uid: Rezolver.Configuration.ISingletonTargetMetadata
+  name: ISingletonTargetMetadata
+  href: api/Rezolver.Configuration.ISingletonTargetMetadata.html#Rezolver_Configuration_ISingletonTargetMetadata
+  commentId: T:Rezolver.Configuration.ISingletonTargetMetadata
+  fullName: Rezolver.Configuration.ISingletonTargetMetadata
+- uid: Rezolver.Configuration.ISingletonTargetMetadata.Inner
+  name: Inner
+  href: api/Rezolver.Configuration.ISingletonTargetMetadata.html#Rezolver_Configuration_ISingletonTargetMetadata_Inner
+  commentId: P:Rezolver.Configuration.ISingletonTargetMetadata.Inner
+  fullName: Rezolver.Configuration.ISingletonTargetMetadata.Inner
+- uid: Rezolver.Configuration.ISingletonTargetMetadata.Scoped
+  name: Scoped
+  href: api/Rezolver.Configuration.ISingletonTargetMetadata.html#Rezolver_Configuration_ISingletonTargetMetadata_Scoped
+  commentId: P:Rezolver.Configuration.ISingletonTargetMetadata.Scoped
+  fullName: Rezolver.Configuration.ISingletonTargetMetadata.Scoped
+- uid: Rezolver.Configuration.ITypeReference
+  name: ITypeReference
+  href: api/Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference
+  commentId: T:Rezolver.Configuration.ITypeReference
+  fullName: Rezolver.Configuration.ITypeReference
+- uid: Rezolver.Configuration.ITypeReference.GenericArguments
+  name: GenericArguments
+  href: api/Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference_GenericArguments
+  commentId: P:Rezolver.Configuration.ITypeReference.GenericArguments
+  fullName: Rezolver.Configuration.ITypeReference.GenericArguments
+- uid: Rezolver.Configuration.ITypeReference.IsArray
+  name: IsArray
+  href: api/Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference_IsArray
+  commentId: P:Rezolver.Configuration.ITypeReference.IsArray
+  fullName: Rezolver.Configuration.ITypeReference.IsArray
+- uid: Rezolver.Configuration.ITypeReference.IsOpenGenericTypeArgument
+  name: IsOpenGenericTypeArgument
+  href: api/Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference_IsOpenGenericTypeArgument
+  commentId: P:Rezolver.Configuration.ITypeReference.IsOpenGenericTypeArgument
+  fullName: Rezolver.Configuration.ITypeReference.IsOpenGenericTypeArgument
+- uid: Rezolver.Configuration.ITypeReference.IsUnbound
+  name: IsUnbound
+  href: api/Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference_IsUnbound
+  commentId: P:Rezolver.Configuration.ITypeReference.IsUnbound
+  fullName: Rezolver.Configuration.ITypeReference.IsUnbound
+- uid: Rezolver.Configuration.ITypeReference.TypeName
+  name: TypeName
+  href: api/Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference_TypeName
+  commentId: P:Rezolver.Configuration.ITypeReference.TypeName
+  fullName: Rezolver.Configuration.ITypeReference.TypeName
+- uid: Rezolver.Configuration.ITypeRegistrationEntry
+  name: ITypeRegistrationEntry
+  href: api/Rezolver.Configuration.ITypeRegistrationEntry.html#Rezolver_Configuration_ITypeRegistrationEntry
+  commentId: T:Rezolver.Configuration.ITypeRegistrationEntry
+  fullName: Rezolver.Configuration.ITypeRegistrationEntry
+- uid: Rezolver.Configuration.ITypeRegistrationEntry.IsMultipleRegistration
+  name: IsMultipleRegistration
+  href: api/Rezolver.Configuration.ITypeRegistrationEntry.html#Rezolver_Configuration_ITypeRegistrationEntry_IsMultipleRegistration
+  commentId: P:Rezolver.Configuration.ITypeRegistrationEntry.IsMultipleRegistration
+  fullName: Rezolver.Configuration.ITypeRegistrationEntry.IsMultipleRegistration
+- uid: Rezolver.Configuration.ITypeRegistrationEntry.TargetMetadata
+  name: TargetMetadata
+  href: api/Rezolver.Configuration.ITypeRegistrationEntry.html#Rezolver_Configuration_ITypeRegistrationEntry_TargetMetadata
+  commentId: P:Rezolver.Configuration.ITypeRegistrationEntry.TargetMetadata
+  fullName: Rezolver.Configuration.ITypeRegistrationEntry.TargetMetadata
+- uid: Rezolver.Configuration.ITypeRegistrationEntry.Types
+  name: Types
+  href: api/Rezolver.Configuration.ITypeRegistrationEntry.html#Rezolver_Configuration_ITypeRegistrationEntry_Types
+  commentId: P:Rezolver.Configuration.ITypeRegistrationEntry.Types
+  fullName: Rezolver.Configuration.ITypeRegistrationEntry.Types
+- uid: Rezolver.Configuration.Json
+  name: Rezolver.Configuration.Json
+  href: api/Rezolver.Configuration.Json.html#Rezolver_Configuration_Json
+  commentId: N:Rezolver.Configuration.Json
+  fullName: Rezolver.Configuration.Json
+- uid: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory
+  name: AdvancedConfigurationAdapterContextFactory
+  href: api/Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.html#Rezolver_Configuration_Json_AdvancedConfigurationAdapterContextFactory
+  commentId: T:Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory
+  fullName: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory
+- uid: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.#ctor
+  name: AdvancedConfigurationAdapterContextFactory()
+  href: api/Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.html#Rezolver_Configuration_Json_AdvancedConfigurationAdapterContextFactory__ctor
+  commentId: M:Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.#ctor
+  fullName: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.AdvancedConfigurationAdapterContextFactory()
+- uid: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences
+  name: GetDefaultAssemblyReferences()
+  href: api/Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.html#Rezolver_Configuration_Json_AdvancedConfigurationAdapterContextFactory_GetDefaultAssemblyReferences
+  commentId: M:Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences
+  fullName: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.GetDefaultAssemblyReferences()
+- uid: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.Instance
+  name: Instance
+  href: api/Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.html#Rezolver_Configuration_Json_AdvancedConfigurationAdapterContextFactory_Instance
+  commentId: P:Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.Instance
+  fullName: Rezolver.Configuration.Json.AdvancedConfigurationAdapterContextFactory.Instance
+- uid: Rezolver.Configuration.Json.ConfigurationEntryConverter
+  name: ConfigurationEntryConverter
+  href: api/Rezolver.Configuration.Json.ConfigurationEntryConverter.html#Rezolver_Configuration_Json_ConfigurationEntryConverter
+  commentId: T:Rezolver.Configuration.Json.ConfigurationEntryConverter
+  fullName: Rezolver.Configuration.Json.ConfigurationEntryConverter
+- uid: Rezolver.Configuration.Json.ConfigurationEntryConverter.#ctor
+  name: ConfigurationEntryConverter()
+  href: api/Rezolver.Configuration.Json.ConfigurationEntryConverter.html#Rezolver_Configuration_Json_ConfigurationEntryConverter__ctor
+  commentId: M:Rezolver.Configuration.Json.ConfigurationEntryConverter.#ctor
+  fullName: Rezolver.Configuration.Json.ConfigurationEntryConverter.ConfigurationEntryConverter()
+- uid: Rezolver.Configuration.Json.ConfigurationEntryConverter.#ctor(Rezolver.Configuration.ConfigurationEntryType)
+  name: ConfigurationEntryConverter(ConfigurationEntryType)
+  href: api/Rezolver.Configuration.Json.ConfigurationEntryConverter.html#Rezolver_Configuration_Json_ConfigurationEntryConverter__ctor_Rezolver_Configuration_ConfigurationEntryType_
+  commentId: M:Rezolver.Configuration.Json.ConfigurationEntryConverter.#ctor(Rezolver.Configuration.ConfigurationEntryType)
+  fullName: Rezolver.Configuration.Json.ConfigurationEntryConverter.ConfigurationEntryConverter(Rezolver.Configuration.ConfigurationEntryType)
+- uid: Rezolver.Configuration.Json.ConfigurationEntryConverter.CanConvert(System.Type)
+  name: CanConvert(Type)
+  href: api/Rezolver.Configuration.Json.ConfigurationEntryConverter.html#Rezolver_Configuration_Json_ConfigurationEntryConverter_CanConvert_System_Type_
+  commentId: M:Rezolver.Configuration.Json.ConfigurationEntryConverter.CanConvert(System.Type)
+  fullName: Rezolver.Configuration.Json.ConfigurationEntryConverter.CanConvert(System.Type)
+- uid: Rezolver.Configuration.Json.ConfigurationEntryConverter.CanWrite
+  name: CanWrite
+  href: api/Rezolver.Configuration.Json.ConfigurationEntryConverter.html#Rezolver_Configuration_Json_ConfigurationEntryConverter_CanWrite
+  commentId: P:Rezolver.Configuration.Json.ConfigurationEntryConverter.CanWrite
+  fullName: Rezolver.Configuration.Json.ConfigurationEntryConverter.CanWrite
+- uid: Rezolver.Configuration.Json.ConfigurationEntryConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  name: ReadJson(JsonReader, Type, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.ConfigurationEntryConverter.html#Rezolver_Configuration_Json_ConfigurationEntryConverter_ReadJson_JsonReader_System_Type_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.ConfigurationEntryConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.ConfigurationEntryConverter.ReadJson(JsonReader, System.Type, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.Json.ConfigurationEntryConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  name: WriteJson(JsonWriter, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.ConfigurationEntryConverter.html#Rezolver_Configuration_Json_ConfigurationEntryConverter_WriteJson_JsonWriter_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.ConfigurationEntryConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.ConfigurationEntryConverter.WriteJson(JsonWriter, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.Json.JsonConfiguration
+  name: JsonConfiguration
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.html#Rezolver_Configuration_Json_JsonConfiguration
+  commentId: T:Rezolver.Configuration.Json.JsonConfiguration
+  fullName: Rezolver.Configuration.Json.JsonConfiguration
+- uid: Rezolver.Configuration.Json.JsonConfiguration.Entries
+  name: Entries
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.html#Rezolver_Configuration_Json_JsonConfiguration_Entries
+  commentId: P:Rezolver.Configuration.Json.JsonConfiguration.Entries
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.Entries
+- uid: Rezolver.Configuration.Json.JsonConfiguration.FileName
+  name: FileName
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.html#Rezolver_Configuration_Json_JsonConfiguration_FileName
+  commentId: P:Rezolver.Configuration.Json.JsonConfiguration.FileName
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.FileName
+- uid: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter
+  name: JsonConfiguration.JsonConfigurationConverter
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.html#Rezolver_Configuration_Json_JsonConfiguration_JsonConfigurationConverter
+  commentId: T:Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter
+- uid: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.CanConvert(System.Type)
+  name: CanConvert(Type)
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.html#Rezolver_Configuration_Json_JsonConfiguration_JsonConfigurationConverter_CanConvert_System_Type_
+  commentId: M:Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.CanConvert(System.Type)
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.CanConvert(System.Type)
+- uid: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.CanWrite
+  name: CanWrite
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.html#Rezolver_Configuration_Json_JsonConfiguration_JsonConfigurationConverter_CanWrite
+  commentId: P:Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.CanWrite
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.CanWrite
+- uid: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  name: ReadJson(JsonReader, Type, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.html#Rezolver_Configuration_Json_JsonConfiguration_JsonConfigurationConverter_ReadJson_JsonReader_System_Type_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.ReadJson(JsonReader, System.Type, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  name: WriteJson(JsonWriter, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.html#Rezolver_Configuration_Json_JsonConfiguration_JsonConfigurationConverter_WriteJson_JsonWriter_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.JsonConfigurationConverter.WriteJson(JsonWriter, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.Json.JsonConfiguration.UnboundType
+  name: UnboundType
+  href: api/Rezolver.Configuration.Json.JsonConfiguration.html#Rezolver_Configuration_Json_JsonConfiguration_UnboundType
+  commentId: F:Rezolver.Configuration.Json.JsonConfiguration.UnboundType
+  fullName: Rezolver.Configuration.Json.JsonConfiguration.UnboundType
+- uid: Rezolver.Configuration.Json.JsonConfigurationException
+  name: JsonConfigurationException
+  href: api/Rezolver.Configuration.Json.JsonConfigurationException.html#Rezolver_Configuration_Json_JsonConfigurationException
+  commentId: T:Rezolver.Configuration.Json.JsonConfigurationException
+  fullName: Rezolver.Configuration.Json.JsonConfigurationException
+- uid: Rezolver.Configuration.Json.JsonConfigurationException.#ctor(JsonToken,JsonReader)
+  name: JsonConfigurationException(JsonToken, JsonReader)
+  href: api/Rezolver.Configuration.Json.JsonConfigurationException.html#Rezolver_Configuration_Json_JsonConfigurationException__ctor_JsonToken_JsonReader_
+  commentId: M:Rezolver.Configuration.Json.JsonConfigurationException.#ctor(JsonToken,JsonReader)
+  fullName: Rezolver.Configuration.Json.JsonConfigurationException.JsonConfigurationException(JsonToken, JsonReader)
+- uid: Rezolver.Configuration.Json.JsonConfigurationException.#ctor(System.String,JsonReader)
+  name: JsonConfigurationException(String, JsonReader)
+  href: api/Rezolver.Configuration.Json.JsonConfigurationException.html#Rezolver_Configuration_Json_JsonConfigurationException__ctor_System_String_JsonReader_
+  commentId: M:Rezolver.Configuration.Json.JsonConfigurationException.#ctor(System.String,JsonReader)
+  fullName: Rezolver.Configuration.Json.JsonConfigurationException.JsonConfigurationException(System.String, JsonReader)
+- uid: Rezolver.Configuration.Json.JsonConfigurationException.#ctor(System.String,JToken)
+  name: JsonConfigurationException(String, JToken)
+  href: api/Rezolver.Configuration.Json.JsonConfigurationException.html#Rezolver_Configuration_Json_JsonConfigurationException__ctor_System_String_JToken_
+  commentId: M:Rezolver.Configuration.Json.JsonConfigurationException.#ctor(System.String,JToken)
+  fullName: Rezolver.Configuration.Json.JsonConfigurationException.JsonConfigurationException(System.String, JToken)
+- uid: Rezolver.Configuration.Json.JsonConfigurationException.Message
+  name: Message
+  href: api/Rezolver.Configuration.Json.JsonConfigurationException.html#Rezolver_Configuration_Json_JsonConfigurationException_Message
+  commentId: P:Rezolver.Configuration.Json.JsonConfigurationException.Message
+  fullName: Rezolver.Configuration.Json.JsonConfigurationException.Message
+- uid: Rezolver.Configuration.Json.JsonConfigurationException.Reader
+  name: Reader
+  href: api/Rezolver.Configuration.Json.JsonConfigurationException.html#Rezolver_Configuration_Json_JsonConfigurationException_Reader
+  commentId: P:Rezolver.Configuration.Json.JsonConfigurationException.Reader
+  fullName: Rezolver.Configuration.Json.JsonConfigurationException.Reader
+- uid: Rezolver.Configuration.Json.JsonConfigurationParser
+  name: JsonConfigurationParser
+  href: api/Rezolver.Configuration.Json.JsonConfigurationParser.html#Rezolver_Configuration_Json_JsonConfigurationParser
+  commentId: T:Rezolver.Configuration.Json.JsonConfigurationParser
+  fullName: Rezolver.Configuration.Json.JsonConfigurationParser
+- uid: Rezolver.Configuration.Json.JsonConfigurationParser.CreateJsonSerializerSettings
+  name: CreateJsonSerializerSettings()
+  href: api/Rezolver.Configuration.Json.JsonConfigurationParser.html#Rezolver_Configuration_Json_JsonConfigurationParser_CreateJsonSerializerSettings
+  commentId: M:Rezolver.Configuration.Json.JsonConfigurationParser.CreateJsonSerializerSettings
+  fullName: Rezolver.Configuration.Json.JsonConfigurationParser.CreateJsonSerializerSettings()
+- uid: Rezolver.Configuration.Json.JsonConfigurationParser.CreateSerializer(JsonSerializerSettings)
+  name: CreateSerializer(JsonSerializerSettings)
+  href: api/Rezolver.Configuration.Json.JsonConfigurationParser.html#Rezolver_Configuration_Json_JsonConfigurationParser_CreateSerializer_JsonSerializerSettings_
+  commentId: M:Rezolver.Configuration.Json.JsonConfigurationParser.CreateSerializer(JsonSerializerSettings)
+  fullName: Rezolver.Configuration.Json.JsonConfigurationParser.CreateSerializer(JsonSerializerSettings)
+- uid: Rezolver.Configuration.Json.JsonConfigurationParser.Parse(System.String)
+  name: Parse(String)
+  href: api/Rezolver.Configuration.Json.JsonConfigurationParser.html#Rezolver_Configuration_Json_JsonConfigurationParser_Parse_System_String_
+  commentId: M:Rezolver.Configuration.Json.JsonConfigurationParser.Parse(System.String)
+  fullName: Rezolver.Configuration.Json.JsonConfigurationParser.Parse(System.String)
+- uid: Rezolver.Configuration.Json.JsonConfigurationParser.Parse(System.String,JsonSerializer)
+  name: Parse(String, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.JsonConfigurationParser.html#Rezolver_Configuration_Json_JsonConfigurationParser_Parse_System_String_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.JsonConfigurationParser.Parse(System.String,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.JsonConfigurationParser.Parse(System.String, JsonSerializer)
+- uid: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata
+  name: LazyJsonObjectTargetMetadata
+  href: api/Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.html#Rezolver_Configuration_Json_LazyJsonObjectTargetMetadata
+  commentId: T:Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata
+  fullName: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata
+- uid: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.html#Rezolver_Configuration_Json_LazyJsonObjectTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.html#Rezolver_Configuration_Json_LazyJsonObjectTargetMetadata_DeclaredType
+  commentId: P:Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.DeclaredType
+  fullName: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.DeclaredType
+- uid: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.GetObject(System.Type)
+  name: GetObject(Type)
+  href: api/Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.html#Rezolver_Configuration_Json_LazyJsonObjectTargetMetadata_GetObject_System_Type_
+  commentId: M:Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.GetObject(System.Type)
+  fullName: Rezolver.Configuration.Json.LazyJsonObjectTargetMetadata.GetObject(System.Type)
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataConverter
+  name: RezolveTargetMetadataConverter
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataConverter.html#Rezolver_Configuration_Json_RezolveTargetMetadataConverter
+  commentId: T:Rezolver.Configuration.Json.RezolveTargetMetadataConverter
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataConverter
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.CanConvert(System.Type)
+  name: CanConvert(Type)
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataConverter.html#Rezolver_Configuration_Json_RezolveTargetMetadataConverter_CanConvert_System_Type_
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataConverter.CanConvert(System.Type)
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.CanConvert(System.Type)
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.CanWrite
+  name: CanWrite
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataConverter.html#Rezolver_Configuration_Json_RezolveTargetMetadataConverter_CanWrite
+  commentId: P:Rezolver.Configuration.Json.RezolveTargetMetadataConverter.CanWrite
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.CanWrite
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  name: ReadJson(JsonReader, Type, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataConverter.html#Rezolver_Configuration_Json_RezolveTargetMetadataConverter_ReadJson_JsonReader_System_Type_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.ReadJson(JsonReader, System.Type, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  name: WriteJson(JsonWriter, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataConverter.html#Rezolver_Configuration_Json_RezolveTargetMetadataConverter_WriteJson_JsonWriter_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataConverter.WriteJson(JsonWriter, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper
+  name: RezolveTargetMetadataWrapper
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper
+  commentId: T:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.#ctor(Rezolver.Configuration.IRezolveTargetMetadata)
+  name: RezolveTargetMetadataWrapper(IRezolveTargetMetadata)
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper__ctor_Rezolver_Configuration_IRezolveTargetMetadata_
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.#ctor(Rezolver.Configuration.IRezolveTargetMetadata)
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.RezolveTargetMetadataWrapper(Rezolver.Configuration.IRezolveTargetMetadata)
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargetBase(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.CreateRezolveTargetBase(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.CreateRezolveTargetBase(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_DeclaredType
+  commentId: P:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.DeclaredType
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.DeclaredType
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.ExtensionType
+  name: ExtensionType
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_ExtensionType
+  commentId: P:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.ExtensionType
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.ExtensionType
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.ExtensionTypeName
+  name: ExtensionTypeName
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_ExtensionTypeName
+  commentId: F:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.ExtensionTypeName
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.ExtensionTypeName
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapConstructorMetadata(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name: UnwrapConstructorMetadata(IRezolveTargetMetadata, ITypeReference[])
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_UnwrapConstructorMetadata_Rezolver_Configuration_IRezolveTargetMetadata_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapConstructorMetadata(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name.vb: UnwrapConstructorMetadata(IRezolveTargetMetadata, ITypeReference())
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapConstructorMetadata(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapConstructorMetadata(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapExtensionMetadata(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name: UnwrapExtensionMetadata(IRezolveTargetMetadata, ITypeReference[])
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_UnwrapExtensionMetadata_Rezolver_Configuration_IRezolveTargetMetadata_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapExtensionMetadata(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name.vb: UnwrapExtensionMetadata(IRezolveTargetMetadata, ITypeReference())
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapExtensionMetadata(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapExtensionMetadata(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapListMetadata(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name: UnwrapListMetadata(IRezolveTargetMetadata, ITypeReference[])
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_UnwrapListMetadata_Rezolver_Configuration_IRezolveTargetMetadata_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapListMetadata(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name.vb: UnwrapListMetadata(IRezolveTargetMetadata, ITypeReference())
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapListMetadata(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapListMetadata(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadata(Rezolver.Configuration.ITypeReference[])
+  name: UnwrapMetadata(ITypeReference[])
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_UnwrapMetadata_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadata(Rezolver.Configuration.ITypeReference[])
+  name.vb: UnwrapMetadata(ITypeReference())
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadata(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadata(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name: UnwrapMetadataList(IRezolveTargetMetadata, ITypeReference[])
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_UnwrapMetadataList_Rezolver_Configuration_IRezolveTargetMetadata_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadata,Rezolver.Configuration.ITypeReference[])
+  name.vb: UnwrapMetadataList(IRezolveTargetMetadata, ITypeReference())
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadata, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadataList,Rezolver.Configuration.ITypeReference[])
+  name: UnwrapMetadataList(IRezolveTargetMetadataList, ITypeReference[])
+  href: api/Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.html#Rezolver_Configuration_Json_RezolveTargetMetadataWrapper_UnwrapMetadataList_Rezolver_Configuration_IRezolveTargetMetadataList_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadataList,Rezolver.Configuration.ITypeReference[])
+  name.vb: UnwrapMetadataList(IRezolveTargetMetadataList, ITypeReference())
+  fullName: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadataList, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.Json.RezolveTargetMetadataWrapper.UnwrapMetadataList(Rezolver.Configuration.IRezolveTargetMetadataList, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.Json.TypeReferenceConverter
+  name: TypeReferenceConverter
+  href: api/Rezolver.Configuration.Json.TypeReferenceConverter.html#Rezolver_Configuration_Json_TypeReferenceConverter
+  commentId: T:Rezolver.Configuration.Json.TypeReferenceConverter
+  fullName: Rezolver.Configuration.Json.TypeReferenceConverter
+- uid: Rezolver.Configuration.Json.TypeReferenceConverter.CanConvert(System.Type)
+  name: CanConvert(Type)
+  href: api/Rezolver.Configuration.Json.TypeReferenceConverter.html#Rezolver_Configuration_Json_TypeReferenceConverter_CanConvert_System_Type_
+  commentId: M:Rezolver.Configuration.Json.TypeReferenceConverter.CanConvert(System.Type)
+  fullName: Rezolver.Configuration.Json.TypeReferenceConverter.CanConvert(System.Type)
+- uid: Rezolver.Configuration.Json.TypeReferenceConverter.CanWrite
+  name: CanWrite
+  href: api/Rezolver.Configuration.Json.TypeReferenceConverter.html#Rezolver_Configuration_Json_TypeReferenceConverter_CanWrite
+  commentId: P:Rezolver.Configuration.Json.TypeReferenceConverter.CanWrite
+  fullName: Rezolver.Configuration.Json.TypeReferenceConverter.CanWrite
+- uid: Rezolver.Configuration.Json.TypeReferenceConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  name: ReadJson(JsonReader, Type, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.TypeReferenceConverter.html#Rezolver_Configuration_Json_TypeReferenceConverter_ReadJson_JsonReader_System_Type_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.TypeReferenceConverter.ReadJson(JsonReader,System.Type,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.TypeReferenceConverter.ReadJson(JsonReader, System.Type, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.Json.TypeReferenceConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  name: WriteJson(JsonWriter, Object, JsonSerializer)
+  href: api/Rezolver.Configuration.Json.TypeReferenceConverter.html#Rezolver_Configuration_Json_TypeReferenceConverter_WriteJson_JsonWriter_System_Object_JsonSerializer_
+  commentId: M:Rezolver.Configuration.Json.TypeReferenceConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  fullName: Rezolver.Configuration.Json.TypeReferenceConverter.WriteJson(JsonWriter, System.Object, JsonSerializer)
+- uid: Rezolver.Configuration.ListTargetMetadata
+  name: ListTargetMetadata
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata
+  commentId: T:Rezolver.Configuration.ListTargetMetadata
+  fullName: Rezolver.Configuration.ListTargetMetadata
+- uid: Rezolver.Configuration.ListTargetMetadata.#ctor(Rezolver.Configuration.ITypeReference,Rezolver.Configuration.IRezolveTargetMetadataList,System.Boolean)
+  name: ListTargetMetadata(ITypeReference, IRezolveTargetMetadataList, Boolean)
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata__ctor_Rezolver_Configuration_ITypeReference_Rezolver_Configuration_IRezolveTargetMetadataList_System_Boolean_
+  commentId: M:Rezolver.Configuration.ListTargetMetadata.#ctor(Rezolver.Configuration.ITypeReference,Rezolver.Configuration.IRezolveTargetMetadataList,System.Boolean)
+  fullName: Rezolver.Configuration.ListTargetMetadata.ListTargetMetadata(Rezolver.Configuration.ITypeReference, Rezolver.Configuration.IRezolveTargetMetadataList, System.Boolean)
+- uid: Rezolver.Configuration.ListTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])
+  name: Bind(ITypeReference[])
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_Bind_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.ListTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])
+  name.vb: Bind(ITypeReference())
+  fullName: Rezolver.Configuration.ListTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.ListTargetMetadata.Bind(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.ListTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.ListTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.ListTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.ListTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.ListTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.ListTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargetBase(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.ListTargetMetadata.CreateRezolveTargetBase(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.ListTargetMetadata.CreateRezolveTargetBase(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.ListTargetMetadata.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_DeclaredType
+  commentId: P:Rezolver.Configuration.ListTargetMetadata.DeclaredType
+  fullName: Rezolver.Configuration.ListTargetMetadata.DeclaredType
+- uid: Rezolver.Configuration.ListTargetMetadata.ElementType
+  name: ElementType
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_ElementType
+  commentId: P:Rezolver.Configuration.ListTargetMetadata.ElementType
+  fullName: Rezolver.Configuration.ListTargetMetadata.ElementType
+- uid: Rezolver.Configuration.ListTargetMetadata.IsArray
+  name: IsArray
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_IsArray
+  commentId: P:Rezolver.Configuration.ListTargetMetadata.IsArray
+  fullName: Rezolver.Configuration.ListTargetMetadata.IsArray
+- uid: Rezolver.Configuration.ListTargetMetadata.Items
+  name: Items
+  href: api/Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_Items
+  commentId: P:Rezolver.Configuration.ListTargetMetadata.Items
+  fullName: Rezolver.Configuration.ListTargetMetadata.Items
+- uid: Rezolver.Configuration.ObjectTargetMetadata
+  name: ObjectTargetMetadata
+  href: api/Rezolver.Configuration.ObjectTargetMetadata.html#Rezolver_Configuration_ObjectTargetMetadata
+  commentId: T:Rezolver.Configuration.ObjectTargetMetadata
+  fullName: Rezolver.Configuration.ObjectTargetMetadata
+- uid: Rezolver.Configuration.ObjectTargetMetadata.#ctor(System.Func{System.Type,System.Object})
+  name: ObjectTargetMetadata(Func<Type, Object>)
+  href: api/Rezolver.Configuration.ObjectTargetMetadata.html#Rezolver_Configuration_ObjectTargetMetadata__ctor_System_Func_System_Type_System_Object__
+  commentId: M:Rezolver.Configuration.ObjectTargetMetadata.#ctor(System.Func{System.Type,System.Object})
+  name.vb: ObjectTargetMetadata(Func(Of Type, Object))
+  fullName: Rezolver.Configuration.ObjectTargetMetadata.ObjectTargetMetadata(System.Func<System.Type, System.Object>)
+  fullName.vb: Rezolver.Configuration.ObjectTargetMetadata.ObjectTargetMetadata(System.Func(Of System.Type, System.Object))
+- uid: Rezolver.Configuration.ObjectTargetMetadata.#ctor(System.Object)
+  name: ObjectTargetMetadata(Object)
+  href: api/Rezolver.Configuration.ObjectTargetMetadata.html#Rezolver_Configuration_ObjectTargetMetadata__ctor_System_Object_
+  commentId: M:Rezolver.Configuration.ObjectTargetMetadata.#ctor(System.Object)
+  fullName: Rezolver.Configuration.ObjectTargetMetadata.ObjectTargetMetadata(System.Object)
+- uid: Rezolver.Configuration.ObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.ObjectTargetMetadata.html#Rezolver_Configuration_ObjectTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.ObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.ObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.ObjectTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.ObjectTargetMetadata.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.ObjectTargetMetadata.html#Rezolver_Configuration_ObjectTargetMetadata_DeclaredType
+  commentId: P:Rezolver.Configuration.ObjectTargetMetadata.DeclaredType
+  fullName: Rezolver.Configuration.ObjectTargetMetadata.DeclaredType
+- uid: Rezolver.Configuration.ObjectTargetMetadata.GetObject(System.Type)
+  name: GetObject(Type)
+  href: api/Rezolver.Configuration.ObjectTargetMetadata.html#Rezolver_Configuration_ObjectTargetMetadata_GetObject_System_Type_
+  commentId: M:Rezolver.Configuration.ObjectTargetMetadata.GetObject(System.Type)
+  fullName: Rezolver.Configuration.ObjectTargetMetadata.GetObject(System.Type)
+- uid: Rezolver.Configuration.ObjectTargetMetadataBase
+  name: ObjectTargetMetadataBase
+  href: api/Rezolver.Configuration.ObjectTargetMetadataBase.html#Rezolver_Configuration_ObjectTargetMetadataBase
+  commentId: T:Rezolver.Configuration.ObjectTargetMetadataBase
+  fullName: Rezolver.Configuration.ObjectTargetMetadataBase
+- uid: Rezolver.Configuration.ObjectTargetMetadataBase.#ctor
+  name: ObjectTargetMetadataBase()
+  href: api/Rezolver.Configuration.ObjectTargetMetadataBase.html#Rezolver_Configuration_ObjectTargetMetadataBase__ctor
+  commentId: M:Rezolver.Configuration.ObjectTargetMetadataBase.#ctor
+  fullName: Rezolver.Configuration.ObjectTargetMetadataBase.ObjectTargetMetadataBase()
+- uid: Rezolver.Configuration.ObjectTargetMetadataBase.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.ObjectTargetMetadataBase.html#Rezolver_Configuration_ObjectTargetMetadataBase_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.ObjectTargetMetadataBase.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargetBase(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.ObjectTargetMetadataBase.CreateRezolveTargetBase(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.ObjectTargetMetadataBase.CreateRezolveTargetBase(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.ObjectTargetMetadataBase.GetObject(System.Type)
+  name: GetObject(Type)
+  href: api/Rezolver.Configuration.ObjectTargetMetadataBase.html#Rezolver_Configuration_ObjectTargetMetadataBase_GetObject_System_Type_
+  commentId: M:Rezolver.Configuration.ObjectTargetMetadataBase.GetObject(System.Type)
+  fullName: Rezolver.Configuration.ObjectTargetMetadataBase.GetObject(System.Type)
+- uid: Rezolver.Configuration.RegisterInstruction
+  name: RegisterInstruction
+  href: api/Rezolver.Configuration.RegisterInstruction.html#Rezolver_Configuration_RegisterInstruction
+  commentId: T:Rezolver.Configuration.RegisterInstruction
+  fullName: Rezolver.Configuration.RegisterInstruction
+- uid: Rezolver.Configuration.RegisterInstruction.#ctor(System.Collections.Generic.IEnumerable{System.Type},Rezolver.ITarget,Rezolver.Configuration.IConfigurationEntry)
+  name: RegisterInstruction(IEnumerable<Type>, ITarget, IConfigurationEntry)
+  href: api/Rezolver.Configuration.RegisterInstruction.html#Rezolver_Configuration_RegisterInstruction__ctor_System_Collections_Generic_IEnumerable_System_Type__Rezolver_ITarget_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.RegisterInstruction.#ctor(System.Collections.Generic.IEnumerable{System.Type},Rezolver.ITarget,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: RegisterInstruction(IEnumerable(Of Type), ITarget, IConfigurationEntry)
+  fullName: Rezolver.Configuration.RegisterInstruction.RegisterInstruction(System.Collections.Generic.IEnumerable<System.Type>, Rezolver.ITarget, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.RegisterInstruction.RegisterInstruction(System.Collections.Generic.IEnumerable(Of System.Type), Rezolver.ITarget, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.RegisterInstruction.Apply(Rezolver.ITargetContainer)
+  name: Apply(ITargetContainer)
+  href: api/Rezolver.Configuration.RegisterInstruction.html#Rezolver_Configuration_RegisterInstruction_Apply_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.Configuration.RegisterInstruction.Apply(Rezolver.ITargetContainer)
+  fullName: Rezolver.Configuration.RegisterInstruction.Apply(Rezolver.ITargetContainer)
+- uid: Rezolver.Configuration.RegisterInstruction.Target
+  name: Target
+  href: api/Rezolver.Configuration.RegisterInstruction.html#Rezolver_Configuration_RegisterInstruction_Target
+  commentId: P:Rezolver.Configuration.RegisterInstruction.Target
+  fullName: Rezolver.Configuration.RegisterInstruction.Target
+- uid: Rezolver.Configuration.RegisterInstruction.TargetTypes
+  name: TargetTypes
+  href: api/Rezolver.Configuration.RegisterInstruction.html#Rezolver_Configuration_RegisterInstruction_TargetTypes
+  commentId: P:Rezolver.Configuration.RegisterInstruction.TargetTypes
+  fullName: Rezolver.Configuration.RegisterInstruction.TargetTypes
+- uid: Rezolver.Configuration.RegisterMultipleInstruction
+  name: RegisterMultipleInstruction
+  href: api/Rezolver.Configuration.RegisterMultipleInstruction.html#Rezolver_Configuration_RegisterMultipleInstruction
+  commentId: T:Rezolver.Configuration.RegisterMultipleInstruction
+  fullName: Rezolver.Configuration.RegisterMultipleInstruction
+- uid: Rezolver.Configuration.RegisterMultipleInstruction.#ctor(System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{Rezolver.ITarget},Rezolver.Configuration.IConfigurationEntry)
+  name: RegisterMultipleInstruction(IEnumerable<Type>, IEnumerable<ITarget>, IConfigurationEntry)
+  href: api/Rezolver.Configuration.RegisterMultipleInstruction.html#Rezolver_Configuration_RegisterMultipleInstruction__ctor_System_Collections_Generic_IEnumerable_System_Type__System_Collections_Generic_IEnumerable_Rezolver_ITarget__Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.RegisterMultipleInstruction.#ctor(System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{Rezolver.ITarget},Rezolver.Configuration.IConfigurationEntry)
+  name.vb: RegisterMultipleInstruction(IEnumerable(Of Type), IEnumerable(Of ITarget), IConfigurationEntry)
+  fullName: Rezolver.Configuration.RegisterMultipleInstruction.RegisterMultipleInstruction(System.Collections.Generic.IEnumerable<System.Type>, System.Collections.Generic.IEnumerable<Rezolver.ITarget>, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.RegisterMultipleInstruction.RegisterMultipleInstruction(System.Collections.Generic.IEnumerable(Of System.Type), System.Collections.Generic.IEnumerable(Of Rezolver.ITarget), Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.RegisterMultipleInstruction.Apply(Rezolver.ITargetContainer)
+  name: Apply(ITargetContainer)
+  href: api/Rezolver.Configuration.RegisterMultipleInstruction.html#Rezolver_Configuration_RegisterMultipleInstruction_Apply_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.Configuration.RegisterMultipleInstruction.Apply(Rezolver.ITargetContainer)
+  fullName: Rezolver.Configuration.RegisterMultipleInstruction.Apply(Rezolver.ITargetContainer)
+- uid: Rezolver.Configuration.RegisterMultipleInstruction.Targets
+  name: Targets
+  href: api/Rezolver.Configuration.RegisterMultipleInstruction.html#Rezolver_Configuration_RegisterMultipleInstruction_Targets
+  commentId: P:Rezolver.Configuration.RegisterMultipleInstruction.Targets
+  fullName: Rezolver.Configuration.RegisterMultipleInstruction.Targets
+- uid: Rezolver.Configuration.RegisterMultipleInstruction.TargetTypes
+  name: TargetTypes
+  href: api/Rezolver.Configuration.RegisterMultipleInstruction.html#Rezolver_Configuration_RegisterMultipleInstruction_TargetTypes
+  commentId: P:Rezolver.Configuration.RegisterMultipleInstruction.TargetTypes
+  fullName: Rezolver.Configuration.RegisterMultipleInstruction.TargetTypes
+- uid: Rezolver.Configuration.RezolverBuilderInstruction
+  name: RezolverBuilderInstruction
+  href: api/Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction
+  commentId: T:Rezolver.Configuration.RezolverBuilderInstruction
+  fullName: Rezolver.Configuration.RezolverBuilderInstruction
+- uid: Rezolver.Configuration.RezolverBuilderInstruction.#ctor(Rezolver.Configuration.IConfigurationEntry)
+  name: RezolverBuilderInstruction(IConfigurationEntry)
+  href: api/Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction__ctor_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.RezolverBuilderInstruction.#ctor(Rezolver.Configuration.IConfigurationEntry)
+  fullName: Rezolver.Configuration.RezolverBuilderInstruction.RezolverBuilderInstruction(Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.RezolverBuilderInstruction.Apply(Rezolver.ITargetContainer)
+  name: Apply(ITargetContainer)
+  href: api/Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction_Apply_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.Configuration.RezolverBuilderInstruction.Apply(Rezolver.ITargetContainer)
+  fullName: Rezolver.Configuration.RezolverBuilderInstruction.Apply(Rezolver.ITargetContainer)
+- uid: Rezolver.Configuration.RezolverBuilderInstruction.Entry
+  name: Entry
+  href: api/Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction_Entry
+  commentId: P:Rezolver.Configuration.RezolverBuilderInstruction.Entry
+  fullName: Rezolver.Configuration.RezolverBuilderInstruction.Entry
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase
+  name: RezolveTargetMetadataBase
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase
+  commentId: T:Rezolver.Configuration.RezolveTargetMetadataBase
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase.#ctor(Rezolver.Configuration.RezolveTargetMetadataType)
+  name: RezolveTargetMetadataBase(RezolveTargetMetadataType)
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase__ctor_Rezolver_Configuration_RezolveTargetMetadataType_
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataBase.#ctor(Rezolver.Configuration.RezolveTargetMetadataType)
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase.RezolveTargetMetadataBase(Rezolver.Configuration.RezolveTargetMetadataType)
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase.Bind(Rezolver.Configuration.ITypeReference[])
+  name: Bind(ITypeReference[])
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_Bind_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataBase.Bind(Rezolver.Configuration.ITypeReference[])
+  name.vb: Bind(ITypeReference())
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase.Bind(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataBase.Bind(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataBase.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataBase.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTarget(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTarget(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_CreateRezolveTarget_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTarget(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTarget(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTarget(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTarget(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargetBase(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTargetBase(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataBase.CreateRezolveTargetBase(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_DeclaredType
+  commentId: P:Rezolver.Configuration.RezolveTargetMetadataBase.DeclaredType
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase.DeclaredType
+- uid: Rezolver.Configuration.RezolveTargetMetadataBase.Type
+  name: Type
+  href: api/Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_Type
+  commentId: P:Rezolver.Configuration.RezolveTargetMetadataBase.Type
+  fullName: Rezolver.Configuration.RezolveTargetMetadataBase.Type
+- uid: Rezolver.Configuration.RezolveTargetMetadataList
+  name: RezolveTargetMetadataList
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList
+  commentId: T:Rezolver.Configuration.RezolveTargetMetadataList
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.#ctor
+  name: RezolveTargetMetadataList()
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList__ctor
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataList.#ctor
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.RezolveTargetMetadataList()
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.#ctor(System.Collections.Generic.IEnumerable{Rezolver.Configuration.IRezolveTargetMetadata})
+  name: RezolveTargetMetadataList(IEnumerable<IRezolveTargetMetadata>)
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList__ctor_System_Collections_Generic_IEnumerable_Rezolver_Configuration_IRezolveTargetMetadata__
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataList.#ctor(System.Collections.Generic.IEnumerable{Rezolver.Configuration.IRezolveTargetMetadata})
+  name.vb: RezolveTargetMetadataList(IEnumerable(Of IRezolveTargetMetadata))
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.RezolveTargetMetadataList(System.Collections.Generic.IEnumerable<Rezolver.Configuration.IRezolveTargetMetadata>)
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataList.RezolveTargetMetadataList(System.Collections.Generic.IEnumerable(Of Rezolver.Configuration.IRezolveTargetMetadata))
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.Bind(Rezolver.Configuration.ITypeReference[])
+  name: Bind(ITypeReference[])
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList_Bind_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataList.Bind(Rezolver.Configuration.ITypeReference[])
+  name.vb: Bind(ITypeReference())
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.Bind(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataList.Bind(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataList.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataList.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargetBase(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargetBase(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargetBase(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargets(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargets(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList_CreateRezolveTargets_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargets(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargets(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargets(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.RezolveTargetMetadataList.CreateRezolveTargets(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList_DeclaredType
+  commentId: P:Rezolver.Configuration.RezolveTargetMetadataList.DeclaredType
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.DeclaredType
+- uid: Rezolver.Configuration.RezolveTargetMetadataList.Targets
+  name: Targets
+  href: api/Rezolver.Configuration.RezolveTargetMetadataList.html#Rezolver_Configuration_RezolveTargetMetadataList_Targets
+  commentId: P:Rezolver.Configuration.RezolveTargetMetadataList.Targets
+  fullName: Rezolver.Configuration.RezolveTargetMetadataList.Targets
+- uid: Rezolver.Configuration.RezolveTargetMetadataType
+  name: RezolveTargetMetadataType
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType
+  commentId: T:Rezolver.Configuration.RezolveTargetMetadataType
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType
+- uid: Rezolver.Configuration.RezolveTargetMetadataType.Constructor
+  name: Constructor
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType_Constructor
+  commentId: F:Rezolver.Configuration.RezolveTargetMetadataType.Constructor
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType.Constructor
+- uid: Rezolver.Configuration.RezolveTargetMetadataType.Extension
+  name: Extension
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType_Extension
+  commentId: F:Rezolver.Configuration.RezolveTargetMetadataType.Extension
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType.Extension
+- uid: Rezolver.Configuration.RezolveTargetMetadataType.List
+  name: List
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType_List
+  commentId: F:Rezolver.Configuration.RezolveTargetMetadataType.List
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType.List
+- uid: Rezolver.Configuration.RezolveTargetMetadataType.MetadataList
+  name: MetadataList
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType_MetadataList
+  commentId: F:Rezolver.Configuration.RezolveTargetMetadataType.MetadataList
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType.MetadataList
+- uid: Rezolver.Configuration.RezolveTargetMetadataType.Object
+  name: Object
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType_Object
+  commentId: F:Rezolver.Configuration.RezolveTargetMetadataType.Object
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType.Object
+- uid: Rezolver.Configuration.RezolveTargetMetadataType.Singleton
+  name: Singleton
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType_Singleton
+  commentId: F:Rezolver.Configuration.RezolveTargetMetadataType.Singleton
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType.Singleton
+- uid: Rezolver.Configuration.RezolveTargetMetadataType.Unknown
+  name: Unknown
+  href: api/Rezolver.Configuration.RezolveTargetMetadataType.html#Rezolver_Configuration_RezolveTargetMetadataType_Unknown
+  commentId: F:Rezolver.Configuration.RezolveTargetMetadataType.Unknown
+  fullName: Rezolver.Configuration.RezolveTargetMetadataType.Unknown
+- uid: Rezolver.Configuration.RuntimeTypeReference
+  name: RuntimeTypeReference
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference
+  commentId: T:Rezolver.Configuration.RuntimeTypeReference
+  fullName: Rezolver.Configuration.RuntimeTypeReference
+- uid: Rezolver.Configuration.RuntimeTypeReference.#ctor(System.Type)
+  name: RuntimeTypeReference(Type)
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference__ctor_System_Type_
+  commentId: M:Rezolver.Configuration.RuntimeTypeReference.#ctor(System.Type)
+  fullName: Rezolver.Configuration.RuntimeTypeReference.RuntimeTypeReference(System.Type)
+- uid: Rezolver.Configuration.RuntimeTypeReference.EndLineNo
+  name: EndLineNo
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_EndLineNo
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.EndLineNo
+  fullName: Rezolver.Configuration.RuntimeTypeReference.EndLineNo
+- uid: Rezolver.Configuration.RuntimeTypeReference.EndLinePos
+  name: EndLinePos
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_EndLinePos
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.EndLinePos
+  fullName: Rezolver.Configuration.RuntimeTypeReference.EndLinePos
+- uid: Rezolver.Configuration.RuntimeTypeReference.GenericArguments
+  name: GenericArguments
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_GenericArguments
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.GenericArguments
+  fullName: Rezolver.Configuration.RuntimeTypeReference.GenericArguments
+- uid: Rezolver.Configuration.RuntimeTypeReference.IsArray
+  name: IsArray
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_IsArray
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.IsArray
+  fullName: Rezolver.Configuration.RuntimeTypeReference.IsArray
+- uid: Rezolver.Configuration.RuntimeTypeReference.IsOpenGenericTypeArgument
+  name: IsOpenGenericTypeArgument
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_IsOpenGenericTypeArgument
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.IsOpenGenericTypeArgument
+  fullName: Rezolver.Configuration.RuntimeTypeReference.IsOpenGenericTypeArgument
+- uid: Rezolver.Configuration.RuntimeTypeReference.IsUnbound
+  name: IsUnbound
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_IsUnbound
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.IsUnbound
+  fullName: Rezolver.Configuration.RuntimeTypeReference.IsUnbound
+- uid: Rezolver.Configuration.RuntimeTypeReference.RuntimeType
+  name: RuntimeType
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_RuntimeType
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.RuntimeType
+  fullName: Rezolver.Configuration.RuntimeTypeReference.RuntimeType
+- uid: Rezolver.Configuration.RuntimeTypeReference.StartLineNo
+  name: StartLineNo
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_StartLineNo
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.StartLineNo
+  fullName: Rezolver.Configuration.RuntimeTypeReference.StartLineNo
+- uid: Rezolver.Configuration.RuntimeTypeReference.StartLinePos
+  name: StartLinePos
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_StartLinePos
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.StartLinePos
+  fullName: Rezolver.Configuration.RuntimeTypeReference.StartLinePos
+- uid: Rezolver.Configuration.RuntimeTypeReference.TypeName
+  name: TypeName
+  href: api/Rezolver.Configuration.RuntimeTypeReference.html#Rezolver_Configuration_RuntimeTypeReference_TypeName
+  commentId: P:Rezolver.Configuration.RuntimeTypeReference.TypeName
+  fullName: Rezolver.Configuration.RuntimeTypeReference.TypeName
+- uid: Rezolver.Configuration.SingletonTargetMetadata
+  name: SingletonTargetMetadata
+  href: api/Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata
+  commentId: T:Rezolver.Configuration.SingletonTargetMetadata
+  fullName: Rezolver.Configuration.SingletonTargetMetadata
+- uid: Rezolver.Configuration.SingletonTargetMetadata.#ctor(Rezolver.Configuration.IRezolveTargetMetadata,System.Boolean)
+  name: SingletonTargetMetadata(IRezolveTargetMetadata, Boolean)
+  href: api/Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata__ctor_Rezolver_Configuration_IRezolveTargetMetadata_System_Boolean_
+  commentId: M:Rezolver.Configuration.SingletonTargetMetadata.#ctor(Rezolver.Configuration.IRezolveTargetMetadata,System.Boolean)
+  fullName: Rezolver.Configuration.SingletonTargetMetadata.SingletonTargetMetadata(Rezolver.Configuration.IRezolveTargetMetadata, System.Boolean)
+- uid: Rezolver.Configuration.SingletonTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name: BindBase(ITypeReference[])
+  href: api/Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.SingletonTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  name.vb: BindBase(ITypeReference())
+  fullName: Rezolver.Configuration.SingletonTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.SingletonTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.SingletonTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name: CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)
+  href: api/Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_
+  commentId: M:Rezolver.Configuration.SingletonTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)
+  name.vb: CreateRezolveTargetBase(Type(), ConfigurationAdapterContext, IConfigurationEntry)
+  fullName: Rezolver.Configuration.SingletonTargetMetadata.CreateRezolveTargetBase(System.Type[], Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+  fullName.vb: Rezolver.Configuration.SingletonTargetMetadata.CreateRezolveTargetBase(System.Type(), Rezolver.Configuration.ConfigurationAdapterContext, Rezolver.Configuration.IConfigurationEntry)
+- uid: Rezolver.Configuration.SingletonTargetMetadata.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata_DeclaredType
+  commentId: P:Rezolver.Configuration.SingletonTargetMetadata.DeclaredType
+  fullName: Rezolver.Configuration.SingletonTargetMetadata.DeclaredType
+- uid: Rezolver.Configuration.SingletonTargetMetadata.Inner
+  name: Inner
+  href: api/Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata_Inner
+  commentId: P:Rezolver.Configuration.SingletonTargetMetadata.Inner
+  fullName: Rezolver.Configuration.SingletonTargetMetadata.Inner
+- uid: Rezolver.Configuration.SingletonTargetMetadata.Scoped
+  name: Scoped
+  href: api/Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata_Scoped
+  commentId: P:Rezolver.Configuration.SingletonTargetMetadata.Scoped
+  fullName: Rezolver.Configuration.SingletonTargetMetadata.Scoped
+- uid: Rezolver.Configuration.TypeReference
+  name: TypeReference
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference
+  commentId: T:Rezolver.Configuration.TypeReference
+  fullName: Rezolver.Configuration.TypeReference
+- uid: Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,Rezolver.Configuration.ITypeReference[])
+  name: TypeReference(String, IConfigurationLineInfo, ITypeReference[])
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,Rezolver.Configuration.ITypeReference[])
+  name.vb: TypeReference(String, IConfigurationLineInfo, ITypeReference())
+  fullName: Rezolver.Configuration.TypeReference.TypeReference(System.String, Rezolver.Configuration.IConfigurationLineInfo, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.TypeReference.TypeReference(System.String, Rezolver.Configuration.IConfigurationLineInfo, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,Rezolver.Configuration.ITypeReference[])
+  name: TypeReference(String, IConfigurationLineInfo, Boolean, ITypeReference[])
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,Rezolver.Configuration.ITypeReference[])
+  name.vb: TypeReference(String, IConfigurationLineInfo, Boolean, ITypeReference())
+  fullName: Rezolver.Configuration.TypeReference.TypeReference(System.String, Rezolver.Configuration.IConfigurationLineInfo, System.Boolean, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.TypeReference.TypeReference(System.String, Rezolver.Configuration.IConfigurationLineInfo, System.Boolean, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,System.Boolean,Rezolver.Configuration.ITypeReference[])
+  name: TypeReference(String, IConfigurationLineInfo, Boolean, Boolean, ITypeReference[])
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_System_Boolean_Rezolver_Configuration_ITypeReference___
+  commentId: M:Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,System.Boolean,Rezolver.Configuration.ITypeReference[])
+  name.vb: TypeReference(String, IConfigurationLineInfo, Boolean, Boolean, ITypeReference())
+  fullName: Rezolver.Configuration.TypeReference.TypeReference(System.String, Rezolver.Configuration.IConfigurationLineInfo, System.Boolean, System.Boolean, Rezolver.Configuration.ITypeReference[])
+  fullName.vb: Rezolver.Configuration.TypeReference.TypeReference(System.String, Rezolver.Configuration.IConfigurationLineInfo, System.Boolean, System.Boolean, Rezolver.Configuration.ITypeReference())
+- uid: Rezolver.Configuration.TypeReference.GenericArguments
+  name: GenericArguments
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_GenericArguments
+  commentId: P:Rezolver.Configuration.TypeReference.GenericArguments
+  fullName: Rezolver.Configuration.TypeReference.GenericArguments
+- uid: Rezolver.Configuration.TypeReference.IsArray
+  name: IsArray
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_IsArray
+  commentId: P:Rezolver.Configuration.TypeReference.IsArray
+  fullName: Rezolver.Configuration.TypeReference.IsArray
+- uid: Rezolver.Configuration.TypeReference.IsOpenGenericTypeArgument
+  name: IsOpenGenericTypeArgument
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_IsOpenGenericTypeArgument
+  commentId: P:Rezolver.Configuration.TypeReference.IsOpenGenericTypeArgument
+  fullName: Rezolver.Configuration.TypeReference.IsOpenGenericTypeArgument
+- uid: Rezolver.Configuration.TypeReference.IsUnbound
+  name: IsUnbound
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_IsUnbound
+  commentId: P:Rezolver.Configuration.TypeReference.IsUnbound
+  fullName: Rezolver.Configuration.TypeReference.IsUnbound
+- uid: Rezolver.Configuration.TypeReference.NoGenericArguments
+  name: NoGenericArguments
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_NoGenericArguments
+  commentId: F:Rezolver.Configuration.TypeReference.NoGenericArguments
+  fullName: Rezolver.Configuration.TypeReference.NoGenericArguments
+- uid: Rezolver.Configuration.TypeReference.OpenGenericTypeArgument
+  name: OpenGenericTypeArgument
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_OpenGenericTypeArgument
+  commentId: P:Rezolver.Configuration.TypeReference.OpenGenericTypeArgument
+  fullName: Rezolver.Configuration.TypeReference.OpenGenericTypeArgument
+- uid: Rezolver.Configuration.TypeReference.TypeName
+  name: TypeName
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_TypeName
+  commentId: P:Rezolver.Configuration.TypeReference.TypeName
+  fullName: Rezolver.Configuration.TypeReference.TypeName
+- uid: Rezolver.Configuration.TypeReference.Unbound
+  name: Unbound
+  href: api/Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_Unbound
+  commentId: P:Rezolver.Configuration.TypeReference.Unbound
+  fullName: Rezolver.Configuration.TypeReference.Unbound
+- uid: Rezolver.Configuration.TypeReferenceBase
+  name: TypeReferenceBase
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase
+  commentId: T:Rezolver.Configuration.TypeReferenceBase
+  fullName: Rezolver.Configuration.TypeReferenceBase
+- uid: Rezolver.Configuration.TypeReferenceBase.#ctor
+  name: TypeReferenceBase()
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase__ctor
+  commentId: M:Rezolver.Configuration.TypeReferenceBase.#ctor
+  fullName: Rezolver.Configuration.TypeReferenceBase.TypeReferenceBase()
+- uid: Rezolver.Configuration.TypeReferenceBase.#ctor(Rezolver.Configuration.IConfigurationLineInfo)
+  name: TypeReferenceBase(IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase__ctor_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.TypeReferenceBase.#ctor(Rezolver.Configuration.IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.TypeReferenceBase.TypeReferenceBase(Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.TypeReferenceBase.EndLineNo
+  name: EndLineNo
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_EndLineNo
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.EndLineNo
+  fullName: Rezolver.Configuration.TypeReferenceBase.EndLineNo
+- uid: Rezolver.Configuration.TypeReferenceBase.EndLinePos
+  name: EndLinePos
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_EndLinePos
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.EndLinePos
+  fullName: Rezolver.Configuration.TypeReferenceBase.EndLinePos
+- uid: Rezolver.Configuration.TypeReferenceBase.GenericArguments
+  name: GenericArguments
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_GenericArguments
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.GenericArguments
+  fullName: Rezolver.Configuration.TypeReferenceBase.GenericArguments
+- uid: Rezolver.Configuration.TypeReferenceBase.IsArray
+  name: IsArray
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_IsArray
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.IsArray
+  fullName: Rezolver.Configuration.TypeReferenceBase.IsArray
+- uid: Rezolver.Configuration.TypeReferenceBase.IsOpenGenericTypeArgument
+  name: IsOpenGenericTypeArgument
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_IsOpenGenericTypeArgument
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.IsOpenGenericTypeArgument
+  fullName: Rezolver.Configuration.TypeReferenceBase.IsOpenGenericTypeArgument
+- uid: Rezolver.Configuration.TypeReferenceBase.IsUnbound
+  name: IsUnbound
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_IsUnbound
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.IsUnbound
+  fullName: Rezolver.Configuration.TypeReferenceBase.IsUnbound
+- uid: Rezolver.Configuration.TypeReferenceBase.StartLineNo
+  name: StartLineNo
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_StartLineNo
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.StartLineNo
+  fullName: Rezolver.Configuration.TypeReferenceBase.StartLineNo
+- uid: Rezolver.Configuration.TypeReferenceBase.StartLinePos
+  name: StartLinePos
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_StartLinePos
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.StartLinePos
+  fullName: Rezolver.Configuration.TypeReferenceBase.StartLinePos
+- uid: Rezolver.Configuration.TypeReferenceBase.ToString
+  name: ToString()
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_ToString
+  commentId: M:Rezolver.Configuration.TypeReferenceBase.ToString
+  fullName: Rezolver.Configuration.TypeReferenceBase.ToString()
+- uid: Rezolver.Configuration.TypeReferenceBase.TypeName
+  name: TypeName
+  href: api/Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_TypeName
+  commentId: P:Rezolver.Configuration.TypeReferenceBase.TypeName
+  fullName: Rezolver.Configuration.TypeReferenceBase.TypeName
+- uid: Rezolver.Configuration.TypeRegistrationEntry
+  name: TypeRegistrationEntry
+  href: api/Rezolver.Configuration.TypeRegistrationEntry.html#Rezolver_Configuration_TypeRegistrationEntry
+  commentId: T:Rezolver.Configuration.TypeRegistrationEntry
+  fullName: Rezolver.Configuration.TypeRegistrationEntry
+- uid: Rezolver.Configuration.TypeRegistrationEntry.#ctor(Rezolver.Configuration.ITypeReference[],Rezolver.Configuration.IRezolveTargetMetadata,System.Boolean,Rezolver.Configuration.IConfigurationLineInfo)
+  name: TypeRegistrationEntry(ITypeReference[], IRezolveTargetMetadata, Boolean, IConfigurationLineInfo)
+  href: api/Rezolver.Configuration.TypeRegistrationEntry.html#Rezolver_Configuration_TypeRegistrationEntry__ctor_Rezolver_Configuration_ITypeReference___Rezolver_Configuration_IRezolveTargetMetadata_System_Boolean_Rezolver_Configuration_IConfigurationLineInfo_
+  commentId: M:Rezolver.Configuration.TypeRegistrationEntry.#ctor(Rezolver.Configuration.ITypeReference[],Rezolver.Configuration.IRezolveTargetMetadata,System.Boolean,Rezolver.Configuration.IConfigurationLineInfo)
+  name.vb: TypeRegistrationEntry(ITypeReference(), IRezolveTargetMetadata, Boolean, IConfigurationLineInfo)
+  fullName: Rezolver.Configuration.TypeRegistrationEntry.TypeRegistrationEntry(Rezolver.Configuration.ITypeReference[], Rezolver.Configuration.IRezolveTargetMetadata, System.Boolean, Rezolver.Configuration.IConfigurationLineInfo)
+  fullName.vb: Rezolver.Configuration.TypeRegistrationEntry.TypeRegistrationEntry(Rezolver.Configuration.ITypeReference(), Rezolver.Configuration.IRezolveTargetMetadata, System.Boolean, Rezolver.Configuration.IConfigurationLineInfo)
+- uid: Rezolver.Configuration.TypeRegistrationEntry.IsMultipleRegistration
+  name: IsMultipleRegistration
+  href: api/Rezolver.Configuration.TypeRegistrationEntry.html#Rezolver_Configuration_TypeRegistrationEntry_IsMultipleRegistration
+  commentId: P:Rezolver.Configuration.TypeRegistrationEntry.IsMultipleRegistration
+  fullName: Rezolver.Configuration.TypeRegistrationEntry.IsMultipleRegistration
+- uid: Rezolver.Configuration.TypeRegistrationEntry.TargetMetadata
+  name: TargetMetadata
+  href: api/Rezolver.Configuration.TypeRegistrationEntry.html#Rezolver_Configuration_TypeRegistrationEntry_TargetMetadata
+  commentId: P:Rezolver.Configuration.TypeRegistrationEntry.TargetMetadata
+  fullName: Rezolver.Configuration.TypeRegistrationEntry.TargetMetadata
+- uid: Rezolver.Configuration.TypeRegistrationEntry.Types
+  name: Types
+  href: api/Rezolver.Configuration.TypeRegistrationEntry.html#Rezolver_Configuration_TypeRegistrationEntry_Types
+  commentId: P:Rezolver.Configuration.TypeRegistrationEntry.Types
+  fullName: Rezolver.Configuration.TypeRegistrationEntry.Types
 - uid: Rezolver.ConstructorTarget
   name: ConstructorTarget
   href: api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget
@@ -1582,6 +3201,26 @@ references:
   href: api/Rezolver.MethodCallExtractor.html#Rezolver_MethodCallExtractor_VisitNew_NewExpression_
   commentId: M:Rezolver.MethodCallExtractor.VisitNew(NewExpression)
   fullName: Rezolver.MethodCallExtractor.VisitNew(NewExpression)
+- uid: Rezolver.Microsoft.Extensions.DependencyInjection
+  name: Rezolver.Microsoft.Extensions.DependencyInjection
+  href: api/Rezolver.Microsoft.Extensions.DependencyInjection.html#Rezolver_Microsoft_Extensions_DependencyInjection
+  commentId: N:Rezolver.Microsoft.Extensions.DependencyInjection
+  fullName: Rezolver.Microsoft.Extensions.DependencyInjection
+- uid: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration
+  name: RezolverRegistration
+  href: api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration
+  commentId: T:Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration
+  fullName: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration
+- uid: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultRezolver(Rezolver.ITargetContainer)
+  name: CreateDefaultRezolver(ITargetContainer)
+  href: api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration_CreateDefaultRezolver_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultRezolver(Rezolver.ITargetContainer)
+  fullName: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultRezolver(Rezolver.ITargetContainer)
+- uid: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.Populate(Rezolver.IContainer,IServiceCollection)
+  name: Populate(IContainer, IServiceCollection)
+  href: api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration_Populate_Rezolver_IContainer_IServiceCollection_
+  commentId: M:Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.Populate(Rezolver.IContainer,IServiceCollection)
+  fullName: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.Populate(Rezolver.IContainer, IServiceCollection)
 - uid: Rezolver.ObjectTarget
   name: ObjectTarget
   href: api/Rezolver.ObjectTarget.html#Rezolver_ObjectTarget

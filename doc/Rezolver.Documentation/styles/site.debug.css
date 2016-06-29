@@ -8130,8 +8130,8 @@ h4,
 h5,
 h6,
 span.xref {
-  word-wrap: break-word;
-  word-break: break-all;
+  /*word-wrap: break-word;
+    word-break: break-all;*/
 }
 /* line 60, styles/site.less */
 h1 mark,
@@ -8290,7 +8290,11 @@ header .navbar {
 }
 /* line 197, styles/site.less */
 .inheritance h5,
-.inheritedMembers h5 {
+.inheritedMembers h5,
+h5.hsyntax,
+h5.parameters,
+h5.hremarks,
+h5.examples {
   background: #ffe7d8;
   color: #000;
   padding: 5px;

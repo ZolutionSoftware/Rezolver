@@ -35,7 +35,7 @@
 {{/inheritedMembers.0}}
 <h6><strong>{{__global.namespace}}</strong>:{{namespace}}</h6>
 <h6><strong>{{__global.assembly}}</strong>:{{assemblies.0}}.dll</h6>
-<h5 id="{{id}}_syntax">{{__global.syntax}}</h5>
+<h5 id="{{id}}_syntax" class="hsyntax">{{__global.syntax}}</h5>
 <div class="codewrapper">
   <pre><code class="lang-{{_lang}} hljs">{{syntax.content.0.value}}</code></pre>
 </div>
@@ -101,16 +101,17 @@
 </table>
 {{/syntax.typeParameters.0}}
 {{#remarks}}
-<h5 id="{{id}}_remarks"><strong>{{__global.remarks}}</strong></h5>
+<h5 id="{{id}}_remarks" class="hremarks"><strong>{{__global.remarks}}</strong></h5>
 <div class="markdown level0 remarks">{{{remarks}}}</div>
 {{/remarks}}
 {{#example.0}}
-<h5 id="{{id}}_examples"><strong>{{__global.examples}}</strong></h5>
+<h5 id="{{id}}_examples" class="hexamples"><strong>{{__global.examples}}</strong></h5>
 {{/example.0}}
 {{#example}}
 {{{.}}}
 {{/example}}
 {{#children}}
+<hr />
 <h3 id="{{id}}">{{>partials/classSubtitle}}</h3>
 {{#children}}
 {{^_disableContribution}}
