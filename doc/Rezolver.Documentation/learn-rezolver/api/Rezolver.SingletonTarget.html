@@ -158,23 +158,23 @@ create the target object once.</p>
               <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public SingletonTarget(ITarget innerTarget)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>innerTarget</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>The target whose result (when compiled) is to be used as the singleton instance.</p>
 </td>
                   </tr>
@@ -191,11 +191,11 @@ create the target object once.</p>
               <h4 id="Rezolver_SingletonTarget_DeclaredType" data-uid="Rezolver.SingletonTarget.DeclaredType">DeclaredType</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -210,7 +210,7 @@ create the target object once.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">DeclaredType</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -222,11 +222,11 @@ create the target object once.</p>
 <p>For the singleton, it&#39;s important that the scope tracking call occurs within the lazy&#39;s callback.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override bool SuppressScopeTracking { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -241,7 +241,7 @@ create the target object once.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">SuppressScopeTracking</a></div>
               <hr>
               <h3 id="methods">Methods
@@ -254,28 +254,28 @@ create the target object once.</p>
               <h4 id="Rezolver_SingletonTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.SingletonTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -290,7 +290,7 @@ create the target object once.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -300,33 +300,33 @@ create the target object once.</p>
               <h4 id="Rezolver_SingletonTarget_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.SingletonTarget.CreateScopeSelectionExpression(Rezolver.CompileContext,Expression)">CreateScopeSelectionExpression(CompileContext, Expression)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override Expression CreateScopeSelectionExpression(CompileContext context, Expression expression)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
                     <td><em>expression</em></td>
+              	  <td><span class="xref">Expression</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -341,7 +341,7 @@ create the target object once.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">CreateScopeSelectionExpression(CompileContext, Expression)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -351,28 +351,28 @@ create the target object once.</p>
               <h4 id="Rezolver_SingletonTarget_SupportsType_System_Type_" data-uid="Rezolver.SingletonTarget.SupportsType(System.Type)">SupportsType(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override bool SupportsType(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -387,7 +387,7 @@ create the target object once.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">SupportsType(Type)</a></div>
             </article>
           </div>

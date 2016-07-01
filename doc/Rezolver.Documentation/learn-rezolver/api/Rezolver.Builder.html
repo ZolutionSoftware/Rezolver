@@ -161,23 +161,23 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
               <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder">Builder</a> class</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public Builder(bool autoRezolveIEnumerable = true)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>autoRezolveIEnumerable</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td><p>If true, then <span class="xref">IEnumerable<t></t></span> will be automatically
 resolved as a concatenation of all the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s that are registered against a particular type.</p>
 <p>Note - this parameter might be removed in a future version - you can achieve the same thing by using the
@@ -202,35 +202,35 @@ to create a specialised container for generic types (<a class="xref" href="Rezol
 if a generic type or generic type definition.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override ITargetContainer CreateContainer(Type serviceType, ITarget target)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The type for which a container is to be created and registered.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>Optional.  The target that will be added to the container that is returned.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -247,9 +247,9 @@ be registered.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_">CreateContainer(Type, ITarget)</a></div>
-              <h5 id="Rezolver_Builder_CreateContainer_System_Type_Rezolver_ITarget__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_Builder_CreateContainer_System_Type_Rezolver_ITarget__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The main caller for this method will be the base Register method, which will create a 
 new container for a target that&#39;s being registered against a new type.</p>
 <p>It is, however, also called by this class&#39; implementation of <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>
@@ -266,35 +266,35 @@ definitions as a starting point.</p>
 that are registered against generic types.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected virtual ITargetContainer CreateGenericTypeDefContainer(Type genericTypeDefinition, ITarget target)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>genericTypeDefinition</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Will be an open generic type (generic type definition)</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>Optional.  The initial target for which the container is being constructed</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -319,28 +319,28 @@ that are registered against generic types.</p>
               <div class="markdown level1 summary"><p>Retrieves </p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override ITargetContainer FetchContainer(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -355,7 +355,7 @@ that are registered against generic types.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">FetchContainer(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -365,33 +365,33 @@ that are registered against generic types.</p>
               <h4 id="Rezolver_Builder_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Builder.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override void Register(ITarget target, Type serviceType = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -404,33 +404,33 @@ then the container will be registered inside another which will be registered
 for the generic type definition first.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override void RegisterContainer(Type type, ITargetContainer container)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>container</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -444,28 +444,28 @@ against the passed type (it just chains through directly to the </p>
 <p><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> method non-virtually.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected virtual void RegisterContainerDirect(Type type, ITargetContainer container)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>container</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                 </tbody>

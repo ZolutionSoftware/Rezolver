@@ -6,10 +6,13 @@ module.exports = function (grunt) {
             dev: {
                 options: {
                     sourceMap: true,
+                    sourceMapFilename: 'site.debug.css.map',
+                    sourceMapUrl: 'site.debug.css.map',
+                    //sourceMapBasepath: 'styles',
                     dumpLineNumbers: 'comments',
                     relativeUrls: true,
                     plugins: [
-                        new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
+                        new (require('less-plugin-autoprefix'))({ browsers: ["last 2 versions"] })
                     ]
                 },
                 files: {
@@ -19,6 +22,10 @@ module.exports = function (grunt) {
             prod: {
                 options: {
                     sourceMap: true,
+                    sourceMapFilename: 'site.css.map',
+                    sourceMapUrl: 'site.css.map',
+                    //sourceMapBasepath: 'styles',
+                    sourceMapRootpath: '/styles',
                     compress: true,
                     relativeUrls: true,
                     plugins: [
@@ -29,12 +36,27 @@ module.exports = function (grunt) {
                     'styles/site.css': 'styles/site.less'
                 }
             }
+        },
+        copy: {
+            bootstrap_less: {
+                expand: true,
+                cwd: 'bower_components/bootstrap/less',
+                src: '**',
+                dest: 'styles/bootstrap'
+            },
+            bootstrap_fonts: {
+                expand: true,
+                cwd: 'bower_components/bootstrap/fonts',
+                src: '**',
+                dest: 'styles/fonts'
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['less']);
-    grunt.registerTask('prod', ['less:prod']);
-    grunt.registerTask('dev', ['less:dev']);
+    grunt.registerTask('default', ['copy', 'less']);
+    grunt.registerTask('prod', ['copy', 'less:prod']);
+    grunt.registerTask('dev', ['copy', 'less:dev']);
 };

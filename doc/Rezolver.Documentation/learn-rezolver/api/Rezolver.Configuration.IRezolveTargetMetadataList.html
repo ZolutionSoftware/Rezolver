@@ -136,11 +136,11 @@ are not bound to a specific type.</p>
 <p>Note - a list is used to allow for modification of the targets after initial creation.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IList&lt;IRezolveTargetMetadata&gt; Targets { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -170,43 +170,43 @@ Creates the rezolve target, potentially customised for the given target type(s),
 If the <em>entry</em> is passed, then it indicates the configuration entry for which the targets are being built.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IEnumerable&lt;ITarget&gt; CreateRezolveTargets(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span>[]</td>
                     <td><em>targetTypes</em></td>
+              	  <td><span class="xref">System.Type</span>[]</td>
                     <td><p>The target types for each of the returned target, generally, this will be the ultimate target types
 for the configuration entry that is passed in <em>entry</em>. An implementation is not bound to use these types 
 at all, but it helps provide additional context that might be of use when generating the rezolve target.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td><p>The context.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><em>entry</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><p>If provided, this is a reference to the configuration entry for which this target is being built.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

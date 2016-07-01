@@ -151,43 +151,43 @@ pass multiple targets in a list.</p>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Configuration.RegisterMultipleInstruction.html#Rezolver_Configuration_RegisterMultipleInstruction">RegisterMultipleInstruction</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public RegisterMultipleInstruction(IEnumerable&lt;Type&gt; targetTypes, IEnumerable&lt;ITarget&gt; targets, IConfigurationEntry entry)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Type</span>&gt;</td>
                     <td><em>targetTypes</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Type</span>&gt;</td>
                     <td><p>The target types for the registration.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><em>targets</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><p>The targets.  Note that this is a list to support modification after
 the instruction is created; since this is a configuration API.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><em>entry</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><p>The source entry for this instruction - allows the system to track the instruction
 back to the configuration it was loaded from.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -228,11 +228,11 @@ All targets in list must be non-null;targets</p>
               <div class="markdown level1 summary"><p>Gets the targets that&#39;ll be used for the registration.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; Targets { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -257,11 +257,11 @@ All targets in list must be non-null;targets</p>
               <div class="markdown level1 summary"><p>The types that the target will be registered with</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;Type&gt; TargetTypes { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -287,28 +287,28 @@ All targets in list must be non-null;targets</p>
               <h4 id="Rezolver_Configuration_RegisterMultipleInstruction_Apply_Rezolver_ITargetContainer_" data-uid="Rezolver.Configuration.RegisterMultipleInstruction.Apply(Rezolver.ITargetContainer)">Apply(ITargetContainer)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override void Apply(ITargetContainer builder)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction_Apply_Rezolver_ITargetContainer_">Apply(ITargetContainer)</a></div>
             </article>
           </div>

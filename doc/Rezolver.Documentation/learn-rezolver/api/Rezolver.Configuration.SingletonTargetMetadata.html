@@ -153,35 +153,35 @@
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata">SingletonTargetMetadata</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public SingletonTargetMetadata(IRezolveTargetMetadata inner, bool scoped = false)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata">IRezolveTargetMetadata</a></td>
                     <td><em>inner</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata">IRezolveTargetMetadata</a></td>
                     <td><p>The inner target that will be turned into a singleton.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>scoped</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td><p>if set to <code>true</code> [scoped].</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -211,11 +211,11 @@ this metadata.  Note - this isn&#39;t always known, or always fixed, since confi
 will allow developers to avoid being specific about the types that are to be built.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override ITypeReference DeclaredType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -231,9 +231,9 @@ will allow developers to avoid being specific about the types that are to be bui
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_DeclaredType">DeclaredType</a></div>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_DeclaredType">DeclaredType</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -244,11 +244,11 @@ will allow developers to avoid being specific about the types that are to be bui
               <div class="markdown level1 summary"><p>Metadata for the inner target that is turned into a scoped singleton</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IRezolveTargetMetadata Inner { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -263,7 +263,7 @@ will allow developers to avoid being specific about the types that are to be bui
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.ISingletonTargetMetadata.html#Rezolver_Configuration_ISingletonTargetMetadata_Inner">Inner</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -275,11 +275,11 @@ will allow developers to avoid being specific about the types that are to be bui
 to the lifetime of an external scope rather than to the AppDomain&#39;s lifetime.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public bool Scoped { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -294,7 +294,7 @@ to the lifetime of an external scope rather than to the AppDomain&#39;s lifetime
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.ISingletonTargetMetadata.html#Rezolver_Configuration_ISingletonTargetMetadata_Scoped">Scoped</a></div>
               <hr>
               <h3 id="methods">Methods
@@ -309,29 +309,29 @@ to the lifetime of an external scope rather than to the AppDomain&#39;s lifetime
 is in the array).  Only ever called if <a class="xref" href="Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata_DeclaredType">DeclaredType</a> is unbound</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override IRezolveTargetMetadata BindBase(params ITypeReference[] targetTypes)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td><em>targetTypes</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td><p>The target types.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -347,7 +347,7 @@ is in the array).  Only ever called if <a class="xref" href="Rezolver.Configurat
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_BindBase_Rezolver_Configuration_ITypeReference___">BindBase(ITypeReference[])</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -359,41 +359,41 @@ is in the array).  Only ever called if <a class="xref" href="Rezolver.Configurat
 <p>If <a class="xref" href="Rezolver.Configuration.SingletonTargetMetadata.html#Rezolver_Configuration_SingletonTargetMetadata_Scoped">Scoped</a> is true, then this creates a new <a class="xref" href="Rezolver.ScopedTarget.html#Rezolver_ScopedTarget">ScopedTarget</a>; if false, it creates a new <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span>[]</td>
                     <td><em>targetTypes</em></td>
+              	  <td><span class="xref">System.Type</span>[]</td>
                     <td><p>The target types.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td><p>The context.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><em>entry</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><p>The entry.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -408,7 +408,7 @@ is in the array).  Only ever called if <a class="xref" href="Rezolver.Configurat
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_">CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)</a></div>
             </article>
           </div>

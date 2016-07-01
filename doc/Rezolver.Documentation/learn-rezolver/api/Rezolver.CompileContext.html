@@ -147,45 +147,45 @@ dependency lookups during compilation time.</p>
               <div class="markdown level1 summary"><p>Creates a new CompileContext using an existing one as a template.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>parentContext</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>Used to seed the compilation stack, rezolver, rezolve context parameter and optionally
 the target type (if you pass null for <em>targetType</em>.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>targetType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The target type that is expected to be compiled, or null to inherit
 the <em>parentContext</em>&#39;s <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> property.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>inheritSharedExpressions</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td><p>If true (the default), then the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_SharedExpressions">SharedExpressions</a> for this context will be shared
 from the parent context - meaning that any new additions will be added back to the parent context again.  This is the most common
 behaviour when chaining multiple targets&#39; expressions together.  Passing false for this parameter is only required in rare situations.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>suppressScopeTracking</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td><p>If true, then any expressions constructed from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> objects
 should not contain automatically generated code to track objects in an enclosing scope.  The default is false.  This is 
 typically only enabled when one target is explicitly using expressions created from other targets, and has its own
@@ -203,47 +203,47 @@ scope tracking code, or expects to be surrounded by automatically generated scop
               <div class="markdown level1 summary"><p>Creates a new CompileContext</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public CompileContext(IContainer rezolver, Type targetType = null, ParameterExpression rezolveContextParameter = null, IEnumerable&lt;ITarget&gt; compilingTargets = null, ITargetContainer dependencyContainer = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><em>rezolver</em></td>
+              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>Required. Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> property.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>targetType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Optional. Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> property.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">ParameterExpression</span></td>
                     <td><em>rezolveContextParameter</em></td>
+              	  <td><span class="xref">ParameterExpression</span></td>
                     <td><p>Optional.  Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a></p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><em>compilingTargets</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><p>Optional.  Allows you to seed the stack of compiling targets from creation.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>dependencyContainer</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>Optional.  By default, this class implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> by wrapping
 a <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder">ChildBuilder</a> over the one that is attached to the <em>rezolver</em> that you pass on construction.</p>
 <p>To override that behaviour, you can pass a different target container here.</p>
@@ -266,11 +266,11 @@ property of the <em>rezolver</em> parameter.</p>
 <p>The underlying stack is not exposed through this enumerable.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; CompilingTargets { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -297,11 +297,11 @@ to aid in code generation.</p>
 <p>Always non-null.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public MemberExpression ContextRezolverPropertyExpression { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -325,11 +325,11 @@ to aid in code generation.</p>
               <div class="markdown level1 summary"><p>Returns an expression that represents reading the Scope property of the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public MemberExpression ContextScopePropertyExpression { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -356,11 +356,11 @@ to aid in code generation.</p>
 the generated expressions.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ParameterExpression RezolveContextParameter { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -386,11 +386,11 @@ the generated expressions.</p>
 for dependency resolution - for that, you should use the DependencyBuilder</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IContainer Rezolver { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -414,11 +414,11 @@ for dependency resolution - for that, you should use the DependencyBuilder</p>
               <div class="markdown level1 summary"><p>Represents an expression that equals the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> that belongs to this context.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public Expression RezolverExpression { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -450,11 +450,11 @@ to be added as local variables to an all-encompassing BlockExpression around the
 that is to be compiled.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;Expression&gt; SharedExpressions { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -479,11 +479,11 @@ that is to be compiled.</p>
 object from, or track the object in, the current scope.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public bool SuppressScopeTracking { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -498,7 +498,7 @@ object from, or track the object in, the current scope.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_CompileContext_SuppressScopeTracking_remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_CompileContext_SuppressScopeTracking_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This is currently used, for example, by wrapper targets that generate their own
 scope tracking code (specifically, the <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a> and <a class="xref" href="Rezolver.ScopedTarget.html#Rezolver_ScopedTarget">ScopedTarget</a>.</p>
 <p>It&#39;s therefore very important that any custom <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementations honour this flag in their
@@ -514,11 +514,11 @@ class does honour this flag.</p>
               <div class="markdown level1 summary"><p>The desired type to be returned by the generated code.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public Type TargetType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -544,33 +544,33 @@ class does honour this flag.</p>
               <h4 id="Rezolver_CompileContext_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.CompileContext.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ITargetContainer CombineWith(ITargetContainer existing, Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>existing</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -585,7 +585,7 @@ class does honour this flag.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -595,28 +595,28 @@ class does honour this flag.</p>
               <h4 id="Rezolver_CompileContext_Fetch_System_Type_" data-uid="Rezolver.CompileContext.Fetch(System.Type)">Fetch(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ITarget Fetch(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -631,7 +631,7 @@ class does honour this flag.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -641,28 +641,28 @@ class does honour this flag.</p>
               <h4 id="Rezolver_CompileContext_FetchAll_System_Type_" data-uid="Rezolver.CompileContext.FetchAll(System.Type)">FetchAll(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; FetchAll(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -677,7 +677,7 @@ class does honour this flag.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -687,43 +687,43 @@ class does honour this flag.</p>
               <h4 id="Rezolver_CompileContext_GetOrAddSharedExpression_System_Type_System_String_System_Func_Expression__System_Type_" data-uid="Rezolver.CompileContext.GetOrAddSharedExpression(System.Type,System.String,System.Func{Expression},System.Type)">GetOrAddSharedExpression(Type, String, Func&lt;Expression&gt;, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public Expression GetOrAddSharedExpression(Type type, string name, Func&lt;Expression&gt; expressionFactory, Type requestingType = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.String</span></td>
                     <td><em>name</em></td>
+              	  <td><span class="xref">System.String</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Func</span>&lt;<span class="xref">Expression</span>&gt;</td>
                     <td><em>expressionFactory</em></td>
+              	  <td><span class="xref">System.Func</span>&lt;<span class="xref">Expression</span>&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>requestingType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -747,38 +747,38 @@ class does honour this flag.</p>
               <div class="markdown level1 summary"><p>Retrieves</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ParameterExpression GetOrAddSharedLocal(Type type, string name, Type requestingType = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.String</span></td>
                     <td><em>name</em></td>
+              	  <td><span class="xref">System.String</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>requestingType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -803,28 +803,28 @@ class does honour this flag.</p>
 to also add it to the stack.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public bool IsCompiling(ITarget target)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -848,39 +848,39 @@ to also add it to the stack.</p>
               <div class="markdown level1 summary"><p>Spawns a new context for the passed <em>targetType</em>, with everything else being inherited from this context by default.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public CompileContext New(Type targetType, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>targetType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Required.  The type to be compiled.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>inheritSharedExpressions</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>suppressScopeTracking</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -896,7 +896,7 @@ to also add it to the stack.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This is a convenience method which simply wraps the <span class="xref">Rezolver.CompileContext.</span> constructor,
 except in this method the <em>targetType</em> is required.</p>
 </div>
@@ -910,11 +910,11 @@ except in this method the <em>targetType</em> is required.</p>
 are no targets on the stack, an InvalidOperationException will occur.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ITarget PopCompileStack()</code></pre>
               </div>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -939,28 +939,28 @@ are no targets on the stack, an InvalidOperationException will occur.</p>
 <p>The method returns whether the target was added.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public bool PushCompileStack(ITarget toCompile)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>toCompile</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -983,33 +983,33 @@ are no targets on the stack, an InvalidOperationException will occur.</p>
               <h4 id="Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.CompileContext.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void Register(ITarget target, Type serviceType = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a></div>
             </article>
           </div>

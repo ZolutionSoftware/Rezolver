@@ -119,35 +119,35 @@ registration inside another <a class="xref" href="Rezolver.ITargetContainerOwner
 against the type, and a new container owner is then registered against the same type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITargetContainer CombineWith(ITargetContainer existing, Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>existing</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>The existing <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance that this instance is to be combined with</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The type that the combined container owner will be registered under.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -162,7 +162,7 @@ against the type, and a new container owner is then registered against the same 
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -187,29 +187,29 @@ against the type, and a new container owner is then registered against the same 
               <div class="markdown level1 summary"><p>Retrieves the default target for a particular type, or null if no target is registered against that type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITarget Fetch(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Required.  The type whose <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> is to be retrieved.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -234,29 +234,29 @@ against the type, and a new container owner is then registered against the same 
               <div class="markdown level1 summary"><p>Retrieves an enumerable of all targets that are registered for a particular <em>type</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IEnumerable&lt;ITarget&gt; FetchAll(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Required.  The type whose <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s are to be retrieved.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -282,29 +282,29 @@ against the type, and a new container owner is then registered against the same 
               <div class="markdown level1 summary"><p>Registers a target, optionally for a particular target type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">void Register(ITarget target, Type serviceType = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>Required.  The target to be registereed</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Optional.  The type the target is to be registered against, if different
 from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <em>target</em></p>
 </td>

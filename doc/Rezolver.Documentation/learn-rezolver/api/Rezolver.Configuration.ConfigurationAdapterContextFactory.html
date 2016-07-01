@@ -147,7 +147,7 @@ you can use as the starting point of your own factory.</p>
               <div class="markdown level1 summary"><p>Creation of new instances of this class, outside of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance">Instance</a> instance, is only through inheritance.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected ConfigurationAdapterContextFactory()</code></pre>
               </div>
@@ -165,11 +165,11 @@ used by the standard <a class="xref" href="Rezolver.Configuration.ConfigurationA
 of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_DefaultContextFactory">DefaultContextFactory</a> property, which you can change).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static ConfigurationAdapterContextFactory Instance { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -198,35 +198,35 @@ of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Re
 the configuration and the default set of assembly references returned by <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences">GetDefaultAssemblyReferences()</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public virtual ConfigurationAdapterContext CreateContext(ConfigurationAdapter adapter, IConfiguration configuration)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter">ConfigurationAdapter</a></td>
                     <td><em>adapter</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter">ConfigurationAdapter</a></td>
                     <td><p>The adapter.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
                     <td><em>configuration</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
                     <td><p>The configuration.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -241,7 +241,7 @@ the configuration and the default set of assembly references returned by <a clas
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_">CreateContext(ConfigurationAdapter, IConfiguration)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -254,11 +254,11 @@ the configuration and the default set of assembly references returned by <a clas
 the list might be less.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Assembly&gt; GetDefaultAssemblyReferences()</code></pre>
               </div>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

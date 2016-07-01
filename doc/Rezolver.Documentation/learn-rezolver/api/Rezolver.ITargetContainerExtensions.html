@@ -145,41 +145,41 @@
 <p>The created entry will effectively represent a second Resolve call into the container for the aliased type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterAlias(this ITargetContainer builder, Type aliasType, Type aliasedType)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>The builder in which the alias is to be registered</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>aliasType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The type to be registered as an alias</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>aliasedType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The type being aliased.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_ITargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ITargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Use this when it&#39;s important that a given target type is always served through the same compiled target, even when the consumer
 expects it to be of a different type.  A very common scenario is when you have a singleton instance of the <em>aliasedType</em>, 
 and need to serve that same instance for <em>aliasType</em>.  If you register the same singleton for both types, you get two separate singletons for each type.</p>
@@ -193,23 +193,23 @@ and need to serve that same instance for <em>aliasType</em>.  If you register th
               <div class="markdown level1 summary"><p>Generic version of <see cref="!:Regi"></see>, see that method for more.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterAlias&lt;TAlias, TAliased&gt;(this ITargetContainer builder)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterAlias__2_Rezolver_ITargetContainer_">RegisterAlias<talias, taliased="">(ITargetContainer)</talias,></a></td>
                   </tr>
                 </tbody>
@@ -243,29 +243,29 @@ and need to serve that same instance for <em>aliasType</em>.  If you register th
 multiple times, once for each of the targets in the array.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterAll(this ITargetContainer builder, params ITarget[] targets)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>The builder.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>[]</td>
                     <td><em>targets</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>[]</td>
                     <td><p>The targets to be registered.</p>
 </td>
                   </tr>
@@ -281,29 +281,29 @@ multiple times, once for each of the targets in the array.</p>
 multiple times, once for each of the targets in the enumerable.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterAll(this ITargetContainer builder, IEnumerable&lt;ITarget&gt; targets)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>The builder.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><em>targets</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><p>The targets to be registered</p>
 </td>
                   </tr>
@@ -317,33 +317,33 @@ multiple times, once for each of the targets in the enumerable.</p>
               <h4 id="Rezolver_ITargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainerOwner_System_Type_System_Type_" data-uid="Rezolver.ITargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainerOwner,System.Type,System.Type)">RegisterDecorator(ITargetContainerOwner, Type, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterDecorator(this ITargetContainerOwner builder, Type decoratorType, Type decoratedType)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>decoratorType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>decoratedType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -356,23 +356,23 @@ multiple times, once for each of the targets in the enumerable.</p>
               <h4 id="Rezolver_ITargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_" data-uid="Rezolver.ITargetContainerExtensions.RegisterDecorator``2(Rezolver.ITargetContainerOwner)">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterDecorator&lt;TDecorator, TDecorated&gt;(this ITargetContainerOwner builder)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -405,41 +405,41 @@ multiple times, once for each of the targets in the enumerable.</p>
               <div class="markdown level1 summary"><p>Registers an expression to be used as a factory for obtaining an instance when the registration matches a resolve request.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterExpression&lt;T&gt;(this ITargetContainer builder, Expression&lt;Func&lt;RezolveContextExpressionHelper, T&gt;&gt; expression, Type type = null, ITargetAdapter adapter = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper">RezolveContextExpressionHelper</a>, T&gt;&gt;</td>
                     <td><em>expression</em></td>
+              	  <td><span class="xref">Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper">RezolveContextExpressionHelper</a>, T&gt;&gt;</td>
                     <td><p>The expression to be analysed and used as a factory.  The argument that is received by this expression can be used to emit explicit
 calls back into the resolver to indicate that a particular argument/property value or whatever should be resolved.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Optional.  The type against which the registration is to be made, if different from <em>T</em>.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
                     <td><em>adapter</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
                     <td><p>Optional.  The adapter that will be used to convert the <em>expression</em> into an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>.  This defaults
 to <a class="xref" href="Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_Default">Default</a>.  Extending this is an advanced topicand shouldn&#39;t be required in most applications - it&#39;s mainly for developers looking
 to extend Rezolver itself.</p>
@@ -462,7 +462,7 @@ to extend Rezolver itself.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_ITargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___System_Type_Rezolver_ITargetAdapter__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ITargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___System_Type_Rezolver_ITargetAdapter__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This is not the same as registering a factory delegate for creating objects - where the code you supply is already compiled and ready to go.  The expression that
 is passed is analysed by the <em>adapter</em> (or the default) and rewritten according to the expressions present.  In general, there is a one to one
 mapping between the code you provide and the code that&#39;s produced, but it&#39;s not guaranteed.  In particular, calls back to the resolver to resolve dependencies are
@@ -481,36 +481,36 @@ existing registration(s) or extending them.</p>
 with the different targets.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterMultiple(this ITargetContainer builder, IEnumerable&lt;ITarget&gt; targets, Type commonServiceType = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>The builder in which the registration is to be performed.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><em>targets</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><p>The targets to be registered - all must support a common service type (potentially
 passed in the <em>commonServiceType</em> argument.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>commonServiceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Optional - instead of determining the common service type automatically,
 you can provide it in advance through this parameter.  Note that all targets must support this type.</p>
 </td>
@@ -528,41 +528,41 @@ you can provide it in advance through this parameter.  Note that all targets mus
 it will be disposed when the root scope is disposed.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterObject&lt;T&gt;(this ITargetContainer builder, T obj, Type serviceType = null, bool suppressScopeTracking = true)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">T</span></td>
                     <td><em>obj</em></td>
+              	  <td><span class="xref">T</span></td>
                     <td><p>The object to be returned when resolving.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The service type against which this object is to be registered, if different
 from <em>T</em>.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>suppressScopeTracking</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -594,38 +594,38 @@ to the active <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_ISco
 is called.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterScoped(this ITargetContainer builder, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>objectType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a></td>
                   </tr>
                 </tbody>
@@ -641,28 +641,28 @@ to the active <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_ISco
 is called.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterScoped&lt;TObject&gt;(this ITargetContainer builder, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><p>See <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject>(ITargetContainer, IPropertyBindingBehaviour)</tobject></a></p>
 </td>
                   </tr>
@@ -694,28 +694,28 @@ to the active <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_ISco
 is called.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterScoped&lt;TObject, TService&gt;(this ITargetContainer builder, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><p>See <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject, tservice="">(ITargetContainer, IPropertyBindingBehaviour)</tobject,></a></p>
 </td>
                   </tr>
@@ -751,38 +751,38 @@ to the root scope of the active <a class="xref" href="Rezolver.IScopedContainer.
 is called.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterSingleton(this ITargetContainer builder, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>objectType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a></td>
                   </tr>
                 </tbody>
@@ -798,28 +798,28 @@ to the root scope of the active <a class="xref" href="Rezolver.IScopedContainer.
 is called.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject&gt;(this ITargetContainer builder, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><p>See <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject>(ITargetContainer, IPropertyBindingBehaviour)</tobject></a></p>
 </td>
                   </tr>
@@ -851,28 +851,28 @@ to the root scope of the active <a class="xref" href="Rezolver.IScopedContainer.
 is called.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject, TService&gt;(this ITargetContainer builder, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><p>See <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject, tservice="">(ITargetContainer, IPropertyBindingBehaviour)</tobject,></a></p>
 </td>
                   </tr>
@@ -906,40 +906,40 @@ is called.</p>
               <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject, tservice="">(ITargetContainer, IPropertyBindingBehaviour)</tobject,></a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterType(this ITargetContainer builder, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>objectType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Required. Type of object to be constructed</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>serviceType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a></p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject>(ITargetContainer, IPropertyBindingBehaviour)</tobject></a></td>
                   </tr>
                 </tbody>
@@ -955,28 +955,28 @@ and optionally bind any properties/fields on the new object, depending on the IP
 Note that this method supports open generics.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterType&lt;TObject&gt;(this ITargetContainer builder, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><p>The property binding behaviour.  If null, then no properties are bound.</p>
 </td>
                   </tr>
@@ -997,7 +997,7 @@ Note that this method supports open generics.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This is equivalent to creating either a <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> via their
 &#39;Auto&#39; static methods and then registering them.</p>
 </div>
@@ -1011,28 +1011,28 @@ Note that this method supports open generics.</p>
 parameter allows you to explicitly set the type against which the registration is to be made.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static void RegisterType&lt;TObject, TService&gt;(this ITargetContainer builder, IPropertyBindingBehaviour propertyBindingBehaviour = null)where TObject : TService</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><em>propertyBindingBehaviour</em></td>
+              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject>(ITargetContainer, IPropertyBindingBehaviour)</tobject></a></td>
                   </tr>
                 </tbody>
@@ -1056,7 +1056,7 @@ parameter allows you to explicitly set the type against which the registration i
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_ITargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ITargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Please note the generic parameter constraints on this method: <em>TService</em> must have <em>TObject</em> as a base or interface
 in order for your code to compile.  Note that if you use the <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a> overload,
 then this is not the case.</p>

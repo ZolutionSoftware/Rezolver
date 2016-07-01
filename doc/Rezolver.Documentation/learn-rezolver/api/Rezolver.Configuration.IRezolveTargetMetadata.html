@@ -117,11 +117,11 @@ this metadata.  Note - this isn&#39;t always known, or always fixed, since confi
 will allow developers to avoid being specific about the types that are to be built.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITypeReference DeclaredType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -146,11 +146,11 @@ will allow developers to avoid being specific about the types that are to be bui
               <div class="markdown level1 summary"><p>The type of rezolve target that is expected to be produced from this metadata</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">RezolveTargetMetadataType Type { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -178,23 +178,23 @@ will allow developers to avoid being specific about the types that are to be bui
 This is invoked if <a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_DeclaredType">DeclaredType</a> represents the <a class="xref" href="Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_Unbound">Unbound</a> type reference.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IRezolveTargetMetadata Bind(params ITypeReference[] targetTypes)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td><em>targetTypes</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td><p>The target types.  Ideally there&#39;d only be one of these, but since type registrations
 can target multiple types - we need to be able to pass all of them.  An implementation should seek the best possible
 type from the array, although in practise - given that there&#39;s no ConfigurationAdapterContext to aid in the parsing
@@ -203,7 +203,7 @@ of the type names, the first type in the array is typically fine to use.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -229,38 +229,38 @@ of the type names, the first type in the array is typically fine to use.</p>
 If the <em>entry</em> is passed, then it indicates the configuration entry for which the targets are being built.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITarget CreateRezolveTarget(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span>[]</td>
                     <td><em>targetTypes</em></td>
+              	  <td><span class="xref">System.Type</span>[]</td>
                     <td><p>Required.  One or more target types that the returned target is expected to be compatible with (i.e.
 able to build an instance of). Generally, this will be the target types for the configuration entry that is passed in 
 <em>entry</em>.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td><p>The current context - provides access to the builder currently being constructed, as well as methods
 for resolving type names from <a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a> instances or strings (and more).</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><em>entry</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><p>If provided, this is a reference to the configuration entry (typically an <a class="xref" href="Rezolver.Configuration.ITypeRegistrationEntry.html#Rezolver_Configuration_ITypeRegistrationEntry">ITypeRegistrationEntry</a>)
 against which this target will be registered.
 Please note - this doesn&#39;t mean that the target that is returned will become the target of the registration.  It might be that the
@@ -269,7 +269,7 @@ target is one that is used by a parent target that will become the target of the
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

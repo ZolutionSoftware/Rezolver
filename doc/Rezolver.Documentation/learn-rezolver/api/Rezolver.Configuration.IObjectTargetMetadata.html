@@ -132,23 +132,23 @@ caller requests one of its registered types. The method can construct an object 
 called, or it can always return the same instance; this behaviour is implementation-dependant.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">object GetObject(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The type of object that is desired.  The implementation determines whether this
 parameter is required.  If it is, and you pass null, then an ArgumentNullException will be thrown.
 If you pass an argument, the implementation is not bound to check or honour the type.  Its purpose
@@ -157,7 +157,7 @@ is to provide a hint only, not a guarantee that the object returned is compatibl
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

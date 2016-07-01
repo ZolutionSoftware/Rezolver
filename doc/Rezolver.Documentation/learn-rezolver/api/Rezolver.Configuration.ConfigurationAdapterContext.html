@@ -147,36 +147,36 @@ might need also to extend this class to ensure any additional state you require 
               <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ConfigurationAdapterContext(IConfigurationAdapter adapter, IConfiguration configuration, IEnumerable&lt;Assembly&gt; defaultAssemblyReferences = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationAdapter.html#Rezolver_Configuration_IConfigurationAdapter">IConfigurationAdapter</a></td>
                     <td><em>adapter</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationAdapter.html#Rezolver_Configuration_IConfigurationAdapter">IConfigurationAdapter</a></td>
                     <td><p>The adapter that will create the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> from the configuration.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
                     <td><em>configuration</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
                     <td><p>Required. The configuration that is being processed by the adapter for which this
 context is being constructed</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Assembly</span>&gt;</td>
                     <td><em>defaultAssemblyReferences</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Assembly</span>&gt;</td>
                     <td><p>Optional. Default set of assemblies that are to be searched for types
 when type references are processed.</p>
 </td>
@@ -194,11 +194,11 @@ when type references are processed.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_Adapter" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.Adapter">Adapter</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IConfigurationAdapter Adapter { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -222,11 +222,11 @@ when type references are processed.</p>
               <div class="markdown level1 summary"><p>Gets the configuration that is being processed by the adapter that is working within this context.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IConfiguration Configuration { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -251,11 +251,11 @@ when type references are processed.</p>
               <div class="markdown level1 summary"><p>Retrieves the number of errors currently in the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_Errors">Errors</a> enumerable.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public int ErrorCount { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -281,11 +281,11 @@ are added while you are enumerating the enumerable returned by this property,
 no exception will occur, and the newly added items will not be included.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;IConfigurationError&gt; Errors { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -309,11 +309,11 @@ no exception will occur, and the newly added items will not be included.</p>
               <div class="markdown level1 summary"><p>Retrieves a snapshot of the instructions currently present in the context.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;RezolverBuilderInstruction&gt; Instructions { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -341,23 +341,23 @@ no exception will occur, and the newly added items will not be included.</p>
 for types that are not fully qualified.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void AddAssemblyReference(Assembly assembly)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Assembly</span></td>
                     <td><em>assembly</em></td>
+              	  <td><span class="xref">Assembly</span></td>
                     <td><p>Required - the assembly to be added as a reference.</p>
 </td>
                   </tr>
@@ -374,23 +374,23 @@ for types that are not fully qualified.</p>
 overload that accepts an Assembly reference.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public virtual void AddAssemblyReference(IAssemblyReferenceEntry entry)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IAssemblyReferenceEntry.html#Rezolver_Configuration_IAssemblyReferenceEntry">IAssemblyReferenceEntry</a></td>
                     <td><em>entry</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IAssemblyReferenceEntry.html#Rezolver_Configuration_IAssemblyReferenceEntry">IAssemblyReferenceEntry</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -405,23 +405,23 @@ overload that accepts an Assembly reference.</p>
 at least) with a null argument.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected virtual void AddAssemblyReferenceBase(Assembly assembly)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Assembly</span></td>
                     <td><em>assembly</em></td>
+              	  <td><span class="xref">Assembly</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -434,23 +434,23 @@ at least) with a null argument.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_AddAssemblyReferences_System_Collections_Generic_IEnumerable_Assembly__" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.AddAssemblyReferences(System.Collections.Generic.IEnumerable{Assembly})">AddAssemblyReferences(IEnumerable&lt;Assembly&gt;)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public virtual void AddAssemblyReferences(IEnumerable&lt;Assembly&gt; assemblies)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Assembly</span>&gt;</td>
                     <td><em>assemblies</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Assembly</span>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -463,23 +463,23 @@ at least) with a null argument.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_AddError_Rezolver_Configuration_IConfigurationError_" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.AddError(Rezolver.Configuration.IConfigurationError)">AddError(IConfigurationError)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void AddError(IConfigurationError error)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError">IConfigurationError</a></td>
                     <td><em>error</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError">IConfigurationError</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -492,23 +492,23 @@ at least) with a null argument.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_AddErrors_System_Collections_Generic_IEnumerable_Rezolver_Configuration_IConfigurationError__" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.AddErrors(System.Collections.Generic.IEnumerable{Rezolver.Configuration.IConfigurationError})">AddErrors(IEnumerable&lt;IConfigurationError&gt;)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void AddErrors(IEnumerable&lt;IConfigurationError&gt; errors)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError">IConfigurationError</a>&gt;</td>
                     <td><em>errors</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.IConfigurationError.html#Rezolver_Configuration_IConfigurationError">IConfigurationError</a>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -521,23 +521,23 @@ at least) with a null argument.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_AppendInstruction_Rezolver_Configuration_RezolverBuilderInstruction_" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.AppendInstruction(Rezolver.Configuration.RezolverBuilderInstruction)">AppendInstruction(RezolverBuilderInstruction)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void AppendInstruction(RezolverBuilderInstruction instruction)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td><em>instruction</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -550,28 +550,28 @@ at least) with a null argument.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_GetNamespacePrefixedTypeNames_System_String_" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.GetNamespacePrefixedTypeNames(System.String)">GetNamespacePrefixedTypeNames(String)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected IEnumerable&lt;string&gt; GetNamespacePrefixedTypeNames(string typeName)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.String</span></td>
                     <td><em>typeName</em></td>
+              	  <td><span class="xref">System.String</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -596,11 +596,11 @@ at least) with a null argument.</p>
 <p>This is used when resolving types.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;Assembly&gt; GetReferencedAssemblies()</code></pre>
               </div>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -626,11 +626,11 @@ imported for the configuration.  This is used, by default, to project a list of 
 to search for during type resolution.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected virtual IEnumerable&lt;string&gt; GetUsingNamespaces()</code></pre>
               </div>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -654,28 +654,28 @@ to search for during type resolution.</p>
               <div class="markdown level1 summary"><p>Allows for explicit ordering of instructions</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void InsertAfter(RezolverBuilderInstruction instruction, RezolverBuilderInstruction after)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td><em>instruction</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td><em>after</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -689,28 +689,28 @@ to search for during type resolution.</p>
               <div class="markdown level1 summary"><p>Allows for explicit ordering of instructions</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void InsertBefore(RezolverBuilderInstruction instruction, RezolverBuilderInstruction before)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td><em>instruction</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td><em>before</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -723,28 +723,28 @@ to search for during type resolution.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_InsertRangeAfter_System_Collections_Generic_IEnumerable_Rezolver_Configuration_RezolverBuilderInstruction__Rezolver_Configuration_RezolverBuilderInstruction_" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeAfter(System.Collections.Generic.IEnumerable{Rezolver.Configuration.RezolverBuilderInstruction},Rezolver.Configuration.RezolverBuilderInstruction)">InsertRangeAfter(IEnumerable&lt;RezolverBuilderInstruction&gt;, RezolverBuilderInstruction)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void InsertRangeAfter(IEnumerable&lt;RezolverBuilderInstruction&gt; instructions, RezolverBuilderInstruction after)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a>&gt;</td>
                     <td><em>instructions</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a>&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td><em>after</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -757,28 +757,28 @@ to search for during type resolution.</p>
               <h4 id="Rezolver_Configuration_ConfigurationAdapterContext_InsertRangeBefore_System_Collections_Generic_IEnumerable_Rezolver_Configuration_RezolverBuilderInstruction__Rezolver_Configuration_RezolverBuilderInstruction_" data-uid="Rezolver.Configuration.ConfigurationAdapterContext.InsertRangeBefore(System.Collections.Generic.IEnumerable{Rezolver.Configuration.RezolverBuilderInstruction},Rezolver.Configuration.RezolverBuilderInstruction)">InsertRangeBefore(IEnumerable&lt;RezolverBuilderInstruction&gt;, RezolverBuilderInstruction)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public void InsertRangeBefore(IEnumerable&lt;RezolverBuilderInstruction&gt; instructions, RezolverBuilderInstruction before)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a>&gt;</td>
                     <td><em>instructions</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a>&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td><em>before</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -794,29 +794,29 @@ to search for during type resolution.</p>
 configuration entries.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public virtual Type ResolveType(string typeName, int ? genericParameterCount = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.String</span></td>
                     <td><em>typeName</em></td>
+              	  <td><span class="xref">System.String</span></td>
                     <td><p>The typename </p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
                     <td><em>genericParameterCount</em></td>
+              	  <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
                     <td><p>Used as a hint when multiple versions of the same type exist with open generic parameters
 and potentially with no generic parameters.  Null means that either a generic or non-generic type can match. Zero means that
 only a non-generic type (or a closed generic type) can match.  Any other positive value means that only an open generic type
@@ -825,7 +825,7 @@ with that exact number of parameters can match.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -841,7 +841,7 @@ with that exact number of parameters can match.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -868,35 +868,35 @@ typically due to namespace imports being used and more than type being available
 <p>Errors are added to this context&#39;s <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext_Errors">Errors</a> if the method returns false.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public virtual bool TryParseTypeReference(ITypeReference typeReference, out Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a></td>
                     <td><em>typeReference</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a></td>
                     <td><p>The type reference.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The type that is identified, if successful.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -923,29 +923,29 @@ typically due to namespace imports being used and more than type being available
 is returned in the <em>types</em> output parameter.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public bool TryParseTypeReferences(IEnumerable&lt;ITypeReference&gt; typeReferences, out Type[] types)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>&gt;</td>
                     <td><em>typeReferences</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>&gt;</td>
                     <td><p>The type references.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span>[]</td>
                     <td><em>types</em></td>
+              	  <td><span class="xref">System.Type</span>[]</td>
                     <td><p>Receives the types that are parsed.  Note that if the method returns true, 
 then this list will contain the same number of types as there are references in <em>typeReferences</em>, in the same order.
 If the method returns false, however, then the number of results in this list is undefined and you will not be able to marry up the input
@@ -954,7 +954,7 @@ type reference to its output type.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

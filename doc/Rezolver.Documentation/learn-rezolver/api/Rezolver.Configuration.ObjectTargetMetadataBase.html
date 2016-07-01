@@ -159,7 +159,7 @@
               <h4 id="Rezolver_Configuration_ObjectTargetMetadataBase__ctor" data-uid="Rezolver.Configuration.ObjectTargetMetadataBase.#ctor">ObjectTargetMetadataBase()</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ObjectTargetMetadataBase()</code></pre>
               </div>
@@ -174,38 +174,38 @@
               <h4 id="Rezolver_Configuration_ObjectTargetMetadataBase_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_" data-uid="Rezolver.Configuration.ObjectTargetMetadataBase.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)">CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override ITarget CreateRezolveTargetBase(Type[] targetTypes, ConfigurationAdapterContext context, IConfigurationEntry entry)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span>[]</td>
                     <td><em>targetTypes</em></td>
+              	  <td><span class="xref">System.Type</span>[]</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td><em>entry</em></td>
+              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -220,7 +220,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_">CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -233,23 +233,23 @@ caller requests one of its registered types. The method can construct an object 
 called, or it can always return the same instance; this behaviour is implementation-dependant.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public abstract object GetObject(Type type)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>The type of object that is desired.  The implementation determines whether this
 parameter is required.  If it is, and you pass null, then an ArgumentNullException will be thrown.
 If you pass an argument, the implementation is not bound to check or honour the type.  Its purpose
@@ -258,7 +258,7 @@ is to provide a hint only, not a guarantee that the object returned is compatibl
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -274,7 +274,7 @@ is to provide a hint only, not a guarantee that the object returned is compatibl
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IObjectTargetMetadata.html#Rezolver_Configuration_IObjectTargetMetadata_GetObject_System_Type_">GetObject(Type)</a></div>
             </article>
           </div>

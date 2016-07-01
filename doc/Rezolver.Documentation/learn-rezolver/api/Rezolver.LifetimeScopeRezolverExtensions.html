@@ -142,43 +142,43 @@
               <h4 id="Rezolver_LifetimeScopeRezolverExtensions_GetOrAdd__1_Rezolver_IScopedContainer_Rezolver_RezolveContext_System_Func_Rezolver_RezolveContext___0__System_Boolean_" data-uid="Rezolver.LifetimeScopeRezolverExtensions.GetOrAdd``1(Rezolver.IScopedContainer,Rezolver.RezolveContext,System.Func{Rezolver.RezolveContext,``0},System.Boolean)">GetOrAdd&lt;T&gt;(IScopedContainer, RezolveContext, Func&lt;RezolveContext, T&gt;, Boolean)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static T GetOrAdd&lt;T&gt;(this IScopedContainer scope, RezolveContext context, Func&lt;RezolveContext, T&gt; factory, bool disposableOnly = true)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><em>scope</em></td>
+              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>, T&gt;</td>
                     <td><em>factory</em></td>
+              	  <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>, T&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>disposableOnly</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -217,29 +217,29 @@
               <div class="markdown level1 summary"><p>As the name suggests - this grabs the root scope for the scope on which this method is invoked.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static IScopedContainer GetScopeRoot(this IScopedContainer scope)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><em>scope</em></td>
+              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><p>The scope whose root scope is sought.  If null, then the method also returns null.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -268,37 +268,37 @@ with a RezolveContext matching the one passed.</p>
 <p>Note - if multiple matches are found in a single scope, an InvalidOperationException will be thrown.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static object GetSingleFromScope(this IScopedContainer scope, RezolveContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><em>scope</em></td>
+              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><p>Required.  The scope to be searched and optionally whose parent scopes
 are to be searched.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><p>Required.  The context whose properties will be used to find the
 matching disposable.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -325,33 +325,33 @@ and the instance is an IDiposable, then the object will be added to the scope.</
 produced from expression trees.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static T TrackIfScopedAndDisposableAndReturn&lt;T&gt;(this IScopedContainer scope, T instance)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><em>scope</em></td>
+              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">T</span></td>
                     <td><em>instance</em></td>
+              	  <td><span class="xref">T</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

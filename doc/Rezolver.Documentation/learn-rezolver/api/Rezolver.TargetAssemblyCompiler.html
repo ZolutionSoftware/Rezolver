@@ -146,7 +146,7 @@
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.TargetAssemblyCompiler.html#Rezolver_TargetAssemblyCompiler">TargetAssemblyCompiler</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public TargetAssemblyCompiler()</code></pre>
               </div>
@@ -159,29 +159,29 @@
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.TargetAssemblyCompiler.html#Rezolver_TargetAssemblyCompiler">TargetAssemblyCompiler</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public TargetAssemblyCompiler(AssemblyBuilder assemblyBuilder)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">AssemblyBuilder</span></td>
                     <td><em>assemblyBuilder</em></td>
+              	  <td><span class="xref">AssemblyBuilder</span></td>
                     <td><p>The assembly builder into which the dynamically generated code will be compiled.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -206,23 +206,23 @@
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.TargetAssemblyCompiler.html#Rezolver_TargetAssemblyCompiler">TargetAssemblyCompiler</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public TargetAssemblyCompiler(ModuleBuilder moduleBuilder)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">ModuleBuilder</span></td>
                     <td><em>moduleBuilder</em></td>
+              	  <td><span class="xref">ModuleBuilder</span></td>
                     <td><p>The module builder - if the assembly builder is already being used for something else 
 and you want the dynamic code for the rezolver to be compiled into a specific module within that assembly.</p>
 </td>
@@ -241,11 +241,11 @@ and you want the dynamic code for the rezolver to be compiled into a specific mo
               <div class="markdown level1 summary"><p>Gets the assembly builder whose dynamic assembly is receiving the dynamically generated code.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public AssemblyBuilder AssemblyBuilder { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -274,35 +274,35 @@ and you want the dynamic code for the rezolver to be compiled into a specific mo
 create/obtain the object(s) it produces.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ICompiledTarget CompileTarget(ITarget target, CompileContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>The target to be compiled.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The current compilation context.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -318,7 +318,7 @@ create/obtain the object(s) it produces.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
+              <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_CompileContext_">CompileTarget(ITarget, CompileContext)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -330,35 +330,35 @@ create/obtain the object(s) it produces.</p>
 with the supplied access settings (e.g. if you want to be able to save the assembly).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static AssemblyBuilder CreateAssemblyBuilder(AssemblyBuilderAccess assemblyBuilderAccess = null, string dir = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">AssemblyBuilderAccess</span></td>
                     <td><em>assemblyBuilderAccess</em></td>
+              	  <td><span class="xref">AssemblyBuilderAccess</span></td>
                     <td><p>The assembly builder access.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.String</span></td>
                     <td><em>dir</em></td>
+              	  <td><span class="xref">System.String</span></td>
                     <td><p>If supplied, then it&#39;s the base directory that will be used when saving the dynamic dll.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

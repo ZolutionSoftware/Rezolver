@@ -162,35 +162,35 @@ enabled, then scope tracking behaves exactly the same as <a class="xref" href="R
               <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.ObjectTarget.html#Rezolver_ObjectTarget">ObjectTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ObjectTarget(object obj, Type declaredType = null, bool suppressScopeTracking = true)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Object</span></td>
                     <td><em>obj</em></td>
+              	  <td><span class="xref">System.Object</span></td>
                     <td><p>The object to be returned by this target when resolved.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>declaredType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Optional.  The declared type of this target, if different from the absolute type of the <em>obj</em></p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>suppressScopeTracking</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td><p>Optional.  Controls whether the instance will be added to a scope when resolved.  If true (the default) then
 no scope tracking is performed, and you will have to dispose of the object, if disposable.  If false, then the object will be tracked by the 
 ROOT scope of the first scope the object is resolved from.</p>
@@ -198,7 +198,7 @@ ROOT scope of the first scope the object is resolved from.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_ObjectTarget__ctor_System_Object_System_Type_System_Boolean__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ObjectTarget__ctor_System_Object_System_Type_System_Boolean__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Please note - if you enable scope tracking, but the object is never resolved, then the object will not be disposed and you will need
 to ensure you dispose of it.</p>
 </div>
@@ -213,11 +213,11 @@ to ensure you dispose of it.</p>
               <h4 id="Rezolver_ObjectTarget_DeclaredType" data-uid="Rezolver.ObjectTarget.DeclaredType">DeclaredType</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -232,7 +232,7 @@ to ensure you dispose of it.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">DeclaredType</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -242,11 +242,11 @@ to ensure you dispose of it.</p>
               <h4 id="Rezolver_ObjectTarget_SuppressScopeTracking" data-uid="Rezolver.ObjectTarget.SuppressScopeTracking">SuppressScopeTracking</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override bool SuppressScopeTracking { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -261,7 +261,7 @@ to ensure you dispose of it.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">SuppressScopeTracking</a></div>
               <hr>
               <h3 id="methods">Methods
@@ -274,28 +274,28 @@ to ensure you dispose of it.</p>
               <h4 id="Rezolver_ObjectTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ObjectTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -310,7 +310,7 @@ to ensure you dispose of it.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -320,33 +320,33 @@ to ensure you dispose of it.</p>
               <h4 id="Rezolver_ObjectTarget_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.ObjectTarget.CreateScopeSelectionExpression(Rezolver.CompileContext,Expression)">CreateScopeSelectionExpression(CompileContext, Expression)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override Expression CreateScopeSelectionExpression(CompileContext context, Expression expression)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
                     <td><em>expression</em></td>
+              	  <td><span class="xref">Expression</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -361,7 +361,7 @@ to ensure you dispose of it.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">CreateScopeSelectionExpression(CompileContext, Expression)</a></div>
             </article>
           </div>

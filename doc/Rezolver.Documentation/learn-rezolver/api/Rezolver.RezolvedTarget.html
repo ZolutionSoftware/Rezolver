@@ -180,29 +180,29 @@ resolve a value at compile time and/or resolve-time and, if it can&#39;t, will e
 or will throw an exception.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public RezolvedTarget(Type type, ITarget fallbackTarget = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>type</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Required.  The type to be resolved</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>fallbackTarget</em></td>
+              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>Optional.  The target to be used if the value cannot be resolved at either compile time or 
 resolve-time.</p>
 </td>
@@ -221,11 +221,11 @@ resolve-time.</p>
               <div class="markdown level1 summary"><p>The type that will be resolved</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -240,7 +240,7 @@ resolve-time.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">DeclaredType</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -252,11 +252,11 @@ resolve-time.</p>
 at compile time.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ITarget FallbackTarget { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -271,7 +271,7 @@ at compile time.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_RezolvedTarget_FallbackTarget_remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_RezolvedTarget_FallbackTarget_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property is also used to determine whether this will be 
 used.  If the target resolved from the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a> has its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a>
 property set to true, and this property is non-null for this target, then this target will be used.</p>
@@ -287,11 +287,11 @@ the use of this fallback if they successfully resolve the type.</p>
               <div class="markdown level1 summary"><p>Always returns true - we never wrap calls to a rezolver inside a scope tracking expression.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override bool SuppressScopeTracking { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -306,7 +306,7 @@ the use of this fallback if they successfully resolve the type.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">SuppressScopeTracking</a></div>
               <hr>
               <h3 id="methods">Methods
@@ -321,28 +321,28 @@ the use of this fallback if they successfully resolve the type.</p>
 Constructs the expression.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -357,7 +357,7 @@ Constructs the expression.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -371,29 +371,29 @@ checking of RezolvedTargets to see if they&#39;ll succeed at compile time (usefu
 for example).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public virtual ITarget Resolve(CompileContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The context from which a target is to be resolved.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -409,7 +409,7 @@ for example).</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_RezolvedTarget_Resolve_Rezolver_CompileContext__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_RezolvedTarget_Resolve_Rezolver_CompileContext__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The target that is returned depends both on the <em>context</em> passed and also whether 
 a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_FallbackTarget">FallbackTarget</a> has been provided to this target.</p>
 </div>

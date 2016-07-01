@@ -120,11 +120,11 @@
               <div class="markdown level1 summary"><p>Gets a value indicating whether this <span class="xref">Newtonsoft.Json.JsonConverter</span> can write JSON.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override bool CanWrite { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -152,29 +152,29 @@
               <div class="markdown level1 summary"><p>Determines whether this instance can convert the specified object type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override bool CanConvert(Type objectType)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>objectType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Type of the object.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -199,47 +199,47 @@
               <div class="markdown level1 summary"><p>Reads the JSON representation of the object.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">JsonReader</span></td>
                     <td><em>reader</em></td>
+              	  <td><span class="xref">JsonReader</span></td>
                     <td><p>The <span class="xref">Newtonsoft.Json.JsonReader</span> to read from.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>objectType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Type of the object.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Object</span></td>
                     <td><em>existingValue</em></td>
+              	  <td><span class="xref">System.Object</span></td>
                     <td><p>The existing value of object being read.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">JsonSerializer</span></td>
                     <td><em>serializer</em></td>
+              	  <td><span class="xref">JsonSerializer</span></td>
                     <td><p>The calling serializer.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -264,41 +264,41 @@
               <div class="markdown level1 summary"><p>Writes the JSON representation of the object.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">JsonWriter</span></td>
                     <td><em>writer</em></td>
+              	  <td><span class="xref">JsonWriter</span></td>
                     <td><p>The <span class="xref">Newtonsoft.Json.JsonWriter</span> to write to.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Object</span></td>
                     <td><em>value</em></td>
+              	  <td><span class="xref">System.Object</span></td>
                     <td><p>The value.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">JsonSerializer</span></td>
                     <td><em>serializer</em></td>
+              	  <td><span class="xref">JsonSerializer</span></td>
                     <td><p>The calling serializer.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>

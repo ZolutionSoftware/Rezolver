@@ -171,41 +171,41 @@ targets that will contribute each element of your list/array.</p>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public ListTarget(Type elementType, IEnumerable&lt;ITarget&gt; items, bool asArray = false)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
                     <td><em>elementType</em></td>
+              	  <td><span class="xref">System.Type</span></td>
                     <td><p>Required. Type of the elements in the array or list.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><em>items</em></td>
+              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><p>Required. The targets that will create each the individual items.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>asArray</em></td>
+              	  <td><span class="xref">System.Boolean</span></td>
                     <td><p>A boolean indicating whether the target will build an array (<code>true</code>) or a list (<code>false</code>).</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -242,11 +242,11 @@ All targets in the items enumerable must support the element type <em>elementTyp
               <div class="markdown level1 summary"><p>Gets a value indicating whether the target will build an array (<code>true</code>) or a list (<code>false</code>).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public bool AsArray { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -271,11 +271,11 @@ All targets in the items enumerable must support the element type <em>elementTyp
 or <span class="xref">List<t></t></span> with <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_ElementType">ElementType</a> as the generic parameter.  This is controlled by the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> property.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -290,7 +290,7 @@ or <span class="xref">List<t></t></span> with <a class="xref" href="Rezolver.Lis
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">DeclaredType</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -303,11 +303,11 @@ or <span class="xref">List<t></t></span> with <a class="xref" href="Rezolver.Lis
 depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a>.<p>
 </elementtype></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public Type ElementType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -332,11 +332,11 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
               <div class="markdown level1 summary"><p>Gets the rezolve targets that will build each individual item in the resulting list or array.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; Items { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -361,11 +361,11 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
               <div class="markdown level1 summary"><p>Returns true if the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_Items">Items</a> enumerable is empty.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override bool UseFallback { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -380,7 +380,7 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">UseFallback</a></div>
               <hr>
               <h3 id="methods">Methods
@@ -395,29 +395,29 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
 depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The current compile context</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -433,7 +433,7 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a></div>
             </article>
           </div>

@@ -182,36 +182,36 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               <h4 id="Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">OverridingContainer(IContainer, ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public OverridingContainer(IContainer inner, ITargetContainer builder = null, ITargetCompiler compiler = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><em>inner</em></td>
+              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>Required.  The inner rezolver that this one combines with.  Any dependencies not served
 by the new combined rezolver&#39;s own registry will be sought from this rezolver.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>builder</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>Optional. A specific builder to be used for this rezolver&#39;s own registrations.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
                     <td><em>compiler</em></td>
+              	  <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
                     <td><p>Optional. A compiler to be used to create <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> instances
 from this rezolver&#39;s registrations.  If this is not provided, then the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Compiler">Compiler</a> of the
 <em>inner</em> rezolver will be used.</p>
@@ -231,29 +231,29 @@ from this rezolver&#39;s registrations.  If this is not provided, then the <a cl
               <div class="markdown level1 summary"><p>Called to determine if this rezolver is able to resolve the type specified in the passed <em>context</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public override bool CanResolve(RezolveContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><p>Required.  The <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -268,7 +268,7 @@ from this rezolver&#39;s registrations.  If this is not provided, then the <a cl
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_RezolveContext_">CanResolve(RezolveContext)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -280,29 +280,29 @@ from this rezolver&#39;s registrations.  If this is not provided, then the <a cl
 is how dependency chaining from this rezolver to the inner rezolver is achieved.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected override ICompiledTarget GetFallbackCompiledRezolveTarget(RezolveContext context)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><em>context</em></td>
+              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><p>Required.  The <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="returns">Returns</h5>
+              <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -317,7 +317,7 @@ is how dependency chaining from this rezolver to the inner rezolver is achieved.
                   </tr>
                 </tbody>
               </table>
-              <h5 class="overrides">Overrides</h5>
+              <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_">GetFallbackCompiledRezolveTarget(RezolveContext)</a></div>
             </article>
           </div>

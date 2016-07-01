@@ -48,6 +48,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -57,6 +61,30 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -89,6 +117,7 @@
     <Content Include="favicon-32x32.png" />
     <Content Include="favicon-96x96.png" />
     <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
     <Content Include="Gruntfile.js" />
     <Content Include="learn-rezolver\.manifest" />
     <Content Include="learn-rezolver\api\index.html" />
@@ -261,9 +290,85 @@
     <None Include="packages.config" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
+    <Content Include="styles\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="styles\site.css" />
     <Content Include="styles\site.debug.css" />
     <Content Include="styles\site.less" />
+    <Content Include="styles\bootstrap\alerts.less" />
+    <Content Include="styles\bootstrap\badges.less" />
+    <Content Include="styles\bootstrap\bootstrap.less" />
+    <Content Include="styles\bootstrap\breadcrumbs.less" />
+    <Content Include="styles\bootstrap\button-groups.less" />
+    <Content Include="styles\bootstrap\buttons.less" />
+    <Content Include="styles\bootstrap\carousel.less" />
+    <Content Include="styles\bootstrap\close.less" />
+    <Content Include="styles\bootstrap\code.less" />
+    <Content Include="styles\bootstrap\component-animations.less" />
+    <Content Include="styles\bootstrap\dropdowns.less" />
+    <Content Include="styles\bootstrap\forms.less" />
+    <Content Include="styles\bootstrap\glyphicons.less" />
+    <Content Include="styles\bootstrap\grid.less" />
+    <Content Include="styles\bootstrap\input-groups.less" />
+    <Content Include="styles\bootstrap\jumbotron.less" />
+    <Content Include="styles\bootstrap\labels.less" />
+    <Content Include="styles\bootstrap\list-group.less" />
+    <Content Include="styles\bootstrap\media.less" />
+    <Content Include="styles\bootstrap\mixins.less" />
+    <Content Include="styles\bootstrap\mixins\alerts.less" />
+    <Content Include="styles\bootstrap\mixins\background-variant.less" />
+    <Content Include="styles\bootstrap\mixins\border-radius.less" />
+    <Content Include="styles\bootstrap\mixins\buttons.less" />
+    <Content Include="styles\bootstrap\mixins\center-block.less" />
+    <Content Include="styles\bootstrap\mixins\clearfix.less" />
+    <Content Include="styles\bootstrap\mixins\forms.less" />
+    <Content Include="styles\bootstrap\mixins\gradients.less" />
+    <Content Include="styles\bootstrap\mixins\grid-framework.less" />
+    <Content Include="styles\bootstrap\mixins\grid.less" />
+    <Content Include="styles\bootstrap\mixins\hide-text.less" />
+    <Content Include="styles\bootstrap\mixins\image.less" />
+    <Content Include="styles\bootstrap\mixins\labels.less" />
+    <Content Include="styles\bootstrap\mixins\list-group.less" />
+    <Content Include="styles\bootstrap\mixins\nav-divider.less" />
+    <Content Include="styles\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="styles\bootstrap\mixins\opacity.less" />
+    <Content Include="styles\bootstrap\mixins\pagination.less" />
+    <Content Include="styles\bootstrap\mixins\panels.less" />
+    <Content Include="styles\bootstrap\mixins\progress-bar.less" />
+    <Content Include="styles\bootstrap\mixins\reset-filter.less" />
+    <Content Include="styles\bootstrap\mixins\reset-text.less" />
+    <Content Include="styles\bootstrap\mixins\resize.less" />
+    <Content Include="styles\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="styles\bootstrap\mixins\size.less" />
+    <Content Include="styles\bootstrap\mixins\tab-focus.less" />
+    <Content Include="styles\bootstrap\mixins\table-row.less" />
+    <Content Include="styles\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="styles\bootstrap\mixins\text-overflow.less" />
+    <Content Include="styles\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="styles\bootstrap\modals.less" />
+    <Content Include="styles\bootstrap\navbar.less" />
+    <Content Include="styles\bootstrap\navs.less" />
+    <Content Include="styles\bootstrap\normalize.less" />
+    <Content Include="styles\bootstrap\pager.less" />
+    <Content Include="styles\bootstrap\pagination.less" />
+    <Content Include="styles\bootstrap\panels.less" />
+    <Content Include="styles\bootstrap\popovers.less" />
+    <Content Include="styles\bootstrap\print.less" />
+    <Content Include="styles\bootstrap\progress-bars.less" />
+    <Content Include="styles\bootstrap\responsive-embed.less" />
+    <Content Include="styles\bootstrap\responsive-utilities.less" />
+    <Content Include="styles\bootstrap\scaffolding.less" />
+    <Content Include="styles\bootstrap\tables.less" />
+    <Content Include="styles\bootstrap\theme.less" />
+    <Content Include="styles\bootstrap\thumbnails.less" />
+    <Content Include="styles\bootstrap\tooltip.less" />
+    <Content Include="styles\bootstrap\type.less" />
+    <Content Include="styles\bootstrap\utilities.less" />
+    <Content Include="styles\bootstrap\variables.less" />
+    <Content Include="styles\bootstrap\wells.less" />
+    <Content Include="styles\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="styles\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="styles\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="styles\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="styles\site.css.map" />
     <Content Include="styles\site.debug.css.map" />
     <None Include="toc.yml" />
@@ -294,10 +399,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EmptyClass.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
