@@ -10,39 +10,39 @@ using System.Reflection;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// </summary>
-	public class Container : CachingContainerBase
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="builder"></param>
-		/// <param name="compiler"></param>
-		/// <param name="registerToBuilder"></param>
-		public Container(ITargetContainer builder = null, ITargetCompiler compiler = null, bool registerToBuilder = true)
-		{
-			_builder = builder ?? new Builder();
-			_compiler = compiler;
-			//auto-register this instance to the underlying builder.  This is so that framework-style components that
-			//need to use dependency resolving instead of so-called 'pure' IOC can do so
-			if(registerToBuilder)
-			{
-				_builder.Register(this.AsObjectTarget(), typeof(IContainer));
-			}
-		}
+  /// <summary>
+  /// </summary>
+  public class Container : CachingContainerBase
+  {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="compiler"></param>
+    /// <param name="registerToBuilder"></param>
+    public Container(ITargetContainer builder = null, ITargetCompiler compiler = null, bool registerToBuilder = true)
+    {
+      _builder = builder ?? new Builder();
+      _compiler = compiler;
+      //auto-register this instance to the underlying builder.  This is so that framework-style components that
+      //need to use dependency resolving instead of so-called 'pure' IOC can do so
+      if (registerToBuilder)
+      {
+        _builder.Register(this.AsObjectTarget(), typeof(IContainer));
+      }
+    }
 
-		private ITargetCompiler _compiler;
-		public override ITargetCompiler Compiler
-		{
-			get { return _compiler ?? TargetCompiler.Default; }
-		}
+    private ITargetCompiler _compiler;
+    public override ITargetCompiler Compiler
+    {
+      get { return _compiler ?? TargetCompiler.Default; }
+    }
 
-		private ITargetContainer _builder;
-		public override ITargetContainer Builder
-		{
-			get { return _builder; }
-		}
+    private ITargetContainer _builder;
+    public override ITargetContainer Builder
+    {
+      get { return _builder; }
+    }
 
-	}
+  }
 }

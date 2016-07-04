@@ -9,8 +9,8 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-	public interface IRezolveTargetMetadataExtension : IRezolveTargetMetadata
-	{
-		string ExtensionType { get; }
-	}
+  public interface IRezolveTargetMetadataExtension : IRezolveTargetMetadata
+  {
+    string ExtensionType { get; }
+  }
 }

@@ -8,19 +8,19 @@ using System.Linq.Expressions;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// An object that produces <see cref="ICompiledTarget"/>s from <see cref="ITarget"/>s given a 
+  /// <summary>
+  /// An object that produces <see cref="ICompiledTarget"/>s from <see cref="ITarget"/>s given a 
   /// particular <see cref="CompileContext"/>.
-	/// </summary>
-	public interface ITargetCompiler
-	{
-		/// <summary>
-		/// Create the <see cref="ICompiledTarget"/> for the given <paramref name="target"/> using the <paramref name="context"/>
+  /// </summary>
+  public interface ITargetCompiler
+  {
+    /// <summary>
+    /// Create the <see cref="ICompiledTarget"/> for the given <paramref name="target"/> using the <paramref name="context"/>
     /// to inform the type of object that is to be built, and for compile-time dependency resolution.
-		/// </summary>
-		/// <param name="target">Required.  The target to be compiled.</param>
-		/// <param name="context">Required.  The current compilation context.</param>
-		/// <returns>A compiled target which can then be used to get produce objects represented by the <paramref name="target"/>.</returns>
-		ICompiledTarget CompileTarget(ITarget target, CompileContext context);
-	}
+    /// </summary>
+    /// <param name="target">Required.  The target to be compiled.</param>
+    /// <param name="context">Required.  The current compilation context.</param>
+    /// <returns>A compiled target which can then be used to get produce objects represented by the <paramref name="target"/>.</returns>
+    ICompiledTarget CompileTarget(ITarget target, CompileContext context);
+  }
 }

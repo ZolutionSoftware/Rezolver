@@ -1,6 +1,6 @@
 ﻿namespace Rezolver.Tests
 {
-	internal class builder
-	{
-	}
+  internal class builder
+  {
+  }
 }

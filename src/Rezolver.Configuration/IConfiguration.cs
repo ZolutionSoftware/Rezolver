@@ -9,9 +9,9 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-	public interface IConfiguration
-	{
-		string FileName { get; }
-		IEnumerable<IConfigurationEntry> Entries { get; }
-	}
+  public interface IConfiguration
+  {
+    string FileName { get; }
+    IEnumerable<IConfigurationEntry> Entries { get; }
+  }
 }

@@ -12,119 +12,119 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Rezolver.Microsoft.Extensions.DependencyInjection
 {
-	// This project can output the Class library as a NuGet Package.
-	// To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
-	public static class RezolverRegistration
-	{
-		private class RezolverScope : IServiceScope
-		{
-			public IServiceProvider ServiceProvider
-			{
-				get
-				{
-					return _rezolver;
-				}
-			}
+  // This project can output the Class library as a NuGet Package.
+  // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
+  public static class RezolverRegistration
+  {
+    private class RezolverScope : IServiceScope
+    {
+      public IServiceProvider ServiceProvider
+      {
+        get
+        {
+          return _rezolver;
+        }
+      }
 
-			public void Dispose()
-			{
-				_rezolver.Dispose();
-			}
+      public void Dispose()
+      {
+        _rezolver.Dispose();
+      }
 
-			private IScopedContainer _rezolver;
+      private IScopedContainer _rezolver;
 
-			public RezolverScope(IScopedContainer rezolver)
-			{
-				_rezolver = rezolver;
-			}
-		}
-		private class RezolverScopeFactory : IServiceScopeFactory
-		{
-			private IContainer _rezolver;
-			public RezolverScopeFactory(IContainer rezolver)
-			{
-				_rezolver = rezolver;
-			}
+      public RezolverScope(IScopedContainer rezolver)
+      {
+        _rezolver = rezolver;
+      }
+    }
+    private class RezolverScopeFactory : IServiceScopeFactory
+    {
+      private IContainer _rezolver;
+      public RezolverScopeFactory(IContainer rezolver)
+      {
+        _rezolver = rezolver;
+      }
 
-			public IServiceScope CreateScope()
-			{
-				return new RezolverScope(_rezolver.CreateLifetimeScope());
-			}
-		}
+      public IServiceScope CreateScope()
+      {
+        return new RezolverScope(_rezolver.CreateLifetimeScope());
+      }
+    }
 
-		public static IContainer CreateDefaultRezolver(ITargetContainer builder)
-		{
+    public static IContainer CreateDefaultRezolver(ITargetContainer builder)
+    {
 #if DOTNET
 			var compiler = new TargetDelegateCompiler();
 #else
-			var compiler = new TargetAssemblyCompiler();
+      var compiler = new TargetAssemblyCompiler();
 #endif
-			return new Container(builder, compiler);
-		}
+      return new Container(builder, compiler);
+    }
 
-		public static IServiceProvider Populate(this IContainer rezolver, IServiceCollection services)
-		{
-			if (rezolver == null) throw new ArgumentNullException(nameof(rezolver));
+    public static IServiceProvider Populate(this IContainer rezolver, IServiceCollection services)
+    {
+      if (rezolver == null) throw new ArgumentNullException(nameof(rezolver));
 
-			//register service provider
-			rezolver.RegisterExpression(context => context.Rezolver, typeof(IServiceProvider));
-			//register scope factory - uses the rezolver that comes in the context.
-			rezolver.RegisterExpression(context => new RezolverScopeFactory(context.Rezolver), typeof(IServiceScopeFactory));
+      //register service provider
+      rezolver.RegisterExpression(context => context.Rezolver, typeof(IServiceProvider));
+      //register scope factory - uses the rezolver that comes in the context.
+      rezolver.RegisterExpression(context => new RezolverScopeFactory(context.Rezolver), typeof(IServiceScopeFactory));
 
-			foreach (var group in services.GroupBy(s => s.ServiceType))
-			{
-				var toRegister = group.Select(s => CreateTargetFromService(s, rezolver)).Where(t => t != null).ToArray();
+      foreach (var group in services.GroupBy(s => s.ServiceType))
+      {
+        var toRegister = group.Select(s => CreateTargetFromService(s, rezolver)).Where(t => t != null).ToArray();
 
-				if (toRegister.Length == 1)
-					rezolver.Register(toRegister[0], group.Key);
-				else if (toRegister.Length > 1)
-					rezolver.RegisterMultiple(toRegister, group.Key);
-			}
+        if (toRegister.Length == 1)
+          rezolver.Register(toRegister[0], group.Key);
+        else if (toRegister.Length > 1)
+          rezolver.RegisterMultiple(toRegister, group.Key);
+      }
 
-			return rezolver;
-		}
+      return rezolver;
+    }
 
-		private static ITarget CreateTargetFromService(ServiceDescriptor service, IContainer rezolver)
-		{
-			ITarget target = null;
-			//three main types of service registration - delegate factory, 
-			if (service.ImplementationType != null)
-			{
-				if (service.ImplementationType.GetTypeInfo().IsGenericTypeDefinition)
-				{
-					target = GenericConstructorTarget.Auto(service.ImplementationType);
-				}
-				else
-				{
-					target = ConstructorTarget.Auto(service.ImplementationType);
-				}
-			}
-			else if (service.ImplementationInstance != null)
-			{
-				target = new ObjectTarget(service.ImplementationInstance, service.ServiceType);
-			}
-			else if (service.ImplementationFactory != null)
-			{
-				//not ideal - need ability to provide a delegate that accepts a rezolve context
-				//as a parameter that can then be fed on to the delegate, that way we can ensure that
-				//any scoping is honoured.
-				target = new DelegateTarget<object>(() => service.ImplementationFactory(rezolver), service.ServiceType);
-			}
+    private static ITarget CreateTargetFromService(ServiceDescriptor service, IContainer rezolver)
+    {
+      ITarget target = null;
+      //three main types of service registration - delegate factory, 
+      if (service.ImplementationType != null)
+      {
+        if (service.ImplementationType.GetTypeInfo().IsGenericTypeDefinition)
+        {
+          target = GenericConstructorTarget.Auto(service.ImplementationType);
+        }
+        else
+        {
+          target = ConstructorTarget.Auto(service.ImplementationType);
+        }
+      }
+      else if (service.ImplementationInstance != null)
+      {
+        target = new ObjectTarget(service.ImplementationInstance, service.ServiceType);
+      }
+      else if (service.ImplementationFactory != null)
+      {
+        //not ideal - need ability to provide a delegate that accepts a rezolve context
+        //as a parameter that can then be fed on to the delegate, that way we can ensure that
+        //any scoping is honoured.
+        target = new DelegateTarget<object>(() => service.ImplementationFactory(rezolver), service.ServiceType);
+      }
 
-			if (target != null)
-			{
-				switch (service.Lifetime)
-				{
-					case ServiceLifetime.Singleton:
-						target = new SingletonTarget(target);
-						break;
-					case ServiceLifetime.Scoped:
-						target = new ScopedTarget(target);
-						break;
-				}
-			}
+      if (target != null)
+      {
+        switch (service.Lifetime)
+        {
+          case ServiceLifetime.Singleton:
+            target = new SingletonTarget(target);
+            break;
+          case ServiceLifetime.Scoped:
+            target = new ScopedTarget(target);
+            break;
+        }
+      }
 
-			return target;
-		}
-	}
+      return target;
+    }
+  }
 }

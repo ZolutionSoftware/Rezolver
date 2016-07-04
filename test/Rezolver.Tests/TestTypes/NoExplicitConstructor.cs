@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	public class NoExplicitConstructor
-	{
-		public int Value { get; protected set; }
-	}
+  public class NoExplicitConstructor
+  {
+    public int Value { get; protected set; }
+  }
 }

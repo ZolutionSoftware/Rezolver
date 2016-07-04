@@ -9,8 +9,8 @@ using System.Text;
 
 namespace Rezolver.Configuration
 {
-	public interface IConfigurationExtensionEntry : IConfigurationEntry
-	{
-		string ExtensionType { get; }
-	}
+  public interface IConfigurationExtensionEntry : IConfigurationEntry
+  {
+    string ExtensionType { get; }
+  }
 }

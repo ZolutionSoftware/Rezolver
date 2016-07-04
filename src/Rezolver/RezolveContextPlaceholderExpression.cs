@@ -10,48 +10,48 @@ using System.Text;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// wraps an expression that represents reading or otherwise manipulating the RezolveContext that's passed
-	/// into a Resolve call.
-	/// </summary>
-	public class RezolveContextPlaceholderExpression : Expression
-	{
-		private Expression _rezolveContextExpression;
+  /// <summary>
+  /// wraps an expression that represents reading or otherwise manipulating the RezolveContext that's passed
+  /// into a Resolve call.
+  /// </summary>
+  public class RezolveContextPlaceholderExpression : Expression
+  {
+    private Expression _rezolveContextExpression;
 
-		public Expression RezolveContextExpression
-		{
-			get
-			{
-				return _rezolveContextExpression;
-			}
-		}
+    public Expression RezolveContextExpression
+    {
+      get
+      {
+        return _rezolveContextExpression;
+      }
+    }
 
-		public RezolveContextPlaceholderExpression(Expression rezolveContextExpression)
-		{
-			_rezolveContextExpression = rezolveContextExpression;
-		}
+    public RezolveContextPlaceholderExpression(Expression rezolveContextExpression)
+    {
+      _rezolveContextExpression = rezolveContextExpression;
+    }
 
-		public override bool CanReduce
-		{
-			get
-			{
-				return true;
-			}
-		}
-		public override ExpressionType NodeType
-		{
-			get
-			{
-				return ExpressionType.Extension;
-			}
-		}
+    public override bool CanReduce
+    {
+      get
+      {
+        return true;
+      }
+    }
+    public override ExpressionType NodeType
+    {
+      get
+      {
+        return ExpressionType.Extension;
+      }
+    }
 
-		public override Type Type
-		{
-			get
-			{
-				return typeof(RezolveContext);
-			}
-		}
-	}
+    public override Type Type
+    {
+      get
+      {
+        return typeof(RezolveContext);
+      }
+    }
+  }
 }

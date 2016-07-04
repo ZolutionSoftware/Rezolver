@@ -12,14 +12,14 @@ using Rezolver;
 namespace System.Linq.Expressions
 // ReSharper restore CheckNamespace
 {
-	public static class ExpressionExtensions
-	{
+  public static class ExpressionExtensions
+  {
 
-		public static ITarget AsRezolveTarget(this Expression expression, ITargetAdapter adapter = null)
-		{
-			throw new NotImplementedException();
+    public static ITarget AsRezolveTarget(this Expression expression, ITargetAdapter adapter = null)
+    {
+      throw new NotImplementedException();
 
-		}
+    }
 
-	}
+  }
 }

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	public class GenericHandler<T> : IHandler<T>
-	{
-		public string Handle(T t)
-		{
-			return $"This is a {typeof(T)}: {t}";
-		}
-	}
+  public class GenericHandler<T> : IHandler<T>
+  {
+    public string Handle(T t)
+    {
+      return $"This is a {typeof(T)}: {t}";
+    }
+  }
 }

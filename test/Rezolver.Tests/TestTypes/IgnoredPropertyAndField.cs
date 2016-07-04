@@ -5,25 +5,25 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	public class IgnoredPropertyAndField
-	{
-		private int IgnoredField;
-		public int GetIgnoredField()
-		{
-			return IgnoredField;
-		}
+  public class IgnoredPropertyAndField
+  {
+    private int IgnoredField;
+    public int GetIgnoredField()
+    {
+      return IgnoredField;
+    }
 
-		private int _ignoredProperty1;
-		//ignorede as it's readonly
-		public int IgnoredProperty1 { get { return _ignoredProperty1; } }
+    private int _ignoredProperty1;
+    //ignorede as it's readonly
+    public int IgnoredProperty1 { get { return _ignoredProperty1; } }
 
-		public int IgnoredProperty2 { get; private set; }
+    public int IgnoredProperty2 { get; private set; }
 
-		public IgnoredPropertyAndField()
-		{
-			IgnoredField = 1;
-			_ignoredProperty1 = 2;
-			IgnoredProperty2 = 3;
-		}
-	}
+    public IgnoredPropertyAndField()
+    {
+      IgnoredField = 1;
+      _ignoredProperty1 = 2;
+      IgnoredProperty2 = 3;
+    }
+  }
 }

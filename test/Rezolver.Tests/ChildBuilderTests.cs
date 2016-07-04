@@ -6,23 +6,24 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-    public class ChildBuilderTests
+  public class ChildBuilderTests
+  {
+    [Fact]
+    public void MustNotAllowNullParent()
     {
-		[Fact]
-		public void MustNotAllowNullParent()
-		{
-			Assert.Throws<ArgumentNullException>(() => {
-				IChildTargetContainer builder = new ChildBuilder(null);
-			});
-		}
+      Assert.Throws<ArgumentNullException>(() =>
+      {
+        IChildTargetContainer builder = new ChildBuilder(null);
+      });
+    }
 
-		[Fact]
-		public void MustCopyParent()
-		{
-			var parent = new Builder();
-			IChildTargetContainer childBuilder = new ChildBuilder(parent);
-			Assert.Same(parent, childBuilder.Parent);
-		}
+    [Fact]
+    public void MustCopyParent()
+    {
+      var parent = new Builder();
+      IChildTargetContainer childBuilder = new ChildBuilder(parent);
+      Assert.Same(parent, childBuilder.Parent);
+    }
 
-	}
+  }
 }

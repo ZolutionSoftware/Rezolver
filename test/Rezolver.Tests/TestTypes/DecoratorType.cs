@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	public class DecoratorType : IDecorated
-	{
-		private readonly IDecorated _inner;
+  public class DecoratorType : IDecorated
+  {
+    private readonly IDecorated _inner;
 
-		public DecoratorType(IDecorated inner)
-		{
-			_inner = inner;
-		}
+    public DecoratorType(IDecorated inner)
+    {
+      _inner = inner;
+    }
 
-		public string DoSomething()
-		{
-			return _inner.DoSomething() + " World";
-		}
-	}
+    public string DoSomething()
+    {
+      return _inner.DoSomething() + " World";
+    }
+  }
 }

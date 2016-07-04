@@ -10,8 +10,8 @@ using Xunit;
 namespace Rezolver.Tests.Configuration
 {
 
-	public class AdvancedJsonConfigurationTests : JsonConfigurationTestsBase
-	{
+  public class AdvancedJsonConfigurationTests : JsonConfigurationTestsBase
+  {
 #if !DOTNET
 		protected override IConfigurationAdapter CreateAdapter()
 		{
@@ -68,5 +68,5 @@ namespace Rezolver.Tests.Configuration
 
 		}
 #endif
-	}
+  }
 }

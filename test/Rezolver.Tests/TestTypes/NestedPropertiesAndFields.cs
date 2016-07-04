@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	public class NestedPropertiesAndFields
-	{
-		public HasProperty Field_HasProperty;
-		public HasField Property_HasField { get; set; }
-	}
+  public class NestedPropertiesAndFields
+  {
+    public HasProperty Field_HasProperty;
+    public HasField Property_HasField { get; set; }
+  }
 }

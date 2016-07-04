@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	/// <summary>
-	/// doesn't do anything other than get created.
-	/// </summary>
-	public class SimpleType
-	{
-	}
+  /// <summary>
+  /// doesn't do anything other than get created.
+  /// </summary>
+  public class SimpleType
+  {
+  }
 }

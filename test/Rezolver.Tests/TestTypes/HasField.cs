@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	public class HasField
-	{
-		public string StringField;
-	}
+  public class HasField
+  {
+    public string StringField;
+  }
 }

@@ -10,71 +10,71 @@ using System.Text;
 
 namespace Rezolver.Diagnostics
 {
-	public class TrackedLifetimeScopeResolver : ScopedContainer
-	{
-		private readonly int _id = TrackingUtils.NextRezolverID();
+  public class TrackedLifetimeScopeResolver : ScopedContainer
+  {
+    private readonly int _id = TrackingUtils.NextRezolverID();
 
-		public override string ToString()
-		{
-			return $"(#{_id} {GetType().Name})";
-		}
+    public override string ToString()
+    {
+      return $"(#{_id} {GetType().Name})";
+    }
 
-		private bool _disposed;
-	
-		protected internal ICallTracker Logger { get; private set; }
+    private bool _disposed;
 
-		public TrackedLifetimeScopeResolver(ICallTracker logger, 
-			ITargetContainer builder = null,
-			ITargetCompiler compiler = null, 
-			IScopedContainer parentScope = null, 
-			bool registerToBuilder = true)
-			: base(builder: builder ?? new TrackedRezolverBuilder(logger), compiler: compiler, registerToBuilder:registerToBuilder)
-		{
-			logger.MustNotBeNull(nameof(logger));
-			Logger = logger;
-		}
+    protected internal ICallTracker Logger { get; private set; }
 
-		public override bool CanResolve(RezolveContext context)
-		{
-			return Logger.TrackCall(this, () => base.CanResolve(context), context);
-		}
-		
-		public override IScopedContainer CreateLifetimeScope()
-		{
-			return Logger.TrackCall(this, () => new TrackedCombinedLifetimeScopeRezolver(this));
-		}
+    public TrackedLifetimeScopeResolver(ICallTracker logger,
+      ITargetContainer builder = null,
+      ITargetCompiler compiler = null,
+      IScopedContainer parentScope = null,
+      bool registerToBuilder = true)
+      : base(builder: builder ?? new TrackedRezolverBuilder(logger), compiler: compiler, registerToBuilder: registerToBuilder)
+    {
+      logger.MustNotBeNull(nameof(logger));
+      Logger = logger;
+    }
 
-		public override ICompiledTarget FetchCompiled(RezolveContext context)
-		{
-			return Logger.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
-		}
+    public override bool CanResolve(RezolveContext context)
+    {
+      return Logger.TrackCall(this, () => base.CanResolve(context), context);
+    }
 
-		protected override object GetService(Type serviceType)
-		{
-			return Logger.TrackCall(this, () => base.GetService(serviceType), new { serviceType = serviceType });
-		}
+    public override IScopedContainer CreateLifetimeScope()
+    {
+      return Logger.TrackCall(this, () => new TrackedCombinedLifetimeScopeRezolver(this));
+    }
 
-		public override object Resolve(RezolveContext context)
-		{
-			return Logger.TrackCall(this, () => base.Resolve(context), new { context = context });
-		}
+    public override ICompiledTarget FetchCompiled(RezolveContext context)
+    {
+      return Logger.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
+    }
 
-		public override bool TryResolve(RezolveContext context, out object result)
-		{
-			object tempResult = null;
-			var @return = Logger.TrackCall(this, () => base.TryResolve(context, out tempResult), new { context = context });
-			result = tempResult;
-			return @return;
-		}
+    protected override object GetService(Type serviceType)
+    {
+      return Logger.TrackCall(this, () => base.GetService(serviceType), new { serviceType = serviceType });
+    }
 
-		public override void AddToScope(object obj, RezolveContext context = null)
-		{
-			Logger.TrackCall(this, () => base.AddToScope(obj, context), new { obj = obj, context = context });
-		}
+    public override object Resolve(RezolveContext context)
+    {
+      return Logger.TrackCall(this, () => base.Resolve(context), new { context = context });
+    }
 
-		public override IEnumerable<object> GetFromScope(RezolveContext context)
-		{
-			return Logger.TrackCall(this, () => base.GetFromScope(context), new { context = context });
-		}
-	}
+    public override bool TryResolve(RezolveContext context, out object result)
+    {
+      object tempResult = null;
+      var @return = Logger.TrackCall(this, () => base.TryResolve(context, out tempResult), new { context = context });
+      result = tempResult;
+      return @return;
+    }
+
+    public override void AddToScope(object obj, RezolveContext context = null)
+    {
+      Logger.TrackCall(this, () => base.AddToScope(obj, context), new { obj = obj, context = context });
+    }
+
+    public override IEnumerable<object> GetFromScope(RezolveContext context)
+    {
+      return Logger.TrackCall(this, () => base.GetFromScope(context), new { context = context });
+    }
+  }
 }

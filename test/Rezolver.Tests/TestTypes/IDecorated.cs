@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-	public interface IDecorated
-	{
-		string DoSomething();
-	}
+  public interface IDecorated
+  {
+    string DoSomething();
+  }
 }
