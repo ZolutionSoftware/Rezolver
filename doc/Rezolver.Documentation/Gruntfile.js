@@ -2,40 +2,8 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        less: {
-            dev: {
-                options: {
-                    sourceMap: true,
-                    sourceMapFilename: 'site.debug.css.map',
-                    sourceMapUrl: 'site.debug.css.map',
-                    //sourceMapBasepath: 'styles',
-                    dumpLineNumbers: 'comments',
-                    relativeUrls: true,
-                    plugins: [
-                        new (require('less-plugin-autoprefix'))({ browsers: ["last 2 versions"] })
-                    ]
-                },
-                files: {
-                    'styles/site.debug.css': 'styles/site.less'
-                }
-            },
-            prod: {
-                options: {
-                    sourceMap: true,
-                    sourceMapFilename: 'site.css.map',
-                    sourceMapUrl: 'site.css.map',
-                    //sourceMapBasepath: 'styles',
-                    sourceMapRootpath: '/styles',
-                    compress: true,
-                    relativeUrls: true,
-                    plugins: [
-                            new (require('less-plugin-autoprefix'))({ browsers: ["last 2 versions"] })
-                    ]
-                },
-                files: {
-                    'styles/site.css': 'styles/site.less'
-                }
-            }
+        clean: {
+            all: ['styles/*.map']
         },
         copy: {
             bootstrap_less: {
@@ -50,13 +18,48 @@ module.exports = function (grunt) {
                 src: '**',
                 dest: 'styles/fonts'
             }
+        },
+        less: {
+            dev: {
+                options: {
+                    sourceMap: true,
+                    sourceMapFilename: 'styles/site.debug.css.map',
+                    sourceMapURL: 'site.debug.css.map',
+                    sourceMapBasepath: 'styles/',
+                    dumpLineNumbers: 'comments',
+                    relativeUrls: true,
+                    plugins: [
+                        new (require('less-plugin-autoprefix'))({ browsers: ["last 2 versions"] })
+                    ]
+                },
+                files: {
+                    'styles/site.debug.css': 'styles/site.less'
+                }
+            },
+            prod: {
+                options: {
+                    sourceMap: true,
+                    sourceMapFilename: 'styles/site.css.map',
+                    sourceMapURL: 'site.css.map',
+                    sourceMapBasepath: 'styles/',
+                    compress: true,
+                    relativeUrls: true,
+                    plugins: [
+                            new (require('less-plugin-autoprefix'))({ browsers: ["last 2 versions"] })
+                    ]
+                },
+                files: {
+                    'styles/site.css': 'styles/site.less'
+                }
+            }
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['copy', 'less']);
-    grunt.registerTask('prod', ['copy', 'less:prod']);
-    grunt.registerTask('dev', ['copy', 'less:dev']);
+    grunt.registerTask('default', ['clean', 'copy', 'less']);
+    grunt.registerTask('prod', ['clean', 'copy', 'less:prod']);
+    grunt.registerTask('dev', ['clean', 'copy', 'less:dev']);
 };

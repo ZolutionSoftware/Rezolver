@@ -215,11 +215,13 @@ header .navbar {
 }
 
 .apiDocSectionHeader {
-    background: @main-color-lighter;
-    color: #000;
+    background: @main-color;
+    color: @main-color-lighter;
     margin-top: 20px;
     padding: 5px;
     border-bottom: 1px solid darken(@main-color-lighter, 10%);
+    font-weight: bold;    
+    text-shadow: 1px 1px 0 @main-color-darker;
 }
 
 .inheritance h5, .inheritedMembers h5, h5.hsyntax, h5.hparameters,
@@ -633,8 +635,8 @@ body .toc {
 }
 
 .article {
-    margin-top: 120px;
-    margin-bottom: 115px;
+    margin-top: 90px;
+    margin-bottom: 100px;
 }
 
 #_content > a {
@@ -642,7 +644,7 @@ body .toc {
 }
 
 .article.grid-right {
-    margin-left: 280px;
+    margin-left: 265px;
 }
 
 .inheritance hr {
@@ -784,12 +786,27 @@ footer {
 }
 
 .footer {
-    border-top: 1px solid #e7e7e7;
-    background-color: #f8f8f8;
+    border-top: 1px solid darken(@navbar-inverse-bg, 10%);
+    background-color: @navbar-inverse-bg;
+    color: @navbar-inverse-color;
     padding: 15px 0;
+
+    a {
+        color: @navbar-inverse-link-color;
+
+        &:hover {
+            background: @navbar-inverse-link-hover-bg;
+            color: @navbar-inverse-link-hover-color;
+        }
+
+        &:active, &:focus {
+            background: @navbar-inverse-link-active-bg;
+            color: @navbar-inverse-link-active-color;
+        }
+    }
 }
 
-@media (min-width: 768px) {
+@media (min-width: @screen-sm-min) {
     #sidetoggle.collapse {
         display: block;
     }
@@ -805,7 +822,7 @@ footer {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: @screen-sm-min) {
     #mobile-indicator {
         display: block;
     }

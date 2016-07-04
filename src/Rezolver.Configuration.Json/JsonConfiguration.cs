@@ -1,16 +1,7 @@
-﻿// ***********************************************************************
-// Assembly         : Rezolver.Configuration.Json
-// Author           : Andras
-// Created          : 11-12-2014
-//
-// Last Modified By : Andras
-// Last Modified On : 12-18-2014
-// ***********************************************************************
-// <copyright file="JsonConfiguration.cs" company="">
-//     Copyright (c) . All rights reserved.
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

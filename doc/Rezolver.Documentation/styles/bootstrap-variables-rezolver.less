@@ -2,9 +2,11 @@
 
 @main-color: #f15c00;
 @main-color-lighter: lighten(@main-color, 45%);
+@main-color-darker: darken(@main-color, 25%);
 
 @alt-color: #1239A2;
 @alt-color-lighter: lighten(@alt-color, 50%);
+@alt-color-darker: darken(@alt-color, 13%);
 
 @brand-primary: @main-color;
 @link-color: darken(@main-color, 10%);
@@ -12,8 +14,8 @@
 /* navbar-default */
 
 @navbar-default-color:             #777;
-@navbar-default-bg:                #f8f8f8;
-@navbar-default-border:            darken(@navbar-default-bg, 6.5%);
+@navbar-default-bg:                lighten(@brand-primary, 45%);
+@navbar-default-border:            darken(@navbar-default-bg, 10%);
 
 // Navbar links
 @navbar-default-link-color:                #777;
@@ -36,7 +38,7 @@
 
 /* inverted navbar */
 
-@navbar-inverse-color:                      lighten(@brand-primary, 15%);
+@navbar-inverse-color:                      darken(@main-color-lighter, 10%);
 @navbar-inverse-bg:                         darken(@brand-primary, 15%);
 @navbar-inverse-border:                     darken(@navbar-inverse-bg, 10%);
 
@@ -58,3 +60,16 @@
 @navbar-inverse-toggle-hover-bg:            #333;
 @navbar-inverse-toggle-icon-bar-bg:         #fff;
 @navbar-inverse-toggle-border-color:        #333;
+
+//** Background color used for `.table-striped`.
+@table-bg-accent:               lighten(@main-color-lighter, 5%);
+//** Background color used for `.table-hover`.
+@table-bg-hover:                @main-color-lighter;
+@table-bg-active:               @table-bg-hover;
+
+//** Border color for table and cell borders.
+@table-border-color:            darken(@main-color-lighter, 8%);
+
+@pre-color: @main-color-darker;
+@pre-bg: @main-color-lighter;
+@pre-border-color: darken(@main-color-lighter, 8%);

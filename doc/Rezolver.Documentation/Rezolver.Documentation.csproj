@@ -369,7 +369,6 @@
     <Content Include="styles\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="styles\site.css.map" />
     <Content Include="styles\site.debug.css.map" />
     <None Include="toc.yml" />
     <None Include="index.md" />

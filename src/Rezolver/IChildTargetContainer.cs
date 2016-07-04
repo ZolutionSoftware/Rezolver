@@ -1,4 +1,8 @@
-﻿namespace Rezolver
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+namespace Rezolver
 {
 	/// <summary>
 	/// An IRezolveTargetContainer that is a logical child of another.  Typically, a child rezolver, 

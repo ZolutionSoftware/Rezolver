@@ -5,5 +5,5 @@ place!
 
 Two crucial classes to look at are:
 
-- [](xref:Rezolver.Builder)
-- [](xref:Rezolver.Container)
+- @Rezolver.Builder
+- @Rezolver.Container
