@@ -94,9 +94,7 @@
               
               <h1 id="Rezolver_IContainer" data-uid="Rezolver.IContainer">Interface IContainer
               </h1>
-              <div class="markdown level0 summary"><p>The primary IOC entry point for the Rezolver framework.  This interface implies more than just
-an object that can resolve dependencies or locate services - for example, it is suggested that an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance
-(see <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a>) be used to store the core type registrations from which this resolver will be built.</p>
+              <div class="markdown level0 summary"><p>A container through which instances of objects can be <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>d.  </p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritedMembers">
@@ -111,15 +109,6 @@ an object that can resolve dependencies or locate services - for example, it is 
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IContainer : IServiceProvider</code></pre>
               </div>
-              <h5 id="Rezolver_IContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>If an implementation is indeed using the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> to build a set of registrations from which objects will be created, 
-then that implementation should, also, allow for new registrations to be added to the builder throughout the lifetime of the </p>
-<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.</p>
-<p>However - A caller cannot, expect to be able to resolve Type &#39;X&#39;,
-then make some modification to the builder which can causes Type &#39;X&#39; to be built differently, the next time it is resolved.  Implementations
-of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> are free to treat the a dependency graph of an object of a resolved type (not necessarily the objects themselves,
-but the types of objects that are resolved and how they, in turn, are built) as fixed after the first resolve operation is done.</p>
-</div>
               <hr class="typeSectionDivider">
               <h3 id="properties">Properties
               </h3>
@@ -322,10 +311,9 @@ used by code generation code (or even generated code) to interoperate between tw
               </span>
               
               <h4 id="Rezolver_IContainer_Resolve_Rezolver_RezolveContext_" data-uid="Rezolver.IContainer.Resolve(Rezolver.RezolveContext)">Resolve(RezolveContext)</h4>
-              <div class="markdown level1 summary"><p>The core &#39;resolve&#39; operation in Rezolver.</p>
-<p>The object is resolved using state from the passed <em>context</em> (type to be resolved, any names,
-lifetime scopes, and a reference to the original resolver instance that is &#39;in scope&#39;, which could be a different resolver to
-this resolver.</p>
+              <div class="markdown level1 summary"><p>The core &#39;resolve&#39; operation for a Rezolver container.</p>
+<p>The object is resolved using state from the passed <em>context</em>, including any active lifetime scope and 
+a reference to the original container instance that was called, which could be a different container to this one.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -361,7 +349,23 @@ this resolver.</p>
                 <tbody>
                   <tr>
                     <td><span class="xref">System.Object</span></td>
-                    <td><p>The resolved object, if successful, otherwise an exception should be raised.</p>
+                    <td><p>The resolved object, if successful.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.InvalidOperationException</span></td>
+                    <td><p>If the requested type cannot be resolved.</p>
 </td>
                   </tr>
                 </tbody>

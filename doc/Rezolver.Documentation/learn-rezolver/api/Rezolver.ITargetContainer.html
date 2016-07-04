@@ -94,8 +94,8 @@
               
               <h1 id="Rezolver_ITargetContainer" data-uid="Rezolver.ITargetContainer">Interface ITargetContainer
               </h1>
-              <div class="markdown level0 summary"><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances, keyed (primarily) by the type of service
-that the targets are associated with.</p>
+              <div class="markdown level0 summary"><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances, keyed by the type of service
+that the targets are registered against.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
@@ -104,6 +104,14 @@ that the targets are associated with.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface ITargetContainer</code></pre>
               </div>
+              <h5 id="Rezolver_ITargetContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>You do not resolve objects from a target container, instead, it holds the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s which will 
+later be compiled to produce the objects.</p>
+<p>An <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> typically uses this as the source of the registrations that it uses to resolve objects
+in its <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method via it <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> property.</p>
+<p>Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
+are <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder">Builder</a> and <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder">ChildBuilder</a>.</p>
+</div>
               <hr class="typeSectionDivider">
               <h3 id="methods">Methods
               </h3>
@@ -184,7 +192,7 @@ against the type, and a new container owner is then registered against the same 
               </span>
               
               <h4 id="Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.ITargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
-              <div class="markdown level1 summary"><p>Retrieves the default target for a particular type, or null if no target is registered against that type.</p>
+              <div class="markdown level1 summary"><p>Retrieves a target for a particular type, or null if no target is registered against that type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -204,7 +212,7 @@ against the type, and a new container owner is then registered against the same 
                   <tr>
                     <td><em>type</em></td>
               	  <td><span class="xref">System.Type</span></td>
-                    <td><p>Required.  The type whose <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> is to be retrieved.</p>
+                    <td><p>Required.  The type whose default <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> is to be retrieved.</p>
 </td>
                   </tr>
                 </tbody>
@@ -220,11 +228,15 @@ against the type, and a new container owner is then registered against the same 
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td><p>The default target for the given <em>type</em>, or null if no target is found.</p>
+                    <td><p>The target for the given <em>type</em>, or null if no target is found.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              <h5 class="hremarks" id="Rezolver_ITargetContainer_Fetch_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The target you receive from this method depends entirely on the implementation, 
+The &#39;default&#39; target registered for a type is typically the last target that as <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>ed</p>
+</div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -279,7 +291,8 @@ against the type, and a new container owner is then registered against the same 
               </span>
               
               <h4 id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ITargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
-              <div class="markdown level1 summary"><p>Registers a target, optionally for a particular target type.</p>
+              <div class="markdown level1 summary"><p>Registers a target, either for the <em>serviceType</em> specified or, if null, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+of the <em>target</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -299,14 +312,45 @@ against the type, and a new container owner is then registered against the same 
                   <tr>
                     <td><em>target</em></td>
               	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td><p>Required.  The target to be registereed</p>
+                    <td><p>Required.  The target to be registered</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
               	  <td><span class="xref">System.Type</span></td>
                     <td><p>Optional.  The type the target is to be registered against, if different
-from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <em>target</em></p>
+from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <em>target</em>.  If provided, then the <em>target</em>
+must be compatible with this type.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hremarks" id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The interface does not define the behaviour for when multiple targets are registered against the same type - although
+the default behaviour of the framework (via the class <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder">Builder</a> is to allow this, with the last registered target 
+being treated as the &#39;default&#39; for that type.</p>
+<p>The only guarantee expected by the framework from implementations of this interface is that if a target is registered against
+a given type with this method, then a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> operation with the same type should return a non-null target,
+and a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> operation should return a non-empty enumerable of targets.</p>
+</div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.ArgumentNullException</span></td>
+                    <td><p>If <em>target</em>is <code>null</code></p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.ArgumentException</span></td>
+                    <td><p>If <em>serviceType</em> is non-null and the <em>target</em>&#39;s</p>
+<p><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a> method returns <code>false</code> for that type.</p>
 </td>
                   </tr>
                 </tbody>

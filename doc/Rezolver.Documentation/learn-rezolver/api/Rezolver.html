@@ -320,9 +320,7 @@ is the final stage before its ready to be used to start producing objects.</p>
 <p>An <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a> is responsible for creating these from one or more <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></h4>
-                  <section><p>The primary IOC entry point for the Rezolver framework.  This interface implies more than just
-an object that can resolve dependencies or locate services - for example, it is suggested that an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance
-(see <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a>) be used to store the core type registrations from which this resolver will be built.</p>
+                  <section><p>A container through which instances of objects can be <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>d.  </p>
 </section>
                   <h4><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></h4>
                   <section><p>Describes a type which discovers property/field bindings</p>
@@ -352,12 +350,12 @@ into an ICompiledRezolveTarget - whose job it is specifically to produce object 
                   <section><p>Interface for an object that is responsible for converting Expressions into <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></h4>
-                  <section><p>Interface for an object that produces <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> instances from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances,
-and that can build Lambda expressions for the same targets</p>
+                  <section><p>An object that produces <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s given a 
+particular <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></h4>
-                  <section><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances, keyed (primarily) by the type of service
-that the targets are associated with.</p>
+                  <section><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances, keyed by the type of service
+that the targets are registered against.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a></h4>
                   <section><p>Interface for an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> which also contains other target containers.</p>

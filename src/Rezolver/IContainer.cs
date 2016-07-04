@@ -10,20 +10,8 @@ using System.Linq.Expressions;
 namespace Rezolver
 {
 	/// <summary>
-	/// The primary IOC entry point for the Rezolver framework.  This interface implies more than just
-	/// an object that can resolve dependencies or locate services - for example, it is suggested that an <see cref="ITargetContainer"/> instance
-	/// (see <see cref="Builder"/>) be used to store the core type registrations from which this resolver will be built.
+	/// A container through which instances of objects can be <see cref="Resolve"/>d.  
 	/// </summary>
-	/// <remarks>
-	/// If an implementation is indeed using the <see cref="Builder"/> to build a set of registrations from which objects will be created, 
-	/// then that implementation should, also, allow for new registrations to be added to the builder throughout the lifetime of the 
-	/// <see cref="IContainer"/>.
-	/// 
-	/// However - A caller cannot, expect to be able to resolve Type 'X',
-	/// then make some modification to the builder which can causes Type 'X' to be built differently, the next time it is resolved.  Implementations
-	/// of <see cref="IContainer"/> are free to treat the a dependency graph of an object of a resolved type (not necessarily the objects themselves,
-	/// but the types of objects that are resolved and how they, in turn, are built) as fixed after the first resolve operation is done.
-	/// </remarks>
 	public interface IContainer : IServiceProvider
 	{
 		/// <summary>
@@ -48,14 +36,14 @@ namespace Rezolver
 		bool CanResolve(RezolveContext context);
 
 		/// <summary>
-		/// The core 'resolve' operation in Rezolver.
+		/// The core 'resolve' operation for a Rezolver container.
 		/// 
-		/// The object is resolved using state from the passed <paramref name="context"/> (type to be resolved, any names,
-		/// lifetime scopes, and a reference to the original resolver instance that is 'in scope', which could be a different resolver to
-		/// this resolver.
+		/// The object is resolved using state from the passed <paramref name="context"/>, including any active lifetime scope and 
+		/// a reference to the original container instance that was called, which could be a different container to this one.
 		/// </summary>
 		/// <param name="context">The context.</param>
-		/// <returns>The resolved object, if successful, otherwise an exception should be raised.</returns>
+		/// <returns>The resolved object, if successful.</returns>
+    /// <exception cref="System.InvalidOperationException">If the requested type cannot be resolved.</exception>
 		object Resolve(RezolveContext context);
 
 		/// <summary>
