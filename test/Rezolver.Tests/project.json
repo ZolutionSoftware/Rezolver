@@ -4,8 +4,8 @@
   "dependencies": {
     "Rezolver.Configuration.Json": "1.0.10-*",
     "Rezolver.Diagnostics": "1.0.0-alpha-*",
-    "xunit": "2.1.0",
-    "dotnet-test-xunit": "1.0.0-rc2-build10025"
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029"
   },
   "frameworks": {
     "netcoreapp1.0": {
@@ -13,13 +13,12 @@
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.0.0-rc2-3002702"
+          "version": "1.0.0"
         }
-      },
-      "imports": [
-        "dnxcore50",
-        "portable-net45+win8"
-      ]
+      }
+    },
+    "net451": {
+      "Microsoft.NETCore.Platforms": "1.0.1"
     }
   }
 }

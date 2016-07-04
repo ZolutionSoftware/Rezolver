@@ -11,25 +11,24 @@
     "Rezolver.Shared": {
       "version": "1.0.10-*",
       "type": "build"
-    }
+    },
+    "Newtonsoft.Json": "9.0.1"
   },
   "frameworks": {
-    "netstandard1.5": {
-      "buildOptions": {
-        "define": [ "DOTNET" ] 
-      },
+    "netstandard1.3": {
+      "buildOptions": { "define": [ "DOTNET" ] },
       "dependencies": {
-        "Newtonsoft.Json": "9.0.1-beta1"
+        "NETStandard.Library": "1.6.0"
       }
     },
     "net451": {
       "dependencies": {
-        "Newtonsoft.Json": "9.0.1-beta1"
+        
       }
     },
     "net46": {
       "dependencies": {
-        "Newtonsoft.Json": "9.0.1-beta1"
+        
       }
     }
   }

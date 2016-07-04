@@ -57,9 +57,9 @@ namespace Rezolver.Tests.Configuration
 			IConfigurationAdapter adapter = new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
 			var builder = adapter.CreateBuilder(configuration);
 
-			Assert.IsType<RezolverBuilder>(builder);
+			Assert.IsType<Builder>(builder);
 
-			var rezolver = new DefaultRezolver(builder, new AssemblyRezolveTargetCompiler());
+			var rezolver = new Container(builder, new TargetAssemblyCompiler());
 			var str = rezolver.Resolve<string>();
 			Assert.Equal("Hello world", str);
 			var en = rezolver.Resolve<IEnumerable<int>>();

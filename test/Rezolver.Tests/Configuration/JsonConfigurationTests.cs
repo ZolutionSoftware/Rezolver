@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Rezolver.Tests.Configuration
 {
-  public class JsonConffigurationTests : JsonConfigurationTestsBase
+  public class JsonConfigurationTests : JsonConfigurationTestsBase
   {
     [Fact]
     public void ShouldCreateJsonConfigurationFromJsonString()

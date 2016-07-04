@@ -14,9 +14,10 @@
     }
   },
   "frameworks": {
-    "netstandard1.5": {
-      "buildOptions": {
-        "define": [ "DOTNET" ]
+    "netstandard1.3": {
+      "buildOptions": { "define": [ "DOTNET" ] },
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
       }
     },
     "net451": {
