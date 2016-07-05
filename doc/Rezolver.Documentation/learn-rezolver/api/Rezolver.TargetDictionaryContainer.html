@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -139,15 +139,16 @@
 open generic version of the type, with concrete (closed) generics being registered within
 that.</p>
 </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
+              <h4 class="hmember" id="Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
               <div class="markdown level1 summary"><p>Always adds this container into the <em>existing</em> container as a child.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -167,12 +168,12 @@ that.</p>
                 <tbody>
                   <tr>
                     <td><em>existing</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -194,12 +195,14 @@ that.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.CreateContainer(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_" data-uid="Rezolver.TargetDictionaryContainer.CreateContainer(System.Type,Rezolver.ITarget)">CreateContainer(Type, ITarget)</h4>
+              <h4 class="hmember" id="Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_" data-uid="Rezolver.TargetDictionaryContainer.CreateContainer(System.Type,Rezolver.ITarget)">CreateContainer(Type, ITarget)</h4>
               <div class="markdown level1 summary"><p>Called by <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> to create and register the container 
 instance most suited for the passed target.  The base implementation 
 always creates a <a class="xref" href="Rezolver.TargetListContainer.html#Rezolver_TargetListContainer">TargetListContainer</a>, capable of storing multiple targets
@@ -222,12 +225,12 @@ against a single type.</p>
                 <tbody>
                   <tr>
                     <td><em>serviceType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>target</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>The initial target for which the container is being created.
 Can be null.  Note - the function is not expected to add this target to the new
 container.</p>
@@ -250,12 +253,14 @@ container.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetDictionaryContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetDictionaryContainer_Fetch_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.Fetch(System.Type)">Fetch(Type)</h4>
+              <h4 class="hmember" id="Rezolver_TargetDictionaryContainer_Fetch_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.Fetch(System.Type)">Fetch(Type)</h4>
               <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -275,7 +280,7 @@ container.</p>
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>The type whose default target is to be retrieved.</p>
 </td>
                   </tr>
@@ -306,12 +311,14 @@ you should consult the return value&#39;s <a class="xref" href="Rezolver.ITarget
 if the method returns non-null because, if true, then it&#39;s an instruction to
 use a parent container&#39;s result for the same type.</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetDictionaryContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetDictionaryContainer_FetchAll_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
+              <h4 class="hmember" id="Rezolver_TargetDictionaryContainer_FetchAll_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
               <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -331,7 +338,7 @@ use a parent container&#39;s result for the same type.</p>
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>The type whose targets are to be retrieved.</p>
 </td>
                   </tr>
@@ -356,12 +363,14 @@ empty enumerable if the type is not registered.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.FetchContainer(System.Type)">FetchContainer(Type)</h4>
+              <h4 class="hmember" id="Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.FetchContainer(System.Type)">FetchContainer(Type)</h4>
               <div class="markdown level1 summary"><p>Obtains a child container that was previously registered by the passed
 <em>type</em>.</p>
 <p>Returns null if no entry is found.</p>
@@ -383,7 +392,7 @@ empty enumerable if the type is not registered.</p>
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -405,12 +414,14 @@ empty enumerable if the type is not registered.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_FetchContainer_System_Type_">FetchContainer(Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
+              <h4 class="hmember" id="Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
               <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -430,13 +441,13 @@ empty enumerable if the type is not registered.</p>
                 <tbody>
                   <tr>
                     <td><em>target</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>The target to be registered</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -449,12 +460,14 @@ with a call to the protected method <a class="xref" href="Rezolver.TargetDiction
 (it calls <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">FetchContainer(Type)</a> to check for existence),
 and then chains to its <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method.</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetDictionaryContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
+              <h4 class="hmember" id="Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetDictionaryContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
               <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -474,12 +487,12 @@ and then chains to its <a class="xref" href="Rezolver.ITargetContainer.html#Rezo
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>container</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -494,6 +507,7 @@ behaviour into this container.</p>
 <p>For example, decorators are not actually <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementations but specialised <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>
 instances into which the &#39;standard&#39; targets are registered.</p>
 </div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

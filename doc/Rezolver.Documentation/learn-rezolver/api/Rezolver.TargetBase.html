@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -132,15 +132,16 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public abstract class TargetBase : ITarget</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_DeclaredType" data-uid="Rezolver.TargetBase.DeclaredType">DeclaredType</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_DeclaredType" data-uid="Rezolver.TargetBase.DeclaredType">DeclaredType</h4>
               <div class="markdown level1 summary"><p>Gets the declared type of object that is constructed by this target.  This will be the return type of
 any expression built by <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> unless otherwise instructed to build a different type.</p>
 </div>
@@ -166,12 +167,14 @@ any expression built by <a class="xref" href="Rezolver.TargetBase.html#Rezolver_
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_SuppressScopeTracking.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.SuppressScopeTracking%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_SuppressScopeTracking" data-uid="Rezolver.TargetBase.SuppressScopeTracking">SuppressScopeTracking</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_SuppressScopeTracking" data-uid="Rezolver.TargetBase.SuppressScopeTracking">SuppressScopeTracking</h4>
               <div class="markdown level1 summary"><p>If false (the default) then any expression produced by <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> will be automatically 
 wrapped in a block of boilerplate code that will push the return value into the <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a> that is 
 in scope.</p>
@@ -200,12 +203,14 @@ it generates is suitable for your use, just not where it would usually place it.
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_UseFallback" data-uid="Rezolver.TargetBase.UseFallback">UseFallback</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_UseFallback" data-uid="Rezolver.TargetBase.UseFallback">UseFallback</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -229,15 +234,17 @@ it generates is suitable for your use, just not where it would usually place it.
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a></div>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.CreateExpression(Rezolver.CompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_" data-uid="Rezolver.TargetBase.CreateExpression(Rezolver.CompileContext)">CreateExpression(CompileContext)</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_" data-uid="Rezolver.TargetBase.CreateExpression(Rezolver.CompileContext)">CreateExpression(CompileContext)</h4>
               <div class="markdown level1 summary"><p>Virtual method implementing IRezolveTarget.CreateExpression.  Rather than overriding this method,
 your starting point is to implement the abstract method <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a>.</p>
 </div>
@@ -258,7 +265,7 @@ your starting point is to implement the abstract method <a class="xref" href="Re
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The current compile context</p>
 </td>
                   </tr>
@@ -281,12 +288,14 @@ your starting point is to implement the abstract method <a class="xref" href="Re
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.CreateExpressionBase(Rezolver.CompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.TargetBase.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.TargetBase.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
               <div class="markdown level1 summary"><p>Abstract method called to create the expression - this is called by <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> after the
 target type has been validated, if provided.</p>
 <p>Note - if your implementation needs to support dynamic Resolve operations from the rezolver that is passed
@@ -310,7 +319,7 @@ all the default implementations of this class (and others) use that by default.<
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The current compile context</p>
 </td>
                   </tr>
@@ -331,12 +340,14 @@ all the default implementations of this class (and others) use that by default.<
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.CreateRezolveContextExpressionForScopeAddCall(Rezolver.CompileContext%2CExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_" data-uid="Rezolver.TargetBase.CreateRezolveContextExpressionForScopeAddCall(Rezolver.CompileContext,Expression)">CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_" data-uid="Rezolver.TargetBase.CreateRezolveContextExpressionForScopeAddCall(Rezolver.CompileContext,Expression)">CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</h4>
               <div class="markdown level1 summary"><p>Called to generate the expression that represents the argument that&#39;ll be passed to the </p>
 <p><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">AddToScope(Object, RezolveContext)</a> method when an object is being tracked in a lifetime scope.<br>By default, the base implementation generates an expression that represents null - because usually there really is little point in 
 adding a specific context along with the object being tracked, unless you&#39;re also grabbing instances back out of the scope which isn&#39;t
@@ -359,12 +370,12 @@ done by the base class behaviour by default.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>expression</em></td>
-              	  <td><span class="xref">Expression</span></td>
+                    <td><span class="xref">Expression</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -384,12 +395,14 @@ done by the base class behaviour by default.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.CreateScopeSelectionExpression(Rezolver.CompileContext%2CExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.TargetBase.CreateScopeSelectionExpression(Rezolver.CompileContext,Expression)">CreateScopeSelectionExpression(CompileContext, Expression)</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.TargetBase.CreateScopeSelectionExpression(Rezolver.CompileContext,Expression)">CreateScopeSelectionExpression(CompileContext, Expression)</h4>
               <div class="markdown level1 summary"><p>Called by <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">CreateScopeTrackingExpression(CompileContext, Expression)</a> to generate the code that selects the correct 
 scope instance that is to be used for scope tracking for the object produced by the code generated by </p>
 <p><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a>.</p>
@@ -411,12 +424,12 @@ scope instance that is to be used for scope tracking for the object produced by 
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>expression</em></td>
-              	  <td><span class="xref">Expression</span></td>
+                    <td><span class="xref">Expression</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -436,12 +449,14 @@ scope instance that is to be used for scope tracking for the object produced by 
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.CreateScopeTrackingExpression(Rezolver.CompileContext%2CExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.TargetBase.CreateScopeTrackingExpression(Rezolver.CompileContext,Expression)">CreateScopeTrackingExpression(CompileContext, Expression)</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.TargetBase.CreateScopeTrackingExpression(Rezolver.CompileContext,Expression)">CreateScopeTrackingExpression(CompileContext, Expression)</h4>
               <div class="markdown level1 summary"><p>This is called by <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> after the derived class generates its expression
 via a call to <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> - unless <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">SuppressScopeTracking</a> is true either 
 on this object, or on the passed <em>context</em>.</p>
@@ -465,13 +480,13 @@ if required.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The current compile context.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>expression</em></td>
-              	  <td><span class="xref">Expression</span></td>
+                    <td><span class="xref">Expression</span></td>
                     <td><p>The code generated from the <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> method, albeit
 possibly rewritten and optimised.</p>
 </td>
@@ -506,12 +521,14 @@ its own explicit scope tracking code.</p>
 <p>If the target simply needs to select a different scope from the current (at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> 
 is called), then it can override the <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">CreateScopeSelectionExpression(CompileContext, Expression)</a> method.</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetBase_SupportsType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetBase.SupportsType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_TargetBase_SupportsType_System_Type_" data-uid="Rezolver.TargetBase.SupportsType(System.Type)">SupportsType(Type)</h4>
+              <h4 class="hmember" id="Rezolver_TargetBase_SupportsType_System_Type_" data-uid="Rezolver.TargetBase.SupportsType(System.Type)">SupportsType(Type)</h4>
               <div class="markdown level1 summary"><p>Called to check whether a target can create an expression that builds an instance of the given <em>type</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -531,7 +548,7 @@ is called), then it can override the <a class="xref" href="Rezolver.TargetBase.h
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>Required</p>
 </td>
                   </tr>
@@ -555,6 +572,7 @@ is called), then it can override the <a class="xref" href="Rezolver.TargetBase.h
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a></div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -118,15 +118,16 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IListTargetMetadata : IRezolveTargetMetadata</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_IListTargetMetadata_ElementType.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.IListTargetMetadata.ElementType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_IListTargetMetadata_ElementType" data-uid="Rezolver.Configuration.IListTargetMetadata.ElementType">ElementType</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_IListTargetMetadata_ElementType" data-uid="Rezolver.Configuration.IListTargetMetadata.ElementType">ElementType</h4>
               <div class="markdown level1 summary"><p>Gets the declared element type of the array or list that will be created from this metadata.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -150,12 +151,14 @@
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_IListTargetMetadata_IsArray.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.IListTargetMetadata.IsArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_IListTargetMetadata_IsArray" data-uid="Rezolver.Configuration.IListTargetMetadata.IsArray">IsArray</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_IListTargetMetadata_IsArray" data-uid="Rezolver.Configuration.IListTargetMetadata.IsArray">IsArray</h4>
               <div class="markdown level1 summary"><p>Maps to the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> property.  If true, then an array of <a class="xref" href="Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata_ElementType">ElementType</a>
 will be created, otherwise a List&lt;<a class="xref" href="Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata_ElementType">ElementType</a>&gt; will be created by the ListTarget
 created from this metadata.</p>
@@ -181,12 +184,14 @@ created from this metadata.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_IListTargetMetadata_Items.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.IListTargetMetadata.Items%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_IListTargetMetadata_Items" data-uid="Rezolver.Configuration.IListTargetMetadata.Items">Items</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_IListTargetMetadata_Items" data-uid="Rezolver.Configuration.IListTargetMetadata.Items">Items</h4>
               <div class="markdown level1 summary"><p>Gets the metadata for the targets that will be used for the items that&#39;ll be returned
 in the Array or List that will be created by the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a> created from this metadata.</p>
 </div>
@@ -211,6 +216,7 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
             </article>
           </div>
           

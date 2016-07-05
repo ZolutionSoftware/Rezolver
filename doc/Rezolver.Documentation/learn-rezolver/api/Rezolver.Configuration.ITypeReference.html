@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -122,15 +122,16 @@ targets from a configuration file.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface ITypeReference : IConfigurationLineInfo</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ITypeReference_GenericArguments.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ITypeReference.GenericArguments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ITypeReference_GenericArguments" data-uid="Rezolver.Configuration.ITypeReference.GenericArguments">GenericArguments</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ITypeReference_GenericArguments" data-uid="Rezolver.Configuration.ITypeReference.GenericArguments">GenericArguments</h4>
               <div class="markdown level1 summary"><p>Any explicitly provided generic arguments are stored here.</p>
 <p>Note that it might turn out that the TypeName refers to a whole closed generic type, in which
 case the referenced type could still be generic even if this array is empty.</p>
@@ -157,12 +158,14 @@ a non-generic type definition, in which case type resolution will likely fail.</
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ITypeReference_IsArray.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ITypeReference.IsArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ITypeReference_IsArray" data-uid="Rezolver.Configuration.ITypeReference.IsArray">IsArray</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ITypeReference_IsArray" data-uid="Rezolver.Configuration.ITypeReference.IsArray">IsArray</h4>
               <div class="markdown level1 summary"><p>Gets a value indicating whether the type ultimately represented by this instance is an array of the
 type described by the rest of this instance&#39;s properties.</p>
 </div>
@@ -187,12 +190,14 @@ type described by the rest of this instance&#39;s properties.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ITypeReference_IsOpenGenericTypeArgument.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ITypeReference.IsOpenGenericTypeArgument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ITypeReference_IsOpenGenericTypeArgument" data-uid="Rezolver.Configuration.ITypeReference.IsOpenGenericTypeArgument">IsOpenGenericTypeArgument</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ITypeReference_IsOpenGenericTypeArgument" data-uid="Rezolver.Configuration.ITypeReference.IsOpenGenericTypeArgument">IsOpenGenericTypeArgument</h4>
               <div class="markdown level1 summary"><p>True if this type represents an open generic argument - this is how to explicitly reference an open generic type in a type reference:
 you specify a base type, then have one or more open generic arguments specified in the GenericArguments array.  If all are
 open generic arguments, then you have created a reference to the fully open generic type.</p>
@@ -221,12 +226,14 @@ the target that is built.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ITypeReference_IsUnbound.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ITypeReference.IsUnbound%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ITypeReference_IsUnbound" data-uid="Rezolver.Configuration.ITypeReference.IsUnbound">IsUnbound</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ITypeReference_IsUnbound" data-uid="Rezolver.Configuration.ITypeReference.IsUnbound">IsUnbound</h4>
               <div class="markdown level1 summary"><p>Gets a value indicating whether this instance represents a type that is to be late-bound for a specific target type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -250,12 +257,14 @@ the target that is built.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ITypeReference_TypeName.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ITypeReference.TypeName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ITypeReference_TypeName" data-uid="Rezolver.Configuration.ITypeReference.TypeName">TypeName</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ITypeReference_TypeName" data-uid="Rezolver.Configuration.ITypeReference.TypeName">TypeName</h4>
               <div class="markdown level1 summary"><p>The root type name.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -278,6 +287,7 @@ the target that is built.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
             </article>
           </div>
           

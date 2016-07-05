@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -139,15 +139,16 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class ListTargetMetadata : RezolveTargetMetadataBase, IListTargetMetadata, IRezolveTargetMetadata</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata__ctor_Rezolver_Configuration_ITypeReference_Rezolver_Configuration_IRezolveTargetMetadataList_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.%23ctor(Rezolver.Configuration.ITypeReference%2CRezolver.Configuration.IRezolveTargetMetadataList%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata__ctor_Rezolver_Configuration_ITypeReference_Rezolver_Configuration_IRezolveTargetMetadataList_System_Boolean_" data-uid="Rezolver.Configuration.ListTargetMetadata.#ctor(Rezolver.Configuration.ITypeReference,Rezolver.Configuration.IRezolveTargetMetadataList,System.Boolean)">ListTargetMetadata(ITypeReference, IRezolveTargetMetadataList, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata__ctor_Rezolver_Configuration_ITypeReference_Rezolver_Configuration_IRezolveTargetMetadataList_System_Boolean_" data-uid="Rezolver.Configuration.ListTargetMetadata.#ctor(Rezolver.Configuration.ITypeReference,Rezolver.Configuration.IRezolveTargetMetadataList,System.Boolean)">ListTargetMetadata(ITypeReference, IRezolveTargetMetadataList, Boolean)</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata">ListTargetMetadata</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -167,33 +168,35 @@
                 <tbody>
                   <tr>
                     <td><em>elementType</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a></td>
                     <td><p>Type of the elements of the eventual array/list.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>items</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadataList.html#Rezolver_Configuration_IRezolveTargetMetadataList">IRezolveTargetMetadataList</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadataList.html#Rezolver_Configuration_IRezolveTargetMetadataList">IRezolveTargetMetadataList</a></td>
                     <td><p>Metadata for the targets that will eventually create the items for the array or list.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>isArray</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td><p>if set to <code>true</code> then an array is to be built, otherwise a list is to be built.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata_DeclaredType" data-uid="Rezolver.Configuration.ListTargetMetadata.DeclaredType">DeclaredType</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata_DeclaredType" data-uid="Rezolver.Configuration.ListTargetMetadata.DeclaredType">DeclaredType</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -219,12 +222,14 @@
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_DeclaredType">DeclaredType</a></div>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_DeclaredType">DeclaredType</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata_ElementType.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.ElementType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata_ElementType" data-uid="Rezolver.Configuration.ListTargetMetadata.ElementType">ElementType</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata_ElementType" data-uid="Rezolver.Configuration.ListTargetMetadata.ElementType">ElementType</h4>
               <div class="markdown level1 summary"><p>Gets the declared element type of the array or list that will be created from this metadata.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -265,12 +270,14 @@
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata_IsArray.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.IsArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata_IsArray" data-uid="Rezolver.Configuration.ListTargetMetadata.IsArray">IsArray</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata_IsArray" data-uid="Rezolver.Configuration.ListTargetMetadata.IsArray">IsArray</h4>
               <div class="markdown level1 summary"><p>Maps to the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> property.  If true, then an array of <a class="xref" href="Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_ElementType">ElementType</a>
 will be created, otherwise a List&lt;<a class="xref" href="Rezolver.Configuration.ListTargetMetadata.html#Rezolver_Configuration_ListTargetMetadata_ElementType">ElementType</a>&gt; will be created by the ListTarget
 created from this metadata.</p>
@@ -298,12 +305,14 @@ created from this metadata.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata_IsArray">IsArray</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata_Items.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.Items%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata_Items" data-uid="Rezolver.Configuration.ListTargetMetadata.Items">Items</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata_Items" data-uid="Rezolver.Configuration.ListTargetMetadata.Items">Items</h4>
               <div class="markdown level1 summary"><p>Gets the metadata for the targets that will be used for the items that&#39;ll be returned
 in the Array or List that will be created by the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a> created from this metadata.</p>
 </div>
@@ -330,15 +339,17 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IListTargetMetadata.html#Rezolver_Configuration_IListTargetMetadata_Items">Items</a></div>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata_Bind_Rezolver_Configuration_ITypeReference___.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.Bind(Rezolver.Configuration.ITypeReference%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata_Bind_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.ListTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])">Bind(ITypeReference[])</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata_Bind_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.ListTargetMetadata.Bind(Rezolver.Configuration.ITypeReference[])">Bind(ITypeReference[])</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -357,7 +368,7 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
                 <tbody>
                   <tr>
                     <td><em>targetTypes</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
+                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -381,12 +392,14 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_Bind_Rezolver_Configuration_ITypeReference___">Bind(ITypeReference[])</a></div>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IRezolveTargetMetadata.html#Rezolver_Configuration_IRezolveTargetMetadata_Bind_Rezolver_Configuration_ITypeReference___">Bind(ITypeReference[])</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.ListTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])">BindBase(ITypeReference[])</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata_BindBase_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.ListTargetMetadata.BindBase(Rezolver.Configuration.ITypeReference[])">BindBase(ITypeReference[])</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -405,7 +418,7 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
                 <tbody>
                   <tr>
                     <td><em>targetTypes</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
+                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -427,12 +440,14 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_BindBase_Rezolver_Configuration_ITypeReference___">BindBase(ITypeReference[])</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ListTargetMetadata_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ListTargetMetadata.CreateRezolveTargetBase(System.Type%5B%5D%2CRezolver.Configuration.ConfigurationAdapterContext%2CRezolver.Configuration.IConfigurationEntry)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ListTargetMetadata_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_" data-uid="Rezolver.Configuration.ListTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)">CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ListTargetMetadata_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_" data-uid="Rezolver.Configuration.ListTargetMetadata.CreateRezolveTargetBase(System.Type[],Rezolver.Configuration.ConfigurationAdapterContext,Rezolver.Configuration.IConfigurationEntry)">CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -451,17 +466,17 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
                 <tbody>
                   <tr>
                     <td><em>targetTypes</em></td>
-              	  <td><span class="xref">System.Type</span>[]</td>
+                    <td><span class="xref">System.Type</span>[]</td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>entry</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationEntry.html#Rezolver_Configuration_IConfigurationEntry">IConfigurationEntry</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -483,6 +498,7 @@ in the Array or List that will be created by the <a class="xref" href="Rezolver.
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase_CreateRezolveTargetBase_System_Type___Rezolver_Configuration_ConfigurationAdapterContext_Rezolver_Configuration_IConfigurationEntry_">CreateRezolveTargetBase(Type[], ConfigurationAdapterContext, IConfigurationEntry)</a></div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

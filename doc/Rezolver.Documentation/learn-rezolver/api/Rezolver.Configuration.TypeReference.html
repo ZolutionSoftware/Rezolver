@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -146,15 +146,16 @@ of <a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Con
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class TypeReference : TypeReferenceBase, ITypeReference, IConfigurationLineInfo</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_Rezolver_Configuration_ITypeReference___.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.%23ctor(System.String%2CRezolver.Configuration.IConfigurationLineInfo%2CRezolver.Configuration.ITypeReference%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,Rezolver.Configuration.ITypeReference[])">TypeReference(String, IConfigurationLineInfo, ITypeReference[])</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,Rezolver.Configuration.ITypeReference[])">TypeReference(String, IConfigurationLineInfo, ITypeReference[])</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference">TypeReference</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -174,30 +175,32 @@ of <a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Con
                 <tbody>
                   <tr>
                     <td><em>typeName</em></td>
-              	  <td><span class="xref">System.String</span></td>
+                    <td><span class="xref">System.String</span></td>
                     <td><p>Name of the type.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>lineInfo</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo">IConfigurationLineInfo</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo">IConfigurationLineInfo</a></td>
                     <td><p>Optional.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>genericArguments</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
+                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td><p>The generic arguments.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_Rezolver_Configuration_ITypeReference___.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.%23ctor(System.String%2CRezolver.Configuration.IConfigurationLineInfo%2CSystem.Boolean%2CRezolver.Configuration.ITypeReference%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,Rezolver.Configuration.ITypeReference[])">TypeReference(String, IConfigurationLineInfo, Boolean, ITypeReference[])</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,Rezolver.Configuration.ITypeReference[])">TypeReference(String, IConfigurationLineInfo, Boolean, ITypeReference[])</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -216,32 +219,34 @@ of <a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Con
                 <tbody>
                   <tr>
                     <td><em>typeName</em></td>
-              	  <td><span class="xref">System.String</span></td>
+                    <td><span class="xref">System.String</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>lineInfo</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo">IConfigurationLineInfo</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo">IConfigurationLineInfo</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>isArray</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>genericArguments</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
+                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_System_Boolean_Rezolver_Configuration_ITypeReference___.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.%23ctor(System.String%2CRezolver.Configuration.IConfigurationLineInfo%2CSystem.Boolean%2CSystem.Boolean%2CRezolver.Configuration.ITypeReference%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_System_Boolean_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,System.Boolean,Rezolver.Configuration.ITypeReference[])">TypeReference(String, IConfigurationLineInfo, Boolean, Boolean, ITypeReference[])</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference__ctor_System_String_Rezolver_Configuration_IConfigurationLineInfo_System_Boolean_System_Boolean_Rezolver_Configuration_ITypeReference___" data-uid="Rezolver.Configuration.TypeReference.#ctor(System.String,Rezolver.Configuration.IConfigurationLineInfo,System.Boolean,System.Boolean,Rezolver.Configuration.ITypeReference[])">TypeReference(String, IConfigurationLineInfo, Boolean, Boolean, ITypeReference[])</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference">TypeReference</a> class, allowing you to create an explicitly &#39;unbound&#39; type,
 which is expected to be replaced by whichever type is required by another component, later.</p>
 </div>
@@ -262,45 +267,47 @@ which is expected to be replaced by whichever type is required by another compon
                 <tbody>
                   <tr>
                     <td><em>typeName</em></td>
-              	  <td><span class="xref">System.String</span></td>
+                    <td><span class="xref">System.String</span></td>
                     <td><p>Name of the type.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>lineInfo</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo">IConfigurationLineInfo</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.IConfigurationLineInfo.html#Rezolver_Configuration_IConfigurationLineInfo">IConfigurationLineInfo</a></td>
                     <td><p>The line information.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>isArray</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td><p>if set to <code>true</code> [is array].</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>isUnbound</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td><p>if set to <code>true</code> [is unbound].</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>genericArguments</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
+                    <td><a class="xref" href="Rezolver.Configuration.ITypeReference.html#Rezolver_Configuration_ITypeReference">ITypeReference</a>[]</td>
                     <td><p>The generic arguments.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="fields">Fields
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_NoGenericArguments.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.NoGenericArguments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_NoGenericArguments" data-uid="Rezolver.Configuration.TypeReference.NoGenericArguments">NoGenericArguments</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_NoGenericArguments" data-uid="Rezolver.Configuration.TypeReference.NoGenericArguments">NoGenericArguments</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -322,15 +329,17 @@ which is expected to be replaced by whichever type is required by another compon
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_GenericArguments.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.GenericArguments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_GenericArguments" data-uid="Rezolver.Configuration.TypeReference.GenericArguments">GenericArguments</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_GenericArguments" data-uid="Rezolver.Configuration.TypeReference.GenericArguments">GenericArguments</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -354,12 +363,14 @@ which is expected to be replaced by whichever type is required by another compon
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_GenericArguments">GenericArguments</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_IsArray.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.IsArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_IsArray" data-uid="Rezolver.Configuration.TypeReference.IsArray">IsArray</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_IsArray" data-uid="Rezolver.Configuration.TypeReference.IsArray">IsArray</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -383,12 +394,14 @@ which is expected to be replaced by whichever type is required by another compon
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_IsArray">IsArray</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_IsOpenGenericTypeArgument.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.IsOpenGenericTypeArgument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_IsOpenGenericTypeArgument" data-uid="Rezolver.Configuration.TypeReference.IsOpenGenericTypeArgument">IsOpenGenericTypeArgument</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_IsOpenGenericTypeArgument" data-uid="Rezolver.Configuration.TypeReference.IsOpenGenericTypeArgument">IsOpenGenericTypeArgument</h4>
               <div class="markdown level1 summary"><p>Gets a value indicating whether this instance represents an open generic type argument (e.g. the &#39;T&#39; from List<t>).<p>
 </t></div>
               <div class="markdown level1 conceptual"></div>
@@ -414,12 +427,14 @@ which is expected to be replaced by whichever type is required by another compon
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_IsOpenGenericTypeArgument">IsOpenGenericTypeArgument</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_IsUnbound.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.IsUnbound%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_IsUnbound" data-uid="Rezolver.Configuration.TypeReference.IsUnbound">IsUnbound</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_IsUnbound" data-uid="Rezolver.Configuration.TypeReference.IsUnbound">IsUnbound</h4>
               <div class="markdown level1 summary"><p>Gets a value indicating whether this instance represents the <a class="xref" href="Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_Unbound">Unbound</a> special type reference.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -445,12 +460,14 @@ which is expected to be replaced by whichever type is required by another compon
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_IsUnbound">IsUnbound</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_OpenGenericTypeArgument.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.OpenGenericTypeArgument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_OpenGenericTypeArgument" data-uid="Rezolver.Configuration.TypeReference.OpenGenericTypeArgument">OpenGenericTypeArgument</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_OpenGenericTypeArgument" data-uid="Rezolver.Configuration.TypeReference.OpenGenericTypeArgument">OpenGenericTypeArgument</h4>
               <div class="markdown level1 summary"><p>The one-and-only open generic argument instance.
 The only way to fetch a non-derived TypeReference that returns true for <a class="xref" href="Rezolver.Configuration.TypeReference.html#Rezolver_Configuration_TypeReference_IsOpenGenericTypeArgument">IsOpenGenericTypeArgument</a>
 is to use the reference from this field.</p>
@@ -476,12 +493,14 @@ is to use the reference from this field.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_TypeName.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.TypeName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_TypeName" data-uid="Rezolver.Configuration.TypeReference.TypeName">TypeName</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_TypeName" data-uid="Rezolver.Configuration.TypeReference.TypeName">TypeName</h4>
               <div class="markdown level1 summary"><p>Gets the name of the type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -507,12 +526,14 @@ is to use the reference from this field.</p>
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Configuration.TypeReferenceBase.html#Rezolver_Configuration_TypeReferenceBase_TypeName">TypeName</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_TypeReference_Unbound.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.TypeReference.Unbound%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_TypeReference_Unbound" data-uid="Rezolver.Configuration.TypeReference.Unbound">Unbound</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_TypeReference_Unbound" data-uid="Rezolver.Configuration.TypeReference.Unbound">Unbound</h4>
               <div class="markdown level1 summary"><p>A static Unbound TypeReference that can be used in cases where a simple instance of an unbound type is required.</p>
 <p>You can also, of course, create explicitly unbound type references using the greediest constructor on this type.</p>
 </div>
@@ -537,6 +558,7 @@ is to use the reference from this field.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
             </article>
           </div>
           

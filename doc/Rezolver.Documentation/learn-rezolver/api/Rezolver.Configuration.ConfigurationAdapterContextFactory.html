@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -135,15 +135,16 @@ you can use as the starting point of your own factory.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class ConfigurationAdapterContextFactory : IConfigurationAdapterContextFactory</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory__ctor.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory__ctor" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.#ctor">ConfigurationAdapterContextFactory()</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationAdapterContextFactory__ctor" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.#ctor">ConfigurationAdapterContextFactory()</h4>
               <div class="markdown level1 summary"><p>Creation of new instances of this class, outside of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance">Instance</a> instance, is only through inheritance.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -151,15 +152,17 @@ you can use as the starting point of your own factory.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected ConfigurationAdapterContextFactory()</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance">Instance</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationAdapterContextFactory_Instance" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.Instance">Instance</h4>
               <div class="markdown level1 summary"><p>The one and only instance of this context factory.  Note that this is also the default application-wide context factory that is
 used by the standard <a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter">ConfigurationAdapter</a> class when converting configuration data into rezolvers (by virtue
 of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter_DefaultContextFactory">DefaultContextFactory</a> property, which you can change).</p>
@@ -184,15 +187,17 @@ of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Re
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter%2CRezolver.Configuration.IConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter,Rezolver.Configuration.IConfiguration)">CreateContext(ConfigurationAdapter, IConfiguration)</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.CreateContext(Rezolver.Configuration.ConfigurationAdapter,Rezolver.Configuration.IConfiguration)">CreateContext(ConfigurationAdapter, IConfiguration)</h4>
               <div class="markdown level1 summary"><p>Implements the <a class="xref" href="Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory">IConfigurationAdapterContextFactory</a> method of the same name.</p>
 <p>The base behaviour is to create an instance of the <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a> class, passing
 the configuration and the default set of assembly references returned by <a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContextFactory.html#Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences">GetDefaultAssemblyReferences()</a>.</p>
@@ -214,13 +219,13 @@ the configuration and the default set of assembly references returned by <a clas
                 <tbody>
                   <tr>
                     <td><em>adapter</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter">ConfigurationAdapter</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapter.html#Rezolver_Configuration_ConfigurationAdapter">ConfigurationAdapter</a></td>
                     <td><p>The adapter.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>configuration</em></td>
-              	  <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
+                    <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
                     <td><p>The configuration.</p>
 </td>
                   </tr>
@@ -243,12 +248,14 @@ the configuration and the default set of assembly references returned by <a clas
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory_CreateContext_Rezolver_Configuration_ConfigurationAdapter_Rezolver_Configuration_IConfiguration_">CreateContext(ConfigurationAdapter, IConfiguration)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences">GetDefaultAssemblyReferences()</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationAdapterContextFactory_GetDefaultAssemblyReferences" data-uid="Rezolver.Configuration.ConfigurationAdapterContextFactory.GetDefaultAssemblyReferences">GetDefaultAssemblyReferences()</h4>
               <div class="markdown level1 summary"><p>Gets the assemblies that are to be used for new contexts as the default set of references.</p>
 <p>The base behaviour is to add mscorlib, System and System.Core although, depending on the target platform,
 the list might be less.</p>
@@ -273,6 +280,7 @@ the list might be less.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
             </article>
           </div>
           

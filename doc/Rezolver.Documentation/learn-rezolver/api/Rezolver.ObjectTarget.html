@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -150,15 +150,16 @@ enabled, then scope tracking behaves exactly the same as <a class="xref" href="R
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class ObjectTarget : TargetBase, ITarget</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ObjectTarget__ctor_System_Object_System_Type_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.ObjectTarget.%23ctor(System.Object%2CSystem.Type%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ObjectTarget__ctor_System_Object_System_Type_System_Boolean_" data-uid="Rezolver.ObjectTarget.#ctor(System.Object,System.Type,System.Boolean)">ObjectTarget(Object, Type, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_ObjectTarget__ctor_System_Object_System_Type_System_Boolean_" data-uid="Rezolver.ObjectTarget.#ctor(System.Object,System.Type,System.Boolean)">ObjectTarget(Object, Type, Boolean)</h4>
               <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.ObjectTarget.html#Rezolver_ObjectTarget">ObjectTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -178,19 +179,19 @@ enabled, then scope tracking behaves exactly the same as <a class="xref" href="R
                 <tbody>
                   <tr>
                     <td><em>obj</em></td>
-              	  <td><span class="xref">System.Object</span></td>
+                    <td><span class="xref">System.Object</span></td>
                     <td><p>The object to be returned by this target when resolved.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>declaredType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>Optional.  The declared type of this target, if different from the absolute type of the <em>obj</em></p>
 </td>
                   </tr>
                   <tr>
                     <td><em>suppressScopeTracking</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td><p>Optional.  Controls whether the instance will be added to a scope when resolved.  If true (the default) then
 no scope tracking is performed, and you will have to dispose of the object, if disposable.  If false, then the object will be tracked by the 
 ROOT scope of the first scope the object is resolved from.</p>
@@ -202,15 +203,17 @@ ROOT scope of the first scope the object is resolved from.</p>
               <div class="markdown level1 remarks"><p>Please note - if you enable scope tracking, but the object is never resolved, then the object will not be disposed and you will need
 to ensure you dispose of it.</p>
 </div>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ObjectTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.ObjectTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ObjectTarget_DeclaredType" data-uid="Rezolver.ObjectTarget.DeclaredType">DeclaredType</h4>
+              <h4 class="hmember" id="Rezolver_ObjectTarget_DeclaredType" data-uid="Rezolver.ObjectTarget.DeclaredType">DeclaredType</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -234,12 +237,14 @@ to ensure you dispose of it.</p>
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">DeclaredType</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ObjectTarget_SuppressScopeTracking.md&amp;value=---%0Auid%3A%20Rezolver.ObjectTarget.SuppressScopeTracking%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ObjectTarget_SuppressScopeTracking" data-uid="Rezolver.ObjectTarget.SuppressScopeTracking">SuppressScopeTracking</h4>
+              <h4 class="hmember" id="Rezolver_ObjectTarget_SuppressScopeTracking" data-uid="Rezolver.ObjectTarget.SuppressScopeTracking">SuppressScopeTracking</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -263,15 +268,17 @@ to ensure you dispose of it.</p>
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">SuppressScopeTracking</a></div>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ObjectTarget_CreateExpressionBase_Rezolver_CompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.ObjectTarget.CreateExpressionBase(Rezolver.CompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ObjectTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ObjectTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
+              <h4 class="hmember" id="Rezolver_ObjectTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ObjectTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -290,7 +297,7 @@ to ensure you dispose of it.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -312,12 +319,14 @@ to ensure you dispose of it.</p>
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ObjectTarget_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.ObjectTarget.CreateScopeSelectionExpression(Rezolver.CompileContext%2CExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ObjectTarget_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.ObjectTarget.CreateScopeSelectionExpression(Rezolver.CompileContext,Expression)">CreateScopeSelectionExpression(CompileContext, Expression)</h4>
+              <h4 class="hmember" id="Rezolver_ObjectTarget_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.ObjectTarget.CreateScopeSelectionExpression(Rezolver.CompileContext,Expression)">CreateScopeSelectionExpression(CompileContext, Expression)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -336,12 +345,12 @@ to ensure you dispose of it.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>expression</em></td>
-              	  <td><span class="xref">Expression</span></td>
+                    <td><span class="xref">Expression</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -363,6 +372,7 @@ to ensure you dispose of it.</p>
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">CreateScopeSelectionExpression(CompileContext, Expression)</a></div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

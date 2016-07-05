@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -131,15 +131,16 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class ParameterBinding</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding__ctor_ParameterInfo_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.%23ctor(ParameterInfo%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding__ctor_ParameterInfo_Rezolver_ITarget_" data-uid="Rezolver.ParameterBinding.#ctor(ParameterInfo,Rezolver.ITarget)">ParameterBinding(ParameterInfo, ITarget)</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding__ctor_ParameterInfo_Rezolver_ITarget_" data-uid="Rezolver.ParameterBinding.#ctor(ParameterInfo,Rezolver.ITarget)">ParameterBinding(ParameterInfo, ITarget)</h4>
               <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding">ParameterBinding</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -159,27 +160,29 @@
                 <tbody>
                   <tr>
                     <td><em>parameter</em></td>
-              	  <td><span class="xref">ParameterInfo</span></td>
+                    <td><span class="xref">ParameterInfo</span></td>
                     <td><p>Required - the parameter being bound</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>target</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><p>Optional - the argument supplied for the parameter.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="fields">Fields
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_None.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.None%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_None" data-uid="Rezolver.ParameterBinding.None">None</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_None" data-uid="Rezolver.ParameterBinding.None">None</h4>
               <div class="markdown level1 summary"><p>Represents an empty parameter bindings array.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -202,15 +205,17 @@
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_IsValid.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.IsValid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_IsValid" data-uid="Rezolver.ParameterBinding.IsValid">IsValid</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_IsValid" data-uid="Rezolver.ParameterBinding.IsValid">IsValid</h4>
               <div class="markdown level1 summary"><p>Gets a boolean indicating whether the parameter binding is valid</p>
 <p>Ultimately, this returns true if <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Target">Target</a> is non-null.</p>
 </div>
@@ -234,12 +239,14 @@
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_Parameter.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.Parameter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_Parameter" data-uid="Rezolver.ParameterBinding.Parameter">Parameter</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_Parameter" data-uid="Rezolver.ParameterBinding.Parameter">Parameter</h4>
               <div class="markdown level1 summary"><p>The parameter to be bound</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -262,12 +269,14 @@
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_Target.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.Target%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_Target" data-uid="Rezolver.ParameterBinding.Target">Target</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_Target" data-uid="Rezolver.ParameterBinding.Target">Target</h4>
               <div class="markdown level1 summary"><p>The initial target that was bound to this parameter.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -290,15 +299,17 @@
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_BindMethod_MethodBase_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.BindMethod(MethodBase%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_BindMethod_MethodBase_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.ParameterBinding.BindMethod(MethodBase,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">BindMethod(MethodBase, IDictionary&lt;String, ITarget&gt;)</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_BindMethod_MethodBase_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.ParameterBinding.BindMethod(MethodBase,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">BindMethod(MethodBase, IDictionary&lt;String, ITarget&gt;)</h4>
               <div class="markdown level1 summary"><p>Matches named targets in <em>args</em> to parameters on the passed <em>method</em>,
 creating default <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding">ParameterBinding</a>s for any parameters for which named targets cannot be found.</p>
 </div>
@@ -319,12 +330,12 @@ creating default <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_P
                 <tbody>
                   <tr>
                     <td><em>method</em></td>
-              	  <td><span class="xref">MethodBase</span></td>
+                    <td><span class="xref">MethodBase</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>args</em></td>
-              	  <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -344,12 +355,14 @@ creating default <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_P
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_BindOverload_MethodBase___System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__MethodBase__.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.BindOverload(MethodBase%5B%5D%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CMethodBase%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_BindOverload_MethodBase___System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__MethodBase__" data-uid="Rezolver.ParameterBinding.BindOverload(MethodBase[],System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},MethodBase@)">BindOverload(MethodBase[], IDictionary&lt;String, ITarget&gt;, out MethodBase)</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_BindOverload_MethodBase___System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__MethodBase__" data-uid="Rezolver.ParameterBinding.BindOverload(MethodBase[],System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},MethodBase@)">BindOverload(MethodBase[], IDictionary&lt;String, ITarget&gt;, out MethodBase)</h4>
               <div class="markdown level1 summary"><p>Searches for a method in the <em>methods</em> collection whose parameters can be filled by the targets provided in the <em>args</em>
 dictionary, returning the parameter bindings, and passing out the resolved target method in <em>resolvedMethod</em> if found.</p>
 <p>Note - if no match can be found, or if more than one method could be bound, then an InvalidOperationException will occur.</p>
@@ -371,19 +384,19 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
                 <tbody>
                   <tr>
                     <td><em>methods</em></td>
-              	  <td><span class="xref">MethodBase</span>[]</td>
+                    <td><span class="xref">MethodBase</span>[]</td>
                     <td><p>The methods.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>args</em></td>
-              	  <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><p>The arguments.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>resolvedMethod</em></td>
-              	  <td><span class="xref">MethodBase</span></td>
+                    <td><span class="xref">MethodBase</span></td>
                     <td><p>The resolved method.</p>
 </td>
                   </tr>
@@ -405,12 +418,14 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_BindWithRezolvedArguments_MethodBase_.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.BindWithRezolvedArguments(MethodBase)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_BindWithRezolvedArguments_MethodBase_" data-uid="Rezolver.ParameterBinding.BindWithRezolvedArguments(MethodBase)">BindWithRezolvedArguments(MethodBase)</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_BindWithRezolvedArguments_MethodBase_" data-uid="Rezolver.ParameterBinding.BindWithRezolvedArguments(MethodBase)">BindWithRezolvedArguments(MethodBase)</h4>
               <div class="markdown level1 summary"><p>Creates parameter bindings for each parameter in the passed method where each value will be resolved.</p>
 <p>For any optional parameters - their default values will be used as a fallback.</p>
 </div>
@@ -431,7 +446,7 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
                 <tbody>
                   <tr>
                     <td><em>method</em></td>
-              	  <td><span class="xref">MethodBase</span></td>
+                    <td><span class="xref">MethodBase</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -451,12 +466,14 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_BindWithRezolvedOrOptionalDefault_MethodBase_Rezolver_CompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase%2CRezolver.CompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_BindWithRezolvedOrOptionalDefault_MethodBase_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase,Rezolver.CompileContext)">BindWithRezolvedOrOptionalDefault(MethodBase, CompileContext)</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_BindWithRezolvedOrOptionalDefault_MethodBase_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase,Rezolver.CompileContext)">BindWithRezolvedOrOptionalDefault(MethodBase, CompileContext)</h4>
               <div class="markdown level1 summary"><p>This is a compile-time helper method which produces a binding for each parameter where arguments that can be resolved 
 from the passed <em>context</em> will be bound with <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>s, and those which cannot, 
 but which are optional, will be bound with <a class="xref" href="Rezolver.OptionalParameterTarget.html#Rezolver_OptionalParameterTarget">OptionalParameterTarget</a>s.</p>
@@ -479,13 +496,13 @@ but which are optional, will be bound with <a class="xref" href="Rezolver.Option
                 <tbody>
                   <tr>
                     <td><em>method</em></td>
-              	  <td><span class="xref">MethodBase</span></td>
+                    <td><span class="xref">MethodBase</span></td>
                     <td><p>Required - the method whose parameters are to be bound.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>Required - the current compile context which will be used to test whether arguments can be resolved
 at compile time.  If they can, then the associated parameter will be bound with a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>.</p>
 </td>
@@ -507,12 +524,14 @@ at compile time.  If they can, then the associated parameter will be bound with 
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_CreateExpression_Rezolver_CompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.CreateExpression(Rezolver.CompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_CreateExpression_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.CreateExpression(Rezolver.CompileContext)">CreateExpression(CompileContext)</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_CreateExpression_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.CreateExpression(Rezolver.CompileContext)">CreateExpression(CompileContext)</h4>
               <div class="markdown level1 summary"><p>Helper method for getting the expression from the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Target">Target</a> for the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Parameter">Parameter</a>&#39;s</p>
 <p><see cref="!:ParameterInfo.ParameterType"></see>.  Takes care of setting the correct</p>
 <p><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> in a new context built from the <em>context</em> you pass.</p>
@@ -534,7 +553,7 @@ at compile time.  If they can, then the associated parameter will be bound with 
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The current context for the object being built whose method or constructor parameter
 is being bound.</p>
 </td>
@@ -558,12 +577,14 @@ is being bound.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ParameterBinding_Resolve_Rezolver_CompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.ParameterBinding.Resolve(Rezolver.CompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_ParameterBinding_Resolve_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.Resolve(Rezolver.CompileContext)">Resolve(CompileContext)</h4>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_Resolve_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.Resolve(Rezolver.CompileContext)">Resolve(CompileContext)</h4>
               <div class="markdown level1 summary"><p>Fetch the target that would be bound to this parameter given the passed <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -583,7 +604,7 @@ is being bound.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>The current compile context - a new one is created for the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Parameter">Parameter</a> type</p>
 </td>
                   </tr>
@@ -612,6 +633,7 @@ target container in the context is a stub (e.g. empty enumerable)</p>
               <div class="markdown level1 remarks"><p>During compilation - you should not use the target returned by this function as a direct
 part of your expression tree - you should </p>
 </div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

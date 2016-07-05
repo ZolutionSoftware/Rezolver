@@ -59,7 +59,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['clean', 'copy', 'less']);
-    grunt.registerTask('prod', ['clean', 'copy', 'less:prod']);
-    grunt.registerTask('dev', ['clean', 'copy', 'less:dev']);
+    grunt.registerTask('default', ['copy', 'less']);
+    grunt.registerTask('prod', ['copy', 'less:prod']);
+    grunt.registerTask('dev', ['copy', 'less:dev']);
 };

@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -118,15 +118,16 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IObjectTargetMetadata : IRezolveTargetMetadata</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_IObjectTargetMetadata_GetObject_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.IObjectTargetMetadata.GetObject(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_Configuration_IObjectTargetMetadata_GetObject_System_Type_" data-uid="Rezolver.Configuration.IObjectTargetMetadata.GetObject(System.Type)">GetObject(Type)</h4>
+              <h4 class="hmember" id="Rezolver_Configuration_IObjectTargetMetadata_GetObject_System_Type_" data-uid="Rezolver.Configuration.IObjectTargetMetadata.GetObject(System.Type)">GetObject(Type)</h4>
               <div class="markdown level1 summary"><p>Called to get the object that will be registered in the IRezolveTargetContainer to be returned when a
 caller requests one of its registered types. The method can construct an object anew everytime it is
 called, or it can always return the same instance; this behaviour is implementation-dependant.</p>
@@ -148,7 +149,7 @@ called, or it can always return the same instance; this behaviour is implementat
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>The type of object that is desired.  The implementation determines whether this
 parameter is required.  If it is, and you pass null, then an ArgumentNullException will be thrown.
 If you pass an argument, the implementation is not bound to check or honour the type.  Its purpose
@@ -173,6 +174,7 @@ is to provide a hint only, not a guarantee that the object returned is compatibl
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
             </article>
           </div>
           

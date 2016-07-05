@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -135,15 +135,16 @@ dependency lookups during compilation time.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class CompileContext : ITargetContainer</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext__ctor_Rezolver_CompileContext_System_Type_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.%23ctor(Rezolver.CompileContext%2CSystem.Type%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext__ctor_Rezolver_CompileContext_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.#ctor(Rezolver.CompileContext,System.Type,System.Boolean,System.Boolean)">CompileContext(CompileContext, Type, Boolean, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext__ctor_Rezolver_CompileContext_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.#ctor(Rezolver.CompileContext,System.Type,System.Boolean,System.Boolean)">CompileContext(CompileContext, Type, Boolean, Boolean)</h4>
               <div class="markdown level1 summary"><p>Creates a new CompileContext using an existing one as a template.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -163,21 +164,21 @@ dependency lookups during compilation time.</p>
                 <tbody>
                   <tr>
                     <td><em>parentContext</em></td>
-              	  <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
                     <td><p>Used to seed the compilation stack, rezolver, rezolve context parameter and optionally
 the target type (if you pass null for <em>targetType</em>.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>targetType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>The target type that is expected to be compiled, or null to inherit
 the <em>parentContext</em>&#39;s <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> property.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>inheritSharedExpressions</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td><p>If true (the default), then the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_SharedExpressions">SharedExpressions</a> for this context will be shared
 from the parent context - meaning that any new additions will be added back to the parent context again.  This is the most common
 behaviour when chaining multiple targets&#39; expressions together.  Passing false for this parameter is only required in rare situations.</p>
@@ -185,7 +186,7 @@ behaviour when chaining multiple targets&#39; expressions together.  Passing fal
                   </tr>
                   <tr>
                     <td><em>suppressScopeTracking</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td><p>If true, then any expressions constructed from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> objects
 should not contain automatically generated code to track objects in an enclosing scope.  The default is false.  This is 
 typically only enabled when one target is explicitly using expressions created from other targets, and has its own
@@ -194,12 +195,14 @@ scope tracking code, or expects to be surrounded by automatically generated scop
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext__ctor_Rezolver_IContainer_System_Type_ParameterExpression_System_Collections_Generic_IEnumerable_Rezolver_ITarget__Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.%23ctor(Rezolver.IContainer%2CSystem.Type%2CParameterExpression%2CSystem.Collections.Generic.IEnumerable%7BRezolver.ITarget%7D%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext__ctor_Rezolver_IContainer_System_Type_ParameterExpression_System_Collections_Generic_IEnumerable_Rezolver_ITarget__Rezolver_ITargetContainer_" data-uid="Rezolver.CompileContext.#ctor(Rezolver.IContainer,System.Type,ParameterExpression,System.Collections.Generic.IEnumerable{Rezolver.ITarget},Rezolver.ITargetContainer)">CompileContext(IContainer, Type, ParameterExpression, IEnumerable&lt;ITarget&gt;, ITargetContainer)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext__ctor_Rezolver_IContainer_System_Type_ParameterExpression_System_Collections_Generic_IEnumerable_Rezolver_ITarget__Rezolver_ITargetContainer_" data-uid="Rezolver.CompileContext.#ctor(Rezolver.IContainer,System.Type,ParameterExpression,System.Collections.Generic.IEnumerable{Rezolver.ITarget},Rezolver.ITargetContainer)">CompileContext(IContainer, Type, ParameterExpression, IEnumerable&lt;ITarget&gt;, ITargetContainer)</h4>
               <div class="markdown level1 summary"><p>Creates a new CompileContext</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -219,31 +222,31 @@ scope tracking code, or expects to be surrounded by automatically generated scop
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>Required. Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> property.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>targetType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>Optional. Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> property.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>rezolveContextParameter</em></td>
-              	  <td><span class="xref">ParameterExpression</span></td>
+                    <td><span class="xref">ParameterExpression</span></td>
                     <td><p>Optional.  Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a></p>
 </td>
                   </tr>
                   <tr>
                     <td><em>compilingTargets</em></td>
-              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td><p>Optional.  Allows you to seed the stack of compiling targets from creation.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>dependencyContainer</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>Optional.  By default, this class implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> by wrapping
 a <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder">ChildBuilder</a> over the one that is attached to the <em>rezolver</em> that you pass on construction.</p>
 <p>To override that behaviour, you can pass a different target container here.</p>
@@ -253,15 +256,17 @@ property of the <em>rezolver</em> parameter.</p>
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_CompilingTargets.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.CompilingTargets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_CompilingTargets" data-uid="Rezolver.CompileContext.CompilingTargets">CompilingTargets</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_CompilingTargets" data-uid="Rezolver.CompileContext.CompilingTargets">CompilingTargets</h4>
               <div class="markdown level1 summary"><p>An enumerable representing the current stack of targets that are being compiled.</p>
 <p>The underlying stack is not exposed through this enumerable.</p>
 </div>
@@ -285,12 +290,14 @@ property of the <em>rezolver</em> parameter.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_ContextRezolverPropertyExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.ContextRezolverPropertyExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_ContextRezolverPropertyExpression" data-uid="Rezolver.CompileContext.ContextRezolverPropertyExpression">ContextRezolverPropertyExpression</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_ContextRezolverPropertyExpression" data-uid="Rezolver.CompileContext.ContextRezolverPropertyExpression">ContextRezolverPropertyExpression</h4>
               <div class="markdown level1 summary"><p>Returns an expression that represents reading the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Rezolver">Rezolver</a> property of the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a> 
 to aid in code generation.</p>
 <p>This IS NOT the same as the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolverExpression">RezolverExpression</a> property.</p>
@@ -316,12 +323,14 @@ to aid in code generation.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_ContextScopePropertyExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.ContextScopePropertyExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_ContextScopePropertyExpression" data-uid="Rezolver.CompileContext.ContextScopePropertyExpression">ContextScopePropertyExpression</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_ContextScopePropertyExpression" data-uid="Rezolver.CompileContext.ContextScopePropertyExpression">ContextScopePropertyExpression</h4>
               <div class="markdown level1 summary"><p>Returns an expression that represents reading the Scope property of the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -344,12 +353,14 @@ to aid in code generation.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_RezolveContextParameter.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.RezolveContextParameter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_RezolveContextParameter" data-uid="Rezolver.CompileContext.RezolveContextParameter">RezolveContextParameter</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_RezolveContextParameter" data-uid="Rezolver.CompileContext.RezolveContextParameter">RezolveContextParameter</h4>
               <div class="markdown level1 summary"><p>A expression to be used to bind to the RezolveContext that will be passed to the generated code at runtime.</p>
 <p>If this is never set, then the framework will use <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_RezolveContextParameter">RezolveContextParameter</a> by default.</p>
 <p>In theory, you should never need to set this to anything else, unless you&#39;re doing something very interesting with
@@ -375,12 +386,14 @@ the generated expressions.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Rezolver.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Rezolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_Rezolver" data-uid="Rezolver.CompileContext.Rezolver">Rezolver</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_Rezolver" data-uid="Rezolver.CompileContext.Rezolver">Rezolver</h4>
               <div class="markdown level1 summary"><p>The rezolver that is considered the current compilation &#39;scope&#39;.</p>
 <p>You should not use this to look up other targets
 for dependency resolution - for that, you should use the DependencyBuilder</p>
@@ -405,12 +418,14 @@ for dependency resolution - for that, you should use the DependencyBuilder</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_RezolverExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.RezolverExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_RezolverExpression" data-uid="Rezolver.CompileContext.RezolverExpression">RezolverExpression</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_RezolverExpression" data-uid="Rezolver.CompileContext.RezolverExpression">RezolverExpression</h4>
               <div class="markdown level1 summary"><p>Represents an expression that equals the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> that belongs to this context.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -433,12 +448,14 @@ for dependency resolution - for that, you should use the DependencyBuilder</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_SharedExpressions.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.SharedExpressions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_SharedExpressions" data-uid="Rezolver.CompileContext.SharedExpressions">SharedExpressions</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressions" data-uid="Rezolver.CompileContext.SharedExpressions">SharedExpressions</h4>
               <div class="markdown level1 summary"><p>Shared expressions are expressions that targets add to the compile context as they are compiled,
 enabling them to generate code which is both more efficient at runtime (e.g. avoiding the creation of
 redundant locals for blocks which can reuse a pre-existing local) and that can be more efficiently rewritten </p>
@@ -469,12 +486,14 @@ that is to be compiled.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_SuppressScopeTracking.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.SuppressScopeTracking%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_SuppressScopeTracking" data-uid="Rezolver.CompileContext.SuppressScopeTracking">SuppressScopeTracking</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_SuppressScopeTracking" data-uid="Rezolver.CompileContext.SuppressScopeTracking">SuppressScopeTracking</h4>
               <div class="markdown level1 summary"><p>If true, then any target that is compiling within this scope should not generate any runtime code to fetch the
 object from, or track the object in, the current scope.</p>
 </div>
@@ -505,12 +524,14 @@ scope tracking code (specifically, the <a class="xref" href="Rezolver.SingletonT
 implementation of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a>.  The <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase">TargetBase</a>
 class does honour this flag.</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_TargetType.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.TargetType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_TargetType" data-uid="Rezolver.CompileContext.TargetType">TargetType</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_TargetType" data-uid="Rezolver.CompileContext.TargetType">TargetType</h4>
               <div class="markdown level1 summary"><p>The desired type to be returned by the generated code.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -533,15 +554,17 @@ class does honour this flag.</p>
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.CompileContext.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.CompileContext.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -560,12 +583,12 @@ class does honour this flag.</p>
                 <tbody>
                   <tr>
                     <td><em>existing</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -587,12 +610,14 @@ class does honour this flag.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_Fetch_System_Type_" data-uid="Rezolver.CompileContext.Fetch(System.Type)">Fetch(Type)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_Fetch_System_Type_" data-uid="Rezolver.CompileContext.Fetch(System.Type)">Fetch(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -611,7 +636,7 @@ class does honour this flag.</p>
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -633,12 +658,14 @@ class does honour this flag.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_FetchAll_System_Type_" data-uid="Rezolver.CompileContext.FetchAll(System.Type)">FetchAll(Type)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_FetchAll_System_Type_" data-uid="Rezolver.CompileContext.FetchAll(System.Type)">FetchAll(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -657,7 +684,7 @@ class does honour this flag.</p>
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -679,12 +706,14 @@ class does honour this flag.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_GetOrAddSharedExpression_System_Type_System_String_System_Func_Expression__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.GetOrAddSharedExpression(System.Type%2CSystem.String%2CSystem.Func%7BExpression%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_GetOrAddSharedExpression_System_Type_System_String_System_Func_Expression__System_Type_" data-uid="Rezolver.CompileContext.GetOrAddSharedExpression(System.Type,System.String,System.Func{Expression},System.Type)">GetOrAddSharedExpression(Type, String, Func&lt;Expression&gt;, Type)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_GetOrAddSharedExpression_System_Type_System_String_System_Func_Expression__System_Type_" data-uid="Rezolver.CompileContext.GetOrAddSharedExpression(System.Type,System.String,System.Func{Expression},System.Type)">GetOrAddSharedExpression(Type, String, Func&lt;Expression&gt;, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -703,22 +732,22 @@ class does honour this flag.</p>
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>name</em></td>
-              	  <td><span class="xref">System.String</span></td>
+                    <td><span class="xref">System.String</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>expressionFactory</em></td>
-              	  <td><span class="xref">System.Func</span>&lt;<span class="xref">Expression</span>&gt;</td>
+                    <td><span class="xref">System.Func</span>&lt;<span class="xref">Expression</span>&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>requestingType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -738,12 +767,14 @@ class does honour this flag.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_GetOrAddSharedLocal_System_Type_System_String_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.GetOrAddSharedLocal(System.Type%2CSystem.String%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_GetOrAddSharedLocal_System_Type_System_String_System_Type_" data-uid="Rezolver.CompileContext.GetOrAddSharedLocal(System.Type,System.String,System.Type)">GetOrAddSharedLocal(Type, String, Type)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_GetOrAddSharedLocal_System_Type_System_String_System_Type_" data-uid="Rezolver.CompileContext.GetOrAddSharedLocal(System.Type,System.String,System.Type)">GetOrAddSharedLocal(Type, String, Type)</h4>
               <div class="markdown level1 summary"><p>Retrieves</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -763,17 +794,17 @@ class does honour this flag.</p>
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>name</em></td>
-              	  <td><span class="xref">System.String</span></td>
+                    <td><span class="xref">System.String</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>requestingType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -793,12 +824,14 @@ class does honour this flag.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_IsCompiling_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_IsCompiling_Rezolver_ITarget_" data-uid="Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)">IsCompiling(ITarget)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_IsCompiling_Rezolver_ITarget_" data-uid="Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)">IsCompiling(ITarget)</h4>
               <div class="markdown level1 summary"><p>Call this to find out if a target is currently compiling without trying
 to also add it to the stack.</p>
 </div>
@@ -819,7 +852,7 @@ to also add it to the stack.</p>
                 <tbody>
                   <tr>
                     <td><em>target</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -839,12 +872,14 @@ to also add it to the stack.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.New(System.Type%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.New(System.Type,System.Boolean,System.Boolean)">New(Type, Boolean, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.New(System.Type,System.Boolean,System.Boolean)">New(Type, Boolean, Boolean)</h4>
               <div class="markdown level1 summary"><p>Spawns a new context for the passed <em>targetType</em>, with everything else being inherited from this context by default.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -864,18 +899,18 @@ to also add it to the stack.</p>
                 <tbody>
                   <tr>
                     <td><em>targetType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>Required.  The type to be compiled.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>inheritSharedExpressions</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>suppressScopeTracking</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -900,12 +935,14 @@ to also add it to the stack.</p>
               <div class="markdown level1 remarks"><p>This is a convenience method which simply wraps the <span class="xref">Rezolver.CompileContext.</span> constructor,
 except in this method the <em>targetType</em> is required.</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_PopCompileStack.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.PopCompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_PopCompileStack" data-uid="Rezolver.CompileContext.PopCompileStack">PopCompileStack()</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_PopCompileStack" data-uid="Rezolver.CompileContext.PopCompileStack">PopCompileStack()</h4>
               <div class="markdown level1 summary"><p>Pops a target from the stack and returns it.  Note that if there
 are no targets on the stack, an InvalidOperationException will occur.</p>
 </div>
@@ -929,12 +966,14 @@ are no targets on the stack, an InvalidOperationException will occur.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_PushCompileStack_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.PushCompileStack(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_PushCompileStack_Rezolver_ITarget_" data-uid="Rezolver.CompileContext.PushCompileStack(Rezolver.ITarget)">PushCompileStack(ITarget)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_PushCompileStack_Rezolver_ITarget_" data-uid="Rezolver.CompileContext.PushCompileStack(Rezolver.ITarget)">PushCompileStack(ITarget)</h4>
               <div class="markdown level1 summary"><p>Adds the target to the compilation stack if it doesn&#39;t already exist.</p>
 <p>The method returns whether the target was added.</p>
 </div>
@@ -955,7 +994,7 @@ are no targets on the stack, an InvalidOperationException will occur.</p>
                 <tbody>
                   <tr>
                     <td><em>toCompile</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -975,12 +1014,14 @@ are no targets on the stack, an InvalidOperationException will occur.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.CompileContext.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.CompileContext.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -999,18 +1040,19 @@ are no targets on the stack, an InvalidOperationException will occur.</p>
                 <tbody>
                   <tr>
                     <td><em>target</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a></div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

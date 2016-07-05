@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -171,15 +171,16 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class OverridingContainer : Container, IContainer, IServiceProvider</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.%23ctor(Rezolver.IContainer%2CRezolver.ITargetContainer%2CRezolver.ITargetCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">OverridingContainer(IContainer, ITargetContainer, ITargetCompiler)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">OverridingContainer(IContainer, ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -198,20 +199,20 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                 <tbody>
                   <tr>
                     <td><em>inner</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>Required.  The inner rezolver that this one combines with.  Any dependencies not served
 by the new combined rezolver&#39;s own registry will be sought from this rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>builder</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>Optional. A specific builder to be used for this rezolver&#39;s own registrations.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
                     <td><p>Optional. A compiler to be used to create <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> instances
 from this rezolver&#39;s registrations.  If this is not provided, then the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Compiler">Compiler</a> of the
 <em>inner</em> rezolver will be used.</p>
@@ -219,15 +220,17 @@ from this rezolver&#39;s registrations.  If this is not provided, then the <a cl
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingContainer_CanResolve_Rezolver_RezolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.CanResolve(Rezolver.RezolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingContainer_CanResolve_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.RezolveContext)">CanResolve(RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingContainer_CanResolve_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.RezolveContext)">CanResolve(RezolveContext)</h4>
               <div class="markdown level1 summary"><p>Called to determine if this rezolver is able to resolve the type specified in the passed <em>context</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -247,7 +250,7 @@ from this rezolver&#39;s registrations.  If this is not provided, then the <a cl
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><p>Required.  The <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
 </td>
                   </tr>
@@ -270,12 +273,14 @@ from this rezolver&#39;s registrations.  If this is not provided, then the <a cl
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_RezolveContext_">CanResolve(RezolveContext)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.RezolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.RezolveContext)">GetFallbackCompiledRezolveTarget(RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.RezolveContext)">GetFallbackCompiledRezolveTarget(RezolveContext)</h4>
               <div class="markdown level1 summary"><p>Overrides the base implementation to pass the lookup for an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> to the inner rezolver - this
 is how dependency chaining from this rezolver to the inner rezolver is achieved.</p>
 </div>
@@ -296,7 +301,7 @@ is how dependency chaining from this rezolver to the inner rezolver is achieved.
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><p>Required.  The <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
 </td>
                   </tr>
@@ -319,6 +324,7 @@ is how dependency chaining from this rezolver to the inner rezolver is achieved.
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_">GetFallbackCompiledRezolveTarget(RezolveContext)</a></div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

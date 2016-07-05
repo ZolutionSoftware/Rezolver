@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -131,15 +131,16 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class IRezolverExtensions</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_Register_Rezolver_IContainer_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.Register(Rezolver.IContainer%2CRezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_Register_Rezolver_IContainer_Rezolver_ITarget_System_Type_" data-uid="Rezolver.IRezolverExtensions.Register(Rezolver.IContainer,Rezolver.ITarget,System.Type)">Register(IContainer, ITarget, Type)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_Register_Rezolver_IContainer_Rezolver_ITarget_System_Type_" data-uid="Rezolver.IRezolverExtensions.Register(Rezolver.IContainer,Rezolver.ITarget,System.Type)">Register(IContainer, ITarget, Type)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method of the <em>rezolver</em>
 argument&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a></p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -161,27 +162,29 @@ argument&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContaine
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>target</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterAll_Rezolver_IContainer_Rezolver_ITarget___.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterAll(Rezolver.IContainer%2CRezolver.ITarget%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterAll_Rezolver_IContainer_Rezolver_ITarget___" data-uid="Rezolver.IRezolverExtensions.RegisterAll(Rezolver.IContainer,Rezolver.ITarget[])">RegisterAll(IContainer, ITarget[])</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterAll_Rezolver_IContainer_Rezolver_ITarget___" data-uid="Rezolver.IRezolverExtensions.RegisterAll(Rezolver.IContainer,Rezolver.ITarget[])">RegisterAll(IContainer, ITarget[])</h4>
               <div class="markdown level1 summary"><p>Parameter array version of the RegisterAll method.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -201,24 +204,26 @@ argument&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContaine
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>targets</em></td>
-              	  <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>[]</td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>[]</td>
                     <td><p>The targets.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterAll_Rezolver_IContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterAll(Rezolver.IContainer%2CSystem.Collections.Generic.IEnumerable%7BRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterAll_Rezolver_IContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__" data-uid="Rezolver.IRezolverExtensions.RegisterAll(Rezolver.IContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget})">RegisterAll(IContainer, IEnumerable&lt;ITarget&gt;)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterAll_Rezolver_IContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__" data-uid="Rezolver.IRezolverExtensions.RegisterAll(Rezolver.IContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget})">RegisterAll(IContainer, IEnumerable&lt;ITarget&gt;)</h4>
               <div class="markdown level1 summary"><p>Batch-registers multiple targets with different contracts.  Basically, this is like calling Register(IRezolveTarget) multiple times, but with an 
 enumerable.</p>
 </div>
@@ -239,22 +244,24 @@ enumerable.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>targets</em></td>
-              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterExpression__1_Rezolver_IContainer_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___System_Type_Rezolver_ITargetAdapter_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterExpression%60%601(Rezolver.IContainer%2CExpression%7BSystem.Func%7BRezolver.RezolveContextExpressionHelper%2C%60%600%7D%7D%2CSystem.Type%2CRezolver.ITargetAdapter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterExpression__1_Rezolver_IContainer_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___System_Type_Rezolver_ITargetAdapter_" data-uid="Rezolver.IRezolverExtensions.RegisterExpression``1(Rezolver.IContainer,Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},System.Type,Rezolver.ITargetAdapter)">RegisterExpression&lt;T&gt;(IContainer, Expression&lt;Func&lt;RezolveContextExpressionHelper, T&gt;&gt;, Type, ITargetAdapter)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterExpression__1_Rezolver_IContainer_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___System_Type_Rezolver_ITargetAdapter_" data-uid="Rezolver.IRezolverExtensions.RegisterExpression``1(Rezolver.IContainer,Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},System.Type,Rezolver.ITargetAdapter)">RegisterExpression&lt;T&gt;(IContainer, Expression&lt;Func&lt;RezolveContextExpressionHelper, T&gt;&gt;, Type, ITargetAdapter)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <see cref="!:ITargetContainerExtensions.RegisterExpression<T>(ITargetContainer, Expression<Func<RezolveContextExpressionHelper, T>>, Type, RezolverPath, ITargetAdapter)"></see>,
 please see that method for the reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -276,23 +283,23 @@ please see that method for the reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>expression</em></td>
-              	  <td><span class="xref">Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper">RezolveContextExpressionHelper</a>, T&gt;&gt;</td>
+                    <td><span class="xref">Expression</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper">RezolveContextExpressionHelper</a>, T&gt;&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>adapter</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -312,12 +319,14 @@ please see that method for the reference for the parameters.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterMultiple_Rezolver_IContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterMultiple(Rezolver.IContainer%2CSystem.Collections.Generic.IEnumerable%7BRezolver.ITarget%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterMultiple_Rezolver_IContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_" data-uid="Rezolver.IRezolverExtensions.RegisterMultiple(Rezolver.IContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget},System.Type)">RegisterMultiple(IContainer, IEnumerable&lt;ITarget&gt;, Type)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterMultiple_Rezolver_IContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_" data-uid="Rezolver.IRezolverExtensions.RegisterMultiple(Rezolver.IContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget},System.Type)">RegisterMultiple(IContainer, IEnumerable&lt;ITarget&gt;, Type)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterMultiple_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_">RegisterMultiple(ITargetContainer, IEnumerable<itarget>, Type)</itarget></a>, please see that method for 
 reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -339,28 +348,30 @@ reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>targets</em></td>
-              	  <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>commonServiceType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterObject__1_Rezolver_IContainer___0_System_Type_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterObject%60%601(Rezolver.IContainer%2C%60%600%2CSystem.Type%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterObject__1_Rezolver_IContainer___0_System_Type_System_Boolean_" data-uid="Rezolver.IRezolverExtensions.RegisterObject``1(Rezolver.IContainer,``0,System.Type,System.Boolean)">RegisterObject&lt;T&gt;(IContainer, T, Type, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterObject__1_Rezolver_IContainer___0_System_Type_System_Boolean_" data-uid="Rezolver.IRezolverExtensions.RegisterObject``1(Rezolver.IContainer,``0,System.Type,System.Boolean)">RegisterObject&lt;T&gt;(IContainer, T, Type, Boolean)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterObject__1_Rezolver_ITargetContainer___0_System_Type_System_Boolean_">RegisterObject<t>(ITargetContainer, T, Type, Boolean)</t></a>, please see that method
 for reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -382,23 +393,23 @@ for reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>obj</em></td>
-              	  <td><span class="xref">T</span></td>
+                    <td><span class="xref">T</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>suppressScopeTracking</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -418,12 +429,14 @@ for reference for the parameters.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterScoped_Rezolver_IContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterScoped(Rezolver.IContainer%2CSystem.Type%2CSystem.Type%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterScoped_Rezolver_IContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterScoped(Rezolver.IContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)">RegisterScoped(IContainer, Type, Type, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterScoped_Rezolver_IContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterScoped(Rezolver.IContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)">RegisterScoped(IContainer, Type, Type, IPropertyBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <see cref="!:ITargetContainerExtensions.RegisterScoped(ITargetContainer, Type, Type, RezolverPath, IPropertyBindingBehaviour)"></see>, please
 see that method for reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -445,32 +458,34 @@ see that method for reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>objectType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterScoped__1_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterScoped%60%601(Rezolver.IContainer%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterScoped__1_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterScoped``1(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterScoped&lt;TObject&gt;(IContainer, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterScoped__1_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterScoped``1(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterScoped&lt;TObject&gt;(IContainer, IPropertyBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterScoped__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterScoped<tobject>(ITargetContainer, IPropertyBindingBehaviour)</tobject></a>, please
 see that method for reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -492,12 +507,12 @@ see that method for reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -517,12 +532,14 @@ see that method for reference for the parameters.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterScoped__2_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterScoped%60%602(Rezolver.IContainer%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterScoped__2_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterScoped``2(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterScoped&lt;TObject, TService&gt;(IContainer, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterScoped__2_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterScoped``2(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterScoped&lt;TObject, TService&gt;(IContainer, IPropertyBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterScoped__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterScoped<tobject, tservice="">(ITargetContainer, IPropertyBindingBehaviour)</tobject,></a>, please
 see that method for reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -544,12 +561,12 @@ see that method for reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -573,12 +590,14 @@ see that method for reference for the parameters.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterType_Rezolver_IContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterType(Rezolver.IContainer%2CSystem.Type%2CSystem.Type%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterType_Rezolver_IContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterType(Rezolver.IContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)">RegisterType(IContainer, Type, Type, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterType_Rezolver_IContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterType(Rezolver.IContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)">RegisterType(IContainer, Type, Type, IPropertyBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_">RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</a>, please
 see that method for reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -600,32 +619,34 @@ see that method for reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>objectType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterType__1_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterType%60%601(Rezolver.IContainer%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterType__1_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterType``1(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterType&lt;TObject&gt;(IContainer, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterType__1_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterType``1(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterType&lt;TObject&gt;(IContainer, IPropertyBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType<tobject>(ITargetContainer, IPropertyBindingBehaviour)</tobject></a>, please 
 see that method for reference for the parameters.</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -647,13 +668,13 @@ see that method for reference for the parameters.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td><p>The property binding behaviour.</p>
 </td>
                   </tr>
@@ -678,12 +699,14 @@ see that method for reference for the parameters.</p>
               <div class="markdown level1 remarks"><p>This is equivalent to creating either a <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> via their
 &#39;Auto&#39; static methods and then registering them.</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_RegisterType__2_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.RegisterType%60%602(Rezolver.IContainer%2CRezolver.IPropertyBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_RegisterType__2_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterType``2(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterType&lt;TObject, TService&gt;(IContainer, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_RegisterType__2_Rezolver_IContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.IRezolverExtensions.RegisterType``2(Rezolver.IContainer,Rezolver.IPropertyBindingBehaviour)">RegisterType&lt;TObject, TService&gt;(IContainer, IPropertyBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Wrapper for the <see cref="!:ITargetContainerExtensions.RegisterType<TObject, TService>(ITargetContainer, RezolverPath, IPropertyBindingBehaviour)"></see>, please
 see that method for reference for the parameters</p>
 <p>Note - the rezolver must have a non-null <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a> in order for this extension method to work.</p>
@@ -705,12 +728,12 @@ see that method for reference for the parameters</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-              	  <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -734,12 +757,14 @@ see that method for reference for the parameters</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.Resolve(Rezolver.IContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_" data-uid="Rezolver.IRezolverExtensions.Resolve(Rezolver.IContainer,System.Type)">Resolve(IContainer, Type)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_" data-uid="Rezolver.IRezolverExtensions.Resolve(Rezolver.IContainer,System.Type)">Resolve(IContainer, Type)</h4>
               <div class="markdown level1 summary"><p>Resolves an object of the given <em>type</em></p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -759,13 +784,13 @@ see that method for reference for the parameters</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>The type to be resolved.</p>
 </td>
                   </tr>
@@ -787,12 +812,14 @@ see that method for reference for the parameters</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.Resolve(Rezolver.IContainer%2CSystem.Type%2CRezolver.IScopedContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_" data-uid="Rezolver.IRezolverExtensions.Resolve(Rezolver.IContainer,System.Type,Rezolver.IScopedContainer)">Resolve(IContainer, Type, IScopedContainer)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_" data-uid="Rezolver.IRezolverExtensions.Resolve(Rezolver.IContainer,System.Type,Rezolver.IScopedContainer)">Resolve(IContainer, Type, IScopedContainer)</h4>
               <div class="markdown level1 summary"><p>Resolves an object of the given <em>type</em>, using the
 given lifetime <em>scope</em> for lifetime management.</p>
 </div>
@@ -813,19 +840,19 @@ given lifetime <em>scope</em> for lifetime management.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>Type to be resolved.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
-              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
 master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
@@ -850,12 +877,14 @@ of the master.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_Resolve__1_Rezolver_IContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.Resolve%60%601(Rezolver.IContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_Resolve__1_Rezolver_IContainer_" data-uid="Rezolver.IRezolverExtensions.Resolve``1(Rezolver.IContainer)">Resolve&lt;TObject&gt;(IContainer)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_Resolve__1_Rezolver_IContainer_" data-uid="Rezolver.IRezolverExtensions.Resolve``1(Rezolver.IContainer)">Resolve&lt;TObject&gt;(IContainer)</h4>
               <div class="markdown level1 summary"><p>Resolves an object of type <em>TObject</em> </p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -875,7 +904,7 @@ of the master.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
@@ -912,12 +941,14 @@ of the master.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_Resolve__1_Rezolver_IContainer_Rezolver_IScopedContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.Resolve%60%601(Rezolver.IContainer%2CRezolver.IScopedContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_Resolve__1_Rezolver_IContainer_Rezolver_IScopedContainer_" data-uid="Rezolver.IRezolverExtensions.Resolve``1(Rezolver.IContainer,Rezolver.IScopedContainer)">Resolve&lt;TObject&gt;(IContainer, IScopedContainer)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_Resolve__1_Rezolver_IContainer_Rezolver_IScopedContainer_" data-uid="Rezolver.IRezolverExtensions.Resolve``1(Rezolver.IContainer,Rezolver.IScopedContainer)">Resolve&lt;TObject&gt;(IContainer, IScopedContainer)</h4>
               <div class="markdown level1 summary"><p>Resolves an object of the type <em>TObject</em>, using the
 given lifetime <em>scope</em> for lifetime management.</p>
 </div>
@@ -938,13 +969,13 @@ given lifetime <em>scope</em> for lifetime management.</p>
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
-              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
 master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
@@ -984,12 +1015,14 @@ of the master.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_TryResolve_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.TryResolve(Rezolver.IContainer%2CSystem.Type%2CRezolver.IScopedContainer%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_TryResolve_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_System_Object__" data-uid="Rezolver.IRezolverExtensions.TryResolve(Rezolver.IContainer,System.Type,Rezolver.IScopedContainer,System.Object@)">TryResolve(IContainer, Type, IScopedContainer, out Object)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_TryResolve_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_System_Object__" data-uid="Rezolver.IRezolverExtensions.TryResolve(Rezolver.IContainer,System.Type,Rezolver.IScopedContainer,System.Object@)">TryResolve(IContainer, Type, IScopedContainer, out Object)</h4>
               <div class="markdown level1 summary"><p>The same as the Resolve method with the same core parameter types, except this will not throw
 exceptions if the resolve operation fails - instead it returns a boolean indicating success or failure, 
 returning the created object (if successful) in the <em>result</em> parameter.</p>
@@ -1011,19 +1044,19 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>The type to be resolved.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
-              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
 master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
@@ -1032,7 +1065,7 @@ of the master.</p>
                   </tr>
                   <tr>
                     <td><em>result</em></td>
-              	  <td><span class="xref">System.Object</span></td>
+                    <td><span class="xref">System.Object</span></td>
                     <td><p>Received the value, or a reference to the instance, that is resolved if the operation is successful.</p>
 </td>
                   </tr>
@@ -1058,12 +1091,14 @@ of the master.</p>
               <div class="markdown level1 remarks"><p>For more detail on the <em>type</em> parameter, see <a class="xref" href="Rezolver.IRezolverExtensions.html#Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_">Resolve(IContainer, Type, IScopedContainer)</a> 
 overloads</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_TryResolve_Rezolver_IContainer_System_Type_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.TryResolve(Rezolver.IContainer%2CSystem.Type%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_TryResolve_Rezolver_IContainer_System_Type_System_Object__" data-uid="Rezolver.IRezolverExtensions.TryResolve(Rezolver.IContainer,System.Type,System.Object@)">TryResolve(IContainer, Type, out Object)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_TryResolve_Rezolver_IContainer_System_Type_System_Object__" data-uid="Rezolver.IRezolverExtensions.TryResolve(Rezolver.IContainer,System.Type,System.Object@)">TryResolve(IContainer, Type, out Object)</h4>
               <div class="markdown level1 summary"><p>The same as the Resolve method with the same core parameter types, except this will not throw
 exceptions if the resolve operation fails - instead it returns a boolean indicating success or failure, 
 returning the created object (if successful) in the <em>result</em> parameter.</p>
@@ -1085,19 +1120,19 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
-              	  <td><span class="xref">System.Type</span></td>
+                    <td><span class="xref">System.Type</span></td>
                     <td><p>The type to be resolved.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>result</em></td>
-              	  <td><span class="xref">System.Object</span></td>
+                    <td><span class="xref">System.Object</span></td>
                     <td><p>Received the value, or a reference to the instance, that is resolved if the operation is successful.</p>
 </td>
                   </tr>
@@ -1123,12 +1158,14 @@ returning the created object (if successful) in the <em>result</em> parameter.</
               <div class="markdown level1 remarks"><p>For more detail on the <em>type</em> parameter, see <a class="xref" href="Rezolver.IRezolverExtensions.html#Rezolver_IRezolverExtensions_Resolve_Rezolver_IContainer_System_Type_">Resolve(IContainer, Type)</a> 
 overloads</p>
 </div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_TryResolve__1_Rezolver_IContainer___0__.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.TryResolve%60%601(Rezolver.IContainer%2C%60%600%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_TryResolve__1_Rezolver_IContainer___0__" data-uid="Rezolver.IRezolverExtensions.TryResolve``1(Rezolver.IContainer,``0@)">TryResolve&lt;TObject&gt;(IContainer, out TObject)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_TryResolve__1_Rezolver_IContainer___0__" data-uid="Rezolver.IRezolverExtensions.TryResolve``1(Rezolver.IContainer,``0@)">TryResolve&lt;TObject&gt;(IContainer, out TObject)</h4>
               <div class="markdown level1 summary"><p>The same as the generic Resolve method the same core parameter types, except this will not throw
 exceptions if the resolve operation fails - instead it returns a boolean indicating success or failure,
 returning the created object (if successful) in the <em>result</em> parameter.</p>
@@ -1150,13 +1187,13 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>result</em></td>
-              	  <td><span class="xref">TObject</span></td>
+                    <td><span class="xref">TObject</span></td>
                     <td><p>Received the value, or a reference to the instance, that is resolved if the operation is successful.</p>
 </td>
                   </tr>
@@ -1193,12 +1230,14 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolverExtensions_TryResolve__1_Rezolver_IContainer_Rezolver_IScopedContainer___0__.md&amp;value=---%0Auid%3A%20Rezolver.IRezolverExtensions.TryResolve%60%601(Rezolver.IContainer%2CRezolver.IScopedContainer%2C%60%600%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolverExtensions_TryResolve__1_Rezolver_IContainer_Rezolver_IScopedContainer___0__" data-uid="Rezolver.IRezolverExtensions.TryResolve``1(Rezolver.IContainer,Rezolver.IScopedContainer,``0@)">TryResolve&lt;TObject&gt;(IContainer, IScopedContainer, out TObject)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolverExtensions_TryResolve__1_Rezolver_IContainer_Rezolver_IScopedContainer___0__" data-uid="Rezolver.IRezolverExtensions.TryResolve``1(Rezolver.IContainer,Rezolver.IScopedContainer,``0@)">TryResolve&lt;TObject&gt;(IContainer, IScopedContainer, out TObject)</h4>
               <div class="markdown level1 summary"><p>The same as the generic Resolve method the same core parameter types, except this will not throw
 exceptions if the resolve operation fails - instead it returns a boolean indicating success or failure,
 returning the created object (if successful) in the <em>result</em> parameter.</p>
@@ -1220,13 +1259,13 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 <tbody>
                   <tr>
                     <td><em>rezolver</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>The rezolver.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
-              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
 master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
@@ -1235,7 +1274,7 @@ of the master.</p>
                   </tr>
                   <tr>
                     <td><em>result</em></td>
-              	  <td><span class="xref">TObject</span></td>
+                    <td><span class="xref">TObject</span></td>
                     <td><p>Received the value, or a reference to the instance, that is resolved if the operation is successful.</p>
 </td>
                   </tr>
@@ -1272,6 +1311,7 @@ of the master.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
             </article>
           </div>
           

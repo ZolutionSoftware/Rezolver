@@ -111,9 +111,10 @@
 {{{.}}}
 {{/example}}
 {{#children}}
-<hr class="typeSectionDivider" />
+<!-- <hr class="typeSectionDivider" /> -->
 <h3 id="{{id}}">{{>partials/classSubtitle}}</h3>
 {{#children}}
+<div class="classchild">
 {{^_disableContribution}}
 {{#docurl}}
 <span class="small pull-right mobile-hide">
@@ -125,7 +126,7 @@
   <a href="{{sourceurl}}">{{__global.viewSource}}</a>
 </span>{{/sourceurl}}
 {{/_disableContribution}}
-<h4 id="{{id}}" data-uid="{{uid}}">{{name.0.value}}</h4>
+<h4 class="hmember" id="{{id}}" data-uid="{{uid}}">{{name.0.value}}</h4>
 <div class="markdown level1 summary">{{{summary}}}</div>
 <div class="markdown level1 conceptual">{{{conceptual}}}</div>
 <h5 class="hdeclaration">{{__global.declaration}}</h5>
@@ -148,7 +149,7 @@
 {{#parameters}}
     <tr>
       <td><em>{{{id}}}</em></td>
-	  <td>{{{type.specName.0.value}}}</td>
+      <td>{{{type.specName.0.value}}}</td>
       <td>{{{description}}}</td>
     </tr>
 {{/parameters}}
@@ -292,6 +293,7 @@
   </tbody>
 </table>
 {{/exceptions.0}}
+</div><!-- .classchild -->
 {{/children}}
 {{/children}}
 {{#extensionMethods.0}}

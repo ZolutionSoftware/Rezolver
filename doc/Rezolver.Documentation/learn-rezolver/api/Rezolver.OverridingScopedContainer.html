@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -174,15 +174,16 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class OverridingScopedContainer : OverridingContainer, IScopedContainer, IContainer, IServiceProvider, IDisposable</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer__ctor_Rezolver_IScopedContainer_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.%23ctor(Rezolver.IScopedContainer%2CRezolver.IContainer%2CRezolver.ITargetContainer%2CRezolver.ITargetCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer__ctor_Rezolver_IScopedContainer_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.OverridingScopedContainer.#ctor(Rezolver.IScopedContainer,Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">OverridingScopedContainer(IScopedContainer, IContainer, ITargetContainer, ITargetCompiler)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer__ctor_Rezolver_IScopedContainer_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.OverridingScopedContainer.#ctor(Rezolver.IScopedContainer,Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">OverridingScopedContainer(IScopedContainer, IContainer, ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"><p>Constructs a new instance of the CombinedLifetimeScopeRezolver class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -202,37 +203,39 @@
                 <tbody>
                   <tr>
                     <td><em>parentScope</em></td>
-              	  <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
                     <td><p>Can be null, but if it is, then <em>inner</em> must be supplied</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>inner</em></td>
-              	  <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td><p>Can be null, but if it is, then <em>parentScope</em> must be supplied</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>builder</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
-              	  <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer_ParentScope.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.ParentScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer_ParentScope" data-uid="Rezolver.OverridingScopedContainer.ParentScope">ParentScope</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_ParentScope" data-uid="Rezolver.OverridingScopedContainer.ParentScope">ParentScope</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -256,15 +259,17 @@
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_ParentScope">ParentScope</a></div>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.AddToScope(System.Object%2CRezolver.RezolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingScopedContainer.AddToScope(System.Object,Rezolver.RezolveContext)">AddToScope(Object, RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingScopedContainer.AddToScope(System.Object,Rezolver.RezolveContext)">AddToScope(Object, RezolveContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -283,24 +288,26 @@
                 <tbody>
                   <tr>
                     <td><em>obj</em></td>
-              	  <td><span class="xref">System.Object</span></td>
+                    <td><span class="xref">System.Object</span></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">AddToScope(Object, RezolveContext)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer_Dispose.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer_Dispose" data-uid="Rezolver.OverridingScopedContainer.Dispose">Dispose()</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_Dispose" data-uid="Rezolver.OverridingScopedContainer.Dispose">Dispose()</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -309,12 +316,14 @@
               </div>
               <h5 class="himplements">Implements</h5>
                   <div><span class="xref">System.IDisposable.Dispose()</span></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.Dispose(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer_Dispose_System_Boolean_" data-uid="Rezolver.OverridingScopedContainer.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_Dispose_System_Boolean_" data-uid="Rezolver.OverridingScopedContainer.Dispose(System.Boolean)">Dispose(Boolean)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -333,17 +342,19 @@
                 <tbody>
                   <tr>
                     <td><em>disposing</em></td>
-              	  <td><span class="xref">System.Boolean</span></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer_GetFromScope_Rezolver_RezolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.GetFromScope(Rezolver.RezolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer_GetFromScope_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingScopedContainer.GetFromScope(Rezolver.RezolveContext)">GetFromScope(RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_GetFromScope_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingScopedContainer.GetFromScope(Rezolver.RezolveContext)">GetFromScope(RezolveContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -362,7 +373,7 @@
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-              	  <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -384,27 +395,31 @@
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_RezolveContext_">GetFromScope(RezolveContext)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer_OnDisposed.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.OnDisposed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer_OnDisposed" data-uid="Rezolver.OverridingScopedContainer.OnDisposed">OnDisposed()</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_OnDisposed" data-uid="Rezolver.OverridingScopedContainer.OnDisposed">OnDisposed()</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">protected void OnDisposed()</code></pre>
               </div>
-              <hr class="typeSectionDivider">
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="events">Events
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_OverridingScopedContainer_Disposed.md&amp;value=---%0Auid%3A%20Rezolver.OverridingScopedContainer.Disposed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_OverridingScopedContainer_Disposed" data-uid="Rezolver.OverridingScopedContainer.Disposed">Disposed</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_Disposed" data-uid="Rezolver.OverridingScopedContainer.Disposed">Disposed</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -428,6 +443,7 @@
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_Disposed">Disposed</a></div>
+              </div><!-- .classchild -->
             </article>
           </div>
           

@@ -1,7 +1,7 @@
 ﻿@import "bootstrap-rezolver.less";
 
-@sidetoc-bg: @navbar-default-bg;
-@sidetoc-border: @navbar-default-border;
+@sidetoc-bg: @gray-lighter; // @navbar-default-bg;
+@sidetoc-border: darken(@sidetoc-bg, 10%); //@navbar-default-border;
 @sidetoc-link-color: darken(@brand-primary, 45%);
 @sidetoc-link-hover-color: #000000;
 @sidetoc-link-active-color: @alt-color;
@@ -43,7 +43,7 @@ a.disable:hover {
 
 /* workaround for leave space for fixed navbar with # anchor url*/
 
-h1:before,
+/*h1:before,
 h2:before,
 h3:before,
 h4:before {
@@ -53,7 +53,7 @@ h4:before {
     width: 0;
     height: 100px;
     margin-top: -100px;
-}
+}*/
 
 h1, h2, h3, h4, h5, h6, span.xref {
     /*word-wrap: break-word;
@@ -214,14 +214,46 @@ header .navbar {
     min-height: 40px;
 }
 
+@media only screen and (min-width:@screen-sm-min) {
+    div.classchild {
+        padding: 0 10px 10px 30px;
+        margin-left: -30px;
+        border-top: 1px solid darken(@main-color-lighter, 10%);
+        border-right: 1px solid darken(@main-color-lighter, 10%);
+        border-bottom: 1px solid darken(@main-color-lighter, 10%);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    article h4.hmember {
+        padding: 10px 0 10px 30px;
+        margin-left: -30px;
+        margin-right: -10px;
+        background: @main-color;
+        font-family: @font-family-monospace;
+        color: @main-color-lighter;
+        text-shadow: 1px 1px 0 @main-color-darker;
+        font-weight: bolder;
+    }
+
+    article h3 {
+        margin-left: -30px;
+        margin-right: -10px;
+        margin-bottom: 10px;
+        padding: 10px 0 10px 30px;
+        //background:@main-color-darker;
+        color: @main-color-darker;
+    }
+}
+
 .apiDocSectionHeader {
-    background: @main-color;
-    color: @main-color-lighter;
+    background: @main-color-lighter;
+    color: @text-color;
     margin-top: 20px;
     padding: 5px;
     border-bottom: 1px solid darken(@main-color-lighter, 10%);
-    font-weight: bold;    
-    text-shadow: 1px 1px 0 @main-color-darker;
+    font-weight: bold;
+    
 }
 
 .inheritance h5, .inheritedMembers h5, h5.hsyntax, h5.hparameters,
@@ -235,7 +267,14 @@ article h1, article h2, article h3, article h4 {
 }
 
 article h4 {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid darken(@main-color, 10%);
+}
+
+article h4.hmember {
+    margin-top: 0;
+    /*border-left:50px solid @alt-color;
+    margin-left:-55px;
+    padding-left: 5px;*/
 }
 
 article span.small.pull-right {
@@ -639,9 +678,9 @@ body .toc {
     margin-bottom: 100px;
 }
 
-#_content > a {
+/*#_content > a {
     margin-top: 105px;
-}
+}*/
 
 .article.grid-right {
     margin-left: 265px;
