@@ -70,7 +70,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div role="main" class="container-fluid body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +78,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -118,24 +118,25 @@ been added to it.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IRezolveTargetEntry : ITarget</code></pre>
               </div>
-              <hr>
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_DefaultTarget.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.DefaultTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolveTargetEntry_DefaultTarget" data-uid="Rezolver.IRezolveTargetEntry.DefaultTarget">DefaultTarget</h4>
+              <h4 class="hmember" id="Rezolver_IRezolveTargetEntry_DefaultTarget" data-uid="Rezolver.IRezolveTargetEntry.DefaultTarget">DefaultTarget</h4>
               <div class="markdown level1 summary"><p>The default target that is to be executed when a single instance of the registered type
 is requested.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITarget DefaultTarget { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -150,20 +151,22 @@ is requested.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_ParentBuilder.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.ParentBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolveTargetEntry_ParentBuilder" data-uid="Rezolver.IRezolveTargetEntry.ParentBuilder">ParentBuilder</h4>
+              <h4 class="hmember" id="Rezolver_IRezolveTargetEntry_ParentBuilder" data-uid="Rezolver.IRezolveTargetEntry.ParentBuilder">ParentBuilder</h4>
               <div class="markdown level1 summary"><p>The builder to which this entry belongs</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITargetContainer ParentBuilder { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -178,20 +181,22 @@ is requested.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_RegisteredType.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.RegisteredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolveTargetEntry_RegisteredType" data-uid="Rezolver.IRezolveTargetEntry.RegisteredType">RegisteredType</h4>
+              <h4 class="hmember" id="Rezolver_IRezolveTargetEntry_RegisteredType" data-uid="Rezolver.IRezolveTargetEntry.RegisteredType">RegisteredType</h4>
               <div class="markdown level1 summary"><p>The type that this entry was registered against in its parent builder.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">Type RegisteredType { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -206,21 +211,23 @@ is requested.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_Targets.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.Targets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolveTargetEntry_Targets" data-uid="Rezolver.IRezolveTargetEntry.Targets">Targets</h4>
+              <h4 class="hmember" id="Rezolver_IRezolveTargetEntry_Targets" data-uid="Rezolver.IRezolveTargetEntry.Targets">Targets</h4>
               <div class="markdown level1 summary"><p>A collection of targets that are to be used when an IEnumerable or other supported collection
 type of the registered type is requested.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IEnumerable&lt;ITarget&gt; Targets { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -235,21 +242,23 @@ type of the registered type is requested.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolveTargetEntry_UseFallback" data-uid="Rezolver.IRezolveTargetEntry.UseFallback">UseFallback</h4>
+              <h4 class="hmember" id="Rezolver_IRezolveTargetEntry_UseFallback" data-uid="Rezolver.IRezolveTargetEntry.UseFallback">UseFallback</h4>
               <div class="markdown level1 summary"><p>If true, then the resolver should consult its fallback for an alternative instead of using this
 entry.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">bool UseFallback { get; }</code></pre>
               </div>
-              <h5 class="propertyValue">Property Value</h5>
+              <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -264,46 +273,48 @@ entry.</p>
                   </tr>
                 </tbody>
               </table>
-              <hr>
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_AddTarget_Rezolver_ITarget_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolveTargetEntry_AddTarget_Rezolver_ITarget_System_Boolean_" data-uid="Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget,System.Boolean)">AddTarget(ITarget, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolveTargetEntry_AddTarget_Rezolver_ITarget_System_Boolean_" data-uid="Rezolver.IRezolveTargetEntry.AddTarget(Rezolver.ITarget,System.Boolean)">AddTarget(ITarget, Boolean)</h4>
               <div class="markdown level1 summary"><p>Adds a target to this entry, optionally checking first to see if it already exists.   If the
 check is enabled (var <em>checkForDuplicates</em>) then the target will not be added.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">void AddTarget(ITarget target, bool checkForDuplicates = false)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td><em>target</em></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td><em>checkForDuplicates</em></td>
+                    <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -322,12 +333,14 @@ inconsistent behaviour.</p>
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IRezolveTargetEntry_Attach_Rezolver_ITargetContainer_Rezolver_IRezolveTargetEntry_.md&amp;value=---%0Auid%3A%20Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer%2CRezolver.IRezolveTargetEntry)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 id="Rezolver_IRezolveTargetEntry_Attach_Rezolver_ITargetContainer_Rezolver_IRezolveTargetEntry_" data-uid="Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer,Rezolver.IRezolveTargetEntry)">Attach(ITargetContainer, IRezolveTargetEntry)</h4>
+              <h4 class="hmember" id="Rezolver_IRezolveTargetEntry_Attach_Rezolver_ITargetContainer_Rezolver_IRezolveTargetEntry_" data-uid="Rezolver.IRezolveTargetEntry.Attach(Rezolver.ITargetContainer,Rezolver.IRezolveTargetEntry)">Attach(ITargetContainer, IRezolveTargetEntry)</h4>
               <div class="markdown level1 summary"><p>ONLY called by rezolver builder classes, when an entry is attached to a builder by being passed 
 directly to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>, optionally replacing
 an existing entry registered for the same type.</p>
@@ -335,35 +348,35 @@ an existing entry registered for the same type.</p>
 that the <em>replacing</em> entry was attached to, and the method cannot be called again.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
+              <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">void Attach(ITargetContainer parentBuilder, IRezolveTargetEntry replacing = null)</code></pre>
               </div>
-              <h5 class="parameters">Parameters</h5>
+              <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Type</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><em>parentBuilder</em></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>Required - the builder that this entry is being attached to.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry">IRezolveTargetEntry</a></td>
                     <td><em>replacing</em></td>
+                    <td><a class="xref" href="Rezolver.IRezolveTargetEntry.html#Rezolver_IRezolveTargetEntry">IRezolveTargetEntry</a></td>
                     <td><p>The original entry that is replaced by this entry, if applicable</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="exceptions">Exceptions</h5>
+              <h5 class="hexceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -390,6 +403,7 @@ that the <em>replacing</em> entry was attached to, and the method cannot be call
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
             </article>
           </div>
           
