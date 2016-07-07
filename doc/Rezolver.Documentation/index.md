@@ -14,4 +14,4 @@ another IOC container.
 
 ## Quick Links
 
-[API Reference](api/)
+[API Reference](rezolver-api/)

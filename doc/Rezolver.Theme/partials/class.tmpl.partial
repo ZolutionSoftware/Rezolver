@@ -119,11 +119,11 @@
 {{#docurl}}
 <span class="small pull-right mobile-hide">
   <span class="divider">|</span>
-  <a href="{{docurl}}">{{__global.improveThisDoc}}</a>
+  <a class="btn btn-default" href="{{docurl}}">{{__global.improveThisDoc}}</a>
 </span>{{/docurl}}
 {{#sourceurl}}
 <span class="small pull-right mobile-hide">
-  <a href="{{sourceurl}}">{{__global.viewSource}}</a>
+  <a class="btn btn-default" href="{{sourceurl}}">{{__global.viewSource}}</a>
 </span>{{/sourceurl}}
 {{/_disableContribution}}
 <h4 class="hmember" id="{{id}}" data-uid="{{uid}}">{{name.0.value}}</h4>

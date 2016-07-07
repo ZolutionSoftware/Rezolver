@@ -43,7 +43,7 @@
           ]
         }
       ],
-      "dest": "obj/api"
+      "dest": "obj/rezolver-api"
     }
   ],
   "build": {
@@ -54,15 +54,15 @@
     "content": [
       {
         "files": [
-          "api/**.yml"
+          "rezolver-api/**.yml"
         ],
         "cwd": "obj"
       },
       {
         "files": [
-          "api/*.md",
-          "articles/**.md",
-          "articles/**.yml",
+          "rezolver-api/*.md",
+          "rezolver-usage/**.md",
+          "rezolver-usage/**.yml",
           "toc.yml",
           "*.md"
         ],

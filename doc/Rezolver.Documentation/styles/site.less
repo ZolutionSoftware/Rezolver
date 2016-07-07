@@ -214,35 +214,45 @@ header .navbar {
     min-height: 40px;
 }
 
+div.classchild {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+article h4.hmember {
+    padding: 10px;
+    background: @main-color;
+    font-family: @font-family-monospace;
+    color: white;
+    text-shadow: 1px 1px 0 @main-color-darker;
+    font-weight: bolder;
+}
+
+article h3 {
+    margin-bottom: 10px;
+    //background:@main-color-darker;
+    color: @main-color-darker;
+}
+
 @media only screen and (min-width:@screen-sm-min) {
     div.classchild {
-        padding: 0 10px 10px 30px;
-        margin-left: -30px;
         border-top: 1px solid darken(@main-color-lighter, 10%);
         border-right: 1px solid darken(@main-color-lighter, 10%);
         border-bottom: 1px solid darken(@main-color-lighter, 10%);
-        margin-top: 10px;
-        margin-bottom: 10px;
+        padding: 0 10px 10px 30px;
+        margin-left: -30px;
     }
 
     article h4.hmember {
         padding: 10px 0 10px 30px;
         margin-left: -30px;
         margin-right: -10px;
-        background: @main-color;
-        font-family: @font-family-monospace;
-        color: @main-color-lighter;
-        text-shadow: 1px 1px 0 @main-color-darker;
-        font-weight: bolder;
     }
 
     article h3 {
+        padding: 10px 0 10px 30px;
         margin-left: -30px;
         margin-right: -10px;
-        margin-bottom: 10px;
-        padding: 10px 0 10px 30px;
-        //background:@main-color-darker;
-        color: @main-color-darker;
     }
 }
 
@@ -253,7 +263,6 @@ header .navbar {
     padding: 5px;
     border-bottom: 1px solid darken(@main-color-lighter, 10%);
     font-weight: bold;
-    
 }
 
 .inheritance h5, .inheritedMembers h5, h5.hsyntax, h5.hparameters,
@@ -278,7 +287,7 @@ article h4.hmember {
 }
 
 article span.small.pull-right {
-    margin-top: 20px;
+    margin-top: 3px;
 }
 
 article section {

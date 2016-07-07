@@ -3765,7 +3765,7 @@ select[multiple].input-lg {
 .btn:hover,
 .btn:focus,
 .btn.focus {
-  color: #333;
+  color: white;
   text-decoration: none;
 }
 /* line 39, styles\bootstrap\buttons.less */
@@ -3791,30 +3791,30 @@ fieldset[disabled] a.btn {
 }
 /* line 66, styles\bootstrap\buttons.less */
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+  color: white;
+  background-color: #1239A2;
+  border-color: #0b2466;
 }
 /* line 11, styles\bootstrap\mixins\buttons.less */
 .btn-default:focus,
 .btn-default.focus {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #8c8c8c;
+  color: white;
+  background-color: #0d2974;
+  border-color: #000000;
 }
 /* line 17, styles\bootstrap\mixins\buttons.less */
 .btn-default:hover {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+  color: white;
+  background-color: #0d2974;
+  border-color: #05112f;
 }
 /* line 22, styles\bootstrap\mixins\buttons.less */
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  color: #333;
-  background-color: #e6e6e6;
-  border-color: #adadad;
+  color: white;
+  background-color: #0d2974;
+  border-color: #05112f;
 }
 /* line 29, styles\bootstrap\mixins\buttons.less */
 .btn-default:active:hover,
@@ -3826,9 +3826,9 @@ fieldset[disabled] a.btn {
 .btn-default:active.focus,
 .btn-default.active.focus,
 .open > .dropdown-toggle.btn-default.focus {
-  color: #333;
-  background-color: #d4d4d4;
-  border-color: #8c8c8c;
+  color: white;
+  background-color: #091e54;
+  border-color: #000000;
 }
 /* line 37, styles\bootstrap\mixins\buttons.less */
 .btn-default:active,
@@ -3846,13 +3846,13 @@ fieldset[disabled] .btn-default:focus,
 .btn-default.disabled.focus,
 .btn-default[disabled].focus,
 fieldset[disabled] .btn-default.focus {
-  background-color: #fff;
-  border-color: #ccc;
+  background-color: #1239A2;
+  border-color: #0b2466;
 }
 /* line 53, styles\bootstrap\mixins\buttons.less */
 .btn-default .badge {
-  color: #fff;
-  background-color: #333;
+  color: #1239A2;
+  background-color: white;
 }
 /* line 69, styles\bootstrap\buttons.less */
 .btn-primary {
@@ -8285,38 +8285,48 @@ header .navbar {
 .subnav {
   min-height: 40px;
 }
+/* line 217, styles/site.less */
+div.classchild {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+/* line 222, styles/site.less */
+article h4.hmember {
+  padding: 10px;
+  background: #f15c00;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  color: white;
+  text-shadow: 1px 1px 0 #722b00;
+  font-weight: bolder;
+}
+/* line 231, styles/site.less */
+article h3 {
+  margin-bottom: 10px;
+  color: #722b00;
+}
 @media only screen and (min-width: 768px) {
-  /* line 218, styles/site.less */
+  /* line 238, styles/site.less */
   div.classchild {
-    padding: 0 10px 10px 30px;
-    margin-left: -30px;
     border-top: 1px solid #ffc7a5;
     border-right: 1px solid #ffc7a5;
     border-bottom: 1px solid #ffc7a5;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding: 0 10px 10px 30px;
+    margin-left: -30px;
   }
-  /* line 228, styles/site.less */
+  /* line 246, styles/site.less */
   article h4.hmember {
     padding: 10px 0 10px 30px;
     margin-left: -30px;
     margin-right: -10px;
-    background: #f15c00;
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-    color: #ffe7d8;
-    text-shadow: 1px 1px 0 #722b00;
-    font-weight: bolder;
   }
-  /* line 239, styles/site.less */
+  /* line 252, styles/site.less */
   article h3 {
+    padding: 10px 0 10px 30px;
     margin-left: -30px;
     margin-right: -10px;
-    margin-bottom: 10px;
-    padding: 10px 0 10px 30px;
-    color: #722b00;
   }
 }
-/* line 249, styles/site.less */
+/* line 259, styles/site.less */
 .apiDocSectionHeader,
 .inheritance h5,
 .inheritedMembers h5,
@@ -8337,171 +8347,171 @@ h5.hexceptions {
   border-bottom: 1px solid #ffc7a5;
   font-weight: bold;
 }
-/* line 265, styles/site.less */
+/* line 274, styles/site.less */
 article h1,
 article h2,
 article h3,
 article h4 {
   margin-top: 25px;
 }
-/* line 269, styles/site.less */
+/* line 278, styles/site.less */
 article h4 {
   border-bottom: 1px solid #be4900;
 }
-/* line 273, styles/site.less */
+/* line 282, styles/site.less */
 article h4.hmember {
   margin-top: 0;
   /*border-left:50px solid @alt-color;
     margin-left:-55px;
     padding-left: 5px;*/
 }
-/* line 280, styles/site.less */
+/* line 289, styles/site.less */
 article span.small.pull-right {
-  margin-top: 20px;
+  margin-top: 3px;
 }
-/* line 284, styles/site.less */
+/* line 293, styles/site.less */
 article section {
   margin-left: 1em;
 }
 /*.expand-all {
   padding: 10px 0;
 }*/
-/* line 291, styles/site.less */
+/* line 300, styles/site.less */
 .breadcrumb {
   margin: 0;
   padding: 10px 0;
   background-color: inherit;
   white-space: nowrap;
 }
-/* line 298, styles/site.less */
+/* line 307, styles/site.less */
 .breadcrumb > li + li:before {
   content: "\00a0/";
 }
-/* line 302, styles/site.less */
+/* line 311, styles/site.less */
 #autocollapse.collapsed .navbar-header {
   float: none;
 }
-/* line 306, styles/site.less */
+/* line 315, styles/site.less */
 #autocollapse.collapsed .navbar-toggle {
   display: block;
 }
-/* line 310, styles/site.less */
+/* line 319, styles/site.less */
 #autocollapse.collapsed .navbar-collapse {
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-/* line 315, styles/site.less */
+/* line 324, styles/site.less */
 #autocollapse.collapsed .navbar-collapse.collapse {
   display: none !important;
 }
-/* line 319, styles/site.less */
+/* line 328, styles/site.less */
 #autocollapse.collapsed .navbar-nav {
   float: none !important;
   margin: 7.5px -15px;
 }
-/* line 324, styles/site.less */
+/* line 333, styles/site.less */
 #autocollapse.collapsed .navbar-nav > li {
   float: none;
 }
-/* line 328, styles/site.less */
+/* line 337, styles/site.less */
 #autocollapse.collapsed .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-/* line 333, styles/site.less */
+/* line 342, styles/site.less */
 #autocollapse.collapsed .collapse.in,
 #autocollapse.collapsed .collapsing {
   display: block !important;
 }
-/* line 338, styles/site.less */
+/* line 347, styles/site.less */
 #autocollapse.collapsed .collapse.in .navbar-right,
 #autocollapse.collapsed .collapsing .navbar-right {
   float: none !important;
 }
-/* line 343, styles/site.less */
+/* line 352, styles/site.less */
 #autocollapse .form-group {
   width: 100%;
 }
-/* line 347, styles/site.less */
+/* line 356, styles/site.less */
 #autocollapse .form-control {
   width: 100%;
 }
-/* line 351, styles/site.less */
+/* line 360, styles/site.less */
 #autocollapse .navbar-header {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 356, styles/site.less */
+/* line 365, styles/site.less */
 #autocollapse .navbar-brand {
   margin-left: 0;
 }
-/* line 360, styles/site.less */
+/* line 369, styles/site.less */
 .collapse.in,
 .collapsing {
   text-align: center;
 }
-/* line 365, styles/site.less */
+/* line 374, styles/site.less */
 .collapsing .navbar-form {
   margin: 0 auto;
   max-width: 400px;
   padding: 10px 15px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-/* line 372, styles/site.less */
+/* line 381, styles/site.less */
 .collapsed .collapse.in .navbar-form {
   margin: 0 auto;
   max-width: 400px;
   padding: 10px 15px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-/* line 379, styles/site.less */
+/* line 388, styles/site.less */
 .navbar .navbar-nav {
   display: inline-block;
 }
-/* line 383, styles/site.less */
+/* line 392, styles/site.less */
 .docs-search {
   background: white;
   vertical-align: middle;
 }
-/* line 388, styles/site.less */
+/* line 397, styles/site.less */
 .docs-search > .search-query {
   font-size: 14px;
   border: 0;
   width: 120%;
   color: #555;
 }
-/* line 395, styles/site.less */
+/* line 404, styles/site.less */
 .docs-search > .search-query:focus {
   outline: 0;
 }
-/* line 399, styles/site.less */
+/* line 408, styles/site.less */
 .search-results-frame {
   clear: both;
   display: table;
   width: 100%;
 }
-/* line 405, styles/site.less */
+/* line 414, styles/site.less */
 .search-results.ng-hide {
   display: none;
 }
-/* line 409, styles/site.less */
+/* line 418, styles/site.less */
 .search-results-container {
   padding-bottom: 1em;
   border-top: 1px solid #111;
   background: rgba(25, 25, 25, 0.5);
 }
-/* line 415, styles/site.less */
+/* line 424, styles/site.less */
 .search-results-container .search-results-group {
   padding-top: 50px !important;
   padding: 10px;
 }
-/* line 420, styles/site.less */
+/* line 429, styles/site.less */
 .search-results-group-heading {
   font-family: "Open Sans";
   padding-left: 10px;
   color: white;
 }
-/* line 426, styles/site.less */
+/* line 435, styles/site.less */
 .search-close {
   position: absolute;
   left: 50%;
@@ -8515,12 +8525,12 @@ article section {
   width: 200px;
   box-shadow: 0 0 10px #111;
 }
-/* line 440, styles/site.less */
+/* line 449, styles/site.less */
 #search {
   display: none;
 }
 /* Search results display*/
-/* line 445, styles/site.less */
+/* line 454, styles/site.less */
 #search-results {
   max-width: 960px !important;
   margin-top: 120px;
@@ -8530,43 +8540,43 @@ article section {
   line-height: 1.8;
   display: none;
 }
-/* line 455, styles/site.less */
+/* line 464, styles/site.less */
 #search-results > .search-list {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 50px;
 }
-/* line 461, styles/site.less */
+/* line 470, styles/site.less */
 #search-results p {
   text-align: center;
 }
-/* line 465, styles/site.less */
+/* line 474, styles/site.less */
 #search-results .sr-items {
   font-size: 24px;
 }
-/* line 469, styles/site.less */
+/* line 478, styles/site.less */
 .sr-item {
   margin-bottom: 25px;
 }
-/* line 473, styles/site.less */
+/* line 482, styles/site.less */
 .sr-item > .item-href {
   font-size: 14px;
   color: #093;
 }
-/* line 478, styles/site.less */
+/* line 487, styles/site.less */
 .sr-item > .item-brief {
   font-size: 13px;
 }
-/* line 482, styles/site.less */
+/* line 491, styles/site.less */
 .pagination > li > a {
   color: #47A7A0;
 }
-/* line 486, styles/site.less */
+/* line 495, styles/site.less */
 .pagination > .active > a {
   background-color: #47A7A0;
   border-color: #47A7A0;
 }
-/* line 491, styles/site.less */
+/* line 500, styles/site.less */
 .fixed_header {
   position: fixed;
   width: 100%;
@@ -8577,18 +8587,18 @@ article section {
   z-index: 9999;
   left: 0;
 }
-/* line 502, styles/site.less */
+/* line 511, styles/site.less */
 .fixed_header + .toc {
   margin-top: 50px;
   margin-left: 0;
 }
-/* line 507, styles/site.less */
+/* line 516, styles/site.less */
 .sidenav,
 .fixed_header,
 .toc {
   background-color: #eeeeee;
 }
-/* line 511, styles/site.less */
+/* line 520, styles/site.less */
 .sidetoc {
   position: fixed;
   width: 260px;
@@ -8601,20 +8611,20 @@ article section {
   border-right: 1px solid #d5d5d5;
   z-index: 1;
 }
-/* line 524, styles/site.less */
+/* line 533, styles/site.less */
 body .toc {
   overflow-x: hidden;
 }
-/* line 528, styles/site.less */
+/* line 537, styles/site.less */
 .sidetoggle.ng-hide {
   display: block !important;
 }
-/* line 532, styles/site.less */
+/* line 541, styles/site.less */
 .sidetoc-expand > .caret {
   margin-left: 0px;
   margin-top: -2px;
 }
-/* line 537, styles/site.less */
+/* line 546, styles/site.less */
 .sidetoc-expand > .caret-side {
   border-left: 4px solid;
   border-top: 4px solid transparent;
@@ -8622,101 +8632,101 @@ body .toc {
   margin-left: 4px;
   margin-top: -4px;
 }
-/* line 545, styles/site.less */
+/* line 554, styles/site.less */
 .sidetoc-heading {
   font-weight: 500;
 }
-/* line 549, styles/site.less */
+/* line 558, styles/site.less */
 .toc {
   margin: 0px 0 0 10px;
   padding: 0 10px;
 }
-/* line 554, styles/site.less */
+/* line 563, styles/site.less */
 .expand-stub {
   position: absolute;
   left: -10px;
 }
-/* line 559, styles/site.less */
+/* line 568, styles/site.less */
 .toc .nav > li > a.sidetoc-expand {
   position: absolute;
   top: 0;
   left: 0;
 }
-/* line 565, styles/site.less */
+/* line 574, styles/site.less */
 .toc .nav > li > a {
   color: #0b0400;
   display: inline;
   padding: 0;
 }
-/* line 571, styles/site.less */
+/* line 580, styles/site.less */
 .toc .nav > li > .expand-stub + a {
   margin-left: 5px;
   display: block;
 }
-/* line 576, styles/site.less */
+/* line 585, styles/site.less */
 .toc .nav > li > a:hover,
 .toc .nav > li > a:focus {
   color: #000000;
   background: none;
   text-decoration: inherit;
 }
-/* line 583, styles/site.less */
+/* line 592, styles/site.less */
 .toc .nav > li.active > a {
   color: #1239A2;
 }
-/* line 587, styles/site.less */
+/* line 596, styles/site.less */
 .toc .nav > li.active > a:hover,
 .toc .nav > li.active > a:focus {
   color: #0d2974;
 }
-/* line 592, styles/site.less */
+/* line 601, styles/site.less */
 .toc .nav > li > .expand-stub {
   cursor: pointer;
 }
-/* line 596, styles/site.less */
+/* line 605, styles/site.less */
 .toc .nav > li.active > .expand-stub::before,
 .toc .nav > li.in > .expand-stub::before,
 .toc .nav > li.in.active > .expand-stub::before,
 .toc .nav > li.filtered > .expand-stub::before {
   content: "-";
 }
-/* line 603, styles/site.less */
+/* line 612, styles/site.less */
 .toc .nav > li > .expand-stub::before,
 .toc .nav > li.active > .expand-stub::before {
   content: "+";
 }
-/* line 608, styles/site.less */
+/* line 617, styles/site.less */
 .toc .nav > li.filtered > ul,
 .toc .nav > li.in > ul {
   display: block;
 }
-/* line 613, styles/site.less */
+/* line 622, styles/site.less */
 .toc .nav > li > ul {
   display: none;
 }
-/* line 617, styles/site.less */
+/* line 626, styles/site.less */
 .toc .level1 > li {
   font-weight: bold;
   margin-top: 10px;
   position: relative;
 }
-/* line 623, styles/site.less */
+/* line 632, styles/site.less */
 .toc .level2 {
   font-weight: normal;
   margin-top: 5px;
   margin-left: 15px;
   font-size: 14px;
 }
-/* line 630, styles/site.less */
+/* line 639, styles/site.less */
 .toc .level3 {
   font-size: 12px;
 }
-/* line 634, styles/site.less */
+/* line 643, styles/site.less */
 .toc-toggle {
   display: none;
   margin: 0 15px 0px 15px;
 }
-/* line 639, styles/site.less */
+/* line 648, styles/site.less */
 .sidefilter {
   position: fixed;
   top: 90px;
@@ -8727,7 +8737,7 @@ body .toc {
   border-right: 1px solid #d5d5d5;
   z-index: 1;
 }
-/* line 650, styles/site.less */
+/* line 659, styles/site.less */
 .toc-filter {
   border-radius: 5px;
   background: #fff;
@@ -8736,24 +8746,24 @@ body .toc {
   position: relative;
   margin: 0 5px 0 5px;
 }
-/* line 659, styles/site.less */
+/* line 668, styles/site.less */
 .toc-filter > input {
   border: 0;
   color: #ff7825;
   padding-left: 20px;
   width: 100%;
 }
-/* line 666, styles/site.less */
+/* line 675, styles/site.less */
 .toc-filter > input:focus {
   outline: 0;
 }
-/* line 670, styles/site.less */
+/* line 679, styles/site.less */
 .toc-filter > .filter-icon {
   position: absolute;
   top: 10px;
   left: 5px;
 }
-/* line 676, styles/site.less */
+/* line 685, styles/site.less */
 .article {
   margin-top: 90px;
   margin-bottom: 100px;
@@ -8761,20 +8771,20 @@ body .toc {
 /*#_content > a {
     margin-top: 105px;
 }*/
-/* line 685, styles/site.less */
+/* line 694, styles/site.less */
 .article.grid-right {
   margin-left: 265px;
 }
-/* line 689, styles/site.less */
+/* line 698, styles/site.less */
 .inheritance hr {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 694, styles/site.less */
+/* line 703, styles/site.less */
 .article img {
   max-width: 100%;
 }
-/* line 698, styles/site.less */
+/* line 707, styles/site.less */
 .affix {
   font-size: 12px;
   max-height: 100%;
@@ -8782,7 +8792,7 @@ body .toc {
   top: 100px;
   bottom: 10px;
 }
-/* line 706, styles/site.less */
+/* line 715, styles/site.less */
 .affix h5 {
   font-weight: bold;
   text-transform: uppercase;
@@ -8790,7 +8800,7 @@ body .toc {
   padding-left: 10px;
   font-size: 12px;
 }
-/* line 714, styles/site.less */
+/* line 723, styles/site.less */
 .affix > ul.level1 {
   overflow-x: hidden;
   overflow-y: -20px;
@@ -8798,71 +8808,71 @@ body .toc {
   height: calc(0%);
   margin-right: -20px;
 }
-/* line 722, styles/site.less */
+/* line 731, styles/site.less */
 .affix ul > li > a:before {
   color: #cccccc;
   position: absolute;
 }
-/* line 727, styles/site.less */
+/* line 736, styles/site.less */
 .affix ul > li > a:hover {
   background: none;
   color: #666666;
 }
-/* line 732, styles/site.less */
+/* line 741, styles/site.less */
 .affix ul > li.active > a,
 .affix ul > li.active > a:before {
   color: #337ab7;
 }
-/* line 737, styles/site.less */
+/* line 746, styles/site.less */
 .affix ul > li > a {
   padding: 5px 12px;
   color: #666666;
 }
-/* line 742, styles/site.less */
+/* line 751, styles/site.less */
 .affix > ul > li > a:before {
   content: "|";
   font-size: 16px;
   top: 1px;
   left: 0;
 }
-/* line 749, styles/site.less */
+/* line 758, styles/site.less */
 .affix > ul > li.active > a,
 .affix > ul > li.active > a:before {
   color: #337ab7;
   font-weight: bold;
 }
-/* line 755, styles/site.less */
+/* line 764, styles/site.less */
 .affix ul ul > li > a {
   padding: 2px 15px;
 }
-/* line 759, styles/site.less */
+/* line 768, styles/site.less */
 .affix ul ul > li > a:before {
   content: ">";
   font-size: 14px;
   top: -1px;
   left: 5px;
 }
-/* line 766, styles/site.less */
+/* line 775, styles/site.less */
 .affix ul > li > a:before,
 .affix ul ul {
   display: none;
 }
-/* line 771, styles/site.less */
+/* line 780, styles/site.less */
 .affix ul > li.active > ul,
 .affix ul > li.active > a:before,
 .affix ul > li > a:hover:before {
   display: block;
   white-space: nowrap;
 }
-/* line 778, styles/site.less */
+/* line 787, styles/site.less */
 .codewrapper {
   position: relative;
 }
-/* line 782, styles/site.less */
+/* line 791, styles/site.less */
 .trydiv {
   height: 0px;
 }
-/* line 786, styles/site.less */
+/* line 795, styles/site.less */
 .tryspan {
   position: absolute;
   top: 0px;
@@ -8881,21 +8891,21 @@ body .toc {
   display: none;
   color: #767676;
 }
-/* line 805, styles/site.less */
+/* line 814, styles/site.less */
 .tryspan:hover {
   background-color: #3b8bd0;
   color: white;
   border-color: #3b8bd0;
 }
-/* line 811, styles/site.less */
+/* line 820, styles/site.less */
 .codewrapper:hover .tryspan {
   display: block;
 }
-/* line 815, styles/site.less */
+/* line 824, styles/site.less */
 .sample-response .response-content {
   max-height: 200px;
 }
-/* line 819, styles/site.less */
+/* line 828, styles/site.less */
 footer {
   position: absolute;
   left: 0;
@@ -8903,76 +8913,76 @@ footer {
   bottom: 0;
   z-index: 1000;
 }
-/* line 827, styles/site.less */
+/* line 836, styles/site.less */
 .footer {
   border-top: 1px solid #712b00;
   background-color: #a43f00;
   color: #ffc7a5;
   padding: 15px 0;
 }
-/* line 833, styles/site.less */
+/* line 842, styles/site.less */
 .footer a {
   color: #eeeeee;
 }
-/* line 836, styles/site.less */
+/* line 845, styles/site.less */
 .footer a:hover {
   background: transparent;
   color: #fff;
 }
-/* line 841, styles/site.less */
+/* line 850, styles/site.less */
 .footer a:active,
 .footer a:focus {
   background: #712b00;
   color: #fff;
 }
 @media (min-width: 768px) {
-  /* line 849, styles/site.less */
+  /* line 858, styles/site.less */
   #sidetoggle.collapse {
     display: block;
   }
-  /* line 853, styles/site.less */
+  /* line 862, styles/site.less */
   .topnav .navbar-nav {
     float: none;
     white-space: nowrap;
   }
-  /* line 858, styles/site.less */
+  /* line 867, styles/site.less */
   .topnav .navbar-nav > li {
     float: none;
     display: inline-block;
   }
 }
 @media only screen and (max-width: 768px) {
-  /* line 865, styles/site.less */
+  /* line 874, styles/site.less */
   #mobile-indicator {
     display: block;
   }
   /* TOC display for responsive */
-  /* line 869, styles/site.less */
+  /* line 878, styles/site.less */
   .article {
     margin-top: 30px !important;
   }
-  /* line 873, styles/site.less */
+  /* line 882, styles/site.less */
   header {
     position: static;
   }
-  /* line 877, styles/site.less */
+  /* line 886, styles/site.less */
   .topnav {
     text-align: center;
   }
-  /* line 881, styles/site.less */
+  /* line 890, styles/site.less */
   .sidenav {
     padding: 15px 0;
     margin-left: -15px;
     margin-right: -15px;
   }
-  /* line 887, styles/site.less */
+  /* line 896, styles/site.less */
   .sidefilter {
     position: static;
     width: auto;
     float: none;
     border: none;
   }
-  /* line 894, styles/site.less */
+  /* line 903, styles/site.less */
   .sidetoc {
     position: static;
     width: auto;
@@ -8980,51 +8990,51 @@ footer {
     padding-bottom: 0px;
     border: none;
   }
-  /* line 902, styles/site.less */
+  /* line 911, styles/site.less */
   .toc .level2 > li {
     display: inline-block;
   }
-  /* line 906, styles/site.less */
+  /* line 915, styles/site.less */
   .toc .level2 > li:after {
     margin-left: -3px;
     margin-right: 5px;
     content: ", ";
     color: #666666;
   }
-  /* line 913, styles/site.less */
+  /* line 922, styles/site.less */
   .article.grid-right {
     margin-left: 0;
   }
-  /* line 917, styles/site.less */
+  /* line 926, styles/site.less */
   .grad-top,
   .grad-bottom {
     display: none;
   }
-  /* line 922, styles/site.less */
+  /* line 931, styles/site.less */
   .toc-toggle {
     display: block;
   }
-  /* line 926, styles/site.less */
+  /* line 935, styles/site.less */
   .sidetoggle.ng-hide {
     display: none !important;
   }
   /*.expand-all {
     display: none;
   }*/
-  /* line 932, styles/site.less */
+  /* line 941, styles/site.less */
   .affix {
     display: none;
   }
-  /* line 936, styles/site.less */
+  /* line 945, styles/site.less */
   .mobile-hide {
     display: none;
   }
-  /* line 940, styles/site.less */
+  /* line 949, styles/site.less */
   .breadcrumb {
     white-space: inherit;
   }
   /* workaround for #hashtag url is no longer needed*/
-  /* line 945, styles/site.less */
+  /* line 954, styles/site.less */
   h1:before,
   h2:before,
   h3:before,
@@ -9035,17 +9045,17 @@ footer {
 }
 /* For toc iframe */
 @media (max-width: 260px) {
-  /* line 956, styles/site.less */
+  /* line 965, styles/site.less */
   .toc .level2 > li {
     display: block;
   }
-  /* line 960, styles/site.less */
+  /* line 969, styles/site.less */
   .toc .level2 > li:after {
     display: none;
   }
 }
 /* For code snippet line highlight */
-/* line 966, styles/site.less */
+/* line 975, styles/site.less */
 pre > code .line-highlight {
   background-color: #ffffcc;
 }

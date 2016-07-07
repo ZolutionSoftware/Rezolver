@@ -1,0 +1,1086 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class CompileContext
+   </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class CompileContext
+   ">
+  	<meta name="generator" content="docfx 2.0.1.0">
+  	
+  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  	<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  	<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  	<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  	<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  	<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  	<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  	<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  	<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  	<link rel="manifest" href="../../manifest.json">
+  	<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  	<meta name="msapplication-TileColor" content="#da532c">
+  	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  	<meta name="theme-color" content="#ffffff">
+  	<link rel="stylesheet" href="../../styles/site.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	<meta property="docfx:rel" content="../">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container-fluid body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+        <div role="main" class="container-fluid body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
+              
+              <h1 id="Rezolver_CompileContext" data-uid="Rezolver.CompileContext">Class CompileContext
+              </h1>
+              <div class="markdown level0 summary"><p>Represents the context in which a target is being compiled or fetched.</p>
+<p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to facilitate
+dependency lookups during compilation time.</p>
+<p>THIS CLASS IS NOT THREAD-SAFE</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">CompileContext</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <span class="xref">System.Object.ToString()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetHashCode()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.GetType()</span>
+                </div>
+                <div>
+                  <span class="xref">System.Object.MemberwiseClone()</span>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Rezolver</h6>
+              <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
+              <h5 id="Rezolver_CompileContext_syntax" class="hsyntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public class CompileContext : ITargetContainer</code></pre>
+              </div>
+              <!-- <hr class="typeSectionDivider" /> -->
+              <h3 id="constructors">Constructors
+              </h3>
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext__ctor_Rezolver_CompileContext_System_Type_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.%23ctor(Rezolver.CompileContext%2CSystem.Type%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext__ctor_Rezolver_CompileContext_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.#ctor(Rezolver.CompileContext,System.Type,System.Boolean,System.Boolean)">CompileContext(CompileContext, Type, Boolean, Boolean)</h4>
+              <div class="markdown level1 summary"><p>Creates a new CompileContext using an existing one as a template.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public CompileContext(CompileContext parentContext, Type targetType = null, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>parentContext</em></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><p>Used to seed the compilation stack, rezolver, rezolve context parameter and optionally
+the target type (if you pass null for <em>targetType</em>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>targetType</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td><p>The target type that is expected to be compiled, or null to inherit
+the <em>parentContext</em>&#39;s <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> property.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>inheritSharedExpressions</em></td>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><p>If true (the default), then the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_SharedExpressions">SharedExpressions</a> for this context will be shared
+from the parent context - meaning that any new additions will be added back to the parent context again.  This is the most common
+behaviour when chaining multiple targets&#39; expressions together.  Passing false for this parameter is only required in rare situations.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>suppressScopeTracking</em></td>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td><p>If true, then any expressions constructed from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> objects
+should not contain automatically generated code to track objects in an enclosing scope.  The default is false.  This is 
+typically only enabled when one target is explicitly using expressions created from other targets, and has its own
+scope tracking code, or expects to be surrounded by automatically generated scope tracking code itself.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext__ctor_Rezolver_IContainer_System_Type_ParameterExpression_System_Collections_Generic_IEnumerable_Rezolver_ITarget__Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.%23ctor(Rezolver.IContainer%2CSystem.Type%2CParameterExpression%2CSystem.Collections.Generic.IEnumerable%7BRezolver.ITarget%7D%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext__ctor_Rezolver_IContainer_System_Type_ParameterExpression_System_Collections_Generic_IEnumerable_Rezolver_ITarget__Rezolver_ITargetContainer_" data-uid="Rezolver.CompileContext.#ctor(Rezolver.IContainer,System.Type,ParameterExpression,System.Collections.Generic.IEnumerable{Rezolver.ITarget},Rezolver.ITargetContainer)">CompileContext(IContainer, Type, ParameterExpression, IEnumerable&lt;ITarget&gt;, ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Creates a new CompileContext</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public CompileContext(IContainer rezolver, Type targetType = null, ParameterExpression rezolveContextParameter = null, IEnumerable&lt;ITarget&gt; compilingTargets = null, ITargetContainer dependencyContainer = null)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>rezolver</em></td>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td><p>Required. Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> property.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>targetType</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td><p>Optional. Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> property.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>rezolveContextParameter</em></td>
+                    <td><span class="xref">ParameterExpression</span></td>
+                    <td><p>Optional.  Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a></p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>compilingTargets</em></td>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><p>Optional.  Allows you to seed the stack of compiling targets from creation.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>dependencyContainer</em></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><p>Optional.  By default, this class implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> by wrapping
+a <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder">ChildBuilder</a> over the one that is attached to the <em>rezolver</em> that you pass on construction.</p>
+<p>To override that behaviour, you can pass a different target container here.</p>
+<p>You can, for example, disable the child rezolver creation by explicitly passing the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a>
+property of the <em>rezolver</em> parameter.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
+              <h3 id="properties">Properties
+              </h3>
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_CompilingTargets.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.CompilingTargets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_CompilingTargets" data-uid="Rezolver.CompileContext.CompilingTargets">CompilingTargets</h4>
+              <div class="markdown level1 summary"><p>An enumerable representing the current stack of targets that are being compiled.</p>
+<p>The underlying stack is not exposed through this enumerable.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; CompilingTargets { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_ContextRezolverPropertyExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.ContextRezolverPropertyExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_ContextRezolverPropertyExpression" data-uid="Rezolver.CompileContext.ContextRezolverPropertyExpression">ContextRezolverPropertyExpression</h4>
+              <div class="markdown level1 summary"><p>Returns an expression that represents reading the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Rezolver">Rezolver</a> property of the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a> 
+to aid in code generation.</p>
+<p>This IS NOT the same as the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolverExpression">RezolverExpression</a> property.</p>
+<p>Always non-null.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public MemberExpression ContextRezolverPropertyExpression { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">MemberExpression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_ContextScopePropertyExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.ContextScopePropertyExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_ContextScopePropertyExpression" data-uid="Rezolver.CompileContext.ContextScopePropertyExpression">ContextScopePropertyExpression</h4>
+              <div class="markdown level1 summary"><p>Returns an expression that represents reading the Scope property of the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public MemberExpression ContextScopePropertyExpression { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">MemberExpression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_RezolveContextParameter.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.RezolveContextParameter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_RezolveContextParameter" data-uid="Rezolver.CompileContext.RezolveContextParameter">RezolveContextParameter</h4>
+              <div class="markdown level1 summary"><p>A expression to be used to bind to the RezolveContext that will be passed to the generated code at runtime.</p>
+<p>If this is never set, then the framework will use <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_RezolveContextParameter">RezolveContextParameter</a> by default.</p>
+<p>In theory, you should never need to set this to anything else, unless you&#39;re doing something very interesting with
+the generated expressions.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ParameterExpression RezolveContextParameter { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">ParameterExpression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Rezolver.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Rezolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_Rezolver" data-uid="Rezolver.CompileContext.Rezolver">Rezolver</h4>
+              <div class="markdown level1 summary"><p>The rezolver that is considered the current compilation &#39;scope&#39;.</p>
+<p>You should not use this to look up other targets
+for dependency resolution - for that, you should use the DependencyBuilder</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IContainer Rezolver { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_RezolverExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.RezolverExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_RezolverExpression" data-uid="Rezolver.CompileContext.RezolverExpression">RezolverExpression</h4>
+              <div class="markdown level1 summary"><p>Represents an expression that equals the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> that belongs to this context.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Expression RezolverExpression { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_SharedExpressions.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.SharedExpressions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressions" data-uid="Rezolver.CompileContext.SharedExpressions">SharedExpressions</h4>
+              <div class="markdown level1 summary"><p>Shared expressions are expressions that targets add to the compile context as they are compiled,
+enabling them to generate code which is both more efficient at runtime (e.g. avoiding the creation of
+redundant locals for blocks which can reuse a pre-existing local) and that can be more efficiently rewritten </p>
+<ul>
+<li>due to the reuse of identical expression references for things like conditional checks and so on.</li>
+</ul>
+<p>A compiler MUST handle the case where this enumerable contains ParameterExpressions, as they will need
+to be added as local variables to an all-encompassing BlockExpression around the root of an expression tree 
+that is to be compiled.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IEnumerable&lt;Expression&gt; SharedExpressions { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Expression</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_SuppressScopeTracking.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.SuppressScopeTracking%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_SuppressScopeTracking" data-uid="Rezolver.CompileContext.SuppressScopeTracking">SuppressScopeTracking</h4>
+              <div class="markdown level1 summary"><p>If true, then any target that is compiling within this scope should not generate any runtime code to fetch the
+object from, or track the object in, the current scope.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool SuppressScopeTracking { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hremarks" id="Rezolver_CompileContext_SuppressScopeTracking_remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This is currently used, for example, by wrapper targets that generate their own
+scope tracking code (specifically, the <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a> and <a class="xref" href="Rezolver.ScopedTarget.html#Rezolver_ScopedTarget">ScopedTarget</a>.</p>
+<p>It&#39;s therefore very important that any custom <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementations honour this flag in their
+implementation of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a>.  The <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase">TargetBase</a>
+class does honour this flag.</p>
+</div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_TargetType.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.TargetType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_TargetType" data-uid="Rezolver.CompileContext.TargetType">TargetType</h4>
+              <div class="markdown level1 summary"><p>The desired type to be returned by the generated code.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Type TargetType { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
+              <h3 id="methods">Methods
+              </h3>
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.CompileContext.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ITargetContainer CombineWith(ITargetContainer existing, Type type)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>existing</em></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_Fetch_System_Type_" data-uid="Rezolver.CompileContext.Fetch(System.Type)">Fetch(Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ITarget Fetch(Type type)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_FetchAll_System_Type_" data-uid="Rezolver.CompileContext.FetchAll(System.Type)">FetchAll(Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; FetchAll(Type type)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_GetOrAddSharedExpression_System_Type_System_String_System_Func_Expression__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.GetOrAddSharedExpression(System.Type%2CSystem.String%2CSystem.Func%7BExpression%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_GetOrAddSharedExpression_System_Type_System_String_System_Func_Expression__System_Type_" data-uid="Rezolver.CompileContext.GetOrAddSharedExpression(System.Type,System.String,System.Func{Expression},System.Type)">GetOrAddSharedExpression(Type, String, Func&lt;Expression&gt;, Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Expression GetOrAddSharedExpression(Type type, string name, Func&lt;Expression&gt; expressionFactory, Type requestingType = null)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>name</em></td>
+                    <td><span class="xref">System.String</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>expressionFactory</em></td>
+                    <td><span class="xref">System.Func</span>&lt;<span class="xref">Expression</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>requestingType</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_GetOrAddSharedLocal_System_Type_System_String_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.GetOrAddSharedLocal(System.Type%2CSystem.String%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_GetOrAddSharedLocal_System_Type_System_String_System_Type_" data-uid="Rezolver.CompileContext.GetOrAddSharedLocal(System.Type,System.String,System.Type)">GetOrAddSharedLocal(Type, String, Type)</h4>
+              <div class="markdown level1 summary"><p>Retrieves</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ParameterExpression GetOrAddSharedLocal(Type type, string name, Type requestingType = null)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>name</em></td>
+                    <td><span class="xref">System.String</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>requestingType</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">ParameterExpression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_IsCompiling_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_IsCompiling_Rezolver_ITarget_" data-uid="Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)">IsCompiling(ITarget)</h4>
+              <div class="markdown level1 summary"><p>Call this to find out if a target is currently compiling without trying
+to also add it to the stack.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool IsCompiling(ITarget target)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>target</em></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.New(System.Type%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.New(System.Type,System.Boolean,System.Boolean)">New(Type, Boolean, Boolean)</h4>
+              <div class="markdown level1 summary"><p>Spawns a new context for the passed <em>targetType</em>, with everything else being inherited from this context by default.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public CompileContext New(Type targetType, bool inheritSharedExpressions = true, bool suppressScopeTracking = false)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>targetType</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td><p>Required.  The type to be compiled.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>inheritSharedExpressions</em></td>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>suppressScopeTracking</em></td>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><p>A new <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hremarks" id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This is a convenience method which simply wraps the <span class="xref">Rezolver.CompileContext.</span> constructor,
+except in this method the <em>targetType</em> is required.</p>
+</div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_PopCompileStack.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.PopCompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_PopCompileStack" data-uid="Rezolver.CompileContext.PopCompileStack">PopCompileStack()</h4>
+              <div class="markdown level1 summary"><p>Pops a target from the stack and returns it.  Note that if there
+are no targets on the stack, an InvalidOperationException will occur.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ITarget PopCompileStack()</code></pre>
+              </div>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_PushCompileStack_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.PushCompileStack(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_PushCompileStack_Rezolver_ITarget_" data-uid="Rezolver.CompileContext.PushCompileStack(Rezolver.ITarget)">PushCompileStack(ITarget)</h4>
+              <div class="markdown level1 summary"><p>Adds the target to the compilation stack if it doesn&#39;t already exist.</p>
+<p>The method returns whether the target was added.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public bool PushCompileStack(ITarget toCompile)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>toCompile</em></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Boolean</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.CompileContext.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public void Register(ITarget target, Type serviceType = null)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>target</em></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>serviceType</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a></div>
+              </div><!-- .classchild -->
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+            </nav>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

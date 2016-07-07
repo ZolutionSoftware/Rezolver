@@ -1,6 +1,6 @@
 
-- name: Articles
-  href: articles/
-- name: API Documentation
-  href: obj/api/
-  homepage: api/index.md
+- name: Usage
+  href: rezolver-usage/
+- name: API
+  href: obj/rezolver-api/
+  homepage: rezolver-api/index.md
