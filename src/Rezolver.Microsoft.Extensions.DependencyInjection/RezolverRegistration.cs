@@ -66,9 +66,9 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection
     {
       if (rezolver == null) throw new ArgumentNullException(nameof(rezolver));
       //register service provider
-      rezolver.RegisterExpression(context => context.Rezolver, typeof(IServiceProvider));
+      rezolver.RegisterExpression(context => context.Container, typeof(IServiceProvider));
       //register scope factory - uses the rezolver that comes in the context.
-      rezolver.RegisterExpression(context => new RezolverScopeFactory(context.Rezolver), typeof(IServiceScopeFactory));
+      rezolver.RegisterExpression(context => new RezolverScopeFactory(context.Container), typeof(IServiceScopeFactory));
 
       foreach (var group in services.GroupBy(s => s.ServiceType))
       {

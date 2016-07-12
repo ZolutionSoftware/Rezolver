@@ -109,9 +109,9 @@ namespace Rezolver
 
     public virtual ICompiledTarget FetchCompiled(RezolveContext context)
     {
-      //note that this rezolver is fixed as the rezolver in the compile context - regardless of the
+      //note that this container is fixed as the container in the compile context - regardless of the
       //one passed in.  This is important.
-      //note also that this rezolver is only passed as scope if the context doesn't already have one.
+      //note also that this container is only passed as scope if the context doesn't already have one.
       return GetCompiledRezolveTarget(context.CreateNew(this, context.Scope ?? (this as IScopedContainer)));
     }
 

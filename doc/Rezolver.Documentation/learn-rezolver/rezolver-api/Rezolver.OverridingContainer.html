@@ -212,21 +212,21 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                   <tr>
                     <td><em>inner</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>Required.  The inner rezolver that this one combines with.  Any dependencies not served
-by the new combined rezolver&#39;s own registry will be sought from this rezolver.</p>
+                    <td><p>Required.  The inner container that this one combines with.  Any dependencies not served
+by the new combined container&#39;s own registry will be sought from this container.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>builder</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td><p>Optional. A specific builder to be used for this rezolver&#39;s own registrations.</p>
+                    <td><p>Optional. A specific builder to be used for this container&#39;s own registrations.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
                     <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
                     <td><p>Optional. A compiler to be used to create <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> instances
-from this rezolver&#39;s registrations.  If this is not provided, then the default is used (<a class="xref" href="Rezolver.TargetCompiler.html#Rezolver_TargetCompiler_Default">Default</a>)</p>
+from this container&#39;s registrations.  If this is not provided, then the default is used (<a class="xref" href="Rezolver.TargetCompiler.html#Rezolver_TargetCompiler_Default">Default</a>)</p>
 </td>
                   </tr>
                 </tbody>
@@ -242,7 +242,7 @@ from this rezolver&#39;s registrations.  If this is not provided, then the defau
               </span>
               
               <h4 class="hmember" id="Rezolver_OverridingContainer_CanResolve_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.RezolveContext)">CanResolve(RezolveContext)</h4>
-              <div class="markdown level1 summary"><p>Called to determine if this rezolver is able to resolve the type specified in the passed <em>context</em>.</p>
+              <div class="markdown level1 summary"><p>Called to determine if this container is able to resolve the type specified in the passed <em>context</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -292,8 +292,8 @@ from this rezolver&#39;s registrations.  If this is not provided, then the defau
               </span>
               
               <h4 class="hmember" id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.RezolveContext)">GetFallbackCompiledRezolveTarget(RezolveContext)</h4>
-              <div class="markdown level1 summary"><p>Overrides the base implementation to pass the lookup for an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> to the inner rezolver - this
-is how dependency chaining from this rezolver to the inner rezolver is achieved.</p>
+              <div class="markdown level1 summary"><p>Overrides the base implementation to pass the lookup for an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> to the inner container - this
+is how dependency chaining from this container to the inner container is achieved.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>

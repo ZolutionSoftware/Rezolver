@@ -94,9 +94,9 @@
               
               <h1 id="Rezolver_RezolveContext" data-uid="Rezolver.RezolveContext">Class RezolveContext
               </h1>
-              <div class="markdown level0 summary"><p>Context of a call to an IRezolver&#39;s Resolve method.  The rezolver is included
-in the context to allow IRezolveTarget-generated code to refer back to the rezolver.</p>
-<p>This also allows us to retarget compiled targets at other rezolvers (e.g. child rezolvers
+              <div class="markdown level0 summary"><p>Context of a call to an IRezolver&#39;s Resolve method.  The container is included
+in the context to allow code generated from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> to refer back to the container.</p>
+<p>This also allows us to retarget compiled targets at other containers (e.g. <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer">OverridingContainer</a>s
 that override existing registrations or define new ones).</p>
 </div>
               <div class="markdown level0 conceptual"></div>
@@ -140,7 +140,7 @@ that override existing registrations or define new ones).</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public RezolveContext(IContainer rezolver, Type requestedType)</code></pre>
+                <pre><code class="lang-csharp hljs">public RezolveContext(IContainer container, Type requestedType)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -153,7 +153,7 @@ that override existing registrations or define new ones).</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
@@ -176,7 +176,7 @@ that override existing registrations or define new ones).</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public RezolveContext(IContainer rezolver, Type requestedType, IScopedContainer scope)</code></pre>
+                <pre><code class="lang-csharp hljs">public RezolveContext(IContainer container, Type requestedType, IScopedContainer scope)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -189,7 +189,7 @@ that override existing registrations or define new ones).</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
@@ -244,6 +244,36 @@ that override existing registrations or define new ones).</p>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_RezolveContext_Container.md&amp;value=---%0Auid%3A%20Rezolver.RezolveContext.Container%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_RezolveContext_Container" data-uid="Rezolver.RezolveContext.Container">Container</h4>
+              <div class="markdown level1 summary"><p>The container for this context.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IContainer Container { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
                 <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_RezolveContext_RequestedType.md&amp;value=---%0Auid%3A%20Rezolver.RezolveContext.RequestedType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
@@ -265,36 +295,6 @@ that override existing registrations or define new ones).</p>
                 <tbody>
                   <tr>
                     <td><span class="xref">System.Type</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_RezolveContext_Rezolver.md&amp;value=---%0Auid%3A%20Rezolver.RezolveContext.Rezolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              
-              <h4 class="hmember" id="Rezolver_RezolveContext_Rezolver" data-uid="Rezolver.RezolveContext.Rezolver">Rezolver</h4>
-              <div class="markdown level1 summary"><p>The rezolver for this context.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public IContainer Rezolver { get; }</code></pre>
-              </div>
-              <h5 class="hpropertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -343,7 +343,7 @@ that override existing registrations or define new ones).</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer rezolver)</code></pre>
+                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer container)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -356,7 +356,7 @@ that override existing registrations or define new ones).</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
@@ -389,7 +389,7 @@ that override existing registrations or define new ones).</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer rezolver, IScopedContainer scope)</code></pre>
+                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer container, IScopedContainer scope)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -402,7 +402,7 @@ that override existing registrations or define new ones).</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
@@ -440,7 +440,7 @@ that override existing registrations or define new ones).</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer rezolver, Type requestedType)</code></pre>
+                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer container, Type requestedType)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -453,7 +453,7 @@ that override existing registrations or define new ones).</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>
@@ -491,7 +491,7 @@ that override existing registrations or define new ones).</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer rezolver, Type requestedType, IScopedContainer scope)</code></pre>
+                <pre><code class="lang-csharp hljs">public RezolveContext CreateNew(IContainer container, Type requestedType, IScopedContainer scope)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -504,7 +504,7 @@ that override existing registrations or define new ones).</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
                     <td></td>
                   </tr>

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Rezolver
 {
   /// <summary>
-  /// A rezolver that's also a lifetime scope - that is, it's disposable,
+  /// A container that's also a lifetime scope - that is, it's disposable,
   /// and will dispose of any disposable instances that it creates when it's disposed.
   /// 
   /// Also, any subsequent lifetime scopes that it, or any child, creates will 

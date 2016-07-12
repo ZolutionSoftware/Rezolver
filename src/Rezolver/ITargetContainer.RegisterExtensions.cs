@@ -136,16 +136,16 @@ namespace Rezolver
     /// <summary>
     /// Non-generic version of <see cref="RegisterType{TObject, TService}(ITargetContainer, IPropertyBindingBehaviour)"/>.
     /// </summary>
-    /// <param name="builder"></param>
+    /// <param name="targets"></param>
     /// <param name="objectType">Required. Type of object to be constructed</param>
     /// <param name="serviceType">See <see cref="ITargetContainer.Register(ITarget, Type)"/></param>
     /// <param name="path">See <see cref="ITargetContainer.Register(ITarget, Type)"/></param>
     /// <param name="propertyBindingBehaviour"><see cref="RegisterType{TObject}(ITargetContainer, IPropertyBindingBehaviour)"/></param>
-    public static void RegisterType(this ITargetContainer builder, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+    public static void RegisterType(this ITargetContainer targets, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
     {
-      builder.MustNotBeNull("rezolver");
-      objectType.MustNotBeNull("objectType");
-      RegisterTypeInternal(builder, objectType, serviceType, propertyBindingBehaviour);
+      targets.MustNotBeNull(nameof(targets));
+      objectType.MustNotBeNull(nameof(objectType));
+      RegisterTypeInternal(targets, objectType, serviceType, propertyBindingBehaviour);
     }
 
     internal static void RegisterTypeInternal(ITargetContainer builder, Type objectType, Type serviceType, IPropertyBindingBehaviour propertyBindingBehaviour)

@@ -142,11 +142,21 @@ references:
   href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_CompilingTargets
   commentId: P:Rezolver.CompileContext.CompilingTargets
   fullName: Rezolver.CompileContext.CompilingTargets
-- uid: Rezolver.CompileContext.ContextRezolverPropertyExpression
-  name: ContextRezolverPropertyExpression
-  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_ContextRezolverPropertyExpression
-  commentId: P:Rezolver.CompileContext.ContextRezolverPropertyExpression
-  fullName: Rezolver.CompileContext.ContextRezolverPropertyExpression
+- uid: Rezolver.CompileContext.Container
+  name: Container
+  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_Container
+  commentId: P:Rezolver.CompileContext.Container
+  fullName: Rezolver.CompileContext.Container
+- uid: Rezolver.CompileContext.ContainerExpression
+  name: ContainerExpression
+  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_ContainerExpression
+  commentId: P:Rezolver.CompileContext.ContainerExpression
+  fullName: Rezolver.CompileContext.ContainerExpression
+- uid: Rezolver.CompileContext.ContextContainerPropertyExpression
+  name: ContextContainerPropertyExpression
+  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_ContextContainerPropertyExpression
+  commentId: P:Rezolver.CompileContext.ContextContainerPropertyExpression
+  fullName: Rezolver.CompileContext.ContextContainerPropertyExpression
 - uid: Rezolver.CompileContext.ContextScopePropertyExpression
   name: ContextScopePropertyExpression
   href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_ContextScopePropertyExpression
@@ -204,16 +214,6 @@ references:
   href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter
   commentId: P:Rezolver.CompileContext.RezolveContextParameter
   fullName: Rezolver.CompileContext.RezolveContextParameter
-- uid: Rezolver.CompileContext.Rezolver
-  name: Rezolver
-  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver
-  commentId: P:Rezolver.CompileContext.Rezolver
-  fullName: Rezolver.CompileContext.Rezolver
-- uid: Rezolver.CompileContext.RezolverExpression
-  name: RezolverExpression
-  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_RezolverExpression
-  commentId: P:Rezolver.CompileContext.RezolverExpression
-  fullName: Rezolver.CompileContext.RezolverExpression
 - uid: Rezolver.CompileContext.SharedExpressionKey
   name: CompileContext.SharedExpressionKey
   href: rezolver-api/Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey
@@ -2433,11 +2433,6 @@ references:
   href: rezolver-api/Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_RezolveContextParameter
   commentId: F:Rezolver.ExpressionHelper.RezolveContextParameter
   fullName: Rezolver.ExpressionHelper.RezolveContextParameter
-- uid: Rezolver.ExpressionHelper.RezolverNameParameter
-  name: RezolverNameParameter
-  href: rezolver-api/Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_RezolverNameParameter
-  commentId: F:Rezolver.ExpressionHelper.RezolverNameParameter
-  fullName: Rezolver.ExpressionHelper.RezolverNameParameter
 - uid: Rezolver.ExpressionHelper.Scope_GetOrAddGenericMethod
   name: Scope_GetOrAddGenericMethod
   href: rezolver-api/Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_Scope_GetOrAddGenericMethod
@@ -3480,6 +3475,11 @@ references:
   href: rezolver-api/Rezolver.RezolveContext.html#Rezolver_RezolveContext__ctor_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_
   commentId: M:Rezolver.RezolveContext.#ctor(Rezolver.IContainer,System.Type,Rezolver.IScopedContainer)
   fullName: Rezolver.RezolveContext.RezolveContext(Rezolver.IContainer, System.Type, Rezolver.IScopedContainer)
+- uid: Rezolver.RezolveContext.Container
+  name: Container
+  href: rezolver-api/Rezolver.RezolveContext.html#Rezolver_RezolveContext_Container
+  commentId: P:Rezolver.RezolveContext.Container
+  fullName: Rezolver.RezolveContext.Container
 - uid: Rezolver.RezolveContext.CreateNew(Rezolver.IContainer)
   name: CreateNew(IContainer)
   href: rezolver-api/Rezolver.RezolveContext.html#Rezolver_RezolveContext_CreateNew_Rezolver_IContainer_
@@ -3550,11 +3550,6 @@ references:
   href: rezolver-api/Rezolver.RezolveContext.html#Rezolver_RezolveContext_RequestedType
   commentId: P:Rezolver.RezolveContext.RequestedType
   fullName: Rezolver.RezolveContext.RequestedType
-- uid: Rezolver.RezolveContext.Rezolver
-  name: Rezolver
-  href: rezolver-api/Rezolver.RezolveContext.html#Rezolver_RezolveContext_Rezolver
-  commentId: P:Rezolver.RezolveContext.Rezolver
-  fullName: Rezolver.RezolveContext.Rezolver
 - uid: Rezolver.RezolveContext.Scope
   name: Scope
   href: rezolver-api/Rezolver.RezolveContext.html#Rezolver_RezolveContext_Scope

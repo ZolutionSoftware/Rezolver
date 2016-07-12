@@ -23,11 +23,11 @@ namespace Rezolver
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="inner">Required.  The inner rezolver that this one combines with.  Any dependencies not served
-    /// by the new combined rezolver's own registry will be sought from this rezolver.</param>
-    /// <param name="builder">Optional. A specific builder to be used for this rezolver's own registrations.</param>
+    /// <param name="inner">Required.  The inner container that this one combines with.  Any dependencies not served
+    /// by the new combined container's own registry will be sought from this container.</param>
+    /// <param name="builder">Optional. A specific builder to be used for this container's own registrations.</param>
     /// <param name="compiler">Optional. A compiler to be used to create <see cref="ICompiledTarget"/> instances
-    /// from this rezolver's registrations.  If this is not provided, then the default is used (<see cref="TargetCompiler.Default"/>)</param>
+    /// from this container's registrations.  If this is not provided, then the default is used (<see cref="TargetCompiler.Default"/>)</param>
     public OverridingContainer(IContainer inner, ITargetContainer builder = null, ITargetCompiler compiler = null)
       : base(builder, compiler)
     {
@@ -36,7 +36,7 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Called to determine if this rezolver is able to resolve the type specified in the passed <paramref name="context"/>.
+    /// Called to determine if this container is able to resolve the type specified in the passed <paramref name="context"/>.
     /// </summary>
     /// <param name="context">Required.  The <see cref="RezolveContext"/>.</param>
     /// <returns></returns>
@@ -46,8 +46,8 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Overrides the base implementation to pass the lookup for an <see cref="ITarget"/> to the inner rezolver - this
-    /// is how dependency chaining from this rezolver to the inner rezolver is achieved.
+    /// Overrides the base implementation to pass the lookup for an <see cref="ITarget"/> to the inner container - this
+    /// is how dependency chaining from this container to the inner container is achieved.
     /// </summary>
     /// <param name="context">Required.  The <see cref="RezolveContext"/>.</param>
     /// <returns></returns>

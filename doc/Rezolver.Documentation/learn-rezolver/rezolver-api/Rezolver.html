@@ -120,11 +120,8 @@ its <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder_Paren
 are present in its parent.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></h4>
-                  <section><p>Represents the context in which a target is being compiled or fetched.</p>
-<p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to facilitate
-dependency lookups during compilation time - indeed, all operations to find targets
-during compilation should be directed through this class&#39; implementation.</p>
-<p>THIS CLASS IS NOT THREAD-SAFE</p>
+                  <section><p>Provides support and compile-time state for the compilation of an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> by an <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a>.
+THIS CLASS IS NOT THREAD-SAFE</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey">CompileContext.SharedExpressionKey</a></h4>
                   <section><p>Key for a shared expression used during expression tree generation</p>
@@ -171,8 +168,8 @@ as doing default(type) in C#.</p>
                   <section><p>   A strongly-typed resource class, for looking up localized strings, etc.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper">ExpressionHelper</a></h4>
-                  <section><p>This static class contains methods and properties to aid in building expressions suitable to be used in
-rezolver targets</p>
+                  <section><p>This static class contains methods and properties to aid in building expressions in the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a>
+method.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget">ExpressionTarget</a></h4>
                   <section><p>A generic target for all expressions not explicitly supported by a particular target.</p>
@@ -196,7 +193,7 @@ rezolver targets</p>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a></h4>
                   <section><p>This exists primarily for the configuration system.</p>
-<p>This target produces arrays or lists whose individual items are built by IRezolveTarget instances.<br>If you are setting up your rezolver environment from code - e.g. using expressions,
+<p>This target produces arrays or lists whose individual items are built by IRezolveTarget instances.<br>If you are setting up your container environment from code - e.g. using expressions,
 then you shouldn&#39;t need to use this unless you have some pretty extreme requirements for the different
 targets that will contribute each element of your list/array.</p>
 </section>
@@ -227,9 +224,9 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                   <h4><a class="xref" href="Rezolver.PropertyOrFieldBinding.html#Rezolver_PropertyOrFieldBinding">PropertyOrFieldBinding</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></h4>
-                  <section><p>Context of a call to an IRezolver&#39;s Resolve method.  The rezolver is included
-in the context to allow IRezolveTarget-generated code to refer back to the rezolver.</p>
-<p>This also allows us to retarget compiled targets at other rezolvers (e.g. child rezolvers
+                  <section><p>Context of a call to an IRezolver&#39;s Resolve method.  The container is included
+in the context to allow code generated from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> to refer back to the container.</p>
+<p>This also allows us to retarget compiled targets at other containers (e.g. <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer">OverridingContainer</a>s
 that override existing registrations or define new ones).</p>
 </section>
                   <h4><a class="xref" href="Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper">RezolveContextExpressionHelper</a></h4>
@@ -276,7 +273,7 @@ of <a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">I
                   <h4><a class="xref" href="Rezolver.TargetAssemblyCompiler.html#Rezolver_TargetAssemblyCompiler">TargetAssemblyCompiler</a></h4>
                   <section><p>Implementation of the <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a> which compiles dynamic code to an assembly (which can, potentially, be saved to disk).</p>
 <p>Suitable for environments that support the full .Net profile.</p>
-<p>Generally, the performance of a rezolver built using this compiler will be better than one that uses the <a class="xref" href="Rezolver.TargetDelegateCompiler.html#Rezolver_TargetDelegateCompiler">TargetDelegateCompiler</a>.</p>
+<p>Generally, the performance of a container built using this compiler will be better than one that uses the <a class="xref" href="Rezolver.TargetDelegateCompiler.html#Rezolver_TargetDelegateCompiler">TargetDelegateCompiler</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase">TargetBase</a></h4>
                   <section><p>Abstract base class, suggested as a starting point for implementations of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>.</p>
@@ -310,24 +307,24 @@ custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html#Rezolver_
                 <h3 id="interfaces">Interfaces
               </h3>
                   <h4><a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer">IChildTargetContainer</a></h4>
-                  <section><p>An IRezolveTargetContainer that is a logical child of another.  Typically, a child rezolver, 
+                  <section><p>An IRezolveTargetContainer that is a logical child of another.  Typically, a child container, 
 if it cannot resolve a particular type, will defer to its parent for fallback.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a></h4>
-                  <section><p>Provides an abstraction for creating objects in response to a resolve operation.</p>
+                  <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
 <p>As the name suggests, it typically represents a compiled <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>, 
 which, in the standard <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementation (<a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a>)
 is the final stage before its ready to be used to start producing objects.</p>
 <p>An <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a> is responsible for creating these from one or more <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></h4>
-                  <section><p>A container through which instances of objects can be resolved (via the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method).</p>
+                  <section><p>Represents the primary IOC container in the Rezolver framework.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></h4>
                   <section><p>Describes a type which discovers property/field bindings</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></h4>
-                  <section><p>A rezolver that&#39;s also a lifetime scope - that is, it&#39;s disposable,
+                  <section><p>A container that&#39;s also a lifetime scope - that is, it&#39;s disposable,
 and will dispose of any disposable instances that it creates when it&#39;s disposed.</p>
 <p>Also, any subsequent lifetime scopes that it, or any child, creates will 
 be disposed of when this scope is disposed.</p>

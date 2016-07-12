@@ -6,7 +6,7 @@ using System;
 namespace Rezolver
 {
   /// <summary>
-  /// Provides an abstraction for creating objects in response to a resolve operation.
+  /// Provides an abstraction for creating objects based on a given <see cref="RezolveContext"/>.
   /// 
   /// As the name suggests, it typically represents a compiled <see cref="ITarget"/>, 
   /// which, in the standard <see cref="IContainer"/> implementation (<see cref="Container"/>)

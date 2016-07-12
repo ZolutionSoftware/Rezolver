@@ -15,7 +15,7 @@ namespace Rezolver
   /// This exists primarily for the configuration system.
   /// 
   /// This target produces arrays or lists whose individual items are built by IRezolveTarget instances.  
-  /// If you are setting up your rezolver environment from code - e.g. using expressions,
+  /// If you are setting up your container environment from code - e.g. using expressions,
   /// then you shouldn't need to use this unless you have some pretty extreme requirements for the different
   /// targets that will contribute each element of your list/array.
   /// </summary>

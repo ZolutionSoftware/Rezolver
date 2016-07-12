@@ -10,21 +10,21 @@ using System.Text;
 namespace Rezolver
 {
   /// <summary>
-  /// Context of a call to an IRezolver's Resolve method.  The rezolver is included
-  /// in the context to allow IRezolveTarget-generated code to refer back to the rezolver.
+  /// Context of a call to an IRezolver's Resolve method.  The container is included
+  /// in the context to allow code generated from <see cref="ITarget.CreateExpression(CompileContext)"/> to refer back to the container.
   /// 
-  /// This also allows us to retarget compiled targets at other rezolvers (e.g. child rezolvers
+  /// This also allows us to retarget compiled targets at other containers (e.g. <see cref="OverridingContainer"/>s
   /// that override existing registrations or define new ones).
   /// </summary>
   public class RezolveContext : IEquatable<RezolveContext>
   {
     public static readonly RezolveContext EmptyContext = new RezolveContext(null);
 
-    private class StubRezolver : IContainer
+    private class StubContainer : IContainer
     {
-      private static readonly StubRezolver _instance = new StubRezolver();
+      private static readonly StubContainer _instance = new StubContainer();
 
-      public static StubRezolver Instance
+      public static StubContainer Instance
       {
         get
         {
@@ -88,38 +88,38 @@ namespace Rezolver
     private Type _requestedType;
     public Type RequestedType { get { return _requestedType; } private set { _requestedType = value; } }
 
-    private IContainer _rezolver;
+    private IContainer _container;
 
     /// <summary>
-    /// The rezolver for this context.
+    /// The container for this context.
     /// </summary>
-    public IContainer Rezolver { get { return _rezolver; } private set { _rezolver = value; } }
+    public IContainer Container { get { return _container; } private set { _container = value; } }
 
     private IScopedContainer _scope;
     public IScopedContainer Scope { get { return _scope; } private set { _scope = value; } }
 
     private RezolveContext() { }
 
-    public RezolveContext(IContainer rezolver, Type requestedType)
-      : this(rezolver)
+    public RezolveContext(IContainer container, Type requestedType)
+      : this(container)
     {
       RequestedType = requestedType;
     }
 
-    public RezolveContext(IContainer rezolver, Type requestedType, IScopedContainer scope)
-      : this(rezolver)
+    public RezolveContext(IContainer container, Type requestedType, IScopedContainer scope)
+      : this(container)
     {
       RequestedType = requestedType;
       Scope = scope;
     }
 
-    private RezolveContext(IContainer rezolver)
+    private RezolveContext(IContainer container)
     {
-      _rezolver = rezolver ?? StubRezolver.Instance;
-      //automatically inherit the rezolver as this context's scope, if it's of the correct type.
+      _container = container ?? StubContainer.Instance;
+      //automatically inherit the container as this context's scope, if it's of the correct type.
       //note - all the other constructors chain to this one.  Note that other constructors
       //might supply a separate scope in addition, which will overwrite the scope set here.
-      _scope = rezolver as IScopedContainer;
+      _scope = container as IScopedContainer;
     }
 
     public override string ToString()
@@ -127,11 +127,11 @@ namespace Rezolver
       List<string> parts = new List<string>();
 
       parts.Add($"Type: {RequestedType}");
-      parts.Add($"Rezolver: {Rezolver}");
+      parts.Add($"Container: {Container}");
       if (Scope != null)
       {
-        if (Scope == Rezolver)
-          parts[parts.Count - 1] = $"Scope Rezolver: {Scope}";
+        if (Scope == Container)
+          parts[parts.Count - 1] = $"Scope Container: {Scope}";
         else
           parts.Add($"Scope: {Scope}");
       }
@@ -195,17 +195,17 @@ namespace Rezolver
     {
       return new RezolveContext()
       {
-        Rezolver = Rezolver,
+        Container = Container,
         RequestedType = requestedType,
         Scope = Scope
       };
     }
 
-    public RezolveContext CreateNew(IContainer rezolver, Type requestedType)
+    public RezolveContext CreateNew(IContainer container, Type requestedType)
     {
       return new RezolveContext()
       {
-        Rezolver = rezolver,
+        Container = container,
         RequestedType = requestedType,
         Scope = Scope
       };
@@ -215,27 +215,27 @@ namespace Rezolver
     {
       return new RezolveContext()
       {
-        Rezolver = Rezolver,
+        Container = Container,
         RequestedType = requestedType,
         Scope = scope
       };
     }
 
-    public RezolveContext CreateNew(IContainer rezolver, Type requestedType, IScopedContainer scope)
+    public RezolveContext CreateNew(IContainer container, Type requestedType, IScopedContainer scope)
     {
       return new RezolveContext()
       {
-        Rezolver = rezolver,
+        Container = container,
         RequestedType = requestedType,
         Scope = scope
       };
     }
 
-    public RezolveContext CreateNew(IContainer rezolver)
+    public RezolveContext CreateNew(IContainer container)
     {
       return new RezolveContext()
       {
-        Rezolver = rezolver,
+        Container = container,
         RequestedType = RequestedType,
         Scope = Scope
       };
@@ -245,17 +245,17 @@ namespace Rezolver
     {
       return new RezolveContext()
       {
-        Rezolver = Rezolver,
+        Container = Container,
         RequestedType = RequestedType,
         Scope = scope
       };
     }
 
-    public RezolveContext CreateNew(IContainer rezolver, IScopedContainer scope)
+    public RezolveContext CreateNew(IContainer container, IScopedContainer scope)
     {
       return new RezolveContext()
       {
-        Rezolver = rezolver ?? Rezolver, //can't have a null rezolver
+        Container = container ?? Container, //can't have a null container
         RequestedType = RequestedType,
         Scope = scope
       };

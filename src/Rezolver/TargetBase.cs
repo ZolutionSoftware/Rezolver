@@ -79,7 +79,7 @@ namespace Rezolver
     /// Abstract method called to create the expression - this is called by <see cref="CreateExpression"/> after the
     /// target type has been validated, if provided.
     /// 
-    /// Note - if your implementation needs to support dynamic Resolve operations from the rezolver that is passed
+    /// Note - if your implementation needs to support dynamic Resolve operations from the container that is passed
     /// to an IRezolver's Resolve method, you can use the <see cref="ExpressionHelper.DynamicRezolverParam"/> property,
     /// all the default implementations of this class (and others) use that by default.
     /// </summary>

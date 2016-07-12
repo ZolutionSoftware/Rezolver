@@ -11,14 +11,13 @@ using System.Text;
 namespace Rezolver
 {
   /// <summary>
-  /// Represents the context in which a target is being compiled or fetched.
-  /// 
-  /// The class implements the <see cref="ITargetContainer"/> interface also to facilitate
-  /// dependency lookups during compilation time - indeed, all operations to find targets
-  /// during compilation should be directed through this class' implementation.
-  /// 
+  /// Provides support and compile-time state for the compilation of an <see cref="ITarget"/> by an <see cref="ITargetCompiler"/>.
   /// THIS CLASS IS NOT THREAD-SAFE
   /// </summary>
+  /// <remarks>The class implements the <see cref="ITargetContainer"/> interface also to facilitate
+  /// dependency lookups during compilation time - indeed, all operations to find targets
+  /// during compilation should be directed through this class' implementation.
+  /// </remarks>
   public class CompileContext : ITargetContainer
   {
     /// <summary>
@@ -61,30 +60,31 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// The rezolver that is considered the current compilation 'scope' - i.e. the container for which the compilation
-    /// is being performed.
+    /// The container that is considered the current compilation 'scope' - i.e. the container for which the compilation
+    /// is being performed and, usually, the one on which the <see cref="IContainer.Resolve(RezolveContext)"/> method was 
+    /// originally called.
     /// 
     /// For compile-time dependency resolution (i.e. other <see cref="ITarget"/>s) you should use this class' implementation
     /// of <see cref="ITargetContainer"/>.
     /// </summary>
-    public IContainer Rezolver { get; }
+    public IContainer Container { get; }
 
-    private Expression _rezolverExpression;
+    private Expression _containerExpression;
     /// <summary>
-    /// Represents an expression that equals the <see cref="Rezolver"/> that belongs to this context.
+    /// Represents an expression that equals the <see cref="Container"/> that is active for this context.
     /// </summary>
-    public Expression RezolverExpression
+    public Expression ContainerExpression
     {
       get
       {
-        if (_rezolverExpression == null)
-          _rezolverExpression = Expression.Constant(Rezolver, typeof(IContainer));
-        return _rezolverExpression;
+        if (_containerExpression == null)
+          _containerExpression = Expression.Constant(Container, typeof(IContainer));
+        return _containerExpression;
       }
       private set
       {
         //class can overwrite this value itself if needs be
-        _rezolverExpression = value;
+        _containerExpression = value;
       }
     }
 
@@ -97,7 +97,8 @@ namespace Rezolver
     private readonly ParameterExpression _rezolveContextParameter;
 
     /// <summary>
-    /// A expression to be used to bind to the RezolveContext that will be passed to the generated code at runtime.
+    /// An expression to be used to bind to the RezolveContext that will be passed to the generated code at runtime (effectively,
+    /// the context parameter to <see cref="ICompiledTarget.GetObject(RezolveContext)"/> which is typically invoked by containers).
     /// 
     /// If this is never set, then the framework will use <see cref="ExpressionHelper.RezolveContextParameter"/> by default.
     /// 
@@ -109,24 +110,23 @@ namespace Rezolver
     private readonly Stack<ITarget> _compilingTargets;
 
 
-    private MemberExpression _contextRezolverPropertyExpression;
+    private MemberExpression _contextContainerPropertyExpression;
     /// <summary>
-    /// Returns an expression that represents reading the <see cref="RezolveContext.Rezolver"/> property of the <see cref="RezolveContextParameter"/> 
-    /// to aid in code generation.
+    /// Returns an expression that represents reading the <see cref="RezolveContext.Container"/> property of the <see cref="RezolveContextParameter"/> 
+    /// during the execution of an <see cref="ICompiledTarget"/>'s <see cref="ICompiledTarget.GetObject(RezolveContext)"/> method.
     /// 
-    /// This IS NOT the same as the <see cref="RezolverExpression"/> property.
+    /// This IS NOT the same as the <see cref="ContainerExpression"/> property.
     /// 
     /// Always non-null.
     /// </summary>
-    public MemberExpression ContextRezolverPropertyExpression
+    public MemberExpression ContextContainerPropertyExpression
     {
       get
       {
-        if (_contextRezolverPropertyExpression == null)
-        {
-          _contextRezolverPropertyExpression = Expression.Property(RezolveContextParameter, "Rezolver");
-        }
-        return _contextRezolverPropertyExpression;
+        if (_contextContainerPropertyExpression == null)
+          _contextContainerPropertyExpression = Expression.Property(RezolveContextParameter, nameof(RezolveContext.Container));
+
+        return _contextContainerPropertyExpression;
       }
     }
 
@@ -139,7 +139,7 @@ namespace Rezolver
       get
       {
         if (_contextScopePropertyExpression == null)
-          _contextScopePropertyExpression = Expression.Property(RezolveContextParameter, "Scope");
+          _contextScopePropertyExpression = Expression.Property(RezolveContextParameter, nameof(RezolveContext.Scope));
         return _contextScopePropertyExpression;
       }
     }
@@ -195,20 +195,20 @@ namespace Rezolver
     /// This is the ITargetContainer through which dependencies are resolved.
     /// Note that this class implements ITargetContainer by proxying this instance, 
     /// which is, by default, created as a child container of the one that
-    /// is attached to the <see cref="Rezolver"/>
+    /// is attached to the <see cref="Container"/>
     /// </summary>
-    private ITargetContainer _rezolverBuilder;
+    private ITargetContainer _dependencyTargetContainer;
 
     private CompileContext(CompileContext parentContext, bool inheritSharedExpressions, bool suppressScopeTracking)
     {
       parentContext.MustNotBeNull("parentContext");
 
-      Rezolver = parentContext.Rezolver;
-      RezolverExpression = parentContext.RezolverExpression;
+      Container = parentContext.Container;
+      ContainerExpression = parentContext.ContainerExpression;
       _compilingTargets = parentContext._compilingTargets;
       _rezolveContextParameter = parentContext._rezolveContextParameter;
 
-      _rezolverBuilder = new ChildBuilder(parentContext._rezolverBuilder);
+      _dependencyTargetContainer = new ChildBuilder(parentContext._dependencyTargetContainer);
       _sharedExpressions = inheritSharedExpressions ? parentContext._sharedExpressions : new Dictionary<SharedExpressionKey, Expression>();
       _suppressScopeTracking = suppressScopeTracking;
     }
@@ -216,11 +216,11 @@ namespace Rezolver
     /// <summary>
     /// Creates a new CompileContext
     /// </summary>
-    /// <param name="rezolver">Required. Will be set into the <see cref="Rezolver"/> property.</param>
-    /// <param name="dependencyContainer">Required - An <see cref="ITargetContainer"/> that contains the <see cref="ITarget"/>s that 
+    /// <param name="container">Required. The container for which compilation is being performed.  Will be set into the <see cref="Container"/> property.</param>
+    /// <param name="dependencyTargetContainer">Required - An <see cref="ITargetContainer"/> that contains the <see cref="ITarget"/>s that 
     /// will be required to complete compilation.
     /// 
-    /// Note - this argument is passed to a new <see cref="ChildBuilder"/> that is created and used for this class' implementation 
+    /// Note - this argument is passed to a new <see cref="ChildBuilder"/> that is created and proxied by this class' implementation 
     /// of <see cref="ITargetContainer"/>.
     /// 
     /// As a result, it's possible to register new targets directly into the context via the <see cref="Register(ITarget, Type)"/> method,
@@ -230,17 +230,17 @@ namespace Rezolver
     /// <param name="targetType">Optional. Will be set into the <see cref="TargetType"/> property.</param>
     /// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/> property.</param>
     /// <param name="compilingTargets">Optional.  Allows you to seed the stack of compiling targets from creation.</param>
-    public CompileContext(IContainer rezolver,
-      ITargetContainer dependencyContainer,
+    public CompileContext(IContainer container,
+      ITargetContainer dependencyTargetContainer,
       Type targetType = null,
       ParameterExpression rezolveContextParameter = null,
       IEnumerable<ITarget> compilingTargets = null
       )
     {
-      rezolver.MustNotBeNull(nameof(rezolver));
-      dependencyContainer.MustNotBeNull(nameof(dependencyContainer));
-      Rezolver = rezolver;
-      _rezolverBuilder = new ChildBuilder(dependencyContainer);
+      container.MustNotBeNull(nameof(container));
+      dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
+      Container = container;
+      _dependencyTargetContainer = new ChildBuilder(dependencyTargetContainer);
       _targetType = targetType;
       _rezolveContextParameter = rezolveContextParameter;
       _compilingTargets = new Stack<ITarget>(compilingTargets ?? Enumerable.Empty<ITarget>());
@@ -250,7 +250,7 @@ namespace Rezolver
     /// <summary>
     /// Creates a new CompileContext using an existing one as a template.
     /// </summary>
-    /// <param name="parentContext">Used to seed the compilation stack, rezolver, rezolve context parameter and optionally
+    /// <param name="parentContext">Used to seed the compilation stack, container, rezolve context parameter and optionally
     /// the target type (if you pass null for <paramref name="targetType"/>.</param>
     /// <param name="targetType">The target type that is expected to be compiled, or null to inherit
     /// the <paramref name="parentContext"/>'s <see cref="CompileContext.TargetType"/> property.</param>
@@ -355,23 +355,23 @@ namespace Rezolver
 
     public void Register(ITarget target, Type serviceType = null)
     {
-      _rezolverBuilder.Register(target, serviceType);
+      _dependencyTargetContainer.Register(target, serviceType);
     }
 
     public ITarget Fetch(Type type)
     {
       if (typeof(IContainer) == type)
-        return new ExpressionTarget(this.ContextRezolverPropertyExpression);
+        return new ExpressionTarget(this.ContextContainerPropertyExpression);
 
-      return _rezolverBuilder.Fetch(type);
+      return _dependencyTargetContainer.Fetch(type);
     }
 
     public IEnumerable<ITarget> FetchAll(Type type)
     {
       if (typeof(IContainer) == type)
-        return new[] { new ExpressionTarget(this.ContextRezolverPropertyExpression) };
+        return new[] { new ExpressionTarget(this.ContextContainerPropertyExpression) };
 
-      return _rezolverBuilder.FetchAll(type);
+      return _dependencyTargetContainer.FetchAll(type);
     }
 
     public ITargetContainer CombineWith(ITargetContainer existing, Type type)

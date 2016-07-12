@@ -146,7 +146,7 @@
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static object Resolve(this IContainer rezolver, Type type)</code></pre>
+                <pre><code class="lang-csharp hljs">public static object Resolve(this IContainer container, Type type)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -159,9 +159,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                   <tr>
@@ -202,7 +202,7 @@ given lifetime <em>scope</em> for lifetime management.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static object Resolve(this IContainer rezolver, Type type, IScopedContainer scope)</code></pre>
+                <pre><code class="lang-csharp hljs">public static object Resolve(this IContainer container, Type type, IScopedContainer scope)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -215,9 +215,9 @@ given lifetime <em>scope</em> for lifetime management.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                   <tr>
@@ -229,9 +229,9 @@ given lifetime <em>scope</em> for lifetime management.</p>
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
+                    <td><p>The lifetime scope - can be a different instance to <em>container</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
-master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
+master container instance is used to create a child &#39;scope&#39; which has a different lifetime to that
 of the master.</p>
 </td>
                   </tr>
@@ -266,7 +266,7 @@ of the master.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static TObject Resolve&lt;TObject&gt;(this IContainer rezolver)</code></pre>
+                <pre><code class="lang-csharp hljs">public static TObject Resolve&lt;TObject&gt;(this IContainer container)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -279,9 +279,9 @@ of the master.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                 </tbody>
@@ -331,7 +331,7 @@ given lifetime <em>scope</em> for lifetime management.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static TObject Resolve&lt;TObject&gt;(this IContainer rezolver, IScopedContainer scope)</code></pre>
+                <pre><code class="lang-csharp hljs">public static TObject Resolve&lt;TObject&gt;(this IContainer container, IScopedContainer scope)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -344,17 +344,17 @@ given lifetime <em>scope</em> for lifetime management.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
+                    <td><p>The lifetime scope - can be a different instance to <em>container</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
-master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
+master container instance is used to create a child &#39;scope&#39; which has a different lifetime to that
 of the master.</p>
 </td>
                   </tr>
@@ -406,7 +406,7 @@ returning the created object (if successful) in the <em>result</em> parameter.</
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static bool TryResolve(this IContainer rezolver, Type type, IScopedContainer scope, out object result)</code></pre>
+                <pre><code class="lang-csharp hljs">public static bool TryResolve(this IContainer container, Type type, IScopedContainer scope, out object result)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -419,9 +419,9 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                   <tr>
@@ -433,9 +433,9 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
+                    <td><p>The lifetime scope - can be a different instance to <em>container</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
-master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
+master container instance is used to create a child &#39;scope&#39; which has a different lifetime to that
 of the master.</p>
 </td>
                   </tr>
@@ -482,7 +482,7 @@ returning the created object (if successful) in the <em>result</em> parameter.</
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static bool TryResolve(this IContainer rezolver, Type type, out object result)</code></pre>
+                <pre><code class="lang-csharp hljs">public static bool TryResolve(this IContainer container, Type type, out object result)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -495,9 +495,9 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                   <tr>
@@ -549,7 +549,7 @@ returning the created object (if successful) in the <em>result</em> parameter.</
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static bool TryResolve&lt;TObject&gt;(this IContainer rezolver, out TObject result)</code></pre>
+                <pre><code class="lang-csharp hljs">public static bool TryResolve&lt;TObject&gt;(this IContainer container, out TObject result)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -562,9 +562,9 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                   <tr>
@@ -621,7 +621,7 @@ returning the created object (if successful) in the <em>result</em> parameter.</
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static bool TryResolve&lt;TObject&gt;(this IContainer rezolver, IScopedContainer scope, out TObject result)</code></pre>
+                <pre><code class="lang-csharp hljs">public static bool TryResolve&lt;TObject&gt;(this IContainer container, IScopedContainer scope, out TObject result)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -634,17 +634,17 @@ returning the created object (if successful) in the <em>result</em> parameter.</
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>The rezolver.</p>
+                    <td><p>The container.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td><p>The lifetime scope - can be a different instance to <em>rezolver</em>
+                    <td><p>The lifetime scope - can be a different instance to <em>container</em>
 (or the object on which the method is invoked if invoked as an extension method), e.g. when a 
-master rezolver instance is used to create a child &#39;scope&#39; which has a different lifetime to that
+master container instance is used to create a child &#39;scope&#39; which has a different lifetime to that
 of the master.</p>
 </td>
                   </tr>

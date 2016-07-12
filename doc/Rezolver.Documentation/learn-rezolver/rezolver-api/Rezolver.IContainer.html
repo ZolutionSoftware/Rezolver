@@ -94,7 +94,7 @@
               
               <h1 id="Rezolver_IContainer" data-uid="Rezolver.IContainer">Interface IContainer
               </h1>
-              <div class="markdown level0 summary"><p>A container through which instances of objects can be resolved (via the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method).</p>
+              <div class="markdown level0 summary"><p>Represents the primary IOC container in the Rezolver framework.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritedMembers">
@@ -109,6 +109,14 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IContainer : IServiceProvider</code></pre>
               </div>
+              <h5 id="Rezolver_IContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>Instances of objects are resolved via the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> or <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_RezolveContext_System_Object__">TryResolve(RezolveContext, out Object)</a> methods.</p>
+<p>You can introspect the container to check in advance whether a given type can be resolved through the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_RezolveContext_">CanResolve(RezolveContext)</a> method.</p>
+<p>Lifetime scoping (where <span class="xref">IDisposable</span> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
+by obtaining a new scope through the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateLifetimeScope">CreateLifetimeScope()</a> method.</p>
+<p>Many of the functions which accept a <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> also have alternatives (in the form of extension methods) in the </p>
+<p><a class="xref" href="Rezolver.IContainerRezolveExtensions.html#Rezolver_IContainerRezolveExtensions">IContainerRezolveExtensions</a> class.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
@@ -170,9 +178,8 @@ which allows you to check and obtain the result at the same time.</p>
               </span>
               
               <h4 class="hmember" id="Rezolver_IContainer_CreateLifetimeScope" data-uid="Rezolver.IContainer.CreateLifetimeScope">CreateLifetimeScope()</h4>
-              <div class="markdown level1 summary"><p>Called to create a lifetime scope that will track, and dispose of, any 
-disposable objects that are created via calls to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> (to the lifetime scope
-itself, not to the resolver that &#39;parents&#39; the lifetime scope).</p>
+              <div class="markdown level1 summary"><p>Called to create a lifetime scope with the same configuration as this container that will track, and dispose of, any 
+disposable objects that are created via calls to its <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>

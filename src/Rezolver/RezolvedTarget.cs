@@ -59,7 +59,7 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Always returns true - we never wrap calls to a rezolver inside a scope tracking expression.
+    /// Always returns true - we never wrap calls to a container inside a scope tracking expression.
     /// </summary>
     protected override bool SuppressScopeTracking
     {
@@ -138,22 +138,22 @@ namespace Rezolver
     protected override Expression CreateExpressionBase(CompileContext context)
     {
       //get the expression for the object that would be resolved statically.  If there is none,
-      //then we emit a call back into the rezolver that's passed in the context.
+      //then we emit a call back into the container that's passed in the context.
 
       //we must then generate a conditional expression which checks whether the 
-      //rezolver passed in the context (that's the parameter from the compile context) can rezolve
+      //container passed in the context (that's the parameter from the compile context) can rezolve
       //an object (optionally by the name, which might also be rezolved) and, if it can, call
-      //that.  Only do this, though, if that rezolver is different to the one to which
+      //that.  Only do this, though, if that container is different to the one to which
       //the target belongs.
 
-      //this needs to do a check to see if the inbound rezolver is different to the one we've got here
-      //if it is, then we will defer to a resolve call on that rezolver.  Otherwise we will use the static
+      //this needs to do a check to see if the inbound container is different to the one we've got here
+      //if it is, then we will defer to a resolve call on that container.  Otherwise we will use the static
       //target, or throw an exception.
 
       //try to resolve the target from the context.  Note this could resolve the fallback target.
       var staticTarget = Resolve(context);
       //TODO: This should be a shared expression
-      var thisRezolver = Expression.Constant(context.Rezolver, typeof(IContainer));
+      var thisRezolver = Expression.Constant(context.Container, typeof(IContainer));
       var declaredTypeExpr = Expression.Constant(DeclaredType, typeof(Type));
 
       var newContextLocal = context.GetOrAddSharedLocal(typeof(RezolveContext), "newContext");
@@ -169,11 +169,11 @@ namespace Rezolver
       }
       else
       {
-        //if no fallback call back into the rezolver passed in the context to this method
+        //if no fallback call back into the container passed in the context to this method
         //when no target was found in the static search.  This is just a convenient way
         //to generate an exception saying that the dependency couldn't be found.
         //unless, of course, some naughty person has snuck in an additional registration
-        //into the rezolver after compilation has been done ;)
+        //into the container after compilation has been done ;)
         setNewContextFirst = true;
         staticExpr = Expression.Call(thisRezolver, RezolverResolveMethod, newContextLocal);
       }
@@ -182,8 +182,8 @@ namespace Rezolver
         staticExpr = Expression.Convert(staticExpr, DeclaredType);
 
       //Equivalent to (RezolveContext r) => r.Resolver.CanResolve(type) ? r.Resolver.Resolve<DeclaredType>() : <<staticExpr>>
-      Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextRezolverPropertyExpression, RezolverCanResolveMethod, newContextLocal),
-          Expression.Convert(Expression.Call(context.ContextRezolverPropertyExpression, RezolverResolveMethod, newContextLocal), DeclaredType),
+      Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextContainerPropertyExpression, RezolverCanResolveMethod, newContextLocal),
+          Expression.Convert(Expression.Call(context.ContextContainerPropertyExpression, RezolverResolveMethod, newContextLocal), DeclaredType),
           staticExpr
         );
 
@@ -197,7 +197,7 @@ namespace Rezolver
       //conditionals
       blockExpressions.Add(Expression.Condition(context.GetOrAddSharedExpression(typeof(bool),
           "IsSameRezolver",
-          () => Expression.ReferenceEqual(context.ContextRezolverPropertyExpression, thisRezolver), this.GetType()),
+          () => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, thisRezolver), this.GetType()),
         staticExpr,
         useContextRezolverIfCanExpr));
 

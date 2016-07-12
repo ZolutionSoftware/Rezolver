@@ -37,9 +37,7 @@ namespace Rezolver
     public override ITarget Fetch(Type type)
     {
       var result = base.Fetch(type);
-      //ascend the tree of rezolver builders looking for a type matching.
-      //note that the name is not passed back up - that could cause untold
-      //stack overflow issues!
+      //ascend the tree of target containers looking for a type match.
       if (result == null && _parent != null)
         return _parent.Fetch(type);
       return result;

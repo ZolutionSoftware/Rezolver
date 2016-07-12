@@ -91,12 +91,12 @@ namespace Rezolver
     {
       //this isn't quite right, imho.  One singleton target should technically be able to create
       //more than one instance of a given concrete type, if that target is in a RezolverBuilder that is, 
-      //in turn, used to build more than one top-level rezolver (a permitted use case).
+      //in turn, used to build more than one top-level container (a permitted use case).
       //The way this code is written, however, the singleton will only ever create one instance of a type and,
       //in a cruel twist, will only ever belong to one scope (if applicable).
-      //to fix this will mean being able to easily identify different rezolver trees from each other,
+      //to fix this will mean being able to easily identify different container trees from each other,
       //and creating one instance for each unique tree.  This isn't even possible at the moment, because
-      //there's no way to identify the root rezolver in a chain of rezolvers, unless you force the use
+      //there's no way to identify the root container in a chain of containers, unless you force the use
       //of scopes, which we don't necessarily want to do.
       //So I'm not sure if I've coded myself down a hole here - or if adding the necessary properties to 
       //the IRezolver interface to uniquely identify each one, and walk any parent/child relationship from 

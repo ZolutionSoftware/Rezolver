@@ -18,7 +18,7 @@ namespace Rezolver
 	/// 
 	/// Suitable for environments that support the full .Net profile.
 	/// 
-	/// Generally, the performance of a rezolver built using this compiler will be better than one that uses the <see cref="TargetDelegateCompiler"/>.
+	/// Generally, the performance of a container built using this compiler will be better than one that uses the <see cref="TargetDelegateCompiler"/>.
 	/// </summary>
 	public class TargetAssemblyCompiler : ITargetCompiler
 	{
@@ -102,7 +102,7 @@ namespace Rezolver
 		/// Initializes a new instance of the <see cref="TargetAssemblyCompiler"/> class.
 		/// </summary>
 		/// <param name="moduleBuilder">The module builder - if the assembly builder is already being used for something else 
-		/// and you want the dynamic code for the rezolver to be compiled into a specific module within that assembly.</param>
+		/// and you want the dynamic code for the container to be compiled into a specific module within that assembly.</param>
 		public TargetAssemblyCompiler(ModuleBuilder moduleBuilder)
 		{
 			_assemblyModuleName = moduleBuilder.Name;

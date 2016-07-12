@@ -19,11 +19,11 @@ namespace Rezolver
   /// </summary>
   /// <remarks>The implementation of this class is very similar to the <see cref="OverridingScopedContainer"/>,
   /// The main difference being that that class can accept additional registrations independent of those
-  /// in the rezolver that it's created from, whereas with this class, it *is* the rezolver.
+  /// in the container that it's created from, whereas with this class, it *is* the container.
   /// 
   /// This type is therefore suited only for standalone Rezolvers for which you want lifetime scoping
   /// and disposable handling; whereas the <see cref="OverridingScopedContainer"/> is primarily
-  /// suited for use as a child lifetime scope for another rezolver.</remarks>
+  /// suited for use as a child lifetime scope for another container.</remarks>
   public class ScopedContainer : Container, IScopedContainer
   {
     private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;

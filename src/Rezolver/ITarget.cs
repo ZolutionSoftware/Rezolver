@@ -44,7 +44,7 @@ namespace Rezolver
     bool SupportsType(Type type);
     /// <summary>
     /// Called to create the expression that will produce the object that is resolved by this target.  The expression
-    /// might be expected to handle a dynamic rezolver being passed to it at run time to enable dynamic per-target overriding
+    /// might be expected to handle a dynamic container being passed to it at run time to enable dynamic per-target overriding
     /// from other rezolvers.
     /// </summary>
     /// <param name="context">The current compile context</param>

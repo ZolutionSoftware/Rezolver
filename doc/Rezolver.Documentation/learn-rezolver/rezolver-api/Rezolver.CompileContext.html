@@ -94,11 +94,8 @@
               
               <h1 id="Rezolver_CompileContext" data-uid="Rezolver.CompileContext">Class CompileContext
               </h1>
-              <div class="markdown level0 summary"><p>Represents the context in which a target is being compiled or fetched.</p>
-<p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to facilitate
-dependency lookups during compilation time - indeed, all operations to find targets
-during compilation should be directed through this class&#39; implementation.</p>
-<p>THIS CLASS IS NOT THREAD-SAFE</p>
+              <div class="markdown level0 summary"><p>Provides support and compile-time state for the compilation of an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> by an <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a>.
+THIS CLASS IS NOT THREAD-SAFE</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -136,6 +133,11 @@ during compilation should be directed through this class&#39; implementation.</p
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class CompileContext : ITargetContainer</code></pre>
               </div>
+              <h5 id="Rezolver_CompileContext_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to facilitate
+dependency lookups during compilation time - indeed, all operations to find targets
+during compilation should be directed through this class&#39; implementation.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
@@ -166,7 +168,7 @@ during compilation should be directed through this class&#39; implementation.</p
                   <tr>
                     <td><em>parentContext</em></td>
                     <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td><p>Used to seed the compilation stack, rezolver, rezolve context parameter and optionally
+                    <td><p>Used to seed the compilation stack, container, rezolve context parameter and optionally
 the target type (if you pass null for <em>targetType</em>.</p>
 </td>
                   </tr>
@@ -209,7 +211,7 @@ scope tracking code, or expects to be surrounded by automatically generated scop
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public CompileContext(IContainer rezolver, ITargetContainer dependencyContainer, Type targetType = null, ParameterExpression rezolveContextParameter = null, IEnumerable&lt;ITarget&gt; compilingTargets = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public CompileContext(IContainer container, ITargetContainer dependencyTargetContainer, Type targetType = null, ParameterExpression rezolveContextParameter = null, IEnumerable&lt;ITarget&gt; compilingTargets = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -222,17 +224,17 @@ scope tracking code, or expects to be surrounded by automatically generated scop
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>rezolver</em></td>
+                    <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td><p>Required. Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> property.</p>
+                    <td><p>Required. The container for which compilation is being performed.  Will be set into the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Container">Container</a> property.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>dependencyContainer</em></td>
+                    <td><em>dependencyTargetContainer</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>Required - An <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> that contains the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s that 
 will be required to complete compilation.</p>
-<p>Note - this argument is passed to a new <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder">ChildBuilder</a> that is created and used for this class&#39; implementation 
+<p>Note - this argument is passed to a new <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder">ChildBuilder</a> that is created and proxied by this class&#39; implementation 
 of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
 <p>As a result, it&#39;s possible to register new targets directly into the context via the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method,
 without modifying the underlying targets in the container you pass.</p>
@@ -297,19 +299,83 @@ without modifying the underlying targets in the container you pass.</p>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_ContextRezolverPropertyExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.ContextRezolverPropertyExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Container.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Container%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_CompileContext_ContextRezolverPropertyExpression" data-uid="Rezolver.CompileContext.ContextRezolverPropertyExpression">ContextRezolverPropertyExpression</h4>
-              <div class="markdown level1 summary"><p>Returns an expression that represents reading the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Rezolver">Rezolver</a> property of the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a> 
-to aid in code generation.</p>
-<p>This IS NOT the same as the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolverExpression">RezolverExpression</a> property.</p>
+              <h4 class="hmember" id="Rezolver_CompileContext_Container" data-uid="Rezolver.CompileContext.Container">Container</h4>
+              <div class="markdown level1 summary"><p>The container that is considered the current compilation &#39;scope&#39; - i.e. the container for which the compilation
+is being performed and, usually, the one on which the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method was 
+originally called.</p>
+<p>For compile-time dependency resolution (i.e. other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s) you should use this class&#39; implementation
+of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IContainer Container { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_ContainerExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.ContainerExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_ContainerExpression" data-uid="Rezolver.CompileContext.ContainerExpression">ContainerExpression</h4>
+              <div class="markdown level1 summary"><p>Represents an expression that equals the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Container">Container</a> that is active for this context.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Expression ContainerExpression { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_ContextContainerPropertyExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.ContextContainerPropertyExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_CompileContext_ContextContainerPropertyExpression" data-uid="Rezolver.CompileContext.ContextContainerPropertyExpression">ContextContainerPropertyExpression</h4>
+              <div class="markdown level1 summary"><p>Returns an expression that represents reading the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Container">Container</a> property of the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a> 
+during the execution of an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>&#39;s <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_RezolveContext_">GetObject(RezolveContext)</a> method.</p>
+<p>This IS NOT the same as the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_ContainerExpression">ContainerExpression</a> property.</p>
 <p>Always non-null.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public MemberExpression ContextRezolverPropertyExpression { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">public MemberExpression ContextContainerPropertyExpression { get; }</code></pre>
               </div>
               <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -364,7 +430,8 @@ to aid in code generation.</p>
               </span>
               
               <h4 class="hmember" id="Rezolver_CompileContext_RezolveContextParameter" data-uid="Rezolver.CompileContext.RezolveContextParameter">RezolveContextParameter</h4>
-              <div class="markdown level1 summary"><p>A expression to be used to bind to the RezolveContext that will be passed to the generated code at runtime.</p>
+              <div class="markdown level1 summary"><p>An expression to be used to bind to the RezolveContext that will be passed to the generated code at runtime (effectively,
+the context parameter to <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_RezolveContext_">GetObject(RezolveContext)</a> which is typically invoked by containers).</p>
 <p>If this is never set, then the framework will use <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_RezolveContextParameter">RezolveContextParameter</a> by default.</p>
 <p>In theory, you should never need to set this to anything else, unless you&#39;re doing something very interesting with
 the generated expressions.</p>
@@ -385,69 +452,6 @@ the generated expressions.</p>
                 <tbody>
                   <tr>
                     <td><span class="xref">ParameterExpression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_Rezolver.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.Rezolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              
-              <h4 class="hmember" id="Rezolver_CompileContext_Rezolver" data-uid="Rezolver.CompileContext.Rezolver">Rezolver</h4>
-              <div class="markdown level1 summary"><p>The rezolver that is considered the current compilation &#39;scope&#39; - i.e. the container for which the compilation
-is being performed.</p>
-<p>For compile-time dependency resolution (i.e. other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s) you should use this class&#39; implementation
-of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public IContainer Rezolver { get; }</code></pre>
-              </div>
-              <h5 class="hpropertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_CompileContext_RezolverExpression.md&amp;value=---%0Auid%3A%20Rezolver.CompileContext.RezolverExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              
-              <h4 class="hmember" id="Rezolver_CompileContext_RezolverExpression" data-uid="Rezolver.CompileContext.RezolverExpression">RezolverExpression</h4>
-              <div class="markdown level1 summary"><p>Represents an expression that equals the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Rezolver">Rezolver</a> that belongs to this context.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Expression RezolverExpression { get; }</code></pre>
-              </div>
-              <h5 class="hpropertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
                     <td></td>
                   </tr>
                 </tbody>

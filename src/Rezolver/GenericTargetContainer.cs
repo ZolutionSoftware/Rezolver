@@ -80,7 +80,7 @@ namespace Rezolver
       //IFoo<>
 
       //using an iterator method is not the best for performance, but fetching type
-      //registrations from a rezolver builder is an operation that, so long as a caching
+      //registrations from a container builder is an operation that, so long as a caching
       //resolver is used, shouldn't be repeated often.
 
       if (!TypeHelpers.IsGenericType(type) || TypeHelpers.IsGenericTypeDefinition(type))
