@@ -14,4 +14,5 @@ another IOC container.
 
 ## Quick Links
 
+[Developer Usage Guide](rezolver-usage/)
 [API Reference](rezolver-api/)

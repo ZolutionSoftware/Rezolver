@@ -111,12 +111,6 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Compiler">Compiler</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Builder">Builder</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">GetCompiledRezolveTarget(RezolveContext)</a>
                 </div>
                 <div>
@@ -124,6 +118,12 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_IsMissingTarget_Rezolver_ICompiledTarget_">IsMissingTarget(ICompiledTarget)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Compiler">Compiler</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
@@ -142,6 +142,18 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetService_System_Type_">GetService(Type)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.Fetch(System.Type)</span>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.FetchAll(System.Type)</span>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer, System.Type)</span>
                 </div>
                 <div>
                   <span class="xref">System.Object.ToString()</span>
@@ -169,7 +181,7 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
               <h5 id="Rezolver_OverridingContainer_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class OverridingContainer : Container, IContainer, IServiceProvider</code></pre>
+                <pre><code class="lang-csharp hljs">public class OverridingContainer : Container, IContainer, IServiceProvider, ITargetContainer</code></pre>
               </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -214,8 +226,7 @@ by the new combined rezolver&#39;s own registry will be sought from this rezolve
                     <td><em>compiler</em></td>
                     <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
                     <td><p>Optional. A compiler to be used to create <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> instances
-from this rezolver&#39;s registrations.  If this is not provided, then the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Compiler">Compiler</a> of the
-<em>inner</em> rezolver will be used.</p>
+from this rezolver&#39;s registrations.  If this is not provided, then the default is used (<a class="xref" href="Rezolver.TargetCompiler.html#Rezolver_TargetCompiler_Default">Default</a>)</p>
 </td>
                   </tr>
                 </tbody>

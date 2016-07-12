@@ -15,34 +15,16 @@ namespace Rezolver
   public class Container : CachingContainerBase
   {
     /// <summary>
-    /// 
+    /// Main IOC container class.  Requires an <see cref="ITargetContainer"/> to provide the <see cref="ITarget"/>s which will
+    /// be compiled when resolving objects.
     /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="compiler"></param>
-    /// <param name="registerToBuilder"></param>
-    public Container(ITargetContainer builder = null, ITargetCompiler compiler = null, bool registerToBuilder = true)
+    /// <param name="targets">The targets which will be used to resolve objects.  If left null, then a new <see cref="Targets"/> will be created.</param>
+    /// <param name="compiler">The compiler to be used to turn the <see cref="ITarget"/>s obtained from the <paramref name="targets"/> 
+    /// into <see cref="ICompiledTarget"/></param>
+    public Container(ITargetContainer targets = null, ITargetCompiler compiler = null)
+      : base(targets, compiler)
     {
-      _builder = builder ?? new Builder();
-      _compiler = compiler;
-      //auto-register this instance to the underlying builder.  This is so that framework-style components that
-      //need to use dependency resolving instead of so-called 'pure' IOC can do so
-      if (registerToBuilder)
-      {
-        _builder.Register(this.AsObjectTarget(), typeof(IContainer));
-      }
+      
     }
-
-    private ITargetCompiler _compiler;
-    public override ITargetCompiler Compiler
-    {
-      get { return _compiler ?? TargetCompiler.Default; }
-    }
-
-    private ITargetContainer _builder;
-    public override ITargetContainer Builder
-    {
-      get { return _builder; }
-    }
-
   }
 }

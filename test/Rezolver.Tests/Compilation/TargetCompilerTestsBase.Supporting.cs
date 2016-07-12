@@ -65,20 +65,20 @@ namespace Rezolver.Tests.Compilation
       return _compiler = CreateCompilerBase(callingMethod);
     }
 
-    protected IContainer GetRezolver([CallerMemberName]string callingMethod = null)
+    protected IContainer GetContainer([CallerMemberName]string callingMethod = null)
     {
       if (_currentRezolver != null) return _currentRezolver;
-      return _currentRezolver = new Container(GetDefaultBuilder(callingMethod), GetCompiler(callingMethod));
+      return _currentRezolver = new Container(GetTargetContainer(callingMethod), GetCompiler(callingMethod));
     }
 
-    protected ITargetContainer GetDefaultBuilder([CallerMemberName]string callingMethod = null)
+    protected ITargetContainer GetTargetContainer([CallerMemberName]string callingMethod = null)
     {
       if (_currentBuilder != null) return _currentBuilder;
       return _currentBuilder = new Builder();
     }
 
     /// <summary>
-    /// Shortcut for compiling a given rezolver target using the test's compiler and the current rezolver/builder for
+    /// Shortcut for compiling a given container target using the test's compiler and the current container/builder for
     /// dpendency resolution.
     /// 
     /// Note - the function asserts the result is not null before returning.
@@ -94,7 +94,7 @@ namespace Rezolver.Tests.Compilation
 
     protected RezolveContext CreateRezolveContext(Type rezolveType, IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
     {
-      return new RezolveContext(GetRezolver(callingMethod), rezolveType, scope);
+      return new RezolveContext(GetContainer(callingMethod), rezolveType, scope);
     }
 
     protected RezolveContext CreateRezolveContext<TRezolve>(IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
@@ -104,53 +104,53 @@ namespace Rezolver.Tests.Compilation
 
     protected CompileContext CreateCompileContext([CallerMemberName]string callingMethod = null)
     {
-      return new CompileContext(GetRezolver(callingMethod));
+      return new CompileContext(GetContainer(callingMethod), GetTargetContainer(callingMethod));
     }
 
     protected void AddIntTarget(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_intObjectTarget.Value, forType ?? typeof(int));
+      GetTargetContainer(callingMethod).Register(_intObjectTarget.Value, forType ?? typeof(int));
     }
 
     protected void AddNullableIntTarget(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_nullableIntObjectTarget.Value, forType ?? typeof(int?));
+      GetTargetContainer(callingMethod).Register(_nullableIntObjectTarget.Value, forType ?? typeof(int?));
     }
 
     protected void AddStringTarget(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_stringObjectTarget.Value, forType ?? typeof(string));
+      GetTargetContainer(callingMethod).Register(_stringObjectTarget.Value, forType ?? typeof(string));
     }
 
     protected void AddTransientTarget(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_transientConstructorTarget.Value, forType ?? typeof(ITransient));
+      GetTargetContainer(callingMethod).Register(_transientConstructorTarget.Value, forType ?? typeof(ITransient));
     }
 
     protected void AddSingletonTarget(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_singletonConstructorTarget.Value, forType ?? typeof(ISingleton));
+      GetTargetContainer(callingMethod).Register(_singletonConstructorTarget.Value, forType ?? typeof(ISingleton));
     }
 
     protected void AddCompositeTarget(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_compositeConstructorTarget.Value, forType ?? typeof(IComposite));
+      GetTargetContainer(callingMethod).Register(_compositeConstructorTarget.Value, forType ?? typeof(IComposite));
     }
 
     protected void AddSuperComplexTarget(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_superComplexConstructorTarget.Value, forType ?? typeof(ISuperComplex));
+      GetTargetContainer(callingMethod).Register(_superComplexConstructorTarget.Value, forType ?? typeof(ISuperComplex));
     }
 
     protected void AddScopedSingletonTestType(Type forType = null, [CallerMemberName]string callingMethod = null)
     {
-      GetRezolver(callingMethod).Register(_scopedSingletonTestTypeConstructorTarget.Value, forType ?? typeof(ScopedSingletonTestClass));
+      GetTargetContainer(callingMethod).Register(_scopedSingletonTestTypeConstructorTarget.Value, forType ?? typeof(ScopedSingletonTestClass));
     }
 
     protected void AddTarget(ITarget target, Type forType = null, [CallerMemberName]string callingMethod = null)
     {
       Assert.NotNull(target);
-      GetRezolver(callingMethod).Register(target, forType);
+      GetTargetContainer(callingMethod).Register(target, forType);
     }
   }
 }

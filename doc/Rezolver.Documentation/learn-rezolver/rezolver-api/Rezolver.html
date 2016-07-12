@@ -104,8 +104,7 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
 <p>Should be used as the root target container for implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase">CachingContainerBase</a></h4>
-                  <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> abstract class to introduce thread-safe caching of compiled targets
-so they are only compiled once.</p>
+                  <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> base to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget">ChangeTypeTarget</a></h4>
                   <section><p>This target is specifically used for explicitly typing another target.</p>
@@ -123,7 +122,8 @@ are present in its parent.</p>
                   <h4><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></h4>
                   <section><p>Represents the context in which a target is being compiled or fetched.</p>
 <p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to facilitate
-dependency lookups during compilation time.</p>
+dependency lookups during compilation time - indeed, all operations to find targets
+during compilation should be directed through this class&#39; implementation.</p>
 <p>THIS CLASS IS NOT THREAD-SAFE</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey">CompileContext.SharedExpressionKey</a></h4>
@@ -147,7 +147,8 @@ you can also use the factory methods - such as <a class="xref" href="Rezolver.Co
                   <h4><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a></h4>
-                  <section></section>
+                  <section><p>Starting point for implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> - only creatable through inheritance.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget">ContainerBase.MissingCompiledTarget</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a></h4>
@@ -180,7 +181,7 @@ rezolver targets</p>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer">GenericTargetContainer</a></h4>
                   <section></section>
-                  <h4><a class="xref" href="Rezolver.IRezolverExtensions.html#Rezolver_IRezolverExtensions">IRezolverExtensions</a></h4>
+                  <h4><a class="xref" href="Rezolver.IContainerRezolveExtensions.html#Rezolver_IContainerRezolveExtensions">IContainerRezolveExtensions</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.IRezolveTargetScopingExtensions.html#Rezolver_IRezolveTargetScopingExtensions">IRezolveTargetScopingExtensions</a></h4>
                   <section><p>Extension method(s) to convert targets into scoped targets.</p>
@@ -320,7 +321,7 @@ is the final stage before its ready to be used to start producing objects.</p>
 <p>An <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a> is responsible for creating these from one or more <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></h4>
-                  <section><p>A container through which instances of objects can be <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>d.  </p>
+                  <section><p>A container through which instances of objects can be resolved (via the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method).</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></h4>
                   <section><p>Describes a type which discovers property/field bindings</p>

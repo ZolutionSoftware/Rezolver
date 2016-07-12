@@ -14,7 +14,8 @@ namespace Rezolver
   /// Represents the context in which a target is being compiled or fetched.
   /// 
   /// The class implements the <see cref="ITargetContainer"/> interface also to facilitate
-  /// dependency lookups during compilation time.
+  /// dependency lookups during compilation time - indeed, all operations to find targets
+  /// during compilation should be directed through this class' implementation.
   /// 
   /// THIS CLASS IS NOT THREAD-SAFE
   /// </summary>
@@ -60,10 +61,11 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// The rezolver that is considered the current compilation 'scope'.
+    /// The rezolver that is considered the current compilation 'scope' - i.e. the container for which the compilation
+    /// is being performed.
     /// 
-    /// You should not use this to look up other targets
-    /// for dependency resolution - for that, you should use the DependencyBuilder
+    /// For compile-time dependency resolution (i.e. other <see cref="ITarget"/>s) you should use this class' implementation
+    /// of <see cref="ITargetContainer"/>.
     /// </summary>
     public IContainer Rezolver { get; }
 
@@ -215,26 +217,30 @@ namespace Rezolver
     /// Creates a new CompileContext
     /// </summary>
     /// <param name="rezolver">Required. Will be set into the <see cref="Rezolver"/> property.</param>
+    /// <param name="dependencyContainer">Required - An <see cref="ITargetContainer"/> that contains the <see cref="ITarget"/>s that 
+    /// will be required to complete compilation.
+    /// 
+    /// Note - this argument is passed to a new <see cref="ChildBuilder"/> that is created and used for this class' implementation 
+    /// of <see cref="ITargetContainer"/>.
+    /// 
+    /// As a result, it's possible to register new targets directly into the context via the <see cref="Register(ITarget, Type)"/> method,
+    /// without modifying the underlying targets in the container you pass.
+    /// 
+    /// Some of the core <see cref="ITarget"/>s exposed by this library take advantage of that functionality (notably, the <see cref="DecoratorTarget"/>).</param>
     /// <param name="targetType">Optional. Will be set into the <see cref="TargetType"/> property.</param>
-    /// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/></param>
+    /// <param name="rezolveContextParameter">Optional.  Will be set into the <see cref="RezolveContextParameter"/> property.</param>
     /// <param name="compilingTargets">Optional.  Allows you to seed the stack of compiling targets from creation.</param>
-    /// <param name="dependencyContainer">Optional.  By default, this class implements <see cref="ITargetContainer"/> by wrapping
-    /// a <see cref="ChildBuilder"/> over the one that is attached to the <paramref name="rezolver"/> that you pass on construction.
-    /// 
-    /// To override that behaviour, you can pass a different target container here.
-    /// 
-    /// You can, for example, disable the child rezolver creation by explicitly passing the <see cref="IContainer.Builder"/>
-    /// property of the <paramref name="rezolver"/> parameter.</param>
     public CompileContext(IContainer rezolver,
+      ITargetContainer dependencyContainer,
       Type targetType = null,
       ParameterExpression rezolveContextParameter = null,
-      IEnumerable<ITarget> compilingTargets = null,
-      ITargetContainer dependencyContainer = null)
+      IEnumerable<ITarget> compilingTargets = null
+      )
     {
-      rezolver.MustNotBeNull("rezolver");
-
+      rezolver.MustNotBeNull(nameof(rezolver));
+      dependencyContainer.MustNotBeNull(nameof(dependencyContainer));
       Rezolver = rezolver;
-      _rezolverBuilder = dependencyContainer ?? new ChildBuilder(Rezolver.Builder);
+      _rezolverBuilder = new ChildBuilder(dependencyContainer);
       _targetType = targetType;
       _rezolveContextParameter = rezolveContextParameter;
       _compilingTargets = new Stack<ITarget>(compilingTargets ?? Enumerable.Empty<ITarget>());
@@ -354,11 +360,17 @@ namespace Rezolver
 
     public ITarget Fetch(Type type)
     {
+      if (typeof(IContainer) == type)
+        return new ExpressionTarget(this.ContextRezolverPropertyExpression);
+
       return _rezolverBuilder.Fetch(type);
     }
 
     public IEnumerable<ITarget> FetchAll(Type type)
     {
+      if (typeof(IContainer) == type)
+        return new[] { new ExpressionTarget(this.ContextRezolverPropertyExpression) };
+
       return _rezolverBuilder.FetchAll(type);
     }
 

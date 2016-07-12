@@ -218,7 +218,7 @@ namespace Rezolver.Tests.Compilation
         ScopedSingletonTestClass obj1;
         ScopedSingletonTestClass obj2;
 
-        using (var scope = GetRezolver().CreateLifetimeScope())
+        using (var scope = GetContainer().CreateLifetimeScope())
         {
           obj1 = (ScopedSingletonTestClass)target.GetObject(CreateRezolveContext<ScopedSingletonTestClass>(scope));
           obj2 = (ScopedSingletonTestClass)target.GetObject(CreateRezolveContext<ScopedSingletonTestClass>(scope));

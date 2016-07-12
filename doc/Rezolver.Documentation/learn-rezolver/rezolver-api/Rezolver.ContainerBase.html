@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_ContainerBase" data-uid="Rezolver.ContainerBase">Class ContainerBase
               </h1>
-              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 summary"><p>Starting point for implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> - only creatable through inheritance.</p>
+</div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
@@ -129,24 +130,58 @@
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
               <h5 id="Rezolver_ContainerBase_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public abstract class ContainerBase : IContainer, IServiceProvider</code></pre>
+                <pre><code class="lang-csharp hljs">public class ContainerBase : IContainer, IServiceProvider, ITargetContainer</code></pre>
               </div>
+              <h5 id="Rezolver_ContainerBase_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>Note that the class also implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> by proxying the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> that are
+provided to it on construction.  All methods are implemented explicitly except the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method, 
+which available through the class&#39; public API.</p>
+<p>Note: <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>s are generally not expected to implement <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>, and the framework
+will never assume they do.</p>
+<p>The reason this class does is to make it easier to create a new container and to register targets into it without having to worry about
+managing a separate <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance in your application root - because all the registration extension methods defined
+in <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions">ITargetContainerExtensions</a> will be available to developers in code which has a reference to this class, or one derived from it.</p>
+<p>Note also that calling <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> on an instance of this type will always
+cause a <span class="xref">System.NotSupportedException</span> to be thrown.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase__ctor.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.%23ctor(Rezolver.ITargetContainer%2CRezolver.ITargetCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_ContainerBase__ctor" data-uid="Rezolver.ContainerBase.#ctor">ContainerBase()</h4>
+              <h4 class="hmember" id="Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.ContainerBase.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">ContainerBase(ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected ContainerBase()</code></pre>
+                <pre><code class="lang-csharp hljs">protected ContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)</code></pre>
               </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>targets</em></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>compiler</em></td>
+                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
               </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
@@ -154,46 +189,18 @@
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase_Builder.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Builder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              
-              <h4 class="hmember" id="Rezolver_ContainerBase_Builder" data-uid="Rezolver.ContainerBase.Builder">Builder</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public abstract ITargetContainer Builder { get; }</code></pre>
-              </div>
-              <h5 class="hpropertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="himplements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Builder">Builder</a></div>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
                 <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase_Compiler.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Compiler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
               <h4 class="hmember" id="Rezolver_ContainerBase_Compiler" data-uid="Rezolver.ContainerBase.Compiler">Compiler</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>The compiler that will be used to compile <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances, obtained from the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> container
+during <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> and <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_RezolveContext_System_Object__">TryResolve(RezolveContext, out Object)</a> operations, into </p>
+<p><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> instances that will actually provide the objects that are resolved.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public abstract ITargetCompiler Compiler { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">protected ITargetCompiler Compiler { get; }</code></pre>
               </div>
               <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -210,8 +217,43 @@
                   </tr>
                 </tbody>
               </table>
-              <h5 class="himplements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Compiler">Compiler</a></div>
+              <h5 class="hremarks" id="Rezolver_ContainerBase_Compiler_remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Notes to implementers: This property must NEVER be null.</p>
+</div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase_Targets.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Targets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_ContainerBase_Targets" data-uid="Rezolver.ContainerBase.Targets">Targets</h4>
+              <div class="markdown level1 summary"><p>Provides the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances that will be compiled by the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Compiler">Compiler</a> into <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>
+instances.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">protected ITargetContainer Targets { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hremarks" id="Rezolver_ContainerBase_Targets_remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Notes to implementers: This property must NEVER be null.</p>
+</div>
               </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
@@ -396,7 +438,10 @@
               </span>
               
               <h4 class="hmember" id="Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_" data-uid="Rezolver.ContainerBase.GetFallbackCompiledRezolveTarget(Rezolver.RezolveContext)">GetFallbackCompiledRezolveTarget(RezolveContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Called by <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">GetCompiledRezolveTarget(RezolveContext)</a> if no valid <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> can be
+found for the <em>context</em> or if the one found has its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property
+set to <code>true</code>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -430,10 +475,16 @@
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a></td>
-                    <td></td>
+                    <td><p>An <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> to be used as the result of a <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> operation
+where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).</p>
+</td>
                   </tr>
                 </tbody>
               </table>
+              <h5 class="hremarks" id="Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The base implementation always returns an instance of the <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget">ContainerBase.MissingCompiledTarget</a> via
+the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">GetMissingTarget(Type)</a> static method.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               <span class="small pull-right mobile-hide">
@@ -488,7 +539,7 @@
               </span>
               
               <h4 class="hmember" id="Rezolver_ContainerBase_GetService_System_Type_" data-uid="Rezolver.ContainerBase.GetService(System.Type)">GetService(Type)</h4>
-              <div class="markdown level1 summary"><p>protected virtual implementation of IServiceProvider.GetService.</p>
+              <div class="markdown level1 summary"><p>Protected virtual implementation of <span class="xref">GetService(Type)</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -573,6 +624,54 @@
                   </tr>
                 </tbody>
               </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ContainerBase.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> - simply proxies the
+call to the target container referenced by the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> property.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public void Register(ITarget target, Type serviceType = null)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>target</em></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>serviceType</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a></div>
+              <h5 class="hremarks" id="Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Remember: registering new targets into an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> after an <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>
+has started compiling targets within it can yield unpredictable results.</p>
+<p>If you create a new container and perform all your registrations before you use it, however, then everything will 
+work as expected.</p>
+<p>Note also the other ITargetContainer interface methods are implemented explicitly so as to hide them from the 
+list of class members.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               <span class="small pull-right mobile-hide">
@@ -678,6 +777,155 @@
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="eii">Explicit Interface Implementations
               </h3>
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#CombineWith(Rezolver.ITargetContainer,System.Type)">ITargetContainer.CombineWith(ITargetContainer, Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">ITargetContainer ITargetContainer.CombineWith(ITargetContainer existing, Type type)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>existing</em></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#Fetch(System.Type)">ITargetContainer.Fetch(Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">ITarget ITargetContainer.Fetch(Type type)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a></div>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchAll(System.Type)">ITargetContainer.FetchAll(Type)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">IEnumerable&lt;ITarget&gt; ITargetContainer.FetchAll(Type type)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>type</em></td>
+                    <td><span class="xref">System.Type</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></div>
+              </div><!-- .classchild -->
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>

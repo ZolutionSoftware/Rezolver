@@ -41,10 +41,10 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowInstanceToBeRegisteredWithoutContextAndDisposed()
     {
-      var rezolver = new Container();
+      var container = new Container();
 
       ITestDisposable disposable = null;
-      using (var scope = new OverridingScopedContainer(null, inner: rezolver))
+      using (var scope = new OverridingScopedContainer(null, inner: container))
       {
         scope.AddToScope(disposable = new DisposableType());
       }
@@ -54,11 +54,11 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowInstanceToBeRegisteredWithContextAndDisposed()
     {
-      var rezolver = new Container();
+      var container = new Container();
       ITestDisposable disposable = null;
-      using (var scope = new OverridingScopedContainer(null, inner: rezolver))
+      using (var scope = new OverridingScopedContainer(null, inner: container))
       {
-        scope.AddToScope(disposable = new DisposableType(), new RezolveContext(rezolver, typeof(ITestDisposable)));
+        scope.AddToScope(disposable = new DisposableType(), new RezolveContext(container, typeof(ITestDisposable)));
       }
       Assert.True(disposable.Disposed);
     }
@@ -66,10 +66,10 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldConfirmNoInstanceAlreadyRegistered()
     {
-      var rezolver = new Container();
+      var container = new Container();
       ITestDisposable disposable = null;
-      var context = new RezolveContext(rezolver, typeof(DisposableType));
-      using (var scope = new OverridingScopedContainer(null, inner: rezolver))
+      var context = new RezolveContext(container, typeof(DisposableType));
+      using (var scope = new OverridingScopedContainer(null, inner: container))
       {
         scope.AddToScope(disposable = new DisposableType(), context);
 

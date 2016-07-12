@@ -26,9 +26,8 @@ namespace Rezolver.Diagnostics
     public TrackedLifetimeScopeResolver(ICallTracker logger,
       ITargetContainer builder = null,
       ITargetCompiler compiler = null,
-      IScopedContainer parentScope = null,
-      bool registerToBuilder = true)
-      : base(builder: builder ?? new TrackedRezolverBuilder(logger), compiler: compiler, registerToBuilder: registerToBuilder)
+      IScopedContainer parentScope = null)
+      : base(builder: builder ?? new TrackedRezolverBuilder(logger), compiler: compiler)
     {
       logger.MustNotBeNull(nameof(logger));
       Logger = logger;

@@ -37,7 +37,7 @@ namespace Rezolver
         get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
       }
 
-      public ITargetContainer Builder
+      public ITargetContainer Targets
       {
         get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
       }

@@ -14,7 +14,7 @@ namespace Rezolver
   /// 
   /// Should be used as the root target container for implementations of <see cref="IContainer"/>.
   /// </summary>
-  /// <remarks>This is the type used by default for the <see cref="IContainer.Builder"/> of the 
+  /// <remarks>This is the type used by default for the <see cref="IContainer.Targets"/> of the 
   /// <see cref="Container"/> and <see cref="ScopedContainer"/> when you don't supply an instance of an 
   /// <see cref="ITargetContainer"/> explicitly on construction.</remarks>
   public class Builder : TargetDictionaryContainer
@@ -134,7 +134,8 @@ namespace Rezolver
           return;
         }
       }
-
+      //because the container is being registered directly against a generic type definition,
+      //we register it directly.
       RegisterContainerDirect(type, container);
     }
 

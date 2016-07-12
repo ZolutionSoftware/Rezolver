@@ -108,10 +108,10 @@ namespace Rezolver.Tests
     public void ShouldNotDisposeByDefault()
     {
       var myDisposable = new MyDisposable();
-      using (var rezolver = new ScopedContainer())
+      using (var container = new ScopedContainer())
       {
-        rezolver.RegisterObject(myDisposable);
-        var instance = rezolver.Resolve<MyDisposable>();
+        container.RegisterObject(myDisposable);
+        var instance = container.Resolve<MyDisposable>();
       }
 
       myDisposable.Dispose();
@@ -123,15 +123,15 @@ namespace Rezolver.Tests
       var myDisposable = new MyDisposable();
       //test targeted specifically at a piece of functionality I currently know not to work.
       //an objecttarget should behave like a SingletonTarget in terms of how it tracks in a scope.
-      using (var rezolver = new ScopedContainer())
+      using (var container = new ScopedContainer())
       {
-        rezolver.RegisterObject(myDisposable, suppressScopeTracking: false);
-        using (var childScope = rezolver.CreateLifetimeScope())
+        container.RegisterObject(myDisposable, suppressScopeTracking: false);
+        using (var childScope = container.CreateLifetimeScope())
         {
           var instance = childScope.Resolve<MyDisposable>();
           //should not dispose here when scope is disposed
         }
-        var instance2 = rezolver.Resolve<MyDisposable>();
+        var instance2 = container.Resolve<MyDisposable>();
         //should dispose here when root scope is disposed
       }
 

@@ -10,7 +10,8 @@
           "System.Linq",
           "System.Reflection",
           "System.Reflection.Extensions",
-          "System.Reflection.Primitives"
+          "System.Reflection.Primitives",
+          "System.Runtime"
         ],
         "compile": {
           "net451/Rezolver.Shared.dll": {}
@@ -28,7 +29,8 @@
           "System.Linq",
           "System.Reflection",
           "System.Reflection.Extensions",
-          "System.Reflection.Primitives"
+          "System.Reflection.Primitives",
+          "System.Runtime"
         ],
         "compile": {
           "net46/Rezolver.Shared.dll": {}

@@ -68,10 +68,10 @@ namespace Rezolver.Tests.Configuration
 
       Assert.IsType<Builder>(builder);
 
-      var rezolver = new Container(builder, new TargetDelegateCompiler());
-      var str = rezolver.Resolve<string>();
+      var container = new Container(builder, new TargetDelegateCompiler());
+      var str = container.Resolve<string>();
       Assert.Equal("Hello world", str);
-      var en = rezolver.Resolve<IEnumerable<int>>();
+      var en = container.Resolve<IEnumerable<int>>();
       Assert.NotNull(en);
       Assert.True(en.SequenceEqual(new[] { 1, 2, 3 }));
     }

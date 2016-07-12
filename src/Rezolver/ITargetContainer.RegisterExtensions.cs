@@ -24,10 +24,9 @@ namespace Rezolver
     /// calls back into the resolver to indicate that a particular argument/property value or whatever should be resolved.</param>
     /// <param name="type">Optional.  The type against which the registration is to be made, if different from <typeparamref name="T"/>.</param>
     /// <param name="adapter">Optional.  The adapter that will be used to convert the <paramref name="expression"/> into an <see cref="ITarget"/>.  This defaults
-    /// to <see cref="TargetAdapter.Default"/>.  Extending this is an advanced topicand shouldn't be required in most applications - it's mainly for developers looking
-    /// to extend Rezolver itself.</param>
+    /// to <see cref="TargetAdapter.Default"/>.  Extending this is an advanced topic and shouldn't be required in most cases.</param>
     /// <remarks>This is not the same as registering a factory delegate for creating objects - where the code you supply is already compiled and ready to go.  The expression that
-    /// is passed is analysed by the <paramref name="adapter"/> (or the default) and rewritten according to the expressions present.  In general, there is a one to one
+    /// is passed is analysed by the <paramref name="adapter"/> (or the default) and rewritten according to the expressions container within.  In general, there is a one to one
     /// mapping between the code you provide and the code that's produced, but it's not guaranteed.  In particular, calls back to the resolver to resolve dependencies are
     /// identified and turned into a different representation internally, so that dependency resolution works inside your code in just the same way as it does when using the
     /// higher-level targets.</remarks>

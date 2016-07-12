@@ -30,7 +30,7 @@ namespace Rezolver.Tests
       var container = new Container(builder);
       //create a CombinedContainer - which combines a new container with an existing one.
       var overridingContainer = new OverridingContainer(container);
-      overridingContainer.Builder.RegisterObject(158, typeof(int));
+      overridingContainer.RegisterObject(158, typeof(int));
       var result = (int)overridingContainer.Resolve<object>();
       Assert.Equal(158, result);
     }

@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Rezolver
 {
-  public static partial class IRezolverExtensions
+  public static partial class IContainerRezolveExtensions
   {
     /// <summary>
     /// Resolves an object of the given <paramref name="type"/>

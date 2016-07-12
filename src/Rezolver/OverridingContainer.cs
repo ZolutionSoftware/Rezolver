@@ -27,10 +27,9 @@ namespace Rezolver
     /// by the new combined rezolver's own registry will be sought from this rezolver.</param>
     /// <param name="builder">Optional. A specific builder to be used for this rezolver's own registrations.</param>
     /// <param name="compiler">Optional. A compiler to be used to create <see cref="ICompiledTarget"/> instances
-    /// from this rezolver's registrations.  If this is not provided, then the <see cref="IContainer.Compiler"/> of the
-    /// <paramref name="inner"/> rezolver will be used.</param>
+    /// from this rezolver's registrations.  If this is not provided, then the default is used (<see cref="TargetCompiler.Default"/>)</param>
     public OverridingContainer(IContainer inner, ITargetContainer builder = null, ITargetCompiler compiler = null)
-      : base(builder, compiler ?? inner.Compiler)
+      : base(builder, compiler)
     {
       inner.MustNotBeNull("inner");
       _inner = inner;

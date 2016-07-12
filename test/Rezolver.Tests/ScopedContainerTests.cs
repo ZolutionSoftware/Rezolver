@@ -107,7 +107,7 @@ namespace Rezolver.Tests
       //code outside the container will have created it first.  Who should dispose of those?
       using (var container = new ScopedContainer())
       {
-        container.Builder.Register(new SingletonTarget(ConstructorTarget.Auto<SingletonDependency>()));
+        container.Register(new SingletonTarget(ConstructorTarget.Auto<SingletonDependency>()));
 
         using (var childScope = container.CreateLifetimeScope())
         {

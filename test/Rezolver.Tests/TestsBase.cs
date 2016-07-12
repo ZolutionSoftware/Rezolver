@@ -7,18 +7,18 @@ namespace Rezolver.Tests
 {
   public class TestsBase
   {
-    protected static T GetValueFromTarget<T>(ITarget target, IContainer rezolver = null)
+    protected static T GetValueFromTarget<T>(ITarget target, Container container = null)
     {
-      rezolver = rezolver ?? CreateADefaultRezolver();
-      var compiledTarget = new TargetDelegateCompiler().CompileTarget(target, new CompileContext(rezolver, typeof(T)));
-      return (T)compiledTarget.GetObject(new RezolveContext(rezolver, typeof(T)));
+      container = container ?? CreateADefaultRezolver();
+      var compiledTarget = new TargetDelegateCompiler().CompileTarget(target, new CompileContext(container, container, typeof(T)));
+      return (T)compiledTarget.GetObject(new RezolveContext(container, typeof(T)));
     }
 
-    protected static object GetValueFromTarget(ITarget target, IContainer rezolver = null, Type targetType = null)
+    protected static object GetValueFromTarget(ITarget target, Container container = null, Type targetType = null)
     {
-      rezolver = rezolver ?? CreateADefaultRezolver();
+      container = container ?? CreateADefaultRezolver();
       return new TargetDelegateCompiler().CompileTarget(target,
-        new CompileContext(rezolver)).GetObject(new RezolveContext(rezolver, targetType));
+        new CompileContext(container, container)).GetObject(new RezolveContext(container, targetType));
     }
 
     protected static Container CreateADefaultRezolver()

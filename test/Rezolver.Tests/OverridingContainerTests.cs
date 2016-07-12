@@ -11,9 +11,9 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldRezolveFromBaseRezolver()
     {
-      //demonstrating how you can simply register directly into a rezolver post construction
+      //demonstrating how you can simply register directly into a container post construction
       var rezolver1 = new Container(compiler: new TargetDelegateCompiler());
-      var rezolver2 = new OverridingContainer(rezolver1, compiler: rezolver1.Compiler);
+      var rezolver2 = new OverridingContainer(rezolver1);
 
       int expectedInt = 10;
 
@@ -37,14 +37,14 @@ namespace Rezolver.Tests
     public void ShouldRezolveIntDependencyFromBaseRezolver()
     {
       //this is using constructorTarget with a prescribed new expression
-      var rezolver = CreateADefaultRezolver();
-      rezolver.RegisterType<TypeWithConstructorArg>();
+      var container = CreateADefaultRezolver();
+      container.RegisterType<TypeWithConstructorArg>();
 
       //the thing being that the underlying Builder does not know how too resolve an integer without
       //being passed a dynamic container at call-time.
       //this mocks a dynamically defined container that an application creates in response to transient information only
       int expected = -1;
-      OverridingContainer dynamicRezolver = new OverridingContainer(rezolver);
+      OverridingContainer dynamicRezolver = new OverridingContainer(container);
       dynamicRezolver.RegisterObject(expected);
 
       var result = (TypeWithConstructorArg)dynamicRezolver.Resolve(typeof(TypeWithConstructorArg));
@@ -69,8 +69,8 @@ namespace Rezolver.Tests
     [Fact]
     public void Bug_DynamicRezolverFallingBackToDefaultOnConstructorParameter()
     {
-      var rezolver1 = new Container(compiler: new TargetDelegateCompiler());
-      var rezolver2 = new OverridingContainer(rezolver1, compiler: rezolver1.Compiler);
+      var rezolver1 = new Container();
+      var rezolver2 = new OverridingContainer(rezolver1);
 
       rezolver1.Register(ConstructorTarget.Auto<Bug_Dependant>());
       rezolver2.Register(ConstructorTarget.Auto<Bug_Dependency>());

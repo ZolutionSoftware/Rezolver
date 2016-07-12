@@ -28,8 +28,8 @@ namespace Rezolver.Tests.Configuration
       var parsed = parser.Parse(json);
       var adapter = CreateAdapter();
       var builder = adapter.CreateBuilder(parsed);
-      var rezolver = CreateRezolver(builder);
-      return rezolver;
+      var container = CreateRezolver(builder);
+      return container;
     }
 
     protected virtual string PreProcess(string json)
@@ -62,8 +62,8 @@ namespace Rezolver.Tests.Configuration
 		] 
 	}
 ";
-      var rezolver = ParseConfigurationAndBuild(json);
-      int result = rezolver.Resolve<int>();
+      var container = ParseConfigurationAndBuild(json);
+      int result = container.Resolve<int>();
 
       Assert.Equal(1, result);
     }
@@ -79,8 +79,8 @@ namespace Rezolver.Tests.Configuration
 }
 ";
 
-      var rezolver = ParseConfigurationAndBuild(json);
-      string result = rezolver.Resolve<string>();
+      var container = ParseConfigurationAndBuild(json);
+      string result = container.Resolve<string>();
       Assert.Equal("Hello World!", result);
     }
 
@@ -98,8 +98,8 @@ namespace Rezolver.Tests.Configuration
 		{ ""Rezolver.Tests.TestTypes.InstanceCountingType"" : { ""$construct"" : ""$auto"" } }
 	]
 }";
-        var rezolver = ParseConfigurationAndBuild(json);
-        var instance = rezolver.Resolve<InstanceCountingType>();
+        var container = ParseConfigurationAndBuild(json);
+        var instance = container.Resolve<InstanceCountingType>();
         Assert.Equal(session.InitialInstanceCount + 1, InstanceCountingType.InstanceCount);
       }
     }
@@ -125,8 +125,8 @@ namespace Rezolver.Tests.Configuration
 	]
 }";
 
-        var rezolver = ParseConfigurationAndBuild(json);
-        var instance = rezolver.Resolve<InstanceCountingType>();
+        var container = ParseConfigurationAndBuild(json);
+        var instance = container.Resolve<InstanceCountingType>();
         Assert.Equal(session.InitialInstanceCount + 1, InstanceCountingType.InstanceCount);
       }
     }
@@ -152,8 +152,8 @@ namespace Rezolver.Tests.Configuration
 	]
 }";
 
-        var rezolver = ParseConfigurationAndBuild(json);
-        var instance = rezolver.Resolve<InstanceCountingType>();
+        var container = ParseConfigurationAndBuild(json);
+        var instance = container.Resolve<InstanceCountingType>();
         Assert.Equal(session.InitialInstanceCount + 1, InstanceCountingType.InstanceCount);
       }
     }
@@ -172,8 +172,8 @@ namespace Rezolver.Tests.Configuration
 	]
 }
 ";
-      var rezolver = ParseConfigurationAndBuild(json);
-      IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
+      var container = ParseConfigurationAndBuild(json);
+      IRequiresInt requiresInt = container.Resolve<IRequiresInt>();
       Assert.Equal(105, requiresInt.IntValue);
     }
 
@@ -195,9 +195,9 @@ namespace Rezolver.Tests.Configuration
 	]
 }";
 
-      var rezolver = ParseConfigurationAndBuild(json);
-      IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
-      RequiresInt requiresInt2 = rezolver.Resolve<RequiresInt>();
+      var container = ParseConfigurationAndBuild(json);
+      IRequiresInt requiresInt = container.Resolve<IRequiresInt>();
+      RequiresInt requiresInt2 = container.Resolve<RequiresInt>();
 
       Assert.Equal(requiresInt.IntValue, requiresInt2.IntValue);
       Assert.Equal(110, requiresInt.IntValue);
@@ -216,7 +216,7 @@ namespace Rezolver.Tests.Configuration
       //In this test (and the other on that currently fails), the intention is to register a singleton once for multiple types, ensuring that only
       //one instance is shared between all target types.  This cannot currently be done because the singleton (rightly) creates a single instance for
       //each type that it receives a request for.  By implementing aliasing, we can use the same singleton for multiple types, but only one of those
-      //registrations will point to that singleton.  All the others will represents a recursion back into the rezolver to resolve against that one
+      //registrations will point to that singleton.  All the others will represents a recursion back into the container to resolve against that one
       //singleton.
       //After doing that, what next?
       //Head over to RegisterInstruction.cs in the configuration project and use the new extension method for hierarchies of related types (from line 57).
@@ -237,9 +237,9 @@ namespace Rezolver.Tests.Configuration
 	]
 }";
 
-      var rezolver = ParseConfigurationAndBuild(json);
-      IRequiresInt requiresInt = rezolver.Resolve<IRequiresInt>();
-      RequiresInt requiresInt2 = rezolver.Resolve<RequiresInt>();
+      var container = ParseConfigurationAndBuild(json);
+      IRequiresInt requiresInt = container.Resolve<IRequiresInt>();
+      RequiresInt requiresInt2 = container.Resolve<RequiresInt>();
 
       Assert.Equal(115, requiresInt.IntValue);
       Assert.Same(requiresInt, requiresInt2);
@@ -255,8 +255,8 @@ namespace Rezolver.Tests.Configuration
 		{ ""System.String[]"" : [ ""Hello World0"", ""Hello World1"", ""Hello World2"" ] }
 	]
 }";
-      var rezolver = ParseConfigurationAndBuild(json);
-      string[] array = rezolver.Resolve<string[]>();
+      var container = ParseConfigurationAndBuild(json);
+      string[] array = container.Resolve<string[]>();
       Assert.NotNull(array);
       Assert.Equal(3, array.Length);
       Assert.True(Enumerable.Range(0, 3).Select(i => string.Format("Hello World{0}", i)).SequenceEqual(array));
@@ -276,8 +276,8 @@ namespace Rezolver.Tests.Configuration
 		}
 	]
 }";
-      var rezolver = ParseConfigurationAndBuild(json);
-      IEnumerable<string> multiple = rezolver.Resolve<IEnumerable<string>>();
+      var container = ParseConfigurationAndBuild(json);
+      IEnumerable<string> multiple = container.Resolve<IEnumerable<string>>();
       Assert.NotNull(multiple);
       var array = multiple.ToArray();
       Assert.Equal(3, array.Length); ;
@@ -310,8 +310,8 @@ namespace Rezolver.Tests.Configuration
 		}
 	]
 }";
-        var rezolver = ParseConfigurationAndBuild(json);
-        IEnumerable<InstanceCountingType> multiple = rezolver.Resolve<IEnumerable<InstanceCountingType>>();
+        var container = ParseConfigurationAndBuild(json);
+        IEnumerable<InstanceCountingType> multiple = container.Resolve<IEnumerable<InstanceCountingType>>();
         Assert.NotNull(multiple);
         var array = multiple.ToArray();
         Assert.Equal(3, array.Length);
@@ -331,8 +331,8 @@ namespace Rezolver.Tests.Configuration
 		}
 	]
 }";
-      var rezolver = ParseConfigurationAndBuild(json);
-      IEnumerable<string> strings = rezolver.Resolve<IEnumerable<string>>();
+      var container = ParseConfigurationAndBuild(json);
+      IEnumerable<string> strings = container.Resolve<IEnumerable<string>>();
       Assert.NotNull(strings);
       var array = strings.ToArray();
       Assert.Equal(3, array.Length);
@@ -362,8 +362,8 @@ namespace Rezolver.Tests.Configuration
 		}
 	]
 }";
-        var rezolver = ParseConfigurationAndBuild(json);
-        InstanceCountingType[] result = rezolver.Resolve<InstanceCountingType[]>();
+        var container = ParseConfigurationAndBuild(json);
+        InstanceCountingType[] result = container.Resolve<InstanceCountingType[]>();
         Assert.NotNull(result);
         Assert.Equal(3, result.Length);
         Assert.Equal(session.InitialInstanceCount + 3, InstanceCountingType.InstanceCount);
@@ -395,8 +395,8 @@ namespace Rezolver.Tests.Configuration
 		}
 	]
 }";
-        var rezolver = ParseConfigurationAndBuild(json);
-        InstanceCountingType[] result = rezolver.Resolve<InstanceCountingType[]>();
+        var container = ParseConfigurationAndBuild(json);
+        InstanceCountingType[] result = container.Resolve<InstanceCountingType[]>();
         Assert.NotNull(result);
         Assert.Equal(3, result.Length);
         Assert.Equal(session.InitialInstanceCount + 3, InstanceCountingType.InstanceCount);
@@ -432,8 +432,8 @@ namespace Rezolver.Tests.Configuration
 		}
 	]
 }";
-        var rezolver = ParseConfigurationAndBuild(json);
-        InstanceCountingType[] result = rezolver.Resolve<InstanceCountingType[]>();
+        var container = ParseConfigurationAndBuild(json);
+        InstanceCountingType[] result = container.Resolve<InstanceCountingType[]>();
         Assert.NotNull(result);
         Assert.Equal(3, result.Length);
         Assert.Equal(session.InitialInstanceCount + 3, InstanceCountingType.InstanceCount);
@@ -458,8 +458,8 @@ namespace Rezolver.Tests.Configuration
 				}
 			}
 		 ]}";
-      var rezolver = ParseConfigurationAndBuild(json);
-      var result = rezolver.Resolve<System.Net.NetworkCredential>();
+      var container = ParseConfigurationAndBuild(json);
+      var result = container.Resolve<System.Net.NetworkCredential>();
       Assert.Equal("username", result.UserName);
       Assert.Equal("password", result.Password);
     }

@@ -62,10 +62,9 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection
       return new Container(builder, compiler);
     }
 
-    public static IServiceProvider Populate(this IContainer rezolver, IServiceCollection services)
+    public static IServiceProvider Populate(this ContainerBase rezolver, IServiceCollection services)
     {
       if (rezolver == null) throw new ArgumentNullException(nameof(rezolver));
-
       //register service provider
       rezolver.RegisterExpression(context => context.Rezolver, typeof(IServiceProvider));
       //register scope factory - uses the rezolver that comes in the context.

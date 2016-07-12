@@ -10,7 +10,24 @@ using System.Text;
 
 namespace Rezolver
 {
-  public abstract class ContainerBase : IContainer
+  /// <summary>
+  /// Starting point for implementations of <see cref="IContainer"/> - only creatable through inheritance.
+  /// </summary>
+  /// <remarks>Note that the class also implements <see cref="ITargetContainer"/> by proxying the <see cref="Targets"/> that are
+  /// provided to it on construction.  All methods are implemented explicitly except the <see cref="Register(ITarget, Type)"/> method, 
+  /// which available through the class' public API.
+  /// 
+  /// Note: <see cref="IContainer"/>s are generally not expected to implement <see cref="ITargetContainer"/>, and the framework
+  /// will never assume they do.
+  /// 
+  /// The reason this class does is to make it easier to create a new container and to register targets into it without having to worry about
+  /// managing a separate <see cref="ITargetContainer"/> instance in your application root - because all the registration extension methods defined
+  /// in <see cref="ITargetContainerExtensions"/> will be available to developers in code which has a reference to this class, or one derived from it.
+  /// 
+  /// Note also that calling <see cref="ITargetContainer.CombineWith(ITargetContainer, Type)"/> on an instance of this type will always
+  /// cause a <see cref="NotSupportedException"/> to be thrown.
+  /// </remarks>
+  public class ContainerBase : IContainer, ITargetContainer
   {
     private static readonly
       ConcurrentDictionary<Type, Lazy<ICompiledTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
@@ -40,13 +57,27 @@ namespace Rezolver
       }
     }
 
-    protected ContainerBase()
+    protected ContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)
     {
+      Targets = targets ?? new Builder();
+      Compiler = compiler ?? TargetCompiler.Default;
+
     }
 
-    public abstract ITargetCompiler Compiler { get; }
+    /// <summary>
+    /// The compiler that will be used to compile <see cref="ITarget"/> instances, obtained from the <see cref="Targets"/> container
+    /// during <see cref="Resolve(RezolveContext)"/> and <see cref="TryResolve(RezolveContext, out object)"/> operations, into 
+    /// <see cref="ICompiledTarget"/> instances that will actually provide the objects that are resolved.
+    /// </summary>
+    /// <remarks>Notes to implementers: This property must NEVER be null.</remarks>
+    protected ITargetCompiler Compiler { get; }
 
-    public abstract ITargetContainer Builder { get; }
+    /// <summary>
+    /// Provides the <see cref="ITarget"/> instances that will be compiled by the <see cref="Compiler"/> into <see cref="ICompiledTarget"/>
+    /// instances.
+    /// </summary>
+    /// <remarks>Notes to implementers: This property must NEVER be null.</remarks>
+    protected ITargetContainer Targets { get; }
 
     public virtual object Resolve(RezolveContext context)
     {
@@ -87,12 +118,12 @@ namespace Rezolver
     public virtual bool CanResolve(RezolveContext context)
     {
       //TODO: Change this to refer to the cache (once I've figured out how to do it based on the new compiler)
-      return Builder.Fetch(context.RequestedType) != null;
+      return Targets.Fetch(context.RequestedType) != null;
     }
 
     protected virtual ICompiledTarget GetCompiledRezolveTarget(RezolveContext context)
     {
-      ITarget target = Builder.Fetch(context.RequestedType);
+      ITarget target = Targets.Fetch(context.RequestedType);
 
       if (target == null)
         return GetFallbackCompiledRezolveTarget(context);
@@ -106,15 +137,24 @@ namespace Rezolver
           return fallback;
       }
 
-
-      //note that if a name was passed we're grabbing the best matching named builder to use for resolving
-      //dependencies.
       return Compiler.CompileTarget(target,
         new CompileContext(this,
+          //the targets we pass here are wrapped in a new ChildBuilder by the context
+          Targets,
           context.RequestedType));
 
     }
 
+    /// <summary>
+    /// Called by <see cref="GetCompiledRezolveTarget(RezolveContext)"/> if no valid <see cref="ITarget"/> can be
+    /// found for the <paramref name="context"/> or if the one found has its <see cref="ITarget.UseFallback"/> property
+    /// set to <c>true</c>.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(RezolveContext)"/> operation
+    /// where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).</returns>
+    /// <remarks>The base implementation always returns an instance of the <see cref="MissingCompiledTarget"/> via
+    /// the <see cref="GetMissingTarget(Type)"/> static method.</remarks>
     protected virtual ICompiledTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
     {
       return GetMissingTarget(context.RequestedType);
@@ -126,7 +166,7 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// protected virtual implementation of IServiceProvider.GetService.
+    /// Protected virtual implementation of <see cref="IServiceProvider.GetService(Type)"/>.
     /// </summary>
     /// <param name="serviceType"></param>
     /// <returns></returns>
@@ -137,5 +177,42 @@ namespace Rezolver
       this.TryResolve(serviceType, out toReturn);
       return toReturn;
     }
+
+    /// <summary>
+    /// Implementation of <see cref="ITargetContainer.Register(ITarget, Type)"/> - simply proxies the
+    /// call to the target container referenced by the <see cref="Targets"/> property.
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="serviceType"></param>
+    /// <remarks>Remember: registering new targets into an <see cref="ITargetContainer"/> after an <see cref="IContainer"/>
+    /// has started compiling targets within it can yield unpredictable results.
+    /// 
+    /// If you create a new container and perform all your registrations before you use it, however, then everything will 
+    /// work as expected.
+    /// 
+    /// Note also the other ITargetContainer interface methods are implemented explicitly so as to hide them from the 
+    /// list of class members.
+    /// </remarks>
+    public void Register(ITarget target, Type serviceType = null)
+    {
+      Targets.Register(target, serviceType);
+    }
+
+    #region ITargetContainer explicit implementation
+    ITarget ITargetContainer.Fetch(Type type)
+    {
+      return Targets.Fetch(type);
+    }
+
+    IEnumerable<ITarget> ITargetContainer.FetchAll(Type type)
+    {
+      return Targets.FetchAll(type);
+    }
+
+    ITargetContainer ITargetContainer.CombineWith(ITargetContainer existing, Type type)
+    {
+      throw new NotSupportedException();
+    }
+    #endregion
   }
 }

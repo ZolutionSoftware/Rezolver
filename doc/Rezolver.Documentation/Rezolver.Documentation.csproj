@@ -367,10 +367,13 @@
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="styles\site.debug.css.map" />
     <Content Include="styles\site.css.map" />
+    <Content Include="rezolver-usage\advanced\rezolving-with-expressions.md" />
+    <Content Include="rezolver-usage\advanced\toc.yml" />
+    <Content Include="rezolver-usage\advanced\index.md" />
     <None Include="toc.yml" />
     <None Include="index.md" />
     <None Include="docfx.json" />
-    <None Include="rezolver-usage\intro.md" />
+    <None Include="rezolver-usage\getting-started.md" />
     <None Include="rezolver-api\index.md" />
     <None Include="rezolver-usage\details1.md" />
     <None Include="rezolver-usage\details2.md" />

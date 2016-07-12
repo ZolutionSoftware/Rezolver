@@ -17,7 +17,7 @@ namespace Rezolver
   /// later be compiled to produce the objects.
   /// 
   /// An <see cref="IContainer"/> typically uses this as the source of the registrations that it uses to resolve objects
-  /// in its <see cref="IContainer.Resolve(RezolveContext)"/> method via it's <see cref="IContainer.Builder"/> property.
+  /// in its <see cref="IContainer.Resolve(RezolveContext)"/> method via it's <see cref="IContainer.Targets"/> property.
   /// 
   /// Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
   /// are <see cref="Builder"/> and <see cref="ChildBuilder"/>.</remarks>

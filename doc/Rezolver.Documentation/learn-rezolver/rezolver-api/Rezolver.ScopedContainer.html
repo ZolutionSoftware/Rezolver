@@ -110,12 +110,6 @@ class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Co
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Compiler">Compiler</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Builder">Builder</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">GetCompiledRezolveTarget(RezolveContext)</a>
                 </div>
                 <div>
@@ -123,6 +117,12 @@ class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Co
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_IsMissingTarget_Rezolver_ICompiledTarget_">IsMissingTarget(ICompiledTarget)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Compiler">Compiler</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
@@ -147,6 +147,18 @@ class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Co
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetService_System_Type_">GetService(Type)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.Fetch(System.Type)</span>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.FetchAll(System.Type)</span>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer, System.Type)</span>
                 </div>
                 <div>
                   <span class="xref">System.Object.ToString()</span>
@@ -174,7 +186,7 @@ class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Co
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
               <h5 id="Rezolver_ScopedContainer_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class ScopedContainer : Container, IScopedContainer, IContainer, IServiceProvider, IDisposable</code></pre>
+                <pre><code class="lang-csharp hljs">public class ScopedContainer : Container, ITargetContainer, IScopedContainer, IContainer, IServiceProvider, IDisposable</code></pre>
               </div>
               <h5 id="Rezolver_ScopedContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>The implementation of this class is very similar to the <a class="xref" href="Rezolver.OverridingScopedContainer.html#Rezolver_OverridingScopedContainer">OverridingScopedContainer</a>,
@@ -190,15 +202,15 @@ suited for use as a child lifetime scope for another rezolver.</p>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.%23ctor(Rezolver.ITargetContainer%2CRezolver.ITargetCompiler%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.%23ctor(Rezolver.ITargetContainer%2CRezolver.ITargetCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_System_Boolean_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetCompiler,System.Boolean)">ScopedContainer(ITargetContainer, ITargetCompiler, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">ScopedContainer(ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ScopedContainer(ITargetContainer builder = null, ITargetCompiler compiler = null, bool registerToBuilder = true)</code></pre>
+                <pre><code class="lang-csharp hljs">public ScopedContainer(ITargetContainer builder = null, ITargetCompiler compiler = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -218,11 +230,6 @@ suited for use as a child lifetime scope for another rezolver.</p>
                   <tr>
                     <td><em>compiler</em></td>
                     <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>registerToBuilder</em></td>
-                    <td><span class="xref">System.Boolean</span></td>
                     <td></td>
                   </tr>
                 </tbody>

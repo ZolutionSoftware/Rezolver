@@ -114,12 +114,6 @@
                   <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_">GetFallbackCompiledRezolveTarget(RezolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Compiler">Compiler</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Builder">Builder</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">GetCompiledRezolveTarget(RezolveContext)</a>
                 </div>
                 <div>
@@ -127,6 +121,12 @@
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_IsMissingTarget_Rezolver_ICompiledTarget_">IsMissingTarget(ICompiledTarget)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Compiler">Compiler</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
@@ -145,6 +145,18 @@
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetService_System_Type_">GetService(Type)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.Fetch(System.Type)</span>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.FetchAll(System.Type)</span>
+                </div>
+                <div>
+                  <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer, System.Type)</span>
                 </div>
                 <div>
                   <span class="xref">System.Object.ToString()</span>
@@ -172,7 +184,7 @@
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
               <h5 id="Rezolver_OverridingScopedContainer_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class OverridingScopedContainer : OverridingContainer, IScopedContainer, IContainer, IServiceProvider, IDisposable</code></pre>
+                <pre><code class="lang-csharp hljs">public class OverridingScopedContainer : OverridingContainer, ITargetContainer, IScopedContainer, IContainer, IServiceProvider, IDisposable</code></pre>
               </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors

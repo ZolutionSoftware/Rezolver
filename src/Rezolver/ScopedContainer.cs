@@ -40,8 +40,8 @@ namespace Rezolver
 
     public event EventHandler Disposed;
 
-    public ScopedContainer(ITargetContainer builder = null, ITargetCompiler compiler = null, bool registerToBuilder = true)
-        : base(builder, compiler, registerToBuilder)
+    public ScopedContainer(ITargetContainer builder = null, ITargetCompiler compiler = null)
+        : base(builder, compiler)
     {
       _objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
       _disposed = false;

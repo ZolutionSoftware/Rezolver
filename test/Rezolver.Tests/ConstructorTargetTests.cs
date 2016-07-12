@@ -59,9 +59,9 @@ namespace Rezolver.Tests
       //integration with the default adapter here.
       var target = ConstructorTarget.FromNewExpression(context => new NoDefaultConstructor(context.Resolve<int>()), TargetAdapter.Instance);
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-      var rezolver = CreateADefaultRezolver();
-      rezolver.Register(intTarget, typeof(int));
-      var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolver);
+      var container = CreateADefaultRezolver();
+      container.Register(intTarget, typeof(int));
+      var result = GetValueFromTarget<NoDefaultConstructor>(target, container);
       Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
     }
     [Fact]
@@ -70,9 +70,9 @@ namespace Rezolver.Tests
       //basically the same as above - except this doesn't provide the constructor call explicitly.
       var target = ConstructorTarget.Auto<NoDefaultConstructor>();
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-      var rezolver = CreateADefaultRezolver();
-      rezolver.Register(intTarget, typeof(int));
-      var result = GetValueFromTarget<NoDefaultConstructor>(target, rezolver);
+      var container = CreateADefaultRezolver();
+      container.Register(intTarget, typeof(int));
+      var result = GetValueFromTarget<NoDefaultConstructor>(target, container);
       Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
     }
 
@@ -84,10 +84,10 @@ namespace Rezolver.Tests
 
       var target = ConstructorTarget.Auto<NoDefaultConstructor2>();
       var intTarget = NoDefaultConstructor2.ExpectedBestValue.AsObjectTarget();
-      var rezolver = CreateADefaultRezolver();
-      rezolver.Register(intTarget);
-      rezolver.Register(target);
-      var result = rezolver.Resolve<NoDefaultConstructor2>();
+      var container = CreateADefaultRezolver();
+      container.Register(intTarget);
+      container.Register(target);
+      var result = container.Resolve<NoDefaultConstructor2>();
       Assert.Equal(NoDefaultConstructor2.ExpectedBestValue, result.Value);
       Assert.Equal(NoDefaultConstructor2.ExpectedDefaultMessage, result.Message);
     }
@@ -100,50 +100,50 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowAPropertyToBeSet()
     {
-      Container rezolver = new Container(compiler: new TargetDelegateCompiler());
-      rezolver.RegisterExpression(c => new HasProperty() { Value = 1 });
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.RegisterExpression(c => new HasProperty() { Value = 1 });
 
-      var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
+      var result = (HasProperty)container.Resolve(typeof(HasProperty));
       Assert.Equal(1, result.Value);
     }
 
     [Fact]
     public void ShouldAllowAPropertyToBeResolved()
     {
-      Container rezolver = new Container(compiler: new TargetDelegateCompiler());
-      rezolver.Register((10).AsObjectTarget());
-      rezolver.RegisterExpression(c => new HasProperty() { Value = c.Resolve<int>() });
-      var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register((10).AsObjectTarget());
+      container.RegisterExpression(c => new HasProperty() { Value = c.Resolve<int>() });
+      var result = (HasProperty)container.Resolve(typeof(HasProperty));
       Assert.Equal(10, result.Value);
     }
 
     [Fact]
     public void ShouldAutoDiscoverProperties()
     {
-      Container rezolver = new Container(compiler: new TargetDelegateCompiler());
-      rezolver.Register((25).AsObjectTarget());
-      rezolver.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
-      var result = (HasProperty)rezolver.Resolve(typeof(HasProperty));
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register((25).AsObjectTarget());
+      container.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
+      var result = (HasProperty)container.Resolve(typeof(HasProperty));
       Assert.Equal(25, result.Value);
     }
 
     [Fact]
     public void ShouldAutoDiscoverFields()
     {
-      Container rezolver = new Container(compiler: new TargetDelegateCompiler());
-      rezolver.Register("Hello world".AsObjectTarget());
-      rezolver.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
-      var result = (HasField)rezolver.Resolve(typeof(HasField));
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register("Hello world".AsObjectTarget());
+      container.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
+      var result = (HasField)container.Resolve(typeof(HasField));
       Assert.Equal("Hello world", result.StringField);
     }
 
     [Fact]
     public void ShouldIgnoreFieldsAndProperties()
     {
-      Container rezolver = new Container(compiler: new TargetDelegateCompiler());
-      rezolver.Register((100).AsObjectTarget());
-      rezolver.RegisterType<IgnoredPropertyAndField>(DefaultPropertyBindingBehaviour.Instance);
-      var result = rezolver.Resolve<IgnoredPropertyAndField>();
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register((100).AsObjectTarget());
+      container.RegisterType<IgnoredPropertyAndField>(DefaultPropertyBindingBehaviour.Instance);
+      var result = container.Resolve<IgnoredPropertyAndField>();
       Assert.Equal(1, result.GetIgnoredField());
       Assert.Equal(2, result.IgnoredProperty1);
       Assert.Equal(3, result.IgnoredProperty2);
@@ -152,14 +152,14 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldChainAutoDiscoveredPropertiesAndFields()
     {
-      Container rezolver = new Container(compiler: new TargetDelegateCompiler());
-      rezolver.Register("hello universe".AsObjectTarget());
-      rezolver.Register((500).AsObjectTarget());
-      rezolver.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
-      rezolver.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
-      rezolver.Register(ConstructorTarget.Auto<NestedPropertiesAndFields>(DefaultPropertyBindingBehaviour.Instance));
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register("hello universe".AsObjectTarget());
+      container.Register((500).AsObjectTarget());
+      container.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto<NestedPropertiesAndFields>(DefaultPropertyBindingBehaviour.Instance));
 
-      var result = (NestedPropertiesAndFields)rezolver.Resolve(typeof(NestedPropertiesAndFields));
+      var result = (NestedPropertiesAndFields)container.Resolve(typeof(NestedPropertiesAndFields));
 
       Assert.NotNull(result.Field_HasProperty);
       Assert.NotNull(result.Property_HasField);

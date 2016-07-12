@@ -12,7 +12,7 @@ namespace Rezolver.Tests
   {
     private class TestRezolverBase : IContainer
     {
-      public virtual ITargetContainer Builder
+      public virtual ITargetContainer Targets
       {
         get
         {

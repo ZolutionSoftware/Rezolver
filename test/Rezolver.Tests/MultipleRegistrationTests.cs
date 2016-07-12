@@ -7,7 +7,7 @@ using Xunit;
 namespace Rezolver.Tests
 {
   /// <summary>
-  /// tests rezolverbuilder and rezolver types for whether they support IEnumerable{Service} - both after registering
+  /// tests rezolverbuilder and container types for whether they support IEnumerable{Service} - both after registering
   /// a single entry, or multiple.
   /// </summary>
   public class MultipleRegistrationTests : TestsBase
@@ -44,11 +44,11 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveOneServiceForIEnumerableDependency()
     {
-      var rezolver = CreateADefaultRezolver();
-      rezolver.Register((10).AsObjectTarget());
-      rezolver.RegisterType<RequiresServices>();
-      rezolver.RegisterType<ServiceA, IService>();
-      var result = rezolver.Resolve<RequiresServices>();
+      var container = CreateADefaultRezolver();
+      container.Register((10).AsObjectTarget());
+      container.RegisterType<RequiresServices>();
+      container.RegisterType<ServiceA, IService>();
+      var result = container.Resolve<RequiresServices>();
       Assert.Single<IService>(result.Services);
       Assert.IsType<ServiceA>(result.Services.First());
     }
@@ -56,13 +56,13 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldRegisterAndResolveMultipleServiceInstances()
     {
-      var rezolver = CreateADefaultRezolver();
-      rezolver.Register((10).AsObjectTarget());
-      rezolver.Register((20.0).AsObjectTarget());
-      rezolver.Register("hello multiple".AsObjectTarget());
-      rezolver.RegisterMultiple(new[] { ConstructorTarget.Auto<ServiceA>(), ConstructorTarget.Auto<ServiceB>() }, typeof(IService));
+      var container = CreateADefaultRezolver();
+      container.Register((10).AsObjectTarget());
+      container.Register((20.0).AsObjectTarget());
+      container.Register("hello multiple".AsObjectTarget());
+      container.RegisterMultiple(new[] { ConstructorTarget.Auto<ServiceA>(), ConstructorTarget.Auto<ServiceB>() }, typeof(IService));
 
-      var result = rezolver.Resolve(typeof(IEnumerable<IService>));
+      var result = container.Resolve(typeof(IEnumerable<IService>));
       Assert.NotNull(result);
       var resultArray = ((IEnumerable<IService>)result).ToArray();
       Assert.Equal(2, resultArray.Length);
@@ -71,14 +71,14 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldRegisterAndResolveMultipleServiceInstancesAsDependency()
     {
-      var rezolver = CreateADefaultRezolver();
-      rezolver.Register((10).AsObjectTarget());
-      rezolver.Register((20.0).AsObjectTarget());
-      rezolver.Register("hello multiple".AsObjectTarget());
-      rezolver.RegisterMultiple(new[] { ConstructorTarget.Auto<ServiceA>(), ConstructorTarget.Auto<ServiceB>() }, typeof(IService));
-      rezolver.Register(ConstructorTarget.Auto<RequiresServices>());
+      var container = CreateADefaultRezolver();
+      container.Register((10).AsObjectTarget());
+      container.Register((20.0).AsObjectTarget());
+      container.Register("hello multiple".AsObjectTarget());
+      container.RegisterMultiple(new[] { ConstructorTarget.Auto<ServiceA>(), ConstructorTarget.Auto<ServiceB>() }, typeof(IService));
+      container.Register(ConstructorTarget.Auto<RequiresServices>());
 
-      var result = (RequiresServices)rezolver.Resolve(typeof(RequiresServices));
+      var result = (RequiresServices)container.Resolve(typeof(RequiresServices));
       Assert.NotNull(result.Services);
       Assert.Equal(2, result.Services.Count());
       Assert.Equal(1, result.Services.OfType<ServiceA>().Count());

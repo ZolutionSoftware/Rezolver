@@ -10,22 +10,20 @@ using System.Linq.Expressions;
 namespace Rezolver
 {
   /// <summary>
-  /// A container through which instances of objects can be <see cref="Resolve"/>d.  
+  /// Represents the primary IOC container in the Rezolver framework.
   /// </summary>
+  /// <remarks>Instances of objects are resolved via the <see cref="Resolve"/> or <see cref="TryResolve(RezolveContext, out object)"/> methods.
+  /// 
+  /// You can introspect the container to check in advance whether a given type can be resolved through the <see cref="CanResolve(RezolveContext)"/> method.
+  /// 
+  /// Lifetime scoping (where <see cref="IDisposable"/> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
+  /// by obtaining a new scope through the <see cref="CreateLifetimeScope"/> method.
+  /// 
+  /// Many of the functions which accept a <see cref="RezolveContext"/> also have alternatives (in the form of extension methods) in the 
+  /// <see cref="IContainerRezolveExtensions"/> class.
+  /// </remarks>
   public interface IContainer : IServiceProvider
   {
-    /// <summary>
-    /// Provides access to the builder for this container - so that registrations can be added to the rezolver after
-    /// construction.  It is not a requirement of a rezolver to use a builder to act as source of registrations, therefore 
-    /// if a builder is not applicable to this instance, either return a stub instance that always returns notargets, or
-    /// throw a NotSupportException.
-    /// </summary>
-    ITargetContainer Builder { get; }
-    /// <summary>
-    /// Provides access to the compiler used by this rezolver in turning IRezolveTargets into
-    /// ICompiledRezolveTargets.
-    /// </summary>
-    ITargetCompiler Compiler { get; }
     /// <summary>
     /// Returns true if a resolve operation for the given context will succeed.
     /// If you're going to be calling <see cref="Resolve"/> immediately afterwards, consider using the TryResolve method instead,
@@ -56,9 +54,8 @@ namespace Rezolver
     bool TryResolve(RezolveContext context, out object result);
 
     /// <summary>
-    /// Called to create a lifetime scope that will track, and dispose of, any 
-    /// disposable objects that are created via calls to <see cref="Resolve"/> (to the lifetime scope
-    /// itself, not to the resolver that 'parents' the lifetime scope).
+    /// Called to create a lifetime scope with the same configuration as this container that will track, and dispose of, any 
+    /// disposable objects that are created via calls to its <see cref="Resolve"/>
     /// </summary>
     /// <returns>An <see cref="IScopedContainer"/> instance that will use this resolver to resolve objects,
     /// but which will impose its own lifetime restrictions on those instances.</returns>

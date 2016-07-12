@@ -25,8 +25,8 @@ namespace Rezolver.Diagnostics
     protected internal ICallTracker Tracker { get; private set; }
 
 
-    public TrackedDefaultRezolver(ICallTracker logger, ITargetContainer builder = null, ITargetCompiler compiler = null, bool registerToBuilder = true) :
-      base(builder: builder, compiler: compiler, registerToBuilder: registerToBuilder)
+    public TrackedDefaultRezolver(ICallTracker logger, ITargetContainer builder = null, ITargetCompiler compiler = null) :
+      base(targets: builder, compiler: compiler)
     {
       Tracker = logger;
     }

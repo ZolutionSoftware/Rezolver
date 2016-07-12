@@ -454,8 +454,7 @@ calls back into the resolver to indicate that a particular argument/property val
                     <td><em>adapter</em></td>
                     <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
                     <td><p>Optional.  The adapter that will be used to convert the <em>expression</em> into an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>.  This defaults
-to <a class="xref" href="Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_Default">Default</a>.  Extending this is an advanced topicand shouldn&#39;t be required in most applications - it&#39;s mainly for developers looking
-to extend Rezolver itself.</p>
+to <a class="xref" href="Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_Default">Default</a>.  Extending this is an advanced topic and shouldn&#39;t be required in most cases.</p>
 </td>
                   </tr>
                 </tbody>
@@ -477,7 +476,7 @@ to extend Rezolver itself.</p>
               </table>
               <h5 class="hremarks" id="Rezolver_ITargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___System_Type_Rezolver_ITargetAdapter__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This is not the same as registering a factory delegate for creating objects - where the code you supply is already compiled and ready to go.  The expression that
-is passed is analysed by the <em>adapter</em> (or the default) and rewritten according to the expressions present.  In general, there is a one to one
+is passed is analysed by the <em>adapter</em> (or the default) and rewritten according to the expressions container within.  In general, there is a one to one
 mapping between the code you provide and the code that&#39;s produced, but it&#39;s not guaranteed.  In particular, calls back to the resolver to resolve dependencies are
 identified and turned into a different representation internally, so that dependency resolution works inside your code in just the same way as it does when using the
 higher-level targets.</p>
