@@ -12,7 +12,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDecorateDecoratedType()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType<DecoratedType, IDecorated>();
       builder.RegisterDecorator<DecoratorType, IDecorated>();
       var container = new Container(builder);
@@ -27,7 +27,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDecorateDecoratedTypeAddedAfterDecorator()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterDecorator<DecoratorType, IDecorated>();
       builder.RegisterType<DecoratedType, IDecorated>();
       var container = new Container(builder);
@@ -41,7 +41,7 @@ namespace Rezolver.Tests
     public void ShouldDecorateDecorator()
     {
       //see if stacking multiple decorators works.
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType<DecoratedType, IDecorated>();
       builder.RegisterDecorator<DecoratorType, IDecorated>();
       builder.RegisterDecorator<AnotherDecoratorType, IDecorated>();
@@ -58,7 +58,7 @@ namespace Rezolver.Tests
     {
       //this test check that requesting an IEnumerable of T gives you
       //an enumerable of decorated T
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType<DecoratedType, IDecorated>();
       builder.RegisterType<DecoratedType2, IDecorated>();
       builder.RegisterDecorator<DecoratorType, IDecorated>();
@@ -73,7 +73,7 @@ namespace Rezolver.Tests
     public void ShouldCreateEnumerableOfDecoratedObjectsAddedAfterDecorator()
     {
       //this test is the same as above, except the decorator is registered first.
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterDecorator<DecoratorType, IDecorated>();
       builder.RegisterType<DecoratedType, IDecorated>();
       builder.RegisterType<DecoratedType2, IDecorated>();
@@ -88,7 +88,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldUseGenericDecorator()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType<StringHandler, IHandler<string>>();
       builder.RegisterType<DoubleHandler, IHandler<double>>();
       builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
@@ -103,7 +103,7 @@ namespace Rezolver.Tests
     public void ShouldUseGenericDecoratorRegisteredBeforeTypes()
     {
       //check that the decorator is registration order agnostic.
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
       builder.RegisterType<StringHandler, IHandler<string>>();
       builder.RegisterType<DoubleHandler, IHandler<double>>();
@@ -117,7 +117,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDecorateGenericDecorator()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType<StringHandler, IHandler<string>>();
       builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
       builder.RegisterDecorator(typeof(GenericDecoratingHandler2<>), typeof(IHandler<>));
@@ -129,7 +129,7 @@ namespace Rezolver.Tests
 
     public void ShouldDecorateOnlyOneClosedGeneric()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType<StringHandler, IHandler<string>>();
       builder.RegisterType<DoubleHandler, IHandler<double>>();
       builder.RegisterDecorator<GenericDecoratingHandler<string>, IHandler<string>>();
@@ -149,7 +149,7 @@ namespace Rezolver.Tests
       //when we get a handler for the double type, we should get only one decorator
       //when we get a handler for the string type, we should get the two decorators - the open generic
       //decorator wrapping the specialised decorator, wrapping the string handler.
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType<StringHandler, IHandler<string>>();
       builder.RegisterType<DoubleHandler, IHandler<double>>();
       builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
@@ -168,7 +168,7 @@ namespace Rezolver.Tests
     public void ShouldInjectAdditionDecorateForOneClosedGenericAddedBeforeRegistrations()
     {
       //as above, but checking that it works when the decorators are applied first
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
       builder.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
       builder.RegisterType<StringHandler, IHandler<string>>();
@@ -186,7 +186,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDecorateGenericHandler()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
       builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
       var container = new Container(builder);

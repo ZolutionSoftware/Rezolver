@@ -167,7 +167,7 @@ namespace Rezolver.Configuration.Json
 
       //otherwise, we return an object target that will construct an instance of the requested type
       //from the raw Json.  This allows developers to implement Json Conversion for types specifically
-      //for the purposes of reading from rezolver configuration - note, however, that when doing this it's
+      //for the purposes of reading from container configuration - note, however, that when doing this it's
       //not possible to 
       return CreateDeferredJsonDeserializerTarget(jObject, serializer);
 

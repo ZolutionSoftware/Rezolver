@@ -47,7 +47,7 @@ namespace Rezolver
   public static class EnumerableTargetBuilderExtensions
   {
 
-    public static void EnableEnumerableResolving(this Builder builder)
+    public static void EnableEnumerableResolving(this TargetContainer builder)
     {
       builder.MustNotBeNull(nameof(builder));
       builder.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(builder));

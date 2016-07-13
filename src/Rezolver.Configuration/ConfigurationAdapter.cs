@@ -97,7 +97,7 @@ namespace Rezolver.Configuration
     /// <exception cref="ConfigurationException">If any part of the passed configuration is invalid (e.g.
     /// bad type references) or cannot be handled by this adapter (e.g. custom IConfigurationEntry instances or
     /// custom IRezolveTargetMetadata instances).</exception>
-    public virtual ITargetContainer CreateBuilder(IConfiguration configuration)
+    public virtual ITargetContainer CreateTargetContainer(IConfiguration configuration)
     {
       if (configuration == null)
       {
@@ -151,12 +151,12 @@ namespace Rezolver.Configuration
     /// No parsing of the configuration is to be done here (except, perhaps, if the actual implementation of 
     /// <see cref="ITargetContainer"/> that is used is dependant upon, say, the type of configuration object.
     /// 
-    /// The base behaviour is simply to create an instance of <see cref="Builder"/>.
+    /// The base behaviour is simply to create an instance of <see cref="TargetContainer"/>.
     /// </remarks>
     /// <param name="configuration">The configuration instance for which a builder is to be created.</param>
     protected virtual ITargetContainer CreateBuilderInstance(IConfiguration configuration)
     {
-      return new Builder();
+      return new TargetContainer();
     }
 
     /// <summary>
@@ -171,7 +171,7 @@ namespace Rezolver.Configuration
       foreach (var entry in context.Configuration.Entries.OrderBy(e => e, new ConfigurationEntryProcessOrderer()))
       {
         var instruction = TransformEntry(entry, context);
-        //not all entries yield instructions to be performed on the rezolver builder
+        //not all entries yield instructions to be performed on the container builder
         if (instruction != null)
           context.AppendInstruction(instruction);
       }

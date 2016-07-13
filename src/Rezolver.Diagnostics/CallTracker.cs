@@ -20,7 +20,7 @@ namespace Rezolver.Diagnostics
     private static readonly Lazy<CallTracker> _default = new Lazy<CallTracker>(() => new CallTracker());
 
     /// <summary>
-    /// The default CallTracker instance - used for application-wide rezolver tracking.
+    /// The default CallTracker instance - used for application-wide container tracking.
     /// </summary>
     public static CallTracker Default
     {

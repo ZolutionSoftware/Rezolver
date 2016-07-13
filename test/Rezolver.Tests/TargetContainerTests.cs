@@ -7,13 +7,13 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-  public class BuilderTests
+  public class TargetContainerTests
   {
     [Fact]
     public void ShouldRegisterNullObjectTarget()
     {
       ITarget t = new ObjectTarget(null);
-      ITargetContainer r = new Builder();
+      ITargetContainer r = new TargetContainer();
       r.Register(t, serviceType: typeof(object));
       var t2 = r.Fetch(typeof(object));
       Assert.Same(t, t2);
@@ -23,14 +23,14 @@ namespace Rezolver.Tests
     public void ShouldNotRegisterIfTypesDontMatch()
     {
       ITarget t = new ObjectTarget("hello world");
-      ITargetContainer r = new Builder();
+      ITargetContainer r = new TargetContainer();
       Assert.Throws<ArgumentException>(() => r.Register(t, serviceType: typeof(int)));
     }
 
     [Fact]
     public void ShouldNotAllowNullTypeOnFetch()
     {
-      ITargetContainer r = new Builder();
+      ITargetContainer r = new TargetContainer();
       Assert.Throws<ArgumentNullException>(() => r.Fetch(null));
     }
 
@@ -38,7 +38,7 @@ namespace Rezolver.Tests
     public void ShouldRegisterForImplicitType()
     {
       ITarget t = new ObjectTarget("hello word");
-      ITargetContainer rezolverBuilder = new Builder();
+      ITargetContainer rezolverBuilder = new TargetContainer();
       rezolverBuilder.Register(t);
       var t2 = rezolverBuilder.Fetch(typeof(string));
       Assert.Same(t, t2);
@@ -47,7 +47,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldSupportTwoRegistrations()
     {
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       var simpleType = new SimpleType();
 
       ITarget target1 = "hello world".AsObjectTarget();
@@ -61,7 +61,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldSupportRegisteringOpenGenericAndFetchingAsClosed()
     {
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       var target = GenericConstructorTarget.Auto(typeof(Generic<>));
       builder.Register(target, typeof(IGeneric<>));
       ///this should be trivial
@@ -74,7 +74,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldSupportRegisteringSpecialisationOfGeneric()
     {
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       builder.RegisterType(typeof(Generic<>), typeof(IGeneric<>));
       var fetched = builder.Fetch(typeof(IGeneric<int>));
       Assert.NotNull(fetched);
@@ -84,7 +84,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldFavourSpecialisationOfGenericInt()
     {
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       var notExpected = ConstructorTarget.Auto(typeof(Generic<>));
       var expected = ConstructorTarget.Auto(typeof(GenericNoCtor<int>));
       builder.Register(notExpected, typeof(IGeneric<>));
@@ -97,7 +97,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldSupportRegisteringAndRetrievingGenericWithGenericParameter()
     {
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       var target = GenericConstructorTarget.Auto(typeof(Generic<>));
       builder.Register(target, typeof(IGeneric<>));
       var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
@@ -108,7 +108,7 @@ namespace Rezolver.Tests
     public void ShouldSupportRegisteringAndRetrievingGenericWithAsymmetricGenericBase()
     {
       //can't think what else to call this scenario!
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       var target = GenericConstructorTarget.Auto(typeof(GenericGeneric<>));
       builder.Register(target, typeof(IGeneric<>));
       var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
@@ -118,7 +118,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldFavourGenericSpecialisationOfGeneric()
     {
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       var target = GenericConstructorTarget.Auto(typeof(Generic<>));
 
       //note here - using MakeGenericType is the only way to get a reference to a type like IFoo<IFoo<>> because
@@ -138,7 +138,7 @@ namespace Rezolver.Tests
     {
       //subtle different between how this one is registered versus the previous test
       // - registers for IGeneric<IGeneric<T>> instead of IGeneric<T>
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       var target = GenericConstructorTarget.Auto(typeof(GenericGeneric<>));
       builder.Register(target, typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
       var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
@@ -159,7 +159,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldSupportRegisteringMultipleImplementationsOfTheSameType()
     {
-      ITargetContainer builder = new Builder();
+      ITargetContainer builder = new TargetContainer();
       builder.RegisterMultiple(new[] { ConstructorTarget.Auto<MultipleRegistration1>(), ConstructorTarget.Auto<MultipleRegistration1>() }, typeof(IMultipleRegistration));
 
       var fetched = builder.Fetch(typeof(IEnumerable<IMultipleRegistration>));

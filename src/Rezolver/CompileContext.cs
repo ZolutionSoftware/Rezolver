@@ -208,7 +208,7 @@ namespace Rezolver
       _compilingTargets = parentContext._compilingTargets;
       _rezolveContextParameter = parentContext._rezolveContextParameter;
 
-      _dependencyTargetContainer = new ChildBuilder(parentContext._dependencyTargetContainer);
+      _dependencyTargetContainer = new ChildTargetContainer(parentContext._dependencyTargetContainer);
       _sharedExpressions = inheritSharedExpressions ? parentContext._sharedExpressions : new Dictionary<SharedExpressionKey, Expression>();
       _suppressScopeTracking = suppressScopeTracking;
     }
@@ -220,7 +220,7 @@ namespace Rezolver
     /// <param name="dependencyTargetContainer">Required - An <see cref="ITargetContainer"/> that contains the <see cref="ITarget"/>s that 
     /// will be required to complete compilation.
     /// 
-    /// Note - this argument is passed to a new <see cref="ChildBuilder"/> that is created and proxied by this class' implementation 
+    /// Note - this argument is passed to a new <see cref="ChildTargetContainer"/> that is created and proxied by this class' implementation 
     /// of <see cref="ITargetContainer"/>.
     /// 
     /// As a result, it's possible to register new targets directly into the context via the <see cref="Register(ITarget, Type)"/> method,
@@ -240,7 +240,7 @@ namespace Rezolver
       container.MustNotBeNull(nameof(container));
       dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
       Container = container;
-      _dependencyTargetContainer = new ChildBuilder(dependencyTargetContainer);
+      _dependencyTargetContainer = new ChildTargetContainer(dependencyTargetContainer);
       _targetType = targetType;
       _rezolveContextParameter = rezolveContextParameter;
       _compilingTargets = new Stack<ITarget>(compilingTargets ?? Enumerable.Empty<ITarget>());

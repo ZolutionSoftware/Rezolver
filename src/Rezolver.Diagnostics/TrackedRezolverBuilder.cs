@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Rezolver.Diagnostics
 {
-  public class TrackedRezolverBuilder : Builder
+  public class TrackedRezolverBuilder : TargetContainer
   {
     private readonly int _id = TrackingUtils.NextBuilderID();
 

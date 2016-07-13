@@ -11,7 +11,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldUseFallback()
     {
-      var builder = new Builder();
+      var builder = new TargetContainer();
       //have to register as object because otherwise we get a cyclic dependency
       builder.Register(new RezolvedTarget(typeof(int), (157).AsObjectTarget()), typeof(object));
       var container = new Container(builder);
@@ -25,7 +25,7 @@ namespace Rezolver.Tests
     {
       //this test demonstrates that a ResolvedTarget defined in a root container
       //can be satisfied by an overriding container registration even when a fallback exists
-      var builder = new Builder();
+      var builder = new TargetContainer();
       builder.Register(new RezolvedTarget(typeof(int), (157).AsObjectTarget()), typeof(object));
       var container = new Container(builder);
       //create a CombinedContainer - which combines a new container with an existing one.
@@ -40,7 +40,7 @@ namespace Rezolver.Tests
     {
       //this test makes sure that the fallback is used when an overriding container
       //is present and can't satisfy the request
-      var builder = new Builder();
+      var builder = new TargetContainer();
       builder.Register(new RezolvedTarget(typeof(int), (157).AsObjectTarget()), typeof(object));
       var container = new Container(builder);
       var overridingContainer = new OverridingContainer(container);

@@ -9,20 +9,17 @@ using System.Linq;
 namespace Rezolver
 {
   /// <summary>
-  ///	A Builder which acts as a child of another builder.
-  /// 
-  /// When it's looking to find an entry for a type, if it
-  /// cannot find one within its own registrations, it will forward the call on to
-  /// its <see cref="Parent"/>.
-  /// 
-  /// This means that a child builder can override any registrations that
-  /// are present in its parent.
+  /// A version of <see cref="TargetContainer"/> which overrides the registrations of another 
+  /// (the <see cref="Parent"/>).
   /// </summary>
-  public class ChildBuilder : Builder, IChildTargetContainer
+  /// <remarks>When it's looking to find an entry for a type, if it
+  /// cannot find one within its own registrations, it will forward the call on to
+  /// its <see cref="Parent"/>.</remarks>
+  public class ChildTargetContainer : TargetContainer, IChildTargetContainer
   {
     private readonly ITargetContainer _parent;
 
-    public ChildBuilder(ITargetContainer parent)
+    public ChildTargetContainer(ITargetContainer parent)
     {
       parent.MustNotBeNull(nameof(parent));
       _parent = parent;

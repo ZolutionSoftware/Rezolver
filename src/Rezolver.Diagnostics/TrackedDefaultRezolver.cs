@@ -11,11 +11,11 @@ using System.Text;
 namespace Rezolver.Diagnostics
 {
   /// <summary>
-  /// A rezolver that logs all calls through the IRezolver interface to aid debugging.
+  /// A container that logs all calls through the IRezolver interface to aid debugging.
   /// </summary>
   public class TrackedDefaultRezolver : Container
   {
-    private readonly int _id = TrackingUtils.NextRezolverID();
+    private readonly int _id = TrackingUtils.NextContainerID();
 
     public override string ToString()
     {

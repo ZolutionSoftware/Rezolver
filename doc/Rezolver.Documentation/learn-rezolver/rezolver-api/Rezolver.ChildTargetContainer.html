@@ -5,10 +5,10 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Class ChildBuilder
+  	<title>Class ChildTargetContainer
    </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Class ChildBuilder
+  	<meta name="title" content="Class ChildTargetContainer
    ">
   	<meta name="generator" content="docfx 2.0.1.0">
   	
@@ -90,44 +90,40 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content">
               
-              <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildBuilder.md&amp;value=---%0Auid%3A%20Rezolver.ChildBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
+              <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildTargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
               
-              <h1 id="Rezolver_ChildBuilder" data-uid="Rezolver.ChildBuilder">Class ChildBuilder
+              <h1 id="Rezolver_ChildTargetContainer" data-uid="Rezolver.ChildTargetContainer">Class ChildTargetContainer
               </h1>
-              <div class="markdown level0 summary"><p>A Builder which acts as a child of another builder.</p>
-<p>When it&#39;s looking to find an entry for a type, if it
-cannot find one within its own registrations, it will forward the call on to
-its <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder_Parent">Parent</a>.</p>
-<p>This means that a child builder can override any registrations that
-are present in its parent.</p>
+              <div class="markdown level0 summary"><p>A version of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> which overrides the registrations of another 
+(the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
                   <div class="level0"><span class="xref">System.Object</span></div>
                   <div class="level1"><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer">TargetDictionaryContainer</a></div>
-                  <div class="level2"><a class="xref" href="Rezolver.Builder.html#Rezolver_Builder">Builder</a></div>
-                  <div class="level3"><span class="xref">ChildBuilder</span></div>
+                  <div class="level2"><a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a></div>
+                  <div class="level3"><span class="xref">ChildTargetContainer</span></div>
               </div>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder_CreateContainer_System_Type_Rezolver_ITarget_">CreateContainer(Type, ITarget)</a>
+                  <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_CreateContainer_System_Type_Rezolver_ITarget_">CreateContainer(Type, ITarget)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder_CreateGenericTypeDefContainer_System_Type_Rezolver_ITarget_">CreateGenericTypeDefContainer(Type, ITarget)</a>
+                  <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_CreateGenericTypeDefContainer_System_Type_Rezolver_ITarget_">CreateGenericTypeDefContainer(Type, ITarget)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder_FetchContainer_System_Type_">FetchContainer(Type)</a>
+                  <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_FetchContainer_System_Type_">FetchContainer(Type)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>
+                  <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>
+                  <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder_RegisterContainerDirect_System_Type_Rezolver_ITargetContainer_">RegisterContainerDirect(Type, ITargetContainer)</a>
+                  <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_RegisterContainerDirect_System_Type_Rezolver_ITargetContainer_">RegisterContainerDirect(Type, ITargetContainer)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a>
@@ -156,25 +152,30 @@ are present in its parent.</p>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_ChildBuilder_syntax" class="hsyntax">Syntax</h5>
+              <h5 id="Rezolver_ChildTargetContainer_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class ChildBuilder : Builder, ITargetContainerOwner, IChildTargetContainer, ITargetContainer</code></pre>
+                <pre><code class="lang-csharp hljs">public class ChildTargetContainer : TargetContainer, ITargetContainerOwner, IChildTargetContainer, ITargetContainer</code></pre>
               </div>
+              <h5 id="Rezolver_ChildTargetContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>When it&#39;s looking to find an entry for a type, if it
+cannot find one within its own registrations, it will forward the call on to
+its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildBuilder__ctor_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ChildBuilder.%23ctor(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildTargetContainer__ctor_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.%23ctor(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_ChildBuilder__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.ChildBuilder.#ctor(Rezolver.ITargetContainer)">ChildBuilder(ITargetContainer)</h4>
+              <h4 class="hmember" id="Rezolver_ChildTargetContainer__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.ChildTargetContainer.#ctor(Rezolver.ITargetContainer)">ChildTargetContainer(ITargetContainer)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ChildBuilder(ITargetContainer parent)</code></pre>
+                <pre><code class="lang-csharp hljs">public ChildTargetContainer(ITargetContainer parent)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -200,10 +201,10 @@ are present in its parent.</p>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildBuilder_Parent.md&amp;value=---%0Auid%3A%20Rezolver.ChildBuilder.Parent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildTargetContainer_Parent.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.Parent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_ChildBuilder_Parent" data-uid="Rezolver.ChildBuilder.Parent">Parent</h4>
+              <h4 class="hmember" id="Rezolver_ChildTargetContainer_Parent" data-uid="Rezolver.ChildTargetContainer.Parent">Parent</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -234,10 +235,10 @@ are present in its parent.</p>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildBuilder_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ChildBuilder.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildTargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_ChildBuilder_Fetch_System_Type_" data-uid="Rezolver.ChildBuilder.Fetch(System.Type)">Fetch(Type)</h4>
+              <h4 class="hmember" id="Rezolver_ChildTargetContainer_Fetch_System_Type_" data-uid="Rezolver.ChildTargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -284,10 +285,10 @@ are present in its parent.</p>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildBuilder_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ChildBuilder.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ChildTargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_ChildBuilder_FetchAll_System_Type_" data-uid="Rezolver.ChildBuilder.FetchAll(System.Type)">FetchAll(Type)</h4>
+              <h4 class="hmember" id="Rezolver_ChildTargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ChildTargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>

@@ -11,7 +11,7 @@ namespace Rezolver.Configuration
 {
   /// <summary>
   /// Standard implementation of <see cref="ObjectTargetMetadataBase"/>, to encapsulate object references
-  /// that are to be baked into a rezolver as targets.
+  /// that are to be baked into a container as targets.
   /// </summary>
   /// <remarks>
   /// This class accepts either an object reference 

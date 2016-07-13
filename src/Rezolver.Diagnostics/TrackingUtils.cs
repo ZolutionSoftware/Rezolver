@@ -26,9 +26,9 @@ namespace Rezolver.Diagnostics
       }
     }
 
-    public static int NextRezolverID()
+    public static int NextContainerID()
     {
-      return NextID("rezolver");
+      return NextID("container");
     }
 
     public static int NextBuilderID()

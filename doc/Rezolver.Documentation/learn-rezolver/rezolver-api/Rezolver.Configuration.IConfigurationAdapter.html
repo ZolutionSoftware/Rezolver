@@ -94,7 +94,7 @@
               
               <h1 id="Rezolver_Configuration_IConfigurationAdapter" data-uid="Rezolver.Configuration.IConfigurationAdapter">Interface IConfigurationAdapter
               </h1>
-              <div class="markdown level0 summary"><p>Creates an IRezolveTargetContainer instance from an IConfiguration instance.</p>
+              <div class="markdown level0 summary"><p>Represents an object that is responsible for transforming configuration data into target containers.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <h6><strong>Namespace</strong>:Rezolver.Configuration</h6>
@@ -109,15 +109,16 @@
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_IConfigurationAdapter_CreateBuilder_Rezolver_Configuration_IConfiguration_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.IConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_IConfigurationAdapter_CreateTargetContainer_Rezolver_Configuration_IConfiguration_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.IConfigurationAdapter.CreateTargetContainer(Rezolver.Configuration.IConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
-              <h4 class="hmember" id="Rezolver_Configuration_IConfigurationAdapter_CreateBuilder_Rezolver_Configuration_IConfiguration_" data-uid="Rezolver.Configuration.IConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)">CreateBuilder(IConfiguration)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 class="hmember" id="Rezolver_Configuration_IConfigurationAdapter_CreateTargetContainer_Rezolver_Configuration_IConfiguration_" data-uid="Rezolver.Configuration.IConfigurationAdapter.CreateTargetContainer(Rezolver.Configuration.IConfiguration)">CreateTargetContainer(IConfiguration)</h4>
+              <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance from an <a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a> instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">ITargetContainer CreateBuilder(IConfiguration configuration)</code></pre>
+                <pre><code class="lang-csharp hljs">ITargetContainer CreateTargetContainer(IConfiguration configuration)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -132,7 +133,8 @@
                   <tr>
                     <td><em>configuration</em></td>
                     <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
-                    <td></td>
+                    <td><p>Required - the configuration object that is to be used to build a container.</p>
+</td>
                   </tr>
                 </tbody>
               </table>

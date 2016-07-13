@@ -74,7 +74,7 @@ namespace Rezolver.Tests.Compilation
     protected ITargetContainer GetTargetContainer([CallerMemberName]string callingMethod = null)
     {
       if (_currentBuilder != null) return _currentBuilder;
-      return _currentBuilder = new Builder();
+      return _currentBuilder = new TargetContainer();
     }
 
     /// <summary>

@@ -34,7 +34,7 @@ namespace Rezolver.Diagnostics
   /// To track calls to a <see cref="Container"/>, swap it with <see cref="TrackedDefaultRezolver"/>
   /// To track calls to a <see cref="ScopedContainer"/>, swap it with <see cref="TrackedLifetimeScopeResolver"/>
   /// To track calls to a <see cref="OverridingScopedContainer"/>, swap it with <see cref="TrackedCombinedLifetimeScopeRezolver"/>
-  /// To track calls to a <see cref="Builder"/>, swap it with <see cref="TrackedRezolverBuilder"/>
+  /// To track calls to a <see cref="TargetContainer"/>, swap it with <see cref="TrackedRezolverBuilder"/>
   /// 
   /// Each of these types requires a reference to this interface that will receive tracking calls for each suitable method or operation.
   /// </remarks>

@@ -137,7 +137,7 @@ you can use as the starting point of your own factory.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Configuration.ObjectTargetMetadata.html#Rezolver_Configuration_ObjectTargetMetadata">ObjectTargetMetadata</a></h4>
                   <section><p>Standard implementation of <a class="xref" href="Rezolver.Configuration.ObjectTargetMetadataBase.html#Rezolver_Configuration_ObjectTargetMetadataBase">ObjectTargetMetadataBase</a>, to encapsulate object references
-that are to be baked into a rezolver as targets.</p>
+that are to be baked into a container as targets.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Configuration.ObjectTargetMetadataBase.html#Rezolver_Configuration_ObjectTargetMetadataBase">ObjectTargetMetadataBase</a></h4>
                   <section><p>Abstract base class for metadata that builds an object target.</p>
@@ -153,7 +153,7 @@ method.  Construction is largely identical, except where in the aforementioned c
 pass multiple targets in a list.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Configuration.RezolverBuilderInstruction.html#Rezolver_Configuration_RezolverBuilderInstruction">RezolverBuilderInstruction</a></h4>
-                  <section><p>An instruction to perform an operation on a rezolver builder from an IConfigurationEntry that&#39;s
+                  <section><p>An instruction to perform an operation on a container builder from an IConfigurationEntry that&#39;s
 been parsed from a configuration source (and which has been retrieved from an IConfiguration instance).</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Configuration.RezolveTargetMetadataBase.html#Rezolver_Configuration_RezolveTargetMetadataBase">RezolveTargetMetadataBase</a></h4>
@@ -184,7 +184,7 @@ resolving types.</p>
                   <h4><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.Configuration.IConfigurationAdapter.html#Rezolver_Configuration_IConfigurationAdapter">IConfigurationAdapter</a></h4>
-                  <section><p>Creates an IRezolveTargetContainer instance from an IConfiguration instance.</p>
+                  <section><p>Represents an object that is responsible for transforming configuration data into target containers.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Configuration.IConfigurationAdapterContextFactory.html#Rezolver_Configuration_IConfigurationAdapterContextFactory">IConfigurationAdapterContextFactory</a></h4>
                   <section><p>Used by this library&#39;s default implementation of IConfigurationAdapter, the ConfigurationAdapter class, 

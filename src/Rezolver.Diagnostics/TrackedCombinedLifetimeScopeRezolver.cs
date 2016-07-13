@@ -11,7 +11,7 @@ namespace Rezolver.Diagnostics
 {
   public class TrackedCombinedLifetimeScopeRezolver : OverridingScopedContainer
   {
-    private readonly int _id = TrackingUtils.NextRezolverID();
+    private readonly int _id = TrackingUtils.NextContainerID();
 
     public override string ToString()
     {

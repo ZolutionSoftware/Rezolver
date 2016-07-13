@@ -20,7 +20,7 @@ namespace Rezolver
   /// in its <see cref="IContainer.Resolve(RezolveContext)"/> method via it's <see cref="IContainer.Targets"/> property.
   /// 
   /// Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
-  /// are <see cref="Builder"/> and <see cref="ChildBuilder"/>.</remarks>
+  /// are <see cref="TargetContainer"/> and <see cref="ChildTargetContainer"/>.</remarks>
   public interface ITargetContainer
   {
     /// <summary>
@@ -32,7 +32,7 @@ namespace Rezolver
     /// from the <see cref="ITarget.DeclaredType"/> of the <paramref name="target"/>.  If provided, then the <paramref name="target"/>
     /// must be compatible with this type.</param>
     /// <remarks>The interface does not define the behaviour for when multiple targets are registered against the same type - although
-    /// the default behaviour of the framework (via the <see cref="Builder"/> class) is to allow this, with the last registered target 
+    /// the default behaviour of the framework (via the <see cref="TargetContainer"/> class) is to allow this, with the last registered target 
     /// being treated as the 'default' for that type.
     /// 
     /// The only guarantee expected by the framework from implementations of this interface is that if a target is registered against

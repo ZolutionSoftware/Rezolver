@@ -11,7 +11,7 @@ namespace Rezolver.Tests
     [Fact]
     public void AliasShouldWorkForBaseTypes()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterObject(1);
       builder.RegisterAlias<object, int>();
 
@@ -25,7 +25,7 @@ namespace Rezolver.Tests
     [Fact]
     public void AliasShouldWorkForDerivedTypes()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterObject(1, typeof(object));
       builder.RegisterAlias<int, object>();
 
@@ -57,7 +57,7 @@ namespace Rezolver.Tests
     [Fact]
     public void AliasShouldYieldSameSingleton()
     {
-      Builder builder = new Builder();
+      TargetContainer builder = new TargetContainer();
       builder.RegisterSingleton<SingletonTest>();
       builder.RegisterAlias<ISingletonTest, SingletonTest>();
 

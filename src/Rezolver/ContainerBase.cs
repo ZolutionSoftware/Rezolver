@@ -59,7 +59,7 @@ namespace Rezolver
 
     protected ContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)
     {
-      Targets = targets ?? new Builder();
+      Targets = targets ?? new TargetContainer();
       Compiler = compiler ?? TargetCompiler.Default;
 
     }

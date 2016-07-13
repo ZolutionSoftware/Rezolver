@@ -10,10 +10,15 @@ using System.Text;
 namespace Rezolver.Configuration
 {
   /// <summary>
-  /// Creates an IRezolveTargetContainer instance from an IConfiguration instance.
+  /// Represents an object that is responsible for transforming configuration data into target containers.
   /// </summary>
   public interface IConfigurationAdapter
   {
-    ITargetContainer CreateBuilder(IConfiguration configuration);
+    /// <summary>
+    /// Creates an <see cref="ITargetContainer"/> instance from an <see cref="IConfiguration"/> instance.
+    /// </summary>
+    /// <param name="configuration">Required - the configuration object that is to be used to build a container.</param>
+    /// <returns></returns>
+    ITargetContainer CreateTargetContainer(IConfiguration configuration);
   }
 }

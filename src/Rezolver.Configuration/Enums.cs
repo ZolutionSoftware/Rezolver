@@ -78,7 +78,7 @@ namespace Rezolver.Configuration
     /// metadata objects.
     /// 
     /// Can be created to feed a multiple instance registration
-    /// for a single type (e.g. registering multiple instances of IFoo to a rezolver, so that you can resolve all
+    /// for a single type (e.g. registering multiple instances of IFoo to a container, so that you can resolve all
     /// of them by resolving IEnumerable&lt;IFoo&gt;), or simply as a collection of targets that are to be used to build an 
     /// array that is to be passed as a constructor argument or property.
     /// </summary>

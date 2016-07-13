@@ -10,7 +10,7 @@ using System.Text;
 namespace Rezolver.Configuration
 {
   /// <summary>
-  /// An instruction to perform an operation on a rezolver builder from an IConfigurationEntry that's
+  /// An instruction to perform an operation on a container builder from an IConfigurationEntry that's
   /// been parsed from a configuration source (and which has been retrieved from an IConfiguration instance).
   /// </summary>
   public abstract class RezolverBuilderInstruction

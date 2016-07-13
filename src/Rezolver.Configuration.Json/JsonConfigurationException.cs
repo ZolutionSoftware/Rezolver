@@ -12,7 +12,7 @@ using System.Text;
 namespace Rezolver.Configuration.Json
 {
   /// <summary>
-  /// Thrown when a Json rezolver configuration file is invalid.
+  /// Thrown when a Json container configuration file is invalid.
   /// </summary>
   public class JsonConfigurationException : Exception
   {

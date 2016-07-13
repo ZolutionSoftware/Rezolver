@@ -9,6 +9,9 @@ using System.Linq;
 namespace Rezolver
 {
   /// <summary>
+  /// Root container for <see cref="ITarget"/>s that can be used as the backing for the standard
+  /// <see cref="IContainer"/> classes - <see cref="Container"/>, <see cref="ScopedContainer"/>, and the 
+  /// 
   /// Stores and retrieves registrations of <see cref="ITarget"/>s, is also Generic type aware,
   /// unlike its base class - <see cref="TargetDictionaryContainer"/>.
   /// 
@@ -17,17 +20,17 @@ namespace Rezolver
   /// <remarks>This is the type used by default for the <see cref="IContainer.Targets"/> of the 
   /// <see cref="Container"/> and <see cref="ScopedContainer"/> when you don't supply an instance of an 
   /// <see cref="ITargetContainer"/> explicitly on construction.</remarks>
-  public class Builder : TargetDictionaryContainer
+  public class TargetContainer : TargetDictionaryContainer
   {
     /// <summary>
-    /// Constructs a new instance of the <see cref="Builder"/> class
+    /// Constructs a new instance of the <see cref="TargetContainer"/> class
     /// </summary>
     /// <param name="autoRezolveIEnumerable">If true, then <see cref="IEnumerable{T}"/> will be automatically
     /// resolved as a concatenation of all the <see cref="ITarget"/>s that are registered against a particular type.
     /// 
     /// Note - this parameter might be removed in a future version - you can achieve the same thing by using the
-    /// extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(Builder)"/></param>
-    public Builder(bool autoRezolveIEnumerable = true)
+    /// extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(TargetContainer)"/></param>
+    public TargetContainer(bool autoRezolveIEnumerable = true)
     {
       //TODO: Change this 
       if (autoRezolveIEnumerable)

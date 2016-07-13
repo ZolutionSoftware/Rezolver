@@ -55,11 +55,11 @@ namespace Rezolver.Tests.Configuration
 			IConfiguration configuration = parser.Parse(json);
 			//use the defaul adapter
 			IConfigurationAdapter adapter = new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
-			var builder = adapter.CreateBuilder(configuration);
+			var targetContainer = adapter.CreateTargetContainer(configuration);
 
-			Assert.IsType<Builder>(builder);
+			Assert.IsType<TargetContainer>(targetContainer);
 
-			var container = new Container(builder, new TargetAssemblyCompiler());
+			var container = new Container(targetContainer, new TargetAssemblyCompiler());
 			var str = container.Resolve<string>();
 			Assert.Equal("Hello world", str);
 			var en = container.Resolve<IEnumerable<int>>();

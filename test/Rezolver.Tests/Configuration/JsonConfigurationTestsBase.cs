@@ -27,7 +27,7 @@ namespace Rezolver.Tests.Configuration
       Console.WriteLine(json);
       var parsed = parser.Parse(json);
       var adapter = CreateAdapter();
-      var builder = adapter.CreateBuilder(parsed);
+      var builder = adapter.CreateTargetContainer(parsed);
       var container = CreateRezolver(builder);
       return container;
     }

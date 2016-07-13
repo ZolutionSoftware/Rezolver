@@ -6,22 +6,22 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-  public class ChildBuilderTests
+  public class ChildTargetContainerTests
   {
     [Fact]
     public void MustNotAllowNullParent()
     {
       Assert.Throws<ArgumentNullException>(() =>
       {
-        IChildTargetContainer builder = new ChildBuilder(null);
+        IChildTargetContainer builder = new ChildTargetContainer(null);
       });
     }
 
     [Fact]
     public void MustCopyParent()
     {
-      var parent = new Builder();
-      IChildTargetContainer childBuilder = new ChildBuilder(parent);
+      var parent = new TargetContainer();
+      IChildTargetContainer childBuilder = new ChildTargetContainer(parent);
       Assert.Same(parent, childBuilder.Parent);
     }
 

@@ -290,77 +290,6 @@ and acts as the target for the processing instructions.</p>
               <div class="classchild">
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapter_CreateBuilder_Rezolver_Configuration_IConfiguration_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              
-              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationAdapter_CreateBuilder_Rezolver_Configuration_IConfiguration_" data-uid="Rezolver.Configuration.ConfigurationAdapter.CreateBuilder(Rezolver.Configuration.IConfiguration)">CreateBuilder(IConfiguration)</h4>
-              <div class="markdown level1 summary"><p>Attempts to create an IRezolveTargetContainer instance from the passed configuration object.</p>
-<p>If the operation succeeds, then a builder will be returned, which you can then use to construct a new
-Rezolver.  If the operation fails, then a <a class="xref" href="Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException">ConfigurationException</a> will be thrown.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual ITargetContainer CreateBuilder(IConfiguration configuration)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>configuration</em></td>
-                    <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
-                    <td><p>The parsed configuration to be loaded.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td><p>An IRezolveTargetContainer instance ready to be used to construct a new IRezolver.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="himplements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.Configuration.IConfigurationAdapter.html#Rezolver_Configuration_IConfigurationAdapter_CreateBuilder_Rezolver_Configuration_IConfiguration_">CreateBuilder(IConfiguration)</a></div>
-              <h5 class="hexceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException">ConfigurationException</a></td>
-                    <td><p>If any part of the passed configuration is invalid (e.g.
-bad type references) or cannot be handled by this adapter (e.g. custom IConfigurationEntry instances or
-custom IRezolveTargetMetadata instances).</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
                 <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapter_CreateBuilderInstance_Rezolver_Configuration_IConfiguration_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapter.CreateBuilderInstance(Rezolver.Configuration.IConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               
@@ -408,7 +337,7 @@ custom IRezolveTargetMetadata instances).</p>
               <h5 class="hremarks" id="Rezolver_Configuration_ConfigurationAdapter_CreateBuilderInstance_Rezolver_Configuration_IConfiguration__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>No parsing of the configuration is to be done here (except, perhaps, if the actual implementation of </p>
 <p><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> that is used is dependant upon, say, the type of configuration object.</p>
-<p>The base behaviour is simply to create an instance of <a class="xref" href="Rezolver.Builder.html#Rezolver_Builder">Builder</a>.</p>
+<p>The base behaviour is simply to create an instance of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a>.</p>
 </div>
               </div><!-- .classchild -->
               <div class="classchild">
@@ -455,6 +384,77 @@ custom IRezolveTargetMetadata instances).</p>
                   <tr>
                     <td><a class="xref" href="Rezolver.Configuration.ConfigurationAdapterContext.html#Rezolver_Configuration_ConfigurationAdapterContext">ConfigurationAdapterContext</a></td>
                     <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationAdapter_CreateTargetContainer_Rezolver_Configuration_IConfiguration_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationAdapter.CreateTargetContainer(Rezolver.Configuration.IConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationAdapter_CreateTargetContainer_Rezolver_Configuration_IConfiguration_" data-uid="Rezolver.Configuration.ConfigurationAdapter.CreateTargetContainer(Rezolver.Configuration.IConfiguration)">CreateTargetContainer(IConfiguration)</h4>
+              <div class="markdown level1 summary"><p>Attempts to create an IRezolveTargetContainer instance from the passed configuration object.</p>
+<p>If the operation succeeds, then a builder will be returned, which you can then use to construct a new
+Rezolver.  If the operation fails, then a <a class="xref" href="Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException">ConfigurationException</a> will be thrown.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public virtual ITargetContainer CreateTargetContainer(IConfiguration configuration)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>configuration</em></td>
+                    <td><a class="xref" href="Rezolver.Configuration.IConfiguration.html#Rezolver_Configuration_IConfiguration">IConfiguration</a></td>
+                    <td><p>The parsed configuration to be loaded.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hreturns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><p>An IRezolveTargetContainer instance ready to be used to construct a new IRezolver.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.Configuration.IConfigurationAdapter.html#Rezolver_Configuration_IConfigurationAdapter_CreateTargetContainer_Rezolver_Configuration_IConfiguration_">CreateTargetContainer(IConfiguration)</a></div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationException.html#Rezolver_Configuration_ConfigurationException">ConfigurationException</a></td>
+                    <td><p>If any part of the passed configuration is invalid (e.g.
+bad type references) or cannot be handled by this adapter (e.g. custom IConfigurationEntry instances or
+custom IRezolveTargetMetadata instances).</p>
+</td>
                   </tr>
                 </tbody>
               </table>

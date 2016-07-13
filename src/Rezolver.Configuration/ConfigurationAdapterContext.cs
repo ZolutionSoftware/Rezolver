@@ -323,7 +323,7 @@ namespace Rezolver.Configuration
     /// <summary>
     /// Resolves a particular type name given this context's assembly references and, potentially, any namespace imports.
     /// 
-    /// This is designed to be used by a configuration adapter during the process of creating a rezolver builder from a set of
+    /// This is designed to be used by a configuration adapter during the process of creating a container builder from a set of
     /// configuration entries.
     /// </summary>
     /// <param name="typeName">The typename </param>

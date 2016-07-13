@@ -98,11 +98,6 @@
               <div class="markdown level0 remarks"></div>
                 <h3 id="classes">Classes
               </h3>
-                  <h4><a class="xref" href="Rezolver.Builder.html#Rezolver_Builder">Builder</a></h4>
-                  <section><p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s, is also Generic type aware,
-unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer">TargetDictionaryContainer</a>.</p>
-<p>Should be used as the root target container for implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.</p>
-</section>
                   <h4><a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase">CachingContainerBase</a></h4>
                   <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> base to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
 </section>
@@ -111,13 +106,9 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
 <p>It&#39;s effectively the same as inserting a ConvertExpression around another Expression tree</p>
 <p>Its use is rare.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder">ChildBuilder</a></h4>
-                  <section><p>A Builder which acts as a child of another builder.</p>
-<p>When it&#39;s looking to find an entry for a type, if it
-cannot find one within its own registrations, it will forward the call on to
-its <a class="xref" href="Rezolver.ChildBuilder.html#Rezolver_ChildBuilder_Parent">Parent</a>.</p>
-<p>This means that a child builder can override any registrations that
-are present in its parent.</p>
+                  <h4><a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer">ChildTargetContainer</a></h4>
+                  <section><p>A version of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> which overrides the registrations of another 
+(the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></h4>
                   <section><p>Provides support and compile-time state for the compilation of an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> by an <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a>.
@@ -289,6 +280,13 @@ compiler that should work on any platform which supports linq expression trees.<
                   <section></section>
                   <h4><a class="xref" href="Rezolver.TargetCompilerHelper.RedundantConvertRemover.html#Rezolver_TargetCompilerHelper_RedundantConvertRemover">TargetCompilerHelper.RedundantConvertRemover</a></h4>
                   <section></section>
+                  <h4><a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a></h4>
+                  <section><p>Root container for <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s that can be used as the backing for the standard</p>
+<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> classes - <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a>, <a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer">ScopedContainer</a>, and the </p>
+<p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s, is also Generic type aware,
+unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer">TargetDictionaryContainer</a>.</p>
+<p>Should be used as the root target container for implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.TargetDelegateCompiler.html#Rezolver_TargetDelegateCompiler">TargetDelegateCompiler</a></h4>
                   <section><p>The default compiler for <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances - takes the expression tree(s) produced by an</p>
 <p><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> and simply compiles it to an anonymous delegate.</p>
@@ -307,8 +305,7 @@ custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html#Rezolver_
                 <h3 id="interfaces">Interfaces
               </h3>
                   <h4><a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer">IChildTargetContainer</a></h4>
-                  <section><p>An IRezolveTargetContainer that is a logical child of another.  Typically, a child container, 
-if it cannot resolve a particular type, will defer to its parent for fallback.</p>
+                  <section><p>An IRezolveTargetContainer that is a logical child of another.<br>A child container, if it cannot resolve a particular type, will defer to its parent for fallback.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a></h4>
                   <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
