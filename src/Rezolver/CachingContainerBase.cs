@@ -32,11 +32,11 @@ namespace Rezolver
     /// <param name="targets">Optional. Contains the targets that will be used to create the <see cref="ICompiledTarget"/>s that this container will use to produce objects
     /// when requested.
     /// 
-    /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, ITargetCompiler)"/> will be used.</param>
+    /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, ITargetCompiler)"/>) will be used.</param>
     /// <param name="compiler">Optional.  The compiler that will be used to compile the <see cref="ITarget"/>s in the <paramref name="targets"/> container into
     /// <see cref="ICompiledTarget"/>s.
     /// 
-    /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, ITargetCompiler)"/> will be used.</param>
+    /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, ITargetCompiler)"/>) will be used.</param>
     protected CachingContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)
       : base(targets, compiler)
     {
