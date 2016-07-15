@@ -11,7 +11,10 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
   /// <summary>
-  /// Implements decoration in an <see cref="ITargetContainer"/>
+  /// Implements service decoration in an <see cref="ITargetContainer"/>.
+  /// 
+  /// The best way to add a decorator to your target container is to use the extension method <see cref="ITargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainerOwner)"/>
+  /// or its non-generic equivalent.
   /// </summary>
   public class DecoratorTarget : ITargetContainerOwner
   {

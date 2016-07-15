@@ -1,0 +1,9 @@
+{
+  "commands": {
+    "dnupackage": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c package.bat"
+    }
+  }
+}

@@ -99,7 +99,8 @@
                 <h3 id="classes">Classes
               </h3>
                   <h4><a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase">CachingContainerBase</a></h4>
-                  <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> base to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
+                  <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
+<p>Only creatable through inheritance.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget">ChangeTypeTarget</a></h4>
                   <section><p>This target is specifically used for explicitly typing another target.</p>
@@ -140,7 +141,9 @@ you can also use the factory methods - such as <a class="xref" href="Rezolver.Co
                   <h4><a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget">ContainerBase.MissingCompiledTarget</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a></h4>
-                  <section><p>Implements decoration in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></p>
+                  <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
+<p>The best way to add a decorator to your target container is to use the extension method <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator<tdecorator, tdecorated="">(ITargetContainerOwner)</tdecorator,></a>
+or its non-generic equivalent.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour">DefaultPropertyBindingBehaviour</a></h4>
                   <section></section>

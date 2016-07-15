@@ -6,13 +6,14 @@ reference for all of the APIs and functionality in the Rezolver library.
 ## What is Rezolver?
 
 Rezolver is (yet another :)) open source IOC container.  It supports many of the features supported by most
-other popular IOC containers out there, integrates into the new .Net Core 1.0 framework (and therefore supports
-Asp.Net Core), and supports some unique functionality too.
+other popular IOC containers out there, integrates into the new .Net Core 1.0 framework (supporting NetStandard1.1) 
+(and therefore supports Asp.Net Core), and supports some unique functionality too.
 
-It's very fast, extensible and reliable, and should slot nicely into any project in which you've already got
+It's very fast, extensible and reliable, and should slot nicely into any project in which you already have
 another IOC container.
 
 ## Quick Links
 
-[Developer Usage Guide](rezolver-usage/)
-[API Reference](rezolver-api/)
+- [Getting Started](rezolver-usage/)
+- [Nuget Packages](rezolver-usage/nuget-packages/)
+- [API Reference](rezolver-api/)

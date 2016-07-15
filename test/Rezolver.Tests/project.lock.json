@@ -2482,59 +2482,59 @@
       },
       "Rezolver/1.0.0-alpha-2": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.3",
+        "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "System.ComponentModel": "4.0.1"
         },
         "compile": {
-          "netstandard1.3/Rezolver.dll": {}
+          "netstandard1.1/Rezolver.dll": {}
         },
         "runtime": {
-          "netstandard1.3/Rezolver.dll": {}
+          "netstandard1.1/Rezolver.dll": {}
         }
       },
       "Rezolver.Configuration/1.0.10-alpha-1": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.3",
+        "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Rezolver": "1.0.0-alpha"
         },
         "compile": {
-          "netstandard1.3/Rezolver.Configuration.dll": {}
+          "netstandard1.1/Rezolver.Configuration.dll": {}
         },
         "runtime": {
-          "netstandard1.3/Rezolver.Configuration.dll": {}
+          "netstandard1.1/Rezolver.Configuration.dll": {}
         }
       },
       "Rezolver.Configuration.Json/1.0.10-alpha-1": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.3",
+        "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
           "Rezolver.Configuration": "1.0.10"
         },
         "compile": {
-          "netstandard1.3/Rezolver.Configuration.Json.dll": {}
+          "netstandard1.1/Rezolver.Configuration.Json.dll": {}
         },
         "runtime": {
-          "netstandard1.3/Rezolver.Configuration.Json.dll": {}
+          "netstandard1.1/Rezolver.Configuration.Json.dll": {}
         }
       },
       "Rezolver.Diagnostics/1.0.0-alpha-200": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.3",
+        "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "Rezolver": "1.0.0-alpha"
         },
         "compile": {
-          "netstandard1.3/Rezolver.Diagnostics.dll": {}
+          "netstandard1.1/Rezolver.Diagnostics.dll": {}
         },
         "runtime": {
-          "netstandard1.3/Rezolver.Diagnostics.dll": {}
+          "netstandard1.1/Rezolver.Diagnostics.dll": {}
         }
       }
     },
@@ -7985,7 +7985,9 @@
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.0"
     ],
-    ".NETFramework,Version=v4.5.1": []
+    ".NETFramework,Version=v4.5.1": [
+      "System.Linq.Expressions >= 4.0.0"
+    ]
   },
   "tools": {},
   "projectFileToolGroups": {}

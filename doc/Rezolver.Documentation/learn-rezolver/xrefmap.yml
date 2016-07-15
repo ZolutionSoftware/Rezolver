@@ -3029,11 +3029,11 @@ references:
   href: rezolver-api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration
   commentId: T:Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration
   fullName: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration
-- uid: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultRezolver(Rezolver.ITargetContainer)
-  name: CreateDefaultRezolver(ITargetContainer)
-  href: rezolver-api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration_CreateDefaultRezolver_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultRezolver(Rezolver.ITargetContainer)
-  fullName: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultRezolver(Rezolver.ITargetContainer)
+- uid: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultContainer(Rezolver.ITargetContainer)
+  name: CreateDefaultContainer(ITargetContainer)
+  href: rezolver-api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration_CreateDefaultContainer_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultContainer(Rezolver.ITargetContainer)
+  fullName: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.CreateDefaultContainer(Rezolver.ITargetContainer)
 - uid: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.Populate(Rezolver.ContainerBase,IServiceCollection)
   name: Populate(ContainerBase, IServiceCollection)
   href: rezolver-api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration_Populate_Rezolver_ContainerBase_IServiceCollection_

@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_CachingContainerBase" data-uid="Rezolver.CachingContainerBase">Class CachingContainerBase
               </h1>
-              <div class="markdown level0 summary"><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> base to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
+              <div class="markdown level0 summary"><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
+<p>Only creatable through inheritance.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -181,6 +182,13 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class CachingContainerBase : ContainerBase, IContainer, IServiceProvider, ITargetContainer</code></pre>
               </div>
+              <h5 id="Rezolver_CachingContainerBase_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>Internally, the class uses a <see cref="!:ConcurrentDictionary<TKey, TValue>"></see> to store <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s keyed by the requested type.</p>
+<p>All the main <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementations used directly in an application inherit from this class, because otherwise every <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
+operation would require a compilation phase before the object could be returned, which would be incredibly slow.</p>
+<p>It&#39;s because of this caching that registering new targets in any <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> used by this class is not recommended: because after the first request
+for a particular type is made, the resultant <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> is fixed until the container is thrown away.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
@@ -211,12 +219,18 @@
                   <tr>
                     <td><em>targets</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
+                    <td><p>Optional. Contains the targets that will be used to create the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s that this container will use to produce objects
+when requested.</p>
+<p>If not provided, then the base class&#39; default (see <span class="xref">Rezolver.ContainerBase.</span> will be used.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
                     <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
-                    <td></td>
+                    <td><p>Optional.  The compiler that will be used to compile the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s in the <em>targets</em> container into</p>
+<p><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s.</p>
+<p>If not provided, then the base class&#39; default (see <span class="xref">Rezolver.ContainerBase.</span> will be used.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -231,7 +245,8 @@
               </span>
               
               <h4 class="hmember" id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_" data-uid="Rezolver.CachingContainerBase.GetCompiledRezolveTarget(Rezolver.RezolveContext)">GetCompiledRezolveTarget(RezolveContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Obtains an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> for the given <em>context</em>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -271,6 +286,13 @@
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">GetCompiledRezolveTarget(RezolveContext)</a></div>
+              <h5 class="hremarks" id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The method is called by <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
+to get the compiled target whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_RezolveContext_">GetObject(RezolveContext)</a> method is to be used to get the instance that is to be resolved for
+a given request.</p>
+<p>The internal cache is examined first to see if an entry exists for the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_RequestedType">RequestedType</a> type and, if not, then 
+the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">GetCompiledRezolveTarget(RezolveContext)</a> is cached and returned.</p>
+</div>
               </div><!-- .classchild -->
             </article>
           </div>

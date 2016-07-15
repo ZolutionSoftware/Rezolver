@@ -12,11 +12,13 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldRegisterNullObjectTarget()
     {
+      // <example1>
       ITarget t = new ObjectTarget(null);
       ITargetContainer r = new TargetContainer();
       r.Register(t, serviceType: typeof(object));
       var t2 = r.Fetch(typeof(object));
       Assert.Same(t, t2);
+      // </example1>
     }
 
     [Fact]

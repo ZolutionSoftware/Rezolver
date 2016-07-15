@@ -1,11 +1,14 @@
 - name: Getting Started
-  href: getting-started.md
+  href: index.md
 - name: Details 1
   href: details1.md
 - name: Details 2
   href: details2.md
 - name: Details 3
   href: details3.md
+- name: Nuget Packages
+  href: nuget-packages/toc.yml
+  homepage: nuget-packages/index.md
 - name: Advanced
   href: advanced/toc.yml
   homepage: advanced/index.md

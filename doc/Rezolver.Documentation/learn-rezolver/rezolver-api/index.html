@@ -92,10 +92,13 @@
               
 <p>Looking for documentation on individual classes or methods in the Rezolver project?  You&#39;ve come to the right
 place!</p>
-<p>Two crucial classes to look at are:</p>
+<p>Crucial types to look at are:</p>
 <ul>
-<li>@Rezolver.Builder</li>
-<li><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></li>
+<li><strong><a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a></strong> (implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>): <em>Stores <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances, and 
+is the main class you&#39;ll use for your &#39;registration&#39; phase</em></li>
+<li><strong><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></strong> (implements <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>): <em>The standard, non-scoped, container you&#39;ll use in 
+your composition root - you can create child scopes from this by calling its implementation of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateLifetimeScope">CreateLifetimeScope()</a>. 
+This class requires an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> for its registrations</em></li>
 </ul>
 
             </article>

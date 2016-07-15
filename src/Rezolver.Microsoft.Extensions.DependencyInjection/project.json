@@ -18,7 +18,7 @@
         "System.Runtime": "4.0.10.0"
       }
     },
-    "netstandard1.3": {
+    "netstandard1.1": {
       "buildOptions": { "define": [ "DOTNET" ] }
     }
   }

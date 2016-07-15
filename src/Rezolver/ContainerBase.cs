@@ -57,6 +57,11 @@ namespace Rezolver
       }
     }
 
+    /// <summary>
+    /// blah blah
+    /// </summary>
+    /// <param name="targets"></param>
+    /// <param name="compiler"></param>
     protected ContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)
     {
       Targets = targets ?? new TargetContainer();

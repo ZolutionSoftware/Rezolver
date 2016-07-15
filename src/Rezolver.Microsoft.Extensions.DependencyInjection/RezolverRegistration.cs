@@ -52,14 +52,9 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection
       }
     }
 
-    public static IContainer CreateDefaultRezolver(ITargetContainer builder)
+    public static IContainer CreateDefaultContainer(ITargetContainer targetContainer)
     {
-#if DOTNET
-			var compiler = new TargetDelegateCompiler();
-#else
-      var compiler = new TargetAssemblyCompiler();
-#endif
-      return new Container(builder, compiler);
+      return new Container(targetContainer);
     }
 
     public static IServiceProvider Populate(this ContainerBase rezolver, IServiceCollection services)

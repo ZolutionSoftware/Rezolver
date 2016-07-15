@@ -30,7 +30,7 @@
         "System.Reflection.Primitives": "4.0.0.0"
       }
     },
-    "netstandard1.3": {
+    "netstandard1.1": {
       "buildOptions": { "define": [ "DOTNET" ] },
       "dependencies": {
         "NETStandard.Library": "1.6.0"
