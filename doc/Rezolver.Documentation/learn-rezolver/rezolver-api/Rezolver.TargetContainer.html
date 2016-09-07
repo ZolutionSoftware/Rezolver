@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
   
@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class TargetContainer
    ">
-  	<meta name="generator" content="docfx 2.0.1.0">
+  	<meta name="generator" content="docfx 2.4.0.0">
   	
   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
@@ -90,7 +90,7 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content">
               
-              <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
+              
               
               <h1 id="Rezolver_TargetContainer" data-uid="Rezolver.TargetContainer">Class TargetContainer
               </h1>
@@ -110,13 +110,13 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Fetch_System_Type_">Fetch(Type)</a>
+                  <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Fetch_System_Type_">TargetDictionaryContainer.Fetch(Type)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchAll_System_Type_">FetchAll(Type)</a>
+                  <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchAll_System_Type_">TargetDictionaryContainer.FetchAll(Type)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a>
+                  <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">TargetDictionaryContainer.CombineWith(ITargetContainer, Type)</a>
                 </div>
                 <div>
                   <span class="xref">System.Object.ToString()</span>
@@ -155,10 +155,7 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
               <h3 id="constructors">Constructors
               </h3>
               <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer__ctor_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.%23ctor(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
+              
               
               <h4 class="hmember" id="Rezolver_TargetContainer__ctor_System_Boolean_" data-uid="Rezolver.TargetContainer.#ctor(System.Boolean)">TargetContainer(Boolean)</h4>
               <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> class</p>
@@ -181,7 +178,7 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
                   <tr>
                     <td><em>autoRezolveIEnumerable</em></td>
                     <td><span class="xref">System.Boolean</span></td>
-                    <td><p>If true, then <span class="xref">IEnumerable<t></t></span> will be automatically
+                    <td><p>If true, then <span class="xref">IEnumerable&lt;T&gt;</span> will be automatically
 resolved as a concatenation of all the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s that are registered against a particular type.</p>
 <p>Note - this parameter might be removed in a future version - you can achieve the same thing by using the
 extension method <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_TargetContainer_">EnableEnumerableResolving(TargetContainer)</a></p>
@@ -194,10 +191,7 @@ extension method <a class="xref" href="Rezolver.EnumerableTargetBuilderExtension
               <h3 id="methods">Methods
               </h3>
               <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer_CreateContainer_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.CreateContainer(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
+              
               
               <h4 class="hmember" id="Rezolver_TargetContainer_CreateContainer_System_Type_Rezolver_ITarget_" data-uid="Rezolver.TargetContainer.CreateContainer(System.Type,Rezolver.ITarget)">CreateContainer(Type, ITarget)</h4>
               <div class="markdown level1 summary"><p>Called to create and register a container for the given <em>serviceType</em> and
@@ -253,7 +247,7 @@ be registered.</p>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_">CreateContainer(Type, ITarget)</a></div>
+              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_">TargetDictionaryContainer.CreateContainer(Type, ITarget)</a></div>
               <h5 class="hremarks" id="Rezolver_TargetContainer_CreateContainer_System_Type_Rezolver_ITarget__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The main caller for this method will be the base Register method, which will create a 
 new container for a target that&#39;s being registered against a new type.</p>
@@ -263,10 +257,7 @@ definitions as a starting point.</p>
 </div>
               </div><!-- .classchild -->
               <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer_CreateGenericTypeDefContainer_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.CreateGenericTypeDefContainer(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
+              
               
               <h4 class="hmember" id="Rezolver_TargetContainer_CreateGenericTypeDefContainer_System_Type_Rezolver_ITarget_" data-uid="Rezolver.TargetContainer.CreateGenericTypeDefContainer(System.Type,Rezolver.ITarget)">CreateGenericTypeDefContainer(Type, ITarget)</h4>
               <div class="markdown level1 summary"><p>Called by <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_CreateContainer_System_Type_Rezolver_ITarget_">CreateContainer(Type, ITarget)</a> to create a container suitable for handling targets 
@@ -319,10 +310,7 @@ that are registered against generic types.</p>
               </table>
               </div><!-- .classchild -->
               <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
+              
               
               <h4 class="hmember" id="Rezolver_TargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.TargetContainer.FetchContainer(System.Type)">FetchContainer(Type)</h4>
               <div class="markdown level1 summary"><p>Retrieves </p>
@@ -365,13 +353,10 @@ that are registered against generic types.</p>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">FetchContainer(Type)</a></div>
+              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">TargetDictionaryContainer.FetchContainer(Type)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
+              
               
               <h4 class="hmember" id="Rezolver_TargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.TargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
               <div class="markdown level1 summary"></div>
@@ -403,13 +388,10 @@ that are registered against generic types.</p>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a></div>
+              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">TargetDictionaryContainer.Register(ITarget, Type)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
+              
               
               <h4 class="hmember" id="Rezolver_TargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
               <div class="markdown level1 summary"><p>Overrides the base method so that if <em>type</em> is a generic type,
@@ -444,13 +426,10 @@ for the generic type definition first.</p>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a></div>
+              <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">TargetDictionaryContainer.RegisterContainer(Type, ITargetContainer)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a class="btn btn-default" href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_TargetContainer_RegisterContainerDirect_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.RegisterContainerDirect(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
+              
               
               <h4 class="hmember" id="Rezolver_TargetContainer_RegisterContainerDirect_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetContainer.RegisterContainerDirect(System.Type,Rezolver.ITargetContainer)">RegisterContainerDirect(Type, ITargetContainer)</h4>
               <div class="markdown level1 summary"><p>Version of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> which does not interrogate the 

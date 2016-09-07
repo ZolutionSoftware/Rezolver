@@ -246,7 +246,7 @@
           "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.dll": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-alpha1-21621": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-alpha1-22078": {
         "type": "package",
         "dependencies": {
           "System.ComponentModel": "4.0.1",
@@ -264,10 +264,10 @@
           "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Specification.Tests/1.1.0-alpha1-21621": {
+      "Microsoft.Extensions.DependencyInjection.Specification.Tests/1.1.0-alpha1-22078": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-alpha1-21621",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-alpha1-22078",
           "System.Threading": "4.0.11",
           "xunit.assert": "2.2.0-beta2-build3300",
           "xunit.extensibility.core": "2.2.0-beta2-build3300"
@@ -2750,23 +2750,23 @@
         "lib/netstandard1.6/Microsoft.DotNet.ProjectModel.dll"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-alpha1-21621": {
-      "sha512": "T2V2f+IJTVJmbU6gOHelRBNa0F6p7yS+AA7wr59OV6WjCfLELMSkzxokgn2LmMbwlAR7u74COfL1kmg/wXRxUw==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-alpha1-22078": {
+      "sha512": "Ytf3xU2tPEiYZj6GGKjxNNU9fFNYDfQ3YgcjmP8oNGi2iAyRrBub40Y0lWUx6ZulBRX3N8/UtaTTV4jGkYAb8w==",
       "type": "package",
-      "path": "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-alpha1-21621",
+      "path": "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-alpha1-22078",
       "files": [
-        "Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0-alpha1-21621.nupkg.sha512",
+        "Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0-alpha1-22078.nupkg.sha512",
         "Microsoft.Extensions.DependencyInjection.Abstractions.nuspec",
         "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Specification.Tests/1.1.0-alpha1-21621": {
-      "sha512": "UIWZbiwZZhePMTyiYwzmkJ/si4lCaeTlKe7jpIaYV4xv6FetRf8VNWK3R5C57xqj7JoapWyyaHlMsheg8/0Ibg==",
+    "Microsoft.Extensions.DependencyInjection.Specification.Tests/1.1.0-alpha1-22078": {
+      "sha512": "de+wXF4WUMGhKLR6UoYCJgQRf/aLa+ya2joigqGFu1tzRCdDIcc5YF86qDnFD86qCTsHwRFtl1iTayFvJI1rpw==",
       "type": "package",
-      "path": "Microsoft.Extensions.DependencyInjection.Specification.Tests/1.1.0-alpha1-21621",
+      "path": "Microsoft.Extensions.DependencyInjection.Specification.Tests/1.1.0-alpha1-22078",
       "files": [
-        "Microsoft.Extensions.DependencyInjection.Specification.Tests.1.1.0-alpha1-21621.nupkg.sha512",
+        "Microsoft.Extensions.DependencyInjection.Specification.Tests.1.1.0-alpha1-22078.nupkg.sha512",
         "Microsoft.Extensions.DependencyInjection.Specification.Tests.nuspec",
         "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.Specification.Tests.dll",
         "lib/netstandard1.1/Microsoft.Extensions.DependencyInjection.Specification.Tests.xml"

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
   
@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver
    ">
-  	<meta name="generator" content="docfx 2.0.1.0">
+  	<meta name="generator" content="docfx 2.4.0.0">
   	
   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
@@ -90,7 +90,6 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content">
               
-              <a href="https://github.com/LordZoltan/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver.md&amp;value=---%0Auid%3A%20Rezolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
               <h1 id="Rezolver" data-uid="Rezolver">Namespace Rezolver
               </h1>
               <div class="markdown level0 summary"></div>
@@ -130,8 +129,8 @@ are moved further up the expression tree into one conditional.</p>
                   <h4><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a></h4>
                   <section><p>The most common target used for building new objects.  Represents binding to a type&#39;s constructor with zero or more
 arguments supplied by other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
-<p>In addition to using the <span class="xref">Rezolver.ConstructorTarget.</span> constructor
-you can also use the factory methods - such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto<t>(IPropertyBindingBehaviour)</t></a>.</p>
+<p>In addition to using the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_IPropertyBindingBehaviour_Rezolver_ParameterBinding___">ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])</a> constructor
+you can also use the factory methods - such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto&lt;T&gt;(IPropertyBindingBehaviour)</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></h4>
                   <section></section>
@@ -142,7 +141,7 @@ you can also use the factory methods - such as <a class="xref" href="Rezolver.Co
                   <section></section>
                   <h4><a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a></h4>
                   <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
-<p>The best way to add a decorator to your target container is to use the extension method <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator<tdecorator, tdecorated="">(ITargetContainerOwner)</tdecorator,></a>
+<p>The best way to add a decorator to your target container is to use the extension method <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</a>
 or its non-generic equivalent.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour">DefaultPropertyBindingBehaviour</a></h4>
@@ -151,7 +150,7 @@ or its non-generic equivalent.</p>
                   <section><p>A target that simply creates a default instance of a given type.  I.e. the same
 as doing default(type) in C#.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.DelegateTarget%601.html#Rezolver_DelegateTarget_1">DelegateTarget</a>&lt;T&gt;</h4>
+                  <h4><a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1">DelegateTarget</a>&lt;T&gt;</h4>
                   <section><p>Implements IRezolveTarget using factory function delegates.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DelegateTargetExtensions.html#Rezolver_DelegateTargetExtensions">DelegateTargetExtensions</a></h4>
