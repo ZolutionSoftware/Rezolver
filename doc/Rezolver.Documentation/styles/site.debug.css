@@ -1,6 +1,6 @@
 /*!
  * Rezolver-themed Bootstrap 
- * Copyright 2016 Zolution Software Ltd
+ * ©Copyright 2016 Zolution Software Ltd
  * Built on top of Bootstrap v3.3.6 (http://getbootstrap.com)
  * Which is copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -8080,27 +8080,106 @@ button.close {
     display: none !important;
   }
 }
+/* Rezolver Highlight-js theme.  Uses structure adapted from the atom-one-dark theme, but nearly all the colours are changed 
+    ©Copyright 2016 onwards Zolution Software Ltd
+*/
+/* line 16, styles\highlight-theme-rezolver.less */
+.hljs {
+  display: block;
+  overflow-x: auto;
+  color: #722b00;
+  background: #ffe7d8;
+}
+/* line 23, styles\highlight-theme-rezolver.less */
+.hljs-comment,
+.hljs-quote {
+  color: rgba(0, 0, 0, 0.5);
+}
+/* line 28, styles\highlight-theme-rezolver.less */
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #166000;
+}
+/* line 32, styles\highlight-theme-rezolver.less */
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+/* line 36, styles\highlight-theme-rezolver.less */
+.hljs-literal {
+  color: #56b6c2;
+}
+/* line 40, styles\highlight-theme-rezolver.less */
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string {
+  color: #98c379;
+}
+/* line 44, styles\highlight-theme-rezolver.less */
+.hljs-built_in,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+/* line 48, styles\highlight-theme-rezolver.less */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+/* line 52, styles\highlight-theme-rezolver.less */
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+/* line 56, styles\highlight-theme-rezolver.less */
+.hljs-emphasis,
+.hljs-comment,
+.hljs-quote {
+  font-style: italic;
+}
+/* line 60, styles\highlight-theme-rezolver.less */
+.hljs-strong {
+  font-weight: bold;
+}
+/* line 64, styles\highlight-theme-rezolver.less */
+.hljs-link {
+  text-decoration: underline;
+}
 /* These styles adapted from the original docfx.css stylesheet in the docfx 
     default template, shifting some of the focus on to the themed bootstrap */
 /* Copyright (c) Microsoft Corporation. All Rights Reserved. Licensed under the MIT License. See License.txt in the project root for license information. */
-/* line 18, styles/site.less */
+/* line 19, styles/site.less */
 html,
 body {
   height: 100%;
 }
-/* line 23, styles/site.less */
+/* line 24, styles/site.less */
 button,
 a {
   cursor: pointer;
 }
-/* line 29, styles/site.less */
+/* line 30, styles/site.less */
 button:hover,
 button:focus,
 a:hover,
 a:focus {
   text-decoration: none;
 }
-/* line 37, styles/site.less */
+/* line 38, styles/site.less */
 a.disable,
 a.disable:hover {
   text-decoration: none;
@@ -8118,7 +8197,7 @@ h4:before {
     height: 100px;
     margin-top: -100px;
 }*/
-/* line 58, styles/site.less */
+/* line 59, styles/site.less */
 h1,
 h2,
 h3,
@@ -8129,7 +8208,7 @@ span.xref {
   /*word-wrap: break-word;
     word-break: break-all;*/
 }
-/* line 63, styles/site.less */
+/* line 64, styles/site.less */
 h1 mark,
 h2 mark,
 h3 mark,
@@ -8138,7 +8217,7 @@ h5 mark,
 h6 mark {
   padding: 0;
 }
-/* line 72, styles/site.less */
+/* line 73, styles/site.less */
 .inheritance .level0:before,
 .inheritance .level1:before,
 .inheritance .level2:before,
@@ -8148,59 +8227,59 @@ h6 mark {
   content: '↳';
   margin-right: 5px;
 }
-/* line 82, styles/site.less */
+/* line 83, styles/site.less */
 .inheritance .level0 {
   margin-left: 0em;
 }
-/* line 86, styles/site.less */
+/* line 87, styles/site.less */
 .inheritance .level1 {
   margin-left: 1em;
 }
-/* line 90, styles/site.less */
+/* line 91, styles/site.less */
 .inheritance .level2 {
   margin-left: 2em;
 }
-/* line 94, styles/site.less */
+/* line 95, styles/site.less */
 .inheritance .level3 {
   margin-left: 3em;
 }
-/* line 98, styles/site.less */
+/* line 99, styles/site.less */
 .inheritance .level4 {
   margin-left: 4em;
 }
-/* line 102, styles/site.less */
+/* line 103, styles/site.less */
 .inheritance .level5 {
   margin-left: 5em;
 }
-/* line 106, styles/site.less */
+/* line 107, styles/site.less */
 .hljs {
   display: inline;
   background-color: inherit;
   padding: 0;
 }
 /* additional spacing fixes */
-/* line 112, styles/site.less */
+/* line 113, styles/site.less */
 .btn + .btn {
   margin-left: 10px;
 }
-/* line 116, styles/site.less */
+/* line 117, styles/site.less */
 .btn.pull-right {
   margin-left: 10px;
   margin-top: 5px;
 }
-/* line 121, styles/site.less */
+/* line 122, styles/site.less */
 .table {
   margin-bottom: 10px;
 }
-/* line 125, styles/site.less */
+/* line 126, styles/site.less */
 table p {
   margin-bottom: 0;
 }
-/* line 129, styles/site.less */
+/* line 130, styles/site.less */
 table a {
   display: inline-block;
 }
-/* line 133, styles/site.less */
+/* line 134, styles/site.less */
 h1,
 .h1,
 h2,
@@ -8211,7 +8290,7 @@ h3,
   margin-bottom: 10px;
   font-weight: 400;
 }
-/* line 144, styles/site.less */
+/* line 145, styles/site.less */
 h4,
 .h4,
 h5,
@@ -8221,17 +8300,17 @@ h6,
   margin-top: 10px;
   margin-bottom: 5px;
 }
-/* line 154, styles/site.less */
+/* line 155, styles/site.less */
 .navbar {
   margin-bottom: 0;
 }
-/* line 158, styles/site.less */
+/* line 159, styles/site.less */
 #wrapper {
   min-height: 100%;
   position: relative;
 }
 /* blends header footer and content together with gradient effect */
-/* line 163, styles/site.less */
+/* line 164, styles/site.less */
 .grad-top {
   /* For Safari 5.1 to 6.0 */
   /* For Opera 11.1 to 12.0 */
@@ -8240,7 +8319,7 @@ h6,
   /* Standard syntax */
   height: 5px;
 }
-/* line 172, styles/site.less */
+/* line 173, styles/site.less */
 .grad-bottom {
   /* For Safari 5.1 to 6.0 */
   /* For Opera 11.1 to 12.0 */
@@ -8249,22 +8328,22 @@ h6,
   /* Standard syntax */
   height: 5px;
 }
-/* line 181, styles/site.less */
+/* line 182, styles/site.less */
 .divider {
   margin: 0 5px;
   color: #eeeeee;
 }
-/* line 186, styles/site.less */
+/* line 187, styles/site.less */
 hr {
   border-color: #ffe7d8;
   border-width: 5px;
 }
-/* line 191, styles/site.less */
+/* line 192, styles/site.less */
 hr.soft {
   border-color: #eeeeee;
   border-width: 2px;
 }
-/* line 196, styles/site.less */
+/* line 197, styles/site.less */
 header {
   position: fixed;
   top: 0;
@@ -8272,30 +8351,30 @@ header {
   right: 0;
   z-index: 1000;
 }
-/* line 204, styles/site.less */
+/* line 205, styles/site.less */
 header .navbar {
   border-width: 0 0 1px;
   border-radius: 0;
 }
-/* line 209, styles/site.less */
+/* line 210, styles/site.less */
 .navbar-brand {
   font-size: inherit;
   padding: 0;
 }
-/* line 214, styles/site.less */
+/* line 215, styles/site.less */
 .navbar-collapse {
   margin: 0 -15px;
 }
-/* line 218, styles/site.less */
+/* line 219, styles/site.less */
 .subnav {
   min-height: 40px;
 }
-/* line 222, styles/site.less */
+/* line 223, styles/site.less */
 div.classchild {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-/* line 227, styles/site.less */
+/* line 228, styles/site.less */
 article h4.hmember {
   padding: 10px;
   background: #f15c00;
@@ -8304,13 +8383,13 @@ article h4.hmember {
   text-shadow: 1px 1px 0 #722b00;
   font-weight: bolder;
 }
-/* line 236, styles/site.less */
+/* line 237, styles/site.less */
 article h3 {
   margin-bottom: 10px;
   color: #722b00;
 }
 @media only screen and (min-width: 768px) {
-  /* line 243, styles/site.less */
+  /* line 244, styles/site.less */
   div.classchild {
     border-top: 1px solid #ffc7a5;
     border-right: 1px solid #ffc7a5;
@@ -8318,20 +8397,20 @@ article h3 {
     padding: 0 10px 10px 30px;
     margin-left: -30px;
   }
-  /* line 251, styles/site.less */
+  /* line 252, styles/site.less */
   article h4.hmember {
     padding: 10px 0 10px 30px;
     margin-left: -30px;
     margin-right: -10px;
   }
-  /* line 257, styles/site.less */
+  /* line 258, styles/site.less */
   article h3 {
     padding: 10px 0 10px 30px;
     margin-left: -30px;
     margin-right: -10px;
   }
 }
-/* line 264, styles/site.less */
+/* line 265, styles/site.less */
 .apiDocSectionHeader,
 .inheritance h5,
 .inheritedMembers h5,
@@ -8352,171 +8431,171 @@ h5.hexceptions {
   border-bottom: 1px solid #ffc7a5;
   font-weight: bold;
 }
-/* line 279, styles/site.less */
+/* line 280, styles/site.less */
 article h1,
 article h2,
 article h3,
 article h4 {
   margin-top: 25px;
 }
-/* line 283, styles/site.less */
+/* line 284, styles/site.less */
 article h4 {
   border-bottom: 1px solid #be4900;
 }
-/* line 287, styles/site.less */
+/* line 288, styles/site.less */
 article h4.hmember {
   margin-top: 0;
   /*border-left:50px solid @alt-color;
     margin-left:-55px;
     padding-left: 5px;*/
 }
-/* line 294, styles/site.less */
+/* line 295, styles/site.less */
 article span.small.pull-right {
   margin-top: 3px;
 }
-/* line 298, styles/site.less */
+/* line 299, styles/site.less */
 article section {
   margin-left: 1em;
 }
 /*.expand-all {
   padding: 10px 0;
 }*/
-/* line 305, styles/site.less */
+/* line 306, styles/site.less */
 .breadcrumb {
   margin: 0;
   padding: 10px 0;
   background-color: inherit;
   white-space: nowrap;
 }
-/* line 312, styles/site.less */
+/* line 313, styles/site.less */
 .breadcrumb > li + li:before {
   content: "\00a0/";
 }
-/* line 316, styles/site.less */
+/* line 317, styles/site.less */
 #autocollapse.collapsed .navbar-header {
   float: none;
 }
-/* line 320, styles/site.less */
+/* line 321, styles/site.less */
 #autocollapse.collapsed .navbar-toggle {
   display: block;
 }
-/* line 324, styles/site.less */
+/* line 325, styles/site.less */
 #autocollapse.collapsed .navbar-collapse {
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-/* line 329, styles/site.less */
+/* line 330, styles/site.less */
 #autocollapse.collapsed .navbar-collapse.collapse {
   display: none !important;
 }
-/* line 333, styles/site.less */
+/* line 334, styles/site.less */
 #autocollapse.collapsed .navbar-nav {
   float: none !important;
   margin: 7.5px -15px;
 }
-/* line 338, styles/site.less */
+/* line 339, styles/site.less */
 #autocollapse.collapsed .navbar-nav > li {
   float: none;
 }
-/* line 342, styles/site.less */
+/* line 343, styles/site.less */
 #autocollapse.collapsed .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-/* line 347, styles/site.less */
+/* line 348, styles/site.less */
 #autocollapse.collapsed .collapse.in,
 #autocollapse.collapsed .collapsing {
   display: block !important;
 }
-/* line 352, styles/site.less */
+/* line 353, styles/site.less */
 #autocollapse.collapsed .collapse.in .navbar-right,
 #autocollapse.collapsed .collapsing .navbar-right {
   float: none !important;
 }
-/* line 357, styles/site.less */
+/* line 358, styles/site.less */
 #autocollapse .form-group {
   width: 100%;
 }
-/* line 361, styles/site.less */
+/* line 362, styles/site.less */
 #autocollapse .form-control {
   width: 100%;
 }
-/* line 365, styles/site.less */
+/* line 366, styles/site.less */
 #autocollapse .navbar-header {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 370, styles/site.less */
+/* line 371, styles/site.less */
 #autocollapse .navbar-brand {
   margin-left: 0;
 }
-/* line 374, styles/site.less */
+/* line 375, styles/site.less */
 .collapse.in,
 .collapsing {
   text-align: center;
 }
-/* line 379, styles/site.less */
+/* line 380, styles/site.less */
 .collapsing .navbar-form {
   margin: 0 auto;
   max-width: 400px;
   padding: 10px 15px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-/* line 386, styles/site.less */
+/* line 387, styles/site.less */
 .collapsed .collapse.in .navbar-form {
   margin: 0 auto;
   max-width: 400px;
   padding: 10px 15px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
-/* line 393, styles/site.less */
+/* line 394, styles/site.less */
 .navbar .navbar-nav {
   display: inline-block;
 }
-/* line 397, styles/site.less */
+/* line 398, styles/site.less */
 .docs-search {
   background: white;
   vertical-align: middle;
 }
-/* line 402, styles/site.less */
+/* line 403, styles/site.less */
 .docs-search > .search-query {
   font-size: 14px;
   border: 0;
   width: 120%;
   color: #555;
 }
-/* line 409, styles/site.less */
+/* line 410, styles/site.less */
 .docs-search > .search-query:focus {
   outline: 0;
 }
-/* line 413, styles/site.less */
+/* line 414, styles/site.less */
 .search-results-frame {
   clear: both;
   display: table;
   width: 100%;
 }
-/* line 419, styles/site.less */
+/* line 420, styles/site.less */
 .search-results.ng-hide {
   display: none;
 }
-/* line 423, styles/site.less */
+/* line 424, styles/site.less */
 .search-results-container {
   padding-bottom: 1em;
   border-top: 1px solid #111;
   background: rgba(25, 25, 25, 0.5);
 }
-/* line 429, styles/site.less */
+/* line 430, styles/site.less */
 .search-results-container .search-results-group {
   padding-top: 50px !important;
   padding: 10px;
 }
-/* line 434, styles/site.less */
+/* line 435, styles/site.less */
 .search-results-group-heading {
   font-family: "Open Sans";
   padding-left: 10px;
   color: white;
 }
-/* line 440, styles/site.less */
+/* line 441, styles/site.less */
 .search-close {
   position: absolute;
   left: 50%;
@@ -8530,12 +8609,12 @@ article section {
   width: 200px;
   box-shadow: 0 0 10px #111;
 }
-/* line 454, styles/site.less */
+/* line 455, styles/site.less */
 #search {
   display: none;
 }
 /* Search results display*/
-/* line 459, styles/site.less */
+/* line 460, styles/site.less */
 #search-results {
   max-width: 960px !important;
   margin-top: 120px;
@@ -8545,43 +8624,43 @@ article section {
   line-height: 1.8;
   display: none;
 }
-/* line 469, styles/site.less */
+/* line 470, styles/site.less */
 #search-results > .search-list {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 50px;
 }
-/* line 475, styles/site.less */
+/* line 476, styles/site.less */
 #search-results p {
   text-align: center;
 }
-/* line 479, styles/site.less */
+/* line 480, styles/site.less */
 #search-results .sr-items {
   font-size: 24px;
 }
-/* line 483, styles/site.less */
+/* line 484, styles/site.less */
 .sr-item {
   margin-bottom: 25px;
 }
-/* line 487, styles/site.less */
+/* line 488, styles/site.less */
 .sr-item > .item-href {
   font-size: 14px;
   color: #093;
 }
-/* line 492, styles/site.less */
+/* line 493, styles/site.less */
 .sr-item > .item-brief {
   font-size: 13px;
 }
-/* line 496, styles/site.less */
+/* line 497, styles/site.less */
 .pagination > li > a {
   color: #47A7A0;
 }
-/* line 500, styles/site.less */
+/* line 501, styles/site.less */
 .pagination > .active > a {
   background-color: #47A7A0;
   border-color: #47A7A0;
 }
-/* line 505, styles/site.less */
+/* line 506, styles/site.less */
 .fixed_header {
   position: fixed;
   width: 100%;
@@ -8592,18 +8671,18 @@ article section {
   z-index: 9999;
   left: 0;
 }
-/* line 516, styles/site.less */
+/* line 517, styles/site.less */
 .fixed_header + .toc {
   margin-top: 50px;
   margin-left: 0;
 }
-/* line 521, styles/site.less */
+/* line 522, styles/site.less */
 .sidenav,
 .fixed_header,
 .toc {
   background-color: #eeeeee;
 }
-/* line 525, styles/site.less */
+/* line 526, styles/site.less */
 .sidetoc {
   position: fixed;
   width: 260px;
@@ -8616,20 +8695,20 @@ article section {
   border-right: 1px solid #d5d5d5;
   z-index: 1;
 }
-/* line 538, styles/site.less */
+/* line 539, styles/site.less */
 body .toc {
   overflow-x: hidden;
 }
-/* line 542, styles/site.less */
+/* line 543, styles/site.less */
 .sidetoggle.ng-hide {
   display: block !important;
 }
-/* line 546, styles/site.less */
+/* line 547, styles/site.less */
 .sidetoc-expand > .caret {
   margin-left: 0px;
   margin-top: -2px;
 }
-/* line 551, styles/site.less */
+/* line 552, styles/site.less */
 .sidetoc-expand > .caret-side {
   border-left: 4px solid;
   border-top: 4px solid transparent;
@@ -8637,101 +8716,101 @@ body .toc {
   margin-left: 4px;
   margin-top: -4px;
 }
-/* line 559, styles/site.less */
+/* line 560, styles/site.less */
 .sidetoc-heading {
   font-weight: 500;
 }
-/* line 563, styles/site.less */
+/* line 564, styles/site.less */
 .toc {
   margin: 0px 0 0 10px;
   padding: 0 10px;
 }
-/* line 568, styles/site.less */
+/* line 569, styles/site.less */
 .expand-stub {
   position: absolute;
   left: -10px;
 }
-/* line 573, styles/site.less */
+/* line 574, styles/site.less */
 .toc .nav > li > a.sidetoc-expand {
   position: absolute;
   top: 0;
   left: 0;
 }
-/* line 579, styles/site.less */
+/* line 580, styles/site.less */
 .toc .nav > li > a {
   color: #0b0400;
   display: inline;
   padding: 0;
 }
-/* line 585, styles/site.less */
+/* line 586, styles/site.less */
 .toc .nav > li > .expand-stub + a {
   margin-left: 5px;
   display: block;
 }
-/* line 590, styles/site.less */
+/* line 591, styles/site.less */
 .toc .nav > li > a:hover,
 .toc .nav > li > a:focus {
   color: #000000;
   background: none;
   text-decoration: inherit;
 }
-/* line 597, styles/site.less */
+/* line 598, styles/site.less */
 .toc .nav > li.active > a {
   color: #1239A2;
 }
-/* line 601, styles/site.less */
+/* line 602, styles/site.less */
 .toc .nav > li.active > a:hover,
 .toc .nav > li.active > a:focus {
   color: #0d2974;
 }
-/* line 606, styles/site.less */
+/* line 607, styles/site.less */
 .toc .nav > li > .expand-stub {
   cursor: pointer;
 }
-/* line 610, styles/site.less */
+/* line 611, styles/site.less */
 .toc .nav > li.active > .expand-stub::before,
 .toc .nav > li.in > .expand-stub::before,
 .toc .nav > li.in.active > .expand-stub::before,
 .toc .nav > li.filtered > .expand-stub::before {
   content: "-";
 }
-/* line 617, styles/site.less */
+/* line 618, styles/site.less */
 .toc .nav > li > .expand-stub::before,
 .toc .nav > li.active > .expand-stub::before {
   content: "+";
 }
-/* line 622, styles/site.less */
+/* line 623, styles/site.less */
 .toc .nav > li.filtered > ul,
 .toc .nav > li.in > ul {
   display: block;
 }
-/* line 627, styles/site.less */
+/* line 628, styles/site.less */
 .toc .nav > li > ul {
   display: none;
 }
-/* line 631, styles/site.less */
+/* line 632, styles/site.less */
 .toc .level1 > li {
   font-weight: bold;
   margin-top: 10px;
   position: relative;
 }
-/* line 637, styles/site.less */
+/* line 638, styles/site.less */
 .toc .level2 {
   font-weight: normal;
   margin-top: 5px;
   margin-left: 15px;
   font-size: 14px;
 }
-/* line 644, styles/site.less */
+/* line 645, styles/site.less */
 .toc .level3 {
   font-size: 12px;
 }
-/* line 648, styles/site.less */
+/* line 649, styles/site.less */
 .toc-toggle {
   display: none;
   margin: 0 15px 0px 15px;
 }
-/* line 653, styles/site.less */
+/* line 654, styles/site.less */
 .sidefilter {
   position: fixed;
   top: 90px;
@@ -8742,7 +8821,7 @@ body .toc {
   border-right: 1px solid #d5d5d5;
   z-index: 1;
 }
-/* line 664, styles/site.less */
+/* line 665, styles/site.less */
 .toc-filter {
   border-radius: 5px;
   background: #fff;
@@ -8751,24 +8830,24 @@ body .toc {
   position: relative;
   margin: 0 5px 0 5px;
 }
-/* line 673, styles/site.less */
+/* line 674, styles/site.less */
 .toc-filter > input {
   border: 0;
   color: #ff7825;
   padding-left: 20px;
   width: 100%;
 }
-/* line 680, styles/site.less */
+/* line 681, styles/site.less */
 .toc-filter > input:focus {
   outline: 0;
 }
-/* line 684, styles/site.less */
+/* line 685, styles/site.less */
 .toc-filter > .filter-icon {
   position: absolute;
   top: 10px;
   left: 5px;
 }
-/* line 690, styles/site.less */
+/* line 691, styles/site.less */
 .article {
   margin-top: 90px;
   margin-bottom: 100px;
@@ -8776,20 +8855,20 @@ body .toc {
 /*#_content > a {
     margin-top: 105px;
 }*/
-/* line 699, styles/site.less */
+/* line 700, styles/site.less */
 .article.grid-right {
   margin-left: 265px;
 }
-/* line 703, styles/site.less */
+/* line 704, styles/site.less */
 .inheritance hr {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* line 708, styles/site.less */
+/* line 709, styles/site.less */
 .article img {
   max-width: 100%;
 }
-/* line 712, styles/site.less */
+/* line 713, styles/site.less */
 .affix {
   font-size: 12px;
   max-height: 100%;
@@ -8797,7 +8876,7 @@ body .toc {
   top: 100px;
   bottom: 10px;
 }
-/* line 720, styles/site.less */
+/* line 721, styles/site.less */
 .affix h5 {
   font-weight: bold;
   text-transform: uppercase;
@@ -8805,7 +8884,7 @@ body .toc {
   padding-left: 10px;
   font-size: 12px;
 }
-/* line 728, styles/site.less */
+/* line 729, styles/site.less */
 .affix > ul.level1 {
   overflow-x: hidden;
   overflow-y: -20px;
@@ -8813,71 +8892,71 @@ body .toc {
   height: calc(0%);
   margin-right: -20px;
 }
-/* line 736, styles/site.less */
+/* line 737, styles/site.less */
 .affix ul > li > a:before {
   color: #cccccc;
   position: absolute;
 }
-/* line 741, styles/site.less */
+/* line 742, styles/site.less */
 .affix ul > li > a:hover {
   background: none;
   color: #666666;
 }
-/* line 746, styles/site.less */
+/* line 747, styles/site.less */
 .affix ul > li.active > a,
 .affix ul > li.active > a:before {
   color: #337ab7;
 }
-/* line 751, styles/site.less */
+/* line 752, styles/site.less */
 .affix ul > li > a {
   padding: 5px 12px;
   color: #666666;
 }
-/* line 756, styles/site.less */
+/* line 757, styles/site.less */
 .affix > ul > li > a:before {
   content: "|";
   font-size: 16px;
   top: 1px;
   left: 0;
 }
-/* line 763, styles/site.less */
+/* line 764, styles/site.less */
 .affix > ul > li.active > a,
 .affix > ul > li.active > a:before {
   color: #337ab7;
   font-weight: bold;
 }
-/* line 769, styles/site.less */
+/* line 770, styles/site.less */
 .affix ul ul > li > a {
   padding: 2px 15px;
 }
-/* line 773, styles/site.less */
+/* line 774, styles/site.less */
 .affix ul ul > li > a:before {
   content: ">";
   font-size: 14px;
   top: -1px;
   left: 5px;
 }
-/* line 780, styles/site.less */
+/* line 781, styles/site.less */
 .affix ul > li > a:before,
 .affix ul ul {
   display: none;
 }
-/* line 785, styles/site.less */
+/* line 786, styles/site.less */
 .affix ul > li.active > ul,
 .affix ul > li.active > a:before,
 .affix ul > li > a:hover:before {
   display: block;
   white-space: nowrap;
 }
-/* line 792, styles/site.less */
+/* line 793, styles/site.less */
 .codewrapper {
   position: relative;
 }
-/* line 796, styles/site.less */
+/* line 797, styles/site.less */
 .trydiv {
   height: 0px;
 }
-/* line 800, styles/site.less */
+/* line 801, styles/site.less */
 .tryspan {
   position: absolute;
   top: 0px;
@@ -8896,21 +8975,21 @@ body .toc {
   display: none;
   color: #767676;
 }
-/* line 819, styles/site.less */
+/* line 820, styles/site.less */
 .tryspan:hover {
   background-color: #3b8bd0;
   color: white;
   border-color: #3b8bd0;
 }
-/* line 825, styles/site.less */
+/* line 826, styles/site.less */
 .codewrapper:hover .tryspan {
   display: block;
 }
-/* line 829, styles/site.less */
+/* line 830, styles/site.less */
 .sample-response .response-content {
   max-height: 200px;
 }
-/* line 833, styles/site.less */
+/* line 834, styles/site.less */
 footer {
   position: absolute;
   left: 0;
@@ -8918,76 +8997,76 @@ footer {
   bottom: 0;
   z-index: 1000;
 }
-/* line 841, styles/site.less */
+/* line 842, styles/site.less */
 .footer {
   border-top: 1px solid #712b00;
   background-color: #a43f00;
   color: #ffc7a5;
   padding: 15px 0;
 }
-/* line 847, styles/site.less */
+/* line 848, styles/site.less */
 .footer a {
   color: #eeeeee;
 }
-/* line 850, styles/site.less */
+/* line 851, styles/site.less */
 .footer a:hover {
   background: transparent;
   color: #fff;
 }
-/* line 855, styles/site.less */
+/* line 856, styles/site.less */
 .footer a:active,
 .footer a:focus {
   background: #712b00;
   color: #fff;
 }
 @media (min-width: 768px) {
-  /* line 863, styles/site.less */
+  /* line 864, styles/site.less */
   #sidetoggle.collapse {
     display: block;
   }
-  /* line 867, styles/site.less */
+  /* line 868, styles/site.less */
   .topnav .navbar-nav {
     float: none;
     white-space: nowrap;
   }
-  /* line 872, styles/site.less */
+  /* line 873, styles/site.less */
   .topnav .navbar-nav > li {
     float: none;
     display: inline-block;
   }
 }
 @media only screen and (max-width: 768px) {
-  /* line 879, styles/site.less */
+  /* line 880, styles/site.less */
   #mobile-indicator {
     display: block;
   }
   /* TOC display for responsive */
-  /* line 883, styles/site.less */
+  /* line 884, styles/site.less */
   .article {
     margin-top: 30px !important;
   }
-  /* line 887, styles/site.less */
+  /* line 888, styles/site.less */
   header {
     position: static;
   }
-  /* line 891, styles/site.less */
+  /* line 892, styles/site.less */
   .topnav {
     text-align: center;
   }
-  /* line 895, styles/site.less */
+  /* line 896, styles/site.less */
   .sidenav {
     padding: 15px 0;
     margin-left: -15px;
     margin-right: -15px;
   }
-  /* line 901, styles/site.less */
+  /* line 902, styles/site.less */
   .sidefilter {
     position: static;
     width: auto;
     float: none;
     border: none;
   }
-  /* line 908, styles/site.less */
+  /* line 909, styles/site.less */
   .sidetoc {
     position: static;
     width: auto;
@@ -8995,51 +9074,51 @@ footer {
     padding-bottom: 0px;
     border: none;
   }
-  /* line 916, styles/site.less */
+  /* line 917, styles/site.less */
   .toc .level2 > li {
     display: inline-block;
   }
-  /* line 920, styles/site.less */
+  /* line 921, styles/site.less */
   .toc .level2 > li:after {
     margin-left: -3px;
     margin-right: 5px;
     content: ", ";
     color: #666666;
   }
-  /* line 927, styles/site.less */
+  /* line 928, styles/site.less */
   .article.grid-right {
     margin-left: 0;
   }
-  /* line 931, styles/site.less */
+  /* line 932, styles/site.less */
   .grad-top,
   .grad-bottom {
     display: none;
   }
-  /* line 936, styles/site.less */
+  /* line 937, styles/site.less */
   .toc-toggle {
     display: block;
   }
-  /* line 940, styles/site.less */
+  /* line 941, styles/site.less */
   .sidetoggle.ng-hide {
     display: none !important;
   }
   /*.expand-all {
     display: none;
   }*/
-  /* line 946, styles/site.less */
+  /* line 947, styles/site.less */
   .affix {
     display: none;
   }
-  /* line 950, styles/site.less */
+  /* line 951, styles/site.less */
   .mobile-hide {
     display: none;
   }
-  /* line 954, styles/site.less */
+  /* line 955, styles/site.less */
   .breadcrumb {
     white-space: inherit;
   }
   /* workaround for #hashtag url is no longer needed*/
-  /* line 959, styles/site.less */
+  /* line 960, styles/site.less */
   h1:before,
   h2:before,
   h3:before,
@@ -9050,17 +9129,17 @@ footer {
 }
 /* For toc iframe */
 @media (max-width: 260px) {
-  /* line 970, styles/site.less */
+  /* line 971, styles/site.less */
   .toc .level2 > li {
     display: block;
   }
-  /* line 974, styles/site.less */
+  /* line 975, styles/site.less */
   .toc .level2 > li:after {
     display: none;
   }
 }
 /* For code snippet line highlight */
-/* line 980, styles/site.less */
+/* line 981, styles/site.less */
 pre > code .line-highlight {
   background-color: #ffffcc;
 }

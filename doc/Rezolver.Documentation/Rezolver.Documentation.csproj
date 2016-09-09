@@ -385,6 +385,7 @@
     <Content Include="rezolver-usage\advanced\toc.yml" />
     <Content Include="rezolver-usage\advanced\index.md" />
     <Content Include="rezolver-usage\nuget-packages\toc.yml" />
+    <Content Include="styles\highlight-theme-rezolver.less" />
     <None Include="toc.yml" />
     <None Include="index.md" />
     <None Include="docfx.json" />

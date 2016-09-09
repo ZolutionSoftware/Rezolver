@@ -116,6 +116,193 @@ ITargetContainer r = new TargetContainer();
 r.Register(t, serviceType: typeof(object));
 var t2 = r.Fetch(typeof(object));
 Assert.Same(t, t2);
+</code></pre><p>More code</p>
+<pre><code class="lang-csharp" name="Full-File.cs">using Rezolver.Tests.TestTypes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace Rezolver.Tests
+{
+  public class ConstructorTargetTests : TestsBase
+  {
+    [Fact]
+    public void ShouldAutomaticallyFindDefaultConstructor()
+    {
+      var target = ConstructorTarget.Auto&lt;DefaultConstructor&gt;();
+      var result = GetValueFromTarget&lt;DefaultConstructor&gt;(target);
+      Assert.Equal(DefaultConstructor.ExpectedValue, result.Value);
+      var result2 = GetValueFromTarget&lt;NoExplicitConstructor&gt;(target);
+      Assert.NotSame(result, result2);
+    }
+
+    [Fact]
+    public void ShouldFindConstructorWithOptionalParameters()
+    {
+      //This test demonstrates whether a constructor with all-default parameters will be treated equally
+      //to a default constructor if no default constructor is present on the type.
+      var target = ConstructorTarget.Auto&lt;ConstructorWithDefaults&gt;();
+      var result = GetValueFromTarget&lt;ConstructorWithDefaults&gt;(target);
+      Assert.Equal(ConstructorWithDefaults.ExpectedValue, result.Value);
+      var result2 = GetValueFromTarget&lt;NoExplicitConstructor&gt;(target);
+      Assert.NotSame(result, result2);
+    }
+
+    //this test now moves into specifically selecting a constructor and extracting the parameter bindings directly
+    //from the caller.  We get to automatically deriving parameter bindings for required parameters later.
+    [Fact]
+    public void ShouldAllowAllConstructorParametersToBeProvided()
+    {
+      var target = ConstructorTarget.FromNewExpression(builder =&gt; new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
+      var result = GetValueFromTarget&lt;NoDefaultConstructor&gt;(target);
+      Assert.Equal(NoDefaultConstructor.ExpectedValue, result.Value);
+      var result2 = GetValueFromTarget&lt;NoExplicitConstructor&gt;(target);
+      Assert.NotSame(result, result2);
+    }
+
+    [Fact]
+    public void ShouldAllowAConstructorParameterToBeExplicitlyRezolved()
+    {
+      //NOTE - used to use mocks, but in the end there is greater value in examining the class&#39; behaviour with
+      //the toher types in the library...
+
+      //this is where the action starts to heat up!
+      //if we can get explicitly resolved arguments to work, then we can get easily get
+      //automatically injected arguments - by simply emitting the correct expression to do the same.
+      //note that we pass the RezolveTargetAdapter singleton instance here to ensure consistent expression
+      //parsing.  However - note that if any tests in the RezolveTargetAdapterTests suite are failing, then
+      //tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget&#39;s
+      //integration with the default adapter here.
+      var target = ConstructorTarget.FromNewExpression(context =&gt; new NoDefaultConstructor(context.Resolve&lt;int&gt;()), TargetAdapter.Instance);
+      var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
+      var container = CreateADefaultRezolver();
+      container.Register(intTarget, typeof(int));
+      var result = GetValueFromTarget&lt;NoDefaultConstructor&gt;(target, container);
+      Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
+    }
+    [Fact]
+    public void ShouldAutoRezolveAConstructor()
+    {
+      //basically the same as above - except this doesn&#39;t provide the constructor call explicitly.
+      var target = ConstructorTarget.Auto&lt;NoDefaultConstructor&gt;();
+      var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
+      var container = CreateADefaultRezolver();
+      container.Register(intTarget, typeof(int));
+      var result = GetValueFromTarget&lt;NoDefaultConstructor&gt;(target, container);
+      Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
+    }
+
+    [Fact]
+    public void ShouldBindConstructorJIT()
+    {
+      //instead of binding the constructor with the most parameters, it&#39;ll bind the constructor just-in-time based
+      //on the services that are actually available from the container when the target is compiled.
+
+      var target = ConstructorTarget.Auto&lt;NoDefaultConstructor2&gt;();
+      var intTarget = NoDefaultConstructor2.ExpectedBestValue.AsObjectTarget();
+      var container = CreateADefaultRezolver();
+      container.Register(intTarget);
+      container.Register(target);
+      var result = container.Resolve&lt;NoDefaultConstructor2&gt;();
+      Assert.Equal(NoDefaultConstructor2.ExpectedBestValue, result.Value);
+      Assert.Equal(NoDefaultConstructor2.ExpectedDefaultMessage, result.Message);
+    }
+
+    public static int ReturnsInt(int input)
+    {
+      return NoDefaultConstructor.ExpectedDynamicExpressionMultiplier * input;
+    }
+
+    [Fact]
+    public void ShouldAllowAPropertyToBeSet()
+    {
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.RegisterExpression(c =&gt; new HasProperty() { Value = 1 });
+
+      var result = (HasProperty)container.Resolve(typeof(HasProperty));
+      Assert.Equal(1, result.Value);
+    }
+
+    [Fact]
+    public void ShouldAllowAPropertyToBeResolved()
+    {
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register((10).AsObjectTarget());
+      container.RegisterExpression(c =&gt; new HasProperty() { Value = c.Resolve&lt;int&gt;() });
+      var result = (HasProperty)container.Resolve(typeof(HasProperty));
+      Assert.Equal(10, result.Value);
+    }
+
+    [Fact]
+    public void ShouldAutoDiscoverProperties()
+    {
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register((25).AsObjectTarget());
+      container.Register(ConstructorTarget.Auto&lt;HasProperty&gt;(DefaultPropertyBindingBehaviour.Instance));
+      var result = (HasProperty)container.Resolve(typeof(HasProperty));
+      Assert.Equal(25, result.Value);
+    }
+
+    [Fact]
+    public void ShouldAutoDiscoverFields()
+    {
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register(&quot;Hello world&quot;.AsObjectTarget());
+      container.Register(ConstructorTarget.Auto&lt;HasField&gt;(DefaultPropertyBindingBehaviour.Instance));
+      var result = (HasField)container.Resolve(typeof(HasField));
+      Assert.Equal(&quot;Hello world&quot;, result.StringField);
+    }
+
+    [Fact]
+    public void ShouldIgnoreFieldsAndProperties()
+    {
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register((100).AsObjectTarget());
+      container.RegisterType&lt;IgnoredPropertyAndField&gt;(DefaultPropertyBindingBehaviour.Instance);
+      var result = container.Resolve&lt;IgnoredPropertyAndField&gt;();
+      Assert.Equal(1, result.GetIgnoredField());
+      Assert.Equal(2, result.IgnoredProperty1);
+      Assert.Equal(3, result.IgnoredProperty2);
+    }
+
+    [Fact]
+    public void ShouldChainAutoDiscoveredPropertiesAndFields()
+    {
+      Container container = new Container(compiler: new TargetDelegateCompiler());
+      container.Register(&quot;hello universe&quot;.AsObjectTarget());
+      container.Register((500).AsObjectTarget());
+      container.Register(ConstructorTarget.Auto&lt;HasField&gt;(DefaultPropertyBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto&lt;HasProperty&gt;(DefaultPropertyBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto&lt;NestedPropertiesAndFields&gt;(DefaultPropertyBindingBehaviour.Instance));
+
+      var result = (NestedPropertiesAndFields)container.Resolve(typeof(NestedPropertiesAndFields));
+
+      Assert.NotNull(result.Field_HasProperty);
+      Assert.NotNull(result.Property_HasField);
+      Assert.Equal(500, result.Field_HasProperty.Value);
+      Assert.Equal(&quot;hello universe&quot;, result.Property_HasField.StringField);
+    }
+
+    [Fact]
+    public void ShouldBindExplicitParameters()
+    {
+      var example = new System.Net.NetworkCredential(&quot;hello&quot;, &quot;world&quot;);
+      var userName = &quot;username&quot;.AsObjectTarget();
+      var password = &quot;password&quot;.AsObjectTarget();
+      var args = new Dictionary&lt;string, ITarget&gt;();
+      args[&quot;userName&quot;] = userName;
+      args[&quot;password&quot;] = password;
+      var target = ConstructorTarget.WithArgs&lt;NetworkCredential&gt;(args);
+      var result = GetValueFromTarget&lt;NetworkCredential&gt;(target);
+
+      Assert.Equal(&quot;username&quot;, result.UserName);
+      Assert.Equal(&quot;password&quot;, result.Password);
+    }
+  }
+}
 </code></pre>
             </article>
           </div>
