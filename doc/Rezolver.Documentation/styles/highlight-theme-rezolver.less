@@ -5,19 +5,21 @@
 */
 
 @hljs-comment-color: fade(#000, 50%);
-@hljs-keyword-color: #166000;
+@hljs-keyword-color: @alt-color;
 @hljs-subst-color: #e06c75;
 @hljs-literal-color: #56b6c2;
-@hljs-string-color: #98c379;
+@hljs-string-color: #c100e6;
 @hljs-title-color: #e6c07b;
-@hljs-number-color: #d19a66;
-@hljs-symbol-color: #61aeee;
+@hljs-number-color: #bb0000;
+@hljs-symbol-color: @pre-color;
 
 .hljs {
     display: block;
     overflow-x: auto;
-    color: @pre-color;
+    color: #000;
     background: @pre-bg;
+    /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
+    white-space: pre;
 }
 
 .hljs-comment, .hljs-quote {

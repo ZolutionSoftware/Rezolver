@@ -8087,21 +8087,23 @@ button.close {
 .hljs {
   display: block;
   overflow-x: auto;
-  color: #722b00;
+  color: #000;
   background: #ffe7d8;
+  /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
+  white-space: pre;
 }
-/* line 23, styles\highlight-theme-rezolver.less */
+/* line 25, styles\highlight-theme-rezolver.less */
 .hljs-comment,
 .hljs-quote {
   color: rgba(0, 0, 0, 0.5);
 }
-/* line 28, styles\highlight-theme-rezolver.less */
+/* line 30, styles\highlight-theme-rezolver.less */
 .hljs-doctag,
 .hljs-keyword,
 .hljs-formula {
-  color: #166000;
+  color: #1239A2;
 }
-/* line 32, styles\highlight-theme-rezolver.less */
+/* line 34, styles\highlight-theme-rezolver.less */
 .hljs-section,
 .hljs-name,
 .hljs-selector-tag,
@@ -8109,24 +8111,24 @@ button.close {
 .hljs-subst {
   color: #e06c75;
 }
-/* line 36, styles\highlight-theme-rezolver.less */
+/* line 38, styles\highlight-theme-rezolver.less */
 .hljs-literal {
   color: #56b6c2;
 }
-/* line 40, styles\highlight-theme-rezolver.less */
+/* line 42, styles\highlight-theme-rezolver.less */
 .hljs-string,
 .hljs-regexp,
 .hljs-addition,
 .hljs-attribute,
 .hljs-meta-string {
-  color: #98c379;
+  color: #c100e6;
 }
-/* line 44, styles\highlight-theme-rezolver.less */
+/* line 46, styles\highlight-theme-rezolver.less */
 .hljs-built_in,
 .hljs-class .hljs-title {
   color: #e6c07b;
 }
-/* line 48, styles\highlight-theme-rezolver.less */
+/* line 50, styles\highlight-theme-rezolver.less */
 .hljs-variable,
 .hljs-template-variable,
 .hljs-type,
@@ -8134,28 +8136,28 @@ button.close {
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-number {
-  color: #d19a66;
+  color: #bb0000;
 }
-/* line 52, styles\highlight-theme-rezolver.less */
+/* line 54, styles\highlight-theme-rezolver.less */
 .hljs-symbol,
 .hljs-bullet,
 .hljs-link,
 .hljs-meta,
 .hljs-selector-id,
 .hljs-title {
-  color: #61aeee;
+  color: #722b00;
 }
-/* line 56, styles\highlight-theme-rezolver.less */
+/* line 58, styles\highlight-theme-rezolver.less */
 .hljs-emphasis,
 .hljs-comment,
 .hljs-quote {
   font-style: italic;
 }
-/* line 60, styles\highlight-theme-rezolver.less */
+/* line 62, styles\highlight-theme-rezolver.less */
 .hljs-strong {
   font-weight: bold;
 }
-/* line 64, styles\highlight-theme-rezolver.less */
+/* line 66, styles\highlight-theme-rezolver.less */
 .hljs-link {
   text-decoration: underline;
 }
