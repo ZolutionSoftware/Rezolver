@@ -16,8 +16,6 @@ namespace Rezolver.Tests
       var target = ConstructorTarget.Auto<DefaultConstructor>();
       var result = GetValueFromTarget<DefaultConstructor>(target);
       Assert.Equal(DefaultConstructor.ExpectedValue, result.Value);
-      var result2 = GetValueFromTarget<NoExplicitConstructor>(target);
-      Assert.NotSame(result, result2);
     }
 
     [Fact]
@@ -28,8 +26,6 @@ namespace Rezolver.Tests
       var target = ConstructorTarget.Auto<ConstructorWithDefaults>();
       var result = GetValueFromTarget<ConstructorWithDefaults>(target);
       Assert.Equal(ConstructorWithDefaults.ExpectedValue, result.Value);
-      var result2 = GetValueFromTarget<NoExplicitConstructor>(target);
-      Assert.NotSame(result, result2);
     }
 
     //this test now moves into specifically selecting a constructor and extracting the parameter bindings directly
@@ -37,11 +33,10 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowAllConstructorParametersToBeProvided()
     {
-      var target = ConstructorTarget.FromNewExpression(builder => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
-      var result = GetValueFromTarget<NoDefaultConstructor>(target);
+      var container = CreateADefaultRezolver();
+      container.RegisterExpression(context => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
+      var result = container.Resolve<NoDefaultConstructor>();
       Assert.Equal(NoDefaultConstructor.ExpectedValue, result.Value);
-      var result2 = GetValueFromTarget<NoExplicitConstructor>(target);
-      Assert.NotSame(result, result2);
     }
 
     [Fact]
@@ -57,11 +52,11 @@ namespace Rezolver.Tests
       //parsing.  However - note that if any tests in the RezolveTargetAdapterTests suite are failing, then
       //tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget's
       //integration with the default adapter here.
-      var target = ConstructorTarget.FromNewExpression(context => new NoDefaultConstructor(context.Resolve<int>()), TargetAdapter.Instance);
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
       var container = CreateADefaultRezolver();
+      container.RegisterExpression(context => new NoDefaultConstructor(context.Resolve<int>()));
       container.Register(intTarget, typeof(int));
-      var result = GetValueFromTarget<NoDefaultConstructor>(target, container);
+      var result = container.Resolve<NoDefaultConstructor>();
       Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
     }
     [Fact]

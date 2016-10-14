@@ -67,17 +67,15 @@ namespace Rezolver
     IEnumerable<ITarget> FetchAll(Type type);
 
     /// <summary>
-    /// 
     /// If supported by the implementation, this gets the container built from combining this container with 
     /// an <paramref name="existing"/> container as part of a registration inside another <see cref="ITargetContainerOwner"/>.
-    /// 
-    /// Used most frequently in implementations of <see cref="ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)"/> 
-    /// when a container owner is already registered against the type, and a new container owner is then registered against the 
-    /// same type.
     /// </summary>
     /// <param name="existing">The existing <see cref="ITargetContainer"/> instance that this instance is to be combined with</param>
     /// <param name="type">The type that the combined container owner will be registered under.</param>
     /// <returns></returns>
+    /// <remarks>Used most frequently in implementations of <see cref="ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)"/> 
+    /// when a container owner is already registered against the type, and a new container owner is then registered against the 
+    /// same type.  This behaviour is used to implement open generics and decorators, and can be used to implement more besides.</remarks>
     /// <exception cref="System.NotSupportedException">If this container doesn't support being combined with another.</exception>
     ITargetContainer CombineWith(ITargetContainer existing, Type type);
   }

@@ -53,7 +53,7 @@ namespace Rezolver
       var isScopeNull = Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IScopedContainer)));
       var throwArgException = Expression.Throw(Expression.New(_argExceptionCtor,
           Expression.Property(null, typeof(ExceptionResources), "ScopedSingletonRequiresAScope"),
-          Expression.Constant(context.RezolveContextParameter.Name ?? "context")));
+          Expression.Constant(context.RezolveContextExpression.Name ?? "context")));
 
       var actualType = context.TargetType ?? DeclaredType;
 
@@ -64,7 +64,7 @@ namespace Rezolver
           Expression.IfThen(isScopeNull, throwArgException),
           ExpressionHelper.Make_Scope_GetOrAddCallExpression(context,
               actualType,
-              Expression.Lambda(lambdaBody, context.RezolveContextParameter),
+              Expression.Lambda(lambdaBody, context.RezolveContextExpression),
               Expression.Constant(false))
           );
     }

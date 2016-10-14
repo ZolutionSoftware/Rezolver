@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_IChildTargetContainer" data-uid="Rezolver.IChildTargetContainer">Interface IChildTargetContainer
               </h1>
-              <div class="markdown level0 summary"><p>An IRezolveTargetContainer that is a logical child of another.<br>A child container, if it cannot resolve a particular type, will defer to its parent for fallback.</p>
+              <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> that inherits all registrations from an ancestor (<a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer_Parent">Parent</a>).
+If it cannot resolve a target for a particular type, will defer to its parent for fallback.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritedMembers">
@@ -125,7 +126,8 @@
               
               
               <h4 class="hmember" id="Rezolver_IChildTargetContainer_Parent" data-uid="Rezolver.IChildTargetContainer.Parent">Parent</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the parent target container.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -142,7 +144,8 @@
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
+                    <td><p>The parent.</p>
+</td>
                   </tr>
                 </tbody>
               </table>

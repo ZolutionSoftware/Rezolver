@@ -100,7 +100,7 @@
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
-                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
                   <div class="level1"><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a></div>
                   <div class="level2"><span class="xref">CachingContainerBase</span></div>
               </div>
@@ -155,25 +155,25 @@
                   <span class="xref">Rezolver.ContainerBase.Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer, System.Type)</span>
                 </div>
                 <div>
-                  <span class="xref">System.Object.ToString()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.Equals(System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.GetHashCode()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.GetType()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.MemberwiseClone()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
@@ -184,8 +184,8 @@
               </div>
               <h5 id="Rezolver_CachingContainerBase_remarks" class="hremarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Internally, the class uses a <see cref="!:ConcurrentDictionary&lt;TKey, TValue&gt;"></see> to store <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s keyed by the requested type.</p>
-<p>All the main <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementations used directly in an application inherit from this class, because otherwise every <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
-operation would require a compilation phase before the object could be returned, which would be incredibly slow.</p>
+<p>All the main <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementations used directly in an application should inherit from this class, because otherwise every </p>
+<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> operation would require a compilation phase before the object could be returned, which would be incredibly slow.</p>
 <p>It&#39;s because of this caching that registering new targets in any <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> used by this class is not recommended: because after the first request
 for a particular type is made, the resultant <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> is fixed until the container is thrown away.</p>
 </div>

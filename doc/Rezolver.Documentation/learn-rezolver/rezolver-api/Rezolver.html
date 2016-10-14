@@ -102,12 +102,12 @@
 <p>Only creatable through inheritance.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget">ChangeTypeTarget</a></h4>
-                  <section><p>This target is specifically used for explicitly typing another target.</p>
-<p>It&#39;s effectively the same as inserting a ConvertExpression around another Expression tree</p>
+                  <section><p>This target is specifically used for explicitly casting the result of one target to another type.</p>
+<p>It&#39;s effectively the same as inserting a ConvertExpression around an expression.</p>
 <p>Its use is rare.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer">ChildTargetContainer</a></h4>
-                  <section><p>A version of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> which overrides the registrations of another 
+                  <section><p>A version of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> which overrides the registrations of another
 (the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></h4>
@@ -115,22 +115,16 @@
 THIS CLASS IS NOT THREAD-SAFE</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey">CompileContext.SharedExpressionKey</a></h4>
-                  <section><p>Key for a shared expression used during expression tree generation</p>
+                  <section><p>Key for a shared expression used during expression tree generation.  As a consumer of this library, you
+are unlikely ever to need to use it.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.CompiledTargetBase.html#Rezolver_CompiledTargetBase">CompiledTargetBase</a></h4>
                   <section><p>Standard starting point for an implementation of <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> where
 the target is built directly from an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.ConditionalRewriter.html#Rezolver_ConditionalRewriter">ConditionalRewriter</a></h4>
-                  <section><p>Reorders an expression tree where duplicate conditional expressions are found
-in multiple places throughout that expression tree. Those duplicated conditionals
-are moved further up the expression tree into one conditional.</p>
-</section>
                   <h4><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a></h4>
-                  <section><p>The most common target used for building new objects.  Represents binding to a type&#39;s constructor with zero or more
-arguments supplied by other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
-<p>In addition to using the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_ConstructorInfo_Rezolver_IPropertyBindingBehaviour_Rezolver_ParameterBinding___">ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])</a> constructor
-you can also use the factory methods - such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto&lt;T&gt;(IPropertyBindingBehaviour)</a>.</p>
+                  <section><p>A target that binds to a type&#39;s constructor with zero or more arguments supplied by other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s and, optionally
+binding to the new instance&#39;s writeable properties.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></h4>
                   <section></section>
@@ -307,7 +301,8 @@ custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html#Rezolver_
                 <h3 id="interfaces">Interfaces
               </h3>
                   <h4><a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer">IChildTargetContainer</a></h4>
-                  <section><p>An IRezolveTargetContainer that is a logical child of another.<br>A child container, if it cannot resolve a particular type, will defer to its parent for fallback.</p>
+                  <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> that inherits all registrations from an ancestor (<a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer_Parent">Parent</a>).
+If it cannot resolve a target for a particular type, will defer to its parent for fallback.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a></h4>
                   <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>

@@ -157,7 +157,7 @@ namespace Rezolver
       var declaredTypeExpr = Expression.Constant(DeclaredType, typeof(Type));
 
       var newContextLocal = context.GetOrAddSharedLocal(typeof(RezolveContext), "newContext");
-      var newContextExpr = Expression.Call(context.RezolveContextParameter, ContextNewContextMethod, declaredTypeExpr);
+      var newContextExpr = Expression.Call(context.RezolveContextExpression, ContextNewContextMethod, declaredTypeExpr);
       var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
       bool setNewContextFirst = false;
       Expression staticExpr = null;

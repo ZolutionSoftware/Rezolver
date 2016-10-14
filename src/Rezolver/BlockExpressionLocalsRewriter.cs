@@ -11,7 +11,7 @@ using System.Text;
 namespace Rezolver
 {
   /// <summary>
-  /// Used to rewrite any block expressions that are found to strip out any locals that have been lifted
+  /// Used to rewrite any block expressions to strip out any locals that have been lifted
   /// out to an outer scope.
   /// 
   /// This prevents additional instances of a local being declared inside inner blocks from shared parameter expressions.

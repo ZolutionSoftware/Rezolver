@@ -16,7 +16,7 @@ namespace Rezolver
   public abstract class CompiledTargetBase : ICompiledTarget
   {
     /// <summary>
-    /// The target that was compiled into this instance.  Will not be null.
+    /// The target whose expression (obtained from <see cref="ITarget.CreateExpression(CompileContext)"/>) was compiled into this instance.  Will not be null.
     /// </summary>
     protected ITarget OriginalTarget { get; }
 

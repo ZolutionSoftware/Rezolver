@@ -15,16 +15,14 @@ namespace Rezolver
   /// </summary>
   /// <remarks>Internally, the class uses a <see cref="ConcurrentDictionary{TKey, TValue}"/> to store <see cref="ICompiledTarget"/>s keyed by the requested type.
   /// 
-  /// All the main <see cref="IContainer"/> implementations used directly in an application inherit from this class, because otherwise every <see cref="IContainer.Resolve(RezolveContext)"/>
-  /// operation would require a compilation phase before the object could be returned, which would be incredibly slow.
+  /// All the main <see cref="IContainer"/> implementations used directly in an application should inherit from this class, because otherwise every 
+  /// <see cref="IContainer.Resolve(RezolveContext)"/> operation would require a compilation phase before the object could be returned, which would be incredibly slow.
   /// 
   /// It's because of this caching that registering new targets in any <see cref="ITargetContainer"/> used by this class is not recommended: because after the first request
   /// for a particular type is made, the resultant <see cref="ICompiledTarget"/> is fixed until the container is thrown away.</remarks>
   public class CachingContainerBase : ContainerBase
   {
     private readonly ConcurrentDictionary<Type, Lazy<ICompiledTarget>> _entries = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
-
-    //note below - <see crefs pointing to constructors appear not to work
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CachingContainerBase"/> class.

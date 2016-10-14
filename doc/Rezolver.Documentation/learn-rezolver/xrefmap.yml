@@ -235,11 +235,11 @@ references:
   href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_Register_Rezolver_ITarget_System_Type_
   commentId: M:Rezolver.CompileContext.Register(Rezolver.ITarget,System.Type)
   fullName: Rezolver.CompileContext.Register(Rezolver.ITarget, System.Type)
-- uid: Rezolver.CompileContext.RezolveContextParameter
-  name: RezolveContextParameter
-  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter
-  commentId: P:Rezolver.CompileContext.RezolveContextParameter
-  fullName: Rezolver.CompileContext.RezolveContextParameter
+- uid: Rezolver.CompileContext.RezolveContextExpression
+  name: RezolveContextExpression
+  href: rezolver-api/Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextExpression
+  commentId: P:Rezolver.CompileContext.RezolveContextExpression
+  fullName: Rezolver.CompileContext.RezolveContextExpression
 - uid: Rezolver.CompileContext.SharedExpressionKey
   name: CompileContext.SharedExpressionKey
   href: rezolver-api/Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey
@@ -2454,11 +2454,11 @@ references:
   href: rezolver-api/Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_Make_Scope_GetScopeRootCallExpression_Rezolver_CompileContext_
   commentId: M:Rezolver.ExpressionHelper.Make_Scope_GetScopeRootCallExpression(Rezolver.CompileContext)
   fullName: Rezolver.ExpressionHelper.Make_Scope_GetScopeRootCallExpression(Rezolver.CompileContext)
-- uid: Rezolver.ExpressionHelper.RezolveContextParameter
-  name: RezolveContextParameter
-  href: rezolver-api/Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_RezolveContextParameter
-  commentId: F:Rezolver.ExpressionHelper.RezolveContextParameter
-  fullName: Rezolver.ExpressionHelper.RezolveContextParameter
+- uid: Rezolver.ExpressionHelper.RezolveContextParameterExpression
+  name: RezolveContextParameterExpression
+  href: rezolver-api/Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_RezolveContextParameterExpression
+  commentId: F:Rezolver.ExpressionHelper.RezolveContextParameterExpression
+  fullName: Rezolver.ExpressionHelper.RezolveContextParameterExpression
 - uid: Rezolver.ExpressionHelper.Scope_GetOrAddGenericMethod
   name: Scope_GetOrAddGenericMethod
   href: rezolver-api/Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_Scope_GetOrAddGenericMethod

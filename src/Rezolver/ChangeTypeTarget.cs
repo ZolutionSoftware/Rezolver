@@ -11,9 +11,9 @@ using System.Text;
 namespace Rezolver
 {
   /// <summary>
-  /// This target is specifically used for explicitly typing another target.
+  /// This target is specifically used for explicitly casting the result of one target to another type.
   /// 
-  /// It's effectively the same as inserting a ConvertExpression around another Expression tree
+  /// It's effectively the same as inserting a ConvertExpression around an expression.
   /// 
   /// Its use is rare.
   /// </summary>
@@ -34,6 +34,10 @@ namespace Rezolver
         return true;
       }
     }
+    
+    /// <summary>
+    /// Always returns the target type that was passed in the <see cref="ChangeTypeTarget.ChangeTypeTarget(ITarget, Type)"/> constructor.
+    /// </summary>
     public override Type DeclaredType
     {
       get
@@ -43,7 +47,7 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// The target whose type will be changed to <see cref="_targetType"/>.
+    /// The target whose type will be changed to <see cref="DeclaredType"/>.
     /// </summary>
     public ITarget InnerTarget { get; private set; }
 
@@ -51,7 +55,7 @@ namespace Rezolver
     /// Creates a new instance of the <see cref="ChangeTypeTarget"/> class.
     /// </summary>
     /// <param name="innerTarget">Required.  See <see cref="InnerTarget"/></param>
-    /// <param name="targetType">Required.  See <see cref="_targetType"/></param>
+    /// <param name="targetType">Required.  See <see cref="DeclaredType"/></param>
     public ChangeTypeTarget(ITarget innerTarget, Type targetType)
     {
       innerTarget.MustNotBeNull(nameof(innerTarget));
@@ -61,6 +65,12 @@ namespace Rezolver
       _targetType = targetType;
     }
 
+    /// <summary>
+    /// Returns a Linq Convert expression (<see cref="UnaryExpression"/> created through the <see cref="Expression.Convert(Expression, Type)"/> factory method)
+    /// whose inner expression is the expression built by the <see cref="InnerTarget"/> for its <see cref="ITarget.DeclaredType"/>.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     protected override Expression CreateExpressionBase(CompileContext context)
     {
       var baseExpression = InnerTarget.CreateExpression(context.New(InnerTarget.DeclaredType));

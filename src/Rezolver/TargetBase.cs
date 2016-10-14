@@ -37,7 +37,7 @@ namespace Rezolver
             }
             RezolveContextPlaceholderExpression pe = node as RezolveContextPlaceholderExpression;
             if (pe != null)
-              return _sourceCompileContext.RezolveContextParameter;
+              return _sourceCompileContext.RezolveContextExpression;
           }
         }
         return base.Visit(node);

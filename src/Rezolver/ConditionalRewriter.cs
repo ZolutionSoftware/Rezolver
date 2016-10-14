@@ -15,7 +15,11 @@ namespace Rezolver
   /// in multiple places throughout that expression tree. Those duplicated conditionals
   /// are moved further up the expression tree into one conditional.
   /// </summary>
-  public class ConditionalRewriter : ExpressionVisitor
+  /// <remarks>Although there's no reason for this type to be internal, it is for now until someone specifically needs it.
+  /// 
+  /// The library already uses it automatically for all expressions created by custom targets so long as the standard base types
+  /// are used to create and compile them.</remarks>
+  internal class ConditionalRewriter : ExpressionVisitor
   {
     private enum RewriteStages
     {

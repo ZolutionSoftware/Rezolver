@@ -94,13 +94,13 @@
               
               <h1 id="Rezolver_ChildTargetContainer" data-uid="Rezolver.ChildTargetContainer">Class ChildTargetContainer
               </h1>
-              <div class="markdown level0 summary"><p>A version of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> which overrides the registrations of another 
+              <div class="markdown level0 summary"><p>A version of <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> which overrides the registrations of another
 (the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
-                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
                   <div class="level1"><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer">TargetDictionaryContainer</a></div>
                   <div class="level2"><a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a></div>
                   <div class="level3"><span class="xref">ChildTargetContainer</span></div>
@@ -129,25 +129,25 @@
                   <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">TargetDictionaryContainer.CombineWith(ITargetContainer, Type)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.ToString()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.Equals(System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.GetHashCode()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.GetType()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.MemberwiseClone()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
@@ -159,7 +159,11 @@
               <h5 id="Rezolver_ChildTargetContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>When it&#39;s looking to find an entry for a type, if it
 cannot find one within its own registrations, it will forward the call on to
-its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>.</p>
+its ancestors (starting with its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).
+As a result, any dependencies required by registrations in this container can be provided by
+any ancestor.
+Fallback logic in the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Fetch_System_Type_">Fetch(Type)</a>
+is triggered by the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property.</p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -168,7 +172,8 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
               
               
               <h4 class="hmember" id="Rezolver_ChildTargetContainer__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.ChildTargetContainer.#ctor(Rezolver.ITargetContainer)">ChildTargetContainer(ITargetContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer">ChildTargetContainer</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -187,7 +192,8 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
                   <tr>
                     <td><em>parent</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
+                    <td><p>Required. The parent target container</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -199,7 +205,8 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
               
               
               <h4 class="hmember" id="Rezolver_ChildTargetContainer_Parent" data-uid="Rezolver.ChildTargetContainer.Parent">Parent</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the parent.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -216,7 +223,8 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
+                    <td><p>The parent.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -230,7 +238,9 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
               
               
               <h4 class="hmember" id="Rezolver_ChildTargetContainer_Fetch_System_Type_" data-uid="Rezolver.ChildTargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Fetches the registered target for the given <em>type</em>, if found, or
+forwards the call to the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a> container.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -248,8 +258,9 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-                    <td><span class="xref">System.Type</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>The type whose registration is sought.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -264,7 +275,9 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
+                    <td><p>The target which is registered for the given type, or null if no registration
+can be found.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -277,7 +290,8 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
               
               
               <h4 class="hmember" id="Rezolver_ChildTargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ChildTargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -295,8 +309,9 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
                 <tbody>
                   <tr>
                     <td><em>type</em></td>
-                    <td><span class="xref">System.Type</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>The type whose targets are to be retrieved.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -310,8 +325,10 @@ its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTarge
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><p>A non-null enumerable containing the targets that match the type, or an
+empty enumerable if the type is not registered.</p>
+</td>
                   </tr>
                 </tbody>
               </table>

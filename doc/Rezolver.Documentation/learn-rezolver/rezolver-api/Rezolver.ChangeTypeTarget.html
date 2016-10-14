@@ -94,14 +94,14 @@
               
               <h1 id="Rezolver_ChangeTypeTarget" data-uid="Rezolver.ChangeTypeTarget">Class ChangeTypeTarget
               </h1>
-              <div class="markdown level0 summary"><p>This target is specifically used for explicitly typing another target.</p>
-<p>It&#39;s effectively the same as inserting a ConvertExpression around another Expression tree</p>
+              <div class="markdown level0 summary"><p>This target is specifically used for explicitly casting the result of one target to another type.</p>
+<p>It&#39;s effectively the same as inserting a ConvertExpression around an expression.</p>
 <p>Its use is rare.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
-                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
                   <div class="level1"><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase">TargetBase</a></div>
                   <div class="level2"><span class="xref">ChangeTypeTarget</span></div>
               </div>
@@ -126,25 +126,25 @@
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.ToString()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.Equals(System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.GetHashCode()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.GetType()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.MemberwiseClone()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
@@ -185,8 +185,8 @@
                   </tr>
                   <tr>
                     <td><em>targetType</em></td>
-                    <td><span class="xref">System.Type</span></td>
-                    <td><p>Required.  See <span class="xref">Rezolver.ChangeTypeTarget._targetType</span></p>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>Required.  See <a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget_DeclaredType">DeclaredType</a></p>
 </td>
                   </tr>
                 </tbody>
@@ -199,7 +199,8 @@
               
               
               <h4 class="hmember" id="Rezolver_ChangeTypeTarget_DeclaredType" data-uid="Rezolver.ChangeTypeTarget.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Always returns the target type that was passed in the <a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget__ctor_Rezolver_ITarget_System_Type_">ChangeTypeTarget(ITarget, Type)</a> constructor.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -215,7 +216,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -227,7 +228,7 @@
               
               
               <h4 class="hmember" id="Rezolver_ChangeTypeTarget_InnerTarget" data-uid="Rezolver.ChangeTypeTarget.InnerTarget">InnerTarget</h4>
-              <div class="markdown level1 summary"><p>The target whose type will be changed to <span class="xref">Rezolver.ChangeTypeTarget._targetType</span>.</p>
+              <div class="markdown level1 summary"><p>The target whose type will be changed to <a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget_DeclaredType">DeclaredType</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -271,7 +272,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -286,7 +287,9 @@
               
               
               <h4 class="hmember" id="Rezolver_ChangeTypeTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ChangeTypeTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a Linq Convert expression (<see cref="!:UnaryExpression"></see> created through the <see cref="!:Expression.Convert(Expression, Type)"></see> factory method)
+whose inner expression is the expression built by the <a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget_InnerTarget">InnerTarget</a> for its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">

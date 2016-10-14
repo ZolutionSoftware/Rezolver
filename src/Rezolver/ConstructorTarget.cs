@@ -11,12 +11,17 @@ using System.Reflection;
 namespace Rezolver
 {
   /// <summary>
-  /// The most common target used for building new objects.  Represents binding to a type's constructor with zero or more
-  /// arguments supplied by other <see cref="ITarget"/>s.
-  /// 
-  /// In addition to using the <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/> constructor
-  /// you can also use the factory methods - such as <see cref="Auto{T}(IPropertyBindingBehaviour)"/>.
+  /// A target that binds to a type's constructor with zero or more arguments supplied by other <see cref="ITarget"/>s and, optionally
+  /// binding to the new instance's writeable properties.
   /// </summary>
+  /// <remarks>Although you can create this target directly through the 
+  /// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/> constructor,
+  /// you're more likely to create it through factory methods such as <see cref="Auto{T}(IPropertyBindingBehaviour)"/> or, more likely still,
+  /// extension methods such as <see cref="ITargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IPropertyBindingBehaviour)"/> during
+  /// your application's container setup phase.
+  /// 
+  /// The expression built by this class' implementation of <see cref="CreateExpressionBase(CompileContext)"/> will be an expression tree that ultimately
+  /// creates a new instance of the <see cref="DeclaredType"/>.</remarks>
   public class ConstructorTarget : TargetBase
   {
     //note - neither of these two classes inherit from TargetBase because that class performs lots 
@@ -128,14 +133,29 @@ namespace Rezolver
     private readonly IDictionary<string, ITarget> _suppliedArgs;
 
     /// <summary>
-    /// 
+    /// Initializes a new instance of the <see cref="ConstructorTarget"/> class.
     /// </summary>
-    /// <param name="type"></param>
-    /// <param name="ctor"></param>
-    /// <param name="propertyBindingBehaviour"></param>
-    /// <param name="parameterBindings"></param>
+    /// <param name="type">Required.  The type to be constructed when resolved in a container.</param>
+    /// <param name="ctor">Optional.  The specific constructor to be bound on the <paramref name="type"/></param>
+    /// <param name="propertyBindingBehaviour">Optional.  If provided, then this is used to extend the expression returned by <see cref="CreateExpressionBase(CompileContext)"/>
+    /// into a <see cref="MemberInitExpression"/> with one or more writeable properties also being bound to the runtime <see cref="IContainer"/>.</param>
+    /// <param name="parameterBindings">Optional, although can only be supplied if <paramref name="ctor"/> is provided.  
+    /// Specific bindings for the parameters of the given <paramref name="ctor"/> which should be used during code generation.</param>
+    /// <remarks>
+    /// If you do not pass an argument to the <paramref name="ctor"/> parameter, then best available constructor on the <paramref name="type"/> is determined
+    /// when <see cref="ITarget.CreateExpression(CompileContext)"/> is called (which ultimately calls <see cref="CreateExpressionBase(CompileContext)"/>).
+    /// 
+    /// The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the <see cref="CompileContext"/> at compile-time
+    /// (i.e. when <see cref="CreateExpressionBase(CompileContext)"/> is called) to the fewest number of <see cref="ITarget"/> objects whose <see cref="ITarget.UseFallback"/> 
+    /// is false (for example - when an IEnumerable of a service is requested, but no registrations are found, a target is returned with <see cref="ITarget.UseFallback"/> set to 
+    /// <c>true</c>, and whose expression will equate to an empty enumerable).
+    /// 
+    /// This allows the system to bind to different constructors automatically based on the other registrations that are present in the <see cref="ITargetContainer"/> of the active
+    /// <see cref="RezolveContext.Container"/> when code is compiled in response to a call to <see cref="IContainer.Resolve(RezolveContext)"/>.
+    /// </remarks>
     public ConstructorTarget(Type type, ConstructorInfo ctor, IPropertyBindingBehaviour propertyBindingBehaviour, ParameterBinding[] parameterBindings)
     {
+      type.MustNotBeNull(nameof(type));
       _declaredType = type;
       _ctor = ctor;
       _parameterBindings = parameterBindings ?? ParameterBinding.None;
@@ -152,6 +172,11 @@ namespace Rezolver
       _suppliedArgs = suppliedArgs;
     }
 
+    /// <summary>
+    /// Implementation of <see cref="TargetBase.CreateExpressionBase(CompileContext)"/>
+    /// </summary>
+    /// <param name="context">The current compile context</param>
+    /// <exception cref="AmbiguousMatchException">If no definitively 'best' constructor can be determined.</exception>
     protected override Expression CreateExpressionBase(CompileContext context)
     {
       ConstructorInfo ctor = _ctor;
@@ -189,7 +214,7 @@ namespace Rezolver
           {
             var mostGreedy = publicCtorGroups[0].ToArray();
             if (mostGreedy.Length > 1)
-              throw new InvalidOperationException(string.Format(ExceptionResources.MoreThanOneConstructorFormat, DeclaredType));
+              throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneConstructorFormat, DeclaredType, string.Join(", ", mostGreedy.AsEnumerable())));
             else
             {
               ctor = mostGreedy[0];
@@ -239,24 +264,37 @@ namespace Rezolver
       return target.CreateExpression(context);
     }
 
+    /// <summary>
+    /// Implementation of <see cref="TargetBase.DeclaredType"/>.  Always returns the type passed into the 
+    /// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/> constructor
+    /// </summary>
     public override Type DeclaredType
     {
       get { return _declaredType; }
     }
 
+    /// <summary>
+    /// Generic version of the <see cref="Auto(Type, IPropertyBindingBehaviour)"/> method.
+    /// </summary>
+    /// <typeparam name="T">The type that is to be constructed when the new target is compiled and executed.</typeparam>
+    /// <param name="propertyBindingBehaviour">See the documentation for the <paramref name="propertyBindingBehaviour"/> parameter
+    /// on the non-generic version of this method.</param>
+    /// <returns>A new <see cref="ITarget"/> that is (likely) to be either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> if
+    /// <paramref name="type"/> is a generic type definition.</returns>
     public static ITarget Auto<T>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
     {
       return Auto(typeof(T), propertyBindingBehaviour);
     }
 
     /// <summary>
-    /// Creates a target that will create a new concrete instance of the <paramref name="type"/>.
-    /// 
-    /// Note - if the type is a generic type definition, t
+    /// Shortcut for calling the <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/>
+    /// with only the <paramref name="type"/> and <paramref name="propertyBindingBehaviour"/> arguments supplied.
     /// </summary>
-    /// <param name="type"></param>
-    /// <param name="propertyBindingBehaviour"></param>
-    /// <returns></returns>
+    /// <param name="type">The type that is to be constructed when this target is compiled and executed.</param>
+    /// <param name="propertyBindingBehaviour">Optional.  An object which selects properties on the new instance which are
+    /// to be bound the container.</param>
+    /// <returns>A new <see cref="ITarget"/> that is (likely) to be either a <see cref="ConstructorTarget"/> (or <see cref="GenericConstructorTarget"/> if
+    /// <paramref name="type"/> is a generic type definition).</returns>
     public static ITarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
     {
       //conduct a very simple search for the constructor with the most parameters
@@ -283,45 +321,25 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Constructs an constructor target that's reconstructed from a <see cref="System.Linq.Expressions.NewExpression"/>, including any
-    /// parameter bindings.
+    /// Creates a <see cref="ConstructorTarget"/> with a set of named targets which will be used to 
+    /// bind the constructor when the target's <see cref="ITarget.CreateExpression(CompileContext)"/>
+    /// is called.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="newExpr"></param>
-    /// <param name="adapter"></param>
-    /// <returns></returns>
-    public static ITarget FromNewExpression<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr, ITargetAdapter adapter = null)
-    {
-      newExpr.MustNotBeNull(nameof(newExpr));
-      NewExpression newExprBody = null;
-
-      newExprBody = newExpr.Body as NewExpression;
-      if (newExprBody == null)
-        throw new ArgumentException(string.Format(ExceptionResources.LambdaBodyIsNotNewExpressionFormat, newExpr), nameof(newExpr));
-      else if (newExprBody.Type != typeof(T))
-        throw new ArgumentException(string.Format(ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat, newExpr, typeof(T)), nameof(newExpr));
-
-      return FromNewExpression(typeof(T), newExprBody, adapter);
-    }
-
-    /// <summary>
+    /// <typeparam name="T">The type whose constructor is to be bound</typeparam>
+    /// <param name="args">The named arguments to be used when building the expression.</param>
+    /// <returns>ITarget.</returns>
+    /// <remarks>Both versions of this method will create a target which will try to find the best-matching
+    /// constructor where all of the named arguments match, and with the fewest number of auto-resolved
+    /// arguments.
     /// 
-    /// </summary>
-    /// <param name="declaredType"></param>
-    /// <param name="newExpr"></param>
-    /// <param name="adapter"></param>
-    /// <returns></returns>
-    public static ITarget FromNewExpression(Type declaredType, NewExpression newExpr, ITargetAdapter adapter = null)
-    {
-      ConstructorInfo ctor = null;
-      ParameterBinding[] parameterBindings = null;
-
-      ctor = newExpr.Constructor;
-      parameterBindings = ExtractParameterBindings(newExpr, adapter ?? TargetAdapter.Default).ToArray();
-
-      return new ConstructorTarget(declaredType, ctor, null, parameterBindings);
-    }
-
+    /// So, a class with a constructor such as 
+    /// 
+    /// <code>Foo(IService1 s1, IService2 s2)</code>
+    /// 
+    /// Can happily be bound if you only provide a named argument for 's1'; the target will simply
+    /// attempt to auto-resolve the argument for the <code>IService2 s2</code> parameter when constructing 
+    /// the object - and will fail only if it can't be resolved at that point.
+    /// </remarks>
     public static ITarget WithArgs<T>(IDictionary<string, ITarget> args)
     {
       args.MustNotBeNull("args");
@@ -329,6 +347,12 @@ namespace Rezolver
       return WithArgsInternal(typeof(T), args);
     }
 
+    /// <summary>
+    /// Non-generic version of <see cref="WithArgs{T}(IDictionary{string, ITarget})"/>.
+    /// </summary>
+    /// <param name="declaredType">The type whose constructor is to be bound</param>
+    /// <param name="args">The named arguments to be used when building the expression.</param>
+    /// <returns>ITarget.</returns>
     public static ITarget WithArgs(Type declaredType, IDictionary<string, ITarget> args)
     {
       declaredType.MustNotBeNull("declaredType");
@@ -337,6 +361,16 @@ namespace Rezolver
       return WithArgsInternal(declaredType, args);
     }
 
+    /// <summary>
+    /// Similar to <see cref="WithArgs(Type, IDictionary{string, ITarget})"/> except this one creates
+    /// a <see cref="ConstructorTarget"/> which is specifically bound to a particular constructor on a 
+    /// given type, using any matched argument bindings from the provided <paramref name="args" /> dictionary,
+    /// and resolving any that are not matched.
+    /// </summary>
+    /// <param name="declaredType">Type of the object to be constructed, or the type .</param>
+    /// <param name="ctor">The ctor.</param>
+    /// <param name="args">The arguments.</param>
+    /// <returns>ITarget.</returns>
     public static ITarget WithArgs(Type declaredType, ConstructorInfo ctor, IDictionary<string, ITarget> args)
     {
       declaredType.MustNotBeNull("declaredType");
@@ -356,7 +390,60 @@ namespace Rezolver
       return new ConstructorTarget(declaredType, (ConstructorInfo)ctor, null, args);
     }
 
+    /// <summary>
+    /// Creates a new <see cref="ConstructorTarget" /> from the passed lambda expression (whose <see cref="LambdaExpression.Body" /> must be a <see cref="NewExpression" />)
+    /// </summary>
+    /// <typeparam name="T">The type of the object to be created by the new <see cref="ConstructorTarget" /></typeparam>
+    /// <param name="newExpr">Required.  The expression from which to create the target.</param>
+    /// <param name="adapter">Optional.  The adapter to be used to convert any additional expressions in the lambda into <see cref="ITarget" /> instances (e.g. for argument values).
+    /// If not provided, then the <see cref="TargetAdapter.Default" /> will be used.</param>
+    /// <returns>An <see cref="ITarget" /> that actually be an intstance of <see cref="ConstructorTarget"/></returns>
+    /// <exception cref="ArgumentNullException">If <paramref name="newExpr"/> is null.</exception>
+    /// <exception cref="ArgumentException">If the <paramref name="newExpr"/> does not have a NewExpression as its root (Body) node, or if the type of
+    /// that expression does not equal <typeparamref name="T"/>
+    /// </exception>
+    /// <remarks>This method does not support member binding expressions - e.g. <code>c => new MyObject() { A = "hello" }</code> - these can be converted into
+    /// targets using a (compliant) <see cref="ITargetAdapter"/> object's <see cref="ITargetAdapter.CreateTarget(Expression)"/> method.  At least, the supplied
+    /// <see cref="TargetAdapter"/> class does support them.
+    /// 
+    /// When providing custom expressions to be used as targets in an <see cref="ITargetContainer"/>, it is possible to explicitly define properties/arguments as
+    /// being resolved from the container itself, in exactly the same way as generated by the other factory methods such as <see cref="Auto{T}(IPropertyBindingBehaviour)"/>
+    /// and <see cref="ITargetContainerExtensions.RegisterType{TObject}(ITargetContainer, IPropertyBindingBehaviour)"/>.  To do this, simply call the 
+    /// <see cref="RezolveContextExpressionHelper.Resolve{T}"/> function on the object passed into your expression (see the signature of the lambda <paramref name="newExpr"/>),
+    /// and Rezolver will convert that call into a <see cref="RezolvedTarget"/>.
+    /// </remarks>
+    public static ITarget FromNewExpression<T>(Expression<Func<RezolveContextExpressionHelper, T>> newExpr, ITargetAdapter adapter = null)
+    {
+      newExpr.MustNotBeNull(nameof(newExpr));
+      NewExpression newExprBody = null;
 
+      newExprBody = newExpr.Body as NewExpression;
+      if (newExprBody == null)
+        throw new ArgumentException(string.Format(ExceptionResources.LambdaBodyIsNotNewExpressionFormat, newExpr), nameof(newExpr));
+      else if (newExprBody.Type != typeof(T))
+        throw new ArgumentException(string.Format(ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat, newExpr, typeof(T)), nameof(newExpr));
+
+      return FromNewExpression(typeof(T), newExprBody, adapter);
+    }
+
+    /// <summary>
+    /// Non-generic version of <see cref="FromNewExpression{T}(Expression{Func{RezolveContextExpressionHelper, T}}, ITargetAdapter)"/>.  See the documentation
+    /// on that method for more.
+    /// </summary>
+    /// <param name="declaredType">The of the object to be created by the new <see cref="ConstructorTarget"/></param>
+    /// <param name="newExpr"></param>
+    /// <param name="adapter"></param>
+    /// <returns></returns>
+    public static ITarget FromNewExpression(Type declaredType, NewExpression newExpr, ITargetAdapter adapter = null)
+    {
+      ConstructorInfo ctor = null;
+      ParameterBinding[] parameterBindings = null;
+
+      ctor = newExpr.Constructor;
+      parameterBindings = ExtractParameterBindings(newExpr, adapter ?? TargetAdapter.Default).ToArray();
+
+      return new ConstructorTarget(declaredType, ctor, null, parameterBindings);
+    }
 
     private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr, ITargetAdapter adapter)
     {

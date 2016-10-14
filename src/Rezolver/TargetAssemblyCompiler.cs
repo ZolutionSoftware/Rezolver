@@ -164,7 +164,7 @@ namespace Rezolver
 			if (sharedLocals.Length != 0)
 				toBuild = Expression.Block(toBuild.Type, sharedLocals, toBuild);
 
-			Expression.Lambda(toBuild, context.RezolveContextParameter).CompileToMethod(methodBuilder);
+			Expression.Lambda(toBuild, context.RezolveContextExpression).CompileToMethod(methodBuilder);
 		}
 
 		private class ConstantRewriter : ExpressionVisitor

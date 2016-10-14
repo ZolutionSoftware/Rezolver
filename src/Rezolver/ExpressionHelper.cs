@@ -34,7 +34,10 @@ namespace Rezolver
     /// </summary>
     public static readonly ParameterExpression DynamicRezolverParam = Expression.Parameter(typeof(IContainer), "dynamicRezolver");
 
-    public static readonly ParameterExpression RezolveContextParameter = Expression.Parameter(typeof(RezolveContext), "context");
+    /// <summary>
+    /// The default <see cref="RezolveContext"/> parameter expression to be used during code generation in an implementation of <see cref="ITarget.CreateExpression(CompileContext)"/>
+    /// </summary>
+    public static readonly ParameterExpression RezolveContextParameterExpression = Expression.Parameter(typeof(RezolveContext), "context");
 
     /// <summary>
     /// Provides a standard way to create the method body for a lambda that, when compiled (with the correct signature) will 
@@ -67,7 +70,7 @@ namespace Rezolver
       var toBuild = target.CreateExpression(context);
       if (toBuild.Type != typeof(object))
         toBuild = Expression.Convert(toBuild, typeof(object));
-      //if we have shared conditionals, then we want to try and reorder them as the intention
+      //if we have shared conditionals, then we want to try and reorder them; as the intention
       //of the use of shared expressions is to consolidate them into one.  We do this on the boolean
       //expressions that might be used as tests for conditionals
       var sharedConditionalTests = context.SharedExpressions.Where(e => e.Type == typeof(Boolean)).ToArray();
@@ -92,7 +95,7 @@ namespace Rezolver
 
     /// <summary>
     /// First gets the lambda body using <see cref="GetLambdaBodyForTarget(ITarget, CompileContext)"/>, then
-    /// passes that as the body for the returned expression, using also the <see cref="CompileContext.RezolveContextParameter"/>
+    /// passes that as the body for the returned expression, using also the <see cref="CompileContext.RezolveContextExpression"/>
     /// <see cref="ParameterExpression"/> from the <paramref name="context"/> parameter as the expression for the RezolveContext that's
     /// passed to the compiled method when invoked.
     /// </summary>
@@ -106,7 +109,7 @@ namespace Rezolver
 
     internal static Expression<Func<RezolveContext, object>> GetResolveLambdaForExpression(Expression toCompile, CompileContext context)
     {
-      return Expression.Lambda<Func<RezolveContext, object>>(toCompile, context.RezolveContextParameter);
+      return Expression.Lambda<Func<RezolveContext, object>>(toCompile, context.RezolveContextExpression);
     }
 
     /// <summary>
@@ -124,7 +127,7 @@ namespace Rezolver
     {
       return Expression.Call(Scope_GetOrAddGenericMethod.MakeGenericMethod(objectType),
           context.ContextScopePropertyExpression,
-          context.RezolveContextParameter,
+          context.RezolveContextExpression,
           factoryExpression,
           iDisposableOnly ?? Expression.Constant(true));
     }

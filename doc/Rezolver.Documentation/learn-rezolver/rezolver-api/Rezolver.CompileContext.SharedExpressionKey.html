@@ -94,30 +94,31 @@
               
               <h1 id="Rezolver_CompileContext_SharedExpressionKey" data-uid="Rezolver.CompileContext.SharedExpressionKey">Class CompileContext.SharedExpressionKey
               </h1>
-              <div class="markdown level0 summary"><p>Key for a shared expression used during expression tree generation</p>
+              <div class="markdown level0 summary"><p>Key for a shared expression used during expression tree generation.  As a consumer of this library, you
+are unlikely ever to need to use it.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
-                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
                   <div class="level1"><span class="xref">CompileContext.SharedExpressionKey</span></div>
               </div>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <span class="xref">System.Object.ToString()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.GetType()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
                 </div>
                 <div>
-                  <span class="xref">System.Object.MemberwiseClone()</span>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
@@ -133,7 +134,8 @@
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressionKey__ctor_System_Type_System_String_System_Type_" data-uid="Rezolver.CompileContext.SharedExpressionKey.#ctor(System.Type,System.String,System.Type)">SharedExpressionKey(Type, String, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey">CompileContext.SharedExpressionKey</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -151,18 +153,21 @@
                 <tbody>
                   <tr>
                     <td><em>targetType</em></td>
-                    <td><span class="xref">System.Type</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>Required. Eventual runtime type of the object produced by the expression that will be cached using this key.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>name</em></td>
-                    <td><span class="xref">System.String</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a></td>
+                    <td><p>Required. The name used for storing and retrieving expressions cached with this key.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>requestingType</em></td>
-                    <td><span class="xref">System.Type</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>The type (e.g. the runtime type of an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementation) whose compilation requires the cached expression.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -174,7 +179,8 @@
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressionKey_Name" data-uid="Rezolver.CompileContext.SharedExpressionKey.Name">Name</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the name used for expressions that are cached using this key.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -190,8 +196,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.String</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a></td>
+                    <td><p>The name.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -200,7 +207,8 @@
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressionKey_RequestingType" data-uid="Rezolver.CompileContext.SharedExpressionKey.RequestingType">RequestingType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the type that registered the shared expression</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -216,7 +224,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -226,7 +234,8 @@
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressionKey_TargetType" data-uid="Rezolver.CompileContext.SharedExpressionKey.TargetType">TargetType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>The intended type of the expression that is cached by this key.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -242,7 +251,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -255,7 +264,8 @@
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressionKey_Equals_Rezolver_CompileContext_SharedExpressionKey_" data-uid="Rezolver.CompileContext.SharedExpressionKey.Equals(Rezolver.CompileContext.SharedExpressionKey)">Equals(CompileContext.SharedExpressionKey)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Indicates whether the current object is equal to another object of the same type.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -274,7 +284,8 @@
                   <tr>
                     <td><em>other</em></td>
                     <td><a class="xref" href="Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey">CompileContext.SharedExpressionKey</a></td>
-                    <td></td>
+                    <td><p>An object to compare with this object.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -288,19 +299,21 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+                    <td><p>true if the current object is equal to the <em>other</em> parameter; otherwise, false.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
-                  <div><span class="xref">System.IEquatable&lt;Rezolver.CompileContext.SharedExpressionKey&gt;.Equals(Rezolver.CompileContext.SharedExpressionKey)</span></div>
+                  <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/ms131190(v=vs.110).aspx">IEquatable&lt;CompileContext.SharedExpressionKey&gt;.Equals(CompileContext.SharedExpressionKey)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressionKey_Equals_System_Object_" data-uid="Rezolver.CompileContext.SharedExpressionKey.Equals(System.Object)">Equals(Object)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Determines whether the specified <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> is equal to this instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -318,8 +331,9 @@
                 <tbody>
                   <tr>
                     <td><em>obj</em></td>
-                    <td><span class="xref">System.Object</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+                    <td><p>The object to compare with the current object.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -333,19 +347,21 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Boolean</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+                    <td><p><code>true</code> if the specified <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> is equal to this instance; otherwise, <code>false</code>.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
-              <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+              <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_SharedExpressionKey_GetHashCode" data-uid="Rezolver.CompileContext.SharedExpressionKey.GetHashCode">GetHashCode()</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a hash code for this instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -361,13 +377,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">System.Int32</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.int32(v=vs.110).aspx">Int32</a></td>
+                    <td><p>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
-              <div><span class="xref">System.Object.GetHashCode()</span></div>
+              <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a></div>
               </div><!-- .classchild -->
             </article>
           </div>

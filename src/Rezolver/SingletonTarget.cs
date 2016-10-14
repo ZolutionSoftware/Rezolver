@@ -130,7 +130,7 @@ namespace Rezolver
                   //that happens to be the AssemblyRezolveTargetCompiler.
                   var lazyLambdaExpr = Expression.Lambda(Expression.New(LazyObject_Ctor,
                       //creating the factory delegate for the lazy uniquely for each invokation of the outer lambda
-                      Expression.Lambda(Expression.Convert(scopeTracking, typeof(object)))), context.RezolveContextParameter);
+                      Expression.Lambda(Expression.Convert(scopeTracking, typeof(object)))), context.RezolveContextExpression);
           var lazyLambda = (Func<RezolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
                   //now we create and capture an instance of the SingletonTargetLazyInitialiser class, passing our
                   //dynamically constructed delegate along with this target
@@ -140,7 +140,7 @@ namespace Rezolver
                 });
       }
       return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledTarget)),
-             ICompiledRezolveTarget_GetObject, context.RezolveContextParameter);
+             ICompiledRezolveTarget_GetObject, context.RezolveContextExpression);
       //return Expression.Property(Expression.Constant(initialiser.Lazy), "Value");
     }
 
