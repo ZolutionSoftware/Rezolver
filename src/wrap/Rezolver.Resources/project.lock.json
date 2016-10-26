@@ -2,12 +2,13 @@
   "locked": false,
   "version": 2,
   "targets": {
-    "DNX,Version=v4.5.1": {},
-    "DNX,Version=v4.5.1/win7-x86": {},
-    "DNX,Version=v4.5.1/win7-x64": {}
+    "Unsupported,Version=v0.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "": []
-  }
+    "": [],
+    "Unsupported,Version=v0.0": []
+  },
+  "tools": {},
+  "projectFileToolGroups": {}
 }

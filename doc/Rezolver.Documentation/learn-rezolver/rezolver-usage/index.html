@@ -135,8 +135,6 @@ namespace Rezolver.Tests
       var target = ConstructorTarget.Auto&lt;DefaultConstructor&gt;();
       var result = GetValueFromTarget&lt;DefaultConstructor&gt;(target);
       Assert.Equal(DefaultConstructor.ExpectedValue, result.Value);
-      var result2 = GetValueFromTarget&lt;NoExplicitConstructor&gt;(target);
-      Assert.NotSame(result, result2);
     }
 
     [Fact]
@@ -147,8 +145,6 @@ namespace Rezolver.Tests
       var target = ConstructorTarget.Auto&lt;ConstructorWithDefaults&gt;();
       var result = GetValueFromTarget&lt;ConstructorWithDefaults&gt;(target);
       Assert.Equal(ConstructorWithDefaults.ExpectedValue, result.Value);
-      var result2 = GetValueFromTarget&lt;NoExplicitConstructor&gt;(target);
-      Assert.NotSame(result, result2);
     }
 
     //this test now moves into specifically selecting a constructor and extracting the parameter bindings directly
@@ -160,8 +156,6 @@ namespace Rezolver.Tests
       container.RegisterExpression(context =&gt; new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
       var result = container.Resolve&lt;NoDefaultConstructor&gt;();
       Assert.Equal(NoDefaultConstructor.ExpectedValue, result.Value);
-      var result2 = container.Resolve&lt;NoExplicitConstructor&gt;();
-      Assert.NotSame(result, result2);
     }
 
     [Fact]

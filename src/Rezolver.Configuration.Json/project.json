@@ -23,13 +23,14 @@
     },
     "net451": {
       "dependencies": {
-        
+
       }
     },
     "net46": {
       "dependencies": {
-        
+
       }
     }
-  }
+  },
+  "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }
 }

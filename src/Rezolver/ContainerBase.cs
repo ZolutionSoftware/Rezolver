@@ -13,9 +13,9 @@ namespace Rezolver
   /// <summary>
   /// Starting point for implementations of <see cref="IContainer"/> - only creatable through inheritance.
   /// </summary>
-  /// <remarks>Note that the class also implements <see cref="ITargetContainer"/> by proxying the <see cref="Targets"/> that are
-  /// provided to it on construction.  All methods are implemented explicitly except the <see cref="Register(ITarget, Type)"/> method, 
-  /// which available through the class' public API.
+  /// <remarks>This class also implements <see cref="ITargetContainer"/> by proxying the <see cref="Targets"/> that are
+  /// provided to it on construction (or created anew if not supplied).  All of those interface methods are implemented 
+  /// explicitly except the <see cref="Register(ITarget, Type)"/> method,  which is available through the class' public API.
   /// 
   /// Note: <see cref="IContainer"/>s are generally not expected to implement <see cref="ITargetContainer"/>, and the framework
   /// will never assume they do.
@@ -32,16 +32,31 @@ namespace Rezolver
     private static readonly
       ConcurrentDictionary<Type, Lazy<ICompiledTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
 
-    protected static ICompiledTarget GetMissingTarget(Type target)
+    /// <summary>
+    /// Gets an <see cref="ICompiledTarget"/> for the given type which will always throw an <see cref="InvalidOperationException"/> whenever its
+    /// <see cref="ICompiledTarget.GetObject(RezolveContext)"/> method is called.  Use this when you can't resolve a target for a type.
+    /// </summary>
+    /// <param name="type">The type for which you wish to create a missing target.</param>
+    protected static ICompiledTarget GetMissingTarget(Type type)
     {
-      return MissingTargets.GetOrAdd(target, t => new Lazy<ICompiledTarget>(() => new MissingCompiledTarget(t))).Value;
+      return MissingTargets.GetOrAdd(type, t => new Lazy<ICompiledTarget>(() => new MissingCompiledTarget(t))).Value;
     }
 
+    /// <summary>
+    /// Determines whether the given <paramref name="target"/> is an instance of <see cref="MissingCompiledTarget"/>.
+    /// </summary>
+    /// <param name="target">The target.</param>
     protected static bool IsMissingTarget(ICompiledTarget target)
     {
       return target is MissingCompiledTarget;
     }
 
+    /// <summary>
+    /// Used as a sentinel type when a type cannot be resolved by a <see cref="ContainerBase"/> instance.  Instead of returning a null
+    /// <see cref="ICompiledTarget"/> instance, the container will construct an instance of this type (typically through <see cref="GetMissingTarget(Type)"/>,
+    /// which caches singleton instances of this class on a per-type basis) which can then be used just as if the lookup succeeded.
+    /// </summary>
+    /// <seealso cref="Rezolver.ICompiledTarget" />
     protected class MissingCompiledTarget : ICompiledTarget
     {
       private readonly Type _type;
@@ -51,6 +66,11 @@ namespace Rezolver
         _type = type;
       }
 
+      /// <summary>
+      /// Implementation of <see cref="ICompiledTarget.GetObject(RezolveContext)"/>.  Always throws an <see cref="InvalidOperationException"/>.
+      /// </summary>
+      /// <param name="context">The current rezolve context.</param>
+      /// <exception cref="InvalidOperationException">Always thrown.</exception>
       public object GetObject(RezolveContext context)
       {
         throw new InvalidOperationException(String.Format("Could not resolve type {0}", _type));
@@ -58,20 +78,23 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// blah blah
+    /// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="compiler"/>
     /// </summary>
-    /// <param name="targets"></param>
-    /// <param name="compiler"></param>
+    /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(RezolveContext)"/> (and other operations)
+    /// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
+    /// <see cref="Targets"/> property.</param>
+    /// <param name="compiler">Optional.  The compiler which will be used to create <see cref="ICompiledTarget"/> instances from the <see cref="ITarget"/> instances which 
+    /// are registered in the <paramref name="targets"/> target container during resolve-time.  If not provided, then the <see cref="TargetCompiler.Default"/> compiler is
+    /// used.</param>
     protected ContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)
     {
       Targets = targets ?? new TargetContainer();
       Compiler = compiler ?? TargetCompiler.Default;
-
     }
 
     /// <summary>
-    /// The compiler that will be used to compile <see cref="ITarget"/> instances, obtained from the <see cref="Targets"/> container
-    /// during <see cref="Resolve(RezolveContext)"/> and <see cref="TryResolve(RezolveContext, out object)"/> operations, into 
+    /// The compiler that will be used to compile <see cref="ITarget"/> instances (obtained from the <see cref="Targets"/> container
+    /// during <see cref="Resolve(RezolveContext)"/> and <see cref="TryResolve(RezolveContext, out object)"/> operations) into 
     /// <see cref="ICompiledTarget"/> instances that will actually provide the objects that are resolved.
     /// </summary>
     /// <remarks>Notes to implementers: This property must NEVER be null.</remarks>
@@ -81,7 +104,16 @@ namespace Rezolver
     /// Provides the <see cref="ITarget"/> instances that will be compiled by the <see cref="Compiler"/> into <see cref="ICompiledTarget"/>
     /// instances.
     /// </summary>
-    /// <remarks>Notes to implementers: This property must NEVER be null.</remarks>
+    /// <remarks>Notes to implementers: This property must NEVER be null.
+    /// 
+    /// This class implements the <see cref="ITargetContainer"/> interface by wrapping around this instance so that an application can create 
+    /// an instance of <see cref="ContainerBase"/> and directly register targets into it; rather than having to create and setup the target container
+    /// first.
+    /// 
+    /// You can add registrations to this target container at any point in the lifetime of any <see cref="ContainerBase"/> instances which are attached
+    /// to it.  In reality, however, if any <see cref="Resolve(RezolveContext)"/> operations have been performed prior to adding more registrations,
+    /// then there's no guarantee that new dependencies will be picked up - especially if the <see cref="CachingContainerBase"/> is being used as your
+    /// application's container (which it nearly always will be).</remarks>
     protected ITargetContainer Targets { get; }
 
     public virtual object Resolve(RezolveContext context)

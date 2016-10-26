@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_Container" data-uid="Rezolver.Container">Class Container
               </h1>
-              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 summary"><p>The standard IOC container class in Rezolver.</p>
+</div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
@@ -184,6 +185,14 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class Container : CachingContainerBase, IContainer, IServiceProvider, ITargetContainer</code></pre>
               </div>
+              <h5 id="Rezolver_Container_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>All of this class&#39; functionality is inherited through <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase">CachingContainerBase</a> and its base classes.</p>
+<p>Note that it doesn&#39;t implement lifetime scoping (although you can create a lifetime scope from it by calling its <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateLifetimeScope">CreateLifetimeScope()</a>
+method).</p>
+<p>Also note that the class implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> through its <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> base (which merely wraps around the </p>
+<p><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> property.  The reason for this is simplicity: in many applications, you&#39;ll want to simply create a new container, register
+services into it, and then start using it.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
@@ -191,8 +200,7 @@
               
               
               <h4 class="hmember" id="Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.Container.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">Container(ITargetContainer, ITargetCompiler)</h4>
-              <div class="markdown level1 summary"><p>Main IOC container class.  Requires an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> to provide the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s which will
-be compiled when resolving objects.</p>
+              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -212,14 +220,15 @@ be compiled when resolving objects.</p>
                   <tr>
                     <td><em>targets</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td><p>The targets which will be used to resolve objects.  If left null, then a new <see cref="!:Targets"></see> will be created.</p>
+                    <td><p>Optional.  The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
                     <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
-                    <td><p>The compiler to be used to turn the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s obtained from the <em>targets</em> 
-into <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a></p>
+                    <td><p>Optional.  The compiler to be used to turn the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s obtained from the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> 
+into <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> targets that can actually be used at resolve-time.  If not provided, then the <a class="xref" href="Rezolver.TargetCompiler.html#Rezolver_TargetCompiler_Default">Default</a> will
+be used.</p>
 </td>
                   </tr>
                 </tbody>

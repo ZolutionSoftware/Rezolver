@@ -127,12 +127,16 @@ the target is built directly from an <a class="xref" href="Rezolver.ITarget.html
 binding to the new instance&#39;s writeable properties.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></h4>
-                  <section></section>
+                  <section><p>The standard IOC container class in Rezolver.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a></h4>
                   <section><p>Starting point for implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> - only creatable through inheritance.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget">ContainerBase.MissingCompiledTarget</a></h4>
-                  <section></section>
+                  <section><p>Used as a sentinel type when a type cannot be resolved by a <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> instance.  Instead of returning a null</p>
+<p><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> instance, the container will construct an instance of this type (typically through <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">GetMissingTarget(Type)</a>,
+which caches singleton instances of this class on a per-type basis) which can then be used just as if the lookup succeeded.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a></h4>
                   <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
 <p>The best way to add a decorator to your target container is to use the extension method <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</a>
@@ -305,14 +309,12 @@ custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html#Rezolver_
 If it cannot resolve a target for a particular type, will defer to its parent for fallback.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a></h4>
-                  <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
-<p>As the name suggests, it typically represents a compiled <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>, 
-which, in the standard <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementation (<a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a>)
-is the final stage before its ready to be used to start producing objects.</p>
-<p>An <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a> is responsible for creating these from one or more <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
+                  <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> - this is
+the ultimate target of all <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> calls in the standard
+container implementations within the Rezolver framework.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></h4>
-                  <section><p>Represents the primary IOC container in the Rezolver framework.</p>
+                  <section><p>The primary IOC container interface in the Rezolver framework.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></h4>
                   <section><p>Describes a type which discovers property/field bindings</p>

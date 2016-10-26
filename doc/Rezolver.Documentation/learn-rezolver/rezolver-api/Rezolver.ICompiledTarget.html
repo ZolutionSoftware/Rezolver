@@ -94,11 +94,9 @@
               
               <h1 id="Rezolver_ICompiledTarget" data-uid="Rezolver.ICompiledTarget">Interface ICompiledTarget
               </h1>
-              <div class="markdown level0 summary"><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
-<p>As the name suggests, it typically represents a compiled <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>, 
-which, in the standard <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementation (<a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a>)
-is the final stage before its ready to be used to start producing objects.</p>
-<p>An <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a> is responsible for creating these from one or more <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s.</p>
+              <div class="markdown level0 summary"><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> - this is
+the ultimate target of all <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> calls in the standard
+container implementations within the Rezolver framework.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
@@ -107,6 +105,14 @@ is the final stage before its ready to be used to start producing objects.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface ICompiledTarget</code></pre>
               </div>
+              <h5 id="Rezolver_ICompiledTarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>In the standard implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> (e.g. <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a>),
+an <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a> creates instances of this from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s which are 
+registered in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
+<p>When the container is then called upon to resolve an instance of a particular type, the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> is first
+obtained, and then the responsibility for creating the object is delegated to its <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_RezolveContext_">GetObject(RezolveContext)</a>
+method.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
@@ -114,7 +120,9 @@ is the final stage before its ready to be used to start producing objects.</p>
               
               
               <h4 class="hmember" id="Rezolver_ICompiledTarget_GetObject_Rezolver_RezolveContext_" data-uid="Rezolver.ICompiledTarget.GetObject(Rezolver.RezolveContext)">GetObject(RezolveContext)</h4>
-              <div class="markdown level1 summary"><p>Called to get/create an object, potentially using the passed <em>context</em> to aid resolve additional dependencies.</p>
+              <div class="markdown level1 summary"><p>Called to get/create an object, potentially using the passed <em>context</em> to resolve additional dependencies
+(via its <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Container">Container</a>), or interact with any lifetime scope which is &#39;active&#39; for that request
+(through <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Scope">Scope</a>).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -151,6 +159,27 @@ is the final stage before its ready to be used to start producing objects.</p>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
                     <td><p>The object that is constructed.  The return value can legitimately be null.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">System.InvalidOperationException</a></td>
+                    <td><p>If the target fails to create the object</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.exception(v=vs.110).aspx">Exception</a></td>
+                    <td><p>Any other exception could be raised by this operation</p>
 </td>
                   </tr>
                 </tbody>

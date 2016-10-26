@@ -11,7 +11,7 @@
       "version": "1.0.10-*",
       "type": "build"
     }
-    
+
   },
   "frameworks": {
     "netstandard1.1": {
@@ -34,5 +34,6 @@
   },
   "buildOptions": {
     "xmlDoc": true
-  }
+  },
+  "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }
 }

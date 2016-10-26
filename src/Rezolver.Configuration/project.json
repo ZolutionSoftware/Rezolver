@@ -25,5 +25,6 @@
     "net46": {
 
     }
-  }
+  },
+  "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }
 }
