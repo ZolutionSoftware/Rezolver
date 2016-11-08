@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5.1": {
-      "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22535": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22569": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1-preview1-24530-04",
@@ -433,7 +433,7 @@
       }
     },
     ".NETStandard,Version=v1.1": {
-      "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22535": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22569": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1-preview1-24530-04",
@@ -874,12 +874,12 @@
     }
   },
   "libraries": {
-    "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22535": {
-      "sha512": "47/riTSlKOXPmCBl70mBTIgm1/Vb8/XWIvwsmG33fNR8gbw5GPFdJEtOlQxd6YBH3XFDFM+qa2rXVz81ioKP8g==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22569": {
+      "sha512": "7qWE+5nPmwMr5uvegiMjEzNrG04ShwCcBtqVUmtUG15MzdmOL7Q5TUIJfcFbt5FI59P/hQlH3nPE5usuVxXW5Q==",
       "type": "package",
-      "path": "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22535",
+      "path": "Microsoft.Extensions.DependencyInjection.Abstractions/1.1.0-preview2-22569",
       "files": [
-        "Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0-preview2-22535.nupkg.sha512",
+        "Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0-preview2-22569.nupkg.sha512",
         "Microsoft.Extensions.DependencyInjection.Abstractions.nuspec",
         "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard1.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml"

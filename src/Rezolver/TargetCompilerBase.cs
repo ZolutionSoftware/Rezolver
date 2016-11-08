@@ -18,7 +18,8 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Produces the lambda body for the target.  The base class uses the method <see cref="ExpressionHelper.GetLambdaBodyForTarget(ITarget, CompileContext)"/>.
+    /// Produces the lambda body for the target.  The base class uses the method <see cref="ExpressionHelper.GetLambdaBodyForTarget(ITarget, CompileContext)"/>
+	/// to get the expression tree that will be compiled.
     /// </summary>
     /// <param name="target"></param>
     /// <param name="context"></param>

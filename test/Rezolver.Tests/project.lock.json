@@ -2520,7 +2520,7 @@
           "netstandard1.1/Rezolver.Configuration.Json.dll": {}
         }
       },
-      "Rezolver.Diagnostics/1.0.0-alpha-200": {
+      "Rezolver.Logging/1.0.0-alpha-200": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2528,10 +2528,10 @@
           "Rezolver": "1.0.0-alpha"
         },
         "compile": {
-          "netstandard1.1/Rezolver.Diagnostics.dll": {}
+          "netstandard1.1/Rezolver.Logging.dll": {}
         },
         "runtime": {
-          "netstandard1.1/Rezolver.Diagnostics.dll": {}
+          "netstandard1.1/Rezolver.Logging.dll": {}
         }
       }
     },
@@ -2957,17 +2957,17 @@
           "net451/Rezolver.Configuration.Json.dll": {}
         }
       },
-      "Rezolver.Diagnostics/1.0.0-alpha-200": {
+      "Rezolver.Logging/1.0.0-alpha-200": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Rezolver": "1.0.0-alpha"
         },
         "compile": {
-          "net451/Rezolver.Diagnostics.dll": {}
+          "net451/Rezolver.Logging.dll": {}
         },
         "runtime": {
-          "net451/Rezolver.Diagnostics.dll": {}
+          "net451/Rezolver.Logging.dll": {}
         }
       }
     }
@@ -7969,16 +7969,16 @@
       "path": "../../src/Rezolver.Configuration.Json/project.json",
       "msbuildProject": "../../src/Rezolver.Configuration.Json/Rezolver.Configuration.Json.xproj"
     },
-    "Rezolver.Diagnostics/1.0.0-alpha-200": {
+    "Rezolver.Logging/1.0.0-alpha-200": {
       "type": "project",
-      "path": "../../src/Rezolver.Diagnostics/project.json",
-      "msbuildProject": "../../src/Rezolver.Diagnostics/Rezolver.Diagnostics.xproj"
+      "path": "../../src/Rezolver.Logging/project.json",
+      "msbuildProject": "../../src/Rezolver.Logging/Rezolver.Logging.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "Rezolver.Configuration.Json >= 1.0.10-*",
-      "Rezolver.Diagnostics >= 1.0.0-alpha-*",
+      "Rezolver.Logging >= 1.0.0-alpha-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta3-build3402"
     ],

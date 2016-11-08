@@ -33,7 +33,8 @@
     }
   },
   "buildOptions": {
-    "xmlDoc": true
+    "xmlDoc": true,
+    "define": [ "Wra" ]
   },
   "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }
 }
