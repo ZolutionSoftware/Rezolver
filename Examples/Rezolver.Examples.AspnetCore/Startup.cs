@@ -64,7 +64,7 @@ namespace Rezolver.Examples.AspnetCore
 
 			//alternatively, adding to the approach from above; you can create a 'tracked' container which will
 			//write all output to an Asp.Net ILogger (warning - gets very long if Level is set to 'Trace'!).
-			var trackingContainer = new TrackedScopeContainer(new LoggingCallTracker(_loggerFactory.CreateLogger("Rezolver")));
+			var trackingContainer = new TrackedScopeContainer(new LoggingCallTracker(_loggerFactory.CreateLogger("Rezolver"), callEventsMessageType: MessageType.Trace));
 			trackingContainer.Populate(services);
 			return trackingContainer;
 		}

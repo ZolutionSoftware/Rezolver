@@ -11,7 +11,7 @@ namespace Rezolver.Logging
 {
 	public class TrackedOverridingScopedContainer : OverridingScopedContainer
 	{
-		private readonly int _id = TrackingUtils.NextContainerID();
+		private readonly int _id = TrackingUtils.NextID<TrackedOverridingScopedContainer>();
 
 		public override string ToString()
 		{
@@ -51,10 +51,11 @@ namespace Rezolver.Logging
 			Logger.TrackCall(this, (callID) =>
 			{
 				var allTrackedObjects = this.TrackedObjects;
-				Logger.Message(callID, $"{ ToString() } being disposed - the following { allTrackedObjects.Count() } child objects will be disposed:");
-				foreach(var s in allTrackedObjects.GroupBy(o => o.GetType()).Select(g => $"{ g.Key }: { g.Count() }"))
+				Logger.Message(callID, MessageType.Information, $"{ ToString() } being disposed - { allTrackedObjects.Count() } child objects are being disposed.");
+				Logger.Message(callID, MessageType.Debug, "Objects being disposed:");
+				foreach(var o in allTrackedObjects)
 				{
-					Logger.Message(callID, s);
+					Logger.Message(callID, MessageType.Debug, $"{ o }");
 				}
 
 				base.Dispose(disposing);

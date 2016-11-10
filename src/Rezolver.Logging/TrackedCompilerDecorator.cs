@@ -11,11 +11,12 @@ namespace Rezolver.Logging
 {
 	/// <summary>
 	/// Decorates an existing ITargetCompiler instance to enable tracking of the calls made to it.
+	/// This class is used by the tracked container classes in the library 
 	/// </summary>
 	/// <seealso cref="Rezolver.ITargetCompiler" />
-	public class TrackedCompiler : ITargetCompiler
+	public class TrackedCompilerDecorator : ITargetCompiler
 	{
-		public TrackedCompiler(ITargetCompiler inner = null)
+		public TrackedCompilerDecorator(ITargetCompiler inner = null)
 		{
 			inner = inner ?? TargetCompiler.Default;
 		}

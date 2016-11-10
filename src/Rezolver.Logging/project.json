@@ -15,11 +15,9 @@
     }
   },
   "frameworks": {
-    "net451": {
-
-    },
+    "net451":{
+	},
     "net46": {
-
     },
     "netstandard1.1": {
       "buildOptions": { "define": [ "DOTNET" ] },

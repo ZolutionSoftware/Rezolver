@@ -57,7 +57,7 @@ namespace Rezolver
     {
       var result = base.Fetch(type);
       //ascend the tree of target containers looking for a type match.
-      if ((result == null || result.UseFallback) && _parent != null)
+      if ((result == null || result.UseFallback))
         return _parent.Fetch(type);
       return result;
     }

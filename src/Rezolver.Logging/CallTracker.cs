@@ -56,6 +56,8 @@ namespace Rezolver.Logging
 		ConcurrentDictionary<long, TrackedCall> _callsInProgress = new ConcurrentDictionary<long, TrackedCall>();
 		ConcurrentBag<string> _messages = new ConcurrentBag<string>();
 
+		public LoggingFormatterCollection MessageFormatter { get; }
+
 		/// <summary>
 		/// Controls whether calls that are completed are retained after they are finished (and therefore available from the <see cref="GetCompletedCalls"/>
 		/// method).  Can only be initialised on construction.
@@ -75,7 +77,7 @@ namespace Rezolver.Logging
 		/// Can only be initialised on construction.
 		/// </summary>
 		/// <remarks>By default (when this property is <c>null</c>, the only messages to be added to <see cref="TrackedCall"/> instances are
-		/// those which are added by callers of this class through the <see cref="Message(long, string, MessageType)"/> function.
+		/// those which are added by callers of this class through the <see cref="Message(long, MessageType, string)"/> function.
 		/// 
 		/// If not null, then the <see cref="CallStart(object, object, string)"/>, <see cref="CallEnd(long)"/>, <see cref="CallResult{TResult}(long, TResult)"/>
 		/// and <see cref="Exception(long, System.Exception)"/> functions will <see cref="TrackedCall"/> but will inject formatted messages detailing those 
@@ -90,19 +92,22 @@ namespace Rezolver.Logging
 		Stack<TrackedCall> _currentCallStack = new Stack<TrackedCall>();
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="CallTracker"/> class.
+		/// Initializes a new instance of the <see cref="CallTracker" /> class.
 		/// </summary>
-		/// <param name="retainCompletedCalls">Sets the initial value of the <see cref="RetainCompletedCalls"/> property, which controls whether this
+		/// <param name="retainCompletedCalls">Sets the initial value of the <see cref="RetainCompletedCalls" /> property, which controls whether this
 		/// tracker will retain all calls in memory after they're completed.  This is useful if you wish to interrogate tracked calls on an ad-hoc basis.
-		/// 
 		/// If you're using real-time logging which derives from this class, then you should leave this as false because the memory overhead could be
 		/// quite severe.</param>
-		/// <param name="callEventsMessageType">If set to <c>true</c> then this tracker will add messages to all <see cref="TrackedCall"/> instances via
+		/// <param name="callEventsMessageType">If set to <c>true</c> then this tracker will add messages to all <see cref="TrackedCall" /> instances via
 		/// .</param>
-		public CallTracker(bool retainCompletedCalls = false, MessageType? callEventsMessageType = null)
+		/// <param name="messageFormatter">The message formatter to be used in converting objects (return values, callees, argument strings, exceptions etc)
+		/// into strings which will ultimately be logged as messages or properties on <see cref="TrackedCall"/> objects.</param>
+		public CallTracker(bool retainCompletedCalls = false, MessageType? callEventsMessageType = null, LoggingFormatterCollection messageFormatter = null)
 		{
 			RetainCompletedCalls = retainCompletedCalls;
 			CallEventsMessageType = callEventsMessageType;
+			//create a new, independent message formatter which extends the formatter passed, or the default collection
+			MessageFormatter = new Logging.LoggingFormatterCollection(messageFormatter ?? LoggingFormatterCollection.Default);
 		}
 
 		/// <summary>
@@ -155,22 +160,22 @@ namespace Rezolver.Logging
 			return call;
 		}
 
-		protected virtual string FormatCallStartMessage(TrackedCall call)
+		protected virtual IFormattable FormatCallStartMessage(TrackedCall call)
 		{
 			return $"{call.Method} called with args({ string.Join(", ", call.Arguments.Select(kvp => $"{kvp.Key}: {kvp.Value}")) }) on {call.Callee}";
 		}
 
-		protected virtual string FormatCallEndWithResultMessage(TrackedCall call)
+		protected virtual IFormattable FormatCallEndWithResultMessage(TrackedCall call)
 		{
 			return $"{call.Method} completed in { (call.Duration ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds }ms with result: { call.Result }";
 		}
 
-		protected virtual string FormatCallEndWithNoResultMessage(TrackedCall call)
+		protected virtual IFormattable FormatCallEndWithNoResultMessage(TrackedCall call)
 		{
 			return $"{call.Method} completed in { (call.Duration ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds }ms";
 		}
 
-		protected virtual string FormatCallEndWithExceptionMessage(TrackedCall call)
+		protected virtual IFormattable FormatCallEndWithExceptionMessage(TrackedCall call)
 		{
 			return $"{call.Method} failed after { (call.Duration ?? TimeSpan.FromMilliseconds(-1)).TotalMilliseconds }ms. { call.Exception }";
 		}
@@ -179,7 +184,7 @@ namespace Rezolver.Logging
 		{
 			if (CallEventsMessageType == null)
 				return;
-			AddMessageToCall(call, FormatCallStartMessage(call), MessageType.Trace);
+			call.AddMessage(CallEventsMessageType.Value, FormatCallStartMessage(call));
 		}
 
 		private void AddCallEndMessage(TrackedCall call)
@@ -188,23 +193,37 @@ namespace Rezolver.Logging
 				return;
 			if (call.Completed == null)
 				return;
-
+			IFormattable message = null;
+			MessageType messageType = CallEventsMessageType.Value;
 			if (call.HasResult)
-				AddMessageToCall(call, FormatCallEndWithResultMessage(call), MessageType.Trace);
+				message = FormatCallEndWithResultMessage(call);
 			else if (call.Exception != null)
-				AddMessageToCall(call, FormatCallEndWithExceptionMessage(call), MessageType.Error);
+			{
+				message = FormatCallEndWithExceptionMessage(call);
+				messageType = MessageType.Error;
+			}
 			else
-				AddMessageToCall(call, FormatCallEndWithNoResultMessage(call), MessageType.Trace);
+				message = FormatCallEndWithNoResultMessage(call);
+
+			if (message != null)
+				call.AddMessage(messageType, message);
 		}
 
-		public virtual long CallStart(object callee, object arguments, [CallerMemberName] string method = null)
+		public virtual long CallStart(object callee, object arguments, [CallerMemberName] string method = null, object data = null)
 		{
 			long callID = _nextCallID++;
-			var newCall = CreateNewCall(callID, callee, method, arguments, _currentCallStack.Count != 0 ? _currentCallStack.Peek() : null);				
+			var newCall = CreateAndInitialiseCall(callID, callee, method, arguments, _currentCallStack.Count != 0 ? _currentCallStack.Peek() : null, data);
 			_callsInProgress.TryAdd(callID, newCall);  //should think about handling when it can't
 			_currentCallStack.Push(newCall);
 			AddCallStartMessage(newCall);
 			return callID;
+		}
+
+		protected TrackedCall CreateAndInitialiseCall(long callID, object callee, string method, object arguments, TrackedCall parent, object data)
+		{
+			var newCall = CreateNewCall(callID, parent);
+			newCall.Init(callee, arguments, method, data);
+			return newCall;
 		}
 
 		/// <summary>
@@ -219,9 +238,9 @@ namespace Rezolver.Logging
 		/// objects which aren't tracked; and equally from other threads.</param>
 		/// <returns>A new <see cref="TrackedCall"/> instance that will ultimately be stored while its onngoing, and possibly for the lifetime of this
 		/// call tracker if <see cref="RetainCompletedCalls"/> is <c>true</c>.</returns>
-		protected virtual TrackedCall CreateNewCall(long callID, object callee, string method, object arguments, TrackedCall parent)
+		protected virtual TrackedCall CreateNewCall(long callID, TrackedCall parent)
 		{
-			return new TrackedCall(callID, callee, arguments, method, parent);
+			return new TrackedCall(callID, parent, MessageFormatter);
 		}
 
 		public virtual void CallEnd(long callID)
@@ -237,7 +256,7 @@ namespace Rezolver.Logging
 			}
 		}
 
-		
+
 
 		public virtual void CallResult<TResult>(long callID, TResult result)
 		{
@@ -262,46 +281,44 @@ namespace Rezolver.Logging
 		}
 
 		/// <summary>
-		/// Used to log messages to a <see cref="TrackedCall"/> given its <paramref name="callID"/>.
-		/// 
-		/// Implememtation of <see cref="ICallTracker.Message(long, string, MessageType)"/>.
+		/// Used to format log messages into the call identified by <paramref name="callID" /> (which was previously returned by
+		/// <see cref="CallStart(object, object, string)" />).
 		/// </summary>
-		/// <param name="callID">The call identifier.</param>
-		/// <param name="message">The message.</param>
-		/// <param name="messageType">The type of message in <paramref name="message" />.  In logging-type scenarios, can be used
-		/// to filter out messages below a certain level.</param>
-		/// <returns>The <see cref="TrackedCallMessage"/> that was created for the call identified by <paramref name="callID"/> if successful,
-		/// <c>null</c> if a call couldn't be found with the given <paramref name="callID"/></returns>
-		public TrackedCallMessage Message(long callID, string message, MessageType messageType = MessageType.Information)
+		/// <param name="callID">ID of the <see cref="TrackedCall" /> to which the message will be added.</param>
+		/// <param name="messageType">The type of message.  In logging-type scenarios, can be used to filter out messages below a certain level.</param>
+		/// <param name="messageFormat">A simple string or a format string which can optionally be formatted with the arguments passed in <paramref name="formatArgs" />.</param>
+		/// <param name="formatArgs">Values to be used when formatting <paramref name="messageFormat" />, if it contains format placeholders.</param>
+		/// <returns>TrackedCallMessage.</returns>
+		public TrackedCallMessage Message(long callID, MessageType messageType, string messageFormat, params object[] formatArgs)
 		{
 			var call = GetCall(callID);
 			if (call != null)
-				AddMessageToCall(call, message, messageType: messageType);
-
+				return call.AddMessage(messageType, messageFormat, formatArgs);
 			return null;
 		}
 
 		/// <summary>
-		/// Adds the message to the passed call.
-		/// 
-		/// The base implementation simply forwards the call directly on to the <paramref name="call" />'s <see cref="TrackedCall.AddMessage(string, MessageType, DateTime?)" />
-		/// function, returning its result.
+		/// Like <see cref="Message(long, MessageType, string, object[])" />, except this adds a message whose text is obtained by formatting an <see cref="IFormattable" /> object.
+		/// Use this for interpolated strings if you want the <see cref="MessageFormatter" /> to format your messages for you.
 		/// </summary>
-		/// <param name="call">The call to which the message is to be added.</param>
-		/// <param name="message">The message string.</param>
+		/// <param name="callID">The call identifier.</param>
 		/// <param name="messageType">Type of the message.</param>
-		/// <returns>The <see cref="TrackedCallMessage"/> which was created for the message.</returns>
-		/// <exception cref="ArgumentNullException">If <paramref name="call"/> is null</exception>
-		/// <remarks>All the functions in this class which generate messages wiil ultimately call this method (including the <see cref="Message(long, string, MessageType)"/>
-		/// function).  You can override this method, say, if you wish to customise the string that's logged; or perhaps if you wish to perform real-time logging of messages
-		/// as they occur.
-		/// 
-		/// If you are looking to override the <see cref="Message(long, string, MessageType)"/> function, then you should instead override this.
-		/// </remarks>
-		protected virtual TrackedCallMessage AddMessageToCall(TrackedCall call, string message, MessageType messageType)
+		/// <param name="format">The format.</param>
+		/// <returns>TrackedCallMessage.</returns>
+		/// <remarks>You'll primarily use this overload is if you regularly build messages from interpolated strings.
+		/// The core implementation of this interface (<see cref="CallTracker" />) utlises a <see cref="LoggingFormatterCollection" /> object to provide
+		/// advanced formatting functionality for objects into the strings that are ultimately stored on <see cref="TrackedCall" /> objects.
+		/// If you target this overload with your interpolated string, then this advanced formatting will automatically be used to produce the eventual
+		/// message, instead of the default .Net string formatting functionality.
+		/// In order to target the overload for interpolated strings, either capture it first into an <see cref="IFormattable" /> (or <see cref="FormattableString" />)
+		/// and pass that, or you can pass the interpolated string as the <paramref name="format" /> by name.  See <see cref="LoggingFormatterCollection.Format(IFormattable)" />
+		/// for more.</remarks>
+		public TrackedCallMessage Message(long callID, MessageType messageType, IFormattable format)
 		{
-			if (call == null) throw new ArgumentNullException(nameof(call));
-			return call.AddMessage(message, messageType);
+			var call = GetCall(callID);
+			if (call != null)
+				return call.AddMessage(messageType, format);
+			return null;
 		}
 
 		/// <summary>

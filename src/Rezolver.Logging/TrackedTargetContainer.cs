@@ -11,7 +11,7 @@ namespace Rezolver.Logging
 {
 	public class TrackedTargetContainer : TargetContainer
 	{
-		private readonly int _id = TrackingUtils.NextTargetContainerID();
+		private readonly int _id = TrackingUtils.NextID<TrackedTargetContainer>();
 
 		public override string ToString()
 		{
@@ -38,7 +38,7 @@ namespace Rezolver.Logging
 
 			Logger.TrackCall(this, callId => {
 				base.Register(target, type);
-				Logger.Message(callId, $"({ GetMessageStringForTarget(target) }) has been registered for type { type ?? target.DeclaredType })");
+				Logger.Message(callId, MessageType.Information, $"({ GetMessageStringForTarget(target) }) has been registered for type { type ?? target.DeclaredType })");
 			});		
 		}
 

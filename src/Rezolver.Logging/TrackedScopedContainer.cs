@@ -12,7 +12,7 @@ namespace Rezolver.Logging
 {
 	public class TrackedScopeContainer : ScopedContainer
 	{
-		private readonly int _id = TrackingUtils.NextContainerID();
+		private readonly int _id = TrackingUtils.NextID<TrackedScopeContainer>();
 
 		public override string ToString()
 		{

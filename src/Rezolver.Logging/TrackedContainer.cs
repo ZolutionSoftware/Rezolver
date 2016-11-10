@@ -17,7 +17,7 @@ namespace Rezolver.Logging
   /// </summary>
   public class TrackedContainer : Container
   {
-    private readonly int _id = TrackingUtils.NextContainerID();
+    private readonly int _id = TrackingUtils.NextID<TrackedContainer>();
 
     public override string ToString()
     {

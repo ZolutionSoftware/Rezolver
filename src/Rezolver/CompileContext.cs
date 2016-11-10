@@ -17,7 +17,7 @@ namespace Rezolver
 	/// <remarks>The purpose of this class is to help an <see cref="ITarget"/> generate an expression tree that will ultimately be
 	/// compiled using <see cref="ITargetCompiler.CompileTarget(ITarget, CompileContext)"/> method.  The goal being to produce 
 	/// an <see cref="ICompiledTarget"/> whose <see cref="ICompiledTarget.GetObject(RezolveContext)"/> method will be called to get
-	/// instances when an <see cref="IContainer"/>'s <see cref="IContainer.Resolve(RezolveContext)"/> method is invoked.
+	/// instances when a container's <see cref="IContainer.Resolve(RezolveContext)"/> method is invoked.
 	/// 
 	/// Therefore, the context of the expression tree being generated is a method which takes a single <see cref="RezolveContext"/> parameter - hence
 	/// the expressions exposed by this type (e.g. <see cref="RezolveContextExpression"/>) are there to help generate code
@@ -28,14 +28,13 @@ namespace Rezolver
 	/// The class implements the <see cref="ITargetContainer"/> interface also to extend
 	/// dependency lookups during compilation time.  Indeed, if you are developing your own 
 	/// <see cref="ITarget"/> implementation and need to resolve any dependencies from an <see cref="ITargetContainer"/>
-	/// during compilation, it should be done through this.
+	/// during compilation, it should be done through the context's implementation of ITargetContainer.
 	/// </remarks>
 	public class CompileContext : ITargetContainer
 	{
 		/// <summary>
 		/// Represents an 
-		/// </summary>
-		/// <seealso cref="System.IEquatable{Rezolver.CompileContext.CompileStackEntry}" />
+		/// </summary> 
 		public class CompileStackEntry : IEquatable<CompileStackEntry>
 		{
 			public ITarget Target { get; }
@@ -127,7 +126,7 @@ namespace Rezolver
 		/// <summary>
 		/// The container that is considered the current compilation 'scope' - i.e. the container for which the compilation
 		/// is being performed and, usually, the one on which the <see cref="IContainer.Resolve(RezolveContext)"/> method was 
-		/// originally called.
+		/// originally called which triggered the compilation call.
 		/// </summary>
 		/// <remarks>
 		/// NOTE - For compile-time dependency resolution (i.e. other <see cref="ITarget"/>s) you should use this class' implementation
@@ -138,7 +137,7 @@ namespace Rezolver
 		private Expression _containerExpression;
 
 		/// <summary>
-		/// An ConstantExpression that equals the <see cref="Container"/> that is active for this context - you can use this during code generation
+		/// A ConstantExpression that equals the <see cref="Container"/> that is active for this context - you can use this during code generation
 		/// to alter your expression's behaviour if the <see cref="RezolveContext.Container"/> during a future call to <see cref="IContainer.Resolve(RezolveContext)"/>
 		/// is different from the one for which the expression was first compiled.
 		/// 

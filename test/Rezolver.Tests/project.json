@@ -5,7 +5,11 @@
     "Rezolver.Configuration.Json": "1.0.10-*",
     "Rezolver.Logging": "1.0.0-alpha-*",
     "xunit": "2.2.0-beta3-build3402",
-    "dotnet-test-xunit": "2.2.0-preview2-build1029"
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Rezolver.Shared": {
+      "version": "1.0.10-alpha-*",
+      "type": "build"
+    }
   },
   "frameworks": {
     "netcoreapp1.0": {

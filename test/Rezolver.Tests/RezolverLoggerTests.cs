@@ -62,45 +62,69 @@ namespace Rezolver.Tests
 
 		private class TestLogger : ICallTracker
 		{
-			private int _lastReqID = 0;
+			private long _lastReqID = 0;
 
-			public int RequestCount
+			public LoggingFormatterCollection MessageFormatter
+			{
+				get
+				{
+					return LoggingFormatterCollection.Default;
+				}
+			}
+
+			public long RequestCount
 			{
 				get
 				{
 					return _lastReqID;
 				}
 			}
-			public void CallEnd(int reqId)
+			public void CallEnd(long reqId)
 			{
 				Console.WriteLine($"CallEnd called for reqId {reqId}");
 			}
 
-			public void CallResult<TResult>(int reqId, TResult result)
+			public void CallResult<TResult>(long reqId, TResult result)
 			{
 				Console.WriteLine($"CallResult called for reqId {reqId}, result: {(result == null ? "null" : result.ToString())}");
 			}
 
-			public int CallStart(object callee, object arguments, [CallerMemberName] string method = null)
+			public long CallStart(object callee, object arguments, [CallerMemberName] string method = null, object data = null)
 			{
-				int thisReqId = ++_lastReqID;
+
+				long thisReqId = ++_lastReqID;
 				Console.WriteLine($"CallStart called on object {callee} for method {method}. Arguments? {(arguments != null ? "Yes" : "No")}.  ReqId: {thisReqId}");
 				return thisReqId;
 			}
 
-			public void Exception(int reqId, Exception ex)
+			public void Exception(long reqId, Exception ex)
 			{
 				Console.WriteLine($"Exception called for reqId {reqId}.  Exception: { ex?.Message }");
 			}
 
-			public TrackedCall GetCall(int callID)
+			public TrackedCall GetCall(long callID)
 			{
 				throw new NotImplementedException();
 			}
 
-			public TrackedCallMessage Message(int callID, string message, MessageType messageType = MessageType.Information)
+			public TrackedCallMessage Message(long callID, MessageType messageType, IFormattable format)
 			{
-				throw new NotImplementedException();
+				var msg = format.ToString(null, MessageFormatter);
+				Console.WriteLine(msg);
+				return new TrackedCallMessage(new TrackedCall(callID, null), messageType, msg, DateTime.UtcNow);
+			}
+
+			public TrackedCallMessage Message(long callID, MessageType messageType, string message)
+			{
+				Console.WriteLine(message);
+				return new TrackedCallMessage(new TrackedCall(callID, null), messageType, message, DateTime.UtcNow);
+			}
+
+			public TrackedCallMessage Message(long callID, MessageType messageType, string messageFormat, params object[] formatArgs)
+			{
+				var msg = MessageFormatter.Format(messageFormat, formatArgs);
+				Console.WriteLine(msg);
+				return new TrackedCallMessage(new TrackedCall(callID, null), messageType, msg, DateTime.UtcNow);
 			}
 		}
 

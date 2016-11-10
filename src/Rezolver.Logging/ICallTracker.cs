@@ -30,9 +30,14 @@ namespace Rezolver.Logging
 	public interface ICallTracker
 	{
 		/// <summary>
+		/// Gets the message formatter used by this tracker (and its <see cref="TrackedCall"/> instances) to format objects into human-readable strings.
+		/// </summary>
+		/// <value>The message formatter.</value>
+		LoggingFormatterCollection MessageFormatter { get; }
+		/// <summary>
 		/// Retrieves a call by its ID.
 		/// </summary>
-		/// <param name="callID">The ID of the call as previously returned by <see cref="CallStart(object, object, string)"/></param>
+		/// <param name="callID">The ID of the call as previously returned by <see cref="CallStart(object, object, string, object)"/></param>
 		/// <returns>A reference to the <see cref="TrackedCall"/> identified by the given <paramref name="callID"/> if found, otherwise: <c>null</c></returns>
 		/// <remarks>An implementation must return a valid reference if the call is still in-progress.
 		/// 
@@ -44,15 +49,17 @@ namespace Rezolver.Logging
 		/// An implementation must return <c>null</c> if the call is not found.</remarks>
 		TrackedCall GetCall(long callID);
 		/// <summary>
-		/// Indicates that a function call is commencing on the <paramref name="callee"/> object with the supplied arguments.
-		/// The name of the method should be supplied.  The function returns a unique identifier for this function call in order to 
+		/// Indicates that a function call is commencing on the <paramref name="callee" /> object with the supplied arguments.
+		/// The name of the method should be supplied.  The function returns a unique identifier for this function call in order to
 		/// collate any further operations against this method call.
 		/// </summary>
 		/// <param name="callee">The object on which the method was called.</param>
-		/// <param name="arguments">An object whose named properties or fields correspond to a named parameter on the <paramref name="method"/></param>
+		/// <param name="arguments">An object whose named properties or fields correspond to a named parameter on the <paramref name="method" /></param>
 		/// <param name="method">The name of the method that was called.</param>
-		/// <returns></returns>
-		long CallStart(object callee, object arguments, [CallerMemberName]string method = null);
+		/// <param name="data">Optional.  Additional data to store in the <see cref="TrackedCall"/> that is created for this new call.  The publicly readable
+		/// properties and fields of this object will be exploded into a dictionary and made available through the <see cref="TrackedCall.Data"/> dictionary.</param>
+		/// <returns>The unique call ID of the new call.  Can be used in the other functions on this interface which accept a call ID.</returns>
+		long CallStart(object callee, object arguments, [CallerMemberName]string method = null, object data = null);
 
 		/// <summary>
 		/// Records the termination of the function call that was originally given the id <paramref name="callID"/>, along with the 
@@ -75,13 +82,35 @@ namespace Rezolver.Logging
 		/// <param name="ex"></param>
 		void Exception(long callID, Exception ex);
 		/// <summary>
-		/// Used to log message strings to the logger for a call.
+		/// Used to format log messages into the call identified by <paramref name="callID"/> (which was previously returned by 
+		/// <see cref="CallStart(object, object, string)"/>).
 		/// </summary>
-		/// <param name="callID"></param>
-		/// <param name="message"></param>
-		/// <param name="messageType">The type of message in <paramref name="message"/>.  In logging-type scenarios, can be used
-		/// to filter out messages below a certain level.</param>
-		TrackedCallMessage Message(long callID, string message, MessageType messageType = MessageType.Information);
+		/// <param name="callID">ID of the <see cref="TrackedCall"/> to which the message will be added.</param>
+		/// <param name="messageType">The type of message.  In logging-type scenarios, can be used to filter out messages below a certain level.</param>
+		/// <param name="messageFormat">A simple string or a format string which can optionally be formatted with the arguments passed in <paramref name="formatArgs"/>.</param>
+		/// <param name="formatArgs">Values to be used when formatting <paramref name="messageFormat"/>, if it contains format placeholders.</param>
+		TrackedCallMessage Message(long callID, MessageType messageType, string messageFormat, params object[] formatArgs);
+
+		/// <summary>
+		/// Like <see cref="Message(long, MessageType, string, object[])"/>, except this adds a message whose text is obtained by formatting an <see cref="IFormattable"/> object.
+		/// 
+		/// Use this for interpolated strings if you want the <see cref="MessageFormatter"/> to format your messages for you.
+		/// </summary>
+		/// <param name="callID">The call identifier.</param>
+		/// <param name="messageType">Type of the message.</param>
+		/// <param name="format">The format.</param>
+		/// <remarks>You'll primarily use this overload is if you regularly build messages from interpolated strings.
+		/// 
+		/// The core implementation of this interface (<see cref="CallTracker"/>) utlises a <see cref="LoggingFormatterCollection"/> object to provide 
+		/// advanced formatting functionality for objects into the strings that are ultimately stored on <see cref="TrackedCall"/> objects.
+		/// 
+		/// If you target this overload with your interpolated string, then this advanced formatting will automatically be used to produce the eventual
+		/// message, instead of the default .Net string formatting functionality.
+		/// 
+		/// In order to target the overload for interpolated strings, either capture it first into an <see cref="IFormattable"/> (or <see cref="FormattableString"/>) 
+		/// and pass that, or you can pass the interpolated string as the <paramref name="format"/> by name.  See <see cref="LoggingFormatterCollection.Format(IFormattable)"/>
+		/// for more.</remarks>
+		TrackedCallMessage Message(long callID, MessageType messageType, IFormattable format);
 	}
 
 	public static class ICallTrackerExtensions

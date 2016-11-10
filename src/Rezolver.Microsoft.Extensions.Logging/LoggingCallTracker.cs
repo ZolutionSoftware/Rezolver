@@ -12,6 +12,8 @@ namespace Rezolver.Microsoft.Extensions.Logging
 	/// calls (represented by <see cref="TrackedCall"/> instances) directly to an ILogger from the Microsoft Logging Extensions.
 	/// </summary>
 	/// <seealso cref="Rezolver.Logging.CallTracker" />
+	/// <remarks>The <see cref="TrackedCall.MessageAdded"/> event is used as the hook by which messages are intercepted and logged to the 
+	/// logger.</remarks>
 	public class LoggingCallTracker : CallTracker
 	{
 		private ILogger _logger;
@@ -20,25 +22,34 @@ namespace Rezolver.Microsoft.Extensions.Logging
 		/// </summary>
 		/// <param name="logger">The logger to which messages will be written.</param>
 		/// <exception cref="ArgumentNullException"></exception>
-		public LoggingCallTracker(ILogger logger, bool retainCompletedCalls = false, MessageType? callEventsMessageType = MessageType.Trace)
-			: base(retainCompletedCalls: retainCompletedCalls, callEventsMessageType: callEventsMessageType)
+		public LoggingCallTracker(ILogger logger, bool retainCompletedCalls = false, MessageType? callEventsMessageType = MessageType.Trace, LoggingFormatterCollection messageFormatter = null)
+			: base(retainCompletedCalls: retainCompletedCalls, callEventsMessageType: callEventsMessageType, messageFormatter: messageFormatter)
 		{
 			if (logger == null) throw new ArgumentNullException(nameof(logger));
 			_logger = logger;
 		}
 
-		/// <summary>
-		/// Adds the message to the passed call and writes it to the ILogger that was passed to this instance on construction.
-		/// </summary>
-		/// <param name="call">The call to which the message is to be added.</param>
-		/// <param name="message">The message string.</param>
-		/// <param name="messageType">Type of the message.</param>
-		/// <returns>The <see cref="TrackedCallMessage" /> which was created for the message.</returns>
-		protected override TrackedCallMessage AddMessageToCall(TrackedCall call, string message, MessageType messageType)
+		protected override TrackedCall CreateNewCall(long callID, TrackedCall parent)
 		{
-			var msg = base.AddMessageToCall(call, message, messageType);
-			var logMsg = $"(#{ call.ID }) { message }";
-			switch (messageType)
+			var call = base.CreateNewCall(callID, parent);
+			call.MessageAdded += Call_MessageAdded;
+			return call;
+		}
+
+		private IEnumerable<long> GetCallStackIDs(TrackedCall call)
+		{
+			while (call != null)
+			{
+				yield return call.ID;
+				call = call.Parent;
+			}
+		}
+
+		private void Call_MessageAdded(object sender, TrackedCallMessage e)
+		{
+
+			var logMsg = $"(#{ string.Join("->", GetCallStackIDs(e.Call).Reverse()) }) { e.Text }";
+			switch (e.Type)
 			{
 				case MessageType.Debug:
 					_logger.LogDebug(logMsg);
@@ -59,7 +70,6 @@ namespace Rezolver.Microsoft.Extensions.Logging
 					_logger.LogInformation(logMsg);
 					break;
 			}
-			return msg;
 		}
 	}
 }

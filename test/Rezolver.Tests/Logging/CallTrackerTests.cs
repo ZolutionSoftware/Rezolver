@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Rezolver.Logging;
 
-namespace Rezolver.Tests
+namespace Rezolver.Tests.Logging
 {
   public class CallTrackerTests
   {
@@ -14,7 +14,7 @@ namespace Rezolver.Tests
     {
       CallTracker logger = new CallTracker();
 
-      int callId = logger.CallStart(this, null);
+      long callId = logger.CallStart(this, null);
       var logData = logger.GetCall(callId);
 
       Assert.NotNull(logData);

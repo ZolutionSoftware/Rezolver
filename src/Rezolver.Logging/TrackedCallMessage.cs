@@ -9,18 +9,18 @@ namespace Rezolver.Logging
 	/// Class TrackedCallMessage.
 	/// </summary>
 	public class TrackedCallMessage
-    {
-		public TrackedCall ParentCall { get; }
+	{
+		public TrackedCall Call { get; }
 		public string Text { get; }
 		public MessageType Type { get; }
 		public DateTime Timestamp { get; }
 
-		internal TrackedCallMessage(TrackedCall parent, string text, MessageType type = MessageType.Information, DateTime? timestamp = null)
+		public TrackedCallMessage(TrackedCall call, MessageType type, string text, DateTime timestamp)
 		{
-			ParentCall = parent;
-			Text = text;
+			Call = call;
 			Type = type;
-			Timestamp = timestamp ?? DateTime.UtcNow;
+			Text = text;
+			Timestamp = timestamp;
 		}
-    }
+	}
 }
