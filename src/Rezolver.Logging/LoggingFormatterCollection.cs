@@ -2,6 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Rezolver.Logging
@@ -26,7 +28,7 @@ namespace Rezolver.Logging
 		static LoggingFormatterCollection()
 		{
 			Default = new LoggingFormatterCollection();
-			Default.AddFormatter(new Formatters.ExceptionFormatter<Exception>());
+			Default.AddFormattersFromAssembly(TypeHelpers.GetAssembly(typeof(LoggingFormatterCollection)));
 		}
 
 		private readonly LoggingFormatterCollection _innerCollection;
@@ -47,14 +49,14 @@ namespace Rezolver.Logging
 		{
 			_formatters = new ConcurrentDictionary<Type, LoggingFormatter>();
 			//have to make sure all the inner collections are unique
-			if(innerCollection != null)
+			if (innerCollection != null)
 			{
 				//we can copy the reference across straight away, if an exception is thrown below, then the 
 				//construction fails and it's not used anyway.
 				_innerCollection = innerCollection;
 				List<LoggingFormatterCollection> nestedCollections = new List<LoggingFormatterCollection>();
-				
-				while(innerCollection != null)
+
+				while (innerCollection != null)
 				{
 					if (nestedCollections.Contains(innerCollection))
 						throw new ArgumentException("Circular loop detected in innerCollection", nameof(innerCollection));
@@ -236,8 +238,18 @@ namespace Rezolver.Logging
 					yield return tt;
 				}
 			}
+
+			var baseType = TypeHelpers.BaseType(t);
+			if (baseType != null)
+			{
+				foreach (var tt in ExplodeType(baseType))
+				{
+					yield return tt;
+				}
+			}
 		}
 
+		#region ICustomFormatter and IFormatProvider implementations
 		/// <summary>
 		/// Converts the value of a specified object to an equivalent string representation using specified format and culture-specific formatting information.
 		/// </summary>
@@ -262,5 +274,125 @@ namespace Rezolver.Logging
 			else
 				return null;
 		}
+		#endregion
+
+		public void AddFormattersFromAssembly(Assembly assembly)
+		{
+			assembly.MustNotBeNull(nameof(assembly));
+			IEnumerable<TypeInfo> typesFiltered = null;
+			if (assembly == TypeHelpers.GetAssembly(typeof(LoggingFormatterCollection)))
+				typesFiltered = assembly.DefinedTypes.Where(ti => !ti.IsAbstract && !ti.IsGenericTypeDefinition && (ti.IsPublic || ti.IsNotPublic)); //public and internal types
+			else
+				typesFiltered = assembly.DefinedTypes.Where(ti => !ti.IsAbstract && !ti.IsGenericTypeDefinition && ti.IsPublic);
+
+			Dictionary<Type, List<TypeInfo>> registrations = new Dictionary<Type, List<TypeInfo>>();
+
+			foreach (var result in typesFiltered.Select(ti => new { Type = ti, Attribute = ti.GetCustomAttribute<LoggingFormatterAttribute>() }).Where(t => t.Attribute != null))
+			{
+				if (typeof(LoggingFormatter).GetTypeInfo().IsAssignableFrom(result.Type))
+				{
+					Type[] associatedTypes = GetAssociatedTypesForFormatterType(assembly, result.Type, result.Attribute);
+
+					if (associatedTypes.Length == 0)
+					{
+						throw new InvalidOperationException(string.Format("Cannot determine the type that the type {0} defined in {1} is responsible for formatting.  The LoggingFormatterAttribute is present on this type, but no associated types have been set.  Please add at least one associated type, or derive the formatter from LoggingFormatter<[target type]>", result.Type.FullName, assembly.FullName));
+					}
+
+					foreach (var type in associatedTypes.Distinct())
+					{
+						List<TypeInfo> list = null;
+						if (!registrations.TryGetValue(type, out list))
+							registrations[type] = list = new List<TypeInfo>();
+						list.Add(result.Type);
+					}
+				}
+				else
+					throw new InvalidOperationException(string.Format("The Type \"{0}\" defined in {1} has the LoggingFormatterAttribute but does not inherit from LoggingFormatter", result.Type.FullName, assembly.FullName));
+			}
+			if (registrations.Count != 0)
+			{
+				var dupes = registrations.Where(kvp => kvp.Value.Count > 1).ToArray();
+				if (dupes.Length != 0)
+				{
+					throw new InvalidOperationException(string.Format("One or more types tagged with the LoggingFormatterAttribute in the assembly {0} are associated to the same type: {1}",
+						assembly.FullName,
+						string.Join("; ", dupes.Select(kvp => string.Format("Target: {0}, Formatters: {1}", kvp.Key.FullName, string.Join(", ", kvp.Value.Select(t => t.FullName)))))));
+				}
+				Func<LoggingFormatterCollection, LoggingFormatter> factory = null;
+				foreach (var registration in registrations)
+				{
+					try
+					{
+						factory = GetLoggingFormatterFactory(registration.Value[0]);
+					}
+					catch (ArgumentException argEx)
+					{
+						throw new InvalidOperationException($"An instance of { registration.Value[0].FullName } cannot be registered for the type { registration.Key.FullName } because there is no way to construct an instance, see the inner exception for more", argEx);
+					}
+
+					try
+					{
+						AddFormatter(registration.Key, factory(this));
+					}
+					catch (Exception ex)
+					{
+						throw new InvalidOperationException($"Constructing an instance of { registration.Value[0].FullName } for the type { registration.Key.FullName } failed with an exception, therefore registration has failed.  See the inner exception for more", ex);
+					}
+				}
+			}
+		}
+
+		private static Type[] GetAssociatedTypesForFormatterType(Assembly assembly, TypeInfo tempType, LoggingFormatterAttribute tempTypeAttribute)
+		{
+			Type[] associatedTypes = tempTypeAttribute.AssociatedTypes;
+			// usually, the attribute will be constructed with at least one type that the formatter should be associated with,
+			// however, this is not required if the LoggingFormatter<T> class is in the inheritance chain, because the <T> is the 
+			// default type.
+			// note that we still allow a type inheriting from LoggingFormatter<T> to have its associated types set explicitly,
+			// which will override this auto-detection.
+			if (associatedTypes.Length == 0)
+			{
+				//now have to figure out whether the type is LoggingFormatter<T>.  If so, then its associated type is the type which is passed as the 
+				//argument to that generic Type.
+				foreach (var t in tempType.GetAllBases())
+				{
+					if (TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == typeof(LoggingFormatter<>))
+					{
+						//get the type argument that was passed for <T> and use that, unless it's open
+						var candidateType = TypeHelpers.GetGenericArguments(t)[0];
+						if (!candidateType.IsGenericParameter)
+							associatedTypes = new[] { candidateType };
+						else
+							throw new InvalidOperationException($"The type \"{ tempType.FullName }\" defined in { assembly.FullName } should not be decorated with the LoggingFormatterAttribute as it is a generic type definition.  Only types derived from a closed LoggingFormatter<T> can be decorated with the LoggingFormatterAttribute");
+					}
+				}
+			}
+
+			return associatedTypes;
+		}
+
+		private Func<LoggingFormatterCollection, LoggingFormatter> GetLoggingFormatterFactory(TypeInfo loggingFormatterType)
+		{
+			//look for a constructor which accepts a LoggingFormatterCollection instance
+			ConstructorInfo ctor = loggingFormatterType.DeclaredConstructors.SingleOrDefault(c =>
+			{
+				var parms = c.GetParameters();
+				return parms.Length == 1 && parms[0].ParameterType == typeof(LoggingFormatterCollection);
+			});
+
+			ParameterExpression collExpr = Expression.Parameter(typeof(LoggingFormatterCollection), "collection");
+
+			if (ctor != null)
+			{
+				return Expression.Lambda<Func<LoggingFormatterCollection, LoggingFormatter>>(Expression.Convert(Expression.New(ctor, collExpr), typeof(LoggingFormatter)), collExpr).Compile();
+			}
+			else if ((ctor = loggingFormatterType.DeclaredConstructors.SingleOrDefault(c => c.GetParameters().Length == 0)) != null)
+			{
+				return Expression.Lambda<Func<LoggingFormatterCollection, LoggingFormatter>>(Expression.Convert(Expression.New(ctor), typeof(LoggingFormatter)), collExpr).Compile();
+			}
+
+			throw new ArgumentException($"Unable to find a default constructor or constructor with one parameter of type LoggingFormatterCollection on the type {loggingFormatterType.FullName}", nameof(loggingFormatterType));
+		}
+
 	}
 }
