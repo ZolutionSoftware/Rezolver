@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Logging
 {
-	[LoggingFormatter(typeof(ILoggedType_String), typeof(ILoggedType_Int), typeof(ILoggedType_Decimal))]
-    public class LoggedTypeInterfaceFormatter : LoggingFormatter
+	[ObjectFormatter(typeof(ILoggedType_String), typeof(ILoggedType_Int), typeof(ILoggedType_Decimal))]
+    public class LoggedTypeInterfaceFormatter : ObjectFormatter
     {
-		public override string Format(object obj, string format = null, LoggingFormatterCollection formatters = null)
+		public override string Format(object obj, string format = null, ObjectFormatterCollection formatters = null)
 		{
 			ILoggedType_String lStr = obj as ILoggedType_String;
 			List<string> strs = new List<string>();
@@ -32,7 +32,7 @@ namespace Rezolver.Tests.Logging
 			throw new NotSupportedException("The object is not supported");
 		}
 
-		public static string Expected(ILoggedType_String lStr, string format = null, LoggingFormatterCollection formatters = null)
+		public static string Expected(ILoggedType_String lStr, string format = null, ObjectFormatterCollection formatters = null)
 		{
 			switch (format)
 			{
@@ -43,7 +43,7 @@ namespace Rezolver.Tests.Logging
 			}
 		}
 
-		public static string Expected(ILoggedType_Decimal lDec, string format = null, LoggingFormatterCollection formatters = null)
+		public static string Expected(ILoggedType_Decimal lDec, string format = null, ObjectFormatterCollection formatters = null)
 		{
 			switch (format)
 			{
@@ -54,7 +54,7 @@ namespace Rezolver.Tests.Logging
 			}
 		}
 
-		public static string Expected(ILoggedType_Int lInt, string format = null, LoggingFormatterCollection formatters = null)
+		public static string Expected(ILoggedType_Int lInt, string format = null, ObjectFormatterCollection formatters = null)
 		{
 			switch (format)
 			{

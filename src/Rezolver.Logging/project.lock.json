@@ -2633,8 +2633,12 @@
       "Rezolver >= 1.0.0-alpha-*",
       "Rezolver.Shared >= 1.0.10-alpha-*"
     ],
-    ".NETFramework,Version=v4.5.1": [],
-    ".NETFramework,Version=v4.6": [],
+    ".NETFramework,Version=v4.5.1": [
+      "System.Linq.Expressions >= 4.0.0"
+    ],
+    ".NETFramework,Version=v4.6": [
+      "System.Linq.Expressions >= 4.0.10"
+    ],
     ".NETStandard,Version=v1.1": [
       "NETStandard.Library >= 1.6.0"
     ]

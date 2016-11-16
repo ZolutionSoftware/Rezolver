@@ -36,30 +36,11 @@ namespace Rezolver.Logging
 		public override void Register(ITarget target, Type type = null)
 		{
 
-			Logger.TrackCall(this, callId => {
+			Logger.TrackCall(this, callID =>
+			{
 				base.Register(target, type);
-				Logger.Message(callId, MessageType.Information, $"({ GetMessageStringForTarget(target) }) has been registered for type { type ?? target.DeclaredType })");
-			});		
-		}
-
-		private string GetMessageStringForTarget(ITarget target)
-		{
-			var oTarget = target as ObjectTarget;
-			if (oTarget != null)
-			{
-				if (oTarget.Value != null && oTarget.Value.GetType() != oTarget.DeclaredType)
-					return $"{ oTarget.Value } (typed as { oTarget.DeclaredType })";
-				else
-					return $"{ oTarget.Value}";
-			}
-			//else if(target is ScopedTarget)
-			//{
-			//	return $"Explicitly scoped { ((ScopedTarget)target). }"
-			//}
-			else
-			{
-				return $"{ target }";
-			}
+				Logger.Message(callID, MessageType.Information, format: $"{ target } has been registered for type { type ?? target.DeclaredType })");
+			});
 		}
 	}
 }

@@ -295,6 +295,8 @@
     <Content Include="learn-rezolver\search-stopwords.json" />
     <Content Include="learn-rezolver\styles\docfx.css.ignore" />
     <Content Include="learn-rezolver\xrefmap.yml" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="msdn.4.5.2.zip" />
     <None Include="packages.config" />
     <Content Include="rezolver-usage\nuget-packages\index.md" />

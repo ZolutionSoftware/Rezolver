@@ -33,7 +33,7 @@ namespace Rezolver.Logging
 		/// Gets the message formatter used by this tracker (and its <see cref="TrackedCall"/> instances) to format objects into human-readable strings.
 		/// </summary>
 		/// <value>The message formatter.</value>
-		LoggingFormatterCollection MessageFormatter { get; }
+		ObjectFormatterCollection MessageFormatter { get; }
 		/// <summary>
 		/// Retrieves a call by its ID.
 		/// </summary>
@@ -48,6 +48,13 @@ namespace Rezolver.Logging
 		/// 
 		/// An implementation must return <c>null</c> if the call is not found.</remarks>
 		TrackedCall GetCall(long callID);
+
+		/// <summary>
+		/// Gets the call currently being tracked for the current thread, if one exists.
+		/// 
+		/// Returns the call if found; otherwise null.
+		/// </summary>
+		TrackedCall GetCurrentCall();
 		/// <summary>
 		/// Indicates that a function call is commencing on the <paramref name="callee" /> object with the supplied arguments.
 		/// The name of the method should be supplied.  The function returns a unique identifier for this function call in order to
@@ -101,14 +108,14 @@ namespace Rezolver.Logging
 		/// <param name="format">The format.</param>
 		/// <remarks>You'll primarily use this overload is if you regularly build messages from interpolated strings.
 		/// 
-		/// The core implementation of this interface (<see cref="CallTracker"/>) utlises a <see cref="LoggingFormatterCollection"/> object to provide 
+		/// The core implementation of this interface (<see cref="CallTracker"/>) utlises a <see cref="ObjectFormatterCollection"/> object to provide 
 		/// advanced formatting functionality for objects into the strings that are ultimately stored on <see cref="TrackedCall"/> objects.
 		/// 
 		/// If you target this overload with your interpolated string, then this advanced formatting will automatically be used to produce the eventual
 		/// message, instead of the default .Net string formatting functionality.
 		/// 
 		/// In order to target the overload for interpolated strings, either capture it first into an <see cref="IFormattable"/> (or <see cref="FormattableString"/>) 
-		/// and pass that, or you can pass the interpolated string as the <paramref name="format"/> by name.  See <see cref="LoggingFormatterCollection.Format(IFormattable)"/>
+		/// and pass that, or you can pass the interpolated string as the <paramref name="format"/> by name.  See <see cref="ObjectFormatterCollection.Format(IFormattable)"/>
 		/// for more.</remarks>
 		TrackedCallMessage Message(long callID, MessageType messageType, IFormattable format);
 	}
@@ -116,15 +123,22 @@ namespace Rezolver.Logging
 	public static class ICallTrackerExtensions
 	{
 		/// <summary>
-		/// Tracks the call represented by <paramref name="call"/>, which will receive the Call ID as an argument to allow additional logging.
+		/// Tracks the call represented by <paramref name="call"/>, which will receive the ID of the <see cref="TrackedCall"/> as an argument to allow additional logging.
 		/// </summary>
-		/// <typeparam name="TResult">The type of the t result.</typeparam>
+		/// <typeparam name="TResult">The type of the result of the tracked call.</typeparam>
 		/// <param name="tracker">The tracker.</param>
-		/// <param name="callee">The callee.</param>
-		/// <param name="call">The call.</param>
-		/// <param name="arguments">The arguments.</param>
-		/// <param name="methodName">Name of the method.</param>
+		/// <param name="callee">The object receiving the call.</param>
+		/// <param name="call">The operation being performed on the <paramref name="callee"/>.</param>
+		/// <param name="arguments">The arguments to the method.</param>
+		/// <param name="methodName">Name of the method that was called on the <paramref name="callee"/>.</param>
 		/// <returns>TResult.</returns>
+		/// <remarks>This function and its overloads are designed to be used by an object which wants its operations
+		/// tracked.  The standard pattern is to wrap the body of a method implementation inside the <paramref name="call"/>
+		/// delegate, and to invoke this method from the method being implemented so its name can automatically be captured
+		/// in <paramref name="methodName"/>.
+		/// 
+		/// To retrieve the <see cref="TrackedCall"/> in your <paramref name="call"/>, you use call the <see cref="ICallTracker.GetCall(long)" />
+		/// method of the call tracker.</remarks>
 		public static TResult TrackCall<TResult>(this ICallTracker tracker, object callee, Func<long, TResult> call, object arguments = null, [CallerMemberName]string methodName = null)
 		{
 			var reqId = tracker.CallStart(callee, arguments, methodName);
@@ -145,20 +159,41 @@ namespace Rezolver.Logging
 			return result;
 		}
 
+		/// <summary>
+		/// Tracks the call represented by <paramref name="call"/>.
+		/// </summary>
+		/// <typeparam name="TResult">The type of the result of the tracked call.</typeparam>
+		/// <param name="tracker">The tracker.</param>
+		/// <param name="callee">The object receiving the call.</param>
+		/// <param name="call">The operation being performed on the <paramref name="callee"/>.</param>
+		/// <param name="arguments">The arguments to the method.</param>
+		/// <param name="methodName">Name of the method that was called on the <paramref name="callee"/>.</param>
+		/// <returns>TResult.</returns>
+		/// <remarks>This function and its overloads are designed to be used by an object which wants its operations
+		/// tracked.  The standard pattern is to wrap the body of a method implementation inside the <paramref name="call"/>
+		/// delegate, and to invoke this method from the method being implemented so its name can automatically be captured
+		/// in <paramref name="methodName"/>.</remarks>
 		public static TResult TrackCall<TResult>(this ICallTracker tracker, object callee, Func<TResult> call, object arguments = null, [CallerMemberName]string methodName = null)
 		{
-			return tracker.TrackCall(callee, callId => call(), arguments, methodName);
+			return tracker.TrackCall(callee, callObj => call(), arguments, methodName);
 		}
 
 		/// <summary>
-		/// Tracks the call represented by <see cref="call"/> (which does not have a return type), which will receive the Call ID as an argument to allow 
-		/// additional logging.
+		/// Tracks the call represented by <see cref="call"/> (which does not have a return type), which will receive the 
+		/// <see cref="TrackedCall"/> as an argument to allow additional logging.
 		/// </summary>
 		/// <param name="tracker">The tracker.</param>
 		/// <param name="callee">The callee.</param>
 		/// <param name="call">The call.</param>
 		/// <param name="arguments">The arguments.</param>
 		/// <param name="methodName">Name of the method.</param>
+		/// <remarks>This function and its overloads are designed to be used by an object which wants its operations
+		/// tracked.  The standard pattern is to wrap the body of a method implementation inside the <paramref name="call"/>
+		/// delegate, and to invoke this method from the method being implemented so its name can automatically be captured
+		/// in <paramref name="methodName"/>.
+		/// 
+		/// To retrieve the <see cref="TrackedCall"/> in your <paramref name="call"/>, you use call the <see cref="ICallTracker.GetCall(long)" />
+		/// method of the call tracker.</remarks>
 		public static void TrackCall(this ICallTracker tracker, object callee, Action<long> call, object arguments = null, [CallerMemberName]string methodName = null)
 		{
 			var reqId = tracker.CallStart(callee, arguments, methodName);
@@ -176,6 +211,20 @@ namespace Rezolver.Logging
 			tracker.CallEnd(reqId);
 		}
 
+		/// <summary>
+		/// Tracks a call represented by <paramref name="call"/> delegate, which does not return a result.
+		/// </summary>
+		/// <typeparam name="TResult">The type of the result of the tracked call.</typeparam>
+		/// <param name="tracker">The tracker.</param>
+		/// <param name="callee">The object receiving the call.</param>
+		/// <param name="call">The operation being performed on the <paramref name="callee"/>.</param>
+		/// <param name="arguments">The arguments to the method.</param>
+		/// <param name="methodName">Name of the method that was called on the <paramref name="callee"/>.</param>
+		/// <returns>TResult.</returns>
+		/// <remarks>This function and its overloads are designed to be used by an object which wants its operations
+		/// tracked.  The standard pattern is to wrap the body of a method implementation inside the <paramref name="call"/>
+		/// delegate, and to invoke this method from the method being implemented so its name can automatically be captured
+		/// in <paramref name="methodName"/>.</remarks>
 		public static void TrackCall(this ICallTracker tracker, object callee, Action call, object arguments = null, [CallerMemberName]string methodName = null)
 		{
 			tracker.TrackCall(tracker, (callId) => call(), arguments, methodName);

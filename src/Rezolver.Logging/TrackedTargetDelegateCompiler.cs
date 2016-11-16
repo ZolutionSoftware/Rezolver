@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Rezolver.Logging
@@ -14,16 +15,14 @@ namespace Rezolver.Logging
 	/// This class is used by the tracked container classes in the library 
 	/// </summary>
 	/// <seealso cref="Rezolver.ITargetCompiler" />
-	public class TrackedCompilerDecorator : ITargetCompiler
+	public class TrackedTargetDelegateCompiler : TargetDelegateCompiler
 	{
-		public TrackedCompilerDecorator(ITargetCompiler inner = null)
-		{
-			inner = inner ?? TargetCompiler.Default;
-		}
+		public TrackedTargetDelegateCompiler() { }
 
-		public ICompiledTarget CompileTarget(ITarget target, CompileContext context)
+		protected override ICompiledTarget CompileTargetBase(ITarget target, Expression toCompile, CompileContext context)
 		{
-			throw new NotImplementedException();
+			return new DelegatingCompiledRezolveTarget(
+				Expression.Lambda<Func<RezolveContext, object>>(toCompile, context.RezolveContextExpression).Compile());
 		}
 	}
 }

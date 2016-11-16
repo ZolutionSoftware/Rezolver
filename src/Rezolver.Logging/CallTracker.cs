@@ -56,7 +56,7 @@ namespace Rezolver.Logging
 		ConcurrentDictionary<long, TrackedCall> _callsInProgress = new ConcurrentDictionary<long, TrackedCall>();
 		ConcurrentBag<string> _messages = new ConcurrentBag<string>();
 
-		public LoggingFormatterCollection MessageFormatter { get; }
+		public ObjectFormatterCollection MessageFormatter { get; }
 
 		/// <summary>
 		/// Controls whether calls that are completed are retained after they are finished (and therefore available from the <see cref="GetCompletedCalls"/>
@@ -102,12 +102,12 @@ namespace Rezolver.Logging
 		/// .</param>
 		/// <param name="messageFormatter">The message formatter to be used in converting objects (return values, callees, argument strings, exceptions etc)
 		/// into strings which will ultimately be logged as messages or properties on <see cref="TrackedCall"/> objects.</param>
-		public CallTracker(bool retainCompletedCalls = false, MessageType? callEventsMessageType = null, LoggingFormatterCollection messageFormatter = null)
+		public CallTracker(bool retainCompletedCalls = false, MessageType? callEventsMessageType = null, ObjectFormatterCollection messageFormatter = null)
 		{
 			RetainCompletedCalls = retainCompletedCalls;
 			CallEventsMessageType = callEventsMessageType;
 			//create a new, independent message formatter which extends the formatter passed, or the default collection
-			MessageFormatter = new Logging.LoggingFormatterCollection(messageFormatter ?? LoggingFormatterCollection.Default);
+			MessageFormatter = new Logging.ObjectFormatterCollection(messageFormatter ?? ObjectFormatterCollection.Default);
 		}
 
 		/// <summary>
@@ -158,6 +158,11 @@ namespace Rezolver.Logging
 			if (!_callsInProgress.TryGetValue(callID, out call))
 				_calls.TryGetValue(callID, out call);
 			return call;
+		}
+
+		public TrackedCall GetCurrentCall()
+		{
+			return _currentCallStack.Count != 0 ? _currentCallStack.Peek() : null;
 		}
 
 		protected virtual IFormattable FormatCallStartMessage(TrackedCall call)
@@ -306,12 +311,12 @@ namespace Rezolver.Logging
 		/// <param name="format">The format.</param>
 		/// <returns>TrackedCallMessage.</returns>
 		/// <remarks>You'll primarily use this overload is if you regularly build messages from interpolated strings.
-		/// The core implementation of this interface (<see cref="CallTracker" />) utlises a <see cref="LoggingFormatterCollection" /> object to provide
+		/// The core implementation of this interface (<see cref="CallTracker" />) utlises a <see cref="ObjectFormatterCollection" /> object to provide
 		/// advanced formatting functionality for objects into the strings that are ultimately stored on <see cref="TrackedCall" /> objects.
 		/// If you target this overload with your interpolated string, then this advanced formatting will automatically be used to produce the eventual
 		/// message, instead of the default .Net string formatting functionality.
 		/// In order to target the overload for interpolated strings, either capture it first into an <see cref="IFormattable" /> (or <see cref="FormattableString" />)
-		/// and pass that, or you can pass the interpolated string as the <paramref name="format" /> by name.  See <see cref="LoggingFormatterCollection.Format(IFormattable)" />
+		/// and pass that, or you can pass the interpolated string as the <paramref name="format" /> by name.  See <see cref="ObjectFormatterCollection.Format(IFormattable)" />
 		/// for more.</remarks>
 		public TrackedCallMessage Message(long callID, MessageType messageType, IFormattable format)
 		{

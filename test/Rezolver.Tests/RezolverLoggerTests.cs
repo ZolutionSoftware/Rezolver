@@ -64,11 +64,11 @@ namespace Rezolver.Tests
 		{
 			private long _lastReqID = 0;
 
-			public LoggingFormatterCollection MessageFormatter
+			public ObjectFormatterCollection MessageFormatter
 			{
 				get
 				{
-					return LoggingFormatterCollection.Default;
+					return ObjectFormatterCollection.Default;
 				}
 			}
 
@@ -103,6 +103,11 @@ namespace Rezolver.Tests
 			}
 
 			public TrackedCall GetCall(long callID)
+			{
+				throw new NotImplementedException();
+			}
+
+			public TrackedCall GetCurrentCall()
 			{
 				throw new NotImplementedException();
 			}

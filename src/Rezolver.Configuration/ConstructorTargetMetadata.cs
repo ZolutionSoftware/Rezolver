@@ -244,9 +244,8 @@ namespace Rezolver.Configuration
         else
           topMatch = mostMatching[0];
       }
-      //todo - add the ability to pre-select constructor in this method, since we've done all the hard work of searching for it!
-      return ConstructorTarget.WithArgs(typeToBuild,
-        topMatch.constructor,
+
+      return ConstructorTarget.WithArgs(topMatch.constructor,
         topMatch.bindings.Where(b => b.argument != null).ToDictionary(b => b.parameter.Name, b => b.argument.CreateRezolveTarget(new[] { b.parameter.ParameterType }, context, entry)));
     }
 

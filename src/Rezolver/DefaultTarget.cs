@@ -8,28 +8,41 @@ using System.Linq.Expressions;
 
 namespace Rezolver
 {
-  /// <summary>
-  /// A target that simply creates a default instance of a given type.  I.e. the same
-  /// as doing default(type) in C#.
-  /// </summary>
-  public class DefaultTarget : TargetBase
-  {
-    private readonly Type _declaredType;
+	/// <summary>
+	/// A target that simply creates a default instance of a given type.  I.e. the same
+	/// as doing default(type) in C#.
+	/// </summary>
+	public class DefaultTarget : TargetBase
+	{
+		private readonly Type _declaredType;
 
-    public DefaultTarget(Type type)
-    {
-      type.MustNotBeNull("type");
-      _declaredType = type;
-    }
+		/// <summary>
+		/// Always equal to the type for which the default value will be returned by the expression
+		/// create by <see cref="CreateExpressionBase(CompileContext)"/>
+		/// </summary>
+		public override Type DeclaredType
+		{
+			get { return _declaredType; }
+		}
+		/// <summary>
+		/// Initializes a new instance of the <see cref="DefaultTarget"/> class.
+		/// </summary>
+		/// <param name="type">The type.</param>
+		public DefaultTarget(Type type)
+		{
+			type.MustNotBeNull("type");
+			_declaredType = type;
+		}
 
-    protected override Expression CreateExpressionBase(CompileContext context)
-    {
-      return Expression.Default(DeclaredType);
-    }
+		/// <summary>
+		/// Always returns a <see cref="DefaultExpression"/> of the type <see cref="DeclaredType"/>
+		/// </summary>
+		/// <param name="context">The current compile context</param>
+		protected override Expression CreateExpressionBase(CompileContext context)
+		{
+			return Expression.Default(DeclaredType);
+		}
 
-    public override Type DeclaredType
-    {
-      get { return _declaredType; }
-    }
-  }
+
+	}
 }

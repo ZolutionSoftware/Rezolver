@@ -48,14 +48,14 @@ namespace Rezolver.Logging
 
 		protected override void Dispose(bool disposing)
 		{
-			Logger.TrackCall(this, (callID) =>
+			Logger.TrackCall(this, (callId) =>
 			{
 				var allTrackedObjects = this.TrackedObjects;
-				Logger.Message(callID, MessageType.Information, $"{ ToString() } being disposed - { allTrackedObjects.Count() } child objects are being disposed.");
-				Logger.Message(callID, MessageType.Debug, "Objects being disposed:");
+				Logger.Message(callId, MessageType.Information, format: $"{ this } being disposed - { allTrackedObjects.Count() } child objects are being disposed.");
+				Logger.Message(callId, MessageType.Debug, "Objects being disposed:");
 				foreach(var o in allTrackedObjects)
 				{
-					Logger.Message(callID, MessageType.Debug, $"{ o }");
+					Logger.Message(callId, MessageType.Debug, format: $"{ o }");
 				}
 
 				base.Dispose(disposing);
@@ -69,7 +69,6 @@ namespace Rezolver.Logging
 
 		public override IScopedContainer CreateLifetimeScope()
 		{
-			//TODO: change this to a LoggingCombinedLifetimeScopeRezolver
 			return Logger.TrackCall(this, () => new TrackedOverridingScopedContainer(this));
 		}
 

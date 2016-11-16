@@ -22,57 +22,7 @@ namespace Rezolver.Logging
 	{
 		bool _initialised;
 
-		/// <summary>
-		/// Used when reading objects to turn them into dictionaries.
-		/// </summary>
-		protected class ObjectMemberValue
-		{
-			public string Name { get; }
-			public object Value { get; }
-			public Type Type { get; }
-
-			public ObjectMemberValue(object obj, MemberInfo member)
-			{
-				Name = member.Name;
-				//initialise it to *something*!
-				Type = typeof(object);
-				Func<object, MemberInfo, object> accessor = null;
-				if (member is FieldInfo)
-				{
-					accessor = GetValueFromField;
-					Type = ((FieldInfo)member).FieldType;
-				}
-				else if (member is PropertyInfo)
-				{
-					accessor = GetValueFromProperty;
-					Type = ((PropertyInfo)member).PropertyType;
-				}
-
-				if (accessor != null)
-				{
-					try
-					{
-						Value = accessor(obj, member);
-					}
-					catch (Exception ex)
-					{
-						Value = $"[Exception ({ ex.GetType() })]: { ex.Message }";
-					}
-				}
-			}
-
-			private static object GetValueFromProperty(object o, MemberInfo p)
-			{
-				return ((PropertyInfo)p).GetValue(o);
-			}
-
-			private static object GetValueFromField(object o, MemberInfo f)
-			{
-				return ((FieldInfo)f).GetValue(o);
-			}
-		}
-
-		public LoggingFormatterCollection MessageFormatter { get; }
+		public ObjectFormatterCollection MessageFormatter { get; }
 
 		public string Callee { get; private set; }
 		/// <summary>
@@ -132,13 +82,13 @@ namespace Rezolver.Logging
 		/// <param name="data">Additional data to be attached to this call, will be used to initialise the <see cref="Data" /> dictionary from the object's public
 		/// properties and fields, where the property/field name will be used as the key, and the property/field value used as the value.</param>
 		/// <param name="messageFormatters">The formatters to be used by this call or its message objects when formatting any objects into strings.  If not provided,
-		/// then the class defaults to the <see cref="LoggingFormatterCollection.Default"/>.</param>
-		public TrackedCall(long id, TrackedCall parent, LoggingFormatterCollection messageFormatter = null)
+		/// then the class defaults to the <see cref="ObjectFormatterCollection.Default"/>.</param>
+		public TrackedCall(long id, TrackedCall parent, ObjectFormatterCollection messageFormatter = null)
 		{
 			ID = id;
 			Parent = parent;
 			Timestamp = DateTime.UtcNow;
-			MessageFormatter = messageFormatter ?? LoggingFormatterCollection.Default;
+			MessageFormatter = messageFormatter ?? ObjectFormatterCollection.Default;
 			_messages = new BlockingCollection<TrackedCallMessage>();
 			ChildCalls = new BlockingCollection<TrackedCall>();
 		}
@@ -165,10 +115,10 @@ namespace Rezolver.Logging
 		{
 			if (_initialised) throw new InvalidOperationException("This TrackedCall has already been initialised");
 
-			Data = ExplodeObjectMembersToObjectDictionary(data);
+			Data = data.ToMemberValueDictionary();
 			Method = method;
 			Callee = MessageFormatter.Format(callee);
-			Arguments = ExplodeObjectMembersToStringDictionary(arguments);
+			Arguments = GetMemberValueStringDictionary(arguments);
 			if (Parent != null)
 				Parent.ChildCalls.Add(this);
 		}
@@ -178,7 +128,7 @@ namespace Rezolver.Logging
 			MessageAdded?.Invoke(this, msg);
 		}
 
-		public void Ended(object result = null, bool hasResult = false)
+		internal void Ended(object result = null, bool hasResult = false)
 		{
 			if (Completed == null)
 				Completed = DateTime.UtcNow;
@@ -195,7 +145,7 @@ namespace Rezolver.Logging
 			}
 		}
 
-		public void EndedWithException(Exception ex)
+		internal void EndedWithException(Exception ex)
 		{
 			if (Completed == null)
 				Completed = DateTime.UtcNow;
@@ -226,23 +176,9 @@ namespace Rezolver.Logging
 			return toReturn;
 		}
 
-		private IEnumerable<ObjectMemberValue> ExplodeObjectMembers(object obj)
+		private Dictionary<string, string> GetMemberValueStringDictionary(object obj)
 		{
-			if (obj == null)
-				return Enumerable.Empty<ObjectMemberValue>();
-
-			return obj.GetType().GetInstanceProperties().PubliclyReadable().Cast<MemberInfo>().Concat(
-				obj.GetType().GetInstanceFields().Public().Cast<MemberInfo>()).Select(m => new ObjectMemberValue(obj, m));
-		}
-
-		private Dictionary<string, object> ExplodeObjectMembersToObjectDictionary(object obj)
-		{
-			return ExplodeObjectMembers(obj).ToDictionary(mv => mv.Name, mv => mv.Value);
-		}
-
-		private Dictionary<string, string> ExplodeObjectMembersToStringDictionary(object obj)
-		{
-			return ExplodeObjectMembers(obj).ToDictionary(mv => mv.Name, mv => MessageFormatter.Format(format: $"{ mv.Value } ({mv.Type})"));
+			return obj.ToMemberValueDictionary().ToDictionary(mv => mv.Key, mv => MessageFormatter.Format(mv.Value));
 		}
 	}
 }

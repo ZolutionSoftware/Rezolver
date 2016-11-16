@@ -10,51 +10,51 @@ namespace Rezolver.Logging
 {
 	/// <summary>
 	/// Provides string formatting capabilities (by implementing <see cref="IFormatProvider"/> and <see cref="ICustomFormatter"/>)
-	/// through the use of instances of the <see cref="LoggingFormatter"/> object registered through the <see cref="AddFormatter(Type, LoggingFormatter)"/>
+	/// through the use of instances of the <see cref="ObjectFormatter"/> object registered through the <see cref="AddFormatter(Type, ObjectFormatter)"/>
 	/// function and its overloads.
 	/// </summary>
 	/// <seealso cref="System.IFormatProvider" />
 	/// <seealso cref="System.ICustomFormatter" />
 	/// <remarks>This class allows you to customise how objects are formatted in messages and other string values for <see cref="TrackedCall"/>
 	/// instances.</remarks>
-	public sealed class LoggingFormatterCollection : IFormatProvider, ICustomFormatter
+	public sealed class ObjectFormatterCollection : IFormatProvider, ICustomFormatter
 	{
 		/// <summary>
 		/// Gets the default logging formatter collection that's used by default in <see cref="CallTracker"/> and
 		/// <see cref="TrackedCall"/> instances.
 		/// </summary>
-		public static LoggingFormatterCollection Default { get; }
+		public static ObjectFormatterCollection Default { get; }
 
-		static LoggingFormatterCollection()
+		static ObjectFormatterCollection()
 		{
-			Default = new LoggingFormatterCollection();
-			Default.AddFormattersFromAssembly(TypeHelpers.GetAssembly(typeof(LoggingFormatterCollection)));
+			Default = new ObjectFormatterCollection();
+			Default.AddFormattersFromAssembly(TypeHelpers.GetAssembly(typeof(ObjectFormatterCollection)));
 		}
 
-		private readonly LoggingFormatterCollection _innerCollection;
+		private readonly ObjectFormatterCollection _innerCollection;
 
 
-		private readonly ConcurrentDictionary<Type, LoggingFormatter> _formatters;
+		private readonly ConcurrentDictionary<Type, ObjectFormatter> _formatters;
 		/// <summary>
-		/// Initialises a new instance of the <see cref="LoggingFormatterCollection" /> class, optionally using the passed <paramref name="source" /> as
+		/// Initialises a new instance of the <see cref="ObjectFormatterCollection" /> class, optionally using the passed <paramref name="source" /> as
 		/// the starting point for new registrations.
 		/// </summary>
-		/// <param name="innerCollection">The inner collection to be used if this collection cannot locate a <see cref="LoggingFormatter"/> for a given type.
+		/// <param name="innerCollection">The inner collection to be used if this collection cannot locate a <see cref="ObjectFormatter"/> for a given type.
 		/// 
 		/// Using parameter, it's possible to extend an existing collection on an ad-hoc basis without modifying it.  Typically, for example, a collection
 		/// might be initialised with the <see cref="Default"/> collection passed as the argument to this parameter, thus allowing a component to use the 
 		/// default collection of formatters, but overriding and extending them as required without replacing any other formatters that are actually required
 		/// by other components.</param>
-		public LoggingFormatterCollection(LoggingFormatterCollection innerCollection = null)
+		public ObjectFormatterCollection(ObjectFormatterCollection innerCollection = null)
 		{
-			_formatters = new ConcurrentDictionary<Type, LoggingFormatter>();
+			_formatters = new ConcurrentDictionary<Type, ObjectFormatter>();
 			//have to make sure all the inner collections are unique
 			if (innerCollection != null)
 			{
 				//we can copy the reference across straight away, if an exception is thrown below, then the 
 				//construction fails and it's not used anyway.
 				_innerCollection = innerCollection;
-				List<LoggingFormatterCollection> nestedCollections = new List<LoggingFormatterCollection>();
+				List<ObjectFormatterCollection> nestedCollections = new List<ObjectFormatterCollection>();
 
 				while (innerCollection != null)
 				{
@@ -73,7 +73,7 @@ namespace Rezolver.Logging
 		/// </summary>
 		/// <typeparam name="TObject">The type of object for which this formatter will be used to produce formatted strings.</typeparam>
 		/// <param name="formatter">The formatter.</param>
-		public void AddFormatter<TObject>(LoggingFormatter formatter)
+		public void AddFormatter<TObject>(ObjectFormatter formatter)
 		{
 			try
 			{
@@ -89,12 +89,12 @@ namespace Rezolver.Logging
 			}
 		}
 
-		public void AddFormatter<TObject>(LoggingFormatter<TObject> formatter)
+		public void AddFormatter<TObject>(ObjectFormatter<TObject> formatter)
 		{
 			AddFormatter(typeof(TObject), formatter);
 		}
 
-		public void AddFormatter(Type objectType, LoggingFormatter formatter)
+		public void AddFormatter(Type objectType, ObjectFormatter formatter)
 		{
 			objectType.MustNotBeNull(nameof(objectType));
 			formatter.MustNotBeNull(nameof(formatter));
@@ -105,7 +105,7 @@ namespace Rezolver.Logging
 
 		/// <summary>
 		/// Produces a string representation of the arguments provided using this object (and the
-		/// <see cref="LoggingFormatter"/> instances that have been registered within it) as a custom formatter.
+		/// <see cref="ObjectFormatter"/> instances that have been registered within it) as a custom formatter.
 		/// </summary>
 		/// <param name="formatString">The format string.  If format placeholders are present, then the <paramref name="args"/> must contain
 		/// values for each of them.</param>
@@ -120,12 +120,12 @@ namespace Rezolver.Logging
 
 		/// <summary>
 		/// Formats the specified formattable object using the custom formatter defined by this
-		/// type, leveraging the <see cref="LoggingFormatter"/> objects contained within this collection
+		/// type, leveraging the <see cref="ObjectFormatter"/> objects contained within this collection
 		/// to produce the string.
 		/// </summary>
 		/// <param name="format">The formattable object.</param>
 		/// <remarks>This function is useful when you want to format a log message from a .Net interpolated
-		/// string using the <see cref="LoggingFormatter"/> objects that have been registered in this collection.
+		/// string using the <see cref="ObjectFormatter"/> objects that have been registered in this collection.
 		/// 
 		/// The only way to invoke it directly when using an interpolated string, however, is to reference the 
 		/// <paramref name="format"/> parameter by name:</remarks>
@@ -148,10 +148,10 @@ namespace Rezolver.Logging
 		}
 
 		/// <summary>
-		/// Formats the given object using a <see cref="LoggingFormatter" /> registered in this collection by a type which is
+		/// Formats the given object using a <see cref="ObjectFormatter" /> registered in this collection by a type which is
 		/// equal to, an interface or base of, or an open generic of the object's type.
 		/// 
-		/// If no <see cref="LoggingFormatter"/> has been registered with a compatible type, but object implements the <see cref="IFormattable"/> interface,
+		/// If no <see cref="ObjectFormatter"/> has been registered with a compatible type, but object implements the <see cref="IFormattable"/> interface,
 		/// then its implementation of the <see cref="IFormattable.ToString(string, IFormatProvider)"/> will be used, optionally passing through the 
 		/// <paramref name="format"/> and <paramref name="formatProvider"/> arguments if provided.
 		/// 
@@ -159,9 +159,9 @@ namespace Rezolver.Logging
 		/// </summary>
 		/// <param name="obj">The object to be formatted.</param>
 		/// <param name="format">Optional format string that can be used to customise how the object is output to the string.
-		/// Either be passed to the handling formatter's <see cref="LoggingFormatter.Format(object, string)"/> function, 
+		/// Either be passed to the handling formatter's <see cref="ObjectFormatter.Format(object, string)"/> function, 
 		/// or the <see cref="IFormattable.ToString(string, IFormatProvider)"/> function if the object is <see cref="IFormattable"/>.</param>
-		/// <param name="formatProvider">Optional. Only used if no compatible <see cref="LoggingFormatter"/> is registered in this collection
+		/// <param name="formatProvider">Optional. Only used if no compatible <see cref="ObjectFormatter"/> is registered in this collection
 		/// and the object implements the <see cref="IFormattable"/> interface.  In this case, this argument will be passed through to the
 		/// object's implementation of the <see cref="IFormattable.ToString(string, IFormatProvider)"/> function.</param>
 		public string Format(object obj, string format = null, IFormatProvider formatProvider = null)
@@ -172,7 +172,7 @@ namespace Rezolver.Logging
 			string toReturn;
 			foreach (var formatter in GetFormatters(obj))
 			{
-				toReturn = formatter.Format(obj, format);
+				toReturn = formatter.Format(obj, format, this);
 				if (toReturn != null)
 					return toReturn;
 			}
@@ -188,11 +188,11 @@ namespace Rezolver.Logging
 		/// Gets the formatters registered in this collection which are compatible with the given object.
 		/// </summary>
 		/// <param name="obj">The object.</param>
-		private IEnumerable<LoggingFormatter> GetFormatters(object obj)
+		private IEnumerable<ObjectFormatter> GetFormatters(object obj)
 		{
 			if (obj != null)
 			{
-				LoggingFormatter formatter;
+				ObjectFormatter formatter;
 				foreach (var type in GetTypeSearchList(obj))
 				{
 					if ((formatter = GetFormatterForTypeExact(type)) != null)
@@ -201,10 +201,10 @@ namespace Rezolver.Logging
 			}
 		}
 
-		private LoggingFormatter GetFormatterForTypeExact(Type type)
+		private ObjectFormatter GetFormatterForTypeExact(Type type)
 		{
 			//exact type match can come from this collection or from the inner collection (or from its inner collection, ad nauseam)
-			LoggingFormatter toReturn;
+			ObjectFormatter toReturn;
 			if (!_formatters.TryGetValue(type, out toReturn) && _innerCollection != null)
 				toReturn = _innerCollection.GetFormatterForTypeExact(type);
 			return toReturn;
@@ -280,22 +280,22 @@ namespace Rezolver.Logging
 		{
 			assembly.MustNotBeNull(nameof(assembly));
 			IEnumerable<TypeInfo> typesFiltered = null;
-			if (assembly == TypeHelpers.GetAssembly(typeof(LoggingFormatterCollection)))
+			if (assembly == TypeHelpers.GetAssembly(typeof(ObjectFormatterCollection)))
 				typesFiltered = assembly.DefinedTypes.Where(ti => !ti.IsAbstract && !ti.IsGenericTypeDefinition && (ti.IsPublic || ti.IsNotPublic)); //public and internal types
 			else
 				typesFiltered = assembly.DefinedTypes.Where(ti => !ti.IsAbstract && !ti.IsGenericTypeDefinition && ti.IsPublic);
 
 			Dictionary<Type, List<TypeInfo>> registrations = new Dictionary<Type, List<TypeInfo>>();
 
-			foreach (var result in typesFiltered.Select(ti => new { Type = ti, Attribute = ti.GetCustomAttribute<LoggingFormatterAttribute>() }).Where(t => t.Attribute != null))
+			foreach (var result in typesFiltered.Select(ti => new { Type = ti, Attribute = ti.GetCustomAttribute<ObjectFormatterAttribute>() }).Where(t => t.Attribute != null))
 			{
-				if (typeof(LoggingFormatter).GetTypeInfo().IsAssignableFrom(result.Type))
+				if (typeof(ObjectFormatter).GetTypeInfo().IsAssignableFrom(result.Type))
 				{
 					Type[] associatedTypes = GetAssociatedTypesForFormatterType(assembly, result.Type, result.Attribute);
 
 					if (associatedTypes.Length == 0)
 					{
-						throw new InvalidOperationException(string.Format("Cannot determine the type that the type {0} defined in {1} is responsible for formatting.  The LoggingFormatterAttribute is present on this type, but no associated types have been set.  Please add at least one associated type, or derive the formatter from LoggingFormatter<[target type]>", result.Type.FullName, assembly.FullName));
+						throw new InvalidOperationException(string.Format("Cannot determine the type that the type {0} defined in {1} is responsible for formatting.  The ObjectFormatterAttribute is present on this type, but no associated types have been set.  Please add at least one associated type, or derive the formatter from ObjectFormatter<[target type]>", result.Type.FullName, assembly.FullName));
 					}
 
 					foreach (var type in associatedTypes.Distinct())
@@ -307,23 +307,23 @@ namespace Rezolver.Logging
 					}
 				}
 				else
-					throw new InvalidOperationException(string.Format("The Type \"{0}\" defined in {1} has the LoggingFormatterAttribute but does not inherit from LoggingFormatter", result.Type.FullName, assembly.FullName));
+					throw new InvalidOperationException(string.Format("The Type \"{0}\" defined in {1} has the ObjectFormatterAttribute but does not inherit from ObjectFormatter", result.Type.FullName, assembly.FullName));
 			}
 			if (registrations.Count != 0)
 			{
 				var dupes = registrations.Where(kvp => kvp.Value.Count > 1).ToArray();
 				if (dupes.Length != 0)
 				{
-					throw new InvalidOperationException(string.Format("One or more types tagged with the LoggingFormatterAttribute in the assembly {0} are associated to the same type: {1}",
+					throw new InvalidOperationException(string.Format("One or more types tagged with the ObjectFormatterAttribute in the assembly {0} are associated to the same type: {1}",
 						assembly.FullName,
 						string.Join("; ", dupes.Select(kvp => string.Format("Target: {0}, Formatters: {1}", kvp.Key.FullName, string.Join(", ", kvp.Value.Select(t => t.FullName)))))));
 				}
-				Func<LoggingFormatterCollection, LoggingFormatter> factory = null;
+				Func<ObjectFormatterCollection, ObjectFormatter> factory = null;
 				foreach (var registration in registrations)
 				{
 					try
 					{
-						factory = GetLoggingFormatterFactory(registration.Value[0]);
+						factory = GetObjectFormatterFactory(registration.Value[0]);
 					}
 					catch (ArgumentException argEx)
 					{
@@ -342,28 +342,28 @@ namespace Rezolver.Logging
 			}
 		}
 
-		private static Type[] GetAssociatedTypesForFormatterType(Assembly assembly, TypeInfo tempType, LoggingFormatterAttribute tempTypeAttribute)
+		private static Type[] GetAssociatedTypesForFormatterType(Assembly assembly, TypeInfo tempType, ObjectFormatterAttribute tempTypeAttribute)
 		{
 			Type[] associatedTypes = tempTypeAttribute.AssociatedTypes;
 			// usually, the attribute will be constructed with at least one type that the formatter should be associated with,
-			// however, this is not required if the LoggingFormatter<T> class is in the inheritance chain, because the <T> is the 
+			// however, this is not required if the ObjectFormatter<T> class is in the inheritance chain, because the <T> is the 
 			// default type.
-			// note that we still allow a type inheriting from LoggingFormatter<T> to have its associated types set explicitly,
+			// note that we still allow a type inheriting from ObjectFormatter<T> to have its associated types set explicitly,
 			// which will override this auto-detection.
 			if (associatedTypes.Length == 0)
 			{
-				//now have to figure out whether the type is LoggingFormatter<T>.  If so, then its associated type is the type which is passed as the 
+				//now have to figure out whether the type is ObjectFormatter<T>.  If so, then its associated type is the type which is passed as the 
 				//argument to that generic Type.
 				foreach (var t in tempType.GetAllBases())
 				{
-					if (TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == typeof(LoggingFormatter<>))
+					if (TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == typeof(ObjectFormatter<>))
 					{
 						//get the type argument that was passed for <T> and use that, unless it's open
 						var candidateType = TypeHelpers.GetGenericArguments(t)[0];
 						if (!candidateType.IsGenericParameter)
 							associatedTypes = new[] { candidateType };
 						else
-							throw new InvalidOperationException($"The type \"{ tempType.FullName }\" defined in { assembly.FullName } should not be decorated with the LoggingFormatterAttribute as it is a generic type definition.  Only types derived from a closed LoggingFormatter<T> can be decorated with the LoggingFormatterAttribute");
+							throw new InvalidOperationException($"The type \"{ tempType.FullName }\" defined in { assembly.FullName } should not be decorated with the ObjectFormatterAttribute as it is a generic type definition.  Only types derived from a closed ObjectFormatter<T> can be decorated with the ObjectFormatterAttribute");
 					}
 				}
 			}
@@ -371,27 +371,27 @@ namespace Rezolver.Logging
 			return associatedTypes;
 		}
 
-		private Func<LoggingFormatterCollection, LoggingFormatter> GetLoggingFormatterFactory(TypeInfo loggingFormatterType)
+		private Func<ObjectFormatterCollection, ObjectFormatter> GetObjectFormatterFactory(TypeInfo objectFormatterType)
 		{
-			//look for a constructor which accepts a LoggingFormatterCollection instance
-			ConstructorInfo ctor = loggingFormatterType.DeclaredConstructors.SingleOrDefault(c =>
+			//look for a constructor which accepts a ObjectFormatterCollection instance
+			ConstructorInfo ctor = objectFormatterType.DeclaredConstructors.SingleOrDefault(c =>
 			{
 				var parms = c.GetParameters();
-				return parms.Length == 1 && parms[0].ParameterType == typeof(LoggingFormatterCollection);
+				return parms.Length == 1 && parms[0].ParameterType == typeof(ObjectFormatterCollection);
 			});
 
-			ParameterExpression collExpr = Expression.Parameter(typeof(LoggingFormatterCollection), "collection");
+			ParameterExpression collExpr = Expression.Parameter(typeof(ObjectFormatterCollection), "collection");
 
 			if (ctor != null)
 			{
-				return Expression.Lambda<Func<LoggingFormatterCollection, LoggingFormatter>>(Expression.Convert(Expression.New(ctor, collExpr), typeof(LoggingFormatter)), collExpr).Compile();
+				return Expression.Lambda<Func<ObjectFormatterCollection, ObjectFormatter>>(Expression.Convert(Expression.New(ctor, collExpr), typeof(ObjectFormatter)), collExpr).Compile();
 			}
-			else if ((ctor = loggingFormatterType.DeclaredConstructors.SingleOrDefault(c => c.GetParameters().Length == 0)) != null)
+			else if ((ctor = objectFormatterType.DeclaredConstructors.SingleOrDefault(c => c.GetParameters().Length == 0)) != null)
 			{
-				return Expression.Lambda<Func<LoggingFormatterCollection, LoggingFormatter>>(Expression.Convert(Expression.New(ctor), typeof(LoggingFormatter)), collExpr).Compile();
+				return Expression.Lambda<Func<ObjectFormatterCollection, ObjectFormatter>>(Expression.Convert(Expression.New(ctor), typeof(ObjectFormatter)), collExpr).Compile();
 			}
 
-			throw new ArgumentException($"Unable to find a default constructor or constructor with one parameter of type LoggingFormatterCollection on the type {loggingFormatterType.FullName}", nameof(loggingFormatterType));
+			throw new ArgumentException($"Unable to find a default constructor or constructor with one parameter of type ObjectFormatterCollection on the type {objectFormatterType.FullName}", nameof(objectFormatterType));
 		}
 
 	}

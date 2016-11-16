@@ -22,7 +22,7 @@ namespace Rezolver.Microsoft.Extensions.Logging
 		/// </summary>
 		/// <param name="logger">The logger to which messages will be written.</param>
 		/// <exception cref="ArgumentNullException"></exception>
-		public LoggingCallTracker(ILogger logger, bool retainCompletedCalls = false, MessageType? callEventsMessageType = MessageType.Trace, LoggingFormatterCollection messageFormatter = null)
+		public LoggingCallTracker(ILogger logger, bool retainCompletedCalls = false, MessageType? callEventsMessageType = MessageType.Trace, ObjectFormatterCollection messageFormatter = null)
 			: base(retainCompletedCalls: retainCompletedCalls, callEventsMessageType: callEventsMessageType, messageFormatter: messageFormatter)
 		{
 			if (logger == null) throw new ArgumentNullException(nameof(logger));
@@ -47,7 +47,6 @@ namespace Rezolver.Microsoft.Extensions.Logging
 
 		private void Call_MessageAdded(object sender, TrackedCallMessage e)
 		{
-
 			var logMsg = $"(#{ string.Join("->", GetCallStackIDs(e.Call).Reverse()) }) { e.Text }";
 			switch (e.Type)
 			{

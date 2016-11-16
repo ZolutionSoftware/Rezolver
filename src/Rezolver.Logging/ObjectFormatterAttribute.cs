@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 namespace Rezolver.Logging
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class LoggingFormatterAttribute : Attribute
+    public class ObjectFormatterAttribute : Attribute
     {
 		public Type[] AssociatedTypes { get; }
 
-		public LoggingFormatterAttribute(params Type[] associatedTypes)
+		public ObjectFormatterAttribute(params Type[] associatedTypes)
 		{
 			AssociatedTypes = associatedTypes;
 		}

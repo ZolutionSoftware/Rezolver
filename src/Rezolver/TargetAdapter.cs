@@ -114,7 +114,7 @@ namespace Rezolver
         //that is put around nearly all expressions produced by RezolveTargetBase implementations. 
         var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
         return rewriter.Visit(ctorTargetExpr);
-      }, node.Type, this));
+      }, node.Type));
     }
 
     protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)
