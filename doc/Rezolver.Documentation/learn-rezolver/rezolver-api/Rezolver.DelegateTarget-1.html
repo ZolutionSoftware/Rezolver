@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_DelegateTarget_1" data-uid="Rezolver.DelegateTarget`1">Class DelegateTarget&lt;T&gt;
               </h1>
-              <div class="markdown level0 summary"><p>Implements IRezolveTarget using factory function delegates.</p>
+              <div class="markdown level0 summary"><p>Implements <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> using either a nullary factory of the type <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func&lt;TResult&gt;</a>
+or a unary factory of the type <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func&lt;T, TResult&gt;</a> in which the argument is <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -165,7 +166,7 @@
                 <tbody>
                   <tr>
                     <td><em>T</em></td>
-                    <td></td>
+                    <td>The type of object produced by the delegate passed on construction</td>
                   </tr>
                 </tbody>
               </table>
@@ -176,11 +177,13 @@
               
               
               <h4 class="hmember" id="Rezolver_DelegateTarget_1__ctor_System_Func__0__System_Type_" data-uid="Rezolver.DelegateTarget`1.#ctor(System.Func{`0},System.Type)">DelegateTarget(Func&lt;T&gt;, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1">DelegateTarget&lt;T&gt;</a> class which will use
+a nullary factory to produce an instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public DelegateTarget(Func&lt;T&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public DelegateTarget(Func&lt;T&gt; nullaryFactory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -193,14 +196,97 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>factory</em></td>
+                    <td><em>nullaryFactory</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func</a>&lt;T&gt;</td>
-                    <td></td>
+                    <td><p>Required. The nullary factory.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>declaredType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Optional. Static type that will be set to this target&#39;s <a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_DeclaredType">DeclaredType</a>
+if different from <em>T</em>.  If provided it must be a base or interface of <em>T</em>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">System.ArgumentException</a></td>
+                    <td><p>If <em>T</em> is not compatible with <em>declaredType</em></p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">System.ArgumentNullException</a></td>
+                    <td><p>If <em>nullaryFactory</em> is null.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_DelegateTarget_1__ctor_System_Func_Rezolver_RezolveContext__0__System_Type_" data-uid="Rezolver.DelegateTarget`1.#ctor(System.Func{Rezolver.RezolveContext,`0},System.Type)">DelegateTarget(Func&lt;RezolveContext, T&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1">DelegateTarget&lt;T&gt;</a> class which will use
+a unary factory to produce an instance.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public DelegateTarget(Func&lt;RezolveContext, T&gt; unaryFactory, Type declaredType = null)</code></pre>
+              </div>
+              <h5 class="hparameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><em>unaryFactory</em></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>, T&gt;</td>
+                    <td><p>Required. The unary factory, which accepts a single argument of type <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><em>declaredType</em></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>Optional. Static type that will be set to this target&#39;s <a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_DeclaredType">DeclaredType</a>
+if different from <em>T</em>.  If provided it must be a base or interface of <em>T</em>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">System.ArgumentException</a></td>
+                    <td><p>If <em>T</em> is not compatible with <em>declaredType</em></p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">System.ArgumentNullException</a></td>
+                    <td><p>If <em>unaryFactory</em> is null.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -212,7 +298,8 @@
               
               
               <h4 class="hmember" id="Rezolver_DelegateTarget_1_DeclaredType" data-uid="Rezolver.DelegateTarget`1.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Either <em>T</em> or a base or interface of that type.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -236,6 +323,62 @@
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
               </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_DelegateTarget_1_NullaryFactory" data-uid="Rezolver.DelegateTarget`1.NullaryFactory">NullaryFactory</h4>
+              <div class="markdown level1 summary"><p>Gets the nullary factory (one which doesn&#39;t take any arguments) to be executed by the compiled code produced
+by this target.  If this is <code>null</code> then <a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_UnaryFactory">UnaryFactory</a> will not be.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Func&lt;T&gt; NullaryFactory { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func</a>&lt;T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_DelegateTarget_1_UnaryFactory" data-uid="Rezolver.DelegateTarget`1.UnaryFactory">UnaryFactory</h4>
+              <div class="markdown level1 summary"><p>Gets the unary factory (one which accepts one argument of type <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>) to be executed
+by the compiled code produced by this target.  If this is <code>null</code> then <a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_NullaryFactory">NullaryFactory</a> will not be.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Func&lt;RezolveContext, T&gt; UnaryFactory { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>, T&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
@@ -243,7 +386,10 @@
               
               
               <h4 class="hmember" id="Rezolver_DelegateTarget_1_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.DelegateTarget`1.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns an expression that represents invoking whichever factory was passed to this instance on construction.</p>
+<p>When compiled and executed, the factory will be called to produce an instance of <em>T</em> or </p>
+<a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_DeclaredType">DeclaredType</a>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -262,7 +408,8 @@
                   <tr>
                     <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
+                    <td><p>The current compile context</p>
+</td>
                   </tr>
                 </tbody>
               </table>

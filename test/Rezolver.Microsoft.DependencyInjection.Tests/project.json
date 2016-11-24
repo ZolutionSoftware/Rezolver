@@ -3,7 +3,7 @@
   "testRunner": "xunit",
 
   "dependencies": {
-    "xunit": "2.2.0-beta3-build3402",
+    "xunit": "2.2.0-beta3-build3444",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Rezolver.Microsoft.Extensions.DependencyInjection": "1.0.0-*",
     "Microsoft.Extensions.DependencyInjection.Specification.Tests": "1.1.0-*"

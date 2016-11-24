@@ -134,6 +134,13 @@ or its non-generic equivalent.</p>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class DecoratorTarget : ITargetContainerOwner, ITargetContainer</code></pre>
               </div>
+              <h5 id="Rezolver_DecoratorTarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>This class does not implement <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>, rather
+it&#39;s an <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a> into which other targets can be added,
+and when <a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget_FetchAll_System_Type_">FetchAll(Type)</a> are called, a temporary
+target object is created which wraps around the targets that have been registered within and
+which will ultimately create instances of <a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget_DecoratorType">DecoratorType</a></p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
@@ -141,7 +148,8 @@ or its non-generic equivalent.</p>
               
               
               <h4 class="hmember" id="Rezolver_DecoratorTarget__ctor_System_Type_System_Type_" data-uid="Rezolver.DecoratorTarget.#ctor(System.Type,System.Type)">DecoratorTarget(Type, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -160,10 +168,69 @@ or its non-generic equivalent.</p>
                   <tr>
                     <td><em>decoratorType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Type of the decorator.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>decoratedType</em></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>Type being decorated.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
+              <h3 id="properties">Properties
+              </h3>
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_DecoratorTarget_DecoratedType" data-uid="Rezolver.DecoratorTarget.DecoratedType">DecoratedType</h4>
+              <div class="markdown level1 summary"><p>Gets the type that&#39;s being decorated - in essence, this is the type that this decorator target</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Type DecoratedType { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_DecoratorTarget_DecoratorType" data-uid="Rezolver.DecoratorTarget.DecoratorType">DecoratorType</h4>
+              <div class="markdown level1 summary"><p>Gets the type which will be used to decorate the instances produced by targets in this decorator target.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Type DecoratorType { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td></td>
                   </tr>
@@ -177,7 +244,11 @@ or its non-generic equivalent.</p>
               
               
               <h4 class="hmember" id="Rezolver_DecoratorTarget_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.DecoratorTarget.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> by wrapping the 
+<em>existing</em> container and returning itself.</p>
+<p>This allows decorators to be applied on top of decorators; and decorators to be added after types
+have begun to be registered in another target container.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -196,12 +267,14 @@ or its non-generic equivalent.</p>
                   <tr>
                     <td><em>existing</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
+                    <td><p>The existing <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance that this instance is to be combined with</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type that the combined container owner will be registered under.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -222,12 +295,30 @@ or its non-generic equivalent.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a></div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">System.InvalidOperationException</a></td>
+                    <td><p>If this target container is already decorating another container</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_DecoratorTarget_Fetch_System_Type_" data-uid="Rezolver.DecoratorTarget.Fetch(System.Type)">Fetch(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> - wraps a special target around
+the target returned by the target container that&#39;s decorated by this one.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -246,7 +337,8 @@ or its non-generic equivalent.</p>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Required.  The type for which an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> is to be retrieved.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -267,12 +359,18 @@ or its non-generic equivalent.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">ITargetContainer.Fetch(Type)</a></div>
+              <h5 class="hremarks" id="Rezolver_DecoratorTarget_Fetch_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>If the inner container returns null, then so does this one.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_DecoratorTarget_FetchAll_System_Type_" data-uid="Rezolver.DecoratorTarget.FetchAll(System.Type)">FetchAll(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> - passes the call on to the inner 
+container that&#39;s decorated by this one, and then wraps each of those targets in a special target which
+represents the decoration logic for each instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -291,7 +389,8 @@ or its non-generic equivalent.</p>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Required.  The type for which the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances are to be retrieved.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -317,7 +416,8 @@ or its non-generic equivalent.</p>
               
               
               <h4 class="hmember" id="Rezolver_DecoratorTarget_FetchContainer_System_Type_" data-uid="Rezolver.DecoratorTarget.FetchContainer(System.Type)">FetchContainer(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Retrieves an existing container registered against the given <em>type</em>, or null if not found.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -336,7 +436,8 @@ or its non-generic equivalent.</p>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -357,12 +458,34 @@ or its non-generic equivalent.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_FetchContainer_System_Type_">ITargetContainerOwner.FetchContainer(Type)</a></div>
+              <h5 class="hremarks" id="Rezolver_DecoratorTarget_FetchContainer_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This is an implementation of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_FetchContainer_System_Type_">FetchContainer(Type)</a> which wraps
+around the inner target container and passes the call on to that.</p>
+</div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">System.InvalidOperationException</a></td>
+                    <td><p>If this decorator&#39;s inner container isn&#39;t an instance of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a></p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_DecoratorTarget_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.DecoratorTarget.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Registers a target, either for the <em>serviceType</em> specified or, if null, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+of the <em>target</em>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -381,23 +504,36 @@ or its non-generic equivalent.</p>
                   <tr>
                     <td><em>target</em></td>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
+                    <td><p>Required.  The target to be registered</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Optional.  The type the target is to be registered against, if different
+from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <em>target</em>.  If provided, then the <em>target</em>
+must be compatible with this type.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">ITargetContainer.Register(ITarget, Type)</a></div>
+              <h5 class="hremarks" id="Rezolver_DecoratorTarget_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The decorator target does not accept registrations directly; rather it passes the call on to its
+inner container which could be a <a class="xref" href="Rezolver.TargetListContainer.html#Rezolver_TargetListContainer">TargetListContainer</a>, or <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer">GenericTargetContainer</a> in 
+the most basic cases; or it could be another <a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a> in situations where a type has had
+multiple decorators registered against it.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_DecoratorTarget_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.DecoratorTarget.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> - the call is
+automatically forwarded on to the inner target container that&#39;s being decorated, since decorator targets don&#39;t support
+direct registration of targets or containers.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -416,17 +552,35 @@ or its non-generic equivalent.</p>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
+                    <td><p>The container.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)</a></div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">System.InvalidOperationException</a></td>
+                    <td><p>This decorator must be decorating another owner, or be decorating a generic type</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               </div><!-- .classchild -->
             </article>
           </div>

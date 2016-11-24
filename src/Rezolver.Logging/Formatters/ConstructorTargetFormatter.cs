@@ -12,7 +12,7 @@ namespace Rezolver.Logging.Formatters
 		{
 			string argsString = null;
 			if (obj.ParameterBindings.Count != 0)
-				argsString = string.Join(", ", obj.ParameterBindings.Select(pb => string.Format(formatters, "{0}={2}", pb.Parameter, pb.Target)));
+				argsString = string.Join(", ", obj.ParameterBindings.Select(pb => string.Format(formatters, "{0}={1}", pb.Parameter, pb.Target)));
 			else if (obj.NamedArgs.Count != 0)
 				argsString = string.Join(", ", obj.NamedArgs.Select(a => string.Format(formatters, "{0}:{1}", a.Key, a.Value)));
 			else if (obj.Ctor != null)

@@ -95,6 +95,8 @@
               <h1 id="Rezolver_ExpressionTarget" data-uid="Rezolver.ExpressionTarget">Class ExpressionTarget
               </h1>
               <div class="markdown level0 summary"><p>A generic target for all expressions not explicitly supported by a particular target.</p>
+<p>Enables more complex behaviours to be registered and used with the more formal</p>
+<p><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementations.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -160,12 +162,13 @@
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ExpressionTarget__ctor_Expression_Rezolver_ITargetAdapter_" data-uid="Rezolver.ExpressionTarget.#ctor(Expression,Rezolver.ITargetAdapter)">ExpressionTarget(Expression, ITargetAdapter)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 class="hmember" id="Rezolver_ExpressionTarget__ctor_Expression_" data-uid="Rezolver.ExpressionTarget.#ctor(Expression)">ExpressionTarget(Expression)</h4>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget">ExpressionTarget</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ExpressionTarget(Expression expression, ITargetAdapter adapter = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ExpressionTarget(Expression expression)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -180,12 +183,9 @@
                   <tr>
                     <td><em>expression</em></td>
                     <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>adapter</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
-                    <td></td>
+                    <td><p>Required. The static expression which will be returned by </p>
+<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a>.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -193,12 +193,13 @@
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ExpressionTarget__ctor_System_Func_Rezolver_CompileContext_Expression__System_Type_Rezolver_ITargetAdapter_" data-uid="Rezolver.ExpressionTarget.#ctor(System.Func{Rezolver.CompileContext,Expression},System.Type,Rezolver.ITargetAdapter)">ExpressionTarget(Func&lt;CompileContext, Expression&gt;, Type, ITargetAdapter)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 class="hmember" id="Rezolver_ExpressionTarget__ctor_System_Func_Rezolver_CompileContext_Expression__System_Type_" data-uid="Rezolver.ExpressionTarget.#ctor(System.Func{Rezolver.CompileContext,Expression},System.Type)">ExpressionTarget(Func&lt;CompileContext, Expression&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget">ExpressionTarget</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ExpressionTarget(Func&lt;CompileContext, Expression&gt; expressionFactory, Type declaredType, ITargetAdapter adapter = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ExpressionTarget(Func&lt;CompileContext, Expression&gt; expressionFactory, Type declaredType)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -213,20 +214,24 @@
                   <tr>
                     <td><em>expressionFactory</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>, <span class="xref">Expression</span>&gt;</td>
-                    <td></td>
+                    <td><p>Required. The factory delegate that will be 
+called to create the expression when <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> is called.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>declaredType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>adapter</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
-                    <td></td>
+                    <td><p>Required. Static type of all expressions that will be
+returned by <em>expressionFactory</em>.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
+              <h5 class="hremarks" id="Rezolver_ExpressionTarget__ctor_System_Func_Rezolver_CompileContext_Expression__System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Note that when you use a factory to produce a new expression on demand each time</p>
+<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> is called, the <em>declaredType</em>
+is required to be the same for all.</p>
+</div>
               </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
@@ -235,7 +240,9 @@
               
               
               <h4 class="hmember" id="Rezolver_ExpressionTarget_DeclaredType" data-uid="Rezolver.ExpressionTarget.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the type of <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_Expression">Expression</a> or the type that all expressions returned by the </p>
+<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_ExpressionFactory">ExpressionFactory</a> are expected to be equal to.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -259,6 +266,65 @@
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
               </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_ExpressionTarget_Expression" data-uid="Rezolver.ExpressionTarget.Expression">Expression</h4>
+              <div class="markdown level1 summary"><p>Gets the static expression represented by this target - if <code>null</code>, then 
+a factory is being used to produce the expression, which is available from
+the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_ExpressionFactory">ExpressionFactory</a> property.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Expression Expression { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_ExpressionTarget_ExpressionFactory" data-uid="Rezolver.ExpressionTarget.ExpressionFactory">ExpressionFactory</h4>
+              <div class="markdown level1 summary"><p>Gets a factory which will be executed to obtain an expression when </p>
+<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> is called.</p>
+<p>If <code>null</code>, then a static expression will be used instead and is available
+from the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_Expression">Expression</a> property.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Func&lt;CompileContext, Expression&gt; ExpressionFactory { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>, <span class="xref">Expression</span>&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
@@ -266,7 +332,9 @@
               
               
               <h4 class="hmember" id="Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ExpressionTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns either the static <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_Expression">Expression</a> or the result of calling the </p>
+<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_ExpressionFactory">ExpressionFactory</a> with the <em>context</em>.  </p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -285,7 +353,8 @@
                   <tr>
                     <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
+                    <td><p>The current compile context</p>
+</td>
                   </tr>
                 </tbody>
               </table>

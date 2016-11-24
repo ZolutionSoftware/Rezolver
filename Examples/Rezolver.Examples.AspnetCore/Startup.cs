@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Rezolver.Logging;
-using Rezolver.Microsoft.Extensions.Logging;
 
 namespace Rezolver.Examples.AspnetCore
 {
@@ -73,7 +72,7 @@ namespace Rezolver.Examples.AspnetCore
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
 			_loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-			_loggerFactory.AddDebug(LogLevel.Trace);
+			_loggerFactory.AddDebug(LogLevel.Debug);
 			//slight modification to the 'standard' template's environment check purely 
 			//to cater for the additional environments that we have configured for these Rezolver demos.
 			if (env.IsDevelopment() || env.EnvironmentName.StartsWith("Development"))

@@ -94,7 +94,9 @@
               
               <h1 id="Rezolver_GenericTargetContainer" data-uid="Rezolver.GenericTargetContainer">Class GenericTargetContainer
               </h1>
-              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 summary"><p>A special type of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a> which stores targets (and potentially other containers)
+which are specifically keyed either to a particular open generic type or a closed generic built from it.</p>
+</div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
@@ -151,7 +153,8 @@
               
               
               <h4 class="hmember" id="Rezolver_GenericTargetContainer__ctor_System_Type_" data-uid="Rezolver.GenericTargetContainer.#ctor(System.Type)">GenericTargetContainer(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer">GenericTargetContainer</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -170,6 +173,37 @@
                   <tr>
                     <td><em>genericType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><p>Required. The generic type definition that all targets and subcontainers will be grouped under.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <!-- <hr class="typeSectionDivider" /> -->
+              <h3 id="properties">Properties
+              </h3>
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_GenericTargetContainer_GenericType" data-uid="Rezolver.GenericTargetContainer.GenericType">GenericType</h4>
+              <div class="markdown level1 summary"><p>Gets open generic type to which all targets and containers within this container relate.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Type GenericType { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -182,7 +216,8 @@
               
               
               <h4 class="hmember" id="Rezolver_GenericTargetContainer_Fetch_System_Type_" data-uid="Rezolver.GenericTargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the target which can be used to build an instance of <em>type</em>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -201,7 +236,11 @@
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Required.  The type for which a target is to be obtained.  Because of the
+restrictions placed on the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the targets that can actually
+be registered into this container, the function will only ever return anything if <em>type</em>
+is a closed generic type whose definition equals <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a>.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -222,12 +261,18 @@
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Fetch_System_Type_">TargetDictionaryContainer.Fetch(Type)</a></div>
+              <h5 class="hremarks" id="Rezolver_GenericTargetContainer_Fetch_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Targets which have been registered specifically against the exact closed generic type 
+represented by <em>type</em> take precedence over any targets which have been registered
+against the open generic type <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a>.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_GenericTargetContainer_FetchAll_System_Type_" data-uid="Rezolver.GenericTargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -246,7 +291,8 @@
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type whose targets are to be retrieved.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -272,7 +318,10 @@
               
               
               <h4 class="hmember" id="Rezolver_GenericTargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.GenericTargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Overrides the <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method to support registering
+both targets against the open generic type <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a> and against specific closed versions of that
+open generic type.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -291,17 +340,45 @@
                   <tr>
                     <td><em>target</em></td>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
+                    <td><p>The target to be registered</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Service type against which the registration will be made.  If null, then it
+will be assumed to be equal to <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a>.  Only types equal to <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a> or
+generic types whose generic type definition is equal to <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a> are supported.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">TargetDictionaryContainer.Register(ITarget, Type)</a></div>
+              <h5 class="hremarks" id="Rezolver_GenericTargetContainer_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Notes to overriders: When <em>serviceType</em> is a closed generic type, this function
+creates an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> for that <em>serviceType</em>
+by calling the protected method <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_">CreateContainer(Type, ITarget)</a> if one doesn&#39;t exist
+(it calls <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">FetchContainer(Type)</a> to check for existence),
+and then chains to its <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method.</p>
+</div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">System.ArgumentException</a></td>
+                    <td><p>If <em>serviceType</em> is not equal to <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a>
+or is not a closed generic type whose generic type definition is <a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer_GenericType">GenericType</a>.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               </div><!-- .classchild -->
             </article>
           </div>

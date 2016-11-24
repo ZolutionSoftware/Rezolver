@@ -3,9 +3,9 @@
   "version": "1.0.10-alpha-1",
   "packOptions": {
     "tags": [ "ioc", "di", "portable", "rezolver", "configuration", "json" ],
-    "projectUrl": "http://www.zolution.co.uk/Rezolver"
+    "projectUrl": "http://rezolver.co.uk"
   },
-  "authors": [ "Andras Zoltan" ],
+  "authors": [ "Zolution Software Ltd" ],
   "dependencies": {
     "Rezolver.Configuration": "1.0.10-*",
     "Rezolver.Shared": {

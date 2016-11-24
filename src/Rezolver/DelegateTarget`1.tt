@@ -1,0 +1,56 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ output extension="cs" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using System;
+
+namespace Rezolver
+{
+<#  
+	var nthParamDescriptors = new[] { "st", "nd", "rd", "th" };
+	for(var f = 0; f<16; f++)
+	{ 
+		var typeParamNames = (f == 1 ? new[] {"T"} : Enumerable.Range(1, f).Select(i => $"T{i}")).Concat(new[] { "TResult" }).ToArray();
+		var typeParamDescriptors= typeParamNames.Select((s, i) => s != "TResult" ? string.Format("{0}{1}", i+1, i < nthParamDescriptors.Length ? nthParamDescriptors[i] : nthParamDescriptors[nthParamDescriptors.Length - 1 ]) : "").ToArray();
+		string paramsString = string.Join(", ", typeParamNames);
+#>
+
+	/// <summary>
+	/// Extension of the <see cref="DelegateTarget"/> class which provides strong typing for the generic Func delegate type.
+	/// </summary>
+<#
+		foreach(var joined in typeParamNames.Zip(typeParamDescriptors, (n,d) => new { name=n, descriptor=d }).Where(tp => tp.name!="TResult")){
+#>	/// <typeparam name="<#= joined.name #>"><#= string.Format("The type of the {0} delegate parameter (will be resolved automatically)", joined.descriptor) #></typeparam>
+<#		
+		} #>
+	/// <typeparam name="TResult">The type of object produced by the delegate.</typeparam>
+	/// <remarks>
+	/// This class and its other generic cousins exist purely to simplify the creation of a <see cref="DelegateTarget"/>
+	/// with a delegate expressed as a lambda expression.
+	/// 
+	/// e.g. <code>new DelegateTarget&lt;IMyservice&gt;(() =&gt; new MyService());</code>
+	/// 
+	/// With the <see cref="DelegateTarget"/> it is not possible to do this - you need a delegate variable.
+	/// 
+	/// Ultimately, however, all functionality beyond construction is provided by the base class.
+	/// </remarks>
+	public class DelegateTarget<<#= paramsString #>> : DelegateTarget
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="DelegateTarget{<#= paramsString #>}"/> class.
+		/// </summary>
+		/// <param name="factory">The factory.</param>
+		/// <param name="declaredType">Type of the declared.</param>
+		public DelegateTarget(Func<<#= paramsString #>> factory, Type declaredType = null)
+			: base(factory, declaredType)
+		{
+
+		}
+	}	
+<#	} #>
+}

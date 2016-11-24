@@ -7,7 +7,7 @@
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>726dc4d6-9064-45b4-9efd-a18aa779ac34</ProjectGuid>
-    <RootNamespace>Rezolver.Microsoft.Extensions.DependencyInjection</RootNamespace>
+    <RootNamespace>Rezolver</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>

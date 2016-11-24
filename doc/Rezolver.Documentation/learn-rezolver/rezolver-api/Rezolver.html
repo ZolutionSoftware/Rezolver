@@ -114,6 +114,9 @@
                   <section><p>Provides support and compile-time state for the compilation of an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> by an <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a>.
 THIS CLASS IS NOT THREAD-SAFE</p>
 </section>
+                  <h4><a class="xref" href="Rezolver.CompileContext.CompileStackEntry.html#Rezolver_CompileContext_CompileStackEntry">CompileContext.CompileStackEntry</a></h4>
+                  <section><p>Represents an </p>
+</section>
                   <h4><a class="xref" href="Rezolver.CompileContext.SharedExpressionKey.html#Rezolver_CompileContext_SharedExpressionKey">CompileContext.SharedExpressionKey</a></h4>
                   <section><p>Key for a shared expression used during expression tree generation.  As a consumer of this library, you
 are unlikely ever to need to use it.</p>
@@ -143,32 +146,45 @@ which caches singleton instances of this class on a per-type basis) which can th
 or its non-generic equivalent.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour">DefaultPropertyBindingBehaviour</a></h4>
-                  <section></section>
+                  <section><p>The default implementation of <a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a> when you are creating a</p>
+<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> and you want publicly writable
+properties and public fields to be assigned values obtained from the container.</p>
+<p>If you do not require properties or fields to be bound from the container, then use a null <a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a>.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.DefaultTarget.html#Rezolver_DefaultTarget">DefaultTarget</a></h4>
                   <section><p>A target that simply creates a default instance of a given type.  I.e. the same
 as doing default(type) in C#.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1">DelegateTarget</a>&lt;T&gt;</h4>
-                  <section><p>Implements IRezolveTarget using factory function delegates.</p>
+                  <section><p>Implements <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> using either a nullary factory of the type <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func&lt;TResult&gt;</a>
+or a unary factory of the type <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func&lt;T, TResult&gt;</a> in which the argument is <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DelegateTargetExtensions.html#Rezolver_DelegateTargetExtensions">DelegateTargetExtensions</a></h4>
-                  <section></section>
+                  <section><p>Extension methods for creating <a class="xref" href="Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1">DelegateTarget&lt;T&gt;</a> instances.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions">EnumerableTargetBuilderExtensions</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.ExceptionResources.html#Rezolver_ExceptionResources">ExceptionResources</a></h4>
                   <section><p>   A strongly-typed resource class, for looking up localized strings, etc.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper">ExpressionHelper</a></h4>
-                  <section><p>This static class contains methods and properties to aid in building expressions in the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a>
-method.</p>
+                  <section><p>This static class contains methods and properties to aid in building expressions in an 
+implementation of the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> method.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget">ExpressionTarget</a></h4>
                   <section><p>A generic target for all expressions not explicitly supported by a particular target.</p>
+<p>Enables more complex behaviours to be registered and used with the more formal</p>
+<p><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementations.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a></h4>
-                  <section></section>
+                  <section><p>Equivalent of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> but for open generic types.</p>
+<p>So, this will handle the open generic MyType&lt;,&gt;, for example, whereas <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a>
+would handle the closed type MyType&lt;int, string&gt;.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer">GenericTargetContainer</a></h4>
-                  <section></section>
+                  <section><p>A special type of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a> which stores targets (and potentially other containers)
+which are specifically keyed either to a particular open generic type or a closed generic built from it.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.IContainerRezolveExtensions.html#Rezolver_IContainerRezolveExtensions">IContainerRezolveExtensions</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.IRezolveTargetScopingExtensions.html#Rezolver_IRezolveTargetScopingExtensions">IRezolveTargetScopingExtensions</a></h4>
@@ -180,6 +196,8 @@ method.</p>
                   <h4><a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions">ITargetContainerExtensions</a></h4>
                   <section><p>Extension methods for implementations of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
 </section>
+                  <h4><a class="xref" href="Rezolver.ITargetContainerMSDIExtensions.html#Rezolver_ITargetContainerMSDIExtensions">ITargetContainerMSDIExtensions</a></h4>
+                  <section></section>
                   <h4><a class="xref" href="Rezolver.LifetimeScopeRezolverExtensions.html#Rezolver_LifetimeScopeRezolverExtensions">LifetimeScopeRezolverExtensions</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a></h4>
@@ -249,8 +267,8 @@ class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Co
                   <section><p>A target that produces a single instance of an object within a lifetime scope.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a></h4>
-                  <section><p>Decorates any IRezolveTarget instance inside a lazily-initialised instance which will only ever
-create the target object once.</p>
+                  <section><p>A target which applies the singleton pattern to any <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>.</p>
+<p>The inner target is available from the <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget_InnerTarget">InnerTarget</a> property.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.TargetAdapter.html#Rezolver_TargetAdapter">TargetAdapter</a></h4>
                   <section><p>Default implementation of the <a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a> interface.</p>

@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0-alpha-2",
   "description": "Rezolver adapter for the Microsoft.Extensions.DependencyInjection abstractions",
-  "authors": [ "Andras Zoltan" ],
+  "authors": [ "Zolution Software Ltd" ],
   "packOptions": {
     "tags": [ "rezolver", "ioc", "di" ],
-    "projectUrl": "http://www.zolution.co.uk/Rezolver",
+    "projectUrl": "http://rezolver.co.uk",
     "licenseUrl": ""
   },
   "dependencies": {
@@ -14,12 +14,10 @@
 
   "frameworks": {
     "net451": {
-      "frameworkAssemblies": {
-        "System.Runtime": "4.0.10.0"
-      }
+      
     },
     "netstandard1.1": {
-      "buildOptions": { "define": [ "DOTNET" ] }
+      
     }
   },
   "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }

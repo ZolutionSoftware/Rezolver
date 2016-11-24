@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Rezolver;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -9,10 +6,10 @@ namespace Microsoft.Extensions.DependencyInjection
 	/// <summary>
 	/// Rezolver interop extension methods for the IServiceCollection class in Microsoft.Extensions.DependencyInjection
 	/// </summary>
-	public static class IServiceCollectionExtensions
+	public static class RezolverServiceCollectionExtensions
 	{
 		/// <summary>
-		/// Creates a new default <see cref="Container"/> and registers the services in <paramref name="services"/>
+		/// Creates a new default <see cref="ScopedContainer"/> and registers the services in <paramref name="services"/>
 		/// as targets.
 		/// </summary>
 		/// <param name="services">The services to be registered.</param>
@@ -30,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
 		/// <summary>
 		/// Registers services in <paramref name="services"/> as targets in the passed <paramref name="targetContainer" />
 		/// </summary>
-		/// <param name="services">The services to b registered.</param>
+		/// <param name="services">The services to be registered.</param>
 		/// <param name="targetContainer">The target container that is to receive the new registrations.</param>
 		/// <exception cref="ArgumentNullException">If either <paramref name="services"/> or <paramref name="targetContainer"/>
 		/// are null.</exception>

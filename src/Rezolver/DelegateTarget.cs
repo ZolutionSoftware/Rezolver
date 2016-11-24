@@ -4,127 +4,101 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Rezolver
 {
 	/// <summary>
-	/// Implements <see cref="ITarget"/> using either a nullary factory of the type <see cref="Func{TResult}"/>
-	/// or a unary factory of the type <see cref="Func{T, TResult}"/> in which the argument is <see cref="RezolveContext"/>.
+	/// An <see cref="ITarget" /> which resolve objects by executing a delegate.
 	/// </summary>
-	/// <typeparam name="T">The type of object produced by the delegate passed on construction</typeparam>
-	public class DelegateTarget<T> : TargetBase
+	/// <remarks>The delegate must be non-void and can have any number of parameters.
+	/// 
+	/// Any parameters will be automatically resolved from the container, and a parameter
+	/// of the type <see cref="RezolveContext"/> will receive the context passed to the
+	/// current <see cref="IContainer.Resolve(RezolveContext)"/>.</remarks>
+ 	public class DelegateTarget : TargetBase
 	{
-		private readonly Type _declaredType;
+		/// <summary>
+		/// Gets the factory method that will be invoked by an expression built by this target.
+		/// </summary>
+		/// <value>The factory.</value>
+		public Delegate Factory { get; private set; }
+		private MethodInfo _factoryMethod;
+		private Type _declaredType;
 
 		/// <summary>
-		/// Gets the nullary factory (one which doesn't take any arguments) to be executed by the compiled code produced
-		/// by this target.  If this is <c>null</c> then <see cref="UnaryFactory"/> will not be.
+		/// Gets the declared type of object that is constructed by this target.
 		/// </summary>
-		public Func<T> NullaryFactory { get; }
-
-		/// <summary>
-		/// Gets the unary factory (one which accepts one argument of type <see cref="RezolveContext"/>) to be executed
-		/// by the compiled code produced by this target.  If this is <c>null</c> then <see cref="NullaryFactory"/> will not be.
-		/// </summary>
-		public Func<RezolveContext, T> UnaryFactory { get; }
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="DelegateTarget{T}"/> class which will use
-		/// a nullary factory to produce an instance.
-		/// </summary>
-		/// <param name="nullaryFactory">Required. The nullary factory.</param>
-		/// <param name="declaredType">Optional. Static type that will be set to this target's <see cref="DeclaredType"/>
-		/// if different from <typeparamref name="T"/>.  If provided it must be a base or interface of <typeparamref name="T"/>.</param>
-		/// <exception cref="ArgumentException">If <typeparamref name="T"/> is not compatible with <paramref name="declaredType" /></exception>
-		/// <exception cref="ArgumentNullException">If <paramref name="nullaryFactory"/> is null.</exception> 
-		public DelegateTarget(Func<T> nullaryFactory, Type declaredType = null)
+		public override Type DeclaredType
 		{
-			nullaryFactory.MustNotBeNull(nameof(nullaryFactory));
-			NullaryFactory = nullaryFactory;
-			if (declaredType != null)
+			get
 			{
-				if (!TypeHelpers.AreCompatible(typeof(T), declaredType) && !TypeHelpers.AreCompatible(declaredType, typeof(T)))
-					throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, typeof(T)));
+				return _declaredType ?? _factoryMethod.ReturnType;
 			}
-			_declaredType = declaredType ?? typeof(T);
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="DelegateTarget{T}"/> class which will use
-		/// a unary factory to produce an instance.
+		/// Initializes a new instance of the <see cref="DelegateTarget"/> class.
 		/// </summary>
-		/// <param name="unaryFactory">Required. The unary factory, which accepts a single argument of type <see cref="RezolveContext"/>.</param>
-		/// <param name="declaredType">Optional. Static type that will be set to this target's <see cref="DeclaredType"/>
-		/// if different from <typeparamref name="T"/>.  If provided it must be a base or interface of <typeparamref name="T"/>.</param>
-		/// <exception cref="ArgumentException">If <typeparamref name="T"/> is not compatible with <paramref name="declaredType" /></exception>
-		/// <exception cref="ArgumentNullException">If <paramref name="unaryFactory"/> is null.</exception> 
-		public DelegateTarget(Func<RezolveContext, T> unaryFactory, Type declaredType = null)
+		/// <param name="factory">Required - the factory delegate.  Must have a return type and can take 
+		/// 0 or more parameters.  As described in the remarks section of this class, parameters will be 
+		/// automatically resolved from the container; except parameters of the type <see cref="RezolveContext"/>,
+		/// which will receive the context that was passed to the current <see cref="IContainer.Resolve(RezolveContext)"/> 
+		/// method.</param>
+		/// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType"/> for the target;
+		/// if not provided, then it will be derived from the <paramref name="factory"/>'s return type</param>
+		/// <exception cref="ArgumentNullException">If <paramref name="factory"/> is null</exception>
+		/// <exception cref="ArgumentException">If the <paramref name="factory"/> represents a void delegate or if
+		/// <paramref name="declaredType"/> is passed but the type is not compatible with the return type of
+		/// <paramref name="factory"/>.</exception>
+		public DelegateTarget(Delegate factory, Type declaredType = null)
 		{
-			unaryFactory.MustNotBeNull("factory");
-			UnaryFactory = unaryFactory;
+			factory.MustNotBeNull(nameof(factory));
+			_factoryMethod = factory.GetMethodInfo();
+			_factoryMethod.MustNot(m => _factoryMethod.ReturnType == null || _factoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
+
 			if (declaredType != null)
 			{
-				if (!TypeHelpers.AreCompatible(typeof(T), declaredType) && !TypeHelpers.AreCompatible(declaredType, typeof(T)))
-					throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, typeof(T)));
+				if (!TypeHelpers.AreCompatible(_factoryMethod.ReturnType, declaredType) && !TypeHelpers.AreCompatible(declaredType, _factoryMethod.ReturnType))
+					throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, _factoryMethod.ReturnType), nameof(declaredType));
 			}
-			_declaredType = declaredType ?? typeof(T);
+			_declaredType = declaredType;
+			Factory = factory;
 		}
 
 		/// <summary>
-		/// Returns an expression that represents invoking whichever factory was passed to this instance on construction.
-		/// 
-		/// When compiled and executed, the factory will be called to produce an instance of <typeparamref name="T"/> or 
-		/// <see cref="DeclaredType"/>
+		/// Returns an expression that represents invoking the <see cref="Factory"/> method with zero or more
+		/// auto-resolved arguments.
 		/// </summary>
 		/// <param name="context">The current compile context</param>
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			//have to pull the _factory member local otherwise it's seen as a member access, which
-			//explodes in the full-blown Dynamic Assembly scenario, but it's private.
-			//var factoryLocal = _factory;
-			if(NullaryFactory != null)
-				return Expression.Invoke(Expression.Constant(NullaryFactory));
-			return Expression.Invoke(Expression.Constant(UnaryFactory), ExpressionHelper.RezolveContextParameterExpression);
-		}
-
-		/// <summary>
-		/// Either <typeparamref name="T"/> or a base or interface of that type.
-		/// </summary>
-		public override Type DeclaredType
-		{
-			get { return _declaredType; }
+			var bindings = ParameterBinding.BindWithRezolvedArguments(Factory.GetMethodInfo());
+			return Expression.Invoke(Expression.Constant(Factory),
+				bindings.Select(b => b.Parameter.ParameterType == typeof(RezolveContext) ?
+					ExpressionHelper.RezolveContextParameterExpression
+					: b.Target.CreateExpression(context.New(b.Parameter.ParameterType))));
 		}
 	}
 
 	/// <summary>
-	/// Extension methods for creating <see cref="DelegateTarget{T}"/> instances.
+	/// Extension methods for the <see cref="Delegate"/> type to aid in the construction of <see cref="DelegateTarget"/>.
 	/// </summary>
-	public static class DelegateTargetExtensions
+	public static class DelegateTargetDelegateExtensions
 	{
 		/// <summary>
-		/// Creates a <see cref="DelegateTarget{T}"/> using the delegate as the factory method to be executed.
+		/// Creates a <see cref="DelegateTarget"/> from the <paramref name="factory"/> which can be registered in an 
+		/// <see cref="ITargetContainer"/> to resolve an instance of a type compatible with the delegate's return type
+		/// an, optionally, with the <paramref name="declaredType" />
 		/// </summary>
-		/// <typeparam name="T">The type returned by the factory when executed.</typeparam>
-		/// <param name="factory">The factory.</param>
-		/// <param name="declaredType">Optional override for the type exposed by the <see cref="DelegateTarget{T}"/>.
-		/// See the <see cref="DelegateTarget{T}.DelegateTarget(Func{T}, Type)"/> constructor for more.</param>
-		public static DelegateTarget<T> AsDelegateTarget<T>(this Func<T> factory, Type declaredType = null)
+		/// <param name="factory">The delegate to be used as a factory.</param>
+		/// <param name="declaredType">Optional type to set as the <see cref="DelegateTarget.DeclaredType"/> of the target</param>
+		public static DelegateTarget AsDelegateTarget(this Delegate factory, Type declaredType = null)
 		{
-			return new DelegateTarget<T>(factory, declaredType);
-		}
-
-		/// <summary>
-		/// Creates a <see cref="DelegateTarget{T}"/> using the delegate as the factory method to be executed.
-		/// </summary>
-		/// <typeparam name="T">The type returned by the factory when executed.</typeparam>
-		/// <param name="factory">The factory.</param>
-		/// <param name="declaredType">Optional override for the type exposed by the <see cref="DelegateTarget{T}"/>.
-		/// See the <see cref="DelegateTarget{T}.DelegateTarget(Func{RezolveContext, T}, Type)"/> constructor for more.</param>
-		public static DelegateTarget<T> AsDelegateTarget<T>(this Func<RezolveContext, T> factory, Type declaredType = null)
-		{
-			return new DelegateTarget<T>(factory, declaredType);
+			return new DelegateTarget(factory, declaredType);
 		}
 	}
 }

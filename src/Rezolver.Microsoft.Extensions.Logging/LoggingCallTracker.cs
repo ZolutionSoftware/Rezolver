@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace Rezolver.Microsoft.Extensions.Logging
+namespace Rezolver.Logging
 {
 	/// <summary>
 	/// Overrides the <see cref="CallTracker"/> class to provide realtime logging of any messages added to 
@@ -28,6 +28,18 @@ namespace Rezolver.Microsoft.Extensions.Logging
 			if (logger == null) throw new ArgumentNullException(nameof(logger));
 			_logger = logger;
 		}
+
+		//public LoggingCallTracker(ILoggerFactory loggerFactory, IOptions<LoggingCallTrackerOptions> options)
+		//{
+		//	RetainCompletedCalls = options.Value.RetainCompletedCalls;
+		//	CallEventsMessageType = options.Value.CallEventsMessageType;
+		//	MessageFormatter = new ObjectFormatterCollection(options.Value.Formatters ?? ObjectFormatterCollection.Default);
+
+		//	if (options.Value.LoggerCategory != null)
+		//		_logger = loggerFactory.CreateLogger(options.Value.LoggerCategory);
+		//	else
+		//		_logger = loggerFactory.CreateLogger(this.GetType());
+		//}
 
 		protected override TrackedCall CreateNewCall(long callID, TrackedCall parent)
 		{

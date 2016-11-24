@@ -125,11 +125,14 @@
     <Content Include="learn-rezolver\images\exampleunittest.PNG" />
     <Content Include="learn-rezolver\index.html" />
     <Content Include="learn-rezolver\rezolver-api\index.html" />
+    <Content Include="learn-rezolver\rezolver-api\Microsoft.Extensions.DependencyInjection.html" />
+    <Content Include="learn-rezolver\rezolver-api\Microsoft.Extensions.DependencyInjection.IServiceCollectionExtensions.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.Builder.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.CachingContainerBase.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ChangeTypeTarget.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ChildBuilder.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ChildTargetContainer.html" />
+    <Content Include="learn-rezolver\rezolver-api\Rezolver.CompileContext.CompileStackEntry.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.CompileContext.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.CompileContext.SharedExpressionKey.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.CompiledTargetBase.html" />
@@ -219,6 +222,7 @@
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ITargetCompiler.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ITargetContainer.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ITargetContainerExtensions.html" />
+    <Content Include="learn-rezolver\rezolver-api\Rezolver.ITargetContainerMSDIExtensions.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ITargetContainerOwner.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.LifetimeScopeRezolverExtensions.html" />
     <Content Include="learn-rezolver\rezolver-api\Rezolver.ListTarget.html" />
@@ -295,8 +299,6 @@
     <Content Include="learn-rezolver\search-stopwords.json" />
     <Content Include="learn-rezolver\styles\docfx.css.ignore" />
     <Content Include="learn-rezolver\xrefmap.yml" />
-    <Content Include="ClassDiagram1.cd" />
-    <Content Include="ClassDiagram2.cd" />
     <None Include="msdn.4.5.2.zip" />
     <None Include="packages.config" />
     <Content Include="rezolver-usage\nuget-packages\index.md" />

@@ -9,6 +9,9 @@ namespace Rezolver.Tests
 {
 	public class DelegateTargetTests : TestsBase
 	{
+		private static int _counter = 0;
+		private int _thisID = _counter++;
+
 		[Fact]
 		public void ShouldNotAllowNullDelegate()
 		{
@@ -60,6 +63,81 @@ namespace Rezolver.Tests
 			var result = container.Resolve<Type>();
 			Assert.NotNull(result);
 			Assert.Equal(typeof(Type).AssemblyQualifiedName, result.AssemblyQualifiedName);
+		}
+
+		
+
+		[Fact]
+		public void ShouldInvokeWithResolvedInteger()
+		{
+			Func<int, string> f = i => $"String #{i}";
+			var container = CreateADefaultRezolver();
+			container.RegisterObject(5);
+			container.Register(f.AsDelegateTarget());
+
+			var result = container.Resolve<string>();
+			Assert.Equal("String #5", result);
+		}
+
+		[Fact]
+		public void ShouldInvokeWithResolvedIntAndContext()
+		{
+			var container = CreateADefaultRezolver();
+			//create the context here purely so we can check it gets passed through
+			var context = new RezolveContext(container, typeof(string));
+
+			Func<RezolveContext, int, string> f = (rc, i) =>
+			{
+				Assert.NotNull(rc);
+				return $"String #{i}";
+			};
+			
+			container.RegisterObject(10);
+			container.Register(f.AsDelegateTarget());
+			
+
+			var result = container.Resolve<string>();
+			Assert.Equal("String #10", result);
+		}
+
+		[Fact]
+		public void ShouldInvokeWithResolvedIntAndContextReversed()
+		{
+			//The RezolveContext parameter should work regardless of where it is in the parameter list
+			var container = CreateADefaultRezolver();
+			//create the context here purely so we can check it gets passed through
+			var context = new RezolveContext(container, typeof(string));
+
+			Func<int, RezolveContext, string> f = (i, rc) =>
+			{
+				Assert.NotNull(rc);
+				return $"String #{i}";
+			};
+
+			container.RegisterObject(15);
+			container.Register(f.AsDelegateTarget());
+
+
+			var result = container.Resolve<string>();
+			Assert.Equal("String #15", result);
+		}
+
+		string DelegateTargetMethod(int i)
+		{
+			return $"Instance {_thisID}, String #{i}";
+		}
+
+		[Fact]
+		public void ShouldInvokeInstanceMethodWithResolvedInt()
+		{
+			//same as before, except this time, instead of a lambda, we're using an instance method.
+			var container = CreateADefaultRezolver();
+			container.RegisterObject(20);
+			container.Register(new DelegateTarget<int, string>(DelegateTargetMethod));
+			var expected = DelegateTargetMethod(20);
+
+			var result = container.Resolve<string>();
+			Assert.Equal(expected, result);
 		}
 	}
 }

@@ -1,0 +1,25 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Extensions for IWebHostBuilder to simplify the use of Rezolver containers in Asp.Net Core applications",
+  "authors": [ "Zolution Software Ltd" ],
+  "packOptions": {
+    "tags": [ "rezolver", "ioc", "di" ],
+    "projectUrl": "http://rezolver.co.uk"
+  },
+  "dependencies": {
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0-*",
+    "Rezolver.Microsoft.Extensions.DependencyInjection": "1.0.0-*",
+    "Rezolver.Microsoft.Extensions.Logging": "1.0.0-alpha-*"
+  },
+
+  "frameworks": {
+    "netstandard1.3": {
+
+    },
+    "net451": {
+
+    }
+  },
+  "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }
+}

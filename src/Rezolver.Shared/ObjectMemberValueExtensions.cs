@@ -27,7 +27,7 @@ namespace Rezolver
 			/// <summary>
 			/// Gets a value indicating whether the <see cref="Value"/> is an exception that was raised when attempting
 			/// to read the property or field.
-			/// </summary
+			/// </summary>
 			public bool ValueError { get; }
 			/// <summary>
 			/// Gets the type of the object member.  Note - that's not the type of the <see cref="Value"/>,

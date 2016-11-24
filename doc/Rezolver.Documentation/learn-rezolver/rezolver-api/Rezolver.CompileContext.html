@@ -137,7 +137,7 @@ THIS CLASS IS NOT THREAD-SAFE</p>
               <div class="markdown level0 remarks"><p>The purpose of this class is to help an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> generate an expression tree that will ultimately be
 compiled using <a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_CompileContext_">CompileTarget(ITarget, CompileContext)</a> method.  The goal being to produce 
 an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_RezolveContext_">GetObject(RezolveContext)</a> method will be called to get
-instances when an <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method is invoked.</p>
+instances when a container&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method is invoked.</p>
 <p>Therefore, the context of the expression tree being generated is a method which takes a single <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> parameter - hence
 the expressions exposed by this type (e.g. <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextExpression">RezolveContextExpression</a>) are there to help generate code
 that will work in that context.</p>
@@ -145,7 +145,7 @@ that will work in that context.</p>
 <p>The class implements the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface also to extend
 dependency lookups during compilation time.  Indeed, if you are developing your own </p>
 <p><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementation and need to resolve any dependencies from an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>
-during compilation, it should be done through this.</p>
+during compilation, it should be done through the context&#39;s implementation of ITargetContainer.</p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -208,13 +208,13 @@ scope tracking code, or expects to be surrounded by automatically generated scop
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_CompileContext__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_System_Type_ParameterExpression_System_Collections_Generic_IEnumerable_Rezolver_ITarget__" data-uid="Rezolver.CompileContext.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,System.Type,ParameterExpression,System.Collections.Generic.IEnumerable{Rezolver.ITarget})">CompileContext(IContainer, ITargetContainer, Type, ParameterExpression, IEnumerable&lt;ITarget&gt;)</h4>
+              <h4 class="hmember" id="Rezolver_CompileContext__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_System_Type_ParameterExpression_System_Collections_Generic_IEnumerable_Rezolver_CompileContext_CompileStackEntry__" data-uid="Rezolver.CompileContext.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,System.Type,ParameterExpression,System.Collections.Generic.IEnumerable{Rezolver.CompileContext.CompileStackEntry})">CompileContext(IContainer, ITargetContainer, Type, ParameterExpression, IEnumerable&lt;CompileContext.CompileStackEntry&gt;)</h4>
               <div class="markdown level1 summary"><p>Creates a new CompileContext</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public CompileContext(IContainer container, ITargetContainer dependencyTargetContainer, Type targetType = null, ParameterExpression rezolveContextExpression = null, IEnumerable&lt;ITarget&gt; compilingTargets = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public CompileContext(IContainer container, ITargetContainer dependencyTargetContainer, Type targetType = null, ParameterExpression rezolveContextExpression = null, IEnumerable&lt;CompileContext.CompileStackEntry&gt; compilingTargets = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -260,7 +260,7 @@ the <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelp
                   </tr>
                   <tr>
                     <td><em>compilingTargets</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.CompileContext.CompileStackEntry.html#Rezolver_CompileContext_CompileStackEntry">CompileContext.CompileStackEntry</a>&gt;</td>
                     <td><p>Optional.  Allows you to seed the stack of compiling targets from creation.</p>
 </td>
                   </tr>
@@ -280,7 +280,7 @@ the <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelp
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; CompilingTargets { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">public IEnumerable&lt;CompileContext.CompileStackEntry&gt; CompilingTargets { get; }</code></pre>
               </div>
               <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -292,7 +292,7 @@ the <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelp
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.CompileContext.CompileStackEntry.html#Rezolver_CompileContext_CompileStackEntry">CompileContext.CompileStackEntry</a>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -304,7 +304,7 @@ the <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelp
               <h4 class="hmember" id="Rezolver_CompileContext_Container" data-uid="Rezolver.CompileContext.Container">Container</h4>
               <div class="markdown level1 summary"><p>The container that is considered the current compilation &#39;scope&#39; - i.e. the container for which the compilation
 is being performed and, usually, the one on which the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> method was 
-originally called.</p>
+originally called which triggered the compilation call.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -335,7 +335,7 @@ of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContaine
               
               
               <h4 class="hmember" id="Rezolver_CompileContext_ContainerExpression" data-uid="Rezolver.CompileContext.ContainerExpression">ContainerExpression</h4>
-              <div class="markdown level1 summary"><p>An ConstantExpression that equals the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Container">Container</a> that is active for this context - you can use this during code generation
+              <div class="markdown level1 summary"><p>A ConstantExpression that equals the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_Container">Container</a> that is active for this context - you can use this during code generation
 to alter your expression&#39;s behaviour if the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Container">Container</a> during a future call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
 is different from the one for which the expression was first compiled.</p>
 <p>For this kind of behaviour you will also need to use the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextExpression">RezolveContextExpression</a></p>
@@ -853,52 +853,6 @@ without interfering with each other.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_CompileContext_IsCompiling_Rezolver_ITarget_" data-uid="Rezolver.CompileContext.IsCompiling(Rezolver.ITarget)">IsCompiling(ITarget)</h4>
-              <div class="markdown level1 summary"><p>Call this to find out if a target is currently compiling without trying to add it to the stack.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public bool IsCompiling(ITarget target)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>target</em></td>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td><p>The target to be checked</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td><p><code>true</code> if the target has previously been added through a call to <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_PushCompileStack_Rezolver_ITarget_">PushCompileStack(ITarget)</a>, otherwise <code>false</code></p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
               <h4 class="hmember" id="Rezolver_CompileContext_New_System_Type_System_Boolean_System_Boolean_" data-uid="Rezolver.CompileContext.New(System.Type,System.Boolean,System.Boolean)">New(Type, Boolean, Boolean)</h4>
               <div class="markdown level1 summary"><p>Spawns a new context for the passed <em>targetType</em>, with everything else being inherited from this context by default.</p>
 </div>
@@ -968,7 +922,7 @@ are no targets on the stack, an <a class="xref" href="https://msdn.microsoft.com
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ITarget PopCompileStack()</code></pre>
+                <pre><code class="lang-csharp hljs">public CompileContext.CompileStackEntry PopCompileStack()</code></pre>
               </div>
               <h5 class="hreturns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -980,7 +934,7 @@ are no targets on the stack, an <a class="xref" href="https://msdn.microsoft.com
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><a class="xref" href="Rezolver.CompileContext.CompileStackEntry.html#Rezolver_CompileContext_CompileStackEntry">CompileContext.CompileStackEntry</a></td>
                     <td></td>
                   </tr>
                 </tbody>

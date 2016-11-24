@@ -74,6 +74,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Microsoft.Extensio
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Logging", "src\Rezolver.Logging\Rezolver.Logging.xproj", "{560EBFA5-D522-4A6B-A25A-A5113CD07846}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Microsoft.AspNetCore.Hosting", "src\Rezolver.Microsoft.AspNetCore.Hosting\Rezolver.Microsoft.AspNetCore.Hosting.xproj", "{CE013397-D47E-40AA-9C2E-9693C3404DB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug With Documentation|Any CPU = Debug With Documentation|Any CPU
@@ -166,6 +168,14 @@ Global
 		{560EBFA5-D522-4A6B-A25A-A5113CD07846}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
 		{560EBFA5-D522-4A6B-A25A-A5113CD07846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{560EBFA5-D522-4A6B-A25A-A5113CD07846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,5 +195,6 @@ Global
 		{1CC97C5A-ACFB-487A-A46F-E7AFB59ED44B} = {73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}
 		{1513EA37-4EBB-4FD1-8F75-D8B16A7DBE74} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
 		{560EBFA5-D522-4A6B-A25A-A5113CD07846} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
+		{CE013397-D47E-40AA-9C2E-9693C3404DB8} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
 	EndGlobalSection
 EndGlobal

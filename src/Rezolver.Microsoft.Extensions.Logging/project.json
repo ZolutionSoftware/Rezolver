@@ -1,15 +1,19 @@
 ﻿{
   "version": "1.0.0-alpha-100",
-
-	"dependencies": {
-		"Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-		"NETStandard.Library": "1.6.0",
-		"Rezolver.Logging": "1.0.0-alpha-*"
-	},
+  "dependencies": {
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+    "Microsoft.Extensions.Options": "1.1.0",
+    "NETStandard.Library": "1.6.1",
+    "Rezolver.Logging": "1.0.0-alpha-*"
+  },
 
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "net451": {
+
+    },
+    "netstandard1.1": {
+
     }
-  }
+  },
+  "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }
 }

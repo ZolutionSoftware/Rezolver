@@ -94,8 +94,8 @@
               
               <h1 id="Rezolver_ExpressionHelper" data-uid="Rezolver.ExpressionHelper">Class ExpressionHelper
               </h1>
-              <div class="markdown level0 summary"><p>This static class contains methods and properties to aid in building expressions in the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a>
-method.</p>
+              <div class="markdown level0 summary"><p>This static class contains methods and properties to aid in building expressions in an 
+implementation of the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> method.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -370,7 +370,11 @@ passed to the compiled method when invoked.</p>
               
               
               <h4 class="hmember" id="Rezolver_ExpressionHelper_Make_Scope_GetOrAddCallExpression_Rezolver_CompileContext_System_Type_LambdaExpression_Expression_" data-uid="Rezolver.ExpressionHelper.Make_Scope_GetOrAddCallExpression(Rezolver.CompileContext,System.Type,LambdaExpression,Expression)">Make_Scope_GetOrAddCallExpression(CompileContext, Type, LambdaExpression, Expression)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Makes an expression which represents calling the <a class="xref" href="Rezolver.LifetimeScopeRezolverExtensions.html#Rezolver_LifetimeScopeRezolverExtensions_GetOrAdd__1_Rezolver_IScopedContainer_Rezolver_RezolveContext_System_Func_Rezolver_RezolveContext___0__System_Boolean_">GetOrAdd&lt;T&gt;(IScopedContainer, RezolveContext, Func&lt;RezolveContext, T&gt;, Boolean)</a>
+function for the passed <em>objectType</em>.</p>
+<p>Used automatically by the built-in scope tracking behaviour, but can also be used by your own custom target if you want
+to take control of its scope tracking behaviour.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -389,22 +393,27 @@ passed to the compiled method when invoked.</p>
                   <tr>
                     <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
+                    <td><p>The compile context.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>objectType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Type of the object to be stored or retrieved.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>factoryExpression</em></td>
                     <td><span class="xref">LambdaExpression</span></td>
-                    <td></td>
+                    <td><p>Lambda which should be executed to obtain a new instance if a matching object is not already in scope.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>iDisposableOnly</em></td>
                     <td><span class="xref">Expression</span></td>
-                    <td></td>
+                    <td><p>Expected to be a boolean expression indicating whether only IDisposables should be tracked in the scope.  The default 
+(if not provided) then will be set to &#39;true&#39;.</p>
+</td>
                   </tr>
                 </tbody>
               </table>

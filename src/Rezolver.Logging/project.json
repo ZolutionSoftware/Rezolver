@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0-alpha-200",
   "description": "Logging classes for Rezolver",
-  "authors": [ "Andras Zoltan" ],
+  "authors": [ "Zolution Software Ltd" ],
   "packOptions": {
     "tags": [ "ioc", "di", "portable", "rezolver", "logging" ],
-    "projectUrl": "http://www.zolution.co.uk/Rezolver",
+    "projectUrl": "http://rezolver.co.uk",
     "licenseUrl": ""
   },
   "dependencies": {
