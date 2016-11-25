@@ -13,7 +13,7 @@ namespace Rezolver
 	/// <summary>
 	/// Implements service decoration in an <see cref="ITargetContainer"/>.
 	/// 
-	/// The best way to add a decorator to your target container is to use the extension method <see cref="ITargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainerOwner)"/>
+	/// The best way to add a decorator to your target container is to use the extension method <see cref="SingletonTargetDictionaryExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainerOwner)"/>
 	/// or its non-generic equivalent.
 	/// </summary>
 	/// <remarks>This class does not implement <see cref="ITarget"/>, rather

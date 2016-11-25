@@ -14,7 +14,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldRezolveAnInt()
 		{
-			var container = CreateADefaultRezolver();
+			var container = CreateContainer();
 			container.Register(1.AsObjectTarget(), typeof(int));
 			var result = container.Resolve(typeof(int));
 			Assert.Equal(1, result);
@@ -23,7 +23,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAllowGenericTargetToCompileMultipleTimesForDifferentTypes()
 		{
-			var container = CreateADefaultRezolver();
+			var container = CreateContainer();
 			container.RegisterType(typeof(GenericWrapper<>));
 			container.RegisterType<NeedsWrappedRoot>();
 			container.RegisterType<Root>();

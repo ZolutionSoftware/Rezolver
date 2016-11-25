@@ -33,7 +33,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowAllConstructorParametersToBeProvided()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.RegisterExpression(context => new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
       var result = container.Resolve<NoDefaultConstructor>();
       Assert.Equal(NoDefaultConstructor.ExpectedValue, result.Value);
@@ -53,7 +53,7 @@ namespace Rezolver.Tests
       //tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget's
       //integration with the default adapter here.
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.RegisterExpression(context => new NoDefaultConstructor(context.Resolve<int>()));
       container.Register(intTarget, typeof(int));
       var result = container.Resolve<NoDefaultConstructor>();
@@ -65,7 +65,7 @@ namespace Rezolver.Tests
       //basically the same as above - except this doesn't provide the constructor call explicitly.
       var target = ConstructorTarget.Auto<NoDefaultConstructor>();
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register(intTarget, typeof(int));
       var result = GetValueFromTarget<NoDefaultConstructor>(target, container);
       Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -79,7 +79,7 @@ namespace Rezolver.Tests
 
       var target = ConstructorTarget.Auto<NoDefaultConstructor2>();
       var intTarget = NoDefaultConstructor2.ExpectedBestValue.AsObjectTarget();
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register(intTarget);
       container.Register(target);
       var result = container.Resolve<NoDefaultConstructor2>();

@@ -44,7 +44,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveOneServiceForIEnumerableDependency()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((10).AsObjectTarget());
       container.RegisterType<RequiresServices>();
       container.RegisterType<ServiceA, IService>();
@@ -56,7 +56,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldRegisterAndResolveMultipleServiceInstances()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((10).AsObjectTarget());
       container.Register((20.0).AsObjectTarget());
       container.Register("hello multiple".AsObjectTarget());
@@ -71,7 +71,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldRegisterAndResolveMultipleServiceInstancesAsDependency()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((10).AsObjectTarget());
       container.Register((20.0).AsObjectTarget());
       container.Register("hello multiple".AsObjectTarget());

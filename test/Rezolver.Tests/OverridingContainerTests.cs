@@ -37,7 +37,7 @@ namespace Rezolver.Tests
     public void ShouldRezolveIntDependencyFromBaseRezolver()
     {
       //this is using constructorTarget with a prescribed new expression
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.RegisterType<TypeWithConstructorArg>();
 
       //the thing being that the underlying Builder does not know how too resolve an integer without

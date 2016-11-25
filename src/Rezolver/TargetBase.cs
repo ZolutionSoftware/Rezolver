@@ -27,7 +27,7 @@ namespace Rezolver
         {
           if (node.NodeType == ExpressionType.Extension)
           {
-            RezolveTargetExpression re = node as RezolveTargetExpression;
+            TargetExpression re = node as TargetExpression;
             if (re != null)
             {
               return re.Target.CreateExpression(_sourceCompileContext.New(re.Type));

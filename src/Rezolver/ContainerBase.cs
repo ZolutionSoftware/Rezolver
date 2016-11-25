@@ -22,7 +22,7 @@ namespace Rezolver
   /// 
   /// The reason this class does is to make it easier to create a new container and to register targets into it without having to worry about
   /// managing a separate <see cref="ITargetContainer"/> instance in your application root - because all the registration extension methods defined
-  /// in <see cref="ITargetContainerExtensions"/> will be available to developers in code which has a reference to this class, or one derived from it.
+  /// in <see cref="SingletonTargetDictionaryExtensions"/> will be available to developers in code which has a reference to this class, or one derived from it.
   /// 
   /// Note also that calling <see cref="ITargetContainer.CombineWith(ITargetContainer, Type)"/> on an instance of this type will always
   /// cause a <see cref="NotSupportedException"/> to be thrown.

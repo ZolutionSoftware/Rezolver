@@ -36,7 +36,7 @@ namespace Rezolver.Tests
     public void ShouldCreateAGenericClass()
     {
       //typical pattern already 
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.RegisterObject(1);
       ITarget t = GenericConstructorTarget.Auto(typeof(Generic<>));
       Assert.NotNull(t);
@@ -138,7 +138,7 @@ namespace Rezolver.Tests
       //to the outer generic interface.  At the time of writing, making it the same causes
       //a circular dependency - see Bug #7
 
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       //we need three dependencies registered - the inner T, an IGenericA<> and 
       //an IGeneric<IGenericA<T>>.
       container.Register((25).AsObjectTarget());
@@ -169,7 +169,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveOpenGenericViaInterfaceDependency()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((40).AsObjectTarget());
       container.Register((50d).AsObjectTarget(typeof(double?))); //will that work?
       container.Register("hello interface generics!".AsObjectTarget());
@@ -195,7 +195,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericTypeWith2Parameters()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((60).AsObjectTarget());
       container.Register("hello multiple".AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(Generic2<,>)));
@@ -212,7 +212,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericTypeWith2ParametersByInterface()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((70).AsObjectTarget());
       container.Register("hello multiple interface".AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(Generic2<,>)), typeof(IGeneric2<,>));
@@ -228,7 +228,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericTypeWith2ReverseParametersByInterface()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((80).AsObjectTarget());
       container.Register("hello reversed interface".AsObjectTarget());
       //the thing here being that the type parameters for IGeneric2 are swapped in Generic2Reversed,
@@ -244,7 +244,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericTypeByABase()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((90).AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric<>)), typeof(Generic<>));
       var result = (Generic<int>)container.Resolve(typeof(Generic<int>));
@@ -255,7 +255,7 @@ namespace Rezolver.Tests
     public void ShouldResolveGenericTypeByABaseOfABase()
     {
       //testing that the type parameter mapping will walk the inheritance treee correctly
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((100).AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(DoubleDeriveGeneric<>)), typeof(Generic<>));
       var result = (Generic<int>)container.Resolve(typeof(Generic<int>));
@@ -265,7 +265,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericWithTwoParametersByABase()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((110).AsObjectTarget());
       container.Register("Hello double parameter base".AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2<,>)), typeof(Generic2<,>));
@@ -277,7 +277,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericWithTwoParametersByABaseOfABase()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((120).AsObjectTarget());
       container.Register("Hello double parameter base of a base".AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2<,>)), typeof(Generic2<,>));
@@ -289,7 +289,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericWithTwoParametersReversedByItsBase()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((130).AsObjectTarget());
       container.Register("Hello double parameter reversed base".AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2Reversed<,>)), typeof(Generic2<,>));
@@ -302,7 +302,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericWithTwoParametersReversedByABaseOfItsBase()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register((140).AsObjectTarget());
       container.Register("Hello double parameter reversed base of a base".AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2Reversed<,>)), typeof(Generic2<,>));

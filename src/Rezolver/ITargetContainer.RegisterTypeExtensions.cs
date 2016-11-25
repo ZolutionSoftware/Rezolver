@@ -5,21 +5,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Rezolver
 {
 	/// <summary>
-	/// Extensions for <see cref="ITargetContainer"/> to provide shortcuts for registering constructor-injected types
-	/// whose lifetimes are slaved to that of a parent <see cref="IScopedContainer"/>.
-	/// 
-	/// All of the extension methods ultimately create a <see cref="ScopedTarget"/>
+	/// Extensions for <see cref="ITargetContainer"/> to provide shortcuts for the simplest cases of registering
+	/// <see cref="ConstructorTarget"/> and <see cref="GenericConstructorTarget"/> targets.
 	/// </summary>
-	public static partial class ScopedTargetContainerExtensions
+	public static partial class RegisterTypeDictionaryExtensions
 	{
 		/// <summary>
-		/// Registers an explicitly scoped instance of <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via 
-		/// constructor injection.  
+		/// Registers an instance of <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via constructor injection.  
 		/// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
 		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(RezolveContext)"/> is first called.
 		/// 
@@ -33,16 +31,15 @@ namespace Rezolver
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IPropertyBindingBehaviour)"/> or 
-		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IPropertyBindingBehaviour)"/> static methods, wrapping it with a
-		/// <see cref="ScopedTarget"/> and registering it.</remarks>
-		public static void RegisterScoped<TObject>(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IPropertyBindingBehaviour)"/> static methods and then registering it.</remarks>
+		public static void RegisterType<TObject>(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
-			RegisterScoped(targetContainer, typeof(TObject), propertyBindingBehaviour: propertyBindingBehaviour);
+			RegisterType(targetContainer, typeof(TObject), propertyBindingBehaviour: propertyBindingBehaviour);
 		}
 
 		/// <summary>
-		/// Registers an explicitly scoped instance of <typeparamref name="TObject"/> for the service type <typeparamref name="TService"/> 
-		/// to be created by an <see cref="IContainer"/> via constructor injection.
+		/// Registers an instance of <typeparamref name="TObject"/> for the service type <typeparamref name="TService"/> to be created by 
+		/// an <see cref="IContainer"/> via constructor injection.  
 		/// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
 		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(RezolveContext)"/> is first called.
 		/// 
@@ -57,17 +54,17 @@ namespace Rezolver
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IPropertyBindingBehaviour)"/> or 
-		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IPropertyBindingBehaviour)"/> static methods, wrapping it with a
-		/// <see cref="ScopedTarget"/> and then registering it against
+		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IPropertyBindingBehaviour)"/> static methods and then registering it against
 		/// the type <typeparamref name="TService"/>.</remarks>
-		public static void RegisterScoped<TObject, TService>(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static void RegisterType<TObject, TService>(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		where TObject : TService
 		{
-			RegisterScoped(targetContainer, typeof(TObject), typeof(TService), propertyBindingBehaviour: propertyBindingBehaviour);
+			RegisterType(targetContainer, typeof(TObject), serviceType: typeof(TService), propertyBindingBehaviour: propertyBindingBehaviour);
 		}
 
 		/// <summary>
-		/// Registers an explicitly instance of <paramref name="objectType"/> (optionally for the service type <paramref name="serviceType"/>) to be 
-		/// created by an <see cref="IContainer"/> via constructor injection.  
+		/// Registers an instance of <paramref name="objectType"/> (optionally for the service type <paramref name="serviceType"/>) to be 
+		/// created by  an <see cref="IContainer"/> via constructor injection.  
 		/// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
 		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(RezolveContext)"/> is first called.
 		/// 
@@ -82,19 +79,18 @@ namespace Rezolver
 		/// on the instance of <paramref name="objectType"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto(Type, IPropertyBindingBehaviour)"/> or 
-		/// <see cref="GenericConstructorTarget.Auto(Type, IPropertyBindingBehaviour)"/> static methods, wrapping it with a <see cref="ScopedTarget"/>
-		/// and then registering it against the type <paramref name="serviceType"/> or <paramref name="objectType"/>.</remarks>
-		public static void RegisterScoped(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		/// <see cref="GenericConstructorTarget.Auto(Type, IPropertyBindingBehaviour)"/> static methods and then registering it against
+		/// the type <paramref name="serviceType"/> or <paramref name="objectType"/>.</remarks>
+		public static void RegisterType(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
-			objectType.MustNotBeNull(nameof(targetContainer));
-
-			RegisterScopedInternal(targetContainer, objectType, serviceType, propertyBindingBehaviour);
+			objectType.MustNotBeNull(nameof(objectType));
+			RegisterTypeInternal(targetContainer, objectType, serviceType, propertyBindingBehaviour);
 		}
 
-		internal static void RegisterScopedInternal(ITargetContainer targetContainer, Type objectType, Type serviceType, IPropertyBindingBehaviour propertyBindingBehaviour)
+		internal static void RegisterTypeInternal(ITargetContainer targetContainer, Type objectType, Type serviceType, IPropertyBindingBehaviour propertyBindingBehaviour)
 		{
-			targetContainer.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour).Scoped(), serviceType: serviceType);
+			targetContainer.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour), serviceType: serviceType);
 		}
 	}
 }

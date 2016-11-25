@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
 	/// <summary>
-	/// An <see cref="ITarget" /> which resolve objects by executing a delegate.
+	/// An <see cref="ITarget" /> which resolve objects by executing a delegate with argument injection.
 	/// </summary>
 	/// <remarks>The delegate must be non-void and can have any number of parameters.
 	/// 
@@ -95,7 +95,8 @@ namespace Rezolver
 		/// an, optionally, with the <paramref name="declaredType" />
 		/// </summary>
 		/// <param name="factory">The delegate to be used as a factory.</param>
-		/// <param name="declaredType">Optional type to set as the <see cref="DelegateTarget.DeclaredType"/> of the target</param>
+		/// <param name="declaredType">Optional type to set as the <see cref="DelegateTarget.DeclaredType"/> of the target,
+		/// if not passed, then the return type of the delegate will be used.</param>
 		public static DelegateTarget AsDelegateTarget(this Delegate factory, Type declaredType = null)
 		{
 			return new DelegateTarget(factory, declaredType);

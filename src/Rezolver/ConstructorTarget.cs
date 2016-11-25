@@ -18,7 +18,7 @@ namespace Rezolver
 	/// <remarks>Although you can create this target directly through the 
 	/// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/> constructor,
 	/// you're more likely to create it through factory methods such as <see cref="Auto{T}(IPropertyBindingBehaviour)"/> or, more likely still,
-	/// extension methods such as <see cref="ITargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IPropertyBindingBehaviour)"/> during
+	/// extension methods such as <see cref="SingletonTargetDictionaryExtensions.RegisterType{TObject, TService}(ITargetContainer, IPropertyBindingBehaviour)"/> during
 	/// your application's container setup phase.
 	/// 
 	/// The expression built by this class' implementation of <see cref="CreateExpressionBase(CompileContext)"/> will be an expression tree that ultimately
