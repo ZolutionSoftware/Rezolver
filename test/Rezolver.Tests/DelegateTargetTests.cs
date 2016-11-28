@@ -148,11 +148,16 @@ namespace Rezolver.Tests
 		delegate string NonGenericDelegateWithContext(int i, RezolveContext c);
 
 		[Fact]
-		public ShouldInvokeNonGenericDelegateWithResolvedIntAndContext()
+		public void ShouldInvokeNonGenericDelegateWithResolvedIntAndContext()
 		{
 			var del = new NonGenericDelegateWithContext(DelegateTargetMethodWithContext);
 			var container = CreateContainer();
-			//container.RegisterDelegate
+			container.RegisterObject(25);
+			container.RegisterDelegate(del);
+			RezolveContext c = new RezolveContext(container, typeof(string));
+			var expected = DelegateTargetMethodWithContext(25, c);
+			var result = container.Resolve(c);
+			Assert.Equal(expected, result);
 		}
 	}
 }

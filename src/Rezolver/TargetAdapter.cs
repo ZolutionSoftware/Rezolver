@@ -30,15 +30,138 @@ namespace Rezolver
 		/// <seealso cref="System.Linq.Expressions.ExpressionVisitor" />
 		private class TargetAdapterVisitor : ExpressionVisitor
 		{
-			private static ParameterExpression[] NoParameters = new ParameterExpression[0];
-
-			private ParameterExpression[] _lambdaParameters = NoParameters;
-			public TargetAdapterVisitor(Expression expression)
+			private class ParameterReplacement
 			{
+				public ParameterExpression Original { get; private set; }
+				public Expression Replacement { get; private set; }
+
+				public ParameterReplacement(ParameterExpression original, Expression replacement)
+				{
+					this.Original = original;
+					this.Replacement = replacement;
+				}
+			}
+			private static ParameterReplacement[] NoParameters = new ParameterReplacement[0];
+			private Expression _rootExpression;
+			private ITargetAdapter _adapter;
+			private ParameterReplacement[] _lambdaParameterReplacements = NoParameters;
+			public TargetAdapterVisitor(Expression expression, ITargetAdapter adapter)
+			{
+#error rewriting the parameters is all well and good; but need to be much cleverer with REzolveContext.Container.Resolve<> calls (continued in commments)
+				//basically the current behaviour with RezolveContextExpressionHelper needs to be extended so that ANY resolve operation,
+				//either from the helper or from the container on a ResolveContext parameter, gets rewritten as a ResolvedTarget.
+				//Means making some changes to how MethodCallExpressions are handled.
+				_adapter = adapter;
 				if(expression.NodeType == ExpressionType.Lambda)
 				{
-					_lambdaParameters = ((LambdaExpression)expression).Parameters.ToArray();
+					_lambdaParameterReplacements = ((LambdaExpression)expression).Parameters.Select(p => {
+						if (p.Type == typeof(RezolveContext))
+							return new ParameterReplacement(p, ExpressionHelper.RezolveContextParameterExpression);
+						else
+							return new ParameterReplacement(p, new TargetExpression(new RezolvedTarget(p.Type)));
+					}).ToArray();
 				}
+				_rootExpression = expression;
+			}
+
+			public TargetExpression CreateTargetExpression()
+			{
+				return Visit(_rootExpression) as TargetExpression;
+			}
+
+			internal Type ExtractRezolveCallType(Expression e)
+			{
+				var methodExpr = e as MethodCallExpression;
+
+				if (methodExpr == null || !methodExpr.Method.IsGenericMethod)
+					return null;
+
+				var match = RezolveMethods.SingleOrDefault(m => m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
+
+				if (match == null)
+					return null;
+
+				return methodExpr.Method.GetGenericArguments()[0];
+			}
+
+			protected override Expression VisitConstant(ConstantExpression node)
+			{
+				return new TargetExpression(new ObjectTarget(node.Value, node.Type));
+			}
+
+			protected override Expression VisitNew(NewExpression node)
+			{
+				return new TargetExpression(ConstructorTarget.FromNewExpression(node.Type, node, _adapter));
+			}
+
+			protected override Expression VisitMemberInit(MemberInitExpression node)
+			{
+				var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, _adapter);
+				return new TargetExpression(new ExpressionTarget(c =>
+				{
+					var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
+
+					//the goal here, then, is to find the new expression for this type and replace it 
+					//with a memberinit equivalent to the one we visited.  Although the constructor target produces 
+					//a NewExpression, it isn't going to be the root expression, because of the scoping boilerplate 
+					//that is put around nearly all expressions produced by RezolveTargetBase implementations. 
+					var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
+					return rewriter.Visit(ctorTargetExpr);
+				}, node.Type));
+			}
+
+			protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)
+			{
+				return base.VisitMemberAssignment(node);
+			}
+
+			protected override MemberListBinding VisitMemberListBinding(MemberListBinding node)
+			{
+				return base.VisitMemberListBinding(node);
+			}
+
+			protected override MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
+			{
+				return base.VisitMemberMemberBinding(node);
+			}
+
+			protected override Expression VisitParameter(ParameterExpression node)
+			{
+				var replacement = _lambdaParameterReplacements.SingleOrDefault(pr => pr.Original == node
+					 || (pr.Original.Name == node.Name && pr.Original.Type == node.Type));
+				if (replacement != null)
+					return replacement.Replacement;
+
+				//if (node.Type == typeof(RezolveContextExpressionHelper))
+				//	return new RezolveContextPlaceholderExpression(node);
+				//TODO: if the original expression is a lambda, and this parameter is one of those input parameters,
+				// then we should rewrite the parameter as a ResolvedTarget :) 
+				return base.VisitParameter(node);
+			}
+
+			protected override Expression VisitLambda<T>(Expression<T> node)
+			{
+				//we can't do anything special with lambdas - we just work over the body.  This enables
+				//us to feed lambdas from code (i.e. compiler-generated expression trees) just as if we
+				//were passing hand-built expressions.
+				//The parameter rewriting takes care of everything else.
+				return base.Visit(node.Body);
+			}
+
+			protected override Expression VisitMethodCall(MethodCallExpression node)
+			{
+				var rezolvedType = ExtractRezolveCallType(node);
+				if (rezolvedType != null)
+					return new TargetExpression(new RezolvedTarget(rezolvedType));
+				return base.VisitMethodCall(node);
+			}
+
+			public override Expression Visit(Expression node)
+			{
+				var result = base.Visit(node);
+				if (result != null && !(result is TargetExpression))
+					return new TargetExpression(new ExpressionTarget(result));
+				return result;
 			}
 		}
 
@@ -86,20 +209,7 @@ namespace Rezolver
 
 		}
 
-		internal Type ExtractRezolveCallType(Expression e)
-		{
-			var methodExpr = e as MethodCallExpression;
-
-			if (methodExpr == null || !methodExpr.Method.IsGenericMethod)
-				return null;
-
-			var match = RezolveMethods.SingleOrDefault(m => m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
-
-			if (match == null)
-				return null;
-
-			return methodExpr.Method.GetGenericArguments()[0];
-		}
+		
 
 		/// <summary>
 		/// Creates the target.
@@ -107,85 +217,10 @@ namespace Rezolver
 		/// <param name="expression">The expression.</param>
 		public ITarget CreateTarget(Expression expression)
 		{
-			var result = Visit(expression) as TargetExpression;
+			var result = new TargetAdapterVisitor(expression, this).CreateTargetExpression();
 			if (result != null)
 				return result.Target;
 			return null;
-		}
-
-		protected override Expression VisitConstant(ConstantExpression node)
-		{
-			return new TargetExpression(new ObjectTarget(node.Value, node.Type));
-		}
-
-		protected override Expression VisitNew(NewExpression node)
-		{
-			return new TargetExpression(ConstructorTarget.FromNewExpression(node.Type, node, this));
-		}
-
-		protected override Expression VisitMemberInit(MemberInitExpression node)
-		{
-			var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, this);
-			return new TargetExpression(new ExpressionTarget(c =>
-			{
-				var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
-
-		  //the goal here, then, is to find the new expression for this type and replace it 
-		  //with a memberinit equivalent to the one we visited.  Although the constructor target produces 
-		  //a NewExpression, it isn't going to be the root expression, because of the scoping boilerplate 
-		  //that is put around nearly all expressions produced by RezolveTargetBase implementations. 
-		  var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
-				return rewriter.Visit(ctorTargetExpr);
-			}, node.Type));
-		}
-
-		protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)
-		{
-			return base.VisitMemberAssignment(node);
-		}
-
-		protected override MemberListBinding VisitMemberListBinding(MemberListBinding node)
-		{
-			return base.VisitMemberListBinding(node);
-		}
-
-		protected override MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
-		{
-			return base.VisitMemberMemberBinding(node);
-		}
-
-		protected override Expression VisitParameter(ParameterExpression node)
-		{
-			if (node.Type == typeof(RezolveContextExpressionHelper))
-				return new RezolveContextPlaceholderExpression(node);
-			//TODO: if the original expression is a lambda, and this parameter is one of those input parameters,
-			// then we should rewrite the parameter as a ResolvedTarget :) 
-			return base.VisitParameter(node);
-		}
-
-		protected override Expression VisitLambda<T>(Expression<T> node)
-		{
-			//we can't do anything special with lambdas - we just work over the body.  This enables
-			//us to feed lambdas from code (i.e. compiler-generated expression trees) just as if we
-			//were passing hand-built expressions.
-			return base.Visit(node.Body);
-		}
-
-		protected override Expression VisitMethodCall(MethodCallExpression node)
-		{
-			//TODO: no string parameter here -needs to be reinstated.
-			var rezolvedType = ExtractRezolveCallType(node);
-			if (rezolvedType != null)
-				return new TargetExpression(new RezolvedTarget(rezolvedType));
-			return base.VisitMethodCall(node);
-		}
-
-		public override Expression Visit(Expression node)
-		{
-			var result = base.Visit(node);
-			if (result != null && !(result is TargetExpression))
-				return new TargetExpression(new ExpressionTarget(result));
-			return result;
 		}
 	}
 }
