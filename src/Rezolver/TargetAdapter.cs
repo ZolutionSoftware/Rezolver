@@ -30,43 +30,10 @@ namespace Rezolver
 		/// <seealso cref="System.Linq.Expressions.ExpressionVisitor" />
 		private class TargetAdapterVisitor : ExpressionVisitor
 		{
-			private class ParameterReplacement
-			{
-				public ParameterExpression Original { get; private set; }
-				public Expression Replacement { get; private set; }
-
-				public ParameterReplacement(ParameterExpression original, Expression replacement)
-				{
-					this.Original = original;
-					this.Replacement = replacement;
-				}
-			}
-			private static ParameterReplacement[] NoParameters = new ParameterReplacement[0];
-			private Expression _rootExpression;
 			private ITargetAdapter _adapter;
-			private ParameterReplacement[] _lambdaParameterReplacements = NoParameters;
-			public TargetAdapterVisitor(Expression expression, ITargetAdapter adapter)
+			public TargetAdapterVisitor(ITargetAdapter adapter)
 			{
-#error rewriting the parameters is all well and good; but need to be much cleverer with REzolveContext.Container.Resolve<> calls (continued in commments)
-				//basically the current behaviour with RezolveContextExpressionHelper needs to be extended so that ANY resolve operation,
-				//either from the helper or from the container on a ResolveContext parameter, gets rewritten as a ResolvedTarget.
-				//Means making some changes to how MethodCallExpressions are handled.
 				_adapter = adapter;
-				if(expression.NodeType == ExpressionType.Lambda)
-				{
-					_lambdaParameterReplacements = ((LambdaExpression)expression).Parameters.Select(p => {
-						if (p.Type == typeof(RezolveContext))
-							return new ParameterReplacement(p, ExpressionHelper.RezolveContextParameterExpression);
-						else
-							return new ParameterReplacement(p, new TargetExpression(new RezolvedTarget(p.Type)));
-					}).ToArray();
-				}
-				_rootExpression = expression;
-			}
-
-			public TargetExpression CreateTargetExpression()
-			{
-				return Visit(_rootExpression) as TargetExpression;
 			}
 
 			internal Type ExtractRezolveCallType(Expression e)
@@ -110,42 +77,47 @@ namespace Rezolver
 				}, node.Type));
 			}
 
-			protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)
-			{
-				return base.VisitMemberAssignment(node);
-			}
-
-			protected override MemberListBinding VisitMemberListBinding(MemberListBinding node)
-			{
-				return base.VisitMemberListBinding(node);
-			}
-
-			protected override MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
-			{
-				return base.VisitMemberMemberBinding(node);
-			}
-
-			protected override Expression VisitParameter(ParameterExpression node)
-			{
-				var replacement = _lambdaParameterReplacements.SingleOrDefault(pr => pr.Original == node
-					 || (pr.Original.Name == node.Name && pr.Original.Type == node.Type));
-				if (replacement != null)
-					return replacement.Replacement;
-
-				//if (node.Type == typeof(RezolveContextExpressionHelper))
-				//	return new RezolveContextPlaceholderExpression(node);
-				//TODO: if the original expression is a lambda, and this parameter is one of those input parameters,
-				// then we should rewrite the parameter as a ResolvedTarget :) 
-				return base.VisitParameter(node);
-			}
-
 			protected override Expression VisitLambda<T>(Expression<T> node)
 			{
-				//we can't do anything special with lambdas - we just work over the body.  This enables
-				//us to feed lambdas from code (i.e. compiler-generated expression trees) just as if we
-				//were passing hand-built expressions.
-				//The parameter rewriting takes care of everything else.
-				return base.Visit(node.Body);
+				Expression body = node.Body;
+				try
+				{
+					ParameterExpression rezolveContextParam = node.Parameters.SingleOrDefault(p => p.Type == typeof(RezolveContext));
+					//if the lambda had a parameter of the type RezolveContext, swap it for the 
+					//RezolveContextParameterExpression parameter expression that all the internal
+					//components use when building expression trees from targets.
+					if (rezolveContextParam != null && rezolveContextParam != ExpressionHelper.RezolveContextParameterExpression)
+						body = new ExpressionSwitcher(new[] {
+							new ExpressionReplacement(rezolveContextParam, ExpressionHelper.RezolveContextParameterExpression)
+						}).Visit(body);
+				}
+				catch (InvalidOperationException ioex)
+				{
+					//throw by the SingleOrDefault call inside the Try.
+					throw new ArgumentException($"The lambda expression { node } is not supported - it has multiple RezolveContext parameters, and only a maximum of one is allowed", nameof(node), ioex);
+				}
+				var variables = node.Parameters.Where(p => p.Type != typeof(RezolveContext)).ToArray();
+				//if we have lambda parameters which need to be converted to block variables which are resolved
+				//by assignment (dynamic service location I suppose you'd call it) then we need to wrap everything
+				//in a block expression.
+				if (variables.Length != 0)
+				{
+					return Expression.Block(node.Body.Type,
+						//all parameters from the Lambda, except one typed as RezolveContext, are fed into the new block as variables
+						variables,
+						//start the block with a run of assignments for all the parameters of the original lambda
+						//with services resolved from the container
+						variables.Select(p => Expression.Assign(p, new TargetExpression(new RezolvedTarget(p.Type)))).Concat(
+							new[] {
+								//and then concatenate the original body of the Lambda, which might have had
+								//any references to a RezolveContext parameter switched for the global RezolveContextParameterExpression
+								base.Visit(body)
+							}
+						)
+					);
+				}
+				else
+					return base.Visit(body);
 			}
 
 			protected override Expression VisitMethodCall(MethodCallExpression node)
@@ -155,19 +127,11 @@ namespace Rezolver
 					return new TargetExpression(new RezolvedTarget(rezolvedType));
 				return base.VisitMethodCall(node);
 			}
-
-			public override Expression Visit(Expression node)
-			{
-				var result = base.Visit(node);
-				if (result != null && !(result is TargetExpression))
-					return new TargetExpression(new ExpressionTarget(result));
-				return result;
-			}
 		}
 
 		internal static readonly MethodInfo[] RezolveMethods =
 		{
-			MethodCallExtractor.ExtractCalledMethod((RezolveContextExpressionHelper helper) => helper.Resolve<int>()).GetGenericMethodDefinition()
+			MethodCallExtractor.ExtractCalledMethod(() => Functions.Resolve<int>()).GetGenericMethodDefinition()
 		};
 
 		/// <summary>
@@ -209,7 +173,7 @@ namespace Rezolver
 
 		}
 
-		
+
 
 		/// <summary>
 		/// Creates the target.
@@ -217,10 +181,13 @@ namespace Rezolver
 		/// <param name="expression">The expression.</param>
 		public ITarget CreateTarget(Expression expression)
 		{
-			var result = new TargetAdapterVisitor(expression, this).CreateTargetExpression();
-			if (result != null)
-				return result.Target;
-			return null;
+			var result = new TargetAdapterVisitor(this).Visit(expression);
+			if (result is TargetExpression)
+				return ((TargetExpression)result).Target;
+			else if (result != null)
+				return new ExpressionTarget(result);
+			else
+				throw new ArgumentException($"Unable to convert the expression { expression } to an ITarget", nameof(expression));
 		}
 	}
 }

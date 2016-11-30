@@ -13,34 +13,6 @@ namespace Rezolver
   /// </summary>
   public abstract class TargetBase : ITarget
   {
-    private class RezolveTargetExpressionRewriter : ExpressionVisitor
-    {
-      readonly CompileContext _sourceCompileContext;
-
-      public RezolveTargetExpressionRewriter(CompileContext context)
-      {
-        _sourceCompileContext = context;
-      }
-      public override Expression Visit(Expression node)
-      {
-        if (node != null)
-        {
-          if (node.NodeType == ExpressionType.Extension)
-          {
-            TargetExpression re = node as TargetExpression;
-            if (re != null)
-            {
-              return re.Target.CreateExpression(_sourceCompileContext.New(re.Type));
-            }
-            RezolveContextPlaceholderExpression pe = node as RezolveContextPlaceholderExpression;
-            if (pe != null)
-              return _sourceCompileContext.RezolveContextExpression;
-          }
-        }
-        return base.Visit(node);
-      }
-    }
-
     /// <summary>
     /// Required for the scope tracking wrapping code.
     /// </summary>
@@ -183,7 +155,7 @@ namespace Rezolver
           || !TypeHelpers.IsAssignableFrom(convertType, result.Type))
           return Expression.Convert(result, convertType);
 
-        result = new RezolveTargetExpressionRewriter(context).Visit(result);
+        result = new TargetExpressionRewriter(context).Visit(result);
         //if scope tracking isn't disabled, either by this target or at the compile context level, then we 
         //add the boilerplate to add this object produced to the current scope.
         if (!SuppressScopeTracking && !context.SuppressScopeTracking)

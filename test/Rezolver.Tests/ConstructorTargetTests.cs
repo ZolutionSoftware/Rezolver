@@ -54,7 +54,7 @@ namespace Rezolver.Tests
       //integration with the default adapter here.
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
       var container = CreateContainer();
-      container.RegisterExpression(context => new NoDefaultConstructor(context.Resolve<int>()));
+      container.RegisterExpression(context => new NoDefaultConstructor(Functions.Resolve<int>()));
       container.Register(intTarget, typeof(int));
       var result = container.Resolve<NoDefaultConstructor>();
       Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -107,7 +107,7 @@ namespace Rezolver.Tests
     {
       Container container = new Container(compiler: new TargetDelegateCompiler());
       container.Register((10).AsObjectTarget());
-      container.RegisterExpression(c => new HasProperty() { Value = c.Resolve<int>() });
+      container.RegisterExpression(c => new HasProperty() { Value = Functions.Resolve<int>() });
       var result = (HasProperty)container.Resolve(typeof(HasProperty));
       Assert.Equal(10, result.Value);
     }

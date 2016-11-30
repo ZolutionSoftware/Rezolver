@@ -23,7 +23,14 @@ namespace Rezolver
 		/// </summary>
 		public Expression Expression { get; }
 
-		private readonly Type _declaredType;//used only when a factory is used.
+		/// <summary>
+		/// Gets the type of <see cref="Expression"/> or the type that all expressions returned by the 
+		/// <see cref="ExpressionFactory"/> are expected to be equal to.
+		/// </summary>
+		public override Type DeclaredType
+		{
+			get;
+		}
 
 		/// <summary>
 		/// Gets a factory which will be executed to obtain an expression when 
@@ -35,14 +42,32 @@ namespace Rezolver
 		public Func<CompileContext, Expression> ExpressionFactory { get; }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ExpressionTarget"/> class.
+		/// Initializes a new instance of the <see cref="ExpressionTarget" /> class.
 		/// </summary>
-		/// <param name="expression">Required. The static expression which will be returned by 
-		/// <see cref="CreateExpressionBase(CompileContext)"/>.</param>
-		public ExpressionTarget(Expression expression)
+		/// <param name="expression">Required. The static expression which will be returned by
+		/// <see cref="CreateExpressionBase(CompileContext)" />.</param>
+		/// <param name="declaredType">Declared type of the target to be created (used when registering without
+		/// an explicit type or when this target is used as a value inside another target).</param>
+		/// <remarks><paramref name="declaredType"/> will automatically be determined if not provided
+		/// by examining the type of the <paramref name="expression"/>.  For lambdas, the type will
+		/// be derived from the Type of the lambda's body.  For all other expressions, the type is
+		/// taken directly from the Type property of the expression itself.</remarks>
+		public ExpressionTarget(Expression expression, Type declaredType = null)
 		{
+#error wondering whether this should delegate to a target adapter if it's a lambda
+			//because there's logic now in TargetAdapter which need to be shared by this
+			//constructor.
 			expression.MustNotBeNull(nameof(expression));
 			Expression = expression;
+			if (declaredType == null)
+			{
+				if (expression is LambdaExpression)
+					declaredType = ((LambdaExpression)expression).Body.Type;
+				else
+					declaredType = expression.Type;
+			}
+
+			DeclaredType = declaredType;
 		}
 
 		/// <summary>
@@ -60,7 +85,7 @@ namespace Rezolver
 			expressionFactory.MustNotBeNull(nameof(expressionFactory));
 			declaredType.MustNotBeNull(nameof(declaredType));
 			ExpressionFactory = expressionFactory;
-			_declaredType = declaredType;
+			DeclaredType = declaredType;
 		}
 
 		/// <summary>
@@ -71,15 +96,6 @@ namespace Rezolver
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
 			return Expression ?? ExpressionFactory(context);
-		}
-
-		/// <summary>
-		/// Gets the type of <see cref="Expression"/> or the type that all expressions returned by the 
-		/// <see cref="ExpressionFactory"/> are expected to be equal to.
-		/// </summary>
-		public override Type DeclaredType
-		{
-			get { return ExpressionFactory != null ? _declaredType : Expression.Type; }
 		}
 	}
 }

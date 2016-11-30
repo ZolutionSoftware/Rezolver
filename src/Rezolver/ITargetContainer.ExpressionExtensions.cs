@@ -11,6 +11,11 @@ namespace Rezolver
 	/// </summary>
     public static class ExpressionTargetContainerExtensions
     {
+		private static void RegisterExpression(ITargetContainer targetContainer, Expression expression, Type type, ITargetAdapter adapter)
+		{
+			var target = (adapter ?? TargetAdapter.Default).CreateTarget(expression);
+			targetContainer.Register(target, type);
+		}
 		/// <summary>
 		/// Registers an expression to be used as a factory for obtaining an instance when the registration matches a resolve request.
 		/// </summary>
@@ -26,12 +31,25 @@ namespace Rezolver
 		/// mapping between the code you provide and the code that's produced, but it's not guaranteed.  In particular, calls back to the resolver to resolve dependencies are
 		/// identified and turned into a different representation internally, so that dependency resolution works inside your code in just the same way as it does when using the
 		/// higher-level targets.</remarks>
-		public static void RegisterExpression<T>(this ITargetContainer targetContainer, Expression<Func<RezolveContextExpressionHelper, T>> expression, Type type = null, ITargetAdapter adapter = null)
+		public static void RegisterExpression<T>(this ITargetContainer targetContainer, Expression<Func<T>> expression, Type type = null, ITargetAdapter adapter = null)
 		{
-			targetContainer.MustNotBeNull("builder");
-			expression.MustNotBeNull("expression");
-			var target = (adapter ?? TargetAdapter.Default).CreateTarget(expression);
-			targetContainer.Register(target, type ?? typeof(T));
+			targetContainer.MustNotBeNull(nameof(targetContainer));
+			expression.MustNotBeNull(nameof(expression));
+			RegisterExpression(targetContainer, (Expression)expression, type, adapter);
+		}
+
+		public static void RegisterExpression<T>(this ITargetContainer targetContainer, Expression<Func<RezolveContext, T>> expression, Type type = null, ITargetAdapter adapter = null)
+		{
+			targetContainer.MustNotBeNull(nameof(targetContainer));
+			expression.MustNotBeNull(nameof(expression));
+			RegisterExpression(targetContainer, (Expression)expression, type, adapter);
+		}
+
+		public static void RegisterExpression<T, TResult>(this ITargetContainer targetContainer, Expression<Func<T, TResult>> expression, Type type = null, ITargetAdapter adapter = null)
+		{
+			targetContainer.MustNotBeNull(nameof(targetContainer));
+			expression.MustNotBeNull(nameof(expression));
+			RegisterExpression(targetContainer, (Expression)expression, type, adapter);
 		}
 
 		//TODO: add functionality for expressions with additional parameters, similar to what we've done for the Func<> delegate
