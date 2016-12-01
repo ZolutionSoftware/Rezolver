@@ -14,6 +14,8 @@ namespace Rezolver
 	/// Enables more complex behaviours to be registered and used with the more formal
 	/// <see cref="ITarget"/> implementations.
 	/// </summary>
+	/// <remarks>Note that this target does not support Lambda expressions.  If you wish to create
+	/// an <see cref="ITarget"/> from a lambda expression, then you should use the </remarks>
 	public class ExpressionTarget : TargetBase
 	{
 		/// <summary>
@@ -54,20 +56,10 @@ namespace Rezolver
 		/// taken directly from the Type property of the expression itself.</remarks>
 		public ExpressionTarget(Expression expression, Type declaredType = null)
 		{
-#error wondering whether this should delegate to a target adapter if it's a lambda
-			//because there's logic now in TargetAdapter which need to be shared by this
-			//constructor.
 			expression.MustNotBeNull(nameof(expression));
+			expression.MustNot(e => e.NodeType == ExpressionType.Lambda, "Lambda expressions are not directly supported by the ExpressionTarget class.  Please use an ITargetAdapter to create a target from a Lambda Expression", nameof(expression));
 			Expression = expression;
-			if (declaredType == null)
-			{
-				if (expression is LambdaExpression)
-					declaredType = ((LambdaExpression)expression).Body.Type;
-				else
-					declaredType = expression.Type;
-			}
-
-			DeclaredType = declaredType;
+			DeclaredType = declaredType ?? expression.Type;
 		}
 
 		/// <summary>
