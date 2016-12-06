@@ -22,20 +22,19 @@ Features
 - Custom expressions
   - With explicit 'resolve' expression so you can call back into the container for arguments in your expression
 - Support for new Microsoft.Extensions.DependencyInjection framework
-  - One test failing at present
 - Configuration framework (needs some more work, but can be used)
   - JSON Configuration
   - Xml Configuration (planned)
   - Your own configuration
 - Extensible API
+  - ***WARNING - PARTS OF THE API WILL BE CHANGING***
   - Provide your own Expression-building targets for registrations
   - Override the compiler
   - Override all container and scope behaviour
 - All features are unit tested
-  - Core library (Rezolver.dll) > 75% coverage.
+  - Core library (Rezolver.dll) > 75% coverage (yeah - could be better - but we're working on it!)
   - More tests will be added as issues raised and features added
 - Plus much more besides :)
 
-Some more in-depth, but in-progress (and possibly wrong), documentation for Rezolver is available [on our website](http://www.zolution.co.uk/Rezolver).
-
-Some of the typenames have changed since it was first written.  I'll be fixing that.
+Some more in-depth, but in-progress (and possibly wrong), documentation for Rezolver is available [on our website](http://rezolver.co.uk),
+including API reference.
