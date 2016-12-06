@@ -7,190 +7,226 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-  public class DecoratorTests : TestsBase
-  {
-    [Fact]
-    public void ShouldDecorateDecoratedType()
-    {
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType<DecoratedType, IDecorated>();
-      builder.RegisterDecorator<DecoratorType, IDecorated>();
-      var container = new Container(builder);
-      var result = container.Resolve<IDecorated>();
-      Assert.IsType<DecoratorType>(result);
-      //yes, we've checked the type - but we also need to check the 
-      //argument is passed into the constructor.  Obviously, we could do this
-      //by null-checking in the constructor, but this is more fun.
-      Assert.Equal("Hello World", result.DoSomething());
-    }
+	public class DecoratorTests : TestsBase
+	{
+		[Fact]
+		public void ShouldDecorateDecoratedType()
+		{
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType<DecoratedType, IDecorated>();
+			builder.RegisterDecorator<DecoratorType, IDecorated>();
+			var container = new Container(builder);
+			var result = container.Resolve<IDecorated>();
+			Assert.IsType<DecoratorType>(result);
+			//yes, we've checked the type - but we also need to check the 
+			//argument is passed into the constructor.  Obviously, we could do this
+			//by null-checking in the constructor, but this is more fun.
+			Assert.Equal("Hello World", result.DoSomething());
+		}
 
-    [Fact]
-    public void ShouldDecorateDecoratedTypeAddedAfterDecorator()
-    {
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterDecorator<DecoratorType, IDecorated>();
-      builder.RegisterType<DecoratedType, IDecorated>();
-      var container = new Container(builder);
-      var result = container.Resolve<IDecorated>();
-      Assert.IsType<DecoratorType>(result);
+		[Fact]
+		public void ShouldDecorateDecoratedTypeAddedAfterDecorator()
+		{
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterDecorator<DecoratorType, IDecorated>();
+			builder.RegisterType<DecoratedType, IDecorated>();
+			var container = new Container(builder);
+			var result = container.Resolve<IDecorated>();
+			Assert.IsType<DecoratorType>(result);
 
-      Assert.Equal("Hello World", result.DoSomething());
-    }
+			Assert.Equal("Hello World", result.DoSomething());
+		}
 
-    [Fact]
-    public void ShouldDecorateDecorator()
-    {
-      //see if stacking multiple decorators works.
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType<DecoratedType, IDecorated>();
-      builder.RegisterDecorator<DecoratorType, IDecorated>();
-      builder.RegisterDecorator<AnotherDecoratorType, IDecorated>();
+		[Fact]
+		public void ShouldDecorateDecorator()
+		{
+			//see if stacking multiple decorators works.
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType<DecoratedType, IDecorated>();
+			builder.RegisterDecorator<DecoratorType, IDecorated>();
+			builder.RegisterDecorator<AnotherDecoratorType, IDecorated>();
 
-      var container = new Container(builder);
-      var result = container.Resolve<IDecorated>();
-      Assert.IsType<AnotherDecoratorType>(result);
+			var container = new Container(builder);
+			var result = container.Resolve<IDecorated>();
+			Assert.IsType<AnotherDecoratorType>(result);
 
-      Assert.Equal("OMG: Hello World", result.DoSomething());
-    }
+			Assert.Equal("OMG: Hello World", result.DoSomething());
+		}
 
-    [Fact]
-    public void ShouldCreateEnumerableOfDecoratedObjects()
-    {
-      //this test check that requesting an IEnumerable of T gives you
-      //an enumerable of decorated T
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType<DecoratedType, IDecorated>();
-      builder.RegisterType<DecoratedType2, IDecorated>();
-      builder.RegisterDecorator<DecoratorType, IDecorated>();
-      var container = new Container(builder);
-      var result = container.Resolve<IEnumerable<IDecorated>>().ToArray();
-      Assert.Equal(2, result.Length);
-      Assert.Single(result, r => r.DoSomething() == "Hello World");
-      Assert.Single(result, r => r.DoSomething() == "Goodbye World");
-    }
+		[Fact]
+		public void ShouldCreateEnumerableOfDecoratedObjects()
+		{
+			//this test check that requesting an IEnumerable of T gives you
+			//an enumerable of decorated T
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType<DecoratedType, IDecorated>();
+			builder.RegisterType<DecoratedType2, IDecorated>();
+			builder.RegisterDecorator<DecoratorType, IDecorated>();
+			var container = new Container(builder);
+			var result = container.Resolve<IEnumerable<IDecorated>>().ToArray();
+			Assert.Equal(2, result.Length);
+			Assert.Single(result, r => r.DoSomething() == "Hello World");
+			Assert.Single(result, r => r.DoSomething() == "Goodbye World");
+		}
 
-    [Fact]
-    public void ShouldCreateEnumerableOfDecoratedObjectsAddedAfterDecorator()
-    {
-      //this test is the same as above, except the decorator is registered first.
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterDecorator<DecoratorType, IDecorated>();
-      builder.RegisterType<DecoratedType, IDecorated>();
-      builder.RegisterType<DecoratedType2, IDecorated>();
+		[Fact]
+		public void ShouldCreateEnumerableOfDecoratedObjectsAddedAfterDecorator()
+		{
+			//this test is the same as above, except the decorator is registered first.
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterDecorator<DecoratorType, IDecorated>();
+			builder.RegisterType<DecoratedType, IDecorated>();
+			builder.RegisterType<DecoratedType2, IDecorated>();
 
-      var container = new Container(builder);
-      var result = container.Resolve<IEnumerable<IDecorated>>().ToArray();
-      Assert.Equal(2, result.Length);
-      Assert.Single(result, r => r.DoSomething() == "Hello World");
-      Assert.Single(result, r => r.DoSomething() == "Goodbye World");
-    }
+			var container = new Container(builder);
+			var result = container.Resolve<IEnumerable<IDecorated>>().ToArray();
+			Assert.Equal(2, result.Length);
+			Assert.Single(result, r => r.DoSomething() == "Hello World");
+			Assert.Single(result, r => r.DoSomething() == "Goodbye World");
+		}
 
-    [Fact]
-    public void ShouldUseGenericDecorator()
-    {
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType<StringHandler, IHandler<string>>();
-      builder.RegisterType<DoubleHandler, IHandler<double>>();
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
-      var container = new Container(builder);
-      var result = container.Resolve<IHandler<string>>();
-      var result2 = container.Resolve<IHandler<double>>();
-      Assert.IsType<GenericDecoratingHandler<string>>(result);
-      Assert.IsType<GenericDecoratingHandler<double>>(result2);
-    }
+		[Fact]
+		public void ShouldUseGenericDecorator()
+		{
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			var container = new Container(builder);
+			var result = container.Resolve<IHandler<string>>();
+			var result2 = container.Resolve<IHandler<double>>();
+			Assert.IsType<GenericDecoratingHandler<string>>(result);
+			Assert.IsType<GenericDecoratingHandler<double>>(result2);
+		}
 
-    [Fact]
-    public void ShouldUseGenericDecoratorRegisteredBeforeTypes()
-    {
-      //check that the decorator is registration order agnostic.
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
-      builder.RegisterType<StringHandler, IHandler<string>>();
-      builder.RegisterType<DoubleHandler, IHandler<double>>();
-      var container = new Container(builder);
-      var result = container.Resolve<IHandler<string>>();
-      var result2 = container.Resolve<IHandler<double>>();
-      Assert.IsType<GenericDecoratingHandler<string>>(result);
-      Assert.IsType<GenericDecoratingHandler<double>>(result2);
-    }
+		[Fact]
+		public void ShouldUseGenericDecoratorRegisteredBeforeTypes()
+		{
+			//check that the decorator is registration order agnostic.
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
+			var container = new Container(builder);
+			var result = container.Resolve<IHandler<string>>();
+			var result2 = container.Resolve<IHandler<double>>();
+			Assert.IsType<GenericDecoratingHandler<string>>(result);
+			Assert.IsType<GenericDecoratingHandler<double>>(result2);
+		}
 
-    [Fact]
-    public void ShouldDecorateGenericDecorator()
-    {
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType<StringHandler, IHandler<string>>();
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler2<>), typeof(IHandler<>));
-      var container = new Container(builder);
-      var result = container.Resolve<IHandler<string>>();
-      Assert.IsType<GenericDecoratingHandler2<string>>(result);
-      Assert.Equal("((This is a string: Hello World) Decorated) Decorated again :)", result.Handle("Hello World"));
-    }
+		[Fact]
+		public void ShouldDecorateGenericDecorator()
+		{
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler2<>), typeof(IHandler<>));
+			var container = new Container(builder);
+			var result = container.Resolve<IHandler<string>>();
+			Assert.IsType<GenericDecoratingHandler2<string>>(result);
+			Assert.Equal("((This is a string: Hello World) Decorated) Decorated again :)", result.Handle("Hello World"));
+		}
 
-    public void ShouldDecorateOnlyOneClosedGeneric()
-    {
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType<StringHandler, IHandler<string>>();
-      builder.RegisterType<DoubleHandler, IHandler<double>>();
-      builder.RegisterDecorator<GenericDecoratingHandler<string>, IHandler<string>>();
-      var container = new Container(builder);
-      var result1 = container.Resolve<IHandler<string>>();
-      var result2 = container.Resolve<IHandler<double>>();
+		public void ShouldDecorateOnlyOneClosedGeneric()
+		{
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
+			builder.RegisterDecorator<GenericDecoratingHandler<string>, IHandler<string>>();
+			var container = new Container(builder);
+			var result1 = container.Resolve<IHandler<string>>();
+			var result2 = container.Resolve<IHandler<double>>();
 
-      Assert.IsType<DoubleHandler>(result2);
-      Assert.IsType<GenericDecoratingHandler<string>>(result1);
-    }
+			Assert.IsType<DoubleHandler>(result2);
+			Assert.IsType<GenericDecoratingHandler<string>>(result1);
+		}
 
-    [Fact]
-    public void ShouldInjectAdditionalDecoratorForOneClosedGeneric()
-    {
-      //in this test we register an open generic decorator
-      //and then register another decorator specialised for string.
-      //when we get a handler for the double type, we should get only one decorator
-      //when we get a handler for the string type, we should get the two decorators - the open generic
-      //decorator wrapping the specialised decorator, wrapping the string handler.
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType<StringHandler, IHandler<string>>();
-      builder.RegisterType<DoubleHandler, IHandler<double>>();
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
+		[Fact]
+		public void ShouldInjectAdditionalDecoratorForOneClosedGeneric()
+		{
+			//in this test we register an open generic decorator
+			//and then register another decorator specialised for string.
+			//when we get a handler for the double type, we should get only one decorator
+			//when we get a handler for the string type, we should get the two decorators - the open generic
+			//decorator wrapping the specialised decorator, wrapping the string handler.
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
 
-      var container = new Container(builder);
-      var result = container.Resolve<IHandler<double>>();
-      var result2 = container.Resolve<IHandler<string>>();
-      Assert.IsType<GenericDecoratingHandler<double>>(result);
-      Assert.IsType<GenericDecoratingHandler<string>>(result2);
-      var handled = result2.Handle("Hello World");
-      Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
-    }
+			var container = new Container(builder);
+			var result = container.Resolve<IHandler<double>>();
+			var result2 = container.Resolve<IHandler<string>>();
+			Assert.IsType<GenericDecoratingHandler<double>>(result);
+			Assert.IsType<GenericDecoratingHandler<string>>(result2);
+			var handled = result2.Handle("Hello World");
+			Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
+		}
 
-    [Fact]
-    public void ShouldInjectAdditionDecorateForOneClosedGenericAddedBeforeRegistrations()
-    {
-      //as above, but checking that it works when the decorators are applied first
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
-      builder.RegisterType<StringHandler, IHandler<string>>();
-      builder.RegisterType<DoubleHandler, IHandler<double>>();
+		[Fact]
+		public void ShouldInjectAdditionDecorateForOneClosedGenericAddedBeforeRegistrations()
+		{
+			//as above, but checking that it works when the decorators are applied first
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
+			builder.RegisterType<StringHandler, IHandler<string>>();
+			builder.RegisterType<DoubleHandler, IHandler<double>>();
 
-      var container = new Container(builder);
-      var result = container.Resolve<IHandler<double>>();
-      var result2 = container.Resolve<IHandler<string>>();
-      Assert.IsType<GenericDecoratingHandler<double>>(result);
-      Assert.IsType<GenericDecoratingHandler<string>>(result2);
-      var handled = result2.Handle("Hello World");
-      Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
-    }
+			var container = new Container(builder);
+			var result = container.Resolve<IHandler<double>>();
+			var result2 = container.Resolve<IHandler<string>>();
+			Assert.IsType<GenericDecoratingHandler<double>>(result);
+			Assert.IsType<GenericDecoratingHandler<string>>(result2);
+			var handled = result2.Handle("Hello World");
+			Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
+		}
 
-    [Fact]
-    public void ShouldDecorateGenericHandler()
-    {
-      TargetContainer builder = new TargetContainer();
-      builder.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
-      builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
-      var container = new Container(builder);
-      Assert.IsType<GenericDecoratingHandler<string>>(container.Resolve<IHandler<string>>());
-    }
-  }
+		[Fact]
+		public void ShouldDecorateGenericHandler()
+		{
+			TargetContainer builder = new TargetContainer();
+			builder.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
+			builder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+			var container = new Container(builder);
+			Assert.IsType<GenericDecoratingHandler<string>>(container.Resolve<IHandler<string>>());
+		}
+
+		#region SHOULD THE DECORATOR SUPPORT THIS WITH CHILD CONTAINERS/CHILD TARGET CONTAINERS?
+
+		//[Fact]
+		public void ChildContainerShouldDecorateParent()
+		{
+			//pretty sure this will fail - and there's a question as to whether it should
+			TargetContainer containerBuilder = new TargetContainer();
+			Container container = new Container(containerBuilder);
+			TargetContainer childContainerBuilder = new TargetContainer();
+			var childContainer = new OverridingContainer(container, childContainerBuilder);
+
+			containerBuilder.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
+			//the test only passes if we also register the above target in the child container
+			//childContainerBuilder.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
+			childContainerBuilder.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+
+			var result = childContainer.Resolve<IHandler<string>>();
+			Assert.IsType<GenericDecoratingHandler<string>>(result);
+		}
+
+		//[Fact]
+		public void ChildTargetContainerShouldDecorateParent()
+		{
+			//let's try it this way instead.  I somehow think this will not work either.
+			TargetContainer targetContainer = new TargetContainer();
+			TargetContainer childTargetContainer = new ChildTargetContainer(targetContainer);
+			var container = new Container(childTargetContainer);
+			targetContainer.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
+			childTargetContainer.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
+
+			var result = container.Resolve<IHandler<string>>();
+			Assert.IsType<GenericDecoratingHandler<string>>(result);
+		}
+
+		#endregion
+	}
 }

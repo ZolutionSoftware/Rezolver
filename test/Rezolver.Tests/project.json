@@ -2,12 +2,12 @@
   "version": "1.0.0-*",
   "testRunner": "xunit",
   "dependencies": {
-    "Rezolver.Configuration.Json": "1.0.10-*",
-    "Rezolver.Logging": "1.0.0-alpha-*",
+    "Rezolver.Configuration.Json": "1.0.10",
+    "Rezolver.Logging": "1.0.0",
     "xunit": "2.2.0-beta3-build3402",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Rezolver.Shared": {
-      "version": "1.0.10-alpha-*",
+      "version": "1.0.10",
       "type": "build"
     }
   },

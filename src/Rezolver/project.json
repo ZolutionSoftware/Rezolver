@@ -1,14 +1,19 @@
 {
-  "description": "Rezolver - A new dependency injection framework",
-  "version": "1.0.0-alpha-2",
+  
+  "version": "1.0.0",
+  "title": "Rezolver IOC Framework",
+  "description": "Rezolver offers all the most common features of any IOC container plus the ability to create new lightweight containers which override others.",
   "packOptions": {
+    "summary": "Rezolver - An IOC/DI framework",
     "tags": [ "ioc", "di", "portable", "rezolver" ],
-    "projectUrl": "http://rezolver.co.uk"
+    "projectUrl": "http://rezolver.co.uk",
+    "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"
   },
   "authors": [ "Zolution Software Ltd" ],
+  "copyright": "2014 onwards Zolution Software Ltd",
   "dependencies": {
     "Rezolver.Shared": {
-      "version": "1.0.10-*",
+      "version": "1.0.10",
       "type": "build"
     }
 

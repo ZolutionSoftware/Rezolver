@@ -95,7 +95,6 @@ namespace Rezolver.Tests
 			container.RegisterObject(10);
 			container.Register(f.AsDelegateTarget());
 
-
 			var result = container.Resolve<string>();
 			Assert.Equal("String #10", result);
 		}

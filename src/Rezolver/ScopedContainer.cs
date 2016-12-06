@@ -115,8 +115,8 @@ namespace Rezolver
       ConcurrentBag<object> instances = null;
       if (_objects.TryGetValue(context, out instances))
       {
-        //important to return a read-only collection here to avoid modification
-        return new ReadOnlyCollection<object>(instances.ToArray());
+        //important to return a fixed array here to avoid modification
+        return instances.ToArray();
       }
       else
         return Enumerable.Empty<object>();

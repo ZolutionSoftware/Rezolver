@@ -1,16 +1,19 @@
 ﻿{
-  "version": "1.0.0-alpha-200",
-  "description": "Logging classes for Rezolver",
-  "authors": [ "Zolution Software Ltd" ],
+  "version": "1.0.0",
+  "title": "Rezolver Logging/Tracking framework",
+  "description": "Logging classes and abstractions for the Rezolver framework.  Most useful for developers looking to extend Rezolver.",
   "packOptions": {
-    "tags": [ "ioc", "di", "portable", "rezolver", "logging" ],
+    "summary": "Provides diagnostics for Rezolver containers",
+    "tags": [ "ioc", "di", "portable", "rezolver" ],
     "projectUrl": "http://rezolver.co.uk",
-    "licenseUrl": ""
+    "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"
   },
+  "authors": [ "Zolution Software Ltd" ],
+  "copyright": "2014 onwards Zolution Software Ltd",
   "dependencies": {
-    "Rezolver": "1.0.0-alpha-*",
+    "Rezolver": "1.0.0",
     "Rezolver.Shared": {
-      "version": "1.0.10-alpha-*",
+      "version": "1.0.10",
       "type": "build"
     }
   },

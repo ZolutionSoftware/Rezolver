@@ -21,11 +21,43 @@ references:
   href: rezolver-api/Microsoft.Extensions.DependencyInjection.IServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_IServiceCollectionExtensions_RegisterTargets_IServiceCollection_ITargetContainer_
   commentId: M:Microsoft.Extensions.DependencyInjection.IServiceCollectionExtensions.RegisterTargets(IServiceCollection,ITargetContainer)
   fullName: Microsoft.Extensions.DependencyInjection.IServiceCollectionExtensions.RegisterTargets(IServiceCollection, ITargetContainer)
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions
+  name: RezolverServiceCollectionExtensions
+  href: rezolver-api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions
+  commentId: T:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer(IServiceCollection)
+  name: CreateRezolverContainer(IServiceCollection)
+  href: rezolver-api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions_CreateRezolverContainer_IServiceCollection_
+  commentId: M:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer(IServiceCollection)
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer(IServiceCollection)
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets(IServiceCollection,ITargetContainer)
+  name: RegisterTargets(IServiceCollection, ITargetContainer)
+  href: rezolver-api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions_RegisterTargets_IServiceCollection_ITargetContainer_
+  commentId: M:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets(IServiceCollection,ITargetContainer)
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets(IServiceCollection, ITargetContainer)
 - uid: Rezolver
   name: Rezolver
   href: rezolver-api/Rezolver.html#Rezolver
   commentId: N:Rezolver
   fullName: Rezolver
+- uid: Rezolver.AliasTargetContainerExtensions
+  name: AliasTargetContainerExtensions
+  href: rezolver-api/Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions
+  commentId: T:Rezolver.AliasTargetContainerExtensions
+  fullName: Rezolver.AliasTargetContainerExtensions
+- uid: Rezolver.AliasTargetContainerExtensions.RegisterAlias(Rezolver.ITargetContainer,System.Type,System.Type)
+  name: RegisterAlias(ITargetContainer, Type, Type)
+  href: rezolver-api/Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type_
+  commentId: M:Rezolver.AliasTargetContainerExtensions.RegisterAlias(Rezolver.ITargetContainer,System.Type,System.Type)
+  fullName: Rezolver.AliasTargetContainerExtensions.RegisterAlias(Rezolver.ITargetContainer, System.Type, System.Type)
+- uid: Rezolver.AliasTargetContainerExtensions.RegisterAlias``2(Rezolver.ITargetContainer)
+  name: RegisterAlias<TAlias, TOriginal>(ITargetContainer)
+  href: rezolver-api/Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias__2_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.AliasTargetContainerExtensions.RegisterAlias``2(Rezolver.ITargetContainer)
+  name.vb: RegisterAlias(Of TAlias, TOriginal)(ITargetContainer)
+  fullName: Rezolver.AliasTargetContainerExtensions.RegisterAlias<TAlias, TOriginal>(Rezolver.ITargetContainer)
+  fullName.vb: Rezolver.AliasTargetContainerExtensions.RegisterAlias(Of TAlias, TOriginal)(Rezolver.ITargetContainer)
 - uid: Rezolver.Builder
   name: Builder
   href: rezolver-api/Rezolver.Builder.html#Rezolver_Builder
@@ -2052,13 +2084,13 @@ references:
   href: rezolver-api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression_System_Type_NewExpression_Rezolver_ITargetAdapter_
   commentId: M:Rezolver.ConstructorTarget.FromNewExpression(System.Type,NewExpression,Rezolver.ITargetAdapter)
   fullName: Rezolver.ConstructorTarget.FromNewExpression(System.Type, NewExpression, Rezolver.ITargetAdapter)
-- uid: Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},Rezolver.ITargetAdapter)
-  name: FromNewExpression<T>(Expression<Func<RezolveContextExpressionHelper, T>>, ITargetAdapter)
-  href: rezolver-api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___Rezolver_ITargetAdapter_
-  commentId: M:Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},Rezolver.ITargetAdapter)
-  name.vb: FromNewExpression(Of T)(Expression(Of Func(Of RezolveContextExpressionHelper, T)), ITargetAdapter)
-  fullName: Rezolver.ConstructorTarget.FromNewExpression<T>(Expression<System.Func<Rezolver.RezolveContextExpressionHelper, T>>, Rezolver.ITargetAdapter)
-  fullName.vb: Rezolver.ConstructorTarget.FromNewExpression(Of T)(Expression(Of System.Func(Of Rezolver.RezolveContextExpressionHelper, T)), Rezolver.ITargetAdapter)
+- uid: Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{``0}},Rezolver.ITargetAdapter)
+  name: FromNewExpression<T>(Expression<Func<T>>, ITargetAdapter)
+  href: rezolver-api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{``0}},Rezolver.ITargetAdapter)
+  name.vb: FromNewExpression(Of T)(Expression(Of Func(Of T)), ITargetAdapter)
+  fullName: Rezolver.ConstructorTarget.FromNewExpression<T>(Expression<System.Func<T>>, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.ConstructorTarget.FromNewExpression(Of T)(Expression(Of System.Func(Of T)), Rezolver.ITargetAdapter)
 - uid: Rezolver.ConstructorTarget.NamedArgs
   name: NamedArgs
   href: rezolver-api/Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_NamedArgs
@@ -2283,6 +2315,23 @@ references:
   href: rezolver-api/Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget_RegisterContainer_System_Type_Rezolver_ITargetContainer_
   commentId: M:Rezolver.DecoratorTarget.RegisterContainer(System.Type,Rezolver.ITargetContainer)
   fullName: Rezolver.DecoratorTarget.RegisterContainer(System.Type, Rezolver.ITargetContainer)
+- uid: Rezolver.DecoratorTargetContainerExtensions
+  name: DecoratorTargetContainerExtensions
+  href: rezolver-api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions
+  commentId: T:Rezolver.DecoratorTargetContainerExtensions
+  fullName: Rezolver.DecoratorTargetContainerExtensions
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainerOwner,System.Type,System.Type)
+  name: RegisterDecorator(ITargetContainerOwner, Type, Type)
+  href: rezolver-api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainerOwner_System_Type_System_Type_
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainerOwner,System.Type,System.Type)
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainerOwner, System.Type, System.Type)
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``2(Rezolver.ITargetContainerOwner)
+  name: RegisterDecorator<TDecorator, TDecorated>(ITargetContainerOwner)
+  href: rezolver-api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``2(Rezolver.ITargetContainerOwner)
+  name.vb: RegisterDecorator(Of TDecorator, TDecorated)(ITargetContainerOwner)
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorator, TDecorated>(Rezolver.ITargetContainerOwner)
+  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorator, TDecorated)(Rezolver.ITargetContainerOwner)
 - uid: Rezolver.DefaultPropertyBindingBehaviour
   name: DefaultPropertyBindingBehaviour
   href: rezolver-api/Rezolver.DefaultPropertyBindingBehaviour.html#Rezolver_DefaultPropertyBindingBehaviour
@@ -2345,51 +2394,399 @@ references:
   href: rezolver-api/Rezolver.DefaultTarget.html#Rezolver_DefaultTarget_DeclaredType
   commentId: P:Rezolver.DefaultTarget.DeclaredType
   fullName: Rezolver.DefaultTarget.DeclaredType
+- uid: Rezolver.DelegateTarget
+  name: DelegateTarget
+  href: rezolver-api/Rezolver.DelegateTarget.html#Rezolver_DelegateTarget
+  commentId: T:Rezolver.DelegateTarget
+  fullName: Rezolver.DelegateTarget
+- uid: Rezolver.DelegateTarget.#ctor(System.Delegate,System.Type)
+  name: DelegateTarget(Delegate, Type)
+  href: rezolver-api/Rezolver.DelegateTarget.html#Rezolver_DelegateTarget__ctor_System_Delegate_System_Type_
+  commentId: M:Rezolver.DelegateTarget.#ctor(System.Delegate,System.Type)
+  fullName: Rezolver.DelegateTarget.DelegateTarget(System.Delegate, System.Type)
+- uid: Rezolver.DelegateTarget.CreateExpressionBase(Rezolver.CompileContext)
+  name: CreateExpressionBase(CompileContext)
+  href: rezolver-api/Rezolver.DelegateTarget.html#Rezolver_DelegateTarget_CreateExpressionBase_Rezolver_CompileContext_
+  commentId: M:Rezolver.DelegateTarget.CreateExpressionBase(Rezolver.CompileContext)
+  fullName: Rezolver.DelegateTarget.CreateExpressionBase(Rezolver.CompileContext)
+- uid: Rezolver.DelegateTarget.DeclaredType
+  name: DeclaredType
+  href: rezolver-api/Rezolver.DelegateTarget.html#Rezolver_DelegateTarget_DeclaredType
+  commentId: P:Rezolver.DelegateTarget.DeclaredType
+  fullName: Rezolver.DelegateTarget.DeclaredType
+- uid: Rezolver.DelegateTarget.Factory
+  name: Factory
+  href: rezolver-api/Rezolver.DelegateTarget.html#Rezolver_DelegateTarget_Factory
+  commentId: P:Rezolver.DelegateTarget.Factory
+  fullName: Rezolver.DelegateTarget.Factory
 - uid: Rezolver.DelegateTarget`1
-  name: DelegateTarget<T>
+  name: DelegateTarget<TResult>
   href: rezolver-api/Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1
   commentId: T:Rezolver.DelegateTarget`1
-  name.vb: DelegateTarget(Of T)
-  fullName: Rezolver.DelegateTarget<T>
-  fullName.vb: Rezolver.DelegateTarget(Of T)
+  name.vb: DelegateTarget(Of TResult)
+  fullName: Rezolver.DelegateTarget<TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of TResult)
 - uid: Rezolver.DelegateTarget`1.#ctor(System.Func{`0},System.Type)
-  name: DelegateTarget(Func<T>, Type)
+  name: DelegateTarget(Func<TResult>, Type)
   href: rezolver-api/Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1__ctor_System_Func__0__System_Type_
   commentId: M:Rezolver.DelegateTarget`1.#ctor(System.Func{`0},System.Type)
-  name.vb: DelegateTarget(Func(Of T), Type)
-  fullName: Rezolver.DelegateTarget<T>.DelegateTarget(System.Func<T>, System.Type)
-  fullName.vb: Rezolver.DelegateTarget(Of T).DelegateTarget(System.Func(Of T), System.Type)
-- uid: Rezolver.DelegateTarget`1.#ctor(System.Func{Rezolver.RezolveContext,`0},System.Type)
-  name: DelegateTarget(Func<RezolveContext, T>, Type)
-  href: rezolver-api/Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1__ctor_System_Func_Rezolver_RezolveContext__0__System_Type_
-  commentId: M:Rezolver.DelegateTarget`1.#ctor(System.Func{Rezolver.RezolveContext,`0},System.Type)
-  name.vb: DelegateTarget(Func(Of RezolveContext, T), Type)
-  fullName: Rezolver.DelegateTarget<T>.DelegateTarget(System.Func<Rezolver.RezolveContext, T>, System.Type)
-  fullName.vb: Rezolver.DelegateTarget(Of T).DelegateTarget(System.Func(Of Rezolver.RezolveContext, T), System.Type)
+  name.vb: DelegateTarget(Func(Of TResult), Type)
+  fullName: Rezolver.DelegateTarget<TResult>.DelegateTarget(System.Func<TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of TResult).DelegateTarget(System.Func(Of TResult), System.Type)
 - uid: Rezolver.DelegateTarget`1.CreateExpressionBase(Rezolver.CompileContext)
   name: CreateExpressionBase(CompileContext)
-  href: rezolver-api/Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_CreateExpressionBase_Rezolver_CompileContext_
+  href: rezolver-api/Rezolver.DelegateTarget`1.html#Rezolver_DelegateTarget_1_CreateExpressionBase_Rezolver_CompileContext_
   commentId: M:Rezolver.DelegateTarget`1.CreateExpressionBase(Rezolver.CompileContext)
   fullName: Rezolver.DelegateTarget<T>.CreateExpressionBase(Rezolver.CompileContext)
   fullName.vb: Rezolver.DelegateTarget(Of T).CreateExpressionBase(Rezolver.CompileContext)
 - uid: Rezolver.DelegateTarget`1.DeclaredType
   name: DeclaredType
-  href: rezolver-api/Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_DeclaredType
+  href: rezolver-api/Rezolver.DelegateTarget`1.html#Rezolver_DelegateTarget_1_DeclaredType
   commentId: P:Rezolver.DelegateTarget`1.DeclaredType
   fullName: Rezolver.DelegateTarget<T>.DeclaredType
   fullName.vb: Rezolver.DelegateTarget(Of T).DeclaredType
-- uid: Rezolver.DelegateTarget`1.NullaryFactory
-  name: NullaryFactory
-  href: rezolver-api/Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_NullaryFactory
-  commentId: P:Rezolver.DelegateTarget`1.NullaryFactory
-  fullName: Rezolver.DelegateTarget<T>.NullaryFactory
-  fullName.vb: Rezolver.DelegateTarget(Of T).NullaryFactory
-- uid: Rezolver.DelegateTarget`1.UnaryFactory
-  name: UnaryFactory
-  href: rezolver-api/Rezolver.DelegateTarget-1.html#Rezolver_DelegateTarget_1_UnaryFactory
-  commentId: P:Rezolver.DelegateTarget`1.UnaryFactory
-  fullName: Rezolver.DelegateTarget<T>.UnaryFactory
-  fullName.vb: Rezolver.DelegateTarget(Of T).UnaryFactory
+- uid: Rezolver.DelegateTarget`10
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-10.html#Rezolver_DelegateTarget_10
+  commentId: T:Rezolver.DelegateTarget`10
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)
+- uid: Rezolver.DelegateTarget`10.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-10.html#Rezolver_DelegateTarget_10__ctor_System_Func__0__1__2__3__4__5__6__7__8__9__System_Type_
+  commentId: M:Rezolver.DelegateTarget`10.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`11
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-11.html#Rezolver_DelegateTarget_11
+  commentId: T:Rezolver.DelegateTarget`11
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)
+- uid: Rezolver.DelegateTarget`11.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-11.html#Rezolver_DelegateTarget_11__ctor_System_Func__0__1__2__3__4__5__6__7__8__9__10__System_Type_
+  commentId: M:Rezolver.DelegateTarget`11.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`12
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-12.html#Rezolver_DelegateTarget_12
+  commentId: T:Rezolver.DelegateTarget`12
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)
+- uid: Rezolver.DelegateTarget`12.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-12.html#Rezolver_DelegateTarget_12__ctor_System_Func__0__1__2__3__4__5__6__7__8__9__10__11__System_Type_
+  commentId: M:Rezolver.DelegateTarget`12.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`13
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-13.html#Rezolver_DelegateTarget_13
+  commentId: T:Rezolver.DelegateTarget`13
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)
+- uid: Rezolver.DelegateTarget`13.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-13.html#Rezolver_DelegateTarget_13__ctor_System_Func__0__1__2__3__4__5__6__7__8__9__10__11__12__System_Type_
+  commentId: M:Rezolver.DelegateTarget`13.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`14
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-14.html#Rezolver_DelegateTarget_14
+  commentId: T:Rezolver.DelegateTarget`14
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)
+- uid: Rezolver.DelegateTarget`14.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-14.html#Rezolver_DelegateTarget_14__ctor_System_Func__0__1__2__3__4__5__6__7__8__9__10__11__12__13__System_Type_
+  commentId: M:Rezolver.DelegateTarget`14.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`15
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-15.html#Rezolver_DelegateTarget_15
+  commentId: T:Rezolver.DelegateTarget`15
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)
+- uid: Rezolver.DelegateTarget`15.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-15.html#Rezolver_DelegateTarget_15__ctor_System_Func__0__1__2__3__4__5__6__7__8__9__10__11__12__13__14__System_Type_
+  commentId: M:Rezolver.DelegateTarget`15.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`16
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-16.html#Rezolver_DelegateTarget_16
+  commentId: T:Rezolver.DelegateTarget`16
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)
+- uid: Rezolver.DelegateTarget`16.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14,`15},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-16.html#Rezolver_DelegateTarget_16__ctor_System_Func__0__1__2__3__4__5__6__7__8__9__10__11__12__13__14__15__System_Type_
+  commentId: M:Rezolver.DelegateTarget`16.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14,`15},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`2
+  name: DelegateTarget<T, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-2.html#Rezolver_DelegateTarget_2
+  commentId: T:Rezolver.DelegateTarget`2
+  name.vb: DelegateTarget(Of T, TResult)
+  fullName: Rezolver.DelegateTarget<T, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T, TResult)
+- uid: Rezolver.DelegateTarget`2.#ctor(System.Func{`0,`1},System.Type)
+  name: DelegateTarget(Func<T, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-2.html#Rezolver_DelegateTarget_2__ctor_System_Func__0__1__System_Type_
+  commentId: M:Rezolver.DelegateTarget`2.#ctor(System.Func{`0,`1},System.Type)
+  name.vb: DelegateTarget(Func(Of T, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T, TResult>.DelegateTarget(System.Func<T, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T, TResult).DelegateTarget(System.Func(Of T, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`3
+  name: DelegateTarget<T1, T2, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-3.html#Rezolver_DelegateTarget_3
+  commentId: T:Rezolver.DelegateTarget`3
+  name.vb: DelegateTarget(Of T1, T2, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, TResult)
+- uid: Rezolver.DelegateTarget`3.#ctor(System.Func{`0,`1,`2},System.Type)
+  name: DelegateTarget(Func<T1, T2, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-3.html#Rezolver_DelegateTarget_3__ctor_System_Func__0__1__2__System_Type_
+  commentId: M:Rezolver.DelegateTarget`3.#ctor(System.Func{`0,`1,`2},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, TResult>.DelegateTarget(System.Func<T1, T2, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, TResult).DelegateTarget(System.Func(Of T1, T2, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`4
+  name: DelegateTarget<T1, T2, T3, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-4.html#Rezolver_DelegateTarget_4
+  commentId: T:Rezolver.DelegateTarget`4
+  name.vb: DelegateTarget(Of T1, T2, T3, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, TResult)
+- uid: Rezolver.DelegateTarget`4.#ctor(System.Func{`0,`1,`2,`3},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-4.html#Rezolver_DelegateTarget_4__ctor_System_Func__0__1__2__3__System_Type_
+  commentId: M:Rezolver.DelegateTarget`4.#ctor(System.Func{`0,`1,`2,`3},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, TResult>.DelegateTarget(System.Func<T1, T2, T3, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, TResult).DelegateTarget(System.Func(Of T1, T2, T3, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`5
+  name: DelegateTarget<T1, T2, T3, T4, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-5.html#Rezolver_DelegateTarget_5
+  commentId: T:Rezolver.DelegateTarget`5
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, TResult)
+- uid: Rezolver.DelegateTarget`5.#ctor(System.Func{`0,`1,`2,`3,`4},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-5.html#Rezolver_DelegateTarget_5__ctor_System_Func__0__1__2__3__4__System_Type_
+  commentId: M:Rezolver.DelegateTarget`5.#ctor(System.Func{`0,`1,`2,`3,`4},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`6
+  name: DelegateTarget<T1, T2, T3, T4, T5, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-6.html#Rezolver_DelegateTarget_6
+  commentId: T:Rezolver.DelegateTarget`6
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, TResult)
+- uid: Rezolver.DelegateTarget`6.#ctor(System.Func{`0,`1,`2,`3,`4,`5},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-6.html#Rezolver_DelegateTarget_6__ctor_System_Func__0__1__2__3__4__5__System_Type_
+  commentId: M:Rezolver.DelegateTarget`6.#ctor(System.Func{`0,`1,`2,`3,`4,`5},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`7
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-7.html#Rezolver_DelegateTarget_7
+  commentId: T:Rezolver.DelegateTarget`7
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, TResult)
+- uid: Rezolver.DelegateTarget`7.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-7.html#Rezolver_DelegateTarget_7__ctor_System_Func__0__1__2__3__4__5__6__System_Type_
+  commentId: M:Rezolver.DelegateTarget`7.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`8
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-8.html#Rezolver_DelegateTarget_8
+  commentId: T:Rezolver.DelegateTarget`8
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, TResult)
+- uid: Rezolver.DelegateTarget`8.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-8.html#Rezolver_DelegateTarget_8__ctor_System_Func__0__1__2__3__4__5__6__7__System_Type_
+  commentId: M:Rezolver.DelegateTarget`8.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, TResult), System.Type)
+- uid: Rezolver.DelegateTarget`9
+  name: DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, TResult>
+  href: rezolver-api/Rezolver.DelegateTarget-9.html#Rezolver_DelegateTarget_9
+  commentId: T:Rezolver.DelegateTarget`9
+  name.vb: DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, TResult>
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)
+- uid: Rezolver.DelegateTarget`9.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8},System.Type)
+  name: DelegateTarget(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTarget-9.html#Rezolver_DelegateTarget_9__ctor_System_Func__0__1__2__3__4__5__6__7__8__System_Type_
+  commentId: M:Rezolver.DelegateTarget`9.#ctor(System.Func{`0,`1,`2,`3,`4,`5,`6,`7,`8},System.Type)
+  name.vb: DelegateTarget(Func(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult), Type)
+  fullName: Rezolver.DelegateTarget<T1, T2, T3, T4, T5, T6, T7, T8, TResult>.DelegateTarget(System.Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTarget(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult).DelegateTarget(System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions
+  name: DelegateTargetContainerExtensions
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions
+  commentId: T:Rezolver.DelegateTargetContainerExtensions
+  fullName: Rezolver.DelegateTargetContainerExtensions
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Rezolver.ITargetContainer,System.Delegate,System.Type)
+  name: RegisterDelegate(ITargetContainer, Delegate, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Rezolver.ITargetContainer,System.Delegate,System.Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Rezolver.ITargetContainer, System.Delegate, System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``1(Rezolver.ITargetContainer,System.Func{``0},System.Type)
+  name: RegisterDelegate<TResult>(ITargetContainer, Func<TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``1(Rezolver.ITargetContainer,System.Func{``0},System.Type)
+  name.vb: RegisterDelegate(Of TResult)(ITargetContainer, Func(Of TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<TResult>(Rezolver.ITargetContainer, System.Func<TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of TResult)(Rezolver.ITargetContainer, System.Func(Of TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``10(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__10_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``10(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``11(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__11_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``11(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``12(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__12_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``12(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``13(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__13_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``13(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``14(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__14_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``14(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``15(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__15_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``15(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``16(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__16_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``16(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``2(Rezolver.ITargetContainer,System.Func{``0,``1},System.Type)
+  name: RegisterDelegate<T, TResult>(ITargetContainer, Func<T, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``2(Rezolver.ITargetContainer,System.Func{``0,``1},System.Type)
+  name.vb: RegisterDelegate(Of T, TResult)(ITargetContainer, Func(Of T, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T, TResult>(Rezolver.ITargetContainer, System.Func<T, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T, TResult)(Rezolver.ITargetContainer, System.Func(Of T, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``3(Rezolver.ITargetContainer,System.Func{``0,``1,``2},System.Type)
+  name: RegisterDelegate<T1, T2, TResult>(ITargetContainer, Func<T1, T2, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``3(Rezolver.ITargetContainer,System.Func{``0,``1,``2},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, TResult)(ITargetContainer, Func(Of T1, T2, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``4(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3},System.Type)
+  name: RegisterDelegate<T1, T2, T3, TResult>(ITargetContainer, Func<T1, T2, T3, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``4(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, TResult)(ITargetContainer, Func(Of T1, T2, T3, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``5(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, TResult>(ITargetContainer, Func<T1, T2, T3, T4, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``5(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``6(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``6(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``7(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__7_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``7(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``8(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__8_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``8(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, TResult), System.Type)
+- uid: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``9(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.Type)
+  name: RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>, Type)
+  href: rezolver-api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__9_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8__System_Type_
+  commentId: M:Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``9(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.Type)
+  name.vb: RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult), Type)
+  fullName: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Rezolver.ITargetContainer, System.Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>, System.Type)
+  fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult), System.Type)
+- uid: Rezolver.DelegateTargetDelegateExtensions
+  name: DelegateTargetDelegateExtensions
+  href: rezolver-api/Rezolver.DelegateTargetDelegateExtensions.html#Rezolver_DelegateTargetDelegateExtensions
+  commentId: T:Rezolver.DelegateTargetDelegateExtensions
+  fullName: Rezolver.DelegateTargetDelegateExtensions
+- uid: Rezolver.DelegateTargetDelegateExtensions.AsDelegateTarget(System.Delegate,System.Type)
+  name: AsDelegateTarget(Delegate, Type)
+  href: rezolver-api/Rezolver.DelegateTargetDelegateExtensions.html#Rezolver_DelegateTargetDelegateExtensions_AsDelegateTarget_System_Delegate_System_Type_
+  commentId: M:Rezolver.DelegateTargetDelegateExtensions.AsDelegateTarget(System.Delegate,System.Type)
+  fullName: Rezolver.DelegateTargetDelegateExtensions.AsDelegateTarget(System.Delegate, System.Type)
 - uid: Rezolver.DelegateTargetExtensions
   name: DelegateTargetExtensions
   href: rezolver-api/Rezolver.DelegateTargetExtensions.html#Rezolver_DelegateTargetExtensions
@@ -2589,11 +2986,11 @@ references:
   href: rezolver-api/Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget
   commentId: T:Rezolver.ExpressionTarget
   fullName: Rezolver.ExpressionTarget
-- uid: Rezolver.ExpressionTarget.#ctor(Expression)
-  name: ExpressionTarget(Expression)
-  href: rezolver-api/Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget__ctor_Expression_
-  commentId: M:Rezolver.ExpressionTarget.#ctor(Expression)
-  fullName: Rezolver.ExpressionTarget.ExpressionTarget(Expression)
+- uid: Rezolver.ExpressionTarget.#ctor(Expression,System.Type)
+  name: ExpressionTarget(Expression, Type)
+  href: rezolver-api/Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget__ctor_Expression_System_Type_
+  commentId: M:Rezolver.ExpressionTarget.#ctor(Expression,System.Type)
+  fullName: Rezolver.ExpressionTarget.ExpressionTarget(Expression, System.Type)
 - uid: Rezolver.ExpressionTarget.#ctor(System.Func{Rezolver.CompileContext,Expression},System.Type)
   name: ExpressionTarget(Func<CompileContext, Expression>, Type)
   href: rezolver-api/Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget__ctor_System_Func_Rezolver_CompileContext_Expression__System_Type_
@@ -2621,6 +3018,18 @@ references:
   href: rezolver-api/Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_ExpressionFactory
   commentId: P:Rezolver.ExpressionTarget.ExpressionFactory
   fullName: Rezolver.ExpressionTarget.ExpressionFactory
+- uid: Rezolver.Functions
+  name: Functions
+  href: rezolver-api/Rezolver.Functions.html#Rezolver_Functions
+  commentId: T:Rezolver.Functions
+  fullName: Rezolver.Functions
+- uid: Rezolver.Functions.Resolve``1
+  name: Resolve<T>()
+  href: rezolver-api/Rezolver.Functions.html#Rezolver_Functions_Resolve__1
+  commentId: M:Rezolver.Functions.Resolve``1
+  name.vb: Resolve(Of T)()
+  fullName: Rezolver.Functions.Resolve<T>()
+  fullName.vb: Rezolver.Functions.Resolve(Of T)()
 - uid: Rezolver.GenericConstructorTarget
   name: GenericConstructorTarget
   href: rezolver-api/Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget
@@ -3380,6 +3789,42 @@ references:
   href: rezolver-api/Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.html#Rezolver_Microsoft_Extensions_DependencyInjection_RezolverRegistration_Populate_Rezolver_ContainerBase_IServiceCollection_
   commentId: M:Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.Populate(Rezolver.ContainerBase,IServiceCollection)
   fullName: Rezolver.Microsoft.Extensions.DependencyInjection.RezolverRegistration.Populate(Rezolver.ContainerBase, IServiceCollection)
+- uid: Rezolver.MSDIITargetContainerExtensions
+  name: MSDIITargetContainerExtensions
+  href: rezolver-api/Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions
+  commentId: T:Rezolver.MSDIITargetContainerExtensions
+  fullName: Rezolver.MSDIITargetContainerExtensions
+- uid: Rezolver.MSDIITargetContainerExtensions.Populate(Rezolver.ITargetContainer,IServiceCollection)
+  name: Populate(ITargetContainer, IServiceCollection)
+  href: rezolver-api/Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_Rezolver_ITargetContainer_IServiceCollection_
+  commentId: M:Rezolver.MSDIITargetContainerExtensions.Populate(Rezolver.ITargetContainer,IServiceCollection)
+  fullName: Rezolver.MSDIITargetContainerExtensions.Populate(Rezolver.ITargetContainer, IServiceCollection)
+- uid: Rezolver.MultipleTargetContainerExtensions
+  name: MultipleTargetContainerExtensions
+  href: rezolver-api/Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions
+  commentId: T:Rezolver.MultipleTargetContainerExtensions
+  fullName: Rezolver.MultipleTargetContainerExtensions
+- uid: Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer,Rezolver.ITarget[])
+  name: RegisterAll(ITargetContainer, ITarget[])
+  href: rezolver-api/Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_Rezolver_ITargetContainer_Rezolver_ITarget___
+  commentId: M:Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer,Rezolver.ITarget[])
+  name.vb: RegisterAll(ITargetContainer, ITarget())
+  fullName: Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer, Rezolver.ITarget[])
+  fullName.vb: Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer, Rezolver.ITarget())
+- uid: Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget})
+  name: RegisterAll(ITargetContainer, IEnumerable<ITarget>)
+  href: rezolver-api/Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__
+  commentId: M:Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget})
+  name.vb: RegisterAll(ITargetContainer, IEnumerable(Of ITarget))
+  fullName: Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer, System.Collections.Generic.IEnumerable<Rezolver.ITarget>)
+  fullName.vb: Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer, System.Collections.Generic.IEnumerable(Of Rezolver.ITarget))
+- uid: Rezolver.MultipleTargetContainerExtensions.RegisterMultiple(Rezolver.ITargetContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget},System.Type)
+  name: RegisterMultiple(ITargetContainer, IEnumerable<ITarget>, Type)
+  href: rezolver-api/Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterMultiple_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_
+  commentId: M:Rezolver.MultipleTargetContainerExtensions.RegisterMultiple(Rezolver.ITargetContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget},System.Type)
+  name.vb: RegisterMultiple(ITargetContainer, IEnumerable(Of ITarget), Type)
+  fullName: Rezolver.MultipleTargetContainerExtensions.RegisterMultiple(Rezolver.ITargetContainer, System.Collections.Generic.IEnumerable<Rezolver.ITarget>, System.Type)
+  fullName.vb: Rezolver.MultipleTargetContainerExtensions.RegisterMultiple(Rezolver.ITargetContainer, System.Collections.Generic.IEnumerable(Of Rezolver.ITarget), System.Type)
 - uid: Rezolver.ObjectTarget
   name: ObjectTarget
   href: rezolver-api/Rezolver.ObjectTarget.html#Rezolver_ObjectTarget
@@ -3415,6 +3860,18 @@ references:
   href: rezolver-api/Rezolver.ObjectTarget.html#Rezolver_ObjectTarget_Value
   commentId: P:Rezolver.ObjectTarget.Value
   fullName: Rezolver.ObjectTarget.Value
+- uid: Rezolver.ObjectTargetContainerExtensions
+  name: ObjectTargetContainerExtensions
+  href: rezolver-api/Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions
+  commentId: T:Rezolver.ObjectTargetContainerExtensions
+  fullName: Rezolver.ObjectTargetContainerExtensions
+- uid: Rezolver.ObjectTargetContainerExtensions.RegisterObject``1(Rezolver.ITargetContainer,``0,System.Type,System.Boolean)
+  name: RegisterObject<T>(ITargetContainer, T, Type, Boolean)
+  href: rezolver-api/Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject__1_Rezolver_ITargetContainer___0_System_Type_System_Boolean_
+  commentId: M:Rezolver.ObjectTargetContainerExtensions.RegisterObject``1(Rezolver.ITargetContainer,``0,System.Type,System.Boolean)
+  name.vb: RegisterObject(Of T)(ITargetContainer, T, Type, Boolean)
+  fullName: Rezolver.ObjectTargetContainerExtensions.RegisterObject<T>(Rezolver.ITargetContainer, T, System.Type, System.Boolean)
+  fullName.vb: Rezolver.ObjectTargetContainerExtensions.RegisterObject(Of T)(Rezolver.ITargetContainer, T, System.Type, System.Boolean)
 - uid: Rezolver.ObjectTargetExtensions
   name: ObjectTargetExtensions
   href: rezolver-api/Rezolver.ObjectTargetExtensions.html#Rezolver_ObjectTargetExtensions
@@ -3636,6 +4093,30 @@ references:
   href: rezolver-api/Rezolver.PropertyOrFieldBinding.html#Rezolver_PropertyOrFieldBinding_Target
   commentId: P:Rezolver.PropertyOrFieldBinding.Target
   fullName: Rezolver.PropertyOrFieldBinding.Target
+- uid: Rezolver.RegisterTypeDictionaryExtensions
+  name: RegisterTypeDictionaryExtensions
+  href: rezolver-api/Rezolver.RegisterTypeDictionaryExtensions.html#Rezolver_RegisterTypeDictionaryExtensions
+  commentId: T:Rezolver.RegisterTypeDictionaryExtensions
+  fullName: Rezolver.RegisterTypeDictionaryExtensions
+- uid: Rezolver.RegisterTypeDictionaryExtensions.RegisterType(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterType(ITargetContainer, Type, Type, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.RegisterTypeDictionaryExtensions.html#Rezolver_RegisterTypeDictionaryExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.RegisterTypeDictionaryExtensions.RegisterType(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)
+  fullName: Rezolver.RegisterTypeDictionaryExtensions.RegisterType(Rezolver.ITargetContainer, System.Type, System.Type, Rezolver.IPropertyBindingBehaviour)
+- uid: Rezolver.RegisterTypeDictionaryExtensions.RegisterType``1(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterType<TObject>(ITargetContainer, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.RegisterTypeDictionaryExtensions.html#Rezolver_RegisterTypeDictionaryExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.RegisterTypeDictionaryExtensions.RegisterType``1(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name.vb: RegisterType(Of TObject)(ITargetContainer, IPropertyBindingBehaviour)
+  fullName: Rezolver.RegisterTypeDictionaryExtensions.RegisterType<TObject>(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+  fullName.vb: Rezolver.RegisterTypeDictionaryExtensions.RegisterType(Of TObject)(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+- uid: Rezolver.RegisterTypeDictionaryExtensions.RegisterType``2(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterType<TObject, TService>(ITargetContainer, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.RegisterTypeDictionaryExtensions.html#Rezolver_RegisterTypeDictionaryExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.RegisterTypeDictionaryExtensions.RegisterType``2(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name.vb: RegisterType(Of TObject, TService)(ITargetContainer, IPropertyBindingBehaviour)
+  fullName: Rezolver.RegisterTypeDictionaryExtensions.RegisterType<TObject, TService>(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+  fullName.vb: Rezolver.RegisterTypeDictionaryExtensions.RegisterType(Of TObject, TService)(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
 - uid: Rezolver.RezolveContext
   name: RezolveContext
   href: rezolver-api/Rezolver.RezolveContext.html#Rezolver_RezolveContext
@@ -3942,6 +4423,30 @@ references:
   href: rezolver-api/Rezolver.ScopedTarget.html#Rezolver_ScopedTarget_SuppressScopeTracking
   commentId: P:Rezolver.ScopedTarget.SuppressScopeTracking
   fullName: Rezolver.ScopedTarget.SuppressScopeTracking
+- uid: Rezolver.ScopedTargetContainerExtensions
+  name: ScopedTargetContainerExtensions
+  href: rezolver-api/Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions
+  commentId: T:Rezolver.ScopedTargetContainerExtensions
+  fullName: Rezolver.ScopedTargetContainerExtensions
+- uid: Rezolver.ScopedTargetContainerExtensions.RegisterScoped(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterScoped(ITargetContainer, Type, Type, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.ScopedTargetContainerExtensions.RegisterScoped(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)
+  fullName: Rezolver.ScopedTargetContainerExtensions.RegisterScoped(Rezolver.ITargetContainer, System.Type, System.Type, Rezolver.IPropertyBindingBehaviour)
+- uid: Rezolver.ScopedTargetContainerExtensions.RegisterScoped``1(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterScoped<TObject>(ITargetContainer, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.ScopedTargetContainerExtensions.RegisterScoped``1(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name.vb: RegisterScoped(Of TObject)(ITargetContainer, IPropertyBindingBehaviour)
+  fullName: Rezolver.ScopedTargetContainerExtensions.RegisterScoped<TObject>(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+  fullName.vb: Rezolver.ScopedTargetContainerExtensions.RegisterScoped(Of TObject)(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+- uid: Rezolver.ScopedTargetContainerExtensions.RegisterScoped``2(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterScoped<TObject, TService>(ITargetContainer, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.ScopedTargetContainerExtensions.RegisterScoped``2(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name.vb: RegisterScoped(Of TObject, TService)(ITargetContainer, IPropertyBindingBehaviour)
+  fullName: Rezolver.ScopedTargetContainerExtensions.RegisterScoped<TObject, TService>(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+  fullName.vb: Rezolver.ScopedTargetContainerExtensions.RegisterScoped(Of TObject, TService)(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
 - uid: Rezolver.SingletonTarget
   name: SingletonTarget
   href: rezolver-api/Rezolver.SingletonTarget.html#Rezolver_SingletonTarget
@@ -3982,6 +4487,30 @@ references:
   href: rezolver-api/Rezolver.SingletonTarget.html#Rezolver_SingletonTarget_SuppressScopeTracking
   commentId: P:Rezolver.SingletonTarget.SuppressScopeTracking
   fullName: Rezolver.SingletonTarget.SuppressScopeTracking
+- uid: Rezolver.SingletonTargetDictionaryExtensions
+  name: SingletonTargetDictionaryExtensions
+  href: rezolver-api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions
+  commentId: T:Rezolver.SingletonTargetDictionaryExtensions
+  fullName: Rezolver.SingletonTargetDictionaryExtensions
+- uid: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterSingleton(ITargetContainer, Type, Type, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)
+  fullName: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer, System.Type, System.Type, Rezolver.IPropertyBindingBehaviour)
+- uid: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterSingleton<TObject>(ITargetContainer, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name.vb: RegisterSingleton(Of TObject)(ITargetContainer, IPropertyBindingBehaviour)
+  fullName: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton<TObject>(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+  fullName.vb: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Of TObject)(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+- uid: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name: RegisterSingleton<TObject, TService>(ITargetContainer, IPropertyBindingBehaviour)
+  href: rezolver-api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_
+  commentId: M:Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)
+  name.vb: RegisterSingleton(Of TObject, TService)(ITargetContainer, IPropertyBindingBehaviour)
+  fullName: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton<TObject, TService>(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
+  fullName.vb: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Of TObject, TService)(Rezolver.ITargetContainer, Rezolver.IPropertyBindingBehaviour)
 - uid: Rezolver.TargetAdapter
   name: TargetAdapter
   href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter
@@ -4007,58 +4536,257 @@ references:
   href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_Instance
   commentId: P:Rezolver.TargetAdapter.Instance
   fullName: Rezolver.TargetAdapter.Instance
-- uid: Rezolver.TargetAdapter.Visit(Expression)
-  name: Visit(Expression)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_Visit_Expression_
-  commentId: M:Rezolver.TargetAdapter.Visit(Expression)
-  fullName: Rezolver.TargetAdapter.Visit(Expression)
-- uid: Rezolver.TargetAdapter.VisitConstant(ConstantExpression)
-  name: VisitConstant(ConstantExpression)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitConstant_ConstantExpression_
-  commentId: M:Rezolver.TargetAdapter.VisitConstant(ConstantExpression)
-  fullName: Rezolver.TargetAdapter.VisitConstant(ConstantExpression)
-- uid: Rezolver.TargetAdapter.VisitLambda``1(Expression{``0})
-  name: VisitLambda<T>(Expression<T>)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitLambda__1_Expression___0__
-  commentId: M:Rezolver.TargetAdapter.VisitLambda``1(Expression{``0})
-  name.vb: VisitLambda(Of T)(Expression(Of T))
-  fullName: Rezolver.TargetAdapter.VisitLambda<T>(Expression<T>)
-  fullName.vb: Rezolver.TargetAdapter.VisitLambda(Of T)(Expression(Of T))
-- uid: Rezolver.TargetAdapter.VisitMemberAssignment(MemberAssignment)
-  name: VisitMemberAssignment(MemberAssignment)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitMemberAssignment_MemberAssignment_
-  commentId: M:Rezolver.TargetAdapter.VisitMemberAssignment(MemberAssignment)
-  fullName: Rezolver.TargetAdapter.VisitMemberAssignment(MemberAssignment)
-- uid: Rezolver.TargetAdapter.VisitMemberInit(MemberInitExpression)
-  name: VisitMemberInit(MemberInitExpression)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitMemberInit_MemberInitExpression_
-  commentId: M:Rezolver.TargetAdapter.VisitMemberInit(MemberInitExpression)
-  fullName: Rezolver.TargetAdapter.VisitMemberInit(MemberInitExpression)
-- uid: Rezolver.TargetAdapter.VisitMemberListBinding(MemberListBinding)
-  name: VisitMemberListBinding(MemberListBinding)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitMemberListBinding_MemberListBinding_
-  commentId: M:Rezolver.TargetAdapter.VisitMemberListBinding(MemberListBinding)
-  fullName: Rezolver.TargetAdapter.VisitMemberListBinding(MemberListBinding)
-- uid: Rezolver.TargetAdapter.VisitMemberMemberBinding(MemberMemberBinding)
-  name: VisitMemberMemberBinding(MemberMemberBinding)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitMemberMemberBinding_MemberMemberBinding_
-  commentId: M:Rezolver.TargetAdapter.VisitMemberMemberBinding(MemberMemberBinding)
-  fullName: Rezolver.TargetAdapter.VisitMemberMemberBinding(MemberMemberBinding)
-- uid: Rezolver.TargetAdapter.VisitMethodCall(MethodCallExpression)
-  name: VisitMethodCall(MethodCallExpression)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitMethodCall_MethodCallExpression_
-  commentId: M:Rezolver.TargetAdapter.VisitMethodCall(MethodCallExpression)
-  fullName: Rezolver.TargetAdapter.VisitMethodCall(MethodCallExpression)
-- uid: Rezolver.TargetAdapter.VisitNew(NewExpression)
-  name: VisitNew(NewExpression)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitNew_NewExpression_
-  commentId: M:Rezolver.TargetAdapter.VisitNew(NewExpression)
-  fullName: Rezolver.TargetAdapter.VisitNew(NewExpression)
-- uid: Rezolver.TargetAdapter.VisitParameter(ParameterExpression)
-  name: VisitParameter(ParameterExpression)
-  href: rezolver-api/Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_VisitParameter_ParameterExpression_
-  commentId: M:Rezolver.TargetAdapter.VisitParameter(ParameterExpression)
-  fullName: Rezolver.TargetAdapter.VisitParameter(ParameterExpression)
+- uid: Rezolver.TargetAdapterCreateExtensions
+  name: TargetAdapterCreateExtensions
+  href: rezolver-api/Rezolver.TargetAdapterCreateExtensions.html#Rezolver_TargetAdapterCreateExtensions
+  commentId: T:Rezolver.TargetAdapterCreateExtensions
+  fullName: Rezolver.TargetAdapterCreateExtensions
+- uid: Rezolver.TargetAdapterCreateExtensions.CreateTarget``1(Rezolver.ITargetAdapter,Expression{System.Func{``0}})
+  name: CreateTarget<TResult>(ITargetAdapter, Expression<Func<TResult>>)
+  href: rezolver-api/Rezolver.TargetAdapterCreateExtensions.html#Rezolver_TargetAdapterCreateExtensions_CreateTarget__1_Rezolver_ITargetAdapter_Expression_System_Func___0___
+  commentId: M:Rezolver.TargetAdapterCreateExtensions.CreateTarget``1(Rezolver.ITargetAdapter,Expression{System.Func{``0}})
+  name.vb: CreateTarget(Of TResult)(ITargetAdapter, Expression(Of Func(Of TResult)))
+  fullName: Rezolver.TargetAdapterCreateExtensions.CreateTarget<TResult>(Rezolver.ITargetAdapter, Expression<System.Func<TResult>>)
+  fullName.vb: Rezolver.TargetAdapterCreateExtensions.CreateTarget(Of TResult)(Rezolver.ITargetAdapter, Expression(Of System.Func(Of TResult)))
+- uid: Rezolver.TargetAdapterCreateExtensions.CreateTarget``1(Rezolver.ITargetAdapter,Expression{System.Func{Rezolver.RezolveContext,``0}})
+  name: CreateTarget<TResult>(ITargetAdapter, Expression<Func<RezolveContext, TResult>>)
+  href: rezolver-api/Rezolver.TargetAdapterCreateExtensions.html#Rezolver_TargetAdapterCreateExtensions_CreateTarget__1_Rezolver_ITargetAdapter_Expression_System_Func_Rezolver_RezolveContext___0___
+  commentId: M:Rezolver.TargetAdapterCreateExtensions.CreateTarget``1(Rezolver.ITargetAdapter,Expression{System.Func{Rezolver.RezolveContext,``0}})
+  name.vb: CreateTarget(Of TResult)(ITargetAdapter, Expression(Of Func(Of RezolveContext, TResult)))
+  fullName: Rezolver.TargetAdapterCreateExtensions.CreateTarget<TResult>(Rezolver.ITargetAdapter, Expression<System.Func<Rezolver.RezolveContext, TResult>>)
+  fullName.vb: Rezolver.TargetAdapterCreateExtensions.CreateTarget(Of TResult)(Rezolver.ITargetAdapter, Expression(Of System.Func(Of Rezolver.RezolveContext, TResult)))
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions
+  name: TargetAdapterGenericRegisterExpressionExtensions
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions
+  commentId: T:Rezolver.TargetAdapterGenericRegisterExpressionExtensions
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``1(Rezolver.ITargetContainer,Expression{System.Func{``0}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<TResult>(ITargetContainer, Expression<Func<TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func___0___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``1(Rezolver.ITargetContainer,Expression{System.Func{``0}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of TResult)(ITargetContainer, Expression(Of Func(Of TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<TResult>(Rezolver.ITargetContainer, Expression<System.Func<TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``1(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<TResult>(ITargetContainer, Expression<Func<RezolveContext, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``1(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``10(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__10_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``10(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``10(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__10_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___8___9___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``10(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``11(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__11_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``11(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``11(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__11_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___8___9___10___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``11(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``12(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__12_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``12(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``12(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__12_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___8___9___10___11___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``12(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``13(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__13_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``13(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``13(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__13_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___8___9___10___11___12___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``13(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``14(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__14_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``14(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``14(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__14_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___8___9___10___11___12___13___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``14(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``15(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__15_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``15(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``15(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__15_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``15(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``16(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__16_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``16(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``2(Rezolver.ITargetContainer,Expression{System.Func{``0,``1}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T, TResult>(ITargetContainer, Expression<Func<T, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__2_Rezolver_ITargetContainer_Expression_System_Func___0___1___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``2(Rezolver.ITargetContainer,Expression{System.Func{``0,``1}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T, TResult)(ITargetContainer, Expression(Of Func(Of T, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``2(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T, TResult>(ITargetContainer, Expression<Func<RezolveContext, T, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__2_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``2(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``3(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, TResult>(ITargetContainer, Expression<Func<T1, T2, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__3_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``3(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``3(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__3_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``3(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``4(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__4_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``4(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``4(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__4_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``4(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``5(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__5_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``5(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``5(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__5_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``5(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``6(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__6_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``6(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``6(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__6_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``6(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``7(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__7_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``7(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``7(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__7_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``7(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``8(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__8_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``8(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``8(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__8_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``8(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``9(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(ITargetContainer, Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__9_Rezolver_ITargetContainer_Expression_System_Func___0___1___2___3___4___5___6___7___8___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``9(Rezolver.ITargetContainer,Expression{System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)(ITargetContainer, Expression(Of Func(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Rezolver.ITargetContainer, Expression<System.Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``9(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, TResult>(ITargetContainer, Expression<Func<RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, TResult>>, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterGenericRegisterExpressionExtensions.html#Rezolver_TargetAdapterGenericRegisterExpressionExtensions_RegisterExpression__9_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_RezolveContext___0___1___2___3___4___5___6___7___8___System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression``9(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.RezolveContext,``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Type,Rezolver.ITargetAdapter)
+  name.vb: RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, TResult)(ITargetContainer, Expression(Of Func(Of RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, TResult)), Type, ITargetAdapter)
+  fullName: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression<T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Rezolver.ITargetContainer, Expression<System.Func<Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, TResult>>, System.Type, Rezolver.ITargetAdapter)
+  fullName.vb: Rezolver.TargetAdapterGenericRegisterExpressionExtensions.RegisterExpression(Of T2, T3, T4, T5, T6, T7, T8, T9, TResult)(Rezolver.ITargetContainer, Expression(Of System.Func(Of Rezolver.RezolveContext, T2, T3, T4, T5, T6, T7, T8, T9, TResult)), System.Type, Rezolver.ITargetAdapter)
+- uid: Rezolver.TargetAdapterRegisterExpressionExtensions
+  name: TargetAdapterRegisterExpressionExtensions
+  href: rezolver-api/Rezolver.TargetAdapterRegisterExpressionExtensions.html#Rezolver_TargetAdapterRegisterExpressionExtensions
+  commentId: T:Rezolver.TargetAdapterRegisterExpressionExtensions
+  fullName: Rezolver.TargetAdapterRegisterExpressionExtensions
+- uid: Rezolver.TargetAdapterRegisterExpressionExtensions.RegisterExpression(Rezolver.ITargetContainer,Expression,System.Type,Rezolver.ITargetAdapter)
+  name: RegisterExpression(ITargetContainer, Expression, Type, ITargetAdapter)
+  href: rezolver-api/Rezolver.TargetAdapterRegisterExpressionExtensions.html#Rezolver_TargetAdapterRegisterExpressionExtensions_RegisterExpression_Rezolver_ITargetContainer_Expression_System_Type_Rezolver_ITargetAdapter_
+  commentId: M:Rezolver.TargetAdapterRegisterExpressionExtensions.RegisterExpression(Rezolver.ITargetContainer,Expression,System.Type,Rezolver.ITargetAdapter)
+  fullName: Rezolver.TargetAdapterRegisterExpressionExtensions.RegisterExpression(Rezolver.ITargetContainer, Expression, System.Type, Rezolver.ITargetAdapter)
 - uid: Rezolver.TargetAssemblyCompiler
   name: TargetAssemblyCompiler
   href: rezolver-api/Rezolver.TargetAssemblyCompiler.html#Rezolver_TargetAssemblyCompiler
@@ -4313,6 +5041,56 @@ references:
   href: rezolver-api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_
   commentId: M:Rezolver.TargetDictionaryContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)
   fullName: Rezolver.TargetDictionaryContainer.RegisterContainer(System.Type, Rezolver.ITargetContainer)
+- uid: Rezolver.TargetExpression
+  name: TargetExpression
+  href: rezolver-api/Rezolver.TargetExpression.html#Rezolver_TargetExpression
+  commentId: T:Rezolver.TargetExpression
+  fullName: Rezolver.TargetExpression
+- uid: Rezolver.TargetExpression.#ctor(Rezolver.ITarget)
+  name: TargetExpression(ITarget)
+  href: rezolver-api/Rezolver.TargetExpression.html#Rezolver_TargetExpression__ctor_Rezolver_ITarget_
+  commentId: M:Rezolver.TargetExpression.#ctor(Rezolver.ITarget)
+  fullName: Rezolver.TargetExpression.TargetExpression(Rezolver.ITarget)
+- uid: Rezolver.TargetExpression.CanReduce
+  name: CanReduce
+  href: rezolver-api/Rezolver.TargetExpression.html#Rezolver_TargetExpression_CanReduce
+  commentId: P:Rezolver.TargetExpression.CanReduce
+  fullName: Rezolver.TargetExpression.CanReduce
+- uid: Rezolver.TargetExpression.NodeType
+  name: NodeType
+  href: rezolver-api/Rezolver.TargetExpression.html#Rezolver_TargetExpression_NodeType
+  commentId: P:Rezolver.TargetExpression.NodeType
+  fullName: Rezolver.TargetExpression.NodeType
+- uid: Rezolver.TargetExpression.Reduce
+  name: Reduce()
+  href: rezolver-api/Rezolver.TargetExpression.html#Rezolver_TargetExpression_Reduce
+  commentId: M:Rezolver.TargetExpression.Reduce
+  fullName: Rezolver.TargetExpression.Reduce()
+- uid: Rezolver.TargetExpression.Target
+  name: Target
+  href: rezolver-api/Rezolver.TargetExpression.html#Rezolver_TargetExpression_Target
+  commentId: P:Rezolver.TargetExpression.Target
+  fullName: Rezolver.TargetExpression.Target
+- uid: Rezolver.TargetExpression.Type
+  name: Type
+  href: rezolver-api/Rezolver.TargetExpression.html#Rezolver_TargetExpression_Type
+  commentId: P:Rezolver.TargetExpression.Type
+  fullName: Rezolver.TargetExpression.Type
+- uid: Rezolver.TargetExpressionRewriter
+  name: TargetExpressionRewriter
+  href: rezolver-api/Rezolver.TargetExpressionRewriter.html#Rezolver_TargetExpressionRewriter
+  commentId: T:Rezolver.TargetExpressionRewriter
+  fullName: Rezolver.TargetExpressionRewriter
+- uid: Rezolver.TargetExpressionRewriter.#ctor(Rezolver.CompileContext)
+  name: TargetExpressionRewriter(CompileContext)
+  href: rezolver-api/Rezolver.TargetExpressionRewriter.html#Rezolver_TargetExpressionRewriter__ctor_Rezolver_CompileContext_
+  commentId: M:Rezolver.TargetExpressionRewriter.#ctor(Rezolver.CompileContext)
+  fullName: Rezolver.TargetExpressionRewriter.TargetExpressionRewriter(Rezolver.CompileContext)
+- uid: Rezolver.TargetExpressionRewriter.Visit(Expression)
+  name: Visit(Expression)
+  href: rezolver-api/Rezolver.TargetExpressionRewriter.html#Rezolver_TargetExpressionRewriter_Visit_Expression_
+  commentId: M:Rezolver.TargetExpressionRewriter.Visit(Expression)
+  fullName: Rezolver.TargetExpressionRewriter.Visit(Expression)
 - uid: Rezolver.TargetListContainer
   name: TargetListContainer
   href: rezolver-api/Rezolver.TargetListContainer.html#Rezolver_TargetListContainer

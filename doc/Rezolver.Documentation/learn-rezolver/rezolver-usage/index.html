@@ -152,7 +152,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowAllConstructorParametersToBeProvided()
     {
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.RegisterExpression(context =&gt; new NoDefaultConstructor(NoDefaultConstructor.ExpectedValue));
       var result = container.Resolve&lt;NoDefaultConstructor&gt;();
       Assert.Equal(NoDefaultConstructor.ExpectedValue, result.Value);
@@ -172,8 +172,8 @@ namespace Rezolver.Tests
       //tests like this might also fail.  I probably should isolate that - but I actually want to test ConstructorTarget&#39;s
       //integration with the default adapter here.
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-      var container = CreateADefaultRezolver();
-      container.RegisterExpression(context =&gt; new NoDefaultConstructor(context.Resolve&lt;int&gt;()));
+      var container = CreateContainer();
+      container.RegisterExpression(context =&gt; new NoDefaultConstructor(Functions.Resolve&lt;int&gt;()));
       container.Register(intTarget, typeof(int));
       var result = container.Resolve&lt;NoDefaultConstructor&gt;();
       Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -184,7 +184,7 @@ namespace Rezolver.Tests
       //basically the same as above - except this doesn&#39;t provide the constructor call explicitly.
       var target = ConstructorTarget.Auto&lt;NoDefaultConstructor&gt;();
       var intTarget = NoDefaultConstructor.ExpectedRezolvedValue.AsObjectTarget();
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register(intTarget, typeof(int));
       var result = GetValueFromTarget&lt;NoDefaultConstructor&gt;(target, container);
       Assert.Equal(NoDefaultConstructor.ExpectedRezolvedValue, result.Value);
@@ -198,7 +198,7 @@ namespace Rezolver.Tests
 
       var target = ConstructorTarget.Auto&lt;NoDefaultConstructor2&gt;();
       var intTarget = NoDefaultConstructor2.ExpectedBestValue.AsObjectTarget();
-      var container = CreateADefaultRezolver();
+      var container = CreateContainer();
       container.Register(intTarget);
       container.Register(target);
       var result = container.Resolve&lt;NoDefaultConstructor2&gt;();
@@ -226,7 +226,7 @@ namespace Rezolver.Tests
     {
       Container container = new Container(compiler: new TargetDelegateCompiler());
       container.Register((10).AsObjectTarget());
-      container.RegisterExpression(c =&gt; new HasProperty() { Value = c.Resolve&lt;int&gt;() });
+      container.RegisterExpression(c =&gt; new HasProperty() { Value = Functions.Resolve&lt;int&gt;() });
       var result = (HasProperty)container.Resolve(typeof(HasProperty));
       Assert.Equal(10, result.Value);
     }

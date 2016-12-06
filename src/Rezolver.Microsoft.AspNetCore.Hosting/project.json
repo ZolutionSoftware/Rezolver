@@ -1,16 +1,20 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "1.0.0",
+  "title": "Rezolver Asp.Net Core application extensions",
   "description": "Extensions for IWebHostBuilder to simplify the use of Rezolver containers in Asp.Net Core applications",
-  "authors": [ "Zolution Software Ltd" ],
   "packOptions": {
-    "tags": [ "rezolver", "ioc", "di" ],
-    "projectUrl": "http://rezolver.co.uk"
+    "summary": "Provides a simple API following the MS suggested pattern to set Rezolver as your web application's ServiceProvider.",
+    "tags": [ "ioc", "di", "portable", "rezolver" ],
+    "projectUrl": "http://rezolver.co.uk",
+    "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"
   },
+  "authors": [ "Zolution Software Ltd" ],
+  "copyright": "2014 onwards Zolution Software Ltd",
   "dependencies": {
     "NETStandard.Library": "1.6.1",
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0-*",
-    "Rezolver.Microsoft.Extensions.DependencyInjection": "1.0.0-*",
-    "Rezolver.Microsoft.Extensions.Logging": "1.0.0-alpha-*"
+    "Rezolver.Microsoft.Extensions.DependencyInjection": "1.0.0",
+    "Rezolver.Microsoft.Extensions.Logging": "1.0.0"
   },
 
   "frameworks": {

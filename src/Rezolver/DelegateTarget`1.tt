@@ -13,23 +13,16 @@ namespace Rezolver
 <#  
 	var nthParamDescriptors = new[] { "st", "nd", "rd", "th" };
   	string[] typeParamStrings = new string[16];
-	//string[] paramStrings = new string[16];
 	NameAndDescriptor[][] allTypeNamesAndDescriptors= new NameAndDescriptor[16][];
-	//NameAndDescriptor[][] allNamesAndDescriptors= new NameAndDescriptor[16][];
 	string typeParamsString;
-	//string paramsString;
 	NameAndDescriptor[] typeNamesAndDescriptors;
-	//NameAndDescriptor[] namesAndDescriptors;
+
 	for(var f = 0; f<16; f++)
 	{ 
 		var typeParamNames = (f == 1 ? new[] {"T"} : Enumerable.Range(1, f).Select(i => $"T{i}")).Concat(new[] { "TResult" }).ToArray();
-		//var paramNames = (f == 1 ? new[] {"p"} : Enumerable.Range(1, f).Select(i => $"p{i}")).ToArray();
 		var typeParamDescriptors = typeParamNames.Select((s, i) => s != "TResult" ? string.Format("{0}{1}", i+1, i < nthParamDescriptors.Length ? nthParamDescriptors[i] : nthParamDescriptors[nthParamDescriptors.Length - 1 ]) : "").ToArray();
-		//var paramDescriptors = paramNames.Select((s, i) => string.Format("{0}{1}", i+1, i < nthParamDescriptors.Length ? nthParamDescriptors[i] : nthParamDescriptors[nthParamDescriptors.Length - 1 ])).ToArray();
 		typeParamsString = typeParamStrings[f] = string.Join(", ", typeParamNames);
-		//paramStrings[f] = string.Join(", ", paramNames);
 		typeNamesAndDescriptors = allTypeNamesAndDescriptors[f] = typeParamNames.Zip(typeParamDescriptors, (n,d) => new NameAndDescriptor() { Name=n, Descriptor=d }).Where(tp => tp.Name!="TResult").ToArray();
-		//allNamesAndDescriptors[f] = paramNames.Zip(paramDescriptors, (n,d) => new NameAndDescriptor() { Name=n, Descriptor=d }).ToArray();
 #>
 
 	/// <summary>
@@ -73,9 +66,7 @@ namespace Rezolver
 	for(int f = 0; f<16; f++) 
 	{ 
 		typeParamsString = typeParamStrings[f];
-		//paramsString = paramStrings[f];
 		typeNamesAndDescriptors = allTypeNamesAndDescriptors[f]; 
-		//namesAndDescriptors = allNamesAndDescriptors[f];
 
 #>		
 		/// <summary>Creates a <see cref="DelegateTarget{ <#= typeParamsString #> }" /> and registers it in the given
@@ -99,7 +90,7 @@ namespace Rezolver
 #>	}
 }
 <#+
-				public class NameAndDescriptor {
+				private class NameAndDescriptor {
 								public string Name { get; set; }
 								public string Descriptor { get; set; }
 				}

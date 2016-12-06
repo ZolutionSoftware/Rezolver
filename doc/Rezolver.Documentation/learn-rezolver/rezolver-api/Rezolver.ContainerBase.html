@@ -140,7 +140,7 @@ explicitly except the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver
 will never assume they do.</p>
 <p>The reason this class does is to make it easier to create a new container and to register targets into it without having to worry about
 managing a separate <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance in your application root - because all the registration extension methods defined
-in <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions">ITargetContainerExtensions</a> will be available to developers in code which has a reference to this class, or one derived from it.</p>
+in <a class="xref" href="Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions">SingletonTargetDictionaryExtensions</a> will be available to developers in code which has a reference to this class, or one derived from it.</p>
 <p>Note also that calling <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> on an instance of this type will always
 cause a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notsupportedexception(v=vs.110).aspx">System.NotSupportedException</a> to be thrown.</p>
 </div>

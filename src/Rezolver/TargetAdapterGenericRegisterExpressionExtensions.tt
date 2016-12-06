@@ -85,7 +85,7 @@ namespace Rezolver
 #>	}
 }
 <#+
-				public class NameAndDescriptor {
+				private class NameAndDescriptor {
 								public string Name { get; set; }
 								public string Descriptor { get; set; }
 				}

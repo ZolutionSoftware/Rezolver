@@ -1,10 +1,20 @@
 ﻿{
-  "version": "1.0.0-alpha-100",
+  "version": "1.0.0",
+  "title": "Rezolver Extensions to .Net Core Logging",
+  "description": "Extensions to be able to use the logging types from Microsoft.Extensions.Logging with Rezolver.Logging",
+  "packOptions": {
+    "summary": "Can be used alongside Rezolver.Logging to output Rezolver diagnostics output through the Microsoft loggers",
+    "tags": [ "ioc", "di", "portable", "rezolver" ],
+    "projectUrl": "http://rezolver.co.uk",
+    "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"
+  },
+  "authors": [ "Zolution Software Ltd" ],
+  "copyright": "2014 onwards Zolution Software Ltd",
   "dependencies": {
     "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
     "Microsoft.Extensions.Options": "1.1.0",
     "NETStandard.Library": "1.6.1",
-    "Rezolver.Logging": "1.0.0-alpha-*"
+    "Rezolver.Logging": "1.0.0"
   },
 
   "frameworks": {

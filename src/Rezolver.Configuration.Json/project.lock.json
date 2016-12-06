@@ -12,7 +12,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -25,11 +25,11 @@
           "net451/Rezolver.dll": {}
         }
       },
-      "Rezolver.Configuration/1.0.10-alpha-1": {
+      "Rezolver.Configuration/1.0.10": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "net451/Rezolver.Configuration.dll": {}
@@ -38,7 +38,7 @@
           "net451/Rezolver.Configuration.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10-alpha-1": {
+      "Rezolver.Shared/1.0.10": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -66,7 +66,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "frameworkAssemblies": [
@@ -79,11 +79,11 @@
           "net46/Rezolver.dll": {}
         }
       },
-      "Rezolver.Configuration/1.0.10-alpha-1": {
+      "Rezolver.Configuration/1.0.10": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "net46/Rezolver.Configuration.dll": {}
@@ -92,7 +92,7 @@
           "net46/Rezolver.Configuration.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10-alpha-1": {
+      "Rezolver.Shared/1.0.10": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "frameworkAssemblies": [
@@ -586,7 +586,7 @@
           "ref/netstandard1.0/System.Xml.XDocument.dll": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -600,12 +600,12 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Configuration/1.0.10-alpha-1": {
+      "Rezolver.Configuration/1.0.10": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Configuration.dll": {}
@@ -614,7 +614,7 @@
           "netstandard1.1/Rezolver.Configuration.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10-alpha-1": {
+      "Rezolver.Shared/1.0.10": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2961,17 +2961,17 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Rezolver/1.0.0-alpha-2": {
+    "Rezolver/1.0.0": {
       "type": "project",
       "path": "../Rezolver/project.json",
       "msbuildProject": "../Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Configuration/1.0.10-alpha-1": {
+    "Rezolver.Configuration/1.0.10": {
       "type": "project",
       "path": "../Rezolver.Configuration/project.json",
       "msbuildProject": "../Rezolver.Configuration/Rezolver.Configuration.xproj"
     },
-    "Rezolver.Shared/1.0.10-alpha-1": {
+    "Rezolver.Shared/1.0.10": {
       "type": "project",
       "path": "../Rezolver.Shared/project.json",
       "msbuildProject": "../Rezolver.Shared/Rezolver.Shared.xproj"
@@ -2980,8 +2980,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Newtonsoft.Json >= 9.0.1",
-      "Rezolver.Configuration >= 1.0.10-*",
-      "Rezolver.Shared >= 1.0.10-*"
+      "Rezolver.Configuration >= 1.0.10",
+      "Rezolver.Shared >= 1.0.10"
     ],
     ".NETFramework,Version=v4.5.1": [],
     ".NETFramework,Version=v4.6": [],

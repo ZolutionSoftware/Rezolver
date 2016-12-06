@@ -2603,7 +2603,7 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2617,12 +2617,12 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Configuration/1.0.10-alpha-1": {
+      "Rezolver.Configuration/1.0.10": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Configuration.dll": {}
@@ -2631,7 +2631,7 @@
           "netstandard1.1/Rezolver.Configuration.dll": {}
         }
       },
-      "Rezolver.Configuration.Json/1.0.10-alpha-1": {
+      "Rezolver.Configuration.Json/1.0.10": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2646,12 +2646,12 @@
           "netstandard1.1/Rezolver.Configuration.Json.dll": {}
         }
       },
-      "Rezolver.Logging/1.0.0-alpha-200": {
+      "Rezolver.Logging/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Logging.dll": {}
@@ -2660,7 +2660,7 @@
           "netstandard1.1/Rezolver.Logging.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10-alpha-1": {
+      "Rezolver.Shared/1.0.10": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -3056,7 +3056,7 @@
           "lib/net45/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -3069,11 +3069,11 @@
           "net451/Rezolver.dll": {}
         }
       },
-      "Rezolver.Configuration/1.0.10-alpha-1": {
+      "Rezolver.Configuration/1.0.10": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "net451/Rezolver.Configuration.dll": {}
@@ -3082,7 +3082,7 @@
           "net451/Rezolver.Configuration.dll": {}
         }
       },
-      "Rezolver.Configuration.Json/1.0.10-alpha-1": {
+      "Rezolver.Configuration.Json/1.0.10": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -3096,11 +3096,11 @@
           "net451/Rezolver.Configuration.Json.dll": {}
         }
       },
-      "Rezolver.Logging/1.0.0-alpha-200": {
+      "Rezolver.Logging/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "frameworkAssemblies": [
           "System.Linq.Expressions"
@@ -3112,7 +3112,7 @@
           "net451/Rezolver.Logging.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10-alpha-1": {
+      "Rezolver.Shared/1.0.10": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -8609,27 +8609,27 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Rezolver/1.0.0-alpha-2": {
+    "Rezolver/1.0.0": {
       "type": "project",
       "path": "../../src/Rezolver/project.json",
       "msbuildProject": "../../src/Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Configuration/1.0.10-alpha-1": {
+    "Rezolver.Configuration/1.0.10": {
       "type": "project",
       "path": "../../src/Rezolver.Configuration/project.json",
       "msbuildProject": "../../src/Rezolver.Configuration/Rezolver.Configuration.xproj"
     },
-    "Rezolver.Configuration.Json/1.0.10-alpha-1": {
+    "Rezolver.Configuration.Json/1.0.10": {
       "type": "project",
       "path": "../../src/Rezolver.Configuration.Json/project.json",
       "msbuildProject": "../../src/Rezolver.Configuration.Json/Rezolver.Configuration.Json.xproj"
     },
-    "Rezolver.Logging/1.0.0-alpha-200": {
+    "Rezolver.Logging/1.0.0": {
       "type": "project",
       "path": "../../src/Rezolver.Logging/project.json",
       "msbuildProject": "../../src/Rezolver.Logging/Rezolver.Logging.xproj"
     },
-    "Rezolver.Shared/1.0.10-alpha-1": {
+    "Rezolver.Shared/1.0.10": {
       "type": "project",
       "path": "../../src/Rezolver.Shared/project.json",
       "msbuildProject": "../../src/Rezolver.Shared/Rezolver.Shared.xproj"
@@ -8637,9 +8637,9 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Rezolver.Configuration.Json >= 1.0.10-*",
-      "Rezolver.Logging >= 1.0.0-alpha-*",
-      "Rezolver.Shared >= 1.0.10-alpha-*",
+      "Rezolver.Configuration.Json >= 1.0.10",
+      "Rezolver.Logging >= 1.0.0",
+      "Rezolver.Shared >= 1.0.10",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta3-build3402"
     ],

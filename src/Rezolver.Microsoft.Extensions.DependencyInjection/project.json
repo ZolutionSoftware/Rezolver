@@ -1,23 +1,26 @@
 ﻿{
-  "version": "1.0.0-alpha-2",
-  "description": "Rezolver adapter for the Microsoft.Extensions.DependencyInjection abstractions",
-  "authors": [ "Zolution Software Ltd" ],
+  "version": "1.0.0",
+  "title": "Rezolver .Net Core IServiceProvider implementation",
+  "description": "Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)",
   "packOptions": {
-    "tags": [ "rezolver", "ioc", "di" ],
+    "summary": "If you are developing an Asp.Net Core or .Net core applicaton and wish to use Rezolver as your container - you need this library.",
+    "tags": [ "ioc", "di", "portable", "rezolver" ],
     "projectUrl": "http://rezolver.co.uk",
-    "licenseUrl": ""
+    "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"
   },
+  "copyright": "2014 onwards Zolution Software Ltd",
+  "authors": [ "Zolution Software Ltd" ],
   "dependencies": {
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-*",
-    "Rezolver": "1.0.0-alpha-*"
+    "Rezolver": "1.0.0"
   },
 
   "frameworks": {
     "net451": {
-      
+
     },
     "netstandard1.1": {
-      
+
     }
   },
   "scripts": { "postcompile": [ "dotnet pack --output ../../.nupkg --no-build --configuration %compile:Configuration% " ] }

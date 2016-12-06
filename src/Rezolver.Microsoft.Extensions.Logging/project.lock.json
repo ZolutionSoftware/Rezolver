@@ -467,7 +467,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -480,11 +480,11 @@
           "net451/Rezolver.dll": {}
         }
       },
-      "Rezolver.Logging/1.0.0-alpha-200": {
+      "Rezolver.Logging/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "frameworkAssemblies": [
           "System.Linq.Expressions"
@@ -976,7 +976,7 @@
           "ref/netstandard1.0/System.Xml.XDocument.dll": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -990,12 +990,12 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Logging/1.0.0-alpha-200": {
+      "Rezolver.Logging/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Logging.dll": {}
@@ -3234,12 +3234,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Rezolver/1.0.0-alpha-2": {
+    "Rezolver/1.0.0": {
       "type": "project",
       "path": "../Rezolver/project.json",
       "msbuildProject": "../Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Logging/1.0.0-alpha-200": {
+    "Rezolver.Logging/1.0.0": {
       "type": "project",
       "path": "../Rezolver.Logging/project.json",
       "msbuildProject": "../Rezolver.Logging/Rezolver.Logging.xproj"
@@ -3250,7 +3250,7 @@
       "Microsoft.Extensions.Logging.Abstractions >= 1.1.0",
       "Microsoft.Extensions.Options >= 1.1.0",
       "NETStandard.Library >= 1.6.1",
-      "Rezolver.Logging >= 1.0.0-alpha-*"
+      "Rezolver.Logging >= 1.0.0"
     ],
     ".NETFramework,Version=v4.5.1": [],
     ".NETStandard,Version=v1.1": []

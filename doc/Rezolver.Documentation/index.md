@@ -17,3 +17,12 @@ another IOC container.
 - [Getting Started](rezolver-usage/)
 - [Nuget Packages](rezolver-usage/nuget-packages/)
 - [API Reference](rezolver-api/)
+
+### Please note - this documentation is a work in progress!
+
+We're working on filling out our guides and how-tos as we go along, as well as filling out the API documentation.
+
+So, keep coming back!  We'll get there :)
+
+If you're the kind of person who likes to learn from seeing the code - then check out the [Rezolver repo on Github](https://github.com/LordZoltan/Rezolver),
+there are some example applications on there, and you can look at the unit tests to get an idea of how to create and configure containers.

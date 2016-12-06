@@ -159,7 +159,7 @@ binding to the new instance&#39;s writeable properties.</p>
               <div class="markdown level0 remarks"><p>Although you can create this target directly through the </p>
 <p><see cref="!:ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"></see> constructor,
 you&#39;re more likely to create it through factory methods such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto&lt;T&gt;(IPropertyBindingBehaviour)</a> or, more likely still,
-extension methods such as <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType&lt;TObject, TService&gt;(ITargetContainer, IPropertyBindingBehaviour)</a> during
+extension methods such as <see cref="!:SingletonTargetDictionaryExtensions.RegisterType&lt;TObject, TService&gt;(ITargetContainer, IPropertyBindingBehaviour)"></see> during
 your application&#39;s container setup phase.</p>
 <p>The expression built by this class&#39; implementation of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> will be an expression tree that ultimately
 creates a new instance of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_DeclaredType">DeclaredType</a>.</p>
@@ -409,9 +409,8 @@ on that property.  This property is for when the constructor is known in advance
               
               
               <h4 class="hmember" id="Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.ConstructorTarget.Auto(System.Type,Rezolver.IPropertyBindingBehaviour)">Auto(Type, IPropertyBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Creates a late bound <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a>.</p>
-<p>Shortcut for calling the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">ConstructorTarget(Type, IPropertyBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</a>
-with only the <em>type</em> and <em>propertyBindingBehaviour</em> arguments supplied.</p>
+              <div class="markdown level1 summary"><p>Creates a late bound <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> for the 
+given <em>type</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -454,12 +453,17 @@ to be bound from the container.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td><p>A new <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> that is (likely) to be either a <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> if
+                    <td><p>Either a <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a>, depending on whether the 
 <em>type</em> is a generic type definition.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              <h5 class="hremarks" id="Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This factory is merely a shortcut for calling the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">ConstructorTarget(Type, IPropertyBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</a>
+with only the <em>type</em> and <em>propertyBindingBehaviour</em> arguments supplied.  When creating a </p>
+<p><a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a>, the function uses the <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_">GenericConstructorTarget(Type, IPropertyBindingBehaviour)</a> constructor.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               
@@ -502,7 +506,7 @@ on the non-generic version of this method.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td><p>A new <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> that is (likely) to be either a <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> if
+                    <td><p>Either a <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a>, depending on whether
 <em>T</em> is a generic type definition.</p>
 </td>
                   </tr>
@@ -575,7 +579,7 @@ on the non-generic version of this method.</p>
               
               
               <h4 class="hmember" id="Rezolver_ConstructorTarget_FromNewExpression_System_Type_NewExpression_Rezolver_ITargetAdapter_" data-uid="Rezolver.ConstructorTarget.FromNewExpression(System.Type,NewExpression,Rezolver.ITargetAdapter)">FromNewExpression(Type, NewExpression, ITargetAdapter)</h4>
-              <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___Rezolver_ITargetAdapter_">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;RezolveContextExpressionHelper, T&gt;&gt;, ITargetAdapter)</a>.  See the documentation
+              <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___Rezolver_ITargetAdapter_">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;, ITargetAdapter)</a>.  See the documentation
 on that method for more.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -630,13 +634,13 @@ on that method for more.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___Rezolver_ITargetAdapter_" data-uid="Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{Rezolver.RezolveContextExpressionHelper,``0}},Rezolver.ITargetAdapter)">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;RezolveContextExpressionHelper, T&gt;&gt;, ITargetAdapter)</h4>
+              <h4 class="hmember" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___Rezolver_ITargetAdapter_" data-uid="Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{``0}},Rezolver.ITargetAdapter)">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;, ITargetAdapter)</h4>
               <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> from the passed lambda expression (whose <see cref="!:LambdaExpression.Body"></see> must be a <see cref="!:NewExpression"></see>)</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;RezolveContextExpressionHelper, T&gt;&gt; newExpr, ITargetAdapter adapter = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt; newExpr, ITargetAdapter adapter = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -650,7 +654,7 @@ on that method for more.</p>
                 <tbody>
                   <tr>
                     <td><em>newExpr</em></td>
-                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper">RezolveContextExpressionHelper</a>, T&gt;&gt;</td>
+                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func</a>&lt;T&gt;&gt;</td>
                     <td><p>Required.  The expression from which to create the target.</p>
 </td>
                   </tr>
@@ -694,14 +698,14 @@ If not provided, then the <a class="xref" href="Rezolver.TargetAdapter.html#Rezo
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func_Rezolver_RezolveContextExpressionHelper___0___Rezolver_ITargetAdapter__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___Rezolver_ITargetAdapter__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This method does not support member binding expressions - e.g. <pre><code>c =&gt; new MyObject() { A = "hello" }</code></pre> - these can be converted into
 targets using a (compliant) <a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a> object&#39;s <a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter_CreateTarget_Expression_">CreateTarget(Expression)</a> method.  At least, the supplied</p>
 <p><a class="xref" href="Rezolver.TargetAdapter.html#Rezolver_TargetAdapter">TargetAdapter</a> class does support them.</p>
 <p>When providing custom expressions to be used as targets in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>, it is possible to explicitly define properties/arguments as
 being resolved from the container itself, in exactly the same way as generated by the other factory methods such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto&lt;T&gt;(IPropertyBindingBehaviour)</a>
-and <a class="xref" href="Rezolver.ITargetContainerExtensions.html#Rezolver_ITargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_">RegisterType&lt;TObject&gt;(ITargetContainer, IPropertyBindingBehaviour)</a>.  To do this, simply call the </p>
-<p><a class="xref" href="Rezolver.RezolveContextExpressionHelper.html#Rezolver_RezolveContextExpressionHelper_Resolve__1">Resolve&lt;T&gt;()</a> function on the object passed into your expression (see the signature of the lambda <em>newExpr</em>),
+and <see cref="!:SingletonTargetDictionaryExtensions.RegisterType&lt;TObject&gt;(ITargetContainer, IPropertyBindingBehaviour)"></see>.  To do this, simply call the </p>
+<p><a class="xref" href="Rezolver.Functions.html#Rezolver_Functions_Resolve__1">Resolve&lt;T&gt;()</a> function on the object passed into your expression (see the signature of the lambda <em>newExpr</em>),
 and Rezolver will convert that call into a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>.</p>
 </div>
               <h5 class="hexceptions">Exceptions</h5>
