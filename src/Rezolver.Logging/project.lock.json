@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5.1": {
-      "Rezolver/1.0.0": {
+      "Rezolver/1.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -16,7 +16,7 @@
           "net451/Rezolver.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10": {
+      "Rezolver.Shared/1.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -35,7 +35,7 @@
       }
     },
     ".NETFramework,Version=v4.6": {
-      "Rezolver/1.0.0": {
+      "Rezolver/1.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "frameworkAssemblies": [
@@ -48,7 +48,7 @@
           "net46/Rezolver.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10": {
+      "Rezolver.Shared/1.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "frameworkAssemblies": [
@@ -477,7 +477,7 @@
           "ref/netstandard1.0/System.Xml.XDocument.dll": {}
         }
       },
-      "Rezolver/1.0.0": {
+      "Rezolver/1.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -491,7 +491,7 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10": {
+      "Rezolver.Shared/1.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2617,12 +2617,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Rezolver/1.0.0": {
+    "Rezolver/1.1.0": {
       "type": "project",
       "path": "../Rezolver/project.json",
       "msbuildProject": "../Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Shared/1.0.10": {
+    "Rezolver.Shared/1.1.0": {
       "type": "project",
       "path": "../Rezolver.Shared/project.json",
       "msbuildProject": "../Rezolver.Shared/Rezolver.Shared.xproj"
@@ -2630,8 +2630,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Rezolver >= 1.0.0",
-      "Rezolver.Shared >= 1.0.10"
+      "Rezolver >= 1.1.0-*",
+      "Rezolver.Shared >= 1.1.0-*"
     ],
     ".NETFramework,Version=v4.5.1": [
       "System.Linq.Expressions >= 4.0.0"

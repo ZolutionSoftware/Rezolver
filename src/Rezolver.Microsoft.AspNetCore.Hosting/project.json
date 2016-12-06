@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0",
+  "version": "1.1.0-*",
   "title": "Rezolver Asp.Net Core application extensions",
   "description": "Extensions for IWebHostBuilder to simplify the use of Rezolver containers in Asp.Net Core applications",
   "packOptions": {
@@ -13,8 +13,8 @@
   "dependencies": {
     "NETStandard.Library": "1.6.1",
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0-*",
-    "Rezolver.Microsoft.Extensions.DependencyInjection": "1.0.0",
-    "Rezolver.Microsoft.Extensions.Logging": "1.0.0"
+    "Rezolver.Microsoft.Extensions.DependencyInjection": "1.1.0-*",
+    "Rezolver.Microsoft.Extensions.Logging": "1.1.0-*"
   },
 
   "frameworks": {

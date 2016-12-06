@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.10",
+  "version": "1.1.0-*",
   "title": "Rezolver IOC Configuration Framework",
   "description": "Core configuration framework for Rezolver. Provides the abstractions and infrastructure for configuration adapters.",
   "packOptions": {
@@ -11,9 +11,9 @@
   "authors": [ "Zolution Software Ltd" ],
   "copyright": "2014 onwards Zolution Software Ltd",
   "dependencies": {
-    "Rezolver": "1.0.0",
+    "Rezolver": "1.1.0-*",
     "Rezolver.Shared": {
-      "version": "1.0.10",
+      "version": "1.1.0-*",
       "type": "build"
     }
   },

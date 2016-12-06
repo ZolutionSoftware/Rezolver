@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0",
+  "version": "1.1.0-*",
   "title": "Rezolver Extensions to .Net Core Logging",
   "description": "Extensions to be able to use the logging types from Microsoft.Extensions.Logging with Rezolver.Logging",
   "packOptions": {
@@ -14,7 +14,7 @@
     "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
     "Microsoft.Extensions.Options": "1.1.0",
     "NETStandard.Library": "1.6.1",
-    "Rezolver.Logging": "1.0.0"
+    "Rezolver.Logging": "1.1.0-*"
   },
 
   "frameworks": {

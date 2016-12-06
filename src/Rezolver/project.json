@@ -1,6 +1,6 @@
 {
   
-  "version": "1.0.0",
+  "version": "1.1.0-*",
   "title": "Rezolver IOC Framework",
   "description": "Rezolver offers all the most common features of any IOC container plus the ability to create new lightweight containers which override others.",
   "packOptions": {
@@ -13,7 +13,7 @@
   "copyright": "2014 onwards Zolution Software Ltd",
   "dependencies": {
     "Rezolver.Shared": {
-      "version": "1.0.10",
+      "version": "1.1.0-*",
       "type": "build"
     }
 

@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5.1": {
-      "Rezolver.Shared/1.0.10": {
+      "Rezolver.Shared/1.1.0-alpha": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -22,7 +22,7 @@
       }
     },
     ".NETFramework,Version=v4.6": {
-      "Rezolver.Shared/1.0.10": {
+      "Rezolver.Shared/1.1.0-alpha": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "frameworkAssemblies": [
@@ -451,7 +451,7 @@
           "ref/netstandard1.0/System.Xml.XDocument.dll": {}
         }
       },
-      "Rezolver.Shared/1.0.10": {
+      "Rezolver.Shared/1.1.0-alpha": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2577,7 +2577,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Rezolver.Shared/1.0.10": {
+    "Rezolver.Shared/1.1.0-alpha": {
       "type": "project",
       "path": "../Rezolver.Shared/project.json",
       "msbuildProject": "../Rezolver.Shared/Rezolver.Shared.xproj"
@@ -2585,7 +2585,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Rezolver.Shared >= 1.0.10"
+      "Rezolver.Shared >= 1.1.0-*"
     ],
     ".NETFramework,Version=v4.5.1": [
       "System.ComponentModel >= 4.0.0"

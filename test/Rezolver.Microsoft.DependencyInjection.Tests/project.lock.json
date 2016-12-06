@@ -2646,7 +2646,7 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Rezolver/1.0.0": {
+      "Rezolver/1.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2660,12 +2660,12 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Microsoft.Extensions.DependencyInjection/1.0.0": {
+      "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
-          "Rezolver": "1.0.0"
+          "Rezolver": "1.1.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Microsoft.Extensions.DependencyInjection.dll": {}
@@ -7872,12 +7872,12 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Rezolver/1.0.0": {
+    "Rezolver/1.1.0": {
       "type": "project",
       "path": "../../src/Rezolver/project.json",
       "msbuildProject": "../../src/Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Microsoft.Extensions.DependencyInjection/1.0.0": {
+    "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.0": {
       "type": "project",
       "path": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection/project.json",
       "msbuildProject": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection/Rezolver.Microsoft.Extensions.DependencyInjection.xproj"
@@ -7886,9 +7886,9 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.Extensions.DependencyInjection.Specification.Tests >= 1.1.0-*",
-      "Rezolver.Microsoft.Extensions.DependencyInjection >= 1.0.0-*",
+      "Rezolver.Microsoft.Extensions.DependencyInjection >= 1.1.0-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
-      "xunit >= 2.2.0-beta3-build3444"
+      "xunit >= 2.2.0-beta4-build3444"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.0"
