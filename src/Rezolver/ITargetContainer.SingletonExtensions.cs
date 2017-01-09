@@ -21,7 +21,7 @@ namespace Rezolver
 		/// <param name="targetContainer">The container on which the registrations will be made.</param>
 		/// <param name="propertyBindingBehaviour">Can be used to enable and control property injection in addition to constructor injection
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
-		public static void RegisterSingleton<TObject>(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static void RegisterSingleton<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
 			RegisterSingleton(targetContainer, typeof(TObject), propertyBindingBehaviour: propertyBindingBehaviour);
 		}
@@ -39,7 +39,7 @@ namespace Rezolver
 		/// <param name="targetContainer">The container on which the registrations will be made.</param>
 		/// <param name="propertyBindingBehaviour">Can be used to enable and control property injection in addition to constructor injection
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
-		public static void RegisterSingleton<TObject, TService>(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static void RegisterSingleton<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
 			RegisterSingleton(targetContainer, typeof(TObject), typeof(TService), propertyBindingBehaviour: propertyBindingBehaviour);
 		}
@@ -57,7 +57,7 @@ namespace Rezolver
 		/// <param name="serviceType">Optional.  The type against which the target will be registered in the <paramref name="targetContainer"/></param>
 		/// <param name="propertyBindingBehaviour">Optional.  Can be used to enable and control property injection in addition to constructor injection
 		/// on the instance of <paramref name="objectType"/> that is created.</param>
-		public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			objectType.MustNotBeNull(nameof(targetContainer));
@@ -65,7 +65,7 @@ namespace Rezolver
 			RegisterSingletonInternal(targetContainer, objectType, serviceType, propertyBindingBehaviour);
 		}
 
-		internal static void RegisterSingletonInternal(ITargetContainer builder, Type objectType, Type serviceType, IPropertyBindingBehaviour propertyBindingBehaviour)
+		internal static void RegisterSingletonInternal(ITargetContainer builder, Type objectType, Type serviceType, IMemberBindingBehaviour propertyBindingBehaviour)
 		{
 			builder.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour).Singleton(), serviceType: serviceType);
 		}

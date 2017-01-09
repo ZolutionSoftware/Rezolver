@@ -16,11 +16,12 @@
           "net451/Rezolver.dll": {}
         }
       },
-      "Rezolver.Shared/1.1.0-alpha": {
+      "Rezolver.Shared/1.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
           "System.Linq",
+          "System.Linq.Expressions",
           "System.Reflection",
           "System.Reflection.Extensions",
           "System.Reflection.Primitives",
@@ -48,11 +49,12 @@
           "net46/Rezolver.dll": {}
         }
       },
-      "Rezolver.Shared/1.1.0-alpha": {
+      "Rezolver.Shared/1.1.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "frameworkAssemblies": [
           "System.Linq",
+          "System.Linq.Expressions",
           "System.Reflection",
           "System.Reflection.Extensions",
           "System.Reflection.Primitives",
@@ -491,7 +493,7 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Shared/1.1.0-alpha": {
+      "Rezolver.Shared/1.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2622,7 +2624,7 @@
       "path": "../Rezolver/project.json",
       "msbuildProject": "../Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Shared/1.1.0-alpha": {
+    "Rezolver.Shared/1.1.0": {
       "type": "project",
       "path": "../Rezolver.Shared/project.json",
       "msbuildProject": "../Rezolver.Shared/Rezolver.Shared.xproj"

@@ -300,7 +300,7 @@ namespace Rezolver
 		/// of <see cref="ITargetContainer" />.
 		/// As a result, it's possible to register new targets directly into the context via the <see cref="Register(ITarget, Type)" /> method,
 		/// without modifying the underlying targets in the container you pass.
-		/// Some of the core <see cref="ITarget" />s exposed by this library take advantage of that functionality (notably, the <see cref="DecoratorTarget" />).</param>
+		/// Some of the core <see cref="ITarget" />s exposed by this library take advantage of that functionality (notably, the <see cref="DecoratingTargetContainer" />).</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType" /> property.  If not provided, then any code generated within this context
 		/// should compile for the <see cref="ITarget.DeclaredType"/>.</param>
 		/// <param name="rezolveContextExpression">Optional.  Will be set into the <see cref="RezolveContextExpression" /> property.  If not provided, then

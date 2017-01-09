@@ -20,23 +20,32 @@ namespace Rezolver
 	{
 		private static Type[] EmptyTypes = new Type[0];
 
-		private Type _genericType;
-		private IPropertyBindingBehaviour _propertyBindingBehaviour;
+		/// <summary>
+		/// Gets the generic type definition from which generic types are to be built and instances of which 
+		/// will be constructed.
+		/// </summary>
+		public Type GenericType { get; private set; }
+
+		/// <summary>
+		/// Gets the member binding behaviour to be used when creating an instance.
+		/// </summary>
+		/// <value>The member binding behaviour.</value>
+		public IMemberBindingBehaviour MemberBindingBehaviour { get; private set; }
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-		/// <param name="propertyBindingBehaviour">Optional.  The <see cref="IPropertyBindingBehaviour"/> to be used for binding properties and/or fields on the 
+		/// <param name="memberBindingBehaviour">Optional.  The <see cref="IMemberBindingBehaviour"/> to be used for binding properties and/or fields on the 
 		/// 'new' expression that is generated.  If null, then no property or fields will be bound on construction.</param>
-		public GenericConstructorTarget(Type genericType, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)
 		{
 			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
 				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Partially open generics are not yet supported, and for fully closed generics, use ConstructorTarget");
 			if (!TypeHelpers.IsClass(genericType) || TypeHelpers.IsAbstract(genericType))
-				throw new ArgumentException("The type must be a non-abstract generic class");
-			_genericType = genericType;
-			_propertyBindingBehaviour = propertyBindingBehaviour;
+				throw new ArgumentException("The type must be a non-abstract generic class definition");
+			GenericType = genericType;
+			MemberBindingBehaviour = memberBindingBehaviour;
 		}
 
 		/// <summary>
@@ -78,6 +87,50 @@ namespace Rezolver
 		/// <returns></returns>
 		protected override System.Linq.Expressions.Expression CreateExpressionBase(CompileContext context)
 		{
+			return target.CreateExpression(context);
+		}
+
+		/// <summary>
+		/// Obtains an <see cref="ITarget"/> (usually a <see cref="ConstructorTarget"/>) which will create 
+		/// an instance of a generic type (whose definition is equal to <see cref="GenericType"/>) with 
+		/// generic arguments set correctly according to the <see cref="CompileContext.TargetType"/> of 
+		/// the <paramref name="context"/>.
+		/// </summary>
+		/// <param name="context">The context.</param>
+		/// <remarks>The process of binding a requested type to the concrete type can be a very complex process, when
+		/// inheritance chains and interface implementation maps are taken into account.
+		/// 
+		/// At the simplest end of the spectrum, if <see cref="GenericType"/> is <c>MyGeneric&lt;&gt;</c> and
+		/// the <paramref name="context"/>'s <see cref="CompileContext.TargetType"/> is <c>MyGeneric&lt;int&gt;</c>,
+		/// then this function merely has to insert the <c>int</c> type as the generic parameter to the <c>MyGeneric&lt;&gt;</c>
+		/// type definition, bake a new type and create an auto-bound <see cref="ConstructorTarget"/>.
+		/// 
+		/// Consider what happens when the inheritance chain is more complex:
+		/// 
+		/// <code>
+		/// interface IMyInterfaceCore&lt;T, U&gt; { }
+		/// 
+		/// class MyBaseClass&lt;T, U&gt; : IMyInterfaceCore&lt;U, T&gt; { }
+		/// 
+		/// class MyDerivedClass&lt;T, U&gt; : MyBaseClass&lt;U, T&gt; { }
+		/// </code>
+		/// 
+		/// A <see cref="GenericConstructorTarget"/> bound to the generic type definition <c>MyDerivedClass&lt;,&gt;</c> can
+		/// create instances not only of any generic type based on that definition, but also any generic type based on the definitions 
+		/// of either it's immediate base, or that base's interface.  In order to do so, however, the parameters must be mapped 
+		/// between the generic type definitions so that if an instance of <c>MyBaseClass&lt;string, int&gt;</c> is requested, 
+		/// then an instance of <c>MyDerivedClass&lt;int, string&gt;</c> (note the arguments are reversed) is actually created.
+		/// 
+		/// Similarly, if an instance of <c>IMyInterface&lt;string, int&gt;</c> is requested, we actually need to create an 
+		/// instance of <c>MyDerivedClass&lt;string, int&gt;</c> - because the generic arguments are reversed first through 
+		/// the base class inheritance, and then again by the base class' implementation of the interface.
+		/// 
+		/// Note that a <see cref="GenericConstructorTarget"/> can only bind to the context's target type is there is enough information
+		/// in order to deduce the generic type arguments for <see cref="GenericType"/>.  This means, in general, that the requested
+		/// type will almost always need to be a generic type.
+		/// </remarks>
+		public ITarget Bind(CompileContext context)
+		{
 			//always create a constructor target from new
 			//basically this class simply acts as a factory for other constructor targets.
 
@@ -106,9 +159,7 @@ namespace Rezolver
 			//make the generic type
 			var typeToBuild = DeclaredType.MakeGenericType(finalTypeArguments);
 			//construct the constructortarget
-			var target = ConstructorTarget.Auto(typeToBuild, _propertyBindingBehaviour);
-
-			return target.CreateExpression(context);
+			return ConstructorTarget.Auto(typeToBuild, MemberBindingBehaviour);
 		}
 
 		private Type[] MapGenericParameters(Type requestedType, Type targetType)
@@ -194,23 +245,23 @@ namespace Rezolver
 		/// </summary>
 		public override System.Type DeclaredType
 		{
-			get { return _genericType; }
+			get { return GenericType; }
 		}
 
 
 		/// <summary>
-		/// Equivalent of <see cref="ConstructorTarget.Auto{T}(IPropertyBindingBehaviour)"/> but for open generic types.
+		/// Equivalent of <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> but for open generic types.
 		/// </summary>
 		/// <typeparam name="TGeneric">The open generic type which will be created when this target is called upon
 		/// to create an instance.</typeparam>
 		/// <param name="propertyBindingBehaviour">Optional behaviour controlling which properties, if any, receive injected values.</param>
-		public static ITarget Auto<TGeneric>(IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Auto<TGeneric>(IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
 			return Auto(typeof(TGeneric), propertyBindingBehaviour);
 		}
 
 		/// <summary>
-		/// Equivalent of <see cref="ConstructorTarget.Auto(Type, IPropertyBindingBehaviour)"/> but for open generic types.
+		/// Equivalent of <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> but for open generic types.
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <param name="propertyBindingBehaviour">The property binding behaviour.</param>
@@ -219,7 +270,7 @@ namespace Rezolver
 		/// or
 		/// The passed type must a non-abstract class
 		/// </exception>
-		public static ITarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)
+		public static ITarget Auto(Type type, IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
 			//I might relax this constraint later - since we could implement partially open generics.
 			if (!TypeHelpers.IsGenericTypeDefinition(type))

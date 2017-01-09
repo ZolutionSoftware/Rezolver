@@ -18,7 +18,7 @@ namespace Rezolver
   internal class NewExpressionMemberInitRewriter : ExpressionVisitor
   {
     private readonly Type _ctorType;
-    private readonly IEnumerable<MemberBinding> _newBindings;
+    private readonly IEnumerable<System.Linq.Expressions.MemberBinding> _newBindings;
     private bool _found;
 
     /// <summary>
@@ -26,7 +26,7 @@ namespace Rezolver
     /// </summary>
     /// <param name="ctorType"></param>
     /// <param name="newBindings"></param>
-    public NewExpressionMemberInitRewriter(Type ctorType, IEnumerable<MemberBinding> newBindings)
+    public NewExpressionMemberInitRewriter(Type ctorType, IEnumerable<System.Linq.Expressions.MemberBinding> newBindings)
     {
       _ctorType = ctorType;
       _newBindings = newBindings;

@@ -114,7 +114,7 @@ namespace Rezolver
     public static bool TryResolve<TObject>(this IContainer container, out TObject result)
     {
       object oResult;
-      var success = container.TryResolve(out oResult);
+      var success = container.TryResolve(typeof(TObject), out oResult);
       if (success)
         result = (TObject)oResult;
       else

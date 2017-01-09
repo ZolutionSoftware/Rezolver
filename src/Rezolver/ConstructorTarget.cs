@@ -16,123 +16,25 @@ namespace Rezolver
 	/// binding to the new instance's writeable properties.
 	/// </summary>
 	/// <remarks>Although you can create this target directly through the 
-	/// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/> constructor,
-	/// you're more likely to create it through factory methods such as <see cref="Auto{T}(IPropertyBindingBehaviour)"/> or, more likely still,
-	/// extension methods such as <see cref="SingletonTargetDictionaryExtensions.RegisterType{TObject, TService}(ITargetContainer, IPropertyBindingBehaviour)"/> during
+	/// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[], IDictionary{string, ITarget})"/> constructor,
+	/// you're more likely to create it through factory methods such as <see cref="Auto{T}(IMemberBindingBehaviour)"/> or, more likely still,
+	/// extension methods such as <see cref="RegisterTypeTargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IMemberBindingBehaviour)"/> during
 	/// your application's container setup phase.
-	/// 
-	/// The expression built by this class' implementation of <see cref="CreateExpressionBase(CompileContext)"/> will be an expression tree that ultimately
-	/// creates a new instance of the <see cref="DeclaredType"/>.</remarks>
+	/// </remarks>
 	public partial class ConstructorTarget : TargetBase
 	{
-		//note - neither of these two classes inherit from TargetBase because that class performs lots 
-		//of unnecessary checks that don't apply to these because we always create boundconstructortargets from 
-		//within the ConstructorTarget's CreateExpressionBase - so they effectively inherit it's TargetBase
-		private class BoundConstructorTarget : ITarget
-		{
-			public Type DeclaredType
-			{
-				get
-				{
-					return _ctor.DeclaringType;
-				}
-			}
-
-			public bool UseFallback
-			{
-				get
-				{
-					return false;
-				}
-			}
-
-			private readonly ConstructorInfo _ctor;
-			private readonly ParameterBinding[] _boundArgs;
-
-			public BoundConstructorTarget(ConstructorInfo ctor, params ParameterBinding[] boundArgs)
-			{
-				_ctor = ctor;
-				_boundArgs = boundArgs ?? ParameterBinding.None;
-			}
-
-			public Expression CreateExpression(CompileContext context)
-			{
-				return Expression.New(_ctor, _boundArgs.Select(a => a.CreateExpression(context)));
-			}
-
-			public bool SupportsType(Type type)
-			{
-				return TypeHelpers.AreCompatible(DeclaredType, type);
-			}
-		}
-
-		private class MemberInitialiserTarget : ITarget
-		{
-			PropertyOrFieldBinding[] _propertyBindings;
-			BoundConstructorTarget _nestedTarget;
-
-			/// <summary>
-			/// Please note that with this constructor, no checking is performed that the property bindings are
-			/// actually valid for the target's type.
-			/// </summary>
-			/// <param name="target"></param>
-			/// <param name="propertyBindings"></param>
-			internal MemberInitialiserTarget(BoundConstructorTarget target, PropertyOrFieldBinding[] propertyBindings)
-			  : base()
-			{
-				_nestedTarget = target;
-				_propertyBindings = propertyBindings ?? PropertyOrFieldBinding.None;
-			}
-
-			public bool SupportsType(Type type)
-			{
-				return _nestedTarget.SupportsType(type);
-			}
-
-			public Expression CreateExpression(CompileContext context)
-			{
-				if (_propertyBindings.Length == 0)
-					return _nestedTarget.CreateExpression(context);
-				else
-				{
-					var nestedExpression = _nestedTarget.CreateExpression(context.New(_nestedTarget.DeclaredType));
-					//have to locate the NewExpression constructed by the inner target and then rewrite it as
-					//a MemberInitExpression with the given property bindings.  Note - if the expression created
-					//by the ConstructorTarget is surrounded with any non-standard funny stuff - i.e. anything that
-					//could require a NewExpression, then this code won't work.  Points to the possibility that we
-					//might need some additional funkiness to allow code such as this to do its thing.
-					return new NewExpressionMemberInitRewriter(null,
-						_propertyBindings.Select(b => b.CreateMemberBinding(context.New(b.MemberType)))).Visit(nestedExpression);
-				}
-			}
-
-			public Type DeclaredType
-			{
-				get { return _nestedTarget.DeclaredType; }
-			}
-
-			public bool UseFallback
-			{
-				get
-				{
-					return _nestedTarget.UseFallback;
-				}
-			}
-		}
-
-		private static readonly IDictionary<string, ITarget> _emptyArgsDictionary = new Dictionary<string, ITarget>();
-
 		private readonly ConstructorInfo _ctor;
 
 		/// <summary>
-		/// Can be null. Gets the constructor that this target is bound to, if known at construction time.
+		/// Can be null. Gets the constructor that this target is bound to, if it was known when the target
+		/// was created.
 		/// </summary>
 		/// <remarks>ConstructorTargets can be bound to a particular constructor
 		/// in advance, or they can search for a best-match constructor at the point where
-		/// <see cref="ITarget.CreateExpression(CompileContext)"/> is called.
+		/// <see cref="Bind(CompileContext)"/> is called.
 		/// 
 		/// This property will only be set ultimately if it was passed to the 
-		/// <see cref="ConstructorTarget.ConstructorTarget(ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"/>
+		/// <see cref="ConstructorTarget.ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])"/>
 		/// constructor, possibly by a factory method like <see cref="ConstructorTarget.WithArgs(ConstructorInfo, IDictionary{string, ITarget})"/>,
 		/// or <see cref="ConstructorTarget.FromNewExpression(Type, NewExpression, ITargetAdapter)"/>, where the constructor
 		/// is captured within the expression.</remarks>
@@ -161,10 +63,15 @@ namespace Rezolver
 			}
 		}
 
-		private IPropertyBindingBehaviour _propertyBindingBehaviour;
+		/// <summary>
+		/// Gets the member binding behaviour to be used when <see cref="Bind(CompileContext)"/> is called.
+		/// </summary>
+		public IMemberBindingBehaviour MemberBindingBehaviour
+		{
+			get; private set;
+		}
 
 		private readonly IDictionary<string, ITarget> _namedArgs;
-
 		/// <summary>
 		/// Named arguments (as <see cref="ITarget"/> objects) to be supplied to the object on construction,
 		/// also aiding the search for a constructor.
@@ -190,12 +97,14 @@ namespace Rezolver
 			get { return _declaredType; }
 		}
 
+		
+
 		/// <summary>
-		/// Initializes a late-bound instance of the <see cref="ConstructorTarget" /> class which will locate the
-		/// best constructor to be called at compile-time.
+		/// Initializes a late-bound instance of the <see cref="ConstructorTarget" /> class which will 
+		/// <see cref="Bind(CompileContext)"/> to the best constructor at compile-time.
 		/// </summary>
 		/// <param name="type">Required.  The type to be constructed when resolved in a container.</param>
-		/// <param name="propertyBindingBehaviour">Optional.  If provided, can be used to select properties which are to be
+		/// <param name="memberBindingBehaviour">Optional.  If provided, can be used to select properties which are to be
 		/// initialised from the container.</param>
 		/// <param name="namedArgs">Optional.  The named arguments which will be provided to the best-matched constructor.  These are taken into account
 		/// when the constructor is sought - with the constructor that the most parameters matched being selected.</param>
@@ -207,8 +116,8 @@ namespace Rezolver
 		/// <c>true</c>, and whose expression will equate to an empty enumerable).
 		/// This allows the system to bind to different constructors automatically based on the other registrations that are present in the <see cref="ITargetContainer" /> of the active
 		/// <see cref="RezolveContext.Container" /> when code is compiled in response to a call to <see cref="IContainer.Resolve(RezolveContext)" />.</remarks>
-		public ConstructorTarget(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null, IDictionary<string, ITarget> namedArgs = null)
-			: this(type, null, propertyBindingBehaviour, null, namedArgs)
+		public ConstructorTarget(Type type, IMemberBindingBehaviour memberBindingBehaviour = null, IDictionary<string, ITarget> namedArgs = null)
+			: this(type, null, memberBindingBehaviour, null, namedArgs)
 		{
 			//it's a post-check, but the private constructor sidesteps null types and ctors to allow the
 			//public constructors to do their thing.
@@ -224,7 +133,7 @@ namespace Rezolver
 		/// initialised from the container.</param>
 		/// <param name="parameterBindings">Optional, although can only be supplied if <paramref name="ctor"/> is provided.  
 		/// Specific bindings for the parameters of the given <paramref name="ctor"/> which should be used during code generation.</param>
-		public ConstructorTarget(ConstructorInfo ctor, IPropertyBindingBehaviour propertyBindingBehaviour = null, ParameterBinding[] parameterBindings = null)
+		public ConstructorTarget(ConstructorInfo ctor, IMemberBindingBehaviour propertyBindingBehaviour = null, ParameterBinding[] parameterBindings = null)
 			: this(null, ctor, propertyBindingBehaviour, parameterBindings, null)
 		{
 			ctor.MustNotBeNull(nameof(ctor));
@@ -244,7 +153,7 @@ namespace Rezolver
 		/// <param name="suppliedArgs">The supplied arguments.</param>
 		private ConstructorTarget(Type type, 
 			ConstructorInfo ctor, 
-			IPropertyBindingBehaviour propertyBindingBehaviour, 
+			IMemberBindingBehaviour propertyBindingBehaviour, 
 			ParameterBinding[] parameterBindings, 
 			IDictionary<string, ITarget> suppliedArgs)
 		{
@@ -255,20 +164,25 @@ namespace Rezolver
 				type.MustNot(t => TypeHelpers.IsInterface(t) || TypeHelpers.IsAbstract(t), "Type must not be an interface or an abstract class", nameof(type));
 			}
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
-			_propertyBindingBehaviour = propertyBindingBehaviour;
+			MemberBindingBehaviour = propertyBindingBehaviour;
 			_namedArgs = suppliedArgs ?? new Dictionary<string, ITarget>();
 		}
 
 		/// <summary>
-		/// Implementation of <see cref="TargetBase.CreateExpressionBase(CompileContext)"/>
+		/// Gets the <see cref="ConstructorBinding"/> for the <see cref="DeclaredType"/> using the 
+		/// targets available in the <paramref name="context"/> for dependency lookup.
+		/// 
+		/// The constructor is either resolved by checking available targets for the best match, or is pre-selected
+		/// on construction (<see cref="Ctor"/> will be non-null in this case).
 		/// </summary>
-		/// <param name="context">The current compile context</param>
-		/// <exception cref="AmbiguousMatchException">If no definitively 'best' constructor can be determined.</exception>
-		protected override Expression CreateExpressionBase(CompileContext context)
+		/// <param name="context">The context.</param>
+		/// <exception cref="AmbiguousMatchException">If more than one constructor can be bound with an equal amount of all-resolved
+		/// arguments or default arguments.</exception>
+		/// <exception cref="InvalidOperationException">If no constructors can be found.</exception>
+		public ConstructorBinding Bind(CompileContext context)
 		{
 			ConstructorInfo ctor = _ctor;
 			ParameterBinding[] boundArgs = ParameterBinding.None;
-
 			if (ctor == null)
 			{
 				//have to go searching for the best constructor match for the current context,
@@ -342,16 +256,9 @@ namespace Rezolver
 			else
 				boundArgs = _parameterBindings;
 
-			BoundConstructorTarget baseTarget = new BoundConstructorTarget(ctor, boundArgs);
-			ITarget target = null;
-			if (_propertyBindingBehaviour != null)
-				target = new MemberInitialiserTarget(baseTarget, _propertyBindingBehaviour.GetPropertyBindings(context, _declaredType));
-			else
-				target = baseTarget;
-			return target.CreateExpression(context);
+			return new ConstructorBinding(ctor, boundArgs, MemberBindingBehaviour?.GetMemberBindings(context, _declaredType));
 		}
 
-		
 
 		private static IGrouping<int, ConstructorInfo>[] GetPublicConstructorGroups(Type declaredType)
 		{

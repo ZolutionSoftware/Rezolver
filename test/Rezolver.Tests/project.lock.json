@@ -3117,6 +3117,7 @@
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
           "System.Linq",
+          "System.Linq.Expressions",
           "System.Reflection",
           "System.Reflection.Extensions",
           "System.Reflection.Primitives",

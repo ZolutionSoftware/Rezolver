@@ -12,15 +12,16 @@ namespace Rezolver
   /// <summary>
   /// Describes a type which discovers property/field bindings
   /// </summary>
-  public interface IPropertyBindingBehaviour
+  public interface IMemberBindingBehaviour
   {
     /// <summary>
     /// Retrieves the property and/or field bindings for the given type based on the given <see cref="CompileContext"/>
     /// </summary>
-    /// <param name="context"></param>
-    /// <param name="type"></param>
-    /// <returns></returns>
-    PropertyOrFieldBinding[] GetPropertyBindings(CompileContext context, Type type);
+    /// <param name="context">The current compilation context (will be used to look up <see cref="ITarget"/> references from its
+	/// implementation of <see cref="ITargetContainer"/></param>
+    /// <param name="type">The type whose writable members are to be probed.</param>
+    /// <returns>Zero or more bindings for the members of the <paramref name="type"/>.</returns>
+    MemberBinding[] GetMemberBindings(CompileContext context, Type type);
   }
 
 }

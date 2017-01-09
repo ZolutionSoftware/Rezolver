@@ -90,6 +90,8 @@ namespace Rezolver
 		{
 			Targets = targets ?? new TargetContainer();
 			Compiler = compiler ?? TargetCompiler.Default;
+			//register the current default target compiler as our default compiler.
+			Register(TargetCompiler.Default.AsObjectTarget());
 		}
 
 		/// <summary>
@@ -178,7 +180,16 @@ namespace Rezolver
 			if (target is ICompiledTarget)
 				return (ICompiledTarget)target;
 
-			return Compiler.CompileTarget(target,
+			//if ITargetCompiler has been requested then we can't continue, because in order
+			//to compile this target we'd need a compiler we can use which, by definition, we don't have.
+			//also, the same error occurs if the container in question is unable to resolve the type.
+			//note that this could trigger this same line of code to blow in the context container.
+			var compilerContext = context.CreateNew(typeof(IContainer));
+			ITargetCompiler compiler;
+			if(context.RequestedType == typeof(ITargetCompiler) || !context.Container.TryResolve(out compiler))
+				throw new InvalidOperationException("The compiler has not been correctly configured for this container.  It must be registered in the container's targets and must be a target that supports the ICompiledTarget interface.");
+			
+			return compiler.CompileTarget(target,
 			  new CompileContext(this,
 				//the targets we pass here are wrapped in a new ChildBuilder by the context
 				Targets,

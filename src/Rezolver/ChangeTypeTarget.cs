@@ -64,17 +64,5 @@ namespace Rezolver
       InnerTarget = innerTarget;
       _targetType = targetType;
     }
-
-    /// <summary>
-    /// Returns a Linq Convert expression (<see cref="UnaryExpression"/> created through the <see cref="Expression.Convert(Expression, Type)"/> factory method)
-    /// whose inner expression is the expression built by the <see cref="InnerTarget"/> for its <see cref="ITarget.DeclaredType"/>.
-    /// </summary>
-    /// <param name="context"></param>
-    /// <returns></returns>
-    protected override Expression CreateExpressionBase(CompileContext context)
-    {
-      var baseExpression = InnerTarget.CreateExpression(context.New(InnerTarget.DeclaredType));
-      return Expression.Convert(baseExpression, _targetType);
-    }
   }
 }

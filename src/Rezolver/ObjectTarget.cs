@@ -9,12 +9,12 @@ using System.Linq.Expressions;
 namespace Rezolver
 {
 	/// <summary>
-	/// Implements IRezolveTarget by wrapping a single instance that's already been constructed.
+	/// Implements <see cref="ITarget"/> by wrapping a single instance that's already been constructed.
 	/// 
 	/// By default, scope tracking is disabled (since the caller owns the object, not the Rezolver framework)).  If it's
 	/// enabled, then scope tracking behaves exactly the same as <see cref="SingletonTarget"/>.
 	/// </summary>
-	public class ObjectTarget : TargetBase
+	public class ObjectTarget : TargetBase, ICompiledTarget
 	{
 
 		private readonly Type _declaredType;
@@ -77,9 +77,24 @@ namespace Rezolver
 
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			return Expression.Constant(Value, context.TargetType ?? DeclaredType);
+			
 		}
 
+		object ICompiledTarget.GetObject(RezolveContext context)
+		{
+			//when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
+			if (SuppressScopeTracking || context.Scope == null)
+				return Value;
+			else {
+				return context.Scope.GetScopeRoot().GetOrAdd(context, c => Value, false);
+			}
+		}
+
+		/// <summary>
+		/// Gets the declared type of object that is constructed by this target.  This will be the return type of
+		/// any expression built by <see cref="CreateExpression" /> unless otherwise instructed to build a different type.
+		/// </summary>
+		/// <value>The type of the declared.</value>
 		public override Type DeclaredType
 		{
 			get

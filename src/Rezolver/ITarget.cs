@@ -49,6 +49,7 @@ namespace Rezolver
     /// </summary>
     /// <param name="context">The current compile context</param>
     /// <returns></returns>
+	[Obsolete("This is to be replaced with the IExpressionCompiler.Build function", true)]
     Expression CreateExpression(CompileContext context);
 
   }

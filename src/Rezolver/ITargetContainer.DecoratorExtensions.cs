@@ -7,7 +7,7 @@ namespace Rezolver
 {
 	/// <summary>
 	/// Extensions for <see cref="ITargetContainerOwner"/> which simplify the registration of decorators (via the
-	/// <see cref="DecoratorTarget"/> pseudo-target)
+	/// <see cref="DecoratingTargetContainer"/> pseudo-target)
 	/// </summary>
 	/// <remarks>Note: The decoration functionality provided by the framework is only possible on 
 	/// <see cref="ITargetContainer"/> implementations which also implement the <see cref="ITargetContainerOwner"/> interface.
@@ -29,7 +29,7 @@ namespace Rezolver
 		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainerOwner targetContainerOwner)
 		{
 			targetContainerOwner.MustNotBeNull(nameof(targetContainerOwner));
-			targetContainerOwner.RegisterContainer(typeof(TDecorated), new DecoratorTarget(typeof(TDecorator), typeof(TDecorated)));
+			targetContainerOwner.RegisterContainer(typeof(TDecorated), new DecoratingTargetContainer(typeof(TDecorator), typeof(TDecorated)));
 		}
 
 		/// <summary>
@@ -48,7 +48,7 @@ namespace Rezolver
 			decoratorType.MustNotBeNull(nameof(decoratorType));
 			decoratedType.MustNotBeNull(nameof(decoratedType));
 
-			targetContainerOwner.RegisterContainer(decoratedType, new DecoratorTarget(decoratorType, decoratedType));
+			targetContainerOwner.RegisterContainer(decoratedType, new DecoratingTargetContainer(decoratorType, decoratedType));
 		}
 	}
 }
