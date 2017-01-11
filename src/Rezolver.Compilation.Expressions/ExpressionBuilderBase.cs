@@ -74,7 +74,7 @@ namespace Rezolver.Compilation.Expressions
 				  || !TypeHelpers.IsAssignableFrom(convertType, result.Type))
 					return Expression.Convert(result, convertType);
 
-				result = new TargetExpressionRewriter(context).Visit(result);
+				result = new TargetExpressionRewriter(compiler, context).Visit(result);
 
 				//TODO: Rework scope tracking (probably via the target object itself so that the majority of the
 				//expression crap can be removed.)
@@ -92,8 +92,6 @@ namespace Rezolver.Compilation.Expressions
 			{
 				context.PopCompileStack();
 			}
-			//for now, just call the abstract build function.
-			//return Build(target, context);
 		}
 
 		/// <summary>

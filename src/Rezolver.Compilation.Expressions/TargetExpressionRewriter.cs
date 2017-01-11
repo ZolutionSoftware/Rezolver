@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Rezolver
+namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
 	/// Used by <see cref="TargetBase"/> (and potentially your own targets)
@@ -17,17 +17,18 @@ namespace Rezolver
 	/// from its <see cref="TargetBase.CreateExpressionBase(CompileContext)"/> abstract
 	/// method through a rewrite - because if there are any non-standard expressions left,
 	/// then compilation will not be possible.</remarks>
-	public class TargetExpressionRewriter : ExpressionVisitor
+	internal class TargetExpressionRewriter : ExpressionVisitor
     {
 		readonly CompileContext _sourceCompileContext;
-
+		readonly IExpressionCompiler _compiler;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetExpressionRewriter"/> class for the
 		/// given <paramref name="context"/>
 		/// </summary>
 		/// <param name="context">The compilation context.</param>
-		public TargetExpressionRewriter(CompileContext context)
+		public TargetExpressionRewriter(IExpressionCompiler compiler, CompileContext context)
 		{
+			_compiler = compiler;
 			_sourceCompileContext = context;
 		}
 		/// <summary>
@@ -40,14 +41,9 @@ namespace Rezolver
 			{
 				if (node.NodeType == ExpressionType.Extension)
 				{
-					TargetExpression re = node as TargetExpression;
-					if (re != null)
-					{
-						return re.Target.CreateExpression(_sourceCompileContext.New(re.Type));
-					}
-					//RezolveContextPlaceholderExpression pe = node as RezolveContextPlaceholderExpression;
-					//if (pe != null)
-					//	return _sourceCompileContext.RezolveContextExpression;
+					TargetExpression te = node as TargetExpression;
+					if (te != null)
+						return _compiler.Build(te.Target, _sourceCompileContext.New(te.Type));
 				}
 			}
 			return base.Visit(node);

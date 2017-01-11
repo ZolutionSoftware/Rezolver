@@ -45,18 +45,6 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Abstract method called to create the expression - this is called by <see cref="CreateExpression"/> after the
-    /// target type has been validated, if provided.
-    /// 
-    /// Note - if your implementation needs to support dynamic Resolve operations from the container that is passed
-    /// to an IRezolver's Resolve method, you can use the <see cref="ExpressionHelper.DynamicRezolverParam"/> property,
-    /// all the default implementations of this class (and others) use that by default.
-    /// </summary>
-    /// <param name="context">The current compile context</param>
-    /// <returns></returns>
-    protected abstract Expression CreateExpressionBase(CompileContext context);
-
-    /// <summary>
     /// This is called by <see cref="CreateExpression(CompileContext)"/> after the derived class generates its expression
     /// via a call to <see cref="CreateExpressionBase(CompileContext)"/> - unless <see cref="SuppressScopeTracking"/> is true either 
     /// on this object, or on the passed <paramref name="context"/>.
@@ -129,48 +117,7 @@ namespace Rezolver
       type.MustNotBeNull("type");
       return TypeHelpers.AreCompatible(DeclaredType, type);
     }
-
-    /// <summary>
-    /// Virtual method implementing IRezolveTarget.CreateExpression.  Rather than overriding this method,
-    /// your starting point is to implement the abstract method <see cref="CreateExpressionBase"/>.
-    /// </summary>
-    /// <param name="context">The current compile context</param>
-    /// <returns></returns>
-    public virtual Expression CreateExpression(CompileContext context)
-    {
-      if (context.TargetType != null && !SupportsType(context.TargetType))
-        throw new ArgumentException(String.Format(ExceptionResources.TargetDoesntSupportType_Format, context.TargetType),
-          "targetType");
-
-      if (!context.PushCompileStack(this))
-        throw new InvalidOperationException(string.Format(ExceptionResources.CyclicDependencyDetectedInTargetFormat, GetType(), DeclaredType));
-
-      try
-      {
-        var result = CreateExpressionBase(context);
-        Type convertType = context.TargetType ?? DeclaredType;
-
-        if (convertType == typeof(object) && TypeHelpers.IsValueType(result.Type)
-          || !TypeHelpers.IsAssignableFrom(convertType, DeclaredType)
-          || !TypeHelpers.IsAssignableFrom(convertType, result.Type))
-          return Expression.Convert(result, convertType);
-
-        result = new TargetExpressionRewriter(context).Visit(result);
-        //if scope tracking isn't disabled, either by this target or at the compile context level, then we 
-        //add the boilerplate to add this object produced to the current scope.
-        if (!SuppressScopeTracking && !context.SuppressScopeTracking)
-        {
-          result = CreateScopeTrackingExpression(context, result);
-        }
-
-        return result;
-      }
-      finally
-      {
-        context.PopCompileStack();
-      }
-    }
-
+		
     /// <summary>
     /// Gets the declared type of object that is constructed by this target.  This will be the return type of
     /// any expression built by <see cref="CreateExpression"/> unless otherwise instructed to build a different type.

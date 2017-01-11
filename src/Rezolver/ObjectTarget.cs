@@ -75,11 +75,6 @@ namespace Rezolver
 			return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
 		}
 
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-			
-		}
-
 		object ICompiledTarget.GetObject(RezolveContext context)
 		{
 			//when directly implementing ICompiledTarget, the scoping rules have to be honoured manually

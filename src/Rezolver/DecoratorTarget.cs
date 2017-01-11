@@ -60,20 +60,6 @@ namespace Rezolver
 			Target = ConstructorTarget.Auto(DecoratorType);
 		}
 
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-			//create a new context in order to create a new ChildBuilder into which we can register targets for look up
-			var newContext = new CompileContext(context, inheritSharedExpressions: true);
-			//add the decorated target into the compile context under the type which the enclosing decorator
-			//was registered against.  If the inner target is bound to a type which correctly implements the decorator
-			//pattern over the common decorated type, then the decorated instance should be resolved when constructor
-			//arguments are resolved.
-			newContext.Register(DecoratedTarget, DecoratedType);
-			var expr = Target.CreateExpression(newContext);
-			return expr;
-#error need a decoratortargetbuilder now
-		}
-
 		public override bool SupportsType(Type type)
 		{
 			return Target.SupportsType(type);

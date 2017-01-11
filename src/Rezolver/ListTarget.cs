@@ -146,16 +146,5 @@ namespace Rezolver
 			Items = items;
 			AsArray = asArray;
 		}
-
-		/// <summary>
-		/// Constructs an expression that represents building an array of <see cref="ElementType"/> or List&lt;<see cref="ElementType"/>&gt;
-		/// depending on the value of <see cref="AsArray"/>.
-		/// </summary>
-		/// <param name="context">The current compile context</param>
-		/// <returns>System.Linq.Expressions.Expression.</returns>
-		protected override System.Linq.Expressions.Expression CreateExpressionBase(CompileContext context)
-		{
-
-		}
 	}
 }

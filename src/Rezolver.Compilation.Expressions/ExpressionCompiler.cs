@@ -8,45 +8,36 @@ namespace Rezolver.Compilation.Expressions
 {
 
 	/// <summary>
-	/// Implementation of the <see cref="ITargetCompiler"/> interface which produces <see cref="ICompiledTarget"/> objects
-	/// by building and compiling expression trees from the <see cref="ITarget"/> objects which are registered.
-	/// 
-	/// To enable the use of this compiler, use the <see cref="ExpressionCompilerTargetContainerExtensions.UseExpressionCompiler(ITargetContainer)"/>
+	/// Implementation of the <see cref="ITargetCompiler" /> interface which produces <see cref="ICompiledTarget" /> objects
+	/// by building and compiling expression trees from the <see cref="ITarget" /> objects which are registered.
+	/// To enable the use of this compiler, use the <see cref="ExpressionCompilerTargetContainerExtensions.UseExpressionCompiler(ITargetContainer)" />
 	/// extension method on your root target container.
 	/// </summary>
-	/// <remarks>This class works by resolving <see cref="IExpressionBuilder"/> instances from the <see cref="CompileContext"/> which can 
-	/// build an expression for a given <see cref="ITarget"/>.
-	/// 
-	/// Typically, this is done by searching for an <see cref="IExpressionBuilder{TTarget}"/> where 'TTarget' is equal to the runtime type
-	/// of the target - e.g. <see cref="ConstructorTarget"/>.  If one cannot be found, it will then search for an <see cref="IExpressionBuilder"/>
-	/// whose <see cref="IExpressionBuilder.CanBuild(ITarget, CompileContext)"/> function returns <c>true</c>.
-	/// 
-	/// With a correctly configured target dictionary (using the 
-	/// <see cref="ExpressionCompilerTargetContainerExtensions.UseExpressionCompiler(ITargetContainer)"/> extension method, for example), 
-	/// this should resolve to an instance of the <see cref="ConstructorTargetBuilder"/> class, which implements 
+	/// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
+	/// <seealso cref="Rezolver.ITargetCompiler" />
+	/// <remarks>This class works by resolving <see cref="IExpressionBuilder" /> instances from the <see cref="CompileContext" /> which can
+	/// build an expression for a given <see cref="ITarget" />.
+	/// Typically, this is done by searching for an <see cref="IExpressionBuilder{TTarget}" /> where 'TTarget' is equal to the runtime type
+	/// of the target - e.g. <see cref="ConstructorTarget" />.  If one cannot be found, it will then search for an <see cref="IExpressionBuilder" />
+	/// whose <see cref="IExpressionBuilder.CanBuild(ITarget, CompileContext)" /> function returns <c>true</c>.
+	/// With a correctly configured target dictionary (using the
+	/// <see cref="ExpressionCompilerTargetContainerExtensions.UseExpressionCompiler(ITargetContainer)" /> extension method, for example),
+	/// this should resolve to an instance of the <see cref="ConstructorTargetBuilder" /> class, which implements
 	/// <code>IExpressionBuilder&lt;ConstructorTarget&gt;</code>
-	/// 
-	/// 
 	/// As such, the compiler can be extended to support extra target types and its existing expression builders can be replaced for customised
-	/// behaviour because they are all resolved from the <see cref="ITargetContainer"/> underpinning a particular <see cref="CompileContext"/>.
-	/// 
-	/// There is a caveat for this, however: you can't use the traditional targets (<see cref="ConstructorTarget"/> etc) to extend the compiler because
-	/// they currently need to be compiled in order to work - and therefore cannot be used because it would cause an infinite recursion.  
-	/// At present, therefore, the targets which are registered must directly implement either the <see cref="IExpressionBuilder{TTarget}"/> or 
-	/// <see cref="IExpressionBuilder"/> interfaces; or implement the <see cref="ICompiledTarget"/> interface and produce an 
-	/// instance of those interfaces when <see cref="ICompiledTarget.GetObject(RezolveContext)"/> is called on them.
-	/// 
-	/// Because of this requirement, the most common way to register an expression builder is to register an instance inside an 
-	/// <see cref="ObjectTarget"/> against the correct type, because it also implements <see cref="ICompiledTarget"/> in addition 
-	/// to <see cref="ITarget"/>.  
-	/// 
+	/// behaviour because they are all resolved from the <see cref="ITargetContainer" /> underpinning a particular <see cref="CompileContext" />.
+	/// There is a caveat for this, however: you can't use the traditional targets (<see cref="ConstructorTarget" /> etc) to extend the compiler because
+	/// they currently need to be compiled in order to work - and therefore cannot be used because it would cause an infinite recursion.
+	/// At present, therefore, the targets which are registered must directly implement either the <see cref="IExpressionBuilder{TTarget}" /> or
+	/// <see cref="IExpressionBuilder" /> interfaces; or implement the <see cref="ICompiledTarget" /> interface and produce an
+	/// instance of those interfaces when <see cref="ICompiledTarget.GetObject(RezolveContext)" /> is called on them.
+	/// Because of this requirement, the most common way to register an expression builder is to register an instance inside an
+	/// <see cref="ObjectTarget" /> against the correct type, because it also implements <see cref="ICompiledTarget" /> in addition
+	/// to <see cref="ITarget" />.
 	/// Using this pattern, it's therefore important that an expression builder is completely threadsafe and recursion safe (since one target's
 	/// compilation might depend on the compilation of another of the same type).
-	/// 
-	/// 
-	/// Under the default configuration, if you want to get hold of this compiler then you should request the type <see cref="IExpressionCompiler"/>,
-	/// which is exclusively implemented by this type.
-	/// </remarks>
+	/// Under the default configuration, if you want to get hold of this compiler then you should request the type <see cref="IExpressionCompiler" />,
+	/// which is exclusively implemented by this type.</remarks>
 	public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler
 	{
 		/// <summary>
@@ -72,13 +63,48 @@ namespace Rezolver.Compilation.Expressions
 
 		public ICompiledTarget CompileTarget(ITarget target, CompileContext context)
 		{
-			//if the target is already a compiledTarget, then return its result.
+			//if the target is already a compiledTarget, then cast it - its implementation
+			//of ICompiledTarget is likely to be faster than any we could generate dynamically.
 			if (target is ICompiledTarget)
 				return (ICompiledTarget)target;
 
+			return BuildCompiledTargetForLambda(BuildResolveLambda(target, context));
+		}
+
+
+		/// <summary>
+		/// Similar to the <see cref="Build(ITarget, CompileContext)" /> function, except the returned lambda will be optimised and can be
+		/// immediately compiled into a delegate and executed; or quoted inside another expression as a callback.
+		/// The <see cref="CompileContext.RezolveContextExpression" /> will be passed to define the single parameter for the lambda
+		/// that is created.
+		/// </summary>
+		/// <param name="target">The target.</param>
+		/// <param name="context">The current compilation context.</param>
+		public virtual Expression<Func<RezolveContext, object>> BuildResolveLambda(ITarget target, CompileContext context)
+		{
 			var expression = Build(target, context);
-			var lambda = CreateResolveLambda(expression, context);
-			return CreateCompiledTargetForLambda(lambda);
+
+			//if we have shared conditionals, then we want to try and reorder them; as the intention
+			//of the use of shared expressions is to consolidate them into one.  We do this on the boolean
+			//expressions that might be used as tests for conditionals
+			var sharedConditionalTests = context.SharedExpressions.Where(e => e.Type == typeof(Boolean)).ToArray();
+			if (sharedConditionalTests.Length != 0)
+				expression = new ConditionalRewriter(expression, sharedConditionalTests).Rewrite();
+
+			expression = expression.Optimise();
+
+			//shared locals are local variables generated by targets that would normally be duplicated
+			//if multiple targets of the same type are used in one compiled target.  By sharing them,
+			//they reduce the size of the stack required for any generated code, but in turn 
+			//the compiler is required to lift them out and add them to an all-encompassing BlockExpression
+			//surrounding all the code - otherwise they won't be in scope.
+			var sharedLocals = context.SharedExpressions.OfType<ParameterExpression>().ToArray();
+			if (sharedLocals.Length != 0)
+			{
+				expression = Expression.Block(expression.Type, sharedLocals, new BlockExpressionLocalsRewriter(sharedLocals).Visit(expression));
+			}
+
+			return BuildResolveLambda(expression, context);
 		}
 
 		/// <summary>
@@ -100,7 +126,7 @@ namespace Rezolver.Compilation.Expressions
 			target.MustNotBeNull(nameof(target));
 			context.MustNotBeNull(nameof(context));
 
-			List<Type> builderTypes = 
+			List<Type> builderTypes =
 				TargetSearchTypes(target).Select(t => typeof(IExpressionBuilder<>).MakeGenericType(t)).ToList();
 
 			//and add the IExpressionBuilder type
@@ -135,20 +161,24 @@ namespace Rezolver.Compilation.Expressions
 			var tTarget = target.GetType();
 			yield return tTarget;
 			//return all bases which can be treated as ITarget
-			foreach(var baseT in tTarget.GetAllBases().Where(t => TypeHelpers.IsAssignableFrom(typeof(ITarget), t)))
+			foreach (var baseT in tTarget.GetAllBases().Where(t => TypeHelpers.IsAssignableFrom(typeof(ITarget), t)))
 			{
 				yield return baseT;
 			}
 		}
 
-		protected virtual ICompiledTarget CreateCompiledTargetForLambda(Expression<Func<RezolveContext, object>> lambda)
+		protected virtual ICompiledTarget BuildCompiledTargetForLambda(Expression<Func<RezolveContext, object>> lambda)
 		{
 			return new CompiledLambdaTarget(lambda.Compile());
 		}
 
-		protected Expression<Func<RezolveContext, object>> CreateResolveLambda(Expression body, CompileContext context)
+		protected Expression<Func<RezolveContext, object>> BuildResolveLambda(Expression expression, CompileContext context)
 		{
-			return Expression.Lambda<Func<RezolveContext, object>>(body, context.RezolveContextExpression);
+			//value types must be boxed, and that requires an explicit convert expression
+			if (expression.Type != typeof(object) && TypeHelpers.IsValueType(expression.Type))
+				expression = Expression.Convert(expression, typeof(object));
+
+			return Expression.Lambda<Func<RezolveContext, object>>(expression, context.RezolveContextExpression);
 		}
 
 		/// <summary>

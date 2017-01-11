@@ -79,15 +79,5 @@ namespace Rezolver
 			ExpressionFactory = expressionFactory;
 			DeclaredType = declaredType;
 		}
-
-		/// <summary>
-		/// Returns either the static <see cref="Expression"/> or the result of calling the 
-		/// <see cref="ExpressionFactory"/> with the <paramref name="context"/>.  
-		/// </summary>
-		/// <param name="context">The current compile context</param>
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-			return Expression ?? ExpressionFactory(context);
-		}
 	}
 }

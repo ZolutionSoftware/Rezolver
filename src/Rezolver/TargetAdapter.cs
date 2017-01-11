@@ -63,17 +63,18 @@ namespace Rezolver
 
 			protected override Expression VisitMemberInit(MemberInitExpression node)
 			{
-				var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, _adapter);
+				//var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, _adapter);
 				return new TargetExpression(new ExpressionTarget(c =>
 				{
-					var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
+					var adaptedCtorExp = Visit(node.NewExpression);
+					//var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
 
 					//the goal here, then, is to find the new expression for this type and replace it 
 					//with a memberinit equivalent to the one we visited.  Although the constructor target produces 
 					//a NewExpression, it isn't going to be the root expression, because of the scoping boilerplate 
 					//that is put around nearly all expressions produced by RezolveTargetBase implementations. 
 					var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
-					return rewriter.Visit(ctorTargetExpr);
+					return rewriter.Visit(adaptedCtorExp);
 				}, node.Type));
 			}
 

@@ -81,16 +81,6 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Determines the generic type to be bound, and then generates a <see cref="System.Linq.Expressions.NewExpression"/> for that type.
-		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
-		protected override System.Linq.Expressions.Expression CreateExpressionBase(CompileContext context)
-		{
-			return target.CreateExpression(context);
-		}
-
-		/// <summary>
 		/// Obtains an <see cref="ITarget"/> (usually a <see cref="ConstructorTarget"/>) which will create 
 		/// an instance of a generic type (whose definition is equal to <see cref="GenericType"/>) with 
 		/// generic arguments set correctly according to the <see cref="CompileContext.TargetType"/> of 

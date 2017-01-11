@@ -18,47 +18,18 @@ namespace Rezolver
 	/// </summary>
 	public class SingletonTarget : TargetBase
 	{
+		//the cached compiled targets for this singleton keyed by the requested type.
+		//compilers should use this so that the singleton rule can be enforced.
+		private readonly ConcurrentDictionary<Type, ICompiledTarget> _initialisers = new ConcurrentDictionary<Type, ICompiledTarget>();
+
 		/// <summary>
-		/// Used in ensuring the correct construction and scope tracking of a singleton instance.
-		/// 
-		/// Implements the ICompiledRezolveTarget interface for the single case of creating a lazy on demand (from the
-		/// first RezolveContext that's passed to its GetObject method, and returning its value.
+		/// Override of <see cref="TargetBase.DeclaredType"/> - always returns the DeclaredType of the <see cref="InnerTarget"/>
 		/// </summary>
-		private class SingletonTargetLazyInitialiser : ICompiledTarget
+		/// <value>The type of the declared.</value>
+		public override Type DeclaredType
 		{
-			private Func<RezolveContext, Lazy<object>> _lazyFactory;
-			private Lazy<object> _lazy;
-
-			//internal Lazy<object> Lazy {  get { return _lazy; } }
-
-			internal SingletonTargetLazyInitialiser(SingletonTarget target, Func<RezolveContext, Lazy<object>> lazyFactory)
-			{
-				_lazyFactory = lazyFactory;
-			}
-
-			/// <summary>
-			/// Creates the singleton target's Lazy on demand if required, and then returns the object that the underlying
-			/// compiled code produces.
-			/// </summary>
-			/// <param name="context"></param>
-			/// <returns></returns>
-			object ICompiledTarget.GetObject(RezolveContext context)
-			{
-				if (_lazy == null)
-				{
-					//here - if we create more than one lazy, it's not a big deal.  *Executing* two
-					//different ones is a big deal.
-					Interlocked.CompareExchange(ref _lazy, _lazyFactory(context), null);
-				}
-				return _lazy.Value;
-			}
+			get { return InnerTarget.DeclaredType; }
 		}
-
-		private static readonly MethodInfo ICompiledRezolveTarget_GetObject = MethodCallExtractor.ExtractCalledMethod((ICompiledTarget t) => t.GetObject(null));
-		private static readonly ConstructorInfo LazyObject_Ctor = MethodCallExtractor.ExtractConstructorCall(() => new Lazy<object>(() => (object)null));
-
-		private ITarget _innerTarget;
-		private readonly ConcurrentDictionary<Type, SingletonTargetLazyInitialiser> _initialisers = new ConcurrentDictionary<Type, SingletonTargetLazyInitialiser>();
 
 		/// <summary>
 		/// Overrides the base class to ensure that automatic generation of the scope tracking code by <see cref="TargetBase"/> is disabled.
@@ -78,10 +49,7 @@ namespace Rezolver
 		/// </summary>
 		public ITarget InnerTarget
 		{
-			get
-			{
-				return _innerTarget;
-			}
+			get;
 		}
 
 		/// <summary>
@@ -91,7 +59,9 @@ namespace Rezolver
 		public SingletonTarget(ITarget innerTarget)
 		{
 			innerTarget.MustNotBeNull("innerTarget");
-			_innerTarget = innerTarget;
+			innerTarget.MustNot(t => t is SingletonTarget, "A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
+
+			InnerTarget = innerTarget;
 		}
 
 		protected override Expression CreateScopeSelectionExpression(CompileContext context, Expression expression)
@@ -101,56 +71,18 @@ namespace Rezolver
 
 		protected override Expression CreateExpressionBase(CompileContext context)
 		{
-			//this isn't quite right, imho.  One singleton target should technically be able to create
-			//more than one instance of a given concrete type, if that target is in a RezolverBuilder that is, 
-			//in turn, used to build more than one top-level container (a permitted use case).
-			//The way this code is written, however, the singleton will only ever create one instance of a type and,
-			//in a cruel twist, will only ever belong to one scope (if applicable).
-			//to fix this will mean being able to easily identify different container trees from each other,
-			//and creating one instance for each unique tree.  This isn't even possible at the moment, because
-			//there's no way to identify the root container in a chain of containers, unless you force the use
-			//of scopes, which we don't necessarily want to do.
-			//So I'm not sure if I've coded myself down a hole here - or if adding the necessary properties to 
-			//the IRezolver interface to uniquely identify each one, and walk any parent/child relationship from 
-			//child back to root would actually be a good thing to do in general anyway, so should therefore just
-			//be done.
+			
+		}
 
-			SingletonTargetLazyInitialiser initialiser = null;
-
-			if (!_initialisers.TryGetValue(context.TargetType ?? _innerTarget.DeclaredType, out initialiser))
-			{
-				//if our inner target is also a singleton, we just chain straight through to its own CreateExpression
-				//call.  Note that if this is the case, our own lazy will never be constructed and the code will always
-				//fall into this branch.
-				if (_innerTarget is SingletonTarget)
-					return _innerTarget.CreateExpression(context);
-
-				initialiser = _initialisers.GetOrAdd(context.TargetType ?? _innerTarget.DeclaredType, t =>
-				{
-					//get the underlying expression for the target that is to be turned into a singleton - but disable the
-					//generation of any scope-tracking code.
-					var innerExpression = ExpressionHelper.GetLambdaBodyForTarget(_innerTarget,
-						context.New(t, suppressScopeTracking: true));
-					//generate our scope tracking expression.
-					var scopeTracking = CreateScopeTrackingExpression(context, innerExpression);
-
-					//there's an argument for using the compiler from the compilecontext (via the Rezolver) here to generate this 
-					//lambda, but our interface specifically creates an ICompiledRezolveTarget - not a delegate - so it's not 
-					//really suitable.
-					//in any case, compiling directly to a delegate will work on all platforms on which Rezolver will work in the 
-					//first place, it just might not be as fast as it might be if we honoured the context's compiler, if
-					//that happens to be the AssemblyRezolveTargetCompiler.
-					var lazyLambdaExpr = Expression.Lambda(Expression.New(LazyObject_Ctor,
-						//creating the factory delegate for the lazy uniquely for each invokation of the outer lambda
-						Expression.Lambda(Expression.Convert(scopeTracking, typeof(object)))), context.RezolveContextExpression);
-					var lazyLambda = (Func<RezolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
-					//now we create and capture an instance of the SingletonTargetLazyInitialiser class, passing our
-					//dynamically constructed delegate along with this target
-					return new SingletonTargetLazyInitialiser(this, lazyLambda);
-				});
-			}
-			return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledTarget)),
-				   ICompiledRezolveTarget_GetObject, context.RezolveContextExpression);
+		/// <summary>
+		/// Used to support compiled versions of this singleton - note this concept is something that probably needs
+		/// to move out of this type, into a more generic TargetState object or something like that.
+		/// </summary>
+		/// <param name="declaredType">Type of object.</param>
+		/// <param name="initialiserFactory">The initialiser factory.</param>
+		public ICompiledTarget GetOrAddInitialiser(Type declaredType, Func<Type, ICompiledTarget> initialiserFactory)
+		{
+			return _initialisers.GetOrAdd(declaredType, initialiserFactory);
 		}
 
 		/// <summary>
@@ -161,16 +93,7 @@ namespace Rezolver
 		/// <param name="type">Required</param>
 		public override bool SupportsType(Type type)
 		{
-			return _innerTarget.SupportsType(type);
-		}
-
-		/// <summary>
-		/// Override of <see cref="TargetBase.DeclaredType"/> - always returns the DeclaredType of the <see cref="InnerTarget"/>
-		/// </summary>
-		/// <value>The type of the declared.</value>
-		public override Type DeclaredType
-		{
-			get { return _innerTarget.DeclaredType; }
+			return InnerTarget.SupportsType(type);
 		}
 	}
 

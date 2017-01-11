@@ -39,7 +39,7 @@ namespace Rezolver.Compilation.Expressions
 				return newExpr;
 			else
 				return Expression.MemberInit(newExpr, 
-					binding.MemberBindings.Select(mb => Expression.Bind(mb.Member, compiler.Build(mb.Target, context))));
+					binding.MemberBindings.Select(mb => Expression.Bind(mb.Member, compiler.Build(mb.Target, context.New(mb.MemberType)))));
 		}
 	}
 }

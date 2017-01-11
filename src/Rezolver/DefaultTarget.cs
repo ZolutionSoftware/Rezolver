@@ -33,16 +33,5 @@ namespace Rezolver
 			type.MustNotBeNull("type");
 			_declaredType = type;
 		}
-
-		/// <summary>
-		/// Always returns a <see cref="DefaultExpression"/> of the type <see cref="DeclaredType"/>
-		/// </summary>
-		/// <param name="context">The current compile context</param>
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-			return Expression.Default(DeclaredType);
-		}
-
-
 	}
 }

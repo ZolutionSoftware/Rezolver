@@ -68,20 +68,6 @@ namespace Rezolver
 			_declaredType = declaredType;
 			Factory = factory;
 		}
-
-		/// <summary>
-		/// Returns an expression that represents invoking the <see cref="Factory"/> method with zero or more
-		/// auto-resolved arguments.
-		/// </summary>
-		/// <param name="context">The current compile context</param>
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-			var bindings = ParameterBinding.BindWithRezolvedArguments(Factory.GetMethodInfo());
-			return Expression.Invoke(Expression.Constant(Factory),
-				bindings.Select(b => b.Parameter.ParameterType == typeof(RezolveContext) ?
-					ExpressionHelper.RezolveContextParameterExpression
-					: b.Target.CreateExpression(context.New(b.Parameter.ParameterType))));
-		}
 	}
 
 	/// <summary>

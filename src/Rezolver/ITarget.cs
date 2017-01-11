@@ -42,15 +42,5 @@ namespace Rezolver
     /// <see cref="DeclaredType"/>, because an <see cref="ITarget"/> might be able to support a much wider
     /// range of types other than just those which are directly compatible with its <see cref="DeclaredType"/>.</remarks>
     bool SupportsType(Type type);
-    /// <summary>
-    /// Called to create the expression that will produce the object that is resolved by this target.  The expression
-    /// might be expected to handle a dynamic container being passed to it at run time to enable dynamic per-target overriding
-    /// from other rezolvers.
-    /// </summary>
-    /// <param name="context">The current compile context</param>
-    /// <returns></returns>
-	[Obsolete("This is to be replaced with the IExpressionCompiler.Build function", true)]
-    Expression CreateExpression(CompileContext context);
-
   }
 }
