@@ -7,66 +7,66 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Rezolver.Tests.Configuration
-{
+//namespace Rezolver.Tests.Configuration
+//{
 
-  public class AdvancedJsonConfigurationTests : JsonConfigurationTestsBase
-  {
-#if !DOTNET
-		protected override IConfigurationAdapter CreateAdapter()
-		{
-			return new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
-		}
+//  public class AdvancedJsonConfigurationTests : JsonConfigurationTestsBase
+//  {
+//#if !DOTNET
+//		protected override IConfigurationAdapter CreateAdapter()
+//		{
+//			return new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
+//		}
 
-		protected override string PreProcess(string json)
-		{
-			var config = JObject.Parse(json);
-			if (config.Remove("assemblies"))
-			{
-				Console.WriteLine("Removed 'assemblies' property from configuration json for advanced test");
-				return config.ToString();
-			}
+//		protected override string PreProcess(string json)
+//		{
+//			var config = JObject.Parse(json);
+//			if (config.Remove("assemblies"))
+//			{
+//				Console.WriteLine("Removed 'assemblies' property from configuration json for advanced test");
+//				return config.ToString();
+//			}
 
-			return base.PreProcess(json);
-		}
+//			return base.PreProcess(json);
+//		}
 
-		[Fact]
-		public void AdapterShouldBuildRezolverBuilder()
-		{
-			var json = @"{
-	""rezolve"": [
-		{ ""System.Int32"": 10 },
-		{ ""Rezolver.Tests.ConfigurationTests.RequiresInt"": { ""$construct"": ""$auto"" }
-			},
-		{ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"": { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" }
-			},
-		{
-				""type"": { ""name"": ""System.Collections.Generic.IEnumerable"", ""args"": [ ""System.Int32"" ]
-	},
-			""value"": [ 1, 2, 3 ]
-},
-		{
-			""types"": [ ""System.Object"", ""System.String"" ],
-			""value"": ""Hello world""
-		}
-	]
-}";
-			var parser = new JsonConfigurationParser();
-			IConfiguration configuration = parser.Parse(json);
-			//use the defaul adapter
-			IConfigurationAdapter adapter = new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
-			var targetContainer = adapter.CreateTargetContainer(configuration);
+//		[Fact]
+//		public void AdapterShouldBuildRezolverBuilder()
+//		{
+//			var json = @"{
+//	""rezolve"": [
+//		{ ""System.Int32"": 10 },
+//		{ ""Rezolver.Tests.ConfigurationTests.RequiresInt"": { ""$construct"": ""$auto"" }
+//			},
+//		{ ""Rezolver.Tests.ConfigurationTests.IRequiresInt"": { ""$construct"": ""Rezolver.Tests.ConfigurationTests.RequiresInt"" }
+//			},
+//		{
+//				""type"": { ""name"": ""System.Collections.Generic.IEnumerable"", ""args"": [ ""System.Int32"" ]
+//	},
+//			""value"": [ 1, 2, 3 ]
+//},
+//		{
+//			""types"": [ ""System.Object"", ""System.String"" ],
+//			""value"": ""Hello world""
+//		}
+//	]
+//}";
+//			var parser = new JsonConfigurationParser();
+//			IConfiguration configuration = parser.Parse(json);
+//			//use the defaul adapter
+//			IConfigurationAdapter adapter = new ConfigurationAdapter(AdvancedConfigurationAdapterContextFactory.Instance);
+//			var targetContainer = adapter.CreateTargetContainer(configuration);
 
-			Assert.IsType<TargetContainer>(targetContainer);
+//			Assert.IsType<TargetContainer>(targetContainer);
 
-			var container = new Container(targetContainer, new TargetAssemblyCompiler());
-			var str = container.Resolve<string>();
-			Assert.Equal("Hello world", str);
-			var en = container.Resolve<IEnumerable<int>>();
-			Assert.NotNull(en);
-			Assert.True(en.SequenceEqual(new[] { 1, 2, 3 }));
+//			var container = new Container(targetContainer, new TargetAssemblyCompiler());
+//			var str = container.Resolve<string>();
+//			Assert.Equal("Hello world", str);
+//			var en = container.Resolve<IEnumerable<int>>();
+//			Assert.NotNull(en);
+//			Assert.True(en.SequenceEqual(new[] { 1, 2, 3 }));
 
-		}
-#endif
-  }
-}
+//		}
+//#endif
+//  }
+//}

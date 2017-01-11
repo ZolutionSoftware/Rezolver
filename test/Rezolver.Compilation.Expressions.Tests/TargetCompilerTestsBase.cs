@@ -1,11 +1,12 @@
-﻿using Rezolver.Tests.TestTypes;
+﻿using Rezolver.Tests;
+using Rezolver.Tests.TestTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Rezolver.Tests.Compilation
+namespace Rezolver.Compilation.Expressions.Tests
 {
   public abstract partial class TargetCompilerTestsBase : TestsBase, IDisposable
   {

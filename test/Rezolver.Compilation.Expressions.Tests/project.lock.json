@@ -2686,6 +2686,23 @@
         "runtime": {
           "netstandard1.1/Rezolver.Shared.dll": {}
         }
+      },
+      "Rezolver.Tests/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.1",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.0",
+          "Rezolver.Configuration.Json": "1.1.0",
+          "Rezolver.Logging": "1.1.0",
+          "dotnet-test-xunit": "2.2.0-preview2-build1029",
+          "xunit": "2.2.0-beta4-build3444"
+        },
+        "compile": {
+          "netcoreapp1.1/Rezolver.Tests.dll": {}
+        },
+        "runtime": {
+          "netcoreapp1.1/Rezolver.Tests.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.5.1": {
@@ -3155,6 +3172,25 @@
         },
         "runtime": {
           "net451/Rezolver.Shared.dll": {}
+        }
+      },
+      "Rezolver.Tests/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Rezolver.Configuration.Json": "1.1.0",
+          "Rezolver.Logging": "1.1.0",
+          "dotnet-test-xunit": "2.2.0-preview2-build1029",
+          "xunit": "2.2.0-beta4-build3444"
+        },
+        "frameworkAssemblies": [
+          "System.Linq.Expressions"
+        ],
+        "compile": {
+          "net451/Rezolver.Tests.dll": {}
+        },
+        "runtime": {
+          "net451/Rezolver.Tests.dll": {}
         }
       }
     }
@@ -8667,6 +8703,11 @@
       "type": "project",
       "path": "../../src/Rezolver.Shared/project.json",
       "msbuildProject": "../../src/Rezolver.Shared/Rezolver.Shared.xproj"
+    },
+    "Rezolver.Tests/1.0.0": {
+      "type": "project",
+      "path": "../Rezolver.Tests/project.json",
+      "msbuildProject": "../Rezolver.Tests/Rezolver.Tests.xproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -8675,6 +8716,7 @@
       "Rezolver.Configuration.Json >= 1.1.0-*",
       "Rezolver.Logging >= 1.1.0-*",
       "Rezolver.Shared >= 1.1.0-*",
+      "Rezolver.Tests >= 1.0.0-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta4-build3444"
     ],

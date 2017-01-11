@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Rezolver.Tests.Compilation
+namespace Rezolver.Compilation.Expressions.Tests
 {
   public abstract partial class TargetCompilerTestsBase
   {

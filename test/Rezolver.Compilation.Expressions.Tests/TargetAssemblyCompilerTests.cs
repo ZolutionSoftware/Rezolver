@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
 
-namespace Rezolver.Tests.Compilation
+namespace Rezolver.Compilation.Expressions.Tests
 {
 #if !DOTNET
   public class TargetAssemblyCompilerTests : TargetCompilerTestsBase
@@ -20,7 +20,6 @@ namespace Rezolver.Tests.Compilation
         _baseOutputDir = Path.Combine(Environment.CurrentDirectory, "_TestAssemblies", System.DateTime.UtcNow.ToString("yyyy-MM-dd HH-mm-ss"));
         if (!Directory.Exists(_baseOutputDir)) Directory.CreateDirectory(_baseOutputDir);
       }
-
       return new TargetAssemblyCompiler(TargetAssemblyCompiler.CreateAssemblyBuilder(AssemblyBuilderAccess.RunAndSave, _baseOutputDir));
     }
 

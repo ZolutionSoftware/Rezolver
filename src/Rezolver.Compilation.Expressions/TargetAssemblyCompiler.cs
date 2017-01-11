@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 
-namespace Rezolver
+namespace Rezolver.Compilation.Expressions
 {
 #if !DOTNET
 	/// <summary>
