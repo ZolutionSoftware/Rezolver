@@ -57,26 +57,10 @@ namespace Rezolver
     /// part of your expression tree - you should </remarks>
     public virtual ITarget Resolve(CompileContext context)
     {
-      var target = Target;
+      if (Target is RezolvedTarget)
+        return ((RezolvedTarget)Target).Resolve(context.New(Parameter.ParameterType));
 
-      if (target is RezolvedTarget)
-        return ((RezolvedTarget)target).Resolve(context.New(Parameter.ParameterType));
-
-      return target;
-    }
-
-    /// <summary>
-    /// Helper method for getting the expression from the <see cref="Target"/> for the <see cref="Parameter"/>'s
-    /// <see cref="ParameterInfo.ParameterType"/>.  Takes care of setting the correct
-    /// <see cref="CompileContext.TargetType"/> in a new context built from the <paramref name="context"/> you pass.
-    /// </summary>
-    /// <param name="context">The current context for the object being built whose method or constructor parameter
-    /// is being bound.</param>
-    /// <returns>The expression built by <see cref="Target"/> for the <see cref="Parameter"/>'s
-    /// <see cref="ParameterInfo.ParameterType"/>.</returns>
-    public Expression CreateExpression(CompileContext context)
-    {
-      return Target.CreateExpression(context.New(Parameter.ParameterType));
+      return Target;
     }
 
     /// <summary>

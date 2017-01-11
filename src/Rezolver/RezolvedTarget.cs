@@ -113,16 +113,5 @@ namespace Rezolver
 
 			return fromContext;
 		}
-
-		/// <summary>
-		/// Implementation of <see cref="TargetBase.CreateExpressionBase(CompileContext)"/>.
-		/// Constructs the expression.
-		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-			
-		}
 	}
 }

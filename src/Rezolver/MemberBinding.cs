@@ -89,17 +89,5 @@ namespace Rezolver
 
 			return memberBindings.ToArray();
 		}
-
-		/// <summary>
-		/// Method for creating a Linq Expression MemberBinding object for the <see cref="Member"/>, to the expression produced by 
-		/// the <see cref="Target"/> object's <see cref="ITarget.CreateExpression(CompileContext)"/> method.
-		/// </summary>
-		/// <param name="context">The <see cref="CompileContext"/> under which the generated expression will be compiled.</param>
-		/// <returns></returns>
-		[Obsolete("To be removed when ITarget.CreateExpression is removed", true)]
-		public System.Linq.Expressions.MemberBinding CreateMemberBindingExpression(CompileContext context)
-		{
-			return Expression.Bind(Member, Target.CreateExpression(context.New(MemberType)));
-		}
 	}
 }

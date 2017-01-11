@@ -26,7 +26,8 @@ namespace Rezolver
     /// <returns></returns>
     protected virtual Expression GetLambdaBody(ITarget target, CompileContext context)
     {
-      return ExpressionHelper.GetLambdaBodyForTarget(target, context);
+      throw new NotImplementedException();
+      //return ExpressionHelper.GetLambdaBodyForTarget(target, context);
     }
 
     /// <summary>

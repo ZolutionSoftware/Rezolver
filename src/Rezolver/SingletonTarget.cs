@@ -69,11 +69,6 @@ namespace Rezolver
 			return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
 		}
 
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-			
-		}
-
 		/// <summary>
 		/// Used to support compiled versions of this singleton - note this concept is something that probably needs
 		/// to move out of this type, into a more generic TargetState object or something like that.

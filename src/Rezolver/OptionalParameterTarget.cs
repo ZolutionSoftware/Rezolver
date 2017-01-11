@@ -3,11 +3,7 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
@@ -17,13 +13,7 @@ namespace Rezolver
   /// </summary>
   public class OptionalParameterTarget : TargetBase
   {
-    public override Type DeclaredType
-    {
-      get
-      {
-        return MethodParameter.ParameterType;
-      }
-    }
+    public override Type DeclaredType { get { return MethodParameter.ParameterType; } }
 
     protected override bool SuppressScopeTracking
     {
@@ -34,13 +24,7 @@ namespace Rezolver
       }
     }
 
-    public override bool UseFallback
-    {
-      get
-      {
-        return true;
-      }
-    }
+    public override bool UseFallback { get { return true; } }
 
     public ParameterInfo MethodParameter { get; }
     /// <summary>
@@ -54,12 +38,6 @@ namespace Rezolver
       methodParameter.MustNotBeNull(nameof(methodParameter));
       methodParameter.MustNot(pi => !pi.IsOptional, "The methodParameter must represent an optional parameter", nameof(methodParameter));
       MethodParameter = methodParameter;
-    }
-
-    protected override Expression CreateExpressionBase(CompileContext context)
-    {
-      return (MethodParameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault ?
-        (Expression)Expression.Constant(MethodParameter.DefaultValue, MethodParameter.ParameterType) : Expression.Default(MethodParameter.ParameterType);
     }
   }
 }

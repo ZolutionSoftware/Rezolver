@@ -43,11 +43,6 @@ namespace Rezolver
 			InnerTarget = innerTarget;
 		}
 
-		protected override Expression CreateExpressionBase(CompileContext context)
-		{
-
-		}
-
 		public override bool SupportsType(Type type)
 		{
 			return InnerTarget.SupportsType(type);
