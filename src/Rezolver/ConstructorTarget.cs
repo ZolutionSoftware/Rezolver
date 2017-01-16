@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -31,7 +32,7 @@ namespace Rezolver
 		/// </summary>
 		/// <remarks>ConstructorTargets can be bound to a particular constructor
 		/// in advance, or they can search for a best-match constructor at the point where
-		/// <see cref="Bind(CompileContext)"/> is called.
+		/// <see cref="Bind(ICompileContext)"/> is called.
 		/// 
 		/// This property will only be set ultimately if it was passed to the 
 		/// <see cref="ConstructorTarget.ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])"/>
@@ -64,7 +65,7 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Gets the member binding behaviour to be used when <see cref="Bind(CompileContext)"/> is called.
+		/// Gets the member binding behaviour to be used when <see cref="Bind(ICompileContext)"/> is called.
 		/// </summary>
 		public IMemberBindingBehaviour MemberBindingBehaviour
 		{
@@ -101,7 +102,7 @@ namespace Rezolver
 
 		/// <summary>
 		/// Initializes a late-bound instance of the <see cref="ConstructorTarget" /> class which will 
-		/// <see cref="Bind(CompileContext)"/> to the best constructor at compile-time.
+		/// <see cref="Bind(ICompileContext)"/> to the best constructor at compile-time.
 		/// </summary>
 		/// <param name="type">Required.  The type to be constructed when resolved in a container.</param>
 		/// <param name="memberBindingBehaviour">Optional.  If provided, can be used to select properties which are to be
@@ -109,13 +110,13 @@ namespace Rezolver
 		/// <param name="namedArgs">Optional.  The named arguments which will be provided to the best-matched constructor.  These are taken into account
 		/// when the constructor is sought - with the constructor that the most parameters matched being selected.</param>
 		/// <remarks>The best available constructor on the <paramref name="type" /> is determined
-		/// when <see cref="ITarget.CreateExpression(CompileContext)" /> is called (which ultimately calls <see cref="CreateExpressionBase(CompileContext)" />).
-		/// The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the <see cref="CompileContext" /> at compile-time
-		/// (i.e. when <see cref="CreateExpressionBase(CompileContext)" /> is called) to the fewest number of <see cref="ITarget" /> objects whose <see cref="ITarget.UseFallback" />
+		/// when <see cref="ITarget.CreateExpression(ICompileContext)" /> is called (which ultimately calls <see cref="CreateExpressionBase(ICompileContext)" />).
+		/// The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the <see cref="ICompileContext" /> at compile-time
+		/// (i.e. when <see cref="CreateExpressionBase(ICompileContext)" /> is called) to the fewest number of <see cref="ITarget" /> objects whose <see cref="ITarget.UseFallback" />
 		/// is false (for example - when an IEnumerable of a service is requested, but no registrations are found, a target is returned with <see cref="ITarget.UseFallback" /> set to
 		/// <c>true</c>, and whose expression will equate to an empty enumerable).
 		/// This allows the system to bind to different constructors automatically based on the other registrations that are present in the <see cref="ITargetContainer" /> of the active
-		/// <see cref="RezolveContext.Container" /> when code is compiled in response to a call to <see cref="IContainer.Resolve(RezolveContext)" />.</remarks>
+		/// <see cref="ResolveContext.Container" /> when code is compiled in response to a call to <see cref="IContainer.Resolve(ResolveContext)" />.</remarks>
 		public ConstructorTarget(Type type, IMemberBindingBehaviour memberBindingBehaviour = null, IDictionary<string, ITarget> namedArgs = null)
 			: this(type, null, memberBindingBehaviour, null, namedArgs)
 		{
@@ -179,7 +180,7 @@ namespace Rezolver
 		/// <exception cref="AmbiguousMatchException">If more than one constructor can be bound with an equal amount of all-resolved
 		/// arguments or default arguments.</exception>
 		/// <exception cref="InvalidOperationException">If no constructors can be found.</exception>
-		public ConstructorBinding Bind(CompileContext context)
+		public ConstructorBinding Bind(ICompileContext context)
 		{
 			ConstructorInfo ctor = _ctor;
 			ParameterBinding[] boundArgs = ParameterBinding.None;

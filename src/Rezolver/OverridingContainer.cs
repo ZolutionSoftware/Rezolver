@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -38,9 +39,9 @@ namespace Rezolver
     /// <summary>
     /// Called to determine if this container is able to resolve the type specified in the passed <paramref name="context"/>.
     /// </summary>
-    /// <param name="context">Required.  The <see cref="RezolveContext"/>.</param>
+    /// <param name="context">Required.  The <see cref="ResolveContext"/>.</param>
     /// <returns></returns>
-    public override bool CanResolve(RezolveContext context)
+    public override bool CanResolve(ResolveContext context)
     {
       return base.CanResolve(context) || _inner.CanResolve(context);
     }
@@ -49,9 +50,9 @@ namespace Rezolver
     /// Overrides the base implementation to pass the lookup for an <see cref="ITarget"/> to the inner container - this
     /// is how dependency chaining from this container to the inner container is achieved.
     /// </summary>
-    /// <param name="context">Required.  The <see cref="RezolveContext"/>.</param>
+    /// <param name="context">Required.  The <see cref="ResolveContext"/>.</param>
     /// <returns></returns>
-    protected override ICompiledTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
+    protected override ICompiledTarget GetFallbackCompiledRezolveTarget(ResolveContext context)
     {
       return _inner.FetchCompiled(context);
     }

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -16,7 +17,7 @@ namespace Rezolver
   /// <remarks>Internally, the class uses a <see cref="ConcurrentDictionary{TKey, TValue}"/> to store <see cref="ICompiledTarget"/>s keyed by the requested type.
   /// 
   /// All the main <see cref="IContainer"/> implementations used directly in an application should inherit from this class, because otherwise every 
-  /// <see cref="IContainer.Resolve(RezolveContext)"/> operation would require a compilation phase before the object could be returned, which would be incredibly slow.
+  /// <see cref="IContainer.Resolve(ResolveContext)"/> operation would require a compilation phase before the object could be returned, which would be incredibly slow.
   /// 
   /// It's because of this caching that registering new targets in any <see cref="ITargetContainer"/> used by this class is not recommended: because after the first request
   /// for a particular type is made, the resultant <see cref="ICompiledTarget"/> is fixed until the container is thrown away.</remarks>
@@ -46,14 +47,14 @@ namespace Rezolver
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    /// <remarks>The method is called by <see cref="ContainerBase.Resolve(RezolveContext)"/>
-    /// to get the compiled target whose <see cref="ICompiledTarget.GetObject(RezolveContext)"/> method is to be used to get the instance that is to be resolved for
+    /// <remarks>The method is called by <see cref="ContainerBase.Resolve(ResolveContext)"/>
+    /// to get the compiled target whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method is to be used to get the instance that is to be resolved for
     /// a given request.
     /// 
-    /// The internal cache is examined first to see if an entry exists for the <see cref="RezolveContext.RequestedType"/> type and, if not, then 
-    /// the result of the base class' <see cref="ContainerBase.GetCompiledRezolveTarget(RezolveContext)"/> is cached and returned.
+    /// The internal cache is examined first to see if an entry exists for the <see cref="ResolveContext.RequestedType"/> type and, if not, then 
+    /// the result of the base class' <see cref="ContainerBase.GetCompiledRezolveTarget(ResolveContext)"/> is cached and returned.
     /// </remarks>
-    protected override ICompiledTarget GetCompiledRezolveTarget(RezolveContext context)
+    protected override ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)
     {
       return _entries.GetOrAdd(context.RequestedType, t => new Lazy<ICompiledTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
     }

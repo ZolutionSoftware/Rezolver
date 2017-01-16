@@ -18,8 +18,8 @@ namespace Rezolver
 	/// the code generated from the expression it produces is executed only once for each lifetime scope.
 	/// 
 	/// Outside of that, the target generates wrapper code that forcibly caches the instance that is produced (whether
-	/// it's IDiposable or not) into the current scope's cache (using <see cref="IScopedContainer.AddToScope(object, RezolveContext)"/>)
-	/// and retrieves previous instances from that scope (using <see cref="IScopedContainer.GetFromScope(RezolveContext)"/>.</remarks>
+	/// it's IDiposable or not) into the current scope's cache (using <see cref="IScopedContainer.AddToScope(object, ResolveContext)"/>)
+	/// and retrieves previous instances from that scope (using <see cref="IScopedContainer.GetFromScope(ResolveContext)"/>.</remarks>
 	public class ScopedTarget : TargetBase
 	{
 		public ITarget InnerTarget { get; }

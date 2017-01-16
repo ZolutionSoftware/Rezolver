@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -69,13 +70,13 @@ namespace Rezolver
 				_declaredType = Value == null ? typeof(object) : Value.GetType();
 		}
 
-		protected override Expression CreateScopeSelectionExpression(CompileContext context, Expression expression)
+		protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
 		{
 			//when scope tracking is enabled (not the default), then we behave like a singleton - and track in the root scope.
 			return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
 		}
 
-		object ICompiledTarget.GetObject(RezolveContext context)
+		object ICompiledTarget.GetObject(ResolveContext context)
 		{
 			//when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
 			if (SuppressScopeTracking || context.Scope == null)

@@ -22,11 +22,12 @@ namespace Rezolver.Compilation.Expressions
 		/// <param name="context">The compilation context.</param>
 		/// <param name="compiler">The expression compiler to be used to build any other expressions for targets
 		/// which might be required by the <paramref name="target" />.</param>
-		protected override Expression Build(ChangeTypeTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(ChangeTypeTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{ 
 			//build the inner target's expression; and wrap it in a conversion expression for the 
 			//target type of the ChangeTypeTarget.
-			return Expression.Convert(compiler.Build(target.InnerTarget, context.New(target.InnerTarget.DeclaredType)), target.DeclaredType);
+			return Expression.Convert(compiler.Build(target.InnerTarget, 
+				context.NewContext(target.InnerTarget.DeclaredType)), target.DeclaredType);
 		}
 	}
 }

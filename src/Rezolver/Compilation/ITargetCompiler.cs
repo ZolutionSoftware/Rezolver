@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Rezolver
+namespace Rezolver.Compilation
 {
   /// <summary>
   /// An object that produces <see cref="ICompiledTarget"/>s from <see cref="ITarget"/>s given a 
-  /// particular <see cref="CompileContext"/>.
+  /// particular <see cref="ICompileContext"/>.
   /// </summary>
   public interface ITargetCompiler
   {
@@ -21,6 +21,6 @@ namespace Rezolver
     /// <param name="target">Required.  The target to be compiled.</param>
     /// <param name="context">Required.  The current compilation context.</param>
     /// <returns>A compiled target which can then be used to get produce objects represented by the <paramref name="target"/>.</returns>
-    ICompiledTarget CompileTarget(ITarget target, CompileContext context);
+    ICompiledTarget CompileTarget(ITarget target, ICompileContext context);
   }
 }

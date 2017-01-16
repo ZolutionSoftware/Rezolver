@@ -14,7 +14,7 @@ namespace Rezolver
 		/// <summary>
 		/// Retrieves a single instance that was previously added to the scope (or,
 		/// optionally parent scopes) through a call to <see cref="IScopedContainer.AddToScope"/> 
-		/// with a RezolveContext matching the one passed.
+		/// with a ResolveContext matching the one passed.
 		/// 
 		/// Note - if multiple matches are found in a single scope, an InvalidOperationException will be thrown.
 		/// </summary>
@@ -22,7 +22,7 @@ namespace Rezolver
 		/// are to be searched.</param>
 		/// <param name="context">Required.  The context whose properties will be used to find the
 		/// matching disposable.</param>
-		public static object GetSingleFromScope(this IScopedContainer scope, RezolveContext context)
+		public static object GetSingleFromScope(this IScopedContainer scope, ResolveContext context)
 		{
 			scope.MustNotBeNull("scope");
 			context.MustNotBeNull("context");
@@ -62,7 +62,7 @@ namespace Rezolver
 			return scope;
 		}
 
-		public static T GetOrAdd<T>(this IScopedContainer scope, RezolveContext context, Func<RezolveContext, T> factory, bool disposableOnly = true)
+		public static T GetOrAdd<T>(this IScopedContainer scope, ResolveContext context, Func<ResolveContext, T> factory, bool disposableOnly = true)
 		{
 			//this is a temporary implementation of this method for the time being which is not entirely thread-safe.
 			//I'll make it part of the Interface and implement it properly eventually
@@ -77,7 +77,7 @@ namespace Rezolver
 			return (T)obj;
 		}
 
-		public static object GetOrAdd(this IScopedContainer scope, RezolveContext context, Func<RezolveContext, object> factory, bool disposableOnly = true)
+		public static object GetOrAdd(this IScopedContainer scope, ResolveContext context, Func<ResolveContext, object> factory, bool disposableOnly = true)
 		{
 			//this is a temporary implementation of this method for the time being which is not entirely thread-safe.
 			//I'll make it part of the Interface and implement it properly eventually

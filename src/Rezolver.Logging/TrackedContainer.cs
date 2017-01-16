@@ -33,7 +33,7 @@ namespace Rezolver.Logging
       Tracker = logger;
     }
 
-    public override bool CanResolve(RezolveContext context)
+    public override bool CanResolve(ResolveContext context)
     {
       return Tracker.TrackCall(this, () => base.CanResolve(context), context);
     }
@@ -43,7 +43,7 @@ namespace Rezolver.Logging
       return Tracker.TrackCall(this, () => new TrackedOverridingScopedContainer(Tracker, null, this));
     }
 
-    public override ICompiledTarget FetchCompiled(RezolveContext context)
+    public override ICompiledTarget FetchCompiled(ResolveContext context)
     {
       return Tracker.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
     }
@@ -53,12 +53,12 @@ namespace Rezolver.Logging
       return Tracker.TrackCall(this, () => base.GetService(serviceType), new { serviceType = serviceType });
     }
 
-    public override object Resolve(RezolveContext context)
+    public override object Resolve(ResolveContext context)
     {
       return Tracker.TrackCall(this, () => base.Resolve(context), new { context = context });
     }
 
-    public override bool TryResolve(RezolveContext context, out object result)
+    public override bool TryResolve(ResolveContext context, out object result)
     {
       object tempResult = null;
       var @return = Tracker.TrackCall(this, () => base.TryResolve(context, out tempResult), new { context = context });
@@ -66,12 +66,12 @@ namespace Rezolver.Logging
       return @return;
     }
 
-    protected override ICompiledTarget GetCompiledRezolveTarget(RezolveContext context)
+    protected override ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)
     {
       return Tracker.TrackCall(this, () => base.GetCompiledRezolveTarget(context), new { context = context });
     }
 
-    protected override ICompiledTarget GetFallbackCompiledRezolveTarget(RezolveContext context)
+    protected override ICompiledTarget GetFallbackCompiledRezolveTarget(ResolveContext context)
     {
       return Tracker.TrackCall(this, () => base.GetFallbackCompiledRezolveTarget(context), new { context = context });
     }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -26,7 +27,7 @@ namespace Rezolver
   /// suited for use as a child lifetime scope for another container.</remarks>
   public class ScopedContainer : Container, IScopedContainer
   {
-    private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;
+    private ConcurrentDictionary<ResolveContext, ConcurrentBag<object>> _objects;
 
     public IScopedContainer ParentScope
     {
@@ -43,7 +44,7 @@ namespace Rezolver
     public ScopedContainer(ITargetContainer builder = null, ITargetCompiler compiler = null)
         : base(builder, compiler)
     {
-      _objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
+      _objects = new ConcurrentDictionary<ResolveContext, ConcurrentBag<object>>();
       _disposed = false;
     }
 
@@ -56,12 +57,12 @@ namespace Rezolver
       catch (Exception) { } //really don't want upstream exceptions affecting this
     }
 
-    private void TrackObject(object obj, RezolveContext context)
+    private void TrackObject(object obj, ResolveContext context)
     {
       if (obj == null)
         return;
       ConcurrentBag<object> instances = _objects.GetOrAdd(
-          new RezolveContext(null, context.RequestedType),
+          new ResolveContext(null, context.RequestedType),
           c => new ConcurrentBag<object>());
 
       //bit slow this, but hopefully there won't be loads of them...
@@ -103,13 +104,13 @@ namespace Rezolver
       _disposed = true;
     }
 
-    public virtual void AddToScope(object obj, RezolveContext context = null)
+    public virtual void AddToScope(object obj, ResolveContext context = null)
     {
       obj.MustNotBeNull("obj");
-      TrackObject(obj, context ?? new RezolveContext(null, obj.GetType()));
+      TrackObject(obj, context ?? new ResolveContext(null, obj.GetType()));
     }
 
-    public virtual IEnumerable<object> GetFromScope(RezolveContext context)
+    public virtual IEnumerable<object> GetFromScope(ResolveContext context)
     {
       context.MustNotBeNull("context");
       ConcurrentBag<object> instances = null;

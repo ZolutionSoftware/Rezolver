@@ -23,10 +23,10 @@ namespace Rezolver.Compilation.Expressions
 		/// <param name="compiler">The expression compiler to be used to build any other expressions for targets
 		/// which might be required by the <paramref name="target" />.  Note that unlike on the interface, where this
 		/// parameter is optional, this will always be provided</param>
-		protected override Expression Build(ListTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(ListTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			var arrayExpr = Expression.NewArrayInit(target.ElementType,
-					target.Items.Select(t => compiler.Build(t, context.New(target.ElementType))));
+					target.Items.Select(t => compiler.Build(t, context.NewContext(target.ElementType))));
 
 			if (target.AsArray)
 				return arrayExpr;

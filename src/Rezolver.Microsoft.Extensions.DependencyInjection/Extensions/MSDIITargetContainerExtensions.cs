@@ -50,7 +50,7 @@ namespace Rezolver
 				//not ideal - need ability to provide a delegate that accepts a rezolve context
 				//as a parameter that can then be fed on to the delegate, that way we can ensure that
 				//any scoping is honoured.
-				target = new DelegateTarget<RezolveContext, object>(c => service.ImplementationFactory(c.Container), service.ServiceType);
+				target = new DelegateTarget<ResolveContext, object>(c => service.ImplementationFactory(c.Container), service.ServiceType);
 			}
 
 			if (target != null)

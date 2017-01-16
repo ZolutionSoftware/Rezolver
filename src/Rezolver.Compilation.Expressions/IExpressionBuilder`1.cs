@@ -28,6 +28,6 @@ namespace Rezolver.Compilation.Expressions
 		/// </param>
 		/// <remarks>When invoked by the <see cref="ExpressionCompiler"/> class, the <paramref name="compiler"/>
 		/// parameter will always be provided.</remarks>
-		Expression Build(TTarget target, CompileContext context, IExpressionCompiler compiler = null);
+		Expression Build(TTarget target, IExpressionCompileContext context, IExpressionCompiler compiler = null);
 	}
 }

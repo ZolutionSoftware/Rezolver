@@ -41,7 +41,7 @@ namespace Rezolver
 			return adapter.CreateTarget((Expression)expression);
 		}
 
-		public static ITarget CreateTarget<TResult>(this ITargetAdapter adapter, Expression<Func<RezolveContext, TResult>> expression)
+		public static ITarget CreateTarget<TResult>(this ITargetAdapter adapter, Expression<Func<ResolveContext, TResult>> expression)
 		{
 			adapter.MustNotBeNull("adapter");
 			expression.MustNotBeNull("expression");

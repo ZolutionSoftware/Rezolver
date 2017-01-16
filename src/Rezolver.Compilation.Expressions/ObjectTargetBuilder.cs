@@ -21,7 +21,7 @@ namespace Rezolver.Compilation.Expressions
 		/// which might be required by the <paramref name="target" />.  Note that unlike on the interface, where this
 		/// parameter is optional, this will always be provided</param>
 		/// <exception cref="NotImplementedException"></exception>
-		protected override Expression Build(ObjectTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(ObjectTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			return Expression.Constant(target.Value, context.TargetType ?? target.DeclaredType);
 		}

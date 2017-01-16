@@ -16,7 +16,7 @@ namespace Rezolver
   public abstract class CompiledTargetBase : ICompiledTarget
   {
     /// <summary>
-    /// The target whose expression (obtained from <see cref="ITarget.CreateExpression(CompileContext)"/>) was compiled into this instance.  Will not be null.
+    /// The target which was compiled into this instance.  Will not be null.
     /// </summary>
     protected ITarget OriginalTarget { get; }
 
@@ -31,10 +31,10 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Abstract implementation of <see cref="ICompiledTarget.GetObject(RezolveContext)"/>
+    /// Abstract implementation of <see cref="ICompiledTarget.GetObject(ResolveContext)"/>
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public abstract object GetObject(RezolveContext context);
+    public abstract object GetObject(ResolveContext context);
   }
 }

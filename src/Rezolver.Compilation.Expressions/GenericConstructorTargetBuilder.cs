@@ -14,7 +14,7 @@ namespace Rezolver.Compilation.Expressions
 	{
 		/// <summary>
 		/// Obtains the bound target for the <paramref name="target"/> passed (by calling 
-		/// <see cref="GenericConstructorTarget.Bind(CompileContext)"/>, and passes it to the 
+		/// <see cref="GenericConstructorTarget.Bind(IExpressionCompileContext)"/>, and passes it to the 
 		/// <paramref name="compiler"/> to have an expression built for it.
 		/// </summary>
 		/// <param name="target">The target whose expression is to be built.</param>
@@ -22,7 +22,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <param name="compiler">The expression compiler to be used to build any other expressions for targets
 		/// which might be required by the <paramref name="target" />.  Note that unlike on the interface, where this
 		/// parameter is optional, this will always be provided</param>
-		protected override Expression Build(GenericConstructorTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(GenericConstructorTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			//simply bind the generic target to the context, obtain the target that is produced
 			//and then build it.

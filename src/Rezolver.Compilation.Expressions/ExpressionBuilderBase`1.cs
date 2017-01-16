@@ -9,7 +9,7 @@ namespace Rezolver.Compilation.Expressions
 	/// <summary>
 	/// Abstract base class for implementations of <see cref="IExpressionBuilder{TTarget}"/>.
 	/// 
-	/// Provide an implementation of <see cref="Build(TTarget, CompileContext, IExpressionCompiler)"/> and then register 
+	/// Provide an implementation of <see cref="Build(TTarget, IExpressionCompileContext, IExpressionCompiler)"/> and then register 
 	/// an instance in an <see cref="ObjectTarget"/> in the active container.
 	/// </summary>
 	/// <typeparam name="TTarget">The type of target for which this builder can build an expression.</typeparam>
@@ -35,15 +35,15 @@ namespace Rezolver.Compilation.Expressions
 		where TTarget : ITarget
 	{
 		/// <summary>
-		/// Overrides the abstract <see cref="ExpressionBuilderBase.Build(ITarget, CompileContext, IExpressionCompiler)"/> (and seals it from
+		/// Overrides the abstract <see cref="ExpressionBuilderBase.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)"/> (and seals it from
 		/// further overrides); checks that <paramref name="target"/> is an instance of <typeparamref name="TTarget"/>
-		/// (throwing an <see cref="ArgumentException"/> if not) and then calls this class' <see cref="Build(TTarget, CompileContext, IExpressionCompiler)"/>
+		/// (throwing an <see cref="ArgumentException"/> if not) and then calls this class' <see cref="Build(TTarget, IExpressionCompileContext, IExpressionCompiler)"/>
 		/// abstract function.
 		/// </summary>
 		/// <param name="target">The target for which an expression is to be built.  Must be an instance of <typeparamref name="TTarget"/>.</param>
 		/// <param name="context">The compilation context.</param>
 		/// <exception cref="ArgumentException">If the passed target is not an instance of <typeparamref name="TTarget"/></exception>
-		protected sealed override Expression Build(ITarget target, CompileContext context, IExpressionCompiler compiler)
+		protected sealed override Expression Build(ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			TTarget target2;
 			try
@@ -65,12 +65,12 @@ namespace Rezolver.Compilation.Expressions
 		/// <param name="context">The context.</param>
 		/// <param name="compiler">Optional. The compiler that's requesting the expression; and which can be used
 		/// to compile other targets within the target.  If not provided, then the implementation attempts to locate
-		/// the context compiler using the <see cref="GetContextCompiler(CompileContext)"/> method, and will throw
+		/// the context compiler using the <see cref="GetContextCompiler(IExpressionCompileContext)"/> method, and will throw
 		/// an <see cref="InvalidOperationException"/> if it cannot do so.</param>
 		/// <exception cref="ArgumentNullException"><paramref name="target"/> is null or <paramref name="context"/> is null</exception>
 		/// <exception cref="InvalidOperationException"><paramref name="compiler"/> is null and an IExpressionCompiler 
-		/// couldn't be resolved for the current context (via <see cref="GetContextCompiler(CompileContext)"/></exception>
-		Expression IExpressionBuilder<TTarget>.Build(TTarget target, CompileContext context, IExpressionCompiler compiler)
+		/// couldn't be resolved for the current context (via <see cref="GetContextCompiler(IExpressionCompileContext)"/></exception>
+		Expression IExpressionBuilder<TTarget>.Build(TTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			//note that this is a copy of the code found in the non-generic ExpressionBuilderBase's explicit implementation
 			//of IExpressionBuilder.Build because there's no simple way to share the implementation between two explicit
@@ -91,7 +91,7 @@ namespace Rezolver.Compilation.Expressions
 		}
 
 		/// <summary>
-		/// Builds an expression from the specified target for the given <see cref="CompileContext"/>
+		/// Builds an expression from the specified target for the given <see cref="ICompileContext"/>
 		/// 
 		/// OVerride this to implement the compilation for your target type.
 		/// </summary>
@@ -100,7 +100,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <param name="compiler">The expression compiler to be used to build any other expressions for targets
 		/// which might be required by the <paramref name="target"/>.  Note that unlike on the interface, where this
 		/// parameter is optional, this will always be provided </param>
-		protected abstract Expression Build(TTarget target, CompileContext context, IExpressionCompiler compiler);
+		protected abstract Expression Build(TTarget target, IExpressionCompileContext context, IExpressionCompiler compiler);
 
 		/// <summary>
 		/// Determines whether this instance can build an expression from the specified target.
@@ -110,7 +110,7 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		/// <param name="target">The target.</param>
 		/// <param name="context">The compilation context.</param>
-		public override bool CanBuild(ITarget target, CompileContext context)
+		public override bool CanBuild(ITarget target, IExpressionCompileContext context)
 		{
 			return target is TTarget;
 		}

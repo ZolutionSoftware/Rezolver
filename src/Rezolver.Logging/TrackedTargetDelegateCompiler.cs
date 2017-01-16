@@ -22,7 +22,7 @@ namespace Rezolver.Logging
 		protected override ICompiledTarget CompileTargetBase(ITarget target, Expression toCompile, CompileContext context)
 		{
 			return new DelegatingCompiledRezolveTarget(
-				Expression.Lambda<Func<RezolveContext, object>>(toCompile, context.RezolveContextExpression).Compile());
+				Expression.Lambda<Func<ResolveContext, object>>(toCompile, context.RezolveContextExpression).Compile());
 		}
 	}
 }

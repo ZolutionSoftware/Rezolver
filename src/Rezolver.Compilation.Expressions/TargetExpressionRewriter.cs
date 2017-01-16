@@ -10,23 +10,23 @@ namespace Rezolver.Compilation.Expressions
 	/// Used by <see cref="TargetBase"/> (and potentially your own targets)
 	/// to convert <see cref="TargetExpression"/> instances which have been baked into
 	/// expression trees (most likely by a <see cref="TargetAdapter"/>) into expressions
-	/// for a given <see cref="CompileContext"/>.
+	/// for a given <see cref="ICompileContext"/>.
 	/// </summary>
 	/// <seealso cref="System.Linq.Expressions.ExpressionVisitor" />
 	/// <remarks>The <see cref="TargetBase"/> class always pushes expressions it receives
-	/// from its <see cref="TargetBase.CreateExpressionBase(CompileContext)"/> abstract
+	/// from its <see cref="TargetBase.CreateExpressionBase(ICompileContext)"/> abstract
 	/// method through a rewrite - because if there are any non-standard expressions left,
 	/// then compilation will not be possible.</remarks>
 	internal class TargetExpressionRewriter : ExpressionVisitor
     {
-		readonly CompileContext _sourceCompileContext;
+		readonly IExpressionCompileContext _sourceCompileContext;
 		readonly IExpressionCompiler _compiler;
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TargetExpressionRewriter"/> class for the
 		/// given <paramref name="context"/>
 		/// </summary>
 		/// <param name="context">The compilation context.</param>
-		public TargetExpressionRewriter(IExpressionCompiler compiler, CompileContext context)
+		public TargetExpressionRewriter(IExpressionCompiler compiler, IExpressionCompileContext context)
 		{
 			_compiler = compiler;
 			_sourceCompileContext = context;
@@ -43,7 +43,7 @@ namespace Rezolver.Compilation.Expressions
 				{
 					TargetExpression te = node as TargetExpression;
 					if (te != null)
-						return _compiler.Build(te.Target, _sourceCompileContext.New(te.Type));
+						return _compiler.Build(te.Target, _sourceCompileContext.NewContext(te.Type));
 				}
 			}
 			return base.Visit(node);

@@ -20,7 +20,7 @@ namespace Rezolver
     /// <returns>An instance of the <paramref name="type"/>.</returns>
     public static object Resolve(this IContainer container, Type type)
     {
-      return container.Resolve(new RezolveContext(container, type));
+      return container.Resolve(new ResolveContext(container, type));
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ namespace Rezolver
     /// <returns>An instance of the requested <paramref name="type"/>.</returns>
     public static object Resolve(this IContainer container, Type type, IScopedContainer scope)
     {
-      return container.Resolve(new RezolveContext(container, type, scope));
+      return container.Resolve(new ResolveContext(container, type, scope));
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ namespace Rezolver
     /// overloads</remarks>
     public static bool TryResolve(this IContainer container, Type type, out object result)
     {
-      return container.TryResolve(new RezolveContext(container, type), out result);
+      return container.TryResolve(new ResolveContext(container, type), out result);
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ namespace Rezolver
     /// overloads</remarks>
     public static bool TryResolve(this IContainer container, Type type, IScopedContainer scope, out object result)
     {
-      return container.TryResolve(new RezolveContext(container, type, scope), out result);
+      return container.TryResolve(new ResolveContext(container, type, scope), out result);
     }
 
     /// <summary>

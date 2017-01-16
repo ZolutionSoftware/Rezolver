@@ -22,8 +22,8 @@ namespace Rezolver.Compilation.Expressions
 		/// If it is, it simply casts and returns the target.
 		/// 
 		/// If not, then it also checks whether the target also supports the <see cref="ICompiledTarget"/>
-		/// interface and, if so, it will call its <see cref="ICompiledTarget.GetObject(RezolveContext)"/>
-		/// with a <see cref="RezolveContext"/> whose <see cref="RezolveContext.RequestedType"/> is set
+		/// interface and, if so, it will call its <see cref="ICompiledTarget.GetObject(ResolveContext)"/>
+		/// with a <see cref="ResolveContext"/> whose <see cref="ResolveContext.RequestedType"/> is set
 		/// to the type <typeparamref name="TObj"/> - and return the result.
 		/// 
 		/// The function therefore allows infrastructure components to leverage the <see cref="ITargetContainer"/>
@@ -34,25 +34,25 @@ namespace Rezolver.Compilation.Expressions
 		/// 
 		/// The built-in <see cref="ObjectTarget"/> class is ideal as that does implement <see cref="ICompiledTarget"/>,
 		/// returning its inner <see cref="ObjectTarget.Value"/> in its implementation of 
-		/// <see cref="ICompiledTarget.GetObject(RezolveContext)"/> if the requested type is compatible with the type
+		/// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> if the requested type is compatible with the type
 		/// of the underlying object.
 		/// 
 		/// Note that the function returns null if no object can be obtained.
 		/// 
 		/// Exceptions may occur if the function falls down to using the <see cref="ICompiledTarget"/> route,
-		/// since the <see cref="ICompiledTarget.GetObject(RezolveContext)"/> implementation might have unknown
+		/// since the <see cref="ICompiledTarget.GetObject(ResolveContext)"/> implementation might have unknown
 		/// requirements.</remarks>
-		internal static TObj FetchDirect<TObj>(this CompileContext context)
+		internal static TObj FetchDirect<TObj>(this ICompileContext context)
 		{
 			return (TObj)context.FetchDirect(typeof(TObj));
 		}
 
 		/// <summary>
-		/// Non generic version of <see cref="FetchDirect{TObj}(CompileContext)"/>.
+		/// Non generic version of <see cref="FetchDirect{TObj}(ICompileContext)"/>.
 		/// </summary>
 		/// <param name="context">The context.</param>
 		/// <param name="objectType">Type of the object required.</param>
-		internal static object FetchDirect(this CompileContext context, Type objectType)
+		internal static object FetchDirect(this ICompileContext context, Type objectType)
 		{
 			var result = context.Fetch(objectType);
 			if(result != null)
@@ -60,28 +60,28 @@ namespace Rezolver.Compilation.Expressions
 			return result;
 		}
 
-		private static object FetchDirect(ITarget target, CompileContext context, Type objectType)
+		private static object FetchDirect(ITarget target, ICompileContext context, Type objectType)
 		{
 			if (TypeHelpers.IsAssignableFrom(objectType, target.GetType()))
 				return target;
 
 			ICompiledTarget resultCompiledTarget = target as ICompiledTarget;
 			if (resultCompiledTarget != null)
-				return (IExpressionCompiler)resultCompiledTarget.GetObject(new RezolveContext(context.Container, objectType));
+				return (IExpressionCompiler)resultCompiledTarget.GetObject(new ResolveContext(context.Container, objectType));
 
 			return null;
 		}
 
 		/// <summary>
-		/// Similar to <see cref="FetchDirect{TObj}(CompileContext)"/> except this enumerates all registered targets, returning
+		/// Similar to <see cref="FetchDirect{TObj}(ICompileContext)"/> except this enumerates all registered targets, returning
 		/// any which are either of the type <typeparamref name="TObj"/> or which implement <see cref="ICompiledTarget"/> and return
-		/// a value when <see cref="ICompiledTarget.GetObject(RezolveContext)"/> is called.
+		/// a value when <see cref="ICompiledTarget.GetObject(ResolveContext)"/> is called.
 		/// 
 		/// Note that the function never returns a null enumerable - the enumerable either has items in it or it doesn't.
 		/// </summary>
 		/// <typeparam name="TObj">The type of object to retrieve.</typeparam>
 		/// <param name="context">The context.</param>
-		internal static IEnumerable<TObj> FetchAllDirect<TObj>(this CompileContext context)
+		internal static IEnumerable<TObj> FetchAllDirect<TObj>(this ICompileContext context)
 		{
 			return context.FetchAll(typeof(TObj))
 				.Select(t => FetchDirect(t, context, typeof(TObj)))
@@ -90,11 +90,11 @@ namespace Rezolver.Compilation.Expressions
 		}
 
 		/// <summary>
-		/// Non generic version of <see cref="FetchAllDirect{TObj}(CompileContext)"/>.
+		/// Non generic version of <see cref="FetchAllDirect{TObj}(ICompileContext)"/>.
 		/// </summary>
 		/// <param name="context">The context.</param>
 		/// <param name="objectType">Type of the objects required.</param>
-		internal static IEnumerable<object> FetchAllDirect(this CompileContext context, Type objectType)
+		internal static IEnumerable<object> FetchAllDirect(this ICompileContext context, Type objectType)
 		{
 			return context.FetchAll(objectType)
 				.Select(t => FetchDirect(t, context, objectType))

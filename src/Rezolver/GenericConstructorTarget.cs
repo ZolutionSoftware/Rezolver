@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -83,7 +84,7 @@ namespace Rezolver
 		/// <summary>
 		/// Obtains an <see cref="ITarget"/> (usually a <see cref="ConstructorTarget"/>) which will create 
 		/// an instance of a generic type (whose definition is equal to <see cref="GenericType"/>) with 
-		/// generic arguments set correctly according to the <see cref="CompileContext.TargetType"/> of 
+		/// generic arguments set correctly according to the <see cref="ICompileContext.TargetType"/> of 
 		/// the <paramref name="context"/>.
 		/// </summary>
 		/// <param name="context">The context.</param>
@@ -91,7 +92,7 @@ namespace Rezolver
 		/// inheritance chains and interface implementation maps are taken into account.
 		/// 
 		/// At the simplest end of the spectrum, if <see cref="GenericType"/> is <c>MyGeneric&lt;&gt;</c> and
-		/// the <paramref name="context"/>'s <see cref="CompileContext.TargetType"/> is <c>MyGeneric&lt;int&gt;</c>,
+		/// the <paramref name="context"/>'s <see cref="ICompileContext.TargetType"/> is <c>MyGeneric&lt;int&gt;</c>,
 		/// then this function merely has to insert the <c>int</c> type as the generic parameter to the <c>MyGeneric&lt;&gt;</c>
 		/// type definition, bake a new type and create an auto-bound <see cref="ConstructorTarget"/>.
 		/// 
@@ -119,7 +120,7 @@ namespace Rezolver
 		/// in order to deduce the generic type arguments for <see cref="GenericType"/>.  This means, in general, that the requested
 		/// type will almost always need to be a generic type.
 		/// </remarks>
-		public ITarget Bind(CompileContext context)
+		public ITarget Bind(ICompileContext context)
 		{
 			//always create a constructor target from new
 			//basically this class simply acts as a factory for other constructor targets.

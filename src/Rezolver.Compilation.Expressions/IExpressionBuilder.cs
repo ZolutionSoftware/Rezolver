@@ -17,7 +17,7 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		/// <param name="target">The target.</param>
 		/// <param name="context">The compilation context.</param>
-		bool CanBuild(ITarget target, CompileContext context);
+		bool CanBuild(ITarget target, IExpressionCompileContext context);
 		/// <summary>
 		/// Builds an expression for the specified target.
 		/// </summary>
@@ -30,6 +30,6 @@ namespace Rezolver.Compilation.Expressions
 		/// </param>
 		/// <remarks>When invoked by the <see cref="ExpressionCompiler"/> class, the <paramref name="compiler"/>
 		/// parameter will always be provided.</remarks>
-		Expression Build(ITarget target, CompileContext context, IExpressionCompiler compiler = null);
+		Expression Build(ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler = null);
 	}
 }

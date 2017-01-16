@@ -12,7 +12,7 @@ namespace Rezolver.Compilation.Expressions
   /// </summary>
   public class OptionalParameterTargetBuilder : ExpressionBuilderBase<OptionalParameterTarget>
   {
-    protected override Expression Build(OptionalParameterTarget target, CompileContext context, IExpressionCompiler compiler)
+    protected override Expression Build(OptionalParameterTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
     {
       return (target.MethodParameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault ?
         (Expression)Expression.Constant(target.MethodParameter.DefaultValue, target.MethodParameter.ParameterType) : Expression.Default(target.MethodParameter.ParameterType);

@@ -92,12 +92,12 @@ namespace Rezolver.Compilation.Expressions.Tests
       return result;
     }
 
-    protected RezolveContext CreateRezolveContext(Type rezolveType, IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
+    protected ResolveContext CreateRezolveContext(Type rezolveType, IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
     {
-      return new RezolveContext(GetContainer(callingMethod), rezolveType, scope);
+      return new ResolveContext(GetContainer(callingMethod), rezolveType, scope);
     }
 
-    protected RezolveContext CreateRezolveContext<TRezolve>(IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
+    protected ResolveContext CreateRezolveContext<TRezolve>(IScopedContainer scope = null, [CallerMemberName]string callingMethod = null)
     {
       return CreateRezolveContext(typeof(TRezolve), scope, callingMethod);
     }

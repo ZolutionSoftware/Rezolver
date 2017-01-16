@@ -37,7 +37,7 @@ namespace Rezolver
     /// then it will be tracked for disposal.</param>
     /// <param name="context">Optional - a rezolve context representing the conditions under which 
     /// the object should be returned in the enumerable returned from a call to GetFromScope</param>
-    void AddToScope(object obj, RezolveContext context = null);
+    void AddToScope(object obj, ResolveContext context = null);
 
     /// <summary>
     /// Retrieves all objects from this scope that were previously added through a call to 
@@ -48,7 +48,7 @@ namespace Rezolver
     /// <param name="context">Required - the context whose properties will be used to find matching
     /// objects.</param>
     /// <returns></returns>
-    IEnumerable<object> GetFromScope(RezolveContext context);
+    IEnumerable<object> GetFromScope(ResolveContext context);
 
     /// <summary>
     /// This event is fired before the scope disposes

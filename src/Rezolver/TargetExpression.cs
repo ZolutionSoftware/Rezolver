@@ -16,7 +16,7 @@ namespace Rezolver
 		private readonly ITarget _target;
 
 		/// <summary>
-		/// Gets the target whose expression (obtained from <see cref="ITarget.CreateExpression(CompileContext)"/>)
+		/// Gets the target whose expression (obtained from <see cref="ITarget.CreateExpression(ICompileContext)"/>)
 		/// will be subsituted for this TargetExpression in the final expression tree.
 		/// </summary>
 		public ITarget Target

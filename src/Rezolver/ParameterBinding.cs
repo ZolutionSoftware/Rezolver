@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -45,7 +46,7 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Fetch the target that would be bound to this parameter given the passed <see cref="CompileContext"/>
+    /// Fetch the target that would be bound to this parameter given the passed <see cref="ICompileContext"/>
     /// </summary>
     /// <param name="context">The current compile context - a new one is created for the <see cref="Parameter"/> type</param>
     /// <returns>The target that should be used for the parameter, or null if no target could be found.
@@ -55,10 +56,10 @@ namespace Rezolver
     /// target container in the context is a stub (e.g. empty enumerable)</returns>
     /// <remarks>During compilation - you should not use the target returned by this function as a direct
     /// part of your expression tree - you should </remarks>
-    public virtual ITarget Resolve(CompileContext context)
+    public virtual ITarget Resolve(ICompileContext context)
     {
       if (Target is RezolvedTarget)
-        return ((RezolvedTarget)Target).Resolve(context.New(Parameter.ParameterType));
+        return ((RezolvedTarget)Target).Resolve(context.NewContext(Parameter.ParameterType));
 
       return Target;
     }
@@ -74,7 +75,7 @@ namespace Rezolver
     /// <param name="context">Required - the current compile context which will be used to test whether arguments can be resolved
     /// at compile time.  If they can, then the associated parameter will be bound with a <see cref="RezolvedTarget"/>.</param>
     /// <returns></returns>
-    public static ParameterBinding[] BindWithRezolvedOrOptionalDefault(MethodBase method, CompileContext context)
+    public static ParameterBinding[] BindWithRezolvedOrOptionalDefault(MethodBase method, ICompileContext context)
     {
       method.MustNotBeNull(nameof(method));
       context.MustNotBeNull(nameof(context));

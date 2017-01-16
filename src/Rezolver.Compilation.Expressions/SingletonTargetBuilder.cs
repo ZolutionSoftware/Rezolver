@@ -18,16 +18,16 @@ namespace Rezolver.Compilation.Expressions
 		/// Used in ensuring the correct construction and scope tracking of a singleton instance.
 		/// 
 		/// Implements the ICompiledRezolveTarget interface for the single case of creating a lazy on demand (from the
-		/// first RezolveContext that's passed to its GetObject method, and returning its value.
+		/// first ResolveContext that's passed to its GetObject method, and returning its value.
 		/// </summary>
 		private class SingletonTargetLazyInitialiser : ICompiledTarget
 		{
-			private Func<RezolveContext, Lazy<object>> _lazyFactory;
+			private Func<ResolveContext, Lazy<object>> _lazyFactory;
 			private Lazy<object> _lazy;
 
 			//internal Lazy<object> Lazy {  get { return _lazy; } }
 
-			internal SingletonTargetLazyInitialiser(Func<RezolveContext, Lazy<object>> lazyFactory)
+			internal SingletonTargetLazyInitialiser(Func<ResolveContext, Lazy<object>> lazyFactory)
 			{
 				_lazyFactory = lazyFactory;
 			}
@@ -38,7 +38,7 @@ namespace Rezolver.Compilation.Expressions
 			/// </summary>
 			/// <param name="context"></param>
 			/// <returns></returns>
-			object ICompiledTarget.GetObject(RezolveContext context)
+			object ICompiledTarget.GetObject(ResolveContext context)
 			{
 				if (_lazy == null)
 				{
@@ -54,7 +54,7 @@ namespace Rezolver.Compilation.Expressions
 		private static readonly ConstructorInfo LazyObject_Ctor = MethodCallExtractor.ExtractConstructorCall(() => new Lazy<object>(() => (object)null));
 
 
-		protected override Expression Build(SingletonTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			//this isn't quite right, imho.  One singleton target should technically be able to create
 			//more than one instance of a given concrete type, if that target is in a RezolverBuilder that is, 
@@ -73,7 +73,7 @@ namespace Rezolver.Compilation.Expressions
 			var initialiser = target.GetOrAddInitialiser(context.TargetType ?? target.DeclaredType, t => {
 				//get the underlying expression for the target that is to be turned into a singleton - but disable the
 				//generation of any scope-tracking code.
-				var innerExpression = compiler.BuildResolveLambda(target.InnerTarget, context.New(t, suppressScopeTracking: true));
+				var innerExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(t, suppressScopeTracking: true));
 				
 				//there's an argument for using the compiler here to generate this 
 				//lambda, but our interface specifically creates an ICompiledRezolveTarget - not a delegate - so it's not 
@@ -85,15 +85,15 @@ namespace Rezolver.Compilation.Expressions
 					//creating the factory delegate for the lazy uniquely for each invokation of the outer lambda
 					//note that the RezolveContextExpression has to be quoted on the outer lambda, but will be used
 					//on the inner lambda
-					Expression.Lambda(innerExpression.Body)), context.RezolveContextExpression);
-				var lazyLambda = (Func<RezolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
+					Expression.Lambda(innerExpression.Body)), context.ResolveContextExpression);
+				var lazyLambda = (Func<ResolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
 				//now we create and capture an instance of the SingletonTargetLazyInitialiser class, passing our
 				//dynamically constructed delegate along with this target
 				return new SingletonTargetLazyInitialiser(lazyLambda);
 			});
 
 			return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledTarget)),
-				   ICompiledRezolveTarget_GetObject, context.RezolveContextExpression);
+				   ICompiledRezolveTarget_GetObject, context.ResolveContextExpression);
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -16,6 +17,7 @@ namespace Rezolver
 			//if you're looking to re-enter the compilation process for a particular
 			//target - then you should request our compiler via the type IExpressionCompiler 
 			targets.RegisterObject<IExpressionCompiler>(compiler);
+			//and then we have all the expression builders.
 			targets.RegisterObject<IExpressionBuilder<ConstructorTarget>>(new ConstructorTargetBuilder());
 
 			return targets;

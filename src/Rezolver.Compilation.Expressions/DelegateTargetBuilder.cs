@@ -14,7 +14,7 @@ namespace Rezolver.Compilation.Expressions
 	public class DelegateTargetBuilder : ExpressionBuilderBase<DelegateTarget>
 	{
 		/// <summary>
-		/// Builds an expression from the specified target for the given <see cref="T:Rezolver.CompileContext" />
+		/// Builds an expression from the specified target for the given <see cref="Rezolver.IExpressionCompileContext" />
 		/// OVerride this to implement the compilation for your target type.
 		/// </summary>
 		/// <param name="target">The target whose expression is to be built.</param>
@@ -23,13 +23,13 @@ namespace Rezolver.Compilation.Expressions
 		/// which might be required by the <paramref name="target" />.  Note that unlike on the interface, where this
 		/// parameter is optional, this will always be provided</param>
 		/// <exception cref="NotImplementedException"></exception>
-		protected override Expression Build(DelegateTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(DelegateTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			var bindings = ParameterBinding.BindWithRezolvedArguments(target.Factory.GetMethodInfo());
 			return Expression.Invoke(Expression.Constant(target.Factory),
-				bindings.Select(b => b.Parameter.ParameterType == typeof(RezolveContext) ?
+				bindings.Select(b => b.Parameter.ParameterType == typeof(ResolveContext) ?
 					ExpressionHelper.RezolveContextParameterExpression
-					: compiler.Build(b.Target, context.New(b.Parameter.ParameterType))));
+					: compiler.Build(b.Target, context.NewContext(b.Parameter.ParameterType))));
 		}
 	}
 }

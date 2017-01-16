@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -35,19 +36,17 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Gets a factory which will be executed to obtain an expression when 
-		/// <see cref="CreateExpressionBase(CompileContext)"/> is called.
+		/// Gets a factory which will be executed to obtain an expression given a particular <see cref="ICompileContext"/>.
 		/// 
 		/// If <c>null</c>, then a static expression will be used instead and is available
 		/// from the <see cref="Expression"/> property.
 		/// </summary>
-		public Func<CompileContext, Expression> ExpressionFactory { get; }
+		public Func<ICompileContext, Expression> ExpressionFactory { get; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ExpressionTarget" /> class.
 		/// </summary>
-		/// <param name="expression">Required. The static expression which will be returned by
-		/// <see cref="CreateExpressionBase(CompileContext)" />.</param>
+		/// <param name="expression">Required. The static expression which should be used by compilers.</param>
 		/// <param name="declaredType">Declared type of the target to be created (used when registering without
 		/// an explicit type or when this target is used as a value inside another target).</param>
 		/// <remarks><paramref name="declaredType"/> will automatically be determined if not provided
@@ -65,14 +64,11 @@ namespace Rezolver
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ExpressionTarget"/> class.
 		/// </summary>
-		/// <param name="expressionFactory">Required. The factory delegate that will be 
-		/// called to create the expression when <see cref="CreateExpressionBase(CompileContext)"/> is called.</param>
+		/// <param name="expressionFactory">Required. The factory delegate that a compiler should call to get the expression to use when 
+		/// compiling this target.</param>
 		/// <param name="declaredType">Required. Static type of all expressions that will be
 		/// returned by <paramref name="expressionFactory"/>.</param>
-		/// <remarks>Note that when you use a factory to produce a new expression on demand each time
-		/// <see cref="CreateExpressionBase(CompileContext)"/> is called, the <paramref name="declaredType"/>
-		/// is required to be the same for all.</remarks>
-		public ExpressionTarget(Func<CompileContext, Expression> expressionFactory, Type declaredType)
+		public ExpressionTarget(Func<ICompileContext, Expression> expressionFactory, Type declaredType)
 		{
 			expressionFactory.MustNotBeNull(nameof(expressionFactory));
 			declaredType.MustNotBeNull(nameof(declaredType));

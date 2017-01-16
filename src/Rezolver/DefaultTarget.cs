@@ -17,8 +17,7 @@ namespace Rezolver
 		private readonly Type _declaredType;
 
 		/// <summary>
-		/// Always equal to the type for which the default value will be returned by the expression
-		/// create by <see cref="CreateExpressionBase(CompileContext)"/>
+		/// Always equal to the type for which the default value will be returned
 		/// </summary>
 		public override Type DeclaredType
 		{

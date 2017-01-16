@@ -35,14 +35,14 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldReturnResolveContext()
 		{
-			//tests that the lambda's RezolveContext parameter gets correctly mapped to the
-			//RezolveContext that is passed directly to the container.  Test is only possible
+			//tests that the lambda's ResolveContext parameter gets correctly mapped to the
+			//ResolveContext that is passed directly to the container.  Test is only possible
 			//here because it's a direct resolve, i.e. caller -> container -> target
 			var container = CreateContainer();
 			//note that the single parameter overload of the RegisterExpression extension methods
-			//default to the concrete RezolveContext versions.
+			//default to the concrete ResolveContext versions.
 			container.RegisterExpression(rc => rc);
-			RezolveContext context = new RezolveContext(container, typeof(RezolveContext));
+			ResolveContext context = new ResolveContext(container, typeof(ResolveContext));
 			Assert.Same(context, container.Resolve(context));
 		}
 

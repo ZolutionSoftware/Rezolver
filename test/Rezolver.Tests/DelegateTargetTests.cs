@@ -55,7 +55,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldGetNonNullRezolveContext()
 		{
-			Func<RezolveContext, Type> f = (RezolveContext rc) => rc.RequestedType;
+			Func<ResolveContext, Type> f = (ResolveContext rc) => rc.RequestedType;
 
 			var container = CreateContainer();
 			container.Register(f.AsDelegateTarget());
@@ -84,9 +84,9 @@ namespace Rezolver.Tests
 		{
 			var container = CreateContainer();
 			//create the context here purely so we can check it gets passed through
-			var context = new RezolveContext(container, typeof(string));
+			var context = new ResolveContext(container, typeof(string));
 
-			Func<RezolveContext, int, string> f = (rc, i) =>
+			Func<ResolveContext, int, string> f = (rc, i) =>
 			{
 				Assert.NotNull(rc);
 				return $"String #{i}";
@@ -102,12 +102,12 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldInvokeWithResolvedIntAndContextReversed()
 		{
-			//The RezolveContext parameter should work regardless of where it is in the parameter list
+			//The ResolveContext parameter should work regardless of where it is in the parameter list
 			var container = CreateContainer();
 			//create the context here purely so we can check it gets passed through
-			var context = new RezolveContext(container, typeof(string));
+			var context = new ResolveContext(container, typeof(string));
 
-			Func<int, RezolveContext, string> f = (i, rc) =>
+			Func<int, ResolveContext, string> f = (i, rc) =>
 			{
 				Assert.NotNull(rc);
 				return $"String #{i}";
@@ -126,7 +126,7 @@ namespace Rezolver.Tests
 			return $"Instance {_thisID}, String #{i}";
 		}
 
-		string DelegateTargetMethodWithContext(int i, RezolveContext c)
+		string DelegateTargetMethodWithContext(int i, ResolveContext c)
 		{
 			return $"Instance {_thisID}, String #{i}, for context {c}";
 		}
@@ -144,7 +144,7 @@ namespace Rezolver.Tests
 			Assert.Equal(expected, result);
 		}
 
-		delegate string NonGenericDelegateWithContext(int i, RezolveContext c);
+		delegate string NonGenericDelegateWithContext(int i, ResolveContext c);
 
 		[Fact]
 		public void ShouldInvokeNonGenericDelegateWithResolvedIntAndContext()
@@ -153,7 +153,7 @@ namespace Rezolver.Tests
 			var container = CreateContainer();
 			container.RegisterObject(25);
 			container.RegisterDelegate(del);
-			RezolveContext c = new RezolveContext(container, typeof(string));
+			ResolveContext c = new ResolveContext(container, typeof(string));
 			var expected = DelegateTargetMethodWithContext(25, c);
 			var result = container.Resolve(c);
 			Assert.Equal(expected, result);

@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
 	/// <summary>
-	/// Represents a target that is rezolved statically at compile time via the <see cref="CompileContext"/>, or dynamically 
-	/// (at 'resolve time') from the <see cref="IContainer"/> that is attached to the current <see cref="RezolveContext"/> when 
-	/// <see cref="IContainer.Resolve(RezolveContext)"/> is called.
+	/// Represents a target that is rezolved statically at compile time via the <see cref="ICompileContext"/>, or dynamically 
+	/// (at 'resolve time') from the <see cref="IContainer"/> that is attached to the current <see cref="ResolveContext"/> when 
+	/// <see cref="IContainer.Resolve(ResolveContext)"/> is called.
 	/// 
 	/// This is the most common way that we bind constructor parameters, for example - i.e. 'I want an
 	/// IService instance - go get it'.
@@ -22,7 +23,7 @@ namespace Rezolver
 	/// then an error occurs.
 	/// 
 	/// Rezolver does this, but goes further when the target can't be resolved at compile-time - in this case, it will emit 
-	/// a call back into the current <see cref="RezolveContext"/>'s <see cref="IContainer"/> to try and dynamically resolve 
+	/// a call back into the current <see cref="ResolveContext"/>'s <see cref="IContainer"/> to try and dynamically resolve 
 	/// the value that is required.
 	/// 
 	/// Furthermore, the code it produces in either case also checks that the <see cref="IContainer"/> that is active at
@@ -59,7 +60,7 @@ namespace Rezolver
 		/// at compile time.
 		/// </summary>
 		/// <remarks>The <see cref="ITarget.UseFallback"/> property is also used to determine whether this will be 
-		/// used.  If the target resolved from the <see cref="CompileContext"/> has its <see cref="ITarget.UseFallback"/>
+		/// used.  If the target resolved from the <see cref="ICompileContext"/> has its <see cref="ITarget.UseFallback"/>
 		/// property set to true, and this property is non-null for this target, then this target will be used.
 		/// 
 		/// Note also that extension containers such as <see cref="OverridingContainer"/> also have the ability to override
@@ -91,9 +92,9 @@ namespace Rezolver
 
 
 		/// <summary>
-		/// Attempts to obtain the target that this <see cref="RezolvedTarget"/> resolves to for the given <see cref="CompileContext"/>.
+		/// Attempts to obtain the target that this <see cref="RezolvedTarget"/> resolves to for the given <see cref="ICompileContext"/>.
 		/// 
-		/// Used in the implementation of <see cref="CreateExpressionBase(CompileContext)"/> but also available to consumers to enable
+		/// Used in the implementation of <see cref="CreateExpressionBase(ICompileContext)"/> but also available to consumers to enable
 		/// checking of RezolvedTargets to see if they'll succeed at compile time (useful when late-binding overloaded constructors, 
 		/// for example).
 		/// </summary>
@@ -101,7 +102,7 @@ namespace Rezolver
 		/// <returns>The target resolved by this target - could be the <see cref="FallbackTarget"/>, could be null.</returns>
 		/// <remarks>The target that is returned depends both on the <paramref name="context"/> passed and also whether 
 		/// a <see cref="FallbackTarget"/> has been provided to this target.</remarks>
-		public virtual ITarget Resolve(CompileContext context)
+		public virtual ITarget Resolve(ICompileContext context)
 		{
 			context.MustNotBeNull(nameof(context));
 

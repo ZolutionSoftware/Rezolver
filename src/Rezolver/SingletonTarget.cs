@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -64,7 +65,7 @@ namespace Rezolver
 			InnerTarget = innerTarget;
 		}
 
-		protected override Expression CreateScopeSelectionExpression(CompileContext context, Expression expression)
+		protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
 		{
 			return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
 		}

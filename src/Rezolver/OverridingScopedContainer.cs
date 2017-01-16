@@ -8,12 +8,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Collections.Concurrent;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
 	public class OverridingScopedContainer : OverridingContainer, IScopedContainer
 	{
-		private ConcurrentDictionary<RezolveContext, ConcurrentBag<object>> _objects;
+		private ConcurrentDictionary<ResolveContext, ConcurrentBag<object>> _objects;
 		protected IEnumerable<object> TrackedObjects
 		{
 			get
@@ -46,7 +47,7 @@ namespace Rezolver
 			: base(inner ?? parentScope, builder: builder, compiler: compiler)
 		{
 			_parentScope = parentScope;
-			_objects = new ConcurrentDictionary<RezolveContext, ConcurrentBag<object>>();
+			_objects = new ConcurrentDictionary<ResolveContext, ConcurrentBag<object>>();
 			_disposed = false;
 
 			if (_parentScope != null)
@@ -68,12 +69,12 @@ namespace Rezolver
 			catch (Exception) { } //don't want an exception here to break anything
 		}
 
-		private void TrackObject(object obj, RezolveContext context)
+		private void TrackObject(object obj, ResolveContext context)
 		{
 			if (obj == null)
 				return;
 			ConcurrentBag<object> instances = _objects.GetOrAdd(
-				new RezolveContext(null, context.RequestedType),
+				new ResolveContext(null, context.RequestedType),
 				c => new ConcurrentBag<object>());
 
 			//bit slow this, but hopefully there won't be loads of them...
@@ -116,13 +117,13 @@ namespace Rezolver
 			_disposed = true;
 		}
 
-		public virtual void AddToScope(object obj, RezolveContext context = null)
+		public virtual void AddToScope(object obj, ResolveContext context = null)
 		{
 			obj.MustNotBeNull("obj");
-			TrackObject(obj, context ?? new RezolveContext(null, obj.GetType()));
+			TrackObject(obj, context ?? new ResolveContext(null, obj.GetType()));
 		}
 
-		public virtual IEnumerable<object> GetFromScope(RezolveContext context)
+		public virtual IEnumerable<object> GetFromScope(ResolveContext context)
 		{
 			context.MustNotBeNull("context");
 			ConcurrentBag<object> instances = null;

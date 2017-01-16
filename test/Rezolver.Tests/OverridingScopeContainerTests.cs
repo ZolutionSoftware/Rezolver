@@ -58,7 +58,7 @@ namespace Rezolver.Tests
       ITestDisposable disposable = null;
       using (var scope = new OverridingScopedContainer(null, inner: container))
       {
-        scope.AddToScope(disposable = new DisposableType(), new RezolveContext(container, typeof(ITestDisposable)));
+        scope.AddToScope(disposable = new DisposableType(), new ResolveContext(container, typeof(ITestDisposable)));
       }
       Assert.True(disposable.Disposed);
     }
@@ -68,7 +68,7 @@ namespace Rezolver.Tests
     {
       var container = new Container();
       ITestDisposable disposable = null;
-      var context = new RezolveContext(container, typeof(DisposableType));
+      var context = new ResolveContext(container, typeof(DisposableType));
       using (var scope = new OverridingScopedContainer(null, inner: container))
       {
         scope.AddToScope(disposable = new DisposableType(), context);

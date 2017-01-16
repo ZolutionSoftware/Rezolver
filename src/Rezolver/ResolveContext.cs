@@ -6,19 +6,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
   /// <summary>
-  /// Context of a call to an IRezolver's Resolve method.  The container is included
-  /// in the context to allow code generated from <see cref="ITarget.CreateExpression(CompileContext)"/> to refer back to the container.
-  /// 
-  /// This also allows us to retarget compiled targets at other containers (e.g. <see cref="OverridingContainer"/>s
-  /// that override existing registrations or define new ones).
+  /// Captures the state for a call to <see cref="IContainer.Resolve(ResolveContext)"/>, including the container on which
+  /// the operation is invoked, any <see cref="IScopedContainer"/> that might be active for the call (if different), and the 
+  /// type which is being resolved from the <see cref="IContainer"/>.
   /// </summary>
-  public class RezolveContext : IEquatable<RezolveContext>
+  public class ResolveContext : IEquatable<ResolveContext>
   {
-    public static readonly RezolveContext EmptyContext = new RezolveContext(null);
+    public static readonly ResolveContext EmptyContext = new ResolveContext(null);
 
     private class StubContainer : IContainer
     {
@@ -34,44 +33,44 @@ namespace Rezolver
 
       public ITargetCompiler Compiler
       {
-        get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
+        get { throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set")); }
       }
 
       public ITargetContainer Targets
       {
-        get { throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set")); }
+        get { throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set")); }
       }
 
-      public bool CanResolve(RezolveContext context)
+      public bool CanResolve(ResolveContext context)
       {
-        throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+        throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
       }
 
-      public object Resolve(RezolveContext context)
-      {
-        context.MustNotBeNull("context");
-        throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
-      }
-
-      public bool TryResolve(RezolveContext context, out object result)
+      public object Resolve(ResolveContext context)
       {
         context.MustNotBeNull("context");
-        throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+        throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
+      }
+
+      public bool TryResolve(ResolveContext context, out object result)
+      {
+        context.MustNotBeNull("context");
+        throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
       }
 
       public IScopedContainer CreateLifetimeScope()
       {
-        throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+        throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
       }
 
-      public ICompiledTarget FetchCompiled(RezolveContext context)
+      public ICompiledTarget FetchCompiled(ResolveContext context)
       {
-        throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+        throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
       }
 
       public void Register(ITarget target, Type type = null)
       {
-        throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+        throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
       }
 
       public IScopedContainer CreateLifetimeScope(IContainer overridingRezolver)
@@ -81,7 +80,7 @@ namespace Rezolver
 
       object IServiceProvider.GetService(Type serviceType)
       {
-        throw new InvalidOperationException(String.Format("The RezolveContext has no Rezolver set"));
+        throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
       }
     }
 
@@ -98,26 +97,26 @@ namespace Rezolver
     private IScopedContainer _scope;
     public IScopedContainer Scope { get { return _scope; } private set { _scope = value; } }
 
-    private RezolveContext() { }
+    private ResolveContext() { }
 
-    public RezolveContext(IContainer container, Type requestedType)
+    public ResolveContext(IContainer container, Type requestedType)
       : this(container)
     {
       RequestedType = requestedType;
     }
 
-    public RezolveContext(IContainer container, Type requestedType, IScopedContainer scope)
+    public ResolveContext(IContainer container, Type requestedType, IScopedContainer scope)
       : this(container)
     {
       RequestedType = requestedType;
       Scope = scope;
     }
 
-    private RezolveContext(IContainer container)
+    private ResolveContext(IContainer container)
     {
       _container = container ?? StubContainer.Instance;
       //automatically inherit the container as this context's scope, if it's of the correct type.
-      //note - all the other constructors chain to this one.  Note that other constructors
+      //note - all the other constructors chain to this one.  Other constructors
       //might supply a separate scope in addition, which will overwrite the scope set here.
       _scope = container as IScopedContainer;
     }
@@ -148,15 +147,15 @@ namespace Rezolver
     {
       if (obj == null)
         return false;
-      return Equals(obj as RezolveContext);
+      return Equals(obj as ResolveContext);
     }
 
-    public virtual bool Equals(RezolveContext other)
+    public virtual bool Equals(ResolveContext other)
     {
       return object.ReferenceEquals(this, other) || _requestedType == other._requestedType;
     }
 
-    public static bool operator ==(RezolveContext left, RezolveContext right)
+    public static bool operator ==(ResolveContext left, ResolveContext right)
     {
       //same ref - yes
       if (object.ReferenceEquals(left, right))
@@ -169,7 +168,7 @@ namespace Rezolver
       return left._requestedType == right._requestedType;
     }
 
-    public static bool operator !=(RezolveContext left, RezolveContext right)
+    public static bool operator !=(ResolveContext left, ResolveContext right)
     {
       //same reference
       if (object.ReferenceEquals(left, right))
@@ -191,9 +190,9 @@ namespace Rezolver
     /// </summary>
     /// <param name="requestedType"></param>
     /// <returns></returns>
-    public RezolveContext CreateNew(Type requestedType)
+    public ResolveContext CreateNew(Type requestedType)
     {
-      return new RezolveContext()
+      return new ResolveContext()
       {
         Container = Container,
         RequestedType = requestedType,
@@ -201,9 +200,9 @@ namespace Rezolver
       };
     }
 
-    public RezolveContext CreateNew(IContainer container, Type requestedType)
+    public ResolveContext CreateNew(IContainer container, Type requestedType)
     {
-      return new RezolveContext()
+      return new ResolveContext()
       {
         Container = container,
         RequestedType = requestedType,
@@ -211,9 +210,9 @@ namespace Rezolver
       };
     }
 
-    public RezolveContext CreateNew(Type requestedType, IScopedContainer scope)
+    public ResolveContext CreateNew(Type requestedType, IScopedContainer scope)
     {
-      return new RezolveContext()
+      return new ResolveContext()
       {
         Container = Container,
         RequestedType = requestedType,
@@ -221,9 +220,9 @@ namespace Rezolver
       };
     }
 
-    public RezolveContext CreateNew(IContainer container, Type requestedType, IScopedContainer scope)
+    public ResolveContext CreateNew(IContainer container, Type requestedType, IScopedContainer scope)
     {
-      return new RezolveContext()
+      return new ResolveContext()
       {
         Container = container,
         RequestedType = requestedType,
@@ -231,9 +230,9 @@ namespace Rezolver
       };
     }
 
-    public RezolveContext CreateNew(IContainer container)
+    public ResolveContext CreateNew(IContainer container)
     {
-      return new RezolveContext()
+      return new ResolveContext()
       {
         Container = container,
         RequestedType = RequestedType,
@@ -241,9 +240,9 @@ namespace Rezolver
       };
     }
 
-    public RezolveContext CreateNew(IScopedContainer scope)
+    public ResolveContext CreateNew(IScopedContainer scope)
     {
-      return new RezolveContext()
+      return new ResolveContext()
       {
         Container = Container,
         RequestedType = RequestedType,
@@ -251,9 +250,9 @@ namespace Rezolver
       };
     }
 
-    public RezolveContext CreateNew(IContainer container, IScopedContainer scope)
+    public ResolveContext CreateNew(IContainer container, IScopedContainer scope)
     {
-      return new RezolveContext()
+      return new ResolveContext()
       {
         Container = container ?? Container, //can't have a null container
         RequestedType = RequestedType,

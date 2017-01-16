@@ -14,7 +14,7 @@ namespace Rezolver.Compilation.Expressions
 	/// <seealso cref="Rezolver.Compilation.Expressions.ExpressionBuilderBase{Rezolver.DefaultTarget}" />
 	public class DefaultTargetBuilder : ExpressionBuilderBase<DefaultTarget>
 	{
-		protected override Expression Build(DefaultTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(DefaultTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			return Expression.Default(target.DeclaredType);
 		}

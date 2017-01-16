@@ -21,7 +21,7 @@ namespace Rezolver
 		/// Registers an explicitly scoped instance of <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via 
 		/// constructor injection.  
 		/// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
-		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(RezolveContext)"/> is first called.
+		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(ResolveContext)"/> is first called.
 		/// 
 		/// Optionally, property injection can be configured for the new object, depending on the <see cref="IMemberBindingBehaviour"/> 
 		/// object passed for the optional parameter <paramref name="propertyBindingBehaviour"/>.
@@ -44,7 +44,7 @@ namespace Rezolver
 		/// Registers an explicitly scoped instance of <typeparamref name="TObject"/> for the service type <typeparamref name="TService"/> 
 		/// to be created by an <see cref="IContainer"/> via constructor injection.
 		/// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
-		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(RezolveContext)"/> is first called.
+		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(ResolveContext)"/> is first called.
 		/// 
 		/// Optionally, property injection can be configured for the new object, depending on the <see cref="IMemberBindingBehaviour"/> 
 		/// object passed for the optional parameter <paramref name="propertyBindingBehaviour"/>.
@@ -69,7 +69,7 @@ namespace Rezolver
 		/// Registers an explicitly instance of <paramref name="objectType"/> (optionally for the service type <paramref name="serviceType"/>) to be 
 		/// created by an <see cref="IContainer"/> via constructor injection.  
 		/// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
-		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(RezolveContext)"/> is first called.
+		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(ResolveContext)"/> is first called.
 		/// 
 		/// Optionally, property injection can be configured for the new object, depending on the <see cref="IMemberBindingBehaviour"/> 
 		/// object passed for the optional parameter <paramref name="propertyBindingBehaviour"/>.

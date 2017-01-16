@@ -12,7 +12,11 @@ using System.Text;
 
 namespace Rezolver.Compilation.Expressions
 {
-#if !DOTNET
+	//code below is disbaled at build time until I've got expression compilation working properly again
+	//after which time, I will then derive this compiler from the expression generating one, throw away
+	//a lot of the code found here and just hook in the core expression generation stuff with the assembly
+	//generation stuff.
+#if SUSPENDED && !DOTNET
 	/// <summary>
 	/// Implementation of the <see cref="ITargetCompiler"/> which compiles dynamic code to an assembly (which can, potentially, be saved to disk).
 	/// 
@@ -31,14 +35,14 @@ namespace Rezolver.Compilation.Expressions
 
 		private sealed class StaticInvoker : ICompiledTarget
 		{
-			private Func<RezolveContext, object> _targetMethod;
+			private Func<ResolveContext, object> _targetMethod;
 
 			public StaticInvoker(MethodInfo targetMethod)
 			{
-				_targetMethod = (Func<RezolveContext, object>)Delegate.CreateDelegate(typeof(Func<RezolveContext, object>), targetMethod);
+				_targetMethod = (Func<ResolveContext, object>)Delegate.CreateDelegate(typeof(Func<ResolveContext, object>), targetMethod);
 			}
 
-			public object GetObject(RezolveContext context)
+			public object GetObject(ResolveContext context)
 			{
 				return _targetMethod(context);
 				//return _targetMethod.Invoke(context);
@@ -290,7 +294,7 @@ namespace Rezolver.Compilation.Expressions
 			MethodBuilder methodBuilder = typeBuilder.DefineMethod(methodName,
 				MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.Final, CallingConventions.HasThis,
 				typeof(object),
-				new[] { typeof(RezolveContext) });
+				new[] { typeof(ResolveContext) });
 
 			var ilgen = methodBuilder.GetILGenerator();
 			ilgen.Emit(OpCodes.Ldarg_1);

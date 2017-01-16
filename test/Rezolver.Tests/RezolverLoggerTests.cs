@@ -28,7 +28,7 @@ namespace Rezolver.Tests
 				}
 			}
 
-			public virtual bool CanResolve(RezolveContext context)
+			public virtual bool CanResolve(ResolveContext context)
 			{
 				return false;
 			}
@@ -38,7 +38,7 @@ namespace Rezolver.Tests
 				return null;
 			}
 
-			public virtual ICompiledTarget FetchCompiled(RezolveContext context)
+			public virtual ICompiledTarget FetchCompiled(ResolveContext context)
 			{
 				return null;
 			}
@@ -48,12 +48,12 @@ namespace Rezolver.Tests
 				return null;
 			}
 
-			public virtual object Resolve(RezolveContext context)
+			public virtual object Resolve(ResolveContext context)
 			{
 				return null;
 			}
 
-			public virtual bool TryResolve(RezolveContext context, out object result)
+			public virtual bool TryResolve(ResolveContext context, out object result)
 			{
 				result = null;
 				return false;

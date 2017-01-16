@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Rezolver.Compilation;
 
 namespace Rezolver
 {
@@ -34,14 +35,14 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(CompileContext, Type)"/>.
+		/// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)"/>.
 		/// 
 		/// Returns a binding for each publicly writable property (i.e. with a public set accessor) and each public
 		/// field on the <paramref name="type"/>.
 		/// </summary>
 		/// <param name="context">The context.</param>
 		/// <param name="type">The type.</param>
-		public virtual MemberBinding[] GetMemberBindings(CompileContext context, Type type)
+		public virtual MemberBinding[] GetMemberBindings(ICompileContext context, Type type)
 		{
 			//find all publicly writable properties and public fields, emit 
 			return BindProperties(type, GetBindableProperties(type))
@@ -67,7 +68,7 @@ namespace Rezolver
 		/// <summary>
 		/// Creates the binding for the given field.
 		/// 
-		/// Called by <see cref="GetMemberBindings(CompileContext, Type)"/>
+		/// Called by <see cref="GetMemberBindings(ICompileContext, Type)"/>
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <param name="field">The field.</param>
@@ -79,7 +80,7 @@ namespace Rezolver
 		/// <summary>
 		/// Creates the binding for the given property.
 		/// 
-		/// Called by <see cref="GetMemberBindings(CompileContext, Type)"/>
+		/// Called by <see cref="GetMemberBindings(ICompileContext, Type)"/>
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <param name="prop">The property.</param>
@@ -91,7 +92,7 @@ namespace Rezolver
 		/// <summary>
 		/// Gets the bindable fields on the <paramref name="type"/>.
 		/// 
-		/// Used by <see cref="GetMemberBindings(CompileContext, Type)"/>.
+		/// Used by <see cref="GetMemberBindings(ICompileContext, Type)"/>.
 		/// </summary>
 		/// <param name="type">The type.</param>
 		protected virtual IEnumerable<FieldInfo> GetBindableFields(Type type)
@@ -102,7 +103,7 @@ namespace Rezolver
 		/// <summary>
 		/// Gets the bindable properties on the <paramref name="type"/>.
 		/// 
-		/// Used by <see cref="GetMemberBindings(CompileContext, Type)"/>.
+		/// Used by <see cref="GetMemberBindings(ICompileContext, Type)"/>.
 		/// </summary>
 		/// <param name="type">The type.</param>
 		protected virtual IEnumerable<PropertyInfo> GetBindableProperties(Type type)

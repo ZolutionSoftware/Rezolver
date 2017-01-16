@@ -36,7 +36,7 @@ namespace Rezolver.Logging
 		{
 			Logger.TrackCall(this, () => base.Dispose(disposing));
 		}
-		public override bool CanResolve(RezolveContext context)
+		public override bool CanResolve(ResolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.CanResolve(context), context);
 		}
@@ -46,7 +46,7 @@ namespace Rezolver.Logging
 			return Logger.TrackCall(this, () => new TrackedOverridingScopedContainer(this));
 		}
 
-		public override ICompiledTarget FetchCompiled(RezolveContext context)
+		public override ICompiledTarget FetchCompiled(ResolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
 		}
@@ -56,12 +56,12 @@ namespace Rezolver.Logging
 			return Logger.TrackCall(this, () => base.GetService(serviceType), new { serviceType = serviceType });
 		}
 
-		public override object Resolve(RezolveContext context)
+		public override object Resolve(ResolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.Resolve(context), new { context = context });
 		}
 
-		public override bool TryResolve(RezolveContext context, out object result)
+		public override bool TryResolve(ResolveContext context, out object result)
 		{
 			object tempResult = null;
 			var @return = Logger.TrackCall(this, () => base.TryResolve(context, out tempResult), new { context = context });
@@ -69,12 +69,12 @@ namespace Rezolver.Logging
 			return @return;
 		}
 
-		public override void AddToScope(object obj, RezolveContext context = null)
+		public override void AddToScope(object obj, ResolveContext context = null)
 		{
 			Logger.TrackCall(this, () => base.AddToScope(obj, context), new { obj = obj, context = context });
 		}
 
-		public override IEnumerable<object> GetFromScope(RezolveContext context)
+		public override IEnumerable<object> GetFromScope(ResolveContext context)
 		{
 			return Logger.TrackCall(this, () => base.GetFromScope(context), new { context = context });
 		}

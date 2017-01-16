@@ -16,7 +16,7 @@ namespace Rezolver.Compilation.Expressions
 		private ConstructorInfo _argExceptionCtor = 
 			MethodCallExtractor.ExtractConstructorCall(() => new ArgumentException("", ""));
 
-		protected override Expression Build(ScopedTarget target, CompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(ScopedTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			throw new NotImplementedException();
 			//TODO: Scoping must be implemented differently, to remove the need for any code generation
@@ -26,7 +26,7 @@ namespace Rezolver.Compilation.Expressions
 			var isScopeNull = Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IScopedContainer)));
 			var throwArgException = Expression.Throw(Expression.New(_argExceptionCtor,
 				Expression.Property(null, typeof(ExceptionResources), "ScopedSingletonRequiresAScope"),
-				Expression.Constant(context.RezolveContextExpression.Name ?? "context")));
+				Expression.Constant(context.ResolveContextExpression.Name ?? "context")));
 
 			var actualType = context.TargetType ?? target.DeclaredType;
 
@@ -38,7 +38,7 @@ namespace Rezolver.Compilation.Expressions
 					//is to be created - for that, instead of getting the raw expression for the target, we get
 					//the final lambda that would normally be compiled for the target and bake it directly as
 					//the callback.
-					compiler.BuildResolveLambda(target.InnerTarget, context.New(actualType, suppressScopeTracking: true)),
+					compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(actualType, suppressScopeTracking: true)),
 					Expression.Constant(false))
 				);
 		}

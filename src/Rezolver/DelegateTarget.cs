@@ -17,8 +17,8 @@ namespace Rezolver
 	/// <remarks>The delegate must be non-void and can have any number of parameters.
 	/// 
 	/// Any parameters will be automatically resolved from the container, and a parameter
-	/// of the type <see cref="RezolveContext"/> will receive the context passed to the
-	/// current <see cref="IContainer.Resolve(RezolveContext)"/>.</remarks>
+	/// of the type <see cref="ResolveContext"/> will receive the context passed to the
+	/// current <see cref="IContainer.Resolve(ResolveContext)"/>.</remarks>
  	public class DelegateTarget : TargetBase
 	{
 		/// <summary>
@@ -45,8 +45,8 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="factory">Required - the factory delegate.  Must have a return type and can take 
 		/// 0 or more parameters.  As described in the remarks section of this class, parameters will be 
-		/// automatically resolved from the container; except parameters of the type <see cref="RezolveContext"/>,
-		/// which will receive the context that was passed to the current <see cref="IContainer.Resolve(RezolveContext)"/> 
+		/// automatically resolved from the container; except parameters of the type <see cref="ResolveContext"/>,
+		/// which will receive the context that was passed to the current <see cref="IContainer.Resolve(ResolveContext)"/> 
 		/// method.</param>
 		/// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType"/> for the target;
 		/// if not provided, then it will be derived from the <paramref name="factory"/>'s return type</param>
