@@ -84,6 +84,15 @@ namespace Rezolver
 #endif
 		}
 
+		internal static FieldInfo[] GetStaticFields(this Type type)
+		{
+#if DOTNET
+			return type.GetTypeInfo().DeclaredFields.Where(f => f.IsStatic).ToArray();
+#else
+			return type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+#endif
+		}
+
 		internal static bool IsEnumerableType(this Type type, out Type elementType)
 		{
 			elementType = null;

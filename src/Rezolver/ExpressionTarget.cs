@@ -15,6 +15,12 @@ namespace Rezolver
 	/// Enables more complex behaviours to be registered and used with the more formal
 	/// <see cref="ITarget"/> implementations.
 	/// </summary>
+	/// <remarks>Note to compiler implementers: This class can be used to represent simple
+	/// expressions such as constants, constructor calls and so on; but can also contain whole
+	/// lambda expressions with parameters.
+	/// 
+	/// In the latter case, expression parameters are expected to receive injected arguments and, 
+	/// therefore, some rewriting of the expression is likely to be required.</remarks>
 	public class ExpressionTarget : TargetBase
 	{
 		/// <summary>
@@ -73,5 +79,8 @@ namespace Rezolver
 			ExpressionFactory = expressionFactory;
 			DeclaredType = declaredType;
 		}
+
+		//TODO: Consider adding a Bind() function to this class to carry out the complex lambda rewriting etc, as it's
+		//going to be needed by other compilers, not just the ExpressionCompiler.
 	}
 }

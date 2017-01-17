@@ -117,7 +117,7 @@ namespace Rezolver.Tests
     {
       Container container = new Container(compiler: new TargetDelegateCompiler());
       container.Register((25).AsObjectTarget());
-      container.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto<HasProperty>(DefaultMemberBindingBehaviour.Instance));
       var result = (HasProperty)container.Resolve(typeof(HasProperty));
       Assert.Equal(25, result.Value);
     }
@@ -127,7 +127,7 @@ namespace Rezolver.Tests
     {
       Container container = new Container(compiler: new TargetDelegateCompiler());
       container.Register("Hello world".AsObjectTarget());
-      container.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto<HasField>(DefaultMemberBindingBehaviour.Instance));
       var result = (HasField)container.Resolve(typeof(HasField));
       Assert.Equal("Hello world", result.StringField);
     }
@@ -137,7 +137,7 @@ namespace Rezolver.Tests
     {
       Container container = new Container(compiler: new TargetDelegateCompiler());
       container.Register((100).AsObjectTarget());
-      container.RegisterType<IgnoredPropertyAndField>(DefaultPropertyBindingBehaviour.Instance);
+      container.RegisterType<IgnoredPropertyAndField>(DefaultMemberBindingBehaviour.Instance);
       var result = container.Resolve<IgnoredPropertyAndField>();
       Assert.Equal(1, result.GetIgnoredField());
       Assert.Equal(2, result.IgnoredProperty1);
@@ -150,9 +150,9 @@ namespace Rezolver.Tests
       Container container = new Container(compiler: new TargetDelegateCompiler());
       container.Register("hello universe".AsObjectTarget());
       container.Register((500).AsObjectTarget());
-      container.Register(ConstructorTarget.Auto<HasField>(DefaultPropertyBindingBehaviour.Instance));
-      container.Register(ConstructorTarget.Auto<HasProperty>(DefaultPropertyBindingBehaviour.Instance));
-      container.Register(ConstructorTarget.Auto<NestedPropertiesAndFields>(DefaultPropertyBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto<HasField>(DefaultMemberBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto<HasProperty>(DefaultMemberBindingBehaviour.Instance));
+      container.Register(ConstructorTarget.Auto<NestedPropertiesAndFields>(DefaultMemberBindingBehaviour.Instance));
 
       var result = (NestedPropertiesAndFields)container.Resolve(typeof(NestedPropertiesAndFields));
 

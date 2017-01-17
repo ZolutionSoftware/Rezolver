@@ -27,13 +27,13 @@ namespace Rezolver
 	/// 
 	/// The default behaviour is bind each member to a new <see cref="RezolvedTarget"/> whose 
 	/// <see cref="RezolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
-	public class DefaultPropertyBindingBehaviour : IMemberBindingBehaviour
+	public class DefaultMemberBindingBehaviour : IMemberBindingBehaviour
 	{
-		private static readonly Lazy<DefaultPropertyBindingBehaviour> _instance = new Lazy<DefaultPropertyBindingBehaviour>(() => new DefaultPropertyBindingBehaviour());
+		private static readonly Lazy<DefaultMemberBindingBehaviour> _instance = new Lazy<DefaultMemberBindingBehaviour>(() => new DefaultMemberBindingBehaviour());
 		/// <summary>
-		/// Gets the one and only instance of <see cref="DefaultPropertyBindingBehaviour"/>
+		/// Gets the one and only instance of <see cref="DefaultMemberBindingBehaviour"/>
 		/// </summary>
-		public static DefaultPropertyBindingBehaviour Instance
+		public static DefaultMemberBindingBehaviour Instance
 		{
 			get
 			{
@@ -42,9 +42,9 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Constructs a new instance of the <see cref="DefaultPropertyBindingBehaviour"/> class.
+		/// Constructs a new instance of the <see cref="DefaultMemberBindingBehaviour"/> class.
 		/// </summary>
-		protected DefaultPropertyBindingBehaviour() { }
+		protected DefaultMemberBindingBehaviour() { }
 
 		/// <summary>
 		/// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)"/>.
@@ -63,39 +63,34 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// 
+		/// Called by <see cref="GetMemberBindings(ICompileContext, Type)"/> - iterates through the 
+		/// <paramref name="fields"/>, calling <see cref="CreateBinding(ICompileContext, Type, FieldInfo)"/> for each,
+		/// and those which are non-null.
 		/// </summary>
 		/// <param name="context">The current compilation context.</param>
 		/// <param name="type">The type whose members are to be bound.</param>
-		/// <param name="fields"></param>
+		/// <param name="fields">The fields for which bindings are to be created.  This is fed by
+		/// the function <see cref="GetBindableFields(ICompileContext, Type)"/></param>
 		/// <returns></returns>
 		protected virtual IEnumerable<MemberBinding> BindFields(ICompileContext context, Type type, IEnumerable<FieldInfo> fields)
 		{
-			MemberBinding binding;
-			foreach (var field in fields)
-			{
-				binding = CreateBinding(context, type, field);
-				if (binding != null)
-					yield return binding;
-			}
+			return fields.Select(f => CreateBinding(context, type, f)).Where(b => b != null);
 		}
-#error continue up from here; and down in the project from here.
+
 		/// <summary>
-		/// 
+		/// Called by <see cref="GetMemberBindings(ICompileContext, Type)"/> - iterates through the 
+		/// <paramref name="properties"/>, calling <see cref="CreateBinding(ICompileContext, Type, PropertyInfo)"/> for each,
+		/// and those which are non-null.
 		/// </summary>
 		/// <param name="context">The current compilation context.</param>
 		/// <param name="type">The type whose members are to be bound.</param>
-		/// <param name="properties"></param>
-		/// <returns></returns>
+		/// <param name="properties">The properties for which bindings are to be created.  This is fed by
+		/// the function <see cref="GetBindableProperties(ICompileContext, Type)"/></param>
+		/// <returns>An enumerable of <see cref="MemberBinding"/> objects representing the bindings to be used
+		/// for each bindable property in <paramref name="properties"/>.</returns>
 		protected virtual IEnumerable<MemberBinding> BindProperties(ICompileContext context, Type type, IEnumerable<PropertyInfo> properties)
 		{
-			MemberBinding binding;
-			foreach (var prop in properties)
-			{
-				binding = CreateBinding(context, type, prop);
-				if (binding != null)
-					yield return binding;
-			}
+			return properties.Select(p => CreateBinding(context, type, p)).Where(b => b != null);
 		}
 
 		/// <summary>

@@ -34,11 +34,14 @@ namespace Rezolver
 		public IMemberBindingBehaviour MemberBindingBehaviour { get; private set; }
 
 		/// <summary>
-		/// 
+		/// Constructs a new instance of the <see cref="GenericConstructorTarget"/> for the given open generic type,
+		/// which will utilise the optional <paramref name="memberBindingBehaviour"/> when it constructs its
+		/// <see cref="ConstructorTarget"/> when <see cref="Bind(ICompileContext)"/> is called.
 		/// </summary>
 		/// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-		/// <param name="memberBindingBehaviour">Optional.  The <see cref="IMemberBindingBehaviour"/> to be used for binding properties and/or fields on the 
-		/// 'new' expression that is generated.  If null, then no property or fields will be bound on construction.</param>
+		/// <param name="memberBindingBehaviour">Optional.  The <see cref="IMemberBindingBehaviour"/> to be used for binding
+		/// properties and/or fields on the <see cref="ConstructorTarget"/> that is generated.  If null, then no property 
+		/// or fields will be bound on construction.</param>
 		public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)
 		{
 			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
@@ -96,7 +99,7 @@ namespace Rezolver
 		/// then this function merely has to insert the <c>int</c> type as the generic parameter to the <c>MyGeneric&lt;&gt;</c>
 		/// type definition, bake a new type and create an auto-bound <see cref="ConstructorTarget"/>.
 		/// 
-		/// Consider what happens when the inheritance chain is more complex:
+		/// Consider what happens, however, when the inheritance chain is more complex:
 		/// 
 		/// <code>
 		/// interface IMyInterfaceCore&lt;T, U&gt; { }
@@ -116,9 +119,9 @@ namespace Rezolver
 		/// instance of <c>MyDerivedClass&lt;string, int&gt;</c> - because the generic arguments are reversed first through 
 		/// the base class inheritance, and then again by the base class' implementation of the interface.
 		/// 
-		/// Note that a <see cref="GenericConstructorTarget"/> can only bind to the context's target type is there is enough information
+		/// Note that a <see cref="GenericConstructorTarget"/> can only bind to the context's target type if there is enough information
 		/// in order to deduce the generic type arguments for <see cref="GenericType"/>.  This means, in general, that the requested
-		/// type will almost always need to be a generic type.
+		/// type will almost always need to be a generic type with at least as many type arguments as the <see cref="GenericType"/>.
 		/// </remarks>
 		public ITarget Bind(ICompileContext context)
 		{
@@ -243,9 +246,9 @@ namespace Rezolver
 		/// <summary>
 		/// Equivalent of <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> but for open generic types.
 		/// </summary>
-		/// <typeparam name="TGeneric">The open generic type which will be created when this target is called upon
+		/// <typeparam name="TGeneric">The open generic type from which a closed generic will be created when this target is called upon
 		/// to create an instance.</typeparam>
-		/// <param name="propertyBindingBehaviour">Optional behaviour controlling which properties, if any, receive injected values.</param>
+		/// <param name="propertyBindingBehaviour">Optional behaviour controlling which properties and fields, if any, receive injected values.</param>
 		public static ITarget Auto<TGeneric>(IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
 			return Auto(typeof(TGeneric), propertyBindingBehaviour);

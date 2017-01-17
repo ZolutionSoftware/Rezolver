@@ -85,7 +85,8 @@ namespace Rezolver.Compilation.Expressions
 				//{
 				//	result = CreateScopeTrackingExpression(context, result);
 				//}
-
+				Container c = null;
+				c.RegisterDelegate((int i) => { return 0; });
 				return result;
 			}
 			finally

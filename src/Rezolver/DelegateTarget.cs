@@ -16,13 +16,14 @@ namespace Rezolver
 	/// </summary>
 	/// <remarks>The delegate must be non-void and can have any number of parameters.
 	/// 
-	/// Any parameters will be automatically resolved from the container, and a parameter
-	/// of the type <see cref="ResolveContext"/> will receive the context passed to the
-	/// current <see cref="IContainer.Resolve(ResolveContext)"/>.</remarks>
+	/// A compiler must ensure that any parameters for the <see cref="Factory"/> are automatically 
+	/// resolved from the container, and that a parameter of the type <see cref="ResolveContext"/> 
+	/// will receive the context passed to the <see cref="IContainer.Resolve(ResolveContext)"/>
+	/// method call for which this target is being compiled and/or executed.</remarks>
  	public class DelegateTarget : TargetBase
 	{
 		/// <summary>
-		/// Gets the factory method that will be invoked by an expression built by this target.
+		/// Gets the factory method that will be invoked when this target is compiled and executed
 		/// </summary>
 		/// <value>The factory.</value>
 		public Delegate Factory { get; private set; }
@@ -30,7 +31,8 @@ namespace Rezolver
 		private Type _declaredType;
 
 		/// <summary>
-		/// Gets the declared type of object that is constructed by this target.
+		/// Gets the declared type of object that is constructed by this target, either set on 
+		/// construction or derived from the return type of the <see cref="Factory"/>
 		/// </summary>
 		public override Type DeclaredType
 		{
@@ -44,10 +46,7 @@ namespace Rezolver
 		/// Initializes a new instance of the <see cref="DelegateTarget"/> class.
 		/// </summary>
 		/// <param name="factory">Required - the factory delegate.  Must have a return type and can take 
-		/// 0 or more parameters.  As described in the remarks section of this class, parameters will be 
-		/// automatically resolved from the container; except parameters of the type <see cref="ResolveContext"/>,
-		/// which will receive the context that was passed to the current <see cref="IContainer.Resolve(ResolveContext)"/> 
-		/// method.</param>
+		/// 0 or more parameters.</param>
 		/// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType"/> for the target;
 		/// if not provided, then it will be derived from the <paramref name="factory"/>'s return type</param>
 		/// <exception cref="ArgumentNullException">If <paramref name="factory"/> is null</exception>
@@ -78,7 +77,7 @@ namespace Rezolver
 		/// <summary>
 		/// Creates a <see cref="DelegateTarget"/> from the <paramref name="factory"/> which can be registered in an 
 		/// <see cref="ITargetContainer"/> to resolve an instance of a type compatible with the delegate's return type
-		/// an, optionally, with the <paramref name="declaredType" />
+		/// and, optionally, with the <paramref name="declaredType" />
 		/// </summary>
 		/// <param name="factory">The delegate to be used as a factory.</param>
 		/// <param name="declaredType">Optional type to set as the <see cref="DelegateTarget.DeclaredType"/> of the target,
