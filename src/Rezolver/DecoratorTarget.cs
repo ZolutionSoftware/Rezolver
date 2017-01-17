@@ -14,11 +14,14 @@ namespace Rezolver
 	/// know what you're doing.  Rather, decorators should be registered using the extension method
 	/// <see cref="DecoratorTargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainerOwner)"/>
 	/// or its non-generic alternative because the target needs a <see cref="DecoratingTargetContainer"/>
-	/// to work properly.
+	/// to work properly (the creation of which is automatically handled by these extension methods).
 	/// </summary>
 	/// <seealso cref="Rezolver.TargetBase" />
 	public class DecoratorTarget : TargetBase
 	{
+		/// <summary>
+		/// Always returns <see cref="DecoratorType"/>
+		/// </summary>
 		public override Type DeclaredType
 		{
 			get
@@ -28,29 +31,37 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Gets the type which is being used to decorate the instance produced by the 
+		/// Gets the type which is decorating the instance produced by the 
 		/// <see cref="DecoratedTarget"/> for the common service type <see cref="DecoratedType"/>
 		/// </summary>
-		/// <value>The type of the decorator.</value>
 		public Type DecoratorType { get; }
 		/// <summary>
 		/// Gets the target which will create an instance of the <see cref="DecoratorType"/>
 		/// </summary>
-		/// <value>The target.</value>
+		/// <remarks>The constructor currently auto-initialises this to a just-in-time-bound <see cref="ConstructorTarget"/>
+		/// targetting the <see cref="DecoratorType"/> by using the <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/>
+		/// method.</remarks>
 		public ITarget Target { get; }
 		/// <summary>
 		/// Gets the target whose instance will be wrapped (decorated) by the one produced by 
 		/// <see cref="Target"/>.
 		/// </summary>
-		/// <value>The decorated target.</value>
 		public ITarget DecoratedTarget { get; }
 		/// <summary>
 		/// Gets the underlying type (e.g. a common service interface or base) that is being implemented
-		/// through decoration..
+		/// through decoration.
 		/// </summary>
-		/// <value>The type of the decorated.</value>
 		public Type DecoratedType { get; }
 
+		/// <summary>
+		/// Creates a new instance of the <see cref="DecoratorTarget"/> type, initialising the <see cref="Target"/>
+		/// to a just-in-time-bound <see cref="ConstructorTarget"/> for the <paramref name="decoratorType"/>.
+		/// </summary>
+		/// <param name="decoratorType">The type which is decorating the <paramref name="decoratedType"/></param>
+		/// <param name="decoratedTarget">The target which is being decorated</param>
+		/// <param name="decoratedType">The common type which is being decorated - e.g. <c>IService</c> when 
+		/// the <paramref name="decoratedTarget"/> is bound to the type <c>MyService : IService</c> and
+		/// the <paramref name="decoratorType"/> is set to <c>MyServiceDecorator : IService</c>.</param>
 		public DecoratorTarget(Type decoratorType, ITarget decoratedTarget, Type decoratedType)
 		{
 			DecoratorType = decoratorType;
@@ -60,6 +71,12 @@ namespace Rezolver
 			Target = ConstructorTarget.Auto(DecoratorType);
 		}
 
+		/// <summary>
+		/// Overrides <see cref="TargetBase.SupportsType(Type)"/> to forward the call to <see cref="Target"/>.
+		/// </summary>
+		/// <param name="type">The type which is to be checked.</param>
+		/// <returns><c>true</c> if the type is compatible with the object created by <see cref="Target"/>, <c>false</c>
+		/// if not.</returns>
 		public override bool SupportsType(Type type)
 		{
 			return Target.SupportsType(type);

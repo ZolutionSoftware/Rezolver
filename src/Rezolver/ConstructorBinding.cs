@@ -40,7 +40,7 @@ namespace Rezolver
 			MemberBinding[] memberBindings = null)
 			: base(constructor, boundArgs)
 		{
-			
+			MemberBindings = memberBindings;
 		}
     }
 }

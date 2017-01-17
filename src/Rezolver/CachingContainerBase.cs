@@ -16,7 +16,7 @@ namespace Rezolver
   /// </summary>
   /// <remarks>Internally, the class uses a <see cref="ConcurrentDictionary{TKey, TValue}"/> to store <see cref="ICompiledTarget"/>s keyed by the requested type.
   /// 
-  /// All the main <see cref="IContainer"/> implementations used directly in an application should inherit from this class, because otherwise every 
+  /// All the main <see cref="IContainer"/> implementations used directly in an application should ideally inherit from this class, because otherwise every 
   /// <see cref="IContainer.Resolve(ResolveContext)"/> operation would require a compilation phase before the object could be returned, which would be incredibly slow.
   /// 
   /// It's because of this caching that registering new targets in any <see cref="ITargetContainer"/> used by this class is not recommended: because after the first request

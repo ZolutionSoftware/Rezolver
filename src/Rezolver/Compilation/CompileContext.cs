@@ -122,7 +122,7 @@ namespace Rezolver.Compilation
 		/// will be required to complete compilation.
 		/// Note - this argument is passed to a new <see cref="ChildTargetContainer" /> that is created and proxied by this class' implementation
 		/// of <see cref="ITargetContainer" />.
-		/// As a result, it's possible to register new targets directly into the context via the <see cref="Register(ITarget, Type)" /> method,
+		/// As a result, it's possible to register new targets directly into the context via its implementation of <see cref="ITargetContainer"/>,
 		/// without modifying the underlying targets in the container you pass.</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType" /> property.  If null, then any 
 		/// <see cref="ITarget"/> that is compiled should be compiled for its own <see cref="ITarget.DeclaredType"/>.</param>

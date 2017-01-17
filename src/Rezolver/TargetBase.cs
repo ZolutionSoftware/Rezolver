@@ -74,11 +74,11 @@ namespace Rezolver
     /// is called), then it can override the <see cref="CreateScopeSelectionExpression(ICompileContext, Expression)"/> method.
     /// </remarks>
     /// <returns></returns>
-    protected virtual Expression CreateScopeTrackingExpression(ICompileContext context, Expression expression)
-    {
-      return Expression.Call(ILifetimeScopeRezolver_TrackIfScopedAndDisposableAndReturnGeneric.MakeGenericMethod(expression.Type),
-          CreateScopeSelectionExpression(context, expression), expression);
-    }
+    //protected virtual Expression CreateScopeTrackingExpression(ICompileContext context, Expression expression)
+    //{
+    //  return Expression.Call(ILifetimeScopeRezolver_TrackIfScopedAndDisposableAndReturnGeneric.MakeGenericMethod(expression.Type),
+    //      CreateScopeSelectionExpression(context, expression), expression);
+    //}
 
     /// <summary>
     /// Called to generate the expression that represents the argument that'll be passed to the 
@@ -90,10 +90,10 @@ namespace Rezolver
     /// <param name="context"></param>
     /// <param name="expression"></param>
     /// <returns></returns>
-    protected virtual Expression CreateRezolveContextExpressionForScopeAddCall(ICompileContext context, Expression expression)
-    {
-      return Expression.Default(typeof(ResolveContext));
-    }
+    //protected virtual Expression CreateRezolveContextExpressionForScopeAddCall(ICompileContext context, Expression expression)
+    //{
+    //  return Expression.Default(typeof(ResolveContext));
+    //}
 
     /// <summary>
     /// Called by <see cref="CreateScopeTrackingExpression(ICompileContext, Expression)"/> to generate the code that selects the correct 
@@ -103,11 +103,11 @@ namespace Rezolver
     /// <param name="context"></param>
     /// <param name="expression"></param>
     /// <returns></returns>
-    protected virtual Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
-    {
-			throw new NotSupportedException();
-      //return context.ContextScopePropertyExpression;
-    }
+   // protected virtual Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
+   // {
+			//throw new NotSupportedException();
+   //   //return context.ContextScopePropertyExpression;
+   // }
 
     /// <summary>
     /// Called to check whether a target can create an expression that builds an instance of the given <paramref name="type" />.
@@ -121,8 +121,7 @@ namespace Rezolver
     }
 		
     /// <summary>
-    /// Gets the declared type of object that is constructed by this target.  This will be the return type of
-    /// any expression built by <see cref="CreateExpression"/> unless otherwise instructed to build a different type.
+    /// Gets the declared type of object that is constructed by this target.
     /// </summary>
     public abstract Type DeclaredType
     {

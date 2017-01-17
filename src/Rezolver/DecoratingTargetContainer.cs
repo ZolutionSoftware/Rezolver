@@ -102,7 +102,7 @@ namespace Rezolver
 
 		/// <summary>
 		/// Implementation of <see cref="ITargetContainer.FetchAll(Type)"/> - passes the call on to the inner 
-		/// container that's decorated by this one, and then wraps each of those targets in a special target which
+		/// container that's decorated by this one, and then wraps each of those targets in a <see cref="DecoratorTarget"/> which
 		/// represents the decoration logic for each instance.
 		/// </summary>
 		/// <param name="type">Required.  The type for which the <see cref="ITarget" /> instances are to be retrieved.</param>
@@ -115,7 +115,7 @@ namespace Rezolver
 
 		/// <summary>
 		/// Registers a target, either for the <paramref name="serviceType" /> specified or, if null, the <see cref="ITarget.DeclaredType" />
-		/// of the <paramref name="target" />.
+		/// of the <paramref name="target" />.  Implementation of <see cref="ITargetContainer.Register(ITarget, Type)"/>.
 		/// </summary>
 		/// <param name="target">Required.  The target to be registered</param>
 		/// <param name="serviceType">Optional.  The type the target is to be registered against, if different
@@ -154,7 +154,8 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <param name="container">The container.</param>
-		/// <exception cref="InvalidOperationException">This decorator must be decorating another owner, or be decorating a generic type</exception>
+		/// <exception cref="InvalidOperationException">This decorator must be decorating another <see cref="ITargetContainerOwner"/>, 
+		/// or be decorating a generic type</exception>
 		public void RegisterContainer(Type type, ITargetContainer container)
 		{
 			EnsureInnerContainer();

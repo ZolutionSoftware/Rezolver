@@ -19,7 +19,14 @@ namespace Rezolver
 	/// If you do not require properties or fields to be bound from the container, then use a null <see cref="IMemberBindingBehaviour"/>.
 	/// </summary>
 	/// <seealso cref="Rezolver.IMemberBindingBehaviour" />
-	/// <remarks>This is a singleton class accessible through the <see cref="Instance"/> static property.</remarks>
+	/// <remarks>This is a stateless singleton accessible through the <see cref="Instance"/> static property.
+	/// 
+	/// The class also serves as a good starting point for any custom binding behaviours you might need - as there
+	/// are numerous virtual methods which allow you to change which fields and/or properties are selected for binding,
+	/// as well as how those bindings are created.
+	/// 
+	/// The default behaviour is bind each member to a new <see cref="RezolvedTarget"/> whose 
+	/// <see cref="RezolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
 	public class DefaultPropertyBindingBehaviour : IMemberBindingBehaviour
 	{
 		private static readonly Lazy<DefaultPropertyBindingBehaviour> _instance = new Lazy<DefaultPropertyBindingBehaviour>(() => new DefaultPropertyBindingBehaviour());
@@ -35,56 +42,100 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)"/>.
-		/// 
-		/// Returns a binding for each publicly writable property (i.e. with a public set accessor) and each public
-		/// field on the <paramref name="type"/>.
+		/// Constructs a new instance of the <see cref="DefaultPropertyBindingBehaviour"/> class.
 		/// </summary>
-		/// <param name="context">The context.</param>
-		/// <param name="type">The type.</param>
+		protected DefaultPropertyBindingBehaviour() { }
+
+		/// <summary>
+		/// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)"/>.
+		/// </summary>
+		/// <param name="context">The current compilation context.</param>
+		/// <param name="type">The type whose members are to be bound.</param>
+		/// <remarks>The base implementation calls <see cref="GetBindableProperties(ICompileContext, Type)"/>, passing the resultant enumerable to
+		/// the <see cref="BindProperties(ICompileContext, Type, IEnumerable{PropertyInfo})"/> function; it also does the same thing with
+		/// <see cref="GetBindableFields(ICompileContext, Type)"/> and <see cref="BindFields(ICompileContext, Type, IEnumerable{FieldInfo})"/> - 
+		/// concatenating the two enumerables together and returning the result as an array of <see cref="MemberBinding"/> objects.</remarks>
 		public virtual MemberBinding[] GetMemberBindings(ICompileContext context, Type type)
 		{
 			//find all publicly writable properties and public fields, emit 
-			return BindProperties(type, GetBindableProperties(type))
-			  .Concat(BindFields(type, GetBindableFields(type))).ToArray();
+			return BindProperties(context, type, GetBindableProperties(context, type))
+			  .Concat(BindFields(context, type, GetBindableFields(context, type))).ToArray();
 		}
 
-		private IEnumerable<MemberBinding> BindFields(Type type, IEnumerable<FieldInfo> fields)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="context">The current compilation context.</param>
+		/// <param name="type">The type whose members are to be bound.</param>
+		/// <param name="fields"></param>
+		/// <returns></returns>
+		protected virtual IEnumerable<MemberBinding> BindFields(ICompileContext context, Type type, IEnumerable<FieldInfo> fields)
 		{
+			MemberBinding binding;
 			foreach (var field in fields)
 			{
-				yield return CreateBinding(type, field);
+				binding = CreateBinding(context, type, field);
+				if (binding != null)
+					yield return binding;
 			}
 		}
-
-		protected virtual IEnumerable<MemberBinding> BindProperties(Type type, IEnumerable<PropertyInfo> properties)
+#error continue up from here; and down in the project from here.
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="context">The current compilation context.</param>
+		/// <param name="type">The type whose members are to be bound.</param>
+		/// <param name="properties"></param>
+		/// <returns></returns>
+		protected virtual IEnumerable<MemberBinding> BindProperties(ICompileContext context, Type type, IEnumerable<PropertyInfo> properties)
 		{
+			MemberBinding binding;
 			foreach (var prop in properties)
 			{
-				yield return CreateBinding(type, prop);
+				binding = CreateBinding(context, type, prop);
+				if (binding != null)
+					yield return binding;
 			}
 		}
 
 		/// <summary>
-		/// Creates the binding for the given field.
+		/// Creates a binding for the given field.
 		/// 
 		/// Called by <see cref="GetMemberBindings(ICompileContext, Type)"/>
 		/// </summary>
-		/// <param name="type">The type.</param>
-		/// <param name="field">The field.</param>
-		protected virtual MemberBinding CreateBinding(Type type, FieldInfo field)
+		/// <param name="context">The current compilation context.</param>
+		/// <param name="type">The type whose members are to be bound.</param>
+		/// <param name="field">The field for which a binding is to be created.</param>
+		/// <remarks>Override this method to customise the binding that is create for the given
+		/// field, or to prevent the binding from being created at all(return <c>null</c> if you want
+		/// to abort binding the field).
+		/// 
+		/// The base implementation simply creates a new <see cref="MemberBinding"/> whose
+		/// <see cref="MemberBinding.Target"/> is set to a new <see cref="RezolvedTarget"/> for the type
+		/// <see cref="FieldInfo.FieldType"/> - thus causing the field to be assigned a value
+		/// resolved from the container when the instance is created.</remarks>
+		protected virtual MemberBinding CreateBinding(ICompileContext context, Type type, FieldInfo field)
 		{
 			return new MemberBinding(field, new RezolvedTarget(field.FieldType));
 		}
 
 		/// <summary>
-		/// Creates the binding for the given property.
+		/// Creates a binding for the given property.
 		/// 
 		/// Called by <see cref="GetMemberBindings(ICompileContext, Type)"/>
 		/// </summary>
-		/// <param name="type">The type.</param>
-		/// <param name="prop">The property.</param>
-		protected virtual MemberBinding CreateBinding(Type type, PropertyInfo prop)
+		/// <param name="context">The current compilation context.</param>
+		/// <param name="type">The type whose members are to be bound.</param>
+		/// <param name="prop">The property for which a binding is to be created.</param>
+		/// <remarks>Override this method to customise the binding that is create for the given
+		/// property, or to prevent the binding from being created at all(return <c>null</c> if you want
+		/// to abort binding the property).
+		/// 
+		/// The base implementation simply creates a new <see cref="MemberBinding"/> whose
+		/// <see cref="MemberBinding.Target"/> is set to a new <see cref="RezolvedTarget"/> for the type
+		/// <see cref="PropertyInfo.PropertyType"/> - thus causing the property to be assigned a value
+		/// resolved from the container when the instance is created.</remarks>
+		protected virtual MemberBinding CreateBinding(ICompileContext context, Type type, PropertyInfo prop)
 		{
 			return new MemberBinding(prop, new RezolvedTarget(prop.PropertyType));
 		}
@@ -92,10 +143,15 @@ namespace Rezolver
 		/// <summary>
 		/// Gets the bindable fields on the <paramref name="type"/>.
 		/// 
-		/// Used by <see cref="GetMemberBindings(ICompileContext, Type)"/>.
+		/// Used by <see cref="GetMemberBindings(ICompileContext, Type)"/> and passed to the
+		/// <see cref="BindFields(ICompileContext, Type, IEnumerable{FieldInfo})"/> method.
 		/// </summary>
-		/// <param name="type">The type.</param>
-		protected virtual IEnumerable<FieldInfo> GetBindableFields(Type type)
+		/// <param name="context">The current compilation context.</param>
+		/// <param name="type">The type whose members are to be bound.</param>
+		/// <remarks>Override this method to filter the fields which can be bound.  The base implementation
+		/// returns all public instance fields declared on the <paramref name="type"/>.
+		/// </remarks>
+		protected virtual IEnumerable<FieldInfo> GetBindableFields(ICompileContext context, Type type)
 		{
 			return type.GetInstanceFields().Public();
 		}
@@ -103,12 +159,15 @@ namespace Rezolver
 		/// <summary>
 		/// Gets the bindable properties on the <paramref name="type"/>.
 		/// 
-		/// Used by <see cref="GetMemberBindings(ICompileContext, Type)"/>.
+		/// Used by <see cref="GetMemberBindings(ICompileContext, Type)"/> and passed to the 
+		/// <see cref="BindProperties(ICompileContext, Type, IEnumerable{PropertyInfo})"/> method.
 		/// </summary>
-		/// <param name="type">The type.</param>
-		protected virtual IEnumerable<PropertyInfo> GetBindableProperties(Type type)
+		/// <param name="context">The current compilation context.</param>
+		/// <param name="type">The type whose members are to be bound.</param>
+		/// <remarks>Override this method to filter the properties which can be bound.  The base implementation
+		/// returns all instance properties which have publicly accessible 'set' accessors.</remarks>
+		protected virtual IEnumerable<PropertyInfo> GetBindableProperties(ICompileContext context, Type type)
 		{
-			//slightly 
 			return type.GetInstanceProperties().PubliclyWritable();
 		}
 	}

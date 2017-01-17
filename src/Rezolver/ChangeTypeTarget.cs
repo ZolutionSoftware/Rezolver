@@ -3,20 +3,22 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace Rezolver
 {
   /// <summary>
   /// This target is specifically used for explicitly casting the result of one target to another type.
-  /// 
-  /// It's effectively the same as inserting a ConvertExpression around an expression.
-  /// 
-  /// Its use is rare.
+  /// Its use is rare, since the framework already caters for downcasting the result of targets to 
+  /// base types.
   /// </summary>
+  /// <remarks>
+  /// A valid use of this target is when you have a <see cref="SingletonTarget"/> registered against one
+  /// type, and you want the same singleton (backed by the same instance) to server another type.
+  /// 
+  /// In this case, instead of registering the same singleton target multiple times, you can register it once
+  /// for its primary type, then register one of these for the other type, with a <see cref="RezolvedTarget"/> 
+  /// as its inner target.
+  /// </remarks>
   public class ChangeTypeTarget : TargetBase
   {
     /// <summary>
