@@ -73,7 +73,8 @@ namespace Rezolver
 		protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
 		{
 			//when scope tracking is enabled (not the default), then we behave like a singleton - and track in the root scope.
-			return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
+			//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
+			throw new NotImplementedException();
 		}
 
 		object ICompiledTarget.GetObject(ResolveContext context)

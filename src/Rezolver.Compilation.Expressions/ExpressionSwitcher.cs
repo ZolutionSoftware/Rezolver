@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Rezolver
+namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
 	/// Replaces expressions within an expression tree with others.

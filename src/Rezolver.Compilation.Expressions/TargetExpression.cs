@@ -5,11 +5,11 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Rezolver
+namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
 	/// An expression which represents an <see cref="ITarget"/> that can be baked into any type of expression
-	/// during code generation.  Used by the <see cref="TargetAdapter"/> extensively.
+	/// during code generation.  Used by the <see cref="ExpressionAdapter"/> extensively.
 	/// </summary>
 	public class TargetExpression : Expression
 	{

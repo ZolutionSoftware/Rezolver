@@ -67,7 +67,8 @@ namespace Rezolver
 
 		protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
 		{
-			return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
+			throw new NotImplementedException();
+			//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
 		}
 
 		/// <summary>

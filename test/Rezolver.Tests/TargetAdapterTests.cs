@@ -18,21 +18,21 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAdaptToObjectTarget()
 		{
-			ITargetAdapter adapter = TargetAdapter.Instance;
+			IExpressionAdapter adapter = ExpressionAdapter.Instance;
 			Assert.IsType<ObjectTarget>(adapter.CreateTarget(Expression.Constant(0)));
 		}
 
 		[Fact]
 		public void ShouldAdaptToConstructorTarget()
 		{
-			ITargetAdapter adapter = TargetAdapter.Instance;
+			IExpressionAdapter adapter = ExpressionAdapter.Instance;
 			Assert.IsType<ConstructorTarget>(adapter.CreateTarget(Expression.New(typeof(Foo))));
 		}
 
 		[Fact]
 		public void ShouldWorkOnLambdaBodyToFetchObjectTarget()
 		{
-			ITargetAdapter adapter = TargetAdapter.Instance;
+			IExpressionAdapter adapter = ExpressionAdapter.Instance;
 			var result = adapter.CreateTarget(() => 0);
 			//could be argued that this test is testing internals (because it relies
 			//on the fact that a nullary lambda will not be wrapped in a block expression.
@@ -43,24 +43,24 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldWorkOnLambdaBodyToFetchConstructorTarget()
 		{
-			ITargetAdapter adapter = TargetAdapter.Instance;
+			IExpressionAdapter adapter = ExpressionAdapter.Instance;
 			Assert.IsType<ConstructorTarget>(adapter.CreateTarget(() => new Foo()));
 		}
 
 		[Fact]
 		public void ShouldIdentifyRezolveCall()
 		{
-			ITargetAdapter adapter = TargetAdapter.Instance;
+			IExpressionAdapter adapter = ExpressionAdapter.Instance;
 			Assert.IsType<RezolvedTarget>(adapter.CreateTarget(() => Functions.Resolve<int>()));
 		}
 
 		[Fact]
 		public void ShouldHaveDefaultTargetAdapter()
 		{
-			Assert.NotNull(TargetAdapter.Default);
+			Assert.NotNull(ExpressionAdapter.Default);
 		}
 
-		private class StubAdapter : ITargetAdapter
+		private class StubAdapter : IExpressionAdapter
 		{
 			public ITarget CreateTarget(Expression expression)
 			{
@@ -71,19 +71,19 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldAllowSettingDefaultAdapter()
 		{
-			ITargetAdapter newAdapter = new StubAdapter();
-			ITargetAdapter previous = TargetAdapter.Default;
-			TargetAdapter.Default = newAdapter;
-			Assert.NotSame(previous, TargetAdapter.Default);
-			Assert.Same(newAdapter, TargetAdapter.Default);
-			TargetAdapter.Default = previous;
-			Assert.Same(previous, TargetAdapter.Default);
+			IExpressionAdapter newAdapter = new StubAdapter();
+			IExpressionAdapter previous = ExpressionAdapter.Default;
+			ExpressionAdapter.Default = newAdapter;
+			Assert.NotSame(previous, ExpressionAdapter.Default);
+			Assert.Same(newAdapter, ExpressionAdapter.Default);
+			ExpressionAdapter.Default = previous;
+			Assert.Same(previous, ExpressionAdapter.Default);
 		}
 
 		[Fact]
 		public void ShouldNotAllowSettingNullDefaultAdapter()
 		{
-			Assert.Throws<ArgumentNullException>(() => TargetAdapter.Default = null);
+			Assert.Throws<ArgumentNullException>(() => ExpressionAdapter.Default = null);
 		}
 
 	}

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Rezolver
+namespace Rezolver.Compilation.Expressions
 {
     internal class ExpressionReplacement
     {

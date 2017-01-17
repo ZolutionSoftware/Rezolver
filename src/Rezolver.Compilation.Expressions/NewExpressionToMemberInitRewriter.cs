@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Rezolver
+namespace Rezolver.Compilation.Expressions
 {
   /// <summary>
   /// Rewrites the first NewExpression found for a particular type into a <see cref="MemberInitExpression"/>

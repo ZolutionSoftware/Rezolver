@@ -37,7 +37,7 @@ namespace Rezolver
 		/// This property will only be set ultimately if it was passed to the 
 		/// <see cref="ConstructorTarget.ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])"/>
 		/// constructor, possibly by a factory method like <see cref="ConstructorTarget.WithArgs(ConstructorInfo, IDictionary{string, ITarget})"/>,
-		/// or <see cref="ConstructorTarget.FromNewExpression(Type, NewExpression, ITargetAdapter)"/>, where the constructor
+		/// or <see cref="ConstructorTarget.FromNewExpression(Type, NewExpression, IExpressionAdapter)"/>, where the constructor
 		/// is captured within the expression.</remarks>
  		public ConstructorInfo Ctor
 		{

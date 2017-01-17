@@ -37,7 +37,7 @@ namespace Rezolver
 			typeParamDescriptors = typeParamNames.Select((s, i) => s != "TResult" ? string.Format("{0}{1}", i+2, (i+1) < nthParamDescriptors.Length ? nthParamDescriptors[i+1] : nthParamDescriptors[nthParamDescriptors.Length - 1 ]) : "").ToArray();
 			typeParamStrings[next] = string.Join(", ", typeParamNames);
 			allTypeNamesAndDescriptors[next] = typeParamNames.Zip(typeParamDescriptors, (n,d) => new NameAndDescriptor() { Name=n, Descriptor=d }).Where(tp => tp.Name!="TResult").ToArray();
-			exprTypeParamStrings[next] = "RezolveContext, " + typeParamStrings[next];
+			exprTypeParamStrings[next] = "ResolveContext, " + typeParamStrings[next];
 			next++;
 		}
 	}
@@ -46,10 +46,10 @@ namespace Rezolver
 	/// <summary>
 	/// Contains numerous generic overloads of the RegisterExpression extension method for <see cref="ITargetContainer" />
 	/// All of these extensions act as proxies for the 
-	/// <see cref="TargetAdapterRegisterExpressionExtensions.RegisterExpression(ITargetContainer, Expression, Type, ITargetAdapter)"/> extension
+	/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/> extension
 	/// method. 
 	/// </summary>
-	public static class TargetAdapterGenericRegisterExpressionExtensions
+	public static partial class ExpressionTargetContainerExtensions
 	{ 
 <#
 	for(int f = 0; f<typeParamStrings.Length; f++) 
@@ -69,17 +69,14 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="adapter">Optional adapter to use to convert the <paramref name="expression" /> into an <see cref="ITarget" />.
-		/// If not provided, then the <see cref="TargetAdapter.Default" /> adapter will be used.  It is unlikely you will ever need to
-		/// use a different adapter unless you've created a target implementation of your own.</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
-		/// <see cref="TargetAdapterRegisterExpressionExtensions.RegisterExpression(ITargetContainer, Expression, Type, ITargetAdapter)"/>, which 
-		/// simply asks the <paramref name="adapter" /> to create a target from the passed expression and then registers it against either 
+		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
+		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
 		/// the passed <paramref name="type" />, or the created target's <see cref="ITarget.DeclaredType" /> if not provided.
 		/// </remarks>
-		public static void RegisterExpression<<#= typeParamsString #>>(this ITargetContainer targetContainer, Expression<Func<<#= exprTypeParamsString #>>> expression, Type type = null, ITargetAdapter adapter = null)
+		public static void RegisterExpression<<#= typeParamsString #>>(this ITargetContainer targetContainer, Expression<Func<<#= exprTypeParamsString #>>> expression, Type type = null)
 		{
-			targetContainer.RegisterExpression((Expression)expression, type, adapter);
+			targetContainer.RegisterExpression((Expression)expression, type);
 		}
 <#	} 
 #>	}

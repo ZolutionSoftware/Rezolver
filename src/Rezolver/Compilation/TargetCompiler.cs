@@ -14,8 +14,6 @@ namespace Rezolver.Compilation
 	/// </summary>
 	public static class TargetCompiler
 	{
-
-
 		private class NullCompiler : ITargetCompiler
 		{
 			internal static NullCompiler Instance { get; } = new NullCompiler();

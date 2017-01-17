@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
-	/// Used by <see cref="TargetBase"/> (and potentially your own targets)
-	/// to convert <see cref="TargetExpression"/> instances which have been baked into
-	/// expression trees (most likely by a <see cref="TargetAdapter"/>) into expressions
-	/// for a given <see cref="ICompileContext"/>.
+	/// Used by the <see cref="ExpressionCompiler"/> just 
 	/// </summary>
 	/// <seealso cref="System.Linq.Expressions.ExpressionVisitor" />
 	/// <remarks>The <see cref="TargetBase"/> class always pushes expressions it receives

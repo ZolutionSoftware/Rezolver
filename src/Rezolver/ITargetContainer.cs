@@ -12,12 +12,19 @@ namespace Rezolver
 	/// <summary>
 	/// Stores and retrieves <see cref="ITarget"/> instances, keyed by the type of service
 	/// that the targets are registered against.
+	/// 
+	/// This is where all your service registrations will ultimately go.
+	/// 
 	/// </summary>
 	/// <remarks>You do not resolve objects from a target container, instead, it holds the <see cref="ITarget"/>s which will 
 	/// later be compiled to produce the objects.
 	/// 
-	/// An <see cref="IContainer"/> typically uses this as the source of the registrations that it uses to resolve objects
-	/// in its <see cref="IContainer.Resolve(ResolveContext)"/> method via it's <see cref="IContainer.Targets"/> property.
+	/// A target container is considered mutable for its entire lifetime, because it's only a glorified dictionary
+	/// of targets from which multiple <see cref="IContainer"/> objects can be built (when using the types provided
+	/// in the framework).
+	/// 
+	/// As an example, the <see cref="Container"/> class uses this as the source of the registrations that it uses to resolve objects
+	/// in its <see cref="IContainer.Resolve(ResolveContext)"/> implementation.
 	/// 
 	/// Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
 	/// are <see cref="TargetContainer"/> and <see cref="ChildTargetContainer"/>.</remarks>
