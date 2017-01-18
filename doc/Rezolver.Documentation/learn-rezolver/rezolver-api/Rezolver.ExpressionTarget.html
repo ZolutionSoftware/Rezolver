@@ -114,19 +114,7 @@
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -157,8 +145,11 @@
                 <pre><code class="lang-csharp hljs">public class ExpressionTarget : TargetBase, ITarget</code></pre>
               </div>
               <h5 id="Rezolver_ExpressionTarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>Note that this target does not support Lambda expressions.  If you wish to create
-an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> from a lambda expression, then you should use the </p>
+              <div class="markdown level0 remarks"><p>Note to compiler implementers: This class can be used to represent simple
+expressions such as constants, constructor calls and so on; but can also contain whole
+lambda expressions with parameters.</p>
+<p>In the latter case, expression parameters are expected to receive injected arguments and, 
+therefore, some rewriting of the expression is likely to be required.</p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -187,8 +178,7 @@ an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> fro
                   <tr>
                     <td><em>expression</em></td>
                     <td><span class="xref">Expression</span></td>
-                    <td><p>Required. The static expression which will be returned by</p>
-<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a>.</p>
+                    <td><p>Required. The static expression which should be used by compilers.</p>
 </td>
                   </tr>
                   <tr>
@@ -210,13 +200,13 @@ an explicit type or when this target is used as a value inside another target).<
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ExpressionTarget__ctor_System_Func_Rezolver_CompileContext_Expression__System_Type_" data-uid="Rezolver.ExpressionTarget.#ctor(System.Func{Rezolver.CompileContext,Expression},System.Type)">ExpressionTarget(Func&lt;CompileContext, Expression&gt;, Type)</h4>
+              <h4 class="hmember" id="Rezolver_ExpressionTarget__ctor_System_Func_Rezolver_Compilation_ICompileContext_Expression__System_Type_" data-uid="Rezolver.ExpressionTarget.#ctor(System.Func{Rezolver.Compilation.ICompileContext,Expression},System.Type)">ExpressionTarget(Func&lt;ICompileContext, Expression&gt;, Type)</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget">ExpressionTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ExpressionTarget(Func&lt;CompileContext, Expression&gt; expressionFactory, Type declaredType)</code></pre>
+                <pre><code class="lang-csharp hljs">public ExpressionTarget(Func&lt;ICompileContext, Expression&gt; expressionFactory, Type declaredType)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -230,9 +220,9 @@ an explicit type or when this target is used as a value inside another target).<
                 <tbody>
                   <tr>
                     <td><em>expressionFactory</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>, <span class="xref">Expression</span>&gt;</td>
-                    <td><p>Required. The factory delegate that will be 
-called to create the expression when <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> is called.</p>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>, <span class="xref">Expression</span>&gt;</td>
+                    <td><p>Required. The factory delegate that a compiler should call to get the expression to use when 
+compiling this target.</p>
 </td>
                   </tr>
                   <tr>
@@ -244,11 +234,6 @@ returned by <em>expressionFactory</em>.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ExpressionTarget__ctor_System_Func_Rezolver_CompileContext_Expression__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>Note that when you use a factory to produce a new expression on demand each time</p>
-<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> is called, the <em>declaredType</em>
-is required to be the same for all.</p>
-</div>
               </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
@@ -316,15 +301,14 @@ the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarg
               
               
               <h4 class="hmember" id="Rezolver_ExpressionTarget_ExpressionFactory" data-uid="Rezolver.ExpressionTarget.ExpressionFactory">ExpressionFactory</h4>
-              <div class="markdown level1 summary"><p>Gets a factory which will be executed to obtain an expression when </p>
-<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> is called.</p>
+              <div class="markdown level1 summary"><p>Gets a factory which will be executed to obtain an expression given a particular <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>.</p>
 <p>If <code>null</code>, then a static expression will be used instead and is available
 from the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_Expression">Expression</a> property.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Func&lt;CompileContext, Expression&gt; ExpressionFactory { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">public Func&lt;ICompileContext, Expression&gt; ExpressionFactory { get; }</code></pre>
               </div>
               <h5 class="hpropertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -336,62 +320,11 @@ from the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_Expressio
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>, <span class="xref">Expression</span>&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>, <span class="xref">Expression</span>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="methods">Methods
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ExpressionTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ExpressionTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Returns either the static <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_Expression">Expression</a> or the result of calling the </p>
-<p><a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget_ExpressionFactory">ExpressionFactory</a> with the <em>context</em>.  </p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td><p>The current compile context</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
               </div><!-- .classchild -->
             </article>
           </div>
@@ -411,7 +344,7 @@ from the <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_Expressio
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

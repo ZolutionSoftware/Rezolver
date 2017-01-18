@@ -114,18 +114,6 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
-                </div>
-                <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
@@ -159,12 +147,15 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_GenericConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.GenericConstructorTarget.#ctor(System.Type,Rezolver.IPropertyBindingBehaviour)">GenericConstructorTarget(Type, IPropertyBindingBehaviour)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 class="hmember" id="Rezolver_GenericConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.GenericConstructorTarget.#ctor(System.Type,Rezolver.IMemberBindingBehaviour)">GenericConstructorTarget(Type, IMemberBindingBehaviour)</h4>
+              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> for the given open generic type,
+which will utilise the optional <em>memberBindingBehaviour</em> when it constructs its</p>
+<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> when <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> is called.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public GenericConstructorTarget(Type genericType, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -183,10 +174,11 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
-                    <td><p>Optional.  The <a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a> to be used for binding properties and/or fields on the 
-&#39;new&#39; expression that is generated.  If null, then no property or fields will be bound on construction.</p>
+                    <td><em>memberBindingBehaviour</em></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a> to be used for binding
+properties and/or fields on the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> that is generated.  If null, then no property 
+or fields will be bound on construction.</p>
 </td>
                   </tr>
                 </tbody>
@@ -224,19 +216,75 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
               </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_GenericType" data-uid="Rezolver.GenericConstructorTarget.GenericType">GenericType</h4>
+              <div class="markdown level1 summary"><p>Gets the generic type definition from which generic types are to be built and instances of which 
+will be constructed.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public Type GenericType { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
+              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_MemberBindingBehaviour" data-uid="Rezolver.GenericConstructorTarget.MemberBindingBehaviour">MemberBindingBehaviour</h4>
+              <div class="markdown level1 summary"><p>Gets the member binding behaviour to be used when creating an instance.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IMemberBindingBehaviour MemberBindingBehaviour { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
+                    <td><p>The member binding behaviour.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.GenericConstructorTarget.Auto(System.Type,Rezolver.IPropertyBindingBehaviour)">Auto(Type, IPropertyBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour_">Auto(Type, IPropertyBindingBehaviour)</a> but for open generic types.</p>
+              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.GenericConstructorTarget.Auto(System.Type,Rezolver.IMemberBindingBehaviour)">Auto(Type, IMemberBindingBehaviour)</h4>
+              <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_">Auto(Type, IMemberBindingBehaviour)</a> but for open generic types.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget Auto(Type type, IMemberBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -256,7 +304,7 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
                     <td><p>The property binding behaviour.</p>
 </td>
                   </tr>
@@ -299,13 +347,13 @@ The passed type must a non-abstract class</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.GenericConstructorTarget.Auto``1(Rezolver.IPropertyBindingBehaviour)">Auto&lt;TGeneric&gt;(IPropertyBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto&lt;T&gt;(IPropertyBindingBehaviour)</a> but for open generic types.</p>
+              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_Auto__1_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.GenericConstructorTarget.Auto``1(Rezolver.IMemberBindingBehaviour)">Auto&lt;TGeneric&gt;(IMemberBindingBehaviour)</h4>
+              <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IMemberBindingBehaviour_">Auto&lt;T&gt;(IMemberBindingBehaviour)</a> but for open generic types.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto&lt;TGeneric&gt;(IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget Auto&lt;TGeneric&gt;(IMemberBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -319,8 +367,8 @@ The passed type must a non-abstract class</p>
                 <tbody>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
-                    <td><p>Optional behaviour controlling which properties, if any, receive injected values.</p>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
+                    <td><p>Optional behaviour controlling which properties and fields, if any, receive injected values.</p>
 </td>
                   </tr>
                 </tbody>
@@ -351,7 +399,7 @@ The passed type must a non-abstract class</p>
                 <tbody>
                   <tr>
                     <td><em>TGeneric</em></td>
-                    <td>The open generic type which will be created when this target is called upon
+                    <td>The open generic type from which a closed generic will be created when this target is called upon
 to create an instance.</td>
                   </tr>
                 </tbody>
@@ -360,13 +408,16 @@ to create an instance.</td>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.GenericConstructorTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Determines the generic type to be bound, and then generates a <see cref="!:System.Linq.Expressions.NewExpression"></see> for that type.</p>
+              <h4 class="hmember" id="Rezolver_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.GenericConstructorTarget.Bind(Rezolver.Compilation.ICompileContext)">Bind(ICompileContext)</h4>
+              <div class="markdown level1 summary"><p>Obtains an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> (usually a <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a>) which will create 
+an instance of a generic type (whose definition is equal to <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget_GenericType">GenericType</a>) with 
+generic arguments set correctly according to the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> of 
+the <em>context</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public ITarget Bind(ICompileContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -380,8 +431,9 @@ to create an instance.</td>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
+                    <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a></td>
+                    <td><p>The context.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -395,13 +447,37 @@ to create an instance.</td>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
+              <h5 class="hremarks" id="Rezolver_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The process of binding a requested type to the concrete type can be a very complex process, when
+inheritance chains and interface implementation maps are taken into account.</p>
+<p>At the simplest end of the spectrum, if <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget_GenericType">GenericType</a> is <code>MyGeneric&lt;&gt;</code> and
+the <em>context</em>&#39;s <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> is <code>MyGeneric&lt;int&gt;</code>,
+then this function merely has to insert the <code>int</code> type as the generic parameter to the <code>MyGeneric&lt;&gt;</code>
+type definition, bake a new type and create an auto-bound <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a>.</p>
+<p>Consider what happens, however, when the inheritance chain is more complex:</p>
+<pre><code>interface IMyInterfaceCore&lt;T, U&gt; { }
+
+class MyBaseClass&lt;T, U&gt; : IMyInterfaceCore&lt;U, T&gt; { }
+
+class MyDerivedClass&lt;T, U&gt; : MyBaseClass&lt;U, T&gt; { }</code></pre>
+
+<p>A <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> bound to the generic type definition <code>MyDerivedClass&lt;,&gt;</code> can
+create instances not only of any generic type based on that definition, but also any generic type based on the definitions 
+of either it&#39;s immediate base, or that base&#39;s interface.  In order to do so, however, the parameters must be mapped 
+between the generic type definitions so that if an instance of <code>MyBaseClass&lt;string, int&gt;</code> is requested, 
+then an instance of <code>MyDerivedClass&lt;int, string&gt;</code> (note the arguments are reversed) is actually created.</p>
+<p>Similarly, if an instance of <code>IMyInterface&lt;string, int&gt;</code> is requested, we actually need to create an 
+instance of <code>MyDerivedClass&lt;string, int&gt;</code> - because the generic arguments are reversed first through 
+the base class inheritance, and then again by the base class&#39; implementation of the interface.</p>
+<p>Note that a <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> can only bind to the context&#39;s target type if there is enough information
+in order to deduce the generic type arguments for <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget_GenericType">GenericType</a>.  This means, in general, that the requested
+type will almost always need to be a generic type with at least as many type arguments as the <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget_GenericType">GenericType</a>.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               
@@ -467,7 +543,7 @@ to create an instance.</td>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

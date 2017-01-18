@@ -10,10 +10,7 @@ using Rezolver.Compilation;
 namespace Rezolver
 {
 	/// <summary>
-	/// Implements <see cref="ITarget"/> by wrapping a single instance that's already been constructed.
-	/// 
-	/// By default, scope tracking is disabled (since the caller owns the object, not the Rezolver framework)).  If it's
-	/// enabled, then scope tracking behaves exactly the same as <see cref="SingletonTarget"/>.
+	/// Implements <see cref="ITarget"/> by wrapping a single instance that's already been constructed by application code.
 	/// </summary>
 	public class ObjectTarget : TargetBase, ICompiledTarget
 	{
@@ -21,6 +18,9 @@ namespace Rezolver
 		private readonly Type _declaredType;
 		private readonly bool _suppressScopeTracking;
 
+		/// <summary>
+		/// Overrides <see cref="TargetBase.SuppressScopeTracking"/>
+		/// </summary>
 		protected override bool SuppressScopeTracking
 		{
 			get
@@ -70,12 +70,12 @@ namespace Rezolver
 				_declaredType = Value == null ? typeof(object) : Value.GetType();
 		}
 
-		protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
-		{
-			//when scope tracking is enabled (not the default), then we behave like a singleton - and track in the root scope.
-			//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
-			throw new NotImplementedException();
-		}
+		//protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
+		//{
+		//	//when scope tracking is enabled (not the default), then we behave like a singleton - and track in the root scope.
+		//	//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
+		//	throw new NotImplementedException();
+		//}
 
 		object ICompiledTarget.GetObject(ResolveContext context)
 		{
@@ -88,8 +88,8 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Gets the declared type of object that is constructed by this target.  This will be the return type of
-		/// any expression built by <see cref="CreateExpression" /> unless otherwise instructed to build a different type.
+		/// Gets the declared type of object that is returned by this target.  Might be different from the type
+		/// of <see cref="Value"/> if explicitly defined when this target was constructed.
 		/// </summary>
 		/// <value>The type of the declared.</value>
 		public override Type DeclaredType
@@ -102,7 +102,7 @@ namespace Rezolver
 	}
 
 	/// <summary>
-	/// Extension method(s)
+	/// Extension method(s) to help create the <see cref="ObjectTarget"/> target.
 	/// </summary>
 	public static class ObjectTargetExtensions
 	{
@@ -111,10 +111,10 @@ namespace Rezolver
 		/// 
 		/// The parameters are direct analogues of the parameters on the type's constructor (see <see cref="ObjectTarget.ObjectTarget(object, Type, bool)"/>).
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="obj"></param>
-		/// <param name="declaredType"></param>
-		/// <param name="suppressScopeTracking"></param>
+		/// <typeparam name="T">The type of object being wrapped</typeparam>
+		/// <param name="obj">the object being wrapped</param>
+		/// <param name="declaredType">Optional.  The type which is to be set as the <see cref="ObjectTarget.DeclaredType"/> of the created target.</param>
+		/// <param name="suppressScopeTracking">Probably going to be removed or changed.</param>
 		/// <returns>A new object target that wraps the object <paramref name="obj"/>.</returns>
 		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null, bool suppressScopeTracking = true)
 		{

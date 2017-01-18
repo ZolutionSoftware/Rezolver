@@ -109,18 +109,6 @@
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
-                </div>
-                <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
@@ -152,8 +140,8 @@
               <div class="markdown level0 remarks"><p>On its own, this target doesn&#39;t do anything - it&#39;s designed to wrap another target such that
 the code generated from the expression it produces is executed only once for each lifetime scope.</p>
 <p>Outside of that, the target generates wrapper code that forcibly caches the instance that is produced (whether
-it&#39;s IDiposable or not) into the current scope&#39;s cache (using <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">AddToScope(Object, RezolveContext)</a>)
-and retrieves previous instances from that scope (using <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_RezolveContext_">GetFromScope(RezolveContext)</a>.</p>
+it&#39;s IDiposable or not) into the current scope&#39;s cache (using <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">AddToScope(Object, ResolveContext)</a>)
+and retrieves previous instances from that scope (using <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_ResolveContext_">GetFromScope(ResolveContext)</a>.</p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -220,6 +208,32 @@ and retrieves previous instances from that scope (using <a class="xref" href="Re
               <div class="classchild">
               
               
+              <h4 class="hmember" id="Rezolver_ScopedTarget_InnerTarget" data-uid="Rezolver.ScopedTarget.InnerTarget">InnerTarget</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ITarget InnerTarget { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
               <h4 class="hmember" id="Rezolver_ScopedTarget_SuppressScopeTracking" data-uid="Rezolver.ScopedTarget.SuppressScopeTracking">SuppressScopeTracking</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
@@ -248,51 +262,6 @@ and retrieves previous instances from that scope (using <a class="xref" href="Re
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ScopedTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ScopedTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
-              </div><!-- .classchild -->
               <div class="classchild">
               
               
@@ -356,7 +325,7 @@ and retrieves previous instances from that scope (using <a class="xref" href="Re
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

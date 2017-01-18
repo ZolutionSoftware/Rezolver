@@ -94,9 +94,9 @@
               
               <h1 id="Rezolver_ChangeTypeTarget" data-uid="Rezolver.ChangeTypeTarget">Class ChangeTypeTarget
               </h1>
-              <div class="markdown level0 summary"><p>This target is specifically used for explicitly casting the result of one target to another type.</p>
-<p>It&#39;s effectively the same as inserting a ConvertExpression around an expression.</p>
-<p>Its use is rare.</p>
+              <div class="markdown level0 summary"><p>This target is specifically used for explicitly casting the result of one target to another type.
+Its use is rare, since the framework already caters for downcasting the result of targets to 
+base types.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -111,19 +111,7 @@
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -153,6 +141,13 @@
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class ChangeTypeTarget : TargetBase, ITarget</code></pre>
               </div>
+              <h5 id="Rezolver_ChangeTypeTarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>A valid use of this target is when you have a <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a> registered against one
+type, and you want the same singleton (backed by the same instance) to server another type.</p>
+<p>In this case, instead of registering the same singleton target multiple times, you can register it once
+for its primary type, then register one of these for the other type, with a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> 
+as its inner target.</p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
@@ -280,56 +275,6 @@
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">TargetBase.SuppressScopeTracking</a></div>
               </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="methods">Methods
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ChangeTypeTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ChangeTypeTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Returns a Linq Convert expression (<see cref="!:UnaryExpression"></see> created through the <see cref="!:Expression.Convert(Expression, Type)"></see> factory method)
-whose inner expression is the expression built by the <a class="xref" href="Rezolver.ChangeTypeTarget.html#Rezolver_ChangeTypeTarget_InnerTarget">InnerTarget</a> for its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
-              </div><!-- .classchild -->
             </article>
           </div>
           
@@ -348,7 +293,7 @@ whose inner expression is the expression built by the <a class="xref" href="Rezo
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

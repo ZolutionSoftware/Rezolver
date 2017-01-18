@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using Microsoft.Extensions.Logging;
 using Rezolver.Logging;
 using System;
 using System.Collections.Generic;

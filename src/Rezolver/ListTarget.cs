@@ -12,26 +12,21 @@ using System.Text;
 namespace Rezolver
 {
 	/// <summary>
-	/// This exists primarily for the configuration system.
-	/// 
-	/// This target produces arrays or lists whose individual items are built by ITarget instances.  
-	/// If you are setting up your container environment from code - e.g. using expressions,
-	/// then you shouldn't need to use this unless you have some pretty extreme requirements for the different
-	/// targets that will contribute each element of your list/array.
+	/// This target produces arrays (<see cref="AsArray"/> = <c>true</c>) or lists (<see cref="AsArray"/> = <c>false</c>) whose 
+	/// individual items are built by ITarget instances.  Primarily used by the <see cref="EnumerableTargetContainer"/> and the configuration
+	/// framework, but can also be used by your code.
 	/// </summary>
 	/// <remarks>
 	/// The element type you feed on construction determines the type of array or the generic argument to List&lt;T&gt;.
 	/// 
 	/// Each of the rezolve targets that you then pass must support that type.
-	/// 
-	/// You can control whether the created instance is an array or a List&lt;T&gt; with the 'asArray' boolean constructor argument.
 	/// </remarks>
 	public class ListTarget : TargetBase
 	{
 		/// <summary>
 		/// Gets the declared type of each element in the array or list that will be constructed.
 		/// 
-		/// The <see cref="DeclaredType"/> returned by this instance will either be ElementType[] or List&lt;ElementType&gt;
+		/// The <see cref="DeclaredType"/> returned by this instance will either be <c>ElementType[]</c> or <c>List&lt;ElementType&gt;</c>
 		/// depending on the value of <see cref="AsArray"/>.
 		/// </summary>
 		/// <value>The declared type of each element.</value>

@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_OverridingScopedContainer" data-uid="Rezolver.OverridingScopedContainer">Class OverridingScopedContainer
               </h1>
-              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 summary"><p>Not sure if this is sticking around anyway.  Think the scoping stuff needs a bit of a rethink.</p>
+</div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
@@ -108,13 +109,13 @@
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_CanResolve_Rezolver_RezolveContext_">OverridingContainer.CanResolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_CanResolve_Rezolver_ResolveContext_">OverridingContainer.CanResolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_">OverridingContainer.GetFallbackCompiledRezolveTarget(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_ResolveContext_">OverridingContainer.GetFallbackCompiledRezolveTarget(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">CachingContainerBase.GetCompiledRezolveTarget(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(ResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">ContainerBase.GetMissingTarget(Type)</a>
@@ -129,16 +130,16 @@
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">ContainerBase.Targets</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">ContainerBase.Resolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_ResolveContext_">ContainerBase.Resolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_RezolveContext_System_Object__">ContainerBase.TryResolve(RezolveContext, Object)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_ResolveContext_System_Object__">ContainerBase.TryResolve(ResolveContext, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CreateLifetimeScope">ContainerBase.CreateLifetimeScope()</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_RezolveContext_">ContainerBase.FetchCompiled(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_ResolveContext_">ContainerBase.FetchCompiled(ResolveContext)</a>
                 </div>
                 <div>
                   <span class="xref">Rezolver.ContainerBase.System.IServiceProvider.GetService(System.Type)</span>
@@ -192,7 +193,7 @@
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_OverridingScopedContainer__ctor_Rezolver_IScopedContainer_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.OverridingScopedContainer.#ctor(Rezolver.IScopedContainer,Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">OverridingScopedContainer(IScopedContainer, IContainer, ITargetContainer, ITargetCompiler)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer__ctor_Rezolver_IScopedContainer_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_Compilation_ITargetCompiler_" data-uid="Rezolver.OverridingScopedContainer.#ctor(Rezolver.IScopedContainer,Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.Compilation.ITargetCompiler)">OverridingScopedContainer(IScopedContainer, IContainer, ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"><p>Constructs a new instance of the CombinedLifetimeScopeRezolver class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -229,7 +230,7 @@
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
+                    <td><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -298,12 +299,12 @@
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingScopedContainer.AddToScope(System.Object,Rezolver.RezolveContext)">AddToScope(Object, RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_" data-uid="Rezolver.OverridingScopedContainer.AddToScope(System.Object,Rezolver.ResolveContext)">AddToScope(Object, ResolveContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual void AddToScope(object obj, RezolveContext context = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public virtual void AddToScope(object obj, ResolveContext context = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -322,13 +323,13 @@
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">IScopedContainer.AddToScope(Object, RezolveContext)</a></div>
+                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">IScopedContainer.AddToScope(Object, ResolveContext)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
               
@@ -374,12 +375,12 @@
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_GetFromScope_Rezolver_RezolveContext_" data-uid="Rezolver.OverridingScopedContainer.GetFromScope(Rezolver.RezolveContext)">GetFromScope(RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_OverridingScopedContainer_GetFromScope_Rezolver_ResolveContext_" data-uid="Rezolver.OverridingScopedContainer.GetFromScope(Rezolver.ResolveContext)">GetFromScope(ResolveContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual IEnumerable&lt;object&gt; GetFromScope(RezolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public virtual IEnumerable&lt;object&gt; GetFromScope(ResolveContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -393,7 +394,7 @@
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -414,7 +415,7 @@
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_RezolveContext_">IScopedContainer.GetFromScope(RezolveContext)</a></div>
+                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_ResolveContext_">IScopedContainer.GetFromScope(ResolveContext)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
               
@@ -476,7 +477,7 @@
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

@@ -137,7 +137,7 @@
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IPropertyBindingBehaviour)">RegisterSingleton(ITargetContainer, Type, Type, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IMemberBindingBehaviour)">RegisterSingleton(ITargetContainer, Type, Type, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers the type <em>objectType</em> as a singleton (<a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a>) in the target container
 using either <em>objectType</em> as the service type, or <em>serviceType</em> instead - if it&#39;s provided.</p>
 <p>The instance will be built automatically with constructor injection (and, optionally, property injection if a
@@ -147,7 +147,7 @@ using either <em>objectType</em> as the service type, or <em>serviceType</em> in
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -179,7 +179,7 @@ using either <em>objectType</em> as the service type, or <em>serviceType</em> in
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
                     <td><p>Optional.  Can be used to enable and control property injection in addition to constructor injection
 on the instance of <em>objectType</em> that is created.</p>
 </td>
@@ -190,7 +190,7 @@ on the instance of <em>objectType</em> that is created.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)">RegisterSingleton&lt;TObject&gt;(ITargetContainer, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterSingleton&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers the type <em>TObject</em> as a singleton (<a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a>) in the target container.
 The instance will be built automatically with constructor injection (and, optionally, property injection if a
 <em>propertyBindingBehaviour</em> is passed) by leveraging the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or</p>
@@ -199,7 +199,7 @@ The instance will be built automatically with constructor injection (and, option
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject&gt;(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject&gt;(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -219,7 +219,7 @@ The instance will be built automatically with constructor injection (and, option
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
                     <td><p>Can be used to enable and control property injection in addition to constructor injection
 on the instance of <em>TObject</em> that is created.</p>
 </td>
@@ -245,7 +245,7 @@ on the instance of <em>TObject</em> that is created.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IPropertyBindingBehaviour)">RegisterSingleton&lt;TObject, TService&gt;(ITargetContainer, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterSingleton&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers the type <em>TObject</em> as a singleton (<a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a>) in the target container
 for the service type <em>TService</em>
 .
@@ -256,7 +256,7 @@ The instance will be built automatically with constructor injection (and, option
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject, TService&gt;(this ITargetContainer targetContainer, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject, TService&gt;(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -276,7 +276,7 @@ The instance will be built automatically with constructor injection (and, option
                   </tr>
                   <tr>
                     <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
                     <td><p>Can be used to enable and control property injection in addition to constructor injection
 on the instance of <em>TObject</em> that is created.</p>
 </td>
@@ -321,7 +321,7 @@ on the instance of <em>TObject</em> that is created.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

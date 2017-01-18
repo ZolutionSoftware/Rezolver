@@ -304,13 +304,16 @@ namespace Rezolver
 
 			//if the target also supports the ICompiledTarget interface then return it, bypassing the
 			//need for any direct compilation.
+			//also check whether the type of the target is compatible with the requested type - so long
+			//as the requested type is not System.Object.  If so, return a DirectResolveCompiledTarget
+			//which will simply return the target when GetObject is called.
 			if (target is ICompiledTarget)
 				return (ICompiledTarget)target;
-			//TODO: Add a check for whether the target is directly compatible with the type requested in the context.
-			//if so, then we can have a dumb compiledtarget returned which simply returns the target.
+			else if (context.RequestedType != typeof(object) && TypeHelpers.IsAssignableFrom(context.RequestedType, target.GetType()))
+				return new DirectResolveCompiledTarget(target);
 
 			//if ITargetCompiler or ICompileContextProvider have been requested then we can't continue, 
-			//because in order to compile this target we'd need a compiler we can use which, by defin-ition, we don't have.
+			//because in order to compile this target we'd need a compiler we can use which, by definition, we don't have.
 			//also, the same error occurs if the container in question is unable to resolve the type.
 			//note that this could trigger this same line of code to blow in the context container.
 			ITargetCompiler compiler;

@@ -16,8 +16,6 @@ make it better for everyone!
 Once you've got the main assembly referenced (Rezolver.dll) - then you can create a @Rezolver.Container, register targets against its
 internal @Rezolver.ITargetContainer target container, and then grab objects from it!
 
-[!code-csharp[Example.cs](../../../test/Rezolver.Tests/TargetContainerTests.cs#example1)]
+<hr class="soft" />
 
-More code
-
-[!code-csharp[Full-File.cs](../../../test/Rezolver.Tests/ConstructorTargetTests.cs)]
+<p><strong class="text-danger">Notice:</strong> This documentation is not complete!!!</p>

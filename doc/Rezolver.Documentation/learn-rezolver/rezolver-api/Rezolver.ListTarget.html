@@ -94,10 +94,9 @@
               
               <h1 id="Rezolver_ListTarget" data-uid="Rezolver.ListTarget">Class ListTarget
               </h1>
-              <div class="markdown level0 summary"><p>This exists primarily for the configuration system.</p>
-<p>This target produces arrays or lists whose individual items are built by IRezolveTarget instances.<br>If you are setting up your container environment from code - e.g. using expressions,
-then you shouldn&#39;t need to use this unless you have some pretty extreme requirements for the different
-targets that will contribute each element of your list/array.</p>
+              <div class="markdown level0 summary"><p>This target produces arrays (<a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose 
+individual items are built by ITarget instances.  Primarily used by the <span class="xref">Rezolver.EnumerableTargetContainer</span> and the configuration
+framework, but can also be used by your code.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -112,19 +111,7 @@ targets that will contribute each element of your list/array.</p>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">TargetBase.SuppressScopeTracking</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -157,7 +144,6 @@ targets that will contribute each element of your list/array.</p>
               <h5 id="Rezolver_ListTarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>The element type you feed on construction determines the type of array or the generic argument to List&lt;T&gt;.</p>
 <p>Each of the rezolve targets that you then pass must support that type.</p>
-<p>You can control whether the created instance is an array or a List&lt;T&gt; with the &#39;asArray&#39; boolean constructor argument.</p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -294,7 +280,7 @@ or <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.
               
               <h4 class="hmember" id="Rezolver_ListTarget_ElementType" data-uid="Rezolver.ListTarget.ElementType">ElementType</h4>
               <div class="markdown level1 summary"><p>Gets the declared type of each element in the array or list that will be constructed.</p>
-<p>The <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_DeclaredType">DeclaredType</a> returned by this instance will either be ElementType[] or List&lt;ElementType&gt;
+<p>The <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_DeclaredType">DeclaredType</a> returned by this instance will either be <code>ElementType[]</code> or <code>List&lt;ElementType&gt;</code>
 depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -350,6 +336,50 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
               <div class="classchild">
               
               
+              <h4 class="hmember" id="Rezolver_ListTarget_ListConstructor" data-uid="Rezolver.ListTarget.ListConstructor">ListConstructor</h4>
+              <div class="markdown level1 summary"><p>Gets the list constructor to be invoked when <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> is false.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ConstructorInfo ListConstructor { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">ConstructorInfo</span></td>
+                    <td><p>The list constructor.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">System.InvalidOperationException</a></td>
+                    <td><p>Since this target is configured to build an array, getting the ListConstructor is not a valid operation.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
               <h4 class="hmember" id="Rezolver_ListTarget_UseFallback" data-uid="Rezolver.ListTarget.UseFallback">UseFallback</h4>
               <div class="markdown level1 summary"><p>Returns true if the <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_Items">Items</a> enumerable is empty.</p>
 </div>
@@ -376,58 +406,6 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a></div>
               </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="methods">Methods
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ListTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ListTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Constructs an expression that represents building an array of <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_ElementType">ElementType</a> or List&lt;<a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_ElementType">ElementType</a>&gt;
-depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a>.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td><p>The current compile context</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
-                    <td><p>System.Linq.Expressions.Expression.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
-              </div><!-- .classchild -->
             </article>
           </div>
           
@@ -446,7 +424,7 @@ depending on the value of <a class="xref" href="Rezolver.ListTarget.html#Rezolve
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

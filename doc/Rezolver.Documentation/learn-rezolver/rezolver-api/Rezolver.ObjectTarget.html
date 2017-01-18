@@ -94,9 +94,7 @@
               
               <h1 id="Rezolver_ObjectTarget" data-uid="Rezolver.ObjectTarget">Class ObjectTarget
               </h1>
-              <div class="markdown level0 summary"><p>Implements IRezolveTarget by wrapping a single instance that&#39;s already been constructed.</p>
-<p>By default, scope tracking is disabled (since the caller owns the object, not the Rezolver framework)).  If it&#39;s
-enabled, then scope tracking behaves exactly the same as <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a>.</p>
+              <div class="markdown level0 summary"><p>Implements <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> by wrapping a single instance that&#39;s already been constructed by application code.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -111,16 +109,7 @@ enabled, then scope tracking behaves exactly the same as <a class="xref" href="R
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -148,7 +137,7 @@ enabled, then scope tracking behaves exactly the same as <a class="xref" href="R
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
               <h5 id="Rezolver_ObjectTarget_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class ObjectTarget : TargetBase, ITarget</code></pre>
+                <pre><code class="lang-csharp hljs">public class ObjectTarget : TargetBase, ITarget, ICompiledTarget</code></pre>
               </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -208,7 +197,9 @@ to ensure you dispose of it.</p>
               
               
               <h4 class="hmember" id="Rezolver_ObjectTarget_DeclaredType" data-uid="Rezolver.ObjectTarget.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the declared type of object that is returned by this target.  Might be different from the type
+of <a class="xref" href="Rezolver.ObjectTarget.html#Rezolver_ObjectTarget_Value">Value</a> if explicitly defined when this target was constructed.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -225,7 +216,8 @@ to ensure you dispose of it.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type of the declared.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -236,7 +228,8 @@ to ensure you dispose of it.</p>
               
               
               <h4 class="hmember" id="Rezolver_ObjectTarget_SuppressScopeTracking" data-uid="Rezolver.ObjectTarget.SuppressScopeTracking">SuppressScopeTracking</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Overrides <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SuppressScopeTracking">SuppressScopeTracking</a></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -289,17 +282,17 @@ to ensure you dispose of it.</p>
               </table>
               </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="methods">Methods
+              <h3 id="eii">Explicit Interface Implementations
               </h3>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ObjectTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ObjectTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
+              <h4 class="hmember" id="Rezolver_ObjectTarget_Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_" data-uid="Rezolver.ObjectTarget.Rezolver#ICompiledTarget#GetObject(Rezolver.ResolveContext)">ICompiledTarget.GetObject(ResolveContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">object ICompiledTarget.GetObject(ResolveContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -313,7 +306,7 @@ to ensure you dispose of it.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -328,63 +321,13 @@ to ensure you dispose of it.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ObjectTarget_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_" data-uid="Rezolver.ObjectTarget.CreateScopeSelectionExpression(Rezolver.CompileContext,Expression)">CreateScopeSelectionExpression(CompileContext, Expression)</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateScopeSelectionExpression(CompileContext context, Expression expression)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>expression</em></td>
-                    <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a></div>
+              <h5 class="himplements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">ICompiledTarget.GetObject(ResolveContext)</a></div>
               </div><!-- .classchild -->
             </article>
           </div>
@@ -404,7 +347,7 @@ to ensure you dispose of it.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

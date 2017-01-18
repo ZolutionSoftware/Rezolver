@@ -21,36 +21,6 @@
             "**/obj/**",
             "**/bin/**"
           ]
-        },
-        {
-          "files": [
-            "**/*.cs"
-          ],
-          "cwd": "../../src/Rezolver.Configuration",
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**"
-          ]
-        },
-        {
-          "files": [
-            "**/*.cs"
-          ],
-          "cwd": "../../src/Rezolver.Configuration.Json",
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**"
-          ]
-        },
-        {
-          "files": [
-            "**/*.cs"
-          ],
-          "cwd": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection",
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**"
-          ]
         }
       ],
       "dest": "obj/rezolver-api"

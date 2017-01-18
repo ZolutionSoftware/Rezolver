@@ -119,22 +119,22 @@
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">ContainerBase.Targets</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">ContainerBase.Resolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_ResolveContext_">ContainerBase.Resolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_RezolveContext_System_Object__">ContainerBase.TryResolve(RezolveContext, Object)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_ResolveContext_System_Object__">ContainerBase.TryResolve(ResolveContext, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CreateLifetimeScope">ContainerBase.CreateLifetimeScope()</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_RezolveContext_">ContainerBase.FetchCompiled(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_ResolveContext_">ContainerBase.FetchCompiled(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_RezolveContext_">ContainerBase.CanResolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_ResolveContext_">ContainerBase.CanResolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_ResolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(ResolveContext)</a>
                 </div>
                 <div>
                   <span class="xref">Rezolver.ContainerBase.System.IServiceProvider.GetService(System.Type)</span>
@@ -183,9 +183,9 @@
                 <pre><code class="lang-csharp hljs">public class CachingContainerBase : ContainerBase, IContainer, IServiceProvider, ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_CachingContainerBase_remarks" class="hremarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>Internally, the class uses a <see cref="!:ConcurrentDictionary&lt;TKey, TValue&gt;"></see> to store <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s keyed by the requested type.</p>
-<p>All the main <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementations used directly in an application should inherit from this class, because otherwise every </p>
-<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> operation would require a compilation phase before the object could be returned, which would be incredibly slow.</p>
+              <div class="markdown level0 remarks"><p>Internally, the class uses a <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd287191(v=vs.110).aspx">System.Collections.Concurrent.ConcurrentDictionary`2</a> to store <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s keyed by the requested type.</p>
+<p>All the main <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementations used directly in an application should ideally inherit from this class, because otherwise every </p>
+<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> operation would require a compilation phase before the object could be returned, which would be incredibly slow.</p>
 <p>It&#39;s because of this caching that registering new targets in any <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> used by this class is not recommended: because after the first request
 for a particular type is made, the resultant <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> is fixed until the container is thrown away.</p>
 </div>
@@ -195,7 +195,7 @@ for a particular type is made, the resultant <a class="xref" href="Rezolver.ICom
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.CachingContainerBase.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">CachingContainerBase(ITargetContainer, ITargetCompiler)</h4>
+              <h4 class="hmember" id="Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_Compilation_ITargetCompiler_" data-uid="Rezolver.CachingContainerBase.#ctor(Rezolver.ITargetContainer,Rezolver.Compilation.ITargetCompiler)">CachingContainerBase(ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase">CachingContainerBase</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -218,15 +218,15 @@ for a particular type is made, the resultant <a class="xref" href="Rezolver.ICom
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
                     <td><p>Optional. Contains the targets that will be used to create the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s that this container will use to produce objects
 when requested.</p>
-<p>If not provided, then the base class&#39; default (see <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_">ContainerBase(ITargetContainer, ITargetCompiler)</a>) will be used.</p>
+<p>If not provided, then the base class&#39; default (see <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_Compilation_ITargetCompiler_">ContainerBase(ITargetContainer, ITargetCompiler)</a>) will be used.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
+                    <td><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a></td>
                     <td><p>Optional.  The compiler that will be used to compile the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s in the <em>targets</em> container into</p>
 <p><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s.</p>
-<p>If not provided, then the base class&#39; default (see <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_">ContainerBase(ITargetContainer, ITargetCompiler)</a>) will be used.</p>
+<p>If not provided, then the base class&#39; default (see <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_Compilation_ITargetCompiler_">ContainerBase(ITargetContainer, ITargetCompiler)</a>) will be used.</p>
 </td>
                   </tr>
                 </tbody>
@@ -238,13 +238,13 @@ when requested.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_" data-uid="Rezolver.CachingContainerBase.GetCompiledRezolveTarget(Rezolver.RezolveContext)">GetCompiledRezolveTarget(RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext_" data-uid="Rezolver.CachingContainerBase.GetCompiledRezolveTarget(Rezolver.ResolveContext)">GetCompiledRezolveTarget(ResolveContext)</h4>
               <div class="markdown level1 summary"><p>Obtains an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> for the given <em>context</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override ICompiledTarget GetCompiledRezolveTarget(RezolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">protected override ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -258,7 +258,7 @@ when requested.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -279,13 +279,13 @@ when requested.</p>
                 </tbody>
               </table>
               <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">ContainerBase.GetCompiledRezolveTarget(RezolveContext)</a></div>
-              <h5 class="hremarks" id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>The method is called by <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>
-to get the compiled target whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_RezolveContext_">GetObject(RezolveContext)</a> method is to be used to get the instance that is to be resolved for
+              <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext_">ContainerBase.GetCompiledRezolveTarget(ResolveContext)</a></div>
+              <h5 class="hremarks" id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The method is called by <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>
+to get the compiled target whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> method is to be used to get the instance that is to be resolved for
 a given request.</p>
-<p>The internal cache is examined first to see if an entry exists for the <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_RequestedType">RequestedType</a> type and, if not, then 
-the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">GetCompiledRezolveTarget(RezolveContext)</a> is cached and returned.</p>
+<p>The internal cache is examined first to see if an entry exists for the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> type and, if not, then 
+the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext_">GetCompiledRezolveTarget(ResolveContext)</a> is cached and returned.</p>
 </div>
               </div><!-- .classchild -->
             </article>
@@ -306,7 +306,7 @@ the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.h
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

@@ -94,9 +94,9 @@
               
               <h1 id="Rezolver_RezolvedTarget" data-uid="Rezolver.RezolvedTarget">Class RezolvedTarget
               </h1>
-              <div class="markdown level0 summary"><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>, or dynamically 
-(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> when </p>
-<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a> is called.</p>
+              <div class="markdown level0 summary"><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>, or dynamically 
+(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a> when </p>
+<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is called.</p>
 <p>This is the most common way that we bind constructor parameters, for example - i.e. &#39;I want an
 IService instance - go get it&#39;.</p>
 </div>
@@ -113,19 +113,7 @@ IService instance - go get it&#39;.</p>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -160,7 +148,7 @@ IService instance - go get it&#39;.</p>
 compile time, a target is resolved for a given type and, if found, its expression is used.  If it&#39;s not found, 
 then an error occurs.</p>
 <p>Rezolver does this, but goes further when the target can&#39;t be resolved at compile-time - in this case, it will emit 
-a call back into the current <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> to try and dynamically resolve 
+a call back into the current <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a>&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> to try and dynamically resolve 
 the value that is required.</p>
 <p>Furthermore, the code it produces in either case also checks that the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> that is active at
 resolve-time is the same one (if applicable) that was active during compile-time.  If it isn&#39;t, then it&#39;ll automatically 
@@ -269,7 +257,7 @@ at compile time.</p>
               </table>
               <h5 class="hremarks" id="Rezolver_RezolvedTarget_FallbackTarget_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property is also used to determine whether this will be 
-used.  If the target resolved from the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a> has its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a>
+used.  If the target resolved from the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a> has its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a>
 property set to true, and this property is non-null for this target, then this target will be used.</p>
 <p>Note also that extension containers such as <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer">OverridingContainer</a> also have the ability to override
 the use of this fallback if they successfully resolve the type.</p>
@@ -310,63 +298,16 @@ the use of this fallback if they successfully resolve the type.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_RezolvedTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.RezolvedTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a>.
-Constructs the expression.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_RezolvedTarget_Resolve_Rezolver_CompileContext_" data-uid="Rezolver.RezolvedTarget.Resolve(Rezolver.CompileContext)">Resolve(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Attempts to obtain the target that this <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> resolves to for the given <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a>.</p>
-<p>Used in the implementation of <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> but also available to consumers to enable
+              <h4 class="hmember" id="Rezolver_RezolvedTarget_Resolve_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.RezolvedTarget.Resolve(Rezolver.Compilation.ICompileContext)">Resolve(ICompileContext)</h4>
+              <div class="markdown level1 summary"><p>Attempts to obtain the target that this <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> resolves to for the given <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>.</p>
+<p>Used in the implementation of <see cref="!:CreateExpressionBase(ICompileContext)"></see> but also available to consumers to enable
 checking of RezolvedTargets to see if they&#39;ll succeed at compile time (useful when late-binding overloaded constructors, 
 for example).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual ITarget Resolve(CompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public virtual ITarget Resolve(ICompileContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -380,7 +321,7 @@ for example).</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a></td>
                     <td><p>The context from which a target is to be resolved.</p>
 </td>
                   </tr>
@@ -402,7 +343,7 @@ for example).</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_RezolvedTarget_Resolve_Rezolver_CompileContext__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_RezolvedTarget_Resolve_Rezolver_Compilation_ICompileContext__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The target that is returned depends both on the <em>context</em> passed and also whether 
 a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_FallbackTarget">FallbackTarget</a> has been provided to this target.</p>
 </div>
@@ -425,7 +366,7 @@ a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_Fal
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

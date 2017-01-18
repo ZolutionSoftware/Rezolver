@@ -110,7 +110,7 @@ class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Co
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">CachingContainerBase.GetCompiledRezolveTarget(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(ResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">ContainerBase.GetMissingTarget(Type)</a>
@@ -125,22 +125,22 @@ class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Co
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">ContainerBase.Targets</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">ContainerBase.Resolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_ResolveContext_">ContainerBase.Resolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_RezolveContext_System_Object__">ContainerBase.TryResolve(RezolveContext, Object)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_ResolveContext_System_Object__">ContainerBase.TryResolve(ResolveContext, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CreateLifetimeScope">ContainerBase.CreateLifetimeScope()</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_RezolveContext_">ContainerBase.FetchCompiled(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_ResolveContext_">ContainerBase.FetchCompiled(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_RezolveContext_">ContainerBase.CanResolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_ResolveContext_">ContainerBase.CanResolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_ResolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(ResolveContext)</a>
                 </div>
                 <div>
                   <span class="xref">Rezolver.ContainerBase.System.IServiceProvider.GetService(System.Type)</span>
@@ -202,7 +202,7 @@ suited for use as a child lifetime scope for another container.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">ScopedContainer(ITargetContainer, ITargetCompiler)</h4>
+              <h4 class="hmember" id="Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_Compilation_ITargetCompiler_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.Compilation.ITargetCompiler)">ScopedContainer(ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -226,7 +226,7 @@ suited for use as a child lifetime scope for another container.</p>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
+                    <td><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -269,12 +269,12 @@ suited for use as a child lifetime scope for another container.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_" data-uid="Rezolver.ScopedContainer.AddToScope(System.Object,Rezolver.RezolveContext)">AddToScope(Object, RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_ScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_" data-uid="Rezolver.ScopedContainer.AddToScope(System.Object,Rezolver.ResolveContext)">AddToScope(Object, ResolveContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual void AddToScope(object obj, RezolveContext context = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public virtual void AddToScope(object obj, ResolveContext context = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -293,13 +293,13 @@ suited for use as a child lifetime scope for another container.</p>
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">IScopedContainer.AddToScope(Object, RezolveContext)</a></div>
+                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">IScopedContainer.AddToScope(Object, ResolveContext)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
               
@@ -345,12 +345,12 @@ suited for use as a child lifetime scope for another container.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ScopedContainer_GetFromScope_Rezolver_RezolveContext_" data-uid="Rezolver.ScopedContainer.GetFromScope(Rezolver.RezolveContext)">GetFromScope(RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_ScopedContainer_GetFromScope_Rezolver_ResolveContext_" data-uid="Rezolver.ScopedContainer.GetFromScope(Rezolver.ResolveContext)">GetFromScope(ResolveContext)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual IEnumerable&lt;object&gt; GetFromScope(RezolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public virtual IEnumerable&lt;object&gt; GetFromScope(ResolveContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -364,7 +364,7 @@ suited for use as a child lifetime scope for another container.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -385,7 +385,7 @@ suited for use as a child lifetime scope for another container.</p>
                 </tbody>
               </table>
               <h5 class="himplements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_RezolveContext_">IScopedContainer.GetFromScope(RezolveContext)</a></div>
+                  <div><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_GetFromScope_Rezolver_ResolveContext_">IScopedContainer.GetFromScope(ResolveContext)</a></div>
               </div><!-- .classchild -->
               <div class="classchild">
               
@@ -447,7 +447,7 @@ suited for use as a child lifetime scope for another container.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

@@ -95,10 +95,9 @@
               <h1 id="Rezolver_TargetContainer" data-uid="Rezolver.TargetContainer">Class TargetContainer
               </h1>
               <div class="markdown level0 summary"><p>Root container for <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s that can be used as the backing for the standard</p>
-<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> classes - <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a>, <a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer">ScopedContainer</a>, and the </p>
+<p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> classes - <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a> and <a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer">ScopedContainer</a>.</p>
 <p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s, is also Generic type aware,
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer">TargetDictionaryContainer</a>.</p>
-<p>Should be used as the root target container for implementations of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -147,8 +146,9 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
                 <pre><code class="lang-csharp hljs">public class TargetContainer : TargetDictionaryContainer, ITargetContainerOwner, ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_TargetContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>This is the type used by default for the <see cref="!:IContainer.Targets"></see> of the </p>
-<p><a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a> and <a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer">ScopedContainer</a> when you don&#39;t supply an instance of an </p>
+              <div class="markdown level0 remarks"><p>This is the type used by default for the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> of all
+the standard containers in the core framework, e.g. <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a>, </p>
+<p><a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer">ScopedContainer</a> etc, when you don&#39;t supply an instance of an </p>
 <p><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> explicitly on construction.</p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
@@ -359,7 +359,9 @@ that are registered against generic types.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.TargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Overrides the base method to block registration if the <em>target</em> does not support the 
+<em>serviceType</em> (checked by calling the target&#39;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a> method).</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -378,12 +380,15 @@ that are registered against generic types.</p>
                   <tr>
                     <td><em>target</em></td>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
+                    <td><p>The target to be registered.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>serviceType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Optional - the type against which the target is to be registered, if different from the
+target&#39;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -483,7 +488,7 @@ against the passed type (it just chains through directly to the </p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

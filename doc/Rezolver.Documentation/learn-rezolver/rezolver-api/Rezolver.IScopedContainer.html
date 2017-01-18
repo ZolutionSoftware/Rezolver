@@ -100,7 +100,7 @@ and will dispose of any disposable instances that it creates when it&#39;s dispo
 be disposed of when this scope is disposed.</p>
 <p>Note that while a lifetime scope can track objects of any types, it only <em>automatically</em>
 tracks disposable objects.  To force a scope to track an instance, regardless of whether it&#39;s
-dispoable or not, you can call <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">AddToScope(Object, RezolveContext)</a>.</p>
+dispoable or not, you can call <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">AddToScope(Object, ResolveContext)</a>.</p>
 <p>This is how the default ScopedSingletonTarget works - if an object with this lifetime isn&#39;t a 
 disposable, it is explicitly added to the scope passed to it at runtime, and then when an instance
 is subsequently requested, the code compiled by the scoped singleton will search the current scope,
@@ -110,19 +110,19 @@ for an existing instance, before creating one.</p>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_RezolveContext_">IContainer.CanResolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_ResolveContext_">IContainer.CanResolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">IContainer.Resolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">IContainer.Resolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_RezolveContext_System_Object__">IContainer.TryResolve(RezolveContext, Object)</a>
+                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">IContainer.TryResolve(ResolveContext, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateLifetimeScope">IContainer.CreateLifetimeScope()</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_FetchCompiled_Rezolver_RezolveContext_">IContainer.FetchCompiled(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_">IContainer.FetchCompiled(ResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/wacy2d1s(v=vs.110).aspx">IServiceProvider.GetService(Type)</a>
@@ -173,14 +173,14 @@ for an existing instance, before creating one.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_" data-uid="Rezolver.IScopedContainer.AddToScope(System.Object,Rezolver.RezolveContext)">AddToScope(Object, RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_" data-uid="Rezolver.IScopedContainer.AddToScope(System.Object,Rezolver.ResolveContext)">AddToScope(Object, ResolveContext)</h4>
               <div class="markdown level1 summary"><p>Registers an instance to this scope which, if disposable, will then be disposed 
 when this scope is disposed.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">void AddToScope(object obj, RezolveContext context = null)</code></pre>
+                <pre><code class="lang-csharp hljs">void AddToScope(object obj, ResolveContext context = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -201,7 +201,7 @@ then it will be tracked for disposal.</p>
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td><p>Optional - a rezolve context representing the conditions under which 
 the object should be returned in the enumerable returned from a call to GetFromScope</p>
 </td>
@@ -212,15 +212,15 @@ the object should be returned in the enumerable returned from a call to GetFromS
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_IScopedContainer_GetFromScope_Rezolver_RezolveContext_" data-uid="Rezolver.IScopedContainer.GetFromScope(Rezolver.RezolveContext)">GetFromScope(RezolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_IScopedContainer_GetFromScope_Rezolver_ResolveContext_" data-uid="Rezolver.IScopedContainer.GetFromScope(Rezolver.ResolveContext)">GetFromScope(ResolveContext)</h4>
               <div class="markdown level1 summary"><p>Retrieves all objects from this scope that were previously added through a call to </p>
-<p><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_RezolveContext_">AddToScope(Object, RezolveContext)</a> with RezolveContexts that match the one passed.</p>
+<p><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">AddToScope(Object, ResolveContext)</a> with RezolveContexts that match the one passed.</p>
 <p>The method never returns null.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">IEnumerable&lt;object&gt; GetFromScope(RezolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">IEnumerable&lt;object&gt; GetFromScope(ResolveContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -234,7 +234,7 @@ the object should be returned in the enumerable returned from a call to GetFromS
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
                     <td><p>Required - the context whose properties will be used to find matching
 objects.</p>
 </td>
@@ -306,7 +306,7 @@ objects.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

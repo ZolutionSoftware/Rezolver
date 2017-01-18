@@ -65,11 +65,11 @@ namespace Rezolver
 			InnerTarget = innerTarget;
 		}
 
-		protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
-		{
-			throw new NotImplementedException();
-			//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
-		}
+		//protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
+		//{
+		//	throw new NotImplementedException();
+		//	//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
+		//}
 
 		/// <summary>
 		/// Used to support compiled versions of this singleton - note this concept is something that probably needs

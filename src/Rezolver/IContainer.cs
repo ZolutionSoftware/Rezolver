@@ -12,12 +12,15 @@ namespace Rezolver
 	/// <summary>
 	/// The primary IOC container interface in the Rezolver framework.
 	/// </summary>
-	/// <remarks>Instances of objects (typically known as 'services' in IOC-speak) are resolved via the <see cref="Resolve"/> or <see cref="TryResolve(ResolveContext, out object)"/> methods.
+	/// <remarks>Instances of objects (typically known as 'services' in IOC-speak) are resolved via the <see cref="Resolve"/> or 
+	/// <see cref="TryResolve(ResolveContext, out object)"/> methods.
 	/// 
-	/// You can introspect the container to check in advance whether a given type can be resolved through the <see cref="CanResolve(ResolveContext)"/> method.
+	/// You can introspect the container to check in advance whether a given type can be resolved through the 
+	/// <see cref="CanResolve(ResolveContext)"/> method.
 	/// 
 	/// Lifetime scoping (where <see cref="IDisposable"/> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
-	/// by obtaining a new scope through the <see cref="CreateLifetimeScope"/> method.
+	/// by obtaining a new scope through the <see cref="CreateLifetimeScope"/> method; although a container might also implement the 
+	/// <see cref="IScopedContainer"/> interface, in which case the container itself is a lifetime scope.
 	/// 
 	/// Many of the functions which accept a <see cref="ResolveContext"/> also have alternatives (in the form of extension methods) in the 
 	/// <see cref="IContainerRezolveExtensions"/> class.  If you're looking for the 'traditional' IOC container methods 

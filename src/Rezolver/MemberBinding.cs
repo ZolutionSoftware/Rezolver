@@ -15,8 +15,11 @@ namespace Rezolver
 	/// Represents the binding of an <see cref="ITarget"/> to a property or field of a given type.
 	/// 
 	/// Not to be confused with the type of the same name from the System.Linq.Expressions namespace, although
-	/// they are equivalent.
+	/// they are technically equivalent.
 	/// </summary>
+	/// <remarks>You typically don't create this type directly - instead, other targets such as <see cref="ConstructorTarget"/>
+	/// will create it as needed through the use of an <see cref="IMemberBindingBehaviour"/> object.
+	/// </remarks>
 	public class MemberBinding
 	{
 		/// <summary>
@@ -66,28 +69,6 @@ namespace Rezolver
 			target.MustNotBeNull(nameof(target));
 			Member = member;
 			Target = target;
-		}
-
-		/// <summary>
-		/// Static factory method that creates bindings for all publicly writable instance properties (and, optionally, fields) of the given type.
-		/// Each property/field is bound to a <see cref="RezolvedTarget"/> instance - meaning that, at runtime, values for those properties or fields 
-		/// will be resolved from the container by type.
-		/// </summary>
-		/// <param name="type">The type whose properties (and, optionally, publicly writable fields) are to be bound.</param>
-		/// <param name="includeFields">If true, then publicly writable fields will be bound.</param>
-		/// <returns></returns>
-		public static MemberBinding[] DeriveAutoPropertyBinding(Type type, bool includeFields = false)
-		{
-			//note - the canwrite and GetSetMethod check in the predicate 
-			var memberBindings = type.GetInstanceProperties().PubliclyWritable()
-			  .Select(p => new MemberBinding(p, new RezolvedTarget(p.PropertyType)));
-			if (includeFields)
-			{
-				memberBindings = memberBindings.Concat(type.GetInstanceFields().Public()
-				  .Select(m => new MemberBinding(m, new RezolvedTarget(m.FieldType))));
-			}
-
-			return memberBindings.ToArray();
 		}
 	}
 }

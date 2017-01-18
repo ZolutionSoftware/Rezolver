@@ -94,7 +94,11 @@
               
               <h1 id="Rezolver_MethodCallExtractor" data-uid="Rezolver.MethodCallExtractor">Class MethodCallExtractor
               </h1>
-              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 summary"><p>Used to help grab method and constructor info from expressions (which is easier than writing long
+strings of reflection code).</p>
+<p>For example: <pre><code>MethodCallExtractor.ExtractCalledMethod(() =&gt; Console.WriteLine("foo"))</code></pre></p>
+<p>Will return the MethodInfo for the <code>WriteLine</code> method of the <code>Console</code> class.</p>
+</div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
@@ -108,94 +112,14 @@
                 <pre><code class="lang-csharp hljs">public sealed class MethodCallExtractor : ExpressionVisitor</code></pre>
               </div>
               <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="properties">Properties
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_MethodCallExtractor_CalledConstructor" data-uid="Rezolver.MethodCallExtractor.CalledConstructor">CalledConstructor</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ConstructorInfo CalledConstructor { get; }</code></pre>
-              </div>
-              <h5 class="hpropertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">ConstructorInfo</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_MethodCallExtractor_CalledMethod" data-uid="Rezolver.MethodCallExtractor.CalledMethod">CalledMethod</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public MethodInfo CalledMethod { get; }</code></pre>
-              </div>
-              <h5 class="hpropertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">MethodInfo</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_MethodCallExtractor_CallExpression" data-uid="Rezolver.MethodCallExtractor.CallExpression">CallExpression</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public MethodCallExpression CallExpression { get; }</code></pre>
-              </div>
-              <h5 class="hpropertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">MethodCallExpression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractCalledMethod_Expression_System_Action__" data-uid="Rezolver.MethodCallExtractor.ExtractCalledMethod(Expression{System.Action})">ExtractCalledMethod(Expression&lt;Action&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the MethodInfo of the first method call found in the expression.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -214,7 +138,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<span class="xref">System.Action</span>&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be read</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -229,7 +154,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">MethodInfo</span></td>
-                    <td></td>
+                    <td><p>A MethodInfo representing the method - if the expression contains a method call; otherwise <code>null</code></p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -238,7 +164,8 @@
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractCalledMethod__1_Expression_System_Action___0___" data-uid="Rezolver.MethodCallExtractor.ExtractCalledMethod``1(Expression{System.Action{``0}})">ExtractCalledMethod&lt;T&gt;(Expression&lt;Action&lt;T&gt;&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the MethodInfo of the first method call found in the expression.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -257,7 +184,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<span class="xref">System.Action</span>&lt;T&gt;&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be read</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -272,7 +200,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">MethodInfo</span></td>
-                    <td></td>
+                    <td><p>A MethodInfo representing the method - if the expression contains a method call; otherwise <code>null</code></p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -287,7 +216,8 @@
                 <tbody>
                   <tr>
                     <td><em>T</em></td>
-                    <td></td>
+                    <td>Allows the expression to declare a parameter to aid overload resolution, but doesn't
+actually have any material influence on the expression analysis.</td>
                   </tr>
                 </tbody>
               </table>
@@ -296,7 +226,8 @@
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractCalledMethod__1_Expression_System_Func___0___" data-uid="Rezolver.MethodCallExtractor.ExtractCalledMethod``1(Expression{System.Func{``0}})">ExtractCalledMethod&lt;TResult&gt;(Expression&lt;Func&lt;TResult&gt;&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the MethodInfo of the first method call found in the expression.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -315,7 +246,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func</a>&lt;TResult&gt;&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be read</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -330,7 +262,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">MethodInfo</span></td>
-                    <td></td>
+                    <td><p>A MethodInfo representing the method - if the expression contains a method call; otherwise <code>null</code></p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -345,7 +278,8 @@
                 <tbody>
                   <tr>
                     <td><em>TResult</em></td>
-                    <td></td>
+                    <td>Return type of the expression.  Not actually used in any way, it's just here to allow overload resolution
+when an expression represents a non-void function call</td>
                   </tr>
                 </tbody>
               </table>
@@ -354,7 +288,8 @@
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractCalledMethod__2_Expression_System_Func___0___1___" data-uid="Rezolver.MethodCallExtractor.ExtractCalledMethod``2(Expression{System.Func{``0,``1}})">ExtractCalledMethod&lt;TInstance, TResult&gt;(Expression&lt;Func&lt;TInstance, TResult&gt;&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the MethodInfo of the first method call found in the expression.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -373,7 +308,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;TInstance, TResult&gt;&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be read</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -388,7 +324,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">MethodInfo</span></td>
-                    <td></td>
+                    <td><p>A MethodInfo representing the method - if the expression contains a method call; otherwise <code>null</code></p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -403,11 +340,13 @@
                 <tbody>
                   <tr>
                     <td><em>TInstance</em></td>
-                    <td></td>
+                    <td>Allows the expression to declare a parameter to aid overload resolution, but doesn't
+actually have any material influence on the expression analysis.</td>
                   </tr>
                   <tr>
                     <td><em>TResult</em></td>
-                    <td></td>
+                    <td>Return type of the expression.  Not actually used in any way, it's just here to allow overload resolution
+when an expression represents a non-void function call</td>
                   </tr>
                 </tbody>
               </table>
@@ -416,7 +355,8 @@
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractConstructorCall_Expression_System_Action__" data-uid="Rezolver.MethodCallExtractor.ExtractConstructorCall(Expression{System.Action})">ExtractConstructorCall(Expression&lt;Action&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the ConstructorInfo of the first &#39;new&#39; statement found in the expression</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -435,7 +375,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<span class="xref">System.Action</span>&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be analysed.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -450,7 +391,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">ConstructorInfo</span></td>
-                    <td></td>
+                    <td><p>A ConstructorInfo representing the constructor being called in the expression; otherwise <code>null</code> if not found.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -459,7 +401,8 @@
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractConstructorCall__1_Expression_System_Action___0___" data-uid="Rezolver.MethodCallExtractor.ExtractConstructorCall``1(Expression{System.Action{``0}})">ExtractConstructorCall&lt;T&gt;(Expression&lt;Action&lt;T&gt;&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the ConstructorInfo of the first &#39;new&#39; statement found in the expression</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -478,7 +421,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<span class="xref">System.Action</span>&lt;T&gt;&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be analysed.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -493,7 +437,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">ConstructorInfo</span></td>
-                    <td></td>
+                    <td><p>A ConstructorInfo representing the constructor being called in the expression; otherwise <code>null</code> if not found.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -508,7 +453,8 @@
                 <tbody>
                   <tr>
                     <td><em>T</em></td>
-                    <td></td>
+                    <td>Allows the expression to declare a parameter to aid overload resolution, but doesn't
+actually have any material influence on the expression analysis.</td>
                   </tr>
                 </tbody>
               </table>
@@ -517,7 +463,8 @@
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractConstructorCall__1_Expression_System_Func___0___" data-uid="Rezolver.MethodCallExtractor.ExtractConstructorCall``1(Expression{System.Func{``0}})">ExtractConstructorCall&lt;TResult&gt;(Expression&lt;Func&lt;TResult&gt;&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the ConstructorInfo of the first &#39;new&#39; statement found in the expression</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -536,7 +483,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func</a>&lt;TResult&gt;&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be analysed.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -551,7 +499,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">ConstructorInfo</span></td>
-                    <td></td>
+                    <td><p>A ConstructorInfo representing the constructor being called in the expression; otherwise <code>null</code> if not found.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -566,7 +515,8 @@
                 <tbody>
                   <tr>
                     <td><em>TResult</em></td>
-                    <td></td>
+                    <td>Return type of the expression.  Not actually used in any way, it's just here to allow overload resolution
+when an expression represents a non-void function call</td>
                   </tr>
                 </tbody>
               </table>
@@ -575,7 +525,8 @@
               
               
               <h4 class="hmember" id="Rezolver_MethodCallExtractor_ExtractConstructorCall__2_Expression_System_Func___0___1___" data-uid="Rezolver.MethodCallExtractor.ExtractConstructorCall``2(Expression{System.Func{``0,``1}})">ExtractConstructorCall&lt;TInstance, TResult&gt;(Expression&lt;Func&lt;TInstance, TResult&gt;&gt;)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Extracts the ConstructorInfo of the first &#39;new&#39; statement found in the expression</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -594,7 +545,8 @@
                   <tr>
                     <td><em>expr</em></td>
                     <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;TInstance, TResult&gt;&gt;</td>
-                    <td></td>
+                    <td><p>The expression to be analysed.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -609,7 +561,8 @@
                 <tbody>
                   <tr>
                     <td><span class="xref">ConstructorInfo</span></td>
-                    <td></td>
+                    <td><p>A ConstructorInfo representing the constructor being called in the expression; otherwise <code>null</code> if not found.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -624,11 +577,13 @@
                 <tbody>
                   <tr>
                     <td><em>TInstance</em></td>
-                    <td></td>
+                    <td>Allows the expression to declare a parameter to aid overload resolution, but doesn't
+actually have any material influence on the expression analysis.</td>
                   </tr>
                   <tr>
                     <td><em>TResult</em></td>
-                    <td></td>
+                    <td>Return type of the expression.  Not actually used in any way, it's just here to allow overload resolution
+when an expression represents a non-void function call</td>
                   </tr>
                 </tbody>
               </table>
@@ -737,7 +692,7 @@
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

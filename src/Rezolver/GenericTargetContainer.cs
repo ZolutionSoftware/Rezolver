@@ -14,10 +14,13 @@ namespace Rezolver
 	/// which are specifically keyed either to a particular open generic type or a closed generic built from it.
 	/// </summary>
 	/// <seealso cref="Rezolver.TargetDictionaryContainer" />
+	/// <remarks>You don't typically use this container directly - it is implicitly added to an <see cref="ITargetContainer"/>
+	/// when generic types are registered.  Indeed the <see cref="TargetContainer"/> and <see cref="DecoratingTargetContainer"/> booth
+	/// create instances of this; and the <see cref="EnumerableTargetContainer"/> (understandably) inherits from it.</remarks>
 	public class GenericTargetContainer : TargetDictionaryContainer
 	{
 		/// <summary>
-		/// Gets open generic type to which all targets and containers within this container relate.
+		/// Gets the open generic type definition which is common to all targets and containers within this container.
 		/// </summary>
 		public Type GenericType { get; }
 
@@ -98,7 +101,7 @@ namespace Rezolver
 			//targets that have been registered directly against the open generic type.
 			return _targets.Fetch(type);
 		}
-//#error got this far
+
 		/// <summary>
 		/// Implementation of <see cref="ITargetContainer.FetchAll(Type)" />
 		/// </summary>

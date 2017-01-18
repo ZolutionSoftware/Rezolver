@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_ParameterBinding" data-uid="Rezolver.ParameterBinding">Class ParameterBinding
               </h1>
-              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 summary"><p>Represents a binding between a method parameter and an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></p>
+</div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
                 <h5>Inheritance</h5>
@@ -403,7 +404,8 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
               
               <h4 class="hmember" id="Rezolver_ParameterBinding_BindWithRezolvedArguments_MethodBase_" data-uid="Rezolver.ParameterBinding.BindWithRezolvedArguments(MethodBase)">BindWithRezolvedArguments(MethodBase)</h4>
               <div class="markdown level1 summary"><p>Creates parameter bindings for each parameter in the passed method where each value will be resolved.</p>
-<p>For any optional parameters - their default values will be used as a fallback.</p>
+<p>For any optional parameters - their default values will be used as a fallback if the <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>
+cannot either resolve a target at compile time or from the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> at resolve-time.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -446,70 +448,13 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ParameterBinding_BindWithRezolvedOrOptionalDefault_MethodBase_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.BindWithRezolvedOrOptionalDefault(MethodBase,Rezolver.CompileContext)">BindWithRezolvedOrOptionalDefault(MethodBase, CompileContext)</h4>
-              <div class="markdown level1 summary"><p>This is a compile-time helper method which produces a binding for each parameter where arguments that can be resolved 
-from the passed <em>context</em> will be bound with <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>s, and those which cannot, 
-but which are optional, will be bound with <a class="xref" href="Rezolver.OptionalParameterTarget.html#Rezolver_OptionalParameterTarget">OptionalParameterTarget</a>s.</p>
-<p>If the parameter is not optional, and no target can be resolved, then an invalid binding will be returned for that parameter.</p>
+              <h4 class="hmember" id="Rezolver_ParameterBinding_Resolve_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.ParameterBinding.Resolve(Rezolver.Compilation.ICompileContext)">Resolve(ICompileContext)</h4>
+              <div class="markdown level1 summary"><p>Fetch the target that would be bound to this parameter given the passed <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ParameterBinding[] BindWithRezolvedOrOptionalDefault(MethodBase method, CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>method</em></td>
-                    <td><span class="xref">MethodBase</span></td>
-                    <td><p>Required - the method whose parameters are to be bound.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td><p>Required - the current compile context which will be used to test whether arguments can be resolved
-at compile time.  If they can, then the associated parameter will be bound with a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding">ParameterBinding</a>[]</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ParameterBinding_CreateExpression_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.CreateExpression(Rezolver.CompileContext)">CreateExpression(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Helper method for getting the expression from the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Target">Target</a> for the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Parameter">Parameter</a>&#39;s</p>
-<p><see cref="!:ParameterInfo.ParameterType"></see>.  Takes care of setting the correct</p>
-<p><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_TargetType">TargetType</a> in a new context built from the <em>context</em> you pass.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Expression CreateExpression(CompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public virtual ITarget Resolve(ICompileContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -523,55 +468,7 @@ at compile time.  If they can, then the associated parameter will be bound with 
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td><p>The current context for the object being built whose method or constructor parameter
-is being bound.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td><p>The expression built by <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Target">Target</a> for the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Parameter">Parameter</a>&#39;s</p>
-<p><see cref="!:ParameterInfo.ParameterType"></see>.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ParameterBinding_Resolve_Rezolver_CompileContext_" data-uid="Rezolver.ParameterBinding.Resolve(Rezolver.CompileContext)">Resolve(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Fetch the target that would be bound to this parameter given the passed <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual ITarget Resolve(CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
+                    <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a></td>
                     <td><p>The current compile context - a new one is created for the <a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding_Parameter">Parameter</a> type</p>
 </td>
                   </tr>
@@ -596,7 +493,7 @@ target container in the context is a stub (e.g. empty enumerable)</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ParameterBinding_Resolve_Rezolver_CompileContext__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ParameterBinding_Resolve_Rezolver_Compilation_ICompileContext__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>During compilation - you should not use the target returned by this function as a direct
 part of your expression tree - you should </p>
 </div>
@@ -619,7 +516,7 @@ part of your expression tree - you should </p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

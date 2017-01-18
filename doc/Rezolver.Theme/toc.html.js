@@ -1,4 +1,3 @@
-// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.
 exports.transform = function (model) {
   transformItem(model, 1);
   if (model.items && model.items.length > 0) model.leaf = false;

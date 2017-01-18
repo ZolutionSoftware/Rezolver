@@ -96,6 +96,8 @@
               </h1>
               <div class="markdown level0 summary"><p>A target that binds to a type&#39;s constructor with zero or more arguments supplied by other <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s and, optionally
 binding to the new instance&#39;s writeable properties.</p>
+<p>The target supports en explicitly supplied constructor, as well as just-in-time lookups for the best available constructor based on the
+available services and/or any named arguments which might been provided up front.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -113,19 +115,7 @@ binding to the new instance&#39;s writeable properties.</p>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -157,12 +147,11 @@ binding to the new instance&#39;s writeable properties.</p>
               </div>
               <h5 id="Rezolver_ConstructorTarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Although you can create this target directly through the </p>
-<p><see cref="!:ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])"></see> constructor,
-you&#39;re more likely to create it through factory methods such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto&lt;T&gt;(IPropertyBindingBehaviour)</a> or, more likely still,
-extension methods such as <see cref="!:SingletonTargetDictionaryExtensions.RegisterType&lt;TObject, TService&gt;(ITargetContainer, IPropertyBindingBehaviour)"></see> during
+<p><span class="xref">Rezolver.ConstructorTarget.#ctor(System.Type,ConstructorInfo,Rezolver.IMemberBindingBehaviour,Rezolver.ParameterBinding[],System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})</span> constructor,
+you&#39;re more likely to create it through factory methods such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IMemberBindingBehaviour_">Auto&lt;T&gt;(IMemberBindingBehaviour)</a> or, more likely still,
+extension methods such as <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterType&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</a> during
 your application&#39;s container setup phase.</p>
-<p>The expression built by this class&#39; implementation of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> will be an expression tree that ultimately
-creates a new instance of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_DeclaredType">DeclaredType</a>.</p>
+<p>To compile this target, an <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a> must call the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method </p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -170,13 +159,13 @@ creates a new instance of the <a class="xref" href="Rezolver.ConstructorTarget.h
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget__ctor_ConstructorInfo_Rezolver_IPropertyBindingBehaviour_Rezolver_ParameterBinding___" data-uid="Rezolver.ConstructorTarget.#ctor(ConstructorInfo,Rezolver.IPropertyBindingBehaviour,Rezolver.ParameterBinding[])">ConstructorTarget(ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])</h4>
-              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> class.</p>
+              <h4 class="hmember" id="Rezolver_ConstructorTarget__ctor_ConstructorInfo_Rezolver_IMemberBindingBehaviour_Rezolver_ParameterBinding___" data-uid="Rezolver.ConstructorTarget.#ctor(ConstructorInfo,Rezolver.IMemberBindingBehaviour,Rezolver.ParameterBinding[])">ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])</h4>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> class bound in advance to a specific constructor.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ConstructorTarget(ConstructorInfo ctor, IPropertyBindingBehaviour propertyBindingBehaviour = null, ParameterBinding[] parameterBindings = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ConstructorTarget(ConstructorInfo ctor, IMemberBindingBehaviour memberBindingBehaviour = null, ParameterBinding[] parameterBindings = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -192,20 +181,23 @@ creates a new instance of the <a class="xref" href="Rezolver.ConstructorTarget.h
                     <td><em>ctor</em></td>
                     <td><span class="xref">ConstructorInfo</span></td>
                     <td><p>Required - the constructor that is to be bound.  The <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_DeclaredType">DeclaredType</a> of the new instance
-will be derived from this.</p>
+will be set to the <see cref="!:MemberInfo.DeclaringType"></see> of this object.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><em>memberBindingBehaviour</em></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
                     <td><p>Optional.  If provided, can be used to select properties which are to be
-initialised from the container.</p>
+initialised before the new instance is returned.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>parameterBindings</em></td>
                     <td><a class="xref" href="Rezolver.ParameterBinding.html#Rezolver_ParameterBinding">ParameterBinding</a>[]</td>
-                    <td><p>Optional, although can only be supplied if <em>ctor</em> is provided.<br>Specific bindings for the parameters of the given <em>ctor</em> which should be used during code generation.</p>
+                    <td><p>Optional.  Specific bindings for the parameters of the given <em>ctor</em>
+which should be used during code generation.  Note that this array can contain fewer or more entries than there are
+parameters on the <em>ctor</em>.  Any missing bindings will be automatically generated when <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a>
+is called.</p>
 </td>
                   </tr>
                 </tbody>
@@ -214,14 +206,14 @@ initialised from the container.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.ConstructorTarget.#ctor(System.Type,Rezolver.IPropertyBindingBehaviour,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">ConstructorTarget(Type, IPropertyBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</h4>
-              <div class="markdown level1 summary"><p>Initializes a late-bound instance of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> class which will locate the
-best constructor to be called at compile-time.</p>
+              <h4 class="hmember" id="Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.ConstructorTarget.#ctor(System.Type,Rezolver.IMemberBindingBehaviour,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">ConstructorTarget(Type, IMemberBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</h4>
+              <div class="markdown level1 summary"><p>Initializes a just-in-time-bound instance of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> class which must be bound 
+to the best constructor at compile-time by calling the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ConstructorTarget(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null, IDictionary&lt;string, ITarget&gt; namedArgs = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ConstructorTarget(Type type, IMemberBindingBehaviour memberBindingBehaviour = null, IDictionary&lt;string, ITarget&gt; namedArgs = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -236,34 +228,30 @@ best constructor to be called at compile-time.</p>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><p>Required.  The type to be constructed when resolved in a container.</p>
+                    <td><p>Required.  The type whose constructor is to bound.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><em>memberBindingBehaviour</em></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
                     <td><p>Optional.  If provided, can be used to select properties which are to be
-initialised from the container.</p>
+initialised before the new instance is returned.</p>
 </td>
                   </tr>
                   <tr>
                     <td><em>namedArgs</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/s4ys34ea(v=vs.110).aspx">IDictionary</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>&gt;</td>
-                    <td><p>Optional.  The named arguments which will be provided to the best-matched constructor.  These are taken into account
-when the constructor is sought - with the constructor that the most parameters matched being selected.</p>
+                    <td><p>Optional.  The named arguments which will be passed to, and used to find, the best-matched constructor.<br>These are taken into account when the constructor is sought - with the constructor containing the most matched parameters matched being selected.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget___remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>The best available constructor on the <em>type</em> is determined
-when <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> is called (which ultimately calls <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a>).
-The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a> at compile-time
-(i.e. when <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a> is called) to the fewest number of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> objects whose <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a>
-is false (for example - when an IEnumerable of a service is requested, but no registrations are found, a target is returned with <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> set to
-<code>true</code>, and whose expression will equate to an empty enumerable).
-This allows the system to bind to different constructors automatically based on the other registrations that are present in the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> of the active</p>
-<p><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext_Container">Container</a> when code is compiled in response to a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_RezolveContext_">Resolve(RezolveContext)</a>.</p>
+              <h5 class="hremarks" id="Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget___remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>To compile this target, a <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a> first calls the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method
+to discover the constructor to be executed, along with the final set of arguments to be provided to it (see <a class="xref" href="Rezolver.ConstructorBinding.html#Rezolver_ConstructorBinding">ConstructorBinding</a>).</p>
+<p>The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the </p>
+<p><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a> at compile-time to the fewest number of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> objects whose <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a>
+is false.</p>
 </div>
               </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
@@ -273,7 +261,8 @@ This allows the system to bind to different constructors automatically based on 
               
               
               <h4 class="hmember" id="Rezolver_ConstructorTarget_Ctor" data-uid="Rezolver.ConstructorTarget.Ctor">Ctor</h4>
-              <div class="markdown level1 summary"><p>Can be null. Gets the constructor that this target is bound to, if known at construction time.</p>
+              <div class="markdown level1 summary"><p>Can be null. Gets the constructor that this target is bound to, if it was known when the target
+was created.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -298,11 +287,11 @@ This allows the system to bind to different constructors automatically based on 
               <h5 class="hremarks" id="Rezolver_ConstructorTarget_Ctor_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>ConstructorTargets can be bound to a particular constructor
 in advance, or they can search for a best-match constructor at the point where</p>
-<p><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_CreateExpression_Rezolver_CompileContext_">CreateExpression(CompileContext)</a> is called.</p>
+<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> is called.</p>
 <p>This property will only be set ultimately if it was passed to the </p>
-<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_ConstructorInfo_Rezolver_IPropertyBindingBehaviour_Rezolver_ParameterBinding___">ConstructorTarget(ConstructorInfo, IPropertyBindingBehaviour, ParameterBinding[])</a>
+<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_ConstructorInfo_Rezolver_IMemberBindingBehaviour_Rezolver_ParameterBinding___">ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])</a>
 constructor, possibly by a factory method like <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_WithArgs_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">WithArgs(ConstructorInfo, IDictionary&lt;String, ITarget&gt;)</a>,
-or <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression_System_Type_NewExpression_Rezolver_ITargetAdapter_">FromNewExpression(Type, NewExpression, ITargetAdapter)</a>, where the constructor
+or <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression_System_Type_NewExpression_">FromNewExpression(Type, NewExpression)</a>, where the constructor
 is captured within the expression.</p>
 </div>
               </div><!-- .classchild -->
@@ -339,9 +328,37 @@ type whose constructor will be bound by this target.</p>
               <div class="classchild">
               
               
+              <h4 class="hmember" id="Rezolver_ConstructorTarget_MemberBindingBehaviour" data-uid="Rezolver.ConstructorTarget.MemberBindingBehaviour">MemberBindingBehaviour</h4>
+              <div class="markdown level1 summary"><p>Gets the member binding behaviour to be used when <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> is called.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="hdeclaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public IMemberBindingBehaviour MemberBindingBehaviour { get; }</code></pre>
+              </div>
+              <h5 class="hpropertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div><!-- .classchild -->
+              <div class="classchild">
+              
+              
               <h4 class="hmember" id="Rezolver_ConstructorTarget_NamedArgs" data-uid="Rezolver.ConstructorTarget.NamedArgs">NamedArgs</h4>
               <div class="markdown level1 summary"><p>Named arguments (as <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> objects) to be supplied to the object on construction,
-also aiding the search for a constructor.</p>
+also aiding the search for a constructor.  This equivalent to the way that languages such as C# 
+can bind to overloaded functions based solely on named arguments.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -398,8 +415,9 @@ argument bindings for that constructor&#39;s parameters.</p>
               </table>
               <h5 class="hremarks" id="Rezolver_ConstructorTarget_ParameterBindings_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This is not the same as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_NamedArgs">NamedArgs</a> - as is noted by the documentation
-on that property.  This property is for when the constructor is known in advance; whereas</p>
-<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_NamedArgs">NamedArgs</a> is for when it&#39;s not.</p>
+on that property.  This property is for when the constructor is known in advance and when certain
+parameters are to be bound with specific arguments; whereas</p>
+<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_NamedArgs">NamedArgs</a> is for when the constructor is not known.</p>
 </div>
               </div><!-- .classchild -->
               <!-- <hr class="typeSectionDivider" /> -->
@@ -408,14 +426,14 @@ on that property.  This property is for when the constructor is known in advance
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.ConstructorTarget.Auto(System.Type,Rezolver.IPropertyBindingBehaviour)">Auto(Type, IPropertyBindingBehaviour)</h4>
+              <h4 class="hmember" id="Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.ConstructorTarget.Auto(System.Type,Rezolver.IMemberBindingBehaviour)">Auto(Type, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Creates a late bound <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> for the 
 given <em>type</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto(Type type, IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -434,8 +452,8 @@ given <em>type</em>.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
+                    <td><em>memberBindingBehaviour</em></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
                     <td><p>Optional.  An object which selects properties on the new instance which are
 to be bound from the container.</p>
 </td>
@@ -459,22 +477,22 @@ to be bound from the container.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This factory is merely a shortcut for calling the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">ConstructorTarget(Type, IPropertyBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</a>
-with only the <em>type</em> and <em>propertyBindingBehaviour</em> arguments supplied.  When creating a </p>
-<p><a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a>, the function uses the <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget__ctor_System_Type_Rezolver_IPropertyBindingBehaviour_">GenericConstructorTarget(Type, IPropertyBindingBehaviour)</a> constructor.</p>
+              <h5 class="hremarks" id="Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This factory is merely a shortcut for calling the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">ConstructorTarget(Type, IMemberBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</a>
+with only the <em>type</em> and <em>memberBindingBehaviour</em> arguments supplied.  When creating a </p>
+<p><a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a>, the function uses the <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_">GenericConstructorTarget(Type, IMemberBindingBehaviour)</a> constructor.</p>
 </div>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_" data-uid="Rezolver.ConstructorTarget.Auto``1(Rezolver.IPropertyBindingBehaviour)">Auto&lt;T&gt;(IPropertyBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Generic version of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IPropertyBindingBehaviour_">Auto(Type, IPropertyBindingBehaviour)</a> method.</p>
+              <h4 class="hmember" id="Rezolver_ConstructorTarget_Auto__1_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.ConstructorTarget.Auto``1(Rezolver.IMemberBindingBehaviour)">Auto&lt;T&gt;(IMemberBindingBehaviour)</h4>
+              <div class="markdown level1 summary"><p>Generic version of the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_">Auto(Type, IMemberBindingBehaviour)</a> method.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto&lt;T&gt;(IPropertyBindingBehaviour propertyBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget Auto&lt;T&gt;(IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -487,9 +505,9 @@ with only the <em>type</em> and <em>propertyBindingBehaviour</em> arguments supp
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>propertyBindingBehaviour</em></td>
-                    <td><a class="xref" href="Rezolver.IPropertyBindingBehaviour.html#Rezolver_IPropertyBindingBehaviour">IPropertyBindingBehaviour</a></td>
-                    <td><p>See the documentation for the <em>propertyBindingBehaviour</em> parameter
+                    <td><em>memberBindingBehaviour</em></td>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a></td>
+                    <td><p>See the documentation for the <em>memberBindingBehaviour</em> parameter
 on the non-generic version of this method.</p>
 </td>
                   </tr>
@@ -531,13 +549,16 @@ on the non-generic version of this method.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.ConstructorTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">CreateExpressionBase(CompileContext)</a></p>
+              <h4 class="hmember" id="Rezolver_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.ConstructorTarget.Bind(Rezolver.Compilation.ICompileContext)">Bind(ICompileContext)</h4>
+              <div class="markdown level1 summary"><p>Gets the <a class="xref" href="Rezolver.ConstructorBinding.html#Rezolver_ConstructorBinding">ConstructorBinding</a> for the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_DeclaredType">DeclaredType</a> using the 
+targets available in the <em>context</em> for dependency lookup.</p>
+<p>The constructor is either resolved by checking available targets for the best match, or is pre-selected
+on construction (<a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Ctor">Ctor</a> will be non-null in this case).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public ConstructorBinding Bind(ICompileContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -551,8 +572,8 @@ on the non-generic version of this method.</p>
                 <tbody>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td><p>The current compile context</p>
+                    <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a></td>
+                    <td><p>The current compilation context.</p>
 </td>
                   </tr>
                 </tbody>
@@ -567,25 +588,39 @@ on the non-generic version of this method.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="Rezolver.ConstructorBinding.html#Rezolver_ConstructorBinding">ConstructorBinding</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">System.InvalidOperationException</a></td>
+                    <td><p>If no sutiable constructors can be found.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget_FromNewExpression_System_Type_NewExpression_Rezolver_ITargetAdapter_" data-uid="Rezolver.ConstructorTarget.FromNewExpression(System.Type,NewExpression,Rezolver.ITargetAdapter)">FromNewExpression(Type, NewExpression, ITargetAdapter)</h4>
-              <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___Rezolver_ITargetAdapter_">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;, ITargetAdapter)</a>.  See the documentation
+              <h4 class="hmember" id="Rezolver_ConstructorTarget_FromNewExpression_System_Type_NewExpression_" data-uid="Rezolver.ConstructorTarget.FromNewExpression(System.Type,NewExpression)">FromNewExpression(Type, NewExpression)</h4>
+              <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;)</a>.  See the documentation
 on that method for more.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression(Type declaredType, NewExpression newExpr, ITargetAdapter adapter = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression(Type declaredType, NewExpression newExpr)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -608,11 +643,6 @@ on that method for more.</p>
                     <td><span class="xref">NewExpression</span></td>
                     <td></td>
                   </tr>
-                  <tr>
-                    <td><em>adapter</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
-                    <td></td>
-                  </tr>
                 </tbody>
               </table>
               <h5 class="hreturns">Returns</h5>
@@ -634,13 +664,13 @@ on that method for more.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___Rezolver_ITargetAdapter_" data-uid="Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{``0}},Rezolver.ITargetAdapter)">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;, ITargetAdapter)</h4>
+              <h4 class="hmember" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___" data-uid="Rezolver.ConstructorTarget.FromNewExpression``1(Expression{System.Func{``0}})">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;)</h4>
               <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> from the passed lambda expression (whose <see cref="!:LambdaExpression.Body"></see> must be a <see cref="!:NewExpression"></see>)</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt; newExpr, ITargetAdapter adapter = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt; newExpr)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -658,13 +688,6 @@ on that method for more.</p>
                     <td><p>Required.  The expression from which to create the target.</p>
 </td>
                   </tr>
-                  <tr>
-                    <td><em>adapter</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a></td>
-                    <td><p>Optional.  The adapter to be used to convert any additional expressions in the lambda into <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances (e.g. for argument values).
-If not provided, then the <a class="xref" href="Rezolver.TargetAdapter.html#Rezolver_TargetAdapter_Default">Default</a> will be used.</p>
-</td>
-                  </tr>
                 </tbody>
               </table>
               <h5 class="hreturns">Returns</h5>
@@ -678,7 +701,7 @@ If not provided, then the <a class="xref" href="Rezolver.TargetAdapter.html#Rezo
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td><p>An <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> that actually be an intstance of <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a></p>
+                    <td><p>An <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> which, when compiled, will perform that same construction as provided in the given expression.</p>
 </td>
                   </tr>
                 </tbody>
@@ -698,13 +721,12 @@ If not provided, then the <a class="xref" href="Rezolver.TargetAdapter.html#Rezo
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0___Rezolver_ITargetAdapter__remarks">Remarks</h5>
+              <h5 class="hremarks" id="Rezolver_ConstructorTarget_FromNewExpression__1_Expression_System_Func___0____remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This method does not support member binding expressions - e.g. <pre><code>c =&gt; new MyObject() { A = "hello" }</code></pre> - these can be converted into
-targets using a (compliant) <a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter">ITargetAdapter</a> object&#39;s <a class="xref" href="Rezolver.ITargetAdapter.html#Rezolver_ITargetAdapter_CreateTarget_Expression_">CreateTarget(Expression)</a> method.  At least, the supplied</p>
-<p><a class="xref" href="Rezolver.TargetAdapter.html#Rezolver_TargetAdapter">TargetAdapter</a> class does support them.</p>
+targets - for these you should construct an <a class="xref" href="Rezolver.ExpressionTarget.html#Rezolver_ExpressionTarget">ExpressionTarget</a> and let the compiler do the rest.</p>
 <p>When providing custom expressions to be used as targets in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>, it is possible to explicitly define properties/arguments as
-being resolved from the container itself, in exactly the same way as generated by the other factory methods such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IPropertyBindingBehaviour_">Auto&lt;T&gt;(IPropertyBindingBehaviour)</a>
-and <see cref="!:SingletonTargetDictionaryExtensions.RegisterType&lt;TObject&gt;(ITargetContainer, IPropertyBindingBehaviour)"></see>.  To do this, simply call the </p>
+being resolved from the container itself, in exactly the same way as generated by the other factory methods such as <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget_Auto__1_Rezolver_IMemberBindingBehaviour_">Auto&lt;T&gt;(IMemberBindingBehaviour)</a>
+and <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterType&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>.  To do this, simply call the </p>
 <p><a class="xref" href="Rezolver.Functions.html#Rezolver_Functions_Resolve__1">Resolve&lt;T&gt;()</a> function on the object passed into your expression (see the signature of the lambda <em>newExpr</em>),
 and Rezolver will convert that call into a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>.</p>
 </div>
@@ -1149,7 +1171,7 @@ ConstructorTarget for the type 'MyType':
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

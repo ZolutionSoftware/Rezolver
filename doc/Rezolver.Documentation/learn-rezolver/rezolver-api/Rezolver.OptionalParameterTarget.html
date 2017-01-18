@@ -107,19 +107,7 @@ default value is to be used when binding to it.</p>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeTrackingExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeTrackingExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateRezolveContextExpressionForScopeAddCall_Rezolver_CompileContext_Expression_">TargetBase.CreateRezolveContextExpressionForScopeAddCall(CompileContext, Expression)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateScopeSelectionExpression_Rezolver_CompileContext_Expression_">TargetBase.CreateScopeSelectionExpression(CompileContext, Expression)</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpression_Rezolver_CompileContext_">TargetBase.CreateExpression(CompileContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -177,7 +165,7 @@ default value is to be used when binding to it.</p>
                     <td><em>methodParameter</em></td>
                     <td><span class="xref">ParameterInfo</span></td>
                     <td><p>Required - parameter to which this target will be bound.</p>
-<p>Its <see cref="!:ParameterInfo.IsOptional"></see> property must be <code>true</code>.</p>
+<p>Its <see cref="!:ParameterInfo.IsOptional"></see> property must be <code>true</code> otherwise an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">System.ArgumentException</a> is thrown.</p>
 </td>
                   </tr>
                 </tbody>
@@ -190,7 +178,8 @@ default value is to be used when binding to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_OptionalParameterTarget_DeclaredType" data-uid="Rezolver.OptionalParameterTarget.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Always returns the <see cref="!:ParameterInfo.ParameterType"></see> of the <a class="xref" href="Rezolver.OptionalParameterTarget.html#Rezolver_OptionalParameterTarget_MethodParameter">MethodParameter</a></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -218,7 +207,8 @@ default value is to be used when binding to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_OptionalParameterTarget_MethodParameter" data-uid="Rezolver.OptionalParameterTarget.MethodParameter">MethodParameter</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>The parameter to which this target is bound.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -244,7 +234,8 @@ default value is to be used when binding to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_OptionalParameterTarget_SuppressScopeTracking" data-uid="Rezolver.OptionalParameterTarget.SuppressScopeTracking">SuppressScopeTracking</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Possibly going to be removed or at least changed.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -272,7 +263,9 @@ default value is to be used when binding to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_OptionalParameterTarget_UseFallback" data-uid="Rezolver.OptionalParameterTarget.UseFallback">UseFallback</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Always returns true, since using a default argument of a parameter is always considered
+to be a last-resort.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -296,54 +289,6 @@ default value is to be used when binding to it.</p>
               <h5 class="hoverrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_UseFallback">TargetBase.UseFallback</a></div>
               </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="methods">Methods
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_OptionalParameterTarget_CreateExpressionBase_Rezolver_CompileContext_" data-uid="Rezolver.OptionalParameterTarget.CreateExpressionBase(Rezolver.CompileContext)">CreateExpressionBase(CompileContext)</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override Expression CreateExpressionBase(CompileContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hoverrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase_CreateExpressionBase_Rezolver_CompileContext_">TargetBase.CreateExpressionBase(CompileContext)</a></div>
-              </div><!-- .classchild -->
             </article>
           </div>
           
@@ -362,7 +307,7 @@ default value is to be used when binding to it.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>

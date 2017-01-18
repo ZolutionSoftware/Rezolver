@@ -12,6 +12,9 @@ using Rezolver.Compilation;
 
 namespace Rezolver
 {
+	/// <summary>
+	/// Not sure if this is sticking around anyway.  Think the scoping stuff needs a bit of a rethink.
+	/// </summary>
 	public class OverridingScopedContainer : OverridingContainer, IScopedContainer
 	{
 		private ConcurrentDictionary<ResolveContext, ConcurrentBag<object>> _objects;
@@ -44,7 +47,7 @@ namespace Rezolver
 		/// <param name="builder"></param>
 		/// <param name="compiler"></param>
 		public OverridingScopedContainer(IScopedContainer parentScope, IContainer inner = null, ITargetContainer builder = null, ITargetCompiler compiler = null)
-			: base(inner ?? parentScope, builder: builder, compiler: compiler)
+			: base(inner ?? parentScope, targets: builder, compiler: compiler)
 		{
 			_parentScope = parentScope;
 			_objects = new ConcurrentDictionary<ResolveContext, ConcurrentBag<object>>();

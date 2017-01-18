@@ -107,7 +107,7 @@
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_RezolveContext_">CachingContainerBase.GetCompiledRezolveTarget(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(ResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">ContainerBase.GetMissingTarget(Type)</a>
@@ -122,22 +122,22 @@
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">ContainerBase.Targets</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_RezolveContext_">ContainerBase.Resolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_ResolveContext_">ContainerBase.Resolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_RezolveContext_System_Object__">ContainerBase.TryResolve(RezolveContext, Object)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_ResolveContext_System_Object__">ContainerBase.TryResolve(ResolveContext, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CreateLifetimeScope">ContainerBase.CreateLifetimeScope()</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_RezolveContext_">ContainerBase.FetchCompiled(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_ResolveContext_">ContainerBase.FetchCompiled(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_RezolveContext_">ContainerBase.CanResolve(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_ResolveContext_">ContainerBase.CanResolve(ResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_RezolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(RezolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_ResolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(ResolveContext)</a>
                 </div>
                 <div>
                   <span class="xref">Rezolver.ContainerBase.System.IServiceProvider.GetService(System.Type)</span>
@@ -199,7 +199,7 @@ services into it, and then start using it.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_ITargetCompiler_" data-uid="Rezolver.Container.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetCompiler)">Container(ITargetContainer, ITargetCompiler)</h4>
+              <h4 class="hmember" id="Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_Compilation_ITargetCompiler_" data-uid="Rezolver.Container.#ctor(Rezolver.ITargetContainer,Rezolver.Compilation.ITargetCompiler)">Container(ITargetContainer, ITargetCompiler)</h4>
               <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -225,9 +225,9 @@ services into it, and then start using it.</p>
                   </tr>
                   <tr>
                     <td><em>compiler</em></td>
-                    <td><a class="xref" href="Rezolver.ITargetCompiler.html#Rezolver_ITargetCompiler">ITargetCompiler</a></td>
+                    <td><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a></td>
                     <td><p>Optional.  The compiler to be used to turn the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s obtained from the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> 
-into <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> targets that can actually be used at resolve-time.  If not provided, then the <a class="xref" href="Rezolver.TargetCompiler.html#Rezolver_TargetCompiler_Default">Default</a> will
+into <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> targets that can actually be used at resolve-time.  If not provided, then the <a class="xref" href="Rezolver.Compilation.TargetCompiler.html#Rezolver_Compilation_TargetCompiler_Default">Default</a> will
 be used.</p>
 </td>
                   </tr>
@@ -252,7 +252,7 @@ be used.</p>
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            <span>Copyright &copy;2015-2016 Zolution Software Ltd<br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
             
           </div>
         </div>
