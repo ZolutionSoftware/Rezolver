@@ -5339,6 +5339,42 @@ references:
   href: rezolver-api/Rezolver.ScopedContainer.html#Rezolver_ScopedContainer_ParentScope
   commentId: P:Rezolver.ScopedContainer.ParentScope
   fullName: Rezolver.ScopedContainer.ParentScope
+- uid: Rezolver.ScopedContainerScopeExtensions
+  name: ScopedContainerScopeExtensions
+  href: rezolver-api/Rezolver.ScopedContainerScopeExtensions.html#Rezolver_ScopedContainerScopeExtensions
+  commentId: T:Rezolver.ScopedContainerScopeExtensions
+  fullName: Rezolver.ScopedContainerScopeExtensions
+- uid: Rezolver.ScopedContainerScopeExtensions.GetOrAdd(Rezolver.IScopedContainer,Rezolver.ResolveContext,System.Func{Rezolver.ResolveContext,System.Object},System.Boolean)
+  name: GetOrAdd(IScopedContainer, ResolveContext, Func<ResolveContext, Object>, Boolean)
+  href: rezolver-api/Rezolver.ScopedContainerScopeExtensions.html#Rezolver_ScopedContainerScopeExtensions_GetOrAdd_Rezolver_IScopedContainer_Rezolver_ResolveContext_System_Func_Rezolver_ResolveContext_System_Object__System_Boolean_
+  commentId: M:Rezolver.ScopedContainerScopeExtensions.GetOrAdd(Rezolver.IScopedContainer,Rezolver.ResolveContext,System.Func{Rezolver.ResolveContext,System.Object},System.Boolean)
+  name.vb: GetOrAdd(IScopedContainer, ResolveContext, Func(Of ResolveContext, Object), Boolean)
+  fullName: Rezolver.ScopedContainerScopeExtensions.GetOrAdd(Rezolver.IScopedContainer, Rezolver.ResolveContext, System.Func<Rezolver.ResolveContext, System.Object>, System.Boolean)
+  fullName.vb: Rezolver.ScopedContainerScopeExtensions.GetOrAdd(Rezolver.IScopedContainer, Rezolver.ResolveContext, System.Func(Of Rezolver.ResolveContext, System.Object), System.Boolean)
+- uid: Rezolver.ScopedContainerScopeExtensions.GetOrAdd``1(Rezolver.IScopedContainer,Rezolver.ResolveContext,System.Func{Rezolver.ResolveContext,``0},System.Boolean)
+  name: GetOrAdd<T>(IScopedContainer, ResolveContext, Func<ResolveContext, T>, Boolean)
+  href: rezolver-api/Rezolver.ScopedContainerScopeExtensions.html#Rezolver_ScopedContainerScopeExtensions_GetOrAdd__1_Rezolver_IScopedContainer_Rezolver_ResolveContext_System_Func_Rezolver_ResolveContext___0__System_Boolean_
+  commentId: M:Rezolver.ScopedContainerScopeExtensions.GetOrAdd``1(Rezolver.IScopedContainer,Rezolver.ResolveContext,System.Func{Rezolver.ResolveContext,``0},System.Boolean)
+  name.vb: GetOrAdd(Of T)(IScopedContainer, ResolveContext, Func(Of ResolveContext, T), Boolean)
+  fullName: Rezolver.ScopedContainerScopeExtensions.GetOrAdd<T>(Rezolver.IScopedContainer, Rezolver.ResolveContext, System.Func<Rezolver.ResolveContext, T>, System.Boolean)
+  fullName.vb: Rezolver.ScopedContainerScopeExtensions.GetOrAdd(Of T)(Rezolver.IScopedContainer, Rezolver.ResolveContext, System.Func(Of Rezolver.ResolveContext, T), System.Boolean)
+- uid: Rezolver.ScopedContainerScopeExtensions.GetScopeRoot(Rezolver.IScopedContainer)
+  name: GetScopeRoot(IScopedContainer)
+  href: rezolver-api/Rezolver.ScopedContainerScopeExtensions.html#Rezolver_ScopedContainerScopeExtensions_GetScopeRoot_Rezolver_IScopedContainer_
+  commentId: M:Rezolver.ScopedContainerScopeExtensions.GetScopeRoot(Rezolver.IScopedContainer)
+  fullName: Rezolver.ScopedContainerScopeExtensions.GetScopeRoot(Rezolver.IScopedContainer)
+- uid: Rezolver.ScopedContainerScopeExtensions.GetSingleFromScope(Rezolver.IScopedContainer,Rezolver.ResolveContext)
+  name: GetSingleFromScope(IScopedContainer, ResolveContext)
+  href: rezolver-api/Rezolver.ScopedContainerScopeExtensions.html#Rezolver_ScopedContainerScopeExtensions_GetSingleFromScope_Rezolver_IScopedContainer_Rezolver_ResolveContext_
+  commentId: M:Rezolver.ScopedContainerScopeExtensions.GetSingleFromScope(Rezolver.IScopedContainer,Rezolver.ResolveContext)
+  fullName: Rezolver.ScopedContainerScopeExtensions.GetSingleFromScope(Rezolver.IScopedContainer, Rezolver.ResolveContext)
+- uid: Rezolver.ScopedContainerScopeExtensions.TrackIfScopedAndDisposableAndReturn``1(Rezolver.IScopedContainer,``0)
+  name: TrackIfScopedAndDisposableAndReturn<T>(IScopedContainer, T)
+  href: rezolver-api/Rezolver.ScopedContainerScopeExtensions.html#Rezolver_ScopedContainerScopeExtensions_TrackIfScopedAndDisposableAndReturn__1_Rezolver_IScopedContainer___0_
+  commentId: M:Rezolver.ScopedContainerScopeExtensions.TrackIfScopedAndDisposableAndReturn``1(Rezolver.IScopedContainer,``0)
+  name.vb: TrackIfScopedAndDisposableAndReturn(Of T)(IScopedContainer, T)
+  fullName: Rezolver.ScopedContainerScopeExtensions.TrackIfScopedAndDisposableAndReturn<T>(Rezolver.IScopedContainer, T)
+  fullName.vb: Rezolver.ScopedContainerScopeExtensions.TrackIfScopedAndDisposableAndReturn(Of T)(Rezolver.IScopedContainer, T)
 - uid: Rezolver.ScopedTarget
   name: ScopedTarget
   href: rezolver-api/Rezolver.ScopedTarget.html#Rezolver_ScopedTarget

@@ -105,7 +105,6 @@ namespace Rezolver
 		/// given type, using any matched argument bindings from the provided <paramref name="namedArgs" /> dictionary,
 		/// and using <see cref="RezolvedTarget"/> targets for any that are not matched.
 		/// </summary>
-		/// <param name="declaredType">Required.  Type of the object to be constructed.</param>
 		/// <param name="ctor">Required. The constructor to be bound.</param>
 		/// <param name="namedArgs">Optional. Any arguments to be supplied to parameters on the <paramref name="ctor"/>
 		/// by name.  Any parameters for which matches are not found in this dictionary will be automatically
@@ -236,9 +235,9 @@ namespace Rezolver
 		/// on that method for more.
 		/// </summary>
 		/// <param name="declaredType">The of the object to be created by the new <see cref="ConstructorTarget"/></param>
-		/// <param name="newExpr"></param>
-		/// <param name="adapter"></param>
-		/// <returns></returns>
+		/// <param name="newExpr">An expression from which the target can be built - parameter bindings and the specific constructor
+		/// called in the expression will be used to seed the new target.
+		/// </param>
 		public static ITarget FromNewExpression(Type declaredType, NewExpression newExpr)
 		{
 			ConstructorInfo ctor = null;

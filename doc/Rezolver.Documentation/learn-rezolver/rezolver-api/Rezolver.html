@@ -268,15 +268,15 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
 which are specifically keyed either to a particular open generic type or a closed generic built from it.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainerRezolveExtensions.html#Rezolver_IContainerRezolveExtensions">IContainerRezolveExtensions</a></h4>
-                  <section></section>
+                  <section><p>Extension methods for <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> which provide shortcuts for the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>
+operation.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.IRezolveTargetScopingExtensions.html#Rezolver_IRezolveTargetScopingExtensions">IRezolveTargetScopingExtensions</a></h4>
                   <section><p>Extension method(s) to convert targets into scoped targets.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IRezolveTargetSingletonExtensions.html#Rezolver_IRezolveTargetSingletonExtensions">IRezolveTargetSingletonExtensions</a></h4>
                   <section><p>Extension method(s) to convert targets into singleton targets.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.LifetimeScopeRezolverExtensions.html#Rezolver_LifetimeScopeRezolverExtensions">LifetimeScopeRezolverExtensions</a></h4>
-                  <section></section>
                   <h4><a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a></h4>
                   <section><p>This target produces arrays (<a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose 
 individual items are built by ITarget instances.  Primarily used by the <span class="xref">Rezolver.EnumerableTargetContainer</span> and the configuration
@@ -346,6 +346,10 @@ IService instance - go get it&#39;.</p>
 <p>If you want your root container to act as a lifetime scope, then you should use this
 class instead of using <a class="xref" href="Rezolver.Container.html#Rezolver_Container">Container</a></p>
 </section>
+                  <h4><a class="xref" href="Rezolver.ScopedContainerScopeExtensions.html#Rezolver_ScopedContainerScopeExtensions">ScopedContainerScopeExtensions</a></h4>
+                  <section><p>Contains extension methods for the <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a> interface which provide some additional
+shortucts for getting or adding objects from/to scopes.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.ScopedTarget.html#Rezolver_ScopedTarget">ScopedTarget</a></h4>
                   <section><p>A target that produces a single instance of an object within a lifetime scope.</p>
 </section>
@@ -359,7 +363,8 @@ whose lifetimes are slaved to that of a parent <a class="xref" href="Rezolver.IS
 <p>The inner target is available from the <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget_InnerTarget">InnerTarget</a> property.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions">SingletonTargetDictionaryExtensions</a></h4>
-                  <section></section>
+                  <section><p>Extension methods for the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> interface which simplify the registration of singletons.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.TargetBase.html#Rezolver_TargetBase">TargetBase</a></h4>
                   <section><p>Abstract base class, suggested as a starting point for implementations of <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>.</p>
 </section>
