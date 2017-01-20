@@ -603,7 +603,7 @@ on construction (<a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">System.InvalidOperationException</a></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
                     <td><p>If no sutiable constructors can be found.</p>
 </td>
                   </tr>
@@ -641,7 +641,9 @@ on that method for more.</p>
                   <tr>
                     <td><em>newExpr</em></td>
                     <td><span class="xref">NewExpression</span></td>
-                    <td></td>
+                    <td><p>An expression from which the target can be built - parameter bindings and the specific constructor
+called in the expression will be used to seed the new target.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -740,12 +742,12 @@ and Rezolver will convert that call into a <a class="xref" href="Rezolver.Rezolv
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">System.ArgumentNullException</a></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
                     <td><p>If <em>newExpr</em> is null.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">System.ArgumentException</a></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
                     <td><p>If the <em>newExpr</em> does not have a NewExpression as its root (Body) node, or if the type of
 that expression does not equal <em>T</em></p>
 </td>

@@ -183,7 +183,7 @@
                 <pre><code class="lang-csharp hljs">public class CachingContainerBase : ContainerBase, IContainer, IServiceProvider, ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_CachingContainerBase_remarks" class="hremarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>Internally, the class uses a <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd287191(v=vs.110).aspx">System.Collections.Concurrent.ConcurrentDictionary`2</a> to store <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s keyed by the requested type.</p>
+              <div class="markdown level0 remarks"><p>Internally, the class uses a <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd287191(v=vs.110).aspx">ConcurrentDictionary&lt;TKey, TValue&gt;</a> to store <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s keyed by the requested type.</p>
 <p>All the main <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> implementations used directly in an application should ideally inherit from this class, because otherwise every </p>
 <p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> operation would require a compilation phase before the object could be returned, which would be incredibly slow.</p>
 <p>It&#39;s because of this caching that registering new targets in any <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> used by this class is not recommended: because after the first request
