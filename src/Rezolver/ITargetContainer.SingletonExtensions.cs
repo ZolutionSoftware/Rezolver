@@ -9,9 +9,6 @@ using System.Text;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Extension methods for the <see cref="ITargetContainer"/> interface which simplify the registration of singletons.
-	/// </summary>
 	public static class SingletonTargetDictionaryExtensions
 	{
 		/// <summary>

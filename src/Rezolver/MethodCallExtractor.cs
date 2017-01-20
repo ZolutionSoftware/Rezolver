@@ -42,10 +42,6 @@ namespace Rezolver
 			Visit(e);
 		}
 
-		/// <summary>
-		/// Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />.
-		/// </summary>
-		/// <param name="node">The expression to visit.</param>
 		protected override Expression VisitMethodCall(MethodCallExpression node)
 		{
 			if (_callExpr == null)
@@ -53,10 +49,6 @@ namespace Rezolver
 			return base.VisitMethodCall(node);
 		}
 
-		/// <summary>
-		/// Visits the children of the <see cref="T:System.Linq.Expressions.NewExpression" />.
-		/// </summary>
-		/// <param name="node">The expression to visit.</param>
 		protected override Expression VisitNew(NewExpression node)
 		{
 			if (_newExpr == null)

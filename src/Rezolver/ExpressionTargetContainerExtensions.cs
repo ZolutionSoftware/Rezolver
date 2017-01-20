@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Linq.Expressions;
 
@@ -21,7 +22,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -37,7 +37,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -54,7 +53,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -71,7 +69,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -89,7 +86,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -107,7 +103,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -126,7 +121,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -145,7 +139,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -165,7 +158,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -185,7 +177,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -206,7 +197,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -227,7 +217,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -249,7 +238,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -271,7 +259,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -294,7 +281,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -317,7 +303,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -341,7 +326,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -365,7 +349,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -390,7 +373,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -415,7 +397,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -441,7 +422,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -467,7 +447,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -494,7 +473,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -521,7 +499,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -549,7 +526,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -577,7 +553,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -606,7 +581,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -635,7 +609,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -665,7 +638,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -695,7 +667,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 
@@ -726,7 +697,6 @@ namespace Rezolver
 		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
 		/// <param name="targetContainer">The container which will receive the registration</param>
 		/// <param name="expression">The lambda expression that is to be converted into a target and registered</param>
-		/// <param name="type">The type for which the registration will be made, if different from the expression's type</param>
 		/// <remarks>This function ultimately forwards the call through to the non generic extension method
 		/// <see cref="ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)"/>, which 
 		/// simply wraps the expression into an <see cref="ExpressionTarget"/> and then registers it against either 

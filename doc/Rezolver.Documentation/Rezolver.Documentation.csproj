@@ -149,8 +149,7 @@
     <Content Include="learn-rezolver\search-stopwords.json" />
     <Content Include="learn-rezolver\styles\docfx.css.ignore" />
     <Content Include="learn-rezolver\xrefmap.yml" />
-    <Content Include="namespaces.4.5.2.zip" />
-    <Content Include="msdn.4.5.2.zip" />
+    <None Include="msdn.4.5.2.zip" />
     <None Include="packages.config" />
     <Content Include="rezolver-usage-todo\nuget-packages\index.md" />
     <Content Include="rezolver-usage-todo\nuget-packages\rezolver.configuration.md" />

@@ -9,11 +9,7 @@ using System.Text;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Contains extension methods for the <see cref="IScopedContainer" /> interface which provide some additional
-	/// shortucts for getting or adding objects from/to scopes.
-	/// </summary>
-	public static partial class ScopedContainerScopeExtensions
+	public static partial class LifetimeScopeRezolverExtensions
 	{
 		/// <summary>
 		/// Retrieves a single instance that was previously added to the scope (or,
@@ -66,16 +62,6 @@ namespace Rezolver
 			return scope;
 		}
 
-
-		/// <summary>
-		/// Retrieves an object from scope or adds it (by calling the <paramref name="factory"/> before returning it.
-		/// </summary>
-		/// <typeparam name="T">Type of object being created and/or retrieved from the scope.</typeparam>
-		/// <param name="scope">The scope.</param>
-		/// <param name="context">The context.</param>
-		/// <param name="factory">The factory.</param>
-		/// <param name="disposableOnly">if set to <c>true</c> then object only gets added to the scope if it's
-		/// has the IDisposable interface..</param>
 		public static T GetOrAdd<T>(this IScopedContainer scope, ResolveContext context, Func<ResolveContext, T> factory, bool disposableOnly = true)
 		{
 			//this is a temporary implementation of this method for the time being which is not entirely thread-safe.
@@ -91,14 +77,6 @@ namespace Rezolver
 			return (T)obj;
 		}
 
-		/// <summary>
-		/// Retrieves an object from scope or adds it (by calling the <paramref name="factory"/> before returning it.
-		/// </summary>
-		/// <param name="scope">The scope.</param>
-		/// <param name="context">The context.</param>
-		/// <param name="factory">The factory.</param>
-		/// <param name="disposableOnly">if set to <c>true</c> then object only gets added to the scope if it's
-		/// has the IDisposable interface..</param>
 		public static object GetOrAdd(this IScopedContainer scope, ResolveContext context, Func<ResolveContext, object> factory, bool disposableOnly = true)
 		{
 			//this is a temporary implementation of this method for the time being which is not entirely thread-safe.
