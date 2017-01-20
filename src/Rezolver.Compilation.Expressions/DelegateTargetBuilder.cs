@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,10 @@ namespace Rezolver.Compilation.Expressions
 	/// <summary>
 	/// Specialised builder for the <see cref="DelegateTarget"/> class and all its derivatives.
 	/// </summary>
-	/// <seealso cref="Rezolver.Compilation.Expressions.ExpressionBuilderBase{Rezolver.DelegateTarget}" />
 	public class DelegateTargetBuilder : ExpressionBuilderBase<DelegateTarget>
 	{
 		/// <summary>
-		/// Builds an expression from the specified target for the given <see cref="Rezolver.IExpressionCompileContext" />
-		/// OVerride this to implement the compilation for your target type.
+		/// Builds an expression from the specified target for the given <see cref="IExpressionCompileContext" />
 		/// </summary>
 		/// <param name="target">The target whose expression is to be built.</param>
 		/// <param name="context">The compilation context.</param>

@@ -1,4 +1,5 @@
 ﻿using Rezolver.Logging;
+using Rezolver.Targets;
 using Rezolver.Tests.TestTypes;
 using System;
 using System.Collections.Generic;

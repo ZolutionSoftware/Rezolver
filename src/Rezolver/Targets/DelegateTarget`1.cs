@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 
 	/// <summary>
@@ -574,7 +573,12 @@ namespace Rezolver
 
 		}
 	}	
-	
+}
+
+namespace Rezolver
+{
+	using Rezolver.Targets;
+
 	// extension of partial class found in ITargetContainer.DelegateExtensions
 	public static partial class DelegateTargetContainerExtensions
 	{ 

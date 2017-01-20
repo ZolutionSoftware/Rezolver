@@ -49,7 +49,7 @@ namespace Rezolver.Tests.Configuration
 
     protected virtual Container CreateRezolver(ITargetContainer builder)
     {
-      return new Container(builder, new TargetDelegateCompiler());
+      return new Container(builder);
     }
 
     [Fact]

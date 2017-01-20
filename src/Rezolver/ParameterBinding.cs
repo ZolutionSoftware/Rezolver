@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Rezolver.Compilation;
+using Rezolver.Targets;
 
 namespace Rezolver
 {
@@ -62,7 +63,7 @@ namespace Rezolver
 		public virtual ITarget Resolve(ICompileContext context)
 		{
 			if (Target is RezolvedTarget)
-				return ((RezolvedTarget)Target).Resolve(context.NewContext(Parameter.ParameterType));
+				return ((RezolvedTarget)Target).Bind(context.NewContext(Parameter.ParameterType));
 
 			return Target;
 		}

@@ -68,7 +68,7 @@ namespace Rezolver.Tests.Configuration
 
       Assert.IsType<TargetContainer>(builder);
 
-      var container = new Container(builder, new TargetDelegateCompiler());
+      var container = new Container(builder);
       var str = container.Resolve<string>();
       Assert.Equal("Hello world", str);
       var en = container.Resolve<IEnumerable<int>>();

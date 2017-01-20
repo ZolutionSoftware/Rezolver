@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Rezolver.Compilation;
+using Rezolver.Targets;
 
 namespace Rezolver
 {

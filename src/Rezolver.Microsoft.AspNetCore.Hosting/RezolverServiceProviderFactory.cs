@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Rezolver.Logging;
+using Rezolver.Compilation;
 using System;
 
 namespace Rezolver

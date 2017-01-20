@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// Represents the action of implementing a common <see cref="DecoratedType"/> by decorating one instance 
@@ -20,7 +20,7 @@ namespace Rezolver
 	/// or its non-generic alternative because the target needs a <see cref="DecoratingTargetContainer"/>
 	/// to work properly (the creation of which is automatically handled by these extension methods).
 	/// </summary>
-	/// <seealso cref="Rezolver.TargetBase" />
+	/// <seealso cref="TargetBase" />
 	public class DecoratorTarget : TargetBase
 	{
 		/// <summary>

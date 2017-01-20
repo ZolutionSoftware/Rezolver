@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Targets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -83,7 +84,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDisposeOnceOnly()
     {
-      Container parentRezolver = new Container(compiler: new TargetDelegateCompiler());
+      Container parentRezolver = new Container();
 
       parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
       ITestDisposable instance;
@@ -99,7 +100,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDisposeTwoInstances()
     {
-      Container parentRezolver = new Container(compiler: new TargetDelegateCompiler());
+      Container parentRezolver = new Container();
 
       parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
       int totalInstanceCount = DisposableType.TotalDisposeCount;
@@ -122,7 +123,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDisposeNestedScope()
     {
-      Container parentRezolver = new Container(compiler: new TargetDelegateCompiler());
+      Container parentRezolver = new Container();
 
       parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
       ITestDisposable instance = null;
@@ -139,7 +140,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldDisposeNestedScopeFirst()
     {
-      Container parentRezolver = new Container(compiler: new TargetDelegateCompiler());
+      Container parentRezolver = new Container();
 
       parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
       int totalDisposeCount = DisposableType.TotalDisposeCount;
@@ -164,7 +165,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAutoDisposeNestedScope()
     {
-      Container parentRezolver = new Container(compiler: new TargetDelegateCompiler());
+      Container parentRezolver = new Container();
 
       parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
       int totalDisposeCount = DisposableType.TotalDisposeCount;

@@ -5,7 +5,7 @@
 using System;
 using System.Reflection;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// Used specifically when binding arguments to method parameters when a parameter is optional and its

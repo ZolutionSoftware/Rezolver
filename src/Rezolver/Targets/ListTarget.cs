@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// This target produces arrays (<see cref="AsArray"/> = <c>true</c>) or lists (<see cref="AsArray"/> = <c>false</c>) whose 

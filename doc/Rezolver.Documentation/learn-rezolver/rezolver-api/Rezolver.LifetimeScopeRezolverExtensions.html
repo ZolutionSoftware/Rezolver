@@ -137,12 +137,12 @@
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_LifetimeScopeRezolverExtensions_GetOrAdd_Rezolver_IScopedContainer_Rezolver_ResolveContext_System_Func_Rezolver_ResolveContext_System_Object__System_Boolean_" data-uid="Rezolver.LifetimeScopeRezolverExtensions.GetOrAdd(Rezolver.IScopedContainer,Rezolver.ResolveContext,System.Func{Rezolver.ResolveContext,System.Object},System.Boolean)">GetOrAdd(IScopedContainer, ResolveContext, Func&lt;ResolveContext, Object&gt;, Boolean)</h4>
+              <h4 class="hmember" id="Rezolver_LifetimeScopeRezolverExtensions_GetOrAdd__1_Rezolver_IScopedContainer_Rezolver_RezolveContext_System_Func_Rezolver_RezolveContext___0__System_Boolean_" data-uid="Rezolver.LifetimeScopeRezolverExtensions.GetOrAdd``1(Rezolver.IScopedContainer,Rezolver.RezolveContext,System.Func{Rezolver.RezolveContext,``0},System.Boolean)">GetOrAdd&lt;T&gt;(IScopedContainer, RezolveContext, Func&lt;RezolveContext, T&gt;, Boolean)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static object GetOrAdd(this IScopedContainer scope, ResolveContext context, Func&lt;ResolveContext, object&gt; factory, bool disposableOnly = true)</code></pre>
+                <pre><code class="lang-csharp hljs">public static T GetOrAdd&lt;T&gt;(this IScopedContainer scope, RezolveContext context, Func&lt;RezolveContext, T&gt; factory, bool disposableOnly = true)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -161,70 +161,12 @@
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td></td>
                   </tr>
                   <tr>
                     <td><em>factory</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>disposableOnly</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_LifetimeScopeRezolverExtensions_GetOrAdd__1_Rezolver_IScopedContainer_Rezolver_ResolveContext_System_Func_Rezolver_ResolveContext___0__System_Boolean_" data-uid="Rezolver.LifetimeScopeRezolverExtensions.GetOrAdd``1(Rezolver.IScopedContainer,Rezolver.ResolveContext,System.Func{Rezolver.ResolveContext,``0},System.Boolean)">GetOrAdd&lt;T&gt;(IScopedContainer, ResolveContext, Func&lt;ResolveContext, T&gt;, Boolean)</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static T GetOrAdd&lt;T&gt;(this IScopedContainer scope, ResolveContext context, Func&lt;ResolveContext, T&gt; factory, bool disposableOnly = true)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>scope</em></td>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>factory</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a>, T&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a>, T&gt;</td>
                     <td></td>
                   </tr>
                   <tr>
@@ -315,16 +257,16 @@ for the passed scope.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_LifetimeScopeRezolverExtensions_GetSingleFromScope_Rezolver_IScopedContainer_Rezolver_ResolveContext_" data-uid="Rezolver.LifetimeScopeRezolverExtensions.GetSingleFromScope(Rezolver.IScopedContainer,Rezolver.ResolveContext)">GetSingleFromScope(IScopedContainer, ResolveContext)</h4>
+              <h4 class="hmember" id="Rezolver_LifetimeScopeRezolverExtensions_GetSingleFromScope_Rezolver_IScopedContainer_Rezolver_RezolveContext_" data-uid="Rezolver.LifetimeScopeRezolverExtensions.GetSingleFromScope(Rezolver.IScopedContainer,Rezolver.RezolveContext)">GetSingleFromScope(IScopedContainer, RezolveContext)</h4>
               <div class="markdown level1 summary"><p>Retrieves a single instance that was previously added to the scope (or,
-optionally parent scopes) through a call to <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">AddToScope(Object, ResolveContext)</a> 
-with a ResolveContext matching the one passed.</p>
+optionally parent scopes) through a call to <span class="xref">AddToScope(Object, RezolveContext)</span> 
+with a RezolveContext matching the one passed.</p>
 <p>Note - if multiple matches are found in a single scope, an InvalidOperationException will be thrown.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static object GetSingleFromScope(this IScopedContainer scope, ResolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public static object GetSingleFromScope(this IScopedContainer scope, RezolveContext context)</code></pre>
               </div>
               <h5 class="hparameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -345,7 +287,7 @@ are to be searched.</p>
                   </tr>
                   <tr>
                     <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a></td>
                     <td><p>Required.  The context whose properties will be used to find the
 matching disposable.</p>
 </td>

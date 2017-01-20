@@ -44,10 +44,10 @@ namespace Rezolver.Compilation.Expressions.Tests
 			container.UseExpressionCompiler();
 			//okay, so yes: repeating the assertion from above.
 			var compiler = Assert.IsType<ExpressionCompiler>(container.Resolve<ITargetCompiler>());
-
+			var contextProvider = Assert.IsType<ExpressionCompiler>(container.Resolve<ICompileContextProvider>());
 			//in normal operation, the Container object impersonates its own target container, 
 			//hence the doubling up of the parameter here.
-			var builder = compiler.ResolveBuilder(target, new CompileContext(container, container, target.DeclaredType));
+			var builder = compiler.ResolveBuilder(target, Assert.IsType<IExpressionCompileContext>(contextProvider.CreateContext(new ResolveContext(container, target.DeclaredType), container)));
 			Assert.NotNull(builder);
 			Assert.IsAssignableFrom(typeof(IExpressionBuilder<>).MakeGenericType(target.GetType()), builder);
 		}

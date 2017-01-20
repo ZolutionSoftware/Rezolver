@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Rezolver.Compilation;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// Implements <see cref="ITarget"/> by wrapping a single instance that's already been constructed by application code.
@@ -98,27 +98,6 @@ namespace Rezolver
 			{
 				return _declaredType;
 			}
-		}
-	}
-
-	/// <summary>
-	/// Extension method(s) to help create the <see cref="ObjectTarget"/> target.
-	/// </summary>
-	public static class ObjectTargetExtensions
-	{
-		/// <summary>
-		/// Wraps the instance on which this is invoked as an <see cref="ObjectTarget"/> that can be registered into an <see cref="ITargetContainer"/>.
-		/// 
-		/// The parameters are direct analogues of the parameters on the type's constructor (see <see cref="ObjectTarget.ObjectTarget(object, Type, bool)"/>).
-		/// </summary>
-		/// <typeparam name="T">The type of object being wrapped</typeparam>
-		/// <param name="obj">the object being wrapped</param>
-		/// <param name="declaredType">Optional.  The type which is to be set as the <see cref="ObjectTarget.DeclaredType"/> of the created target.</param>
-		/// <param name="suppressScopeTracking">Probably going to be removed or changed.</param>
-		/// <returns>A new object target that wraps the object <paramref name="obj"/>.</returns>
-		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null, bool suppressScopeTracking = true)
-		{
-			return new ObjectTarget(obj, declaredType ?? typeof(T), suppressScopeTracking: suppressScopeTracking);
 		}
 	}
 }

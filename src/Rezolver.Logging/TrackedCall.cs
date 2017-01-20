@@ -121,6 +121,7 @@ namespace Rezolver.Logging
 			Arguments = GetMemberValueStringDictionary(arguments);
 			if (Parent != null)
 				Parent.ChildCalls.Add(this);
+			_initialised = true;
 		}
 
 		protected virtual void OnMessageAdded(TrackedCallMessage msg)

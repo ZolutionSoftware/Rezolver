@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,6 @@ namespace Rezolver.Compilation.Expressions
 	/// be compiled by an <see cref="IExpressionCompiler"/> after a <see cref="TargetExpressionRewriter"/> has been used to
 	/// expand any targets embedded in the expression.
 	/// </summary>
-	/// <seealso cref="Rezolver.Compilation.Expressions.ExpressionBuilderBase{Rezolver.ExpressionTarget}" />
 	public class ExpressionTargetBuilder : ExpressionBuilderBase<ExpressionTarget>
 	{
 		internal static readonly MethodInfo[] RezolveMethods =
@@ -29,7 +29,8 @@ namespace Rezolver.Compilation.Expressions
 		};
 
 		/// <summary>
-		/// The work horse for the TargetAdapter
+		/// rewrites the expression from an ExpressionTarget into something we can actually compile and use
+		/// in the context of a call to a container's Resolve method.
 		/// </summary>
 		/// <seealso cref="System.Linq.Expressions.ExpressionVisitor" />
 		private class ExpressionTranslator : ExpressionVisitor
@@ -43,6 +44,8 @@ namespace Rezolver.Compilation.Expressions
 
 			internal Type ExtractRezolveCallType(Expression e)
 			{
+				//TODO: expand the behaviour here to pick up calls to a ResolveContext's Resolve method (again)
+				//rather than just relying on the Functions.Resolve static function.
 				var methodExpr = e as MethodCallExpression;
 
 				if (methodExpr == null || !methodExpr.Method.IsGenericMethod)
@@ -63,7 +66,8 @@ namespace Rezolver.Compilation.Expressions
 
 			protected override Expression VisitNew(NewExpression node)
 			{
-				return new TargetExpression(ConstructorTarget.FromNewExpression(node.Type, node));
+				//we have to use the base's Visitor code so that argument bindings are translated correctly
+				return new TargetExpression(ConstructorTarget.FromNewExpression(node.Type, (NewExpression)base.VisitNew(node)));
 			}
 
 			protected override Expression VisitMemberInit(MemberInitExpression node)

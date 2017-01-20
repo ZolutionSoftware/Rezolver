@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Rezolver.Compilation;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// A target that binds to a type's constructor with zero or more arguments supplied by other <see cref="ITarget"/>s and, optionally
@@ -151,12 +151,12 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <param name="ctor">The ctor.</param>
-		/// <param name="propertyBindingBehaviour">The property binding behaviour.</param>
+		/// <param name="memberBindingBehaviour">The property binding behaviour.</param>
 		/// <param name="parameterBindings">The parameter bindings.</param>
 		/// <param name="suppliedArgs">The supplied arguments.</param>
 		private ConstructorTarget(Type type,
 			ConstructorInfo ctor,
-			IMemberBindingBehaviour propertyBindingBehaviour,
+			IMemberBindingBehaviour memberBindingBehaviour,
 			ParameterBinding[] parameterBindings,
 			IDictionary<string, ITarget> suppliedArgs)
 		{
@@ -167,7 +167,7 @@ namespace Rezolver
 				type.MustNot(t => TypeHelpers.IsInterface(t) || TypeHelpers.IsAbstract(t), "Type must not be an interface or an abstract class", nameof(type));
 			}
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
-			MemberBindingBehaviour = propertyBindingBehaviour;
+			MemberBindingBehaviour = memberBindingBehaviour;
 			_namedArgs = suppliedArgs ?? new Dictionary<string, ITarget>();
 		}
 

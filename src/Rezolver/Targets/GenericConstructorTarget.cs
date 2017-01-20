@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using Rezolver.Compilation;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// Equivalent of <see cref="ConstructorTarget"/> but for open generic types.
@@ -16,7 +16,7 @@ namespace Rezolver
 	/// So, this will handle the open generic MyType&lt;,&gt;, for example, whereas <see cref="ConstructorTarget"/>
 	/// would handle the closed type MyType&lt;int, string&gt;.
 	/// </summary>
-	/// <seealso cref="Rezolver.TargetBase" />
+	/// <seealso cref="TargetBase" />
 	public class GenericConstructorTarget : TargetBase
 	{
 		private static Type[] EmptyTypes = new Type[0];

@@ -1,4 +1,5 @@
-﻿using Rezolver.Tests.TestTypes;
+﻿using Rezolver.Targets;
+using Rezolver.Tests.TestTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,7 +96,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowAPropertyToBeSet()
     {
-      Container container = new Container(compiler: new TargetDelegateCompiler());
+      Container container = new Container();
       container.RegisterExpression(c => new HasProperty() { Value = 1 });
 
       var result = (HasProperty)container.Resolve(typeof(HasProperty));
@@ -105,7 +106,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAllowAPropertyToBeResolved()
     {
-      Container container = new Container(compiler: new TargetDelegateCompiler());
+      Container container = new Container();
       container.Register((10).AsObjectTarget());
       container.RegisterExpression(c => new HasProperty() { Value = Functions.Resolve<int>() });
       var result = (HasProperty)container.Resolve(typeof(HasProperty));
@@ -115,7 +116,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAutoDiscoverProperties()
     {
-      Container container = new Container(compiler: new TargetDelegateCompiler());
+      Container container = new Container();
       container.Register((25).AsObjectTarget());
       container.Register(ConstructorTarget.Auto<HasProperty>(DefaultMemberBindingBehaviour.Instance));
       var result = (HasProperty)container.Resolve(typeof(HasProperty));
@@ -125,7 +126,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldAutoDiscoverFields()
     {
-      Container container = new Container(compiler: new TargetDelegateCompiler());
+      Container container = new Container();
       container.Register("Hello world".AsObjectTarget());
       container.Register(ConstructorTarget.Auto<HasField>(DefaultMemberBindingBehaviour.Instance));
       var result = (HasField)container.Resolve(typeof(HasField));
@@ -135,7 +136,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldIgnoreFieldsAndProperties()
     {
-      Container container = new Container(compiler: new TargetDelegateCompiler());
+      Container container = new Container();
       container.Register((100).AsObjectTarget());
       container.RegisterType<IgnoredPropertyAndField>(DefaultMemberBindingBehaviour.Instance);
       var result = container.Resolve<IgnoredPropertyAndField>();
@@ -147,7 +148,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldChainAutoDiscoveredPropertiesAndFields()
     {
-      Container container = new Container(compiler: new TargetDelegateCompiler());
+      Container container = new Container();
       container.Register("hello universe".AsObjectTarget());
       container.Register((500).AsObjectTarget());
       container.Register(ConstructorTarget.Auto<HasField>(DefaultMemberBindingBehaviour.Instance));

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Rezolver.Compilation;
 
 namespace Rezolver.Logging
 {
@@ -18,8 +19,6 @@ namespace Rezolver.Logging
 		{
 			return $"(#{_id} {GetType().Name})";
 		}
-
-		private bool _disposed;
 
 		protected internal ICallTracker Logger { get; private set; }
 

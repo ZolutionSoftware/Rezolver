@@ -8,7 +8,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// A target that simply creates a default instance of a given type.  I.e. the same

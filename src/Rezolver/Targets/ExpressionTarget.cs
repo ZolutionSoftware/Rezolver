@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Rezolver.Compilation;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// A generic target for all expressions not explicitly supported by a particular target.

@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace Rezolver.Compilation.Expressions
 	/// <summary>
 	/// An <see cref="IExpressionBuilder"/> specialised for building expressions for the <see cref="ListTarget"/> target.
 	/// </summary>
-	/// <seealso cref="Rezolver.Compilation.Expressions.ExpressionBuilderBase{Rezolver.ListTarget}" />
 	public class ListTargetBuilder : ExpressionBuilderBase<ListTarget>
 	{
 		/// <summary>

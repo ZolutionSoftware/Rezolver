@@ -1,4 +1,5 @@
-﻿using Rezolver.Logging;
+﻿using Rezolver.Compilation;
+using Rezolver.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;

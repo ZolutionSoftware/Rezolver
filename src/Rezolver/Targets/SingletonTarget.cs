@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Threading;
 using Rezolver.Compilation;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// A target which applies the singleton pattern to any <see cref="ITarget"/>.
@@ -91,23 +91,6 @@ namespace Rezolver
 		public override bool SupportsType(Type type)
 		{
 			return InnerTarget.SupportsType(type);
-		}
-	}
-
-	/// <summary>
-	/// Extension method(s) to convert targets into singleton targets.
-	/// </summary>
-	public static class IRezolveTargetSingletonExtensions
-	{
-		/// <summary>
-		/// Constructs a <see cref="SingletonTarget"/> that wraps the target on which the method is invoked.
-		/// </summary>
-		/// <param name="target"></param>
-		/// <returns></returns>
-		public static SingletonTarget Singleton(this ITarget target)
-		{
-			target.MustNotBeNull(nameof(target));
-			return new SingletonTarget(target);
 		}
 	}
 }

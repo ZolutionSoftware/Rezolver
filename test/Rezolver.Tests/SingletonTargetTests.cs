@@ -1,4 +1,5 @@
-﻿using Rezolver.Tests.TestTypes;
+﻿using Rezolver.Targets;
+using Rezolver.Tests.TestTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

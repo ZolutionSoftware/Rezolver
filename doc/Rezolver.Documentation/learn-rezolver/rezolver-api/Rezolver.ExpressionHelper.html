@@ -94,8 +94,8 @@
               
               <h1 id="Rezolver_ExpressionHelper" data-uid="Rezolver.ExpressionHelper">Class ExpressionHelper
               </h1>
-              <div class="markdown level0 summary"><p>This static class contains methods and properties to aid in building expressions in the <span class="xref">Rezolver.ITarget.CreateExpression(Rezolver.CompileContext)</span>
-method.</p>
+              <div class="markdown level0 summary"><p>This static class contains methods and properties to aid in building expressions in an 
+implementation of the <span class="xref">Rezolver.ITarget.CreateExpression(Rezolver.CompileContext)</span> method.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -106,32 +106,32 @@ method.</p>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">ToString()</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Equals(Object)</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Equals(Object, Object)</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">ReferenceEquals(Object, Object)</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">GetHashCode()</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">GetType()</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">MemberwiseClone()</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
               <h5 id="Rezolver_ExpressionHelper_syntax" class="hsyntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class ExpressionHelper</code></pre>
+                <pre><code class="lang-csharp hljs">public static class ExpressionHelper</code></pre>
               </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="fields">Fields
@@ -168,12 +168,13 @@ a target.</p>
               <div class="classchild">
               
               
-              <h4 class="hmember" id="Rezolver_ExpressionHelper_RezolveContextParameter" data-uid="Rezolver.ExpressionHelper.RezolveContextParameter">RezolveContextParameter</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 class="hmember" id="Rezolver_ExpressionHelper_RezolveContextParameterExpression" data-uid="Rezolver.ExpressionHelper.RezolveContextParameterExpression">RezolveContextParameterExpression</h4>
+              <div class="markdown level1 summary"><p>The default <a class="xref" href="Rezolver.RezolveContext.html#Rezolver_RezolveContext">RezolveContext</a> parameter expression to be used during code generation in an implementation of <span class="xref">Rezolver.ITarget.CreateExpression(Rezolver.CompileContext)</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static readonly ParameterExpression RezolveContextParameter</code></pre>
+                <pre><code class="lang-csharp hljs">public static readonly ParameterExpression RezolveContextParameterExpression</code></pre>
               </div>
               <h5 class="fieldValue">Field Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -195,7 +196,7 @@ a target.</p>
               
               
               <h4 class="hmember" id="Rezolver_ExpressionHelper_Scope_GetOrAddGenericMethod" data-uid="Rezolver.ExpressionHelper.Scope_GetOrAddGenericMethod">Scope_GetOrAddGenericMethod</h4>
-              <div class="markdown level1 summary"><p>A MethodInfo object representing the generic definition <see cref="!:LifetimeScopeRezolverExtensions.GetOrAdd<T>(IScopedContainer, RezolveContext, Func<RezolveContext, T>, bool, bool)"></see></p>
+              <div class="markdown level1 summary"><p>A MethodInfo object representing the generic definition <see cref="!:LifetimeScopeRezolverExtensions.GetOrAdd&lt;T&gt;(IScopedContainer, RezolveContext, Func&lt;RezolveContext, T&gt;, bool, bool)"></see></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -318,7 +319,7 @@ method is the code we&#39;d normally produce for a target.</p>
               
               <h4 class="hmember" id="Rezolver_ExpressionHelper_GetResolveLambdaForTarget_Rezolver_ITarget_Rezolver_CompileContext_" data-uid="Rezolver.ExpressionHelper.GetResolveLambdaForTarget(Rezolver.ITarget,Rezolver.CompileContext)">GetResolveLambdaForTarget(ITarget, CompileContext)</h4>
               <div class="markdown level1 summary"><p>First gets the lambda body using <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_GetLambdaBodyForTarget_Rezolver_ITarget_Rezolver_CompileContext_">GetLambdaBodyForTarget(ITarget, CompileContext)</a>, then
-passes that as the body for the returned expression, using also the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a></p>
+passes that as the body for the returned expression, using also the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextExpression">RezolveContextExpression</a></p>
 <p><see cref="!:ParameterExpression"></see> from the <em>context</em> parameter as the expression for the RezolveContext that&#39;s
 passed to the compiled method when invoked.</p>
 </div>
@@ -369,7 +370,11 @@ passed to the compiled method when invoked.</p>
               
               
               <h4 class="hmember" id="Rezolver_ExpressionHelper_Make_Scope_GetOrAddCallExpression_Rezolver_CompileContext_System_Type_LambdaExpression_Expression_" data-uid="Rezolver.ExpressionHelper.Make_Scope_GetOrAddCallExpression(Rezolver.CompileContext,System.Type,LambdaExpression,Expression)">Make_Scope_GetOrAddCallExpression(CompileContext, Type, LambdaExpression, Expression)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Makes an expression which represents calling the <a class="xref" href="Rezolver.LifetimeScopeRezolverExtensions.html#Rezolver_LifetimeScopeRezolverExtensions_GetOrAdd__1_Rezolver_IScopedContainer_Rezolver_RezolveContext_System_Func_Rezolver_RezolveContext___0__System_Boolean_">GetOrAdd&lt;T&gt;(IScopedContainer, RezolveContext, Func&lt;RezolveContext, T&gt;, Boolean)</a>
+function for the passed <em>objectType</em>.</p>
+<p>Used automatically by the built-in scope tracking behaviour, but can also be used by your own custom target if you want
+to take control of its scope tracking behaviour.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -388,22 +393,27 @@ passed to the compiled method when invoked.</p>
                   <tr>
                     <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext">CompileContext</a></td>
-                    <td></td>
+                    <td><p>The compile context.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>objectType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Type of the object to be stored or retrieved.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>factoryExpression</em></td>
                     <td><span class="xref">LambdaExpression</span></td>
-                    <td></td>
+                    <td><p>Lambda which should be executed to obtain a new instance if a matching object is not already in scope.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>iDisposableOnly</em></td>
                     <td><span class="xref">Expression</span></td>
-                    <td></td>
+                    <td><p>Expected to be a boolean expression indicating whether only IDisposables should be tracked in the scope.  The default 
+(if not provided) then will be set to &#39;true&#39;.</p>
+</td>
                   </tr>
                 </tbody>
               </table>

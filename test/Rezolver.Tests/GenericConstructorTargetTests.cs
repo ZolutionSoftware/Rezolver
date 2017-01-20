@@ -1,4 +1,5 @@
-﻿using Rezolver.Tests.TestTypes;
+﻿using Rezolver.Targets;
+using Rezolver.Tests.TestTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Rezolver.Tests
     {
       //similar test to above, but we're testing that it works when you put the target inside the
       //default resolver.
-      var container = new Container(compiler: new TargetDelegateCompiler());
+      var container = new Container();
       container.Register(GenericConstructorTarget.Auto(typeof(GenericNoCtor<>)));
       var instance = (GenericNoCtor<int>)container.Resolve(typeof(GenericNoCtor<int>));
       Assert.NotNull(instance);
@@ -50,7 +51,7 @@ namespace Rezolver.Tests
     public void ShouldRezolveAGenericClass()
     {
       //in this one, using DefaultRezolver, we're going to test a few parameter types
-      var container = new Container(compiler: new TargetDelegateCompiler());
+      var container = new Container();
       container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
       container.Register((2).AsObjectTarget());
       container.Register((3).AsObjectTarget(typeof(int?)));
@@ -70,7 +71,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldRezolveAClosedGenericDependency()
     {
-      var container = new Container(compiler: new TargetDelegateCompiler());
+      var container = new Container();
       container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
       container.Register((2).AsObjectTarget());
       container.Register(ConstructorTarget.Auto<HasGenericDependency>());
@@ -88,7 +89,7 @@ namespace Rezolver.Tests
       //generic.
       //note that this isn't the most complicated it can get, however: that would be using
       //the type argument as a type argument to another open generic dependency.  That one is on it's way.
-      var container = new Container(compiler: new TargetDelegateCompiler());
+      var container = new Container();
 
       container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
       container.Register(GenericConstructorTarget.Auto(typeof(GenericNoCtor<>)));
@@ -105,7 +106,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveNestedeOpenGenericDependency()
     {
-      var container = new Container(compiler: new TargetDelegateCompiler());
+      var container = new Container();
 
       container.Register((10).AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
@@ -122,7 +123,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveGenericViaInterface()
     {
-      var container = new Container(compiler: new TargetDelegateCompiler());
+      var container = new Container();
       container.Register((20).AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
 
@@ -157,7 +158,7 @@ namespace Rezolver.Tests
     [Fact]
     public void ShouldResolveClosedGenericViaInterfaceDependency()
     {
-      var container = new Container(compiler: new TargetDelegateCompiler());
+      var container = new Container();
       container.Register((30).AsObjectTarget());
       container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
       container.Register(ConstructorTarget.Auto<HasGenericInterfaceDependency>());

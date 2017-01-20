@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Rezolver.Compilation;
+using Rezolver.Targets;
 
 namespace Rezolver
 {
@@ -21,7 +22,9 @@ namespace Rezolver
 			//if you're looking to re-enter the compilation process for a particular
 			//target - then you should request our compiler via the type IExpressionCompiler 
 			targets.RegisterObject<IExpressionCompiler>(compiler);
+			targets.RegisterObject<ICompileContextProvider>(compiler);
 			//and then we have all the expression builders.
+			//TODO: Implement a RegisterExpressionBuilder<TTarget>(this ITargetContainer, IExpressionBuilder<TTarget>>) method
 			targets.RegisterObject<IExpressionBuilder<ConstructorTarget>>(new ConstructorTargetBuilder());
 
 			return targets;

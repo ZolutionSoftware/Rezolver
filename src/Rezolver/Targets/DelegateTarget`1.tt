@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 <#  
 	var nthParamDescriptors = new[] { "st", "nd", "rd", "th" };
@@ -58,7 +58,12 @@ namespace Rezolver
 		}
 	}	
 <#	} #>
-	
+}
+
+namespace Rezolver
+{
+	using Rezolver.Targets;
+
 	// extension of partial class found in ITargetContainer.DelegateExtensions
 	public static partial class DelegateTargetContainerExtensions
 	{ 

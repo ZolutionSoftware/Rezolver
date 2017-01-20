@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Logging
 {
-	/// <summary>
-	/// Decorates an existing ITargetCompiler instance to enable tracking of the calls made to it.
-	/// This class is used by the tracked container classes in the library 
-	/// </summary>
-	/// <seealso cref="Rezolver.ITargetCompiler" />
-	public class TrackedTargetDelegateCompiler : TargetDelegateCompiler
-	{
-		public TrackedTargetDelegateCompiler() { }
+	///// <summary>
+	///// Decorates an existing ITargetCompiler instance to enable tracking of the calls made to it.
+	///// This class is used by the tracked container classes in the library 
+	///// </summary>
+	///// <seealso cref="Rezolver.ITargetCompiler" />
+	//public class TrackedTargetDelegateCompiler : TargetDelegateCompiler
+	//{
+	//	public TrackedTargetDelegateCompiler() { }
 
-		protected override ICompiledTarget CompileTargetBase(ITarget target, Expression toCompile, CompileContext context)
-		{
-			return new DelegatingCompiledRezolveTarget(
-				Expression.Lambda<Func<ResolveContext, object>>(toCompile, context.RezolveContextExpression).Compile());
-		}
-	}
+	//	protected override ICompiledTarget CompileTargetBase(ITarget target, Expression toCompile, CompileContext context)
+	//	{
+	//		return new DelegatingCompiledRezolveTarget(
+	//			Expression.Lambda<Func<ResolveContext, object>>(toCompile, context.RezolveContextExpression).Compile());
+	//	}
+	//}
 }

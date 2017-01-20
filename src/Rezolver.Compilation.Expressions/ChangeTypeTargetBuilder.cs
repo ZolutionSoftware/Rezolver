@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,6 @@ namespace Rezolver.Compilation.Expressions
 	/// 
 	/// This always produces a conversion expression (i.e. cast or box/unbox)
 	/// </summary>
-	/// <seealso cref="Rezolver.Compilation.Expressions.ExpressionBuilderBase{Rezolver.ChangeTypeTarget}" />
 	public class ChangeTypeTargetBuilder : ExpressionBuilderBase<ChangeTypeTarget>
 	{
 		/// <summary>

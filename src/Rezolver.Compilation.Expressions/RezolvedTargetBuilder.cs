@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace Rezolver.Compilation.Expressions
 			//target, or throw an exception.
 
 			//try to resolve the target from the context.  Note this could resolve the fallback target.
-			var staticTarget = target.Resolve(context);
+			var staticTarget = target.Bind(context);
 			//TODO: This should be a shared expression
 			var thisRezolver = Expression.Constant(context.Container, typeof(IContainer));
 			var declaredTypeExpr = Expression.Constant(target.DeclaredType, typeof(Type));

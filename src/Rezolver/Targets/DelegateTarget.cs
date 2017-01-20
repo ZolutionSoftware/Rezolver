@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Rezolver
+namespace Rezolver.Targets
 {
 	/// <summary>
 	/// An <see cref="ITarget" /> which resolve objects by executing a delegate with argument injection.
@@ -66,25 +66,6 @@ namespace Rezolver
 			}
 			_declaredType = declaredType;
 			Factory = factory;
-		}
-	}
-
-	/// <summary>
-	/// Extension methods for the <see cref="Delegate"/> type to aid in the construction of <see cref="DelegateTarget"/>.
-	/// </summary>
-	public static class DelegateTargetDelegateExtensions
-	{
-		/// <summary>
-		/// Creates a <see cref="DelegateTarget"/> from the <paramref name="factory"/> which can be registered in an 
-		/// <see cref="ITargetContainer"/> to resolve an instance of a type compatible with the delegate's return type
-		/// and, optionally, with the <paramref name="declaredType" />
-		/// </summary>
-		/// <param name="factory">The delegate to be used as a factory.</param>
-		/// <param name="declaredType">Optional type to set as the <see cref="DelegateTarget.DeclaredType"/> of the target,
-		/// if not passed, then the return type of the delegate will be used.</param>
-		public static DelegateTarget AsDelegateTarget(this Delegate factory, Type declaredType = null)
-		{
-			return new DelegateTarget(factory, declaredType);
 		}
 	}
 }

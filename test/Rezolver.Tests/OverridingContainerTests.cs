@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Targets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Rezolver.Tests
     public void ShouldRezolveFromBaseRezolver()
     {
       //demonstrating how you can simply register directly into a container post construction
-      var rezolver1 = new Container(compiler: new TargetDelegateCompiler());
+      var rezolver1 = new Container();
       var rezolver2 = new OverridingContainer(rezolver1);
 
       int expectedInt = 10;

@@ -11,14 +11,13 @@ using Rezolver.Compilation;
 namespace Rezolver
 {
 	/// <summary>
-	/// Captures the state for a call to <see cref="IContainer.Resolve(ResolveContext)"/>, including the container on which
+	/// Captures the state for a call to <see cref="IContainer.Resolve(ResolveContext)"/> 
+	/// (or <see cref="IContainer.TryResolve(ResolveContext, out object)"/>), including the container on which
 	/// the operation is invoked, any <see cref="IScopedContainer"/> that might be active for the call (if different), and the 
 	/// type which is being resolved from the <see cref="IContainer"/>.
 	/// </summary>
 	public class ResolveContext : IEquatable<ResolveContext>
 	{
-		public static readonly ResolveContext EmptyContext = new ResolveContext(null);
-
 		private class StubContainer : IContainer
 		{
 			private static readonly StubContainer _instance = new StubContainer();
@@ -85,6 +84,10 @@ namespace Rezolver
 		}
 
 		private Type _requestedType;
+		/// <summary>
+		/// Gets the type being requested from the container
+		/// </summary>
+		/// <value>The type of the requested.</value>
 		public Type RequestedType { get { return _requestedType; } private set { _requestedType = value; } }
 
 		private IContainer _container;
@@ -92,19 +95,38 @@ namespace Rezolver
 		/// <summary>
 		/// The container for this context.
 		/// </summary>
+		/// <remarks>This is the container which received the original call to <see cref="IContainer.Resolve(ResolveContext)"/>,
+		/// but is not necessarily the same container that will eventually end up resolving the object.</remarks>
 		public IContainer Container { get { return _container; } private set { _container = value; } }
 
 		private IScopedContainer _scope;
+		/// <summary>
+		/// Gets the scope in which the resolve operation is taking place.  Objects which are to be bound to a 
+		/// lifetime scope will be retrieved or placed in here or one of the scope's 
+		/// <see cref="IScopedContainer.ParentScope"/> hierarchy.
+		/// </summary>
+		/// <value>The scope.</value>
 		public IScopedContainer Scope { get { return _scope; } private set { _scope = value; } }
 
 		private ResolveContext() { }
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ResolveContext"/> class.
+		/// </summary>
+		/// <param name="container">The container.</param>
+		/// <param name="requestedType">The type of object to be resolved from the container.</param>
 		public ResolveContext(IContainer container, Type requestedType)
 		  : this(container)
 		{
 			RequestedType = requestedType;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ResolveContext"/> class.
+		/// </summary>
+		/// <param name="container">The container.</param>
+		/// <param name="requestedType">The type of object to be resolved from the container.</param>
+		/// <param name="scope">The scope for this context.</param>
 		public ResolveContext(IContainer container, Type requestedType, IScopedContainer scope)
 		  : this(container)
 		{
@@ -121,6 +143,9 @@ namespace Rezolver
 			_scope = container as IScopedContainer;
 		}
 
+		/// <summary>
+		/// Returns a <see cref="System.String" /> that represents this instance.
+		/// </summary>
 		public override string ToString()
 		{
 			List<string> parts = new List<string>();
@@ -138,11 +163,18 @@ namespace Rezolver
 			return $"({string.Join(", ", parts)})";
 		}
 
+		/// <summary>
+		/// Returns a hash code for this instance.
+		/// </summary>
 		public override int GetHashCode()
 		{
 			return _requestedType.GetHashCode();
 		}
 
+		/// <summary>
+		/// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+		/// </summary>
+		/// <param name="obj">The object to compare with the current object.</param>
 		public override bool Equals(object obj)
 		{
 			if (obj == null)
@@ -150,11 +182,21 @@ namespace Rezolver
 			return Equals(obj as ResolveContext);
 		}
 
+		/// <summary>
+		/// Indicates whether the current object is equal to another object of the same type.
+		/// </summary>
+		/// <param name="other">An object to compare with this object.</param>
 		public virtual bool Equals(ResolveContext other)
 		{
 			return object.ReferenceEquals(this, other) || _requestedType == other._requestedType;
 		}
 
+		/// <summary>
+		/// Implements the equality operator.  Contexts are checked for reference equality, and then
+		/// their <see cref="RequestedType"/> properties are checked for equality also.
+		/// </summary>
+		/// <param name="left">The left.</param>
+		/// <param name="right">The right.</param>
 		public static bool operator ==(ResolveContext left, ResolveContext right)
 		{
 			//same ref - yes
@@ -168,6 +210,11 @@ namespace Rezolver
 			return left._requestedType == right._requestedType;
 		}
 
+		/// <summary>
+		/// Implements the inequality operator.
+		/// </summary>
+		/// <param name="left">The left.</param>
+		/// <param name="right">The right.</param>
 		public static bool operator !=(ResolveContext left, ResolveContext right)
 		{
 			//same reference
@@ -185,11 +232,9 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Returns a clone of this context, but replaces the type, establishing the root context relationship
-		/// also, either by inheriting this one's root context, or setting this as the root context.
+		/// Returns a clone of this context, but replaces the type.
 		/// </summary>
-		/// <param name="requestedType"></param>
-		/// <returns></returns>
+		/// <param name="requestedType">The type of object to be resolved from the container.</param>
 		public ResolveContext CreateNew(Type requestedType)
 		{
 			return new ResolveContext()
@@ -201,11 +246,10 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// 
+		/// Returns a clone of this context, but replaces the <see cref="RequestedType"/> and <see cref="Container"/>.
 		/// </summary>
-		/// <param name="container"></param>
-		/// <param name="requestedType"></param>
-		/// <returns></returns>
+		/// <param name="container">The container for the new context.</param>
+		/// <param name="requestedType">The type of object to be resolved from the container.</param>
 		public ResolveContext CreateNew(IContainer container, Type requestedType)
 		{
 			return new ResolveContext()
@@ -216,6 +260,11 @@ namespace Rezolver
 			};
 		}
 
+		/// <summary>
+		/// Returns a clone of this context, but replaces the <see cref="RequestedType"/> and the <see cref="Scope"/>.
+		/// </summary>
+		/// <param name="requestedType">The type of object to be resolved from the container.</param>
+		/// <param name="scope">The scope for the new context.</param>
 		public ResolveContext CreateNew(Type requestedType, IScopedContainer scope)
 		{
 			return new ResolveContext()
@@ -226,16 +275,10 @@ namespace Rezolver
 			};
 		}
 
-		public ResolveContext CreateNew(IContainer container, Type requestedType, IScopedContainer scope)
-		{
-			return new ResolveContext()
-			{
-				Container = container,
-				RequestedType = requestedType,
-				Scope = scope
-			};
-		}
-
+		/// <summary>
+		/// Returns a clone of this context, but replaces the <see cref="Container"/>.
+		/// </summary>
+		/// <param name="container">The container for the new context.</param>
 		public ResolveContext CreateNew(IContainer container)
 		{
 			return new ResolveContext()
@@ -246,6 +289,10 @@ namespace Rezolver
 			};
 		}
 
+		/// <summary>
+		/// Returns a clone of this context, but replaces the <see cref="Scope"/>.
+		/// </summary>
+		/// <param name="scope">The scope for the new context.</param>
 		public ResolveContext CreateNew(IScopedContainer scope)
 		{
 			return new ResolveContext()
@@ -256,6 +303,11 @@ namespace Rezolver
 			};
 		}
 
+		/// <summary>
+		/// Returns a clone of this context, but replaces the <see cref="Container"/> and the <see cref="Scope"/>.
+		/// </summary>
+		/// <param name="container">The container for the new context.</param>
+		/// <param name="scope">The scope for the new context.</param>
 		public ResolveContext CreateNew(IContainer container, IScopedContainer scope)
 		{
 			return new ResolveContext()
