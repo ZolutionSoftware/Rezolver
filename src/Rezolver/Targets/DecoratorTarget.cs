@@ -68,11 +68,22 @@ namespace Rezolver.Targets
 		/// the <paramref name="decoratorType"/> is set to <c>MyServiceDecorator : IService</c>.</param>
 		public DecoratorTarget(Type decoratorType, ITarget decoratedTarget, Type decoratedType)
 		{
+			decoratorType.MustNotBeNull(nameof(decoratorType));
+			decoratedTarget.MustNotBeNull(nameof(decoratedTarget));
+			decoratedType.MustNotBeNull(nameof(decoratedType));
+
+			if (!decoratedTarget.SupportsType(decoratedType))
+				throw new ArgumentException("The decorated target doesn't support the decorated type", nameof(decoratedType));
+
 			DecoratorType = decoratorType;
 			DecoratedTarget = decoratedTarget;
 			DecoratedType = decoratedType;
 			//TODO: Allow a constructor to be supplied explicitly and potentially with parameter bindings
 			Target = ConstructorTarget.Auto(DecoratorType);
+
+			if (!Target.SupportsType(decoratedType))
+				throw new ArgumentException("The decorator type is not compatible with the decorated type", nameof(decoratedType));
+
 		}
 
 		/// <summary>

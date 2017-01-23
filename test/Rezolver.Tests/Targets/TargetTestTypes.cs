@@ -28,4 +28,28 @@ namespace Rezolver.Tests.Targets
 		public TwoCtorsOneNoOptional(string s, int i, object o) { }
 		public TwoCtorsOneNoOptional(string s, int i = 0, double d = 0) { }
 	}
+
+	public class Decorated
+	{
+
+	}
+
+	public class Decorator : Decorated
+	{
+		public Decorated Decorated { get; }
+		public Decorator(Decorated decorated)
+		{
+			Decorated = decorated;
+		}
+	}
+
+	public class GenericDecorator<TDecorated> : Decorated
+		where TDecorated : Decorated
+	{
+		public TDecorated Decorated { get; }
+		public GenericDecorator(TDecorated decorated)
+		{
+			Decorated = decorated;
+		}
+	}
 }
