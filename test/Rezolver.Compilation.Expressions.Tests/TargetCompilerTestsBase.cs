@@ -1,4 +1,5 @@
-﻿using Rezolver.Tests;
+﻿using Rezolver.Targets;
+using Rezolver.Tests;
 using Rezolver.Tests.TestTypes;
 using System;
 using System.Collections.Generic;
@@ -239,7 +240,7 @@ namespace Rezolver.Compilation.Expressions.Tests
     [Fact]
     public void ShouldCompileTargetForStaticProperty()
     {
-      var target = CompileTarget(ExpressionAdapter.Instance.CreateTarget(c => IntForStaticExpression));
+      var target = CompileTarget(new ExpressionTarget((ICompileContext c) => IntForStaticExpression));
       int result = (int)target.GetObject(CreateRezolveContext<int>());
       Assert.Equal(IntForStaticExpression, result);
     }

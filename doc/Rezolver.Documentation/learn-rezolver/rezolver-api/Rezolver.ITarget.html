@@ -115,9 +115,9 @@ for the requested type.</p>
 compiled target that is built from it.</p>
 <p>The interface doesn&#39;t describe the type of target in hand - it only provides the core data required to query the static type of
 the target (the type of object that the target will produce) and to determine compatibility with a request for a particular type.</p>
-<p>The framework&#39;s many implementations of this interface - e.g. <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a>, <a class="xref" href="Rezolver.SingletonTarget.html#Rezolver_SingletonTarget">SingletonTarget</a>,</p>
-<p><a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> plus many others - then define the behaviour and any additional data required in order for a compiler
-to produce an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> which matches the target&#39;s intent.  E.g, the <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a>, which
+<p>The framework&#39;s many implementations of this interface - e.g. <see cref="!:ConstructorTarget"></see>, <see cref="!:SingletonTarget"></see>,</p>
+<p><see cref="!:RezolvedTarget"></see> plus many others - then define the behaviour and any additional data required in order for a compiler
+to produce an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> which matches the target&#39;s intent.  E.g, the <see cref="!:ConstructorTarget"></see>, which
 represents creating a new instance via a constructor, provides all the necessary information to bind to the correct constructor
 (including parameter bindings etc) - and the compiler&#39;s job is to translate that into an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> which 
 executes that constructor, returning the result.</p>
@@ -237,7 +237,7 @@ an instance of a given type rather than performing any type checking yourself on
 <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>, because an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> might be able to support a much wider
 range of types other than just those which are directly compatible with its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.
 
-For example, the <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> is statically bound to an open generic, so therefore
+For example, the <see cref="!:GenericConstructorTarget"></see> is statically bound to an open generic, so therefore
 traditional type checks on the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> do not work.  That class&#39; implementation of this
 method, however, contains the complex logic necessary to determine if the open generic can be closed into a
 generic type which is compatible with the given <em>type</em>.

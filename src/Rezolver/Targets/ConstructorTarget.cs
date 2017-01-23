@@ -208,17 +208,33 @@ namespace Rezolver.Targets
 				  }).Where(a => a.bindings.Length == g.Key).ToArray()
 				).Where(a => a.Length > 0).ToArray(); //filter to where there is at least one successfully bound constructor
 
-				//No constructors for which we could bind all parameters with either a mix of resolved or default arguments.
-				//so we'll auto-bind to the constructor with the most parameters - if there is one - leaving the application
-				//with the responsibility of ensuring that the correct registrations are made in the target container, or 
-				//in the container supplied at resolve-time, to satisfy the constructor's dependencies.
 				if (ctorsWithBindingsGrouped.Length == 0)
 				{
+					//No constructors for which we could bind all parameters with either a mix of resolved or default arguments.
+					//so we'll auto-bind to the constructor with the most parameters - if there is one - leaving the application
+					//with the responsibility of ensuring that the correct registrations are made in the target container, or 
+					//in the container supplied at resolve-time, to satisfy the constructor's dependencies.
 					if (publicCtorGroups.Length != 0)
 					{
 						var mostGreedy = publicCtorGroups[0].ToArray();
 						if (mostGreedy.Length > 1)
-							throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneConstructorFormat, DeclaredType, string.Join(", ", mostGreedy.AsEnumerable())));
+						{
+							//see if we can get a single constructor which has the fewest number of optionals
+							// - even though we haven't got configured services for all (or even any), we can choose
+							// one based on the greedy rule.
+							var leastOptional = mostGreedy.Select(c => new {  ctor = c, optionalCount = c.GetParameters().Count(p  => p.IsOptional)})
+								.OrderBy(c => c.optionalCount)
+								.GroupBy(c => c.optionalCount)
+								.First()
+								.ToArray();
+							if (leastOptional.Length == 1)
+							{
+								ctor = leastOptional[0].ctor;
+								boundArgs = ParameterBinding.BindWithRezolvedArguments(ctor).ToArray();
+							}
+							else
+								throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneConstructorFormat, DeclaredType, string.Join(", ", mostGreedy.AsEnumerable())));
+						}
 						else
 						{
 							ctor = mostGreedy[0];

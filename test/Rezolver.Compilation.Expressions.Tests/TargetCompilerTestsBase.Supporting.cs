@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Targets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;

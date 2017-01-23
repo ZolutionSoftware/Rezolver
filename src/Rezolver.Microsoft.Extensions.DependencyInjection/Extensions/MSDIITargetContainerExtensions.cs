@@ -3,6 +3,7 @@
 
 
 using Microsoft.Extensions.DependencyInjection;
+using Rezolver.Targets;
 using System;
 using System.Linq;
 using System.Reflection;

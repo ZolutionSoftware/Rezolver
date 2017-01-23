@@ -456,7 +456,7 @@ the fallback target will be compiled as normal.</p>
 returned) or the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> is <em>not</em> <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> and the target&#39;s type 
 is compatible with it (in which case the target is simply embedded in a new <a class="xref" href="Rezolver.ContainerBase.DirectResolveCompiledTarget.html#Rezolver_ContainerBase_DirectResolveCompiledTarget">ContainerBase.DirectResolveCompiledTarget</a>, which
 will later just return the target when its <a class="xref" href="Rezolver.ContainerBase.DirectResolveCompiledTarget.html#Rezolver_ContainerBase_DirectResolveCompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> is called).</p>
-<p><em>The <a class="xref" href="Rezolver.ObjectTarget.html#Rezolver_ObjectTarget">ObjectTarget</a> supports the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> interface, therefore any objects which are
+<p><em>The <see cref="!:ObjectTarget"></see> supports the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> interface, therefore any objects which are
 directly registered through this target will always use that class&#39; implementation of <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> if
 requested through the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> method.</em></p>
 <p>Once the decision has been taken to compile the target, the container first needs a compiler (<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a>)
@@ -472,7 +472,7 @@ that this could lead to an infinite recursion - i.e. since compiling a target me
 in turn must mean compiling that target.</p>
 <p>The class sidesteps this potential pitfall by requiring that the targets registered for these types support direct 
 resolving, as per the description a couple of paragraphs back.  Therefore, compilers and context providers are typically
-registered as objects via the <a class="xref" href="Rezolver.ObjectTarget.html#Rezolver_ObjectTarget">ObjectTarget</a> target.</p>
+registered as objects via the <see cref="!:ObjectTarget"></see> target.</p>
 <p>Finally, a new <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a> is created via the </p>
 <p><a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_ResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_">CreateContext(ResolveContext, ITargetContainer, IContainer)</a> method of the resolved
 context provider, and then passed to the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a> method

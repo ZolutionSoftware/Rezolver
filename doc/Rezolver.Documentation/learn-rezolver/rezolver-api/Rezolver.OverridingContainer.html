@@ -187,9 +187,9 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               <div class="markdown level0 remarks"><p>When overriding another <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>, you are overriding the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> objects that
 will be returned when <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_">FetchCompiled(ResolveContext)</a> is called on that container and, therefore,
 the compiled target which is executed when the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> method is called.</p>
-<p>This has the side effect of overriding automatically resolved arguments (bound to a <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a>) compiled 
+<p>This has the side effect of overriding automatically resolved arguments (bound to a <see cref="!:RezolvedTarget"></see>) compiled 
 in the overridden container by virtue of the fact that the overriding container is a different reference, because the</p>
-<p><a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> expects a check to be performed, at resolve-time, that the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a>
+<p><see cref="!:RezolvedTarget"></see> expects a check to be performed, at resolve-time, that the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a>
 is the same container as the one that was active when it was originally compiled.</p>
 <p>In essence, when resolving an instance as a dependency the RezolvedTarget does something like this:</p>
 <pre><code>resolveContext.Container == compileContext.Container ? (execute compile-time target) : resolveContext.Container.Resolve(type)</code></pre>

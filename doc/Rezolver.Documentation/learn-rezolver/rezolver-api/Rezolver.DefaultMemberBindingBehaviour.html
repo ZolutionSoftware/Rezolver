@@ -95,7 +95,7 @@
               <h1 id="Rezolver_DefaultMemberBindingBehaviour" data-uid="Rezolver.DefaultMemberBindingBehaviour">Class DefaultMemberBindingBehaviour
               </h1>
               <div class="markdown level0 summary"><p>The default implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a> when you are creating a</p>
-<p><a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> or <a class="xref" href="Rezolver.GenericConstructorTarget.html#Rezolver_GenericConstructorTarget">GenericConstructorTarget</a> and you want publicly writable
+<p><see cref="!:ConstructorTarget"></see> or <see cref="!:GenericConstructorTarget"></see> and you want publicly writable
 properties and public fields to be assigned values obtained from the container.</p>
 <p>If you do not require properties or fields to be bound from the container, then use a null <a class="xref" href="Rezolver.IMemberBindingBehaviour.html#Rezolver_IMemberBindingBehaviour">IMemberBindingBehaviour</a>.</p>
 </div>
@@ -140,8 +140,8 @@ properties and public fields to be assigned values obtained from the container.<
 <p>The class also serves as a good starting point for any custom binding behaviours you might need - as there
 are numerous virtual methods which allow you to change which fields and/or properties are selected for binding,
 as well as how those bindings are created.</p>
-<p>The default behaviour is bind each member to a new <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> whose </p>
-<p><a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget_DeclaredType">DeclaredType</a> is set to the member&#39;s type.</p>
+<p>The default behaviour is bind each member to a new <see cref="!:RezolvedTarget"></see> whose </p>
+<p><see cref="!:RezolvedTarget.DeclaredType"></see> is set to the member&#39;s type.</p>
 </div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
@@ -375,7 +375,7 @@ for each bindable property in <em>properties</em>.</p>
 field, or to prevent the binding from being created at all(return <code>null</code> if you want
 to abort binding the field).</p>
 <p>The base implementation simply creates a new <a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding">MemberBinding</a> whose</p>
-<p><a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding_Target">Target</a> is set to a new <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> for the type</p>
+<p><a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding_Target">Target</a> is set to a new <see cref="!:RezolvedTarget"></see> for the type</p>
 <p><see cref="!:FieldInfo.FieldType"></see> - thus causing the field to be assigned a value
 resolved from the container when the instance is created.</p>
 </div>
@@ -442,7 +442,7 @@ resolved from the container when the instance is created.</p>
 property, or to prevent the binding from being created at all(return <code>null</code> if you want
 to abort binding the property).</p>
 <p>The base implementation simply creates a new <a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding">MemberBinding</a> whose</p>
-<p><a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding_Target">Target</a> is set to a new <a class="xref" href="Rezolver.RezolvedTarget.html#Rezolver_RezolvedTarget">RezolvedTarget</a> for the type</p>
+<p><a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding_Target">Target</a> is set to a new <see cref="!:RezolvedTarget"></see> for the type</p>
 <p><see cref="!:PropertyInfo.PropertyType"></see> - thus causing the property to be assigned a value
 resolved from the container when the instance is created.</p>
 </div>

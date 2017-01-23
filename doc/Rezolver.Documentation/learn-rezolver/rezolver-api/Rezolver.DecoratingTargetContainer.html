@@ -95,7 +95,7 @@
               <h1 id="Rezolver_DecoratingTargetContainer" data-uid="Rezolver.DecoratingTargetContainer">Class DecoratingTargetContainer
               </h1>
               <div class="markdown level0 summary"><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>, producing instances of the</p>
-<p><a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
+<p><see cref="!:DecoratorTarget"></see> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
 <p>The best way to add a decorator to your target container is to use the extension method </p>
 <p><a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</a>
 or its non-generic equivalent.</p>
@@ -140,8 +140,9 @@ or its non-generic equivalent.</p>
               <div class="markdown level0 remarks"><p>This class does not implement <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>, rather
 it&#39;s an <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a> into which other targets can be added,
 and when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called, a temporary</p>
-<a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a> is created which wraps around the targets that have been registered within and
-which will ultimately create instances of <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_DecoratorType">DecoratorType</a></div>
+<p><see cref="!:DecoratorTarget"></see> is created which wraps around the targets that have been registered within and
+which will ultimately create instances of <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_DecoratorType">DecoratorType</a></p>
+</div>
               <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="constructors">Constructors
               </h3>
@@ -369,7 +370,7 @@ the target returned by the target container that&#39;s decorated by this one.</p
               
               <h4 class="hmember" id="Rezolver_DecoratingTargetContainer_FetchAll_System_Type_" data-uid="Rezolver.DecoratingTargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
               <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> - passes the call on to the inner 
-container that&#39;s decorated by this one, and then wraps each of those targets in a <a class="xref" href="Rezolver.DecoratorTarget.html#Rezolver_DecoratorTarget">DecoratorTarget</a> which
+container that&#39;s decorated by this one, and then wraps each of those targets in a <see cref="!:DecoratorTarget"></see> which
 represents the decoration logic for each instance.</p>
 </div>
               <div class="markdown level1 conceptual"></div>

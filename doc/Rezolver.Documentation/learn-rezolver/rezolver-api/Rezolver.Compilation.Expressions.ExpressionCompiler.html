@@ -139,7 +139,7 @@ extension method on your root target container.</p>
               <div class="markdown level0 remarks"><p>This class works by directly resolving <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder">IExpressionBuilder</a> instances which can build an expression for a 
 given <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> from the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html#Rezolver_Compilation_Expressions_IExpressionCompileContext">IExpressionCompileContext</a>.</p>
 <p>Typically, this is done by searching for an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html#Rezolver_Compilation_Expressions_IExpressionBuilder_1">IExpressionBuilder&lt;TTarget&gt;</a> where &#39;TTarget&#39; is equal to the runtime type
-of the target - e.g. <a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a>.  If one cannot be found, it will then search for an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder">IExpressionBuilder</a>
+of the target - e.g. <see cref="!:ConstructorTarget"></see>.  If one cannot be found, it will then search for an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder">IExpressionBuilder</a>
 whose <see cref="!:IExpressionBuilder.CanBuild(ITarget, CompileContext)"></see> function returns <code>true</code> for the given target.</p>
 <p>With a correctly configured target dictionary (using the</p>
 <p><see cref="!:ExpressionCompilerTargetContainerExtensions.UseExpressionCompiler(ITargetContainer)"></see> extension method, for example),
@@ -147,14 +147,14 @@ this should resolve to an instance of the <a class="xref" href="Rezolver.Compila
 <code>IExpressionBuilder&lt;ConstructorTarget&gt;</code>.</p>
 <p>As such, the compiler can be extended to support extra target types and its existing expression builders can be replaced for customised
 behaviour because they are all resolved from the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> underpinning a particular <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext">CompileContext</a>.
-There is a caveat for this, however: you can&#39;t use the traditional targets (<a class="xref" href="Rezolver.ConstructorTarget.html#Rezolver_ConstructorTarget">ConstructorTarget</a> etc) to extend the compiler because
+There is a caveat for this, however: you can&#39;t use the traditional targets (<see cref="!:ConstructorTarget"></see> etc) to extend the compiler because
 they currently need to be compiled in order to work - and therefore cannot be used because it would cause an infinite recursion.</p>
 <p>At present, therefore, the targets which are registered as expression builders must directly implement either the </p>
 <p><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html#Rezolver_Compilation_Expressions_IExpressionBuilder_1">IExpressionBuilder&lt;TTarget&gt;</a> or <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder">IExpressionBuilder</a> interfaces; or implement the </p>
 <p><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> interface and produce an instance of those interfaces when </p>
 <p><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> is called on them.</p>
 <p>Because of this requirement, the most common way to register an expression builder is to register an instance inside an</p>
-<p><a class="xref" href="Rezolver.ObjectTarget.html#Rezolver_ObjectTarget">ObjectTarget</a> against the correct type, because it also implements <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> in addition
+<p><see cref="!:ObjectTarget"></see> against the correct type, because it also implements <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> in addition
 to <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>.</p>
 <p>Using this pattern, it&#39;s important that an expression builder is completely threadsafe and recursion safe (since one target&#39;s
 compilation might depend on the compilation of another of the same type).

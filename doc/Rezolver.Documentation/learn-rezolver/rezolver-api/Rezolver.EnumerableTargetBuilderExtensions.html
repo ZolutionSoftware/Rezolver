@@ -143,11 +143,11 @@ containers which use that target container.</p>
               <h4 class="hmember" id="Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_TargetContainer_" data-uid="Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving(Rezolver.TargetContainer)">EnableEnumerableResolving(TargetContainer)</h4>
               <div class="markdown level1 summary"><p>Enables resolving of enumerables of services on the target container.</p>
 <p>After calling this, you can immediately request a target for <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> of
-any type and you will receive a <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a> (with <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_AsArray">AsArray</a>
+any type and you will receive a <see cref="!:ListTarget"></see> (with <see cref="!:ListTarget.AsArray"></see>
 set to true) which contains all the targets which have previously been
 registered for the type <code>T</code>, in the order they were registered.</p>
-<p>If a service has not been registered, then the returned <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget">ListTarget</a> will be empty
-and its <a class="xref" href="Rezolver.ListTarget.html#Rezolver_ListTarget_UseFallback">UseFallback</a> property will be <code>true</code>.</p>
+<p>If a service has not been registered, then the returned <see cref="!:ListTarget"></see> will be empty
+and its <see cref="!:ListTarget.UseFallback"></see> property will be <code>true</code>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>

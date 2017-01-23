@@ -94,7 +94,8 @@
               
               <h1 id="Rezolver_ResolveContext" data-uid="Rezolver.ResolveContext">Class ResolveContext
               </h1>
-              <div class="markdown level0 summary"><p>Captures the state for a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>, including the container on which
+              <div class="markdown level0 summary"><p>Captures the state for a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> 
+(or <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a>), including the container on which
 the operation is invoked, any <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a> that might be active for the call (if different), and the 
 type which is being resolved from the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.</p>
 </div>
@@ -132,7 +133,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext__ctor_Rezolver_IContainer_System_Type_" data-uid="Rezolver.ResolveContext.#ctor(Rezolver.IContainer,System.Type)">ResolveContext(IContainer, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -151,12 +153,14 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                   <tr>
                     <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td></td>
+                    <td><p>The container.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>requestedType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type of object to be resolved from the container.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -165,7 +169,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext__ctor_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_" data-uid="Rezolver.ResolveContext.#ctor(Rezolver.IContainer,System.Type,Rezolver.IScopedContainer)">ResolveContext(IContainer, Type, IScopedContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -184,46 +189,20 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                   <tr>
                     <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td></td>
+                    <td><p>The container.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>requestedType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type of object to be resolved from the container.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="fields">Fields
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ResolveContext_EmptyContext" data-uid="Rezolver.ResolveContext.EmptyContext">EmptyContext</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static readonly ResolveContext EmptyContext</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
+                    <td><p>The scope for this context.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -257,12 +236,17 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                   </tr>
                 </tbody>
               </table>
+              <h5 class="hremarks" id="Rezolver_ResolveContext_Container_remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This is the container which received the original call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>,
+but is not necessarily the same container that will eventually end up resolving the object.</p>
+</div>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_RequestedType" data-uid="Rezolver.ResolveContext.RequestedType">RequestedType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the type being requested from the container</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -279,7 +263,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                 <tbody>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type of the requested.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -288,7 +273,10 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_Scope" data-uid="Rezolver.ResolveContext.Scope">Scope</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the scope in which the resolve operation is taking place.  Objects which are to be bound to a 
+lifetime scope will be retrieved or placed in here or one of the scope&#39;s </p>
+<p><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_ParentScope">ParentScope</a> hierarchy.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -305,7 +293,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td></td>
+                    <td><p>The scope.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -317,7 +306,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_CreateNew_Rezolver_IContainer_" data-uid="Rezolver.ResolveContext.CreateNew(Rezolver.IContainer)">CreateNew(IContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a clone of this context, but replaces the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -336,7 +326,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                   <tr>
                     <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td></td>
+                    <td><p>The container for the new context.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -360,7 +351,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_CreateNew_Rezolver_IContainer_Rezolver_IScopedContainer_" data-uid="Rezolver.ResolveContext.CreateNew(Rezolver.IContainer,Rezolver.IScopedContainer)">CreateNew(IContainer, IScopedContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a clone of this context, but replaces the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a> and the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -379,12 +371,14 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                   <tr>
                     <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td></td>
+                    <td><p>The container for the new context.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td></td>
+                    <td><p>The scope for the new context.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -408,7 +402,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_CreateNew_Rezolver_IContainer_System_Type_" data-uid="Rezolver.ResolveContext.CreateNew(Rezolver.IContainer,System.Type)">CreateNew(IContainer, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a clone of this context, but replaces the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> and <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -427,65 +422,14 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                   <tr>
                     <td><em>container</em></td>
                     <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td></td>
+                    <td><p>The container for the new context.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>requestedType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_ResolveContext_CreateNew_Rezolver_IContainer_System_Type_Rezolver_IScopedContainer_" data-uid="Rezolver.ResolveContext.CreateNew(Rezolver.IContainer,System.Type,Rezolver.IScopedContainer)">CreateNew(IContainer, Type, IScopedContainer)</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ResolveContext CreateNew(IContainer container, Type requestedType, IScopedContainer scope)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>container</em></td>
-                    <td><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>requestedType</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><em>scope</em></td>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td></td>
+                    <td><p>The type of object to be resolved from the container.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -509,7 +453,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_CreateNew_Rezolver_IScopedContainer_" data-uid="Rezolver.ResolveContext.CreateNew(Rezolver.IScopedContainer)">CreateNew(IScopedContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a clone of this context, but replaces the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -528,7 +473,8 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td></td>
+                    <td><p>The scope for the new context.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -552,8 +498,7 @@ type which is being resolved from the <a class="xref" href="Rezolver.IContainer.
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_CreateNew_System_Type_" data-uid="Rezolver.ResolveContext.CreateNew(System.Type)">CreateNew(Type)</h4>
-              <div class="markdown level1 summary"><p>Returns a clone of this context, but replaces the type, establishing the root context relationship
-also, either by inheriting this one&#39;s root context, or setting this as the root context.</p>
+              <div class="markdown level1 summary"><p>Returns a clone of this context, but replaces the type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
@@ -573,7 +518,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
                   <tr>
                     <td><em>requestedType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type of object to be resolved from the container.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -597,7 +543,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_CreateNew_System_Type_Rezolver_IScopedContainer_" data-uid="Rezolver.ResolveContext.CreateNew(System.Type,Rezolver.IScopedContainer)">CreateNew(Type, IScopedContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a clone of this context, but replaces the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> and the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -616,12 +563,14 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
                   <tr>
                     <td><em>requestedType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>The type of object to be resolved from the container.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>scope</em></td>
                     <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
-                    <td></td>
+                    <td><p>The scope for the new context.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -645,7 +594,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_Equals_Rezolver_ResolveContext_" data-uid="Rezolver.ResolveContext.Equals(Rezolver.ResolveContext)">Equals(ResolveContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Indicates whether the current object is equal to another object of the same type.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -664,7 +614,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
                   <tr>
                     <td><em>other</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
+                    <td><p>An object to compare with this object.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -690,7 +641,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_Equals_System_Object_" data-uid="Rezolver.ResolveContext.Equals(System.Object)">Equals(Object)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Determines whether the specified <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> is equal to this instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -709,7 +661,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
                   <tr>
                     <td><em>obj</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
-                    <td></td>
+                    <td><p>The object to compare with the current object.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -735,7 +688,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_GetHashCode" data-uid="Rezolver.ResolveContext.GetHashCode">GetHashCode()</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a hash code for this instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -763,7 +717,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_ToString" data-uid="Rezolver.ResolveContext.ToString">ToString()</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Returns a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a> that represents this instance.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -794,7 +749,9 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_op_Equality_Rezolver_ResolveContext_Rezolver_ResolveContext_" data-uid="Rezolver.ResolveContext.op_Equality(Rezolver.ResolveContext,Rezolver.ResolveContext)">Equality(ResolveContext, ResolveContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implements the equality operator.  Contexts are checked for reference equality, and then
+their <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> properties are checked for equality also.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -813,12 +770,14 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
                   <tr>
                     <td><em>left</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
+                    <td><p>The left.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>right</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
+                    <td><p>The right.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -842,7 +801,8 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
               
               
               <h4 class="hmember" id="Rezolver_ResolveContext_op_Inequality_Rezolver_ResolveContext_Rezolver_ResolveContext_" data-uid="Rezolver.ResolveContext.op_Inequality(Rezolver.ResolveContext,Rezolver.ResolveContext)">Inequality(ResolveContext, ResolveContext)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Implements the inequality operator.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -861,12 +821,14 @@ also, either by inheriting this one&#39;s root context, or setting this as the r
                   <tr>
                     <td><em>left</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
+                    <td><p>The left.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>right</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td></td>
+                    <td><p>The right.</p>
+</td>
                   </tr>
                 </tbody>
               </table>

@@ -145,7 +145,8 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer__ctor_System_Type_Rezolver_ITarget___" data-uid="Rezolver.TargetListContainer.#ctor(System.Type,Rezolver.ITarget[])">TargetListContainer(Type, ITarget[])</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.TargetListContainer.html#Rezolver_TargetListContainer">TargetListContainer</a> class.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -164,12 +165,14 @@ that are added to it.</p>
                   <tr>
                     <td><em>registeredType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Required - the type against which this list will be registered.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>targets</em></td>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>[]</td>
-                    <td></td>
+                    <td><p>Optional array of targets with which to initialise the list.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -181,7 +184,8 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_Count" data-uid="Rezolver.TargetListContainer.Count">Count</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the number of targets which have been added to the list.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -198,7 +202,8 @@ that are added to it.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.int32(v=vs.110).aspx">Int32</a></td>
-                    <td></td>
+                    <td><p>The count.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -207,7 +212,9 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_DefaultTarget" data-uid="Rezolver.TargetListContainer.DefaultTarget">DefaultTarget</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the default target for this list - which will always be the last target added to the list, or 
+<code>null</code> if no targets have been added yet.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -233,7 +240,8 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_Item_System_Int32_" data-uid="Rezolver.TargetListContainer.Item(System.Int32)">Item[Int32]</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> at the specified index.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -252,7 +260,8 @@ that are added to it.</p>
                   <tr>
                     <td><em>index</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.int32(v=vs.110).aspx">Int32</a></td>
-                    <td></td>
+                    <td><p>The index.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -267,7 +276,26 @@ that are added to it.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
+                    <td><p>ITarget.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.indexoutofrangeexception(v=vs.110).aspx">IndexOutOfRangeException</a></td>
+                    <td><p>If <em>index</em> is less than zero, or
+if <a class="xref" href="Rezolver.TargetListContainer.html#Rezolver_TargetListContainer_Count">Count</a> is zero, or if <em>index</em> represents an index greater
+than last item&#39;s index</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -276,7 +304,8 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_RegisteredType" data-uid="Rezolver.TargetListContainer.RegisteredType">RegisteredType</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the type against which this list container is registered in its <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -302,7 +331,8 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_Targets" data-uid="Rezolver.TargetListContainer.Targets">Targets</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets the targets stored in this list container.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -358,7 +388,8 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.TargetListContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Not supported.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -377,12 +408,14 @@ that are added to it.</p>
                   <tr>
                     <td><em>existing</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
-                    <td></td>
+                    <td><p>Ignored</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Ignored.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -403,12 +436,29 @@ that are added to it.</p>
               </table>
               <h5 class="himplements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a></div>
+              <h5 class="hexceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notsupportedexception(v=vs.110).aspx">NotSupportedException</a></td>
+                    <td><p>Always</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               </div><!-- .classchild -->
               <div class="classchild">
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_Fetch_System_Type_" data-uid="Rezolver.TargetListContainer.Fetch(System.Type)">Fetch(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Always returns the <a class="xref" href="Rezolver.TargetListContainer.html#Rezolver_TargetListContainer_DefaultTarget">DefaultTarget</a></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -427,7 +477,8 @@ that are added to it.</p>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Ignored.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -453,7 +504,8 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_FetchAll_System_Type_" data-uid="Rezolver.TargetListContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Retrieves an enumerable of all targets that have been registered to this list.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -472,7 +524,8 @@ that are added to it.</p>
                   <tr>
                     <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Ignored.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -498,7 +551,9 @@ that are added to it.</p>
               
               
               <h4 class="hmember" id="Rezolver_TargetListContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.TargetListContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Registers the specified target into the list.  Note - the target is not checked to see
+if it supports this list&#39;s <a class="xref" href="Rezolver.TargetListContainer.html#Rezolver_TargetListContainer_RegisteredType">RegisteredType</a>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="hdeclaration">Declaration</h5>
               <div class="codewrapper">
@@ -517,12 +572,14 @@ that are added to it.</p>
                   <tr>
                     <td><em>target</em></td>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
+                    <td><p>The target.</p>
+</td>
                   </tr>
                   <tr>
                     <td><em>registeredType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
+                    <td><p>Ignored.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
