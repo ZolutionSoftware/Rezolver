@@ -123,7 +123,8 @@ namespace Rezolver
 
 		/// <summary>
 		/// Matches named targets in <paramref name="args"/> to parameters on the passed <paramref name="method"/>,
-		/// creating default <see cref="ParameterBinding"/>s for any parameters for which named targets cannot be found.
+		/// creating default <see cref="ParameterBinding"/>s (which will be resolved from the compile or run-time container),
+		/// for any parameters for which named targets cannot be found.
 		/// </summary>
 		/// <param name="method"></param>
 		/// <param name="args"></param>
@@ -142,6 +143,19 @@ namespace Rezolver
 			if (args.TryGetValue(p.Name, out argValue))
 				return argValue;
 			return null;
+		}
+
+		/// <summary>
+		/// Binds the method using explicit bindings for each parameter supplied in the <paramref name="suppliedBindings"/> array,
+		/// or defaults (which will be resolved from the compile or run-time container) if not present.
+		/// </summary>
+		/// <param name="method">The method to be bound</param>
+		/// <param name="suppliedBindings">Optional.  The supplied bindings for the parameters of the method.  Any parameters
+		/// not matched from this array will be automatically bound with default (resolved from the container).</param>
+		public static ParameterBinding[] BindMethod(MethodBase method, ParameterBinding[] suppliedBindings)
+		{
+			suppliedBindings = suppliedBindings ?? new ParameterBinding[0];
+			return method.GetParameters().Select(p => suppliedBindings.FirstOrDefault(pb => pb.Parameter == p) ?? new ParameterBinding(p)).ToArray();
 		}
 	}
 }

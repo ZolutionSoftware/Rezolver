@@ -266,14 +266,16 @@ namespace Rezolver.Targets
 				}
 			}
 			//we allow for no parameter bindings to be provided on construction, and have them dynamically determined
-			else if (_parameterBindings.Length == 0 && ctor.GetParameters().Length != 0)
+			//also allow for some to be ommitted (check by testing reference equality on the parameterinfo)
+			else if (_parameterBindings.Length != ctor.GetParameters().Length
+				|| !ctor.GetParameters().All(p => _parameterBindings.FirstOrDefault(pb => pb.Parameter == p) != null))
 			{
 				//just need to generate the bound parameters - nice and easy
 				//because the constructor was provided up-front, we don't check whether the target can be resolved
-				boundArgs = ParameterBinding.BindMethod(ctor, _namedArgs);// ParameterBinding.BindWithRezolvedArguments(ctor);
+				boundArgs = ParameterBinding.BindMethod(ctor, _parameterBindings);// ParameterBinding.BindWithRezolvedArguments(ctor);
 			}
 			else
-				boundArgs = _parameterBindings; //TODO: use ParameterBinding to finalise these bindings to allow for missing parameters to be filled in with resolved targets.
+				boundArgs = _parameterBindings;
 
 			return new ConstructorBinding(ctor, boundArgs, MemberBindingBehaviour?.GetMemberBindings(context, DeclaredType));
 		}
