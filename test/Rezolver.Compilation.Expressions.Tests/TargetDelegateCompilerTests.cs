@@ -9,7 +9,7 @@ namespace Rezolver.Compilation.Expressions.Tests
   {
     protected override ITargetCompiler CreateCompilerBase(string callingMethod)
     {
-      return new TargetDelegateCompiler();
+      return new ExpressionCompiler();
     }
 
     protected override void ReleaseCompiler(ITargetCompiler compiler)

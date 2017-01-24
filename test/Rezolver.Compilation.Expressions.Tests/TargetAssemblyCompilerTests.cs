@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Compilation.Expressions.Tests
 {
-#if !DOTNET
+#if DISABLED
   public class TargetAssemblyCompilerTests : TargetCompilerTestsBase
   {
 

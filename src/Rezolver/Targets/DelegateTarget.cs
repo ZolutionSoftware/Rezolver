@@ -23,11 +23,20 @@ namespace Rezolver.Targets
  	public class DelegateTarget : TargetBase
 	{
 		/// <summary>
-		/// Gets the factory method that will be invoked when this target is compiled and executed
+		/// Gets the factory delegate that will be invoked when this target is compiled and executed
 		/// </summary>
 		/// <value>The factory.</value>
-		public Delegate Factory { get; private set; }
-		private MethodInfo _factoryMethod;
+		public Delegate Factory { get; }
+		/// <summary>
+		/// Gets the MethodInfo for the <see cref="Factory"/> delegate.
+		/// </summary>
+		/// <remarks>Whilst this can be easily obtained from the delegate yourself (by using the 
+		/// <see cref="RuntimeReflectionExtensions.GetMethodInfo(Delegate)"/> extension method) however, this 
+		/// class also uses it to determine the <see cref="DeclaredType"/> of the target or whether the delegate 
+		/// is actually compatible with the one supplied on construction, therefore if you need to introspect 
+		/// the delegate, you might as well use this.</remarks>
+		public MethodInfo FactoryMethod { get; }
+
 		private Type _declaredType;
 
 		/// <summary>
@@ -38,7 +47,7 @@ namespace Rezolver.Targets
 		{
 			get
 			{
-				return _declaredType ?? _factoryMethod.ReturnType;
+				return _declaredType ?? FactoryMethod.ReturnType;
 			}
 		}
 
@@ -56,14 +65,16 @@ namespace Rezolver.Targets
 		public DelegateTarget(Delegate factory, Type declaredType = null)
 		{
 			factory.MustNotBeNull(nameof(factory));
-			_factoryMethod = factory.GetMethodInfo();
-			_factoryMethod.MustNot(m => _factoryMethod.ReturnType == null || _factoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
+			FactoryMethod = factory.GetMethodInfo();
+			FactoryMethod.MustNot(m => FactoryMethod.ReturnType == null || FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
+			FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
 
 			if (declaredType != null)
 			{
-				if (!TypeHelpers.AreCompatible(_factoryMethod.ReturnType, declaredType) && !TypeHelpers.AreCompatible(declaredType, _factoryMethod.ReturnType))
-					throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, _factoryMethod.ReturnType), nameof(declaredType));
+				if (!TypeHelpers.AreCompatible(FactoryMethod.ReturnType, declaredType) && !TypeHelpers.AreCompatible(declaredType, FactoryMethod.ReturnType))
+					throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, FactoryMethod.ReturnType), nameof(declaredType));
 			}
+
 			_declaredType = declaredType;
 			Factory = factory;
 		}

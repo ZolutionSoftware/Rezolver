@@ -34,12 +34,12 @@ namespace Rezolver.Targets
 						Expression.Field(null, tDefault.GetStaticFields().Single(f => f.Name == "Value")), typeof(object)
 					)
 				).Compile();
-			});
+			})();
 		}
 
 		object ICompiledTarget.GetObject(ResolveContext context)
 		{
-			return GetDefault(context.RequestedType);
+			return Value;
 		}
 
 		private readonly Type _declaredType;
@@ -50,6 +50,17 @@ namespace Rezolver.Targets
 		public override Type DeclaredType
 		{
 			get { return _declaredType; }
+		}
+
+		/// <summary>
+		/// Gets the actual default value represented by this instance.
+		/// </summary>
+		public object Value
+		{
+			get
+			{
+				return GetDefault(DeclaredType);
+			}
 		}
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DefaultTarget"/> class.

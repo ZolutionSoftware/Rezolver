@@ -60,9 +60,10 @@ namespace Rezolver.Targets
 		public ExpressionTarget(Expression expression, Type declaredType = null)
 		{
 			expression.MustNotBeNull(nameof(expression));
-			//expression.MustNot(e => e.NodeType == ExpressionType.Lambda, "Lambda expressions are not directly supported by the ExpressionTarget class.  Please use an ITargetAdapter to create a target from a Lambda Expression", nameof(expression));
 			Expression = expression;
 			DeclaredType = declaredType ?? expression.Type;
+			if (!TypeHelpers.IsAssignableFrom(DeclaredType, Expression.Type))
+				throw new ArgumentException("The declaredType must be compatible with the type of the expression", nameof(declaredType));
 		}
 
 		/// <summary>

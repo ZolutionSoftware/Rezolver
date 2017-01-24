@@ -25,11 +25,6 @@ namespace Rezolver.Targets
 	public class ChangeTypeTarget : TargetBase
 	{
 		/// <summary>
-		/// The target type for the conversion.
-		/// </summary>
-		private readonly Type _targetType;
-
-		/// <summary>
 		/// Always returns true.
 		/// </summary>
 		protected override bool SuppressScopeTracking
