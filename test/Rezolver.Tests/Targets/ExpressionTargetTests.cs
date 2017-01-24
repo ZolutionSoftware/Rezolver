@@ -43,6 +43,18 @@ namespace Rezolver.Tests.Targets
 		}
 
 		[Fact]
+		public void ShouldSetExpressionOrFactory()
+		{
+			var expr = Expression.Constant("hello world");
+			Assert.Same(expr, new ExpressionTarget(expr).Expression);
+			Func<ICompileContext, Expression> factory = c => expr;
+			var factoryTarget = new ExpressionTarget(factory, typeof(string));
+			//we test DeclaredType for straight Expressions next
+			Assert.Same(factory, factoryTarget.ExpressionFactory);
+			Assert.Equal(typeof(string), factoryTarget.DeclaredType);
+		}
+
+		[Fact]
 		public void DeclaredTypeShouldBeInheritedFromExpression()
 		{
 			//use two expressions: a lambda and a standard expression

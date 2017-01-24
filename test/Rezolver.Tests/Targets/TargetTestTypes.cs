@@ -52,4 +52,22 @@ namespace Rezolver.Tests.Targets
 			Decorated = decorated;
 		}
 	}
+
+	public interface IGeneric<T>
+	{
+		void Foo();
+	}
+
+	public abstract class AbstractGeneric<T>
+	{
+		protected abstract void Foo();
+	}
+
+	public class Generic<T> : AbstractGeneric<T>
+	{
+		protected override void Foo()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

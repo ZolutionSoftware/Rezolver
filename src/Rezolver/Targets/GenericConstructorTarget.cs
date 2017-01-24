@@ -33,6 +33,16 @@ namespace Rezolver.Targets
 		/// <value>The member binding behaviour.</value>
 		public IMemberBindingBehaviour MemberBindingBehaviour { get; private set; }
 
+
+		/// <summary>
+		/// Implementation of the abstract base property.  Will return the unbound generic type passed to this object on construction.
+		/// </summary>
+		public override System.Type DeclaredType
+		{
+			get { return GenericType; }
+		}
+
+
 		/// <summary>
 		/// Constructs a new instance of the <see cref="GenericConstructorTarget"/> for the given open generic type,
 		/// which will utilise the optional <paramref name="memberBindingBehaviour"/> when it constructs its
@@ -44,8 +54,9 @@ namespace Rezolver.Targets
 		/// or fields will be bound on construction.</param>
 		public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)
 		{
+			genericType.MustNotBeNull(nameof(genericType));
 			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
-				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Partially open generics are not yet supported, and for fully closed generics, use ConstructorTarget");
+				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Use ConstructorTarget for closed generics.");
 			if (!TypeHelpers.IsClass(genericType) || TypeHelpers.IsAbstract(genericType))
 				throw new ArgumentException("The type must be a non-abstract generic class definition");
 			GenericType = genericType;
@@ -232,14 +243,6 @@ namespace Rezolver.Targets
 				}
 			}
 			return null;
-		}
-
-		/// <summary>
-		/// Implementation of the abstract base property.  Will retrn the unbound generic type passed to this object on construction.
-		/// </summary>
-		public override System.Type DeclaredType
-		{
-			get { return GenericType; }
 		}
 
 
