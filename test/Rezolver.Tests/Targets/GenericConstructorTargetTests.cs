@@ -32,16 +32,43 @@ namespace Rezolver.Tests.Targets
 		public void ShouldNotAllowGenericInterfaceOrAbstractClass()
 		{
 			Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(typeof(IEqualityComparer<>)));
-			Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(typeof(AbstractGeneric<>)));
+			Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(typeof(GenericBase<>)));
 		}
 
 		[Fact]
 		public void DeclaredTypeShouldBeEqualToGenericType()
 		{
-			Assert.Same(typeof(EqualityComparer<>), new GenericConstructorTarget(typeof(EqualityComparer<>)).DeclaredType);
+			Assert.Same(typeof(Generic<>), new GenericConstructorTarget(typeof(Generic<>)).DeclaredType);
 		}
 
-		//class has custom SupportsType implementation theories
-#error carry on here.
+		//since the class overrides SupportsType - we use a theory to test
+		public static IEnumerable<object[]> GetSupportsTypeTheoryData()
+		{
+			return new object[][]
+			{
+						//target type					//type which should be supported (often alternating between ref/value types)
+				new[] { typeof(Generic<>),				typeof(Generic<TypeArgs.T1>)},
+				new[] { typeof(Generic<>),				typeof(GenericBase<TypeArgs.T1>)},
+				new[] { typeof(Generic<>),				typeof(IGeneric<TypeArgs.T1>)},
+				new[] { typeof(Generic2<,>),			typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(Generic2<,>),			typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(ReversingGeneric2<,>),	typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(ReversingGeneric2<,>),   typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(NarrowingGeneric<>),		typeof(INarrowingGeneric<TypeArgs.T1>) },
+				new[] { typeof(NarrowingGeneric<>),     typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(NarrowingGeneric<>),     typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(NarrowingGeneric<>),     typeof(GenericBase<TypeArgs.T1>) },
+				new[] { typeof(NarrowingGeneric<>),     typeof(IGeneric<TypeArgs.T1>) },
+			};
+		}
+
+		[Theory]
+		[MemberData(nameof(GetSupportsTypeTheoryData))]
+		public void ShouldSupportType(Type targetType, Type testType)
+		{
+			Output.WriteLine($"Testing target for type { targetType } supports { testType }...");
+			var target = new GenericConstructorTarget(targetType);
+			Assert.True(target.SupportsType(testType));
+		}
 	}
 }

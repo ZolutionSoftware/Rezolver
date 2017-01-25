@@ -73,7 +73,10 @@ namespace Rezolver.Targets
 			if (base.SupportsType(type))
 				return true;
 
-			//scenario - requested type is a closed generic built from this target's open generic
+			//should pass when requested type is a closed generic which can be made by a closed
+			//version of this target's open generic.  E.g. IFoo<Bar> should succeed when this target's type
+			//is Foo<T> : IFoo<T>
+
 			if (!TypeHelpers.IsGenericType(type))
 				return false;
 
@@ -102,7 +105,7 @@ namespace Rezolver.Targets
 		/// the <paramref name="context"/>.
 		/// </summary>
 		/// <param name="context">The context.</param>
-		/// <remarks>The process of binding a requested type to the concrete type can be a very complex process, when
+		/// <remarks>The process of binding a requested type to the concrete type can be very complex, when
 		/// inheritance chains and interface implementation maps are taken into account.
 		/// 
 		/// At the simplest end of the spectrum, if <see cref="GenericType"/> is <c>MyGeneric&lt;&gt;</c> and
@@ -136,12 +139,14 @@ namespace Rezolver.Targets
 		/// </remarks>
 		public ITarget Bind(ICompileContext context)
 		{
+			context.MustNotBeNull(nameof(context));
+
 			//always create a constructor target from new
 			//basically this class simply acts as a factory for other constructor targets.
 
 			var expectedType = context.TargetType;
 			if (expectedType == null)
-				throw new ArgumentException("GenericConstructorTarget requires a concrete to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", "context");
+				throw new ArgumentException("GenericConstructorTarget requires a concrete type to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", "context");
 			if (!TypeHelpers.IsGenericType(expectedType))
 				throw new ArgumentException("The compile context requested an instance of a non-generic type to be built.", "context");
 
@@ -154,11 +159,10 @@ namespace Rezolver.Targets
 			}
 			else
 			{
-				if (TypeHelpers.IsGenericType(expectedType))
-					finalTypeArguments = MapGenericParameters(expectedType, DeclaredType);
+				finalTypeArguments = MapGenericParameters(expectedType);
 
 				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
-					throw new ArgumentException("Unable to complete generic target, not enough information from CompileContext", "context");
+					throw new ArgumentException("Unable to complete generic target, the requested type doesn't contain enough generic arguments to calculate the closed generic type to be created", "context");
 			}
 
 			//make the generic type
@@ -167,36 +171,36 @@ namespace Rezolver.Targets
 			return ConstructorTarget.Auto(typeToBuild, MemberBindingBehaviour);
 		}
 
-		private Type[] MapGenericParameters(Type requestedType, Type targetType)
+		private Type[] MapGenericParameters(Type requestedType)
 		{
 			var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
-			Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(targetType);
+			Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(DeclaredType);
 			//check whether it's a base or an interface
 			var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
-				TypeHelpers.GetInterfaces(targetType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-				: targetType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+				TypeHelpers.GetInterfaces(DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
+				: DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
 			if (mappedBase != null)
 			{
 				var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);
-				var typeParamPositions = TypeHelpers.GetGenericArguments(targetType)
+				var typeParamPositions = TypeHelpers.GetGenericArguments(DeclaredType)
 					.Select(t =>
 					{
 						var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
 
-				//if the mapping is not found, but one or more of the interface type parameters are generic, then 
-				//it's possible that one of those has been passed the type parameter.
-				//the problem with that, fromm our point of view, however, is how then 
+						//if the mapping is not found, but one or more of the interface type parameters are generic, then 
+						//it's possible that one of those has been passed the type parameter.
+						//the problem with that, fromm our point of view, however, is how then 
 
-				return new
+						return new
 						{
 							DeclaredTypeParamPosition = t.GenericParameterPosition,
 							Type = t,
-					//the projection here allows us to get the index of the base interface's generic type parameter
-					//It is required because using the GenericParameterPosition property simply returns the index of the 
-					//type in our declared type, as the type is passed down into the interfaces from the open generic
-					//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
-					//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
-					MappedTo = mapping
+							//the projection here allows us to get the index of the base interface's generic type parameter
+							//It is required because using the GenericParameterPosition property simply returns the index of the 
+							//type in our declared type, as the type is passed down into the interfaces from the open generic
+							//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
+							//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
+							MappedTo = mapping
 						};
 					}).OrderBy(r => r.MappedTo != null ? r.MappedTo[0] : int.MinValue).ToArray();
 
