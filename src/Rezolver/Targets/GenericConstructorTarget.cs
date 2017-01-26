@@ -19,6 +19,26 @@ namespace Rezolver.Targets
 	/// <seealso cref="TargetBase" />
 	public class GenericConstructorTarget : TargetBase
 	{
+		/// <summary>
+		/// Result returned from the <see cref="MapType(Type, out string)"/>
+		/// </summary>
+		public class MapTypeResult
+		{
+			public string ErrorMessage { get; }
+			public Type Type { get; }
+
+			public bool Success {  get { return Type != null; } }
+
+			internal MapTypeResult(Type type)
+			{
+				Type = type;
+			}
+
+			internal MapTypeResult(string errorMessage)
+			{
+				ErrorMessage = errorMessage;
+			}
+		}
 		private static Type[] EmptyTypes = new Type[0];
 
 		/// <summary>
@@ -72,30 +92,33 @@ namespace Rezolver.Targets
 		{
 			if (base.SupportsType(type))
 				return true;
+			return MapType(type).Success;
+		}
 
-			//should pass when requested type is a closed generic which can be made by a closed
-			//version of this target's open generic.  E.g. IFoo<Bar> should succeed when this target's type
-			//is Foo<T> : IFoo<T>
+		public MapTypeResult MapType(Type targetType)
+		{
+			//used both in SupportsType and in the Bind function - except the bind function
+			//receive any error message and uses it to throw an exception
+			if (!TypeHelpers.IsGenericType(targetType))
+				return new MapTypeResult($"The type { DeclaredType } cannot be mapped to non-generic type { targetType }");
 
-			if (!TypeHelpers.IsGenericType(type))
-				return false;
-
-			var genericType = type.GetGenericTypeDefinition();
+			var genericType = targetType.GetGenericTypeDefinition();
+			Type[] suppliedTypeArguments = EmptyTypes;
+			Type[] finalTypeArguments = EmptyTypes;
 			if (genericType == DeclaredType)
-				return true;
-
-			if (!TypeHelpers.IsInterface(genericType))
 			{
-				var bases = DeclaredType.GetAllBases();
-				var matchedBase = bases.FirstOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == genericType);
-				if (matchedBase != null)
-					return true;
+				finalTypeArguments = TypeHelpers.GetGenericArguments(targetType);
 			}
-			//TODO: tighten this up to handle the proposed partially open type
-			else if (TypeHelpers.GetInterfaces(DeclaredType).Any(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == genericType))
-				return true;
+			else
+			{
+				finalTypeArguments = MapGenericParameters(targetType);
 
-			return false;
+				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
+					return new MapTypeResult($"The requested type { targetType } doesn't contain enough generic arguments to calculate a closed generic type from { DeclaredType }");
+			}
+
+			//make the generic type
+			return new MapTypeResult(DeclaredType.MakeGenericType(finalTypeArguments));
 		}
 
 		/// <summary>
@@ -146,29 +169,12 @@ namespace Rezolver.Targets
 
 			var expectedType = context.TargetType;
 			if (expectedType == null)
-				throw new ArgumentException("GenericConstructorTarget requires a concrete type to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", "context");
-			if (!TypeHelpers.IsGenericType(expectedType))
-				throw new ArgumentException("The compile context requested an instance of a non-generic type to be built.", "context");
-
-			var genericType = expectedType.GetGenericTypeDefinition();
-			Type[] suppliedTypeArguments = EmptyTypes;
-			Type[] finalTypeArguments = EmptyTypes;
-			if (genericType == DeclaredType)
-			{
-				finalTypeArguments = TypeHelpers.GetGenericArguments(expectedType);
-			}
-			else
-			{
-				finalTypeArguments = MapGenericParameters(expectedType);
-
-				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
-					throw new ArgumentException("Unable to complete generic target, the requested type doesn't contain enough generic arguments to calculate the closed generic type to be created", "context");
-			}
-
-			//make the generic type
-			var typeToBuild = DeclaredType.MakeGenericType(finalTypeArguments);
+				throw new ArgumentException("GenericConstructorTarget requires a concrete type to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", nameof(context));
+			var mapTypeResult = MapType(context.TargetType);
+			if (!mapTypeResult.Success)
+				throw new ArgumentException(mapTypeResult.ErrorMessage, nameof(context));
 			//construct the constructortarget
-			return ConstructorTarget.Auto(typeToBuild, MemberBindingBehaviour);
+			return ConstructorTarget.Auto(mapTypeResult.Type, MemberBindingBehaviour);
 		}
 
 		private Type[] MapGenericParameters(Type requestedType)

@@ -47,14 +47,14 @@ namespace Rezolver.Tests.Targets
 			return new object[][]
 			{
 						//target type					//type which should be supported (often alternating between ref/value types)
-				new[] { typeof(Generic<>),				typeof(Generic<TypeArgs.T1>)},
-				new[] { typeof(Generic<>),				typeof(GenericBase<TypeArgs.T1>)},
-				new[] { typeof(Generic<>),				typeof(IGeneric<TypeArgs.T1>)},
-				new[] { typeof(Generic2<,>),			typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
-				new[] { typeof(Generic2<,>),			typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>) },
-				new[] { typeof(ReversingGeneric2<,>),	typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(Generic<>),              typeof(Generic<TypeArgs.T1>)},
+				new[] { typeof(Generic<>),              typeof(GenericBase<TypeArgs.T1>)},
+				new[] { typeof(Generic<>),              typeof(IGeneric<TypeArgs.T1>)},
+				new[] { typeof(Generic2<,>),            typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(Generic2<,>),            typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>) },
+				new[] { typeof(ReversingGeneric2<,>),   typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
 				new[] { typeof(ReversingGeneric2<,>),   typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>) },
-				new[] { typeof(NarrowingGeneric<>),		typeof(INarrowingGeneric<TypeArgs.T1>) },
+				new[] { typeof(NarrowingGeneric<>),     typeof(INarrowingGeneric<TypeArgs.T1>) },
 				new[] { typeof(NarrowingGeneric<>),     typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
 				new[] { typeof(NarrowingGeneric<>),     typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>) },
 				new[] { typeof(NarrowingGeneric<>),     typeof(GenericBase<TypeArgs.T1>) },
@@ -69,6 +69,24 @@ namespace Rezolver.Tests.Targets
 			Output.WriteLine($"Testing target for type { targetType } supports { testType }...");
 			var target = new GenericConstructorTarget(targetType);
 			Assert.True(target.SupportsType(testType));
+		}
+
+		public static IEnumerable<object[]> GetUnsupportedTypesTheoryData()
+		{
+			return new object[][] {
+				new[] { typeof(Generic2<,>), typeof(GenericBase<TypeArgs.T1>) }
+			};
+#error add other types - like Open Generics etc.
+		}
+	
+
+		[Theory]
+		[MemberData(nameof(GetUnsupportedTypesTheoryData))]
+		public void ShouldNotSupportType(Type targetType, Type testType)
+		{
+			Output.WriteLine($"Testing target for type { targetType } DOES NOT support { testType }");
+			var target = new GenericConstructorTarget(targetType);
+			Assert.False(target.SupportsType(testType));
 		}
 	}
 }
