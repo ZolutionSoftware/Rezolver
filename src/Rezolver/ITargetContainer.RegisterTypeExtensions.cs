@@ -32,7 +32,7 @@ namespace Rezolver
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> or 
-		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IMemberBindingBehaviour)"/> static methods and then registering it.</remarks>
+		/// <see cref="GenericConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> static methods and then registering it.</remarks>
 		public static void RegisterType<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
 			RegisterType(targetContainer, typeof(TObject), propertyBindingBehaviour: propertyBindingBehaviour);
@@ -55,7 +55,7 @@ namespace Rezolver
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> or 
-		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IMemberBindingBehaviour)"/> static methods and then registering it against
+		/// <see cref="GenericConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> static methods and then registering it against
 		/// the type <typeparamref name="TService"/>.</remarks>
 		public static void RegisterType<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
 		where TObject : TService

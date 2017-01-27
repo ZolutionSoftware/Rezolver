@@ -20,21 +20,35 @@ namespace Rezolver.Targets
 	public class GenericConstructorTarget : TargetBase
 	{
 		/// <summary>
-		/// Result returned from the <see cref="MapType(Type, out string)"/>
+		/// Result returned from the <see cref="MapType(Type)"/> function
 		/// </summary>
-		public class MapTypeResult
+		public class GenericTypeMapping
 		{
+			/// <summary>
+			/// Gets a string describing the reason why the type could not be mapped.  Can be used for exceptions, etc.
+			/// </summary>
+			/// <value>The error message.</value>
 			public string ErrorMessage { get; }
+			/// <summary>
+			/// If <see cref="Success"/> = <c>true</c>, gets the final, closed, generic type implementation to be used for the
+			/// requested type.
+			/// </summary>
+			/// <value>The type.</value>
 			public Type Type { get; }
-
+			/// <summary>
+			/// Gets a value indicating whether the <see cref="DeclaredType"/> of the <see cref="GenericConstructorTarget"/>  
+			/// was successfully mapped to the requested type.  If so, then an instance of <see cref="Type"/> will be compatible
+			/// with the type that was requested.
+			/// </summary>
+			/// <value><c>true</c> if success; otherwise, <c>false</c>.</value>
 			public bool Success {  get { return Type != null; } }
 
-			internal MapTypeResult(Type type)
+			internal GenericTypeMapping(Type type)
 			{
 				Type = type;
 			}
 
-			internal MapTypeResult(string errorMessage)
+			internal GenericTypeMapping(string errorMessage)
 			{
 				ErrorMessage = errorMessage;
 			}
@@ -77,8 +91,8 @@ namespace Rezolver.Targets
 			genericType.MustNotBeNull(nameof(genericType));
 			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
 				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Use ConstructorTarget for closed generics.");
-			if (!TypeHelpers.IsClass(genericType) || TypeHelpers.IsAbstract(genericType))
-				throw new ArgumentException("The type must be a non-abstract generic class definition");
+			if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
+				throw new ArgumentException("The type must be a generic type definition of either a non-abstract class or value type.");
 			GenericType = genericType;
 			MemberBindingBehaviour = memberBindingBehaviour;
 		}
@@ -90,17 +104,21 @@ namespace Rezolver.Targets
 		/// <returns></returns>
 		public override bool SupportsType(Type type)
 		{
+			//example - if this is bound to Generic<> and you pass Generic<>, then although the
+			//types are the same, 
 			if (base.SupportsType(type))
 				return true;
 			return MapType(type).Success;
 		}
 
-		public MapTypeResult MapType(Type targetType)
+		public GenericTypeMapping MapType(Type targetType)
 		{
 			//used both in SupportsType and in the Bind function - except the bind function
-			//receive any error message and uses it to throw an exception
+			//uses the error message as exception text
+			if (TypeHelpers.IsGenericTypeDefinition(targetType))
+				return new GenericTypeMapping($"The type { targetType } is an open generic and therefore can't be mapped to a closed version of { DeclaredType }");
 			if (!TypeHelpers.IsGenericType(targetType))
-				return new MapTypeResult($"The type { DeclaredType } cannot be mapped to non-generic type { targetType }");
+				return new GenericTypeMapping($"The type { DeclaredType } cannot be mapped to non-generic type { targetType }");
 
 			var genericType = targetType.GetGenericTypeDefinition();
 			Type[] suppliedTypeArguments = EmptyTypes;
@@ -114,11 +132,11 @@ namespace Rezolver.Targets
 				finalTypeArguments = MapGenericParameters(targetType);
 
 				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
-					return new MapTypeResult($"The requested type { targetType } doesn't contain enough generic arguments to calculate a closed generic type from { DeclaredType }");
+					return new GenericTypeMapping($"The requested type { targetType } doesn't contain enough generic arguments to calculate a closed generic type from { DeclaredType }");
 			}
 
 			//make the generic type
-			return new MapTypeResult(DeclaredType.MakeGenericType(finalTypeArguments));
+			return new GenericTypeMapping(DeclaredType.MakeGenericType(finalTypeArguments));
 		}
 
 		/// <summary>
@@ -255,35 +273,20 @@ namespace Rezolver.Targets
 			return null;
 		}
 
-
-		/// <summary>
-		/// Equivalent of <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> but for open generic types.
-		/// </summary>
-		/// <typeparam name="TGeneric">The open generic type from which a closed generic will be created when this target is called upon
-		/// to create an instance.</typeparam>
-		/// <param name="propertyBindingBehaviour">Optional behaviour controlling which properties and fields, if any, receive injected values.</param>
-		public static ITarget Auto<TGeneric>(IMemberBindingBehaviour propertyBindingBehaviour = null)
-		{
-			return Auto(typeof(TGeneric), propertyBindingBehaviour);
-		}
-
 		/// <summary>
 		/// Equivalent of <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> but for open generic types.
+		/// 
+		/// Note - there is no generic version because that could only be invoked by reflection.
 		/// </summary>
 		/// <param name="type">The type.</param>
-		/// <param name="propertyBindingBehaviour">The property binding behaviour.</param>
+		/// <param name="memberBindingBehaviour">Optional behaviour controlling which properties and fields, if any, will receive injected values.</param>
 		/// <exception cref="ArgumentException">
-		/// The passed type must be an open generic type
-		/// or
-		/// The passed type must a non-abstract class
+		/// This is raised from the <see cref="GenericConstructorTarget.GenericConstructorTarget(Type, IMemberBindingBehaviour)"/> constructor
+		/// when the passed type is either not an open generic type
+		/// or is an abstract class or interface.
 		/// </exception>
-		public static ITarget Auto(Type type, IMemberBindingBehaviour propertyBindingBehaviour = null)
-		{
-			//I might relax this constraint later - since we could implement partially open generics.
-			if (!TypeHelpers.IsGenericTypeDefinition(type))
-				throw new ArgumentException("The passed type must be an open generic type");
-			if (!TypeHelpers.IsClass(type) || TypeHelpers.IsAbstract(type))
-				throw new ArgumentException("The passed type must a non-abstract class");
+		public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)
+		{ 
 			return new GenericConstructorTarget(type);
 		}
 	}

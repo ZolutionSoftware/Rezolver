@@ -121,7 +121,7 @@ namespace Rezolver.Tests.Targets
 	//However, if you register Bar<T> : IFoo<T, int> for IFoo<,> then you can request 
 	//IFoo<double, int>, because the second type parameter is statically mapped.
 
-	public interface INarrowingGeneric<T> : IGeneric2<T, TypeArgs.IT2>
+	public interface INarrowingGeneric<T> : IGeneric2<T, TypeArgs.T2>
 	{
 
 	}
@@ -131,6 +131,50 @@ namespace Rezolver.Tests.Targets
 		//if you register this type and request an IGeneric<*, T2> it should work.
 		//equally, if you request an IGeneric<*> it should also work.
 	}
+
+	public class NestedGenericA<T> : Generic<IEnumerable<T>>
+	{
+		//finding this type's mapping to any of the bases or interfaces involves 
+		//translating through the layers of inheritance/implementation and 
+		//getting to the IEnumerable type parameter, then lifting the T out
+	}
+
+	public interface INestedGenericB<T> : IGeneric<IEnumerable<T>>
+	{
+
+	}
+
+	public class NestedGenericB<T> : INestedGenericB<T>
+	{
+		public void Foo()
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class TwiceNestedGenericA<T> : IGeneric<IGeneric<IEnumerable<T>>>
+	{
+		//even more complicated now - double nesting of generic parameters
+		public void Foo()
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public interface ITwiceNestedGenericB<T> : IGeneric<IGeneric<IEnumerable<T>>>
+	{
+
+	}
+
+	public class TwiceNestedGenericB<T> : ITwiceNestedGenericB<T>
+	{
+		public void Foo()
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public struct GenericValueType<T> { }
 
 	#endregion
 }

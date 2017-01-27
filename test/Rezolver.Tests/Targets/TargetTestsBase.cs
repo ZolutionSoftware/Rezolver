@@ -31,7 +31,7 @@ namespace Rezolver.Tests.Targets
 
 			public ICompileContext CreateContext(ResolveContext resolveContext, ITargetContainer targets, IContainer containerOverride = null)
 			{
-				return new TestCompileContext(resolveContext.Container, targets);
+				return new TestCompileContext(resolveContext.Container, targets, targetType: resolveContext.RequestedType);
 			}
 		}
 
@@ -64,11 +64,11 @@ namespace Rezolver.Tests.Targets
 		/// <param name="targets">The target container to use for the compile context.  If null, then the <paramref name="container"/>
 		/// will be passed to the <see cref="GetDefaultTargetContainer(IContainer)"/> method (including if one is automatically
 		/// built) - with the target container that's returned being used instead.</param>
-		protected virtual ICompileContext GetCompileContext(ITarget target, IContainer container = null, ITargetContainer targets = null)
+		protected virtual ICompileContext GetCompileContext(ITarget target, IContainer container = null, ITargetContainer targets = null, Type targetType = null)
 		{
 			container = container ?? GetDefaultContainer();
 			targets = targets ?? GetDefaultTargetContainer(container);
-			return GetContextProvider().CreateContext(new ResolveContext(container, target.DeclaredType), targets);
+			return GetContextProvider().CreateContext(new ResolveContext(container, targetType ?? target.DeclaredType), targets);
 		}
 	}
 }

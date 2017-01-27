@@ -68,7 +68,11 @@ namespace Rezolver
 		/// Implementations of <see cref="Compilation.ITargetCompiler"/> should always consult this function in their
 		/// implementation of <see cref="Compilation.ITargetCompiler.CompileTarget(ITarget, Compilation.ICompileContext)"/>
 		/// to determine if the target is compatible with the <see cref="Compilation.CompileContext.TargetType"/> of the
-		/// <see cref="Compilation.CompileContext"/></remarks>
+		/// <see cref="Compilation.CompileContext"/>
+		/// 
+		/// Please note that any <paramref name="type"/> that's a generic type definition will always yield a false result,
+		/// because it's impossible to build an instance of an open generic type.
+		/// </remarks>
 		bool SupportsType(Type type);
 	}
 }

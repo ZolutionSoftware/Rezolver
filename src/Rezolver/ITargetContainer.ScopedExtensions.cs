@@ -34,7 +34,7 @@ namespace Rezolver
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> or 
-		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IMemberBindingBehaviour)"/> static methods, wrapping it with a
+		/// <see cref="GenericConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> static methods, wrapping it with a
 		/// <see cref="ScopedTarget"/> and registering it.</remarks>
 		public static void RegisterScoped<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
 		{
@@ -58,7 +58,7 @@ namespace Rezolver
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> or 
-		/// <see cref="GenericConstructorTarget.Auto{TGeneric}(IMemberBindingBehaviour)"/> static methods, wrapping it with a
+		/// <see cref="GenericConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> static methods, wrapping it with a
 		/// <see cref="ScopedTarget"/> and then registering it against
 		/// the type <typeparamref name="TService"/>.</remarks>
 		public static void RegisterScoped<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
