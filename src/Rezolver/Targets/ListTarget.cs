@@ -128,14 +128,10 @@ namespace Rezolver.Targets
 		/// All targets in the items enumerable must support the element type <paramref name="elementType"/></exception>
 		public ListTarget(Type elementType, IEnumerable<ITarget> items, bool asArray = false)
 		{
-			if (elementType == null)
-				throw new ArgumentNullException("elementType");
-			if (items == null)
-				throw new ArgumentNullException("items");
-			if (items.Any(i => i == null))
-				throw new ArgumentException("All targets in the items enumerable must be non-null", "items");
-			if (items.Any(i => !i.SupportsType(elementType)))
-				throw new ArgumentException(string.Format("All targets in the items enumerable must support the element type {0}", elementType), "items");
+			elementType.MustNotBeNull(nameof(elementType));
+			items.MustNotBeNull(nameof(items));
+			items.MustNot(ts => ts.Any(t => t == null), "All targets in the items enumerable must be non-null", nameof(items));
+			items.MustNot(ts => ts.Any(t => !t.SupportsType(elementType)), $"All targets in the items enumerable must support the element type { elementType }", nameof(items));
 
 			ElementType = elementType;
 			Items = items;
