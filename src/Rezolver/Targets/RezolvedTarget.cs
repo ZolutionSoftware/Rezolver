@@ -45,17 +45,10 @@ namespace Rezolver.Targets
 	/// </remarks>
 	public class RezolvedTarget : TargetBase
 	{
-		
-		private readonly Type _resolveType;
-		private readonly ITarget _fallbackTarget;
-
 		/// <summary>
 		/// The type that is to be resolved from the container at resolve-time.
 		/// </summary>
-		public override Type DeclaredType
-		{
-			get { return _resolveType; }
-		}
+		public override Type DeclaredType { get; }
 
 		/// <summary>
 		/// Always returns true - we never wrap calls to a container inside a scope tracking expression.
@@ -79,13 +72,7 @@ namespace Rezolver.Targets
 		/// Note also that extension containers such as <see cref="OverridingContainer"/> also have the ability to override
 		/// the use of this fallback if they successfully resolve the type.
 		/// </remarks>
-		public ITarget FallbackTarget
-		{
-			get
-			{
-				return _fallbackTarget;
-			}
-		}
+		public ITarget FallbackTarget { get; }
 
 		/// <summary>
 		/// Creates a new <see cref="RezolvedTarget"/> for the given <paramref name="type"/> which will attempt to 
@@ -94,15 +81,16 @@ namespace Rezolver.Targets
 		/// </summary>
 		/// <param name="type">Required.  The type to be resolved</param>
 		/// <param name="fallbackTarget">Optional.  The target to be used if the value cannot be resolved at either compile time or 
-		/// resolve-time.</param>
+		/// resolve-time.  An <see cref="ArgumentException"/> is thrown if this target's <see cref="ITarget.SupportsType(Type)"/>
+		/// function returns <c>false</c> when called with the <paramref name="type"/>.</param>
 		public RezolvedTarget(Type type, ITarget fallbackTarget = null)
 		{
 			type.MustNotBeNull("type");
-			_resolveType = type;
-			_fallbackTarget = fallbackTarget;
+			if (fallbackTarget != null && !fallbackTarget.SupportsType(type))
+				throw new ArgumentException($"The fallback target must support the passed type { type }", nameof(fallbackTarget));
+			DeclaredType = type;
+			FallbackTarget = fallbackTarget;
 		}
-
-
 
 		/// <summary>
 		/// Attempts to obtain the target that this <see cref="RezolvedTarget"/> resolves to for the given <see cref="ICompileContext"/>.
@@ -119,11 +107,11 @@ namespace Rezolver.Targets
 		{
 			context.MustNotBeNull(nameof(context));
 
-			var fromContext = context.Fetch(_resolveType);
+			var fromContext = context.Fetch(DeclaredType);
 			if (fromContext == null)
-				return _fallbackTarget; //might still be null of course
+				return FallbackTarget; //might still be null of course
 			else if (fromContext.UseFallback)
-				return _fallbackTarget ?? fromContext;
+				return FallbackTarget ?? fromContext;
 
 			return fromContext;
 		}
