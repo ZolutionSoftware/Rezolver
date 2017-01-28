@@ -80,6 +80,7 @@ namespace Rezolver.Targets
 		object ICompiledTarget.GetObject(ResolveContext context)
 		{
 			//when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
+			//POSSIBLY CHANGING HERE
 			if (SuppressScopeTracking || context.Scope == null)
 				return Value;
 			else {

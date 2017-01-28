@@ -24,7 +24,8 @@ namespace Rezolver.Targets
 		}
 		private static readonly ConcurrentDictionary<Type, Func<object>> _defaultCallbacks = new ConcurrentDictionary<Type, Func<object>>();
 
-		private static object GetDefault(Type type)
+		//internal to allow other classes take advantage of late-bound defaults
+		internal static object GetDefault(Type type)
 		{
 			return _defaultCallbacks.GetOrAdd(type, t => {
 				var tDefault = typeof(Default<>).MakeGenericType(type);

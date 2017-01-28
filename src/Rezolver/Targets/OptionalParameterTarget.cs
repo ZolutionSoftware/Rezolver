@@ -10,6 +10,8 @@ namespace Rezolver.Targets
 	/// <summary>
 	/// Used specifically when binding arguments to method parameters when a parameter is optional and its
 	/// default value is to be used when binding to it.
+	/// 
+	/// It is highly unlikely you'll ever create one of these directly.
 	/// </summary>
 	public class OptionalParameterTarget : TargetBase
 	{
@@ -42,6 +44,13 @@ namespace Rezolver.Targets
 		public ParameterInfo MethodParameter { get; }
 
 		/// <summary>
+		/// Gets the value represented by this target.  This is either the default value of the 
+		/// <see cref="MethodParameter"/>, if applicable, or the default for the parameter type.
+		/// </summary>
+		/// <value>The value.</value>
+		public object Value { get; }
+
+		/// <summary>
 		/// Constructs a new instance of the <see cref="OptionalParameterTarget"/> class.
 		/// </summary>
 		/// <param name="methodParameter">Required - parameter to which this target will be bound.
@@ -52,6 +61,9 @@ namespace Rezolver.Targets
 			methodParameter.MustNotBeNull(nameof(methodParameter));
 			methodParameter.MustNot(pi => !pi.IsOptional, "The methodParameter must represent an optional parameter", nameof(methodParameter));
 			MethodParameter = methodParameter;
+			//re-use the DefaultTarget's GetDefault method, which gives us easy access to the default value for any type.
+			Value = (MethodParameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault ?
+				MethodParameter.DefaultValue : DefaultTarget.GetDefault(MethodParameter.ParameterType);
 		}
 	}
 }
