@@ -71,7 +71,7 @@ namespace Rezolver.Compilation.Expressions
 
 			ICompiledTarget resultCompiledTarget = target as ICompiledTarget;
 			if (resultCompiledTarget != null)
-				return (IExpressionCompiler)resultCompiledTarget.GetObject(new ResolveContext(context.Container, objectType));
+				return resultCompiledTarget.GetObject(new ResolveContext(context.Container, objectType));
 
 			return null;
 		}

@@ -19,6 +19,12 @@ namespace Rezolver
 	public class ConstructorBinding : MethodBinding
     {
 		/// <summary>
+		/// An empty array of <see cref="MemberBinding"/> objects used to represent a 
+		/// constructor binding with no bound members.  The <see cref="MemberBindings"/> property
+		/// will be set to this if the constructor is called with a null <c>memberBindings</c> argument.
+		/// </summary>
+		public static MemberBinding[] NoBoundMembers = new MemberBinding[0];
+		/// <summary>
 		/// Gets the constructor to be invoked. Note that this simply returns the 
 		/// base <see cref="MethodBinding.Method"/> property cast to <see cref="ConstructorInfo"/>.
 		/// </summary>
@@ -44,7 +50,7 @@ namespace Rezolver
 			MemberBinding[] memberBindings = null)
 			: base(constructor, boundArgs)
 		{
-			MemberBindings = memberBindings;
+			MemberBindings = memberBindings ?? NoBoundMembers;
 		}
     }
 }

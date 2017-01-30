@@ -6,6 +6,7 @@ using Rezolver.Targets;
 using Xunit;
 using System.Reflection;
 using Xunit.Abstractions;
+using Rezolver.Tests.Types;
 
 namespace Rezolver.Tests.Targets
 {
@@ -133,17 +134,27 @@ namespace Rezolver.Tests.Targets
 				return $"Type: { Type }, Expected ctor: { ExpectedConstructor }, Container?: { ContainerFactory != DefaultContainerFactory }, Named Args?: { NamedArgsFactory != DefaultNamedArgsFactory }";
 			}
 
-			public void Run(ConstructorTargetTests host)
+			public void RunBindingTest(ConstructorTargetTests host)
 			{
 				host.Output.WriteLine("Running JIT Binding Test \"{0}\".", Description ?? "Unknown Bindings Test");
 				host.Output.WriteLine(ToString());
-				var target = new ConstructorTarget(Type, namedArgs: NamedArgsFactory());
+				var namedArgs = NamedArgsFactory();
+				var target = new ConstructorTarget(Type, namedArgs: namedArgs);
 				var compileContext = host.GetCompileContext(target, ContainerFactory());
 
 				var binding = target.Bind(compileContext);
 
 				Xunit.Assert.NotNull(binding);
 				Xunit.Assert.Same(ExpectedConstructor, binding.Constructor);
+
+				if(namedArgs != null && namedArgs.Count != 0)
+				{
+					Assert.All(namedArgs, kvp => {
+						var boundArg = binding.BoundArguments.SingleOrDefault(p => p.Parameter.Name == kvp.Key);
+						Assert.NotNull(boundArg);
+						Assert.Same(kvp.Value, boundArg.Target);
+					});
+				}
 				//
 				host.Output.WriteLine("Test Complete");
 			}
@@ -202,7 +213,7 @@ namespace Rezolver.Tests.Targets
 		[MemberData(nameof(JITBindingData))]
 		public void ShouldJITBind(ExpectedJITBinding test)
 		{
-			test.Run(this);
+			test.RunBindingTest(this);
 		}
 
 		//2) Constructor-specific binding

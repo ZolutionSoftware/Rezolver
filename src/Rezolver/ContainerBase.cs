@@ -128,18 +128,19 @@ namespace Rezolver
 		protected ContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)
 		{
 			Targets = targets ?? new TargetContainer();
-			Compiler = compiler ?? TargetCompiler.Default;
+			//Compiler = compiler ?? TargetCompiler.Default;
 			//register the current default target compiler as our default compiler.
-			Register(TargetCompiler.Default.AsObjectTarget());
+			if(compiler != null)
+				Register(compiler.AsObjectTarget());
 		}
 
-		/// <summary>
-		/// The compiler that will be used to compile <see cref="ITarget"/> instances (obtained from the <see cref="Targets"/> container
-		/// during <see cref="Resolve(ResolveContext)"/> and <see cref="TryResolve(ResolveContext, out object)"/> operations) into 
-		/// <see cref="ICompiledTarget"/> instances that will actually provide the objects that are resolved.
-		/// </summary>
-		/// <remarks>Notes to implementers: This property must NEVER be null.</remarks>
-		protected ITargetCompiler Compiler { get; }
+		///// <summary>
+		///// The compiler that will be used to compile <see cref="ITarget"/> instances (obtained from the <see cref="Targets"/> container
+		///// during <see cref="Resolve(ResolveContext)"/> and <see cref="TryResolve(ResolveContext, out object)"/> operations) into 
+		///// <see cref="ICompiledTarget"/> instances that will actually provide the objects that are resolved.
+		///// </summary>
+		///// <remarks>Notes to implementers: This property must NEVER be null.</remarks>
+		//protected ITargetCompiler Compiler { get; }
 
 		/// <summary>
 		/// Provides the <see cref="ITarget"/> instances that will be compiled by the <see cref="Compiler"/> into <see cref="ICompiledTarget"/>

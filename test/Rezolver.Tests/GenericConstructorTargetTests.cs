@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using OldTypes = Rezolver.Tests.TestTypes;
 
 namespace Rezolver.Tests
 {
@@ -39,10 +40,10 @@ namespace Rezolver.Tests
       //typical pattern already 
       var container = CreateContainer();
       container.RegisterObject(1);
-      ITarget t = GenericConstructorTarget.Auto(typeof(Generic<>));
+      ITarget t = GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>));
       Assert.NotNull(t);
-      Assert.Equal(typeof(Generic<>), t.DeclaredType);
-      var instance = GetValueFromTarget<Generic<int>>(t, container);
+      Assert.Equal(typeof(OldTypes.Generic<>), t.DeclaredType);
+      var instance = GetValueFromTarget<OldTypes.Generic<int>>(t, container);
       Assert.NotNull(instance);
       Assert.Equal(1, instance.Value);
     }
@@ -52,13 +53,13 @@ namespace Rezolver.Tests
     {
       //in this one, using DefaultRezolver, we're going to test a few parameter types
       var container = new Container();
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)));
       container.Register((2).AsObjectTarget());
       container.Register((3).AsObjectTarget(typeof(int?)));
       container.Register("hello world".AsObjectTarget());
-      var instance1 = (Generic<int>)container.Resolve(typeof(Generic<int>));
-      var instance2 = (Generic<string>)container.Resolve(typeof(Generic<string>));
-      var instance3 = (Generic<int?>)container.Resolve(typeof(Generic<int?>));
+      var instance1 = (OldTypes.Generic<int>)container.Resolve(typeof(OldTypes.Generic<int>));
+      var instance2 = (OldTypes.Generic<string>)container.Resolve(typeof(OldTypes.Generic<string>));
+      var instance3 = (OldTypes.Generic<int?>)container.Resolve(typeof(OldTypes.Generic<int?>));
 
       Assert.Equal(2, instance1.Value);
       Assert.Equal("hello world", instance2.Value);
@@ -72,7 +73,7 @@ namespace Rezolver.Tests
     public void ShouldRezolveAClosedGenericDependency()
     {
       var container = new Container();
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)));
       container.Register((2).AsObjectTarget());
       container.Register(ConstructorTarget.Auto<HasGenericDependency>());
 
@@ -91,10 +92,10 @@ namespace Rezolver.Tests
       //the type argument as a type argument to another open generic dependency.  That one is on it's way.
       var container = new Container();
 
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)));
       container.Register(GenericConstructorTarget.Auto(typeof(GenericNoCtor<>)));
 
-      var result = (Generic<GenericNoCtor<int>>)container.Resolve(typeof(Generic<GenericNoCtor<int>>));
+      var result = (OldTypes.Generic<GenericNoCtor<int>>)container.Resolve(typeof(OldTypes.Generic<GenericNoCtor<int>>));
       Assert.NotNull(result);
       Assert.NotNull(result.Value);
       Assert.Equal(0, result.Value.Value);
@@ -109,7 +110,7 @@ namespace Rezolver.Tests
       var container = new Container();
 
       container.Register((10).AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)));
       container.Register(GenericConstructorTarget.Auto(typeof(HasOpenGenericDependency<>)));
 
       var result = (HasOpenGenericDependency<int>)container.Resolve(typeof(HasOpenGenericDependency<int>));
@@ -125,10 +126,10 @@ namespace Rezolver.Tests
     {
       var container = new Container();
       container.Register((20).AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)), typeof(OldTypes.IGeneric<>));
 
-      var result = (IGeneric<int>)container.Resolve(typeof(IGeneric<int>));
-      Assert.IsType<Generic<int>>(result);
+      var result = (OldTypes.IGeneric<int>)container.Resolve(typeof(OldTypes.IGeneric<int>));
+      Assert.IsType<OldTypes.Generic<int>>(result);
       Assert.Equal(20, result.Value);
     }
 
@@ -143,16 +144,16 @@ namespace Rezolver.Tests
       //we need three dependencies registered - the inner T, an IGenericA<> and 
       //an IGeneric<IGenericA<T>>.
       container.Register((25).AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)), typeof(OldTypes.IGeneric<>));
       //note here - using MakeGenericType is the only way to get a reference to a type like IFoo<IFoo<>> because
       //supply an open generic as a type parameter to a generic is not valid.
-      container.Register(GenericConstructorTarget.Auto(typeof(GenericGeneric<>)), typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
+      container.Register(GenericConstructorTarget.Auto(typeof(GenericGeneric<>)), typeof(OldTypes.IGeneric<>).MakeGenericType(typeof(OldTypes.IGeneric<>)));
 
-      var result = (IGeneric<IGeneric<int>>)container.Resolve(typeof(IGeneric<IGeneric<int>>));
+      var result = (OldTypes.IGeneric<OldTypes.IGeneric<int>>)container.Resolve(typeof(OldTypes.IGeneric<OldTypes.IGeneric<int>>));
 
       Assert.Equal(25, result.Value.Value);
       Assert.IsType<GenericGeneric<int>>(result);
-      Assert.IsType<Generic<int>>(result.Value);
+      Assert.IsType<OldTypes.Generic<int>>(result.Value);
     }
 
     [Fact]
@@ -160,7 +161,7 @@ namespace Rezolver.Tests
     {
       var container = new Container();
       container.Register((30).AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)), typeof(OldTypes.IGeneric<>));
       container.Register(ConstructorTarget.Auto<HasGenericInterfaceDependency>());
       var result = (HasGenericInterfaceDependency)container.Resolve(typeof(HasGenericInterfaceDependency));
       Assert.NotNull(result.Dependency);
@@ -175,7 +176,7 @@ namespace Rezolver.Tests
       container.Register((50d).AsObjectTarget(typeof(double?))); //will that work?
       container.Register("hello interface generics!".AsObjectTarget());
       //now register the IGeneric<T>
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic<>)), typeof(IGeneric<>));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic<>)), typeof(OldTypes.IGeneric<>));
       container.Register(GenericConstructorTarget.Auto(typeof(HasOpenGenericInterfaceDependency<>)));
       var resultWithInt = (HasOpenGenericInterfaceDependency<int>)container.Resolve(typeof(HasOpenGenericInterfaceDependency<int>));
       var resultWithNullableDouble = (HasOpenGenericInterfaceDependency<double?>)container.Resolve(typeof(HasOpenGenericInterfaceDependency<double?>));
@@ -199,12 +200,12 @@ namespace Rezolver.Tests
       var container = CreateContainer();
       container.Register((60).AsObjectTarget());
       container.Register("hello multiple".AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic2<,>)));
-      var result = (Generic2<int, string>)container.Resolve(typeof(Generic2<int, string>));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic2<,>)));
+      var result = (OldTypes.Generic2<int, string>)container.Resolve(typeof(OldTypes.Generic2<int, string>));
       Assert.Equal(60, result.Value1);
       Assert.Equal("hello multiple", result.Value2);
 
-      var result2 = (Generic2<string, int>)container.Resolve(typeof(Generic2<string, int>));
+      var result2 = (OldTypes.Generic2<string, int>)container.Resolve(typeof(OldTypes.Generic2<string, int>));
       Assert.Equal("hello multiple", result2.Value1);
       Assert.Equal(60, result2.Value2);
     }
@@ -216,12 +217,12 @@ namespace Rezolver.Tests
       var container = CreateContainer();
       container.Register((70).AsObjectTarget());
       container.Register("hello multiple interface".AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic2<,>)), typeof(IGeneric2<,>));
-      var result = (IGeneric2<int, string>)container.Resolve(typeof(IGeneric2<int, string>));
+      container.Register(GenericConstructorTarget.Auto(typeof(OldTypes.Generic2<,>)), typeof(OldTypes.IGeneric2<,>));
+      var result = (OldTypes.IGeneric2<int, string>)container.Resolve(typeof(OldTypes.IGeneric2<int, string>));
       Assert.Equal(70, result.Value1);
       Assert.Equal("hello multiple interface", result.Value2);
 
-      var result2 = (IGeneric2<string, int>)container.Resolve(typeof(IGeneric2<string, int>));
+      var result2 = (OldTypes.IGeneric2<string, int>)container.Resolve(typeof(OldTypes.IGeneric2<string, int>));
       Assert.Equal("hello multiple interface", result2.Value1);
       Assert.Equal(70, result2.Value2);
     }
@@ -235,8 +236,8 @@ namespace Rezolver.Tests
       //the thing here being that the type parameters for IGeneric2 are swapped in Generic2Reversed,
       //so we're testing that the engine can identify that and map the parameters from IGeneric2
       //back to the type parameters that should be passed to Generic2Reversed
-      container.Register(GenericConstructorTarget.Auto(typeof(Generic2Reversed<,>)), typeof(IGeneric2<,>));
-      var result = (IGeneric2<int, string>)container.Resolve(typeof(IGeneric2<int, string>));
+      container.Register(GenericConstructorTarget.Auto(typeof(Generic2Reversed<,>)), typeof(OldTypes.IGeneric2<,>));
+      var result = (OldTypes.IGeneric2<int, string>)container.Resolve(typeof(OldTypes.IGeneric2<int, string>));
       Assert.IsType<Generic2Reversed<string, int>>(result);
       Assert.Equal(80, result.Value1);
       Assert.Equal("hello reversed interface", result.Value2);
@@ -247,8 +248,8 @@ namespace Rezolver.Tests
     {
       var container = CreateContainer();
       container.Register((90).AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric<>)), typeof(Generic<>));
-      var result = (Generic<int>)container.Resolve(typeof(Generic<int>));
+      container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric<>)), typeof(OldTypes.Generic<>));
+      var result = (OldTypes.Generic<int>)container.Resolve(typeof(OldTypes.Generic<int>));
       Assert.Equal(90, result.Value);
     }
 
@@ -258,8 +259,8 @@ namespace Rezolver.Tests
       //testing that the type parameter mapping will walk the inheritance treee correctly
       var container = CreateContainer();
       container.Register((100).AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(DoubleDeriveGeneric<>)), typeof(Generic<>));
-      var result = (Generic<int>)container.Resolve(typeof(Generic<int>));
+      container.Register(GenericConstructorTarget.Auto(typeof(DoubleDeriveGeneric<>)), typeof(OldTypes.Generic<>));
+      var result = (OldTypes.Generic<int>)container.Resolve(typeof(OldTypes.Generic<int>));
       Assert.Equal(100, result.Value);
     }
 
@@ -269,8 +270,8 @@ namespace Rezolver.Tests
       var container = CreateContainer();
       container.Register((110).AsObjectTarget());
       container.Register("Hello double parameter base".AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2<,>)), typeof(Generic2<,>));
-      var result = (Generic2<int, string>)container.Resolve(typeof(Generic2<int, string>));
+      container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2<,>)), typeof(OldTypes.Generic2<,>));
+      var result = (OldTypes.Generic2<int, string>)container.Resolve(typeof(OldTypes.Generic2<int, string>));
       Assert.Equal(110, result.Value1);
       Assert.Equal("Hello double parameter base", result.Value2);
     }
@@ -281,8 +282,8 @@ namespace Rezolver.Tests
       var container = CreateContainer();
       container.Register((120).AsObjectTarget());
       container.Register("Hello double parameter base of a base".AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2<,>)), typeof(Generic2<,>));
-      var result = (Generic2<int, string>)container.Resolve(typeof(Generic2<int, string>));
+      container.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2<,>)), typeof(OldTypes.Generic2<,>));
+      var result = (OldTypes.Generic2<int, string>)container.Resolve(typeof(OldTypes.Generic2<int, string>));
       Assert.Equal(120, result.Value1);
       Assert.Equal("Hello double parameter base of a base", result.Value2);
     }
@@ -293,8 +294,8 @@ namespace Rezolver.Tests
       var container = CreateContainer();
       container.Register((130).AsObjectTarget());
       container.Register("Hello double parameter reversed base".AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2Reversed<,>)), typeof(Generic2<,>));
-      var result = (Generic2<int, string>)container.Resolve(typeof(Generic2<int, string>));
+      container.Register(GenericConstructorTarget.Auto(typeof(DerivedGeneric2Reversed<,>)), typeof(OldTypes.Generic2<,>));
+      var result = (OldTypes.Generic2<int, string>)container.Resolve(typeof(OldTypes.Generic2<int, string>));
       Assert.IsType<DerivedGeneric2Reversed<string, int>>(result);
       Assert.Equal(130, result.Value1);
       Assert.Equal("Hello double parameter reversed base", result.Value2);
@@ -306,8 +307,8 @@ namespace Rezolver.Tests
       var container = CreateContainer();
       container.Register((140).AsObjectTarget());
       container.Register("Hello double parameter reversed base of a base".AsObjectTarget());
-      container.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2Reversed<,>)), typeof(Generic2<,>));
-      var result = (Generic2<int, string>)container.Resolve(typeof(Generic2<int, string>));
+      container.Register(GenericConstructorTarget.Auto(typeof(DoubleDerivedGeneric2Reversed<,>)), typeof(OldTypes.Generic2<,>));
+      var result = (OldTypes.Generic2<int, string>)container.Resolve(typeof(OldTypes.Generic2<int, string>));
       Assert.IsType<DoubleDerivedGeneric2Reversed<string, int>>(result);
       Assert.Equal(140, result.Value1);
       Assert.Equal("Hello double parameter reversed base of a base", result.Value2);

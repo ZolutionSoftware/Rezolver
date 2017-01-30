@@ -1,6 +1,7 @@
 ﻿using Rezolver.Configuration;
 using Rezolver.Configuration.Json;
 using Rezolver.Tests.TestTypes;
+using Rezolver.Tests.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;

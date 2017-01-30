@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit;
 using Rezolver.Targets;
+using Rezolver.Tests.Types;
 
 namespace Rezolver.Tests.Targets
 {

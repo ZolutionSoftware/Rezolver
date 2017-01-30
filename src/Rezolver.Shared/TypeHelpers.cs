@@ -18,6 +18,15 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeHelpers
 	{
+		internal static bool IsPublic(Type type)
+		{
+#if DOTNET
+			return type.GetTypeInfo().IsPublic;
+#else
+			return type.IsPublic;
+#endif
+		}
+
 		internal static bool IsGenericType(Type type)
 		{
 #if DOTNET

@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Rezolver.Tests.Types
+{
+	internal class TwiceNestedGenericB<T> : ITwiceNestedGenericB<T>
+	{
+		public void Foo()
+		{
+			throw new NotImplementedException();
+		}
+	}
+}

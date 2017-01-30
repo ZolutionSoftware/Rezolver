@@ -72,13 +72,17 @@ namespace Rezolver.Targets
 		//}
 
 		/// <summary>
-		/// Used to support compiled versions of this singleton - note this concept is something that probably needs
-		/// to move out of this type, into a more generic TargetState object or something like that.
+		/// Used to support compiled versions of this singleton
 		/// </summary>
 		/// <param name="declaredType">Type of object.</param>
 		/// <param name="initialiserFactory">The initialiser factory.</param>
+		/// <remarks>This concept is something that probably needs
+		/// to move out of this type, into a more generic TargetState object or something like that.</remarks>
 		public ICompiledTarget GetOrAddInitialiser(Type declaredType, Func<Type, ICompiledTarget> initialiserFactory)
 		{
+			declaredType.MustNotBeNull(nameof(declaredType));
+			initialiserFactory.MustNotBeNull(nameof(initialiserFactory));
+
 			return _initialisers.GetOrAdd(declaredType, initialiserFactory);
 		}
 
