@@ -51,6 +51,9 @@ namespace Rezolver.Tests.Targets
 				new[] { typeof(Generic<>),              typeof(Generic<TypeArgs.T1>)},
 				new[] { typeof(Generic<>),              typeof(GenericBase<TypeArgs.T1>),				typeof(Generic<TypeArgs.T1>)},
 				new[] { typeof(Generic<>),              typeof(IGeneric<TypeArgs.T1>),					typeof(Generic<TypeArgs.T1>)},
+				//this means that the generic type is supported, but not actually mapped to any concrete type. 
+#error GenericConstructorTarget MapType needs to be modified to support this.
+				new[] { typeof(Generic<>),              typeof(IGeneric<>),                             null },
 				new[] { typeof(Generic2<,>),            typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
 				new[] { typeof(Generic2<,>),            typeof(IGeneric2<TypeArgs.T1, TypeArgs.T2>),	typeof(Generic2<TypeArgs.T1, TypeArgs.T2>) },
 				new[] { typeof(ReversingGeneric2<,>),   typeof(Generic2<TypeArgs.T1, TypeArgs.T2>),		typeof(ReversingGeneric2<TypeArgs.T2, TypeArgs.T1>) },

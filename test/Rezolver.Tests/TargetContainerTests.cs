@@ -1,5 +1,5 @@
 ﻿using Rezolver.Targets;
-using Rezolver.Tests.TestTypes;
+using Rezolver.Tests.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,14 +51,14 @@ namespace Rezolver.Tests
     public void ShouldSupportTwoRegistrations()
     {
       ITargetContainer builder = new TargetContainer();
-      var simpleType = new SimpleType();
+      var simpleType = new NoCtor();
 
       ITarget target1 = "hello world".AsObjectTarget();
-      ITarget target2 = new SimpleType().AsObjectTarget();
+      ITarget target2 = new NoCtor().AsObjectTarget();
       builder.Register(target1);
       builder.Register(target2);
       Assert.Same(target1, builder.Fetch(typeof(string)));
-      Assert.Same(target2, builder.Fetch(typeof(SimpleType)));
+      Assert.Same(target2, builder.Fetch(typeof(NoCtor)));
     }
 
     [Fact]
@@ -89,7 +89,7 @@ namespace Rezolver.Tests
     {
       ITargetContainer builder = new TargetContainer();
       var notExpected = ConstructorTarget.Auto(typeof(Generic<>));
-      var expected = ConstructorTarget.Auto(typeof(GenericNoCtor<int>));
+      var expected = ConstructorTarget.Auto(typeof(AltGeneric<int>));
       builder.Register(notExpected, typeof(IGeneric<>));
       builder.Register(expected, typeof(IGeneric<int>));
       var fetched = builder.Fetch(typeof(IGeneric<int>));
@@ -112,7 +112,7 @@ namespace Rezolver.Tests
     {
       //can't think what else to call this scenario!
       ITargetContainer builder = new TargetContainer();
-      var target = GenericConstructorTarget.Auto(typeof(GenericGeneric<>));
+      var target = GenericConstructorTarget.Auto(typeof(NestedGenericA<>));
       builder.Register(target, typeof(IGeneric<>));
       var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
       Assert.Same(target, fetched);
@@ -126,7 +126,7 @@ namespace Rezolver.Tests
 
       //note here - using MakeGenericType is the only way to get a reference to a type like IFoo<IFoo<>> because
       //supply an open generic as a type parameter to a generic is not valid.
-      var target2 = GenericConstructorTarget.Auto(typeof(GenericGeneric<>));
+      var target2 = GenericConstructorTarget.Auto(typeof(NestedGenericA<>));
 
       builder.Register(target, typeof(IGeneric<>));
       builder.Register(target2, typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
@@ -142,7 +142,7 @@ namespace Rezolver.Tests
       //subtle different between how this one is registered versus the previous test
       // - registers for IGeneric<IGeneric<T>> instead of IGeneric<T>
       ITargetContainer builder = new TargetContainer();
-      var target = GenericConstructorTarget.Auto(typeof(GenericGeneric<>));
+      var target = GenericConstructorTarget.Auto(typeof(NestedGenericA<>));
       builder.Register(target, typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
       var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
       Assert.Same(target, fetched);

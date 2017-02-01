@@ -5,12 +5,17 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class Decorator : Decorated
+	internal class Decorator : IDecorated
 	{
-		public Decorated Decorated { get; }
-		public Decorator(Decorated decorated)
+		public IDecorated Decorated { get; }
+		public Decorator(IDecorated decorated)
 		{
 			Decorated = decorated;
+		}
+
+		public string DoSomething()
+		{
+			return Decorated.DoSomething() + " World";
 		}
 	}
 }

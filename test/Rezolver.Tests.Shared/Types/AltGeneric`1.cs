@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class NoCtor
+    internal class AltGeneric<T> : GenericBase<T>
     {
-		public int Value { get; protected set; }
+		public override void Foo()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

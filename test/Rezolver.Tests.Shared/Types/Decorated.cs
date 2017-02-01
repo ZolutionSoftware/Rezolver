@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class Decorated
+	internal class Decorated : IDecorated
 	{
-
+		public string DoSomething()
+		{
+			return "Hello";
+		}
 	}
 }

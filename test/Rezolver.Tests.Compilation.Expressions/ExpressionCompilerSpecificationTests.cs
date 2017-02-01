@@ -17,7 +17,7 @@ namespace Rezolver.Tests.Compilation.Expressions
 
 		}
 
-		protected override ITargetContainer CreateTargetContainer([CallerMemberName] string testName = null)
+		protected override ITargetContainerOwner CreateTargetContainer([CallerMemberName] string testName = null)
 		{
 			var toReturn = new TargetContainer();
 			toReturn.UseExpressionCompiler();

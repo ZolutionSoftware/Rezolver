@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class OneCtor
+	internal class OneCtor : NoCtor
 	{
-		public int Param1 { get; }
-
-		public OneCtor(int param1)
+		//some expected values
+		public const int ExpectedRezolvedValue = 101;
+		public const int ExpectedValue = 100;
+		public const int ExpectedDynamicExpressionMultiplier = 5;
+		public OneCtor(int value)
 		{
-			Param1 = param1;
+			Value = value;
 		}
 	}
 }

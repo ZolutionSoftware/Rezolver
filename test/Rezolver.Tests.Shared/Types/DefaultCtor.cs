@@ -5,8 +5,12 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class NoCtor
+    internal class DefaultCtor : NoCtor
     {
-		public int Value { get; protected set; }
+		public const int ExpectedValue = -1;
+		public DefaultCtor()
+		{
+			Value = ExpectedValue;
+		}
 	}
 }

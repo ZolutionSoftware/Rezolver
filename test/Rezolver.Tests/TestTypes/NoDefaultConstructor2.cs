@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Rezolver.Tests.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Rezolver.Tests.TestTypes
 {
-  public class NoDefaultConstructor2 : NoExplicitConstructor
+  internal class NoDefaultConstructor2 : NoCtor
   {
     public const int ExpectedBestValue = 1001;
     public const string ExpectedDefaultMessage = "Default Message";

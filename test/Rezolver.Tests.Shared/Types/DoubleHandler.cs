@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rezolver.Tests.TestTypes
+namespace Rezolver.Tests.Types
 {
-  public class DoubleHandler : IHandler<double>
+  internal class DoubleHandler : IHandler<double>
   {
     public string Handle(double t)
     {

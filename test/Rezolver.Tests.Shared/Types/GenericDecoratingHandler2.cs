@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Rezolver.Tests.TestTypes
+namespace Rezolver.Tests.Types
 {
-  public class GenericDecoratingHandler2<T> : IHandler<T>
+  internal class GenericDecoratingHandler2<T> : IHandler<T>
   {
     private readonly IHandler<T> _decorated;
 
