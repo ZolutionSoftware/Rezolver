@@ -115,20 +115,22 @@ namespace Rezolver.Targets
 		/// an instance of a given type rather than performing any type checking yourself on the
 		/// <see cref="DeclaredType" />, because an <see cref="ITarget" /> might be able to support a much wider
 		/// range of types other than just those which are directly compatible with its <see cref="DeclaredType" />.
+		/// 
 		/// For example, the <see cref="GenericConstructorTarget" /> is statically bound to an open generic, so therefore
 		/// traditional type checks on the <see cref="DeclaredType" /> do not work.  That class' implementation of this
 		/// method, however, contains the complex logic necessary to determine if the open generic can be closed into a
 		/// generic type which is compatible with the given <paramref name="type" />.
+		/// 
 		/// Implementations of <see cref="Compilation.ITargetCompiler" /> should always consult this function in their
 		/// implementation of <see cref="Compilation.ITargetCompiler.CompileTarget(ITarget, Compilation.ICompileContext)" />
 		/// to determine if the target is compatible with the <see cref="Compilation.CompileContext.TargetType" /> of the
 		/// <see cref="Compilation.CompileContext" />
-		/// Please note that any <paramref name="type" /> that's a generic type definition will always yield a false result,
-		/// because it's impossible to build an instance of an open generic type.</remarks>
+		/// </remarks>
 		public virtual bool SupportsType(Type type)
 		{
 			type.MustNotBeNull("type");
-			return TypeHelpers.AreCompatible(DeclaredType, type) && !TypeHelpers.IsGenericTypeDefinition(type);
+			//removed generic type test here because it's a blunt instrument.
+			return TypeHelpers.AreCompatible(DeclaredType, type)/* && !TypeHelpers.IsGenericTypeDefinition(type)*/;
 		}
 
 		/// <summary>

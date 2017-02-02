@@ -20,37 +20,75 @@ namespace Rezolver.Targets
 	public class GenericConstructorTarget : TargetBase
 	{
 		/// <summary>
-		/// Result returned from the <see cref="MapType(Type)"/> function
+		/// Result returned from the <see cref="MapType(Type)"/> function.  Represents various levels of success - 
+		/// from a completely incompatible mapping (<see cref="Success"/> = <c>false</c>), or a successful mapping from
+		/// an open generic type to a closed generic type which can then be constructed (<see cref="Success"/> = <c>true</c>
+		/// and <see cref="IsFullyBound"/> = <c>true</c>) or, a successful mapping from an open generic type to another open 
+		/// generic type (<see cref="Success"/> = <c>true</c> but <see cref="IsFullyBound"/> = <c>false</c>).
+		/// 
+		/// This mapping is then used by both the <see cref="SupportsType(Type)"/> and <see cref="Bind(ICompileContext)"/>
+		/// functions.  Only fully bound mappings are supported by <see cref="Bind(ICompileContext)"/>, whereas 
+		/// <see cref="SupportsType(Type)"/> will return <c>true</c> so long as the <see cref="Success"/> is true.
+		/// 
+		/// The caller, therefore, must ensure it is aware of the difference between open and closed generics.
 		/// </summary>
 		public class GenericTypeMapping
 		{
 			/// <summary>
 			/// Gets a string describing the reason why the type could not be mapped.  Can be used for exceptions, etc.
+			/// 
+			/// Note that this can be set even if <see cref="Success"/> is <c>true</c> - because mappings exist between
+			/// open generic types so that a target's <see cref="SupportsType(Type)"/> returns <c>true</c>, but the
+			/// <see cref="Bind(ICompileContext)"/> function throws an exception for the same type, since you can't create
+			/// an instance of an open generic.
 			/// </summary>
-			/// <value>The error message.</value>
-			public string ErrorMessage { get; }
+			/// <value>The binding error message.</value>
+			public string BindErrorMessage { get; }
 			/// <summary>
-			/// If <see cref="Success"/> = <c>true</c>, gets the final, closed, generic type implementation to be used for the
-			/// requested type.
+			/// The type requested for mapping.  If this is an open generic, then the best result for this mapping will be
+			/// that <see cref="Success"/> is <c>true</c> and <see cref="IsFullyBound"/> is <c>false</c>.
+			/// </summary>
+			public Type RequestedType { get; }
+			/// <summary>
+			/// If <see cref="Success"/> = <c>true</c>, gets the generic type to be used for the <see cref="RequestedType"/>.
+			/// 
+			/// Note that this could be either an open or closed generic - the <see cref="IsFullyBound"/> offers a quick means
+			/// by which to determine this.  If <see cref="IsFullyBound"/> is <c>true</c>, then the mapping will succeed when 
+			/// encountered by the <see cref="Bind(ICompileContext)"/> method.
 			/// </summary>
 			/// <value>The type.</value>
 			public Type Type { get; }
 			/// <summary>
 			/// Gets a value indicating whether the <see cref="DeclaredType"/> of the <see cref="GenericConstructorTarget"/>  
-			/// was successfully mapped to the requested type.  If so, then an instance of <see cref="Type"/> will be compatible
-			/// with the type that was requested.
+			/// was successfully mapped to the requested type.  If so, and <see cref="IsFullyBound"/> is <c>true</c>, then an 
+			/// instance of <see cref="Type"/> will be compatible with the type that was requested.
+			/// 
+			/// If <see cref="IsFullyBound"/> is <c>false</c>, then you can't create an instance of <see cref="Type"/> because it's
+			/// an open generic - but you will be able to bind the same target to a closed generic of the same <see cref="Type"/>.
 			/// </summary>
 			/// <value><c>true</c> if success; otherwise, <c>false</c>.</value>
 			public bool Success {  get { return Type != null; } }
 
-			internal GenericTypeMapping(Type type)
+			/// <summary>
+			/// If true, then the <see cref="Type"/> is a fully closed generic type that can be constructed (and therefore would
+			/// be successfully bound by the <see cref="Bind(ICompileContext)"/> method, which uses the <see cref="MapType(Type)"/> 
+			/// method).  If this is <c>false</c> but <see cref="Success"/> is <c>true</c>, then while the target is technically
+			/// compatible with the requested type, you can't create an instance.  The target will, however, be able to mapped to
+			/// a closed generic type based on the same <see cref="Type"/>.
+			/// </summary>
+			public bool IsFullyBound { get { return Success ? Type.IsConstructedGenericType : false; } }
+
+			internal GenericTypeMapping(Type requestedType, Type type, string bindErrorMessage = null)
 			{
+				RequestedType = requestedType;
 				Type = type;
+				BindErrorMessage = bindErrorMessage;
 			}
 
-			internal GenericTypeMapping(string errorMessage)
+			internal GenericTypeMapping(Type requestedType, string errorMessage)
 			{
-				ErrorMessage = errorMessage;
+				RequestedType = requestedType;
+				BindErrorMessage = errorMessage;
 			}
 		}
 		private static Type[] EmptyTypes = new Type[0];
@@ -99,13 +137,16 @@ namespace Rezolver.Targets
 
 		/// <summary>
 		/// Override - introduces additional logic to cope with generic types not generally supported by the majority of other targets.
+		/// 
+		/// This uses the <see cref="MapType(Type)"/> function to determine success, but only checks the <see cref="GenericTypeMapping.Success"/>
+		/// flag.  As a result, this method will return true if an open generic base or interface of <see cref="DeclaredType"/>
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
 		public override bool SupportsType(Type type)
 		{
-			//example - if this is bound to Generic<> and you pass Generic<>, then although the
-			//types are the same, 
+			//note - the base test will return true for any generic base or interface of DeclaredType - including where
+			//an open generic is passed which is the same a DeclaredType.
 			if (base.SupportsType(type))
 				return true;
 			return MapType(type).Success;
@@ -115,12 +156,12 @@ namespace Rezolver.Targets
 		{
 			//used both in SupportsType and in the Bind function - except the bind function
 			//uses the error message as exception text
-			if (TypeHelpers.IsGenericTypeDefinition(targetType))
-				return new GenericTypeMapping($"The type { targetType } is an open generic and therefore can't be mapped to a closed version of { DeclaredType }");
+			//if (TypeHelpers.IsGenericTypeDefinition(targetType))
+			//	return new GenericTypeMapping($"The type { targetType } is an open generic and therefore can't be mapped to a closed version of { DeclaredType }");
 			if (!TypeHelpers.IsGenericType(targetType))
-				return new GenericTypeMapping($"The type { DeclaredType } cannot be mapped to non-generic type { targetType }");
+				return new GenericTypeMapping(targetType, $"The type { DeclaredType } cannot be mapped to non-generic type { targetType }");
 
-			var genericType = targetType.GetGenericTypeDefinition();
+			var genericType = TypeHelpers.IsGenericTypeDefinition(targetType) ? targetType : targetType.GetGenericTypeDefinition();
 			Type[] suppliedTypeArguments = EmptyTypes;
 			Type[] finalTypeArguments = EmptyTypes;
 			if (genericType == DeclaredType)
@@ -131,12 +172,24 @@ namespace Rezolver.Targets
 			{
 				finalTypeArguments = MapGenericParameters(targetType);
 
+				if (finalTypeArguments == null)
+					return new GenericTypeMapping(targetType, $"The requested type { targetType } is not a generic base or interface of { DeclaredType }");
+
 				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
-					return new GenericTypeMapping($"The requested type { targetType } doesn't contain enough generic arguments to calculate a closed generic type from { DeclaredType }");
+				{
+					//if we were mapping to an open generic (generic type def), then the mapping is successful, so Success=true, but
+					//we can't create an instance of the type unless we try the mapping again with a closed version of the same
+					//type.  So that's what the error message here is for - it'll be used as an exception if Bind is called with the same
+					//type, even though SupportsType would return true.
+					if (TypeHelpers.IsGenericTypeDefinition(targetType))
+						return new GenericTypeMapping(targetType, DeclaredType, $"{ targetType } should be compatible with { DeclaredType }, but since it is an open generic type, no instance can be constructed");
+					else
+						return new GenericTypeMapping(targetType, $"There is not enough generic type information from { targetType } to map all generic arguments to { DeclaredType }.  This is likely to be because { targetType } has fewer type parameters than { DeclaredType }");
+				}
 			}
 
 			//make the generic type
-			return new GenericTypeMapping(DeclaredType.MakeGenericType(finalTypeArguments));
+			return new GenericTypeMapping(targetType, DeclaredType.MakeGenericType(finalTypeArguments));
 		}
 
 		/// <summary>
@@ -189,8 +242,9 @@ namespace Rezolver.Targets
 			if (expectedType == null)
 				throw new ArgumentException("GenericConstructorTarget requires a concrete type to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", nameof(context));
 			var mapTypeResult = MapType(context.TargetType);
-			if (!mapTypeResult.Success)
-				throw new ArgumentException(mapTypeResult.ErrorMessage, nameof(context));
+			//if the mapping fails, or the mapping is not fully bound to a closed generic, throw an exception
+			if (!mapTypeResult.Success || !mapTypeResult.IsFullyBound)
+				throw new ArgumentException(mapTypeResult.BindErrorMessage, nameof(context));
 			//construct the constructortarget
 			return ConstructorTarget.Auto(mapTypeResult.Type, MemberBindingBehaviour);
 		}
@@ -240,6 +294,9 @@ namespace Rezolver.Targets
 					finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
 				}
 			}
+			else
+				return null; //means that no mappings exist - because the types are not even compatible
+
 			return finalTypeArguments;
 		}
 
