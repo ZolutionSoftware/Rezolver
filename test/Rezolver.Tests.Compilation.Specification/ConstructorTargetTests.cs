@@ -8,13 +8,17 @@ using Xunit;
 
 namespace Rezolver.Tests.Compilation.Specification
 {
-    public partial class CompilerTestsBase
-    {
+	public partial class CompilerTestsBase
+	{
 		//tests in here are based on similar scenarios to the Binding tests
-		//for ConstructorTarget in the main test suite.
+		//for ConstructorTarget in the main test suite - except there are fewer, because
+		//there are actually very few unique cases for a compiler to deal with when it comes
+		//to executing constructors.
+
+		//Most of the complexity comes from things like RezolvedTargets etc.
 
 		[Fact]
-		public void ShouldCompileImplicitCtor()
+		public void ConstructorTarget_ImplicitCtor()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<NoCtor>();
@@ -25,7 +29,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldCompileOneParamCtor_WithResolvedArg()
+		public void ConstructorTarget_OneParamCtor_WithResolvedArg()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<OneCtor>();
@@ -38,7 +42,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldCompileTwoParamCtor_WithResolvedArgs()
+		public void ConstructorTarget_TwoParamCtor_WithResolvedArgs()
 		{
 			Output.WriteLine("Both arguments are supplied by automatically resolving them (using RezolvedTarget)");
 			var targets = CreateTargetContainer();
@@ -52,9 +56,9 @@ namespace Rezolver.Tests.Compilation.Specification
 			Assert.Equal(10, result.I);
 			Assert.Equal("hello world", result.S);
 		}
-		
+
 		[Fact]
-		public void ShouldCompileConstructorSelectedByNamedArgs()
+		public void ConstructorTarget_CtorSelectedByNamedArgs()
 		{
 			Output.WriteLine("The constructor is located JIT based on a single named argument");
 			var targets = CreateTargetContainer();
@@ -67,5 +71,5 @@ namespace Rezolver.Tests.Compilation.Specification
 			Assert.Equal("hello world", result.S);
 
 		}
-    }
+	}
 }

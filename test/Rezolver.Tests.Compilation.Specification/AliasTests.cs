@@ -9,8 +9,13 @@ namespace Rezolver.Tests.Compilation.Specification
 {
 	public partial class CompilerTestsBase
 	{
+		//An alias is a synthetic target created by wrapping a ChangeTypeTarget 
+		//around a RezolvedTarget
+
+		//These tests check that the compiler can support this combination
+
 		[Fact]
-		public void AliasShouldWorkForBaseTypes()
+		public void Alias_ShouldWorkForBaseTypes()
 		{
 			ITargetContainer targets = CreateTargetContainer();
 			targets.RegisterObject(1);
@@ -24,7 +29,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void AliasShouldWorkForDerivedTypes()
+		public void Alias_ShouldWorkForDerivedTypes()
 		{
 			ITargetContainer targets = CreateTargetContainer();
 			targets.RegisterObject(1, typeof(object));
@@ -37,7 +42,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void AliasShouldYieldSameSingleton()
+		public void Alias_ShouldYieldSameSingleton()
 		{
 			//this test can fail if the compiler is not working properly for singletons, too
 

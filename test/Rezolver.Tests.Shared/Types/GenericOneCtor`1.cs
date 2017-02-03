@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal abstract class GenericBase<T> : IGeneric<T>
-	{
-		public T Value
+    internal class GenericOneCtor<T> : Generic<T>
+    {
+		public GenericOneCtor(T value)
 		{
-			get; protected set;
+			Value = value;
 		}
-
-		public abstract void Foo();
-	}
+    }
 }

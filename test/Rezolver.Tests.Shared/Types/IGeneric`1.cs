@@ -7,6 +7,7 @@ namespace Rezolver.Tests.Types
 {
 	internal interface IGeneric<T>
 	{
+		T Value { get; }
 		void Foo();
 	}
 }

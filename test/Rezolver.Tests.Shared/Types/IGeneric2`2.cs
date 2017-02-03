@@ -10,6 +10,7 @@ namespace Rezolver.Tests.Types
 	//the type argument to use for the other parameters.
 	internal interface IGeneric2<Ta, Tb> : IGeneric<Ta>
 	{
+		Tb ValueB { get; }
 		void Foo2();
 	}
 }

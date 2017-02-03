@@ -7,6 +7,11 @@ namespace Rezolver.Tests.Types
 {
 	internal class TwiceNestedGenericA<T> : IGeneric<IGeneric<IEnumerable<T>>>
 	{
+		public IGeneric<IEnumerable<T>> Value
+		{
+			get; private set;
+		}
+
 		//even more complicated now - double nesting of generic parameters
 		public void Foo()
 		{

@@ -7,6 +7,11 @@ namespace Rezolver.Tests.Types
 {
 	internal class TwiceNestedGenericB<T> : ITwiceNestedGenericB<T>
 	{
+		public IGeneric<IEnumerable<T>> Value
+		{
+			get; private set;
+		}
+
 		public void Foo()
 		{
 			throw new NotImplementedException();

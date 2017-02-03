@@ -10,7 +10,7 @@ namespace Rezolver.Tests.Compilation.Specification
     public partial class CompilerTestsBase
     {
 		[Fact]
-		public void ShouldDecorateDecoratedType()
+		public void DecoratorTarget_PostRegistered()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<Decorated, IDecorated>();
@@ -25,7 +25,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldDecorateDecoratedTypeAddedAfterDecorator()
+		public void DecoratorTarget_PreRegistered()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterDecorator<Decorator, IDecorated>();
@@ -38,7 +38,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldDecorateDecorator()
+		public void DecoratorTarget_DecorateADecorator()
 		{
 			//see if stacking multiple decorators works.
 			var targets = CreateTargetContainer();
@@ -54,7 +54,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldCreateEnumerableOfDecoratedObjects()
+		public void DecoratorTarget_Enumerable_PostRegistered()
 		{
 			//this test check that requesting an IEnumerable of T gives you
 			//an enumerable of decorated T
@@ -70,7 +70,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldCreateEnumerableOfDecoratedObjectsAddedAfterDecorator()
+		public void DecoratorTarget_Enumerable_PreRegistered()
 		{
 			//this test is the same as above, except the decorator is registered first.
 			var targets = CreateTargetContainer();
@@ -86,7 +86,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldUseGenericDecorator()
+		public void DecoratorTarget_Generic_PostRegistered()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<StringHandler, IHandler<string>>();
@@ -100,7 +100,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldUseGenericDecoratorRegisteredBeforeTypes()
+		public void DecoratorTarget_Generic_PreRegistered()
 		{
 			//check that the decorator is registration order agnostic.
 			var targets = CreateTargetContainer();
@@ -115,7 +115,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldDecorateGenericDecorator()
+		public void DecoratorTarget_Generic_DecorateADecorator()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<StringHandler, IHandler<string>>();
@@ -127,7 +127,8 @@ namespace Rezolver.Tests.Compilation.Specification
 			Assert.Equal("((This is a string: Hello World) Decorated) Decorated again :)", result.Handle("Hello World"));
 		}
 
-		public void ShouldDecorateOnlyOneClosedGeneric()
+		[Fact]
+		public void DecoratorTarget_Generic_SpecificClosedGeneric()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<StringHandler, IHandler<string>>();
@@ -142,7 +143,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldInjectAdditionalDecoratorForOneClosedGeneric()
+		public void DecoratorTarget_Generic_DecorateADecorator_SpecificClosedGeneric_PostRegistered()
 		{
 			//in this test we register an open generic decorator
 			//and then register another decorator specialised for string.
@@ -165,7 +166,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldInjectAdditionDecorateForOneClosedGenericAddedBeforeRegistrations()
+		public void DecoratorTarget_Generic_DecorateADecorator_SpecificClosedGeneric_PreRegistered()
 		{
 			//as above, but checking that it works when the decorators are applied first
 			var targets = CreateTargetContainer();
@@ -184,7 +185,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ShouldDecorateGenericHandler()
+		public void DecoratorTarget_Generic_DecoratingImplementationInsteadOfInterface()
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType(typeof(GenericHandler<>), typeof(IHandler<>));
