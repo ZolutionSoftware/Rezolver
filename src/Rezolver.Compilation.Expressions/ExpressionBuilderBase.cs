@@ -73,12 +73,12 @@ namespace Rezolver.Compilation.Expressions
 				var result = Build(target, context, compiler);
 				Type convertType = context.TargetType ?? target.DeclaredType;
 
-				if (convertType == typeof(object) && TypeHelpers.IsValueType(result.Type)
-				  || !TypeHelpers.IsAssignableFrom(convertType, target.DeclaredType)
-				  || !TypeHelpers.IsAssignableFrom(convertType, result.Type))
-					return Expression.Convert(result, convertType);
-
 				result = new TargetExpressionRewriter(compiler, context).Visit(result);
+
+				//always convert if types aren't the same.
+				if (convertType != result.Type &&
+					(TypeHelpers.IsAssignableFrom(convertType, target.DeclaredType)))
+					result = Expression.Convert(result, convertType);
 
 				//TODO: Rework scope tracking (probably via the target object itself so that the majority of the
 				//expression crap can be removed.)

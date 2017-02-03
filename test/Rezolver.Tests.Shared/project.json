@@ -8,7 +8,7 @@
     "licenseUrl": ""
   },
 
-  "shared": "**/*.cs",
+  "shared": [ "**/*.cs" ],
 
   "frameworks": {
     "net451": {

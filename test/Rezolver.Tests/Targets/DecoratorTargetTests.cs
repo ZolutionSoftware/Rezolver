@@ -42,7 +42,7 @@ namespace Rezolver.Tests.Targets
 		{
 			var decoratorType = typeof(Decorator);
 			var target = new TestTarget(typeof(Decorated), useFallBack: false, supportsType: true);
-			var decoratedType = typeof(Decorated);
+			var decoratedType = typeof(IDecorated);
 
 			var result = new DecoratorTarget(decoratorType, target, decoratedType);
 			Assert.Same(decoratorType, result.DecoratorType);

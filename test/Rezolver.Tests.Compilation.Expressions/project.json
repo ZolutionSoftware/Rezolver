@@ -33,5 +33,6 @@
         "System.Linq.Expressions": "4.0.0.0"
       }
     }
-  }
+  },
+  "buildOptions": { "copyToOutput": "xunit.runner.json" }
 }

@@ -26,17 +26,29 @@ namespace Rezolver.Tests
 		}
 
 		[Fact]
+		public void ShouldInheritParentRegistration()
+		{
+			var parent = new TargetContainer();
+			var child = new ChildTargetContainer(parent);
+
+			var parentTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
+			parent.Register(parentTarget);
+
+			Assert.Same(parentTarget, child.Fetch(typeof(int)));
+		}
+
+		[Fact]
 		public void ShouldOverrideParentRegistration()
 		{
 			var parent = new TargetContainer();
 			var child = new ChildTargetContainer(parent);
 
-			var parentTarget = new TestTarget(typeof(int), supportsType: true);
-			var childTarget = new TestTarget(typeof(int), supportsType: true);
+			var parentTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
+			var childTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
 			parent.Register(parentTarget);
 			child.Register(childTarget);
 
-			Assert.Same(child, child.Fetch(typeof(int)));
+			Assert.Same(childTarget, child.Fetch(typeof(int)));
 		}
 	}
 }
