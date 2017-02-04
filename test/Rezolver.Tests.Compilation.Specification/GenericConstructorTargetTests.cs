@@ -80,7 +80,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 			targets.Register((10).AsObjectTarget());
-			targets.Register(GenericConstructorTarget.Auto(typeof(GenericOneCtor<>)));
+			targets.Register(GenericConstructorTarget.Auto(typeof(GenericOneCtor<>)), typeof(IGeneric<>));
 			targets.Register(GenericConstructorTarget.Auto(typeof(RequiresIGenericT<>)));
 			var container = CreateContainer(targets);
 

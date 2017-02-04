@@ -164,6 +164,17 @@ namespace Rezolver.Compilation.Expressions
 					var falsePart = base.Visit(node);
 					_currentlyRewriting.Pop();
 
+					//because of optimisations that we perform elsewhere, we need to check that the true/false parts have compatible types
+					//if not equal, then we inject a conversion to one or the other to ensure the types are equal.
+					if(truePart.Type != falsePart.Type)
+					{
+						//note that this code relies on NULLs (either via DefaultExpression or ConstantExpression) being strongly-typed
+						if (TypeHelpers.IsAssignableFrom(truePart.Type, falsePart.Type))
+							falsePart = Expression.Convert(falsePart, truePart.Type);
+						else if (TypeHelpers.IsAssignableFrom(falsePart.Type, truePart.Type))
+							truePart = Expression.Convert(truePart, falsePart.Type);
+					}
+
 					return Expression.Condition(matchingGroup.Group.Key.Expression.Test, truePart, falsePart);
 				}
 			}

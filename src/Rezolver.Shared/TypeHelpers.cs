@@ -26,6 +26,15 @@ namespace Rezolver
 			return type.IsPublic;
 #endif
 		}
+		internal static bool ContainsGenericParameters(Type type)
+		{
+#if DOTNET
+			return type.GetTypeInfo().ContainsGenericParameters;
+#else
+			return type.ContainsGenericParameters;
+#endif
+		}
+
 
 		internal static bool IsGenericType(Type type)
 		{

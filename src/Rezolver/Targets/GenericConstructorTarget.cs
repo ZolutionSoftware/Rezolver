@@ -181,7 +181,8 @@ namespace Rezolver.Targets
 					//we can't create an instance of the type unless we try the mapping again with a closed version of the same
 					//type.  So that's what the error message here is for - it'll be used as an exception if Bind is called with the same
 					//type, even though SupportsType would return true.
-					if (TypeHelpers.IsGenericTypeDefinition(targetType))
+					//TODO: change dis to deep search for *ANY* open generics
+					if (TypeHelpers.ContainsGenericParameters(targetType))
 						return new GenericTypeMapping(targetType, DeclaredType, $"{ targetType } should be compatible with { DeclaredType }, but since it is an open generic type, no instance can be constructed");
 					else
 						return new GenericTypeMapping(targetType, $"There is not enough generic type information from { targetType } to map all generic arguments to { DeclaredType }.  This is likely to be because { targetType } has fewer type parameters than { DeclaredType }");
