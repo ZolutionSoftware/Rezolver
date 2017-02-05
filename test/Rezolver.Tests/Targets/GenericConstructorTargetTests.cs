@@ -74,6 +74,8 @@ namespace Rezolver.Tests.Targets
 				new[] { typeof(TwiceNestedGenericB<>),  typeof(IGeneric<IGeneric<IEnumerable<TypeArgs.T1>>>),   typeof(TwiceNestedGenericB<TypeArgs.T1>) },
 				// Generic Value Type verification
 				new[] { typeof(GenericValueType<>),     typeof(GenericValueType<TypeArgs.T1>) },
+				// using constraints expressed in terms of correctly mapped type parameters to be clever
+				new[] { typeof(ValidWideningGeneric<,>),typeof(IGeneric<int>),                          typeof(ValidWideningGeneric<IEnumerable<int>, int>) },
 				// Not-fully-bound tests.  These types yield SupportsType = true, but Bind will throw an exception
 				new[] { typeof(Generic<>),              typeof(Generic<>) },
 				new[] { typeof(Generic<>),              typeof(IGeneric<>),								typeof(Generic<>) },
@@ -126,7 +128,9 @@ namespace Rezolver.Tests.Targets
 				//of Generic2
 				new[] { typeof(Generic2<,>),					typeof(GenericBase<TypeArgs.T1>) },
 				//not supported because the types aren't even compatible
-				new[] { typeof(Generic<>),						typeof(IEnumerable<TypeArgs.T1>) }
+				new[] { typeof(Generic<>),						typeof(IEnumerable<TypeArgs.T1>) },
+				//not supported becuse NestedGenericA<> inherits Generic<IEnumerable<>>, not Generic<>
+				new[] { typeof(NestedGenericA<>),				typeof(Generic<>) }		
 			};
 		}
 	
@@ -138,6 +142,10 @@ namespace Rezolver.Tests.Targets
 			Output.WriteLine($"Testing target for type { targetType } DOES NOT support { testType }");
 			var target = new GenericConstructorTarget(targetType);
 			Assert.False(target.SupportsType(testType));
+
+			//also make sure we get an exception if we try to bind directly
+			var context = GetCompileContext(target, targetType: testType);
+			Assert.ThrowsAny<Exception>(() => target.Bind(context));
 		}
 
 		

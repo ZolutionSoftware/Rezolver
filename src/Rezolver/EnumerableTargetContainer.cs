@@ -54,20 +54,20 @@ namespace Rezolver
 	{
 		/// <summary>
 		/// Enables resolving of enumerables of services on the target container.
-		/// 
+		/// </summary>
+		/// <param name="targetContainer">The target container.</param>
+		/// <remarks>
 		/// After calling this, you can immediately request a target for <see cref="IEnumerable{T}"/> of
 		/// any type and you will receive a <see cref="ListTarget"/> (with <see cref="ListTarget.AsArray"/>
 		/// set to true) which contains all the targets which have previously been
 		/// registered for the type <c>T</c>, in the order they were registered.
 		///  
 		/// If a service has not been registered, then the returned <see cref="ListTarget"/> will be empty
-		/// and its <see cref="ListTarget.UseFallback"/> property will be <c>true</c>.
-		/// </summary>
-		/// <param name="builder">The builder.</param>
-		public static void EnableEnumerableResolving(this TargetContainer builder)
+		/// and its <see cref="ListTarget.UseFallback"/> property will be <c>true</c>.</remarks>
+		public static void EnableEnumerableResolving(this ITargetContainerOwner targetContainer)
 		{
-			builder.MustNotBeNull(nameof(builder));
-			builder.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(builder));
+			targetContainer.MustNotBeNull(nameof(targetContainer));
+			targetContainer.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(targetContainer));
 		}
 	}
 }

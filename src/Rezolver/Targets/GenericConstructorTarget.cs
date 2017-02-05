@@ -20,6 +20,30 @@ namespace Rezolver.Targets
 	public class GenericConstructorTarget : TargetBase
 	{
 		/// <summary>
+		/// base interface only for <see cref="ITypeArgGenericMismatch{TFrom, TFromParent, TTo, TToParent}"/>
+		/// just to simplify type testing
+		/// </summary>
+		private interface ITypeArgGenericMismatch { }
+		/// <summary>
+		/// Used purely to carry diagnostic information when type arguments aren't mapped successfully
+		/// </summary>
+		/// <typeparam name="TFrom">The type argument mapped from a target's <see cref="DeclaredType"/> corresponding to the argument that can't be mapped</typeparam>
+		/// <typeparam name="TFromParent">The generic type which declares the type parameter <typeparamref name="TFrom"/></typeparam>
+		/// <typeparam name="TTo">The type argument in the type for which a match was sought</typeparam>
+		/// <typeparam name="TToParent">The generic type which declared the type parameter <typeparamref name="TTo"/></typeparam>
+		private interface ITypeArgGenericMismatch<TFrom, TFromParent, TTo, TToParent> : ITypeArgGenericMismatch
+		{
+
+		}
+
+		/// <summary>
+		/// Another diagnostic-only interface.  Used for TFromParent and TToParent type arguments in the 
+		/// <see cref="ITypeArgGenericMismatch{TFrom, TFromParent, TTo, TToParent}"/> type when a type parameter
+		/// wasn't generic.
+		/// </summary>
+		private interface INotGeneric { }
+
+		/// <summary>
 		/// Result returned from the <see cref="MapType(Type)"/> function.  Represents various levels of success - 
 		/// from a completely incompatible mapping (<see cref="Success"/> = <c>false</c>), or a successful mapping from
 		/// an open generic type to a closed generic type which can then be constructed (<see cref="Success"/> = <c>true</c>
@@ -175,6 +199,23 @@ namespace Rezolver.Targets
 				if (finalTypeArguments == null)
 					return new GenericTypeMapping(targetType, $"The requested type { targetType } is not a generic base or interface of { DeclaredType }");
 
+				var genericMismatches = finalTypeArguments.Where(a => TypeHelpers.IsAssignableFrom(typeof(ITypeArgGenericMismatch), a)).ToArray();
+
+				if (genericMismatches.Length != 0)
+				{
+					return new GenericTypeMapping(targetType, $@"One or more type arguments in the requested type { targetType } are 'less generic' than those of { DeclaredType }: {
+						string.Join(", ", genericMismatches.Select(t =>
+						{
+							var mismatchedArgs = TypeHelpers.GetGenericArguments(t);
+							return $@"{ 
+								mismatchedArgs[0] } in { (mismatchedArgs[1] != typeof(INotGeneric) ? mismatchedArgs[1].ToString() : "[not generic]") 
+							} is mapped to less generic argument { 
+								mismatchedArgs[2] } of { (mismatchedArgs[3] != typeof(INotGeneric) ? mismatchedArgs[3].ToString() : "[not generic]" )
+							}";
+						})
+						)}");
+				}
+
 				if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
 				{
 					//if we were mapping to an open generic (generic type def), then the mapping is successful, so Success=true, but
@@ -266,9 +307,8 @@ namespace Rezolver.Targets
 					{
 						var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
 
-						//if the mapping is not found, but one or more of the interface type parameters are generic, then 
-						//it's possible that one of those has been passed the type parameter.
-						//the problem with that, fromm our point of view, however, is how then 
+						//todo: if mapping is null, then we need to examine the generic constraints on t (or possibly its base or interfaces), which also works
+						// - there's currently a GenericConstructorTargets test containing the ValidWideningGeneric type - which should be able to be supported.  If we're clever.
 
 						return new
 						{
@@ -279,18 +319,36 @@ namespace Rezolver.Targets
 							//type in our declared type, as the type is passed down into the interfaces from the open generic
 							//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
 							//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
-							MappedTo = mapping
+							Mapping = mapping
 						};
-					}).OrderBy(r => r.MappedTo != null ? r.MappedTo[0] : int.MinValue).ToArray();
+					}).OrderBy(r => r.Mapping != null ? r.Mapping[0].Index : int.MinValue).ToArray();
 
 				var suppliedTypeArguments = TypeHelpers.GetGenericArguments(requestedType);
 				Type suppliedArg = null;
-				foreach (var typeParam in typeParamPositions.Where(p => p.MappedTo != null))
+				foreach (var typeParam in typeParamPositions.Where(p => p.Mapping != null))
 				{
-					suppliedArg = suppliedTypeArguments[typeParam.MappedTo[0]];
-					foreach (var index in typeParam.MappedTo.Skip(1))
+					//now, just because we've found a mapping, doesn't actually mean that we have success.
+					//consider a declared type of IFoo<IEnumerable<T>> and a requested type of IFoo<T> - 
+					//in this case it's not possible to map, because it only works if the T in the second IFoo<>
+					//is IEnumerable<T>.
+					//When it's the other way around - i.e. declared is IFoo<T> and requested is IFoo<IEnumerable<T>>, 
+					//then it's possible to map, but we can only create if we are ultimmately given a concrete
+					//IEnumerable<T> as the inner argument.
+					suppliedArg = suppliedTypeArguments[typeParam.Mapping[0].Index];
+					foreach (var mapping in typeParam.Mapping.Skip(1))
 					{
-						suppliedArg = TypeHelpers.GetGenericArguments(suppliedArg)[index];
+						//so if the next parameter is not a generic type, then we can't get the arguments
+						if (!TypeHelpers.IsGenericType(suppliedArg))
+						{
+							suppliedArg = typeof(ITypeArgGenericMismatch<,,,>).MakeGenericType(
+								mapping.BaseTypeArgument, 
+								mapping.BaseType ?? typeof(INotGeneric), 
+								suppliedArg, 
+								suppliedArg.DeclaringType ?? typeof(INotGeneric));
+							break;
+						}
+						else
+							suppliedArg = TypeHelpers.GetGenericArguments(suppliedArg)[mapping.Index];
 					}
 					finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
 				}
@@ -298,7 +356,28 @@ namespace Rezolver.Targets
 			else
 				return null; //means that no mappings exist - because the types are not even compatible
 
+			//note - some arguments might get left as generic parameters in failed scenarios
 			return finalTypeArguments;
+		}
+
+		private class GenericParameterMapping
+		{
+			/// <summary>
+			/// Gets or sets the index of the mapper parameter in the array of type parameters for <see cref="BaseType"/>
+			/// </summary>
+			/// <value>The index.</value>
+			public int Index { get; set; }
+			/// <summary>
+			/// Gets or sets the type argument in <see cref="BaseType"/> represented by this mapping.
+			/// </summary>
+			/// <value>The base type parameter.</value>
+			public Type BaseTypeArgument { get; set; }
+			/// <summary>
+			/// Gets or sets the type to which this mapping relates.  The type will be a base or interface of the <see cref="DeclaredType"/>
+			/// </summary>
+			/// <value>The type of the base.</value>
+			public Type BaseType { get; set; }
+			public Type TargetParameter { get; set; }
 		}
 
 		/// <summary>
@@ -309,19 +388,19 @@ namespace Rezolver.Targets
 		/// <param name="baseTypeParameter"></param>
 		/// <param name="targetTypeParameter"></param>
 		/// <returns></returns>
-		private int[] DeepSearchTypeParameterMapping(Stack<int> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
+		private GenericParameterMapping[] DeepSearchTypeParameterMapping(Stack<GenericParameterMapping> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
 		{
 			if (baseTypeParameter == targetTypeParameter)
 				return previousTypeParameterPositions.ToArray();
 			if (previousTypeParameterPositions == null)
-				previousTypeParameterPositions = new Stack<int>();
+				previousTypeParameterPositions = new Stack<GenericParameterMapping>();
 			if (TypeHelpers.IsGenericType(baseTypeParameter))
 			{
 				var args = TypeHelpers.GetGenericArguments(baseTypeParameter);
-				int[] result = null;
+				GenericParameterMapping[] result = null;
 				for (int f = 0; f < args.Length; f++)
 				{
-					previousTypeParameterPositions.Push(f);
+					previousTypeParameterPositions.Push(new GenericParameterMapping() { BaseType = baseTypeParameter, BaseTypeArgument = args[f], Index = f, TargetParameter = targetTypeParameter });
 					result = DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
 					previousTypeParameterPositions.Pop();
 					if (result != null)
