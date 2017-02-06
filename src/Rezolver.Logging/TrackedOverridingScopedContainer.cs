@@ -23,16 +23,16 @@ namespace Rezolver.Logging
 
 		internal TrackedOverridingScopedContainer(TrackedOverridingScopedContainer parent,
 		  ITargetContainer builder = null,
-		  ITargetCompiler compiler = null)
-		  : this(parent.Logger, parent, builder: builder, compiler: compiler)
+		  ICompilerConfigurationProvider compilerConfig = null)
+		  : this(parent.Logger, parent, builder: builder, compilerConfig: compilerConfig)
 		{
 
 		}
 
 		internal TrackedOverridingScopedContainer(TrackedScopeContainer parent,
 		  ITargetContainer builder = null,
-		  ITargetCompiler compiler = null)
-		  : this(parent.Logger, parent, builder: builder, compiler: compiler)
+		  ICompilerConfigurationProvider compilerConfig = null)
+		  : this(parent.Logger, parent, builder: builder, compilerConfig: compilerConfig)
 		{
 
 		}
@@ -41,8 +41,8 @@ namespace Rezolver.Logging
 		  IScopedContainer parentScope,
 		  IContainer inner = null,
 		  ITargetContainer builder = null,
-		  ITargetCompiler compiler = null)
-		  : base(parentScope, inner, builder ?? new TrackedTargetContainer(logger), compiler)
+		  ICompilerConfigurationProvider compilerConfig = null)
+		  : base(parentScope, inner, builder ?? new TrackedTargetContainer(logger), compilerConfig)
 		{
 			Logger = logger;
 		}

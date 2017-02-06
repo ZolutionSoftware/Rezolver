@@ -17,11 +17,10 @@ namespace Rezolver.Tests.Compilation.Expressions
 
 		}
 
-		protected override ITargetContainerOwner CreateTargetContainer([CallerMemberName] string testName = null)
+		protected override IContainer CreateContainer(ITargetContainer targets, [CallerMemberName] string testName = null)
 		{
-			var toReturn = new TargetContainer();
-			toReturn.UseExpressionCompiler();
-			return toReturn;
+			//in reality, most applications are going to use the UseExpressionCompiler.Configure() static method
+			return new Container(targets, ExpressionCompiler.ConfigProvider);
 		}
 	}
 }

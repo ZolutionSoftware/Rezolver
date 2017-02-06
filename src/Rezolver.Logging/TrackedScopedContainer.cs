@@ -24,9 +24,9 @@ namespace Rezolver.Logging
 
 		public TrackedScopeContainer(ICallTracker logger,
 		  ITargetContainer builder = null,
-		  ITargetCompiler compiler = null,
+		  ICompilerConfigurationProvider compilerConfig = null,
 		  IScopedContainer parentScope = null)
-		  : base(builder: builder ?? new TrackedTargetContainer(logger), compiler: compiler)
+		  : base(builder: builder ?? new TrackedTargetContainer(logger), compilerConfig: compilerConfig)
 		{
 			logger.MustNotBeNull(nameof(logger));
 			Logger = logger;

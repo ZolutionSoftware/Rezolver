@@ -20,7 +20,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ContainerShouldBeAbleToResolveContextProvider()
+		public void Container_ShouldResolveContextProvider()
 		{
 			var targets = CreateTargetContainer();
 			var container = CreateContainer(targets);
@@ -29,12 +29,32 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ContainerShouldBeAbleToResolveCompiler()
+		public void Container_ShouldResolveCompiler()
 		{
 			var targets = CreateTargetContainer();
 			var container = CreateContainer(targets);
 			Output.WriteLine("If this test fails, then all other tests in this class will likely fail");
 			Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
+		}
+
+		[Fact]
+		public void OverridingContainer_ShouldResolveSameContextProvider()
+		{
+			Output.WriteLine("Testing that the container returned from CreateOverridingContainer can resolve the same context provider as the base container.  If this fails, then any tests to do with overriding containers will fail.");
+			var container = CreateContainer(CreateTargetContainer());
+			var overrideContainer = CreateOverridingContainer(container);
+
+			Assert.Same(container.Resolve<ICompileContextProvider>(), overrideContainer.Resolve<ICompileContextProvider>());
+		}
+
+		[Fact]
+		public void OverridingContainer_ShouldResolveSameCompiler()
+		{
+			Output.WriteLine("Testing that the container returned from CreateOverridingContainer can resolve the same compiler as the base container.  If this fails, then any tests to do with overriding containers will fail.");
+			var container = CreateContainer(CreateTargetContainer());
+			var overrideContainer = CreateOverridingContainer(container);
+
+			Assert.Same(container.Resolve<ITargetCompiler>(), overrideContainer.Resolve<ITargetCompiler>());
 		}
 	}
 }

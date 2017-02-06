@@ -22,8 +22,7 @@ namespace Rezolver.Tests.Compilation.Expressions
 		[Fact]
 		public void ContainerShouldResolveExpressionCompiler()
 		{
-			var container = new Container();
-			container.UseExpressionCompiler();
+			var container = new Container(ExpressionCompiler.ConfigProvider);
 			var compiler = Assert.IsType<ExpressionCompiler>(container.Resolve<ITargetCompiler>());
 		}
 
@@ -43,8 +42,7 @@ namespace Rezolver.Tests.Compilation.Expressions
 		{
 			_output.WriteLine($"Target type is { target.GetType() }");
 
-			var container = new Container();
-			container.UseExpressionCompiler();
+			var container = new Container(ExpressionCompiler.ConfigProvider);
 			//okay, so yes: repeating the assertion from above.
 			var compiler = Assert.IsType<ExpressionCompiler>(container.Resolve<ITargetCompiler>());
 			var contextProvider = Assert.IsType<ExpressionCompiler>(container.Resolve<ICompileContextProvider>());

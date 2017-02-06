@@ -46,8 +46,8 @@ namespace Rezolver
 		/// <param name="inner">Can be null, but if it is, then <paramref name="parentScope"/> must be supplied</param>
 		/// <param name="builder"></param>
 		/// <param name="compiler"></param>
-		public OverridingScopedContainer(IScopedContainer parentScope, IContainer inner = null, ITargetContainer builder = null, ITargetCompiler compiler = null)
-			: base(inner ?? parentScope, targets: builder, compiler: compiler)
+		public OverridingScopedContainer(IScopedContainer parentScope, IContainer inner = null, ITargetContainer builder = null, ICompilerConfigurationProvider compilerConfig = null)
+			: base(inner ?? parentScope, targets: builder, compilerConfig: compilerConfig)
 		{
 			_parentScope = parentScope;
 			_objects = new ConcurrentDictionary<ResolveContext, ConcurrentBag<object>>();

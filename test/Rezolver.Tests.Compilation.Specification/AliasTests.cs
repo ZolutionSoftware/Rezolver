@@ -35,7 +35,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			targets.RegisterObject(1, typeof(object));
 			targets.RegisterAlias<int, object>();
 
-			var container = new Container(targets);
+			var container = CreateContainer(targets);
 			int i = container.Resolve<int>();
 
 			Assert.Equal(1, i);

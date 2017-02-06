@@ -41,8 +41,8 @@ namespace Rezolver
 
     public event EventHandler Disposed;
 
-    public ScopedContainer(ITargetContainer builder = null, ITargetCompiler compiler = null)
-        : base(builder, compiler)
+    public ScopedContainer(ITargetContainer builder = null, ICompilerConfigurationProvider compilerConfig = null)
+        : base(builder, compilerConfig)
     {
       _objects = new ConcurrentDictionary<ResolveContext, ConcurrentBag<object>>();
       _disposed = false;

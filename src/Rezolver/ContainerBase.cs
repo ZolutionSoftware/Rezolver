@@ -32,27 +32,18 @@ namespace Rezolver
 	/// </remarks>
 	public class ContainerBase : IContainer, ITargetContainer
 	{
-		private static readonly
-		  ConcurrentDictionary<Type, Lazy<ICompiledTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
-
-		/// <summary>
-		/// Gets an <see cref="ICompiledTarget"/> for the given type which will always throw an <see cref="InvalidOperationException"/> whenever its
-		/// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method is called.  Use this when you can't resolve a target for a type.
-		/// </summary>
-		/// <param name="type">The type for which you wish to create a missing target.</param>
-		protected static ICompiledTarget GetMissingTarget(Type type)
+		#region NoChangeCompilerConfigurationProvider class
+		private class NoChangeCompilerConfigurationProvider : ICompilerConfigurationProvider
 		{
-			return MissingTargets.GetOrAdd(type, t => new Lazy<ICompiledTarget>(() => new MissingCompiledTarget(t))).Value;
-		}
+			///<summary>Empty implementation of <see cref="ICompilerConfigurationProvider.Configure(IContainer, ITargetContainer)"/></summary>
+			public void Configure(IContainer container, ITargetContainer targets)
+			{
 
-		/// <summary>
-		/// Determines whether the given <paramref name="target"/> is an instance of <see cref="MissingCompiledTarget"/>.
-		/// </summary>
-		/// <param name="target">The target.</param>
-		protected static bool IsMissingTarget(ICompiledTarget target)
-		{
-			return target is MissingCompiledTarget;
+			}
 		}
+		#endregion
+
+		#region MissingCompiledTarget
 
 		/// <summary>
 		/// Used as a sentinel type when a type cannot be resolved by a <see cref="ContainerBase"/> instance.  Instead of returning a null
@@ -85,6 +76,9 @@ namespace Rezolver
 				throw new InvalidOperationException(String.Format("Could not resolve type {0}", _type));
 			}
 		}
+		#endregion
+
+		#region DirectResolveCompiledTarget
 
 		/// <summary>
 		/// Used when an <see cref="ITarget"/> is also of the same type as the one for which it is returned
@@ -115,6 +109,40 @@ namespace Rezolver
 				return _target;
 			}
 		}
+		#endregion
+
+		/// <summary>
+		/// Gets the compiler configuration provider to be passed when a derived container does not want the
+		/// <see cref="CompilerConfiguration.Default" /> provider to be used if one is not passed on construction.
+		/// 
+		/// This provider is guaranteed not to add/modify any registrations in the underlying target container
+		/// which are connected with compilation.
+		/// </summary>
+		protected static ICompilerConfigurationProvider NoCompilerConfiguration { get; } = new NoChangeCompilerConfigurationProvider();
+		
+
+		private static readonly
+		  ConcurrentDictionary<Type, Lazy<ICompiledTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
+
+		/// <summary>
+		/// Gets an <see cref="ICompiledTarget"/> for the given type which will always throw an <see cref="InvalidOperationException"/> whenever its
+		/// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method is called.  Use this when you can't resolve a target for a type.
+		/// </summary>
+		/// <param name="type">The type for which you wish to create a missing target.</param>
+		protected static ICompiledTarget GetMissingTarget(Type type)
+		{
+			return MissingTargets.GetOrAdd(type, t => new Lazy<ICompiledTarget>(() => new MissingCompiledTarget(t))).Value;
+		}
+
+		/// <summary>
+		/// Determines whether the given <paramref name="target"/> is an instance of <see cref="MissingCompiledTarget"/>.
+		/// </summary>
+		/// <param name="target">The target.</param>
+		protected static bool IsMissingTarget(ICompiledTarget target)
+		{
+			return target is MissingCompiledTarget;
+		}
+
 
 		/// <summary>
 		/// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="compiler"/>
@@ -122,16 +150,12 @@ namespace Rezolver
 		/// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(ResolveContext)"/> (and other operations)
 		/// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
 		/// <see cref="Targets"/> property.</param>
-		/// <param name="compiler">Optional.  The compiler which will be used to create <see cref="ICompiledTarget"/> instances from the <see cref="ITarget"/> instances which 
-		/// are registered in the <paramref name="targets"/> target container during resolve-time.  If not provided, then the <see cref="TargetCompiler.Default"/> compiler is
-		/// used.</param>
-		protected ContainerBase(ITargetContainer targets = null, ITargetCompiler compiler = null)
+		/// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
+		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.Default"/> provider will be used.</param>
+		protected ContainerBase(ITargetContainer targets = null, ICompilerConfigurationProvider compilerConfig = null)
 		{
 			Targets = targets ?? new TargetContainer();
-			//Compiler = compiler ?? TargetCompiler.Default;
-			//register the current default target compiler as our default compiler.
-			if(compiler != null)
-				Register(compiler.AsObjectTarget());
+			(compilerConfig ?? CompilerConfiguration.Default).Configure(this, Targets);
 		}
 
 		///// <summary>

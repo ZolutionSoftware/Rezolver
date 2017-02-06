@@ -19,7 +19,10 @@ namespace Rezolver.Compilation.Expressions
 	/// </summary>
 	/// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
 	/// <seealso cref="Rezolver.ITargetCompiler" />
-	/// <remarks>This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a 
+	/// <remarks>To configure this compiler as the default for all containers (at least, those inheriting from <see cref="ContainerBase"/>,
+	/// simply call the 
+	/// 
+	/// This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a 
 	/// given <see cref="ITarget" /> from the <see cref="IExpressionCompileContext" />.
 	/// 
 	/// Typically, this is done by searching for an <see cref="IExpressionBuilder{TTarget}" /> where 'TTarget' is equal to the runtime type
@@ -57,6 +60,22 @@ namespace Rezolver.Compilation.Expressions
 		/// the <see cref="ExpressionCompilerTargetContainerExtensions.UseExpressionCompiler(ITargetContainer)"/> method is called.
 		/// </summary>
 		public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
+
+		/// <summary>
+		/// Gets the default provider.
+		/// </summary>
+		/// <value>The provider.</value>
+		public static ExpressionCompilerConfigurationProvider ConfigProvider { get; } = new ExpressionCompilerConfigurationProvider();
+
+		/// <summary>
+		/// Configures the Rezolver <see cref="CompilerConfiguration" /> to use the default expression compiler for
+		/// all containers not otherwise supplied with a specific compiler configuration
+		/// </summary>
+		public static void UseAsDefaultCompiler()
+		{
+			CompilerConfiguration.Default = ConfigProvider;
+		}
+
 
 		private class CompiledLambdaTarget : ICompiledTarget
 		{
