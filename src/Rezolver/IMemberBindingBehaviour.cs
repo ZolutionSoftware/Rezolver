@@ -15,7 +15,7 @@ namespace Rezolver
 	/// Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.
 	/// </summary>
 	/// <remarks>The default implementation of this is <see cref="DefaultMemberBindingBehaviour"/>, which always binds all publicly
-	/// writable instance properties and publicly accessible instance fields to auto-generated <see cref="RezolvedTarget"/> targets.</remarks>
+	/// writable instance properties and publicly accessible instance fields to auto-generated <see cref="ResolvedTarget"/> targets.</remarks>
 	public interface IMemberBindingBehaviour
 	{
 		/// <summary>

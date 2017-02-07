@@ -15,13 +15,13 @@ namespace Rezolver
 	/// functions server no actual purpose other than to act as hooks to create specific <see cref="ITarget"/> objects
 	/// in place of static code.
 	/// 
-	/// For example, the <see cref="Resolve{T}"/> function is used to trigger the creation of a <see cref="RezolvedTarget"/>
+	/// For example, the <see cref="Resolve{T}"/> function is used to trigger the creation of a <see cref="ResolvedTarget"/>
 	/// in its place - thus allowing expressions to leverage the full power of the Rezolver API all through a simple method call.
 	/// </summary>
 	public static class Functions
 	{
 		/// <summary>
-		/// Translated to a <see cref="RezolvedTarget" /> with <typeparamref name="T"/> being the 
+		/// Translated to a <see cref="ResolvedTarget" /> with <typeparamref name="T"/> being the 
 		/// type that will be resolved in this function's place.
 		/// </summary>
 		/// <typeparam name="T">The type to be resolved.</typeparam>

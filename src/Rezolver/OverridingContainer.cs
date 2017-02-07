@@ -22,12 +22,12 @@ namespace Rezolver
 	/// will be returned when <see cref="IContainer.FetchCompiled(ResolveContext)"/> is called on that container and, therefore,
 	/// the compiled target which is executed when the <see cref="IContainer.Resolve(ResolveContext)"/> method is called.
 	/// 
-	/// This has the side effect of overriding automatically resolved arguments (bound to a <see cref="RezolvedTarget"/>) compiled 
+	/// This has the side effect of overriding automatically resolved arguments (bound to a <see cref="ResolvedTarget"/>) compiled 
 	/// in the overridden container by virtue of the fact that the overriding container is a different reference, because the
-	/// <see cref="RezolvedTarget"/> expects a check to be performed, at resolve-time, that the <see cref="ResolveContext.Container"/>
+	/// <see cref="ResolvedTarget"/> expects a check to be performed, at resolve-time, that the <see cref="ResolveContext.Container"/>
 	/// is the same container as the one that was active when it was originally compiled.
 	/// 
-	/// In essence, when resolving an instance as a dependency the RezolvedTarget does something like this:
+	/// In essence, when resolving an instance as a dependency the <see cref="ResolvedTarget"/> does something like this:
 	/// 
 	/// <code>resolveContext.Container == compileContext.Container ? (execute compile-time target) : resolveContext.Container.Resolve(type)</code>
 	/// </remarks>

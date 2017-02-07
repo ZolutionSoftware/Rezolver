@@ -22,7 +22,7 @@ namespace Rezolver.Targets
 	/// or when the target is used perhaps by another <see cref="ITarget"/> (e.g. - a <see cref="ConstructorTarget"/> with a
 	/// constructor parameter bound to one of these).
 	/// 
-	/// So, in essence, a <see cref="RezolvedTarget"/> represents an automatic call to a container's 
+	/// So, in essence, a <see cref="ResolvedTarget"/> represents an automatic call to a container's 
 	/// <see cref="IContainer.Resolve(ResolveContext)"/> method, for the <see cref="DeclaredType"/>.
 	/// 
 	/// In practise - an <see cref="ITargetCompiler"/> might take advantage of the fact that, during compilation, targets
@@ -35,7 +35,7 @@ namespace Rezolver.Targets
 	/// which results in very fast execution times for all resolve operations.
 	/// 
 	/// Not only this, but the behaviour can be extended still further by realising that a <see cref="ResolveContext.Container"/>
-	/// on which a resolve operation is invoked might not be the same container for which this <see cref="RezolvedTarget"/> was 
+	/// on which a resolve operation is invoked might not be the same container for which this <see cref="ResolvedTarget"/> was 
 	/// first compiled.  In this case - it's possible that the other container has alternative registrations for a given service
 	/// type which the application expects to take precedence over those which were originally resolved when compilation took 
 	/// place.  The expressions compiler, again, detects this - allowing compiled code from a root container to detect an 
@@ -43,7 +43,7 @@ namespace Rezolver.Targets
 	/// 
 	/// It's this behaviour which is almost unique to the Rezolver framework out of the box.
 	/// </remarks>
-	public class RezolvedTarget : TargetBase
+	public class ResolvedTarget : TargetBase
 	{
 		/// <summary>
 		/// The type that is to be resolved from the container at resolve-time.
@@ -62,7 +62,7 @@ namespace Rezolver.Targets
 		}
 
 		/// <summary>
-		/// Gets the target that this <see cref="RezolvedTarget"/> will fallback to if a satisfactory target cannot be found
+		/// Gets the target that this <see cref="ResolvedTarget"/> will fallback to if a satisfactory target cannot be found
 		/// at compile time or resolve-time.
 		/// </summary>
 		/// <remarks>The <see cref="ITarget.UseFallback"/> property is also used to determine whether this will be 
@@ -75,7 +75,7 @@ namespace Rezolver.Targets
 		public ITarget FallbackTarget { get; }
 
 		/// <summary>
-		/// Creates a new <see cref="RezolvedTarget"/> for the given <paramref name="type"/> which will attempt to 
+		/// Creates a new <see cref="ResolvedTarget"/> for the given <paramref name="type"/> which will attempt to 
 		/// resolve a value at compile time and/or resolve-time and, if it can't, will either use the <paramref name="fallbackTarget"/>
 		/// or will throw an exception.
 		/// </summary>
@@ -83,7 +83,7 @@ namespace Rezolver.Targets
 		/// <param name="fallbackTarget">Optional.  The target to be used if the value cannot be resolved at either compile time or 
 		/// resolve-time.  An <see cref="ArgumentException"/> is thrown if this target's <see cref="ITarget.SupportsType(Type)"/>
 		/// function returns <c>false</c> when called with the <paramref name="type"/>.</param>
-		public RezolvedTarget(Type type, ITarget fallbackTarget = null)
+		public ResolvedTarget(Type type, ITarget fallbackTarget = null)
 		{
 			type.MustNotBeNull("type");
 			if (fallbackTarget != null && !fallbackTarget.SupportsType(type))
@@ -93,7 +93,7 @@ namespace Rezolver.Targets
 		}
 
 		/// <summary>
-		/// Attempts to obtain the target that this <see cref="RezolvedTarget"/> resolves to for the given <see cref="ICompileContext"/>.
+		/// Attempts to obtain the target that this <see cref="ResolvedTarget"/> resolves to for the given <see cref="ICompileContext"/>.
 		/// 
 		/// This function should be used by <see cref="ITargetCompiler"/> implementations when producing the <see cref="ICompiledTarget"/>
 		/// for this instance, who wish to perform some form of up-front optimisations.

@@ -44,7 +44,7 @@ namespace Rezolver
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			aliasType.MustNot(t => t == originalType, "The aliased type and alias must be different", nameof(aliasType));
-			ITarget target = new RezolvedTarget(originalType);
+			ITarget target = new ResolvedTarget(originalType);
 			//if there's no implicit conversion to our alias type from the aliased type, but there is
 			//the other way around, then we need to stick in an explicit change of type, otherwise the registration will
 			//fail.  This does, unfortunately, give rise to the situation where we could be performing an invalid cast - but that

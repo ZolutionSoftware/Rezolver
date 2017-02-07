@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
-	/// An <see cref="IExpressionBuilder"/> specialised for building the expression for the <see cref="RezolvedTarget"/> target.
+	/// An <see cref="IExpressionBuilder"/> specialised for building the expression for the <see cref="ResolvedTarget"/> target.
 	/// </summary>
-	public class RezolvedTargetBuilder : ExpressionBuilderBase<RezolvedTarget>
+	public class RezolvedTargetBuilder : ExpressionBuilderBase<ResolvedTarget>
 	{
 		private static readonly MethodInfo RezolverCanResolveMethod =
 		  MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.CanResolve(null));
@@ -34,7 +34,7 @@ namespace Rezolver.Compilation.Expressions
 		private static readonly MethodInfo RezolverTryResolveMethod = TypeHelpers.GetMethod(typeof(IContainer), "TryResolve");
 
 
-		protected override Expression Build(RezolvedTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
+		protected override Expression Build(ResolvedTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			//get the expression for the object that would be resolved statically.  If there is none,
 			//then we emit a call back into the container that's passed in the context.

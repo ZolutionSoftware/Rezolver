@@ -16,7 +16,7 @@ namespace Rezolver.Targets
 	/// type, and you want the same singleton (backed by the same instance) to server another type.
 	/// 
 	/// In this case, instead of registering the same singleton target multiple times, you can register it once
-	/// for its primary type, then register one of these for the other type, with a <see cref="RezolvedTarget"/> 
+	/// for its primary type, then register one of these for the other type, with a <see cref="ResolvedTarget"/> 
 	/// as its inner target.
 	/// 
 	/// When creating this target, the <see cref="ITarget.DeclaredType"/> of the <see cref="InnerTarget"/> must 

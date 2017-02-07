@@ -62,8 +62,8 @@ namespace Rezolver
 		/// part of your expression tree - you should </remarks>
 		public virtual ITarget Resolve(ICompileContext context)
 		{
-			if (Target is RezolvedTarget)
-				return ((RezolvedTarget)Target).Bind(context.NewContext(Parameter.ParameterType));
+			if (Target is ResolvedTarget)
+				return ((ResolvedTarget)Target).Bind(context.NewContext(Parameter.ParameterType));
 
 			return Target;
 		}
@@ -71,7 +71,7 @@ namespace Rezolver
 		/// <summary>
 		/// Creates parameter bindings for each parameter in the passed method where each value will be resolved.
 		/// 
-		/// For any optional parameters - their default values will be used as a fallback if the <see cref="RezolvedTarget"/>
+		/// For any optional parameters - their default values will be used as a fallback if the <see cref="ResolvedTarget"/>
 		/// cannot either resolve a target at compile time or from the <see cref="IContainer"/> at resolve-time.
 		/// </summary>
 		/// <param name="method"></param>
@@ -85,9 +85,9 @@ namespace Rezolver
 			  new ParameterBinding(pi, BindRezolvedArgument(pi))).ToArray();
 		}
 
-		private static RezolvedTarget BindRezolvedArgument(ParameterInfo pi)
+		private static ResolvedTarget BindRezolvedArgument(ParameterInfo pi)
 		{
-			return new RezolvedTarget(pi.ParameterType, pi.IsOptional ? new OptionalParameterTarget(pi) : null);
+			return new ResolvedTarget(pi.ParameterType, pi.IsOptional ? new OptionalParameterTarget(pi) : null);
 		}
 
 		/// <summary>

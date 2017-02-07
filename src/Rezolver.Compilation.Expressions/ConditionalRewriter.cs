@@ -64,7 +64,7 @@ namespace Rezolver.Compilation.Expressions
 
 			//equality is exceptionally simple - only performs reference equality check.
 			//this works only because the specific scenario that this rewriter is designed to
-			//handle relates to the RezolvedTarget - which uses shared expressions.
+			//handle relates to the ResolvedTarget - which uses shared expressions.
 			public bool Equals(ConditionalExpressionInfo other)
 			{
 				return object.ReferenceEquals(Expression.Test, other.Expression.Test);

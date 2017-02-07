@@ -61,9 +61,11 @@ namespace Rezolver.Targets
 		{
 			expression.MustNotBeNull(nameof(expression));
 			Expression = expression;
-			DeclaredType = declaredType ?? expression.Type;
-			if (!TypeHelpers.IsAssignableFrom(DeclaredType, Expression.Type))
-				throw new ArgumentException("The declaredType must be compatible with the type of the expression", nameof(declaredType));
+			var expressionType = (expression.NodeType == ExpressionType.Lambda ? ((LambdaExpression)expression).Body.Type : expression.Type);
+			DeclaredType = declaredType ?? expressionType;
+
+			if (!TypeHelpers.IsAssignableFrom(DeclaredType, expressionType))
+				throw new ArgumentException($"{ nameof(declaredType) } must be compatible with the type of the expression", nameof(declaredType));
 		}
 
 		/// <summary>

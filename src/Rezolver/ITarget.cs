@@ -30,7 +30,7 @@ namespace Rezolver
 	/// 
 	/// 
 	/// The framework's many implementations of this interface - e.g. <see cref="ConstructorTarget"/>, <see cref="SingletonTarget"/>,
-	/// <see cref="RezolvedTarget"/> plus many others - then define the behaviour and any additional data required in order for a compiler
+	/// <see cref="ResolvedTarget"/> plus many others - then define the behaviour and any additional data required in order for a compiler
 	/// to produce an <see cref="ICompiledTarget"/> which matches the target's intent.  E.g, the <see cref="ConstructorTarget"/>, which
 	/// represents creating a new instance via a constructor, provides all the necessary information to bind to the correct constructor
 	/// (including parameter bindings etc) - and the compiler's job is to translate that into an <see cref="ICompiledTarget"/> which 

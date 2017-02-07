@@ -44,7 +44,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void ConstructorTarget_TwoParamCtor_WithResolvedArgs()
 		{
-			Output.WriteLine("Both arguments are supplied by automatically resolving them (using RezolvedTarget)");
+			Output.WriteLine("Both arguments are supplied by automatically resolving them (using ResolvedTarget)");
 			var targets = CreateTargetContainer();
 			targets.RegisterType<TwoCtors>();
 			targets.RegisterObject(10);

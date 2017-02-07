@@ -26,8 +26,8 @@ namespace Rezolver
 	/// are numerous virtual methods which allow you to change which fields and/or properties are selected for binding,
 	/// as well as how those bindings are created.
 	/// 
-	/// The default behaviour is bind each member to a new <see cref="RezolvedTarget"/> whose 
-	/// <see cref="RezolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
+	/// The default behaviour is bind each member to a new <see cref="ResolvedTarget"/> whose 
+	/// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
 	public class DefaultMemberBindingBehaviour : IMemberBindingBehaviour
 	{
 		private static readonly Lazy<DefaultMemberBindingBehaviour> _instance = new Lazy<DefaultMemberBindingBehaviour>(() => new DefaultMemberBindingBehaviour());
@@ -107,12 +107,12 @@ namespace Rezolver
 		/// to abort binding the field).
 		/// 
 		/// The base implementation simply creates a new <see cref="MemberBinding"/> whose
-		/// <see cref="MemberBinding.Target"/> is set to a new <see cref="RezolvedTarget"/> for the type
+		/// <see cref="MemberBinding.Target"/> is set to a new <see cref="ResolvedTarget"/> for the type
 		/// <see cref="FieldInfo.FieldType"/> - thus causing the field to be assigned a value
 		/// resolved from the container when the instance is created.</remarks>
 		protected virtual MemberBinding CreateBinding(ICompileContext context, Type type, FieldInfo field)
 		{
-			return new MemberBinding(field, new RezolvedTarget(field.FieldType));
+			return new MemberBinding(field, new ResolvedTarget(field.FieldType));
 		}
 
 		/// <summary>
@@ -128,12 +128,12 @@ namespace Rezolver
 		/// to abort binding the property).
 		/// 
 		/// The base implementation simply creates a new <see cref="MemberBinding"/> whose
-		/// <see cref="MemberBinding.Target"/> is set to a new <see cref="RezolvedTarget"/> for the type
+		/// <see cref="MemberBinding.Target"/> is set to a new <see cref="ResolvedTarget"/> for the type
 		/// <see cref="PropertyInfo.PropertyType"/> - thus causing the property to be assigned a value
 		/// resolved from the container when the instance is created.</remarks>
 		protected virtual MemberBinding CreateBinding(ICompileContext context, Type type, PropertyInfo prop)
 		{
-			return new MemberBinding(prop, new RezolvedTarget(prop.PropertyType));
+			return new MemberBinding(prop, new ResolvedTarget(prop.PropertyType));
 		}
 
 		/// <summary>

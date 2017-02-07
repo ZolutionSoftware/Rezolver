@@ -55,17 +55,24 @@ namespace Rezolver.Tests.Targets
 		}
 
 		[Fact]
-		public void DeclaredTypeShouldBeInheritedFromExpression()
+		public void DeclaredTypeShouldBeInheritedFromConstantExpression()
 		{
 			//use two expressions: a lambda and a standard expression
-			var expr1 = Expression.Constant("hello world");
-			Expression<Func<ResolveContext, string>> expr2 = c => "hello world";
+			var expr = Expression.Constant("hello world");
+			
+			var result1 = new ExpressionTarget(expr);
 
-			var result1 = new ExpressionTarget(expr1);
-			Assert.Same(expr1.Type, result1.DeclaredType);
+			Assert.Same(typeof(string), result1.DeclaredType);
+		}
 
-			var result2 = new ExpressionTarget(expr2);
-			Assert.Same(expr2.Type, result2.DeclaredType);
+		[Fact]
+		public void DeclaredTypeShouldBeInheritedFromLambdaExpression()
+		{
+			Expression<Func<ResolveContext, string>> expr = c => "hello world";
+
+			var result2 = new ExpressionTarget(expr);
+
+			Assert.Same(typeof(string), result2.DeclaredType);
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace Rezolver.Tests.Compilation.Specification
 	public partial class CompilerTestsBase
 	{
 		//An alias is a synthetic target created by wrapping a ChangeTypeTarget 
-		//around a RezolvedTarget
+		//around a ResolvedTarget
 
 		//These tests check that the compiler can support this combination
 

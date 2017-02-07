@@ -211,7 +211,7 @@ namespace Rezolver.Tests.Configuration
     {
       //TODO: implement aliasing as an extension method on the IRezolveTargetContainerExtensions class - RegisterAlias
       //What will it do?
-      //It will take a target type and a registration type - and it will create a RezolvedTarget that rezolves an instance of the target type,
+      //It will take a target type and a registration type - and it will create a ResolvedTarget that rezolves an instance of the target type,
       //but then register it against the registration type.
       //Why do we need it?
       //In this test (and the other on that currently fails), the intention is to register a singleton once for multiple types, ensuring that only

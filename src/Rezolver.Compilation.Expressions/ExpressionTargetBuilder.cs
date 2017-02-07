@@ -117,7 +117,7 @@ namespace Rezolver.Compilation.Expressions
 						variables,
 						//start the block with a run of assignments for all the parameters of the original lambda
 						//with services resolved from the container
-						variables.Select(p => Expression.Assign(p, new TargetExpression(new RezolvedTarget(p.Type)))).Concat(
+						variables.Select(p => Expression.Assign(p, new TargetExpression(new ResolvedTarget(p.Type)))).Concat(
 							new[] {
 								//and then concatenate the original body of the Lambda, which might have had
 								//any references to a ResolveContext parameter switched for the global RezolveContextParameterExpression
@@ -134,7 +134,7 @@ namespace Rezolver.Compilation.Expressions
 			{
 				var rezolvedType = ExtractRezolveCallType(node);
 				if (rezolvedType != null)
-					return new TargetExpression(new RezolvedTarget(rezolvedType));
+					return new TargetExpression(new ResolvedTarget(rezolvedType));
 				return base.VisitMethodCall(node);
 			}
 		}
@@ -142,7 +142,7 @@ namespace Rezolver.Compilation.Expressions
 		protected override Expression Build(ExpressionTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			//reasonably simple - get the underlying expression, push it through the ExpressionTranslator to perform any parameter augmentations
-			//or conversion to other targets (like RezolvedTarget, CconstructorTarget etc) and then push the result through a 
+			//or conversion to other targets (like ResolvedTarget, CconstructorTarget etc) and then push the result through a 
 			//TargetExpressionRewriter to compile any newly created targets into their respective expressions and into the resulting
 			//expression.
 

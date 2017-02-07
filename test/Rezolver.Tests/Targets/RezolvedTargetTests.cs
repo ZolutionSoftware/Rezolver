@@ -22,20 +22,20 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldNotAllowNullType()
 		{
-			Assert.Throws<ArgumentNullException>(() => new RezolvedTarget(null));
+			Assert.Throws<ArgumentNullException>(() => new ResolvedTarget(null));
 		}
 
 		[Fact]
 		public void ShouldRequireFallbackTargetToSupportResolveType()
 		{
-			Assert.Throws<ArgumentException>(() => new RezolvedTarget(typeof(string), new TestTarget(supportsType: false)));
+			Assert.Throws<ArgumentException>(() => new ResolvedTarget(typeof(string), new TestTarget(supportsType: false)));
 		}
 
 		[Fact]
 		public void ShouldSetAllPropertiesIfProvided()
 		{
 			var fallback = new TestTarget(supportsType: true);
-			var target = new RezolvedTarget(typeof(string), fallback);
+			var target = new ResolvedTarget(typeof(string), fallback);
 
 			Assert.Equal(typeof(string), target.DeclaredType);
 			Assert.Same(fallback, target.FallbackTarget);
@@ -49,7 +49,7 @@ namespace Rezolver.Tests.Targets
 			var container = new Container();
 			container.Register(new TestTarget(typeof(string), useFallBack: false, supportsType: true));
 
-			var target = new RezolvedTarget(typeof(string));
+			var target = new ResolvedTarget(typeof(string));
 			var context = GetCompileContext(target, container);
 
 			var result = target.Bind(context);
@@ -63,7 +63,7 @@ namespace Rezolver.Tests.Targets
 			var container = new Container();
 			var fallback = new TestTarget(typeof(string), useFallBack: false, supportsType: true);
 
-			var target = new RezolvedTarget(typeof(string), fallback);
+			var target = new ResolvedTarget(typeof(string), fallback);
 			var context = GetCompileContext(target, container);
 
 			var result = target.Bind(context);
@@ -78,7 +78,7 @@ namespace Rezolver.Tests.Targets
 			container.Register(new TestTarget(typeof(string), useFallBack: true, supportsType: true));
 			var fallback = new TestTarget(typeof(string), useFallBack: false, supportsType: true);
 
-			var target = new RezolvedTarget(typeof(string), fallback);
+			var target = new ResolvedTarget(typeof(string), fallback);
 			var context = GetCompileContext(target, container);
 
 			var result = target.Bind(context);
@@ -89,7 +89,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldBindToNullWhenNoTargetIsResolved()
 		{
-			var target = new RezolvedTarget(typeof(string));
+			var target = new ResolvedTarget(typeof(string));
 			var context = GetCompileContext(target);
 
 			Assert.Null(target.Bind(context));

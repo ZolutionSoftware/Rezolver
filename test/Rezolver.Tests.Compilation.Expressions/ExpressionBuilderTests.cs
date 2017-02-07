@@ -55,7 +55,7 @@ namespace Rezolver.Tests.Compilation.Expressions
 		//public void ShouldIdentifyRezolveCall()
 		//{
 		//	IExpressionAdapter adapter = ExpressionAdapter.Instance;
-		//	Assert.IsType<RezolvedTarget>(adapter.CreateTarget(() => Functions.Resolve<int>()));
+		//	Assert.IsType<ResolvedTarget>(adapter.CreateTarget(() => Functions.Resolve<int>()));
 		//}
 
 		//[Fact]
