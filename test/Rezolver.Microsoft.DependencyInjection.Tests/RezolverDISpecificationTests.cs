@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Specification;
+using Rezolver.Compilation.Expressions;
 
 namespace Rezolver.Microsoft.Extensions.DependencyInjection.Tests
 {
@@ -13,7 +14,7 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection.Tests
   {
     protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
     {
-      var container = new ScopedContainer();
+      var container = new ScopedContainer(compilerConfig: ExpressionCompiler.ConfigProvider);
       container.Populate(serviceCollection);
       return container;
     }

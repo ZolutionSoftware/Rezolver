@@ -56,5 +56,34 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			Assert.Same(container.Resolve<ITargetCompiler>(), overrideContainer.Resolve<ITargetCompiler>());
 		}
+
+		[Fact]
+		public void CompilerConfiguration_ShouldConfigureContainerAutomatically()
+		{
+			var container = new Container(GetCompilerConfigProvider());
+			Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
+			Assert.IsType<TCompileContextProvider>(container.Resolve<ICompileContextProvider>());
+		}
+
+		[Fact]
+		public void CompilerConfiguration_ShouldConfigureAllCompilersWhenUsedAsDefault()
+		{
+			var previousProvider = CompilerConfiguration.DefaultProvider;
+			CompilerConfiguration.DefaultProvider = GetCompilerConfigProvider();
+
+			try
+			{
+				foreach (var i in Enumerable.Range(0, 10))
+				{
+					var container = new Container();
+					Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
+					Assert.IsType<TCompileContextProvider>(container.Resolve<ICompileContextProvider>());
+				}
+			}
+			finally
+			{
+				CompilerConfiguration.DefaultProvider = previousProvider;
+			}
+		}
 	}
 }

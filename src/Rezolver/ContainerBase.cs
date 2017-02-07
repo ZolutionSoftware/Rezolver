@@ -113,7 +113,7 @@ namespace Rezolver
 
 		/// <summary>
 		/// Gets the compiler configuration provider to be passed when a derived container does not want the
-		/// <see cref="CompilerConfiguration.Default" /> provider to be used if one is not passed on construction.
+		/// <see cref="CompilerConfiguration.DefaultProvider" /> provider to be used if one is not passed on construction.
 		/// 
 		/// This provider is guaranteed not to add/modify any registrations in the underlying target container
 		/// which are connected with compilation.
@@ -151,11 +151,11 @@ namespace Rezolver
 		/// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
 		/// <see cref="Targets"/> property.</param>
 		/// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.Default"/> provider will be used.</param>
+		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
 		protected ContainerBase(ITargetContainer targets = null, ICompilerConfigurationProvider compilerConfig = null)
 		{
 			Targets = targets ?? new TargetContainer();
-			(compilerConfig ?? CompilerConfiguration.Default).Configure(this, Targets);
+			(compilerConfig ?? CompilerConfiguration.DefaultProvider).Configure(this, Targets);
 		}
 
 		///// <summary>

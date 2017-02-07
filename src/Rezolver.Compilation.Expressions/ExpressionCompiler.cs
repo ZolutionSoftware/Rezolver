@@ -74,7 +74,7 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		public static void UseAsDefaultCompiler()
 		{
-			CompilerConfiguration.Default = ConfigProvider;
+			CompilerConfiguration.DefaultProvider = ConfigProvider;
 		}
 
 

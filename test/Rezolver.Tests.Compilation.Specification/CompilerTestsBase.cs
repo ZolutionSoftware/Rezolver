@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Compilation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -20,6 +21,14 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		/// <summary>
+		/// Gets the compiler configuration provider to be used to configure the container 
+		/// returned by <see cref="CreateContainer(ITargetContainer, string)"/> and when performing
+		/// the tests of the <see cref="CompilerConfiguration.DefaultProvider"/> configuration provider.
+		/// </summary>
+		/// <param name="testName">Name of the test.</param>
+		protected abstract ICompilerConfigurationProvider GetCompilerConfigProvider([CallerMemberName]string testName = null);
+
+		/// <summary>
 		/// Creates the target container for the test.
 		/// </summary>
 		/// <param name="testName">Name of the test.</param>
@@ -32,12 +41,15 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// Creates the container for the test or theory from the targets created by 
 		/// <see cref="CreateTargetContainer(string)"/>.
 		/// 
-		/// Your derived tests class must override this to ensure that your compiler is correctly configured
-		/// (most likely through the 
+		/// Your implementation of <see cref="GetCompilerConfigProvider(string)"/> is used to configure the container
+		/// on creation.
 		/// </summary>
 		/// <param name="targets">The targets to be used for the container.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected abstract IContainer CreateContainer(ITargetContainer targets, [CallerMemberName]string testName = null);
+		protected virtual IContainer CreateContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
+		{
+			return new Container(targets, GetCompilerConfigProvider(testName));
+		}
 
 		/// <summary>
 		/// Creates an overriding container using the passed <paramref name="baseContainer"/> as the parent container.
@@ -77,6 +89,6 @@ namespace Rezolver.Tests.Compilation.Specification
 			var targets = CreateTargetContainer(testName);
 			targets.Register(target, serviceType);
 			return CreateContainer(targets, testName);
-		}
+		}		
 	}
 }

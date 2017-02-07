@@ -35,9 +35,22 @@ namespace Rezolver.Tests.Targets
 			}
 		}
 
+		protected class TestCompilerConfigProvider : ICompilerConfigurationProvider
+		{
+			public void Configure(IContainer container, ITargetContainer targets)
+			{
+				targets.RegisterObject<ICompileContextProvider>(new TestContextProvider());
+			}
+		}
+
+		protected virtual ICompilerConfigurationProvider GetTestCompilerConfigProvider()
+		{
+			return new TestCompilerConfigProvider();
+		}
+
 		protected virtual IContainer GetDefaultContainer()
 		{
-			return new Container();
+			return new Container(new TestCompilerConfigProvider());
 		}
 
 		protected virtual ITargetContainer GetDefaultTargetContainer(IContainer container = null)
@@ -51,6 +64,8 @@ namespace Rezolver.Tests.Targets
 		{
 			return new TestContextProvider();
 		}
+
+
 
 		/// <summary>
 		/// Gets the compile context for the specified target under test.

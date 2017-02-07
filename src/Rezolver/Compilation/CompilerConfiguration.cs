@@ -18,7 +18,7 @@ namespace Rezolver.Compilation
 			}
 		}
 
-		private static ICompilerConfigurationProvider _default = new NoCompilerConfigurationProvider();
+		private static ICompilerConfigurationProvider _defaultProvider = new NoCompilerConfigurationProvider();
 
 		/// <summary>
 		/// Gets or sets the default <see cref="ICompilerConfigurationProvider"/> used by classes derived from 
@@ -30,17 +30,18 @@ namespace Rezolver.Compilation
 		/// compilation, or that you explicitly pass a provider to the container when you create it.
 		/// 
 		/// The standard expression compiler defined in the <c>Rezolver.Compilation.Expressions</c> library defines a
-		/// provider </remarks>
-		public static ICompilerConfigurationProvider Default
+		/// provider in <c>Rezolver.Compilation.Expressions.ConfigProvider</c>, and a static configuration method
+		/// <c>UseAsDefaultCompiler</c> which automatically sets it into this property for you.</remarks>
+		public static ICompilerConfigurationProvider DefaultProvider
 		{
 			get
 			{
-				return _default;
+				return _defaultProvider;
 			}
 			set
 			{
 				value.MustNotBeNull(nameof(value));
-				_default = value;
+				_defaultProvider = value;
 			}
 		}
     }

@@ -31,7 +31,7 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="targets">Optional.  The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</param>
 		/// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.Default"/> provider will be used.</param>
+		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
 		public Container(ITargetContainer targets = null, ICompilerConfigurationProvider compilerConfig = null)
 			: base(targets, compilerConfig)
 		{
@@ -40,7 +40,7 @@ namespace Rezolver
 
 		/// <summary>
 		/// Constructs a new instance of the <see cref="Container"/> class using the given target container and the
-		/// default compiler configuration (<see cref="CompilerConfiguration.Default"/>).
+		/// default compiler configuration (<see cref="CompilerConfiguration.DefaultProvider"/>).
 		/// </summary>
 		/// <param name="targets">The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</param>
 		public Container(ITargetContainer targets): this(targets, null)
@@ -52,7 +52,7 @@ namespace Rezolver
 		/// Constructs a new instance of the <see cref="Container"/> class using a default empty <see cref="ITargetContainer"/>
 		/// </summary>
 		/// <param name="compilerConfig">An object which will be used to configure this container and its targets to use a 
-		/// specific compilation strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.Default"/> provider 
+		/// specific compilation strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider 
 		/// will be used.</param>
 		public Container(ICompilerConfigurationProvider compilerConfig) : this(null, compilerConfig)
 		{

@@ -2660,6 +2660,20 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
+      "Rezolver.Compilation.Expressions/1.1.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.1",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "Rezolver": "1.1.0"
+        },
+        "compile": {
+          "netstandard1.1/Rezolver.Compilation.Expressions.dll": {}
+        },
+        "runtime": {
+          "netstandard1.1/Rezolver.Compilation.Expressions.dll": {}
+        }
+      },
       "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
@@ -7877,6 +7891,11 @@
       "path": "../../src/Rezolver/project.json",
       "msbuildProject": "../../src/Rezolver/Rezolver.xproj"
     },
+    "Rezolver.Compilation.Expressions/1.1.0": {
+      "type": "project",
+      "path": "../../src/Rezolver.Compilation.Expressions/project.json",
+      "msbuildProject": "../../src/Rezolver.Compilation.Expressions/Rezolver.Compilation.Expressions.xproj"
+    },
     "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.0": {
       "type": "project",
       "path": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection/project.json",
@@ -7886,6 +7905,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.Extensions.DependencyInjection.Specification.Tests >= 1.1.0-*",
+      "Rezolver.Compilation.Expressions >= 1.1.0-*",
       "Rezolver.Microsoft.Extensions.DependencyInjection >= 1.1.0-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta4-build3444"

@@ -9,7 +9,7 @@ namespace Rezolver.Compilation
 	/// Used by all the standard container types in the Rezolver framework.
 	/// 
 	/// You can provide a specific provider to most containers on creation, and you can configure
-	/// the default system-wide provider via the <see cref="CompilerConfiguration.Default"/> static
+	/// the default system-wide provider via the <see cref="CompilerConfiguration.DefaultProvider"/> static
 	/// property.
 	/// </summary>
 	public interface ICompilerConfigurationProvider

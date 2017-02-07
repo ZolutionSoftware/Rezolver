@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Xunit.Abstractions;
+using Rezolver.Compilation;
 
 namespace Rezolver.Tests.Compilation.Expressions
 {
@@ -17,10 +18,9 @@ namespace Rezolver.Tests.Compilation.Expressions
 
 		}
 
-		protected override IContainer CreateContainer(ITargetContainer targets, [CallerMemberName] string testName = null)
+		protected override ICompilerConfigurationProvider GetCompilerConfigProvider([CallerMemberName] string testName = null)
 		{
-			//in reality, most applications are going to use the UseExpressionCompiler.Configure() static method
-			return new Container(targets, ExpressionCompiler.ConfigProvider);
+			return ExpressionCompiler.ConfigProvider;
 		}
 	}
 }
