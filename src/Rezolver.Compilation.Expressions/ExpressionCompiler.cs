@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -175,7 +176,8 @@ namespace Rezolver.Compilation.Expressions
 
 			foreach (var type in builderTypes)
 			{
-				foreach (IExpressionBuilder expressionBuilder in context.FetchAllDirect(type))
+				foreach (IExpressionBuilder expressionBuilder in (IEnumerable)context.Container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)))
+					//FetchAllDirect(type))
 				{
 					if (expressionBuilder != this)
 					{
