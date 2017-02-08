@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Rezolver.Compilation;
 using Rezolver.Targets;
+using System.Threading;
 
 namespace Rezolver
 {
@@ -118,7 +119,7 @@ namespace Rezolver
 		/// This provider is guaranteed not to add/modify any registrations in the underlying target container
 		/// which are connected with compilation.
 		/// </summary>
-		protected static ICompilerConfigurationProvider NoCompilerConfiguration { get; } = new NoChangeCompilerConfigurationProvider();
+		protected static ICompilerConfigurationProvider NoChangeCompilerConfiguration { get; } = new NoChangeCompilerConfigurationProvider();
 		
 
 		private static readonly
@@ -143,7 +144,8 @@ namespace Rezolver
 			return target is MissingCompiledTarget;
 		}
 
-
+		private int _compileConfigured = 0;
+		private ICompilerConfigurationProvider _compilerConfigurationProvider;
 		/// <summary>
 		/// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="compiler"/>
 		/// </summary>
@@ -155,7 +157,7 @@ namespace Rezolver
 		protected ContainerBase(ITargetContainer targets = null, ICompilerConfigurationProvider compilerConfig = null)
 		{
 			Targets = targets ?? new TargetContainer();
-			(compilerConfig ?? CompilerConfiguration.DefaultProvider).Configure(this, Targets);
+			_compilerConfigurationProvider = compilerConfig ?? CompilerConfiguration.DefaultProvider;
 		}
 
 		///// <summary>
@@ -314,6 +316,9 @@ namespace Rezolver
 		/// </remarks> 
 		protected virtual ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)
 		{
+			if (Interlocked.CompareExchange(ref _compileConfigured, 1, 0) == 0)
+				_compilerConfigurationProvider.Configure(this, Targets);
+
 			ITarget target = Targets.Fetch(context.RequestedType);
 
 			if (target == null)

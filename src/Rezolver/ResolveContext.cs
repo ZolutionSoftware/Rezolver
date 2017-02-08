@@ -108,6 +108,8 @@ namespace Rezolver
 		/// <value>The scope.</value>
 		public IScopedContainer Scope { get { return _scope; } private set { _scope = value; } }
 
+		public IContainerScope NewScope { get; }
+
 		private ResolveContext() { }
 
 		/// <summary>
@@ -118,6 +120,13 @@ namespace Rezolver
 		public ResolveContext(IContainer container, Type requestedType)
 		  : this(container)
 		{
+			RequestedType = requestedType;
+		}
+
+		public ResolveContext(IContainerScope scope, Type requestedType)
+		{
+			NewScope = scope;
+			Container = scope.Container;
 			RequestedType = requestedType;
 		}
 

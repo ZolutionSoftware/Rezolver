@@ -77,7 +77,7 @@ namespace Rezolver
 			if (obj == null)
 				return;
 			ConcurrentBag<object> instances = _objects.GetOrAdd(
-				new ResolveContext(null, context.RequestedType),
+				new ResolveContext((IContainer)null, context.RequestedType),
 				c => new ConcurrentBag<object>());
 
 			//bit slow this, but hopefully there won't be loads of them...
@@ -123,7 +123,7 @@ namespace Rezolver
 		public virtual void AddToScope(object obj, ResolveContext context = null)
 		{
 			obj.MustNotBeNull("obj");
-			TrackObject(obj, context ?? new ResolveContext(null, obj.GetType()));
+			TrackObject(obj, context ?? new ResolveContext((IContainer)null, obj.GetType()));
 		}
 
 		public virtual IEnumerable<object> GetFromScope(ResolveContext context)
