@@ -29,6 +29,20 @@ namespace Rezolver.Tests
 			}
 		}
 
+		
+
+		private ScopeActivationBehaviour? _scopeBehaviour;
+
+		public ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				if (_scopeBehaviour == null)
+					throw new NotImplementedException();
+				return _scopeBehaviour.Value;
+			}
+		}
+
 		private bool? _supportsType;
 		public bool SupportsType(Type type)
 		{
@@ -37,7 +51,12 @@ namespace Rezolver.Tests
 			return _supportsType.Value;
 		}
 
-		public TestTarget(Type declaredType = null, bool? useFallBack = null, bool? supportsType = null)
+		public IContainerScope SelectScope(ResolveContext context)
+		{
+			return context.NewScope;
+		}
+
+		public TestTarget(Type declaredType = null, bool? useFallBack = null, bool? supportsType = null, ScopeActivationBehaviour? scopeBehaviour = null)
 		{
 			_declaredType = declaredType;
 			_useFallBack = useFallBack;

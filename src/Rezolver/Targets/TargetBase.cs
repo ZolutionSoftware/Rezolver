@@ -133,6 +133,11 @@ namespace Rezolver.Targets
 			return TypeHelpers.AreCompatible(DeclaredType, type)/* && !TypeHelpers.IsGenericTypeDefinition(type)*/;
 		}
 
+		public virtual IContainerScope SelectScope(ResolveContext context)
+		{
+			return context.NewScope;
+		}
+
 		/// <summary>
 		/// Gets the declared type of object that is constructed by this target.
 		/// </summary>
@@ -140,5 +145,15 @@ namespace Rezolver.Targets
 		{
 			get;
 		}
+
+		public virtual ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				return ScopeActivationBehaviour.Implicit;
+			}
+		}
+
+
 	}
 }

@@ -84,6 +84,10 @@ namespace Rezolver.Compilation.Expressions
 
 				//TODO: Rework scope tracking (probably via the target object itself so that the majority of the
 				//expression crap can be removed.)
+				if(target.ScopeBehaviour != ScopeActivationBehaviour.None && !context.SuppressScopeTracking)
+				{
+#error tricky here - need to get a lambda representing our expression tree which can be fed to a scope's Resolve function as the factory, which technically means firing up the IExpressionCompiler again.
+				}
 
 				//if scope tracking isn't disabled, either by this target or at the compile context level, then we 
 				//add the boilerplate to add this object produced to the current scope.

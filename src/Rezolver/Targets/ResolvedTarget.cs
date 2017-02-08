@@ -61,6 +61,14 @@ namespace Rezolver.Targets
 			}
 		}
 
+		public override ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				return ScopeActivationBehaviour.None;
+			}
+		}
+
 		/// <summary>
 		/// Gets the target that this <see cref="ResolvedTarget"/> will fallback to if a satisfactory target cannot be found
 		/// at compile time or resolve-time.

@@ -45,6 +45,15 @@ namespace Rezolver.Targets
 			}
 		}
 
+		public override IContainerScope SelectScope(ResolveContext context)
+		{
+			if(context.NewScope != null)
+			{
+				return context.NewScope.GetRootScope();
+			}
+			return base.SelectScope(context);
+		}
+
 		/// <summary>
 		/// Gets the inner target for this singleton.
 		/// </summary>

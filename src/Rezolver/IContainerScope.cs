@@ -75,10 +75,10 @@ namespace Rezolver
 		/// <summary>
 		/// implicitly scoped objects will always be IDisposable
 		/// </summary>
-		private readonly ConcurrentBag<IDisposable> _implicitlyScopedObjects
+		private ConcurrentBag<IDisposable> _implicitlyScopedObjects
 			= new ConcurrentBag<IDisposable>();
-		private readonly ConcurrentBag<IContainerScope> _childScopes
-			= new ConcurrentBag<IContainerScope>();
+		private readonly LockedList<IContainerScope> _childScopes
+			= new LockedList<IContainerScope>();
 
 		private bool _disposed = false;
 		private bool _disposing = false;
@@ -139,7 +139,7 @@ namespace Rezolver
 		public void ChildScopeDisposed(IContainerScope child)
 		{
 			if (!_disposing) {
-#error Need to be able to remove scopes as they are disposed but we can't because ConcurrentBag doesn't support that.
+				_childScopes.Remove(child);
 			}
 		}
 
@@ -158,13 +158,16 @@ namespace Rezolver
 				_disposing = true;
 				try
 				{
-					//dispose all child scopes first
-					var childScopes = _childScopes.ToArray();
-
-					foreach (var scope in childScopes)
+					using (var listLock = _childScopes.Lock())
 					{
-						scope.Dispose();
+						//dispose all child scopes first
+						foreach (var scope in _childScopes)
+						{
+							scope.Dispose();
+						}
+						_childScopes.Clear();
 					}
+
 					//note that explicitly scoped objects might not actually be IDisposable :)
 					var allExplicitObjects = _explicitlyScopedObjects.Values.ToArray()
 						.Select(l => l.Value).OfType<IDisposable>();
@@ -175,7 +178,8 @@ namespace Rezolver
 						obj.Dispose();
 					}
 
-
+					_explicitlyScopedObjects.Clear();
+					_implicitlyScopedObjects = new ConcurrentBag<IDisposable>();
 				}
 				finally
 				{
@@ -207,6 +211,13 @@ namespace Rezolver
 
 	public static class IContainerScopeExtensions
 	{
+		public static IContainerScope GetRootScope(this IContainerScope scope)
+		{
+			if (scope == null) throw new ArgumentNullException(nameof(scope));
+			while(scope.Parent != null) { scope = scope.Parent; }
+			return scope;
+		}
+
 		public static TResult Resolve<TResult>(this IContainerScope scope, ResolveContext context, Func<ResolveContext, object> factory, ScopeActivationBehaviour behaviour)
 		{
 			if (scope == null) throw new ArgumentNullException(nameof(scope));

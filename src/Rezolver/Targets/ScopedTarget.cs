@@ -55,6 +55,14 @@ namespace Rezolver.Targets
 			}
 		}
 
+		public override ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				return ScopeActivationBehaviour.Explicit;
+			}
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ScopedTarget"/> class.
 		/// </summary>

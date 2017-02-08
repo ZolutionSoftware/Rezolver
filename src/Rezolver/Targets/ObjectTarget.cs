@@ -17,7 +17,7 @@ namespace Rezolver.Targets
 
 		private readonly Type _declaredType;
 		private readonly bool _suppressScopeTracking;
-
+		private readonly ScopeActivationBehaviour _scopeBehaviour;
 		/// <summary>
 		/// Overrides <see cref="TargetBase.SuppressScopeTracking"/>
 		/// </summary>
@@ -26,6 +26,14 @@ namespace Rezolver.Targets
 			get
 			{
 				return _suppressScopeTracking;
+			}
+		}
+
+		public override ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				return _scopeBehaviour;
 			}
 		}
 
@@ -49,6 +57,7 @@ namespace Rezolver.Targets
 		{
 			Value = obj;
 			_suppressScopeTracking = suppressScopeTracking;
+			_scopeBehaviour = suppressScopeTracking ? ScopeActivationBehaviour.None : ScopeActivationBehaviour.Implicit;
 			//if the caller provides a declared type we check
 			//also that, if the object is null, the target type
 			//can accept nulls.  Otherwise we're simply checking 

@@ -35,6 +35,14 @@ namespace Rezolver.Targets
 			}
 		}
 
+		public override ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				return ScopeActivationBehaviour.None;
+			}
+		}
+
 		/// <summary>
 		/// Always returns the target type that was passed in the <see cref="ChangeTypeTarget.ChangeTypeTarget(ITarget, Type)"/> constructor.
 		/// </summary>

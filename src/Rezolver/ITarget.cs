@@ -74,5 +74,9 @@ namespace Rezolver
 		/// because it's impossible to build an instance of an open generic type.
 		/// </remarks>
 		bool SupportsType(Type type);
+
+		ScopeActivationBehaviour ScopeBehaviour { get; }
+
+		IContainerScope SelectScope(ResolveContext context);
 	}
 }

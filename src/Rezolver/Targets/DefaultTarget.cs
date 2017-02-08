@@ -38,6 +38,13 @@ namespace Rezolver.Targets
 			})();
 		}
 
+		public override ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				return ScopeActivationBehaviour.None;
+			}
+		}
 		object ICompiledTarget.GetObject(ResolveContext context)
 		{
 			return Value;

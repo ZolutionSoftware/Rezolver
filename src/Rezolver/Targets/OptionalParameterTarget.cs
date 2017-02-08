@@ -32,6 +32,14 @@ namespace Rezolver.Targets
 			}
 		}
 
+		public override ScopeActivationBehaviour ScopeBehaviour
+		{
+			get
+			{
+				return ScopeActivationBehaviour.None;
+			}
+		}
+
 		/// <summary>
 		/// Always returns true, since using a default argument of a parameter is always considered
 		/// to be a last-resort.
