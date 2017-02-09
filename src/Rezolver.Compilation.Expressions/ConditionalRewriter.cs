@@ -217,6 +217,13 @@ namespace Rezolver.Compilation.Expressions
 
 			return base.VisitConditional(node);
 		}
+
+		//protected override Expression VisitLambda<T>(Expression<T> node)
+		//{
+		//	//prevent the rewriter from lifting code out of a lambda
+		//	//this means that any quoted lambdas must already be optimised.
+		//	return node;
+		//}
 	}
 
 }

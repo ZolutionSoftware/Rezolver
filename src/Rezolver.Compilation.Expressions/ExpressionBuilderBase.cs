@@ -46,13 +46,14 @@ namespace Rezolver.Compilation.Expressions
 		/// The core expression build function - takes care of handling mismatched types between the target and
 		/// the requested type in the context - both checking compatibility and producing conversion expressions
 		/// where necessary.
-		/// Also performs cyclic dependency checking.
+		/// Also performs cyclic dependency checking and rewriting expressions to take advantage of a target's
+		/// <see cref="ITarget.ScopeBehaviour"/> (which can be overriden with <see cref="ICompileContext.ScopeBehaviourOverride"/>)
 		/// </summary>
 		/// <param name="target">The target to be compiled.</param>
 		/// <param name="context">The context.</param>
 		/// <param name="compiler">The compiler.</param>
-		/// <exception cref="ArgumentException">targetType</exception>
-		/// <exception cref="InvalidOperationException"></exception>
+		/// <exception cref="ArgumentException">targetType doesn't support the context's <see cref="ICompileContext.TargetType"/></exception>
+		/// <exception cref="InvalidOperationException">The <paramref name="target"/> is already being compiled.</exception>
 		/// <remarks>This class' implementation of <see cref="IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)" /> calls this,
 		/// as does the derived abstract class <see cref="ExpressionBuilderBase{TTarget}" /> for its implementation
 		/// of <see cref="IExpressionBuilder{TTarget}.Build(TTarget, IExpressionCompileContext, IExpressionCompiler)" />.
@@ -78,23 +79,59 @@ namespace Rezolver.Compilation.Expressions
 				result = new TargetExpressionRewriter(compiler, context).Visit(result);
 
 				//always convert if types aren't the same.
-				if (convertType != result.Type &&
-					(TypeHelpers.IsAssignableFrom(convertType, target.DeclaredType)))
+				if (convertType != result.Type)
 					result = Expression.Convert(result, convertType);
 
-				//TODO: Rework scope tracking (probably via the target object itself so that the majority of the
-				//expression crap can be removed.)
-				if(target.ScopeBehaviour != ScopeActivationBehaviour.None && !context.SuppressScopeTracking)
+				if ((context.ScopeBehaviourOverride ?? target.ScopeBehaviour) != ScopeActivationBehaviour.None)
 				{
-#error tricky here - need to get a lambda representing our expression tree which can be fed to a scope's Resolve function as the factory, which technically means firing up the IExpressionCompiler again.
-				}
+					//so the expression needs to be changed so that it becomes something like this:
+					//if(context.Scope != null) return context.Scope.Resolve(context, lambda<targetExpression>);
+					//else return targetExpression
 
-				//if scope tracking isn't disabled, either by this target or at the compile context level, then we 
-				//add the boilerplate to add this object produced to the current scope.
-				//if (!SuppressScopeTracking && !context.SuppressScopeTracking)
-				//{
-				//	result = CreateScopeTrackingExpression(context, result);
-				//}
+					//TODO: if behaviour == explicit, then a scope is *required* and the expression should throw
+					//an exception if it is null :)
+
+					//TODO: optimise away these methodinfos etc.
+
+					//this will automatically be of type object and will be optimised.
+					var lambda = compiler.BuildResolveLambda(result, context);
+					var scopeResolveMethod = MethodCallExtractor.ExtractCalledMethod(
+						(IContainerScope s) => s.Resolve(
+							(ResolveContext)null, 
+							(Func<ResolveContext, object>)null, 
+							ScopeActivationBehaviour.None));
+					var selectScopeMethod = MethodCallExtractor.ExtractCalledMethod(
+						(ITarget t) => t.SelectScope(null)
+						);
+					//use a shared expression for the scope check so we can optimise away all the nested scope calls
+					//we're likely to be generating.
+					var compareExpr = context.GetOrAddSharedExpression(typeof(bool), "isScoped", () =>
+					{
+						return Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IContainerScope)));
+					}, typeof(ExpressionBuilderBase));
+
+					result = Expression.Condition(
+						compareExpr,
+						result, //if null scope, just use the built expression as-is
+						Expression.Convert(	//otherwise - generate a call into the scope's special Resolve method
+							Expression.Call(
+								//the target is called to select the scope it wants
+								Expression.Call(
+									Expression.Constant(target), 
+									selectScopeMethod,
+									context.ResolveContextExpression
+								),
+								scopeResolveMethod,
+								context.ResolveContextExpression,
+								lambda,
+								//feed the target's scope behaviour
+								//(note: I'm thinking this should be derived from the context
+								//unless it's null)
+								Expression.Constant(target.ScopeBehaviour)
+							),
+							convertType
+						));
+				}
 
 				return result;
 			}
@@ -122,7 +159,7 @@ namespace Rezolver.Compilation.Expressions
 			target.MustNotBeNull(nameof(target));
 			context.MustNotBeNull(nameof(context));
 
-			if(compiler == null)
+			if (compiler == null)
 			{
 				compiler = GetContextCompiler(context);
 				if (compiler == null)

@@ -34,24 +34,33 @@ namespace Rezolver.Compilation.Expressions
 		/// compilation).
 		/// </summary>
 		/// <param name="target">The target.</param>
-		/// <param name="context">The current compilation context.</param>
-		/// <remarks>Whilst the returned expression can be directly used as the body for a new 
-		/// <c>Expression&lt;Func&lt;ResolveContext, object&gt;&gt;</c>, you should not use it for that, because the expression will
-		/// not have had potential duplicate logic and variables optimised away.  As mentioned in the summary, it's primarily useful
-		/// when you want to incporate the code for one target inside that of another.
+		/// <param name="context">Contains the supporting expressions (shared locals, shared expressions, 
+		/// ResolveContext expression etc) that have been used in the generation of the expression.</param>
+		/// <remarks>
 		/// 
-		/// If you want the optimised code for the passed target, you should use the <see cref="BuildResolveLambda(ITarget, IExpressionCompileContext)"/>
-		/// function instead.</remarks>
+		/// If you want to build the optimised code for the passed target, you should use the
+		/// <see cref="ExpressionCompilerBuildExtensions.BuildResolveLambda(IExpressionCompiler, ITarget, IExpressionCompileContext)"/>
+		/// extension method, which uses this method and then passes the result to the 
+		/// <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> function also defined on 
+		/// this interface.</remarks>
 		Expression Build(ITarget target, IExpressionCompileContext context);
 		/// <summary>
-		/// Similar to the <see cref="Build(ITarget, IExpressionCompileContext)"/> function, except the returned lambda will be optimised and can be 
-		/// immediately compiled into a delegate and executed; or quoted inside another expression as a callback.
+		/// This function optimises and prepares an expression that's (most likely) previously been 
+		/// produced by the <see cref="Build(ITarget, IExpressionCompileContext)"/> function into a 
+		/// lambda expression which can be compiled into a delegate and executed; or quoted inside 
+		/// another expression as a callback.
 		/// 
-		/// The <see cref="IExpressionCompileContext.ResolveContextExpression"/> of the <paramref name="context"/> will be used to define 
-		/// the single parameter for the lambda that is created.
+		/// The <see cref="IExpressionCompileContext.ResolveContextExpression"/> of the 
+		/// <paramref name="context"/> will be used to define the single parameter for the lambda that 
+		/// is created.
 		/// </summary>
-		/// <param name="target">The target.</param>
-		/// <param name="context">The current compilation context.</param>
-		Expression<Func<ResolveContext, object>> BuildResolveLambda(ITarget target, IExpressionCompileContext context);
+		/// <param name="targetExpression">Expression to be optimised and used as the body of the lambda.
+		/// Any expression produced by the <see cref="Build(ITarget, IExpressionCompileContext)"/> method
+		/// must be compatible with this.</param>
+		/// <param name="context">Contains the supporting expressions (shared locals, shared expressions, 
+		/// ResolveContext expression etc) that have been used in the generation of the expression.</param>
+		/// <returns>A lambda expression which, when compiled and executed, will produce an object 
+		/// consistent with the <see cref="ITarget"/> from which the code was produced.</returns>
+		Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression targetExpression, IExpressionCompileContext context);
 	}
 }

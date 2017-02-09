@@ -60,6 +60,11 @@ namespace Rezolver.Compilation.Expressions
 
 		protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
+			//TODO: Re below: Add a type/interface specifically to hold singletons in a container and add it to 
+			//the configuration provider's set up.  Then we can use that as the backing store for the singleton 
+			//objects produced by all singletons within.  In fact - we can use a similar approach to what's 
+			//been done for scopes.
+
 			//this isn't quite right, imho.  One singleton target should technically be able to create
 			//more than one instance of a given concrete type, if that target is in a RezolverBuilder that is, 
 			//in turn, used to build more than one top-level container (a permitted use case).
@@ -75,9 +80,10 @@ namespace Rezolver.Compilation.Expressions
 			//be done.
 
 			var initialiser = target.GetOrAddInitialiser(context.TargetType ?? target.DeclaredType, t => {
-				//get the underlying expression for the target that is to be turned into a singleton - but disable the
-				//generation of any scope-tracking code.
-				var innerExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(t, suppressScopeTracking: true));
+				//get the underlying expression for the target that is to be turned into a singleton - but disable any
+				//scope tracking because the singleton is fixed to 'Implicit' and it's important that it is in
+				//control of that, because all singletons must be stored in the very root scope.
+				var innerExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(t, scopeBehaviourOverride: ScopeActivationBehaviour.None));
 				
 				//there's an argument for using the compiler here to generate this 
 				//lambda, but our interface specifically creates an ICompiledRezolveTarget - not a delegate - so it's not 

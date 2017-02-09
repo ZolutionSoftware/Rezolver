@@ -34,16 +34,10 @@ namespace Rezolver.Compilation
 		IContainer Container { get; }
 
 		/// <summary>
-		/// If true, then any target that is compiling within this context should not generate any runtime code to fetch the
-		/// object from, or track the object in, the current <see cref="IScopedContainer"/>.
+		/// If not <c>null</c> then this overrides the <see cref="ITarget.ScopeBehaviour"/> of the <see cref="ITarget"/>
+		/// that's currently being compiled.
 		/// </summary>
-		/// <remarks>This is currently used, for example, by wrapper targets that generate their own
-		/// scope tracking code (specifically, the <see cref="SingletonTarget"/> and <see cref="ScopedTarget"/>.
-		/// 
-		/// It's therefore very important that any custom <see cref="ITarget"/> implementations which intend to do their own
-		/// scoping honour this flag in their implementation.
-		/// The <see cref="TargetBase"/> class does honour this flag.</remarks>
-		bool SuppressScopeTracking { get; }
+		ScopeActivationBehaviour? ScopeBehaviourOverride { get; }
 
 		/// <summary>
 		/// Any <see cref="ICompiledTarget"/> built for a <see cref="ITarget"/> with this context should target this type.  
@@ -59,13 +53,16 @@ namespace Rezolver.Compilation
 
 		/// <summary>
 		/// Creates a new child context from this one, except the <see cref="TargetType"/> and
-		/// <see cref="SuppressScopeTracking"/> properties can be overriden if required, the rest of the state is inherited from
-		/// this context.
+		/// <see cref="ScopeBehaviourOverride"/> properties can be overriden if required.
+		/// 
+		/// Implementations must make sure that the <see cref="ScopeBehaviourOverride"/> 
+		/// is *never* inherited.
 		/// </summary>
 		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this context's <see cref="TargetType"/>.</param>
-		/// <param name="suppressScopeTracking">The value passed here will be used for the new context's <see cref="SuppressScopeTracking"/></param>
+		/// <param name="scopeBehaviourOverride">Override the <see cref="ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
+		/// This is never inherited automatically from one context to another.</param>
 		/// <returns>A new <see cref="ICompileContext" />.</returns>
-		ICompileContext NewContext(Type targetType = null, bool? suppressScopeTracking = null);
+		ICompileContext NewContext(Type targetType = null, ScopeActivationBehaviour? scopeBehaviourOverride = null);
 
 		/// <summary>
 		/// Pops the compile stack, returning the entry that was popped.

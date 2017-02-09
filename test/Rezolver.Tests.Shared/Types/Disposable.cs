@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	public class Disposable : IDisposable
+	internal class Disposable : IDisposable
 	{
 		public bool Disposed { get; private set; } = false;
 		public int DisposedCount { get; private set; } = 0;

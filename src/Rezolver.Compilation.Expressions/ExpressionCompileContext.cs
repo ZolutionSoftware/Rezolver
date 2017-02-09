@@ -131,12 +131,11 @@ namespace Rezolver.Compilation.Expressions
 		/// <param name="sourceContext">The source context.</param>
 		/// <param name="useParentSharedExpressions">If <c>true</c> then the <see cref="SharedExpressions"/> of the <paramref name="sourceContext"/>
 		/// will be reused by this new context.  If <c>false</c>, then this context will start with a new empty set of shared expressions.</param>
-		/// <param name="suppressScopeTracking"><c>null</c> to inherit the <paramref name="sourceContext"/>'s 
-		/// <see cref="ICompileContext.SuppressScopeTracking"/> value, any non-null value overrides that value.</param>
+		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with this context.</param>
 		/// <param name="targetType">If not null, the type for which expressions are to be compiled.  If null, then the 
 		/// <paramref name="sourceContext"/>'s <see cref="ICompileContext.TargetType"/> will be inherited.</param>
-		protected internal ExpressionCompileContext(IExpressionCompileContext sourceContext, Type targetType = null, bool useParentSharedExpressions = true, bool? suppressScopeTracking = null)
-			: base(sourceContext, targetType, suppressScopeTracking)
+		protected internal ExpressionCompileContext(IExpressionCompileContext sourceContext, Type targetType = null, bool useParentSharedExpressions = true, ScopeActivationBehaviour? scopeBehaviourOverride = null)
+			: base(sourceContext, targetType, scopeBehaviourOverride)
 		{
 			_sharedExpressions = useParentSharedExpressions ? null : new Dictionary<SharedExpressionKey, Expression>();
 
@@ -171,7 +170,7 @@ namespace Rezolver.Compilation.Expressions
 			_sharedExpressions = new Dictionary<SharedExpressionKey, Expression>(20);
 			_containerExpression = Expression.Constant(Container, typeof(IContainer));
 			_contextContainerPropertyExpression = Expression.Property(_resolveContextExpression, nameof(ResolveContext.Container));
-			_contextScopePropertyExpression = Expression.Property(ResolveContextExpression, nameof(ResolveContext.Scope));
+			_contextScopePropertyExpression = Expression.Property(ResolveContextExpression, nameof(ResolveContext.NewScope));
 			RegisterExpressionTargets();
 		}
 
@@ -192,10 +191,11 @@ namespace Rezolver.Compilation.Expressions
 		/// by the new context by reference.  That is, when the new context goes out of scope, any new shared expressions it created
 		/// will still be available.
 		/// If false, then the new context will get a brand new, empty, set of shared expressions.</param>
-		/// <param name="suppressScopeTracking">The value passed here will be used for the new context's <see cref="SuppressScopeTracking" /></param>
-		IExpressionCompileContext IExpressionCompileContext.NewContext(Type targetType, bool useParentSharedExpressions, bool? suppressScopeTracking)
+		/// <param name="scopeBehaviourOverride">Override the <see cref="ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
+		/// This is never inherited automatically from one context to another.</param>
+		IExpressionCompileContext IExpressionCompileContext.NewContext(Type targetType, bool useParentSharedExpressions, ScopeActivationBehaviour? scopeBehaviourOverride)
 		{
-			return new ExpressionCompileContext(this, targetType, useParentSharedExpressions, suppressScopeTracking);
+			return new ExpressionCompileContext(this, targetType, useParentSharedExpressions, scopeBehaviourOverride);
 		}
 
 		/// <summary>
@@ -206,12 +206,12 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this
 		/// context's <see cref="Rezolver.Compilation.ICompileContext.TargetType" />.</param>
-		/// <param name="suppressScopeTracking">The value passed here will be used for the new context's
-		/// <see cref="Rezolver.Compilation.ICompileContext.SuppressScopeTracking" /></param>
+		/// <param name="scopeBehaviourOverride">Override the <see cref="ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
+		/// This is never inherited automatically from one context to another.</param>
 		/// <remarks>Note all child contexts created through this virtual method will always inherit the parent context's shared expressions.</remarks>
-		protected override ICompileContext NewContext(Type targetType = null, bool? suppressScopeTracking = default(bool?))
+		protected override ICompileContext NewContext(Type targetType = null, ScopeActivationBehaviour? scopeBehaviourOverride = null)
 		{
-			return ((IExpressionCompileContext)this).NewContext(targetType, suppressScopeTracking: suppressScopeTracking);
+			return ((IExpressionCompileContext)this).NewContext(targetType, scopeBehaviourOverride: scopeBehaviourOverride);
 		}
 
 		/// <summary>
