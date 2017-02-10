@@ -51,16 +51,9 @@ namespace Rezolver.Targets
 		public override Type DeclaredType { get; }
 
 		/// <summary>
-		/// Always returns true - we never wrap calls to a container inside a scope tracking expression.
+		/// Always returns <see cref="ScopeActivationBehaviour.None"/>
 		/// </summary>
-		protected override bool SuppressScopeTracking
-		{
-			get
-			{
-				return true;
-			}
-		}
-
+		/// <value>The scope behaviour.</value>
 		public override ScopeActivationBehaviour ScopeBehaviour
 		{
 			get

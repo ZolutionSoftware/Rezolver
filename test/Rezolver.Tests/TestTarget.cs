@@ -53,7 +53,7 @@ namespace Rezolver.Tests
 
 		public IContainerScope SelectScope(ResolveContext context)
 		{
-			return context.NewScope;
+			return context.Scope;
 		}
 
 		public TestTarget(Type declaredType = null, bool? useFallBack = null, bool? supportsType = null, ScopeActivationBehaviour? scopeBehaviour = null)

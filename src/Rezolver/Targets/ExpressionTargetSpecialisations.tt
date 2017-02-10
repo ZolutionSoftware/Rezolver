@@ -83,6 +83,41 @@ namespace Rezolver
 <#	} 
 #>	}
 }
+
+namespace Rezolver.Targets
+{
+	//factory methods to aid in creating ExpressionTarget instances from expressions without having to resort
+	//to ludicrous amounts of angle brackets.	
+
+	public partial class ExpressionTarget
+	{ 
+<#
+	for(int f = 0; f<typeParamStrings.Length; f++) 
+	{ 
+		typeParamsString = typeParamStrings[f];
+		exprTypeParamsString = exprTypeParamStrings[f];
+		typeNamesAndDescriptors = allTypeNamesAndDescriptors[f]; 
+
+#>		
+		/// <summary>Creates a target from the passed lambda expression.  The numerous overloads exist to simplify the translation of expressions into targets.</summary>
+<#
+		foreach(var typeNameAndDescriptor in typeNamesAndDescriptors){
+#>		/// <typeparam name="<#= typeNameAndDescriptor.Name #>"><#= string.Format("The type of the {0} lambda parameter (will be resolved automatically)", typeNameAndDescriptor.Descriptor) #></typeparam>
+<#		
+		} #>
+		/// <typeparam name="TResult">The type of object produced by the lambda expression.</typeparam>
+		/// <param name="expression">The lambda expression that is to be converted into an ExpressionTarget</param>
+		/// <remarks>Whilst creating ExpressionTargets is simple enough; the nature of the C# and VB compilers is that
+		/// you need a function to declare an expression parameter of the specific delegate type you need in order to be
+		/// able to pass a whole lambda expression as if it were code.  Hence the need for these static factory methods.
+		/// </remarks>
+		public static ExpressionTarget From<<#= typeParamsString #>>(Expression<Func<<#= exprTypeParamsString #>>> expression)
+		{
+			return new ExpressionTarget(expression);
+		}
+<#	} 
+#>	}
+}
 <#+
 				private class NameAndDescriptor {
 								public string Name { get; set; }

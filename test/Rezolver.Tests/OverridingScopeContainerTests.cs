@@ -88,7 +88,7 @@ namespace Rezolver.Tests
 
       parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
       ITestDisposable instance;
-      using (var lifetime = parentRezolver.CreateLifetimeScope())
+      using (var lifetime = parentRezolver.CreateScope())
       {
         instance = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
       }
@@ -106,7 +106,7 @@ namespace Rezolver.Tests
       int totalInstanceCount = DisposableType.TotalDisposeCount;
       ITestDisposable instance = null;
       ITestDisposable instance2 = null;
-      using (var lifetime = parentRezolver.CreateLifetimeScope())
+      using (var lifetime = parentRezolver.CreateScope())
       {
         instance = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
         instance2 = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
@@ -127,9 +127,9 @@ namespace Rezolver.Tests
 
       parentRezolver.Register(ConstructorTarget.Auto<DisposableType>(), typeof(ITestDisposable));
       ITestDisposable instance = null;
-      using (var lifetime = parentRezolver.CreateLifetimeScope())
+      using (var lifetime = parentRezolver.CreateScope())
       {
-        var lifetime2 = lifetime.CreateLifetimeScope();
+        var lifetime2 = lifetime.CreateScope();
         instance = (ITestDisposable)lifetime2.Resolve(typeof(ITestDisposable));
       }
 
@@ -146,10 +146,10 @@ namespace Rezolver.Tests
       int totalDisposeCount = DisposableType.TotalDisposeCount;
       ITestDisposable instance = null;
       ITestDisposable instance2 = null;
-      using (var lifetime = parentRezolver.CreateLifetimeScope())
+      using (var lifetime = parentRezolver.CreateScope())
       {
         instance = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
-        using (var lifetime2 = lifetime.CreateLifetimeScope())
+        using (var lifetime2 = lifetime.CreateScope())
         {
           instance2 = (ITestDisposable)lifetime2.Resolve(typeof(ITestDisposable));
         }
@@ -171,12 +171,12 @@ namespace Rezolver.Tests
       int totalDisposeCount = DisposableType.TotalDisposeCount;
       ITestDisposable instance = null;
       ITestDisposable instance2 = null;
-      using (var lifetime = parentRezolver.CreateLifetimeScope())
+      using (var lifetime = parentRezolver.CreateScope())
       {
         instance = (ITestDisposable)lifetime.Resolve(typeof(ITestDisposable));
         //create an inner scope but don't dispose it - it should be auto-disposed by the
         //parent scope when it is disposed.
-        var lifetime2 = lifetime.CreateLifetimeScope();
+        var lifetime2 = lifetime.CreateScope();
         instance2 = (ITestDisposable)lifetime2.Resolve(typeof(ITestDisposable));
       }
 

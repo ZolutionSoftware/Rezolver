@@ -34,7 +34,7 @@ namespace Rezolver.Tests
 				return false;
 			}
 
-			public virtual IScopedContainer CreateLifetimeScope()
+			public virtual IContainerScope CreateScope()
 			{
 				return null;
 			}
@@ -173,7 +173,7 @@ namespace Rezolver.Tests
 
 			var result = loggingRezolver.Resolve<RequiresInt>();
 
-			using (var scope = loggingRezolver.CreateLifetimeScope())
+			using (var scope = loggingRezolver.CreateScope())
 			{
 				var result2 = scope.Resolve<RequiresInt>();
 			}

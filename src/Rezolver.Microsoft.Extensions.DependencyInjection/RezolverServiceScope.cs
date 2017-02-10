@@ -16,20 +16,20 @@ namespace Rezolver
 		{
 			get
 			{
-				return _container;
+				return _scope;
 			}
 		}
 
 		public void Dispose()
 		{
-			_container.Dispose();
+			_scope.Dispose();
 		}
 
-		private IScopedContainer _container;
+		private IContainerScope _scope;
 
-		public RezolverServiceScope(IScopedContainer container)
+		public RezolverServiceScope(IContainerScope scope)
 		{
-			_container = container;
+			_scope = scope;
 		}
 	}
 }

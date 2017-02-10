@@ -160,14 +160,6 @@ namespace Rezolver
 			_compilerConfigurationProvider = compilerConfig ?? CompilerConfiguration.DefaultProvider;
 		}
 
-		///// <summary>
-		///// The compiler that will be used to compile <see cref="ITarget"/> instances (obtained from the <see cref="Targets"/> container
-		///// during <see cref="Resolve(ResolveContext)"/> and <see cref="TryResolve(ResolveContext, out object)"/> operations) into 
-		///// <see cref="ICompiledTarget"/> instances that will actually provide the objects that are resolved.
-		///// </summary>
-		///// <remarks>Notes to implementers: This property must NEVER be null.</remarks>
-		//protected ITargetCompiler Compiler { get; }
-
 		/// <summary>
 		/// Provides the <see cref="ITarget"/> instances that will be compiled by the <see cref="Compiler"/> into <see cref="ICompiledTarget"/>
 		/// instances.
@@ -223,16 +215,17 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Implementation of the <see cref="IContainer.CreateLifetimeScope"/> method.  The base definition creates 
+		/// Implementation of the <see cref="IContainer.CreateScope"/> method.  The base definition creates 
 		/// a new instance of the <see cref="OverridingScopedContainer"/>, passing this container as its parent and, 
 		/// if this container is an <see cref="IScopedContainer"/>, also as its parent scope.
 		/// </summary>
-		public virtual IScopedContainer CreateLifetimeScope()
+		public virtual IContainerScope CreateScope()
 		{
+			return new ContainerScope(this);
 			//optimistic implementation of this method - attempts a safe cast to ILifetimeScopeRezolver of itself
 			//so that types derived from this class that are ILifetimeScopeRezolver instances do not need
 			//to reimplement this method.
-			return new OverridingScopedContainer(this as IScopedContainer, this);
+			//return new OverridingScopedContainer(this as IScopedContainer, this);
 		}
 
 		/// <summary>
@@ -247,8 +240,7 @@ namespace Rezolver
 		{
 			//note that this container is fixed as the container in the context - regardless of the
 			//one passed in.  This is important.
-			//note also that this container is only passed as scope if the context doesn't already have one.
-			return GetCompiledRezolveTarget(context.CreateNew(this, context.Scope ?? (this as IScopedContainer)));
+			return GetCompiledRezolveTarget(context.CreateNew(this));
 		}
 
 		/// <summary>
@@ -259,7 +251,6 @@ namespace Rezolver
 		/// <param name="context">The resolve context containing the requested type.</param>
 		public virtual bool CanResolve(ResolveContext context)
 		{
-			//TODO: Change this to refer to the cache (once I've figured out how to do it based on the new compiler)
 			return Targets.Fetch(context.RequestedType) != null;
 		}
 

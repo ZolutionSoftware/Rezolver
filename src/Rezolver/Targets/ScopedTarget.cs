@@ -44,17 +44,9 @@ namespace Rezolver.Targets
 		}
 
 		/// <summary>
-		/// this is probably going to be removed or at least changed.
+		/// Always returns <see cref="ScopeActivationBehaviour.None"/>
 		/// </summary>
-		/// <value><c>true</c> if [suppress scope tracking]; otherwise, <c>false</c>.</value>
-		protected override bool SuppressScopeTracking
-		{
-			get
-			{
-				return true;
-			}
-		}
-
+		/// <value>The scope behaviour.</value>
 		public override ScopeActivationBehaviour ScopeBehaviour
 		{
 			get

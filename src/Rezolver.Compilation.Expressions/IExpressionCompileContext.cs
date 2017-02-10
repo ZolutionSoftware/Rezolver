@@ -36,7 +36,7 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		MemberExpression ContextContainerPropertyExpression { get; }
 		/// <summary>
-		/// Gets an expression for reading the <see cref="ResolveContext.NewScope"/> property of the <see cref="ResolveContext"/>
+		/// Gets an expression for reading the <see cref="ResolveContext.Scope"/> property of the <see cref="ResolveContext"/>
 		/// that's in scope when the <see cref="ICompiledTarget"/> (which is built from the compiled expression) is executed.
 		/// </summary>
 		MemberExpression ContextScopePropertyExpression { get; }

@@ -20,11 +20,11 @@ namespace Rezolver
 		/// <typeparam name="T">The type of object being wrapped</typeparam>
 		/// <param name="obj">the object being wrapped</param>
 		/// <param name="declaredType">Optional.  The type which is to be set as the <see cref="ObjectTarget.DeclaredType"/> of the created target.</param>
-		/// <param name="suppressScopeTracking">Probably going to be removed or changed.</param>
+		/// <param name="scopeBehaviour">Controls how the object will interact the the scope.  By default, object targets must be disposed by you.</param>
 		/// <returns>A new object target that wraps the object <paramref name="obj"/>.</returns>
-		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null, bool suppressScopeTracking = true)
+		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
 		{
-			return new ObjectTarget(obj, declaredType ?? typeof(T), suppressScopeTracking: suppressScopeTracking);
+			return new ObjectTarget(obj, declaredType ?? typeof(T), scopeBehaviour: scopeBehaviour);
 		}
 
 		/// <summary>
@@ -49,6 +49,16 @@ namespace Rezolver
 		{
 			target.MustNotBeNull(nameof(target));
 			return new ScopedTarget(target);
+		}
+
+		/// <summary>
+		/// Creates an <see cref="UnscopedTarget"/> from the target on which this method is invoked.
+		/// </summary>
+		/// <param name="target">The target.</param>
+		public static UnscopedTarget Unscoped(this ITarget target)
+		{
+			target.MustNotBeNull(nameof(target));
+			return new UnscopedTarget(target);
 		}
 
 		/// <summary>

@@ -50,6 +50,11 @@ namespace Rezolver
 		/// </summary>
 		Type DeclaredType { get; }
 		/// <summary>
+		/// Gets the scoping behaviour for instances that will ultimately be produced by this target.
+		/// </summary>
+		/// <value>The scope behaviour.</value>
+		ScopeActivationBehaviour ScopeBehaviour { get; }
+		/// <summary>
 		/// Returns a boolean indicating whether the target is able to produce an instance of, or an instance
 		/// that is compatible with, the passed <paramref name="type"/>.
 		/// </summary>
@@ -74,9 +79,11 @@ namespace Rezolver
 		/// because it's impossible to build an instance of an open generic type.
 		/// </remarks>
 		bool SupportsType(Type type);
-
-		ScopeActivationBehaviour ScopeBehaviour { get; }
-
+		/// <summary>
+		/// Selects the scope in which instances produced from this target should be tracked.
+		/// </summary>
+		/// <param name="context">The context passed to a container's <see cref="IContainer.Resolve(ResolveContext)"/>
+		/// method.</param>
 		IContainerScope SelectScope(ResolveContext context);
 	}
 }

@@ -83,11 +83,12 @@ namespace Rezolver.Tests.Compilation.Specification
 			//an objecttarget should behave like a SingletonTarget in terms of how it tracks in a scope.
 			using (var container = new ScopedContainer())
 			{
-				container.RegisterObject(myDisposable, suppressScopeTracking: false);
-				using (var childScope = container.CreateLifetimeScope())
+				container.RegisterObject(myDisposable, scopeBehaviour: ScopeActivationBehaviour.Explicit);
+				using (var childScope = container.CreateScope())
 				{
 					var instance = childScope.Resolve<MyDisposable>();
-					//should not dispose here when scope is disposed
+					//should not dispose here when scope is disposed because 
+					//we default to the root scope.
 				}
 				var instance2 = container.Resolve<MyDisposable>();
 				//should dispose here when root scope is disposed

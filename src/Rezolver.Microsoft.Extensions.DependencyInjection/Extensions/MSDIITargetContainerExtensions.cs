@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Rezolver.Targets;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Rezolver
@@ -15,8 +16,9 @@ namespace Rezolver
 		public static void Populate(this ITargetContainer targets, IServiceCollection services)
 		{
 			if (targets == null) throw new ArgumentNullException(nameof(targets));
-			//register service provider
-			targets.RegisterExpression(context => context.Container, typeof(IServiceProvider));
+			//register service provider - ensuring that it's marked as unscoped because the lifetimes of
+			//containers which are also scopes are managed by the code that creates them, not by the containers themselves
+			targets.RegisterExpression(context => (IServiceProvider)context.Container);
 			//register scope factory - uses the rezolver that comes in the context.
 			targets.RegisterExpression(context => new RezolverContainerScopeFactory(context.Container), typeof(IServiceScopeFactory));
 

@@ -20,7 +20,7 @@ namespace Rezolver
 
 		public IServiceScope CreateScope()
 		{
-			return new RezolverServiceScope(_container.CreateLifetimeScope());
+			return new RezolverServiceScope(_container.CreateScope());
 		}
 	}
 }

@@ -21,7 +21,7 @@ namespace Rezolver.Targets
 	/// 
 	/// In the latter case, expression parameters are expected to receive injected arguments and, 
 	/// therefore, some rewriting of the expression is likely to be required.</remarks>
-	public class ExpressionTarget : TargetBase
+	public partial class ExpressionTarget : TargetBase
 	{
 		/// <summary>
 		/// Gets the static expression represented by this target - if <c>null</c>, then 
@@ -39,6 +39,9 @@ namespace Rezolver.Targets
 			get;
 		}
 
+		public override ScopeActivationBehaviour ScopeBehaviour { get; }
+		
+
 		/// <summary>
 		/// Gets a factory which will be executed to obtain an expression given a particular <see cref="ICompileContext"/>.
 		/// 
@@ -53,11 +56,14 @@ namespace Rezolver.Targets
 		/// <param name="expression">Required. The static expression which should be used by compilers.</param>
 		/// <param name="declaredType">Declared type of the target to be created (used when registering without
 		/// an explicit type or when this target is used as a value inside another target).</param>
+		/// <param name="scopeBehaviour">Override the scoping behaviour of this expression.  The default for this
+		/// will be <c>None</c> because if you want to interact with the Scope in an expression, then you have to 
+		/// do it explicitly in the expression.</param>
 		/// <remarks><paramref name="declaredType"/> will automatically be determined if not provided
 		/// by examining the type of the <paramref name="expression"/>.  For lambdas, the type will
 		/// be derived from the Type of the lambda's body.  For all other expressions, the type is
 		/// taken directly from the Type property of the expression itself.</remarks>
-		public ExpressionTarget(Expression expression, Type declaredType = null)
+		public ExpressionTarget(Expression expression, Type declaredType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
 		{
 			expression.MustNotBeNull(nameof(expression));
 			Expression = expression;
@@ -66,6 +72,8 @@ namespace Rezolver.Targets
 
 			if (!TypeHelpers.IsAssignableFrom(DeclaredType, expressionType))
 				throw new ArgumentException($"{ nameof(declaredType) } must be compatible with the type of the expression", nameof(declaredType));
+
+			ScopeBehaviour = scopeBehaviour;
 		}
 
 		/// <summary>

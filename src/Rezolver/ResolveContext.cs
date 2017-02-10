@@ -57,7 +57,7 @@ namespace Rezolver
 				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
 			}
 
-			public IScopedContainer CreateLifetimeScope()
+			public IContainerScope CreateScope()
 			{
 				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
 			}
@@ -99,16 +99,7 @@ namespace Rezolver
 		/// but is not necessarily the same container that will eventually end up resolving the object.</remarks>
 		public IContainer Container { get { return _container; } private set { _container = value; } }
 
-		private IScopedContainer _scope;
-		/// <summary>
-		/// Gets the scope in which the resolve operation is taking place.  Objects which are to be bound to a 
-		/// lifetime scope will be retrieved or placed in here or one of the scope's 
-		/// <see cref="IScopedContainer.ParentScope"/> hierarchy.
-		/// </summary>
-		/// <value>The scope.</value>
-		public IScopedContainer Scope { get { return _scope; } private set { _scope = value; } }
-
-		public IContainerScope NewScope { get; }
+		public IContainerScope Scope { get; private set; }
 
 		private ResolveContext() { }
 
@@ -125,7 +116,7 @@ namespace Rezolver
 
 		public ResolveContext(IContainerScope scope, Type requestedType)
 		{
-			NewScope = scope;
+			Scope = scope;
 			Container = scope.Container;
 			RequestedType = requestedType;
 		}
@@ -136,7 +127,7 @@ namespace Rezolver
 		/// <param name="container">The container.</param>
 		/// <param name="requestedType">The type of object to be resolved from the container.</param>
 		/// <param name="scope">The scope for this context.</param>
-		public ResolveContext(IContainer container, Type requestedType, IScopedContainer scope)
+		public ResolveContext(IContainer container, Type requestedType, IContainerScope scope)
 		  : this(container)
 		{
 			RequestedType = requestedType;
@@ -149,7 +140,7 @@ namespace Rezolver
 			//automatically inherit the container as this context's scope, if it's of the correct type.
 			//note - all the other constructors chain to this one.  Other constructors
 			//might supply a separate scope in addition, which will overwrite the scope set here.
-			_scope = container as IScopedContainer;
+			//Scope = container as IContainerScope;
 		}
 
 		/// <summary>
@@ -246,12 +237,7 @@ namespace Rezolver
 		/// <param name="requestedType">The type of object to be resolved from the container.</param>
 		public ResolveContext CreateNew(Type requestedType)
 		{
-			return new ResolveContext()
-			{
-				Container = Container,
-				RequestedType = requestedType,
-				Scope = Scope
-			};
+			return new ResolveContext(Container, requestedType, Scope);
 		}
 
 		/// <summary>
@@ -261,12 +247,7 @@ namespace Rezolver
 		/// <param name="requestedType">The type of object to be resolved from the container.</param>
 		public ResolveContext CreateNew(IContainer container, Type requestedType)
 		{
-			return new ResolveContext()
-			{
-				Container = container,
-				RequestedType = requestedType,
-				Scope = Scope
-			};
+			return new ResolveContext(container, requestedType, Scope);
 		}
 
 		/// <summary>
@@ -274,14 +255,9 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="requestedType">The type of object to be resolved from the container.</param>
 		/// <param name="scope">The scope for the new context.</param>
-		public ResolveContext CreateNew(Type requestedType, IScopedContainer scope)
+		public ResolveContext CreateNew(Type requestedType, IContainerScope scope)
 		{
-			return new ResolveContext()
-			{
-				Container = Container,
-				RequestedType = requestedType,
-				Scope = scope
-			};
+			return new ResolveContext(Container, requestedType, scope);
 		}
 
 		/// <summary>
@@ -290,19 +266,14 @@ namespace Rezolver
 		/// <param name="container">The container for the new context.</param>
 		public ResolveContext CreateNew(IContainer container)
 		{
-			return new ResolveContext()
-			{
-				Container = container,
-				RequestedType = RequestedType,
-				Scope = Scope
-			};
+			return new ResolveContext(container, RequestedType, Scope);
 		}
 
 		/// <summary>
 		/// Returns a clone of this context, but replaces the <see cref="Scope"/>.
 		/// </summary>
 		/// <param name="scope">The scope for the new context.</param>
-		public ResolveContext CreateNew(IScopedContainer scope)
+		public ResolveContext CreateNew(IContainerScope scope)
 		{
 			return new ResolveContext()
 			{
@@ -315,16 +286,12 @@ namespace Rezolver
 		/// <summary>
 		/// Returns a clone of this context, but replaces the <see cref="Container"/> and the <see cref="Scope"/>.
 		/// </summary>
-		/// <param name="container">The container for the new context.</param>
+		/// <param name="container">The container for the new context - regardless of what the 
+		/// <see cref="IContainerScope.Container"/> of the <paramref name="scope"/> is.</param>
 		/// <param name="scope">The scope for the new context.</param>
-		public ResolveContext CreateNew(IContainer container, IScopedContainer scope)
+		public ResolveContext CreateNew(IContainer container, IContainerScope scope)
 		{
-			return new ResolveContext()
-			{
-				Container = container ?? Container, //can't have a null container
-				RequestedType = RequestedType,
-				Scope = scope
-			};
+			return new Rezolver.ResolveContext(container, RequestedType, scope);
 		}
 	}
 }

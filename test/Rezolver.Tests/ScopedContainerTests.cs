@@ -81,7 +81,7 @@ namespace Rezolver.Tests
       {
         container.RegisterType<Disposable1>();
         disp1 = container.Resolve<Disposable1>();
-        using (var childContainer = container.CreateLifetimeScope())
+        using (var childContainer = container.CreateScope())
         {
           disp1a = childContainer.Resolve<Disposable1>();
         }
@@ -110,13 +110,13 @@ namespace Rezolver.Tests
       {
         container.Register(new SingletonTarget(ConstructorTarget.Auto<SingletonDependency>()));
 
-        using (var childScope = container.CreateLifetimeScope())
+        using (var childScope = container.CreateScope())
         {
           dep1 = childScope.Resolve<SingletonDependency>();
         }
         Assert.False(dep1.Disposed);
 
-        using (var childScope = container.CreateLifetimeScope())
+        using (var childScope = container.CreateScope())
         {
           dep2 = childScope.Resolve<SingletonDependency>();
         }

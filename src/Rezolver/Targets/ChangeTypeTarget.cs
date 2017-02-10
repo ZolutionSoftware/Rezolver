@@ -25,16 +25,9 @@ namespace Rezolver.Targets
 	public class ChangeTypeTarget : TargetBase
 	{
 		/// <summary>
-		/// Always returns true.
+		/// Always returns <see cref="ScopeActivationBehaviour.None"/>
 		/// </summary>
-		protected override bool SuppressScopeTracking
-		{
-			get
-			{
-				return true;
-			}
-		}
-
+		/// <value>The scope behaviour.</value>
 		public override ScopeActivationBehaviour ScopeBehaviour
 		{
 			get

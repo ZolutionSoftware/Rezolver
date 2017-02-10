@@ -43,7 +43,7 @@ namespace Rezolver.Tests
 
         var instance1 = resolver.Resolve<ScopedObject>();
 
-        using (var childScope = resolver.CreateLifetimeScope())
+        using (var childScope = resolver.CreateScope())
         {
           var instance2 = childScope.Resolve<ScopedObject>();
 

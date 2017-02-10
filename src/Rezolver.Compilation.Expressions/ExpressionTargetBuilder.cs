@@ -67,7 +67,7 @@ namespace Rezolver.Compilation.Expressions
 			protected override Expression VisitNew(NewExpression node)
 			{
 				//we have to use the base's Visitor code so that argument bindings are translated correctly
-				return new TargetExpression(ConstructorTarget.FromNewExpression(node.Type, (NewExpression)base.VisitNew(node)));
+				return new TargetExpression(ConstructorTarget.FromNewExpression(node.Type, (NewExpression)base.VisitNew(node)).Unscoped());
 			}
 
 			protected override Expression VisitMemberInit(MemberInitExpression node)

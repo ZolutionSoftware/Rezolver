@@ -170,7 +170,7 @@ namespace Rezolver.Compilation.Expressions
 			_sharedExpressions = new Dictionary<SharedExpressionKey, Expression>(20);
 			_containerExpression = Expression.Constant(Container, typeof(IContainer));
 			_contextContainerPropertyExpression = Expression.Property(_resolveContextExpression, nameof(ResolveContext.Container));
-			_contextScopePropertyExpression = Expression.Property(ResolveContextExpression, nameof(ResolveContext.NewScope));
+			_contextScopePropertyExpression = Expression.Property(ResolveContextExpression, nameof(ResolveContext.Scope));
 			RegisterExpressionTargets();
 		}
 

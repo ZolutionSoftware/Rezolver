@@ -19,12 +19,12 @@ namespace Rezolver
 	/// <see cref="CanResolve(ResolveContext)"/> method.
 	/// 
 	/// Lifetime scoping (where <see cref="IDisposable"/> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
-	/// by obtaining a new scope through the <see cref="CreateLifetimeScope"/> method; although a container might also implement the 
+	/// by obtaining a new scope through the <see cref="CreateScope"/> method; although a container might also implement the 
 	/// <see cref="IScopedContainer"/> interface, in which case the container itself is a lifetime scope.
 	/// 
 	/// Many of the functions which accept a <see cref="ResolveContext"/> also have alternatives (in the form of extension methods) in the 
-	/// <see cref="IContainerRezolveExtensions"/> class.  If you're looking for the 'traditional' IOC container methods 
-	/// (e.g. <see cref="IContainerRezolveExtensions.Resolve{TObject}(IContainer)"/>, that's where you'll find them.
+	/// <see cref="ContainerRezolveExtensions"/> class.  If you're looking for the 'traditional' IOC container methods 
+	/// (e.g. <see cref="ContainerRezolveExtensions.Resolve{TObject}(IContainer)"/>, that's where you'll find them.
 	/// 
 	/// Note that while the standard implementation of this interface supplied by the framework (<see cref="ContainerBase" /> and its derivatives) all utilitise
 	/// the <see cref="ITargetContainer"/> to actually locate registrations for types which are ultimately requested from the container; the interface
@@ -60,12 +60,10 @@ namespace Rezolver
 		bool TryResolve(ResolveContext context, out object result);
 
 		/// <summary>
-		/// Called to create an <see cref="IScopedContainer" /> which can resolve the same objects as this container, but which will track,
+		/// Called to create an <see cref="IContainerScope" /> which can resolve the same objects as this container, but which will track,
 		/// and dispose of, any disposable objects that it creates.
 		/// </summary>
-		/// <remarks>If the container on which this is called also implements the <see cref="IScopedContainer"/> interface, then the newly created
-		/// scope's lifetime will be tied to that parent container.</remarks>
-		IScopedContainer CreateLifetimeScope();
+		IContainerScope CreateScope();
 
 		/// <summary>
 		/// Fetches the <see cref="ICompiledTarget"/> for the given context, whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method 

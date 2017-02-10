@@ -44,7 +44,8 @@ namespace Rezolver
 		protected virtual IContainer CreateDefaultContainer(ITargetContainer targetContainer)
 		{
 			if (_options.Tracking.CallTracker != null)
-				return new TrackedScopeContainer(_options.Tracking.CallTracker, targetContainer);
+				throw new NotImplementedException("Scoping has been changed and the call tracking stuff currently doesn't work - it will");
+				//return new TrackedContainerScope(_options.Tracking.CallTracker, new ContainerScope(new Container(targetContainer)));
 			else
 				return new ScopedContainer(targetContainer);
 		}

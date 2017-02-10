@@ -30,8 +30,10 @@ namespace Rezolver.Compilation.Expressions
 		{ 
 			//build the inner target's expression; and wrap it in a conversion expression for the 
 			//target type of the ChangeTypeTarget.
+			//note that if the compilation context was overriding the scoping behaviour before - then we pass that through,
+			//because this target defaults to 'None'
 			return Expression.Convert(compiler.Build(target.InnerTarget, 
-				context.NewContext(target.InnerTarget.DeclaredType)), target.DeclaredType);
+				context.NewContext(target.InnerTarget.DeclaredType, scopeBehaviourOverride: context.ScopeBehaviourOverride)), target.DeclaredType);
 		}
 	}
 }

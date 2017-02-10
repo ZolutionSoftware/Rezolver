@@ -21,17 +21,9 @@ namespace Rezolver.Targets
 		public override Type DeclaredType { get { return MethodParameter.ParameterType; } }
 
 		/// <summary>
-		/// Possibly going to be removed or at least changed.
+		/// Always returns <see cref="ScopeActivationBehaviour.None"/>
 		/// </summary>
-		protected override bool SuppressScopeTracking
-		{
-			get
-			{
-				//there's never any need to perform scope tracking on default values.
-				return true;
-			}
-		}
-
+		/// <value>The scope behaviour.</value>
 		public override ScopeActivationBehaviour ScopeBehaviour
 		{
 			get

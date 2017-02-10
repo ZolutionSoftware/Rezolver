@@ -12,115 +12,98 @@ using Rezolver.Compilation;
 
 namespace Rezolver
 {
-  /// <summary>
-  /// Extends the <see cref="Container"/> to implement lifetime scoping.
-  /// 
-  /// If you want your root container to act as a lifetime scope, then you should use this
-  /// class instead of using <see cref="Container"/>
-  /// </summary>
-  /// <remarks>The implementation of this class is very similar to the <see cref="OverridingScopedContainer"/>,
-  /// The main difference being that that class can accept additional registrations independent of those
-  /// in the container that it's created from, whereas with this class, it *is* the container.
-  /// 
-  /// This type is therefore suited only for standalone Rezolvers for which you want lifetime scoping
-  /// and disposable handling; whereas the <see cref="OverridingScopedContainer"/> is primarily
-  /// suited for use as a child lifetime scope for another container.</remarks>
-  public class ScopedContainer : Container, IScopedContainer
-  {
-    private ConcurrentDictionary<ResolveContext, ConcurrentBag<object>> _objects;
+	/// <summary>
+	/// Extends the <see cref="Container"/> to implement lifetime scoping through a private <see cref="IContainerScope"/>.
+	/// 
+	/// Both the <see cref="Resolve(ResolveContext)"/> and <see cref="TryResolve(ResolveContext, out object)"/> methods
+	/// will inject the <see cref="Scope"/> into <see cref="ResolveContext"/> that's passed if the context doesn't already
+	/// have a scope.
+	/// 
+	/// If you want your root container to act as a lifetime scope, then you should use this
+	/// class instead of using <see cref="Container"/>.
+	/// </summary>
+	/// <remarks>Note that this class does NOT implement the <see cref="IContainerScope"/> interface because
+	/// the two interfaces are not actually compatible with each other, thanks to identical sets of extension methods.
+	/// </remarks>
+	public class ScopedContainer : Container, IDisposable
+	{
+		private readonly IContainerScope _scope;
 
-    public IScopedContainer ParentScope
-    {
-      get
-      {
-        return null;
-      }
-    }
+		/// <summary>
+		/// Gets the underlying scope used by this container for all <see cref="IContainer.Resolve(ResolveContext)"/> calls
+		/// which do not already have a scope defined.
+		/// </summary>
+		/// <value>The scope.</value>
+		public IContainerScope Scope
+		{
+			get
+			{
+				return _scope;
+			}
+		}
 
-    private bool _disposed;
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ScopedContainer"/> class.
+		/// </summary>
+		/// <param name="targets">Optional.  The underlying target container to be used to resolve objects.</param>
+		/// <param name="compilerConfig">Optional.  The compiler configuration.</param>
+		public ScopedContainer(ITargetContainer targets = null, ICompilerConfigurationProvider compilerConfig = null)
+			: base(targets, compilerConfig)
+		{
+			_scope = new ContainerScope(this);
+		}
 
-    public event EventHandler Disposed;
+		#region IDisposable Support
+		private bool disposedValue = false; // To detect redundant calls
 
-    public ScopedContainer(ITargetContainer builder = null, ICompilerConfigurationProvider compilerConfig = null)
-        : base(builder, compilerConfig)
-    {
-      _objects = new ConcurrentDictionary<ResolveContext, ConcurrentBag<object>>();
-      _disposed = false;
-    }
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposedValue)
+			{
+				if (disposing)
+				{
+					_scope.Dispose();
+				}
 
-    protected void OnDisposed()
-    {
-      try
-      {
-        Disposed?.Invoke(this, EventArgs.Empty);
-      }
-      catch (Exception) { } //really don't want upstream exceptions affecting this
-    }
+				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+				// TODO: set large fields to null.
 
-    private void TrackObject(object obj, ResolveContext context)
-    {
-      if (obj == null)
-        return;
-      ConcurrentBag<object> instances = _objects.GetOrAdd(
-          new ResolveContext((IContainer)null, context.RequestedType),
-          c => new ConcurrentBag<object>());
+				disposedValue = true;
+			}
+		}
 
-      //bit slow this, but hopefully there won't be loads of them...
-      //note that there'll be a memory overhead with this, certainly in portable,
-      //as under the hood the internal implementation realises the enumerable as an array
-      //before returning its enumerator.
-      if (!instances.Any(o => object.ReferenceEquals(o, obj)))
-        instances.Add(obj);
-    }
+		// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+		// ~ScopedContainer() {
+		//   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+		//   Dispose(false);
+		// }
 
-    public void Dispose()
-    {
-      Dispose(true);
-      GC.SuppressFinalize(this);
-    }
+		// This code added to correctly implement the disposable pattern.
+		public void Dispose()
+		{
+			// Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+			Dispose(true);
+			// TODO: uncomment the following line if the finalizer is overridden above.
+			// GC.SuppressFinalize(this);
+		}
+		public override IContainerScope CreateScope()
+		{
+			return new ContainerScope(Scope);
+		}
+		#endregion
+		public override bool CanResolve(ResolveContext context)
+		{
+			return base.CanResolve(context.Scope == null ? context.CreateNew(Scope) : context);
+		}
 
-    protected virtual void Dispose(bool disposing)
-    {
-      if (_disposed)
-        return;
+		public override bool TryResolve(ResolveContext context, out object result)
+		{
+			return base.TryResolve(context.Scope == null ? context.CreateNew(Scope) : context, out result);
+		}
 
-      if (disposing)
-      {
-        object obj = null;
-        IDisposable disposableObj = null;
-        foreach (var kvp in _objects)
-        {
-          while (kvp.Value.TryTake(out obj))
-          {
-            disposableObj = obj as IDisposable;
-            if (disposableObj != null)
-              disposableObj.Dispose();
-          }
-        }
-        _objects.Clear();
-        OnDisposed();
-      }
-
-      _disposed = true;
-    }
-
-    public virtual void AddToScope(object obj, ResolveContext context = null)
-    {
-      obj.MustNotBeNull("obj");
-      TrackObject(obj, context ?? new ResolveContext((IContainer)null, obj.GetType()));
-    }
-
-    public virtual IEnumerable<object> GetFromScope(ResolveContext context)
-    {
-      context.MustNotBeNull("context");
-      ConcurrentBag<object> instances = null;
-      if (_objects.TryGetValue(context, out instances))
-      {
-        //important to return a fixed array here to avoid modification
-        return instances.ToArray();
-      }
-      else
-        return Enumerable.Empty<object>();
-    }
-  }
+		public override object Resolve(ResolveContext context)
+		{
+			return base.Resolve(context.Scope == null ? context.CreateNew(Scope) : context);
+		}
+	}
 }

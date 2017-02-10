@@ -29,10 +29,10 @@ namespace Rezolver
 		/// of by any <see cref="IScopedContainer"/> that might be active when the object is first resolved.  In theory
 		/// this should always be left as true because otherwise the object will not be usable after the first 
 		/// scope its contained within is disposed.</param>
-		public static void RegisterObject<T>(this ITargetContainer targetContainer, T obj, Type serviceType = null, bool suppressScopeTracking = true)
+		public static void RegisterObject<T>(this ITargetContainer targetContainer, T obj, Type serviceType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
-			targetContainer.Register(obj.AsObjectTarget(serviceType, suppressScopeTracking: suppressScopeTracking), serviceType);
+			targetContainer.Register(obj.AsObjectTarget(serviceType, scopeBehaviour: scopeBehaviour), serviceType);
 		}
 	}
 }

@@ -23,6 +23,7 @@ namespace Rezolver
   /// is subsequently requested, the code compiled by the scoped singleton will search the current scope,
   /// for an existing instance, before creating one.
   /// </summary>
+  [Obsolete("This is being retired in favour of IContainerScope")]
   public interface IScopedContainer : IContainer, IDisposable
   {
     /// <summary>

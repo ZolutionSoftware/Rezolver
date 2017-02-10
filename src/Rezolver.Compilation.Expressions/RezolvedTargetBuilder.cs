@@ -23,9 +23,6 @@ namespace Rezolver.Compilation.Expressions
 		private static readonly MethodInfo RezolverResolveMethod =
 		  MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
 
-		private static readonly ConstructorInfo RezolveContextCtor =
-		  MethodCallExtractor.ExtractConstructorCall(() => new ResolveContext((IContainer)null, (Type)null, (IScopedContainer)null));
-
 		private static readonly MethodInfo ContextNewContextMethod =
 		  MethodCallExtractor.ExtractCalledMethod((ResolveContext context) => context.CreateNew((Type)null));
 

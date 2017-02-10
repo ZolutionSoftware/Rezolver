@@ -16,19 +16,12 @@ namespace Rezolver.Targets
 	{
 
 		private readonly Type _declaredType;
-		private readonly bool _suppressScopeTracking;
 		private readonly ScopeActivationBehaviour _scopeBehaviour;
-		/// <summary>
-		/// Overrides <see cref="TargetBase.SuppressScopeTracking"/>
-		/// </summary>
-		protected override bool SuppressScopeTracking
-		{
-			get
-			{
-				return _suppressScopeTracking;
-			}
-		}
 
+		/// <summary>
+		/// Gets the scope behaviour.
+		/// </summary>
+		/// <value>The scope behaviour.</value>
 		public override ScopeActivationBehaviour ScopeBehaviour
 		{
 			get
@@ -48,16 +41,16 @@ namespace Rezolver.Targets
 		/// </summary>
 		/// <param name="obj">The object to be returned by this target when resolved.</param>
 		/// <param name="declaredType">Optional.  The declared type of this target, if different from the absolute type of the <paramref name="obj"/></param>
-		/// <param name="suppressScopeTracking">Optional.  Controls whether the instance will be added to a scope when resolved.  If true (the default) then
-		/// no scope tracking is performed, and you will have to dispose of the object, if disposable.  If false, then the object will be tracked by the 
-		/// ROOT scope of the first scope the object is resolved from.</param>
+		/// <param name="scopeBehaviour">Optional.  If you want the object to be disposed by Rezolver when the root scope is disposed, then
+		/// specify a behaviour other than the default.  Note - the only real behaviour that makes sense for this is <see cref="ScopeActivationBehaviour.Explicit"/>,
+		/// since the Implicit behaviour will typically fool a scope that multiple instances are being created and, therefore, the object
+		/// will be tracked multiple times by that scope.</param>
 		/// <remarks>Please note - if you enable scope tracking, but the object is never resolved, then the object will not be disposed and you will need
 		/// to ensure you dispose of it.</remarks>
-		public ObjectTarget(object obj, Type declaredType = null, bool suppressScopeTracking = true)
+		public ObjectTarget(object obj, Type declaredType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
 		{
 			Value = obj;
-			_suppressScopeTracking = suppressScopeTracking;
-			_scopeBehaviour = suppressScopeTracking ? ScopeActivationBehaviour.None : ScopeActivationBehaviour.Implicit;
+			_scopeBehaviour = scopeBehaviour;
 			//if the caller provides a declared type we check
 			//also that, if the object is null, the target type
 			//can accept nulls.  Otherwise we're simply checking 
@@ -79,22 +72,20 @@ namespace Rezolver.Targets
 				_declaredType = Value == null ? typeof(object) : Value.GetType();
 		}
 
-		//protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
-		//{
-		//	//when scope tracking is enabled (not the default), then we behave like a singleton - and track in the root scope.
-		//	//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
-		//	throw new NotImplementedException();
-		//}
-
 		object ICompiledTarget.GetObject(ResolveContext context)
 		{
 			//when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
-			//POSSIBLY CHANGING HERE
-			if (SuppressScopeTracking || context.Scope == null)
+			if(context.Scope == null)
 				return Value;
 			else {
-				return context.Scope.GetScopeRoot().GetOrAdd(context, c => Value, false);
+				//whatever scoping we're doing, we MUST use the root scope.
+				return context.Scope.GetRootScope().Resolve(context, r => Value, ScopeBehaviour);
 			}
+		}
+
+		public override IContainerScope SelectScope(ResolveContext context)
+		{
+			return context.Scope != null ? context.Scope.GetRootScope() : base.SelectScope(context);
 		}
 
 		/// <summary>

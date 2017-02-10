@@ -19,7 +19,7 @@ namespace Rezolver.Logging
 	/// tracked should be expected to be coming from multiple threads.
 	/// 
 	/// To track calls to a <see cref="Container"/>, swap it with <see cref="TrackedContainer"/>
-	/// To track calls to a <see cref="ScopedContainer"/>, swap it with <see cref="TrackedScopeContainer"/>
+	/// To track calls to a <see cref="ScopedContainer"/>, swap it with <see cref="TrackedContainerScope"/>
 	/// To track calls to a <see cref="OverridingScopedContainer"/>, swap it with <see cref="TrackedOverridingScopedContainer"/>
 	/// To track calls to a <see cref="TargetContainer"/>, swap it with <see cref="TrackedTargetContainer"/>
 	/// 

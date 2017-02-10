@@ -32,24 +32,23 @@ namespace Rezolver.Targets
 			get { return InnerTarget.DeclaredType; }
 		}
 
-		/// <summary>
-		/// Overrides the base class to ensure that automatic generation of the scope tracking code by <see cref="TargetBase"/> is disabled.
-		/// 
-		/// For the singleton, it's important that the scope tracking call occurs within the lazy's callback.
-		/// </summary>
-		protected override bool SuppressScopeTracking
+		public override ScopeActivationBehaviour ScopeBehaviour
 		{
 			get
 			{
-				return true;
+				return ScopeActivationBehaviour.Explicit;
 			}
 		}
-
+		/// <summary>
+		/// Always selects the root scope from the context (<see cref="ContainerScopeExtensions.GetRootScope(IContainerScope)"/>,
+		/// if the context has a non-null scope.
+		/// </summary>
+		/// <param name="context">The context.</param>
 		public override IContainerScope SelectScope(ResolveContext context)
 		{
-			if(context.NewScope != null)
+			if(context.Scope != null)
 			{
-				return context.NewScope.GetRootScope();
+				return context.Scope.GetRootScope();
 			}
 			return base.SelectScope(context);
 		}
@@ -73,12 +72,6 @@ namespace Rezolver.Targets
 
 			InnerTarget = innerTarget;
 		}
-
-		//protected override Expression CreateScopeSelectionExpression(ICompileContext context, Expression expression)
-		//{
-		//	throw new NotImplementedException();
-		//	//return ExpressionHelper.Make_Scope_GetScopeRootCallExpression(context);
-		//}
 
 		/// <summary>
 		/// Used to support compiled versions of this singleton
