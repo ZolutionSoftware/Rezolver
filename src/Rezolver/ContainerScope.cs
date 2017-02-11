@@ -137,6 +137,7 @@ namespace Rezolver
 
 		object IContainerScope.Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeActivationBehaviour behaviour)
 		{
+#error in here, if you debug the current failing test, you'll see the problem is with (I think) the types not flowing correctly through the ResolveContext.
 			if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 
 			if (behaviour == ScopeActivationBehaviour.Explicit)

@@ -166,9 +166,6 @@ namespace Rezolver.Compilation.Expressions
 						IContainerScope_Resolve_Method,
 						context.ResolveContextExpression,
 						lambda,
-						//feed the target's scope behaviour
-						//(note: I'm thinking this should be derived from the context
-						//unless it's null)
 						Expression.Constant(scopeBehaviour)
 					),
 					originalType

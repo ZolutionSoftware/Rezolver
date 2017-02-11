@@ -1,4 +1,5 @@
 ﻿using Rezolver.Compilation;
+using Rezolver.Tests.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +84,27 @@ namespace Rezolver.Tests.Compilation.Specification
 			finally
 			{
 				CompilerConfiguration.DefaultProvider = previousProvider;
+			}
+		}
+
+		[Fact]
+		public void VerifyingFailedTest()
+		{
+#error stick with this error.  You're nearly there.
+			var targets = CreateTargetContainer();
+			//targets.Register(new Disposable().AsObjectTarget().Singleton());
+			//targets.Register(new Disposable2().AsObjectTarget().Singleton());
+			//targets.Register(new Disposable3().AsObjectTarget().Singleton());
+			targets.RegisterSingleton<Disposable>();
+			targets.RegisterSingleton<Disposable2>();
+			targets.RegisterSingleton<Disposable3>();
+			targets.RegisterType<RequiresThreeDisposables>();
+			//var container = new ScopedContainer(targets, GetCompilerConfigProvider()); //CreateContainer(targets);
+			var container = CreateContainer(targets);
+			using (var scope = container.CreateScope())
+			{
+				var created = scope.Resolve<RequiresThreeDisposables>();
+				Assert.NotNull(created);
 			}
 		}
 	}

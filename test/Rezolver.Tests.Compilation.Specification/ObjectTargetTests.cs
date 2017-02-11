@@ -66,10 +66,12 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void ObjectTarget_ShouldNotDisposeByDefault()
 		{
 			var myDisposable = new MyDisposable();
-			using (var container = new ScopedContainer())
+			var targets = CreateTargetContainer();
+			targets.RegisterObject(myDisposable);
+			var container = CreateContainer(targets);
+			using (var scope = container.CreateScope())
 			{
-				container.RegisterObject(myDisposable);
-				var instance = container.Resolve<MyDisposable>();
+				var instance = scope.Resolve<MyDisposable>();
 			}
 
 			myDisposable.Dispose();
@@ -79,18 +81,19 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void ObjectTarget_ShouldNotDisposeMultipleTimes()
 		{
 			var myDisposable = new MyDisposable();
-			//test targeted specifically at a piece of functionality I currently know not to work.
-			//an objecttarget should behave like a SingletonTarget in terms of how it tracks in a scope.
-			using (var container = new ScopedContainer())
+			var targets = CreateTargetContainer();
+			targets.RegisterObject(myDisposable, scopeBehaviour: ScopeActivationBehaviour.Explicit);
+			var container = CreateContainer(targets);
+			using (var scope = container.CreateScope())
 			{
-				container.RegisterObject(myDisposable, scopeBehaviour: ScopeActivationBehaviour.Explicit);
-				using (var childScope = container.CreateScope())
+				using (var childScope = scope.CreateScope())
 				{
 					var instance = childScope.Resolve<MyDisposable>();
 					//should not dispose here when scope is disposed because 
 					//we default to the root scope.
+					//if it does, then when instance2 is disposed we'll get an exception we're not expecting
 				}
-				var instance2 = container.Resolve<MyDisposable>();
+				var instance2 = scope.Resolve<MyDisposable>();
 				//should dispose here when root scope is disposed
 			}
 

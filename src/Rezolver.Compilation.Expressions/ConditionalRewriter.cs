@@ -93,9 +93,15 @@ namespace Rezolver.Compilation.Expressions
 			public ConditionalRewritePart Mode;
 		}
 
+		private class CandidateTest
+		{
+			public Expression Test;
+			public int RewriteCount;
+		}
+
 		int _rewriteCount = 0;
 		private Expression _expression;
-		private IEnumerable<Expression> _candidateTests;
+		private CandidateTest[] _candidateTests;
 		private Stack<Expression> _currentStack = new Stack<Expression>();
 		private List<ConditionalExpressionInfo> _allConditionals = new List<ConditionalExpressionInfo>();
 		private ConditionalExpressionGroupInfo[] _groupedConditionals = null;
@@ -104,39 +110,51 @@ namespace Rezolver.Compilation.Expressions
 		public ConditionalRewriter(Expression expression, IEnumerable<Expression> candidateTests)
 		{
 			_expression = expression;
-			_candidateTests = candidateTests;
+			_candidateTests = candidateTests.Select(c => new CandidateTest() { Test = c }).ToArray();
 		}
 
 		public Expression Rewrite()
 		{
-			_currentStage = RewriteStages.GatheringConditionals;
-			var result = Visit(_expression);
-			//if there are no conditionals, or only one, then there's no benefit to rewriting.
-			if (_allConditionals.Count <= 1)
-				return result;
-			var grouped = _allConditionals.GroupBy(i => i).ToArray();
+			//keep rewriting until we've got no more rewrites left to do.
+			Expression result = _expression;
+			while (true)
+			{
+				_currentStage = RewriteStages.GatheringConditionals;
+				_allConditionals.Clear();
+				result = Visit(result);
+				//if there are no conditionals, or only one, then there's no benefit to rewriting.
+				//and if all those which could have been (difficult to judge, that)
+				if (_allConditionals.Count <= 1
+					|| _candidateTests.Where(ct => _allConditionals.Any(cei => ct.Test == cei.Expression.Test))
+					.All(ct => ct.RewriteCount != 0))
+					break;
 
-			if (grouped.Length == _allConditionals.Count)
-				return result;  //no rewriting to do here, all conditional tests are unique
+				var grouped = _allConditionals.GroupBy(i => i).ToArray();
 
-			//now we have to find whether this group has a shared parent expression that we can rewrite
-			//this involves finding the bottom-most expression which is present in all the stacks that
-			//we gathered.  We won't remove that expression, we're just going to push it down and clone it 
-			//as a new pair of iffalse and iftrue branches in a new conditional expression.
-			_groupedConditionals = (from grp in grouped
-									let grpArray = grp.ToArray()
-									where grpArray.Length > 1
-									let commonParent = (from expr in grpArray[0].Hierarchy
-														let otherHierarchies = (from conditional2 in grp.Skip(1)
-																				select conditional2.Hierarchy)
-														where otherHierarchies.All(h => h.Any(expr2 => object.ReferenceEquals(expr, expr2)))
-														select expr).LastOrDefault()
-									where commonParent != null
-									select new ConditionalExpressionGroupInfo { Group = grp, CommonParent = commonParent }).ToArray();
+				if (grouped.Length == _allConditionals.Count)
+					break;
 
-			_currentStage = RewriteStages.RewritingConditionals;
+				_currentStage = RewriteStages.RewritingConditionals;
 
-			result = Visit(result);
+				//now we have to find whether this group has a shared parent expression that we can rewrite
+				//this involves finding the bottom-most expression which is present in all the stacks that
+				//we gathered.  We won't remove that expression, we're just going to push it down and clone it 
+				//as a new pair of iffalse and iftrue branches in a new conditional expression.
+				_groupedConditionals = (from grp in grouped
+										let grpArray = grp.ToArray()
+										where grpArray.Length > 1
+										let commonParent = (from expr in grpArray[0].Hierarchy
+															let otherHierarchies = (from conditional2 in grp.Skip(1)
+																					select conditional2.Hierarchy)
+															where otherHierarchies.All(h => h.Any(expr2 => object.ReferenceEquals(expr, expr2)))
+															select expr).LastOrDefault()
+										where commonParent != null
+										select new ConditionalExpressionGroupInfo { Group = grp, CommonParent = commonParent }).ToArray();
+
+
+
+				result = Visit(result);
+			};
 
 			return result;
 		}
@@ -166,7 +184,7 @@ namespace Rezolver.Compilation.Expressions
 
 					//because of optimisations that we perform elsewhere, we need to check that the true/false parts have compatible types
 					//if not equal, then we inject a conversion to one or the other to ensure the types are equal.
-					if(truePart.Type != falsePart.Type)
+					if (truePart.Type != falsePart.Type)
 					{
 						//note that this code relies on NULLs (either via DefaultExpression or ConstantExpression) being strongly-typed
 						if (TypeHelpers.IsAssignableFrom(truePart.Type, falsePart.Type))
@@ -174,7 +192,8 @@ namespace Rezolver.Compilation.Expressions
 						else if (TypeHelpers.IsAssignableFrom(falsePart.Type, truePart.Type))
 							truePart = Expression.Convert(truePart, falsePart.Type);
 					}
-
+					var test = _candidateTests.SingleOrDefault(ct => ct.Test == matchingGroup.Group.Key.Expression.Test);
+					if (test != null) test.RewriteCount++;
 					return Expression.Condition(matchingGroup.Group.Key.Expression.Test, truePart, falsePart);
 				}
 			}
@@ -187,10 +206,9 @@ namespace Rezolver.Compilation.Expressions
 			if (_currentStage == RewriteStages.GatheringConditionals)
 			{
 				//check that this expression is one of those that 
-				if (_candidateTests.Any(e => object.ReferenceEquals(node.Test, e)))
+				if (_candidateTests.Any(e => e.RewriteCount == 0 &&  object.ReferenceEquals(node.Test, e.Test)))
 				{
-					//remember that the stack here will have this node as the most recently added object
-					_allConditionals.Add(new ConditionalExpressionInfo() { Expression = node, Hierarchy = new Stack<Expression>(_currentStack) });
+					_allConditionals.Add(new ConditionalExpressionInfo() { Expression = node, Hierarchy = new Stack<Expression>(_currentStack)});
 				}
 				return base.VisitConditional(node);
 			}
@@ -200,7 +218,6 @@ namespace Rezolver.Compilation.Expressions
 				var matching = currentRewrite.GroupInfo.Group.FirstOrDefault(e => object.ReferenceEquals(e.Expression, node));
 				if (matching != null)
 				{
-					++_rewriteCount;
 					switch (currentRewrite.Mode)
 					{
 						case ConditionalRewritePart.TruePart:
