@@ -90,7 +90,6 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void VerifyingFailedTest()
 		{
-#error stick with this error.  You're nearly there.
 			var targets = CreateTargetContainer();
 			//targets.Register(new Disposable().AsObjectTarget().Singleton());
 			//targets.Register(new Disposable2().AsObjectTarget().Singleton());

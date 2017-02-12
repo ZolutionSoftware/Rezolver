@@ -42,6 +42,13 @@ namespace Rezolver.Compilation.Expressions
 				);
 
 		/// <summary>
+		/// Gets a MethodInfo object for the <see cref="ResolveContext.CreateNew(Type)"/> method
+		/// </summary>
+		/// <value>The type of the resolve context create new method.</value>
+		protected MethodInfo ResolveContext_CreateNew_Method_Type { get; } = MethodCallExtractor.ExtractCalledMethod(
+			(ResolveContext r) => r.CreateNew((Type)null));
+
+		/// <summary>
 		/// Gets the <see cref="IExpressionCompiler"/> to be used to build the expression for the given target for
 		/// the given context, if different from one passed to this class' implementation of 
 		/// <see cref="IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)"/>.
@@ -164,7 +171,7 @@ namespace Rezolver.Compilation.Expressions
 							context.ResolveContextExpression
 						),
 						IContainerScope_Resolve_Method,
-						context.ResolveContextExpression,
+						Expression.Call(context.ResolveContextExpression, ResolveContext_CreateNew_Method_Type, Expression.Constant(builtExpression.Type)),
 						lambda,
 						Expression.Constant(scopeBehaviour)
 					),

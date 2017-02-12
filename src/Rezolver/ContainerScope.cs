@@ -93,7 +93,8 @@ namespace Rezolver
 
 		protected virtual void Dispose(bool disposing)
 		{
-			if (_disposing) throw new InvalidOperationException("ContainerScope dispose method called itself");
+			//have to cope with recursion below because of the complexity of some of the disposable
+			//scenarios we might have to deal with.
 			if (Disposed || _disposing) return;
 
 			if (disposing)
@@ -137,7 +138,7 @@ namespace Rezolver
 
 		object IContainerScope.Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeActivationBehaviour behaviour)
 		{
-#error in here, if you debug the current failing test, you'll see the problem is with (I think) the types not flowing correctly through the ResolveContext.
+//#error in here, if you debug the current failing test, you'll see the problem is with (I think) the types not flowing correctly through the ResolveContext.
 			if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 
 			if (behaviour == ScopeActivationBehaviour.Explicit)
