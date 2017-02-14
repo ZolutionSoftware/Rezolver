@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class NestedGenericA<T> : Generic<IEnumerable<T>>
+	public class NestedGenericA<T> : Generic<IEnumerable<T>>
 	{
 		//finding this type's mapping to any of the bases or interfaces involves 
 		//translating through the layers of inheritance/implementation and 

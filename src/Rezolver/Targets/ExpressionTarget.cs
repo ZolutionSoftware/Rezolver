@@ -39,7 +39,11 @@ namespace Rezolver.Targets
 			get;
 		}
 
-		public override ScopeActivationBehaviour ScopeBehaviour { get; }
+		/// <summary>
+		/// Gets the scoping behaviour for instances that will ultimately be produced by this target.
+		/// </summary>
+		/// <value>The scope behaviour.</value>
+		public override ScopeBehaviour ScopeBehaviour { get; }
 		
 
 		/// <summary>
@@ -63,7 +67,7 @@ namespace Rezolver.Targets
 		/// by examining the type of the <paramref name="expression"/>.  For lambdas, the type will
 		/// be derived from the Type of the lambda's body.  For all other expressions, the type is
 		/// taken directly from the Type property of the expression itself.</remarks>
-		public ExpressionTarget(Expression expression, Type declaredType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
+		public ExpressionTarget(Expression expression, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
 		{
 			expression.MustNotBeNull(nameof(expression));
 			Expression = expression;

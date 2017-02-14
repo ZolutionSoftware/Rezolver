@@ -8,15 +8,15 @@ namespace Rezolver.Tests.Types
 	/// <summary>
 	/// some types to use as generic arguments for our generic tests
 	/// </summary>
-	internal class TypeArgs
+	public class TypeArgs
 	{
-		internal interface IT1 { }
-		internal interface IT2 { }
-		internal interface IT3 { }
+		public interface IT1 { }
+		public interface IT2 { }
+		public interface IT3 { }
 
-		internal class T1 : IT1 { }
-		internal class T2 : IT2 { }
-		internal class T3 : IT3 { }
+		public class T1 : IT1 { }
+		public class T2 : IT2 { }
+		public class T3 : IT3 { }
 
 		internal struct VT1 : IT1 { }
 		internal struct VT2 : IT2 { }

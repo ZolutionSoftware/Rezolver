@@ -18,7 +18,7 @@ namespace Rezolver.Tests.Targets
 
 		protected class TestCompileContext : CompileContext
 		{
-			public TestCompileContext(ICompileContext parentContext, Type targetType = null, ScopeActivationBehaviour? scopeBehaviourOverride = null)
+			public TestCompileContext(ICompileContext parentContext, Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
 				: base(parentContext, targetType, scopeBehaviourOverride) { }
 
 			public TestCompileContext(IContainer container, ITargetContainer dependencyTargetContainer, Type targetType = null)

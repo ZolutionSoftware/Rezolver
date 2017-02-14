@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class RequiresIGenericT<T> : GenericOneCtor<IGeneric<T>>
+    public class RequiresIGenericT<T> : GenericOneCtor<IGeneric<T>>
     {
 		public RequiresIGenericT(IGeneric<T> value)
 			: base(value)

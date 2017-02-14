@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class TwiceNestedGenericA<T> : IGeneric<IGeneric<IEnumerable<T>>>
+	public class TwiceNestedGenericA<T> : IGeneric<IGeneric<IEnumerable<T>>>
 	{
 		public IGeneric<IEnumerable<T>> Value
 		{

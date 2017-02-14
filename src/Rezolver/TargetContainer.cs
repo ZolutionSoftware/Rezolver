@@ -28,7 +28,7 @@ namespace Rezolver
 		/// resolved as a concatenation of all the <see cref="ITarget"/>s that are registered against a particular type.
 		/// 
 		/// Note - this parameter might be removed in a future version - you can achieve the same thing by using the
-		/// extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(TargetContainer)"/></param>
+		/// extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainerOwner)"/></param>
 		public TargetContainer(bool autoRezolveIEnumerable = true)
 		{
 			//TODO: Change this 

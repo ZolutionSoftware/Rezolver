@@ -147,7 +147,7 @@ namespace Rezolver
 		private int _compileConfigured = 0;
 		private ICompilerConfigurationProvider _compilerConfigurationProvider;
 		/// <summary>
-		/// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="compiler"/>
+		/// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="compilerConfig"/>
 		/// </summary>
 		/// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(ResolveContext)"/> (and other operations)
 		/// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
@@ -161,7 +161,7 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Provides the <see cref="ITarget"/> instances that will be compiled by the <see cref="Compiler"/> into <see cref="ICompiledTarget"/>
+		/// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
 		/// instances.
 		/// </summary>
 		/// <remarks>Notes to implementers: This property must NEVER be null.
@@ -215,17 +215,15 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Implementation of the <see cref="IContainer.CreateScope"/> method.  The base definition creates 
-		/// a new instance of the <see cref="OverridingScopedContainer"/>, passing this container as its parent and, 
-		/// if this container is an <see cref="IScopedContainer"/>, also as its parent scope.
+		/// Implementation of the <see cref="IContainer.CreateScope"/> method.
+		/// 
+		/// The base definition creates a <see cref="ContainerScope"/> with this container passed as the scope's container.
+		/// 
+		/// Thus, the new scope is a 'root' scope.
 		/// </summary>
 		public virtual IContainerScope CreateScope()
 		{
 			return new ContainerScope(this);
-			//optimistic implementation of this method - attempts a safe cast to ILifetimeScopeRezolver of itself
-			//so that types derived from this class that are ILifetimeScopeRezolver instances do not need
-			//to reimplement this method.
-			//return new OverridingScopedContainer(this as IScopedContainer, this);
 		}
 
 		/// <summary>

@@ -21,6 +21,8 @@ namespace Rezolver.Targets
 	{
 		//the cached compiled targets for this singleton keyed by the requested type.
 		//compilers should use this so that the singleton rule can be enforced.
+		//TODO: change this to be a state storage device in the container - possibly using the same
+		//pattern that's been proposed for scoping (see IContainerScope, bottom of the file)
 		private readonly ConcurrentDictionary<Type, ICompiledTarget> _initialisers = new ConcurrentDictionary<Type, ICompiledTarget>();
 
 		/// <summary>
@@ -32,11 +34,14 @@ namespace Rezolver.Targets
 			get { return InnerTarget.DeclaredType; }
 		}
 
-		public override ScopeActivationBehaviour ScopeBehaviour
+		/// <summary>
+		/// Always returns <see cref="ScopeBehaviour.Explicit"/>.
+		/// </summary>
+		public override ScopeBehaviour ScopeBehaviour
 		{
 			get
 			{
-				return ScopeActivationBehaviour.Explicit;
+				return ScopeBehaviour.Explicit;
 			}
 		}
 		/// <summary>

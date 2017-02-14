@@ -52,6 +52,20 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		/// <summary>
+		/// Creates a scoped container for the test or theory from the targets created by 
+		/// <see cref="CreateTargetContainer(string)"/>.
+		/// 
+		/// Your implementation of <see cref="GetCompilerConfigProvider(string)"/> is used to configure the container
+		/// on creation.
+		/// </summary>
+		/// <param name="targets">The targets.</param>
+		/// <param name="testName">Name of the test.</param>
+		protected virtual IScopedContainer CreateScopedContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
+		{
+			return new ScopedContainer(targets, GetCompilerConfigProvider(testName));
+		}
+
+		/// <summary>
 		/// Creates an overriding container using the passed <paramref name="baseContainer"/> as the parent container.
 		/// 
 		/// The <paramref name="newTargets"/> target container is optionally used to seed the new container with additional
@@ -72,10 +86,10 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// Shortcut method for testing a compiler with a single target registered in a container.
 		/// 
 		/// Reduces common boilerplate found in many of the target-specfic compilation tests (although not
-		/// all of it has been swapped over to using this method! :$
+		/// all of it has been swapped over to using this method! :$)
 		/// 
 		/// Creates the target container through <see cref="CreateTargetContainer(string)"/>, then
-		/// registers the <paramref name="target"/> in it optionally using the passed <paramref name="registeredType"/>,
+		/// registers the <paramref name="target"/> in it, optionally using the passed <paramref name="registeredType"/>,
 		/// and then creates and returns the container built from those targets by 
 		/// <see cref="CreateContainer(ITargetContainer, string)"/>
 		/// </summary>

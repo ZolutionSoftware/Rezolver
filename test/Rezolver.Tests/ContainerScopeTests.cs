@@ -11,7 +11,7 @@ namespace Rezolver.Tests
 	{
 		//this is testing the container scope's low level behaviour, which
 		//does not require a container to work - just a delegate that creates
-		//an object, and 
+		//an object - which, in normal operation, is taken care of by the compiler.
 
 		[Fact]
 		public void ShouldDisposeImplicitIDisposable()
@@ -23,7 +23,7 @@ namespace Rezolver.Tests
 				disposable = scope.Resolve<Disposable>(
 					new ResolveContext(scope, typeof(Disposable)),
 					c => new Disposable(),
-					ScopeActivationBehaviour.Implicit);
+					ScopeBehaviour.Implicit);
 			}
 
 			Assert.True(disposable.Disposed);
@@ -40,7 +40,7 @@ namespace Rezolver.Tests
 				disposable = scope.Resolve<Disposable>(
 					new ResolveContext(scope, typeof(Disposable)),
 					c => new Disposable(),
-					ScopeActivationBehaviour.Explicit);
+					ScopeBehaviour.Explicit);
 			}
 
 			Assert.True(disposable.Disposed);
@@ -60,7 +60,7 @@ namespace Rezolver.Tests
 					inner1 = childScope.Resolve<Disposable>(
 						new ResolveContext(childScope, typeof(Disposable)),
 						factory,
-						ScopeActivationBehaviour.Implicit);
+						ScopeBehaviour.Implicit);
 				}
 
 				Assert.True(inner1.Disposed);
@@ -71,7 +71,7 @@ namespace Rezolver.Tests
 					inner2 = childScope.Resolve<Disposable>(
 						new ResolveContext(childScope, typeof(Disposable)),
 						factory,
-						ScopeActivationBehaviour.Implicit);
+						ScopeBehaviour.Implicit);
 				}
 
 				Assert.True(inner2.Disposed);
@@ -89,14 +89,14 @@ namespace Rezolver.Tests
 				var result = scope.Resolve<NoCtor>(
 					new ResolveContext(scope, typeof(NoCtor)),
 					factory,
-					ScopeActivationBehaviour.Explicit);
+					ScopeBehaviour.Explicit);
 
 				Assert.NotNull(result);
 
 				var result2 = scope.Resolve<NoCtor>(
 					new ResolveContext(scope, typeof(NoCtor)),
 					factory,
-					ScopeActivationBehaviour.Explicit);
+					ScopeBehaviour.Explicit);
 
 				Assert.Same(result, result2);
 			}
@@ -112,7 +112,7 @@ namespace Rezolver.Tests
 				var result = scope.Resolve<NoCtor>(
 					new ResolveContext(scope, typeof(NoCtor)),
 					factory,
-					ScopeActivationBehaviour.Explicit);
+					ScopeBehaviour.Explicit);
 
 				Assert.NotNull(result);
 
@@ -121,7 +121,7 @@ namespace Rezolver.Tests
 					var result2 = childScope.Resolve<NoCtor>(
 						new ResolveContext(childScope, typeof(NoCtor)),
 						factory,
-						ScopeActivationBehaviour.Explicit);
+						ScopeBehaviour.Explicit);
 
 					Assert.NotSame(result, result2);
 				}
@@ -138,12 +138,12 @@ namespace Rezolver.Tests
 				explicitlyScoped = scope.Resolve<Disposable>(
 					new ResolveContext(scope, typeof(Disposable)),
 					factory,
-					ScopeActivationBehaviour.Explicit);
+					ScopeBehaviour.Explicit);
 
 				implicitlyScoped = scope.Resolve<Disposable>(
 					new ResolveContext(scope, typeof(Disposable)),
 					factory,
-					ScopeActivationBehaviour.Implicit);
+					ScopeBehaviour.Implicit);
 
 				Assert.NotSame(explicitlyScoped, implicitlyScoped);
 			}
@@ -166,22 +166,22 @@ namespace Rezolver.Tests
 				parentObj = parent.Resolve<Disposable>(
 					new ResolveContext(parent, typeof(Disposable)),
 					factory,
-					ScopeActivationBehaviour.Implicit);
+					ScopeBehaviour.Implicit);
 
 				childObj = child.Resolve<Disposable>(
 					new ResolveContext(child, typeof(Disposable)),
 					factory,
-					ScopeActivationBehaviour.Implicit);
+					ScopeBehaviour.Implicit);
 
 				grandChildObj = grandChild.Resolve<Disposable>(
 					new ResolveContext(grandChild, typeof(Disposable)),
 					factory,
-					ScopeActivationBehaviour.Implicit);
+					ScopeBehaviour.Implicit);
 
 				siblingObj = sibling.Resolve<Disposable>(
 					new ResolveContext(sibling, typeof(Disposable)),
 					factory,
-					ScopeActivationBehaviour.Implicit);
+					ScopeBehaviour.Implicit);
 			}
 
 			Assert.All(new[] { parentObj, childObj, grandChildObj, siblingObj },

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class Decorated : IDecorated
+	public class Decorated : IDecorated
 	{
 		public string DoSomething()
 		{

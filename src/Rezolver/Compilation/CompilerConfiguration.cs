@@ -10,15 +10,16 @@ namespace Rezolver.Compilation
 	/// </summary>
 	public static class CompilerConfiguration
 	{
-		private class NoCompilerConfigurationProvider : ICompilerConfigurationProvider
-		{
-			public void Configure(IContainer container, ITargetContainer targets)
-			{
-				throw new InvalidOperationException("The current IContainer or ITargetContainer has not been configured with a compiler configuration provider, so compilation is not possible.  The default configuration provider (used by all built-in containers) is set through the Rezolver.Compilation.CompilerConfiguration.Default property.  Most containers also allow you to provide an explicit ICompilerConfigurationProvider on construction.");
-			}
-		}
+		// not needed now I've merged the expression compiler back into the main project and made it the default
+		//private class NoCompilerConfigurationProvider : ICompilerConfigurationProvider
+		//{
+		//	public void Configure(IContainer container, ITargetContainer targets)
+		//	{
+		//		throw new InvalidOperationException("The current IContainer or ITargetContainer has not been configured with a compiler configuration provider, so compilation is not possible.  The default configuration provider (used by all built-in containers) is set through the Rezolver.Compilation.CompilerConfiguration.Default property.  Most containers also allow you to provide an explicit ICompilerConfigurationProvider on construction.");
+		//	}
+		//}
 
-		private static ICompilerConfigurationProvider _defaultProvider = new NoCompilerConfigurationProvider();
+		private static ICompilerConfigurationProvider _defaultProvider = Expressions.ExpressionCompiler.ConfigProvider;
 
 		/// <summary>
 		/// Gets or sets the default <see cref="ICompilerConfigurationProvider"/> used by classes derived from 

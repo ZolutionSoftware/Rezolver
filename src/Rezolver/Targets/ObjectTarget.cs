@@ -16,13 +16,13 @@ namespace Rezolver.Targets
 	{
 
 		private readonly Type _declaredType;
-		private readonly ScopeActivationBehaviour _scopeBehaviour;
+		private readonly ScopeBehaviour _scopeBehaviour;
 
 		/// <summary>
 		/// Gets the scope behaviour.
 		/// </summary>
 		/// <value>The scope behaviour.</value>
-		public override ScopeActivationBehaviour ScopeBehaviour
+		public override ScopeBehaviour ScopeBehaviour
 		{
 			get
 			{
@@ -42,12 +42,12 @@ namespace Rezolver.Targets
 		/// <param name="obj">The object to be returned by this target when resolved.</param>
 		/// <param name="declaredType">Optional.  The declared type of this target, if different from the absolute type of the <paramref name="obj"/></param>
 		/// <param name="scopeBehaviour">Optional.  If you want the object to be disposed by Rezolver when the root scope is disposed, then
-		/// specify a behaviour other than the default.  Note - the only real behaviour that makes sense for this is <see cref="ScopeActivationBehaviour.Explicit"/>,
+		/// specify a behaviour other than the default.  Note - the only real behaviour that makes sense for this is <see cref="ScopeBehaviour.Explicit"/>,
 		/// since the Implicit behaviour will typically fool a scope that multiple instances are being created and, therefore, the object
 		/// will be tracked multiple times by that scope.</param>
 		/// <remarks>Please note - if you enable scope tracking, but the object is never resolved, then the object will not be disposed and you will need
 		/// to ensure you dispose of it.</remarks>
-		public ObjectTarget(object obj, Type declaredType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
+		public ObjectTarget(object obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
 		{
 			Value = obj;
 			_scopeBehaviour = scopeBehaviour;
@@ -83,6 +83,10 @@ namespace Rezolver.Targets
 			}
 		}
 
+		/// <summary>
+		/// Selects the scopem in which instance should be tracked for disposal.
+		/// </summary>
+		/// <param name="context">The context.</param>
 		public override IContainerScope SelectScope(ResolveContext context)
 		{
 			return context.Scope != null ? context.Scope.GetRootScope() : base.SelectScope(context);

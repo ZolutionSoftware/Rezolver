@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal interface INestedGenericB<T> : IGeneric<IEnumerable<T>>
+	public interface INestedGenericB<T> : IGeneric<IEnumerable<T>>
 	{
 
 	}

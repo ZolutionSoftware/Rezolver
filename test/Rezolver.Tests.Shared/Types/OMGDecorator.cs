@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class OMGDecorator : IDecorated
+    public class OMGDecorator : IDecorated
     {
 		IDecorated _decorated;
 		public OMGDecorator(IDecorated decorated)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Rezolver.Tests.Types
 {
 	//bit like a decorator, this.
-    internal class GenericGenericOneCtor<T> : GenericBase<IGeneric<T>>
+    public class GenericGenericOneCtor<T> : GenericBase<IGeneric<T>>
     {
 		public GenericGenericOneCtor(IGeneric<T> value)
 		{

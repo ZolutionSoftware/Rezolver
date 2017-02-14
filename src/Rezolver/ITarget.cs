@@ -53,7 +53,7 @@ namespace Rezolver
 		/// Gets the scoping behaviour for instances that will ultimately be produced by this target.
 		/// </summary>
 		/// <value>The scope behaviour.</value>
-		ScopeActivationBehaviour ScopeBehaviour { get; }
+		ScopeBehaviour ScopeBehaviour { get; }
 		/// <summary>
 		/// Returns a boolean indicating whether the target is able to produce an instance of, or an instance
 		/// that is compatible with, the passed <paramref name="type"/>.
@@ -81,6 +81,8 @@ namespace Rezolver
 		bool SupportsType(Type type);
 		/// <summary>
 		/// Selects the scope in which instances produced from this target should be tracked.
+		/// 
+		/// This should be executed only during a resolve operation when a scope is detected.
 		/// </summary>
 		/// <param name="context">The context passed to a container's <see cref="IContainer.Resolve(ResolveContext)"/>
 		/// method.</param>

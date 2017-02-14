@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class DefaultCtor : NoCtor
+    public class DefaultCtor : NoCtor
     {
 		public const int ExpectedValue = -1;
 		public DefaultCtor()

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal abstract class GenericBase<T> : IGeneric<T>
+	public abstract class GenericBase<T> : IGeneric<T>
 	{
 		public T Value
 		{

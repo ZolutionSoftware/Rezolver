@@ -8,7 +8,7 @@ namespace Rezolver.Tests
     internal static class ContainerScopeResolveExtensions
     {
 
-		public static TResult Resolve<TResult>(this IContainerScope scope, ResolveContext context, Func<ResolveContext, object> factory, ScopeActivationBehaviour behaviour)
+		public static TResult Resolve<TResult>(this IContainerScope scope, ResolveContext context, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
 		{
 			if (scope == null) throw new ArgumentNullException(nameof(scope));
 			return (TResult)scope.Resolve(context, factory, behaviour);

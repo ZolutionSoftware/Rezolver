@@ -176,6 +176,13 @@ namespace Rezolver.Targets
 			return MapType(type).Success;
 		}
 
+		/// <summary>
+		/// Maps the <see cref="DeclaredType"/> open generic type to the <paramref name="targetType"/>.
+		/// 
+		/// Examine the <see cref="GenericTypeMapping.Success"/> of the result to check whether the
+		/// result was successful.
+		/// </summary>
+		/// <param name="targetType">Type of the target.</param>
 		public GenericTypeMapping MapType(Type targetType)
 		{
 			//used both in SupportsType and in the Bind function - except the bind function
@@ -207,10 +214,10 @@ namespace Rezolver.Targets
 						string.Join(", ", genericMismatches.Select(t =>
 						{
 							var mismatchedArgs = TypeHelpers.GetGenericArguments(t);
-							return $@"{ 
-								mismatchedArgs[0] } in { (mismatchedArgs[1] != typeof(INotGeneric) ? mismatchedArgs[1].ToString() : "[not generic]") 
-							} is mapped to less generic argument { 
-								mismatchedArgs[2] } of { (mismatchedArgs[3] != typeof(INotGeneric) ? mismatchedArgs[3].ToString() : "[not generic]" )
+							return $@"{
+								mismatchedArgs[0] } in { (mismatchedArgs[1] != typeof(INotGeneric) ? mismatchedArgs[1].ToString() : "[not generic]")
+							} is mapped to less generic argument {
+								mismatchedArgs[2] } of { (mismatchedArgs[3] != typeof(INotGeneric) ? mismatchedArgs[3].ToString() : "[not generic]")
 							}";
 						})
 						)}");

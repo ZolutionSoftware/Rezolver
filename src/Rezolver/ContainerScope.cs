@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
+	/// <summary>
+	/// Standard implementation of the <see cref="IContainerScope"/> interface.
+	/// </summary>
+	/// <seealso cref="Rezolver.IContainerScope" />
 	public class ContainerScope : IContainerScope
 	{
 		/// <summary>
@@ -24,9 +28,18 @@ namespace Rezolver
 		private bool _disposed = false;
 		private bool _disposing = false;
 
+		/// <summary>
+		/// Gets a value indicating whether this <see cref="ContainerScope"/> is disposed.
+		/// </summary>
+		/// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
 		public bool Disposed { get { return _disposed; } }
 
 		private readonly IContainer _container;
+		/// <summary>
+		/// The container that this scope is tied to.  All standard resolve operations
+		/// should be made against this container.
+		/// </summary>
+		/// <value>The container.</value>
 		public IContainer Container
 		{
 			get
@@ -35,6 +48,10 @@ namespace Rezolver
 			}
 		}
 
+		/// <summary>
+		/// If this scope has a parent scope, this is it.
+		/// </summary>
+		/// <value>The parent.</value>
 		public IContainerScope Parent
 		{
 			get;
@@ -70,6 +87,11 @@ namespace Rezolver
 			_container = container;
 		}
 
+		/// <summary>
+		/// Called to create a child scope from this scope.  The implementation adds the
+		/// new scope to a private collection so that it can dispose of the new child if
+		/// it is not already disposed.
+		/// </summary>
 		public IContainerScope CreateScope()
 		{
 			var newScope = new ContainerScope(this);
@@ -77,6 +99,13 @@ namespace Rezolver
 			return newScope;
 		}
 
+		/// <summary>
+		/// Called by child scopes when they are disposed to notify the parent that they
+		/// will no longer need to be disposed of when the parent is disposed.
+		/// </summary>
+		/// <param name="child">The child.</param>
+		/// <remarks>This is an infrastructure method and not something you would usually need to call.
+		/// It's exposed for developers who are extending the container scoping functionality only.</remarks>
 		public void ChildScopeDisposed(IContainerScope child)
 		{
 			if (!_disposing)
@@ -85,12 +114,19 @@ namespace Rezolver
 			}
 		}
 
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
 		public void Dispose()
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
 		protected virtual void Dispose(bool disposing)
 		{
 			//have to cope with recursion below because of the complexity of some of the disposable
@@ -136,17 +172,16 @@ namespace Rezolver
 			}
 		}
 
-		object IContainerScope.Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeActivationBehaviour behaviour)
+		object IContainerScope.Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
 		{
-//#error in here, if you debug the current failing test, you'll see the problem is with (I think) the types not flowing correctly through the ResolveContext.
 			if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 
-			if (behaviour == ScopeActivationBehaviour.Explicit)
+			if (behaviour == ScopeBehaviour.Explicit)
 			{
 				//use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
 				return _explicitlyScopedObjects.GetOrAdd(context, k => new Lazy<object>(() => factory(k))).Value;
 			}
-			else if (behaviour == ScopeActivationBehaviour.Implicit)
+			else if (behaviour == ScopeBehaviour.Implicit)
 			{
 				var result = factory(context);
 				if (result is IDisposable) _implicitlyScopedObjects.Add((IDisposable)result);

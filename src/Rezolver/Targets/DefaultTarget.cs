@@ -38,11 +38,16 @@ namespace Rezolver.Targets
 			})();
 		}
 
-		public override ScopeActivationBehaviour ScopeBehaviour
+		/// <summary>
+		/// Override of <see cref="TargetBase.ScopeBehaviour"/> - always returns
+		/// <see cref="ScopeBehaviour.None"/>.
+		/// </summary>
+		/// <value>The scope behaviour.</value>
+		public override ScopeBehaviour ScopeBehaviour
 		{
 			get
 			{
-				return ScopeActivationBehaviour.None;
+				return ScopeBehaviour.None;
 			}
 		}
 		object ICompiledTarget.GetObject(ResolveContext context)

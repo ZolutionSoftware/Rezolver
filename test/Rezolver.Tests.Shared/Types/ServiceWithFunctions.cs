@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class ServiceWithFunctions
+    public class ServiceWithFunctions
     {
 		public ServiceChild GetChild(int input)
 		{

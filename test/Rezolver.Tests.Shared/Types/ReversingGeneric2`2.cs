@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class ReversingGeneric2<Ta, Tb> : Generic2<Tb, Ta>
+	public class ReversingGeneric2<Ta, Tb> : Generic2<Tb, Ta>
 	{
 
 	}

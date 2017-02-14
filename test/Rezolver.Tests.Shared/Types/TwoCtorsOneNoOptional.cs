@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class TwoCtorsOneNoOptional
+	public class TwoCtorsOneNoOptional
 	{
 		//signatures here have to be slightly different obviously
 		public string S { get; }

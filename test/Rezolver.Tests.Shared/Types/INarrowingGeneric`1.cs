@@ -12,7 +12,7 @@ namespace Rezolver.Tests.Types
 	//However, if you register Bar<T> : IFoo<T, int> for IFoo<,> then you can request 
 	//IFoo<double, int>, because the second type parameter is statically mapped.
 
-	internal interface INarrowingGeneric<T> : IGeneric2<T, TypeArgs.T2>
+	public interface INarrowingGeneric<T> : IGeneric2<T, TypeArgs.T2>
 	{
 
 	}

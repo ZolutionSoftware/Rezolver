@@ -6,19 +6,27 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
-	public enum ScopeActivationBehaviour
+	/// <summary>
+	/// Describes different ways in which objeects interact with scopes.
+	/// </summary>
+	/// <remarks>Note: this enum *might* be replaced with an abstraction in the future.  If so,
+	/// it will not alter how regatrations are performed, but it will affect any low-level code
+	/// which uses this enum directly.</remarks>
+	public enum ScopeBehaviour
 	{
 		/// <summary>
-		/// implicitly scoped objects are only added to the scope 
+		/// Implicitly scoped objects are only added to the scope 
 		/// for the purposes of disposing when the scope is disposed
 		/// </summary>
 		Implicit = 0,
 		/// <summary>
-		/// explicitly scoped objects act like singletons in the current scope
+		/// Explicitly scoped objects act like singletons in the current scope, regardless of
+		/// whether they are disposable or not.
 		/// </summary>
 		Explicit = 1,
 		/// <summary>
-		/// This means that no scope should be considered, even if there is one.
+		/// The object will not be tracked in any scope, regardless of whether there is one active,
+		/// or whether the object is disposable.
 		/// </summary>
 		None
 	}
@@ -70,8 +78,8 @@ namespace Rezolver
 		/// <see cref="Container"/> - the implementing type simply has to ensure that 
 		/// it tracks whatever object is ultimately returned; potentially returning
 		/// a previously tracked object if <paramref name="behaviour"/> is 
-		/// <see cref="ScopeActivationBehaviour.Explicit"/></remarks>
-		object Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeActivationBehaviour behaviour);
+		/// <see cref="ScopeBehaviour.Explicit"/></remarks>
+		object Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeBehaviour behaviour);
 		//REVIEW: The enum solution for this method works fine for now, but offers no scope for extending it outside of the Rezolver codebase.
 		//The more extensible solution would be to have an interface which represents the behaviour so that the logic for that behaviour can be abstracted away
 		//The difficulty with this being that it means the underlying storage containers for scoped objects used by the scope needs to exposed to implementations

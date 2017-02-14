@@ -21,14 +21,14 @@ namespace Rezolver.Targets
 		public override Type DeclaredType { get { return MethodParameter.ParameterType; } }
 
 		/// <summary>
-		/// Always returns <see cref="ScopeActivationBehaviour.None"/>
+		/// Always returns <see cref="ScopeBehaviour.None"/>
 		/// </summary>
 		/// <value>The scope behaviour.</value>
-		public override ScopeActivationBehaviour ScopeBehaviour
+		public override ScopeBehaviour ScopeBehaviour
 		{
 			get
 			{
-				return ScopeActivationBehaviour.None;
+				return ScopeBehaviour.None;
 			}
 		}
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class GenericDecorator<TDecorated> : Decorated
+	public class GenericDecorator<TDecorated> : Decorated
 		where TDecorated : Decorated
 	{
 		public TDecorated Decorated { get; }

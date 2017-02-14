@@ -17,7 +17,8 @@ namespace Rezolver
 	public static class ObjectTargetContainerExtensions
 	{
 		/// <summary>
-		/// Registers a single instance (already created) to be used when resolving a particular service type.
+		/// Registers an instance to be used when resolving a particular service type via the <see cref="ObjectTarget"/>
+		/// target.
 		/// </summary>
 		/// <typeparam name="T">Type of the object - will be used as the service type for registration if
 		/// <paramref name="serviceType"/> is not provied.</typeparam>
@@ -25,11 +26,9 @@ namespace Rezolver
 		/// <param name="obj">The instance that will be resolved when the service type is requested.</param>
 		/// <param name="serviceType">The service type against which this object is to be registered, if different
 		/// from <typeparamref name="T"/>.</param>
-		/// <param name="suppressScopeTracking">If true (the default), then the object will not be tracked and disposed
-		/// of by any <see cref="IScopedContainer"/> that might be active when the object is first resolved.  In theory
-		/// this should always be left as true because otherwise the object will not be usable after the first 
-		/// scope its contained within is disposed.</param>
-		public static void RegisterObject<T>(this ITargetContainer targetContainer, T obj, Type serviceType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
+		/// <param name="scopeBehaviour">Sets the <see cref="ITarget.ScopeBehaviour"/> for the 
+		/// <see cref="ObjectTarget"/> that's created</param>
+		public static void RegisterObject<T>(this ITargetContainer targetContainer, T obj, Type serviceType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			targetContainer.Register(obj.AsObjectTarget(serviceType, scopeBehaviour: scopeBehaviour), serviceType);

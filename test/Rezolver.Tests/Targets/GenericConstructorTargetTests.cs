@@ -74,8 +74,8 @@ namespace Rezolver.Tests.Targets
 				new[] { typeof(TwiceNestedGenericB<>),  typeof(IGeneric<IGeneric<IEnumerable<TypeArgs.T1>>>),   typeof(TwiceNestedGenericB<TypeArgs.T1>) },
 				// Generic Value Type verification
 				new[] { typeof(GenericValueType<>),     typeof(GenericValueType<TypeArgs.T1>) },
-				// using constraints expressed in terms of correctly mapped type parameters to be clever
-				new[] { typeof(ValidWideningGeneric<,>),typeof(IGeneric<int>),                          typeof(ValidWideningGeneric<IEnumerable<int>, int>) },
+				// TODO: using constraints expressed in terms of correctly mapped type parameters to be clever
+				//new[] { typeof(ValidWideningGeneric<,>),typeof(IGeneric<int>),                          typeof(ValidWideningGeneric<IEnumerable<int>, int>) },
 				// Not-fully-bound tests.  These types yield SupportsType = true, but Bind will throw an exception
 				new[] { typeof(Generic<>),              typeof(Generic<>) },
 				new[] { typeof(Generic<>),              typeof(IGeneric<>),								typeof(Generic<>) },

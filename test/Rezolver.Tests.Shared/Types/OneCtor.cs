@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class OneCtor : NoCtor
+	public class OneCtor : NoCtor
 	{
 		//some expected values
 		public const int ExpectedRezolvedValue = 101;

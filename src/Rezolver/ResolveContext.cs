@@ -72,11 +72,6 @@ namespace Rezolver
 				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
 			}
 
-			public IScopedContainer CreateLifetimeScope(IContainer overridingRezolver)
-			{
-				throw new NotImplementedException();
-			}
-
 			object IServiceProvider.GetService(Type serviceType)
 			{
 				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
@@ -99,6 +94,10 @@ namespace Rezolver
 		/// but is not necessarily the same container that will eventually end up resolving the object.</remarks>
 		public IContainer Container { get { return _container; } private set { _container = value; } }
 
+		/// <summary>
+		/// Gets the scope that's active for all calls for this context.
+		/// </summary>
+		/// <value>The scope.</value>
 		public IContainerScope Scope { get; private set; }
 
 		private ResolveContext() { }
@@ -114,6 +113,13 @@ namespace Rezolver
 			RequestedType = requestedType;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ResolveContext"/> class from the given scope.
+		/// 
+		/// The <see cref="Container"/> is inherited from the scope's <see cref="IContainerScope.Container"/>.
+		/// </summary>
+		/// <param name="scope">The scope.</param>
+		/// <param name="requestedType">The of object to be resolved from the container.</param>
 		public ResolveContext(IContainerScope scope, Type requestedType)
 		{
 			Scope = scope;
@@ -137,10 +143,6 @@ namespace Rezolver
 		private ResolveContext(IContainer container)
 		{
 			_container = container ?? StubContainer.Instance;
-			//automatically inherit the container as this context's scope, if it's of the correct type.
-			//note - all the other constructors chain to this one.  Other constructors
-			//might supply a separate scope in addition, which will overwrite the scope set here.
-			//Scope = container as IContainerScope;
 		}
 
 		/// <summary>

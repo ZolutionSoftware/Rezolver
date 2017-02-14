@@ -31,9 +31,9 @@ namespace Rezolver.Tests
 
 		
 
-		private ScopeActivationBehaviour? _scopeBehaviour;
+		private ScopeBehaviour? _scopeBehaviour;
 
-		public ScopeActivationBehaviour ScopeBehaviour
+		public ScopeBehaviour ScopeBehaviour
 		{
 			get
 			{
@@ -56,11 +56,12 @@ namespace Rezolver.Tests
 			return context.Scope;
 		}
 
-		public TestTarget(Type declaredType = null, bool? useFallBack = null, bool? supportsType = null, ScopeActivationBehaviour? scopeBehaviour = null)
+		public TestTarget(Type declaredType = null, bool? useFallBack = null, bool? supportsType = null, ScopeBehaviour? scopeBehaviour = null)
 		{
 			_declaredType = declaredType;
 			_useFallBack = useFallBack;
 			_supportsType = supportsType;
+			_scopeBehaviour = scopeBehaviour;
 		}
 	}
 }

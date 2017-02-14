@@ -1,6 +1,6 @@
 ﻿namespace Rezolver.Tests.Types
 {
-	internal interface IDecorated
+	public interface IDecorated
 	{
 		string DoSomething();
 	}

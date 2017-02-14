@@ -15,14 +15,14 @@ namespace Rezolver
 		/// <summary>
 		/// Wraps the instance on which this is invoked as an <see cref="ObjectTarget"/> that can be registered into an <see cref="ITargetContainer"/>.
 		/// 
-		/// The parameters are direct analogues of the parameters on the type's constructor (see <see cref="ObjectTarget.ObjectTarget(object, Type, bool)"/>).
+		/// The parameters are direct analogues of the parameters on the type's constructor (see <see cref="ObjectTarget.ObjectTarget(object, Type, ScopeBehaviour)"/>).
 		/// </summary>
 		/// <typeparam name="T">The type of object being wrapped</typeparam>
 		/// <param name="obj">the object being wrapped</param>
 		/// <param name="declaredType">Optional.  The type which is to be set as the <see cref="ObjectTarget.DeclaredType"/> of the created target.</param>
 		/// <param name="scopeBehaviour">Controls how the object will interact the the scope.  By default, object targets must be disposed by you.</param>
 		/// <returns>A new object target that wraps the object <paramref name="obj"/>.</returns>
-		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null, ScopeActivationBehaviour scopeBehaviour = ScopeActivationBehaviour.None)
+		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
 		{
 			return new ObjectTarget(obj, declaredType ?? typeof(T), scopeBehaviour: scopeBehaviour);
 		}

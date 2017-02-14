@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class AltGeneric<T> : GenericBase<T>
+    public class AltGeneric<T> : GenericBase<T>
     {
 		public override void Foo()
 		{

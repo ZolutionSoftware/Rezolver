@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal class TwoCtors
+	public class TwoCtors
 	{
 		public string S { get; }
 		public int I { get; }

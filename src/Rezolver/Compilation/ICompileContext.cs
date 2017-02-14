@@ -37,7 +37,7 @@ namespace Rezolver.Compilation
 		/// If not <c>null</c> then this overrides the <see cref="ITarget.ScopeBehaviour"/> of the <see cref="ITarget"/>
 		/// that's currently being compiled.
 		/// </summary>
-		ScopeActivationBehaviour? ScopeBehaviourOverride { get; }
+		ScopeBehaviour? ScopeBehaviourOverride { get; }
 
 		/// <summary>
 		/// Any <see cref="ICompiledTarget"/> built for a <see cref="ITarget"/> with this context should target this type.  
@@ -62,7 +62,7 @@ namespace Rezolver.Compilation
 		/// <param name="scopeBehaviourOverride">Override the <see cref="ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
 		/// This is never inherited automatically from one context to another.</param>
 		/// <returns>A new <see cref="ICompileContext" />.</returns>
-		ICompileContext NewContext(Type targetType = null, ScopeActivationBehaviour? scopeBehaviourOverride = null);
+		ICompileContext NewContext(Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null);
 
 		/// <summary>
 		/// Pops the compile stack, returning the entry that was popped.
@@ -70,15 +70,16 @@ namespace Rezolver.Compilation
 		CompileStackEntry PopCompileStack();
 
 		/// <summary>
-		/// Pushes the passed target on to the compile stack if it's not already on it for the same <see cref="TargetType"/>
-		/// 
+		/// Pushes the passed target on to the compile stack if it's not already on it for the same <see cref="TargetType" />
 		/// Compilers should consult the return value and abort compilation if it's <c>true</c> - since that implies a cyclic
 		/// dependency graph.
 		/// </summary>
-		/// <remarks>Targets can appear on the compilation stack more than once for different types, since the <see cref="ICompiledTarget"/>
-		/// produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a 
-		/// cyclic dependency graph, then the <see cref="PushCompileStack(ITarget)"/> method will detect it.</remarks>
-		bool PushCompileStack(ITarget toCompile);
+		/// <param name="toCompile">To compile.</param>
+		/// <param name="targetType">The type for which the target is being compiled, if different from <see cref="ITarget.DeclaredType"/></param>
+		/// <remarks>Targets can appear on the compilation stack more than once for different types, since the <see cref="ICompiledTarget" />
+		/// produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a
+		/// cyclic dependency graph, then this method will detect that.</remarks>
+		bool PushCompileStack(ITarget toCompile, Type targetType = null);
 	}
 }
 

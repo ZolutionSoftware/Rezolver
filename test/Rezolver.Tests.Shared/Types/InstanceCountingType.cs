@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal interface ITestSession : IDisposable
+	public interface ITestSession : IDisposable
 	{
 		int InitialInstanceCount { get; }
 	}
 
-	internal interface IInstanceCountingType
+	public interface IInstanceCountingType
 	{
 		int ThisInstanceID { get; }
 	}
@@ -24,7 +24,7 @@ namespace Rezolver.Tests.Types
 	/// Deriving type should always be sealed.
 	/// </summary>
 	/// <typeparam name="TDerived"></typeparam>
-	internal class InstanceCountingTypeBase<TDerived> : IInstanceCountingType
+	public class InstanceCountingTypeBase<TDerived> : IInstanceCountingType
 	{
 		private class TestSession : ITestSession
 		{

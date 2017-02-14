@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-  internal interface IHandler<T>
+  public interface IHandler<T>
   {
     string Handle(T t);
   }

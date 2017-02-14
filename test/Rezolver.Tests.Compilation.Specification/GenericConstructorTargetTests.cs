@@ -111,6 +111,28 @@ namespace Rezolver.Tests.Compilation.Specification
 			Assert.Equal(25, result.Value.Value);
 		}
 
+		[Fact]
+		public void GenericCtorTarget_ShouldAlloweRecursionForDifferentGenericTypes()
+		{
+			//this test verifies that generic targets can be compiled recursively so long
+			//as the target types for those targets is different.
+
+			var targets = CreateTargetContainer();
+
+			targets.RegisterType(typeof(GenericWrapper<>));
+			targets.RegisterType<NeedsWrappedRoot>();
+			targets.RegisterType<Root>();
+
+			var container = CreateContainer(targets);
+
+			var result = container.Resolve<GenericWrapper<NeedsWrappedRoot>>();
+
+			Assert.NotNull(result);
+			Assert.NotNull(result.Wrapped);
+			Assert.NotNull(result.Wrapped.WrappedRoot);
+			Assert.NotNull(result.Wrapped.WrappedRoot.Wrapped);
+		}
+
 		//some of the more exotic scenarios (multiple type parameters, resolving by bases/interfaces
 		//potentially with reversed/munged type parameter mappings etc) are ignored now that we've 
 		//tested most single-parameter scenarios and everything has worked.

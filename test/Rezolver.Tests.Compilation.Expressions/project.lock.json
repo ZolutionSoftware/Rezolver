@@ -2687,23 +2687,6 @@
           "netstandard1.1/Rezolver.Shared.dll": {}
         }
       },
-      "Rezolver.Tests/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v1.1",
-        "dependencies": {
-          "Microsoft.NETCore.App": "1.1.0",
-          "Rezolver.Configuration.Json": "1.1.0",
-          "Rezolver.Logging": "1.1.0",
-          "dotnet-test-xunit": "2.2.0-preview2-build1029",
-          "xunit": "2.2.0-beta4-build3444"
-        },
-        "compile": {
-          "netcoreapp1.1/Rezolver.Tests.dll": {}
-        },
-        "runtime": {
-          "netcoreapp1.1/Rezolver.Tests.dll": {}
-        }
-      },
       "Rezolver.Tests.Compilation.Specification/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.1",
@@ -2718,19 +2701,6 @@
         },
         "runtime": {
           "netcoreapp1.1/Rezolver.Tests.Compilation.Specification.dll": {}
-        }
-      },
-      "Rezolver.Tests.Shared/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.1",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0"
-        },
-        "compile": {
-          "netstandard1.1/Rezolver.Tests.Shared.dll": {}
-        },
-        "runtime": {
-          "netstandard1.1/Rezolver.Tests.Shared.dll": {}
         }
       }
     },
@@ -3203,25 +3173,6 @@
           "net451/Rezolver.Shared.dll": {}
         }
       },
-      "Rezolver.Tests/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Rezolver.Configuration.Json": "1.1.0",
-          "Rezolver.Logging": "1.1.0",
-          "dotnet-test-xunit": "2.2.0-preview2-build1029",
-          "xunit": "2.2.0-beta4-build3444"
-        },
-        "frameworkAssemblies": [
-          "System.Linq.Expressions"
-        ],
-        "compile": {
-          "net451/Rezolver.Tests.dll": {}
-        },
-        "runtime": {
-          "net451/Rezolver.Tests.dll": {}
-        }
-      },
       "Rezolver.Tests.Compilation.Specification/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -3238,24 +3189,6 @@
         },
         "runtime": {
           "net451/Rezolver.Tests.Compilation.Specification.dll": {}
-        }
-      },
-      "Rezolver.Tests.Shared/1.0.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "frameworkAssemblies": [
-          "System.Linq",
-          "System.Linq.Expressions",
-          "System.Reflection",
-          "System.Reflection.Extensions",
-          "System.Reflection.Primitives",
-          "System.Runtime"
-        ],
-        "compile": {
-          "net451/Rezolver.Tests.Shared.dll": {}
-        },
-        "runtime": {
-          "net451/Rezolver.Tests.Shared.dll": {}
         }
       }
     }
@@ -8769,20 +8702,10 @@
       "path": "../../src/Rezolver.Shared/project.json",
       "msbuildProject": "../../src/Rezolver.Shared/Rezolver.Shared.xproj"
     },
-    "Rezolver.Tests/1.0.0": {
-      "type": "project",
-      "path": "../Rezolver.Tests/project.json",
-      "msbuildProject": "../Rezolver.Tests/Rezolver.Tests.xproj"
-    },
     "Rezolver.Tests.Compilation.Specification/1.0.0": {
       "type": "project",
       "path": "../Rezolver.Tests.Compilation.Specification/project.json",
       "msbuildProject": "../Rezolver.Tests.Compilation.Specification/Rezolver.Tests.Compilation.Specification.xproj"
-    },
-    "Rezolver.Tests.Shared/1.0.0": {
-      "type": "project",
-      "path": "../Rezolver.Tests.Shared/project.json",
-      "msbuildProject": "../Rezolver.Tests.Shared/Rezolver.Tests.Shared.xproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -8791,9 +8714,7 @@
       "Rezolver.Configuration.Json >= 1.1.0-*",
       "Rezolver.Logging >= 1.1.0-*",
       "Rezolver.Shared >= 1.1.0-*",
-      "Rezolver.Tests >= 1.0.0-*",
       "Rezolver.Tests.Compilation.Specification >= 1.0.0-*",
-      "Rezolver.Tests.Shared >= 1.0.0-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta4-build3444"
     ],

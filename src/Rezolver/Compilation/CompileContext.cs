@@ -26,7 +26,7 @@ namespace Rezolver.Compilation
 	/// <seealso cref="Rezolver.Compilation.ICompileContext" />
 	/// <seealso cref="Rezolver.ITargetContainer" />
 	/// <remarks>Note that you can only create an instance of this either through inheritance, via the explicit implementation
-	/// of <see cref="ICompileContext.NewContext(Type, ScopeActivationBehaviour?)"/>, or (preferably) via an <see cref="ICompileContextProvider" /> 
+	/// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?)"/>, or (preferably) via an <see cref="ICompileContextProvider" /> 
 	/// resolved from an <see cref="IContainer" /> or <see cref="ITargetContainer" /> directly from a registered target.
 	/// </remarks>
 	public class CompileContext : ICompileContext, ITargetContainer
@@ -58,7 +58,7 @@ namespace Rezolver.Compilation
 		/// <summary>
 		/// Implementation of <see cref="ICompileContext.ScopeBehaviourOverride"/>
 		/// </summary>
-		public ScopeActivationBehaviour? ScopeBehaviourOverride
+		public ScopeBehaviour? ScopeBehaviourOverride
 		{
 			get;
 		}
@@ -96,7 +96,7 @@ namespace Rezolver.Compilation
 		/// <param name="targetType">The target type that is expected to be compiled, or null if the <see cref="TargetType"/>
 		/// is to be inherited from the <paramref name="parentContext"/>.</param>
 		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with this context.</param>
-		protected CompileContext(ICompileContext parentContext, Type targetType = null, ScopeActivationBehaviour? scopeBehaviourOverride = null)
+		protected CompileContext(ICompileContext parentContext, Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
 		{
 			parentContext.MustNotBeNull(nameof(parentContext));
 			ParentContext = parentContext;
@@ -134,25 +134,25 @@ namespace Rezolver.Compilation
 
 		/// <summary>
 		/// Creates a new child context from this one, except the <see cref="TargetType" /> and
-		/// <see cref="SuppressScopeTracking" /> properties can be overriden if required, the rest of the state is inherited from
+		/// <see cref="ScopeBehaviour" /> properties can be overriden if required, with the rest of the state inherited from
 		/// this context.
 		/// </summary>
 		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this context's <see cref="TargetType" />.</param>
 		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with the new context.</param>
-		ICompileContext ICompileContext.NewContext(Type targetType, ScopeActivationBehaviour? scopeBehaviourOverride)
+		ICompileContext ICompileContext.NewContext(Type targetType, ScopeBehaviour? scopeBehaviourOverride)
 		{
 			return NewContext(targetType, scopeBehaviourOverride);
 		}
 
 		/// <summary>
-		/// Used by the explicit implementation of <see cref="ICompileContext.NewContext(Type, ScopeActivationBehaviour?)"/>.
+		/// Used by the explicit implementation of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?)"/>.
 		/// 
 		/// Override this in your derived class to create the correct implementation of <see cref="ICompileContext"/>.
 		/// </summary>
 		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this 
 		/// context's <see cref="TargetType" />.</param>
 		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with the new context.</param>
-		protected virtual ICompileContext NewContext(Type targetType = null, ScopeActivationBehaviour? scopeBehaviourOverride = null)
+		protected virtual ICompileContext NewContext(Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
 		{
 			return new CompileContext(this, targetType, scopeBehaviourOverride);
 		}
@@ -161,16 +161,19 @@ namespace Rezolver.Compilation
 		/// Adds the target to the compilation stack if it doesn't already exist.
 		/// </summary>
 		/// <param name="toCompile">The target to be pushed</param>
-		/// <returns>A boolean indicating whether the target was added.  Will be false if the target is already on the stack.</returns>
-		/// <remarks>If <see cref="ParentContext"/> is not null, then the call is redirected to that context, so that 
-		/// the compilation stack is always shared between all contexts spawned from the same root.</remarks>
-		bool ICompileContext.PushCompileStack(ITarget toCompile)
+		/// <param name="targetType">The type for which the target is being compiled, if different from <see cref="ITarget.DeclaredType" /></param>
+		/// <remarks>Targets can appear on the compilation stack more than once for different types, since the <see cref="ICompiledTarget" />
+		/// produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a
+		/// cyclic dependency graph, then this method will detect that.</remarks>
+		bool ICompileContext.PushCompileStack(ITarget toCompile, Type targetType)
 		{
+			//when referring this call up to the parent, we either use the targetType passed, or default to our target type
 			if (ParentContext != null)
-				return ParentContext.PushCompileStack(toCompile);
+				return ParentContext.PushCompileStack(toCompile, targetType ?? TargetType);
 			
 			toCompile.MustNotBeNull("toCompile");
-			CompileStackEntry entry = new CompileStackEntry(toCompile, this.TargetType ?? toCompile.DeclaredType);
+			//whereas here we default to the target's declared type if no targetType is passed.
+			CompileStackEntry entry = new CompileStackEntry(toCompile, targetType ?? toCompile.DeclaredType);
 			if (!_compileStack.Contains(entry))
 			{
 				_compileStack.Push(entry);

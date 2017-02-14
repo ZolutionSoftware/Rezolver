@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class RequiresIGenericInt
+    public class RequiresIGenericInt
     {
 		/// <summary>
 		/// Gets the generic value.

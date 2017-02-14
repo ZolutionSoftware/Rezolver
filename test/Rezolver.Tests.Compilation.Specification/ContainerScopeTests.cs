@@ -16,8 +16,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			var container = CreateContainerForSingleTarget(ConstructorTarget.Auto<Disposable>());
 
 			Disposable result;
-			//will change the API to use a member
-			using(var scope = new ContainerScope(container))
+			using(var scope = container.CreateScope())
 			{
 				result = scope.Resolve<Disposable>();
 			}
@@ -36,7 +35,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			IEnumerable<Disposable> results;
 
-			using (var scope = new ContainerScope(container))
+			using (var scope = container.CreateScope())
 			{
 				results = scope.Resolve<IEnumerable<Disposable>>();
 				Assert.NotNull(results);
@@ -56,13 +55,76 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			Disposable expected;
 
-			using (var scope = new ContainerScope(container))
+			using (var scope = container.CreateScope())
 			{
 				expected = scope.Resolve<Disposable>();
 				var second = scope.Resolve<Disposable>();
 				Assert.Same(expected, second);
 			}
 			Assert.True(expected.Disposed);
+		}
+
+		[Fact]
+		public void ContainerScope_ShouldDisposeDependencyDisposables()
+		{
+			var targets = CreateTargetContainer();
+			targets.RegisterType<RequiresThreeDisposables>();
+			targets.RegisterAll(ConstructorTarget.Auto<Disposable>(),
+				ConstructorTarget.Auto<Disposable2>(),
+				ConstructorTarget.Auto<Disposable3>());
+
+			RequiresThreeDisposables result = null;
+			using (var container = CreateScopedContainer(targets))
+			{
+				result = container.Resolve<RequiresThreeDisposables>();
+			}
+
+			Assert.True(result.First.Disposed);
+			Assert.True(result.Second.Disposed);
+			Assert.True(result.Third.Disposed);
+		}
+
+		[Fact]
+		public void ContainerScope_ShouldDisposeDependenciesInChildScope()
+		{
+			var targets = CreateTargetContainer();
+			targets.RegisterType<RequiresThreeDisposables>();
+			targets.RegisterAll(ConstructorTarget.Auto<Disposable>(),
+				ConstructorTarget.Auto<Disposable2>(),
+				ConstructorTarget.Auto<Disposable3>());
+
+			RequiresThreeDisposables result = null;
+			using (var container = CreateScopedContainer(targets))
+			{
+				using (var childScope = container.CreateScope())
+				{
+					result = childScope.Resolve<RequiresThreeDisposables>();
+				}
+
+				Assert.True(result.First.Disposed);
+				Assert.True(result.Second.Disposed);
+				Assert.True(result.Third.Disposed);
+			}
+		}
+
+		[Fact]
+		public void ContainerScope_SingletonShouldOnlyBeDisposedByRoot()
+		{
+			var targets = CreateTargetContainer();
+			targets.RegisterSingleton<Disposable>();
+
+			Disposable disposable = null;
+
+			using (var container = CreateScopedContainer(targets))
+			{
+				using(var childScope = container.CreateScope())
+				{
+					disposable = childScope.Resolve<Disposable>();
+				}
+				Assert.False(disposable.Disposed);
+			}
+
+			Assert.True(disposable.Disposed);
 		}
     }
 }

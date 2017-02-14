@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    internal class Disposable2 : Disposable
+    public class Disposable2 : Disposable
     {
     }
 }

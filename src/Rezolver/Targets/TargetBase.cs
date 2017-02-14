@@ -72,12 +72,12 @@ namespace Rezolver.Targets
 		/// Gets the scoping behaviour for instances that will ultimately be produced by this target.
 		/// </summary>
 		/// <value>The scope behaviour.</value>
-		/// <remarks>Base implementation always returns <see cref="ScopeActivationBehaviour.Implicit"/>.</remarks>
-		public virtual ScopeActivationBehaviour ScopeBehaviour
+		/// <remarks>Base implementation always returns <see cref="ScopeBehaviour.Implicit"/>.</remarks>
+		public virtual ScopeBehaviour ScopeBehaviour
 		{
 			get
 			{
-				return ScopeActivationBehaviour.Implicit;
+				return ScopeBehaviour.Implicit;
 			}
 		}
 

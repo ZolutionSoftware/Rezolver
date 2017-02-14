@@ -13,27 +13,32 @@ using Rezolver.Compilation;
 namespace Rezolver
 {
 	/// <summary>
-	/// Extends the <see cref="Container"/> to implement lifetime scoping through a private <see cref="IContainerScope"/>.
+	/// Extends the <see cref="Container"/> to implement lifetime implicit scoping through the
+	/// <see cref="Scope"/> that's created along with it.
 	/// 
+	/// Implementation of the <see cref="IScopedContainer"/> interface.
+	/// </summary>
+	/// <remarks>
 	/// Both the <see cref="Resolve(ResolveContext)"/> and <see cref="TryResolve(ResolveContext, out object)"/> methods
 	/// will inject the <see cref="Scope"/> into <see cref="ResolveContext"/> that's passed if the context doesn't already
 	/// have a scope.
 	/// 
 	/// If you want your root container to act as a lifetime scope, then you should use this
 	/// class instead of using <see cref="Container"/>.
-	/// </summary>
-	/// <remarks>Note that this class does NOT implement the <see cref="IContainerScope"/> interface because
+	/// 
+	/// Note that this class does NOT implement the <see cref="IContainerScope"/> interface because
 	/// the two interfaces are not actually compatible with each other, thanks to identical sets of extension methods.
 	/// </remarks>
-	public class ScopedContainer : Container, IDisposable
+	public class ScopedContainer : Container, IScopedContainer, IDisposable
 	{
 		private readonly IContainerScope _scope;
 
 		/// <summary>
-		/// Gets the underlying scope used by this container for all <see cref="IContainer.Resolve(ResolveContext)"/> calls
-		/// which do not already have a scope defined.
+		/// Gets the scope for this scoped container.
+		/// 
+		/// Note that this is used automatically by the container for <see cref="IContainer.Resolve(ResolveContext)"/>
+		/// operations where the <see cref="ResolveContext.Scope"/> property is not already set.
 		/// </summary>
-		/// <value>The scope.</value>
 		public IContainerScope Scope
 		{
 			get
@@ -56,6 +61,10 @@ namespace Rezolver
 		#region IDisposable Support
 		private bool disposedValue = false; // To detect redundant calls
 
+		/// <summary>
+		/// Releases unmanaged and - optionally - managed resources.
+		/// </summary>
+		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
 		protected virtual void Dispose(bool disposing)
 		{
 			if (!disposedValue)
@@ -69,7 +78,9 @@ namespace Rezolver
 			}
 		}
 
-		// This code added to correctly implement the disposable pattern.
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
 		public void Dispose()
 		{
 			// Do not change this code. Put cleanup code in Dispose(bool disposing) above.
@@ -77,21 +88,38 @@ namespace Rezolver
 			// TODO: uncomment the following line if the finalizer is overridden above.
 			// GC.SuppressFinalize(this);
 		}
+
+		/// <summary>
+		/// Overrides the base method to pass the <see cref="Scope"/> as the new scope's parent.
+		/// </summary>
 		public override IContainerScope CreateScope()
 		{
 			return new ContainerScope(Scope);
 		}
 		#endregion
+		/// <summary>
+		/// Overrides the base implementation to ensure that the context has the <see cref="Scope"/> assigned.
+		/// </summary>
+		/// <param name="context">The resolve context containing the requested type.</param>
 		public override bool CanResolve(ResolveContext context)
 		{
 			return base.CanResolve(context.Scope == null ? context.CreateNew(Scope) : context);
 		}
 
+		/// <summary>
+		/// Overrides the base implementation to ensure that the context has the <see cref="Scope"/> assigned.
+		/// </summary>
+		/// <param name="context">The context containing the type that's requested, any active scope and so on.</param>
+		/// <param name="result">Receives a reference to the object that was resolved, if successful, or <c>null</c> if not.</param>
 		public override bool TryResolve(ResolveContext context, out object result)
 		{
 			return base.TryResolve(context.Scope == null ? context.CreateNew(Scope) : context, out result);
 		}
 
+		/// <summary>
+		/// Overrides the base implementation to ensure that the context has the <see cref="Scope"/> assigned.
+		/// </summary>
+		/// <param name="context">The context containing the type that's requested, any active scope and so on.</param>
 		public override object Resolve(ResolveContext context)
 		{
 			return base.Resolve(context.Scope == null ? context.CreateNew(Scope) : context);

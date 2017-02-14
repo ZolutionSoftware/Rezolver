@@ -82,7 +82,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var myDisposable = new MyDisposable();
 			var targets = CreateTargetContainer();
-			targets.RegisterObject(myDisposable, scopeBehaviour: ScopeActivationBehaviour.Explicit);
+			targets.RegisterObject(myDisposable, scopeBehaviour: ScopeBehaviour.Explicit);
 			var container = CreateContainer(targets);
 			using (var scope = container.CreateScope())
 			{
