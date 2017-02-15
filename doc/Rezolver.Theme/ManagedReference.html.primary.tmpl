@@ -18,17 +18,16 @@
         {{/_disableBreadcrumb}}
       </header>
       {{#_enableSearch}}
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         {{>partials/searchResults}}
       </div>
       {{/_enableSearch}}
+      <div role="main" class="container body-content hide-when-search">
       {{^_disableToc}}
-        <div role="main" class="container-fluid body-content hide-when-search">
         {{>partials/toc}}
         <div class="article row grid-right">
       {{/_disableToc}}
       {{#_disableToc}}
-        <div role="main" class="container body-content hide-when-search">
         <div class="article row grid">
       {{/_disableToc}}
           {{#_disableAffix}}
@@ -44,6 +43,10 @@
             {{#isClass}}
               {{>partials/class}}
             {{/isClass}}
+            {{#isEnum}}
+              {{>partials/enum}}
+            {{/isEnum}}
+            {{>partials/customMREFContent}}
             </article>
           </div>
           {{^_disableAffix}}

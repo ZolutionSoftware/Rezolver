@@ -3,16 +3,16 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface ITarget
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface ITarget
    </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface ITarget
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface ITarget
    ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
@@ -31,9 +31,11 @@
   	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../../styles/site.css">
-  	<meta property="docfx:navrel" content="../toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="../">
+  
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -48,8 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +81,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container-fluid body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -91,7 +94,6 @@
             <article class="content wrap" id="_content">
               
               
-              
               <h1 id="Rezolver_ITarget" data-uid="Rezolver.ITarget">Interface ITarget
               </h1>
               <div class="markdown level0 summary"><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>,
@@ -100,11 +102,11 @@ when the standard implementations of <a class="xref" href="Rezolver.IContainer.h
               <div class="markdown level0 conceptual"></div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_ITarget_syntax" class="hsyntax">Syntax</h5>
+              <h5 id="Rezolver_ITarget_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface ITarget</code></pre>
               </div>
-              <h5 id="Rezolver_ITarget_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <h5 id="Rezolver_ITarget_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>As mentioned in the summary, the role of this interface is largely determined by the framework&#39;s own standard implementations of the </p>
 <p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> interface - all of which use an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> to store service registrations which, when</p>
 <p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is called, is queried to obtain one or more targets which will have been registered
@@ -116,28 +118,29 @@ compiled target that is built from it.</p>
 <p>The interface doesn&#39;t describe the type of target in hand - it only provides the core data required to query the static type of
 the target (the type of object that the target will produce) and to determine compatibility with a request for a particular type.</p>
 <p>The framework&#39;s many implementations of this interface - e.g. <see cref="!:ConstructorTarget"></see>, <see cref="!:SingletonTarget"></see>,</p>
-<p><see cref="!:RezolvedTarget"></see> plus many others - then define the behaviour and any additional data required in order for a compiler
+<p><see cref="!:ResolvedTarget"></see> plus many others - then define the behaviour and any additional data required in order for a compiler
 to produce an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> which matches the target&#39;s intent.  E.g, the <see cref="!:ConstructorTarget"></see>, which
 represents creating a new instance via a constructor, provides all the necessary information to bind to the correct constructor
 (including parameter bindings etc) - and the compiler&#39;s job is to translate that into an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> which 
 executes that constructor, returning the result.</p>
 </div>
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_ITarget_DeclaredType" data-uid="Rezolver.ITarget.DeclaredType">DeclaredType</h4>
+              <h4 id="Rezolver_ITarget_DeclaredType" data-uid="Rezolver.ITarget.DeclaredType">DeclaredType</h4>
               <div class="markdown level1 summary"><p>Gets the static type of the object produced from this target.  For example, if this target represents executing
 a constructor on a type, then this property should equal the type to which that constructor belongs.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">Type DeclaredType { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -152,21 +155,51 @@ a constructor on a type, then this property should equal the type to which that 
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
+              <h4 id="Rezolver_ITarget_ScopeBehaviour" data-uid="Rezolver.ITarget.ScopeBehaviour">ScopeBehaviour</h4>
+              <div class="markdown level1 summary"><p>Gets the scoping behaviour for instances that will ultimately be produced by this target.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">ScopeBehaviour ScopeBehaviour { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour">ScopeBehaviour</a></td>
+                    <td><p>The scope behaviour.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITarget_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              <h4 class="hmember" id="Rezolver_ITarget_UseFallback" data-uid="Rezolver.ITarget.UseFallback">UseFallback</h4>
+              <h4 id="Rezolver_ITarget_UseFallback" data-uid="Rezolver.ITarget.UseFallback">UseFallback</h4>
               <div class="markdown level1 summary"><p>If <code>true</code>, then the consumer should consider falling back to a more suitable target if available, as
 the object produced from this target is most likely a default of some kind - e.g. empty enumerable, default
 parameter value.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">bool UseFallback { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -181,41 +214,89 @@ parameter value.</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITarget_SelectScope_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.SelectScope(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_ITarget_SupportsType_System_Type_" data-uid="Rezolver.ITarget.SupportsType(System.Type)">SupportsType(Type)</h4>
-              <div class="markdown level1 summary"><p>Returns a boolean indicating whether the target is able to produce an instance of, or an instance
-that is compatible with, the passed <em>type</em>.</p>
+              <h4 id="Rezolver_ITarget_SelectScope_Rezolver_ResolveContext_" data-uid="Rezolver.ITarget.SelectScope(Rezolver.ResolveContext)">SelectScope(ResolveContext)</h4>
+              <div class="markdown level1 summary"><p>Selects the scope in which instances produced from this target should be tracked.</p>
+<p>This should be executed only during a resolve operation when a scope is detected.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">bool SupportsType(Type type)</code></pre>
+                <pre><code class="lang-csharp hljs">IContainerScope SelectScope(ResolveContext context)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
+                    <th>Type</th>
                     <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
+                    <td><span class="parametername">context</span></td>
+                    <td><p>The context passed to a container&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>
+method.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
                     <th>Type</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>type</em></td>
+                    <td><a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope">IContainerScope</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITarget_SupportsType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.SupportsType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              
+              <h4 id="Rezolver_ITarget_SupportsType_System_Type_" data-uid="Rezolver.ITarget.SupportsType(System.Type)">SupportsType(Type)</h4>
+              <div class="markdown level1 summary"><p>Returns a boolean indicating whether the target is able to produce an instance of, or an instance
+that is compatible with, the passed <em>type</em>.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">bool SupportsType(Type type)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">type</span></td>
                     <td><p>The type.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -231,7 +312,7 @@ that is compatible with, the passed <em>type</em>.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ITarget_SupportsType_System_Type__remarks">Remarks</h5>
+              <h5 id="Rezolver_ITarget_SupportsType_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>It is strongly suggested that you use this method to check whether the target can construct
 an instance of a given type rather than performing any type checking yourself on the </p>
 <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>, because an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> might be able to support a much wider
@@ -245,15 +326,27 @@ generic type which is compatible with the given <em>type</em>.
 Implementations of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a> should always consult this function in their
 implementation of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a>
 to determine if the target is compatible with the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_TargetType">TargetType</a> of the
-<a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext">CompileContext</a></div>
-              </div><!-- .classchild -->
-            </article>
+<a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext">CompileContext</a>
+
+<p>Please note that any <em>type</em> that&#39;s a generic type definition will always yield a false result,
+because it&#39;s impossible to build an instance of an open generic type.</p>
+</div>
+                        </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITarget.md&amp;value=---%0Auid%3A%20Rezolver.ITarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -275,6 +368,5 @@ to determine if the target is compatible with the <a class="xref" href="Rezolver
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

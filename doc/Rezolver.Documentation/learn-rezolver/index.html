@@ -3,14 +3,14 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Rezolver </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Rezolver ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../apple-touch-icon-57x57.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Rezolver </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Rezolver ">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../apple-touch-icon-76x76.png">
@@ -29,9 +29,11 @@
   	<meta name="msapplication-TileImage" content="../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../styles/site.css">
-  	<meta property="docfx:navrel" content="toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="">
+  
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -46,8 +48,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="index.html">
-                <img id="logo" src="../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -68,7 +71,7 @@
           </div>
         </div>
       </header>
-      <div class="container-fluid body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -76,21 +79,41 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <a href="https://github.com/LordZoltan/Rezolver/blob/dev/doc/Rezolver.Documentation/index.md/#L1" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
               <h1 id="rezolver">Rezolver</h1>
               
 <p>Welcome to the home of Rezolver - here you&#39;ll find guides, walkthroughs, deep-dives and 
 reference for all of the APIs and functionality in the Rezolver library.</p>
 <h2 id="what-is-rezolver">What is Rezolver?</h2>
-<p>Rezolver is (yet another :)) open source IOC container.  It supports many of the features supported by most
-other popular IOC containers out there, integrates into the new .Net Core 1.0 framework (supporting the
-NetStandard1.1 profile), and supports some unique functionality too.</p>
-<p>It&#39;s very fast, extensible and reliable, and should slot nicely into any project in which you already have
-another IOC container.</p>
+<p>Rezolver is an <a href="https://github.com/ZolutionSoftware/Rezolver">open source</a> IOC container that, out of the box, supports all the standard 
+features supported by most =other popular IOC containers out there.  It&#39;s also highly extensible - with practically the entire stack open
+to extension immediately after referencing the core library.</p>
+<p>It&#39;s been built specifically with the .Net Core framework in mind, supporting the NetStandard1.1 profile for (almost!) maximum portability</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>&#39;Intelligent&#39; constructor discovery based on registered services</li>
+<li>Open generics (with specific closed generics taking precedence)</li>
+<li>Decorators (non-generic and generic)</li>
+<li>Enumerables (empty enumerables returned by default)</li>
+<li>Child containers (overriding registrations in one container with those of another)</li>
+<li>Lifetime scoping (incl. child lifetimes)</li>
+<li>Delegates and Expressions as factories, with argument injection</li>
+<li>Singletons</li>
+<li>Pre-built objects</li>
+<li>Scoped objects (i.e. &#39;singleton per scope&#39;)</li>
+<li>Extensible compiler framework<ul>
+<li>Expression tree compiler used by default</li>
+</ul>
+</li>
+<li>Integration with Microsoft.Extensions.DependencyInjection via nuget packages</li>
+<li>Extensible configuration framework <em>(still in development)</em><ul>
+<li>Json configuration <em>(still in development)</em></li>
+</ul>
+</li>
+</ul>
 <h2 id="quick-links">Quick Links</h2>
 <ul>
 <li><a href="rezolver-usage/">Getting Started</a>
@@ -102,16 +125,26 @@ another IOC container.</p>
 <p>Once everything is built and re-tested, all the documentation will be added ASAP to provide in-depth guides and tutorials
 which are then guaranteed to stand the test of time!</p>
 <p>So, keep coming back!  We&#39;ll get there :)</p>
-<p>If you&#39;re the kind of person who likes to learn from seeing the code - then check out the <a href="https://github.com/LordZoltan/Rezolver">Rezolver repo on Github</a>,
+<h2 id="on-github">On Github</h2>
+<p>If you&#39;re the kind of person who likes to learn from seeing the code - then check out the <a href="https://github.com/ZolutionSoftware/Rezolver">Rezolver repo on Github</a>,
 there are some example applications on there, and you can look at the unit tests to get an idea of how to create and configure containers.</p>
 
             </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -133,6 +166,5 @@ there are some example applications on there, and you can look at the unit tests
     <script type="text/javascript" src="styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="styles/docfx.js"></script>
     <script type="text/javascript" src="styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

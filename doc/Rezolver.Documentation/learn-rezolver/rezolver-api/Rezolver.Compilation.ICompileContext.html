@@ -3,16 +3,16 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface ICompileContext
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface ICompileContext
    </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface ICompileContext
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface ICompileContext
    ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
@@ -31,9 +31,11 @@
   	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../../styles/site.css">
-  	<meta property="docfx:navrel" content="../toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="../">
+  
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -48,8 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +81,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container-fluid body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -91,7 +94,6 @@
             <article class="content wrap" id="_content">
               
               
-              
               <h1 id="Rezolver_Compilation_ICompileContext" data-uid="Rezolver.Compilation.ICompileContext">Interface ICompileContext
               </h1>
               <div class="markdown level0 summary"><p>Tracks state and provides services during the compilation phase in which <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> targets
@@ -101,45 +103,46 @@ are compiled into <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_I
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">ITargetContainer.Register(ITarget, Type)</a>
+                  <xref uid="Rezolver.ITargetContainer.Register(Rezolver.ITarget,System.Type)" text="ITargetContainer.Register(ITarget, Type)" alt="Rezolver.ITargetContainer.Register(Rezolver.ITarget, System.Type)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">ITargetContainer.Fetch(Type)</a>
+                  <xref uid="Rezolver.ITargetContainer.Fetch(System.Type)" text="ITargetContainer.Fetch(Type)" alt="Rezolver.ITargetContainer.Fetch(System.Type)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">ITargetContainer.FetchAll(Type)</a>
+                  <xref uid="Rezolver.ITargetContainer.FetchAll(System.Type)" text="ITargetContainer.FetchAll(Type)" alt="Rezolver.ITargetContainer.FetchAll(System.Type)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a>
+                  <xref uid="Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer,System.Type)" text="ITargetContainer.CombineWith(ITargetContainer, Type)" alt="Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer, System.Type)"></xref>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver.Compilation</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_Compilation_ICompileContext_syntax" class="hsyntax">Syntax</h5>
+              <h5 id="Rezolver_Compilation_ICompileContext_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface ICompileContext : ITargetContainer</code></pre>
               </div>
-              <h5 id="Rezolver_Compilation_ICompileContext_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <h5 id="Rezolver_Compilation_ICompileContext_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Implementations must also implement the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> so the compile context can be used for
 dependency lookups during compilation time.  Indeed, if you are developing your own compilation component (possibly
 for a custom <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementation) and need to resolve any dependencies from an <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>
 during compilation, it should be done through the context&#39;s implementation of ITargetContainer.</p>
 </div>
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_CompileStack.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.CompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_CompileStack" data-uid="Rezolver.Compilation.ICompileContext.CompileStack">CompileStack</h4>
+              <h4 id="Rezolver_Compilation_ICompileContext_CompileStack" data-uid="Rezolver.Compilation.ICompileContext.CompileStack">CompileStack</h4>
               <div class="markdown level1 summary"><p>Gets the stack entries for all the targets that are being compiled.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IEnumerable&lt;CompileStackEntry&gt; CompileStack { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -155,21 +158,22 @@ during compilation, it should be done through the context&#39;s implementation o
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_Container.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.Container%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_Container" data-uid="Rezolver.Compilation.ICompileContext.Container">Container</h4>
+              <h4 id="Rezolver_Compilation_ICompileContext_Container" data-uid="Rezolver.Compilation.ICompileContext.Container">Container</h4>
               <div class="markdown level1 summary"><p>The container that is considered the current compilation &#39;scope&#39; - i.e. the container for which the compilation
 is being performed and, usually, the one on which the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> method was 
 originally called which triggered the compilation call.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IContainer Container { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -184,19 +188,20 @@ originally called which triggered the compilation call.</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_ParentContext.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.ParentContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_ParentContext" data-uid="Rezolver.Compilation.ICompileContext.ParentContext">ParentContext</h4>
+              <h4 id="Rezolver_Compilation_ICompileContext_ParentContext" data-uid="Rezolver.Compilation.ICompileContext.ParentContext">ParentContext</h4>
               <div class="markdown level1 summary"><p>Gets the parent context from which this context was created, if applicable.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ICompileContext ParentContext { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -212,20 +217,21 @@ originally called which triggered the compilation call.</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_ScopeBehaviourOverride.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.ScopeBehaviourOverride%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_SuppressScopeTracking" data-uid="Rezolver.Compilation.ICompileContext.SuppressScopeTracking">SuppressScopeTracking</h4>
-              <div class="markdown level1 summary"><p>If true, then any target that is compiling within this context should not generate any runtime code to fetch the
-object from, or track the object in, the current <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a>.</p>
+              <h4 id="Rezolver_Compilation_ICompileContext_ScopeBehaviourOverride" data-uid="Rezolver.Compilation.ICompileContext.ScopeBehaviourOverride">ScopeBehaviourOverride</h4>
+              <div class="markdown level1 summary"><p>If not <code>null</code> then this overrides the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_ScopeBehaviour">ScopeBehaviour</a> of the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>
+that&#39;s currently being compiled.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">bool SuppressScopeTracking { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">ScopeBehaviour? ScopeBehaviourOverride { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -235,31 +241,25 @@ object from, or track the object in, the current <a class="xref" href="Rezolver.
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/b3h38hb0(v=vs.110).aspx">Nullable</a>&lt;<a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour">ScopeBehaviour</a>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_Compilation_ICompileContext_SuppressScopeTracking_remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is currently used, for example, by wrapper targets that generate their own
-scope tracking code (specifically, the <see cref="!:SingletonTarget"></see> and <see cref="!:ScopedTarget"></see>.</p>
-<p>It&#39;s therefore very important that any custom <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> implementations which intend to do their own
-scoping honour this flag in their implementation.
-The <see cref="!:TargetBase"></see> class does honour this flag.</p>
-</div>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_TargetType.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.TargetType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_TargetType" data-uid="Rezolver.Compilation.ICompileContext.TargetType">TargetType</h4>
+              <h4 id="Rezolver_Compilation_ICompileContext_TargetType" data-uid="Rezolver.Compilation.ICompileContext.TargetType">TargetType</h4>
               <div class="markdown level1 summary"><p>Any <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> built for a <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> with this context should target this type.<br>If null, then the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target being compiled should be used.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">Type TargetType { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -274,48 +274,50 @@ The <see cref="!:TargetBase"></see> class does honour this flag.</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.NewContext(System.Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_System_Boolean__" data-uid="Rezolver.Compilation.ICompileContext.NewContext(System.Type,System.Nullable{System.Boolean})">NewContext(Type, Nullable&lt;Boolean&gt;)</h4>
+              <h4 id="Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__" data-uid="Rezolver.Compilation.ICompileContext.NewContext(System.Type,System.Nullable{Rezolver.ScopeBehaviour})">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;)</h4>
               <div class="markdown level1 summary"><p>Creates a new child context from this one, except the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> and</p>
-<p><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_SuppressScopeTracking">SuppressScopeTracking</a> properties can be overriden if required, the rest of the state is inherited from
-this context.</p>
+<p><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_ScopeBehaviourOverride">ScopeBehaviourOverride</a> properties can be overriden if required.</p>
+<p>Implementations must make sure that the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_ScopeBehaviourOverride">ScopeBehaviourOverride</a> 
+is <em>never</em> inherited.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">ICompileContext NewContext(Type targetType = null, bool ? suppressScopeTracking = null)</code></pre>
+                <pre><code class="lang-csharp hljs">ICompileContext NewContext(Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>targetType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">targetType</span></td>
                     <td><p>Optional.  The type for which the target is to be compiled, if different from this context&#39;s <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a>.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>suppressScopeTracking</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/b3h38hb0(v=vs.110).aspx">Nullable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>&gt;</td>
-                    <td><p>The value passed here will be used for the new context&#39;s <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_SuppressScopeTracking">SuppressScopeTracking</a></p>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/b3h38hb0(v=vs.110).aspx">Nullable</a>&lt;<a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour">ScopeBehaviour</a>&gt;</td>
+                    <td><span class="parametername">scopeBehaviourOverride</span></td>
+                    <td><p>Override the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_ScopeBehaviourOverride">ScopeBehaviourOverride</a> to be used for the target that is compiled with the new context.
+This is never inherited automatically from one context to another.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -331,19 +333,20 @@ this context.</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_PopCompileStack.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.PopCompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_PopCompileStack" data-uid="Rezolver.Compilation.ICompileContext.PopCompileStack">PopCompileStack()</h4>
+              <h4 id="Rezolver_Compilation_ICompileContext_PopCompileStack" data-uid="Rezolver.Compilation.ICompileContext.PopCompileStack">PopCompileStack()</h4>
               <div class="markdown level1 summary"><p>Pops the compile stack, returning the entry that was popped.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">CompileStackEntry PopCompileStack()</code></pre>
               </div>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -358,38 +361,46 @@ this context.</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext.PushCompileStack(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_" data-uid="Rezolver.Compilation.ICompileContext.PushCompileStack(Rezolver.ITarget)">PushCompileStack(ITarget)</h4>
-              <div class="markdown level1 summary"><p>Pushes the passed target on to the compile stack if it&#39;s not already on it for the same <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a></p>
-<p>Compilers should consult the return value and abort compilation if it&#39;s <code>true</code> - since that implies a cyclic
+              <h4 id="Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Compilation.ICompileContext.PushCompileStack(Rezolver.ITarget,System.Type)">PushCompileStack(ITarget, Type)</h4>
+              <div class="markdown level1 summary"><p>Pushes the passed target on to the compile stack if it&#39;s not already on it for the same <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a>
+Compilers should consult the return value and abort compilation if it&#39;s <code>true</code> - since that implies a cyclic
 dependency graph.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">bool PushCompileStack(ITarget toCompile)</code></pre>
+                <pre><code class="lang-csharp hljs">bool PushCompileStack(ITarget toCompile, Type targetType = null)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>toCompile</em></td>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
-                    <td></td>
+                    <td><span class="parametername">toCompile</span></td>
+                    <td><p>To compile.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">targetType</span></td>
+                    <td><p>The type for which the target is being compiled, if different from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></p>
+</td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -404,19 +415,31 @@ dependency graph.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget__remarks">Remarks</h5>
+              <h5 id="Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Targets can appear on the compilation stack more than once for different types, since the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>
-produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a 
-cyclic dependency graph, then the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_">PushCompileStack(ITarget)</a> method will detect it.</p>
+produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a
+cyclic dependency graph, then this method will detect that.</p>
 </div>
-              </div><!-- .classchild -->
-            </article>
+              <h3 id="seealso">See Also</h3>
+              <div class="seealso">
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></div>
+              </div>
+                        </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation_ICompileContext.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -438,6 +461,5 @@ cyclic dependency graph, then the <a class="xref" href="Rezolver.Compilation.ICo
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

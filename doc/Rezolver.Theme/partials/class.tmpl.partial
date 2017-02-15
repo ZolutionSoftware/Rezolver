@@ -1,45 +1,32 @@
 {{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
 
+{{>partials/class.header}}
+{{#children}}
+<h3 id="{{id}}">{{>partials/classSubtitle}}</h3>
+{{#children}}
 {{^_disableContribution}}
-{{#docurl}}<a href="{{docurl}}" class="btn btn-primary pull-right mobile-hide">{{__global.improveThisDoc}}</a>{{/docurl}}
-{{#sourceurl}}<a href="{{sourceurl}}" class="btn btn-primary pull-right mobile-hide">{{__global.viewSource}}</a>{{/sourceurl}}
+{{#docurl}}
+<span class="small pull-right mobile-hide">
+  <span class="divider">|</span>
+  <a href="{{docurl}}">{{__global.improveThisDoc}}</a>
+</span>{{/docurl}}
+{{#sourceurl}}
+<span class="small pull-right mobile-hide">
+  <a href="{{sourceurl}}">{{__global.viewSource}}</a>
+</span>{{/sourceurl}}
 {{/_disableContribution}}
-<h1 id="{{id}}" data-uid="{{uid}}">{{>partials/title}}</h1>
-<div class="markdown level0 summary">{{{summary}}}</div>
-<div class="markdown level0 conceptual">{{{conceptual}}}</div>
-{{#inheritance.0}}
-<div class="inheritance">
-  <h5>{{__global.inheritance}}</h5>
-{{#inheritance}}
-    <div class="level{{index}}">{{{specName.0.value}}}</div>
-{{/inheritance}}
-    <div class="level{{item.level}}"><span class="xref">{{item.name.0.value}}</span></div>
-</div>
-{{/inheritance.0}}
-{{#inheritedMembers.0}}
-<div class="inheritedMembers">
-  <h5>{{__global.inheritedMembers}}</h5>
-{{/inheritedMembers.0}}
-{{#inheritedMembers}}
-  <div>
-  {{#definition}}
-    <xref href="{{definition}}" fullName="{{fullName.0.value}}" name="{{nameWithType.0.value}}"/>
-  {{/definition}}
-  {{^definition}}
-    <xref href="{{uid}}" fullName="{{fullName.0.value}}" name="{{nameWithType.0.value}}"/>
-  {{/definition}}
-  </div>
-{{/inheritedMembers}}
-{{#inheritedMembers.0}}
-</div>
-{{/inheritedMembers.0}}
-<h6><strong>{{__global.namespace}}</strong>:{{namespace}}</h6>
-<h6><strong>{{__global.assembly}}</strong>:{{assemblies.0}}.dll</h6>
-<h5 id="{{id}}_syntax" class="hsyntax">{{__global.syntax}}</h5>
+{{#overload}}
+<a id="{{id}}" data-uid="{{uid}}"></a>
+{{/overload}}
+<h4 id="{{id}}" data-uid="{{uid}}">{{name.0.value}}</h4>
+<div class="markdown level1 summary">{{{summary}}}</div>
+<div class="markdown level1 conceptual">{{{conceptual}}}</div>
+<h5 class="decalaration">{{__global.declaration}}</h5>
+{{#syntax}}
 <div class="codewrapper">
   <pre><code class="lang-{{_lang}} hljs">{{syntax.content.0.value}}</code></pre>
 </div>
-{{#syntax.parameters.0}}
+{{#parameters.0}}
 <h5 class="parameters">{{__global.parameters}}</h5>
 <table class="table table-bordered table-striped table-condensed">
   <thead>
@@ -50,106 +37,11 @@
     </tr>
   </thead>
   <tbody>
-{{/syntax.parameters.0}}
-{{#syntax.parameters}}
-    <tr>
-      <td>{{{type.specName.0.value}}}</td>
-      <td><em>{{{id}}}</em></td>
-      <td>{{{description}}}</td>
-    </tr>
-{{/syntax.parameters}}
-{{#syntax.parameters.0}}
-  </tbody>
-</table>
-{{/syntax.parameters.0}}
-{{#syntax.return}}
-<h5 class="returns">{{__global.returns}}</h5>
-<table class="table table-bordered table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>{{__global.type}}</th>
-      <th>{{__global.description}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{{type.specName.0.value}}}</td>
-      <td>{{{description}}}</td>
-    </tr>
-  </tbody>
-</table>
-{{/syntax.return}}
-{{#syntax.typeParameters.0}}
-<h5 class="typeParameters">{{__global.typeParameters}}</h5>
-<table class="table table-bordered table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>{{__global.name}}</th>
-      <th>{{__global.description}}</th>
-    </tr>
-  </thead>
-  <tbody>
-{{/syntax.typeParameters.0}}
-{{#syntax.typeParameters}}
-    <tr>
-      <td><em>{{{id}}}</em></td>
-      <td>{{{description}}}</td>
-    </tr>
-{{/syntax.typeParameters}}
-{{#syntax.typeParameters.0}}
-  </tbody>
-</table>
-{{/syntax.typeParameters.0}}
-{{#remarks}}
-<h5 id="{{id}}_remarks" class="hremarks"><strong>{{__global.remarks}}</strong></h5>
-<div class="markdown level0 remarks">{{{remarks}}}</div>
-{{/remarks}}
-{{#example.0}}
-<h5 id="{{id}}_examples" class="hexamples"><strong>{{__global.examples}}</strong></h5>
-{{/example.0}}
-{{#example}}
-{{{.}}}
-{{/example}}
-{{#children}}
-<!-- <hr class="typeSectionDivider" /> -->
-<h3 id="{{id}}">{{>partials/classSubtitle}}</h3>
-{{#children}}
-<div class="classchild">
-{{^_disableContribution}}
-{{#docurl}}
-<span class="small pull-right mobile-hide">
-  <span class="divider">|</span>
-  <a class="btn btn-default" href="{{docurl}}">{{__global.improveThisDoc}}</a>
-</span>{{/docurl}}
-{{#sourceurl}}
-<span class="small pull-right mobile-hide">
-  <a class="btn btn-default" href="{{sourceurl}}">{{__global.viewSource}}</a>
-</span>{{/sourceurl}}
-{{/_disableContribution}}
-<h4 class="hmember" id="{{id}}" data-uid="{{uid}}">{{name.0.value}}</h4>
-<div class="markdown level1 summary">{{{summary}}}</div>
-<div class="markdown level1 conceptual">{{{conceptual}}}</div>
-<h5 class="hdeclaration">{{__global.declaration}}</h5>
-{{#syntax}}
-<div class="codewrapper">
-  <pre><code class="lang-{{_lang}} hljs">{{syntax.content.0.value}}</code></pre>
-</div>
-{{#parameters.0}}
-<h5 class="hparameters">{{__global.parameters}}</h5>
-<table class="table table-bordered table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>{{__global.name}}</th>
-      <th>{{__global.type}}</th>
-      <th>{{__global.description}}</th>
-    </tr>
-  </thead>
-  <tbody>
 {{/parameters.0}}
 {{#parameters}}
     <tr>
-      <td><em>{{{id}}}</em></td>
       <td>{{{type.specName.0.value}}}</td>
+      <td><span class="parametername">{{{id}}}</span></td>
       <td>{{{description}}}</td>
     </tr>
 {{/parameters}}
@@ -158,7 +50,7 @@
 </table>
 {{/parameters.0}}
 {{#return}}
-<h5 class="hreturns">{{__global.returns}}</h5>
+<h5 class="returns">{{__global.returns}}</h5>
 <table class="table table-bordered table-striped table-condensed">
   <thead>
     <tr>
@@ -187,7 +79,7 @@
 {{/typeParameters.0}}
 {{#typeParameters}}
     <tr>
-      <td><em>{{{id}}}</em></td>
+      <td><span class="parametername">{{{id}}}</span></td>
       <td>{{{description}}}</td>
     </tr>
 {{/typeParameters}}
@@ -213,7 +105,7 @@
 </table>
 {{/fieldValue}}
 {{#propertyValue}}
-<h5 class="hpropertyValue">{{__global.propertyValue}}</h5>
+<h5 class="propertyValue">{{__global.propertyValue}}</h5>
 <table class="table table-bordered table-striped table-condensed">
   <thead>
     <tr>
@@ -248,32 +140,32 @@
 {{/eventType}}
 {{/syntax}}
 {{#overridden}}
-<h5 class="hoverrides">{{__global.overrides}}</h5>
-<div><xref href="{{uid}}" fullName="{{fullName.0.value}}" name="{{nameWithType.0.value}}"/></div>
+<h5 class="overrides">{{__global.overrides}}</h5>
+<div><xref uid="{{uid}}" altProperty="fullName" displayProperty="nameWithType"/></div>
 {{/overridden}}
 {{#implements.0}}
-<h5 class="himplements">{{__global.implements}}</h5>
+<h5 class="implements">{{__global.implements}}</h5>
 {{/implements.0}}
 {{#implements}}
   {{#definition}}
-    <div><xref href="{{definition}}" fullName="{{fullName.0.value}}" name="{{nameWithType.0.value}}"/></div>
+    <div><xref uid="{{definition}}" altProperty="fullName" displayProperty="nameWithType"/></div>
   {{/definition}}
   {{^definition}}
-    <div><xref href="{{uid}}" fullName="{{fullName.0.value}}" name="{{nameWithType.0.value}}"/></div>
+    <div><xref uid="{{uid}}" altProperty="fullName" displayProperty="nameWithType"/></div>
   {{/definition}}
 {{/implements}}
 {{#remarks}}
-<h5 class="hremarks" id="{{id}}_remarks">{{__global.remarks}}</h5>
+<h5 id="{{id}}_remarks">{{__global.remarks}}</h5>
 <div class="markdown level1 remarks">{{{remarks}}}</div>
 {{/remarks}}
 {{#example.0}}
-<h5 class="hexamples" id="{{id}}_examples">{{__global.examples}}</h5>
+<h5 id="{{id}}_examples">{{__global.examples}}</h5>
 {{/example.0}}
 {{#example}}
 {{{.}}}
 {{/example}}
 {{#exceptions.0}}
-<h5 class="hexceptions">{{__global.exceptions}}</h5>
+<h5 class="exceptions">{{__global.exceptions}}</h5>
 <table class="table table-bordered table-striped table-condensed">
   <thead>
     <tr>
@@ -293,19 +185,48 @@
   </tbody>
 </table>
 {{/exceptions.0}}
-</div><!-- .classchild -->
+{{#seealso.0}}
+<h5 id="{{id}}_seealso">{{__global.seealso}}</h5>
+<div class="seealso">
+{{/seealso.0}}
+{{#seealso}}
+  {{#isCref}}
+    <div>{{{type.specName.0.value}}}</div>
+  {{/isCref}}
+  {{^isCref}}
+    <div>{{{url}}}</div>
+  {{/isCref}}
+{{/seealso}}
+{{#seealso.0}}
+</div>
+{{/seealso.0}}
 {{/children}}
 {{/children}}
 {{#extensionMethods.0}}
-<h3 class="hextensionmethods" id="extensionmethods">{{__global.extensionMethods}}</h3>
+<h3 id="extensionmethods">{{__global.extensionMethods}}</h3>
 {{/extensionMethods.0}}
 {{#extensionMethods}}
 <div>
   {{#definition}}
-    <xref href="{{definition}}" fullName="{{fullName.0.value}}" name="{{nameWithType.0.value}}"/>
+    <xref uid="{{definition}}" altProperty="fullName" displayProperty="nameWithType"/>
   {{/definition}}
   {{^definition}}
-    <xref href="{{uid}}" fullName="{{fullName.0.value}}" name="{{nameWithType.0.value}}"/>
+    <xref uid="{{uid}}" altProperty="fullName" displayProperty="nameWithType"/>
   {{/definition}}
 </div>
 {{/extensionMethods}}
+{{#seealso.0}}
+<h3 id="seealso">{{__global.seealso}}</h3>
+<div class="seealso">
+{{/seealso.0}}
+{{#seealso}}
+  {{#isCref}}
+    <div>{{{type.specName.0.value}}}</div>
+  {{/isCref}}
+  {{^isCref}}
+    <div>{{{url}}}</div>
+  {{/isCref}}
+{{/seealso}}
+{{#seealso.0}}
+</div>
+{{/seealso.0}}

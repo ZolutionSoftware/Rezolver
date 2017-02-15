@@ -5,12 +5,29 @@ reference for all of the APIs and functionality in the Rezolver library.
 
 ## What is Rezolver?
 
-Rezolver is (yet another :)) open source IOC container.  It supports many of the features supported by most
-other popular IOC containers out there, integrates into the new .Net Core 1.0 framework (supporting the
-NetStandard1.1 profile), and supports some unique functionality too.
+Rezolver is an [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container that, out of the box, supports all the standard 
+features supported by most =other popular IOC containers out there.  It's also highly extensible - with practically the entire stack open
+to extension immediately after referencing the core library.
 
-It's very fast, extensible and reliable, and should slot nicely into any project in which you already have
-another IOC container.
+It's been built specifically with the .Net Core framework in mind, supporting the NetStandard1.1 profile for (almost!) maximum portability
+
+##Features
+
+- 'Intelligent' constructor discovery based on registered services
+- Open generics (with specific closed generics taking precedence)
+- Decorators (non-generic and generic)
+- Enumerables (empty enumerables returned by default)
+- Child containers (overriding registrations in one container with those of another)
+- Lifetime scoping (incl. child lifetimes)
+- Delegates and Expressions as factories, with argument injection
+- Singletons
+- Pre-built objects
+- Scoped objects (i.e. 'singleton per scope')
+- Extensible compiler framework
+  - Expression tree compiler used by default
+- Integration with Microsoft.Extensions.DependencyInjection via nuget packages
+- Extensible configuration framework *(still in development)*
+  - Json configuration *(still in development)*
 
 ## Quick Links
 
@@ -27,5 +44,7 @@ which are then guaranteed to stand the test of time!
 
 So, keep coming back!  We'll get there :)
 
-If you're the kind of person who likes to learn from seeing the code - then check out the [Rezolver repo on Github](https://github.com/LordZoltan/Rezolver),
+##On Github
+
+If you're the kind of person who likes to learn from seeing the code - then check out the [Rezolver repo on Github](https://github.com/ZolutionSoftware/Rezolver),
 there are some example applications on there, and you can look at the unit tests to get an idea of how to create and configure containers.

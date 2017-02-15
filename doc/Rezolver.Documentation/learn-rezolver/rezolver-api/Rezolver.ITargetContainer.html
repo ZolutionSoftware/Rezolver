@@ -3,16 +3,16 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface ITargetContainer
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface ITargetContainer
    </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface ITargetContainer
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface ITargetContainer
    ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
@@ -31,9 +31,11 @@
   	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../../styles/site.css">
-  	<meta property="docfx:navrel" content="../toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="../">
+  
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -48,8 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +81,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container-fluid body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -91,7 +94,6 @@
             <article class="content wrap" id="_content">
               
               
-              
               <h1 id="Rezolver_ITargetContainer" data-uid="Rezolver.ITargetContainer">Interface ITargetContainer
               </h1>
               <div class="markdown level0 summary"><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> instances, keyed by the type of service
@@ -101,11 +103,11 @@ that the targets are registered against.</p>
               <div class="markdown level0 conceptual"></div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_ITargetContainer_syntax" class="hsyntax">Syntax</h5>
+              <h5 id="Rezolver_ITargetContainer_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface ITargetContainer</code></pre>
               </div>
-              <h5 id="Rezolver_ITargetContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <h5 id="Rezolver_ITargetContainer_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>You do not resolve objects from a target container, instead, it holds the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s which will 
 later be compiled to produce the objects.</p>
 <p>A target container is considered mutable for its entire lifetime, because it&#39;s only a glorified dictionary
@@ -116,46 +118,47 @@ in its <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolv
 <p>Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
 are <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> and <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer">ChildTargetContainer</a>.</p>
 </div>
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
+              <h4 id="Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
               <div class="markdown level1 summary"><p>If supported by the implementation, this gets the container built from combining this container with 
 an <em>existing</em> container as part of a registration inside another <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner">ITargetContainerOwner</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITargetContainer CombineWith(ITargetContainer existing, Type type)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>existing</em></td>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a></td>
+                    <td><span class="parametername">existing</span></td>
                     <td><p>The existing <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> instance that this instance is to be combined with</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">type</span></td>
                     <td><p>The type that the combined container owner will be registered under.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -170,12 +173,12 @@ an <em>existing</em> container as part of a registration inside another <a class
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type__remarks">Remarks</h5>
+              <h5 id="Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Used most frequently in implementations of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> 
 when a container owner is already registered against the type, and a new container owner is then registered against the 
 same type.  This behaviour is used to implement open generics and decorators, and can be used to implement more besides.</p>
 </div>
-              <h5 class="hexceptions">Exceptions</h5>
+              <h5 class="exceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -191,37 +194,38 @@ same type.  This behaviour is used to implement open generics and decorators, an
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.ITargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
+              <h4 id="Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.ITargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
               <div class="markdown level1 summary"><p>Retrieves a target for a particular type, or null if no target is registered against that type.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ITarget Fetch(Type type)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">type</span></td>
                     <td><p>Required.  The type for which an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> is to be retrieved.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -237,44 +241,45 @@ same type.  This behaviour is used to implement open generics and decorators, an
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ITargetContainer_Fetch_System_Type__remarks">Remarks</h5>
+              <h5 id="Rezolver_ITargetContainer_Fetch_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The target you receive from this method depends entirely on the implementation.</p>
 <p>It could be the last target to be registered against the <em>type</em> or the first, or 
 another target entirely.</p>
 <p>As mentioned in the documentation for the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method - the only guarantee is that if
 at least one target has been registered for the same type, then this method should return a valid target.</p>
 </div>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ITargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
+              <h4 id="Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ITargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
               <div class="markdown level1 summary"><p>Retrieves an enumerable of all targets that have been registered for a particular <em>type</em>.  </p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">IEnumerable&lt;ITarget&gt; FetchAll(Type type)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>type</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">type</span></td>
                     <td><p>Required.  The type for which the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s are to be retrieved.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -291,42 +296,43 @@ an empty enumerable if no targets have been registered.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ITargetContainer_FetchAll_System_Type__remarks">Remarks</h5>
+              <h5 id="Rezolver_ITargetContainer_FetchAll_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>As with <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a>, the only guarantee is that if a target has been registered for the <em>type</em>
 through a call to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>, then the returned enumerable will contain at least one valid target.</p>
 </div>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ITargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
+              <h4 id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ITargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
               <div class="markdown level1 summary"><p>Registers a target, either for the <em>serviceType</em> specified or, if null, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
 of the <em>target</em>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">void Register(ITarget target, Type serviceType = null)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>target</em></td>
                     <td><a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a></td>
+                    <td><span class="parametername">target</span></td>
                     <td><p>Required.  The target to be registered</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>serviceType</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">serviceType</span></td>
                     <td><p>Optional.  The type the target is to be registered against, if different
 from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <em>target</em>.  If provided, then the <em>target</em>
 must be compatible with this type.</p>
@@ -334,7 +340,7 @@ must be compatible with this type.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
+              <h5 id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The interface does not define the behaviour for when multiple targets are registered against the same type - although
 the default behaviour of the framework (via the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer">TargetContainer</a> class) is to allow this, with the last registered target 
 being treated as the &#39;default&#39; for that type.</p>
@@ -342,7 +348,7 @@ being treated as the &#39;default&#39; for that type.</p>
 a given type with this method, then a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> operation with the same type should return a valid target,
 and a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> operation should return a non-empty enumerable of targets.</p>
 </div>
-              <h5 class="hexceptions">Exceptions</h5>
+              <h5 class="exceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -359,14 +365,22 @@ and a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetConta
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-            </article>
+                        </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_ITargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -388,6 +402,5 @@ and a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetConta
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

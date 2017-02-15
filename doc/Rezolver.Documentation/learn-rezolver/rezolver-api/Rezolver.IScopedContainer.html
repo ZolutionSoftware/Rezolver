@@ -3,16 +3,16 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface IScopedContainer
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IScopedContainer
    </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface IScopedContainer
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IScopedContainer
    ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
@@ -31,9 +31,11 @@
   	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../../styles/site.css">
-  	<meta property="docfx:navrel" content="../toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="../">
+  
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -48,8 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +81,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container-fluid body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -91,67 +94,61 @@
             <article class="content wrap" id="_content">
               
               
-              
               <h1 id="Rezolver_IScopedContainer" data-uid="Rezolver.IScopedContainer">Interface IScopedContainer
               </h1>
-              <div class="markdown level0 summary"><p>A container that&#39;s also a lifetime scope - that is, it&#39;s disposable,
-and will dispose of any disposable instances that it creates when it&#39;s disposed.</p>
-<p>Also, any subsequent lifetime scopes that it, or any child, creates will 
-be disposed of when this scope is disposed.</p>
-<p>Note that while a lifetime scope can track objects of any types, it only <em>automatically</em>
-tracks disposable objects.  To force a scope to track an instance, regardless of whether it&#39;s
-dispoable or not, you can call <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">AddToScope(Object, ResolveContext)</a>.</p>
-<p>This is how the default ScopedSingletonTarget works - if an object with this lifetime isn&#39;t a 
-disposable, it is explicitly added to the scope passed to it at runtime, and then when an instance
-is subsequently requested, the code compiled by the scoped singleton will search the current scope,
-for an existing instance, before creating one.</p>
+              <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> that also has a <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_Scope">Scope</a> attached to it.</p>
+<p>Many applications will use such a container as the root container to use as anchors
+for things like scoped singletons.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_ResolveContext_">IContainer.CanResolve(ResolveContext)</a>
+                  <xref uid="Rezolver.IContainer.CanResolve(Rezolver.ResolveContext)" text="IContainer.CanResolve(ResolveContext)" alt="Rezolver.IContainer.CanResolve(Rezolver.ResolveContext)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">IContainer.Resolve(ResolveContext)</a>
+                  <xref uid="Rezolver.IContainer.Resolve(Rezolver.ResolveContext)" text="IContainer.Resolve(ResolveContext)" alt="Rezolver.IContainer.Resolve(Rezolver.ResolveContext)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">IContainer.TryResolve(ResolveContext, Object)</a>
+                  <xref uid="Rezolver.IContainer.TryResolve(Rezolver.ResolveContext,System.Object@)" text="IContainer.TryResolve(ResolveContext, Object)" alt="Rezolver.IContainer.TryResolve(Rezolver.ResolveContext, System.Object)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateLifetimeScope">IContainer.CreateLifetimeScope()</a>
+                  <xref uid="Rezolver.IContainer.CreateScope" text="IContainer.CreateScope()" alt="Rezolver.IContainer.CreateScope()"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_">IContainer.FetchCompiled(ResolveContext)</a>
+                  <xref uid="Rezolver.IContainer.FetchCompiled(Rezolver.ResolveContext)" text="IContainer.FetchCompiled(ResolveContext)" alt="Rezolver.IContainer.FetchCompiled(Rezolver.ResolveContext)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/wacy2d1s(v=vs.110).aspx">IServiceProvider.GetService(Type)</a>
+                  <xref uid="System.IServiceProvider.GetService(System.Type)" text="IServiceProvider.GetService(Type)" alt="System.IServiceProvider.GetService(System.Type)"></xref>
                 </div>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/es4s3w1d(v=vs.110).aspx">IDisposable.Dispose()</a>
+                  <xref uid="System.IDisposable.Dispose" text="IDisposable.Dispose()" alt="System.IDisposable.Dispose()"></xref>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_IScopedContainer_syntax" class="hsyntax">Syntax</h5>
+              <h5 id="Rezolver_IScopedContainer_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IScopedContainer : IContainer, IServiceProvider, IDisposable</code></pre>
               </div>
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="properties">Properties
               </h3>
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IScopedContainer_Scope.md&amp;value=---%0Auid%3A%20Rezolver.IScopedContainer.Scope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_IScopedContainer_ParentScope" data-uid="Rezolver.IScopedContainer.ParentScope">ParentScope</h4>
-              <div class="markdown level1 summary"><p>If this lifetime scope is a child of another, this will be non-null.</p>
+              <h4 id="Rezolver_IScopedContainer_Scope" data-uid="Rezolver.IScopedContainer.Scope">Scope</h4>
+              <div class="markdown level1 summary"><p>Gets the scope for this scoped container.</p>
+<p>Note that this is used automatically by the container for <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>
+operations where the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a> property is not already set.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">IScopedContainer ParentScope { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">IContainerScope Scope { get; }</code></pre>
               </div>
-              <h5 class="hpropertyValue">Property Value</h5>
+              <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -161,140 +158,32 @@ for an existing instance, before creating one.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope">IContainerScope</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="methods">Methods
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_" data-uid="Rezolver.IScopedContainer.AddToScope(System.Object,Rezolver.ResolveContext)">AddToScope(Object, ResolveContext)</h4>
-              <div class="markdown level1 summary"><p>Registers an instance to this scope which, if disposable, will then be disposed 
-when this scope is disposed.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">void AddToScope(object obj, ResolveContext context = null)</code></pre>
+              <h3 id="seealso">See Also</h3>
+              <div class="seealso">
+                  <div><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a></div>
+                  <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.idisposable(v=vs.110).aspx">IDisposable</a></div>
               </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>obj</em></td>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
-                    <td><p>The object; if null, then no operation is performed.  Doesn&#39;t have to be IDisposable, but if it is, 
-then it will be tracked for disposal.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td><p>Optional - a rezolve context representing the conditions under which 
-the object should be returned in the enumerable returned from a call to GetFromScope</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_IScopedContainer_GetFromScope_Rezolver_ResolveContext_" data-uid="Rezolver.IScopedContainer.GetFromScope(Rezolver.ResolveContext)">GetFromScope(ResolveContext)</h4>
-              <div class="markdown level1 summary"><p>Retrieves all objects from this scope that were previously added through a call to </p>
-<p><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_AddToScope_System_Object_Rezolver_ResolveContext_">AddToScope(Object, ResolveContext)</a> with RezolveContexts that match the one passed.</p>
-<p>The method never returns null.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">IEnumerable&lt;object&gt; GetFromScope(ResolveContext context)</code></pre>
-              </div>
-              <h5 class="hparameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><em>context</em></td>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
-                    <td><p>Required - the context whose properties will be used to find matching
-objects.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="hreturns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <!-- <hr class="typeSectionDivider" /> -->
-              <h3 id="events">Events
-              </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_IScopedContainer_Disposed" data-uid="Rezolver.IScopedContainer.Disposed">Disposed</h4>
-              <div class="markdown level1 summary"><p>This event is fired before the scope disposes</p>
-<p>This is primarily for infrastructure purposes, and not intended to be used from your code.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">event EventHandler Disposed</code></pre>
-              </div>
-              <h5 class="eventType">Event Type</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.eventhandler(v=vs.110).aspx">EventHandler</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-            </article>
+                        </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IScopedContainer.md&amp;value=---%0Auid%3A%20Rezolver.IScopedContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -316,6 +205,5 @@ objects.</p>
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

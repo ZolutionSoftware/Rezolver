@@ -1,7 +1,0 @@
-var common = require('./common.js');
-
-exports.transform = function (model) {
-  model._disableToc = model._disableToc || !model._tocPath || (model._navPath === model._tocPath);
-  model.docurl = model.docurl || common.getViewSourceHref(model);
-  return model;
-}

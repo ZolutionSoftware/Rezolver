@@ -3,16 +3,16 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Enum ConfigurationEntryType
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Enum ConfigurationEntryType
    </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Enum ConfigurationEntryType
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Enum ConfigurationEntryType
    ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
@@ -31,9 +31,11 @@
   	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../../styles/site.css">
-  	<meta property="docfx:navrel" content="../toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="../">
+  
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -48,8 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +81,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container-fluid body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -91,7 +94,6 @@
             <article class="content wrap" id="_content">
               
               
-              
               <h1 id="Rezolver_Configuration_ConfigurationEntryType" data-uid="Rezolver.Configuration.ConfigurationEntryType">Enum ConfigurationEntryType
               </h1>
               <div class="markdown level0 summary"><p>Types of configuration entry that can be parsed from a configuration file</p>
@@ -99,189 +101,75 @@
               <div class="markdown level0 conceptual"></div>
               <h6><strong>Namespace</strong>:Rezolver.Configuration</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_Configuration_ConfigurationEntryType_syntax" class="hsyntax">Syntax</h5>
+              <h5 id="Rezolver_Configuration_ConfigurationEntryType_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public enum ConfigurationEntryType</code></pre>
               </div>
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="fields">Fields
               </h3>
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationEntryType_AssemblyReference" data-uid="Rezolver.Configuration.ConfigurationEntryType.AssemblyReference">AssemblyReference</h4>
-              <div class="markdown level1 summary"><p>An instruction to load one or more assemblies before any type registrations are processed</p>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                <thead>
+                <tbody>
+                  <tr>
+                    <td id="Rezolver_Configuration_ConfigurationEntryType_AssemblyReference">AssemblyReference</td>
+                    <td><p>An instruction to load one or more assemblies before any type registrations are processed</p>
 <p>Depending on the runtime environment, to be sure of the type binder finding
 namespace-qualified types mentioned in a configuration file, then any assemblies you might be
 referencing should be included in your configuration file.</p>
 <p>Equally, you can use this to load assemblies that wouldn&#39;t normally be found (e.g. a la unity)</p>
 <p>Note that types which would usually be found with a simple call to Type.GetType do not need their
 parent assemblies explicitly referenced.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">AssemblyReference = 1</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
+</td>
                   </tr>
-                </thead>
-                <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType">ConfigurationEntryType</a></td>
-                    <td></td>
+                    <td id="Rezolver_Configuration_ConfigurationEntryType_Extension">Extension</td>
+                    <td><p>A custom entry - the instance should also have the interface IConfigurationExtensionEntry</p>
+</td>
                   </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationEntryType_Extension" data-uid="Rezolver.Configuration.ConfigurationEntryType.Extension">Extension</h4>
-              <div class="markdown level1 summary"><p>A custom entry - the instance should also have the interface IConfigurationExtensionEntry</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">Extension = 2147483647</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
                   <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType">ConfigurationEntryType</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationEntryType_NamedBuilder" data-uid="Rezolver.Configuration.ConfigurationEntryType.NamedBuilder">NamedBuilder</h4>
-              <div class="markdown level1 summary"><p>An instruction to create a named builder in the target builder, within which further named builders or type registrations
+                    <td id="Rezolver_Configuration_ConfigurationEntryType_NamedBuilder">NamedBuilder</td>
+                    <td><p>An instruction to create a named builder in the target builder, within which further named builders or type registrations
 might be performed.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">NamedBuilder = 11</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
+</td>
                   </tr>
-                </thead>
-                <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType">ConfigurationEntryType</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationEntryType_NamespaceImport" data-uid="Rezolver.Configuration.ConfigurationEntryType.NamespaceImport">NamespaceImport</h4>
-              <div class="markdown level1 summary"><p>Just like &#39;using&#39; or &#39;import&#39; in C# or VB, this allows you to specify namespaces that you will be using in your
+                    <td id="Rezolver_Configuration_ConfigurationEntryType_NamespaceImport">NamespaceImport</td>
+                    <td><p>Just like &#39;using&#39; or &#39;import&#39; in C# or VB, this allows you to specify namespaces that you will be using in your
 type names elsewhere in a configuration file.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">NamespaceImport = 2</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
+</td>
                   </tr>
-                </thead>
-                <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType">ConfigurationEntryType</a></td>
+                    <td id="Rezolver_Configuration_ConfigurationEntryType_TypeRegistration">TypeRegistration</td>
+                    <td><p>The most common type - an instruction to generate one or more type registrations in the target builder</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td id="Rezolver_Configuration_ConfigurationEntryType_Unknown">Unknown</td>
                     <td></td>
                   </tr>
                 </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationEntryType_TypeRegistration" data-uid="Rezolver.Configuration.ConfigurationEntryType.TypeRegistration">TypeRegistration</h4>
-              <div class="markdown level1 summary"><p>The most common type - an instruction to generate one or more type registrations in the target builder</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">TypeRegistration = 10</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType">ConfigurationEntryType</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
-              
-              
-              <h4 class="hmember" id="Rezolver_Configuration_ConfigurationEntryType_Unknown" data-uid="Rezolver.Configuration.ConfigurationEntryType.Unknown">Unknown</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">Unknown = 0</code></pre>
-              </div>
-              <h5 class="fieldValue">Field Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Configuration.ConfigurationEntryType.html#Rezolver_Configuration_ConfigurationEntryType">ConfigurationEntryType</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              </div><!-- .classchild -->
-            </article>
+              </thead></thead></table>
+                        </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Configuration_ConfigurationEntryType.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.ConfigurationEntryType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -303,6 +191,5 @@ type names elsewhere in a configuration file.</p>
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

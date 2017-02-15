@@ -3,16 +3,16 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface IContainer
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IContainer
    </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface IContainer
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IContainer
    ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
@@ -31,9 +31,11 @@
   	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../../styles/site.css">
-  	<meta property="docfx:navrel" content="../toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="../">
+  
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -48,8 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +81,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container-fluid body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -91,7 +94,6 @@
             <article class="content wrap" id="_content">
               
               
-              
               <h1 id="Rezolver_IContainer" data-uid="Rezolver.IContainer">Interface IContainer
               </h1>
               <div class="markdown level0 summary"><p>The primary IOC container interface in the Rezolver framework.</p>
@@ -100,65 +102,66 @@
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/wacy2d1s(v=vs.110).aspx">IServiceProvider.GetService(Type)</a>
+                  <xref uid="System.IServiceProvider.GetService(System.Type)" text="IServiceProvider.GetService(Type)" alt="System.IServiceProvider.GetService(System.Type)"></xref>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
-              <h5 id="Rezolver_IContainer_syntax" class="hsyntax">Syntax</h5>
+              <h5 id="Rezolver_IContainer_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public interface IContainer : IServiceProvider</code></pre>
               </div>
-              <h5 id="Rezolver_IContainer_remarks" class="hremarks"><strong>Remarks</strong></h5>
+              <h5 id="Rezolver_IContainer_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Instances of objects (typically known as &#39;services&#39; in IOC-speak) are resolved via the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> or </p>
 <p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a> methods.</p>
 <p>You can introspect the container to check in advance whether a given type can be resolved through the </p>
 <p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_ResolveContext_">CanResolve(ResolveContext)</a> method.</p>
 <p>Lifetime scoping (where <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.idisposable(v=vs.110).aspx">IDisposable</a> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
-by obtaining a new scope through the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateLifetimeScope">CreateLifetimeScope()</a> method; although a container might also implement the </p>
+by obtaining a new scope through the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateScope">CreateScope()</a> method; although a container might also implement the </p>
 <p><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a> interface, in which case the container itself is a lifetime scope.</p>
 <p>Many of the functions which accept a <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a> also have alternatives (in the form of extension methods) in the </p>
-<p><a class="xref" href="Rezolver.IContainerRezolveExtensions.html#Rezolver_IContainerRezolveExtensions">IContainerRezolveExtensions</a> class.  If you&#39;re looking for the &#39;traditional&#39; IOC container methods 
-(e.g. <a class="xref" href="Rezolver.IContainerRezolveExtensions.html#Rezolver_IContainerRezolveExtensions_Resolve__1_Rezolver_IContainer_">Resolve&lt;TObject&gt;(IContainer)</a>, that&#39;s where you&#39;ll find them.</p>
+<p><a class="xref" href="Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions">ContainerRezolveExtensions</a> class.  If you&#39;re looking for the &#39;traditional&#39; IOC container methods 
+(e.g. <a class="xref" href="Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions_Resolve__1_Rezolver_IContainer_">Resolve&lt;TObject&gt;(IContainer)</a>, that&#39;s where you&#39;ll find them.</p>
 <p>Note that while the standard implementation of this interface supplied by the framework (<a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase">ContainerBase</a> and its derivatives) all utilitise
 the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a> to actually locate registrations for types which are ultimately requested from the container; the interface
 doesn&#39;t actually mandate that pattern.</p>
 </div>
-              <!-- <hr class="typeSectionDivider" /> -->
               <h3 id="methods">Methods
               </h3>
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IContainer_CanResolve_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.CanResolve(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_IContainer_CanResolve_Rezolver_ResolveContext_" data-uid="Rezolver.IContainer.CanResolve(Rezolver.ResolveContext)">CanResolve(ResolveContext)</h4>
+              <h4 id="Rezolver_IContainer_CanResolve_Rezolver_ResolveContext_" data-uid="Rezolver.IContainer.CanResolve(Rezolver.ResolveContext)">CanResolve(ResolveContext)</h4>
               <div class="markdown level1 summary"><p>Returns true if a resolve operation for the given context will succeed.
 If you&#39;re going to be calling <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> immediately afterwards, consider using the </p>
 <p><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a> method instead, which allows you to check and obtain the result at the same time.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">bool CanResolve(ResolveContext context)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
+                    <td><span class="parametername">context</span></td>
                     <td><p>The resolve context.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -174,20 +177,21 @@ If you&#39;re going to be calling <a class="xref" href="Rezolver.IContainer.html
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IContainer_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_IContainer_CreateLifetimeScope" data-uid="Rezolver.IContainer.CreateLifetimeScope">CreateLifetimeScope()</h4>
-              <div class="markdown level1 summary"><p>Called to create an <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a> which can resolve the same objects as this container, but which will track,
+              <h4 id="Rezolver_IContainer_CreateScope" data-uid="Rezolver.IContainer.CreateScope">CreateScope()</h4>
+              <div class="markdown level1 summary"><p>Called to create an <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope">IContainerScope</a> which can resolve the same objects as this container, but which will track,
 and dispose of, any disposable objects that it creates.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">IScopedContainer CreateLifetimeScope()</code></pre>
+                <pre><code class="lang-csharp hljs">IContainerScope CreateScope()</code></pre>
               </div>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -197,47 +201,44 @@ and dispose of, any disposable objects that it creates.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a></td>
+                    <td><a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope">IContainerScope</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_IContainer_CreateLifetimeScope_remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>If the container on which this is called also implements the <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer">IScopedContainer</a> interface, then the newly created
-scope&#39;s lifetime will be tied to that parent container.</p>
-</div>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.FetchCompiled(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_" data-uid="Rezolver.IContainer.FetchCompiled(Rezolver.ResolveContext)">FetchCompiled(ResolveContext)</h4>
+              <h4 id="Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_" data-uid="Rezolver.IContainer.FetchCompiled(Rezolver.ResolveContext)">FetchCompiled(ResolveContext)</h4>
               <div class="markdown level1 summary"><p>Fetches the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> for the given context, whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> method 
 would ultimately be called if the same context was passed to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> or <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">ICompiledTarget FetchCompiled(ResolveContext context)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
+                    <td><span class="parametername">context</span></td>
                     <td><p>The context.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -252,44 +253,45 @@ would ultimately be called if the same context was passed to <a class="xref" hre
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hremarks" id="Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext__remarks">Remarks</h5>
+              <h5 id="Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This is not typically a method that you&#39;re likely to use as the consumer of an <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a>.
 It&#39;s more typically used by implementations of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a> or <em>implementations</em> 
 of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer">IContainer</a> when communicating with other containers.</p>
 <p>As such, its use at an application level is limited.</p>
 </div>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IContainer_Resolve_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.Resolve(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_IContainer_Resolve_Rezolver_ResolveContext_" data-uid="Rezolver.IContainer.Resolve(Rezolver.ResolveContext)">Resolve(ResolveContext)</h4>
+              <h4 id="Rezolver_IContainer_Resolve_Rezolver_ResolveContext_" data-uid="Rezolver.IContainer.Resolve(Rezolver.ResolveContext)">Resolve(ResolveContext)</h4>
               <div class="markdown level1 summary"><p>Called to resolve a reference to an object for the given context (which provides the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> of the 
 object that is required, among other things).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">object Resolve(ResolveContext context)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
+                    <td><span class="parametername">context</span></td>
                     <td><p>The context.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -305,7 +307,7 @@ object that is required, among other things).</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hexceptions">Exceptions</h5>
+              <h5 class="exceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -321,43 +323,44 @@ object that is required, among other things).</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-              <div class="classchild">
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.TryResolve(Rezolver.ResolveContext%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
               
-              
-              <h4 class="hmember" id="Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__" data-uid="Rezolver.IContainer.TryResolve(Rezolver.ResolveContext,System.Object@)">TryResolve(ResolveContext, out Object)</h4>
+              <h4 id="Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__" data-uid="Rezolver.IContainer.TryResolve(Rezolver.ResolveContext,System.Object@)">TryResolve(ResolveContext, out Object)</h4>
               <div class="markdown level1 summary"><p>Merges the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_ResolveContext_">CanResolve(ResolveContext)</a> and <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> operations into one operation.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
-              <h5 class="hdeclaration">Declaration</h5>
+              <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">bool TryResolve(ResolveContext context, out object result)</code></pre>
               </div>
-              <h5 class="hparameters">Parameters</h5>
+              <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
-                    <th>Name</th>
                     <th>Type</th>
+                    <th>Name</th>
                     <th>Description</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><em>context</em></td>
                     <td><a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext">ResolveContext</a></td>
+                    <td><span class="parametername">context</span></td>
                     <td><p>The context.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><em>result</em></td>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+                    <td><span class="parametername">result</span></td>
                     <td><p>Receives the resultant resolved object if the operation succeeds.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 class="hreturns">Returns</h5>
+              <h5 class="returns">Returns</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>
                   <tr>
@@ -374,14 +377,22 @@ object that is required, among other things).</p>
                   </tr>
                 </tbody>
               </table>
-              </div><!-- .classchild -->
-            </article>
+                        </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_IContainer.md&amp;value=---%0Auid%3A%20Rezolver.IContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -403,6 +414,5 @@ object that is required, among other things).</p>
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

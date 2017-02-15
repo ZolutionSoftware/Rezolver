@@ -3,16 +3,16 @@
 <html>
   
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Namespace Rezolver.Compilation
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace Rezolver.Compilation
    </title>
-  	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Namespace Rezolver.Compilation
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace Rezolver.Compilation
    ">
-  	<meta name="generator" content="docfx 2.4.0.0">
-  	
-  	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+    <meta name="generator" content="docfx 2.4.0.0">
+    
+   	<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
   	<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
   	<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
   	<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
@@ -31,9 +31,11 @@
   	<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   	<meta name="theme-color" content="#ffffff">
   	<link rel="stylesheet" href="../../styles/site.css">
-  	<meta property="docfx:navrel" content="../toc.html">
-  	<meta property="docfx:tocrel" content="toc.html">
-  	<meta property="docfx:rel" content="../">
+  
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+    
   </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
@@ -48,8 +50,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              
               <a class="navbar-brand" href="../index.html">
-                <img id="logo" src="../../content/logo.png" alt="" width="50px" height="50px">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="" height="50px" width="50px">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -70,7 +73,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container-fluid body-content">
+      <div role="main" class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -78,7 +81,7 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-        <div role="main" class="container-fluid body-content hide-when-search">
+      <div role="main" class="container body-content hide-when-search">
         
         <div class="sidenav hide-when-search">
           <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
@@ -97,7 +100,7 @@
               <div class="markdown level0 remarks"></div>
                 <h3 id="classes">Classes
               </h3>
-                  <h4><a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext">CompileContext</a></h4>
+                  <h4><xref uid="Rezolver.Compilation.CompileContext" altproperty="fullName" displayproperty="name"></xref></h4>
                   <section><p>Core implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>.  A root context (i.e. where <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ParentContext">ParentContext</a> is
 <code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_System_Type_">CompileContext(IContainer, ITargetContainer, Type)</a>
 constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_Container">Container</a> and the compilation
@@ -107,38 +110,54 @@ so that new registrations can be added without interfering with upstream contain
 <p>Note that many of the interface members are implemented explicitly - therefore most of your interaction with 
 this type is through its implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a> and <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer">ITargetContainer</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.CompileStackEntry.html#Rezolver_Compilation_CompileStackEntry">CompileStackEntry</a></h4>
+                  <h4><xref uid="Rezolver.Compilation.CompilerConfiguration" altproperty="fullName" displayproperty="name"></xref></h4>
+                  <section><p>Controls the system-wide compiler configuration used by default by all standard Rezolver containers.</p>
+</section>
+                  <h4><xref uid="Rezolver.Compilation.CompileStackEntry" altproperty="fullName" displayproperty="name"></xref></h4>
                   <section><p>Represents an entry in the compilation stack of a <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>,
 recording both a target that is being compiled, and the type for which it is being compiled.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.SharedExpressionKey.html#Rezolver_Compilation_SharedExpressionKey">SharedExpressionKey</a></h4>
-                  <section><p>Key for a shared expression used during expression tree generation.  As a consumer of this library, you
-are unlikely ever to need to use it.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.Compilation.TargetCompiler.html#Rezolver_Compilation_TargetCompiler">TargetCompiler</a></h4>
+                  <h4><xref uid="Rezolver.Compilation.TargetCompiler" altproperty="fullName" displayproperty="name"></xref></h4>
                   <section><p>Holds a reference to the default compiler for this application.</p>
 </section>
                 <h3 id="interfaces">Interfaces
               </h3>
-                  <h4><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a></h4>
+                  <h4><xref uid="Rezolver.Compilation.ICompileContext" altproperty="fullName" displayproperty="name"></xref></h4>
                   <section><p>Tracks state and provides services during the compilation phase in which <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> targets
 are compiled into <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a> targets, which produce actual instances of objects.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider">ICompileContextProvider</a></h4>
+                  <h4><xref uid="Rezolver.Compilation.ICompileContextProvider" altproperty="fullName" displayproperty="name"></xref></h4>
                   <section><p>Interface for an object which creates <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a> instances for when the system needs to
 compile an <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a> into an <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a></h4>
+                  <h4><xref uid="Rezolver.Compilation.ICompilerConfigurationProvider" altproperty="fullName" displayproperty="name"></xref></h4>
+                  <section><p>Interface for an object which configures the compiler for the given container and/or targets object
+to use a specific <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler">ITargetCompiler</a> and <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider">ICompileContextProvider</a>.</p>
+<p>Used by all the standard container types in the Rezolver framework.</p>
+<p>You can provide a specific provider to most containers on creation, and you can configure
+the default system-wide provider via the <a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider">DefaultProvider</a> static
+property.</p>
+</section>
+                  <h4><xref uid="Rezolver.Compilation.ITargetCompiler" altproperty="fullName" displayproperty="name"></xref></h4>
                   <section><p>An object that produces <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget">ICompiledTarget</a>s from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget">ITarget</a>s given a 
 particular <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext">ICompileContext</a>.</p>
 </section>
-            </article>
+                        </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
-            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
-            </nav>
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/doc/Rezolver.Documentation/apispec/new?filename=Rezolver_Compilation.md&amp;value=---%0Auid%3A%20Rezolver.Compilation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -160,6 +179,5 @@ particular <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezol
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
     <script type="text/javascript" src="../styles/main.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
