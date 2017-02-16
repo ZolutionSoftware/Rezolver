@@ -3,7 +3,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
-            all: ['styles/*.map', 'learn-rezolver/**']
+            all: ['styles/*.map', 'learn/**']
         },
         copy: {
             bootstrap_less: {

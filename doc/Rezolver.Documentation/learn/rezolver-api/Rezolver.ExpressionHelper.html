@@ -1,0 +1,473 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ExpressionHelper
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ExpressionHelper
+   ">
+    <meta name="generator" content="docfx 2.12.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../content/logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Rezolver_ExpressionHelper" data-uid="Rezolver.ExpressionHelper">Class ExpressionHelper
+              </h1>
+              <div class="markdown level0 summary"><p>This static class contains methods and properties to aid in building expressions in the <span class="xref">Rezolver.ITarget.CreateExpression(Rezolver.CompileContext)</span>
+method.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+                  <div class="level1"><span class="xref">ExpressionHelper</span></div>
+              </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">ToString()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Equals(Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">ReferenceEquals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">GetHashCode()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">GetType()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">MemberwiseClone()</a>
+                </div>
+              </div>
+              <h6><strong>Namespace</strong>:Rezolver</h6>
+              <h6><strong>Assembly</strong>:cs.temp.dll.dll</h6>
+              <h5 id="Rezolver_ExpressionHelper_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public class ExpressionHelper</code></pre>
+              </div>
+              <h3 id="fields">Fields
+              </h3>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_DynamicRezolverParam" data-uid="Rezolver.ExpressionHelper.DynamicRezolverParam">DynamicRezolverParam</h4>
+              <div class="markdown level1 summary"><p>This parameter expression is to be used by all targets and rezolvers in this library by default to perform late binding 
+to a container provided at run time when a caller is trying to resolve something through code built from
+a target.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static readonly ParameterExpression DynamicRezolverParam</code></pre>
+              </div>
+              <h5 class="fieldValue">Field Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">ParameterExpression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_RezolveContextParameter" data-uid="Rezolver.ExpressionHelper.RezolveContextParameter">RezolveContextParameter</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static readonly ParameterExpression RezolveContextParameter</code></pre>
+              </div>
+              <h5 class="fieldValue">Field Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">ParameterExpression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_Scope_GetOrAddGenericMethod" data-uid="Rezolver.ExpressionHelper.Scope_GetOrAddGenericMethod">Scope_GetOrAddGenericMethod</h4>
+              <div class="markdown level1 summary"><p>A MethodInfo object representing the generic definition <see cref="!:LifetimeScopeRezolverExtensions.GetOrAdd<T>(IScopedContainer, RezolveContext, Func<RezolveContext, T>, bool, bool)"></see></p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static readonly MethodInfo Scope_GetOrAddGenericMethod</code></pre>
+              </div>
+              <h5 class="fieldValue">Field Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">MethodInfo</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_Scope_GetScopeRootMethod" data-uid="Rezolver.ExpressionHelper.Scope_GetScopeRootMethod">Scope_GetScopeRootMethod</h4>
+              <div class="markdown level1 summary"><p>A MethodInfo object representing the <a class="xref" href="Rezolver.LifetimeScopeRezolverExtensions.html#Rezolver_LifetimeScopeRezolverExtensions_GetScopeRoot_Rezolver_IScopedContainer_">GetScopeRoot(IScopedContainer)</a> method - to aid in code generation
+where the target scope for tracking an object is the root scope, not the current scope.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static readonly MethodInfo Scope_GetScopeRootMethod</code></pre>
+              </div>
+              <h5 class="fieldValue">Field Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">MethodInfo</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h3 id="methods">Methods
+              </h3>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_GetLambdaBodyForTarget_Rezolver_ITarget_Rezolver_CompileContext_" data-uid="Rezolver.ExpressionHelper.GetLambdaBodyForTarget(Rezolver.ITarget,Rezolver.CompileContext)">GetLambdaBodyForTarget(ITarget, CompileContext)</h4>
+              <div class="markdown level1 summary"><p>Provides a standard way to create the method body for a lambda that, when compiled (with the correct signature) will 
+execute code that will produce the object represented by the target.</p>
+<p>Some rewriting optimisations are applied to the expression tree, the resulting expression tree will be able to be 
+compiled straight to a method if passed into a LambdaExpression.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Expression GetLambdaBodyForTarget(ITarget target, CompileContext context)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+                    <td><span class="parametername">target</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.CompileContext.html">CompileContext</a></td>
+                    <td><span class="parametername">context</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Rezolver_ExpressionHelper_GetLambdaBodyForTarget_Rezolver_ITarget_Rezolver_CompileContext__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Note that the <a class="xref" href="Rezolver.TargetCompilerBase.html">TargetCompilerBase</a> abstract class uses this method to get the expression tree
+for a target that is to be compiled, and the <a class="xref" href="Rezolver.TargetDelegateCompiler.html">TargetDelegateCompiler</a> uses that expression tree
+as-is.</p>
+<p>Note, however, that some compilers might override this behaviour, or rewrite the generated expression more - in which case
+this code wouldn&#39;t be suitable for those compilers.</p>
+<p>This method, therefore, is exposed to provide a surefire way to generate a whole lambda that can be compiled into an in-memory delegate
+for re-use in other targets and scenarios.</p>
+<p>The SingletonTarget, for example, uses this method during its own <span class="xref">Rezolver.ITarget.CreateExpression(Rezolver.CompileContext)</span>
+implementation to get a nested lambda for the wrapped target, so that it can dynamically construct a Lazy whose factory
+method is the code we&#39;d normally produce for a target.</p>
+</div>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_GetResolveLambdaForTarget_Rezolver_ITarget_Rezolver_CompileContext_" data-uid="Rezolver.ExpressionHelper.GetResolveLambdaForTarget(Rezolver.ITarget,Rezolver.CompileContext)">GetResolveLambdaForTarget(ITarget, CompileContext)</h4>
+              <div class="markdown level1 summary"><p>First gets the lambda body using <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_GetLambdaBodyForTarget_Rezolver_ITarget_Rezolver_CompileContext_">GetLambdaBodyForTarget(ITarget, CompileContext)</a>, then
+passes that as the body for the returned expression, using also the <a class="xref" href="Rezolver.CompileContext.html#Rezolver_CompileContext_RezolveContextParameter">RezolveContextParameter</a>
+<see cref="!:ParameterExpression"></see> from the <em>context</em> parameter as the expression for the RezolveContext that&#39;s
+passed to the compiled method when invoked.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Expression&lt;Func&lt;RezolveContext, object&gt;&gt; GetResolveLambdaForTarget(ITarget target, CompileContext context)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+                    <td><span class="parametername">target</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.CompileContext.html">CompileContext</a></td>
+                    <td><span class="parametername">context</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.RezolveContext.html">RezolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_Make_Scope_GetOrAddCallExpression_Rezolver_CompileContext_System_Type_LambdaExpression_Expression_" data-uid="Rezolver.ExpressionHelper.Make_Scope_GetOrAddCallExpression(Rezolver.CompileContext,System.Type,LambdaExpression,Expression)">Make_Scope_GetOrAddCallExpression(CompileContext, Type, LambdaExpression, Expression)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Expression Make_Scope_GetOrAddCallExpression(CompileContext context, Type objectType, LambdaExpression factoryExpression, Expression iDisposableOnly = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.CompileContext.html">CompileContext</a></td>
+                    <td><span class="parametername">context</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">objectType</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">LambdaExpression</span></td>
+                    <td><span class="parametername">factoryExpression</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td><span class="parametername">iDisposableOnly</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+              <h4 id="Rezolver_ExpressionHelper_Make_Scope_GetScopeRootCallExpression_Rezolver_CompileContext_" data-uid="Rezolver.ExpressionHelper.Make_Scope_GetScopeRootCallExpression(Rezolver.CompileContext)">Make_Scope_GetScopeRootCallExpression(CompileContext)</h4>
+              <div class="markdown level1 summary"><p>Returns an expression that represents a call to the <a class="xref" href="Rezolver.ExpressionHelper.html#Rezolver_ExpressionHelper_Scope_GetScopeRootMethod">Scope_GetScopeRootMethod</a> extension method on the scope of the 
+RezolveContext passed to a compiled object target.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static Expression Make_Scope_GetScopeRootCallExpression(CompileContext context)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.CompileContext.html">CompileContext</a></td>
+                    <td><span class="parametername">context</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">Expression</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https: //dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
