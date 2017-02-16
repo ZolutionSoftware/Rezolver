@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
     <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     <meta property="docfx:rel" content="../">
   </head>
   <body data-spy="scroll" data-target="#affix">
@@ -63,14 +63,7 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
-        </div>
-        <div class="article row grid-right">
+        <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
               <h1 id="rezolver-api-reference">Rezolver API reference</h1>
@@ -79,15 +72,15 @@
 place!</p>
 <p>Crucial types to look at are:</p>
 <ul>
-<li><p><strong><a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a></strong> (implements @Rezolver.ITargetContainer): Stores <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances, and 
+<li><p><strong><a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a></strong> (implements @Rezolver.ITargetContainer): Stores <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> instances, and 
 is the main class you&#39;ll use for your &#39;registration&#39; phase.</p>
 </li>
-<li><p><strong><a class="xref" href="Rezolver.Container.html">Container</a></strong> (implements @Rezolver.IContainer): The standard, non-scoped, container you&#39;ll use in 
-your composition root - you can create child scopes from this by calling its implementation of <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateScope">CreateScope()</a>, 
-which returns instances of <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>.  This class uses an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> for its registrations,
+<li><p><strong><a class="xref" href="../api/Rezolver.Container.html">Container</a></strong> (implements @Rezolver.IContainer): The standard, non-scoped, container you&#39;ll use in 
+your composition root - you can create child scopes from this by calling its implementation of <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_CreateScope">CreateScope()</a>, 
+which returns instances of <a class="xref" href="../api/Rezolver.IContainerScope.html">IContainerScope</a>.  This class uses an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> for its registrations,
 which you can supply construction if required.</p>
 </li>
-<li><p><strong><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></strong> - A container which also acts as a &#39;root&#39; scope.</p>
+<li><p><strong><a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a></strong> - A container which also acts as a &#39;root&#39; scope.</p>
 </li>
 </ul>
 

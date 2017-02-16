@@ -95,6 +95,37 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="gulpfile.js" />
+    <Content Include="learn\**\*.*" />
+    <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />
+    <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\PublishExclude.xml" />
+    <Content Include="styles\highlight-theme-rezolver.css" />
+    <Content Include="styles\highlight-theme-rezolver.debug.css" />
+    <Content Include="_docfx_themes\default\common.js" />
+    <Content Include="_docfx_themes\default\conceptual.extension.js" />
+    <Content Include="_docfx_themes\default\conceptual.html.primary.js" />
+    <Content Include="_docfx_themes\default\favicon.ico" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="_docfx_themes\default\gulpfile.js" />
+    <Content Include="_docfx_themes\default\logo.svg" />
+    <Content Include="_docfx_themes\default\ManagedReference.common.js" />
+    <Content Include="_docfx_themes\default\ManagedReference.extension.js" />
+    <Content Include="_docfx_themes\default\ManagedReference.html.primary.js" />
+    <Content Include="_docfx_themes\default\RestApi.common.js" />
+    <Content Include="_docfx_themes\default\RestApi.extension.js" />
+    <Content Include="_docfx_themes\default\RestApi.html.primary.js" />
+    <Content Include="_docfx_themes\default\styles\docfx.css" />
+    <Content Include="_docfx_themes\default\styles\docfx.js" />
+    <Content Include="_docfx_themes\default\styles\docfx.vendor.css" />
+    <Content Include="_docfx_themes\default\styles\docfx.vendor.js" />
+    <Content Include="_docfx_themes\default\styles\lunr.min.js" />
+    <Content Include="_docfx_themes\default\styles\main.css" />
+    <Content Include="_docfx_themes\default\styles\main.js" />
+    <Content Include="_docfx_themes\default\styles\search-worker.js" />
+    <Content Include="_docfx_themes\default\toc.html.js" />
     <None Include=".gitignore" />
     <Content Include="android-chrome-144x144.png" />
     <Content Include="android-chrome-192x192.png" />
@@ -135,6 +166,7 @@
     <Content Include="rezolver-usage\nuget-packages\index.md" />
     <Content Include="rezolver-usage\nuget-packages\rezolver.configuration.md" />
     <Content Include="rezolver-usage-old\index.md" />
+    <None Include="Properties\PublishProfiles\DiskPackage.pubxml" />
     <None Include="rezolver-usage\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -224,8 +256,8 @@
     <Content Include="rezolver-usage\advanced\index.md" />
     <Content Include="rezolver-usage\nuget-packages\toc.yml" />
     <Content Include="styles\highlight-theme-rezolver.less" />
-    <None Include="toc.yml" />
-    <None Include="index.md" />
+    <Content Include="toc.yml" />
+    <Content Include="index.md" />
     <None Include="docfx.json" />
     <None Include="rezolver-usage\index.md" />
     <None Include="rezolver-api\index.md" />
@@ -240,6 +272,37 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="_docfx_themes\default\conceptual.html.primary.tmpl" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="_docfx_themes\default\ManagedReference.html.primary.tmpl" />
+    <Content Include="_docfx_themes\default\partials\affix.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\breadcrumb.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\class.header.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\class.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\classSubtitle.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\customMREFContent.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\enum.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\footer.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\head.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\li.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\logo.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\namespace.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\namespaceSubtitle.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\navbar.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\rest.child.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\rest.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\scripts.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\searchResults.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\title.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\toc.tmpl.partial" />
+    <Content Include="_docfx_themes\default\RestApi.html.primary.tmpl" />
+    <Content Include="_docfx_themes\default\search-stopwords.json" />
+    <Content Include="_docfx_themes\default\toc.html.tmpl" />
+    <Content Include="_docfx_themes\default\token.json" />
+    <Content Include="_docfx_themes\rezolver\partials\head.tmpl.partial" />
   </ItemGroup>
   <ItemGroup>
     <None Include="images\exampleunittest.PNG" />
@@ -262,6 +325,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

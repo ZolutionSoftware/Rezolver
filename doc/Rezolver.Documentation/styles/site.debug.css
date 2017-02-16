@@ -332,11 +332,11 @@ th {
 }
 /* line 35, styles\bootstrap\glyphicons.less */
 .glyphicon-asterisk:before {
-  content: "\002a";
+  content: "\2a";
 }
 /* line 36, styles\bootstrap\glyphicons.less */
 .glyphicon-plus:before {
-  content: "\002b";
+  content: "\2b";
 }
 /* line 38, styles\bootstrap\glyphicons.less */
 .glyphicon-euro:before,
@@ -3239,40 +3239,35 @@ output {
 .form-control::-webkit-input-placeholder {
   color: #999;
 }
-/* line 136, styles\bootstrap\forms.less */
-.form-control::-ms-expand {
-  border: 0;
-  background-color: transparent;
-}
-/* line 146, styles\bootstrap\forms.less */
+/* line 140, styles\bootstrap\forms.less */
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
   background-color: #eeeeee;
   opacity: 1;
 }
-/* line 153, styles\bootstrap\forms.less */
+/* line 147, styles\bootstrap\forms.less */
 .form-control[disabled],
 fieldset[disabled] .form-control {
   cursor: not-allowed;
 }
-/* line 159, styles\bootstrap\forms.less */
+/* line 153, styles\bootstrap\forms.less */
 textarea.form-control {
   height: auto;
 }
-/* line 172, styles\bootstrap\forms.less */
+/* line 166, styles\bootstrap\forms.less */
 input[type="search"] {
   -webkit-appearance: none;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  /* line 191, styles\bootstrap\forms.less */
+  /* line 185, styles\bootstrap\forms.less */
   input[type="date"].form-control,
   input[type="time"].form-control,
   input[type="datetime-local"].form-control,
   input[type="month"].form-control {
     line-height: 34px;
   }
-  /* line 195, styles\bootstrap\forms.less */
+  /* line 189, styles\bootstrap\forms.less */
   input[type="date"].input-sm,
   input[type="time"].input-sm,
   input[type="datetime-local"].input-sm,
@@ -3283,7 +3278,7 @@ input[type="search"] {
   .input-group-sm input[type="month"] {
     line-height: 30px;
   }
-  /* line 200, styles\bootstrap\forms.less */
+  /* line 194, styles\bootstrap\forms.less */
   input[type="date"].input-lg,
   input[type="time"].input-lg,
   input[type="datetime-local"].input-lg,
@@ -3295,11 +3290,11 @@ input[type="search"] {
     line-height: 46px;
   }
 }
-/* line 213, styles\bootstrap\forms.less */
+/* line 207, styles\bootstrap\forms.less */
 .form-group {
   margin-bottom: 15px;
 }
-/* line 222, styles\bootstrap\forms.less */
+/* line 216, styles\bootstrap\forms.less */
 .radio,
 .checkbox {
   position: relative;
@@ -3307,7 +3302,7 @@ input[type="search"] {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 229, styles\bootstrap\forms.less */
+/* line 223, styles\bootstrap\forms.less */
 .radio label,
 .checkbox label {
   min-height: 20px;
@@ -3316,7 +3311,7 @@ input[type="search"] {
   font-weight: normal;
   cursor: pointer;
 }
-/* line 237, styles\bootstrap\forms.less */
+/* line 231, styles\bootstrap\forms.less */
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
@@ -3325,12 +3320,12 @@ input[type="search"] {
   margin-left: -20px;
   margin-top: 4px \9;
 }
-/* line 246, styles\bootstrap\forms.less */
+/* line 240, styles\bootstrap\forms.less */
 .radio + .radio,
 .checkbox + .checkbox {
   margin-top: -5px;
 }
-/* line 252, styles\bootstrap\forms.less */
+/* line 246, styles\bootstrap\forms.less */
 .radio-inline,
 .checkbox-inline {
   position: relative;
@@ -3341,13 +3336,13 @@ input[type="search"] {
   font-weight: normal;
   cursor: pointer;
 }
-/* line 262, styles\bootstrap\forms.less */
+/* line 256, styles\bootstrap\forms.less */
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
   margin-top: 0;
   margin-left: 10px;
 }
-/* line 274, styles\bootstrap\forms.less */
+/* line 268, styles\bootstrap\forms.less */
 input[type="radio"][disabled],
 input[type="checkbox"][disabled],
 input[type="radio"].disabled,
@@ -3356,34 +3351,34 @@ fieldset[disabled] input[type="radio"],
 fieldset[disabled] input[type="checkbox"] {
   cursor: not-allowed;
 }
-/* line 283, styles\bootstrap\forms.less */
+/* line 277, styles\bootstrap\forms.less */
 .radio-inline.disabled,
 .checkbox-inline.disabled,
 fieldset[disabled] .radio-inline,
 fieldset[disabled] .checkbox-inline {
   cursor: not-allowed;
 }
-/* line 293, styles\bootstrap\forms.less */
+/* line 287, styles\bootstrap\forms.less */
 .radio.disabled label,
 .checkbox.disabled label,
 fieldset[disabled] .radio label,
 fieldset[disabled] .checkbox label {
   cursor: not-allowed;
 }
-/* line 305, styles\bootstrap\forms.less */
+/* line 299, styles\bootstrap\forms.less */
 .form-control-static {
   padding-top: 7px;
   padding-bottom: 7px;
   margin-bottom: 0;
   min-height: 34px;
 }
-/* line 313, styles\bootstrap\forms.less */
+/* line 307, styles\bootstrap\forms.less */
 .form-control-static.input-lg,
 .form-control-static.input-sm {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 329, styles\bootstrap\forms.less */
+/* line 323, styles\bootstrap\forms.less */
 .input-sm {
   height: 30px;
   padding: 5px 10px;
@@ -3401,7 +3396,7 @@ textarea.input-sm,
 select[multiple].input-sm {
   height: auto;
 }
-/* line 333, styles\bootstrap\forms.less */
+/* line 327, styles\bootstrap\forms.less */
 .form-group-sm .form-control {
   height: 30px;
   padding: 5px 10px;
@@ -3409,17 +3404,17 @@ select[multiple].input-sm {
   line-height: 1.5;
   border-radius: 3px;
 }
-/* line 340, styles\bootstrap\forms.less */
+/* line 334, styles\bootstrap\forms.less */
 .form-group-sm select.form-control {
   height: 30px;
   line-height: 30px;
 }
-/* line 344, styles\bootstrap\forms.less */
+/* line 338, styles\bootstrap\forms.less */
 .form-group-sm textarea.form-control,
 .form-group-sm select[multiple].form-control {
   height: auto;
 }
-/* line 348, styles\bootstrap\forms.less */
+/* line 342, styles\bootstrap\forms.less */
 .form-group-sm .form-control-static {
   height: 30px;
   min-height: 32px;
@@ -3427,7 +3422,7 @@ select[multiple].input-sm {
   font-size: 12px;
   line-height: 1.5;
 }
-/* line 357, styles\bootstrap\forms.less */
+/* line 351, styles\bootstrap\forms.less */
 .input-lg {
   height: 46px;
   padding: 10px 16px;
@@ -3445,7 +3440,7 @@ textarea.input-lg,
 select[multiple].input-lg {
   height: auto;
 }
-/* line 361, styles\bootstrap\forms.less */
+/* line 355, styles\bootstrap\forms.less */
 .form-group-lg .form-control {
   height: 46px;
   padding: 10px 16px;
@@ -3453,17 +3448,17 @@ select[multiple].input-lg {
   line-height: 1.3333333;
   border-radius: 6px;
 }
-/* line 368, styles\bootstrap\forms.less */
+/* line 362, styles\bootstrap\forms.less */
 .form-group-lg select.form-control {
   height: 46px;
   line-height: 46px;
 }
-/* line 372, styles\bootstrap\forms.less */
+/* line 366, styles\bootstrap\forms.less */
 .form-group-lg textarea.form-control,
 .form-group-lg select[multiple].form-control {
   height: auto;
 }
-/* line 376, styles\bootstrap\forms.less */
+/* line 370, styles\bootstrap\forms.less */
 .form-group-lg .form-control-static {
   height: 46px;
   min-height: 38px;
@@ -3471,15 +3466,15 @@ select[multiple].input-lg {
   font-size: 18px;
   line-height: 1.3333333;
 }
-/* line 390, styles\bootstrap\forms.less */
+/* line 384, styles\bootstrap\forms.less */
 .has-feedback {
   position: relative;
 }
-/* line 395, styles\bootstrap\forms.less */
+/* line 389, styles\bootstrap\forms.less */
 .has-feedback .form-control {
   padding-right: 42.5px;
 }
-/* line 400, styles\bootstrap\forms.less */
+/* line 394, styles\bootstrap\forms.less */
 .form-control-feedback {
   position: absolute;
   top: 0;
@@ -3492,7 +3487,7 @@ select[multiple].input-lg {
   text-align: center;
   pointer-events: none;
 }
-/* line 412, styles\bootstrap\forms.less */
+/* line 406, styles\bootstrap\forms.less */
 .input-lg + .form-control-feedback,
 .input-group-lg + .form-control-feedback,
 .form-group-lg .form-control + .form-control-feedback {
@@ -3500,7 +3495,7 @@ select[multiple].input-lg {
   height: 46px;
   line-height: 46px;
 }
-/* line 419, styles\bootstrap\forms.less */
+/* line 413, styles\bootstrap\forms.less */
 .input-sm + .form-control-feedback,
 .input-group-sm + .form-control-feedback,
 .form-group-sm .form-control + .form-control-feedback {
@@ -3607,15 +3602,15 @@ select[multiple].input-lg {
 .has-error .form-control-feedback {
   color: #a94442;
 }
-/* line 441, styles\bootstrap\forms.less */
+/* line 435, styles\bootstrap\forms.less */
 .has-feedback label ~ .form-control-feedback {
   top: 25px;
 }
-/* line 444, styles\bootstrap\forms.less */
+/* line 438, styles\bootstrap\forms.less */
 .has-feedback label.sr-only ~ .form-control-feedback {
   top: 0;
 }
-/* line 455, styles\bootstrap\forms.less */
+/* line 449, styles\bootstrap\forms.less */
 .help-block {
   display: block;
   margin-top: 5px;
@@ -3623,43 +3618,43 @@ select[multiple].input-lg {
   color: #737373;
 }
 @media (min-width: 768px) {
-  /* line 479, styles\bootstrap\forms.less */
+  /* line 473, styles\bootstrap\forms.less */
   .form-inline .form-group {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 486, styles\bootstrap\forms.less */
+  /* line 480, styles\bootstrap\forms.less */
   .form-inline .form-control {
     display: inline-block;
     width: auto;
     vertical-align: middle;
   }
-  /* line 493, styles\bootstrap\forms.less */
+  /* line 487, styles\bootstrap\forms.less */
   .form-inline .form-control-static {
     display: inline-block;
   }
-  /* line 497, styles\bootstrap\forms.less */
+  /* line 491, styles\bootstrap\forms.less */
   .form-inline .input-group {
     display: inline-table;
     vertical-align: middle;
   }
-  /* line 501, styles\bootstrap\forms.less */
+  /* line 495, styles\bootstrap\forms.less */
   .form-inline .input-group .input-group-addon,
   .form-inline .input-group .input-group-btn,
   .form-inline .input-group .form-control {
     width: auto;
   }
-  /* line 509, styles\bootstrap\forms.less */
+  /* line 503, styles\bootstrap\forms.less */
   .form-inline .input-group > .form-control {
     width: 100%;
   }
-  /* line 513, styles\bootstrap\forms.less */
+  /* line 507, styles\bootstrap\forms.less */
   .form-inline .control-label {
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 520, styles\bootstrap\forms.less */
+  /* line 514, styles\bootstrap\forms.less */
   .form-inline .radio,
   .form-inline .checkbox {
     display: inline-block;
@@ -3667,23 +3662,23 @@ select[multiple].input-lg {
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 527, styles\bootstrap\forms.less */
+  /* line 521, styles\bootstrap\forms.less */
   .form-inline .radio label,
   .form-inline .checkbox label {
     padding-left: 0;
   }
-  /* line 531, styles\bootstrap\forms.less */
+  /* line 525, styles\bootstrap\forms.less */
   .form-inline .radio input[type="radio"],
   .form-inline .checkbox input[type="checkbox"] {
     position: relative;
     margin-left: 0;
   }
-  /* line 538, styles\bootstrap\forms.less */
+  /* line 532, styles\bootstrap\forms.less */
   .form-inline .has-feedback .form-control-feedback {
     top: 0;
   }
 }
-/* line 555, styles\bootstrap\forms.less */
+/* line 549, styles\bootstrap\forms.less */
 .form-horizontal .radio,
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
@@ -3692,37 +3687,37 @@ select[multiple].input-lg {
   margin-bottom: 0;
   padding-top: 7px;
 }
-/* line 565, styles\bootstrap\forms.less */
+/* line 559, styles\bootstrap\forms.less */
 .form-horizontal .radio,
 .form-horizontal .checkbox {
   min-height: 27px;
 }
-/* line 571, styles\bootstrap\forms.less */
+/* line 565, styles\bootstrap\forms.less */
 .form-horizontal .form-group {
   margin-left: -15px;
   margin-right: -15px;
 }
 @media (min-width: 768px) {
-  /* line 578, styles\bootstrap\forms.less */
+  /* line 572, styles\bootstrap\forms.less */
   .form-horizontal .control-label {
     text-align: right;
     margin-bottom: 0;
     padding-top: 7px;
   }
 }
-/* line 589, styles\bootstrap\forms.less */
+/* line 583, styles\bootstrap\forms.less */
 .form-horizontal .has-feedback .form-control-feedback {
   right: 15px;
 }
 @media (min-width: 768px) {
-  /* line 599, styles\bootstrap\forms.less */
+  /* line 593, styles\bootstrap\forms.less */
   .form-horizontal .form-group-lg .control-label {
-    padding-top: 11px;
+    padding-top: 14.333333px;
     font-size: 18px;
   }
 }
 @media (min-width: 768px) {
-  /* line 607, styles\bootstrap\forms.less */
+  /* line 601, styles\bootstrap\forms.less */
   .form-horizontal .form-group-sm .control-label {
     padding-top: 6px;
     font-size: 12px;
@@ -3837,6 +3832,9 @@ fieldset[disabled] a.btn {
   background-image: none;
 }
 /* line 45, styles\bootstrap\mixins\buttons.less */
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
 .btn-default.disabled:hover,
 .btn-default[disabled]:hover,
 fieldset[disabled] .btn-default:hover,
@@ -3845,11 +3843,17 @@ fieldset[disabled] .btn-default:hover,
 fieldset[disabled] .btn-default:focus,
 .btn-default.disabled.focus,
 .btn-default[disabled].focus,
-fieldset[disabled] .btn-default.focus {
+fieldset[disabled] .btn-default.focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
   background-color: #1239A2;
   border-color: #0b2466;
 }
-/* line 53, styles\bootstrap\mixins\buttons.less */
+/* line 56, styles\bootstrap\mixins\buttons.less */
 .btn-default .badge {
   color: #1239A2;
   background-color: white;
@@ -3902,6 +3906,9 @@ fieldset[disabled] .btn-default.focus {
   background-image: none;
 }
 /* line 45, styles\bootstrap\mixins\buttons.less */
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
 .btn-primary.disabled:hover,
 .btn-primary[disabled]:hover,
 fieldset[disabled] .btn-primary:hover,
@@ -3910,11 +3917,17 @@ fieldset[disabled] .btn-primary:hover,
 fieldset[disabled] .btn-primary:focus,
 .btn-primary.disabled.focus,
 .btn-primary[disabled].focus,
-fieldset[disabled] .btn-primary.focus {
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
   background-color: #f15c00;
   border-color: #d85200;
 }
-/* line 53, styles\bootstrap\mixins\buttons.less */
+/* line 56, styles\bootstrap\mixins\buttons.less */
 .btn-primary .badge {
   color: #f15c00;
   background-color: #fff;
@@ -3967,6 +3980,9 @@ fieldset[disabled] .btn-primary.focus {
   background-image: none;
 }
 /* line 45, styles\bootstrap\mixins\buttons.less */
+.btn-success.disabled,
+.btn-success[disabled],
+fieldset[disabled] .btn-success,
 .btn-success.disabled:hover,
 .btn-success[disabled]:hover,
 fieldset[disabled] .btn-success:hover,
@@ -3975,11 +3991,17 @@ fieldset[disabled] .btn-success:hover,
 fieldset[disabled] .btn-success:focus,
 .btn-success.disabled.focus,
 .btn-success[disabled].focus,
-fieldset[disabled] .btn-success.focus {
+fieldset[disabled] .btn-success.focus,
+.btn-success.disabled:active,
+.btn-success[disabled]:active,
+fieldset[disabled] .btn-success:active,
+.btn-success.disabled.active,
+.btn-success[disabled].active,
+fieldset[disabled] .btn-success.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-/* line 53, styles\bootstrap\mixins\buttons.less */
+/* line 56, styles\bootstrap\mixins\buttons.less */
 .btn-success .badge {
   color: #5cb85c;
   background-color: #fff;
@@ -4032,6 +4054,9 @@ fieldset[disabled] .btn-success.focus {
   background-image: none;
 }
 /* line 45, styles\bootstrap\mixins\buttons.less */
+.btn-info.disabled,
+.btn-info[disabled],
+fieldset[disabled] .btn-info,
 .btn-info.disabled:hover,
 .btn-info[disabled]:hover,
 fieldset[disabled] .btn-info:hover,
@@ -4040,11 +4065,17 @@ fieldset[disabled] .btn-info:hover,
 fieldset[disabled] .btn-info:focus,
 .btn-info.disabled.focus,
 .btn-info[disabled].focus,
-fieldset[disabled] .btn-info.focus {
+fieldset[disabled] .btn-info.focus,
+.btn-info.disabled:active,
+.btn-info[disabled]:active,
+fieldset[disabled] .btn-info:active,
+.btn-info.disabled.active,
+.btn-info[disabled].active,
+fieldset[disabled] .btn-info.active {
   background-color: #5bc0de;
   border-color: #46b8da;
 }
-/* line 53, styles\bootstrap\mixins\buttons.less */
+/* line 56, styles\bootstrap\mixins\buttons.less */
 .btn-info .badge {
   color: #5bc0de;
   background-color: #fff;
@@ -4097,6 +4128,9 @@ fieldset[disabled] .btn-info.focus {
   background-image: none;
 }
 /* line 45, styles\bootstrap\mixins\buttons.less */
+.btn-warning.disabled,
+.btn-warning[disabled],
+fieldset[disabled] .btn-warning,
 .btn-warning.disabled:hover,
 .btn-warning[disabled]:hover,
 fieldset[disabled] .btn-warning:hover,
@@ -4105,11 +4139,17 @@ fieldset[disabled] .btn-warning:hover,
 fieldset[disabled] .btn-warning:focus,
 .btn-warning.disabled.focus,
 .btn-warning[disabled].focus,
-fieldset[disabled] .btn-warning.focus {
+fieldset[disabled] .btn-warning.focus,
+.btn-warning.disabled:active,
+.btn-warning[disabled]:active,
+fieldset[disabled] .btn-warning:active,
+.btn-warning.disabled.active,
+.btn-warning[disabled].active,
+fieldset[disabled] .btn-warning.active {
   background-color: #f0ad4e;
   border-color: #eea236;
 }
-/* line 53, styles\bootstrap\mixins\buttons.less */
+/* line 56, styles\bootstrap\mixins\buttons.less */
 .btn-warning .badge {
   color: #f0ad4e;
   background-color: #fff;
@@ -4162,6 +4202,9 @@ fieldset[disabled] .btn-warning.focus {
   background-image: none;
 }
 /* line 45, styles\bootstrap\mixins\buttons.less */
+.btn-danger.disabled,
+.btn-danger[disabled],
+fieldset[disabled] .btn-danger,
 .btn-danger.disabled:hover,
 .btn-danger[disabled]:hover,
 fieldset[disabled] .btn-danger:hover,
@@ -4170,11 +4213,17 @@ fieldset[disabled] .btn-danger:hover,
 fieldset[disabled] .btn-danger:focus,
 .btn-danger.disabled.focus,
 .btn-danger[disabled].focus,
-fieldset[disabled] .btn-danger.focus {
+fieldset[disabled] .btn-danger.focus,
+.btn-danger.disabled:active,
+.btn-danger[disabled]:active,
+fieldset[disabled] .btn-danger:active,
+.btn-danger.disabled.active,
+.btn-danger[disabled].active,
+fieldset[disabled] .btn-danger.active {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
-/* line 53, styles\bootstrap\mixins\buttons.less */
+/* line 56, styles\bootstrap\mixins\buttons.less */
 .btn-danger .badge {
   color: #d9534f;
   background-color: #fff;
@@ -4601,16 +4650,14 @@ tbody.collapse.in {
 /* line 175, styles\bootstrap\button-groups.less */
 .btn-group-vertical > .btn:first-child:not(:last-child) {
   border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 /* line 179, styles\bootstrap\button-groups.less */
 .btn-group-vertical > .btn:last-child:not(:first-child) {
+  border-bottom-left-radius: 4px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
 }
 /* line 184, styles\bootstrap\button-groups.less */
 .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
@@ -4678,11 +4725,7 @@ tbody.collapse.in {
   width: 100%;
   margin-bottom: 0;
 }
-/* line 33, styles\bootstrap\input-groups.less */
-.input-group .form-control:focus {
-  z-index: 3;
-}
-/* line 44, styles\bootstrap\input-groups.less */
+/* line 40, styles\bootstrap\input-groups.less */
 .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn {
@@ -4708,7 +4751,7 @@ select[multiple].input-group-lg > .input-group-addon,
 select[multiple].input-group-lg > .input-group-btn > .btn {
   height: auto;
 }
-/* line 49, styles\bootstrap\input-groups.less */
+/* line 45, styles\bootstrap\input-groups.less */
 .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn {
@@ -4734,26 +4777,26 @@ select[multiple].input-group-sm > .input-group-addon,
 select[multiple].input-group-sm > .input-group-btn > .btn {
   height: auto;
 }
-/* line 58, styles\bootstrap\input-groups.less */
+/* line 54, styles\bootstrap\input-groups.less */
 .input-group-addon,
 .input-group-btn,
 .input-group .form-control {
   display: table-cell;
 }
-/* line 63, styles\bootstrap\input-groups.less */
+/* line 59, styles\bootstrap\input-groups.less */
 .input-group-addon:not(:first-child):not(:last-child),
 .input-group-btn:not(:first-child):not(:last-child),
 .input-group .form-control:not(:first-child):not(:last-child) {
   border-radius: 0;
 }
-/* line 68, styles\bootstrap\input-groups.less */
+/* line 64, styles\bootstrap\input-groups.less */
 .input-group-addon,
 .input-group-btn {
   width: 1%;
   white-space: nowrap;
   vertical-align: middle;
 }
-/* line 77, styles\bootstrap\input-groups.less */
+/* line 73, styles\bootstrap\input-groups.less */
 .input-group-addon {
   padding: 6px 12px;
   font-size: 14px;
@@ -4765,24 +4808,24 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-/* line 89, styles\bootstrap\input-groups.less */
+/* line 85, styles\bootstrap\input-groups.less */
 .input-group-addon.input-sm {
   padding: 5px 10px;
   font-size: 12px;
   border-radius: 3px;
 }
-/* line 94, styles\bootstrap\input-groups.less */
+/* line 90, styles\bootstrap\input-groups.less */
 .input-group-addon.input-lg {
   padding: 10px 16px;
   font-size: 18px;
   border-radius: 6px;
 }
-/* line 101, styles\bootstrap\input-groups.less */
+/* line 97, styles\bootstrap\input-groups.less */
 .input-group-addon input[type="radio"],
 .input-group-addon input[type="checkbox"] {
   margin-top: 0;
 }
-/* line 108, styles\bootstrap\input-groups.less */
+/* line 104, styles\bootstrap\input-groups.less */
 .input-group .form-control:first-child,
 .input-group-addon:first-child,
 .input-group-btn:first-child > .btn,
@@ -4793,11 +4836,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
-/* line 117, styles\bootstrap\input-groups.less */
+/* line 113, styles\bootstrap\input-groups.less */
 .input-group-addon:first-child {
   border-right: 0;
 }
-/* line 120, styles\bootstrap\input-groups.less */
+/* line 116, styles\bootstrap\input-groups.less */
 .input-group .form-control:last-child,
 .input-group-addon:last-child,
 .input-group-btn:last-child > .btn,
@@ -4808,36 +4851,36 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
-/* line 129, styles\bootstrap\input-groups.less */
+/* line 125, styles\bootstrap\input-groups.less */
 .input-group-addon:last-child {
   border-left: 0;
 }
-/* line 135, styles\bootstrap\input-groups.less */
+/* line 131, styles\bootstrap\input-groups.less */
 .input-group-btn {
   position: relative;
   font-size: 0;
   white-space: nowrap;
 }
-/* line 144, styles\bootstrap\input-groups.less */
+/* line 140, styles\bootstrap\input-groups.less */
 .input-group-btn > .btn {
   position: relative;
 }
-/* line 146, styles\bootstrap\input-groups.less */
+/* line 142, styles\bootstrap\input-groups.less */
 .input-group-btn > .btn + .btn {
   margin-left: -1px;
 }
-/* line 150, styles\bootstrap\input-groups.less */
+/* line 146, styles\bootstrap\input-groups.less */
 .input-group-btn > .btn:hover,
 .input-group-btn > .btn:focus,
 .input-group-btn > .btn:active {
   z-index: 2;
 }
-/* line 159, styles\bootstrap\input-groups.less */
+/* line 155, styles\bootstrap\input-groups.less */
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .btn-group {
   margin-right: -1px;
 }
-/* line 165, styles\bootstrap\input-groups.less */
+/* line 161, styles\bootstrap\input-groups.less */
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .btn-group {
   z-index: 2;
@@ -5326,43 +5369,43 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 8px;
 }
 @media (min-width: 768px) {
-  /* line 479, styles\bootstrap\forms.less */
+  /* line 473, styles\bootstrap\forms.less */
   .navbar-form .form-group {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 486, styles\bootstrap\forms.less */
+  /* line 480, styles\bootstrap\forms.less */
   .navbar-form .form-control {
     display: inline-block;
     width: auto;
     vertical-align: middle;
   }
-  /* line 493, styles\bootstrap\forms.less */
+  /* line 487, styles\bootstrap\forms.less */
   .navbar-form .form-control-static {
     display: inline-block;
   }
-  /* line 497, styles\bootstrap\forms.less */
+  /* line 491, styles\bootstrap\forms.less */
   .navbar-form .input-group {
     display: inline-table;
     vertical-align: middle;
   }
-  /* line 501, styles\bootstrap\forms.less */
+  /* line 495, styles\bootstrap\forms.less */
   .navbar-form .input-group .input-group-addon,
   .navbar-form .input-group .input-group-btn,
   .navbar-form .input-group .form-control {
     width: auto;
   }
-  /* line 509, styles\bootstrap\forms.less */
+  /* line 503, styles\bootstrap\forms.less */
   .navbar-form .input-group > .form-control {
     width: 100%;
   }
-  /* line 513, styles\bootstrap\forms.less */
+  /* line 507, styles\bootstrap\forms.less */
   .navbar-form .control-label {
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 520, styles\bootstrap\forms.less */
+  /* line 514, styles\bootstrap\forms.less */
   .navbar-form .radio,
   .navbar-form .checkbox {
     display: inline-block;
@@ -5370,18 +5413,18 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-bottom: 0;
     vertical-align: middle;
   }
-  /* line 527, styles\bootstrap\forms.less */
+  /* line 521, styles\bootstrap\forms.less */
   .navbar-form .radio label,
   .navbar-form .checkbox label {
     padding-left: 0;
   }
-  /* line 531, styles\bootstrap\forms.less */
+  /* line 525, styles\bootstrap\forms.less */
   .navbar-form .radio input[type="radio"],
   .navbar-form .checkbox input[type="checkbox"] {
     position: relative;
     margin-left: 0;
   }
-  /* line 538, styles\bootstrap\forms.less */
+  /* line 532, styles\bootstrap\forms.less */
   .navbar-form .has-feedback .form-control-feedback {
     top: 0;
   }
@@ -5773,7 +5816,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  z-index: 2;
+  z-index: 3;
   color: #722b00;
   background-color: #eeeeee;
   border-color: #ddd;
@@ -5785,7 +5828,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  z-index: 3;
+  z-index: 2;
   color: #fff;
   background-color: #f15c00;
   border-color: #f15c00;
@@ -6051,26 +6094,24 @@ a.badge:focus {
 .container .jumbotron,
 .container-fluid .jumbotron {
   border-radius: 6px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
-/* line 35, styles\bootstrap\jumbotron.less */
+/* line 33, styles\bootstrap\jumbotron.less */
 .jumbotron .container {
   max-width: 100%;
 }
 @media screen and (min-width: 768px) {
-  /* line 39, styles\bootstrap\jumbotron.less */
+  /* line 37, styles\bootstrap\jumbotron.less */
   .jumbotron {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-  /* line 43, styles\bootstrap\jumbotron.less */
+  /* line 41, styles\bootstrap\jumbotron.less */
   .container .jumbotron,
   .container-fluid .jumbotron {
     padding-left: 60px;
     padding-right: 60px;
   }
-  /* line 49, styles\bootstrap\jumbotron.less */
+  /* line 47, styles\bootstrap\jumbotron.less */
   .jumbotron h1,
   .jumbotron .h1 {
     font-size: 63px;
@@ -7142,6 +7183,7 @@ button.close {
 .modal-header {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
+  min-height: 16.42857143px;
 }
 /* line 85, styles\bootstrap\modals.less */
 .modal-header .close {
@@ -7582,15 +7624,14 @@ button.close {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: rgba(0, 0, 0, 0);
 }
-/* line 109, styles\bootstrap\carousel.less */
+/* line 108, styles\bootstrap\carousel.less */
 .carousel-control.left {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
 }
-/* line 112, styles\bootstrap\carousel.less */
+/* line 111, styles\bootstrap\carousel.less */
 .carousel-control.right {
   left: auto;
   right: 0;
@@ -7598,7 +7639,7 @@ button.close {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
 }
-/* line 119, styles\bootstrap\carousel.less */
+/* line 118, styles\bootstrap\carousel.less */
 .carousel-control:hover,
 .carousel-control:focus {
   outline: 0;
@@ -7607,7 +7648,7 @@ button.close {
   opacity: 0.9;
   filter: alpha(opacity=90);
 }
-/* line 128, styles\bootstrap\carousel.less */
+/* line 127, styles\bootstrap\carousel.less */
 .carousel-control .icon-prev,
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-left,
@@ -7618,19 +7659,19 @@ button.close {
   z-index: 5;
   display: inline-block;
 }
-/* line 138, styles\bootstrap\carousel.less */
+/* line 137, styles\bootstrap\carousel.less */
 .carousel-control .icon-prev,
 .carousel-control .glyphicon-chevron-left {
   left: 50%;
   margin-left: -10px;
 }
-/* line 143, styles\bootstrap\carousel.less */
+/* line 142, styles\bootstrap\carousel.less */
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-right {
   right: 50%;
   margin-right: -10px;
 }
-/* line 148, styles\bootstrap\carousel.less */
+/* line 147, styles\bootstrap\carousel.less */
 .carousel-control .icon-prev,
 .carousel-control .icon-next {
   width: 20px;
@@ -7638,15 +7679,15 @@ button.close {
   line-height: 1;
   font-family: serif;
 }
-/* line 158, styles\bootstrap\carousel.less */
+/* line 157, styles\bootstrap\carousel.less */
 .carousel-control .icon-prev:before {
   content: '\2039';
 }
-/* line 163, styles\bootstrap\carousel.less */
+/* line 162, styles\bootstrap\carousel.less */
 .carousel-control .icon-next:before {
   content: '\203a';
 }
-/* line 174, styles\bootstrap\carousel.less */
+/* line 173, styles\bootstrap\carousel.less */
 .carousel-indicators {
   position: absolute;
   bottom: 10px;
@@ -7658,7 +7699,7 @@ button.close {
   list-style: none;
   text-align: center;
 }
-/* line 185, styles\bootstrap\carousel.less */
+/* line 184, styles\bootstrap\carousel.less */
 .carousel-indicators li {
   display: inline-block;
   width: 10px;
@@ -7671,14 +7712,14 @@ button.close {
   background-color: #000 \9;
   background-color: rgba(0, 0, 0, 0);
 }
-/* line 207, styles\bootstrap\carousel.less */
+/* line 206, styles\bootstrap\carousel.less */
 .carousel-indicators .active {
   margin: 0;
   width: 12px;
   height: 12px;
   background-color: #fff;
 }
-/* line 218, styles\bootstrap\carousel.less */
+/* line 217, styles\bootstrap\carousel.less */
 .carousel-caption {
   position: absolute;
   left: 15%;
@@ -7691,38 +7732,38 @@ button.close {
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
-/* line 229, styles\bootstrap\carousel.less */
+/* line 228, styles\bootstrap\carousel.less */
 .carousel-caption .btn {
   text-shadow: none;
 }
 @media screen and (min-width: 768px) {
-  /* line 240, styles\bootstrap\carousel.less */
+  /* line 239, styles\bootstrap\carousel.less */
   .carousel-control .glyphicon-chevron-left,
   .carousel-control .glyphicon-chevron-right,
   .carousel-control .icon-prev,
   .carousel-control .icon-next {
     width: 30px;
     height: 30px;
-    margin-top: -10px;
+    margin-top: -15px;
     font-size: 30px;
   }
-  /* line 249, styles\bootstrap\carousel.less */
+  /* line 248, styles\bootstrap\carousel.less */
   .carousel-control .glyphicon-chevron-left,
   .carousel-control .icon-prev {
-    margin-left: -10px;
+    margin-left: -15px;
   }
-  /* line 253, styles\bootstrap\carousel.less */
+  /* line 252, styles\bootstrap\carousel.less */
   .carousel-control .glyphicon-chevron-right,
   .carousel-control .icon-next {
-    margin-right: -10px;
+    margin-right: -15px;
   }
-  /* line 260, styles\bootstrap\carousel.less */
+  /* line 259, styles\bootstrap\carousel.less */
   .carousel-caption {
     left: 20%;
     right: 20%;
     padding-bottom: 30px;
   }
-  /* line 267, styles\bootstrap\carousel.less */
+  /* line 266, styles\bootstrap\carousel.less */
   .carousel-indicators {
     bottom: 20px;
   }
@@ -7756,8 +7797,6 @@ button.close {
 .pager:after,
 .panel-body:before,
 .panel-body:after,
-.modal-header:before,
-.modal-header:after,
 .modal-footer:before,
 .modal-footer:after {
   content: " ";
@@ -7778,7 +7817,6 @@ button.close {
 .navbar-collapse:after,
 .pager:after,
 .panel-body:after,
-.modal-header:after,
 .modal-footer:after {
   clear: both;
 }
@@ -8160,989 +8198,5 @@ button.close {
 /* line 66, styles\highlight-theme-rezolver.less */
 .hljs-link {
   text-decoration: underline;
-}
-/* These styles adapted from the original docfx.css stylesheet in the docfx 
-    default template, shifting some of the focus on to the themed bootstrap */
-/* Copyright (c) Microsoft Corporation. All Rights Reserved. Licensed under the MIT License. See License.txt in the project root for license information. */
-/* line 19, styles/site.less */
-html,
-body {
-  height: 100%;
-}
-/* line 24, styles/site.less */
-button,
-a {
-  cursor: pointer;
-}
-/* line 30, styles/site.less */
-button:hover,
-button:focus,
-a:hover,
-a:focus {
-  text-decoration: none;
-}
-/* line 38, styles/site.less */
-a.disable,
-a.disable:hover {
-  text-decoration: none;
-  cursor: default;
-}
-/* workaround for leave space for fixed navbar with # anchor url*/
-/*h1:before,
-h2:before,
-h3:before,
-h4:before {
-    content: '';
-    display: block;
-    position: relative;
-    width: 0;
-    height: 100px;
-    margin-top: -100px;
-}*/
-/* line 59, styles/site.less */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-span.xref {
-  /*word-wrap: break-word;
-    word-break: break-all;*/
-}
-/* line 64, styles/site.less */
-h1 mark,
-h2 mark,
-h3 mark,
-h4 mark,
-h5 mark,
-h6 mark {
-  padding: 0;
-}
-/* line 73, styles/site.less */
-.inheritance .level0:before,
-.inheritance .level1:before,
-.inheritance .level2:before,
-.inheritance .level3:before,
-.inheritance .level4:before,
-.inheritance .level5:before {
-  content: '↳';
-  margin-right: 5px;
-}
-/* line 83, styles/site.less */
-.inheritance .level0 {
-  margin-left: 0em;
-}
-/* line 87, styles/site.less */
-.inheritance .level1 {
-  margin-left: 1em;
-}
-/* line 91, styles/site.less */
-.inheritance .level2 {
-  margin-left: 2em;
-}
-/* line 95, styles/site.less */
-.inheritance .level3 {
-  margin-left: 3em;
-}
-/* line 99, styles/site.less */
-.inheritance .level4 {
-  margin-left: 4em;
-}
-/* line 103, styles/site.less */
-.inheritance .level5 {
-  margin-left: 5em;
-}
-/* line 107, styles/site.less */
-.hljs {
-  display: inline;
-  background-color: inherit;
-  padding: 0;
-}
-/* additional spacing fixes */
-/* line 113, styles/site.less */
-.btn + .btn {
-  margin-left: 10px;
-}
-/* line 117, styles/site.less */
-.btn.pull-right {
-  margin-left: 10px;
-  margin-top: 5px;
-}
-/* line 122, styles/site.less */
-.table {
-  margin-bottom: 10px;
-}
-/* line 126, styles/site.less */
-table p {
-  margin-bottom: 0;
-}
-/* line 130, styles/site.less */
-table a {
-  display: inline-block;
-}
-/* line 134, styles/site.less */
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3 {
-  margin-top: 15px;
-  margin-bottom: 10px;
-  font-weight: 400;
-}
-/* line 145, styles/site.less */
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-/* line 155, styles/site.less */
-.navbar {
-  margin-bottom: 0;
-}
-/* line 159, styles/site.less */
-#wrapper {
-  min-height: 100%;
-  position: relative;
-}
-/* blends header footer and content together with gradient effect */
-/* line 164, styles/site.less */
-.grad-top {
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0));
-  /* Standard syntax */
-  height: 5px;
-}
-/* line 173, styles/site.less */
-.grad-bottom {
-  /* For Safari 5.1 to 6.0 */
-  /* For Opera 11.1 to 12.0 */
-  /* For Firefox 3.6 to 15 */
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
-  /* Standard syntax */
-  height: 5px;
-}
-/* line 182, styles/site.less */
-.divider {
-  margin: 0 5px;
-  color: #eeeeee;
-}
-/* line 187, styles/site.less */
-hr {
-  border-color: #ffe7d8;
-  border-width: 5px;
-}
-/* line 192, styles/site.less */
-hr.soft {
-  border-color: #eeeeee;
-  border-width: 2px;
-}
-/* line 197, styles/site.less */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-/* line 205, styles/site.less */
-header .navbar {
-  border-width: 0 0 1px;
-  border-radius: 0;
-}
-/* line 210, styles/site.less */
-.navbar-brand {
-  font-size: inherit;
-  padding: 0;
-}
-/* line 215, styles/site.less */
-.navbar-collapse {
-  margin: 0 -15px;
-}
-/* line 219, styles/site.less */
-.subnav {
-  min-height: 40px;
-}
-/* line 223, styles/site.less */
-div.classchild {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-/* line 228, styles/site.less */
-article h4.hmember {
-  padding: 10px;
-  background: #f15c00;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-  color: white;
-  text-shadow: 1px 1px 0 #722b00;
-  font-weight: bolder;
-}
-/* line 237, styles/site.less */
-article h3 {
-  margin-bottom: 10px;
-  color: #722b00;
-}
-@media only screen and (min-width: 768px) {
-  /* line 244, styles/site.less */
-  div.classchild {
-    border-top: 1px solid #ffc7a5;
-    border-right: 1px solid #ffc7a5;
-    border-bottom: 1px solid #ffc7a5;
-    padding: 0 10px 10px 30px;
-    margin-left: -30px;
-  }
-  /* line 252, styles/site.less */
-  article h4.hmember {
-    padding: 10px 0 10px 30px;
-    margin-left: -30px;
-    margin-right: -10px;
-  }
-  /* line 258, styles/site.less */
-  article h3 {
-    padding: 10px 0 10px 30px;
-    margin-left: -30px;
-    margin-right: -10px;
-  }
-}
-/* line 265, styles/site.less */
-.apiDocSectionHeader,
-.inheritance h5,
-.inheritedMembers h5,
-h5.hsyntax,
-h5.hparameters,
-h5.hremarks,
-h5.hexamples,
-h5.hreturns,
-h5.hdeclaration,
-h5.hpropertyValue,
-h5.hoverrides,
-h5.himplements,
-h5.hexceptions {
-  background: #ffe7d8;
-  color: #333333;
-  margin-top: 20px;
-  padding: 5px;
-  border-bottom: 1px solid #ffc7a5;
-  font-weight: bold;
-}
-/* line 280, styles/site.less */
-article h1,
-article h2,
-article h3,
-article h4 {
-  margin-top: 25px;
-}
-/* line 284, styles/site.less */
-article h4 {
-  border-bottom: 1px solid #be4900;
-}
-/* line 288, styles/site.less */
-article h4.hmember {
-  margin-top: 0;
-  /*border-left:50px solid @alt-color;
-    margin-left:-55px;
-    padding-left: 5px;*/
-}
-/* line 295, styles/site.less */
-article span.small.pull-right {
-  margin-top: 3px;
-}
-/* line 299, styles/site.less */
-article section {
-  margin-left: 1em;
-}
-/*.expand-all {
-  padding: 10px 0;
-}*/
-/* line 306, styles/site.less */
-.breadcrumb {
-  margin: 0;
-  padding: 10px 0;
-  background-color: inherit;
-  white-space: nowrap;
-}
-/* line 313, styles/site.less */
-.breadcrumb > li + li:before {
-  content: "\00a0/";
-}
-/* line 317, styles/site.less */
-#autocollapse.collapsed .navbar-header {
-  float: none;
-}
-/* line 321, styles/site.less */
-#autocollapse.collapsed .navbar-toggle {
-  display: block;
-}
-/* line 325, styles/site.less */
-#autocollapse.collapsed .navbar-collapse {
-  border-top: 1px solid transparent;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-/* line 330, styles/site.less */
-#autocollapse.collapsed .navbar-collapse.collapse {
-  display: none !important;
-}
-/* line 334, styles/site.less */
-#autocollapse.collapsed .navbar-nav {
-  float: none !important;
-  margin: 7.5px -15px;
-}
-/* line 339, styles/site.less */
-#autocollapse.collapsed .navbar-nav > li {
-  float: none;
-}
-/* line 343, styles/site.less */
-#autocollapse.collapsed .navbar-nav > li > a {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-/* line 348, styles/site.less */
-#autocollapse.collapsed .collapse.in,
-#autocollapse.collapsed .collapsing {
-  display: block !important;
-}
-/* line 353, styles/site.less */
-#autocollapse.collapsed .collapse.in .navbar-right,
-#autocollapse.collapsed .collapsing .navbar-right {
-  float: none !important;
-}
-/* line 358, styles/site.less */
-#autocollapse .form-group {
-  width: 100%;
-}
-/* line 362, styles/site.less */
-#autocollapse .form-control {
-  width: 100%;
-}
-/* line 366, styles/site.less */
-#autocollapse .navbar-header {
-  margin-left: 0;
-  margin-right: 0;
-}
-/* line 371, styles/site.less */
-#autocollapse .navbar-brand {
-  margin-left: 0;
-}
-/* line 375, styles/site.less */
-.collapse.in,
-.collapsing {
-  text-align: center;
-}
-/* line 380, styles/site.less */
-.collapsing .navbar-form {
-  margin: 0 auto;
-  max-width: 400px;
-  padding: 10px 15px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-/* line 387, styles/site.less */
-.collapsed .collapse.in .navbar-form {
-  margin: 0 auto;
-  max-width: 400px;
-  padding: 10px 15px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-/* line 394, styles/site.less */
-.navbar .navbar-nav {
-  display: inline-block;
-}
-/* line 398, styles/site.less */
-.docs-search {
-  background: white;
-  vertical-align: middle;
-}
-/* line 403, styles/site.less */
-.docs-search > .search-query {
-  font-size: 14px;
-  border: 0;
-  width: 120%;
-  color: #555;
-}
-/* line 410, styles/site.less */
-.docs-search > .search-query:focus {
-  outline: 0;
-}
-/* line 414, styles/site.less */
-.search-results-frame {
-  clear: both;
-  display: table;
-  width: 100%;
-}
-/* line 420, styles/site.less */
-.search-results.ng-hide {
-  display: none;
-}
-/* line 424, styles/site.less */
-.search-results-container {
-  padding-bottom: 1em;
-  border-top: 1px solid #111;
-  background: rgba(25, 25, 25, 0.5);
-}
-/* line 430, styles/site.less */
-.search-results-container .search-results-group {
-  padding-top: 50px !important;
-  padding: 10px;
-}
-/* line 435, styles/site.less */
-.search-results-group-heading {
-  font-family: "Open Sans";
-  padding-left: 10px;
-  color: white;
-}
-/* line 441, styles/site.less */
-.search-close {
-  position: absolute;
-  left: 50%;
-  margin-left: -100px;
-  color: white;
-  text-align: center;
-  padding: 5px;
-  background: #333;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  width: 200px;
-  box-shadow: 0 0 10px #111;
-}
-/* line 455, styles/site.less */
-#search {
-  display: none;
-}
-/* Search results display*/
-/* line 460, styles/site.less */
-#search-results {
-  max-width: 960px !important;
-  margin-top: 120px;
-  margin-bottom: 115px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.8;
-  display: none;
-}
-/* line 470, styles/site.less */
-#search-results > .search-list {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 50px;
-}
-/* line 476, styles/site.less */
-#search-results p {
-  text-align: center;
-}
-/* line 480, styles/site.less */
-#search-results .sr-items {
-  font-size: 24px;
-}
-/* line 484, styles/site.less */
-.sr-item {
-  margin-bottom: 25px;
-}
-/* line 488, styles/site.less */
-.sr-item > .item-href {
-  font-size: 14px;
-  color: #093;
-}
-/* line 493, styles/site.less */
-.sr-item > .item-brief {
-  font-size: 13px;
-}
-/* line 497, styles/site.less */
-.pagination > li > a {
-  color: #47A7A0;
-}
-/* line 501, styles/site.less */
-.pagination > .active > a {
-  background-color: #47A7A0;
-  border-color: #47A7A0;
-}
-/* line 506, styles/site.less */
-.fixed_header {
-  position: fixed;
-  width: 100%;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  margin: 0px;
-  top: 0;
-  z-index: 9999;
-  left: 0;
-}
-/* line 517, styles/site.less */
-.fixed_header + .toc {
-  margin-top: 50px;
-  margin-left: 0;
-}
-/* line 522, styles/site.less */
-.sidenav,
-.fixed_header,
-.toc {
-  background-color: #eeeeee;
-}
-/* line 526, styles/site.less */
-.sidetoc {
-  position: fixed;
-  width: 260px;
-  top: 150px;
-  bottom: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: #eeeeee;
-  border-left: 1px solid #d5d5d5;
-  border-right: 1px solid #d5d5d5;
-  z-index: 1;
-}
-/* line 539, styles/site.less */
-body .toc {
-  overflow-x: hidden;
-}
-/* line 543, styles/site.less */
-.sidetoggle.ng-hide {
-  display: block !important;
-}
-/* line 547, styles/site.less */
-.sidetoc-expand > .caret {
-  margin-left: 0px;
-  margin-top: -2px;
-}
-/* line 552, styles/site.less */
-.sidetoc-expand > .caret-side {
-  border-left: 4px solid;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  margin-left: 4px;
-  margin-top: -4px;
-}
-/* line 560, styles/site.less */
-.sidetoc-heading {
-  font-weight: 500;
-}
-/* line 564, styles/site.less */
-.toc {
-  margin: 0px 0 0 10px;
-  padding: 0 10px;
-}
-/* line 569, styles/site.less */
-.expand-stub {
-  position: absolute;
-  left: -10px;
-}
-/* line 574, styles/site.less */
-.toc .nav > li > a.sidetoc-expand {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-/* line 580, styles/site.less */
-.toc .nav > li > a {
-  color: #0b0400;
-  display: inline;
-  padding: 0;
-}
-/* line 586, styles/site.less */
-.toc .nav > li > .expand-stub + a {
-  margin-left: 5px;
-  display: block;
-}
-/* line 591, styles/site.less */
-.toc .nav > li > a:hover,
-.toc .nav > li > a:focus {
-  color: #000000;
-  background: none;
-  text-decoration: inherit;
-}
-/* line 598, styles/site.less */
-.toc .nav > li.active > a {
-  color: #1239A2;
-}
-/* line 602, styles/site.less */
-.toc .nav > li.active > a:hover,
-.toc .nav > li.active > a:focus {
-  color: #0d2974;
-}
-/* line 607, styles/site.less */
-.toc .nav > li > .expand-stub {
-  cursor: pointer;
-}
-/* line 611, styles/site.less */
-.toc .nav > li.active > .expand-stub::before,
-.toc .nav > li.in > .expand-stub::before,
-.toc .nav > li.in.active > .expand-stub::before,
-.toc .nav > li.filtered > .expand-stub::before {
-  content: "-";
-}
-/* line 618, styles/site.less */
-.toc .nav > li > .expand-stub::before,
-.toc .nav > li.active > .expand-stub::before {
-  content: "+";
-}
-/* line 623, styles/site.less */
-.toc .nav > li.filtered > ul,
-.toc .nav > li.in > ul {
-  display: block;
-}
-/* line 628, styles/site.less */
-.toc .nav > li > ul {
-  display: none;
-}
-/* line 632, styles/site.less */
-.toc .level1 > li {
-  font-weight: bold;
-  margin-top: 10px;
-  position: relative;
-}
-/* line 638, styles/site.less */
-.toc .level2 {
-  font-weight: normal;
-  margin-top: 5px;
-  margin-left: 15px;
-  font-size: 14px;
-}
-/* line 645, styles/site.less */
-.toc .level3 {
-  font-size: 12px;
-}
-/* line 649, styles/site.less */
-.toc-toggle {
-  display: none;
-  margin: 0 15px 0px 15px;
-}
-/* line 654, styles/site.less */
-.sidefilter {
-  position: fixed;
-  top: 90px;
-  width: 260px;
-  background-color: #eeeeee;
-  padding: 15px;
-  border-left: 1px solid #d5d5d5;
-  border-right: 1px solid #d5d5d5;
-  z-index: 1;
-}
-/* line 665, styles/site.less */
-.toc-filter {
-  border-radius: 5px;
-  background: #fff;
-  color: #f15c00;
-  padding: 5px;
-  position: relative;
-  margin: 0 5px 0 5px;
-}
-/* line 674, styles/site.less */
-.toc-filter > input {
-  border: 0;
-  color: #ff7825;
-  padding-left: 20px;
-  width: 100%;
-}
-/* line 681, styles/site.less */
-.toc-filter > input:focus {
-  outline: 0;
-}
-/* line 685, styles/site.less */
-.toc-filter > .filter-icon {
-  position: absolute;
-  top: 10px;
-  left: 5px;
-}
-/* line 691, styles/site.less */
-.article {
-  margin-top: 90px;
-  margin-bottom: 100px;
-}
-/*#_content > a {
-    margin-top: 105px;
-}*/
-/* line 700, styles/site.less */
-.article.grid-right {
-  margin-left: 265px;
-}
-/* line 704, styles/site.less */
-.inheritance hr {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-/* line 709, styles/site.less */
-.article img {
-  max-width: 100%;
-}
-/* line 713, styles/site.less */
-.affix {
-  font-size: 12px;
-  max-height: 100%;
-  overflow: hidden;
-  top: 100px;
-  bottom: 10px;
-}
-/* line 721, styles/site.less */
-.affix h5 {
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-top: 50px;
-  padding-left: 10px;
-  font-size: 12px;
-}
-/* line 729, styles/site.less */
-.affix > ul.level1 {
-  overflow-x: hidden;
-  overflow-y: -20px;
-  padding-bottom: 10px;
-  height: calc(0%);
-  margin-right: -20px;
-}
-/* line 737, styles/site.less */
-.affix ul > li > a:before {
-  color: #cccccc;
-  position: absolute;
-}
-/* line 742, styles/site.less */
-.affix ul > li > a:hover {
-  background: none;
-  color: #666666;
-}
-/* line 747, styles/site.less */
-.affix ul > li.active > a,
-.affix ul > li.active > a:before {
-  color: #337ab7;
-}
-/* line 752, styles/site.less */
-.affix ul > li > a {
-  padding: 5px 12px;
-  color: #666666;
-}
-/* line 757, styles/site.less */
-.affix > ul > li > a:before {
-  content: "|";
-  font-size: 16px;
-  top: 1px;
-  left: 0;
-}
-/* line 764, styles/site.less */
-.affix > ul > li.active > a,
-.affix > ul > li.active > a:before {
-  color: #337ab7;
-  font-weight: bold;
-}
-/* line 770, styles/site.less */
-.affix ul ul > li > a {
-  padding: 2px 15px;
-}
-/* line 774, styles/site.less */
-.affix ul ul > li > a:before {
-  content: ">";
-  font-size: 14px;
-  top: -1px;
-  left: 5px;
-}
-/* line 781, styles/site.less */
-.affix ul > li > a:before,
-.affix ul ul {
-  display: none;
-}
-/* line 786, styles/site.less */
-.affix ul > li.active > ul,
-.affix ul > li.active > a:before,
-.affix ul > li > a:hover:before {
-  display: block;
-  white-space: nowrap;
-}
-/* line 793, styles/site.less */
-.codewrapper {
-  position: relative;
-}
-/* line 797, styles/site.less */
-.trydiv {
-  height: 0px;
-}
-/* line 801, styles/site.less */
-.tryspan {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  border-style: solid;
-  border-radius: 0px 4px;
-  box-sizing: border-box;
-  border-width: 1px;
-  border-color: #cccccc;
-  text-align: center;
-  padding: 2px 8px;
-  background-color: white;
-  font-size: 12px;
-  cursor: pointer;
-  z-index: 100;
-  display: none;
-  color: #767676;
-}
-/* line 820, styles/site.less */
-.tryspan:hover {
-  background-color: #3b8bd0;
-  color: white;
-  border-color: #3b8bd0;
-}
-/* line 826, styles/site.less */
-.codewrapper:hover .tryspan {
-  display: block;
-}
-/* line 830, styles/site.less */
-.sample-response .response-content {
-  max-height: 200px;
-}
-/* line 834, styles/site.less */
-footer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-}
-/* line 842, styles/site.less */
-.footer {
-  border-top: 1px solid #712b00;
-  background-color: #a43f00;
-  color: #ffc7a5;
-  padding: 15px 0;
-}
-/* line 848, styles/site.less */
-.footer a {
-  color: #eeeeee;
-}
-/* line 851, styles/site.less */
-.footer a:hover {
-  background: transparent;
-  color: #fff;
-}
-/* line 856, styles/site.less */
-.footer a:active,
-.footer a:focus {
-  background: #712b00;
-  color: #fff;
-}
-@media (min-width: 768px) {
-  /* line 864, styles/site.less */
-  #sidetoggle.collapse {
-    display: block;
-  }
-  /* line 868, styles/site.less */
-  .topnav .navbar-nav {
-    float: none;
-    white-space: nowrap;
-  }
-  /* line 873, styles/site.less */
-  .topnav .navbar-nav > li {
-    float: none;
-    display: inline-block;
-  }
-}
-@media only screen and (max-width: 768px) {
-  /* line 880, styles/site.less */
-  #mobile-indicator {
-    display: block;
-  }
-  /* TOC display for responsive */
-  /* line 884, styles/site.less */
-  .article {
-    margin-top: 30px !important;
-  }
-  /* line 888, styles/site.less */
-  header {
-    position: static;
-  }
-  /* line 892, styles/site.less */
-  .topnav {
-    text-align: center;
-  }
-  /* line 896, styles/site.less */
-  .sidenav {
-    padding: 15px 0;
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-  /* line 902, styles/site.less */
-  .sidefilter {
-    position: static;
-    width: auto;
-    float: none;
-    border: none;
-  }
-  /* line 909, styles/site.less */
-  .sidetoc {
-    position: static;
-    width: auto;
-    float: none;
-    padding-bottom: 0px;
-    border: none;
-  }
-  /* line 917, styles/site.less */
-  .toc .level2 > li {
-    display: inline-block;
-  }
-  /* line 921, styles/site.less */
-  .toc .level2 > li:after {
-    margin-left: -3px;
-    margin-right: 5px;
-    content: ", ";
-    color: #666666;
-  }
-  /* line 928, styles/site.less */
-  .article.grid-right {
-    margin-left: 0;
-  }
-  /* line 932, styles/site.less */
-  .grad-top,
-  .grad-bottom {
-    display: none;
-  }
-  /* line 937, styles/site.less */
-  .toc-toggle {
-    display: block;
-  }
-  /* line 941, styles/site.less */
-  .sidetoggle.ng-hide {
-    display: none !important;
-  }
-  /*.expand-all {
-    display: none;
-  }*/
-  /* line 947, styles/site.less */
-  .affix {
-    display: none;
-  }
-  /* line 951, styles/site.less */
-  .mobile-hide {
-    display: none;
-  }
-  /* line 955, styles/site.less */
-  .breadcrumb {
-    white-space: inherit;
-  }
-  /* workaround for #hashtag url is no longer needed*/
-  /* line 960, styles/site.less */
-  h1:before,
-  h2:before,
-  h3:before,
-  h4:before {
-    content: '';
-    display: none;
-  }
-}
-/* For toc iframe */
-@media (max-width: 260px) {
-  /* line 971, styles/site.less */
-  .toc .level2 > li {
-    display: block;
-  }
-  /* line 975, styles/site.less */
-  .toc .level2 > li:after {
-    display: none;
-  }
-}
-/* For code snippet line highlight */
-/* line 981, styles/site.less */
-pre > code .line-highlight {
-  background-color: #ffffcc;
 }
 /*# sourceMappingURL=site.debug.css.map */

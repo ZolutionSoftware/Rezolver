@@ -9,12 +9,11 @@
           "cwd": "../../src/Rezolver",
           "exclude": [
             "**/obj/**",
-            "**/bin/**",
-            "learn/**"
+            "**/bin/**"
           ]
         }
       ],
-      "dest": "obj/rezolver-api"
+      "dest": "obj/api"
     }
   ],
   "build": {
@@ -30,7 +29,7 @@
     "content": [
       {
         "files": [
-          "rezolver-api/**.yml"
+          "api/**.yml"
         ],
         "cwd": "obj"
       },

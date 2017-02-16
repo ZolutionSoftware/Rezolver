@@ -1,9 +1,9 @@
-﻿/// <binding BeforeBuild='default' />
+/// <binding BeforeBuild='default' />
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
-            all: ['styles/*.map', 'learn/**']
+            all: ['styles/*.map', 'learn/**', 'log.txt']
         },
         copy: {
             bootstrap_less: {
@@ -33,7 +33,8 @@ module.exports = function (grunt) {
                     ]
                 },
                 files: {
-                    'styles/site.debug.css': 'styles/site.less'
+                  'styles/site.debug.css': 'styles/site.less',
+                  'styles/highlight-theme-rezolver.debug.css': 'styles/highlight-theme-rezolver.less'
                 }
             },
             prod: {
@@ -49,7 +50,8 @@ module.exports = function (grunt) {
                     ]
                 },
                 files: {
-                    'styles/site.css': 'styles/site.less'
+                  'styles/site.css': 'styles/site.less',
+                  'styles/highlight-theme-rezolver.css': 'styles/highlight-theme-rezolver.less'
                 }
             }
         }
