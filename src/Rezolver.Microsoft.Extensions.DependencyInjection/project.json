@@ -3,7 +3,7 @@
   "title": "Rezolver .Net Core IServiceProvider implementation",
   "description": "Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)",
   "packOptions": {
-    "summary": "If you are developing an Asp.Net Core or .Net core applicaton and wish to use Rezolver as your container - you need this library.",
+    "summary": "Enables the use of a Rezolver container as the IOC container for Asp.Net Core applications.",
     "tags": [ "ioc", "di", "portable", "rezolver" ],
     "projectUrl": "http://rezolver.co.uk",
     "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"

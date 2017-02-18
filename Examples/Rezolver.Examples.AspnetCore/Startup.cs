@@ -56,18 +56,6 @@ namespace Rezolver.Examples.AspnetCore
 			return container;
 		}
 
-		public IServiceProvider ConfigureDevelopment_LoggingServices(IServiceCollection services)
-		{
-			// Add framework services.
-			services.AddMvc();
-
-			//alternatively, adding to the approach from above; you can create a 'tracked' container which will
-			//write all output to an Asp.Net ILogger (warning - gets very long if Level is set to 'Trace'!).
-			var trackingContainer = new TrackedScopeContainer(new LoggingCallTracker(_loggerFactory.CreateLogger("Rezolver"), callEventsMessageType: MessageType.Trace));
-			trackingContainer.Populate(services);
-			return trackingContainer;
-		}
-
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{

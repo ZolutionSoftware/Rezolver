@@ -30,14 +30,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development2"
       }
-    },
-    "Rezolver.Examples.AspNetCore.LoggingExample": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:5000",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development_Logging"
-      }
     }
   }
 }

@@ -11,7 +11,7 @@ namespace Rezolver.Documentation.Controllers
 		// GET: Home
 		public ActionResult Index()
 		{
-			return Redirect(Url.Content("/learn-rezolver"));
+			return Redirect(Url.Content("/developers"));
 		}
 	}
 }

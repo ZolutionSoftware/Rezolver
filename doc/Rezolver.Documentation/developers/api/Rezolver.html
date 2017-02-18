@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Namespace Rezolver
+   </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Namespace Rezolver
+   ">
+  	<meta name="generator" content="docfx 2.12.1.0">
+  	
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              <h1 id="Rezolver" data-uid="Rezolver">Namespace Rezolver
+              </h1>
+              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 conceptual"></div>
+              <div class="markdown level0 remarks"></div>
+                <h3 id="classes">Classes
+              </h3>
+                  <h4><a class="xref" href="Rezolver.AliasTargetContainerExtensions.html">AliasTargetContainerExtensions</a></h4>
+                  <section><p>Contains extension methods for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to create targets which alias others by
+different types.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a></h4>
+                  <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
+<p>Only creatable through inheritance.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a></h4>
+                  <section><p>A version of <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> which overrides the registrations of another
+(the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ConstructorBinding.html">ConstructorBinding</a></h4>
+                  <section><p>Represents a binding specifically to a class constructor, optionally with an additional
+set of <a class="xref" href="Rezolver.ConstructorBinding.html#Rezolver_ConstructorBinding_MemberBindings">MemberBindings</a> to be used to initialise a new instance&#39;s properties
+or fields directly.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.Container.html">Container</a></h4>
+                  <section><p>The standard IOC container class in Rezolver.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a></h4>
+                  <section><p>Starting point for implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> - only creatable through inheritance.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerBase.DirectResolveCompiledTarget.html">ContainerBase.DirectResolveCompiledTarget</a></h4>
+                  <section><p>Used when an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> is also of the same type as the one for which it is returned
+by the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> method of the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> container.</p>
+<p>In this case, the target is not compiled, but instead is simply returned as the desired object.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html">ContainerBase.MissingCompiledTarget</a></h4>
+                  <section><p>Used as a sentinel type when a type cannot be resolved by a <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> instance.  Instead of returning a null
+<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instance, the container will construct an instance of this type (typically through <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">GetMissingTarget(Type)</a>,
+which caches singleton instances of this class on a per-type basis) which can then be used just as if the lookup succeeded.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerRezolveExtensions.html">ContainerRezolveExtensions</a></h4>
+                  <section><p>Extension methods for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which provide shortcuts for the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>
+operation.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></h4>
+                  <section><p>Standard implementation of the <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a> interface.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerScopeExtensions.html">ContainerScopeExtensions</a></h4>
+                  <section><p>Standard extensions for the <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">ContainerScopeResolveExtensions</a></h4>
+                  <section><p>Extensions for <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a> so that instances of that
+interface present a similar set of functionality to <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a></h4>
+                  <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
+<a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
+<p>The best way to add a decorator to your target container is to use the extension method 
+<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</a>
+or its non-generic equivalent.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a></h4>
+                  <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> which simplify the registration of decorators (via the
+<a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a> pseudo-target)</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a></h4>
+                  <section><p>The default implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> when you are creating a
+<a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> and you want publicly writable
+properties and public fields to be assigned values obtained from the container.</p>
+<p>If you do not require properties or fields to be bound from the container, then use a null <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html">DelegateTargetContainerExtensions</a></h4>
+                  <section><p>Extension methods for ITargetContainer designed to simplify the registration of <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> and its
+numerous generic variants.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html">EnumerableTargetBuilderExtensions</a></h4>
+                  <section><p>Houses an extension method which enables native resolving of IEnumerables of services on 
+<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> containers which, in turn, enables it for any <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>
+containers which use that target container.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ExceptionResources.html">ExceptionResources</a></h4>
+                  <section><p>A strongly-typed resource class, for looking up localized strings, etc.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html">ExpressionTargetContainerExtensions</a></h4>
+                  <section><p>Extensions for to simplify registering expressions in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.Functions.html">Functions</a></h4>
+                  <section><p>This type is only used when using expressions as targets (via the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> type) - it&#39;s
+functions server no actual purpose other than to act as hooks to create specific <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects
+in place of static code.</p>
+<p>For example, the <a class="xref" href="Rezolver.Functions.html#Rezolver_Functions_Resolve__1">Resolve&lt;T&gt;()</a> function is used to trigger the creation of a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>
+in its place - thus allowing expressions to leverage the full power of the Rezolver API all through a simple method call.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.GenericTargetContainer.html">GenericTargetContainer</a></h4>
+                  <section><p>A special type of <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> which stores targets (and potentially other containers)
+which are specifically keyed either to a particular open generic type or a closed generic built from it.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.MemberBinding.html">MemberBinding</a></h4>
+                  <section><p>Represents the binding of an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> to a property or field of a given type.</p>
+<p>Not to be confused with the type of the same name from the System.Linq.Expressions namespace, although
+they are technically equivalent.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.MethodBinding.html">MethodBinding</a></h4>
+                  <section><p>Represents a binding to a method whose arguments will be supplied by <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.MethodCallExtractor.html">MethodCallExtractor</a></h4>
+                  <section><p>Used to help grab method and constructor info from expressions (which is easier than writing long
+strings of reflection code).</p>
+<p>For example: <pre><code>MethodCallExtractor.ExtractCalledMethod(() =&gt; Console.WriteLine("foo"))</code></pre></p>
+<p>Will return the MethodInfo for the <code>WriteLine</code> method of the <code>Console</code> class.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html">MultipleTargetContainerExtensions</a></h4>
+                  <section><p>Extensions for registering multiple targets individually and against the same type</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ObjectTargetContainerExtensions.html">ObjectTargetContainerExtensions</a></h4>
+                  <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> relating to registering concrete instances via the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>
+target.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which can override the resolve operations of another.  This is useful when you have a 
+core application-wide container, with some objects being customised based on some ambient information,
+e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application for example) or more.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a></h4>
+                  <section><p>Represents a binding between a method parameter and an <a class="xref" href="Rezolver.ITarget.html">ITarget</a></p>
+</section>
+                  <h4><a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a></h4>
+                  <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to provide shortcuts for the simplest cases of registering
+<a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> targets.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></h4>
+                  <section><p>Captures the state for a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> 
+(or <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a>), including the container on which
+the operation is invoked, any <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> that might be active for the call (if different), and the 
+type which is being resolved from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></h4>
+                  <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the
+<a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer_Scope">Scope</a> that&#39;s created along with it.</p>
+<p>Implementation of the <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> interface.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a></h4>
+                  <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to provide shortcuts for registering constructor-injected types
+whose lifetimes are slaved to that of a parent <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a>.</p>
+<p>All of the extension methods ultimately create a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a></p>
+</section>
+                  <h4><a class="xref" href="Rezolver.SingletonTargetDictionaryExtensions.html">SingletonTargetDictionaryExtensions</a></h4>
+                  <section><p>Extension methods for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> interface which simplify the registration of singletons.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a></h4>
+                  <section><p>Root container for <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s that can be used as the backing for the standard
+<a class="xref" href="Rezolver.IContainer.html">IContainer</a> classes - <a class="xref" href="Rezolver.Container.html">Container</a> and <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a>.</p>
+<p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s, is also Generic type aware,
+unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.TargetCreationExtensions.html">TargetCreationExtensions</a></h4>
+                  <section><p>Extensions which provide shortcuts for creating some of the extensions in the <code>Rezolver.Targets</code>
+namespace.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> implementation that stores and retrieves 
+<a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by type.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.TargetListContainer.html">TargetListContainer</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that stores multiple targets in a list.</p>
+<p>This is not a type that you would typically use directly in your code, unless you are writing 
+custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html">ITarget</a> registration.</p>
+</section>
+                <h3 id="interfaces">Interfaces
+              </h3>
+                  <h4><a class="xref" href="Rezolver.IChildTargetContainer.html">IChildTargetContainer</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that inherits all registrations from a (<a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer_Parent">Parent</a>) target container.
+If it cannot resolve a target for a particular type, will defer to its parent for fallback.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a></h4>
+                  <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> - this is
+the ultimate target of all <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> calls in the standard
+container implementations within the Rezolver framework.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.IContainer.html">IContainer</a></h4>
+                  <section><p>The primary IOC container interface in the Rezolver framework.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></h4>
+                  <section><p>This is an <a class="xref" href="Rezolver.IContainer.html">IContainer</a>-like object (resolving functionality is provided through the extension methods
+in the <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">ContainerScopeResolveExtensions</a> class) which </p>
+</section>
+                  <h4><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h4>
+                  <section><p>Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that also has a <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_Scope">Scope</a> attached to it.</p>
+<p>Many applications will use such a container as the root container to use as anchors
+for things like scoped singletons.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ITarget.html">ITarget</a></h4>
+                  <section><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>,
+when the standard implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> are used (e.g. <a class="xref" href="Rezolver.Container.html">Container</a>).</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></h4>
+                  <section><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances, keyed by the type of service
+that the targets are registered against.</p>
+<p>This is where all your service registrations will ultimately go.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a></h4>
+                  <section><p>Interface for an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which also contains other target containers.</p>
+<p>It is not typically used by your application code since it&#39;s primarily an infrastructure interface - if you are extending the
+API, however, then you might need to work with it.</p>
+</section>
+                <h3 id="enums">Enums
+              </h3>
+                  <h4><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></h4>
+                  <section><p>Describes different ways in which objeects interact with scopes.</p>
+</section>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

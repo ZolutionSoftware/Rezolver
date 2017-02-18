@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- import this into the pubxml file to strip out all the guff that we don't want publishewd with the website -->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<ExcludeFoldersFromDeployment>_docfx_themes;_docfx_proj;api;articles;images;styles/bootstrap</ExcludeFoldersFromDeployment>
+		<ExcludeFilesFromDeployment>docfx*.json;*.md;*.yml;gruntfile.js;gulpfile.js;package.json;bower.json;**/*.less;**/*.zip</ExcludeFilesFromDeployment>
+	</PropertyGroup>
+</Project>

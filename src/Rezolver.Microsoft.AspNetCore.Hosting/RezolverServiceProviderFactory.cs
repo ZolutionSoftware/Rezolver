@@ -36,7 +36,8 @@ namespace Rezolver
 		protected virtual ITargetContainer CreateDefaultTargetContainer(IServiceCollection services)
 		{
 			if (_options.Tracking.CallTracker != null)
-				return new TrackedTargetContainer(_options.Tracking.CallTracker);
+				throw new NotImplementedException("Call tracking stuff currently doesn't work - it's on the way");
+				//return new TrackedTargetContainer(_options.Tracking.CallTracker);
 			else
 				return new TargetContainer();
 		}
@@ -44,7 +45,7 @@ namespace Rezolver
 		protected virtual IContainer CreateDefaultContainer(ITargetContainer targetContainer)
 		{
 			if (_options.Tracking.CallTracker != null)
-				throw new NotImplementedException("Scoping has been changed and the call tracking stuff currently doesn't work - it will");
+				throw new NotImplementedException("Call tracking stuff currently doesn't work - it's on the way");
 				//return new TrackedContainerScope(_options.Tracking.CallTracker, new ContainerScope(new Container(targetContainer)));
 			else
 				return new ScopedContainer(targetContainer);

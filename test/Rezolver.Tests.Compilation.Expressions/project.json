@@ -2,7 +2,6 @@
   "version": "1.0.0-*",
   "testRunner": "xunit",
   "dependencies": {
-    "Rezolver.Compilation.Expressions": "1.1.0-*",
     "Rezolver.Configuration.Json": "1.1.0-*",
     "Rezolver.Logging": "1.1.0-*",
     "xunit": "2.2.0-beta4-build3444",

@@ -2603,7 +2603,7 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Rezolver/1.1.0": {
+      "Rezolver/1.1.71402-alpha-01": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2615,20 +2615,6 @@
         },
         "runtime": {
           "netstandard1.1/Rezolver.dll": {}
-        }
-      },
-      "Rezolver.Compilation.Expressions/1.1.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.1",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "Rezolver": "1.1.0"
-        },
-        "compile": {
-          "netstandard1.1/Rezolver.Compilation.Expressions.dll": {}
-        },
-        "runtime": {
-          "netstandard1.1/Rezolver.Compilation.Expressions.dll": {}
         }
       },
       "Rezolver.Configuration/1.1.0": {
@@ -3083,7 +3069,7 @@
           "lib/net45/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "Rezolver/1.1.0": {
+      "Rezolver/1.1.71402-alpha-01": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -3094,19 +3080,6 @@
         },
         "runtime": {
           "net451/Rezolver.dll": {}
-        }
-      },
-      "Rezolver.Compilation.Expressions/1.1.0": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Rezolver": "1.1.0"
-        },
-        "compile": {
-          "net451/Rezolver.Compilation.Expressions.dll": {}
-        },
-        "runtime": {
-          "net451/Rezolver.Compilation.Expressions.dll": {}
         }
       },
       "Rezolver.Configuration/1.1.0": {
@@ -8669,15 +8642,10 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Rezolver/1.1.0": {
+    "Rezolver/1.1.71402-alpha-01": {
       "type": "project",
       "path": "../../src/Rezolver/project.json",
       "msbuildProject": "../../src/Rezolver/Rezolver.xproj"
-    },
-    "Rezolver.Compilation.Expressions/1.1.0": {
-      "type": "project",
-      "path": "../../src/Rezolver.Compilation.Expressions/project.json",
-      "msbuildProject": "../../src/Rezolver.Compilation.Expressions/Rezolver.Compilation.Expressions.xproj"
     },
     "Rezolver.Configuration/1.1.0": {
       "type": "project",
@@ -8707,7 +8675,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Rezolver.Compilation.Expressions >= 1.1.0-*",
       "Rezolver.Configuration.Json >= 1.1.0-*",
       "Rezolver.Logging >= 1.1.0-*",
       "Rezolver.Shared >= 1.1.0-*",

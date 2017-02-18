@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>How we've used docfx to build rezolver.co.uk </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="How we've used docfx to build rezolver.co.uk ">
+  	<meta name="generator" content="docfx 2.12.1.0">
+  	
+  	<link rel="shortcut icon" href="favicon.ico">
+  	<link rel="stylesheet" href="styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="styles/docfx.css">
+  	<link rel="stylesheet" href="styles/main.css">
+  	<meta property="docfx:navrel" content="toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	<meta property="docfx:rel" content="">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../manifest.json">
+  		<link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1 id="how-weve-used-docfxhttpsdotnetgithubiodocfx-to-build-rezolvercoukhttprezolvercouk">How we&#39;ve used <a href="https://dotnet.github.io/docfx/">docfx</a> to build <a href="http://rezolver.co.uk">rezolver.co.uk</a></h1>
+              
+<p>This web project ultimately builds the content that is released to <a href="http://rezolver.co.uk">http://rezolver.co.uk</a>.</p>
+<p>We&#39;re using the recommended <a href="https://www.nuget.org/packages/docfx.console/"><code>docfx.console</code></a> nuget package to add docfx 
+preprocessing to this website&#39;s build process.  However, our usage of the package diverges from the documented process in order
+to customise the underlying bootstrap theme that the documentation pages use, as well as to add additional features such as
+browser-specific icons etc.</p>
+<p>As such, this project looks slightly different from a &#39;standard&#39; docfx web project, and this document describes what we&#39;ve done.</p>
+<blockquote><p>Feel free to use this site as a model for your own OSS project&#39;s documentation site, but please <em>do not</em> use it to publish an
+alternative version of the Rezolver documentation!  If you have a suggestion for content to be added to the site, you can 
+submit a pull request to the <a href="https://github.com/zolutionsoftware/rezolver">repo on github</a> to have it included in the build.</p>
+</blockquote>
+<h2 id="1---template-usage">1 - Template usage</h2>
+<p>As mentioned before, the site is using a custom build of bootstrap as its backbone - replacing the version that the docfx
+team have included by default.</p>
+<p>This was <em>not</em> done by building bootstrap into the site&#39;s <code>main.css</code>, or otherwise using a theme as per the docfx documentation, 
+but by breaking apart the <code>default</code> template and inserting our custom build of bootstrap into the build process of the default 
+theme&#39;s own <code>docfx.vendor</code> <code>js</code> and <code>css</code> files.</p>
+<p>The reason for this is that we don&#39;t want to include all of docfx&#39;s bootstrap content only to overwrite it with another version.</p>
+<h3 id="11---default-template">1.1 - Default template</h3>
+<p>Upon installing the docfx.console package (or upgrading it), the first thing we do is to extract the default theme into
+the <code>~/_docfx_themes/default</code> folder.</p>
+<p>This can be done easily by opening a console to the install folder of the docfx package (or whichever folder you&#39;ve downloaded
+the docfx binaries to if not using nuget) and running the command:</p>
+<p><code>docfx template export default</code></p>
+<p><em>(As per the docfx <a href="https://dotnet.github.io/docfx/tutorial/howto_create_custom_template.html#merge-template-with-default-template">documentation</a>)</em></p>
+<blockquote><p>It&#39;s worth becoming familiar with how the default template is built, and how you can &#39;peek&#39; into what&#39;s in the latest version by 
+taking a look directly at the source at <a href="https://github.com/dotnet/docfx/tree/dev/src/docfx.website.themes">https://github.com/dotnet/docfx/tree/dev/src/docfx.website.themes</a> (correct at the time
+of writing - Feb 2017).</p>
+<p>The contents of those folders there are similar to what you get when you export a template, except a docfx template is actually 
+a combination which includes the <code>common</code> template folder which you will see in that source tree.</p>
+</blockquote>
+<p>The entire contents of the generated folder are then copied into this project&#39;s local copy of the template.</p>
+<p>The only thing we&#39;ve actually then changed afterward is that the <code>fonts/</code> folder is removed, because:</p>
+<h3 id="12---rezolver-template">1.2 - &#39;Rezolver&#39; template</h3>
+<p>This theme replaces the standard <code>docfx.vendor.js</code> and <code>docfx.vendor.css</code> files (containing jquery, bootstrap, 
+lunr, highlightjs and more) so that the Rezolver bootstrap theme and the Rezolver highlightjs themes in <code>~/styles/</code>
+are used instead of those which are baked into docfx.</p>
+<blockquote><p>Our custom bootstrap requires that the fonts are located <strong><em>under</em></strong> the styles folder, instead of as a sibling to it - hence why 
+we delete the default template&#39;s fonts folder.  We don&#39;t really have to - it just avoids unnecessary files in the output.</p>
+</blockquote>
+<p>The <code>~/_docfx_themes/rezolver/docfx.vendor.*</code> files are produced by a <code>gulpfile.js</code> (which must be run after our 
+<code>gruntfile.js</code> has been run) in the root of this project - one which is very similar to the one in the default 
+template (found in <code>~/_docfx_themes/default/gulpfile.js</code>) except the location it gets its bootstrap from is changed
+to our local build, and the location it drops its fonts into is different.</p>
+<p>If the gulpfile of the default docfx template changes, we can just mimic those changes in ours after updating and re-exporting
+the template.  The most likely thing that will have changed will be the <code>docfx.css</code> file - which contains all the additional styles
+which the docfx team add to bootstrap in order to make the site look like a docfx site - and which we do not modify.</p>
+<blockquote><p>The docfx gulpfile relies on bower packages and npm packages - therefore the <code>bower.json</code> and <code>package.json</code> files which 
+describe those dependencies (found, again, under the default theme&#39;s folder in the docfx repo at 
+<a href="https://github.com/dotnet/docfx/tree/dev/src/docfx.website.themes">https://github.com/dotnet/docfx/tree/dev/src/docfx.website.themes</a>) need to be imported into this site&#39;s own 
+bower and npm package files, so we have all the same build-time components to replicate their build.</p>
+</blockquote>
+<h2 id="2---docfx-content-files-api-articles-etc">2 - docfx content files (~/api/ ~/articles/ etc)</h2>
+<p>We relocated all the docfx project content (<code>md</code>, <code>yml</code> and image files in the <code>~/api</code>, <code>~/articles</code> and <code>~/images</code> folders)
+into this single subfolder in the root of the project in order to keep it clean.</p>
+<p>The default folders might still be there because the docfx package adds them every time we upgrade the  package, 
+but the root docfx.json file has been customised not to use them.</p>
+<p>Also - any MSBuild publish profile should import the Properties/PublishExclude.props file to ensure all the build-time docfx
+content which is typically marked as &#39;content&#39; is not included in the publish - including the xref zip files which balloon
+the release to over 20Mb.</p>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/how-this-website-is-built.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

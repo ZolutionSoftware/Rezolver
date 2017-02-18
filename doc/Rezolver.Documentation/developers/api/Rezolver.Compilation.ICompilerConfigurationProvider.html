@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Interface ICompilerConfigurationProvider
+   </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Interface ICompilerConfigurationProvider
+   ">
+  	<meta name="generator" content="docfx 2.12.1.0">
+  	
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              
+              <h1 id="Rezolver_Compilation_ICompilerConfigurationProvider" data-uid="Rezolver.Compilation.ICompilerConfigurationProvider">Interface ICompilerConfigurationProvider
+              </h1>
+              <div class="markdown level0 summary"><p>Interface for an object which configures the compiler for the given container and/or targets object
+to use a specific <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> and <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a>.</p>
+<p>Used by all the standard container types in the Rezolver framework.</p>
+<p>You can provide a specific provider to most containers on creation, and you can configure
+the default system-wide provider via the <a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider">DefaultProvider</a> static
+property.</p>
+</div>
+              <div class="markdown level0 conceptual"></div>
+              <h6><strong>Namespace</strong>:Rezolver.Compilation</h6>
+              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
+              <h5 id="Rezolver_Compilation_ICompilerConfigurationProvider_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public interface ICompilerConfigurationProvider</code></pre>
+              </div>
+              <h3 id="methods">Methods
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_ICompilerConfigurationProvider_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompilerConfigurationProvider.Configure(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/ICompilerConfigurationProvider.cs/#L46">View Source</a>
+              </span>
+              <a id="Rezolver_Compilation_ICompilerConfigurationProvider_Configure_" data-uid="Rezolver.Compilation.ICompilerConfigurationProvider.Configure*"></a>
+              <h4 id="Rezolver_Compilation_ICompilerConfigurationProvider_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.ICompilerConfigurationProvider.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Called to configure the compiler and context provider for the given container and/or targets.</p>
+<p>When using the standard container types (based on <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>), the method 
+should register directly-resolvable targets in the <span class="paramref">targets</span> target container
+for the types <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> and <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a> so that 
+the container can resolve the compiler and context provider.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">void Configure(IContainer container, ITargetContainer targets)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
+                    <td><span class="parametername">container</span></td>
+                    <td><p>The container.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>The targets.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Rezolver_Compilation_ICompilerConfigurationProvider_Configure_Rezolver_IContainer_Rezolver_ITargetContainer__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>The built-in container classes (all those which inherit from <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>)
+rely on their <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to directly resolve the compiler and context provider
+that is used to compile <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects into <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instances.</p>
+<p>Therefore, in order to use a specific compilation strategy, the framework needs some way of knowing
+how the underlying <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> should be configured to use that strategy.  Since
+this requires adding registrations to the container, the most flexible way to do that is via a callback,
+which is what this method technically represents.</p>
+<p>Note that the registered targets must NOT require compilation - i.e. - the target must either directly
+implement <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>/<a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a> or also implement
+<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> such that when <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a>
+is called, the actual compiler or context provider are returned.</p>
+<p>The simplest way to achieve this is to build the compiler/context provider conventionally, and then
+use the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> target to store them directly in the target container against
+the types for which they should be used.  This is how the default expression compiler does it - in addition
+to registering additional targets to support the different compilation strategies required for the
+different target types.</p>
+</div>
+              <h3 id="extensionmethods">Extension Methods</h3>
+              <div>
+                  <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>
+              </div>
+                        </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_ICompilerConfigurationProvider.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompilerConfigurationProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/ICompilerConfigurationProvider.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2015 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

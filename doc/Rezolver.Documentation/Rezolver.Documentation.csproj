@@ -95,20 +95,38 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\rz_square_white_on_orange_128x128.png" />
+    <Content Include="Content\rz_square_white_on_orange_16x16.png" />
+    <Content Include="Content\rz_square_white_on_orange_24x24.png" />
+    <Content Include="Content\rz_square_white_on_orange_256x256.png" />
+    <Content Include="Content\rz_square_white_on_orange_320x320.png" />
+    <Content Include="Content\rz_square_white_on_orange_32x32.png" />
+    <Content Include="Content\rz_square_white_on_orange_480x480.png" />
+    <Content Include="Content\rz_square_white_on_orange_48x48.png" />
+    <Content Include="Content\rz_square_white_on_orange_640x640.png" />
+    <Content Include="Content\rz_square_white_on_orange_64x64.png" />
+    <Content Include="Content\rz_square_white_on_orange_96x96.png" />
     <Content Include="gulpfile.js" />
-    <Content Include="learn\**\*.*" />
+    <Content Include="developers\**\*.*" />
+    <Content Include="styles\site.css" />
+    <Content Include="_docfx_themes\rezolver\styles\main.css" />
+    <Content Include="_docfx_themes\rezolver\styles\main.less" />
+    <Content Include="styles\site.css.map" />
+    <None Include="_docfx_proj\how-this-website-is-built.md" />
+    <Content Include="_docfx_themes\rezolver\favicon.ico" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.js" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css.map" />
+    <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.js.map" />
+    <Content Include="_docfx_themes\rezolver\styles\main.css.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\PublishExclude.xml" />
-    <Content Include="styles\highlight-theme-rezolver.css" />
-    <Content Include="styles\highlight-theme-rezolver.debug.css" />
+    <None Include="Properties\PublishExclude.props" />
     <Content Include="_docfx_themes\default\common.js" />
     <Content Include="_docfx_themes\default\conceptual.extension.js" />
     <Content Include="_docfx_themes\default\conceptual.html.primary.js" />
     <Content Include="_docfx_themes\default\favicon.ico" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="_docfx_themes\default\gulpfile.js" />
     <Content Include="_docfx_themes\default\logo.svg" />
     <Content Include="_docfx_themes\default\ManagedReference.common.js" />
@@ -163,16 +181,14 @@
     <Content Include="articles\intro.md" />
     <Content Include="api\index.md" />
     <None Include="packages.config" />
-    <Content Include="rezolver-usage\nuget-packages\index.md" />
-    <Content Include="rezolver-usage\nuget-packages\rezolver.configuration.md" />
+    <Content Include="_docfx_proj\docs\nuget-packages\index.md" />
+    <Content Include="_docfx_proj\docs\nuget-packages\rezolver.configuration.md" />
     <Content Include="rezolver-usage-old\index.md" />
     <None Include="Properties\PublishProfiles\DiskPackage.pubxml" />
-    <None Include="rezolver-usage\nuget-packages\rezolver.md" />
+    <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="styles\site.css" />
-    <Content Include="styles\site.debug.css" />
     <Content Include="styles\site.less" />
     <Content Include="styles\bootstrap\alerts.less" />
     <Content Include="styles\bootstrap\badges.less" />
@@ -249,22 +265,20 @@
     <Content Include="styles\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="styles\site.debug.css.map" />
-    <Content Include="styles\site.css.map" />
-    <Content Include="rezolver-usage\advanced\rezolving-with-expressions.md" />
-    <Content Include="rezolver-usage\advanced\toc.yml" />
-    <Content Include="rezolver-usage\advanced\index.md" />
-    <Content Include="rezolver-usage\nuget-packages\toc.yml" />
+    <Content Include="_docfx_proj\docs\advanced\rezolving-with-expressions.md" />
+    <Content Include="_docfx_proj\docs\advanced\toc.yml" />
+    <Content Include="_docfx_proj\docs\advanced\index.md" />
+    <Content Include="_docfx_proj\docs\nuget-packages\toc.yml" />
     <Content Include="styles\highlight-theme-rezolver.less" />
-    <Content Include="toc.yml" />
-    <Content Include="index.md" />
+    <Content Include="_docfx_proj\toc.yml" />
+    <Content Include="_docfx_proj\index.md" />
     <None Include="docfx.json" />
-    <None Include="rezolver-usage\index.md" />
-    <None Include="rezolver-api\index.md" />
-    <None Include="rezolver-usage\details1.md" />
-    <None Include="rezolver-usage\details2.md" />
-    <None Include="rezolver-usage\details3.md" />
-    <None Include="rezolver-usage\toc.yml" />
+    <None Include="_docfx_proj\docs\index.md" />
+    <None Include="_docfx_proj\api\index.md" />
+    <None Include="_docfx_proj\docs\details1.md" />
+    <None Include="_docfx_proj\docs\details2.md" />
+    <None Include="_docfx_proj\docs\details3.md" />
+    <None Include="_docfx_proj\docs\toc.yml" />
     <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -273,10 +287,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="_docfx_themes\default\conceptual.html.primary.tmpl" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="_docfx_themes\default\ManagedReference.html.primary.tmpl" />
     <Content Include="_docfx_themes\default\partials\affix.tmpl.partial" />
     <Content Include="_docfx_themes\default\partials\breadcrumb.tmpl.partial" />
@@ -303,9 +313,14 @@
     <Content Include="_docfx_themes\default\toc.html.tmpl" />
     <Content Include="_docfx_themes\default\token.json" />
     <Content Include="_docfx_themes\rezolver\partials\head.tmpl.partial" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="_docfx_themes\rezolver\partials\browsericons.tmpl.partial" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="images\exampleunittest.PNG" />
+    <None Include="_docfx_proj\images\exampleunittest.PNG" />
     <Content Include="mstile-144x144.png" />
     <Content Include="mstile-150x150.png" />
     <Content Include="mstile-310x150.png" />
