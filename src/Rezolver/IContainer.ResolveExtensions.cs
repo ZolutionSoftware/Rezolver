@@ -14,7 +14,7 @@ namespace Rezolver
 	/// Extension methods for <see cref="IContainer"/> which provide shortcuts for the <see cref="IContainer.Resolve(ResolveContext)"/>
 	/// operation.
 	/// </summary>
-	public static partial class ContainerRezolveExtensions
+	public static partial class ContainerResolveExtensions
 	{
 		/// <summary>
 		/// Resolves an object of the given <paramref name="type"/>

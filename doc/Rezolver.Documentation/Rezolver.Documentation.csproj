@@ -112,7 +112,9 @@
     <Content Include="_docfx_themes\rezolver\styles\main.css" />
     <Content Include="_docfx_themes\rezolver\styles\main.less" />
     <Content Include="styles\site.css.map" />
-    <Content Include="_docfx_proj\docs\getting-started.md" />
+    <Content Include="_docfx_proj\docs\basic-usage\getting-started.md" />
+    <Content Include="_docfx_proj\docs\basic-usage\toc.yml" />
+    <Content Include="_docfx_proj\docs\basic-usage\create-and-use-a-container.md" />
     <None Include="_docfx_proj\docs\miscellaneous\how-this-website-is-built.md" />
     <Content Include="_docfx_themes\rezolver\favicon.ico" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />

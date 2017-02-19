@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Rezolver Nuget Packages </title>
+  	<title>Getting started </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Rezolver Nuget Packages ">
+  	<meta name="title" content="Getting started ">
   	<meta name="generator" content="docfx 2.12.1.0">
   	
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -92,33 +92,29 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="rezolver-nuget-packages">Rezolver Nuget Packages</h1>
+              <h1 id="getting-started">Getting started</h1>
               
-<p>Rezolver is primarily distributed as a suite of Nuget packages whose functionality stacks one on top of another.
-Depending on the level of functionality you require, there should be a Nuget package which contains only the code you need,
-with the main package (<a href="rezolver.html">Rezolver</a>) being the root dependency for all.</p>
-<p>All the core nuget packages support the .NetStandard 1.1 profile (don&#39;t know what this is? 
-<a href="https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md">Learn more</a>), 
-.Net 4.5.1 and .Net 4.6.</p>
-<div class="NOTE"><h5>Note</h5><p>Where a package has a dependency on a third party package (such as Newtonsoft&#39;s Json.Net or .Net Core&#39;s Microsoft.Extensions.DependencyInjection packages),
-then we try to maintain full support for the same frameworks and profiles that those packages support.</p>
-</div>
-<h2 id="list-of-packages">List of packages</h2>
+<p>As with many open source .Net projects, there are two primary ways to get Rezolver integrated into your project.</p>
 <ul>
-<li><a href="rezolver.html">Rezolver</a></li>
-<li><strike><a href="rezolver.configuration.html">Rezolver.Configuration</a></strike> (needs verifying)</li>
-<li><a href="rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a></li>
-<li><a href="rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting</a></li>
+<li>The easiest is via the <a href="../nuget-packages/index.html">Nuget packages</a><ul>
+<li>By using the Nuget packages, you ensure that you&#39;re using the latest (hopefully stable!) releases.  Pre-release packages will also
+be made available for in-development features.</li>
 </ul>
-<h2 id="versioning">Versioning</h2>
-<p>Our versioning approach is the same as recommended by Nuget.org - semantic versioning - where:</p>
-<ol>
-<li>A major version bump (<code>x.y.z.w</code> -&gt; <code>(++x).y.z.w</code>) indicates a breaking change</li>
-<li>A minor version bump (<code>x.y.z.w</code> =&gt; <code>x.(++y).z.w</code>) indicates new functionality that <em>shouldn&#39;t</em> be a breaking change</li>
-<li>A build version bump (<code>x.y.x.w</code> =&gt; <code>x.y.(++z).w</code>) indicates small new functionality or bugfixes</li>
-<li>A revision bump (<code>x.y.z.w</code> =&gt; <code>x.y.z.(++w)</code>) indicates a cock-up on our part that had to be corrected :)</li>
-</ol>
-<p>Obviously, we try to keep the latter to a minimum!</p>
+</li>
+<li>Fork or download the source from <a href="https://github.com/ZolutionSoftware/Rezolver">Github</a><ul>
+<li>Use this if you can&#39;t integrate nuget into your build pipeline, or if you&#39;d like to customise or contribute to the project.</li>
+<li>If you&#39;re looking to customise, though, then there <em>should</em> be enough extensibility points in the framework to allow you to do so 
+without having to change core types.  If that&#39;s not the case, post an issue on the Github project so we can get it added in and
+make it better for everyone!</li>
+</ul>
+</li>
+</ul>
+<div class="TIP"><h5>Tip</h5><p>If you are developing an Asp.Net Core website, then you&#39;ll also want to read how to 
+<a href="../nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">integrate Rezolver into the Asp.Net Core hosting pipeline</a>.</p>
+</div>
+<hr>
+<p>Once you have the main assembly referenced (Rezolver.dll) - you&#39;re ready to move on to the next step - which is to 
+<a href="create-and-use-a-container.html">create and use a container</a>.</p>
 
             </article>
           </div>
@@ -128,7 +124,7 @@ then we try to maintain full support for the same frameworks and profiles that t
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/basic-usage/getting-started.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

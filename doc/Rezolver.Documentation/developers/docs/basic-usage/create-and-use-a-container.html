@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Rezolver Nuget Packages </title>
+  	<title>Simple registration </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Rezolver Nuget Packages ">
+  	<meta name="title" content="Simple registration ">
   	<meta name="generator" content="docfx 2.12.1.0">
   	
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -92,33 +92,52 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="rezolver-nuget-packages">Rezolver Nuget Packages</h1>
               
-<p>Rezolver is primarily distributed as a suite of Nuget packages whose functionality stacks one on top of another.
-Depending on the level of functionality you require, there should be a Nuget package which contains only the code you need,
-with the main package (<a href="rezolver.html">Rezolver</a>) being the root dependency for all.</p>
-<p>All the core nuget packages support the .NetStandard 1.1 profile (don&#39;t know what this is? 
-<a href="https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md">Learn more</a>), 
-.Net 4.5.1 and .Net 4.6.</p>
-<div class="NOTE"><h5>Note</h5><p>Where a package has a dependency on a third party package (such as Newtonsoft&#39;s Json.Net or .Net Core&#39;s Microsoft.Extensions.DependencyInjection packages),
-then we try to maintain full support for the same frameworks and profiles that those packages support.</p>
+              <p>The simplest way to create an <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a>, registering targets in it and resolving objects from it 
+couldn&#39;t be easier.</p>
+<div class="NOTE"><h5>Note</h5><p>In Rezolver, registering and resolving services are operations which are handled by two separate interfaces 
+(<a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a>).  The two most-used standard container classes (<a class="xref" href="../../api/Rezolver.Container.html">Container</a> and
+<a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a>) implement both of these interfaces, however, in order to provide the
+most convenient developer experience.</p>
+<p>So, in order for your application to be able to both register targets in, <em>and</em> resolve objects from, a
+container, you will need a reference to one of those two container classes.</p>
 </div>
-<h2 id="list-of-packages">List of packages</h2>
+<div class="NOTE"><h5>Note</h5><p>A <strong><em>target</em></strong> (<a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a>) is an object stored by an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which contains 
+information about how an object is to be created or retrieved when a container&#39;s <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> 
+operation is called.</p>
+<p>![NOTE]
+The core implementation of <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> is <a class="xref" href="../../api/Rezolver.ContainerBase.html">ContainerBase</a>, which is shared by both 
+<a class="xref" href="../../api/Rezolver.Container.html">Container</a> and <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> - and it is this class which provides the implementations of
+both <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> and <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+</div>
+<p>For the majority of these code samples, we&#39;ll be using the many extension methods for both registration and 
+resolving objects which are provided by numerous extension classes:</p>
 <ul>
-<li><a href="rezolver.html">Rezolver</a></li>
-<li><strike><a href="rezolver.configuration.html">Rezolver.Configuration</a></strike> (needs verifying)</li>
-<li><a href="rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a></li>
-<li><a href="rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting</a></li>
+<li>Registration:<ul>
+<li><a class="xref" href="../../api/Rezolver.AliasTargetContainerExtensions.html">AliasTargetContainerExtensions</a></li>
+<li><a class="xref" href="../../api/Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a></li>
+<li><a class="xref" href="../../api/Rezolver.DelegateTargetContainerExtensions.html">DelegateTargetContainerExtensions</a></li>
+<li><a class="xref" href="../../api/Rezolver.ExpressionTargetContainerExtensions.html">ExpressionTargetContainerExtensions</a></li>
+<li><a class="xref" href="../../api/Rezolver.MultipleTargetContainerExtensions.html">MultipleTargetContainerExtensions</a></li>
+<li><a class="xref" href="../../api/Rezolver.ObjectTargetContainerExtensions.html">ObjectTargetContainerExtensions</a></li>
+<li><a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a></li>
+<li><a class="xref" href="../../api/Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a></li>
+<li>@Reaolver.SingletonTargetContainerExtensions</li>
 </ul>
-<h2 id="versioning">Versioning</h2>
-<p>Our versioning approach is the same as recommended by Nuget.org - semantic versioning - where:</p>
-<ol>
-<li>A major version bump (<code>x.y.z.w</code> -&gt; <code>(++x).y.z.w</code>) indicates a breaking change</li>
-<li>A minor version bump (<code>x.y.z.w</code> =&gt; <code>x.(++y).z.w</code>) indicates new functionality that <em>shouldn&#39;t</em> be a breaking change</li>
-<li>A build version bump (<code>x.y.x.w</code> =&gt; <code>x.y.(++z).w</code>) indicates small new functionality or bugfixes</li>
-<li>A revision bump (<code>x.y.z.w</code> =&gt; <code>x.y.z.(++w)</code>) indicates a cock-up on our part that had to be corrected :)</li>
-</ol>
-<p>Obviously, we try to keep the latter to a minimum!</p>
+</li>
+<li>Resolving:<ul>
+<li><a class="xref" href="../../api/Rezolver.ContainerResolveExtensions.html">ContainerResolveExtensions</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="simple-registration">Simple registration</h2>
+<p>The simplest thing we can do is to register a type for which we want an instance to be created
+when request that type.</p>
+<pre><code class="lang-csharp" name="Example.cs">Container container = new Container();
+container.RegisterType&lt;MyService&gt;();
+var result = container.Resolve&lt;MyService&gt;();
+Assert.NotNull(result);
+</code></pre><p>As you can see - we create a <a class="xref" href="../../api/Rezolver.Container.html">Container</a>, register a single type (as itself)</p>
 
             </article>
           </div>
@@ -128,7 +147,7 @@ then we try to maintain full support for the same frameworks and profiles that t
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/basic-usage/create-and-use-a-container.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

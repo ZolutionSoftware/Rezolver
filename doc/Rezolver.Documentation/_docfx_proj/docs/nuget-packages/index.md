@@ -8,7 +8,7 @@ All the core nuget packages support the .NetStandard 1.1 profile (don't know wha
 [Learn more](https://github.com/dotnet/corefx/blob/master/Documentation/architecture/net-platform-standard.md)), 
 .Net 4.5.1 and .Net 4.6.
 
-> [!INFO]
+> [!NOTE]
 > Where a package has a dependency on a third party package (such as Newtonsoft's Json.Net or .Net Core's Microsoft.Extensions.DependencyInjection packages),
 > then we try to maintain full support for the same frameworks and profiles that those packages support.
 
@@ -22,7 +22,7 @@ All the core nuget packages support the .NetStandard 1.1 profile (don't know wha
 
 ## Versioning
 
-Our versioning approach is the same as recommended by Nuget.org - semantic versioning where:
+Our versioning approach is the same as recommended by Nuget.org - semantic versioning - where:
 
 1. A major version bump (`x.y.z.w` -> `(++x).y.z.w`) indicates a breaking change
 2. A minor version bump (`x.y.z.w` => `x.(++y).z.w`) indicates new functionality that *shouldn't* be a breaking change

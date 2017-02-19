@@ -3,16 +3,6 @@
 a #logo {
   padding: 1px;
 }
-blockquote {
-  border-left-color: #722b00;
-  background: rgba(255, 231, 216, 0.5);
-  font-size: 14px;
-  color: #777777;
-}
-blockquote h5 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
 .navbar-inverse {
   border-bottom: none;
 }
@@ -27,6 +17,22 @@ blockquote h5 {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a43f00', endColorstr='#ffe7d8', GradientType=0);
   /* IE6-9 */
   border-bottom: none;
+}
+blockquote {
+  border-left-color: #722b00;
+  background: rgba(255, 231, 216, 0.5);
+  font-size: 14px;
+  color: #777777;
+}
+blockquote h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.toc .level1 > li {
+  font-size: 14px;
+}
+.toc .level2 {
+  font-size: 12px;
 }
 
 /*# sourceMappingURL=main.css.map */

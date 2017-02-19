@@ -23,8 +23,8 @@ namespace Rezolver
 	/// <see cref="IScopedContainer"/> interface, in which case the container itself is a lifetime scope.
 	/// 
 	/// Many of the functions which accept a <see cref="ResolveContext"/> also have alternatives (in the form of extension methods) in the 
-	/// <see cref="ContainerRezolveExtensions"/> class.  If you're looking for the 'traditional' IOC container methods 
-	/// (e.g. <see cref="ContainerRezolveExtensions.Resolve{TObject}(IContainer)"/>, that's where you'll find them.
+	/// <see cref="ContainerResolveExtensions"/> class.  If you're looking for the 'traditional' IOC container methods 
+	/// (e.g. <see cref="ContainerResolveExtensions.Resolve{TObject}(IContainer)"/>, that's where you'll find them.
 	/// 
 	/// Note that while the standard implementation of this interface supplied by the framework (<see cref="ContainerBase" /> and its derivatives) all utilitise
 	/// the <see cref="ITargetContainer"/> to actually locate registrations for types which are ultimately requested from the container; the interface

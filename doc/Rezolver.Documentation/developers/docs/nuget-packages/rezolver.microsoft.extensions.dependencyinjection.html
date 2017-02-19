@@ -95,17 +95,30 @@
               <h1 id="rezolver-nuget-package">Rezolver Nuget Package</h1>
               
 <p><a href="https://www.nuget.org/packages/Rezolver.Microsoft.Extensions.DependencyInjection">See package page on nuget</a>.</p>
-<blockquote><p>[!INFO]
-It&#39;s recommended that you use the <a href="rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core Hosting integration package</a> 
+<div class="TIP"><h5>Tip</h5><p>It&#39;s recommended that you use the <a href="rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core Hosting integration package</a> 
 on top of this one to enable integration of Rezolver into your Asp.Net core website at an earlier stage of 
 its lifetime.</p>
-</blockquote>
+</div>
 <p>This package provides Rezolver&#39;s implementation of the Microsoft DI Container which drives the new Asp.Net Core stack.</p>
 <p>After adding the package, configuring your Asp.Net website to use Rezolver as the DI container is simple:</p>
 <p>Replace the default <code>ConfigureServices</code> function in your application&#39;s <code>Startup.cs</code> file with
 this one:</p>
-<p>[!code-sharp]<a href="../../../../../Examples/Rezolver.Examples.AspnetCore/Startup.cs#example">Example.cs</a></p>
-<p>This returns a new service provider to the Asp.Net Core stack - thus replacing the default service provider
+<pre><code class="lang-csharp" name="Example.cs">// This method gets called by the runtime. Use this method to add services to the container.
+public IServiceProvider ConfigureServices(IServiceCollection services)
+{
+	// Add framework services.
+	services.AddMvc();
+
+	//create the Rezolver container from the services, without making any additional
+	//registrations
+	var container = services.CreateRezolverContainer();
+	//use IContainer/ITargetContainer methods and extensions here to add extra registrations, e.g.
+	//decorators or your own application&#39;s registrations.
+
+	//IContainers implement the IServiceProvider interface natively - so can simply be returned.
+	return container;
+}
+</code></pre><p>This returns a new service provider to the Asp.Net Core stack - thus replacing the default service provider
 that&#39;s already built.</p>
 <p>As the comment in the snippet suggests, you will likely want to perform additional registration operations
 on the <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> object that&#39;s returned by the <code>CreateRezolverContainer</code> function called here,
