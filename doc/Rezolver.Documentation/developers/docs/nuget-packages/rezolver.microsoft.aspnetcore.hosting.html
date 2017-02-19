@@ -94,12 +94,17 @@
             <article class="content wrap" id="_content" data-uid="">
               <h1 id="rezolver-nuget-package">Rezolver Nuget Package</h1>
               
-<p><a href="https://www.nuget.org/packages/Rezolver">See package page on nuget</a>.</p>
-<p>The core nuget package for using Rezolver in your class library or application, includes all the 
-core abstractions and classes required to create @TargetContainer objects and @Container objects in your composition root.</p>
-<p>Also contains the core <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> implementations and logic which allow you to create/retrieve objects using all
-the standard techniques (constructor injection, optional member binding, enumerables, delegates and expressions etc)
-from the get-go.</p>
+<p><a href="https://www.nuget.org/packages/Rezolver.Microsoft.AspNetCore.Hosting">See package page on nuget</a>.</p>
+<p>This builds on the <a href="rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a>
+package to enable the integration of Rezolver into your Asp.Net Core site somewhwat earlier in its startup phase.</p>
+<p>After adding the package, open your site&#39;s <code>program.cs</code> and add a call to the <code>UseRezolver()</code> extension
+method that&#39;s now available, as shown:</p>
+<p>[!code-sharp]<a href="../../../../../Examples/Rezolver.Examples.AspNetCore.1.1/Program.cs#example">Example.cs</a></p>
+<p>Then we need to tell the Asp.Net Core stack that you want an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> to be created
+in order to construct the <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> that will be used as the DI container.</p>
+<p>We do this in your application&#39;s <code>startup.cs</code> - simply by declaring a single method:</p>
+<p>[!code-sharp]<a href="../../../../../Examples/Rezolver.Examples.AspNetCore.1.1/Startup.cs#example">Example.cs</a></p>
+<p>And that&#39;s it - your application is configured.</p>
 
             </article>
           </div>
@@ -109,7 +114,7 @@ from the get-go.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

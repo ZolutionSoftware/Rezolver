@@ -1,5 +1,5 @@
 - name: Getting Started
-  href: index.md
+  href: getting-started.md
 - name: Details 1
   href: details1.md
 - name: Details 2
@@ -12,3 +12,5 @@
 - name: Advanced
   href: advanced/toc.yml
   homepage: advanced/index.md
+- name: Miscellaneous
+  href: miscellaneous/toc.yml

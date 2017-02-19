@@ -25,7 +25,7 @@ namespace Rezolver.Examples.AspNetCore._1._1
 
 		public IConfigurationRoot Configuration { get; }
 
-		// <example>
+		
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
@@ -33,9 +33,16 @@ namespace Rezolver.Examples.AspNetCore._1._1
 			services.AddMvc();
 		}
 
+		// <example>
 		public void ConfigureContainer(ITargetContainer container)
 		{
-			//required method, otherwise Rezolver will not be used
+			//by declaring this method - even if empty - you trigger the 
+			//creation of the ITargetContainer which will ultimately
+			//be used to create the IContainer that will be used
+			//as the application's container.
+
+			//Here you can perform additional registrations/configuration on the
+			//ITargetContainer here.
 		}
 		// </example>
 

@@ -16,6 +16,7 @@ namespace Rezolver.Examples.AspNetCore._1._1
         {
 			var host = new WebHostBuilder()
                 .UseKestrel()				
+				//add the Rezolver container to the host builder
 				.UseRezolver()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()

@@ -2,7 +2,7 @@
   
   "version": "1.1.71702.100",
   "title": "Rezolver IOC Framework",
-  "description": "Rezolver offers all the most common features of any IOC container plus the ability to create new lightweight containers which override others.",
+  "description": "Rezolver is a fast IOC framework offering all the most common features of any IOC container.  It's easy to use and 100% extensible.",
   "packOptions": {
     "summary": "Rezolver - An IOC/DI framework",
     "tags": [ "ioc", "di", "portable", "rezolver" ],

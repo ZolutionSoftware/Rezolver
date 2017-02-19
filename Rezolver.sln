@@ -63,6 +63,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.Compilation.
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.Configuration.Json", "test\Rezolver.Tests.Configuration.Json\Rezolver.Tests.Configuration.Json.xproj", "{66246160-1B64-490D-98A1-A69ECF29C86C}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.Examples", "test\Rezolver.Tests.Examples\Rezolver.Tests.Examples.xproj", "{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug With Documentation|Any CPU = Debug With Documentation|Any CPU
@@ -189,6 +191,14 @@ Global
 		{66246160-1B64-490D-98A1-A69ECF29C86C}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
 		{66246160-1B64-490D-98A1-A69ECF29C86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66246160-1B64-490D-98A1-A69ECF29C86C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -212,5 +222,6 @@ Global
 		{460515E5-89FF-48FC-911B-FC31E12902F5} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 		{37C203A5-5019-410D-B8D8-9BE495EC0139} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 		{66246160-1B64-490D-98A1-A69ECF29C86C} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 	EndGlobalSection
 EndGlobal

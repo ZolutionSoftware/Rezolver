@@ -112,7 +112,8 @@
     <Content Include="_docfx_themes\rezolver\styles\main.css" />
     <Content Include="_docfx_themes\rezolver\styles\main.less" />
     <Content Include="styles\site.css.map" />
-    <None Include="_docfx_proj\how-this-website-is-built.md" />
+    <Content Include="_docfx_proj\docs\getting-started.md" />
+    <None Include="_docfx_proj\docs\miscellaneous\how-this-website-is-built.md" />
     <Content Include="_docfx_themes\rezolver\favicon.ico" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.js" />
@@ -183,8 +184,8 @@
     <None Include="packages.config" />
     <Content Include="_docfx_proj\docs\nuget-packages\index.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.configuration.md" />
-    <Content Include="rezolver-usage-old\index.md" />
     <None Include="Properties\PublishProfiles\DiskPackage.pubxml" />
+    <Content Include="_docfx_proj\docs\miscellaneous\toc.yml" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -278,6 +279,8 @@
     <None Include="_docfx_proj\docs\details1.md" />
     <None Include="_docfx_proj\docs\details2.md" />
     <None Include="_docfx_proj\docs\details3.md" />
+    <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.aspnetcore.hosting.md" />
+    <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.extensions.dependencyinjection.md" />
     <None Include="_docfx_proj\docs\toc.yml" />
     <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">

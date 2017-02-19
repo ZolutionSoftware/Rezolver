@@ -23,11 +23,12 @@ var bootstrap = {
 };
 //built
 var rezolverBootstrap = {
-    src: 'site.less',
-    cwd: 'styles/'
+  src: 'site.less',
+  cwd: 'styles/'
 };
 var rezolverDocFXMain = {
   src: 'main.less',
+  dest: ['main.css','main.css.map', 'main.less'],
   cwd: '_docfx_themes/rezolver/styles/'
 };
 
@@ -49,24 +50,31 @@ var vendor = {
   ]
 }
 
-gulp.task('less', function () {
-  return es.merge(
-    gulp.src(rezolverBootstrap.src, { cwd: rezolverBootstrap.cwd })
+//builds the rezolver bootstrap theme from the less in ./styles/
+gulp.task('buildRezolverBootstrap', function () {
+  return gulp.src(rezolverBootstrap.src, { cwd: rezolverBootstrap.cwd })
       .pipe(sourcemaps.init())
       .pipe(less({
         plugins: [autoprefix]
       }))
       .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(rezolverBootstrap.cwd)),
-    gulp.src(rezolverDocFXMain.src, { cwd: rezolverDocFXMain.cwd })
-      .pipe(sourcemaps.init())
-      .pipe(less({
-        plugins: [autoprefix]
-      }))
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest(rezolverDocFXMain.cwd))
-    );
+      .pipe(gulp.dest(rezolverBootstrap.cwd));
 });
+
+//builds the rezolver docfx template main css from the LESS source
+gulp.task('buildRezolverDocFXMain', function () {
+  return gulp.src(rezolverDocFXMain.src, { cwd: rezolverDocFXMain.cwd })
+      .pipe(sourcemaps.init())
+      .pipe(less({
+        plugins: [autoprefix]
+      }))
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest(rezolverDocFXMain.cwd));
+});
+
+//single 'less' task compiles our less files with source maps
+gulp.task('less', [ 'buildRezolverBootstrap', 
+                    'buildRezolverDocFXMain' ]);
 
 gulp.task('copy', function () {
   return es.merge(
@@ -79,7 +87,6 @@ gulp.task('copy', function () {
       .pipe(copy('./_docfx_themes/rezolver/styles/fonts/'))
   );
 });
-
 
 gulp.task('bundles', function () {
   return es.merge(
@@ -100,6 +107,13 @@ gulp.task('bundles', function () {
   );
 });
 
+//used only when performing style updates to the Rezolver docfx
+//theme whilst running the site - builds the theme from source
+//and re-copies it to the /developers/styles folder
+gulp.task('patchtemplate', ['buildRezolverDocFXMain'], function () {
+  gulp.src(rezolverDocFXMain.dest, { cwd: rezolverDocFXMain.cwd })
+    .pipe(copy('./developers/styles'));
+});
 
-
-gulp.task('default', ['copy', 'less', 'bundles', ]);
+//the main task only requires these three
+gulp.task('default', ['copy', 'less', 'bundles' ]);

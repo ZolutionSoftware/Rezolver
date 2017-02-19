@@ -1,4 +1,4 @@
-# 1. Getting started
+﻿# 1. Getting started
 
 As with many open source .Net projects, there are two primary ways to get Rezolver integrated into your project.
 

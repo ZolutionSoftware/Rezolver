@@ -1,3 +1,31 @@
-﻿a #logo{
-	padding:1px;
+﻿@import "../../../styles/bootstrap-variables-rezolver";
+
+a #logo {
+	padding: 1px;
+}
+
+blockquote {
+	border-left-color: @main-color-darker;
+	background: fade(@main-color-lighter, 50%);
+	font-size: @font-size-base;
+	color: @gray-light;
+
+	h5{
+		margin-top:0;
+		margin-bottom:10px;
+	}
+}
+
+.navbar-inverse {
+	border-bottom: none;
+}
+
+.navbar-default.subnav {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a43f00+0,ffffff+18,ffe7d8+100 */
+	background: @main-color-lighter; /* Old browsers */
+	background: -moz-linear-gradient(top, #a43f00 0%, #ffffff 18%, #ffe7d8 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #a43f00 0%,#ffffff 18%,#ffe7d8 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #a43f00 0%,#ffffff 18%,#ffe7d8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a43f00', endColorstr='#ffe7d8',GradientType=0 ); /* IE6-9 */
+	border-bottom: none;
 }
