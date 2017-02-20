@@ -11,7 +11,7 @@ namespace Rezolver.Configuration
 {
   /// <summary>
   /// Similar to the <see cref="RegisterInstruction"/> except this specifically wraps the 
-  /// <see cref="SingletonTargetDictionaryExtensions.RegisterMultiple(ITargetContainer, IEnumerable{ITarget}, Type, RezolverPath)"/>
+  /// <see cref="SingletonTargetContainerExtensions.RegisterMultiple(ITargetContainer, IEnumerable{ITarget}, Type, RezolverPath)"/>
   /// method.  Construction is largely identical, except where in the aforementioned class you pass a single target, here you
   /// pass multiple targets in a list.
   /// </summary>

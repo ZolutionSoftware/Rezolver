@@ -1,5 +1,7 @@
 /* navbar-default */
 /* inverted navbar */
+/* @main-color-darker;*/
+/*@main-color-lighter;*/
 a #logo {
   padding: 1px;
 }
@@ -33,6 +35,7 @@ blockquote h5 {
 }
 .toc .level2 {
   font-size: 12px;
+  margin-left: 5px;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -4,20 +4,20 @@
     ©Copyright 2016 onwards Zolution Software Ltd
 */
 
-@hljs-comment-color: fade(#000, 50%);
-@hljs-keyword-color: @alt-color;
+@hljs-comment-color: fade(@main-color-lighter, 50%);
+@hljs-keyword-color: #7dbd21;
 @hljs-subst-color: #e06c75;
 @hljs-literal-color: #56b6c2;
-@hljs-string-color: #c100e6;
+@hljs-string-color: @alt-color-lighter;
 @hljs-title-color: #e6c07b;
-@hljs-number-color: #bb0000;
-@hljs-symbol-color: @pre-color;
+@hljs-number-color: #b33;
+@hljs-symbol-color: lighten(@hljs-keyword-color, 35%);
 
 .hljs {
     display: block;
     overflow-x: auto;
-    color: #000;
-    background: @pre-bg;
+    color: #fff;
+    //background: #000;
     /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
     white-space: pre;
 }

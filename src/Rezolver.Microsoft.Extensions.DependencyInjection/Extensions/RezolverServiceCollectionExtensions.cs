@@ -35,7 +35,7 @@ namespace Microsoft.Extensions.DependencyInjection
 		/// <param name="targetContainer">The target container that is to receive the new registrations.</param>
 		/// <exception cref="ArgumentNullException">If either <paramref name="services"/> or <paramref name="targetContainer"/>
 		/// are null.</exception>
-		/// <remarks>This extension method just uses the <see cref="SingletonTargetDictionaryExtensions.Populate(ITargetContainer, IServiceCollection)"/>
+		/// <remarks>This extension method just uses the <see cref="SingletonTargetContainerExtensions.Populate(ITargetContainer, IServiceCollection)"/>
 		/// method also found in this library.</remarks>
 		public static void RegisterTargets(this IServiceCollection services, ITargetContainer targetContainer)
 		{

@@ -61,7 +61,7 @@ namespace Rezolver
 		/// </summary>
 		/// <typeparam name="TObject">The type to be resolved.</typeparam>
 		/// <param name="container">The container.</param>
-		/// <param name="result">Received the value, or a reference to the instance, that is resolved if the operation is successful.</param>
+		/// <param name="result">Receives the object that is resolved if the operation is successful.</param>
 		/// <returns><c>true</c> if the object was resolved, <c>false</c> otherwise.</returns>
 		public static bool TryResolve<TObject>(this IContainer container, out TObject result)
 		{
@@ -72,6 +72,26 @@ namespace Rezolver
 			else
 				result = default(TObject);
 			return success;
+		}
+
+		/// <summary>
+		/// Determines whether this instance can resolve the specified type - wrapper for <see cref="IContainer.CanResolve(ResolveContext)"/>
+		/// </summary>
+		/// <param name="container">The container.</param>
+		/// <param name="type">The type.</param>
+		public static bool CanResolve(this IContainer container, Type type)
+		{
+			return container.CanResolve(new ResolveContext(container, type));
+		}
+
+		/// <summary>
+		/// Determines whether this instance can resolve the specified container - wrapper for <see cref="IContainer.CanResolve(ResolveContext)"/>
+		/// </summary>
+		/// <typeparam name="TObject">The type to be checked..</typeparam>
+		/// <param name="container">The container.</param>
+		public static bool CanResolve<TObject>(this IContainer container)
+		{
+			return container.CanResolve(typeof(TObject));
 		}
 	}
 }

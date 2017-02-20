@@ -7,6 +7,8 @@
  */
 /* navbar-default */
 /* inverted navbar */
+/* @main-color-darker;*/
+/*@main-color-lighter;*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -1374,11 +1376,11 @@ a.bg-success:focus {
   background-color: #c1e2b3;
 }
 .bg-info {
-  background-color: #d9edf7;
+  background-color: rgba(238, 238, 238, 0.5);
 }
 a.bg-info:hover,
 a.bg-info:focus {
-  background-color: #afd9ee;
+  background-color: rgba(213, 213, 213, 0.5);
 }
 .bg-warning {
   background-color: #fcf8e3;
@@ -1549,9 +1551,9 @@ pre {
   line-height: 1.42857143;
   word-break: break-all;
   word-wrap: break-word;
-  color: #722b00;
-  background-color: #ffe7d8;
-  border: 1px solid #ffcdaf;
+  color: #000;
+  background-color: #0b2466;
+  border: 1px solid #071742;
   border-radius: 4px;
 }
 pre code {
@@ -2373,14 +2375,14 @@ table th[class*="col-"] {
 .table > thead > tr.info > th,
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th {
-  background-color: #d9edf7;
+  background-color: rgba(238, 238, 238, 0.5);
 }
 .table-hover > tbody > tr > td.info:hover,
 .table-hover > tbody > tr > th.info:hover,
 .table-hover > tbody > tr.info:hover > td,
 .table-hover > tbody > tr:hover > .info,
 .table-hover > tbody > tr.info:hover > th {
-  background-color: #c4e3f3;
+  background-color: rgba(226, 226, 226, 0.5);
 }
 .table > thead > tr > td.warning,
 .table > tbody > tr > td.warning,
@@ -5018,12 +5020,12 @@ a.thumbnail.active {
   color: #2b542c;
 }
 .alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+  background-color: rgba(238, 238, 238, 0.5);
+  border-color: rgba(221, 221, 221, 0.5);
   color: #31708f;
 }
 .alert-info hr {
-  border-top-color: #a6e1ec;
+  border-top-color: rgba(208, 208, 208, 0.5);
 }
 .alert-info .alert-link {
   color: #245269;
@@ -5272,7 +5274,7 @@ button.list-group-item-success.active:focus {
 }
 .list-group-item-info {
   color: #31708f;
-  background-color: #d9edf7;
+  background-color: rgba(238, 238, 238, 0.5);
 }
 a.list-group-item-info,
 button.list-group-item-info {
@@ -5287,7 +5289,7 @@ button.list-group-item-info:hover,
 a.list-group-item-info:focus,
 button.list-group-item-info:focus {
   color: #31708f;
-  background-color: #c4e3f3;
+  background-color: rgba(226, 226, 226, 0.5);
 }
 a.list-group-item-info.active,
 button.list-group-item-info.active,
@@ -5654,22 +5656,22 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #d6e9c6;
 }
 .panel-info {
-  border-color: #bce8f1;
+  border-color: rgba(221, 221, 221, 0.5);
 }
 .panel-info > .panel-heading {
   color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
+  background-color: rgba(238, 238, 238, 0.5);
+  border-color: rgba(221, 221, 221, 0.5);
 }
 .panel-info > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #bce8f1;
+  border-top-color: rgba(221, 221, 221, 0.5);
 }
 .panel-info > .panel-heading .badge {
-  color: #d9edf7;
+  color: rgba(238, 238, 238, 0.5);
   background-color: #31708f;
 }
 .panel-info > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #bce8f1;
+  border-bottom-color: rgba(221, 221, 221, 0.5);
 }
 .panel-warning {
   border-color: #faebcc;
@@ -6645,19 +6647,18 @@ button.close {
 .hljs {
   display: block;
   overflow-x: auto;
-  color: #000;
-  background: #ffe7d8;
+  color: #fff;
   /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
   white-space: pre;
 }
 .hljs-comment,
 .hljs-quote {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 231, 216, 0.5);
 }
 .hljs-doctag,
 .hljs-keyword,
 .hljs-formula {
-  color: #1239A2;
+  color: #7dbd21;
 }
 .hljs-section,
 .hljs-name,
@@ -6674,7 +6675,7 @@ button.close {
 .hljs-addition,
 .hljs-attribute,
 .hljs-meta-string {
-  color: #c100e6;
+  color: #bcccf7;
 }
 .hljs-built_in,
 .hljs-class .hljs-title {
@@ -6687,7 +6688,7 @@ button.close {
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-number {
-  color: #bb0000;
+  color: #b33;
 }
 .hljs-symbol,
 .hljs-bullet,
@@ -6695,7 +6696,7 @@ button.close {
 .hljs-meta,
 .hljs-selector-id,
 .hljs-title {
-  color: #722b00;
+  color: #cfefa2;
 }
 .hljs-emphasis,
 .hljs-comment,
@@ -6707,6 +6708,18 @@ button.close {
 }
 .hljs-link {
   text-decoration: underline;
+}
+/* some targetted additions for docfx's use of bootstrap */
+.TIP.alert-info {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+.TIP.alert-info hr {
+  border-top-color: #c9e2b3;
+}
+.TIP.alert-info .alert-link {
+  color: #2b542c;
 }
 
 /*# sourceMappingURL=site.css.map */

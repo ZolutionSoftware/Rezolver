@@ -11,6 +11,7 @@
 @alt-color-darker: darken(@alt-color, 13%);
 
 @brand-primary: @main-color;
+@state-info-bg: fade(@gray-lighter, 50%);
 @link-color: darken(@main-color, 10%);
 
 @btn-default-color: white;
@@ -76,6 +77,6 @@
 //** Border color for table and cell borders.
 @table-border-color:            darken(@main-color-lighter, 8%);
 
-@pre-color: @main-color-darker;
-@pre-bg: @main-color-lighter;
-@pre-border-color: darken(@main-color-lighter, 8%);
+@pre-color: #000;/* @main-color-darker;*/
+@pre-bg: @alt-color-darker; /*@main-color-lighter;*/
+@pre-border-color: darken(@alt-color-darker, 8%);

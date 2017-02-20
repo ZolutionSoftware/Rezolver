@@ -1,2 +1,8 @@
 ﻿@import "bootstrap-rezolver.less";
 @import "highlight-theme-rezolver.less";
+
+/* some targetted additions for docfx's use of bootstrap */
+
+.TIP.alert-info{
+	.alert-variant(@alert-success-bg, @alert-success-border, @alert-success-text)
+}

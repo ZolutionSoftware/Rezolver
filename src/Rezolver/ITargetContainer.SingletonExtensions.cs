@@ -13,7 +13,7 @@ namespace Rezolver
 	/// <summary>
 	/// Extension methods for the <see cref="ITargetContainer"/> interface which simplify the registration of singletons.
 	/// </summary>
-	public static class SingletonTargetDictionaryExtensions
+	public static class SingletonTargetContainerExtensions
 	{
 		/// <summary>
 		/// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container.
