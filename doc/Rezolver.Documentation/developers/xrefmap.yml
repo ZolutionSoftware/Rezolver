@@ -2241,57 +2241,6 @@ references:
   fullName.vb: Rezolver.ContainerResolveExtensions.TryResolve(Of TObject)(Rezolver.IContainer, ByRef TObject)
   nameWithType: ContainerResolveExtensions.TryResolve<TObject>(IContainer, out TObject)
   nameWithType.vb: ContainerResolveExtensions.TryResolve(Of TObject)(IContainer, ByRef TObject)
-- uid: Rezolver.ContainerRezolveExtensions
-  name: ContainerRezolveExtensions
-  href: api/Rezolver.ContainerRezolveExtensions.html
-  commentId: T:Rezolver.ContainerRezolveExtensions
-  fullName: Rezolver.ContainerRezolveExtensions
-  nameWithType: ContainerRezolveExtensions
-- uid: Rezolver.ContainerRezolveExtensions.Resolve(Rezolver.IContainer,System.Type)
-  name: Resolve(IContainer, Type)
-  href: api/Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions_Resolve_Rezolver_IContainer_System_Type_
-  commentId: M:Rezolver.ContainerRezolveExtensions.Resolve(Rezolver.IContainer,System.Type)
-  fullName: Rezolver.ContainerRezolveExtensions.Resolve(Rezolver.IContainer, System.Type)
-  nameWithType: ContainerRezolveExtensions.Resolve(IContainer, Type)
-- uid: Rezolver.ContainerRezolveExtensions.Resolve*
-  name: Resolve
-  href: api/Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions_Resolve_
-  commentId: Overload:Rezolver.ContainerRezolveExtensions.Resolve
-  fullName: Rezolver.ContainerRezolveExtensions.Resolve
-  nameWithType: ContainerRezolveExtensions.Resolve
-- uid: Rezolver.ContainerRezolveExtensions.Resolve``1(Rezolver.IContainer)
-  name: Resolve<TObject>(IContainer)
-  href: api/Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions_Resolve__1_Rezolver_IContainer_
-  commentId: M:Rezolver.ContainerRezolveExtensions.Resolve``1(Rezolver.IContainer)
-  name.vb: Resolve(Of TObject)(IContainer)
-  fullName: Rezolver.ContainerRezolveExtensions.Resolve<TObject>(Rezolver.IContainer)
-  fullName.vb: Rezolver.ContainerRezolveExtensions.Resolve(Of TObject)(Rezolver.IContainer)
-  nameWithType: ContainerRezolveExtensions.Resolve<TObject>(IContainer)
-  nameWithType.vb: ContainerRezolveExtensions.Resolve(Of TObject)(IContainer)
-- uid: Rezolver.ContainerRezolveExtensions.TryResolve(Rezolver.IContainer,System.Type,System.Object@)
-  name: TryResolve(IContainer, Type, out Object)
-  href: api/Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions_TryResolve_Rezolver_IContainer_System_Type_System_Object__
-  commentId: M:Rezolver.ContainerRezolveExtensions.TryResolve(Rezolver.IContainer,System.Type,System.Object@)
-  name.vb: TryResolve(IContainer, Type, ByRef Object)
-  fullName: Rezolver.ContainerRezolveExtensions.TryResolve(Rezolver.IContainer, System.Type, out System.Object)
-  fullName.vb: Rezolver.ContainerRezolveExtensions.TryResolve(Rezolver.IContainer, System.Type, ByRef System.Object)
-  nameWithType: ContainerRezolveExtensions.TryResolve(IContainer, Type, out Object)
-  nameWithType.vb: ContainerRezolveExtensions.TryResolve(IContainer, Type, ByRef Object)
-- uid: Rezolver.ContainerRezolveExtensions.TryResolve*
-  name: TryResolve
-  href: api/Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions_TryResolve_
-  commentId: Overload:Rezolver.ContainerRezolveExtensions.TryResolve
-  fullName: Rezolver.ContainerRezolveExtensions.TryResolve
-  nameWithType: ContainerRezolveExtensions.TryResolve
-- uid: Rezolver.ContainerRezolveExtensions.TryResolve``1(Rezolver.IContainer,``0@)
-  name: TryResolve<TObject>(IContainer, out TObject)
-  href: api/Rezolver.ContainerRezolveExtensions.html#Rezolver_ContainerRezolveExtensions_TryResolve__1_Rezolver_IContainer___0__
-  commentId: M:Rezolver.ContainerRezolveExtensions.TryResolve``1(Rezolver.IContainer,``0@)
-  name.vb: TryResolve(Of TObject)(IContainer, ByRef TObject)
-  fullName: Rezolver.ContainerRezolveExtensions.TryResolve<TObject>(Rezolver.IContainer, out TObject)
-  fullName.vb: Rezolver.ContainerRezolveExtensions.TryResolve(Of TObject)(Rezolver.IContainer, ByRef TObject)
-  nameWithType: ContainerRezolveExtensions.TryResolve<TObject>(IContainer, out TObject)
-  nameWithType.vb: ContainerRezolveExtensions.TryResolve(Of TObject)(IContainer, ByRef TObject)
 - uid: Rezolver.ContainerScope
   name: ContainerScope
   href: api/Rezolver.ContainerScope.html
@@ -4800,42 +4749,6 @@ references:
   fullName.vb: Rezolver.SingletonTargetContainerExtensions.RegisterSingleton(Of TObject, TService)(Rezolver.ITargetContainer, Rezolver.IMemberBindingBehaviour)
   nameWithType: SingletonTargetContainerExtensions.RegisterSingleton<TObject, TService>(ITargetContainer, IMemberBindingBehaviour)
   nameWithType.vb: SingletonTargetContainerExtensions.RegisterSingleton(Of TObject, TService)(ITargetContainer, IMemberBindingBehaviour)
-- uid: Rezolver.SingletonTargetDictionaryExtensions
-  name: SingletonTargetDictionaryExtensions
-  href: api/Rezolver.SingletonTargetDictionaryExtensions.html
-  commentId: T:Rezolver.SingletonTargetDictionaryExtensions
-  fullName: Rezolver.SingletonTargetDictionaryExtensions
-  nameWithType: SingletonTargetDictionaryExtensions
-- uid: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IMemberBindingBehaviour)
-  name: RegisterSingleton(ITargetContainer, Type, Type, IMemberBindingBehaviour)
-  href: api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_
-  commentId: M:Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IMemberBindingBehaviour)
-  fullName: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Rezolver.ITargetContainer, System.Type, System.Type, Rezolver.IMemberBindingBehaviour)
-  nameWithType: SingletonTargetDictionaryExtensions.RegisterSingleton(ITargetContainer, Type, Type, IMemberBindingBehaviour)
-- uid: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton*
-  name: RegisterSingleton
-  href: api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton_
-  commentId: Overload:Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton
-  fullName: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton
-  nameWithType: SingletonTargetDictionaryExtensions.RegisterSingleton
-- uid: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)
-  name: RegisterSingleton<TObject>(ITargetContainer, IMemberBindingBehaviour)
-  href: api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_
-  commentId: M:Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)
-  name.vb: RegisterSingleton(Of TObject)(ITargetContainer, IMemberBindingBehaviour)
-  fullName: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton<TObject>(Rezolver.ITargetContainer, Rezolver.IMemberBindingBehaviour)
-  fullName.vb: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Of TObject)(Rezolver.ITargetContainer, Rezolver.IMemberBindingBehaviour)
-  nameWithType: SingletonTargetDictionaryExtensions.RegisterSingleton<TObject>(ITargetContainer, IMemberBindingBehaviour)
-  nameWithType.vb: SingletonTargetDictionaryExtensions.RegisterSingleton(Of TObject)(ITargetContainer, IMemberBindingBehaviour)
-- uid: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)
-  name: RegisterSingleton<TObject, TService>(ITargetContainer, IMemberBindingBehaviour)
-  href: api/Rezolver.SingletonTargetDictionaryExtensions.html#Rezolver_SingletonTargetDictionaryExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_
-  commentId: M:Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)
-  name.vb: RegisterSingleton(Of TObject, TService)(ITargetContainer, IMemberBindingBehaviour)
-  fullName: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton<TObject, TService>(Rezolver.ITargetContainer, Rezolver.IMemberBindingBehaviour)
-  fullName.vb: Rezolver.SingletonTargetDictionaryExtensions.RegisterSingleton(Of TObject, TService)(Rezolver.ITargetContainer, Rezolver.IMemberBindingBehaviour)
-  nameWithType: SingletonTargetDictionaryExtensions.RegisterSingleton<TObject, TService>(ITargetContainer, IMemberBindingBehaviour)
-  nameWithType.vb: SingletonTargetDictionaryExtensions.RegisterSingleton(Of TObject, TService)(ITargetContainer, IMemberBindingBehaviour)
 - uid: Rezolver.TargetContainer
   name: TargetContainer
   href: api/Rezolver.TargetContainer.html

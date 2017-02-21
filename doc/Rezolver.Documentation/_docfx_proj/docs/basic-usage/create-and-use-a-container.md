@@ -6,8 +6,45 @@ Using Rezolver is the same as with all other IOC containers:
 - Register the services which your application needs
 - Resolve services from the container
 
-> [!NOTE]
-> Rezolver does also support child containers and lifetime scopes, but we won't cover those here.
+All of this setup is ultimately conducted through just a few primary types, which we'll take a brief look at
+now.
+
+## Core types
+
+For all the built-in container types, Rezolver splits registration and resolving responsibilities between 
+two primary interfaces:
+
+### @Rezolver.ITargetContainer
+
+This interface describes a registry of @Rezolver.ITarget objects, keyed by type, describing the type of object 
+that is to be created (and how) when a given type is requested.
+
+It is through this interface that you setup your container with registrations, which are then later used when 
+resolving objects.
+
+You might also see @Rezolver.ITargetContainerOwner - which is a special type required by some of the more complex
+registration mechanisms (decorators, for example).
+
+> [!TIP]
+> The primary implementation of this interface that you will use in your application is @Rezolver.TargetContainer.
+
+### @Rezolver.IContainer
+
+This is the interface through which we resolve objects.  The interface does not expose any registration 
+mechanisms at all (even if the 'standard' implementations of those classes all do) - only the ability
+to request objects from the container.
+
+This interface does not mandate that a container has an `ITargetContainer`, it's simply the case
+that all the provided implementations which we will discuss in the rest of this documentation do
+use that interface as the source of their service registrations.
+
+> [!TIP]
+> The primary implementation of this interface is @Rezolver.ContainerBase, an abstract class which also 
+> implements the @Rezolver.ITargetContainer interface by wrapping around the @Rezolver.ContainerBase.Targets 
+> property that it exposes.
+> 
+> As a consumer of Rezolver, however, you will be using the @Rezolver.Container and @Rezolver.ScopedContainer 
+> classes most of the time - which derive most of their functionality from this abstract class.
 
 ## Creating a container
 
@@ -25,27 +62,16 @@ void Foo()
     var container = new ScopedContainer();
 ```
 
-> [!NOTE]
-> All code samples assume you have added a `using` statement (`imports` in VB) for the `Rezolver` namespace.
+*All code samples assume you have added a `using` statement (`imports` in VB) for the `Rezolver` namespace.*
 
 Once you have a local reference to either of these classes, you can start registering services in the container,
 and resolving objects from it.
 
-> [!TIP]
-> The core implementation of @Rezolver.IContainer is @Rezolver.ContainerBase, which is shared by both 
-> @Rezolver.Container and @Rezolver.ScopedContainer - and it is this class which provides the implementations of
-> both @Rezolver.IContainer and @Rezolver.ITargetContainer through which you can both register services and resolve
-> them.
-
 ## Registering services
 
-With our default implementations of @Rezolver.IContainer, registration of services ultimately requires adding 
-'targets' to an @Rezolver.ITargetContainer (the container's <xref:Rezolver.ContainerBase.Targets> property) and 
-associating them with a service type which we will later resolve.
-
-> [!NOTE]
-> The @Rezolver.ContainerBase class implements the @Rezolver.ITargetContainer interface by forwarding all the
-> calls it receives through that interface to its @Rezolver.ContainerBase.Targets property.
+As mentioned above, with our default implementations of @Rezolver.IContainer, registration of services ultimately 
+means adding targets to a container's @Rezolver.ContainerBase.Targets target container, associating them with service 
+types which we will later resolve.
 
 The core registration method for this is the @Rezolver.ITargetContainer.Register*
 method, which accepts an @Rezolver.ITarget and an optional type against which the registration is to be made.
@@ -55,25 +81,25 @@ method, which accepts an @Rezolver.ITarget and an optional type against which th
 > information about how an object is to be created or retrieved when a container's @Rezolver.IContainer.Resolve* 
 > operation is called.
 
-Rezolver, like most IOC containers, also provides additional registration extension methods which abstract away 
+Rezolver, like most IOC containers, also provides additional registration extension methods that abstract away 
 the @Rezolver.ITarget which will ultimately be created and stored.
 
-The majority of the code samples here use these registration methods, which are documented in the API section
+The majority of the code samples shown on this site use these registration methods, which are documented in the API section
 of this site:
 
-- @Rezolver.AliasTargetContainerExtensions
-- @Rezolver.DecoratorTargetContainerExtensions
-- @Rezolver.DelegateTargetContainerExtensions
-- @Rezolver.ExpressionTargetContainerExtensions
-- @Rezolver.MultipleTargetContainerExtensions
-- @Rezolver.ObjectTargetContainerExtensions
-- @Rezolver.RegisterTypeTargetContainerExtensions
-- @Rezolver.ScopedTargetContainerExtensions
-- @Rezolver.SingletonTargetContainerExtensions
+- @Rezolver.AliasTargetContainerExtensions *- for registering aliases of one type to another (useful for reusing singletons for multiple types)*
+- @Rezolver.DecoratorTargetContainerExtensions *- for registering decorators*
+- @Rezolver.DelegateTargetContainerExtensions *- for registering factory delegates*
+- @Rezolver.ExpressionTargetContainerExtensions *- for registering expression trees*
+- @Rezolver.MultipleTargetContainerExtensions *- for batch registering multiple targets*
+- @Rezolver.ObjectTargetContainerExtensions *- for registering object references/values*
+- @Rezolver.RegisterTypeTargetContainerExtensions *- for registering constructor-injected types (plain and open-generic)*
+- @Rezolver.ScopedTargetContainerExtensions *- for registering scoped constructor-injected types*
+- @Rezolver.SingletonTargetContainerExtensions *- for registering singleton constructor-injected types*
 
-> [!NOTE]
-> All the registration extension methods require an instance of @Rezolver.ITargetContainer or
-> @Rezolver.ITargetContainerOwner
+All the registration extension methods require an instance of @Rezolver.ITargetContainer or @Rezolver.ITargetContainerOwner,
+and they all ultimately will create one of the many target types in the @Rezolver.Targets namespace.  These are all documented
+more explicitly elsewhere in this guide.
 
 So, then - if we wanted to tell the container that we want the type `MyService` to be available - we could use 
 one of the many @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* methods, such as the generic
@@ -113,11 +139,10 @@ container.RegisterType(
 // container.RegisterType<IMyGeneric<IEnumerable<>>();
 ```
 
-> [!NOTE]
-> This overview has only covered setting up a registration for a constructor-injected type, there are 
-> many other types of registration that can be created - in different ways - and constructor injection
-> itself has multiple alternative behaviours associated with it, too.  These will be introduced as we
-> progress further through the documentation.
+This overview has only covered setting up a registration for a constructor-injected type, there are 
+many other types of registration that can be created - in different ways - and constructor injection
+itself has multiple alternative behaviours associated with it, too.  These will be introduced as we
+progress further through the documentation.
 
 ## Resolving services
 
@@ -158,7 +183,7 @@ previously registered.
 
 If no registration is found, then an `InvalidOperationException` is raised by the container.
 
-> [!NOTE]
+> [!TIP]
 > @Rezolver.IContainer also implements the `System.IServiceProvider` interface from the .Net framework, which requires
 > that missing services yield a `null` result instead of throwing an exception.
 
