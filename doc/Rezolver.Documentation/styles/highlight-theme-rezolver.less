@@ -1,68 +1,71 @@
 ﻿@import "bootstrap-variables-rezolver.less";
 
 /* Rezolver Highlight-js theme.  Uses structure adapted from the atom-one-dark theme, but nearly all the colours are changed 
-    ©Copyright 2016 onwards Zolution Software Ltd
+	©Copyright 2016 onwards Zolution Software Ltd
 */
 
-@hljs-comment-color: fade(@main-color-lighter, 50%);
-@hljs-keyword-color: #7dbd21;
-@hljs-subst-color: #e06c75;
-@hljs-literal-color: #56b6c2;
-@hljs-string-color: @alt-color-lighter;
-@hljs-title-color: #e6c07b;
-@hljs-number-color: #b33;
-@hljs-symbol-color: lighten(@hljs-keyword-color, 35%);
+@hljs-base-color: @alt-color-darker;
+@hljs-comment-color: lighten(desaturate(@hljs-base-color, 50%), 25%);
+@hljs-keyword-color: #b33;
+@hljs-subst-color: darken(@hljs-keyword-color, 15%);
+@hljs-string-color: spin(saturate(@hljs-base-color, 20%), 90);
+@hljs-literal-color: saturate(@hljs-base-color, 25%);
+@hljs-title-color: spin(saturate(@hljs-base-color, 20%), 270);
+@hljs-number-color: @hljs-string-color;
+@hljs-symbol-color: spin(saturate(@hljs-base-color, 20%), 180);
 
 .hljs {
-    display: block;
-    overflow-x: auto;
-    color: #fff;
-    //background: #000;
-    /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
-    white-space: pre;
+	display: block;
+	overflow-x: auto;
+	color: @hljs-base-color;
+	//background: #000;
+	/* undo the word-breaking which is applied to all <pre> blocks in our styles. */
+	white-space: pre;
 }
 
 .hljs-comment, .hljs-quote {
-    &:extend(.hljs-emphasis);
-    color: @hljs-comment-color;
+	&:extend(.hljs-emphasis);
+	color: @hljs-comment-color;
 }
 
 .hljs-doctag, .hljs-keyword, .hljs-formula {
-    color: @hljs-keyword-color;
+	color: @hljs-keyword-color;
 }
 
 .hljs-section, .hljs-name, .hljs-selector-tag, .hljs-deletion, .hljs-subst {
-    color: @hljs-subst-color;
+	color: @hljs-subst-color;
 }
 
 .hljs-literal {
-    color: @hljs-literal-color;
+	color: @hljs-literal-color;
 }
 
-.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta-string {
-    color: @hljs-string-color;
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta-string, .hljs-value {
+	color: @hljs-string-color;
 }
 
 .hljs-built_in, .hljs-class .hljs-title {
-    color: @hljs-title-color;
+	color: @hljs-title-color;
 }
 
 .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number {
-    color: @hljs-number-color;
+	color: @hljs-number-color;
 }
-
-.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-title {
-    color: @hljs-symbol-color;
+.hljs-title{
+	color: @hljs-title-color;
+}
+.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id,  {
+	color: @hljs-symbol-color;
 }
 
 .hljs-emphasis {
-    font-style: italic;
+	font-style: italic;
 }
 
 .hljs-strong {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .hljs-link {
-    text-decoration: underline;
+	text-decoration: underline;
 }

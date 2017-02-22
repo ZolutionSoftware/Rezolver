@@ -211,9 +211,7 @@ methods (e.g. <xref:Rezolver.ContainerResolveExtensions.CanResolve``1(Rezolver.I
 bool canResolve = container.CanResolve<MyService>();
 ```
 
-## Examples
+* * *
 
-### Register and resolve by same type
-
-[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/SimpleExamples.cs#MyServiceDirect)]
-
+Now we understand how to create a container and register/resolve services to/from it, next we'll take a look
+at Rezolver's understanding of [object lifetimes](object-lifetimes.md).

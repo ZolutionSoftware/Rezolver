@@ -1,7 +1,7 @@
 ﻿# Examples as tests
 
 This project contains numerous Rezolver integration tests whose purpose is to provide working examples for 
-our [Developer Documentation](http://rezolver.co.uk/developers/docs).
+our [Developer Documentation](http://rezolver.co.uk).
 
 The code in this project is directly pulled into the various topics throughout that website as code snippets
 (rather like Github gists).

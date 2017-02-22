@@ -115,6 +115,8 @@
     <Content Include="_docfx_proj\docs\basic-usage\getting-started.md" />
     <Content Include="_docfx_proj\docs\basic-usage\toc.yml" />
     <Content Include="_docfx_proj\docs\basic-usage\create-and-use-a-container.md" />
+    <Content Include="_docfx_proj\docs\basic-usage\using-scopes.md" />
+    <Content Include="_docfx_proj\docs\basic-usage\object-lifetimes.md" />
     <None Include="_docfx_proj\docs\miscellaneous\how-this-website-is-built.md" />
     <Content Include="_docfx_themes\rezolver\favicon.ico" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />

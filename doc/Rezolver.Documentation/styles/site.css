@@ -7,8 +7,6 @@
  */
 /* navbar-default */
 /* inverted navbar */
-/* @main-color-darker;*/
-/*@main-color-lighter;*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -1552,8 +1550,8 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   color: #000;
-  background-color: #0b2466;
-  border: 1px solid #071742;
+  background-color: #e9effd;
+  border: 1px solid #c5d3f9;
   border-radius: 4px;
 }
 pre code {
@@ -6642,44 +6640,45 @@ button.close {
   }
 }
 /* Rezolver Highlight-js theme.  Uses structure adapted from the atom-one-dark theme, but nearly all the colours are changed 
-    ©Copyright 2016 onwards Zolution Software Ltd
+	©Copyright 2016 onwards Zolution Software Ltd
 */
 .hljs {
   display: block;
   overflow-x: auto;
-  color: #fff;
+  color: #0b2466;
   /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
   white-space: pre;
 }
 .hljs-comment,
 .hljs-quote {
-  color: rgba(255, 231, 216, 0.5);
+  color: #54689d;
 }
 .hljs-doctag,
 .hljs-keyword,
 .hljs-formula {
-  color: #7dbd21;
+  color: #b33;
 }
 .hljs-section,
 .hljs-name,
 .hljs-selector-tag,
 .hljs-deletion,
 .hljs-subst {
-  color: #e06c75;
+  color: #7f2323;
 }
 .hljs-literal {
-  color: #56b6c2;
+  color: #001f72;
 }
 .hljs-string,
 .hljs-regexp,
 .hljs-addition,
 .hljs-attribute,
-.hljs-meta-string {
-  color: #bcccf7;
+.hljs-meta-string,
+.hljs-value {
+  color: #720058;
 }
 .hljs-built_in,
 .hljs-class .hljs-title {
-  color: #e6c07b;
+  color: #00721a;
 }
 .hljs-variable,
 .hljs-template-variable,
@@ -6688,15 +6687,17 @@ button.close {
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-number {
-  color: #b33;
+  color: #720058;
+}
+.hljs-title {
+  color: #00721a;
 }
 .hljs-symbol,
 .hljs-bullet,
 .hljs-link,
 .hljs-meta,
-.hljs-selector-id,
-.hljs-title {
-  color: #cfefa2;
+.hljs-selector-id {
+  color: #725300;
 }
 .hljs-emphasis,
 .hljs-comment,
