@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='cleanDocFXOutput, default' />
+/// <binding BeforeBuild='default' Clean='cleanDocFXOutput' />
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.
 var path = require('path');
 var gulp = require('gulp');

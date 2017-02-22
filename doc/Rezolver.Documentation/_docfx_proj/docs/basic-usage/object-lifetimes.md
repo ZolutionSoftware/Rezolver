@@ -63,7 +63,7 @@ This idea of transience is encompassed by the following targets in the @Rezolver
 
 Remember that a target in Rezolver is an instruction to perform an *action* when the associated service
 type is resolved by the container.  In the case of the above list, for all but two we can *definitely* say that 
-a new object will be created.
+a new object will be created if that target is registered against a type that's requested.
 
 So, the @Rezolver.Targets.ConstructorTarget will always result in a type's constructor being called; the 
 @Rezolver.Targets.ListTarget will always result in a new `Array` or `List<T>` being created, and so on.
@@ -84,12 +84,13 @@ static MyObject CreateObject()
 }
 ```
 
-In this case, we can no longer guarantee the transience of the object that is produced by the `CreateObject` 
-method because we no longer know how the service is producing that object.  All we can definitely say is that
-we *definitely* execute the service's `GetObject` method every time we call `CreateObject`.
+The point here being that we can no longer **guarantee** the transience of the object that is produced by the
+`CreateObject` method because we no longer know how the service is producing that object.  All we can definitely 
+say is that we *definitely* execute the service's `GetObject` method every time we call `CreateObject`.
 
 We will go into more depth about using delegates and expressions (and indeed custom targets) as we delve deeper
-into the Rezolver framework.
+into the Rezolver framework - but for now it's important to know that some targets produce inherently transient
+results, whereas some *might* do, but they equally might ***not***.
 
 ### Singleton
 
@@ -113,18 +114,19 @@ public class MySingleton
     }
 }
 ```
-An application wishing to use the `MySingleton` object will do so through the `Instance` property.
+An application wishing to use the `MySingleton` object must do so through the `Instance` property, which is
+the only instance of that type for the entire `AppDomain`.
 
 Equally, if the singleton object implements an interface or base, then it can be passed to code which requires
 an instance of that interface or base without knowing that the underlying object itself is always the same 
 reference.
-
-
 
 > [!NOTE]
 > Different IOC containers have differing understandings of what a singleton really is.
 > In some cases it's one instance per-AppDomain (as with the above code snippet) and in other cases it's
 > one instance per-container.
 > 
-> In other cases, it's configurable or indeed extensible.
-
+> In yet more cases, it's configurable or, indeed, extensible.
+> 
+> Rezolver currently supports one instance per-AppDomain, but in future it will also support one per-container 
+> as well as possibly an API through which you can extend the behaviour.

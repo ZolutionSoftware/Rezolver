@@ -99,20 +99,21 @@
 <p>As with any IOC container, Rezolver understands the concept of object lifetimes, which are implemented
 as different <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> implementations that can be registered in an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <h2 id="what-is-a-lifetime">What is a lifetime?</h2>
+<p>No, this is not a philosophical question ;)</p>
 <p>In a crude sense, an object lifetime describes when a new object is created and whether a previously 
 created object is subsequently returned from a container&#39;s <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method.</p>
 <div class="NOTE"><h5>Note</h5><p>In practise, it&#39;s not that simple - because an IOC container&#39;s understanding of a lifetime does not
-directly map to whether a new instance is actually created at all.</p>
-<p>In IOC world - it&#39;s more accurate to say that the lifetime determines <strong>when</strong> the
+strictly map to whether a new instance is actually created at all.</p>
+<p>It&#39;s more accurate to say that the lifetime determines <strong>when</strong> the
 <strong><em>action</em></strong> that&#39;s been associated with a given service type is actually <strong><em>executed</em></strong>.</p>
 </div>
-<p>Rezolver understands three primary lifetimes, which should be familiar to anyone who&#39;s used an IOC
+<p>Rezolver understands three main lifetimes, which should be familiar to anyone who&#39;s used an IOC
 container before:</p>
 <h3 id="transient">Transient</h3>
-<p>In <em>general</em> programming terms, a transient object is simply one which is created when needed; and thrown 
+<p>In <em>general</em>, a transient object is simply one which is created when needed; and thrown 
 away when it&#39;s fulfilled its purpose.</p>
 <p>This typically translates to calling the <code>new</code> operator with the constructor of a particular type, 
-and then allowing that object to go out of scope, as in this snippet:</p>
+when you want an object, and then allowing that object to go out of scope, as in this snippet:</p>
 <pre><code class="lang-cs">// Factory method always creates a new instance
 static MyObject CreateObject()
 {
@@ -130,34 +131,65 @@ void Test()
     Assert.NotSame(_transient, transient1);
     Assert.NotSame(_transient, transient2);
 }
-</code></pre><p>This is what most developers think of when they talk about a transient object, and it might well be correct, 
-but it&#39;s not the whole story.</p>
-<p>If transiency is defined as <em>the caller **knowing</em>** that <code>new</code> is called (or some other method by which we can
-invoke a constructor - such as via <code>Activator.CreateInstance</code>) - then how do we define the lifetime of <code>MyObject</code>
-when we define <code>CreateObject</code> as follows:</p>
+</code></pre><p>This idea of transience is encompassed by the following targets in the <a class="xref" href="../../api/Rezolver.Targets.html">Rezolver.Targets</a> namespace:</p>
+<ul>
+<li><a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></li>
+<li><a class="xref" href="../../api/Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a></li>
+<li><a class="xref" href="../../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> <em>(see below)</em></li>
+<li><a class="xref" href="../../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> <em>(see below)</em></li>
+<li><a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a></li>
+<li><a class="xref" href="../../api/Rezolver.Targets.ListTarget.html">ListTarget</a></li>
+</ul>
+<p>Remember that a target in Rezolver is an instruction to perform an <em>action</em> when the associated service
+type is resolved by the container.  In the case of the above list, for all but two we can <em>definitely</em> say that 
+a new object will be created if that target is registered against a type that&#39;s requested.</p>
+<p>So, the <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> will always result in a type&#39;s constructor being called; the 
+<a class="xref" href="../../api/Rezolver.Targets.ListTarget.html">ListTarget</a> will always result in a new <code>Array</code> or <code>List&lt;T&gt;</code> being created, and so on.</p>
+<p>In the case of the <a class="xref" href="../../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> and <a class="xref" href="../../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> targets, however,
+all we can say about those is that the <strong><em>action</em></strong> they represent will be executed <em>every time</em> the container 
+resolves them.</p>
+<p>That&#39;s the same as if we were to change the definition of <code>CreateObject</code> in our earlier code example as 
+follows:</p>
 <pre><code class="lang-cs">private static IMyObjectService _service = new MyObjectService();
 
 static MyObject CreateObject()
 {
     return _service.GetObject();
 }
-</code></pre><p>The answer is: we don&#39;t know what the <em>**object&#39;s</em>* lifetime* is, because we no longer know how the object is produced.</p>
-<p>But we do know that we call the service&#39;s <code>GetObject()</code> method every time we want an object - so therefore we 
-<strong><em>treat</em></strong> it as transient.</p>
-<p>In </p>
-<p>And this is where Rezolver&#39;s concept of transience comes into play, and it&#39;s derived from the role of the <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a>
-interface in our standard container types. </p>
-<div class="TIP"><h5>Tip</h5><p>We don&#39;t have transient &#39;objects&#39; in Rezolver, we have targets which describe transient <strong><em>actions</em></strong>
-that 
-the concept of transiency in Rezolver (or in any IOC container) is less connected with the actual
-instance that&#39;s returned from the <code>Resolve</code> method, but more the action that&#39;s performed to <em>produce</em>
-that object.</p>
-</div>
-<p>In the case of Rezolver, most of the target types in the <a class="xref" href="../../api/Rezolver.Targets.html">Rezolver.Targets</a> namespace will yield objects
-which are <em>implicitly</em> transient, because they don&#39;t impose their own lifetime rules.</p>
-<p>Also, </p>
-<p>In most cases, then, it&#39;s best to think of a transient object as </p>
+</code></pre><p>The point here being that we can no longer <strong>guarantee</strong> the transience of the object that is produced by the
+<code>CreateObject</code> method because we no longer know how the service is producing that object.  All we can definitely 
+say is that we <em>definitely</em> execute the service&#39;s <code>GetObject</code> method every time we call <code>CreateObject</code>.</p>
+<p>We will go into more depth about using delegates and expressions (and indeed custom targets) as we delve deeper
+into the Rezolver framework - but for now it&#39;s important to know that some targets produce inherently transient
+results, whereas some <em>might</em> do, but they equally might <strong><em>not</em></strong>.</p>
 <h3 id="singleton">Singleton</h3>
+<p>Every developer should know what a singleton is.  Okay - any <em>reasonably experienced</em> developer should know what
+a singleton is!</p>
+<p>In short, a singleton is exactly as the name suggests: a type for which there is <strong>guaranteed</strong> to be only one 
+instance.</p>
+<p>Here&#39;s a simple implementation (note: please don&#39;t take this as the best, or <em>only</em>, way to implement one - it&#39;s
+just an example!):</p>
+<pre><code class="lang-cs">public class MySingleton
+{
+    public MySingleton Instance { get; } = new MySingleton();
+
+    private MySingleton()
+    {
+
+    }
+}
+</code></pre><p>An application wishing to use the <code>MySingleton</code> object must do so through the <code>Instance</code> property, which is
+the only instance of that type for the entire <code>AppDomain</code>.</p>
+<p>Equally, if the singleton object implements an interface or base, then it can be passed to code which requires
+an instance of that interface or base without knowing that the underlying object itself is always the same 
+reference.</p>
+<div class="NOTE"><h5>Note</h5><p>Different IOC containers have differing understandings of what a singleton really is.
+In some cases it&#39;s one instance per-AppDomain (as with the above code snippet) and in other cases it&#39;s
+one instance per-container.</p>
+<p>In yet more cases, it&#39;s configurable or, indeed, extensible.</p>
+<p>Rezolver currently supports one instance per-AppDomain, but in future it will also support one per-container 
+as well as possibly an API through which you can extend the behaviour.</p>
+</div>
 
             </article>
           </div>
