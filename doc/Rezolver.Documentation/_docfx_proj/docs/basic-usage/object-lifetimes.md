@@ -129,4 +129,88 @@ reference.
 > In yet more cases, it's configurable or, indeed, extensible.
 > 
 > Rezolver currently supports one instance per-AppDomain, but in future it will also support one per-container 
-> as well as possibly an API through which you can extend the behaviour.
+> and possibly more besides.
+
+### Scoped
+
+Scoping has two flavours, and also often relates specifically to objects which implement the `IDisposable` interface
+from the .Net framework (although it doesn't have to).  In order for the idea of a scoped object to make any sense,
+however, you need a scope within which the object will exist.
+
+A scope can be thought of as being a 'bag' for objects which the application wants to create and keep alive for a specific
+period of time and, when it no longer needs those objects, it disposes of the scope.
+
+The reason why this pattern is usually only applied to disposable objects is because with transient objects you don't
+need to worry about telling the system that you're done with an object - you simply allow it to go out of scope and
+eventually the garbage collector will reclaim the memory that object occupied.
+
+That said, there are scenarios why you might wish to explicitly restrict a service instance to one-per-scope, so that's
+why scoped objects do not have to be disposable.
+
+One feature which is consistent, however, is that the scope **itself** is disposable.
+
+#### Implicit scoping
+
+Implicit scoping applies only to `IDisposable` objects and affects when the object is disposed, not when it's 
+created.
+
+A simple demonstration of this, if you were handwriting it, would be as follows (*please note the implementation
+of `IDisposable` shown here is ***not*** recommended!*):
+
+```cs
+public class Scope : IDisposable
+{
+    private List<IDisposable> _scopeObjects = new List<IDisposable>();
+    public void Dispose()
+    {
+        //dispose all our tracked disposables
+        foreach(var obj in _scopeObjects)
+        {
+            obj.Dispose();
+        }
+    }
+
+    public T CreateObject<T>()
+    {
+        //this bit is merely to take the place of a generic 
+        //factory/service/IOC container which knows how to build things.  
+        T result;
+        if(typeof(T) == typeof(MyDisposable))
+            result = (T)(object)new MyDisposable();
+        else
+            throw new InvalidOperationException($"Don't know how to create { typeof(T) }");
+
+        //if the object is disposable - track it
+        if(result is IDisposable)
+            _scopeObjects.Add((IDisposable)result);
+
+        return result;
+    }
+}
+
+public class MyDisposable : IDisposable
+{
+    public bool Disposed { get; private set; }
+    public void Dispose()
+    {
+        Disposed = true;
+    }
+}
+
+public class XUnitTest
+{
+    [Fact]
+    public void ShouldDispose()
+    {
+        MyDisposable obj;
+        using(var scope = new Scope())
+        {
+            obj = scope.CreateObject<MyDisposable>();
+        }
+        Assert.True(obj.Disposed);
+    }
+}
+```
+
+To reiterate - nothing in the above is recommended practise at all - it's entirely contrived just to demonstrate what
+a scope does.
