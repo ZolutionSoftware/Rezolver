@@ -9,31 +9,44 @@ a #logo {
 }
 
 .navbar-default.subnav {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a43f00+0,ffffff+18,ffe7d8+100 */
-	background: @main-color-lighter; /* Old browsers */
-	background: -moz-linear-gradient(top, #a43f00 0%, #ffffff 18%, #ffe7d8 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, #a43f00 0%,#ffffff 18%,#ffe7d8 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, #a43f00 0%,#ffffff 18%,#ffe7d8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a43f00', endColorstr='#ffe7d8',GradientType=0 ); /* IE6-9 */
-	border-bottom: none;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0b2466+0,ffffff+18,e9effd+100 */
+	background: #0b2466; /* Old browsers */
+	background: -moz-linear-gradient(top, #0b2466 0%, #ffffff 18%, #e9effd 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #0b2466 0%,#ffffff 18%,#e9effd 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #0b2466 0%,#ffffff 18%,#e9effd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b2466', endColorstr='#e9effd',GradientType=0 ); /* IE6-9 */
+	border-bottom:none;
 }
+
 blockquote {
 	border-left-color: @main-color-darker;
 	background: fade(@main-color-lighter, 50%);
 	font-size: @font-size-base;
 	color: @gray-light;
 
-	h5{
-		margin-top:0;
-		margin-bottom:10px;
+	h5 {
+		margin-top: 0;
+		margin-bottom: 10px;
 	}
 }
 
-.toc .level1 > li{
+.toc .level1 > li {
 	font-size: @font-size-base;
 }
 
-.toc .level2{
+.toc .level2 {
 	font-size: @font-size-small;
-	margin-left:5px;
+	margin-left: 5px;
+}
+
+footer .packageDetails{
+	margin-bottom: 5px;
+	padding: 10px;
+	background: @alert-success-bg;
+	color:@alert-success-text;
+}
+
+footer .packageDetails.notyetreleased{
+	background: @alert-danger-bg;
+	color: @alert-danger-text;
 }

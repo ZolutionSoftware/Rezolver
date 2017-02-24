@@ -1,5 +1,6 @@
 /* navbar-default */
 /* inverted navbar */
+/*darken(@brand-primary, 15%);*/
 a #logo {
   padding: 1px;
 }
@@ -7,14 +8,14 @@ a #logo {
   border-bottom: none;
 }
 .navbar-default.subnav {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a43f00+0,ffffff+18,ffe7d8+100 */
-  background: #ffe7d8;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0b2466+0,ffffff+18,e9effd+100 */
+  background: #0b2466;
   /* Old browsers */
   /* FF3.6-15 */
   /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #a43f00 0%, #ffffff 18%, #ffe7d8 100%);
+  background: linear-gradient(to bottom, #0b2466 0%, #ffffff 18%, #e9effd 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a43f00', endColorstr='#ffe7d8', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0b2466', endColorstr='#e9effd', GradientType=0);
   /* IE6-9 */
   border-bottom: none;
 }
@@ -34,6 +35,16 @@ blockquote h5 {
 .toc .level2 {
   font-size: 12px;
   margin-left: 5px;
+}
+footer .packageDetails {
+  margin-bottom: 5px;
+  padding: 10px;
+  background: #dff0d8;
+  color: #3c763d;
+}
+footer .packageDetails.notyetreleased {
+  background: #f2dede;
+  color: #a94442;
 }
 
 /*# sourceMappingURL=main.css.map */

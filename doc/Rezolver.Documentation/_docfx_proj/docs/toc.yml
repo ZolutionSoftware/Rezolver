@@ -1,8 +1,13 @@
 - name: Home
   href: index.md
-- name: Basic Usage
-  href: basic-usage/toc.yml
-  homepage: basic-usage/getting-started.md
+- name: Getting started
+  href: getting-started.md
+- name: Create & use a container
+  href: create-and-use-a-container.md
+- name: Object lifetimes
+  href: object-lifetimes.md
+- name: Lifetimes in Rezolver
+  href: lifetimes-in-rezolver.md
 - name: Nuget Packages
   href: nuget-packages/toc.yml
   homepage: nuget-packages/index.md

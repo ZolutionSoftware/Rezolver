@@ -7,6 +7,7 @@
  */
 /* navbar-default */
 /* inverted navbar */
+/*darken(@brand-primary, 15%);*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -4542,8 +4543,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #a43f00;
-  border-color: #712b00;
+  background-color: #0b2466;
+  border-color: #061438;
 }
 .navbar-inverse .navbar-brand {
   color: #eeeeee;
@@ -4568,7 +4569,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
   color: #fff;
-  background-color: #712b00;
+  background-color: #061438;
 }
 .navbar-inverse .navbar-nav > .disabled > a,
 .navbar-inverse .navbar-nav > .disabled > a:hover,
@@ -4588,20 +4589,20 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {
-  border-color: #813100;
+  border-color: #081946;
 }
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
-  background-color: #712b00;
+  background-color: #061438;
   color: #fff;
 }
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-    border-color: #712b00;
+    border-color: #061438;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
-    background-color: #712b00;
+    background-color: #061438;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color: #eeeeee;
@@ -4615,7 +4616,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
     color: #fff;
-    background-color: #712b00;
+    background-color: #061438;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
