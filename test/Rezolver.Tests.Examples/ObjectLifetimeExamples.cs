@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Rezolver.Tests.Examples.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Types;
 using Xunit;
 
 namespace Rezolver.Tests.Examples

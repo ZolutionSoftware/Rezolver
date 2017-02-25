@@ -117,6 +117,8 @@
     <Content Include="_docfx_proj\docs\create-and-use-a-container.md" />
     <Content Include="_docfx_proj\docs\lifetimes-in-rezolver.md" />
     <Content Include="_docfx_proj\docs\object-lifetimes.md" />
+    <Content Include="_docfx_proj\docs\registering-services\toc.yml" />
+    <Content Include="_docfx_proj\docs\registering-services\index.md" />
     <None Include="_docfx_proj\docs\miscellaneous\how-this-website-is-built.md" />
     <Content Include="_docfx_themes\rezolver\favicon.ico" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />
@@ -179,10 +181,8 @@
     <Content Include="manifest.json" />
     <Content Include="package.json" />
     <Content Include="bower.json" />
-    <Content Include="docfx-globalMetadata.json" />
     <Content Include="namespaces.4.5.2.zip" />
     <Content Include="msdn.4.5.2.zip" />
-    <Content Include="docfx - Old.json" />
     <Content Include="articles\toc.md" />
     <Content Include="articles\intro.md" />
     <Content Include="api\index.md" />
@@ -286,6 +286,12 @@
     <None Include="_docfx_proj\docs\details3.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.aspnetcore.hosting.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.extensions.dependencyinjection.md" />
+    <Content Include="_docfx_proj\docs\registering-services\constructors.md" />
+    <Content Include="_docfx_proj\docs\registering-services\objects.md" />
+    <Content Include="_docfx_proj\docs\registering-services\expressions.md" />
+    <Content Include="_docfx_proj\docs\registering-services\delegates.md" />
+    <Content Include="_docfx_proj\docs\registering-services\decorators.md" />
+    <Content Include="_docfx_proj\docs\registering-services\type-compatibility.md" />
     <None Include="_docfx_proj\docs\toc.yml" />
     <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">

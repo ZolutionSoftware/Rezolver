@@ -213,5 +213,7 @@ bool canResolve = container.CanResolve<MyService>();
 
 * * *
 
-Now we understand how to create a container and register/resolve services to/from it, next we'll take a look
-at Rezolver's understanding of [object lifetimes](object-lifetimes.md).
+Now we understand how to create a container, and register/resolve services to/from it, it's worth taking a look
+at some of the ways in which we can [register services in our container](registering-services/index.md).
+
+Alternatively, you might be interested in Rezolver's understanding of [object lifetimes](object-lifetimes.md).

@@ -9,15 +9,26 @@ a #logo {
 }
 .navbar-default.subnav {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0b2466+0,ffffff+18,e9effd+100 */
-  background: #0b2466;
+  background: #e9effd;
   /* Old browsers */
   /* FF3.6-15 */
   /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #0b2466 0%, #ffffff 18%, #e9effd 100%);
+  background: linear-gradient(to bottom, #0b2466 0%, #fff 23%, #e9effd 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0b2466', endColorstr='#e9effd', GradientType=0);
   /* IE6-9 */
-  border-bottom: none;
+  border-bottom-color: #bcccf7;
+}
+.sidefilter,
+.sidetoc {
+  background: #e9effd;
+  border-left-color: #bcccf7;
+  border-right-color: #bcccf7;
+}
+body .toc,
+.sidenav,
+.fixed-header {
+  background: #e9effd;
 }
 blockquote {
   border-left-color: #722b00;
@@ -45,6 +56,18 @@ footer .packageDetails {
 footer .packageDetails.notyetreleased {
   background: #f2dede;
   color: #a94442;
+}
+@media only screen and (max-width: 768px) {
+  .toc .level2 > li {
+    display: inline-block;
+    min-width: 20em;
+  }
+  .toc .level2 > li:after {
+    content: none;
+  }
+  .toc .nav > .li > a {
+    display: inline-block;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

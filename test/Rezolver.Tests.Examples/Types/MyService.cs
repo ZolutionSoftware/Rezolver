@@ -1,6 +1,8 @@
-﻿namespace Types
+﻿namespace Rezolver.Tests.Examples.Types
 {
-	internal class MyService
+	//<example>
+	public class MyService : IMyService
 	{
 	}
+	//</example>
 }

@@ -1,4 +1,4 @@
-﻿# Rezolver Nuget Package
+﻿# Rezolver.Microsoft.AspNetCore.Hosting Package
 
 [See package page on nuget](https://www.nuget.org/packages/Rezolver.Microsoft.AspNetCore.Hosting).
 

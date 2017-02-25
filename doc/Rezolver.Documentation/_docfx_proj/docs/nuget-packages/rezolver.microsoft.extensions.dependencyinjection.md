@@ -1,4 +1,4 @@
-﻿# Rezolver Nuget Package
+﻿# Rezolver.Microsoft.Extensions.DependencyInjection Package
 
 [See package page on nuget](https://www.nuget.org/packages/Rezolver.Microsoft.Extensions.DependencyInjection).
 
