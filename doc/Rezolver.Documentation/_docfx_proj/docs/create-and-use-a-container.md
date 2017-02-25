@@ -76,73 +76,8 @@ types which we will later resolve.
 The core registration method for this is the @Rezolver.ITargetContainer.Register*
 method, which accepts an @Rezolver.ITarget and an optional type against which the registration is to be made.
 
-> [!TIP]
-> A ***target*** (<xref:Rezolver.ITarget>) is an object stored within an @Rezolver.ITargetContainer which contains 
-> information about how an object is to be created or retrieved when a container's @Rezolver.IContainer.Resolve* 
-> operation is called.
-
-Rezolver, like most IOC containers, also provides additional registration extension methods that abstract away 
-the @Rezolver.ITarget which will ultimately be created and stored.
-
-The majority of the code samples shown on this site use these registration methods, which are documented in the API section
-of this site:
-
-- @Rezolver.AliasTargetContainerExtensions *- for registering aliases of one type to another (useful for reusing singletons for multiple types)*
-- @Rezolver.DecoratorTargetContainerExtensions *- for registering decorators*
-- @Rezolver.DelegateTargetContainerExtensions *- for registering factory delegates*
-- @Rezolver.ExpressionTargetContainerExtensions *- for registering expression trees*
-- @Rezolver.MultipleTargetContainerExtensions *- for batch registering multiple targets*
-- @Rezolver.ObjectTargetContainerExtensions *- for registering object references/values*
-- @Rezolver.RegisterTypeTargetContainerExtensions *- for registering constructor-injected types (plain and open-generic)*
-- @Rezolver.ScopedTargetContainerExtensions *- for registering scoped constructor-injected types*
-- @Rezolver.SingletonTargetContainerExtensions *- for registering singleton constructor-injected types*
-
-All the registration extension methods require an instance of @Rezolver.ITargetContainer or @Rezolver.ITargetContainerOwner,
-and they all ultimately will create one of the many target types in the @Rezolver.Targets namespace.  These are all documented
-more explicitly elsewhere in this guide.
-
-So, then - if we wanted to tell the container that we want the type `MyService` to be available - we could use 
-one of the many @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* methods, such as the generic
-@Rezolver.RegisterTypeTargetContainerExtensions.RegisterType``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)
-method:
-
-```cs
-container.RegisterType<MyService>();
-```
-
-This tells the container to construct an instance of `MyService` when we resolve that type.
-
-Alternatively, we could register the type `MyService` against one of its bases or interfaces:
-
-```cs
-//assume MyService inherits from MyServiceBase
-container.RegisterType<MyService, MyServiceBase>();
-
-//assume MyService implements IMyService
-container.RegisterType<MyService, IMyService>();
-```
-
-So, here, the container will construct an instance of `MyService` when either `MyServiceBase` or
-`IMyService` are requested.
-
-All of our generic extension methods like those shown above will also have non-generic variants.  Typically this is
-just good manners, but it's also more essential with IOC containers because you sometimes need to register against
-types which cannot expressed as generic type arguments, for example:
-
-```cs
-container.RegisterType(
-  typeof(IMyGeneric).MakeGenericType(
-    typeof(IEnumerable<>)
-  )
-);
-// because it's impossible to do:
-// container.RegisterType<IMyGeneric<IEnumerable<>>();
-```
-
-This overview has only covered setting up a registration for a constructor-injected type, there are 
-many other types of registration that can be created - in different ways - and constructor injection
-itself has multiple alternative behaviours associated with it, too.  These will be introduced as we
-progress further through the documentation.
+There's too much to cover in a few sub headings here for this - so please head over to 
+[the service registration documentation](registering-services/index.md) to find out more.
 
 ## Resolving services
 
@@ -213,7 +148,7 @@ bool canResolve = container.CanResolve<MyService>();
 
 * * *
 
-Now we understand how to create a container, and register/resolve services to/from it, it's worth taking a look
-at some of the ways in which we can [register services in our container](registering-services/index.md).
+Now we understand how to create a container and resolve services from it, if you haven't already then you 
+should now head over to the section detailing how we [register services in the container](registering-services/index.md).
 
 Alternatively, you might be interested in Rezolver's understanding of [object lifetimes](object-lifetimes.md).

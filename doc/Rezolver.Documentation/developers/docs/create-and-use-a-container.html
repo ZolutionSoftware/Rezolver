@@ -147,56 +147,8 @@ means adding targets to a container&#39;s <a class="xref" href="../api/Rezolver.
 types which we will later resolve.</p>
 <p>The core registration method for this is the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> and an optional type against which the registration is to be made.</p>
-<div class="TIP"><h5>Tip</h5><p>A <strong><em>target</em></strong> (<a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a>) is an object stored within an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which contains 
-information about how an object is to be created or retrieved when a container&#39;s <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> 
-operation is called.</p>
-</div>
-<p>Rezolver, like most IOC containers, also provides additional registration extension methods that abstract away 
-the <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> which will ultimately be created and stored.</p>
-<p>The majority of the code samples shown on this site use these registration methods, which are documented in the API section
-of this site:</p>
-<ul>
-<li><a class="xref" href="../api/Rezolver.AliasTargetContainerExtensions.html">AliasTargetContainerExtensions</a> <em>- for registering aliases of one type to another (useful for reusing singletons for multiple types)</em></li>
-<li><a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a> <em>- for registering decorators</em></li>
-<li><a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html">DelegateTargetContainerExtensions</a> <em>- for registering factory delegates</em></li>
-<li><a class="xref" href="../api/Rezolver.ExpressionTargetContainerExtensions.html">ExpressionTargetContainerExtensions</a> <em>- for registering expression trees</em></li>
-<li><a class="xref" href="../api/Rezolver.MultipleTargetContainerExtensions.html">MultipleTargetContainerExtensions</a> <em>- for batch registering multiple targets</em></li>
-<li><a class="xref" href="../api/Rezolver.ObjectTargetContainerExtensions.html">ObjectTargetContainerExtensions</a> <em>- for registering object references/values</em></li>
-<li><a class="xref" href="../api/Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a> <em>- for registering constructor-injected types (plain and open-generic)</em></li>
-<li><a class="xref" href="../api/Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a> <em>- for registering scoped constructor-injected types</em></li>
-<li><a class="xref" href="../api/Rezolver.SingletonTargetContainerExtensions.html">SingletonTargetContainerExtensions</a> <em>- for registering singleton constructor-injected types</em></li>
-</ul>
-<p>All the registration extension methods require an instance of <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> or <a class="xref" href="../api/Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a>,
-and they all ultimately will create one of the many target types in the <a class="xref" href="../api/Rezolver.Targets.html">Rezolver.Targets</a> namespace.  These are all documented
-more explicitly elsewhere in this guide.</p>
-<p>So, then - if we wanted to tell the container that we want the type <code>MyService</code> to be available - we could use 
-one of the many <a class="xref" href="../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_">RegisterType</a> methods, such as the generic
-<a class="xref" href="../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterType&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
-method:</p>
-<pre><code class="lang-cs">container.RegisterType&lt;MyService&gt;();
-</code></pre><p>This tells the container to construct an instance of <code>MyService</code> when we resolve that type.</p>
-<p>Alternatively, we could register the type <code>MyService</code> against one of its bases or interfaces:</p>
-<pre><code class="lang-cs">//assume MyService inherits from MyServiceBase
-container.RegisterType&lt;MyService, MyServiceBase&gt;();
-
-//assume MyService implements IMyService
-container.RegisterType&lt;MyService, IMyService&gt;();
-</code></pre><p>So, here, the container will construct an instance of <code>MyService</code> when either <code>MyServiceBase</code> or
-<code>IMyService</code> are requested.</p>
-<p>All of our generic extension methods like those shown above will also have non-generic variants.  Typically this is
-just good manners, but it&#39;s also more essential with IOC containers because you sometimes need to register against
-types which cannot expressed as generic type arguments, for example:</p>
-<pre><code class="lang-cs">container.RegisterType(
-  typeof(IMyGeneric).MakeGenericType(
-    typeof(IEnumerable&lt;&gt;)
-  )
-);
-// because it&#39;s impossible to do:
-// container.RegisterType&lt;IMyGeneric&lt;IEnumerable&lt;&gt;&gt;();
-</code></pre><p>This overview has only covered setting up a registration for a constructor-injected type, there are 
-many other types of registration that can be created - in different ways - and constructor injection
-itself has multiple alternative behaviours associated with it, too.  These will be introduced as we
-progress further through the documentation.</p>
+<p>There&#39;s too much to cover in a few sub headings here for this - so please head over to 
+<a href="registering-services/index.html">the service registration documentation</a> to find out more.</p>
 <h2 id="resolving-services">Resolving services</h2>
 <p>Resolving objects from your container is done through the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method which, you&#39;ll
 notice, accepts a <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> as its single parameter, and returns an <code>Object</code>.  Again, if 
@@ -242,8 +194,8 @@ by using the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_ICon
 methods (e.g. <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve__1_Rezolver_IContainer_">CanResolve&lt;TObject&gt;(IContainer)</a>)):</p>
 <pre><code class="lang-cs">bool canResolve = container.CanResolve&lt;MyService&gt;();
 </code></pre><hr>
-<p>Now we understand how to create a container, and register/resolve services to/from it, it&#39;s worth taking a look
-at some of the ways in which we can <a href="registering-services/index.html">register services in our container</a>.</p>
+<p>Now we understand how to create a container and resolve services from it, if you haven&#39;t already then you 
+should now head over to the section detailing how we <a href="registering-services/index.html">register services in the container</a>.</p>
 <p>Alternatively, you might be interested in Rezolver&#39;s understanding of <a href="object-lifetimes.html">object lifetimes</a>.</p>
 
             </article>

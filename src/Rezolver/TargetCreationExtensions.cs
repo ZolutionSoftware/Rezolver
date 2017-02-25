@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
 	/// <summary>
-	/// Extensions which provide shortcuts for creating some of the extensions in the <c>Rezolver.Targets</c>
+	/// Extensions which provide shortcuts for creating some of the targets in the <c>Rezolver.Targets</c>
 	/// namespace.
 	/// </summary>
 	public static class TargetCreationExtensions

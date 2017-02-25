@@ -97,6 +97,8 @@
 <p>The most basic, fundamental feature of any IOC container is the ability to create instances of services through a 
 constructor, automatically injecting arguments into that constructor from the services which have been registered in
 the container.</p>
+<p>The default behaviour for our constructor injection is to find the constructor you want bound when the container has
+to materialise an instance for you - you tell Rezolver the type you want created, and it&#39;ll do the rest.</p>
 <div class="TIP"><h5>Tip</h5><p>Constructor injection is achieved in Rezolver through the targets <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and
 <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> (for open generic types).  These classes can be built by hand in your code for
 registration in the container, or you can use the extensions defined in 
@@ -144,11 +146,6 @@ Assert.NotNull(result.Service);
 <p>Now, obviously a key facet of dependency injection is that we can depend upon an <em>abstraction</em> of a service instead of a concrete
 implementation - so most of the time your constructors will request an interface instead of a concrete type.  To do this,
 we simply register <code>MyService</code> against the type <code>IMyService</code>:</p>
-<div class="TIP"><h5>Tip</h5><p>Remember - just because we&#39;ve registered a target which builds the type <code>MyService</code>, if we register it only against
-the type <code>IMyService</code>, then that&#39;s the only type the container actually knows about.  The challenge for the container
-here is to correctly identify our second constructor, which accepts an IMyService, based on the fact that that&#39;s the 
-only other type we&#39;ve registered.</p>
-</div>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 container.RegisterType&lt;MyService, IMyService&gt;();
 container.RegisterType&lt;RequiresMyService&gt;();
@@ -160,7 +157,7 @@ Assert.NotNull(result.Service);
 <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> is selecting the best-matched constructor based on the service registrations present 
 in the container when it&#39;s asked to <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> the object.</p>
 <p>To prove that it&#39;s the <code>IMyService</code> constructor we bound there, and not the other one - let&#39;s try registering a different
-implementation of <code>IMyService</code> - one which the class will not support because it&#39;ll fail the argument type check in the
+implementation of <code>IMyService</code> - one which the class will not support because it&#39;ll fail the argument type-check in the
 second constructor:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 container.RegisterType&lt;MyAlternateService, IMyService&gt;();
@@ -186,7 +183,7 @@ which have multiple constructors.</p>
 <h2 id="best-match-constructor">Best match constructor</h2>
 <p>The best-match algorithm is similar to how a compiler matches a method overload.  The rules aren&#39;t necessarily exactly 
 the same as, say, the C# spec, but they&#39;re close.</p>
-<p>Based on the services available in the container at the time the @Resolver.IContainer.Resolve* call is made, the algorithm
+<p>Based on the services available in the container at the time the <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call is made, the algorithm
 will first attempt to select the greediest constructor whose parameters are <em>completely</em>
 satisfied by those registered services.  Thus, if a class has a constructor with one parameter and one with ten; if the single
 parameter can be successfully injected but only nine of the others can be, then the single parameter constructor wins:</p>

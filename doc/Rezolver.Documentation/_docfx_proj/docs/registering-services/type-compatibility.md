@@ -17,19 +17,25 @@ a type for registration.  So, if a @Rezolver.Targets.ConstructorTarget is bound 
 `MyService`, then its @Rezolver.ITarget.DeclaredType property will return 
 `typeof(MyService)`.
 
+## TL;DR
+
+In short, the type against which you can register a target depends on the 
+@Rezolver.ITarget.DeclaredType of the target you're registering, but ultimately on its
+implementation of @Rezolver.ITarget.SupportsType*, too.
 
 Here's just a few example types and the types against which we could register them:
 
-Type | Can be registered as
---- | ---
-`int` | `object`
-`int` | `IFormattable`
-`string` | `IEnumerable<char>`
-`MyService : IService` | `IService`
-`MyService<T>` | `MyService<T>`
-`MyService<T>` | `MyService<string>`
-`MyService<T> : IService<OtherService, T>` | `IService<OtherService, int>`
+ITarget.DeclaredType | Can be registered as | With Targets
+--- | --- | ---
+`int` | `object` | Any
+`int` | `int?` | Any
+`int` | `IFormattable` | Any
+`string` | `IEnumerable<char>` | Any
+`MyService : IService` | `IService` | Any
+`MyService<T>` | `MyService<T>` | @Rezolver.Targets.GenericConstructorTarget
+`MyService<T>` | `MyService<string>` | @Rezolver.Targets.GenericConstructorTarget
+`MyService<T> : IService<OtherService, T>` | `IService<OtherService, int>` | @Rezolver.Targets.GenericConstructorTarget
 
-The built-in target container implementations (specifically <xref:Rezolver.TargetContainer>)
-auto-detect 
-Rezolver's 
+## Registration vs Resolving
+
+
