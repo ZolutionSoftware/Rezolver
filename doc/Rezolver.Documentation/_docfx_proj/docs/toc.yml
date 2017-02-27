@@ -6,11 +6,11 @@
   href: create-and-use-a-container.md
 - name: Registering Services
   href: registering-services/toc.yml
-  homepage: registering-services/index.md
-- name: Object lifetimes
-  href: object-lifetimes.md
-- name: Lifetimes in Rezolver
-  href: lifetimes-in-rezolver.md
+#  homepage: registering-services/index.md
+#- name: Object lifetimes
+#  href: object-lifetimes.md
+#- name: Lifetimes in Rezolver
+#  href: lifetimes-in-rezolver.md
 - name: Nuget Packages
   href: nuget-packages/toc.yml
   homepage: nuget-packages/index.md

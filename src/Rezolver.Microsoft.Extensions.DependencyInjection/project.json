@@ -9,6 +9,7 @@
     "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"
   },
   "copyright": "2014 onwards Zolution Software Ltd",
+  "licenseUrl": "https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt",
   "authors": [ "Zolution Software Ltd" ],
   "dependencies": {
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-*",

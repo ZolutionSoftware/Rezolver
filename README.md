@@ -6,7 +6,7 @@ designed and built by Zolution Software Ltd.
 
 The latest version - 1.1 - decouples the compilation stack from the rest of the framework,
 making it, and the rest of the API, completely extensible - providing hooks to implement
-interception and other more 'exotic' functionality. 
+interception and other more 'exotic' functionality.
 
 More information, including API reference and developer how-tos, is available on the
 [Rezolver website](http://rezolver.co.uk) (*note* - still in development).
@@ -43,7 +43,7 @@ More information, including API reference and developer how-tos, is available on
   - *this was already in development, but due to recent changes needs reworking*
 - Auto-built factories e.g. register `IService` and request a `Func<IService>`
 - Reflection-base compiler (faster first-call vs expression compiler)
-  - Mixed compiler - uses reflection till expression tree is built asynchronously
+  - Mixed compiler - uses reflection until expression tree is built asynchronously
 - Statically compiled container - turns container into a module that you can reference
 and use with signficantly less startup/compilation cost.
 - Container 'storage' API for singletons and scopes
@@ -51,7 +51,7 @@ and use with signficantly less startup/compilation cost.
 - Self registration of non-abstract classes - e.g. request `MyService` without registering it
 first.
   - Just-in-time API extracted from this to provide a base on which to build interception and automocking
-- Auto-built WCF client 'experiment'
+- Auto-built WCF client 'experiment' (just gotta try :) )
 - Conditional targets with caching support in `CachingContainerBase`
 - Truly mutable containers - add new targets for an enumerable, or replace a service registration
 after using them, and have the cache purge automatically.

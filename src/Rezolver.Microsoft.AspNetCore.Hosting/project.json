@@ -10,11 +10,12 @@
   },
   "authors": [ "Zolution Software Ltd" ],
   "copyright": "2014 onwards Zolution Software Ltd",
+  "licenseUrl": "https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt",
   "dependencies": {
     "NETStandard.Library": "1.6.1",
     "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0-*",
     "Rezolver.Microsoft.Extensions.DependencyInjection": "1.1.0-*",
-    "Rezolver.Microsoft.Extensions.Logging": "1.1.0-*"
+    "Microsoft.Extensions.Options": "1.1.0"
   },
 
   "frameworks": {

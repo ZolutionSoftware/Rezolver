@@ -1,7 +1,5 @@
 ﻿- name: Overview
   href: index.md
-- name: Associating Targets with Types
-  href: type-compatibility.md
 - name: Constructor Injection
   href: constructors.md
 - name: Objects

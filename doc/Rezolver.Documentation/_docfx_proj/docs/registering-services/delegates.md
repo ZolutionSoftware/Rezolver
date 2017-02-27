@@ -1,2 +1,4 @@
-﻿# Markdown File
+﻿# Factory delegates
+
+Documentation coming soon!
 

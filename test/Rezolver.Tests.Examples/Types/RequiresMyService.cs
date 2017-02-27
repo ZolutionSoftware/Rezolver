@@ -16,8 +16,11 @@ namespace Rezolver.Tests.Examples.Types
 
 		public RequiresMyService(IMyService service)
 		{
-			if (service != typeof(MyService))
-				throw new ArgumentException(nameof(service));
+			if (service.GetType() != typeof(MyService))
+			{
+				throw new ArgumentException($"{ service.GetType() } not supported",
+					nameof(service));
+			}
 			Service = (MyService)service;
 		}
 

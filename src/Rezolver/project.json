@@ -1,5 +1,5 @@
 {
-  
+
   "version": "1.1.71702.100",
   "title": "Rezolver IOC Framework",
   "description": "Rezolver is a fast IOC framework offering all the most common features of any IOC container.  It's easy to use and 100% extensible.",
@@ -11,6 +11,7 @@
   },
   "authors": [ "Zolution Software Ltd" ],
   "copyright": "2014 onwards Zolution Software Ltd",
+  "licenseUrl": "https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt",
   "dependencies": {
     "Rezolver.Shared": {
       "version": "1.1.0-*",
