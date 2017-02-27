@@ -3926,7 +3926,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "Rezolver/1.0.0-alpha-2": {
+      "Rezolver/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -3940,12 +3940,12 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Logging/1.0.0-alpha-200": {
+      "Rezolver.Logging/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Logging.dll": {}
@@ -3961,7 +3961,7 @@
           "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.0",
           "NETStandard.Library": "1.6.1",
           "Rezolver.Microsoft.Extensions.DependencyInjection": "1.0.0",
-          "Rezolver.Microsoft.Extensions.Logging": "1.0.0-alpha"
+          "Rezolver.Microsoft.Extensions.Logging": "1.0.0"
         },
         "compile": {
           "netstandard1.3/Rezolver.Microsoft.AspNetCore.Hosting.dll": {}
@@ -3970,12 +3970,12 @@
           "netstandard1.3/Rezolver.Microsoft.AspNetCore.Hosting.dll": {}
         }
       },
-      "Rezolver.Microsoft.Extensions.DependencyInjection/1.0.0-alpha-2": {
+      "Rezolver.Microsoft.Extensions.DependencyInjection/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
-          "Rezolver": "1.0.0-alpha"
+          "Rezolver": "1.0.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Microsoft.Extensions.DependencyInjection.dll": {}
@@ -3984,14 +3984,14 @@
           "netstandard1.1/Rezolver.Microsoft.Extensions.DependencyInjection.dll": {}
         }
       },
-      "Rezolver.Microsoft.Extensions.Logging/1.0.0-alpha-100": {
+      "Rezolver.Microsoft.Extensions.Logging/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
           "Microsoft.Extensions.Options": "1.1.0",
           "NETStandard.Library": "1.6.1",
-          "Rezolver.Logging": "1.0.0-alpha"
+          "Rezolver.Logging": "1.0.0"
         },
         "compile": {
           "netstandard1.1/Rezolver.Microsoft.Extensions.Logging.dll": {}
@@ -10337,12 +10337,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Rezolver/1.0.0-alpha-2": {
+    "Rezolver/1.0.0": {
       "type": "project",
       "path": "../../src/Rezolver/project.json",
       "msbuildProject": "../../src/Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Logging/1.0.0-alpha-200": {
+    "Rezolver.Logging/1.0.0": {
       "type": "project",
       "path": "../../src/Rezolver.Logging/project.json",
       "msbuildProject": "../../src/Rezolver.Logging/Rezolver.Logging.xproj"
@@ -10352,12 +10352,12 @@
       "path": "../../src/Rezolver.Microsoft.AspNetCore.Hosting/project.json",
       "msbuildProject": "../../src/Rezolver.Microsoft.AspNetCore.Hosting/Rezolver.Microsoft.AspNetCore.Hosting.xproj"
     },
-    "Rezolver.Microsoft.Extensions.DependencyInjection/1.0.0-alpha-2": {
+    "Rezolver.Microsoft.Extensions.DependencyInjection/1.0.0": {
       "type": "project",
       "path": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection/project.json",
       "msbuildProject": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection/Rezolver.Microsoft.Extensions.DependencyInjection.xproj"
     },
-    "Rezolver.Microsoft.Extensions.Logging/1.0.0-alpha-100": {
+    "Rezolver.Microsoft.Extensions.Logging/1.0.0": {
       "type": "project",
       "path": "../../src/Rezolver.Microsoft.Extensions.Logging/project.json",
       "msbuildProject": "../../src/Rezolver.Microsoft.Extensions.Logging/Rezolver.Microsoft.Extensions.Logging.xproj"

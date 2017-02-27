@@ -57,13 +57,25 @@ blockquote {
 footer .packageDetails{
 	margin-bottom: 5px;
 	padding: 10px;
-	background: @alert-success-bg;
+	background: fade(@alert-success-bg, 50%);
 	color:@alert-success-text;
 }
 
 footer .packageDetails.notyetreleased{
-	background: @alert-danger-bg;
+	background: fade(@alert-danger-bg, 50%);
 	color: @alert-danger-text;
+}
+
+.footer {
+	background: @navbar-inverse-bg;
+	color: @navbar-inverse-color;
+
+	a{
+		color: @main-color;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
 }
 
 @media only screen and (max-width: @screen-sm){

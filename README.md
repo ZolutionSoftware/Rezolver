@@ -9,7 +9,15 @@ making it, and the rest of the API, completely extensible - providing hooks to i
 interception and other more 'exotic' functionality.
 
 More information, including API reference and developer how-tos, is available on the
-[Rezolver website](http://rezolver.co.uk) (*note* - still in development).
+[Rezolver website](http://rezolver.co.uk).
+
+> **Note -** writing docs takes a while(!) so if there's something you're looking for and can't find it
+> on the website, then see if you can find examples in one of the [test projects](tests/) - as nearly all
+> the functionality is covered in there :)
+> 
+> Work on the documentation is going on all the time, and content will be pushed as and when it's good 
+> enough (hopefully every day or two).
+
 ## Features
 
 - Constructor injection
@@ -39,6 +47,8 @@ More information, including API reference and developer how-tos, is available on
 
 ## Planned/In Development
 
+### For the framework (in no particular order)
+
 - Low-level logging
   - *this was already in development, but due to recent changes needs reworking*
 - Auto-built factories e.g. register `IService` and request a `Func<IService>`
@@ -55,6 +65,15 @@ first.
 - Conditional targets with caching support in `CachingContainerBase`
 - Truly mutable containers - add new targets for an enumerable, or replace a service registration
 after using them, and have the cache purge automatically.
+
+### For [rezolver.co.uk](http://rezolver.co.uk)
+
+- <strike>Styling of the footer (where'd that green come from!?)</strike>
+- Full documentation of all targets
+- Results of benchmarking via https://github.com/danielpalme/IocPerformance (*hint* - only child containers letting it down at the moment, otherwise v.quick)
+- Scoping documentation
+- Compilation walkthrough
+- Experimental examples
 
 # Contributing
 

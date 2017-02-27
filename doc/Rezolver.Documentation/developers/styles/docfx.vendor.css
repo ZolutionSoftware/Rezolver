@@ -1038,7 +1038,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .navbar-inverse{background-color:#0b2466;border-color:#061438}
 .navbar-inverse .navbar-brand{color:#eee}
 .navbar-inverse .navbar-brand:focus,.navbar-inverse .navbar-brand:hover{color:#fff;background-color:transparent}
-.navbar-inverse .navbar-text{color:#ffc7a5}
+.navbar-inverse .navbar-text{color:#fff}
 .navbar-inverse .navbar-nav>li>a{color:#eee}
 .navbar-inverse .navbar-nav>li>a:focus,.navbar-inverse .navbar-nav>li>a:hover{color:#fff;background-color:transparent}
 .navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:focus,.navbar-inverse .navbar-nav>.active>a:hover{color:#fff;background-color:#061438}

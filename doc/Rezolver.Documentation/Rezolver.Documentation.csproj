@@ -127,6 +127,7 @@
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.js.map" />
     <Content Include="_docfx_themes\rezolver\styles\main.css.map" />
     <Content Include="_docfx_themes\rezolver\partials\footer.tmpl.partial" />
+    <Content Include="_docfx_themes\rezolver\partials\ga.tmpl.partial" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishExclude.props" />
