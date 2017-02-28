@@ -49,9 +49,11 @@ More information, including API reference and developer how-tos, is available on
 
 ### For the framework (in no particular order)
 
+- Migrate to MSBuild-based projects for VS 2017
+- Traditional Asp.Net and Web API integration
 - Low-level logging
   - *this was already in development, but due to recent changes needs reworking*
-- Auto-built factories e.g. register `IService` and request a `Func<IService>`
+- Auto-injected factories e.g. register `IService` and request a `Func<IService>`
 - Reflection-base compiler (faster first-call vs expression compiler)
   - Mixed compiler - uses reflection until expression tree is built asynchronously
 - Statically compiled container - turns container into a module that you can reference
