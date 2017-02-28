@@ -25,6 +25,8 @@ The `ConstructorTarget` actually has two modes:
 - Find the best matching constructor
 - Explicitly-supplied constructor (where you supply a `ConstructorInfo` on creation)
 
+* * *
+
 ## Example - Injected class
 
 So, given these types:
@@ -44,7 +46,7 @@ In order to build `RequiresMyService` we need an instance of `MyService` or `IMy
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example1)]
 
-*Notice that the container happily binds to one of these two constructors*
+* * *
 
 ## Example - Injected interface
 
@@ -58,15 +60,23 @@ we simply register `MyService` against the type `IMyService`:
 @Rezolver.Targets.ConstructorTarget is selecting the best-matched constructor based on the service registrations present 
 in the container when it's asked to @Rezolver.IContainer.Resolve* the object.
 
-## Example - Best-match (proof)
+* * *
 
-To prove that it's the `IMyService` constructor we bound in the previous example, and not the other one - let's try registering 
+## Best-match examples
+
+Let's take a bit of deep dive into how Rezolver determines a 'best-match' for the constructor to be called by the container.
+
+### Example - Best-match (proof)
+
+First, to prove that it's the `IMyService` constructor we bound in the previous example, and not the other one - let's try registering 
 a different implementation of `IMyService` - one which the class will not support because it'll fail that silly argument type-check 
 in the second constructor of `RequiresMyService`:
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example3)]
 
-## Example - Best-match (fewest params)
+* * *
+
+### Example - Best-match (fewest params)
 
 The best-match algorithm is similar to how a compiler matches a method overload when writing code by hand.  The rules aren't 
 necessarily exactly the same as, say, the C# spec, but they're close.
@@ -84,7 +94,9 @@ If we register `Service1`, but not ***all*** of the other service types, the sin
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example4)]
 
-## Example - Best-match (with defaults)
+* * *
+
+### Example - Best-match (with defaults)
 
 When a constructor's parameters have default values, the rules change slightly.
 
@@ -109,7 +121,9 @@ the base:
 > In the example, we have to use this if we're determined to the use the @Rezolver.MultipleTargetContainerExtensions.RegisterAll* method(s),
 > because they don't allow us to override the registration type for the targets that we're registering.
 
-## Example - Best partial match 
+* * *
+
+### Example - Best *partial* match 
 
 If, however, none of the constructors can be completely satisfied, then we look for the greediest constructor with the most
 number of successfully resolved arguments.  If there's a clear winner, then we proceed with that constructor anyway even though one or
@@ -127,6 +141,8 @@ To force the selection of the second constructor for the test, we'll only regist
 resolve the instance, we should get an `InvalidOperationException` explaining that `MyService3` couldn't be resolved: 
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example6)]
+
+* * *
 
 ## Why we allow partial matches
 
@@ -169,6 +185,8 @@ was called (i.e. `overridingContainer`), so it forwards the call for `MyService3
   - It finds its registration, and executes it to get the instance, passing it back to `container` - thus completing the constructor call 
 for `Requires2MyServices`
 
+* * *
+
 ### Example - @Rezolver.ChildTargetContainer
 
 This solution is similar to the previous one, except this time we're not overriding the container, but overriding the *target container* used 
@@ -205,11 +223,62 @@ Also, if you delve into the compiler pipeline, you will be using this functional
 But providing full examples of how you'd leverage this functionality is outside the scope of this topic, but we'll add them to the guide
 as soon as we've got the rest of the guide complete.
 
+* * *
 
-## Named argument binding
+## Best-match (named args)
 
 When using best-match, you can also supply a dictionary of named argument bindings (as a dictionary of <xref:Rezolver.ITarget>s)
-which can be used to provide a hint as to your preferred constructor.  You don't need to provide all named arguments, the binder will use
-as many as it can and auto-bind the rest.
+which can be used to provide a hint as to your preferred constructor and, more crucially, override the default behaviour of resolving *every* argument
+from container.
+
+You don't need to provide all named arguments, the binder will use as many as it can and auto-bind the rest.
+
+### Example - Supplying a `DateTime`
+
+To demonstrate this, we'll have a new type which requires an `IMyService` and also accepts a `DateTime`.
+
+`DateTime`s and other primitive
+types (`string`s etc) are typically not great for use in IOC containers, because you can only have one of them registered (or one collection)
+unless you start using overriding containers or child target containers, which means you typically can only allow one type to have them as
+dependencies.
+
+[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/Types/RequiresIMyServiceAndDateTime.cs#example)]
+
+Note that the single parameter constructor defaults the `StartDate` to `DateTime.UtcNow`, but in our test, we'll explicitly provide a 
+`DateTime` which is `DateTime.UtcNow.AddDays(1)` to create a date in the future:
+
+[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example7)]
+
+What happens is that the named arguments contribute to the argument binding process - thus allowing us to 'cheat' and promote a constructor to being
+a better match than the one that would normally be.
+
+> [!WARNING]
+> Obviously - named argument binding is potentially very brittle - as if the parameter name changes, then the binding will no longer work.
+>
+> In the future, we will also add the ability to supply an @Rezolver.ITargetContainer to a @Rezolver.Targets.ConstructorTarget whose registrations
+> will be used in preference to the main container - thus allowing us simply to register a `DateTime` in this example, removing the dependency on
+> the parameter name.
+
+When you supply @Rezolver.ITarget instances up-front to another target in this way, you can use any of the targets in the @Rezolver.Targets
+namespace to supply a value, and they will work as if they were registered in the container.
+
+* * *
+
+## With a `ConstructorInfo`
+
+Instead of relying on the best match algorithm, you can also specify the constructor you want bound up-front, *and* you can supply parameter
+bindings too.  To illustrate, we'll have a type with a default constructor and one which accepts a service:
+
+[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/Types/AcceptsOptionalIMyService.cs#example)]
+
+### Example - No parameter bindings
+
+The first test ignores the registered services and forcibly targets the default constructor:
+
+[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example100)]
+
+You can also do this with the .FromNewExpression static method on `ConstructorTarget`:
+
+(todo)
 
 *Documentation incomplete - we're working on it!*

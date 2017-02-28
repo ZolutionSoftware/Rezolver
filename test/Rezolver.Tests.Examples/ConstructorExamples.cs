@@ -1,6 +1,7 @@
 ﻿using Rezolver.Targets;
 using Rezolver.Tests.Examples.Types;
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -176,6 +177,53 @@ namespace Rezolver.Tests.Examples
 			Assert.NotNull(result.First);
 			Assert.NotNull(result.Second);
 			//</example6_2>
+		}
+
+		[Fact]
+		public void ShouldSelect2ParamConstructorBecauseOfNamedArgBinding()
+		{
+			//<example7>
+			var container = new Container();
+			container.RegisterType<MyService, IMyService>();
+			//Currently a couple of different ways to do this - use the 
+			//ConstructorTarget's constructor directly with a dictionary, 
+			//or use this static method which creates a dictionary from an object
+			//TODO: Will add object overload to the constructor in the future
+			container.Register(ConstructorTarget.WithArgs<RequiresIMyServiceAndDateTime>(
+				new
+				{
+					//each member of this object must be an ITarget
+					startDate = DateTime.UtcNow.AddDays(1).AsObjectTarget()
+				}
+			));
+
+			var result = container.Resolve<RequiresIMyServiceAndDateTime>();
+
+			//if the datetime was used, then StartDate will be in the future
+			Assert.True(result.StartDate > DateTime.UtcNow);
+			//</example7>
+		}
+
+		[Fact]
+		public void ShouldForceUseOfDefaultConstructorDespiteRegisteredService()
+		{
+			//docfx website notes: explicit examples start at #100 to allow for more to be
+			//added later :)
+
+			//<example100>
+			var container = new Container();
+			container.RegisterType<MyService, IMyService>();
+
+			//under best-match, the container would select the greedy constructor,
+			//but we're going to force it to use the default constructor
+			container.Register(new ConstructorTarget(
+				typeof(AcceptsOptionalIMyService).GetConstructor(Type.EmptyTypes)
+			));
+
+			var result = container.Resolve<AcceptsOptionalIMyService>();
+
+			Assert.Null(result.Service);
+			//</example100>
 		}
 	}
 }

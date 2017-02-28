@@ -123,6 +123,7 @@ supports binding to types which have multiple constructors.</p>
 <li>Find the best matching constructor</li>
 <li>Explicitly-supplied constructor (where you supply a <code>ConstructorInfo</code> on creation)</li>
 </ul>
+<hr>
 <h2 id="example---injected-class">Example - Injected class</h2>
 <p>So, given these types:</p>
 <pre><code class="lang-csharp" name="MyService.cs">public class MyService : IMyService
@@ -161,7 +162,7 @@ container.RegisterType&lt;RequiresMyService&gt;();
 var result = container.Resolve&lt;RequiresMyService&gt;();
 
 Assert.NotNull(result.Service);
-</code></pre><p><em>Notice that the container happily binds to one of these two constructors</em></p>
+</code></pre><hr>
 <h2 id="example---injected-interface">Example - Injected interface</h2>
 <p>Now, obviously a key facet of dependency injection is that we can depend upon an <em>abstraction</em> of a service instead of a concrete
 implementation - so most of the time your constructors will request an interface instead of a concrete type.  To do this,
@@ -176,8 +177,11 @@ Assert.NotNull(result.Service);
 </code></pre><p>&#39;So what?&#39; you say, &#39;it&#39;s doing exactly what I want it to!&#39;  Yes, but there&#39;s more going on here than you&#39;d think: the 
 <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> is selecting the best-matched constructor based on the service registrations present 
 in the container when it&#39;s asked to <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> the object.</p>
-<h2 id="example---best-match-proof">Example - Best-match (proof)</h2>
-<p>To prove that it&#39;s the <code>IMyService</code> constructor we bound in the previous example, and not the other one - let&#39;s try registering 
+<hr>
+<h2 id="best-match-examples">Best-match examples</h2>
+<p>Let&#39;s take a bit of deep dive into how Rezolver determines a &#39;best-match&#39; for the constructor to be called by the container.</p>
+<h3 id="example---best-match-proof">Example - Best-match (proof)</h3>
+<p>First, to prove that it&#39;s the <code>IMyService</code> constructor we bound in the previous example, and not the other one - let&#39;s try registering 
 a different implementation of <code>IMyService</code> - one which the class will not support because it&#39;ll fail that silly argument type-check 
 in the second constructor of <code>RequiresMyService</code>:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
@@ -187,7 +191,8 @@ container.RegisterType&lt;RequiresMyService&gt;();
 // based on the available services.
 Assert.Throws&lt;ArgumentException&gt;(&quot;service&quot;,
 	() =&gt; container.Resolve&lt;RequiresMyService&gt;());
-</code></pre><h2 id="example---best-match-fewest-params">Example - Best-match (fewest params)</h2>
+</code></pre><hr>
+<h3 id="example---best-match-fewest-params">Example - Best-match (fewest params)</h3>
 <p>The best-match algorithm is similar to how a compiler matches a method overload when writing code by hand.  The rules aren&#39;t 
 necessarily exactly the same as, say, the C# spec, but they&#39;re close.</p>
 <p>At the time the first <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call is made, the algorithm will first attempt to select the greediest constructor 
@@ -266,7 +271,8 @@ Assert.Same(RequiresMyServices.Default3, result.Service3);
 Assert.Same(RequiresMyServices.Default4, result.Service4);
 Assert.Same(RequiresMyServices.Default5, result.Service5);
 Assert.Same(RequiresMyServices.Default6, result.Service6);
-</code></pre><h2 id="example---best-match-with-defaults">Example - Best-match (with defaults)</h2>
+</code></pre><hr>
+<h3 id="example---best-match-with-defaults">Example - Best-match (with defaults)</h3>
 <p>When a constructor&#39;s parameters have default values, the rules change slightly.</p>
 <p>The algorithm treats parameters which have defaults as <em>always</em> satisfied, even if a service is not registered of the correct type.  So 
 if we extend <code>RequiresMyServices</code> with a new class whose 6-parameter constructor specifies default values for parameters 2-6:</p>
@@ -334,7 +340,8 @@ you want it to be.</p>
 <p>In the example, we have to use this if we&#39;re determined to the use the <a class="xref" href="../../api/Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_">RegisterAll</a> method(s),
 because they don&#39;t allow us to override the registration type for the targets that we&#39;re registering.</p>
 </div>
-<h2 id="example---best-partial-match">Example - Best partial match</h2>
+<hr>
+<h3 id="example---best-partial-match">Example - Best <em>partial</em> match</h3>
 <p>If, however, none of the constructors can be completely satisfied, then we look for the greediest constructor with the most
 number of successfully resolved arguments.  If there&#39;s a clear winner, then we proceed with that constructor anyway even though one or
 more required services are missing.</p>
@@ -373,7 +380,8 @@ var exception = Assert.Throws&lt;InvalidOperationException&gt;(
 //the InvalidOperationException contains the name of the type that
 //couldn&#39;t be resolved
 Assert.Contains(&quot;MyService3&quot;, exception.Message);
-</code></pre><h2 id="why-we-allow-partial-matches">Why we allow partial matches</h2>
+</code></pre><hr>
+<h2 id="why-we-allow-partial-matches">Why we allow partial matches</h2>
 <p>As mentioned in the intro to the last example - it&#39;s probably not obvious why we would want to allow binding to a constructor in a container
 which can&#39;t actually fulfil that constructor&#39;s requirements!</p>
 <p>Well, it&#39;s clearly not <em>normal</em>, but it&#39;s a valid use-case when you consider that Rezolver supports a concept that is typically referred
@@ -422,6 +430,7 @@ for <code>Requires2MyServices</code></li>
 </ul>
 </li>
 </ul>
+<hr>
 <h3 id="example---rezolverchildtargetcontainer">Example - <a class="xref" href="../../api/Rezolver.ChildTargetContainer.html">ChildTargetContainer</a></h3>
 <p>This solution is similar to the previous one, except this time we&#39;re not overriding the container, but overriding the <em>target container</em> used 
 by a container.</p>
@@ -460,10 +469,100 @@ functionality, for example.</p>
 <p>Also, if you delve into the compiler pipeline, you will be using this functionality all the time.</p>
 <p>But providing full examples of how you&#39;d leverage this functionality is outside the scope of this topic, but we&#39;ll add them to the guide
 as soon as we&#39;ve got the rest of the guide complete.</p>
-<h2 id="named-argument-binding">Named argument binding</h2>
+<hr>
+<h2 id="best-match-named-args">Best-match (named args)</h2>
 <p>When using best-match, you can also supply a dictionary of named argument bindings (as a dictionary of <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a>s)
-which can be used to provide a hint as to your preferred constructor.  You don&#39;t need to provide all named arguments, the binder will use
-as many as it can and auto-bind the rest.</p>
+which can be used to provide a hint as to your preferred constructor and, more crucially, override the default behaviour of resolving <em>every</em> argument
+from container.</p>
+<p>You don&#39;t need to provide all named arguments, the binder will use as many as it can and auto-bind the rest.</p>
+<h3 id="example---supplying-a-datetime">Example - Supplying a <code>DateTime</code></h3>
+<p>To demonstrate this, we&#39;ll have a new type which requires an <code>IMyService</code> and also accepts a <code>DateTime</code>.</p>
+<p><code>DateTime</code>s and other primitive
+types (<code>string</code>s etc) are typically not great for use in IOC containers, because you can only have one of them registered (or one collection)
+unless you start using overriding containers or child target containers, which means you typically can only allow one type to have them as
+dependencies.</p>
+<pre><code class="lang-csharp" name="Example.cs">public class RequiresIMyServiceAndDateTime
+{
+	public DateTime StartDate { get; }
+	public IMyService Service { get; }
+
+	public RequiresIMyServiceAndDateTime(IMyService service)
+		: this(service, DateTime.UtcNow)
+	{
+
+	}
+
+	public RequiresIMyServiceAndDateTime(IMyService service, DateTime startDate)
+	{
+		Service = service;
+		StartDate = startDate;
+	}
+}
+</code></pre><p>Note that the single parameter constructor defaults the <code>StartDate</code> to <code>DateTime.UtcNow</code>, but in our test, we&#39;ll explicitly provide a 
+<code>DateTime</code> which is <code>DateTime.UtcNow.AddDays(1)</code> to create a date in the future:</p>
+<pre><code class="lang-csharp" name="Example.cs">var container = new Container();
+container.RegisterType&lt;MyService, IMyService&gt;();
+//Currently a couple of different ways to do this - use the 
+//ConstructorTarget&#39;s constructor directly with a dictionary, 
+//or use this static method which creates a dictionary from an object
+//TODO: Will add object overload to the constructor in the future
+container.Register(ConstructorTarget.WithArgs&lt;RequiresIMyServiceAndDateTime&gt;(
+	new
+	{
+		//each member of this object must be an ITarget
+		startDate = DateTime.UtcNow.AddDays(1).AsObjectTarget()
+	}
+));
+
+var result = container.Resolve&lt;RequiresIMyServiceAndDateTime&gt;();
+
+//if the datetime was used, then StartDate will be in the future
+Assert.True(result.StartDate &gt; DateTime.UtcNow);
+</code></pre><p>What happens is that the named arguments contribute to the argument binding process - thus allowing us to &#39;cheat&#39; and promote a constructor to being
+a better match than the one that would normally be.</p>
+<div class="WARNING"><h5>Warning</h5><p>Obviously - named argument binding is potentially very brittle - as if the parameter name changes, then the binding will no longer work.</p>
+<p>In the future, we will also add the ability to supply an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> to a <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> whose registrations
+will be used in preference to the main container - thus allowing us simply to register a <code>DateTime</code> in this example, removing the dependency on
+the parameter name.</p>
+</div>
+<p>When you supply <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> instances up-front to another target in this way, you can use any of the targets in the <a class="xref" href="../../api/Rezolver.Targets.html">Rezolver.Targets</a>
+namespace to supply a value, and they will work as if they were registered in the container.</p>
+<hr>
+<h2 id="with-a-constructorinfo">With a <code>ConstructorInfo</code></h2>
+<p>Instead of relying on the best match algorithm, you can also specify the constructor you want bound up-front, <em>and</em> you can supply parameter
+bindings too.  To illustrate, we&#39;ll have a type with a default constructor and one which accepts a service:</p>
+<pre><code class="lang-csharp" name="Example.cs">public class AcceptsOptionalIMyService
+{
+	public IMyService Service { get; }
+	public AcceptsOptionalIMyService()
+	{
+
+	}
+
+	public AcceptsOptionalIMyService(IMyService service)
+	{
+		if (service == null)
+			throw new ArgumentNullException(nameof(service));
+
+		Service = service;
+	}
+}
+</code></pre><h3 id="example---no-parameter-bindings">Example - No parameter bindings</h3>
+<p>The first test ignores the registered services and forcibly targets the default constructor:</p>
+<pre><code class="lang-csharp" name="Example.cs">var container = new Container();
+container.RegisterType&lt;MyService, IMyService&gt;();
+
+//under best-match, the container would select the greedy constructor,
+//but we&#39;re going to force it to use the default constructor
+container.Register(new ConstructorTarget(
+	typeof(AcceptsOptionalIMyService).GetConstructor(Type.EmptyTypes)
+));
+
+var result = container.Resolve&lt;AcceptsOptionalIMyService&gt;();
+
+Assert.Null(result.Service);
+</code></pre><p>You can also do this with the .FromNewExpression static method on <code>ConstructorTarget</code>:</p>
+<p>(todo)</p>
 <p><em>Documentation incomplete - we&#39;re working on it!</em></p>
 
             </article>
