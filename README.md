@@ -4,11 +4,14 @@ Rezolver
 Rezolver is a high performance, portable (.NetStandard 1.1), open-source IOC container
 designed and built by Zolution Software Ltd.
 
+> You can get the [Rezolver Package from Nuget](https://www.nuget.org/packages/Rezolver/), and for more 
+> packages, head over to the [packages documentation](http://rezolver.co.uk/developers/docs/nuget-packages/index.html).
+
 The latest version - 1.1 - decouples the compilation stack from the rest of the framework,
 making it, and the rest of the API, completely extensible - providing hooks to implement
 interception and other more 'exotic' functionality.
 
-More information, including API reference and developer how-tos, is available on the
+More information, including API reference and developer how-tos, is available also on the
 [Rezolver website](http://rezolver.co.uk).
 
 > **Note -** writing docs takes a while(!) so if there's something you're looking for and can't find it
