@@ -12,7 +12,7 @@ More information, including API reference and developer how-tos, is available on
 [Rezolver website](http://rezolver.co.uk).
 
 > **Note -** writing docs takes a while(!) so if there's something you're looking for and can't find it
-> on the website, then see if you can find examples in one of the [test projects](tests/) - as nearly all
+> on the website, then see if you can find examples in one of the [test projects](test/readme.md) - as nearly all
 > the functionality is covered in there :)
 > 
 > Work on the documentation is going on all the time, and content will be pushed as and when it's good 
