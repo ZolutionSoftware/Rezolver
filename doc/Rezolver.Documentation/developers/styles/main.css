@@ -1,6 +1,7 @@
 /* navbar-default */
 /* inverted navbar */
 /*darken(@brand-primary, 15%);*/
+/* Included after docfx.vendor (incorporating bootstrap) and the base docfx.css styles */
 a #logo {
   padding: 1px;
 }
@@ -30,6 +31,18 @@ body .toc,
 .fixed-header {
   background: #e9effd;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* remove header breaking - looks v.silly for long titles and narrow screens */
+  word-wrap: normal;
+  /* break-word;*/
+  word-break: normal;
+  /* break-all;*/
+}
 blockquote {
   border-left-color: #722b00;
   background: rgba(255, 231, 216, 0.5);
@@ -46,6 +59,54 @@ blockquote h5 {
 .toc .level2 {
   font-size: 12px;
   margin-left: 5px;
+}
+pre {
+  position: relative;
+}
+@media only screen and (max-width: 768px) {
+  pre code::before {
+    content: attr(name);
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 5px;
+    border: 1px solid;
+    border-color: #ff680c;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+    background: #ff680c;
+    color: white;
+  }
+  pre code *:first-child {
+    display: inline-block;
+    margin-top: 2em;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  pre code::before {
+    content: attr(name);
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 5px;
+    border: 1px solid;
+    border-color: #ff680c;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: none;
+    background: #ff680c;
+    color: white;
+  }
+  pre code *:first-child {
+    display: inline-block;
+    margin-top: 2em;
+  }
+}
+.hljs {
+  background: none;
 }
 footer .packageDetails {
   margin-bottom: 5px;

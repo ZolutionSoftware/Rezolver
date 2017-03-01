@@ -1,5 +1,7 @@
 ﻿@import "../../../styles/bootstrap-variables-rezolver";
 
+/* Included after docfx.vendor (incorporating bootstrap) and the base docfx.css styles */
+
 a #logo {
 	padding: 1px;
 }
@@ -20,17 +22,23 @@ a #logo {
 	background: -webkit-linear-gradient(top, @subnav-grad-start 0%,@subnav-grad-highlight 23%,@subnav-grad-end 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom, @subnav-grad-start 0%,@subnav-grad-highlight 23%,@subnav-grad-end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b2466', endColorstr='#e9effd',GradientType=0 ); /* IE6-9 */
-	border-bottom-color:@subnav-border;
+	border-bottom-color: @subnav-border;
 }
 
-.sidefilter, .sidetoc{
+.sidefilter, .sidetoc {
 	background: @subnav-grad-end;
 	border-left-color: @subnav-border;
-	border-right-color:@subnav-border;
+	border-right-color: @subnav-border;
 }
 
 body .toc, .sidenav, .fixed-header {
 	background: @subnav-grad-end;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	/* remove header breaking - looks v.silly for long titles and narrow screens */
+	word-wrap: normal; /* break-word;*/
+	word-break: normal; /* break-all;*/
 }
 
 blockquote {
@@ -54,14 +62,57 @@ blockquote {
 	margin-left: 5px;
 }
 
-footer .packageDetails{
+pre{
+	position:relative;
+}
+
+.labelledCode(){
+	&::before {
+			content: attr(name);
+			display: block;
+			position:absolute;
+			right:0px;
+			top:0px;
+			padding: 5px;
+			border: 1px solid;
+			border-color: darken(@pre-border-color, 30%);
+			border-top: none;
+			background: darken(@pre-border-color, 30%);
+			color: white;
+		}
+
+		*:first-child {
+			display:inline-block;
+			margin-top:2em;
+		}
+}
+
+@media only screen and (max-width: @screen-sm) {
+	pre code {
+		.labelledCode;
+	}
+}
+
+@media only screen and (min-width: @screen-lg-min){
+	pre code{
+		.labelledCode;
+	}
+}
+
+
+.hljs {
+	//have to prevent inherit because if using a transparent colour, the transparency stacks.
+	background: none;
+}
+
+footer .packageDetails {
 	margin-bottom: 5px;
 	padding: 10px;
 	background: fade(@alert-success-bg, 50%);
-	color:@alert-success-text;
+	color: @alert-success-text;
 }
 
-footer .packageDetails.notyetreleased{
+footer .packageDetails.notyetreleased {
 	background: fade(@alert-danger-bg, 50%);
 	color: @alert-danger-text;
 }
@@ -70,24 +121,26 @@ footer .packageDetails.notyetreleased{
 	background: @navbar-inverse-bg;
 	color: @navbar-inverse-color;
 
-	a{
+	a {
 		color: @main-color;
-		&:hover{
+
+		&:hover {
 			text-decoration: underline;
 		}
 	}
 }
 
-@media only screen and (max-width: @screen-sm){
-	.toc .level2 > li{
-		&:after{
-			content:none;
+@media only screen and (max-width: @screen-sm) {
+	.toc .level2 > li {
+		&:after {
+			content: none;
 		}
-		display:inline-block;
+
+		display: inline-block;
 		min-width: 20em;
 	}
 
-	.toc .nav > .li > a{
-		display:inline-block;
+	.toc .nav > .li > a {
+		display: inline-block;
 	}
 }

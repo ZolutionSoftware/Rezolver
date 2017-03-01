@@ -419,7 +419,7 @@ about the overriding container.</p>
 <li>The bound constructor is executed<ul>
 <li>The <code>MyService2</code> parameter is fulfiled by the <code>container</code>&#39;s own registration</li>
 <li>But, for the <code>MyService3</code> parameter, <code>container</code> sees that it was not the container whose <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method
-was called (i.e. <code>overridingContainer</code>), so it forwards the call for <code>MyService3</code> to <code>overridingContainer</code>.</li>
+was <em>originally</em> called (i.e. <code>overridingContainer</code>), so it forwards the call for <code>MyService3</code> to <code>overridingContainer</code>.</li>
 </ul>
 </li>
 </ul>
@@ -464,10 +464,10 @@ Assert.NotNull(result.Second);
 of understanding about the internals of Rezolver.  Therefore it&#39;s more suited to developers who are extending the framework, rather
 than the average developer who&#39;s simply looking to use it to drive their application.</p>
 <p>The framework itself takes advantage of this functionality throughout in order to override behaviours, or to 
-extend a user-configured container with additional transient targets.  The <a class="xref" href="../../api/Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> wouldn&#39;t work with this
+extend a user-configured container with additional transient targets.  The <a class="xref" href="../../api/Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> wouldn&#39;t work without this
 functionality, for example.</p>
 <p>Also, if you delve into the compiler pipeline, you will be using this functionality all the time.</p>
-<p>But providing full examples of how you&#39;d leverage this functionality is outside the scope of this topic, but we&#39;ll add them to the guide
+<p>Providing full examples of how you&#39;d leverage this functionality is outside the scope of this topic, but we&#39;ll add them to the guide
 as soon as we&#39;ve got the rest of the guide complete.</p>
 <hr>
 <h2 id="best-match-named-args">Best-match (named args)</h2>
@@ -561,7 +561,9 @@ container.Register(new ConstructorTarget(
 var result = container.Resolve&lt;AcceptsOptionalIMyService&gt;();
 
 Assert.Null(result.Service);
-</code></pre><p>You can also do this with the .FromNewExpression static method on <code>ConstructorTarget</code>:</p>
+</code></pre><hr>
+<h3 id="example---pre-bound-parameters">Example - Pre-bound parameters</h3>
+<p>We can also explicitly bind the parameters of a particular constructor by providing an </p>
 <p>(todo)</p>
 <p><em>Documentation incomplete - we&#39;re working on it!</em></p>
 

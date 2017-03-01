@@ -180,7 +180,7 @@ If you're interested in the inner workings when using overriding containers, the
   - The bound constructor is executed
     - The `MyService2` parameter is fulfiled by the `container`'s own registration
     - But, for the `MyService3` parameter, `container` sees that it was not the container whose @Rezolver.IContainer.Resolve* method
-was called (i.e. `overridingContainer`), so it forwards the call for `MyService3` to `overridingContainer`.
+was *originally* called (i.e. `overridingContainer`), so it forwards the call for `MyService3` to `overridingContainer`.
 - `overridingContainer` receives the @Rezolver.IContainer.Resolve* call for `MyService3`
   - It finds its registration, and executes it to get the instance, passing it back to `container` - thus completing the constructor call 
 for `Requires2MyServices`
@@ -215,12 +215,12 @@ of understanding about the internals of Rezolver.  Therefore it's more suited to
 than the average developer who's simply looking to use it to drive their application.
 
 The framework itself takes advantage of this functionality throughout in order to override behaviours, or to 
-extend a user-configured container with additional transient targets.  The @Rezolver.Targets.DecoratorTarget wouldn't work with this
+extend a user-configured container with additional transient targets.  The @Rezolver.Targets.DecoratorTarget wouldn't work without this
 functionality, for example.
 
 Also, if you delve into the compiler pipeline, you will be using this functionality all the time.
 
-But providing full examples of how you'd leverage this functionality is outside the scope of this topic, but we'll add them to the guide
+Providing full examples of how you'd leverage this functionality is outside the scope of this topic, but we'll add them to the guide
 as soon as we've got the rest of the guide complete.
 
 * * *
@@ -277,7 +277,11 @@ The first test ignores the registered services and forcibly targets the default 
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example100)]
 
-You can also do this with the .FromNewExpression static method on `ConstructorTarget`:
+* * *
+
+### Example - Pre-bound parameters
+
+We can also explicitly bind the parameters of a particular constructor by providing an 
 
 (todo)
 
