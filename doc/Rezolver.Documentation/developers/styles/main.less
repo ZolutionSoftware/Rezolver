@@ -1,4 +1,4 @@
-@import "../../../styles/bootstrap-variables-rezolver";
+﻿@import "../../../styles/bootstrap-variables-rezolver";
 
 /* Included after docfx.vendor (incorporating bootstrap) and the base docfx.css styles */
 
@@ -23,6 +23,16 @@ a #logo {
 	background: linear-gradient(to bottom, @subnav-grad-start 0%,@subnav-grad-highlight 23%,@subnav-grad-end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b2466', endColorstr='#e9effd',GradientType=0 ); /* IE6-9 */
 	border-bottom-color: @subnav-border;
+}
+
+.github-link{
+	font-size:30px;
+	margin-top: 2px;
+	margin-bottom:0;
+	a{
+		color:white;
+		text-decoration:none;
+	}
 }
 
 .sidefilter, .sidetoc {
@@ -76,8 +86,6 @@ pre{
 			padding: 5px;
 			border: 1px solid;
 			border-color: darken(@pre-border-color, 30%);
-			border-bottom-left-radius: 3px;
-			border-bottom-right-radius: 3px;
 			border-top: none;
 			background: darken(@pre-border-color, 30%);
 			color: white;
@@ -90,13 +98,13 @@ pre{
 }
 
 @media only screen and (max-width: @screen-sm) {
-	pre code {
+	pre code[name] {
 		.labelledCode;
 	}
 }
 
 @media only screen and (min-width: @screen-lg-min){
-	pre code{
+	pre code[name] {
 		.labelledCode;
 	}
 }

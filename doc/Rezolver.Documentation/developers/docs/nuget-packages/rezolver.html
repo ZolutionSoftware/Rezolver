@@ -65,6 +65,7 @@
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/zolutionsoftware/rezolver" title="See this project on Github"><span class="fa fa-github"></span></a></p>
               <form class="navbar-form navbar-right" role="search" id="search">
                 <div class="form-group">
                   <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
@@ -104,11 +105,15 @@
               <h1 id="rezolver-nuget-package">Rezolver Nuget Package</h1>
               
 <p><a href="https://www.nuget.org/packages/Rezolver">See package page on nuget</a>.</p>
-<p>The core nuget package for using Rezolver in your class library or application, includes all the 
-core abstractions and classes required to create @TargetContainer objects and @Container objects in your composition root.</p>
-<p>Also contains the core <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> implementations and logic which allow you to create/retrieve objects using all
-the standard techniques (constructor injection, optional member binding, enumerables, delegates and expressions etc)
-from the get-go.</p>
+<p>The core nuget package for using Rezolver in your class library or application, includes:</p>
+<ul>
+<li>All the core abstractions and classes required to create <a class="xref" href="../../api/Rezolver.TargetContainer.html">TargetContainer</a> and <a class="xref" href="../../api/Rezolver.Container.html">Container</a> objects.</li>
+<li>The core <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> implementations which allow you to create/retrieve objects using all
+the standard techniques documented here (constructor injection, enumerables, delegates and expressions etc)
+from the get-go.</li>
+<li>The expression compiler which builds bespoke factories for each service you resolve in your container</li>
+</ul>
+<p>Simply add the package, add an <code>using</code>/<code>import</code> for the <code>Rezolver</code> namespace and you&#39;re all set.</p>
 
             </article>
           </div>

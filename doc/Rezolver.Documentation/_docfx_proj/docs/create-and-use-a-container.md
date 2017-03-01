@@ -76,8 +76,9 @@ types which we will later resolve.
 The core registration method for this is the @Rezolver.ITargetContainer.Register*
 method, which accepts an @Rezolver.ITarget and an optional type against which the registration is to be made.
 
-There's too much to cover in a few sub headings here for this - so please head over to 
-[the service registration documentation](registering-services/index.md) to find out more.
+There's too much to cover in a few sub headings here for this - 
+[the service registration topic](service-registration.md) has more detail, and links to the different types of
+registration you can perform.
 
 ## Resolving services
 
@@ -148,7 +149,8 @@ bool canResolve = container.CanResolve<MyService>();
 
 * * *
 
-Now we understand how to create a container and resolve services from it, if you haven't already then you 
-should now head over to the section detailing how we [register services in the container](registering-services/index.md).
+## Next Steps
+
+  - Now read up on how to [register services in the container](service-registration.md).
 
 <!--Alternatively, you might be interested in Rezolver's understanding of [object lifetimes](object-lifetimes.md).-->

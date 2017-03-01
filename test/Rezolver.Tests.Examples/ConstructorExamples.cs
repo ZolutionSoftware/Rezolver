@@ -225,5 +225,30 @@ namespace Rezolver.Tests.Examples
 			Assert.Null(result.Service);
 			//</example100>
 		}
+
+		[Fact]
+		public void ShouldForceUseOfSingleParamConstructorDespiteNoServices()
+		{
+			//<example101>
+			var container = new Container();
+			//get the constructor:
+			var ctor = typeof(AcceptsOptionalIMyService).GetConstructor(new[]
+			{
+				typeof(IMyService)
+			});
+			//create parameter bindings
+			var bindings = new[] {
+				new ParameterBinding(ctor.GetParameters()[0],
+					ConstructorTarget.Auto<MyService>()
+				)
+			};
+
+			container.Register(new ConstructorTarget(ctor, parameterBindings: bindings));
+
+			var result = container.Resolve<AcceptsOptionalIMyService>();
+
+			Assert.NotNull(result.Service);
+			//</example101>
+		}
 	}
 }

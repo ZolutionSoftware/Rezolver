@@ -108,16 +108,35 @@
     <Content Include="Content\rz_square_white_on_orange_96x96.png" />
     <Content Include="gulpfile.js" />
     <Content Include="developers\**\*.*" />
+    <Content Include="styles\fonts\fontawesome-webfont.svg" />
     <Content Include="styles\site.css" />
     <Content Include="_docfx_proj\md-styles.css" />
     <Content Include="_docfx_themes\rezolver\styles\main.css" />
     <Content Include="_docfx_themes\rezolver\styles\main.less" />
     <Content Include="styles\site.css.map" />
-    <Content Include="_docfx_proj\docs\getting-started.md" />
     <Content Include="_docfx_proj\docs\create-and-use-a-container.md" />
     <Content Include="_docfx_proj\docs\object-lifetimes.md" />
-    <Content Include="_docfx_proj\docs\registering-services\toc.yml" />
-    <Content Include="_docfx_proj\docs\registering-services\index.md" />
+    <Content Include="_docfx_proj\docs\service-registration.md" />
+    <Content Include="styles\fontawesome\animated.less" />
+    <Content Include="styles\fontawesome\bordered-pulled.less" />
+    <Content Include="styles\fontawesome\core.less" />
+    <Content Include="styles\fontawesome\fixed-width.less" />
+    <Content Include="styles\fontawesome\font-awesome.less" />
+    <Content Include="styles\fontawesome\icons.less" />
+    <Content Include="styles\fontawesome\larger.less" />
+    <Content Include="styles\fontawesome\list.less" />
+    <Content Include="styles\fontawesome\mixins.less" />
+    <Content Include="styles\fontawesome\path.less" />
+    <Content Include="styles\fontawesome\rotated-flipped.less" />
+    <Content Include="styles\fontawesome\screen-reader.less" />
+    <Content Include="styles\fontawesome\stacked.less" />
+    <Content Include="styles\fontawesome\variables.less" />
+    <Content Include="styles\fonts\fontawesome-webfont.eot" />
+    <Content Include="styles\fonts\fontawesome-webfont.ttf" />
+    <Content Include="styles\fonts\fontawesome-webfont.woff" />
+    <Content Include="styles\fonts\fontawesome-webfont.woff2" />
+    <Content Include="styles\fonts\FontAwesome.otf" />
+    <Content Include="styles\font-awesome.less" />
     <None Include="_docfx_proj\docs\miscellaneous\how-this-website-is-built.md" />
     <Content Include="_docfx_themes\rezolver\favicon.ico" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />
@@ -128,6 +147,7 @@
     <Content Include="_docfx_themes\rezolver\styles\main.css.map" />
     <Content Include="_docfx_themes\rezolver\partials\footer.tmpl.partial" />
     <Content Include="_docfx_themes\rezolver\partials\ga.tmpl.partial" />
+    <Content Include="_docfx_themes\rezolver\partials\navbar.tmpl.partial" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishExclude.props" />
@@ -271,9 +291,6 @@
     <Content Include="styles\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="styles\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="_docfx_proj\docs\advanced\rezolving-with-expressions.md" />
-    <Content Include="_docfx_proj\docs\advanced\toc.yml" />
-    <Content Include="_docfx_proj\docs\advanced\index.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\toc.yml" />
     <Content Include="styles\highlight-theme-rezolver.less" />
     <Content Include="_docfx_proj\toc.yml" />
@@ -286,11 +303,11 @@
     <None Include="_docfx_proj\docs\details3.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.aspnetcore.hosting.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.extensions.dependencyinjection.md" />
-    <Content Include="_docfx_proj\docs\registering-services\constructors.md" />
-    <Content Include="_docfx_proj\docs\registering-services\objects.md" />
-    <Content Include="_docfx_proj\docs\registering-services\expressions.md" />
-    <Content Include="_docfx_proj\docs\registering-services\delegates.md" />
-    <Content Include="_docfx_proj\docs\registering-services\decorators.md" />
+    <Content Include="_docfx_proj\docs\using-constructors\index.md" />
+    <Content Include="_docfx_proj\docs\objects.md" />
+    <Content Include="_docfx_proj\docs\expressions.md" />
+    <Content Include="_docfx_proj\docs\delegates.md" />
+    <Content Include="_docfx_proj\docs\decorators.md" />
     <None Include="_docfx_proj\docs\toc.yml" />
     <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
@@ -333,6 +350,9 @@
     <Content Include="_docfx_themes\rezolver\partials\browsericons.tmpl.partial" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="_docfx_proj\docs\using-constructors\toc.yml" />
+    <Content Include="_docfx_proj\docs\using-constructors\member-binding.md" />
+    <Content Include="_docfx_proj\docs\using-constructors\generics.md" />
     <None Include="_docfx_proj\images\exampleunittest.PNG" />
     <Content Include="mstile-144x144.png" />
     <Content Include="mstile-150x150.png" />

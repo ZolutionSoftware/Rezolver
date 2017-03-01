@@ -1,12 +1,22 @@
-- name: Home
+- name: Introduction
   href: index.md
-- name: Getting started
-  href: getting-started.md
-- name: Create & use a container
+- name: Create & Use a Container
   href: create-and-use-a-container.md
-- name: Registering Services
-  href: registering-services/toc.yml
-#  homepage: registering-services/index.md
+- name: Service Registration
+  href: service-registration.md
+# note: this one is going to become a folder incorporating 
+# open generics and member binding too
+- name: Using Constructor Injection
+  href: using-constructors/toc.yml
+  homepage: using-constructors/index.md
+- name: Using Objects as Services
+  href: objects.md
+- name: Using Factory Delegates
+  href: delegates.md
+- name: Using Expression Trees
+  href: expressions.md
+- name: Using Decorators
+  href: decorators.md
 #- name: Object lifetimes
 #  href: object-lifetimes.md
 #- name: Lifetimes in Rezolver
@@ -14,8 +24,5 @@
 - name: Nuget Packages
   href: nuget-packages/toc.yml
   homepage: nuget-packages/index.md
-- name: Advanced
-  href: advanced/toc.yml
-  homepage: advanced/index.md
 - name: Miscellaneous
   href: miscellaneous/toc.yml

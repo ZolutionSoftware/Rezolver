@@ -20,6 +20,15 @@ a #logo {
   /* IE6-9 */
   border-bottom-color: #bcccf7;
 }
+.github-link {
+  font-size: 30px;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+.github-link a {
+  color: white;
+  text-decoration: none;
+}
 .sidefilter,
 .sidetoc {
   background: #e9effd;
@@ -64,7 +73,7 @@ pre {
   position: relative;
 }
 @media only screen and (max-width: 768px) {
-  pre code::before {
+  pre code[name]::before {
     content: attr(name);
     display: block;
     position: absolute;
@@ -73,19 +82,17 @@ pre {
     padding: 5px;
     border: 1px solid;
     border-color: #ff680c;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
     border-top: none;
     background: #ff680c;
     color: white;
   }
-  pre code *:first-child {
+  pre code[name] *:first-child {
     display: inline-block;
     margin-top: 2em;
   }
 }
 @media only screen and (min-width: 1200px) {
-  pre code::before {
+  pre code[name]::before {
     content: attr(name);
     display: block;
     position: absolute;
@@ -94,13 +101,11 @@ pre {
     padding: 5px;
     border: 1px solid;
     border-color: #ff680c;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
     border-top: none;
     background: #ff680c;
     color: white;
   }
-  pre code *:first-child {
+  pre code[name] *:first-child {
     display: inline-block;
     margin-top: 2em;
   }

@@ -25,6 +25,16 @@ a #logo {
 	border-bottom-color: @subnav-border;
 }
 
+.github-link{
+	font-size:30px;
+	margin-top: 2px;
+	margin-bottom:0;
+	a{
+		color:white;
+		text-decoration:none;
+	}
+}
+
 .sidefilter, .sidetoc {
 	background: @subnav-grad-end;
 	border-left-color: @subnav-border;
@@ -88,13 +98,13 @@ pre{
 }
 
 @media only screen and (max-width: @screen-sm) {
-	pre code {
+	pre code[name] {
 		.labelledCode;
 	}
 }
 
 @media only screen and (min-width: @screen-lg-min){
-	pre code{
+	pre code[name] {
 		.labelledCode;
 	}
 }

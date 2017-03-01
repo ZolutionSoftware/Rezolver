@@ -65,6 +65,7 @@
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/zolutionsoftware/rezolver" title="See this project on Github"><span class="fa fa-github"></span></a></p>
               <form class="navbar-form navbar-right" role="search" id="search">
                 <div class="form-group">
                   <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
@@ -156,8 +157,9 @@ means adding targets to a container&#39;s <a class="xref" href="../api/Rezolver.
 types which we will later resolve.</p>
 <p>The core registration method for this is the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> and an optional type against which the registration is to be made.</p>
-<p>There&#39;s too much to cover in a few sub headings here for this - so please head over to 
-<a href="registering-services/index.html">the service registration documentation</a> to find out more.</p>
+<p>There&#39;s too much to cover in a few sub headings here for this - 
+<a href="service-registration.html">the service registration topic</a> has more detail, and links to the different types of
+registration you can perform.</p>
 <h2 id="resolving-services">Resolving services</h2>
 <p>Resolving objects from your container is done through the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method which, you&#39;ll
 notice, accepts a <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> as its single parameter, and returns an <code>Object</code>.  Again, if 
@@ -203,8 +205,10 @@ by using the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_ICon
 methods (e.g. <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve__1_Rezolver_IContainer_">CanResolve&lt;TObject&gt;(IContainer)</a>)):</p>
 <pre><code class="lang-cs">bool canResolve = container.CanResolve&lt;MyService&gt;();
 </code></pre><hr>
-<p>Now we understand how to create a container and resolve services from it, if you haven&#39;t already then you 
-should now head over to the section detailing how we <a href="registering-services/index.html">register services in the container</a>.</p>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>Now read up on how to <a href="service-registration.html">register services in the container</a>.</li>
+</ul>
 <!--Alternatively, you might be interested in Rezolver's understanding of [object lifetimes](object-lifetimes.md).-->
             </article>
           </div>

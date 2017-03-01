@@ -22,6 +22,14 @@ var bootstrap = {
     cwd: 'bower_components/bootstrap/dist/fonts/'
   }
 };
+
+var fontawesome = {
+  src: ['**/*'], cwd: 'bower_components/components-font-awesome/less/',
+  font: {
+    src: ['*'],
+    cwd: 'bower_components/components-font-awesome/fonts/'
+  }
+};
 //built
 var rezolverBootstrap = {
   src: 'site.less',
@@ -37,7 +45,8 @@ var rezolverDocFXMain = {
 //files which replace the default docfx.vendor.* files.
 var vendor = {
   css: ['styles/site.css' //built from site.less in less task after copy
-                          //includes custom bootstrap and custom highlightjs theme
+                          //includes: custom bootstrap, 
+                          //custom highlightjs theme and font-awesome
   ],
   js: ['bower_components/jquery/dist/jquery.min.js',
        'bower_components/bootstrap/dist/js/bootstrap.min.js',
@@ -61,7 +70,14 @@ gulp.task('copy', function () {
   return merge(
     gulp.src(bootstrap.src, { cwd: bootstrap.cwd })
       .pipe(gulp.dest('./styles/bootstrap/')),
+    gulp.src(fontawesome.src, { cwd: fontawesome.cwd })
+      .pipe(gulp.dest('./styles/fontawesome/')),
+      //fonts are copied to two places to satisfy both the main site's
+      //styles and the Rezolver docfx theme's styles.
     gulp.src(bootstrap.font.src, { cwd: bootstrap.font.cwd })
+      .pipe(gulp.dest('./styles/fonts'))
+      .pipe(gulp.dest('./_docfx_themes/rezolver/styles/fonts/')),
+      gulp.src(fontawesome.font.src, { cwd: fontawesome.font.cwd })
       //fonts are copied to two places to satisfy both the main site's
       //styles and the Rezolver docfx theme's styles.
       .pipe(gulp.dest('./styles/fonts'))
