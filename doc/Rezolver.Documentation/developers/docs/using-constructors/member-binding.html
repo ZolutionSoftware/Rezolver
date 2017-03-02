@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Markdown file </title>
+  	<title>Member Injection </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Markdown file ">
+  	<meta name="title" content="Member Injection ">
   	<meta name="generator" content="docfx 2.12.1.0">
   	
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -102,8 +102,63 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="markdown-file">Markdown file</h1>
+              <h1 id="member-injection">Member Injection</h1>
               
+<p>When executing a type&#39;s constructor you also have the option to inject services into the new instance&#39;s properties
+and/or fields.</p>
+<p>So - the equivalent of:</p>
+<pre><code class="lang-cs">var service = new ServiceWithFields()
+{
+    Property = foo,
+    Field = bar
+}
+</code></pre><p>This is all done via implementations of the <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> interface - of which there is currently one
+implementation - <a class="xref" href="../../api/Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a> (which will be renamed to <code>Rezolver.AllMembersBindingBehaviour</code> in 1.2).</p>
+<p>This implementation will automatically cause all <strong><em>publicly writeable</em></strong> properties and fields on the type being constructed
+to be bound to values from the container when resolved - <em>regardless</em> of whether the required services exist in the container.</p>
+<hr>
+<h2 id="example---injecting-all-members">Example - Injecting all members</h2>
+<p>Given this type:</p>
+<pre><code class="lang-csharp" name="Has2InjectableMembers.cs">public class Has2InjectableMembers
+{
+	public MyService1 Service1 { get; set; }
+	public MyService2 Service2 { get; set; }
+}
+</code></pre><p>We simply setup the container to build all three types and make sure to pass the binding behaviour when registering the
+<code>Has2InjectableMembers</code> target:</p>
+<pre><code class="lang-csharp" name="Example.cs">var container = new Container();
+container.RegisterAll(
+	ConstructorTarget.Auto&lt;MyService1&gt;(),
+	ConstructorTarget.Auto&lt;MyService2&gt;()
+);
+container.RegisterType&lt;Has2InjectableMembers&gt;(DefaultMemberBindingBehaviour.Instance);
+
+var result = container.Resolve&lt;Has2InjectableMembers&gt;();
+
+Assert.NotNull(result.Service1);
+Assert.NotNull(result.Service2);
+</code></pre><div class="WARNING"><h5>Warning</h5><p>As intimated above, when using this behaviour, if one of the services required by any of the writable properties or 
+fields is missing, then the resolve operation will fail.</p>
+<p>The behaviour is <em>deliberately</em> primitive - because unlike
+with constructors, where it&#39;s reasonable to assume all parameters are to be injected, there are no simple rules
+that can always applied to an object to determine which properties and/or fields should be auto-injected.</p>
+</div>
+<p><em>It&#39;s likely that two extra &#39;default&#39; behaviours - <code>PropertiesOnlyBindingBehaviour</code> and <code>FieldsOnlyBindingBehaviour</code>, which
+will only bind publicly writeable properties <strong>or</strong> public fields, respectively -
+will be added to the framework in 1.2</em></p>
+<hr>
+<h2 id="example---custom-binding-behaviour">Example - Custom binding behaviour</h2>
+<p>If you find you need more control over which properties and/or fields you want bound on an instance, then you can, 
+of course, implement your own binding behaviour.</p>
+<p>A popular implementation of member injection in some IOC containers is to use an attribute on the properties/fields 
+which should be injected.  This is, of course, not something that Rezolver supports out of the box - however it&#39;s a trivial
+thing to implement yourself, and that&#39;s what this example does.</p>
+<p>We will:</p>
+<ul>
+<li>Add a new attribute <code>InjectAttribute</code> which we will use to mark the properties that we want injected</li>
+<li>Implement our custom <code>IMemberBindingBehaviour</code> to only bind properties which have this attribute applied</li>
+</ul>
+<p><strong><em>Coming soon!</em></strong></p>
 
             </article>
           </div>

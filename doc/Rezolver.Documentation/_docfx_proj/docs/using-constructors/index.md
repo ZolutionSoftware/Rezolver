@@ -293,8 +293,5 @@ As you can see - using explicitly bound parameters is a little verbose, given th
 
 ## Next steps
 
-***TODO!***
-
-*Please come back another day - there'll be more here then :)**
-  <!--- If you're interested in injecting services into the publicly writable properties and/or fields
- of a type - then -->
+- See how [constructor injection works with generic types](generics.md)
+- Learn how to [enable member injection](member-binding.md) (injecting services into properties and/or fields)

@@ -13,6 +13,8 @@ using Rezolver.Targets;
 namespace Rezolver
 {
 	/// <summary>
+	/// WILL BE RENAMED TO AllMembersBindingBehaviour IN 1.2 - SEE https://github.com/ZolutionSoftware/Rezolver/issues/7 FOR MORE
+	/// 
 	/// The default implementation of <see cref="IMemberBindingBehaviour"/> when you are creating a
 	/// <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> and you want publicly writable
 	/// properties and public fields to be assigned values obtained from the container.
@@ -28,6 +30,7 @@ namespace Rezolver
 	/// 
 	/// The default behaviour is bind each member to a new <see cref="ResolvedTarget"/> whose 
 	/// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
+	[Obsolete("This type will be renamed to AllMembersBindingBehaviour - see https://github.com/ZolutionSoftware/Rezolver/issues/7")]
 	public class DefaultMemberBindingBehaviour : IMemberBindingBehaviour
 	{
 		private static readonly Lazy<DefaultMemberBindingBehaviour> _instance = new Lazy<DefaultMemberBindingBehaviour>(() => new DefaultMemberBindingBehaviour());
