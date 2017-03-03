@@ -14,10 +14,18 @@ var service = new ServiceWithFields()
 ```
 
 This is all done via implementations of the @Rezolver.IMemberBindingBehaviour interface - of which there is currently one
-implementation - @Rezolver.DefaultMemberBindingBehaviour (which will be renamed to `Rezolver.AllMembersBindingBehaviour` in 1.2).
+implementation - @Rezolver.DefaultMemberBindingBehaviour.
 
-This implementation will automatically cause all ***publicly writeable*** properties and fields on the type being constructed
-to be bound to values from the container when resolved - *regardless* of whether the required services exist in the container.
+Almost all of the ways in which you can create @Rezolver.Targets.ConstructorTarget
+(factory methods, registration methods, constructors etc) will also accept a @Rezolver.IMemberBindingBehaviour with which to enable 
+member injection if you want to.
+
+> [!WARNING]
+> @Rezolver.DefaultMemberBindingBehaviour will be renamed to `AllMembersBindingBehaviour` in 1.2, and might also
+> go into a child namespace - e.g. `Rezolver.MemberBindingBehaviours`.
+
+@Rezolver.DefaultMemberBindingBehaviour automatically binds all ***publicly writeable*** properties and fields on the type being constructed
+with values from the container when resolved - *regardless* of whether the required services exist in the container.
 
 * * *
 
@@ -58,6 +66,33 @@ thing to implement yourself, and that's what this example does.
 We will:
 
 - Add a new attribute `InjectAttribute` which we will use to mark the properties that we want injected
-- Implement our custom `IMemberBindingBehaviour` to only bind properties which have this attribute applied
+- Implement a custom `IMemberBindingBehaviour` (`AttributeBindingBehaviour`) to bind only properties which have this attribute applied
+- Decorate one or more members on a type with the `InjectAttribute`
+- Pass the new `AttributeBindingBehaviour` when we register the type, or create the `ConstructorTarget`
 
-***Coming soon!***
+First, the `InjectAttribute`:
+
+[!code-csharp[InjectAttribute.cs](../../../../../test/Rezolver.Tests.Examples/Types/InjectAttribute.cs#example)]
+
+Then our type which uses it:
+
+[!code-csharp[HasAttributeInjectedMembers.cs](../../../../../test/Rezolver.Tests.Examples/Types/HasAttributeInjectedMembers.cs#example)]
+
+Finally, our binding behaviour - which extends the aforementioned @Rezolver.DefaultMemberBindingBehaviour as that class has plenty of
+extension points:
+
+[!code-csharp[AttributeBindingBehaviour.cs](../../../../../test/Rezolver.Tests.Examples/Types/AttributeBindingBehaviour.cs#example)]
+
+With that in place, we can then test:
+
+[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example1)]
+
+
+Hopefully this example will inspire you to create your own custom binding behaviour :)
+
+* * *
+
+## Next steps
+
+- Head back to the [Constructor topic](index.md)
+- Or, see how [constructor injection works with generic types](generics.md)
