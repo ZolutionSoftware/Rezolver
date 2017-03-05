@@ -17,9 +17,18 @@ namespace Rezolver.Compilation
 	/// Implementations must also implement the <see cref="ITargetContainer"/> so the compile context can be used for
 	/// dependency lookups during compilation time.  Indeed, if you are developing your own compilation component (possibly
 	/// for a custom <see cref="ITarget"/> implementation) and need to resolve any dependencies from an <see cref="ITargetContainer"/>
-	/// during compilation, it should be done through the context's implementation of ITargetContainer.</remarks>
+	/// during compilation, it should be done through the context's implementation of ITargetContainer and *not* through the
+	/// <see cref=""/>.</remarks>
 	public interface ICompileContext : ITargetContainer
 	{
+		/// <summary>
+		/// Gets the targets which are used by the <see cref="Container"/> - NOTE this should not be used for dependency 
+		/// lookup - that should always be done through this object's implementation of <see cref="ITargetContainer"/>.
+		/// 
+		/// This property is provided to allow advanced functionality which is dependant on the actual target container
+		/// which is providing the targets to a particular container.
+		/// </summary>
+		ITargetContainer ContainerTargets { get; }
 		/// <summary>
 		/// Gets the parent context from which this context was created, if applicable.
 		/// </summary>

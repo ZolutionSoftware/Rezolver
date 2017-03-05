@@ -4,18 +4,16 @@
   href: create-and-use-a-container.md
 - name: Service Registration
   href: service-registration.md
-# note: this one is going to become a folder incorporating 
-# open generics and member binding too
-- name: Using Constructor Injection
+- name: Constructor Injection
   href: using-constructors/toc.yml
   homepage: using-constructors/index.md
-- name: Using Objects as Services
+- name: Objects as Services
   href: objects.md
-- name: Using Factory Delegates
+- name: Factory Delegates
   href: delegates.md
-- name: Using Expression Trees
+- name: Expression Trees
   href: expressions.md
-- name: Using Decorators
+- name: Decorators
   href: decorators.md
 #- name: Object lifetimes
 #  href: object-lifetimes.md

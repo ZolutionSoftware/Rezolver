@@ -1,15 +1,7 @@
 # Rezolver
 
-Welcome to the home of Rezolver - here you'll find guides, walkthroughs, deep-dives and 
-reference for all of the APIs and functionality in the Rezolver library.
-
-## What is Rezolver?
-
-Rezolver is an [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container that, out of the box, supports all the standard 
-features supported by most other popular IOC containers out there.  It's also highly extensible - with practically the entire stack open
-to extension immediately after referencing the core library.
-
-It's been built specifically with the .Net Core framework in mind, supporting the NetStandard1.1 profile for (almost!) maximum portability
+Rezolver is a fast, efficient, extensible, [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container supporting .Net 
+Core.  This site contains API documentation and developer guides for getting the most out of it.  
 
 ## Features
 

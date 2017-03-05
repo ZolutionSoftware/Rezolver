@@ -63,6 +63,22 @@ namespace Rezolver.Compilation
 			get;
 		}
 
+		private ITargetContainer _containerTargets;
+
+		/// <summary>
+		/// Gets the targets which are used by the <see cref="Container" /> - NOTE this should not be used for dependency
+		/// lookup - that should always be done through this object's implementation of <see cref="ITargetContainer" />.
+		/// This property is provided to allow advanced functionality which is dependant on the actual target container
+		/// which is providing the targets to a particular container.
+		/// </summary>
+		public ITargetContainer ContainerTargets
+		{
+			get
+			{
+				return _containerTargets ?? ParentContext?.ContainerTargets;
+			}
+		}
+
 		/// <summary>
 		/// This is the <see cref="ITargetContainer"/> through which dependencies are resolved by this context in its 
 		/// implementation of <see cref="ITargetContainer"/>.
@@ -113,8 +129,8 @@ namespace Rezolver.Compilation
 		/// <see cref="Container" /> property.</param>
 		/// <param name="dependencyTargetContainer">Required - An <see cref="ITargetContainer" /> that contains the <see cref="ITarget" />s that
 		/// will be required to complete compilation.
-		/// Note - this argument is passed to a new <see cref="ChildTargetContainer" /> that is created and proxied by this class' implementation
-		/// of <see cref="ITargetContainer" />.
+		/// Note - this argument is used for the <see cref="ContainerTargets"/> property, but is also passed to a new <see cref="ChildTargetContainer" /> 
+		/// that is created and proxied by this class' implementation of <see cref="ITargetContainer" />.
 		/// As a result, it's possible to register new targets directly into the context via its implementation of <see cref="ITargetContainer"/>,
 		/// without modifying the underlying targets in the container you pass.</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType" /> property.  If null, then any 
@@ -127,6 +143,7 @@ namespace Rezolver.Compilation
 			container.MustNotBeNull(nameof(container));
 			dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
 			_container = container;
+			_containerTargets = dependencyTargetContainer;
 			DependencyTargetContainer = new ChildTargetContainer(dependencyTargetContainer);
 			_targetType = targetType;
 			_compileStack = new Stack<CompileStackEntry>(30);
@@ -170,7 +187,7 @@ namespace Rezolver.Compilation
 			//when referring this call up to the parent, we either use the targetType passed, or default to our target type
 			if (ParentContext != null)
 				return ParentContext.PushCompileStack(toCompile, targetType ?? TargetType);
-			
+
 			toCompile.MustNotBeNull("toCompile");
 			//whereas here we default to the target's declared type if no targetType is passed.
 			CompileStackEntry entry = new CompileStackEntry(toCompile, targetType ?? toCompile.DeclaredType);

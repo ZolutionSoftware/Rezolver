@@ -245,16 +245,21 @@ public class AttributeBindingBehaviour : DefaultMemberBindingBehaviour
 }
 </code></pre><p>With that in place, we can then test:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
-container.RegisterAll(
-	ConstructorTarget.Auto&lt;MyService1&gt;(),
-	ConstructorTarget.Auto&lt;MyService2&gt;()
-);
-container.RegisterType&lt;Has2InjectableMembers&gt;(DefaultMemberBindingBehaviour.Instance);
 
-var result = container.Resolve&lt;Has2InjectableMembers&gt;();
+//register the type which uses the attributes, passing our custom binding behaviour
+container.RegisterType&lt;HasAttributeInjectedMembers&gt;(new AttributeBindingBehaviour());
 
-Assert.NotNull(result.Service1);
-Assert.NotNull(result.Service2);
+//The first injected field will request an IMyService
+container.RegisterType&lt;MyService1, IMyService&gt;();
+//The second requests an MyService6 by way of the type override on the attribute
+container.RegisterType&lt;MyService6&gt;();
+
+var result = container.Resolve&lt;HasAttributeInjectedMembers&gt;();
+
+Assert.IsType&lt;MyService1&gt;(result.InjectedServiceField);
+Assert.IsType&lt;MyService6&gt;(result.InjectedServiceProp);
+Assert.Null(result.ServiceField);
+Assert.Null(result.ServiceProp);
 </code></pre><p>Hopefully this example will inspire you to create your own custom binding behaviour :)</p>
 <hr>
 <h2 id="next-steps">Next steps</h2>

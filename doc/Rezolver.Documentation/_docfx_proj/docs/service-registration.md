@@ -33,12 +33,12 @@ The majority of the code samples shown on this site use these registration metho
 of this site:
 
 - @Rezolver.AliasTargetContainerExtensions *- for registering aliases of one type to another (useful for reusing singletons for multiple types)*
-- @Rezolver.DecoratorTargetContainerExtensions *- for registering decorators*
-- @Rezolver.DelegateTargetContainerExtensions *- for registering factory delegates*
-- @Rezolver.ExpressionTargetContainerExtensions *- for registering expression trees*
+- @Rezolver.DecoratorTargetContainerExtensions *- for [registering decorators](decorators.md)*
+- @Rezolver.DelegateTargetContainerExtensions *- for [registering factory delegates](delegates.md)*
+- @Rezolver.ExpressionTargetContainerExtensions *- for [registering expression trees](expressions.md)*
 - @Rezolver.MultipleTargetContainerExtensions *- for batch registering multiple targets*
-- @Rezolver.ObjectTargetContainerExtensions *- for registering object references/values*
-- @Rezolver.RegisterTypeTargetContainerExtensions *- for registering constructor-injected types (plain and open-generic)*
+- @Rezolver.ObjectTargetContainerExtensions *- for [registering object references/values](objects.md)*
+- @Rezolver.RegisterTypeTargetContainerExtensions *- for [registering constructor-injected types](using-constructors/index.md) (plain and open-generic)*
 - @Rezolver.ScopedTargetContainerExtensions *- for registering scoped constructor-injected types*
 - @Rezolver.SingletonTargetContainerExtensions *- for registering singleton constructor-injected types*
 

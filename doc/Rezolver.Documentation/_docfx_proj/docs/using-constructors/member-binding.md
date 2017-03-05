@@ -85,7 +85,7 @@ extension points:
 
 With that in place, we can then test:
 
-[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example1)]
+[!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example2)]
 
 
 Hopefully this example will inspire you to create your own custom binding behaviour :)

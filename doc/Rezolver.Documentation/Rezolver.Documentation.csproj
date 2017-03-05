@@ -111,6 +111,7 @@
     <Content Include="styles\fonts\fontawesome-webfont.svg" />
     <Content Include="styles\site.css" />
     <Content Include="_docfx_proj\md-styles.css" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\fontawesome-webfont.svg" />
     <Content Include="_docfx_themes\rezolver\styles\main.css" />
     <Content Include="_docfx_themes\rezolver\styles\main.less" />
     <Content Include="styles\site.css.map" />
@@ -148,6 +149,11 @@
     <Content Include="_docfx_themes\rezolver\partials\footer.tmpl.partial" />
     <Content Include="_docfx_themes\rezolver\partials\ga.tmpl.partial" />
     <Content Include="_docfx_themes\rezolver\partials\navbar.tmpl.partial" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\fontawesome-webfont.eot" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\fontawesome-webfont.ttf" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\fontawesome-webfont.woff" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\fontawesome-webfont.woff2" />
+    <Content Include="_docfx_themes\rezolver\styles\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishExclude.props" />
