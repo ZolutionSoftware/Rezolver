@@ -23,7 +23,7 @@ make it better for everyone!
 
 * * *
 
-## Next Steps
+# Next Steps
 
 - Asp.Net Core developers should read how to 
 [integrate Rezolver into the Asp.Net Core hosting pipeline](nuget-packages/rezolver.microsoft.aspnetcore.hosting.md).

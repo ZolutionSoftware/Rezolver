@@ -38,7 +38,7 @@ of this site:
 - @Rezolver.ExpressionTargetContainerExtensions *- for [registering expression trees](expressions.md)*
 - @Rezolver.MultipleTargetContainerExtensions *- for batch registering multiple targets*
 - @Rezolver.ObjectTargetContainerExtensions *- for [registering object references/values](objects.md)*
-- @Rezolver.RegisterTypeTargetContainerExtensions *- for [registering constructor-injected types](using-constructors/index.md) (plain and open-generic)*
+- @Rezolver.RegisterTypeTargetContainerExtensions *- for [registering constructor-injected types](constructor-injection/index.md) (plain and open-generic)*
 - @Rezolver.ScopedTargetContainerExtensions *- for registering scoped constructor-injected types*
 - @Rezolver.SingletonTargetContainerExtensions *- for registering singleton constructor-injected types*
 
@@ -67,7 +67,7 @@ as a valid type, too:
 
 > [!NOTE]
 > This time we're creating a @Rezolver.Targets.ConstructorTarget via one of its static factory functions.
-> Again, this target [is covered in more depth here](using-constructors/index.md).
+> Again, this target [is covered in more depth here](constructor-injection/index.md).
 
 [!code-csharp[TargetContainerExamples.cs](../../../../test/Rezolver.Tests.Examples/TargetContainerExamples.cs#example2)]
 
@@ -112,7 +112,7 @@ a given type.
 The different ways in which Rezolver can create/obtain objects for your application, then, are pretty much all handled 
 through the @Rezolver.ITarget interface, and the different implementations that we have for that.
 
-Whether you want to use [constructor injection](using-constructors/index.md), an [object you've built yourself](objects.md), an 
+Whether you want to use [constructor injection](constructor-injection/index.md), an [object you've built yourself](objects.md), an 
 [expression tree](expressions.md) or a [factory delegate](delegates.md), or something else, there's lots of ways to get 
 Rezolver to build the services you want to use in your application.
 

@@ -5,8 +5,8 @@
 - name: Service Registration
   href: service-registration.md
 - name: Constructor Injection
-  href: using-constructors/toc.yml
-  homepage: using-constructors/index.md
+  href: constructor-injection/toc.yml
+  homepage: constructor-injection/index.md
 - name: Objects as Services
   href: objects.md
 - name: Factory Delegates
@@ -22,5 +22,3 @@
 - name: Nuget Packages
   href: nuget-packages/toc.yml
   homepage: nuget-packages/index.md
-- name: Miscellaneous
-  href: miscellaneous/toc.yml

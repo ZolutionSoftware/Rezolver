@@ -138,7 +138,6 @@
     <Content Include="styles\fonts\fontawesome-webfont.woff2" />
     <Content Include="styles\fonts\FontAwesome.otf" />
     <Content Include="styles\font-awesome.less" />
-    <None Include="_docfx_proj\docs\miscellaneous\how-this-website-is-built.md" />
     <Content Include="_docfx_themes\rezolver\favicon.ico" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.css" />
     <Content Include="_docfx_themes\rezolver\styles\docfx.vendor.js" />
@@ -216,7 +215,6 @@
     <Content Include="_docfx_proj\docs\nuget-packages\index.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.configuration.md" />
     <None Include="Properties\PublishProfiles\DiskPackage.pubxml" />
-    <Content Include="_docfx_proj\docs\miscellaneous\toc.yml" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -304,12 +302,9 @@
     <None Include="docfx.json" />
     <None Include="_docfx_proj\docs\index.md" />
     <None Include="_docfx_proj\api\index.md" />
-    <None Include="_docfx_proj\docs\details1.md" />
-    <None Include="_docfx_proj\docs\details2.md" />
-    <None Include="_docfx_proj\docs\details3.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.aspnetcore.hosting.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.microsoft.extensions.dependencyinjection.md" />
-    <Content Include="_docfx_proj\docs\using-constructors\index.md" />
+    <Content Include="_docfx_proj\docs\constructor-injection\index.md" />
     <Content Include="_docfx_proj\docs\objects.md" />
     <Content Include="_docfx_proj\docs\expressions.md" />
     <Content Include="_docfx_proj\docs\delegates.md" />
@@ -356,9 +351,9 @@
     <Content Include="_docfx_themes\rezolver\partials\browsericons.tmpl.partial" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="_docfx_proj\docs\using-constructors\toc.yml" />
-    <Content Include="_docfx_proj\docs\using-constructors\member-binding.md" />
-    <Content Include="_docfx_proj\docs\using-constructors\generics.md" />
+    <Content Include="_docfx_proj\docs\constructor-injection\toc.yml" />
+    <Content Include="_docfx_proj\docs\constructor-injection\member-binding.md" />
+    <Content Include="_docfx_proj\docs\constructor-injection\generics.md" />
     <None Include="_docfx_proj\images\exampleunittest.PNG" />
     <Content Include="mstile-144x144.png" />
     <Content Include="mstile-150x150.png" />

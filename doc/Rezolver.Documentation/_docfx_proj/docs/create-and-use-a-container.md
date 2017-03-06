@@ -149,7 +149,7 @@ bool canResolve = container.CanResolve<MyService>();
 
 * * *
 
-## Next Steps
+# Next Steps
 
   - Now read up on how to [register services in the container](service-registration.md).
 
