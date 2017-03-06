@@ -175,18 +175,6 @@ references:
   commentId: Overload:Rezolver.Compilation.CompileContext.Container
   fullName: Rezolver.Compilation.CompileContext.Container
   nameWithType: CompileContext.Container
-- uid: Rezolver.Compilation.CompileContext.ContainerTargets
-  name: ContainerTargets
-  href: api/Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ContainerTargets
-  commentId: P:Rezolver.Compilation.CompileContext.ContainerTargets
-  fullName: Rezolver.Compilation.CompileContext.ContainerTargets
-  nameWithType: CompileContext.ContainerTargets
-- uid: Rezolver.Compilation.CompileContext.ContainerTargets*
-  name: ContainerTargets
-  href: api/Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ContainerTargets_
-  commentId: Overload:Rezolver.Compilation.CompileContext.ContainerTargets
-  fullName: Rezolver.Compilation.CompileContext.ContainerTargets
-  nameWithType: CompileContext.ContainerTargets
 - uid: Rezolver.Compilation.CompileContext.DependencyTargetContainer
   name: DependencyTargetContainer
   href: api/Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_DependencyTargetContainer
@@ -1652,18 +1640,6 @@ references:
   commentId: Overload:Rezolver.Compilation.ICompileContext.Container
   fullName: Rezolver.Compilation.ICompileContext.Container
   nameWithType: ICompileContext.Container
-- uid: Rezolver.Compilation.ICompileContext.ContainerTargets
-  name: ContainerTargets
-  href: api/Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_ContainerTargets
-  commentId: P:Rezolver.Compilation.ICompileContext.ContainerTargets
-  fullName: Rezolver.Compilation.ICompileContext.ContainerTargets
-  nameWithType: ICompileContext.ContainerTargets
-- uid: Rezolver.Compilation.ICompileContext.ContainerTargets*
-  name: ContainerTargets
-  href: api/Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_ContainerTargets_
-  commentId: Overload:Rezolver.Compilation.ICompileContext.ContainerTargets
-  fullName: Rezolver.Compilation.ICompileContext.ContainerTargets
-  nameWithType: ICompileContext.ContainerTargets
 - uid: Rezolver.Compilation.ICompileContext.NewContext(System.Type,System.Nullable{Rezolver.ScopeBehaviour})
   name: NewContext(Type, Nullable<ScopeBehaviour>)
   href: api/Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__

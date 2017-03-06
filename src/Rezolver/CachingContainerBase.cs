@@ -9,21 +9,24 @@ using Rezolver.Compilation;
 
 namespace Rezolver
 {
-  /// <summary>
-  /// Builds on the <see cref="ContainerBase"/> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.
-  /// 
-  /// Only creatable through inheritance.
-  /// </summary>
-  /// <remarks>Internally, the class uses a <see cref="ConcurrentDictionary{TKey, TValue}"/> to store <see cref="ICompiledTarget"/>s keyed by the requested type.
-  /// 
-  /// All the main <see cref="IContainer"/> implementations used directly in an application should ideally inherit from this class, because otherwise every 
-  /// <see cref="IContainer.Resolve(ResolveContext)"/> operation would require a compilation phase before the object could be returned, which would be incredibly slow.
-  /// 
-  /// It's because of this caching that registering new targets in any <see cref="ITargetContainer"/> used by this class is not recommended: because after the first request
-  /// for a particular type is made, the resultant <see cref="ICompiledTarget"/> is fixed until the container is thrown away.</remarks>
-  public class CachingContainerBase : ContainerBase
-  {
-    private readonly ConcurrentDictionary<Type, Lazy<ICompiledTarget>> _entries = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
+	/// <summary>
+	/// Builds on the <see cref="ContainerBase"/> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.
+	/// 
+	/// Only creatable through inheritance.
+	/// </summary>
+	/// <remarks>Internally, the class uses a <see cref="ConcurrentDictionary{TKey, TValue}"/> to store <see cref="ICompiledTarget"/>s keyed by the requested type.
+	/// 
+	/// All the main <see cref="IContainer"/> implementations used directly in an application should ideally inherit from this class, because otherwise every 
+	/// <see cref="IContainer.Resolve(ResolveContext)"/> operation would require a compilation phase before the object could be returned, which would be incredibly slow.
+	/// 
+	/// It's because of this caching that registering new targets in any <see cref="ITargetContainer"/> used by this class is not recommended: because after the first request
+	/// for a particular type is made, the resultant <see cref="ICompiledTarget"/> is fixed until the container is thrown away.</remarks>
+	public class CachingContainerBase : ContainerBase
+	{
+		//private readonly object _l1Locker = new object();
+		//private readonly Dictionary<Type, ICompiledTarget> _l1Entries = new Dictionary<Type, ICompiledTarget>();
+		private readonly ConcurrentDictionary<ResolveContext, ICompiledTarget> _entries = new ConcurrentDictionary<ResolveContext, ICompiledTarget>();
+		//private readonly ConcurrentDictionary<ResolveContext, Lazy<ICompiledTarget>> _entries = new ConcurrentDictionary<ResolveContext, Lazy<ICompiledTarget>>();
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CachingContainerBase"/> class.
@@ -35,26 +38,54 @@ namespace Rezolver
 		/// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
 		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
 		protected CachingContainerBase(ITargetContainer targets = null, ICompilerConfigurationProvider compilerConfig = null)
-      : base(targets, compilerConfig)
-    {
+			: base(targets, compilerConfig)
+		{
 
-    }
+		}
 
-    /// <summary>
-    /// Obtains an <see cref="ICompiledTarget"/> for the given <paramref name="context"/>.
-    /// </summary>
-    /// <param name="context"></param>
-    /// <returns></returns>
-    /// <remarks>The method is called by <see cref="ContainerBase.Resolve(ResolveContext)"/>
-    /// to get the compiled target whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method is to be used to get the instance that is to be resolved for
-    /// a given request.
-    /// 
-    /// The internal cache is examined first to see if an entry exists for the <see cref="ResolveContext.RequestedType"/> type and, if not, then 
-    /// the result of the base class' <see cref="ContainerBase.GetCompiledRezolveTarget(ResolveContext)"/> is cached and returned.
-    /// </remarks>
-    protected override ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)
-    {
-      return _entries.GetOrAdd(context.RequestedType, t => new Lazy<ICompiledTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
-    }
-  }
+		/// <summary>
+		/// Obtains an <see cref="ICompiledTarget"/> for the given <paramref name="context"/>.
+		/// </summary>
+		/// <param name="context"></param>
+		/// <returns></returns>
+		/// <remarks>The method is called by <see cref="ContainerBase.Resolve(ResolveContext)"/>
+		/// to get the compiled target whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method is to be used to get the instance that is to be resolved for
+		/// a given request.
+		/// 
+		/// The internal cache is examined first to see if an entry exists for the <see cref="ResolveContext.RequestedType"/> type and, if not, then 
+		/// the result of the base class' <see cref="ContainerBase.GetCompiledRezolveTarget(ResolveContext)"/> is cached and returned.
+		/// </remarks>
+		protected override ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)
+		{
+			//code's written on the basis that a simple read in a warm container is faster than always
+			//calling getoradd.
+			//ICompiledTarget temp;
+			//if (_entries.TryGetValue(context, out temp))
+			//	return temp;
+			return _entries.GetOrAdd(context, c => base.GetCompiledRezolveTarget(c));
+			////////////////
+			//try
+			//{
+			//	return _entries[context];
+			//}
+			//catch (KeyNotFoundException)
+			//{
+			//	return _entries.GetOrAdd(context, c => base.GetCompiledRezolveTarget(c));
+			//}
+			////////////
+			//lock (_l1Locker)
+			//{
+			//	_l1Entries.TryGetValue(context.RequestedType, out toReturn);
+			//}
+			//return toReturn ?? _entries.GetOrAdd(context.RequestedType, t => new Lazy<ICompiledTarget>(() =>
+			//{
+			//	var toCache = base.GetCompiledRezolveTarget(context);
+			//	lock (_l1Locker)
+			//	{
+			//		_l1Entries[context.RequestedType] = toCache;
+			//	}
+			//	return toCache;
+			//})).Value;
+		}
+	}
 }

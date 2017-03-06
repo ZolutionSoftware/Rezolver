@@ -4,6 +4,7 @@
 
 using System.Resources;
 using System.Reflection;
+using System.Security;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -17,6 +18,11 @@ using System.Reflection;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
+[assembly: AllowPartiallyTrustedCallers]
+[assembly: SecurityTransparent]
+#if !DOTNET
+[assembly: SecurityRules(SecurityRuleSet.Level2,SkipVerificationInFullTrust=true)]
+#endif
 
 // Version information for an assembly consists of the following four values:
 //

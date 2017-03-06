@@ -66,55 +66,6 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		public static ExpressionCompilerConfigurationProvider ConfigProvider { get; } = new ExpressionCompilerConfigurationProvider();
 
-		private class CachedTargetBuilder : ITarget
-		{
-			public IExpressionBuilder Builder { get; set; }
-			public static CachedTargetBuilder Create(Type targetType)
-			{
-				return (CachedTargetBuilder)Activator.CreateInstance(typeof(CachedTargetBuilder<>).MakeGenericType(targetType));
-			}
-
-			public Type DeclaredType
-			{
-				get
-				{
-					return this.GetType();
-				}
-			}
-
-			public ScopeBehaviour ScopeBehaviour
-			{
-				get
-				{
-					return ScopeBehaviour.None;
-				}
-			}
-
-			public bool UseFallback
-			{
-				get
-				{
-					return false;
-				}
-			}
-
-			public IContainerScope SelectScope(ResolveContext context)
-			{
-				throw new NotSupportedException();
-			}
-
-			public bool SupportsType(Type type)
-			{
-				return TypeHelpers.IsAssignableFrom(type, this.GetType());
-			}
-		}
-
-		private class CachedTargetBuilder<TTarget> : CachedTargetBuilder
-			where TTarget : ITarget
-		{
-			
-		}
-
 		private class CompiledLambdaTarget : ICompiledTarget
 		{
 			private readonly Func<ResolveContext, object> _getObjectDelegate;
@@ -172,15 +123,6 @@ namespace Rezolver.Compilation.Expressions
 			target.MustNotBeNull(nameof(target));
 			context.MustNotBeNull(nameof(context));
 
-			//slightly abusing the target container as a secondary cache here - we need to implement container storage
-			//ASAP so each container has a generic 'bin' which can provide a state storage for all other things - including for
-			//scoping etc.
-			var cacheEntryType = typeof(CachedTargetBuilder<>).MakeGenericType(target.GetType());
-			CachedTargetBuilder cached = (CachedTargetBuilder)context.ContainerTargets.Fetch(cacheEntryType);
-
-			if (cached != null)
-				return cached.Builder;
-
 			List<Type> builderTypes =
 				TargetSearchTypes(target).Select(t => typeof(IExpressionBuilder<>).MakeGenericType(t)).ToList();
 
@@ -195,12 +137,7 @@ namespace Rezolver.Compilation.Expressions
 					if (expressionBuilder != this)
 					{
 						if (expressionBuilder.CanBuild(target, context))
-						{
-							cached = CachedTargetBuilder.Create(target.GetType());
-							cached.Builder = expressionBuilder;
-							context.ContainerTargets.Register(cached);
 							return expressionBuilder;
-						}
 					}
 				}
 			}
