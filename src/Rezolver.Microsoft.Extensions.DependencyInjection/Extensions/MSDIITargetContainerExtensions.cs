@@ -19,8 +19,9 @@ namespace Rezolver
 			//register service provider - ensuring that it's marked as unscoped because the lifetimes of
 			//containers which are also scopes are managed by the code that creates them, not by the containers themselves
 			targets.RegisterExpression(context => (IServiceProvider)context.Container);
-			//register scope factory - uses the rezolver that comes in the context.
-			targets.RegisterExpression(context => new RezolverContainerScopeFactory(context.Container), typeof(IServiceScopeFactory));
+			//register scope factory - uses the context as a scope factory (it will choose between the container or
+			//the scope as the actual scope factory that will be used.
+			targets.RegisterExpression(context => new RezolverContainerScopeFactory(context), typeof(IServiceScopeFactory));
 
 			foreach (var group in services.GroupBy(s => s.ServiceType))
 			{

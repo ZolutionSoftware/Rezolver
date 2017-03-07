@@ -18,7 +18,7 @@ namespace Rezolver
 	public interface IScopedContainer : IContainer, IDisposable
 	{
 		/// <summary>
-		/// Gets the scope for this scoped container.
+		/// Gets the root scope for this scoped container.
 		/// 
 		/// Note that this is used automatically by the container for <see cref="IContainer.Resolve(ResolveContext)"/>
 		/// operations where the <see cref="ResolveContext.Scope"/> property is not already set.

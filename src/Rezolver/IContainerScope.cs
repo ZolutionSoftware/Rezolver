@@ -32,12 +32,17 @@ namespace Rezolver
 	}
 
 	/// <summary>
-	/// This is an <see cref="IContainer"/>-like object (resolving functionality is provided through the extension methods
-	/// in the <see cref="ContainerScopeResolveExtensions" /> class) which 
+	/// This is an <see cref="IContainer" />-like object (resolving functionality is provided through the extension methods
+	/// in the <see cref="ContainerScopeResolveExtensions" /> class) which provides lifetime scoping for disposable objects,
+	/// and scoped singleton functionality for any object.
+	/// 
+	/// Implementations of this interface must, in their implementation of <see cref="IScopeFactory"/>, create a child scope
+	/// of this scope.
 	/// </summary>
+	/// <seealso cref="Rezolver.IScopeFactory" />
 	/// <seealso cref="System.IDisposable" />
 	/// <seealso cref="System.IServiceProvider" />
-	public interface IContainerScope : IDisposable, IServiceProvider
+	public interface IContainerScope : IDisposable, IServiceProvider, IScopeFactory
 	{
 		/// <summary>
 		/// If this scope has a parent scope, this is it.
@@ -48,11 +53,6 @@ namespace Rezolver
 		/// should be made against this container to begin with.
 		/// </summary>
 		IContainer Container { get; }
-		/// <summary>
-		/// Called to create a child scope from this scope.
-		/// </summary>
-		/// <returns></returns>
-		IContainerScope CreateScope();
 		/// <summary>
 		/// Called by child scopes when they are disposed to notify the parent that they 
 		/// will no longer need to be disposed of when the parent is disposed.

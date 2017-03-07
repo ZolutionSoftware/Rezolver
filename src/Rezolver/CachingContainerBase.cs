@@ -23,10 +23,10 @@ namespace Rezolver
 	/// for a particular type is made, the resultant <see cref="ICompiledTarget"/> is fixed until the container is thrown away.</remarks>
 	public class CachingContainerBase : ContainerBase
 	{
-		//private readonly object _l1Locker = new object();
-		//private readonly Dictionary<Type, ICompiledTarget> _l1Entries = new Dictionary<Type, ICompiledTarget>();
-		private readonly ConcurrentDictionary<ResolveContext, ICompiledTarget> _entries = new ConcurrentDictionary<ResolveContext, ICompiledTarget>();
-		//private readonly ConcurrentDictionary<ResolveContext, Lazy<ICompiledTarget>> _entries = new ConcurrentDictionary<ResolveContext, Lazy<ICompiledTarget>>();
+		// developer note: This used to be a c/current dictionary of lazy objects, but benchmarking and performance analysis showed
+		// that it was slower than simply allowing redundant compiled targets to be created and have one thead 'win'.
+		private readonly ConcurrentDictionary<ResolveContext, ICompiledTarget> _entries 
+			= new ConcurrentDictionary<ResolveContext, ICompiledTarget>(ResolveContext.RequestedTypeComparer);
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CachingContainerBase"/> class.
@@ -57,35 +57,7 @@ namespace Rezolver
 		/// </remarks>
 		protected override ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)
 		{
-			//code's written on the basis that a simple read in a warm container is faster than always
-			//calling getoradd.
-			//ICompiledTarget temp;
-			//if (_entries.TryGetValue(context, out temp))
-			//	return temp;
 			return _entries.GetOrAdd(context, c => base.GetCompiledRezolveTarget(c));
-			////////////////
-			//try
-			//{
-			//	return _entries[context];
-			//}
-			//catch (KeyNotFoundException)
-			//{
-			//	return _entries.GetOrAdd(context, c => base.GetCompiledRezolveTarget(c));
-			//}
-			////////////
-			//lock (_l1Locker)
-			//{
-			//	_l1Entries.TryGetValue(context.RequestedType, out toReturn);
-			//}
-			//return toReturn ?? _entries.GetOrAdd(context.RequestedType, t => new Lazy<ICompiledTarget>(() =>
-			//{
-			//	var toCache = base.GetCompiledRezolveTarget(context);
-			//	lock (_l1Locker)
-			//	{
-			//		_l1Entries[context.RequestedType] = toCache;
-			//	}
-			//	return toCache;
-			//})).Value;
 		}
 	}
 }

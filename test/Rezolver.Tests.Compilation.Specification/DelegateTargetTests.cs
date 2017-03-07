@@ -146,5 +146,18 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			Assert.Equal(DelegateTargetMethod(20), result);
 		}
+
+		[Fact]
+		public void DelegateTarget_ShouldResolve_ThroughInjectedResolveContext()
+		{
+			var targets = CreateTargetContainer();
+			targets.RegisterType<TaxService>();
+			targets.RegisterDelegate((ResolveContext rc) => new RequiresTaxService(rc.Resolve<TaxService>(), 0.175M));
+
+			var container = CreateContainer(targets);
+			var result = container.Resolve<RequiresTaxService>();
+
+			Assert.Equal(117.5M, result.CalculatePrice(100M));
+		}
 	}
 }

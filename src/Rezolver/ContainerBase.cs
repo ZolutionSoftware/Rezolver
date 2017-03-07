@@ -215,7 +215,7 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Implementation of the <see cref="IContainer.CreateScope"/> method.
+		/// Implementation of the <see cref="IScopeFactory.CreateScope"/> method.
 		/// 
 		/// The base definition creates a <see cref="ContainerScope"/> with this container passed as the scope's container.
 		/// 

@@ -83,18 +83,15 @@ namespace Rezolver
 		/// </summary>
 		public void Dispose()
 		{
-			// Do not change this code. Put cleanup code in Dispose(bool disposing) above.
 			Dispose(true);
-			// TODO: uncomment the following line if the finalizer is overridden above.
-			// GC.SuppressFinalize(this);
 		}
 
 		/// <summary>
-		/// Overrides the base method to pass the <see cref="Scope"/> as the new scope's parent.
+		/// Overrides the base method's implementation of <see cref="IScopeFactory.CreateScope" /> to pass the call to the <see cref="Scope" />.
 		/// </summary>
 		public override IContainerScope CreateScope()
 		{
-			return new ContainerScope(Scope);
+			return Scope.CreateScope();
 		}
 		#endregion
 		/// <summary>

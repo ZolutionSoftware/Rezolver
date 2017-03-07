@@ -1,0 +1,30 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ output extension="cs" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+				List<string> paramData = new List<string>(){
+												"", "T1","T1, T2","T1, T2, T3"												
+												};
+
+
+
+				foreach(var allParam in paramData){
+					#>public class DelegateTarget<<#= allParam #>, TResult> : DelegateTarget
+{
+
+}
+<#
+				}
+#>
+<#+
+				static IEnumerable<ParamDataBuilder> GetParamData(string s){
+								return s.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(ss => new ParamDataBuilder() { Param = s });
+				}
+
+				public class ParamDataBuilder{
+								public string Param { get; set; }
+
+				}
+#>

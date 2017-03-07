@@ -19,7 +19,7 @@ namespace Rezolver
 	/// <see cref="CanResolve(ResolveContext)"/> method.
 	/// 
 	/// Lifetime scoping (where <see cref="IDisposable"/> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
-	/// by obtaining a new scope through the <see cref="CreateScope"/> method; although a container might also implement the 
+	/// by obtaining a new scope through the object's implementatio of the <see cref="IScopeFactory.CreateScope"/> method; although a container might also implement the 
 	/// <see cref="IScopedContainer"/> interface, in which case the container itself is a lifetime scope.
 	/// 
 	/// Many of the functions which accept a <see cref="ResolveContext"/> also have alternatives (in the form of extension methods) in the 
@@ -30,7 +30,7 @@ namespace Rezolver
 	/// the <see cref="ITargetContainer"/> to actually locate registrations for types which are ultimately requested from the container; the interface
 	/// doesn't actually mandate that pattern.
 	/// </remarks>
-	public interface IContainer : IServiceProvider
+	public interface IContainer : IServiceProvider, IScopeFactory
 	{
 		/// <summary>
 		/// Returns true if a resolve operation for the given context will succeed.
@@ -58,12 +58,6 @@ namespace Rezolver
 		/// <returns><c>true</c> if the operation succeeded (the resolved object will be set into the <paramref name="result"/> 
 		/// parameter); <c>false</c> otherwise.</returns>
 		bool TryResolve(ResolveContext context, out object result);
-
-		/// <summary>
-		/// Called to create an <see cref="IContainerScope" /> which can resolve the same objects as this container, but which will track,
-		/// and dispose of, any disposable objects that it creates.
-		/// </summary>
-		IContainerScope CreateScope();
 
 		/// <summary>
 		/// Fetches the <see cref="ICompiledTarget"/> for the given context, whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method 

@@ -16,7 +16,7 @@ namespace Rezolver
 		/// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
 		/// </summary>
 		private readonly ConcurrentDictionary<ResolveContext, Lazy<object>> _explicitlyScopedObjects
-			= new ConcurrentDictionary<ResolveContext, Lazy<object>>();
+			= new ConcurrentDictionary<ResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
 		/// <summary>
 		/// implicitly scoped objects will always be IDisposable
 		/// </summary>

@@ -74,7 +74,8 @@ namespace Rezolver.Compilation
 		private readonly Stack<CompileStackEntry> _compileStack;
 
 		/// <summary>
-		/// Gets the stack entries for all the targets that are being compiled.
+		/// Gets the stack entries for all the targets that are being compiled for all contexts
+		/// related to this one - both up and down the hierarchy.
 		/// </summary>
 		/// <value>The compile stack.</value>
 		public IEnumerable<CompileStackEntry> CompileStack

@@ -16,83 +16,51 @@ namespace Rezolver
 	/// the operation is invoked, any <see cref="IScopedContainer"/> that might be active for the call (if different), and the 
 	/// type which is being resolved from the <see cref="IContainer"/>.
 	/// </summary>
-	public class ResolveContext : IEquatable<ResolveContext>
+	public class ResolveContext : IScopeFactory
 	{
-		private class StubContainer : IContainer
+		/// <summary>
+		/// Gets a comparer for <see cref="ResolveContext"/> which treats two contexts as being equal
+		/// if they're both the same reference (including null) or, if both have the same <see cref="RequestedType"/>
+		/// </summary>
+		public static IEqualityComparer<ResolveContext> RequestedTypeComparer { get; } = new RequestedTypeEqualityComparer();
+		/// <summary>
+		/// An equality comparer for ResolveContext which treats two contexts
+		/// as equal if they are both null, or have the same <see cref="ResolveContext.RequestedType"/>.
+		/// </summary>
+		/// <seealso cref="System.Collections.Generic.IEqualityComparer{T}" />
+		internal class RequestedTypeEqualityComparer : IEqualityComparer<ResolveContext>
 		{
-			private static readonly StubContainer _instance = new StubContainer();
-
-			public static StubContainer Instance
+			/// <summary>
+			/// Determines whether the specified objects are equal.
+			/// </summary>
+			/// <param name="x">The first object of type <paramref name="T" /> to compare.</param>
+			/// <param name="y">The second object of type <paramref name="T" /> to compare.</param>
+			public bool Equals(ResolveContext x, ResolveContext y)
 			{
-				get
-				{
-					return _instance;
-				}
+				return x == y || x?.RequestedType == y?.RequestedType;
 			}
 
-			public ITargetCompiler Compiler
+			/// <summary>
+			/// Returns a hash code for this instance.
+			/// </summary>
+			/// <param name="obj">The <see cref="T:System.Object" /> for which a hash code is to be returned.</param>
+			public int GetHashCode(ResolveContext obj)
 			{
-				get { throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set")); }
-			}
-
-			public ITargetContainer Targets
-			{
-				get { throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set")); }
-			}
-
-			public bool CanResolve(ResolveContext context)
-			{
-				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
-			}
-
-			public object Resolve(ResolveContext context)
-			{
-				context.MustNotBeNull("context");
-				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
-			}
-
-			public bool TryResolve(ResolveContext context, out object result)
-			{
-				context.MustNotBeNull("context");
-				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
-			}
-
-			public IContainerScope CreateScope()
-			{
-				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
-			}
-
-			public ICompiledTarget FetchCompiled(ResolveContext context)
-			{
-				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
-			}
-
-			public void Register(ITarget target, Type type = null)
-			{
-				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
-			}
-
-			object IServiceProvider.GetService(Type serviceType)
-			{
-				throw new InvalidOperationException(String.Format("The ResolveContext has no Rezolver set"));
+				return obj?.RequestedType?.GetHashCode() ?? 0;
 			}
 		}
-
-		private Type _requestedType;
 		/// <summary>
 		/// Gets the type being requested from the container
 		/// </summary>
 		/// <value>The type of the requested.</value>
-		public Type RequestedType { get { return _requestedType; } private set { _requestedType = value; } }
-
-		private IContainer _container;
+		public Type RequestedType { get; private set; }
 
 		/// <summary>
 		/// The container for this context.
 		/// </summary>
 		/// <remarks>This is the container which received the original call to <see cref="IContainer.Resolve(ResolveContext)"/>,
 		/// but is not necessarily the same container that will eventually end up resolving the object.</remarks>
-		public IContainer Container { get { return _container; } private set { _container = value; } }
+		public IContainer Container { get; private set; }
 
 		/// <summary>
 		/// Gets the scope that's active for all calls for this context.
@@ -101,6 +69,10 @@ namespace Rezolver
 		public IContainerScope Scope { get; private set; }
 
 		private ResolveContext() { }
+
+		//TODO: Need to think about potentially tracking parent/child relationships as new contexts are spawned from others
+		//      So that conditional targets can be implemented.  At the moment, you can only see which type(s) might be requesting
+		//		an instance during compilation.
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ResolveContext"/> class.
@@ -142,7 +114,77 @@ namespace Rezolver
 
 		private ResolveContext(IContainer container)
 		{
-			_container = container ?? StubContainer.Instance;
+			Container = container ?? StubContainer.Instance;
+		}
+
+		/// <summary>
+		/// Resolves a new instance of a different type from the same scope/container that originally
+		/// received the current Resolve operation.
+		/// </summary>
+		/// <param name="newRequestedType">New type to be resolved.</param>
+		/// <remarks>Use this method, or the generic equivalent, to resolve dependency services in a 
+		/// factory or expression.
+		/// 
+		/// If a scope is active then it will be honoured.</remarks>
+		public object Resolve(Type newRequestedType)
+		{
+			return (Scope?.Container ?? Container).Resolve(CreateNew(newRequestedType));
+		}
+
+		/// <summary>
+		/// Resolves a new instance of a different type from the same scope/container that originally
+		/// received the current Resolve operation.
+		/// </summary>
+		/// <typeparam name="TResult">New type to be resolved.</typeparam>
+		/// <remarks>Use this method, or the non-generic equivalent, to resolve dependency services in a 
+		/// factory or expression.
+		/// 
+		/// If a scope is active then it will be honoured.</remarks>
+		public TResult Resolve<TResult>()
+		{
+			return (TResult)Resolve(typeof(TResult));
+		}
+
+		/// <summary>
+		/// Returns a clone of this context, but replaces the type.
+		/// </summary>
+		/// <param name="requestedType">The type of object to be resolved from the container.</param>
+		internal ResolveContext CreateNew(Type requestedType)
+		{
+			return new ResolveContext()
+			{
+				Container = Container,
+				RequestedType = requestedType,
+				Scope = Scope
+			};
+		}
+
+		/// <summary>
+		/// Returns a clone of this context, but replaces the <see cref="Container"/>.
+		/// </summary>
+		/// <param name="container">The container for the new context.</param>
+		internal ResolveContext CreateNew(IContainer container)
+		{
+			return new ResolveContext()
+			{
+				Container = container,
+				RequestedType = RequestedType,
+				Scope = Scope
+			};
+		}
+
+		/// <summary>
+		/// Returns a clone of this context, but replaces the <see cref="Scope"/>.
+		/// </summary>
+		/// <param name="scope">The scope for the new context.</param>
+		internal ResolveContext CreateNew(IContainerScope scope)
+		{
+			return new ResolveContext()
+			{
+				Container = Container,
+				RequestedType = RequestedType,
+				Scope = scope
+			};
 		}
 
 		/// <summary>
@@ -156,144 +198,18 @@ namespace Rezolver
 			parts.Add($"Container: {Container}");
 			if (Scope != null)
 			{
-				if (Scope == Container)
-					parts[parts.Count - 1] = $"Scope Container: {Scope}";
-				else
-					parts.Add($"Scope: {Scope}");
+				parts.Add($"Scope: {Scope}");
 			}
 
 			return $"({string.Join(", ", parts)})";
 		}
 
 		/// <summary>
-		/// Returns a hash code for this instance.
+		/// Creates a new scope either through the <see cref="Scope"/> or, if that's null, then the <see cref="Container"/>.
 		/// </summary>
-		public override int GetHashCode()
+		IContainerScope IScopeFactory.CreateScope()
 		{
-			return _requestedType.GetHashCode();
-		}
-
-		/// <summary>
-		/// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
-		/// </summary>
-		/// <param name="obj">The object to compare with the current object.</param>
-		public override bool Equals(object obj)
-		{
-			if (obj == null)
-				return false;
-			return Equals(obj as ResolveContext);
-		}
-
-		/// <summary>
-		/// Indicates whether the current object is equal to another object of the same type.
-		/// </summary>
-		/// <param name="other">An object to compare with this object.</param>
-		public virtual bool Equals(ResolveContext other)
-		{
-			return object.ReferenceEquals(this, other) || _requestedType == other._requestedType;
-		}
-
-		/// <summary>
-		/// Implements the equality operator.  Contexts are checked for reference equality, and then
-		/// their <see cref="RequestedType"/> properties are checked for equality also.
-		/// </summary>
-		/// <param name="left">The left.</param>
-		/// <param name="right">The right.</param>
-		public static bool operator ==(ResolveContext left, ResolveContext right)
-		{
-			//same ref - yes
-			if (object.ReferenceEquals(left, right))
-				return true;
-			//one is null, the other not - short-circuit
-			//have to be careful not to do left == null or right == null here or we stackoverflow...
-			if (object.ReferenceEquals(null, left) != object.ReferenceEquals(null, right))
-				return false;
-			//now standard equality check on type/name
-			return left._requestedType == right._requestedType;
-		}
-
-		/// <summary>
-		/// Implements the inequality operator.
-		/// </summary>
-		/// <param name="left">The left.</param>
-		/// <param name="right">The right.</param>
-		public static bool operator !=(ResolveContext left, ResolveContext right)
-		{
-			//same reference
-			if (object.ReferenceEquals(left, right))
-				return false;
-			//one is null, the other isn't - short-circuit
-			//have to be careful not to do left == null or right == null here or we stackoverflow ...
-			if (object.ReferenceEquals(null, left) != object.ReferenceEquals(null, right))
-				return true;
-			//now standard inequality check on type/name
-			return left._requestedType != right._requestedType;
-
-			//TODO: Going to need to think of a way to bring in user-defined equalities in here - for those
-			//contexts where the registration does 'interesting' things with the context.
-		}
-
-		/// <summary>
-		/// Returns a clone of this context, but replaces the type.
-		/// </summary>
-		/// <param name="requestedType">The type of object to be resolved from the container.</param>
-		public ResolveContext CreateNew(Type requestedType)
-		{
-			return new ResolveContext(Container, requestedType, Scope);
-		}
-
-		/// <summary>
-		/// Returns a clone of this context, but replaces the <see cref="RequestedType"/> and <see cref="Container"/>.
-		/// </summary>
-		/// <param name="container">The container for the new context.</param>
-		/// <param name="requestedType">The type of object to be resolved from the container.</param>
-		public ResolveContext CreateNew(IContainer container, Type requestedType)
-		{
-			return new ResolveContext(container, requestedType, Scope);
-		}
-
-		/// <summary>
-		/// Returns a clone of this context, but replaces the <see cref="RequestedType"/> and the <see cref="Scope"/>.
-		/// </summary>
-		/// <param name="requestedType">The type of object to be resolved from the container.</param>
-		/// <param name="scope">The scope for the new context.</param>
-		public ResolveContext CreateNew(Type requestedType, IContainerScope scope)
-		{
-			return new ResolveContext(Container, requestedType, scope);
-		}
-
-		/// <summary>
-		/// Returns a clone of this context, but replaces the <see cref="Container"/>.
-		/// </summary>
-		/// <param name="container">The container for the new context.</param>
-		public ResolveContext CreateNew(IContainer container)
-		{
-			return new ResolveContext(container, RequestedType, Scope);
-		}
-
-		/// <summary>
-		/// Returns a clone of this context, but replaces the <see cref="Scope"/>.
-		/// </summary>
-		/// <param name="scope">The scope for the new context.</param>
-		public ResolveContext CreateNew(IContainerScope scope)
-		{
-			return new ResolveContext()
-			{
-				Container = Container,
-				RequestedType = RequestedType,
-				Scope = scope
-			};
-		}
-
-		/// <summary>
-		/// Returns a clone of this context, but replaces the <see cref="Container"/> and the <see cref="Scope"/>.
-		/// </summary>
-		/// <param name="container">The container for the new context - regardless of what the 
-		/// <see cref="IContainerScope.Container"/> of the <paramref name="scope"/> is.</param>
-		/// <param name="scope">The scope for the new context.</param>
-		public ResolveContext CreateNew(IContainer container, IContainerScope scope)
-		{
-			return new Rezolver.ResolveContext(container, RequestedType, scope);
+			return (((IScopeFactory)Scope) ?? Container).CreateScope();
 		}
 	}
 }
