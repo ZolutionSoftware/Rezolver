@@ -1,0 +1,69 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+public class GenericSpec
+{
+    // the generic arguments of the overall class/method group etc
+	public string Args { get; set; }
+	// the allowed generic signatures for the methods' argument
+	public string[] Signatures { get; set; }
+
+	private GenericSpecArg[] _argsSpec;
+	public GenericSpecArg[] ArgsSpec
+	{
+		get
+		{
+			if(_argsSpec == null)
+			{
+				_argsSpec = Args.Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+							   .Select((s, i) => new GenericSpecArg{ Spec = this, Name = s, Pos = i }).ToArray();
+			}
+			return _argsSpec;
+		}
+	}
+
+	public int ArgCount
+	{
+		get { return ArgsSpec.Length; }
+	}
+
+	public IEnumerable<string> GetAllSignatures()
+	{
+		var signatures = Signatures ?? new[] { Args };
+		return signatures.Select(s => s ?? Args);
+	}
+}
+
+public class GenericSpecArg
+{
+	public GenericSpec Spec { get; set; }
+	public string Name { get; set; }
+	public int Pos { get; set; }
+}
+
+public void ForSpecs(IEnumerable<GenericSpec> specs, Action<GenericSpec> output)
+{
+	foreach(var spec in specs)
+	{
+		output(spec);
+	}
+}
+
+public void ForArgs(GenericSpec spec, Action<GenericSpecArg> output)
+{
+	foreach(var argSpec in spec.ArgsSpec)
+	{
+		output(argSpec);
+	}
+}
+
+public void ForSpecSignatures(GenericSpec spec, Action<GenericSpec, string> output)
+{
+	foreach(var sig in spec.GetAllSignatures())
+	{
+		output(spec, sig);
+	}
+}
+
+#>

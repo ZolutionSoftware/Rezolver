@@ -27,7 +27,7 @@ namespace Rezolver
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			factory.MustNotBeNull(nameof(factory));
-			targetContainer.Register(factory.AsDelegateTarget(declaredType));
+			targetContainer.Register(new DelegateTarget(factory, declaredType));
 		}
     }
 }
