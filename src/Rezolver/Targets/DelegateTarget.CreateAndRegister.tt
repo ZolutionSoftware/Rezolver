@@ -18,29 +18,13 @@ var specs = new []{
 		Args = "T1, TResult"
 	},
 	new GenericSpec {
-		Args = "T2, TResult",
-		Signatures = new[] { "ResolveContext, T2, TResult" }
-	},
-	new GenericSpec {
 		Args = "T1, T2, TResult"
-	},
-	new GenericSpec {
-		Args = "T2, T3, TResult",
-		Signatures = new[] { "ResolveContext, T2, T3, TResult" }
 	},
 	new GenericSpec {
 		Args = "T1, T2, T3, TResult"
 	},
 	new GenericSpec {
-		Args = "T2, T3, T4, TResult",
-		Signatures = new[] { "ResolveContext, T2, T3, T4, TResult" }
-	},
-	new GenericSpec {
 		Args = "T1, T2, T3, T4, TResult"
-	},
-	new GenericSpec {
-		Args = "T2, T3, T4, T5, TResult",
-		Signatures = new[] { "ResolveContext, T2, T3, T4, T5, TResult" }
 	},
 	new GenericSpec {
 		Args = "T1, T2, T3, T4, T5, TResult"

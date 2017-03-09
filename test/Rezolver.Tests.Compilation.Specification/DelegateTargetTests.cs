@@ -156,7 +156,6 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			var container = CreateContainer(targets);
 			var result = container.Resolve<RequiresTaxService>();
-
 			Assert.Equal(117.5M, result.CalculatePrice(100M));
 		}
 	}
