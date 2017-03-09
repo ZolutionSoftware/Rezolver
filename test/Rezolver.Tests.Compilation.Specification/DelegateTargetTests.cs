@@ -18,7 +18,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void DelegateTarget_ReturningConstantInt()
 		{
 			var targets = CreateTargetContainer();
-			ITarget target = new DelegateTarget<int>(() => 1);
+			ITarget target = Target.ForDelegate(() => 1);
 			targets.Register(target);
 			var container = CreateContainer(targets);
 			
@@ -29,7 +29,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void DelegateTarget_ReturningConstantIntAsObject()
 		{
 			var targets = CreateTargetContainer();
-			ITarget target = new DelegateTarget<object>(() => 1);
+			ITarget target = Target.ForDelegate<object>(() => 1);
 			targets.Register(target);
 			var container = CreateContainer(targets);
 
@@ -40,7 +40,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void DelegateTarget_ShouldExecuteEachResolveCall()
 		{
 			var targets = CreateTargetContainer();
-			ITarget target = new DelegateTarget<InstanceCountingType>(() => new InstanceCountingType());
+			ITarget target = Target.ForDelegate(() => new InstanceCountingType());
 			targets.Register(target);
 			var container = CreateContainer(targets);
 			using (var session = InstanceCountingType.NewSession())
@@ -57,7 +57,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			Func<ResolveContext, RequiresResolveContext> f = (ResolveContext rc) => new RequiresResolveContext(rc);
 			var targets = CreateTargetContainer();
-			targets.Register(f.AsDelegateTarget());
+			targets.RegisterDelegate(f);
 			var container = CreateContainer(targets);
 
 			var result = container.Resolve<RequiresResolveContext>();
@@ -75,7 +75,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			Func<int, string> f = i => $"String #{i}";
 			var targets = CreateTargetContainer();
 			targets.RegisterObject(5);
-			targets.Register(f.AsDelegateTarget());
+			targets.RegisterDelegate(f);
 			var container = CreateContainer(targets);
 
 			var result = container.Resolve<string>();
@@ -93,7 +93,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			var targets = CreateTargetContainer();
 			targets.RegisterObject(10);
-			targets.Register(f.AsDelegateTarget());
+			targets.RegisterDelegate(f);
 			var container = CreateContainer(targets);
 			
 			//looks the same as above, but note there's an assertion in the delegate
@@ -114,7 +114,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			var targets = CreateTargetContainer();
 			targets.RegisterObject(10);
-			targets.Register(f.AsDelegateTarget());
+			targets.RegisterDelegate(f);
 			var container = CreateContainer(targets);
 
 			//looks the same as above, but note there's an assertion in the delegate
@@ -139,7 +139,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			//same as before, except this time, instead of a lambda, we're using an instance method.
 			var targets = CreateTargetContainer();
 			targets.RegisterObject(20);
-			targets.Register(new DelegateTarget<int, string>(DelegateTargetMethod));
+			targets.RegisterDelegate<int, string>(DelegateTargetMethod);
 			var container = CreateContainer(targets);
 
 			var result = container.Resolve<string>();
@@ -152,7 +152,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<TaxService>();
-			targets.RegisterDelegate((ResolveContext rc) => new RequiresTaxService(rc.Resolve<TaxService>(), 0.175M));
+			targets.RegisterDelegate(rc => new RequiresTaxService(rc.Resolve<TaxService>(), 0.175M));
 
 			var container = CreateContainer(targets);
 			var result = container.Resolve<RequiresTaxService>();

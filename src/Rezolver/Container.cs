@@ -17,7 +17,7 @@ namespace Rezolver
 	/// <remarks>
 	/// All of this class' functionality is inherited through <see cref="CachingContainerBase"/> and its base classes.
 	/// 
-	/// Note that it doesn't implement lifetime scoping (although you can create a lifetime scope from it by calling its <see cref="IContainer.CreateScope"/>
+	/// Note that it doesn't implement lifetime scoping (although you can create a lifetime scope from it by calling its <see cref="IScopeFactory.CreateScope"/>
 	/// method).
 	/// 
 	/// Also note that the class implements <see cref="ITargetContainer"/> through its <see cref="ContainerBase"/> base (which merely wraps around the 

@@ -108,8 +108,7 @@
               
               <h1 id="Rezolver_TargetCreationExtensions" data-uid="Rezolver.TargetCreationExtensions">Class TargetCreationExtensions
               </h1>
-              <div class="markdown level0 summary"><p>Extensions which provide shortcuts for creating some of the targets in the <code>Rezolver.Targets</code>
-namespace.</p>
+              <div class="markdown level0 summary"><p>Has been replaced by the <a class="xref" href="Rezolver.Target.html">Target</a> static class, and will be removed from 1.2</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritance">
@@ -145,7 +144,8 @@ namespace.</p>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_TargetCreationExtensions_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static class TargetCreationExtensions</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This static class has been replaces by the Target static class and will be obsoleted in 1.2, please remove all references to it&quot;)]
+public static class TargetCreationExtensions</code></pre>
               </div>
               <h3 id="methods">Methods
               </h3>
@@ -154,7 +154,7 @@ namespace.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_TargetCreationExtensions_AsDelegateTarget_System_Delegate_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetCreationExtensions.AsDelegateTarget(System.Delegate%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/TargetCreationExtensions.cs/#L38">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/TargetCreationExtensions.cs/#L39">View Source</a>
               </span>
               <a id="Rezolver_TargetCreationExtensions_AsDelegateTarget_" data-uid="Rezolver.TargetCreationExtensions.AsDelegateTarget*"></a>
               <h4 id="Rezolver_TargetCreationExtensions_AsDelegateTarget_System_Delegate_System_Type_" data-uid="Rezolver.TargetCreationExtensions.AsDelegateTarget(System.Delegate,System.Type)">AsDelegateTarget(Delegate, Type)</h4>
@@ -165,7 +165,8 @@ and, optionally, with the <span class="paramref">declaredType</span></p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static DelegateTarget AsDelegateTarget(this Delegate factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method will be removed in 1.2 in favour of the Target.ForFactory static methods&quot;)]
+public static DelegateTarget AsDelegateTarget(this Delegate factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -222,7 +223,8 @@ if not passed, then the return type of the delegate will be used.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ObjectTarget AsObjectTarget&lt;T&gt;(this T obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method will be removed in 1.2 in favour of Target.ForObject&lt;T&gt;(T)&quot;)]
+public static ObjectTarget AsObjectTarget&lt;T&gt;(this T obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -286,151 +288,6 @@ if not passed, then the return type of the delegate will be used.</p>
                   </tr>
                 </tbody>
               </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_TargetCreationExtensions_Scoped_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.TargetCreationExtensions.Scoped(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/TargetCreationExtensions.cs/#L48">View Source</a>
-              </span>
-              <a id="Rezolver_TargetCreationExtensions_Scoped_" data-uid="Rezolver.TargetCreationExtensions.Scoped*"></a>
-              <h4 id="Rezolver_TargetCreationExtensions_Scoped_Rezolver_ITarget_" data-uid="Rezolver.TargetCreationExtensions.Scoped(Rezolver.ITarget)">Scoped(ITarget)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> from the target on which this method is invoked.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ScopedTarget Scoped(this ITarget target)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td><span class="parametername">target</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_TargetCreationExtensions_Singleton_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.TargetCreationExtensions.Singleton(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/TargetCreationExtensions.cs/#L69">View Source</a>
-              </span>
-              <a id="Rezolver_TargetCreationExtensions_Singleton_" data-uid="Rezolver.TargetCreationExtensions.Singleton*"></a>
-              <h4 id="Rezolver_TargetCreationExtensions_Singleton_Rezolver_ITarget_" data-uid="Rezolver.TargetCreationExtensions.Singleton(Rezolver.ITarget)">Singleton(ITarget)</h4>
-              <div class="markdown level1 summary"><p>Constructs a <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> that wraps the target on which the method is invoked.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static SingletonTarget Singleton(this ITarget target)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td><span class="parametername">target</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_TargetCreationExtensions_Unscoped_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.TargetCreationExtensions.Unscoped(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/TargetCreationExtensions.cs/#L58">View Source</a>
-              </span>
-              <a id="Rezolver_TargetCreationExtensions_Unscoped_" data-uid="Rezolver.TargetCreationExtensions.Unscoped*"></a>
-              <h4 id="Rezolver_TargetCreationExtensions_Unscoped_Rezolver_ITarget_" data-uid="Rezolver.TargetCreationExtensions.Unscoped(Rezolver.ITarget)">Unscoped(ITarget)</h4>
-              <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a> from the target on which this method is invoked.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static UnscopedTarget Unscoped(this ITarget target)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td><span class="parametername">target</span></td>
-                    <td><p>The target.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
                         </article>
           </div>
           
@@ -442,7 +299,7 @@ if not passed, then the return type of the delegate will be used.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_TargetCreationExtensions.md&amp;value=---%0Auid%3A%20Rezolver.TargetCreationExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/TargetCreationExtensions.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/TargetCreationExtensions.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -198,17 +198,17 @@ and registers it in the target container.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%601(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L594">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L197">View Source</a>
               </span>
               <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
               <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``1(Rezolver.ITargetContainer,System.Func{``0},System.Type)">RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-1.html">DelegateTarget&lt;TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a parameterless factory delegate 
+which returns an instance of <span class="typeparamref">TResult</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;TResult&gt;(this ITargetContainer targetContainer, Func&lt;TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;TResult&gt;(this ITargetContainer targets, Func&lt;TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -222,18 +222,22 @@ and registers it in the target container.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func</a>&lt;TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
-                    <td></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
-                    <td></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -248,33 +252,27 @@ and registers it in the target container.</p>
                 <tbody>
                   <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
+                    <td><p>The type of the object produced by the factory delegate.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__10_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%6010(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%601(Rezolver.ITargetContainer%2CSystem.Func%7BRezolver.ResolveContext%2C%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L756">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L209">View Source</a>
               </span>
               <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__10_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``10(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-10.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``1(Rezolver.ITargetContainer,System.Func{Rezolver.ResolveContext,``0},System.Type)">RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;ResolveContext, TResult&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes a 
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> and which returns an instance of <span class="typeparamref">TResult</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;TResult&gt;(this ITargetContainer targets, Func&lt;ResolveContext, TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -288,18 +286,22 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd386894(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
-                    <td></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
-                    <td></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -313,850 +315,28 @@ Each of these generic overloads simply calls the non-generic
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T9</span></td>
-                    <td><p>The type of the 9th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
+                    <td><p>The type of the object produced by the factory delegate.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__10_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__11_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%6011(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L779">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__11_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``11(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-11.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd383294(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T9</span></td>
-                    <td><p>The type of the 9th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T10</span></td>
-                    <td><p>The type of the 10th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__11_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__12_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%6012(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L803">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__12_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``12(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-12.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402864(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T9</span></td>
-                    <td><p>The type of the 9th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T10</span></td>
-                    <td><p>The type of the 10th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T11</span></td>
-                    <td><p>The type of the 11th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__12_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__13_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%6013(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L828">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__13_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``13(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-13.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402863(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T9</span></td>
-                    <td><p>The type of the 9th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T10</span></td>
-                    <td><p>The type of the 10th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T11</span></td>
-                    <td><p>The type of the 11th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T12</span></td>
-                    <td><p>The type of the 12th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__13_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__14_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%6014(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L854">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__14_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``14(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-14.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402867(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T9</span></td>
-                    <td><p>The type of the 9th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T10</span></td>
-                    <td><p>The type of the 10th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T11</span></td>
-                    <td><p>The type of the 11th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T12</span></td>
-                    <td><p>The type of the 12th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T13</span></td>
-                    <td><p>The type of the 13th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__14_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__15_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%6015(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%2C%60%6014%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L881">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__15_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``15(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-15.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402861(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T9</span></td>
-                    <td><p>The type of the 9th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T10</span></td>
-                    <td><p>The type of the 10th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T11</span></td>
-                    <td><p>The type of the 11th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T12</span></td>
-                    <td><p>The type of the 12th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T13</span></td>
-                    <td><p>The type of the 13th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T14</span></td>
-                    <td><p>The type of the 14th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__15_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__16_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%6016(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%2C%60%609%2C%60%6010%2C%60%6011%2C%60%6012%2C%60%6013%2C%60%6014%2C%60%6015%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L909">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__16_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``16(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-16.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402868(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T9</span></td>
-                    <td><p>The type of the 9th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T10</span></td>
-                    <td><p>The type of the 10th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T11</span></td>
-                    <td><p>The type of the 11th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T12</span></td>
-                    <td><p>The type of the 12th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T13</span></td>
-                    <td><p>The type of the 13th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T14</span></td>
-                    <td><p>The type of the 14th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T15</span></td>
-                    <td><p>The type of the 15th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__16_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%602(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L608">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L221">View Source</a>
               </span>
               <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``2(Rezolver.ITargetContainer,System.Func{``0,``1},System.Type)">RegisterDelegate&lt;T, TResult&gt;(ITargetContainer, Func&lt;T, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-2.html">DelegateTarget&lt;T, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``2(Rezolver.ITargetContainer,System.Func{``0,``1},System.Type)">RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes 1 argument
+and which returns an instance of <span class="typeparamref">TResult</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T, TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, TResult&gt;(this ITargetContainer targets, Func&lt;T1, TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1170,18 +350,22 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;T, TResult&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;T1, TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
-                    <td></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
-                    <td></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -1195,39 +379,102 @@ Each of these generic overloads simply calls the non-generic
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="parametername">T</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
+                    <td><span class="parametername">T1</span></td>
+                    <td><p>Type of the 1st delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
+                    <td><p>The type of the object produced by the factory delegate.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%602(Rezolver.ITargetContainer%2CSystem.Func%7BRezolver.ResolveContext%2C%60%600%2C%60%601%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L234">View Source</a>
+              </span>
+              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
+              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``2(Rezolver.ITargetContainer,System.Func{Rezolver.ResolveContext,``0,``1},System.Type)">RegisterDelegate&lt;T2, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, TResult&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes a 
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> plus 1 other argument, and which returns an instance of <span class="typeparamref">TResult</span></p>
 </div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T2, TResult&gt;(this ITargetContainer targets, Func&lt;ResolveContext, T2, TResult&gt; factory, Type declaredType = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534647(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, T2, TResult&gt;</td>
+                    <td><span class="parametername">factory</span></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">declaredType</span></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td><p>Type of the 2nd delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%603(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L623">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L247">View Source</a>
               </span>
               <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
               <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``3(Rezolver.ITargetContainer,System.Func{``0,``1,``2},System.Type)">RegisterDelegate&lt;T1, T2, TResult&gt;(ITargetContainer, Func&lt;T1, T2, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-3.html">DelegateTarget&lt;T1, T2, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes 2 arguments
+and which returns an instance of <span class="typeparamref">TResult</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, TResult&gt;(this ITargetContainer targets, Func&lt;T1, T2, TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1241,18 +488,22 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534647(v=vs.110).aspx">Func</a>&lt;T1, T2, TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
-                    <td></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
-                    <td></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -1267,43 +518,111 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 1st delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 2nd delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
+                    <td><p>The type of the object produced by the factory delegate.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%603(Rezolver.ITargetContainer%2CSystem.Func%7BRezolver.ResolveContext%2C%60%600%2C%60%601%2C%60%602%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L261">View Source</a>
+              </span>
+              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
+              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``3(Rezolver.ITargetContainer,System.Func{Rezolver.ResolveContext,``0,``1,``2},System.Type)">RegisterDelegate&lt;T2, T3, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, T3, TResult&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes a 
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> plus 2 other arguments, and which returns an instance of <span class="typeparamref">TResult</span></p>
 </div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T2, T3, TResult&gt;(this ITargetContainer targets, Func&lt;ResolveContext, T2, T3, TResult&gt; factory, Type declaredType = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549430(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, T2, T3, TResult&gt;</td>
+                    <td><span class="parametername">factory</span></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">declaredType</span></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td><p>Type of the 2nd delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td><p>Type of the 3rd delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%604(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L639">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L275">View Source</a>
               </span>
               <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
               <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``4(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3},System.Type)">RegisterDelegate&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-4.html">DelegateTarget&lt;T1, T2, T3, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes 3 arguments
+and which returns an instance of <span class="typeparamref">TResult</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, TResult&gt;(this ITargetContainer targets, Func&lt;T1, T2, T3, TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1317,18 +636,22 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549430(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
-                    <td></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
-                    <td></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -1343,48 +666,121 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 1st delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 2nd delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 3rd delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
+                    <td><p>The type of the object produced by the factory delegate.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2___3__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%604(Rezolver.ITargetContainer%2CSystem.Func%7BRezolver.ResolveContext%2C%60%600%2C%60%601%2C%60%602%2C%60%603%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L290">View Source</a>
+              </span>
+              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
+              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2___3__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``4(Rezolver.ITargetContainer,System.Func{Rezolver.ResolveContext,``0,``1,``2,``3},System.Type)">RegisterDelegate&lt;T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, T3, T4, TResult&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes a 
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> plus 3 other arguments, and which returns an instance of <span class="typeparamref">TResult</span></p>
 </div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T2, T3, T4, TResult&gt;(this ITargetContainer targets, Func&lt;ResolveContext, T2, T3, T4, TResult&gt; factory, Type declaredType = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534303(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, T2, T3, T4, TResult&gt;</td>
+                    <td><span class="parametername">factory</span></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">declaredType</span></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td><p>Type of the 2nd delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td><p>Type of the 3rd delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T4</span></td>
+                    <td><p>Type of the 4th delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%605(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L656">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L305">View Source</a>
               </span>
               <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
               <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``5(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-5.html">DelegateTarget&lt;T1, T2, T3, T4, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes 4 arguments
+and which returns an instance of <span class="typeparamref">TResult</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(this ITargetContainer targets, Func&lt;T1, T2, T3, T4, TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1398,18 +794,22 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534303(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
-                    <td></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
-                    <td></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -1424,53 +824,131 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 1st delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 2nd delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 3rd delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 4th delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
+                    <td><p>The type of the object produced by the factory delegate.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2___3___4__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%605(Rezolver.ITargetContainer%2CSystem.Func%7BRezolver.ResolveContext%2C%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L321">View Source</a>
+              </span>
+              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
+              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2___3___4__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``5(Rezolver.ITargetContainer,System.Func{Rezolver.ResolveContext,``0,``1,``2,``3,``4},System.Type)">RegisterDelegate&lt;T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, T3, T4, T5, TResult&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes a 
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> plus 4 other arguments, and which returns an instance of <span class="typeparamref">TResult</span></p>
 </div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T2, T3, T4, T5, TResult&gt;(this ITargetContainer targets, Func&lt;ResolveContext, T2, T3, T4, T5, TResult&gt; factory, Type declaredType = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd268303(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, T2, T3, T4, T5, TResult&gt;</td>
+                    <td><span class="parametername">factory</span></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="parametername">declaredType</span></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="typeParameters">Type Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="parametername">T2</span></td>
+                    <td><p>Type of the 2nd delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T3</span></td>
+                    <td><p>Type of the 3rd delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T4</span></td>
+                    <td><p>Type of the 4th delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">T5</span></td>
+                    <td><p>Type of the 5th delegate parameter</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><span class="parametername">TResult</span></td>
+                    <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%606(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L674">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L337">View Source</a>
               </span>
               <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
               <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``6(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-6.html">DelegateTarget&lt;T1, T2, T3, T4, T5, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
+              <div class="markdown level1 summary"><p>Registers a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> built from a factory delegate which takes 5 arguments
+and which returns an instance of <span class="typeparamref">TResult</span></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(this ITargetContainer targets, Func&lt;T1, T2, T3, T4, T5, TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1484,18 +962,22 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which the newly created target will be registered</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd268303(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
-                    <td></td>
+                    <td><p>Required.  The factory delegate which is to be executed when an instance is resolved by a container</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
-                    <td></td>
+                    <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created
+if different from <span class="typeparamref">TResult</span>.  Also overrides the type against which the registration will be made.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -1510,345 +992,36 @@ Each of these generic overloads simply calls the non-generic
                 <tbody>
                   <tr>
                     <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 1st delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 2nd delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 3rd delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 4th delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
+                    <td><p>Type of the 5th delegate parameter</p>
 </td>
                   </tr>
                   <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
+                    <td><p>The type of the object produced by the factory delegate.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__7_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%607(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L693">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__7_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``7(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-7.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd269654(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__7_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__8_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%608(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L713">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__8_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``8(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-8.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd289456(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__8_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__9_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions.RegisterDelegate%60%609(Rezolver.ITargetContainer%2CSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%2C%60%606%2C%60%607%2C%60%608%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L734">View Source</a>
-              </span>
-              <a id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate*"></a>
-              <h4 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__9_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8__System_Type_" data-uid="Rezolver.DelegateTargetContainerExtensions.RegisterDelegate``9(Rezolver.ITargetContainer,System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.Type)">RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget-9.html">DelegateTarget&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;</a> and registers it in the given
-<span class="paramref">targetContainer</span>, optionally with the given <span class="paramref">declaredType</span> as its</p>
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;(this ITargetContainer targetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt; factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/dd267613(v=vs.110).aspx">Func</a>&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;</td>
-                    <td><span class="parametername">factory</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T1</span></td>
-                    <td><p>The type of the 1st delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T2</span></td>
-                    <td><p>The type of the 2nd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T3</span></td>
-                    <td><p>The type of the 3rd delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T4</span></td>
-                    <td><p>The type of the 4th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T5</span></td>
-                    <td><p>The type of the 5th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T6</span></td>
-                    <td><p>The type of the 6th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T7</span></td>
-                    <td><p>The type of the 7th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">T8</span></td>
-                    <td><p>The type of the 8th delegate parameter (will be resolved automatically)</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TResult</span></td>
-                    <td><p>The type of object produced by the delegate.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__9_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8__System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is one of many generic extension methods that exist purely to simplify registering a 
-<a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> with a delegate expressed as a lambda expression.
-Each of these generic overloads simply calls the non-generic 
-<a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_">RegisterDelegate(ITargetContainer, Delegate, Type)</a> extension method.</p>
-</div>
                         </article>
           </div>
           
@@ -1860,7 +1033,7 @@ Each of these generic overloads simply calls the non-generic
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DelegateTargetContainerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.DelegateTargetContainerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget`1.cs/#L583" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DelegateTarget.CreateAndRegister.cs/#L188" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

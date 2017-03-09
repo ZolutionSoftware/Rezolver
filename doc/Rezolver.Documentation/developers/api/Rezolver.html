@@ -255,6 +255,10 @@ whose lifetimes are slaved to that of a parent <a class="xref" href="Rezolver.IS
                   <h4><a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html">SingletonTargetContainerExtensions</a></h4>
                   <section><p>Extension methods for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> interface which simplify the registration of singletons.</p>
 </section>
+                  <h4><a class="xref" href="Rezolver.Target.html">Target</a></h4>
+                  <section><p>Provides static factory methods (including extension methods) for creating numerous types of targets 
+from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> namespace.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a></h4>
                   <section><p>Root container for <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s that can be used as the backing for the standard
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> classes - <a class="xref" href="Rezolver.Container.html">Container</a> and <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a>.</p>
@@ -262,8 +266,7 @@ whose lifetimes are slaved to that of a parent <a class="xref" href="Rezolver.IS
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.TargetCreationExtensions.html">TargetCreationExtensions</a></h4>
-                  <section><p>Extensions which provide shortcuts for creating some of the targets in the <code>Rezolver.Targets</code>
-namespace.</p>
+                  <section><p>Has been replaced by the <a class="xref" href="Rezolver.Target.html">Target</a> static class, and will be removed from 1.2</p>
 </section>
                   <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
                   <section><p>An <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> implementation that stores and retrieves 
@@ -290,7 +293,10 @@ container implementations within the Rezolver framework.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></h4>
                   <section><p>This is an <a class="xref" href="Rezolver.IContainer.html">IContainer</a>-like object (resolving functionality is provided through the extension methods
-in the <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">ContainerScopeResolveExtensions</a> class) which </p>
+in the <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">ContainerScopeResolveExtensions</a> class) which provides lifetime scoping for disposable objects,
+and scoped singleton functionality for any object.</p>
+<p>Implementations of this interface must, in their implementation of <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a>, create a child scope
+of this scope.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h4>
                   <section><p>Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.</p>
@@ -299,6 +305,9 @@ in the <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">Cont
                   <section><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that also has a <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_Scope">Scope</a> attached to it.</p>
 <p>Many applications will use such a container as the root container to use as anchors
 for things like scoped singletons.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a></h4>
+                  <section><p>Represents an object from which a scope can be created</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ITarget.html">ITarget</a></h4>
                   <section><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>,

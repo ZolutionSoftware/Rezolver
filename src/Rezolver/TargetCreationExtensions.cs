@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Extensions which provide shortcuts for creating some of the targets in the <c>Rezolver.Targets</c>
-	/// namespace.
-	/// </summary>
+    /// <summary>
+    /// Has been replaced by the <see cref="Target"/> static class, and will be removed from 1.2
+    /// </summary>
+    [Obsolete("This static class has been replaces by the Target static class and will be obsoleted in 1.2, please remove all references to it")]
 	public static class TargetCreationExtensions
     {
 		/// <summary>
@@ -22,6 +22,7 @@ namespace Rezolver
 		/// <param name="declaredType">Optional.  The type which is to be set as the <see cref="ObjectTarget.DeclaredType"/> of the created target.</param>
 		/// <param name="scopeBehaviour">Controls how the object will interact the the scope.  By default, object targets must be disposed by you.</param>
 		/// <returns>A new object target that wraps the object <paramref name="obj"/>.</returns>
+        [Obsolete("This method will be removed in 1.2 in favour of Target.ForObject<T>(T)")]
 		public static ObjectTarget AsObjectTarget<T>(this T obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
 		{
 			return new ObjectTarget(obj, declaredType ?? typeof(T), scopeBehaviour: scopeBehaviour);
@@ -35,41 +36,10 @@ namespace Rezolver
 		/// <param name="factory">The delegate to be used as a factory.</param>
 		/// <param name="declaredType">Optional type to set as the <see cref="DelegateTarget.DeclaredType"/> of the target,
 		/// if not passed, then the return type of the delegate will be used.</param>
+        [Obsolete("This method will be removed in 1.2 in favour of the Target.ForFactory static methods")]
 		public static DelegateTarget AsDelegateTarget(this Delegate factory, Type declaredType = null)
 		{
 			return new DelegateTarget(factory, declaredType);
-		}
-
-		/// <summary>
-		/// Creates a <see cref="ScopedTarget"/> from the target on which this method is invoked.
-		/// </summary>
-		/// <param name="target"></param>
-		/// <returns></returns>
-		public static ScopedTarget Scoped(this ITarget target)
-		{
-			target.MustNotBeNull(nameof(target));
-			return new ScopedTarget(target);
-		}
-
-		/// <summary>
-		/// Creates an <see cref="UnscopedTarget"/> from the target on which this method is invoked.
-		/// </summary>
-		/// <param name="target">The target.</param>
-		public static UnscopedTarget Unscoped(this ITarget target)
-		{
-			target.MustNotBeNull(nameof(target));
-			return new UnscopedTarget(target);
-		}
-
-		/// <summary>
-		/// Constructs a <see cref="SingletonTarget"/> that wraps the target on which the method is invoked.
-		/// </summary>
-		/// <param name="target"></param>
-		/// <returns></returns>
-		public static SingletonTarget Singleton(this ITarget target)
-		{
-			target.MustNotBeNull(nameof(target));
-			return new SingletonTarget(target);
 		}
 	}
 }

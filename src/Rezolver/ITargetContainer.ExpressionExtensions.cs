@@ -17,14 +17,21 @@ namespace Rezolver
     public static partial class ExpressionTargetContainerExtensions
     {
 		/// <summary>
-		/// Registers the expression.
+		/// Registers the expression in the target container
 		/// </summary>
-		/// <param name="targetContainer">The target container.</param>
-		/// <param name="expression">The expression.</param>
-		/// <param name="type">The type.</param>
-		public static void RegisterExpression(this ITargetContainer targetContainer, Expression expression, Type type)
+		/// <param name="targetContainer">The target container in which the registration will be made.</param>
+		/// <param name="expression">The expression to be registered.</param>
+		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType"/> of the target to be created,
+        /// if different from the <see cref="Expression.Type"/> of the <paramref name="expression"/> (or its 
+        /// <see cref="LambdaExpression.Body"/> if the expression is a <see cref="LambdaExpression"/>).
+        /// 
+        /// Will also override the type against which the expression will be registered if provided.</param>
+		public static void RegisterExpression(this ITargetContainer targetContainer, Expression expression, Type declaredType = null)
 		{
-			targetContainer.Register(new ExpressionTarget(expression), type);
+            if (targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
+
+			targetContainer.Register(new ExpressionTarget(expression), declaredType);
 		}
 	}
 }

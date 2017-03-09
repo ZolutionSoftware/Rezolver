@@ -1,7 +1,10 @@
 ﻿<#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
 <#+
+// a little T4 include to help generate somme of the generics that we have in this project - which require the same code but for different
+// sets of generic parameters.  It's not fantastic, but it does exactly what's needed here.
 public class GenericSpec
 {
     // the generic arguments of the overall class/method group etc
@@ -17,7 +20,13 @@ public class GenericSpec
 			if(_argsSpec == null)
 			{
 				_argsSpec = Args.Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-							   .Select((s, i) => new GenericSpecArg{ Spec = this, Name = s, Pos = i }).ToArray();
+							.Select((s, i) => {
+								int pos = i;
+								var matcher = new Regex("\\d+$");
+								var result = matcher.Match(s);
+								if(result.Success) pos = int.Parse(result.Value);
+								return new GenericSpecArg { Spec = this, Name = s, Pos = pos };
+							}).ToArray();
 			}
 			return _argsSpec;
 		}
@@ -28,10 +37,39 @@ public class GenericSpec
 		get { return ArgsSpec.Length; }
 	}
 
-	public IEnumerable<string> GetAllSignatures()
+	public IEnumerable<Signature> GetAllSignatures()
 	{
 		var signatures = Signatures ?? new[] { Args };
-		return signatures.Select(s => s ?? Args);
+		return signatures.Select(s => new Signature { Spec = this, Text = s ?? Args });
+	}
+}
+
+public class Signature
+{
+	public GenericSpec Spec { get; set; }
+	private string _text;
+	public string Text { 
+		get
+		{
+			return _text;
+		}
+		set
+		{
+			_text = value;
+			_args = (value ?? "")
+				.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+				.Select(s => s.Trim())
+				.ToArray();
+		}
+	}
+
+	private string[] _args;
+	public string[] Args
+	{
+		get
+		{
+			return _args;
+		}
 	}
 }
 
@@ -39,7 +77,28 @@ public class GenericSpecArg
 {
 	public GenericSpec Spec { get; set; }
 	public string Name { get; set; }
-	public int Pos { get; set; }
+
+	private int _pos;
+	public int Pos { 
+		get{
+			return _pos;
+		} 
+		set{
+			_pos = value;
+			if(value > 0) _nthDescriptor = string.Format("{0}{1}", value, _nthParamDescriptors[Math.Min(value - 1, 3)]);
+			else _nthDescriptor = "[unknown]";
+		} 
+	}
+
+	private static string[] _nthParamDescriptors = new[] { "st", "nd", "rd", "th" };
+
+	private string _nthDescriptor;
+	public string nthDescriptor { get { return _nthDescriptor; } }
+}
+
+public string Pluralize(int count, string singular, string plural)
+{
+	return count == 1 ? singular : plural;
 }
 
 public void ForSpecs(IEnumerable<GenericSpec> specs, Action<GenericSpec> output)
@@ -58,11 +117,11 @@ public void ForArgs(GenericSpec spec, Action<GenericSpecArg> output)
 	}
 }
 
-public void ForSpecSignatures(GenericSpec spec, Action<GenericSpec, string> output)
+public void ForSignatures(GenericSpec spec, Action<Signature> output)
 {
 	foreach(var sig in spec.GetAllSignatures())
 	{
-		output(spec, sig);
+		output(sig);
 	}
 }
 

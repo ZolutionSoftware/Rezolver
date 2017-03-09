@@ -125,13 +125,13 @@ for things like scoped singletons.</p>
                   <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">IContainer.TryResolve(ResolveContext, Object)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CreateScope">IContainer.CreateScope()</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_">IContainer.FetchCompiled(ResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/wacy2d1s(v=vs.110).aspx">IServiceProvider.GetService(Type)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">IScopeFactory.CreateScope()</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/es4s3w1d(v=vs.110).aspx">IDisposable.Dispose()</a>
@@ -141,7 +141,7 @@ for things like scoped singletons.</p>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_IScopedContainer_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public interface IScopedContainer : IContainer, IServiceProvider, IDisposable</code></pre>
+                <pre><code class="lang-csharp hljs">public interface IScopedContainer : IContainer, IServiceProvider, IScopeFactory, IDisposable</code></pre>
               </div>
               <h3 id="properties">Properties
               </h3>
@@ -154,7 +154,7 @@ for things like scoped singletons.</p>
               </span>
               <a id="Rezolver_IScopedContainer_Scope_" data-uid="Rezolver.IScopedContainer.Scope*"></a>
               <h4 id="Rezolver_IScopedContainer_Scope" data-uid="Rezolver.IScopedContainer.Scope">Scope</h4>
-              <div class="markdown level1 summary"><p>Gets the scope for this scoped container.</p>
+              <div class="markdown level1 summary"><p>Gets the root scope for this scoped container.</p>
 <p>Note that this is used automatically by the container for <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>
 operations where the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a> property is not already set.</p>
 </div>

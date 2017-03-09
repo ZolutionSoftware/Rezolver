@@ -195,7 +195,7 @@
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_CachingContainerBase_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class CachingContainerBase : ContainerBase, IContainer, IServiceProvider, ITargetContainer</code></pre>
+                <pre><code class="lang-csharp hljs">public class CachingContainerBase : ContainerBase, IContainer, IServiceProvider, IScopeFactory, ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_CachingContainerBase_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Internally, the class uses a <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd287191(v=vs.110).aspx">ConcurrentDictionary&lt;TKey, TValue&gt;</a> to store <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s keyed by the requested type.</p>
@@ -340,49 +340,34 @@ the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.h
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T, TResult&gt;(ITargetContainer, Func&lt;T, TResult&gt;, Type)</a>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;ResolveContext, TResult&gt;, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T2, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, TResult&gt;, Type)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, TResult&gt;(ITargetContainer, Func&lt;T1, T2, TResult&gt;, Type)</a>
               </div>
               <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T2, T3, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, T3, TResult&gt;, Type)</a>
+              </div>
+              <div>
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, TResult&gt;, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2___3__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, T3, T4, TResult&gt;, Type)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, TResult&gt;, Type)</a>
               </div>
               <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0___1___2___3___4__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;ResolveContext, T2, T3, T4, T5, TResult&gt;, Type)</a>
+              </div>
+              <div>
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__7_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__8_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__9_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__10_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__11_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__12_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__13_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__14_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__15_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__16_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15__System_Type_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;, Type)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Type_">ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type)</a>
@@ -394,10 +379,10 @@ the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.h
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt;, Type)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T, TResult&gt;&gt;, Type)</a>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T, TResult&gt;&gt;, Type)</a>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, TResult&gt;&gt;, Type)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__3_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, TResult&gt;&gt;, Type)</a>
@@ -419,66 +404,6 @@ the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.h
               </div>
               <div>
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__6_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__6_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__7_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__7_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__8_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__8_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__9_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__9_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___8___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__10_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__10_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___8___9___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__11_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__11_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___8___9___10___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__12_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__12_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___8___9___10___11___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__13_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__13_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___8___9___10___11___12___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__14_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__14_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___8___9___10___11___12___13___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__15_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__15_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;&gt;, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__16_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___6___7___8___9___10___11___12___13___14___15___System_Type_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;&gt;, Type)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterMultiple_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_">MultipleTargetContainerExtensions.RegisterMultiple(ITargetContainer, IEnumerable&lt;ITarget&gt;, Type)</a>
