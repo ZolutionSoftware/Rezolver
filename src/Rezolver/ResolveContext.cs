@@ -14,7 +14,7 @@ namespace Rezolver
 	/// Captures the state for a call to <see cref="IContainer.Resolve(ResolveContext)"/> 
 	/// (or <see cref="IContainer.TryResolve(ResolveContext, out object)"/>), including the container on which
 	/// the operation is invoked, any <see cref="IScopedContainer"/> that might be active for the call (if different), and the 
-	/// type which is being resolved from the <see cref="IContainer"/>.
+	/// type that is being resolved from the <see cref="IContainer"/>.
 	/// </summary>
 	public class ResolveContext : IScopeFactory
 	{
@@ -27,14 +27,14 @@ namespace Rezolver
 		/// An equality comparer for ResolveContext which treats two contexts
 		/// as equal if they are both null, or have the same <see cref="ResolveContext.RequestedType"/>.
 		/// </summary>
-		/// <seealso cref="System.Collections.Generic.IEqualityComparer{T}" />
+		/// <seealso cref="System.Collections.Generic.IComparer{T}" />
 		internal class RequestedTypeEqualityComparer : IEqualityComparer<ResolveContext>
 		{
 			/// <summary>
 			/// Determines whether the specified objects are equal.
 			/// </summary>
-			/// <param name="x">The first object of type <paramref name="T" /> to compare.</param>
-			/// <param name="y">The second object of type <paramref name="T" /> to compare.</param>
+			/// <param name="x">The first object to compare.</param>
+			/// <param name="y">The second object to compare.</param>
 			public bool Equals(ResolveContext x, ResolveContext y)
 			{
 				return x == y || x?.RequestedType == y?.RequestedType;
@@ -43,7 +43,7 @@ namespace Rezolver
 			/// <summary>
 			/// Returns a hash code for this instance.
 			/// </summary>
-			/// <param name="obj">The <see cref="T:System.Object" /> for which a hash code is to be returned.</param>
+			/// <param name="obj">The <see cref="System.Object" /> for which a hash code is to be returned.</param>
 			public int GetHashCode(ResolveContext obj)
 			{
 				return obj?.RequestedType?.GetHashCode() ?? 0;

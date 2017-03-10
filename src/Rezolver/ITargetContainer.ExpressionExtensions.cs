@@ -16,22 +16,26 @@ namespace Rezolver
 	/// </summary>
     public static partial class ExpressionTargetContainerExtensions
     {
-		/// <summary>
-		/// Registers the expression in the target container
-		/// </summary>
-		/// <param name="targetContainer">The target container in which the registration will be made.</param>
-		/// <param name="expression">The expression to be registered.</param>
-		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType"/> of the target to be created,
+        /// <summary>
+        /// Registers the expression in the target container
+        /// </summary>
+        /// <param name="targetContainer">The target container in which the registration will be made.</param>
+        /// <param name="expression">The expression to be registered.</param>
+        /// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType"/> of the target to be created,
         /// if different from the <see cref="Expression.Type"/> of the <paramref name="expression"/> (or its 
         /// <see cref="LambdaExpression.Body"/> if the expression is a <see cref="LambdaExpression"/>).
         /// 
         /// Will also override the type against which the expression will be registered if provided.</param>
-		public static void RegisterExpression(this ITargetContainer targetContainer, Expression expression, Type declaredType = null)
+        /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the compiled expression will be
+        /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
+        public static void RegisterExpression(this ITargetContainer targetContainer, Expression expression, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
 		{
             if (targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
             if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-			targetContainer.Register(new ExpressionTarget(expression), declaredType);
+            ITarget toRegister = new ExpressionTarget(expression, declaredType);
+            if (scopeBehaviour == ScopeBehaviour.Explicit) toRegister = toRegister.Scoped();
+            else if (scopeBehaviour == ScopeBehaviour.None) toRegister = toRegister.Unscoped();
+            targetContainer.Register(toRegister);
 		}
 	}
 }

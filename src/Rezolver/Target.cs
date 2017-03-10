@@ -43,5 +43,34 @@ namespace Rezolver
             target.MustNotBeNull(nameof(target));
             return new SingletonTarget(target);
         }
+
+        /// <summary>
+        /// Creates a new <see cref="ChangeTypeTarget"/> which wraps the <paramref name="target"/>,
+        /// changing its <see cref="ITarget.DeclaredType"/> to the <paramref name="targetType"/> passed.
+        /// </summary>
+        /// <param name="target">Required. The target.</param>
+        /// <param name="targetType">Required. The new type for the <paramref name="target"/>.</param>
+        public static ChangeTypeTarget ChangeTypeTo(this ITarget target, Type targetType)
+        {
+            target.MustNotBeNull(nameof(target));
+            targetType.MustNotBeNull(nameof(targetType));
+            return new ChangeTypeTarget(target, targetType);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="ChangeTypeTarget"/> which wraps the <paramref name="target"/>,
+        /// changing its <see cref="ITarget.DeclaredType"/> to <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="target">Required. The target.</param>
+        public static ChangeTypeTarget ChangeTypeTo<T>(this ITarget target)
+        {
+            target.MustNotBeNull(nameof(target));
+            return new ChangeTypeTarget(target, typeof(T));
+        }
+
+        public static ITarget ForType<T>(IMemberBindingBehaviour memberBindingBehaviour = null)
+        {
+            return ConstructorTarget.Auto<T>(memberBindingBehaviour);
+        }
     }
 }

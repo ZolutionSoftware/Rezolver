@@ -51,18 +51,18 @@ namespace Rezolver.Targets
 			}
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="DelegateTarget"/> class.
-		/// </summary>
-		/// <param name="factory">Required - the factory delegate.  Must have a return type and can take 
-		/// 0 or more parameters.</param>
-		/// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType"/> for the target;
-		/// if not provided, then it will be derived from the <paramref name="factory"/>'s return type</param>
-		/// <exception cref="ArgumentNullException">If <paramref name="factory"/> is null</exception>
-		/// <exception cref="ArgumentException">If the <paramref name="factory"/> represents a void delegate or if
-		/// <paramref name="declaredType"/> is passed but the type is not compatible with the return type of
-		/// <paramref name="factory"/>.</exception>
-		public DelegateTarget(Delegate factory, Type declaredType = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DelegateTarget" /> class.
+        /// </summary>
+        /// <param name="factory">Required - the factory delegate.  Must have a return type and can take
+        /// 0 or more parameters.</param>
+        /// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType" /> for the target;
+        /// if not provided, then it will be derived from the <paramref name="factory" />'s return type</param>
+        /// <exception cref="ArgumentException">If the <paramref name="factory" /> represents a void delegate or if
+        /// <paramref name="declaredType" /> is passed but the type is not compatible with the return type of
+        /// <paramref name="factory" />.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="factory" /> is null</exception>
+        public DelegateTarget(Delegate factory, Type declaredType = null)
 		{
 			factory.MustNotBeNull(nameof(factory));
 			FactoryMethod = factory.GetMethodInfo();

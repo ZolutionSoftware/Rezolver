@@ -64,10 +64,23 @@ namespace Rezolver.Compilation.Expressions
 				return new TargetExpression(new ObjectTarget(node.Value, node.Type));
 			}
 
-			protected override Expression VisitNew(NewExpression node)
+            private static IEnumerable<ParameterBinding> ExtractParameterBindings(NewExpression newExpr)
+            {
+                return newExpr.Constructor.GetParameters()
+                  .Zip(newExpr.Arguments, (info, expression) => new ParameterBinding(info, new ExpressionTarget(expression))).ToArray();
+            }
+
+            protected override Expression VisitNew(NewExpression node)
 			{
-				//we have to use the base's Visitor code so that argument bindings are translated correctly
-				return new TargetExpression(ConstructorTarget.FromNewExpression(node.Type, (NewExpression)base.VisitNew(node)).Unscoped());
+                //we have to use the base's Visitor code so that argument bindings are translated correctly
+                var translated = (NewExpression)base.VisitNew(node);
+                ConstructorInfo ctor = null;
+                ParameterBinding[] parameterBindings = null;
+
+                ctor = translated.Constructor;
+                parameterBindings = ExtractParameterBindings(translated).ToArray();
+
+                return new TargetExpression(new ConstructorTarget(ctor, null, parameterBindings).Unscoped());
 			}
 
 			protected override Expression VisitMemberInit(MemberInitExpression node)
