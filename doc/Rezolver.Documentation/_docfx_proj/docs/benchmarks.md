@@ -32,7 +32,7 @@ the processor ran at its maximum clock).
 
 > [!NOTE]
 > A couple of results which you'll find on the [IOCPerformance](https://github.com/DanielPalme/IOCPerformance)
-> pagr are left out of the individual results because Rezolver doesn't yet support them (specifically
+> page are left out of the individual results because Rezolver doesn't yet support them (specifically
 > Interception and Conditional services).  Implementations are planned.
 
 ## Singleton
