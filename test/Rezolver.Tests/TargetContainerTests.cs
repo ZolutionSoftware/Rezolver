@@ -53,8 +53,8 @@ namespace Rezolver.Tests
 			ITargetContainer builder = new TargetContainer();
 			var simpleType = new NoCtor();
 
-			ITarget target1 = "hello world".AsObjectTarget();
-			ITarget target2 = new NoCtor().AsObjectTarget();
+            ITarget target1 = Target.ForObject("hello world");
+            ITarget target2 = Target.ForObject(new NoCtor());
 			builder.Register(target1);
 			builder.Register(target2);
 			Assert.Same(target1, builder.Fetch(typeof(string)));
@@ -65,7 +65,7 @@ namespace Rezolver.Tests
 		public void ShouldSupportRegisteringOpenGenericAndFetchingAsClosed()
 		{
 			ITargetContainer builder = new TargetContainer();
-			var target = GenericConstructorTarget.Auto(typeof(Generic<>));
+			var target = Target.ForType(typeof(Generic<>));
 			builder.Register(target, typeof(IGeneric<>));
 			///this should be trivial
 			var fetched = builder.Fetch(typeof(IGeneric<>));
@@ -88,8 +88,8 @@ namespace Rezolver.Tests
 		public void ShouldFavourSpecialisationOfGenericInt()
 		{
 			ITargetContainer builder = new TargetContainer();
-			var notExpected = ConstructorTarget.Auto(typeof(Generic<>));
-			var expected = ConstructorTarget.Auto(typeof(AltGeneric<int>));
+			var notExpected = Target.ForType(typeof(Generic<>));
+			var expected = Target.ForType(typeof(AltGeneric<int>));
 			builder.Register(notExpected, typeof(IGeneric<>));
 			builder.Register(expected, typeof(IGeneric<int>));
 			var fetched = builder.Fetch(typeof(IGeneric<int>));
@@ -101,7 +101,7 @@ namespace Rezolver.Tests
 		public void ShouldSupportRegisteringAndRetrievingGenericWithGenericParameter()
 		{
 			ITargetContainer builder = new TargetContainer();
-			var target = GenericConstructorTarget.Auto(typeof(Generic<>));
+			var target = Target.ForType(typeof(Generic<>));
 			builder.Register(target, typeof(IGeneric<>));
 			var fetched = builder.Fetch(typeof(IGeneric<IGeneric<int>>));
 			Assert.Same(target, fetched);
@@ -112,7 +112,7 @@ namespace Rezolver.Tests
 		{
 			//can't think what else to call this scenario!
 			ITargetContainer builder = new TargetContainer();
-			var target = GenericConstructorTarget.Auto(typeof(NestedGenericA<>));
+			var target = Target.ForType(typeof(NestedGenericA<>));
 			builder.Register(target, typeof(IGeneric<>).MakeGenericType(typeof(IEnumerable<>)));
 			var fetched = builder.Fetch(typeof(IGeneric<IEnumerable<int>>));
 			Assert.Same(target, fetched);
@@ -122,11 +122,11 @@ namespace Rezolver.Tests
 		public void ShouldFavourGenericSpecialisationOfGeneric()
 		{
 			ITargetContainer builder = new TargetContainer();
-			var target = GenericConstructorTarget.Auto(typeof(Generic<>));
+			var target = Target.ForType(typeof(Generic<>));
 
 			//note here - using MakeGenericType is the only way to get a reference to a type like IFoo<IFoo<>> because
 			//supply an open generic as a type parameter to a generic is not valid.
-			var target2 = GenericConstructorTarget.Auto(typeof(NestedGenericA<>));
+			var target2 = Target.ForType(typeof(NestedGenericA<>));
 
 			builder.Register(target, typeof(IGeneric<>));
 			builder.Register(target2, typeof(IGeneric<>).MakeGenericType(typeof(IEnumerable<>)));
@@ -163,7 +163,7 @@ namespace Rezolver.Tests
 		public void ShouldSupportRegisteringMultipleTargetsOfTheSameType()
 		{
 			ITargetContainer builder = new TargetContainer();
-			builder.RegisterMultiple(new[] { ConstructorTarget.Auto<MultipleRegistration1>(), ConstructorTarget.Auto<MultipleRegistration1>() }, typeof(IMultipleRegistration));
+			builder.RegisterMultiple(new[] { Target.ForType<MultipleRegistration1>(), Target.ForType<MultipleRegistration1>() }, typeof(IMultipleRegistration));
 
 			var fetched = builder.Fetch(typeof(IEnumerable<IMultipleRegistration>));
 			Assert.NotNull(fetched);
@@ -175,7 +175,7 @@ namespace Rezolver.Tests
 		{
 			ITargetContainer targets = new TargetContainer();
 
-			targets.RegisterMultiple(new[] { ConstructorTarget.Auto<MultipleRegistration1>(), ConstructorTarget.Auto<MultipleRegistration2>() }, typeof(IMultipleRegistration));
+			targets.RegisterMultiple(new[] { Target.ForType<MultipleRegistration1>(), Target.ForType<MultipleRegistration2>() }, typeof(IMultipleRegistration));
 
 			var fetched = targets.Fetch(typeof(IEnumerable<IMultipleRegistration>));
 			Assert.NotNull(fetched);

@@ -6,10 +6,10 @@
     "summary": "Enables the use of a Rezolver container as the IOC container for Asp.Net Core applications.",
     "tags": [ "ioc", "di", "portable", "rezolver" ],
     "projectUrl": "http://rezolver.co.uk",
-    "iconUrl": "http://rezolver.co.uk/favicon-96x96.png"
+    "iconUrl": "http://rezolver.co.uk/favicon-96x96.png",
+    "licenseUrl": "https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt"
   },
   "copyright": "2014 onwards Zolution Software Ltd",
-  "licenseUrl": "https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt",
   "authors": [ "Zolution Software Ltd" ],
   "dependencies": {
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-*",

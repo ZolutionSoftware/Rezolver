@@ -131,6 +131,9 @@
                   <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SelectScope_Rezolver_ResolveContext_">TargetBase.SelectScope(ResolveContext)</a>
                 </div>
                 <div>
+                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a>
+                </div>
+                <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
                 </div>
                 <div>
@@ -172,7 +175,7 @@ therefore, some rewriting of the expression is likely to be required.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget__ctor_System_Func_Rezolver_Compilation_ICompileContext_System_Linq_Expressions_Expression__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.%23ctor(System.Func%7BRezolver.Compilation.ICompileContext%2CSystem.Linq.Expressions.Expression%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ExpressionTarget.cs/#L90">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ExpressionTarget.cs/#L79">View Source</a>
               </span>
               <a id="Rezolver_Targets_ExpressionTarget__ctor_" data-uid="Rezolver.Targets.ExpressionTarget.#ctor*"></a>
               <h4 id="Rezolver_Targets_ExpressionTarget__ctor_System_Func_Rezolver_Compilation_ICompileContext_System_Linq_Expressions_Expression__System_Type_" data-uid="Rezolver.Targets.ExpressionTarget.#ctor(System.Func{Rezolver.Compilation.ICompileContext,System.Linq.Expressions.Expression},System.Type)">ExpressionTarget(Func&lt;ICompileContext, Expression&gt;, Type)</h4>
@@ -211,19 +214,19 @@ returned by <span class="paramref">expressionFactory</span>.</p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.%23ctor(System.Linq.Expressions.Expression%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.%23ctor(System.Linq.Expressions.Expression%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ExpressionTarget.cs/#L70">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ExpressionTarget.cs/#L61">View Source</a>
               </span>
               <a id="Rezolver_Targets_ExpressionTarget__ctor_" data-uid="Rezolver.Targets.ExpressionTarget.#ctor*"></a>
-              <h4 id="Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.Targets.ExpressionTarget.#ctor(System.Linq.Expressions.Expression,System.Type,Rezolver.ScopeBehaviour)">ExpressionTarget(Expression, Type, ScopeBehaviour)</h4>
+              <h4 id="Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_" data-uid="Rezolver.Targets.ExpressionTarget.#ctor(System.Linq.Expressions.Expression,System.Type)">ExpressionTarget(Expression, Type)</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ExpressionTarget(Expression expression, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)</code></pre>
+                <pre><code class="lang-csharp hljs">public ExpressionTarget(Expression expression, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -248,17 +251,9 @@ returned by <span class="paramref">expressionFactory</span>.</p>
 an explicit type or when this target is used as a value inside another target).</p>
 </td>
                   </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
-                    <td><span class="parametername">scopeBehaviour</span></td>
-                    <td><p>Override the scoping behaviour of this expression.  The default for this
-will be <code>None</code> because if you want to interact with the Scope in an expression, then you have to 
-do it explicitly in the expression.</p>
-</td>
-                  </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_Rezolver_ScopeBehaviour__remarks">Remarks</h5>
+              <h5 id="Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p><span class="paramref">declaredType</span> will automatically be determined if not provided
     by examining the type of the <span class="paramref">expression</span>.  For lambdas, the type will
     be derived from the Type of the lambda&#39;s body.  For all other expressions, the type is
@@ -338,7 +333,7 @@ the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_Target
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget_ExpressionFactory.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.ExpressionFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ExpressionTarget.cs/#L55">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ExpressionTarget.cs/#L49">View Source</a>
               </span>
               <a id="Rezolver_Targets_ExpressionTarget_ExpressionFactory_" data-uid="Rezolver.Targets.ExpressionTarget.ExpressionFactory*"></a>
               <h4 id="Rezolver_Targets_ExpressionTarget_ExpressionFactory" data-uid="Rezolver.Targets.ExpressionTarget.ExpressionFactory">ExpressionFactory</h4>
@@ -366,40 +361,6 @@ from the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_T
                   </tr>
                 </tbody>
               </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ExpressionTarget.cs/#L46">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ExpressionTarget_ScopeBehaviour_" data-uid="Rezolver.Targets.ExpressionTarget.ScopeBehaviour*"></a>
-              <h4 id="Rezolver_Targets_ExpressionTarget_ScopeBehaviour" data-uid="Rezolver.Targets.ExpressionTarget.ScopeBehaviour">ScopeBehaviour</h4>
-              <div class="markdown level1 summary"><p>Gets the scoping behaviour for instances that will ultimately be produced by this target.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public override ScopeBehaviour ScopeBehaviour { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
-                    <td><p>The scope behaviour.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a></div>
               <h3 id="extensionmethods">Extension Methods</h3>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
@@ -409,6 +370,12 @@ from the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_T
               </div>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType_Rezolver_ITarget_System_Type_">Target.ChangeType(ITarget, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType__1_Rezolver_ITarget_">Target.ChangeType&lt;T&gt;(ITarget)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>

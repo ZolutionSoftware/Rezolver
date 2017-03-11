@@ -174,19 +174,19 @@ your application&#39;s container setup phase.</p>
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget__ctor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_Rezolver_ParameterBinding___.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.%23ctor(System.Reflection.ConstructorInfo%2CRezolver.IMemberBindingBehaviour%2CRezolver.ParameterBinding%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget__ctor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.%23ctor(System.Reflection.ConstructorInfo%2CRezolver.ParameterBinding%5B%5D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L139">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L138">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget__ctor_" data-uid="Rezolver.Targets.ConstructorTarget.#ctor*"></a>
-              <h4 id="Rezolver_Targets_ConstructorTarget__ctor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_Rezolver_ParameterBinding___" data-uid="Rezolver.Targets.ConstructorTarget.#ctor(System.Reflection.ConstructorInfo,Rezolver.IMemberBindingBehaviour,Rezolver.ParameterBinding[])">ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])</h4>
+              <h4 id="Rezolver_Targets_ConstructorTarget__ctor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Targets.ConstructorTarget.#ctor(System.Reflection.ConstructorInfo,Rezolver.ParameterBinding[],Rezolver.IMemberBindingBehaviour)">ConstructorTarget(ConstructorInfo, ParameterBinding[], IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> class bound in advance to a specific constructor.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ConstructorTarget(ConstructorInfo ctor, IMemberBindingBehaviour memberBindingBehaviour = null, ParameterBinding[] parameterBindings = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ConstructorTarget(ConstructorInfo ctor, ParameterBinding[] parameterBindings = null, IMemberBindingBehaviour memberBinding = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -206,13 +206,6 @@ will be set to the <a class="xref" href="https://msdn.microsoft.com/en-us/librar
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
-                    <td><span class="parametername">memberBindingBehaviour</span></td>
-                    <td><p>Optional.  If provided, can be used to select properties which are to be
-initialised before the new instance is returned.</p>
-</td>
-                  </tr>
-                  <tr>
                     <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
                     <td><span class="parametername">parameterBindings</span></td>
                     <td><p>Optional.  Specific bindings for the parameters of the given <span class="paramref">ctor</span>
@@ -221,24 +214,31 @@ parameters on the <span class="paramref">ctor</span>.  Any missing bindings will
 is called.</p>
 </td>
                   </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+                    <td><span class="parametername">memberBinding</span></td>
+                    <td><p>Optional.  If provided, can be used to select properties which are to be
+initialised before the new instance is returned.</p>
+</td>
+                  </tr>
                 </tbody>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.%23ctor(System.Type%2CRezolver.IMemberBindingBehaviour%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget__ctor_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.%23ctor(System.Type%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L120">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L119">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget__ctor_" data-uid="Rezolver.Targets.ConstructorTarget.#ctor*"></a>
-              <h4 id="Rezolver_Targets_ConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.Targets.ConstructorTarget.#ctor(System.Type,Rezolver.IMemberBindingBehaviour,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">ConstructorTarget(Type, IMemberBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</h4>
+              <h4 id="Rezolver_Targets_ConstructorTarget__ctor_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Targets.ConstructorTarget.#ctor(System.Type,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ConstructorTarget(Type, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Initializes a just-in-time-bound instance of the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> class which must be bound 
 to the best constructor at compile-time by calling the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ConstructorTarget(Type type, IMemberBindingBehaviour memberBindingBehaviour = null, IDictionary&lt;string, ITarget&gt; namedArgs = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ConstructorTarget(Type type, IDictionary&lt;string, ITarget&gt; namedArgs = null, IMemberBindingBehaviour memberBinding = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -257,21 +257,21 @@ to the best constructor at compile-time by calling the <a class="xref" href="Rez
 </td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
-                    <td><span class="parametername">memberBindingBehaviour</span></td>
-                    <td><p>Optional.  If provided, can be used to select properties which are to be
-initialised before the new instance is returned.</p>
-</td>
-                  </tr>
-                  <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/s4ys34ea(v=vs.110).aspx">IDictionary</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
                     <td><span class="parametername">namedArgs</span></td>
                     <td><p>Optional.  The named arguments which will be passed to, and used to find, the best-matched constructor.<br>These are taken into account when the constructor is sought - with the constructor containing the most matched parameters matched being selected.</p>
 </td>
                   </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+                    <td><span class="parametername">memberBinding</span></td>
+                    <td><p>Optional.  If provided, can be used to select properties which are to be
+initialised before the new instance is returned.</p>
+</td>
+                  </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Targets_ConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget___remarks">Remarks</h5>
+              <h5 id="Rezolver_Targets_ConstructorTarget__ctor_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>To compile this target, a <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> first calls the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method
 to discover the constructor to be executed, along with the final set of arguments to be provided to it (see <a class="xref" href="Rezolver.ConstructorBinding.html">ConstructorBinding</a>).</p>
 <p>The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the 
@@ -285,7 +285,7 @@ is false.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_Ctor.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.Ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L47">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L46">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_Ctor_" data-uid="Rezolver.Targets.ConstructorTarget.Ctor*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_Ctor" data-uid="Rezolver.Targets.ConstructorTarget.Ctor">Ctor</h4>
@@ -317,9 +317,8 @@ was created.</p>
 in advance, or they can search for a best-match constructor at the point where
 <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> is called.</p>
 <p>This property will only be set ultimately if it was passed to the 
-<a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget__ctor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_Rezolver_ParameterBinding___">ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])</a>
-constructor, possibly by a factory method like <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_WithArgs_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">WithArgs(ConstructorInfo, IDictionary&lt;String, ITarget&gt;)</a>,
-or <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_FromNewExpression_System_Type_System_Linq_Expressions_NewExpression_">FromNewExpression(Type, NewExpression)</a>, where the constructor
+<a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget__ctor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_">ConstructorTarget(ConstructorInfo, ParameterBinding[], IMemberBindingBehaviour)</a>
+constructor, possibly by a factory method like <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_WithArgs_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">WithArgs(ConstructorInfo, IDictionary&lt;String, ITarget&gt;)</a>
 is captured within the expression.</p>
 </div>
               <span class="small pull-right mobile-hide">
@@ -327,7 +326,7 @@ is captured within the expression.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L102">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L101">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_DeclaredType_" data-uid="Rezolver.Targets.ConstructorTarget.DeclaredType*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_DeclaredType" data-uid="Rezolver.Targets.ConstructorTarget.DeclaredType">DeclaredType</h4>
@@ -361,7 +360,7 @@ type whose constructor will be bound by this target.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_MemberBindingBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.MemberBindingBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L76">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L75">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_MemberBindingBehaviour_" data-uid="Rezolver.Targets.ConstructorTarget.MemberBindingBehaviour*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_MemberBindingBehaviour" data-uid="Rezolver.Targets.ConstructorTarget.MemberBindingBehaviour">MemberBindingBehaviour</h4>
@@ -392,7 +391,7 @@ type whose constructor will be bound by this target.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_NamedArgs.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.NamedArgs%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L90">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L89">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_NamedArgs_" data-uid="Rezolver.Targets.ConstructorTarget.NamedArgs*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_NamedArgs" data-uid="Rezolver.Targets.ConstructorTarget.NamedArgs">NamedArgs</h4>
@@ -430,7 +429,7 @@ property might be used when the constructor is not known in advance, whereas
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_ParameterBindings.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.ParameterBindings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L65">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L64">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_ParameterBindings_" data-uid="Rezolver.Targets.ConstructorTarget.ParameterBindings*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_ParameterBindings" data-uid="Rezolver.Targets.ConstructorTarget.ParameterBindings">ParameterBindings</h4>
@@ -470,7 +469,7 @@ parameters are to be bound with specific arguments; whereas
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.Auto(System.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L43">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L44">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_Auto_" data-uid="Rezolver.Targets.ConstructorTarget.Auto*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Targets.ConstructorTarget.Auto(System.Type,Rezolver.IMemberBindingBehaviour)">Auto(Type, IMemberBindingBehaviour)</h4>
@@ -480,7 +479,8 @@ given <span class="paramref">type</span>.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -525,7 +525,7 @@ to be bound from the container.</p>
                 </tbody>
               </table>
               <h5 id="Rezolver_Targets_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This factory is merely a shortcut for calling the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__">ConstructorTarget(Type, IMemberBindingBehaviour, IDictionary&lt;String, ITarget&gt;)</a>
+              <div class="markdown level1 remarks"><p>This factory is merely a shortcut for calling the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget__ctor_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_">ConstructorTarget(Type, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</a>
 with only the <span class="paramref">type</span> and <span class="paramref">memberBindingBehaviour</span> arguments supplied.  When creating a 
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>, the function uses the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_">GenericConstructorTarget(Type, IMemberBindingBehaviour)</a> constructor.</p>
 </div>
@@ -543,7 +543,8 @@ with only the <span class="paramref">type</span> and <span class="paramref">memb
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto&lt;T&gt;(IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget Auto&lt;T&gt;(IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -602,7 +603,7 @@ on the non-generic version of this method.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.Bind(Rezolver.Compilation.ICompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L185">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.cs/#L184">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_Bind_" data-uid="Rezolver.Targets.ConstructorTarget.Bind*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.Targets.ConstructorTarget.Bind(Rezolver.Compilation.ICompileContext)">Bind(ICompileContext)</h4>
@@ -673,164 +674,10 @@ arguments or default arguments.</p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_FromNewExpression_System_Type_System_Linq_Expressions_NewExpression_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.FromNewExpression(System.Type%2CSystem.Linq.Expressions.NewExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L241">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ConstructorTarget_FromNewExpression_" data-uid="Rezolver.Targets.ConstructorTarget.FromNewExpression*"></a>
-              <h4 id="Rezolver_Targets_ConstructorTarget_FromNewExpression_System_Type_System_Linq_Expressions_NewExpression_" data-uid="Rezolver.Targets.ConstructorTarget.FromNewExpression(System.Type,System.Linq.Expressions.NewExpression)">FromNewExpression(Type, NewExpression)</h4>
-              <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_FromNewExpression__1_System_Linq_Expressions_Expression_System_Func___0___">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;)</a>.  See the documentation
-on that method for more.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression(Type declaredType, NewExpression newExpr)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td><p>The of the object to be created by the new <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a></td>
-                    <td><span class="parametername">newExpr</span></td>
-                    <td><p>An expression from which the target can be built - parameter bindings and the specific constructor
-called in the expression will be used to seed the new target.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_FromNewExpression__1_System_Linq_Expressions_Expression_System_Func___0___.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.FromNewExpression%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L219">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ConstructorTarget_FromNewExpression_" data-uid="Rezolver.Targets.ConstructorTarget.FromNewExpression*"></a>
-              <h4 id="Rezolver_Targets_ConstructorTarget_FromNewExpression__1_System_Linq_Expressions_Expression_System_Func___0___" data-uid="Rezolver.Targets.ConstructorTarget.FromNewExpression``1(System.Linq.Expressions.Expression{System.Func{``0}})">FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt;)</h4>
-              <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> from the passed lambda expression (whose <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> must be a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a>)</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget FromNewExpression&lt;T&gt;(Expression&lt;Func&lt;T&gt;&gt; newExpr)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb335710(v=vs.110).aspx">Expression</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534960(v=vs.110).aspx">Func</a>&lt;T&gt;&gt;</td>
-                    <td><span class="parametername">newExpr</span></td>
-                    <td><p>Required.  The expression from which to create the target.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which, when compiled, will perform that same construction as provided in the given expression.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">T</span></td>
-                    <td><p>The type of the object to be created by the new <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_Targets_ConstructorTarget_FromNewExpression__1_System_Linq_Expressions_Expression_System_Func___0____remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This method does not support member binding expressions - e.g. <pre><code>c =&gt; new MyObject() { A = "hello" }</code></pre> - these can be converted into
-targets - for these you should construct an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> and let the compiler do the rest.</p>
-<p>When providing custom expressions to be used as targets in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, it is possible to explicitly define properties/arguments as
-being resolved from the container itself, in exactly the same way as generated by the other factory methods such as <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_Auto__1_Rezolver_IMemberBindingBehaviour_">Auto&lt;T&gt;(IMemberBindingBehaviour)</a>
-and <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterType&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>.  To do this, simply call the 
-<a class="xref" href="Rezolver.Functions.html#Rezolver_Functions_Resolve__1">Resolve&lt;T&gt;()</a> function on the object passed into your expression (see the signature of the lambda <span class="paramref">newExpr</span>),
-and Rezolver will convert that call into a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>.</p>
-</div>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
-                    <td><p>If <span class="paramref">newExpr</span> is null.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
-                    <td><p>If the <span class="paramref">newExpr</span> does not have a NewExpression as its root (Body) node, or if the type of
-that expression does not equal <span class="typeparamref">T</span></p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_WithArgs_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.WithArgs(System.Reflection.ConstructorInfo%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L119">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L113">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_WithArgs_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_WithArgs_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs(System.Reflection.ConstructorInfo,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">WithArgs(ConstructorInfo, IDictionary&lt;String, ITarget&gt;)</h4>
@@ -842,7 +689,8 @@ and using <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTa
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget WithArgs(ConstructorInfo ctor, IDictionary&lt;string, ITarget&gt; namedArgs)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget WithArgs(ConstructorInfo ctor, IDictionary&lt;string, ITarget&gt; namedArgs)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -898,7 +746,7 @@ be matched to parameters on the <span class="paramref">ctor</span>.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_WithArgs_System_Reflection_ConstructorInfo_System_Object_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.WithArgs(System.Reflection.ConstructorInfo%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L145">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L140">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_WithArgs_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_WithArgs_System_Reflection_ConstructorInfo_System_Object_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs(System.Reflection.ConstructorInfo,System.Object)">WithArgs(ConstructorInfo, Object)</h4>
@@ -909,7 +757,8 @@ object.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget WithArgs(ConstructorInfo ctor, object namedArgs)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget WithArgs(ConstructorInfo ctor, object namedArgs)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -965,7 +814,7 @@ be matched to parameters on the <span class="paramref">ctor</span>.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_WithArgs_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.WithArgs(System.Type%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L73">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L69">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_WithArgs_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_WithArgs_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs(System.Type,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">WithArgs(Type, IDictionary&lt;String, ITarget&gt;)</h4>
@@ -976,7 +825,8 @@ named arguments to late-bind the constructor when code-generation occurs.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget WithArgs(Type declaredType, IDictionary&lt;string, ITarget&gt; namedArgs)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget WithArgs(Type declaredType, IDictionary&lt;string, ITarget&gt; namedArgs)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1033,7 +883,7 @@ the object - and will fail only if it can&#39;t be resolved at that point.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_WithArgs_System_Type_System_Object_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.WithArgs(System.Type%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L96">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L90">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_WithArgs_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_WithArgs_System_Type_System_Object_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs(System.Type,System.Object)">WithArgs(Type, Object)</h4>
@@ -1044,7 +894,8 @@ object.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget WithArgs(Type declaredType, object namedArgs)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget WithArgs(Type declaredType, object namedArgs)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1101,7 +952,7 @@ ConstructorTarget for the type 'MyType':
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_WithArgs__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.WithArgs%60%601(System.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L168">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L164">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_WithArgs_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_WithArgs__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs``1(System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">WithArgs&lt;T&gt;(IDictionary&lt;String, ITarget&gt;)</h4>
@@ -1111,7 +962,8 @@ named arguments to late-bind the constructor when code-generation occurs.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget WithArgs&lt;T&gt;(IDictionary&lt;string, ITarget&gt; namedArgs)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget WithArgs&lt;T&gt;(IDictionary&lt;string, ITarget&gt; namedArgs)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1178,7 +1030,7 @@ the object - and will fail only if it can&#39;t be resolved at that point.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_ConstructorTarget_WithArgs__1_System_Object_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ConstructorTarget.WithArgs%60%601(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L190">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/ConstructorTarget.FactoryMethods.cs/#L187">View Source</a>
               </span>
               <a id="Rezolver_Targets_ConstructorTarget_WithArgs_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs*"></a>
               <h4 id="Rezolver_Targets_ConstructorTarget_WithArgs__1_System_Object_" data-uid="Rezolver.Targets.ConstructorTarget.WithArgs``1(System.Object)">WithArgs&lt;T&gt;(Object)</h4>
@@ -1189,7 +1041,8 @@ object.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget WithArgs&lt;T&gt;(object namedArgs)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2&quot;)]
+public static ITarget WithArgs&lt;T&gt;(object namedArgs)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1259,6 +1112,12 @@ ConstructorTarget for the type 'MyType':
               </div>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType_Rezolver_ITarget_System_Type_">Target.ChangeType(ITarget, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType__1_Rezolver_ITarget_">Target.ChangeType&lt;T&gt;(ITarget)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>

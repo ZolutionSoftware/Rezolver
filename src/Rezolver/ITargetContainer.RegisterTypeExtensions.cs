@@ -23,19 +23,19 @@ namespace Rezolver
 		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(ResolveContext)"/> is first called.
 		/// 
 		/// Optionally, property injection can be configured for the new object, depending on the <see cref="IMemberBindingBehaviour"/> 
-		/// object passed for the optional parameter <paramref name="propertyBindingBehaviour"/>.
+		/// object passed for the optional parameter <paramref name="memberBinding"/>.
 		/// </summary>
 		/// <typeparam name="TObject">The type of the object that is to be constructed when resolved.  Also doubles up as the type to be 
 		/// used for the registration itself.</typeparam>
 		/// <param name="targetContainer">The target container on which the registration is to be performed.</param>
-		/// <param name="propertyBindingBehaviour">Can be used to enable and control property injection in addition to constructor injection
+		/// <param name="memberBinding">Can be used to enable and control property injection in addition to constructor injection
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> or 
 		/// <see cref="GenericConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> static methods and then registering it.</remarks>
-		public static void RegisterType<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
+		public static void RegisterType<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
 		{
-			RegisterType(targetContainer, typeof(TObject), propertyBindingBehaviour: propertyBindingBehaviour);
+			RegisterType(targetContainer, typeof(TObject), memberBinding: memberBinding);
 		}
 
 		/// <summary>
@@ -45,22 +45,22 @@ namespace Rezolver
 		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(ResolveContext)"/> is first called.
 		/// 
 		/// Optionally, property injection can be configured for the new object, depending on the <see cref="IMemberBindingBehaviour"/> 
-		/// object passed for the optional parameter <paramref name="propertyBindingBehaviour"/>.
+		/// object passed for the optional parameter <paramref name="memberBinding"/>.
 		/// </summary>
 		/// <typeparam name="TObject">The type of the object that is to be constructed when resolved.</typeparam>
 		/// <typeparam name="TService">The type against which the registration will be performed.  <typeparamref name="TObject"/> must be
 		/// compatible with this type.</typeparam>
 		/// <param name="targetContainer">The target container on which the registration is to be performed.</param>
-		/// <param name="propertyBindingBehaviour">Can be used to enable and control property injection in addition to constructor injection
+		/// <param name="memberBinding">Can be used to enable and control property injection in addition to constructor injection
 		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto{T}(IMemberBindingBehaviour)"/> or 
 		/// <see cref="GenericConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> static methods and then registering it against
 		/// the type <typeparamref name="TService"/>.</remarks>
-		public static void RegisterType<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour propertyBindingBehaviour = null)
+		public static void RegisterType<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
 		where TObject : TService
 		{
-			RegisterType(targetContainer, typeof(TObject), serviceType: typeof(TService), propertyBindingBehaviour: propertyBindingBehaviour);
+			RegisterType(targetContainer, typeof(TObject), serviceType: typeof(TService), memberBinding: memberBinding);
 		}
 
 		/// <summary>
@@ -70,28 +70,28 @@ namespace Rezolver
 		/// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(ResolveContext)"/> is first called.
 		/// 
 		/// Optionally, property injection can be configured for the new object, depending on the <see cref="IMemberBindingBehaviour"/> 
-		/// object passed for the optional parameter <paramref name="propertyBindingBehaviour"/>.
+		/// object passed for the optional parameter <paramref name="memberBinding"/>.
 		/// </summary>
 		/// <param name="targetContainer">The target container on which the registration is to be performed.</param>
 		/// <param name="objectType">The type of the object that is to be constructed when resolved.</param>
 		/// <param name="serviceType">Optional.  The type against which the registration will be performed, if different from 
 		/// <paramref name="objectType"/>.  <paramref name="objectType"/> must be compatible with this type, if it's provided.</param>
-		/// <param name="propertyBindingBehaviour">Optional.  Can be used to enable and control property injection in addition to constructor injection
+		/// <param name="memberBinding">Optional.  Can be used to enable and control property injection in addition to constructor injection
 		/// on the instance of <paramref name="objectType"/> that is created.</param>
 		/// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
 		/// the <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> or 
 		/// <see cref="GenericConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> static methods and then registering it against
 		/// the type <paramref name="serviceType"/> or <paramref name="objectType"/>.</remarks>
-		public static void RegisterType(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour propertyBindingBehaviour = null)
+		public static void RegisterType(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			objectType.MustNotBeNull(nameof(objectType));
-			RegisterTypeInternal(targetContainer, objectType, serviceType, propertyBindingBehaviour);
+			RegisterTypeInternal(targetContainer, objectType, serviceType, memberBinding);
 		}
 
-		internal static void RegisterTypeInternal(ITargetContainer targetContainer, Type objectType, Type serviceType, IMemberBindingBehaviour propertyBindingBehaviour)
+		internal static void RegisterTypeInternal(ITargetContainer targetContainer, Type objectType, Type serviceType, IMemberBindingBehaviour memberBinding)
 		{
-			targetContainer.Register(ConstructorTarget.Auto(objectType, propertyBindingBehaviour), serviceType: serviceType);
+			targetContainer.Register(Target.ForType(objectType, memberBinding), serviceType: serviceType);
 		}
 	}
 }

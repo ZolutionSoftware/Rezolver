@@ -19,7 +19,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <summary>
 		/// Creates a new compilation context, registers the target's <see cref="DecoratorTarget.DecoratedTarget"/>
 		/// into it as the correct target for the <see cref="DecoratorTarget.DecoratedType"/>, and then builds the 
-		/// expression for the <see cref="DecoratorTarget.Target"/> (which is typically a constructor target).
+		/// expression for the <see cref="DecoratorTarget.InnerTarget"/> (which is typically a constructor target).
 		/// </summary>
 		/// <param name="target">The target whose expression is to be built.</param>
 		/// <param name="context">The compilation context.</param>
@@ -39,7 +39,7 @@ namespace Rezolver.Compilation.Expressions
 			//pattern over the common decorated type, then the decorated instance should be resolved when constructor
 			//arguments are resolved.
 			newContext.Register(target.DecoratedTarget, target.DecoratedType);
-			return compiler.Build(target.Target, newContext);
+			return compiler.Build(target.InnerTarget, newContext);
 		}
 	}
 }

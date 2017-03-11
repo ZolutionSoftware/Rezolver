@@ -80,7 +80,7 @@ namespace Rezolver.Compilation.Expressions
                 ctor = translated.Constructor;
                 parameterBindings = ExtractParameterBindings(translated).ToArray();
 
-                return new TargetExpression(new ConstructorTarget(ctor, null, parameterBindings).Unscoped());
+                return new TargetExpression(new ConstructorTarget(ctor, parameterBindings, null).Unscoped());
 			}
 
 			protected override Expression VisitMemberInit(MemberInitExpression node)

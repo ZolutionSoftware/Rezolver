@@ -11,7 +11,7 @@ namespace Rezolver.Targets
 {
 	/// <summary>
 	/// Represents the action of implementing a common <see cref="DecoratedType"/> by decorating one instance 
-	/// (produced by <see cref="DecoratedTarget"/>) with another (<see cref="Target"/>, which will create an 
+	/// (produced by <see cref="DecoratedTarget"/>) with another (<see cref="InnerTarget"/>, which will create an 
 	/// instance of <see cref="DecoratorType"/>).
 	/// 
 	/// NOTE - You shouldn't register or otherwise create instances of this target unless you absolutely 
@@ -45,10 +45,10 @@ namespace Rezolver.Targets
 		/// <remarks>The constructor currently auto-initialises this to a just-in-time-bound <see cref="ConstructorTarget"/>
 		/// targetting the <see cref="DecoratorType"/> by using the <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/>
 		/// method.</remarks>
-		public ITarget Target { get; }
+		public ITarget InnerTarget { get; }
 		/// <summary>
 		/// Gets the target whose instance will be wrapped (decorated) by the one produced by 
-		/// <see cref="Target"/>.
+		/// <see cref="InnerTarget"/>.
 		/// </summary>
 		public ITarget DecoratedTarget { get; }
 		/// <summary>
@@ -57,16 +57,16 @@ namespace Rezolver.Targets
 		/// </summary>
 		public Type DecoratedType { get; }
 
-		/// <summary>
-		/// Creates a new instance of the <see cref="DecoratorTarget"/> type, initialising the <see cref="Target"/>
-		/// to a just-in-time-bound <see cref="ConstructorTarget"/> for the <paramref name="decoratorType"/>.
-		/// </summary>
-		/// <param name="decoratorType">The type which is decorating the <paramref name="decoratedType"/></param>
-		/// <param name="decoratedTarget">The target which is being decorated</param>
-		/// <param name="decoratedType">The common type which is being decorated - e.g. <c>IService</c> when 
-		/// the <paramref name="decoratedTarget"/> is bound to the type <c>MyService : IService</c> and
-		/// the <paramref name="decoratorType"/> is set to <c>MyServiceDecorator : IService</c>.</param>
-		public DecoratorTarget(Type decoratorType, ITarget decoratedTarget, Type decoratedType)
+        /// <summary>
+        /// Creates a new instance of the <see cref="Targets.DecoratorTarget"/> type, initialising the <see cref="InnerTarget"/>
+        /// to a just-in-time-bound <see cref="ConstructorTarget"/> for the <paramref name="decoratorType"/>.
+        /// </summary>
+        /// <param name="decoratorType">The type which is decorating the <paramref name="decoratedType"/></param>
+        /// <param name="decoratedTarget">The target which is being decorated</param>
+        /// <param name="decoratedType">The common type which is being decorated - e.g. <c>IService</c> when 
+        /// the <paramref name="decoratedTarget"/> is bound to the type <c>MyService : IService</c> and
+        /// the <paramref name="decoratorType"/> is set to <c>MyServiceDecorator : IService</c>.</param>
+        public DecoratorTarget(Type decoratorType, ITarget decoratedTarget, Type decoratedType)
 		{
 			decoratorType.MustNotBeNull(nameof(decoratorType));
 			decoratedTarget.MustNotBeNull(nameof(decoratedTarget));
@@ -79,22 +79,23 @@ namespace Rezolver.Targets
 			DecoratedTarget = decoratedTarget;
 			DecoratedType = decoratedType;
 			//TODO: Allow a constructor to be supplied explicitly and potentially with parameter bindings
-			Target = ConstructorTarget.Auto(DecoratorType);
+            //TODO: Allow other targets to implement this - for example, you could have a delegate/expression do it just by injecting the decorated instance as an argument.
+			InnerTarget = Target.ForType(DecoratorType);
 
-			if (!Target.SupportsType(decoratedType))
+			if (!InnerTarget.SupportsType(decoratedType))
 				throw new ArgumentException("The decorator type is not compatible with the decorated type", nameof(decoratedType));
 
 		}
 
 		/// <summary>
-		/// Overrides <see cref="TargetBase.SupportsType(Type)"/> to forward the call to <see cref="Target"/>.
+		/// Overrides <see cref="TargetBase.SupportsType(Type)"/> to forward the call to <see cref="InnerTarget"/>.
 		/// </summary>
 		/// <param name="type">The type which is to be checked.</param>
-		/// <returns><c>true</c> if the type is compatible with the object created by <see cref="Target"/>, <c>false</c>
+		/// <returns><c>true</c> if the type is compatible with the object created by <see cref="InnerTarget"/>, <c>false</c>
 		/// if not.</returns>
 		public override bool SupportsType(Type type)
 		{
-			return Target.SupportsType(type);
+			return InnerTarget.SupportsType(type);
 		}
 	}
 }

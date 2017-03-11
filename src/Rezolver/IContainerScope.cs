@@ -62,16 +62,19 @@ namespace Rezolver
 		/// It's exposed for developers who are extending the container scoping functionality only.</remarks>
 		void ChildScopeDisposed(IContainerScope child);
 		/// <summary>
+        /// Not intended for direct use.  Use the Resolve extension methods on this interface to
+        /// perform 'normal' resolve operations.
+        /// 
 		/// Execute the given object factory within this scope.  Depending on the
 		/// scoping behaviour passed, the object will either be resolved directly from the
 		/// scope (i.e. existing objects contained within it) or obtained by executing
-		/// the factory and optionally tracking the object if it's IDisposable.
+		/// the factory and optionally tracking the object if it's <see cref="IDisposable"/>.
 		/// </summary>
 		/// <param name="context">The resolve context - please note that the container
 		/// that's present on this is the actual container that should be used to 
-		/// resolve objects</param>
+		/// resolve objects.</param>
 		/// <param name="factory">The factory to be executed</param>
-		/// <param name="behaviour"></param>
+		/// <param name="behaviour">The scope behaviour that the factory should be executed with.</param>
 		/// <returns></returns>
 		/// <remarks>This function is the primary workhorse of all scopes.  Most importantly,
 		/// the object produced from the factory DOES NOT have to come from this scope's

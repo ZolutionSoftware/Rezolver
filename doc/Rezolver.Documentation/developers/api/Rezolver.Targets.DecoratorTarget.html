@@ -109,7 +109,7 @@
               <h1 id="Rezolver_Targets_DecoratorTarget" data-uid="Rezolver.Targets.DecoratorTarget">Class DecoratorTarget
               </h1>
               <div class="markdown level0 summary"><p>Represents the action of implementing a common <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedType">DecoratedType</a> by decorating one instance 
-(produced by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedTarget">DecoratedTarget</a>) with another (<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_Target">Target</a>, which will create an 
+(produced by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedTarget">DecoratedTarget</a>) with another (<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>, which will create an 
 instance of <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratorType">DecoratorType</a>).</p>
 <p>NOTE - You shouldn&#39;t register or otherwise create instances of this target unless you absolutely 
 know what you&#39;re doing.  Rather, decorators should be registered using the extension method
@@ -174,7 +174,7 @@ to work properly (the creation of which is automatically handled by these extens
               </span>
               <a id="Rezolver_Targets_DecoratorTarget__ctor_" data-uid="Rezolver.Targets.DecoratorTarget.#ctor*"></a>
               <h4 id="Rezolver_Targets_DecoratorTarget__ctor_System_Type_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Targets.DecoratorTarget.#ctor(System.Type,Rezolver.ITarget,System.Type)">DecoratorTarget(Type, ITarget, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> type, initialising the <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_Target">Target</a>
+              <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> type, initialising the <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>
 to a just-in-time-bound <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the <span class="paramref">decoratorType</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -259,7 +259,7 @@ the <span class="paramref">decoratorType</span> is set to <code>MyServiceDecorat
               <a id="Rezolver_Targets_DecoratorTarget_DecoratedTarget_" data-uid="Rezolver.Targets.DecoratorTarget.DecoratedTarget*"></a>
               <h4 id="Rezolver_Targets_DecoratorTarget_DecoratedTarget" data-uid="Rezolver.Targets.DecoratorTarget.DecoratedTarget">DecoratedTarget</h4>
               <div class="markdown level1 summary"><p>Gets the target whose instance will be wrapped (decorated) by the one produced by 
-<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_Target">Target</a>.</p>
+<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -347,19 +347,19 @@ through decoration.</p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_DecoratorTarget_Target.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DecoratorTarget.Target%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_DecoratorTarget_InnerTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DecoratorTarget.InnerTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DecoratorTarget.cs/#L48">View Source</a>
               </span>
-              <a id="Rezolver_Targets_DecoratorTarget_Target_" data-uid="Rezolver.Targets.DecoratorTarget.Target*"></a>
-              <h4 id="Rezolver_Targets_DecoratorTarget_Target" data-uid="Rezolver.Targets.DecoratorTarget.Target">Target</h4>
+              <a id="Rezolver_Targets_DecoratorTarget_InnerTarget_" data-uid="Rezolver.Targets.DecoratorTarget.InnerTarget*"></a>
+              <h4 id="Rezolver_Targets_DecoratorTarget_InnerTarget" data-uid="Rezolver.Targets.DecoratorTarget.InnerTarget">InnerTarget</h4>
               <div class="markdown level1 summary"><p>Gets the target which will create an instance of the <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratorType">DecoratorType</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ITarget Target { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">public ITarget InnerTarget { get; }</code></pre>
               </div>
               <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -376,7 +376,7 @@ through decoration.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Targets_DecoratorTarget_Target_remarks">Remarks</h5>
+              <h5 id="Rezolver_Targets_DecoratorTarget_InnerTarget_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The constructor currently auto-initialises this to a just-in-time-bound <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>
 targetting the <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratorType">DecoratorType</a> by using the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_">Auto(Type, IMemberBindingBehaviour)</a>
 method.</p>
@@ -388,11 +388,11 @@ method.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_Targets_DecoratorTarget_SupportsType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DecoratorTarget.SupportsType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DecoratorTarget.cs/#L95">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/Targets/DecoratorTarget.cs/#L96">View Source</a>
               </span>
               <a id="Rezolver_Targets_DecoratorTarget_SupportsType_" data-uid="Rezolver.Targets.DecoratorTarget.SupportsType*"></a>
               <h4 id="Rezolver_Targets_DecoratorTarget_SupportsType_System_Type_" data-uid="Rezolver.Targets.DecoratorTarget.SupportsType(System.Type)">SupportsType(Type)</h4>
-              <div class="markdown level1 summary"><p>Overrides <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">SupportsType(Type)</a> to forward the call to <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_Target">Target</a>.</p>
+              <div class="markdown level1 summary"><p>Overrides <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">SupportsType(Type)</a> to forward the call to <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -428,7 +428,7 @@ method.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td><p><code>true</code> if the type is compatible with the object created by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_Target">Target</a>, <code>false</code>
+                    <td><p><code>true</code> if the type is compatible with the object created by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>, <code>false</code>
     if not.</p>
 </td>
                   </tr>
@@ -445,6 +445,12 @@ method.</p>
               </div>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType_Rezolver_ITarget_System_Type_">Target.ChangeType(ITarget, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType__1_Rezolver_ITarget_">Target.ChangeType&lt;T&gt;(ITarget)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>

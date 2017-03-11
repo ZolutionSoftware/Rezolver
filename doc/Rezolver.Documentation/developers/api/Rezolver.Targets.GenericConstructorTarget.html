@@ -320,7 +320,8 @@ will be constructed.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType method and will be removed in 1.2.&quot;)]
+public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -569,6 +570,12 @@ flag.  As a result, this method will return true if an open generic base or inte
               </div>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType_Rezolver_ITarget_System_Type_">Target.ChangeType(ITarget, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType__1_Rezolver_ITarget_">Target.ChangeType&lt;T&gt;(ITarget)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>

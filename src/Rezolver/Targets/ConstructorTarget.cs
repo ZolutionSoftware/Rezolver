@@ -40,9 +40,8 @@ namespace Rezolver.Targets
 		/// <see cref="Bind(ICompileContext)"/> is called.
 		/// 
 		/// This property will only be set ultimately if it was passed to the 
-		/// <see cref="ConstructorTarget.ConstructorTarget(ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[])"/>
-		/// constructor, possibly by a factory method like <see cref="ConstructorTarget.WithArgs(ConstructorInfo, IDictionary{string, ITarget})"/>,
-		/// or <see cref="ConstructorTarget.FromNewExpression(Type, NewExpression)"/>, where the constructor
+		/// <see cref="ConstructorTarget.ConstructorTarget(ConstructorInfo, ParameterBinding[], IMemberBindingBehaviour)"/>
+		/// constructor, possibly by a factory method like <see cref="ConstructorTarget.WithArgs(ConstructorInfo, IDictionary{string, ITarget})"/>
 		/// is captured within the expression.</remarks>
 		public ConstructorInfo Ctor
 		{
@@ -106,10 +105,10 @@ namespace Rezolver.Targets
 		/// to the best constructor at compile-time by calling the <see cref="Bind(ICompileContext)"/> method.
 		/// </summary>
 		/// <param name="type">Required.  The type whose constructor is to bound.</param>
-		/// <param name="memberBindingBehaviour">Optional.  If provided, can be used to select properties which are to be
-		/// initialised before the new instance is returned.</param>
 		/// <param name="namedArgs">Optional.  The named arguments which will be passed to, and used to find, the best-matched constructor.  
 		/// These are taken into account when the constructor is sought - with the constructor containing the most matched parameters matched being selected.</param>
+		/// <param name="memberBinding">Optional.  If provided, can be used to select properties which are to be
+		/// initialised before the new instance is returned.</param>
 		/// <remarks>To compile this target, a <see cref="Compilation.ITargetCompiler"/> first calls the <see cref="Bind(ICompileContext)"/> method
 		/// to discover the constructor to be executed, along with the final set of arguments to be provided to it (see <see cref="ConstructorBinding"/>).
 		/// 
@@ -117,8 +116,8 @@ namespace Rezolver.Targets
 		/// <see cref="ICompileContext" /> at compile-time to the fewest number of <see cref="ITarget" /> objects whose <see cref="ITarget.UseFallback" />
 		/// is false.
 		/// </remarks>
-		public ConstructorTarget(Type type, IMemberBindingBehaviour memberBindingBehaviour = null, IDictionary<string, ITarget> namedArgs = null)
-			: this(type, null, memberBindingBehaviour, null, namedArgs)
+		public ConstructorTarget(Type type, IDictionary<string, ITarget> namedArgs = null, IMemberBindingBehaviour memberBinding = null)
+            : this(type, null, memberBinding, null, namedArgs)
 		{
 			//it's a post-check, but the private constructor sidesteps null types and ctors to allow the
 			//public constructors to do their thing.
@@ -130,14 +129,14 @@ namespace Rezolver.Targets
 		/// </summary>
 		/// <param name="ctor">Required - the constructor that is to be bound.  The <see cref="DeclaredType"/> of the new instance
 		/// will be set to the <see cref="MemberInfo.DeclaringType"/> of this object.</param>
-		/// <param name="memberBindingBehaviour">Optional.  If provided, can be used to select properties which are to be
-		/// initialised before the new instance is returned.</param>
 		/// <param name="parameterBindings">Optional.  Specific bindings for the parameters of the given <paramref name="ctor"/>
 		/// which should be used during code generation.  Note that this array can contain fewer or more entries than there are
 		/// parameters on the <paramref name="ctor"/>.  Any missing bindings will be automatically generated when <see cref="Bind(ICompileContext)"/>
 		/// is called.</param>
-		public ConstructorTarget(ConstructorInfo ctor, IMemberBindingBehaviour memberBindingBehaviour = null, ParameterBinding[] parameterBindings = null)
-			: this(null, ctor, memberBindingBehaviour, parameterBindings, null)
+		/// <param name="memberBinding">Optional.  If provided, can be used to select properties which are to be
+		/// initialised before the new instance is returned.</param>
+		public ConstructorTarget(ConstructorInfo ctor, ParameterBinding[] parameterBindings = null, IMemberBindingBehaviour memberBinding = null)
+            : this(null, ctor, memberBinding, parameterBindings, null)
 		{
 			ctor.MustNotBeNull(nameof(ctor));
 		}
@@ -151,23 +150,23 @@ namespace Rezolver.Targets
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <param name="ctor">The ctor.</param>
-		/// <param name="memberBindingBehaviour">The property binding behaviour.</param>
+		/// <param name="memberBinding">The property binding behaviour.</param>
 		/// <param name="parameterBindings">The parameter bindings.</param>
 		/// <param name="suppliedArgs">The supplied arguments.</param>
 		private ConstructorTarget(Type type,
 			ConstructorInfo ctor,
-			IMemberBindingBehaviour memberBindingBehaviour,
+			IMemberBindingBehaviour memberBinding,
 			ParameterBinding[] parameterBindings,
 			IDictionary<string, ITarget> suppliedArgs)
 		{
 			_ctor = ctor;
-			DeclaredType = type ?? (ctor != null ? ctor.DeclaringType : null);
+			DeclaredType = type ?? ctor?.DeclaringType;
 			if (type != null)
 			{
 				type.MustNot(t => TypeHelpers.IsInterface(t) || TypeHelpers.IsAbstract(t), "Type must not be an interface or an abstract class", nameof(type));
 			}
 			_parameterBindings = parameterBindings ?? ParameterBinding.None;
-			MemberBindingBehaviour = memberBindingBehaviour;
+			MemberBindingBehaviour = memberBinding;
 			_namedArgs = suppliedArgs ?? new Dictionary<string, ITarget>();
 		}
 
@@ -272,7 +271,7 @@ namespace Rezolver.Targets
 			{
 				//just need to generate the bound parameters - nice and easy
 				//because the constructor was provided up-front, we don't check whether the target can be resolved
-				boundArgs = ParameterBinding.BindMethod(ctor, _parameterBindings);// ParameterBinding.BindWithRezolvedArguments(ctor);
+				boundArgs = ParameterBinding.BindMethod(ctor, _parameterBindings);
 			}
 			else
 				boundArgs = _parameterBindings;

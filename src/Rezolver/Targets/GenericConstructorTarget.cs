@@ -295,7 +295,7 @@ namespace Rezolver.Targets
 			if (!mapTypeResult.Success || !mapTypeResult.IsFullyBound)
 				throw new ArgumentException(mapTypeResult.BindErrorMessage, nameof(context));
 			//construct the constructortarget
-			return ConstructorTarget.Auto(mapTypeResult.Type, MemberBindingBehaviour);
+			return Target.ForType(mapTypeResult.Type, MemberBindingBehaviour);
 		}
 
 		private Type[] MapGenericParameters(Type requestedType)
@@ -429,6 +429,7 @@ namespace Rezolver.Targets
 		/// when the passed type is either not an open generic type
 		/// or is an abstract class or interface.
 		/// </exception>
+        [Obsolete("This method has been replaced by the Target.ForType method and will be removed in 1.2.")]
 		public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)
 		{ 
 			return new GenericConstructorTarget(type);

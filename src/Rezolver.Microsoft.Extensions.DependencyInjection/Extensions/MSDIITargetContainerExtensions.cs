@@ -40,14 +40,8 @@ namespace Rezolver
 			//three main types of service registration - delegate factory, 
 			if (service.ImplementationType != null)
 			{
-				if (service.ImplementationType.GetTypeInfo().IsGenericTypeDefinition)
-				{
-					target = GenericConstructorTarget.Auto(service.ImplementationType);
-				}
-				else
-				{
-					target = ConstructorTarget.Auto(service.ImplementationType);
-				}
+                //this factory function checks for Generic Types and uses GenericConstructorTarget accordingly.
+				target = Target.ForType(service.ImplementationType);
 			}
 			else if (service.ImplementationInstance != null)
 			{

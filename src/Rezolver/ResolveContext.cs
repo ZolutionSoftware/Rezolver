@@ -16,13 +16,16 @@ namespace Rezolver
 	/// the operation is invoked, any <see cref="IScopedContainer"/> that might be active for the call (if different), and the 
 	/// type that is being resolved from the <see cref="IContainer"/>.
 	/// </summary>
+    /// <remarks>The context implements <see cref="IScopeFactory"/> because the a new child scope might be created
+    /// either from the <see cref="Scope"/> or the <see cref="Container"/>, in that order.  So, rather than </remarks>
 	public class ResolveContext : IScopeFactory
 	{
-		/// <summary>
-		/// Gets a comparer for <see cref="ResolveContext"/> which treats two contexts as being equal
-		/// if they're both the same reference (including null) or, if both have the same <see cref="RequestedType"/>
-		/// </summary>
-		public static IEqualityComparer<ResolveContext> RequestedTypeComparer { get; } = new RequestedTypeEqualityComparer();
+        #region equality comparer (used for some of the caches)
+        /// <summary>
+        /// Gets a comparer for <see cref="ResolveContext"/> which treats two contexts as being equal
+        /// if they're both the same reference (including null) or, if both have the same <see cref="RequestedType"/>
+        /// </summary>
+        public static IEqualityComparer<ResolveContext> RequestedTypeComparer { get; } = new RequestedTypeEqualityComparer();
 		/// <summary>
 		/// An equality comparer for ResolveContext which treats two contexts
 		/// as equal if they are both null, or have the same <see cref="ResolveContext.RequestedType"/>.
@@ -49,11 +52,13 @@ namespace Rezolver
 				return obj?.RequestedType?.GetHashCode() ?? 0;
 			}
 		}
-		/// <summary>
-		/// Gets the type being requested from the container
-		/// </summary>
-		/// <value>The type of the requested.</value>
-		public Type RequestedType { get; private set; }
+        #endregion
+
+        /// <summary>
+        /// Gets the type being requested from the container
+        /// </summary>
+        /// <value>The type of the requested.</value>
+        public Type RequestedType { get; private set; }
 
 		/// <summary>
 		/// The container for this context.
@@ -207,7 +212,9 @@ namespace Rezolver
 		/// <summary>
 		/// Creates a new scope either through the <see cref="Scope"/> or, if that's null, then the <see cref="Container"/>.
 		/// </summary>
-		IContainerScope IScopeFactory.CreateScope()
+        /// <remarks>This interface implementation is present for when an object wants to be able to inject a scope factory
+        /// in order to create child scopes which are correctly parented either to another active scope or the container.</remarks>
+		public IContainerScope CreateScope()
 		{
 			return (((IScopeFactory)Scope) ?? Container).CreateScope();
 		}

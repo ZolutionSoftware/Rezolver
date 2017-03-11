@@ -31,7 +31,7 @@ namespace Rezolver
 		public static void RegisterObject<T>(this ITargetContainer targetContainer, T obj, Type serviceType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
-			targetContainer.Register(obj.AsObjectTarget(serviceType, scopeBehaviour: scopeBehaviour), serviceType);
+			targetContainer.Register(new ObjectTarget(obj, scopeBehaviour: scopeBehaviour), serviceType);
 		}
 	}
 }

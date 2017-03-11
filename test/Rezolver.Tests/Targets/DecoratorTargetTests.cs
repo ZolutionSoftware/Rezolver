@@ -48,7 +48,7 @@ namespace Rezolver.Tests.Targets
 			Assert.Same(decoratorType, result.DecoratorType);
 			Assert.Same(target, result.DecoratedTarget);
 			Assert.Same(decoratedType, result.DecoratedType);
-			Assert.NotNull(result.Target);
+			Assert.NotNull(result.InnerTarget);
 			Assert.Equal(decoratorType, result.DeclaredType);
 		}
 	}

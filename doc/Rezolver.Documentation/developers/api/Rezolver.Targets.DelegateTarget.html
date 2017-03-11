@@ -197,7 +197,7 @@ method call for which this target is being compiled and/or executed.</p>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
                     <td><span class="parametername">factory</span></td>
-                    <td><p>Required - the factory delegate.  Must have a return type and can take 
+                    <td><p>Required - the factory delegate.  Must have a return type and can take
 0 or more parameters.</p>
 </td>
                   </tr>
@@ -220,15 +220,15 @@ if not provided, then it will be derived from the <span class="paramref">factory
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
-                    <td><p>If <span class="paramref">factory</span> is null</p>
-</td>
-                  </tr>
-                  <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
                     <td><p>If the <span class="paramref">factory</span> represents a void delegate or if
 <span class="paramref">declaredType</span> is passed but the type is not compatible with the return type of
 <span class="paramref">factory</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
+                    <td><p>If <span class="paramref">factory</span> is null</p>
 </td>
                   </tr>
                 </tbody>
@@ -348,6 +348,12 @@ the delegate, you might as well use this.</p>
               </div>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType_Rezolver_ITarget_System_Type_">Target.ChangeType(ITarget, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ChangeType__1_Rezolver_ITarget_">Target.ChangeType&lt;T&gt;(ITarget)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>

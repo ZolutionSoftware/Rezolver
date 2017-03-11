@@ -111,8 +111,8 @@ namespace Rezolver.Tests.Logging
 		[Fact]
 		public void Foo()
 		{
-			var target = ConstructorTarget.Auto(typeof(NoDefaultConstructor2));
-			var target2 = ConstructorTarget.WithArgs<NoDefaultConstructor2>(new { value = (1).AsObjectTarget() });
+			var target = Target.ForType(typeof(NoDefaultConstructor2));
+			var target2 = Target.ForType<NoDefaultConstructor2>(new { value = Target.ForObject(1) });
 			var str = ObjectFormatterCollection.Default.Format(target);
 			var str2 = ObjectFormatterCollection.Default.Format(target2);
 			var logger = new Xunit.ConsoleRunnerLogger(true);

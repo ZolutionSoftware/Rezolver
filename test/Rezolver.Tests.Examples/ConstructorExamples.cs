@@ -217,8 +217,8 @@ namespace Rezolver.Tests.Examples
 			//under best-match, the container would select the greedy constructor,
 			//but we're going to force it to use the default constructor
 			container.Register(new ConstructorTarget(
-				typeof(AcceptsOptionalIMyService).GetConstructor(Type.EmptyTypes)
-			));
+                typeof(AcceptsOptionalIMyService).GetConstructor(Type.EmptyTypes)
+            ));
 
 			var result = container.Resolve<AcceptsOptionalIMyService>();
 
