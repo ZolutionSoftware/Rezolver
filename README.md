@@ -21,6 +21,12 @@ More information, including API reference and developer how-tos, is available al
 > Work on the documentation is going on all the time, and content will be pushed as and when it's good 
 > enough (hopefully every day or two).
 
+## Benchmarks
+
+[Check out some benchmarks results for Rezolver](doc/Rezolver.Documentation/_docfx_proj/docs/benchmarks.md).
+It finishes around top 10 in almost everything that's tested - and the speed will only improve
+over time. 
+
 ## Features
 
 - Constructor injection
