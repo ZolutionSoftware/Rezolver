@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='default' Clean='cleanDocFXOutput' />
+/// <binding BeforeBuild='default' AfterBuild='sitemap' Clean='cleanDocFXOutput' />
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.
 var path = require('path');
 var gulp = require('gulp');
@@ -13,6 +13,8 @@ var lec = require('gulp-line-ending-corrector');
 var LessAutoprefix = require('less-plugin-autoprefix');
 
 var autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
+
+var sitemap = require('gulp-sitemap');
 
 //copied only
 var bootstrap = {
@@ -44,21 +46,37 @@ var rezolverDocFXMain = {
 //bundling and minification of the docfx custom template theme - the
 //files which replace the default docfx.vendor.* files.
 var vendor = {
-  css: ['styles/site.css' //built from site.less in less task after copy
-                          //includes: custom bootstrap, 
-                          //custom highlightjs theme and font-awesome
-  ],
-  js: ['bower_components/jquery/dist/jquery.min.js',
-       'bower_components/bootstrap/dist/js/bootstrap.min.js',
-       'bower_components/highlightjs/highlight.pack.min.js',
-       'bower_components/lunr.js/lunr.min.js',
-       'bower_components/js-url/url.min.js',
-       'bower_components/twbs-pagination/jquery.twbsPagination.min.js',
-       "bower_components/mark.js/dist/jquery.mark.min.js",
-       "bower_components/anchor-js/anchor.min.js"
-  ],
-  dest: ['docfx.vendor.*']
-}
+    css: ['styles/site.css' //built from site.less in less task after copy
+                            //includes: custom bootstrap, 
+                            //custom highlightjs theme and font-awesome
+    ],
+    js: ['bower_components/jquery/dist/jquery.min.js',
+         'bower_components/bootstrap/dist/js/bootstrap.min.js',
+         'bower_components/highlightjs/highlight.pack.min.js',
+         'bower_components/lunr.js/lunr.min.js',
+         'bower_components/js-url/url.min.js',
+         'bower_components/twbs-pagination/jquery.twbsPagination.min.js',
+         "bower_components/mark.js/dist/jquery.mark.min.js",
+         "bower_components/anchor-js/anchor.min.js"
+    ],
+    dest: ['docfx.vendor.*']
+};
+
+var devSitemap = {
+    src: ['./developers/**/*.html'],
+    dest: './developers',
+    siteUrl: 'http://rezolver.co.uk'
+};
+
+gulp.task('sitemap', function () {
+    return gulp.src(devSitemap.src, {
+        read: false
+    })
+    .pipe(sitemap({
+        siteUrl: devSitemap.siteUrl
+    }))
+    .pipe(gulp.dest(devSitemap.dest));
+});
 
 //destroys all the output files produced by the docfx processing - this is to ensure that
 //APIs and pages which are no longer being produced are no longer present in the content.

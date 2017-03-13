@@ -1,5 +1,8 @@
 - name: Introduction
   href: index.md
+- name: Nuget Packages
+  href: nuget-packages/toc.yml
+  homepage: nuget-packages/index.md
 - name: Create & Use a Container
   href: create-and-use-a-container.md
 - name: Service Registration
@@ -15,10 +18,9 @@
   href: expressions.md
 - name: Decorators
   href: decorators.md
+- name: Benchmarks
+  href: benchmarks.md
 #- name: Object lifetimes
 #  href: object-lifetimes.md
 #- name: Lifetimes in Rezolver
 #  href: lifetimes-in-rezolver.md
-- name: Nuget Packages
-  href: nuget-packages/toc.yml
-  homepage: nuget-packages/index.md

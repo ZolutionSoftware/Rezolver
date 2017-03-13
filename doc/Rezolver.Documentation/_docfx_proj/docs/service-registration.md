@@ -93,6 +93,7 @@ ITarget.DeclaredType | Can be registered as | With Targets
 `int` | `IFormattable` | Any
 `string` | `IEnumerable<char>` | Any
 `MyService : IService` | `IService` | Any
+`MyService<int> : IService<int>` | `IService<int>` | Any
 `MyService<T>` | `MyService<T>` | @Rezolver.Targets.GenericConstructorTarget
 `MyService<T>` | `MyService<string>` | @Rezolver.Targets.GenericConstructorTarget
 `MyService<T> : IService<OtherService, T>` | `IService<OtherService, int>` | @Rezolver.Targets.GenericConstructorTarget
@@ -107,27 +108,35 @@ As illustrated by earlier examples, you can interrogate the registrations in an 
 These same methods are used by the standard container classes when determining how to resolve an instance (or instances) for
 a given type.
 
+> [!NOTE]
+> There is currently no way to remove a registration from a @Rezolver.ITargetContainer.
+
 # Target types
 
 The different ways in which Rezolver can create/obtain objects for your application, then, are pretty much all handled 
-through the @Rezolver.ITarget interface, and the different implementations that we have for that.
+through the @Rezolver.ITarget interface, and the different implementations that are available.
 
-Whether you want to use [constructor injection](constructor-injection/index.md), an [object you've built yourself](objects.md), an 
-[expression tree](expressions.md) or a [factory delegate](delegates.md), or something else, there's lots of ways to get 
-Rezolver to build the services you want to use in your application.
+Whether you want to use [constructor injection](constructor-injection/index.md) (via <xref:Rezolver.Targets.ConstructorTarget> or 
+<xref:Rezolver.Targets.GenericConstructorTarget>), 
+an [object you've built yourself](objects.md) (via <xref:Rezolver.Targets.ObjectTarget>), an 
+[expression tree](expressions.md) (via <xref:Rezolver.Targets.ExpressionTarget>) or a [factory delegate](delegates.md) 
+(via <xref:Rezolver.Targets.DelegateTarget>), or something else, there's lots of ways to get Rezolver to build the services 
+you want to use in your application.
 
-Use the table of contents to the left (or above if on a small screen) to select the type of registration you want to
-learn more about.
+All the targets used by default in Rezolver to create objects can be found in the @Rezolver.Targets namespace.  In addition to their
+constructors, the @Rezolver.Target static class also contains numerous factory methods for building these targets in isolation, using
+an API which is similar to the registration API.  For example: @Rezolver.Target.ForType* is a shortcut for building the 
+@Rezolver.Targets.ConstructorTarget, which binds a type for constructor injection.
 
-All the targets used by default in Rezolver to create objects can be found in the @Rezolver.Targets namespace.  The @Rezolver.Target
-static class also contains numerous factory methods for building these targets in isolation.  For example: @Rezolver.Target.ForType*, which
-can generate a target that binds a type for constructor injection.
+In the table of contents to the left (or above if on a small screen) you'll also find high-level walkthroughs, including examples, 
+on the most important targets you need to know about.
 
 ## Implementing targets
 
 You can also implement @Rezolver.ITarget yourself if you're feeling adventurous - but you must provide a way for the
 container to compile your target into an @Rezolver.ICompiledTarget that can be used at resolve-time.  Documentation 
-on how to do this will be added to this guide in the future.
+on how to do this will be added to this guide in the future, but if you're curious now, then the types in the 
+@Rezolver.Compilation.Expressions namespace will provide a few ideas.
 
 ## Short-circuited targets
 

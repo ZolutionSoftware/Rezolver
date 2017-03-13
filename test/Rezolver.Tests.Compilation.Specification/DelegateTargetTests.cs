@@ -184,7 +184,43 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.True(result.Third.Disposed);
         }
 
-        //TODO: do the requiresscopeanddisposable 
+        [Fact]
+        public void DelegateTarget_ShouldUseChildScopesCreatedByInjectedFactory()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterType<Disposable>();
+            targets.RegisterType<Disposable2>();
+            targets.RegisterType<Disposable3>();
+            targets.RegisterDelegate(rc =>
+            {
+                var scope = rc.CreateScope();
+                //this object belongs to the current scope,
+                //but its child object belongs to the new scope we just created via the ResolveContext
+                return new RequiresScopeAndDisposable3(scope, scope.Resolve<Disposable3>());
+            });
+            targets.RegisterDelegate(rc =>
+            {
+                var scope = rc.CreateScope();
+                return new RequiresScopeAndDisposable2(scope, scope.Resolve<Disposable2>(), scope.Resolve<RequiresScopeAndDisposable3>());
+            });
+            targets.RegisterDelegate(rc =>
+            {
+                var scope = rc.CreateScope();
+                return new RequiresScopeAndDisposable(scope, scope.Resolve<Disposable>(), scope.Resolve<RequiresScopeAndDisposable2>());
+            });
+            RequiresScopeAndDisposable result = null;
+            using (var container = CreateScopedContainer(targets))
+            {
+                result = container.Resolve<RequiresScopeAndDisposable>();
+            }
+            //All disposables should be disposed and all the scopes should fail with ObjectDisposedException
+            Assert.True(result.Disposable.Disposed);
+            Assert.Throws<ObjectDisposedException>(() => result.Scope.Resolve<RequiresScopeAndDisposable>());
+            Assert.True(result.Next.Disposable.Disposed);
+            Assert.Throws<ObjectDisposedException>(() => result.Next.Scope.Resolve<RequiresScopeAndDisposable>());
+            Assert.True(result.Next.Next.Disposable.Disposed);
+            Assert.Throws<ObjectDisposedException>(() => result.Next.Next.Scope.Resolve<RequiresScopeAndDisposable>());
+        }
 
 	}
 }

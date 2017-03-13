@@ -23,9 +23,16 @@ namespace Rezolver.Compilation.Expressions
 	/// </summary>
 	public class ExpressionTargetBuilder : ExpressionBuilderBase<ExpressionTarget>
 	{
+        internal static readonly MethodInfo[] ExpressionFunctionsMethods =
+        {
+            MethodCallExtractor.ExtractCalledMethod(() => ExpressionFunctions.Resolve<int>()).GetGenericMethodDefinition(),
+            //MethodCallExtractor.ExtractCalledMethod(() => ExpressionFunctions.Resolve(typeof(int)))
+        };
+
 		internal static readonly MethodInfo[] RezolveMethods =
 		{
-			MethodCallExtractor.ExtractCalledMethod(() => Functions.Resolve<int>()).GetGenericMethodDefinition()
+            MethodCallExtractor.ExtractCalledMethod((ResolveContext rc) => rc.Resolve<int>()).GetGenericMethodDefinition(),
+            MethodCallExtractor.ExtractCalledMethod((ResolveContext rc) => rc.Resolve(typeof(int)))
 		};
 
 		/// <summary>
@@ -51,10 +58,18 @@ namespace Rezolver.Compilation.Expressions
 				if (methodExpr == null || !methodExpr.Method.IsGenericMethod)
 					return null;
 
-				var match = RezolveMethods.SingleOrDefault(m => m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
+				var match = RezolveMethods.SingleOrDefault(m => m.IsGenericMethodDefinition && m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
 
-				if (match == null)
-					return null;
+                if (match == null)
+                {
+                    //move to the non-generic method versions
+                    match = RezolveMethods.SingleOrDefault(m => !m.IsGenericMethodDefinition && m.Equals(methodExpr.Method));
+                    if (match != null) //only constant types references can be handled (no casts whatsoever)
+                    {
+                        var typeArgs = methodExpr.Arguments.OfType<ConstantExpression>().FirstOrDefault(arg => arg.Type == typeof(Type) && arg is ConstantExpression);
+
+                    }
+                }
 
 				return methodExpr.Method.GetGenericArguments()[0];
 			}

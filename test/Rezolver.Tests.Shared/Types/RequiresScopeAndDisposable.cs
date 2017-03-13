@@ -19,6 +19,7 @@ namespace Rezolver.Tests.Types
 
         public void Dispose()
         {
+            //only cascade disposal of the object - the scope should be disposed by its parent scope
             Disposable.Dispose();
         }
     }

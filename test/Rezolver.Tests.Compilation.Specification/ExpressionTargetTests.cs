@@ -78,14 +78,43 @@ namespace Rezolver.Tests.Compilation.Specification
 			//When you want to explicitly resolve something in an expression, but don't want to or can't 
 			//use a lambda argument, you can also use the Function.Resolve helper method.  It does nothing
 			//at run time (except throw an exception) but it instructs the target adapter to replace that
-			//call with a ResolvedTarget
+			//call with a ResolvedTarget, which is more efficient and flexible than simply emitting a 
+            //runtime call to the container's Resolve method.
 			var targets = CreateTargetContainer();
 			targets.RegisterType<ServiceWithFunctions>();
-			targets.RegisterExpression(() => Functions.Resolve<ServiceWithFunctions>().GetChild(5));
+			targets.RegisterExpression(() => ExpressionFunctions.Resolve<ServiceWithFunctions>().GetChild(5));
 
 			var container = CreateContainer(targets);
 
 			Assert.Equal(new ServiceWithFunctions().GetChild(5).Output, container.Resolve<ServiceChild>().Output);
 		}
+
+        [Fact]
+        public void ExpressionTarget_ShouldResolveViaGenericResolveContextAndReturnAMethodCall()
+        {
+            //same as above, just invoking the ResolveContext's Resolve{T} method directly (which should be rewritten
+            //as a ResolvedTarget also
+            var targets = CreateTargetContainer();
+            targets.RegisterType<ServiceWithFunctions>();
+            targets.RegisterExpression(rc => rc.Resolve<ServiceWithFunctions>().GetChild(6));
+
+            var container = CreateContainer(targets);
+
+            Assert.Equal(new ServiceWithFunctions().GetChild(6).Output, container.Resolve<ServiceChild>().Output);
+        }
+
+        [Fact]
+        public void ExpressionTarget_ShouldResolveViaResolveContextAndReturnAMethodCall()
+        {
+            //same as above, just invoking the ResolveContext's Resolve{T} method directly (which should be rewritten
+            //as a ResolvedTarget also
+            var targets = CreateTargetContainer();
+            targets.RegisterType<ServiceWithFunctions>();
+            targets.RegisterExpression(rc => ((ServiceWithFunctions)rc.Resolve(typeof(ServiceWithFunctions))).GetChild(7));
+
+            var container = CreateContainer(targets);
+
+            Assert.Equal(new ServiceWithFunctions().GetChild(7).Output, container.Resolve<ServiceChild>().Output);
+        }
 	}
 }

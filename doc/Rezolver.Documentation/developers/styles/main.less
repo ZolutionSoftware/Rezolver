@@ -10,20 +10,7 @@ a #logo {
 	border-bottom: none;
 }
 
-@subnav-grad-start: @alt-color-darker;
-@subnav-grad-highlight: #fff;
-@subnav-grad-end: lighten(@alt-color-lighter, 10%);
 @subnav-border: darken(@gray-lighter, 10%);
-
-.navbar-default.subnav.old {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0b2466+0,ffffff+18,e9effd+100 */
-	background: @subnav-grad-end; /* Old browsers */
-	background: -moz-linear-gradient(top, @subnav-grad-start 0%, @subnav-grad-highlight 23%, @subnav-grad-end 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, @subnav-grad-start 0%,@subnav-grad-highlight 23%,@subnav-grad-end 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, @subnav-grad-start 0%,@subnav-grad-highlight 23%,@subnav-grad-end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b2466', endColorstr='#e9effd',GradientType=0 ); /* IE6-9 */
-	border-bottom-color: @subnav-border;
-}
 
 .navbar-default.subnav{
     background:white;
@@ -41,13 +28,17 @@ a #logo {
 }
 
 .sidefilter, .sidetoc {
-	background: @subnav-grad-end;
 	border-left-color: @subnav-border;
 	border-right-color: @subnav-border;
 }
 
+.toc-filter{
+    /* search box in the toc */
+    border: solid 1px @subnav-border;
+}
+
 body .toc, .sidenav, .sidefilter, .sidetoc, .fixed-header {
-	background: white;//@subnav-grad-end;
+	background: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -99,11 +90,6 @@ pre{
 
 	margin-top:2em;
 	display:inline-block;
-
-		/**:first-child {
-			display:inline-block;
-			margin-top:2em;
-		}*/
 }
 
 @media only screen and (max-width: @screen-sm) {
