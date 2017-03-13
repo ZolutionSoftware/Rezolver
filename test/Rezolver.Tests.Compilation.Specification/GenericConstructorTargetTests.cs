@@ -13,7 +13,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void GenericCtorTarget_NoCtor()
 		{
-			ITarget t = GenericConstructorTarget.Auto(typeof(Generic<>));
+			ITarget t = Target.ForType(typeof(Generic<>));
 			var targets = CreateTargetContainer();
 			targets.Register(t);
 			var container = CreateContainer(targets);
@@ -27,7 +27,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void GenericCtorTarget_OneCtor()
 		{
 			//typical pattern already 
-			ITarget t = GenericConstructorTarget.Auto(typeof(GenericOneCtor<>));
+			ITarget t = Target.ForType(typeof(GenericOneCtor<>));
 			var targets = CreateTargetContainer();
 			targets.Register(t);
 			targets.RegisterObject(1);
@@ -46,9 +46,9 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 
-			targets.Register(GenericConstructorTarget.Auto(typeof(GenericOneCtor<>)), typeof(IGeneric<>));
-			targets.Register((2).AsObjectTarget());
-			targets.Register(ConstructorTarget.Auto<RequiresIGenericInt>());
+            targets.RegisterType(typeof(GenericOneCtor<>), typeof(IGeneric<>));
+			targets.RegisterObject(2);
+			targets.RegisterType(typeof(RequiresIGenericInt));
 			var container = CreateContainer(targets);
 
 			var result = container.Resolve<RequiresIGenericInt>();
@@ -61,8 +61,8 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void GenericCtorTarget_NestedGenericDependency()
 		{
 			var targets = CreateTargetContainer();
-			targets.Register(GenericConstructorTarget.Auto(typeof(GenericOneCtor<>)));
-			targets.Register(GenericConstructorTarget.Auto(typeof(Generic<>)));
+			targets.Register(Target.ForType(typeof(GenericOneCtor<>)));
+			targets.Register(Target.ForType(typeof(Generic<>)));
 			var container = CreateContainer(targets);
 
 			var result = container.Resolve<GenericOneCtor<Generic<int>>>();
@@ -79,9 +79,9 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void GenericCtorTarget_NestedOpenGenericDependency()
 		{
 			var targets = CreateTargetContainer();
-			targets.Register((10).AsObjectTarget());
-			targets.Register(GenericConstructorTarget.Auto(typeof(GenericOneCtor<>)), typeof(IGeneric<>));
-			targets.Register(GenericConstructorTarget.Auto(typeof(RequiresIGenericT<>)));
+			targets.RegisterObject(10);
+			targets.RegisterType(typeof(GenericOneCtor<>), typeof(IGeneric<>));
+			targets.RegisterType(typeof(RequiresIGenericT<>));
 			var container = CreateContainer(targets);
 
 			var result = container.Resolve<RequiresIGenericT<int>>();
@@ -95,12 +95,12 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 
-			targets.Register((25).AsObjectTarget());
+			targets.RegisterObject(25);
 			//register a standard handler for all IGeneric<T>
-			targets.Register(GenericConstructorTarget.Auto(typeof(GenericOneCtor<>)), typeof(IGeneric<>));
+			targets.RegisterType(typeof(GenericOneCtor<>), typeof(IGeneric<>));
 			//register a specific handler for IGeneric<IGeneric<T>>
 			//only way to get hold of the type for this is to use MakeGenericType
-			targets.Register(GenericConstructorTarget.Auto(typeof(GenericGenericOneCtor<>)), typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
+			targets.RegisterType(typeof(GenericGenericOneCtor<>), typeof(IGeneric<>).MakeGenericType(typeof(IGeneric<>)));
 			var container = CreateContainer(targets);
 
 			var result = container.Resolve<IGeneric<IGeneric<int>>>();

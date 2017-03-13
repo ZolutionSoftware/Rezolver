@@ -63,12 +63,12 @@ namespace Rezolver.Tests.Examples
 			// and using the batch-registration 'RegisterAll' method,
 			// which registers against the target's DeclaredType
 			container.RegisterAll(
-				ConstructorTarget.Auto<RequiresMyServices>(),
-				ConstructorTarget.Auto<MyService1>(),
-				ConstructorTarget.Auto<MyService2>(),
-				ConstructorTarget.Auto<MyService3>(),
-				ConstructorTarget.Auto<MyService4>(),
-				ConstructorTarget.Auto<MyService5>());
+				Target.ForType<RequiresMyServices>(),
+				Target.ForType<MyService1>(),
+				Target.ForType<MyService2>(),
+				Target.ForType<MyService3>(),
+				Target.ForType<MyService4>(),
+				Target.ForType<MyService5>());
 
 			var result = container.Resolve<RequiresMyServices>();
 
@@ -95,14 +95,14 @@ namespace Rezolver.Tests.Examples
 				// Could also have done:
 				// container.RegisterType<RequiresMyServicesWithDefaults, RequiresMyServices>()
 				new ChangeTypeTarget(
-					ConstructorTarget.Auto<RequiresMyServicesWithDefaults>(),
+					Target.ForType<RequiresMyServicesWithDefaults>(),
 					typeof(RequiresMyServices)
 				),
-				ConstructorTarget.Auto<MyService1>(),
-				ConstructorTarget.Auto<MyService2>(),
-				ConstructorTarget.Auto<MyService3>(),
-				ConstructorTarget.Auto<MyService4>(),
-				ConstructorTarget.Auto<MyService5>());
+				Target.ForType<MyService1>(),
+				Target.ForType<MyService2>(),
+				Target.ForType<MyService3>(),
+				Target.ForType<MyService4>(),
+				Target.ForType<MyService5>());
 
 			var result = container.Resolve<RequiresMyServices>();
 
@@ -189,11 +189,11 @@ namespace Rezolver.Tests.Examples
 			//ConstructorTarget's constructor directly with a dictionary, 
 			//or use this static method which creates a dictionary from an object
 			//TODO: Will add object overload to the constructor in the future
-			container.Register(ConstructorTarget.WithArgs<RequiresIMyServiceAndDateTime>(
+			container.Register(Target.ForType<RequiresIMyServiceAndDateTime>(
 				new
 				{
 					//each member of this object must be an ITarget
-					startDate = DateTime.UtcNow.AddDays(1).AsObjectTarget()
+					startDate = Target.ForObject(DateTime.UtcNow.AddDays(1))
 				}
 			));
 
@@ -239,7 +239,7 @@ namespace Rezolver.Tests.Examples
 			//create parameter bindings
 			var bindings = new[] {
 				new ParameterBinding(ctor.GetParameters()[0],
-					ConstructorTarget.Auto<MyService>()
+					Target.ForType<MyService>()
 				)
 			};
 

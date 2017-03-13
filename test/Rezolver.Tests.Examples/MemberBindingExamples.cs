@@ -18,8 +18,8 @@ namespace Rezolver.Tests.Examples
 			//<example1>
 			var container = new Container();
 			container.RegisterAll(
-				ConstructorTarget.Auto<MyService1>(),
-				ConstructorTarget.Auto<MyService2>()
+				Target.ForType<MyService1>(),
+				Target.ForType<MyService2>()
 			);
 			container.RegisterType<Has2InjectableMembers>(DefaultMemberBindingBehaviour.Instance);
 

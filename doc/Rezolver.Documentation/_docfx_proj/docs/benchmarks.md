@@ -17,23 +17,25 @@ maintaining a benchmarking suite for IOC containers - called
 performance analysis, this program offers an easy way to stress test the Rezolver containers
 both on their own, but also against other popular containers. 
 
-The tests range from the basics - singletons, transients, objects which require a mixture of
-these, complex objects which require lots of nested dependencies
+The tests include singletons, transients, objects which require a mixture of
+these, complex objects which require lots of nested dependencies, resolving enumerables and child 
+containers, and does provide a reasonably thorough examination of a container's features in 
+addition to its performance.
  
 Excluding Rezolver and the 'No' container, which the baseline, there are 31 containers now
 being stress-tested by this application, with the list growing.
 
-So, [we've forked this project](https://github.com/ZolutionSoftware/IOCPerformance) and 
+So, [we forked this project](https://github.com/ZolutionSoftware/IOCPerformance) and 
 added an adapter for Rezolver.  We then ran it on an
-Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz (speed step/power manage was switched off to ensure
-the processor ran at its maximum clock).
+Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz (power management options set to 'maximum performance'
+to ensure the processor runs at its maximum clock).
 
 # Results
 
 > [!NOTE]
 > A couple of results which you'll find on the [IOCPerformance](https://github.com/DanielPalme/IOCPerformance)
 > page are left out of the individual results because Rezolver doesn't yet support them (specifically
-> Interception and Conditional services).  Implementations are planned.
+> Interception and Conditional services) - implementations for these are planned.
 
 ## Singleton
 
@@ -91,8 +93,8 @@ Create a new container from an existing one, register new services in it and res
 >
 > A solution is in the pipeline for this, which will be implemented once we've implemented another
 > compiler that's based entirely on reflection and late-bound delegates instead of dynamically 
-> constructed expression trees.  When this is done, the performance of child containers will 
-> improve drastically.
+> constructed expression trees.  When this is done and merged with the current expression-tree
+> based compiler, the performance of child containers will improve drastically.
 
 ![][09-Child-Container]
 
@@ -114,7 +116,7 @@ has been improved, then this one will also.
 ## 'Advanced' compound results
 
 All the so-called 'advanced' operations' times summed and graphed (note - if a container doesn't
-even support a particular feature, then it'll be higher up these graphs).
+even support a particular feature, then there's a good chance it'll be higher up these graphs).
 
 ### Fastest
 
@@ -126,8 +128,8 @@ even support a particular feature, then it'll be higher up these graphs).
 
 ### Notes
 
-Rezolver doesn't make it into the 'Fast' graph because of the aforementioned first-call overhead
-when resolving a service of a given type for the very first time.  This will change.
+Rezolver doesn't make it into the 'Fast' graph purely because of the aforementioned first-call 
+overhead when resolving a service of a given type for the very first time.  This will change.
 
 
 ## 'Basic' compound results
@@ -145,7 +147,7 @@ even support a particular feature, then it'll be higher up these graphs).
 
 ### Notes
 
-Top 10!
+Top 10 for Rezolver!
 
 ## Register/Prepare (+ Resolve operation)
 

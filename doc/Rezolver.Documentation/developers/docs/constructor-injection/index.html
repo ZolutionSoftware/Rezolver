@@ -254,12 +254,12 @@ constructor&#39;s parameters can be, then the single-parameter constructor wins.
 // and using the batch-registration &#39;RegisterAll&#39; method,
 // which registers against the target&#39;s DeclaredType
 container.RegisterAll(
-	ConstructorTarget.Auto&lt;RequiresMyServices&gt;(),
-	ConstructorTarget.Auto&lt;MyService1&gt;(),
-	ConstructorTarget.Auto&lt;MyService2&gt;(),
-	ConstructorTarget.Auto&lt;MyService3&gt;(),
-	ConstructorTarget.Auto&lt;MyService4&gt;(),
-	ConstructorTarget.Auto&lt;MyService5&gt;());
+	Target.ForType&lt;RequiresMyServices&gt;(),
+	Target.ForType&lt;MyService1&gt;(),
+	Target.ForType&lt;MyService2&gt;(),
+	Target.ForType&lt;MyService3&gt;(),
+	Target.ForType&lt;MyService4&gt;(),
+	Target.ForType&lt;MyService5&gt;());
 
 var result = container.Resolve&lt;RequiresMyServices&gt;();
 
@@ -311,14 +311,14 @@ container.RegisterAll(
 	// Could also have done:
 	// container.RegisterType&lt;RequiresMyServicesWithDefaults, RequiresMyServices&gt;()
 	new ChangeTypeTarget(
-		ConstructorTarget.Auto&lt;RequiresMyServicesWithDefaults&gt;(),
+		Target.ForType&lt;RequiresMyServicesWithDefaults&gt;(),
 		typeof(RequiresMyServices)
 	),
-	ConstructorTarget.Auto&lt;MyService1&gt;(),
-	ConstructorTarget.Auto&lt;MyService2&gt;(),
-	ConstructorTarget.Auto&lt;MyService3&gt;(),
-	ConstructorTarget.Auto&lt;MyService4&gt;(),
-	ConstructorTarget.Auto&lt;MyService5&gt;());
+	Target.ForType&lt;MyService1&gt;(),
+	Target.ForType&lt;MyService2&gt;(),
+	Target.ForType&lt;MyService3&gt;(),
+	Target.ForType&lt;MyService4&gt;(),
+	Target.ForType&lt;MyService5&gt;());
 
 var result = container.Resolve&lt;RequiresMyServices&gt;();
 
@@ -507,11 +507,11 @@ container.RegisterType&lt;MyService, IMyService&gt;();
 //ConstructorTarget&#39;s constructor directly with a dictionary, 
 //or use this static method which creates a dictionary from an object
 //TODO: Will add object overload to the constructor in the future
-container.Register(ConstructorTarget.WithArgs&lt;RequiresIMyServiceAndDateTime&gt;(
+container.Register(Target.ForType&lt;RequiresIMyServiceAndDateTime&gt;(
 	new
 	{
 		//each member of this object must be an ITarget
-		startDate = DateTime.UtcNow.AddDays(1).AsObjectTarget()
+		startDate = Target.ForObject(DateTime.UtcNow.AddDays(1))
 	}
 ));
 
@@ -575,7 +575,7 @@ var ctor = typeof(AcceptsOptionalIMyService).GetConstructor(new[]
 //create parameter bindings
 var bindings = new[] {
 	new ParameterBinding(ctor.GetParameters()[0],
-		ConstructorTarget.Auto&lt;MyService&gt;()
+		Target.ForType&lt;MyService&gt;()
 	)
 };
 

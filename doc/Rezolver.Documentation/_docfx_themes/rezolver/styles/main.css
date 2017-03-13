@@ -8,7 +8,7 @@ a #logo {
 .navbar-inverse {
   border-bottom: none;
 }
-.navbar-default.subnav {
+.navbar-default.subnav.old {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0b2466+0,ffffff+18,e9effd+100 */
   background: #e9effd;
   /* Old browsers */
@@ -18,7 +18,11 @@ a #logo {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0b2466', endColorstr='#e9effd', GradientType=0);
   /* IE6-9 */
-  border-bottom-color: #bcccf7;
+  border-bottom-color: #d5d5d5;
+}
+.navbar-default.subnav {
+  background: white;
+  border-bottom-color: #d5d5d5;
 }
 .github-link {
   font-size: 30px;
@@ -32,13 +36,15 @@ a #logo {
 .sidefilter,
 .sidetoc {
   background: #e9effd;
-  border-left-color: #bcccf7;
-  border-right-color: #bcccf7;
+  border-left-color: #d5d5d5;
+  border-right-color: #d5d5d5;
 }
 body .toc,
 .sidenav,
+.sidefilter,
+.sidetoc,
 .fixed-header {
-  background: #e9effd;
+  background: white;
 }
 h1,
 h2,
@@ -64,6 +70,7 @@ blockquote h5 {
 }
 .toc .level1 > li {
   font-size: 14px;
+  font-weight: normal;
 }
 .toc .level2 {
   font-size: 12px;

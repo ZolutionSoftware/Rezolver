@@ -134,8 +134,8 @@ with values from the container when resolved - <em>regardless</em> of whether th
 <code>Has2InjectableMembers</code> target:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 container.RegisterAll(
-	ConstructorTarget.Auto&lt;MyService1&gt;(),
-	ConstructorTarget.Auto&lt;MyService2&gt;()
+	Target.ForType&lt;MyService1&gt;(),
+	Target.ForType&lt;MyService2&gt;()
 );
 container.RegisterType&lt;Has2InjectableMembers&gt;(DefaultMemberBindingBehaviour.Instance);
 

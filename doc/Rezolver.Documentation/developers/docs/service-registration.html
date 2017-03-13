@@ -150,7 +150,7 @@ registration type:</p>
 We have <a href="objects.html">more in-depth documentation about <code>ObjectTarget</code></a> if you want to know more.</p>
 </div>
 <pre><code class="lang-csharp" name="TargetContainerExamples.cs">var targets = new TargetContainer();
-targets.Register(&quot;hello world&quot;.AsObjectTarget());
+targets.RegisterObject(&quot;hello world&quot;);
 
 var target = targets.Fetch(typeof(string));
 Assert.IsType&lt;ObjectTarget&gt;(target);
@@ -161,7 +161,7 @@ as a valid type, too:</p>
 Again, this target <a href="constructor-injection/index.html">is covered in more depth here</a>.</p>
 </div>
 <pre><code class="lang-csharp" name="TargetContainerExamples.cs">var targets = new TargetContainer();
-targets.Register(ConstructorTarget.Auto&lt;MyService&gt;(), typeof(IMyService));
+targets.Register(Target.ForType&lt;MyService&gt;(), typeof(IMyService));
 
 var target = targets.Fetch(typeof(IMyService));
 Assert.IsType&lt;ConstructorTarget&gt;(target);
@@ -170,7 +170,7 @@ Assert.IsType&lt;ConstructorTarget&gt;(target);
 <pre><code class="lang-csharp" name="TargetContainerExamples.cs">var targets = new TargetContainer();
 //int is obviously not compatible with IMyService.
 Assert.Throws&lt;ArgumentException&gt;(
-	() =&gt; targets.Register(50.AsObjectTarget(), typeof(IMyService)));
+	() =&gt; targets.Register(Target.ForObject(50), typeof(IMyService)));
 </code></pre><h3 id="how-type-compatiblity-is-verified">How type compatiblity is verified</h3>
 <p>The type(s) against which you can register a target is dependant upon the <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target,
 but, instead of performing the compatibility checks itself, the target container uses the <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_">SupportsType</a> 

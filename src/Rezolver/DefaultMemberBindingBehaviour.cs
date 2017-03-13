@@ -30,7 +30,7 @@ namespace Rezolver
 	/// 
 	/// The default behaviour is bind each member to a new <see cref="ResolvedTarget"/> whose 
 	/// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
-	[Obsolete("This type will be renamed to AllMembersBindingBehaviour - see https://github.com/ZolutionSoftware/Rezolver/issues/7")]
+	[Obsolete("This type will be renamed to AllMembersBindingBehaviour in 1.2 - see https://github.com/ZolutionSoftware/Rezolver/issues/7")]
 	public class DefaultMemberBindingBehaviour : IMemberBindingBehaviour
 	{
 		private static readonly Lazy<DefaultMemberBindingBehaviour> _instance = new Lazy<DefaultMemberBindingBehaviour>(() => new DefaultMemberBindingBehaviour());

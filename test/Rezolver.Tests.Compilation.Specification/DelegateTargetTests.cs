@@ -158,5 +158,33 @@ namespace Rezolver.Tests.Compilation.Specification
 			var result = container.Resolve<RequiresTaxService>();
 			Assert.Equal(117.5M, result.CalculatePrice(100M));
 		}
+
+        [Fact]
+        public void DelegateTarget_ShouldUseScopeForExplicitlyResolveObject()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterType<Disposable>();
+            targets.RegisterType<Disposable2>();
+            targets.RegisterType<Disposable3>();
+            //note that the delegate is using the resolve-live API on ResolveContext
+            //and therefore the scope will be honoured automatically.
+            targets.RegisterDelegate(rc => new RequiresThreeDisposables(
+                rc.Resolve<Disposable>(),
+                rc.Resolve<Disposable2>(),
+                rc.Resolve<Disposable3>()));
+
+            RequiresThreeDisposables result;
+            using (var container = CreateScopedContainer(targets))
+            {
+                result = container.Resolve<RequiresThreeDisposables>();
+            }
+
+            Assert.True(result.First.Disposed);
+            Assert.True(result.Second.Disposed);
+            Assert.True(result.Third.Disposed);
+        }
+
+        //TODO: do the requiresscopeanddisposable 
+
 	}
 }

@@ -18,7 +18,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 			//have to register as object because otherwise we get a cyclic dependency
-			targets.Register(new ResolvedTarget(typeof(int), (157).AsObjectTarget()), typeof(object));
+			targets.Register(new ResolvedTarget(typeof(int), Target.ForObject(157)), typeof(object));
 			var container = CreateContainer(targets);
 			//the value will not be resolved, so it should fallback to 157
 			var result = (int)container.Resolve<object>();
@@ -32,7 +32,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			//can be satisfied by an overriding container registration even when a fallback exists
 
 			var targets = CreateTargetContainer();
-			targets.Register(new ResolvedTarget(typeof(int), (157).AsObjectTarget()), typeof(object));
+			targets.Register(new ResolvedTarget(typeof(int), Target.ForObject(157)), typeof(object));
 			var container = CreateContainer(targets);
 
 			//create targets for our overriding container
@@ -50,7 +50,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			//this test makes sure that the fallback is used when an overriding container
 			//is present and doesn't have an override for the type
 			var targets = CreateTargetContainer();
-			targets.Register(new ResolvedTarget(typeof(int), (157).AsObjectTarget()), typeof(object));
+			targets.Register(new ResolvedTarget(typeof(int), Target.ForObject(157)), typeof(object));
 			var container = CreateContainer(targets);
 
 			var overridingContainer = CreateOverridingContainer(container);

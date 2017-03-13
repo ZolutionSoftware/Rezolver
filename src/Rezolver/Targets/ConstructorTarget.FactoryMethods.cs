@@ -16,6 +16,8 @@ namespace Rezolver.Targets
 		private static readonly IDictionary<string, ITarget> _emptyArgsDictionary = new Dictionary<string, ITarget>();
 
         /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
         /// Generic version of the <see cref="Auto(Type, IMemberBindingBehaviour)"/> method.
         /// </summary>
         /// <typeparam name="T">The type that is to be constructed when the new target is compiled and executed.</typeparam>
@@ -29,18 +31,20 @@ namespace Rezolver.Targets
             return Target.ForType<T>(memberBinding: memberBindingBehaviour);
 		}
 
-		/// <summary>
-		/// Creates a late bound <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> for the 
-		/// given <paramref name="type"/>.
-		/// </summary>
-		/// <param name="type">The type that is to be constructed when this target is compiled and executed.</param>
-		/// <param name="memberBindingBehaviour">Optional.  An object which selects properties on the new instance which are
-		/// to be bound from the container.</param>
-		/// <returns>Either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/>, depending on whether the 
-		/// <paramref name="type"/> is a generic type definition.</returns>
-		/// <remarks>This factory is merely a shortcut for calling the <see cref="ConstructorTarget.ConstructorTarget(Type, IDictionary{string, ITarget}, IMemberBindingBehaviour)"/>
-		/// with only the <paramref name="type"/> and <paramref name="memberBindingBehaviour"/> arguments supplied.  When creating a 
-		/// <see cref="GenericConstructorTarget"/>, the function uses the <see cref="GenericConstructorTarget.GenericConstructorTarget(Type, IMemberBindingBehaviour)"/> constructor.</remarks>
+        /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
+        /// Creates a late bound <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> for the 
+        /// given <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">The type that is to be constructed when this target is compiled and executed.</param>
+        /// <param name="memberBindingBehaviour">Optional.  An object which selects properties on the new instance which are
+        /// to be bound from the container.</param>
+        /// <returns>Either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/>, depending on whether the 
+        /// <paramref name="type"/> is a generic type definition.</returns>
+        /// <remarks>This factory is merely a shortcut for calling the <see cref="ConstructorTarget.ConstructorTarget(Type, IDictionary{string, ITarget}, IMemberBindingBehaviour)"/>
+        /// with only the <paramref name="type"/> and <paramref name="memberBindingBehaviour"/> arguments supplied.  When creating a 
+        /// <see cref="GenericConstructorTarget"/>, the function uses the <see cref="GenericConstructorTarget.GenericConstructorTarget(Type, IMemberBindingBehaviour)"/> constructor.</remarks>
         [Obsolete("This method has been replaced by the Target.ForType overloaded method and will be removed in 1.2")]
 		public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)
 		{
@@ -48,6 +52,8 @@ namespace Rezolver.Targets
 		}
 
         /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
         /// Non-generic version of <see cref="WithArgs{T}(IDictionary{string, ITarget})"/>.
         /// Creates a <see cref="ConstructorTarget"/> with a set of named targets which will be used like
         /// named arguments to late-bind the constructor when code-generation occurs.
@@ -73,6 +79,8 @@ namespace Rezolver.Targets
 		}
 
         /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
         /// Performs the same operation as <see cref="WithArgs(Type, IDictionary{string, ITarget})"/> except the
         /// arguments are pulled from the publicly readable properties and fields of the passed <paramref name="namedArgs"/>
         /// object.
@@ -94,6 +102,8 @@ namespace Rezolver.Targets
 		}
 
         /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
         /// Similar to <see cref="WithArgs(Type, IDictionary{string, ITarget})"/> except this one creates
         /// a <see cref="ConstructorTarget"/> that is specifically bound to a particular constructor on a 
         /// given type, using any matched argument bindings from the provided <paramref name="namedArgs" /> dictionary,
@@ -122,6 +132,8 @@ namespace Rezolver.Targets
 		}
 
         /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
         /// Performs the same operation as <see cref="WithArgs(ConstructorInfo, IDictionary{string, ITarget})"/>
         /// except the arguments are pulled from the publicly readable properties and fields of the passed <paramref name="namedArgs"/>
         /// object.
@@ -144,6 +156,8 @@ namespace Rezolver.Targets
 		}
 
         /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
         /// Creates a <see cref="ConstructorTarget"/> with a set of named targets which will be used like
         /// named arguments to late-bind the constructor when code-generation occurs.
         /// </summary>
@@ -170,6 +184,8 @@ namespace Rezolver.Targets
 		}
 
         /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
         /// Performs the same operation as <see cref="WithArgs{T}(IDictionary{string, ITarget})"/> except the
         /// arguments are pulled from the publicly readable properties and fields of the passed <paramref name="namedArgs"/>
         /// object.

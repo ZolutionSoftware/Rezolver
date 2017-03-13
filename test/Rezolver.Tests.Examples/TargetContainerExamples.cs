@@ -14,7 +14,7 @@ namespace Rezolver.Tests.Examples
 		{
 			//<example1>
 			var targets = new TargetContainer();
-			targets.Register("hello world".AsObjectTarget());
+			targets.RegisterObject("hello world");
 
 			var target = targets.Fetch(typeof(string));
 			Assert.IsType<ObjectTarget>(target);
@@ -25,7 +25,7 @@ namespace Rezolver.Tests.Examples
 		{
 			//<example2>
 			var targets = new TargetContainer();
-			targets.Register(ConstructorTarget.Auto<MyService>(), typeof(IMyService));
+			targets.Register(Target.ForType<MyService>(), typeof(IMyService));
 
 			var target = targets.Fetch(typeof(IMyService));
 			Assert.IsType<ConstructorTarget>(target);
@@ -38,7 +38,7 @@ namespace Rezolver.Tests.Examples
 			var targets = new TargetContainer();
 			//int is obviously not compatible with IMyService.
 			Assert.Throws<ArgumentException>(
-				() => targets.Register(50.AsObjectTarget(), typeof(IMyService)));
+				() => targets.Register(Target.ForObject(50), typeof(IMyService)));
 			//</example3>
 		}
 	}

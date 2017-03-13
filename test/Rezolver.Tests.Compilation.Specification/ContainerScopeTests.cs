@@ -13,7 +13,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void ContainerScope_ShouldDispose_CtorTarget()
 		{
-			var container = CreateContainerForSingleTarget(ConstructorTarget.Auto<Disposable>());
+			var container = CreateContainerForSingleTarget(Target.ForType<Disposable>());
 
 			Disposable result;
 			using(var scope = container.CreateScope())
@@ -69,9 +69,9 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<RequiresThreeDisposables>();
-			targets.RegisterAll(ConstructorTarget.Auto<Disposable>(),
-				ConstructorTarget.Auto<Disposable2>(),
-				ConstructorTarget.Auto<Disposable3>());
+			targets.RegisterAll(Target.ForType<Disposable>(),
+				Target.ForType<Disposable2>(),
+				Target.ForType<Disposable3>());
 
 			RequiresThreeDisposables result = null;
 			using (var container = CreateScopedContainer(targets))
@@ -89,9 +89,9 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 			targets.RegisterType<RequiresThreeDisposables>();
-			targets.RegisterAll(ConstructorTarget.Auto<Disposable>(),
-				ConstructorTarget.Auto<Disposable2>(),
-				ConstructorTarget.Auto<Disposable3>());
+			targets.RegisterAll(Target.ForType<Disposable>(),
+				Target.ForType<Disposable2>(),
+				Target.ForType<Disposable3>());
 
 			RequiresThreeDisposables result = null;
 			using (var container = CreateScopedContainer(targets))

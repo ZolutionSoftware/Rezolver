@@ -43,8 +43,12 @@ namespace Rezolver.Compilation.Expressions
 			//type in this assembly
 			foreach (var registration in GetStandardTargetBuilders())
 			{
+                //NOTE: MUST pass the concrete type below as an argument to the declaredType parameter below
+                //otherwise the object target is created as IExpressionBuilder, which is not capable of
+                //handling the type represented by ExpressionBuilderType - because it is a base interface
+                //to that type, not a derived interface.
 				if (targets.Fetch(registration.ExpressionBuilderType) == null)
-					targets.RegisterObject(registration.Instance, registration.ExpressionBuilderType);
+					targets.RegisterObject(registration.Instance, declaredType: registration.ExpressionBuilderType);
 			}
 		}
 

@@ -17,7 +17,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			var targets = CreateTargetContainer();
 			//enumerable of object targets
 			var expectedStrings = Enumerable.Range(0, 3).Select(i => $"Item{i}");
-			var target = new ListTarget(typeof(string), expectedStrings.Select(s => s.AsObjectTarget()));
+			var target = new ListTarget(typeof(string), expectedStrings.Select(s => Target.ForObject(s)));
 			targets.Register(target);
 			var container = CreateContainer(targets);
 
@@ -32,7 +32,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var targets = CreateTargetContainer();
 			var expectedStrings = Enumerable.Range(0, 3).Select(i => $"Item{i}");
-			var target = new ListTarget(typeof(string), expectedStrings.Select(s => s.AsObjectTarget()), asArray: true);
+			var target = new ListTarget(typeof(string), expectedStrings.Select(s => Target.ForObject(s)), asArray: true);
 			targets.Register(target);
 			var container = CreateContainer(targets);
 
@@ -48,7 +48,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			var targets = CreateTargetContainer();
 			//enumerable of object targets
 			var expectedStrings = Enumerable.Range(0, 3).Select(i => $"Item{i}");
-			var target = new ListTarget(typeof(string), expectedStrings.Select(s => s.AsObjectTarget()));
+			var target = new ListTarget(typeof(string), expectedStrings.Select(s => Target.ForObject(s)));
 			targets.Register(target, typeof(IEnumerable<string>));
 			var container = CreateContainer(targets);
 
@@ -64,7 +64,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			var targets = CreateTargetContainer();
 			//enumerable of object targets
 			var expectedStrings = Enumerable.Range(0, 3).Select(i => $"Item{i}");
-			var target = new ListTarget(typeof(string), expectedStrings.Select(s => s.AsObjectTarget()), asArray: true);
+			var target = new ListTarget(typeof(string), expectedStrings.Select(s => Target.ForObject(s)), asArray: true);
 			targets.Register(target, typeof(IEnumerable<string>));
 			var container = CreateContainer(targets);
 

@@ -4758,6 +4758,18 @@ references:
   fullName.vb: Rezolver.Target.ForType(Of T)(System.Object, Rezolver.IMemberBindingBehaviour)
   nameWithType: Target.ForType<T>(Object, IMemberBindingBehaviour)
   nameWithType.vb: Target.ForType(Of T)(Object, IMemberBindingBehaviour)
+- uid: Rezolver.Target.Resolved(System.Type,Rezolver.ITarget)
+  name: Resolved(Type, ITarget)
+  href: api/Rezolver.Target.html#Rezolver_Target_Resolved_System_Type_Rezolver_ITarget_
+  commentId: M:Rezolver.Target.Resolved(System.Type,Rezolver.ITarget)
+  fullName: Rezolver.Target.Resolved(System.Type, Rezolver.ITarget)
+  nameWithType: Target.Resolved(Type, ITarget)
+- uid: Rezolver.Target.Resolved*
+  name: Resolved
+  href: api/Rezolver.Target.html#Rezolver_Target_Resolved_
+  commentId: Overload:Rezolver.Target.Resolved
+  fullName: Rezolver.Target.Resolved
+  nameWithType: Target.Resolved
 - uid: Rezolver.Target.Scoped(Rezolver.ITarget)
   name: Scoped(ITarget)
   href: api/Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_

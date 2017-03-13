@@ -1,0 +1,8 @@
+﻿@model ErrorModel
+@{
+    ViewBag.Title = $"Error {Model.StatusCode ?? -1}";
+}
+
+<h1>HTTP Status @(Model.StatusCode ?? -1)</h1>
+
+<p class="lead">Oops!  Something unexpected has happened, please go to <a href="@Url.Content("~/")">the homepage</a> and try again</p>

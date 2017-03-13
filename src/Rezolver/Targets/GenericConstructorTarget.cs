@@ -387,15 +387,15 @@ namespace Rezolver.Targets
 			public Type TargetParameter { get; set; }
 		}
 
-		/// <summary>
-		/// returns a series of type parameter indexes from the baseType parameter which can be used to derive
-		/// the concrete type parameter to be used in a target type, given a fully-closed generic type as the model
-		/// </summary>
-		/// <param name="previousTypeParameterPositions"></param>
-		/// <param name="baseTypeParameter"></param>
-		/// <param name="targetTypeParameter"></param>
-		/// <returns></returns>
-		private GenericParameterMapping[] DeepSearchTypeParameterMapping(Stack<GenericParameterMapping> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
+        /// <summary>
+        /// Returns a series of type parameter indexes from the baseType parameter which can be used to derive
+        /// the concrete type parameter to be used in a target type, given a fully-closed generic type as the model
+        /// </summary>
+        /// <param name="previousTypeParameterPositions"></param>
+        /// <param name="baseTypeParameter"></param>
+        /// <param name="targetTypeParameter"></param>
+        /// <returns></returns>
+        private GenericParameterMapping[] DeepSearchTypeParameterMapping(Stack<GenericParameterMapping> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
 		{
 			if (baseTypeParameter == targetTypeParameter)
 				return previousTypeParameterPositions.ToArray();
@@ -417,18 +417,20 @@ namespace Rezolver.Targets
 			return null;
 		}
 
-		/// <summary>
-		/// Equivalent of <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> but for open generic types.
-		/// 
-		/// Note - there is no generic version because that could only be invoked by reflection.
-		/// </summary>
-		/// <param name="type">The type.</param>
-		/// <param name="memberBindingBehaviour">Optional behaviour controlling which properties and fields, if any, will receive injected values.</param>
-		/// <exception cref="ArgumentException">
-		/// This is raised from the <see cref="GenericConstructorTarget.GenericConstructorTarget(Type, IMemberBindingBehaviour)"/> constructor
-		/// when the passed type is either not an open generic type
-		/// or is an abstract class or interface.
-		/// </exception>
+        /// <summary>
+        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
+        /// 
+        /// Equivalent of <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> but for open generic types.
+        /// 
+        /// Note - there is no generic version because that could only be invoked by reflection.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="memberBindingBehaviour">Optional behaviour controlling which properties and fields, if any, will receive injected values.</param>
+        /// <exception cref="ArgumentException">
+        /// This is raised from the <see cref="GenericConstructorTarget.GenericConstructorTarget(Type, IMemberBindingBehaviour)"/> constructor
+        /// when the passed type is either not an open generic type
+        /// or is an abstract class or interface.
+        /// </exception>
         [Obsolete("This method has been replaced by the Target.ForType method and will be removed in 1.2.")]
 		public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)
 		{ 

@@ -119,7 +119,9 @@ Rezolver to build the services you want to use in your application.
 Use the table of contents to the left (or above if on a small screen) to select the type of registration you want to
 learn more about.
 
-All the targets used by default in Rezolver to create objects can be found in the @Rezolver.Targets namespace.
+All the targets used by default in Rezolver to create objects can be found in the @Rezolver.Targets namespace.  The @Rezolver.Target
+static class also contains numerous factory methods for building these targets in isolation.  For example: @Rezolver.Target.ForType*, which
+can generate a target that binds a type for constructor injection.
 
 ## Implementing targets
 

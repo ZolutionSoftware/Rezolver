@@ -19,7 +19,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			int expectedInt = 10;
 
-			targets.Register(expectedInt.AsObjectTarget());
+			targets.RegisterObject(expectedInt);
 
 			Assert.Equal(expectedInt, overridingContainer.Resolve(typeof(int)));
 		}

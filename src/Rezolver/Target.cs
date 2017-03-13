@@ -103,7 +103,7 @@ namespace Rezolver
         /// <see cref="IContainerScope"/>.</param>
         public static ITarget ForObject<T>(T @object, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
         {
-            return new ObjectTarget(@object, declaredType, scopeBehaviour);
+            return new ObjectTarget(@object, declaredType ?? typeof(T), scopeBehaviour);
         }
 
         /// <summary>
@@ -119,6 +119,19 @@ namespace Rezolver
         public static ITarget ForObject(object @object, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
         {
             return new ObjectTarget(@object, declaredType ?? @object?.GetType(), scopeBehaviour);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ResolvedTarget"/> for the given type, providing a way to call back into the
+        /// container during the execution of another target.
+        /// </summary>
+        /// <param name="type">Required. The type to be resolved from the container.</param>
+        /// <param name="fallbackTarget">Optional. If provided and the container is unable to resolve the 
+        /// <paramref name="type"/>, then this target is used instead.</param>
+        public static ITarget Resolved(Type type, ITarget fallbackTarget = null)
+        {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            return new ResolvedTarget(type, fallbackTarget);
         }
 
         #region Types/Constructors

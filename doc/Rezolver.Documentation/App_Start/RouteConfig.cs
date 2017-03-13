@@ -16,6 +16,11 @@ namespace Rezolver.Documentation
 			routes.IgnoreRoute("learn-rezolver/{*pathInfo}");
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "Errors",
+                url: "Errors/{action}",
+                defaults: new { controller = "Errors" });
+
 			routes.MapRoute(
 					name: "Default",
 					url: "{*pathInfo}",

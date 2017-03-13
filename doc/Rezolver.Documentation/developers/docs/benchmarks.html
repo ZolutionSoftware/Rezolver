@@ -117,34 +117,89 @@ maintaining a benchmarking suite for IOC containers - called
 <a href="https://github.com/DanielPalme/IOCPerformance">IOCPerformance</a>.  In addition to our own 
 performance analysis, this program offers an easy way to stress test the Rezolver containers
 both on their own, but also against other popular containers. </p>
-<p>The tests range from the basics - singletons, transients, objects which require a mixture of
-these, complex objects which require lots of nested dependencies</p>
+<p>The tests include singletons, transients, objects which require a mixture of
+these, complex objects which require lots of nested dependencies, resolving enumerables and child 
+containers, and does provide a reasonably thorough examination of a container&#39;s features in 
+addition to its performance.</p>
 <p>Excluding Rezolver and the &#39;No&#39; container, which the baseline, there are 31 containers now
 being stress-tested by this application, with the list growing.</p>
-<p>So, <a href="https://github.com/ZolutionSoftware/IOCPerformance">we&#39;ve forked this project</a> and 
+<p>So, <a href="https://github.com/ZolutionSoftware/IOCPerformance">we forked this project</a> and 
 added an adapter for Rezolver.  We then ran it on an
-Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz (speed step/power manage was switched off to ensure
-the processor ran at its maximum clock).</p>
+Intel(R) Xeon(R) CPU E3-1230 v3 @ 3.30GHz (power management options set to &#39;maximum performance&#39;
+to ensure the processor runs at its maximum clock).</p>
 <h1 id="results">Results</h1>
+<div class="NOTE"><h5>Note</h5><p>A couple of results which you&#39;ll find on the <a href="https://github.com/DanielPalme/IOCPerformance">IOCPerformance</a>
+page are left out of the individual results because Rezolver doesn&#39;t yet support them (specifically
+Interception and Conditional services) - implementations for these are planned.</p>
+</div>
 <h2 id="singleton">Singleton</h2>
-<p><img src="../images/benchmark-results/01-Singleton.png" alt="Singleton results - all">
-<img src="../images/benchmark-results/02-Transient.png" alt="Transient results - all">
-<img src="../images/benchmark-results/03-Combined.png" alt="Combined results - all">
-<img src="../images/benchmark-results/04-Complex.png" alt="">
-<img src="../images/benchmark-results/05-Property.png" alt="">
-<img src="../images/benchmark-results/06-Generics.png" alt="">
-<img src="../images/benchmark-results/07-IEnumerable.png" alt="">
-<img src="../images/benchmark-results/09-Child-Container.png" alt="">
-<img src="../images/benchmark-results/11-Prepare-And-Register.png" alt="">
-<img src="../images/benchmark-results/12-Prepare-And-Register-And-Simple-Resolve.png" alt="">
-<img src="../images/benchmark-results/Overview_Advanced_Fast.png" alt="">
-<img src="../images/benchmark-results/Overview_Advanced_Slow.png" alt="">
-<img src="../images/benchmark-results/Overview_Basic_Fast.png" alt="">
-<img src="../images/benchmark-results/Overview_Basic_Slow.png" alt="">
-<img src="../images/benchmark-results/Overview_Prepare_Fast.png" alt="">
-<img src="../images/benchmark-results/Overview_Prepare_Slow.png" alt=""></p>
-<h1 id="more-to-come">More to come</h1>
-<p>We&#39;ll add more detail and analysis of these results in the near future.  </p>
+<p>Singleton service via <a class="xref" href="../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a></p>
+<p><img src="../images/benchmark-results/01-Singleton.png" alt="Singleton results - all"></p>
+<h2 id="transient">Transient</h2>
+<p>Transient service using <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></p>
+<p><img src="../images/benchmark-results/02-Transient.png" alt="Transient results - all"></p>
+<h2 id="combined">Combined</h2>
+<p>Singleton and transient mixed together.</p>
+<p><img src="../images/benchmark-results/03-Combined.png" alt="Combined results - all"></p>
+<h2 id="complex">Complex</h2>
+<p>Deep dependency graph, mix of transient and singleton</p>
+<p><img src="../images/benchmark-results/04-Complex.png" alt=""></p>
+<h2 id="properties">Properties</h2>
+<p>Constructor injection with property injection  - <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> in
+conjunction with an <a class="xref" href="../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> </p>
+<p><img src="../images/benchmark-results/05-Property.png" alt=""></p>
+<h2 id="generics">Generics</h2>
+<p>Using <a class="xref" href="../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> to register <code>Foo&lt;&gt;</code> and then request instances
+of <code>Foo&lt;Bar&gt;</code>, <code>Foo&lt;Baz&gt;</code>, <code>Foo&lt;Bat&gt;</code> etc.</p>
+<p><img src="../images/benchmark-results/06-Generics.png" alt=""></p>
+<h2 id="enumerable">Enumerable</h2>
+<p>Registering multiple services for <code>T</code> and then resolving an <code>IEnumerable&lt;T&gt;</code></p>
+<p><img src="../images/benchmark-results/07-IEnumerable.png" alt=""></p>
+<h2 id="child-containers">Child Containers</h2>
+<p>Create a new container from an existing one, register new services in it and resolve.</p>
+<div class="NOTE"><h5>Note</h5><p>The poor performance of Rezolver here is caused by the fact that there&#39;s an overhead on the
+first <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call to a container, as that&#39;s when it compiles the 
+associated <a class="xref" href="../api/Rezolver.ICompiledTarget.html">ICompiledTarget</a> for that service.  Because of the way this benchmark
+is performed, it means that Rezolver spends most of its time dynamically compiling delegates.</p>
+<p>A solution is in the pipeline for this, which will be implemented once we&#39;ve implemented another
+compiler that&#39;s based entirely on reflection and late-bound delegates instead of dynamically 
+constructed expression trees.  When this is done and merged with the current expression-tree
+based compiler, the performance of child containers will improve drastically.</p>
+</div>
+<p><img src="../images/benchmark-results/09-Child-Container.png" alt=""></p>
+<h2 id="registeringpreparing-the-container">Registering/Preparing the Container</h2>
+<p>Creating a container, registering services and optionally &#39;baking&#39; the container (not required
+by Rezolver).</p>
+<p><img src="../images/benchmark-results/11-Prepare-And-Register.png" alt=""></p>
+<h2 id="registeringpreparing-the-container--resolve">Registering/Preparing the Container (+ Resolve)</h2>
+<p>Same as above, except a resolve operation is then subsequently fired at the container.  Again,
+Rezolver suffers for the same reason as with the child containers.  When performance for that
+has been improved, then this one will also.</p>
+<p><img src="../images/benchmark-results/12-Prepare-And-Register-And-Simple-Resolve.png" alt=""></p>
+<h2 id="advanced-compound-results">&#39;Advanced&#39; compound results</h2>
+<p>All the so-called &#39;advanced&#39; operations&#39; times summed and graphed (note - if a container doesn&#39;t
+even support a particular feature, then there&#39;s a good chance it&#39;ll be higher up these graphs).</p>
+<h3 id="fastest">Fastest</h3>
+<p><img src="../images/benchmark-results/Overview_Advanced_Fast.png" alt=""></p>
+<h3 id="slowest">Slowest</h3>
+<p><img src="../images/benchmark-results/Overview_Advanced_Slow.png" alt=""></p>
+<h3 id="notes">Notes</h3>
+<p>Rezolver doesn&#39;t make it into the &#39;Fast&#39; graph purely because of the aforementioned first-call 
+overhead when resolving a service of a given type for the very first time.  This will change.</p>
+<h2 id="basic-compound-results">&#39;Basic&#39; compound results</h2>
+<p>All the so-called &#39;basic&#39; operations&#39; times summed and graphed (again - if a container doesn&#39;t
+even support a particular feature, then it&#39;ll be higher up these graphs).</p>
+<h3 id="fastest-1">Fastest</h3>
+<p><img src="../images/benchmark-results/Overview_Basic_Fast.png" alt=""></p>
+<h3 id="slowest-1">Slowest</h3>
+<p><img src="../images/benchmark-results/Overview_Basic_Slow.png" alt=""></p>
+<h3 id="notes-1">Notes</h3>
+<p>Top 10 for Rezolver!</p>
+<h2 id="registerprepare--resolve-operation">Register/Prepare (+ Resolve operation)</h2>
+<h3 id="fasters">Fasters</h3>
+<p><img src="../images/benchmark-results/Overview_Prepare_Fast.png" alt=""></p>
+<h3 id="slowest-2">Slowest</h3>
+<p><img src="../images/benchmark-results/Overview_Prepare_Slow.png" alt=""></p>
 
             </article>
           </div>

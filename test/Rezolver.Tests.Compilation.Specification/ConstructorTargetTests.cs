@@ -62,7 +62,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			Output.WriteLine("The constructor is located JIT based on a single named argument");
 			var targets = CreateTargetContainer();
-			var target = ConstructorTarget.WithArgs<TwoCtors>(new { s = "hello world".AsObjectTarget() });
+			var target = Target.ForType<TwoCtors>(new { s = Target.ForObject("hello world") });
 			targets.Register(target);
 
 			var container = CreateContainer(targets);
