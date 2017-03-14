@@ -8,7 +8,8 @@ using System.Linq.Expressions;
 namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
-	/// An expression which represents an <see cref="ITarget" />.
+	/// An expression which represents an <see cref="ITarget" />, allowing a target with a particular <see cref="ITarget.DeclaredType"/> to be
+    /// used in place of a traditional expression.
 	/// </summary>
 	/// <remarks>The <see cref="ExpressionTargetBuilder"/> uses this class extensively when translating expressions
 	/// into targets and back again.  It's *highly* unlikely you'll need to use it in your code.

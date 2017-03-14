@@ -73,7 +73,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ExpressionTarget_ShouldResolveAnObjectAndReturnAMethodCall()
+		public void ExpressionTarget_ShouldResolveAnObjectViaGenericHelperAndReturnAMethodCall()
 		{
 			//When you want to explicitly resolve something in an expression, but don't want to or can't 
 			//use a lambda argument, you can also use the Function.Resolve helper method.  It does nothing
@@ -88,6 +88,19 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			Assert.Equal(new ServiceWithFunctions().GetChild(5).Output, container.Resolve<ServiceChild>().Output);
 		}
+
+        [Fact]
+        public void ExpressionTarget_ShouldResolveAnObjectViaHelperAndReturnAMethodCall()
+        {
+            //same as above, except not using the generic version
+            var targets = CreateTargetContainer();
+            targets.RegisterType<ServiceWithFunctions>();
+            targets.RegisterExpression(() => ((ServiceWithFunctions)ExpressionFunctions.Resolve(typeof(ServiceWithFunctions))).GetChild(5));
+
+            var container = CreateContainer(targets);
+
+            Assert.Equal(new ServiceWithFunctions().GetChild(5).Output, container.Resolve<ServiceChild>().Output);
+        }
 
         [Fact]
         public void ExpressionTarget_ShouldResolveViaGenericResolveContextAndReturnAMethodCall()
