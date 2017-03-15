@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -73,7 +74,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void ExpressionTarget_ShouldResolveAnObjectViaGenericHelperAndReturnAMethodCall()
+		public void ExpressionTarget_LambdaShouldResolveViaGenericHelperAndReturnAMethodCall()
 		{
 			//When you want to explicitly resolve something in an expression, but don't want to or can't 
 			//use a lambda argument, you can also use the Function.Resolve helper method.  It does nothing
@@ -90,7 +91,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
         [Fact]
-        public void ExpressionTarget_ShouldResolveAnObjectViaHelperAndReturnAMethodCall()
+        public void ExpressionTarget_LambdaShouldResolveViaHelperAndReturnAMethodCall()
         {
             //same as above, except not using the generic version
             var targets = CreateTargetContainer();
@@ -103,7 +104,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void ExpressionTarget_ShouldResolveViaGenericResolveContextAndReturnAMethodCall()
+        public void ExpressionTarget_LambdaShouldResolveViaGenericResolveContextAndReturnAMethodCall()
         {
             //same as above, just invoking the ResolveContext's Resolve{T} method directly (which should be rewritten
             //as a ResolvedTarget also
@@ -117,7 +118,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void ExpressionTarget_ShouldResolveViaResolveContextAndReturnAMethodCall()
+        public void ExpressionTarget_LambdaShouldResolveViaResolveContextAndReturnAMethodCall()
         {
             //same as above, just invoking the ResolveContext's Resolve{T} method directly (which should be rewritten
             //as a ResolvedTarget also
@@ -129,5 +130,93 @@ namespace Rezolver.Tests.Compilation.Specification
 
             Assert.Equal(new ServiceWithFunctions().GetChild(7).Output, container.Resolve<ServiceChild>().Output);
         }
-	}
+
+        [Fact]
+        public void ExpressionTarget_ExpressionShouldResolveViaGenericHelper()
+        {
+            //testing that the ExpressionFunctions static works in a non-lambda
+            //to do this we just use the body of a lambda
+            var targets = CreateTargetContainer();
+            targets.RegisterType<ServiceWithFunctions>();
+            Expression<Func<ServiceChild>> f = () => ExpressionFunctions.Resolve<ServiceWithFunctions>().GetChild(8);
+            targets.RegisterExpression(f.Body, typeof(ServiceChild));
+
+            var container = CreateContainer(targets);
+            Assert.Equal(new ServiceWithFunctions().GetChild(8).Output, container.Resolve<ServiceChild>().Output);
+        }
+
+        [Fact]
+        public void ExpressionTarget_ExpressionShouldResolveViaHelper()
+        {
+            //testing that the ExpressionFunctions static works in a non-lambda
+            //to do this we just use the body of a lambda
+            var targets = CreateTargetContainer();
+            targets.RegisterType<ServiceWithFunctions>();
+            Expression<Func<ServiceChild>> f = () => ((ServiceWithFunctions)ExpressionFunctions.Resolve(typeof(ServiceWithFunctions))).GetChild(9);
+            targets.RegisterExpression(f.Body, typeof(ServiceChild));
+
+            var container = CreateContainer(targets);
+            Assert.Equal(new ServiceWithFunctions().GetChild(9).Output, container.Resolve<ServiceChild>().Output);
+        }
+
+        [Fact]
+        public void ExpressionTarget_ResolvingByContextShouldGoThroughActiveScope()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterType<Disposable>();
+            //note - this expression is ultimately identical to using 'RegisterType'
+            targets.RegisterExpression(rc => new RequiresDisposable(rc.Resolve<Disposable>()));
+
+            var container = CreateContainer(targets);
+
+            RequiresDisposable outerResult = null;
+            RequiresDisposable innerResult = null;
+
+            using(var scope = container.CreateScope())
+            {
+                outerResult = scope.Resolve<RequiresDisposable>();
+                using(var childScope = scope.CreateScope())
+                {
+                    innerResult = childScope.Resolve<RequiresDisposable>();
+                }
+                Assert.Equal(1, innerResult.DisposedCount);
+                Assert.True(innerResult.Disposable.Disposed);
+            }
+            Assert.Equal(1, innerResult.DisposedCount);
+            Assert.True(innerResult.Disposable.Disposed);
+
+            Assert.Equal(1, outerResult.DisposedCount);
+            Assert.True(outerResult.Disposable.Disposed);
+        }
+
+        [Fact]
+        public void ExpressionTarget_ResolvingByHelperShouldGoThroughActiveScope()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterType<Disposable>();
+            //note - this expression is ultimately identical to using 'RegisterType'
+            targets.RegisterExpression(() => new RequiresDisposable(ExpressionFunctions.Resolve<Disposable>()));
+
+            var container = CreateContainer(targets);
+
+            RequiresDisposable outerResult = null;
+            RequiresDisposable innerResult = null;
+
+            using (var scope = container.CreateScope())
+            {
+                outerResult = scope.Resolve<RequiresDisposable>();
+                using (var childScope = scope.CreateScope())
+                {
+                    innerResult = childScope.Resolve<RequiresDisposable>();
+                }
+                Assert.Equal(1, innerResult.DisposedCount);
+                Assert.True(innerResult.Disposable.Disposed);
+            }
+            Assert.Equal(1, innerResult.DisposedCount);
+            Assert.True(innerResult.Disposable.Disposed);
+
+            Assert.Equal(1, outerResult.DisposedCount);
+            Assert.True(outerResult.Disposable.Disposed);
+        }
+    }
 }

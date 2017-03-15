@@ -124,6 +124,17 @@ namespace Rezolver.Compilation.Expressions
                 return null;
             }
 
+            protected override Expression VisitExtension(Expression node)
+            {
+                //if the expression is the TargetExpression, we simply return it - this happens
+                //when an expression specifically uses a known ITarget to provide a value for something
+                //within an expression (and allows us to mix and match expressions with targets).
+                if (node is TargetExpression)
+                    return node;
+
+                return base.VisitExtension(node);
+            }
+
             protected override Expression VisitConstant(ConstantExpression node)
             {
                 return new TargetExpression(new ObjectTarget(node.Value, node.Type));
