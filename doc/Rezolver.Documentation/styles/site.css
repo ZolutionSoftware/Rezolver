@@ -1551,8 +1551,8 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   color: #000;
-  background-color: rgba(255, 231, 216, 0.25);
-  border: 1px solid #ffc7a5;
+  background-color: white;
+  border: 1px solid #f15c00;
   border-radius: 4px;
 }
 pre code {
@@ -6648,13 +6648,13 @@ button.close {
 .hljs {
   display: block;
   overflow-x: auto;
-  color: #0b2466;
+  color: #1239A2;
   /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
   white-space: pre;
 }
 .hljs-comment,
 .hljs-quote {
-  color: #54689d;
+  color: #7b8cb8;
 }
 .hljs-doctag,
 .hljs-keyword,
@@ -6669,7 +6669,7 @@ button.close {
   color: #7f2323;
 }
 .hljs-literal {
-  color: #001f72;
+  color: #0031b4;
 }
 .hljs-string,
 .hljs-regexp,
@@ -6677,11 +6677,11 @@ button.close {
 .hljs-attribute,
 .hljs-meta-string,
 .hljs-value {
-  color: #720058;
+  color: #b4008b;
 }
 .hljs-built_in,
 .hljs-class .hljs-title {
-  color: #00721a;
+  color: #00b429;
 }
 .hljs-variable,
 .hljs-template-variable,
@@ -6690,17 +6690,17 @@ button.close {
 .hljs-selector-attr,
 .hljs-selector-pseudo,
 .hljs-number {
-  color: #720058;
+  color: #b4008b;
 }
 .hljs-title {
-  color: #00721a;
+  color: #00b429;
 }
 .hljs-symbol,
 .hljs-bullet,
 .hljs-link,
 .hljs-meta,
 .hljs-selector-id {
-  color: #725300;
+  color: #b48300;
 }
 .hljs-emphasis,
 .hljs-comment,

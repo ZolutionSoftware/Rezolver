@@ -30,7 +30,7 @@ might be passed to it.
 
 You can, of course, simply use the constructors to build a new instance of this target - e.g: `new GenericConstructorTarget(typeof(Foo<>))`.
 
-However, the non-generic versions of the Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* method that we've been using elsewhere to 
+However, the non-generic versions of the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* method that we've been using elsewhere to 
 register 'simple' types in our target containers are also generic type-aware.  So, if you specify an open generic type as the implementing type, 
 then those functions automatically create a @Rezolver.Targets.GenericConstructorTarget for you and register it.  
 
@@ -51,7 +51,7 @@ Lets get on with some examples, the first few of which use these types:
 ## Direct (no base/interface)
 
 Similar to the examples for 'normal' constructor injection, we'll start by looking at registering without worrying about bases or interfaces, 
-registering `DataFormatter<>` and fetching a `DataFormatter<int>`:
+registering `DataFormatter<>` and fetching a few different closed variants of that generic:
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/GenericConstructorExamples.cs#example1)]
 

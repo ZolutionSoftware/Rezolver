@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Factory delegates | Rezolver IOC Framework </title>
+  	<title>Factory Delegates | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Factory delegates | Rezolver IOC Framework ">
+  	<meta name="title" content="Factory Delegates | Rezolver IOC Framework ">
   	<meta name="generator" content="docfx 2.12.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
@@ -102,10 +102,63 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="factory-delegates">Factory delegates</h1>
+              <h1 id="factory-delegates">Factory Delegates</h1>
               
-<p>Documentation coming soon!</p>
+<p>You can register delegates in a Rezolver container so that, when the associated service type is resolved, your
+delegate will be executed and its result returned as the instance.</p>
+<p>The delegate can be of any type, subject to the following constraints:</p>
+<ul>
+<li>The delegate must have non-<code>void</code> return type</li>
+<li>It must not have any <code>ref</code> or <code>out</code> parameters</li>
+</ul>
+<p>To register delegates you can use one of the many <a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>To create delegate targets you can either:</p>
+<ul>
+<li>Manually create an instance of <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> through its constructor</li>
+<li>Use the <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForDelegate_">ForDelegate</a> overload, which provides specialisations for variants of the <code>System.Func&lt;&gt;</code> generic delegate</li>
+</ul>
+<h1 id="basic-examples">Basic Examples</h1>
+<p>Here are some straightforward examples</p>
+<h2 id="registertype-analogue"><code>RegisterType</code> analogue</h2>
+<p>In this example, we simply register a delegate that fires a type&#39;s constructor:</p>
+<pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
+container.RegisterDelegate(() =&gt; new MyService());
 
+var result = container.Resolve&lt;MyService&gt;();
+Assert.NotNull(result);
+</code></pre><h2 id="as-a-singleton">As a Singleton</h2>
+<p>We can also use the <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> and the <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_Scoped_">Scoped</a> extension methods to modify the lifetime of the
+object produced by the delegate:</p>
+<pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
+container.Register(
+    //RegisterSingleton specialises for types only, so
+    //we create the target manually and apply this .Singleton 
+    //extension method to to it before registering
+    Target.ForDelegate(() =&gt; new MyService()).Singleton()
+);
+
+var result = container.Resolve&lt;MyService&gt;();
+var result2 = container.Resolve&lt;MyService&gt;();
+
+Assert.Same(result, result2);
+</code></pre><h2 id="honouring-scopes-xrefrezolvertargeticontainerscope">Honouring Scopes (&lt;xref:Rezolver.Target.IContainerScope&gt;)</h2>
+<p>As you would expect, if the object is resolved through a scope, then it will be tracked and disposed by that scope when it is disposed:</p>
+<pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
+container.RegisterDelegate(() =&gt; new DisposableType());
+
+DisposableType result, result2;
+
+using (var scope = container.CreateScope())
+{
+    result = scope.Resolve&lt;DisposableType&gt;();
+    using (var childScope = scope.CreateScope())
+    {
+        result2 = scope.Resolve&lt;DisposableType&gt;();
+    }
+    Assert.True(result2.Disposed);
+}
+Assert.True(result.Disposed);
+</code></pre>
             </article>
           </div>
           

@@ -3120,6 +3120,33 @@ references:
   commentId: Overload:Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat
   fullName: Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat
   nameWithType: ExceptionResources.UnableToResolveTypeFromBuilderFormat
+- uid: Rezolver.ExpressionFunctions
+  name: ExpressionFunctions
+  href: api/Rezolver.ExpressionFunctions.html
+  commentId: T:Rezolver.ExpressionFunctions
+  fullName: Rezolver.ExpressionFunctions
+  nameWithType: ExpressionFunctions
+- uid: Rezolver.ExpressionFunctions.Resolve(System.Type)
+  name: Resolve(Type)
+  href: api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve_System_Type_
+  commentId: M:Rezolver.ExpressionFunctions.Resolve(System.Type)
+  fullName: Rezolver.ExpressionFunctions.Resolve(System.Type)
+  nameWithType: ExpressionFunctions.Resolve(Type)
+- uid: Rezolver.ExpressionFunctions.Resolve*
+  name: Resolve
+  href: api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve_
+  commentId: Overload:Rezolver.ExpressionFunctions.Resolve
+  fullName: Rezolver.ExpressionFunctions.Resolve
+  nameWithType: ExpressionFunctions.Resolve
+- uid: Rezolver.ExpressionFunctions.Resolve``1
+  name: Resolve<T>()
+  href: api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve__1
+  commentId: M:Rezolver.ExpressionFunctions.Resolve``1
+  name.vb: Resolve(Of T)()
+  fullName: Rezolver.ExpressionFunctions.Resolve<T>()
+  fullName.vb: Rezolver.ExpressionFunctions.Resolve(Of T)()
+  nameWithType: ExpressionFunctions.Resolve<T>()
+  nameWithType.vb: ExpressionFunctions.Resolve(Of T)()
 - uid: Rezolver.ExpressionTargetContainerExtensions
   name: ExpressionTargetContainerExtensions
   href: api/Rezolver.ExpressionTargetContainerExtensions.html
@@ -3912,21 +3939,27 @@ references:
   commentId: T:Rezolver.ObjectTargetContainerExtensions
   fullName: Rezolver.ObjectTargetContainerExtensions
   nameWithType: ObjectTargetContainerExtensions
+- uid: Rezolver.ObjectTargetContainerExtensions.RegisterObject(Rezolver.ITargetContainer,System.Object,System.Type,System.Type,Rezolver.ScopeBehaviour)
+  name: RegisterObject(ITargetContainer, Object, Type, Type, ScopeBehaviour)
+  href: api/Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject_Rezolver_ITargetContainer_System_Object_System_Type_System_Type_Rezolver_ScopeBehaviour_
+  commentId: M:Rezolver.ObjectTargetContainerExtensions.RegisterObject(Rezolver.ITargetContainer,System.Object,System.Type,System.Type,Rezolver.ScopeBehaviour)
+  fullName: Rezolver.ObjectTargetContainerExtensions.RegisterObject(Rezolver.ITargetContainer, System.Object, System.Type, System.Type, Rezolver.ScopeBehaviour)
+  nameWithType: ObjectTargetContainerExtensions.RegisterObject(ITargetContainer, Object, Type, Type, ScopeBehaviour)
 - uid: Rezolver.ObjectTargetContainerExtensions.RegisterObject*
   name: RegisterObject
   href: api/Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject_
   commentId: Overload:Rezolver.ObjectTargetContainerExtensions.RegisterObject
   fullName: Rezolver.ObjectTargetContainerExtensions.RegisterObject
   nameWithType: ObjectTargetContainerExtensions.RegisterObject
-- uid: Rezolver.ObjectTargetContainerExtensions.RegisterObject``1(Rezolver.ITargetContainer,``0,System.Type,Rezolver.ScopeBehaviour)
-  name: RegisterObject<T>(ITargetContainer, T, Type, ScopeBehaviour)
-  href: api/Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject__1_Rezolver_ITargetContainer___0_System_Type_Rezolver_ScopeBehaviour_
-  commentId: M:Rezolver.ObjectTargetContainerExtensions.RegisterObject``1(Rezolver.ITargetContainer,``0,System.Type,Rezolver.ScopeBehaviour)
-  name.vb: RegisterObject(Of T)(ITargetContainer, T, Type, ScopeBehaviour)
-  fullName: Rezolver.ObjectTargetContainerExtensions.RegisterObject<T>(Rezolver.ITargetContainer, T, System.Type, Rezolver.ScopeBehaviour)
-  fullName.vb: Rezolver.ObjectTargetContainerExtensions.RegisterObject(Of T)(Rezolver.ITargetContainer, T, System.Type, Rezolver.ScopeBehaviour)
-  nameWithType: ObjectTargetContainerExtensions.RegisterObject<T>(ITargetContainer, T, Type, ScopeBehaviour)
-  nameWithType.vb: ObjectTargetContainerExtensions.RegisterObject(Of T)(ITargetContainer, T, Type, ScopeBehaviour)
+- uid: Rezolver.ObjectTargetContainerExtensions.RegisterObject``1(Rezolver.ITargetContainer,``0,System.Type,System.Type,Rezolver.ScopeBehaviour)
+  name: RegisterObject<T>(ITargetContainer, T, Type, Type, ScopeBehaviour)
+  href: api/Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject__1_Rezolver_ITargetContainer___0_System_Type_System_Type_Rezolver_ScopeBehaviour_
+  commentId: M:Rezolver.ObjectTargetContainerExtensions.RegisterObject``1(Rezolver.ITargetContainer,``0,System.Type,System.Type,Rezolver.ScopeBehaviour)
+  name.vb: RegisterObject(Of T)(ITargetContainer, T, Type, Type, ScopeBehaviour)
+  fullName: Rezolver.ObjectTargetContainerExtensions.RegisterObject<T>(Rezolver.ITargetContainer, T, System.Type, System.Type, Rezolver.ScopeBehaviour)
+  fullName.vb: Rezolver.ObjectTargetContainerExtensions.RegisterObject(Of T)(Rezolver.ITargetContainer, T, System.Type, System.Type, Rezolver.ScopeBehaviour)
+  nameWithType: ObjectTargetContainerExtensions.RegisterObject<T>(ITargetContainer, T, Type, Type, ScopeBehaviour)
+  nameWithType.vb: ObjectTargetContainerExtensions.RegisterObject(Of T)(ITargetContainer, T, Type, Type, ScopeBehaviour)
 - uid: Rezolver.OverridingContainer
   name: OverridingContainer
   href: api/Rezolver.OverridingContainer.html
@@ -4488,27 +4521,27 @@ references:
   commentId: T:Rezolver.Target
   fullName: Rezolver.Target
   nameWithType: Target
-- uid: Rezolver.Target.ChangeType(Rezolver.ITarget,System.Type)
-  name: ChangeType(ITarget, Type)
-  href: api/Rezolver.Target.html#Rezolver_Target_ChangeType_Rezolver_ITarget_System_Type_
-  commentId: M:Rezolver.Target.ChangeType(Rezolver.ITarget,System.Type)
-  fullName: Rezolver.Target.ChangeType(Rezolver.ITarget, System.Type)
-  nameWithType: Target.ChangeType(ITarget, Type)
-- uid: Rezolver.Target.ChangeType*
-  name: ChangeType
-  href: api/Rezolver.Target.html#Rezolver_Target_ChangeType_
-  commentId: Overload:Rezolver.Target.ChangeType
-  fullName: Rezolver.Target.ChangeType
-  nameWithType: Target.ChangeType
-- uid: Rezolver.Target.ChangeType``1(Rezolver.ITarget)
-  name: ChangeType<T>(ITarget)
-  href: api/Rezolver.Target.html#Rezolver_Target_ChangeType__1_Rezolver_ITarget_
-  commentId: M:Rezolver.Target.ChangeType``1(Rezolver.ITarget)
-  name.vb: ChangeType(Of T)(ITarget)
-  fullName: Rezolver.Target.ChangeType<T>(Rezolver.ITarget)
-  fullName.vb: Rezolver.Target.ChangeType(Of T)(Rezolver.ITarget)
-  nameWithType: Target.ChangeType<T>(ITarget)
-  nameWithType.vb: Target.ChangeType(Of T)(ITarget)
+- uid: Rezolver.Target.As(Rezolver.ITarget,System.Type)
+  name: As(ITarget, Type)
+  href: api/Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_
+  commentId: M:Rezolver.Target.As(Rezolver.ITarget,System.Type)
+  fullName: Rezolver.Target.As(Rezolver.ITarget, System.Type)
+  nameWithType: Target.As(ITarget, Type)
+- uid: Rezolver.Target.As*
+  name: As
+  href: api/Rezolver.Target.html#Rezolver_Target_As_
+  commentId: Overload:Rezolver.Target.As
+  fullName: Rezolver.Target.As
+  nameWithType: Target.As
+- uid: Rezolver.Target.As``1(Rezolver.ITarget)
+  name: As<T>(ITarget)
+  href: api/Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_
+  commentId: M:Rezolver.Target.As``1(Rezolver.ITarget)
+  name.vb: As(Of T)(ITarget)
+  fullName: Rezolver.Target.As<T>(Rezolver.ITarget)
+  fullName.vb: Rezolver.Target.As(Of T)(Rezolver.ITarget)
+  nameWithType: Target.As<T>(ITarget)
+  nameWithType.vb: Target.As(Of T)(ITarget)
 - uid: Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,Rezolver.IMemberBindingBehaviour)
   name: ForConstructor(ConstructorInfo, IMemberBindingBehaviour)
   href: api/Rezolver.Target.html#Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_

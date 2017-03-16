@@ -112,7 +112,7 @@ the base:
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example5)]
 
 > [!TIP]
-> The use of @Rezolver.Targets.ChangeTypeTarget there might be a little confusing.  In truth, we're only sneaking it in here to show
+> The use of @Rezolver.Targets.ChangeTypeTarget (via the `As` extension method) there might be a little confusing.  In truth, we're only sneaking it in here to show
 > some other parts of the framework :)
 > 
 > Think of it as being the same as an explicit cast from one type to another - you put a target inside it and tell it what type

@@ -212,6 +212,11 @@ implementation:</p>
 <td>Any</td>
 </tr>
 <tr>
+<td><code>MyService&lt;int&gt; : IService&lt;int&gt;</code></td>
+<td><code>IService&lt;int&gt;</code></td>
+<td>Any</td>
+</tr>
+<tr>
 <td><code>MyService&lt;T&gt;</code></td>
 <td><code>MyService&lt;T&gt;</code></td>
 <td><a class="xref" href="../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a></td>
@@ -236,19 +241,28 @@ implementation:</p>
 </ul>
 <p>These same methods are used by the standard container classes when determining how to resolve an instance (or instances) for
 a given type.</p>
+<div class="NOTE"><h5>Note</h5><p>There is currently no way to remove a registration from a <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+</div>
 <h1 id="target-types">Target types</h1>
 <p>The different ways in which Rezolver can create/obtain objects for your application, then, are pretty much all handled 
-through the <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> interface, and the different implementations that we have for that.</p>
-<p>Whether you want to use <a href="constructor-injection/index.html">constructor injection</a>, an <a href="objects.html">object you&#39;ve built yourself</a>, an 
-<a href="expressions.html">expression tree</a> or a <a href="delegates.html">factory delegate</a>, or something else, there&#39;s lots of ways to get 
-Rezolver to build the services you want to use in your application.</p>
-<p>Use the table of contents to the left (or above if on a small screen) to select the type of registration you want to
-learn more about.</p>
-<p>All the targets used by default in Rezolver to create objects can be found in the <a class="xref" href="../api/Rezolver.Targets.html">Rezolver.Targets</a> namespace.</p>
+through the <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> interface, and the different implementations that are available.</p>
+<p>Whether you want to use <a href="constructor-injection/index.html">constructor injection</a> (via <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or 
+<a class="xref" href="../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>), 
+an <a href="objects.html">object you&#39;ve built yourself</a> (via <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>), an 
+<a href="expressions.html">expression tree</a> (via <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a>) or a <a href="delegates.html">factory delegate</a> 
+(via <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a>), or something else, there&#39;s lots of ways to get Rezolver to build the services 
+you want to use in your application.</p>
+<p>All the targets used by default in Rezolver to create objects can be found in the <a class="xref" href="../api/Rezolver.Targets.html">Rezolver.Targets</a> namespace.  In addition to their
+constructors, the <a class="xref" href="../api/Rezolver.Target.html">Target</a> static class also contains numerous factory methods for building these targets in isolation, using
+an API which is similar to the registration API.  For example: <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForType_">ForType</a> is a shortcut for building the 
+<a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>, which binds a type for constructor injection.</p>
+<p>In the table of contents to the left (or above if on a small screen) you&#39;ll also find high-level walkthroughs, including examples, 
+on the most important targets you need to know about.</p>
 <h2 id="implementing-targets">Implementing targets</h2>
 <p>You can also implement <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> yourself if you&#39;re feeling adventurous - but you must provide a way for the
 container to compile your target into an <a class="xref" href="../api/Rezolver.ICompiledTarget.html">ICompiledTarget</a> that can be used at resolve-time.  Documentation 
-on how to do this will be added to this guide in the future.</p>
+on how to do this will be added to this guide in the future, but if you&#39;re curious now, then the types in the 
+<a class="xref" href="../api/Rezolver.Compilation.Expressions.html">Rezolver.Compilation.Expressions</a> namespace will provide a few ideas.</p>
 <h2 id="short-circuited-targets">Short-circuited targets</h2>
 <p>Rezolver containers also support short-circuited, &#39;direct&#39; targets which bypass the compilation process when attempting 
 to fulfil a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operation, specifically:</p>

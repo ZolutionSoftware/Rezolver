@@ -65,7 +65,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="target">Required. The target.</param>
         /// <param name="targetType">Required. The new type for the <paramref name="target"/>.</param>
-        public static ITarget ChangeType(this ITarget target, Type targetType)
+        public static ITarget As(this ITarget target, Type targetType)
         {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
@@ -82,7 +82,7 @@ namespace Rezolver
         /// <typeparamref name="T"/>.
         /// </summary>
         /// <param name="target">Required. The target.</param>
-        public static ITarget ChangeType<T>(this ITarget target)
+        public static ITarget As<T>(this ITarget target)
         {
             if (target == null)
                 throw new ArgumentNullException(nameof(target));

@@ -124,7 +124,7 @@ argument is dependant upon a type argument, then there&#39;s no way you could su
 might be passed to it.</p>
 <h2 id="creatingregistering-xrefrezolvertargetsgenericconstructortargets">Creating/registering <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>s</h2>
 <p>You can, of course, simply use the constructors to build a new instance of this target - e.g: <code>new GenericConstructorTarget(typeof(Foo&lt;&gt;))</code>.</p>
-<p>However, the non-generic versions of the Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* method that we&#39;ve been using elsewhere to 
+<p>However, the non-generic versions of the <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_">RegisterType</a> method that we&#39;ve been using elsewhere to 
 register &#39;simple&#39; types in our target containers are also generic type-aware.  So, if you specify an open generic type as the implementing type, 
 then those functions automatically create a <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for you and register it.  </p>
 <p>So, <code>container.RegisterType(typeof(MyGeneric&lt;&gt;))</code> will register <code>MyGeneric&lt;&gt;</code> for all variants of itself, and 
@@ -145,7 +145,7 @@ then those functions automatically create a <a class="xref" href="../../api/Rezo
 <h1 id="basic-examples">Basic examples</h1>
 <h2 id="direct-no-baseinterface">Direct (no base/interface)</h2>
 <p>Similar to the examples for &#39;normal&#39; constructor injection, we&#39;ll start by looking at registering without worrying about bases or interfaces, 
-registering <code>DataFormatter&lt;&gt;</code> and fetching a <code>DataFormatter&lt;int&gt;</code>:</p>
+registering <code>DataFormatter&lt;&gt;</code> and fetching a few different closed variants of that generic:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 container.RegisterType(typeof(DataFormatter&lt;&gt;));
 

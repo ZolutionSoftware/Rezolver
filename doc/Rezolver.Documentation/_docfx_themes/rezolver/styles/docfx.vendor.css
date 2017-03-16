@@ -414,7 +414,7 @@ code,kbd,pre,samp{font-family:Menlo,Monaco,Consolas,"Courier New",monospace}
 code{color:#c7254e;background-color:#f9f2f4;border-radius:4px}
 kbd{color:#fff;background-color:#333;border-radius:3px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)}
 kbd kbd{padding:0;font-size:100%;box-shadow:none}
-pre{margin:0 0 10px;font-size:13px;word-break:break-all;word-wrap:break-word;color:#000;background-color:rgba(255,231,216,.25);border:1px solid #ffc7a5;border-radius:4px}
+pre{margin:0 0 10px;font-size:13px;word-break:break-all;word-wrap:break-word;color:#000;background-color:#fff;border:1px solid #f15c00;border-radius:4px}
 .container,.container-fluid{margin-right:auto;margin-left:auto}
 pre code{padding:0;font-size:inherit;color:inherit;white-space:pre-wrap;border-radius:0}
 .container,.container-fluid{padding-left:15px;padding-right:15px}
@@ -1442,17 +1442,17 @@ td.visible-print,th.visible-print{display:table-cell!important}
 @media print{.visible-print-inline-block{display:inline-block!important}
 .hidden-print{display:none!important}
 }
-.hljs{display:block;overflow-x:auto;color:#0b2466;white-space:pre}
+.hljs{display:block;overflow-x:auto;color:#1239A2;white-space:pre}
 .fa,.fa-stack{display:inline-block}
-.hljs-comment,.hljs-quote{color:#54689d}
+.hljs-comment,.hljs-quote{color:#7b8cb8}
 .hljs-doctag,.hljs-formula,.hljs-keyword{color:#b33}
 .hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#7f2323}
-.hljs-literal{color:#001f72}
-.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string,.hljs-value{color:#720058}
-.hljs-built_in,.hljs-class .hljs-title{color:#00721a}
-.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#720058}
-.hljs-title{color:#00721a}
-.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol{color:#725300}
+.hljs-literal{color:#0031b4}
+.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string,.hljs-value{color:#b4008b}
+.hljs-built_in,.hljs-class .hljs-title{color:#00b429}
+.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#b4008b}
+.hljs-title{color:#00b429}
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol{color:#b48300}
 .hljs-comment,.hljs-emphasis,.hljs-quote{font-style:italic}
 .hljs-strong{font-weight:700}
 .hljs-link{text-decoration:underline}

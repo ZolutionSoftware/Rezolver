@@ -82,10 +82,10 @@ pre {
     right: 0px;
     top: 0px;
     padding: 5px;
-    border: 1px solid;
-    border-color: #ff680c;
-    border-top: none;
-    background: #ff680c;
+    /*border: 1px solid;
+			border-color: darken(@pre-border-color, 30%);
+			border-top: none;*/
+    background: #f15c00;
     color: white;
   }
 }
@@ -101,10 +101,10 @@ pre {
     right: 0px;
     top: 0px;
     padding: 5px;
-    border: 1px solid;
-    border-color: #ff680c;
-    border-top: none;
-    background: #ff680c;
+    /*border: 1px solid;
+			border-color: darken(@pre-border-color, 30%);
+			border-top: none;*/
+    background: #f15c00;
     color: white;
   }
 }

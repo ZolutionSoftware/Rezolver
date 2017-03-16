@@ -112,11 +112,11 @@ place!</p>
 is the main class you&#39;ll use for your &#39;registration&#39; phase.</p>
 </li>
 <li><p><strong><a class="xref" href="Rezolver.Container.html">Container</a></strong> (implements <a class="xref" href="Rezolver.IContainer.html">IContainer</a>): The standard, non-scoped, container you&#39;ll use in 
-your composition root - you can create child scopes from this by calling its implementation of @Rezolver.IContainer.CreateScope, 
+your composition root - you can create child scopes from this by calling its implementation of <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a>, 
 which returns instances of <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>.  This class uses an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> for its registrations,
 which you can supply construction if required.</p>
 </li>
-<li><p><strong><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></strong> - A container which also acts as a &#39;root&#39; scope.</p>
+<li><p><strong><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></strong> - A disposable <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that also acts as a &#39;root&#39; scope.</p>
 </li>
 </ul>
 
