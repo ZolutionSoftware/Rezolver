@@ -21,6 +21,8 @@ More information, including API reference and developer how-tos, is available al
 > Work on the documentation is going on all the time, and content will be pushed as and when it's good 
 > enough (hopefully every day or two).
 
+[Follow us on twitter](https://twitter.com/RezolverIOC) for code or documentation updates/release notifications etc.
+
 ## Benchmarks
 
 [Check out some benchmarks results for Rezolver](http://rezolver.co.uk/developers/docs/benchmarks.html).
@@ -75,13 +77,13 @@ first.
 - Auto-built WCF client 'experiment' (just gotta try :) )
 - Conditional targets with caching support in `CachingContainerBase`
 - Truly mutable containers - add new targets for an enumerable, or replace a service registration
-after using them, and have the cache purge automatically.
+after using them, and have the cache purge automatically without sacrificing speed of normal operation.
 
 ### For [rezolver.co.uk](http://rezolver.co.uk)
 
 - <strike>Styling of the footer (where'd that green come from!?)</strike>
-- Full documentation of all targets
-- Results of benchmarking via https://github.com/danielpalme/IocPerformance (*hint* - only child containers letting it down at the moment, otherwise v.quick)
+- Full documentation of all targets ***70-75%* done**
+- <strike>Results of benchmarking via https://github.com/danielpalme/IocPerformance (*hint* - only child containers letting it down at the moment, otherwise v.quick)</strike> - [here](http://rezolver.co.uk/developers/docs/benchmarks.html)
 - Scoping documentation
 - Compilation walkthrough
 - Experimental examples
