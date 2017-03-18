@@ -562,7 +562,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Rezolver/1.1.71702.100": {
+      "Rezolver/1.1.71702.500": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "frameworkAssemblies": [
@@ -575,12 +575,12 @@
           "net451/Rezolver.dll": {}
         }
       },
-      "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.0": {
+      "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.703.1800": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
-          "Rezolver": "1.1.0"
+          "Rezolver": "1.1.71702.500"
         },
         "compile": {
           "net451/Rezolver.Microsoft.Extensions.DependencyInjection.dll": {}
@@ -1742,7 +1742,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "Rezolver/1.1.71702.100": {
+      "Rezolver/1.1.71702.500": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -1756,12 +1756,12 @@
           "netstandard1.1/Rezolver.dll": {}
         }
       },
-      "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.0": {
+      "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.703.1800": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
-          "Rezolver": "1.1.0"
+          "Rezolver": "1.1.71702.500"
         },
         "compile": {
           "netstandard1.1/Rezolver.Microsoft.Extensions.DependencyInjection.dll": {}
@@ -5002,12 +5002,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Rezolver/1.1.71702.100": {
+    "Rezolver/1.1.71702.500": {
       "type": "project",
       "path": "../Rezolver/project.json",
       "msbuildProject": "../Rezolver/Rezolver.xproj"
     },
-    "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.0": {
+    "Rezolver.Microsoft.Extensions.DependencyInjection/1.1.703.1800": {
       "type": "project",
       "path": "../Rezolver.Microsoft.Extensions.DependencyInjection/project.json",
       "msbuildProject": "../Rezolver.Microsoft.Extensions.DependencyInjection/Rezolver.Microsoft.Extensions.DependencyInjection.xproj"

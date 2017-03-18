@@ -23,7 +23,7 @@ More information, including API reference and developer how-tos, is available al
 
 ## Benchmarks
 
-[Check out some benchmarks results for Rezolver](doc/Rezolver.Documentation/_docfx_proj/docs/benchmarks.md).
+[Check out some benchmarks results for Rezolver](http://rezolver.co.uk/developers/docs/benchmarks.html).
 It finishes around top 10 in almost everything that's tested - and the speed will only improve
 over time. 
 

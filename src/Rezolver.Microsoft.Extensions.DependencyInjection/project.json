@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.1.0-*",
+  "version": "1.1.703.1800",
   "title": "Rezolver .Net Core IServiceProvider implementation",
   "description": "Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)",
   "packOptions": {
@@ -7,13 +7,14 @@
     "tags": [ "ioc", "di", "portable", "rezolver" ],
     "projectUrl": "http://rezolver.co.uk",
     "iconUrl": "http://rezolver.co.uk/favicon-96x96.png",
-    "licenseUrl": "https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt"
+    "licenseUrl": "https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt",
+    "releaseNotes": "Switched scope factory to use the IScopeFactory implementation of ResolveContext (new in 1.1.71702.500), which honours child scopes correctly."
   },
   "copyright": "2014 onwards Zolution Software Ltd",
   "authors": [ "Zolution Software Ltd" ],
   "dependencies": {
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0-*",
-    "Rezolver": "1.1.0-*"
+    "Rezolver": "1.1.71702.500"
   },
 
   "frameworks": {

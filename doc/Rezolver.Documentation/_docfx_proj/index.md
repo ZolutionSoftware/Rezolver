@@ -1,6 +1,6 @@
 # Rezolver
 
-Rezolver is a fast, efficient, extensible, [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container supporting .Net 
+Rezolver is a [fast](docs/benchmarks.md), efficient, extensible, [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container supporting .Net 
 Core.  This site contains API documentation and developer guides for getting the most out of it.  
 
 ## Features
@@ -19,7 +19,7 @@ _Linked topics provide high level overviews and examples in our developer guide 
 - Child containers (overriding registrations in one container with those of another)
   - Child registration containers (lower-level overriding of registrations for similar but sibling containers)
 - Hierarchical lifetime scoping
-- [Delegates](docs/delegates.md) and [Expressions](docs/expressions.md) as factories, with argument injection
+- [Delegates](docs/delegates.md) and Expressions as factories, with argument injection
   - Explicit resolving supported inside factory/expression bodies
 - Singletons
 - [Objects as services](docs/objects.md)
@@ -38,6 +38,7 @@ _<small> * If a topic isn't linked, it's probably because we're still working on
 ## Quick Links
 
 - [Developer Guide](docs/index.md)
+- [Benchmarks](docs/benchmarks.md)
 - [Nuget Packages](docs/nuget-packages/index.md)
 - [API Reference](api/index.md)
 - [Release History (On Github)](https://github.com/ZolutionSoftware/Rezolver/releases)
