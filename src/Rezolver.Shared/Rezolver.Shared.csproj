@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Shared source for Rezolver projects</Description>
+    <VersionPrefix>1.1.0.106</VersionPrefix>
+    <Authors>Zolution Software Ltd</Authors>
+    <TargetFrameworks>netstandard1.1</TargetFrameworks>
+    <AssemblyName>Rezolver.Shared</AssemblyName>
+    <PackageId>Rezolver.Shared</PackageId>
+    <PackageTags>rezolver</PackageTags>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="**/*.cs" />
+    <Compile Include="**/*.cs" Exclude="obj/**/*.cs">
+      <Pack>true</Pack>
+      <PackagePath>content\;contentFiles\any\netstandard1.1\</PackagePath>
+    </Compile>
+    <!--<Content Include="**/*.cs" Exclude="obj/**/*.cs">
+    </Content>-->
+  </ItemGroup>
+
+  <Target Name="PrepNuspec" AfterTargets="DisabledBuild">
+    <RemoveDir Directories="obj/temp" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'obj/temp/net451/%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'obj/temp/net46/%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'obj/temp/netstandard1.1/%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+</Project>

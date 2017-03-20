@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Rezolver is a fast IOC framework offering all the most common features of any IOC container.  It's easy to use and 100% extensible.</Description>
+    <Copyright>2014 onwards Zolution Software Ltd</Copyright>
+    <AssemblyTitle>Rezolver IOC Framework</AssemblyTitle>
+    <VersionPrefix>1.1.71702.500</VersionPrefix>
+    <Authors>Zolution Software Ltd</Authors>
+    <TargetFrameworks>netstandard1.1;net451;net46</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>Rezolver</AssemblyName>
+    <PackageId>Rezolver</PackageId>
+    <PackageTags>ioc;di;portable;rezolver</PackageTags>
+    <PackageReleaseNotes>(Last version before 1.2) Simplification of target creation factory method (see 'Target') type; Added IScopeFactory; added Resolve functionality to ResolveContext; minor bug fixes</PackageReleaseNotes>
+    <PackageIconUrl>http://rezolver.co.uk/favicon-96x96.png</PackageIconUrl>
+    <PackageProjectUrl>http://rezolver.co.uk</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateNeutralResourcesLanguageAttribute>false</GenerateNeutralResourcesLanguageAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>../../.nupkg</PackageOutputPath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
+  </PropertyGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <PackageReference Include="System.ComponentModel" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Targets\DelegateTarget_CreateAndRegister.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DelegateTarget_CreateAndRegister.cs</LastGenOutput>
+    </None>
+    <None Update="Targets\ExpressionTarget_CreateAndRegister.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ExpressionTarget_CreateAndRegister.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Targets\DelegateTarget_CreateAndRegister.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DelegateTarget_CreateAndRegister.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Targets\ExpressionTarget_CreateAndRegister.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExpressionTarget_CreateAndRegister.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../Rezolver.Shared/**/*.cs" Exclude="../Rezolver.Shared/obj/**/*.cs">
+      <Link>Shared\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+</Project>
