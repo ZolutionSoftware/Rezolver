@@ -1,6 +1,7 @@
 ﻿using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -25,7 +26,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldNotAllowVoidDelegate()
 		{
-			Action invalidFactory = () => Console.WriteLine();
+			Action invalidFactory = () => Debug.WriteLine(string.Empty);
 			Assert.Throws<ArgumentException>(() => new DelegateTarget(invalidFactory));
 		}
 

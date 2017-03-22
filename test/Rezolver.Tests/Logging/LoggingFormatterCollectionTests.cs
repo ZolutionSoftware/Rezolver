@@ -115,9 +115,6 @@ namespace Rezolver.Tests.Logging
 			var target2 = Target.ForType<NoDefaultConstructor2>(new { value = Target.ForObject(1) });
 			var str = ObjectFormatterCollection.Default.Format(target);
 			var str2 = ObjectFormatterCollection.Default.Format(target2);
-			var logger = new Xunit.ConsoleRunnerLogger(true);
-			logger.LogMessage(str);
-			logger.LogMessage(str2);
-		}
+        }
     }
 }

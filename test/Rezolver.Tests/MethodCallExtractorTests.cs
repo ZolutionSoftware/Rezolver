@@ -15,7 +15,7 @@ namespace Rezolver.Tests
 		public void ShouldExtractMethodFromCallExpression()
 		{
 			MethodInfo mi = MethodCallExtractor.ExtractCalledMethod((object o) => o.GetHashCode());
-			MethodInfo expected = typeof(object).GetMethod("GetHashCode");
+			MethodInfo expected = TypeHelpers.GetMethod(typeof(object), ("GetHashCode"));
 			Assert.Equal(expected, mi);
 		}
 
@@ -23,7 +23,7 @@ namespace Rezolver.Tests
 		public void ShouldExtractConstructor()
 		{
 			var ctor = MethodCallExtractor.ExtractConstructorCall(() => new string('c', 10));
-			var expected = typeof(string).GetConstructors().SingleOrDefault(c =>
+			var expected = TypeHelpers.GetConstructors(typeof(string)).SingleOrDefault(c =>
 			{
 				var parms = c.GetParameters();
 				return parms.Length == 2 && parms[0].ParameterType == typeof(char) && parms[1].ParameterType == typeof(int);

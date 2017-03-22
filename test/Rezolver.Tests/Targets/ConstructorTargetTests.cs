@@ -37,7 +37,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldCreateTargetForCtor()
 		{
-			var ctor = TypeHelpers.GetConstructor(typeof(NoCtor), Type.EmptyTypes);
+			var ctor = TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]);
 			var target = new ConstructorTarget(ctor);
 
 			//declared type should be lifted from the ctor
@@ -52,7 +52,7 @@ namespace Rezolver.Tests.Targets
 		public void ShouldSetMemberBindingBehaviour()
 		{
 			//test both Ctors here
-			var ctor = TypeHelpers.GetConstructor(typeof(NoCtor), Type.EmptyTypes);
+			var ctor = TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]);
 			var target1 = new ConstructorTarget(typeof(NoCtor), memberBinding: DefaultMemberBindingBehaviour.Instance);
 			var target2 = new ConstructorTarget(ctor, memberBinding: DefaultMemberBindingBehaviour.Instance);
 
@@ -166,7 +166,7 @@ namespace Rezolver.Tests.Targets
 			{
 				new[] {  new ExpectedJITBinding(
 					typeof(NoCtor),
-					TypeHelpers.GetConstructor(typeof(NoCtor), Type.EmptyTypes),
+					TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]),
 					description: "Default constructor"
 				)},
 				new[] {  new ExpectedJITBinding(
@@ -289,7 +289,7 @@ namespace Rezolver.Tests.Targets
 			return new object[][]
 			{
 				new[] {  new UpfrontBinding(
-					TypeHelpers.GetConstructor(typeof(NoCtor), Type.EmptyTypes),
+					TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]),
 					description: "Default constructor"
 				)},
 				new[] {  new UpfrontBinding(

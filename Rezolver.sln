@@ -14,14 +14,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}"
+	ProjectSection(SolutionItems) = preProject
+		src\Rezolver.Shared.props = src\Rezolver.Shared.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}"
+	ProjectSection(SolutionItems) = preProject
+		test\Rezolver.Tests.Shared.props = test\Rezolver.Tests.Shared.props
+	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Configuration", "src\Rezolver.Configuration\Rezolver.Configuration.xproj", "{05F52AEE-AB5B-4008-8B00-6CA2B58CAC48}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Configuration.Json", "src\Rezolver.Configuration.Json\Rezolver.Configuration.Json.xproj", "{666B1CA1-F096-4C52-92AF-D35738EE79DA}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests", "test\Rezolver.Tests\Rezolver.Tests.xproj", "{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Tests", "test\Rezolver.Tests\Rezolver.Tests.csproj", "{28DD4C74-DC5C-41FC-95DA-B2D0C593234B}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Microsoft.Extensions.DependencyInjection.Tests", "test\Rezolver.Microsoft.DependencyInjection.Tests\Rezolver.Microsoft.Extensions.DependencyInjection.Tests.xproj", "{8E28B05B-C9DA-4F59-8108-44519816FD02}"
 EndProject
@@ -51,7 +57,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Logging", "src\Rez
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Microsoft.AspNetCore.Hosting", "src\Rezolver.Microsoft.AspNetCore.Hosting\Rezolver.Microsoft.AspNetCore.Hosting.xproj", "{CE013397-D47E-40AA-9C2E-9693C3404DB8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.Shared", "test\Rezolver.Tests.Shared\Rezolver.Tests.Shared.xproj", "{8DF651BD-CC9C-4DF1-BD0C-E3B2A7D1BB69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Tests.Shared", "test\Rezolver.Tests.Shared\Rezolver.Tests.Shared.csproj", "{8DF651BD-CC9C-4DF1-BD0C-E3B2A7D1BB69}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Rezolver.Tests.Compilation.Specification", "test\Rezolver.Tests.Compilation.Specification\Rezolver.Tests.Compilation.Specification.xproj", "{460515E5-89FF-48FC-911B-FC31E12902F5}"
 EndProject

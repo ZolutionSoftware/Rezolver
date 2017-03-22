@@ -177,6 +177,7 @@ FakesAssemblies/
 
 # nuget packages
 *.nupkg
+.nupkg/
 
 # code analysis files
 *.crdata
@@ -188,3 +189,5 @@ Help/
 test/Rezolver.Tests/_TestAssemblies
 *.pubxml
 /doc/Rezolver.Documentation/bower_components
+test/artifacts/
+src/artifacts/

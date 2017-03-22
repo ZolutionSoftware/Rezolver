@@ -2,6 +2,7 @@
 using Rezolver.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -82,25 +83,25 @@ namespace Rezolver.Tests
 			}
 			public void CallEnd(long reqId)
 			{
-				Console.WriteLine($"CallEnd called for reqId {reqId}");
+				Debug.WriteLine($"CallEnd called for reqId {reqId}");
 			}
 
 			public void CallResult<TResult>(long reqId, TResult result)
 			{
-				Console.WriteLine($"CallResult called for reqId {reqId}, result: {(result == null ? "null" : result.ToString())}");
+                Debug.WriteLine($"CallResult called for reqId {reqId}, result: {(result == null ? "null" : result.ToString())}");
 			}
 
 			public long CallStart(object callee, object arguments, [CallerMemberName] string method = null, object data = null)
 			{
 
 				long thisReqId = ++_lastReqID;
-				Console.WriteLine($"CallStart called on object {callee} for method {method}. Arguments? {(arguments != null ? "Yes" : "No")}.  ReqId: {thisReqId}");
+                Debug.WriteLine($"CallStart called on object {callee} for method {method}. Arguments? {(arguments != null ? "Yes" : "No")}.  ReqId: {thisReqId}");
 				return thisReqId;
 			}
 
 			public void Exception(long reqId, Exception ex)
 			{
-				Console.WriteLine($"Exception called for reqId {reqId}.  Exception: { ex?.Message }");
+                Debug.WriteLine($"Exception called for reqId {reqId}.  Exception: { ex?.Message }");
 			}
 
 			public TrackedCall GetCall(long callID)
@@ -116,20 +117,20 @@ namespace Rezolver.Tests
 			public TrackedCallMessage Message(long callID, MessageType messageType, IFormattable format)
 			{
 				var msg = format.ToString(null, MessageFormatter);
-				Console.WriteLine(msg);
+                Debug.WriteLine(msg);
 				return new TrackedCallMessage(new TrackedCall(callID, null), messageType, msg, DateTime.UtcNow);
 			}
 
 			public TrackedCallMessage Message(long callID, MessageType messageType, string message)
 			{
-				Console.WriteLine(message);
+                Debug.WriteLine(message);
 				return new TrackedCallMessage(new TrackedCall(callID, null), messageType, message, DateTime.UtcNow);
 			}
 
 			public TrackedCallMessage Message(long callID, MessageType messageType, string messageFormat, params object[] formatArgs)
 			{
 				var msg = MessageFormatter.Format(messageFormat, formatArgs);
-				Console.WriteLine(msg);
+                Debug.WriteLine(msg);
 				return new TrackedCallMessage(new TrackedCall(callID, null), messageType, msg, DateTime.UtcNow);
 			}
 		}

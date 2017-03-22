@@ -25,14 +25,14 @@ namespace Rezolver.Tests.Targets
 		}
 
 		static MethodInfo TestMethod_NoOptional_Info
-			= typeof(OptionalParameterTargetTests).GetMethod(nameof(TestMethod_NoOptional));
+			= TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_NoOptional));
 
 		public void TestMethod_OptionalStringWithDefault(string msg = "hello world")
 		{
 		}
 
 		static MethodInfo TestMethod_OptionalStringWithDefault_Info 
-			= typeof(OptionalParameterTargetTests).GetMethod(nameof(TestMethod_OptionalStringWithDefault));
+			= TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_OptionalStringWithDefault));
 
 		public void TestMethod_OptionalIntWithNoDefault([Optional]int value)
 		{
@@ -40,7 +40,7 @@ namespace Rezolver.Tests.Targets
 		}
 
 		static MethodInfo TestMethod_OptionalIntWithNoDefault_Info
-			 = typeof(OptionalParameterTargetTests).GetMethod(nameof(TestMethod_OptionalIntWithNoDefault));
+			 = TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_OptionalIntWithNoDefault));
 
 		[Fact]
 		public void ShouldNotAllowNullParameter()
