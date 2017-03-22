@@ -1,17 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFramework>net46</TargetFramework>
     <AssemblyName>Rezolver.Microsoft.DependencyInjection.Tests</AssemblyName>
     <PackageId>Rezolver.Microsoft.DependencyInjection.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,18 +13,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver.Microsoft.Extensions.DependencyInjection\Rezolver.Microsoft.Extensions.DependencyInjection.csproj" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Specification.Tests" Version="1.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0-preview-20170106-08" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0-beta5-build1225" />
-    <PackageReference Include="xunit" Version="2.2.0-beta5-build3474" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Specification.Tests" Version="1.1.0-*" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System.Linq.Expressions" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
-    <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
-  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <PackageReference Include="xunit.runner.visualstudio">
+      <Version>2.2.0</Version>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>

@@ -28,12 +28,16 @@
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
   </PropertyGroup>
-  
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
-    <PackageReference Include="System.ComponentModel" Version="4.0.1" />
-  </ItemGroup>
+
+  <Import Project="../Rezolver.Shared.Props" />
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System.ComponentModel" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,12 +46,6 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
-    <Reference Include="System.ComponentModel" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Update="Targets\DelegateTarget_CreateAndRegister.tt">
@@ -72,8 +70,6 @@
       <DependentUpon>ExpressionTarget_CreateAndRegister.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
-  <Import Project="../Rezolver.Shared.Props" />
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

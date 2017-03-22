@@ -1,7 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\Rezolver.Microsoft.AspNetCore.Hosting",
+    "\\src\\Rezolver.Microsoft.Extensions.DependencyInjection",
+    "\\src\\Rezolver.Microsoft.Extensions.Logging",
+    "\\test",
+    "\\test\\Rezolver.Microsoft.DependencyInjection.Tests",
+    "\\test\\Rezolver.Tests",
+    "\\test\\Rezolver.Tests.Compilation.Expressions",
+    "\\test\\Rezolver.Tests.Compilation.Specification"
   ],
   "SelectedNode": "\\Rezolver.sln",
   "PreviewInSolutionExplorer": false

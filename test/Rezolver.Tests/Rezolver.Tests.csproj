@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.1;net46</TargetFrameworks>
+    <TargetFrameworks>net46</TargetFrameworks>
     <AssemblyName>Rezolver.Tests</AssemblyName>
     <PackageId>Rezolver.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -17,8 +16,10 @@
   <Import Project="..\..\src\Rezolver.Shared.props " />
 
   <ItemGroup>
-    <PackageReference Include="Rezolver.Configuration.Json" Version="1.1.0-*" />
-    <PackageReference Include="Rezolver.Logging" Version="1.1.0-*" />
+    <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="xunit" Version="2.2.0" />
   </ItemGroup>
 
@@ -38,8 +39,5 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
-  </ItemGroup>
 
 </Project>

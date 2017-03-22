@@ -1,14 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.1;net451</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;net46</TargetFrameworks>
     <AssemblyName>Rezolver.Tests.Compilation.Specification</AssemblyName>
     <PackageId>Rezolver.Tests.Compilation.Specification</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">1.1.1</RuntimeFrameworkVersion>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,19 +12,18 @@
     </None>
   </ItemGroup>
 
+  <Import Project="..\Rezolver.Tests.Shared.props" />
+  <Import Project="..\..\src\Rezolver.Shared.props " />
+
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver.Shared\Rezolver.Shared.csproj" />
-    <ProjectReference Include="..\Rezolver.Tests.Shared\Rezolver.Tests.Shared.csproj" />
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0-preview-20170106-08" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0-beta5-build1225" />
-    <PackageReference Include="xunit" Version="2.2.0-beta5-build3474" />
+    <PackageReference Include="xunit" Version="2.2.0" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
   </PropertyGroup>
 
@@ -39,4 +33,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <PackageReference Include="xunit.runner.visualstudio">
+      <Version>2.2.0</Version>
+    </PackageReference>
+  </ItemGroup>
 </Project>

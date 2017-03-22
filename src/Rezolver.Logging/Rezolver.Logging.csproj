@@ -6,21 +6,26 @@
     <AssemblyTitle>Rezolver Logging/Tracking framework</AssemblyTitle>
     <VersionPrefix>1.1.0</VersionPrefix>
     <Authors>Zolution Software Ltd</Authors>
-    <TargetFrameworks>net451;net46;netstandard1.1</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;net452;net46</TargetFrameworks>
     <AssemblyName>Rezolver.Logging</AssemblyName>
     <PackageId>Rezolver.Logging</PackageId>
     <PackageTags>ioc;di;portable;rezolver</PackageTags>
     <PackageIconUrl>http://rezolver.co.uk/favicon-96x96.png</PackageIconUrl>
     <PackageProjectUrl>http://rezolver.co.uk</PackageProjectUrl>
-    <NetStandardImplicitPackageVersion Condition=" '$(TargetFramework)' == 'netstandard1.1' ">1.6.0</NetStandardImplicitPackageVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>../../.nupkg</PackageOutputPath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
   </PropertyGroup>
 
+  <Import Project="..\Rezolver.Shared.props" />
+  
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj" />
-    <ProjectReference Include="..\Rezolver.Shared\Rezolver.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -35,9 +40,5 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
   </PropertyGroup>
-
-  <Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
-    <Exec Command="dotnet pack --output ../../.nupkg --no-build --configuration $(Configuration)" />
-  </Target>
 
 </Project>

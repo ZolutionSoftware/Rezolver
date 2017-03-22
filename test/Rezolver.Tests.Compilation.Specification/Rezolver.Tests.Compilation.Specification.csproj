@@ -18,15 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver.Shared\Rezolver.Shared.csproj" />
     <ProjectReference Include="..\Rezolver.Tests.Shared\Rezolver.Tests.Shared.csproj" />
-    <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0-preview-20170106-08" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0-beta5-build1225" />
     <PackageReference Include="xunit" Version="2.2.0-beta5-build3474" />
+    <PackageReference Include="Rezolver.Shared" Version="1.1.0-*">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Rezolver" Version="1.1.0-*" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
