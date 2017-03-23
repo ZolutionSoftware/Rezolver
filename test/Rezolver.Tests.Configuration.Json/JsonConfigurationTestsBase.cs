@@ -456,7 +456,7 @@ namespace Rezolver.Tests.Configuration.Json
 					}
 				}
 			}
-		 ]}"s;
+		 ]}";
       var container = ParseConfigurationAndBuild(json);
       var result = container.Resolve<System.Net.NetworkCredential>();
       Assert.Equal("username", result.UserName);
