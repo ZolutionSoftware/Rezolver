@@ -37,6 +37,18 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <PackageReference Include="StringInterpolationBridge">
+      <Version>0.9.1</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
+    <PackageReference Include="StringInterpolationBridge">
+      <Version>0.9.1</Version>
+    </PackageReference>
+  </ItemGroup>
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
   </PropertyGroup>

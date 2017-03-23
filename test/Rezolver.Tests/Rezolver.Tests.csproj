@@ -16,16 +16,13 @@
   <Import Project="..\..\src\Rezolver.Shared.props " />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Rezolver.Logging\Rezolver.Logging.csproj" />
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="xunit" Version="2.2.0" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
-    <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
-  </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System.Linq.Expressions" />
