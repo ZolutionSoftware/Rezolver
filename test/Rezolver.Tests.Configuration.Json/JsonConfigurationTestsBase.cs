@@ -445,7 +445,6 @@ namespace Rezolver.Tests.Configuration.Json
     {
       //binding a constructor explicitly - using a type from the .Net framework
       string json = @"{
-			""assemblies"": [""System.Net.Primitives""],
 			""rezolve"" : [ 
 			{
 				""System.Net.NetworkCredential"": {
@@ -457,7 +456,7 @@ namespace Rezolver.Tests.Configuration.Json
 					}
 				}
 			}
-		 ]}";
+		 ]}"s;
       var container = ParseConfigurationAndBuild(json);
       var result = container.Resolve<System.Net.NetworkCredential>();
       Assert.Equal("username", result.UserName);
