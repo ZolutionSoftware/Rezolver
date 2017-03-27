@@ -8,7 +8,7 @@
   	<title>Objects as Services | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Objects as Services | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -120,7 +120,8 @@ var service = new MyService();
 container.RegisterObject(service);
 
 Assert.Same(service, container.Resolve&lt;MyService&gt;());
-</code></pre><p>And if you want to register it against a different type, the following example shows one way, with another shown in comments:</p>
+</code></pre><p>And if you want to register it against a different type, the following example shows one way, with 
+another shown in comments:</p>
 <pre><code class="lang-csharp" name="ObjectExamples.cs">var container = new Container();
 
 var service = new MyService();
@@ -130,7 +131,8 @@ container.RegisterObject&lt;IMyService&gt;(service);
 // container.RegisterObject(service, typeof(IMyService)
 
 Assert.Same(service, container.Resolve&lt;IMyService&gt;());
-</code></pre><p>That&#39;s all there is to it, really.  Although before we move on, we should take a quick look at how object-based services interact with scopes.</p>
+</code></pre><p>That&#39;s all there is to it, really.  Although before we move on, we should take a quick look at how 
+object-based services interact with scopes.</p>
 <hr>
 <h1 id="objects-in-scopes">Objects in Scopes</h1>
 <p>A scope (obtained either by using <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a> or through a <a class="xref" href="../api/Rezolver.IContainerScope.html">IContainerScope</a> returned from a container&#39;s 

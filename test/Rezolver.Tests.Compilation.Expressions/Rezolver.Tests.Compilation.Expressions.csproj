@@ -5,7 +5,12 @@
     <AssemblyName>Rezolver.Tests.Compilation.Expressions</AssemblyName>
     <PackageId>Rezolver.Tests.Compilation.Expressions</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-   </PropertyGroup>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Update="xunit.runner.json">
@@ -13,10 +18,10 @@
     </None>
   </ItemGroup>
 
-  <Import Project="..\Rezolver.Tests.Shared.props" />
   <Import Project="..\..\src\Rezolver.Shared.props " />
 
   <ItemGroup>
+    <ProjectReference Include="..\Rezolver.Tests.Shared\Rezolver.Tests.Shared.csproj" />
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
     <ProjectReference Include="..\Rezolver.Tests.Compilation.Specification\Rezolver.Tests.Compilation.Specification.csproj" />
   </ItemGroup>

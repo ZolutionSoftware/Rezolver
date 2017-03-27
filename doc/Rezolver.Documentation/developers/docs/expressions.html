@@ -8,7 +8,7 @@
   	<title>Factory expressions | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Factory expressions | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -104,7 +104,197 @@
             <article class="content wrap" id="_content" data-uid="">
               <h1 id="factory-expressions">Factory expressions</h1>
               
-<p>Documentation coming soon!</p>
+<p>If you&#39;ve read the <a href="delegates.html">factory delegate</a> documentation, then you&#39;ll know that Rezolver can bind a delegate (with an unlimited number of non-<code>ref</code>, non-<code>out</code>
+parameters) as a factory for a given type registration.</p>
+<p>Rezolver can do the same with expression trees (derived from the <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a> class) and has one or two additional tricks up its sleeve when doing
+so.</p>
+<p>To register expessions you can use one of the many <a class="xref" href="../api/Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression_">RegisterExpression</a> extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>To create expression targets you can either:</p>
+<ul>
+<li>Manually create an instance of <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> through its constructor</li>
+<li>Use the <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForExpression_">ForExpression</a> overload, which, like the delegate helper function <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForDelegate_">ForDelegate</a>, provides specialisations for lambda expressions whose
+signatures conform to one of many <code>System.Func&lt;&gt;</code> generic delegate types.</li>
+</ul>
+<p>Whilst using expressions might appear to be fundamentally the same as using delegates, there is a subtle difference:  A <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> requires 
+an entire function body, whilst an <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> supports any expression, from expression &#39;fragments&#39; like <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.constantexpression(v=vs.110).aspx">ConstantExpression</a> 
+right up to the delegate-like <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.lambdaexpression(v=vs.110).aspx">LambdaExpression</a>.</p>
+<h1 id="expression-fragments">Expression &#39;fragments&#39;</h1>
+<p>As we&#39;ve just mentioned, an expression fragment is one of the small, specialised, expression types from the <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions(v=vs.110).aspx">System.Linq.Expressions</a> namespace which wrap a fundamental 
+language expression, such as constants or method calls or whatever.  The <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> supports these through its 
+<a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget__ctor_Expression_System_Type_">ExpressionTarget(Expression, Type)</a> constructor.</p>
+<p>When creating an <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> this way, its <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> (and therefore the default type under which it will be registered, unless
+overridden at registration time) will, by default, be set to the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb291819(v=vs.110).aspx">Type</a> of the expression you pass to the constructor, unless you pass a 
+non-null type explicitly as the second argument.</p>
+<h2 id="using-constantexpression">Using <code>ConstantExpression</code></h2>
+<p>In this example, we&#39;ll bake a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.constantexpression(v=vs.110).aspx">ConstantExpression</a> into an <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a>, which will then be used to provide a <code>string</code>:</p>
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">var container = new Container();
+container.Register(
+    new ExpressionTarget(
+        Expression.Constant(&quot;Hello World&quot;)
+    )
+);
+
+Assert.Equal(&quot;Hello World&quot;, container.Resolve&lt;string&gt;());
+</code></pre><h2 id="using-methodcallexpression">Using <code>MethodCallExpression</code></h2>
+<p>Here, we have an instance method declared in our test, which returns the value of a local field:</p>
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">private string _theMessage = &quot;Hello World&quot;;
+public string GetMessage()
+{
+    return _theMessage;
+}
+</code></pre><p>To instruct Rezolver to execute this method on <code>this</code> instance whenever a string is resolved, we simply do this:</p>
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">var container = new Container();
+
+container.Register(
+    new ExpressionTarget(
+        Expression.Call(
+                Expression.Constant(this), //the instance
+                this.GetType().GetMethod(&quot;GetMessage&quot;)
+            )
+        )
+    );
+Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
+//now change _theMessage and re-resolve:
+_theMessage = &quot;New Message!!!&quot;;
+Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
+</code></pre><div class="NOTE"><h5>Note</h5><p>Obviously, this can also easily be implemented as a <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> - but the same reasons for why you might use expressions over delegates in
+any application (i.e. the ability to analyse and rewrite code or dynamically compose logic) hold for targets in your container.  The point of these examples is to show
+that Rezolver will happily deal with any expression you throw at it, <em>not</em> that you should use expressions where a delegate would be a better choice.</p>
+</div>
+<h1 id="lambda-expressions">Lambda Expressions</h1>
+<p>Lambda expressions can also be used to create or register an <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a>, meaning you can take advantage of the compiler&#39;s translation of code 
+into expression trees to simplify their construction.</p>
+<div class="NOTE"><h5>Note</h5><p>When constructing an <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> from a lambda expression, the <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target will be set to the
+<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb291819(v=vs.110).aspx">Type</a> of the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> of the lambda, unless overridden by a type explicitly provided on construction.</p>
+</div>
+<p>Ultimately, Rezolver doesn&#39;t really care if you pass a lambda or a fragment like those in the previous section - the same process is followed - but one additional feature
+that a lambda provides is parameters.</p>
+<h2 id="injecting-arguments">Injecting Arguments</h2>
+<p>As with <a href="delegates.html">factory delegates</a>, Rezolver provides automatic argument injection for lambda expressions - so, taking the <code>MethodCallExpression</code> example from
+above, we could instead do this:</p>
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">//this is equivalent to the previous example, just with a lambda
+//and explicitly injected argument
+var container = new Container();
+//note - the type of &#39;this&#39; is ExpressionExamples
+container.RegisterObject(this);
+container.RegisterExpression((ExpressionExamples e) =&gt; e.GetMessage());
+
+Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
+
+_theMessage = &quot;Another New Message!!!&quot;;
+Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
+</code></pre><div class="NOTE"><h5>Note</h5><p>Look past the fact that the object being injected is the same instance on which the test is executed, it&#39;s the principle that matters!</p>
+</div>
+<h2 id="injecting-the-resolvecontext">Injecting the <code>ResolveContext</code></h2>
+<p>Just as with the <a href="delegates.html#injecting-rezolverresolvecontext"><code>DelegateTarget</code> example</a>, you can also inject the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> into your expression in order
+to perform late-bound service location within your expression.  As the comment at the start of the test states - this example is functionally identical to the <code>DelegateTarget</code>
+example - but because of the limitations of the C# compiler and its ability to translate code into expression trees, the main expression is written as a series of stacked 
+conditional expressions so that the whole thing is a single expression.</p>
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">static IPrincipal CurrentPrincipal { get; set; }
+
+[Fact]
+public void ShouldGetDifferentImplementationFromResolveContextForUser()
+{
+    //this test is functionally identical to the one in DelegateExamples.cs,
+    //it&#39;s just done with an expression, and therefore the format of the code block
+    //used for the IUserActionsService is different because the compiler can only 
+    //translate expression lambdas.
+    IIdentity identity = new AppIdentity();
+    //three principals, one for each role
+    var adminPrincipal = new AppPrincipal(identity, new[] { &quot;Admin&quot; });
+    var salesPrincipal = new AppPrincipal(identity, new[] { &quot;Sales&quot; });
+    var customerPrincipal = new AppPrincipal(identity, new[] { &quot;Customer&quot; });
+
+    var container = new Container();
+    container.RegisterType&lt;AdminActionsService&gt;();
+    container.RegisterType&lt;SalesActionsService&gt;();
+    container.RegisterType&lt;CustomerActionsService&gt;();
+    container.RegisterType&lt;UserControlPanel&gt;();
+    //register expression to read the CurrentPrincipal property, to make it dynamic
+    container.RegisterExpression(() =&gt; CurrentPrincipal);
+    //now register the expression for the IUserActionsService, which does the
+    //role sniffing over the principal as one expression
+    container.RegisterExpression((IPrincipal p, ResolveContext rc) =&gt;
+        p.IsInRole(&quot;Customer&quot;) ?
+        rc.Resolve&lt;CustomerActionsService&gt;() :
+            p.IsInRole(&quot;Sales&quot;) ?
+                rc.Resolve&lt;SalesActionsService&gt;() :
+                p.IsInRole(&quot;Admin&quot;) ?
+                    rc.Resolve&lt;AdminActionsService&gt;() :
+                    (IUserActionsService)null);
+
+    //set the principal, and resolve
+    CurrentPrincipal = adminPrincipal;
+    var result1 = container.Resolve&lt;UserControlPanel&gt;();
+    //now swap principals
+    CurrentPrincipal = salesPrincipal;
+    var result2 = container.Resolve&lt;UserControlPanel&gt;();
+    //and again
+    CurrentPrincipal = customerPrincipal;
+    var result3 = container.Resolve&lt;UserControlPanel&gt;();
+
+    Assert.IsType&lt;AdminActionsService&gt;(result1.ActionsService);
+    Assert.IsType&lt;SalesActionsService&gt;(result2.ActionsService);
+    Assert.IsType&lt;CustomerActionsService&gt;(result3.ActionsService);
+}
+</code></pre><div class="NOTE"><h5>Note</h5><p>Remember: any expression tree built by the compiler can be built &#39;by hand&#39; through the factory methods in <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a>, meaning that 
+you could also provide an expression in which the conditional statements where built dynamically (or, more likely, a dynamically built 
+<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.switchexpression(v=vs.110).aspx">SwitchExpression</a>) and it would still work.</p>
+</div>
+<h1 id="resolving-without-a-resolvecontext">Resolving without a <code>ResolveContext</code></h1>
+<p>These advanced examples with lambda expressions show how you can inject an argument or perform late-bound service location within your expression body.  Sometimes, however,
+you might not want to, or be able to, provide a parameterised lambda expression, or you might be passing an expression fragment which cannot accept
+injected arguments.</p>
+<p>For this purpose, Rezolver provides the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html">ExpressionFunctions</a> static class.  If the compiler sees a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> bound to one of 
+the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve_">Resolve</a> static functions of this class, it will be converted into a call to the appropriate <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> overload of the 
+<a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> that is in scope when the container executes the code compiled from the expression.</p>
+<div class="WARNING"><h5>Warning</h5><p>These functions only work inside expressions - any attempt to execute them outside of an expression passed to a <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> will result in 
+a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a> being thrown.</p>
+</div>
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">var container = new Container();
+container.RegisterType&lt;MyService, IMyService&gt;();
+//get the ExpressionFunctions.Resolve&lt;T&gt; method
+var resolveMethod = typeof(ExpressionFunctions)
+    .GetMethods(BindingFlags.Public | BindingFlags.Static)
+    .SingleOrDefault(m =&gt; m.Name == &quot;Resolve&quot; &amp;&amp; m.IsGenericMethodDefinition);
+
+//this expression is equivalent to the lambda expression:
+//rc =&gt; new RequiresMyService(rc.Resolve&lt;IMyService&gt;())
+container.Register(
+    new ExpressionTarget(
+        Expression.New(
+            //get the (IMyService) constructor
+            typeof(RequiresMyService).GetConstructor(new[] {
+                typeof(IMyService)
+            }),
+            Expression.Call(
+                resolveMethod.MakeGenericMethod(typeof(IMyService))
+            )
+        )
+    ));
+
+var result = container.Resolve&lt;RequiresMyService&gt;();
+
+Assert.NotNull(result.Service);
+</code></pre><div class="NOTE"><h5>Note</h5><p>The <code>RequiresMyService</code> and <code>MyService</code> types can be seen in the <a href="constructor-injection/index.html#example---injected-class">construction injection documentation</a>.</p>
+</div>
+<p>Admittedly, this way of dynamically resolving services inside an expression requires some heavy lifting (with reflection in particular) when compared with writing the lambda 
+by hand, but it&#39;s not intended to be a direct alternative to doing that.  Using this approach is for those times when you simply can&#39;t alter how you build the expression
+you want to register.</p>
+<p>You can, of course, also use the <code>ExpressionFunctions</code> static class inside a parameterless lambda to achieve exactly the same result:</p>
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">var container = new Container();
+container.RegisterType&lt;MyService, IMyService&gt;();
+container.RegisterExpression(() =&gt;
+    new RequiresMyService(ExpressionFunctions.Resolve&lt;IMyService&gt;())
+    );
+var result = container.Resolve&lt;RequiresMyService&gt;();
+
+Assert.NotNull(result.Service);
+</code></pre><h1 id="next-steps">Next steps</h1>
+<ul>
+<li>If you haven&#39;t already, then you should probably look at the aforementioned <a href="delegates.html">factory delegate documentation</a>.</li>
+<li>The next main topic after this covers <a href="decorators.html">decorators</a>.</li>
+</ul>
 
             </article>
           </div>

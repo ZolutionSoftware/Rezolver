@@ -9,7 +9,7 @@ var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
 var merge = require('merge-stream');
-var lec = require('gulp-line-ending-corrector');
+//var lec = require('gulp-line-ending-corrector');
 var LessAutoprefix = require('less-plugin-autoprefix');
 
 var autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
@@ -78,10 +78,10 @@ gulp.task('sitemap', function () {
     .pipe(gulp.dest(devSitemap.dest));
 });
 
-//destroys all the output files produced by the docfx processing - this is to ensure that
+//destroys all the output and intermediate files produced by the docfx processing - this is to ensure that
 //APIs and pages which are no longer being produced are no longer present in the content.
 gulp.task('cleanDocFXOutput', function () {
-  return del('./developers/**', '!./developers');
+  return del(['./developers/**', './obj/**', './_docfx_proj/obj/**', '!./developers']);
 });
 
 gulp.task('copy', function () {
@@ -113,7 +113,7 @@ gulp.task('less', ['copy'], function () {
         plugins: [autoprefix]
       }))
       .pipe(sourcemaps.write('.'))
-      .pipe(lec({ eolc: 'CRLF' }))
+      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverBootstrap.cwd)),
     gulp.src(rezolverDocFXMain.src, { cwd: rezolverDocFXMain.cwd })
       .pipe(sourcemaps.init())
@@ -121,7 +121,7 @@ gulp.task('less', ['copy'], function () {
         plugins: [autoprefix]
       }))
       .pipe(sourcemaps.write('.'))
-      .pipe(lec({ eolc: 'CRLF' }))
+      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverDocFXMain.cwd))
     );
 });
@@ -136,23 +136,24 @@ gulp.task('bundles', ['less'], function () {
       }))
       .pipe(concat('docfx.vendor.css'))
       .pipe(sourcemaps.write('.'))
-      .pipe(lec({ eolc: 'CRLF' }))
+      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverDocFXMain.cwd)),
     gulp.src(vendor.js)
       .pipe(sourcemaps.init())
       .pipe(concat('docfx.vendor.js'))
       .pipe(sourcemaps.write('.'))
-      .pipe(lec({ eolc: 'CRLF' }))
+      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverDocFXMain.cwd))
     );
 });
 
-//the main task only requires these three - this is the one we bind to pre-build
+//the default task - single dependencies are used to chain all the tasks together
 gulp.task('default', ['bundles']);
 
 //used only when performing style updates to the Rezolver docfx
 //theme or underlying bootstrap theme whilst running the site - runs the default
-//task and then copies everything to the /developers/styles folder
+//task and then copies everything to the /developers/styles folder - which is usually
+//performed by the docfx build courtesy of its template handling.
 gulp.task('patchtemplate', ['default'], function () {
   return gulp.src([].concat(rezolverDocFXMain.dest).concat(vendor.dest), { cwd: rezolverDocFXMain.cwd })
       .pipe(gulp.dest('./developers/styles'));

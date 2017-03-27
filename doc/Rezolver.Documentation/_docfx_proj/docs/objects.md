@@ -16,11 +16,13 @@ runtime type:
 
 [!code-csharp[ObjectExamples.cs](../../../../test/Rezolver.Tests.Examples/ObjectExamples.cs#example1)]
 
-And if you want to register it against a different type, the following example shows one way, with another shown in comments:
+And if you want to register it against a different type, the following example shows one way, with 
+another shown in comments:
 
 [!code-csharp[ObjectExamples.cs](../../../../test/Rezolver.Tests.Examples/ObjectExamples.cs#example2)]
 
-That's all there is to it, really.  Although before we move on, we should take a quick look at how object-based services interact with scopes.
+That's all there is to it, really.  Although before we move on, we should take a quick look at how 
+object-based services interact with scopes.
 
 * * *
 

@@ -43,7 +43,7 @@ namespace Rezolver.Tests.Configuration.Json
     {
       string json = @"{
 	""assemblies"": [
-		""Rezolver.Tests.Configuration.Json""
+		""Rezolver.Tests.Shared""
 	],
 	""rezolve"": [
 		{ ""System.Int32"": 10 },

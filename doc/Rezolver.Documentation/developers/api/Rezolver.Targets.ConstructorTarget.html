@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ConstructorTarget
    | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -135,10 +135,16 @@ available services and/or any named arguments which might been provided up front
                   <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a>
                 </div>
                 <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+                </div>
+                <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
@@ -149,15 +155,9 @@ available services and/or any named arguments which might been provided up front
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver.Targets</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
+              <h6><strong>Assembly</strong>:rezolver-docfx.dll</h6>
               <h5 id="Rezolver_Targets_ConstructorTarget_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public class ConstructorTarget : TargetBase, ITarget</code></pre>
@@ -950,8 +950,8 @@ by removing the need to create an argument dictionary in advance.  An anonymous 
 to supply the arguments.</p>
 </div>
               <h5 id="Rezolver_Targets_ConstructorTarget_WithArgs_System_Type_System_Object__examples">Examples</h5>
-              This example shows how to provide an ObjectTarget for the parameter 'param1' when creating a
-ConstructorTarget for the type 'MyType':
+              <p>This example shows how to provide an ObjectTarget for the parameter &#39;param1&#39; when creating a
+ConstructorTarget for the type &#39;MyType&#39;:</p>
 <pre><code>ConstructorTarget.WithArgs(typeof(MyType), new { param1 = new ObjectTarget("Hello World") });</code></pre>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -1108,8 +1108,8 @@ by removing the need to create an argument dictionary in advance.  An anonymous 
 to supply the arguments.</p>
 </div>
               <h5 id="Rezolver_Targets_ConstructorTarget_WithArgs__1_System_Object__examples">Examples</h5>
-              This example shows how to provide an ObjectTarget for the parameter 'param1' when creating a
-ConstructorTarget for the type 'MyType':
+              <p>This example shows how to provide an ObjectTarget for the parameter &#39;param1&#39; when creating a
+ConstructorTarget for the type &#39;MyType&#39;:</p>
 <pre><code>ConstructorTarget.WithArgs&lt;MyType&gt;(new { param1 = new ObjectTarget("Hello World") });</code></pre>
               <h3 id="extensionmethods">Extension Methods</h3>
               <div>

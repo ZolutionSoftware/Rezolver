@@ -8,7 +8,7 @@
   	<title>Factory Delegates | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Factory Delegates | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -117,10 +117,10 @@ delegate will be executed and its result returned as the instance.</p>
 <li>Manually create an instance of <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> through its constructor</li>
 <li>Use the <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForDelegate_">ForDelegate</a> overload, which provides specialisations for variants of the <code>System.Func&lt;&gt;</code> generic delegate</li>
 </ul>
-<p>Delegates are a useful tool in the context IOC containers as support for them gives you the opportunity to perform much more complex
+<p>Delegates are a useful tool in the context of IOC containers as support for them gives you the opportunity to perform much more complex
 tasks in order to resolve an object than the functionality offered by the standard targets in Rezolver.</p>
-<p>Whether you <em>should</em> perform excessively complex logic in these factories is a topic of much debate.  Our view is that
-you should be able to if you want or need to, so Rezolver&#39;s support for delegates is extensive, including the ability to 
+<p>Whether you <em>should</em> perform excessively complex logic in these factories is a topic of debate.  Our view is that
+you should be able to if you want, or need, to, so Rezolver&#39;s support for delegates is extensive, including the ability to 
 inject arguments to your delegate from the container, or resolve additional services inside your delegate through <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a>.</p>
 <h1 id="basic-examples">Basic Examples</h1>
 <p>Here are some straightforward examples</p>
@@ -231,12 +231,11 @@ public class AppPrincipal : IPrincipal
 
 public interface IRoleBasedActionsService : IUserActionsService
 {
-    IEnumerable&lt;string&gt; Roles { get; }
+
 }
 
 public class CustomerActionsService : IRoleBasedActionsService
 {
-    public IEnumerable&lt;string&gt; Roles { get; } = new[] { &quot;Customer&quot; };
     public IEnumerable&lt;string&gt; GetActions() =&gt;
         new[] {
             &quot;View Products&quot;
@@ -245,7 +244,6 @@ public class CustomerActionsService : IRoleBasedActionsService
 
 public class SalesActionsService : IRoleBasedActionsService
 {
-    public IEnumerable&lt;string&gt; Roles { get; } = new[] { &quot;Sales&quot; };
     public IEnumerable&lt;string&gt; GetActions() =&gt;
         new[] {
             &quot;Create Customers&quot;,
@@ -255,7 +253,6 @@ public class SalesActionsService : IRoleBasedActionsService
 
 public class AdminActionsService : IRoleBasedActionsService
 {
-    public IEnumerable&lt;string&gt; Roles { get; } = new[] { &quot;Admin&quot; };
     public IEnumerable&lt;string&gt; GetActions() =&gt;
         new[] {
             &quot;Manage Users&quot;,

@@ -5,22 +5,22 @@
 */
 
 @hljs-base-color: @alt-color;
-@hljs-comment-color: lighten(desaturate(@hljs-base-color, 50%), 25%);
-@hljs-keyword-color: #b33;
-@hljs-subst-color: darken(@hljs-keyword-color, 15%);
-@hljs-string-color: spin(saturate(@hljs-base-color, 20%), 90);
+@hljs-comment-color: #383;
+@hljs-keyword-color: lighten(saturate(@hljs-base-color, 15%), 20%);
+@hljs-subst-color: @hljs-base-color;
+@hljs-string-color: lighten(@main-color, 20%);
 @hljs-literal-color: saturate(@hljs-base-color, 25%);
-@hljs-title-color: spin(saturate(@hljs-base-color, 20%), 270);
+@hljs-title-color: @main-color;
 @hljs-number-color: @hljs-string-color;
 @hljs-symbol-color: spin(saturate(@hljs-base-color, 20%), 180);
 
 .hljs {
-	display: block;
-	overflow-x: auto;
-	color: @hljs-base-color;
-	//background: #000;
-	/* undo the word-breaking which is applied to all <pre> blocks in our styles. */
-	white-space: pre;
+    display: block;
+    overflow-x: auto;
+    color: @hljs-base-color;
+    //background: #000;
+    /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
+    white-space: pre;
 }
 
 .hljs-comment, .hljs-quote {

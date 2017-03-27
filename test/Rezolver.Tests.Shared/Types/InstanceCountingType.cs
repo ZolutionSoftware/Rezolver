@@ -94,7 +94,7 @@ namespace Rezolver.Tests.Types
 	/// and type reuse across multiple tests, you must take an exclusive lock on the underlying
 	/// counter by creating a new session by calling NewSession, and then disposing of it. 
 	/// </summary>
-	internal sealed class InstanceCountingType : InstanceCountingTypeBase<InstanceCountingType>
+	public sealed class InstanceCountingType : InstanceCountingTypeBase<InstanceCountingType>
 	{
 
 	}

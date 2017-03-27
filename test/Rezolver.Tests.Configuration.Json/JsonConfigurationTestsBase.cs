@@ -93,7 +93,7 @@ namespace Rezolver.Tests.Configuration.Json
         //use the type name as the property name, with it's value being the target (the { "$construct" : ... } bit)
         string json = @"
 {
-	""assemblies"": [ ""Rezolver.Tests.Configuration.Json"" ],
+	""assemblies"": [ ""Rezolver.Tests.Shared"" ],
 	""rezolve"" : [
 		{ ""Rezolver.Tests.Types.InstanceCountingType"" : { ""$construct"" : ""$auto"" } }
 	]
@@ -116,7 +116,7 @@ namespace Rezolver.Tests.Configuration.Json
         //note - this is just another way of specifying a type reference in a json file by string.
         string json = @"
 {
-	""assemblies"": [ ""Rezolver.Tests.Configuration.Json"" ],
+	""assemblies"": [ ""Rezolver.Tests.Shared"" ],
 	""rezolve"" : [
 		{
 			""type"": ""Rezolver.Tests.Types.InstanceCountingType"",
@@ -143,7 +143,7 @@ namespace Rezolver.Tests.Configuration.Json
         //the type to build, e.g. as the value for the $construct property of a target.
         string json = @"
 {
-	""assemblies"": [ ""Rezolver.Tests.Configuration.Json"" ],
+	""assemblies"": [ ""Rezolver.Tests.Shared"" ],
 	""rezolve"" : [
 		{
 			""type"": { ""name"": ""Rezolver.Tests.Types.InstanceCountingType"" },
@@ -165,7 +165,7 @@ namespace Rezolver.Tests.Configuration.Json
       //however I am registering an entry for IRequiresInt, but building an instance of RequiresInt
       string json = @"
 {
-	""assemblies"":[""Rezolver.Tests.Configuration.Json"" ],
+	""assemblies"":[""Rezolver.Tests.Shared"" ],
 	""rezolve"": [
 		{ ""System.Int32"": 105 },
 		{ ""Rezolver.Tests.Types.IRequiresInt"" : { ""$construct"": ""Rezolver.Tests.Types.RequiresInt"" } }
@@ -185,7 +185,7 @@ namespace Rezolver.Tests.Configuration.Json
       //as mentioned in an earlier test, can be a literal string specifying a type name, or a construct such 
       //as { "name": "[typename]", "args": [ {type_reference}, ... ] }
       string json = @"{
-	""assemblies"":[""Rezolver.Tests.Configuration.Json"" ],
+	""assemblies"":[""Rezolver.Tests.Shared"" ],
 	""rezolve"": [
 		{ ""System.Int32"": 110 },
 		{ 
@@ -227,7 +227,7 @@ namespace Rezolver.Tests.Configuration.Json
       //again, except this time, it's expected that we get the same instance for both rezolve calls.
       //singletons are easy - just take the value entry that you typically put, and wrap it in a { "$singleton": /* original value */ }
       string json = @"{
-	""assemblies"":[""Rezolver.Tests.Configuration.Json"" ],
+	""assemblies"":[""Rezolver.Tests.Shared"" ],
 	""rezolve"": [
 		{ ""System.Int32"": 115 },
 		{ 
@@ -295,7 +295,7 @@ namespace Rezolver.Tests.Configuration.Json
         //this test shows instead how we specify element type, instruct the parser that we intend to register
         //multiple targets against that, and then the caller will simply request IEnumerable<type>
         string json = @"{
-	""assemblies"":[ ""Rezolver.Tests.Configuration.Json"" ],	
+	""assemblies"":[ ""Rezolver.Tests.Shared"" ],	
 	""rezolve"" : [
 		{
 			""Rezolver.Tests.Types.InstanceCountingType"" :
@@ -345,7 +345,7 @@ namespace Rezolver.Tests.Configuration.Json
       using (var session = InstanceCountingType.NewSession())
       {
         string json = @"{
-	""assemblies"":[ ""Rezolver.Tests.Configuration.Json"" ],	
+	""assemblies"":[ ""Rezolver.Tests.Shared"" ],	
 	""rezolve"" : [
 		{
 			""type"" : { ""name"" : ""Rezolver.Tests.Types.InstanceCountingType"", ""array"": true },
@@ -378,7 +378,7 @@ namespace Rezolver.Tests.Configuration.Json
         //demonstrates how you can use the $auto typename in a $construct call to inherit the 
         ///type name from the array's element type.
         string json = @"{
-	""assemblies"":[ ""Rezolver.Tests.Configuration.Json"" ],	
+	""assemblies"":[ ""Rezolver.Tests.Shared"" ],	
 	""rezolve"" : [
 		{
 			""type"" : { ""name"" : ""Rezolver.Tests.Types.InstanceCountingType"", ""array"": true },
@@ -415,7 +415,7 @@ namespace Rezolver.Tests.Configuration.Json
         //note it's imperative that the type of the registration is explicitly marked as 'array = true',
         //so do not use 'Type[]'
         string json = @"{
-	""assemblies"":[ ""Rezolver.Tests.Configuration.Json"" ],	
+	""assemblies"":[ ""Rezolver.Tests.Shared"" ],	
 	""rezolve"" : [
 		{
 			""type"" : { ""name"" : ""Rezolver.Tests.Types.InstanceCountingType"", ""array"": true },

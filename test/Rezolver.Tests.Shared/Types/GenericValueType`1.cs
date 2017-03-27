@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-	internal struct GenericValueType<T> { }
+	public struct GenericValueType<T> { }
 }

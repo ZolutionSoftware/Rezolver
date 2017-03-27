@@ -83,14 +83,14 @@ necessarily exactly the same as, say, the C# spec, but they're close.
 
 At the time the first @Rezolver.IContainer.Resolve* call is made, the algorithm will first attempt to select the greediest constructor 
 whose parameters are *completely* satisfied by services available to the container.  Thus, if a class has two constructors - one with 
-1 parameter and one with 6 parameters - if the single parameter version can be successfully injected, but only 5 of the other 
+1 parameter and one with 3 parameters - if the single parameter version can be successfully injected, but only 2 of the other 
 constructor's parameters can be, then the single-parameter constructor wins.
 
 So, given this type:
 
 [!code-csharp[RequiresMyServices.cs](../../../../../test/Rezolver.Tests.Examples/Types/RequiresMyServices.cs#example)]
 
-If we register `Service1`, but not ***all*** of the other service types, the single-parameter constructor will be used:
+If we register `Service1` & `Service2`, but not `Service3`, the single-parameter constructor will be used:
 
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example4)]
 
@@ -101,12 +101,12 @@ If we register `Service1`, but not ***all*** of the other service types, the sin
 When a constructor's parameters have default values, the rules change slightly.
 
 The algorithm treats parameters which have defaults as *always* satisfied, even if a service is not registered of the correct type.  So 
-if we extend `RequiresMyServices` with a new class whose 6-parameter constructor specifies default values for parameters 2-6:
+if we extend `RequiresMyServices` with a new class whose 3-parameter constructor specifies default values for parameters 2 & 3:
 
 [!code-csharp[RequiresMyServicesWithDefaults.cs](../../../../../test/Rezolver.Tests.Examples/Types/RequiresMyServicesWithDefaults.cs#example)]
 
-And then we swap `RequiresMyServices` for `RequiresMyServicesWithDefaults`, this time, the 6-parameter
-constructor will be executed, with parameters 1-5 receiving injected arguments, and parameter 6 receiving the default instance from
+And then we swap `RequiresMyServices` for `RequiresMyServicesWithDefaults`, this time, the 3-parameter
+constructor will be executed, with parameters 1 & 2 receiving injected arguments, and parameter 3 receiving the default instance from
 the base:
 
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example5)]

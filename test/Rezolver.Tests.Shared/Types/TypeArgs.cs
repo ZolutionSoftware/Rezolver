@@ -18,8 +18,8 @@ namespace Rezolver.Tests.Types
 		public class T2 : IT2 { }
 		public class T3 : IT3 { }
 
-		internal struct VT1 : IT1 { }
-		internal struct VT2 : IT2 { }
-		internal struct VT3 : IT3 { }
+		public struct VT1 : IT1 { }
+		public struct VT2 : IT2 { }
+		public struct VT3 : IT3 { }
 	}
 }

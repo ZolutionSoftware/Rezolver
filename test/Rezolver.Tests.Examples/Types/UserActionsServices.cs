@@ -15,12 +15,11 @@ namespace Rezolver.Tests.Examples.Types
 
     public interface IRoleBasedActionsService : IUserActionsService
     {
-        IEnumerable<string> Roles { get; }
+
     }
 
     public class CustomerActionsService : IRoleBasedActionsService
     {
-        public IEnumerable<string> Roles { get; } = new[] { "Customer" };
         public IEnumerable<string> GetActions() =>
             new[] {
                 "View Products"
@@ -29,7 +28,6 @@ namespace Rezolver.Tests.Examples.Types
 
     public class SalesActionsService : IRoleBasedActionsService
     {
-        public IEnumerable<string> Roles { get; } = new[] { "Sales" };
         public IEnumerable<string> GetActions() =>
             new[] {
                 "Create Customers",
@@ -39,7 +37,6 @@ namespace Rezolver.Tests.Examples.Types
 
     public class AdminActionsService : IRoleBasedActionsService
     {
-        public IEnumerable<string> Roles { get; } = new[] { "Admin" };
         public IEnumerable<string> GetActions() =>
             new[] {
                 "Manage Users",

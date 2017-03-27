@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,9 +44,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -106,8 +105,163 @@
     <Content Include="Content\rz_square_white_on_orange_640x640.png" />
     <Content Include="Content\rz_square_white_on_orange_64x64.png" />
     <Content Include="Content\rz_square_white_on_orange_96x96.png" />
+    <Content Include="developers\api\index.html" />
+    <Content Include="developers\api\Rezolver.AliasTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.CachingContainerBase.html" />
+    <Content Include="developers\api\Rezolver.ChildTargetContainer.html" />
+    <Content Include="developers\api\Rezolver.Compilation.CompileContext.html" />
+    <Content Include="developers\api\Rezolver.Compilation.CompilerConfiguration.html" />
+    <Content Include="developers\api\Rezolver.Compilation.CompileStackEntry.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.DecoratorTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.DefaultTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.DelegateTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ExpressionBuilderBase.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ExpressionCompileContext.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ExpressionCompiler.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.IExpressionBuilder-1.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.IExpressionBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.IExpressionCompileContext.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.IExpressionCompiler.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ListTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ObjectTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.RedundantConvertRewriter.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.RezolvedTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.ScopedTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.SharedExpressionKey.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.SingletonTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.TargetExpression.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.UnscopedTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.html" />
+    <Content Include="developers\api\Rezolver.Compilation.ICompileContext.html" />
+    <Content Include="developers\api\Rezolver.Compilation.ICompileContextProvider.html" />
+    <Content Include="developers\api\Rezolver.Compilation.ICompilerConfigurationProvider.html" />
+    <Content Include="developers\api\Rezolver.Compilation.ITargetCompiler.html" />
+    <Content Include="developers\api\Rezolver.Compilation.TargetCompiler.html" />
+    <Content Include="developers\api\Rezolver.ConstructorBinding.html" />
+    <Content Include="developers\api\Rezolver.Container.html" />
+    <Content Include="developers\api\Rezolver.ContainerBase.DirectResolveCompiledTarget.html" />
+    <Content Include="developers\api\Rezolver.ContainerBase.html" />
+    <Content Include="developers\api\Rezolver.ContainerBase.MissingCompiledTarget.html" />
+    <Content Include="developers\api\Rezolver.ContainerResolveExtensions.html" />
+    <Content Include="developers\api\Rezolver.ContainerScope.html" />
+    <Content Include="developers\api\Rezolver.ContainerScopeExtensions.html" />
+    <Content Include="developers\api\Rezolver.ContainerScopeResolveExtensions.html" />
+    <Content Include="developers\api\Rezolver.DecoratingTargetContainer.html" />
+    <Content Include="developers\api\Rezolver.DecoratorTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.DefaultMemberBindingBehaviour.html" />
+    <Content Include="developers\api\Rezolver.DelegateTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.EnumerableTargetBuilderExtensions.html" />
+    <Content Include="developers\api\Rezolver.ExceptionResources.html" />
+    <Content Include="developers\api\Rezolver.ExpressionFunctions.html" />
+    <Content Include="developers\api\Rezolver.ExpressionTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.GenericTargetContainer.html" />
+    <Content Include="developers\api\Rezolver.html" />
+    <Content Include="developers\api\Rezolver.IChildTargetContainer.html" />
+    <Content Include="developers\api\Rezolver.ICompiledTarget.html" />
+    <Content Include="developers\api\Rezolver.IContainer.html" />
+    <Content Include="developers\api\Rezolver.IContainerScope.html" />
+    <Content Include="developers\api\Rezolver.IMemberBindingBehaviour.html" />
+    <Content Include="developers\api\Rezolver.IScopedContainer.html" />
+    <Content Include="developers\api\Rezolver.IScopeFactory.html" />
+    <Content Include="developers\api\Rezolver.ITarget.html" />
+    <Content Include="developers\api\Rezolver.ITargetContainer.html" />
+    <Content Include="developers\api\Rezolver.ITargetContainerOwner.html" />
+    <Content Include="developers\api\Rezolver.MemberBinding.html" />
+    <Content Include="developers\api\Rezolver.MethodBinding.html" />
+    <Content Include="developers\api\Rezolver.MethodCallExtractor.html" />
+    <Content Include="developers\api\Rezolver.MultipleTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.ObjectTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.OverridingContainer.html" />
+    <Content Include="developers\api\Rezolver.ParameterBinding.html" />
+    <Content Include="developers\api\Rezolver.RegisterTypeTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.ResolveContext.html" />
+    <Content Include="developers\api\Rezolver.ScopeBehaviour.html" />
+    <Content Include="developers\api\Rezolver.ScopedContainer.html" />
+    <Content Include="developers\api\Rezolver.ScopedTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.SingletonTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.Target.html" />
+    <Content Include="developers\api\Rezolver.TargetContainer.html" />
+    <Content Include="developers\api\Rezolver.TargetCreationExtensions.html" />
+    <Content Include="developers\api\Rezolver.TargetDictionaryContainer.html" />
+    <Content Include="developers\api\Rezolver.TargetListContainer.html" />
+    <Content Include="developers\api\Rezolver.Targets.ChangeTypeTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.ConstructorTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.DecoratorTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.DefaultTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.DelegateTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.ExpressionTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html" />
+    <Content Include="developers\api\Rezolver.Targets.GenericConstructorTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.html" />
+    <Content Include="developers\api\Rezolver.Targets.ListTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.ObjectTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.OptionalParameterTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.ResolvedTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.ScopedTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.SingletonTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.TargetBase.html" />
+    <Content Include="developers\api\Rezolver.Targets.UnscopedTarget.html" />
+    <Content Include="developers\api\toc.html" />
+    <Content Include="developers\docs\benchmarks.html" />
+    <Content Include="developers\docs\constructor-injection\generics.html" />
+    <Content Include="developers\docs\constructor-injection\index.html" />
+    <Content Include="developers\docs\constructor-injection\member-binding.html" />
+    <Content Include="developers\docs\create-and-use-a-container.html" />
+    <Content Include="developers\docs\decorators.html" />
+    <Content Include="developers\docs\delegates.html" />
+    <Content Include="developers\docs\expressions.html" />
+    <Content Include="developers\docs\index.html" />
+    <Content Include="developers\docs\nuget-packages\index.html" />
+    <Content Include="developers\docs\nuget-packages\rezolver.configuration.html" />
+    <Content Include="developers\docs\nuget-packages\rezolver.html" />
+    <Content Include="developers\docs\nuget-packages\rezolver.microsoft.aspnetcore.hosting.html" />
+    <Content Include="developers\docs\nuget-packages\rezolver.microsoft.extensions.dependencyinjection.html" />
+    <Content Include="developers\docs\object-lifetimes.html" />
+    <Content Include="developers\docs\objects.html" />
+    <Content Include="developers\docs\service-registration.html" />
+    <Content Include="developers\docs\toc.html" />
+    <Content Include="developers\favicon.ico" />
+    <Content Include="developers\images\benchmark-results\01-Singleton.png" />
+    <Content Include="developers\images\benchmark-results\02-Transient.png" />
+    <Content Include="developers\images\benchmark-results\03-Combined.png" />
+    <Content Include="developers\images\benchmark-results\04-Complex.png" />
+    <Content Include="developers\images\benchmark-results\05-Property.png" />
+    <Content Include="developers\images\benchmark-results\06-Generics.png" />
+    <Content Include="developers\images\benchmark-results\07-IEnumerable.png" />
+    <Content Include="developers\images\benchmark-results\09-Child-Container.png" />
+    <Content Include="developers\images\benchmark-results\11-Prepare-And-Register.png" />
+    <Content Include="developers\images\benchmark-results\12-Prepare-And-Register-And-Simple-Resolve.png" />
+    <Content Include="developers\images\benchmark-results\Overview_Advanced_Fast.png" />
+    <Content Include="developers\images\benchmark-results\Overview_Advanced_Slow.png" />
+    <Content Include="developers\images\benchmark-results\Overview_Basic_Fast.png" />
+    <Content Include="developers\images\benchmark-results\Overview_Basic_Slow.png" />
+    <Content Include="developers\images\benchmark-results\Overview_Prepare_Fast.png" />
+    <Content Include="developers\images\benchmark-results\Overview_Prepare_Slow.png" />
+    <Content Include="developers\images\exampleunittest.PNG" />
+    <Content Include="developers\index.html" />
+    <Content Include="developers\logo.svg" />
+    <Content Include="developers\sitemap.xml" />
+    <Content Include="developers\styles\docfx.css" />
+    <Content Include="developers\styles\docfx.js" />
+    <Content Include="developers\styles\docfx.vendor.css" />
+    <Content Include="developers\styles\docfx.vendor.js" />
+    <Content Include="developers\styles\fonts\fontawesome-webfont.svg" />
+    <Content Include="developers\styles\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="developers\styles\lunr.min.js" />
+    <Content Include="developers\styles\main.css" />
+    <Content Include="developers\styles\main.js" />
+    <Content Include="developers\styles\search-worker.js" />
+    <Content Include="developers\toc.html" />
     <Content Include="gulpfile.js" />
-    <Content Include="developers\**\*.*" />
     <Content Include="styles\fonts\fontawesome-webfont.svg" />
     <Content Include="styles\site.css" />
     <Content Include="_docfx_proj\images\benchmark-results\01-Singleton.png" />
@@ -171,6 +325,27 @@
     <Content Include="_docfx_themes\rezolver\styles\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.md" />
+    <Content Include="articles\toc.md" />
+    <Content Include="articles\intro.md" />
+    <Content Include="api\index.md" />
+    <Content Include="developers\index.json" />
+    <Content Include="developers\manifest.json" />
+    <Content Include="developers\search-stopwords.json" />
+    <Content Include="developers\styles\docfx.vendor.css.map" />
+    <Content Include="developers\styles\docfx.vendor.js.map" />
+    <Content Include="developers\styles\fonts\fontawesome-webfont.eot" />
+    <Content Include="developers\styles\fonts\fontawesome-webfont.ttf" />
+    <Content Include="developers\styles\fonts\fontawesome-webfont.woff" />
+    <Content Include="developers\styles\fonts\fontawesome-webfont.woff2" />
+    <Content Include="developers\styles\fonts\FontAwesome.otf" />
+    <Content Include="developers\styles\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="developers\styles\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="developers\styles\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="developers\styles\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="developers\styles\main.css.map" />
+    <Content Include="developers\styles\main.less" />
+    <Content Include="developers\xrefmap.yml" />
     <None Include="Properties\PublishExclude.props" />
     <Content Include="_docfx_themes\default\common.js" />
     <Content Include="_docfx_themes\default\conceptual.extension.js" />
@@ -224,9 +399,6 @@
     <Content Include="bower.json" />
     <Content Include="namespaces.4.5.2.zip" />
     <Content Include="msdn.4.5.2.zip" />
-    <Content Include="articles\toc.md" />
-    <Content Include="articles\intro.md" />
-    <Content Include="api\index.md" />
     <None Include="packages.config" />
     <Content Include="_docfx_proj\docs\nuget-packages\index.md" />
     <Content Include="_docfx_proj\docs\nuget-packages\rezolver.configuration.md" />
@@ -237,6 +409,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Errors\Error404.cshtml" />
     <Content Include="Views\Errors\Error.cshtml" />
+    <Content Include="toc.yml" />
+    <Content Include="_docfx_proj\docs\enumerables.md" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -427,15 +601,15 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\..\packages\docfx.console.2.13.1\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.13.1\build\docfx.console.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\docfx.console.2.13.1\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.13.1\build\docfx.console.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\..\packages\docfx.console.2.12.1\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.12.1\build\docfx.console.targets'))" />
   </Target>
-  <Import Project="..\..\packages\docfx.console.2.12.1\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.12.1\build\docfx.console.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

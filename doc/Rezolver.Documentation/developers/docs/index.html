@@ -8,7 +8,7 @@
   	<title>Rezolver Dev Guide | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Rezolver Dev Guide | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -126,6 +126,121 @@ make it better for everyone!</li>
 </li>
 </ul>
 <hr>
+<h1 id="tests-as-examples">Tests as Examples</h1>
+<p>Most of the example code shown here is drawn directly from the project <code>Rezolver.Tests.Examples</code>, which can be found
+in the <code>test</code> folder under the root of the repo.  If there&#39;s a filename shown at the top of a code example, then that
+<em>should</em> equal the filename where you can find that code in the examples project.</p>
+<p>Please note that any example code containing type declarations will be found in the <code>Types</code> folder of that project, with all the 
+individual test files in the root.</p>
+<p>We&#39;re using <a href="https://xunit.github.io/">xunit</a> for all our tests, hence all the examples are written for it too.</p>
+<h2 id="matching-an-example-to-a-test">Matching an example to a test</h2>
+<p>We do omit the test function declaration in these examples - but if you look down a tests file you&#39;ll see comments inside
+each test method with an XML tag.  Here&#39;s the body of the <code>ObjectExamples.cs</code> file, which contains all the examples
+for the <a href="objects.html">&#39;Objects as Services&#39; documentation</a>:</p>
+<pre><code class="lang-csharp" name="ObjectExamples.cs">using Rezolver.Tests.Examples.Types;
+using Xunit;
+
+namespace Rezolver.Tests.Examples
+{
+	public class ObjectExamples
+	{
+		[Fact]
+		public void ShouldRegisterAndRetrieveByItsType()
+		{
+			//&lt;example1&gt;
+			var container = new Container();
+
+			var service = new MyService();
+			container.RegisterObject(service);
+
+			Assert.Same(service, container.Resolve&lt;MyService&gt;());
+			//&lt;/example1&gt;
+		}
+
+		[Fact]
+		public void ShouldRegisterAndRetrieveByInterface()
+		{
+			//&lt;example2&gt;
+			var container = new Container();
+
+			var service = new MyService();
+			container.RegisterObject&lt;IMyService&gt;(service);
+
+			// NOTE: Could also use:
+			// container.RegisterObject(service, typeof(IMyService)
+
+			Assert.Same(service, container.Resolve&lt;IMyService&gt;());
+			//&lt;/example2&gt;
+		}
+
+		[Fact]
+		public void ShouldNotDisposeByDefault()
+		{
+			//&lt;example10&gt;
+			var disposableObj = new DisposableType();
+
+			using (var container = new ScopedContainer())
+			{
+				container.RegisterObject(disposableObj);
+				var result = container.Resolve&lt;DisposableType&gt;();
+				Assert.Same(disposableObj, result);
+			}
+			// Should NOT be disposed
+			Assert.False(disposableObj.Disposed);
+			//&lt;/example10&gt;
+		}
+
+		[Fact]
+		public void ShouldDispose()
+		{
+			//&lt;example11&gt;
+			var disposableObj = new DisposableType();
+
+			using (var container = new ScopedContainer())
+			{
+				container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
+				var result = container.Resolve&lt;DisposableType&gt;();
+				Assert.Same(disposableObj, result);
+			}
+			// Should be disposed
+			Assert.True(disposableObj.Disposed);
+			//&lt;/example11&gt;
+		}
+
+		[Fact]
+		public void OnlyRootScopeShouldDispose()
+		{
+			//&lt;example12&gt;
+			var disposableObj = new DisposableType();
+
+			using (var container = new ScopedContainer())
+			{
+				container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
+
+				using (var scope = container.CreateScope())
+				{
+					var result = container.Resolve&lt;DisposableType&gt;();
+					Assert.Same(disposableObj, result);
+				}
+				// Should not be disposed here...
+				Assert.False(disposableObj.Disposed);
+			}
+			// ... but should be disposed here
+			Assert.True(disposableObj.Disposed);
+			//&lt;/example12&gt;
+		}
+	}
+}
+</code></pre><p>You&#39;ll notice that the body of each test method looks like this:</p>
+<pre><code class="lang-cs">//&lt;example_n&gt;
+
+... (code) ...
+
+//&lt;/example_n&gt;
+</code></pre><div class="NOTE"><h5>Note</h5><p>This is a facet of the code snippet feature of <a href="https://dotnet.github.io/docfx/">docfx</a></p>
+</div>
+<p>Each example is numbered sequentially, so it shouldn&#39;t be too hard to marry up the example in the documentation to the 
+test in the tests file.</p>
 <h1 id="next-steps">Next Steps</h1>
 <ul>
 <li>Asp.Net Core developers should read how to 

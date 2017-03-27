@@ -8,7 +8,7 @@
   	<title>Constructor Injection | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Constructor Injection | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -198,7 +198,7 @@ Assert.Throws&lt;ArgumentException&gt;(&quot;service&quot;,
 necessarily exactly the same as, say, the C# spec, but they&#39;re close.</p>
 <p>At the time the first <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call is made, the algorithm will first attempt to select the greediest constructor 
 whose parameters are <em>completely</em> satisfied by services available to the container.  Thus, if a class has two constructors - one with 
-1 parameter and one with 6 parameters - if the single parameter version can be successfully injected, but only 5 of the other 
+1 parameter and one with 3 parameters - if the single parameter version can be successfully injected, but only 2 of the other 
 constructor&#39;s parameters can be, then the single-parameter constructor wins.</p>
 <p>So, given this type:</p>
 <pre><code class="lang-csharp" name="RequiresMyServices.cs">public class RequiresMyServices
@@ -206,49 +206,34 @@ constructor&#39;s parameters can be, then the single-parameter constructor wins.
 	#region Sentinel Instances
 	public static readonly MyService2 Default2 = new MyService2();
 	public static readonly MyService3 Default3 = new MyService3();
-	public static readonly MyService4 Default4 = new MyService4();
-	public static readonly MyService5 Default5 = new MyService5();
-	public static readonly MyService6 Default6 = new MyService6();
 	#endregion
 
 	#region Instance Properties
 	public MyService1 Service1 { get; private set; }
 	public MyService2 Service2 { get; private set; }
 	public MyService3 Service3 { get; private set; }
-	public MyService4 Service4 { get; private set; }
-	public MyService5 Service5 { get; private set; }
-	public MyService6 Service6 { get; private set; }
 	#endregion
 
 	public RequiresMyServices(MyService1 service1)
 		: this(service1,
 			  Default2,
-			  Default3,
-			  Default4,
-			  Default5,
-			  Default6)
+			  Default3)
 	{
 
 	}
 
 	public RequiresMyServices(MyService1 service1,
 		MyService2 service2,
-		MyService3 service3,
-		MyService4 service4,
-		MyService5 service5,
-		MyService6 service6)
+		MyService3 service3)
 	{
 		Service1 = service1;
 		Service2 = service2;
 		Service3 = service3;
-		Service4 = service4;
-		Service5 = service5;
-		Service6 = service6;
 	}
 
 
 }
-</code></pre><p>If we register <code>Service1</code>, but not <strong><em>all</em></strong> of the other service types, the single-parameter constructor will be used:</p>
+</code></pre><p>If we register <code>Service1</code> &amp; <code>Service2</code>, but not <code>Service3</code>, the single-parameter constructor will be used:</p>
 <pre><code class="lang-csharp" name="ConstructorExamples.cs">var container = new Container();
 // Building ConstructorTargets directly here,
 // and using the batch-registration &#39;RegisterAll&#39; method,
@@ -256,27 +241,21 @@ constructor&#39;s parameters can be, then the single-parameter constructor wins.
 container.RegisterAll(
     Target.ForType&lt;RequiresMyServices&gt;(),
     Target.ForType&lt;MyService1&gt;(),
-    Target.ForType&lt;MyService2&gt;(),
-    Target.ForType&lt;MyService3&gt;(),
-    Target.ForType&lt;MyService4&gt;(),
-    Target.ForType&lt;MyService5&gt;());
+    Target.ForType&lt;MyService2&gt;());
 
 var result = container.Resolve&lt;RequiresMyServices&gt;();
 
-// Because we didn&#39;t have MyService6 registered, the
+// Because we didn&#39;t have MyService3 registered, the
 // container will bind the first constructor, which defaults
-// services 2-6:
+// services 2 &amp; 3:
 Assert.NotNull(result.Service1);
 Assert.Same(RequiresMyServices.Default2, result.Service2);
 Assert.Same(RequiresMyServices.Default3, result.Service3);
-Assert.Same(RequiresMyServices.Default4, result.Service4);
-Assert.Same(RequiresMyServices.Default5, result.Service5);
-Assert.Same(RequiresMyServices.Default6, result.Service6);
 </code></pre><hr>
 <h3 id="example---best-match-with-defaults">Example - Best-match (with defaults)</h3>
 <p>When a constructor&#39;s parameters have default values, the rules change slightly.</p>
 <p>The algorithm treats parameters which have defaults as <em>always</em> satisfied, even if a service is not registered of the correct type.  So 
-if we extend <code>RequiresMyServices</code> with a new class whose 6-parameter constructor specifies default values for parameters 2-6:</p>
+if we extend <code>RequiresMyServices</code> with a new class whose 3-parameter constructor specifies default values for parameters 2 &amp; 3:</p>
 <pre><code class="lang-csharp" name="RequiresMyServicesWithDefaults.cs">public class RequiresMyServicesWithDefaults : RequiresMyServices
 {
 	public RequiresMyServicesWithDefaults(MyService1 service1)
@@ -287,52 +266,37 @@ if we extend <code>RequiresMyServices</code> with a new class whose 6-parameter 
 
 	public RequiresMyServicesWithDefaults(MyService1 service1,
 		MyService2 service2 = null,
-		MyService3 service3 = null,
-		MyService4 service4 = null,
-		MyService5 service5 = null,
-		MyService6 service6 = null)
+		MyService3 service3 = null)
 		: base(service1,
 			  service2 ?? Default2,
-			  service3 ?? Default3,
-			  service4 ?? Default4,
-			  service5 ?? Default5,
-			  service6 ?? Default6)
+			  service3 ?? Default3)
 	{
 
 	}
 }
-</code></pre><p>And then we swap <code>RequiresMyServices</code> for <code>RequiresMyServicesWithDefaults</code>, this time, the 6-parameter
-constructor will be executed, with parameters 1-5 receiving injected arguments, and parameter 6 receiving the default instance from
+</code></pre><p>And then we swap <code>RequiresMyServices</code> for <code>RequiresMyServicesWithDefaults</code>, this time, the 3-parameter
+constructor will be executed, with parameters 1 &amp; 2 receiving injected arguments, and parameter 3 receiving the default instance from
 the base:</p>
-<pre><code class="lang-csharp" name="ConstructorExamples.cs">     var container = new Container();
-     container.RegisterAll(
-         // Note - using .As&lt;T&gt; here to create a ChangeTypeTarget
-         // which makes our .ForType&lt;T&gt; target appear
-         // to be for RequiresMyService
-         // Could also have done:
-         // container.RegisterType&lt;RequiresMyServicesWithDefaults, RequiresMyServices&gt;()
-         Target.ForType&lt;RequiresMyServicesWithDefaults&gt;()
-             .As&lt;RequiresMyServices&gt;(),
-Target.ForType&lt;MyService1&gt;(),
-Target.ForType&lt;MyService2&gt;(),
-Target.ForType&lt;MyService3&gt;(),
-Target.ForType&lt;MyService4&gt;(),
-Target.ForType&lt;MyService5&gt;());
+<pre><code class="lang-csharp" name="ConstructorExamples.cs">var container = new Container();
+container.RegisterAll(
+    // Note - using .As&lt;T&gt; here to create a ChangeTypeTarget
+    // which makes our .ForType&lt;T&gt; target appear
+    // to be for RequiresMyService
+    // Could also have done:
+    // container.RegisterType&lt;RequiresMyServicesWithDefaults, RequiresMyServices&gt;()
+    Target.ForType&lt;RequiresMyServicesWithDefaults&gt;()
+        .As&lt;RequiresMyServices&gt;(),
+    Target.ForType&lt;MyService1&gt;(),
+    Target.ForType&lt;MyService2&gt;());
 
-     var result = container.Resolve&lt;RequiresMyServices&gt;();
+var result = container.Resolve&lt;RequiresMyServices&gt;();
 
-     //this time all but Service6 will have been injected
-     Assert.NotNull(result.Service1);
-     Assert.NotNull(result.Service2);
-     Assert.NotNull(result.Service3);
-     Assert.NotNull(result.Service4);
-     Assert.NotNull(result.Service5);
+//this time all but Service3 will have been injected
+Assert.NotNull(result.Service1);
+Assert.NotNull(result.Service2);
 
-     Assert.NotSame(RequiresMyServices.Default2, result.Service2);
-     Assert.NotSame(RequiresMyServices.Default3, result.Service3);
-     Assert.NotSame(RequiresMyServices.Default4, result.Service4);
-     Assert.NotSame(RequiresMyServices.Default5, result.Service5);
-     Assert.Same(RequiresMyServices.Default6, result.Service6);
+Assert.NotSame(RequiresMyServices.Default2, result.Service2);
+Assert.Same(RequiresMyServices.Default3, result.Service3);
 </code></pre><div class="TIP"><h5>Tip</h5><p>The use of <a class="xref" href="../../api/Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a> (via the <code>As</code> extension method) there might be a little confusing.  In truth, we&#39;re only sneaking it in here to show
 some other parts of the framework :)</p>
 <p>Think of it as being the same as an explicit cast from one type to another - you put a target inside it and tell it what type

@@ -52,6 +52,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="rezolver-docfx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Targets\DelegateTarget_CreateAndRegister.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DelegateTarget_CreateAndRegister.cs</LastGenOutput>

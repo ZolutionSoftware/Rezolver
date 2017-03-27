@@ -23,6 +23,41 @@ make it better for everyone!
 
 * * *
 
+# Tests as Examples
+
+Most of the example code shown here is drawn directly from the project `Rezolver.Tests.Examples`, which can be found
+in the `test` folder under the root of the repo.  If there's a filename shown at the top of a code example, then that
+*should* equal the filename where you can find that code in the examples project.
+
+Please note that any example code containing type declarations will be found in the `Types` folder of that project, with all the 
+individual test files in the root.
+
+We're using [xunit](https://xunit.github.io/) for all our tests, hence all the examples are written for it too.
+
+## Matching an example to a test
+
+We do omit the test function declaration in these examples - but if you look down a tests file you'll see comments inside
+each test method with an XML tag.  Here's the body of the `ObjectExamples.cs` file, which contains all the examples
+for the ['Objects as Services' documentation](objects.md):
+
+[!code-csharp[ObjectExamples.cs](../../../../test/Rezolver.Tests.Examples/ObjectExamples.cs)]
+
+You'll notice that the body of each test method looks like this:
+
+```cs
+//<example_n>
+
+... (code) ...
+
+//</example_n>
+```
+
+> [!NOTE]
+> This is a facet of the code snippet feature of [docfx](https://dotnet.github.io/docfx/)
+
+Each example is numbered sequentially, so it shouldn't be too hard to marry up the example in the documentation to the 
+test in the tests file.
+
 # Next Steps
 
 - Asp.Net Core developers should read how to 

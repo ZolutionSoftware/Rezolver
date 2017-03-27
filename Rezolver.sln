@@ -19,9 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{27A5E07B-3BE
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}"
-	ProjectSection(SolutionItems) = preProject
-		test\Rezolver.Tests.Shared.props = test\Rezolver.Tests.Shared.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Configuration", "src\Rezolver.Configuration\Rezolver.Configuration.csproj", "{05F52AEE-AB5B-4008-8B00-6CA2B58CAC48}"
 EndProject
@@ -32,6 +29,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.Documentation", "doc\Rezolver.Documentation\Rezolver.Documentation.csproj", "{BD8449E1-9E0F-4FB6-A6EA-97FF921EF65E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2CF0FA03-83F9-436C-A178-DA5C77D039CC} = {2CF0FA03-83F9-436C-A178-DA5C77D039CC}
+		{63D7227A-5B11-4EC1-A074-C3FD4301AD4F} = {63D7227A-5B11-4EC1-A074-C3FD4301AD4F}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{44C7026C-38E6-4229-B8B8-B4CC557DA409}"
 EndProject

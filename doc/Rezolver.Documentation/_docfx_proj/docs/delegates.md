@@ -15,11 +15,11 @@ To create delegate targets you can either:
 - Manually create an instance of @Rezolver.Targets.DelegateTarget through its constructor
 - Use the @Rezolver.Target.ForDelegate* overload, which provides specialisations for variants of the `System.Func<>` generic delegate
 
-Delegates are a useful tool in the context IOC containers as support for them gives you the opportunity to perform much more complex
+Delegates are a useful tool in the context of IOC containers as support for them gives you the opportunity to perform much more complex
 tasks in order to resolve an object than the functionality offered by the standard targets in Rezolver.
 
-Whether you *should* perform excessively complex logic in these factories is a topic of much debate.  Our view is that
-you should be able to if you want or need to, so Rezolver's support for delegates is extensive, including the ability to 
+Whether you *should* perform excessively complex logic in these factories is a topic of debate.  Our view is that
+you should be able to if you want, or need, to, so Rezolver's support for delegates is extensive, including the ability to 
 inject arguments to your delegate from the container, or resolve additional services inside your delegate through @Rezolver.ResolveContext.
 
 # Basic Examples

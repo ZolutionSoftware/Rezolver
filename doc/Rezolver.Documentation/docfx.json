@@ -4,7 +4,7 @@
       "src": [
         {
           "files": [
-            "project.json"
+            "rezolver-docfx.csproj"
           ],
           "cwd": "../../src/Rezolver",
           "exclude": [

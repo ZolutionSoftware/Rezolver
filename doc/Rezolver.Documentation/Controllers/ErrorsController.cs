@@ -47,13 +47,5 @@ namespace Rezolver.Documentation.Controllers
 
             return Decorate(View(model), model);
         }
-
-        // GET: Errors
-        public ActionResult Error404()
-        {
-            var model = new Models.ErrorModel(ControllerContext);
-            //query string from IIS comes through as ?[http status];[original url]
-            return Decorate(View(model), model);
-        }
     }
 }

@@ -8,7 +8,7 @@
   	<title>Rezolver | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Rezolver | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="favicon.ico">
   	<link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -98,7 +98,8 @@
               <h1 id="rezolver">Rezolver</h1>
               
 <p>Rezolver is a <a href="docs/benchmarks.html">fast</a>, efficient, extensible, <a href="https://github.com/ZolutionSoftware/Rezolver">open source</a> IOC container supporting .Net 
-Core.  This site contains API documentation and developer guides for getting the most out of it.  </p>
+Core, .Net 4.5.2 and .Net 4.6 - with Asp.Net Core integration too.</p>
+<p>This site contains API documentation and developer guides for getting the most out of it.  </p>
 <h2 id="features">Features</h2>
 <p><em>Linked topics provide high level overviews and examples in our developer guide - click on them to find out more! (*)</em></p>
 <ul>
@@ -118,7 +119,7 @@ Core.  This site contains API documentation and developer guides for getting the
 </ul>
 </li>
 <li>Hierarchical lifetime scoping</li>
-<li><a href="docs/delegates.html">Delegates</a> and Expressions as factories, with argument injection<ul>
+<li><a href="docs/delegates.html">Delegates</a> and <a href="docs/expressions.html">Expressions</a> as factories, with argument injection<ul>
 <li>Explicit resolving supported inside factory/expression bodies</li>
 </ul>
 </li>
@@ -126,15 +127,15 @@ Core.  This site contains API documentation and developer guides for getting the
 <li><a href="docs/objects.html">Objects as services</a></li>
 <li>Scoped objects (i.e. &#39;singleton per scope&#39;)</li>
 <li>No &#39;prepare&#39; phase - you can register targets in a container after you start using it<ul>
-<li><em>Note - services which have already been used cannot yet be replaced</em></li>
+<li><em>Note - services which have already been used cannot yet be replaced, but high-performance mutable containers are on their way</em></li>
 </ul>
 </li>
 <li>Extensible compiler framework<ul>
 <li>Expression tree compiler used by default</li>
 </ul>
 </li>
-<li>Integration with <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Microsoft.Extensions.DependencyInjection</a> and 
-<a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Microsoft.AspNetCore.Hosting</a> via nuget packages</li>
+<li>Direct Asp.Net Core integration via extensions to the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Microsoft.Extensions.DependencyInjection</a> and 
+<a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Microsoft.AspNetCore.Hosting</a> packages via nuget packages (click the links to go to our package docs)</li>
 <li>Extensible configuration framework <em>(still in development)</em><ul>
 <li>Json configuration <em>(still in development)</em></li>
 </ul>

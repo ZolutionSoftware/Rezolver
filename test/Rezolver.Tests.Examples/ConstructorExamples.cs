@@ -65,22 +65,16 @@ namespace Rezolver.Tests.Examples
             container.RegisterAll(
                 Target.ForType<RequiresMyServices>(),
                 Target.ForType<MyService1>(),
-                Target.ForType<MyService2>(),
-                Target.ForType<MyService3>(),
-                Target.ForType<MyService4>(),
-                Target.ForType<MyService5>());
+                Target.ForType<MyService2>());
 
             var result = container.Resolve<RequiresMyServices>();
 
-            // Because we didn't have MyService6 registered, the
+            // Because we didn't have MyService3 registered, the
             // container will bind the first constructor, which defaults
-            // services 2-6:
+            // services 2 & 3:
             Assert.NotNull(result.Service1);
             Assert.Same(RequiresMyServices.Default2, result.Service2);
             Assert.Same(RequiresMyServices.Default3, result.Service3);
-            Assert.Same(RequiresMyServices.Default4, result.Service4);
-            Assert.Same(RequiresMyServices.Default5, result.Service5);
-            Assert.Same(RequiresMyServices.Default6, result.Service6);
             //</example4>
         }
 
@@ -97,26 +91,17 @@ namespace Rezolver.Tests.Examples
                 // container.RegisterType<RequiresMyServicesWithDefaults, RequiresMyServices>()
                 Target.ForType<RequiresMyServicesWithDefaults>()
                     .As<RequiresMyServices>(),
-			    Target.ForType<MyService1>(),
-			    Target.ForType<MyService2>(),
-			    Target.ForType<MyService3>(),
-			    Target.ForType<MyService4>(),
-			    Target.ForType<MyService5>());
+                Target.ForType<MyService1>(),
+                Target.ForType<MyService2>());
 
             var result = container.Resolve<RequiresMyServices>();
 
-            //this time all but Service6 will have been injected
+            //this time all but Service3 will have been injected
             Assert.NotNull(result.Service1);
             Assert.NotNull(result.Service2);
-            Assert.NotNull(result.Service3);
-            Assert.NotNull(result.Service4);
-            Assert.NotNull(result.Service5);
 
             Assert.NotSame(RequiresMyServices.Default2, result.Service2);
-            Assert.NotSame(RequiresMyServices.Default3, result.Service3);
-            Assert.NotSame(RequiresMyServices.Default4, result.Service4);
-            Assert.NotSame(RequiresMyServices.Default5, result.Service5);
-            Assert.Same(RequiresMyServices.Default6, result.Service6);
+            Assert.Same(RequiresMyServices.Default3, result.Service3);
             //</example5>
         }
 

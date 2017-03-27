@@ -7,13 +7,17 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Update="xunit.runner.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
-  <Import Project="..\Rezolver.Tests.Shared.props" />
   <Import Project="..\..\src\Rezolver.Shared.props " />
 
   <ItemGroup>
@@ -37,6 +41,11 @@
     <ProjectReference Include="..\..\src\Rezolver.Configuration.Json\Rezolver.Configuration.Json.csproj" />
     <ProjectReference Include="..\..\src\Rezolver.Configuration\Rezolver.Configuration.csproj" />
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
+    <ProjectReference Include="..\Rezolver.Tests.Shared\Rezolver.Tests.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
 </Project>

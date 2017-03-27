@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ExpressionFunctions
    | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.12.1.0">
+  	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -122,10 +122,16 @@ in place of static code.</p>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+                </div>
+                <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
@@ -136,15 +142,9 @@ in place of static code.</p>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
+              <h6><strong>Assembly</strong>:rezolver-docfx.dll</h6>
               <h5 id="Rezolver_ExpressionFunctions_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public static class ExpressionFunctions</code></pre>
@@ -213,7 +213,7 @@ which is active when an expression is compiled and executed when resolving an ob
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a></td>
                     <td><p>Always.  The method is not intended to be used outside of an expression, instead
-it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> bound
+it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <see cref="!:MethodCallExpression"></see> bound
 to the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_System_Type_">Resolve(Type)</a> method of a <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>.</p>
 </td>
                   </tr>
@@ -271,7 +271,7 @@ which is active when an expression is compiled and executed when resolving an ob
               <div class="markdown level1 remarks"><p>Use of this function in a Lambda expression is not required if you can add a <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> 
 parameter to the Lambda - since you can simply call its <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve__1">Resolve&lt;TResult&gt;()</a> method in your
 lambda body.  This is primarily provided instead for non-lambda expressions which require services from the 
-container (e.g. if manually building a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a> or <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> and you 
+container (e.g. if manually building a <see cref="!:NewExpression"></see> or <see cref="!:MethodCallExpression"></see> and you 
 want to explicitly inject one or more constructor/method arguments).</p>
 </div>
               <h5 class="exceptions">Exceptions</h5>
@@ -286,7 +286,7 @@ want to explicitly inject one or more constructor/method arguments).</p>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a></td>
                     <td><p>Always.  The method is not intended to be used outside of an expression, instead
-it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> bound
+it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <see cref="!:MethodCallExpression"></see> bound
 to the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve__1">Resolve&lt;TResult&gt;()</a> method of a <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>.</p>
 </td>
                   </tr>

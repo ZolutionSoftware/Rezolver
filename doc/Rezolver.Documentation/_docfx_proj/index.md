@@ -1,7 +1,9 @@
 # Rezolver
 
 Rezolver is a [fast](docs/benchmarks.md), efficient, extensible, [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container supporting .Net 
-Core.  This site contains API documentation and developer guides for getting the most out of it.  
+Core, .Net 4.5.2 and .Net 4.6 - with Asp.Net Core integration too.
+
+This site contains API documentation and developer guides for getting the most out of it.  
 
 ## Features
 
@@ -19,17 +21,17 @@ _Linked topics provide high level overviews and examples in our developer guide 
 - Child containers (overriding registrations in one container with those of another)
   - Child registration containers (lower-level overriding of registrations for similar but sibling containers)
 - Hierarchical lifetime scoping
-- [Delegates](docs/delegates.md) and Expressions as factories, with argument injection
+- [Delegates](docs/delegates.md) and [Expressions](docs/expressions.md) as factories, with argument injection
   - Explicit resolving supported inside factory/expression bodies
 - Singletons
 - [Objects as services](docs/objects.md)
 - Scoped objects (i.e. 'singleton per scope')
 - No 'prepare' phase - you can register targets in a container after you start using it
-  - *Note - services which have already been used cannot yet be replaced*
+  - *Note - services which have already been used cannot yet be replaced, but high-performance mutable containers are on their way*
 - Extensible compiler framework
   - Expression tree compiler used by default
-- Integration with [Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) and 
-[Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) via nuget packages
+- Direct Asp.Net Core integration via extensions to the [Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) and 
+[Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) packages via nuget packages (click the links to go to our package docs)
 - Extensible configuration framework *(still in development)*
   - Json configuration *(still in development)*
 
