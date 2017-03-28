@@ -141,8 +141,8 @@ container.RegisterType&lt;RequiresEnumerableOfServices&gt;();
 
 var result = container.Resolve&lt;RequiresEnumerableOfServices&gt;();
 Assert.Empty(result.Services);
-</code></pre><h2 id="enumerables-of-constructortargets">Enumerables of ConstructorTargets</h2>
-<p>Here, we actually register each type one after another:</p>
+</code></pre><h2 id="same-itarget-type">Same <code>ITarget</code> type</h2>
+<p>Here, we register each type one after another:</p>
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
 var expectedTypes = new[] {
     typeof(MyService1), typeof(MyService2), typeof(MyService3)
@@ -154,10 +154,37 @@ foreach(var t in expectedTypes)
 container.RegisterType&lt;RequiresEnumerableOfServices&gt;();
 
 var result = container.Resolve&lt;RequiresEnumerableOfServices&gt;();
-Assert.Collection(result.Services,
-    expectedTypes.Select(
-        t =&gt; new Action&lt;IMyService&gt;((i) =&gt; Assert.Equal(t, i.GetType()))).ToArray());
-</code></pre><h1 id="in-progress">In progress!</h1>
+Assert.Equal(3, result.Services.Count());
+Assert.All(
+    result.Services.Zip(
+        expectedTypes, 
+        (s, t) =&gt; (service: s, expectedType: t)
+    ),
+    t =&gt; Assert.IsType(t.expectedType, t.service));
+</code></pre><h2 id="mixed-itarget-types">Mixed <code>ITarget</code> types</h2>
+<p>This time, we&#39;re mixing it up a bit by registering multiple different target types (a constructor target, a delegate
+target and an object target), <em>and</em> we&#39;re also using a delegate to create the <code>RequiresEnumerableOfServices</code> just
+to show that the enumerable can be injected into a delegate as you&#39;d expect:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+container.RegisterType&lt;MyService1, IMyService&gt;();
+container.RegisterDelegate&lt;IMyService&gt;(() =&gt; new MyService2());
+container.RegisterObject&lt;IMyService&gt;(new MyService3());
+
+//shows also that injection of IEnumerables holds wherever injection
+//is normally supported - such as here, with delegate argument injection
+container.RegisterDelegate((IEnumerable&lt;IMyService&gt; services) =&gt;
+{
+    if (!services.OfType&lt;MyService4&gt;().Any())
+        services = services.Concat(new[] { new MyService4() });
+    return new RequiresEnumerableOfServices(services);
+});
+
+var result = container.Resolve&lt;RequiresEnumerableOfServices&gt;();
+
+Assert.Equal(4, result.Services.Count());
+//just check they&#39;re all different types this time.
+Assert.Equal(4, result.Services.Select(s =&gt; s.GetType()).Distinct().Count());
+</code></pre><h1 id="in-progress---mixed-lifetimes-next">In progress - (mixed lifetimes next)</h1>
 <p>This documentation is incomplete - please keep coming back to learn more.</p>
 
             </article>

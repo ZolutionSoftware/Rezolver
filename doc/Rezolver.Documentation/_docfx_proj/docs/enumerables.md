@@ -37,12 +37,20 @@ And then the test:
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example1)]
 
-## Enumerables of ConstructorTargets
+## Same `ITarget` type
 
-Here, we actually register each type one after another:
+Here, we register each type one after another:
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example2)]
 
-#In progress!
+## Mixed `ITarget` types
+
+This time, we're mixing it up a bit by registering multiple different target types (a constructor target, a delegate
+target and an object target), *and* we're also using a delegate to create the `RequiresEnumerableOfServices` just
+to show that the enumerable can be injected into a delegate as you'd expect:
+
+[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example3)]
+
+#In progress - (mixed lifetimes next)
 
 This documentation is incomplete - please keep coming back to learn more.
