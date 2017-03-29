@@ -122,7 +122,6 @@ configuration callback-based mechanism for configuring containers.</p>
 </div>
 <p>You are not restricted in the targets you use to produce instances for an enumerable, and each one can have its
 own lifetime (scoped/singleton etc).</p>
-<h1 id="basic-examples">Basic examples</h1>
 <h2 id="empty-enumerable">Empty enumerable</h2>
 <p>Here&#39;s an example where we only register the service we&#39;re going to create, which has a single constructor that requires
 an <code>IEnumerable&lt;IMyService&gt;</code>.</p>
@@ -174,6 +173,7 @@ container.RegisterObject&lt;IMyService&gt;(new MyService3());
 //is normally supported - such as here, with delegate argument injection
 container.RegisterDelegate((IEnumerable&lt;IMyService&gt; services) =&gt;
 {
+    //if MyService4 is missing, add it to the enumerable
     if (!services.OfType&lt;MyService4&gt;().Any())
         services = services.Concat(new[] { new MyService4() });
     return new RequiresEnumerableOfServices(services);
@@ -184,7 +184,73 @@ var result = container.Resolve&lt;RequiresEnumerableOfServices&gt;();
 Assert.Equal(4, result.Services.Count());
 //just check they&#39;re all different types this time.
 Assert.Equal(4, result.Services.Select(s =&gt; s.GetType()).Distinct().Count());
-</code></pre><h1 id="in-progress---mixed-lifetimes-next">In progress - (mixed lifetimes next)</h1>
+</code></pre><h2 id="mixed-lifetimes">Mixed lifetimes</h2>
+<p>When registering targets, you have three lifetimes at your disposal:</p>
+<ul>
+<li>Transient (a new object created for every <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call)</li>
+<li>Singleton (only one object is ever created)</li>
+<li>Scoped (one object created per <a class="xref" href="../api/Rezolver.IContainerScope.html">IContainerScope</a>)</li>
+</ul>
+<div class="NOTE"><h5>Note</h5><p>Of course, the <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> (see <a href="objects.html">objects as services</a>) is technically a singleton, also,
+but that&#39;s because it wraps a constant reference supplied by you.</p>
+</div>
+<p>If you register multiple targets for the same type, <strong><em>and</em></strong> those targets have different lifetimes, then those lifetimes are
+honoured if the container injects an <code>IEnumerable&lt;&gt;</code>.</p>
+<p>The following example registers three implementations for <code>IMyService</code> again which will appear in the enumerables in the 
+following positions:</p>
+<ul>
+<li><code>[0]</code>: A singleton </li>
+<li><code>[1]</code>: A scoped object</li>
+<li><code>[2]</code>: A transient</li>
+</ul>
+<p>It then resolves <code>IEnumerable&lt;IMyService&gt;</code> multiple times - twice from the root container (which
+is a <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a> so that the scoped <code>MyService2</code> registration has a scope to &#39;live&#39; in) and then
+twice again from a child scope:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">//since we&#39;re using a scoped registration here,
+//we&#39;ll use the ScopedContainer, which establishes
+//a root scope.
+var container = new ScopedContainer();
+
+container.RegisterSingleton&lt;MyService1, IMyService&gt;();
+container.RegisterScoped&lt;MyService2, IMyService&gt;();
+container.RegisterType&lt;MyService3, IMyService&gt;();
+
+//So - each enumerable will contain, in order:
+// 1) Singleton IMyService
+// 2) Scoped IMyService
+// 3) Transient IMyService
+
+var fromRoot1 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+var fromRoot2 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+
+Assert.Same(fromRoot1[0], fromRoot2[0]);
+//both scoped objects should be the same because we&#39;ve resolved
+//from the root scope
+Assert.Same(fromRoot1[1], fromRoot2[1]);
+Assert.NotSame(fromRoot1[2], fromRoot2[2]);
+
+using(var childScope = container.CreateScope())
+{
+    var fromChildScope1 = childScope.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+    //singleton should be the same as before, but 
+    //the scoped object will be different
+    Assert.Same(fromRoot1[0], fromChildScope1[0]);
+    Assert.NotSame(fromRoot1[1], fromChildScope1[1]);
+    Assert.NotSame(fromRoot1[2], fromChildScope1[2]);
+
+    var fromChildScope2 = childScope.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+    //the scoped object will be the same as above
+    Assert.Same(fromChildScope1[0], fromChildScope2[0]);
+    Assert.Same(fromChildScope1[1], fromChildScope2[1]);
+    Assert.NotSame(fromChildScope1[2], fromChildScope2[2]);
+}
+</code></pre><p>To summarise:</p>
+<ul>
+<li><code>[0]</code> is <em>always</em> the same reference</li>
+<li><code>[1]</code> is created once per enclosing scope (remember - the container itself is a scope in this example)</li>
+<li><code>[2]</code> is created once per call</li>
+</ul>
+<h1 id="in-progress---mixed-lifetimes-next">In progress - (mixed lifetimes next)</h1>
 <p>This documentation is incomplete - please keep coming back to learn more.</p>
 
             </article>
