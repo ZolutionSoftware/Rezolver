@@ -83,6 +83,28 @@ To summarise:
 - `[1]` is created once per enclosing scope (remember - the container itself is a scope in this example)
 - `[2]` is created once per call
 
-# In progress - (mixed lifetimes next)
+## Open generics in enumerables
+
+Here we have multiple registrations for an open generic:
+
+[!code-csharp[UsesAnyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesAnyService.cs#example)]
+[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example5)]
+
+## Closed generics 
+
+In this case, we still have an open generic registration, but it's superseded for certain generic types by two
+specialised registrations where the inner generic type argument is known.
+
+We're adding these extra generic types:
+
+[!code-csharp[UsesAnyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesIMyService.cs#example)]
+
+So we can do this:
+
+[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6)]
+
+
+
+# In progress
 
 This documentation is incomplete - please keep coming back to learn more.

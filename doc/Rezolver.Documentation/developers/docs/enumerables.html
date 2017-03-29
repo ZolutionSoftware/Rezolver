@@ -146,7 +146,7 @@ Assert.Empty(result.Services);
 var expectedTypes = new[] {
     typeof(MyService1), typeof(MyService2), typeof(MyService3)
 };
-foreach(var t in expectedTypes)
+foreach (var t in expectedTypes)
 {
     container.RegisterType(t, typeof(IMyService));
 }
@@ -156,7 +156,7 @@ var result = container.Resolve&lt;RequiresEnumerableOfServices&gt;();
 Assert.Equal(3, result.Services.Count());
 Assert.All(
     result.Services.Zip(
-        expectedTypes, 
+        expectedTypes,
         (s, t) =&gt; (service: s, expectedType: t)
     ),
     t =&gt; Assert.IsType(t.expectedType, t.service));
@@ -229,7 +229,7 @@ Assert.Same(fromRoot1[0], fromRoot2[0]);
 Assert.Same(fromRoot1[1], fromRoot2[1]);
 Assert.NotSame(fromRoot1[2], fromRoot2[2]);
 
-using(var childScope = container.CreateScope())
+using (var childScope = container.CreateScope())
 {
     var fromChildScope1 = childScope.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
     //singleton should be the same as before, but 
@@ -250,7 +250,75 @@ using(var childScope = container.CreateScope())
 <li><code>[1]</code> is created once per enclosing scope (remember - the container itself is a scope in this example)</li>
 <li><code>[2]</code> is created once per call</li>
 </ul>
-<h1 id="in-progress---mixed-lifetimes-next">In progress - (mixed lifetimes next)</h1>
+<h2 id="open-generics-in-enumerables">Open generics in enumerables</h2>
+<p>Here we have multiple registrations for an open generic:</p>
+<pre><code class="lang-csharp" name="UsesAnyService.cs">public interface IUsesAnyService&lt;TAnyService&gt;
+{
+    void UseTheService(TAnyService service);
+}
+
+public class UsesAnyService&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
+{
+    public void UseTheService(TAnyService service)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class UsesAnyService2&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
+{
+    public void UseTheService(TAnyService service)
+    {
+        throw new NotImplementedException();
+    }
+}
+</code></pre><pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+container.RegisterType(typeof(UsesAnyService2&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+
+var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
+
+Assert.Equal(2, result.Length);
+Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[0]);
+Assert.IsType&lt;UsesAnyService2&lt;IMyService&gt;&gt;(result[1]);
+</code></pre><h2 id="closed-generics">Closed generics</h2>
+<p>In this case, we still have an open generic registration, but it&#39;s superseded for certain generic types by two
+specialised registrations where the inner generic type argument is known.</p>
+<p>We&#39;re adding these extra generic types:</p>
+<pre><code class="lang-csharp" name="UsesAnyService.cs">public class UsesIMyService : IUsesAnyService&lt;IMyService&gt;
+{
+    public void UseTheService(IMyService service)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class UsesIMyService2 : IUsesAnyService&lt;IMyService&gt;
+{
+    public void UseTheService(IMyService service)
+    {
+        throw new NotImplementedException();
+    }
+}
+</code></pre><p>So we can do this:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+//register our open generic
+container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+//register our two specialisations for IMyService
+container.RegisterType&lt;UsesIMyService, IUsesAnyService&lt;IMyService&gt;&gt;();
+container.RegisterType&lt;UsesIMyService2, IUsesAnyService&lt;IMyService&gt;&gt;();
+
+//will use the UsesIMyService and UsesIMyService2 specialised registrations
+var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
+//will use the open generic registration - array of one
+var result2 = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;MyService&gt;&gt;&gt;().ToArray();
+
+Assert.Equal(2, result.Length);
+Assert.IsType&lt;UsesIMyService&gt;(result[0]);
+Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
+
+Assert.Equal(1, result2.Length);
+Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
+</code></pre><h1 id="in-progress">In progress</h1>
 <p>This documentation is incomplete - please keep coming back to learn more.</p>
 
             </article>

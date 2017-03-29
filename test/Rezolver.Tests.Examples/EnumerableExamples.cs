@@ -30,7 +30,7 @@ namespace Rezolver.Tests.Examples
             var expectedTypes = new[] {
                 typeof(MyService1), typeof(MyService2), typeof(MyService3)
             };
-            foreach(var t in expectedTypes)
+            foreach (var t in expectedTypes)
             {
                 container.RegisterType(t, typeof(IMyService));
             }
@@ -40,7 +40,7 @@ namespace Rezolver.Tests.Examples
             Assert.Equal(3, result.Services.Count());
             Assert.All(
                 result.Services.Zip(
-                    expectedTypes, 
+                    expectedTypes,
                     (s, t) => (service: s, expectedType: t)
                 ),
                 t => Assert.IsType(t.expectedType, t.service));
@@ -101,7 +101,7 @@ namespace Rezolver.Tests.Examples
             Assert.Same(fromRoot1[1], fromRoot2[1]);
             Assert.NotSame(fromRoot1[2], fromRoot2[2]);
 
-            using(var childScope = container.CreateScope())
+            using (var childScope = container.CreateScope())
             {
                 var fromChildScope1 = childScope.Resolve<IEnumerable<IMyService>>().ToArray();
                 //singleton should be the same as before, but 
@@ -123,9 +123,41 @@ namespace Rezolver.Tests.Examples
         public void ShouldResolveEnumerableOfOpenGenerics()
         {
             //<example5>
-            //USE GenericServiceContainer here - although do away with the constructor argument and property - give it
-            // a method.  Then add another container implementation; register both and resolve two.
+            var container = new Container();
+            container.RegisterType(typeof(UsesAnyService<>), typeof(IUsesAnyService<>));
+            container.RegisterType(typeof(UsesAnyService2<>), typeof(IUsesAnyService<>));
+
+            var result = container.Resolve<IEnumerable<IUsesAnyService<IMyService>>>().ToArray();
+
+            Assert.Equal(2, result.Length);
+            Assert.IsType<UsesAnyService<IMyService>>(result[0]);
+            Assert.IsType<UsesAnyService2<IMyService>>(result[1]);
             //</example5>
+        }
+
+        [Fact]
+        public void ShouldResolveEnumerableOfClosedGenericsInsteadOfOpen()
+        {
+            //<example6>
+            var container = new Container();
+            //register our open generic
+            container.RegisterType(typeof(UsesAnyService<>), typeof(IUsesAnyService<>));
+            //register our two specialisations for IMyService
+            container.RegisterType<UsesIMyService, IUsesAnyService<IMyService>>();
+            container.RegisterType<UsesIMyService2, IUsesAnyService<IMyService>>();
+
+            //will use the UsesIMyService and UsesIMyService2 specialised registrations
+            var result = container.Resolve<IEnumerable<IUsesAnyService<IMyService>>>().ToArray();
+            //will use the open generic registration - array of one
+            var result2 = container.Resolve<IEnumerable<IUsesAnyService<MyService>>>().ToArray();
+
+            Assert.Equal(2, result.Length);
+            Assert.IsType<UsesIMyService>(result[0]);
+            Assert.IsType<UsesIMyService2>(result[1]);
+
+            Assert.Equal(1, result2.Length);
+            Assert.IsType<UsesAnyService<MyService>>(result2[0]);
+            //</example6>
         }
     }
 }
