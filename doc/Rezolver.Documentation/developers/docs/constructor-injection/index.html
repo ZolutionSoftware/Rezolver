@@ -291,7 +291,7 @@ container.RegisterAll(
 
 var result = container.Resolve&lt;RequiresMyServices&gt;();
 
-//this time all but Service3 will have been injected
+// this time all but Service3 will have been injected
 Assert.NotNull(result.Service1);
 Assert.NotNull(result.Service2);
 
@@ -341,8 +341,8 @@ container.RegisterType&lt;Requires2MyServices&gt;();
 
 var exception = Assert.Throws&lt;InvalidOperationException&gt;(
     () =&gt; container.Resolve&lt;Requires2MyServices&gt;());
-//the InvalidOperationException contains the name of the type that
-//couldn&#39;t be resolved
+// the InvalidOperationException contains the name of the type that
+// couldn&#39;t be resolved
 Assert.Contains(&quot;MyService3&quot;, exception.Message);
 </code></pre><hr>
 <h2 id="why-we-allow-partial-matches">Why we allow partial matches</h2>
@@ -360,11 +360,11 @@ registrations when creating instances, so long as the overriding container&#39;s
 container.RegisterType&lt;MyService2&gt;();
 container.RegisterType&lt;Requires2MyServices&gt;();
 
-//create an overriding container
+// create an overriding container
 var containerOverride = new OverridingContainer(container);
 containerOverride.RegisterType&lt;MyService3&gt;();
 
-//resolve instance via containerOverride
+// resolve instance via containerOverride
 var result = containerOverride.Resolve&lt;Requires2MyServices&gt;();
 
 Assert.NotNull(result.First);
@@ -414,8 +414,8 @@ targets.RegisterType&lt;Requires2MyServices&gt;();
 var childTargets = new ChildTargetContainer(targets);
 childTargets.RegisterType&lt;MyService3&gt;();
 
-//pass the childTargets ITargetContainer to 
-//the container on construction
+// pass the childTargets ITargetContainer to 
+// the container on construction
 var container = new Container(childTargets);
 
 var result = container.Resolve&lt;Requires2MyServices&gt;();
@@ -466,21 +466,21 @@ dependencies.</p>
 <code>DateTime</code> which is <code>DateTime.UtcNow.AddDays(1)</code> to create a date in the future:</p>
 <pre><code class="lang-csharp" name="ConstructorExamples.cs">var container = new Container();
 container.RegisterType&lt;MyService, IMyService&gt;();
-//Currently a couple of different ways to do this - use the 
-//ConstructorTarget&#39;s constructor directly with a dictionary, 
-//or use this static method which creates a dictionary from an object
-//TODO: Will add object overload to the constructor in the future
+// Currently a couple of different ways to do this - use the 
+// ConstructorTarget&#39;s constructor directly with a dictionary, 
+// or use this static method which creates a dictionary from an object
+// TODO: Will add object overload to the constructor in the future
 container.Register(Target.ForType&lt;RequiresIMyServiceAndDateTime&gt;(
     new
     {
-        //each member of this object must be an ITarget
+        // each member of this object must be an ITarget
         startDate = Target.ForObject(DateTime.UtcNow.AddDays(1))
     }
 ));
 
 var result = container.Resolve&lt;RequiresIMyServiceAndDateTime&gt;();
 
-//if the datetime was used, then StartDate will be in the future
+// if the datetime was used, then StartDate will be in the future
 Assert.True(result.StartDate &gt; DateTime.UtcNow);
 </code></pre><p>What happens is that the named arguments contribute to the argument binding process - thus allowing us to &#39;cheat&#39; and promote a constructor to being
 a better match than the one that would normally be.</p>
@@ -516,8 +516,8 @@ bindings too.  To illustrate, we&#39;ll have a type with a default constructor a
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 container.RegisterType&lt;MyService, IMyService&gt;();
 
-//under best-match, the container would select the greedy constructor,
-//but we&#39;re going to force it to use the default constructor
+// under best-match, the container would select the greedy constructor,
+// but we&#39;re going to force it to use the default constructor
 container.Register(new ConstructorTarget(
     typeof(AcceptsOptionalIMyService).GetConstructor(Type.EmptyTypes)
 ));
@@ -530,12 +530,12 @@ Assert.Null(result.Service);
 <p>We can also explicitly bind the parameters of a particular constructor by providing an array of <a class="xref" href="../../api/Rezolver.ParameterBinding.html">ParameterBinding</a> objects along with 
 a <code>ConstructorInfo</code>.  </p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
-//get the constructor:
+// get the constructor:
 var ctor = typeof(AcceptsOptionalIMyService).GetConstructor(new[]
 {
     typeof(IMyService)
 });
-//create parameter bindings
+// create parameter bindings
 var bindings = new[] {
     new ParameterBinding(ctor.GetParameters()[0],
         Target.ForType&lt;MyService&gt;()

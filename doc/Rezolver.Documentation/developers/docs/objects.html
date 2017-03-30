@@ -144,9 +144,9 @@ therefore you will also typically dispose them.</p>
 
 using (var container = new ScopedContainer())
 {
-	container.RegisterObject(disposableObj);
-	var result = container.Resolve&lt;DisposableType&gt;();
-	Assert.Same(disposableObj, result);
+    container.RegisterObject(disposableObj);
+    var result = container.Resolve&lt;DisposableType&gt;();
+    Assert.Same(disposableObj, result);
 }
 // Should NOT be disposed
 Assert.False(disposableObj.Disposed);
@@ -157,9 +157,9 @@ the <code>RegisterObject</code> method):</p>
 
 using (var container = new ScopedContainer())
 {
-	container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
-	var result = container.Resolve&lt;DisposableType&gt;();
-	Assert.Same(disposableObj, result);
+    container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
+    var result = container.Resolve&lt;DisposableType&gt;();
+    Assert.Same(disposableObj, result);
 }
 // Should be disposed
 Assert.True(disposableObj.Disposed);
@@ -183,9 +183,9 @@ is disposed:</p>
 
 using (var container = new ScopedContainer())
 {
-	container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
-	var result = container.Resolve&lt;DisposableType&gt;();
-	Assert.Same(disposableObj, result);
+    container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
+    var result = container.Resolve&lt;DisposableType&gt;();
+    Assert.Same(disposableObj, result);
 }
 // Should be disposed
 Assert.True(disposableObj.Disposed);

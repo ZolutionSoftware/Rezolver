@@ -168,9 +168,9 @@ Assert.IsType&lt;ConstructorTarget&gt;(target);
 </code></pre><p><em>The class <code>MyService</code> implements the interface <code>IMyService</code> in this example</em></p>
 <p>If you attempt to register a target against a type which the target does not support then an exception will occur:</p>
 <pre><code class="lang-csharp" name="TargetContainerExamples.cs">var targets = new TargetContainer();
-//int is obviously not compatible with IMyService.
+// int is obviously not compatible with IMyService.
 Assert.Throws&lt;ArgumentException&gt;(
-	() =&gt; targets.Register(Target.ForObject(50), typeof(IMyService)));
+    () =&gt; targets.Register(Target.ForObject(50), typeof(IMyService)));
 </code></pre><h3 id="how-type-compatiblity-is-verified">How type compatiblity is verified</h3>
 <p>The type(s) against which you can register a target is dependant upon the <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target,
 but, instead of performing the compatibility checks itself, the target container uses the <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_">SupportsType</a> 

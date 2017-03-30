@@ -83,28 +83,86 @@ To summarise:
 - `[1]` is created once per enclosing scope (remember - the container itself is a scope in this example)
 - `[2]` is created once per call
 
-## Open generics in enumerables
+* * *
 
-Here we have multiple registrations for an open generic:
+# Advanced examples
+
+On to generics and decorators, now...
+
+## Enumerables of open generics
+
+You can also register multiple open generics of the same type (e.g. `IFoo<>`) and then resolve an enumerable of 
+`IFoo<Bar>`, and the container will create an enumerable containing an object for each open generic registration:
 
 [!code-csharp[UsesAnyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesAnyService.cs#example)]
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example5)]
 
-## Closed generics 
+> [!NOTE]
+> When working with generics, the enumerable handler searches for the first generic registration which has least
+> one @Rezolver.ITarget whose @Rezolver.ITarget.UseFallback is `false` - searching from least generic to most
+> generic (e.g. `Foo<Bar>` is less generic than `Foo<>`).
+>
+> So if you request an `IEnumerable<Foo<Bar>>`, targets are first sought for `Foo<Bar>` and, if none are found,
+> it then searches for `Foo<>`.  The side effect of this is that your enumerable will always only contain objects
+> produced from targets registered against the most-specific generic type that's applicable for the type requested.  The
+> next example expands on this.
 
-In this case, we still have an open generic registration, but it's superseded for certain generic types by two
+## Mixing open/closed generics
+
+Let's say that we have one open generic registration for `IUsesAnyService<>` to be used as a catch-all, but that
+when `IMyService` is used, we have two types that we want to use instead.
+
+In this case, we still have an open generic registration, but we want it to be superseded for certain generic types by two
 specialised registrations where the inner generic type argument is known.
 
-We're adding these extra generic types:
+Given these extra generic types:
 
-[!code-csharp[UsesAnyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesIMyService.cs#example)]
+[!code-csharp[UsesIMyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesIMyService.cs#example)]
 
-So we can do this:
+We can do this:
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6)]
 
+So, as soon as we want an `IEnumerable<IUsesAnyService<IMyService>>`, the enumerable will use *only* the
+two explicit registrations made against the closed generic type `IUsesAnyService<IMyService>`, but if we
+request any other type, we only get items produced by registrations against the open generic `IUsesAnyService<>`.
 
+> [!WARNING]
+> There is currently *no* way to fall back on an open generic registration for given generic once you make a 
+> registration for a closed generic.  The framework might, however, be extended to allow you to make an explicit 
+> registration which instructs the container to fall back to a more generic registration and include any results from
+> that in the enumerable.
 
-# In progress
+It doesn't matter what order you register the open generics and closed generics - the logic is applied on a type-by-type
+basis; but the order of an individual enumerable of a given type is, however, governed by the order of registration.
+
+## Decorators and Enumerables
+
+> [!NOTE]
+> At the time of writing, the [decorators topic](decorators.md) has not been written, so this is preview of how to 
+> use decorators as well as how they work in enumerables.
+
+Decorators that have been registered against the element type of an enumerable will be applied to all instances 
+that the container produces for the enumerable.  This also applies to stacked decorators (where multiple decorators are
+applied on top of one other).
+
+So, we have two decorator types for `IMyService`:
+
+[!code-csharp[MyServiceDecorators.cs](../../../../test/Rezolver.Tests.Examples/Types/MyServiceDecorators.cs#example)]
+
+And in this example we'll have one of those decorators being used to decorate three registrations:
+
+[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example7)]
+
+> [!NOTE]
+> As the first comment states - you cannot currently call any `RegisterDecorator` extension method via an @Rezolver.IContainer,
+> or, more importantly, a @Rezolver.ContainerBase derivative.
+> 
+> This is because the extensions require an `@Rezolver.ITargetContainerOwner`, which is not implemented by these types.
+> This will change with the 1.2 release, though (see [Issue #25](https://github.com/ZolutionSoftware/Rezolver/issues/25)).
+
+This example only shows one decorator - in reality you might need to use more than one - and Rezolver is happy to let you.
+
+### In progress
 
 This documentation is incomplete - please keep coming back to learn more.

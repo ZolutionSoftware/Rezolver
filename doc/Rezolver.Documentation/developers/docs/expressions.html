@@ -148,13 +148,13 @@ public string GetMessage()
 container.Register(
     new ExpressionTarget(
         Expression.Call(
-                Expression.Constant(this), //the instance
+                Expression.Constant(this), // the instance
                 this.GetType().GetMethod(&quot;GetMessage&quot;)
             )
         )
     );
 Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
-//now change _theMessage and re-resolve:
+// now change _theMessage and re-resolve:
 _theMessage = &quot;New Message!!!&quot;;
 Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
 </code></pre><div class="NOTE"><h5>Note</h5><p>Obviously, this can also easily be implemented as a <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> - but the same reasons for why you might use expressions over delegates in
@@ -172,10 +172,10 @@ that a lambda provides is parameters.</p>
 <h2 id="injecting-arguments">Injecting Arguments</h2>
 <p>As with <a href="delegates.html">factory delegates</a>, Rezolver provides automatic argument injection for lambda expressions - so, taking the <code>MethodCallExpression</code> example from
 above, we could instead do this:</p>
-<pre><code class="lang-csharp" name="ExpressionExamples.cs">//this is equivalent to the previous example, just with a lambda
-//and explicitly injected argument
+<pre><code class="lang-csharp" name="ExpressionExamples.cs">// this is equivalent to the previous example, just with a lambda
+// and explicitly injected argument
 var container = new Container();
-//note - the type of &#39;this&#39; is ExpressionExamples
+// note - the type of &#39;this&#39; is ExpressionExamples
 container.RegisterObject(this);
 container.RegisterExpression((ExpressionExamples e) =&gt; e.GetMessage());
 
@@ -195,12 +195,12 @@ conditional expressions so that the whole thing is a single expression.</p>
 [Fact]
 public void ShouldGetDifferentImplementationFromResolveContextForUser()
 {
-    //this test is functionally identical to the one in DelegateExamples.cs,
-    //it&#39;s just done with an expression, and therefore the format of the code block
-    //used for the IUserActionsService is different because the compiler can only 
-    //translate expression lambdas.
+    // this test is functionally identical to the one in DelegateExamples.cs,
+    // it&#39;s just done with an expression, and therefore the format of the code block
+    // used for the IUserActionsService is different because the compiler can only 
+    // translate expression lambdas.
     IIdentity identity = new AppIdentity();
-    //three principals, one for each role
+    // three principals, one for each role
     var adminPrincipal = new AppPrincipal(identity, new[] { &quot;Admin&quot; });
     var salesPrincipal = new AppPrincipal(identity, new[] { &quot;Sales&quot; });
     var customerPrincipal = new AppPrincipal(identity, new[] { &quot;Customer&quot; });
@@ -210,10 +210,10 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
     container.RegisterType&lt;SalesActionsService&gt;();
     container.RegisterType&lt;CustomerActionsService&gt;();
     container.RegisterType&lt;UserControlPanel&gt;();
-    //register expression to read the CurrentPrincipal property, to make it dynamic
+    // register expression to read the CurrentPrincipal property, to make it dynamic
     container.RegisterExpression(() =&gt; CurrentPrincipal);
-    //now register the expression for the IUserActionsService, which does the
-    //role sniffing over the principal as one expression
+    // now register the expression for the IUserActionsService, which does the
+    // role sniffing over the principal as one expression
     container.RegisterExpression((IPrincipal p, ResolveContext rc) =&gt;
         p.IsInRole(&quot;Customer&quot;) ?
         rc.Resolve&lt;CustomerActionsService&gt;() :
@@ -223,13 +223,13 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
                     rc.Resolve&lt;AdminActionsService&gt;() :
                     (IUserActionsService)null);
 
-    //set the principal, and resolve
+    // set the principal, and resolve
     CurrentPrincipal = adminPrincipal;
     var result1 = container.Resolve&lt;UserControlPanel&gt;();
-    //now swap principals
+    // now swap principals
     CurrentPrincipal = salesPrincipal;
     var result2 = container.Resolve&lt;UserControlPanel&gt;();
-    //and again
+    // and again
     CurrentPrincipal = customerPrincipal;
     var result3 = container.Resolve&lt;UserControlPanel&gt;();
 
@@ -253,17 +253,17 @@ a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimple
 </div>
 <pre><code class="lang-csharp" name="ExpressionExamples.cs">var container = new Container();
 container.RegisterType&lt;MyService, IMyService&gt;();
-//get the ExpressionFunctions.Resolve&lt;T&gt; method
+// get the ExpressionFunctions.Resolve&lt;T&gt; method
 var resolveMethod = typeof(ExpressionFunctions)
     .GetMethods(BindingFlags.Public | BindingFlags.Static)
     .SingleOrDefault(m =&gt; m.Name == &quot;Resolve&quot; &amp;&amp; m.IsGenericMethodDefinition);
 
-//this expression is equivalent to the lambda expression:
-//rc =&gt; new RequiresMyService(rc.Resolve&lt;IMyService&gt;())
+// this expression is equivalent to the lambda expression:
+// rc =&gt; new RequiresMyService(rc.Resolve&lt;IMyService&gt;())
 container.Register(
     new ExpressionTarget(
         Expression.New(
-            //get the (IMyService) constructor
+            // get the (IMyService) constructor
             typeof(RequiresMyService).GetConstructor(new[] {
                 typeof(IMyService)
             }),

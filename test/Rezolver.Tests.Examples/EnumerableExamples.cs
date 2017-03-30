@@ -13,19 +13,19 @@ namespace Rezolver.Tests.Examples
         [Fact]
         public void ShouldInjectEmptyEnumerable()
         {
-            //<example1>
+            // <example1>
             var container = new Container();
             container.RegisterType<RequiresEnumerableOfServices>();
 
             var result = container.Resolve<RequiresEnumerableOfServices>();
             Assert.Empty(result.Services);
-            //</example1>
+            // </example1>
         }
 
         [Fact]
         public void ShouldInjectEnumerableWithThreeItems()
         {
-            //<example2>
+            // <example2>
             var container = new Container();
             var expectedTypes = new[] {
                 typeof(MyService1), typeof(MyService2), typeof(MyService3)
@@ -44,23 +44,23 @@ namespace Rezolver.Tests.Examples
                     (s, t) => (service: s, expectedType: t)
                 ),
                 t => Assert.IsType(t.expectedType, t.service));
-            //</example2>
+            // </example2>
         }
 
         [Fact]
         public void ShouldInjectEnumerableWithItemsFromDifferentTargets()
         {
-            //<example3>
+            // <example3>
             var container = new Container();
             container.RegisterType<MyService1, IMyService>();
             container.RegisterDelegate<IMyService>(() => new MyService2());
             container.RegisterObject<IMyService>(new MyService3());
 
-            //shows also that injection of IEnumerables holds wherever injection
-            //is normally supported - such as here, with delegate argument injection
+            // shows also that injection of IEnumerables holds wherever injection
+            // is normally supported - such as here, with delegate argument injection
             container.RegisterDelegate((IEnumerable<IMyService> services) =>
             {
-                //if MyService4 is missing, add it to the enumerable
+                // if MyService4 is missing, add it to the enumerable
                 if (!services.OfType<MyService4>().Any())
                     services = services.Concat(new[] { new MyService4() });
                 return new RequiresEnumerableOfServices(services);
@@ -69,25 +69,25 @@ namespace Rezolver.Tests.Examples
             var result = container.Resolve<RequiresEnumerableOfServices>();
 
             Assert.Equal(4, result.Services.Count());
-            //just check they're all different types this time.
+            // just check they're all different types this time.
             Assert.Equal(4, result.Services.Select(s => s.GetType()).Distinct().Count());
-            //</example3>
+            // </example3>
         }
 
         [Fact]
         public void ShouldInjectEnumerableWithItemsWithDifferentLifetimes()
         {
-            //<example4>
-            //since we're using a scoped registration here,
-            //we'll use the ScopedContainer, which establishes
-            //a root scope.
+            // <example4>
+            // since we're using a scoped registration here,
+            // we'll use the ScopedContainer, which establishes
+            // a root scope.
             var container = new ScopedContainer();
 
             container.RegisterSingleton<MyService1, IMyService>();
             container.RegisterScoped<MyService2, IMyService>();
             container.RegisterType<MyService3, IMyService>();
 
-            //So - each enumerable will contain, in order:
+            // So - each enumerable will contain, in order:
             // 1) Singleton IMyService
             // 2) Scoped IMyService
             // 3) Transient IMyService
@@ -96,33 +96,33 @@ namespace Rezolver.Tests.Examples
             var fromRoot2 = container.Resolve<IEnumerable<IMyService>>().ToArray();
 
             Assert.Same(fromRoot1[0], fromRoot2[0]);
-            //both scoped objects should be the same because we've resolved
-            //from the root scope
+            // both scoped objects should be the same because we've resolved
+            // from the root scope
             Assert.Same(fromRoot1[1], fromRoot2[1]);
             Assert.NotSame(fromRoot1[2], fromRoot2[2]);
 
             using (var childScope = container.CreateScope())
             {
                 var fromChildScope1 = childScope.Resolve<IEnumerable<IMyService>>().ToArray();
-                //singleton should be the same as before, but 
-                //the scoped object will be different
+                // singleton should be the same as before, but 
+                // the scoped object will be different
                 Assert.Same(fromRoot1[0], fromChildScope1[0]);
                 Assert.NotSame(fromRoot1[1], fromChildScope1[1]);
                 Assert.NotSame(fromRoot1[2], fromChildScope1[2]);
 
                 var fromChildScope2 = childScope.Resolve<IEnumerable<IMyService>>().ToArray();
-                //the scoped object will be the same as above
+                // the scoped object will be the same as above
                 Assert.Same(fromChildScope1[0], fromChildScope2[0]);
                 Assert.Same(fromChildScope1[1], fromChildScope2[1]);
                 Assert.NotSame(fromChildScope1[2], fromChildScope2[2]);
             }
-            //</example4>
+            // </example4>
         }
 
         [Fact]
         public void ShouldResolveEnumerableOfOpenGenerics()
         {
-            //<example5>
+            // <example5>
             var container = new Container();
             container.RegisterType(typeof(UsesAnyService<>), typeof(IUsesAnyService<>));
             container.RegisterType(typeof(UsesAnyService2<>), typeof(IUsesAnyService<>));
@@ -132,23 +132,23 @@ namespace Rezolver.Tests.Examples
             Assert.Equal(2, result.Length);
             Assert.IsType<UsesAnyService<IMyService>>(result[0]);
             Assert.IsType<UsesAnyService2<IMyService>>(result[1]);
-            //</example5>
+            // </example5>
         }
 
         [Fact]
         public void ShouldResolveEnumerableOfClosedGenericsInsteadOfOpen()
         {
-            //<example6>
+            // <example6>
             var container = new Container();
-            //register our open generic
+            // register our open generic
             container.RegisterType(typeof(UsesAnyService<>), typeof(IUsesAnyService<>));
-            //register our two specialisations for IMyService
+            // register our two specialisations for IMyService
             container.RegisterType<UsesIMyService, IUsesAnyService<IMyService>>();
             container.RegisterType<UsesIMyService2, IUsesAnyService<IMyService>>();
 
-            //will use the UsesIMyService and UsesIMyService2 specialised registrations
+            // will use the UsesIMyService and UsesIMyService2 specialised registrations
             var result = container.Resolve<IEnumerable<IUsesAnyService<IMyService>>>().ToArray();
-            //will use the open generic registration - array of one
+            // will use the open generic registration - array of one
             var result2 = container.Resolve<IEnumerable<IUsesAnyService<MyService>>>().ToArray();
 
             Assert.Equal(2, result.Length);
@@ -157,7 +157,35 @@ namespace Rezolver.Tests.Examples
 
             Assert.Equal(1, result2.Length);
             Assert.IsType<UsesAnyService<MyService>>(result2[0]);
-            //</example6>
+            // </example6>
+        }
+
+        [Fact]
+        public void ShouldResolveEnumerableOfDecoratedServices()
+        {
+            // <example7>
+            // the extension API for RegisterDecorator currently only appears for ITargetContainerOwner
+            // thus, for this test we need to change how we create the container.
+            // The extension API will be changed to allow it to be called on ITargetContainer objects 
+            // in v1.2 - see #25 (https://github.com/ZolutionSoftware/Rezolver/issues/25)
+            var targets = new TargetContainer();
+            // register the decorator up front.  Note - it doesn't actually matter when it's registered
+            targets.RegisterDecorator<MyServiceDecorator1, IMyService>();
+            targets.RegisterType<MyService, IMyService>();
+            targets.RegisterType<MyService2, IMyService>();
+            targets.RegisterType<MyService3, IMyService>();
+
+            // create the container with these targets
+            var container = new Container(targets);
+            var result = container.Resolve<IEnumerable<IMyService>>().ToArray();
+
+            // make sure each item in the enumerable is an instance of our decorator.
+            // then make sure the decorated services are correct.
+            Assert.All(result, r => Assert.IsType<MyServiceDecorator1>(r));
+            Assert.IsType<MyService>(((MyServiceDecorator1)result[0]).Inner);
+            Assert.IsType<MyService2>(((MyServiceDecorator1)result[1]).Inner);
+            Assert.IsType<MyService3>(((MyServiceDecorator1)result[2]).Inner);
+            // </example7>
         }
     }
 }

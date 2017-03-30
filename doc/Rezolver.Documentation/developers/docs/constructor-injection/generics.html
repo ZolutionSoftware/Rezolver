@@ -220,7 +220,7 @@ container.RegisterType(typeof(FinalGeneric&lt;,,&gt;), typeof(BaseGeneric&lt;,,&
 // Which is what the container should give us
 
 var result = Assert.IsType&lt;FinalGeneric&lt;T2, T3, T1&gt;&gt;(
-	container.Resolve&lt;BaseGeneric&lt;T1, T2, T3&gt;&gt;()
+    container.Resolve&lt;BaseGeneric&lt;T1, T2, T3&gt;&gt;()
 );
 </code></pre><p>In order to do this, the container must walk the inheritance chain of the <a class="xref" href="../../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
 to create a map of the type arguments which must be fed to <code>FinalGeneric&lt;,,&gt;</code> in order to create an instance of <code>BaseGeneric&lt;,,&gt;</code>.</p>
@@ -239,7 +239,7 @@ always be <code>BaseGeneric&lt;string, T, U&gt;</code>.</p>
 container.RegisterType(typeof(ClosingGeneric&lt;,&gt;), typeof(BaseGeneric&lt;,,&gt;));
 
 var result = Assert.IsType&lt;ClosingGeneric&lt;T2, T3&gt;&gt;(
-	container.Resolve&lt;BaseGeneric&lt;string, T2, T3&gt;&gt;()
+    container.Resolve&lt;BaseGeneric&lt;string, T2, T3&gt;&gt;()
 );
 </code></pre><div class="NOTE"><h5>Note</h5><p>If we were to try to resolve <code>BaseGeneric&lt;T1, T2, T3&gt;</code> as we did before, then the container will <em>correctly</em> tell us that it cannot - and
 that the registered target is not compatible with that type.  Which leads us on to our problem...</p>
@@ -280,12 +280,12 @@ public class GenericEnumerableNullableService&lt;T&gt;
 
 
 container.RegisterType(
-	typeof(GenericEnumerableService&lt;&gt;),
-	typeof(IGenericService&lt;&gt;).MakeGenericType(typeof(IEnumerable&lt;&gt;))
+    typeof(GenericEnumerableService&lt;&gt;),
+    typeof(IGenericService&lt;&gt;).MakeGenericType(typeof(IEnumerable&lt;&gt;))
 );
 
 var result = Assert.IsType&lt;GenericEnumerableService&lt;string&gt;&gt;(
-	container.Resolve&lt;IGenericService&lt;IEnumerable&lt;string&gt;&gt;&gt;()
+    container.Resolve&lt;IGenericService&lt;IEnumerable&lt;string&gt;&gt;&gt;()
 );
 </code></pre><div class="NOTE"><h5>Note</h5><p>As with our <code>ClosingGeneric&lt;,&gt;</code> from before, we <em>could</em> perform
 this registration against <code>IGenericService&lt;&gt;</code>, but if we do, then we wipe out
@@ -301,16 +301,16 @@ working, you will be able to register against <code>IGenericService&lt;&gt;</cod
 
 // Even more .MakeGenericType jiggery pokery required here
 container.RegisterType(
-	typeof(GenericEnumerableNullableService&lt;&gt;),
-	typeof(IGenericService&lt;&gt;).MakeGenericType(
-		typeof(IEnumerable&lt;&gt;).MakeGenericType(
-			typeof(Nullable&lt;&gt;)
-		)
-	)
+    typeof(GenericEnumerableNullableService&lt;&gt;),
+    typeof(IGenericService&lt;&gt;).MakeGenericType(
+        typeof(IEnumerable&lt;&gt;).MakeGenericType(
+            typeof(Nullable&lt;&gt;)
+        )
+    )
 );
 
 var result = Assert.IsType&lt;GenericEnumerableNullableService&lt;int&gt;&gt;(
-	container.Resolve&lt;IGenericService&lt;IEnumerable&lt;Nullable&lt;int&gt;&gt;&gt;&gt;()
+    container.Resolve&lt;IGenericService&lt;IEnumerable&lt;Nullable&lt;int&gt;&gt;&gt;&gt;()
 );
 </code></pre><hr>
 <h1 id="using-member-bindings">Using Member Bindings</h1>

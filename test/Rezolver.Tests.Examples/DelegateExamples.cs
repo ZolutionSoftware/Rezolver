@@ -14,24 +14,24 @@ namespace Rezolver.Tests.Examples
         [Fact]
         public void ShouldGetMyService()
         {
-            //<example1>
+            // <example1>
             var container = new Container();
             container.RegisterDelegate(() => new MyService());
 
             var result = container.Resolve<MyService>();
             Assert.NotNull(result);
-            //</example1>
+            // </example1>
         }
 
         [Fact]
         public void ShouldGetMyServiceAsASingleton()
         {
-            //<example2>
+            // <example2>
             var container = new Container();
             container.Register(
-                //RegisterSingleton specialises for types only, so
-                //we create the target manually and apply this .Singleton 
-                //extension method to to it before registering
+                // RegisterSingleton specialises for types only, so
+                // we create the target manually and apply this .Singleton 
+                // extension method to to it before registering
                 Target.ForDelegate(() => new MyService()).Singleton()
             );
 
@@ -39,13 +39,13 @@ namespace Rezolver.Tests.Examples
             var result2 = container.Resolve<MyService>();
 
             Assert.Same(result, result2);
-            //</example2>
+            // </example2>
         }
 
         [Fact]
         public void ScopeShouldDisposeDelegateResult()
         {
-            //<example3>
+            // <example3>
             var container = new Container();
             container.RegisterDelegate(() => new DisposableType());
 
@@ -61,17 +61,17 @@ namespace Rezolver.Tests.Examples
                 Assert.True(result2.Disposed);
             }
             Assert.True(result.Disposed);
-            //</example3>
+            // </example3>
         }
 
         [Fact]
         public void ShouldInjectIMyService()
         {
-            //<example10>
+            // <example10>
             var container = new Container();
             container.RegisterType<MyService, IMyService>();
-            //delegate requires an IMyService to feed as a dependency, along with
-            //another value which is not injection-friendly (DateTime)
+            // delegate requires an IMyService to feed as a dependency, along with
+            // another value which is not injection-friendly (DateTime)
             DateTime expectedStartDate = new DateTime(2014, 5, 5);
             container.RegisterDelegate((IMyService service) => 
                 new RequiresIMyServiceAndDateTime(service, new DateTime(2014, 5, 5)));
@@ -79,26 +79,26 @@ namespace Rezolver.Tests.Examples
             var result = container.Resolve<RequiresIMyServiceAndDateTime>();
             Assert.NotNull(result.Service);
             Assert.Equal(expectedStartDate, result.StartDate);
-            //</example10>
+            // </example10>
         }
 
         [Fact]
         public void ShouldInjectResolveContext()
         {
-            //<example11>
+            // <example11>
             var container = new Container();
-            //RegisterDelegate has a specialisation for a delegate which takes ResolveContext
+            // RegisterDelegate has a specialisation for a delegate which takes ResolveContext
             container.RegisterDelegate(rc => new RequiresResolveContext(rc));
 
             var result = container.Resolve<RequiresResolveContext>();
-            //the context was injected
+            // the context was injected
             Assert.NotNull(result.Context);
-            //and the container on the context will be the one on which we called Resolve<>
+            // and the container on the context will be the one on which we called Resolve<>
             Assert.Same(container, result.Context.Container);
-            //</example11>
+            // </example11>
         }
 
-        //<example12>
+        // <example12>
         static IPrincipal CurrentPrincipal { get; set; }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace Rezolver.Tests.Examples
         {
             
             IIdentity identity = new AppIdentity();
-            //three principals, one for each role
+            // three principals, one for each role
             var adminPrincipal = new AppPrincipal(identity, new[] { "Admin" });
             var salesPrincipal = new AppPrincipal(identity, new[] { "Sales" });
             var customerPrincipal = new AppPrincipal(identity, new[] { "Customer" });
@@ -116,10 +116,10 @@ namespace Rezolver.Tests.Examples
             container.RegisterType<SalesActionsService>();
             container.RegisterType<CustomerActionsService>();
             container.RegisterType<UserControlPanel>();
-            //register delegate to read the CurrentPrincipal property, to make it dynamic
+            // register delegate to read the CurrentPrincipal property, to make it dynamic
             container.RegisterDelegate(() => CurrentPrincipal);
-            //now register the delegate handler for the IUserActionsService, which does the
-            //role sniffing over the principal
+            // now register the delegate handler for the IUserActionsService, which does the
+            // role sniffing over the principal
             container.RegisterDelegate((IPrincipal p, ResolveContext rc) => {
                 IUserActionsService toReturn = null;
                 if (p != null)
@@ -134,13 +134,13 @@ namespace Rezolver.Tests.Examples
                 return toReturn;
             });
 
-            //set the principal, and resolve
+            // set the principal, and resolve
             CurrentPrincipal = adminPrincipal;
             var result1 = container.Resolve<UserControlPanel>();
-            //now swap principals
+            // now swap principals
             CurrentPrincipal = salesPrincipal;
             var result2 = container.Resolve<UserControlPanel>();
-            //and again
+            // and again
             CurrentPrincipal = customerPrincipal;
             var result3 = container.Resolve<UserControlPanel>();
 
@@ -148,6 +148,6 @@ namespace Rezolver.Tests.Examples
             Assert.IsType<SalesActionsService>(result2.ActionsService);
             Assert.IsType<CustomerActionsService>(result3.ActionsService);
         }
-        //</example12>
+        // </example12>
     }
 }

@@ -142,94 +142,94 @@ using Xunit;
 
 namespace Rezolver.Tests.Examples
 {
-	public class ObjectExamples
-	{
-		[Fact]
-		public void ShouldRegisterAndRetrieveByItsType()
-		{
-			//&lt;example1&gt;
-			var container = new Container();
+    public class ObjectExamples
+    {
+        [Fact]
+        public void ShouldRegisterAndRetrieveByItsType()
+        {
+            // &lt;example1&gt;
+            var container = new Container();
 
-			var service = new MyService();
-			container.RegisterObject(service);
+            var service = new MyService();
+            container.RegisterObject(service);
 
-			Assert.Same(service, container.Resolve&lt;MyService&gt;());
-			//&lt;/example1&gt;
-		}
+            Assert.Same(service, container.Resolve&lt;MyService&gt;());
+            // &lt;/example1&gt;
+        }
 
-		[Fact]
-		public void ShouldRegisterAndRetrieveByInterface()
-		{
-			//&lt;example2&gt;
-			var container = new Container();
+        [Fact]
+        public void ShouldRegisterAndRetrieveByInterface()
+        {
+            // &lt;example2&gt;
+            var container = new Container();
 
-			var service = new MyService();
-			container.RegisterObject&lt;IMyService&gt;(service);
+            var service = new MyService();
+            container.RegisterObject&lt;IMyService&gt;(service);
 
-			// NOTE: Could also use:
-			// container.RegisterObject(service, typeof(IMyService)
+            // NOTE: Could also use:
+            // container.RegisterObject(service, typeof(IMyService)
 
-			Assert.Same(service, container.Resolve&lt;IMyService&gt;());
-			//&lt;/example2&gt;
-		}
+            Assert.Same(service, container.Resolve&lt;IMyService&gt;());
+            // &lt;/example2&gt;
+        }
 
-		[Fact]
-		public void ShouldNotDisposeByDefault()
-		{
-			//&lt;example10&gt;
-			var disposableObj = new DisposableType();
+        [Fact]
+        public void ShouldNotDisposeByDefault()
+        {
+            // &lt;example10&gt;
+            var disposableObj = new DisposableType();
 
-			using (var container = new ScopedContainer())
-			{
-				container.RegisterObject(disposableObj);
-				var result = container.Resolve&lt;DisposableType&gt;();
-				Assert.Same(disposableObj, result);
-			}
-			// Should NOT be disposed
-			Assert.False(disposableObj.Disposed);
-			//&lt;/example10&gt;
-		}
+            using (var container = new ScopedContainer())
+            {
+                container.RegisterObject(disposableObj);
+                var result = container.Resolve&lt;DisposableType&gt;();
+                Assert.Same(disposableObj, result);
+            }
+            // Should NOT be disposed
+            Assert.False(disposableObj.Disposed);
+            // &lt;/example10&gt;
+        }
 
-		[Fact]
-		public void ShouldDispose()
-		{
-			//&lt;example11&gt;
-			var disposableObj = new DisposableType();
+        [Fact]
+        public void ShouldDispose()
+        {
+            // &lt;example11&gt;
+            var disposableObj = new DisposableType();
 
-			using (var container = new ScopedContainer())
-			{
-				container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
-				var result = container.Resolve&lt;DisposableType&gt;();
-				Assert.Same(disposableObj, result);
-			}
-			// Should be disposed
-			Assert.True(disposableObj.Disposed);
-			//&lt;/example11&gt;
-		}
+            using (var container = new ScopedContainer())
+            {
+                container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
+                var result = container.Resolve&lt;DisposableType&gt;();
+                Assert.Same(disposableObj, result);
+            }
+            // Should be disposed
+            Assert.True(disposableObj.Disposed);
+            // &lt;/example11&gt;
+        }
 
-		[Fact]
-		public void OnlyRootScopeShouldDispose()
-		{
-			//&lt;example12&gt;
-			var disposableObj = new DisposableType();
+        [Fact]
+        public void OnlyRootScopeShouldDispose()
+        {
+            // &lt;example12&gt;
+            var disposableObj = new DisposableType();
 
-			using (var container = new ScopedContainer())
-			{
-				container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
+            using (var container = new ScopedContainer())
+            {
+                container.RegisterObject(disposableObj, scopeBehaviour: ScopeBehaviour.Explicit);
 
-				using (var scope = container.CreateScope())
-				{
-					var result = container.Resolve&lt;DisposableType&gt;();
-					Assert.Same(disposableObj, result);
-				}
-				// Should not be disposed here...
-				Assert.False(disposableObj.Disposed);
-			}
-			// ... but should be disposed here
-			Assert.True(disposableObj.Disposed);
-			//&lt;/example12&gt;
-		}
-	}
+                using (var scope = container.CreateScope())
+                {
+                    var result = container.Resolve&lt;DisposableType&gt;();
+                    Assert.Same(disposableObj, result);
+                }
+                // Should not be disposed here...
+                Assert.False(disposableObj.Disposed);
+            }
+            // ... but should be disposed here
+            Assert.True(disposableObj.Disposed);
+            // &lt;/example12&gt;
+        }
+    }
 }
 </code></pre><p>You&#39;ll notice that the body of each test method looks like this:</p>
 <pre><code class="lang-cs">//&lt;example_n&gt;

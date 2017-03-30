@@ -136,9 +136,9 @@ Assert.NotNull(result);
 object produced by the delegate:</p>
 <pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
 container.Register(
-    //RegisterSingleton specialises for types only, so
-    //we create the target manually and apply this .Singleton 
-    //extension method to to it before registering
+    // RegisterSingleton specialises for types only, so
+    // we create the target manually and apply this .Singleton 
+    // extension method to to it before registering
     Target.ForDelegate(() =&gt; new MyService()).Singleton()
 );
 
@@ -169,8 +169,8 @@ Assert.True(result.Disposed);
 <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>.</p>
 <pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
 container.RegisterType&lt;MyService, IMyService&gt;();
-//delegate requires an IMyService to feed as a dependency, along with
-//another value which is not injection-friendly (DateTime)
+// delegate requires an IMyService to feed as a dependency, along with
+// another value which is not injection-friendly (DateTime)
 DateTime expectedStartDate = new DateTime(2014, 5, 5);
 container.RegisterDelegate((IMyService service) =&gt; 
     new RequiresIMyServiceAndDateTime(service, new DateTime(2014, 5, 5)));
@@ -190,13 +190,13 @@ you&#39;ll probably use the single parameter specialisation of the <a class="xre
 be injected.</p>
 <p>This example shows the <code>Func&lt;RezolveContext, TResult&gt;</code> overload in action:</p>
 <pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
-//RegisterDelegate has a specialisation for a delegate which takes ResolveContext
+// RegisterDelegate has a specialisation for a delegate which takes ResolveContext
 container.RegisterDelegate(rc =&gt; new RequiresResolveContext(rc));
 
 var result = container.Resolve&lt;RequiresResolveContext&gt;();
-//the context was injected
+// the context was injected
 Assert.NotNull(result.Context);
-//and the container on the context will be the one on which we called Resolve&lt;&gt;
+// and the container on the context will be the one on which we called Resolve&lt;&gt;
 Assert.Same(container, result.Context.Container);
 </code></pre><h2 id="resolving-inside-a-delegate">Resolving inside a delegate</h2>
 <p>Building on the above, here&#39;s an example which injects the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> in order to perform a late-bound 
@@ -283,7 +283,7 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
 {
     
     IIdentity identity = new AppIdentity();
-    //three principals, one for each role
+    // three principals, one for each role
     var adminPrincipal = new AppPrincipal(identity, new[] { &quot;Admin&quot; });
     var salesPrincipal = new AppPrincipal(identity, new[] { &quot;Sales&quot; });
     var customerPrincipal = new AppPrincipal(identity, new[] { &quot;Customer&quot; });
@@ -293,10 +293,10 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
     container.RegisterType&lt;SalesActionsService&gt;();
     container.RegisterType&lt;CustomerActionsService&gt;();
     container.RegisterType&lt;UserControlPanel&gt;();
-    //register delegate to read the CurrentPrincipal property, to make it dynamic
+    // register delegate to read the CurrentPrincipal property, to make it dynamic
     container.RegisterDelegate(() =&gt; CurrentPrincipal);
-    //now register the delegate handler for the IUserActionsService, which does the
-    //role sniffing over the principal
+    // now register the delegate handler for the IUserActionsService, which does the
+    // role sniffing over the principal
     container.RegisterDelegate((IPrincipal p, ResolveContext rc) =&gt; {
         IUserActionsService toReturn = null;
         if (p != null)
@@ -311,13 +311,13 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
         return toReturn;
     });
 
-    //set the principal, and resolve
+    // set the principal, and resolve
     CurrentPrincipal = adminPrincipal;
     var result1 = container.Resolve&lt;UserControlPanel&gt;();
-    //now swap principals
+    // now swap principals
     CurrentPrincipal = salesPrincipal;
     var result2 = container.Resolve&lt;UserControlPanel&gt;();
-    //and again
+    // and again
     CurrentPrincipal = customerPrincipal;
     var result3 = container.Resolve&lt;UserControlPanel&gt;();
 
