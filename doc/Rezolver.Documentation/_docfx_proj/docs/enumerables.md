@@ -161,8 +161,24 @@ And in this example we'll have one of those decorators being used to decorate th
 > This is because the extensions require an `@Rezolver.ITargetContainerOwner`, which is not implemented by these types.
 > This will change with the 1.2 release, though (see [Issue #25](https://github.com/ZolutionSoftware/Rezolver/issues/25)).
 
-This example only shows one decorator - in reality you might need to use more than one - and Rezolver is happy to let you.
+If more decorators were added, of course - then each element would be 're-decorated' accordingly.
 
-### In progress
+## Explicit `IEnumerable<T>` registrations
 
-This documentation is incomplete - please keep coming back to learn more.
+Although you get `IEnumerable<T>` handling automatically, it doesn't prevent you from manually adding registrations
+which override the default behaviour.
+
+For example, let's say that you have two registrations for services which share a common interface, but they have only
+been registered against their concrete type (perhaps it's historical code you can't risk changing). Your code 
+now wants an enumerable of that common interface.  Well, assuming you know what the specific registrations are - you can
+use delegate registrations (note, there are *lots* of ways, this is just the most illustrative):
+
+[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example8)]
+
+* * *
+
+# Next steps
+- Recommend going to take (another) look at [decorators](decorators.md) - although, at the time of writing it might 
+not be written yet!
+- The [generic constructor injection](constructor-injection/generics.md) documentation contains more useful guidance 
+about open generics etc.

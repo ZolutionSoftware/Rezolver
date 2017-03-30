@@ -187,5 +187,24 @@ namespace Rezolver.Tests.Examples
             Assert.IsType<MyService3>(((MyServiceDecorator1)result[2]).Inner);
             // </example7>
         }
+
+        [Fact]
+        public void ShouldResolveEnumerableViaExplicitRegistration()
+        {
+            // <example8>
+            var container = new Container();
+            container.RegisterType<MyService1>();
+            container.RegisterType<MyService2>();
+            container.RegisterDelegate<IEnumerable<IMyService>>(
+                rc => new IMyService[] { rc.Resolve<MyService1>(), rc.Resolve<MyService2>()
+            });
+
+            var result = container.Resolve<IEnumerable<IMyService>>().ToArray();
+
+            Assert.Equal(2, result.Length);
+            Assert.IsType<MyService1>(result[0]);
+            Assert.IsType<MyService2>(result[1]);
+            // </example8>
+        }
     }
 }

@@ -394,9 +394,34 @@ or, more importantly, a <a class="xref" href="../api/Rezolver.ContainerBase.html
 <p>This is because the extensions require an <code>@Rezolver.ITargetContainerOwner</code>, which is not implemented by these types.
 This will change with the 1.2 release, though (see <a href="https://github.com/ZolutionSoftware/Rezolver/issues/25">Issue #25</a>).</p>
 </div>
-<p>This example only shows one decorator - in reality you might need to use more than one - and Rezolver is happy to let you.</p>
-<h3 id="in-progress">In progress</h3>
-<p>This documentation is incomplete - please keep coming back to learn more.</p>
+<p>If more decorators were added, of course - then each element would be &#39;re-decorated&#39; accordingly.</p>
+<h2 id="explicit-ienumerablet-registrations">Explicit <code>IEnumerable&lt;T&gt;</code> registrations</h2>
+<p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically, it doesn&#39;t prevent you from manually adding registrations
+which override the default behaviour.</p>
+<p>For example, let&#39;s say that you have two registrations for services which share a common interface, but they have only
+been registered against their concrete type (perhaps it&#39;s historical code you can&#39;t risk changing). Your code 
+now wants an enumerable of that common interface.  Well, assuming you know what the specific registrations are - you can
+use delegate registrations (note, there are <em>lots</em> of ways, this is just the most illustrative):</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+container.RegisterType&lt;MyService1&gt;();
+container.RegisterType&lt;MyService2&gt;();
+container.RegisterDelegate&lt;IEnumerable&lt;IMyService&gt;&gt;(
+    rc =&gt; new IMyService[] { rc.Resolve&lt;MyService1&gt;(), rc.Resolve&lt;MyService2&gt;()
+});
+
+var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+
+Assert.Equal(2, result.Length);
+Assert.IsType&lt;MyService1&gt;(result[0]);
+Assert.IsType&lt;MyService2&gt;(result[1]);
+</code></pre><hr>
+<h1 id="next-steps">Next steps</h1>
+<ul>
+<li>Recommend going to take (another) look at <a href="decorators.html">decorators</a> - although, at the time of writing it might 
+not be written yet!</li>
+<li>The <a href="constructor-injection/generics.html">generic constructor injection</a> documentation contains more useful guidance 
+about open generics etc.</li>
+</ul>
 
             </article>
           </div>

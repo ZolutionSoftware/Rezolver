@@ -17,7 +17,7 @@ _Linked topics provide high level overviews and examples in our developer guide 
   - [Member injection](docs/constructor-injection/member-binding.md) (extensible)
 - [Open generics](docs/constructor-injection/generics.md) (with specific closed generics taking precedence)
 - [Decorators](docs/decorators.md) (non-generic and generic)
-- Enumerables (empty enumerables returned by default)
+- [Enumerables](docs/enumerables.md) (empty enumerables returned by default)
 - Child containers (overriding registrations in one container with those of another)
   - Child registration containers (lower-level overriding of registrations for similar but sibling containers)
 - Hierarchical lifetime scoping

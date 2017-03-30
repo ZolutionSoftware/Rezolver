@@ -29,7 +29,7 @@ object-based services interact with scopes.
 # Objects in Scopes
 
 A scope (obtained either by using @Rezolver.ScopedContainer or through a @Rezolver.IContainerScope returned from a container's 
-@Rezolver.IContainer.CreateScope* method) will by default dispose of any disposable objects it creates when it is disposed.
+@Rezolver.IScopeFactory.CreateScope* method) will by default dispose of any disposable objects it creates when it is disposed.
 
 If those objects are obtained from an @Rezolver.Targets.ObjectTarget, however, then no scope will ever touch them - because *you* created them,
 therefore you will also typically dispose them.
