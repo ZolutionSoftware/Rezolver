@@ -24,8 +24,9 @@
       "_enableSearch": true,
       "_appLogoPath": "../content/rz_square_white_on_orange_48x48.png",
       "_packageVersion": "1.1.71702.500",
-      "_packageReleased": true,
-      "_githubUrl": "http://github.com/zolutionsoftware/rezolver"
+      "_packageId": "Rezolver",
+      "_githubPath": "ZolutionSoftware/Rezolver",
+      "_usingWaffle": true
     },
     "xref": [
       "msdn.4.5.2.zip",
