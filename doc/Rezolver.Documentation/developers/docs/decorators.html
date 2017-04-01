@@ -109,8 +109,100 @@
             <article class="content wrap" id="_content" data-uid="">
               <h1 id="decorators">Decorators</h1>
               
-<p>Documentation coming soon!</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> is a key part of many software projects, 
+and Rezolver offers first-class support for implementing it, but only if you have a reference to the 
+<a class="xref" href="../api/Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> interface - which you will, if you use the <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> class directly 
+to register your targets instead of simply creating a new <a class="xref" href="../api/Rezolver.Container.html">Container</a> instance.</p>
+<div class="NOTE"><h5>Note</h5><p>This limitation will be removed in 1.2 - in which <a href="https://github.com/ZolutionSoftware/Rezolver/issues/25">issue #25</a>
+will be addressed - so that the extension methods shown in these examples will be available on the 
+<a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> interface instead, with a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notsupportedexception(v=vs.110).aspx">NotSupportedException</a> being thrown if the target 
+container on which you call the method is not also a <a class="xref" href="../api/Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a>.</p>
+</div>
+<h2 id="registering-decorators-in-rezolver">Registering decorators in Rezolver</h2>
+<p>Registration of Decorators in Rezolver is done through the overloaded extension method 
+<a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a>.  There is a generic and non-generic version
+(as is typical for nearly all Rezolver registration functions), but, unlike many other target types,
+there is no factory method in the <a class="xref" href="../api/Rezolver.Target.html">Target</a> static class to create one on its own.</p>
+<p>The sharp-eyed developer will be confused by this omission, especially since the type 
+<a class="xref" href="../api/Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> is a key part of Rezolver&#39;s implementation of decorators - but if 
+you read the summary notes about that class, it should be apparent why: Decoration isn&#39;t <em>solely</em> 
+implemented through an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> implementation, it also needs a special target container 
+type in which that target will be registered -<br><a class="xref" href="../api/Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>, the creation of which is handled automatically by the 
+<a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> methods.</p>
+<p>Now, as mentioned in the introduction, you cannot <em>currently</em> register a decorator directly into a
+<a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a> -  because it does not (and will never) support the interface required by the
+extension methods.  As a result, the examples here do not follow the same pattern that you should already
+be familiar with:</p>
+<pre><code class="lang-cs">var container = new Container();
 
+// Add registrations to the container through its implementation of
+// Rezolver.ITargetContainer.
+
+var ifoo = container.Resolve&lt;some_type&gt;();
+</code></pre><p>Instead, until v1.2 we have to create a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> separately on which we will perform our
+registrations, and then construct a new <a class="xref" href="../api/Rezolver.Container.html">Container</a>, passing those targets as
+a constructor argument:</p>
+<pre><code class="lang-cs">var targets = new TargetContainer();
+targets.RegisterType&lt;Foo, IFoo&gt;(); 
+targets.RegisterDecorator&lt;FooDecorator, IFoo&gt;();
+
+var container = new Container(targets);
+
+var result = container.Resolve&lt;IFoo&gt;();
+</code></pre><p>Although this is somewhat inconvenient, it should be said that if you are looking to use Rezolver&#39;s
+<a href="nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">integration with Asp.Net Core</a>, you almost certainly
+<em>will</em> be working with a target container when performing registrations anyway.</p>
+<h1 id="examples">Examples</h1>
+<p>For the first few examples, we&#39;ll be using these decorators for the interface <code>IMyService</code>, which 
+has also been used in many of the other examples.  If you&#39;ve already looked at the 
+<a href="enumerables.html">enumerable examples</a> then you&#39;ll be familiar with them:</p>
+<pre><code class="lang-csharp" name="MyServiceDecorators.cs">public class MyServiceDecorator1 : IMyService
+{
+    public IMyService Inner { get; }
+    public MyServiceDecorator1(IMyService inner)
+    {
+        Inner = inner;
+    }
+}
+
+public class MyServiceDecorator2 : IMyService
+{
+    public IMyService Inner { get; }
+    public MyServiceDecorator2(IMyService inner)
+    {
+        Inner = inner;
+    }
+}
+</code></pre><h2 id="single-decorator-single-service">Single decorator, single service</h2>
+<p>Here, we simply register an <code>IMyService</code> implementation and one of our decorators.  We then resolve an 
+instance and we should get an instance of the decorator, with the original <code>IMyService</code> as its <code>Inner</code>.</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var targets = new TargetContainer();
+targets.RegisterType&lt;MyService, IMyService&gt;();
+targets.RegisterDecorator&lt;MyServiceDecorator1, IMyService&gt;();
+
+var container = new Container(targets);
+
+var result = container.Resolve&lt;IMyService&gt;();
+var decorator = Assert.IsType&lt;MyServiceDecorator1&gt;(result);
+
+Assert.IsType&lt;MyService&gt;(decorator.Inner);
+</code></pre><h2 id="two-decorators-single-service">Two decorators, single service</h2>
+<p>You can also &#39;stack&#39; decorators for a given type, meaning you can decorate the decorators:</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">// same as before - but two decorators
+// note that the order they&#39;re registered determines the order in which 
+// the decoration occurs.
+var targets = new TargetContainer();
+targets.RegisterType&lt;MyService, IMyService&gt;();
+targets.RegisterDecorator&lt;MyServiceDecorator2, IMyService&gt;();
+targets.RegisterDecorator&lt;MyServiceDecorator1, IMyService&gt;();
+
+var container = new Container(targets);
+
+var result = container.Resolve&lt;IMyService&gt;();
+var decorator = Assert.IsType&lt;MyServiceDecorator1&gt;(result);
+var innerDecorator = Assert.IsType&lt;MyServiceDecorator2&gt;(decorator.Inner);
+Assert.IsType&lt;MyService&gt;(innerDecorator.Inner);
+</code></pre>
             </article>
           </div>
           
