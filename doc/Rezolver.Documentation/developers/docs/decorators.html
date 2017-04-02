@@ -202,7 +202,82 @@ var result = container.Resolve&lt;IMyService&gt;();
 var decorator = Assert.IsType&lt;MyServiceDecorator1&gt;(result);
 var innerDecorator = Assert.IsType&lt;MyServiceDecorator2&gt;(decorator.Inner);
 Assert.IsType&lt;MyService&gt;(innerDecorator.Inner);
-</code></pre>
+</code></pre><p>As the test shows, the decorators are applied in the order they are registered for the given type.</p>
+<h2 id="two-decorators-enumerable">Two decorators, enumerable</h2>
+<p>Decorators are also applied to elements of an enumerable:</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var targets = new TargetContainer();
+// this time we&#39;ll register the decorators first, not because
+// we have to, but because we can :)
+targets.RegisterDecorator&lt;MyServiceDecorator2, IMyService&gt;();
+targets.RegisterDecorator&lt;MyServiceDecorator1, IMyService&gt;();
+
+// note: this array of types is purely to simplify the asserts
+// used at the end.
+var serviceTypes = new[] {
+    typeof(MyService1), typeof(MyService2),
+    typeof(MyService3), typeof(MyService4),
+    typeof(MyService5), typeof(MyService6)
+};
+
+var serviceTargets = serviceTypes.Select(
+    t =&gt; Target.ForType(t)
+);
+
+// another way to bulk-register multiple targets
+// against the same service type.  
+targets.RegisterMultiple(serviceTargets, typeof(IMyService));
+
+var container = new Container(targets);
+var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;();
+
+Assert.All(serviceTypes.Zip(result, (t, s) =&gt; (type: t, service: s)),
+    ts =&gt; {
+        var decorator = Assert.IsType&lt;MyServiceDecorator1&gt;(ts.service);
+        var innerDecorator = Assert.IsType&lt;MyServiceDecorator2&gt;(decorator.Inner);
+        Assert.IsType(ts.type, innerDecorator.Inner);
+    });
+</code></pre><h2 id="open-generic-decorator">Open Generic Decorator</h2>
+<p>You can also use decorators with open generics - register them just like <a href="constructor-injection/generics.html">normal generic types</a>, except
+via the <a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> method.</p>
+<p>For this, our basic generic decorator is this:</p>
+<pre><code class="lang-csharp" name="MyServiceDecorators.cs">public class UsesAnyServiceDecorator&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
+{
+    public IUsesAnyService&lt;TAnyService&gt; Inner { get; }
+
+    public UsesAnyServiceDecorator(IUsesAnyService&lt;TAnyService&gt; inner)
+    {
+        Inner = inner;
+    }
+
+    public void UseTheService(TAnyService service)
+    {
+        throw new NotImplementedException();
+    }
+}
+</code></pre><p>And the code to register it shouldn&#39;t be too much of a surprise:</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var targets = new TargetContainer();
+
+targets.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+targets.RegisterDecorator(typeof(UsesAnyServiceDecorator&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+
+var container = new Container(targets);
+var result = container.Resolve&lt;IUsesAnyService&lt;MyService&gt;&gt;();
+
+var decorator = Assert.IsType&lt;UsesAnyServiceDecorator&lt;MyService&gt;&gt;(result);
+Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(decorator.Inner);
+</code></pre><div class="TIP"><h5>Tip</h5><p>Enumerables of open generics can also be decorated in a similar way to the previous example. Just register multiple 
+<code>IService&lt;&gt;</code> registrations, then one or more open generic decorators as normal - then an <code>IEnumerable&lt;IService&lt;Foo&gt;&gt;</code> 
+will produce an enumerable with each element correctly decorated.</p>
+</div>
+<h2 id="specialised-generic-decorator">Specialised Generic Decorator</h2>
+<div class="NOTE"><h5>Note</h5><p>This section is intended to show how you can apply decorators to specific closed variants of an open generic, however,
+whilst preparing the example, <a href="https://github.com/ZolutionSoftware/Rezolver/issues/27">an issue</a> was discovered in the 
+implementation.</p>
+<p>Not in the <em>least</em> bit embarrassing! :)</p>
+<p>A fix is planned for v1.2, and is right at the top of the priority list - which you can see on the 
+<a href="http://waffle.io/ZolutionSoftware/Rezolver">project board</a></p>
+</div>
+
             </article>
           </div>
           

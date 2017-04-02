@@ -155,14 +155,15 @@ namespace Rezolver.Tests.Compilation.Specification
 			targets.RegisterType<DoubleHandler, IHandler<double>>();
 			targets.RegisterDecorator(typeof(GenericDecoratingHandler<>), typeof(IHandler<>));
 			targets.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
-
-			var container = CreateContainer(targets);
+            
+            var container = CreateContainer(targets);
 			var result = container.Resolve<IHandler<double>>();
 			var result2 = container.Resolve<IHandler<string>>();
 			Assert.IsType<GenericDecoratingHandler<double>>(result);
 			Assert.IsType<GenericDecoratingHandler<string>>(result2);
 			var handled = result2.Handle("Hello World");
-			Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
+            //see BUG #27: https://github.com/ZolutionSoftware/Rezolver/issues/27
+            Assert.Equal("((This is a string: Hello World) Decorated) Decorated again :)", handled);
 		}
 
 		[Fact]
@@ -174,14 +175,15 @@ namespace Rezolver.Tests.Compilation.Specification
 			targets.RegisterDecorator(typeof(GenericDecoratingHandler2<string>), typeof(IHandler<string>));
 			targets.RegisterType<StringHandler, IHandler<string>>();
 			targets.RegisterType<DoubleHandler, IHandler<double>>();
-
-			var container = CreateContainer(targets);
+            
+            var container = CreateContainer(targets);
 			var result = container.Resolve<IHandler<double>>();
 			var result2 = container.Resolve<IHandler<string>>();
 			Assert.IsType<GenericDecoratingHandler<double>>(result);
 			Assert.IsType<GenericDecoratingHandler<string>>(result2);
 			var handled = result2.Handle("Hello World");
-			Assert.Equal("((This is a string: Hello World) Decorated again :)) Decorated", handled);
+            //see BUG #27: https://github.com/ZolutionSoftware/Rezolver/issues/27
+            Assert.Equal("((This is a string: Hello World) Decorated) Decorated again :)", handled);
 		}
 
 		[Fact]
