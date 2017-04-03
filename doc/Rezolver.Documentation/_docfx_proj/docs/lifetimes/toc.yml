@@ -1,0 +1,8 @@
+﻿- name: Transient objects
+  href: transient.md
+- name: Singleton objects
+  href: singleton.md
+- name: Scoped objects
+  href: scoped.md
+- name: Container Scopes
+  href: container-scopes.md

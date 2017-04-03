@@ -20,9 +20,8 @@
   href: decorators.md
 - name: Enumerables
   href: enumerables.md
+- name: Lifetimes
+  href: lifetimes/toc.yml
+  homepage: lifetimes/index.md
 - name: Benchmarks
   href: benchmarks.md
-#- name: Object lifetimes
-#  href: object-lifetimes.md
-#- name: Lifetimes in Rezolver
-#  href: lifetimes-in-rezolver.md

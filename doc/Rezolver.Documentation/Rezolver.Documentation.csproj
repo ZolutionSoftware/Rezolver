@@ -412,6 +412,12 @@
     <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="toc.yml" />
     <Content Include="_docfx_proj\docs\enumerables.md" />
+    <Content Include="_docfx_proj\docs\lifetimes\index.md" />
+    <Content Include="_docfx_proj\docs\lifetimes\transient.md" />
+    <Content Include="_docfx_proj\docs\lifetimes\singleton.md" />
+    <Content Include="_docfx_proj\docs\lifetimes\scoped.md" />
+    <Content Include="_docfx_proj\docs\lifetimes\container-scopes.md" />
+    <Content Include="_docfx_proj\docs\lifetimes\toc.yml" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
