@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- this project only exists to serve the DocFX project until it supports the new 
+  .Net Core .csproj format.  DO NOT LOAD THIS PROJECT! -->
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <OutputPath>bin\</OutputPath>
@@ -13,8 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="**\*.cs"></Compile>
-    <!--<Compile Include="Compilation\*.cs"></Compile>
-    <Compile Include="Compilation.Expressions\*.cs"></Compile>
-    <Compile Include="Targets\*.cs"></Compile>-->
   </ItemGroup>
 </Project>

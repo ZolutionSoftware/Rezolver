@@ -271,6 +271,8 @@ bindings too.  To illustrate, we'll have a type with a default constructor and o
 
 [!code-csharp[AcceptsOptionalIMyService.cs](../../../../../test/Rezolver.Tests.Examples/Types/AcceptsOptionalIMyService.cs#example)]
 
+* * *
+
 ### Example - No parameter bindings
 
 The first test ignores the registered services and forcibly targets the default constructor:

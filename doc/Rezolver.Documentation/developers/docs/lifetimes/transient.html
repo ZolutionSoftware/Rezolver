@@ -126,7 +126,7 @@ lifetimee of other targets.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>&lt;xref:Rezolver.Targets.ChangeTypeTarget&gt;</code></td>
+<td><a class="xref" href="../../api/Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a></td>
 <td><em>Inherited</em></td>
 <td>Target doesn&#39;t create anything, only changes the type of another target&#39;s result, therefore it inherits that target&#39;s lifetime.</td>
 </tr>
@@ -136,7 +136,7 @@ lifetimee of other targets.</p>
 <td></td>
 </tr>
 <tr>
-<td>@Rezolver.Targets.DecoratorTarget&lt;sup&gt;*&lt;/sup&gt;</td>
+<td><sup>*</sup><a class="xref" href="../../api/Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a></td>
 <td><strong>Yes</strong></td>
 <td>It&#39;s not currently possible to directly control the lifetime of a decorator - only the object it decorates.</td>
 </tr>
@@ -197,7 +197,14 @@ lifetimee of other targets.</p>
 </tr>
 </tbody>
 </table>
-<p><sup><em></em></sup> *Denotes a target which is used indirectly by other registrations and not generally used directly by applications</p>
+<p><sup>*</sup> <em>Denotes a target which is used indirectly by other registrations and not generally used directly by applications</em></p>
+<p>There&#39;s no need for any further examples for transient objects, as most of the examples throughout this documentation (see the <a href="../constructor-injection/index.html">constructor injection documentation</a>
+for example) use the targets which are marked as transient in the above table.</p>
+<hr>
+<h1 id="next-steps">Next steps</h1>
+<ul>
+<li>Head over to the <a href="singleton.html">singletons topic</a> to read about how to use the <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> to see how to turn any target into a singleton.</li>
+</ul>
 
             </article>
           </div>

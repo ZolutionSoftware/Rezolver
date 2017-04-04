@@ -152,8 +152,8 @@ type that is being resolved from the <a class="xref" href="Rezolver.IContainer.h
                 <pre><code class="lang-csharp hljs">public class ResolveContext : IScopeFactory</code></pre>
               </div>
               <h5 id="Rezolver_ResolveContext_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>The context implements <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a> because the a new child scope might be created
-either from the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a> or the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a>, in that order.  So, rather than </p>
+              <div class="markdown level0 remarks"><p>The context implements <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a> and correctly handles whether a new child scope should
+be created either from the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a> or the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a>.</p>
 </div>
               <h3 id="constructors">Constructors
               </h3>

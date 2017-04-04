@@ -16,8 +16,8 @@ namespace Rezolver
 	/// the operation is invoked, any <see cref="IScopedContainer"/> that might be active for the call (if different), and the 
 	/// type that is being resolved from the <see cref="IContainer"/>.
 	/// </summary>
-    /// <remarks>The context implements <see cref="IScopeFactory"/> because the a new child scope might be created
-    /// either from the <see cref="Scope"/> or the <see cref="Container"/>, in that order.  So, rather than </remarks>
+    /// <remarks>The context implements <see cref="IScopeFactory"/> and correctly handles whether a new child scope should
+    /// be created either from the <see cref="Scope"/> or the <see cref="Container"/>.</remarks>
 	public class ResolveContext : IScopeFactory
 	{
         #region equality comparer (used for some of the caches)

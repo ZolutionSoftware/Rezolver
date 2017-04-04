@@ -120,7 +120,7 @@ it to go out of scope when that function returns.</p>
 <p>Most developers will be familiar with the singleton pattern - an object created only once per process (often created lazily - i.e. on
 demand) and which is frequently accessed via <code>static</code> accessors or similar.  Specifically, an application will usually enforce
 rules at the code level to ensure that it&#39;s impossible to create more than one instance of the type.</p>
-<p>Rezolver lets you change any registration into a singleton by simply wrapping an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> inside a @Rezolver.SingletonTarget.</p>
+<p>Rezolver lets you change any registration into a singleton by simply wrapping an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> inside a <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>.</p>
 <p><a href="singleton.html">Read more about singletons</a>.</p>
 <h1 id="scoped-objects">Scoped Objects</h1>
 <p>Unsurprisingly, understanding scoped objects requires an understanding of scopes.</p>
@@ -136,9 +136,9 @@ is itself &#39;scoped&#39;.  Indeed, transients and singletons can be used insid
 <em>per scope</em> instead of one per-process.  A scoped object also <em>requires</em> a scope to be available in order for it to be resolved.</p>
 <p>Scopes are also hierarchical - one scope can contain zero or more other child scopes whose scoped objects are independent of each other 
 (and those of the parent) - but each child scope will be disposed when the parent scope is disposed.</p>
-<p>Rezolver allows you to change any registration into a scoped object by wrapping an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> inside a @Rezolver.ScopedTarget.</p>
-<p><a href="scoped.html">Read more about scoped objects</a>.</p>
+<p>Rezolver allows you to change any registration into a scoped object by wrapping an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> inside a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>.</p>
 <p><a href="container-scopes.html">Read more about container scopes</a> (particularly if you will be using <code>IDisposable</code> objects in your application).</p>
+<p><a href="scoped.html">Read more about scoped objects</a>.</p>
 
             </article>
           </div>

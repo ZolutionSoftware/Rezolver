@@ -17,7 +17,7 @@ Most developers will be familiar with the singleton pattern - an object created 
 demand) and which is frequently accessed via `static` accessors or similar.  Specifically, an application will usually enforce
 rules at the code level to ensure that it's impossible to create more than one instance of the type.
 
-Rezolver lets you change any registration into a singleton by simply wrapping an @Rezolver.ITarget inside a @Rezolver.SingletonTarget.
+Rezolver lets you change any registration into a singleton by simply wrapping an @Rezolver.ITarget inside a @Rezolver.Targets.SingletonTarget.
 
 [Read more about singletons](singleton.md).
 
@@ -42,8 +42,9 @@ Instead, a scoped object has a special lifetime behaviour such that it behaves l
 Scopes are also hierarchical - one scope can contain zero or more other child scopes whose scoped objects are independent of each other 
 (and those of the parent) - but each child scope will be disposed when the parent scope is disposed.
 
-Rezolver allows you to change any registration into a scoped object by wrapping an @Rezolver.ITarget inside a @Rezolver.ScopedTarget.
+Rezolver allows you to change any registration into a scoped object by wrapping an @Rezolver.ITarget inside a @Rezolver.Targets.ScopedTarget.
+
+[Read more about container scopes](container-scopes.md) (particularly if you will be using `IDisposable` objects in your application).
 
 [Read more about scoped objects](scoped.md).
 
-[Read more about container scopes](container-scopes.md) (particularly if you will be using `IDisposable` objects in your application).

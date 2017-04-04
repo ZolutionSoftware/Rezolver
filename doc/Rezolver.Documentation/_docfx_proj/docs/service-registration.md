@@ -149,3 +149,8 @@ will be used to get the object.
 will be returned as the object.
 
 The framework exploits both of these techniques to use the container as the source of its own services and configuration.
+
+# Next steps
+
+- Use [some of the links](#target-types) above to start exploring different ways to create objects in Rezolver.
+- If you haven't already, explore Rezolver's concept of [object lifetimes](lifetimes/index.md) to learn about transient, singleton and scoped objects.

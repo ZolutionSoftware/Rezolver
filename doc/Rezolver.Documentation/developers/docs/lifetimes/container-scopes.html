@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Markdown File | Rezolver IOC Framework </title>
+  	<title>Container Scopes | Rezolver IOC Framework </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Markdown File | Rezolver IOC Framework ">
+  	<meta name="title" content="Container Scopes | Rezolver IOC Framework ">
   	<meta name="generator" content="docfx 2.13.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -107,9 +107,92 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="markdown-file">Markdown File</h1>
+              <h1 id="container-scopes">Container Scopes</h1>
               
+<p>Before we start looking at <a href="scoped.html">scoped objects</a>, we should first look at how Rezolver&#39;s <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> interface, and
+its implementations, are used to implement lifetime scoping.</p>
+<h2 id="whats-the-purpose-of-a-scope">What&#39;s the purpose of a scope?</h2>
+<p>A scope is a disposable object whose main purpose, as mentioned in the <a href="index.html">introduction to this section</a>, is to track and dispose 
+any <code>IDisposable</code> objects produced by the container through that scope.</p>
+<p>This is necessary, or at least desirable, because the IOC container takes control of both how <em>and</em> when your objects are created and, 
+more importantly, they are more often than not created purely to be passed as dependencies into other objects via dependency injection 
+(via, for example, constructor parameters).  This means that the .Net developer&#39;s preferred pattern of working with disposable objects 
+(at least in C#), namely:</p>
+<pre><code class="lang-cs">using(var disposable = new MyDisposable())
+{
+    //use disposable
+}
+</code></pre><p>is no longer possible.  Not only that, but there&#39;s the issue of <em>who</em> is responsible for disposing of a given object, especially if it 
+has been used as a dependency of more than one other object.</p>
+<p>The scope offers a way to simplify this problem by taking ownership of those disposables for you.  All you need to do is to create the scope,
+and then dispose of it when you no longer need the objects it produced.</p>
+<h2 id="creating-a-container-scope">Creating a Container Scope</h2>
+<p>If you&#39;ve used other IOC containers, then you&#39;ll probably already have guessed how to create a new scope.</p>
+<p>Formally, the <a class="xref" href="../../api/Rezolver.IScopeFactory.html">IScopeFactory</a> interface is how you create a scope - through its <a class="xref" href="../../api/Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope_">CreateScope</a> method.</p>
+<p>The interface is implemented by:</p>
+<ul>
+<li><a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a></li>
+<li><a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> (because scopes are hierarchical)</li>
+<li><a class="xref" href="../../api/Rezolver.ResolveContext.html">ResolveContext</a></li>
+</ul>
+<p>In the example code, therefore, you will see a lot of this:</p>
+<pre><code class="lang-cs">var container = new Container();
 
+// perform registrations
+
+using(var scope = container.CreateScope())
+{
+
+}
+</code></pre><h2 id="scope-behaviours">Scope Behaviours</h2>
+<p>Different targets (see the <a class="xref" href="../../api/Rezolver.Targets.html">Rezolver.Targets</a> namespace) exhibit different scoping behaviours - that is, how the object produced by the target
+should be tracked within a scope when resolved.  At present<sup>*</sup>, this is determined by the <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html">ScopeBehaviour</a> enumeration, which 
+has three values:</p>
+<ul>
+<li><a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Implicit">Implicit</a> - The object should be passively tracked within an enclosing scope (if present) when it is created if, 
+and <em>only</em> if, it is <code>IDisposable</code>.  Each and every instance will be tracked, and none of those instances will be reused.  When the scope is
+disposed, all objects that were tracked will also be disposed.</li>
+<li><a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a> - The object <em>requires</em> an enclosing scope to be present when created, and only one instance of the
+object should be created per scope.  If the object is <code>IDisposable</code> then it, too, will be disposed when the scope is disposed.</li>
+<li><a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_None">None</a> - The object does not interact with a scope and, if it&#39;s <code>IDisposable</code>, then it must be explicitly disposed
+by application code.</li>
+</ul>
+<p><sup>*</sup> <em>In the future, the enumeration might be replaced with a type and static instances whose names are the same as those listed here,
+so that scoping behaviour can be abstracted and, therefore, made more extensible</em></p>
+<p>The behaviour of an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> can be read through its <a class="xref" href="../../api/Rezolver.ITarget.html#Rezolver_ITarget_ScopeBehaviour">ScopeBehaviour</a> property - which is read only and is, for most
+targets, defaulted to <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Implicit">Implicit</a>.</p>
+<p>Indeed, most implementations of the interface do not allow you to control this behaviour.  One exception that does, however, is the 
+<a class="xref" href="../../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> - which defaults to <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_None">None</a> because <em>you</em> supply the instance
+when you create the target, therefore it&#39;s assumed <em>you</em> will also take responsibility for disposing it, if it&#39;s <code>IDisposable</code>.  If you want
+Rezolver to dispose of it for you, then you can pass a different behaviour when you create the target.</p>
+<div class="NOTE"><h5>Note</h5><p>The only other scope behaviour that you <em>should</em> pass to an <a class="xref" href="../../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> is <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a>, because
+there&#39;s only ever one instance.  If you use <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Implicit">Implicit</a>, then a scope will end up tracking the same instance multiple
+times, creating unnecessary entries in its internal tracking arrays, and the object&#39;s <code>Dispose</code> method will end up being called multiple
+times.</p>
+</div>
+<h2 id="using-rezolverscopebehaviourexplicit">Using <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a></h2>
+<p>There is only one target whose <a class="xref" href="../../api/Rezolver.ITarget.html#Rezolver_ITarget_ScopeBehaviour">ScopeBehaviour</a> is set to <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a> - the <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>.</p>
+<p>This target is used in the same way that we use the <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> (as described in the 
+<a href="singleton.html">singletons documentation in this section</a>) - you wrap another target with it, and it then ensures that only one instance per-scope 
+is ever produced from the target.</p>
+<p>Explicitly scoped objects are covered exclusively in <a href="scoped.html">the next topic in this section</a> but before we head on over to that topic,
+we will go through a few examples which involve the <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Implicit">Implicit</a> behaviour - i.e, the default for most types of
+registration, to see how &#39;normal&#39; objects interact with scopes.</p>
+<hr>
+<h1 id="examples">Examples</h1>
+<h2 id="implicitly-scoped-transient-object">Implicitly scoped transient object</h2>
+<p>This is the simplest example possible:</p>
+<pre><code class="lang-csharp" name="ImplicitScopeExamples.cs">var container = new Container();
+container.RegisterType&lt;DisposableType&gt;();
+
+DisposableType result;
+using(var scope = container.CreateScope())
+{
+    result = scope.Resolve&lt;DisposableType&gt;();
+}
+
+Assert.True(result.Disposed);
+</code></pre>
             </article>
           </div>
           

@@ -516,7 +516,8 @@ bindings too.  To illustrate, we&#39;ll have a type with a default constructor a
 		Service = service;
 	}
 }
-</code></pre><h3 id="example---no-parameter-bindings">Example - No parameter bindings</h3>
+</code></pre><hr>
+<h3 id="example---no-parameter-bindings">Example - No parameter bindings</h3>
 <p>The first test ignores the registered services and forcibly targets the default constructor:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 container.RegisterType&lt;MyService, IMyService&gt;();

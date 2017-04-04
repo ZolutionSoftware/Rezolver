@@ -7,6 +7,9 @@
   href: create-and-use-a-container.md
 - name: Service Registration
   href: service-registration.md
+- name: Lifetimes
+  href: lifetimes/toc.yml
+  homepage: lifetimes/index.md
 - name: Constructor Injection
   href: constructor-injection/toc.yml
   homepage: constructor-injection/index.md
@@ -20,8 +23,6 @@
   href: decorators.md
 - name: Enumerables
   href: enumerables.md
-- name: Lifetimes
-  href: lifetimes/toc.yml
-  homepage: lifetimes/index.md
+
 - name: Benchmarks
   href: benchmarks.md

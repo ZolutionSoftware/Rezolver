@@ -193,7 +193,8 @@ Refer to the topic for detailed examples on how to use member binding.
 Assuming you've read the previous topics on [constructor injection](index.md) and [member binding](member-binding.md),
 then that's it for constructor injection for now.
 
-> [!NOTE] A separate topic will be added in the future regarding Generic Specialisation in the container, but that covers all target types, 
+> [!NOTE]
+> A separate topic will be added in the future regarding Generic Specialisation in the container, but that covers all target types, 
 > not just the @Rezolver.Targets.GenericConstructorTarget - so that will go elsewhere.
 
 Feel free to explore the table of contents or [head back to the main service registration overview](../service-registration.md) to explore 

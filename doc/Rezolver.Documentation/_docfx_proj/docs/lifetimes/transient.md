@@ -27,13 +27,13 @@ The following table summarises this:
 @Rezolver.Targets.SingletonTarget | No | This target is responsible for Rezolver's implementation of [singleton objects](singleton.md).
 <sup>*</sup>@Rezolver.Targets.UnscopedTarget | *Inherited* | This target is used to strip explicit or implicit scoping behaviour from another target.
 
-<sup>*</sup> *Denotes a target which is used indirectly by other registrations and not generally used directly by applications* 
+<sup>*</sup> _Denotes a target which is used indirectly by other registrations and not generally used directly by applications_
 
-There's no need for any further examples for transient objects, as most of the examples throughout this documentation
-use the targets which are marked as transient in the above table.
+There's no need for any further examples for transient objects, as most of the examples throughout this documentation (see the [constructor injection documentation](../constructor-injection/index.md)
+for example) use the targets which are marked as transient in the above table.
 
 * * *
 
 # Next steps
 
-- Head over to the [singletons topic](singleton.md) to read about how to use the @Rezolver.Targets.SingletonTarget.
+- Head over to the [singletons topic](singleton.md) to read about how to use the @Rezolver.Targets.SingletonTarget to see how to turn any target into a singleton.

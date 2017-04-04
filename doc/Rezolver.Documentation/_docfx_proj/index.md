@@ -20,20 +20,20 @@ _Linked topics provide high level overviews and examples in our developer guide 
 - [Enumerables](docs/enumerables.md) (empty enumerables returned by default)
 - Child containers (overriding registrations in one container with those of another)
   - Child registration containers (lower-level overriding of registrations for similar but sibling containers)
-- Hierarchical lifetime scoping
+- [Hierarchical lifetime scoping](docs/lifetimes/container-scopes.md)
 - [Delegates](docs/delegates.md) and [Expressions](docs/expressions.md) as factories, with argument injection
   - Explicit resolving supported inside factory/expression bodies
-- Singletons
+- [Singletons](docs/lifetimes/singleton.md)
 - [Objects as services](docs/objects.md)
-- Scoped objects (i.e. 'singleton per scope')
+- [Scoped objects](docs/lifetimes/scoped.md) (i.e. 'singleton per scope')
 - No 'prepare' phase - you can register targets in a container after you start using it
   - *Note - services which have already been used cannot yet be replaced, but high-performance mutable containers are on their way*
 - Extensible compiler framework
   - Expression tree compiler used by default
 - Direct Asp.Net Core integration via extensions to the [Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) and 
 [Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) packages via nuget packages (click the links to go to our package docs)
-- Extensible configuration framework *(still in development)*
-  - Json configuration *(still in development)*
+- Extensible configuration framework *(under review)*
+  - Json configuration *(under review)*
 
 _<small> * If a topic isn't linked, it's probably because we're still working on the documentation!</small>_
 

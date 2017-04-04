@@ -151,6 +151,5 @@ bool canResolve = container.CanResolve<MyService>();
 
 # Next Steps
 
-  - Now read up on how to [register services in the container](service-registration.md).
-
-<!--Alternatively, you might be interested in Rezolver's understanding of [object lifetimes](object-lifetimes.md).-->
+- Read up on how to [register services in the container](service-registration.md).
+- Alternatively, if you haven't already, take a look Rezolver's understanding of [object lifetimes](lifetimes/index.md).
