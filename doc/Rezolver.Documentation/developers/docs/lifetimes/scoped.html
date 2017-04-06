@@ -109,7 +109,54 @@
             <article class="content wrap" id="_content" data-uid="">
               <h1 id="scoped-objects">Scoped Objects</h1>
               
-<p><em>Coming soon!</em></p>
+<p>If you&#39;ve been reading through <a href="index.html">this section</a> in order, then you&#39;re probably already familiar with the purpose of a scoped object.</p>
+<p>If you haven&#39;t already, then its suggested you read the <a href="singleton.html">singletons topic</a> (because the way you create scoped registrations is fundamentally
+identical), then the <a href="container-scopes.html">container scopes topic</a> so that you know how to create a scope and what you can expect from it.</p>
+<ul>
+<li>A scoped object is a singleton enforced at the scope level</li>
+<li>The <a class="xref" href="../../api/Rezolver.ITarget.html#Rezolver_ITarget_ScopeBehaviour">ScopeBehaviour</a> of an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> that creates a scoped object will be set to <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a>.</li>
+<li>Although often used with objects that support the <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.idisposable(v=vs.110).aspx">IDisposable</a> interface; any object can be registered as &#39;scoped&#39;</li>
+<li>Any target can be made to produce a scoped object by wrapping it with a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> (either through its constructor or via the
+<a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Scoped_">Scoped</a> extension method)</li>
+<li>You can also register scoped types (i.e. a shortcut for creating a <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+which is then wrapped in a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>) with the <a class="xref" href="../../api/Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped_">RegisterScoped</a> extension methods.</li>
+</ul>
+<p>Apart from the fact that a scoped object limits itself to one-per-scope (and one registration can, therefore, produce multiple instances across multiple
+scopes), the big difference between it and a singleton is that a scope must be available when you resolve an instance.</p>
+<h1 id="examples">Examples</h1>
+<p>We don&#39;t need many examples to show scoped objects in action.</p>
+<p>You can apply the <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> to all the same targets to which 
+the <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> can be applied, so some of the more exotic examples from the <a href="singleton.html">singletons topic</a> are not repeated
+here, but with the examples we do have, you should have enough to adapt those into creating scoped objects.</p>
+<p>Finally, all the behaviour shown regarding <code>IDisposables</code> and <a href="container-scopes.html">scopes</a> works the same for these explicitly scoped objects as
+they do for transient object.</p>
+<div class="NOTE"><h5>Note</h5><p>In all these examples, we will use the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> so that we always have a scope available even if we don&#39;t create one.</p>
+</div>
+<h2 id="basic-example">Basic example</h2>
+<pre><code class="lang-csharp" name="ExplicitScopeExamples.cs">using (var container = new ScopedContainer())
+{
+    container.RegisterScoped&lt;MyService, IMyService&gt;();
+
+    var result1 = container.Resolve&lt;IMyService&gt;();
+    var result2 = container.Resolve&lt;IMyService&gt;();
+
+    Assert.Same(result1, result2);
+}
+</code></pre><h2 id="different-scope--a-different-object">Different scope = a different object</h2>
+<p>This example shows how different instances are returned for different scopes for the same registration:</p>
+<pre><code class="lang-csharp" name="ExplicitScopeExamples.cs">using(var container = new ScopedContainer())
+{
+    container.RegisterScoped&lt;MyService, IMyService&gt;();
+    var result1 = container.Resolve&lt;IMyService&gt;();
+    IMyService result2;
+    using(var scope = container.CreateScope())
+    {
+        result2 = scope.Resolve&lt;IMyService&gt;();
+        Assert.NotSame(result1, result2);
+    }
+}
+</code></pre><h1 id="wrapping-up">Wrapping up</h1>
+<p>And that&#39;s it for lifetimes, <a href="index.html">return to the topic homepage</a> if you need more information.</p>
 
             </article>
           </div>

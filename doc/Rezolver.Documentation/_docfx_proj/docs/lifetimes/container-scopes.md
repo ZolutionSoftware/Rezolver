@@ -99,9 +99,99 @@ registration, to see how 'normal' objects interact with scopes.
 
 # Examples
 
-## Implicitly scoped transient object
+For these examples, we're using this type:
 
-This is the simplest example possible:
+[!code-csharp[DisposableType.cs](../../../../../test/Rezolver.Tests.Examples/Types/DisposableType.cs#example)]
+
+Note that the type throws an exception if attempts are made to dispose of it multiple times - this is a feature of the tests which drive the examples,
+as we want to prevent unnecessary `Dispose()` calls as much as possible.
+
+We're also using this trivial type for examples where we resolve the disposable as a dependency:
+
+[!code-csharp[RequiresDisposableType.cs](../../../../../test/Rezolver.Tests.Examples/Types/RequiresDisposableType.cs#example)]
+
+## Implicitly scoped transient disposable
+
+First we look at the simplest case - we create a @Rezolver.Container from which we obtain a new scope through which we then resolve an instance 
+of a disposable object.  When we dispose the scope, the object should also be disposed:
 
 [!code-csharp[ImplicitScopeExamples.cs](../../../../../test/Rezolver.Tests.Examples/ImplicitScopeExamples.cs#example1)]
 
+* * *
+
+## Nested child scopes
+
+This time, the container is building the same type, but we're using child scopes - checking that each child scope *only* disposes of the objects
+resolved within it:
+
+[!code-csharp[ImplicitScopeExamples.cs](../../../../../test/Rezolver.Tests.Examples/ImplicitScopeExamples.cs#example2)]
+
+* * *
+
+## Disposable Dependencies
+
+All the examples so far demonstrate disposable objects being resolved directly via a scope.  What if a disposable object is instead created
+as a dependency of another?
+
+[!code-csharp[ImplicitScopeExamples.cs](../../../../../test/Rezolver.Tests.Examples/ImplicitScopeExamples.cs#example3)]
+
+> [!TIP]
+> Remember - the scope tracks all `IDisposable` objects it creates - so it doesn't matter whether an object is created directly for a Resolve
+> operation or purely as a dependency for another object - it will be disposed by the scope that owns it.
+
+* * *
+
+## Disposable Singletons
+
+On the subject of ownership - a singleton has special rules regarding the scope it wants to belong to.
+
+The singleton could be constructed at any time, inside any scope, but as we know from the [singletons documentation](singleton.md), the object 
+itself must remain available as long as the container itself is available.  As a result, singletons must ensure that they are disposed by the 
+root-most scope (i.e. one which does not have a parent):
+
+[!code-csharp[ImplicitScopeExamples.cs](../../../../../test/Rezolver.Tests.Examples/ImplicitScopeExamples.cs#example4)]
+
+> [!IMPORTANT]
+> As the example shows, if you are using disposable singletons, then you should *__always__* use @Rezolver.ScopedContainer as your 
+> application's container instead of @Rezolver.Container.
+> 
+> It supports exactly the same functionality shown in all the examples on this site, but it also has it's own scope
+> which will automatically become the default root for your application, thus ensuring that any singletons will be disposed only when you
+> dispose of the @Rezolver.ScopedContainer.
+
+* * *
+
+## Mixing lifetimes and scopes
+
+The previous example throws up a slight problem: what happens when a singleton depends on a non-singleton disposable; and vice versa?
+
+At the moment (until 1.2 is done), it's good news and bad news...
+
+### Transient depending on a Singleton
+
+When a transient object depends on a singleton disposable, then (regardless of whether the transient is Disposable too) then nothing changes, the
+singleton is still tracked in the root-most scope, and is not disposed until that scope is disposed - there is no difference to the singleton 
+example shown above.
+
+### Singleton depending on a Transient
+
+If the roles are reversed and a singleton takes a dependency on a transient `IDisposable`, then that transient should also be tracked in the
+root scope, so that it remains usable for the lifetime of the singleton:
+
+> [!CAUTION]
+> There is a bug in v1.1 which means that the following example *does not work* - the disposable dependency is prematurely disposed.
+> The issue [is already in the backlog](https://github.com/ZolutionSoftware/Rezolver/issues/28) and is planned to be fixed in 1.2.
+> 
+> In meantime, there are two workarounds - either ensure that singletons are always dependant on other singleton disposables; or you 
+> can force the correct scope to be selected for the transient dependencies of a singleton by ensuring that you resolve the
+> singleton in the *root scope __first__*.
+
+[!code-csharp[ImplicitScopeExamples.cs](../../../../../test/Rezolver.Tests.Examples/ImplicitScopeExamples.cs#example5)]
+
+The bug that this example highlights will be one of the first things to be addressed in the v1.2.
+
+* * *
+
+# Next steps
+
+- Learn how to create per-scope singletons with [scoped objects](scoped.md).

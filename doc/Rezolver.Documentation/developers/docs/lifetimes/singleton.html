@@ -120,7 +120,12 @@ on which it is called, converting it into a singleton.</li>
 </ul>
 <p>The <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> enforces a lock around its inner target so that its first result is cached and then returned
 for each subsequent <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operation.</p>
-<div class="NOTE"><h5>Note</h5><p>At the moment, singletons apply across the whole <code>AppDomain</code>, but in the future (v1.2), they will apply to each container - 
+<div class="NOTE"><h5>Note</h5><p>At the moment, the lifetime of a singleton is tied to the lifetime of the <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> itself.
+If you only ever have one container, or if you have multiple containers but use different targets for singletons 
+of the same type, apply across the whole <code>AppDomain</code>, then you won&#39;t enounter any issues.  But if you create multiple
+containers from the same <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>, then you will find that singletons will be shared between them.</p>
+<hr>
+<p>In the future (v1.2), singletons will be unique to each container - 
 meaning that the same registration in two different containers would yield two different singletons.</p>
 </div>
 <hr>

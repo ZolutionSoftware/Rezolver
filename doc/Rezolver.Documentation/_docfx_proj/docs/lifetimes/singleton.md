@@ -13,7 +13,12 @@ The @Rezolver.Targets.SingletonTarget enforces a lock around its inner target so
 for each subsequent @Rezolver.IContainer.Resolve* operation.
 
 > [!NOTE]
-> At the moment, singletons apply across the whole `AppDomain`, but in the future (v1.2), they will apply to each container - 
+> At the moment, the lifetime of a singleton is tied to the lifetime of the @Rezolver.Targets.SingletonTarget itself.
+> If you only ever have one container, or if you have multiple containers but use different targets for singletons 
+> of the same type, apply across the whole `AppDomain`, then you won't enounter any issues.  But if you create multiple
+> containers from the same @Rezolver.ITargetContainer, then you will find that singletons will be shared between them.
+> * * *
+> In the future (v1.2), singletons will be unique to each container - 
 > meaning that the same registration in two different containers would yield two different singletons.
 
 * * *

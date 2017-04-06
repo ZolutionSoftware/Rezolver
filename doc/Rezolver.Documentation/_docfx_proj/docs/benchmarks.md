@@ -1,5 +1,19 @@
 ﻿# Rezolver Benchmarks
 
+> [!NOTE]
+> Daniel Palme has now integrated Rezolver into his benchmarks as standard, so now you can evaluate
+> it's performance independently of our own tests shown here.
+> 
+> He regularly updates [this blog post](http://www.palmmedia.de/Blog/2011/8/30/ioc-container-benchmark-performance-comparison) 
+> with in depth comments and analysis on his latest results.
+> * * *
+> The current status of Rezolver's performance is 'Average', which is fair, because of the results
+> of the Child Container tests, which we are working on improving.
+> 
+> This page will continue to be maintained with our own copies of the results in order to flesh out
+> the reasons behind any deficiencies in Rezolver, both in terms of features and performance, as
+> well as keeping everyone updated on our progress in improving performance.
+
 Benchmarking an IOC container obviously has pitfalls.  In a web environment, for example, 
 it's highly unlikely you'll hit the kind of traffic levels required for your choice of container
 to have a noticeable impact on speed.

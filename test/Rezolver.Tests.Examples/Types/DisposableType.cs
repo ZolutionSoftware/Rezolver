@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Examples.Types
 {
+    // <example>
 	public class DisposableType : IDisposable
 	{
 		public bool Disposed { get; private set; }
@@ -14,4 +15,5 @@ namespace Rezolver.Tests.Examples.Types
 			Disposed = true;
 		}
 	}
+    // </example>
 }
