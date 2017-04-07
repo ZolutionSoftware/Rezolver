@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
-	public class ConfigureRezolverOptions : IConfigureOptions<RezolverOptions>
+	internal class ConfigureRezolverOptions : IConfigureOptions<RezolverOptions>
 	{
 		//private ILoggerFactory _loggerFactory;
 		//private ObjectFormatterCollection _formatters;

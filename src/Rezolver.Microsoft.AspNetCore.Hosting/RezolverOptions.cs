@@ -13,7 +13,7 @@ namespace Rezolver
 	/// <summary>
 	/// 
 	/// </summary>
-	public class RezolverOptions
+	internal class RezolverOptions
 	{
 		//public RezolverTrackingOptions Tracking { get; set; } = new RezolverTrackingOptions();
     }

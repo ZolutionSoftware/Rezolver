@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Copyright>2014 onwards Zolution Software Ltd</Copyright>
+    <Authors>Andras Zoltan</Authors>
+    <Company>Zolution Software Ltd</Company>
+    <PackageReleaseNotes>See https://github.com/ZolutionSoftware/Rezolver/releases</PackageReleaseNotes>
+    <PackageIconUrl>http://rezolver.co.uk/favicon-96x96.png</PackageIconUrl>
+    <PackageProjectUrl>http://rezolver.co.uk</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <Product>Rezolver</Product>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/ZolutionSoftware/Rezolver</RepositoryUrl>
+    <VersionPrefix>1.2.7040</VersionPrefix>
+    <VersionSuffix>alpha-710</VersionSuffix>
+  </PropertyGroup>
+</Project>

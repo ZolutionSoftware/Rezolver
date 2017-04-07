@@ -1,20 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="../../common.props" />
   <PropertyGroup>
-    <Description>Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)</Description>
-    <Copyright>2014 onwards Zolution Software Ltd</Copyright>
-    <AssemblyTitle>Rezolver .Net Core IServiceProvider implementation</AssemblyTitle>
-    <VersionPrefix>1.1.703.1800</VersionPrefix>
-    <Authors>Zolution Software Ltd</Authors>
-    <TargetFrameworks>netstandard1.1</TargetFrameworks>
     <AssemblyName>Rezolver.Microsoft.Extensions.DependencyInjection</AssemblyName>
+    <AssemblyTitle>Rezolver .Net Core IServiceProvider implementation</AssemblyTitle>
+    <Description>Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)</Description>
+    <TargetFrameworks>netstandard1.1</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    
     <PackageId>Rezolver.Microsoft.Extensions.DependencyInjection</PackageId>
     <PackageTags>ioc;di;portable;rezolver</PackageTags>
-    <PackageReleaseNotes>Switched scope factory to use the IScopeFactory implementation of ResolveContext (new in 1.1.71702.500), which honours child scopes correctly.</PackageReleaseNotes>
-    <PackageIconUrl>http://rezolver.co.uk/favicon-96x96.png</PackageIconUrl>
-    <PackageProjectUrl>http://rezolver.co.uk</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
@@ -22,7 +17,7 @@
   </PropertyGroup>
 
   <Import Project="..\Rezolver.Shared.props" />
-  
+
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj" />
   </ItemGroup>

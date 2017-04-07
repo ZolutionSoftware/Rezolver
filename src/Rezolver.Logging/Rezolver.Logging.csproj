@@ -1,18 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="../../common.props" />
   <PropertyGroup>
-    <Description>Logging classes and abstractions for the Rezolver framework.  Most useful for developers looking to extend Rezolver.</Description>
-    <Copyright>2014 onwards Zolution Software Ltd</Copyright>
-    <AssemblyTitle>Rezolver Logging/Tracking framework</AssemblyTitle>
-    <VersionPrefix>1.1.0</VersionPrefix>
-    <Authors>Zolution Software Ltd</Authors>
-    <TargetFrameworks>netstandard1.1;net452;net46</TargetFrameworks>
     <AssemblyName>Rezolver.Logging</AssemblyName>
+    <AssemblyTitle>Rezolver Logging/Tracking framework</AssemblyTitle>
+    <Description>Logging classes and abstractions for the Rezolver framework.  Most useful for developers looking to extend Rezolver.</Description>
+    <TargetFrameworks>netstandard1.1;net452;net46</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    
     <PackageId>Rezolver.Logging</PackageId>
     <PackageTags>ioc;di;portable;rezolver</PackageTags>
-    <PackageIconUrl>http://rezolver.co.uk/favicon-96x96.png</PackageIconUrl>
-    <PackageProjectUrl>http://rezolver.co.uk</PackageProjectUrl>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
