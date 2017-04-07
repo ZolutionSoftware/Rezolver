@@ -31,16 +31,16 @@ over time.
   - [Member injection](http://rezolver.co.uk/developers/docs/constructor-injection/member-binding.html) (extensible)
 - [Open generics](http://rezolver.co.uk/developers/docs/constructor-injection/generics.html) 
   - Specific closed generics take precedence
-- Decorators (non-generic and generic)
+- [Decorators](http://rezolver.co.uk/developers/docs/decorators.html) (non-generic and generic)
 - [Enumerables](http://rezolver.co.uk/developers/docs/enumerables.html) (empty enumerables returned by default)
 - Child containers (overriding registrations in one container with those of another)
   - Child registration containers (lower-level overriding of registrations for similar but sibling containers)
-- Hierarchical lifetime scoping
+- [Hierarchical lifetime scoping](http://rezolver.co.uk/developers/docs/lifetimes/container-scopes.html)
 - [Delegates](http://rezolver.co.uk/developers/docs/delegates.html) and [Expressions](http://rezolver.co.uk/developers/docs/expressions.html) as factories, with argument injection
   - Explicit resolving supported inside factory/expression bodies
-- Singletons
+- [Singletons](http://rezolver.co.uk/developers/docs/lifetimes/singleton.html)
 - [Objects as services](http://rezolver.co.uk/developers/docs/objects.html)
-- Scoped objects (i.e. 'singleton per scope')
+- [Scoped objects](http://rezolver.co.uk/developers/docs/lifetimes/scoped.html) (i.e. 'singleton per scope')
 - No 'prepare' phase - you can register targets in a container after you start using it
   - *Note - services which have already been used cannot yet be replaced*
 - Extensible compiler framework
@@ -63,33 +63,34 @@ Click on the badges to see the whole board, including also the backlog, and what
 
 Here's a bit more detail on some of the bigger things that have been planned for ages (but might not yet be on the board :) )
 
-- <strike>Migrate to MSBuild-based projects for VS 2017</strike>
-- Traditional Asp.Net and Web API integration
-- Low-level logging
+- [x] <strike>Migrate to MSBuild-based projects for VS 2017</strike>
+- [ ] Traditional Asp.Net and Web API integration
+- [ ] Low-level logging
   - *this was already in development, but due to recent changes needs reworking*
-- Auto-injected factories e.g. register `IService` and request a `Func<IService>`
-- Reflection-based compiler (faster first-call vs expression compiler)
-  - Mixed compiler - uses reflection until expression tree is built asynchronously
-- Statically compiled container - turns container into a module that you can reference
+- [ ] Auto-injected factories e.g. register `IService` and request a `Func<IService>`
+- [ ] Reflection-based compiler (faster first-call vs expression compiler)
+  - [ ] Mixed compiler - uses reflection until expression tree is built asynchronously
+- [ ] Statically compiled container - turns container into a module that you can reference
 and use with signficantly less startup/compilation cost.
-- Container 'storage' API for singletons and scopes
+- [ ] Container 'storage' API for singletons and scopes
   - Will allow singletons to operate per-container and allow for more exotic scoping scenarios
-- Self registration of non-abstract classes - e.g. request `MyService` without registering it
+- [ ] Self registration of non-abstract classes - e.g. request `MyService` without registering it
 first.
-  - Just-in-time API extracted from this to provide a base on which to build interception and automocking
-- Auto-built WCF client 'experiment' (just gotta try :) )
-- Conditional targets with caching support in `CachingContainerBase`
-- Mutable containers - *without* speed penalties
+  - [ ] Just-in-time API extracted from this to provide a base on which to build interception and automocking
+- [ ] Auto-built WCF client 'experiment' (just gotta try :) )
+- [ ] Conditional targets with caching support in `CachingContainerBase`
+- [ ] Mutable containers - *without* speed penalties
 
 ### For [rezolver.co.uk](http://rezolver.co.uk)
 
-- <strike>Styling of the footer (where'd that green come from!?)</strike>
-- Full documentation of all targets ***85%* done**
-- <strike>Results of benchmarking via https://github.com/danielpalme/IocPerformance (*hint* - only child containers letting it down at the moment, otherwise v.quick)</strike> - [here](http://rezolver.co.uk/developers/docs/benchmarks.html)
-- Scoping documentation
-- Snazzier homepage ;)
-- Compilation walkthrough
-- Experimental examples
+- [x] Styling of the footer (where'd that green come from!?)
+- [x] Full documentation of all targets
+- [x] Results of benchmarking via https://github.com/danielpalme/IocPerformance (*hint* - only child containers letting it down at the moment, otherwise v.quick) - [here](http://rezolver.co.uk/developers/docs/benchmarks.html)
+  - [x] *Daniel Palme has now included Rezolver in his stock list of containers - thanks Daniel!*
+- [x] Scoping documentation
+- [ ] Snazzier homepage ;)
+- [ ] Compilation walkthrough
+- [ ] Experimental examples
 
 # Contributing
 
