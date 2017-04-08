@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
   /// <summary>
-  /// An <see cref="ITargetContainerOwner"/> implementation that stores and retrieves 
+  /// An <see cref="ITargetContainer"/> implementation that stores and retrieves 
   /// <see cref="ITarget"/> and <see cref="ITargetContainer"/> by type.
   /// </summary>
   /// <remarks>
@@ -20,7 +20,7 @@ namespace Rezolver
   /// open generic version of the type, with concrete (closed) generics being registered within
   /// that.
   /// </remarks>
-  public class TargetDictionaryContainer : ITargetContainer, ITargetContainerOwner
+  public class TargetDictionaryContainer : ITargetContainer
   {
     private readonly Dictionary<Type, ITargetContainer> _targets
       = new Dictionary<Type, ITargetContainer>();
@@ -74,7 +74,7 @@ namespace Rezolver
     }
 
     /// <summary>
-    /// Implementation of <see cref="ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)" />
+    /// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)" />
     /// </summary>
     /// <param name="type"></param>
     /// <param name="container"></param>

@@ -32,7 +32,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// Creates the target container for the test.
 		/// </summary>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual ITargetContainerOwner CreateTargetContainer([CallerMemberName]string testName = null)
+		protected virtual ITargetContainer CreateTargetContainer([CallerMemberName]string testName = null)
 		{
 			return new TargetContainer();
 		}

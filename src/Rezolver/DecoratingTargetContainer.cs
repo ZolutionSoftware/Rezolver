@@ -16,15 +16,15 @@ namespace Rezolver
 	/// <see cref="DecoratorTarget"/> when <see cref="Fetch(Type)"/> or <see cref="FetchAll(Type)"/> are called.
 	/// 
 	/// The best way to add a decorator to your target container is to use the extension method 
-	/// <see cref="DecoratorTargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainerOwner)"/>
+	/// <see cref="DecoratorTargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainer)"/>
 	/// or its non-generic equivalent.
 	/// </summary>
 	/// <remarks>This class does not implement <see cref="ITarget"/>, rather
-	/// it's an <see cref="ITargetContainerOwner"/> into which other targets can be added,
+	/// it's an <see cref="ITargetContainer"/> into which other targets can be added,
 	/// and when <see cref="Fetch(Type)"/> or <see cref="FetchAll(Type)"/> are called, a temporary
 	/// <see cref="DecoratorTarget"/> is created which wraps around the targets that have been registered within and
 	/// which will ultimately create instances of <see cref="DecoratorType"/></remarks>
-	public class DecoratingTargetContainer : ITargetContainerOwner
+	public class DecoratingTargetContainer : ITargetContainer
 	{
 		/// <summary>
 		/// Gets the type which will be used to decorate the instances produced by targets in this decorator target.
@@ -137,33 +137,25 @@ namespace Rezolver
 		/// Retrieves an existing container registered against the given <paramref name="type" />, or null if not found.
 		/// </summary>
 		/// <param name="type">The type.</param>
-		/// <exception cref="InvalidOperationException">If this decorator's inner container isn't an instance of <see cref="ITargetContainerOwner"/></exception>
-		/// <remarks>This is an implementation of <see cref="ITargetContainerOwner.FetchContainer(Type)"/> which wraps
+		/// <remarks>This is an implementation of <see cref="ITargetContainer.FetchContainer(Type)"/> which wraps
 		/// around the inner target container and passes the call on to that.</remarks>
 		public ITargetContainer FetchContainer(Type type)
 		{
 			EnsureInnerContainer();
-			if (_inner is ITargetContainerOwner)
-				return ((ITargetContainerOwner)_inner).FetchContainer(type);
-			throw new InvalidOperationException("This decorator must be decorating another owner, or be decorating a generic type");
+			return _inner.FetchContainer(type);
 		}
 
 		/// <summary>
-		/// Implementation of <see cref="ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)"/> - the call is
+		/// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> - the call is
 		/// automatically forwarded on to the inner target container that's being decorated, since decorator targets don't support
 		/// direct registration of targets or containers.
 		/// </summary>
 		/// <param name="type">The type.</param>
 		/// <param name="container">The container.</param>
-		/// <exception cref="InvalidOperationException">This decorator must be decorating another <see cref="ITargetContainerOwner"/>, 
-		/// or be decorating a generic type</exception>
 		public void RegisterContainer(Type type, ITargetContainer container)
 		{
 			EnsureInnerContainer();
-			if (_inner is ITargetContainerOwner)
-				((ITargetContainerOwner)_inner).RegisterContainer(type, container);
-			else
-				throw new InvalidOperationException("This decorator must be decorating another owner, or be decorating a generic type");
+			_inner.RegisterContainer(type, container);
 		}
 	}
 }

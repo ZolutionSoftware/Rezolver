@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
 	/// <summary>
-	/// A special type of <see cref="ITargetContainerOwner"/> which stores targets (and potentially other containers)
+	/// A special type of <see cref="ITargetContainer"/> which stores targets (and potentially other containers)
 	/// which are specifically keyed either to a particular open generic type or a closed generic built from it.
 	/// </summary>
 	/// <seealso cref="Rezolver.TargetDictionaryContainer" />

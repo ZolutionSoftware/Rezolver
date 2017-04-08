@@ -129,7 +129,7 @@ namespace Rezolver
 		///  
 		/// If a service has not been registered, then the returned <see cref="ListTarget"/> will be empty
 		/// and its <see cref="ListTarget.UseFallback"/> property will be <c>true</c>.</remarks>
-		public static void EnableEnumerableResolving(this ITargetContainerOwner targetContainer)
+		public static void EnableEnumerableResolving(this ITargetContainer targetContainer)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			targetContainer.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(targetContainer));

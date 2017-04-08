@@ -29,7 +29,7 @@ namespace Rezolver
 		/// <remarks>If the container has the capability to handle enumerables, then each target will be returned
 		/// when an IEnumerable of the common service type is requested.  This is an opt-in behaviour in Rezolver -
 		/// implemented by the <see cref="EnumerableTargetContainer"/> and can be added to a target container
-		/// with the extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainerOwner)"/>.
+		/// with the extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)"/>.
 		/// 
 		/// Note that default behaviour of <see cref="TargetContainer"/> is for this to be enabled.</remarks>
 		public static void RegisterMultiple(this ITargetContainer targetContainer, IEnumerable<ITarget> targets, Type commonServiceType = null)

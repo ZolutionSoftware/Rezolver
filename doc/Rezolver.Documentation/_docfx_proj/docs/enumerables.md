@@ -154,13 +154,6 @@ And in this example we'll have one of those decorators being used to decorate th
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example7)]
 
-> [!NOTE]
-> As the first comment states - you cannot currently call any `RegisterDecorator` extension method via an @Rezolver.IContainer,
-> or, more importantly, a @Rezolver.ContainerBase derivative.
-> 
-> This is because the extensions require an `@Rezolver.ITargetContainerOwner`, which is not implemented by these types.
-> This will change with the 1.2 release, though (see [Issue #25](https://github.com/ZolutionSoftware/Rezolver/issues/25)).
-
 If more decorators were added, of course - then each element would be 're-decorated' accordingly.
 
 ## Explicit `IEnumerable<T>` registrations

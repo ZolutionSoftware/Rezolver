@@ -174,7 +174,6 @@
     <Content Include="developers\api\Rezolver.IScopeFactory.html" />
     <Content Include="developers\api\Rezolver.ITarget.html" />
     <Content Include="developers\api\Rezolver.ITargetContainer.html" />
-    <Content Include="developers\api\Rezolver.ITargetContainerOwner.html" />
     <Content Include="developers\api\Rezolver.MemberBinding.html" />
     <Content Include="developers\api\Rezolver.MethodBinding.html" />
     <Content Include="developers\api\Rezolver.MethodCallExtractor.html" />

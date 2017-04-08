@@ -168,11 +168,11 @@ interface present a similar set of functionality to <a class="xref" href="Rezolv
                   <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
 <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
 <p>The best way to add a decorator to your target container is to use the extension method 
-<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</a>
+<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
 or its non-generic equivalent.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a></h4>
-                  <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> which simplify the registration of decorators (via the
+                  <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which simplify the registration of decorators (via the
 <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a> pseudo-target)</p>
 </section>
                   <h4><a class="xref" href="Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a></h4>
@@ -204,7 +204,7 @@ in place of static code.</p>
                   <section><p>Extensions for to simplify registering expressions in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.GenericTargetContainer.html">GenericTargetContainer</a></h4>
-                  <section><p>A special type of <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> which stores targets (and potentially other containers)
+                  <section><p>A special type of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which stores targets (and potentially other containers)
 which are specifically keyed either to a particular open generic type or a closed generic built from it.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.MemberBinding.html">MemberBinding</a></h4>
@@ -273,7 +273,7 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
                   <section><p>Has been replaced by the <a class="xref" href="Rezolver.Target.html">Target</a> static class, and will be removed in 1.2</p>
 </section>
                   <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> implementation that stores and retrieves 
+                  <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves 
 <a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by type.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.TargetListContainer.html">TargetListContainer</a></h4>
@@ -321,11 +321,6 @@ when the standard implementations of <a class="xref" href="Rezolver.IContainer.h
                   <section><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances, keyed by the type of service
 that the targets are registered against.</p>
 <p>This is where all your service registrations will ultimately go.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a></h4>
-                  <section><p>Interface for an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which also contains other target containers.</p>
-<p>It is not typically used by your application code since it&#39;s primarily an infrastructure interface - if you are extending the
-API, however, then you might need to work with it.</p>
 </section>
                 <h3 id="enums">Enums
               </h3>

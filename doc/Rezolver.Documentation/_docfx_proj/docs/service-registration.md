@@ -42,10 +42,6 @@ of this site:
 - @Rezolver.ScopedTargetContainerExtensions *- for registering scoped constructor-injected types*
 - @Rezolver.SingletonTargetContainerExtensions *- for registering singleton constructor-injected types*
 
-> [!NOTE]
-> Some of these methods extend @Rezolver.ITargetContainerOwner - an interface which extends @Rezolver.ITargetContainer
-> to supply advanced functionality to the framework - such as decoration.
-
 ## Registering via @Rezolver.ITargetContainer.Register*
 
 To add registrations to an @Rezolver.ITargetContainer directly, i.e. without extension methods, we ultimately use the 

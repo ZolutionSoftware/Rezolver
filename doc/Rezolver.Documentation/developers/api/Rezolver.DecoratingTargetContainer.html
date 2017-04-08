@@ -116,7 +116,7 @@
               <div class="markdown level0 summary"><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
 <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
 <p>The best way to add a decorator to your target container is to use the extension method 
-<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</a>
+<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
 or its non-generic equivalent.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
@@ -153,11 +153,11 @@ or its non-generic equivalent.</p>
               <h6><strong>Assembly</strong>:rezolver-docfx.dll</h6>
               <h5 id="Rezolver_DecoratingTargetContainer_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class DecoratingTargetContainer : ITargetContainerOwner, ITargetContainer</code></pre>
+                <pre><code class="lang-csharp hljs">public class DecoratingTargetContainer : ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_DecoratingTargetContainer_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>This class does not implement <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, rather
-it&#39;s an <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a> into which other targets can be added,
+it&#39;s an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> into which other targets can be added,
 and when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called, a temporary</p>
 <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> is created which wraps around the targets that have been registered within and
 which will ultimately create instances of <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_DecoratorType">DecoratorType</a></div>
@@ -165,10 +165,10 @@ which will ultimately create instances of <a class="xref" href="Rezolver.Decorat
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer__ctor_System_Type_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.%23ctor(System.Type%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer__ctor_System_Type_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.%23ctor(System.Type%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L46">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L46">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer__ctor_" data-uid="Rezolver.DecoratingTargetContainer.#ctor*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer__ctor_System_Type_System_Type_" data-uid="Rezolver.DecoratingTargetContainer.#ctor(System.Type,System.Type)">DecoratingTargetContainer(Type, Type)</h4>
@@ -207,10 +207,10 @@ which will ultimately create instances of <a class="xref" href="Rezolver.Decorat
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_DecoratedType.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.DecoratedType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_DecoratedType.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.DecoratedType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L37">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L37">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_DecoratedType_" data-uid="Rezolver.DecoratingTargetContainer.DecoratedType*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_DecoratedType" data-uid="Rezolver.DecoratingTargetContainer.DecoratedType">DecoratedType</h4>
@@ -238,10 +238,10 @@ which will ultimately create instances of <a class="xref" href="Rezolver.Decorat
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_DecoratorType.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.DecoratorType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_DecoratorType.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.DecoratorType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L32">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L32">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_DecoratorType_" data-uid="Rezolver.DecoratingTargetContainer.DecoratorType*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_DecoratorType" data-uid="Rezolver.DecoratingTargetContainer.DecoratorType">DecoratorType</h4>
@@ -271,10 +271,10 @@ which will ultimately create instances of <a class="xref" href="Rezolver.Decorat
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L78">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L78">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_CombineWith_" data-uid="Rezolver.DecoratingTargetContainer.CombineWith*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.DecoratingTargetContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
@@ -347,10 +347,10 @@ have begun to be registered in another target container.</p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L93">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L93">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_Fetch_" data-uid="Rezolver.DecoratingTargetContainer.Fetch*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_Fetch_System_Type_" data-uid="Rezolver.DecoratingTargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
@@ -402,10 +402,10 @@ the target returned by the target container that&#39;s decorated by this one.</p
 </div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L110">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L110">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_FetchAll_" data-uid="Rezolver.DecoratingTargetContainer.FetchAll*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_FetchAll_System_Type_" data-uid="Rezolver.DecoratingTargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
@@ -455,10 +455,10 @@ represents the decoration logic for each instance.</p>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">ITargetContainer.FetchAll(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L143">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L142">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_FetchContainer_" data-uid="Rezolver.DecoratingTargetContainer.FetchContainer*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.DecoratingTargetContainer.FetchContainer(System.Type)">FetchContainer(Type)</h4>
@@ -503,33 +503,17 @@ represents the decoration logic for each instance.</p>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_FetchContainer_System_Type_">ITargetContainerOwner.FetchContainer(Type)</a></div>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_System_Type_">ITargetContainer.FetchContainer(Type)</a></div>
               <h5 id="Rezolver_DecoratingTargetContainer_FetchContainer_System_Type__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>This is an implementation of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_FetchContainer_System_Type_">FetchContainer(Type)</a> which wraps
+              <div class="markdown level1 remarks"><p>This is an implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_System_Type_">FetchContainer(Type)</a> which wraps
 around the inner target container and passes the call on to that.</p>
 </div>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
-                    <td><p>If this decorator&#39;s inner container isn&#39;t an instance of <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a></p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L129">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L129">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_Register_" data-uid="Rezolver.DecoratingTargetContainer.Register*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.DecoratingTargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
@@ -577,14 +561,14 @@ multiple decorators registered against it.</p>
 </div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer.RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L160">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L155">View Source</a>
               </span>
               <a id="Rezolver_DecoratingTargetContainer_RegisterContainer_" data-uid="Rezolver.DecoratingTargetContainer.RegisterContainer*"></a>
               <h4 id="Rezolver_DecoratingTargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.DecoratingTargetContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
-              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> - the call is
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> - the call is
 automatically forwarded on to the inner target container that&#39;s being decorated, since decorator targets don&#39;t support
 direct registration of targets or containers.</p>
 </div>
@@ -618,27 +602,10 @@ direct registration of targets or containers.</p>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainerOwner.html#Rezolver_ITargetContainerOwner_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)</a></div>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
-                    <td><p>This decorator must be decorating another <a class="xref" href="Rezolver.ITargetContainerOwner.html">ITargetContainerOwner</a>, 
-or be decorating a generic type</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ITargetContainer.RegisterContainer(Type, ITargetContainer)</a></div>
               <h3 id="extensionmethods">Extension Methods</h3>
               <div>
-                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainerOwner_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainerOwner)</a>
+                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias__2_Rezolver_ITargetContainer_">AliasTargetContainerExtensions.RegisterAlias&lt;TAlias, TOriginal&gt;(ITargetContainer)</a>
@@ -647,10 +614,10 @@ or be decorating a generic type</p>
                   <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type_">AliasTargetContainerExtensions.RegisterAlias(ITargetContainer, Type, Type)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainerOwner_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainerOwner)</a>
+                  <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainerOwner_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainerOwner, Type, Type)</a>
+                  <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Type, Type)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate(ITargetContainer, Delegate, Type, ScopeBehaviour)</a>
@@ -753,10 +720,10 @@ or be decorating a generic type</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/1.1.71702.100/apiSpec/new?filename=Rezolver_DecoratingTargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DecoratingTargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.DecoratingTargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/src/Rezolver/DecoratingTargetContainer.cs/#L27" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DecoratingTargetContainer.cs/#L27" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

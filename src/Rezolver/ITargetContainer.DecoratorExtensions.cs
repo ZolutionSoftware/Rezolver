@@ -10,14 +10,9 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
 	/// <summary>
-	/// Extensions for <see cref="ITargetContainerOwner"/> which simplify the registration of decorators (via the
+	/// Extensions for <see cref="ITargetContainer"/> which simplify the registration of decorators (via the
 	/// <see cref="DecoratingTargetContainer"/> pseudo-target)
 	/// </summary>
-	/// <remarks>Note: The decoration functionality provided by the framework is only possible on 
-	/// <see cref="ITargetContainer"/> implementations which also implement the <see cref="ITargetContainerOwner"/> interface.
-	/// 
-	/// All the main target container types you'll use in your application (<see cref="TargetContainer"/> and <see cref="ChildTargetContainer"/>)
-	/// do support this interface.</remarks>
     public static class DecoratorTargetContainerExtensions
     {
 		/// <summary>
@@ -29,30 +24,30 @@ namespace Rezolver
 		/// </summary>
 		/// <typeparam name="TDecorator">The type to be used as the decorator implementation</typeparam>
 		/// <typeparam name="TDecorated">The type which will be decorated by <typeparamref name="TDecorator"/>.</typeparam>
-		/// <param name="targetContainerOwner">The container into which the decorator will be registered.</param>
-		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainerOwner targetContainerOwner)
+		/// <param name="targetContainer">The container into which the decorator will be registered.</param>
+		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainer targetContainer)
 		{
-			targetContainerOwner.MustNotBeNull(nameof(targetContainerOwner));
-			targetContainerOwner.RegisterContainer(typeof(TDecorated), new DecoratingTargetContainer(typeof(TDecorator), typeof(TDecorated)));
+			targetContainer.MustNotBeNull(nameof(targetContainer));
+
+            targetContainer.RegisterContainer(typeof(TDecorated), new DecoratingTargetContainer(typeof(TDecorator), typeof(TDecorated)));
 		}
 
-		/// <summary>
-		/// Registers a decorator container which will cause all instances of <paramref name="decoratedType" /> to be decorated with
-		/// the type <paramref name="decoratorType" />.
-		/// 
-		/// Any existing registrations for <paramref name="decoratedType" /> will be decorated correctly, and subsequent registrations 
-		/// of <paramref name="decoratedType" /> will also be decorated as expected.
-		/// </summary>
-		/// <param name="decoratorType">The type to be used as the decorator implementation</param>
-		/// <param name="decoratedType">The type which will be decorated by <paramref name="decoratorType" />.</param>
-		/// <param name="targetContainerOwner">The container into which the decorator will be registered.</param>
-		public static void RegisterDecorator(this ITargetContainerOwner targetContainerOwner, Type decoratorType, Type decoratedType)
+        /// <summary>
+        /// Registers a decorator container which will cause all instances of <paramref name="decoratedType" /> to be decorated with
+        /// the type <paramref name="decoratorType" />.
+        /// 
+        /// Any existing registrations for <paramref name="decoratedType" /> will be decorated correctly, and subsequent registrations 
+        /// of <paramref name="decoratedType" /> will also be decorated as expected.
+        /// </summary>
+        /// <param name="targetContainer">The container into which the decorator will be registered.</param>
+        /// <param name="decoratorType">The type to be used as the decorator implementation</param>
+        /// <param name="decoratedType">The type which will be decorated by <paramref name="decoratorType" />.</param>
+        public static void RegisterDecorator(this ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
 		{
-			targetContainerOwner.MustNotBeNull(nameof(targetContainerOwner));
+			targetContainer.MustNotBeNull(nameof(targetContainer));
 			decoratorType.MustNotBeNull(nameof(decoratorType));
 			decoratedType.MustNotBeNull(nameof(decoratedType));
-
-			targetContainerOwner.RegisterContainer(decoratedType, new DecoratingTargetContainer(decoratorType, decoratedType));
+            targetContainer.RegisterContainer(decoratedType, new DecoratingTargetContainer(decoratorType, decoratedType));
 		}
 	}
 }

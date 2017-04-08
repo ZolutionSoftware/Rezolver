@@ -164,19 +164,14 @@ namespace Rezolver.Tests.Examples
         public void ShouldResolveEnumerableOfDecoratedServices()
         {
             // <example7>
-            // the extension API for RegisterDecorator currently only appears for ITargetContainerOwner
-            // thus, for this test we need to change how we create the container.
-            // The extension API will be changed to allow it to be called on ITargetContainer objects 
-            // in v1.2 - see #25 (https://github.com/ZolutionSoftware/Rezolver/issues/25)
-            var targets = new TargetContainer();
+            var container = new Container();
             // register the decorator up front.  Note - it doesn't actually matter when it's registered
-            targets.RegisterDecorator<MyServiceDecorator1, IMyService>();
-            targets.RegisterType<MyService, IMyService>();
-            targets.RegisterType<MyService2, IMyService>();
-            targets.RegisterType<MyService3, IMyService>();
+            container.RegisterDecorator<MyServiceDecorator1, IMyService>();
+            container.RegisterType<MyService, IMyService>();
+            container.RegisterType<MyService2, IMyService>();
+            container.RegisterType<MyService3, IMyService>();
 
             // create the container with these targets
-            var container = new Container(targets);
             var result = container.Resolve<IEnumerable<IMyService>>().ToArray();
 
             // make sure each item in the enumerable is an instance of our decorator.

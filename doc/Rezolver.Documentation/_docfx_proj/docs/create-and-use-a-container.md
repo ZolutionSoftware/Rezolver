@@ -22,9 +22,6 @@ that is to be created (and how) when a given type is requested.
 It is through this interface that you setup your container with registrations, which are then later used when 
 resolving objects.
 
-You might also see @Rezolver.ITargetContainerOwner - which is a special type required by some of the more complex
-registration mechanisms (decorators, for example).
-
 > [!TIP]
 > The primary implementation of this interface that you will use in your application is @Rezolver.TargetContainer.
 

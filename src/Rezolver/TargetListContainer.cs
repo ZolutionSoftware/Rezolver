@@ -34,7 +34,7 @@ namespace Rezolver
 		public IEnumerable<ITarget> Targets { get { return _targets.AsReadOnly(); } }
 
 		/// <summary>
-		/// Gets the type against which this list container is registered in its <see cref="ITargetContainerOwner"/>.
+		/// Gets the type against which this list container is registered in its <see cref="ITargetContainer"/>.
 		/// </summary>
 		public Type RegisteredType { get; }
 
@@ -112,15 +112,25 @@ namespace Rezolver
 			throw new NotSupportedException();
 		}
 
-		/// <summary>
-		/// Gets the <see cref="ITarget"/> at the specified index.
-		/// </summary>
-		/// <param name="index">The index.</param>
-		/// <returns>ITarget.</returns>
-		/// <exception cref="IndexOutOfRangeException">If <paramref name="index"/> is less than zero, or
-		/// if <see cref="Count"/> is zero, or if <paramref name="index"/> represents an index greater
-		/// than last item's index</exception>
-		public ITarget this[int index]
+        public ITargetContainer FetchContainer(Type type)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void RegisterContainer(Type type, ITargetContainer container)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Gets the <see cref="ITarget"/> at the specified index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>ITarget.</returns>
+        /// <exception cref="IndexOutOfRangeException">If <paramref name="index"/> is less than zero, or
+        /// if <see cref="Count"/> is zero, or if <paramref name="index"/> represents an index greater
+        /// than last item's index</exception>
+        public ITarget this[int index]
 		{
 			get
 			{

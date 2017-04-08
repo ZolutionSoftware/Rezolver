@@ -1,15 +1,7 @@
 ﻿# Decorators
 
 The [decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern) is a key part of many software projects, 
-and Rezolver offers first-class support for implementing it, but only if you have a reference to the 
-@Rezolver.ITargetContainerOwner interface - which you will, if you use the @Rezolver.TargetContainer class directly 
-to register your targets instead of simply creating a new @Rezolver.Container instance.
-
-> [!NOTE]
-> This limitation will be removed in 1.2 - in which [issue #25](https://github.com/ZolutionSoftware/Rezolver/issues/25)
-> will be addressed - so that the extension methods shown in these examples will be available on the 
-> @Rezolver.ITargetContainer interface instead, with a @System.NotSupportedException being thrown if the target 
-> container on which you call the method is not also a @Rezolver.ITargetContainerOwner.
+and Rezolver offers first-class support for implementing it either non-generically, or generically.
 
 ## Registering decorators in Rezolver
 
@@ -25,38 +17,6 @@ implemented through an @Rezolver.ITarget implementation, it also needs a special
 type in which that target will be registered -  
 @Rezolver.DecoratingTargetContainer, the creation of which is handled automatically by the 
 @Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator* methods.
-
-Now, as mentioned in the introduction, you cannot *currently* register a decorator directly into a
-@Rezolver.IContainer -  because it does not (and will never) support the interface required by the
-extension methods.  As a result, the examples here do not follow the same pattern that you should already
-be familiar with:
-
-```cs
-var container = new Container();
-
-// Add registrations to the container through its implementation of
-// Rezolver.ITargetContainer.
-
-var ifoo = container.Resolve<some_type>();
-```
-
-Instead, until v1.2 we have to create a @Rezolver.TargetContainer separately on which we will perform our
-registrations, and then construct a new @Rezolver.Container, passing those targets as
-a constructor argument:
-
-```cs
-var targets = new TargetContainer();
-targets.RegisterType<Foo, IFoo>(); 
-targets.RegisterDecorator<FooDecorator, IFoo>();
-
-var container = new Container(targets);
-
-var result = container.Resolve<IFoo>();
-```
-
-Although this is somewhat inconvenient, it should be said that if you are looking to use Rezolver's
-[integration with Asp.Net Core](nuget-packages/rezolver.microsoft.aspnetcore.hosting.md), you almost certainly
-*will* be working with a target container when performing registrations anyway.
 
 # Examples
 

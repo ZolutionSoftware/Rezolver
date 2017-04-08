@@ -423,6 +423,16 @@ namespace Rezolver
 		{
 			throw new NotSupportedException();
 		}
-		#endregion
-	}
+
+        ITargetContainer ITargetContainer.FetchContainer(Type type)
+        {
+            return Targets.FetchContainer(type);
+        }
+
+        void ITargetContainer.RegisterContainer(Type type, ITargetContainer container)
+        {
+            Targets.RegisterContainer(type, container);
+        }
+        #endregion
+    }
 }

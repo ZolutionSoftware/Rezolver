@@ -16,7 +16,7 @@ namespace Rezolver.Targets
 	/// 
 	/// NOTE - You shouldn't register or otherwise create instances of this target unless you absolutely 
 	/// know what you're doing.  Rather, decorators should be registered using the extension method
-	/// <see cref="DecoratorTargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainerOwner)"/>
+	/// <see cref="DecoratorTargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainer)"/>
 	/// or its non-generic alternative because the target needs a <see cref="DecoratingTargetContainer"/>
 	/// to work properly (the creation of which is automatically handled by these extension methods).
 	/// </summary>

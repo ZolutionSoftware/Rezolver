@@ -373,19 +373,14 @@ public class MyServiceDecorator2 : IMyService
     }
 }
 </code></pre><p>And in this example we&#39;ll have one of those decorators being used to decorate three registrations:</p>
-<pre><code class="lang-csharp" name="EnumerableExamples.cs">// the extension API for RegisterDecorator currently only appears for ITargetContainerOwner
-// thus, for this test we need to change how we create the container.
-// The extension API will be changed to allow it to be called on ITargetContainer objects 
-// in v1.2 - see #25 (https://github.com/ZolutionSoftware/Rezolver/issues/25)
-var targets = new TargetContainer();
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
 // register the decorator up front.  Note - it doesn&#39;t actually matter when it&#39;s registered
-targets.RegisterDecorator&lt;MyServiceDecorator1, IMyService&gt;();
-targets.RegisterType&lt;MyService, IMyService&gt;();
-targets.RegisterType&lt;MyService2, IMyService&gt;();
-targets.RegisterType&lt;MyService3, IMyService&gt;();
+container.RegisterDecorator&lt;MyServiceDecorator1, IMyService&gt;();
+container.RegisterType&lt;MyService, IMyService&gt;();
+container.RegisterType&lt;MyService2, IMyService&gt;();
+container.RegisterType&lt;MyService3, IMyService&gt;();
 
 // create the container with these targets
-var container = new Container(targets);
 var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
 
 // make sure each item in the enumerable is an instance of our decorator.
@@ -394,12 +389,7 @@ Assert.All(result, r =&gt; Assert.IsType&lt;MyServiceDecorator1&gt;(r));
 Assert.IsType&lt;MyService&gt;(((MyServiceDecorator1)result[0]).Inner);
 Assert.IsType&lt;MyService2&gt;(((MyServiceDecorator1)result[1]).Inner);
 Assert.IsType&lt;MyService3&gt;(((MyServiceDecorator1)result[2]).Inner);
-</code></pre><div class="NOTE"><h5>Note</h5><p>As the first comment states - you cannot currently call any <code>RegisterDecorator</code> extension method via an <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>,
-or, more importantly, a <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a> derivative.</p>
-<p>This is because the extensions require an <code>@Rezolver.ITargetContainerOwner</code>, which is not implemented by these types.
-This will change with the 1.2 release, though (see <a href="https://github.com/ZolutionSoftware/Rezolver/issues/25">Issue #25</a>).</p>
-</div>
-<p>If more decorators were added, of course - then each element would be &#39;re-decorated&#39; accordingly.</p>
+</code></pre><p>If more decorators were added, of course - then each element would be &#39;re-decorated&#39; accordingly.</p>
 <h2 id="explicit-ienumerablet-registrations">Explicit <code>IEnumerable&lt;T&gt;</code> registrations</h2>
 <p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically, it doesn&#39;t prevent you from manually adding registrations
 which override the default behaviour.</p>
@@ -436,7 +426,7 @@ about open generics etc.</li>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/1.1.71702.100/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

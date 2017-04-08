@@ -236,5 +236,15 @@ namespace Rezolver.Compilation
 		{
 			throw new NotSupportedException();
 		}
-	}
+
+        ITargetContainer ITargetContainer.FetchContainer(Type type)
+        {
+            return DependencyTargetContainer.FetchContainer(type);
+        }
+
+        void ITargetContainer.RegisterContainer(Type type, ITargetContainer container)
+        {
+            DependencyTargetContainer.RegisterContainer(type, container);
+        }
+    }
 }

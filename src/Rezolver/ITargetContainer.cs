@@ -75,15 +75,32 @@ namespace Rezolver
 
 		/// <summary>
 		/// If supported by the implementation, this gets the container built from combining this container with 
-		/// an <paramref name="existing"/> container as part of a registration inside another <see cref="ITargetContainerOwner"/>.
+		/// an <paramref name="existing"/> container as part of a registration inside another <see cref="ITargetContainer"/>.
 		/// </summary>
 		/// <param name="existing">The existing <see cref="ITargetContainer"/> instance that this instance is to be combined with</param>
 		/// <param name="type">The type that the combined container owner will be registered under.</param>
 		/// <returns></returns>
-		/// <remarks>Used most frequently in implementations of <see cref="ITargetContainerOwner.RegisterContainer(Type, ITargetContainer)"/> 
+		/// <remarks>Used most frequently in implementations of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> 
 		/// when a container owner is already registered against the type, and a new container owner is then registered against the 
 		/// same type.  This behaviour is used to implement open generics and decorators, and can be used to implement more besides.</remarks>
 		/// <exception cref="System.NotSupportedException">If this container doesn't support being combined with another.</exception>
 		ITargetContainer CombineWith(ITargetContainer existing, Type type);
-	}
+
+        /// <summary>
+		/// Retrieves an existing container registered against the given <paramref name="type"/>, or null if not found.
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		ITargetContainer FetchContainer(Type type);
+        /// <summary>
+        /// Registers a container against a given <paramref name="type"/>.
+        /// 
+        /// If a container already exists against this type, then the existing container's 
+        /// <see cref="ITargetContainer.CombineWith(ITargetContainer, Type)"/> method is called with the <paramref name="container"/> as the 
+        /// argument, and the resulting container will replace the existing one.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="container"></param>
+        void RegisterContainer(Type type, ITargetContainer container);
+    }
 }
