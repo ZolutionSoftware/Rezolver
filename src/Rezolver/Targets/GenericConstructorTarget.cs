@@ -416,25 +416,5 @@ namespace Rezolver.Targets
 			}
 			return null;
 		}
-
-        /// <summary>
-        /// This method has been replaced by the Target.ForType method and will be removed in 1.2.
-        /// 
-        /// Equivalent of <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/> but for open generic types.
-        /// 
-        /// Note - there is no generic version because that could only be invoked by reflection.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <param name="memberBindingBehaviour">Optional behaviour controlling which properties and fields, if any, will receive injected values.</param>
-        /// <exception cref="ArgumentException">
-        /// This is raised from the <see cref="GenericConstructorTarget.GenericConstructorTarget(Type, IMemberBindingBehaviour)"/> constructor
-        /// when the passed type is either not an open generic type
-        /// or is an abstract class or interface.
-        /// </exception>
-        [Obsolete("This method has been replaced by the Target.ForType method and will be removed in 1.2.")]
-		public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)
-		{ 
-			return new GenericConstructorTarget(type);
-		}
 	}
 }

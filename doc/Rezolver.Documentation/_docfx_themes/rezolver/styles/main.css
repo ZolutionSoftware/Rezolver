@@ -8,9 +8,39 @@ a #logo {
 .navbar-inverse {
   border-bottom: none;
 }
+button,
+a {
+  color: #e27633;
+}
+button:hover,
+a:hover,
+button:focus,
+a:focus {
+  color: #efb28c;
+}
+.affix ul > li > a {
+  color: #afafaf;
+}
+.affix ul > li > a:hover,
+.affix ul > li > a:focus {
+  color: #bcccf7;
+}
+.affix ul > li.active > a {
+  color: #bcccf7;
+}
+.affix ul > li.active > a:before {
+  color: #bcccf7;
+}
+.affix ul > li.active > a:hover,
+.affix ul > li.active > a:focus {
+  color: #8ea9f2;
+}
+.sideaffix > div.contribution > ul > li > a.contribution-link:hover {
+  color: #040c21;
+}
 .navbar-default.subnav {
-  background: white;
-  border-bottom-color: #d5d5d5;
+  background: #061438;
+  border-bottom: none;
 }
 .github-link {
   font-size: 30px;
@@ -23,8 +53,8 @@ a #logo {
 }
 .sidefilter,
 .sidetoc {
-  border-left-color: #d5d5d5;
-  border-right-color: #d5d5d5;
+  border-left: none;
+  border-right: none;
 }
 .toc-filter {
   /* search box in the toc */
@@ -35,7 +65,7 @@ body .toc,
 .sidefilter,
 .sidetoc,
 .fixed-header {
-  background: white;
+  background: #040c21;
 }
 h1,
 h2,
@@ -58,6 +88,20 @@ blockquote {
 blockquote h5 {
   margin-top: 0;
   margin-bottom: 10px;
+}
+.toc .nav > li > a {
+  color: #afafaf;
+}
+.toc .nav > li > a:hover,
+.toc .nav > li > a:focus {
+  color: #bcccf7;
+}
+.toc .nav > li.active > a {
+  color: #bcccf7;
+}
+.toc .nav > li.active > a:hover,
+.toc .nav > li.active > a:focus {
+  color: #8ea9f2;
 }
 .toc .level1 > li {
   font-size: 14px;
@@ -85,7 +129,7 @@ pre {
     /*border: 1px solid;
 			border-color: darken(@pre-border-color, 30%);
 			border-top: none;*/
-    background: #f15c00;
+    background: #313131;
     color: white;
   }
 }
@@ -104,24 +148,15 @@ pre {
     /*border: 1px solid;
 			border-color: darken(@pre-border-color, 30%);
 			border-top: none;*/
-    background: #f15c00;
+    background: #313131;
     color: white;
   }
 }
 .hljs {
   background: none;
 }
-footer .packageDetails {
-  margin-bottom: 5px;
-  padding: 10px;
-  background: rgba(223, 240, 216, 0.5);
-  color: #3c763d;
-}
-footer .packageDetails.notyetreleased {
-  background: rgba(242, 222, 222, 0.5);
-  color: #a94442;
-}
 .footer {
+  border-top: none;
   background: #0b2466;
   color: white;
 }

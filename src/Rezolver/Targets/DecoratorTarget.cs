@@ -43,7 +43,7 @@ namespace Rezolver.Targets
 		/// Gets the target which will create an instance of the <see cref="DecoratorType"/>
 		/// </summary>
 		/// <remarks>The constructor currently auto-initialises this to a just-in-time-bound <see cref="ConstructorTarget"/>
-		/// targetting the <see cref="DecoratorType"/> by using the <see cref="ConstructorTarget.Auto(Type, IMemberBindingBehaviour)"/>
+		/// targetting the <see cref="DecoratorType"/> by using the <see cref="Target.ForType(Type, IMemberBindingBehaviour)"/>
 		/// method.</remarks>
 		public ITarget InnerTarget { get; }
 		/// <summary>

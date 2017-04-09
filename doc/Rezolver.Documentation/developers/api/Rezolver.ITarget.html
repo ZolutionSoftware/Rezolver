@@ -6,11 +6,11 @@
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   	<title>Interface ITarget
-   | Rezolver IOC Framework </title>
+   | Rezolver IOC Framework (prerelease) </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface ITarget
-   | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.13.1.0">
+   | Rezolver IOC Framework (prerelease) ">
+  	<meta name="generator" content="docfx 2.15.5.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -38,16 +38,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
       <header>
@@ -346,20 +337,17 @@ that is compatible with, the passed <span class="paramref">type</span>.</p>
               </table>
               <h5 id="Rezolver_ITarget_SupportsType_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>It is strongly suggested that you use this method to check whether the target can construct
-an instance of a given type rather than performing any type checking yourself on the </p>
+an instance of a given type rather than performing any type checking yourself on the 
 <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>, because an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> might be able to support a much wider
-range of types other than just those which are directly compatible with its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.
-
-For example, the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> is statically bound to an open generic, so therefore
+range of types other than just those which are directly compatible with its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+<p>For example, the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> is statically bound to an open generic, so therefore
 traditional type checks on the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> do not work.  That class&#39; implementation of this
 method, however, contains the complex logic necessary to determine if the open generic can be closed into a
-generic type which is compatible with the given <span class="paramref">type</span>.
-
-Implementations of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> should always consult this function in their
+generic type which is compatible with the given <span class="paramref">type</span>.</p>
+<p>Implementations of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> should always consult this function in their
 implementation of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a>
 to determine if the target is compatible with the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_TargetType">TargetType</a> of the
-<a class="xref" href="Rezolver.Compilation.CompileContext.html">CompileContext</a>
-
+<a class="xref" href="Rezolver.Compilation.CompileContext.html">CompileContext</a></p>
 <p>Please note that any <span class="paramref">type</span> that&#39;s a generic type definition will always yield a false result,
 because it&#39;s impossible to build an instance of an open generic type.</p>
 </div>
@@ -378,9 +366,6 @@ because it&#39;s impossible to build an instance of an open generic type.</p>
               </div>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>
               </div>
                         </article>
           </div>

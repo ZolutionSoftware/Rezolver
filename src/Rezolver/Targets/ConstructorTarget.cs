@@ -21,7 +21,7 @@ namespace Rezolver.Targets
 	/// </summary>
 	/// <remarks>Although you can create this target directly through the 
 	/// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[], IDictionary{string, ITarget})"/> constructor,
-	/// you're more likely to create it through factory methods such as <see cref="Auto{T}(IMemberBindingBehaviour)"/> or, more likely still,
+	/// you're more likely to create it through factory methods such as <see cref="Target.ForType{T}(IMemberBindingBehaviour)"/> or, more likely still,
 	/// extension methods such as <see cref="RegisterTypeTargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IMemberBindingBehaviour)"/> during
 	/// your application's container setup phase.
 	/// 
@@ -41,7 +41,7 @@ namespace Rezolver.Targets
 		/// 
 		/// This property will only be set ultimately if it was passed to the 
 		/// <see cref="ConstructorTarget.ConstructorTarget(ConstructorInfo, ParameterBinding[], IMemberBindingBehaviour)"/>
-		/// constructor, possibly by a factory method like <see cref="ConstructorTarget.WithArgs(ConstructorInfo, IDictionary{string, ITarget})"/>
+		/// constructor, possibly by a factory method like <see cref="Target.ForConstructor(ConstructorInfo, IDictionary{string, ITarget}, IMemberBindingBehaviour)"/>
 		/// is captured within the expression.</remarks>
 		public ConstructorInfo Ctor
 		{

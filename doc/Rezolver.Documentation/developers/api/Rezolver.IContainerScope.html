@@ -6,11 +6,11 @@
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   	<title>Interface IContainerScope
-   | Rezolver IOC Framework </title>
+   | Rezolver IOC Framework (prerelease) </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface IContainerScope
-   | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.13.1.0">
+   | Rezolver IOC Framework (prerelease) ">
+  	<meta name="generator" content="docfx 2.15.5.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -38,16 +38,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
       <header>
@@ -313,11 +304,12 @@ resolve objects.</p>
               </table>
               <h5 id="Rezolver_IContainerScope_Resolve_Rezolver_ResolveContext_System_Func_Rezolver_ResolveContext_System_Object__Rezolver_ScopeBehaviour__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>This function is the primary workhorse of all scopes.  Most importantly,
-the object produced from the factory DOES NOT have to come from this scope&#39;s</p>
+the object produced from the factory DOES NOT have to come from this scope&#39;s
 <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Container">Container</a> - the implementing type simply has to ensure that 
 it tracks whatever object is ultimately returned; potentially returning
 a previously tracked object if <span class="paramref">behaviour</span> is 
-<a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a></div>
+<a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a></p>
+</div>
               <h3 id="extensionmethods">Extension Methods</h3>
               <div>
                   <a class="xref" href="Rezolver.ContainerScopeExtensions.html#Rezolver_ContainerScopeExtensions_GetRootScope_Rezolver_IContainerScope_">ContainerScopeExtensions.GetRootScope(IContainerScope)</a>
@@ -327,9 +319,6 @@ a previously tracked object if <span class="paramref">behaviour</span> is
               </div>
               <div>
                   <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_Resolve_Rezolver_IContainerScope_System_Type_">ContainerScopeResolveExtensions.Resolve(IContainerScope, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>
               </div>
               <h3 id="seealso">See Also</h3>
               <div class="seealso">

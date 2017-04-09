@@ -6,11 +6,11 @@
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   	<title>Class GenericConstructorTarget
-   | Rezolver IOC Framework </title>
+   | Rezolver IOC Framework (prerelease) </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class GenericConstructorTarget
-   | Rezolver IOC Framework ">
-  	<meta name="generator" content="docfx 2.13.1.0">
+   | Rezolver IOC Framework (prerelease) ">
+  	<meta name="generator" content="docfx 2.15.5.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -38,16 +38,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
       <header>
@@ -312,82 +303,6 @@ will be constructed.</p>
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.Auto(System.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L434">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_GenericConstructorTarget_Auto_" data-uid="Rezolver.Targets.GenericConstructorTarget.Auto*"></a>
-              <h4 id="Rezolver_Targets_GenericConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Targets.GenericConstructorTarget.Auto(System.Type,Rezolver.IMemberBindingBehaviour)">Auto(Type, IMemberBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>This method has been replaced by the Target.ForType method and will be removed in 1.2.</p>
-<p>Equivalent of <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_Auto_System_Type_Rezolver_IMemberBindingBehaviour_">Auto(Type, IMemberBindingBehaviour)</a> but for open generic types.</p>
-<p>Note - there is no generic version because that could only be invoked by reflection.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method has been replaced by the Target.ForType method and will be removed in 1.2.&quot;)]
-public static ITarget Auto(Type type, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">type</span></td>
-                    <td><p>The type.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
-                    <td><span class="parametername">memberBindingBehaviour</span></td>
-                    <td><p>Optional behaviour controlling which properties and fields, if any, will receive injected values.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
-                    <td><p>This is raised from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_">GenericConstructorTarget(Type, IMemberBindingBehaviour)</a> constructor
-when the passed type is either not an open generic type
-or is an abstract class or interface.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.Bind(Rezolver.Compilation.ICompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
@@ -582,9 +497,6 @@ flag.  As a result, this method will return true if an open generic base or inte
               </div>
               <div>
                   <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.TargetCreationExtensions.html#Rezolver_TargetCreationExtensions_AsObjectTarget__1___0_System_Type_Rezolver_ScopeBehaviour_">TargetCreationExtensions.AsObjectTarget&lt;T&gt;(T, Type, ScopeBehaviour)</a>
               </div>
               <h3 id="seealso">See Also</h3>
               <div class="seealso">

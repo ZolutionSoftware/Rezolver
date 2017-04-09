@@ -14,6 +14,24 @@
 @state-info-bg: fade(@gray-lighter, 50%);
 @link-color: darken(@main-color, 10%);
 
+@body-bg: darken(@alt-color-darker, 15%);
+@text-color: rgb(200,200,200);
+
+@link-color: lighten(desaturate(@main-color, 25%), 7%);
+@link-hover-color: lighten(@link-color, 20%);
+@link-hover-decoration: underline;
+
+@headings-color: white;
+
+@component-active-color: white;
+@component-active-bg: transparent;
+
+@table-bg: lighten(@body-bg, 3%);
+@table-bg-accent: lighten(@table-bg, 3%);
+@table-bg-hover: lighten(@table-bg, 12%);
+@table-bg-active: @table-bg-hover;
+@table-border-color: lighten(@body-bg, 6%);
+
 @btn-default-color: white;
 @btn-default-bg: @alt-color; 
 @btn-default-border: @alt-color-darker;
@@ -68,16 +86,26 @@
 @navbar-inverse-toggle-icon-bar-bg:         #fff;
 @navbar-inverse-toggle-border-color:        #333;
 
-//** Background color used for `.table-striped`.
-@table-bg-accent:               lighten(@main-color-lighter, 5%);
-//** Background color used for `.table-hover`.
-@table-bg-hover:                @main-color-lighter;
-@table-bg-active:               @table-bg-hover;
-
-//** Border color for table and cell borders.
-@table-border-color:            darken(@main-color-lighter, 8%);
-
-@pre-color: #000;
-@pre-bg: white;
-@pre-border-color: @main-color;
+@pre-color: #EEE;
+@pre-bg: #121212;
+@pre-border-color: lighten(@pre-bg, 12%);
 @pre-padding:9.5px;
+
+@code-color: lighten(@alt-color, 20%);
+@code-bg: @pre-bg;
+
+@alert-success-bg: fade(@brand-success, 25%);
+@alert-success-border: @brand-success;
+@alert-success-text: white;
+
+@alert-danger-bg: fade(@brand-danger, 25%);
+@alert-danger-border: @brand-danger;
+@alert-danger-text: white;
+
+@alert-info-bg: fade(@brand-info, 25%);
+@alert-info-border: @brand-info;
+@alert-info-text: white;
+
+@alert-warning-bg: fade(@brand-warning, 25%);
+@alert-warning-border: @brand-warning;
+@alert-warning-text: white;

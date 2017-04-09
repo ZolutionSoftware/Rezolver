@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -128,10 +129,57 @@ namespace Rezolver
         /// <param name="type">Required. The type to be resolved from the container.</param>
         /// <param name="fallbackTarget">Optional. If provided and the container is unable to resolve the 
         /// <paramref name="type"/>, then this target is used instead.</param>
+        /// <returns>An <see cref="ITarget"/>.</returns>
         public static ITarget Resolved(Type type, ITarget fallbackTarget = null)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
             return new ResolvedTarget(type, fallbackTarget);
+        }
+
+        /// <summary>
+        /// Generic version of <see cref="Resolved(Type, ITarget)"/> - creates a <see cref="ResolvedTarget"/>
+        /// for the given type, providing a way to callback into the container during the execution of another
+        /// target.
+        /// </summary>
+        /// <typeparam name="T">The type to be resolved from the container.</typeparam>
+        /// <param name="fallbackTarget">Optional. If provided and the container is unable to resolve the
+        /// <typeparamref name="T"/>, then this target is used instead</param>
+        /// <returns>An <see cref="ITarget"/> which represents the act of resolving a particular type from the container.</returns>
+        public static ITarget Resolved<T>(ITarget fallbackTarget = null)
+        {
+            return new ResolvedTarget(typeof(T), fallbackTarget);
+        }
+
+        /// <summary>
+        /// A simple wrapper for the <see cref="DelegateTarget.DelegateTarget(Delegate, Type)"/> constructor.
+        /// </summary>
+        /// <param name="factory">Required, the factory delegate that is to be used to produce an object.</param>
+        /// <param name="declaredType">Optional.  If not null, then it will be used as the target's <see cref="ITarget.DeclaredType"/>
+        /// which, in turn, is used as the target's default registration type if not overriden when added to 
+        /// an <see cref="ITargetContainer"/>.  If null, then the return type of the factory will be used.</param>
+        /// <returns>An <see cref="ITarget"/> which represents the passed factory.</returns>
+        public static ITarget ForDelegate(Delegate factory, Type declaredType = null)
+        {
+            if (factory == null) throw new ArgumentNullException(nameof(factory));
+            return new DelegateTarget(factory, declaredType);
+        }
+
+        /// <summary>
+        /// A simple wrapper for the <see cref="ExpressionTarget.ExpressionTarget(Expression, Type)"/> constructor.
+        /// </summary>
+        /// <param name="expression">Required, the expression representing the code that is to be executed
+        /// in order to produce an object.</param>
+        /// <param name="declaredType">Optional.  If not null, then it will be used as the target's <see cref="ITarget.DeclaredType"/>
+        /// which, in turn, is used as the target's default registration type if not overriden when added to an
+        /// <see cref="ITargetContainer"/>.  If null, then the <see cref="Expression.Type"/> will be used, unless 
+        /// <paramref name="expression"/> is a <see cref="LambdaExpression"/>, in which case the <see cref="Expression.Type"/>
+        /// of its <see cref="LambdaExpression.Body"/> will be used.</param>
+        /// <returns>An <see cref="ITarget"/> which represents the given expression; which must be compiled or otherwise
+        /// translated into a runtime operation which creates/obtains an object.</returns>
+        public static ITarget ForExpression(Expression expression, Type declaredType = null)
+        {
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
+            return new ExpressionTarget(expression, declaredType);
         }
 
         #region Types/Constructors

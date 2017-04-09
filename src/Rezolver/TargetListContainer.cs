@@ -112,11 +112,21 @@ namespace Rezolver
 			throw new NotSupportedException();
 		}
 
+        /// <summary>
+        /// Not supported by this target container.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public ITargetContainer FetchContainer(Type type)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Not supported by this target container
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="container"></param>
         public void RegisterContainer(Type type, ITargetContainer container)
         {
             throw new NotSupportedException();
