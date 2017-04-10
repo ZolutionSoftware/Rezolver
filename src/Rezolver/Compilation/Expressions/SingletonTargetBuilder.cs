@@ -26,13 +26,15 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		private class SingletonTargetLazyInitialiser : ICompiledTarget
 		{
-			private Func<ResolveContext, Lazy<object>> _lazyFactory;
+			private Func<IResolveContext, Lazy<object>> _lazyFactory;
 			private Lazy<object> _lazy;
+            public ITarget SourceTarget { get; }
 
 			//internal Lazy<object> Lazy {  get { return _lazy; } }
 
-			internal SingletonTargetLazyInitialiser(Func<ResolveContext, Lazy<object>> lazyFactory)
+			internal SingletonTargetLazyInitialiser(ITarget sourceTarget, Func<IResolveContext, Lazy<object>> lazyFactory)
 			{
+                SourceTarget = sourceTarget;
 				_lazyFactory = lazyFactory;
 			}
 
@@ -42,7 +44,7 @@ namespace Rezolver.Compilation.Expressions
 			/// </summary>
 			/// <param name="context"></param>
 			/// <returns></returns>
-			object ICompiledTarget.GetObject(ResolveContext context)
+			object ICompiledTarget.GetObject(IResolveContext context)
 			{
 				if (_lazy == null)
 				{
@@ -76,7 +78,7 @@ namespace Rezolver.Compilation.Expressions
 
 			var initialiser = target.GetOrAddInitialiser(context.TargetType ?? target.DeclaredType, t => {
 				//get the underlying expression for the target that is to be turned into a singleton - but disable any
-				//scope tracking because the singleton is fixed to 'Implicit' and it's important that it is in
+				//scope tracking because the singleton is fixed to 'Explicit' and it's important that it is in
 				//control of that, because all singletons must be stored in the very root scope.
 				var innerExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(t, scopeBehaviourOverride: ScopeBehaviour.None));
 				
@@ -91,10 +93,10 @@ namespace Rezolver.Compilation.Expressions
 					//note that the RezolveContextExpression has to be quoted on the outer lambda, but will be used
 					//on the inner lambda
 					Expression.Lambda(innerExpression.Body)), context.ResolveContextExpression);
-				var lazyLambda = (Func<ResolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
+				var lazyLambda = (Func<IResolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
 				//now we create and capture an instance of the SingletonTargetLazyInitialiser class, passing our
 				//dynamically constructed delegate along with this target
-				return new SingletonTargetLazyInitialiser(lazyLambda);
+				return new SingletonTargetLazyInitialiser(target, lazyLambda);
 			});
 
 			return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledTarget)),

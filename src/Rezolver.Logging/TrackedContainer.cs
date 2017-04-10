@@ -28,13 +28,13 @@ namespace Rezolver.Logging
 		protected internal ICallTracker Tracker { get; private set; }
 
 
-		public TrackedContainer(ICallTracker logger, ITargetContainer builder = null, ICompilerConfigurationProvider compilerConfig = null) :
+		public TrackedContainer(ICallTracker logger, ITargetContainer builder = null, IContainerConfiguration compilerConfig = null) :
 		  base(targets: builder, compilerConfig: compilerConfig)
 		{
 			Tracker = logger;
 		}
 
-		public override bool CanResolve(ResolveContext context)
+		public override bool CanResolve(IResolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.CanResolve(context), context);
 		}
@@ -44,7 +44,7 @@ namespace Rezolver.Logging
 			return Tracker.TrackCall(this, () => new TrackedContainerScope(Tracker, base.CreateScope()));
 		}
 
-		public override ICompiledTarget FetchCompiled(ResolveContext context)
+		public override ICompiledTarget FetchCompiled(IResolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
 		}
@@ -54,12 +54,12 @@ namespace Rezolver.Logging
 			return Tracker.TrackCall(this, () => base.GetService(serviceType), new { serviceType = serviceType });
 		}
 
-		public override object Resolve(ResolveContext context)
+		public override object Resolve(IResolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.Resolve(context), new { context = context });
 		}
 
-		public override bool TryResolve(ResolveContext context, out object result)
+		public override bool TryResolve(IResolveContext context, out object result)
 		{
 			object tempResult = null;
 			var @return = Tracker.TrackCall(this, () => base.TryResolve(context, out tempResult), new { context = context });
@@ -67,12 +67,12 @@ namespace Rezolver.Logging
 			return @return;
 		}
 
-		protected override ICompiledTarget GetCompiledRezolveTarget(ResolveContext context)
+		protected override ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.GetCompiledRezolveTarget(context), new { context = context });
 		}
 
-		protected override ICompiledTarget GetFallbackCompiledRezolveTarget(ResolveContext context)
+		protected override ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
 		{
 			return Tracker.TrackCall(this, () => base.GetFallbackCompiledRezolveTarget(context), new { context = context });
 		}

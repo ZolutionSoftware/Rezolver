@@ -43,7 +43,9 @@ namespace Rezolver.Tests
 			}
 		}
 
-		private bool? _supportsType;
+        public ScopePreference ScopePreference => ScopePreference.Current;
+
+        private bool? _supportsType;
 		public bool SupportsType(Type type)
 		{
 			if(_supportsType == null)
@@ -51,10 +53,7 @@ namespace Rezolver.Tests
 			return _supportsType.Value;
 		}
 
-		public IContainerScope SelectScope(ResolveContext context)
-		{
-			return context.Scope;
-		}
+		
 
 		public TestTarget(Type declaredType = null, bool? useFallBack = null, bool? supportsType = null, ScopeBehaviour? scopeBehaviour = null)
 		{

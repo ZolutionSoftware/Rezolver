@@ -31,6 +31,22 @@ namespace Rezolver
 		None
 	}
 
+    /// <summary>
+    /// Specifies the scope that the object produced by a target should be tracked within.
+    /// </summary>
+    public enum ScopePreference
+    {
+        /// <summary>
+        /// The object will be tracked within the scope already set on the <see cref="IResolveContext"/>
+        /// </summary>
+        Current = 0,
+        /// <summary>
+        /// The object (and all its dependants) will be tracked within the root scope of the current scope
+        /// set on the <see cref="IResolveContext"/>
+        /// </summary>
+        Root
+    }
+
 	/// <summary>
 	/// This is an <see cref="IContainer" />-like object (resolving functionality is provided through the extension methods
 	/// in the <see cref="ContainerScopeResolveExtensions" /> class) which provides lifetime scoping for disposable objects,
@@ -58,31 +74,24 @@ namespace Rezolver
 		/// will no longer need to be disposed of when the parent is disposed.
 		/// </summary>
 		/// <param name="child"></param>
-		/// <remarks>This is an infrastructure method and not something you would usually need to call.
-		/// It's exposed for developers who are extending the container scoping functionality only.</remarks>
+		/// <remarks>This is an infrastructure method and not something you would usually need to call
+        /// unless you are implementing lower-level functionality.</remarks>
 		void ChildScopeDisposed(IContainerScope child);
 		/// <summary>
-        /// Not intended for direct use.  Use the Resolve extension methods on this interface to
-        /// perform 'normal' resolve operations.
-        /// 
 		/// Execute the given object factory within this scope.  Depending on the
 		/// scoping behaviour passed, the object will either be resolved directly from the
 		/// scope (i.e. existing objects contained within it) or obtained by executing
 		/// the factory and optionally tracking the object if it's <see cref="IDisposable"/>.
 		/// </summary>
 		/// <param name="context">The resolve context - please note that the container
-		/// that's present on this is the actual container that should be used to 
-		/// resolve objects.</param>
+		/// that's present on this is the actual container that should be used to resolve objects.</param>
 		/// <param name="factory">The factory to be executed</param>
 		/// <param name="behaviour">The scope behaviour that the factory should be executed with.</param>
-		/// <returns></returns>
-		/// <remarks>This function is the primary workhorse of all scopes.  Most importantly,
-		/// the object produced from the factory DOES NOT have to come from this scope's
-		/// <see cref="Container"/> - the implementing type simply has to ensure that 
-		/// it tracks whatever object is ultimately returned; potentially returning
-		/// a previously tracked object if <paramref name="behaviour"/> is 
-		/// <see cref="ScopeBehaviour.Explicit"/></remarks>
-		object Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeBehaviour behaviour);
+		/// <remarks>This function is the primary workhorse of all scopes and is primarily an infrastructure
+        /// method supporting targets and compiled targets - i.e. not a method that an application should
+        /// be calling.
+        /// </remarks>
+		object Resolve(IResolveContext context, Func<IResolveContext, object> factory, ScopeBehaviour behaviour);
 		//REVIEW: The enum solution for this method works fine for now, but offers no scope for extending it outside of the Rezolver codebase.
 		//The more extensible solution would be to have an interface which represents the behaviour so that the logic for that behaviour can be abstracted away
 		//The difficulty with this being that it means the underlying storage containers for scoped objects used by the scope needs to exposed to implementations

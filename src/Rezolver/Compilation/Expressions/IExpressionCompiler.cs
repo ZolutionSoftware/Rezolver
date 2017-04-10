@@ -15,8 +15,8 @@ namespace Rezolver.Compilation.Expressions
 	/// provides the one implementation, too: <see cref="ExpressionCompiler"/>.
 	/// </summary>
 	/// <remarks>
-	/// All expressions are built to be called from the <see cref="ICompiledTarget.GetObject(ResolveContext)"/> function which,
-	/// in turn, is typically called in response to a container's <see cref="IContainer.Resolve(ResolveContext)"/> function being
+	/// All expressions are built to be called from the <see cref="ICompiledTarget.GetObject(IResolveContext)"/> function which,
+	/// in turn, is typically called in response to a container's <see cref="IContainer.Resolve(IResolveContext)"/> function being
 	/// called.
 	/// 
 	/// Note that the <see cref="Build(ITarget, IExpressionCompileContext)"/> method declared here is effectively an 
@@ -27,7 +27,7 @@ namespace Rezolver.Compilation.Expressions
 	{
 		/// <summary>
 		/// Gets an unoptimised expression containing the logic required to create or fetch an instance of the <paramref name="target"/>'s
-		/// <see cref="ITarget.DeclaredType"/> when invoked for a particular <see cref="ResolveContext"/>.
+		/// <see cref="ITarget.DeclaredType"/> when invoked for a particular <see cref="IResolveContext"/>.
 		/// 
 		/// Use this method if you want the raw expression for a target (possibly when integrating it into your own expressions during custom
 		/// compilation).
@@ -60,6 +60,6 @@ namespace Rezolver.Compilation.Expressions
 		/// ResolveContext expression etc) that have been used in the generation of the expression.</param>
 		/// <returns>A lambda expression which, when compiled and executed, will produce an object 
 		/// consistent with the <see cref="ITarget"/> from which the code was produced.</returns>
-		Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression targetExpression, IExpressionCompileContext context);
+		Expression<Func<IResolveContext, object>> BuildResolveLambda(Expression targetExpression, IExpressionCompileContext context);
 	}
 }

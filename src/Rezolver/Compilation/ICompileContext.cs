@@ -27,13 +27,6 @@ namespace Rezolver.Compilation
 		ICompileContext ParentContext { get; }
 
 		/// <summary>
-		/// The container that is considered the current compilation 'scope' - i.e. the container for which the compilation
-		/// is being performed and, usually, the one on which the <see cref="IContainer.Resolve(ResolveContext)"/> method was 
-		/// originally called which triggered the compilation call.
-		/// </summary>
-		IContainer Container { get; }
-
-		/// <summary>
 		/// If not <c>null</c> then this overrides the <see cref="ITarget.ScopeBehaviour"/> of the <see cref="ITarget"/>
 		/// that's currently being compiled.
 		/// </summary>
@@ -50,6 +43,13 @@ namespace Rezolver.Compilation
 		/// </summary>
 		/// <value>The compile stack.</value>
 		IEnumerable<CompileStackEntry> CompileStack { get; }
+
+        /// <summary>
+        /// The context for which this compilation context was created.
+        /// 
+        /// Provides access to the current container, scope and more besides
+        /// </summary>
+        IResolveContext ResolveContext { get; }
 
 		/// <summary>
 		/// Creates a new child context from this one, except the <see cref="TargetType"/> and

@@ -63,7 +63,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -117,7 +117,7 @@ delegate will be executed and its result returned as the instance.</p>
 tasks in order to resolve an object than the functionality offered by the standard targets in Rezolver.</p>
 <p>Whether you <em>should</em> perform excessively complex logic in these factories is a topic of debate.  Our view is that
 you should be able to if you want, or need, to, so Rezolver&#39;s support for delegates is extensive, including the ability to 
-inject arguments to your delegate from the container, or resolve additional services inside your delegate through <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a>.</p>
+inject arguments to your delegate from the container, or resolve additional services inside your delegate through <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a>.</p>
 <h1 id="basic-examples">Basic Examples</h1>
 <p>Here are some straightforward examples</p>
 <h2 id="registertype-analogue"><code>RegisterType</code> analogue</h2>
@@ -175,16 +175,16 @@ var result = container.Resolve&lt;RequiresIMyServiceAndDateTime&gt;();
 Assert.NotNull(result.Service);
 Assert.Equal(expectedStartDate, result.StartDate);
 </code></pre><p><strong><em>Any</em> delegate type, with any number of parameters, is supported, so long as it has a return type.</strong></p>
-<h2 id="injecting-rezolverresolvecontext">Injecting <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a></h2>
-<p>All <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operations have a <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> at their heart.  Through the context, you can get the 
-<a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a> that originally received the call, the <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a> and the 
-<a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a>. It can also be used to create a new child scope (through its implementation of the 
+<h2 id="injecting-rezolveriresolvecontext">Injecting <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a></h2>
+<p>All <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operations have an <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> at their heart.  Through the context, you can get the 
+<a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> that originally received the call, the <a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a> and the 
+<a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a>. It can also be used to create a new child scope (through its implementation of the 
 <a class="xref" href="../api/Rezolver.IScopeFactory.html">IScopeFactory</a> interface).</p>
 <p>If you need the context to be passed to your delegate - just make sure to declare a parameter of that type, most commonly
 you&#39;ll probably use the single parameter specialisation of the <a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> or
 <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForDelegate_">ForDelegate</a> methods, but ultimately the parameter can appear anywhere in the delegate&#39;s signature and it will
 be injected.</p>
-<p>This example shows the <code>Func&lt;RezolveContext, TResult&gt;</code> overload in action:</p>
+<p>This example shows the <code>Func&lt;IRezolveContext, TResult&gt;</code> overload in action:</p>
 <pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
 // RegisterDelegate has a specialisation for a delegate which takes ResolveContext
 container.RegisterDelegate(rc =&gt; new RequiresResolveContext(rc));
@@ -195,8 +195,8 @@ Assert.NotNull(result.Context);
 // and the container on the context will be the one on which we called Resolve&lt;&gt;
 Assert.Same(container, result.Context.Container);
 </code></pre><h2 id="resolving-inside-a-delegate">Resolving inside a delegate</h2>
-<p>Building on the above, here&#39;s an example which injects the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> in order to perform a late-bound 
-<a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> operation to inject a different dependency based on some ambient information about a user (which
+<p>Building on the above, here&#39;s an example which injects the <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> in order to perform a late-bound 
+<a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Resolve_">Resolve</a> operation to inject a different dependency based on some ambient information about a user (which
 is also injected into the delegate).</p>
 <p>This is quite a long example which, admittedly, can be solved in a few different ways.  We&#39;re not saying this is the only way :)</p>
 <pre><code class="lang-csharp" name="AppPrincipal.cs">public class AppIdentity : IIdentity
@@ -293,7 +293,7 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
     container.RegisterDelegate(() =&gt; CurrentPrincipal);
     // now register the delegate handler for the IUserActionsService, which does the
     // role sniffing over the principal
-    container.RegisterDelegate((IPrincipal p, ResolveContext rc) =&gt; {
+    container.RegisterDelegate((IPrincipal p, IResolveContext rc) =&gt; {
         IUserActionsService toReturn = null;
         if (p != null)
         {

@@ -80,7 +80,7 @@ registration you can perform.
 ## Resolving services
 
 Resolving objects from your container is done through the @Rezolver.IContainer.Resolve* method which, you'll
-notice, accepts a @Rezolver.ResolveContext as its single parameter, and returns an `Object`.  Again, if 
+notice, accepts an @Rezolver.IResolveContext as its single parameter, and returns an `Object`.  Again, if 
 you're familiar with IOC containers then you're probably wondering where your strongly-typed `Resolve<TService>()` 
 method is!
 
@@ -103,11 +103,11 @@ IMyService service = container.Resolve<IMyService>();
 ```
 
 > [!NOTE]
-> The @Rezolver.ResolveContext class is used to capture the context of a call to the `Resolve` method, tracking the
+> The @Rezolver.IResolveContext interface captures the context of a call to the `Resolve` method, tracking the
 > container on which the call is originally made, whether there is an @Rezolver.IContainerScope active for the call,
 > and other things besides.  You will rarely use it directly in application code unless you are extending Rezolver.
 >
-> These `Resolve` extension methods create the `ResolveContext` for a given operation on your behalf, so you never
+> These `Resolve` extension methods create the `IResolveContext` for a given operation on your behalf, so you never
 > have to worry about it.
 
 Assuming the container can locate the service registration for the type you request, it will fetch/produce an

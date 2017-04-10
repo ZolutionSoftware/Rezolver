@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -273,20 +273,20 @@ tracked if the target is executed within an <a class="xref" href="Rezolver.ICont
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ExpressionTargetContainerExtensions.RegisterExpression%60%601(Rezolver.ITargetContainer%2CExpression%7BSystem.Func%7BRezolver.ResolveContext%2C%60%600%7D%7D%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ExpressionTargetContainerExtensions.RegisterExpression%60%601(Rezolver.ITargetContainer%2CExpression%7BSystem.Func%7BRezolver.IResolveContext%2C%60%600%7D%7D%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L149">View Source</a>
               </span>
               <a id="Rezolver_ExpressionTargetContainerExtensions_RegisterExpression_" data-uid="Rezolver.ExpressionTargetContainerExtensions.RegisterExpression*"></a>
-              <h4 id="Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.ExpressionTargetContainerExtensions.RegisterExpression``1(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.ResolveContext,``0}},System.Type,Rezolver.ScopeBehaviour)">RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Registers an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> built from a lambda expression which takes a 
-<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> and which returns an instance of <span class="typeparamref">TResult</span></p>
+              <h4 id="Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.ExpressionTargetContainerExtensions.RegisterExpression``1(Rezolver.ITargetContainer,Expression{System.Func{Rezolver.IResolveContext,``0}},System.Type,Rezolver.ScopeBehaviour)">RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</h4>
+              <div class="markdown level1 summary"><p>Registers an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> built from a lambda expression which takes an 
+<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> and which returns an instance of <span class="typeparamref">TResult</span></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterExpression&lt;TResult&gt;(this ITargetContainer targets, Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt; lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)</code></pre>
+                <pre><code class="lang-csharp hljs">public static void RegisterExpression&lt;TResult&gt;(this ITargetContainer targets, Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt; lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -305,7 +305,7 @@ tracked if the target is executed within an <a class="xref" href="Rezolver.ICont
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, TResult&gt;&gt;</td>
+                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, TResult&gt;&gt;</td>
                     <td><span class="parametername">lambda</span></td>
                     <td><p>Required.  The lambda expression which is to be compiled and executed when an instance is resolved by a container</p>
 </td>
@@ -342,7 +342,7 @@ tracked if the target is executed within an <a class="xref" href="Rezolver.ICont
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_Rezolver_ScopeBehaviour__remarks">Remarks</h5>
+              <h5 id="Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
 </div>
               <span class="small pull-right mobile-hide">

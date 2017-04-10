@@ -50,10 +50,7 @@ namespace Rezolver.Targets
 				return ScopeBehaviour.None;
 			}
 		}
-		object ICompiledTarget.GetObject(ResolveContext context)
-		{
-			return Value;
-		}
+
 
 		private readonly Type _declaredType;
 
@@ -84,5 +81,12 @@ namespace Rezolver.Targets
 			type.MustNotBeNull("type");
 			_declaredType = type;
 		}
-	}
+
+        ITarget ICompiledTarget.SourceTarget => this;
+
+        object ICompiledTarget.GetObject(IResolveContext context)
+        {
+            return Value;
+        }
+    }
 }

@@ -71,9 +71,9 @@ above, we could instead do this:
 > [!NOTE]
 > Look past the fact that the object being injected is the same instance on which the test is executed, it's the principle that matters!
 
-## Injecting the `ResolveContext`
+## Injecting the `IResolveContext`
 
-Just as with the [`DelegateTarget` example](Delegates.md#injecting-rezolverresolvecontext), you can also inject the @Rezolver.ResolveContext into your expression in order
+Just as with the [`DelegateTarget` example](Delegates.md#injecting-rezolverresolvecontext), you can also inject the @Rezolver.IResolveContext into your expression in order
 to perform late-bound service location within your expression.  As the comment at the start of the test states - this example is functionally identical to the `DelegateTarget`
 example - but because of the limitations of the C# compiler and its ability to translate code into expression trees, the main expression is written as a series of stacked 
 conditional expressions so that the whole thing is a single expression.
@@ -85,15 +85,15 @@ conditional expressions so that the whole thing is a single expression.
 > you could also provide an expression in which the conditional statements where built dynamically (or, more likely, a dynamically built 
 > <xref:System.Linq.Expressions.SwitchExpression>) and it would still work.
 
-# Resolving without a `ResolveContext`
+# Resolving without an `IResolveContext`
 
 These advanced examples with lambda expressions show how you can inject an argument or perform late-bound service location within your expression body.  Sometimes, however,
 you might not want to, or be able to, provide a parameterised lambda expression, or you might be passing an expression fragment which cannot accept
 injected arguments.
 
 For this purpose, Rezolver provides the @Rezolver.ExpressionFunctions static class.  If the compiler sees a @System.Linq.Expressions.MethodCallExpression bound to one of 
-the @Rezolver.ExpressionFunctions.Resolve* static functions of this class, it will be converted into a call to the appropriate @Rezolver.ResolveContext.Resolve* overload of the 
-@Rezolver.ResolveContext that is in scope when the container executes the code compiled from the expression.
+the @Rezolver.ExpressionFunctions.Resolve* static functions of this class, it will be converted into a call to the appropriate @Rezolver.IResolveContext.Resolve* overload of the 
+@Rezolver.IResolveContext that is in scope when the container executes the code compiled from the expression.
 
 > [!WARNING]
 > These functions only work inside expressions - any attempt to execute them outside of an expression passed to a @Rezolver.Targets.ExpressionTarget will result in 

@@ -10,7 +10,7 @@ namespace Rezolver
 		internal static StubContainer Instance { get; } = new StubContainer();
 
 		private StubContainer() { }
-		public bool CanResolve(ResolveContext context)
+		public bool CanResolve(IResolveContext context)
 		{
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}
@@ -20,7 +20,7 @@ namespace Rezolver
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}
 
-		public ICompiledTarget FetchCompiled(ResolveContext context)
+		public ICompiledTarget FetchCompiled(IResolveContext context)
 		{
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}
@@ -30,12 +30,12 @@ namespace Rezolver
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}
 
-		public object Resolve(ResolveContext context)
+		public object Resolve(IResolveContext context)
 		{
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}
 
-		public bool TryResolve(ResolveContext context, out object result)
+		public bool TryResolve(IResolveContext context, out object result)
 		{
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}

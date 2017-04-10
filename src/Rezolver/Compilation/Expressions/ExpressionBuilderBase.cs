@@ -24,29 +24,28 @@ namespace Rezolver.Compilation.Expressions
 	public abstract class ExpressionBuilderBase : IExpressionBuilder
 	{
 		/// <summary>
-		/// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(ResolveContext, Func{ResolveContext, object}, ScopeBehaviour)"/>
+		/// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
 		/// method for help in generating scope-interfacing code.
 		/// </summary>
-		protected MethodInfo IContainerScope_Resolve_Method { get; } = MethodCallExtractor.ExtractCalledMethod(
+		protected static MethodInfo IContainerScope_Resolve_Method { get; } = MethodCallExtractor.ExtractCalledMethod(
 				(IContainerScope s) => s.Resolve(
-					(ResolveContext)null,
-					(Func<ResolveContext, object>)null,
+					(IResolveContext)null,
+					(Func<IResolveContext, object>)null,
 					ScopeBehaviour.None));
 
-		/// <summary>
-		/// Gets a MethodInfo object for the <see cref="ITarget.SelectScope(ResolveContext)"/> method for
-		/// help in generating scope-interfacing code.
-		/// </summary>
-		protected MethodInfo ITarget_SelectScope_Method { get; } = MethodCallExtractor.ExtractCalledMethod(
-				(ITarget t) => t.SelectScope(null)
-				);
+        protected static MethodInfo ResolveContextExtensions_Resolve_Method { get; } = MethodCallExtractor.ExtractCalledMethod(
+            (IResolveContext rc) => rc.Resolve((Func<IResolveContext, object>)null,
+                    ScopeBehaviour.None));
+
+        protected static MethodInfo IContainerScope_GetRootScope_Method { get; } = MethodCallExtractor.ExtractCalledMethod(
+            (IContainerScope s) => s.GetRootScope());
 
 		/// <summary>
-		/// Gets a MethodInfo object for the <see cref="ResolveContext.CreateNew(Type)"/> method
+		/// Gets a MethodInfo object for the <see cref="IResolveContext.New(Type, IContainer, IContainerScope)"/> method
 		/// </summary>
 		/// <value>The type of the resolve context create new method.</value>
-		protected MethodInfo ResolveContext_CreateNew_Method_Type { get; } = MethodCallExtractor.ExtractCalledMethod(
-			(ResolveContext r) => r.CreateNew((Type)null));
+		protected static MethodInfo IResolveContext_New_Method { get; } = MethodCallExtractor.ExtractCalledMethod(
+			(IResolveContext r) => r.New(null, null, null));
 
 		/// <summary>
 		/// Gets the <see cref="IExpressionCompiler"/> to be used to build the expression for the given target for
@@ -65,7 +64,7 @@ namespace Rezolver.Compilation.Expressions
 		/// to compile it.</remarks>
 		protected virtual IExpressionCompiler GetContextCompiler(IExpressionCompileContext context)
 		{
-			return context.Container.Resolve<IExpressionCompiler>();
+			return context.ResolveContext.Container.Resolve<IExpressionCompiler>();
 		}
 
 		/// <summary>
@@ -123,7 +122,7 @@ namespace Rezolver.Compilation.Expressions
 		/// Called by the <see cref="BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)"/> method.
 		/// 
 		/// Applies the scoping behaviour to the <paramref name="builtExpression"/> such that when it is executed it 
-		/// correctly interfaces with the active scope (from the <see cref="ResolveContext"/>) if one is present for the
+		/// correctly interfaces with the active scope (from the <see cref="IResolveContext"/>) if one is present for the
 		/// given <paramref name="scopeBehaviour"/>.
 		/// </summary>
 		/// <param name="scopeBehaviour">The scoping behaviour for which the expression is to be adapted.
@@ -159,20 +158,23 @@ namespace Rezolver.Compilation.Expressions
 				return Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IContainerScope)));
 			}, typeof(ExpressionBuilderBase));
 
-			builtExpression = Expression.Condition(
+            var newContextExpr = target.ScopePreference == ScopePreference.Current ? (Expression)context.ResolveContextExpression
+                : Expression.Call(
+                            context.ResolveContextExpression,
+                            IResolveContext_New_Method,
+                            Expression.Constant(builtExpression.Type),
+                            Expression.Default(typeof(IContainer)),
+                            Expression.Call(IContainerScope_GetRootScope_Method,
+                                context.ContextScopePropertyExpression));
+
+            builtExpression = Expression.Condition(
 				compareExpr,
 				builtExpression, //if null scope, just use the built expression as-is
-				Expression.Convert( //otherwise - generate a call into the scope's special Resolve method
+                Expression.Convert( //otherwise - generate a call into the scope's special Resolve method
 					Expression.Call(
-						//the target is called to select the scope it wants
-						Expression.Call(
-							Expression.Constant(target),
-							ITarget_SelectScope_Method,
-							context.ResolveContextExpression
-						),
-						IContainerScope_Resolve_Method,
-						Expression.Call(context.ResolveContextExpression, ResolveContext_CreateNew_Method_Type, Expression.Constant(builtExpression.Type)),
-						lambda,
+                        ResolveContextExtensions_Resolve_Method,
+                        newContextExpr,
+                        lambda,
 						Expression.Constant(scopeBehaviour)
 					),
 					originalType

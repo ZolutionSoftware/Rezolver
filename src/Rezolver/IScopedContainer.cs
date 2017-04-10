@@ -20,8 +20,8 @@ namespace Rezolver
 		/// <summary>
 		/// Gets the root scope for this scoped container.
 		/// 
-		/// Note that this is used automatically by the container for <see cref="IContainer.Resolve(ResolveContext)"/>
-		/// operations where the <see cref="ResolveContext.Scope"/> property is not already set.
+		/// Note that this is used automatically by the container for <see cref="IContainer.Resolve(IResolveContext)"/>
+		/// operations where the <see cref="IResolveContext.Scope"/> property is not already set.
 		/// </summary>
 		IContainerScope Scope { get; }
 	}

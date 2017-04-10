@@ -63,7 +63,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -181,8 +181,8 @@ _theMessage = &quot;Another New Message!!!&quot;;
 Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
 </code></pre><div class="NOTE"><h5>Note</h5><p>Look past the fact that the object being injected is the same instance on which the test is executed, it&#39;s the principle that matters!</p>
 </div>
-<h2 id="injecting-the-resolvecontext">Injecting the <code>ResolveContext</code></h2>
-<p>Just as with the <a href="delegates.html#injecting-rezolverresolvecontext"><code>DelegateTarget</code> example</a>, you can also inject the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> into your expression in order
+<h2 id="injecting-the-iresolvecontext">Injecting the <code>IResolveContext</code></h2>
+<p>Just as with the <a href="delegates.html#injecting-rezolverresolvecontext"><code>DelegateTarget</code> example</a>, you can also inject the <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> into your expression in order
 to perform late-bound service location within your expression.  As the comment at the start of the test states - this example is functionally identical to the <code>DelegateTarget</code>
 example - but because of the limitations of the C# compiler and its ability to translate code into expression trees, the main expression is written as a series of stacked 
 conditional expressions so that the whole thing is a single expression.</p>
@@ -210,7 +210,7 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
     container.RegisterExpression(() =&gt; CurrentPrincipal);
     // now register the expression for the IUserActionsService, which does the
     // role sniffing over the principal as one expression
-    container.RegisterExpression((IPrincipal p, ResolveContext rc) =&gt;
+    container.RegisterExpression((IPrincipal p, IResolveContext rc) =&gt;
         p.IsInRole(&quot;Customer&quot;) ?
         rc.Resolve&lt;CustomerActionsService&gt;() :
             p.IsInRole(&quot;Sales&quot;) ?
@@ -237,13 +237,13 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
 you could also provide an expression in which the conditional statements where built dynamically (or, more likely, a dynamically built 
 <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.switchexpression(v=vs.110).aspx">SwitchExpression</a>) and it would still work.</p>
 </div>
-<h1 id="resolving-without-a-resolvecontext">Resolving without a <code>ResolveContext</code></h1>
+<h1 id="resolving-without-an-iresolvecontext">Resolving without an <code>IResolveContext</code></h1>
 <p>These advanced examples with lambda expressions show how you can inject an argument or perform late-bound service location within your expression body.  Sometimes, however,
 you might not want to, or be able to, provide a parameterised lambda expression, or you might be passing an expression fragment which cannot accept
 injected arguments.</p>
 <p>For this purpose, Rezolver provides the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html">ExpressionFunctions</a> static class.  If the compiler sees a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> bound to one of 
-the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve_">Resolve</a> static functions of this class, it will be converted into a call to the appropriate <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> overload of the 
-<a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> that is in scope when the container executes the code compiled from the expression.</p>
+the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve_">Resolve</a> static functions of this class, it will be converted into a call to the appropriate <a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Resolve_">Resolve</a> overload of the 
+<a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> that is in scope when the container executes the code compiled from the expression.</p>
 <div class="WARNING"><h5>Warning</h5><p>These functions only work inside expressions - any attempt to execute them outside of an expression passed to a <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> will result in 
 a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a> being thrown.</p>
 </div>

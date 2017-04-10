@@ -53,7 +53,7 @@ namespace Rezolver.Tests
 			using (var scope = new ContainerScope(new Container()))
 			{
 				Disposable inner1, inner2;
-				Func<ResolveContext, object> factory = c => new Disposable();
+				Func<IResolveContext, object> factory = c => new Disposable();
 
 				using (var childScope = scope.CreateScope())
 				{
@@ -84,7 +84,7 @@ namespace Rezolver.Tests
 		{
 			using (var scope = new ContainerScope(new Container()))
 			{
-				Func<ResolveContext, object> factory = c => new NoCtor();
+				Func<IResolveContext, object> factory = c => new NoCtor();
 
 				var result = scope.Resolve<NoCtor>(
 					new ResolveContext(scope, typeof(NoCtor)),
@@ -107,7 +107,7 @@ namespace Rezolver.Tests
 		{
 			using (var scope = new ContainerScope(new Container()))
 			{
-				Func<ResolveContext, object> factory = c => new NoCtor();
+				Func<IResolveContext, object> factory = c => new NoCtor();
 
 				var result = scope.Resolve<NoCtor>(
 					new ResolveContext(scope, typeof(NoCtor)),
@@ -134,7 +134,7 @@ namespace Rezolver.Tests
 			Disposable explicitlyScoped, implicitlyScoped;
 			using(var scope = new ContainerScope(new Container()))
 			{
-				Func<ResolveContext, object> factory = c => new Disposable();
+				Func<IResolveContext, object> factory = c => new Disposable();
 				explicitlyScoped = scope.Resolve<Disposable>(
 					new ResolveContext(scope, typeof(Disposable)),
 					factory,
@@ -154,7 +154,7 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ParentScopeShouldDisposeAllChildScopesAndObjects()
 		{
-			Func<ResolveContext, object> factory = c => new Disposable();
+			Func<IResolveContext, object> factory = c => new Disposable();
 			Disposable parentObj, childObj, grandChildObj, siblingObj;
 
 			using (var parent = new ContainerScope(new Container()))

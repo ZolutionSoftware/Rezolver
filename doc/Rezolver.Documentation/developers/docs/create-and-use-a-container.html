@@ -63,7 +63,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -156,7 +156,7 @@ method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITa
 registration you can perform.</p>
 <h2 id="resolving-services">Resolving services</h2>
 <p>Resolving objects from your container is done through the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method which, you&#39;ll
-notice, accepts a <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> as its single parameter, and returns an <code>Object</code>.  Again, if 
+notice, accepts an <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> as its single parameter, and returns an <code>Object</code>.  Again, if 
 you&#39;re familiar with IOC containers then you&#39;re probably wondering where your strongly-typed <code>Resolve&lt;TService&gt;()</code> 
 method is!</p>
 <p>Well, fear not.  As with the many extension methods available on <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>, the <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>
@@ -171,10 +171,10 @@ simply by doing one of the following:</p>
 MyServiceBase service = container.Resolve&lt;MyServiceBase&gt;();
 //or
 IMyService service = container.Resolve&lt;IMyService&gt;();
-</code></pre><div class="NOTE"><h5>Note</h5><p>The <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> class is used to capture the context of a call to the <code>Resolve</code> method, tracking the
+</code></pre><div class="NOTE"><h5>Note</h5><p>The <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> interface captures the context of a call to the <code>Resolve</code> method, tracking the
 container on which the call is originally made, whether there is an <a class="xref" href="../api/Rezolver.IContainerScope.html">IContainerScope</a> active for the call,
 and other things besides.  You will rarely use it directly in application code unless you are extending Rezolver.</p>
-<p>These <code>Resolve</code> extension methods create the <code>ResolveContext</code> for a given operation on your behalf, so you never
+<p>These <code>Resolve</code> extension methods create the <code>IResolveContext</code> for a given operation on your behalf, so you never
 have to worry about it.</p>
 </div>
 <p>Assuming the container can locate the service registration for the type you request, it will fetch/produce an

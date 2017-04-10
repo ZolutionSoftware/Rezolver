@@ -23,13 +23,8 @@ namespace Rezolver.Compilation.Expressions
 		private static readonly MethodInfo RezolverResolveMethod =
 		  MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
 
-		private static readonly MethodInfo ContextNewContextMethod =
-		  MethodCallExtractor.ExtractCalledMethod((ResolveContext context) => context.CreateNew((Type)null));
-
-		//this one cannot be obtained via expression extraction - as it uses an output parameter and there's no way of
-		//modelling that to the compiler.
-		private static readonly MethodInfo RezolverTryResolveMethod = TypeHelpers.GetMethod(typeof(IContainer), "TryResolve");
-
+		private static readonly MethodInfo NewContextMethod =
+		  MethodCallExtractor.ExtractCalledMethod((IResolveContext context) => context.New(null, null, null));
 
 		/// <summary>
 		/// Builds an expression for the given <paramref name="target"/>.
@@ -57,12 +52,16 @@ namespace Rezolver.Compilation.Expressions
 
 			//try to resolve the target from the context.  Note this could resolve the fallback target.
 			var staticTarget = target.Bind(context);
-			//TODO: This should be a shared expression
-			var thisRezolver = Expression.Constant(context.Container, typeof(IContainer));
+            //TODO: This should be a shared expression
+            var currentContainer = context.ContainerExpression;
 			var declaredTypeExpr = Expression.Constant(target.DeclaredType, typeof(Type));
 
-			var newContextLocal = context.GetOrAddSharedLocal(typeof(ResolveContext), "newContext");
-			var newContextExpr = Expression.Call(context.ResolveContextExpression, ContextNewContextMethod, declaredTypeExpr);
+			var newContextLocal = context.GetOrAddSharedLocal(typeof(IResolveContext), "newContext");
+			var newContextExpr = Expression.Call(context.ResolveContextExpression, 
+                NewContextMethod, 
+                declaredTypeExpr, 
+                Expression.Default(typeof(IContainer)), 
+                Expression.Default(typeof(IContainerScope)));
 			var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
 			bool setNewContextFirst = false;
 			Expression staticExpr = null;
@@ -80,7 +79,7 @@ namespace Rezolver.Compilation.Expressions
 				//unless, of course, some naughty person has snuck in an additional registration
 				//into the container after compilation has been done ;)
 				setNewContextFirst = true;
-				staticExpr = Expression.Call(thisRezolver, RezolverResolveMethod, newContextLocal);
+				staticExpr = Expression.Call(currentContainer, RezolverResolveMethod, newContextLocal);
 			}
 
 			if (staticExpr.Type != target.DeclaredType)
@@ -103,7 +102,7 @@ namespace Rezolver.Compilation.Expressions
 			//conditionals
 			blockExpressions.Add(Expression.Condition(context.GetOrAddSharedExpression(typeof(bool),
 				"IsSameRezolver",
-				() => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, thisRezolver), this.GetType()),
+				() => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), this.GetType()),
 			  staticExpr,
 			  useContextRezolverIfCanExpr));
 

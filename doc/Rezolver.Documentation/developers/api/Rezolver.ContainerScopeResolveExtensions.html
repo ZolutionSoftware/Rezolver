@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -287,8 +287,8 @@ tracked.  Ultimately, it&#39;s up to the behaviour of the individual underlying
 targets to determine whether they should interact with the scope.</p>
 <p>Indeed, all this extension method does is to forward the method call on to the
 <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Container">Container</a> of the given scope, ensuring that
-the scope is set on the <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> that is passed to its
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> method.</p>
+the scope is set on the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> that is passed to its
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method.</p>
 </div>
                         </article>
           </div>

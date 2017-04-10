@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -648,21 +648,21 @@ if different from <span class="typeparamref">TResult</span></p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForDelegate__1_System_Func_Rezolver_ResolveContext___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%601(System.Func%7BRezolver.ResolveContext%2C%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%601(System.Func%7BRezolver.IResolveContext%2C%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L33">View Source</a>
               </span>
               <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
-              <h4 id="Rezolver_Target_ForDelegate__1_System_Func_Rezolver_ResolveContext___0__System_Type_" data-uid="Rezolver.Target.ForDelegate``1(System.Func{Rezolver.ResolveContext,``0},System.Type)">ForDelegate&lt;TResult&gt;(Func&lt;ResolveContext, TResult&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes a 
-<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> and which returns
+              <h4 id="Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type_" data-uid="Rezolver.Target.ForDelegate``1(System.Func{Rezolver.IResolveContext,``0},System.Type)">ForDelegate&lt;TResult&gt;(Func&lt;IResolveContext, TResult&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes an 
+<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> and which returns
 an instance of <span class="typeparamref">TResult</span></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;TResult&gt;(Func&lt;ResolveContext, TResult&gt; factory, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;TResult&gt;(Func&lt;IResolveContext, TResult&gt; factory, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -675,7 +675,7 @@ an instance of <span class="typeparamref">TResult</span></p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, TResult&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, TResult&gt;</td>
                     <td><span class="parametername">factory</span></td>
                     <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
 </td>
@@ -720,7 +720,7 @@ if different from <span class="typeparamref">TResult</span></p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Target_ForDelegate__1_System_Func_Rezolver_ResolveContext___0__System_Type__remarks">Remarks</h5>
+              <h5 id="Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>All arguments to the delegate are injected from the container when executed</p>
 </div>
               <span class="small pull-right mobile-hide">
@@ -1315,21 +1315,21 @@ if different from <span class="typeparamref">TResult</span></p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForExpression__1_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%601(Expression%7BSystem.Func%7BRezolver.ResolveContext%2C%60%600%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForExpression__1_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%601(Expression%7BSystem.Func%7BRezolver.IResolveContext%2C%60%600%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L34">View Source</a>
               </span>
               <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
-              <h4 id="Rezolver_Target_ForExpression__1_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_" data-uid="Rezolver.Target.ForExpression``1(Expression{System.Func{Rezolver.ResolveContext,``0}},System.Type)">ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt;, Type)</h4>
-              <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes a
-<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> and which returns
+              <h4 id="Rezolver_Target_ForExpression__1_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_" data-uid="Rezolver.Target.ForExpression``1(Expression{System.Func{Rezolver.IResolveContext,``0}},System.Type)">ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type)</h4>
+              <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes an
+<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> and which returns
 an instance of <span class="typeparamref">TResult</span></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -1342,7 +1342,7 @@ an instance of <span class="typeparamref">TResult</span></p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, TResult&gt;&gt;</td>
+                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, TResult&gt;&gt;</td>
                     <td><span class="parametername">lambda</span></td>
                     <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
 </td>
@@ -1387,7 +1387,7 @@ if different from <span class="typeparamref">TResult</span></p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Target_ForExpression__1_Expression_System_Func_Rezolver_ResolveContext___0___System_Type__remarks">Remarks</h5>
+              <h5 id="Rezolver_Target_ForExpression__1_Expression_System_Func_Rezolver_IResolveContext___0___System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
 </div>
               <span class="small pull-right mobile-hide">

@@ -29,42 +29,21 @@ namespace Rezolver.Targets
 		/// Override of <see cref="TargetBase.DeclaredType"/> - always returns the DeclaredType of the <see cref="InnerTarget"/>
 		/// </summary>
 		/// <value>The type of the declared.</value>
-		public override Type DeclaredType
-		{
-			get { return InnerTarget.DeclaredType; }
-		}
+		public override Type DeclaredType => InnerTarget.DeclaredType;
 
 		/// <summary>
 		/// Always returns <see cref="ScopeBehaviour.Explicit"/>.
 		/// </summary>
-		public override ScopeBehaviour ScopeBehaviour
-		{
-			get
-			{
-				return ScopeBehaviour.Explicit;
-			}
-		}
-		/// <summary>
-		/// Always selects the root scope from the context (<see cref="ContainerScopeExtensions.GetRootScope(IContainerScope)"/>,
-		/// if the context has a non-null scope.
-		/// </summary>
-		/// <param name="context">The context.</param>
-		public override IContainerScope SelectScope(ResolveContext context)
-		{
-			if(context.Scope != null)
-			{
-				return context.Scope.GetRootScope();
-			}
-			return base.SelectScope(context);
-		}
+		public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Explicit;
 
-		/// <summary>
-		/// Gets the inner target for this singleton.
-		/// </summary>
-		public ITarget InnerTarget
-		{
-			get;
-		}
+        /// <summary>
+        /// Always returns <see cref="ScopePreference.Root"/>
+        /// </summary>
+        public override ScopePreference ScopePreference => ScopePreference.Root;
+        /// <summary>
+        /// Gets the inner target for this singleton.
+        /// </summary>
+        public ITarget InnerTarget { get; }
 
 		/// <summary>
 		/// Constructs a new instance of the <see cref="SingletonTarget"/> class.

@@ -15,8 +15,8 @@ namespace Rezolver
 		/// <summary>
 		/// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
 		/// </summary>
-		private readonly ConcurrentDictionary<ResolveContext, Lazy<object>> _explicitlyScopedObjects
-			= new ConcurrentDictionary<ResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
+		private readonly ConcurrentDictionary<IResolveContext, Lazy<object>> _explicitlyScopedObjects
+			= new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
 		/// <summary>
 		/// implicitly scoped objects will always be IDisposable
 		/// </summary>
@@ -172,7 +172,7 @@ namespace Rezolver
 			}
 		}
 
-		object IContainerScope.Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
+		object IContainerScope.Resolve(IResolveContext context, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
 		{
 			if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 

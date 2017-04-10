@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
-	/// Implements the <see cref="ICompilerConfigurationProvider"/> to configure expression-based compilation for targets in containers.
+	/// Implements the <see cref="IContainerConfiguration"/> to configure expression-based compilation for targets in containers.
 	/// 
 	/// The implementation registers all the targets necessary to use the expression tree-based compilation provided by 
 	/// the <c>Rezolver.Compilation.Expressions</c> library.
 	/// 
 	/// This configuration provider is automatically configured as the default for all containers when the Rezolver 
 	/// library is referenced.</summary>
-	public class ExpressionCompilerConfigurationProvider : ICompilerConfigurationProvider
+	public class ExpressionCompilerConfigurationProvider : IContainerConfiguration
 	{
 		/// <summary>
-		/// Implements the <see cref="ICompilerConfigurationProvider.Configure(IContainer, ITargetContainer)"/> method,
+		/// Implements the <see cref="IContainerConfiguration.Configure(IContainer, ITargetContainer)"/> method,
 		/// registering all the targets necessary to use expression-based compilation for all the standard targets
 		/// defined in the <c>Rezolver</c> core library.
 		/// </summary>

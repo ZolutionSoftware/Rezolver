@@ -30,7 +30,7 @@ namespace Rezolver.Tests
 				}
 			}
 
-			public virtual bool CanResolve(ResolveContext context)
+			public virtual bool CanResolve(IResolveContext context)
 			{
 				return false;
 			}
@@ -40,7 +40,7 @@ namespace Rezolver.Tests
 				return null;
 			}
 
-			public virtual ICompiledTarget FetchCompiled(ResolveContext context)
+			public virtual ICompiledTarget FetchCompiled(IResolveContext context)
 			{
 				return null;
 			}
@@ -50,12 +50,12 @@ namespace Rezolver.Tests
 				return null;
 			}
 
-			public virtual object Resolve(ResolveContext context)
+			public virtual object Resolve(IResolveContext context)
 			{
 				return null;
 			}
 
-			public virtual bool TryResolve(ResolveContext context, out object result)
+			public virtual bool TryResolve(IResolveContext context, out object result)
 			{
 				result = null;
 				return false;

@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -194,7 +194,7 @@ i.e. the same reference as given by the <a class="xref" href="Rezolver.Compilati
               <h5 id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ContainerExpression_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Note that this is <em>not</em> the same as <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html#Rezolver_Compilation_Expressions_IExpressionCompileContext_ContextContainerPropertyExpression">ContextContainerPropertyExpression</a> - but is provided
 to allow expressions to be compiled which compare the container supplied at compile time to the one from the 
-<a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a> at resolve-time.</p>
+<a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> at resolve-time.</p>
 </div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
@@ -205,7 +205,7 @@ to allow expressions to be compiled which compare the container supplied at comp
               </span>
               <a id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ContextContainerPropertyExpression_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompileContext.ContextContainerPropertyExpression*"></a>
               <h4 id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ContextContainerPropertyExpression" data-uid="Rezolver.Compilation.Expressions.IExpressionCompileContext.ContextContainerPropertyExpression">ContextContainerPropertyExpression</h4>
-              <div class="markdown level1 summary"><p>Gets an expression for reading the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a> property of the <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>
+              <div class="markdown level1 summary"><p>Gets an expression for reading the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> property of the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>
 that&#39;s in scope when the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> (which is built from the compiled expression) is executed.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -237,7 +237,7 @@ that&#39;s in scope when the <a class="xref" href="Rezolver.ICompiledTarget.html
               </span>
               <a id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ContextScopePropertyExpression_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompileContext.ContextScopePropertyExpression*"></a>
               <h4 id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ContextScopePropertyExpression" data-uid="Rezolver.Compilation.Expressions.IExpressionCompileContext.ContextScopePropertyExpression">ContextScopePropertyExpression</h4>
-              <div class="markdown level1 summary"><p>Gets an expression for reading the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Scope">Scope</a> property of the <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>
+              <div class="markdown level1 summary"><p>Gets an expression for reading the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a> property of the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>
 that&#39;s in scope when the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> (which is built from the compiled expression) is executed.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -304,7 +304,7 @@ since an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompi
               </span>
               <a id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ResolveContextExpression_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompileContext.ResolveContextExpression*"></a>
               <h4 id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ResolveContextExpression" data-uid="Rezolver.Compilation.Expressions.IExpressionCompileContext.ResolveContextExpression">ResolveContextExpression</h4>
-              <div class="markdown level1 summary"><p>This is the parameter expression which represents the <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> that is passed to the
+              <div class="markdown level1 summary"><p>This is the parameter expression which represents the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> that is passed to the
 <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> at resolve-time.
 The other expressions - <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html#Rezolver_Compilation_Expressions_IExpressionCompileContext_ContextContainerPropertyExpression">ContextContainerPropertyExpression</a> and <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html#Rezolver_Compilation_Expressions_IExpressionCompileContext_ContextScopePropertyExpression">ContextScopePropertyExpression</a>
 are both built from this too.</p>
@@ -331,7 +331,7 @@ are both built from this too.</p>
               </table>
               <h5 id="Rezolver_Compilation_Expressions_IExpressionCompileContext_ResolveContextExpression_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>If the code produced by the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> for a given target needs to read or use the
-<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> that was originally passed to the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> method,
+<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> that was originally passed to the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method,
 then it does it by using this expression, which will be set as the only parameter on the lambda expression which is 
 eventually compiled (in the case of the default expression compiler, <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.</p>
 </div>
@@ -611,7 +611,7 @@ an argument for the <span class="paramref">inheritSharedExpressions</span> param
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;ResolveContext, TResult&gt;, Type, ScopeBehaviour)</a>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_IResolveContext___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;IResolveContext, TResult&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type, ScopeBehaviour)</a>
@@ -635,7 +635,7 @@ an argument for the <span class="paramref">inheritSharedExpressions</span> param
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;TResult&gt;&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_Expression_System_Func___0___1___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type, ScopeBehaviour)</a>

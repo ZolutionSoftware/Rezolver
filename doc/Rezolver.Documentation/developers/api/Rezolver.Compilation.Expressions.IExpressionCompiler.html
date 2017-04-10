@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -123,8 +123,8 @@ provides the one implementation, too: <a class="xref" href="Rezolver.Compilation
                 <pre><code class="lang-csharp hljs">public interface IExpressionCompiler : ITargetCompiler</code></pre>
               </div>
               <h5 id="Rezolver_Compilation_Expressions_IExpressionCompiler_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>All expressions are built to be called from the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> function which,
-in turn, is typically called in response to a container&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> function being
+              <div class="markdown level0 remarks"><p>All expressions are built to be called from the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> function which,
+in turn, is typically called in response to a container&#39;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> function being
 called.</p>
 <p>Note that the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_">Build(ITarget, IExpressionCompileContext)</a> method declared here is effectively an 
 analogue to the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>.  Indeed, the default 
@@ -142,7 +142,7 @@ implementation resolves <a class="xref" href="Rezolver.Compilation.Expressions.I
               <a id="Rezolver_Compilation_Expressions_IExpressionCompiler_Build_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.Build*"></a>
               <h4 id="Rezolver_Compilation_Expressions_IExpressionCompiler_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext)">Build(ITarget, IExpressionCompileContext)</h4>
               <div class="markdown level1 summary"><p>Gets an unoptimised expression containing the logic required to create or fetch an instance of the <span class="paramref">target</span>&#39;s
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> when invoked for a particular <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>.</p>
+<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> when invoked for a particular <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>.</p>
 <p>Use this method if you want the raw expression for a target (possibly when integrating it into your own expressions during custom
 compilation).</p>
 </div>
@@ -218,7 +218,7 @@ is created.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">Expression&lt;Func&lt;ResolveContext, object&gt;&gt; BuildResolveLambda(Expression targetExpression, IExpressionCompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">Expression&lt;Func&lt;IResolveContext, object&gt;&gt; BuildResolveLambda(Expression targetExpression, IExpressionCompileContext context)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -257,7 +257,7 @@ ResolveContext expression etc) that have been used in the generation of the expr
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
+                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
                     <td><p>A lambda expression which, when compiled and executed, will produce an object 
 consistent with the <a class="xref" href="Rezolver.ITarget.html">ITarget</a> from which the code was produced.</p>
 </td>

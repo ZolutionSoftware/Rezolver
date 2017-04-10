@@ -13,7 +13,7 @@ namespace Rezolver.Compilation
 {
 	/// <summary>
 	/// Core implementation of <see cref="ICompileContext" />.  A root context (i.e. where <see cref="ParentContext"/> is
-	/// <c>null</c>; created via the <see cref="CompileContext.CompileContext(IContainer, ITargetContainer, Type)"/>
+	/// <c>null</c>; created via the <see cref="CompileContext.CompileContext(IResolveContext, ITargetContainer, Type)"/>
 	/// constructor) is the starting point for all shared state, such as the <see cref="Container"/> and the compilation
 	/// stack.
 	/// 
@@ -37,14 +37,8 @@ namespace Rezolver.Compilation
 		/// <value>The parent context.</value>
 		public ICompileContext ParentContext { get; }
 
-		private readonly IContainer _container;
-		/// <summary>
-		/// The container that is considered the current compilation 'scope' - i.e. the container for which the compilation
-		/// is being performed and, usually, the one on which the <see cref="IContainer.Resolve(ResolveContext)" /> method was
-		/// originally called which triggered the compilation call.
-		/// </summary>
-		/// <value>The container.</value>
-		public IContainer Container { get { return _container ?? ParentContext?.Container; } }
+        private readonly IResolveContext _resolveContext;
+        public IResolveContext ResolveContext => _resolveContext ?? ParentContext?.ResolveContext;
 
 		private readonly Type _targetType;
 		/// <summary>
@@ -58,10 +52,7 @@ namespace Rezolver.Compilation
 		/// <summary>
 		/// Implementation of <see cref="ICompileContext.ScopeBehaviourOverride"/>
 		/// </summary>
-		public ScopeBehaviour? ScopeBehaviourOverride
-		{
-			get;
-		}
+		public ScopeBehaviour? ScopeBehaviourOverride { get; }
 
 		/// <summary>
 		/// This is the <see cref="ITargetContainer"/> through which dependencies are resolved by this context in its 
@@ -78,14 +69,7 @@ namespace Rezolver.Compilation
 		/// related to this one - both up and down the hierarchy.
 		/// </summary>
 		/// <value>The compile stack.</value>
-		public IEnumerable<CompileStackEntry> CompileStack
-		{
-			get
-			{
-				//note - if _compileStack is null then ParentContext will never be null - per the constructors
-				return _compileStack != null ? _compileStack.AsReadOnly() : ParentContext?.CompileStack;
-			}
-		}
+		public IEnumerable<CompileStackEntry> CompileStack => _compileStack?.AsReadOnly() ?? ParentContext?.CompileStack;
 
 		/// <summary>
 		/// Creates a new <see cref="CompileContext"/> as a child of another.
@@ -110,8 +94,7 @@ namespace Rezolver.Compilation
 		/// <summary>
 		/// Creates a new CompileContext
 		/// </summary>
-		/// <param name="container">Required. The container for which compilation is being performed.  Will be set into the 
-		/// <see cref="Container" /> property.</param>
+		/// <param name="resolveContext">Required.  The context for which compilation is being performed.</param>
 		/// <param name="dependencyTargetContainer">Required - An <see cref="ITargetContainer" /> that contains the <see cref="ITarget" />s that
 		/// will be required to complete compilation.
 		/// Note - this argument is passed to a new <see cref="ChildTargetContainer" /> that is created and proxied by this class' implementation
@@ -120,15 +103,15 @@ namespace Rezolver.Compilation
 		/// without modifying the underlying targets in the container you pass.</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType" /> property.  If null, then any 
 		/// <see cref="ITarget"/> that is compiled should be compiled for its own <see cref="ITarget.DeclaredType"/>.</param>
-		protected CompileContext(IContainer container,
+		protected CompileContext(IResolveContext resolveContext,
 		  ITargetContainer dependencyTargetContainer,
 		  Type targetType = null
 		  )
 		{
-			container.MustNotBeNull(nameof(container));
+			resolveContext.MustNotBeNull(nameof(resolveContext));
 			dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
-			_container = container;
 			DependencyTargetContainer = new ChildTargetContainer(dependencyTargetContainer);
+            _resolveContext = resolveContext;
 			_targetType = targetType;
 			_compileStack = new Stack<CompileStackEntry>(30);
 		}

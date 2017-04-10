@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -145,7 +145,7 @@ which caches singleton instances of this class on a per-type basis) which can th
                 <pre><code class="lang-csharp hljs">protected class MissingCompiledTarget : ICompiledTarget</code></pre>
               </div>
               <h5 id="Rezolver_ContainerBase_MissingCompiledTarget_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>The <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> always throws an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a> with the message
+              <div class="markdown level0 remarks"><p>The <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> always throws an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a> with the message
 &#39;Could resolve type [[type]]&#39;</p>
 </div>
               <h3 id="constructors">Constructors
@@ -187,19 +187,19 @@ which caches singleton instances of this class on a per-type basis) which can th
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.MissingCompiledTarget.GetObject(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.MissingCompiledTarget.GetObject(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L75">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_MissingCompiledTarget_GetObject_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.GetObject*"></a>
-              <h4 id="Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_ResolveContext_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.GetObject(Rezolver.ResolveContext)">GetObject(ResolveContext)</h4>
-              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a>.  Always throws an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a>.</p>
+              <h4 id="Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.GetObject(Rezolver.IResolveContext)">GetObject(IResolveContext)</h4>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a>.  Always throws an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public object GetObject(ResolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public object GetObject(IResolveContext context)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -212,7 +212,7 @@ which caches singleton instances of this class on a per-type basis) which can th
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
                     <td><span class="parametername">context</span></td>
                     <td><p>The current rezolve context.</p>
 </td>
@@ -235,7 +235,7 @@ which caches singleton instances of this class on a per-type basis) which can th
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">ICompiledTarget.GetObject(ResolveContext)</a></div>
+                  <div><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">ICompiledTarget.GetObject(IResolveContext)</a></div>
               <h5 class="exceptions">Exceptions</h5>
               <table class="table table-bordered table-striped table-condensed">
                 <thead>

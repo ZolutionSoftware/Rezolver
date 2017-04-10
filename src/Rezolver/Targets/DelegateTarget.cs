@@ -17,8 +17,8 @@ namespace Rezolver.Targets
 	/// <remarks>The delegate must be non-void and can have any number of parameters.
 	/// 
 	/// A compiler must ensure that any parameters for the <see cref="Factory"/> are automatically 
-	/// resolved from the container, and that a parameter of the type <see cref="ResolveContext"/> 
-	/// will receive the context passed to the <see cref="IContainer.Resolve(ResolveContext)"/>
+	/// resolved from the container, and that a parameter of the type <see cref="IResolveContext"/> 
+	/// will receive the context passed to the <see cref="IContainer.Resolve(IResolveContext)"/>
 	/// method call for which this target is being compiled and/or executed.</remarks>
  	public class DelegateTarget : TargetBase
 	{

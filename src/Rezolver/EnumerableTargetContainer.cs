@@ -30,15 +30,17 @@ namespace Rezolver
 		internal class CompiledListTarget<TElement> : ListTarget, ICompiledTarget
 		{
 			private readonly IEnumerable<ICompiledTarget> _compiledTargets;
+            public ITarget SourceTarget => this;
+
 			public CompiledListTarget(IEnumerable<ITarget> targets, bool asArray = false)
 				: base(typeof(TElement), targets, asArray)
 			{
 				_compiledTargets = targets.Cast<ICompiledTarget>();
 			}
 
-			public object GetObject(ResolveContext context)
+			public object GetObject(IResolveContext context)
 			{
-				var elements = _compiledTargets.Select(i => (TElement)i.GetObject(context.CreateNew(typeof(TElement))));
+				var elements = _compiledTargets.Select(i => (TElement)i.GetObject(context.New(newRequestedType: typeof(TElement))));
 				return AsArray ? (object)elements.ToArray() : new List<TElement>(elements);
 			}
 		}

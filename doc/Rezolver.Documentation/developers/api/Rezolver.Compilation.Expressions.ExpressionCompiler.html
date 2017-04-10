@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -162,7 +162,7 @@ the compiler because they need to be compiled in order to work - which would cau
 <p>Therefore, the targets which are registered as expression builders must directly implement either the 
 <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html">IExpressionBuilder&lt;TTarget&gt;</a> or <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> interfaces; or implement the 
 <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> interface and produce an instance of those interfaces when 
-<a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> is called on them.</p>
+<a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> is called on them.</p>
 <p>Because of this requirement, the most common way to register an expression builder is to register an instance inside an
 <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> against the correct type, because that class does implement <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> 
 in addition to <a class="xref" href="Rezolver.ITarget.html">ITarget</a>.</p>
@@ -323,20 +323,20 @@ the <span class="paramref">context</span> for the <span class="paramref">target<
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionCompiler_BuildCompiledTargetForLambda_Expression_System_Func_Rezolver_ResolveContext_System_Object___.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionCompiler.BuildCompiledTargetForLambda(Expression%7BSystem.Func%7BRezolver.ResolveContext%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionCompiler_BuildCompiledTargetForLambda_Expression_System_Func_Rezolver_IResolveContext_System_Object___.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionCompiler.BuildCompiledTargetForLambda(Expression%7BSystem.Func%7BRezolver.IResolveContext%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionCompiler.cs/#L175">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionCompiler_BuildCompiledTargetForLambda_" data-uid="Rezolver.Compilation.Expressions.ExpressionCompiler.BuildCompiledTargetForLambda*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionCompiler_BuildCompiledTargetForLambda_Expression_System_Func_Rezolver_ResolveContext_System_Object___" data-uid="Rezolver.Compilation.Expressions.ExpressionCompiler.BuildCompiledTargetForLambda(Expression{System.Func{Rezolver.ResolveContext,System.Object}})">BuildCompiledTargetForLambda(Expression&lt;Func&lt;ResolveContext, Object&gt;&gt;)</h4>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionCompiler_BuildCompiledTargetForLambda_Expression_System_Func_Rezolver_IResolveContext_System_Object___" data-uid="Rezolver.Compilation.Expressions.ExpressionCompiler.BuildCompiledTargetForLambda(Expression{System.Func{Rezolver.IResolveContext,System.Object}})">BuildCompiledTargetForLambda(Expression&lt;Func&lt;IResolveContext, Object&gt;&gt;)</h4>
               <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> from the finalised <span class="paramref">lambda</span> expression which was
 previously built for a target.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected virtual ICompiledTarget BuildCompiledTargetForLambda(Expression&lt;Func&lt;ResolveContext, object&gt;&gt; lambda)</code></pre>
+                <pre><code class="lang-csharp hljs">protected virtual ICompiledTarget BuildCompiledTargetForLambda(Expression&lt;Func&lt;IResolveContext, object&gt;&gt; lambda)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -349,7 +349,7 @@ previously built for a target.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
+                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
                     <td><span class="parametername">lambda</span></td>
                     <td><p>The lambda expression representing the code to be executed in order to get the underlying
 object which will be resolved.  Typically, this is fed directly from the 
@@ -388,7 +388,7 @@ be compiled into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompil
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual Expression&lt;Func&lt;ResolveContext, object&gt;&gt; BuildResolveLambda(Expression expression, IExpressionCompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public virtual Expression&lt;Func&lt;IResolveContext, object&gt;&gt; BuildResolveLambda(Expression expression, IExpressionCompileContext context)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -424,7 +424,7 @@ be compiled into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompil
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
+                    <td><span class="xref">Expression</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -507,19 +507,19 @@ to inform the type of object that is to be built, and for compile-time dependenc
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionCompiler_CreateContext_Rezolver_ResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionCompiler.CreateContext(Rezolver.ResolveContext%2CRezolver.ITargetContainer%2CRezolver.IContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionCompiler_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionCompiler.CreateContext(Rezolver.IResolveContext%2CRezolver.ITargetContainer%2CRezolver.IContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionCompiler.cs/#L254">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionCompiler_CreateContext_" data-uid="Rezolver.Compilation.Expressions.ExpressionCompiler.CreateContext*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionCompiler_CreateContext_Rezolver_ResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_" data-uid="Rezolver.Compilation.Expressions.ExpressionCompiler.CreateContext(Rezolver.ResolveContext,Rezolver.ITargetContainer,Rezolver.IContainer)">CreateContext(ResolveContext, ITargetContainer, IContainer)</h4>
-              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_ResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_">CreateContext(ResolveContext, ITargetContainer, IContainer)</a></p>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionCompiler_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_" data-uid="Rezolver.Compilation.Expressions.ExpressionCompiler.CreateContext(Rezolver.IResolveContext,Rezolver.ITargetContainer,Rezolver.IContainer)">CreateContext(IResolveContext, ITargetContainer, IContainer)</h4>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_">CreateContext(IResolveContext, ITargetContainer, IContainer)</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ICompileContext CreateContext(ResolveContext resolveContext, ITargetContainer targets, IContainer containerOverride = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ICompileContext CreateContext(IResolveContext resolveContext, ITargetContainer targets, IContainer containerOverride = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -532,7 +532,7 @@ to inform the type of object that is to be built, and for compile-time dependenc
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
                     <td><span class="parametername">resolveContext</span></td>
                     <td></td>
                   </tr>
@@ -564,7 +564,7 @@ to inform the type of object that is to be built, and for compile-time dependenc
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_ResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_">ICompileContextProvider.CreateContext(ResolveContext, ITargetContainer, IContainer)</a></div>
+                  <div><a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_Rezolver_IContainer_">ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer, IContainer)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionCompiler_ResolveBuilder_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionCompiler.ResolveBuilder(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>

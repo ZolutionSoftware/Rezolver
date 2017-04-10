@@ -17,7 +17,7 @@ namespace Rezolver.Targets
 	/// <remarks>Scopes in Rezolver operate much the same as they do in any IOC framework, but use
 	/// of them is always entirely optional.
 	/// 
-	/// When a scope is active for a given <see cref="IContainer.Resolve(ResolveContext)"/> operation, most 
+	/// When a scope is active for a given <see cref="IContainer.Resolve(IResolveContext)"/> operation, most 
 	/// objects which are returned from those operations will implicitly be scoped to whichever scope is active
 	/// when the objects are resolved.  Implicitly scoped objects are only disposed of when their containing
 	/// scope is disposed, and you can have an unlimited number of instances of implicitly scoped objects

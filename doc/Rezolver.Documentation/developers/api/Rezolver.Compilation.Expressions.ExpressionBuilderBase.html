@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -161,13 +161,13 @@ method</p>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_Resolve_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_Resolve_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_Resolve_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_Resolve_Method">IContainerScope_Resolve_Method</h4>
-              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Resolve_Rezolver_ResolveContext_System_Func_Rezolver_ResolveContext_System_Object__Rezolver_ScopeBehaviour_">Resolve(ResolveContext, Func&lt;ResolveContext, Object&gt;, ScopeBehaviour)</a>
+              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_">Resolve(IResolveContext, Func&lt;IResolveContext, Object&gt;, ScopeBehaviour)</a>
 method for help in generating scope-interfacing code.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected MethodInfo IContainerScope_Resolve_Method { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">protected static MethodInfo IContainerScope_Resolve_Method { get; }</code></pre>
               </div>
               <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -189,17 +189,17 @@ method for help in generating scope-interfacing code.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ITarget_SelectScope_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ITarget_SelectScope_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L40">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L44">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ITarget_SelectScope_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ITarget_SelectScope_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ITarget_SelectScope_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ITarget_SelectScope_Method">ITarget_SelectScope_Method</h4>
-              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SelectScope_Rezolver_ResolveContext_">SelectScope(ResolveContext)</a> method for
+              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SelectScope_Rezolver_IResolveContext_">SelectScope(IResolveContext)</a> method for
 help in generating scope-interfacing code.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected MethodInfo ITarget_SelectScope_Method { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">protected static MethodInfo ITarget_SelectScope_Method { get; }</code></pre>
               </div>
               <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -218,19 +218,19 @@ help in generating scope-interfacing code.</p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContext_CreateNew_Method_Type.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContext_CreateNew_Method_Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContext_Alter_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContext_Alter_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L48">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L52">View Source</a>
               </span>
-              <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContext_CreateNew_Method_Type_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContext_CreateNew_Method_Type*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContext_CreateNew_Method_Type" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContext_CreateNew_Method_Type">ResolveContext_CreateNew_Method_Type</h4>
-              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <span class="xref">Rezolver.ResolveContext.CreateNew(System.Type)</span> method</p>
+              <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContext_Alter_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContext_Alter_Method*"></a>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContext_Alter_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContext_Alter_Method">ResolveContext_Alter_Method</h4>
+              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Alter_System_Type_Rezolver_IContainer_Rezolver_IContainerScope_">Alter(Type, IContainer, IContainerScope)</a> method</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected MethodInfo ResolveContext_CreateNew_Method_Type { get; }</code></pre>
+                <pre><code class="lang-csharp hljs">protected static MethodInfo ResolveContext_Alter_Method { get; }</code></pre>
               </div>
               <h5 class="propertyValue">Property Value</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -248,6 +248,36 @@ help in generating scope-interfacing code.</p>
                   </tr>
                 </tbody>
               </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContextExtensions_Resolve_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContextExtensions_Resolve_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L36">View Source</a>
+              </span>
+              <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContextExtensions_Resolve_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContextExtensions_Resolve_Method*"></a>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContextExtensions_Resolve_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContextExtensions_Resolve_Method">ResolveContextExtensions_Resolve_Method</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">protected static MethodInfo ResolveContextExtensions_Resolve_Method { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
@@ -255,13 +285,13 @@ help in generating scope-interfacing code.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_Rezolver_ScopeBehaviour_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping(Rezolver.ScopeBehaviour%2CExpression%2CRezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L138">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L142">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_Rezolver_ScopeBehaviour_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping(Rezolver.ScopeBehaviour,Expression,Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">ApplyScoping(ScopeBehaviour, Expression, ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
               <div class="markdown level1 summary"><p>Called by the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</a> method.</p>
 <p>Applies the scoping behaviour to the <span class="paramref">builtExpression</span> such that when it is executed it 
-correctly interfaces with the active scope (from the <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>) if one is present for the
+correctly interfaces with the active scope (from the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>) if one is present for the
 given <span class="paramref">scopeBehaviour</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -334,7 +364,7 @@ was built.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.Build(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L223">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L234">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Build*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
@@ -399,7 +429,7 @@ parameter is optional, this will always be provided </p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.BuildCore(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L91">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L95">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.BuildCore*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.BuildCore(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
@@ -492,7 +522,7 @@ function, which deriving classes implement to actually produce their expression 
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CanBuild(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L231">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L242">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CanBuild*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CanBuild(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext)">CanBuild(ITarget, IExpressionCompileContext)</h4>
@@ -550,7 +580,7 @@ determines whether this instance can build an expression for the specified targe
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetContextCompiler(Rezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L66">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L70">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetContextCompiler*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetContextCompiler(Rezolver.Compilation.Expressions.IExpressionCompileContext)">GetContextCompiler(IExpressionCompileContext)</h4>
@@ -613,7 +643,7 @@ to compile it.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver%23Compilation%23Expressions%23IExpressionBuilder%23Build(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L198">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L209">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver#Compilation#Expressions#IExpressionBuilder#Build*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver#Compilation#Expressions#IExpressionBuilder#Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>

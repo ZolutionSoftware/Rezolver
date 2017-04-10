@@ -42,7 +42,7 @@ namespace Rezolver.Compilation.Expressions
 	/// Therefore, the targets which are registered as expression builders must directly implement either the 
 	/// <see cref="IExpressionBuilder{TTarget}" /> or <see cref="IExpressionBuilder" /> interfaces; or implement the 
 	/// <see cref="ICompiledTarget" /> interface and produce an instance of those interfaces when 
-	/// <see cref="ICompiledTarget.GetObject(ResolveContext)" /> is called on them.
+	/// <see cref="ICompiledTarget.GetObject(IResolveContext)" /> is called on them.
 	/// 
 	/// Because of this requirement, the most common way to register an expression builder is to register an instance inside an
 	/// <see cref="Targets.ObjectTarget" /> against the correct type, because that class does implement <see cref="ICompiledTarget" /> 
@@ -68,14 +68,17 @@ namespace Rezolver.Compilation.Expressions
 
 		private class CompiledLambdaTarget : ICompiledTarget
 		{
-			private readonly Func<ResolveContext, object> _getObjectDelegate;
+			private readonly Func<IResolveContext, object> _getObjectDelegate;
 
-			public CompiledLambdaTarget(Func<ResolveContext, object> getObjectDelegate)
+            public ITarget SourceTarget { get; }
+
+			public CompiledLambdaTarget(ITarget sourceTarget, Func<IResolveContext, object> getObjectDelegate)
 			{
+                SourceTarget = sourceTarget;
 				_getObjectDelegate = getObjectDelegate;
 			}
 
-			public object GetObject(ResolveContext context)
+			public object GetObject(IResolveContext context)
 			{
 				return _getObjectDelegate(context);
 			}
@@ -101,7 +104,7 @@ namespace Rezolver.Compilation.Expressions
 			var exprContext = context as IExpressionCompileContext;
 			if (exprContext == null)
 				throw new ArgumentException("context must be an instance of IExpressionCompileContext", nameof(context));
-			return BuildCompiledTargetForLambda(this.BuildResolveLambda(target, exprContext));
+			return BuildCompiledTargetForLambda(target, this.BuildResolveLambda(target, exprContext));
 		}
 
 		/// <summary>
@@ -131,8 +134,7 @@ namespace Rezolver.Compilation.Expressions
 
 			foreach (var type in builderTypes)
 			{
-				foreach (IExpressionBuilder expressionBuilder in (IEnumerable)context.Container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)))
-				//FetchAllDirect(type))
+				foreach (IExpressionBuilder expressionBuilder in (IEnumerable)context.ResolveContext.Container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)))
 				{
 					if (expressionBuilder != this)
 					{
@@ -169,12 +171,13 @@ namespace Rezolver.Compilation.Expressions
 		/// Creates an <see cref="ICompiledTarget"/> from the finalised <paramref name="lambda"/> expression which was
 		/// previously built for a target.
 		/// </summary>
+        /// <param name="target">The <see cref="ITarget"/> from which the passed <paramref name="lambda"/> was built</param>
 		/// <param name="lambda">The lambda expression representing the code to be executed in order to get the underlying
 		/// object which will be resolved.  Typically, this is fed directly from the 
 		/// <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> implementation.</param>
-		protected virtual ICompiledTarget BuildCompiledTargetForLambda(Expression<Func<ResolveContext, object>> lambda)
+		protected virtual ICompiledTarget BuildCompiledTargetForLambda(ITarget target, Expression<Func<IResolveContext, object>> lambda)
 		{
-			return new CompiledLambdaTarget(lambda.Compile());
+			return new CompiledLambdaTarget(target, lambda.Compile());
 		}
 
 		/// <summary>
@@ -183,7 +186,7 @@ namespace Rezolver.Compilation.Expressions
 		/// </summary>
 		/// <param name="expression">The expression.</param>
 		/// <param name="context">The context.</param>
-		public virtual Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context)
+		public virtual Expression<Func<IResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context)
 		{
 			expression.MustNotBeNull(nameof(expression));
 			context.MustNotBeNull(nameof(context));
@@ -216,7 +219,7 @@ namespace Rezolver.Compilation.Expressions
 			if (expression.Type != typeof(object) && TypeHelpers.IsValueType(expression.Type))
 				expression = Expression.Convert(expression, typeof(object));
 
-			return Expression.Lambda<Func<ResolveContext, object>>(expression, context.ResolveContextExpression);
+			return Expression.Lambda<Func<IResolveContext, object>>(expression, context.ResolveContextExpression);
 		}
 
 		/// <summary>
@@ -245,16 +248,14 @@ namespace Rezolver.Compilation.Expressions
 		}
 
 		/// <summary>
-		/// Implementation of <see cref="ICompileContextProvider.CreateContext(ResolveContext, ITargetContainer, IContainer)"/>
+		/// Implementation of <see cref="ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer)"/>
 		/// </summary>
 		/// <param name="resolveContext"></param>
 		/// <param name="targets"></param>
-		/// <param name="containerOverride"></param>
 		/// <returns></returns>
-		public ICompileContext CreateContext(ResolveContext resolveContext, ITargetContainer targets, IContainer containerOverride = null)
+		public ICompileContext CreateContext(IResolveContext resolveContext, ITargetContainer targets)
 		{
-			return new ExpressionCompileContext(containerOverride ?? resolveContext.Container,
-				targets, resolveContext.RequestedType);
+			return new ExpressionCompileContext(resolveContext, targets, resolveContext.RequestedType);
 		}
 	}
 }

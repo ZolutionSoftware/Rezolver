@@ -20,7 +20,7 @@ tasks in order to resolve an object than the functionality offered by the standa
 
 Whether you *should* perform excessively complex logic in these factories is a topic of debate.  Our view is that
 you should be able to if you want, or need, to, so Rezolver's support for delegates is extensive, including the ability to 
-inject arguments to your delegate from the container, or resolve additional services inside your delegate through @Rezolver.ResolveContext.
+inject arguments to your delegate from the container, or resolve additional services inside your delegate through @Rezolver.IResolveContext.
 
 # Basic Examples
 
@@ -56,11 +56,11 @@ As mentioned in the introduction, Rezolver can inject arguments into your factor
 
 **_Any_ delegate type, with any number of parameters, is supported, so long as it has a return type.**
 
-## Injecting @Rezolver.ResolveContext
+## Injecting @Rezolver.IResolveContext
 
-All @Rezolver.IContainer.Resolve* operations have a @Rezolver.ResolveContext at their heart.  Through the context, you can get the 
-@Rezolver.ResolveContext.Container that originally received the call, the @Rezolver.ResolveContext.Scope and the 
-@Rezolver.ResolveContext.RequestedType. It can also be used to create a new child scope (through its implementation of the 
+All @Rezolver.IContainer.Resolve* operations have an @Rezolver.IResolveContext at their heart.  Through the context, you can get the 
+@Rezolver.IResolveContext.Container that originally received the call, the @Rezolver.IResolveContext.Scope and the 
+@Rezolver.IResolveContext.RequestedType. It can also be used to create a new child scope (through its implementation of the 
 @Rezolver.IScopeFactory interface).
 
 If you need the context to be passed to your delegate - just make sure to declare a parameter of that type, most commonly
@@ -68,14 +68,14 @@ you'll probably use the single parameter specialisation of the @Rezolver.Delegat
 @Rezolver.Target.ForDelegate* methods, but ultimately the parameter can appear anywhere in the delegate's signature and it will
 be injected.
 
-This example shows the `Func<RezolveContext, TResult>` overload in action:
+This example shows the `Func<IRezolveContext, TResult>` overload in action:
 
 [!code-csharp[DelegateExamples.cs](../../../../test/Rezolver.Tests.Examples/DelegateExamples.cs#example11)]
 
 ## Resolving inside a delegate
 
-Building on the above, here's an example which injects the @Rezolver.ResolveContext in order to perform a late-bound 
-@Rezolver.ResolveContext.Resolve* operation to inject a different dependency based on some ambient information about a user (which
+Building on the above, here's an example which injects the @Rezolver.IResolveContext in order to perform a late-bound 
+@Rezolver.IResolveContext.Resolve* operation to inject a different dependency based on some ambient information about a user (which
 is also injected into the delegate).
 
 This is quite a long example which, admittedly, can be solved in a few different ways.  We're not saying this is the only way :)

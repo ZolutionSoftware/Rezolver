@@ -23,8 +23,8 @@ namespace Rezolver
 		/// 
 		/// Indeed, all this extension method does is to forward the method call on to the
 		/// <see cref="IContainerScope.Container"/> of the given scope, ensuring that
-		/// the scope is set on the <see cref="ResolveContext"/> that is passed to its
-		/// <see cref="IContainer.Resolve(ResolveContext)"/> method.
+		/// the scope is set on the <see cref="IResolveContext"/> that is passed to its
+		/// <see cref="IContainer.Resolve(IResolveContext)"/> method.
 		/// </remarks>
 		public static TResult Resolve<TResult>(this IContainerScope scope)
 		{

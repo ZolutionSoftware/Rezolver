@@ -21,21 +21,21 @@ namespace Rezolver.Tests.Targets
 			public TestCompileContext(ICompileContext parentContext, Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
 				: base(parentContext, targetType, scopeBehaviourOverride) { }
 
-			public TestCompileContext(IContainer container, ITargetContainer dependencyTargetContainer, Type targetType = null)
-				: base(container, dependencyTargetContainer, targetType) { }
+			public TestCompileContext(IResolveContext resolveContext, ITargetContainer dependencyTargetContainer, Type targetType = null)
+				: base(resolveContext, dependencyTargetContainer, targetType) { }
 		}
 
 		protected class TestContextProvider : ICompileContextProvider
 		{
 			public TestContextProvider() { }
 
-			public ICompileContext CreateContext(ResolveContext resolveContext, ITargetContainer targets, IContainer containerOverride = null)
+			public ICompileContext CreateContext(IResolveContext resolveContext, ITargetContainer targets)
 			{
-				return new TestCompileContext(resolveContext.Container, targets, targetType: resolveContext.RequestedType);
+                return new TestCompileContext(resolveContext, targets, targetType: resolveContext.RequestedType);
 			}
 		}
 
-		protected class TestCompilerConfigProvider : ICompilerConfigurationProvider
+		protected class TestCompilerConfigProvider : IContainerConfiguration
 		{
 			public void Configure(IContainer container, ITargetContainer targets)
 			{
@@ -43,7 +43,7 @@ namespace Rezolver.Tests.Targets
 			}
 		}
 
-		protected virtual ICompilerConfigurationProvider GetTestCompilerConfigProvider()
+		protected virtual IContainerConfiguration GetTestCompilerConfigProvider()
 		{
 			return new TestCompilerConfigProvider();
 		}
@@ -74,7 +74,7 @@ namespace Rezolver.Tests.Targets
 		/// of the passed target.
 		/// </summary>
 		/// <param name="target">The target.</param>
-		/// <param name="container">The container to use for the <see cref="ResolveContext"/> from which the compile context
+		/// <param name="container">The container to use for the <see cref="IResolveContext"/> from which the compile context
 		/// will be created.  If null, then the <see cref="GetDefaultContainer"/> method is called.</param>
 		/// <param name="targets">The target container to use for the compile context.  If null, then the <paramref name="container"/>
 		/// will be passed to the <see cref="GetDefaultTargetContainer(IContainer)"/> method (including if one is automatically

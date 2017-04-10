@@ -60,7 +60,7 @@ namespace Rezolver.Logging
 			Logger.TrackCall(this, () => _inner.ChildScopeDisposed(child));
 		}
 
-		public object Resolve(ResolveContext context, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
+		public object Resolve(IResolveContext context, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
 		{
 			return Logger.TrackCall(this, () => _inner.Resolve(context, factory, behaviour));
 		}

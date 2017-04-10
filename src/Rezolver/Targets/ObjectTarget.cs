@@ -14,27 +14,30 @@ namespace Rezolver.Targets
 	/// </summary>
 	public class ObjectTarget : TargetBase, ICompiledTarget
 	{
+        
+        /// <summary>
+        /// Gets the scope behaviour.
+        /// </summary>
+        /// <value>The scope behaviour.</value>
+        public override ScopeBehaviour ScopeBehaviour { get; }
 
-		private readonly Type _declaredType;
-		private readonly ScopeBehaviour _scopeBehaviour;
+        /// <summary>
+        /// Always returns <see cref="ScopePreference.Root"/>
+        /// </summary>
+        public override ScopePreference ScopePreference => ScopePreference.Root;
 
-		/// <summary>
-		/// Gets the scope behaviour.
-		/// </summary>
-		/// <value>The scope behaviour.</value>
-		public override ScopeBehaviour ScopeBehaviour
-		{
-			get
-			{
-				return _scopeBehaviour;
-			}
-		}
+        /// <summary>
+        /// Gets the declared type of object that is returned by this target.  Might be different from the type
+        /// of <see cref="Value"/> if explicitly defined when this target was constructed.
+        /// </summary>
+        /// <value>The type of the declared.</value>
+        public override Type DeclaredType { get; }
 
-		/// <summary>
-		/// Gets the value that will be exposed by expressions built by this instance.
-		/// </summary>
-		/// <value>The value.</value>
-		public object Value { get; }
+        /// <summary>
+        /// Gets the value that will be exposed by expressions built by this instance.
+        /// </summary>
+        /// <value>The value.</value>
+        public object Value { get; }
 
 		/// <summary>
 		/// Creates a new instance of the <see cref="ObjectTarget"/> class.
@@ -47,10 +50,10 @@ namespace Rezolver.Targets
 		/// will be tracked multiple times by that scope.</param>
 		/// <remarks>Please note - if you enable scope tracking, but the object is never resolved, then the object will not be disposed and you will need
 		/// to ensure you dispose of it.</remarks>
-		public ObjectTarget(object obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
+		public ObjectTarget(object obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = Rezolver.ScopeBehaviour.None)
 		{
 			Value = obj;
-			_scopeBehaviour = scopeBehaviour;
+			ScopeBehaviour = scopeBehaviour;
 			//if the caller provides a declared type we check
 			//also that, if the object is null, the target type
 			//can accept nulls.  Otherwise we're simply checking 
@@ -66,13 +69,13 @@ namespace Rezolver.Targets
 				else if (!TypeHelpers.AreCompatible(Value.GetType(), declaredType))
 					throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, Value.GetType()), "declaredType");
 
-				_declaredType = declaredType;
+				DeclaredType = declaredType;
 			}
 			else //an untyped null is typed as Object
-				_declaredType = Value == null ? typeof(object) : Value.GetType();
+				DeclaredType = Value == null ? typeof(object) : Value.GetType();
 		}
 
-		object ICompiledTarget.GetObject(ResolveContext context)
+		object ICompiledTarget.GetObject(IResolveContext context)
 		{
 			//when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
 			if(context.Scope == null)
@@ -83,26 +86,6 @@ namespace Rezolver.Targets
 			}
 		}
 
-		/// <summary>
-		/// Selects the scopem in which instance should be tracked for disposal.
-		/// </summary>
-		/// <param name="context">The context.</param>
-		public override IContainerScope SelectScope(ResolveContext context)
-		{
-			return context.Scope != null ? context.Scope.GetRootScope() : base.SelectScope(context);
-		}
-
-		/// <summary>
-		/// Gets the declared type of object that is returned by this target.  Might be different from the type
-		/// of <see cref="Value"/> if explicitly defined when this target was constructed.
-		/// </summary>
-		/// <value>The type of the declared.</value>
-		public override Type DeclaredType
-		{
-			get
-			{
-				return _declaredType;
-			}
-		}
+        ITarget ICompiledTarget.SourceTarget => this;
 	}
 }

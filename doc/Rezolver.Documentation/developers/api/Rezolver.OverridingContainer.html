@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -120,7 +120,7 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_ResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(ResolveContext)</a>
+                  <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(IResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_NoChangeCompilerConfiguration">ContainerBase.NoChangeCompilerConfiguration</a>
@@ -135,16 +135,16 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">ContainerBase.Targets</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_ResolveContext_">ContainerBase.Resolve(ResolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_">ContainerBase.Resolve(IResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_ResolveContext_System_Object__">ContainerBase.TryResolve(ResolveContext, Object)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_IResolveContext_System_Object__">ContainerBase.TryResolve(IResolveContext, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CreateScope">ContainerBase.CreateScope()</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_ResolveContext_">ContainerBase.FetchCompiled(ResolveContext)</a>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_FetchCompiled_Rezolver_IResolveContext_">ContainerBase.FetchCompiled(IResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_">ContainerBase.IServiceProvider.GetService(Type)</a>
@@ -200,12 +200,12 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               </div>
               <h5 id="Rezolver_OverridingContainer_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>When overriding another <a class="xref" href="Rezolver.IContainer.html">IContainer</a>, you are overriding the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> objects that
-will be returned when <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_FetchCompiled_Rezolver_ResolveContext_">FetchCompiled(ResolveContext)</a> is called on that container and, therefore,
-the compiled target which is executed when the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> method is called.</p>
+will be returned when <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_FetchCompiled_Rezolver_IResolveContext_">FetchCompiled(IResolveContext)</a> is called on that container and, therefore,
+the compiled target which is executed when the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method is called.</p>
 <p>This has the side effect of overriding automatically resolved arguments (bound to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>) compiled 
 in the overridden container by virtue of the fact that the overriding container is a different reference, because the
 <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> is typically compiled with a check, at resolve-time, that the 
-<a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a> is the same container as the one that was active when it was originally compiled.</p>
+<a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> is the same container as the one that was active when it was originally compiled.</p>
 <p>In essence, when resolving an instance as a dependency the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> does something like this:</p>
 <pre><code>resolveContext.Container == compileContext.Container ? (execute compile-time target) : resolveContext.Container.Resolve(type)</code></pre>
 </div>
@@ -265,19 +265,19 @@ strategy.  If <code>null</code> (recommended), then the <span class="paramref">i
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer_CanResolve_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.CanResolve(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer_CanResolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.CanResolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L58">View Source</a>
               </span>
               <a id="Rezolver_OverridingContainer_CanResolve_" data-uid="Rezolver.OverridingContainer.CanResolve*"></a>
-              <h4 id="Rezolver_OverridingContainer_CanResolve_Rezolver_ResolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.ResolveContext)">CanResolve(ResolveContext)</h4>
+              <h4 id="Rezolver_OverridingContainer_CanResolve_Rezolver_IResolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.IResolveContext)">CanResolve(IResolveContext)</h4>
               <div class="markdown level1 summary"><p>Called to determine if this container is able to resolve the type specified in the passed <span class="paramref">context</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public override bool CanResolve(ResolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public override bool CanResolve(IResolveContext context)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -290,9 +290,9 @@ strategy.  If <code>null</code> (recommended), then the <span class="paramref">i
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
                     <td><span class="parametername">context</span></td>
-                    <td><p>Required.  The <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>.</p>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>.</p>
 </td>
                   </tr>
                 </tbody>
@@ -313,23 +313,23 @@ strategy.  If <code>null</code> (recommended), then the <span class="paramref">i
                 </tbody>
               </table>
               <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_ResolveContext_">ContainerBase.CanResolve(ResolveContext)</a></div>
+              <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_IResolveContext_">ContainerBase.CanResolve(IResolveContext)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L69">View Source</a>
               </span>
               <a id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget*"></a>
-              <h4 id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_ResolveContext_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.ResolveContext)">GetFallbackCompiledRezolveTarget(ResolveContext)</h4>
+              <h4 id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.IResolveContext)">GetFallbackCompiledRezolveTarget(IResolveContext)</h4>
               <div class="markdown level1 summary"><p>Overrides the base implementation to pass the lookup for an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> to the inner container - this
 is how dependency chaining from this container to the inner container is achieved.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override ICompiledTarget GetFallbackCompiledRezolveTarget(ResolveContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">protected override ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -342,9 +342,9 @@ is how dependency chaining from this container to the inner container is achieve
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
+                    <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
                     <td><span class="parametername">context</span></td>
-                    <td><p>Required.  The <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>.</p>
+                    <td><p>Required.  The <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>.</p>
 </td>
                   </tr>
                 </tbody>
@@ -365,7 +365,7 @@ is how dependency chaining from this container to the inner container is achieve
                 </tbody>
               </table>
               <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_ResolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(ResolveContext)</a></div>
+              <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(IResolveContext)</a></div>
               <h3 id="extensionmethods">Extension Methods</h3>
               <div>
                   <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
@@ -407,7 +407,7 @@ is how dependency chaining from this container to the inner container is achieve
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;ResolveContext, TResult&gt;, Type, ScopeBehaviour)</a>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_IResolveContext___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;IResolveContext, TResult&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type, ScopeBehaviour)</a>
@@ -431,7 +431,7 @@ is how dependency chaining from this container to the inner container is achieve
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;TResult&gt;&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
-                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
               </div>
               <div>
                   <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_Expression_System_Func___0___1___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type, ScopeBehaviour)</a>

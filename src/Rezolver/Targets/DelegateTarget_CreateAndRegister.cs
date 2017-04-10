@@ -22,15 +22,15 @@ namespace Rezolver
 			return new DelegateTarget(factory, declaredType);
 		}
 
-		/// <summary>Creates a <see cref="Rezolver.Targets.DelegateTarget" /> for a factory delegate which takes a 
-		/// <see cref="ResolveContext" /> and which returns
+		/// <summary>Creates a <see cref="Rezolver.Targets.DelegateTarget" /> for a factory delegate which takes an 
+		/// <see cref="IResolveContext" /> and which returns
 		/// an instance of <typeparamref name="TResult" /></summary>
 		/// <typeparam name="TResult">The type of the object produced by the factory delegate.</typeparam>
 		/// <param name="factory">Required.  The factory delegate that is to be wrapped by the target.</param>
 		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType" /> of the target to be created,
 		/// if different from <typeparamref name="TResult" /></param>
 		/// <remarks>All arguments to the delegate are injected from the container when executed</remarks>
-		public static ITarget ForDelegate<TResult>(Func<ResolveContext, TResult> factory, Type declaredType = null)
+		public static ITarget ForDelegate<TResult>(Func<IResolveContext, TResult> factory, Type declaredType = null)
 		{
 			if(factory == null) throw new ArgumentNullException(nameof(factory));
 			return new DelegateTarget(factory, declaredType);
@@ -134,8 +134,8 @@ namespace Rezolver
 			targets.RegisterDelegate((Delegate)factory, declaredType, scopeBehaviour);
 		}
 
-		/// <summary>Registers a <see cref="Rezolver.Targets.DelegateTarget" /> built from a factory delegate which takes a 
-		/// <see cref="ResolveContext" /> and which returns an instance of <typeparamref name="TResult" /></summary>
+		/// <summary>Registers a <see cref="Rezolver.Targets.DelegateTarget" /> built from a factory delegate which takes an 
+		/// <see cref="IResolveContext" /> and which returns an instance of <typeparamref name="TResult" /></summary>
 		/// <typeparam name="TResult">The type of the object produced by the factory delegate.</typeparam>
 		/// <param name="targets">Required.  The <see cref="ITargetContainer" /> into which the newly created target will be registered</param>
 		/// <param name="factory">Required.  The factory delegate which is to be executed when an instance is resolved by a container</param>
@@ -143,7 +143,7 @@ namespace Rezolver
 		/// if different from <typeparamref name="TResult" />.  Also overrides the type against which the registration will be made.</param>
         /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the factory delegate will be
         /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
-		public static void RegisterDelegate<TResult>(this ITargetContainer targets, Func<ResolveContext, TResult> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
+		public static void RegisterDelegate<TResult>(this ITargetContainer targets, Func<IResolveContext, TResult> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
 		{
 			targets.RegisterDelegate((Delegate)factory, declaredType, scopeBehaviour);
 		}

@@ -18,13 +18,13 @@ namespace Rezolver.Compilation.Expressions
 	public class ExpressionCompileContext : CompileContext, IExpressionCompileContext
 	{
 		/// <summary>
-		/// The default <see cref="ResolveContext"/> parameter expression used by the expression-based code generators
+		/// The default <see cref="IResolveContext"/> parameter expression used by the expression-based code generators
 		/// defined in this library, although it's not used directly for that purpose - instead, the <see cref="ResolveContextExpression"/> 
 		/// of new contexts is initialised to this if not explicitly provided on  construction and when not being inherited from another 
 		/// context.
 		/// </summary>
 		public static ParameterExpression DefaultResolveContextParameterExpression { get; }
-			= Expression.Parameter(typeof(ResolveContext), "resolveContext");
+			= Expression.Parameter(typeof(IResolveContext), "resolveContext");
 
 		/// <summary>
 		/// Gets the parent context.
@@ -47,7 +47,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <value>The container expression.</value>
 		/// <remarks>Note that this is *not* the same as <see cref="ContextContainerPropertyExpression" /> - but is provided
 		/// to allow expressions to be compiled which compare the container supplied at compile time to the one from the
-		/// <see cref="ResolveContext.Container" /> at resolve-time.</remarks>
+		/// <see cref="IResolveContext.Container" /> at resolve-time.</remarks>
 		public Expression ContainerExpression
 		{
 			get
@@ -58,14 +58,14 @@ namespace Rezolver.Compilation.Expressions
 
 		private readonly ParameterExpression _resolveContextExpression;
 		/// <summary>
-		/// This is the parameter expression which represents the <see cref="ResolveContext" /> that is passed to the
+		/// This is the parameter expression which represents the <see cref="IResolveContext" /> that is passed to the
 		/// <see cref="ICompiledTarget" /> at resolve-time.
 		/// The other expressions - <see cref="ContextContainerPropertyExpression" /> and <see cref="ContextScopePropertyExpression" />
 		/// are both built from this too.
 		/// </summary>
 		/// <value>The resolve context expression.</value>
 		/// <remarks>If the code produced by the <see cref="IExpressionBuilder" /> for a given target needs to read or use the
-		/// <see cref="ResolveContext" /> that was originally passed to the <see cref="IContainer.Resolve(ResolveContext)" /> method,
+		/// <see cref="IResolveContext" /> that was originally passed to the <see cref="IContainer.Resolve(IResolveContext)" /> method,
 		/// then it does it by using this expression, which will be set as the only parameter on the lambda expression which is
 		/// eventually compiled (in the case of the default expression compiler, <see cref="ExpressionCompiler" />.</remarks>
 		public ParameterExpression ResolveContextExpression
@@ -78,7 +78,7 @@ namespace Rezolver.Compilation.Expressions
 
 		private MemberExpression _contextContainerPropertyExpression;
 		/// <summary>
-		/// Gets an expression for reading the <see cref="ResolveContext.Container" /> property of the <see cref="ResolveContext" />
+		/// Gets an expression for reading the <see cref="IResolveContext.Container" /> property of the <see cref="IResolveContext" />
 		/// that's in scope when the <see cref="ICompiledTarget" /> (which is built from the compiled expression) is executed.
 		/// </summary>
 		/// <value>The context container property expression.</value>
@@ -93,7 +93,7 @@ namespace Rezolver.Compilation.Expressions
 		private MemberExpression _contextScopePropertyExpression;
 
 		/// <summary>
-		/// Gets an expression for reading the <see cref="ResolveContext.Scope" /> property of the <see cref="ResolveContext" />
+		/// Gets an expression for reading the <see cref="IResolveContext.Scope" /> property of the <see cref="IResolveContext" />
 		/// that's in scope when the <see cref="ICompiledTarget" /> (which is built from the compiled expression) is executed.
 		/// </summary>
 		/// <value>The context scope property expression.</value>
@@ -146,8 +146,8 @@ namespace Rezolver.Compilation.Expressions
 		/// Initializes a new instance of the <see cref="ExpressionCompileContext"/> class.
 		/// </summary>
 		/// <seealso cref="CompileContext.CompileContext(IContainer, ITargetContainer, Type)"/>.
-		/// <param name="container">Required.  The container for which the compilation is being performed.  When compiling in response to
-		/// a call to <see cref="IContainer.Resolve(ResolveContext)"/>, the container which first receives the call should be 
+		/// <param name="resolveContext">Required.  The container for which the compilation is being performed.  When compiling in response to
+		/// a call to <see cref="IContainer.Resolve(IResolveContext)"/>, the container which first receives the call should be 
 		/// the one passed here.</param>
 		/// <param name="dependencyTargetContainer">Required - target container used for dependency lookups.  As with the base class
 		/// this is actually wrapped in a new <see cref="ChildTargetContainer"/> and used as this class' implementation of
@@ -160,17 +160,17 @@ namespace Rezolver.Compilation.Expressions
 		/// 
 		/// The <see cref="ExpressionCompiler"/>, when building expressions to turn into compiled lambdas, uses this as the main parameter
 		/// on the lambda itself.</param>
-		protected internal ExpressionCompileContext(IContainer container,
+		protected internal ExpressionCompileContext(IResolveContext resolveContext,
 		  ITargetContainer dependencyTargetContainer,
 		  Type targetType = null,
 		  ParameterExpression resolveContextExpression = null)
-			: base(container, dependencyTargetContainer, targetType)
+			: base(resolveContext, dependencyTargetContainer, targetType)
 		{
 			_resolveContextExpression = resolveContextExpression ?? DefaultResolveContextParameterExpression;
 			_sharedExpressions = new Dictionary<SharedExpressionKey, Expression>(20);
-			_containerExpression = Expression.Constant(Container, typeof(IContainer));
-			_contextContainerPropertyExpression = Expression.Property(_resolveContextExpression, nameof(ResolveContext.Container));
-			_contextScopePropertyExpression = Expression.Property(ResolveContextExpression, nameof(ResolveContext.Scope));
+			_containerExpression = Expression.Constant(resolveContext.Container, typeof(IContainer));
+			_contextContainerPropertyExpression = Expression.Property(_resolveContextExpression, nameof(IResolveContext.Container));
+			_contextScopePropertyExpression = Expression.Property(ResolveContextExpression, nameof(IResolveContext.Scope));
 			RegisterExpressionTargets();
 		}
 

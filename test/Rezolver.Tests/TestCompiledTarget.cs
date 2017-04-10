@@ -8,12 +8,15 @@ namespace Rezolver.Tests
 	public class TestCompiledTarget : ICompiledTarget
 	{
 		private object _obj;
+
+        public ITarget SourceTarget => null;
+
 		public TestCompiledTarget(object obj = null)
 		{
 			_obj = obj;
 		}
 
-		public object GetObject(ResolveContext context)
+		public object GetObject(IResolveContext context)
 		{
 			return _obj;
 		}

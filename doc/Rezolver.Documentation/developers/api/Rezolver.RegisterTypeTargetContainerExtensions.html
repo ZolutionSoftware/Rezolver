@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -156,7 +156,7 @@
               <h4 id="Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.RegisterTypeTargetContainerExtensions.RegisterType(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IMemberBindingBehaviour)">RegisterType(ITargetContainer, Type, Type, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers an instance of <span class="paramref">objectType</span> (optionally for the service type <span class="paramref">serviceType</span>) to be 
 created by  an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> via constructor injection.<br>The registration will auto-bind a constructor based on the services available in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> and 
-<a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is first called.</p>
+<a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is first called.</p>
 <p>Optionally, property injection can be configured for the new object, depending on the <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> 
 object passed for the optional parameter <span class="paramref">memberBinding</span>.</p>
 </div>
@@ -218,7 +218,7 @@ the type <span class="paramref">serviceType</span> or <span class="paramref">obj
               <a id="Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_" data-uid="Rezolver.RegisterTypeTargetContainerExtensions.RegisterType*"></a>
               <h4 id="Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.RegisterTypeTargetContainerExtensions.RegisterType``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterType&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers an instance of <span class="typeparamref">TObject</span> to be created by an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> via constructor injection.<br>The registration will auto-bind a constructor based on the services available in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> and 
-<a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is first called.</p>
+<a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is first called.</p>
 <p>Optionally, property injection can be configured for the new object, depending on the <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> 
 object passed for the optional parameter <span class="paramref">memberBinding</span>.</p>
 </div>
@@ -284,7 +284,7 @@ the <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ForType__1_Rezolv
               <h4 id="Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.RegisterTypeTargetContainerExtensions.RegisterType``2(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterType&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers an instance of <span class="typeparamref">TObject</span> for the service type <span class="typeparamref">TService</span> to be created by 
 an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> via constructor injection.<br>The registration will auto-bind a constructor based on the services available in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> and 
-<a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is first called.</p>
+<a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is first called.</p>
 <p>Optionally, property injection can be configured for the new object, depending on the <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> 
 object passed for the optional parameter <span class="paramref">memberBinding</span>.</p>
 </div>

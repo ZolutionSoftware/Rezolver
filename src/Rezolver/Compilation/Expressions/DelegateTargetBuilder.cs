@@ -30,7 +30,7 @@ namespace Rezolver.Compilation.Expressions
 		{
 			var bindings = ParameterBinding.BindWithRezolvedArguments(target.Factory.GetMethodInfo());
 			return Expression.Invoke(Expression.Constant(target.Factory),
-				bindings.Select(b => b.Parameter.ParameterType == typeof(ResolveContext) ?
+				bindings.Select(b => b.Parameter.ParameterType == typeof(IResolveContext) ?
 					context.ResolveContextExpression
 					: compiler.Build(b.Target, context.NewContext(b.Parameter.ParameterType))));
 		}

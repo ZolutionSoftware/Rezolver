@@ -36,7 +36,7 @@ The interface is implemented by:
 
 - @Rezolver.IContainer
 - @Rezolver.IContainerScope (because scopes are hierarchical)
-- @Rezolver.ResolveContext
+- @Rezolver.IResolveContext
 
 In the example code, therefore, you will see a lot of this:
 

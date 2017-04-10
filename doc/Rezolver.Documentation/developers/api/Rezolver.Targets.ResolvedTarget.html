@@ -65,7 +65,7 @@
         		</div>
         		</form>
         		<p class="navbar-text navbar-right">
-        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/vpre/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
         			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
         			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
@@ -105,8 +105,8 @@
               <h1 id="Rezolver_Targets_ResolvedTarget" data-uid="Rezolver.Targets.ResolvedTarget">Class ResolvedTarget
               </h1>
               <div class="markdown level0 summary"><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically 
-(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> when 
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is called.</p>
+(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when 
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is called.</p>
 <p>This is the most common way that we bind constructor parameters, for example - i.e. &#39;I want an
 <code>IService</code> instance - go get it&#39;.</p>
 </div>
@@ -126,7 +126,7 @@
                   <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SelectScope_Rezolver_ResolveContext_">TargetBase.SelectScope(ResolveContext)</a>
+                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SelectScope_Rezolver_IResolveContext_">TargetBase.SelectScope(IResolveContext)</a>
                 </div>
                 <div>
                   <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -161,7 +161,7 @@
 or when the target is used perhaps by another <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (e.g. - a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> with a
 constructor parameter bound to one of these).</p>
 <p>So, in essence, a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> represents an automatic call to a container&#39;s 
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> method, for the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_ResolvedTarget_DeclaredType">DeclaredType</a>.</p>
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method, for the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_ResolvedTarget_DeclaredType">DeclaredType</a>.</p>
 <p>In practise - an <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> might take advantage of the fact that, during compilation, targets
 can be discovered directly from the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> that is passed to 
 <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a> by leveraging its <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
@@ -169,7 +169,7 @@ implementation.</p>
 <p>Indeed - the expressions compiler uses this to avoid repeated recursion into the Resolve method of the container, instead
 choosing to compile all the expressions for all targets required for an operation into one dynamically built method - 
 which results in very fast execution times for all resolve operations.</p>
-<p>Not only this, but the behaviour can be extended still further by realising that a <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_Container">Container</a>
+<p>Not only this, but the behaviour can be extended still further by realising that a <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a>
 on which a resolve operation is invoked might not be the same container for which this <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> was 
 first compiled.  In this case - it&#39;s possible that the other container has alternative registrations for a given service
 type which the application expects to take precedence over those which were originally resolved when compilation took 
