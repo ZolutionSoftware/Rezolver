@@ -145,7 +145,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ExpressionCompileContext"/> class.
 		/// </summary>
-		/// <seealso cref="CompileContext.CompileContext(IContainer, ITargetContainer, Type)"/>.
+		/// <seealso cref="CompileContext.CompileContext(IResolveContext, ITargetContainer, Type)"/>.
 		/// <param name="resolveContext">Required.  The container for which the compilation is being performed.  When compiling in response to
 		/// a call to <see cref="IContainer.Resolve(IResolveContext)"/>, the container which first receives the call should be 
 		/// the one passed here.</param>

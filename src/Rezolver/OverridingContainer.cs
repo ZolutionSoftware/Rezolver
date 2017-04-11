@@ -70,5 +70,10 @@ namespace Rezolver
         {
             return _inner.FetchCompiled(context);
         }
+
+        public override bool TryResolve(IResolveContext context, out object result)
+        {
+            return base.TryResolve(context, out result);
+        }
     }
 }

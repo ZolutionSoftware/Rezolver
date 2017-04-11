@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Rezolver.Tests.Shared.Types
+namespace Rezolver.Tests.Types
 {
     public class RequiresITargetCompiler
     {

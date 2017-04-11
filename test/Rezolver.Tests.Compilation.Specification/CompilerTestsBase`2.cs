@@ -38,6 +38,15 @@ namespace Rezolver.Tests.Compilation.Specification
 			Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
 		}
 
+        [Fact]
+        public void Container_ShouldInjectCompilerAsDependency()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterType<RequiresITargetCompiler>();
+            var container = CreateContainer(targets);
+            Assert.IsType<TCompiler>(container.Resolve<RequiresITargetCompiler>().Compiler);
+        }
+
 		[Fact]
 		public void OverridingContainer_ShouldResolveSameContextProvider()
 		{
@@ -87,24 +96,6 @@ namespace Rezolver.Tests.Compilation.Specification
 			}
 		}
 
-		[Fact]
-		public void VerifyingFailedTest()
-		{
-			var targets = CreateTargetContainer();
-			//targets.Register(new Disposable().AsObjectTarget().Singleton());
-			//targets.Register(new Disposable2().AsObjectTarget().Singleton());
-			//targets.Register(new Disposable3().AsObjectTarget().Singleton());
-			targets.RegisterSingleton<Disposable>();
-			targets.RegisterSingleton<Disposable2>();
-			targets.RegisterSingleton<Disposable3>();
-			targets.RegisterType<RequiresThreeDisposables>();
-			//var container = new ScopedContainer(targets, GetCompilerConfigProvider()); //CreateContainer(targets);
-			var container = CreateContainer(targets);
-			using (var scope = container.CreateScope())
-			{
-				var created = scope.Resolve<RequiresThreeDisposables>();
-				Assert.NotNull(created);
-			}
-		}
+		
 	}
 }

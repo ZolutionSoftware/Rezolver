@@ -70,37 +70,68 @@ namespace Rezolver.Compilation.Expressions
 		/// parameter is optional, this will always be provided</param>
 		protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
-			//TODO: Re below: Add a type/interface specifically to hold singletons in a container and add it to 
-			//the configuration provider's set up.  Then we can use that as the backing store for the singleton 
-			//objects produced by all singletons within.  In fact - we can use a similar approach to what's 
-			//been done for scopes.  This enables us to have one singleton create multiple instances per-container-tree
-			//as opposed to per app-domain.
+            //TODO: Re below: Add a type/interface specifically to hold singletons in a container and add it to 
+            //the configuration provider's set up.  Then we can use that as the backing store for the singleton 
+            //objects produced by all singletons within.  In fact - we can use a similar approach to what's 
+            //been done for scopes.  This enables us to have one singleton create multiple instances per-container-tree
+            //as opposed to per app-domain.
 
-			var initialiser = target.GetOrAddInitialiser(context.TargetType ?? target.DeclaredType, t => {
-				//get the underlying expression for the target that is to be turned into a singleton - but disable any
-				//scope tracking because the singleton is fixed to 'Explicit' and it's important that it is in
-				//control of that, because all singletons must be stored in the very root scope.
-				var innerExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(t, scopeBehaviourOverride: ScopeBehaviour.None));
-				
-				//there's an argument for using the compiler here to generate this 
-				//lambda, but our interface specifically creates an ICompiledRezolveTarget - not a delegate - so it's not 
-				//really suitable.
-				//in any case, compiling directly to a delegate will work on all platforms on which Rezolver will work in the 
-				//first place, it just might not be as fast as it might be if we honoured the context's compiler, if
-				//that happens to be the AssemblyRezolveTargetCompiler.
-				var lazyLambdaExpr = Expression.Lambda(Expression.New(LazyObject_Ctor,
-					//creating the factory delegate for the lazy uniquely for each invokation of the outer lambda
-					//note that the RezolveContextExpression has to be quoted on the outer lambda, but will be used
-					//on the inner lambda
-					Expression.Lambda(innerExpression.Body)), context.ResolveContextExpression);
-				var lazyLambda = (Func<IResolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
-				//now we create and capture an instance of the SingletonTargetLazyInitialiser class, passing our
-				//dynamically constructed delegate along with this target
-				return new SingletonTargetLazyInitialiser(target, lazyLambda);
-			});
+            //we want an object in the 
+            //get the compiled target for the current context
+            //var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
+            //var compiled = holder.GetCompiled(context, c => compiler.CompileTarget(target.InnerTarget, c.NewContext(scopeBehaviourOverride: ScopeBehaviour.None)));
 
-			return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledTarget)),
-				   ICompiledRezolveTarget_GetObject, context.ResolveContextExpression);
-		}
-	}
+
+            //var lazy = holder.GetLazy(context.ResolveContext, c => compiled.GetObject(c));
+
+            //return Expression.Property(Expression.Constant(lazy), "Value");
+            var methodToCall = MethodCallExtractor.ExtractCalledMethod((SingletonTarget.SingletonContainer c) => c.GetLazy(null, null));
+            var innerExpression = compiler.BuildResolveLambda(
+                target.InnerTarget, 
+                context.NewContext(context.TargetType ?? target.DeclaredType, scopeBehaviourOverride: ScopeBehaviour.None));
+            //var lazyExpr = Expression.Lambda(Expression.New(LazyObject_Ctor,
+            //        //creating the factory delegate for the lazy uniquely for each invokation of the outer lambda
+            //        //note that the RezolveContextExpression has to be quoted on the outer lambda, but will be used
+            //        //on the inner lambda
+            //        Expression.Lambda(innerExpression.Body)));
+            var finalExpr = Expression.Property(
+                Expression.Call(
+                    Expression.Constant(context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>())
+                    /*new TargetExpression(Target.Resolved<SingletonTarget.SingletonContainer>())*/,
+                    methodToCall,
+                    context.ResolveContextExpression,
+                    innerExpression
+                ), "Value");
+
+            return finalExpr;
+
+            //var initialiser = target.GetOrAddInitialiser(context.TargetType ?? target.DeclaredType, t => {
+            //	//get the underlying expression for the target that is to be turned into a singleton - but disable any
+            //	//scope tracking because the singleton is fixed to 'Explicit' and it's important that it is in
+            //	//control of that, because all singletons must be stored in the very root scope.
+            //	var innerExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(t, scopeBehaviourOverride: ScopeBehaviour.None));
+
+            //	//there's an argument for using the compiler here to generate this 
+            //	//lambda, but our interface specifically creates an ICompiledRezolveTarget - not a delegate - so it's not 
+            //	//really suitable.
+            //	//in any case, compiling directly to a delegate will work on all platforms on which Rezolver will work in the 
+            //	//first place, it just might not be as fast as it might be if we honoured the context's compiler, if
+            //	//that happens to be the AssemblyRezolveTargetCompiler.
+            //	var lazyLambdaExpr = Expression.Lambda(Expression.New(LazyObject_Ctor,
+            //		//creating the factory delegate for the lazy uniquely for each invokation of the outer lambda
+            //		//note that the RezolveContextExpression has to be quoted on the outer lambda, but will be used
+            //		//on the inner lambda
+            //		Expression.Lambda(innerExpression.Body)), context.ResolveContextExpression);
+            //	var lazyLambda = (Func<IResolveContext, Lazy<object>>)lazyLambdaExpr.Compile();
+            //	//now we create and capture an instance of the SingletonTargetLazyInitialiser class, passing our
+            //	//dynamically constructed delegate along with this target
+            //	return new SingletonTargetLazyInitialiser(target, lazyLambda);
+            //});
+
+            //return Expression.Call(Expression.Constant(initialiser, typeof(ICompiledTarget)),
+            //	   ICompiledRezolveTarget_GetObject, context.ResolveContextExpression);
+        }
+
+
+    }
 }

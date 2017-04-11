@@ -6,6 +6,7 @@
     <AssemblyName>Rezolver.Tests.Shared</AssemblyName>
     <PackageId>Rezolver.Tests.Shared</PackageId>
     <PackageTags>rezolver</PackageTags>
+    <RootNamespace>Rezolver.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">

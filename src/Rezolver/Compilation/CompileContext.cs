@@ -87,6 +87,7 @@ namespace Rezolver.Compilation
 			ParentContext = parentContext;
 			DependencyTargetContainer = new ChildTargetContainer(parentContext);
 			_targetType = targetType;
+            _resolveContext = parentContext.ResolveContext.New(newRequestedType: targetType);
 			ScopeBehaviourOverride = scopeBehaviourOverride;
 			//note - many of the other members are inherited in the property getters or interface implementations
 		}

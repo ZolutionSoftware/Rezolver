@@ -10,7 +10,26 @@ namespace Rezolver.Tests.Compilation.Specification
 {
 	public partial class CompilerTestsBase
 	{
-		[Fact]
+        [Fact]
+        public void ShouldCreateDependantWithSingletonDependenciesInScope()
+        {
+            //this test arrived from a bug that occurred early on.
+
+            var targets = CreateTargetContainer();
+            targets.RegisterSingleton<Disposable>();
+            targets.RegisterSingleton<Disposable2>();
+            targets.RegisterSingleton<Disposable3>();
+            targets.RegisterType<RequiresThreeDisposables>();
+            
+            var container = CreateContainer(targets);
+            using (var scope = container.CreateScope())
+            {
+                var created = scope.Resolve<RequiresThreeDisposables>();
+                Assert.NotNull(created);
+            }
+        }
+
+        [Fact]
 		public void SingletonTarget_ShouldOnlyCreateOneInstance_ViaConstructorTarget()
 		{
 			var targets = CreateTargetContainer();

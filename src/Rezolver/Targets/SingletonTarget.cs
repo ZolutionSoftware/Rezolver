@@ -19,6 +19,42 @@ namespace Rezolver.Targets
 	/// </summary>
 	public class SingletonTarget : TargetBase
 	{
+        internal class SingletonContainer
+        {
+            private class CompileContextRequestedTypeComparer : IEqualityComparer<ICompileContext>
+            {
+                public static readonly CompileContextRequestedTypeComparer Instance = new CompileContextRequestedTypeComparer();
+
+                private CompileContextRequestedTypeComparer() { }
+
+                public bool Equals(ICompileContext x, ICompileContext y)
+                {
+                    return object.ReferenceEquals(x, y) || x?.TargetType == y?.TargetType;
+                }
+
+                public int GetHashCode(ICompileContext obj)
+                {
+                    return obj?.TargetType?.GetHashCode() ?? 0;
+                }
+            }
+
+            private readonly ConcurrentDictionary<IResolveContext, Lazy<object>> _cached =
+                new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
+
+            private readonly ConcurrentDictionary<ICompileContext, ICompiledTarget> _cachedCompiled =
+                new ConcurrentDictionary<ICompileContext, ICompiledTarget>(CompileContextRequestedTypeComparer.Instance);
+
+            public ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
+                where TCompileContext: ICompileContext
+            {
+                return _cachedCompiled.GetOrAdd(context, c => compiledTargetFactory((TCompileContext)c));
+            }
+
+            public Lazy<object> GetLazy(IResolveContext context, Func<IResolveContext, object> lazyFactory)
+            {
+                return _cached.GetOrAdd(context, c => new Lazy<object>(() => lazyFactory(c)));
+            }
+        }
 		//the cached compiled targets for this singleton keyed by the requested type.
 		//compilers should use this so that the singleton rule can be enforced.
 		//TODO: change this to be a state storage device in the container - possibly using the same
