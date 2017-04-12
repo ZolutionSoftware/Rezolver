@@ -149,6 +149,7 @@ namespace Rezolver
 					}
 
 					//note that explicitly scoped objects might not actually be IDisposable :)
+                    
 					var allExplicitObjects = _explicitlyScopedObjects.Values.ToArray()
 						.Select(l => l.Value).OfType<IDisposable>();
 					var allImplicitObjects = _implicitlyScopedObjects.ToArray();

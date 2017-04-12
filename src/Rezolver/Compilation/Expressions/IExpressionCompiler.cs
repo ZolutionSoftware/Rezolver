@@ -49,7 +49,7 @@ namespace Rezolver.Compilation.Expressions
 		/// lambda expression which can be compiled into a delegate and executed; or quoted inside 
 		/// another expression as a callback.
 		/// 
-		/// The <see cref="IExpressionCompileContext.ResolveContextExpression"/> of the 
+		/// The <see cref="IExpressionCompileContext.ResolveContextParameterExpression"/> of the 
 		/// <paramref name="context"/> will be used to define the single parameter for the lambda that 
 		/// is created.
 		/// </summary>

@@ -26,7 +26,8 @@ namespace Rezolver.Compilation
 	/// <seealso cref="Rezolver.Compilation.ICompileContext" />
 	/// <seealso cref="Rezolver.ITargetContainer" />
 	/// <remarks>Note that you can only create an instance of this either through inheritance, via the explicit implementation
-	/// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?)"/>, or (preferably) via an <see cref="ICompileContextProvider" /> 
+	/// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>, or (preferably) via an 
+    /// <see cref="ICompileContextProvider" /> 
 	/// resolved from an <see cref="IContainer" /> or <see cref="ITargetContainer" /> directly from a registered target.
 	/// </remarks>
 	public class CompileContext : ICompileContext, ITargetContainer
@@ -38,6 +39,9 @@ namespace Rezolver.Compilation
 		public ICompileContext ParentContext { get; }
 
         private readonly IResolveContext _resolveContext;
+        /// <summary>
+        /// Implementation of <see cref="ICompileContext.ResolveContext"/>
+        /// </summary>
         public IResolveContext ResolveContext => _resolveContext ?? ParentContext?.ResolveContext;
 
 		private readonly Type _targetType;
@@ -54,6 +58,11 @@ namespace Rezolver.Compilation
 		/// </summary>
 		public ScopeBehaviour? ScopeBehaviourOverride { get; }
 
+        private ScopePreference? _scopePreferenceOverride;
+        /// <summary>
+        /// Implementation of <see cref="ICompileContext.ScopePreferenceOverride"/>
+        /// </summary>
+        public ScopePreference? ScopePreferenceOverride { get { return _scopePreferenceOverride ?? ParentContext?.ScopePreferenceOverride; } }
 		/// <summary>
 		/// This is the <see cref="ITargetContainer"/> through which dependencies are resolved by this context in its 
 		/// implementation of <see cref="ITargetContainer"/>.
@@ -81,7 +90,12 @@ namespace Rezolver.Compilation
 		/// <param name="targetType">The target type that is expected to be compiled, or null if the <see cref="TargetType"/>
 		/// is to be inherited from the <paramref name="parentContext"/>.</param>
 		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with this context.</param>
-		protected CompileContext(ICompileContext parentContext, Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
+        /// <param name="scopePreferenceOverride">Allows you to override the scope preference for any target being compiled in this context - 
+        /// if not provided, then it is automatically inherited from the parent.</param>
+		protected CompileContext(ICompileContext parentContext, 
+            Type targetType = null, 
+            ScopeBehaviour? scopeBehaviourOverride = null,
+            ScopePreference? scopePreferenceOverride = null)
 		{
 			parentContext.MustNotBeNull(nameof(parentContext));
 			ParentContext = parentContext;
@@ -89,6 +103,7 @@ namespace Rezolver.Compilation
 			_targetType = targetType;
             _resolveContext = parentContext.ResolveContext.New(newRequestedType: targetType);
 			ScopeBehaviourOverride = scopeBehaviourOverride;
+            _scopePreferenceOverride = scopePreferenceOverride;
 			//note - many of the other members are inherited in the property getters or interface implementations
 		}
 
@@ -117,29 +132,28 @@ namespace Rezolver.Compilation
 			_compileStack = new Stack<CompileStackEntry>(30);
 		}
 
-		/// <summary>
-		/// Creates a new child context from this one, except the <see cref="TargetType" /> and
-		/// <see cref="ScopeBehaviour" /> properties can be overriden if required, with the rest of the state inherited from
-		/// this context.
-		/// </summary>
-		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this context's <see cref="TargetType" />.</param>
-		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with the new context.</param>
-		ICompileContext ICompileContext.NewContext(Type targetType, ScopeBehaviour? scopeBehaviourOverride)
+        ICompileContext ICompileContext.NewContext(Type targetType, 
+            ScopeBehaviour? scopeBehaviourOverride,
+            ScopePreference? scopePreferenceOverride)
 		{
 			return NewContext(targetType, scopeBehaviourOverride);
 		}
 
-		/// <summary>
-		/// Used by the explicit implementation of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?)"/>.
-		/// 
-		/// Override this in your derived class to create the correct implementation of <see cref="ICompileContext"/>.
-		/// </summary>
-		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this 
-		/// context's <see cref="TargetType" />.</param>
-		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with the new context.</param>
-		protected virtual ICompileContext NewContext(Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
+        /// <summary>
+        /// Used by the explicit implementation of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>.
+        /// 
+        /// Override this in your derived class to create the correct implementation of <see cref="ICompileContext"/>.
+        /// </summary>
+        /// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this 
+        /// context's <see cref="TargetType" />.</param>
+        /// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with the new context.</param>
+        /// <param name="scopePreferenceOverride">Sets the <see cref="ScopePreferenceOverride"/>.  As soon as this is set on one context, it is automatically 
+        /// inherited by all its child contexts (i.e. you cannot null it)</param>
+        protected virtual ICompileContext NewContext(Type targetType = null, 
+            ScopeBehaviour? scopeBehaviourOverride = null,
+            ScopePreference? scopePreferenceOverride = null)
 		{
-			return new CompileContext(this, targetType, scopeBehaviourOverride);
+			return new CompileContext(this, targetType, scopeBehaviourOverride, scopePreferenceOverride ?? ScopePreferenceOverride);
 		}
 
 		/// <summary>

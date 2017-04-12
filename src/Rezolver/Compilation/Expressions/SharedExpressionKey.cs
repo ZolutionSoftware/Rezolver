@@ -64,7 +64,7 @@ namespace Rezolver.Compilation.Expressions
 		{
 			return TargetType.GetHashCode() ^
 			  Name.GetHashCode() ^
-			  (RequestingType != null ? RequestingType.GetHashCode() : 0);
+			  (RequestingType?.GetHashCode() ?? 0);
 		}
 
 		/// <summary>

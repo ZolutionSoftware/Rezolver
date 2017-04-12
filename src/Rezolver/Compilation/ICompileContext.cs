@@ -29,8 +29,18 @@ namespace Rezolver.Compilation
 		/// <summary>
 		/// If not <c>null</c> then this overrides the <see cref="ITarget.ScopeBehaviour"/> of the <see cref="ITarget"/>
 		/// that's currently being compiled.
+        /// 
+        /// Note that this is not automatically inherited from one context to another
 		/// </summary>
 		ScopeBehaviour? ScopeBehaviourOverride { get; }
+
+        /// <summary>
+        /// Same as <see cref="ScopeBehaviourOverride"/> but this is used to override currently compiling target's
+        /// <see cref="ITarget.ScopePreference"/>.
+        /// 
+        /// Typically used, for example, when a singleton is compiling other targets.
+        /// </summary>
+        ScopePreference? ScopePreferenceOverride { get; }
 
 		/// <summary>
 		/// Any <see cref="ICompiledTarget"/> built for a <see cref="ITarget"/> with this context should target this type.  
@@ -51,18 +61,22 @@ namespace Rezolver.Compilation
         /// </summary>
         IResolveContext ResolveContext { get; }
 
-		/// <summary>
-		/// Creates a new child context from this one, except the <see cref="TargetType"/> and
-		/// <see cref="ScopeBehaviourOverride"/> properties can be overriden if required.
-		/// 
-		/// Implementations must make sure that the <see cref="ScopeBehaviourOverride"/> 
-		/// is *never* inherited.
-		/// </summary>
-		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this context's <see cref="TargetType"/>.</param>
-		/// <param name="scopeBehaviourOverride">Override the <see cref="ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
-		/// This is never inherited automatically from one context to another.</param>
-		/// <returns>A new <see cref="ICompileContext" />.</returns>
-		ICompileContext NewContext(Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null);
+        /// <summary>
+        /// Creates a new child context from this one, except the <see cref="TargetType"/> and
+        /// <see cref="ScopeBehaviourOverride"/> properties can be overriden if required.
+        /// 
+        /// Implementations must make sure that the <see cref="ScopeBehaviourOverride"/> 
+        /// is *never* inherited.
+        /// </summary>
+        /// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this context's <see cref="TargetType"/>.</param>
+        /// <param name="scopeBehaviourOverride">Value for the <see cref="ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
+        /// This is never inherited automatically from one context to another.</param>
+        /// <param name="scopePreferenceOverride">Sets the <see cref="ScopePreferenceOverride"/>.  As soon as this is set on one context, it is automatically 
+        /// inherited by all its child contexts (i.e. you cannot null it)</param>
+        /// <returns>A new <see cref="ICompileContext" />.</returns>
+        ICompileContext NewContext(Type targetType = null, 
+            ScopeBehaviour? scopeBehaviourOverride = null,
+            ScopePreference? scopePreferenceOverride = null);
 
 		/// <summary>
 		/// Pops the compile stack, returning the entry that was popped.

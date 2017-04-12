@@ -143,6 +143,19 @@ namespace Rezolver
 			return (TResult)Resolve(typeof(TResult));
 		}
 
+        public bool TryResolve(Type newRequestedType, out object result)
+        {
+            return (Scope?.Container ?? Container).TryResolve(New(newRequestedType: newRequestedType), out result);
+        }
+
+        public bool TryResolve<TResult>(out TResult result)
+        {
+            object temp;
+            bool success = TryResolve(typeof(TResult), out temp);
+            result = (TResult)temp;
+            return success;
+        }
+
         public IResolveContext New(Type newRequestedType = null,
             IContainer newContainer = null,
             IContainerScope newScope = null)

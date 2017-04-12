@@ -2,6 +2,41 @@
 
 namespace Rezolver
 {
+    //public interface IResolve
+    //{
+    //    object Resolve(Type type);
+    //    TResult Resolve<TResult>();
+    //}
+
+    //public interface IResolveByContext
+    //{
+    //    object Resolve(IResolveContext context);
+    //    TResult Resolve<TResult>(IResolveContext context);
+    //}
+
+    //public interface ICanResolve
+    //{
+    //    bool CanResolve(Type type);
+    //    bool CanResolve<TResult>();
+    //}
+
+    //public interface ICanResolveByContext
+    //{
+    //    bool CanResolve(IResolveContext context);
+    //}
+
+    //public interface ITryResolve
+    //{
+    //    bool TryResolve(Type type, out object result);
+    //    bool TryResolve<TResult>(out TResult result);
+    //}
+
+    //public interface ITryResolveByContext
+    //{
+    //    bool TryResolve(IResolveContext context, out object result);
+    //    bool TryResolve<TResult>(IResolveContext context, out TResult result);
+    //}
+
     /// <summary>
 	/// Captures the state for a call to <see cref="IContainer.Resolve(IResolveContext)"/> 
 	/// (or <see cref="IContainer.TryResolve(IResolveContext, out object)"/>), including the container on which
@@ -65,9 +100,17 @@ namespace Rezolver
 		/// If a scope is active then it will be honoured.</remarks>
         TResult Resolve<TResult>();
 
+        bool TryResolve(Type newRequestedType, out object result);
+
+        bool TryResolve<TResult>(out TResult result);
+
         /// <summary>
         /// Creates a new context from this one, typically with at least one of the properties
+        /// changed according to the parameters you pass.
         /// 
+        /// Note that if none of the parameters are provided; or if none of the parameters have different
+        /// values from those already on the properties of the context, then the method can return
+        /// the same instance on which it is called.
         /// </summary>
         /// <param name="newRequestedType"></param>
         /// <param name="newContainer"></param>

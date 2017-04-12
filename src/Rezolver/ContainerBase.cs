@@ -437,6 +437,7 @@ namespace Rezolver
         {
             Targets.RegisterContainer(type, container);
         }
+
         #endregion
     }
 }

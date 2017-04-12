@@ -17,14 +17,24 @@ namespace Rezolver.Compilation.Expressions
 	/// </summary>
 	public class RezolvedTargetBuilder : ExpressionBuilderBase<ResolvedTarget>
 	{
-		private static readonly MethodInfo RezolverCanResolveMethod =
-		  MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.CanResolve(null));
+		
 
-		private static readonly MethodInfo RezolverResolveMethod =
-		  MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
+        private static object DynamicResolve(IResolveContext context, Type newType, Func<IResolveContext, object> fallback)
+        {
+            //assumes context is already prepared with the correct type set
+            object toReturn;
+            if (!context.Container.TryResolve(context, out toReturn))
+                toReturn = fallback(context);
+            return toReturn;
+        }
 
-		private static readonly MethodInfo NewContextMethod =
-		  MethodCallExtractor.ExtractCalledMethod((IResolveContext context) => context.New(null, null, null));
+        private static readonly MethodInfo DynamicResolveMethod =
+            MethodCallExtractor.ExtractCalledMethod(() => DynamicResolve(null, null, null));
+
+        private MethodCallExpression CallDynamicResolve(Expression resolveContext, Expression type, Expression fallback)
+        {
+            return Expression.Call(DynamicResolveMethod, resolveContext, type, fallback);
+        }
 
 		/// <summary>
 		/// Builds an expression for the given <paramref name="target"/>.
@@ -53,63 +63,115 @@ namespace Rezolver.Compilation.Expressions
 			//try to resolve the target from the context.  Note this could resolve the fallback target.
 			var staticTarget = target.Bind(context);
             //TODO: This should be a shared expression
-            var currentContainer = context.ContainerExpression;
+            var currentContainer = context.CurrentContainerExpression;
 			var declaredTypeExpr = Expression.Constant(target.DeclaredType, typeof(Type));
+            var newContext = CallResolveContext_New(context.ResolveContextParameterExpression, declaredTypeExpr);
+            /* new version */
+            Expression staticExpr;
 
-			var newContextLocal = context.GetOrAddSharedLocal(typeof(IResolveContext), "newContext");
-			var newContextExpr = Expression.Call(context.ResolveContextExpression, 
-                NewContextMethod, 
-                declaredTypeExpr, 
-                Expression.Default(typeof(IContainer)), 
-                Expression.Default(typeof(IContainerScope)));
-			var setNewContextLocal = Expression.Assign(newContextLocal, newContextExpr);
-			bool setNewContextFirst = false;
-			Expression staticExpr = null;
-			if (staticTarget != null)
-			{
-				staticExpr = compiler.Build(staticTarget, context.NewContext(target.DeclaredType)); //need a new context here to change the resolve type to our declared type.
-				if (staticExpr == null)
+            if(staticTarget != null)
+            {
+                staticExpr = compiler.Build(staticTarget, context.NewContext(target.DeclaredType));
+                if (staticExpr == null)
 					throw new InvalidOperationException(string.Format(ExceptionResources.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
-			}
-			else
-			{
-				//if no fallback call back into the container passed in the context to this method
-				//when no target was found in the static search.  This is just a convenient way
-				//to generate an exception saying that the dependency couldn't be found.
-				//unless, of course, some naughty person has snuck in an additional registration
-				//into the container after compilation has been done ;)
-				setNewContextFirst = true;
-				staticExpr = Expression.Call(currentContainer, RezolverResolveMethod, newContextLocal);
-			}
+            }
+            else
+            {
+                //this should generate a missing dependency exception if executed
+                //or, might actually yield a result if registrations have been added
+                //after the expression is compiled.
+                staticExpr = CallIContainer_Resolve(currentContainer, newContext);
+            }
 
-			if (staticExpr.Type != target.DeclaredType)
-				staticExpr = Expression.Convert(staticExpr, target.DeclaredType);
+            if (staticExpr.Type != target.DeclaredType)
+                staticExpr = Expression.Convert(staticExpr, target.DeclaredType);
 
-			//TODO: Change this to use the TryResolve and assign to staticExpr if false - avoids the CanResolve/Resolve check
-			//Equivalent to (ResolveContext r) => r.Resolver.CanResolve(type) ? r.Resolver.Resolve<DeclaredType>() : <<staticExpr>>
-			Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextContainerPropertyExpression, RezolverCanResolveMethod, newContextLocal),
-				Expression.Convert(Expression.Call(context.ContextContainerPropertyExpression, RezolverResolveMethod, newContextLocal), target.DeclaredType),
-				staticExpr
-			  );
+            var checkContainer = context.GetOrAddSharedExpression(typeof(bool),
+                "IsSameRezolver",
+                () => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), this.GetType());
+            
 
-			List<Expression> blockExpressions = new List<Expression>();
-			if (setNewContextFirst)
-				blockExpressions.Add(setNewContextLocal);
-			else
-				useContextRezolverIfCanExpr = Expression.Block(target.DeclaredType, setNewContextLocal, useContextRezolverIfCanExpr);
+            Expression useContextRezolverIfCanExpr = Expression.Condition(
+                CallIContainer_CanResolve(context.ContextContainerPropertyExpression, newContext),
+                Expression.Convert(CallIContainer_Resolve(context.ContextContainerPropertyExpression, newContext), target.DeclaredType),
+                staticExpr
+              );
 
-			//note the use of the shared expression here - which enables an advanced optimisation specifically connected with
-			//conditionals
-			blockExpressions.Add(Expression.Condition(context.GetOrAddSharedExpression(typeof(bool),
-				"IsSameRezolver",
-				() => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), this.GetType()),
-			  staticExpr,
-			  useContextRezolverIfCanExpr));
+            var finalExpr = Expression.Condition(checkContainer,
+                staticExpr,
+                useContextRezolverIfCanExpr);
 
-			if (blockExpressions.Count == 1)
-				return blockExpressions[0];
-			else
-				return Expression.Block(target.DeclaredType, blockExpressions);
-		}
-	}
+            return finalExpr;
+
+            //var finalexpr = Expression.Block(new[] { originalContext, toReturn },
+            //    Expression.Assign(originalContext, context.ResolveContextParameterExpression),
+            //    Expression.Assign(context.ResolveContextParameterExpression,
+            //        CallResolveContext_New(context.ResolveContextParameterExpression, newRequestedType: declaredTypeExpr)),
+            //    Expression.Assign(toReturn,
+            //        Expression.Condition(checkContainer,
+            //            Expression.Convert(staticExpr, target.DeclaredType),
+            //            Expression.Convert(CallDynamicResolve(context.ResolveContextParameterExpression,
+            //                declaredTypeExpr,
+            //                Expression.Constant(staticExprLambda.Compile())), target.DeclaredType))),
+            //    Expression.Assign(context.ResolveContextParameterExpression, originalContext),
+            //    toReturn);
+            //return finalexpr;
+            /* old version */
+            //var newContextLocal = context.GetOrAddSharedLocal(typeof(IResolveContext), "newContext");
+            //var newContextExpr = Expression.Call(context.ResolveContextParameterExpression,
+            //    NewContextMethod,
+            //    declaredTypeExpr,
+            //    Expression.Default(typeof(IContainer)),
+            //    Expression.Default(typeof(IContainerScope)));
+            //var setNewContextLocal = Expression.Assign(context.ResolveContextParameterExpression, newContextExpr);
+            //bool setNewContextFirst = false;
+            //Expression staticExpr = null;
+
+            //if (staticTarget != null)
+            //{
+            //	staticExpr = compiler.Build(staticTarget, context.NewContext(target.DeclaredType)); //need a new context here to change the resolve type to our declared type.
+            //	if (staticExpr == null)
+            //		throw new InvalidOperationException(string.Format(ExceptionResources.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
+            //}
+            //else
+            //{
+            //	//if no fallback call back into the container passed in the context to this method
+            //	//when no target was found in the static search.  This is just a convenient way
+            //	//to generate an exception saying that the dependency couldn't be found.
+            //	//unless, of course, some naughty person has snuck in an additional registration
+            //	//into the container after compilation has been done ;)
+            //	setNewContextFirst = true;
+            //	staticExpr = Expression.Call(currentContainer, RezolverResolveMethod, newContextLocal);
+            //}
+
+            //if (staticExpr.Type != target.DeclaredType)
+            //	staticExpr = Expression.Convert(staticExpr, target.DeclaredType);
+
+            ////TODO: Change this to use the TryResolve and assign to staticExpr if false - avoids the CanResolve/Resolve check
+            ////Equivalent to (ResolveContext r) => r.Resolver.CanResolve(type) ? r.Resolver.Resolve<DeclaredType>() : <<staticExpr>>
+            //Expression useContextRezolverIfCanExpr = Expression.Condition(Expression.Call(context.ContextContainerPropertyExpression, RezolverCanResolveMethod, newContextLocal),
+            //	Expression.Convert(Expression.Call(context.ContextContainerPropertyExpression, RezolverResolveMethod, newContextLocal), target.DeclaredType),
+            //	staticExpr
+            //  );
+
+            //List<Expression> blockExpressions = new List<Expression>();
+            //if (setNewContextFirst)
+            //	blockExpressions.Add(setNewContextLocal);
+            //else
+            //	useContextRezolverIfCanExpr = Expression.Block(target.DeclaredType, setNewContextLocal, useContextRezolverIfCanExpr);
+
+            ////note the use of the shared expression here - which enables an advanced optimisation specifically connected with
+            ////conditionals
+            //blockExpressions.Add(Expression.Condition(context.GetOrAddSharedExpression(typeof(bool),
+            //	"IsSameRezolver",
+            //	() => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), this.GetType()),
+            //  staticExpr,
+            //  useContextRezolverIfCanExpr));
+
+            //if (blockExpressions.Count == 1)
+            //	return blockExpressions[0];
+            //else
+            //	return Expression.Block(target.DeclaredType, blockExpressions);
+        }
+    }
 }

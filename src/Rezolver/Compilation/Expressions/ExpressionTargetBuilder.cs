@@ -79,12 +79,12 @@ namespace Rezolver.Compilation.Expressions
                 //rewrites to (ResolveContext.Resolve<T>()) of the ResolveContextExpression of the current compile context
                 new MethodCallRewrite(
                     MethodCallExtractor.ExtractCalledMethod(() => ExpressionFunctions.Resolve<int>()).GetGenericMethodDefinition(),
-                    (t, c) => Expression.Call(t._context.ResolveContextExpression, RezolveMethods[0].MakeGenericMethod(c.Method.GetGenericArguments()[0]), c.Arguments)
+                    (t, c) => Expression.Call(t._context.ResolveContextParameterExpression, RezolveMethods[0].MakeGenericMethod(c.Method.GetGenericArguments()[0]), c.Arguments)
                 ),
                 //rewrites to (ResolveContext.Resolve(t)) of the ResolveContextExpression of the current compile context
                 new MethodCallRewrite(
                     MethodCallExtractor.ExtractCalledMethod(() => ExpressionFunctions.Resolve(typeof(int))),
-                    (t, c) => Expression.Call(t._context.ResolveContextExpression, RezolveMethods[1], c.Arguments)
+                    (t, c) => Expression.Call(t._context.ResolveContextParameterExpression, RezolveMethods[1], c.Arguments)
                 )
             };
 
@@ -185,9 +185,9 @@ namespace Rezolver.Compilation.Expressions
                     //if the lambda had a parameter of the type ResolveContext, swap it for the 
                     //RezolveContextParameterExpression parameter expression that all the internal
                     //components use when building expression trees from targets.
-                    if (rezolveContextParam != null && rezolveContextParam != _context.ResolveContextExpression)
+                    if (rezolveContextParam != null && rezolveContextParam != _context.ResolveContextParameterExpression)
                         body = new ExpressionSwitcher(new[] {
-                            new ExpressionReplacement(rezolveContextParam, _context.ResolveContextExpression)
+                            new ExpressionReplacement(rezolveContextParam, _context.ResolveContextParameterExpression)
                         }).Visit(body);
                 }
                 catch (InvalidOperationException ioex)

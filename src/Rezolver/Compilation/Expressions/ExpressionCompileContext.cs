@@ -19,7 +19,7 @@ namespace Rezolver.Compilation.Expressions
 	{
 		/// <summary>
 		/// The default <see cref="IResolveContext"/> parameter expression used by the expression-based code generators
-		/// defined in this library, although it's not used directly for that purpose - instead, the <see cref="ResolveContextExpression"/> 
+		/// defined in this library, although it's not used directly for that purpose - instead, the <see cref="ResolveContextParameterExpression"/> 
 		/// of new contexts is initialised to this if not explicitly provided on  construction and when not being inherited from another 
 		/// context.
 		/// </summary>
@@ -39,20 +39,20 @@ namespace Rezolver.Compilation.Expressions
 			}
 		}
 
-		private Expression _containerExpression;
+		private Expression _currentContainerExpression;
 		/// <summary>
 		/// Gets an expression which gives a reference to the <see cref="IContainer" /> for this context -
-		/// i.e. the same reference as given by the <see cref="ICompileContext.Container" /> property.
+		/// i.e. the one on the <see cref="ICompileContext.ResolveContext" /> property.
 		/// </summary>
 		/// <value>The container expression.</value>
 		/// <remarks>Note that this is *not* the same as <see cref="ContextContainerPropertyExpression" /> - but is provided
 		/// to allow expressions to be compiled which compare the container supplied at compile time to the one from the
 		/// <see cref="IResolveContext.Container" /> at resolve-time.</remarks>
-		public Expression ContainerExpression
+		public Expression CurrentContainerExpression
 		{
 			get
 			{
-				return _containerExpression ?? ParentContext.ContainerExpression;
+				return _currentContainerExpression ?? ParentContext.CurrentContainerExpression;
 			}
 		}
 
@@ -68,11 +68,11 @@ namespace Rezolver.Compilation.Expressions
 		/// <see cref="IResolveContext" /> that was originally passed to the <see cref="IContainer.Resolve(IResolveContext)" /> method,
 		/// then it does it by using this expression, which will be set as the only parameter on the lambda expression which is
 		/// eventually compiled (in the case of the default expression compiler, <see cref="ExpressionCompiler" />.</remarks>
-		public ParameterExpression ResolveContextExpression
+		public ParameterExpression ResolveContextParameterExpression
 		{
 			get
 			{
-				return _resolveContextExpression ?? ParentContext.ResolveContextExpression;
+				return _resolveContextExpression ?? ParentContext.ResolveContextParameterExpression;
 			}
 		}
 
@@ -121,21 +121,27 @@ namespace Rezolver.Compilation.Expressions
 			}
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ExpressionCompileContext"/> class as a child of another.
-		/// 
-		/// Note that all the expression properties (<see cref="ResolveContextExpression"/>, <see cref="ContextContainerPropertyExpression"/>
-		/// and <see cref="ContextScopePropertyExpression"/>) are always inherited from the source context to ensure consistency across
-		/// all expressions being built during a particular compilation chain.
-		/// </summary>
-		/// <param name="sourceContext">The source context.</param>
-		/// <param name="useParentSharedExpressions">If <c>true</c> then the <see cref="SharedExpressions"/> of the <paramref name="sourceContext"/>
-		/// will be reused by this new context.  If <c>false</c>, then this context will start with a new empty set of shared expressions.</param>
-		/// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with this context.</param>
-		/// <param name="targetType">If not null, the type for which expressions are to be compiled.  If null, then the 
-		/// <paramref name="sourceContext"/>'s <see cref="ICompileContext.TargetType"/> will be inherited.</param>
-		protected internal ExpressionCompileContext(IExpressionCompileContext sourceContext, Type targetType = null, bool useParentSharedExpressions = true, ScopeBehaviour? scopeBehaviourOverride = null)
-			: base(sourceContext, targetType, scopeBehaviourOverride)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionCompileContext"/> class as a child of another.
+        /// 
+        /// Note that all the expression properties (<see cref="ResolveContextParameterExpression"/>, <see cref="ContextContainerPropertyExpression"/>
+        /// and <see cref="ContextScopePropertyExpression"/>) are always inherited from the source context to ensure consistency across
+        /// all expressions being built during a particular compilation chain.
+        /// </summary>
+        /// <param name="sourceContext">The source context.</param>
+        /// <param name="useParentSharedExpressions">If <c>true</c> then the <see cref="SharedExpressions"/> of the <paramref name="sourceContext"/>
+        /// will be reused by this new context.  If <c>false</c>, then this context will start with a new empty set of shared expressions.</param>
+        /// <param name="scopeBehaviourOverride">Override the scope behaviour to be used for the target that is compiled with this context.</param>
+        /// <param name="targetType">If not null, the type for which expressions are to be compiled.  If null, then the 
+        /// <paramref name="sourceContext"/>'s <see cref="ICompileContext.TargetType"/> will be inherited.</param>
+        /// <param name="scopePreferenceOverride">Allows you to override the scope preference for any target being compiled in this context - 
+        /// if not provided, then it is automatically inherited from the parent.</param>
+        protected internal ExpressionCompileContext(IExpressionCompileContext sourceContext, 
+            Type targetType = null, 
+            bool useParentSharedExpressions = true, 
+            ScopeBehaviour? scopeBehaviourOverride = null,
+            ScopePreference? scopePreferenceOverride = null)
+			: base(sourceContext, targetType, scopeBehaviourOverride, scopePreferenceOverride)
 		{
 			_sharedExpressions = useParentSharedExpressions ? null : new Dictionary<SharedExpressionKey, Expression>();
 
@@ -154,7 +160,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <see cref="ITargetContainer"/>.</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="CompileContext.TargetType" /> property.  If null, then any 
 		/// <see cref="ITarget"/> that is compiled should be compiled for its own <see cref="ITarget.DeclaredType"/>.</param>
-		/// <param name="resolveContextExpression">Optional, mapped to <see cref="ResolveContextExpression"/> - the default 
+		/// <param name="resolveContextExpression">Optional, mapped to <see cref="ResolveContextParameterExpression"/> - the default 
 		/// for this (i.e. when you leave it as null) is to use the static <see cref="DefaultResolveContextParameterExpression"/> 
 		/// and generally it should always be left as that.
 		/// 
@@ -168,9 +174,9 @@ namespace Rezolver.Compilation.Expressions
 		{
 			_resolveContextExpression = resolveContextExpression ?? DefaultResolveContextParameterExpression;
 			_sharedExpressions = new Dictionary<SharedExpressionKey, Expression>(20);
-			_containerExpression = Expression.Constant(resolveContext.Container, typeof(IContainer));
+			_currentContainerExpression = Expression.Constant(resolveContext.Container, typeof(IContainer));
 			_contextContainerPropertyExpression = Expression.Property(_resolveContextExpression, nameof(IResolveContext.Container));
-			_contextScopePropertyExpression = Expression.Property(ResolveContextExpression, nameof(IResolveContext.Scope));
+			_contextScopePropertyExpression = Expression.Property(ResolveContextParameterExpression, nameof(IResolveContext.Scope));
 			RegisterExpressionTargets();
 		}
 
@@ -183,38 +189,55 @@ namespace Rezolver.Compilation.Expressions
 		}
 
 
-		/// <summary>
-		/// Creates a new <see cref="IExpressionCompileContext" /> using this one as a seed.  This function is identical to
-		/// <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?)" /> but allows you to control whether the <see cref="SharedExpressions" />
-		/// are inherited (the default); and is more convenient because it returns another <see cref="IExpressionCompileContext" />.
-		/// </summary>
-		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this
-		/// context's <see cref="CompileContext.TargetType" />.</param>
-		/// <param name="useParentSharedExpressions">If <c>true</c> then the shared expressions in this context will be inherited
-		/// by the new context by reference.  That is, when the new context goes out of scope, any new shared expressions it created
-		/// will still be available.
-		/// If false, then the new context will get a brand new, empty, set of shared expressions.</param>
-		/// <param name="scopeBehaviourOverride">Override the <see cref="CompileContext.ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
-		/// This is never inherited automatically from one context to another.</param>
-		IExpressionCompileContext IExpressionCompileContext.NewContext(Type targetType, bool useParentSharedExpressions, ScopeBehaviour? scopeBehaviourOverride)
+        /// <summary>
+        /// Creates a new <see cref="IExpressionCompileContext" /> using this one as a seed.  This function is identical to
+        /// <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)" /> but allows you to control whether the <see cref="SharedExpressions" />
+        /// are inherited (the default); and is more convenient because it returns another <see cref="IExpressionCompileContext" />.
+        /// </summary>
+        /// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this
+        /// context's <see cref="CompileContext.TargetType" />.</param>
+        /// <param name="useParentSharedExpressions">If <c>true</c> then the shared expressions in this context will be inherited
+        /// by the new context by reference.  That is, when the new context goes out of scope, any new shared expressions it created
+        /// will still be available.
+        /// If false, then the new context will get a brand new, empty, set of shared expressions.</param>
+        /// <param name="scopeBehaviourOverride">Override the <see cref="CompileContext.ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
+        /// This is never inherited automatically from one context to another.</param>
+        /// <param name="scopePreferenceOverride">Sets the <see cref="CompileContext.ScopePreferenceOverride"/>.  As soon as this is set on one context, it is automatically 
+        /// inherited by all its child contexts (i.e. you cannot null it)</param>
+        IExpressionCompileContext IExpressionCompileContext.NewContext(
+            Type targetType, 
+            bool useParentSharedExpressions, 
+            ScopeBehaviour? scopeBehaviourOverride,
+            ScopePreference? scopePreferenceOverride)
 		{
-			return new ExpressionCompileContext(this, targetType, useParentSharedExpressions, scopeBehaviourOverride);
+			return new ExpressionCompileContext(this, 
+                targetType, 
+                useParentSharedExpressions, 
+                scopeBehaviourOverride,
+                scopePreferenceOverride);
 		}
 
-		/// <summary>
-		/// Used by the explicit implementation of 
-		/// <see cref="Rezolver.Compilation.ICompileContext.NewContext(Type, ScopeBehaviour?)" />.
-		/// This is overriden to ensure that the correct type of context is created when created directly through the 
-		/// <see cref="ICompileContext"/> interface.
-		/// </summary>
-		/// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this
-		/// context's <see cref="Rezolver.Compilation.ICompileContext.TargetType" />.</param>
-		/// <param name="scopeBehaviourOverride">Override the <see cref="CompileContext.ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
-		/// This is never inherited automatically from one context to another.</param>
-		/// <remarks>Note all child contexts created through this virtual method will always inherit the parent context's shared expressions.</remarks>
-		protected override ICompileContext NewContext(Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
+        /// <summary>
+        /// Used by the explicit implementation of 
+        /// <see cref="Rezolver.Compilation.ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)" />.
+        /// This is overriden to ensure that the correct type of context is created when created directly through the 
+        /// <see cref="ICompileContext"/> interface.
+        /// </summary>
+        /// <param name="targetType">Optional.  The type for which the target is to be compiled, if different from this
+        /// context's <see cref="Rezolver.Compilation.ICompileContext.TargetType" />.</param>
+        /// <param name="scopeBehaviourOverride">Override the <see cref="CompileContext.ScopeBehaviourOverride"/> to be used for the target that is compiled with the new context.
+        /// This is never inherited automatically from one context to another.</param>
+        /// <param name="scopePreferenceOverride">Sets the <see cref="CompileContext.ScopePreferenceOverride"/>.  As soon as this is set on one context, it is automatically 
+        /// inherited by all its child contexts (i.e. you cannot null it)</param>
+        /// <remarks>Note all child contexts created through this virtual method will always inherit the parent context's shared expressions.</remarks>
+        protected override ICompileContext NewContext(
+            Type targetType = null, 
+            ScopeBehaviour? scopeBehaviourOverride = null,
+            ScopePreference? scopePreferenceOverride = null)
 		{
-			return ((IExpressionCompileContext)this).NewContext(targetType, scopeBehaviourOverride: scopeBehaviourOverride);
+			return ((IExpressionCompileContext)this).NewContext(targetType, 
+                scopeBehaviourOverride: scopeBehaviourOverride,
+                scopePreferenceOverride: scopePreferenceOverride);
 		}
 
 		/// <summary>

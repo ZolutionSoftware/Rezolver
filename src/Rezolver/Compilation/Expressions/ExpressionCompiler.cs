@@ -219,7 +219,7 @@ namespace Rezolver.Compilation.Expressions
 			if (expression.Type != typeof(object) && TypeHelpers.IsValueType(expression.Type))
 				expression = Expression.Convert(expression, typeof(object));
 
-			return Expression.Lambda<Func<IResolveContext, object>>(expression, context.ResolveContextExpression);
+			return Expression.Lambda<Func<IResolveContext, object>>(expression, context.ResolveContextParameterExpression);
 		}
 
 		/// <summary>

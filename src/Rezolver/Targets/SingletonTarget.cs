@@ -44,6 +44,9 @@ namespace Rezolver.Targets
             private readonly ConcurrentDictionary<ICompileContext, ICompiledTarget> _cachedCompiled =
                 new ConcurrentDictionary<ICompileContext, ICompiledTarget>(CompileContextRequestedTypeComparer.Instance);
 
+            private readonly ConcurrentDictionary<ICompileContext, object> _cachedObjects =
+                new ConcurrentDictionary<ICompileContext, object>(CompileContextRequestedTypeComparer.Instance);
+
             public ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext: ICompileContext
             {
@@ -53,6 +56,16 @@ namespace Rezolver.Targets
             public Lazy<object> GetLazy(IResolveContext context, Func<IResolveContext, object> lazyFactory)
             {
                 return _cached.GetOrAdd(context, c => new Lazy<object>(() => lazyFactory(c)));
+            }
+
+            public object GetObject<TCompileContext>(TCompileContext context, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
+                where TCompileContext : ICompileContext
+            {
+                return _cachedObjects.GetOrAdd(context, c =>
+                {
+                    var compiled = GetCompiled(context, compiledTargetFactory);
+                    return GetLazy(c.ResolveContext, rc => compiled.GetObject(rc)).Value;
+                });
             }
         }
 		//the cached compiled targets for this singleton keyed by the requested type.

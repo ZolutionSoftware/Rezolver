@@ -18,13 +18,14 @@ namespace Rezolver.Compilation.Expressions
 	/// </summary>
 	public class SingletonTargetBuilder : ExpressionBuilderBase<SingletonTarget>
 	{
-		/// <summary>
-		/// Used in ensuring the correct construction and scope tracking of a singleton instance.
-		/// 
-		/// Implements the ICompiledRezolveTarget interface for the single case of creating a lazy on demand (from the
-		/// first ResolveContext that's passed to its GetObject method, and returning its value.
-		/// </summary>
-		private class SingletonTargetLazyInitialiser : ICompiledTarget
+        private static MethodInfo GetLazyMethod = MethodCallExtractor.ExtractCalledMethod((SingletonTarget.SingletonContainer c) => c.GetLazy(null, null));
+        /// <summary>
+        /// Used in ensuring the correct construction and scope tracking of a singleton instance.
+        /// 
+        /// Implements the ICompiledRezolveTarget interface for the single case of creating a lazy on demand (from the
+        /// first ResolveContext that's passed to its GetObject method, and returning its value.
+        /// </summary>
+        private class SingletonTargetLazyInitialiser : ICompiledTarget
 		{
 			private Func<IResolveContext, Lazy<object>> _lazyFactory;
 			private Lazy<object> _lazy;
@@ -70,41 +71,12 @@ namespace Rezolver.Compilation.Expressions
 		/// parameter is optional, this will always be provided</param>
 		protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
-            //TODO: Re below: Add a type/interface specifically to hold singletons in a container and add it to 
-            //the configuration provider's set up.  Then we can use that as the backing store for the singleton 
-            //objects produced by all singletons within.  In fact - we can use a similar approach to what's 
-            //been done for scopes.  This enables us to have one singleton create multiple instances per-container-tree
-            //as opposed to per app-domain.
+            var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
+           
+            return Expression.Constant(holder.GetObject(context,
+                c => compiler.CompileTarget(target.InnerTarget, c.NewContext(context.TargetType ?? target.DeclaredType, scopeBehaviourOverride: ScopeBehaviour.None, scopePreferenceOverride: ScopePreference.Root))));
 
-            //we want an object in the 
-            //get the compiled target for the current context
-            //var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
-            //var compiled = holder.GetCompiled(context, c => compiler.CompileTarget(target.InnerTarget, c.NewContext(scopeBehaviourOverride: ScopeBehaviour.None)));
-
-
-            //var lazy = holder.GetLazy(context.ResolveContext, c => compiled.GetObject(c));
-
-            //return Expression.Property(Expression.Constant(lazy), "Value");
-            var methodToCall = MethodCallExtractor.ExtractCalledMethod((SingletonTarget.SingletonContainer c) => c.GetLazy(null, null));
-            var innerExpression = compiler.BuildResolveLambda(
-                target.InnerTarget, 
-                context.NewContext(context.TargetType ?? target.DeclaredType, scopeBehaviourOverride: ScopeBehaviour.None));
-            //var lazyExpr = Expression.Lambda(Expression.New(LazyObject_Ctor,
-            //        //creating the factory delegate for the lazy uniquely for each invokation of the outer lambda
-            //        //note that the RezolveContextExpression has to be quoted on the outer lambda, but will be used
-            //        //on the inner lambda
-            //        Expression.Lambda(innerExpression.Body)));
-            var finalExpr = Expression.Property(
-                Expression.Call(
-                    Expression.Constant(context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>())
-                    /*new TargetExpression(Target.Resolved<SingletonTarget.SingletonContainer>())*/,
-                    methodToCall,
-                    context.ResolveContextExpression,
-                    innerExpression
-                ), "Value");
-
-            return finalExpr;
-
+            // ORIGINAL
             //var initialiser = target.GetOrAddInitialiser(context.TargetType ?? target.DeclaredType, t => {
             //	//get the underlying expression for the target that is to be turned into a singleton - but disable any
             //	//scope tracking because the singleton is fixed to 'Explicit' and it's important that it is in

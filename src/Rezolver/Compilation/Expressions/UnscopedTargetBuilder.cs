@@ -15,7 +15,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <summary>
 		/// overrides the base method to block all automatic scoping code from the expression being built.
 		/// </summary>
-		protected override Expression ApplyScoping(ScopeBehaviour scopeBehaviour, Expression builtExpression, ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
+		protected override Expression ApplyScoping(Expression builtExpression, ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
 		{
 			//forcibly disable any scoping code for the expression that's built if somehow it sneaks through
 			return builtExpression;
