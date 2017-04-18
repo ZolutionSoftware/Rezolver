@@ -25,19 +25,20 @@ namespace Rezolver
 	{
 		// developer note: This used to be a c/current dictionary of lazy objects, but benchmarking and performance analysis showed
 		// that it was slower than simply allowing redundant compiled targets to be created and have one thead 'win'.
-		private readonly ConcurrentDictionary<IResolveContext, ICompiledTarget> _entries 
-			= new ConcurrentDictionary<IResolveContext, ICompiledTarget>(ResolveContext.RequestedTypeComparer);
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CachingContainerBase"/> class.
-		/// </summary>
-		/// <param name="targets">Optional. Contains the targets that will be used to create the <see cref="ICompiledTarget"/>s that this container will use to produce objects
-		/// when requested.
-		/// 
-		/// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, IContainerConfiguration)"/>) will be used.</param>
-		/// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
-		protected CachingContainerBase(ITargetContainer targets = null, IContainerConfiguration compilerConfig = null)
+		//private readonly ConcurrentDictionary<IResolveContext, Lazy<ICompiledTarget>> _entries 
+		//	= new ConcurrentDictionary<IResolveContext, Lazy<ICompiledTarget>>(ResolveContext.RequestedTypeComparer);
+        private readonly ConcurrentDictionary<Type, Lazy<ICompiledTarget>> _entries
+            = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CachingContainerBase"/> class.
+        /// </summary>
+        /// <param name="targets">Optional. Contains the targets that will be used to create the <see cref="ICompiledTarget"/>s that this container will use to produce objects
+        /// when requested.
+        /// 
+        /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, IContainerConfiguration)"/>) will be used.</param>
+        /// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
+        /// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
+        protected CachingContainerBase(ITargetContainer targets = null, IContainerConfiguration compilerConfig = null)
 			: base(targets, compilerConfig)
 		{
 
@@ -57,7 +58,10 @@ namespace Rezolver
 		/// </remarks>
 		protected override ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
 		{
-			return _entries.GetOrAdd(context, c => base.GetCompiledRezolveTarget(c));
+            if (_entries.TryGetValue(context.RequestedType, out Lazy<ICompiledTarget> myLazy))
+                return myLazy.Value;
+
+            return _entries.GetOrAdd(context.RequestedType, c => new Lazy<ICompiledTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
 		}
 	}
 }

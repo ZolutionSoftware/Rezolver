@@ -4,7 +4,7 @@
     <AssemblyName>Rezolver</AssemblyName>
     <AssemblyTitle>Rezolver Core</AssemblyTitle>
     <Description>Rezolver is a fast IOC framework offering all the most common features of any IOC container.  It's easy to use and very extensible.</Description>
-    <TargetFrameworks>netstandard1.1;net452;net46</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;net451;net46</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <PackageId>Rezolver</PackageId>
@@ -18,7 +18,7 @@
 
   <Import Project="../Rezolver.Shared.Props" />
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
     <Reference Include="System.ComponentModel" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -32,6 +32,11 @@
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">

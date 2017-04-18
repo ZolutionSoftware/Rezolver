@@ -83,13 +83,13 @@ namespace Rezolver.Compilation.Expressions
                 staticExpr = CallIContainer_Resolve(currentContainer, newContext);
             }
 
+
             if (staticExpr.Type != target.DeclaredType)
                 staticExpr = Expression.Convert(staticExpr, target.DeclaredType);
 
             var checkContainer = context.GetOrAddSharedExpression(typeof(bool),
                 "IsSameRezolver",
                 () => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), this.GetType());
-            
 
             Expression useContextRezolverIfCanExpr = Expression.Condition(
                 CallIContainer_CanResolve(context.ContextContainerPropertyExpression, newContext),

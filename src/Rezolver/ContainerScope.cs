@@ -12,17 +12,18 @@ namespace Rezolver
 	/// <seealso cref="Rezolver.IContainerScope" />
 	public class ContainerScope : IContainerScope
 	{
-		/// <summary>
-		/// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
-		/// </summary>
-		private readonly ConcurrentDictionary<IResolveContext, Lazy<object>> _explicitlyScopedObjects
-			= new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
-		/// <summary>
-		/// implicitly scoped objects will always be IDisposable
-		/// </summary>
-		private ConcurrentBag<IDisposable> _implicitlyScopedObjects
+        /// <summary>
+        /// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
+        /// </summary>
+        //private ConcurrentDictionary<IResolveContext, Lazy<object>> _explicitlyScopedObjects;
+        private ConcurrentDictionary<Type, Lazy<object>> _explicitlyScopedObjects;
+
+        /// <summary>
+        /// implicitly scoped objects will always be IDisposable
+        /// </summary>
+        private ConcurrentBag<IDisposable> _implicitlyScopedObjects
 			= new ConcurrentBag<IDisposable>();
-		private readonly LockedList<IContainerScope> _childScopes
+		private LockedList<IContainerScope> _childScopes
 			= new LockedList<IContainerScope>();
 
 		private bool _disposed = false;
@@ -57,7 +58,25 @@ namespace Rezolver
 			get;
 		}
 
+        private void InitScopeContainers()
+        {
+            //_explicitlyScopedObjects = new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
+            _explicitlyScopedObjects = new ConcurrentDictionary<Type, Lazy<object>>();
+            _implicitlyScopedObjects = new ConcurrentBag<IDisposable>();
+            _childScopes = new LockedList<IContainerScope>();
+        }
 
+        private void FreeScopeContainers()
+        {
+            _explicitlyScopedObjects = null;
+            _implicitlyScopedObjects = null;
+            _childScopes = null;
+        }
+
+        private ContainerScope()
+        {
+            InitScopeContainers();
+        }
 		/// <summary>
 		/// Creates a new container that is a child of another.
 		/// 
@@ -69,6 +88,7 @@ namespace Rezolver
 		/// operations executed against this scope (note - all the resolve methods are declared as extension
 		/// methods which mirror those present on <see cref="IContainer"/>.</param>
 		public ContainerScope(IContainerScope parentScope, IContainer containerOverride = null)
+            : this()
 		{
 			parentScope.MustNotBeNull(nameof(parentScope));
 			Parent = parentScope;
@@ -81,6 +101,7 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="container"></param>
 		public ContainerScope(IContainer container)
+            : this()
 		{
 			container.MustNotBeNull(nameof(container));
 
@@ -94,7 +115,9 @@ namespace Rezolver
 		/// </summary>
 		public IContainerScope CreateScope()
 		{
-			var newScope = new ContainerScope(this);
+            if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
+
+            var newScope = new ContainerScope(this);
 			_childScopes.Add(newScope);
 			return newScope;
 		}
@@ -145,18 +168,16 @@ namespace Rezolver
 						{
 							scope.Dispose();
 						}
-						_childScopes.Clear();
 					}
 
 					//note that explicitly scoped objects might not actually be IDisposable :)
                     
-					var allExplicitObjects = _explicitlyScopedObjects.Values.ToArray()
-						.Select(l => l.Value).OfType<IDisposable>();
-					var allImplicitObjects = _implicitlyScopedObjects.ToArray();
+					var allExplicitObjects = _explicitlyScopedObjects.Skip(0).ToArray()
+						.Select(l => l.Value.Value).OfType<IDisposable>();
+					var allImplicitObjects = _implicitlyScopedObjects.Skip(0).ToArray();
 
-					//clear the collections FIRST to prevent possible recursion
-					_explicitlyScopedObjects.Clear();
-					_implicitlyScopedObjects = new ConcurrentBag<IDisposable>();
+                    //deref all used collections 
+                    FreeScopeContainers();
 
 					foreach (var obj in allExplicitObjects.Concat(allImplicitObjects))
 					{
@@ -179,8 +200,11 @@ namespace Rezolver
 
 			if (behaviour == ScopeBehaviour.Explicit)
 			{
-				//use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
-				return _explicitlyScopedObjects.GetOrAdd(context, k => new Lazy<object>(() => factory(k))).Value;
+                if (_explicitlyScopedObjects.TryGetValue(context.RequestedType, out Lazy<object> lazy))
+                    return lazy.Value;
+
+                //use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
+                return _explicitlyScopedObjects.GetOrAdd(context.RequestedType, k => new Lazy<object>(() => factory(context))).Value;
 			}
 			else if (behaviour == ScopeBehaviour.Implicit)
 			{
@@ -193,7 +217,9 @@ namespace Rezolver
 
 		object IServiceProvider.GetService(Type serviceType)
 		{
-			object toReturn = null;
+            if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
+
+            object toReturn = null;
 			Container.TryResolve(new ResolveContext(this, serviceType), out toReturn);
 			return toReturn;
 		}

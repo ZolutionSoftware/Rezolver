@@ -4,7 +4,7 @@
     <AssemblyName>Rezolver.Logging</AssemblyName>
     <AssemblyTitle>Rezolver Logging/Tracking framework</AssemblyTitle>
     <Description>Logging classes and abstractions for the Rezolver framework.  Most useful for developers looking to extend Rezolver.</Description>
-    <TargetFrameworks>netstandard1.1;net452;net46</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;net451;net46</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <PackageId>Rezolver.Logging</PackageId>
@@ -22,7 +22,7 @@
     <ProjectReference Include="..\Rezolver\Rezolver.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
     <Reference Include="System.Linq.Expressions" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
