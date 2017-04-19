@@ -6,13 +6,13 @@ using Xunit;
 
 namespace Rezolver.Tests.Types
 {
-    public class Decorator : IDecorated
+    public class Decorator2 : IDecorated
     {
-        public IDecorated Decorated { get; }
-        public Decorator(IDecorated decorated)
-        {
+		public IDecorated Decorated { get; }
+		public Decorator2(IDecorated decorated)
+		{
             Assert.NotNull(decorated);
-            Decorated = decorated;
-        }
-    }
+			Decorated = decorated;
+		}
+	}
 }

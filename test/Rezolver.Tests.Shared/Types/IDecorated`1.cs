@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-  public class GenericHandler<T> : IHandler<T>
+  public interface IDecorated<T>
   {
-    public string Handle(T t)
-    {
-      return $"This is a {typeof(T)}: {t}";
-    }
+
   }
 }

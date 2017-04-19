@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-  public class DoubleHandler : IHandler<double>
-  {
-    public string Handle(double t)
+    public class DecoratedForDouble : IDecorated<double>
     {
-      return $"This is a double: {t}";
+        
     }
-  }
 }

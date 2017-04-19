@@ -6,10 +6,11 @@ using Xunit;
 
 namespace Rezolver.Tests.Types
 {
-    public class Decorator : IDecorated
+    public class DecoratorForAny<T> : IDecorated<T>
     {
-        public IDecorated Decorated { get; }
-        public Decorator(IDecorated decorated)
+        public IDecorated<T> Decorated { get; }
+
+        public DecoratorForAny(IDecorated<T> decorated)
         {
             Assert.NotNull(decorated);
             Decorated = decorated;

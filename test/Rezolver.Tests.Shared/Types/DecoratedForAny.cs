@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-  public interface IHandler<T>
-  {
-    string Handle(T t);
-  }
+    public class DecoratedForAny<T> : IDecorated<T>
+    {
+
+    }
 }
