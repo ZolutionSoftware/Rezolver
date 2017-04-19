@@ -191,13 +191,13 @@ namespace Rezolver.Compilation.Expressions
             }, typeof(ExpressionBuilderBase));
 
             var newContextExpr = scopePreference == ScopePreference.Current ? (Expression)context.ResolveContextParameterExpression
-                : Expression.Call(
-                            context.ResolveContextParameterExpression,
-                            IResolveContext_New_Method,
-                            Expression.Constant(builtExpression.Type),
+                : CallResolveContext_New(
+                    context.ResolveContextParameterExpression,
+                    Expression.Constant(builtExpression.Type),
                             Expression.Default(typeof(IContainer)),
                             Expression.Call(IContainerScope_GetRootScope_Method,
-                                context.ContextScopePropertyExpression));
+                                context.ContextScopePropertyExpression)
+                    );
 
             builtExpression = Expression.Condition(
                 compareExpr,
@@ -212,6 +212,15 @@ namespace Rezolver.Compilation.Expressions
                     originalType
                 ));
 
+            //builtExpression = Expression.Convert( //otherwise - generate a call into the scope's special Resolve method
+            //        Expression.Call(
+            //            ResolveContextExtensions_Resolve_Method,
+            //            newContextExpr,
+            //            Expression.Constant(lambda),
+            //            Expression.Constant(scopeBehaviour)
+            //        ),
+            //        originalType
+            //    );
 
             return builtExpression;
         }
@@ -261,7 +270,6 @@ namespace Rezolver.Compilation.Expressions
         /// determines whether this instance can build an expression for the specified target.
         /// </summary>
         /// <param name="target">The target.</param>
-        /// <param name="context">The compilation context.</param>
-        public abstract bool CanBuild(ITarget target, IExpressionCompileContext context);
+        public abstract bool CanBuild(ITarget target);
     }
 }

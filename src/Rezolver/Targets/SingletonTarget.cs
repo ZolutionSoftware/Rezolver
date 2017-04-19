@@ -21,50 +21,33 @@ namespace Rezolver.Targets
 	{
         internal class SingletonContainer
         {
-            private class CompileContextRequestedTypeComparer : IEqualityComparer<ICompileContext>
-            {
-                public static readonly CompileContextRequestedTypeComparer Instance = new CompileContextRequestedTypeComparer();
+            private readonly ConcurrentDictionary<Type, Lazy<object>> _cached =
+                new ConcurrentDictionary<Type, Lazy<object>>();
 
-                private CompileContextRequestedTypeComparer() { }
+            private readonly ConcurrentDictionary<Type, ICompiledTarget> _cachedCompiled =
+                new ConcurrentDictionary<Type, ICompiledTarget>();
 
-                public bool Equals(ICompileContext x, ICompileContext y)
-                {
-                    return object.ReferenceEquals(x, y) || x?.TargetType == y?.TargetType;
-                }
-
-                public int GetHashCode(ICompileContext obj)
-                {
-                    return obj?.TargetType?.GetHashCode() ?? 0;
-                }
-            }
-
-            private readonly ConcurrentDictionary<IResolveContext, Lazy<object>> _cached =
-                new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
-
-            private readonly ConcurrentDictionary<ICompileContext, ICompiledTarget> _cachedCompiled =
-                new ConcurrentDictionary<ICompileContext, ICompiledTarget>(CompileContextRequestedTypeComparer.Instance);
-
-            private readonly ConcurrentDictionary<ICompileContext, object> _cachedObjects =
-                new ConcurrentDictionary<ICompileContext, object>(CompileContextRequestedTypeComparer.Instance);
+            private readonly ConcurrentDictionary<Type, object> _cachedObjects =
+                new ConcurrentDictionary<Type, object>();
 
             public ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext: ICompileContext
             {
-                return _cachedCompiled.GetOrAdd(context, c => compiledTargetFactory((TCompileContext)c));
+                return _cachedCompiled.GetOrAdd(context.TargetType, t => compiledTargetFactory(context));
             }
 
             public Lazy<object> GetLazy(IResolveContext context, Func<IResolveContext, object> lazyFactory)
             {
-                return _cached.GetOrAdd(context, c => new Lazy<object>(() => lazyFactory(c)));
+                return _cached.GetOrAdd(context.RequestedType, c => new Lazy<object>(() => lazyFactory(context)));
             }
 
             public object GetObject<TCompileContext>(TCompileContext context, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
-                return _cachedObjects.GetOrAdd(context, c =>
+                return _cachedObjects.GetOrAdd(context.TargetType, c =>
                 {
                     var compiled = GetCompiled(context, compiledTargetFactory);
-                    return GetLazy(c.ResolveContext, rc => compiled.GetObject(rc)).Value;
+                    return GetLazy(context.ResolveContext, rc => compiled.GetObject(rc)).Value;
                 });
             }
         }

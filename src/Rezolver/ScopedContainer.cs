@@ -19,10 +19,6 @@ namespace Rezolver
 	/// Implementation of the <see cref="IScopedContainer"/> interface.
 	/// </summary>
 	/// <remarks>
-	/// Both the <see cref="Resolve(IResolveContext)"/> and <see cref="TryResolve(IResolveContext, out object)"/> methods
-	/// will inject the <see cref="Scope"/> into <see cref="IResolveContext"/> that's passed if the context doesn't already
-	/// have a scope.
-	/// 
 	/// If you want your root container to act as a lifetime scope, then you should use this
 	/// class instead of using <see cref="Container"/>.
 	/// 
@@ -94,32 +90,6 @@ namespace Rezolver
 			return Scope.CreateScope();
 		}
 		#endregion
-		/// <summary>
-		/// Overrides the base implementation to ensure that the context has the <see cref="Scope"/> assigned.
-		/// </summary>
-		/// <param name="context">The resolve context containing the requested type.</param>
-		public override bool CanResolve(IResolveContext context)
-		{
-			return base.CanResolve(context.Scope == null ? context.New(newScope: Scope) : context);
-		}
 
-		/// <summary>
-		/// Overrides the base implementation to ensure that the context has the <see cref="Scope"/> assigned.
-		/// </summary>
-		/// <param name="context">The context containing the type that's requested, any active scope and so on.</param>
-		/// <param name="result">Receives a reference to the object that was resolved, if successful, or <c>null</c> if not.</param>
-		public override bool TryResolve(IResolveContext context, out object result)
-		{
-			return base.TryResolve(context.Scope == null ? context.New(newScope: Scope) : context, out result);
-		}
-
-		/// <summary>
-		/// Overrides the base implementation to ensure that the context has the <see cref="Scope"/> assigned.
-		/// </summary>
-		/// <param name="context">The context containing the type that's requested, any active scope and so on.</param>
-		public override object Resolve(IResolveContext context)
-		{
-			return base.Resolve(context.Scope == null ? context.New(newScope: Scope) : context);
-		}
 	}
 }

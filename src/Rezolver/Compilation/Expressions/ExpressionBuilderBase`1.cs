@@ -118,8 +118,7 @@ namespace Rezolver.Compilation.Expressions
 		/// compatible with the type <typeparamref name="TTarget"/>.
 		/// </summary>
 		/// <param name="target">The target.</param>
-		/// <param name="context">The compilation context.</param>
-		public override bool CanBuild(ITarget target, IExpressionCompileContext context)
+		public override bool CanBuild(ITarget target)
 		{
 			return target is TTarget;
 		}

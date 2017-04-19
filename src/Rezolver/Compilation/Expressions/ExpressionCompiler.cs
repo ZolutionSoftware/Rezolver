@@ -126,45 +126,8 @@ namespace Rezolver.Compilation.Expressions
 			target.MustNotBeNull(nameof(target));
 			context.MustNotBeNull(nameof(context));
 
-			List<Type> builderTypes =
-				TargetSearchTypes(target).Select(t => typeof(IExpressionBuilder<>).MakeGenericType(t)).ToList();
-
-			//and add the IExpressionBuilder type
-			builderTypes.Add(typeof(IExpressionBuilder));
-
-			foreach (var type in builderTypes)
-			{
-				foreach (IExpressionBuilder expressionBuilder in (IEnumerable)context.ResolveContext.Container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)))
-				{
-					if (expressionBuilder != this)
-					{
-						if (expressionBuilder.CanBuild(target, context))
-							return expressionBuilder;
-					}
-				}
-			}
-
-			return null;
-		}
-
-		private IEnumerable<Type> TargetSearchTypes(ITarget target)
-		{
-			//the search list is:
-			//1) the target's type
-			//2) each base (in descending order of inheritance) of the target which is compatible with ITarget
-			//So a target of type {MyTarget<T> : TargetBase} will yield the list
-			//[ MyTarget<T>, TargetBase ]
-			//Whereas a target of type MyTarget<T> : ITarget yields the list
-			//[ MyTarget<T> ]
-			//because it has no bases which implement ITarget
-
-			var tTarget = target.GetType();
-			yield return tTarget;
-			//return all bases which can be treated as ITarget
-			foreach (var baseT in tTarget.GetAllBases().Where(t => TypeHelpers.IsAssignableFrom(typeof(ITarget), t)))
-			{
-				yield return baseT;
-			}
+            var cache = context.ResolveContext.Resolve<ExpressionBuilderCache>();
+            return cache.ResolveBuilder(target);
 		}
 
 		/// <summary>

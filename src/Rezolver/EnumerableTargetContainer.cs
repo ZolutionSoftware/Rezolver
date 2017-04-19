@@ -52,7 +52,7 @@ namespace Rezolver
 
 		internal static ITarget CreateListTarget(Type elementType, IEnumerable<ITarget> targets, bool asArray = false)
 		{
-			if (!targets.All(t => t is ICompiledTarget))
+			if (!targets.Any() || !targets.All(t => t is ICompiledTarget))
 				return new ListTarget(elementType, targets, asArray);
 
 			//get or build (and add) a dynamic binding to the generic CompiledTargetListTarget constructor

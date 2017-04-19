@@ -71,13 +71,6 @@ namespace Rezolver
         IContainerScope Scope { get; }
 
         /// <summary>
-        /// Provides a reference to the type of the instance that is currently being created by compiled targets
-        /// within a container (if known).
-        /// </summary>
-        /// <remarks></remarks>
-        Type TypeBeingCreated { get; }
-
-        /// <summary>
 		/// Resolves a new instance of a different type from the same scope/container that originally
 		/// received the current Resolve operation.
 		/// </summary>
@@ -119,8 +112,6 @@ namespace Rezolver
         IResolveContext New(Type newRequestedType = null,
             IContainer newContainer = null,
             IContainerScope newScope = null);
-
-        IResolveContext SetTypeBeingCreated(Type type);
     }
 
     internal static class ResolveContextExtensions

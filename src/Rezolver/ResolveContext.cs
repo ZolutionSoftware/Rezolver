@@ -15,43 +15,7 @@ namespace Rezolver
     /// </summary>
 	public class ResolveContext : IResolveContext
     {
-        #region equality comparer (used for some of the caches)
-        /// <summary>
-        /// Gets a comparer for <see cref="IResolveContext"/> which treats two contexts as being equal
-        /// if they're both the same reference (including null) or, if both have the same <see cref="RequestedType"/>
-        /// </summary>
-        public static IEqualityComparer<IResolveContext> RequestedTypeComparer { get; } = new RequestedTypeEqualityComparer();
-		/// <summary>
-		/// An equality comparer for ResolveContext which treats two contexts
-		/// as equal if they are both null, or have the same <see cref="IResolveContext.RequestedType"/>.
-		/// </summary>
-		/// <seealso cref="System.Collections.Generic.IComparer{T}" />
-		internal class RequestedTypeEqualityComparer : IEqualityComparer<IResolveContext>
-		{
-			/// <summary>
-			/// Determines whether the specified objects are equal.
-			/// </summary>
-			/// <param name="x">The first object to compare.</param>
-			/// <param name="y">The second object to compare.</param>
-			public bool Equals(IResolveContext x, IResolveContext y)
-			{
-				return x == y || x?.RequestedType == y?.RequestedType;
-			}
-
-			/// <summary>
-			/// Returns a hash code for this instance.
-			/// </summary>
-			/// <param name="obj">The <see cref="System.Object" /> for which a hash code is to be returned.</param>
-			public int GetHashCode(IResolveContext obj)
-			{
-				return obj?.RequestedType?.GetHashCode() ?? 0;
-			}
-		}
-        #endregion
-
         public IResolveContext Previous { get; private set; }
-
-        public Type TypeBeingCreated { get; private set; }
 
         /// <summary>
         /// Gets the type being requested from the container
@@ -80,7 +44,6 @@ namespace Rezolver
         {
             Previous = previous;
             RequestedType = previous.RequestedType;
-            TypeBeingCreated = previous.TypeBeingCreated;
             Container = previous.Container;
             Scope = previous.Scope;
         }
@@ -113,6 +76,8 @@ namespace Rezolver
 		private ResolveContext(IContainer container)
 		{
 			Container = container ?? StubContainer.Instance;
+            //if the container is a scoped container, then we pull it out and set it into this context.
+            Scope = (container as IScopedContainer)?.Scope;
 		}
 
 		/// <summary>
@@ -126,8 +91,8 @@ namespace Rezolver
 		/// If a scope is active then it will be honoured.</remarks>
 		public object Resolve(Type newRequestedType)
 		{
-			return (Scope?.Container ?? Container).Resolve(New(newRequestedType: newRequestedType));
-		}
+            return (Scope?.Container ?? Container).Resolve(New(newRequestedType: newRequestedType));
+        }
 
 		/// <summary>
 		/// Resolves a new instance of a different type from the same scope/container that originally
@@ -166,8 +131,7 @@ namespace Rezolver
             {
                 newContext = new ResolveContext(this)
                 {
-                    RequestedType = newRequestedType,
-                    TypeBeingCreated = null
+                    RequestedType = newRequestedType
                 };
                 if (newContainer != null && !Object.ReferenceEquals(newContainer, Container))
                     newContext.Container = newContainer;
@@ -197,24 +161,6 @@ namespace Rezolver
             return this;
         }
 
-        public IResolveContext SetTypeBeingCreated(Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-            if(TypeBeingCreated == type)
-            {
-                return this;
-            }
-            else if(TypeBeingCreated != null)
-            {
-                return new ResolveContext(this)
-                {
-                    TypeBeingCreated = type
-                };
-            }
-            TypeBeingCreated = type;
-            return this;
-        }
-
 		/// <summary>
 		/// Returns a <see cref="System.String" /> that represents this instance.
 		/// </summary>
@@ -239,7 +185,7 @@ namespace Rezolver
         /// in order to create child scopes which are correctly parented either to another active scope or the container.</remarks>
 		public IContainerScope CreateScope()
 		{
-			return (((IScopeFactory)Scope) ?? Container).CreateScope();
-		}
+            return (((IScopeFactory)Scope) ?? Container).CreateScope();
+        }
 	}
 }

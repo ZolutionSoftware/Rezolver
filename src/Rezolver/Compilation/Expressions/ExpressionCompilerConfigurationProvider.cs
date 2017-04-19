@@ -31,6 +31,7 @@ namespace Rezolver.Compilation.Expressions
 			targets.MustNotBeNull(nameof(targets));
 
             targets.RegisterObject(new SingletonTarget.SingletonContainer());
+            targets.RegisterObject(new ExpressionBuilderCache(container));
 			//will be how containers pick up and use this compiler
 			targets.RegisterObject<ITargetCompiler>(ExpressionCompiler.Default);
 			//if you're looking to re-enter the compilation process for a particular

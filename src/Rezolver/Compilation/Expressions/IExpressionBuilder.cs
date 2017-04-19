@@ -20,8 +20,7 @@ namespace Rezolver.Compilation.Expressions
 		/// Determines whether this instance can build an expression for the specified target.
 		/// </summary>
 		/// <param name="target">The target.</param>
-		/// <param name="context">The compilation context.</param>
-		bool CanBuild(ITarget target, IExpressionCompileContext context);
+		bool CanBuild(ITarget target);
 		/// <summary>
 		/// Builds an expression for the specified target.
 		/// </summary>
