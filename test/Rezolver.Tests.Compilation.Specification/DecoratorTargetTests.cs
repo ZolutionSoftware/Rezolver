@@ -80,6 +80,56 @@ namespace Rezolver.Tests.Compilation.Specification
                 }, "before" },
             };
 
+        public static DecoratorTheoryData Generic_DecoratedDecoratorRegistrations =>
+            new DecoratorTheoryData()
+            {
+                { t => {
+                    t.RegisterType(typeof(DecoratedForAny<>), typeof(IDecorated<>));
+                    t.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
+                    t.RegisterDecorator(typeof(DecoratorForAny2<>), typeof(IDecorated<>));
+                }, "after" },
+                { t => {
+                    t.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
+                    t.RegisterDecorator(typeof(DecoratorForAny2<>), typeof(IDecorated<>));
+                    t.RegisterType(typeof(DecoratedForAny<>), typeof(IDecorated<>));
+                }, "before" },
+            };
+
+        public static DecoratorTheoryData Generic_EnumerableRegistrations =>
+            new DecoratorTheoryData()
+            {
+                { t => {
+                    t.RegisterType(typeof(DecoratedForAny<>), typeof(IDecorated<>));
+                    t.RegisterType(typeof(DecoratedForAny2<>), typeof(IDecorated<>));
+                    t.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
+                }, "after" },
+                { t => {
+                    t.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
+                    t.RegisterType(typeof(DecoratedForAny<>), typeof(IDecorated<>));
+                    t.RegisterType(typeof(DecoratedForAny2<>), typeof(IDecorated<>));
+                }, "before" },
+                { t => {
+                    t.RegisterType(typeof(DecoratedForAny<>), typeof(IDecorated<>));
+                    t.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
+                    t.RegisterType(typeof(DecoratedForAny2<>), typeof(IDecorated<>));
+                }, "mid" }
+            };
+
+        public static DecoratorTheoryData Generic_DecoratingSpecialisedRegistrations =>
+            new DecoratorTheoryData()
+            {
+                { t => {
+                    t.RegisterType<DecoratedForString, IDecorated<string>>();
+                    t.RegisterType<DecoratedForDouble, IDecorated<double>>();
+                    t.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
+                }, "after" },
+                { t => {
+                    t.RegisterType<DecoratedForString, IDecorated<string>>();
+                    t.RegisterType<DecoratedForDouble, IDecorated<double>>();
+                    t.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
+                }, "before" }
+            };
+
         [Theory]
         [MemberData(nameof(SimpleRegistrations))]
         public void Decorator_Simple(SetupTargets setup, string description)
@@ -108,7 +158,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
         [Theory]
         [MemberData(nameof(EnumerableRegistrations))]
-        public void VerifyEnumerable(SetupTargets setup, string description)
+        public void Decorator_Enumerable(SetupTargets setup, string description)
         {
             var targets = CreateTargetContainer();
             setup(targets);
@@ -136,34 +186,48 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.IsType<DecoratedForAny<Disposable>>(result2.Decorated);
         }
 
-        //[Fact]
-        //public void DecoratorTarget_Generic_PostRegistered()
-        //{
-        //    var targets = CreateTargetContainer();
-        //    targets.RegisterType<DecoratedForString, IDecorated<string>>();
-        //    targets.RegisterType<DecoratedForDouble, IDecorated<double>>();
-        //    targets.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
-        //    var container = CreateContainer(targets);
-        //    var result = container.Resolve<IDecorated<string>>();
-        //    var result2 = container.Resolve<IDecorated<double>>();
-        //    Assert.IsType<DecoratorForAny<string>>(result);
-        //    Assert.IsType<DecoratorForAny<double>>(result2);
-        //}
+        [Theory]
+        [MemberData(nameof(Generic_DecoratedDecoratorRegistrations))]
+        public void Decorator_Generic_DecoratedDecorator(SetupTargets setup, string description)
+        {
+            var targets = CreateTargetContainer();
+            setup(targets);
+            var container = CreateContainer(targets);
 
-        //[Fact]
-        //public void DecoratorTarget_Generic_PreRegistered()
-        //{
-        //    //check that the decorator is registration order agnostic.
-        //    var targets = CreateTargetContainer();
-        //    targets.RegisterDecorator(typeof(DecoratorForAny<>), typeof(IDecorated<>));
-        //    targets.RegisterType<DecoratedForString, IDecorated<string>>();
-        //    targets.RegisterType<DecoratedForDouble, IDecorated<double>>();
-        //    var container = CreateContainer(targets);
-        //    var result = container.Resolve<IDecorated<string>>();
-        //    var result2 = container.Resolve<IDecorated<double>>();
-        //    Assert.IsType<DecoratorForAny<string>>(result);
-        //    Assert.IsType<DecoratorForAny<double>>(result2);
-        //}
+            var result1 = Assert.IsType<DecoratorForAny2<decimal>>(container.Resolve<IDecorated<decimal>>());
+            var inner = Assert.IsType<DecoratorForAny<decimal>>(result1.Decorated);
+            Assert.IsType<DecoratedForAny<decimal>>(inner.Decorated);
+        }
+
+        [Theory]
+        [MemberData(nameof(Generic_EnumerableRegistrations))]
+        public void Decorator_GenericEnumerable(SetupTargets setup, string description)
+        {
+            var targets = CreateTargetContainer();
+            setup(targets);
+            var container = CreateContainer(targets);
+
+            var result = container.Resolve<IEnumerable<IDecorated<Disposable2>>>().ToArray();
+
+            Assert.Equal(2, result.Length);
+            Assert.IsType<DecoratedForAny<Disposable2>>(Assert.IsType<DecoratorForAny<Disposable2>>(result[0]).Decorated);
+            Assert.IsType<DecoratedForAny2<Disposable2>>(Assert.IsType<DecoratorForAny<Disposable2>>(result[1]).Decorated);
+        }
+
+        [Theory]
+        [MemberData(nameof(Generic_DecoratingSpecialisedRegistrations))]
+        public void Decorator_GenericDecoratingSpecialisedGenerics(SetupTargets setup, string description)
+        {
+            var targets = CreateTargetContainer();
+            setup(targets);
+            var container = CreateContainer(targets);
+
+            var result = Assert.IsType<DecoratorForAny<string>>(container.Resolve<IDecorated<string>>());
+            var result2 = Assert.IsType<DecoratorForAny<double>>(container.Resolve<IDecorated<double>>());
+
+            Assert.IsType<DecoratedForString>(result.Decorated);
+            Assert.IsType<DecoratedForDouble>(result2.Decorated);
+        }
 
         //[Fact]
         //public void DecoratorTarget_Generic_DecorateADecorator()
