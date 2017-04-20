@@ -28,8 +28,7 @@ namespace Rezolver
 		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainer targetContainer)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
-
-            targetContainer.RegisterContainer(typeof(TDecorated), new DecoratingTargetContainer(typeof(TDecorator), typeof(TDecorated)));
+            RegisterDecoratorInternal(targetContainer, typeof(TDecorator), typeof(TDecorated));
 		}
 
         /// <summary>
@@ -43,11 +42,26 @@ namespace Rezolver
         /// <param name="decoratorType">The type to be used as the decorator implementation</param>
         /// <param name="decoratedType">The type which will be decorated by <paramref name="decoratorType" />.</param>
         public static void RegisterDecorator(this ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
-		{
-			targetContainer.MustNotBeNull(nameof(targetContainer));
-			decoratorType.MustNotBeNull(nameof(decoratorType));
-			decoratedType.MustNotBeNull(nameof(decoratedType));
-            targetContainer.RegisterContainer(decoratedType, new DecoratingTargetContainer(decoratorType, decoratedType));
-		}
-	}
+        {
+            targetContainer.MustNotBeNull(nameof(targetContainer));
+            decoratorType.MustNotBeNull(nameof(decoratorType));
+            decoratedType.MustNotBeNull(nameof(decoratedType));
+            RegisterDecoratorInternal(targetContainer, decoratorType, decoratedType);
+        }
+
+        private static void RegisterDecoratorInternal(ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
+        {
+            //decorators for generics are always registered against the open generic type.
+            //the decorator, however, will only create a decorated target when the type requested
+            //equals the type it's decorating; and if that happens to be the open generic, then it'll
+            //be all types.
+            Type registerType = decoratedType;
+            if (TypeHelpers.IsGenericType(decoratedType))
+            {
+                if (!TypeHelpers.IsGenericTypeDefinition(decoratedType))
+                    registerType = decoratedType.GetGenericTypeDefinition();
+            }
+            targetContainer.RegisterContainer(registerType, new DecoratingTargetContainer(decoratorType, decoratedType));
+        }
+    }
 }

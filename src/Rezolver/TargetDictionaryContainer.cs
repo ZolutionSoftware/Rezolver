@@ -162,7 +162,7 @@ namespace Rezolver
 
 
     /// <summary>
-    /// Always adds this container into the <paramref name="existing"/> container as a child.
+    /// NotSupported by default
     /// </summary>
     /// <param name="existing"></param>
     /// <param name="type"></param>

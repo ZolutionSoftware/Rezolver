@@ -91,27 +91,41 @@ namespace Rezolver
 		/// <param name="type">Required.  The type for which an <see cref="ITarget" /> is to be retrieved.</param>
 		/// <remarks>If the inner container returns null, then so does this one.</remarks>
 		public ITarget Fetch(Type type)
-		{
-			if (_inner == null)
-				return null;
+        {
+            if (_inner == null)
+                return null;
 
-			var result = _inner.Fetch(type);
-			if (result != null)
-				return new DecoratorTarget(DecoratorType, result, type);
-			return null;
-		}
+            if (ShouldDecorate(type))
+            {
+                var result = _inner.Fetch(type);
+                return result != null ? new DecoratorTarget(DecoratorType, result, type) : null;
+            }
+            else
+                return _inner.Fetch(type);
+        }
 
-		/// <summary>
-		/// Implementation of <see cref="ITargetContainer.FetchAll(Type)"/> - passes the call on to the inner 
-		/// container that's decorated by this one, and then wraps each of those targets in a <see cref="DecoratorTarget"/> which
-		/// represents the decoration logic for each instance.
-		/// </summary>
-		/// <param name="type">Required.  The type for which the <see cref="ITarget" /> instances are to be retrieved.</param>
-		public IEnumerable<ITarget> FetchAll(Type type)
+        private bool ShouldDecorate(Type type)
+        {
+            return type == DecoratedType ||
+                            (TypeHelpers.IsGenericType(type)
+                                && TypeHelpers.IsGenericTypeDefinition(DecoratedType)
+                                && type.GetGenericTypeDefinition() == DecoratedType);
+        }
+
+        /// <summary>
+        /// Implementation of <see cref="ITargetContainer.FetchAll(Type)"/> - passes the call on to the inner 
+        /// container that's decorated by this one, and then wraps each of those targets in a <see cref="DecoratorTarget"/> which
+        /// represents the decoration logic for each instance.
+        /// </summary>
+        /// <param name="type">Required.  The type for which the <see cref="ITarget" /> instances are to be retrieved.</param>
+        public IEnumerable<ITarget> FetchAll(Type type)
 		{
 			if (_inner == null)
 				return Enumerable.Empty<ITarget>();
-			return _inner.FetchAll(type).Select(t => new DecoratorTarget(DecoratorType, t, type));
+            if (ShouldDecorate(type))
+                return _inner.FetchAll(type).Select(t => new DecoratorTarget(DecoratorType, t, type));
+            else
+                return _inner.FetchAll(type);
 		}
 
 		/// <summary>
