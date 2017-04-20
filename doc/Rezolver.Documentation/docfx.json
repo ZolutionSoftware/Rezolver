@@ -4,13 +4,12 @@
       "src": [
         {
           "files": [
-            "rezolver-docfx.csproj"
+            "rezolver.csproj"
           ],
           "cwd": "../../src/Rezolver",
-          "exclude": [
-            "**/obj/**",
-            "**/bin/**"
-          ]
+          "properties": {
+            "TargetFramework": "net46"
+          }
         }
       ],
       "dest": "_docfx_proj/obj/api"
@@ -27,7 +26,7 @@
       "_packagePreRelease": true,
       "_githubPath": "ZolutionSoftware/Rezolver",
       "_usingWaffle": true,
-      "_GATracking":  false,
+      "_GATracking": false,
       "_GATrackingID": "UA-92764222-1"
     },
     "xref": [

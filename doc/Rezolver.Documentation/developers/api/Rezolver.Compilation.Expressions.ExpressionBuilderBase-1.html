@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ExpressionBuilderBase&lt;TTarget&gt;
    | Rezolver IOC Framework (prerelease) ">
-  	<meta name="generator" content="docfx 2.15.5.0">
+  	<meta name="generator" content="docfx 2.16.2.2">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -132,16 +132,31 @@ an instance in an <a class="xref" href="Rezolver.Targets.ObjectTarget.html">Obje
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_GetRootScope_Method">ExpressionBuilderBase.IContainerScope_GetRootScope_Method</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_CanResolve_Method">ExpressionBuilderBase.IContainer_CanResolve_Method</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_Resolve_Method">ExpressionBuilderBase.IContainer_Resolve_Method</a>
+                </div>
+                <div>
                   <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_Resolve_Method">ExpressionBuilderBase.IContainerScope_Resolve_Method</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContextExtensions_Resolve_Method">ExpressionBuilderBase.ResolveContextExtensions_Resolve_Method</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_ITarget_SelectScope_Method">ExpressionBuilderBase.ITarget_SelectScope_Method</a>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_IResolveContext_New_Method">ExpressionBuilderBase.IResolveContext_New_Method</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContext_Alter_Method">ExpressionBuilderBase.ResolveContext_Alter_Method</a>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallResolveContext_New_Expression_Expression_Expression_Expression_">ExpressionBuilderBase.CallResolveContext_New(Expression, Expression, Expression, Expression)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_Resolve_Expression_Expression_">ExpressionBuilderBase.CallIContainer_Resolve(Expression, Expression)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_CanResolve_Expression_Expression_">ExpressionBuilderBase.CallIContainer_CanResolve(Expression, Expression)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_">ExpressionBuilderBase.GetContextCompiler(IExpressionCompileContext)</a>
@@ -150,35 +165,14 @@ an instance in an <a class="xref" href="Rezolver.Targets.ObjectTarget.html">Obje
                   <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">ExpressionBuilderBase.BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_Rezolver_ScopeBehaviour_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">ExpressionBuilderBase.ApplyScoping(ScopeBehaviour, Expression, ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
+                  <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">ExpressionBuilderBase.ApplyScoping(Expression, ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">ExpressionBuilderBase.IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
                 </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
-                </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver.Compilation.Expressions</h6>
-              <h6><strong>Assembly</strong>:rezolver-docfx.dll</h6>
+              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_syntax">Syntax</h5>
               <div class="codewrapper">
                 <pre><code class="lang-csharp hljs">public abstract class ExpressionBuilderBase&lt;TTarget&gt; : ExpressionBuilderBase, IExpressionBuilder&lt;TTarget&gt;, IExpressionBuilder where TTarget : ITarget</code></pre>
@@ -290,7 +284,7 @@ parameter is optional, this will always be provided </p>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
               <div class="markdown level1 summary"><p>Overrides the abstract <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a> (and seals it from
 further overrides); checks that <span class="paramref">target</span> is an instance of <span class="typeparamref">TTarget</span>
-(throwing an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a> if not) and then calls this class&#39; <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</a>
+(throwing an <see cref="!:ArgumentException"></see> if not) and then calls this class&#39; <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</a>
 abstract function.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -347,36 +341,15 @@ parameter is optional, this will always be provided</p>
               </table>
               <h5 class="overrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">ExpressionBuilderBase.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a></div>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
-                    <td><p>target must be an instance of { typeof(TTarget) }</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
-                    <td><p>If the passed target is not an instance of <span class="typeparamref">TTarget</span></p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase%601.CanBuild(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase%601.CanBuild(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase`1.cs/#L122">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase`1.cs/#L121">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.CanBuild*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.CanBuild(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext)">CanBuild(ITarget, IExpressionCompileContext)</h4>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_Rezolver_ITarget_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.CanBuild(Rezolver.ITarget)">CanBuild(ITarget)</h4>
               <div class="markdown level1 summary"><p>Determines whether this instance can build an expression from the specified target.</p>
 <p>This base implementation simply checks that the type of <span class="paramref">target</span> is
 compatible with the type <span class="typeparamref">TTarget</span>.</p>
@@ -384,7 +357,7 @@ compatible with the type <span class="typeparamref">TTarget</span>.</p>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public override bool CanBuild(ITarget target, IExpressionCompileContext context)</code></pre>
+                <pre><code class="lang-csharp hljs">public override bool CanBuild(ITarget target)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -400,12 +373,6 @@ compatible with the type <span class="typeparamref">TTarget</span>.</p>
                     <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
                     <td><span class="parametername">target</span></td>
                     <td><p>The target.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html">IExpressionCompileContext</a></td>
-                    <td><span class="parametername">context</span></td>
-                    <td><p>The compilation context.</p>
 </td>
                   </tr>
                 </tbody>
@@ -426,9 +393,9 @@ compatible with the type <span class="typeparamref">TTarget</span>.</p>
                 </tbody>
               </table>
               <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_">ExpressionBuilderBase.CanBuild(ITarget, IExpressionCompileContext)</a></div>
+              <div><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_Rezolver_ITarget_">ExpressionBuilderBase.CanBuild(ITarget)</a></div>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_CanBuild_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_">IExpressionBuilder.CanBuild(ITarget, IExpressionCompileContext)</a></div>
+                  <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_CanBuild_Rezolver_ITarget_">IExpressionBuilder.CanBuild(ITarget)</a></div>
               <h3 id="eii">Explicit Interface Implementations
               </h3>
               <span class="small pull-right mobile-hide">
@@ -475,7 +442,7 @@ compatible with the type <span class="typeparamref">TTarget</span>.</p>
                     <td><p>Optional. The compiler that&#39;s requesting the expression; and which can be used
 to compile other targets within the target.  If not provided, then the implementation attempts to locate
 the context compiler using the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_">GetContextCompiler(IExpressionCompileContext)</a> method, and will throw
-an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a> if it cannot do so.</p>
+an <see cref="!:InvalidOperationException"></see> if it cannot do so.</p>
 </td>
                   </tr>
                 </tbody>
@@ -497,28 +464,6 @@ an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalid
               </table>
               <h5 class="implements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html#Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">IExpressionBuilder&lt;TTarget&gt;.Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</a></div>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
-                    <td><p><span class="paramref">target</span> is null or <span class="paramref">context</span> is null</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
-                    <td><p><span class="paramref">compiler</span> is null and an IExpressionCompiler 
-    couldn&#39;t be resolved for the current context (via <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_">GetContextCompiler(IExpressionCompileContext)</a></p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
               <h3 id="seealso">See Also</h3>
               <div class="seealso">
                   <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html">IExpressionBuilder</a>&lt;TTarget&gt;</div>

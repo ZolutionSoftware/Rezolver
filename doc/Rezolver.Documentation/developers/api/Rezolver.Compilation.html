@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Compilation
    | Rezolver IOC Framework (prerelease) ">
-  	<meta name="generator" content="docfx 2.15.5.0">
+  	<meta name="generator" content="docfx 2.16.2.2">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -110,8 +110,8 @@
               </h3>
                   <h4><a class="xref" href="Rezolver.Compilation.CompileContext.html">CompileContext</a></h4>
                   <section><p>Core implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.  A root context (i.e. where <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ParentContext">ParentContext</a> is
-<code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_System_Type_">CompileContext(IContainer, ITargetContainer, Type)</a>
-constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_Container">Container</a> and the compilation
+<code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
+constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Container.html">Container</a> and the compilation
 stack.</p>
 <p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation is done by decorating a new <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a>,
 so that new registrations can be added without interfering with upstream containers.</p>
@@ -138,13 +138,9 @@ are compiled into <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiled
                   <section><p>Interface for an object which creates <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> instances for when the system needs to
 compile an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.ICompilerConfigurationProvider.html">ICompilerConfigurationProvider</a></h4>
-                  <section><p>Interface for an object which configures the compiler for the given container and/or targets object
-to use a specific <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> and <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a>.</p>
-<p>Used by all the standard container types in the Rezolver framework.</p>
-<p>You can provide a specific provider to most containers on creation, and you can configure
-the default system-wide provider via the <a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider">DefaultProvider</a> static
-property.</p>
+                  <h4><a class="xref" href="Rezolver.Compilation.IContainerConfiguration.html">IContainerConfiguration</a></h4>
+                  <section><p>Interface for an object which configures an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> and its <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
+before being used.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a></h4>
                   <section><p>An object that produces <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s given a 

@@ -1,5 +1,5 @@
 /// <binding BeforeBuild='default' AfterBuild='sitemap' Clean='cleanDocFXOutput' />
-// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 var path = require('path');
 var gulp = require('gulp');
 var minify = require('gulp-minify-css');
@@ -9,7 +9,6 @@ var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
 var merge = require('merge-stream');
-//var lec = require('gulp-line-ending-corrector');
 var LessAutoprefix = require('less-plugin-autoprefix');
 
 var autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
@@ -113,7 +112,6 @@ gulp.task('less', ['copy'], function () {
         plugins: [autoprefix]
       }))
       .pipe(sourcemaps.write('.'))
-      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverBootstrap.cwd)),
     gulp.src(rezolverDocFXMain.src, { cwd: rezolverDocFXMain.cwd })
       .pipe(sourcemaps.init())
@@ -121,7 +119,6 @@ gulp.task('less', ['copy'], function () {
         plugins: [autoprefix]
       }))
       .pipe(sourcemaps.write('.'))
-      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverDocFXMain.cwd))
     );
 });
@@ -136,13 +133,11 @@ gulp.task('bundles', ['less'], function () {
       }))
       .pipe(concat('docfx.vendor.css'))
       .pipe(sourcemaps.write('.'))
-      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverDocFXMain.cwd)),
     gulp.src(vendor.js)
       .pipe(sourcemaps.init())
       .pipe(concat('docfx.vendor.js'))
       .pipe(sourcemaps.write('.'))
-      //.pipe(lec({ eolc: 'CRLF' }))
       .pipe(gulp.dest(rezolverDocFXMain.cwd))
     );
 });

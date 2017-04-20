@@ -143,7 +143,7 @@
     <Content Include="developers\api\Rezolver.Compilation.html" />
     <Content Include="developers\api\Rezolver.Compilation.ICompileContext.html" />
     <Content Include="developers\api\Rezolver.Compilation.ICompileContextProvider.html" />
-    <Content Include="developers\api\Rezolver.Compilation.ICompilerConfigurationProvider.html" />
+    <Content Include="developers\api\Rezolver.Compilation.IContainerConfiguration.html" />
     <Content Include="developers\api\Rezolver.Compilation.ITargetCompiler.html" />
     <Content Include="developers\api\Rezolver.Compilation.TargetCompiler.html" />
     <Content Include="developers\api\Rezolver.ConstructorBinding.html" />
@@ -170,6 +170,7 @@
     <Content Include="developers\api\Rezolver.IContainer.html" />
     <Content Include="developers\api\Rezolver.IContainerScope.html" />
     <Content Include="developers\api\Rezolver.IMemberBindingBehaviour.html" />
+    <Content Include="developers\api\Rezolver.IResolveContext.html" />
     <Content Include="developers\api\Rezolver.IScopedContainer.html" />
     <Content Include="developers\api\Rezolver.IScopeFactory.html" />
     <Content Include="developers\api\Rezolver.ITarget.html" />
@@ -186,6 +187,7 @@
     <Content Include="developers\api\Rezolver.ScopeBehaviour.html" />
     <Content Include="developers\api\Rezolver.ScopedContainer.html" />
     <Content Include="developers\api\Rezolver.ScopedTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.ScopePreference.html" />
     <Content Include="developers\api\Rezolver.SingletonTargetContainerExtensions.html" />
     <Content Include="developers\api\Rezolver.Target.html" />
     <Content Include="developers\api\Rezolver.TargetContainer.html" />
@@ -327,10 +329,6 @@
     <Content Include="_docfx_themes\rezolver\styles\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.md" />
-    <Content Include="articles\toc.md" />
-    <Content Include="articles\intro.md" />
-    <Content Include="api\index.md" />
     <Content Include="developers\index.json" />
     <Content Include="developers\manifest.json" />
     <Content Include="developers\search-stopwords.json" />
@@ -348,6 +346,10 @@
     <Content Include="developers\styles\main.css.map" />
     <Content Include="developers\styles\main.less" />
     <Content Include="developers\xrefmap.yml" />
+    <Content Include="index.md" />
+    <Content Include="articles\toc.md" />
+    <Content Include="articles\intro.md" />
+    <Content Include="api\index.md" />
     <None Include="Properties\PublishExclude.props" />
     <Content Include="_docfx_themes\default\common.js" />
     <Content Include="_docfx_themes\default\conceptual.extension.js" />
@@ -418,10 +420,10 @@
     <Content Include="_docfx_proj\docs\lifetimes\scoped.md" />
     <Content Include="_docfx_proj\docs\lifetimes\container-scopes.md" />
     <Content Include="_docfx_proj\docs\lifetimes\toc.yml" />
-    <Content Include="toc.yml" />
     <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy - Pre.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="toc.yml" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -617,10 +619,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\..\packages\docfx.console.2.15.5\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.15.5\build\docfx.console.targets'))" />
+    <Error Condition="!Exists('..\..\packages\docfx.console.2.16.2\tools\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.16.2\tools\docfx.console.targets'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
   </Target>
-  <Import Project="..\..\packages\docfx.console.2.15.5\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.15.5\build\docfx.console.targets')" />
+  <Import Project="..\..\packages\docfx.console.2.16.2\tools\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.16.2\tools\docfx.console.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ContainerBase.MissingCompiledTarget
    | Rezolver IOC Framework (prerelease) ">
-  	<meta name="generator" content="docfx 2.15.5.0">
+  	<meta name="generator" content="docfx 2.16.2.2">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -105,7 +105,7 @@
               <h1 id="Rezolver_ContainerBase_MissingCompiledTarget" data-uid="Rezolver.ContainerBase.MissingCompiledTarget">Class ContainerBase.MissingCompiledTarget
               </h1>
               <div class="markdown level0 summary"><p>Used as a sentinel type when a type cannot be resolved by a <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> instance.  Instead of returning a null
-<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instance, the container will construct an instance of this type (typically through <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">GetMissingTarget(Type)</a>,
+<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instance, the container will construct an instance of this type (typically through <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_Type_">GetMissingTarget(Type)</a>,
 which caches singleton instances of this class on a per-type basis) which can then be used just as if the lookup succeeded.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
@@ -114,51 +114,27 @@ which caches singleton instances of this class on a per-type basis) which can th
                   <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
                   <div class="level1"><span class="xref">ContainerBase.MissingCompiledTarget</span></div>
               </div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
-                </div>
-              </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
-              <h6><strong>Assembly</strong>:rezolver-docfx.dll</h6>
+              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_ContainerBase_MissingCompiledTarget_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected class MissingCompiledTarget : ICompiledTarget</code></pre>
+                <pre><code class="lang-csharp hljs">protected class MissingCompiledTarget : object, ICompiledTarget</code></pre>
               </div>
               <h5 id="Rezolver_ContainerBase_MissingCompiledTarget_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>The <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> always throws an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a> with the message
+              <div class="markdown level0 remarks"><p>The <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html#Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> always throws an <see cref="!:InvalidOperationException"></see> with the message
 &#39;Could resolve type [[type]]&#39;</p>
 </div>
               <h3 id="constructors">Constructors
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_MissingCompiledTarget__ctor_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.MissingCompiledTarget.%23ctor(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_MissingCompiledTarget__ctor_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.MissingCompiledTarget.%23ctor(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L65">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L67">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_MissingCompiledTarget__ctor_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.#ctor*"></a>
-              <h4 id="Rezolver_ContainerBase_MissingCompiledTarget__ctor_System_Type_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.#ctor(System.Type)">MissingCompiledTarget(Type)</h4>
+              <h4 id="Rezolver_ContainerBase_MissingCompiledTarget__ctor_Type_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.#ctor(Type)">MissingCompiledTarget(Type)</h4>
               <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html">ContainerBase.MissingCompiledTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -177,12 +153,46 @@ which caches singleton instances of this class on a per-type basis) which can th
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+                    <td><span class="xref">Type</span></td>
                     <td><span class="parametername">type</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
+              <h3 id="properties">Properties
+              </h3>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_MissingCompiledTarget_SourceTarget.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.MissingCompiledTarget.SourceTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L62">View Source</a>
+              </span>
+              <a id="Rezolver_ContainerBase_MissingCompiledTarget_SourceTarget_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.SourceTarget*"></a>
+              <h4 id="Rezolver_ContainerBase_MissingCompiledTarget_SourceTarget" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.SourceTarget">SourceTarget</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ITarget SourceTarget { get; }</code></pre>
+              </div>
+              <h5 class="propertyValue">Property Value</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="implements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_SourceTarget">ICompiledTarget.SourceTarget</a></div>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
@@ -190,11 +200,11 @@ which caches singleton instances of this class on a per-type basis) which can th
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.MissingCompiledTarget.GetObject(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L75">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L77">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_MissingCompiledTarget_GetObject_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.GetObject*"></a>
               <h4 id="Rezolver_ContainerBase_MissingCompiledTarget_GetObject_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.MissingCompiledTarget.GetObject(Rezolver.IResolveContext)">GetObject(IResolveContext)</h4>
-              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a>.  Always throws an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a>.</p>
+              <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a>.  Always throws an <see cref="!:InvalidOperationException"></see>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -236,22 +246,6 @@ which caches singleton instances of this class on a per-type basis) which can th
               </table>
               <h5 class="implements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">ICompiledTarget.GetObject(IResolveContext)</a></div>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
-                    <td><p>Always thrown.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
               <h3 id="seealso">See Also</h3>
               <div class="seealso">
                   <div><a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a></div>
@@ -267,7 +261,7 @@ which caches singleton instances of this class on a per-type basis) which can th
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_MissingCompiledTarget.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.MissingCompiledTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L57" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L58" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

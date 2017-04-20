@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver
    | Rezolver IOC Framework (prerelease) ">
-  	<meta name="generator" content="docfx 2.15.5.0">
+  	<meta name="generator" content="docfx 2.16.2.2">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -133,12 +133,12 @@ or fields directly.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ContainerBase.DirectResolveCompiledTarget.html">ContainerBase.DirectResolveCompiledTarget</a></h4>
                   <section><p>Used when an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> is also of the same type as the one for which it is returned
-by the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> method of the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> container.</p>
+by the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_Type_">Fetch(Type)</a> method of the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> container.</p>
 <p>In this case, the target is not compiled, but instead is simply returned as the desired object.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html">ContainerBase.MissingCompiledTarget</a></h4>
                   <section><p>Used as a sentinel type when a type cannot be resolved by a <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> instance.  Instead of returning a null
-<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instance, the container will construct an instance of this type (typically through <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">GetMissingTarget(Type)</a>,
+<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instance, the container will construct an instance of this type (typically through <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_Type_">GetMissingTarget(Type)</a>,
 which caches singleton instances of this class on a per-type basis) which can then be used just as if the lookup succeeded.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ContainerResolveExtensions.html">ContainerResolveExtensions</a></h4>
@@ -157,7 +157,7 @@ interface present a similar set of functionality to <a class="xref" href="Rezolv
 </section>
                   <h4><a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a></h4>
                   <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
-<a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
+<a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_Type_">FetchAll(Type)</a> are called.</p>
 <p>The best way to add a decorator to your target container is to use the extension method 
 <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
 or its non-generic equivalent.</p>
@@ -189,7 +189,7 @@ containers which use that target container.</p>
                   <section><p>This type is only used when using expressions as targets(via the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> type) - it&#39;s
 functions serve no actual purpose other than to act as hooks to create specific <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects
 in place of static code.</p>
-<p>All the functions will throw a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a> if called at runtime.</p>
+<p>All the functions will throw a <see cref="!:NotImplementedException"></see> if called at runtime.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html">ExpressionTargetContainerExtensions</a></h4>
                   <section><p>Extensions for to simplify registering expressions in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
@@ -317,6 +317,9 @@ that the targets are registered against.</p>
               </h3>
                   <h4><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></h4>
                   <section><p>Describes different ways in which objeects interact with scopes.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ScopePreference.html">ScopePreference</a></h4>
+                  <section><p>Specifies the scope that the object produced by a target should be tracked within.</p>
 </section>
                         </article>
           </div>
