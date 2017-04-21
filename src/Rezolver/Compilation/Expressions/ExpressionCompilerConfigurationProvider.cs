@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 namespace Rezolver.Compilation.Expressions
 {
 	/// <summary>
-	/// Implements the <see cref="IContainerConfiguration"/> to configure expression-based compilation for targets in containers.
+	/// Implements the <see cref="IContainerBehaviour"/> to configure expression-based compilation for targets in containers.
 	/// 
 	/// The implementation registers all the targets necessary to use the expression tree-based compilation provided by 
 	/// the <c>Rezolver.Compilation.Expressions</c> library.
 	/// 
 	/// This configuration provider is automatically configured as the default for all containers when the Rezolver 
 	/// library is referenced.</summary>
-	public class ExpressionCompilerConfigurationProvider : IContainerConfiguration
+	public class ExpressionCompilerConfigurationProvider : IContainerBehaviour
 	{
 		/// <summary>
-		/// Implements the <see cref="IContainerConfiguration.Configure(IContainer, ITargetContainer)"/> method,
+		/// Implements the <see cref="IContainerBehaviour.Configure(IContainer, ITargetContainer)"/> method,
 		/// registering all the targets necessary to use expression-based compilation for all the standard targets
 		/// defined in the <c>Rezolver</c> core library.
 		/// </summary>
@@ -29,7 +29,7 @@ namespace Rezolver.Compilation.Expressions
 		public virtual void Configure(IContainer container, ITargetContainer targets)
 		{
 			targets.MustNotBeNull(nameof(targets));
-
+            //extract the singleton to its own behaviour
             targets.RegisterObject(new SingletonTarget.SingletonContainer());
             targets.RegisterObject(new ExpressionBuilderCache(container));
 			//will be how containers pick up and use this compiler
@@ -99,5 +99,10 @@ namespace Rezolver.Compilation.Expressions
 		{
 			return _standardTargetBuilders.Value;
 		}
-	}
+
+        public IEnumerable<IContainerBehaviour> GetDependencies(IEnumerable<IContainerBehaviour> behaviours)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

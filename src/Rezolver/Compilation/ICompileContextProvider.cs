@@ -11,7 +11,7 @@ namespace Rezolver.Compilation
 	/// <remarks>In normal operation, this interface is closely related to the <see cref="ITargetCompiler"/> interface 
 	/// because the core <see cref="ContainerBase"/> class (which provides most of the default implementation for 
 	/// <see cref="IContainer"/>) obtains a new <see cref="ICompileContext"/> by resolving an instance of this interface, and 
-	/// calling the <see cref="CreateContext(IResolveContext, ITargetContainer, IContainer)"/> method, passing the result
+	/// calling the <see cref="CreateContext(IResolveContext, ITargetContainer)"/> method, passing the result
 	/// to the <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> method, along with the target to be compiled.
 	/// 
 	/// Frequently, implementations of <c>ITargetCompiler</c> will also implement this interface to ensure that the compilation
@@ -24,10 +24,9 @@ namespace Rezolver.Compilation
 		/// the <see cref="IResolveContext.RequestedType"/> that the eventual <see cref="ICompiledTarget"/> should return.
 		/// </summary>
 		/// <param name="resolveContext">The resolve context - used to get the <see cref="IResolveContext.RequestedType"/>
-		/// and the <see cref="IResolveContext.Container"/> (if <paramref name="containerOverride"/> is not provided).</param>
+		/// and the <see cref="IResolveContext.Container"/>, and will be set on the <see cref="ICompileContext.ResolveContext"/>
+        /// property of the returned context.</param>
 		/// <param name="targets">The target container that should be used to lookup other non-compiled targets.</param>
-		/// <param name="containerOverride">The container requesting the new compilation context, if different from the
-		/// <see cref="IResolveContext.Container"/> on the <paramref name="resolveContext"/></param>
 		ICompileContext CreateContext(IResolveContext resolveContext, ITargetContainer targets);
 	}
 }

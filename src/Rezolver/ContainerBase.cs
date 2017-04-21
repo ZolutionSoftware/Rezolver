@@ -35,12 +35,17 @@ namespace Rezolver
     public class ContainerBase : IContainer, ITargetContainer
     {
         #region NoChangeCompilerConfigurationProvider class
-        private class NoChangeCompilerConfigurationProvider : IContainerConfiguration
+        private class NoChangeCompilerConfigurationProvider : IContainerBehaviour
         {
-            ///<summary>Empty implementation of <see cref="IContainerConfiguration.Configure(IContainer, ITargetContainer)"/></summary>
+            ///<summary>Empty implementation of <see cref="IContainerBehaviour.Configure(IContainer, ITargetContainer)"/></summary>
             public void Configure(IContainer container, ITargetContainer targets)
             {
 
+            }
+
+            public IEnumerable<IContainerBehaviour> GetDependencies(IEnumerable<IContainerBehaviour> behaviours)
+            {
+                throw new NotImplementedException();
             }
         }
         #endregion
@@ -121,7 +126,7 @@ namespace Rezolver
         /// This provider is guaranteed not to add/modify any registrations in the underlying target container
         /// which are connected with compilation.
         /// </summary>
-        protected static IContainerConfiguration NoChangeCompilerConfiguration { get; } = new NoChangeCompilerConfigurationProvider();
+        protected static IContainerBehaviour NoChangeCompilerConfiguration { get; } = new NoChangeCompilerConfigurationProvider();
 
 
         private static readonly
@@ -147,7 +152,7 @@ namespace Rezolver
         }
 
         private int _compileConfigured = 0;
-        private IContainerConfiguration _compilerConfigurationProvider;
+        private IContainerBehaviour _compilerConfigurationProvider;
         /// <summary>
         /// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="compilerConfig"/>
         /// </summary>
@@ -156,7 +161,7 @@ namespace Rezolver
         /// <see cref="Targets"/> property.</param>
         /// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
         /// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
-        protected ContainerBase(ITargetContainer targets = null, IContainerConfiguration compilerConfig = null)
+        protected ContainerBase(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)
         {
             Targets = targets ?? new TargetContainer();
             _compilerConfigurationProvider = compilerConfig ?? CompilerConfiguration.DefaultProvider;

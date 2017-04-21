@@ -32,7 +32,7 @@ namespace Rezolver
 		/// <param name="targets">Optional.  The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</param>
 		/// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
 		/// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
-		public Container(ITargetContainer targets = null, IContainerConfiguration compilerConfig = null)
+		public Container(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)
 			: base(targets, compilerConfig)
 		{
 			
@@ -54,7 +54,7 @@ namespace Rezolver
 		/// <param name="compilerConfig">An object which will be used to configure this container and its targets to use a 
 		/// specific compilation strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider 
 		/// will be used.</param>
-		public Container(IContainerConfiguration compilerConfig) : this(null, compilerConfig)
+		public Container(IContainerBehaviour compilerConfig) : this(null, compilerConfig)
 		{
 
 		}

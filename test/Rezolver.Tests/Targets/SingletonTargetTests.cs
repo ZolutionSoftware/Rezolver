@@ -43,44 +43,5 @@ namespace Rezolver.Tests.Targets
 			Assert.Equal(typeof(string),
 				new SingletonTarget(new TestTarget(typeof(string), useFallBack: false, supportsType: true)).DeclaredType);
 		}
-
-		[Fact]
-		public void GetOrAddInitialiserShouldNotAllowNullArguments()
-		{
-			Assert.Throws<ArgumentNullException>(() => new SingletonTarget(new TestTarget()).GetOrAddInitialiser(null, t => null));
-			Assert.Throws<ArgumentNullException>(() => new SingletonTarget(new TestTarget()).GetOrAddInitialiser(typeof(string), null));
-		}
-
-		[Fact]
-		public void ShouldExecuteInitialiserFactoryIfNewInitialiser()
-		{
-			var target = new SingletonTarget(new TestTarget());
-
-			bool executed = false;
-			var result = target.GetOrAddInitialiser(typeof(string), t => {
-				executed = true;
-				return new TestCompiledTarget();
-			});
-
-			Assert.True(executed);
-		}
-
-		[Fact]
-		public void ShouldOnlyExecuteInitialiseFactoryOnce()
-		{
-			var target = new SingletonTarget(new TestTarget());
-
-			int execCount = 0;
-			Func<Type, ICompiledTarget> factory = t =>
-			{
-				++execCount;
-				return new TestCompiledTarget();
-			};
-			var result1 = target.GetOrAddInitialiser(typeof(string), factory);
-			var result2 = target.GetOrAddInitialiser(typeof(string), factory);
-
-			Assert.Equal(1, execCount);
-			Assert.Same(result1, result2);
-		}
 	}
 }

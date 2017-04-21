@@ -26,7 +26,7 @@ namespace Rezolver.Compilation.Expressions
 	/// 
 	/// Typically, this is done by searching for an <see cref="IExpressionBuilder{TTarget}" /> where 'TTarget' is equal to the runtime type
 	/// of the target - e.g. <see cref="Targets.ConstructorTarget" />.  If one cannot be found, it will then search for an <see cref="IExpressionBuilder" />
-	/// whose <see cref="IExpressionBuilder.CanBuild(ITarget, IExpressionCompileContext)" /> function returns <c>true</c> for the given target.
+	/// whose <see cref="IExpressionBuilder.CanBuild(ITarget)" /> function returns <c>true</c> for the given target.
 	/// 
 	/// With a correctly configured target dictionary (using the <see cref="ConfigProvider"/> which, as mentioned previously, is
 	/// used by default if no configuration provider is explicitly passed to the constructor of one of the <see cref="ContainerBase"/>
@@ -195,7 +195,7 @@ namespace Rezolver.Compilation.Expressions
 		/// the <paramref name="context" /> for the <paramref name="target" /></exception>
 		/// <remarks>This implementation attempts to resolve an <see cref="IExpressionBuilder{TTarget}" /> (with <c>TTarget"</c>
 		/// equal to the runtime type of the <paramref name="target" />) or <see cref="IExpressionBuilder" /> whose
-		/// <see cref="IExpressionBuilder.CanBuild(ITarget, IExpressionCompileContext)" /> function returns <c>true</c> for the given target and context.
+		/// <see cref="IExpressionBuilder.CanBuild(ITarget)" /> function returns <c>true</c> for the given target and context.
 		/// If that lookup fails, then an <see cref="ArgumentException" /> is raised.  If the lookup succeeds, then the builder's
 		/// <see cref="IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)" /> function is called, and the expression it
 		/// produces is returned.</remarks>

@@ -51,12 +51,7 @@ namespace Rezolver.Targets
                 });
             }
         }
-		//the cached compiled targets for this singleton keyed by the requested type.
-		//compilers should use this so that the singleton rule can be enforced.
-		//TODO: change this to be a state storage device in the container - possibly using the same
-		//pattern that's been proposed for scoping (see IContainerScope, bottom of the file)
-		private readonly ConcurrentDictionary<Type, ICompiledTarget> _initialisers = new ConcurrentDictionary<Type, ICompiledTarget>();
-
+		
 		/// <summary>
 		/// Override of <see cref="TargetBase.DeclaredType"/> - always returns the DeclaredType of the <see cref="InnerTarget"/>
 		/// </summary>
@@ -87,21 +82,6 @@ namespace Rezolver.Targets
 			innerTarget.MustNot(t => t is SingletonTarget, "A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
 
 			InnerTarget = innerTarget;
-		}
-
-		/// <summary>
-		/// Used to support compiled versions of this singleton
-		/// </summary>
-		/// <param name="declaredType">Type of object.</param>
-		/// <param name="initialiserFactory">The initialiser factory.</param>
-		/// <remarks>This concept is something that probably needs
-		/// to move out of this type, into a more generic TargetState object or something like that.</remarks>
-		public ICompiledTarget GetOrAddInitialiser(Type declaredType, Func<Type, ICompiledTarget> initialiserFactory)
-		{
-			declaredType.MustNotBeNull(nameof(declaredType));
-			initialiserFactory.MustNotBeNull(nameof(initialiserFactory));
-
-			return _initialisers.GetOrAdd(declaredType, initialiserFactory);
 		}
 
 		/// <summary>
