@@ -2,7 +2,11 @@
 
 namespace Rezolver
 {
-    public interface IDependantBehaviour<T> where T: IDependantBehaviour<T>
+    /// <summary>
+    /// Common interface for an object which has dependencies on one or more other objects of a given type
+    /// </summary>
+    /// <typeparam name="TDependency"></typeparam>
+    public interface IDependant<TDependency>
     {
         /// <summary>
         /// Called to filter the given enumerable of behaviours to include all the behaviours
@@ -10,8 +14,8 @@ namespace Rezolver
         /// </summary>
         /// <param name="behaviours"></param>
         /// <returns></returns>
-        /// <exception cref="BehaviourConfigurationException">If an expected dependency is not
+        /// <exception cref="BehaviourException">If an expected dependency is not
         /// found in the <paramref name="behaviours"/></exception>
-        IEnumerable<T> GetDependencies(IEnumerable<T> behaviours);
+        IEnumerable<TDependency> GetDependencies(IEnumerable<TDependency> behaviours);
     }
 }

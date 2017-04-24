@@ -41,7 +41,12 @@ namespace Rezolver.Tests.Targets
 			{
 				targets.RegisterObject<ICompileContextProvider>(new TestContextProvider());
 			}
-		}
+
+            public IEnumerable<IContainerBehaviour> GetDependencies(IEnumerable<IContainerBehaviour> behaviours)
+            {
+                return Enumerable.Empty<IContainerBehaviour>();
+            }
+        }
 
 		protected virtual IContainerBehaviour GetTestCompilerConfigProvider()
 		{
