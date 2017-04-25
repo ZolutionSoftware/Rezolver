@@ -21,41 +21,13 @@ pre {
 }
 
 ::-webkit-scrollbar-track {
-    background: @alt-color-darker;
+    background: @gray-darker;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: @alt-color;
+    background: @gray;
 }
 
 ::-webkit-scrollbar-button {
-    &:start:increment:extend(.fa), &:end:increment:extend(.fa) {
-        display: block;
-        color: @alt-color-lighter;
-        background: @alt-color-darker;
-    }
-
-    &:start:decrement, &:end:decrement {
-        display: none;
-    }
-
-    &:vertical {
-        &:start:increment {
-            content: @fa-var-arrow-up;
-        }
-
-        &:end:increment {
-            content: @fa-var-arrow-down;
-        }
-    }
-
-    &:horizontal {
-        &:start:increment {
-            content: @fa-var-arrow-left;
-        }
-
-        &:end:increment {
-            content: @fa-var-arrow-right;
-        }
-    }
+    display:none;
 }

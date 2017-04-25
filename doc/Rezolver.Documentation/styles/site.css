@@ -9060,32 +9060,13 @@ pre {
   height: 12px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b2466;
+  background: #222222;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1239A2;
+  background: #555555;
 }
-::-webkit-scrollbar-button:start:increment,
-::-webkit-scrollbar-button:end:increment {
-  display: block;
-  color: #bcccf7;
-  background: #0b2466;
-}
-::-webkit-scrollbar-button:start:decrement,
-::-webkit-scrollbar-button:end:decrement {
+::-webkit-scrollbar-button {
   display: none;
-}
-::-webkit-scrollbar-button:vertical:start:increment {
-  content: "\f062";
-}
-::-webkit-scrollbar-button:vertical:end:increment {
-  content: "\f063";
-}
-::-webkit-scrollbar-button:horizontal:start:increment {
-  content: "\f060";
-}
-::-webkit-scrollbar-button:horizontal:end:increment {
-  content: "\f061";
 }
 
 /*# sourceMappingURL=site.css.map */

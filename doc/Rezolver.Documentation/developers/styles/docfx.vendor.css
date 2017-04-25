@@ -2175,12 +2175,7 @@ td.visible-print,th.visible-print{display:table-cell!important}
 .TIP.alert-info .alert-link{color:#e6e6e6}
 pre{-moz-tab-size:3;tab-size:3;padding:9.5px}
 ::-webkit-scrollbar{width:12px;height:12px}
-::-webkit-scrollbar-track{background:#0b2466}
-::-webkit-scrollbar-thumb{background:#1239A2}
-::-webkit-scrollbar-button:end:increment,::-webkit-scrollbar-button:start:increment{display:block;color:#bcccf7;background:#0b2466}
-::-webkit-scrollbar-button:end:decrement,::-webkit-scrollbar-button:start:decrement{display:none}
-::-webkit-scrollbar-button:vertical:start:increment{content:"\f062"}
-::-webkit-scrollbar-button:vertical:end:increment{content:"\f063"}
-::-webkit-scrollbar-button:horizontal:start:increment{content:"\f060"}
-::-webkit-scrollbar-button:horizontal:end:increment{content:"\f061"}
+::-webkit-scrollbar-track{background:#222}
+::-webkit-scrollbar-thumb{background:#555}
+::-webkit-scrollbar-button{display:none}
 /*# sourceMappingURL=docfx.vendor.css.map */
