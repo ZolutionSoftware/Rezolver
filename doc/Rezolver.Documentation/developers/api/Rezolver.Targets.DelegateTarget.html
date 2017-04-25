@@ -125,7 +125,28 @@
                   <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_Type_">TargetBase.SupportsType(Type)</a>
+                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver.Targets</h6>
@@ -145,13 +166,13 @@ method call for which this target is being compiled and/or executed.</p>
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_DelegateTarget__ctor_Delegate_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.%23ctor(Delegate%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_DelegateTarget__ctor_System_Delegate_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.%23ctor(System.Delegate%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/DelegateTarget.cs/#L65">View Source</a>
               </span>
               <a id="Rezolver_Targets_DelegateTarget__ctor_" data-uid="Rezolver.Targets.DelegateTarget.#ctor*"></a>
-              <h4 id="Rezolver_Targets_DelegateTarget__ctor_Delegate_Type_" data-uid="Rezolver.Targets.DelegateTarget.#ctor(Delegate,Type)">DelegateTarget(Delegate, Type)</h4>
+              <h4 id="Rezolver_Targets_DelegateTarget__ctor_System_Delegate_System_Type_" data-uid="Rezolver.Targets.DelegateTarget.#ctor(System.Delegate,System.Type)">DelegateTarget(Delegate, Type)</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -170,17 +191,40 @@ method call for which this target is being compiled and/or executed.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Delegate</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
                     <td><span class="parametername">factory</span></td>
                     <td><p>Required - the factory delegate.  Must have a return type and can take
 0 or more parameters.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
                     <td><p>Optional - type that will be set into the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_DeclaredType">DeclaredType</a> for the target;
 if not provided, then it will be derived from the <span class="paramref">factory</span>&#39;s return type</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
+                    <td><p>If the <span class="paramref">factory</span> represents a void delegate or if
+<span class="paramref">declaredType</span> is passed but the type is not compatible with the return type of
+<span class="paramref">factory</span>.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
+                    <td><p>If <span class="paramref">factory</span> is null</p>
 </td>
                   </tr>
                 </tbody>
@@ -214,7 +258,7 @@ construction or derived from the return type of the <a class="xref" href="Rezolv
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -247,7 +291,7 @@ construction or derived from the return type of the <a class="xref" href="Rezolv
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Delegate</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
                     <td><p>The factory.</p>
 </td>
                   </tr>
@@ -279,18 +323,34 @@ construction or derived from the return type of the <a class="xref" href="Rezolv
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodInfo</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <h5 id="Rezolver_Targets_DelegateTarget_FactoryMethod_remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Whilst this can be easily obtained from the delegate yourself (by using the 
-<see cref="!:RuntimeReflectionExtensions.GetMethodInfo(Delegate)"></see> extension method) however, this 
+<a class="xref" href="https://msdn.microsoft.com/en-us/library/hh875135(v=vs.110).aspx">GetMethodInfo(Delegate)</a> extension method) however, this 
 class also uses it to determine the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_DeclaredType">DeclaredType</a> of the target or whether the delegate 
 is actually compatible with the one supplied on construction, therefore if you need to introspect 
 the delegate, you might as well use this.</p>
 </div>
+              <h3 id="extensionmethods">Extension Methods</h3>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Unscoped_Rezolver_ITarget_">Target.Unscoped(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_">Target.As(ITarget, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
+              </div>
                         </article>
           </div>
           

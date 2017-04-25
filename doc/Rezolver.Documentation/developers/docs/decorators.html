@@ -134,7 +134,8 @@ public class MyServiceDecorator2 : IMyService
         Inner = inner;
     }
 }
-</code></pre><h2 id="single-decorator-single-service">Single decorator, single service</h2>
+</code></pre><hr>
+<h2 id="single-decorator-single-service">Single decorator, single service</h2>
 <p>Here, we simply register an <code>IMyService</code> implementation and one of our decorators.  We then resolve an 
 instance and we should get an instance of the decorator, with the original <code>IMyService</code> as its <code>Inner</code>.</p>
 <pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
@@ -145,7 +146,8 @@ var result = container.Resolve&lt;IMyService&gt;();
 var decorator = Assert.IsType&lt;MyServiceDecorator1&gt;(result);
 
 Assert.IsType&lt;MyService&gt;(decorator.Inner);
-</code></pre><h2 id="two-decorators-single-service">Two decorators, single service</h2>
+</code></pre><hr>
+<h2 id="two-decorators-single-service">Two decorators, single service</h2>
 <p>You can also &#39;stack&#39; decorators for a given type, meaning you can decorate the decorators:</p>
 <pre><code class="lang-csharp" name="DecoratorExamples.cs">// same as before - but two decorators
 // note that the order they&#39;re registered determines the order in which 
@@ -161,6 +163,7 @@ var innerDecorator = Assert.IsType&lt;MyServiceDecorator2&gt;(decorator.Inner);
 
 Assert.IsType&lt;MyService&gt;(innerDecorator.Inner);
 </code></pre><p>As the test shows, the decorators are applied in the order they are registered for the given type.</p>
+<hr>
 <h2 id="two-decorators-enumerable">Two decorators, enumerable</h2>
 <p>Decorators are also applied to elements of an enumerable:</p>
 <pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
@@ -193,7 +196,8 @@ Assert.All(serviceTypes.Zip(result, (t, s) =&gt; (type: t, service: s)),
         var innerDecorator = Assert.IsType&lt;MyServiceDecorator2&gt;(decorator.Inner);
         Assert.IsType(ts.type, innerDecorator.Inner);
     });
-</code></pre><h2 id="open-generic-decorator">Open Generic Decorator</h2>
+</code></pre><hr>
+<h2 id="open-generic-decorator">Open Generic Decorator</h2>
 <p>You can also use decorators with open generics - register them just like <a href="constructor-injection/generics.html">normal generic types</a>, except
 via the <a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> method.</p>
 <p>For this, our basic generic decorator is this:</p>
@@ -224,15 +228,66 @@ Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(decorator.Inner);
 <code>IService&lt;&gt;</code> registrations, then one or more open generic decorators as normal - then an <code>IEnumerable&lt;IService&lt;Foo&gt;&gt;</code> 
 will produce an enumerable with each element correctly decorated.</p>
 </div>
-<h2 id="specialised-generic-decorator">Specialised Generic Decorator</h2>
-<div class="NOTE"><h5>Note</h5><p>This section is intended to show how you can apply decorators to specific closed variants of an open generic, however,
-whilst preparing the example, <a href="https://github.com/ZolutionSoftware/Rezolver/issues/27">an issue</a> was discovered in the 
-implementation.</p>
-<p>Not in the <em>least</em> bit embarrassing! :)</p>
-<p>A fix is planned for v1.2, and is right at the top of the priority list - which you can see on the 
-<a href="http://waffle.io/ZolutionSoftware/Rezolver">project board</a></p>
+<hr>
+<h2 id="mixing-open-generic-and-closed-decorators">Mixing Open Generic and Closed Decorators</h2>
+<div class="NOTE"><h5>Note</h5><p>This is new in v1.2 after <a href="https://github.com/ZolutionSoftware/Rezolver/issues/27">this issue</a> was fixed.</p>
 </div>
+<p>Given a type <code>Foo&lt;T&gt; : IFoo&lt;T&gt;</code> which will be resolved by interface, e.g: <code>IFoo&lt;Bar&gt;</code>, there are two ways in which
+we can decorate it:</p>
+<ul>
+<li>By registering a decorator for <code>IFoo&lt;Bar&gt;</code></li>
+<li>By registering a decorator for the open generic <code>IFoo&lt;&gt;</code></li>
+</ul>
+<p>Resolver allows you to mix both approaches, so that you can have one or more catch-all decorators for the open generic, as well
+as decorators for specific closed versions of that generic.  When Resolver produces the underlying instance, it will be decorated
+with each decorator that applies for the type:</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
+container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+container.RegisterDecorator(typeof(UsesAnyServiceDecorator&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+// this decorator only kicks in when resolving IUsesAnyService&lt;MyService2&gt;
+container.RegisterDecorator&lt;UsesMyService2Decorator, IUsesAnyService&lt;MyService2&gt;&gt;();
 
+// will be decorated twice
+var redecorated = container.Resolve&lt;IUsesAnyService&lt;MyService2&gt;&gt;();
+// but this will be decorated once
+var decorated = container.Resolve&lt;IUsesAnyService&lt;MyService1&gt;&gt;();
+
+Assert.IsType&lt;UsesMyService2Decorator&gt;(redecorated);
+Assert.IsType&lt;UsesAnyServiceDecorator&lt;MyService2&gt;&gt;(
+    ((UsesMyService2Decorator)redecorated).Inner);
+
+// but the IUsesAnyService&lt;MyService1&gt; will only be decorated once
+Assert.IsType&lt;UsesAnyServiceDecorator&lt;MyService1&gt;&gt;(decorated);
+
+</code></pre><p>In the above example, we create a registration for the interface <code>IUsesAnyService&lt;&gt;</code>, and then <em><em>two</em></em> decorators: the first 
+also for <code>IUsesAnyService&lt;&gt;</code> and a second which only applies to <code>IUsesAnyService&lt;MyService2&gt;</code>.</p>
+<p>We then resolve two instances - an <code>IUsesAnyService&lt;MyService2&gt;</code>, which is decorated twice, and an instance of 
+<code>IUsesAnyService&lt;MyService1&gt;</code>, which is decorated only once.</p>
+<h3 id="ordering-of-open-and-closed-generic-decorators">Ordering of Open and Closed Generic Decorators</h3>
+<p>When mixing open and closed generic decorators, the decorators are always applied in the order they are registered, regardless of
+whether the decorator is registered against the closed or open generic.</p>
+<p>So if you register decorators for the following types:</p>
+<ol>
+<li><code>IFoo&lt;&gt;</code></li>
+<li><code>IFoo&lt;Bar&gt;</code></li>
+<li><code>IFoo&lt;&gt;</code></li>
+</ol>
+<p>An instance of <code>IFoo&lt;Bar&gt;</code> will be decorated by all three in that same order, whereas an instance of <code>IFoo&lt;Baz&gt;</code> will only 
+be decorated by decorators 1 and 3, in that order.</p>
+<p>The following example demonstrates the <code>IFoo&lt;Bar&gt;</code> scenario, for completeness:</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
+container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+container.RegisterDecorator(typeof(UsesAnyServiceDecorator&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+//register the special decorator for IUsesAnyService&lt;MyService2&gt; again
+container.RegisterDecorator&lt;UsesMyService2Decorator, IUsesAnyService&lt;MyService2&gt;&gt;();
+container.RegisterDecorator(typeof(UsesAnyServiceDecorator2&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+
+var reredecorated = Assert.IsType&lt;UsesAnyServiceDecorator2&lt;MyService2&gt;&gt;(
+    container.Resolve&lt;IUsesAnyService&lt;MyService2&gt;&gt;());
+
+var redecorated = Assert.IsType&lt;UsesMyService2Decorator&gt;(reredecorated.Inner);
+var decorated = Assert.IsType&lt;UsesAnyServiceDecorator&lt;MyService2&gt;&gt;(redecorated.Inner);
+</code></pre>
             </article>
           </div>
           

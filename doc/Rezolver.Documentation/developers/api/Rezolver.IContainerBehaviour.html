@@ -5,10 +5,10 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface IExpressionBuilder&lt;TTarget&gt;
+  	<title>Interface IContainerBehaviour
    | Rezolver IOC Framework (prerelease) </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface IExpressionBuilder&lt;TTarget&gt;
+  	<meta name="title" content="Interface IContainerBehaviour
    | Rezolver IOC Framework (prerelease) ">
   	<meta name="generator" content="docfx 2.16.2.2">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
@@ -102,60 +102,52 @@
             <article class="content wrap" id="_content">
               
               
-              <h1 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1" data-uid="Rezolver.Compilation.Expressions.IExpressionBuilder`1">Interface IExpressionBuilder&lt;TTarget&gt;
+              <h1 id="Rezolver_IContainerBehaviour" data-uid="Rezolver.IContainerBehaviour">Interface IContainerBehaviour
               </h1>
-              <div class="markdown level0 summary"><p>Interface for an object that produces expressions from instances of <span class="typeparamref">TTarget</span>.</p>
-<p>This is a generic extension to the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> interface.</p>
+              <div class="markdown level0 summary"><p>Encapsulates a configurable behaviour for an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which also uses an 
+<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> as the source of its registrations.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_CanBuild_Rezolver_ITarget_">IExpressionBuilder.CanBuild(ITarget)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
+                  <a class="xref" href="Rezolver.IDependant-1.html#Rezolver_IDependant_1_GetDependencies_System_Collections_Generic_IEnumerable__0__">IDependant&lt;IContainerBehaviour&gt;.GetDependencies(IEnumerable&lt;IContainerBehaviour&gt;)</a>
                 </div>
               </div>
-              <h6><strong>Namespace</strong>:Rezolver.Compilation.Expressions</h6>
+              <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_syntax">Syntax</h5>
+              <h5 id="Rezolver_IContainerBehaviour_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public interface IExpressionBuilder&lt;in TTarget&gt; : IExpressionBuilder where TTarget : ITarget</code></pre>
+                <pre><code class="lang-csharp hljs">public interface IContainerBehaviour : IDependant&lt;IContainerBehaviour&gt;</code></pre>
               </div>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">TTarget</span></td>
-                    <td><p>The type of the target.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
+              <h5 id="Rezolver_IContainerBehaviour_remarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>While similar to <a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>, this is specifically used
+when a container is created which also uses an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> as the source of its
+service registrations and other behaviours.  Therefore, the type of configuration performed by
+an instance of this interface will not be the same as that performed by <a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>.</p>
+<p>For example, to configure compilers you would use this interface; to allow automatic enumerable resolving, you
+would use <a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>.</p>
+<p>As additional background, many of the container and target container classes use registrations within themselves
+to configure their behaviour.  Referring back to compilation, for example, the built-in containers will self-resolve
+an instance of a compiler when a target needs compiling.</p>
+</div>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionBuilder%601.Build(%600%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IContainerBehaviour_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IContainerBehaviour.Configure(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/IExpressionBuilder`1.cs/#L35">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerBehaviour.cs/#L27">View Source</a>
               </span>
-              <a id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build_" data-uid="Rezolver.Compilation.Expressions.IExpressionBuilder`1.Build*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.IExpressionBuilder`1.Build(`0,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</h4>
-              <div class="markdown level1 summary"><p>Builds an expression from the specified target.</p>
+              <a id="Rezolver_IContainerBehaviour_Configure_" data-uid="Rezolver.IContainerBehaviour.Configure*"></a>
+              <h4 id="Rezolver_IContainerBehaviour_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.IContainerBehaviour.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Called to configure the behaviour for the given container via the given targets.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">Expression Build(TTarget target, IExpressionCompileContext context, IExpressionCompiler compiler = null)</code></pre>
+                <pre><code class="lang-csharp hljs">void Configure(IContainer container, ITargetContainer targets)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -168,51 +160,17 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">TTarget</span></td>
-                    <td><span class="parametername">target</span></td>
-                    <td><p>The target whose expression is to be built.</p>
-</td>
+                    <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
+                    <td><span class="parametername">container</span></td>
+                    <td></td>
                   </tr>
                   <tr>
-                    <td><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html">IExpressionCompileContext</a></td>
-                    <td><span class="parametername">context</span></td>
-                    <td><p>The compilation context.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a></td>
-                    <td><span class="parametername">compiler</span></td>
-                    <td><p>Optional. The compiler that&#39;s requesting the expression; and which can be used 
-to compile other targets within the target.  If not provided, then the builder should attempt to 
-fetch the compiler from the context; or throw an exception if it is required but not provided and
-cannot be resolved fromm the context.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+                    <td><span class="parametername">targets</span></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>When invoked by the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a> class, the <span class="paramref">compiler</span>
-parameter will always be provided.</p>
-</div>
-              <h3 id="seealso">See Also</h3>
-              <div class="seealso">
-                  <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a></div>
-              </div>
                         </article>
           </div>
           
@@ -221,10 +179,10 @@ parameter will always be provided.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionBuilder_1.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionBuilder%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IContainerBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.IContainerBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/IExpressionBuilder`1.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerBehaviour.cs/#L20" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

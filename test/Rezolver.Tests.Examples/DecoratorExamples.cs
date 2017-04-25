@@ -100,18 +100,47 @@ namespace Rezolver.Tests.Examples
         [Fact]
         public void ShouldUseSpecialisedDecoratorForMyService2()
         {
+            //Fixed after BUG #27: https://github.com/ZolutionSoftware/Rezolver/issues/27
+
             // <example5>
             var container = new Container();
             container.RegisterType(typeof(UsesAnyService<>), typeof(IUsesAnyService<>));
             container.RegisterDecorator(typeof(UsesAnyServiceDecorator<>), typeof(IUsesAnyService<>));
-            //this decorator only kicks in when resolving IUsesAnyService<MyService2>
-            container.RegisterDecorator(typeof(UsesMyService2Decorator), typeof(IUsesAnyService<MyService2>));
+            // this decorator only kicks in when resolving IUsesAnyService<MyService2>
+            container.RegisterDecorator<UsesMyService2Decorator, IUsesAnyService<MyService2>>();
 
-            var result = container.Resolve<IUsesAnyService<MyService2>>();
+            // will be decorated twice
+            var redecorated = container.Resolve<IUsesAnyService<MyService2>>();
+            // but this will be decorated once
+            var decorated = container.Resolve<IUsesAnyService<MyService1>>();
 
-            //see BUG #27: https://github.com/ZolutionSoftware/Rezolver/issues/27
-            var decorator = Assert.IsType<UsesMyService2Decorator>(result);
+            Assert.IsType<UsesMyService2Decorator>(redecorated);
+            Assert.IsType<UsesAnyServiceDecorator<MyService2>>(
+                ((UsesMyService2Decorator)redecorated).Inner);
+
+            // but the IUsesAnyService<MyService1> will only be decorated once
+            Assert.IsType<UsesAnyServiceDecorator<MyService1>>(decorated);
+
             // </example5>
+        }
+
+        [Fact]
+        public void ShouldInjectSpecialisedDecoratorBetweenTwoGenericDecorators()
+        {
+            // <example6>
+            var container = new Container();
+            container.RegisterType(typeof(UsesAnyService<>), typeof(IUsesAnyService<>));
+            container.RegisterDecorator(typeof(UsesAnyServiceDecorator<>), typeof(IUsesAnyService<>));
+            //register the special decorator for IUsesAnyService<MyService2> again
+            container.RegisterDecorator<UsesMyService2Decorator, IUsesAnyService<MyService2>>();
+            container.RegisterDecorator(typeof(UsesAnyServiceDecorator2<>), typeof(IUsesAnyService<>));
+
+            var reredecorated = Assert.IsType<UsesAnyServiceDecorator2<MyService2>>(
+                container.Resolve<IUsesAnyService<MyService2>>());
+
+            var redecorated = Assert.IsType<UsesMyService2Decorator>(reredecorated.Inner);
+            var decorated = Assert.IsType<UsesAnyServiceDecorator<MyService2>>(redecorated.Inner);
+            // </example6>
         }
     }
 }

@@ -105,7 +105,7 @@
               <h1 id="Rezolver_Compilation_CompileContext" data-uid="Rezolver.Compilation.CompileContext">Class CompileContext
               </h1>
               <div class="markdown level0 summary"><p>Core implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.  A root context (i.e. where <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ParentContext">ParentContext</a> is
-<code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
+<code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
 constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Container.html">Container</a> and the compilation
 stack.</p>
 <p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation is done by decorating a new <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a>,
@@ -120,15 +120,39 @@ this type is through its implementation of <a class="xref" href="Rezolver.Compil
                   <div class="level1"><span class="xref">CompileContext</span></div>
                   <div class="level2"><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompileContext.html">ExpressionCompileContext</a></div>
               </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+                </div>
+              </div>
               <h6><strong>Namespace</strong>:Rezolver.Compilation</h6>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_Compilation_CompileContext_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class CompileContext : object, ICompileContext, ITargetContainer</code></pre>
+                <pre><code class="lang-csharp hljs">public class CompileContext : ICompileContext, ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_Compilation_CompileContext_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Note that you can only create an instance of this either through inheritance, via the explicit implementation
-of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a>, or (preferably) via an 
+of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a>, or (preferably) via an 
 <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a> 
 resolved from an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> or <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> directly from a registered target.</p>
 </div>
@@ -136,13 +160,13 @@ resolved from an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> 
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext__ctor_Rezolver_Compilation_ICompileContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.%23ctor(Rezolver.Compilation.ICompileContext%2CType%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext__ctor_Rezolver_Compilation_ICompileContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.%23ctor(Rezolver.Compilation.ICompileContext%2CSystem.Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L95">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext__ctor_" data-uid="Rezolver.Compilation.CompileContext.#ctor*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext__ctor_Rezolver_Compilation_ICompileContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.#ctor(Rezolver.Compilation.ICompileContext,Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">CompileContext(ICompileContext, Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
+              <h4 id="Rezolver_Compilation_CompileContext__ctor_Rezolver_Compilation_ICompileContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.#ctor(Rezolver.Compilation.ICompileContext,System.Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">CompileContext(ICompileContext, Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
               <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Compilation.CompileContext.html">CompileContext</a> as a child of another.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -170,7 +194,7 @@ override that).</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">targetType</span></td>
                     <td><p>The target type that is expected to be compiled, or null if the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_TargetType">TargetType</a>
 is to be inherited from the <span class="paramref">parentContext</span>.</p>
@@ -193,13 +217,13 @@ if not provided, then it is automatically inherited from the parent.</p>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.%23ctor(Rezolver.IResolveContext%2CRezolver.ITargetContainer%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.%23ctor(Rezolver.IResolveContext%2CRezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L122">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext__ctor_" data-uid="Rezolver.Compilation.CompileContext.#ctor*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_Type_" data-uid="Rezolver.Compilation.CompileContext.#ctor(Rezolver.IResolveContext,Rezolver.ITargetContainer,Type)">CompileContext(IResolveContext, ITargetContainer, Type)</h4>
+              <h4 id="Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.Compilation.CompileContext.#ctor(Rezolver.IResolveContext,Rezolver.ITargetContainer,System.Type)">CompileContext(IResolveContext, ITargetContainer, Type)</h4>
               <div class="markdown level1 summary"><p>Creates a new CompileContext</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -235,7 +259,7 @@ without modifying the underlying targets in the container you pass.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">targetType</span></td>
                     <td><p>Optional. Will be set into the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_TargetType">TargetType</a> property.  If null, then any 
 <a class="xref" href="Rezolver.ITarget.html">ITarget</a> that is compiled should be compiled for its own <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
@@ -272,7 +296,7 @@ related to this one - both up and down the hierarchy.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Rezolver.Compilation.CompileStackEntry.html">CompileStackEntry</a>&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.Compilation.CompileStackEntry.html">CompileStackEntry</a>&gt;</td>
                     <td><p>The compile stack.</p>
 </td>
                   </tr>
@@ -473,7 +497,7 @@ If null, then the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_D
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -488,14 +512,14 @@ from the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_NewContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.NewContext(Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.NewContext(System.Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L152">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_NewContext_" data-uid="Rezolver.Compilation.CompileContext.NewContext*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_NewContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.NewContext(Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
-              <div class="markdown level1 summary"><p>Used by the explicit implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a>.</p>
+              <h4 id="Rezolver_Compilation_CompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.NewContext(System.Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
+              <div class="markdown level1 summary"><p>Used by the explicit implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a>.</p>
 <p>Override this in your derived class to create the correct implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -514,7 +538,7 @@ from the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">targetType</span></td>
                     <td><p>Optional.  The type for which the target is to be compiled, if different from this 
 context&#39;s <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_TargetType">TargetType</a>.</p>
@@ -554,13 +578,13 @@ inherited by all its child contexts (i.e. you cannot null it)</p>
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23NewContext(Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23NewContext(System.Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L135">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#NewContext*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#NewContext(Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">ICompileContext.NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#NewContext(System.Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">ICompileContext.NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -578,7 +602,7 @@ inherited by all its child contexts (i.e. you cannot null it)</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">targetType</span></td>
                     <td></td>
                   </tr>
@@ -610,7 +634,7 @@ inherited by all its child contexts (i.e. you cannot null it)</p>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">ICompileContext.NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a></div>
+                  <div><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">ICompileContext.NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PopCompileStack.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23PopCompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -621,7 +645,7 @@ inherited by all its child contexts (i.e. you cannot null it)</p>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PopCompileStack_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PopCompileStack*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PopCompileStack" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PopCompileStack">ICompileContext.PopCompileStack()</h4>
               <div class="markdown level1 summary"><p>Pops a target from the stack and returns it.  Note that if there
-are no targets on the stack, an <see cref="!:InvalidOperationException"></see> will occur.</p>
+are no targets on the stack, an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a> will occur.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -652,13 +676,13 @@ the compilation stack is always shared between all contexts spawned from the sam
 </div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23PushCompileStack(Rezolver.ITarget%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23PushCompileStack(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L167">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PushCompileStack*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PushCompileStack(Rezolver.ITarget,Type)">ICompileContext.PushCompileStack(ITarget, Type)</h4>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PushCompileStack(Rezolver.ITarget,System.Type)">ICompileContext.PushCompileStack(ITarget, Type)</h4>
               <div class="markdown level1 summary"><p>Adds the target to the compilation stack if it doesn&#39;t already exist.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -683,7 +707,7 @@ the compilation stack is always shared between all contexts spawned from the sam
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">targetType</span></td>
                     <td><p>The type for which the target is being compiled, if different from <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a></p>
 </td>
@@ -706,22 +730,22 @@ the compilation stack is always shared between all contexts spawned from the sam
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_Type_">ICompileContext.PushCompileStack(ITarget, Type)</a></div>
-              <h5 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_Type__remarks">Remarks</h5>
+                  <div><a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type_">ICompileContext.PushCompileStack(ITarget, Type)</a></div>
+              <h5 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Targets can appear on the compilation stack more than once for different types, since the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>
 produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a
 cyclic dependency graph, then this method will detect that.</p>
 </div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23CombineWith(Rezolver.ITargetContainer%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L233">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#CombineWith*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#CombineWith(Rezolver.ITargetContainer,Type)">ITargetContainer.CombineWith(ITargetContainer, Type)</h4>
-              <div class="markdown level1 summary"><p>Always throws a <see cref="!:NotSupportedException"></see></p>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#CombineWith(Rezolver.ITargetContainer,System.Type)">ITargetContainer.CombineWith(ITargetContainer, Type)</h4>
+              <div class="markdown level1 summary"><p>Always throws a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notsupportedexception(v=vs.110).aspx">NotSupportedException</a></p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -745,7 +769,7 @@ cyclic dependency graph, then this method will detect that.</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">type</span></td>
                     <td><p>Ignored</p>
 </td>
@@ -768,17 +792,33 @@ cyclic dependency graph, then this method will detect that.</p>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a></div>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a></div>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notsupportedexception(v=vs.110).aspx">NotSupportedException</a></td>
+                    <td><p>Always thrown</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23Fetch(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L213">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Fetch*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Fetch(Type)">ITargetContainer.Fetch(Type)</h4>
-              <div class="markdown level1 summary"><p>Implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_Type_">Fetch(Type)</a> by wrapping around the child target container created by this context on construction.</p>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Fetch(System.Type)">ITargetContainer.Fetch(Type)</h4>
+              <div class="markdown level1 summary"><p>Implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> by wrapping around the child target container created by this context on construction.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -796,9 +836,9 @@ cyclic dependency graph, then this method will detect that.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">type</span></td>
-                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_Type_">Fetch(Type)</a> for more.</p>
+                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> for more.</p>
 </td>
                   </tr>
                 </tbody>
@@ -819,17 +859,17 @@ cyclic dependency graph, then this method will detect that.</p>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_Type_">ITargetContainer.Fetch(Type)</a></div>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">ITargetContainer.Fetch(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23FetchAll(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L222">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchAll*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchAll(Type)">ITargetContainer.FetchAll(Type)</h4>
-              <div class="markdown level1 summary"><p>Implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_Type_">FetchAll(Type)</a> by wrapping around the child target container created by this context on construction.</p>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchAll(System.Type)">ITargetContainer.FetchAll(Type)</h4>
+              <div class="markdown level1 summary"><p>Implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> by wrapping around the child target container created by this context on construction.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -847,9 +887,9 @@ cyclic dependency graph, then this method will detect that.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">type</span></td>
-                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_Type_">FetchAll(Type)</a> for more</p>
+                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> for more</p>
 </td>
                   </tr>
                 </tbody>
@@ -864,22 +904,22 @@ cyclic dependency graph, then this method will detect that.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_Type_">ITargetContainer.FetchAll(Type)</a></div>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">ITargetContainer.FetchAll(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23FetchContainer(Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L238">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchContainer*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchContainer(Type)">ITargetContainer.FetchContainer(Type)</h4>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchContainer(System.Type)">ITargetContainer.FetchContainer(Type)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -897,7 +937,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">type</span></td>
                     <td></td>
                   </tr>
@@ -919,17 +959,17 @@ cyclic dependency graph, then this method will detect that.</p>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_Type_">ITargetContainer.FetchContainer(Type)</a></div>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_System_Type_">ITargetContainer.FetchContainer(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_Rezolver_ITarget_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23Register(Rezolver.ITarget%2CType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L204">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Register*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_Rezolver_ITarget_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Register(Rezolver.ITarget,Type)">ITargetContainer.Register(ITarget, Type)</h4>
-              <div class="markdown level1 summary"><p>Implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_Type_">Register(ITarget, Type)</a> by wrapping around the child target container created by this context on construction.</p>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Register(Rezolver.ITarget,System.Type)">ITargetContainer.Register(ITarget, Type)</h4>
+              <div class="markdown level1 summary"><p>Implements <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> by wrapping around the child target container created by this context on construction.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -949,28 +989,28 @@ cyclic dependency graph, then this method will detect that.</p>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
                     <td><span class="parametername">target</span></td>
-                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_Type_">Register(ITarget, Type)</a> for more</p>
+                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> for more</p>
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">serviceType</span></td>
-                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_Type_">Register(ITarget, Type)</a> for more</p>
+                    <td><p>See <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> for more</p>
 </td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_Type_">ITargetContainer.Register(ITarget, Type)</a></div>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">ITargetContainer.Register(ITarget, Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23RegisterContainer(Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L243">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#RegisterContainer*"></a>
-              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#RegisterContainer(Type,Rezolver.ITargetContainer)">ITargetContainer.RegisterContainer(Type, ITargetContainer)</h4>
+              <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#RegisterContainer(System.Type,Rezolver.ITargetContainer)">ITargetContainer.RegisterContainer(Type, ITargetContainer)</h4>
               <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -988,7 +1028,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">type</span></td>
                     <td></td>
                   </tr>
@@ -1000,7 +1040,113 @@ cyclic dependency graph, then this method will detect that.</p>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_Type_Rezolver_ITargetContainer_">ITargetContainer.RegisterContainer(Type, ITargetContainer)</a></div>
+                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ITargetContainer.RegisterContainer(Type, ITargetContainer)</a></div>
+              <h3 id="extensionmethods">Extension Methods</h3>
+              <div>
+                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias__2_Rezolver_ITargetContainer_">AliasTargetContainerExtensions.RegisterAlias&lt;TAlias, TOriginal&gt;(ITargetContainer)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type_">AliasTargetContainerExtensions.RegisterAlias(ITargetContainer, Type, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Type, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate(ITargetContainer, Delegate, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_IResolveContext___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;IResolveContext, TResult&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, TResult&gt;(ITargetContainer, Func&lt;T1, T2, TResult&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, TResult&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, TResult&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__3_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__4_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__5_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__6_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterMultiple_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_">MultipleTargetContainerExtensions.RegisterMultiple(ITargetContainer, IEnumerable&lt;ITarget&gt;, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__">MultipleTargetContainerExtensions.RegisterAll(ITargetContainer, IEnumerable&lt;ITarget&gt;)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_Rezolver_ITargetContainer_Rezolver_ITarget___">MultipleTargetContainerExtensions.RegisterAll(ITargetContainer, ITarget[])</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject__1_Rezolver_ITargetContainer___0_System_Type_System_Type_Rezolver_ScopeBehaviour_">ObjectTargetContainerExtensions.RegisterObject&lt;T&gt;(ITargetContainer, T, Type, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject_Rezolver_ITargetContainer_System_Object_System_Type_System_Type_Rezolver_ScopeBehaviour_">ObjectTargetContainerExtensions.RegisterObject(ITargetContainer, Object, Type, Type, ScopeBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterTypeTargetContainerExtensions.RegisterType&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterTypeTargetContainerExtensions.RegisterType&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_">RegisterTypeTargetContainerExtensions.RegisterType(ITargetContainer, Type, Type, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">ScopedTargetContainerExtensions.RegisterScoped&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">ScopedTargetContainerExtensions.RegisterScoped&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_">ScopedTargetContainerExtensions.RegisterScoped(ITargetContainer, Type, Type, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">SingletonTargetContainerExtensions.RegisterSingleton&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">SingletonTargetContainerExtensions.RegisterSingleton&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_">SingletonTargetContainerExtensions.RegisterSingleton(ITargetContainer, Type, Type, IMemberBindingBehaviour)</a>
+              </div>
               <h3 id="seealso">See Also</h3>
               <div class="seealso">
                   <div><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></div>

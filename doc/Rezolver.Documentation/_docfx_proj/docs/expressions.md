@@ -22,7 +22,7 @@ right up to the delegate-like @System.Linq.Expressions.LambdaExpression.
 
 As we've just mentioned, an expression fragment is one of the small, specialised, expression types from the @System.Linq.Expressions namespace which wrap a fundamental 
 language expression, such as constants or method calls or whatever.  The @Rezolver.Targets.ExpressionTarget supports these through its 
-@Rezolver.Targets.ExpressionTarget.%23ctor(Expression,System.Type) constructor.
+@Rezolver.Targets.ExpressionTarget.%23ctor(System.Linq.Expressions.Expression,System.Type) constructor.
 
 When creating an @Rezolver.Targets.ExpressionTarget this way, its @Rezolver.ITarget.DeclaredType (and therefore the default type under which it will be registered, unless
 overridden at registration time) will, by default, be set to the @System.Linq.Expressions.Expression.Type of the expression you pass to the constructor, unless you pass a 
@@ -73,7 +73,7 @@ above, we could instead do this:
 
 ## Injecting the `IResolveContext`
 
-Just as with the [`DelegateTarget` example](Delegates.md#injecting-rezolverresolvecontext), you can also inject the @Rezolver.IResolveContext into your expression in order
+Just as with the [`DelegateTarget` example](delegates.md#injecting-rezolveriresolvecontext), you can also inject the @Rezolver.IResolveContext into your expression in order
 to perform late-bound service location within your expression.  As the comment at the start of the test states - this example is functionally identical to the `DelegateTarget`
 example - but because of the limitations of the C# compiler and its ability to translate code into expression trees, the main expression is written as a series of stacked 
 conditional expressions so that the whole thing is a single expression.

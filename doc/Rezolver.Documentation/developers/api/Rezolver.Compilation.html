@@ -110,7 +110,7 @@
               </h3>
                   <h4><a class="xref" href="Rezolver.Compilation.CompileContext.html">CompileContext</a></h4>
                   <section><p>Core implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.  A root context (i.e. where <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ParentContext">ParentContext</a> is
-<code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
+<code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
 constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Container.html">Container</a> and the compilation
 stack.</p>
 <p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation is done by decorating a new <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a>,
@@ -137,10 +137,6 @@ are compiled into <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiled
                   <h4><a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a></h4>
                   <section><p>Interface for an object which creates <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> instances for when the system needs to
 compile an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.Compilation.IContainerConfiguration.html">IContainerConfiguration</a></h4>
-                  <section><p>Interface for an object which configures an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> and its <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
-before being used.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a></h4>
                   <section><p>An object that produces <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s given a 

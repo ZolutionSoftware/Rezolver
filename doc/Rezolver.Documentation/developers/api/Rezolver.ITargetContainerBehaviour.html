@@ -5,10 +5,10 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface IContainerConfiguration
+  	<title>Interface ITargetContainerBehaviour
    | Rezolver IOC Framework (prerelease) </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface IContainerConfiguration
+  	<meta name="title" content="Interface ITargetContainerBehaviour
    | Rezolver IOC Framework (prerelease) ">
   	<meta name="generator" content="docfx 2.16.2.2">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
@@ -102,34 +102,42 @@
             <article class="content wrap" id="_content">
               
               
-              <h1 id="Rezolver_Compilation_IContainerConfiguration" data-uid="Rezolver.Compilation.IContainerConfiguration">Interface IContainerConfiguration
+              <h1 id="Rezolver_ITargetContainerBehaviour" data-uid="Rezolver.ITargetContainerBehaviour">Interface ITargetContainerBehaviour
               </h1>
-              <div class="markdown level0 summary"><p>Interface for an object which configures an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> and its <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
-before being used.</p>
+              <div class="markdown level0 summary"><p>Provides configuration for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
-              <h6><strong>Namespace</strong>:Rezolver.Compilation</h6>
+              <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_Compilation_IContainerConfiguration_syntax">Syntax</h5>
+              <h5 id="Rezolver_ITargetContainerBehaviour_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public interface IContainerConfiguration</code></pre>
+                <pre><code class="lang-csharp hljs">public interface ITargetContainerBehaviour</code></pre>
               </div>
+              <h5 id="Rezolver_ITargetContainerBehaviour_remarks"><strong>Remarks</strong></h5>
+              <div class="markdown level0 remarks"><p>This abstraction provides a way to apply common setup procedures to <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
+objects which are then used by containers and during compilation - typically by registering targets or 
+target containers within it.</p>
+<p>While similar to <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a>, this is specifically intended to be used when
+creating any <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>; whereas the other interface is for when a container is created
+which also uses <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+</div>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_IContainerConfiguration_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.IContainerConfiguration.Configure(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ITargetContainerBehaviour_Configure_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerBehaviour.Configure(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/IContainerConfiguration.cs/#L12">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainerBehaviour.cs/#L25">View Source</a>
               </span>
-              <a id="Rezolver_Compilation_IContainerConfiguration_Configure_" data-uid="Rezolver.Compilation.IContainerConfiguration.Configure*"></a>
-              <h4 id="Rezolver_Compilation_IContainerConfiguration_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.IContainerConfiguration.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
-              <div class="markdown level1 summary"></div>
+              <a id="Rezolver_ITargetContainerBehaviour_Configure_" data-uid="Rezolver.ITargetContainerBehaviour.Configure*"></a>
+              <h4 id="Rezolver_ITargetContainerBehaviour_Configure_Rezolver_ITargetContainer_" data-uid="Rezolver.ITargetContainerBehaviour.Configure(Rezolver.ITargetContainer)">Configure(ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Called to configure the given <span class="paramref">targets</span>.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">void Configure(IContainer container, ITargetContainer targets)</code></pre>
+                <pre><code class="lang-csharp hljs">void Configure(ITargetContainer targets)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -142,14 +150,10 @@ before being used.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
-                    <td><span class="parametername">container</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td></td>
+                    <td><p>The target container to be configured - will not be null when called by the framework.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -161,10 +165,10 @@ before being used.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_IContainerConfiguration.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.IContainerConfiguration%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ITargetContainerBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/IContainerConfiguration.cs/#L9" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainerBehaviour.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -121,7 +121,7 @@
 </section>
                   <h4><a class="xref" href="Rezolver.Compilation.Expressions.DefaultTargetBuilder.html">DefaultTargetBuilder</a></h4>
                   <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a> target.</p>
-<p>Essentially, it just calls <see cref="!:Expression.Default(Type)"></see> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
+<p>Essentially, it just calls <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402751(v=vs.110).aspx">Default(Type)</a> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Compilation.Expressions.DelegateTargetBuilder.html">DelegateTargetBuilder</a></h4>
                   <section><p>Specialised builder for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class and all its derivatives.</p>
@@ -147,7 +147,7 @@ by building and compiling expression trees from the <a class="xref" href="Rezolv
                   <section><p>Extensions for <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a>.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.html">ExpressionCompilerConfigurationProvider</a></h4>
-                  <section><p>Implements the <a class="xref" href="Rezolver.Compilation.IContainerConfiguration.html">IContainerConfiguration</a> to configure expression-based compilation for targets in containers.</p>
+                  <section><p>Implements the <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> to configure expression-based compilation for targets in containers.</p>
 <p>The implementation registers all the targets necessary to use the expression tree-based compilation provided by 
 the <code>Rezolver.Compilation.Expressions</code> library.</p>
 <p>This configuration provider is automatically configured as the default for all containers when the Rezolver 

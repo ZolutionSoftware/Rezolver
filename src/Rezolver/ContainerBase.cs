@@ -306,7 +306,7 @@ namespace Rezolver
         /// registered as objects via the <see cref="ObjectTarget"/> target.
         /// 
         /// Finally, a new <see cref="ICompileContext"/> is created via the 
-        /// <see cref="ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer, IContainer)"/> method of the resolved
+        /// <see cref="ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer)"/> method of the resolved
         /// context provider, and then passed to the <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> method
         /// of the resolved compiler.  The result of that operation is then returned to the caller.
         /// </remarks> 
@@ -356,7 +356,7 @@ namespace Rezolver
                 target,
                 compileContextProvider.CreateContext(
                     context,
-                    //the targets we pass here are wrapped in a new ChildBuilder by the context
+                    //the targets we pass here are wrapped in a new ChildTargetContainer by the context
                     Targets)
                 );
         }

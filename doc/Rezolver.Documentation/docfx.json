@@ -4,15 +4,15 @@
       "src": [
         {
           "files": [
-            "rezolver-docfx.csproj"
+            "rezolver.csproj"
           ],
-          "cwd": "../../src/Rezolver"/*,
-          "properties": {
-            "TargetFramework": "net46"
-          }*/
+          "cwd": "../../src/Rezolver"
         }
       ],
-      "dest": "_docfx_proj/obj/api"
+      "dest": "_docfx_proj/obj/api",
+      "properties": {
+        "TargetFramework": "net46"
+      }
     }
   ],
   "build": {

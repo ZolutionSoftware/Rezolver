@@ -118,7 +118,7 @@ compile an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> into an <a c
               <div class="markdown level0 remarks"><p>In normal operation, this interface is closely related to the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> interface 
 because the core <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> class (which provides most of the default implementation for 
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a>) obtains a new <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> by resolving an instance of this interface, and 
-calling the <see cref="!:CreateContext(IResolveContext, ITargetContainer, IContainer)"></see> method, passing the result
+calling the <a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_">CreateContext(IResolveContext, ITargetContainer)</a> method, passing the result
 to the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a> method, along with the target to be compiled.</p>
 <p>Frequently, implementations of <code>ITargetCompiler</code> will also implement this interface to ensure that the compilation
 context contains everything the compiler needs to do its work.</p>
@@ -130,7 +130,7 @@ context contains everything the compiler needs to do its work.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.ICompileContextProvider.CreateContext(Rezolver.IResolveContext%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/ICompileContextProvider.cs/#L31">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/ICompileContextProvider.cs/#L30">View Source</a>
               </span>
               <a id="Rezolver_Compilation_ICompileContextProvider_CreateContext_" data-uid="Rezolver.Compilation.ICompileContextProvider.CreateContext*"></a>
               <h4 id="Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.ICompileContextProvider.CreateContext(Rezolver.IResolveContext,Rezolver.ITargetContainer)">CreateContext(IResolveContext, ITargetContainer)</h4>
@@ -156,7 +156,8 @@ the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext
                     <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
                     <td><span class="parametername">resolveContext</span></td>
                     <td><p>The resolve context - used to get the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a>
-and the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> (if <span class="paramref">containerOverride</span> is not provided).</p>
+and the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a>, and will be set on the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_ResolveContext">ResolveContext</a>
+property of the returned context.</p>
 </td>
                   </tr>
                   <tr>

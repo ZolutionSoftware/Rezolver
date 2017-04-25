@@ -119,7 +119,28 @@
                   <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_UseFallback">TargetBase.UseFallback</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_Type_">TargetBase.SupportsType(Type)</a>
+                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
               <h6><strong>Namespace</strong>:Rezolver.Targets</h6>
@@ -132,19 +153,19 @@
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ObjectTarget__ctor_System_Object_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ObjectTarget.%23ctor(System.Object%2CType%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ObjectTarget__ctor_System_Object_System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ObjectTarget.%23ctor(System.Object%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
                 <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ObjectTarget.cs/#L53">View Source</a>
               </span>
               <a id="Rezolver_Targets_ObjectTarget__ctor_" data-uid="Rezolver.Targets.ObjectTarget.#ctor*"></a>
-              <h4 id="Rezolver_Targets_ObjectTarget__ctor_System_Object_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.Targets.ObjectTarget.#ctor(System.Object,Type,Rezolver.ScopeBehaviour)">ObjectTarget(Object, Type, ScopeBehaviour)</h4>
+              <h4 id="Rezolver_Targets_ObjectTarget__ctor_System_Object_System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.Targets.ObjectTarget.#ctor(System.Object,System.Type,Rezolver.ScopeBehaviour)">ObjectTarget(Object, Type, ScopeBehaviour)</h4>
               <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ObjectTarget(object obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ObjectTarget(object obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -163,7 +184,7 @@
 </td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">declaredType</span></td>
                     <td><p>Optional.  The declared type of this target, if different from the absolute type of the <span class="paramref">obj</span></p>
 </td>
@@ -179,7 +200,7 @@ will be tracked multiple times by that scope.</p>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Targets_ObjectTarget__ctor_System_Object_Type_Rezolver_ScopeBehaviour__remarks">Remarks</h5>
+              <h5 id="Rezolver_Targets_ObjectTarget__ctor_System_Object_System_Type_Rezolver_ScopeBehaviour__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>Please note - if you enable scope tracking, but the object is never resolved, then the object will not be disposed and you will need
 to ensure you dispose of it.</p>
 </div>
@@ -212,7 +233,7 @@ of <a class="xref" href="Rezolver.Targets.ObjectTarget.html#Rezolver_Targets_Obj
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Type</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><p>The type of the declared.</p>
 </td>
                   </tr>
@@ -402,6 +423,22 @@ of <a class="xref" href="Rezolver.Targets.ObjectTarget.html#Rezolver_Targets_Obj
               </table>
               <h5 class="implements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_SourceTarget">ICompiledTarget.SourceTarget</a></div>
+              <h3 id="extensionmethods">Extension Methods</h3>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Unscoped_Rezolver_ITarget_">Target.Unscoped(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_">Target.As(ITarget, Type)</a>
+              </div>
+              <div>
+                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
+              </div>
                         </article>
           </div>
           

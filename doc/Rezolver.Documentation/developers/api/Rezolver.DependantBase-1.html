@@ -5,10 +5,10 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface IExpressionBuilder&lt;TTarget&gt;
+  	<title>Class DependantBase&lt;T&gt;
    | Rezolver IOC Framework (prerelease) </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface IExpressionBuilder&lt;TTarget&gt;
+  	<meta name="title" content="Class DependantBase&lt;T&gt;
    | Rezolver IOC Framework (prerelease) ">
   	<meta name="generator" content="docfx 2.16.2.2">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
@@ -102,26 +102,47 @@
             <article class="content wrap" id="_content">
               
               
-              <h1 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1" data-uid="Rezolver.Compilation.Expressions.IExpressionBuilder`1">Interface IExpressionBuilder&lt;TTarget&gt;
+              <h1 id="Rezolver_DependantBase_1" data-uid="Rezolver.DependantBase`1">Class DependantBase&lt;T&gt;
               </h1>
-              <div class="markdown level0 summary"><p>Interface for an object that produces expressions from instances of <span class="typeparamref">TTarget</span>.</p>
-<p>This is a generic extension to the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> interface.</p>
+              <div class="markdown level0 summary"><p>Suggested base class for implementations of <a class="xref" href="Rezolver.IDependant-1.html">IDependant&lt;TDependency&gt;</a>.</p>
+<p>Provides functionality such as adding required as well as optional dependencies; plus shortcut 
+filters for declaring dependencies on all objects of a certain type, etc.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+                  <div class="level1"><span class="xref">DependantBase&lt;T&gt;</span></div>
+              </div>
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_CanBuild_Rezolver_ITarget_">IExpressionBuilder.CanBuild(ITarget)</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
                 </div>
               </div>
-              <h6><strong>Namespace</strong>:Rezolver.Compilation.Expressions</h6>
+              <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_syntax">Syntax</h5>
+              <h5 id="Rezolver_DependantBase_1_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public interface IExpressionBuilder&lt;in TTarget&gt; : IExpressionBuilder where TTarget : ITarget</code></pre>
+                <pre><code class="lang-csharp hljs">public class DependantBase&lt;T&gt; : IDependant&lt;T&gt;</code></pre>
               </div>
               <h5 class="typeParameters">Type Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -133,8 +154,8 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="parametername">TTarget</span></td>
-                    <td><p>The type of the target.</p>
+                    <td><span class="parametername">T</span></td>
+                    <td><p>Should be equal to the derived type - describes the type of behaviours upon which this </p>
 </td>
                   </tr>
                 </tbody>
@@ -143,19 +164,18 @@
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionBuilder%601.Build(%600%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DependantBase_1_GetDependencies_System_Collections_Generic_IEnumerable__0__.md&amp;value=---%0Auid%3A%20Rezolver.DependantBase%601.GetDependencies(System.Collections.Generic.IEnumerable%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/IExpressionBuilder`1.cs/#L35">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DependantBase.cs/#L16">View Source</a>
               </span>
-              <a id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build_" data-uid="Rezolver.Compilation.Expressions.IExpressionBuilder`1.Build*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.IExpressionBuilder`1.Build(`0,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</h4>
-              <div class="markdown level1 summary"><p>Builds an expression from the specified target.</p>
-</div>
+              <a id="Rezolver_DependantBase_1_GetDependencies_" data-uid="Rezolver.DependantBase`1.GetDependencies*"></a>
+              <h4 id="Rezolver_DependantBase_1_GetDependencies_System_Collections_Generic_IEnumerable__0__" data-uid="Rezolver.DependantBase`1.GetDependencies(System.Collections.Generic.IEnumerable{`0})">GetDependencies(IEnumerable&lt;T&gt;)</h4>
+              <div class="markdown level1 summary"></div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">Expression Build(TTarget target, IExpressionCompileContext context, IExpressionCompiler compiler = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public IEnumerable&lt;T&gt; GetDependencies(IEnumerable&lt;T&gt; behaviours)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -168,25 +188,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">TTarget</span></td>
-                    <td><span class="parametername">target</span></td>
-                    <td><p>The target whose expression is to be built.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html">IExpressionCompileContext</a></td>
-                    <td><span class="parametername">context</span></td>
-                    <td><p>The compilation context.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a></td>
-                    <td><span class="parametername">compiler</span></td>
-                    <td><p>Optional. The compiler that&#39;s requesting the expression; and which can be used 
-to compile other targets within the target.  If not provided, then the builder should attempt to 
-fetch the compiler from the context; or throw an exception if it is required but not provided and
-cannot be resolved fromm the context.</p>
-</td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;T&gt;</td>
+                    <td><span class="parametername">behaviours</span></td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
@@ -200,19 +204,13 @@ cannot be resolved fromm the context.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;T&gt;</td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
-              <h5 id="Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>When invoked by the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a> class, the <span class="paramref">compiler</span>
-parameter will always be provided.</p>
-</div>
-              <h3 id="seealso">See Also</h3>
-              <div class="seealso">
-                  <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a></div>
-              </div>
+              <h5 class="implements">Implements</h5>
+                  <div><a class="xref" href="Rezolver.IDependant-1.html#Rezolver_IDependant_1_GetDependencies_System_Collections_Generic_IEnumerable__0__">IDependant&lt;TDependency&gt;.GetDependencies(IEnumerable&lt;TDependency&gt;)</a></div>
                         </article>
           </div>
           
@@ -221,10 +219,10 @@ parameter will always be provided.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionBuilder_1.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionBuilder%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_DependantBase_1.md&amp;value=---%0Auid%3A%20Rezolver.DependantBase%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/IExpressionBuilder`1.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/DependantBase.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

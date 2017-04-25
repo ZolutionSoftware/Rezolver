@@ -115,11 +115,35 @@ methods for inheritors to extend.</p>
                   <div class="level1"><span class="xref">ExpressionBuilderBase</span></div>
                   <div class="level2"><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html">ExpressionBuilderBase</a>&lt;TTarget&gt;</div>
               </div>
+              <div class="inheritedMembers">
+                <h5>Inherited Members</h5>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+                </div>
+                <div>
+                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+                </div>
+              </div>
               <h6><strong>Namespace</strong>:Rezolver.Compilation.Expressions</h6>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public abstract class ExpressionBuilderBase : object, IExpressionBuilder</code></pre>
+                <pre><code class="lang-csharp hljs">public abstract class ExpressionBuilderBase : IExpressionBuilder</code></pre>
               </div>
               <h5 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>This class takes care of checking the type requested in the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html">IExpressionCompileContext</a>
@@ -133,11 +157,13 @@ method</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_CanResolve_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainer_CanResolve_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L30">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L38">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_CanResolve_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainer_CanResolve_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_CanResolve_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainer_CanResolve_Method">IContainer_CanResolve_Method</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Get a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a> for the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_">CanResolve(IResolveContext)</a>
+method</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
@@ -153,7 +179,7 @@ method</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodInfo</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -163,11 +189,12 @@ method</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_Resolve_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainer_Resolve_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L33">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L45">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_Resolve_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainer_Resolve_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainer_Resolve_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainer_Resolve_Method">IContainer_Resolve_Method</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a> for the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
@@ -183,7 +210,7 @@ method</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodInfo</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -193,11 +220,13 @@ method</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_GetRootScope_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_GetRootScope_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L26">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L30">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_GetRootScope_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_GetRootScope_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_GetRootScope_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_GetRootScope_Method">IContainerScope_GetRootScope_Method</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a> for the <a class="xref" href="Rezolver.ContainerScopeExtensions.html#Rezolver_ContainerScopeExtensions_GetRootScope_Rezolver_IContainerScope_">GetRootScope(IContainerScope)</a>
+extension method.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
@@ -213,7 +242,7 @@ method</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodInfo</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -223,11 +252,11 @@ method</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_Resolve_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_Resolve_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L40">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L52">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_Resolve_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_Resolve_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IContainerScope_Resolve_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IContainerScope_Resolve_Method">IContainerScope_Resolve_Method</h4>
-              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_">Resolve(IResolveContext, Func&lt;IResolveContext, Object&gt;, ScopeBehaviour)</a>
+              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_">Resolve(IResolveContext, Func&lt;IResolveContext, Object&gt;, ScopeBehaviour)</a>
 method for help in generating scope-interfacing code.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -245,7 +274,7 @@ method for help in generating scope-interfacing code.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodInfo</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -255,11 +284,11 @@ method for help in generating scope-interfacing code.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_IResolveContext_New_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.IResolveContext_New_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L57">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L73">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IResolveContext_New_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IResolveContext_New_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_IResolveContext_New_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.IResolveContext_New_Method">IResolveContext_New_Method</h4>
-              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_New_Type_Rezolver_IContainer_Rezolver_IContainerScope_">New(Type, IContainer, IContainerScope)</a> method</p>
+              <div class="markdown level1 summary"><p>Gets a MethodInfo object for the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_New_System_Type_Rezolver_IContainer_Rezolver_IContainerScope_">New(Type, IContainer, IContainerScope)</a> method</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -276,7 +305,7 @@ method for help in generating scope-interfacing code.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodInfo</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
                     <td><p>The type of the resolve context create new method.</p>
 </td>
                   </tr>
@@ -287,11 +316,13 @@ method for help in generating scope-interfacing code.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContextExtensions_Resolve_Method.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContextExtensions_Resolve_Method%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L47">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L63">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContextExtensions_Resolve_Method_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContextExtensions_Resolve_Method*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ResolveContextExtensions_Resolve_Method" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ResolveContextExtensions_Resolve_Method">ResolveContextExtensions_Resolve_Method</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Gets a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a> for the <span class="xref">Rezolver.ResolveContextExtensions.Resolve(Rezolver.IResolveContext,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)</span>
+extension method.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
@@ -307,7 +338,7 @@ method for help in generating scope-interfacing code.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodInfo</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -316,13 +347,13 @@ method for help in generating scope-interfacing code.</p>
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping(Expression%2CRezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_System_Linq_Expressions_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping(System.Linq.Expressions.Expression%2CRezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L168">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L210">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping(Expression,Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">ApplyScoping(Expression, ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_ApplyScoping_System_Linq_Expressions_Expression_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.ApplyScoping(System.Linq.Expressions.Expression,Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">ApplyScoping(Expression, ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
               <div class="markdown level1 summary"><p>Called by the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</a> method.</p>
 <p>Applies the scoping behaviour to the <span class="paramref">builtExpression</span> such that when it is executed it 
 correctly interfaces with the active scope (from the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>) if one is present for the
@@ -344,7 +375,7 @@ scope behaviour and preference determined from the <span class="paramref">contex
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td><span class="parametername">builtExpression</span></td>
                     <td><p>The expression that was built for the <span class="paramref">target</span>.</p>
 </td>
@@ -381,7 +412,7 @@ and <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Com
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -391,7 +422,7 @@ and <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Com
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.Build(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L266">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L298">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Build*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
@@ -446,7 +477,7 @@ parameter is optional, this will always be provided </p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -456,7 +487,7 @@ parameter is optional, this will always be provided </p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.BuildCore(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L124">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L166">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.BuildCore*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.BuildCore(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
@@ -511,7 +542,7 @@ Also performs cyclic dependency checking and rewriting expressions to take advan
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -523,20 +554,44 @@ of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.h
 <p>It is this function that is responsible for calling the abstract <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
 function, which deriving classes implement to actually produce their expression for the <span class="paramref">target</span>.</p>
 </div>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
+                    <td><p>targetType doesn&#39;t support the context&#39;s <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a></p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
+                    <td><p>The <span class="paramref">target</span> is already being compiled.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_CanResolve_Expression_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_CanResolve(Expression%2CExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_CanResolve_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_CanResolve(System.Linq.Expressions.Expression%2CSystem.Linq.Expressions.Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L78">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L120">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_CanResolve_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_CanResolve*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_CanResolve_Expression_Expression_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_CanResolve(Expression,Expression)">CallIContainer_CanResolve(Expression, Expression)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_CanResolve_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_CanResolve(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">CallIContainer_CanResolve(Expression, Expression)</h4>
+              <div class="markdown level1 summary"><p>Emits a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> which represents calling the
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_">CanResolve(IResolveContext)</a> method with the given
+context argument.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected MethodCallExpression CallIContainer_CanResolve(Expression container, Expression resolveContext)</code></pre>
+                <pre><code class="lang-csharp hljs">protected static MethodCallExpression CallIContainer_CanResolve(Expression container, Expression context)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -549,14 +604,16 @@ function, which deriving classes implement to actually produce their expression 
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td><span class="parametername">container</span></td>
-                    <td></td>
+                    <td><p>An expression representing the container on which the method will be called</p>
+</td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td><span class="parametername">resolveContext</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
+                    <td><span class="parametername">context</span></td>
+                    <td><p>An expression representing the argument to the context parameter</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -570,25 +627,28 @@ function, which deriving classes implement to actually produce their expression 
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodCallExpression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_Resolve_Expression_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_Resolve(Expression%2CExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_Resolve_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_Resolve(System.Linq.Expressions.Expression%2CSystem.Linq.Expressions.Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L72">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L106">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_Resolve_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_Resolve*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_Resolve_Expression_Expression_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_Resolve(Expression,Expression)">CallIContainer_Resolve(Expression, Expression)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallIContainer_Resolve_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallIContainer_Resolve(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">CallIContainer_Resolve(Expression, Expression)</h4>
+              <div class="markdown level1 summary"><p>Emits a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> which represents calling the
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method with the given
+context argument.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected MethodCallExpression CallIContainer_Resolve(Expression container, Expression resolveContext)</code></pre>
+                <pre><code class="lang-csharp hljs">protected static MethodCallExpression CallIContainer_Resolve(Expression container, Expression context)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -601,14 +661,16 @@ function, which deriving classes implement to actually produce their expression 
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td><span class="parametername">container</span></td>
-                    <td></td>
+                    <td><p>An expression representing the container on which the method will be called</p>
+</td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
-                    <td><span class="parametername">resolveContext</span></td>
-                    <td></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
+                    <td><span class="parametername">context</span></td>
+                    <td><p>An expression representing the argument to the context parameter</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -622,25 +684,28 @@ function, which deriving classes implement to actually produce their expression 
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodCallExpression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallResolveContext_New_Expression_Expression_Expression_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallResolveContext_New(Expression%2CExpression%2CExpression%2CExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallResolveContext_New_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallResolveContext_New(System.Linq.Expressions.Expression%2CSystem.Linq.Expressions.Expression%2CSystem.Linq.Expressions.Expression%2CSystem.Linq.Expressions.Expression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L60">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L86">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallResolveContext_New_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallResolveContext_New*"></a>
-              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallResolveContext_New_Expression_Expression_Expression_Expression_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallResolveContext_New(Expression,Expression,Expression,Expression)">CallResolveContext_New(Expression, Expression, Expression, Expression)</h4>
-              <div class="markdown level1 summary"></div>
+              <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CallResolveContext_New_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_System_Linq_Expressions_Expression_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CallResolveContext_New(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">CallResolveContext_New(Expression, Expression, Expression, Expression)</h4>
+              <div class="markdown level1 summary"><p>Emits a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> which represents calling the
+<a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_New_System_Type_Rezolver_IContainer_Rezolver_IContainerScope_">New(Type, IContainer, IContainerScope)</a> method with the
+given arguments.</p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected MethodCallExpression CallResolveContext_New(Expression resolveContext, Expression newRequestedType = null, Expression newContainer = null, Expression newScope = null)</code></pre>
+                <pre><code class="lang-csharp hljs">protected static MethodCallExpression CallResolveContext_New(Expression resolveContext, Expression newRequestedType = null, Expression newContainer = null, Expression newScope = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -653,24 +718,28 @@ function, which deriving classes implement to actually produce their expression 
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td><span class="parametername">resolveContext</span></td>
-                    <td></td>
+                    <td><p>An expression representing the context on which the method will be called</p>
+</td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td><span class="parametername">newRequestedType</span></td>
-                    <td></td>
+                    <td><p>An expression representing the argument to the newRequestedType parameter</p>
+</td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td><span class="parametername">newContainer</span></td>
-                    <td></td>
+                    <td><p>An expression representing the argument to the newContainer parameter</p>
+</td>
                   </tr>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td><span class="parametername">newScope</span></td>
-                    <td></td>
+                    <td><p>An expression representing the argument to the newScope parameter</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -684,7 +753,7 @@ function, which deriving classes implement to actually produce their expression 
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">MethodCallExpression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -694,11 +763,11 @@ function, which deriving classes implement to actually produce their expression 
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.CanBuild(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L273">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L305">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CanBuild*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_CanBuild_Rezolver_ITarget_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.CanBuild(Rezolver.ITarget)">CanBuild(ITarget)</h4>
-              <div class="markdown level1 summary"><p>Abstract method (implementation of <see cref="!:IExpressionBuilder.CanBuild(ITarget, IExpressionCompileContext)"></see>) which
+              <div class="markdown level1 summary"><p>Abstract method (implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_CanBuild_Rezolver_ITarget_">CanBuild(ITarget)</a>) which
 determines whether this instance can build an expression for the specified target.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
@@ -746,16 +815,13 @@ determines whether this instance can build an expression for the specified targe
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetContextCompiler(Rezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L99">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L141">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetContextCompiler*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetContextCompiler(Rezolver.Compilation.Expressions.IExpressionCompileContext)">GetContextCompiler(IExpressionCompileContext)</h4>
-              <div class="markdown level1 summary"><p>Gets the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a> to be used to build the expression for the given target for
+              <div class="markdown level1 summary"><p>Gets the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a> to be used for
 the given context, if different from one passed to this class&#39; implementation of 
 <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>.</p>
-<p>This function is called by <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</a> which will throw
-an exception if it returns null and no compiler was provided to <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
-(typically via the explicit implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a>).</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -796,11 +862,14 @@ an exception if it returns null and no compiler was provided to <a class="xref" 
                 </tbody>
               </table>
               <h5 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>The base implementation simply attempts to resolve an instance of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a>
-from the <see cref="!:ICompileContext.Container"></see> which should, with the default configuration, resolve to the root 
-<a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.  In order for this to work, it is imperative that the underlying registered target 
-implements the ICompiledTarget interface - so as to avoid needing a (or, more precisely, this) compiler needing 
-to compile it.</p>
+              <div class="markdown level1 remarks"><p>This function is called by <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</a> which will throw
+an exception if it returns null and no compiler was provided to <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_BuildCore_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>
+(typically via the explicit implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a>).</p>
+<p>The base implementation simply attempts to resolve an instance of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a>
+from the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> of the context&#39;s <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_ResolveContext">ResolveContext</a> which should, 
+with the default configuration, resolve to the root <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.  In order for this to work, it is 
+imperative that the underlying registered target implements the ICompiledTarget interface - so as to avoid needing a (or, 
+more precisely, this) compiler needing to compile it.</p>
 </div>
               <h3 id="eii">Explicit Interface Implementations
               </h3>
@@ -809,7 +878,7 @@ to compile it.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver%23Compilation%23Expressions%23IExpressionBuilder%23Build(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L241">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/Expressions/ExpressionBuilderBase.cs/#L273">View Source</a>
               </span>
               <a id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver#Compilation#Expressions#IExpressionBuilder#Build*"></a>
               <h4 id="Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver#Compilation#Expressions#IExpressionBuilder#Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</h4>
@@ -849,7 +918,7 @@ ultimately forwards the call to the <a class="xref" href="Rezolver.Compilation.E
                     <td><p>Optional. The compiler that&#39;s requesting the expression; and which can be used
 to compile other targets within the target.  If not provided, then the implementation attempts to locate
 the context compiler using the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_">GetContextCompiler(IExpressionCompileContext)</a> method, and will throw
-an <see cref="!:InvalidOperationException"></see> if it cannot do so.</p>
+an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a> if it cannot do so.</p>
 </td>
                   </tr>
                 </tbody>
@@ -864,13 +933,35 @@ an <see cref="!:InvalidOperationException"></see> if it cannot do so.</p>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><span class="xref">Expression</span></td>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a></td>
                     <td></td>
                   </tr>
                 </tbody>
               </table>
               <h5 class="implements">Implements</h5>
                   <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a></div>
+              <h5 class="exceptions">Exceptions</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
+                    <td><p><span class="paramref">target</span> is null or <span class="paramref">context</span> is null</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
+                    <td><p><span class="paramref">compiler</span> is null and an IExpressionCompiler 
+    couldn&#39;t be resolved for the current context (via <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_">GetContextCompiler(IExpressionCompileContext)</a></p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
               <h3 id="seealso">See Also</h3>
               <div class="seealso">
                   <div><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a></div>

@@ -80,10 +80,10 @@ h6 {
   /* break-all;*/
 }
 blockquote {
-  border-left-color: #722b00;
-  background: rgba(255, 231, 216, 0.5);
+  border-left-color: #0b2466;
+  background: #091c4f;
   font-size: 14px;
-  color: #777777;
+  color: #c8c8c8;
 }
 blockquote h5 {
   margin-top: 0;

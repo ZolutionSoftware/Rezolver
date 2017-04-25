@@ -143,7 +143,6 @@
     <Content Include="developers\api\Rezolver.Compilation.html" />
     <Content Include="developers\api\Rezolver.Compilation.ICompileContext.html" />
     <Content Include="developers\api\Rezolver.Compilation.ICompileContextProvider.html" />
-    <Content Include="developers\api\Rezolver.Compilation.IContainerConfiguration.html" />
     <Content Include="developers\api\Rezolver.Compilation.ITargetCompiler.html" />
     <Content Include="developers\api\Rezolver.Compilation.TargetCompiler.html" />
     <Content Include="developers\api\Rezolver.ConstructorBinding.html" />
@@ -151,6 +150,7 @@
     <Content Include="developers\api\Rezolver.ContainerBase.DirectResolveCompiledTarget.html" />
     <Content Include="developers\api\Rezolver.ContainerBase.html" />
     <Content Include="developers\api\Rezolver.ContainerBase.MissingCompiledTarget.html" />
+    <Content Include="developers\api\Rezolver.ContainerBehaviourCollection.html" />
     <Content Include="developers\api\Rezolver.ContainerResolveExtensions.html" />
     <Content Include="developers\api\Rezolver.ContainerScope.html" />
     <Content Include="developers\api\Rezolver.ContainerScopeExtensions.html" />
@@ -159,6 +159,8 @@
     <Content Include="developers\api\Rezolver.DecoratorTargetContainerExtensions.html" />
     <Content Include="developers\api\Rezolver.DefaultMemberBindingBehaviour.html" />
     <Content Include="developers\api\Rezolver.DelegateTargetContainerExtensions.html" />
+    <Content Include="developers\api\Rezolver.DependantBase-1.html" />
+    <Content Include="developers\api\Rezolver.DependantCollection-1.html" />
     <Content Include="developers\api\Rezolver.EnumerableTargetBuilderExtensions.html" />
     <Content Include="developers\api\Rezolver.ExceptionResources.html" />
     <Content Include="developers\api\Rezolver.ExpressionFunctions.html" />
@@ -168,13 +170,16 @@
     <Content Include="developers\api\Rezolver.IChildTargetContainer.html" />
     <Content Include="developers\api\Rezolver.ICompiledTarget.html" />
     <Content Include="developers\api\Rezolver.IContainer.html" />
+    <Content Include="developers\api\Rezolver.IContainerBehaviour.html" />
     <Content Include="developers\api\Rezolver.IContainerScope.html" />
+    <Content Include="developers\api\Rezolver.IDependant-1.html" />
     <Content Include="developers\api\Rezolver.IMemberBindingBehaviour.html" />
     <Content Include="developers\api\Rezolver.IResolveContext.html" />
     <Content Include="developers\api\Rezolver.IScopedContainer.html" />
     <Content Include="developers\api\Rezolver.IScopeFactory.html" />
     <Content Include="developers\api\Rezolver.ITarget.html" />
     <Content Include="developers\api\Rezolver.ITargetContainer.html" />
+    <Content Include="developers\api\Rezolver.ITargetContainerBehaviour.html" />
     <Content Include="developers\api\Rezolver.MemberBinding.html" />
     <Content Include="developers\api\Rezolver.MethodBinding.html" />
     <Content Include="developers\api\Rezolver.MethodCallExtractor.html" />
@@ -329,6 +334,10 @@
     <Content Include="_docfx_themes\rezolver\styles\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.md" />
+    <Content Include="articles\toc.md" />
+    <Content Include="articles\intro.md" />
+    <Content Include="api\index.md" />
     <Content Include="developers\index.json" />
     <Content Include="developers\manifest.json" />
     <Content Include="developers\search-stopwords.json" />
@@ -346,10 +355,6 @@
     <Content Include="developers\styles\main.css.map" />
     <Content Include="developers\styles\main.less" />
     <Content Include="developers\xrefmap.yml" />
-    <Content Include="index.md" />
-    <Content Include="articles\toc.md" />
-    <Content Include="articles\intro.md" />
-    <Content Include="api\index.md" />
     <None Include="Properties\PublishExclude.props" />
     <Content Include="_docfx_themes\default\common.js" />
     <Content Include="_docfx_themes\default\conceptual.extension.js" />
