@@ -107,14 +107,5 @@ namespace Rezolver.Tests.Logging
 			var result = string.Format(loggingFormatters, "{0:alt}", toLog);
 			Assert.Equal(LoggedTypeInterfaceFormatter.Expected(toLog, "alt"), result);
 		}
-
-		[Fact]
-		public void Foo()
-		{
-			var target = Target.ForType(typeof(NoDefaultConstructor2));
-			var target2 = Target.ForType<NoDefaultConstructor2>(new { value = Target.ForObject(1) });
-			var str = ObjectFormatterCollection.Default.Format(target);
-			var str2 = ObjectFormatterCollection.Default.Format(target2);
-        }
     }
 }

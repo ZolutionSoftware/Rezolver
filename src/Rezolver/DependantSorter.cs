@@ -31,7 +31,7 @@ namespace Rezolver
             Map[behaviour] = entry = new HashSet<T>(ReferenceComparer<T>.Instance);
             foreach (var dependency in behaviour.GetDependencies(Behaviours))
             {
-                // allow a behaviour to return itself as a dependency, and ignore it.
+                // allow an object to return itself as a dependency, and ignore it.
                 if (object.ReferenceEquals(behaviour, dependency))
                     continue;
                 entry.Add(dependency);
@@ -49,7 +49,7 @@ namespace Rezolver
             if (x == null) throw new ArgumentNullException(nameof(x));
             if (y == null) throw new ArgumentNullException(nameof(y));
             // do this before checking reference equality - ensures the dependency maps are built
-            // for all behaviours
+            // for all objects
             var xdeps = GetDependencyMap(x);
             var ydeps = GetDependencyMap(y);
             if (object.ReferenceEquals(x, y))
