@@ -6,33 +6,33 @@ using System.Linq;
 namespace Rezolver
 {
     internal class DependantSorter<T> : IEnumerable<T>, IComparer<T>
-        where T : IDependant<T>
+        where T : class, IDependant<T>
     {
-        private readonly IEnumerable<T> Behaviours;
+        private readonly IEnumerable<T> Objects;
         private readonly Dictionary<T, HashSet<T>> Map;
 
-        public DependantSorter(IEnumerable<T> behaviours)
+        public DependantSorter(IEnumerable<T> objects)
         {
-            Behaviours = behaviours;
+            Objects = objects;
             Map = new Dictionary<T, HashSet<T>>(ReferenceComparer<T>.Instance);
         }
 
-        HashSet<T> GetDependencyMap(T behaviour)
+        HashSet<T> GetDependencyMap(T obj)
         {
             HashSet<T> toReturn;
-            if (!Map.TryGetValue(behaviour, out toReturn))
-                Map[behaviour] = toReturn = BuildDependencies(behaviour);
+            if (!Map.TryGetValue(obj, out toReturn))
+                Map[obj] = toReturn = BuildDependencies(obj);
             return toReturn;
         }
 
-        HashSet<T> BuildDependencies(T behaviour)
+        HashSet<T> BuildDependencies(T obj)
         {
             HashSet<T> entry;
-            Map[behaviour] = entry = new HashSet<T>(ReferenceComparer<T>.Instance);
-            foreach (var dependency in behaviour.GetDependencies(Behaviours))
+            Map[obj] = entry = new HashSet<T>(ReferenceComparer<T>.Instance);
+            foreach (var dependency in obj.Dependencies.Resolve(Objects))
             {
                 // allow an object to return itself as a dependency, and ignore it.
-                if (object.ReferenceEquals(behaviour, dependency))
+                if (object.ReferenceEquals(obj, dependency))
                     continue;
                 entry.Add(dependency);
                 // dependencies of my dependency are my dependencies :)
@@ -61,7 +61,7 @@ namespace Rezolver
             if (xdeps.Contains(y))
             {
                 if (ydeps.Contains(x))
-                    throw new InvalidOperationException($"Objects {x} and {y} are codependant - this is not allowed");
+                    throw new InvalidOperationException($"Objects {x} and {y} are mutually dependent - cyclic dependencies are not allowed.");
                 return 1;
             }
             else if (ydeps.Contains(x))
@@ -71,7 +71,7 @@ namespace Rezolver
 
         public IEnumerator<T> GetEnumerator()
         {
-            return Behaviours.OrderBy(b => b, this).GetEnumerator();
+            return Objects.OrderBy(b => b, this).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

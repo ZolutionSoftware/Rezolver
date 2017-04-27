@@ -26,7 +26,7 @@ namespace Rezolver
             }
         }
 
-        public IEnumerable<IContainerBehaviour> GetDependencies(IEnumerable<IContainerBehaviour> behaviours)
+        public IEnumerable<IContainerBehaviour> ResolveDependencies(IEnumerable<IContainerBehaviour> behaviours)
         {
             return Enumerable.Empty<IContainerBehaviour>();
         }

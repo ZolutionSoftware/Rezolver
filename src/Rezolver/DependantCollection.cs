@@ -6,28 +6,29 @@ using System.Linq;
 namespace Rezolver
 {
     /// <summary>
-    /// A collection of objects which may or may not have dependencies on each other.
+    /// A collection of objects in which all objects can be dependent on others in the same collection.
     /// </summary>
-    /// <typeparam name="TDependency"></typeparam>
+    /// <typeparam name="TDependency">The type of object in the collection, and the type of
+    /// object upon which all objects in the collection depend.  So, `Foo` is `IDependant&lt;Foo&gt;`.</typeparam>
     /// <remarks>This type is ultimately just a list of <typeparamref name="TDependency"/> which prevents
     /// null items, with a few extra manipulation functions.
     /// 
     /// To iterate the collection in order of least dependant to most dependant, enumerate the
-    /// result of the <see cref="OrderByDependency"/> function - using a typical DAG topological
-    /// sort to achieve its results.</remarks>
+    /// result of the <see cref="OrderByDependency"/> function - which uses a typical DAG topological
+    /// sort to organise the objects by least dependent to most dependent.</remarks>
     public class DependantCollection<TDependency> : IList<TDependency>
-        where TDependency : IDependant<TDependency>
+        where TDependency : class, IDependant<TDependency>
     {
-        private readonly List<TDependency> _inner;
+        private readonly List<IDependant<TDependency>> _inner;
 
         public DependantCollection()
         {
-            _inner = new List<TDependency>();
+            _inner = new List<IDependant<TDependency>>();
         }
 
         public DependantCollection(IEnumerable<TDependency> range)
         {
-            _inner = new List<TDependency>(range);
+            _inner = new List<IDependant<TDependency>>(range);
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace Rezolver
             if (index >= 0) this[index] = replacement;
         }
 
-        public TDependency this[int index] { get => _inner[index]; set => _inner[index] = value; }
+        public TDependency this[int index] { get => (TDependency)_inner[index]; set => _inner[index] = value; }
 
         public int Count => _inner.Count;
 
@@ -64,7 +65,7 @@ namespace Rezolver
 
         public void CopyTo(TDependency[] array, int arrayIndex) => _inner.CopyTo(array, arrayIndex);
 
-        public IEnumerator<TDependency> GetEnumerator() => _inner.GetEnumerator();
+        public IEnumerator<TDependency> GetEnumerator() => _inner.Cast<TDependency>().GetEnumerator();
 
         public int IndexOf(TDependency item) => _inner.IndexOf(item);
 

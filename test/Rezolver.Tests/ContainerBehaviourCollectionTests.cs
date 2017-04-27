@@ -12,126 +12,160 @@ namespace Rezolver.Tests
 
     public class ContainerBehaviourCollectionTests
     {
+        internal class TestDependant : DependantBase<TestDependant>
+        {
+            private readonly Action _callback;
+            public TestDependant(Action callback = null)
+            {
+                _callback = callback;
+            }
+
+            public void Run()
+            {
+                _callback?.Invoke();
+            }
+        }
+
+        internal class TestDependant2 : TestDependant
+        {
+            public TestDependant2(Action callback = null)
+                : base(callback) { }
+        }
+
+        internal class TestDependant1 : TestDependant
+        {
+            public TestDependant1(Action callback = null)
+                : base(callback) { }
+        }
+
         ITestOutputHelper Output { get; }
         public ContainerBehaviourCollectionTests(ITestOutputHelper output)
         {
             Output = output;
         }
+
+        private void Run(DependantCollection<TestDependant> coll)
+        {
+            // obtains the dependants in dependency order from the collection
+            // and then executes their callbacks in order
+            foreach(var dep in coll.OrderByDependency())
+            {
+                dep.Run();
+            }
+        }
+
         // Note - this test also tests the lower-level DependantCollection as everything we're
-        // doing here relies on that.  The ContainerBehaviourCollection class itself is just a couple of
+        // doing here relies on that.  The DependantCollection<TestDependant> class itself is just a couple of
         // connstructors and a stub implementation of another which always returns an empty enumerable.
 
         [Fact]
         public void ShouldBeEmptyOnConstruction()
         {
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
-            Assert.Empty(behaviours);
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
+            Assert.Empty(coll);
         }
 
         [Fact]
         public void ShouldAddBehaviour()
         {
-            // behaviours can be added and then should appear in the IEnumerable
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
-            var behaviour = new TestBehaviour();
-            behaviours.Add(behaviour);
-            Assert.Contains(behaviour, behaviours);
+            // coll can be added and then should appear in the IEnumerable
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
+            var behaviour = new TestDependant1();
+            coll.Add(behaviour);
+            Assert.Contains(behaviour, coll);
         }
 
         [Fact]
         public void ShouldAddAllBehaviours()
         {
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
-            var expected = new IContainerBehaviour[]
-            {
-                new TestBehaviour(), new TestBehaviour2()
-            };
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
+            TestDependant[] expected = { new TestDependant1(), new TestDependant2() };
 
-            behaviours.AddAll(expected);
+            coll.AddAll(expected);
 
-            Assert.Equal(expected, behaviours);
+            Assert.Equal(expected, coll);
         }
 
         [Fact]
         public void ShouldAddAllBehavioursOnConstruction()
         {
-            var expected = new IContainerBehaviour[]
+            var expected = new TestDependant[]
             {
-                new TestBehaviour(), new TestBehaviour2()
+                new TestDependant1(), new TestDependant2()
             };
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection(expected);
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>(expected);
 
-            Assert.Equal(expected, behaviours);
+            Assert.Equal(expected, coll);
         }
 
         [Fact]
         public void ShouldRemoveBehaviour()
         {
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
-            var behaviour = new TestBehaviour();
-            behaviours.Add(behaviour);
-            behaviours.Remove(behaviour);
-            Assert.Empty(behaviours);
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
+            var behaviour = new TestDependant1();
+            coll.Add(behaviour);
+            coll.Remove(behaviour);
+            Assert.Empty(coll);
         }
 
         [Fact]
         public void ShouldRemoveBehaviours()
         {
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
-            var toRemove = new IContainerBehaviour[]
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
+            var toRemove = new TestDependant[]
             {
-                new TestBehaviour(),
-                new TestBehaviour(),
-                new TestBehaviour()
+                new TestDependant1(),
+                new TestDependant1(),
+                new TestDependant1()
             };
-            var remaining = new IContainerBehaviour[]
+            var remaining = new TestDependant[]
             {
-                new TestBehaviour2()
+                new TestDependant2()
             };
 
-            behaviours.AddAll(toRemove);
-            behaviours.AddAll(remaining);
-            behaviours.RemoveAll(toRemove);
+            coll.AddAll(toRemove);
+            coll.AddAll(remaining);
+            coll.RemoveAll(toRemove);
 
-            Assert.Equal(remaining, behaviours);
+            Assert.Equal(remaining, coll);
         }
 
         [Fact]
         public void ShouldReplaceBehaviour()
         {
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
-            var original = new TestBehaviour();
-            var replacement = new TestBehaviour2();
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
+            var original = new TestDependant1();
+            var replacement = new TestDependant2();
 
-            behaviours.Add(original);
-            behaviours.Replace(original, replacement);
+            coll.Add(original);
+            coll.Replace(original, replacement);
 
-            Assert.Equal(new[] { replacement }, behaviours);
+            Assert.Equal(new[] { replacement }, coll);
         }
 
         [Fact]
         public void ShouldConfigureAddedBehaviour()
         {
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
             bool configured = false;
 
-            behaviours.Add(new TestBehaviour((c, t) => configured = true));
+            coll.Add(new TestDependant1(() => configured = true));
 
-            behaviours.Configure(null, null);
+            Run(coll);
             Assert.True(configured);
         }
 
         [Fact]
         public void ShouldConfigureAllAddedBehaviours()
         {
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
             int configured = 0;
 
-            behaviours.Add(new TestBehaviour((c, t) => configured++));
-            behaviours.Add(new TestBehaviour((c, t) => configured++));
-            behaviours.Add(new TestBehaviour((c, t) => configured++));
+            coll.Add(new TestDependant1(() => configured++));
+            coll.Add(new TestDependant1(() => configured++));
+            coll.Add(new TestDependant1(() => configured++));
 
-            behaviours.Configure(null, null);
+            Run(coll);
 
             Assert.Equal(3, configured);
         }
@@ -139,20 +173,20 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldConfigureBehavioursInRegistrationOrder()
         {
-            // behaviours must be applied in the order they're registered,
+            // coll must be applied in the order they're registered,
             // assuming no dependencies etc.
-            ContainerBehaviourCollection behaviours = new ContainerBehaviourCollection();
+            DependantCollection<TestDependant> coll = new DependantCollection<TestDependant>();
             bool firstCalled = true;
             bool secondCalled = true;
 
-            behaviours.Add(new TestBehaviour((c, t) => firstCalled = true));
-            behaviours.Add(new TestBehaviour((c, t) =>
+            coll.Add(new TestDependant1(() => firstCalled = true));
+            coll.Add(new TestDependant1(() =>
             {
                 Assert.True(firstCalled);
                 secondCalled = true;
             }));
 
-            behaviours.Configure(null, null);
+            Run(coll);
             Assert.True(secondCalled);
         }
 
@@ -183,29 +217,29 @@ namespace Rezolver.Tests
                 });
         }
 
-        private void RunBehaviourTest(IContainerBehaviour[] behaviours, Action<ContainerBehaviourCollection> test = null, Action reset = null, bool dontConfigure=false)
+        private void RunTest(TestDependant[] coll, Action<DependantCollection<TestDependant>> test = null, Action reset = null, bool dontConfigure=false)
         {
-            // runs the test for each unique permutation of the behaviours.
+            // runs the test for each unique permutation of the coll.
             // note that the test fails as soon as one order fails - and, because
             // I'm not proficient enouigh with Xunit yet - I'm just outputting the 
             // indices of the items, in order, which led to the failure.
             // Remember - keep the number of input items to a reasonable amount; with a
             // suggested maximum of 9-10 as the number of permutations is (n!) where n is the 
-            // length of the behaviours array.
+            // length of the coll array.
             int count = 0;
-            foreach (var uniqueOrder in UniquePermutations(behaviours))
+            foreach (var uniqueOrder in UniquePermutations(coll))
             {
                 count++;
-                var collection = new ContainerBehaviourCollection(uniqueOrder);
+                var collection = new DependantCollection<TestDependant>(uniqueOrder);
                 try
                 {
-                    if(!dontConfigure) collection.Configure(null, null);
+                    if(!dontConfigure) Run(collection);
                     test?.Invoke(collection);
                     reset?.Invoke();
                 }
                 catch (Exception)
                 {
-                    Output.WriteLine($"Ordering of failed items: { string.Join(", ", uniqueOrder.Select(i => Array.IndexOf(behaviours, i))) } ");
+                    Output.WriteLine($"Ordering of failed items: { string.Join(", ", uniqueOrder.Select(i => Array.IndexOf(coll, i))) } ");
                     throw;
                 }
             }
@@ -216,19 +250,19 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldConfigureDependencyBeforeDependantBehaviour()
         {
-            // The IDependantBehaviour interface provides the ability for behaviours to declare 
-            // a dependency on other behaviours.  The behaviours collection automatically processes
+            // The IDependantBehaviour interface provides the ability for coll to declare 
+            // a dependency on other coll.  The coll collection automatically processes
             // those dependencies when Configure() is called 
             bool rootCalled = false, dependantCalled = false;
-            var root = new TestBehaviour((c, t) => rootCalled = true);
-            var dependant = new TestBehaviour((c, t) =>
+            var root = new TestDependant1(() => rootCalled = true);
+            var dependant = new TestDependant1(() =>
             {
                 Assert.True(rootCalled);
                 dependantCalled = true;
             });
             dependant.Requires(root);
 
-            RunBehaviourTest(new IContainerBehaviour[] { root, dependant },
+            RunTest(new TestDependant[] { root, dependant },
                 c => Assert.True(dependantCalled),
                 () => rootCalled = dependantCalled = false);
         }
@@ -238,19 +272,20 @@ namespace Rezolver.Tests
         {
             bool rootCalled = false, midCalled = false, dependantCalled = false;
 
-            var root = new TestBehaviour((c, t) => rootCalled = true);
-            var mid = new TestBehaviour((c, t) =>
+            var root = new TestDependant1(() => rootCalled = true);
+            var mid = new TestDependant1(() =>
             {
                 Assert.True(rootCalled);
                 midCalled = true;
             }).Requires(root);
-            var dependant = new TestBehaviour((c, t) =>
+
+            var dependant = new TestDependant1(() =>
             {
                 Assert.True(midCalled);
                 dependantCalled = true;
             }).Requires(mid);
 
-            RunBehaviourTest(new[] { root, mid, dependant },
+            RunTest(new TestDependant[] { root, mid, dependant },
                 c => Assert.True(dependantCalled),
                 () => rootCalled = midCalled = dependantCalled = false);
         }
@@ -260,18 +295,18 @@ namespace Rezolver.Tests
         {
             bool rootCalled = false;
             int dependantCalled = 0;
-            var root = new TestBehaviour((c, t) => rootCalled = true);
-            var dependantCallBack = new Action<IContainer, ITargetContainer>((c, t) =>
+            var root = new TestDependant1(() => rootCalled = true);
+            var dependantCallBack = new Action(() =>
             {
                 Assert.True(rootCalled);
                 dependantCalled++;
             });
 
-            RunBehaviourTest(new[] {
+            RunTest(new TestDependant[] {
                     root,
-                    new TestBehaviour(dependantCallBack).Requires(root),
-                    new TestBehaviour(dependantCallBack).Requires(root),
-                    new TestBehaviour(dependantCallBack).Requires(root)
+                    new TestDependant1(dependantCallBack).Requires(root),
+                    new TestDependant1(dependantCallBack).Requires(root),
+                    new TestDependant1(dependantCallBack).Requires(root)
                 },
                 c => Assert.Equal(3, dependantCalled),
                 () =>
@@ -287,15 +322,15 @@ namespace Rezolver.Tests
             bool rootCalled = false;
             bool dependantCalled = false;
             bool independentCalled = false;
-            var root = new TestBehaviour((c, t) => rootCalled = true);
-            var dependant = new TestBehaviour((c, t) =>
+            var root = new TestDependant1(() => rootCalled = true);
+            var dependant = new TestDependant1(() =>
             {
                 Assert.True(rootCalled);
                 dependantCalled = true;
             }).Requires(root);
-            var independent = new TestBehaviour((c, t) => independentCalled = true);
+            var independent = new TestDependant1(() => independentCalled = true);
 
-            RunBehaviourTest(new[] { dependant, independent, root },
+            RunTest(new IDependant<TestDependant>[] { dependant, independent, root },
                 c =>
                 {
                     Assert.True(dependantCalled);
@@ -313,32 +348,32 @@ namespace Rezolver.Tests
             bool[] independentCalled = { false, false };
 
             //group1 of dependency chain
-            var root1 = new TestBehaviour((c, t) => rootCalled[0] = true);
-            var mid1 = new TestBehaviour((c, t) =>
+            var root1 = new TestDependant1(() => rootCalled[0] = true);
+            var mid1 = new TestDependant1(() =>
             {
                 Assert.True(rootCalled[0]);
                 midCalled[0] = true;
             }).Requires(root1);
-            var dependant1 = new TestBehaviour((c, t) =>
+            var dependant1 = new TestDependant1(() =>
             {
                 Assert.True(midCalled[0]);
                 dependantCalled[0] = true;
             }).Requires(mid1);
 
-            var root2 = new TestBehaviour2((c, t) => rootCalled[1] = true);
-            var mid2 = new TestBehaviour2((c, t) =>
+            var root2 = new TestDependant2(() => rootCalled[1] = true);
+            var mid2 = new TestDependant2(() =>
             {
                 Assert.True(rootCalled[1]);
                 midCalled[1] = true;
             }).Requires(root2);
-            var dependant2 = new TestBehaviour2((c, t) =>
+            var dependant2 = new TestDependant2(() =>
             {
                 Assert.True(midCalled[1]);
                 dependantCalled[1] = true;
             }).Requires(mid2);
 
-            var independent1 = new TestBehaviour((c, t) => independentCalled[0] = true);
-            var independent2 = new TestBehaviour2((c, t) => independentCalled[1] = true);
+            var independent1 = new TestDependant1(() => independentCalled[0] = true);
+            var independent2 = new TestDependant2(() => independentCalled[1] = true);
 
             RunBehaviourTest(new[] { dependant1, independent1, dependant2,
                 mid2, mid1, root1, independent2, root2 },
@@ -360,55 +395,28 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldThrowExceptionForDirectCyclicDependencies()
         {
-            var coDependant1 = new TestBehaviour();
-            var coDependant2 = new TestBehaviour();
+            var coDependant1 = new TestDependant1();
+            var coDependant2 = new TestDependant1();
             coDependant1.Requires(coDependant2);
             coDependant2.Requires(coDependant1);
 
             RunBehaviourTest(new[] { coDependant1, coDependant2 },
-                c => Assert.Throws<InvalidOperationException>(() => c.Configure(null, null)), 
+                c => Assert.Throws<InvalidOperationException>(() => c.Run()), 
                 dontConfigure: true);
         }
 
         [Fact]
         public void ShouldThrowExceptionForTransitiveCyclicDependencies()
         {
-            var root = new TestBehaviour();
-            var intermediate = new TestBehaviour();
-            var dependant = new TestBehaviour();
+            var root = new TestDependant1();
+            var intermediate = new TestDependant1();
+            var dependant = new TestDependant1();
             root.Requires(dependant);
             intermediate.Requires(root);
             dependant.Requires(intermediate);
-
             RunBehaviourTest(new[] { root, intermediate, dependant },
-                c => Assert.Throws<InvalidOperationException>(() => c.Configure(null, null)),
+                c => Assert.Throws<InvalidOperationException>(() => c.Run()),
                 dontConfigure: true);
-        }
-
-        internal class TestBehaviourBase : DependantBase<IContainerBehaviour>, IContainerBehaviour
-        {
-            private readonly Action<IContainer, ITargetContainer> _callback;
-            public TestBehaviourBase(Action<IContainer, ITargetContainer> callback = null)
-            {
-                _callback = callback;
-            }
-
-            public void Configure(IContainer container, ITargetContainer targets)
-            {
-                _callback?.Invoke(container, targets);
-            }
-        }
-
-        internal class TestBehaviour2 : TestBehaviourBase
-        {
-            public TestBehaviour2(Action<IContainer, ITargetContainer> callback = null)
-                : base(callback) { }
-        }
-
-        internal class TestBehaviour : TestBehaviourBase
-        {
-            public TestBehaviour(Action<IContainer, ITargetContainer> callback = null)
-                : base(callback) { }
         }
     }
 }

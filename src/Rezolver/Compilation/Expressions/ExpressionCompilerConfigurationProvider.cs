@@ -100,7 +100,7 @@ namespace Rezolver.Compilation.Expressions
 			return _standardTargetBuilders.Value;
 		}
 
-        public IEnumerable<IContainerBehaviour> GetDependencies(IEnumerable<IContainerBehaviour> behaviours)
+        public IEnumerable<IContainerBehaviour> ResolveDependencies(IEnumerable<IContainerBehaviour> behaviours)
         {
             throw new NotImplementedException();
         }

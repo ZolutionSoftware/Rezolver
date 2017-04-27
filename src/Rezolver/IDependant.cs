@@ -10,16 +10,13 @@ namespace Rezolver
     /// </summary>
     /// <typeparam name="TDependency"></typeparam>
     public interface IDependant<TDependency>
+        where TDependency : class
     {
         /// <summary>
-        /// Selects the dependencies for this object which appear in <paramref name="objects"/>.
+        /// The dependencies for this object.  To obtain the collection of <typeparamref name="TDependency" />
+        /// on which this object depends - you must call <see cref="DependencyCollection{TDependency}.Resolve(IEnumerable{TDependency})"/>,
+        /// passing the collection of objects from which dependencies are to be selected.
         /// </summary>
-        /// <param name="objects">All objects from which dependencies are to be selected.  The set will
-        /// likely include this object too.</param>
-        /// <returns>A non-null enumerable of all objects in <paramref name="objects"/> on which this
-        /// object depends.  If no dependencies are found, then an empty enumerable is returned.</returns>
-        /// <exception cref="InvalidOperationException">If an required dependency is not
-        /// found in the <paramref name="objects"/></exception>
-        IEnumerable<TDependency> GetDependencies(IEnumerable<TDependency> objects);
+        DependencyCollection<TDependency> Dependencies { get; }
     }
 }

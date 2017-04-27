@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 namespace Rezolver
 {
     internal class ReferenceComparer<T> : IEqualityComparer<T>
+        where T:class
     {
         public static IEqualityComparer<T> Instance { get; } = new ReferenceComparer<T>();
 
