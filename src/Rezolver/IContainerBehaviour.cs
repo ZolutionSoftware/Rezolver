@@ -17,7 +17,7 @@ namespace Rezolver
     /// As additional background, many of the container and target container classes use registrations within themselves
     /// to configure their behaviour.  Referring back to compilation, for example, the built-in containers will self-resolve
     /// an instance of a compiler when a target needs compiling.</remarks>
-	public interface IContainerBehaviour : IDependant<IContainerBehaviour>
+	public interface IContainerBehaviour
 	{
 		/// <summary>
         /// Called to configure the behaviour for the given container via the given targets.

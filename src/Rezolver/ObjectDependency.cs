@@ -8,18 +8,17 @@ namespace Rezolver
     /// <summary>
     /// Represents a dependency on a specific instance
     /// </summary>
-    internal class ObjectDependency<TDependency> : Dependency<TDependency>
-        where TDependency : class
+    internal class ObjectDependency : DependencyMetadata
     {
-        private TDependency Obj { get; }
+        private object Obj { get; }
 
-        public ObjectDependency(TDependency obj, IDependant<TDependency> owner, bool required)
+        public ObjectDependency(object obj, IDependant owner, bool required)
             : base(owner, required)
         {
             Obj = obj;
         }
 
-        public override IEnumerable<TDependency> Resolve(IEnumerable<TDependency> objects)
+        public override IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects)
         {
             bool found = false;
             foreach (var result in objects.Where(o => object.ReferenceEquals(Obj, o)))

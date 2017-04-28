@@ -9,10 +9,9 @@ using Xunit.Abstractions;
 
 namespace Rezolver.Tests
 {
-
-    public class ContainerBehaviourCollectionTests
+    public class DependantCollectionTests
     {
-        internal class TestDependant : DependantBase<TestDependant>
+        internal class TestDependant : Dependant
         {
             private readonly Action _callback;
             public TestDependant(Action callback = null)
@@ -39,7 +38,7 @@ namespace Rezolver.Tests
         }
 
         ITestOutputHelper Output { get; }
-        public ContainerBehaviourCollectionTests(ITestOutputHelper output)
+        public DependantCollectionTests(ITestOutputHelper output)
         {
             Output = output;
         }
@@ -48,7 +47,7 @@ namespace Rezolver.Tests
         {
             // obtains the dependants in dependency order from the collection
             // and then executes their callbacks in order
-            foreach(var dep in coll.OrderByDependency())
+            foreach(var dep in coll.Ordered)
             {
                 dep.Run();
             }
@@ -330,7 +329,7 @@ namespace Rezolver.Tests
             }).Requires(root);
             var independent = new TestDependant1(() => independentCalled = true);
 
-            RunTest(new IDependant<TestDependant>[] { dependant, independent, root },
+            RunTest(new[] { dependant, independent, root },
                 c =>
                 {
                     Assert.True(dependantCalled);
@@ -375,7 +374,7 @@ namespace Rezolver.Tests
             var independent1 = new TestDependant1(() => independentCalled[0] = true);
             var independent2 = new TestDependant2(() => independentCalled[1] = true);
 
-            RunBehaviourTest(new[] { dependant1, independent1, dependant2,
+            RunTest(new TestDependant[]{ dependant1, independent1, dependant2,
                 mid2, mid1, root1, independent2, root2 },
                 c =>
                 {
@@ -392,6 +391,8 @@ namespace Rezolver.Tests
                 });
         }
 
+
+
         [Fact]
         public void ShouldThrowExceptionForDirectCyclicDependencies()
         {
@@ -400,8 +401,8 @@ namespace Rezolver.Tests
             coDependant1.Requires(coDependant2);
             coDependant2.Requires(coDependant1);
 
-            RunBehaviourTest(new[] { coDependant1, coDependant2 },
-                c => Assert.Throws<InvalidOperationException>(() => c.Run()), 
+            RunTest(new[] { coDependant1, coDependant2 },
+                c => Assert.Throws<InvalidOperationException>(() => Run(c)), 
                 dontConfigure: true);
         }
 
@@ -414,8 +415,8 @@ namespace Rezolver.Tests
             root.Requires(dependant);
             intermediate.Requires(root);
             dependant.Requires(intermediate);
-            RunBehaviourTest(new[] { root, intermediate, dependant },
-                c => Assert.Throws<InvalidOperationException>(() => c.Run()),
+            RunTest(new[] { root, intermediate, dependant },
+                c => Assert.Throws<InvalidOperationException>(() => Run(c)),
                 dontConfigure: true);
         }
     }

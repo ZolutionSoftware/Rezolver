@@ -36,10 +36,10 @@ namespace Rezolver
         /// when requested.
         /// 
         /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, IContainerBehaviour)"/>) will be used.</param>
-        /// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-        /// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
-        protected CachingContainerBase(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)
-			: base(targets, compilerConfig)
+        /// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="ContainerBehaviour.Default"/>
+        /// behaviour collection will be used.</param>
+        protected CachingContainerBase(ITargetContainer targets = null, IContainerBehaviour behaviour = null)
+			: base(targets, behaviour)
 		{
 
 		}

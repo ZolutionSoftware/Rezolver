@@ -34,22 +34,6 @@ namespace Rezolver
     /// </remarks>
     public class ContainerBase : IContainer, ITargetContainer
     {
-        #region NoChangeCompilerConfigurationProvider class
-        private class NoChangeCompilerConfigurationProvider : IContainerBehaviour
-        {
-            ///<summary>Empty implementation of <see cref="IContainerBehaviour.Configure(IContainer, ITargetContainer)"/></summary>
-            public void Configure(IContainer container, ITargetContainer targets)
-            {
-
-            }
-
-            public IEnumerable<IContainerBehaviour> ResolveDependencies(IEnumerable<IContainerBehaviour> behaviours)
-            {
-                throw new NotImplementedException();
-            }
-        }
-        #endregion
-
         #region MissingCompiledTarget
 
         /// <summary>
@@ -64,6 +48,9 @@ namespace Rezolver
         {
             private readonly Type _type;
 
+            /// <summary>
+            /// Always returns <c>null</c>
+            /// </summary>
             public ITarget SourceTarget => null;
             /// <summary>
             /// Constructs a new instance of the <see cref="MissingCompiledTarget"/> class.
@@ -96,6 +83,9 @@ namespace Rezolver
         /// </summary>
         protected class DirectResolveCompiledTarget : ICompiledTarget
         {
+            /// <summary>
+            /// The target for which this compiled target was created.
+            /// </summary>
             public ITarget SourceTarget { get; }
             /// <summary>
             /// Constructs a new instance of the <see cref="DirectResolveCompiledTarget"/>
@@ -118,16 +108,6 @@ namespace Rezolver
             }
         }
         #endregion
-
-        /// <summary>
-        /// Gets the compiler configuration provider to be passed when a derived container does not want the
-        /// <see cref="CompilerConfiguration.DefaultProvider" /> provider to be used if one is not passed on construction.
-        /// 
-        /// This provider is guaranteed not to add/modify any registrations in the underlying target container
-        /// which are connected with compilation.
-        /// </summary>
-        protected static IContainerBehaviour NoChangeCompilerConfiguration { get; } = new NoChangeCompilerConfigurationProvider();
-
 
         private static readonly
           ConcurrentDictionary<Type, Lazy<ICompiledTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
@@ -154,17 +134,17 @@ namespace Rezolver
         private int _compileConfigured = 0;
         private IContainerBehaviour _compilerConfigurationProvider;
         /// <summary>
-        /// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="compilerConfig"/>
+        /// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="behaviour"/>
         /// </summary>
         /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> (and other operations)
         /// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
         /// <see cref="Targets"/> property.</param>
-        /// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-        /// strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider will be used.</param>
-        protected ContainerBase(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)
+        /// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="ContainerBehaviour.Default"/>
+        /// behaviour collection will be used.</param>
+        protected ContainerBase(ITargetContainer targets = null, IContainerBehaviour behaviour = null)
         {
             Targets = targets ?? new TargetContainer();
-            _compilerConfigurationProvider = compilerConfig ?? CompilerConfiguration.DefaultProvider;
+            _compilerConfigurationProvider = behaviour ?? CompilerConfiguration.DefaultProvider;
         }
 
         /// <summary>

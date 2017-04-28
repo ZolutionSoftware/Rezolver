@@ -56,15 +56,9 @@ namespace Rezolver.Compilation.Expressions
 	public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler, ICompileContextProvider
 	{
 		/// <summary>
-		/// Gets the default expression compiler which is registered by the <see cref="ConfigProvider"/> by default.
+		/// Gets the default expression compiler which is registered by the <see cref="ExpressionCompilingBehaviour"/>
 		/// </summary>
 		public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
-
-		/// <summary>
-		/// Gets the default expression compiler configuration provider which is also set, by default, into the 
-		/// <see cref="CompilerConfiguration.DefaultProvider"/> property.
-		/// </summary>
-		public static ExpressionCompilerConfigurationProvider ConfigProvider { get; } = new ExpressionCompilerConfigurationProvider();
 
 		private class CompiledLambdaTarget : ICompiledTarget
 		{

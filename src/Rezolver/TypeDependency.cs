@@ -5,47 +5,35 @@ using System.Text;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Represents a dependency on objects of a specific type, which is itself a sub class of 
-    /// <typeparamref name="TDependency"/>.
-    /// </summary>
-    /// <typeparam name="TDependency">The general type of object upon which the owner of this dependency
-    /// is dependent upon.  So, an <see cref="IDependant{TDependency}"/> will pass its <typeparamref name="TDependency"/>
-    /// argument to this parameter.</typeparam>
-    internal class TypeDependency<TDependency> : Dependency<TDependency>
-        where TDependency : class
+    internal class TypeDependency : DependencyMetadata
     {
         private Type Type { get; }
-        public TypeDependency(Type type, IDependant<TDependency> owner, bool required)
+        public TypeDependency(Type type, IDependant owner, bool required)
             : base(owner, required)
         {
             Type = type;
         }
 
-        public override IEnumerable<TDependency> Resolve(IEnumerable<TDependency> objects)
+        public override IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects)
         {
-            Type oType;
-            DependantBase<TDependency> oDependant;
             int count = 0;
             foreach (var o in objects)
             {
-                oType = o.GetType();
-                if (!TypeHelpers.IsAssignableFrom(Type, oType))
+                if (!TypeHelpers.IsAssignableFrom(Type, o.GetType()))
                     continue;
-                // if the object is also a DependantBase<T> object
-                // then we examine the other's dependency descriptors - if it also has 
+                // if the object is also an IDependant object
+                // then we examine its dependency descriptors - if it also has 
                 // a TypeDependency for the same type and our owner matches it, then we
                 // don't add a dependency on it because we would end up with a circular
                 // dependency.
                 // Note we don't check whether our owner is in the objects enumerable - 
                 // we just assume that it is (because if it's dependencies are being 
                 // calculated, then it should be).
-                oDependant = o as DependantBase<TDependency>;
-                if (oDependant != null)
+                if (o is IDependant oDependant)
                 {
-                    foreach (var descriptor in oDependant.Dependencies.OfType<TypeDependency<TDependency>>())
+                    foreach (var oDependency in oDependant.Dependencies.OfType<TypeDependency>())
                     {
-                        if (descriptor.Type == Type && TypeHelpers.IsAssignableFrom(Type, Owner.GetType()))
+                        if (oDependency.Type == Type && TypeHelpers.IsAssignableFrom(Type, Owner.GetType()))
                             continue;
                     }
                 }

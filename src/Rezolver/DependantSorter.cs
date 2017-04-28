@@ -6,7 +6,7 @@ using System.Linq;
 namespace Rezolver
 {
     internal class DependantSorter<T> : IEnumerable<T>, IComparer<T>
-        where T : class, IDependant<T>
+        where T: class
     {
         private readonly IEnumerable<T> Objects;
         private readonly Dictionary<T, HashSet<T>> Map;
@@ -29,16 +29,21 @@ namespace Rezolver
         {
             HashSet<T> entry;
             Map[obj] = entry = new HashSet<T>(ReferenceComparer<T>.Instance);
-            foreach (var dependency in obj.Dependencies.Resolve(Objects))
+            if (obj is IDependant oDependant)
             {
-                // allow an object to return itself as a dependency, and ignore it.
-                if (object.ReferenceEquals(obj, dependency))
-                    continue;
-                entry.Add(dependency);
-                // dependencies of my dependency are my dependencies :)
-                foreach (var dep in GetDependencyMap(dependency))
+                foreach (var dependency in oDependant.Dependencies.GetDependencies(Objects))
                 {
-                    entry.Add(dep);
+                    // allow an object to return itself as a dependency, and ignore it.
+                    if (object.ReferenceEquals(obj, dependency))
+                        continue;
+                    entry.Add(dependency);
+                    // dependencies of my dependency are my dependencies
+                    // (note we don't bother marking transitive dependencies because
+                    // they're not relevant to the algorithm)
+                    foreach (var dep in GetDependencyMap(dependency))
+                    {
+                        entry.Add(dep);
+                    }
                 }
             }
             return entry;

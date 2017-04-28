@@ -35,7 +35,7 @@ namespace Rezolver.Tests.Targets
 			}
 		}
 
-		protected class TestCompilerConfigProvider : IContainerBehaviour
+		protected class TestCompilerConfigProvider : Dependant, IContainerBehaviour
 		{
 			public void Configure(IContainer container, ITargetContainer targets)
 			{

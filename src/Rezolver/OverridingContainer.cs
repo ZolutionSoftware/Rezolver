@@ -41,10 +41,10 @@ namespace Rezolver
         /// are resolved when the overriding container is the root container for a resolve operation, will resolve
         /// their dependencies from this container.</param>
         /// <param name="targets">Optional. A specific target container to be used for this container's own registrations.</param>
-        /// <param name="compilerConfig">Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-        /// strategy.  If <c>null</c> (recommended), then the <paramref name="inner"/> container's configuration will be inherited.</param>
-        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)
-            : base(targets, compilerConfig ?? NoChangeCompilerConfiguration)
+        /// <param name="behaviour">Optional.  Behaviour which will be used to configure this container and its targets.  If not
+        /// provided then the <see cref="ContainerBehaviour.DefaultOverridingBehaviour"/> will be used.</param>
+        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour behaviour = null)
+            : base(targets, behaviour ?? ContainerBehaviour.DefaultOverridingBehaviour)
         {
             inner.MustNotBeNull("inner");
             _inner = inner;
