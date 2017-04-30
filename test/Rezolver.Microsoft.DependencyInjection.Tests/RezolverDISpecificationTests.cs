@@ -14,7 +14,7 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection.Tests
   {
     protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
     {
-      var container = new ScopedContainer(compilerConfig: ExpressionCompiler.ConfigProvider);
+      var container = new ScopedContainer();
       container.Populate(serviceCollection);
       return container;
     }

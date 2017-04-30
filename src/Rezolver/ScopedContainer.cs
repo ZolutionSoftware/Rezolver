@@ -48,7 +48,7 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="targets">Optional.  The underlying target container to be used to resolve objects.</param>
 		/// <param name="compilerConfig">Optional.  The compiler configuration.</param>
-		public ScopedContainer(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)
+		public ScopedContainer(ITargetContainer targets = null, IContainerConfiguration compilerConfig = null)
 			: base(targets, compilerConfig)
 		{
 			_scope = new ContainerScope(this);

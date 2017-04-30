@@ -29,11 +29,11 @@ namespace Rezolver
     /// Initializes a new instance of the <see cref="ChildTargetContainer"/> class.
     /// </summary>
     /// <param name="parent">Required. The parent target container</param>
-    public ChildTargetContainer(ITargetContainer parent)
+    public ChildTargetContainer(ITargetContainer parent, ITargetContainerConfiguration configuration = null)
+            : base(configuration ?? DefaultConfiguration.ChildTargetContainerConfig)
     {
       parent.MustNotBeNull(nameof(parent));
       _parent = parent;
-
     }
 
     /// <summary>

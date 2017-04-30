@@ -111,30 +111,4 @@ namespace Rezolver
 			return base.CombineWith(existing, type);
 		}
 	}
-
-	/// <summary>
-	/// Houses an extension method which enables native resolving of IEnumerables of services on 
-	/// <see cref="ITargetContainer"/> containers which, in turn, enables it for any <see cref="ContainerBase"/>
-	/// containers which use that target container.
-	/// </summary>
-	public static class EnumerableTargetBuilderExtensions
-	{
-		/// <summary>
-		/// Enables resolving of enumerables of services on the target container.
-		/// </summary>
-		/// <param name="targetContainer">The target container.</param>
-		/// <remarks>
-		/// After calling this, you can immediately request a target for <see cref="IEnumerable{T}"/> of
-		/// any type and you will receive a <see cref="ListTarget"/> (with <see cref="ListTarget.AsArray"/>
-		/// set to true) which contains all the targets which have previously been
-		/// registered for the type <c>T</c>, in the order they were registered.
-		///  
-		/// If a service has not been registered, then the returned <see cref="ListTarget"/> will be empty
-		/// and its <see cref="ListTarget.UseFallback"/> property will be <c>true</c>.</remarks>
-		public static void EnableEnumerableResolving(this ITargetContainer targetContainer)
-		{
-			targetContainer.MustNotBeNull(nameof(targetContainer));
-			targetContainer.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(targetContainer));
-		}
-	}
 }

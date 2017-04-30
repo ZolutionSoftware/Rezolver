@@ -56,7 +56,7 @@ namespace Rezolver.Compilation.Expressions
 	public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler, ICompileContextProvider
 	{
 		/// <summary>
-		/// Gets the default expression compiler which is registered by the <see cref="ExpressionCompilingBehaviour"/>
+		/// Gets the default expression compiler which is registered by the <see cref="ExpressionCompilerConfiguration"/>
 		/// </summary>
 		public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
 

@@ -132,21 +132,8 @@ namespace Rezolver
         }
 
         private int _compileConfigured = 0;
-        private IContainerBehaviour _compilerConfigurationProvider;
-        /// <summary>
-        /// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="behaviour"/>
-        /// </summary>
-        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> (and other operations)
-        /// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
-        /// <see cref="Targets"/> property.</param>
-        /// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="ContainerBehaviour.Default"/>
-        /// behaviour collection will be used.</param>
-        protected ContainerBase(ITargetContainer targets = null, IContainerBehaviour behaviour = null)
-        {
-            Targets = targets ?? new TargetContainer();
-            _compilerConfigurationProvider = behaviour ?? CompilerConfiguration.DefaultProvider;
-        }
-
+        private IContainerConfiguration _behaviour;
+        
         /// <summary>
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
         /// instances.
@@ -162,6 +149,21 @@ namespace Rezolver
         /// then there's no guarantee that new dependencies will be picked up - especially if the <see cref="CachingContainerBase"/> is being used as your
         /// application's container (which it nearly always will be).</remarks>
         protected ITargetContainer Targets { get; }
+
+        /// <summary>
+        /// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="configuration"/>
+        /// </summary>
+        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> (and other operations)
+        /// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
+        /// <see cref="Targets"/> property.</param>
+        /// <param name="configuration">Optional.  Configuration for this container.  If not provided then the <see cref="DefaultConfiguration.ContainerConfig"/>
+        /// collection will be used.</param>
+        protected ContainerBase(ITargetContainer targets = null, IContainerConfiguration configuration = null)
+        {
+            Targets = targets ?? new TargetContainer();
+            _behaviour = configuration ?? DefaultConfiguration.ContainerConfig;
+            _behaviour.Configure(this, Targets);
+        }
 
         /// <summary>
         /// Implementation of the <see cref="IContainer.Resolve(IResolveContext)"/> method.
@@ -292,8 +294,8 @@ namespace Rezolver
         /// </remarks> 
         protected virtual ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
         {
-            if (Interlocked.CompareExchange(ref _compileConfigured, 1, 0) == 0)
-                _compilerConfigurationProvider.Configure(this, Targets);
+            //if (Interlocked.CompareExchange(ref _compileConfigured, 1, 0) == 0)
+            //    _behaviour.Configure(this, Targets);
 
             ITarget target = Targets.Fetch(context.RequestedType);
 

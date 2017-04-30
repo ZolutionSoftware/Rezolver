@@ -30,9 +30,9 @@ namespace Rezolver
 		/// Constructs a new instance of the <see cref="Container"/> class.
 		/// </summary>
 		/// <param name="targets">Optional.  The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</param>
-		/// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="ContainerBehaviour.Default"/>
+		/// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="DefaultConfiguration.ContainerConfig"/>
         /// behaviour collection will be used.</param>
-		public Container(ITargetContainer targets = null, IContainerBehaviour behaviour = null)
+		public Container(ITargetContainer targets = null, IContainerConfiguration behaviour = null)
 			: base(targets, behaviour)
 		{
 			
@@ -54,7 +54,7 @@ namespace Rezolver
 		/// <param name="compilerConfig">An object which will be used to configure this container and its targets to use a 
 		/// specific compilation strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider 
 		/// will be used.</param>
-		public Container(IContainerBehaviour compilerConfig) : this(null, compilerConfig)
+		public Container(IContainerConfiguration compilerConfig) : this(null, compilerConfig)
 		{
 
 		}

@@ -24,18 +24,13 @@ namespace Rezolver
         /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class
         /// </summary>
-        /// <param name="autoRezolveIEnumerable">If true, then <see cref="IEnumerable{T}"/> will be automatically
-        /// resolved as a concatenation of all the <see cref="ITarget"/>s that are registered against a particular type.
-        /// 
-        /// Note - this parameter might be removed in a future version - you can achieve the same thing by using the
-        /// extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)"/></param>
-        public TargetContainer(bool autoRezolveIEnumerable = true)
+        /// <param name="configuration">The configuration to use for this container.  If not provided, then
+        /// the <see cref="DefaultConfiguration.TargetContainerConfig"/> in the <see cref="DefaultConfiguration"/>
+        /// class is used.
+        /// </param>
+        public TargetContainer(ITargetContainerConfiguration configuration = null)
         {
-            //TODO: Change this 
-            if (autoRezolveIEnumerable)
-            {
-                this.EnableEnumerableResolving();
-            }
+            (configuration ?? DefaultConfiguration.TargetContainerConfig).Configure(this);
         }
 
         /// <summary>
@@ -63,7 +58,7 @@ namespace Rezolver
             {
                 if (!TypeHelpers.IsGenericTypeDefinition(serviceType))
                     serviceType = serviceType.GetGenericTypeDefinition();
-
+                //TODO: consider changing this functionality to use a factory registered within the target container itself.
                 var created = CreateGenericTypeDefContainer(serviceType, target);
                 //bypass the generic type detection in our override of RegisterContainer.
                 RegisterContainerDirect(serviceType, created);

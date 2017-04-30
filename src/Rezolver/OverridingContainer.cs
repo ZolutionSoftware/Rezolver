@@ -42,9 +42,9 @@ namespace Rezolver
         /// their dependencies from this container.</param>
         /// <param name="targets">Optional. A specific target container to be used for this container's own registrations.</param>
         /// <param name="behaviour">Optional.  Behaviour which will be used to configure this container and its targets.  If not
-        /// provided then the <see cref="ContainerBehaviour.DefaultOverridingBehaviour"/> will be used.</param>
-        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour behaviour = null)
-            : base(targets, behaviour ?? ContainerBehaviour.DefaultOverridingBehaviour)
+        /// provided then the <see cref="DefaultConfiguration.OverridingContainerConfig"/> will be used.</param>
+        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerConfiguration behaviour = null)
+            : base(targets, behaviour ?? DefaultConfiguration.OverridingContainerConfig)
         {
             inner.MustNotBeNull("inner");
             _inner = inner;

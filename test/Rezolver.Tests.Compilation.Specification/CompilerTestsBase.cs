@@ -21,12 +21,12 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		/// <summary>
-		/// Gets the compiler configuration provider to be used to configure the container 
+		/// Gets the behaviour to be used to configure the compiler in the container 
 		/// returned by <see cref="CreateContainer(ITargetContainer, string)"/> and when performing
 		/// the tests of the <see cref="CompilerConfiguration.DefaultProvider"/> configuration provider.
 		/// </summary>
 		/// <param name="testName">Name of the test.</param>
-		protected abstract IContainerBehaviour GetCompilerConfigProvider([CallerMemberName]string testName = null);
+		protected abstract IContainerConfiguration GetCompilerBehaviour([CallerMemberName]string testName = null);
 
 		/// <summary>
 		/// Creates the target container for the test.
@@ -41,28 +41,28 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// Creates the container for the test or theory from the targets created by 
 		/// <see cref="CreateTargetContainer(string)"/>.
 		/// 
-		/// Your implementation of <see cref="GetCompilerConfigProvider(string)"/> is used to configure the container
+		/// Your implementation of <see cref="GetCompilerBehaviour(string)"/> is used to configure the container
 		/// on creation.
 		/// </summary>
 		/// <param name="targets">The targets to be used for the container.</param>
 		/// <param name="testName">Name of the test.</param>
 		protected virtual IContainer CreateContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
 		{
-			return new Container(targets, GetCompilerConfigProvider(testName));
+			return new Container(targets, GetCompilerBehaviour(testName));
 		}
 
 		/// <summary>
 		/// Creates a scoped container for the test or theory from the targets created by 
 		/// <see cref="CreateTargetContainer(string)"/>.
 		/// 
-		/// Your implementation of <see cref="GetCompilerConfigProvider(string)"/> is used to configure the container
+		/// Your implementation of <see cref="GetCompilerBehaviour(string)"/> is used to configure the container
 		/// on creation.
 		/// </summary>
 		/// <param name="targets">The targets.</param>
 		/// <param name="testName">Name of the test.</param>
 		protected virtual IScopedContainer CreateScopedContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
 		{
-			return new ScopedContainer(targets, GetCompilerConfigProvider(testName));
+			return new ScopedContainer(targets, GetCompilerBehaviour(testName));
 		}
 
 		/// <summary>

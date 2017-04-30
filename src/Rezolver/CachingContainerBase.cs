@@ -35,10 +35,10 @@ namespace Rezolver
         /// <param name="targets">Optional. Contains the targets that will be used to create the <see cref="ICompiledTarget"/>s that this container will use to produce objects
         /// when requested.
         /// 
-        /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, IContainerBehaviour)"/>) will be used.</param>
-        /// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="ContainerBehaviour.Default"/>
+        /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, IContainerConfiguration)"/>) will be used.</param>
+        /// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="DefaultConfiguration.ContainerConfig"/>
         /// behaviour collection will be used.</param>
-        protected CachingContainerBase(ITargetContainer targets = null, IContainerBehaviour behaviour = null)
+        protected CachingContainerBase(ITargetContainer targets = null, IContainerConfiguration behaviour = null)
 			: base(targets, behaviour)
 		{
 

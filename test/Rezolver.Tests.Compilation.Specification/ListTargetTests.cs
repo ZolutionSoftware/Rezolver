@@ -9,7 +9,7 @@ namespace Rezolver.Tests.Compilation.Specification
 {
     public partial class CompilerTestsBase
     {
-		//testing ListTarget directly and via the EnumemrableTargetContainer, which uses it
+		//testing ListTarget directly and via the EnumerableTargetContainer, which uses it
 
 		[Fact]
 		public void ListTarget_ListOfStrings()
@@ -78,9 +78,6 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void ListTarget_ImplicitEnumerable_Unregistered()
 		{
 			var targets = CreateTargetContainer();
-			//this extension method, and the behaviour of the EnumerableTargetContainer, will
-			//only enable it if it's not already enabled
-			targets.EnableEnumerableResolving();
 
 			var container = CreateContainer(targets);
 
@@ -93,7 +90,6 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void ListTarget_ImplicitEnumerable_SingleTarget()
 		{
 			var targets = CreateTargetContainer();
-			targets.EnableEnumerableResolving();
 			targets.RegisterObject("first");
 			var container = CreateContainer(targets);
 
@@ -106,7 +102,6 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void ListTarget_ImplicitEnumerable_MultipleTargets_OrderMustBePreserved()
 		{
 			var targets = CreateTargetContainer();
-			targets.EnableEnumerableResolving();
 			targets.RegisterObject("first");
 			targets.RegisterObject("second");
 			targets.RegisterObject("third");

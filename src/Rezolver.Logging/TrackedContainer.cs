@@ -28,7 +28,7 @@ namespace Rezolver.Logging
 		protected internal ICallTracker Tracker { get; private set; }
 
 
-		public TrackedContainer(ICallTracker logger, ITargetContainer builder = null, IContainerBehaviour compilerConfig = null) :
+		public TrackedContainer(ICallTracker logger, ITargetContainer builder = null, IContainerConfiguration compilerConfig = null) :
 		  base(targets: builder, behaviour: compilerConfig)
 		{
 			Tracker = logger;

@@ -68,18 +68,18 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void CompilerConfiguration_ShouldConfigureContainerAutomatically()
+		public void ContainerBehaviour_ShouldConfigureCompiler()
 		{
-			var container = new Container(GetCompilerConfigProvider());
+			var container = new Container(GetCompilerBehaviour());
 			Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
 			Assert.IsType<TCompileContextProvider>(container.Resolve<ICompileContextProvider>());
 		}
 
 		[Fact]
-		public void CompilerConfiguration_ShouldConfigureAllCompilersWhenUsedAsDefault()
+		public void ContainerBehaviour_ShouldConfigureCompilersForAllContainersWhenUsedAsDefault()
 		{
-			var previousProvider = CompilerConfiguration.DefaultProvider;
-			CompilerConfiguration.DefaultProvider = GetCompilerConfigProvider();
+			var previousProvider = DefaultConfiguration.ContainerConfig;
+			DefaultConfiguration.ContainerConfig = new ContainerConfigurationCollection(GetCompilerBehaviour());
 
 			try
 			{
@@ -92,7 +92,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			}
 			finally
 			{
-				CompilerConfiguration.DefaultProvider = previousProvider;
+				DefaultConfiguration.ContainerConfig = previousProvider;
 			}
 		}
 
