@@ -13,8 +13,7 @@ namespace Rezolver.Targets
 {
 	/// <summary>
 	/// This target produces arrays (<see cref="AsArray"/> = <c>true</c>) or lists (<see cref="AsArray"/> = <c>false</c>) whose 
-	/// individual items are built by ITarget instances.  Primarily used by the <see cref="EnumerableTargetContainer"/> and the configuration
-	/// framework, but can also be used by your code.
+	/// individual items are built by ITarget instances.
 	/// </summary>
 	/// <remarks>
 	/// The element type you feed on construction determines the type of array or the generic argument to List&lt;T&gt;.

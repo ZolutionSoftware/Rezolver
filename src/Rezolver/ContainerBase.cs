@@ -130,9 +130,6 @@ namespace Rezolver
         {
             return target is MissingCompiledTarget;
         }
-
-        private int _compileConfigured = 0;
-        private IContainerConfiguration _behaviour;
         
         /// <summary>
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
@@ -151,18 +148,37 @@ namespace Rezolver
         protected ITargetContainer Targets { get; }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="ContainerBase"/>, optionally initialising it with the given <paramref name="targets"/> and <paramref name="configuration"/>
+        /// Constructs a new instance of the <see cref="ContainerBase"/> class, optionally with the given <paramref name="targets"/>
+        /// as the source of registrations.
         /// </summary>
-        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> (and other operations)
-        /// is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, after construction, through the 
-        /// <see cref="Targets"/> property.</param>
-        /// <param name="configuration">Optional.  Configuration for this container.  If not provided then the <see cref="DefaultConfiguration.ContainerConfig"/>
-        /// collection will be used.</param>
-        protected ContainerBase(ITargetContainer targets = null, IContainerConfiguration configuration = null)
+        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> 
+        /// (and other operations) is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
+        /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
+        /// <remarks>This constructor will not use any <see cref="IContainerBehaviour"/> objects to perform post-creation initialisation
+        /// of the container.  If you want it to do so, then use the <see cref="ContainerBase.ContainerBase(IContainerBehaviour, ITargetContainer)"/>
+        /// constructor.</remarks>
+        protected ContainerBase(ITargetContainer targets = null)
         {
             Targets = targets ?? new TargetContainer();
-            _behaviour = configuration ?? DefaultConfiguration.ContainerConfig;
-            _behaviour.Configure(this, Targets);
+        }
+
+        /// <summary>
+        /// Constructs a new instance of the <see cref="ContainerBase"/> class, initialising it with the passed 
+        /// <paramref name="initialiser"/>, or the <see cref="GlobalBehaviours.ContainerBehaviour"/> if <paramref name="initialiser"/>
+        /// is <c>null</c>.  If passed, the <paramref name="targets"/> argument will be used as the source of registrations.
+        /// </summary>
+        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
+        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+        /// will be used.</param>
+        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> 
+        /// (and other operations) is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
+        /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
+        /// <remarks>To create an instance without using initialisers, use the 
+        /// <see cref="ContainerBase.ContainerBase(ITargetContainer)"/> constructor.</remarks>
+        protected ContainerBase(IContainerBehaviour initialiser, ITargetContainer targets = null)
+            : this(targets)
+        {
+            (initialiser ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
         }
 
         /// <summary>
@@ -294,9 +310,6 @@ namespace Rezolver
         /// </remarks> 
         protected virtual ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
         {
-            //if (Interlocked.CompareExchange(ref _compileConfigured, 1, 0) == 0)
-            //    _behaviour.Configure(this, Targets);
-
             ITarget target = Targets.Fetch(context.RequestedType);
 
             if (target == null)

@@ -191,3 +191,4 @@ test/Rezolver.Tests/_TestAssemblies
 /doc/Rezolver.Documentation/bower_components
 test/artifacts/
 src/artifacts/
+*.dgml

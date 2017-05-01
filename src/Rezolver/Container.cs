@@ -26,35 +26,48 @@ namespace Rezolver
 	/// </remarks>
 	public class Container : CachingContainerBase
 	{
-		/// <summary>
-		/// Constructs a new instance of the <see cref="Container"/> class.
-		/// </summary>
-		/// <param name="targets">Optional.  The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</param>
-		/// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="DefaultConfiguration.ContainerConfig"/>
-        /// behaviour collection will be used.</param>
-		public Container(ITargetContainer targets = null, IContainerConfiguration behaviour = null)
-			: base(targets, behaviour)
+        /// <summary>
+        /// Constructs a new instance of the <see cref="Container"/> class.
+        /// </summary>
+        /// <param name="targets">Optional.  The targets that will be used as the source of registrations for the container.
+        /// 
+        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
+        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
+        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+        /// will be used.</param>
+        public Container(ITargetContainer targets = null, IContainerBehaviour initialiser = null)
+            //note the use of the non-initialising base constructor.  It's important that we don't initialise
+            //till after all bases' constructors are done.
+			: base(targets)
 		{
-			
+            (initialiser ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
 		}
 
-		/// <summary>
-		/// Constructs a new instance of the <see cref="Container"/> class using the given target container and the
-		/// default compiler configuration (<see cref="CompilerConfiguration.DefaultProvider"/>).
-		/// </summary>
-		/// <param name="targets">The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</param>
-		public Container(ITargetContainer targets): this(targets, null)
-		{
+        /// <summary>
+        /// Constructs a new instance of the <see cref="Container"/> class, with a default new <see cref="TargetContainer"/>
+        /// as the <see cref="Targets"/>; using the passed <paramref name="initialiser"/> to initialise additional functionality.
+        /// </summary>
+        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
+        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+        /// will be used.</param>
+        public Container(IContainerBehaviour initialiser) :
+            this(targets: null, initialiser: initialiser)
+        {
 
-		}
+        }
 
-		/// <summary>
-		/// Constructs a new instance of the <see cref="Container"/> class using a default empty <see cref="ITargetContainer"/>
-		/// </summary>
-		/// <param name="compilerConfig">An object which will be used to configure this container and its targets to use a 
-		/// specific compilation strategy.  If <c>null</c>, then the <see cref="CompilerConfiguration.DefaultProvider"/> provider 
-		/// will be used.</param>
-		public Container(IContainerConfiguration compilerConfig) : this(null, compilerConfig)
+        /// <summary>
+        /// Constructs a new instance of the <see cref="Container"/> class using the given target container (or a new <see cref="TargetContainer"/>
+        /// if not provided).  No <see cref="IContainerBehaviour"/> will be used, leaving the deriving class free to do so.
+        /// </summary>
+        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the container.
+        /// 
+        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
+        /// <remarks>This constructor will not use any <see cref="IContainerBehaviour"/> objects to perform post-creation initialisation
+        /// of the container.  If you want it to do so, then use the <see cref="CachingContainerBase.CachingContainerBase(IContainerBehaviour, ITargetContainer)"/>
+        /// constructor.</remarks>
+        protected Container(ITargetContainer targets)
+            : base(targets)
 		{
 
 		}

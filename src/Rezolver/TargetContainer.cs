@@ -24,13 +24,22 @@ namespace Rezolver
         /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class
         /// </summary>
-        /// <param name="configuration">The configuration to use for this container.  If not provided, then
-        /// the <see cref="DefaultConfiguration.TargetContainerConfig"/> in the <see cref="DefaultConfiguration"/>
+        /// <param name="initialiser">The initialiser to use for this container.  If not provided, then
+        /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
         /// class is used.
         /// </param>
-        public TargetContainer(ITargetContainerConfiguration configuration = null)
+        public TargetContainer(ITargetContainerBehaviour initialiser = null)
         {
-            (configuration ?? DefaultConfiguration.TargetContainerConfig).Configure(this);
+            (initialiser ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="TargetContainer"/> class without using a <see cref="ITargetContainerBehaviour"/>
+        /// to perform additional initialisation on the instance.
+        /// </summary>
+        protected TargetContainer()
+        {
+
         }
 
         /// <summary>

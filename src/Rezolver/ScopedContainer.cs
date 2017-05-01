@@ -25,7 +25,7 @@ namespace Rezolver
 	/// Note that this class does NOT implement the <see cref="IContainerScope"/> interface because
 	/// the two interfaces are not actually compatible with each other, thanks to identical sets of extension methods.
 	/// </remarks>
-	public class ScopedContainer : Container, IScopedContainer, IDisposable
+	public sealed class ScopedContainer : Container, IScopedContainer, IDisposable
 	{
 		private readonly IContainerScope _scope;
 
@@ -43,16 +43,34 @@ namespace Rezolver
 			}
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ScopedContainer"/> class.
-		/// </summary>
-		/// <param name="targets">Optional.  The underlying target container to be used to resolve objects.</param>
-		/// <param name="compilerConfig">Optional.  The compiler configuration.</param>
-		public ScopedContainer(ITargetContainer targets = null, IContainerConfiguration compilerConfig = null)
-			: base(targets, compilerConfig)
+        /// <summary>
+        /// Constructs a new instance of the <see cref="ScopedContainer"/> class.
+        /// </summary>
+        /// <param name="targets">Optional.  The targets that will be used as the source of registrations for the container.
+        /// 
+        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
+        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
+        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+        /// will be used.</param>
+        public ScopedContainer(ITargetContainer targets = null, IContainerBehaviour initialiser = null)
+			: base(targets)
 		{
 			_scope = new ContainerScope(this);
+            (initialiser ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
 		}
+
+        /// <summary>
+        /// Constructs a new instance of the <see cref="ScopedContainer"/> class, with a default new <see cref="TargetContainer"/>
+        /// as the <see cref="Targets"/>; using the passed <paramref name="initialiser"/> to initialise additional functionality.
+        /// </summary>
+        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
+        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+        /// will be used.</param>
+        public ScopedContainer(IContainerBehaviour initialiser)
+            : this(targets: null, initialiser: initialiser)
+        {
+
+        }
 
 		#region IDisposable Support
 		private bool disposedValue = false; // To detect redundant calls
@@ -61,7 +79,7 @@ namespace Rezolver
 		/// Releases unmanaged and - optionally - managed resources.
 		/// </summary>
 		/// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-		protected virtual void Dispose(bool disposing)
+		protected void Dispose(bool disposing)
 		{
 			if (!disposedValue)
 			{

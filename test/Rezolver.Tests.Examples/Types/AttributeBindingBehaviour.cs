@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Examples.Types
 {
-	//<example>
-	/// <summary>
-	/// Class AttributeBindingBehaviour - we reuse the DefaultMemberBindingBehaviour class
-	/// because it has numerous virtual hooks we can use to customise behaviour, and takes care
-	/// of reflecting the target type for us.
-	/// </summary>
-	/// <seealso cref="Rezolver.DefaultMemberBindingBehaviour" />
-	public class AttributeBindingBehaviour : DefaultMemberBindingBehaviour
-	{
+    //<example>
+    /// <summary>
+    /// Class AttributeBindingBehaviour - we reuse the BindAllMembersBehaviour class
+    /// because it has numerous virtual hooks we can use to customise behaviour, and takes care
+    /// of reflecting the target type for us.
+    /// </summary>
+    /// <seealso cref="Rezolver.BindAllMembersBehaviour" />
+    public class AttributeBindingBehaviour : BindAllMembersBehaviour
+    {
 		protected override IEnumerable<FieldInfo> GetBindableFields(ICompileContext context, Type type)
 		{
 			//filter the fields to those which have an InjectAttribute defined

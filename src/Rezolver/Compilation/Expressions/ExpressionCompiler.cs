@@ -19,7 +19,8 @@ namespace Rezolver.Compilation.Expressions
 	/// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
 	/// <seealso cref="Rezolver.Compilation.ITargetCompiler" />
 	/// <remarks>This compiler is automatically configured as the default for all containers because the 
-	/// <see cref="ConfigProvider"/> from this class is set as the <see cref="CompilerConfiguration.DefaultProvider"/>.
+    /// <see cref="ExpressionCompilerInitialiser"/> singleton is registered in the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+    /// collection.
 	/// 
 	/// This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a 
 	/// given <see cref="ITarget" /> from the <see cref="IExpressionCompileContext" />.
@@ -28,10 +29,8 @@ namespace Rezolver.Compilation.Expressions
 	/// of the target - e.g. <see cref="Targets.ConstructorTarget" />.  If one cannot be found, it will then search for an <see cref="IExpressionBuilder" />
 	/// whose <see cref="IExpressionBuilder.CanBuild(ITarget)" /> function returns <c>true</c> for the given target.
 	/// 
-	/// With a correctly configured target dictionary (using the <see cref="ConfigProvider"/> which, as mentioned previously, is
-	/// used by default if no configuration provider is explicitly passed to the constructor of one of the <see cref="ContainerBase"/>
-	/// deriving types) this should resolve to an instance of the <see cref="ConstructorTargetBuilder" /> class, which implements
-	/// <c>IExpressionBuilder&lt;ConstructorTarget&gt;</c>.
+	/// With a correctly configured target dictionary this should resolve to an instance of the <see cref="ConstructorTargetBuilder" />
+    /// class, which implements <c>IExpressionBuilder&lt;ConstructorTarget&gt;</c>.
 	/// 
 	/// As such, the compiler can be extended to support extra target types and its existing expression builders can be replaced for customised
 	/// behaviour because they are all resolved from the <see cref="ITargetContainer" /> underpinning a particular <see cref="CompileContext" />.
@@ -56,7 +55,7 @@ namespace Rezolver.Compilation.Expressions
 	public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler, ICompileContextProvider
 	{
 		/// <summary>
-		/// Gets the default expression compiler which is registered by the <see cref="ExpressionCompilerConfiguration"/>
+		/// Gets the default expression compiler which is registered by the <see cref="ExpressionCompilerInitialiser"/>
 		/// </summary>
 		public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
 

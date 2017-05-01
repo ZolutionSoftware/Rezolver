@@ -13,13 +13,8 @@ using Rezolver.Targets;
 namespace Rezolver
 {
 	/// <summary>
-	/// WILL BE RENAMED TO AllMembersBindingBehaviour IN 1.2 - SEE https://github.com/ZolutionSoftware/Rezolver/issues/7 FOR MORE
-	/// 
-	/// The default implementation of <see cref="IMemberBindingBehaviour"/> when you are creating a
-	/// <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> and you want publicly writable
-	/// properties and public fields to be assigned values obtained from the container.
-	/// 
-	/// If you do not require properties or fields to be bound from the container, then use a null <see cref="IMemberBindingBehaviour"/>.
+	/// This implementation of <see cref="IMemberBindingBehaviour"/> binds all publicly writable
+	/// properties and public fields to values obtained from the container.
 	/// </summary>
 	/// <seealso cref="Rezolver.IMemberBindingBehaviour" />
 	/// <remarks>This is a stateless singleton accessible through the <see cref="Instance"/> static property.
@@ -28,16 +23,15 @@ namespace Rezolver
 	/// are numerous virtual methods which allow you to change which fields and/or properties are selected for binding,
 	/// as well as how those bindings are created.
 	/// 
-	/// The default behaviour is bind each member to a new <see cref="ResolvedTarget"/> whose 
+	/// The default behaviour is to bind each member to a new <see cref="ResolvedTarget"/> whose 
 	/// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
-	[Obsolete("This type will be renamed to AllMembersBindingBehaviour in 1.2 - see https://github.com/ZolutionSoftware/Rezolver/issues/7")]
-	public class DefaultMemberBindingBehaviour : IMemberBindingBehaviour
+	public class BindAllMembersBehaviour : IMemberBindingBehaviour
 	{
-		private static readonly Lazy<DefaultMemberBindingBehaviour> _instance = new Lazy<DefaultMemberBindingBehaviour>(() => new DefaultMemberBindingBehaviour());
+		private static readonly Lazy<BindAllMembersBehaviour> _instance = new Lazy<BindAllMembersBehaviour>(() => new BindAllMembersBehaviour());
 		/// <summary>
-		/// Gets the one and only instance of <see cref="DefaultMemberBindingBehaviour"/>
+		/// Gets the one and only instance of <see cref="BindAllMembersBehaviour"/>
 		/// </summary>
-		public static DefaultMemberBindingBehaviour Instance
+		public static BindAllMembersBehaviour Instance
 		{
 			get
 			{
@@ -46,9 +40,9 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Constructs a new instance of the <see cref="DefaultMemberBindingBehaviour"/> class.
+		/// Constructs a new instance of the <see cref="BindAllMembersBehaviour"/> class.
 		/// </summary>
-		protected DefaultMemberBindingBehaviour() { }
+		protected BindAllMembersBehaviour() { }
 
 		/// <summary>
 		/// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)"/>.

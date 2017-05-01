@@ -29,7 +29,7 @@ namespace Rezolver
     /// 
     /// <code>resolveContext.Container == compileContext.Container ? (execute compile-time target) : resolveContext.Container.Resolve(type)</code>
     /// </remarks>
-    public class OverridingContainer : Container
+    public sealed class OverridingContainer : Container
     {
         private readonly IContainer _inner;
 
@@ -40,11 +40,15 @@ namespace Rezolver
         /// by the new combined container's own targets will be sought from this container.  Equally, any targets in the base which
         /// are resolved when the overriding container is the root container for a resolve operation, will resolve
         /// their dependencies from this container.</param>
-        /// <param name="targets">Optional. A specific target container to be used for this container's own registrations.</param>
-        /// <param name="behaviour">Optional.  Behaviour which will be used to configure this container and its targets.  If not
-        /// provided then the <see cref="DefaultConfiguration.OverridingContainerConfig"/> will be used.</param>
-        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerConfiguration behaviour = null)
-            : base(targets, behaviour ?? DefaultConfiguration.OverridingContainerConfig)
+        /// <param name="targets">Optional. Contains the targets that will be used as the source of registrations for this container
+        /// (note - separate to those of the <paramref name="inner"/> container).
+        /// 
+        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
+        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
+        /// with additional functionality.  If not provided then the <see cref="GlobalBehaviours.OverridingContainerBehaviour"/> 
+        /// will be used.</param>
+        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour initialiser = null)
+            : base(targets)
         {
             inner.MustNotBeNull("inner");
             _inner = inner;
@@ -69,11 +73,6 @@ namespace Rezolver
         protected override ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
         {
             return _inner.FetchCompiled(context);
-        }
-
-        public override bool TryResolve(IResolveContext context, out object result)
-        {
-            return base.TryResolve(context, out result);
         }
     }
 }

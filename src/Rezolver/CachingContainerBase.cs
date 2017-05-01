@@ -23,26 +23,39 @@ namespace Rezolver
 	/// for a particular type is made, the resultant <see cref="ICompiledTarget"/> is fixed until the container is thrown away.</remarks>
 	public class CachingContainerBase : ContainerBase
 	{
-		// developer note: This used to be a c/current dictionary of lazy objects, but benchmarking and performance analysis showed
-		// that it was slower than simply allowing redundant compiled targets to be created and have one thead 'win'.
-		//private readonly ConcurrentDictionary<IResolveContext, Lazy<ICompiledTarget>> _entries 
-		//	= new ConcurrentDictionary<IResolveContext, Lazy<ICompiledTarget>>(ResolveContext.RequestedTypeComparer);
         private readonly ConcurrentDictionary<Type, Lazy<ICompiledTarget>> _entries
             = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
         /// <summary>
-        /// Initializes a new instance of the <see cref="CachingContainerBase"/> class.
+        /// Creates a new instance of the <see cref="CachingContainerBase"/> class.
         /// </summary>
-        /// <param name="targets">Optional. Contains the targets that will be used to create the <see cref="ICompiledTarget"/>s that this container will use to produce objects
-        /// when requested.
+        /// <param name="targets">Optional. Contains the targets that will be used as the source of registrations for the container.
         /// 
-        /// If not provided, then the base class' default (see <see cref="ContainerBase.ContainerBase(ITargetContainer, IContainerConfiguration)"/>) will be used.</param>
-        /// <param name="behaviour">Optional.  Configures various behaviours for this container.  If not provided then the <see cref="DefaultConfiguration.ContainerConfig"/>
-        /// behaviour collection will be used.</param>
-        protected CachingContainerBase(ITargetContainer targets = null, IContainerConfiguration behaviour = null)
-			: base(targets, behaviour)
+        /// If not provided, then a new <see cref="TargetContainer"/> will be created</param>
+        /// <remarks>This constructor will not use any <see cref="IContainerBehaviour"/> objects to perform post-creation initialisation
+        /// of the container.  If you want it to do so, then use the <see cref="CachingContainerBase.CachingContainerBase(IContainerBehaviour, ITargetContainer)"/>
+        /// constructor.</remarks>
+        protected CachingContainerBase(ITargetContainer targets = null)
+			: base(targets)
 		{
 
 		}
+
+        /// <summary>
+        /// Creates (and initialises) a new instance of the <see cref="CachingContainerBase"/> class.
+        /// </summary>
+        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
+        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+        /// will be used.</param>
+        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the container.
+        /// 
+        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
+        /// <remarks>To create an instance without using initialisers, use the 
+        /// <see cref="CachingContainerBase.CachingContainerBase(ITargetContainer)"/> constructor.</remarks>
+        protected CachingContainerBase(IContainerBehaviour initialiser, ITargetContainer targets = null)
+            : base(initialiser, targets)
+        {
+
+        }
 
 		/// <summary>
 		/// Obtains an <see cref="ICompiledTarget"/> for the given <paramref name="context"/>.

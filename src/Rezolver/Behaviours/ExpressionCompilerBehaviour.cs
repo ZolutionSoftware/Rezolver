@@ -4,24 +4,27 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Rezolver.Compilation.Expressions;
+using Rezolver.Compilation;
 
-namespace Rezolver.Compilation.Expressions
+namespace Rezolver.Behaviours
 {
 	/// <summary>
-	/// Implements the <see cref="IContainerConfiguration"/> to configure expression-based compilation for targets in containers.
+	/// Implements the <see cref="IContainerBehaviour"/> to configure expression-based compilation for targets in containers.
 	/// 
 	/// The implementation registers all the targets necessary to use the expression tree-based compilation provided by 
-	/// the <c>Rezolver.Compilation.Expressions</c> library.
+	/// the <see cref="ExpressionCompiler"/>
 	/// 
-	/// This behaviour is included in the <see cref="DefaultConfiguration.ContainerConfig"/> container behaviour collection by default.</summary>
-	public class ExpressionCompilerConfiguration : IContainerConfiguration
+	/// This is included in the default <see cref="GlobalBehaviours.ContainerBehaviour"/>, meaning that all containers
+    /// created without a specific behaviour will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
+	public class ExpressionCompilerBehaviour : IContainerBehaviour
 	{
         /// <summary>
-        /// The one and only instance of <see cref="ExpressionCompilerConfiguration"/>
+        /// The one and only instance of <see cref="ExpressionCompilerBehaviour"/>
         /// </summary>
-        public static IContainerConfiguration Instance { get; } = new ExpressionCompilerConfiguration();
+        public static IContainerBehaviour Instance { get; } = new ExpressionCompilerBehaviour();
 
-        private ExpressionCompilerConfiguration()
+        private ExpressionCompilerBehaviour()
         {
 
         }
@@ -39,7 +42,7 @@ namespace Rezolver.Compilation.Expressions
             // instances of that new behaviour type and this class will automatically use them.
 
 			var rezolverAssembly = TypeHelpers.GetAssembly(typeof(IContainer));
-			var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilerConfiguration));
+			var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilerBehaviour));
 			//loop through all target types defined in the Rezolver assembly which reside in the same
 			//namespace as one of the well-known targets and which are non-abstract classes
 			foreach (var type in rezolverAssembly.ExportedTypes.Where(t =>
@@ -77,7 +80,7 @@ namespace Rezolver.Compilation.Expressions
 		}
 
         /// <summary>
-		/// Implements the <see cref="IContainerConfiguration.Configure(IContainer, ITargetContainer)"/> method,
+		/// Implements the <see cref="IContainerBehaviour.Attach(IContainer, ITargetContainer)"/> method,
 		/// registering all the targets necessary to use expression-based compilation for all the standard targets
 		/// defined in the <c>Rezolver</c> core library.
 		/// </summary>
@@ -85,7 +88,7 @@ namespace Rezolver.Compilation.Expressions
 		/// <param name="targets">Required - the target container into which the various targets will be registered.</param>
 		/// <remarks>All targets registered by this function are <see cref="ObjectTarget"/> targets backed by concrete instances
 		/// of the various components (compiler etc).</remarks>
-		public virtual void Configure(IContainer container, ITargetContainer targets)
+		public virtual void Attach(IContainer container, ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
             //extract the singleton to its own behaviour

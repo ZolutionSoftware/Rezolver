@@ -78,8 +78,9 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void ContainerBehaviour_ShouldConfigureCompilersForAllContainersWhenUsedAsDefault()
 		{
-			var previousProvider = DefaultConfiguration.ContainerConfig;
-			DefaultConfiguration.ContainerConfig = new ContainerConfigurationCollection(GetCompilerBehaviour());
+			var previousProvider = GlobalBehaviours.ContainerBehaviour;
+            //replace the global container behaviour with a new one containing just this compiler behaviour
+			GlobalBehaviours.ContainerBehaviour = new ContainerBehaviourCollection(GetCompilerBehaviour());
 
 			try
 			{
@@ -92,7 +93,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			}
 			finally
 			{
-				DefaultConfiguration.ContainerConfig = previousProvider;
+				GlobalBehaviours.ContainerBehaviour = previousProvider;
 			}
 		}
 

@@ -26,7 +26,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// the tests of the <see cref="CompilerConfiguration.DefaultProvider"/> configuration provider.
 		/// </summary>
 		/// <param name="testName">Name of the test.</param>
-		protected abstract IContainerConfiguration GetCompilerBehaviour([CallerMemberName]string testName = null);
+		protected abstract IContainerBehaviour GetCompilerBehaviour([CallerMemberName]string testName = null);
 
 		/// <summary>
 		/// Creates the target container for the test.

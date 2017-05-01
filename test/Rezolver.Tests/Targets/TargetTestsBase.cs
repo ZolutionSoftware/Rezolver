@@ -35,20 +35,20 @@ namespace Rezolver.Tests.Targets
 			}
 		}
 
-		protected class TestCompilerConfigProvider : Dependant, IContainerConfiguration
+		protected class TestCompilerConfigProvider : Dependant, IContainerBehaviour
 		{
-			public void Configure(IContainer container, ITargetContainer targets)
+			public void Attach(IContainer container, ITargetContainer targets)
 			{
 				targets.RegisterObject<ICompileContextProvider>(new TestContextProvider());
 			}
 
-            public IEnumerable<IContainerConfiguration> ResolveDependencies(IEnumerable<IContainerConfiguration> behaviours)
+            public IEnumerable<IContainerBehaviour> ResolveDependencies(IEnumerable<IContainerBehaviour> behaviours)
             {
-                return Enumerable.Empty<IContainerConfiguration>();
+                return Enumerable.Empty<IContainerBehaviour>();
             }
         }
 
-		protected virtual IContainerConfiguration GetTestCompilerConfigProvider()
+		protected virtual IContainerBehaviour GetTestCompilerConfigProvider()
 		{
 			return new TestCompilerConfigProvider();
 		}
