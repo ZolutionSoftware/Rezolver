@@ -27,7 +27,7 @@ namespace Rezolver
     {
         private static ContainerBehaviourCollection _containerBehaviour = new ContainerBehaviourCollection();
         private static ContainerBehaviourCollection _overridingContainerBehaviour = new ContainerBehaviourCollection();
-        private static TargetContainerInitialiserCollection _targetContainerBehaviour = new TargetContainerInitialiserCollection();
+        private static TargetContainerBehaviourCollection _targetContainerBehaviour = new TargetContainerBehaviourCollection();
 
         /// <summary>
         /// Gets/sets the default behaviour to attach to all the <see cref="ContainerBase"/> 
@@ -84,7 +84,7 @@ namespace Rezolver
         /// 
         /// Caution: The collection is only thread-safe for multiple readers.
         /// </remarks>
-        public static TargetContainerInitialiserCollection TargetContainerBehaviour
+        public static TargetContainerBehaviourCollection TargetContainerBehaviour
         {
             get
             {
@@ -101,8 +101,10 @@ namespace Rezolver
             // automatic IEnumerable<> resolving is enabled by default
             TargetContainerBehaviour.AddAll(AutoEnumerableBehaviour.Instance);
 
-            // expression compiler is used by default
-            ContainerBehaviour.AddAll(ExpressionCompilerBehaviour.Instance);
+            // expression compiler is used by default,
+            // and members of classes are not bound by default.
+            ContainerBehaviour.AddAll(ExpressionCompilerBehaviour.Instance,
+                new DefaultMemberBindingBehaviour(BindNoMembersBehaviour.Instance));
         }
     }
 }

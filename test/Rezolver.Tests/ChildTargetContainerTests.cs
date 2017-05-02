@@ -13,7 +13,7 @@ namespace Rezolver.Tests
 		{
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				IChildTargetContainer builder = new ChildTargetContainer(null);
+				var builder = new ChildTargetContainer(null);
 			});
 		}
 
@@ -21,7 +21,7 @@ namespace Rezolver.Tests
 		public void MustCopyParent()
 		{
 			var parent = new TargetContainer();
-			IChildTargetContainer childBuilder = new ChildTargetContainer(parent);
+			var childBuilder = new ChildTargetContainer(parent);
 			Assert.Same(parent, childBuilder.Parent);
 		}
 

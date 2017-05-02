@@ -21,7 +21,7 @@ namespace Rezolver.Tests.Examples
                 Target.ForType<MyService1>(),
                 Target.ForType<MyService2>()
             );
-            container.RegisterType<Has2InjectableMembers>(BindAllMembersBehaviour.Instance);
+            container.RegisterType<Has2InjectableMembers>(MemberBindingBehaviour.BindAll);
 
             var result = container.Resolve<Has2InjectableMembers>();
 

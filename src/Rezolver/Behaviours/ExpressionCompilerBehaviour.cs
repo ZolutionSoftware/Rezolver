@@ -17,7 +17,7 @@ namespace Rezolver.Behaviours
 	/// 
 	/// This is included in the default <see cref="GlobalBehaviours.ContainerBehaviour"/>, meaning that all containers
     /// created without a specific behaviour will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
-	public class ExpressionCompilerBehaviour : IContainerBehaviour
+	public class ExpressionCompilerBehaviour : IContainerBehaviour<ITargetCompiler>
 	{
         /// <summary>
         /// The one and only instance of <see cref="ExpressionCompilerBehaviour"/>
@@ -99,7 +99,6 @@ namespace Rezolver.Behaviours
             //if you're looking to re-enter the compilation process for a particular
             //target - then you should request our compiler via the type IExpressionCompiler 
             targets.RegisterObject<IExpressionCompiler>(ExpressionCompiler.Default);
-            targets.RegisterObject<ICompileContextProvider>(ExpressionCompiler.Default);
             
             // TODO: Consider moving this next part into its own behaviour on which others can depend so that they 
             // can augment and decorate the standard builders.

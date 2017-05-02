@@ -11,6 +11,10 @@ namespace Rezolver.Compilation
 	/// <summary>
 	/// Tracks state and provides services during the compilation phase in which <see cref="ITarget"/> targets
 	/// are compiled into <see cref="ICompiledTarget"/> targets, which produce actual instances of objects.
+    /// 
+    /// Instances of this interface are created by calling the 
+    /// <see cref="ITargetCompiler.CreateContext(IResolveContext, ITargetContainer)"/> method of the <see cref="ITargetCompiler"/>
+    /// which is registered in a container.
 	/// </summary>
 	/// <seealso cref="Rezolver.ITargetContainer" />
 	/// <remarks>

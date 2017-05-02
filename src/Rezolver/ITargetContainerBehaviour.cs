@@ -11,13 +11,12 @@ namespace Rezolver
     /// objects in the target container passed to <see cref="Attach(ITargetContainer)"/>.
     /// 
     /// While similar to <see cref="IContainerBehaviour"/>, this is specifically intended to be used when
-    /// creating any <see cref="ITargetContainer"/>; whereas the other interface is for when a container is created
-    /// which also uses <see cref="ITargetContainer"/>.  Usually, behaviours that are implemented through this
+    /// creating any <see cref="ITargetContainer"/>.  Behaviours that are implemented through this
     /// interface are typically used to customise how the underlying <see cref="ITarget"/> registrations are stored
     /// and retrieved in the target container.
     /// 
     /// Functionality such as enumerable resolving, and the default <see cref="IMemberBindingBehaviour"/> to be
-    /// used by <see cref="ConstructorTarget"/> are configured by instances of this interface.</remarks>
+    /// used by <see cref="ConstructorTarget"/> is configured by instances of this interface.</remarks>
     /// <seealso cref="GlobalBehaviours.TargetContainerBehaviour"/>
     public interface ITargetContainerBehaviour
     {

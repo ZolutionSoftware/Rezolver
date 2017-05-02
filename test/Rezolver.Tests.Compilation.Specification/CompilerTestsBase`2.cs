@@ -10,9 +10,8 @@ using Xunit.Abstractions;
 
 namespace Rezolver.Tests.Compilation.Specification
 {
-	public abstract partial class CompilerTestsBase<TCompiler, TCompileContextProvider> : CompilerTestsBase
+	public abstract partial class CompilerTestsBase<TCompiler> : CompilerTestsBase
 		where TCompiler : ITargetCompiler
-		where TCompileContextProvider : ICompileContextProvider
 	{
 		protected CompilerTestsBase(ITestOutputHelper output)
 			: base(output)

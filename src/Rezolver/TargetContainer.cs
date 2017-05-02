@@ -18,24 +18,33 @@ namespace Rezolver
     /// <remarks>This is the type used by default for the <see cref="ContainerBase.Targets"/> of all
     /// the standard containers in the core framework, e.g. <see cref="Container"/>, 
     /// <see cref="ScopedContainer"/> etc, when you don't supply an instance of an 
-    /// <see cref="ITargetContainer"/> explicitly on construction.</remarks>
+    /// <see cref="ITargetContainer"/> explicitly on construction.
+    /// 
+    /// Although you can derive from this class to extend its functionality; it's also possible to 
+    /// extend it via behaviours (see <see cref="ITargetContainerBehaviour"/>) - which is how, for example,
+    /// the framework enables automatic enumerable resolving (see <see cref="Behaviours.AutoEnumerableBehaviour"/>).
+    /// 
+    /// For its default behaviour set, this class uses the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in
+    /// the <see cref="GlobalBehaviours"/> class.</remarks>
     public class TargetContainer : TargetDictionaryContainer
     {
         /// <summary>
-        /// Constructs a new instance of the <see cref="TargetContainer"/> class
+        /// Constructs a new instance of the <see cref="TargetContainer"/> class.
         /// </summary>
-        /// <param name="initialiser">The initialiser to use for this container.  If not provided, then
+        /// <param name="behaviour">Optional.  The behaviour to attach to this target container.  If not provided, then
         /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
-        /// class is used.
+        /// class is used by default.
         /// </param>
-        public TargetContainer(ITargetContainerBehaviour initialiser = null)
+        public TargetContainer(ITargetContainerBehaviour behaviour = null)
         {
-            (initialiser ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+            (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="TargetContainer"/> class without using a <see cref="ITargetContainerBehaviour"/>
-        /// to perform additional initialisation on the instance.
+        /// Creates a new instance of the <see cref="TargetContainer"/> class without attaching any
+        /// <see cref="ITargetContainerBehaviour"/> to it.  This is desirable for derived types as behaviours typically
+        /// will invoke methods on this target container which are declared virtual and which are, therefore, 
+        /// unsafe to be called during construction.
         /// </summary>
         protected TargetContainer()
         {

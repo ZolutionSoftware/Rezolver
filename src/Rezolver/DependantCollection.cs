@@ -6,7 +6,8 @@ using System.Linq;
 namespace Rezolver
 {
     /// <summary>
-    /// A collection of objects in which one or more IDependant objects can be dependent on others in the same collection.
+    /// A collection of objects in which one or more objects can be dependent on others in the 
+    /// same collection.
     /// </summary>
     /// <typeparam name="T">The type of object in the collection</typeparam>
     /// <remarks>
@@ -40,8 +41,8 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Gets an enumerable which will return the items in the collection in order of least dependant
-        /// to most dependant.  Therefore, if item 1 depends on item 2, this enumerable will return item 2
+        /// Gets an enumerable which will return the items in the collection in order of least dependent
+        /// to most dependent.  Therefore, if item 1 depends on item 2, this enumerable will return item 2
         /// first, followed by item 1.
         /// 
         /// Items which have no dependencies within the same collection will be sorted earlier in the collection.
@@ -78,6 +79,50 @@ namespace Rezolver
                 return toReturn;
             }
             return null;
+        }
+
+        /// <summary>
+        /// Replaces the <paramref name="original"/> with the <paramref name="replacement"/>, or
+        /// adds the <paramref name="replacement"/> to the end of the collection if the <paramref name="original"/>
+        /// does not exist.
+        /// </summary>
+        /// <param name="original">The item to be replaced.  If found, it will be swapped with 
+        /// the <paramref name="replacement"/>.</param>
+        /// <param name="replacement">The item to be swapped with <paramref name="original"/> or added to
+        /// the end of the collection if the <paramref name="original"/> can't be found.</param>
+        public void ReplaceOrAdd(T original, T replacement)
+        {
+            var result = Replace(original, replacement);
+            if (result == null)
+                Add(replacement);
+        }
+
+        /// <summary>
+        /// Replaces any objects of the type <typeparamref name="TOriginal"/> with the single object
+        /// passed for the <paramref name="replacement"/> argument.  Note - the replacement will be inserted at the 
+        /// first index at which a matching object was found.  If none is found, then the replacement will be added to
+        /// the end of the collection.
+        /// </summary>
+        /// <typeparam name="TOriginal">The type of object to be removed.  Note that any object equal to, derived from,
+        /// or which implements the type will be removed.</typeparam>
+        /// <param name="replacement">The object to be added to the collection at the position where the first object 
+        /// of the type <typeparamref name="TOriginal"/> is found.  Note that all will still be removed.</param>
+        public void ReplaceAnyOrAdd<TOriginal>(T replacement)
+            where TOriginal : T
+        {
+            var toRemoveIndices = this.Select((o, i) => new { obj = o, index = i })
+                .Where(o => o.obj is TOriginal)
+                .ToArray();
+            var insertIndex = -1;
+            for(var f = toRemoveIndices.Length; f > 0; f--)
+            {
+                insertIndex = toRemoveIndices[f - 1].index;
+                RemoveAt(insertIndex);
+            }
+            if (insertIndex < 0 || insertIndex == Count)
+                Add(replacement);
+            else
+                Insert(insertIndex, replacement);
         }
 
         /// <summary>

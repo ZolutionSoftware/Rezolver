@@ -29,7 +29,7 @@ namespace Rezolver.Logging
 
 
 		public TrackedContainer(ICallTracker logger, ITargetContainer builder = null, IContainerBehaviour compilerConfig = null) :
-		  base(targets: builder, initialiser: compilerConfig)
+		  base(targets: builder, behaviour: compilerConfig)
 		{
 			Tracker = logger;
 		}

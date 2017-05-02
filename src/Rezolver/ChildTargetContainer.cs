@@ -13,30 +13,35 @@ namespace Rezolver
     /// (the <see cref="Parent" />).
     /// </summary>
     /// <seealso cref="Rezolver.TargetContainer" />
-    /// <seealso cref="Rezolver.IChildTargetContainer" />
-    /// <remarks>When it's looking to find an entry for a type, if it
-    /// cannot find one within its own registrations, it will forward the call on to
+    /// <remarks>When this class searches for an entry for a type, if it
+    /// cannot find one within its own registrations, it falls back to the registrations of
     /// its ancestors (starting with its <see cref="Parent" />).
+    /// 
     /// As a result, any dependencies required by registrations in this container can be provided by
     /// any ancestor.
-    /// Fallback logic in the <see cref="Fetch(Type)" />
-    /// is triggered by the <see cref="ITarget.UseFallback" /> property.</remarks>
-    public sealed class ChildTargetContainer : TargetContainer, IChildTargetContainer
+    /// 
+    /// This fallback logic in the <see cref="Fetch(Type)" /> is triggered by the 
+    /// <see cref="ITarget.UseFallback" /> property.</remarks>
+    public sealed class ChildTargetContainer : TargetContainer
     { 
         private readonly ITargetContainer _parent;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChildTargetContainer"/> class.
         /// </summary>
-        /// <param name="parent">Required. The parent target container</param>
-        /// <param name="initialiser">Optional.  </param>
-        public ChildTargetContainer(ITargetContainer parent, ITargetContainerBehaviour initialiser = null)
+        /// <param name="parent">Required. The parent target container.</param>
+        /// <param name="behaviour">Optional.  The behaviour to attach to this target container.  If not provided, then
+        /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
+        /// class is used by default.
+        /// </param>
+        public ChildTargetContainer(ITargetContainer parent, ITargetContainerBehaviour behaviour = null)
                 : base()
         {
+            //note above - the class uses the non-behaviour constructor of TargetContainer to ensure that 
             parent.MustNotBeNull(nameof(parent));
             _parent = parent;
 
-            (initialiser ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+            (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace Rezolver
             var result = base.Fetch(type);
             //ascend the tree of target containers looking for a type match.
             if ((result == null || result.UseFallback))
-                return _parent?.Fetch(type);
+                return _parent.Fetch(type);
             return result;
         }
 
@@ -76,7 +81,7 @@ namespace Rezolver
         {
             var result = base.FetchAll(type);
             if (result == null || !result.Any())
-                return _parent?.FetchAll(type);
+                return _parent.FetchAll(type);
             return result;
         }
     }

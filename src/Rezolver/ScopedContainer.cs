@@ -46,28 +46,30 @@ namespace Rezolver
         /// <summary>
         /// Constructs a new instance of the <see cref="ScopedContainer"/> class.
         /// </summary>
-        /// <param name="targets">Optional.  The targets that will be used as the source of registrations for the container.
+        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the 
+        /// container, ultimately being passed to the <see cref="Targets"/> property.
         /// 
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
-        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
-        /// will be used.</param>
-        public ScopedContainer(ITargetContainer targets = null, IContainerBehaviour initialiser = null)
+        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
+        /// <see cref="ContainerBase.Targets"/>). If not provided, then the global 
+        /// <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
+        public ScopedContainer(ITargetContainer targets = null, IContainerBehaviour behaviour = null)
 			: base(targets)
 		{
 			_scope = new ContainerScope(this);
-            (initialiser ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
+            (behaviour ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
 		}
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="ScopedContainer"/> class, with a default new <see cref="TargetContainer"/>
-        /// as the <see cref="Targets"/>; using the passed <paramref name="initialiser"/> to initialise additional functionality.
+        /// Constructs a new instance of the <see cref="ScopedContainer"/> class, with a default new 
+        /// <see cref="TargetContainer"/> as the <see cref="ContainerBase.Targets"/>; using the passed 
+        /// <paramref name="behaviour"/> to initialise additional functionality.
         /// </summary>
-        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
-        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
-        /// will be used.</param>
-        public ScopedContainer(IContainerBehaviour initialiser)
-            : this(targets: null, initialiser: initialiser)
+        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
+        /// <see cref="ContainerBase.Targets"/>). If not provided, then the global 
+        /// <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
+        public ScopedContainer(IContainerBehaviour behaviour)
+            : this(targets: null, behaviour: behaviour)
         {
 
         }

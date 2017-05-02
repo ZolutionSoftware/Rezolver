@@ -44,10 +44,10 @@ namespace Rezolver
         /// (note - separate to those of the <paramref name="inner"/> container).
         /// 
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
-        /// with additional functionality.  If not provided then the <see cref="GlobalBehaviours.OverridingContainerBehaviour"/> 
-        /// will be used.</param>
-        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour initialiser = null)
+        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
+        /// <see cref="Targets"/>).  If not provided, then the global 
+        /// <see cref="GlobalBehaviours.OverridingContainerBehaviour"/> will be used.</param>
+        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour behaviour = null)
             : base(targets)
         {
             inner.MustNotBeNull("inner");
@@ -58,7 +58,8 @@ namespace Rezolver
         /// Called to determine if this container is able to resolve the type specified in the passed <paramref name="context"/>.
         /// </summary>
         /// <param name="context">Required.  The <see cref="IResolveContext"/>.</param>
-        /// <returns></returns>
+        /// <returns><c>true</c> if either this container or the inner container can resolve the 
+        /// <see cref="IResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
         public override bool CanResolve(IResolveContext context)
         {
             return base.CanResolve(context) || _inner.CanResolve(context);

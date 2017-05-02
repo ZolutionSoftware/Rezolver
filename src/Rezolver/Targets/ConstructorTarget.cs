@@ -69,10 +69,15 @@ namespace Rezolver.Targets
 			}
 		}
 
-		/// <summary>
-		/// Gets the member binding behaviour to be used when <see cref="Bind(ICompileContext)"/> is called.
-		/// </summary>
-		public IMemberBindingBehaviour MemberBindingBehaviour
+        /// <summary>
+        /// Gets the member binding behaviour to be used when <see cref="Bind(ICompileContext)"/> is called.
+        /// 
+        /// If <c>null</c>, then the binding behaviour will be resolved from the container present in the 
+        /// <see cref="ICompileContext.ResolveContext"/> of the <see cref="ICompileContext"/> passed to the
+        /// <see cref="Bind(ICompileContext)"/> method.  If it's still <c>null</c>, then no member binding behaviour
+        /// will be used.
+        /// </summary>
+        public IMemberBindingBehaviour MemberBindingBehaviour
 		{
 			get; private set;
 		}
@@ -107,8 +112,9 @@ namespace Rezolver.Targets
 		/// <param name="type">Required.  The type whose constructor is to bound.</param>
 		/// <param name="namedArgs">Optional.  The named arguments which will be passed to, and used to find, the best-matched constructor.  
 		/// These are taken into account when the constructor is sought - with the constructor containing the most matched parameters matched being selected.</param>
-		/// <param name="memberBinding">Optional.  If provided, can be used to select properties which are to be
-		/// initialised before the new instance is returned.</param>
+		/// <param name="memberBinding">Optional.  If provided, can be used to select properties and/or fields which are to be
+		/// initialised before the new instance is returned.  If not provided, then the <see cref="Bind(ICompileContext)"/>
+        /// method attempts to resolve it from the container and, if it can't, then no member binding is performed.</param>
 		/// <remarks>To compile this target, a <see cref="Compilation.ITargetCompiler"/> first calls the <see cref="Bind(ICompileContext)"/> method
 		/// to discover the constructor to be executed, along with the final set of arguments to be provided to it (see <see cref="ConstructorBinding"/>).
 		/// 
@@ -124,35 +130,24 @@ namespace Rezolver.Targets
 			type.MustNotBeNull(nameof(type));
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ConstructorTarget"/> class bound in advance to a specific constructor.
-		/// </summary>
-		/// <param name="ctor">Required - the constructor that is to be bound.  The <see cref="DeclaredType"/> of the new instance
-		/// will be set to the <see cref="MemberInfo.DeclaringType"/> of this object.</param>
-		/// <param name="parameterBindings">Optional.  Specific bindings for the parameters of the given <paramref name="ctor"/>
-		/// which should be used during code generation.  Note that this array can contain fewer or more entries than there are
-		/// parameters on the <paramref name="ctor"/>.  Any missing bindings will be automatically generated when <see cref="Bind(ICompileContext)"/>
-		/// is called.</param>
-		/// <param name="memberBinding">Optional.  If provided, can be used to select properties which are to be
-		/// initialised before the new instance is returned.</param>
-		public ConstructorTarget(ConstructorInfo ctor, ParameterBinding[] parameterBindings = null, IMemberBindingBehaviour memberBinding = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConstructorTarget"/> class bound in advance to a specific constructor.
+        /// </summary>
+        /// <param name="ctor">Required - the constructor that is to be bound.  The <see cref="DeclaredType"/> of the new instance
+        /// will be set to the <see cref="MemberInfo.DeclaringType"/> of this object.</param>
+        /// <param name="parameterBindings">Optional.  Specific bindings for the parameters of the given <paramref name="ctor"/>
+        /// which should be used during code generation.  Note that this array can contain fewer or more entries than there are
+        /// parameters on the <paramref name="ctor"/>.  Any missing bindings will be automatically generated when <see cref="Bind(ICompileContext)"/>
+        /// is called.</param>
+        /// <param name="memberBinding">Optional.  If provided, can be used to select properties and/or fields which are to be
+        /// initialised before the new instance is returned.  If not provided, then the <see cref="Bind(ICompileContext)"/>
+        /// method attempts to resolve it from the container and, if it can't, then no member binding is performed.</param>
+        public ConstructorTarget(ConstructorInfo ctor, ParameterBinding[] parameterBindings = null, IMemberBindingBehaviour memberBinding = null)
             : this(null, ctor, memberBinding, parameterBindings, null)
 		{
 			ctor.MustNotBeNull(nameof(ctor));
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ConstructorTarget"/> class.
-		/// 
-		/// Used only by other constructors and some factory methods.
-		/// 
-		/// Has no argument-checking logic.
-		/// </summary>
-		/// <param name="type">The type.</param>
-		/// <param name="ctor">The ctor.</param>
-		/// <param name="memberBinding">The property binding behaviour.</param>
-		/// <param name="parameterBindings">The parameter bindings.</param>
-		/// <param name="suppliedArgs">The supplied arguments.</param>
 		private ConstructorTarget(Type type,
 			ConstructorInfo ctor,
 			IMemberBindingBehaviour memberBinding,
@@ -181,6 +176,15 @@ namespace Rezolver.Targets
 		/// <exception cref="AmbiguousMatchException">If more than one constructor can be bound with an equal amount of all-resolved
 		/// arguments or default arguments.</exception>
 		/// <exception cref="InvalidOperationException">If no sutiable constructors can be found.</exception>
+        /// <remarks>All implementations of <see cref="ITargetCompiler"/> should first use this method to find
+        /// the constructor to be called, and the arguments that are to be supplied to it.
+        /// 
+        /// This method also builds a list of <see cref="MemberBinding"/>s for properties or fields on the type
+        /// which are to be set with values from the container after construction.  The exact behaviour of this is
+        /// controlled by the behaviour set on the <see cref="MemberBindingBehaviour"/> property, or, if <c>null</c>
+        /// then the method attempts to resolve an <see cref="IMemberBindingBehaviour"/> from the 
+        /// <see cref="IResolveContext.Container"/> of the <see cref="IResolveContext"/> set on the 
+        /// <see cref="ICompileContext.ResolveContext"/> of the passed <paramref name="context"/>.</remarks>
 		public ConstructorBinding Bind(ICompileContext context)
 		{
 			ConstructorInfo ctor = _ctor;
@@ -275,6 +279,11 @@ namespace Rezolver.Targets
 			}
 			else
 				boundArgs = _parameterBindings;
+
+            //use either the member binding behaviour that was passed on construction, 
+            var memberBindingBehaviour = MemberBindingBehaviour;
+            if (memberBindingBehaviour == null)
+                context.ResolveContext.TryResolve(out memberBindingBehaviour);
 
 			return new ConstructorBinding(ctor, boundArgs, MemberBindingBehaviour?.GetMemberBindings(context, DeclaredType));
 		}

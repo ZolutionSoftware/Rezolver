@@ -19,18 +19,22 @@ namespace Rezolver
     /// </summary>
     /// <remarks>This class also implements <see cref="ITargetContainer"/> by proxying the <see cref="Targets"/> that are
     /// provided to it on construction (or created anew if not supplied).  All of those interface methods are implemented 
-    /// explicitly except the <see cref="Register(ITarget, Type)"/> method,  which is available through the class' public API.
+    /// explicitly except the <see cref="Register(ITarget, Type)"/> method,  which is available through the class' public 
+    /// API.
     /// 
-    /// Note: <see cref="IContainer"/>s are generally not expected to implement <see cref="ITargetContainer"/>, and the framework
-    /// will never assume they do.
+    /// Note: <see cref="IContainer"/>s are generally not expected to implement <see cref="ITargetContainer"/>, and the 
+    /// framework will never assume they do.
     /// 
-    /// The reason this class does is to make it easier to create a new container and to register targets into it without having to worry about
-    /// managing a separate <see cref="ITargetContainer"/> instance in your application root - because all the registration extension methods defined
-    /// in classes like <see cref="RegisterTypeTargetContainerExtensions"/>, <see cref="SingletonTargetContainerExtensions"/> plus many more
-    /// will be available to developers in code which has a reference to this class, or one derived from it.
+    /// The reason this class does is to make it easier to create a new container and to register targets into it without 
+    /// having to worry about managing a separate <see cref="ITargetContainer"/> instance in your application root - 
+    /// because all the registration extension methods defined in classes like 
+    /// <see cref="RegisterTypeTargetContainerExtensions"/>, <see cref="SingletonTargetContainerExtensions"/> (plus many 
+    /// more) will be available to developers in code which has a reference to this class, or one derived from it.
     /// 
-    /// Note also that calling <see cref="ITargetContainer.CombineWith(ITargetContainer, Type)"/> on an instance of this type will always
-    /// cause a <see cref="NotSupportedException"/> to be thrown.
+    /// Note also that calling <see cref="ITargetContainer.CombineWith(ITargetContainer, Type)"/> on an instance of this 
+    /// type will always cause a <see cref="NotSupportedException"/> to be thrown, thus preventing containers from being 
+    /// registered as sub target containers within an <see cref="ITargetContainer"/> via its 
+    /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method.
     /// </remarks>
     public class ContainerBase : IContainer, ITargetContainer
     {
@@ -113,8 +117,10 @@ namespace Rezolver
           ConcurrentDictionary<Type, Lazy<ICompiledTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
 
         /// <summary>
-        /// Gets an <see cref="ICompiledTarget"/> for the given type which will always throw an <see cref="InvalidOperationException"/> whenever its
-        /// <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method is called.  Use this when you can't resolve a target for a type.
+        /// Gets an <see cref="ICompiledTarget"/> for the given type which will always throw an 
+        /// <see cref="InvalidOperationException"/> whenever its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> 
+        /// method is called.  Use this when you can't resolve a target for a type to ensure that you always return an
+        /// <see cref="ICompiledTarget"/> for it (which is required).
         /// </summary>
         /// <param name="type">The type for which you wish to create a missing target.</param>
         protected static ICompiledTarget GetMissingTarget(Type type)
@@ -137,55 +143,74 @@ namespace Rezolver
         /// </summary>
         /// <remarks>Notes to implementers: This property must NEVER be null.
         /// 
-        /// This class implements the <see cref="ITargetContainer"/> interface by wrapping around this instance so that an application can create 
-        /// an instance of <see cref="ContainerBase"/> and directly register targets into it; rather than having to create and setup the target container
-        /// first.
+        /// This class implements the <see cref="ITargetContainer"/> interface by wrapping around this instance so that 
+        /// an application can create an instance of <see cref="ContainerBase"/> and directly register targets into it; 
+        /// rather than having to create and setup the target container first.
         /// 
-        /// You can add registrations to this target container at any point in the lifetime of any <see cref="ContainerBase"/> instances which are attached
-        /// to it.  In reality, however, if any <see cref="Resolve(IResolveContext)"/> operations have been performed prior to adding more registrations,
-        /// then there's no guarantee that new dependencies will be picked up - especially if the <see cref="CachingContainerBase"/> is being used as your
-        /// application's container (which it nearly always will be).</remarks>
+        /// You can add registrations to this target container at any point in the lifetime of any 
+        /// <see cref="ContainerBase"/> instances which are attached to it. 
+        /// 
+        /// In reality, however, if any <see cref="Resolve(IResolveContext)"/> operations have been performed prior to 
+        /// adding more registrations, then there's no guarantee that new dependencies will be picked up - especially 
+        /// if the <see cref="CachingContainerBase"/> is being used as your application's container (which it nearly 
+        /// always will be).</remarks>
         protected ITargetContainer Targets { get; }
 
+        private Lazy<ITargetCompiler> _compiler;
+
+        private ContainerBase()
+        {
+            //only the compiler and compile context provider fromm this container are used by this container.
+            _compiler = new Lazy<ITargetCompiler>(() =>
+            {
+                if (!this.TryResolve(out ITargetCompiler compiler))
+                    throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler and ICompileContextProvider as constant services");
+                return compiler;
+            });
+        }
+
         /// <summary>
-        /// Constructs a new instance of the <see cref="ContainerBase"/> class, optionally with the given <paramref name="targets"/>
-        /// as the source of registrations.
+        /// Constructs a new instance of the <see cref="ContainerBase"/> class.
         /// </summary>
-        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> 
-        /// (and other operations) is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
-        /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
-        /// <remarks>This constructor will not use any <see cref="IContainerBehaviour"/> objects to perform post-creation initialisation
-        /// of the container.  If you want it to do so, then use the <see cref="ContainerBase.ContainerBase(IContainerBehaviour, ITargetContainer)"/>
-        /// constructor.</remarks>
+        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup 
+        /// when <see cref="Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new 
+        /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, 
+        /// after construction, through the <see cref="Targets"/> property.</param>
+        /// <remarks>This constructor does not attach any <see cref="IContainerBehaviour"/> behaviours, because behaviours 
+        /// typically call methods which are declared virtual on this class - which could be unsafe.
+        /// 
+        /// If this does not apply to your derived class (which is unlikely) - use the 
+        /// <see cref="ContainerBase.ContainerBase(IContainerBehaviour, ITargetContainer)"/> constructor.</remarks>
         protected ContainerBase(ITargetContainer targets = null)
+            : this()
         {
             Targets = targets ?? new TargetContainer();
         }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="ContainerBase"/> class, initialising it with the passed 
-        /// <paramref name="initialiser"/>, or the <see cref="GlobalBehaviours.ContainerBehaviour"/> if <paramref name="initialiser"/>
-        /// is <c>null</c>.  If passed, the <paramref name="targets"/> argument will be used as the source of registrations.
+        /// Creates a new instance of the <see cref="ContainerBase"/> class.
         /// </summary>
-        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
-        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
+        /// <see cref="Targets"/>). If not provided, then the global <see cref="GlobalBehaviours.ContainerBehaviour"/> 
         /// will be used.</param>
-        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> 
-        /// (and other operations) is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
-        /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
-        /// <remarks>To create an instance without using initialisers, use the 
+        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the container,
+        /// ultimately being passed to the <see cref="Targets"/> property.
+        /// 
+        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
+        /// <remarks>To create an instance without attaching behaviours, use the 
         /// <see cref="ContainerBase.ContainerBase(ITargetContainer)"/> constructor.</remarks>
-        protected ContainerBase(IContainerBehaviour initialiser, ITargetContainer targets = null)
+        protected ContainerBase(IContainerBehaviour behaviour, ITargetContainer targets = null)
             : this(targets)
         {
-            (initialiser ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
+            (behaviour ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
         }
 
         /// <summary>
         /// Implementation of the <see cref="IContainer.Resolve(IResolveContext)"/> method.
         /// 
-        /// Obtains an <see cref="ICompiledTarget"/> by calling the <see cref="GetCompiledRezolveTarget(IResolveContext)"/> method, and
-        /// then immediately calls its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method, returning the result.
+        /// Obtains an <see cref="ICompiledTarget"/> by calling the 
+        /// <see cref="GetCompiledRezolveTarget(IResolveContext)"/> method, and then immediately calls its 
+        /// <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method, returning the result.
         /// </summary>
         /// <param name="context">The context containing the type that's requested, any active scope and so on.</param>
         /// <returns></returns>
@@ -202,7 +227,8 @@ namespace Rezolver
         /// a reference to the resolved object.
         /// </summary>
         /// <param name="context">The context containing the type that's requested, any active scope and so on.</param>
-        /// <param name="result">Receives a reference to the object that was resolved, if successful, or <c>null</c> if not.</param>
+        /// <param name="result">Receives a reference to the object that was resolved, if successful, or <c>null</c> 
+        /// if not.</param>
         /// <returns>A boolean indicating whether the operation completed successfully.</returns>
         public virtual bool TryResolve(IResolveContext context, out object result)
         {
@@ -236,9 +262,10 @@ namespace Rezolver
         /// already defined in the <see cref="IResolveContext.Container"/> is ignored in favour of this container.
         /// </summary>
         /// <param name="context">The context containing the requested type and any scope which is currently in force.</param>
-        /// <returns>Always returns a reference to a compiled target - but note that if <see cref="CanResolve(IResolveContext)"/>
-        /// returns false for the same context, then the target's <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method 
-        /// will likely throw an exception - in line with the behaviour of the <see cref="MissingCompiledTarget"/> class' behaviour.</returns>
+        /// <returns>Always returns a reference to a compiled target - but note that if 
+        /// <see cref="CanResolve(IResolveContext)"/> returns false for the same context, then the target's 
+        /// <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method will likely throw an exception - in line with 
+        /// the behaviour of the <see cref="MissingCompiledTarget"/> class.</returns>
         public virtual ICompiledTarget FetchCompiled(IResolveContext context)
         {
             //note that this container is fixed as the container in the context - regardless of the
@@ -247,8 +274,8 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Implementation of the <see cref="IContainer.CanResolve(IResolveContext)"/> method.  Returns true if, and only if,
-        /// the <see cref="Targets"/> <see cref="ITargetContainer"/> returns a non-null <see cref="ITarget"/> when the 
+        /// Implementation of the <see cref="IContainer.CanResolve(IResolveContext)"/> method.  Returns true if, and only 
+        /// if, the <see cref="Targets"/> <see cref="ITargetContainer"/> returns a non-null <see cref="ITarget"/> when the 
         /// <see cref="IResolveContext.RequestedType"/> is passed to its <see cref="ITargetContainer.Fetch(Type)"/> method.
         /// </summary>
         /// <param name="context">The resolve context containing the requested type.</param>
@@ -258,8 +285,9 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// The main workhorse of the resolve process - obtains an <see cref="ICompiledTarget"/> for the given <paramref name="context"/>
-        /// by looking up an <see cref="ITarget"/> from the <see cref="Targets"/> target container, then compiling it.
+        /// The main workhorse of the resolve process - obtains an <see cref="ICompiledTarget"/> for the given 
+        /// <paramref name="context"/> by looking up an <see cref="ITarget"/> from the <see cref="Targets"/> target 
+        /// container, then compiling it.
         /// </summary>
         /// <param name="context">The current resolve context</param>
         /// <remarks>The specifics of how this process works are not important if you simply want to use the container, 
@@ -270,28 +298,31 @@ namespace Rezolver
         /// returns a <c>null</c> <see cref="ITarget"/>, or one which has its <see cref="ITarget.UseFallback"/> set to 
         /// <c>true</c>, then the method gets an alternative compiled target by calling the
         /// <see cref="GetFallbackCompiledRezolveTarget(IResolveContext)"/> method.  This fallback compiled target will be
-        /// used instead of compiling the target unless the target was not null and its <see cref="ITarget.UseFallback"/> is true
-        /// *AND* the compiled target returned by the fallback method is a <see cref="MissingCompiledTarget"/> - in which case
-        /// the fallback target will be compiled as normal.
+        /// used instead of compiling the target unless the target was not null and its <see cref="ITarget.UseFallback"/> is 
+        /// true *AND* the compiled target returned by the fallback method is a <see cref="MissingCompiledTarget"/> - in 
+        /// which case the fallback target will be compiled as normal.
         /// 
-        /// Before proceeding with compilation, the container checks whether the target can resolve the required object directly.
+        /// Before proceeding with compilation, the container checks whether the target can resolve the required object 
+        /// directly.
         /// 
-        /// This means that the target either implements the <see cref="ICompiledTarget"/> interface (in which case it is immediately
-        /// returned) or the <see cref="IResolveContext.RequestedType"/> is *not* <see cref="Object"/> and the target's type 
-        /// is compatible with it (in which case the target is simply embedded in a new <see cref="DirectResolveCompiledTarget"/>, which
-        /// will later just return the target when its <see cref="DirectResolveCompiledTarget.GetObject(IResolveContext)"/> is called).
+        /// This means that the target either implements the <see cref="ICompiledTarget"/> interface (in which case it is
+        /// immediately returned) or the <see cref="IResolveContext.RequestedType"/> is *not* <see cref="Object"/> and the 
+        /// target's type is compatible with it (in which case the target is simply embedded in a new 
+        /// <see cref="DirectResolveCompiledTarget"/>, which will later just return the target when its 
+        /// <see cref="DirectResolveCompiledTarget.GetObject(IResolveContext)"/> is called).
         /// 
-        /// <em>The <see cref="ObjectTarget"/> supports the <see cref="ICompiledTarget"/> interface, therefore any objects which are
-        /// directly registered through this target will always use that class' implementation of <see cref="ICompiledTarget"/> if
-        /// requested through the <see cref="Resolve(IResolveContext)"/> method.</em>
+        /// <em>The <see cref="ObjectTarget"/> supports the <see cref="ICompiledTarget"/> interface, therefore any objects 
+        /// which are directly registered through this target will always use that class' implementation of 
+        /// <see cref="ICompiledTarget"/> if requested through the <see cref="Resolve(IResolveContext)"/> method.</em>
         /// 
-        /// Once the decision has been taken to compile the target, the container first needs a compiler (<see cref="Compilation.ITargetCompiler"/>)
-        /// and a compile context provider (<see cref="Compilation.ICompileContextProvider"/>).
+        /// Once the decision has been taken to compile the target, the container first needs a compiler 
+        /// (<see cref="Compilation.ITargetCompiler"/>) and a compile context provider 
+        /// (<see cref="Compilation.ICompileContextProvider"/>).
         /// 
         /// <em>Note that classes which implement the <see cref="ITargetCompiler"/> interface also frequently implement the 
         /// <see cref="ICompileContextProvider"/> interface so that any additional state they require is correctly attached 
-        /// to the <see cref="ICompileContext"/> which will be fed to their <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> 
-        /// implementation.</em>
+        /// to the <see cref="ICompileContext"/> which will be fed to their 
+        /// <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> implementation.</em>
         /// 
         /// These are both obtained by resolving them directly from the <see cref="IResolveContext.Container"/> of the 
         /// <paramref name="context"/> (since a container can be delegated to from another container which originally
@@ -299,14 +330,14 @@ namespace Rezolver
         /// that this could lead to an infinite recursion - i.e. since compiling a target means resolving a compiler, which
         /// in turn must mean compiling that target.
         /// 
-        /// The class sidesteps this potential pitfall by requiring that the targets registered for these types support direct 
-        /// resolving, as per the description a couple of paragraphs back.  Therefore, compilers and context providers are typically
-        /// registered as objects via the <see cref="ObjectTarget"/> target.
+        /// The class sidesteps this potential pitfall by requiring that the targets registered for these types support 
+        /// direct resolving, as per the description a couple of paragraphs back.  Therefore, compilers and context 
+        /// providers are typically registered as constant services via the <see cref="ObjectTarget"/> target.
         /// 
         /// Finally, a new <see cref="ICompileContext"/> is created via the 
         /// <see cref="ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer)"/> method of the resolved
-        /// context provider, and then passed to the <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> method
-        /// of the resolved compiler.  The result of that operation is then returned to the caller.
+        /// context provider, and then passed to the <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> 
+        /// method of the resolved compiler.  The result of that operation is then returned to the caller.
         /// </remarks> 
         protected virtual ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
         {
@@ -334,26 +365,11 @@ namespace Rezolver
             else if (context.RequestedType != typeof(object) && TypeHelpers.IsAssignableFrom(context.RequestedType, target.GetType()))
                 return new DirectResolveCompiledTarget(target);
 
-            //if ITargetCompiler or ICompileContextProvider have been requested then we can't continue, 
-            //because in order to compile this target we'd need a compiler we can use which, by definition, we don't have.
-            //also, the same error occurs if the container in question is unable to resolve the type.
-            //note that this could trigger this same line of code to blow in the context container.
-            ITargetCompiler compiler;
-            ICompileContextProvider compileContextProvider;
-
-            if (context.RequestedType == typeof(ITargetCompiler) || !context.Container.TryResolve(out compiler))
-                throw new InvalidOperationException("The compiler has not been correctly configured for this container.  It must be registered in the container's targets and must be a target that supports the ICompiledTarget interface.");
-            if (context.RequestedType == typeof(ICompileContextProvider) || !context.Container.TryResolve(out compileContextProvider))
-                throw new InvalidOperationException("Could not obtain an ICompileContextProvider for the operation");
-
-            //
-            return compiler.CompileTarget(
-                target,
-                compileContextProvider.CreateContext(
-                    context,
-                    //the targets we pass here are wrapped in a new ChildTargetContainer by the context
-                    Targets)
-                );
+             if (context.RequestedType == typeof(ITargetCompiler))
+                throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler as a constant service");
+             //note below - the context's container is always fixed to this container for compilation
+             //to ensure that the correct set of 
+            return _compiler.Value.CompileTarget(target, context.New(newContainer: this), Targets);
         }
 
         /// <summary>
@@ -362,8 +378,9 @@ namespace Rezolver
         /// set to <c>true</c>.
         /// </summary>
         /// <param name="context"></param>
-        /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(IResolveContext)"/> operation
-        /// where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).</returns>
+        /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(IResolveContext)"/> 
+        /// operation where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).
+        /// </returns>
         /// <remarks>The base implementation always returns an instance of the <see cref="MissingCompiledTarget"/> via
         /// the <see cref="GetMissingTarget(Type)"/> static method.</remarks>
         protected virtual ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
@@ -398,11 +415,11 @@ namespace Rezolver
         /// </summary>
         /// <param name="target"></param>
         /// <param name="serviceType"></param>
-        /// <remarks>Remember: registering new targets into an <see cref="ITargetContainer"/> after an <see cref="IContainer"/>
-        /// has started compiling targets within it can yield unpredictable results.
+        /// <remarks>Remember: registering new targets into an <see cref="ITargetContainer"/> after an 
+        /// <see cref="IContainer"/> has started compiling targets within it can yield unpredictable results.
         /// 
-        /// If you create a new container and perform all your registrations before you use it, however, then everything will 
-        /// work as expected.
+        /// If you create a new container and perform all your registrations before you use it, however, then everything 
+        /// will work as expected.
         /// 
         /// Note also the other ITargetContainer interface methods are implemented explicitly so as to hide them from the 
         /// list of class members.

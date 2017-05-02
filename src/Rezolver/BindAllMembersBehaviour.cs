@@ -17,7 +17,8 @@ namespace Rezolver
 	/// properties and public fields to values obtained from the container.
 	/// </summary>
 	/// <seealso cref="Rezolver.IMemberBindingBehaviour" />
-	/// <remarks>This is a stateless singleton accessible through the <see cref="Instance"/> static property.
+	/// <remarks>This is a stateless singleton accessible through the <see cref="MemberBindingBehaviour.BindAll"/> 
+    /// static property.
 	/// 
 	/// The class also serves as a good starting point for any custom binding behaviours you might need - as there
 	/// are numerous virtual methods which allow you to change which fields and/or properties are selected for binding,
@@ -31,7 +32,7 @@ namespace Rezolver
 		/// <summary>
 		/// Gets the one and only instance of <see cref="BindAllMembersBehaviour"/>
 		/// </summary>
-		public static BindAllMembersBehaviour Instance
+		internal static BindAllMembersBehaviour Instance
 		{
 			get
 			{
@@ -161,7 +162,7 @@ namespace Rezolver
 		/// returns all instance properties which have publicly accessible 'set' accessors.</remarks>
 		protected virtual IEnumerable<PropertyInfo> GetBindableProperties(ICompileContext context, Type type)
 		{
-			return type.GetInstanceProperties().PubliclyWritable();
+			return type.GetInstanceProperties().PubliclyWritable().Where(pi => pi.GetIndexParameters()?.Length == 0);
 		}
 	}
 }

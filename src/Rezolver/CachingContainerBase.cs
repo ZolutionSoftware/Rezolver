@@ -28,12 +28,14 @@ namespace Rezolver
         /// <summary>
         /// Creates a new instance of the <see cref="CachingContainerBase"/> class.
         /// </summary>
-        /// <param name="targets">Optional. Contains the targets that will be used as the source of registrations for the container.
+        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> 
+        /// (and other operations) is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
+        /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
+        /// <remarks>This constructor does not attach any <see cref="IContainerBehaviour"/> behaviours, because behaviours typically
+        /// call methods which are declared virtual on this class - which could be unsafe.
         /// 
-        /// If not provided, then a new <see cref="TargetContainer"/> will be created</param>
-        /// <remarks>This constructor will not use any <see cref="IContainerBehaviour"/> objects to perform post-creation initialisation
-        /// of the container.  If you want it to do so, then use the <see cref="CachingContainerBase.CachingContainerBase(IContainerBehaviour, ITargetContainer)"/>
-        /// constructor.</remarks>
+        /// If this does not apply to your derived class (which is unlikely) - use the 
+        /// <see cref="CachingContainerBase.CachingContainerBase(IContainerBehaviour, ITargetContainer)"/> constructor.</remarks>
         protected CachingContainerBase(ITargetContainer targets = null)
 			: base(targets)
 		{
@@ -41,18 +43,18 @@ namespace Rezolver
 		}
 
         /// <summary>
-        /// Creates (and initialises) a new instance of the <see cref="CachingContainerBase"/> class.
+        /// Creates a new instance of the <see cref="CachingContainerBase"/> class.
         /// </summary>
-        /// <param name="initialiser">Can be null.  An initialiser which configures the new instance (and its <see cref="Targets"/>)
-        /// with additional functionality, such as compiler etc.  If not provided, then the <see cref="GlobalBehaviours.ContainerBehaviour"/>
-        /// will be used.</param>
-        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the container.
+        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its <see cref="Targets"/>).
+        /// If not provided, then the global <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
+        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the container,
+        /// ultimately being passed to the <see cref="Targets"/> property.
         /// 
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <remarks>To create an instance without using initialisers, use the 
+        /// <remarks>To create an instance without attaching behaviours, use the 
         /// <see cref="CachingContainerBase.CachingContainerBase(ITargetContainer)"/> constructor.</remarks>
-        protected CachingContainerBase(IContainerBehaviour initialiser, ITargetContainer targets = null)
-            : base(initialiser, targets)
+        protected CachingContainerBase(IContainerBehaviour behaviour, ITargetContainer targets = null)
+            : base(behaviour, targets)
         {
 
         }
@@ -74,7 +76,9 @@ namespace Rezolver
             if (_entries.TryGetValue(context.RequestedType, out Lazy<ICompiledTarget> myLazy))
                 return myLazy.Value;
 
-            return _entries.GetOrAdd(context.RequestedType, c => new Lazy<ICompiledTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
+            return _entries.GetOrAdd(
+                context.RequestedType, 
+                c => new Lazy<ICompiledTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
 		}
 	}
 }

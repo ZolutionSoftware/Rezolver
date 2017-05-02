@@ -287,10 +287,9 @@ namespace Rezolver.Compilation.Expressions
 
 			type.MustNotBeNull("type");
 			expressionFactory.MustNotBeNull("expressionFactory");
-			Expression toReturn;
 			//if this is 
 			SharedExpressionKey key = new SharedExpressionKey(type, name, requestingType);
-			if (!_sharedExpressions.TryGetValue(key, out toReturn))
+			if (!_sharedExpressions.TryGetValue(key, out Expression toReturn))
 				_sharedExpressions[key] = toReturn = expressionFactory();
 			return toReturn;
 		}

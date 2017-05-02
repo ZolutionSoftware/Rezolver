@@ -7,15 +7,10 @@ namespace Rezolver
 {
     /// <summary>
     /// An <see cref="IContainerBehaviour"/> which contains zero or or more other <see cref="IContainerBehaviour"/>
-    /// objects.
+    /// objects.  Behaviours can depend on other behaviours, and this collection ensures that they are applied
+    /// in the correct order.
     /// </summary>
-    /// <remarks><see cref="IContainer"/> objects are configured by registering
-    /// known services in the <see cref="ITargetContainer"/> that they're built from. Initialisers can also be
-    /// interdependent - i.e. initialiser A requires initialiser B in order to work - hence
-    /// the use of the <see cref="IDependant"/> interface on the <see cref="IContainerBehaviour"/> interface.
-    /// 
-    /// This collection implements <see cref="IContainerBehaviour.Attach(IContainer, ITargetContainer)"/> 
-    /// by running through all the behaviours that have been added to it, in order of least to most dependant.</remarks>
+    /// <seealso cref="TargetContainerBehaviourCollection"/>
     public class ContainerBehaviourCollection : DependantCollection<IContainerBehaviour>, IContainerBehaviour
     {
         /// <summary>
@@ -27,33 +22,35 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="ContainerBehaviourCollection"/> type, using the passed initialisers
+        /// Constructs a new instance of the <see cref="ContainerBehaviourCollection"/> type, using the passed behaviours
         /// enumerable to seed the underlying collection.
         /// </summary>
-        /// <param name="configs">The initialisers to be added to the collection on construction.</param>
-        public ContainerBehaviourCollection(IEnumerable<IContainerBehaviour> configs)
-            : base(configs)
+        /// <param name="behaviours">The behaviours to be added to the collection on construction.</param>
+        public ContainerBehaviourCollection(IEnumerable<IContainerBehaviour> behaviours)
+            : base(behaviours)
         {
 
         }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="ContainerBehaviourCollection"/> type, using the passed initialisers
+        /// Constructs a new instance of the <see cref="ContainerBehaviourCollection"/> type, using the passed behaviours
         /// enumerable to seed the underlying collection.
         /// </summary>
-        /// <param name="configs">The initialisers to be added to the collection on construction.</param>
-        public ContainerBehaviourCollection(params IContainerBehaviour[] configs)
-            : this((IEnumerable<IContainerBehaviour>)configs)
+        /// <param name="behaviours">The behaviours to be added to the collection on construction.</param>
+        public ContainerBehaviourCollection(params IContainerBehaviour[] behaviours)
+            : this((IEnumerable<IContainerBehaviour>)behaviours)
         { 
 
         }
 
         /// <summary>
-        /// Runs through each initialiser that has been added to the collection, in dependency order, calling its
-        /// <see cref="IContainerBehaviour.Attach(IContainer, ITargetContainer)"/> method.
+        /// Applies the behaviours in this collection to the passed <paramref name="container"/> and 
+        /// <paramref name="targets"/>.
         /// </summary>
-        /// <param name="container">The container being configured</param>
+        /// <param name="container">The container to which the behaviours are being attached.</param>
         /// <param name="targets">The target container used by the <paramref name="container"/> for its registrations.</param>
+        /// <remarks>The implementation runs through each behaviour that has been added to the collection, in dependency 
+        /// order, calling its <see cref="IContainerBehaviour.Attach(IContainer, ITargetContainer)"/> method.</remarks>
         public void Attach(IContainer container, ITargetContainer targets)
         {
             foreach(var behaviour in Ordered)

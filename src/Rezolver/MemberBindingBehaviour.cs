@@ -1,38 +1,27 @@
-﻿using Rezolver.Targets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Rezolver
 {
     /// <summary>
-    /// Holds the default member binding behaviour for the <see cref="ConstructorTarget"/>
+    /// Static accessor for the common member binding behaviours provided by Rezolver.
     /// </summary>
     public static class MemberBindingBehaviour
     {
-        private static IMemberBindingBehaviour _default;
+        /// <summary>
+        /// A behaviour that binds all writeable properties and fields on an object after construction.
+        /// </summary>
+        /// <remarks>The implementation is an instance of the <see cref="BindAllMembersBehaviour"/></remarks>
+        public static IMemberBindingBehaviour BindAll => BindAllMembersBehaviour.Instance;
 
         /// <summary>
-        /// The default <see cref="IMemberBindingBehaviour"/> - set to <see cref="BindNoMembersBehaviour"/>
-        /// by default.  Note that this property is used indirectly by the <see cref="ConstructorTarget"/>
-        /// when resolving objects - in that an <see cref="IMemberBindingBehaviour"/> is resolved from the
-        /// current <see cref="IContainer"/> during compilation - and that 
+        /// A behaviour that doesn't bind any properties or fields on an object.
+        /// 
+        /// This is the container default behaviour - configured via a <see cref="Behaviours.DefaultMemberBindingBehaviour"/>
+        /// in the <see cref="GlobalBehaviours.ContainerBehaviour"/>.
         /// </summary>
-        public static IMemberBindingBehaviour Default
-        {
-            get
-            {
-                return _default;
-            }
-            set
-            {
-                _default = value ?? throw new ArgumentNullException(nameof(value));
-            }
-        }
-        
-        static MemberBindingBehaviour()
-        {
-            _default = BindNoMembersBehaviour.Instance;
-        }
+        /// <remarks>The implementation is an instance of the <see cref="BindNoMembersBehaviour"/></remarks>
+        public static IMemberBindingBehaviour BindNone => BindNoMembersBehaviour.Instance;
     }
 }
