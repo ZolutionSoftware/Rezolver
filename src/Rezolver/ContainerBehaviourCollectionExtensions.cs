@@ -4,6 +4,7 @@ using Rezolver.Compilation.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Rezolver.Sdk;
 
 namespace Rezolver
 {
@@ -30,9 +31,8 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Configures the container to use the <see cref="ExpressionCompiler"/> for both the <see cref="ITargetCompiler"/>
-        /// service and <see cref="ICompileContextProvider"/> services.  Also performs all additional registrations required
-        /// by the <see cref="ExpressionCompiler"/>.
+        /// Configures the container to use the <see cref="ExpressionCompiler"/> for its <see cref="ITargetCompiler"/>
+        /// service.  Also performs all additional registrations required by the <see cref="ExpressionCompiler"/>.
         /// </summary>
         /// <param name="collectionBehaviour">The collection to which the behaviour is to be added.</param>
         /// <returns>The collection on which the operation is called, to allow chaining of further calls.</returns>

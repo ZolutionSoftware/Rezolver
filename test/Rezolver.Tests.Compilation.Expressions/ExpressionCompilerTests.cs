@@ -15,7 +15,7 @@ using Xunit.Abstractions;
 
 namespace Rezolver.Tests.Compilation.Expressions
 {
-	public class ExpressionCompilerTests : Rezolver.Tests.Compilation.Specification.CompilerTestsBase<ExpressionCompiler, ExpressionCompiler>
+	public class ExpressionCompilerTests : Rezolver.Tests.Compilation.Specification.CompilerTestsBase<ExpressionCompiler>
 	{
 		public ExpressionCompilerTests(ITestOutputHelper output)
 			: base(output)

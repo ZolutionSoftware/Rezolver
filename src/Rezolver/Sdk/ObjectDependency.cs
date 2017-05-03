@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Rezolver
+namespace Rezolver.Sdk
 {
     /// <summary>
     /// Represents a dependency on a specific instance
@@ -28,7 +28,7 @@ namespace Rezolver
             }
 
             if (Required && !found)
-                throw new InvalidOperationException($"Object { Owner } has a required dependency on { Obj } which was not found");
+                throw new DependencyException($"Object { Owner } has a required dependency on { Obj } which was not found");
         }
     }
 }

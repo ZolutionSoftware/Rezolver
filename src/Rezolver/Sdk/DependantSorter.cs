@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rezolver
+namespace Rezolver.Sdk
 {
     internal class DependantSorter<T> : IEnumerable<T>, IComparer<T>
         where T: class
@@ -19,8 +19,7 @@ namespace Rezolver
 
         HashSet<T> GetDependencyMap(T obj)
         {
-            HashSet<T> toReturn;
-            if (!Map.TryGetValue(obj, out toReturn))
+            if (!Map.TryGetValue(obj, out HashSet<T> toReturn))
                 Map[obj] = toReturn = BuildDependencies(obj);
             return toReturn;
         }
@@ -31,6 +30,9 @@ namespace Rezolver
             Map[obj] = entry = new HashSet<T>(ReferenceComparer<T>.Instance);
             if (obj is IDependant oDependant)
             {
+                // note that the dependencies returned by this function might not be in the
+                // Objects enumerable (required objects not present in the input set) - but the 
+                // algorithm doesn't care
                 foreach (var dependency in oDependant.Dependencies.GetDependencies(Objects))
                 {
                     // allow an object to return itself as a dependency, and ignore it.
@@ -66,7 +68,7 @@ namespace Rezolver
             if (xdeps.Contains(y))
             {
                 if (ydeps.Contains(x))
-                    throw new InvalidOperationException($"Objects {x} and {y} are mutually dependent - cyclic dependencies are not allowed.");
+                    throw new DependencyException($"Objects {x} and {y} are mutually dependent - cyclic dependencies are not allowed.");
                 return 1;
             }
             else if (ydeps.Contains(x))

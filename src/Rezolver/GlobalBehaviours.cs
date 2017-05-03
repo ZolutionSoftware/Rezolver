@@ -103,8 +103,10 @@ namespace Rezolver
 
             // expression compiler is used by default,
             // and members of classes are not bound by default.
-            ContainerBehaviour.AddAll(ExpressionCompilerBehaviour.Instance,
-                new DefaultMemberBindingBehaviour(BindNoMembersBehaviour.Instance));
+            ContainerBehaviour.UseExpressionCompiler()
+                .UseMemberBindingBehaviour(BindNoMembersBehaviour.Instance);
+
+            // no additional behaviours are currently configured for OverridingContainer
         }
     }
 }

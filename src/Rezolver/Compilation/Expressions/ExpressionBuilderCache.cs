@@ -64,6 +64,8 @@ namespace Rezolver.Compilation.Expressions
             {
                 yield return baseT;
             }
+            if (targetType is ICompiledTarget)
+                yield return typeof(ICompiledTarget);
         }
     }
 }

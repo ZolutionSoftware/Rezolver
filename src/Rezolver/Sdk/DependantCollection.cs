@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rezolver
+namespace Rezolver.Sdk
 {
     /// <summary>
     /// A collection of objects in which one or more objects can be dependent on others in the 
-    /// same collection.
+    /// same collection (via the <see cref="IDependant"/> interface).
     /// </summary>
     /// <typeparam name="T">The type of object in the collection</typeparam>
     /// <remarks>

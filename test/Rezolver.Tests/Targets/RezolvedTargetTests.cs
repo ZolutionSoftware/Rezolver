@@ -46,7 +46,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldBindToTargetFromContextContainer()
 		{
-			var container = new Container(GetTestCompilerConfigProvider());
+            var container = new Container();
 			container.Register(new TestTarget(typeof(string), useFallBack: false, supportsType: true));
 
 			var target = new ResolvedTarget(typeof(string));
@@ -60,7 +60,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldUseFallbackWhenContextContainerFails()
 		{
-			var container = new Container(GetTestCompilerConfigProvider());
+			var container = new Container();
 			var fallback = new TestTarget(typeof(string), useFallBack: false, supportsType: true);
 
 			var target = new ResolvedTarget(typeof(string), fallback);
@@ -74,7 +74,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldUseFallbackWhenResolvedTargetUseFallbackIsTrue()
 		{
-			var container = new Container(GetTestCompilerConfigProvider());
+			var container = new Container();
 			container.Register(new TestTarget(typeof(string), useFallBack: true, supportsType: true));
 			var fallback = new TestTarget(typeof(string), useFallBack: false, supportsType: true);
 

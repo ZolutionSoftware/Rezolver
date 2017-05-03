@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rezolver
+namespace Rezolver.Sdk
 {
     /// <summary>
     /// A collection of <see cref="DependencyMetadata"/> objects.

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rezolver
+namespace Rezolver.Sdk
 {
     /// <summary>
     /// Extension methods for the <see cref="IDependant"/> interface
@@ -33,8 +33,7 @@ namespace Rezolver
         /// <summary>
         /// Adds a required dependency from the object on which this is called to <paramref name="obj"/>
         /// 
-        /// When dependencies are resolved, if <paramref name="obj"/> is not found, then an exception will
-        /// be thrown.
+        /// The object <paramref name="dep"/> must be present in the input collection when dependencies are resolved.
         /// </summary>
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
         /// <typeparam name="TDependency">The type for the dependency being added.</typeparam>
@@ -54,8 +53,7 @@ namespace Rezolver
         /// <summary>
         /// Adds a required dependency from the object on which this is called to all the objects in <paramref name="deps"/>
         /// 
-        /// When dependencies are resolved, if *all* of the objects in <paramref name="deps"/> are not found, then an exception will
-        /// be thrown.
+        /// Every object in <paramref name="deps"/> must be present in the input collection when dependencies are resolved.
         /// </summary>
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
         /// <typeparam name="TDependency">The type for the dependency being added.</typeparam>
@@ -74,24 +72,8 @@ namespace Rezolver
 
         /// <summary>
         /// Adds a required dependency from the object on which this is called to at least one object of the type
-        /// <typeparamref name="TDependency"/>.  Use this when only the type of the dependency is known.
-        /// </summary>
-        /// <typeparam name="T">The type of object on which this is called.</typeparam>
-        /// <typeparam name="TDependency">The type for the dependency being added.</typeparam>
-        /// <param name="obj">The object to which a dependency is to be added.</param>
-        /// <returns></returns>
-        public static T RequiresAny<T, TDependency>(this T obj)
-            where T : IDependant
-            where TDependency : class
-        {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-
-            return AddTypeDependency(obj, typeof(TDependency), true);
-        }
-
-        /// <summary>
-        /// Adds a required dependency from the object on which this is called to at least one object of the type
-        /// <paramref name="dependencyType"/>.  Use this when only the type of the dependency is known.
+        /// <paramref name="dependencyType"/>.  Use this when only the type of the dependency is known, but the specific
+        /// instance is not important.
         /// </summary>
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
         /// <param name="obj">The object to which a dependency is to be added.</param>
@@ -117,7 +99,7 @@ namespace Rezolver
         /// <param name="obj">Required - the object whose dependencies are to be resolved.</param>
         /// <param name="objects">Required - the range of objects from which dependencies are to be located.
         /// 
-        /// Generally speaking, it's very usual for <paramref name="obj"/> to be present within this range somewhere.</param>
+        /// Generally speaking, it's typical for <paramref name="obj"/> to be a member of this range.</param>
         /// <returns></returns>
         public static IEnumerable<TDependency> GetDependencies<T, TDependency>(this T obj, IEnumerable<TDependency> objects)
             where T : IDependant
@@ -127,5 +109,7 @@ namespace Rezolver
             if (objects == null) throw new ArgumentNullException(nameof(objects));
             return obj.Dependencies.GetDependencies(objects);
         }
+
+        // TODO: Add the non-required public extensions when we need them (YAGNI): Follows/FollowsAll<> or After/AfterAll<>
     }
 }

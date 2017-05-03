@@ -1,7 +1,15 @@
 <Project>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)\Rezolver.Shared\**\*.cs" Exclude="$(MSBuildThisFileDirectory)\Rezolver.Shared\obj\**\*.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)\Rezolver.Shared\**\*.cs" 
+             Exclude="$(MSBuildThisFileDirectory)\Rezolver.Shared\obj\**\*.cs">
       <Link>Rezolver.Shared\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Compile>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)\Rezolver.Shared\ExceptionResources.resx">
+      <Link>Rezolver.Shared\ExceptionResources.resx</Link>
+      <!--<Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ExceptionResources.Designer.cs</LastGenOutput>
+        <CustomToolNamespace>Rezolver</CustomToolNamespace>-->
+      <LogicalName>Rezolver.Shared.ExceptionResources.resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

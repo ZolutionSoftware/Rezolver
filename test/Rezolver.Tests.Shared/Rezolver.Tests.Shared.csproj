@@ -6,6 +6,8 @@
     <RootNamespace>Rezolver.Tests</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+  
+  <Import Project="..\..\src\Rezolver.Shared.props " />
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System.Runtime" />

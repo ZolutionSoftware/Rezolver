@@ -43,10 +43,10 @@ namespace Rezolver.Behaviours
 
 			var rezolverAssembly = TypeHelpers.GetAssembly(typeof(IContainer));
 			var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilerBehaviour));
-			//loop through all target types defined in the Rezolver assembly which reside in the same
-			//namespace as one of the well-known targets and which are non-abstract classes
+            // the well-known target types for compilation are ICompiledTarget, plus all the concrete target types in Rezolver.Targets
 			foreach (var type in rezolverAssembly.ExportedTypes.Where(t =>
-				 t.Namespace == typeof(ObjectTarget).Namespace && TypeHelpers.IsPublic(t) && !TypeHelpers.IsAbstract(t) && TypeHelpers.IsClass(t)))
+                t == typeof(ICompiledTarget) || 
+				(t.Namespace == typeof(ObjectTarget).Namespace && TypeHelpers.IsPublic(t) && !TypeHelpers.IsAbstract(t) && TypeHelpers.IsClass(t))))
 			{
 				var builderInterfaceType = typeof(IExpressionBuilder<>).GetTypeInfo().MakeGenericType(type);
 				//attempt to find a single expressionbuilder type in this assembly which implements the builderInterfaceType

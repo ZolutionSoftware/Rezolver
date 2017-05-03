@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Rezolver
+namespace Rezolver.Sdk
 {
     /// <summary>
     /// Represents a dependency from an <see cref="IDependant"/> on one or more other objects
@@ -44,6 +44,11 @@ namespace Rezolver
         /// match this dependency metadata.</param>
         /// <returns>A filtered enumerable containing any objects from <paramref name="objects"/> which match
         /// this dependency metadata.</returns>
+        /// <exception cref="DependencyException">Most commonly thrown if a required dependency is not 
+        /// present in <paramref name="objects"/>, but other reasons are possible.
+        /// 
+        /// Basically - if you get one of these, then there's something wrong with the <paramref name="objects"/>
+        /// which prevents dependencies from being obtained by this dependency metadata.</exception>
         public abstract IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects) where T: class;
     }
 

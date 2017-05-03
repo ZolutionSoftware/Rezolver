@@ -51,12 +51,13 @@ namespace Rezolver
     /// 
     /// Some types passed for <typeparamref name="TContainerService"/> are well-known to Rezolver and carry expectations 
     /// as to what they will do (and thus will undergo validation after being run).  One example is 
-    /// <see cref="ITargetCompiler"/> - an <c>IContainerBehaviour&lt;ITargetCompiler&gt;</c> is expected to configure
-    /// both an <see cref="ITargetCompiler"/> and an <see cref="ICompileContextProvider"/> and if it doesn't then
-    /// an error will occur.
+    /// <see cref="ITargetCompiler"/> - an <c>IContainerBehaviour&lt;ITargetCompiler&gt;</c> is expected to ensure that
+    /// a compiler can be resolved from the container after the behaviour has been attached.
     /// 
     /// In closing, direct use of this stuff is not normally required for standard applications - all of the standard
-    /// behaviours hide the complexity behind extension methods and/or friendly behaviour types.</remarks>
+    /// behaviours hide the complexity behind extension methods and/or friendly behaviour types.
+    /// 
+    /// You'll only need to use it directly if you're extending some of the more advanced parts of the framework.</remarks>
     public interface IContainerBehaviour<TContainerService> : IContainerBehaviour
     {
 

@@ -53,11 +53,11 @@ namespace Rezolver.Tests.Targets
 		{
 			//test both Ctors here
 			var ctor = TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]);
-			var target1 = new ConstructorTarget(typeof(NoCtor), memberBinding: BindAllMembersBehaviour.Instance);
-			var target2 = new ConstructorTarget(ctor, memberBinding: BindAllMembersBehaviour.Instance);
+			var target1 = new ConstructorTarget(typeof(NoCtor), memberBinding: MemberBindingBehaviour.BindAll);
+			var target2 = new ConstructorTarget(ctor, memberBinding: MemberBindingBehaviour.BindAll);
 
-			Assert.Same(target1.MemberBindingBehaviour, BindAllMembersBehaviour.Instance);
-			Assert.Same(target2.MemberBindingBehaviour, BindAllMembersBehaviour.Instance);
+			Assert.Same(target1.MemberBindingBehaviour, MemberBindingBehaviour.BindAll);
+			Assert.Same(target2.MemberBindingBehaviour, MemberBindingBehaviour.BindAll);
 		}
 
 		[Fact]

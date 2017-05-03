@@ -17,7 +17,10 @@ namespace Rezolver.Compilation.Expressions
 	/// Provide an implementation of <see cref="Build(TTarget, IExpressionCompileContext, IExpressionCompiler)"/> and then register 
 	/// an instance in an <see cref="ObjectTarget"/> in the active container.
 	/// </summary>
-	/// <typeparam name="TTarget">The type of target for which this builder can build an expression.</typeparam>
+	/// <typeparam name="TTarget">The type of target for which this builder can build an expression.  This should ideally be
+    /// a type which directly implements <see cref="ITarget"/> - however, so long as the runtime type of all the targets which 
+    /// are fed to it do implement it, everything is fine.
+    /// </typeparam>
 	/// <seealso cref="Rezolver.Compilation.Expressions.IExpressionBuilder{TTarget}" />
 	/// <seealso cref="ExpressionBuilderBase"/>
 	/// <remarks>This is a generic extension of the <see cref="ExpressionBuilderBase"/> class, 
@@ -37,7 +40,7 @@ namespace Rezolver.Compilation.Expressions
 	/// of this class without exposing the behaviour to external callers yourself is via the interface.
 	/// </remarks>
 	public abstract class ExpressionBuilderBase<TTarget> : ExpressionBuilderBase, IExpressionBuilder<TTarget>
-		where TTarget : ITarget
+		//where TTarget : ITarget
 	{
 		/// <summary>
 		/// Overrides the abstract <see cref="ExpressionBuilderBase.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)" /> (and seals it from
@@ -96,8 +99,14 @@ namespace Rezolver.Compilation.Expressions
 					throw new InvalidOperationException("Unable to identify the IExpressionCompiler for the current context");
 			}
 
-			return BuildCore(target, context, compiler);
-		}
+            if (target is ITarget tTarget)
+            {
+                return BuildCore(tTarget, context, compiler);
+            }
+            else
+                throw new ArgumentException($"The target must implement ITarget as well as { typeof(TTarget) } - this object only supports { typeof(TTarget) }", nameof(target));
+
+        }
 
 		/// <summary>
 		/// Builds an expression from the specified target for the given <see cref="ICompileContext"/>

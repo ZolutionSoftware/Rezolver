@@ -1,4 +1,5 @@
 ﻿using Rezolver.Compilation;
+using Rezolver.Compilation.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,46 +17,9 @@ namespace Rezolver.Tests.Targets
 			this.Output = output;
 		}
 
-		protected class TestCompileContext : CompileContext
-		{
-			public TestCompileContext(ICompileContext parentContext, Type targetType = null, ScopeBehaviour? scopeBehaviourOverride = null)
-				: base(parentContext, targetType, scopeBehaviourOverride) { }
-
-			public TestCompileContext(IResolveContext resolveContext, ITargetContainer dependencyTargetContainer, Type targetType = null)
-				: base(resolveContext, dependencyTargetContainer, targetType) { }
-		}
-
-		protected class TestContextProvider : ICompileContextProvider
-		{
-			public TestContextProvider() { }
-
-			public ICompileContext CreateContext(IResolveContext resolveContext, ITargetContainer targets)
-			{
-                return new TestCompileContext(resolveContext, targets, targetType: resolveContext.RequestedType);
-			}
-		}
-
-		protected class TestCompilerConfigProvider : Dependant, IContainerBehaviour
-		{
-			public void Attach(IContainer container, ITargetContainer targets)
-			{
-				targets.RegisterObject<ICompileContextProvider>(new TestContextProvider());
-			}
-
-            public IEnumerable<IContainerBehaviour> ResolveDependencies(IEnumerable<IContainerBehaviour> behaviours)
-            {
-                return Enumerable.Empty<IContainerBehaviour>();
-            }
-        }
-
-		protected virtual IContainerBehaviour GetTestCompilerConfigProvider()
-		{
-			return new TestCompilerConfigProvider();
-		}
-
 		protected virtual IContainer GetDefaultContainer()
 		{
-			return new Container(new TestCompilerConfigProvider());
+			return new Container();
 		}
 
 		protected virtual ITargetContainer GetDefaultTargetContainer(IContainer container = null)
@@ -64,13 +28,6 @@ namespace Rezolver.Tests.Targets
 				return ((ITargetContainer)container);
 			return new TargetContainer();
 		}
-
-		protected virtual ICompileContextProvider GetContextProvider()
-		{
-			return new TestContextProvider();
-		}
-
-
 
 		/// <summary>
 		/// Gets the compile context for the specified target under test.
@@ -88,7 +45,11 @@ namespace Rezolver.Tests.Targets
 		{
 			container = container ?? GetDefaultContainer();
 			targets = targets ?? GetDefaultTargetContainer(container);
-			return GetContextProvider().CreateContext(new ResolveContext(container, targetType ?? target.DeclaredType), targets);
+
+            // to create a context we resolve the ITargetCompiler from the container.
+            // this is usually an internal operation within the container itself.
+            return container.Resolve<ITargetCompiler>()
+                .CreateContext(new ResolveContext(container, targetType ?? target.DeclaredType), targets);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Rezolver
+namespace Rezolver.Sdk
 {
     /// <summary>
     /// Interface for an object that is dependent upon other objects

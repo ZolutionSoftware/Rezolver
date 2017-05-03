@@ -13,4 +13,20 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Update="ExceptionResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExceptionResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="ExceptionResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Rezolver</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
