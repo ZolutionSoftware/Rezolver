@@ -123,9 +123,6 @@
                   <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(IResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_NoChangeCompilerConfiguration">ContainerBase.NoChangeCompilerConfiguration</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">ContainerBase.GetMissingTarget(Type)</a>
                 </div>
                 <div>
@@ -199,7 +196,7 @@
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_ScopedContainer_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class ScopedContainer : Container, ITargetContainer, IScopedContainer, IContainer, IScopeFactory, IServiceProvider, IDisposable</code></pre>
+                <pre><code class="lang-csharp hljs">public sealed class ScopedContainer : Container, ITargetContainer, IScopedContainer, IContainer, IScopeFactory, IServiceProvider, IDisposable</code></pre>
               </div>
               <h5 id="Rezolver_ScopedContainer_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>If you want your root container to act as a lifetime scope, then you should use this
@@ -211,19 +208,57 @@ the two interfaces are not actually compatible with each other, thanks to identi
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.%23ctor(Rezolver.ITargetContainer%2CRezolver.IContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedContainer__ctor_Rezolver_IContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.%23ctor(Rezolver.IContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L51">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L71">View Source</a>
               </span>
               <a id="Rezolver_ScopedContainer__ctor_" data-uid="Rezolver.ScopedContainer.#ctor*"></a>
-              <h4 id="Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)">ScopedContainer(ITargetContainer, IContainerBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a> class.</p>
+              <h4 id="Rezolver_ScopedContainer__ctor_Rezolver_IContainerBehaviour_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.IContainerBehaviour)">ScopedContainer(IContainerBehaviour)</h4>
+              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a> class, with a default new 
+<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> as the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a>; using the passed 
+<span class="paramref">behaviour</span> to initialise additional functionality.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ScopedContainer(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public ScopedContainer(IContainerBehaviour behaviour)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></td>
+                    <td><span class="parametername">behaviour</span></td>
+                    <td><p>Can be null.  A behaviour to attach to this container (and, potentially its 
+<a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a>). If not provided, then the global 
+<a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> will be used.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.%23ctor(Rezolver.ITargetContainer%2CRezolver.IContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L56">View Source</a>
+              </span>
+              <a id="Rezolver_ScopedContainer__ctor_" data-uid="Rezolver.ScopedContainer.#ctor*"></a>
+              <h4 id="Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)">ScopedContainer(ITargetContainer, IContainerBehaviour)</h4>
+              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a> class.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public ScopedContainer(ITargetContainer targets = null, IContainerBehaviour behaviour = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -238,13 +273,17 @@ the two interfaces are not actually compatible with each other, thanks to identi
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td><p>Optional.  The underlying target container to be used to resolve objects.</p>
+                    <td><p>Optional.  Contains the targets that will be used as the source of registrations for the 
+container, ultimately being passed to the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> property.</p>
+<p>If not provided, then a new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> will be created.</p>
 </td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></td>
-                    <td><span class="parametername">compilerConfig</span></td>
-                    <td><p>Optional.  The compiler configuration.</p>
+                    <td><span class="parametername">behaviour</span></td>
+                    <td><p>Can be null.  A behaviour to attach to this container (and, potentially its 
+<a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a>). If not provided, then the global 
+<a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> will be used.</p>
 </td>
                   </tr>
                 </tbody>
@@ -293,7 +332,7 @@ operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolve
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedContainer_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L88">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L108">View Source</a>
               </span>
               <a id="Rezolver_ScopedContainer_CreateScope_" data-uid="Rezolver.ScopedContainer.CreateScope*"></a>
               <h4 id="Rezolver_ScopedContainer_CreateScope" data-uid="Rezolver.ScopedContainer.CreateScope">CreateScope()</h4>
@@ -328,7 +367,7 @@ operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolve
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedContainer_Dispose.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L80">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L100">View Source</a>
               </span>
               <a id="Rezolver_ScopedContainer_Dispose_" data-uid="Rezolver.ScopedContainer.Dispose*"></a>
               <h4 id="Rezolver_ScopedContainer_Dispose" data-uid="Rezolver.ScopedContainer.Dispose">Dispose()</h4>
@@ -341,44 +380,7 @@ operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolve
               </div>
               <h5 class="implements">Implements</h5>
                   <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/es4s3w1d(v=vs.110).aspx">IDisposable.Dispose()</a></div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedContainer_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.Dispose(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ScopedContainer.cs/#L64">View Source</a>
-              </span>
-              <a id="Rezolver_ScopedContainer_Dispose_" data-uid="Rezolver.ScopedContainer.Dispose*"></a>
-              <h4 id="Rezolver_ScopedContainer_Dispose_System_Boolean_" data-uid="Rezolver.ScopedContainer.Dispose(System.Boolean)">Dispose(Boolean)</h4>
-              <div class="markdown level1 summary"><p>Releases unmanaged and - optionally - managed resources.</p>
-</div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td><span class="parametername">disposing</span></td>
-                    <td><p><code>true</code> to release both managed and unmanaged resources; <code>false</code> to release only unmanaged resources.</p>
-</td>
-                  </tr>
-                </tbody>
-              </table>
               <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
-              </div>
               <div>
                   <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve_Rezolver_IContainer_System_Type_">ContainerResolveExtensions.Resolve(IContainer, Type)</a>
               </div>

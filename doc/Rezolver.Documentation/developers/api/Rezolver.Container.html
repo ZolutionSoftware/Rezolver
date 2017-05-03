@@ -122,9 +122,6 @@
                   <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(IResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_NoChangeCompilerConfiguration">ContainerBase.NoChangeCompilerConfiguration</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">ContainerBase.GetMissingTarget(Type)</a>
                 </div>
                 <div>
@@ -205,10 +202,11 @@
               </div>
               <h5 id="Rezolver_Container_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>All of this class&#39; functionality is inherited through <a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a> and its base classes.</p>
-<p>Note that it doesn&#39;t implement lifetime scoping (although you can create a lifetime scope from it by calling its <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a>
-method).</p>
-<p>Also note that the class implements <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> through its <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> base (which merely wraps around the 
-<a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> property.  The reason for this is simplicity: in many applications, you&#39;ll want to simply create a new container, register
+<p>Note that it doesn&#39;t implement lifetime scoping (although you can create a lifetime scope from it by calling its 
+<a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a> method).</p>
+<p>Also note that the class implements <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by wrapping the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> 
+property inherited from <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>.</p>
+<p>The reason for this is simplicity: in many applications, you&#39;ll want to simply create a new container, register
 services into it, and then start using it.</p>
 </div>
               <h3 id="constructors">Constructors
@@ -218,16 +216,18 @@ services into it, and then start using it.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Container__ctor_Rezolver_IContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Container.%23ctor(Rezolver.IContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L57">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L58">View Source</a>
               </span>
               <a id="Rezolver_Container__ctor_" data-uid="Rezolver.Container.#ctor*"></a>
               <h4 id="Rezolver_Container__ctor_Rezolver_IContainerBehaviour_" data-uid="Rezolver.Container.#ctor(Rezolver.IContainerBehaviour)">Container(IContainerBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html">Container</a> class using a default empty <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></p>
+              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html">Container</a> class, with a default new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>
+as the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a>; using the passed <span class="paramref">behaviour</span> to attach additional functionality
+to the container.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Container(IContainerBehaviour compilerConfig)</code></pre>
+                <pre><code class="lang-csharp hljs">public Container(IContainerBehaviour behaviour)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -241,30 +241,34 @@ services into it, and then start using it.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></td>
-                    <td><span class="parametername">compilerConfig</span></td>
-                    <td><p>An object which will be used to configure this container and its targets to use a 
-specific compilation strategy.  If <code>null</code>, then the <a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider">DefaultProvider</a> provider 
-will be used.</p>
+                    <td><span class="parametername">behaviour</span></td>
+                    <td><p>Can be null.  A behaviour to attach to this container (and, potentially its <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a>).
+If not provided, then the global <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> will be used.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              <h5 id="Rezolver_Container__ctor_Rezolver_IContainerBehaviour__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Note to inheritors - to create an instance without attaching behaviours (thereby avoiding inadvertant
+virtual method calls from this class via the constructor), use the <a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_">Container(ITargetContainer)</a> 
+protected constructor.</p>
+</div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Container__ctor_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Container.%23ctor(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L46">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L77">View Source</a>
               </span>
               <a id="Rezolver_Container__ctor_" data-uid="Rezolver.Container.#ctor*"></a>
               <h4 id="Rezolver_Container__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.Container.#ctor(Rezolver.ITargetContainer)">Container(ITargetContainer)</h4>
-              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html">Container</a> class using the given target container and the
-default compiler configuration (<a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider">DefaultProvider</a>).</p>
+              <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html">Container</a> class using the given target container (or a new 
+<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> if not provided).  No <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> will be used, leaving the deriving class free to do so.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Container(ITargetContainer targets)</code></pre>
+                <pre><code class="lang-csharp hljs">protected Container(ITargetContainer targets)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -279,17 +283,25 @@ default compiler configuration (<a class="xref" href="Rezolver.Compilation.Compi
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td><p>The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</p>
+                    <td><p>Optional.  Contains the targets that will be used as the source of registrations for the container.</p>
+<p>If not provided, then a new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> will be created.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              <h5 id="Rezolver_Container__ctor_Rezolver_ITargetContainer__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This constructor does not attach any <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> behaviours, because behaviours typically
+call methods which are declared virtual on this class - which could be unsafe.</p>
+<p>If this does not apply to your derived class (which is unlikely) - use one of the 
+<a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">Container(ITargetContainer, IContainerBehaviour)</a> or 
+<a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_IContainerBehaviour_">Container(IContainerBehaviour)</a> constructors.</p>
+</div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Container.%23ctor(Rezolver.ITargetContainer%2CRezolver.IContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L35">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L42">View Source</a>
               </span>
               <a id="Rezolver_Container__ctor_" data-uid="Rezolver.Container.#ctor*"></a>
               <h4 id="Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_" data-uid="Rezolver.Container.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)">Container(ITargetContainer, IContainerBehaviour)</h4>
@@ -298,7 +310,7 @@ default compiler configuration (<a class="xref" href="Rezolver.Compilation.Compi
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Container(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public Container(ITargetContainer targets = null, IContainerBehaviour behaviour = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -313,22 +325,26 @@ default compiler configuration (<a class="xref" href="Rezolver.Compilation.Compi
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td><p>Optional.  The targets that will be used to resolve objects.  If left null, then a new, empty, target container will be constructed.</p>
+                    <td><p>Optional.  The target container whose registrations will be used for dependency lookup when <see cref="!:Resolve(IResolveContext)"></see> 
+(and other operations) is called.  If not provided, a new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> instance is constructed.  This will ultimately be available 
+to inherited types, after construction, through the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> property.</p>
 </td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></td>
-                    <td><span class="parametername">compilerConfig</span></td>
-                    <td><p>Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-strategy.  If <code>null</code>, then the <a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider">DefaultProvider</a> provider will be used.</p>
+                    <td><span class="parametername">behaviour</span></td>
+                    <td><p>Can be null.  A behaviour to attach to this container (and, potentially its <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a>).
+If not provided, then the global <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> will be used.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              <h5 id="Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Note to inheritors - to create an instance without attaching behaviours (thereby avoiding inadvertant
+virtual method calls from this class via the constructor), use the <a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_">Container(ITargetContainer)</a> 
+protected constructor.</p>
+</div>
               <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
-              </div>
               <div>
                   <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve_Rezolver_IContainer_System_Type_">ContainerResolveExtensions.Resolve(IContainer, Type)</a>
               </div>
@@ -460,7 +476,7 @@ strategy.  If <code>null</code>, then the <a class="xref" href="Rezolver.Compila
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Container.md&amp;value=---%0Auid%3A%20Rezolver.Container%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L27" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Container.cs/#L29" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

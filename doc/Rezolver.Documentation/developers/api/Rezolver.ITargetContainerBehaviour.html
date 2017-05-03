@@ -104,7 +104,8 @@
               
               <h1 id="Rezolver_ITargetContainerBehaviour" data-uid="Rezolver.ITargetContainerBehaviour">Interface ITargetContainerBehaviour
               </h1>
-              <div class="markdown level0 summary"><p>Provides configuration for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
+              <div class="markdown level0 summary"><p>Represents a behaviour that can be attached to <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> instances to
+customise how it behaves.</p>
 </div>
               <div class="markdown level0 conceptual"></div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
@@ -114,30 +115,33 @@
                 <pre><code class="lang-csharp hljs">public interface ITargetContainerBehaviour</code></pre>
               </div>
               <h5 id="Rezolver_ITargetContainerBehaviour_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>This abstraction provides a way to apply common setup procedures to <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
-objects which are then used by containers and during compilation - typically by registering targets or 
-target containers within it.</p>
+              <div class="markdown level0 remarks"><p>This abstraction provides a way to customise and extend an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>;
+typically by registering one or more <a class="xref" href="Rezolver.ITarget.html">ITarget</a> or <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
+objects in the target container passed to <a class="xref" href="Rezolver.ITargetContainerBehaviour.html#Rezolver_ITargetContainerBehaviour_Attach_Rezolver_ITargetContainer_">Attach(ITargetContainer)</a>.</p>
 <p>While similar to <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a>, this is specifically intended to be used when
-creating any <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>; whereas the other interface is for when a container is created
-which also uses <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+creating any <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.  Behaviours that are implemented through this
+interface are typically used to customise how the underlying <a class="xref" href="Rezolver.ITarget.html">ITarget</a> registrations are stored
+and retrieved in the target container.</p>
+<p>Functionality such as enumerable resolving, and the default <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> to be
+used by <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> is configured by instances of this interface.</p>
 </div>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ITargetContainerBehaviour_Configure_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerBehaviour.Configure(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ITargetContainerBehaviour_Attach_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerBehaviour.Attach(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainerBehaviour.cs/#L25">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainerBehaviour.cs/#L28">View Source</a>
               </span>
-              <a id="Rezolver_ITargetContainerBehaviour_Configure_" data-uid="Rezolver.ITargetContainerBehaviour.Configure*"></a>
-              <h4 id="Rezolver_ITargetContainerBehaviour_Configure_Rezolver_ITargetContainer_" data-uid="Rezolver.ITargetContainerBehaviour.Configure(Rezolver.ITargetContainer)">Configure(ITargetContainer)</h4>
-              <div class="markdown level1 summary"><p>Called to configure the given <span class="paramref">targets</span>.</p>
+              <a id="Rezolver_ITargetContainerBehaviour_Attach_" data-uid="Rezolver.ITargetContainerBehaviour.Attach*"></a>
+              <h4 id="Rezolver_ITargetContainerBehaviour_Attach_Rezolver_ITargetContainer_" data-uid="Rezolver.ITargetContainerBehaviour.Attach(Rezolver.ITargetContainer)">Attach(ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Called to attach this behaviour to the given <span class="paramref">targets</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">void Configure(ITargetContainer targets)</code></pre>
+                <pre><code class="lang-csharp hljs">void Attach(ITargetContainer targets)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -152,11 +156,16 @@ which also uses <a class="xref" href="Rezolver.ITargetContainer.html">ITargetCon
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td><p>The target container to be configured - will not be null when called by the framework.</p>
+                    <td><p>The target container to which the behaviour is to be attached - will not be 
+null when called by the framework.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              <h3 id="seealso">See Also</h3>
+              <div class="seealso">
+                  <div><a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_TargetContainerBehaviour">TargetContainerBehaviour</a></div>
+              </div>
                         </article>
           </div>
           
@@ -168,7 +177,7 @@ which also uses <a class="xref" href="Rezolver.ITargetContainer.html">ITargetCon
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ITargetContainerBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainerBehaviour.cs/#L19" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainerBehaviour.cs/#L21" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

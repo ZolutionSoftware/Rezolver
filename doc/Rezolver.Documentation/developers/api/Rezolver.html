@@ -112,6 +112,22 @@
                   <section><p>Contains extension methods for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to create targets which alias others by
 different types.</p>
 </section>
+                  <h4><a class="xref" href="Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a></h4>
+                  <section><p>This implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> binds all publicly writable
+properties and public fields to values obtained from the container.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.BindNoMembersBehaviour.html">BindNoMembersBehaviour</a></h4>
+                  <section><p>This is the default <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> which doesn&#39;t bind any members.  It&#39;s
+a singleton accessible only via the <a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a> static property.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.BindPublicFieldsBehaviour.html">BindPublicFieldsBehaviour</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> which binds all public instance fields
+on new instances to services from the container.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.BindPublicPropertiesBehaviour.html">BindPublicPropertiesBehaviour</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> which binds all non-indexer publicly writeable instance 
+properties on new instances to services from the container.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a></h4>
                   <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
 <p>Only creatable through inheritance.</p>
@@ -142,6 +158,11 @@ by the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetCont
 which caches singleton instances of this class on a per-type basis) which can then be used just as if the lookup succeeded.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ContainerBehaviourCollection.html">ContainerBehaviourCollection</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> which contains zero or or more other <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a>
+objects.  Behaviours can depend on other behaviours, and this collection ensures that they are applied
+in the correct order.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.ContainerBehaviourCollectionExtensions.html">ContainerBehaviourCollectionExtensions</a></h4>
                   <section></section>
                   <h4><a class="xref" href="Rezolver.ContainerResolveExtensions.html">ContainerResolveExtensions</a></h4>
                   <section><p>Extension methods for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which provide shortcuts for the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a>
@@ -168,32 +189,9 @@ or its non-generic equivalent.</p>
                   <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which simplify the registration of decorators (via the
 <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a> pseudo-target)</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a></h4>
-                  <section><p>WILL BE RENAMED TO AllMembersBindingBehaviour IN 1.2 - SEE <a href="https://github.com/ZolutionSoftware/Rezolver/issues/7">https://github.com/ZolutionSoftware/Rezolver/issues/7</a> FOR MORE</p>
-<p>The default implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> when you are creating a
-<a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> and you want publicly writable
-properties and public fields to be assigned values obtained from the container.</p>
-<p>If you do not require properties or fields to be bound from the container, then use a null <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>.</p>
-</section>
                   <h4><a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html">DelegateTargetContainerExtensions</a></h4>
                   <section><p>Extension methods for ITargetContainer designed to simplify the registration of <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> and its
 numerous generic variants.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.DependantBase-1.html">DependantBase&lt;T&gt;</a></h4>
-                  <section><p>Suggested base class for implementations of <a class="xref" href="Rezolver.IDependant-1.html">IDependant&lt;TDependency&gt;</a>.</p>
-<p>Provides functionality such as adding required as well as optional dependencies; plus shortcut 
-filters for declaring dependencies on all objects of a certain type, etc.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.DependantCollection-1.html">DependantCollection&lt;TDependency&gt;</a></h4>
-                  <section><p>A collection of objects which may or may not have dependencies on each other.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html">EnumerableTargetBuilderExtensions</a></h4>
-                  <section><p>Houses an extension method which enables native resolving of IEnumerables of services on 
-<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> containers which, in turn, enables it for any <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>
-containers which use that target container.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.ExceptionResources.html">ExceptionResources</a></h4>
-                  <section><p>A strongly-typed resource class, for looking up localized strings, etc.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ExpressionFunctions.html">ExpressionFunctions</a></h4>
                   <section><p>This type is only used when using expressions as targets(via the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> type) - it&#39;s
@@ -208,10 +206,18 @@ in place of static code.</p>
                   <section><p>A special type of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which stores targets (and potentially other containers)
 which are specifically keyed either to a particular open generic type or a closed generic built from it.</p>
 </section>
+                  <h4><a class="xref" href="Rezolver.GlobalBehaviours.html">GlobalBehaviours</a></h4>
+                  <section><p>Contains the global behaviours for <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>-derived containers (that&#39;s all
+containers in Rezolver), the special <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a>, and the <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>
+classes.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.MemberBinding.html">MemberBinding</a></h4>
                   <section><p>Represents the binding of an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> to a property or field of a given type.</p>
 <p>Not to be confused with the type of the same name from the System.Linq.Expressions namespace, although
 they are technically equivalent.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.MemberBindingBehaviour.html">MemberBindingBehaviour</a></h4>
+                  <section><p>Static accessor for the common member binding behaviours provided by Rezolver.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.MethodBinding.html">MethodBinding</a></h4>
                   <section><p>Represents a binding to a method whose arguments will be supplied by <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances.</p>
@@ -267,6 +273,11 @@ from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> names
 <p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s, is also Generic type aware,
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
 </section>
+                  <h4><a class="xref" href="Rezolver.TargetContainerBehaviourCollection.html">TargetContainerBehaviourCollection</a></h4>
+                  <section><p>An <a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a> which contains zero or or more other 
+<a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a> objects.  Behaviours can depend on other behaviours, and this 
+collection ensures that they are applied in the correct order.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
                   <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves 
 <a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by type.</p>
@@ -278,10 +289,6 @@ custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html">ITarget<
 </section>
                 <h3 id="interfaces">Interfaces
               </h3>
-                  <h4><a class="xref" href="Rezolver.IChildTargetContainer.html">IChildTargetContainer</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that inherits all registrations from a (<a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer_Parent">Parent</a>) target container.
-If it cannot resolve a target for a particular type, will defer to its parent for fallback.</p>
-</section>
                   <h4><a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a></h4>
                   <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> - this is
 the ultimate target of all <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> calls in the standard
@@ -291,8 +298,12 @@ container implementations within the Rezolver framework.</p>
                   <section><p>The primary IOC container interface in the Rezolver framework.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></h4>
-                  <section><p>Encapsulates a configurable behaviour for an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which also uses an 
-<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> as the source of its registrations.</p>
+                  <section><p>Represents a behaviour for an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> (specifically one which also uses an 
+<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> as the source of its registrations).</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.IContainerBehaviour-1.html">IContainerBehaviour&lt;TContainerService&gt;</a></h4>
+                  <section><p>Represents a behaviour for an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which configures/extends or supplies a particular 
+service (and potentially services related to <span class="typeparamref">TContainerService</span>) for the container.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></h4>
                   <section><p>This is an <a class="xref" href="Rezolver.IContainer.html">IContainer</a>-like object (resolving functionality is provided through the extension methods
@@ -300,9 +311,6 @@ in the <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">Cont
 and scoped singleton functionality for any object.</p>
 <p>Implementations of this interface must, in their implementation of <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a>, create a child scope
 of this scope.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.IDependant-1.html">IDependant&lt;TDependency&gt;</a></h4>
-                  <section><p>Common interface for an object which has dependencies on one or more other objects of a given type</p>
 </section>
                   <h4><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h4>
                   <section><p>Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.</p>
@@ -331,7 +339,8 @@ that the targets are registered against.</p>
 <p>This is where all your service registrations will ultimately go.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a></h4>
-                  <section><p>Provides configuration for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
+                  <section><p>Represents a behaviour that can be attached to <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> instances to
+customise how it behaves.</p>
 </section>
                 <h3 id="enums">Enums
               </h3>

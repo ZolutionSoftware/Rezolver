@@ -13,19 +13,21 @@ var service = new ServiceWithFields()
 }
 ```
 
-This is all done via implementations of the @Rezolver.IMemberBindingBehaviour interface - of which there is currently one
-implementation - @Rezolver.DefaultMemberBindingBehaviour.
+This is all done via implementations of the @Rezolver.IMemberBindingBehaviour interface - of which there are a few implementations
+supplied by Rezolver, which can be found in the @Rezolver.MemberBindingBehaviour static class:
+
+1. **@Rezolver.MemberBindingBehaviour.BindNone**: prevents binding of any field or properties (implemented by <xref:Rezolver.BindNoMembersBehaviour>)
+2. **@Rezolver.MemberBindingBehaviour.BindAll**: binds all publicly writeable properties and fields to values from the container, even
+if the container doesn't have a registration for the member's type.  Implemented by an instance of @Rezolver.BindAllMembersBindingBehaviour.
+3. **@Rezolver.MemberBindingBehaviour.BindProperties**: binds only publicly writeable properties to values from the container.  Fields are
+ignored.  Implemented by an instance of @Rezolver.BindPublicPropertiesBehaviour.
+4. **@Rezolver.MemberBindingBehaviour.BindFields**: binds only public fields to values from the container.  Properties are
+ignored.  Implemented by an instance of @Rezolver.BindPublicFieldsBehaviour.
 
 Almost all of the ways in which you can create @Rezolver.Targets.ConstructorTarget
 (factory methods, registration methods, constructors etc) will also accept a @Rezolver.IMemberBindingBehaviour with which to enable 
 member injection if you want to.
 
-> [!WARNING]
-> @Rezolver.DefaultMemberBindingBehaviour will be renamed to `AllMembersBindingBehaviour` in 1.2, and might also
-> go into a child namespace - e.g. `Rezolver.MemberBindingBehaviours`.
-
-@Rezolver.DefaultMemberBindingBehaviour automatically binds all ***publicly writeable*** properties and fields on the type being constructed
-with values from the container when resolved - *regardless* of whether the required services exist in the container.
 
 * * *
 
@@ -48,11 +50,9 @@ We simply setup the container to build all three types and make sure to pass the
 > with constructors, where it's reasonable to assume all parameters are to be injected, there are no simple rules
 > that can always applied to an object to determine which properties and/or fields should be auto-injected.
 
-*It's likely that two extra 'default' behaviours - `PropertiesOnlyBindingBehaviour` and `FieldsOnlyBindingBehaviour`, which
-will only bind publicly writeable properties __or__ public fields, respectively -
-will be added to the framework in 1.2*
-
 * * *
+
+## TODO: Example using @Rezolver.GlobalBehaviours
 
 ## Example - Custom binding behaviour
 

@@ -13,13 +13,13 @@ namespace Rezolver.Tests.Compilation.Specification
         // These feature tests came from Issue #31
 
         [Fact]
-        public void ShouldResolveCustomCompileTargetDirectly()
+        public void ICompiledTarget_ShouldResolveCustomCompileTargetDirectly()
         {
             // First test just registers the custom compiled target in the container
             // and then directly resolves it.  The compiler *shouldn't* even be required because
             // the default container classes have shortcircuiting logic to avoid compiling
-            // targets which are already compiled.  This is as much a sanity check of that as much
-            // as anything else.
+            // targets which are already compiled.  Even so - we still test it just in case
+            // that part of the container's behaviour changes in the future (or is customised).
             var targets = CreateTargetContainer();
 
             // will register against 'int'
@@ -31,14 +31,14 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void ShouldUseCustomCompiledTargetAsDependency()
+        public void ICompiledTarget_ShouldUseCustomCompiledTargetAsDependency()
         {
             // This test does the same, except this time the Custom target is used to
             // satisfy a dependency in another object.  This is different because the compiler 
             // should be directly involved in 'compiling' the target for the purposes of 
             // satisfying the constructor parameter.  And since we haven't told the compiler
             // anything about our custom target, it should be forced to consider its ICompiledTarget
-            // implementation
+            // implementation.
             var targets = CreateTargetContainer();
 
             targets.Register(new CustomTargetAndCompiledTarget(2));
@@ -47,7 +47,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var container = CreateContainer(targets);
 
             var result = container.Resolve<RequiresInt>();
-            Assert.Equal(1, result.IntValue);
+            Assert.Equal(2, result.IntValue);
         }
     }
 }

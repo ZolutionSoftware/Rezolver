@@ -27,7 +27,9 @@ namespace Rezolver.Compilation.Expressions
             return _cache.GetOrAdd(target.GetType(), t => new Lazy<IExpressionBuilder>(() =>
             {
                 List<Type> builderTypes =
-                    TargetSearchTypes(t).Select(tt => typeof(IExpressionBuilder<>).MakeGenericType(t)).ToList();
+                    TargetSearchTypes(t)
+                    .Distinct()
+                    .Select(tt => typeof(IExpressionBuilder<>).MakeGenericType(tt)).ToList();
 
                 //and add the IExpressionBuilder type
                 builderTypes.Add(typeof(IExpressionBuilder));
@@ -64,7 +66,7 @@ namespace Rezolver.Compilation.Expressions
             {
                 yield return baseT;
             }
-            if (targetType is ICompiledTarget)
+            if (TypeHelpers.IsAssignableFrom(typeof(ICompiledTarget), targetType))
                 yield return typeof(ICompiledTarget);
         }
     }

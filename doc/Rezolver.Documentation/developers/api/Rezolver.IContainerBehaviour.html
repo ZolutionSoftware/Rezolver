@@ -104,50 +104,49 @@
               
               <h1 id="Rezolver_IContainerBehaviour" data-uid="Rezolver.IContainerBehaviour">Interface IContainerBehaviour
               </h1>
-              <div class="markdown level0 summary"><p>Encapsulates a configurable behaviour for an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which also uses an 
-<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> as the source of its registrations.</p>
+              <div class="markdown level0 summary"><p>Represents a behaviour for an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> (specifically one which also uses an 
+<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> as the source of its registrations).</p>
 </div>
               <div class="markdown level0 conceptual"></div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="Rezolver.IDependant-1.html#Rezolver_IDependant_1_GetDependencies_System_Collections_Generic_IEnumerable__0__">IDependant&lt;IContainerBehaviour&gt;.GetDependencies(IEnumerable&lt;IContainerBehaviour&gt;)</a>
-                </div>
-              </div>
               <h6><strong>Namespace</strong>:Rezolver</h6>
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_IContainerBehaviour_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public interface IContainerBehaviour : IDependant&lt;IContainerBehaviour&gt;</code></pre>
+                <pre><code class="lang-csharp hljs">public interface IContainerBehaviour</code></pre>
               </div>
               <h5 id="Rezolver_IContainerBehaviour_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>While similar to <a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>, this is specifically used
-when a container is created which also uses an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> as the source of its
-service registrations and other behaviours.  Therefore, the type of configuration performed by
-an instance of this interface will not be the same as that performed by <a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>.</p>
-<p>For example, to configure compilers you would use this interface; to allow automatic enumerable resolving, you
-would use <a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>.</p>
-<p>As additional background, many of the container and target container classes use registrations within themselves
-to configure their behaviour.  Referring back to compilation, for example, the built-in containers will self-resolve
-an instance of a compiler when a target needs compiling.</p>
+for new containers.</p>
+<p>A behaviour can be passed to any of the provided <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>-derived types on 
+construction (see the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_IContainerBehaviour_Rezolver_ITargetContainer_">ContainerBase(IContainerBehaviour, ITargetContainer)</a> 
+constructor).  If one is not passed then a default is used from the <a class="xref" href="Rezolver.GlobalBehaviours.html">GlobalBehaviours</a> class.</p>
+<p>The actual one used depends whether it&#39;s an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> or not: Rezolver has global 
+behaviours for the standalone container types (via the <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> 
+property) and for overriding containers (via the <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_OverridingContainerBehaviour">OverridingContainerBehaviour</a> 
+property).</p>
+<p>Behaviours extend <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>-based containers by registering well-known service types
+in the target container passed to <a class="xref" href="Rezolver.IContainerBehaviour.html#Rezolver_IContainerBehaviour_Attach_Rezolver_IContainer_Rezolver_ITargetContainer_">Attach(IContainer, ITargetContainer)</a> - which is the target container from which the container
+itself will retrieve registrations when resolving instances.  The built in <a class="xref" href="Rezolver.IContainer.html">IContainer</a> classes resolve
+these service types (e.g. <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>) as part of normal operation, so - by providing alternative
+or additional registrations - behaviours can extend the underlying container.</p>
 </div>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IContainerBehaviour_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IContainerBehaviour.Configure(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IContainerBehaviour_Attach_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IContainerBehaviour.Attach(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerBehaviour.cs/#L27">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerBehaviour.cs/#L37">View Source</a>
               </span>
-              <a id="Rezolver_IContainerBehaviour_Configure_" data-uid="Rezolver.IContainerBehaviour.Configure*"></a>
-              <h4 id="Rezolver_IContainerBehaviour_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.IContainerBehaviour.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
-              <div class="markdown level1 summary"><p>Called to configure the behaviour for the given container via the given targets.</p>
+              <a id="Rezolver_IContainerBehaviour_Attach_" data-uid="Rezolver.IContainerBehaviour.Attach*"></a>
+              <h4 id="Rezolver_IContainerBehaviour_Attach_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.IContainerBehaviour.Attach(Rezolver.IContainer,Rezolver.ITargetContainer)">Attach(IContainer, ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Attaches the behaviour to the <span class="paramref">container</span> and/or its <span class="paramref">targets</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">void Configure(IContainer container, ITargetContainer targets)</code></pre>
+                <pre><code class="lang-csharp hljs">void Attach(IContainer container, ITargetContainer targets)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -162,15 +161,22 @@ an instance of a compiler when a target needs compiling.</p>
                   <tr>
                     <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
                     <td><span class="parametername">container</span></td>
-                    <td></td>
+                    <td><p>The container to which the behaviour is to be attached.</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td></td>
+                    <td><p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> for the <span class="paramref">container</span> to
+which the behaviour is to be attached.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
+              <h3 id="seealso">See Also</h3>
+              <div class="seealso">
+                  <div><a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a></div>
+              </div>
                         </article>
           </div>
           
@@ -182,7 +188,7 @@ an instance of a compiler when a target needs compiling.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IContainerBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.IContainerBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerBehaviour.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerBehaviour.cs/#L29" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

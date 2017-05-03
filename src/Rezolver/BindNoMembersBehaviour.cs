@@ -13,11 +13,7 @@ namespace Rezolver
     {
         private static MemberBinding[] NoBindings = new MemberBinding[0];
 
-        /// <summary>
-        /// The one and only instance of the <see cref="BindNoMembersBehaviour"/>
-        /// </summary>
-        internal static BindNoMembersBehaviour Instance { get; } = new BindNoMembersBehaviour();
-        private BindNoMembersBehaviour() { }
+        internal BindNoMembersBehaviour() { }
 
         /// <summary>
         /// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)"/>

@@ -118,29 +118,25 @@ so that new registrations can be added without interfering with upstream contain
 <p>Note that many of the interface members are implemented explicitly - therefore most of your interaction with 
 this type is through its implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html">CompilerConfiguration</a></h4>
-                  <section><p>Controls the system-wide compiler configuration used by default by all standard Rezolver containers.</p>
-</section>
                   <h4><a class="xref" href="Rezolver.Compilation.CompileStackEntry.html">CompileStackEntry</a></h4>
                   <section><p>Represents an entry in the compilation stack of a <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>,
 recording both a target that is being compiled, and the type for which it is being compiled.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.TargetCompiler.html">TargetCompiler</a></h4>
-                  <section><p>Holds a reference to the default compiler for this application.</p>
+                  <h4><a class="xref" href="Rezolver.Compilation.TargetCompilerExtensions.html">TargetCompilerExtensions</a></h4>
+                  <section><p>Extensions for the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> interface.</p>
 </section>
                 <h3 id="interfaces">Interfaces
               </h3>
                   <h4><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></h4>
                   <section><p>Tracks state and provides services during the compilation phase in which <a class="xref" href="Rezolver.ITarget.html">ITarget</a> targets
 are compiled into <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> targets, which produce actual instances of objects.</p>
-</section>
-                  <h4><a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a></h4>
-                  <section><p>Interface for an object which creates <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> instances for when the system needs to
-compile an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>.</p>
+<p>Instances of this interface are created by calling the 
+<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_">CreateContext(IResolveContext, ITargetContainer)</a> method of the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>
+which is registered in a container.</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a></h4>
                   <section><p>An object that produces <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s given a 
-particular <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.</p>
+particular <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> - for which it also acts as a factory.</p>
 </section>
                         </article>
           </div>

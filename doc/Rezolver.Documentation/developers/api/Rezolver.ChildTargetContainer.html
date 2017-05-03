@@ -164,34 +164,34 @@
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_ChildTargetContainer_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class ChildTargetContainer : TargetContainer, IChildTargetContainer, ITargetContainer</code></pre>
+                <pre><code class="lang-csharp hljs">public sealed class ChildTargetContainer : TargetContainer, ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_ChildTargetContainer_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>When it&#39;s looking to find an entry for a type, if it
-cannot find one within its own registrations, it will forward the call on to
-its ancestors (starting with its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).
-As a result, any dependencies required by registrations in this container can be provided by
-any ancestor.
-Fallback logic in the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Fetch_System_Type_">Fetch(Type)</a>
-is triggered by the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property.</p>
+              <div class="markdown level0 remarks"><p>When this class searches for an entry for a type, if it
+cannot find one within its own registrations, it falls back to the registrations of
+its ancestors (starting with its <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).</p>
+<p>As a result, any dependencies required by registrations in this container can be provided by
+any ancestor.</p>
+<p>This fallback logic in the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Fetch_System_Type_">Fetch(Type)</a> is triggered by the 
+<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property.</p>
 </div>
               <h3 id="constructors">Constructors
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ChildTargetContainer__ctor_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.%23ctor(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ChildTargetContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.%23ctor(Rezolver.ITargetContainer%2CRezolver.ITargetContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L32">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L37">View Source</a>
               </span>
               <a id="Rezolver_ChildTargetContainer__ctor_" data-uid="Rezolver.ChildTargetContainer.#ctor*"></a>
-              <h4 id="Rezolver_ChildTargetContainer__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.ChildTargetContainer.#ctor(Rezolver.ITargetContainer)">ChildTargetContainer(ITargetContainer)</h4>
+              <h4 id="Rezolver_ChildTargetContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetContainerBehaviour_" data-uid="Rezolver.ChildTargetContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetContainerBehaviour)">ChildTargetContainer(ITargetContainer, ITargetContainerBehaviour)</h4>
               <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ChildTargetContainer(ITargetContainer parent)</code></pre>
+                <pre><code class="lang-csharp hljs">public ChildTargetContainer(ITargetContainer parent, ITargetContainerBehaviour behaviour = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -206,7 +206,15 @@ is triggered by the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">parent</span></td>
-                    <td><p>Required. The parent target container</p>
+                    <td><p>Required. The parent target container.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a></td>
+                    <td><span class="parametername">behaviour</span></td>
+                    <td><p>Optional.  The behaviour to attach to this target container.  If not provided, then
+the <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_TargetContainerBehaviour">TargetContainerBehaviour</a> in the <a class="xref" href="Rezolver.GlobalBehaviours.html">GlobalBehaviours</a>
+class is used by default.</p>
 </td>
                   </tr>
                 </tbody>
@@ -218,11 +226,11 @@ is triggered by the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ChildTargetContainer_Parent.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.Parent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L43">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L51">View Source</a>
               </span>
               <a id="Rezolver_ChildTargetContainer_Parent_" data-uid="Rezolver.ChildTargetContainer.Parent*"></a>
               <h4 id="Rezolver_ChildTargetContainer_Parent" data-uid="Rezolver.ChildTargetContainer.Parent">Parent</h4>
-              <div class="markdown level1 summary"><p>Gets the parent.</p>
+              <div class="markdown level1 summary"><p>Gets the parent target container.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -245,8 +253,6 @@ is triggered by the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget
                   </tr>
                 </tbody>
               </table>
-              <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer_Parent">IChildTargetContainer.Parent</a></div>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
@@ -254,7 +260,7 @@ is triggered by the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ChildTargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L56">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L64">View Source</a>
               </span>
               <a id="Rezolver_ChildTargetContainer_Fetch_" data-uid="Rezolver.ChildTargetContainer.Fetch*"></a>
               <h4 id="Rezolver_ChildTargetContainer_Fetch_System_Type_" data-uid="Rezolver.ChildTargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
@@ -303,14 +309,12 @@ can be found.</p>
               </table>
               <h5 class="overrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Fetch_System_Type_">TargetDictionaryContainer.Fetch(Type)</a></div>
-              <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">ITargetContainer.Fetch(Type)</a></div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ChildTargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L72">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L80">View Source</a>
               </span>
               <a id="Rezolver_ChildTargetContainer_FetchAll_" data-uid="Rezolver.ChildTargetContainer.FetchAll*"></a>
               <h4 id="Rezolver_ChildTargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ChildTargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
@@ -358,12 +362,7 @@ empty enumerable if the type is not registered.</p>
               </table>
               <h5 class="overrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchAll_System_Type_">TargetDictionaryContainer.FetchAll(Type)</a></div>
-              <h5 class="implements">Implements</h5>
-                  <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">ITargetContainer.FetchAll(Type)</a></div>
               <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
-              </div>
               <div>
                   <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias__2_Rezolver_ITargetContainer_">AliasTargetContainerExtensions.RegisterAlias&lt;TAlias, TOriginal&gt;(ITargetContainer)</a>
               </div>
@@ -469,7 +468,6 @@ empty enumerable if the type is not registered.</p>
               <h3 id="seealso">See Also</h3>
               <div class="seealso">
                   <div><a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a></div>
-                  <div><a class="xref" href="Rezolver.IChildTargetContainer.html">IChildTargetContainer</a></div>
               </div>
                         </article>
           </div>
@@ -482,7 +480,7 @@ empty enumerable if the type is not registered.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ChildTargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.ChildTargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L24" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ChildTargetContainer.cs/#L25" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

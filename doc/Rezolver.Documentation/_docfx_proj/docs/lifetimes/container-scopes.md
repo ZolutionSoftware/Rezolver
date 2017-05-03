@@ -175,20 +175,16 @@ example shown above.
 
 ### Singleton depending on a Transient
 
-If the roles are reversed and a singleton takes a dependency on a transient `IDisposable`, then that transient should also be tracked in the
-root scope, so that it remains usable for the lifetime of the singleton:
+> [!INFO]
+> This didn't work properly prior to v1.2.  If you are still using v1.1, then
+> consider upgrading to the latest package
 
-> [!CAUTION]
-> There is a bug in v1.1 which means that the following example *does not work* - the disposable dependency is prematurely disposed.
-> The issue [is already in the backlog](https://github.com/ZolutionSoftware/Rezolver/issues/28) and is planned to be fixed in 1.2.
-> 
-> In meantime, there are two workarounds - either ensure that singletons are always dependant on other singleton disposables; or you 
-> can force the correct scope to be selected for the transient dependencies of a singleton by ensuring that you resolve the
-> singleton in the *root scope __first__*.
+If the roles are reversed and a singleton takes a dependency on a transient `IDisposable`, then that transient (and any other dependencies)
+will also be tracked in the root scope, so that it remains usable for the lifetime of the singleton:
 
 [!code-csharp[ImplicitScopeExamples.cs](../../../../../test/Rezolver.Tests.Examples/ImplicitScopeExamples.cs#example5)]
 
-The bug that this example highlights will be one of the first things to be addressed in the v1.2.
+
 
 * * *
 

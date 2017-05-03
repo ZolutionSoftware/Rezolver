@@ -28,22 +28,12 @@ namespace Rezolver
 	/// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
 	public class BindAllMembersBehaviour : IMemberBindingBehaviour
 	{
-		private static readonly Lazy<BindAllMembersBehaviour> _instance = new Lazy<BindAllMembersBehaviour>(() => new BindAllMembersBehaviour());
-		/// <summary>
-		/// Gets the one and only instance of <see cref="BindAllMembersBehaviour"/>
-		/// </summary>
-		internal static BindAllMembersBehaviour Instance
-		{
-			get
-			{
-				return _instance.Value;
-			}
-		}
-
-		/// <summary>
-		/// Constructs a new instance of the <see cref="BindAllMembersBehaviour"/> class.
-		/// </summary>
-		protected BindAllMembersBehaviour() { }
+        /// <summary>
+        /// Constructs a new instance of the <see cref="BindAllMembersBehaviour"/> class.
+        /// 
+        /// Can only be created by Rezolver or through inheritance.
+        /// </summary>
+        protected internal BindAllMembersBehaviour() { }
 
 		/// <summary>
 		/// Implementation of <see cref="IMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)"/>.
@@ -159,7 +149,7 @@ namespace Rezolver
 		/// <param name="context">The current compilation context.</param>
 		/// <param name="type">The type whose members are to be bound.</param>
 		/// <remarks>Override this method to filter the properties which can be bound.  The base implementation
-		/// returns all instance properties which have publicly accessible 'set' accessors.</remarks>
+		/// returns all non-indexer instance properties which have publicly accessible 'set' accessors.</remarks>
 		protected virtual IEnumerable<PropertyInfo> GetBindableProperties(ICompileContext context, Type type)
 		{
 			return type.GetInstanceProperties().PubliclyWritable().Where(pi => pi.GetIndexParameters()?.Length == 0);

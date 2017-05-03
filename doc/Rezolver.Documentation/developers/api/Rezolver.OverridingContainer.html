@@ -123,9 +123,6 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                   <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_">CachingContainerBase.GetCompiledRezolveTarget(IResolveContext)</a>
                 </div>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_NoChangeCompilerConfiguration">ContainerBase.NoChangeCompilerConfiguration</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">ContainerBase.GetMissingTarget(Type)</a>
                 </div>
                 <div>
@@ -136,6 +133,9 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_">ContainerBase.Resolve(IResolveContext)</a>
+                </div>
+                <div>
+                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_IResolveContext_System_Object__">ContainerBase.TryResolve(IResolveContext, Object)</a>
                 </div>
                 <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CreateScope">ContainerBase.CreateScope()</a>
@@ -193,7 +193,7 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
               <h6><strong>Assembly</strong>:Rezolver.dll</h6>
               <h5 id="Rezolver_OverridingContainer_syntax">Syntax</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class OverridingContainer : Container, IContainer, IScopeFactory, IServiceProvider, ITargetContainer</code></pre>
+                <pre><code class="lang-csharp hljs">public sealed class OverridingContainer : Container, IContainer, IScopeFactory, IServiceProvider, ITargetContainer</code></pre>
               </div>
               <h5 id="Rezolver_OverridingContainer_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>When overriding another <a class="xref" href="Rezolver.IContainer.html">IContainer</a>, you are overriding the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> objects that
@@ -213,7 +213,7 @@ in the overridden container by virtue of the fact that the overriding container 
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.%23ctor(Rezolver.IContainer%2CRezolver.ITargetContainer%2CRezolver.IContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L46">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L50">View Source</a>
               </span>
               <a id="Rezolver_OverridingContainer__ctor_" data-uid="Rezolver.OverridingContainer.#ctor*"></a>
               <h4 id="Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_" data-uid="Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)">OverridingContainer(IContainer, ITargetContainer, IContainerBehaviour)</h4>
@@ -222,7 +222,7 @@ in the overridden container by virtue of the fact that the overriding container 
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)</code></pre>
+                <pre><code class="lang-csharp hljs">public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour behaviour = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -246,14 +246,17 @@ their dependencies from this container.</p>
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td><p>Optional. A specific target container to be used for this container&#39;s own registrations.</p>
+                    <td><p>Optional. Contains the targets that will be used as the source of registrations for this container
+(note - separate to those of the <span class="paramref">inner</span> container).</p>
+<p>If not provided, then a new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> will be created.</p>
 </td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></td>
-                    <td><span class="parametername">compilerConfig</span></td>
-                    <td><p>Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-strategy.  If <code>null</code> (recommended), then the <span class="paramref">inner</span> container&#39;s configuration will be inherited.</p>
+                    <td><span class="parametername">behaviour</span></td>
+                    <td><p>Can be null.  A behaviour to attach to this container (and, potentially its 
+<a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a>).  If not provided, then the global 
+<a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_OverridingContainerBehaviour">OverridingContainerBehaviour</a> will be used.</p>
 </td>
                   </tr>
                 </tbody>
@@ -265,7 +268,7 @@ strategy.  If <code>null</code> (recommended), then the <span class="paramref">i
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer_CanResolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.CanResolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L58">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L63">View Source</a>
               </span>
               <a id="Rezolver_OverridingContainer_CanResolve_" data-uid="Rezolver.OverridingContainer.CanResolve*"></a>
               <h4 id="Rezolver_OverridingContainer_CanResolve_Rezolver_IResolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.IResolveContext)">CanResolve(IResolveContext)</h4>
@@ -305,7 +308,9 @@ strategy.  If <code>null</code> (recommended), then the <span class="paramref">i
                 <tbody>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td></td>
+                    <td><p><code>true</code> if either this container or the inner container can resolve the 
+<a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a>; otherwise <code>false</code></p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -316,7 +321,7 @@ strategy.  If <code>null</code> (recommended), then the <span class="paramref">i
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L69">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L74">View Source</a>
               </span>
               <a id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget*"></a>
               <h4 id="Rezolver_OverridingContainer_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget(Rezolver.IResolveContext)">GetFallbackCompiledRezolveTarget(IResolveContext)</h4>
@@ -363,64 +368,7 @@ is how dependency chaining from this container to the inner container is achieve
               </table>
               <h5 class="overrides">Overrides</h5>
               <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_">ContainerBase.GetFallbackCompiledRezolveTarget(IResolveContext)</a></div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OverridingContainer_TryResolve_Rezolver_IResolveContext_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.TryResolve(Rezolver.IResolveContext%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/OverridingContainer.cs/#L74">View Source</a>
-              </span>
-              <a id="Rezolver_OverridingContainer_TryResolve_" data-uid="Rezolver.OverridingContainer.TryResolve*"></a>
-              <h4 id="Rezolver_OverridingContainer_TryResolve_Rezolver_IResolveContext_System_Object__" data-uid="Rezolver.OverridingContainer.TryResolve(Rezolver.IResolveContext,System.Object@)">TryResolve(IResolveContext, out Object)</h4>
-              <div class="markdown level1 summary"></div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public override bool TryResolve(IResolveContext context, out object result)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
-                    <td><span class="parametername">context</span></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
-                    <td><span class="parametername">result</span></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_IResolveContext_System_Object__">ContainerBase.TryResolve(IResolveContext, out Object)</a></div>
               <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
-              </div>
               <div>
                   <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve_Rezolver_IContainer_System_Type_">ContainerResolveExtensions.Resolve(IContainer, Type)</a>
               </div>

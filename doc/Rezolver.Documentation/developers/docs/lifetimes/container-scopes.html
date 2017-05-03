@@ -288,17 +288,13 @@ dispose of the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">Sc
 singleton is still tracked in the root-most scope, and is not disposed until that scope is disposed - there is no difference to the singleton 
 example shown above.</p>
 <h3 id="singleton-depending-on-a-transient">Singleton depending on a Transient</h3>
-<p>If the roles are reversed and a singleton takes a dependency on a transient <code>IDisposable</code>, then that transient should also be tracked in the
-root scope, so that it remains usable for the lifetime of the singleton:</p>
-<div class="CAUTION"><h5>Caution</h5><p>There is a bug in v1.1 which means that the following example <em>does not work</em> - the disposable dependency is prematurely disposed.
-The issue <a href="https://github.com/ZolutionSoftware/Rezolver/issues/28">is already in the backlog</a> and is planned to be fixed in 1.2.</p>
-<p>In meantime, there are two workarounds - either ensure that singletons are always dependant on other singleton disposables; or you 
-can force the correct scope to be selected for the transient dependencies of a singleton by ensuring that you resolve the
-singleton in the <em>root scope <strong>first</strong></em>.</p>
-</div>
-<pre><code class="lang-csharp" name="ImplicitScopeExamples.cs">// THIS EXAMPLE FAILS &lt; 1.2
-// See bug #28: (https://github.com/ZolutionSoftware/Rezolver/issues/28)
-var container = new Container();
+<blockquote><p>[!INFO]
+This didn&#39;t work properly prior to v1.2.  If you are still using v1.1, then
+consider upgrading to the latest package</p>
+</blockquote>
+<p>If the roles are reversed and a singleton takes a dependency on a transient <code>IDisposable</code>, then that transient (and any other dependencies)
+will also be tracked in the root scope, so that it remains usable for the lifetime of the singleton:</p>
+<pre><code class="lang-csharp" name="ImplicitScopeExamples.cs">var container = new Container();
 container.RegisterSingleton&lt;RequiresDisposableType&gt;();
 container.RegisterType&lt;DisposableType&gt;();
 
@@ -313,8 +309,7 @@ using (var scope = container.CreateScope())
 }
 
 Assert.True(result.Disposable.Disposed);
-</code></pre><p>The bug that this example highlights will be one of the first things to be addressed in the v1.2.</p>
-<hr>
+</code></pre><hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>Learn how to create per-scope singletons with <a href="scoped.html">scoped objects</a>.</li>

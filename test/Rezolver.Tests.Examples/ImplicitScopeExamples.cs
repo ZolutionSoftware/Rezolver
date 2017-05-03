@@ -103,8 +103,6 @@ namespace Rezolver.Tests.Examples
         public void DisposableDependencyOfASingletonShouldBeDisposedByRootScope()
         {
             // <example5>
-            // THIS EXAMPLE FAILS < 1.2
-            // See bug #28: (https://github.com/ZolutionSoftware/Rezolver/issues/28)
             var container = new Container();
             container.RegisterSingleton<RequiresDisposableType>();
             container.RegisterType<DisposableType>();

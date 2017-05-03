@@ -118,9 +118,6 @@
               <div class="inheritedMembers">
                 <h5>Inherited Members</h5>
                 <div>
-                  <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_NoChangeCompilerConfiguration">ContainerBase.NoChangeCompilerConfiguration</a>
-                </div>
-                <div>
                   <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetMissingTarget_System_Type_">ContainerBase.GetMissingTarget(Type)</a>
                 </div>
                 <div>
@@ -210,19 +207,66 @@ for a particular type is made, the resultant <a class="xref" href="Rezolver.ICom
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.CachingContainerBase.%23ctor(Rezolver.ITargetContainer%2CRezolver.IContainerBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_CachingContainerBase__ctor_Rezolver_IContainerBehaviour_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.CachingContainerBase.%23ctor(Rezolver.IContainerBehaviour%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CachingContainerBase.cs/#L41">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CachingContainerBase.cs/#L56">View Source</a>
               </span>
               <a id="Rezolver_CachingContainerBase__ctor_" data-uid="Rezolver.CachingContainerBase.#ctor*"></a>
-              <h4 id="Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_" data-uid="Rezolver.CachingContainerBase.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)">CachingContainerBase(ITargetContainer, IContainerBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a> class.</p>
+              <h4 id="Rezolver_CachingContainerBase__ctor_Rezolver_IContainerBehaviour_Rezolver_ITargetContainer_" data-uid="Rezolver.CachingContainerBase.#ctor(Rezolver.IContainerBehaviour,Rezolver.ITargetContainer)">CachingContainerBase(IContainerBehaviour, ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a> class.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected CachingContainerBase(ITargetContainer targets = null, IContainerBehaviour compilerConfig = null)</code></pre>
+                <pre><code class="lang-csharp hljs">protected CachingContainerBase(IContainerBehaviour behaviour, ITargetContainer targets = null)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></td>
+                    <td><span class="parametername">behaviour</span></td>
+                    <td><p>Can be null.  A behaviour to attach to this container (and, potentially its <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a>).
+If not provided, then the global <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> will be used.</p>
+</td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+                    <td><span class="parametername">targets</span></td>
+                    <td><p>Optional.  Contains the targets that will be used as the source of registrations for the container,
+ultimately being passed to the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> property.</p>
+<p>If not provided, then a new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> will be created.</p>
+</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 id="Rezolver_CachingContainerBase__ctor_Rezolver_IContainerBehaviour_Rezolver_ITargetContainer__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>To create an instance without attaching behaviours, use the 
+<a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_">CachingContainerBase(ITargetContainer)</a> constructor.</p>
+</div>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.CachingContainerBase.%23ctor(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CachingContainerBase.cs/#L39">View Source</a>
+              </span>
+              <a id="Rezolver_CachingContainerBase__ctor_" data-uid="Rezolver.CachingContainerBase.#ctor*"></a>
+              <h4 id="Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.CachingContainerBase.#ctor(Rezolver.ITargetContainer)">CachingContainerBase(ITargetContainer)</h4>
+              <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a> class.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">protected CachingContainerBase(ITargetContainer targets = null)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -237,20 +281,19 @@ for a particular type is made, the resultant <a class="xref" href="Rezolver.ICom
                   <tr>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">targets</span></td>
-                    <td><p>Optional. Contains the targets that will be used to create the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s that this container will use to produce objects
-when requested.</p>
-<p>If not provided, then the base class&#39; default (see <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">ContainerBase(ITargetContainer, IContainerBehaviour)</a>) will be used.</p>
-</td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a></td>
-                    <td><span class="parametername">compilerConfig</span></td>
-                    <td><p>Optional.  An object which will be used to configure this container and its targets to use a specific compilation
-strategy.  If <code>null</code>, then the <a class="xref" href="Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider">DefaultProvider</a> provider will be used.</p>
+                    <td><p>Optional.  The target container whose registrations will be used for dependency lookup when <see cref="!:Resolve(IResolveContext)"></see> 
+(and other operations) is called.  If not provided, a new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> instance is constructed.  This will ultimately be available 
+to inherited types, after construction, through the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> property.</p>
 </td>
                   </tr>
                 </tbody>
               </table>
+              <h5 id="Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer__remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>This constructor does not attach any <a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> behaviours, because behaviours typically
+call methods which are declared virtual on this class - which could be unsafe.</p>
+<p>If this does not apply to your derived class (which is unlikely) - use the 
+<a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase__ctor_Rezolver_IContainerBehaviour_Rezolver_ITargetContainer_">CachingContainerBase(IContainerBehaviour, ITargetContainer)</a> constructor.</p>
+</div>
               <h3 id="methods">Methods
               </h3>
               <span class="small pull-right mobile-hide">
@@ -258,7 +301,7 @@ strategy.  If <code>null</code>, then the <a class="xref" href="Rezolver.Compila
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.CachingContainerBase.GetCompiledRezolveTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CachingContainerBase.cs/#L59">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CachingContainerBase.cs/#L74">View Source</a>
               </span>
               <a id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_" data-uid="Rezolver.CachingContainerBase.GetCompiledRezolveTarget*"></a>
               <h4 id="Rezolver_CachingContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_" data-uid="Rezolver.CachingContainerBase.GetCompiledRezolveTarget(Rezolver.IResolveContext)">GetCompiledRezolveTarget(IResolveContext)</h4>
@@ -311,9 +354,6 @@ a given request.</p>
 the result of the base class&#39; <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_">GetCompiledRezolveTarget(IResolveContext)</a> is cached and returned.</p>
 </div>
               <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
-              </div>
               <div>
                   <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve_Rezolver_IContainer_System_Type_">ContainerResolveExtensions.Resolve(IContainer, Type)</a>
               </div>

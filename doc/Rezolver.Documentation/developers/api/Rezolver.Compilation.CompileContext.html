@@ -153,7 +153,7 @@ this type is through its implementation of <a class="xref" href="Rezolver.Compil
               <h5 id="Rezolver_Compilation_CompileContext_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Note that you can only create an instance of this either through inheritance, via the explicit implementation
 of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a>, or (preferably) via an 
-<a class="xref" href="Rezolver.Compilation.ICompileContextProvider.html">ICompileContextProvider</a> 
+<see cref="!:ICompileContextProvider"></see> 
 resolved from an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> or <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> directly from a registered target.</p>
 </div>
               <h3 id="constructors">Constructors
@@ -1042,9 +1042,6 @@ cyclic dependency graph, then this method will detect that.</p>
               <h5 class="implements">Implements</h5>
                   <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ITargetContainer.RegisterContainer(Type, ITargetContainer)</a></div>
               <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_">EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)</a>
-              </div>
               <div>
                   <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias__2_Rezolver_ITargetContainer_">AliasTargetContainerExtensions.RegisterAlias&lt;TAlias, TOriginal&gt;(ITargetContainer)</a>
               </div>

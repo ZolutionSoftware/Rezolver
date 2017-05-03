@@ -108,16 +108,20 @@ and/or fields.</p>
     Property = foo,
     Field = bar
 }
-</code></pre><p>This is all done via implementations of the <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> interface - of which there is currently one
-implementation - <a class="xref" href="../../api/Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a>.</p>
+</code></pre><p>This is all done via implementations of the <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> interface - of which there are a few implementations
+supplied by Rezolver, which can be found in the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html">MemberBindingBehaviour</a> static class:</p>
+<ol>
+<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a></strong>: prevents binding of any field or properties (implemented by <a class="xref" href="../../api/Rezolver.BindNoMembersBehaviour.html">BindNoMembersBehaviour</a>)</li>
+<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a></strong>: binds all publicly writeable properties and fields to values from the container, even
+if the container doesn&#39;t have a registration for the member&#39;s type.  Implemented by an instance of @Rezolver.BindAllMembersBindingBehaviour.</li>
+<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindProperties">BindProperties</a></strong>: binds only publicly writeable properties to values from the container.  Fields are
+ignored.  Implemented by an instance of <a class="xref" href="../../api/Rezolver.BindPublicPropertiesBehaviour.html">BindPublicPropertiesBehaviour</a>.</li>
+<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindFields">BindFields</a></strong>: binds only public fields to values from the container.  Properties are
+ignored.  Implemented by an instance of <a class="xref" href="../../api/Rezolver.BindPublicFieldsBehaviour.html">BindPublicFieldsBehaviour</a>.</li>
+</ol>
 <p>Almost all of the ways in which you can create <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>
 (factory methods, registration methods, constructors etc) will also accept a <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> with which to enable 
 member injection if you want to.</p>
-<div class="WARNING"><h5>Warning</h5><p><a class="xref" href="../../api/Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a> will be renamed to <code>AllMembersBindingBehaviour</code> in 1.2, and might also
-go into a child namespace - e.g. <code>Rezolver.MemberBindingBehaviours</code>.</p>
-</div>
-<p><a class="xref" href="../../api/Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a> automatically binds all <strong><em>publicly writeable</em></strong> properties and fields on the type being constructed
-with values from the container when resolved - <em>regardless</em> of whether the required services exist in the container.</p>
 <hr>
 <h2 id="example---injecting-all-members">Example - Injecting all members</h2>
 <p>Given this type:</p>
@@ -133,7 +137,7 @@ container.RegisterAll(
     Target.ForType&lt;MyService1&gt;(),
     Target.ForType&lt;MyService2&gt;()
 );
-container.RegisterType&lt;Has2InjectableMembers&gt;(DefaultMemberBindingBehaviour.Instance);
+container.RegisterType&lt;Has2InjectableMembers&gt;(MemberBindingBehaviour.BindAll);
 
 var result = container.Resolve&lt;Has2InjectableMembers&gt;();
 
@@ -145,10 +149,8 @@ fields is missing, then the resolve operation will fail.</p>
 with constructors, where it&#39;s reasonable to assume all parameters are to be injected, there are no simple rules
 that can always applied to an object to determine which properties and/or fields should be auto-injected.</p>
 </div>
-<p><em>It&#39;s likely that two extra &#39;default&#39; behaviours - <code>PropertiesOnlyBindingBehaviour</code> and <code>FieldsOnlyBindingBehaviour</code>, which
-will only bind publicly writeable properties <strong>or</strong> public fields, respectively -
-will be added to the framework in 1.2</em></p>
 <hr>
+<h2 id="todo-example-using-rezolverglobalbehaviours">TODO: Example using <a class="xref" href="../../api/Rezolver.GlobalBehaviours.html">GlobalBehaviours</a></h2>
 <h2 id="example---custom-binding-behaviour">Example - Custom binding behaviour</h2>
 <p>If you find you need more control over which properties and/or fields you want bound on an instance, then you can, 
 of course, implement your own binding behaviour.</p>
@@ -199,14 +201,14 @@ public class InjectAttribute : Attribute
 }
 </code></pre><p>Finally, our binding behaviour - which extends the aforementioned <a class="xref" href="../../api/Rezolver.DefaultMemberBindingBehaviour.html">DefaultMemberBindingBehaviour</a> as that class has plenty of
 extension points:</p>
-<pre><code class="lang-csharp" name="AttributeBindingBehaviour.cs">/// &lt;summary&gt;
-/// Class AttributeBindingBehaviour - we reuse the DefaultMemberBindingBehaviour class
-/// because it has numerous virtual hooks we can use to customise behaviour, and takes care
-/// of reflecting the target type for us.
-/// &lt;/summary&gt;
-/// &lt;seealso cref=&quot;Rezolver.DefaultMemberBindingBehaviour&quot; /&gt;
-public class AttributeBindingBehaviour : DefaultMemberBindingBehaviour
-{
+<pre><code class="lang-csharp" name="AttributeBindingBehaviour.cs">   /// &lt;summary&gt;
+   /// Class AttributeBindingBehaviour - we reuse the BindAllMembersBehaviour class
+   /// because it has numerous virtual hooks we can use to customise behaviour, and takes care
+   /// of reflecting the target type for us.
+   /// &lt;/summary&gt;
+   /// &lt;seealso cref=&quot;Rezolver.BindAllMembersBehaviour&quot; /&gt;
+   public class AttributeBindingBehaviour : BindAllMembersBehaviour
+   {
 	protected override IEnumerable&lt;FieldInfo&gt; GetBindableFields(ICompileContext context, Type type)
 	{
 		//filter the fields to those which have an InjectAttribute defined
