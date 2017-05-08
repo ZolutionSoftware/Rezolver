@@ -17,7 +17,8 @@ namespace Rezolver.Compilation
 	/// constructor) is the starting point for all shared state, such as the <see cref="Container"/> and the compilation
 	/// stack.
 	/// 
-	/// The <see cref="ITargetContainer" /> implementation is done by decorating a new <see cref="ChildTargetContainer" />,
+	/// The <see cref="ITargetContainer" /> implementation is done by decorating a new <see cref="OverridingTargetContainer" />
+    /// which wraps the actual target container which contains the targets which will be compiled,
 	/// so that new registrations can be added without interfering with upstream containers.
 	/// 
 	/// Note that many of the interface members are implemented explicitly - therefore most of your interaction with 
@@ -26,9 +27,9 @@ namespace Rezolver.Compilation
 	/// <seealso cref="Rezolver.Compilation.ICompileContext" />
 	/// <seealso cref="Rezolver.ITargetContainer" />
 	/// <remarks>Note that you can only create an instance of this either through inheritance, via the explicit implementation
-	/// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>, or (preferably) via an 
-    /// <see cref="ICompileContextProvider" /> 
-	/// resolved from an <see cref="IContainer" /> or <see cref="ITargetContainer" /> directly from a registered target.
+	/// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>, or (preferably) via the
+    /// <see cref="ITargetCompiler.CreateContext(IResolveContext, ITargetContainer)"/> method of an 
+    /// <see cref="ITargetCompiler" /> resolved from an <see cref="IContainer" />.
 	/// </remarks>
 	public class CompileContext : ICompileContext, ITargetContainer
 	{
@@ -84,7 +85,7 @@ namespace Rezolver.Compilation
 		/// Creates a new <see cref="CompileContext"/> as a child of another.
 		/// </summary>
 		/// <param name="parentContext">Used to seed the compilation stack, container, dependency container (which
-		/// will still be wrapped in a new <see cref="ChildTargetContainer"/> for isolation) and, optionally, 
+		/// will still be wrapped in a new <see cref="OverridingTargetContainer"/> for isolation) and, optionally, 
 		/// the target type (unless you pass a non-null type for <paramref name="targetType" />, which would
 		/// override that).</param>
 		/// <param name="targetType">The target type that is expected to be compiled, or null if the <see cref="TargetType"/>
@@ -99,7 +100,7 @@ namespace Rezolver.Compilation
 		{
 			parentContext.MustNotBeNull(nameof(parentContext));
 			ParentContext = parentContext;
-			DependencyTargetContainer = new ChildTargetContainer(parentContext);
+			DependencyTargetContainer = new OverridingTargetContainer(parentContext);
 			_targetType = targetType;
             _resolveContext = parentContext.ResolveContext.New(newRequestedType: targetType);
 			ScopeBehaviourOverride = scopeBehaviourOverride;
@@ -113,8 +114,10 @@ namespace Rezolver.Compilation
 		/// <param name="resolveContext">Required.  The context for which compilation is being performed.</param>
 		/// <param name="dependencyTargetContainer">Required - An <see cref="ITargetContainer" /> that contains the <see cref="ITarget" />s that
 		/// will be required to complete compilation.
-		/// Note - this argument is passed to a new <see cref="ChildTargetContainer" /> that is created and proxied by this class' implementation
+        /// 
+		/// Note - this argument is passed to a new <see cref="OverridingTargetContainer" /> that is created and proxied by this class' implementation
 		/// of <see cref="ITargetContainer" />.
+        /// 
 		/// As a result, it's possible to register new targets directly into the context via its implementation of <see cref="ITargetContainer"/>,
 		/// without modifying the underlying targets in the container you pass.</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="TargetType" /> property.  If null, then any 
@@ -126,7 +129,7 @@ namespace Rezolver.Compilation
 		{
 			resolveContext.MustNotBeNull(nameof(resolveContext));
 			dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
-			DependencyTargetContainer = new ChildTargetContainer(dependencyTargetContainer);
+			DependencyTargetContainer = new OverridingTargetContainer(dependencyTargetContainer);
             _resolveContext = resolveContext;
 			_targetType = targetType;
 			_compileStack = new Stack<CompileStackEntry>(30);

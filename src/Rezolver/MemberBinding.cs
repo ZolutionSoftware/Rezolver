@@ -51,12 +51,11 @@ namespace Rezolver
 		{
 			get
 			{
-				PropertyInfo p = Member as PropertyInfo;
-				if (p != null)
-					return p.PropertyType;
-				else
-					return ((FieldInfo)Member).FieldType;
-			}
+                if (Member is PropertyInfo p)
+                    return p.PropertyType;
+                else
+                    return ((FieldInfo)Member).FieldType;
+            }
 		}
 
 		/// <summary>

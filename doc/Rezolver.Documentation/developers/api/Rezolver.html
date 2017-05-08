@@ -132,10 +132,6 @@ properties on new instances to services from the container.</p>
                   <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
 <p>Only creatable through inheritance.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a></h4>
-                  <section><p>A version of <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> which overrides the registrations of another
-(the <a class="xref" href="Rezolver.ChildTargetContainer.html#Rezolver_ChildTargetContainer_Parent">Parent</a>).</p>
-</section>
                   <h4><a class="xref" href="Rezolver.ConstructorBinding.html">ConstructorBinding</a></h4>
                   <section><p>Represents a binding specifically to a class constructor, optionally with an additional
 set of <a class="xref" href="Rezolver.ConstructorBinding.html#Rezolver_ConstructorBinding_MemberBindings">MemberBindings</a> to be used to initialise a new instance&#39;s properties
@@ -239,6 +235,10 @@ target.</p>
                   <section><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which can override the resolve operations of another.  This is useful when you have a 
 core application-wide container, with some objects being customised based on some ambient information,
 e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application for example) or more.</p>
+</section>
+                  <h4><a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a></h4>
+                  <section><p>A version of <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> which overrides the registrations of another
+(the <a class="xref" href="Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Parent">Parent</a>).</p>
 </section>
                   <h4><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a></h4>
                   <section><p>Represents a binding between a method parameter and an <a class="xref" href="Rezolver.ITarget.html">ITarget</a></p>

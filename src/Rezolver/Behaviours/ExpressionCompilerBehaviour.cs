@@ -22,7 +22,7 @@ namespace Rezolver.Behaviours
         /// <summary>
         /// The one and only instance of <see cref="ExpressionCompilerBehaviour"/>
         /// </summary>
-        public static IContainerBehaviour Instance { get; } = new ExpressionCompilerBehaviour();
+        public static IContainerBehaviour<ITargetCompiler> Instance { get; } = new ExpressionCompilerBehaviour();
 
         private ExpressionCompilerBehaviour()
         {

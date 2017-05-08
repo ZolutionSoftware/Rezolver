@@ -151,15 +151,13 @@ whose lifetimes are slaved to that of a parent <a class="xref" href="Rezolver.IS
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedTargetContainerExtensions_RegisterScoped_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedTargetContainerExtensions.RegisterScoped(Rezolver.ITargetContainer%2CSystem.Type%2CSystem.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.ScopedExtensions.cs/#L85">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.ScopedExtensions.cs/#L82">View Source</a>
               </span>
               <a id="Rezolver_ScopedTargetContainerExtensions_RegisterScoped_" data-uid="Rezolver.ScopedTargetContainerExtensions.RegisterScoped*"></a>
               <h4 id="Rezolver_ScopedTargetContainerExtensions_RegisterScoped_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.ScopedTargetContainerExtensions.RegisterScoped(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IMemberBindingBehaviour)">RegisterScoped(ITargetContainer, Type, Type, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers an explicitly instance of <span class="paramref">objectType</span> (optionally for the service type <span class="paramref">serviceType</span>) to be 
 created by an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> via constructor injection.<br>The registration will auto-bind a constructor based on the services available in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> and 
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is first called.</p>
-<p>Optionally, property injection can be configured for the new object, depending on the <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> 
-object passed for the optional parameter <span class="paramref">memberBinding</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -198,8 +196,10 @@ object passed for the optional parameter <span class="paramref">memberBinding</s
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>Optional.  Can be used to enable and control property injection in addition to constructor injection
-on the instance of <span class="paramref">objectType</span> that is created.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -214,15 +214,13 @@ and then registering it against the type <span class="paramref">serviceType</spa
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedTargetContainerExtensions_RegisterScoped__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedTargetContainerExtensions.RegisterScoped%60%601(Rezolver.ITargetContainer%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.ScopedExtensions.cs/#L38">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.ScopedExtensions.cs/#L37">View Source</a>
               </span>
               <a id="Rezolver_ScopedTargetContainerExtensions_RegisterScoped_" data-uid="Rezolver.ScopedTargetContainerExtensions.RegisterScoped*"></a>
               <h4 id="Rezolver_ScopedTargetContainerExtensions_RegisterScoped__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.ScopedTargetContainerExtensions.RegisterScoped``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterScoped&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Registers an explicitly scoped instance of <span class="typeparamref">TObject</span> to be created by an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> via 
 constructor injection.<br>The registration will auto-bind a constructor based on the services available in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> and 
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is first called.</p>
-<p>Optionally, property injection can be configured for the new object, depending on the <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> 
-object passed for the optional parameter <span class="paramref">memberBinding</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -248,8 +246,10 @@ object passed for the optional parameter <span class="paramref">memberBinding</s
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>Can be used to enable and control property injection in addition to constructor injection
-on the instance of <span class="typeparamref">TObject</span> that is created.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -281,7 +281,7 @@ the <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ForType__1_Rezolv
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopedTargetContainerExtensions_RegisterScoped__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedTargetContainerExtensions.RegisterScoped%60%602(Rezolver.ITargetContainer%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.ScopedExtensions.cs/#L62">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.ScopedExtensions.cs/#L60">View Source</a>
               </span>
               <a id="Rezolver_ScopedTargetContainerExtensions_RegisterScoped_" data-uid="Rezolver.ScopedTargetContainerExtensions.RegisterScoped*"></a>
               <h4 id="Rezolver_ScopedTargetContainerExtensions_RegisterScoped__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.ScopedTargetContainerExtensions.RegisterScoped``2(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterScoped&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
@@ -289,8 +289,6 @@ the <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ForType__1_Rezolv
 to be created by an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> via constructor injection.
 The registration will auto-bind a constructor based on the services available in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> and 
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> available at the time <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is first called.</p>
-<p>Optionally, property injection can be configured for the new object, depending on the <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> 
-object passed for the optional parameter <span class="paramref">memberBinding</span>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -316,8 +314,10 @@ object passed for the optional parameter <span class="paramref">memberBinding</s
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>Can be used to enable and control property injection in addition to constructor injection
-on the instance of <span class="typeparamref">TObject</span> that is created.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>

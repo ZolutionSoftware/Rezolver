@@ -113,7 +113,8 @@
 <code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
 constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Container.html">Container</a> and the compilation
 stack.</p>
-<p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation is done by decorating a new <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a>,
+<p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation is done by decorating a new <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>
+which wraps the actual target container which contains the targets which will be compiled,
 so that new registrations can be added without interfering with upstream containers.</p>
 <p>Note that many of the interface members are implemented explicitly - therefore most of your interaction with 
 this type is through its implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>

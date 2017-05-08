@@ -14,7 +14,7 @@ _Linked topics provide high level overviews and examples in our developer guide 
   - 'Intelligent' constructor discovery based on registered services
   - Named argument binding
   - Parameters with default arguments are supported
-  - [Member injection](docs/constructor-injection/member-binding.md) (extensible)
+  - [Member injection](docs/constructor-injection/member-injection.md) (extensible)
 - [Open generics](docs/constructor-injection/generics.md) (with specific closed generics taking precedence)
 - [Decorators](docs/decorators.md) (non-generic and generic)
 - [Enumerables](docs/enumerables.md) (empty enumerables returned by default)

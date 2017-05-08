@@ -28,8 +28,9 @@ namespace Rezolver
         /// <summary>
         /// Creates a new instance of the <see cref="CachingContainerBase"/> class.
         /// </summary>
-        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> 
-        /// (and other operations) is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
+        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when 
+        /// <see cref="IContainer.Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new 
+        /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
         /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
         /// <remarks>This constructor does not attach any <see cref="IContainerBehaviour"/> behaviours, because behaviours typically
         /// call methods which are declared virtual on this class - which could be unsafe.

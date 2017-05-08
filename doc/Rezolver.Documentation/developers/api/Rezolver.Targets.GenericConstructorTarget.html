@@ -193,9 +193,10 @@ which will utilise the optional <span class="paramref">memberBindingBehaviour</s
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBindingBehaviour</span></td>
-                    <td><p>Optional.  The <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> to be used for binding
-properties and/or fields on the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> that is generated.  If null, then no property 
-or fields will be bound on construction.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -207,7 +208,7 @@ or fields will be bound on construction.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L136">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L135">View Source</a>
               </span>
               <a id="Rezolver_Targets_GenericConstructorTarget_DeclaredType_" data-uid="Rezolver.Targets.GenericConstructorTarget.DeclaredType*"></a>
               <h4 id="Rezolver_Targets_GenericConstructorTarget_DeclaredType" data-uid="Rezolver.Targets.GenericConstructorTarget.DeclaredType">DeclaredType</h4>
@@ -276,7 +277,8 @@ will be constructed.</p>
               </span>
               <a id="Rezolver_Targets_GenericConstructorTarget_MemberBindingBehaviour_" data-uid="Rezolver.Targets.GenericConstructorTarget.MemberBindingBehaviour*"></a>
               <h4 id="Rezolver_Targets_GenericConstructorTarget_MemberBindingBehaviour" data-uid="Rezolver.Targets.GenericConstructorTarget.MemberBindingBehaviour">MemberBindingBehaviour</h4>
-              <div class="markdown level1 summary"><p>Gets the member binding behaviour to be used when creating an instance.</p>
+              <div class="markdown level1 summary"><p>Gets the member binding behaviour to be used when creating an instance.  The rules for this are the same as for
+<a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_MemberBindingBehaviour">MemberBindingBehaviour</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -294,8 +296,7 @@ will be constructed.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
-                    <td><p>The member binding behaviour.</p>
-</td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>

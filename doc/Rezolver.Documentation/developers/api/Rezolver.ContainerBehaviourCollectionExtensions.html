@@ -145,20 +145,19 @@
               </h3>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBehaviourCollectionExtensions_UseExpressionCompiler_Rezolver_ContainerBehaviourCollection_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBehaviourCollectionExtensions.UseExpressionCompiler(Rezolver.ContainerBehaviourCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBehaviourCollectionExtensions_UseCompiler_Rezolver_ContainerBehaviourCollection_Rezolver_IContainerBehaviour_Rezolver_Compilation_ITargetCompiler__.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler(Rezolver.ContainerBehaviourCollection%2CRezolver.IContainerBehaviour%7BRezolver.Compilation.ITargetCompiler%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBehaviourCollectionExtensions.cs/#L39">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBehaviourCollectionExtensions.cs/#L51">View Source</a>
               </span>
-              <a id="Rezolver_ContainerBehaviourCollectionExtensions_UseExpressionCompiler_" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseExpressionCompiler*"></a>
-              <h4 id="Rezolver_ContainerBehaviourCollectionExtensions_UseExpressionCompiler_Rezolver_ContainerBehaviourCollection_" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseExpressionCompiler(Rezolver.ContainerBehaviourCollection)">UseExpressionCompiler(ContainerBehaviourCollection)</h4>
-              <div class="markdown level1 summary"><p>Configures the container to use the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a> for its <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>
-service.  Also performs all additional registrations required by the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.</p>
+              <a id="Rezolver_ContainerBehaviourCollectionExtensions_UseCompiler_" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler*"></a>
+              <h4 id="Rezolver_ContainerBehaviourCollectionExtensions_UseCompiler_Rezolver_ContainerBehaviourCollection_Rezolver_IContainerBehaviour_Rezolver_Compilation_ITargetCompiler__" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler(Rezolver.ContainerBehaviourCollection,Rezolver.IContainerBehaviour{Rezolver.Compilation.ITargetCompiler})">UseCompiler(ContainerBehaviourCollection, IContainerBehaviour&lt;ITargetCompiler&gt;)</h4>
+              <div class="markdown level1 summary"><p>Configures the container</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ContainerBehaviourCollection UseExpressionCompiler(this ContainerBehaviourCollection collectionBehaviour)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ContainerBehaviourCollection UseCompiler(this ContainerBehaviourCollection collection, IContainerBehaviour&lt;ITargetCompiler&gt; compilerBehaviour)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -172,7 +171,62 @@ service.  Also performs all additional registrations required by the <a class="x
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ContainerBehaviourCollection.html">ContainerBehaviourCollection</a></td>
-                    <td><span class="parametername">collectionBehaviour</span></td>
+                    <td><span class="parametername">collection</span></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.IContainerBehaviour-1.html">IContainerBehaviour</a>&lt;<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>&gt;</td>
+                    <td><span class="parametername">compilerBehaviour</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ContainerBehaviourCollection.html">ContainerBehaviourCollection</a></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="small pull-right mobile-hide">
+                <span class="divider">|</span>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBehaviourCollectionExtensions_UseExpressionCompiler_Rezolver_ContainerBehaviourCollection_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBehaviourCollectionExtensions.UseExpressionCompiler(Rezolver.ContainerBehaviourCollection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+              </span>
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBehaviourCollectionExtensions.cs/#L40">View Source</a>
+              </span>
+              <a id="Rezolver_ContainerBehaviourCollectionExtensions_UseExpressionCompiler_" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseExpressionCompiler*"></a>
+              <h4 id="Rezolver_ContainerBehaviourCollectionExtensions_UseExpressionCompiler_Rezolver_ContainerBehaviourCollection_" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseExpressionCompiler(Rezolver.ContainerBehaviourCollection)">UseExpressionCompiler(ContainerBehaviourCollection)</h4>
+              <div class="markdown level1 summary"><p>Replaces any existing <a class="xref" href="Rezolver.IContainerBehaviour-1.html">IContainerBehaviour&lt;TContainerService&gt;</a> in the collection with the 
+<a class="xref" href="Rezolver.Behaviours.ExpressionCompilerBehaviour.html#Rezolver_Behaviours_ExpressionCompilerBehaviour_Instance">Instance</a> from <a class="xref" href="Rezolver.Behaviours.ExpressionCompilerBehaviour.html">ExpressionCompilerBehaviour</a> so that
+any container which uses this behaviour collection will use the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.</p>
+</div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static ContainerBehaviourCollection UseExpressionCompiler(this ContainerBehaviourCollection collection)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a class="xref" href="Rezolver.ContainerBehaviourCollection.html">ContainerBehaviourCollection</a></td>
+                    <td><span class="parametername">collection</span></td>
                     <td><p>The collection to which the behaviour is to be added.</p>
 </td>
                   </tr>
@@ -204,12 +258,12 @@ service.  Also performs all additional registrations required by the <a class="x
               <a id="Rezolver_ContainerBehaviourCollectionExtensions_UseMemberBindingBehaviour_" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseMemberBindingBehaviour*"></a>
               <h4 id="Rezolver_ContainerBehaviourCollectionExtensions_UseMemberBindingBehaviour_Rezolver_ContainerBehaviourCollection_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.ContainerBehaviourCollectionExtensions.UseMemberBindingBehaviour(Rezolver.ContainerBehaviourCollection,Rezolver.IMemberBindingBehaviour)">UseMemberBindingBehaviour(ContainerBehaviourCollection, IMemberBindingBehaviour)</h4>
               <div class="markdown level1 summary"><p>Sets the default member binding behaviour to be used by containers to which the 
-<span class="paramref">collectionBehaviour</span> is attached.</p>
+<span class="paramref">collection</span> is attached.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static ContainerBehaviourCollection UseMemberBindingBehaviour(this ContainerBehaviourCollection collectionBehaviour, IMemberBindingBehaviour behaviour)</code></pre>
+                <pre><code class="lang-csharp hljs">public static ContainerBehaviourCollection UseMemberBindingBehaviour(this ContainerBehaviourCollection collection, IMemberBindingBehaviour behaviour)</code></pre>
               </div>
               <h5 class="parameters">Parameters</h5>
               <table class="table table-bordered table-striped table-condensed">
@@ -223,7 +277,7 @@ service.  Also performs all additional registrations required by the <a class="x
                 <tbody>
                   <tr>
                     <td><a class="xref" href="Rezolver.ContainerBehaviourCollection.html">ContainerBehaviourCollection</a></td>
-                    <td><span class="parametername">collectionBehaviour</span></td>
+                    <td><span class="parametername">collection</span></td>
                     <td><p>The collection to which the behaviour is to be added.</p>
 </td>
                   </tr>
@@ -231,7 +285,7 @@ service.  Also performs all additional registrations required by the <a class="x
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">behaviour</span></td>
                     <td><p>The <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> to be used as the default for any
-container to which the <span class="paramref">collectionBehaviour</span> is attached.</p>
+container to which the <span class="paramref">collection</span> is attached.</p>
 </td>
                   </tr>
                 </tbody>

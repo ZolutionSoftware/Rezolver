@@ -9,12 +9,12 @@ Using Rezolver is the same as with all other IOC containers:
 All of this setup is ultimately conducted through just a few primary types, which we'll take a brief look at
 now.
 
-## Core types
+# Core types
 
 For all the built-in container types, Rezolver splits registration and resolving responsibilities between 
 two primary interfaces:
 
-### @Rezolver.ITargetContainer
+## @Rezolver.ITargetContainer
 
 This interface describes a registry of @Rezolver.ITarget objects, keyed by type, describing the type of object 
 that is to be created (and how) when a given type is requested.
@@ -25,7 +25,7 @@ resolving objects.
 > [!TIP]
 > The primary implementation of this interface that you will use in your application is @Rezolver.TargetContainer.
 
-### @Rezolver.IContainer
+## @Rezolver.IContainer
 
 This is the interface through which we resolve objects.  The interface does not expose any registration 
 mechanisms at all (even if the 'standard' implementations of those classes all do) - only the ability
@@ -43,11 +43,11 @@ use that interface as the source of their service registrations.
 > As a consumer of Rezolver, however, you will be using the @Rezolver.Container and @Rezolver.ScopedContainer 
 > classes most of the time - which derive most of their functionality from this abstract class.
 
-## Creating a container
+# Creating a container
 
-There are numerous ways to create an @Rezolver.IContainer instance.  The easiest, from the point of view registering
+There are numerous ways to create an @Rezolver.IContainer instance.  The easiest, from the point of view of registering
 services and then resolving them, is to create an instance of the @Rezolver.Container type.  Or, if you want your root
-container to act as a global lifetime scope for explicitly scoped objects (see <xref:Rezolver.Targets.ScopedTarget>) then you
+container to act as a global lifetime scope for [explicitly scoped objects](lifetimes/scoped.md) then you
 can also use @Rezolver.ScopedContainer:
 
 ```cs
@@ -143,6 +143,64 @@ methods (e.g. <xref:Rezolver.ContainerResolveExtensions.CanResolve``1(Rezolver.I
 ```cs
 bool canResolve = container.CanResolve<MyService>();
 ```
+
+## Behaviours (Advanced)
+
+For those looking to customise or extend Rezolver, many of the types are overridable.  However, 
+the @Rezolver.ITargetContainer and @Rezolver.IContainer implementations mentioned above also use
+another mechanism which provide extensibility without having to override them.
+
+> [!NOTE]
+> This is an advanced topic and not one that you should have to worry about most of the time.  The examples in
+> this guide will highlight where you can use the functionality described below.
+
+There are two primary types of behaviour in Rezolver:
+
+1. **Target container behaviours** (via implementations of <xref:Rezolver.ITargetContainerBehaviour>)
+2. **Container behaviours** (via implementations of <xref:Rezolver.IContainerBehaviour>)
+
+Both are very similar in that they define a method called `Attach` to which is passed an 
+@Rezolver.ITargetContainer and, in the case of @Rezolver.IContainerBehaviour, also an
+@Rezolver.IContainer.  Implementations of the interfaces can add/modify service 
+registrations which are then used either directly by the container, or which provide more advanced registration
+functionality.
+
+For example, Rezolver's [automatic resolving of enumerables](enumerables.md) is enabled by attaching the 
+@Rezolver.Behaviours.AutoEnumerableBehaviour to an @Rezolver.ITargetContainer (it is, therefore an 
+<xref:Rezolver.ITargetContainerBehaviour>).
+
+Equally, Rezolver's support for [member injection](constructor-injection/member-injection.md) can be
+controlled container-wide by attaching a @Rezolver.Behaviours.DefaultMemberBinding to the container when it
+is created.
+
+> [!TIP]
+> At the moment, the functionality that's controlled by these behaviours is limited, but it will increase
+> over time as new features are added and as other functionality is reimplemented to take advantage of them.
+
+The various types of target container and container have constructors which accept optional behaviours, as 
+shown in the following lists:
+
+*Target Container Behaviours*
+
+- <xref:Rezolver.TargetContainer.%23ctor(Rezolver.ITargetContainerBehaviour)>
+- <xref:Rezolver.OverridingTargetContainer.%23ctor(Rezolver.ITargetContainer,Rezolver.ITargetContainerBehaviour)>
+
+*Container Behaviours*
+
+- <xref:Rezolver.Container.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
+- <xref:Rezolver.ScopedContainer.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
+- <xref:Rezolver.OverridingContainer.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
+
+These lists aren't exhaustive, but, in fact, you'll notice that in all cases they are optional.
+
+This is because Rezolver has *default* behaviours that it uses for these types if no specific behaviour is
+passed on construction, and these can all be found in the @Rezolver.GlobalBehaviours class.
+
+Briefly, these are all instances of special behaviour classes which wrap collections of other behaviours:
+
+- **@Rezolver.GlobalBehaviours.TargetContainerBehaviour** A @Rezolver.TargetContainerBehaviourCollection with zero
+or more @Rezolver.ITargetContainerBehaviour objects which are to be applied to all @Rezolver.TargetContainer
+and @Rezolver.OverridingTargetContainer objects 
 
 * * *
 

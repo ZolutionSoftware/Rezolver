@@ -677,24 +677,6 @@ references:
   commentId: Overload:Rezolver.Compilation.CompileContext.TargetType
   fullName: Rezolver.Compilation.CompileContext.TargetType
   nameWithType: CompileContext.TargetType
-- uid: Rezolver.Compilation.CompilerConfiguration
-  name: CompilerConfiguration
-  href: api/Rezolver.Compilation.CompilerConfiguration.html
-  commentId: T:Rezolver.Compilation.CompilerConfiguration
-  fullName: Rezolver.Compilation.CompilerConfiguration
-  nameWithType: CompilerConfiguration
-- uid: Rezolver.Compilation.CompilerConfiguration.DefaultProvider
-  name: DefaultProvider
-  href: api/Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider
-  commentId: P:Rezolver.Compilation.CompilerConfiguration.DefaultProvider
-  fullName: Rezolver.Compilation.CompilerConfiguration.DefaultProvider
-  nameWithType: CompilerConfiguration.DefaultProvider
-- uid: Rezolver.Compilation.CompilerConfiguration.DefaultProvider*
-  name: DefaultProvider
-  href: api/Rezolver.Compilation.CompilerConfiguration.html#Rezolver_Compilation_CompilerConfiguration_DefaultProvider_
-  commentId: Overload:Rezolver.Compilation.CompilerConfiguration.DefaultProvider
-  fullName: Rezolver.Compilation.CompilerConfiguration.DefaultProvider
-  nameWithType: CompilerConfiguration.DefaultProvider
 - uid: Rezolver.Compilation.CompileStackEntry
   name: CompileStackEntry
   href: api/Rezolver.Compilation.CompileStackEntry.html
@@ -1449,24 +1431,6 @@ references:
   commentId: Overload:Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.BuildResolveLambda
   fullName: Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.BuildResolveLambda
   nameWithType: ExpressionCompilerBuildExtensions.BuildResolveLambda
-- uid: Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider
-  name: ExpressionCompilerConfigurationProvider
-  href: api/Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.html
-  commentId: T:Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider
-  fullName: Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider
-  nameWithType: ExpressionCompilerConfigurationProvider
-- uid: Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  name: Configure(IContainer, ITargetContainer)
-  href: api/Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.html#Rezolver_Compilation_Expressions_ExpressionCompilerConfigurationProvider_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  fullName: Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.Configure(Rezolver.IContainer, Rezolver.ITargetContainer)
-  nameWithType: ExpressionCompilerConfigurationProvider.Configure(IContainer, ITargetContainer)
-- uid: Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.Configure*
-  name: Configure
-  href: api/Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.html#Rezolver_Compilation_Expressions_ExpressionCompilerConfigurationProvider_Configure_
-  commentId: Overload:Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.Configure
-  fullName: Rezolver.Compilation.Expressions.ExpressionCompilerConfigurationProvider.Configure
-  nameWithType: ExpressionCompilerConfigurationProvider.Configure
 - uid: Rezolver.Compilation.Expressions.ExpressionTargetBuilder
   name: ExpressionTargetBuilder
   href: api/Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html
@@ -2143,42 +2107,6 @@ references:
   commentId: Overload:Rezolver.Compilation.ICompileContext.TargetType
   fullName: Rezolver.Compilation.ICompileContext.TargetType
   nameWithType: ICompileContext.TargetType
-- uid: Rezolver.Compilation.ICompileContextProvider
-  name: ICompileContextProvider
-  href: api/Rezolver.Compilation.ICompileContextProvider.html
-  commentId: T:Rezolver.Compilation.ICompileContextProvider
-  fullName: Rezolver.Compilation.ICompileContextProvider
-  nameWithType: ICompileContextProvider
-- uid: Rezolver.Compilation.ICompileContextProvider.CreateContext(Rezolver.IResolveContext,Rezolver.ITargetContainer)
-  name: CreateContext(IResolveContext, ITargetContainer)
-  href: api/Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Compilation.ICompileContextProvider.CreateContext(Rezolver.IResolveContext,Rezolver.ITargetContainer)
-  fullName: Rezolver.Compilation.ICompileContextProvider.CreateContext(Rezolver.IResolveContext, Rezolver.ITargetContainer)
-  nameWithType: ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer)
-- uid: Rezolver.Compilation.ICompileContextProvider.CreateContext*
-  name: CreateContext
-  href: api/Rezolver.Compilation.ICompileContextProvider.html#Rezolver_Compilation_ICompileContextProvider_CreateContext_
-  commentId: Overload:Rezolver.Compilation.ICompileContextProvider.CreateContext
-  fullName: Rezolver.Compilation.ICompileContextProvider.CreateContext
-  nameWithType: ICompileContextProvider.CreateContext
-- uid: Rezolver.Compilation.IContainerConfiguration
-  name: IContainerConfiguration
-  href: api/Rezolver.Compilation.IContainerConfiguration.html
-  commentId: T:Rezolver.Compilation.IContainerConfiguration
-  fullName: Rezolver.Compilation.IContainerConfiguration
-  nameWithType: IContainerConfiguration
-- uid: Rezolver.Compilation.IContainerConfiguration.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  name: Configure(IContainer, ITargetContainer)
-  href: api/Rezolver.Compilation.IContainerConfiguration.html#Rezolver_Compilation_IContainerConfiguration_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Compilation.IContainerConfiguration.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  fullName: Rezolver.Compilation.IContainerConfiguration.Configure(Rezolver.IContainer, Rezolver.ITargetContainer)
-  nameWithType: IContainerConfiguration.Configure(IContainer, ITargetContainer)
-- uid: Rezolver.Compilation.IContainerConfiguration.Configure*
-  name: Configure
-  href: api/Rezolver.Compilation.IContainerConfiguration.html#Rezolver_Compilation_IContainerConfiguration_Configure_
-  commentId: Overload:Rezolver.Compilation.IContainerConfiguration.Configure
-  fullName: Rezolver.Compilation.IContainerConfiguration.Configure
-  nameWithType: IContainerConfiguration.Configure
 - uid: Rezolver.Compilation.ITargetCompiler
   name: ITargetCompiler
   href: api/Rezolver.Compilation.ITargetCompiler.html
@@ -2209,24 +2137,6 @@ references:
   commentId: Overload:Rezolver.Compilation.ITargetCompiler.CreateContext
   fullName: Rezolver.Compilation.ITargetCompiler.CreateContext
   nameWithType: ITargetCompiler.CreateContext
-- uid: Rezolver.Compilation.TargetCompiler
-  name: TargetCompiler
-  href: api/Rezolver.Compilation.TargetCompiler.html
-  commentId: T:Rezolver.Compilation.TargetCompiler
-  fullName: Rezolver.Compilation.TargetCompiler
-  nameWithType: TargetCompiler
-- uid: Rezolver.Compilation.TargetCompiler.Default
-  name: Default
-  href: api/Rezolver.Compilation.TargetCompiler.html#Rezolver_Compilation_TargetCompiler_Default
-  commentId: P:Rezolver.Compilation.TargetCompiler.Default
-  fullName: Rezolver.Compilation.TargetCompiler.Default
-  nameWithType: TargetCompiler.Default
-- uid: Rezolver.Compilation.TargetCompiler.Default*
-  name: Default
-  href: api/Rezolver.Compilation.TargetCompiler.html#Rezolver_Compilation_TargetCompiler_Default_
-  commentId: Overload:Rezolver.Compilation.TargetCompiler.Default
-  fullName: Rezolver.Compilation.TargetCompiler.Default
-  nameWithType: TargetCompiler.Default
 - uid: Rezolver.Compilation.TargetCompilerExtensions
   name: TargetCompilerExtensions
   href: api/Rezolver.Compilation.TargetCompilerExtensions.html
@@ -2689,6 +2599,12 @@ references:
   commentId: M:Rezolver.ContainerBehaviourCollection.#ctor
   fullName: Rezolver.ContainerBehaviourCollection.ContainerBehaviourCollection()
   nameWithType: ContainerBehaviourCollection.ContainerBehaviourCollection()
+- uid: Rezolver.ContainerBehaviourCollection.#ctor(Rezolver.ContainerBehaviourCollection)
+  name: ContainerBehaviourCollection(ContainerBehaviourCollection)
+  href: api/Rezolver.ContainerBehaviourCollection.html#Rezolver_ContainerBehaviourCollection__ctor_Rezolver_ContainerBehaviourCollection_
+  commentId: M:Rezolver.ContainerBehaviourCollection.#ctor(Rezolver.ContainerBehaviourCollection)
+  fullName: Rezolver.ContainerBehaviourCollection.ContainerBehaviourCollection(Rezolver.ContainerBehaviourCollection)
+  nameWithType: ContainerBehaviourCollection.ContainerBehaviourCollection(ContainerBehaviourCollection)
 - uid: Rezolver.ContainerBehaviourCollection.#ctor(Rezolver.IContainerBehaviour[])
   name: ContainerBehaviourCollection(IContainerBehaviour[])
   href: api/Rezolver.ContainerBehaviourCollection.html#Rezolver_ContainerBehaviourCollection__ctor_Rezolver_IContainerBehaviour___
@@ -2731,6 +2647,21 @@ references:
   commentId: T:Rezolver.ContainerBehaviourCollectionExtensions
   fullName: Rezolver.ContainerBehaviourCollectionExtensions
   nameWithType: ContainerBehaviourCollectionExtensions
+- uid: Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler(Rezolver.ContainerBehaviourCollection,Rezolver.IContainerBehaviour{Rezolver.Compilation.ITargetCompiler})
+  name: UseCompiler(ContainerBehaviourCollection, IContainerBehaviour<ITargetCompiler>)
+  href: api/Rezolver.ContainerBehaviourCollectionExtensions.html#Rezolver_ContainerBehaviourCollectionExtensions_UseCompiler_Rezolver_ContainerBehaviourCollection_Rezolver_IContainerBehaviour_Rezolver_Compilation_ITargetCompiler__
+  commentId: M:Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler(Rezolver.ContainerBehaviourCollection,Rezolver.IContainerBehaviour{Rezolver.Compilation.ITargetCompiler})
+  name.vb: UseCompiler(ContainerBehaviourCollection, IContainerBehaviour(Of ITargetCompiler))
+  fullName: Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler(Rezolver.ContainerBehaviourCollection, Rezolver.IContainerBehaviour<Rezolver.Compilation.ITargetCompiler>)
+  fullName.vb: Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler(Rezolver.ContainerBehaviourCollection, Rezolver.IContainerBehaviour(Of Rezolver.Compilation.ITargetCompiler))
+  nameWithType: ContainerBehaviourCollectionExtensions.UseCompiler(ContainerBehaviourCollection, IContainerBehaviour<ITargetCompiler>)
+  nameWithType.vb: ContainerBehaviourCollectionExtensions.UseCompiler(ContainerBehaviourCollection, IContainerBehaviour(Of ITargetCompiler))
+- uid: Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler*
+  name: UseCompiler
+  href: api/Rezolver.ContainerBehaviourCollectionExtensions.html#Rezolver_ContainerBehaviourCollectionExtensions_UseCompiler_
+  commentId: Overload:Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler
+  fullName: Rezolver.ContainerBehaviourCollectionExtensions.UseCompiler
+  nameWithType: ContainerBehaviourCollectionExtensions.UseCompiler
 - uid: Rezolver.ContainerBehaviourCollectionExtensions.UseExpressionCompiler(Rezolver.ContainerBehaviourCollection)
   name: UseExpressionCompiler(ContainerBehaviourCollection)
   href: api/Rezolver.ContainerBehaviourCollectionExtensions.html#Rezolver_ContainerBehaviourCollectionExtensions_UseExpressionCompiler_Rezolver_ContainerBehaviourCollection_
@@ -3148,120 +3079,6 @@ references:
   fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorator, TDecorated)(Rezolver.ITargetContainer)
   nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorator, TDecorated>(ITargetContainer)
   nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorator, TDecorated)(ITargetContainer)
-- uid: Rezolver.DefaultMemberBindingBehaviour
-  name: DefaultMemberBindingBehaviour
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html
-  commentId: T:Rezolver.DefaultMemberBindingBehaviour
-  fullName: Rezolver.DefaultMemberBindingBehaviour
-  nameWithType: DefaultMemberBindingBehaviour
-- uid: Rezolver.DefaultMemberBindingBehaviour.#ctor
-  name: DefaultMemberBindingBehaviour()
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour__ctor
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.#ctor
-  fullName: Rezolver.DefaultMemberBindingBehaviour.DefaultMemberBindingBehaviour()
-  nameWithType: DefaultMemberBindingBehaviour.DefaultMemberBindingBehaviour()
-- uid: Rezolver.DefaultMemberBindingBehaviour.#ctor*
-  name: DefaultMemberBindingBehaviour
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour__ctor_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.#ctor
-  fullName: Rezolver.DefaultMemberBindingBehaviour.DefaultMemberBindingBehaviour
-  nameWithType: DefaultMemberBindingBehaviour.DefaultMemberBindingBehaviour
-- uid: Rezolver.DefaultMemberBindingBehaviour.BindFields(Rezolver.Compilation.ICompileContext,Type,IEnumerable{FieldInfo})
-  name: BindFields(ICompileContext, Type, IEnumerable<FieldInfo>)
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_BindFields_Rezolver_Compilation_ICompileContext_Type_IEnumerable_FieldInfo__
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.BindFields(Rezolver.Compilation.ICompileContext,Type,IEnumerable{FieldInfo})
-  name.vb: BindFields(ICompileContext, Type, IEnumerable(Of FieldInfo))
-  fullName: Rezolver.DefaultMemberBindingBehaviour.BindFields(Rezolver.Compilation.ICompileContext, Type, IEnumerable<FieldInfo>)
-  fullName.vb: Rezolver.DefaultMemberBindingBehaviour.BindFields(Rezolver.Compilation.ICompileContext, Type, IEnumerable(Of FieldInfo))
-  nameWithType: DefaultMemberBindingBehaviour.BindFields(ICompileContext, Type, IEnumerable<FieldInfo>)
-  nameWithType.vb: DefaultMemberBindingBehaviour.BindFields(ICompileContext, Type, IEnumerable(Of FieldInfo))
-- uid: Rezolver.DefaultMemberBindingBehaviour.BindFields*
-  name: BindFields
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_BindFields_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.BindFields
-  fullName: Rezolver.DefaultMemberBindingBehaviour.BindFields
-  nameWithType: DefaultMemberBindingBehaviour.BindFields
-- uid: Rezolver.DefaultMemberBindingBehaviour.BindProperties(Rezolver.Compilation.ICompileContext,Type,IEnumerable{PropertyInfo})
-  name: BindProperties(ICompileContext, Type, IEnumerable<PropertyInfo>)
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_BindProperties_Rezolver_Compilation_ICompileContext_Type_IEnumerable_PropertyInfo__
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.BindProperties(Rezolver.Compilation.ICompileContext,Type,IEnumerable{PropertyInfo})
-  name.vb: BindProperties(ICompileContext, Type, IEnumerable(Of PropertyInfo))
-  fullName: Rezolver.DefaultMemberBindingBehaviour.BindProperties(Rezolver.Compilation.ICompileContext, Type, IEnumerable<PropertyInfo>)
-  fullName.vb: Rezolver.DefaultMemberBindingBehaviour.BindProperties(Rezolver.Compilation.ICompileContext, Type, IEnumerable(Of PropertyInfo))
-  nameWithType: DefaultMemberBindingBehaviour.BindProperties(ICompileContext, Type, IEnumerable<PropertyInfo>)
-  nameWithType.vb: DefaultMemberBindingBehaviour.BindProperties(ICompileContext, Type, IEnumerable(Of PropertyInfo))
-- uid: Rezolver.DefaultMemberBindingBehaviour.BindProperties*
-  name: BindProperties
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_BindProperties_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.BindProperties
-  fullName: Rezolver.DefaultMemberBindingBehaviour.BindProperties
-  nameWithType: DefaultMemberBindingBehaviour.BindProperties
-- uid: Rezolver.DefaultMemberBindingBehaviour.CreateBinding(Rezolver.Compilation.ICompileContext,Type,FieldInfo)
-  name: CreateBinding(ICompileContext, Type, FieldInfo)
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_CreateBinding_Rezolver_Compilation_ICompileContext_Type_FieldInfo_
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.CreateBinding(Rezolver.Compilation.ICompileContext,Type,FieldInfo)
-  fullName: Rezolver.DefaultMemberBindingBehaviour.CreateBinding(Rezolver.Compilation.ICompileContext, Type, FieldInfo)
-  nameWithType: DefaultMemberBindingBehaviour.CreateBinding(ICompileContext, Type, FieldInfo)
-- uid: Rezolver.DefaultMemberBindingBehaviour.CreateBinding(Rezolver.Compilation.ICompileContext,Type,PropertyInfo)
-  name: CreateBinding(ICompileContext, Type, PropertyInfo)
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_CreateBinding_Rezolver_Compilation_ICompileContext_Type_PropertyInfo_
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.CreateBinding(Rezolver.Compilation.ICompileContext,Type,PropertyInfo)
-  fullName: Rezolver.DefaultMemberBindingBehaviour.CreateBinding(Rezolver.Compilation.ICompileContext, Type, PropertyInfo)
-  nameWithType: DefaultMemberBindingBehaviour.CreateBinding(ICompileContext, Type, PropertyInfo)
-- uid: Rezolver.DefaultMemberBindingBehaviour.CreateBinding*
-  name: CreateBinding
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_CreateBinding_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.CreateBinding
-  fullName: Rezolver.DefaultMemberBindingBehaviour.CreateBinding
-  nameWithType: DefaultMemberBindingBehaviour.CreateBinding
-- uid: Rezolver.DefaultMemberBindingBehaviour.GetBindableFields(Rezolver.Compilation.ICompileContext,Type)
-  name: GetBindableFields(ICompileContext, Type)
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_GetBindableFields_Rezolver_Compilation_ICompileContext_Type_
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.GetBindableFields(Rezolver.Compilation.ICompileContext,Type)
-  fullName: Rezolver.DefaultMemberBindingBehaviour.GetBindableFields(Rezolver.Compilation.ICompileContext, Type)
-  nameWithType: DefaultMemberBindingBehaviour.GetBindableFields(ICompileContext, Type)
-- uid: Rezolver.DefaultMemberBindingBehaviour.GetBindableFields*
-  name: GetBindableFields
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_GetBindableFields_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.GetBindableFields
-  fullName: Rezolver.DefaultMemberBindingBehaviour.GetBindableFields
-  nameWithType: DefaultMemberBindingBehaviour.GetBindableFields
-- uid: Rezolver.DefaultMemberBindingBehaviour.GetBindableProperties(Rezolver.Compilation.ICompileContext,Type)
-  name: GetBindableProperties(ICompileContext, Type)
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_GetBindableProperties_Rezolver_Compilation_ICompileContext_Type_
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.GetBindableProperties(Rezolver.Compilation.ICompileContext,Type)
-  fullName: Rezolver.DefaultMemberBindingBehaviour.GetBindableProperties(Rezolver.Compilation.ICompileContext, Type)
-  nameWithType: DefaultMemberBindingBehaviour.GetBindableProperties(ICompileContext, Type)
-- uid: Rezolver.DefaultMemberBindingBehaviour.GetBindableProperties*
-  name: GetBindableProperties
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_GetBindableProperties_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.GetBindableProperties
-  fullName: Rezolver.DefaultMemberBindingBehaviour.GetBindableProperties
-  nameWithType: DefaultMemberBindingBehaviour.GetBindableProperties
-- uid: Rezolver.DefaultMemberBindingBehaviour.GetMemberBindings(Rezolver.Compilation.ICompileContext,Type)
-  name: GetMemberBindings(ICompileContext, Type)
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_GetMemberBindings_Rezolver_Compilation_ICompileContext_Type_
-  commentId: M:Rezolver.DefaultMemberBindingBehaviour.GetMemberBindings(Rezolver.Compilation.ICompileContext,Type)
-  fullName: Rezolver.DefaultMemberBindingBehaviour.GetMemberBindings(Rezolver.Compilation.ICompileContext, Type)
-  nameWithType: DefaultMemberBindingBehaviour.GetMemberBindings(ICompileContext, Type)
-- uid: Rezolver.DefaultMemberBindingBehaviour.GetMemberBindings*
-  name: GetMemberBindings
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_GetMemberBindings_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.GetMemberBindings
-  fullName: Rezolver.DefaultMemberBindingBehaviour.GetMemberBindings
-  nameWithType: DefaultMemberBindingBehaviour.GetMemberBindings
-- uid: Rezolver.DefaultMemberBindingBehaviour.Instance
-  name: Instance
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_Instance
-  commentId: P:Rezolver.DefaultMemberBindingBehaviour.Instance
-  fullName: Rezolver.DefaultMemberBindingBehaviour.Instance
-  nameWithType: DefaultMemberBindingBehaviour.Instance
-- uid: Rezolver.DefaultMemberBindingBehaviour.Instance*
-  name: Instance
-  href: api/Rezolver.DefaultMemberBindingBehaviour.html#Rezolver_DefaultMemberBindingBehaviour_Instance_
-  commentId: Overload:Rezolver.DefaultMemberBindingBehaviour.Instance
-  fullName: Rezolver.DefaultMemberBindingBehaviour.Instance
-  nameWithType: DefaultMemberBindingBehaviour.Instance
 - uid: Rezolver.DelegateTargetContainerExtensions
   name: DelegateTargetContainerExtensions
   href: api/Rezolver.DelegateTargetContainerExtensions.html
@@ -3343,318 +3160,6 @@ references:
   fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, TResult), System.Type, Rezolver.ScopeBehaviour)
   nameWithType: DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, TResult>, Type, ScopeBehaviour)
   nameWithType.vb: DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, TResult), Type, ScopeBehaviour)
-- uid: Rezolver.EnumerableTargetBuilderExtensions
-  name: EnumerableTargetBuilderExtensions
-  href: api/Rezolver.EnumerableTargetBuilderExtensions.html
-  commentId: T:Rezolver.EnumerableTargetBuilderExtensions
-  fullName: Rezolver.EnumerableTargetBuilderExtensions
-  nameWithType: EnumerableTargetBuilderExtensions
-- uid: Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving(Rezolver.ITargetContainer)
-  name: EnableEnumerableResolving(ITargetContainer)
-  href: api/Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving(Rezolver.ITargetContainer)
-  fullName: Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving(Rezolver.ITargetContainer)
-  nameWithType: EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)
-- uid: Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving*
-  name: EnableEnumerableResolving
-  href: api/Rezolver.EnumerableTargetBuilderExtensions.html#Rezolver_EnumerableTargetBuilderExtensions_EnableEnumerableResolving_
-  commentId: Overload:Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving
-  fullName: Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving
-  nameWithType: EnumerableTargetBuilderExtensions.EnableEnumerableResolving
-- uid: Rezolver.ExceptionResources
-  name: ExceptionResources
-  href: api/Rezolver.ExceptionResources.html
-  commentId: T:Rezolver.ExceptionResources
-  fullName: Rezolver.ExceptionResources
-  nameWithType: ExceptionResources
-- uid: Rezolver.ExceptionResources._MOVETOSHAREDPROJECT
-  name: _MOVETOSHAREDPROJECT
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources__MOVETOSHAREDPROJECT
-  commentId: P:Rezolver.ExceptionResources._MOVETOSHAREDPROJECT
-  fullName: Rezolver.ExceptionResources._MOVETOSHAREDPROJECT
-  nameWithType: ExceptionResources._MOVETOSHAREDPROJECT
-- uid: Rezolver.ExceptionResources._MOVETOSHAREDPROJECT*
-  name: _MOVETOSHAREDPROJECT
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources__MOVETOSHAREDPROJECT_
-  commentId: Overload:Rezolver.ExceptionResources._MOVETOSHAREDPROJECT
-  fullName: Rezolver.ExceptionResources._MOVETOSHAREDPROJECT
-  nameWithType: ExceptionResources._MOVETOSHAREDPROJECT
-- uid: Rezolver.ExceptionResources.Culture
-  name: Culture
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_Culture
-  commentId: P:Rezolver.ExceptionResources.Culture
-  fullName: Rezolver.ExceptionResources.Culture
-  nameWithType: ExceptionResources.Culture
-- uid: Rezolver.ExceptionResources.Culture*
-  name: Culture
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_Culture_
-  commentId: Overload:Rezolver.ExceptionResources.Culture
-  fullName: Rezolver.ExceptionResources.Culture
-  nameWithType: ExceptionResources.Culture
-- uid: Rezolver.ExceptionResources.CyclicDependencyDetectedInTargetFormat
-  name: CyclicDependencyDetectedInTargetFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_CyclicDependencyDetectedInTargetFormat
-  commentId: P:Rezolver.ExceptionResources.CyclicDependencyDetectedInTargetFormat
-  fullName: Rezolver.ExceptionResources.CyclicDependencyDetectedInTargetFormat
-  nameWithType: ExceptionResources.CyclicDependencyDetectedInTargetFormat
-- uid: Rezolver.ExceptionResources.CyclicDependencyDetectedInTargetFormat*
-  name: CyclicDependencyDetectedInTargetFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_CyclicDependencyDetectedInTargetFormat_
-  commentId: Overload:Rezolver.ExceptionResources.CyclicDependencyDetectedInTargetFormat
-  fullName: Rezolver.ExceptionResources.CyclicDependencyDetectedInTargetFormat
-  nameWithType: ExceptionResources.CyclicDependencyDetectedInTargetFormat
-- uid: Rezolver.ExceptionResources.DeclaredTypeIsNotCompatible_Format
-  name: DeclaredTypeIsNotCompatible_Format
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_DeclaredTypeIsNotCompatible_Format
-  commentId: P:Rezolver.ExceptionResources.DeclaredTypeIsNotCompatible_Format
-  fullName: Rezolver.ExceptionResources.DeclaredTypeIsNotCompatible_Format
-  nameWithType: ExceptionResources.DeclaredTypeIsNotCompatible_Format
-- uid: Rezolver.ExceptionResources.DeclaredTypeIsNotCompatible_Format*
-  name: DeclaredTypeIsNotCompatible_Format
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_DeclaredTypeIsNotCompatible_Format_
-  commentId: Overload:Rezolver.ExceptionResources.DeclaredTypeIsNotCompatible_Format
-  fullName: Rezolver.ExceptionResources.DeclaredTypeIsNotCompatible_Format
-  nameWithType: ExceptionResources.DeclaredTypeIsNotCompatible_Format
-- uid: Rezolver.ExceptionResources.LambdaBodyIsNotNewExpressionFormat
-  name: LambdaBodyIsNotNewExpressionFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_LambdaBodyIsNotNewExpressionFormat
-  commentId: P:Rezolver.ExceptionResources.LambdaBodyIsNotNewExpressionFormat
-  fullName: Rezolver.ExceptionResources.LambdaBodyIsNotNewExpressionFormat
-  nameWithType: ExceptionResources.LambdaBodyIsNotNewExpressionFormat
-- uid: Rezolver.ExceptionResources.LambdaBodyIsNotNewExpressionFormat*
-  name: LambdaBodyIsNotNewExpressionFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_LambdaBodyIsNotNewExpressionFormat_
-  commentId: Overload:Rezolver.ExceptionResources.LambdaBodyIsNotNewExpressionFormat
-  fullName: Rezolver.ExceptionResources.LambdaBodyIsNotNewExpressionFormat
-  nameWithType: ExceptionResources.LambdaBodyIsNotNewExpressionFormat
-- uid: Rezolver.ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat
-  name: LambdaBodyNewExpressionIsWrongTypeFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_LambdaBodyNewExpressionIsWrongTypeFormat
-  commentId: P:Rezolver.ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat
-  fullName: Rezolver.ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat
-  nameWithType: ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat
-- uid: Rezolver.ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat*
-  name: LambdaBodyNewExpressionIsWrongTypeFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_LambdaBodyNewExpressionIsWrongTypeFormat_
-  commentId: Overload:Rezolver.ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat
-  fullName: Rezolver.ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat
-  nameWithType: ExceptionResources.LambdaBodyNewExpressionIsWrongTypeFormat
-- uid: Rezolver.ExceptionResources.MoreThanOneBestConstructorFormat
-  name: MoreThanOneBestConstructorFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_MoreThanOneBestConstructorFormat
-  commentId: P:Rezolver.ExceptionResources.MoreThanOneBestConstructorFormat
-  fullName: Rezolver.ExceptionResources.MoreThanOneBestConstructorFormat
-  nameWithType: ExceptionResources.MoreThanOneBestConstructorFormat
-- uid: Rezolver.ExceptionResources.MoreThanOneBestConstructorFormat*
-  name: MoreThanOneBestConstructorFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_MoreThanOneBestConstructorFormat_
-  commentId: Overload:Rezolver.ExceptionResources.MoreThanOneBestConstructorFormat
-  fullName: Rezolver.ExceptionResources.MoreThanOneBestConstructorFormat
-  nameWithType: ExceptionResources.MoreThanOneBestConstructorFormat
-- uid: Rezolver.ExceptionResources.MoreThanOneConstructorFormat
-  name: MoreThanOneConstructorFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_MoreThanOneConstructorFormat
-  commentId: P:Rezolver.ExceptionResources.MoreThanOneConstructorFormat
-  fullName: Rezolver.ExceptionResources.MoreThanOneConstructorFormat
-  nameWithType: ExceptionResources.MoreThanOneConstructorFormat
-- uid: Rezolver.ExceptionResources.MoreThanOneConstructorFormat*
-  name: MoreThanOneConstructorFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_MoreThanOneConstructorFormat_
-  commentId: Overload:Rezolver.ExceptionResources.MoreThanOneConstructorFormat
-  fullName: Rezolver.ExceptionResources.MoreThanOneConstructorFormat
-  nameWithType: ExceptionResources.MoreThanOneConstructorFormat
-- uid: Rezolver.ExceptionResources.MoreThanOneObjectFoundInScope
-  name: MoreThanOneObjectFoundInScope
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_MoreThanOneObjectFoundInScope
-  commentId: P:Rezolver.ExceptionResources.MoreThanOneObjectFoundInScope
-  fullName: Rezolver.ExceptionResources.MoreThanOneObjectFoundInScope
-  nameWithType: ExceptionResources.MoreThanOneObjectFoundInScope
-- uid: Rezolver.ExceptionResources.MoreThanOneObjectFoundInScope*
-  name: MoreThanOneObjectFoundInScope
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_MoreThanOneObjectFoundInScope_
-  commentId: Overload:Rezolver.ExceptionResources.MoreThanOneObjectFoundInScope
-  fullName: Rezolver.ExceptionResources.MoreThanOneObjectFoundInScope
-  nameWithType: ExceptionResources.MoreThanOneObjectFoundInScope
-- uid: Rezolver.ExceptionResources.NoApplicableConstructorForContextFormat
-  name: NoApplicableConstructorForContextFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoApplicableConstructorForContextFormat
-  commentId: P:Rezolver.ExceptionResources.NoApplicableConstructorForContextFormat
-  fullName: Rezolver.ExceptionResources.NoApplicableConstructorForContextFormat
-  nameWithType: ExceptionResources.NoApplicableConstructorForContextFormat
-- uid: Rezolver.ExceptionResources.NoApplicableConstructorForContextFormat*
-  name: NoApplicableConstructorForContextFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoApplicableConstructorForContextFormat_
-  commentId: Overload:Rezolver.ExceptionResources.NoApplicableConstructorForContextFormat
-  fullName: Rezolver.ExceptionResources.NoApplicableConstructorForContextFormat
-  nameWithType: ExceptionResources.NoApplicableConstructorForContextFormat
-- uid: Rezolver.ExceptionResources.NoConstructorSetOnNewExpression
-  name: NoConstructorSetOnNewExpression
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoConstructorSetOnNewExpression
-  commentId: P:Rezolver.ExceptionResources.NoConstructorSetOnNewExpression
-  fullName: Rezolver.ExceptionResources.NoConstructorSetOnNewExpression
-  nameWithType: ExceptionResources.NoConstructorSetOnNewExpression
-- uid: Rezolver.ExceptionResources.NoConstructorSetOnNewExpression*
-  name: NoConstructorSetOnNewExpression
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoConstructorSetOnNewExpression_
-  commentId: Overload:Rezolver.ExceptionResources.NoConstructorSetOnNewExpression
-  fullName: Rezolver.ExceptionResources.NoConstructorSetOnNewExpression
-  nameWithType: ExceptionResources.NoConstructorSetOnNewExpression
-- uid: Rezolver.ExceptionResources.NoDefaultOrAllOptionalConstructorFormat
-  name: NoDefaultOrAllOptionalConstructorFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoDefaultOrAllOptionalConstructorFormat
-  commentId: P:Rezolver.ExceptionResources.NoDefaultOrAllOptionalConstructorFormat
-  fullName: Rezolver.ExceptionResources.NoDefaultOrAllOptionalConstructorFormat
-  nameWithType: ExceptionResources.NoDefaultOrAllOptionalConstructorFormat
-- uid: Rezolver.ExceptionResources.NoDefaultOrAllOptionalConstructorFormat*
-  name: NoDefaultOrAllOptionalConstructorFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoDefaultOrAllOptionalConstructorFormat_
-  commentId: Overload:Rezolver.ExceptionResources.NoDefaultOrAllOptionalConstructorFormat
-  fullName: Rezolver.ExceptionResources.NoDefaultOrAllOptionalConstructorFormat
-  nameWithType: ExceptionResources.NoDefaultOrAllOptionalConstructorFormat
-- uid: Rezolver.ExceptionResources.NoPublicConstructorsDefinedFormat
-  name: NoPublicConstructorsDefinedFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoPublicConstructorsDefinedFormat
-  commentId: P:Rezolver.ExceptionResources.NoPublicConstructorsDefinedFormat
-  fullName: Rezolver.ExceptionResources.NoPublicConstructorsDefinedFormat
-  nameWithType: ExceptionResources.NoPublicConstructorsDefinedFormat
-- uid: Rezolver.ExceptionResources.NoPublicConstructorsDefinedFormat*
-  name: NoPublicConstructorsDefinedFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NoPublicConstructorsDefinedFormat_
-  commentId: Overload:Rezolver.ExceptionResources.NoPublicConstructorsDefinedFormat
-  fullName: Rezolver.ExceptionResources.NoPublicConstructorsDefinedFormat
-  nameWithType: ExceptionResources.NoPublicConstructorsDefinedFormat
-- uid: Rezolver.ExceptionResources.NotRuntimeMethod
-  name: NotRuntimeMethod
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NotRuntimeMethod
-  commentId: P:Rezolver.ExceptionResources.NotRuntimeMethod
-  fullName: Rezolver.ExceptionResources.NotRuntimeMethod
-  nameWithType: ExceptionResources.NotRuntimeMethod
-- uid: Rezolver.ExceptionResources.NotRuntimeMethod*
-  name: NotRuntimeMethod
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_NotRuntimeMethod_
-  commentId: Overload:Rezolver.ExceptionResources.NotRuntimeMethod
-  fullName: Rezolver.ExceptionResources.NotRuntimeMethod
-  nameWithType: ExceptionResources.NotRuntimeMethod
-- uid: Rezolver.ExceptionResources.PathIsAtEnd
-  name: PathIsAtEnd
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_PathIsAtEnd
-  commentId: P:Rezolver.ExceptionResources.PathIsAtEnd
-  fullName: Rezolver.ExceptionResources.PathIsAtEnd
-  nameWithType: ExceptionResources.PathIsAtEnd
-- uid: Rezolver.ExceptionResources.PathIsAtEnd*
-  name: PathIsAtEnd
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_PathIsAtEnd_
-  commentId: Overload:Rezolver.ExceptionResources.PathIsAtEnd
-  fullName: Rezolver.ExceptionResources.PathIsAtEnd
-  nameWithType: ExceptionResources.PathIsAtEnd
-- uid: Rezolver.ExceptionResources.PathIsInvalid
-  name: PathIsInvalid
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_PathIsInvalid
-  commentId: P:Rezolver.ExceptionResources.PathIsInvalid
-  fullName: Rezolver.ExceptionResources.PathIsInvalid
-  nameWithType: ExceptionResources.PathIsInvalid
-- uid: Rezolver.ExceptionResources.PathIsInvalid*
-  name: PathIsInvalid
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_PathIsInvalid_
-  commentId: Overload:Rezolver.ExceptionResources.PathIsInvalid
-  fullName: Rezolver.ExceptionResources.PathIsInvalid
-  nameWithType: ExceptionResources.PathIsInvalid
-- uid: Rezolver.ExceptionResources.ResourceManager
-  name: ResourceManager
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_ResourceManager
-  commentId: P:Rezolver.ExceptionResources.ResourceManager
-  fullName: Rezolver.ExceptionResources.ResourceManager
-  nameWithType: ExceptionResources.ResourceManager
-- uid: Rezolver.ExceptionResources.ResourceManager*
-  name: ResourceManager
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_ResourceManager_
-  commentId: Overload:Rezolver.ExceptionResources.ResourceManager
-  fullName: Rezolver.ExceptionResources.ResourceManager
-  nameWithType: ExceptionResources.ResourceManager
-- uid: Rezolver.ExceptionResources.RezolverTargetEntryHasBeenRealised
-  name: RezolverTargetEntryHasBeenRealised
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_RezolverTargetEntryHasBeenRealised
-  commentId: P:Rezolver.ExceptionResources.RezolverTargetEntryHasBeenRealised
-  fullName: Rezolver.ExceptionResources.RezolverTargetEntryHasBeenRealised
-  nameWithType: ExceptionResources.RezolverTargetEntryHasBeenRealised
-- uid: Rezolver.ExceptionResources.RezolverTargetEntryHasBeenRealised*
-  name: RezolverTargetEntryHasBeenRealised
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_RezolverTargetEntryHasBeenRealised_
-  commentId: Overload:Rezolver.ExceptionResources.RezolverTargetEntryHasBeenRealised
-  fullName: Rezolver.ExceptionResources.RezolverTargetEntryHasBeenRealised
-  nameWithType: ExceptionResources.RezolverTargetEntryHasBeenRealised
-- uid: Rezolver.ExceptionResources.ScopedSingletonRequiresAScope
-  name: ScopedSingletonRequiresAScope
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_ScopedSingletonRequiresAScope
-  commentId: P:Rezolver.ExceptionResources.ScopedSingletonRequiresAScope
-  fullName: Rezolver.ExceptionResources.ScopedSingletonRequiresAScope
-  nameWithType: ExceptionResources.ScopedSingletonRequiresAScope
-- uid: Rezolver.ExceptionResources.ScopedSingletonRequiresAScope*
-  name: ScopedSingletonRequiresAScope
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_ScopedSingletonRequiresAScope_
-  commentId: Overload:Rezolver.ExceptionResources.ScopedSingletonRequiresAScope
-  fullName: Rezolver.ExceptionResources.ScopedSingletonRequiresAScope
-  nameWithType: ExceptionResources.ScopedSingletonRequiresAScope
-- uid: Rezolver.ExceptionResources.TargetDoesntSupportType_Format
-  name: TargetDoesntSupportType_Format
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TargetDoesntSupportType_Format
-  commentId: P:Rezolver.ExceptionResources.TargetDoesntSupportType_Format
-  fullName: Rezolver.ExceptionResources.TargetDoesntSupportType_Format
-  nameWithType: ExceptionResources.TargetDoesntSupportType_Format
-- uid: Rezolver.ExceptionResources.TargetDoesntSupportType_Format*
-  name: TargetDoesntSupportType_Format
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TargetDoesntSupportType_Format_
-  commentId: Overload:Rezolver.ExceptionResources.TargetDoesntSupportType_Format
-  fullName: Rezolver.ExceptionResources.TargetDoesntSupportType_Format
-  nameWithType: ExceptionResources.TargetDoesntSupportType_Format
-- uid: Rezolver.ExceptionResources.TargetIsNullButTypeIsNotNullable_Format
-  name: TargetIsNullButTypeIsNotNullable_Format
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TargetIsNullButTypeIsNotNullable_Format
-  commentId: P:Rezolver.ExceptionResources.TargetIsNullButTypeIsNotNullable_Format
-  fullName: Rezolver.ExceptionResources.TargetIsNullButTypeIsNotNullable_Format
-  nameWithType: ExceptionResources.TargetIsNullButTypeIsNotNullable_Format
-- uid: Rezolver.ExceptionResources.TargetIsNullButTypeIsNotNullable_Format*
-  name: TargetIsNullButTypeIsNotNullable_Format
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TargetIsNullButTypeIsNotNullable_Format_
-  commentId: Overload:Rezolver.ExceptionResources.TargetIsNullButTypeIsNotNullable_Format
-  fullName: Rezolver.ExceptionResources.TargetIsNullButTypeIsNotNullable_Format
-  nameWithType: ExceptionResources.TargetIsNullButTypeIsNotNullable_Format
-- uid: Rezolver.ExceptionResources.TargetReturnedNullExpressionFormat
-  name: TargetReturnedNullExpressionFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TargetReturnedNullExpressionFormat
-  commentId: P:Rezolver.ExceptionResources.TargetReturnedNullExpressionFormat
-  fullName: Rezolver.ExceptionResources.TargetReturnedNullExpressionFormat
-  nameWithType: ExceptionResources.TargetReturnedNullExpressionFormat
-- uid: Rezolver.ExceptionResources.TargetReturnedNullExpressionFormat*
-  name: TargetReturnedNullExpressionFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TargetReturnedNullExpressionFormat_
-  commentId: Overload:Rezolver.ExceptionResources.TargetReturnedNullExpressionFormat
-  fullName: Rezolver.ExceptionResources.TargetReturnedNullExpressionFormat
-  nameWithType: ExceptionResources.TargetReturnedNullExpressionFormat
-- uid: Rezolver.ExceptionResources.TypeIsAlreadyRegistered
-  name: TypeIsAlreadyRegistered
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TypeIsAlreadyRegistered
-  commentId: P:Rezolver.ExceptionResources.TypeIsAlreadyRegistered
-  fullName: Rezolver.ExceptionResources.TypeIsAlreadyRegistered
-  nameWithType: ExceptionResources.TypeIsAlreadyRegistered
-- uid: Rezolver.ExceptionResources.TypeIsAlreadyRegistered*
-  name: TypeIsAlreadyRegistered
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_TypeIsAlreadyRegistered_
-  commentId: Overload:Rezolver.ExceptionResources.TypeIsAlreadyRegistered
-  fullName: Rezolver.ExceptionResources.TypeIsAlreadyRegistered
-  nameWithType: ExceptionResources.TypeIsAlreadyRegistered
-- uid: Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat
-  name: UnableToResolveTypeFromBuilderFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_UnableToResolveTypeFromBuilderFormat
-  commentId: P:Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat
-  fullName: Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat
-  nameWithType: ExceptionResources.UnableToResolveTypeFromBuilderFormat
-- uid: Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat*
-  name: UnableToResolveTypeFromBuilderFormat
-  href: api/Rezolver.ExceptionResources.html#Rezolver_ExceptionResources_UnableToResolveTypeFromBuilderFormat_
-  commentId: Overload:Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat
-  fullName: Rezolver.ExceptionResources.UnableToResolveTypeFromBuilderFormat
-  nameWithType: ExceptionResources.UnableToResolveTypeFromBuilderFormat
 - uid: Rezolver.ExpressionFunctions
   name: ExpressionFunctions
   href: api/Rezolver.ExpressionFunctions.html
@@ -3871,24 +3376,6 @@ references:
   commentId: Overload:Rezolver.GlobalBehaviours.TargetContainerBehaviour
   fullName: Rezolver.GlobalBehaviours.TargetContainerBehaviour
   nameWithType: GlobalBehaviours.TargetContainerBehaviour
-- uid: Rezolver.IChildTargetContainer
-  name: IChildTargetContainer
-  href: api/Rezolver.IChildTargetContainer.html
-  commentId: T:Rezolver.IChildTargetContainer
-  fullName: Rezolver.IChildTargetContainer
-  nameWithType: IChildTargetContainer
-- uid: Rezolver.IChildTargetContainer.Parent
-  name: Parent
-  href: api/Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer_Parent
-  commentId: P:Rezolver.IChildTargetContainer.Parent
-  fullName: Rezolver.IChildTargetContainer.Parent
-  nameWithType: IChildTargetContainer.Parent
-- uid: Rezolver.IChildTargetContainer.Parent*
-  name: Parent
-  href: api/Rezolver.IChildTargetContainer.html#Rezolver_IChildTargetContainer_Parent_
-  commentId: Overload:Rezolver.IChildTargetContainer.Parent
-  fullName: Rezolver.IChildTargetContainer.Parent
-  nameWithType: IChildTargetContainer.Parent
 - uid: Rezolver.ICompiledTarget
   name: ICompiledTarget
   href: api/Rezolver.ICompiledTarget.html
@@ -4774,6 +4261,60 @@ references:
   commentId: Overload:Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget
   fullName: Rezolver.OverridingContainer.GetFallbackCompiledRezolveTarget
   nameWithType: OverridingContainer.GetFallbackCompiledRezolveTarget
+- uid: Rezolver.OverridingTargetContainer
+  name: OverridingTargetContainer
+  href: api/Rezolver.OverridingTargetContainer.html
+  commentId: T:Rezolver.OverridingTargetContainer
+  fullName: Rezolver.OverridingTargetContainer
+  nameWithType: OverridingTargetContainer
+- uid: Rezolver.OverridingTargetContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetContainerBehaviour)
+  name: OverridingTargetContainer(ITargetContainer, ITargetContainerBehaviour)
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetContainerBehaviour_
+  commentId: M:Rezolver.OverridingTargetContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITargetContainerBehaviour)
+  fullName: Rezolver.OverridingTargetContainer.OverridingTargetContainer(Rezolver.ITargetContainer, Rezolver.ITargetContainerBehaviour)
+  nameWithType: OverridingTargetContainer.OverridingTargetContainer(ITargetContainer, ITargetContainerBehaviour)
+- uid: Rezolver.OverridingTargetContainer.#ctor*
+  name: OverridingTargetContainer
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer__ctor_
+  commentId: Overload:Rezolver.OverridingTargetContainer.#ctor
+  fullName: Rezolver.OverridingTargetContainer.OverridingTargetContainer
+  nameWithType: OverridingTargetContainer.OverridingTargetContainer
+- uid: Rezolver.OverridingTargetContainer.Fetch(System.Type)
+  name: Fetch(Type)
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Fetch_System_Type_
+  commentId: M:Rezolver.OverridingTargetContainer.Fetch(System.Type)
+  fullName: Rezolver.OverridingTargetContainer.Fetch(System.Type)
+  nameWithType: OverridingTargetContainer.Fetch(Type)
+- uid: Rezolver.OverridingTargetContainer.Fetch*
+  name: Fetch
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Fetch_
+  commentId: Overload:Rezolver.OverridingTargetContainer.Fetch
+  fullName: Rezolver.OverridingTargetContainer.Fetch
+  nameWithType: OverridingTargetContainer.Fetch
+- uid: Rezolver.OverridingTargetContainer.FetchAll(System.Type)
+  name: FetchAll(Type)
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_FetchAll_System_Type_
+  commentId: M:Rezolver.OverridingTargetContainer.FetchAll(System.Type)
+  fullName: Rezolver.OverridingTargetContainer.FetchAll(System.Type)
+  nameWithType: OverridingTargetContainer.FetchAll(Type)
+- uid: Rezolver.OverridingTargetContainer.FetchAll*
+  name: FetchAll
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_FetchAll_
+  commentId: Overload:Rezolver.OverridingTargetContainer.FetchAll
+  fullName: Rezolver.OverridingTargetContainer.FetchAll
+  nameWithType: OverridingTargetContainer.FetchAll
+- uid: Rezolver.OverridingTargetContainer.Parent
+  name: Parent
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Parent
+  commentId: P:Rezolver.OverridingTargetContainer.Parent
+  fullName: Rezolver.OverridingTargetContainer.Parent
+  nameWithType: OverridingTargetContainer.Parent
+- uid: Rezolver.OverridingTargetContainer.Parent*
+  name: Parent
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Parent_
+  commentId: Overload:Rezolver.OverridingTargetContainer.Parent
+  fullName: Rezolver.OverridingTargetContainer.Parent
+  nameWithType: OverridingTargetContainer.Parent
 - uid: Rezolver.ParameterBinding
   name: ParameterBinding
   href: api/Rezolver.ParameterBinding.html
@@ -5269,6 +4810,15 @@ references:
   fullName.vb: Rezolver.Sdk.DependantCollection(Of T).DependantCollection()
   nameWithType: DependantCollection<T>.DependantCollection()
   nameWithType.vb: DependantCollection(Of T).DependantCollection()
+- uid: Rezolver.Sdk.DependantCollection`1.#ctor(`0[])
+  name: DependantCollection(T[])
+  href: api/Rezolver.Sdk.DependantCollection-1.html#Rezolver_Sdk_DependantCollection_1__ctor__0___
+  commentId: M:Rezolver.Sdk.DependantCollection`1.#ctor(`0[])
+  name.vb: DependantCollection(T())
+  fullName: Rezolver.Sdk.DependantCollection<T>.DependantCollection(T[])
+  fullName.vb: Rezolver.Sdk.DependantCollection(Of T).DependantCollection(T())
+  nameWithType: DependantCollection<T>.DependantCollection(T[])
+  nameWithType.vb: DependantCollection(Of T).DependantCollection(T())
 - uid: Rezolver.Sdk.DependantCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
   name: DependantCollection(IEnumerable<T>)
   href: api/Rezolver.Sdk.DependantCollection-1.html#Rezolver_Sdk_DependantCollection_1__ctor_System_Collections_Generic_IEnumerable__0__

@@ -150,8 +150,8 @@ is performed by instances of the <a class="xref" href="Rezolver.ITargetContainer
 Implementations are executed when these objects are created and they will typically register services which are later 
 resolved by the container types.</p>
 <p>For example, compilation is a key container-related behaviour which is configured via the 
-<a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> interface; which is expected to register the types <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>
-and <see cref="!:ICompileContextProvider"></see> so that these objects can then be used to convert registered targets
+<a class="xref" href="Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> interface; which is expected to register the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>
+for the container so that these objects can then be used to convert registered targets
 (of the type <a class="xref" href="Rezolver.ITarget.html">ITarget</a>) into compiled targets (of the type <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>).</p>
 </div>
               <h3 id="properties">Properties

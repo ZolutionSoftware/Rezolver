@@ -34,10 +34,22 @@ namespace Rezolver.Sdk
         /// Constructs a new <see cref="DependantCollection{T}"/> with the passed range of objects as the initial
         /// set.
         /// </summary>
-        /// <param name="range"></param>
+        /// <param name="range">The items to be added to the collection on construction.  If null, then the collection simply
+        /// starts off empty.</param>
         public DependantCollection(IEnumerable<T> range)
         {
             _inner = new List<T>(range ?? Enumerable.Empty<T>());
+        }
+
+        /// <summary>
+        /// Provides a convenient way to initialise a <see cref="DependantCollection{T}"/> using a variable argument
+        /// list.
+        /// </summary>
+        /// <param name="dependants">The items to be added to the collection on construction.</param>
+        public DependantCollection(params T[] dependants)
+            : this((IEnumerable<T>)dependants)
+        {
+
         }
 
         /// <summary>

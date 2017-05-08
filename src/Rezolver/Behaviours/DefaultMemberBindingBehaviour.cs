@@ -19,9 +19,7 @@ namespace Rezolver.Behaviours
         /// used as the default for the container to which this behaviour is attached.</param>
         public DefaultMemberBindingBehaviour(IMemberBindingBehaviour memberBindingBehaviour)
         {
-            if (memberBindingBehaviour == null) throw new ArgumentNullException(nameof(memberBindingBehaviour));
-
-            _memberBindingBehaviour = memberBindingBehaviour;
+            _memberBindingBehaviour = memberBindingBehaviour ?? throw new ArgumentNullException(nameof(memberBindingBehaviour));
         }
 
         /// <summary>

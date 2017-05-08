@@ -411,7 +411,7 @@ caption,th{text-align:left}
 .blockquote-reverse .small:before,.blockquote-reverse footer:before,.blockquote-reverse small:before,blockquote.pull-right .small:before,blockquote.pull-right footer:before,blockquote.pull-right small:before{content:''}
 .blockquote-reverse .small:after,.blockquote-reverse footer:after,.blockquote-reverse small:after,blockquote.pull-right .small:after,blockquote.pull-right footer:after,blockquote.pull-right small:after{content:'\00A0 \2014'}
 code,kbd,pre,samp{font-family:Menlo,Monaco,Consolas,"Courier New",monospace}
-code{color:#3263e8;border-radius:4px}
+code{color:#e26358;border-radius:4px}
 kbd{color:#fff;background-color:#333;border-radius:3px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.25)}
 kbd kbd{padding:0;font-size:100%;box-shadow:none}
 pre{margin:0 0 10px;font-size:13px;word-break:break-all;word-wrap:break-word;color:#EEE;border:1px solid #313131;border-radius:4px}
@@ -1446,14 +1446,13 @@ td.visible-print,th.visible-print{display:table-cell!important}
 .hljs{display:block;overflow-x:auto;color:#EEE;white-space:pre}
 .fa,.fa-stack{display:inline-block}
 .hljs-comment,.hljs-quote{color:#383}
-.hljs-doctag,.hljs-formula,.hljs-keyword{color:#3263e8}
-.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#1239A2}
-.hljs-literal{color:#0031b4}
+.hljs-deletion,.hljs-doctag,.hljs-formula,.hljs-keyword,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#e26358}
+.hljs-literal{color:#fa4e40}
 .hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string,.hljs-value{color:#ff9858}
 .hljs-built_in,.hljs-class .hljs-title{color:#f15c00}
 .hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#ff9858}
 .hljs-title{color:#f15c00}
-.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol{color:#b48300}
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol{color:#44e7f6}
 .hljs-comment,.hljs-emphasis,.hljs-quote{font-style:italic}
 .hljs-strong{font-weight:700}
 .hljs-link{text-decoration:underline}

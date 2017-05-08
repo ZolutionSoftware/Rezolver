@@ -26,12 +26,9 @@ namespace Rezolver
 		/// <param name="commonServiceType">Optional - if provided, then this will be used as the common service type
 		/// for registration.  If not provided, then the <see cref="ITarget.DeclaredType"/> of the first target
 		/// will be used.</param>
-		/// <remarks>If the container has the capability to handle enumerables, then each target will be returned
-		/// when an IEnumerable of the common service type is requested.  This is an opt-in behaviour in Rezolver -
-		/// implemented by the <see cref="EnumerableTargetContainer"/> and can be added to a target container
-		/// with the extension method <see cref="EnumerableTargetBuilderExtensions.EnableEnumerableResolving(ITargetContainer)"/>.
-		/// 
-		/// Note that default behaviour of <see cref="TargetContainer"/> is for this to be enabled.</remarks>
+		/// <remarks>If the container has the capability to create enumerables automatically (enabled by the
+        /// <see cref="Behaviours.AutoEnumerableBehaviour"/> target container behaviour - which is switched on by default)
+        /// then each target will be returned when an IEnumerable of the common service type is requested.</remarks>
 		public static void RegisterMultiple(this ITargetContainer targetContainer, IEnumerable<ITarget> targets, Type commonServiceType = null)
 		{
 			targets.MustNotBeNull("targets");

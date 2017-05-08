@@ -27,7 +27,7 @@ namespace Rezolver
 	/// in its <see cref="IContainer.Resolve(IResolveContext)"/> implementation.
 	/// 
 	/// Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
-	/// are <see cref="TargetContainer"/> and <see cref="ChildTargetContainer"/>.</remarks>
+	/// are <see cref="TargetContainer"/> and <see cref="OverridingTargetContainer"/>.</remarks>
 	public interface ITargetContainer
 	{
 		/// <summary>

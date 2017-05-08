@@ -15,8 +15,7 @@ namespace Rezolver
     /// interface are typically used to customise how the underlying <see cref="ITarget"/> registrations are stored
     /// and retrieved in the target container.
     /// 
-    /// Functionality such as enumerable resolving, and the default <see cref="IMemberBindingBehaviour"/> to be
-    /// used by <see cref="ConstructorTarget"/> is configured by instances of this interface.</remarks>
+    /// Functionality such as enumerable resolving is configured by instances of this interface.</remarks>
     /// <seealso cref="GlobalBehaviours.TargetContainerBehaviour"/>
     public interface ITargetContainerBehaviour
     {

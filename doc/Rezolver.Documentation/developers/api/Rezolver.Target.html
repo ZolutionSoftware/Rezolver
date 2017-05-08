@@ -278,7 +278,7 @@ changes in implementation in the future.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L329">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L348">View Source</a>
               </span>
               <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
               <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, IMemberBindingBehaviour)</h4>
@@ -308,7 +308,10 @@ changes in implementation in the future.</p>
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -333,7 +336,7 @@ changes in implementation in the future.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CRezolver.ParameterBinding%5B%5D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L343">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L365">View Source</a>
               </span>
               <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
               <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,Rezolver.ParameterBinding[],Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, ParameterBinding[], IMemberBindingBehaviour)</h4>
@@ -370,7 +373,10 @@ objects containing targets to be bound to somme or all of the constructor parame
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -395,7 +401,7 @@ objects containing targets to be bound to somme or all of the constructor parame
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L361">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L386">View Source</a>
               </span>
               <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
               <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
@@ -432,7 +438,10 @@ constructor by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITa
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -457,7 +466,7 @@ constructor by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITa
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CSystem.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L380">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L408">View Source</a>
               </span>
               <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
               <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,System.Object,Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, Object, IMemberBindingBehaviour)</h4>
@@ -495,7 +504,10 @@ by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_Declare
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -1996,7 +2008,7 @@ of the target that is created.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L196">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L199">View Source</a>
               </span>
               <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
               <h4 id="Rezolver_Target_ForType_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,Rezolver.IMemberBindingBehaviour)">ForType(Type, IMemberBindingBehaviour)</h4>
@@ -2027,7 +2039,10 @@ for the type <span class="paramref">type</span>.</p>
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -2056,7 +2071,7 @@ is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L214">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L220">View Source</a>
               </span>
               <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
               <h4 id="Rezolver_Target_ForType_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForType(Type, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
@@ -2095,7 +2110,10 @@ this parameter must be null, or an <a class="xref" href="https://msdn.microsoft.
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -2124,7 +2142,7 @@ is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CSystem.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L290">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L303">View Source</a>
               </span>
               <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
               <h4 id="Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,System.Object,Rezolver.IMemberBindingBehaviour)">ForType(Type, Object, IMemberBindingBehaviour)</h4>
@@ -2165,7 +2183,10 @@ this parameter must be null, or an <a class="xref" href="https://msdn.microsoft.
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -2199,7 +2220,7 @@ ConstructorTarget for the type &#39;MyType&#39;:
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForType__1_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(Rezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L244">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L253">View Source</a>
               </span>
               <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
               <h4 id="Rezolver_Target_ForType__1_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(IMemberBindingBehaviour)</h4>
@@ -2224,7 +2245,10 @@ for the type <span class="typeparamref">T</span>.</p>
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -2269,7 +2293,7 @@ is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L264">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L274">View Source</a>
               </span>
               <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
               <h4 id="Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
@@ -2303,9 +2327,10 @@ this parameter must be null, or an <a class="xref" href="https://msdn.microsoft.
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>Optional.  The member binding behaviour to be used - controls
-whether and which properties and/or fields also receive values injected from the container when an
-instance is created.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>
@@ -2350,7 +2375,7 @@ is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L317">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Target.cs/#L333">View Source</a>
               </span>
               <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
               <h4 id="Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(System.Object,Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(Object, IMemberBindingBehaviour)</h4>
@@ -2385,7 +2410,10 @@ this parameter must be null, or an <a class="xref" href="https://msdn.microsoft.
                   <tr>
                     <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
                     <td><span class="parametername">memberBinding</span></td>
-                    <td><p>The member binding behaviour.</p>
+                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
+If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
+is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
+<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
 </td>
                   </tr>
                 </tbody>

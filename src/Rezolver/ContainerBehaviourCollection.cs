@@ -23,6 +23,17 @@ namespace Rezolver
         }
 
         /// <summary>
+        /// Constructs a new instance of the <see cref="ContainerBehaviourCollection"/> class by cloning an existing one.
+        /// </summary>
+        /// <param name="collection">The collection whose elements are to be copied.  If null, then the collection is initialised
+        /// empty.</param>
+        public ContainerBehaviourCollection(ContainerBehaviourCollection collection)
+            : this((IEnumerable<IContainerBehaviour>)collection)
+        {
+
+        }
+
+        /// <summary>
         /// Constructs a new instance of the <see cref="ContainerBehaviourCollection"/> type, using the passed behaviours
         /// enumerable to seed the underlying collection.
         /// </summary>

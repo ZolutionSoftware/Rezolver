@@ -19,8 +19,8 @@ namespace Rezolver
     /// resolved by the container types.
     /// 
     /// For example, compilation is a key container-related behaviour which is configured via the 
-    /// <see cref="IContainerBehaviour"/> interface; which is expected to register the types <see cref="ITargetCompiler"/>
-    /// and <see cref="ICompileContextProvider"/> so that these objects can then be used to convert registered targets
+    /// <see cref="IContainerBehaviour"/> interface; which is expected to register the <see cref="ITargetCompiler"/>
+    /// for the container so that these objects can then be used to convert registered targets
     /// (of the type <see cref="ITarget"/>) into compiled targets (of the type <see cref="ICompiledTarget"/>).
     /// </remarks>
     public static class GlobalBehaviours

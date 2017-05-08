@@ -15,53 +15,57 @@ namespace Rezolver
 	/// </summary>
 	public static class SingletonTargetContainerExtensions
 	{
-		/// <summary>
-		/// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container.
-		/// The instance will be built automatically with constructor injection (and, optionally, property injection if a
-		/// <paramref name="memberBinding" /> is passed) by leveraging the <see cref="ConstructorTarget"/> or
-		/// <see cref="GenericConstructorTarget"/> targets.
-		/// </summary>
-		/// <typeparam name="TObject">The type to be created, and the type against which the registration will be made</typeparam>
-		/// <param name="targetContainer">The container on which the registrations will be made.</param>
-		/// <param name="memberBinding">Can be used to enable and control property injection in addition to constructor injection
-		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
-		public static void RegisterSingleton<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
+        /// <summary>
+        /// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container.
+        /// 
+        /// The instance will be built automatically with constructor injection by leveraging either the <see cref="ConstructorTarget"/> or
+        /// <see cref="GenericConstructorTarget"/>, depending on whether <typeparamref name="TObject"/> is a generic type or not.
+        /// </summary>
+        /// <typeparam name="TObject">The type to be created, and the type against which the registration will be made</typeparam>
+        /// <param name="targetContainer">The container on which the registrations will be made.</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
+        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
+        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        public static void RegisterSingleton<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
 		{
 			RegisterSingleton(targetContainer, typeof(TObject), memberBinding: memberBinding);
 		}
 
-		/// <summary>
-		/// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container
-		/// for the service type <typeparamref name="TService"/>
-		/// .
-		/// The instance will be built automatically with constructor injection (and, optionally, property injection if a
-		/// <paramref name="memberBinding" /> is passed) by leveraging the <see cref="ConstructorTarget"/> or
-		/// <see cref="GenericConstructorTarget"/> targets.
-		/// </summary>
-		/// <typeparam name="TObject">The type of object to be created.</typeparam>
-		/// <typeparam name="TService">The type against which the target will be registered in the <paramref name="targetContainer"/></typeparam>
-		/// <param name="targetContainer">The container on which the registrations will be made.</param>
-		/// <param name="memberBinding">Can be used to enable and control property injection in addition to constructor injection
-		/// on the instance of <typeparamref name="TObject"/> that is created.</param>
-		public static void RegisterSingleton<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
+        /// <summary>
+        /// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container
+        /// for the service type <typeparamref name="TService"/>.
+        /// 
+        /// The instance will be built automatically with constructor injection by leveraging either the <see cref="ConstructorTarget"/> or
+        /// <see cref="GenericConstructorTarget"/>, depending on whether <typeparamref name="TObject"/> is a generic type or not.
+        /// </summary>
+        /// <typeparam name="TObject">The type of object to be created.</typeparam>
+        /// <typeparam name="TService">The type against which the target will be registered in the <paramref name="targetContainer"/></typeparam>
+        /// <param name="targetContainer">The container on which the registrations will be made.</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
+        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
+        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        public static void RegisterSingleton<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
 		{
 			RegisterSingleton(targetContainer, typeof(TObject), typeof(TService), memberBinding: memberBinding);
 		}
 
-		/// <summary>
-		/// Registers the type <paramref name="objectType"/> as a singleton (<see cref="SingletonTarget"/>) in the target container
-		/// using either <paramref name="objectType"/> as the service type, or <paramref name="serviceType"/> instead - if it's provided.
-		/// 
-		/// The instance will be built automatically with constructor injection (and, optionally, property injection if a
-		/// <paramref name="memberBinding" /> is passed) by leveraging the <see cref="ConstructorTarget"/> or
-		/// <see cref="GenericConstructorTarget"/> targets.
-		/// </summary>
-		/// <param name="targetContainer">The container on which the registrations will be made.</param>
-		/// <param name="objectType">Required.  The type of object to be created.</param>
-		/// <param name="serviceType">Optional.  The type against which the target will be registered in the <paramref name="targetContainer"/></param>
-		/// <param name="memberBinding">Optional.  Can be used to enable and control property injection in addition to constructor injection
-		/// on the instance of <paramref name="objectType"/> that is created.</param>
-		public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
+        /// <summary>
+        /// Registers the type <paramref name="objectType"/> as a singleton (<see cref="SingletonTarget"/>) in the target container,
+        /// either for the same service type, or for the service type passed to the <paramref name="serviceType"/> parameter (if provided).
+        /// 
+        /// The instance will be built automatically with constructor injection by leveraging either the <see cref="ConstructorTarget"/> or
+        /// <see cref="GenericConstructorTarget"/>, depending on whether <paramref name="objectType"/> is a generic type or not.
+        /// </summary>
+        /// <param name="targetContainer">The container on which the registrations will be made.</param>
+        /// <param name="objectType">Required.  The type of object to be created.</param>
+        /// <param name="serviceType">Optional.  The type against which the target will be registered in the <paramref name="targetContainer"/></param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
+        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
+        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			objectType.MustNotBeNull(nameof(targetContainer));

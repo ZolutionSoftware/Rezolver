@@ -30,12 +30,64 @@ namespace Rezolver.Tests.Examples
             // </example1>
         }
 
+        [Fact]
+        public void ShouldInject2MembersWithAllMembersBehaviour_FromGlobalDefault()
+        {
+            var previousDefault = GlobalBehaviours.ContainerBehaviour.OfType<IContainerBehaviour<IMemberBindingBehaviour>>().Single();
+            try
+            {
+                // <example2>
+                GlobalBehaviours.ContainerBehaviour
+                    .UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
 
+                var container = new Container();
+                container.RegisterAll(
+                    Target.ForType<MyService1>(),
+                    Target.ForType<MyService2>()
+                );
+                container.RegisterType<Has2InjectableMembers>();
+
+                var result = container.Resolve<Has2InjectableMembers>();
+
+                Assert.NotNull(result.Service1);
+                Assert.NotNull(result.Service2);
+                // </example2>
+            }
+            finally
+            {
+                GlobalBehaviours.ContainerBehaviour
+                    .ReplaceAnyOrAdd<IContainerBehaviour<IMemberBindingBehaviour>>(previousDefault);
+            }
+        }
+
+        [Fact]
+        public void ShouldInject2MembersWithAllMembersBehaviour_FromContainerDefault()
+        {
+            // <example3>
+            // start off with the global behaviour to ensure you have any and all other required
+            // behaviours
+            var behaviour = new ContainerBehaviourCollection(GlobalBehaviours.ContainerBehaviour);
+            // then simply use the .UseMemberBindingBehaviour extension method as before
+            behaviour.UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
+
+            var container = new Container(behaviour);
+            container.RegisterAll(
+                Target.ForType<MyService1>(),
+                Target.ForType<MyService2>()
+            );
+            container.RegisterType<Has2InjectableMembers>();
+
+            var result = container.Resolve<Has2InjectableMembers>();
+
+            Assert.NotNull(result.Service1);
+            Assert.NotNull(result.Service2);
+            // </example3>
+        }
 
         [Fact]
         public void ShouldInjectMembersWithAttribute()
         {
-            // <example2>
+            // <example5>
             var container = new Container();
 
             // register the type which uses the attributes, passing our custom binding behaviour
@@ -52,7 +104,7 @@ namespace Rezolver.Tests.Examples
             Assert.IsType<MyService6>(result.InjectedServiceProp);
             Assert.Null(result.ServiceField);
             Assert.Null(result.ServiceProp);
-            // </example2>
+            // </example5>
         }
     }
 }

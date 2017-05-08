@@ -15,6 +15,9 @@ namespace Rezolver
     /// </summary>
 	public class ResolveContext : IResolveContext
     {
+        /// <summary>
+        /// A reference to the context from which this one was created.
+        /// </summary>
         public IResolveContext Previous { get; private set; }
 
         /// <summary>
@@ -108,19 +111,55 @@ namespace Rezolver
 			return (TResult)Resolve(typeof(TResult));
 		}
 
+        /// <summary>
+        /// Mirror of the <see cref="IContainer.TryResolve(IResolveContext, out object)"/> method
+        /// which works directly off this resolve context - taking into account the current 
+        /// <see cref="Container"/> and <see cref="Scope"/>
+        /// </summary>
+        /// <param name="newRequestedType">The type to be resolved.</param>
+        /// <param name="result">Receives the result of a successful resolve operation.</param>
+        /// <returns>A boolean indicating whether the operation was successful.</returns>
+        /// <remarks>Use this method, or the non-generic equivalent, to resolve dependency services in a 
+		/// factory or expression.
+		/// 
+		/// If a scope is active then it will be honoured.</remarks>
         public bool TryResolve(Type newRequestedType, out object result)
         {
             return (Scope?.Container ?? Container).TryResolve(New(newRequestedType: newRequestedType), out result);
         }
 
+        /// <summary>
+        /// Generic equivalent of <see cref="TryResolve(Type, out object)"/>
+        /// </summary>
+        /// <typeparam name="TResult">The type to be resolved.</typeparam>
+        /// <param name="result">Receives the result of a successful resolve operation.</param>
+        /// <returns>A boolean indicating whether the operation was successful.</returns>
         public bool TryResolve<TResult>(out TResult result)
         {
-            object temp;
-            bool success = TryResolve(typeof(TResult), out temp);
+            bool success = TryResolve(typeof(TResult), out object temp);
             result = (TResult)temp;
             return success;
         }
 
+        /// <summary>
+        /// Creates a new context from this one, typically with at least one of the properties
+        /// changed according to the parameters you pass.
+        /// 
+        /// Note that if none of the parameters are provided; or if none of the parameters have different
+        /// values from those already on the properties of the context, then the method can return
+        /// the same instance on which it is called.
+        /// </summary>
+        /// <param name="newRequestedType">Optional - a new type to be resolved.  If a new context is created,
+        /// then its <see cref="RequestedType"/> will be inherited from this context, unless a non-null type
+        /// is passed to this parameter.</param>
+        /// <param name="newContainer">Optional - a new container to be used for the new context.  If a new context
+        /// is created, then its <see cref="Container"/> will be inherited from this context unless a non-null
+        /// container is passed to this parameter.</param>
+        /// <param name="newScope">Optional - a new scope to be used for the new context.  If a new context
+        /// is created, then its <see cref="Scope"/> will be inherited from this context unless a non-null
+        /// container is passed to this parameter.  Note the implication: once a context has a non-null <see cref="Scope"/>,
+        /// it's not possible to create a new, child, context which has a null scope.</param>
+        /// <returns></returns>
         public IResolveContext New(Type newRequestedType = null,
             IContainer newContainer = null,
             IContainerScope newScope = null)
@@ -166,11 +205,12 @@ namespace Rezolver
 		/// </summary>
 		public override string ToString()
 		{
-			List<string> parts = new List<string>();
-
-			parts.Add($"Type: {RequestedType}");
-			parts.Add($"Container: {Container}");
-			if (Scope != null)
+            List<string> parts = new List<string>
+            {
+                $"Type: {RequestedType}",
+                $"Container: {Container}"
+            };
+            if (Scope != null)
 			{
 				parts.Add($"Scope: {Scope}");
 			}

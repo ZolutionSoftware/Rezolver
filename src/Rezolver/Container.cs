@@ -31,9 +31,10 @@ namespace Rezolver
         /// <summary>
         /// Constructs a new instance of the <see cref="Container"/> class.
         /// </summary>
-        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when <see cref="Resolve(IResolveContext)"/> 
-        /// (and other operations) is called.  If not provided, a new <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
-        /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
+        /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when 
+        /// <see cref="IContainer.Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new 
+        /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
+        /// to derived types, after construction, through the <see cref="Targets"/> property.</param>
         /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its <see cref="Targets"/>).
         /// If not provided, then the global <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
         /// <remarks>Note to inheritors - to create an instance without attaching behaviours (thereby avoiding inadvertant
@@ -69,7 +70,11 @@ namespace Rezolver
         /// 
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
         /// <remarks>This constructor does not attach any <see cref="IContainerBehaviour"/> behaviours, because behaviours typically
-        /// call methods which are declared virtual on this class - which could be unsafe.
+        /// call methods which are declared virtual on this class - which could be unsafe for derived types.
+        /// 
+        /// Your derived class' constructor can then attach the behaviour manually by calling its 
+        /// <see cref="IContainerBehaviour.Attach(IContainer, ITargetContainer)"/> method - typically like this:
+        /// <code>(behaviour ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);</code>
         /// 
         /// If this does not apply to your derived class (which is unlikely) - use one of the 
         /// <see cref="Container.Container(ITargetContainer, IContainerBehaviour)"/> or 

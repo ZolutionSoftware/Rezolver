@@ -21,9 +21,17 @@ namespace Rezolver.Sdk
         internal DependencyException(string message) : base(message) { }
         internal DependencyException(string message, Exception inner) : base(message, inner) { }
 #if !DOTNET
+#pragma warning disable CS0628 // New protected member declared in sealed class
+        /// <summary>
+        /// Required constructor for Serialization
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="context"></param>
         protected DependencyException(
+
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+#pragma warning restore CS0628 // New protected member declared in sealed class
 #endif
     }
 }

@@ -124,11 +124,10 @@ namespace Rezolver.Targets
 		public Type GenericType { get; private set; }
 
 		/// <summary>
-		/// Gets the member binding behaviour to be used when creating an instance.
+		/// Gets the member binding behaviour to be used when creating an instance.  The rules for this are the same as for
+        /// <see cref="ConstructorTarget.MemberBindingBehaviour"/>.
 		/// </summary>
-		/// <value>The member binding behaviour.</value>
 		public IMemberBindingBehaviour MemberBindingBehaviour { get; private set; }
-
 
 		/// <summary>
 		/// Implementation of the abstract base property.  Will return the unbound generic type passed to this object on construction.
@@ -139,16 +138,17 @@ namespace Rezolver.Targets
 		}
 
 
-		/// <summary>
-		/// Constructs a new instance of the <see cref="GenericConstructorTarget"/> for the given open generic type,
-		/// which will utilise the optional <paramref name="memberBindingBehaviour"/> when it constructs its
-		/// <see cref="ConstructorTarget"/> when <see cref="Bind(ICompileContext)"/> is called.
-		/// </summary>
-		/// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-		/// <param name="memberBindingBehaviour">Optional.  The <see cref="IMemberBindingBehaviour"/> to be used for binding
-		/// properties and/or fields on the <see cref="ConstructorTarget"/> that is generated.  If null, then no property 
-		/// or fields will be bound on construction.</param>
-		public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)
+        /// <summary>
+        /// Constructs a new instance of the <see cref="GenericConstructorTarget"/> for the given open generic type,
+        /// which will utilise the optional <paramref name="memberBindingBehaviour"/> when it constructs its
+        /// <see cref="ConstructorTarget"/> when <see cref="Bind(ICompileContext)"/> is called.
+        /// </summary>
+        /// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
+        /// <param name="memberBindingBehaviour">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
+        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
+        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)
 		{
 			genericType.MustNotBeNull(nameof(genericType));
 			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
@@ -233,7 +233,7 @@ namespace Rezolver.Targets
 					if (TypeHelpers.ContainsGenericParameters(targetType))
 						return new GenericTypeMapping(targetType, DeclaredType, $"{ targetType } should be compatible with { DeclaredType }, but since it is an open generic type, no instance can be constructed");
 					else
-						return new GenericTypeMapping(targetType, $"There is not enough generic type information from { targetType } to map all generic arguments to { DeclaredType }.  This is likely to be because { targetType } has fewer type parameters than { DeclaredType }");
+						return new GenericTypeMapping(targetType, $"There is not enough generic type information from { targetType } to map all generic arguments to { DeclaredType }.  This is most likely because { targetType } has fewer type parameters than { DeclaredType }");
 				}
 			}
 

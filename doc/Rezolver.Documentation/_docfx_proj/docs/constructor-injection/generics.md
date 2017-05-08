@@ -180,7 +180,7 @@ Rezolver doesn't care how far it has to go to work out how a type argument on a 
 
 # Using Member Bindings
 
-The same techniques that are shown in our [member binding documentation](member-binding.md) also work for generic types - if you supply an
+The same techniques that are shown in our [member injection documentation](member-injection.md) also work for generic types - if you supply an
 @Rezolver.IMemberBindingBehaviour to the @Rezolver.Targets.GenericConstructorTarget when it is created (either by the constructors or the 
 aforementioned factory methods), then that behaviour will be used when the constructor is bound.
 
@@ -190,7 +190,7 @@ Refer to the topic for detailed examples on how to use member binding.
 
 # Next Steps
 
-Assuming you've read the previous topics on [constructor injection](index.md) and [member binding](member-binding.md),
+Assuming you've read the previous topics on [constructor injection](index.md) and [member injection](member-injection.md),
 then that's it for constructor injection for now.
 
 > [!NOTE]

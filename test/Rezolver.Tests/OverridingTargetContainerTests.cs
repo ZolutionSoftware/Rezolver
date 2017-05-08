@@ -6,14 +6,14 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-	public class ChildTargetContainerTests
+	public class OverridingTargetContainerTests
 	{
 		[Fact]
 		public void MustNotAllowNullParent()
 		{
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				var builder = new ChildTargetContainer(null);
+				var builder = new OverridingTargetContainer(null);
 			});
 		}
 
@@ -21,7 +21,7 @@ namespace Rezolver.Tests
 		public void MustCopyParent()
 		{
 			var parent = new TargetContainer();
-			var childBuilder = new ChildTargetContainer(parent);
+			var childBuilder = new OverridingTargetContainer(parent);
 			Assert.Same(parent, childBuilder.Parent);
 		}
 
@@ -29,7 +29,7 @@ namespace Rezolver.Tests
 		public void ShouldInheritParentRegistration()
 		{
 			var parent = new TargetContainer();
-			var child = new ChildTargetContainer(parent);
+			var child = new OverridingTargetContainer(parent);
 
 			var parentTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
 			parent.Register(parentTarget);
@@ -41,7 +41,7 @@ namespace Rezolver.Tests
 		public void ShouldOverrideParentRegistration()
 		{
 			var parent = new TargetContainer();
-			var child = new ChildTargetContainer(parent);
+			var child = new OverridingTargetContainer(parent);
 
 			var parentTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
 			var childTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);

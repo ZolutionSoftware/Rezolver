@@ -187,13 +187,13 @@ for `Requires2MyServices`
 
 * * *
 
-### Example - @Rezolver.ChildTargetContainer
+### Example - @Rezolver.OverridingTargetContainer
 
 This solution is similar to the previous one, except this time we're not overriding the container, but overriding the *target container* used 
 by a container.
 
 > [!NOTE]
-> The choice of name 'ChildTargetContainer' is deliberate, despite the overriding behaviour shown here, because it is more a parent-child
+> The choice of name 'OverridingTargetContainer' is deliberate, despite the overriding behaviour shown here, because it is more a parent-child
 > relationship than in the previous example.
 
 In order to do this, however, we have to change how we create our container.  Until now, we've simply been creating a new @Rezolver.Container
@@ -201,7 +201,7 @@ instance and registering targets via its own implementation of @Rezolver.ITarget
 @Rezolver.ContainerBase.Targets property).
 
 This time, we're going to create a @Rezolver.TargetContainer directly, register `MyService2` and `Requires2MyServices` in it, then 
-create a @Rezolver.ChildTargetContainer on top of that with the other registration of `MyService3`.  This target container is then 
+create a @Rezolver.OverridingTargetContainer on top of that with the other registration of `MyService3`.  This target container is then 
 passed to the new container on construction.
 
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example6_2)]
@@ -296,4 +296,4 @@ As you can see - using explicitly bound parameters is a little verbose, given th
 # Next steps
 
 - See how [constructor injection works with generic types](generics.md)
-- Learn how to [enable member injection](member-binding.md) (injecting services into properties and/or fields)
+- Learn how to [enable member injection](member-injection.md) (injecting services into properties and/or fields)

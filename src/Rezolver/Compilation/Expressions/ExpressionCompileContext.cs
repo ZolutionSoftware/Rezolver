@@ -156,7 +156,7 @@ namespace Rezolver.Compilation.Expressions
 		/// a call to <see cref="IContainer.Resolve(IResolveContext)"/>, the container which first receives the call should be 
 		/// the one passed here.</param>
 		/// <param name="dependencyTargetContainer">Required - target container used for dependency lookups.  As with the base class
-		/// this is actually wrapped in a new <see cref="ChildTargetContainer"/> and used as this class' implementation of
+		/// this is actually wrapped in a new <see cref="OverridingTargetContainer"/> and used as this class' implementation of
 		/// <see cref="ITargetContainer"/>.</param>
 		/// <param name="targetType">Optional. Will be set into the <see cref="CompileContext.TargetType" /> property.  If null, then any 
 		/// <see cref="ITarget"/> that is compiled should be compiled for its own <see cref="ITarget.DeclaredType"/>.</param>

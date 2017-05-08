@@ -25,7 +25,9 @@ namespace Rezolver.Targets
 	/// extension methods such as <see cref="RegisterTypeTargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IMemberBindingBehaviour)"/> during
 	/// your application's container setup phase.
 	/// 
-	/// To compile this target, an <see cref="Compilation.ITargetCompiler"/> must call the <see cref="Bind(ICompileContext)"/> method 
+	/// To compile this target, an <see cref="Compilation.ITargetCompiler"/> should first call the <see cref="Bind(ICompileContext)"/> method,
+    /// which will select the correct constructor to be bound based on the original arguments passed to the target when it was built, and
+    /// the other registrations in the <see cref="ITargetContainer"/> that's active when compilation occurs.
 	/// </remarks>
 	public partial class ConstructorTarget : TargetBase
 	{
@@ -77,6 +79,9 @@ namespace Rezolver.Targets
         /// <see cref="Bind(ICompileContext)"/> method.  If it's still <c>null</c>, then no member binding behaviour
         /// will be used.
         /// </summary>
+        /// <remarks>The container default <see cref="IMemberBindingBehaviour"/> can be configured by calling
+        /// the <see cref="ContainerBehaviourCollectionExtensions.UseMemberBindingBehaviour(ContainerBehaviourCollection, IMemberBindingBehaviour)"/>
+        /// extension method on the <see cref="GlobalBehaviours.ContainerBehaviour"/> container behaviour collection.</remarks>
         public IMemberBindingBehaviour MemberBindingBehaviour
 		{
 			get; private set;
@@ -105,24 +110,25 @@ namespace Rezolver.Targets
 		/// </summary>
 		public override Type DeclaredType { get; }
 
-		/// <summary>
-		/// Initializes a just-in-time-bound instance of the <see cref="ConstructorTarget" /> class which must be bound 
-		/// to the best constructor at compile-time by calling the <see cref="Bind(ICompileContext)"/> method.
-		/// </summary>
-		/// <param name="type">Required.  The type whose constructor is to bound.</param>
-		/// <param name="namedArgs">Optional.  The named arguments which will be passed to, and used to find, the best-matched constructor.  
-		/// These are taken into account when the constructor is sought - with the constructor containing the most matched parameters matched being selected.</param>
-		/// <param name="memberBinding">Optional.  If provided, can be used to select properties and/or fields which are to be
-		/// initialised before the new instance is returned.  If not provided, then the <see cref="Bind(ICompileContext)"/>
-        /// method attempts to resolve it from the container and, if it can't, then no member binding is performed.</param>
-		/// <remarks>To compile this target, a <see cref="Compilation.ITargetCompiler"/> first calls the <see cref="Bind(ICompileContext)"/> method
-		/// to discover the constructor to be executed, along with the final set of arguments to be provided to it (see <see cref="ConstructorBinding"/>).
-		/// 
-		/// The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the 
-		/// <see cref="ICompileContext" /> at compile-time to the fewest number of <see cref="ITarget" /> objects whose <see cref="ITarget.UseFallback" />
-		/// is false.
-		/// </remarks>
-		public ConstructorTarget(Type type, IDictionary<string, ITarget> namedArgs = null, IMemberBindingBehaviour memberBinding = null)
+        /// <summary>
+        /// Initializes a just-in-time-bound instance of the <see cref="ConstructorTarget" /> class which must be bound 
+        /// to the best constructor at compile-time by calling the <see cref="Bind(ICompileContext)"/> method.
+        /// </summary>
+        /// <param name="type">Required.  The type whose constructor is to bound.</param>
+        /// <param name="namedArgs">Optional.  The named arguments which will be passed to, and used to find, the best-matched constructor.  
+        /// These are taken into account when the constructor is sought - with the constructor containing the most matched parameters matched being selected.</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
+        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
+        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <remarks>To compile this target, a <see cref="Compilation.ITargetCompiler"/> first calls the <see cref="Bind(ICompileContext)"/> method
+        /// to discover the constructor to be executed, along with the final set of arguments to be provided to it (see <see cref="ConstructorBinding"/>).
+        /// 
+        /// The best available constructor is defined as the constructor with the most parameters for which arguments can be resolved from the 
+        /// <see cref="ICompileContext" /> at compile-time to the fewest number of <see cref="ITarget" /> objects whose <see cref="ITarget.UseFallback" />
+        /// is false.
+        /// </remarks>
+        public ConstructorTarget(Type type, IDictionary<string, ITarget> namedArgs = null, IMemberBindingBehaviour memberBinding = null)
             : this(type, null, memberBinding, null, namedArgs)
 		{
 			//it's a post-check, but the private constructor sidesteps null types and ctors to allow the
@@ -139,9 +145,10 @@ namespace Rezolver.Targets
         /// which should be used during code generation.  Note that this array can contain fewer or more entries than there are
         /// parameters on the <paramref name="ctor"/>.  Any missing bindings will be automatically generated when <see cref="Bind(ICompileContext)"/>
         /// is called.</param>
-        /// <param name="memberBinding">Optional.  If provided, can be used to select properties and/or fields which are to be
-        /// initialised before the new instance is returned.  If not provided, then the <see cref="Bind(ICompileContext)"/>
-        /// method attempts to resolve it from the container and, if it can't, then no member binding is performed.</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
+        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
+        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
         public ConstructorTarget(ConstructorInfo ctor, ParameterBinding[] parameterBindings = null, IMemberBindingBehaviour memberBinding = null)
             : this(null, ctor, memberBinding, parameterBindings, null)
 		{
@@ -285,7 +292,7 @@ namespace Rezolver.Targets
             if (memberBindingBehaviour == null)
                 context.ResolveContext.TryResolve(out memberBindingBehaviour);
 
-			return new ConstructorBinding(ctor, boundArgs, MemberBindingBehaviour?.GetMemberBindings(context, DeclaredType));
+			return new ConstructorBinding(ctor, boundArgs, memberBindingBehaviour?.GetMemberBindings(context, DeclaredType));
 		}
 
 

@@ -84,7 +84,8 @@ namespace Rezolver
         
         /// <summary>
 		/// Resolves a new instance of a different type from the same scope/container that originally
-		/// received the current Resolve operation.
+		/// received the current Resolve operation.  This is a deliberate mirror of the same method
+        /// on <see cref="IContainer"/>.
 		/// </summary>
 		/// <typeparam name="TResult">New type to be resolved.</typeparam>
 		/// <remarks>Use this method, or the non-generic equivalent, to resolve dependency services in a 
@@ -93,8 +94,26 @@ namespace Rezolver
 		/// If a scope is active then it will be honoured.</remarks>
         TResult Resolve<TResult>();
 
+        /// <summary>
+        /// Mirror of the <see cref="IContainer.TryResolve(IResolveContext, out object)"/> method
+        /// which works directly off this resolve context - taking into account the current 
+        /// <see cref="Container"/> and <see cref="Scope"/>
+        /// </summary>
+        /// <param name="newRequestedType">The type to be resolved.</param>
+        /// <param name="result">Receives the result of a successful resolve operation.</param>
+        /// <returns>A boolean indicating whether the operation was successful.</returns>
+        /// <remarks>Use this method, or the non-generic equivalent, to resolve dependency services in a 
+		/// factory or expression.
+		/// 
+		/// If a scope is active then it will be honoured.</remarks>
         bool TryResolve(Type newRequestedType, out object result);
 
+        /// <summary>
+        /// Generic equivalent of <see cref="TryResolve(Type, out object)"/>
+        /// </summary>
+        /// <typeparam name="TResult">The type to be resolved.</typeparam>
+        /// <param name="result">Receives the result of a successful resolve operation.</param>
+        /// <returns>A boolean indicating whether the operation was successful.</returns>
         bool TryResolve<TResult>(out TResult result);
 
         /// <summary>
@@ -105,9 +124,16 @@ namespace Rezolver
         /// values from those already on the properties of the context, then the method can return
         /// the same instance on which it is called.
         /// </summary>
-        /// <param name="newRequestedType"></param>
-        /// <param name="newContainer"></param>
-        /// <param name="newScope"></param>
+        /// <param name="newRequestedType">Optional - a new type to be resolved.  If a new context is created,
+        /// then its <see cref="RequestedType"/> will be inherited from this context, unless a non-null type
+        /// is passed to this parameter.</param>
+        /// <param name="newContainer">Optional - a new container to be used for the new context.  If a new context
+        /// is created, then its <see cref="Container"/> will be inherited from this context unless a non-null
+        /// container is passed to this parameter.</param>
+        /// <param name="newScope">Optional - a new scope to be used for the new context.  If a new context
+        /// is created, then its <see cref="Scope"/> will be inherited from this context unless a non-null
+        /// container is passed to this parameter.  Note the implication: once a context has a non-null <see cref="Scope"/>,
+        /// it's not possible to create a new, child, context which has a null scope.</param>
         /// <returns></returns>
         IResolveContext New(Type newRequestedType = null,
             IContainer newContainer = null,

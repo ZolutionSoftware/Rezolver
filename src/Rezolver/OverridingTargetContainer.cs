@@ -22,19 +22,19 @@ namespace Rezolver
     /// 
     /// This fallback logic in the <see cref="Fetch(Type)" /> is triggered by the 
     /// <see cref="ITarget.UseFallback" /> property.</remarks>
-    public sealed class ChildTargetContainer : TargetContainer
+    public sealed class OverridingTargetContainer : TargetContainer
     { 
         private readonly ITargetContainer _parent;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChildTargetContainer"/> class.
+        /// Initializes a new instance of the <see cref="OverridingTargetContainer"/> class.
         /// </summary>
         /// <param name="parent">Required. The parent target container.</param>
         /// <param name="behaviour">Optional.  The behaviour to attach to this target container.  If not provided, then
         /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
         /// class is used by default.
         /// </param>
-        public ChildTargetContainer(ITargetContainer parent, ITargetContainerBehaviour behaviour = null)
+        public OverridingTargetContainer(ITargetContainer parent, ITargetContainerBehaviour behaviour = null)
                 : base()
         {
             //note above - the class uses the non-behaviour constructor of TargetContainer to ensure that 

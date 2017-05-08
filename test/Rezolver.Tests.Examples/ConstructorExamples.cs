@@ -142,14 +142,14 @@ namespace Rezolver.Tests.Examples
         }
 
         [Fact]
-        public void ShouldBindSecondConstructorAndCompleteWithChildTargetContainer()
+        public void ShouldBindSecondConstructorAndCompleteWithOverridingTargetContainer()
         {
             // <example6_2>
             var targets = new TargetContainer();
             targets.RegisterType<MyService2>();
             targets.RegisterType<Requires2MyServices>();
 
-            var childTargets = new ChildTargetContainer(targets);
+            var childTargets = new OverridingTargetContainer(targets);
             childTargets.RegisterType<MyService3>();
 
             // pass the childTargets ITargetContainer to 

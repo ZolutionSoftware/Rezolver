@@ -108,7 +108,8 @@
 <code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
 constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Container.html">Container</a> and the compilation
 stack.</p>
-<p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation is done by decorating a new <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a>,
+<p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation is done by decorating a new <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>
+which wraps the actual target container which contains the targets which will be compiled,
 so that new registrations can be added without interfering with upstream containers.</p>
 <p>Note that many of the interface members are implemented explicitly - therefore most of your interaction with 
 this type is through its implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
@@ -152,9 +153,9 @@ this type is through its implementation of <a class="xref" href="Rezolver.Compil
               </div>
               <h5 id="Rezolver_Compilation_CompileContext_remarks"><strong>Remarks</strong></h5>
               <div class="markdown level0 remarks"><p>Note that you can only create an instance of this either through inheritance, via the explicit implementation
-of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a>, or (preferably) via an 
-<see cref="!:ICompileContextProvider"></see> 
-resolved from an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> or <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> directly from a registered target.</p>
+of <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</a>, or (preferably) via the
+<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_">CreateContext(IResolveContext, ITargetContainer)</a> method of an 
+<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> resolved from an <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
 </div>
               <h3 id="constructors">Constructors
               </h3>
@@ -163,7 +164,7 @@ resolved from an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> 
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext__ctor_Rezolver_Compilation_ICompileContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.%23ctor(Rezolver.Compilation.ICompileContext%2CSystem.Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L95">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L96">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext__ctor_" data-uid="Rezolver.Compilation.CompileContext.#ctor*"></a>
               <h4 id="Rezolver_Compilation_CompileContext__ctor_Rezolver_Compilation_ICompileContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.#ctor(Rezolver.Compilation.ICompileContext,System.Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">CompileContext(ICompileContext, Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
@@ -188,7 +189,7 @@ resolved from an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> 
                     <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></td>
                     <td><span class="parametername">parentContext</span></td>
                     <td><p>Used to seed the compilation stack, container, dependency container (which
-will still be wrapped in a new <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a> for isolation) and, optionally, 
+will still be wrapped in a new <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> for isolation) and, optionally, 
 the target type (unless you pass a non-null type for <span class="paramref">targetType</span>, which would
 override that).</p>
 </td>
@@ -220,7 +221,7 @@ if not provided, then it is automatically inherited from the parent.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.%23ctor(Rezolver.IResolveContext%2CRezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L122">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L125">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext__ctor_" data-uid="Rezolver.Compilation.CompileContext.#ctor*"></a>
               <h4 id="Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.Compilation.CompileContext.#ctor(Rezolver.IResolveContext,Rezolver.ITargetContainer,System.Type)">CompileContext(IResolveContext, ITargetContainer, Type)</h4>
@@ -251,10 +252,10 @@ if not provided, then it is automatically inherited from the parent.</p>
                     <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
                     <td><span class="parametername">dependencyTargetContainer</span></td>
                     <td><p>Required - An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that contains the <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s that
-will be required to complete compilation.
-Note - this argument is passed to a new <a class="xref" href="Rezolver.ChildTargetContainer.html">ChildTargetContainer</a> that is created and proxied by this class&#39; implementation
-of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.
-As a result, it&#39;s possible to register new targets directly into the context via its implementation of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>,
+will be required to complete compilation.</p>
+<p>Note - this argument is passed to a new <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> that is created and proxied by this class&#39; implementation
+of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>As a result, it&#39;s possible to register new targets directly into the context via its implementation of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>,
 without modifying the underlying targets in the container you pass.</p>
 </td>
                   </tr>
@@ -274,7 +275,7 @@ without modifying the underlying targets in the container you pass.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_CompileStack.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.CompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L81">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L82">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_CompileStack_" data-uid="Rezolver.Compilation.CompileContext.CompileStack*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_CompileStack" data-uid="Rezolver.Compilation.CompileContext.CompileStack">CompileStack</h4>
@@ -309,7 +310,7 @@ related to this one - both up and down the hierarchy.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_DependencyTargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.DependencyTargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L72">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L73">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_DependencyTargetContainer_" data-uid="Rezolver.Compilation.CompileContext.DependencyTargetContainer*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_DependencyTargetContainer" data-uid="Rezolver.Compilation.CompileContext.DependencyTargetContainer">DependencyTargetContainer</h4>
@@ -342,7 +343,7 @@ implementation of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetC
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_ParentContext.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.ParentContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L39">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L40">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_ParentContext_" data-uid="Rezolver.Compilation.CompileContext.ParentContext*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_ParentContext" data-uid="Rezolver.Compilation.CompileContext.ParentContext">ParentContext</h4>
@@ -376,7 +377,7 @@ implementation of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetC
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_ResolveContext.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.ResolveContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L45">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L46">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_ResolveContext_" data-uid="Rezolver.Compilation.CompileContext.ResolveContext*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_ResolveContext" data-uid="Rezolver.Compilation.CompileContext.ResolveContext">ResolveContext</h4>
@@ -409,7 +410,7 @@ implementation of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetC
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_ScopeBehaviourOverride.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.ScopeBehaviourOverride%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L59">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L60">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_ScopeBehaviourOverride_" data-uid="Rezolver.Compilation.CompileContext.ScopeBehaviourOverride*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_ScopeBehaviourOverride" data-uid="Rezolver.Compilation.CompileContext.ScopeBehaviourOverride">ScopeBehaviourOverride</h4>
@@ -442,7 +443,7 @@ implementation of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetC
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_ScopePreferenceOverride.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.ScopePreferenceOverride%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L65">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L66">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_ScopePreferenceOverride_" data-uid="Rezolver.Compilation.CompileContext.ScopePreferenceOverride*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_ScopePreferenceOverride" data-uid="Rezolver.Compilation.CompileContext.ScopePreferenceOverride">ScopePreferenceOverride</h4>
@@ -475,7 +476,7 @@ implementation of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetC
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_TargetType.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.TargetType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L54">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L55">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_TargetType_" data-uid="Rezolver.Compilation.CompileContext.TargetType*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_TargetType" data-uid="Rezolver.Compilation.CompileContext.TargetType">TargetType</h4>
@@ -515,7 +516,7 @@ from the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.NewContext(System.Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L152">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L155">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_NewContext_" data-uid="Rezolver.Compilation.CompileContext.NewContext*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.NewContext(System.Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
@@ -581,7 +582,7 @@ inherited by all its child contexts (i.e. you cannot null it)</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23NewContext(System.Type%2CSystem.Nullable%7BRezolver.ScopeBehaviour%7D%2CSystem.Nullable%7BRezolver.ScopePreference%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L135">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L138">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#NewContext*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_NewContext_System_Type_System_Nullable_Rezolver_ScopeBehaviour__System_Nullable_Rezolver_ScopePreference__" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#NewContext(System.Type,System.Nullable{Rezolver.ScopeBehaviour},System.Nullable{Rezolver.ScopePreference})">ICompileContext.NewContext(Type, Nullable&lt;ScopeBehaviour&gt;, Nullable&lt;ScopePreference&gt;)</h4>
@@ -640,7 +641,7 @@ inherited by all its child contexts (i.e. you cannot null it)</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PopCompileStack.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23PopCompileStack%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L191">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L194">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PopCompileStack_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PopCompileStack*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PopCompileStack" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PopCompileStack">ICompileContext.PopCompileStack()</h4>
@@ -679,7 +680,7 @@ the compilation stack is always shared between all contexts spawned from the sam
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23Compilation%23ICompileContext%23PushCompileStack(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L167">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L170">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PushCompileStack*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_Compilation_ICompileContext_PushCompileStack_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#Compilation#ICompileContext#PushCompileStack(Rezolver.ITarget,System.Type)">ICompileContext.PushCompileStack(ITarget, Type)</h4>
@@ -741,7 +742,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L233">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L236">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#CombineWith*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#CombineWith(Rezolver.ITargetContainer,System.Type)">ITargetContainer.CombineWith(ITargetContainer, Type)</h4>
@@ -814,7 +815,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L213">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L216">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Fetch*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Fetch(System.Type)">ITargetContainer.Fetch(Type)</h4>
@@ -865,7 +866,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L222">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L225">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchAll*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchAll(System.Type)">ITargetContainer.FetchAll(Type)</h4>
@@ -916,7 +917,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L238">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L241">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchContainer*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#FetchContainer(System.Type)">ITargetContainer.FetchContainer(Type)</h4>
@@ -965,7 +966,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L204">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L207">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Register*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Register(Rezolver.ITarget,System.Type)">ITargetContainer.Register(ITarget, Type)</h4>
@@ -1007,7 +1008,7 @@ cyclic dependency graph, then this method will detect that.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext.Rezolver%23ITargetContainer%23RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L243">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L246">View Source</a>
               </span>
               <a id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#RegisterContainer*"></a>
               <h4 id="Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#RegisterContainer(System.Type,Rezolver.ITargetContainer)">ITargetContainer.RegisterContainer(Type, ITargetContainer)</h4>
@@ -1160,7 +1161,7 @@ cyclic dependency graph, then this method will detect that.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Compilation_CompileContext.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.CompileContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L33" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Compilation/CompileContext.cs/#L34" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

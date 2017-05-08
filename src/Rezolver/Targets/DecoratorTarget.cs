@@ -78,8 +78,9 @@ namespace Rezolver.Targets
 			DecoratorType = decoratorType;
 			DecoratedTarget = decoratedTarget;
 			DecoratedType = decoratedType;
-			//TODO: Allow a constructor to be supplied explicitly and potentially with parameter bindings
-            //TODO: Allow other targets to implement this - for example, you could have a delegate/expression do it just by injecting the decorated instance as an argument.
+            //TODO: Allow a constructor to be supplied explicitly and potentially with parameter bindings
+            //TODO: Allow other targets to implement this - for example, you could have a delegate/expression 
+            //do it just by injecting the decorated instance as an argument.
 			InnerTarget = Target.ForType(DecoratorType);
 
 			if (!InnerTarget.SupportsType(decoratedType))

@@ -1524,7 +1524,7 @@ samp {
 code {
   padding: 2px 4px;
   font-size: 90%;
-  color: #3263e8;
+  color: #e26358;
   background-color: #121212;
   border-radius: 4px;
 }
@@ -6659,17 +6659,17 @@ button.close {
 .hljs-doctag,
 .hljs-keyword,
 .hljs-formula {
-  color: #3263e8;
+  color: #e26358;
 }
 .hljs-section,
 .hljs-name,
 .hljs-selector-tag,
 .hljs-deletion,
 .hljs-subst {
-  color: #1239A2;
+  color: #e26358;
 }
 .hljs-literal {
-  color: #0031b4;
+  color: #fa4e40;
 }
 .hljs-string,
 .hljs-regexp,
@@ -6700,7 +6700,7 @@ button.close {
 .hljs-link,
 .hljs-meta,
 .hljs-selector-id {
-  color: #b48300;
+  color: #44e7f6;
 }
 .hljs-emphasis,
 .hljs-comment,

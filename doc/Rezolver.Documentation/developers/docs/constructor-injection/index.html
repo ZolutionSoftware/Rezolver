@@ -391,23 +391,23 @@ for <code>Requires2MyServices</code></li>
 </li>
 </ul>
 <hr>
-<h3 id="example---rezolverchildtargetcontainer">Example - <a class="xref" href="../../api/Rezolver.ChildTargetContainer.html">ChildTargetContainer</a></h3>
+<h3 id="example---rezolveroverridingtargetcontainer">Example - <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a></h3>
 <p>This solution is similar to the previous one, except this time we&#39;re not overriding the container, but overriding the <em>target container</em> used 
 by a container.</p>
-<div class="NOTE"><h5>Note</h5><p>The choice of name &#39;ChildTargetContainer&#39; is deliberate, despite the overriding behaviour shown here, because it is more a parent-child
+<div class="NOTE"><h5>Note</h5><p>The choice of name &#39;OverridingTargetContainer&#39; is deliberate, despite the overriding behaviour shown here, because it is more a parent-child
 relationship than in the previous example.</p>
 </div>
 <p>In order to do this, however, we have to change how we create our container.  Until now, we&#39;ve simply been creating a new <a class="xref" href="../../api/Rezolver.Container.html">Container</a>
 instance and registering targets via its own implementation of <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> (which, as mentioned elsewhere, wraps its
 <a class="xref" href="../../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> property).</p>
 <p>This time, we&#39;re going to create a <a class="xref" href="../../api/Rezolver.TargetContainer.html">TargetContainer</a> directly, register <code>MyService2</code> and <code>Requires2MyServices</code> in it, then 
-create a <a class="xref" href="../../api/Rezolver.ChildTargetContainer.html">ChildTargetContainer</a> on top of that with the other registration of <code>MyService3</code>.  This target container is then 
+create a <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> on top of that with the other registration of <code>MyService3</code>.  This target container is then 
 passed to the new container on construction.</p>
 <pre><code class="lang-csharp" name="ConstructorExamples.cs">var targets = new TargetContainer();
 targets.RegisterType&lt;MyService2&gt;();
 targets.RegisterType&lt;Requires2MyServices&gt;();
 
-var childTargets = new ChildTargetContainer(targets);
+var childTargets = new OverridingTargetContainer(targets);
 childTargets.RegisterType&lt;MyService3&gt;();
 
 // pass the childTargets ITargetContainer to 
@@ -550,7 +550,7 @@ Assert.NotNull(result.Service);
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>See how <a href="generics.html">constructor injection works with generic types</a></li>
-<li>Learn how to <a href="member-binding.html">enable member injection</a> (injecting services into properties and/or fields)</li>
+<li>Learn how to <a href="member-injection.html">enable member injection</a> (injecting services into properties and/or fields)</li>
 </ul>
 
             </article>

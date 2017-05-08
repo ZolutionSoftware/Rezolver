@@ -17,21 +17,24 @@ namespace Rezolver.Tests.Examples.Types
     /// <seealso cref="Rezolver.BindAllMembersBehaviour" />
     public class AttributeBindingBehaviour : BindAllMembersBehaviour
     {
-		protected override IEnumerable<FieldInfo> GetBindableFields(ICompileContext context, Type type)
+		protected override IEnumerable<FieldInfo> GetBindableFields(
+            ICompileContext context, Type type)
 		{
 			//filter the fields to those which have an InjectAttribute defined
 			return base.GetBindableFields(context, type)
 				.Where(f => f.IsDefined(typeof(InjectAttribute)));
 		}
 
-		protected override IEnumerable<PropertyInfo> GetBindableProperties(ICompileContext context, Type type)
+		protected override IEnumerable<PropertyInfo> GetBindableProperties(
+            ICompileContext context, Type type)
 		{
 			return base.GetBindableProperties(context, type)
 				.Where(f => f.IsDefined(typeof(InjectAttribute)));
 		}
 
 
-		protected override MemberBinding CreateBinding(ICompileContext context, Type type, FieldInfo field)
+		protected override MemberBinding CreateBinding(
+            ICompileContext context, Type type, FieldInfo field)
 		{
 			//the base method merely creates a new MemberBinding, bound to a new ResolvedTarget
 			//whose type is set to the field type.
@@ -41,7 +44,8 @@ namespace Rezolver.Tests.Examples.Types
 			return new MemberBinding(field, new ResolvedTarget(attr.Type ?? field.FieldType));
 		}
 
-		protected override MemberBinding CreateBinding(ICompileContext context, Type type, PropertyInfo prop)
+		protected override MemberBinding CreateBinding(
+            ICompileContext context, Type type, PropertyInfo prop)
 		{
 			//identical to above
 			var attr = prop.GetCustomAttribute<InjectAttribute>();

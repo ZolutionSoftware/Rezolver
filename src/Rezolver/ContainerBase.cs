@@ -292,17 +292,21 @@ namespace Rezolver
         /// <param name="context">The current resolve context</param>
         /// <remarks>The specifics of how this process works are not important if you simply want to use the container, 
         /// but if you are looking to extend it, then it's essential you understand the different steps that the process
-        /// goes through.
+        /// goes through:
+        /// 
+        /// ### Locating the target
         /// 
         /// If the <see cref="ITargetContainer.Fetch(Type)"/> method of the <see cref="Targets"/> target container
         /// returns a <c>null</c> <see cref="ITarget"/>, or one which has its <see cref="ITarget.UseFallback"/> set to 
         /// <c>true</c>, then the method gets an alternative compiled target by calling the
-        /// <see cref="GetFallbackCompiledRezolveTarget(IResolveContext)"/> method.  This fallback compiled target will be
-        /// used instead of compiling the target unless the target was not null and its <see cref="ITarget.UseFallback"/> is 
-        /// true *AND* the compiled target returned by the fallback method is a <see cref="MissingCompiledTarget"/> - in 
-        /// which case the fallback target will be compiled as normal.
+        /// <see cref="GetFallbackCompiledRezolveTarget(IResolveContext)"/> method.
         /// 
-        /// Before proceeding with compilation, the container checks whether the target can resolve the required object 
+        /// This fallback will be used unless the target was not null and its <see cref="ITarget.UseFallback"/> is 
+        /// true *AND* the compiled target returned by the fallback method is a <see cref="MissingCompiledTarget"/>.
+        /// 
+        /// ### To compile, or not to compile
+        /// 
+        /// Before proceeding with compilation, the code checks whether the target can resolve the required object 
         /// directly.
         /// 
         /// This means that the target either implements the <see cref="ICompiledTarget"/> interface (in which case it is
@@ -315,27 +319,23 @@ namespace Rezolver
         /// which are directly registered through this target will always use that class' implementation of 
         /// <see cref="ICompiledTarget"/> if requested through the <see cref="Resolve(IResolveContext)"/> method.</em>
         /// 
+        /// * * *
+        /// 
         /// Once the decision has been taken to compile the target, the container first needs a compiler 
-        /// (<see cref="Compilation.ITargetCompiler"/>) and a compile context provider 
-        /// (<see cref="Compilation.ICompileContextProvider"/>).
+        /// (<see cref="Compilation.ITargetCompiler"/>).
         /// 
-        /// <em>Note that classes which implement the <see cref="ITargetCompiler"/> interface also frequently implement the 
-        /// <see cref="ICompileContextProvider"/> interface so that any additional state they require is correctly attached 
-        /// to the <see cref="ICompileContext"/> which will be fed to their 
-        /// <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> implementation.</em>
-        /// 
-        /// These are both obtained by resolving them directly from the <see cref="IResolveContext.Container"/> of the 
+        /// This is obtained by resolving it directly from the <see cref="IResolveContext.Container"/> of the 
         /// <paramref name="context"/> (since a container can be delegated to from another container which originally
         /// received the <see cref="Resolve(IResolveContext)"/> call).  Attentive readers will realise at this point 
         /// that this could lead to an infinite recursion - i.e. since compiling a target means resolving a compiler, which
         /// in turn must mean compiling that target.
         /// 
-        /// The class sidesteps this potential pitfall by requiring that the targets registered for these types support 
-        /// direct resolving, as per the description a couple of paragraphs back.  Therefore, compilers and context 
+        /// The class sidesteps this potential pitfall by requiring that a target registered for <see cref="ITargetCompiler"/> 
+        /// supports direct resolving, as per the description a couple of paragraphs back.  Therefore, compilers and context 
         /// providers are typically registered as constant services via the <see cref="ObjectTarget"/> target.
         /// 
         /// Finally, a new <see cref="ICompileContext"/> is created via the 
-        /// <see cref="ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer)"/> method of the resolved
+        /// <see cref="ITargetCompiler.CreateContext(IResolveContext, ITargetContainer)"/> method of the resolved
         /// context provider, and then passed to the <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> 
         /// method of the resolved compiler.  The result of that operation is then returned to the caller.
         /// </remarks> 
@@ -404,8 +404,7 @@ namespace Rezolver
         protected virtual object GetService(Type serviceType)
         {
             //IServiceProvider should return null if not found - so we use TryResolve.
-            object toReturn = null;
-            this.TryResolve(serviceType, out toReturn);
+            this.TryResolve(serviceType, out object toReturn);
             return toReturn;
         }
 
