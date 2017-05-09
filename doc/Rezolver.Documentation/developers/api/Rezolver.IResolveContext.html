@@ -264,7 +264,7 @@ but is not necessarily the same container that will eventually end up resolving 
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IResolveContext_New_System_Type_Rezolver_IContainer_Rezolver_IContainerScope_.md&amp;value=---%0Auid%3A%20Rezolver.IResolveContext.New(System.Type%2CRezolver.IContainer%2CRezolver.IContainerScope)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L112">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L138">View Source</a>
               </span>
               <a id="Rezolver_IResolveContext_New_" data-uid="Rezolver.IResolveContext.New*"></a>
               <h4 id="Rezolver_IResolveContext_New_System_Type_Rezolver_IContainer_Rezolver_IContainerScope_" data-uid="Rezolver.IResolveContext.New(System.Type,Rezolver.IContainer,Rezolver.IContainerScope)">New(Type, IContainer, IContainerScope)</h4>
@@ -292,17 +292,27 @@ the same instance on which it is called.</p>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">newRequestedType</span></td>
-                    <td></td>
+                    <td><p>Optional - a new type to be resolved.  If a new context is created,
+then its <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> will be inherited from this context, unless a non-null type
+is passed to this parameter.</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
                     <td><span class="parametername">newContainer</span></td>
-                    <td></td>
+                    <td><p>Optional - a new container to be used for the new context.  If a new context
+is created, then its <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> will be inherited from this context unless a non-null
+container is passed to this parameter.</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
                     <td><span class="parametername">newScope</span></td>
-                    <td></td>
+                    <td><p>Optional - a new scope to be used for the new context.  If a new context
+is created, then its <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a> will be inherited from this context unless a non-null
+container is passed to this parameter.  Note the implication: once a context has a non-null <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a>,
+it&#39;s not possible to create a new, child, context which has a null scope.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -381,12 +391,13 @@ factory or expression.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IResolveContext_Resolve__1.md&amp;value=---%0Auid%3A%20Rezolver.IResolveContext.Resolve%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L94">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L95">View Source</a>
               </span>
               <a id="Rezolver_IResolveContext_Resolve_" data-uid="Rezolver.IResolveContext.Resolve*"></a>
               <h4 id="Rezolver_IResolveContext_Resolve__1" data-uid="Rezolver.IResolveContext.Resolve``1">Resolve&lt;TResult&gt;()</h4>
               <div class="markdown level1 summary"><p>Resolves a new instance of a different type from the same scope/container that originally
-received the current Resolve operation.</p>
+received the current Resolve operation.  This is a deliberate mirror of the same method
+on <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
 </div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
@@ -434,11 +445,14 @@ factory or expression.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IResolveContext_TryResolve_System_Type_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.IResolveContext.TryResolve(System.Type%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L96">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L109">View Source</a>
               </span>
               <a id="Rezolver_IResolveContext_TryResolve_" data-uid="Rezolver.IResolveContext.TryResolve*"></a>
               <h4 id="Rezolver_IResolveContext_TryResolve_System_Type_System_Object__" data-uid="Rezolver.IResolveContext.TryResolve(System.Type,System.Object@)">TryResolve(Type, out Object)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Mirror of the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a> method
+which works directly off this resolve context - taking into account the current 
+<a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> and <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
@@ -457,12 +471,14 @@ factory or expression.</p>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
                     <td><span class="parametername">newRequestedType</span></td>
-                    <td></td>
+                    <td><p>The type to be resolved.</p>
+</td>
                   </tr>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
                     <td><span class="parametername">result</span></td>
-                    <td></td>
+                    <td><p>Receives the result of a successful resolve operation.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -477,20 +493,27 @@ factory or expression.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td></td>
+                    <td><p>A boolean indicating whether the operation was successful.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
+              <h5 id="Rezolver_IResolveContext_TryResolve_System_Type_System_Object___remarks">Remarks</h5>
+              <div class="markdown level1 remarks"><p>Use this method, or the non-generic equivalent, to resolve dependency services in a 
+factory or expression.</p>
+<p>If a scope is active then it will be honoured.</p>
+</div>
               <span class="small pull-right mobile-hide">
                 <span class="divider">|</span>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IResolveContext_TryResolve__1___0__.md&amp;value=---%0Auid%3A%20Rezolver.IResolveContext.TryResolve%60%601(%60%600%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L98">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IResolveContext.cs/#L117">View Source</a>
               </span>
               <a id="Rezolver_IResolveContext_TryResolve_" data-uid="Rezolver.IResolveContext.TryResolve*"></a>
               <h4 id="Rezolver_IResolveContext_TryResolve__1___0__" data-uid="Rezolver.IResolveContext.TryResolve``1(``0@)">TryResolve&lt;TResult&gt;(out TResult)</h4>
-              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 summary"><p>Generic equivalent of <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_TryResolve_System_Type_System_Object__">TryResolve(Type, out Object)</a></p>
+</div>
               <div class="markdown level1 conceptual"></div>
               <h5 class="decalaration">Declaration</h5>
               <div class="codewrapper">
@@ -509,7 +532,8 @@ factory or expression.</p>
                   <tr>
                     <td><span class="xref">TResult</span></td>
                     <td><span class="parametername">result</span></td>
-                    <td></td>
+                    <td><p>Receives the result of a successful resolve operation.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -524,7 +548,8 @@ factory or expression.</p>
                 <tbody>
                   <tr>
                     <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td></td>
+                    <td><p>A boolean indicating whether the operation was successful.</p>
+</td>
                   </tr>
                 </tbody>
               </table>
@@ -539,7 +564,8 @@ factory or expression.</p>
                 <tbody>
                   <tr>
                     <td><span class="parametername">TResult</span></td>
-                    <td></td>
+                    <td><p>The type to be resolved.</p>
+</td>
                   </tr>
                 </tbody>
               </table>

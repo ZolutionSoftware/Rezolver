@@ -1,7 +1,7 @@
 ﻿# Generic Constructor Injection
 
 > [!TIP]
-> Before reading this you should read through the section on [construction injection](index.md)
+> Before reading this you should read through the section on [constructor injection](index.md)
 >
 > Also, generic types - especially in IOC-world - are an advanced concept that's easy to get very confused over, so if this is entirely new to you
 > and you find you don't understand it fully, then don't worry: this isn't easy!
@@ -156,7 +156,7 @@ Rezolver also supports generics where type arguments are passed to an interface 
 
 [!code-csharp[NestedGenerics.cs](../../../../../test/Rezolver.Tests.Examples/Types/NestedGenerics.cs#example)]
 
-## Singly nested generic argument
+## Singly Nested Generic Argument
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/GenericConstructorExamples.cs#example20)]
 
@@ -170,7 +170,7 @@ Rezolver also supports generics where type arguments are passed to an interface 
 
 * * *
 
-## Doubly nested generic argument
+## Doubly Nested Generic Argument
 
 Rezolver doesn't care how far it has to go to work out how a type argument on a base is nested from the implementing type:
 
@@ -178,11 +178,14 @@ Rezolver doesn't care how far it has to go to work out how a type argument on a 
 
 * * *
 
-# Using Member Bindings
+# Member Injection with Generics
 
 The same techniques that are shown in our [member injection documentation](member-injection.md) also work for generic types - if you supply an
 @Rezolver.IMemberBindingBehaviour to the @Rezolver.Targets.GenericConstructorTarget when it is created (either by the constructors or the 
 aforementioned factory methods), then that behaviour will be used when the constructor is bound.
+
+Equally, container-specific <xref:Rezolver.IMemberBindingBehaviour>s injected via <xref:Rezolver.IContainerBehaviour>s will
+also be used as normal.
 
 Refer to the topic for detailed examples on how to use member binding.
 

@@ -11,8 +11,18 @@ using System.Reflection;
 
 namespace Rezolver
 {
+    /// <summary>
+    /// Provides the <see cref="Populate(ITargetContainer, IServiceCollection)"/> extension method which allows
+    /// easy importing of all registrations in an <c>IServiceCollection</c> from <c>Microsoft.Extensions.DependencyInjection</c>
+    /// into a Rezolver <see cref="ITargetContainer"/>.
+    /// </summary>
 	public static class MSDIITargetContainerExtensions
 	{
+        /// <summary>
+        /// Translates all registrations in <paramref name="services"/> into registered targets in <paramref name="targets"/>.
+        /// </summary>
+        /// <param name="targets">The target container into which the registrations will be added</param>
+        /// <param name="services">The service collection to be registered</param>
 		public static void Populate(this ITargetContainer targets, IServiceCollection services)
 		{
 			if (targets == null) throw new ArgumentNullException(nameof(targets));

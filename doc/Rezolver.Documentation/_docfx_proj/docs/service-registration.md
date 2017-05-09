@@ -39,8 +39,8 @@ of this site:
 - @Rezolver.MultipleTargetContainerExtensions *- for batch registering multiple targets*
 - @Rezolver.ObjectTargetContainerExtensions *- for [registering object references/values](objects.md)*
 - @Rezolver.RegisterTypeTargetContainerExtensions *- for [registering constructor-injected types](constructor-injection/index.md) (plain and open-generic)*
-- @Rezolver.ScopedTargetContainerExtensions *- for registering scoped constructor-injected types*
-- @Rezolver.SingletonTargetContainerExtensions *- for registering singleton constructor-injected types*
+- @Rezolver.ScopedTargetContainerExtensions *- for [registering scoped constructor-injected types](lifetimes/scoped.md)*
+- @Rezolver.SingletonTargetContainerExtensions *- for [registering singleton constructor-injected types](lifetimes/singleton.md)*
 
 ## Registering via @Rezolver.ITargetContainer.Register*
 

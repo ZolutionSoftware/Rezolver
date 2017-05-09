@@ -198,10 +198,11 @@ bool success = container.TryResolve(out result);
 by using the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_">CanResolve</a> method.  This method also has friendly overloads via extension
 methods (e.g. <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve__1_Rezolver_IContainer_">CanResolve&lt;TObject&gt;(IContainer)</a>)):</p>
 <pre><code class="lang-cs">bool canResolve = container.CanResolve&lt;MyService&gt;();
-</code></pre><h2 id="behaviours-advanced">Behaviours (Advanced)</h2>
+</code></pre><hr>
+<h1 id="behaviours-advanced">Behaviours (Advanced)</h1>
 <p>For those looking to customise or extend Rezolver, many of the types are overridable.  However, 
 the <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a> implementations mentioned above also use
-another mechanism which provide extensibility without having to override them.</p>
+another mechanism that provides extensibility without having to subclass them.</p>
 <div class="NOTE"><h5>Note</h5><p>This is an advanced topic and not one that you should have to worry about most of the time.  The examples in
 this guide will highlight where you can use the functionality described below.</p>
 </div>
@@ -233,12 +234,12 @@ shown in the following lists:</p>
 </ul>
 <p><em>Container Behaviours</em></p>
 <ul>
-<li>&lt;xref:Rezolver.Container.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
-<li>&lt;xref:Rezolver.ScopedContainer.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
-<li>&lt;xref:Rezolver.OverridingContainer.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
+<li><a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">Container(ITargetContainer, IContainerBehaviour)</a></li>
+<li><a class="xref" href="../api/Rezolver.ScopedContainer.html#Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">ScopedContainer(ITargetContainer, IContainerBehaviour)</a></li>
+<li><a class="xref" href="../api/Rezolver.OverridingContainer.html#Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">OverridingContainer(IContainer, ITargetContainer, IContainerBehaviour)</a></li>
 </ul>
-<p>These lists aren&#39;t exhaustive, but, in fact, you&#39;ll notice that in all cases they are optional.</p>
-<p>This is because Rezolver has <em>default</em> behaviours that it uses for these types if no specific behaviour is
+<p>If you look at these constructors, you&#39;ll notice that in all cases the behaviour parameters are optional - 
+this is because Rezolver has <em>default</em> behaviours that it uses for these types if no specific behaviour is
 passed on construction, and these can all be found in the <a class="xref" href="../api/Rezolver.GlobalBehaviours.html">GlobalBehaviours</a> class.</p>
 <p>Briefly, these are all instances of special behaviour classes which wrap collections of other behaviours:</p>
 <ul>

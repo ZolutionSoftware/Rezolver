@@ -450,7 +450,7 @@ the behaviour of the <a class="xref" href="Rezolver.ContainerBase.MissingCompile
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetCompiledRezolveTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L343">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L342">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_GetCompiledRezolveTarget_" data-uid="Rezolver.ContainerBase.GetCompiledRezolveTarget*"></a>
               <h4 id="Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.GetCompiledRezolveTarget(Rezolver.IResolveContext)">GetCompiledRezolveTarget(IResolveContext)</h4>
@@ -499,15 +499,16 @@ container, then compiling it.</p>
               <h5 id="Rezolver_ContainerBase_GetCompiledRezolveTarget_Rezolver_IResolveContext__remarks">Remarks</h5>
               <div class="markdown level1 remarks"><p>The specifics of how this process works are not important if you simply want to use the container, 
 but if you are looking to extend it, then it&#39;s essential you understand the different steps that the process
-goes through.</p>
+goes through:</p>
+<h3 id="locating-the-target">Locating the target</h3>
 <p>If the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> method of the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> target container
 returns a <code>null</code> <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, or one which has its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> set to 
 <code>true</code>, then the method gets an alternative compiled target by calling the
-<a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_">GetFallbackCompiledRezolveTarget(IResolveContext)</a> method.  This fallback compiled target will be
-used instead of compiling the target unless the target was not null and its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> is 
-true <em>AND</em> the compiled target returned by the fallback method is a <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html">ContainerBase.MissingCompiledTarget</a> - in 
-which case the fallback target will be compiled as normal.</p>
-<p>Before proceeding with compilation, the container checks whether the target can resolve the required object 
+<a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_">GetFallbackCompiledRezolveTarget(IResolveContext)</a> method.</p>
+<p>This fallback will be used unless the target was not null and its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> is 
+true <em>AND</em> the compiled target returned by the fallback method is a <a class="xref" href="Rezolver.ContainerBase.MissingCompiledTarget.html">ContainerBase.MissingCompiledTarget</a>.</p>
+<h3 id="to-compile-or-not-to-compile">To compile, or not to compile</h3>
+<p>Before proceeding with compilation, the code checks whether the target can resolve the required object 
 directly.</p>
 <p>This means that the target either implements the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> interface (in which case it is
 immediately returned) or the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> is <em>not</em> <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> and the 
@@ -520,20 +521,16 @@ which are directly registered through this target will always use that class&#39
 <hr>
 <p>Once the decision has been taken to compile the target, the container first needs a compiler 
 (<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>).</p>
-<p><em>Note that classes which implement the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> interface also frequently implement the 
-<see cref="!:ICompileContextProvider"></see> interface so that any additional state they require is correctly attached 
-to the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> which will be fed to their 
-<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a> implementation.</em></p>
-<p>These are both obtained by resolving them directly from the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> of the 
+<p>This is obtained by resolving it directly from the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> of the 
 <span class="paramref">context</span> (since a container can be delegated to from another container which originally
 received the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> call).  Attentive readers will realise at this point 
 that this could lead to an infinite recursion - i.e. since compiling a target means resolving a compiler, which
 in turn must mean compiling that target.</p>
-<p>The class sidesteps this potential pitfall by requiring that the targets registered for these types support 
-direct resolving, as per the description a couple of paragraphs back.  Therefore, compilers and context 
+<p>The class sidesteps this potential pitfall by requiring that a target registered for <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> 
+supports direct resolving, as per the description a couple of paragraphs back.  Therefore, compilers and context 
 providers are typically registered as constant services via the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> target.</p>
 <p>Finally, a new <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> is created via the 
-<see cref="!:ICompileContextProvider.CreateContext(IResolveContext, ITargetContainer)"></see> method of the resolved
+<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_">CreateContext(IResolveContext, ITargetContainer)</a> method of the resolved
 context provider, and then passed to the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a> 
 method of the resolved compiler.  The result of that operation is then returned to the caller.</p>
 </div>
@@ -542,7 +539,7 @@ method of the resolved compiler.  The result of that operation is then returned 
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetFallbackCompiledRezolveTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L387">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L386">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_" data-uid="Rezolver.ContainerBase.GetFallbackCompiledRezolveTarget*"></a>
               <h4 id="Rezolver_ContainerBase_GetFallbackCompiledRezolveTarget_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.GetFallbackCompiledRezolveTarget(Rezolver.IResolveContext)">GetFallbackCompiledRezolveTarget(IResolveContext)</h4>
@@ -650,7 +647,7 @@ method is called.  Use this when you can&#39;t resolve a target for a type to en
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_GetService_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetService(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L405">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L404">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_GetService_" data-uid="Rezolver.ContainerBase.GetService*"></a>
               <h4 id="Rezolver_ContainerBase_GetService_System_Type_" data-uid="Rezolver.ContainerBase.GetService(System.Type)">GetService(Type)</h4>
@@ -750,7 +747,7 @@ method is called.  Use this when you can&#39;t resolve a target for a type to en
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L427">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L426">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_Register_" data-uid="Rezolver.ContainerBase.Register*"></a>
               <h4 id="Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ContainerBase.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
@@ -917,7 +914,7 @@ if not.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L443">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L442">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#CombineWith*"></a>
               <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#CombineWith(Rezolver.ITargetContainer,System.Type)">ITargetContainer.CombineWith(ITargetContainer, Type)</h4>
@@ -971,7 +968,7 @@ if not.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L433">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L432">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#Fetch*"></a>
               <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#Fetch(System.Type)">ITargetContainer.Fetch(Type)</h4>
@@ -1020,7 +1017,7 @@ if not.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L438">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L437">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchAll*"></a>
               <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchAll(System.Type)">ITargetContainer.FetchAll(Type)</h4>
@@ -1069,7 +1066,7 @@ if not.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L448">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L447">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchContainer*"></a>
               <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchContainer(System.Type)">ITargetContainer.FetchContainer(Type)</h4>
@@ -1118,7 +1115,7 @@ if not.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L453">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L452">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#RegisterContainer*"></a>
               <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#RegisterContainer(System.Type,Rezolver.ITargetContainer)">ITargetContainer.RegisterContainer(Type, ITargetContainer)</h4>
@@ -1157,7 +1154,7 @@ if not.</p>
                 <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.System%23IServiceProvider%23GetService(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
               </span>
               <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L392">View Source</a>
+                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ContainerBase.cs/#L391">View Source</a>
               </span>
               <a id="Rezolver_ContainerBase_System_IServiceProvider_GetService_" data-uid="Rezolver.ContainerBase.System#IServiceProvider#GetService*"></a>
               <h4 id="Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_" data-uid="Rezolver.ContainerBase.System#IServiceProvider#GetService(System.Type)">IServiceProvider.GetService(Type)</h4>

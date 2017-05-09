@@ -8,8 +8,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <PackageId>Rezolver.Microsoft.AspNetCore.Hosting</PackageId>
-    <PackageTags>ioc;di;portable;rezolver</PackageTags>
-
+    <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore;aspnetcore</PackageTags>
+    <Title>Rezolver Extensions for Asp.Net Core </Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>

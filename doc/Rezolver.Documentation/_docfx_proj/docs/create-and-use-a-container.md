@@ -144,11 +144,13 @@ methods (e.g. <xref:Rezolver.ContainerResolveExtensions.CanResolve``1(Rezolver.I
 bool canResolve = container.CanResolve<MyService>();
 ```
 
-## Behaviours (Advanced)
+* * *
+
+# Behaviours (Advanced)
 
 For those looking to customise or extend Rezolver, many of the types are overridable.  However, 
 the @Rezolver.ITargetContainer and @Rezolver.IContainer implementations mentioned above also use
-another mechanism which provide extensibility without having to override them.
+another mechanism that provides extensibility without having to subclass them.
 
 > [!NOTE]
 > This is an advanced topic and not one that you should have to worry about most of the time.  The examples in
@@ -187,20 +189,31 @@ shown in the following lists:
 
 *Container Behaviours*
 
-- <xref:Rezolver.Container.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
-- <xref:Rezolver.ScopedContainer.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
-- <xref:Rezolver.OverridingContainer.ctor%23(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
+- <xref:Rezolver.Container.%23ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
+- <xref:Rezolver.ScopedContainer.%23ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
+- <xref:Rezolver.OverridingContainer.%23ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)>
 
-These lists aren't exhaustive, but, in fact, you'll notice that in all cases they are optional.
-
-This is because Rezolver has *default* behaviours that it uses for these types if no specific behaviour is
+If you look at these constructors, you'll notice that in all cases the behaviour parameters are optional - 
+this is because Rezolver has *default* behaviours that it uses for these types if no specific behaviour is
 passed on construction, and these can all be found in the @Rezolver.GlobalBehaviours class.
 
-Briefly, these are all instances of special behaviour classes which wrap collections of other behaviours:
+Briefly, these are all instances of special behaviour classes which are collections of other behaviours:
 
-- **@Rezolver.GlobalBehaviours.TargetContainerBehaviour** A @Rezolver.TargetContainerBehaviourCollection with zero
-or more @Rezolver.ITargetContainerBehaviour objects which are to be applied to all @Rezolver.TargetContainer
-and @Rezolver.OverridingTargetContainer objects 
+- **@Rezolver.GlobalBehaviours.TargetContainerBehaviour** - A @Rezolver.TargetContainerBehaviourCollection with zero
+or more @Rezolver.ITargetContainerBehaviour objects which will be attached to all @Rezolver.TargetContainer
+and @Rezolver.OverridingTargetContainer objects by default
+- **@Rezolver.GlobalBehaviours.ContainerBehaviour** - A @Rezolver.ContainerBehaviourCollection with zero or more
+@Rezolver.IContainerBehaviour objects which will be attached to all @Rezolver.Container objects by default 
+(including derived types; except @Rezolver.OverridingTargetContainer, which gets its own global behaviour)
+- **@Rezolver.GlobalBehaviours.OverridingContainerBehaviour** - Same as above, but this is specifically for
+@Rezolver.OverridingContainer, because some of its behaviours are typically inherited from the container that
+it is overriding.
+
+These collections can be modified (add/remove/replace/clear) at any stage of the application's lifetime, and they 
+will take effect the next time a new container or target container is created.
+
+There is much more to be covered about behaviours in the future.  For now - use them where this guide shows you can,
+and if you think you need to use them for something you want to achieve then open an issue on Github.
 
 * * *
 

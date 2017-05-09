@@ -114,7 +114,11 @@
 <p>This always produces a conversion expression (i.e. cast or box/unbox)</p>
 </section>
                   <h4><a class="xref" href="Rezolver.Compilation.Expressions.CompiledTargetBuilder.html">CompiledTargetBuilder</a></h4>
-                  <section></section>
+                  <section><p>Special compiler for <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances which are also <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instances.</p>
+<p>This build is only used when no &#39;better&#39; builder is available for the target&#39;s type.  So, the <a class="xref" href="Rezolver.Compilation.Expressions.ObjectTargetBuilder.html">ObjectTargetBuilder</a>
+will be used for <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> instead of this one, even though that class also implements
+<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>.</p>
+</section>
                   <h4><a class="xref" href="Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html">ConstructorTargetBuilder</a></h4>
                   <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the target <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></p>
 </section>

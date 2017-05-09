@@ -166,7 +166,7 @@ Then our type which uses it:
 
 [!code-csharp[HasAttributeInjectedMembers.cs](../../../../../test/Rezolver.Tests.Examples/Types/HasAttributeInjectedMembers.cs#example)]
 
-Finally, our binding behaviour - which extends the aforementioned @Rezolver.DefaultMemberBindingBehaviour as that class has plenty of
+Finally, our binding behaviour - which extends the aforementioned @Rezolver.BindAllMembersBehaviour as that class has plenty of
 extension points:
 
 [!code-csharp[AttributeBindingBehaviour.cs](../../../../../test/Rezolver.Tests.Examples/Types/AttributeBindingBehaviour.cs#example)]
@@ -174,7 +174,6 @@ extension points:
 With that in place, we can then test:
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example5)]
-
 
 Hopefully this example will inspire you to create your own custom binding behaviour :)
 
