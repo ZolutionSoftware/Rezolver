@@ -102,7 +102,7 @@
               
 <p><a href="https://www.nuget.org/packages/Rezolver.Microsoft.AspNetCore.Hosting">See package page on nuget</a>.</p>
 <p>This builds on the <a href="rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a>
-package to enable the integration of Rezolver into your Asp.Net Core site somewhwat earlier in its startup phase.</p>
+package to enable the integration of Rezolver into your Asp.Net Core site somewhat earlier in its startup phase.</p>
 <p>After adding the package, open your site&#39;s <code>program.cs</code> and add a call to the <code>UseRezolver()</code> extension
 method that&#39;s now available, as shown:</p>
 <pre><code class="lang-csharp" name="Example.cs">public class Program
@@ -124,7 +124,7 @@ method that&#39;s now available, as shown:</p>
 </code></pre><p>Then we need to tell the Asp.Net Core stack that you want an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> to be created
 in order to construct the <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> that will be used as the DI container.</p>
 <p>We do this in your application&#39;s <code>startup.cs</code> - simply by declaring a single method:</p>
-<pre><code class="lang-csharp" name="Example.cs">public void ConfigureContainer(ITargetContainer container)
+<pre><code class="lang-csharp" name="Startup.cs">public void ConfigureContainer(ITargetContainer container)
 {
 	//by declaring this method - even if empty - you trigger the 
 	//creation of the ITargetContainer which will ultimately

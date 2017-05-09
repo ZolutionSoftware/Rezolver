@@ -108,7 +108,13 @@ Core, .Net 4.5.2 and .Net 4.6 - with Asp.Net Core integration too.</p>
 </ul>
 </li>
 <li><a href="docs/constructor-injection/generics.html">Open generics</a> (with specific closed generics taking precedence)</li>
-<li><a href="docs/decorators.html">Decorators</a> (non-generic and generic)</li>
+<li><a href="docs/decorators.html">Decorators</a><ul>
+<li>Non-generic &amp; Generic</li>
+<li>Specialised generic (<em>where a decorator for <code>IFoo&lt;&gt;</code> is redecorated by another decorator for <code>IFoo&lt;Bar&gt;</code> only when
+<code>IFoo&lt;Bar&gt;</code> is requested</em>)</li>
+<li>Enumerables of decorated instances</li>
+</ul>
+</li>
 <li><a href="docs/enumerables.html">Enumerables</a> (empty enumerables returned by default)</li>
 <li>Child containers (overriding registrations in one container with those of another)<ul>
 <li>Child registration containers (lower-level overriding of registrations for similar but sibling containers)</li>

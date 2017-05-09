@@ -293,7 +293,7 @@ public class InjectAttribute : Attribute
 	public IMyService ServiceField;
 	public IMyService ServiceProp { get; set; }
 }
-</code></pre><p>Finally, our binding behaviour - which extends the aforementioned @Rezolver.DefaultMemberBindingBehaviour as that class has plenty of
+</code></pre><p>Finally, our binding behaviour - which extends the aforementioned <a class="xref" href="../../api/Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a> as that class has plenty of
 extension points:</p>
 <pre><code class="lang-csharp" name="AttributeBindingBehaviour.cs">   /// &lt;summary&gt;
    /// Class AttributeBindingBehaviour - we reuse the BindAllMembersBehaviour class

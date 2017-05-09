@@ -241,12 +241,22 @@ shown in the following lists:</p>
 <p>If you look at these constructors, you&#39;ll notice that in all cases the behaviour parameters are optional - 
 this is because Rezolver has <em>default</em> behaviours that it uses for these types if no specific behaviour is
 passed on construction, and these can all be found in the <a class="xref" href="../api/Rezolver.GlobalBehaviours.html">GlobalBehaviours</a> class.</p>
-<p>Briefly, these are all instances of special behaviour classes which wrap collections of other behaviours:</p>
+<p>Briefly, these are all instances of special behaviour classes which are collections of other behaviours:</p>
 <ul>
-<li><strong><a class="xref" href="../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_TargetContainerBehaviour">TargetContainerBehaviour</a></strong> A <a class="xref" href="../api/Rezolver.TargetContainerBehaviourCollection.html">TargetContainerBehaviourCollection</a> with zero
-or more <a class="xref" href="../api/Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a> objects which are to be applied to all <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>
-and <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> objects </li>
+<li><strong><a class="xref" href="../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_TargetContainerBehaviour">TargetContainerBehaviour</a></strong> - A <a class="xref" href="../api/Rezolver.TargetContainerBehaviourCollection.html">TargetContainerBehaviourCollection</a> with zero
+or more <a class="xref" href="../api/Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a> objects which will be attached to all <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>
+and <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> objects by default</li>
+<li><strong><a class="xref" href="../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a></strong> - A <a class="xref" href="../api/Rezolver.ContainerBehaviourCollection.html">ContainerBehaviourCollection</a> with zero or more
+<a class="xref" href="../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> objects which will be attached to all <a class="xref" href="../api/Rezolver.Container.html">Container</a> objects by default 
+(including derived types; except <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>, which gets its own global behaviour)</li>
+<li><strong><a class="xref" href="../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_OverridingContainerBehaviour">OverridingContainerBehaviour</a></strong> - Same as above, but this is specifically for
+<a class="xref" href="../api/Rezolver.OverridingContainer.html">OverridingContainer</a>, because some of its behaviours are typically inherited from the container that
+it is overriding.</li>
 </ul>
+<p>These collections can be modified (add/remove/replace/clear) at any stage of the application&#39;s lifetime, and they 
+will take effect the next time a new container or target container is created.</p>
+<p>There is much more to be covered about behaviours in the future.  For now - use them where this guide shows you can,
+and if you think you need to use them for something you want to achieve then open an issue on Github.</p>
 <hr>
 <h1 id="next-steps">Next Steps</h1>
 <ul>

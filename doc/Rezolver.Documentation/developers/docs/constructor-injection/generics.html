@@ -100,7 +100,7 @@
             <article class="content wrap" id="_content" data-uid="">
               <h1 id="generic-constructor-injection">Generic Constructor Injection</h1>
               
-<div class="TIP"><h5>Tip</h5><p>Before reading this you should read through the section on <a href="index.html">construction injection</a></p>
+<div class="TIP"><h5>Tip</h5><p>Before reading this you should read through the section on <a href="index.html">constructor injection</a></p>
 <p>Also, generic types - especially in IOC-world - are an advanced concept that&#39;s easy to get very confused over, so if this is entirely new to you
 and you find you don&#39;t understand it fully, then don&#39;t worry: this isn&#39;t easy!</p>
 <p>It&#39;s probably a good idea to read the MSDN documentation about the <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms131514(v=vs.110).aspx">IsGenericType</a> property on <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a> for more about &#39;open&#39; 
@@ -271,7 +271,7 @@ public class GenericEnumerableNullableService&lt;T&gt;
 {
 
 }
-</code></pre><h2 id="singly-nested-generic-argument">Singly nested generic argument</h2>
+</code></pre><h2 id="singly-nested-generic-argument">Singly Nested Generic Argument</h2>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 
 
@@ -291,7 +291,7 @@ register against <code>IGenericService&lt;IEnumerable&lt;&gt;&gt;</code>, which 
 working, you will be able to register against <code>IGenericService&lt;&gt;</code>.</p>
 </div>
 <hr>
-<h2 id="doubly-nested-generic-argument">Doubly nested generic argument</h2>
+<h2 id="doubly-nested-generic-argument">Doubly Nested Generic Argument</h2>
 <p>Rezolver doesn&#39;t care how far it has to go to work out how a type argument on a base is nested from the implementing type:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 
@@ -309,10 +309,12 @@ var result = Assert.IsType&lt;GenericEnumerableNullableService&lt;int&gt;&gt;(
     container.Resolve&lt;IGenericService&lt;IEnumerable&lt;Nullable&lt;int&gt;&gt;&gt;&gt;()
 );
 </code></pre><hr>
-<h1 id="using-member-bindings">Using Member Bindings</h1>
+<h1 id="member-injection-with-generics">Member Injection with Generics</h1>
 <p>The same techniques that are shown in our <a href="member-injection.html">member injection documentation</a> also work for generic types - if you supply an
 <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> to the <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> when it is created (either by the constructors or the 
 aforementioned factory methods), then that behaviour will be used when the constructor is bound.</p>
+<p>Equally, container-specific <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>s injected via <a class="xref" href="../../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a>s will
+also be used as normal.</p>
 <p>Refer to the topic for detailed examples on how to use member binding.</p>
 <hr>
 <h1 id="next-steps">Next Steps</h1>
