@@ -11,7 +11,7 @@
     <Product>Rezolver</Product>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ZolutionSoftware/Rezolver</RepositoryUrl>
-    <VersionPrefix>1.2.7050</VersionPrefix>
-    <VersionSuffix>alpha-900</VersionSuffix>
+    <VersionPrefix>1.2.7050.900</VersionPrefix>
+    <!--<VersionSuffix>900</VersionSuffix>-->
   </PropertyGroup>
 </Project>

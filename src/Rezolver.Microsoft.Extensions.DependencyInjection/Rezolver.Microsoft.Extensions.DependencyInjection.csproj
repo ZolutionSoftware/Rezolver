@@ -9,7 +9,7 @@
     
     <PackageId>Rezolver.Microsoft.Extensions.DependencyInjection</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore;aspnetcore</PackageTags>
-    <Title>Rezolver Extensions for Microsoft DI</Title>
+    <Title>Rezolver MS Dependency Injection Extensions</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">

@@ -9,7 +9,7 @@
     
     <PackageId>Rezolver.Microsoft.AspNetCore.Hosting</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore;aspnetcore</PackageTags>
-    <Title>Rezolver Extensions for Asp.Net Core </Title>
+    <Title>Rezolver Asp.Net Core Extensions</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">

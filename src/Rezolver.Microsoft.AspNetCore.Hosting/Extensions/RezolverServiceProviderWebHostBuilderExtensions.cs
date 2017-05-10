@@ -20,13 +20,6 @@ namespace Microsoft.AspNetCore.Hosting
 		/// DI for the web host produced by the builder.
 		/// </summary>
 		/// <param name="builder">The builder.</param>
-		/// <param name="targetContainer">Optional.  A target container which will store all service
-		/// registrations.  If left as <c>null</c> then a new instance of <see cref="TargetContainer" /> will
-		/// be used.</param>
-		/// <param name="containerFactoryOverride">Optional.  Delegate to be called when a new <see cref="IContainer"/>
-		/// is required.  If left as <c>null</c>, then the default behaviour is to pass the <see cref="ITargetContainer"/>
-		/// to a new instance of <see cref="ScopedContainer"/>.
-		/// </param>
 		public static IWebHostBuilder UseRezolver(this IWebHostBuilder builder/*, Action<LoggingCallTrackerOptions> configureCallTrackingOptionsCallback = null*/)
 		{
 			return builder.ConfigureServices(services => services.AddRezolver(/*configureCallTrackingOptionsCallback*/));

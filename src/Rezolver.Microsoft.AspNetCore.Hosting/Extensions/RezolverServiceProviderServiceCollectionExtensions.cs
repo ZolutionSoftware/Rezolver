@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
+    /// <summary>
+    /// Provides the <see cref="AddRezolver(IServiceCollection)"/> extension method which adds the 
+    /// <c>IServiceProviderFactory</c> service registration for the <see cref="ITargetContainer"/> service provider builder.
+    /// </summary>
     public static class RezolverServiceProviderServiceCollectionExtensions
     {
         /// <summary>
@@ -18,13 +22,6 @@ namespace Microsoft.Extensions.DependencyInjection
         /// extension method.
         /// </summary>
         /// <param name="services">The services to be configured.</param>
-        /// <param name="targetContainer">Optional.  A target container which will store all service
-        /// registrations.  If left as <c>null</c> then a new instance of <see cref="TargetContainer" /> will
-        /// be used.</param>
-        /// <param name="containerFactoryOverride">Optional.  Delegate to be called when a new <see cref="IContainer"/>
-        /// is required.  If left as <c>null</c>, then the default behaviour is to pass the <see cref="ITargetContainer"/>
-        /// to a new instance of <see cref="ScopedContainer"/>.
-        /// </param>
         public static IServiceCollection AddRezolver(this IServiceCollection services/*, Action<LoggingCallTrackerOptions> configureCallTrackingOptionsCallback = null*/)
 		{
 
