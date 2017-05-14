@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.1;net451;net46</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Rezolver.IOCScript.Codegen\obj\$(Configuration)\iocscript*.cs">
+      <Link>Parser\%(Filename)%(Extension)</Link>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Antlr4.Runtime" Version="4.6.1-beta002" />
+  </ItemGroup>
+</Project>
