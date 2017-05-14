@@ -111,5 +111,21 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			Assert.Equal(new[] { 1 }, result);
 		}
+
+        [Fact]
+        public void OverridingContainer_ShouldConcatenateBothEnumerables()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterObject(1);
+            var baseContainer = CreateContainer(targets);
+
+            var targets2 = CreateTargetContainer();
+            targets2.RegisterObject(2);
+
+            var container = CreateOverridingContainer(baseContainer, targets2);
+
+            var result = container.Resolve<IEnumerable<int>>();
+            Assert.Equal(new[] { 1, 2 }, result);
+        }
 	}
 }

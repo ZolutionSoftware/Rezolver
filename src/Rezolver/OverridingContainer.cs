@@ -31,7 +31,7 @@ namespace Rezolver
     /// </remarks>
     public sealed class OverridingContainer : Container
     {
-        private readonly IContainer _inner;
+        public IContainer Inner { get; }
 
         /// <summary>
         /// Creates a new instance of the <see cref="OverridingContainer"/>
@@ -51,9 +51,11 @@ namespace Rezolver
             : base(targets)
         {
             inner.MustNotBeNull("inner");
-            _inner = inner;
-        }
+            Inner = inner;
 
+            (behaviour ?? GlobalBehaviours.OverridingContainerBehaviour).Attach(this, Targets);
+        }
+        
         /// <summary>
         /// Called to determine if this container is able to resolve the type specified in the passed <paramref name="context"/>.
         /// </summary>
@@ -62,7 +64,7 @@ namespace Rezolver
         /// <see cref="IResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
         public override bool CanResolve(IResolveContext context)
         {
-            return base.CanResolve(context) || _inner.CanResolve(context);
+            return base.CanResolve(context) || Inner.CanResolve(context);
         }
 
         /// <summary>
@@ -73,7 +75,7 @@ namespace Rezolver
         /// <returns></returns>
         protected override ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
         {
-            return _inner.FetchCompiled(context);
+            return Inner.FetchCompiled(context);
         }
     }
 }

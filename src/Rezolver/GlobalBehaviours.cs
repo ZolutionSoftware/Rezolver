@@ -106,7 +106,7 @@ namespace Rezolver
             ContainerBehaviour.UseExpressionCompiler()
                 .UseMemberBindingBehaviour(MemberBindingBehaviour.BindNone);
 
-            // no additional behaviours are currently configured for OverridingContainer
+            OverridingContainerBehaviour.Add(OverridingEnumerableBehaviour.Instance);
         }
     }
 }

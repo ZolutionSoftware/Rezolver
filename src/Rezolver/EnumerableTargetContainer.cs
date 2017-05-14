@@ -12,9 +12,10 @@ using System.Reflection;
 
 namespace Rezolver
 {
-	using CompiledListFactory = Func<IEnumerable<ITarget>, bool, ITarget>;
+    using System.Collections;
+    using CompiledListFactory = Func<IEnumerable<ITarget>, bool, ITarget>;
 
-	internal class EnumerableTargetContainer : GenericTargetContainer
+    internal class EnumerableTargetContainer : GenericTargetContainer
 	{
 		#region CompiledListTarget
 		/// <summary>
@@ -50,7 +51,7 @@ namespace Rezolver
 		private static readonly ConcurrentDictionary<Type, Lazy<CompiledListFactory>> _compiledTargetListFactories 
 			= new ConcurrentDictionary<Type, Lazy<CompiledListFactory>>();
 
-		internal static ITarget CreateListTarget(Type elementType, IEnumerable<ITarget> targets, bool asArray = false)
+		protected virtual ITarget CreateListTarget(Type elementType, IEnumerable<ITarget> targets, bool asArray = false)
 		{
 			if (!targets.Any() || !targets.All(t => t is ICompiledTarget))
 				return new ListTarget(elementType, targets, asArray);
@@ -112,4 +113,58 @@ namespace Rezolver
 			return base.CombineWith(existing, type);
 		}
 	}
+
+    internal class ConcatenatingEnumerableContainer : EnumerableTargetContainer
+    {
+        private class EnumerableConcatenator<T> : IEnumerable<T>
+        {
+            private IEnumerable<T> _concatenated;
+
+            public EnumerableConcatenator(IResolveContext context, IEnumerable<T> baseEnumerable, IEnumerable<T> extra)
+            {
+                _concatenated = baseEnumerable.Concat(extra);
+            }
+
+            public IEnumerator<T> GetEnumerator()
+            {
+                return _concatenated.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+
+        private readonly OverridingContainer _owner;
+        private readonly ITargetContainer _targets;
+
+        public ConcatenatingEnumerableContainer(IContainer owner, ITargetContainer targets)
+            : base(targets)
+        {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+
+            _owner = owner as OverridingContainer ?? throw new ArgumentException("owner must be an instance of OverridingContainer", nameof(owner));
+            _targets = targets ?? throw new ArgumentNullException(nameof(targets));   
+        }
+
+        public override ITarget Fetch(Type type)
+        {
+            var baseCompiled = _owner.Inner.FetchCompiled(new ResolveContext(_owner.Inner, type));
+            var overrideTarget = base.Fetch(type);
+
+            // we know from above that if type is not IEnumerable<T>, then an exception will occur.
+            // so this type wrangling is safe
+
+            return Target.ForType(typeof(EnumerableConcatenator<>).MakeGenericType(TypeHelpers.GetGenericArguments(type)[0]),
+                new { context = Target.Resolved<IResolveContext>(), baseEnumerable = baseCompiled.SourceTarget, extra = overrideTarget });
+        }
+
+        public override ITargetContainer CombineWith(ITargetContainer existing, Type type)
+        {
+            if (existing is ConcatenatingEnumerableContainer) return existing;
+            
+            return this;
+        }
+    }
 }
