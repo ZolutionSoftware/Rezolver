@@ -88,7 +88,8 @@ namespace Rezolver
 			Type genericType = type.GetGenericTypeDefinition();
 			if (genericType != typeof(IEnumerable<>))
 				throw new ArgumentException("Only IEnumerable<T> is supported by this container", nameof(type));
-			//we allow for specific IEnumerable<T> registrations
+			
+            //we allow for specific IEnumerable<T> registrations
 			var result = base.Fetch(type);
 
 			if (result != null)

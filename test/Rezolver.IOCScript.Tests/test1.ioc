@@ -1,0 +1,12 @@
+# references
+reference   {a}
+            {_.a.123,Culture=neutral}
+            <..\folder name\hello\assembly name.dll>
+reference   all
+
+# namespaces
+using       Rezolver
+            Rezolver.IOCScript.Parser
+
+# registrations
+

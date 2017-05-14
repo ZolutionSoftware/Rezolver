@@ -72,6 +72,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Microsoft.AspNetCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Logging", "src\Rezolver.Logging\Rezolver.Logging.csproj", "{80FC1ADC-E094-4505-B5A9-0339B5E03936}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOCScript", "IOCScript", "{775A6D70-BDA1-465F-AD71-C2B79F0DA31E}"
+	ProjectSection(SolutionItems) = preProject
+		src\IOCScript\readme.md = src\IOCScript\readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.IOCScript.Codegen", "src\IOCScript\Rezolver.IOCScript.Codegen\Rezolver.IOCScript.Codegen.csproj", "{1218A304-E417-4E37-8272-6C60703556EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.IOCScript", "src\IOCScript\Rezolver.IOCScript\Rezolver.IOCScript.csproj", "{B1063100-5EC8-486E-B6D2-53B2509540B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1218A304-E417-4E37-8272-6C60703556EA} = {1218A304-E417-4E37-8272-6C60703556EA}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.IOCScript.Tests", "test\Rezolver.IOCScript.Tests\Rezolver.IOCScript.Tests.csproj", "{3EB2EE85-37BB-408F-8137-48AB235E62C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug With Documentation|Any CPU = Debug With Documentation|Any CPU
@@ -206,6 +220,30 @@ Global
 		{80FC1ADC-E094-4505-B5A9-0339B5E03936}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
 		{80FC1ADC-E094-4505-B5A9-0339B5E03936}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80FC1ADC-E094-4505-B5A9-0339B5E03936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1218A304-E417-4E37-8272-6C60703556EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1063100-5EC8-486E-B6D2-53B2509540B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -230,6 +268,10 @@ Global
 		{52399C04-A89B-44F5-B5B4-F123E9FDE80B} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
 		{D88A4858-C6EF-4B85-80B2-293C9C031272} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
 		{80FC1ADC-E094-4505-B5A9-0339B5E03936} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
+		{775A6D70-BDA1-465F-AD71-C2B79F0DA31E} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
+		{1218A304-E417-4E37-8272-6C60703556EA} = {775A6D70-BDA1-465F-AD71-C2B79F0DA31E}
+		{B1063100-5EC8-486E-B6D2-53B2509540B5} = {775A6D70-BDA1-465F-AD71-C2B79F0DA31E}
+		{3EB2EE85-37BB-408F-8137-48AB235E62C9} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
