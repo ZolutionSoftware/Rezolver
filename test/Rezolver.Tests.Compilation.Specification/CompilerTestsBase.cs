@@ -21,12 +21,19 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		/// <summary>
-		/// Gets the behaviour to be used to configure the compiler in the container 
-		/// returned by <see cref="CreateContainer(ITargetContainer, string)"/> and when performing
-		/// the tests of the <see cref="CompilerConfiguration.DefaultProvider"/> configuration provider.
+		/// Gets the behaviour to be used to configure the compiler in the container
+        /// 
+        /// 
 		/// </summary>
 		/// <param name="testName">Name of the test.</param>
-		protected abstract IContainerBehaviour GetCompilerBehaviour([CallerMemberName]string testName = null);
+		protected abstract IContainerBehaviour<ITargetCompiler> GetCompilerBehaviour([CallerMemberName]string testName = null);
+
+        protected IContainerBehaviour GetContainerBehaviour([CallerMemberName]string testName = null)
+        {
+            var behaviour = new ContainerBehaviourCollection(GlobalBehaviours.ContainerBehaviour);
+            behaviour.UseCompiler(GetCompilerBehaviour(testName));
+            return behaviour;
+        }
 
 		/// <summary>
 		/// Creates the target container for the test.
@@ -41,14 +48,15 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// Creates the container for the test or theory from the targets created by 
 		/// <see cref="CreateTargetContainer(string)"/>.
 		/// 
-		/// Your implementation of <see cref="GetCompilerBehaviour(string)"/> is used to configure the container
-		/// on creation.
+		/// Your implementation of <see cref="GetCompilerBehaviour(string)"/> is used to create a clone of the 
+        /// <see cref="GlobalBehaviours.ContainerBehaviour"/> with its compiler behaviour replaced so that the tests
+        /// run with the standard configuration - just with your compiler.
 		/// </summary>
 		/// <param name="targets">The targets to be used for the container.</param>
 		/// <param name="testName">Name of the test.</param>
 		protected virtual IContainer CreateContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
 		{
-			return new Container(targets, GetCompilerBehaviour(testName));
+			return new Container(targets, GetContainerBehaviour(testName));
 		}
 
 		/// <summary>
@@ -62,7 +70,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// <param name="testName">Name of the test.</param>
 		protected virtual IScopedContainer CreateScopedContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
 		{
-			return new ScopedContainer(targets, GetCompilerBehaviour(testName));
+			return new ScopedContainer(targets, GetContainerBehaviour(testName));
 		}
 
 		/// <summary>

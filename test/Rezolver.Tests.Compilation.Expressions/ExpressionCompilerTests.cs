@@ -23,7 +23,7 @@ namespace Rezolver.Tests.Compilation.Expressions
 
 		}
 
-		protected override IContainerBehaviour GetCompilerBehaviour([CallerMemberName] string testName = null)
+		protected override IContainerBehaviour<ITargetCompiler> GetCompilerBehaviour([CallerMemberName] string testName = null)
 		{
             return ExpressionCompilerBehaviour.Instance;
 		}

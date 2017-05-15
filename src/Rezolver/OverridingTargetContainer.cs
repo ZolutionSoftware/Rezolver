@@ -72,17 +72,16 @@ namespace Rezolver
 
 
         /// <summary>
-        /// Implementation of <see cref="ITargetContainer.FetchAll(Type)" />
+        /// Implementation of <see cref="ITargetContainer.FetchAll(Type)" /> which returns 
+        /// an enumerable of targets from both the base target container and this target container.
         /// </summary>
         /// <param name="type">The type whose targets are to be retrieved.</param>
         /// <returns>A non-null enumerable containing the targets that match the type, or an
         /// empty enumerable if the type is not registered.</returns>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            var result = base.FetchAll(type);
-            if (result == null || !result.Any())
-                return _parent.FetchAll(type);
-            return result;
+            return (_parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
+                (base.FetchAll(type) ?? Enumerable.Empty<ITarget>()));
         }
     }
 }

@@ -31,7 +31,8 @@ namespace Rezolver.Behaviours
         public void Attach(ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
-            targets.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(targets));
+            if(targets.FetchContainer(typeof(IEnumerable<>)) == null)
+                targets.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(targets));
         }
     }
 }

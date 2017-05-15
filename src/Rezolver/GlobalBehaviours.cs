@@ -99,7 +99,8 @@ namespace Rezolver
         static GlobalBehaviours()
         {
             // automatic IEnumerable<> resolving is enabled by default
-            TargetContainerBehaviour.AddAll(AutoEnumerableBehaviour.Instance);
+            TargetContainerBehaviour.AddAll(AutoEnumerableBehaviour.Instance,
+                ContextResolvingBehaviour.Instance);
 
             // expression compiler is used by default,
             // and members of classes are not bound by default.

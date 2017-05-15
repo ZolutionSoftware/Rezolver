@@ -36,7 +36,7 @@ namespace Rezolver
 		/// </summary>
 		public Type DecoratedType { get; }
 
-		private ITargetContainer _inner;
+        private ITargetContainer _inner;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DecoratingTargetContainer"/> class.
@@ -52,8 +52,8 @@ namespace Rezolver
 		private void EnsureInnerContainer()
 		{
 			if (_inner != null) return;
-			//similar logic to the Builder class here - if the type we're decorating is a generic 
-			//then we will use a GenericTargetContainer.  Otherwise, we'll use a TargetListContainer
+			//similar logic to the main TargetContainer class here - if the type we're decorating is a generic 
+			//then we fire the GenericTargetContainer factory.  Otherwise, we'll use a TargetListContainer
 			if (TypeHelpers.IsGenericType(DecoratedType))
 			{
 				_inner = new GenericTargetContainer(

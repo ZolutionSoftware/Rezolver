@@ -9,18 +9,27 @@ namespace Rezolver.Behaviours
     /// class by chaining the enumerable from the overridden container to the enumerable produced by the overriding container.
     /// </summary>
     /// <remarks>
-    /// Note that this class is not an <see cref="ITargetContainerBehaviour"/> like the <see cref="AutoEnumerableBehaviour"/>.
-    /// 
-    /// It is an <see cref="IContainerBehaviour"/> because it only applies to instances of <see cref="OverridingContainer"/>.</remarks>
-    public class OverridingEnumerableBehaviour : IContainerBehaviour
+    /// Note that this class is not an <see cref="ITargetContainerBehaviour"/> like the <see cref="AutoEnumerableBehaviour"/>,
+    /// instead it is an <see cref="IContainerBehaviour"/> because it's only relevant for instances of <see cref="OverridingContainer"/>.</remarks>
+    public sealed class OverridingEnumerableBehaviour : IContainerBehaviour
     {
+        /// <summary>
+        /// The one and only instance of the <see cref="OverridingEnumerableBehaviour"/>
+        /// </summary>
         public static OverridingEnumerableBehaviour Instance { get; } = new OverridingEnumerableBehaviour();
 
         private OverridingEnumerableBehaviour() { }
+
+        /// <summary>
+        /// Attaches this behaviour to the container
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="targets"></param>
         public void Attach(IContainer container, ITargetContainer targets)
         {
             if (container == null) throw new ArgumentNullException(nameof(container));
             if (targets == null) throw new ArgumentNullException(nameof(targets));
+
             targets.RegisterContainer(typeof(IEnumerable<>), 
                 new ConcatenatingEnumerableContainer(container, targets));
         }

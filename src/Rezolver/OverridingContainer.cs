@@ -28,9 +28,27 @@ namespace Rezolver
     /// In essence, when resolving an instance as a dependency the <see cref="ResolvedTarget"/> does something like this:
     /// 
     /// <code>resolveContext.Container == compileContext.Container ? (execute compile-time target) : resolveContext.Container.Resolve(type)</code>
+    /// 
+    /// ---
+    /// 
+    /// ## Behaviour of enumerables
+    /// 
+    /// The behaviour of enumerables depends on whether the <see cref="Behaviours.OverridingEnumerableBehaviour"/> is applied to the container
+    /// (which it is by default via the <see cref="GlobalBehaviours.OverridingContainerBehaviour"/>).
+    /// 
+    /// If it is, then any request for <c>IEnumerable&lt;T&gt;</c> will result in an enumerable which combines the one resolved by the <see cref="Inner"/>
+    /// container, and then by any direct registration in this container.  This mirrors the behaviour of the <see cref="ITargetContainer.FetchAll(Type)"/>
+    /// implementation of the <see cref="OverridingTargetContainer"/> - which produces an enumerable of targets from both the base target container and
+    /// the overriding one.
+    /// 
+    /// If the <see cref="Behaviours.OverridingEnumerableBehaviour"/> is not applied to this container, then any IEnumerable registered (or automatically built)
+    /// in this container will override that of the <see cref="Inner"/> container.
     /// </remarks>
     public sealed class OverridingContainer : Container
     {
+        /// <summary>
+        /// Gets the <see cref="IContainer"/> which this container overrides/extends.
+        /// </summary>
         public IContainer Inner { get; }
 
         /// <summary>

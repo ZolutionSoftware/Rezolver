@@ -107,7 +107,7 @@ namespace Rezolver
 		/// <param name="existing">Ignored</param>
 		/// <param name="type">Ignored.</param>
 		/// <exception cref="NotSupportedException">Always</exception>
-		public ITargetContainer CombineWith(ITargetContainer existing, Type type)
+		public virtual ITargetContainer CombineWith(ITargetContainer existing, Type type)
 		{
 			throw new NotSupportedException();
 		}

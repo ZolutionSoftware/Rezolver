@@ -190,5 +190,18 @@ namespace Rezolver.Tests
 			Assert.NotNull(result);
 			Assert.True(result.UseFallback);
 		}
+
+        //[Fact]
+        //public void ShouldIncludeAllGenericsInEnumerable()
+        //{
+        //    ITargetContainer targets = new TargetContainer();
+
+        //    var intTarget = Target.ForObject(1);
+        //    var doubleTarget = Target.ForObject(1.0);
+
+        //    targets.RegisterAll(intTarget, doubleTarget);
+
+        //    targets.RegisterContainer(typeof(IEnumerable<object>), new EnumerableIncludeTargetContainer(typeof(object), typeof(int)));
+        //}
 	}
 }

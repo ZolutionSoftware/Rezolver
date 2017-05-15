@@ -108,16 +108,18 @@ namespace Rezolver
 		/// <param name="type">The type whose targets are to be retrieved.</param>
 		public override IEnumerable<ITarget> FetchAll(Type type)
 		{
-			IEnumerable<ITarget> baseResults = null;
-			//this is similar to the fetch method, except it'll return as soon as it gets
-			//a non-empty hit for any of the search types.
+            //all generics are returned in descending order of specificity
 			foreach (var searchType in DeriveGenericTypeSearchList(type))
 			{
-				if ((baseResults = base.FetchAll(searchType)).Any())
-					return baseResults;
+                foreach (var result in base.FetchAll(searchType))
+                    yield return result;
 			}
 
-			return _targets.FetchAll(type);
+            foreach(var result in _targets.FetchAll(type))
+            {
+                yield return result;
+            }
+			
 		}
 
 		private IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
