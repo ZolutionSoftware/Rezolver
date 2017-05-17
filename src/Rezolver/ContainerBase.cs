@@ -38,105 +38,6 @@ namespace Rezolver
     /// </remarks>
     public class ContainerBase : IContainer, ITargetContainer
     {
-        #region MissingCompiledTarget
-
-        /// <summary>
-        /// Used as a sentinel type when a type cannot be resolved by a <see cref="ContainerBase"/> instance.  Instead of returning a null
-        /// <see cref="ICompiledTarget"/> instance, the container will construct an instance of this type (typically through <see cref="GetMissingTarget(Type)"/>,
-        /// which caches singleton instances of this class on a per-type basis) which can then be used just as if the lookup succeeded.
-        /// </summary>
-        /// <seealso cref="Rezolver.ICompiledTarget" />
-        /// <remarks>The <see cref="GetObject(IResolveContext)"/> always throws an <see cref="InvalidOperationException"/> with the message
-        /// 'Could resolve type [[type]]'</remarks>
-        protected class MissingCompiledTarget : ICompiledTarget
-        {
-            private readonly Type _type;
-
-            /// <summary>
-            /// Always returns <c>null</c>
-            /// </summary>
-            public ITarget SourceTarget => null;
-            /// <summary>
-            /// Constructs a new instance of the <see cref="MissingCompiledTarget"/> class.
-            /// </summary>
-            /// <param name="type"></param>
-            public MissingCompiledTarget(Type type)
-            {
-                _type = type;
-            }
-
-            /// <summary>
-            /// Implementation of <see cref="ICompiledTarget.GetObject(IResolveContext)"/>.  Always throws an <see cref="InvalidOperationException"/>.
-            /// </summary>
-            /// <param name="context">The current rezolve context.</param>
-            /// <exception cref="InvalidOperationException">Always thrown.</exception>
-            public object GetObject(IResolveContext context)
-            {
-                throw new InvalidOperationException(String.Format("Could not resolve type {0}", _type));
-            }
-        }
-        #endregion
-
-        #region DirectResolveCompiledTarget
-
-        /// <summary>
-        /// Used when an <see cref="ITarget"/> is also of the same type as the one for which it is returned
-        /// by the <see cref="ITargetContainer.Fetch(Type)"/> method of the <see cref="ContainerBase.Targets"/> container.
-        /// 
-        /// In this case, the target is not compiled, but instead is simply returned as the desired object.
-        /// </summary>
-        protected class DirectResolveCompiledTarget : ICompiledTarget
-        {
-            /// <summary>
-            /// The target for which this compiled target was created.
-            /// </summary>
-            public ITarget SourceTarget { get; }
-            /// <summary>
-            /// Constructs a new instance of the <see cref="DirectResolveCompiledTarget"/>
-            /// </summary>
-            /// <param name="target"></param>
-            public DirectResolveCompiledTarget(ITarget target)
-            {
-                SourceTarget = target;
-            }
-
-            /// <summary>
-            /// Implementation of <see cref="ICompiledTarget.GetObject(IResolveContext)"/> - simply returns the
-            /// target with which this instance was constructed.
-            /// </summary>
-            /// <param name="context">ignored</param>
-            /// <returns></returns>
-            public object GetObject(IResolveContext context)
-            {
-                return SourceTarget;
-            }
-        }
-        #endregion
-
-        private static readonly
-          ConcurrentDictionary<Type, Lazy<ICompiledTarget>> MissingTargets = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
-
-        /// <summary>
-        /// Gets an <see cref="ICompiledTarget"/> for the given type which will always throw an 
-        /// <see cref="InvalidOperationException"/> whenever its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> 
-        /// method is called.  Use this when you can't resolve a target for a type to ensure that you always return an
-        /// <see cref="ICompiledTarget"/> for it (which is required).
-        /// </summary>
-        /// <param name="type">The type for which you wish to create a missing target.</param>
-        protected static ICompiledTarget GetMissingTarget(Type type)
-        {
-            return MissingTargets.GetOrAdd(type, t => new Lazy<ICompiledTarget>(() => new MissingCompiledTarget(t))).Value;
-        }
-
-        /// <summary>
-        /// Determines whether the given <paramref name="target"/> is an instance of <see cref="MissingCompiledTarget"/>.
-        /// </summary>
-        /// <param name="target">The target.</param>
-        protected static bool IsMissingTarget(ICompiledTarget target)
-        {
-            return target is MissingCompiledTarget;
-        }
-        
         /// <summary>
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
         /// instances.
@@ -233,7 +134,7 @@ namespace Rezolver
         public virtual bool TryResolve(IResolveContext context, out object result)
         {
             var target = GetCompiledRezolveTarget(context);
-            if (!IsMissingTarget(target))
+            if (!target.IsUnresolved())
             {
                 result = target.GetObject(context);
                 return true;
@@ -265,7 +166,7 @@ namespace Rezolver
         /// <returns>Always returns a reference to a compiled target - but note that if 
         /// <see cref="CanResolve(IResolveContext)"/> returns false for the same context, then the target's 
         /// <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method will likely throw an exception - in line with 
-        /// the behaviour of the <see cref="MissingCompiledTarget"/> class.</returns>
+        /// the behaviour of the <see cref="UnresolvedTypeCompiledTarget"/> class.</returns>
         public virtual ICompiledTarget FetchCompiled(IResolveContext context)
         {
             //note that this container is fixed as the container in the context - regardless of the
@@ -302,7 +203,7 @@ namespace Rezolver
         /// <see cref="GetFallbackCompiledRezolveTarget(IResolveContext)"/> method.
         /// 
         /// This fallback will be used unless the target was not null and its <see cref="ITarget.UseFallback"/> is 
-        /// true *AND* the compiled target returned by the fallback method is a <see cref="MissingCompiledTarget"/>.
+        /// true *AND* the compiled target returned by the fallback method is an <see cref="UnresolvedTypeCompiledTarget"/>.
         /// 
         /// ### To compile, or not to compile
         /// 
@@ -312,8 +213,8 @@ namespace Rezolver
         /// This means that the target either implements the <see cref="ICompiledTarget"/> interface (in which case it is
         /// immediately returned) or the <see cref="IResolveContext.RequestedType"/> is *not* <see cref="Object"/> and the 
         /// target's type is compatible with it (in which case the target is simply embedded in a new 
-        /// <see cref="DirectResolveCompiledTarget"/>, which will later just return the target when its 
-        /// <see cref="DirectResolveCompiledTarget.GetObject(IResolveContext)"/> is called).
+        /// <see cref="ConstantCompiledTarget"/>, which will later just return the target when its 
+        /// <see cref="ConstantCompiledTarget.GetObject(IResolveContext)"/> is called).
         /// 
         /// <em>The <see cref="ObjectTarget"/> supports the <see cref="ICompiledTarget"/> interface, therefore any objects 
         /// which are directly registered through this target will always use that class' implementation of 
@@ -351,7 +252,7 @@ namespace Rezolver
             if (target.UseFallback)
             {
                 var fallback = GetFallbackCompiledRezolveTarget(context);
-                if (!IsMissingTarget(fallback))
+                if (!fallback.IsUnresolved())
                     return fallback;
             }
 
@@ -363,7 +264,7 @@ namespace Rezolver
             if (target is ICompiledTarget)
                 return (ICompiledTarget)target;
             else if (context.RequestedType != typeof(object) && TypeHelpers.IsAssignableFrom(context.RequestedType, target.GetType()))
-                return new DirectResolveCompiledTarget(target);
+                return new Compilation.ConstantCompiledTarget(target, target);
 
              if (context.RequestedType == typeof(ITargetCompiler))
                 throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler as a constant service");
@@ -381,11 +282,10 @@ namespace Rezolver
         /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(IResolveContext)"/> 
         /// operation where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).
         /// </returns>
-        /// <remarks>The base implementation always returns an instance of the <see cref="MissingCompiledTarget"/> via
-        /// the <see cref="GetMissingTarget(Type)"/> static method.</remarks>
+        /// <remarks>The base implementation always returns an instance of the <see cref="UnresolvedTypeCompiledTarget"/>.</remarks>
         protected virtual ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
         {
-            return GetMissingTarget(context.RequestedType);
+            return new UnresolvedTypeCompiledTarget(context.RequestedType);
         }
 
         object IServiceProvider.GetService(Type serviceType)
