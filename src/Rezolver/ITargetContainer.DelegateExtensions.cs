@@ -31,6 +31,7 @@ namespace Rezolver
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			factory.MustNotBeNull(nameof(factory));
+#error Before continuing - introspect the target method here and create NullaryDelegateTarget for parameterless delegates
             ITarget toRegister = new DelegateTarget(factory, declaredType);
             if (scopeBehaviour == ScopeBehaviour.Explicit) toRegister = toRegister.Scoped();
             else if (scopeBehaviour == ScopeBehaviour.None) toRegister = toRegister.Unscoped();
