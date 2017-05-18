@@ -17,7 +17,7 @@ namespace Rezolver
     /// e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application for example) or more.
     /// </summary>
     /// <remarks>When overriding another <see cref="IContainer"/>, you are overriding the <see cref="ICompiledTarget"/> objects that
-    /// will be returned when <see cref="IContainer.FetchCompiled(IResolveContext)"/> is called on that container and, therefore,
+    /// will be returned when <see cref="IContainer.GetCompiledTarget(IResolveContext)"/> is called on that container and, therefore,
     /// the compiled target which is executed when the <see cref="IContainer.Resolve(IResolveContext)"/> method is called.
     /// 
     /// This has the side effect of overriding automatically resolved arguments (bound to a <see cref="ResolvedTarget"/>) compiled 
@@ -91,9 +91,9 @@ namespace Rezolver
         /// </summary>
         /// <param name="context">Required.  The <see cref="IResolveContext"/>.</param>
         /// <returns></returns>
-        protected override ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
+        protected override ICompiledTarget GetFallbackCompiledTarget(IResolveContext context)
         {
-            return Inner.FetchCompiled(context);
+            return Inner.GetCompiledTarget(context);
         }
     }
 }

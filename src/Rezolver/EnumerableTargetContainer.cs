@@ -20,7 +20,7 @@ namespace Rezolver
         #region CompiledListTarget
         /// <summary>
         /// Special variant of ListTarget which is used when auto-resolving an enumerable of objects where all
-        /// the resolved targets are ICompiledTarget implementations.  This type also implements ICompiledTarget,
+        /// the resolved targets are all ICompiledTarget implementations.  This type also implements ICompiledTarget,
         /// which, in its implementation of GetObject, returns a fully materialised array or list of the objects
         /// returned by each target's GetObject call - bypassing the need to compile each target first, or compiling
         /// the list first.
@@ -152,7 +152,7 @@ namespace Rezolver
 
         public override ITarget Fetch(Type type)
         {
-            var baseCompiled = _owner.Inner.FetchCompiled(new ResolveContext(_owner.Inner, type));
+            var baseCompiled = _owner.Inner.GetCompiledTarget(new ResolveContext(_owner.Inner, type));
             var overrideTarget = base.Fetch(type);
 
             // we know from above that if type is not IEnumerable<T>, then an exception will occur.

@@ -70,16 +70,16 @@ namespace Rezolver
 		/// a given request.
 		/// 
 		/// The internal cache is examined first to see if an entry exists for the <see cref="IResolveContext.RequestedType"/> type and, if not, then 
-		/// the result of the base class' <see cref="ContainerBase.GetCompiledRezolveTarget(IResolveContext)"/> is cached and returned.
+		/// the result of the base class' <see cref="ContainerBase.GetCompiledTarget(IResolveContext)"/> is cached and returned.
 		/// </remarks>
-		protected override ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
+		protected override ICompiledTarget GetCompiledTargetVirtual(IResolveContext context)
 		{
             if (_entries.TryGetValue(context.RequestedType, out Lazy<ICompiledTarget> myLazy))
                 return myLazy.Value;
 
             return _entries.GetOrAdd(
                 context.RequestedType, 
-                c => new Lazy<ICompiledTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
+                c => new Lazy<ICompiledTarget>(() => base.GetCompiledTargetVirtual(context))).Value;
 		}
 	}
 }

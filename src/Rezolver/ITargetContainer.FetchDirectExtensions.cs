@@ -23,7 +23,7 @@ namespace Rezolver
                 throw new NotImplementedException();
             }
 
-            public ICompiledTarget FetchCompiled(IResolveContext context)
+            public ICompiledTarget GetCompiledTarget(IResolveContext context)
             {
                 throw new NotImplementedException();
             }

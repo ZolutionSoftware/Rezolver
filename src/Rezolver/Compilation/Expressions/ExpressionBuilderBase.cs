@@ -24,110 +24,124 @@ namespace Rezolver.Compilation.Expressions
     public abstract class ExpressionBuilderBase : IExpressionBuilder
     {
         /// <summary>
-        /// Gets a <see cref="MethodInfo"/> for the <see cref="ICompiledTarget.GetObject(IResolveContext)"/>
-        /// method.
+        /// Provides access to a set of <see cref="MethodInfo"/> objects for common functions required
+        /// by code produced from <see cref="ITarget"/>s.  Also contains some factory methods for building
+        /// expressions which bind to those methods.
         /// </summary>
-        protected static MethodInfo ICompiledTarget_GetObject_Method =>
-            MethodCallExtractor.ExtractCalledMethod((ICompiledTarget t) => t.GetObject(null));
-
-        /// <summary>
-        /// Gets a <see cref="MethodInfo"/> for the <see cref="ContainerScopeExtensions.GetRootScope(IContainerScope)"/>
-        /// extension method.
-        /// </summary>
-        protected static MethodInfo IContainerScope_GetRootScope_Method =>
-            MethodCallExtractor.ExtractCalledMethod(
-                (IContainerScope s) => s.GetRootScope());
-
-        /// <summary>
-        /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(IResolveContext)"/>
-        /// method
-        /// </summary>
-        protected static MethodInfo IContainer_CanResolve_Method =>
-            MethodCallExtractor.ExtractCalledMethod(
-                (IContainer c) => c.CanResolve((IResolveContext)null));
-
-        /// <summary>
-        /// Gets a <see cref="MethodInfo"/> for the <see cref="IContainer.Resolve(IResolveContext)"/> method
-        /// </summary>
-        protected static MethodInfo IContainer_Resolve_Method =>
-            MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
-        
-        /// <summary>
-        /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
-        /// method for help in generating scope-interfacing code.
-        /// </summary>
-        protected static MethodInfo IContainerScope_Resolve_Method =>
-            MethodCallExtractor.ExtractCalledMethod(
-                (IContainerScope s) => s.Resolve(
-                    (IResolveContext)null,
-                    (Func<IResolveContext, object>)null,
-                    ScopeBehaviour.None));
-
-        /// <summary>
-        /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
-        /// extension method.
-        /// </summary>
-        protected static MethodInfo ResolveContextExtensions_Resolve_Method =>
-            MethodCallExtractor.ExtractCalledMethod(
-                (IResolveContext rc) => rc.Resolve((Func<IResolveContext, object>)null,
-                    ScopeBehaviour.None));
-
-
-        /// <summary>
-        /// Gets a MethodInfo object for the <see cref="IResolveContext.New(Type, IContainer, IContainerScope)"/> method
-        /// </summary>
-        /// <value>The type of the resolve context create new method.</value>
-        protected static MethodInfo IResolveContext_New_Method =>
-            MethodCallExtractor.ExtractCalledMethod((IResolveContext r) => r.New(null, null, null));
-
-        /// <summary>
-        /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-        /// <see cref="IResolveContext.New(Type, IContainer, IContainerScope)"/> method with the
-        /// given arguments.
-        /// </summary>
-        /// <param name="resolveContext">An expression representing the context on which the method will be called</param>
-        /// <param name="newRequestedType">An expression representing the argument to the newRequestedType parameter</param>
-        /// <param name="newContainer">An expression representing the argument to the newContainer parameter</param>
-        /// <param name="newScope">An expression representing the argument to the newScope parameter</param>
-        /// <returns></returns>
-        protected static MethodCallExpression CallResolveContext_New(Expression resolveContext,
-            Expression newRequestedType = null,
-            Expression newContainer = null,
-            Expression newScope = null)
+        protected static class Methods
         {
-            return Expression.Call(resolveContext,
-                IResolveContext_New_Method,
-                newRequestedType ?? Expression.Default(typeof(Type)),
-                newContainer ?? Expression.Default(typeof(IContainer)),
-                newScope ?? Expression.Default(typeof(IContainerScope)));
-        }
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="IDirectTarget.GetValue"/> method.
+            /// </summary>
+            public static MethodInfo IDirectTarget_GetValue_Method =>
+            MethodCallExtractor.ExtractCalledMethod((IDirectTarget t) => t.GetValue());
 
-        /// <summary>
-        /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-        /// <see cref="IContainer.Resolve(IResolveContext)"/> method with the given
-        /// context argument.
-        /// </summary>
-        /// <param name="container">An expression representing the container on which the method will be called</param>
-        /// <param name="context">An expression representing the argument to the context parameter</param>
-        /// <returns></returns>
-        protected static MethodCallExpression CallIContainer_Resolve(Expression container,
-            Expression context)
-        {
-            return Expression.Call(container, IContainer_Resolve_Method, context);
-        }
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="ICompiledTarget.GetObject(IResolveContext)"/>
+            /// method.
+            /// </summary>
+            public static MethodInfo ICompiledTarget_GetObject_Method =>
+                MethodCallExtractor.ExtractCalledMethod((ICompiledTarget t) => t.GetObject(null));
 
-        /// <summary>
-        /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-        /// <see cref="IContainer.CanResolve(IResolveContext)"/> method with the given
-        /// context argument.
-        /// </summary>
-        /// <param name="container">An expression representing the container on which the method will be called</param>
-        /// <param name="context">An expression representing the argument to the context parameter</param>
-        /// <returns></returns>
-        protected static MethodCallExpression CallIContainer_CanResolve(Expression container,
-            Expression context)
-        {
-            return Expression.Call(container, IContainer_CanResolve_Method, context);
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="ContainerScopeExtensions.GetRootScope(IContainerScope)"/>
+            /// extension method.
+            /// </summary>
+            public static MethodInfo IContainerScope_GetRootScope_Method =>
+                MethodCallExtractor.ExtractCalledMethod(
+                    (IContainerScope s) => s.GetRootScope());
+
+            /// <summary>
+            /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(IResolveContext)"/>
+            /// method
+            /// </summary>
+            public static MethodInfo IContainer_CanResolve_Method =>
+                MethodCallExtractor.ExtractCalledMethod(
+                    (IContainer c) => c.CanResolve((IResolveContext)null));
+
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="IContainer.Resolve(IResolveContext)"/> method
+            /// </summary>
+            public static MethodInfo IContainer_Resolve_Method =>
+                MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
+
+            /// <summary>
+            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// method for help in generating scope-interfacing code.
+            /// </summary>
+            public static MethodInfo IContainerScope_Resolve_Method =>
+                MethodCallExtractor.ExtractCalledMethod(
+                    (IContainerScope s) => s.Resolve(
+                        (IResolveContext)null,
+                        (Func<IResolveContext, object>)null,
+                        ScopeBehaviour.None));
+
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// extension method.
+            /// </summary>
+            public static MethodInfo ResolveContextExtensions_Resolve_Method =>
+                MethodCallExtractor.ExtractCalledMethod(
+                    (IResolveContext rc) => rc.Resolve((Func<IResolveContext, object>)null,
+                        ScopeBehaviour.None));
+
+
+            /// <summary>
+            /// Gets a MethodInfo object for the <see cref="IResolveContext.New(Type, IContainer, IContainerScope)"/> method
+            /// </summary>
+            /// <value>The type of the resolve context create new method.</value>
+            public static MethodInfo IResolveContext_New_Method =>
+                MethodCallExtractor.ExtractCalledMethod((IResolveContext r) => r.New(null, null, null));
+
+            /// <summary>
+            /// Emits a <see cref="MethodCallExpression"/> which represents calling the
+            /// <see cref="IResolveContext.New(Type, IContainer, IContainerScope)"/> method with the
+            /// given arguments.
+            /// </summary>
+            /// <param name="resolveContext">An expression representing the context on which the method will be called</param>
+            /// <param name="newRequestedType">An expression representing the argument to the newRequestedType parameter</param>
+            /// <param name="newContainer">An expression representing the argument to the newContainer parameter</param>
+            /// <param name="newScope">An expression representing the argument to the newScope parameter</param>
+            /// <returns></returns>
+            public static MethodCallExpression CallResolveContext_New(Expression resolveContext,
+                Expression newRequestedType = null,
+                Expression newContainer = null,
+                Expression newScope = null)
+            {
+                return Expression.Call(resolveContext,
+                    IResolveContext_New_Method,
+                    newRequestedType ?? Expression.Default(typeof(Type)),
+                    newContainer ?? Expression.Default(typeof(IContainer)),
+                    newScope ?? Expression.Default(typeof(IContainerScope)));
+            }
+
+            /// <summary>
+            /// Emits a <see cref="MethodCallExpression"/> which represents calling the
+            /// <see cref="IContainer.Resolve(IResolveContext)"/> method with the given
+            /// context argument.
+            /// </summary>
+            /// <param name="container">An expression representing the container on which the method will be called</param>
+            /// <param name="context">An expression representing the argument to the context parameter</param>
+            /// <returns></returns>
+            public static MethodCallExpression CallIContainer_Resolve(Expression container,
+                Expression context)
+            {
+                return Expression.Call(container, IContainer_Resolve_Method, context);
+            }
+
+            /// <summary>
+            /// Emits a <see cref="MethodCallExpression"/> which represents calling the
+            /// <see cref="IContainer.CanResolve(IResolveContext)"/> method with the given
+            /// context argument.
+            /// </summary>
+            /// <param name="container">An expression representing the container on which the method will be called</param>
+            /// <param name="context">An expression representing the argument to the context parameter</param>
+            /// <returns></returns>
+            public static MethodCallExpression CallIContainer_CanResolve(Expression container,
+                Expression context)
+            {
+                return Expression.Call(container, IContainer_CanResolve_Method, context);
+            }
         }
 
         /// <summary>
@@ -240,11 +254,11 @@ namespace Rezolver.Compilation.Expressions
             }, typeof(ExpressionBuilderBase));
 
             var newContextExpr = scopePreference == ScopePreference.Current ? (Expression)context.ResolveContextParameterExpression
-                : CallResolveContext_New(
+                : Methods.CallResolveContext_New(
                     context.ResolveContextParameterExpression,
                     Expression.Constant(builtExpression.Type),
                             Expression.Default(typeof(IContainer)),
-                            Expression.Call(IContainerScope_GetRootScope_Method,
+                            Expression.Call(Methods.IContainerScope_GetRootScope_Method,
                                 context.ContextScopePropertyExpression)
                     );
 
@@ -253,7 +267,7 @@ namespace Rezolver.Compilation.Expressions
                 builtExpression, //if null scope, just use the built expression as-is
                 Expression.Convert( //otherwise - generate a call into the scope's special Resolve method
                     Expression.Call(
-                        ResolveContextExtensions_Resolve_Method,
+                        Methods.ResolveContextExtensions_Resolve_Method,
                         newContextExpr,
                         Expression.Constant(lambda),
                         Expression.Constant(scopeBehaviour)

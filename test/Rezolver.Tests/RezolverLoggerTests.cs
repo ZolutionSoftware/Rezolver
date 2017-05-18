@@ -40,7 +40,7 @@ namespace Rezolver.Tests
 				return null;
 			}
 
-			public virtual ICompiledTarget FetchCompiled(IResolveContext context)
+			public virtual ICompiledTarget GetCompiledTarget(IResolveContext context)
 			{
 				return null;
 			}

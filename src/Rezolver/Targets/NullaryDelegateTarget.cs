@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Rezolver.Targets
@@ -12,14 +13,18 @@ namespace Rezolver.Targets
     /// </summary>
     internal class NullaryDelegateTarget : DelegateTarget, IDirectTarget
     {
+        readonly Func<object> _strongDelegate;
         public NullaryDelegateTarget(Delegate factory, Type declaredType = null) : base(factory, declaredType)
         {
             if (FactoryMethod.GetParameters()?.Length > 0) throw new ArgumentException("Only nullary delegates (i.e. which have no parameters) can be used for this target");
+
+            _strongDelegate = Expression.Lambda<Func<object>>(Expression.Convert(
+                Expression.Invoke(Expression.Constant(factory)), typeof(object))).Compile();
         }
 
         object IDirectTarget.GetValue()
         {
-            throw new NotImplementedException();
+            return _strongDelegate();
         }
     }
 }
