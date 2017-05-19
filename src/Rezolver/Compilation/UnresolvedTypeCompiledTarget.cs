@@ -52,7 +52,7 @@ namespace Rezolver
     /// <summary>
     /// Contains an extension to test the validity of <see cref="ICompiledTarget"/> objects.
     /// </summary>
-    public static class UnresolveICompiledTargetExtensions
+    public static class UnresolvedICompiledTargetExtensions
     {
         /// <summary>
         /// Returns true if <paramref name="compiledTarget"/> is an <see cref="UnresolvedTypeCompiledTarget"/>

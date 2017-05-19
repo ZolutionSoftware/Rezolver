@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using System.Runtime.CompilerServices;
 using System.Security;
 
 [assembly: AllowPartiallyTrustedCallers]
