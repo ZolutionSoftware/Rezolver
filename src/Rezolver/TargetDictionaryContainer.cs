@@ -25,6 +25,18 @@ namespace Rezolver
         private readonly Dictionary<Type, ITargetContainer> _targets
           = new Dictionary<Type, ITargetContainer>();
 
+        public TargetDictionaryConfig Configuration { get; protected set; }
+
+        TargetContainerConfig ITargetContainer.Configuration => Configuration;
+
+        public TargetDictionaryContainer(TargetDictionaryConfig config = null)
+        {
+            Configuration = config ?? TargetContainerConfig<TargetDictionaryConfig>.Default();
+            (Configuration.Behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+            // alter the TargetContainerOptions type to use this global behaviour; then refactor here.
+            // might need to alter the base class to use reasonable defaults for the container behaviour etc.
+        }
+
         /// <summary>
         /// Implementation of <see cref="ITargetContainer.Fetch(Type)"/>.
         /// </summary>

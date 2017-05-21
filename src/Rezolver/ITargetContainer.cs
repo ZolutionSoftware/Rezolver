@@ -30,6 +30,8 @@ namespace Rezolver
 	/// are <see cref="TargetContainer"/> and <see cref="OverridingTargetContainer"/>.</remarks>
 	public interface ITargetContainer
 	{
+        TargetContainerConfig Configuration { get; }
+
 		/// <summary>
 		/// Registers a target, either for the <paramref name="serviceType"/> specified or, if null, the <see cref="ITarget.DeclaredType"/>
 		/// of the <paramref name="target"/>.
