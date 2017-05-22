@@ -35,14 +35,9 @@ namespace Rezolver
         /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
         /// class is used by default.
         /// </param>
-        //public TargetContainer(ITargetContainerBehaviour behaviour = null)
-        //{
-        //    (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
-        //}
-
-        public TargetContainer(TargetDictionaryConfig config)
+        public TargetContainer(ITargetContainerBehaviour behaviour = null)
         {
-            
+            (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
         }
 
         /// <summary>
