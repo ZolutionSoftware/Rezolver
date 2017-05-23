@@ -5,6 +5,29 @@ using System.Text;
 
 namespace Rezolver
 {
+    /// <summary>
+    /// Contains extension methods for getting and setting container options which are used to control the behaviour, chiefly,
+    /// of the various well-known <see cref="ITargetContainer"/> implementations.
+    /// </summary>
+    /// <remarks>Options are different to target container behaviours (<see cref="ITargetContainerBehaviour"/>) in that options
+    /// are actively *read* by the various <see cref="ITargetContainer"/>-related types throughout the Rezolver framework to
+    /// control how certain standard functionality operates.
+    /// 
+    /// The <see cref="ITargetContainerBehaviour"/>, however, can be used both to *configure* those options and to add extra
+    /// registrations (both <see cref="ITarget"/> and, more commonly, other <see cref="ITargetContainer"/>s via the 
+    /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method).
+    /// 
+    /// The automatic building of <see cref="IEnumerable{T}"/> sequences from all the targets registered for a type, for example,
+    /// is enabled by attaching the <see cref="Behaviours.AutoEnumerableBehaviour"/> to the target container.  Whereas, the 
+    /// ability to actually register more than one target for a particular service in the first place is controlled by the 
+    /// <see cref="Options.AllowMultiple"/> option.
+    /// 
+    /// ## Types of options
+    /// 
+    /// Ultimately an option can be of any type, but most of the built-in options use the <see cref="Options.ContainerOption{TOption}"/>
+    /// type to wrap simple types (<see cref="bool"/>, <see cref="string"/>, <see cref="int"/> and so on) as a human-readably
+    /// named type that differentiates that option from others of the same underlying value type.  Note that the phrase 'value type'
+    /// there doesn't mean that all options must be literal value types (i.e. <see cref="ValueType"/>).</remarks>
     public static class OptionsTargetContainerExtensions
     {
         public static ITargetContainer SetOption<TOption>(this ITargetContainer targets, TOption option)
@@ -61,7 +84,7 @@ namespace Rezolver
             if (targets == null) throw new ArgumentNullException(nameof(targets));
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
 
-            bool useGlobalFallback = GetOption<PerServiceOptionGlobalFallback>(targets, true);
+            bool useGlobalFallback = GetOption<UseGlobalsForUnsetServiceOptions>(targets, true);
 
             var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<,>)
                 .MakeGenericType(serviceType, typeof(TOption)));
@@ -77,7 +100,7 @@ namespace Rezolver
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 
-            bool useGlobalFallback = GetOption<PerServiceOptionGlobalFallback>(targets, true);
+            bool useGlobalFallback = GetOption<UseGlobalsForUnsetServiceOptions>(targets, true);
 
             var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<TService, TOption>));
 

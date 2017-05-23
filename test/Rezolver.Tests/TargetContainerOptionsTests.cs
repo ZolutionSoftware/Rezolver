@@ -53,7 +53,8 @@ namespace Rezolver.Tests
         {
             var targets = new TargetContainer();
 
-            targets.SetOption<PerServiceOptionGlobalFallback>(false);
+            // you can control how the options functionality works by using options :)
+            targets.SetOption<UseGlobalsForUnsetServiceOptions>(false);
             targets.SetOption<TestOption>("global");
 
             Assert.Equal("default", targets.GetOption<int, TestOption>("default"));
