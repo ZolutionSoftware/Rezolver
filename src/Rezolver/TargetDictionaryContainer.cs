@@ -26,6 +26,25 @@ namespace Rezolver
           = new Dictionary<Type, ITargetContainer>();
 
         /// <summary>
+        /// Never null.  Returns the root target container.
+        /// </summary>
+        /// <value>If this instance is created with a root
+        /// passed to the <see cref="TargetDictionaryContainer.TargetDictionaryContainer(ITargetContainer)"/>
+        /// constructor, then it will be returned by this property.
+        /// 
+        /// Otherwise it will return this instance.</value>
+        protected ITargetContainer Root { get; }
+
+        /// <summary>
+        /// Constructs a new <see cref="TargetDictionaryContainer"/> optionally setting 
+        /// </summary>
+        /// <param name="root">If this container belongs to another, then pass it here.</param>
+        public TargetDictionaryContainer(ITargetContainer root = null)
+        {
+            Root = root ?? this;
+        }
+
+        /// <summary>
         /// Implementation of <see cref="ITargetContainer.Fetch(Type)"/>.
         /// </summary>
         /// <param name="type">The type whose default target is to be retrieved.</param>
@@ -68,8 +87,7 @@ namespace Rezolver
         public virtual ITargetContainer FetchContainer(Type type)
         {
             type.MustNotBeNull(nameof(type));
-            ITargetContainer toReturn;
-            _targets.TryGetValue(type, out toReturn);
+            _targets.TryGetValue(type, out ITargetContainer toReturn);
             return toReturn;
         }
 
@@ -90,8 +108,7 @@ namespace Rezolver
             type.MustNotBeNull(nameof(type));
             container.MustNotBeNull(nameof(container));
 
-            ITargetContainer existing;
-            _targets.TryGetValue(type, out existing);
+            _targets.TryGetValue(type, out ITargetContainer existing);
             //if there is already another container registered, we attempt to combine the two, prioritising
             //the new container over the old one but trying the reverse operation if that fails.
             if (existing != null)
@@ -153,7 +170,7 @@ namespace Rezolver
         /// <returns></returns>
         protected virtual ITargetContainer CreateContainer(Type serviceType, ITarget target)
         {
-            var created = new TargetListContainer(serviceType);
+            var created = new TargetListContainer(Root, serviceType);
 
             RegisterContainer(serviceType, created);
             return created;

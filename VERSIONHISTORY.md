@@ -11,23 +11,20 @@ create a new instance as there's no need to enforce a one-instance-per-type
 rule
  - Added `Rezolver.Compilation.DelegatingCompiledTarget` to allow factory functions
 to be used directly as implementations of `ICompiledTarget`
- - Added `IDirectTarget` - to be used on an `ITarget` which ultimately wraps 
-a non-context-aware method or instance.
-    - `ObjectTarget` now implements this too
-    - As does `NullaryDelegateTarget` - a special `DelegateTarget` that 
-is specialised for parameterless delegates which return something.
-
-### Notes on `IDirectTarget`
-
-The idea behind this is to simplify the resolving of objects directly from
-`ITargetContainer` without compiling.  A new `IContainer` implementation will
-be created which only works with `IDirectTarget` targets and targets which
-are of the type for which they are registered.
-
-The root `TargetContainer` instance will create an instance of this class 
-(non-caching) which it then uses to service its own container service needs.
-
-Interestingly - the Container can also do the same.
+ - Added `Rezolver.Options` namespace
+   - Given an `ITargetContainer`, you can use extension methods to get and set options
+which alter behaviour of the container.  For example, if you don't want your container
+to accept multiple registrations for any type, or for a particular type or group of generics,
+you can use `.SetOption<AllowMultiple[, Type]>(false)`.
+ - Options currently available:
+   - `AllowMultiple`: (As above)
+   - `FetchAllMatchingGenerics`: Controls the underlying behaviour of the `GenericTargetContainer`
+class' `FetchAll` implementation works which, when using automatic `IEnumerable<>` resolving,
+also controls which objects are actually included in an enumerable.
+   - `UseGlobalsForUnsetServiceOptions`: Controls how the container resolves options for
+specific service types.  By default, if an option is not set for the given service type, or
+matching open generic for that service type, then it'll look for a globally-defined option - i.e.
+one which is not Set against a specific service type.
 
 ## 1.2.current and before
 

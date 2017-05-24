@@ -95,7 +95,8 @@ namespace Rezolver
         /// <returns>The base implementation always creates an instance of <see cref="CreateGenericTypeDefContainer( Type,ITarget)"/></returns>
         protected virtual ITargetContainer CreateGenericTypeDefContainer(Type genericTypeDefinition, ITarget target)
         {
-            return new GenericTargetContainer(genericTypeDefinition);
+            //Note below: Root will be equal to this
+            return new GenericTargetContainer(Root, genericTypeDefinition);
         }
 
         /// <summary>

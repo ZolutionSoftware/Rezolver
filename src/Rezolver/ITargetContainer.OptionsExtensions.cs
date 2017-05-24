@@ -57,7 +57,7 @@ namespace Rezolver
             return targets;
         }
 
-        public static ITargetContainer SetOption<TService, TOption>(this ITargetContainer targets, TOption option)
+        public static ITargetContainer SetOption<TOption, TService>(this ITargetContainer targets, TOption option)
             where TOption : class
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
@@ -84,7 +84,7 @@ namespace Rezolver
             if (targets == null) throw new ArgumentNullException(nameof(targets));
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
 
-            bool useGlobalFallback = GetOption<UseGlobalsForUnsetServiceOptions>(targets, true);
+            bool useGlobalFallback = GetOption(targets, UseGlobalsForUnsetServiceOptions.Default);
 
             var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<,>)
                 .MakeGenericType(serviceType, typeof(TOption)));
@@ -95,12 +95,12 @@ namespace Rezolver
             return optionContainer?.Option ?? @default;
         }
 
-        public static TOption GetOption<TService, TOption>(this ITargetContainer targets, TOption @default = default(TOption))
+        public static TOption GetOption<TOption, TService>(this ITargetContainer targets, TOption @default = default(TOption))
             where TOption : class
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 
-            bool useGlobalFallback = GetOption<UseGlobalsForUnsetServiceOptions>(targets, true);
+            bool useGlobalFallback = GetOption(targets, UseGlobalsForUnsetServiceOptions.Default);
 
             var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<TService, TOption>));
 

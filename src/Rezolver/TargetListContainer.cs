@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,19 +20,9 @@ namespace Rezolver
 	/// This type is not thread-safe, nor does it perform any type checking on the targets
 	/// that are added to it.
 	/// </remarks>
-	public class TargetListContainer : ITargetContainer
+	public class TargetListContainer : ITargetContainer, IList<ITarget>
 	{
 		private List<ITarget> _targets;
-
-		/// <summary>
-		/// Provides deriving classes a means to manipulate the underlying list.
-		/// </summary>
-		protected List<ITarget> TargetsList { get { return _targets; } }
-
-		/// <summary>
-		/// Gets the targets stored in this list container.
-		/// </summary>
-		public IEnumerable<ITarget> Targets { get { return _targets.AsReadOnly(); } }
 
 		/// <summary>
 		/// Gets the type against which this list container is registered in its <see cref="ITargetContainer"/>.
@@ -52,24 +43,39 @@ namespace Rezolver
 			}
 		}
 
-		/// <summary>
+        /// <summary>
 		/// Gets the number of targets which have been added to the list.
 		/// </summary>
 		/// <value>The count.</value>
-		public int Count { get { return TargetsList.Count; } }
+		public int Count { get { return _targets.Count; } }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="TargetListContainer"/> class.
-		/// </summary>
-		/// <param name="registeredType">Required - the type against which this list will be registered.</param>
-		/// <param name="targets">Optional array of targets with which to initialise the list.</param>
-		public TargetListContainer(Type registeredType, params ITarget[] targets)
+        bool ICollection<ITarget>.IsReadOnly => ((IList<ITarget>)_targets).IsReadOnly;
+
+        ITarget IList<ITarget>.this[int index] { get => ((IList<ITarget>)_targets)[index]; set => ((IList<ITarget>)_targets)[index] = value; }
+
+        private ITargetContainer Root { get; }
+        private bool AllowMultiple { get; }
+        private bool CanAdd => AllowMultiple || Count == 0;
+
+        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TargetListContainer"/> class.
+        /// </summary>
+        /// <param name="root">The root target container in which this container is registered.</param>
+        /// <param name="registeredType">Required - the type against which this list will be registered.</param>
+        /// <param name="targets">Optional array of targets with which to initialise the list.</param>
+        public TargetListContainer(ITargetContainer root, Type registeredType, params ITarget[] targets)
 		{
-			registeredType.MustNotBeNull(nameof(registeredType));
+            Root = root ?? throw new ArgumentNullException(nameof(root));
+			RegisteredType = registeredType ?? throw new ArgumentNullException(nameof(registeredType));
+            AllowMultiple = Root.GetOption(registeredType, Options.AllowMultiple.Default);
 
-			RegisteredType = registeredType;
-			_targets = new List<ITarget>(targets ?? new ITarget[0]);
-		}
+            if (AllowMultiple || targets?.Length <= 1)
+                _targets = new List<ITarget>(targets ?? new ITarget[0]);
+            else
+                throw new ArgumentException($"Too many targets provided - only one target can be registered for the type { registeredType }", nameof(targets));
+        }
 
 		/// <summary>
 		/// Registers the specified target into the list.  Note - the target is not checked to see
@@ -79,8 +85,7 @@ namespace Rezolver
 		/// <param name="registeredType">Ignored.</param>
 		public virtual void Register(ITarget target, Type registeredType = null)
 		{
-			target.MustNotBeNull(nameof(target));
-			TargetsList.Add(target);
+			Add(target ?? throw new ArgumentNullException(nameof(target)));
 		}
 
 		/// <summary>
@@ -98,7 +103,7 @@ namespace Rezolver
 		/// <param name="type">Ignored.</param>
 		public virtual IEnumerable<ITarget> FetchAll(Type type)
 		{
-			return Targets;
+			return this.AsReadOnly();
 		}
 
 		/// <summary>
@@ -109,6 +114,8 @@ namespace Rezolver
 		/// <exception cref="NotSupportedException">Always</exception>
 		public virtual ITargetContainer CombineWith(ITargetContainer existing, Type type)
 		{
+            // clearly - we could actually do this - if the other container is a list, too, we
+            // could merge its targets into this one and return this one.
 			throw new NotSupportedException();
 		}
 
@@ -132,23 +139,62 @@ namespace Rezolver
             throw new NotSupportedException();
         }
 
-        /// <summary>
-        /// Gets the <see cref="ITarget"/> at the specified index.
-        /// </summary>
-        /// <param name="index">The index.</param>
-        /// <returns>ITarget.</returns>
-        /// <exception cref="IndexOutOfRangeException">If <paramref name="index"/> is less than zero, or
-        /// if <see cref="Count"/> is zero, or if <paramref name="index"/> represents an index greater
-        /// than last item's index</exception>
-        public ITarget this[int index]
-		{
-			get
-			{
-				if (index < 0 || index > (TargetsList.Count - 1))
-					throw new IndexOutOfRangeException();
+        private void IfCanAdd(Action action)
+        {
+            if (CanAdd)
+                action();
+            else
+                throw new InvalidOperationException($"Only one target can be registered for the type { RegisteredType }");
+        }
 
-				return TargetsList[index];
-			}
-		}
+        public int IndexOf(ITarget item)
+        {
+            return ((IList<ITarget>)_targets).IndexOf(item);
+        }
+
+        public void Insert(int index, ITarget item)
+        {
+            IfCanAdd(() => ((IList<ITarget>)_targets).Insert(index, item));
+        }
+
+        public void RemoveAt(int index)
+        {
+            ((IList<ITarget>)_targets).RemoveAt(index);
+        }
+
+        public void Add(ITarget item)
+        {
+            IfCanAdd(() => ((IList<ITarget>)_targets).Add(item));
+        }
+
+        public void Clear()
+        {
+            ((IList<ITarget>)_targets).Clear();
+        }
+
+        public bool Contains(ITarget item)
+        {
+            return ((IList<ITarget>)_targets).Contains(item);
+        }
+
+        public void CopyTo(ITarget[] array, int arrayIndex)
+        {
+            ((IList<ITarget>)_targets).CopyTo(array, arrayIndex);
+        }
+
+        public bool Remove(ITarget item)
+        {
+            return ((IList<ITarget>)_targets).Remove(item);
+        }
+
+        public IEnumerator<ITarget> GetEnumerator()
+        {
+            return ((IList<ITarget>)_targets).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IList<ITarget>)_targets).GetEnumerator();
+        }
 	}
 }
