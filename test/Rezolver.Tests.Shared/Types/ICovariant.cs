@@ -8,5 +8,6 @@ namespace Rezolver.Tests.Types
 {
     public interface ICovariant<out T>
     {
+        T Out();
     }
 }

@@ -105,17 +105,6 @@ namespace Rezolver
 			elementType = TypeHelpers.GetGenericArguments(type)[0];
 			return true;
 		}
-
-		internal static IEnumerable<Type> GetAllBases(this Type t)
-		{
-			t.MustNotBeNull("t");
-			var baseType = TypeHelpers.BaseType(t);
-			while (baseType != null)
-			{
-				yield return baseType;
-				baseType = TypeHelpers.BaseType(baseType);
-			}
-		}
 	}
 
 

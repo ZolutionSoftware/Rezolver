@@ -8,6 +8,6 @@ namespace Rezolver.Tests.Types
 {
     public interface IContravariant<in T>
     {
-        
+        void In(T t);
     }
 }

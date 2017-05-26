@@ -86,12 +86,40 @@ namespace Rezolver.Tests
         }
 
         [Fact]
-        public void ShouldMatchClosedBaseForContravariantTypeParameter()
+        public void ShouldFetchClosedBaseForContravariantTypeParameter()
         {
             ITargetContainer targets = new TargetContainer();
-#error need to adjust TypeHelpers to allow for contravariance (and covariance) in the IsCompatibleWith method.
-            //var target = Target.ForType<Contravariant<BaseClass>>();
-            //targets.Register()            
+            var target = Target.ForType<Contravariant<BaseClass>>();
+            targets.Register(target, typeof(IContravariant<BaseClass>));
+
+            // this should be matched implicitly because the type argument 
+            // 'T' in IContravariant<T> is marked as 'in'.  However, it should only 
+            // do this when no specific registration is present for a more derived type
+            // also - it must not interfere with open generic registrations
+
+            // TODO: Use generic constraints to alter a target's default registered service type.
+
+            var match = targets.Fetch(typeof(IContravariant<BaseClassChild>));
+            Assert.Same(target, match);
+
+            // Note: this must be supported
+            IContravariant<IEnumerable<BaseClassChild>> f = new Contravariant<IEnumerable<BaseClass>>();
+            
+
+            // But this mustn't (line below doesn't compile - it's just here to demonstrate the type incompatibility)
+            // IGeneric<IEnumerable<BaseClassChild>> u = new Generic<IEnumerable<BaseClass>>();
+            
+        }
+
+        [Fact]
+        public void ShouldAllowCrazyCoContraVariance()
+        {
+            ITargetContainer targets = new TargetContainer();
+            var target = Target.ForType<Contravariant<IEnumerable<BaseClass>>>();
+            targets.Register(target, typeof(IContravariant<IEnumerable<BaseClass>>));
+
+            var match = targets.Fetch(typeof(IContravariant<IEnumerable<BaseClassChild>>));
+            Assert.Same(target, match);
         }
 
         ////testing overload resolution based on interface/base
@@ -99,7 +127,7 @@ namespace Rezolver.Tests
         //private interface ISuper { }
         //private class Super : ISuper { }
 
-        //private interface ISub { }
+        //private interface ISub : ISuper { }
         //private class Sub : Super, ISub { }
 
         //private class Supersub : Sub { }

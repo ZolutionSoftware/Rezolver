@@ -8,6 +8,9 @@ namespace Rezolver.Tests.Types
 {
     public class Covariant<T> : ICovariant<T>
     {
-        
+        public T Out()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

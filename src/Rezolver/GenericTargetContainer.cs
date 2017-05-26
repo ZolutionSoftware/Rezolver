@@ -131,7 +131,59 @@ namespace Rezolver
             }
         }
 
-        private IEnumerable<Type> DeriveGenericTypeSearchList(Type type)
+        private class GenericTypeSearch
+        {
+            public GenericTypeSearch Parent { get; set; }
+            public Type Type { get; set; }
+            public Type TypeParameter { get; set; }
+
+            public static implicit operator GenericTypeSearch(Type t)
+            {
+                return new GenericTypeSearch() { Type = t };
+            }
+
+            public bool TypeParameterIsContravariant
+            {
+                get
+                {
+                    return TypeParameter == null ? false :
+                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & System.Reflection.GenericParameterAttributes.Contravariant)
+                        == System.Reflection.GenericParameterAttributes.Contravariant;
+                }
+            }
+
+            public bool TypeParameterIsCovariant
+            {
+                get
+                {
+                    return TypeParameter == null ? false :
+                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & System.Reflection.GenericParameterAttributes.Covariant)
+                        == System.Reflection.GenericParameterAttributes.Covariant;
+                }
+            }
+
+            public bool TreatAsContravariant
+            {
+                get
+                {
+                    return TypeParameterIsContravariant ||
+                        (TypeParameterIsCovariant && (Parent?.TypeParameterIsContravariant ?? false));
+
+                }
+            }
+
+            public bool TreatAsCovariant
+            {
+                get
+                {
+                    return TypeParameterIsCovariant ||
+                        (TypeParameterIsContravariant && (Parent?.TypeParameterIsContravariant ?? false));
+
+                }
+            }
+        }
+
+        private IEnumerable<Type> DeriveGenericTypeSearchList(GenericTypeSearch search)
         {
             //for IFoo<IEnumerable<Nullable<T>>>, this should return something like
             //IFoo<IEnumerable<Nullable<T>>>, 
@@ -142,19 +194,32 @@ namespace Rezolver
             //using an iterator method is not the best for performance, but fetching type
             //registrations from a container builder is an operation that, so long as a caching
             //resolver is used, shouldn't be repeated often.
-
-            if (!TypeHelpers.IsGenericType(type) || TypeHelpers.IsGenericTypeDefinition(type))
+            
+            if (!TypeHelpers.IsGenericType(search.Type) || TypeHelpers.IsGenericTypeDefinition(search.Type))
             {
-                yield return type;
+                yield return search.Type;
+
+                if(search.TreatAsContravariant)
+                {
+                    //if it's a class then iterate the bases
+                    if (!TypeHelpers.IsInterface(search.Type))
+                    {
+                        foreach(var baseClass in TypeHelpers.GetAllBases(search.Type))
+                        {
+                            yield return baseClass;
+                        }
+                    }
+                }
                 yield break;
             }
 
             //for every generic type, there is at least two versions - the closed and the open
             //when you consider, also, that a generic parameter might also be a generic, with multiple
             //versions - you can see that things can get icky.  
-            var typeParams = TypeHelpers.GetGenericArguments(type);
-            var typeParamSearchLists = typeParams.Select(t => DeriveGenericTypeSearchList(t).ToArray()).ToArray();
-            var genericType = type.GetGenericTypeDefinition();
+            var typeArgs = TypeHelpers.GetGenericArguments(search.Type).Zip(TypeHelpers.GetGenericArguments(search.Type.GetGenericTypeDefinition()), 
+                (arg, param) => new GenericTypeSearch { Parent = search, Type = arg, TypeParameter = param });
+            var typeParamSearchLists = typeArgs.Select(t => DeriveGenericTypeSearchList(t).ToArray()).ToArray();
+            var genericType = search.Type.GetGenericTypeDefinition();
 
             foreach (var combination in CartesianProduct(typeParamSearchLists))
             {

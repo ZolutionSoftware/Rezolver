@@ -8,6 +8,9 @@ namespace Rezolver.Tests.Types
 {
     public class Contravariant<T> : IContravariant<T>
     {
-        
+        public void In(T t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
