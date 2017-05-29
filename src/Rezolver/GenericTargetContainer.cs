@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Rezolver
@@ -133,13 +134,31 @@ namespace Rezolver
 
         private class GenericTypeSearch
         {
-            public GenericTypeSearch Parent { get; set; }
-            public Type Type { get; set; }
-            public Type TypeParameter { get; set; }
+            public GenericTypeSearch Parent { get; }
+            public Type Type { get; }
+            public Type TypeParameter { get; }
+
+            public int ConcreteTypeHierarchyDirection { get; }
+
+            public GenericTypeSearch(Type type, Type typeParameter = null, GenericTypeSearch parent = null)
+            {
+                Parent = parent;
+                Type = type;
+                TypeParameter = typeParameter;
+
+                // determine variance, and whether concrete bases or derived types should be 
+                // sought.  This is a combination of whether the current 
+                if (TypeParameterIsCovariant)
+                {
+                    // if(Parent == null || Parent.)
+#error open targetbasetests.cs to see a whole bunch of examples.
+#error what I'm currently thinking is that contra parameters flip the search direction; but co parameters cause a derived search, but never change any pre-existing search direction.
+                }
+            }
 
             public static implicit operator GenericTypeSearch(Type t)
             {
-                return new GenericTypeSearch() { Type = t };
+                return new GenericTypeSearch(t);
             }
 
             public bool TypeParameterIsContravariant
@@ -147,8 +166,8 @@ namespace Rezolver
                 get
                 {
                     return TypeParameter == null ? false :
-                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & System.Reflection.GenericParameterAttributes.Contravariant)
-                        == System.Reflection.GenericParameterAttributes.Contravariant;
+                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & GenericParameterAttributes.Contravariant)
+                        == GenericParameterAttributes.Contravariant;
                 }
             }
 
@@ -157,28 +176,22 @@ namespace Rezolver
                 get
                 {
                     return TypeParameter == null ? false :
-                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & System.Reflection.GenericParameterAttributes.Covariant)
-                        == System.Reflection.GenericParameterAttributes.Covariant;
+                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & GenericParameterAttributes.Covariant)
+                        == GenericParameterAttributes.Covariant;
                 }
             }
 
-            public bool TreatAsContravariant
+            /// <summary>
+            /// True if the <see cref="TypeParameter"/> is not null and is either covariant
+            /// or contravariant
+            /// </summary>
+            public bool TypeParameterIsVariant
             {
                 get
                 {
-                    return TypeParameterIsContravariant ||
-                        (TypeParameterIsCovariant && (Parent?.TypeParameterIsContravariant ?? false));
-
-                }
-            }
-
-            public bool TreatAsCovariant
-            {
-                get
-                {
-                    return TypeParameterIsCovariant ||
-                        (TypeParameterIsContravariant && (Parent?.TypeParameterIsContravariant ?? false));
-
+                    return TypeParameter == null ? false :
+                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & GenericParameterAttributes.VarianceMask)
+                        == GenericParameterAttributes.VarianceMask;
                 }
             }
         }
@@ -199,7 +212,7 @@ namespace Rezolver
             {
                 yield return search.Type;
 
-                if(search.TreatAsContravariant)
+                if(search.ConcreteTypeHierarchyDirection == -1)
                 {
                     //if it's a class then iterate the bases
                     if (!TypeHelpers.IsInterface(search.Type))

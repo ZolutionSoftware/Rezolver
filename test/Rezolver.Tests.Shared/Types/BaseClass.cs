@@ -8,6 +8,6 @@ namespace Rezolver.Tests.Types
 {
     public class BaseClass
     {
-        
+        public void Foo() { }
     }
 }
