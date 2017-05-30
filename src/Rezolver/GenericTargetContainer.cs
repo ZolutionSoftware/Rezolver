@@ -132,13 +132,20 @@ namespace Rezolver
             }
         }
 
+        private enum VarianceSearchType
+        {
+            IncludeBases = -1,
+            None = 0,
+            IncludeDerived = 1
+        }
+
         private class GenericTypeSearch
         {
             public GenericTypeSearch Parent { get; }
             public Type Type { get; }
             public Type TypeParameter { get; }
 
-            public int ConcreteTypeHierarchyDirection { get; }
+            public VarianceSearchType SearchVariance { get; }
 
             public GenericTypeSearch(Type type, Type typeParameter = null, GenericTypeSearch parent = null)
             {
@@ -148,12 +155,39 @@ namespace Rezolver
 
                 // determine variance, and whether concrete bases or derived types should be 
                 // sought.  This is a combination of whether the current 
-                if (TypeParameterIsCovariant)
+                if (TypeParameterIsContravariant)
                 {
-                    // if(Parent == null || Parent.)
-#error open targetbasetests.cs to see a whole bunch of examples.
-#error what I'm currently thinking is that contra parameters flip the search direction; but co parameters cause a derived search, but never change any pre-existing search direction.
+                    // having conducted a bit of research, contravariance stacked on top of any other variance always appears to 
+                    // reverse the order that works as assignment compatible.
+                    // So one contravariant type parameter allows generic types with less derived type arguments for the same parameter
+                    // Whereas placing that inside another contravariant parameter then allows more derived types to be used
+                    // Any covariant parameters along the way basically don't appear to influence this ordering unless they're introducing
+                    // variance.  As soon as a contravariant one appears, that's when it all gets fun.
+                    // note that any invariance in the chain immediately disables further variance checks.
+                    if (parent == null)
+                        SearchVariance = VarianceSearchType.IncludeBases;
+                    else
+                    {
+                        if (parent.SearchVariance == VarianceSearchType.IncludeBases)
+                            SearchVariance = VarianceSearchType.IncludeDerived;
+                        else if (parent.SearchVariance == VarianceSearchType.IncludeDerived)
+                            SearchVariance = VarianceSearchType.IncludeBases;
+                    }
                 }
+                else if (TypeParameterIsCovariant)
+                {
+                    // nesting covariant type parameters inside contra or covariant parameters doesn't seem to alter
+                    // the relation already sought.  I.e. if we've determined that we can use base types (contravariant), then we 
+                    // still can; and if we can use derived types (covariant) then we still can.
+                    // Equally, implicit in this is that as soon as variance no longer applies to a type parameter, then 
+                    // no further variance is supported.
+                    if (parent == null)
+                        SearchVariance = VarianceSearchType.IncludeDerived;
+                    else
+                        SearchVariance = parent.SearchVariance;
+                }
+                else
+                    SearchVariance = VarianceSearchType.None;
             }
 
             public static implicit operator GenericTypeSearch(Type t)
@@ -212,7 +246,7 @@ namespace Rezolver
             {
                 yield return search.Type;
 
-                if(search.ConcreteTypeHierarchyDirection == -1)
+                if(search.SearchVariance == VarianceSearchType.IncludeBases)
                 {
                     //if it's a class then iterate the bases
                     if (!TypeHelpers.IsInterface(search.Type))
@@ -230,7 +264,7 @@ namespace Rezolver
             //when you consider, also, that a generic parameter might also be a generic, with multiple
             //versions - you can see that things can get icky.  
             var typeArgs = TypeHelpers.GetGenericArguments(search.Type).Zip(TypeHelpers.GetGenericArguments(search.Type.GetGenericTypeDefinition()), 
-                (arg, param) => new GenericTypeSearch { Parent = search, Type = arg, TypeParameter = param });
+                (arg, param) => new GenericTypeSearch(arg, param, search));
             var typeParamSearchLists = typeArgs.Select(t => DeriveGenericTypeSearchList(t).ToArray()).ToArray();
             var genericType = search.Type.GetGenericTypeDefinition();
 

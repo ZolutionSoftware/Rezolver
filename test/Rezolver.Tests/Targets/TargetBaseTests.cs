@@ -35,13 +35,29 @@ namespace Rezolver.Tests.Targets
             { typeof(BaseClassChild), typeof(BaseClass) },
             { typeof(BaseClassGrandchild), typeof(BaseClass) },
             { typeof(BaseClassGrandchild[]), typeof(BaseClassChild[]) },
-            //Covariance
+            // Covariance
             { typeof(Func<BaseClassChild>), typeof(Func<BaseClass>) },
-            //Contravariance
+            { typeof(ICovariant<string>), typeof(ICovariant<object>) },
+            { typeof(Covariant<string>), typeof(ICovariant<object>) },
+            // Contravariance
             { typeof(Action<BaseClass>), typeof(Action<BaseClassChild>) },
-            //Variance combinations
-            { typeof(Action<Func<BaseClassChild>>), typeof(Action<Func<BaseClass>>) },
-            { typeof(Func<Action<BaseClassChild>>), typeof(Func<Action<BaseClass>>) }
+            { typeof(IContravariant<BaseClass>), typeof(IContravariant<BaseClassChild>) },
+            { typeof(Contravariant<BaseClass>), typeof(IContravariant<BaseClassChild>) },
+            // Variance combinations
+            // ---------------------
+            // When combining a contravariant type param as an argument to a covariant
+            // type param - the normal contravariance rules apply
+            { typeof(Action<Func<BaseClass>>), typeof(Action<Func<BaseClassChild>>) },
+            { typeof(Func<Action<BaseClass>>), typeof(Func<Action<BaseClassChild>>) },
+            // class<class<type>> -> iface<iface<type>> works because class->interface is 'smaller' assignment
+            { typeof(Covariant<Covariant<string>>), typeof(ICovariant<ICovariant<object>>) },
+            { typeof(Covariant<Covariant<string>>), typeof(ICovariant<object>) },
+            // outer type -> interface works purely because of standard assignment equality
+            // first generic arguments must be of the same generic type (i.e. IContravariant<> because
+            // that type parameter is itself contravariant, which would only allow bases or interfaces
+            { typeof(Contravariant<IContravariant<string>>), typeof(IContravariant<IContravariant<object>>) },
+            { typeof(Contravariant<object>), typeof(IContravariant<IContravariant<object>>) }
+
         };
 
         [Theory]
@@ -55,6 +71,16 @@ namespace Rezolver.Tests.Targets
         [Fact]
         public void FunWithVariance()
         {
+            // allows nested class type because covariance allows derived/implementing types
+            ICovariant<ICovariant<object>> cco = new Covariant<Covariant<string>>();
+            // so, the inner type argument obeys contravariance rules (allowing base types or interfaces)
+            // whilst the outer type obeys standard covariance - allowing more derived types.
+            ICovariant<IContravariant<string>> cocco = new Covariant<Contravariant<IEnumerable<char>>>();
+            // requires same IContravariant middle interface, but allows derived/implementing
+            // types as innermost generic argument - because contravariance requires equal types
+            // or bases of types.
+            IContravariant<IContravariant<object>> coco = new Contravariant<IContravariant<string>>();
+            IContravariant<IContravariant<object>> coco3 = new Contravariant<object>();
             // starting position:
             // if a class type is passed to a contravariant type parameter, then any of its
             // bases are also possible matches.
