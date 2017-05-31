@@ -29,46 +29,56 @@ namespace Rezolver.Tests.Targets
 
         public static TheoryData<Type, Type> SupportsTypeData = new TheoryData<Type, Type>()
         {
-            { typeof(string), typeof(string) },
-            { typeof(string), typeof(object) },
-            { typeof(string), typeof(IEnumerable<char>) },
-            { typeof(BaseClassChild), typeof(BaseClass) },
-            { typeof(BaseClassGrandchild), typeof(BaseClass) },
-            { typeof(BaseClassGrandchild[]), typeof(BaseClassChild[]) },
-            // Covariance
-            { typeof(Func<BaseClassChild>), typeof(Func<BaseClass>) },
-            { typeof(ICovariant<string>), typeof(ICovariant<object>) },
-            { typeof(Covariant<string>), typeof(ICovariant<object>) },
-            // Contravariance
-            { typeof(Action<BaseClass>), typeof(Action<BaseClassChild>) },
-            { typeof(IContravariant<BaseClass>), typeof(IContravariant<BaseClassChild>) },
-            { typeof(Contravariant<BaseClass>), typeof(IContravariant<BaseClassChild>) },
-            // Variance combinations
-            // ---------------------
-            // When combining a contravariant type param as an argument to a covariant
-            // type param - the normal contravariance rules apply
-            { typeof(Action<Func<BaseClass>>), typeof(Action<Func<BaseClassChild>>) },
-            { typeof(Func<Action<BaseClass>>), typeof(Func<Action<BaseClassChild>>) },
-            // class<class<type>> -> iface<iface<type>> works because class->interface is 'smaller' assignment
-            { typeof(Covariant<Covariant<string>>), typeof(ICovariant<ICovariant<object>>) },
-            { typeof(Covariant<Covariant<string>>), typeof(ICovariant<object>) },
-            // outer type -> interface works purely because of standard assignment equality
-            // first generic arguments must be of the same generic type (i.e. IContravariant<> because
-            // that type parameter is itself contravariant, which would only allow bases or interfaces
-            { typeof(Contravariant<IContravariant<string>>), typeof(IContravariant<IContravariant<object>>) },
-            { typeof(Contravariant<object>), typeof(IContravariant<IContravariant<object>>) }
-
+            // Target Type                                      Supports Type
+            { typeof(string),                                   typeof(string) },
+            { typeof(string),                                   typeof(object) },
+            { typeof(string),                                   typeof(IEnumerable<char>) },
+            { typeof(BaseClassChild),                           typeof(BaseClass) },
+            { typeof(BaseClassGrandchild),                      typeof(BaseClass) },
+            { typeof(BaseClassGrandchild[]),                    typeof(BaseClassChild[]) },
         };
 
         [Theory]
-        [MemberData("SupportsTypeData")]
+        [MemberData(nameof(SupportsTypeData))]
         public void ShouldSupportType(Type targetType, Type shouldBeSupported)
         {
             var target = new TestTarget(targetType);
             Assert.True(target.SupportsType(shouldBeSupported));
         }
 
-        [Fact]
+        public static TheoryData<Type, Type> SupportsVariantTypeData = new TheoryData<Type, Type>()
+        {
+            // Covariance
+            { typeof(Func<BaseClassChild>),                     typeof(Func<BaseClass>) },
+            { typeof(Covariant<string>),                        typeof(ICovariant<IEnumerable<char>>) },
+            { typeof(Covariant<string>),                        typeof(ICovariant<object>) },
+            // Contravariance
+            { typeof(Action<BaseClass>),                        typeof(Action<BaseClassChild>) },
+            { typeof(Contravariant<BaseClass>),                 typeof(IContravariant<BaseClassChild>) },
+            // Variance combinations
+            // ---------------------
+            // When combining a contravariant type param as an argument to a covariant
+            // type param - the normal contravariance rules apply
+            { typeof(Action<Func<BaseClass>>),                  typeof(Action<Func<BaseClassChild>>) },
+            { typeof(Func<Action<BaseClass>>),                  typeof(Func<Action<BaseClassChild>>) },
+            // class<class<type>> -> iface<iface<type>> works because class->interface is 'smaller' assignment
+            { typeof(Covariant<Covariant<string>>),             typeof(ICovariant<ICovariant<object>>) },
+            { typeof(Covariant<Covariant<string>>),             typeof(ICovariant<object>) },
+            // outer type -> interface works purely because of standard assignment equality
+            // first generic arguments must be of the same generic type (i.e. IContravariant<> because
+            // that type parameter is itself contravariant, which would only allow bases or interfaces
+            { typeof(Contravariant<IContravariant<string>>),    typeof(IContravariant<IContravariant<object>>) },
+            { typeof(Contravariant<object>),                    typeof(IContravariant<IContravariant<object>>) }
+        };
+
+        [Theory]
+        [MemberData(nameof(SupportsVariantTypeData))]
+        public void ShouldSupportVariantType(Type tTarget, Type tSupports)
+        {
+            var target = new TestTarget(tTarget);
+            Assert.True(target.SupportsType(tSupports));
+        }
+
         public void FunWithVariance()
         {
             // allows nested class type because covariance allows derived/implementing types

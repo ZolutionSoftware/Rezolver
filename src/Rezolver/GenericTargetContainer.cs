@@ -95,7 +95,7 @@ namespace Rezolver
             //If we don't find one - then we return the targets that have been registered against the 
             //open generic type definition.
             ITarget baseResult = null;
-            foreach (var searchType in DeriveGenericTypeSearchList(type))
+            foreach (var searchType in new RegistrationTypeSearch(type))
             {
                 if ((baseResult = base.Fetch(searchType)) != null)
                     return baseResult;
@@ -116,7 +116,7 @@ namespace Rezolver
             bool foundOne = false;
 
             //all generics are returned in descending order of specificity
-            foreach (var searchType in DeriveGenericTypeSearchList(type))
+            foreach (var searchType in new RegistrationTypeSearch(type).Distinct())
             {
                 foreach (var result in base.FetchAll(searchType))
                 {
@@ -131,163 +131,5 @@ namespace Rezolver
                 yield return result;
             }
         }
-
-        private enum VarianceSearchType
-        {
-            IncludeBases = -1,
-            None = 0,
-            IncludeDerived = 1
-        }
-
-        private class GenericTypeSearch
-        {
-            public GenericTypeSearch Parent { get; }
-            public Type Type { get; }
-            public Type TypeParameter { get; }
-
-            public VarianceSearchType SearchVariance { get; }
-
-            public GenericTypeSearch(Type type, Type typeParameter = null, GenericTypeSearch parent = null)
-            {
-                Parent = parent;
-                Type = type;
-                TypeParameter = typeParameter;
-
-                // determine variance, and whether concrete bases or derived types should be 
-                // sought.  This is a combination of whether the current 
-                if (TypeParameterIsContravariant)
-                {
-                    // having conducted a bit of research, contravariance stacked on top of any other variance always appears to 
-                    // reverse the order that works as assignment compatible.
-                    // So one contravariant type parameter allows generic types with less derived type arguments for the same parameter
-                    // Whereas placing that inside another contravariant parameter then allows more derived types to be used
-                    // Any covariant parameters along the way basically don't appear to influence this ordering unless they're introducing
-                    // variance.  As soon as a contravariant one appears, that's when it all gets fun.
-                    // note that any invariance in the chain immediately disables further variance checks.
-                    if (parent == null)
-                        SearchVariance = VarianceSearchType.IncludeBases;
-                    else
-                    {
-                        if (parent.SearchVariance == VarianceSearchType.IncludeBases)
-                            SearchVariance = VarianceSearchType.IncludeDerived;
-                        else if (parent.SearchVariance == VarianceSearchType.IncludeDerived)
-                            SearchVariance = VarianceSearchType.IncludeBases;
-                    }
-                }
-                else if (TypeParameterIsCovariant)
-                {
-                    // nesting covariant type parameters inside contra or covariant parameters doesn't seem to alter
-                    // the relation already sought.  I.e. if we've determined that we can use base types (contravariant), then we 
-                    // still can; and if we can use derived types (covariant) then we still can.
-                    // Equally, implicit in this is that as soon as variance no longer applies to a type parameter, then 
-                    // no further variance is supported.
-                    if (parent == null)
-                        SearchVariance = VarianceSearchType.IncludeDerived;
-                    else
-                        SearchVariance = parent.SearchVariance;
-                }
-                else
-                    SearchVariance = VarianceSearchType.None;
-            }
-
-            public static implicit operator GenericTypeSearch(Type t)
-            {
-                return new GenericTypeSearch(t);
-            }
-
-            public bool TypeParameterIsContravariant
-            {
-                get
-                {
-                    return TypeParameter == null ? false :
-                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & GenericParameterAttributes.Contravariant)
-                        == GenericParameterAttributes.Contravariant;
-                }
-            }
-
-            public bool TypeParameterIsCovariant
-            {
-                get
-                {
-                    return TypeParameter == null ? false :
-                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & GenericParameterAttributes.Covariant)
-                        == GenericParameterAttributes.Covariant;
-                }
-            }
-
-            /// <summary>
-            /// True if the <see cref="TypeParameter"/> is not null and is either covariant
-            /// or contravariant
-            /// </summary>
-            public bool TypeParameterIsVariant
-            {
-                get
-                {
-                    return TypeParameter == null ? false :
-                        (TypeHelpers.GetGenericParameterAttributes(TypeParameter) & GenericParameterAttributes.VarianceMask)
-                        == GenericParameterAttributes.VarianceMask;
-                }
-            }
-        }
-
-        private IEnumerable<Type> DeriveGenericTypeSearchList(GenericTypeSearch search)
-        {
-            //for IFoo<IEnumerable<Nullable<T>>>, this should return something like
-            //IFoo<IEnumerable<Nullable<T>>>, 
-            //IFoo<IEnumerable<Nullable<>>>, 
-            //IFoo<IEnumerable<>>,
-            //IFoo<>
-
-            //using an iterator method is not the best for performance, but fetching type
-            //registrations from a container builder is an operation that, so long as a caching
-            //resolver is used, shouldn't be repeated often.
-            
-            if (!TypeHelpers.IsGenericType(search.Type) || TypeHelpers.IsGenericTypeDefinition(search.Type))
-            {
-                yield return search.Type;
-
-                if(search.SearchVariance == VarianceSearchType.IncludeBases)
-                {
-                    //if it's a class then iterate the bases
-                    if (!TypeHelpers.IsInterface(search.Type))
-                    {
-                        foreach(var baseClass in TypeHelpers.GetAllBases(search.Type))
-                        {
-                            yield return baseClass;
-                        }
-                    }
-                }
-                yield break;
-            }
-
-            //for every generic type, there is at least two versions - the closed and the open
-            //when you consider, also, that a generic parameter might also be a generic, with multiple
-            //versions - you can see that things can get icky.  
-            var typeArgs = TypeHelpers.GetGenericArguments(search.Type).Zip(TypeHelpers.GetGenericArguments(search.Type.GetGenericTypeDefinition()), 
-                (arg, param) => new GenericTypeSearch(arg, param, search));
-            var typeParamSearchLists = typeArgs.Select(t => DeriveGenericTypeSearchList(t).ToArray()).ToArray();
-            var genericType = search.Type.GetGenericTypeDefinition();
-
-            foreach (var combination in CartesianProduct(typeParamSearchLists))
-            {
-                yield return genericType.MakeGenericType(combination.ToArray());
-            }
-            yield return genericType;
-        }
-
-        static IEnumerable<IEnumerable<T>> CartesianProduct<T>
-        (IEnumerable<IEnumerable<T>> sequences)
-        {
-            //thank you Eric Lippert...
-            IEnumerable<IEnumerable<T>> emptyProduct =
-              new[] { Enumerable.Empty<T>() };
-            return sequences.Aggregate(
-              emptyProduct,
-              (accumulator, sequence) =>
-                from accseq in accumulator
-                from item in sequence
-                select accseq.Concat(new[] { item }));
-        }
-
     }
 }
