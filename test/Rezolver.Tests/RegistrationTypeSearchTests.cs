@@ -96,11 +96,34 @@ namespace Rezolver.Tests
                     typeof(SimpleGenericInterface<,,>)
                 }
             },
+            // this time, starting with an open generic as a type argument to the outer generic - which drastically shortens the potential list
+            // of types
+            {
+                typeof(SimpleGenericInterface<>).MakeGenericType(typeof(SimpleGenericClass<>)),
+                new[] {
+                    typeof(SimpleGenericInterface<>).MakeGenericType(typeof(SimpleGenericClass<>)),
+                    typeof(SimpleGenericInterface<>)
+                }
+            },
+            {
+                typeof(SimpleGenericInterface<,>).MakeGenericType(typeof(SimpleGenericClass<>), typeof(SimpleGenericValueType<>)),
+                new[] {
+                    typeof(SimpleGenericInterface<,>).MakeGenericType(typeof(SimpleGenericClass<>), typeof(SimpleGenericValueType<>)),
+                    typeof(SimpleGenericInterface<,>)
+                }
+            },
+            {
+                typeof(SimpleGenericInterface<,,>).MakeGenericType(typeof(SimpleGenericClass<>), typeof(SimpleGenericValueType<>), typeof(SimpleGenericInterface<>)),
+                new[] {
+                    typeof(SimpleGenericInterface<,,>).MakeGenericType(typeof(SimpleGenericClass<>), typeof(SimpleGenericValueType<>), typeof(SimpleGenericInterface<>)),
+                    typeof(SimpleGenericInterface<,,>)
+                }
+            },
         };
 
         [Theory]
         [MemberData(nameof(NestedGenericTypes))]
-        public void ShouldReturnClosedAndOpenGenericMultiParam(Type type, Type[] expected)
+        public void ShouldHandleNestedGenerics(Type type, Type[] expected)
         {
             var result = new RegistrationTypeSearch(type).ToArray();
             Assert.Equal(expected, result);
@@ -138,15 +161,95 @@ namespace Rezolver.Tests
                     typeof(Action<object>),
                     typeof(Action<>)
                 }
+            },
+            // Two-parameter contravariance
+            {
+                typeof(Action<BaseClassGrandchild, BaseClassGrandchild>),
+                new[]
+                {
+                    typeof(Action<BaseClassGrandchild, BaseClassGrandchild>),
+                    typeof(Action<BaseClassGrandchild, BaseClassChild>),
+                    typeof(Action<BaseClassGrandchild, BaseClass>),
+                    typeof(Action<BaseClassGrandchild, object>),
+                    typeof(Action<BaseClassChild, BaseClassGrandchild>),
+                    typeof(Action<BaseClassChild, BaseClassChild>),
+                    typeof(Action<BaseClassChild, BaseClass>),
+                    typeof(Action<BaseClassChild, object>),
+                    typeof(Action<BaseClass, BaseClassGrandchild>),
+                    typeof(Action<BaseClass, BaseClassChild>),
+                    typeof(Action<BaseClass, BaseClass>),
+                    typeof(Action<BaseClass, object>),
+                    typeof(Action<object, BaseClassGrandchild>),
+                    typeof(Action<object, BaseClassChild>),
+                    typeof(Action<object, BaseClass>),
+                    typeof(Action<object, object>),
+                    typeof(Action<,>)
+                }
             }
         };
 
         [Theory]
         [MemberData(nameof(ContravariantTypes))]
-        public void ShouldReturnCorrectCombinationForSimpleContravariant(Type type, Type[] expected)
+        public void ShouldReturnCorrectCombinationForContravariant(Type type, Type[] expected)
         {
             var result = new RegistrationTypeSearch(type).ToArray();
+            // assert that instances of each closed generic search type can be assigned to the search type 
+            // - this is double-checking our type compatibility assertions before checking that the results 
+            // are the ones we expect.
+            Assert.All(expected.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
+                t => type.IsAssignableFrom(t));
             Assert.Equal(expected, result);
+            
         }
+
+        public static TheoryData<Type, Type[]> NestedContravariantTypes = new TheoryData<Type, Type[]>
+        {
+            {
+                typeof(IContravariant<IContravariant<BaseClass>>),
+                new[] {
+                    // inner most type argument would normally be descended because its contravariant,
+                    // but contravariance inverts each time it's nested (effectively becoming covariance)
+                    //typeof(IContravariant<IContravariant<BaseClassGrandchild>>),
+                    //typeof(IContravariant<IContravariant<BaseClassChild>>),
+                    typeof(IContravariant<IContravariant<BaseClass>>),
+                    typeof(IContravariant<>).MakeGenericType(typeof(IContravariant<>)),
+                    typeof(IContravariant<>)
+                }
+            }
+        };
+
+        [Theory]
+        [MemberData(nameof(NestedContravariantTypes))]
+        public void ShouldReturnCorrectCombinationForNestedContravariant(Type type, Type[] expected)
+        {
+            var result = new RegistrationTypeSearch(type).ToArray();
+
+            Assert.All(expected.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
+                t => t.IsAssignableFrom(type));
+            Assert.Equal(expected, result);
+
+            // standard contra
+            Action<BaseClassGrandchild> m = (Action<BaseClass>)null;
+            // double contra (effectively becomes co)
+            Action<Action<BaseClass>> m2 = (Action<Action<BaseClassGrandchild>>)null;
+            // covariance mixed with contra.  Note: contra search direction wins.
+            Action<Func<BaseClassGrandchild>> m3 = (Action<Func<BaseClass>>)null;
+            // double contra with co mixed in different positions - again, same as straight double contra.
+            Action<Action<Func<BaseClass>>> m4a = (Action<Action<Func<BaseClassGrandchild>>>)null;
+            Action<Func<Action<BaseClass>>> m4b = (Action<Func<Action<BaseClassGrandchild>>>)null;
+            Func<Action<Action<BaseClass>>> m4c = (Func<Action<Action<BaseClassGrandchild>>>)null;
+            // taking it to extremes
+            Action<Func<Func<Func<Action<BaseClass>>>>> m5 = (Action<Func<Func<Func<Action<BaseClassGrandchild>>>>>)null;
+            Action<Func<Func<Func<Action<Action<BaseClassGrandchild>>>>>> m6 = (Action<Func<Func<Func<Action<Action<BaseClass>>>>>>)null;
+
+            // 'odd' contravariance behaves normally
+            // 'even' contravariance is reversed, so IContra<> <--> Contra<> and BaseClass <--> BaseClassGrandchild
+            // alternately as we descend through the varying levels of contra-ness.  I'm yet to fully grasp exactly why,
+            // except when I do a proper worked example it always makes sense.
+            Action<Contravariant<BaseClass>> n1 = (Action<IContravariant<BaseClassGrandchild>>)null;
+            Action<Contravariant<Action<BaseClassGrandchild>>> n2 = (Action<IContravariant<Action<BaseClass>>>)null;
+            Action<Contravariant<IContravariant<BaseClassGrandchild>>> n3 = (Action<IContravariant<Contravariant<BaseClass>>>)null;
+        }
+        
     }
 }
