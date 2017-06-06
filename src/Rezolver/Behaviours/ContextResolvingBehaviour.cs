@@ -44,7 +44,8 @@ namespace Rezolver.Behaviours
         /// </summary>
         public static ContextResolvingBehaviour Instance { get; } = new ContextResolvingBehaviour();
         /// <summary>
-        /// Attaches this behaviour to the target container.
+        /// Attaches this behaviour to the target container, adding a registration to the <paramref name="targets"/>
+        /// for the type <see cref="IResolveContext"/>.
         /// 
         /// Note - if the <paramref name="targets"/> already has a registration for <see cref="IResolveContext"/>,
         /// then the behaviour DOES NOT overwrite it.

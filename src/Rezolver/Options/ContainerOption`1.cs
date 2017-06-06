@@ -36,7 +36,7 @@ namespace Rezolver.Options
     /// 
     /// ### Note:
     /// 
-    /// Whilst Rezolver uses this type for all its configurable options, the options API implemented by the extension methods 
+    /// Whilst Rezolver uses this type for most of its configurable options, the options API implemented by the extension methods 
     /// (e.g. <see cref="OptionsTargetContainerExtensions.GetOption{TOption}(ITargetContainer, TOption)"/>
     /// or <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>) do **not** require
     /// you to use it.</remarks>

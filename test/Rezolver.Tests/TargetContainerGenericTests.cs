@@ -122,12 +122,43 @@ namespace Rezolver.Tests
         public void ShouldNotFetchConstrainedGenericForIncompatibleType()
         {
             ITargetContainer targets = new TargetContainer();
-            var target = Target.ForType(typeof(ConstrainedGeneric<>));
-            targets.Register(target, typeof(IGeneric<>));
+            var expected = Target.ForType(typeof(Generic<>));
+            var notexpected = Target.ForType(typeof(ConstrainedGeneric<>));
+            targets.Register(expected, typeof(IGeneric<>));
+            targets.Register(notexpected, typeof(IGeneric<>));
 
-            // so this should return a fallback target.
             var fetched = targets.Fetch(typeof(IGeneric<string>));
-            Assert.True(fetched.UseFallback);      
+            Assert.Same(expected, fetched);
+
+            var all = targets.FetchAll(typeof(IGeneric<string>));
+            Assert.Single(all, expected);
+        }
+
+        [Fact]
+        public void ShouldFetchConstrainedGenericInsteadOfOpen()
+        {
+            // registration order matters, for now, when registering constrained generics
+            // because they are registered against the open generic type.  Therefore, if 
+            // an unconstrained open generic is registered *after* one with constraints, then
+            // that will win for any single-service Fetch.
+
+            // When #24 is done, it should be possible to make it so that open generics with 
+            // base/interface restrictions are registered against partially closed generics.
+            // Might get a bit tricky if a type parameter has multiple interfaces, or when a constraint
+            // references another type parameter.
+
+            ITargetContainer targets = new TargetContainer();
+            var openTarget = Target.ForType(typeof(Generic<>));
+            var constrainedTarget = Target.ForType(typeof(ConstrainedGeneric<>));
+            targets.Register(openTarget, typeof(IGeneric<>));
+            targets.Register(constrainedTarget, typeof(IGeneric<>));
+
+            var fetched = targets.Fetch(typeof(IGeneric<BaseClassChild>));
+            Assert.Same(constrainedTarget, fetched);
+
+            //but now - this should return both as they both apply
+            var all = targets.FetchAll(typeof(IGeneric<BaseClassChild>));
+            Assert.Equal(new[] { openTarget, constrainedTarget }, all);
         }
     }
 }

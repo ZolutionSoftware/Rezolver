@@ -112,7 +112,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void GenericCtorTarget_ShouldAlloweRecursionForDifferentGenericTypes()
+		public void GenericCtorTarget_ShouldAllowRecursionForDifferentGenericTypes()
 		{
 			//this test verifies that generic targets can be compiled recursively so long
 			//as the target types for those targets is different.
@@ -138,5 +138,31 @@ namespace Rezolver.Tests.Compilation.Specification
 		//tested most single-parameter scenarios and everything has worked.
 		//These exotica are effectively Bind(context) test cases, which are handled by the main library's
 		//test suite.
+
+        [Fact]
+        public void GenericCtorTarget_ShouldMatchConstrainedGeneric()
+        {
+            var targets = CreateTargetContainer();
+
+            targets.RegisterType(typeof(Generic<>), typeof(IGeneric<>));
+            targets.RegisterType(typeof(ConstrainedGeneric<>), typeof(IGeneric<>));
+
+            var container = CreateContainer(targets);
+
+            var result = Assert.IsType<ConstrainedGeneric<BaseClassChild>>(container.Resolve<IGeneric<BaseClassChild>>());
+        }
+
+        [Fact]
+        public void GenericCtorTarget_ShouldFavourOpenGenericWhenConstraintsNotMatched()
+        {
+            var targets = CreateTargetContainer();
+
+            targets.RegisterType(typeof(Generic<>), typeof(IGeneric<>));
+            targets.RegisterType(typeof(ConstrainedGeneric<>), typeof(IGeneric<>));
+
+            var container = CreateContainer(targets);
+
+            var result = Assert.IsType<Generic<string>>(container.Resolve<IGeneric<string>>());
+        }
 	}
 }

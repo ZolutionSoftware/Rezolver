@@ -14,7 +14,7 @@ namespace Rezolver
     /// construction (see the <see cref="ContainerBase.ContainerBase(IContainerBehaviour, ITargetContainer)"/> 
     /// constructor).  If one is not passed then a default is used from the <see cref="GlobalBehaviours"/> class.
     /// 
-    /// The actual one used depends whether it's an <see cref="OverridingContainer"/> or not: Rezolver has global 
+    /// The one used depends whether it's an <see cref="OverridingContainer"/> or not: Rezolver has global 
     /// behaviours for the standalone container types (via the <see cref="GlobalBehaviours.ContainerBehaviour"/> 
     /// property) and for overriding containers (via the <see cref="GlobalBehaviours.OverridingContainerBehaviour"/> 
     /// property).

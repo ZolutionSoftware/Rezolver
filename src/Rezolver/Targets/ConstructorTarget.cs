@@ -287,11 +287,11 @@ namespace Rezolver.Targets
 			else
 				boundArgs = _parameterBindings;
 
-            //use either the member binding behaviour that was passed on construction, 
-            var memberBindingBehaviour = MemberBindingBehaviour;
-            if (memberBindingBehaviour == null)
-                context.ResolveContext.TryResolve(out memberBindingBehaviour);
-
+            // use either the member binding behaviour that was passed on construction, or locate the
+            // option from the compile context's target container.
+            var memberBindingBehaviour = MemberBindingBehaviour 
+                ?? context.GetOption(ctor.DeclaringType, Rezolver.MemberBindingBehaviour.Default);
+            
 			return new ConstructorBinding(ctor, boundArgs, memberBindingBehaviour?.GetMemberBindings(context, DeclaredType));
 		}
 

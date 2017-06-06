@@ -63,6 +63,12 @@ namespace Rezolver
         {
             if (serviceType == null) serviceType = target.DeclaredType;
 
+            // TODO: if the target's declared type is generic and has any constraints, then 
+            // map the generic type to the service type and if any of the parameters have base/interface
+            // constraints then bump the registration to a (possibly partially) closed generic.
+            // Need partial generic specialisations for this (issue #24) - also need to pull the generic type
+            // mapping algorithm out of GenericConstructorTarget
+
             //if the type we're adding against is equal to this container's generic type definition,
             //then we add it to the collection of targets that are registered specifically against
             //this type.

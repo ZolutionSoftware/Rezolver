@@ -4,19 +4,22 @@ namespace Rezolver
 {
     /// <summary>
     /// Represents a behaviour that can be attached to <see cref="ITargetContainer"/> instances to
-    /// customise how it behaves.
+    /// customise how it behaves - typically by registering targets or target containers to the 
+    /// passed <see cref="ITargetContainer"/> via its <see cref="ITargetContainer.Register(ITarget, System.Type)"/>
+    /// or <see cref="ITargetContainer.RegisterContainer(System.Type, ITargetContainer)"/> methods.
     /// </summary>
-    /// <remarks>This abstraction provides a way to customise and extend an <see cref="ITargetContainer"/>;
-    /// typically by registering one or more <see cref="ITarget"/> or <see cref="ITargetContainer"/>
-    /// objects in the target container passed to <see cref="Attach(ITargetContainer)"/>.
+    /// <remarks>Behaviours are separate from options (<see cref="OptionsTargetContainerExtensions"/>)
+    /// in that options are *read* by the code in the Rezolver framework to alter how certain functionality
+    /// works (e.g. enabling/disabling multiple registrations or generic contravariance).
     /// 
-    /// While similar to <see cref="IContainerBehaviour"/>, this is specifically intended to be used when
-    /// creating any <see cref="ITargetContainer"/>.  Behaviours that are implemented through this
-    /// interface are typically used to customise how the underlying <see cref="ITarget"/> registrations are stored
-    /// and retrieved in the target container.
+    /// Instead, behaviours are typically used to add one or more registrations to an <see cref="ITargetContainer"/>
+    /// to extend the types that a container will be able to inject without any further configuration by the application.
     /// 
-    /// Functionality such as enumerable resolving is configured by instances of this interface.</remarks>
+    /// For example, the automatic injection of enumerables is enabled by attaching the 
+    /// <see cref="Behaviours.AutoEnumerableBehaviour"/>.
+    /// </remarks>
     /// <seealso cref="GlobalBehaviours.TargetContainerBehaviour"/>
+    /// <seealso cref="Behaviours.AutoEnumerableBehaviour"/>
     public interface ITargetContainerBehaviour
     {
         /// <summary>

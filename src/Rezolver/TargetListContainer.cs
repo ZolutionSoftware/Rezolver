@@ -89,12 +89,22 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Always returns the <see cref="DefaultTarget"/>
+		/// Returns the first target which supports the passed <paramref name="type"/>
 		/// </summary>
-		/// <param name="type">Ignored.</param>
+        /// <param name="type">The type for which a target is sought.</param>
 		public virtual ITarget Fetch(Type type)
 		{
-			return DefaultTarget;
+            // TODO: Allow specifying which way we search.  For now we're searching most recently
+            // registered first.
+            // TODO: allow caching of per-type lookups.  Throw cache away if the list changes.
+            ITarget temp;
+            for (var f = Count-1; f >= 0; f--)
+            {
+                temp = _targets[f];
+                if (temp.SupportsType(type))
+                    return temp;
+            }
+			return null;
 		}
 
 		/// <summary>
@@ -103,7 +113,8 @@ namespace Rezolver
 		/// <param name="type">Ignored.</param>
 		public virtual IEnumerable<ITarget> FetchAll(Type type)
 		{
-			return this.AsReadOnly();
+            // always returns in order of registration
+			return this.Where(t => t.SupportsType(type)).AsReadOnly();
 		}
 
 		/// <summary>

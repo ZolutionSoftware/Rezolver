@@ -191,7 +191,7 @@ namespace Rezolver.Tests.Targets
 					() => {
 						var container = new Container();
 						//fallback switched off for the target because we're simulating a direct match
-						container.Register(new TestTarget(typeof(string), useFallBack: false));
+						container.Register(new TestTarget(typeof(string), useFallBack: false, supportsType: true));
 						return container;
 					},
 					description: "Constructor with greatest number of resolved arguments supersedes greedy behaviour"

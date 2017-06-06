@@ -104,8 +104,7 @@ namespace Rezolver
 
             // expression compiler is used by default,
             // and members of classes are not bound by default.
-            ContainerBehaviour.UseExpressionCompiler()
-                .UseMemberBindingBehaviour(MemberBindingBehaviour.BindNone);
+            ContainerBehaviour.UseExpressionCompiler();
 
             OverridingContainerBehaviour.Add(OverridingEnumerableBehaviour.Instance);
         }

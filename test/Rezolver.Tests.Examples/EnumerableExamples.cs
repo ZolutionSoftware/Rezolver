@@ -217,8 +217,8 @@ namespace Rezolver.Tests.Examples
             container.RegisterType<MyService1>();
             container.RegisterType<MyService2>();
             container.RegisterDelegate<IEnumerable<IMyService>>(
-                rc => new IMyService[] { rc.Resolve<MyService1>(), rc.Resolve<MyService2>()
-            });
+                rc => new IMyService[] { rc.Resolve<MyService2>(), rc.Resolve<MyService1>() }
+                );
 
             var result = container.Resolve<IEnumerable<IMyService>>().ToArray();
 
