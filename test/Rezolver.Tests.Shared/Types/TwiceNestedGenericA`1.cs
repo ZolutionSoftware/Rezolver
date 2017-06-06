@@ -11,11 +11,5 @@ namespace Rezolver.Tests.Types
 		{
 			get; private set;
 		}
-
-		//even more complicated now - double nesting of generic parameters
-		public void Foo()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

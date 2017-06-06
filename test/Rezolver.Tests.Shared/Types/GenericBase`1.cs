@@ -11,7 +11,5 @@ namespace Rezolver.Tests.Types
 		{
 			get; protected set;
 		}
-
-		public abstract void Foo();
 	}
 }

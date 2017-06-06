@@ -8,6 +8,5 @@ namespace Rezolver.Tests.Types
 	public interface IGeneric<T>
 	{
 		T Value { get; }
-		void Foo();
 	}
 }

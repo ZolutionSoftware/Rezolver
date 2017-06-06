@@ -84,7 +84,7 @@ namespace Rezolver
             if (targets == null) throw new ArgumentNullException(nameof(targets));
             if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
 
-            bool useGlobalFallback = GetOption(targets, UseGlobalsForUnsetServiceOptions.Default);
+            bool useGlobalFallback = GetOption(targets, EnableGlobalOptions.Default);
 
             var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<,>)
                 .MakeGenericType(serviceType, typeof(TOption)));
@@ -100,7 +100,7 @@ namespace Rezolver
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 
-            bool useGlobalFallback = GetOption(targets, UseGlobalsForUnsetServiceOptions.Default);
+            bool useGlobalFallback = GetOption(targets, EnableGlobalOptions.Default);
 
             var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<TService, TOption>));
 

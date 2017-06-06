@@ -86,7 +86,7 @@ namespace Rezolver.Tests
             Assert.Same(target, fetched2);
         }
 
-        public static TheoryData<Type, Type> CovariantTypeData = new TheoryData<Type, Type>
+        public static TheoryData<Type, Type> ContravariantTypeData = new TheoryData<Type, Type>
         {
             // Target Type                                  // Type to Fetch
 
@@ -97,11 +97,12 @@ namespace Rezolver.Tests
             { typeof(Action<BaseClass>),                    typeof(Action<BaseClassChild>) },
             { typeof(Action<BaseClass>),                    typeof(Action<BaseClassGrandchild>) },
             // Generic base/interface matching contravariant parameter
-            { typeof(IContravariant<IGeneric<string>>),     typeof(IContravariant<Generic<string>>) }
+            { typeof(IContravariant<IGeneric<string>>),     typeof(IContravariant<Generic<string>>) },
+            { typeof(IContravariant<IContravariant<IContravariant<object>>>), typeof(IContravariant<IContravariant<IContravariant<string>>>) }   
         };
 
         [Theory]
-        [MemberData(nameof(CovariantTypeData))]
+        [MemberData(nameof(ContravariantTypeData))]
         public void ShouldFetchContravariant(Type tTarget, Type toFetch)
         {
             // this theory specifically tests that if we register a target for a generic which
@@ -117,41 +118,16 @@ namespace Rezolver.Tests
             Assert.Same(target, fetched);
         }
 
-        //[Fact]
-        //public void ShouldFetchClosedBaseForContravariantTypeParameter()
-        //{
-        //    ITargetContainer targets = new TargetContainer();
-        //    var target = Target.ForType<Contravariant<BaseClass>>();
-        //    targets.Register(target, typeof(IContravariant<BaseClass>));
+        [Fact]
+        public void ShouldNotFetchConstrainedGenericForIncompatibleType()
+        {
+            ITargetContainer targets = new TargetContainer();
+            var target = Target.ForType(typeof(ConstrainedGeneric<>));
+            targets.Register(target, typeof(IGeneric<>));
 
-        //    // this should be matched implicitly because the type argument 
-        //    // 'T' in IContravariant<T> is marked as 'in'.  However, it should only 
-        //    // do this when no specific registration is present for a more derived type
-        //    // also - it must not interfere with open generic registrations
-
-        //    // TODO: Use generic constraints to alter a target's default registered service type.
-
-        //    var match = targets.Fetch(typeof(IContravariant<BaseClassChild>));
-        //    Assert.Same(target, match);
-
-        //    // Note: this must be supported
-        //    IContravariant<IEnumerable<BaseClassChild>> f = new Contravariant<IEnumerable<BaseClass>>();
-            
-
-        //    // But this mustn't (line below doesn't compile - it's just here to demonstrate the type incompatibility)
-        //    // IGeneric<IEnumerable<BaseClassChild>> u = new Generic<IEnumerable<BaseClass>>();
-            
-        //}
-
-        //[Fact]
-        //public void ShouldAllowCrazyCoContraVariance()
-        //{
-        //    ITargetContainer targets = new TargetContainer();
-        //    var target = Target.ForType<Contravariant<IEnumerable<BaseClass>>>();
-        //    targets.Register(target, typeof(IContravariant<IEnumerable<BaseClass>>));
-
-        //    var match = targets.Fetch(typeof(IContravariant<IEnumerable<BaseClassChild>>));
-        //    Assert.Same(target, match);
-        //}
+            // so this should return a fallback target.
+            var fetched = targets.Fetch(typeof(IGeneric<string>));
+            Assert.True(fetched.UseFallback);      
+        }
     }
 }

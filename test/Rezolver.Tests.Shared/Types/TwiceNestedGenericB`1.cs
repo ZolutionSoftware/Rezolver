@@ -11,10 +11,5 @@ namespace Rezolver.Tests.Types
 		{
 			get; private set;
 		}
-
-		public void Foo()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

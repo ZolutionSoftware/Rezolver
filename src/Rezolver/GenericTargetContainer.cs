@@ -95,7 +95,7 @@ namespace Rezolver
             //If we don't find one - then we return the targets that have been registered against the 
             //open generic type definition.
             ITarget baseResult = null;
-            foreach (var searchType in new RegistrationTypeSearch(type))
+            foreach (var searchType in new TargetTypeSelector(type))
             {
                 if ((baseResult = base.Fetch(searchType)) != null)
                     return baseResult;
@@ -116,7 +116,7 @@ namespace Rezolver
             bool foundOne = false;
 
             //all generics are returned in descending order of specificity
-            foreach (var searchType in new RegistrationTypeSearch(type).Distinct())
+            foreach (var searchType in new TargetTypeSelector(type).Distinct())
             {
                 foreach (var result in base.FetchAll(searchType))
                 {

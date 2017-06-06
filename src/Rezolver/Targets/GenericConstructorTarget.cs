@@ -236,9 +236,9 @@ namespace Rezolver.Targets
 						return new GenericTypeMapping(targetType, $"There is not enough generic type information from { targetType } to map all generic arguments to { DeclaredType }.  This is most likely because { targetType } has fewer type parameters than { DeclaredType }");
 				}
 			}
-
-			//make the generic type
-			return new GenericTypeMapping(targetType, DeclaredType.MakeGenericType(finalTypeArguments));
+#error TODO: Catch TypeLoadException when trying to make the generic type - this will be a constraint violation which then allows us to reject the mapping.
+            //make the generic type
+            return new GenericTypeMapping(targetType, DeclaredType.MakeGenericType(finalTypeArguments));
 		}
 
 		/// <summary>
