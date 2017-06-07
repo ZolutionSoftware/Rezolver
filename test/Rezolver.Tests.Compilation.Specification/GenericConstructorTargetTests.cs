@@ -146,6 +146,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
             targets.RegisterType(typeof(Generic<>), typeof(IGeneric<>));
             targets.RegisterType(typeof(ConstrainedGeneric<>), typeof(IGeneric<>));
+            targets.RegisterType<BaseClassChild>();
 
             var container = CreateContainer(targets);
 

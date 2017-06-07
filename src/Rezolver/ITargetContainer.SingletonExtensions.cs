@@ -23,10 +23,8 @@ namespace Rezolver
         /// </summary>
         /// <typeparam name="TObject">The type to be created, and the type against which the registration will be made</typeparam>
         /// <param name="targetContainer">The container on which the registrations will be made.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on the <paramref name="targetContainer"/>.</param>
         public static void RegisterSingleton<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
 		{
 			RegisterSingleton(targetContainer, typeof(TObject), memberBinding: memberBinding);
@@ -42,10 +40,8 @@ namespace Rezolver
         /// <typeparam name="TObject">The type of object to be created.</typeparam>
         /// <typeparam name="TService">The type against which the target will be registered in the <paramref name="targetContainer"/></typeparam>
         /// <param name="targetContainer">The container on which the registrations will be made.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on the <paramref name="targetContainer"/>.</param>
         public static void RegisterSingleton<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
 		{
 			RegisterSingleton(targetContainer, typeof(TObject), typeof(TService), memberBinding: memberBinding);
@@ -61,10 +57,8 @@ namespace Rezolver
         /// <param name="targetContainer">The container on which the registrations will be made.</param>
         /// <param name="objectType">Required.  The type of object to be created.</param>
         /// <param name="serviceType">Optional.  The type against which the target will be registered in the <paramref name="targetContainer"/></param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on the <paramref name="targetContainer"/>.</param>
         public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));

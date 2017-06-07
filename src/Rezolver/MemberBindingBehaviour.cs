@@ -16,18 +16,6 @@ namespace Rezolver
     /// The default behaviour, when no option is explicitly set for a particular type, is the <see cref="Default"/>.</remarks>
     public static class MemberBindingBehaviour
     {
-        private static IMemberBindingBehaviour _default = BindNone;
-        /// <summary>
-        /// Gets or sets the default (unconfigured) member binding behaviour for all objects created by constructor injection 
-        /// (via the <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/>).
-        /// - initially set to <see cref="BindNone"/>.
-        /// </summary>
-        /// <seealso cref="BindNone"/>
-        public static IMemberBindingBehaviour Default
-        {
-            get { return _default; }
-            set { _default = value ?? throw new ArgumentNullException(nameof(value)); }
-        }
         /// <summary>
         /// A behaviour that binds all publicly writeable properties and fields on an object after construction.
         /// </summary>

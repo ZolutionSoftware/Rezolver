@@ -216,15 +216,18 @@ namespace Rezolver.Tests.Examples
             var container = new Container();
             container.RegisterType<MyService1>();
             container.RegisterType<MyService2>();
+
+            // reversing the 'normal' order that would usually be 
+            // produced by the default IEnumerable functionality
             container.RegisterDelegate<IEnumerable<IMyService>>(
                 rc => new IMyService[] { rc.Resolve<MyService2>(), rc.Resolve<MyService1>() }
-                );
+            );
 
             var result = container.Resolve<IEnumerable<IMyService>>().ToArray();
 
             Assert.Equal(2, result.Length);
-            Assert.IsType<MyService1>(result[0]);
-            Assert.IsType<MyService2>(result[1]);
+            Assert.IsType<MyService2>(result[0]);
+            Assert.IsType<MyService1>(result[1]);
             // </example8>
         }
     }

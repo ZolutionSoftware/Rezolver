@@ -74,14 +74,15 @@ namespace Rezolver.Targets
         /// <summary>
         /// Gets the member binding behaviour to be used when <see cref="Bind(ICompileContext)"/> is called.
         /// 
-        /// If <c>null</c>, then the binding behaviour will be resolved from the container present in the 
-        /// <see cref="ICompileContext.ResolveContext"/> of the <see cref="ICompileContext"/> passed to the
-        /// <see cref="Bind(ICompileContext)"/> method.  If it's still <c>null</c>, then no member binding behaviour
-        /// will be used.
+        /// If <c>null</c>, then the binding behaviour will be resolved from <see cref="ICompileContext"/> passed to the
+        /// <see cref="Bind(ICompileContext)"/> method, via the Options API.
         /// </summary>
-        /// <remarks>The container default <see cref="IMemberBindingBehaviour"/> can be configured by calling
-        /// the <see cref="ContainerBehaviourCollectionExtensions.UseMemberBindingBehaviour(ContainerBehaviourCollection, IMemberBindingBehaviour)"/>
-        /// extension method on the <see cref="GlobalBehaviours.ContainerBehaviour"/> container behaviour collection.</remarks>
+        /// <remarks>The container default <see cref="IMemberBindingBehaviour"/> can be configured by setting it as an 
+        /// option using the <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>
+        /// extension method - passing an instance of member binding behaviour to be used as the default.
+        /// 
+        /// The global default, unconfigured, behaviour is not to inject any members 
+        /// (<see cref="MemberBindingBehaviour.BindNone"/>)</remarks>
         public IMemberBindingBehaviour MemberBindingBehaviour
 		{
 			get; private set;
@@ -290,7 +291,7 @@ namespace Rezolver.Targets
             // use either the member binding behaviour that was passed on construction, or locate the
             // option from the compile context's target container.
             var memberBindingBehaviour = MemberBindingBehaviour 
-                ?? context.GetOption(ctor.DeclaringType, Rezolver.MemberBindingBehaviour.Default);
+                ?? context.GetOption(ctor.DeclaringType, Rezolver.MemberBindingBehaviour.BindNone);
             
 			return new ConstructorBinding(ctor, boundArgs, memberBindingBehaviour?.GetMemberBindings(context, DeclaredType));
 		}

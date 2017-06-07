@@ -26,27 +26,14 @@ ignored.  Implemented by an instance of @Rezolver.BindPublicFieldsBehaviour.
 
 # Enabling member injection
 
-## Via Container behaviours
+## Via Container Options
 
-Container behaviours were introduced in 1.2, and provide a way to configure additional services used by any @Rezolver.ContainerBase derived
-object (that's all @Rezolver.IContainer implementations you're likely to use) created by your application.
+The simplest way to configure member injection is through the Options API, which provides a way to define metadata globally or on a per-type
+basis.  To do this, you need an @Rezolver.ITargetContainer, an interface which is implemented by all the standard container classes, in addition
+to the primary implementation types @Rezolver.TargetContainer and @Rezolver.OverridingTargetContainer.
 
-Container behaviours can be supplied to these container classes on construction (for example, the 
-@Rezolver.Container.%23ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour) @Rezolver.Container constructor) or, if
-not provided, then a default will be used from the @Rezolver.GlobalBehaviours class.  This class has two global behaviours for
-@Rezolver.IContainer objects:
-
-1. **@Rezolver.GlobalBehaviours.ContainerBehaviour** - Behaviour to be used by the majority of containers
-2. **@Rezolver.GlobalBehaviours.OverridingContainerBehaviour** - Behaviour to be used by @Rezolver.OverridingContainer
-
-The @Rezolver.MemberBindingBehaviour.BindNone @Rezolver.IMemberBindingBehaviour (see above) is configured as
-the default in the first of these two container behaviours - which means that it becomes the default for all 
-@Rezolver.IContainer.Resolve* operations (including those of @Rezolver.OverridingContainer objects, since they
-fall back to their overriden container if unable to resolve a particular type).
-
-If you want to change this default for containers in your application (e.g.
-to the @Rezolver.MemberBindingBehaviour.BindAll behaviour), you can use the 
-@Rezolver.ContainerBehaviourCollectionExtensions.UseMemberBindingBehaviour* extension method:
+This short example shows how to set the default member binding behaviour for all constructed types to the @Rezolver.MemberBindingBehaviour.BindAll
+behaviour, thus enabling member injection for all publicly writeable properties and fields:
 
 ```cs
 using Rezolver;
@@ -55,28 +42,21 @@ namespace MyApp
 {
     public static void Main()
     {
-        // GlobalBehaviours sits directly in the Rezolver namespace
-        GlobalBehaviours.ContainerBehaviour
-            .UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
-            
-        // all containers will now bind all members by default, unless
-        // a different IMemberBindingBehaviour is passed to a ConstructorTarget
-        // (or any of the other methods/types which create it)
+        var container = new Container();
+        container.SetOption(MemberBindingBehaviour.BindAll);
+        // objects created through constructor injection by this container will now also have their members injected
+
+        // you can also set a specific behaviour for a type in this way
+        container.SetOption(typeof(ClassWithProperties), MemberBindingBehaviour.BindProperties);
+        // now, any instance of ClassWithProperties created by constructor injection will have only its properties injected
+
+        // also works for open generics
+        container.SetOption(typeof(GenericWithFields<>), MemberBindingBehaviour.BindFields);
+        // any instance of any generic based on GenericWithFields<> will have only its fields injected
     }
 }
 
 ```
-
-Whilst this is the simplest way to do it, your application might have multiple containers, and you therefore
-might wish to control their behaviour independently.  If so, then you can also supply a specific set of behaviours to your 
-container when you create it.
-
-> [!NOTE]
-> If you do this, then it's best to clone the existing global default one first, and then
-> reconfigure it, because there are other services configured in a container behaviour collection which are required,
-> such as an `IContainerBehaviour<ITargetCompiler>`.
-
-You'll see how to use custom container behaviours in an example further down this page.
 
 ## Via Explicit @Rezolver.IMemberBindingBehaviour 
 
@@ -84,9 +64,16 @@ Almost all of the ways in which you register types for construction by the conta
 (be it via @Rezolver.ITarget factory methods like @Rezolver.Target.ForType*, registration extension methods such as those in 
 @Rezolver.RegisterTypeTargetContainerExtensions, or any of the constructors for @Rezolver.Targets.ConstructorTarget or 
 @Rezolver.Targets.GenericConstructorTarget constructors etc) will accept an @Rezolver.IMemberBindingBehaviour which is 
-specific to the target being created - overriding any behaviour configured by container behaviors.
+specific to the target being created.
 
-It is this method of passing @Rezolver.IMemberBindingBehaviour that most of the examples here use.
+Such explicitly provided member binding behaviours will *override* any which might otherwise be applied via the Options
+API (as shown in the last example).
+
+```cs
+    container.RegisterType<MyClass>(MemberBindingBehaviour.BindAll);
+```
+
+The rest of the examples in this topic will show both in action.
 
 * * *
 
@@ -118,14 +105,10 @@ always bound.
 > with constructors, where it's reasonable to assume all parameters are to be injected, there are no simple rules
 > that can always applied to an object to determine which properties and/or fields should be auto-injected.
 
-### @Rezolver.IContainerBehaviour (Global)
+### Global Option
 
-In this version of the example, we'll change the container behaviour defined in @Rezolver.GlobalBehaviours.ContainerBehaviour
-so that binding all members becomes the default for all containers.
-
-> [!NOTE]
-> If you're running the examples test project in Visual Studio, then it's recommended you disable parallel execution, because 
-> it could cause other tests to fail when this one runs!
+In this version of the example, we'll set the @Rezolver.MemberBindingBehaviour.BindAll behaviour as a global option on 
+the container itself.
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example2)]
 
@@ -141,7 +124,7 @@ whatever the default @Rezolver.IMemberBindingBehaviour is with the @Rezolver.Mem
 ## Custom binding behaviour
 
 > [!TIP]
-> The @Rezolver.IContainerBehaviour approach shown in the previous example will work also with the the custom binding behaviour
+> The options approach shown in the previous two examples will work also with the the custom binding behaviour
 > shown in this example.
 
 If you find you need more control over which properties and/or fields you want bound on an instance, then you can, 
