@@ -9,11 +9,11 @@ namespace Rezolver
     /// Contains extension methods for getting and setting container options which are used to control the behaviour, chiefly,
     /// of the various well-known <see cref="ITargetContainer"/> implementations.
     /// </summary>
-    /// <remarks>Options are different to target container behaviours (<see cref="ITargetContainerBehaviour"/>) in that options
+    /// <remarks>Options are different to target container behaviours (<see cref="ITargetContainerConfig"/>) in that options
     /// are actively *read* by the various <see cref="ITargetContainer"/>-related types throughout the Rezolver framework to
     /// control how certain standard functionality operates.
     /// 
-    /// The <see cref="ITargetContainerBehaviour"/>, however, can be used both to *configure* those options and to add extra
+    /// The <see cref="ITargetContainerConfig"/>, however, can be used both to *configure* those options and to add extra
     /// registrations (both <see cref="ITarget"/> and, more commonly, other <see cref="ITargetContainer"/>s via the 
     /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method).
     /// 
@@ -35,7 +35,7 @@ namespace Rezolver
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
             if (option == null) throw new ArgumentNullException(nameof(option));
-            targets.Register(new OptionContainer<TOption>(option));
+            targets.Register(new OptionContainer<TOption>(option), typeof(IOptionContainer<TOption>));
             return targets;
         }
 
@@ -52,7 +52,7 @@ namespace Rezolver
             // a target for the <TService, TOption> pair.  That's part of the reason why all this stuff is 
             // internal.
             targets.Register(new OptionContainer<TOption>(option), 
-                typeof(OptionContainer<,>).MakeGenericType(serviceType, typeof(TOption)));
+                typeof(IOptionContainer<,>).MakeGenericType(serviceType, typeof(TOption)));
             
             return targets;
         }
@@ -65,7 +65,7 @@ namespace Rezolver
 
             // see long comment in method above
             targets.Register(new OptionContainer<TOption>(option),
-                typeof(OptionContainer<TService, TOption>));
+                typeof(IOptionContainer<TService, TOption>));
 
             return targets;
         }
@@ -74,7 +74,7 @@ namespace Rezolver
             where TOption : class
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
-            var optionContainer = targets.FetchDirect<OptionContainer<TOption>>();
+            var optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
             return optionContainer?.Option ?? @default;
         }
 
@@ -86,11 +86,11 @@ namespace Rezolver
 
             bool useGlobalFallback = GetOption(targets, EnableGlobalOptions.Default);
 
-            var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<,>)
+            var optionContainer = (IOptionContainer<TOption>)targets.FetchDirect(typeof(IOptionContainer<,>)
                 .MakeGenericType(serviceType, typeof(TOption)));
             
             if(optionContainer == null && useGlobalFallback)
-                optionContainer = targets.FetchDirect<OptionContainer<TOption>>();
+                optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
 
             return optionContainer?.Option ?? @default;
         }
@@ -102,10 +102,10 @@ namespace Rezolver
 
             bool useGlobalFallback = GetOption(targets, EnableGlobalOptions.Default);
 
-            var optionContainer = (OptionContainer<TOption>)targets.FetchDirect(typeof(OptionContainer<TService, TOption>));
+            var optionContainer = (IOptionContainer<TOption>)targets.FetchDirect(typeof(IOptionContainer<TService, TOption>));
 
             if(optionContainer == null && useGlobalFallback)
-                optionContainer = targets.FetchDirect<OptionContainer<TOption>>();
+                optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
             
             return optionContainer?.Option ?? @default;
         }

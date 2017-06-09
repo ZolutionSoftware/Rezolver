@@ -2,7 +2,7 @@
 
 namespace Rezolver.Options
 {
-    internal class OptionContainer<TOption> : IDirectTarget, ITarget
+    internal class OptionContainer<TOption> : IDirectTarget, ITarget, IOptionContainer<TOption>
     {
         public TOption Option { get; }
 
@@ -23,12 +23,13 @@ namespace Rezolver.Options
 
         bool ITarget.SupportsType(Type type)
         {
-            // yes - this is a bit weird.  It's because of the way that service-specific options
-            // are registered.
-            return (typeof(OptionContainer<TOption>) == type
+            // yes - this is a bit weird.  The whole type compatibility thing here is subverted,
+            // so we can register an option against a service, taking advantage of the contravariance
+            // and other generic functionality of the target containers - 
+            return typeof(IOptionContainer<TOption>) == type
                 || (TypeHelpers.IsGenericType(type)
-                    && typeof(OptionContainer<,>).Equals(type.GetGenericTypeDefinition())
-                    && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[1]));
+                    && typeof(IOptionContainer<,>).Equals(type.GetGenericTypeDefinition())
+                    && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[1]);
         }
     }
 }

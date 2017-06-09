@@ -11,7 +11,7 @@ namespace Rezolver
     /// objects.  Behaviours can depend on other behaviours, and this collection ensures that they are applied
     /// in the correct order.
     /// </summary>
-    /// <seealso cref="TargetContainerBehaviourCollection"/>
+    /// <seealso cref="TargetContainerConfigCollection"/>
     public class ContainerBehaviourCollection : DependantCollection<IContainerBehaviour>, IContainerBehaviour
     {
         /// <summary>

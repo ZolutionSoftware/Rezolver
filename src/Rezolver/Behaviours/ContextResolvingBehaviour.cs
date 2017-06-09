@@ -5,12 +5,12 @@ using System.Text;
 namespace Rezolver.Behaviours
 {
     /// <summary>
-    /// An <see cref="ITargetContainerBehaviour"/> that enables automatic resolving of the 
+    /// An <see cref="ITargetContainerConfig"/> that enables automatic resolving of the 
     /// <see cref="IResolveContext"/> created for a <see cref="IContainer.Resolve(IResolveContext)"/> operation.
     /// </summary>
     /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/> 
     /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method</remarks>
-    public sealed class ContextResolvingBehaviour : ITargetContainerBehaviour
+    public sealed class ContextResolvingBehaviour : ITargetContainerConfig
     {
         private class ResolveContextTarget : ITarget, ICompiledTarget
         {
@@ -51,7 +51,7 @@ namespace Rezolver.Behaviours
         /// then the behaviour DOES NOT overwrite it.
         /// </summary>
         /// <param name="targets"></param>
-        public void Attach(ITargetContainer targets)
+        public void Apply(ITargetContainer targets)
         {
             var existing = targets.Fetch(typeof(IResolveContext));
             if (existing == null || existing.UseFallback)

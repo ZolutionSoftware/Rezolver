@@ -1,4 +1,5 @@
 ﻿using Rezolver.Options;
+using Rezolver.Tests.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,6 +110,17 @@ namespace Rezolver.Tests
             overriding.SetOption<TestOption>("overriden");
 
             Assert.Equal("overriden", overriding.GetOption<TestOption>());
+        }
+
+        [Fact]
+        public void ShouldUseOptionForBaseClass()
+        {
+            var targets = new TargetContainer();
+            // the underlying options container that's used to store the option value
+            // is contravariant, so should return an option defined at the base class level :)
+            targets.SetOption<TestOption>(typeof(BaseClass), "for baseclass");
+
+            Assert.Equal("for baseclass", targets.GetOption<TestOption, BaseClassChild>());
         }
     }
 }

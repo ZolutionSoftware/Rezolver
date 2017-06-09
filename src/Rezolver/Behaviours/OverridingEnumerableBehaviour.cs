@@ -9,7 +9,7 @@ namespace Rezolver.Behaviours
     /// class by chaining the enumerable from the overridden container to the enumerable produced by the overriding container.
     /// </summary>
     /// <remarks>
-    /// Note that this class is not an <see cref="ITargetContainerBehaviour"/> like the <see cref="AutoEnumerableBehaviour"/>,
+    /// Note that this class is not an <see cref="ITargetContainerConfig"/> like the <see cref="AutoEnumerableBehaviour"/>,
     /// instead it is an <see cref="IContainerBehaviour"/> because it's only relevant for instances of <see cref="OverridingContainer"/>.</remarks>
     public sealed class OverridingEnumerableBehaviour : IContainerBehaviour
     {

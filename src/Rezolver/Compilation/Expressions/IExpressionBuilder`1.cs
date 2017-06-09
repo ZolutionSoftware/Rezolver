@@ -18,7 +18,6 @@ namespace Rezolver.Compilation.Expressions
 	/// <typeparam name="TTarget">The type of the target.</typeparam>
 	/// <seealso cref="Rezolver.Compilation.Expressions.IExpressionBuilder" />
 	public interface IExpressionBuilder<in TTarget> : IExpressionBuilder
-		//where TTarget : ITarget
 	{
 		/// <summary>
 		/// Builds an expression from the specified target.

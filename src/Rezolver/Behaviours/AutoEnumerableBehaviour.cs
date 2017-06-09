@@ -5,7 +5,7 @@ using System.Text;
 namespace Rezolver.Behaviours
 {
     /// <summary>
-    /// An <see cref="ITargetContainerBehaviour"/> which enables automatic handling of fetching
+    /// An <see cref="ITargetContainerConfig"/> which enables automatic handling of fetching
     /// targets for <see cref="IEnumerable{T}"/> based on all the targets registered for a given <c>T</c>
     /// in an <see cref="ITargetContainer"/>.
     /// </summary>
@@ -14,7 +14,7 @@ namespace Rezolver.Behaviours
     /// If this behaviour is not attached to an <see cref="ITargetContainer"/> instance, then only explicitly
     /// registered enumerables will be able to be resolved from any <see cref="IContainer"/> built from that 
     /// target container.</remarks>
-    public class AutoEnumerableBehaviour : ITargetContainerBehaviour
+    public class AutoEnumerableBehaviour : ITargetContainerConfig
     {
         /// <summary>
         /// The one and only instance of the <see cref="AutoEnumerableBehaviour"/> type.
@@ -25,10 +25,10 @@ namespace Rezolver.Behaviours
         }
 
         /// <summary>
-        /// Implementation of <see cref="ITargetContainerBehaviour.Attach(ITargetContainer)"/>
+        /// Implementation of <see cref="ITargetContainerConfig.Apply(ITargetContainer)"/>
         /// </summary>
         /// <param name="targets"></param>
-        public void Attach(ITargetContainer targets)
+        public void Apply(ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
             if(targets.FetchContainer(typeof(IEnumerable<>)) == null)

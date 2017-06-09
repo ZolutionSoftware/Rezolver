@@ -7,7 +7,7 @@ namespace Rezolver
     /// Represents a behaviour for an <see cref="IContainer"/> (specifically one which also uses an 
     /// <see cref="ITargetContainer"/> as the source of its registrations).
     /// </summary>
-    /// <remarks>While similar to <see cref="ITargetContainerBehaviour"/>, this is specifically used
+    /// <remarks>While similar to <see cref="ITargetContainerConfig"/>, this is specifically used
     /// for new containers.
     /// 
     /// A behaviour can be passed to any of the provided <see cref="ContainerBase"/>-derived types on 
@@ -25,7 +25,7 @@ namespace Rezolver
     /// itself will retrieve registrations when resolving instances.  The built in <see cref="IContainer"/> classes resolve
     /// these service types (e.g. <see cref="ITargetCompiler"/>) as part of normal operation, so - by providing alternative
     /// or additional registrations - behaviours can extend the underlying container.</remarks>
-    /// <seealso cref="ITargetContainerBehaviour"/>
+    /// <seealso cref="ITargetContainerConfig"/>
     public interface IContainerBehaviour
     {
         /// <summary>

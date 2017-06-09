@@ -16,7 +16,7 @@ namespace Rezolver
     /// Rezolver uses targets like this extensively for its configuration and container 
     /// services functionality - which are required to be accessible directly from an <see cref="ITargetContainer"/>
     /// without an <see cref="IContainer"/> being available.  For example, the <see cref="GenericTargetContainer"/> uses
-    /// its own registrations (configured by <see cref="ITargetContainerBehaviour"/> objects) to control how generic
+    /// its own registrations (configured by <see cref="ITargetContainerConfig"/> objects) to control how generic
     /// registrations are mapped to generic type requests.</remarks>
     internal interface IDirectTarget : ITarget
     {
