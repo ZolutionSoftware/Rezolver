@@ -10,7 +10,7 @@ namespace Rezolver.Behaviours
     /// </summary>
     /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/> 
     /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method</remarks>
-    public sealed class ContextResolvingBehaviour : ITargetContainerConfig
+    public sealed class ContextResolvingConfig : ITargetContainerConfig
     {
         private class ResolveContextTarget : ITarget, ICompiledTarget
         {
@@ -37,12 +37,12 @@ namespace Rezolver.Behaviours
 
         private readonly ResolveContextTarget _target = new ResolveContextTarget();
 
-        private ContextResolvingBehaviour() { }
+        private ContextResolvingConfig() { }
         
         /// <summary>
-        /// The one and only instance of <see cref="ContextResolvingBehaviour"/>
+        /// The one and only instance of <see cref="ContextResolvingConfig"/>
         /// </summary>
-        public static ContextResolvingBehaviour Instance { get; } = new ContextResolvingBehaviour();
+        public static ContextResolvingConfig Instance { get; } = new ContextResolvingConfig();
         /// <summary>
         /// Attaches this behaviour to the target container, adding a registration to the <paramref name="targets"/>
         /// for the type <see cref="IResolveContext"/>.

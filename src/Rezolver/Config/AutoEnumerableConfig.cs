@@ -9,18 +9,21 @@ namespace Rezolver.Behaviours
     /// targets for <see cref="IEnumerable{T}"/> based on all the targets registered for a given <c>T</c>
     /// in an <see cref="ITargetContainer"/>.
     /// </summary>
-    /// <remarks>This behaviour is added to the default <see cref="GlobalBehaviours.TargetContainerBehaviour"/>.
+    /// <remarks>This behaviour is added to the default configuration for all <see cref="TargetContainer"/>-derived
+    /// objects via theh <see cref="TargetContainer.DefaultConfig"/>.
+    /// 
+    /// To disable it, you can either remove it from that configuration object (which then disables it for all 
     /// 
     /// If this behaviour is not attached to an <see cref="ITargetContainer"/> instance, then only explicitly
     /// registered enumerables will be able to be resolved from any <see cref="IContainer"/> built from that 
     /// target container.</remarks>
-    public class AutoEnumerableBehaviour : ITargetContainerConfig
+    public class AutoEnumerableConfig : ITargetContainerConfig
     {
         /// <summary>
-        /// The one and only instance of the <see cref="AutoEnumerableBehaviour"/> type.
+        /// The one and only instance of the <see cref="AutoEnumerableConfig"/> type.
         /// </summary>
-        public static AutoEnumerableBehaviour Instance { get; } = new AutoEnumerableBehaviour();
-        private AutoEnumerableBehaviour()
+        public static AutoEnumerableConfig Instance { get; } = new AutoEnumerableConfig();
+        private AutoEnumerableConfig()
         {
         }
 
@@ -31,6 +34,13 @@ namespace Rezolver.Behaviours
         public void Apply(ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
+            // if an option has already been set on the target container which disable automatic enumerables,
+            // then do not apply the configuration.
+            if (!targets.GetOption(Options.EnableAutoEnumerable.Default))
+                return;
+            // we can make an IDependant config which is specialised to be dependant on a particular boolean option
+            // then we can make a reusable 'ConfigureOption' configuration object, which can be wrapped up behind an
+            // extension method on ITargetContainerConfigCollection.
             if(targets.FetchContainer(typeof(IEnumerable<>)) == null)
                 targets.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(targets));
         }

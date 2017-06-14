@@ -240,6 +240,8 @@ namespace Rezolver.Targets
             try
             {
                 //make the generic type
+                // TODO: change this from a try/catch to actually detecting the constraints and actively excluding
+                // incompatible types.  Obviously, that's difficult so it's a low priority change.
                 return new GenericTypeMapping(targetType, DeclaredType.MakeGenericType(finalTypeArguments));
             }
             catch(TypeLoadException tlex)

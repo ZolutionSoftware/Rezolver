@@ -27,7 +27,7 @@ namespace Rezolver
 		/// for registration.  If not provided, then the <see cref="ITarget.DeclaredType"/> of the first target
 		/// will be used.</param>
 		/// <remarks>If the container has the capability to create enumerables automatically (enabled by the
-        /// <see cref="Behaviours.AutoEnumerableBehaviour"/> target container behaviour - which is switched on by default)
+        /// <see cref="Behaviours.AutoEnumerableConfig"/> target container behaviour - which is switched on by default)
         /// then each target will be returned when an IEnumerable of the common service type is requested.</remarks>
 		public static void RegisterMultiple(this ITargetContainer targetContainer, IEnumerable<ITarget> targets, Type commonServiceType = null)
 		{

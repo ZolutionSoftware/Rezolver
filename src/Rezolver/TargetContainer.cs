@@ -22,7 +22,7 @@ namespace Rezolver
     /// 
     /// Although you can derive from this class to extend its functionality; it's also possible to 
     /// extend it via configuration (see <see cref="ITargetContainerConfig"/>) - which is how, for example,
-    /// the framework enables automatic enumerable resolving (see <see cref="Behaviours.AutoEnumerableBehaviour"/>).
+    /// the framework enables automatic enumerable resolving (see <see cref="Behaviours.AutoEnumerableConfig"/>).
     /// 
     /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer
@@ -34,8 +34,8 @@ namespace Rezolver
         /// </summary>
         protected internal static ITargetContainerConfig[] DefaultConfigEntries = new ITargetContainerConfig[]
         {
-            Behaviours.AutoEnumerableBehaviour.Instance,
-            Behaviours.ContextResolvingBehaviour.Instance
+            Behaviours.AutoEnumerableConfig.Instance,
+            Behaviours.ContextResolvingConfig.Instance
         };
 
         private static TargetContainerConfigCollection _defaultConfig = new TargetContainerConfigCollection(DefaultConfigEntries);
@@ -78,7 +78,7 @@ namespace Rezolver
         /// will invoke methods on this target container which are declared virtual and which are, therefore, 
         /// unsafe to be called during construction.
         /// </summary>
-        protected internal TargetContainer()
+        protected TargetContainer()
         {
 
         }
