@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 using Rezolver.Compilation.Expressions;
 using Rezolver.Compilation;
 
-namespace Rezolver.Behaviours
+namespace Rezolver.Configuration
 {
 	/// <summary>
-	/// Implements the <see cref="IContainerBehaviour"/> to configure expression-based compilation for targets in containers.
+	/// Implements the <see cref="IContainerConfig"/> to configure expression-based compilation for targets in containers.
 	/// 
 	/// The implementation registers all the targets necessary to use the expression tree-based compilation provided by 
 	/// the <see cref="ExpressionCompiler"/>
 	/// 
 	/// This is included in the default <see cref="GlobalBehaviours.ContainerBehaviour"/>, meaning that all containers
     /// created without a specific behaviour will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
-	public class ExpressionCompilerBehaviour : IContainerBehaviour<ITargetCompiler>
+	public class ExpressionCompilerBehaviour : IContainerConfig<ITargetCompiler>
 	{
         /// <summary>
         /// The one and only instance of <see cref="ExpressionCompilerBehaviour"/>
         /// </summary>
-        public static IContainerBehaviour<ITargetCompiler> Instance { get; } = new ExpressionCompilerBehaviour();
+        public static IContainerConfig<ITargetCompiler> Instance { get; } = new ExpressionCompilerBehaviour();
 
         private ExpressionCompilerBehaviour()
         {
@@ -80,7 +80,7 @@ namespace Rezolver.Behaviours
 		}
 
         /// <summary>
-		/// Implements the <see cref="IContainerBehaviour.Attach(IContainer, ITargetContainer)"/> method,
+		/// Implements the <see cref="IContainerConfig.Attach(IContainer, ITargetContainer)"/> method,
 		/// registering all the targets necessary to use expression-based compilation for all the standard targets
 		/// defined in the <c>Rezolver</c> core library.
 		/// </summary>

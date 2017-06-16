@@ -18,7 +18,7 @@ namespace Rezolver
     /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method).
     /// 
     /// The automatic building of <see cref="IEnumerable{T}"/> sequences from all the targets registered for a type, for example,
-    /// is enabled by attaching the <see cref="Behaviours.AutoEnumerableConfig"/> to the target container.  Whereas, the 
+    /// is enabled by attaching the <see cref="Configuration.AutoEnumerables"/> to the target container.  Whereas, the 
     /// ability to actually register more than one target for a particular service in the first place is controlled by the 
     /// <see cref="Options.AllowMultiple"/> option.
     /// 

@@ -22,24 +22,11 @@ namespace Rezolver
     /// 
     /// Although you can derive from this class to extend its functionality; it's also possible to 
     /// extend it via configuration (see <see cref="ITargetContainerConfig"/>) - which is how, for example,
-    /// the framework enables automatic enumerable resolving (see <see cref="Behaviours.AutoEnumerableConfig"/>).
+    /// the framework enables automatic enumerable resolving (see <see cref="Configuration.AutoEnumerables"/>).
     /// 
     /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer
-    {
-        /// <summary>
-        /// An array containing the standard configurations that are set in the <see cref="DefaultConfig"/>
-        /// collection.  Derived types which have their own default configuration can use this to seed it
-        /// with the same core configuration as this class.
-        /// </summary>
-        protected internal static ITargetContainerConfig[] DefaultConfigEntries = new ITargetContainerConfig[]
-        {
-            Behaviours.AutoEnumerableConfig.Instance,
-            Behaviours.ContextResolvingConfig.Instance
-        };
-
-        private static TargetContainerConfigCollection _defaultConfig = new TargetContainerConfigCollection(DefaultConfigEntries);
-
+    {        
         /// <summary>
         /// The default configuration used for <see cref="TargetContainer"/> objects created via the <see cref="TargetContainer.TargetContainer(ITargetContainerConfig)"/>
         /// constructor when no configuration is explicitly passed.
@@ -47,13 +34,11 @@ namespace Rezolver
         /// <remarks>The simplest way to configure all target container instances is to add/remove configs to this collection.
         /// 
         /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.</remarks>
-        public static TargetContainerConfigCollection DefaultConfig
+        public static TargetContainerConfigCollection DefaultConfig { get; } = new TargetContainerConfigCollection(new ITargetContainerConfig[]
         {
-            get
-            {
-                return _defaultConfig;
-            }
-        }
+            Configuration.AutoEnumerables.Instance,
+            Configuration.InjectResolveContext.Instance
+        });
 
         /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class.

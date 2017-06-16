@@ -10,7 +10,7 @@ namespace Rezolver
     /// <see cref="ITargetContainerConfig"/> objects.  Behaviours can depend on other behaviours, and this 
     /// collection ensures that they are applied in the correct order.
     /// </summary>
-    /// <seealso cref="ContainerBehaviourCollection"/>
+    /// <seealso cref="ContainerConfigCollection"/>
     public class TargetContainerConfigCollection 
         : DependantCollection<ITargetContainerConfig>, ITargetContainerConfig
     {

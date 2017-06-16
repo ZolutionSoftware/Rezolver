@@ -1,4 +1,4 @@
-﻿using Rezolver.Behaviours;
+﻿using Rezolver.Configuration;
 using Rezolver.Compilation;
 using Rezolver.Targets;
 using System;
@@ -14,19 +14,19 @@ namespace Rezolver
     /// </summary>
     /// <remarks>
     /// Customisation and extension of the behaviour of <see cref="ITargetContainer"/> and <see cref="IContainer"/> types 
-    /// is performed by instances of the <see cref="ITargetContainerConfig"/> and <see cref="IContainerBehaviour"/> interfaces.
+    /// is performed by instances of the <see cref="ITargetContainerConfig"/> and <see cref="IContainerConfig"/> interfaces.
     /// Implementations are executed when these objects are created and they will typically register services which are later 
     /// resolved by the container types.
     /// 
     /// For example, compilation is a key container-related behaviour which is configured via the 
-    /// <see cref="IContainerBehaviour"/> interface; which is expected to register the <see cref="ITargetCompiler"/>
+    /// <see cref="IContainerConfig"/> interface; which is expected to register the <see cref="ITargetCompiler"/>
     /// for the container so that these objects can then be used to convert registered targets
     /// (of the type <see cref="ITarget"/>) into compiled targets (of the type <see cref="ICompiledTarget"/>).
     /// </remarks>
     public static class GlobalBehaviours
     {
-        private static ContainerBehaviourCollection _containerBehaviour = new ContainerBehaviourCollection();
-        private static ContainerBehaviourCollection _overridingContainerBehaviour = new ContainerBehaviourCollection();
+        private static ContainerConfigCollection _containerBehaviour = new ContainerConfigCollection();
+        private static ContainerConfigCollection _overridingContainerBehaviour = new ContainerConfigCollection();
 
         /// <summary>
         /// Gets/sets the default behaviour to attach to all the <see cref="ContainerBase"/> 
@@ -39,7 +39,7 @@ namespace Rezolver
         /// 
         /// Caution: The collection is only thread-safe for multiple readers.
         /// </remarks>
-        public static ContainerBehaviourCollection ContainerBehaviour {
+        public static ContainerConfigCollection ContainerBehaviour {
             get { return _containerBehaviour; }
             set
             {
@@ -57,7 +57,7 @@ namespace Rezolver
         /// 
         /// Caution: The collection is only thread-safe for multiple readers.
         /// </remarks>
-        public static ContainerBehaviourCollection OverridingContainerBehaviour
+        public static ContainerConfigCollection OverridingContainerBehaviour
         {
             get
             {

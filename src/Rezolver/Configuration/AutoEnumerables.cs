@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Rezolver.Behaviours
+namespace Rezolver.Configuration
 {
     /// <summary>
     /// An <see cref="ITargetContainerConfig"/> which enables automatic handling of fetching
@@ -17,13 +17,13 @@ namespace Rezolver.Behaviours
     /// If this behaviour is not attached to an <see cref="ITargetContainer"/> instance, then only explicitly
     /// registered enumerables will be able to be resolved from any <see cref="IContainer"/> built from that 
     /// target container.</remarks>
-    public class AutoEnumerableConfig : ITargetContainerConfig
+    public sealed class AutoEnumerables : ITargetContainerConfig
     {
         /// <summary>
-        /// The one and only instance of the <see cref="AutoEnumerableConfig"/> type.
+        /// The one and only instance of the <see cref="AutoEnumerables"/> type.
         /// </summary>
-        public static AutoEnumerableConfig Instance { get; } = new AutoEnumerableConfig();
-        private AutoEnumerableConfig()
+        public static AutoEnumerables Instance { get; } = new AutoEnumerables();
+        private AutoEnumerables()
         {
         }
 
@@ -34,7 +34,7 @@ namespace Rezolver.Behaviours
         public void Apply(ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
-            // if an option has already been set on the target container which disable automatic enumerables,
+            // if an option has already been set on the target container which disables automatic enumerables,
             // then do not apply the configuration.
             if (!targets.GetOption(Options.EnableAutoEnumerable.Default))
                 return;

@@ -50,7 +50,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void ContainerBehaviour_ShouldConfigureCompiler()
 		{
-			var container = new Container(GetCompilerBehaviour());
+			var container = new Container(config: GetCompilerBehaviour());
 			Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
 		}
 
@@ -59,7 +59,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			var previousProvider = GlobalBehaviours.ContainerBehaviour;
             //replace the global container behaviour with a new one containing just this compiler behaviour
-			GlobalBehaviours.ContainerBehaviour = new ContainerBehaviourCollection(GetCompilerBehaviour());
+			GlobalBehaviours.ContainerBehaviour = new ContainerConfigCollection(GetCompilerBehaviour());
 
 			try
 			{

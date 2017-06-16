@@ -18,10 +18,10 @@ namespace Rezolver.Compilation.Expressions
     /// </summary>
     /// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
     /// <seealso cref="Rezolver.Compilation.ITargetCompiler" />
-    /// <remarks>Use of this compiler by a container is enabled by attaching the <see cref="Behaviours.ExpressionCompilerBehaviour"/>
-    /// <see cref="Behaviours.ExpressionCompilerBehaviour.Instance"/> to the container either on construction (for example, via the 
-    /// <see cref="Container.Container(ITargetContainer, IContainerBehaviour)"/> or
-    /// <see cref="Container.Container(IContainerBehaviour)"/> constructors) or via the <see cref="GlobalBehaviours.ContainerBehaviour"/>
+    /// <remarks>Use of this compiler by a container is enabled by attaching the <see cref="Configuration.ExpressionCompilerBehaviour"/>
+    /// <see cref="Configuration.ExpressionCompilerBehaviour.Instance"/> to the container either on construction (for example, via the 
+    /// <see cref="Container.Container(ITargetContainer, IContainerConfig)"/> or
+    /// <see cref="Container.Container(IContainerConfig)"/> constructors) or via the <see cref="GlobalBehaviours.ContainerBehaviour"/>
     /// global behaviour, which currently includes the behaviour by default.
     /// 
     /// This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a 
@@ -55,7 +55,7 @@ namespace Rezolver.Compilation.Expressions
     public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler
     {
         /// <summary>
-        /// Gets the default expression compiler.  It's this that the <see cref="Behaviours.ExpressionCompilerBehaviour"/>
+        /// Gets the default expression compiler.  It's this that the <see cref="Configuration.ExpressionCompilerBehaviour"/>
         /// registers.
         /// </summary>
         public static ExpressionCompiler Default { get; } = new ExpressionCompiler();

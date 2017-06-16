@@ -42,9 +42,7 @@ namespace Rezolver
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
         /// instances.
         /// </summary>
-        /// <remarks>Notes to implementers: This property must NEVER be null.
-        /// 
-        /// This class implements the <see cref="ITargetContainer"/> interface by wrapping around this instance so that 
+        /// <remarks>This class implements the <see cref="ITargetContainer"/> interface by wrapping around this instance so that 
         /// an application can create an instance of <see cref="ContainerBase"/> and directly register targets into it; 
         /// rather than having to create and setup the target container first.
         /// 
@@ -77,34 +75,12 @@ namespace Rezolver
         /// when <see cref="Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new 
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, 
         /// after construction, through the <see cref="Targets"/> property.</param>
-        /// <remarks>This constructor does not attach any <see cref="IContainerBehaviour"/> behaviours, because behaviours 
-        /// typically call methods which are declared virtual on this class - which could be unsafe.
-        /// 
-        /// If this does not apply to your derived class (which is unlikely) - use the 
-        /// <see cref="ContainerBase.ContainerBase(IContainerBehaviour, ITargetContainer)"/> constructor.</remarks>
         protected ContainerBase(ITargetContainer targets = null)
             : this()
         {
             Targets = targets ?? new TargetContainer();
         }
 
-        /// <summary>
-        /// Creates a new instance of the <see cref="ContainerBase"/> class.
-        /// </summary>
-        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
-        /// <see cref="Targets"/>). If not provided, then the global <see cref="GlobalBehaviours.ContainerBehaviour"/> 
-        /// will be used.</param>
-        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the container,
-        /// ultimately being passed to the <see cref="Targets"/> property.
-        /// 
-        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <remarks>To create an instance without attaching behaviours, use the 
-        /// <see cref="ContainerBase.ContainerBase(ITargetContainer)"/> constructor.</remarks>
-        protected ContainerBase(IContainerBehaviour behaviour, ITargetContainer targets = null)
-            : this(targets)
-        {
-            (behaviour ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
-        }
 
         /// <summary>
         /// Implementation of the <see cref="IContainer.Resolve(IResolveContext)"/> method.
@@ -266,6 +242,8 @@ namespace Rezolver
                 return compiledTarget;
             else if (context.RequestedType != typeof(object) && TypeHelpers.IsAssignableFrom(context.RequestedType, target.GetType()))
                 return new ConstantCompiledTarget(target, target);
+
+            // TODO: Remove this by changing how compilation works, to use options from the target container instead of direct resolving
 
             if (context.RequestedType == typeof(ITargetCompiler))
                 throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler as a constant service");

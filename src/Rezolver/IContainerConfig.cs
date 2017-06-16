@@ -4,29 +4,23 @@ using System.Collections.Generic;
 namespace Rezolver
 {
     /// <summary>
-    /// Represents a behaviour for an <see cref="IContainer"/> (specifically one which also uses an 
-    /// <see cref="ITargetContainer"/> as the source of its registrations).
+    /// A configuration callback for instances of <see cref="IContainer"/> which also use <see cref="ITargetContainer"/>
+    /// as the source of their registrations.
     /// </summary>
     /// <remarks>While similar to <see cref="ITargetContainerConfig"/>, this is specifically used
-    /// for new containers.
+    /// for new container instances - since some configuration (setting of options etc) only applies to
+    /// containers rather than target containers.
     /// 
-    /// A behaviour can be passed to any of the provided <see cref="ContainerBase"/>-derived types on 
-    /// construction (see the <see cref="ContainerBase.ContainerBase(IContainerBehaviour, ITargetContainer)"/> 
-    /// constructor).  If one is not passed then a default is used from the <see cref="GlobalBehaviours"/> class.
+    /// A configuration instance can be passed to any of the provided <see cref="ContainerBase"/>-derived types on 
+    /// construction (see the <see cref="ContainerBase.ContainerBase(IContainerConfig, ITargetContainer)"/> 
+    /// constructor).  If one is not passed then a default is used.
     /// 
-    /// The one used depends whether it's an <see cref="OverridingContainer"/> or not: Rezolver has global 
-    /// behaviours for the standalone container types (via the <see cref="GlobalBehaviours.ContainerBehaviour"/> 
-    /// property) and for overriding containers (via the <see cref="GlobalBehaviours.OverridingContainerBehaviour"/> 
-    /// property).
-    /// 
-    /// 
-    /// Behaviours extend <see cref="ITargetContainer"/>-based containers by registering well-known service types
-    /// in the target container passed to <see cref="Attach"/> - which is the target container from which the container
-    /// itself will retrieve registrations when resolving instances.  The built in <see cref="IContainer"/> classes resolve
-    /// these service types (e.g. <see cref="ITargetCompiler"/>) as part of normal operation, so - by providing alternative
-    /// or additional registrations - behaviours can extend the underlying container.</remarks>
+    /// The built-in config implementations register services or set options in the target container that 
+    /// is used by the container to change or add functionality.
+    /// </remarks>
     /// <seealso cref="ITargetContainerConfig"/>
-    public interface IContainerBehaviour
+    /// <seealso cref=""/>
+    public interface IContainerConfig
     {
         /// <summary>
         /// Attaches the behaviour to the <paramref name="container"/> and/or its <paramref name="targets"/>.
@@ -58,7 +52,7 @@ namespace Rezolver
     /// behaviours hide the complexity behind extension methods and/or friendly behaviour types.
     /// 
     /// You'll only need to use it directly if you're extending some of the more advanced parts of the framework.</remarks>
-    public interface IContainerBehaviour<TContainerService> : IContainerBehaviour
+    public interface IContainerConfig<TContainerService> : IContainerConfig
     {
 
     }

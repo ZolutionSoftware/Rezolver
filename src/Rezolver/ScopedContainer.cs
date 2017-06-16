@@ -53,7 +53,7 @@ namespace Rezolver
         /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
         /// <see cref="ContainerBase.Targets"/>). If not provided, then the global 
         /// <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
-        public ScopedContainer(ITargetContainer targets = null, IContainerBehaviour behaviour = null)
+        public ScopedContainer(ITargetContainer targets = null, IContainerConfig behaviour = null)
 			: base(targets)
 		{
 			_scope = new ContainerScope(this);
@@ -68,7 +68,7 @@ namespace Rezolver
         /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
         /// <see cref="ContainerBase.Targets"/>). If not provided, then the global 
         /// <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
-        public ScopedContainer(IContainerBehaviour behaviour)
+        public ScopedContainer(IContainerConfig behaviour)
             : this(targets: null, behaviour: behaviour)
         {
 

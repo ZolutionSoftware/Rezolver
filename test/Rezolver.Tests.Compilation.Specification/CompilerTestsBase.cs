@@ -26,11 +26,11 @@ namespace Rezolver.Tests.Compilation.Specification
         /// 
 		/// </summary>
 		/// <param name="testName">Name of the test.</param>
-		protected abstract IContainerBehaviour<ITargetCompiler> GetCompilerBehaviour([CallerMemberName]string testName = null);
+		protected abstract IContainerConfig<ITargetCompiler> GetCompilerBehaviour([CallerMemberName]string testName = null);
 
-        protected IContainerBehaviour GetContainerBehaviour([CallerMemberName]string testName = null)
+        protected IContainerConfig GetContainerBehaviour([CallerMemberName]string testName = null)
         {
-            var behaviour = new ContainerBehaviourCollection(GlobalBehaviours.ContainerBehaviour);
+            var behaviour = new ContainerConfigCollection(GlobalBehaviours.ContainerBehaviour);
             behaviour.UseCompiler(GetCompilerBehaviour(testName));
             return behaviour;
         }
