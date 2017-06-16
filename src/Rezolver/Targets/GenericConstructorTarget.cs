@@ -140,15 +140,14 @@ namespace Rezolver.Targets
 
         /// <summary>
         /// Constructs a new instance of the <see cref="GenericConstructorTarget"/> for the given open generic type,
-        /// which will utilise the optional <paramref name="memberBindingBehaviour"/> when it constructs its
+        /// which will utilise the optional <paramref name="memberBinding"/> when it constructs its
         /// <see cref="ConstructorTarget"/> when <see cref="Bind(ICompileContext)"/> is called.
         /// </summary>
         /// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-        /// <param name="memberBindingBehaviour">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
-        public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the <see cref="Bind(ICompileContext)"/> method will attempt to obtain one via the options API from the 
+        /// <see cref="ICompileContext"/> - and if one is still not available, then no member binding will be performed.</param>
+        public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBinding = null)
 		{
 			genericType.MustNotBeNull(nameof(genericType));
 			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
@@ -156,7 +155,7 @@ namespace Rezolver.Targets
 			if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
 				throw new ArgumentException("The type must be a generic type definition of either a non-abstract class or value type.");
 			GenericType = genericType;
-			MemberBindingBehaviour = memberBindingBehaviour;
+			MemberBindingBehaviour = memberBinding;
 		}
 
 		/// <summary>

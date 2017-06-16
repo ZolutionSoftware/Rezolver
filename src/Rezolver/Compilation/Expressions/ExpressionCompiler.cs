@@ -18,11 +18,10 @@ namespace Rezolver.Compilation.Expressions
     /// </summary>
     /// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
     /// <seealso cref="Rezolver.Compilation.ITargetCompiler" />
-    /// <remarks>Use of this compiler by a container is enabled by attaching the <see cref="Configuration.ExpressionCompilerBehaviour"/>
+    /// <remarks>Use of this compiler by a container is enabled by applying the <see cref="Configuration.ExpressionCompilerBehaviour"/>
     /// <see cref="Configuration.ExpressionCompilerBehaviour.Instance"/> to the container either on construction (for example, via the 
-    /// <see cref="Container.Container(ITargetContainer, IContainerConfig)"/> or
-    /// <see cref="Container.Container(IContainerConfig)"/> constructors) or via the <see cref="GlobalBehaviours.ContainerBehaviour"/>
-    /// global behaviour, which currently includes the behaviour by default.
+    /// <see cref="Container.Container(ITargetContainer, IContainerConfig)"/> constructor) or via the 
+    /// <see cref="Container.DefaultConfig"/> - which currently configures this compiler by default anyway.
     /// 
     /// This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a 
     /// given <see cref="ITarget" /> from the <see cref="IExpressionCompileContext" />.

@@ -10,13 +10,13 @@ using Rezolver.Compilation;
 namespace Rezolver.Configuration
 {
 	/// <summary>
-	/// Implements the <see cref="IContainerConfig"/> to configure expression-based compilation for targets in containers.
+	/// Implementation of <see cref="IContainerConfig"/> which configures expression-based compilation for targets in containers.
 	/// 
 	/// The implementation registers all the targets necessary to use the expression tree-based compilation provided by 
 	/// the <see cref="ExpressionCompiler"/>
 	/// 
-	/// This is included in the default <see cref="GlobalBehaviours.ContainerBehaviour"/>, meaning that all containers
-    /// created without a specific behaviour will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
+	/// This is included in the <see cref="Container.DefaultConfig"/>, meaning that all containers
+    /// created without a specific config will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
 	public class ExpressionCompilerBehaviour : IContainerConfig<ITargetCompiler>
 	{
         /// <summary>

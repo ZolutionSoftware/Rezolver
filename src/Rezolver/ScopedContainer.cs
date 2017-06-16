@@ -50,29 +50,14 @@ namespace Rezolver
         /// container, ultimately being passed to the <see cref="Targets"/> property.
         /// 
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
-        /// <see cref="ContainerBase.Targets"/>). If not provided, then the global 
-        /// <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
-        public ScopedContainer(ITargetContainer targets = null, IContainerConfig behaviour = null)
+        /// <param name="config">Can be null.  A configuration to apply to this container (and, potentially its 
+        /// <see cref="Targets"/>).  If not provided, then the <see cref="Container.DefaultConfig"/> will be used</param>
+        public ScopedContainer(ITargetContainer targets = null, IContainerConfig config = null)
 			: base(targets)
 		{
 			_scope = new ContainerScope(this);
-            (behaviour ?? GlobalBehaviours.ContainerBehaviour).Attach(this, Targets);
+            (config ?? DefaultConfig).Attach(this, Targets);
 		}
-
-        /// <summary>
-        /// Constructs a new instance of the <see cref="ScopedContainer"/> class, with a default new 
-        /// <see cref="TargetContainer"/> as the <see cref="ContainerBase.Targets"/>; using the passed 
-        /// <paramref name="behaviour"/> to initialise additional functionality.
-        /// </summary>
-        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
-        /// <see cref="ContainerBase.Targets"/>). If not provided, then the global 
-        /// <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
-        public ScopedContainer(IContainerConfig behaviour)
-            : this(targets: null, behaviour: behaviour)
-        {
-
-        }
 
 		#region IDisposable Support
 		private bool disposedValue = false; // To detect redundant calls

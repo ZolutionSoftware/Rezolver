@@ -73,7 +73,7 @@ namespace Rezolver
                         Contravariance = contravariantSearchType.Value;
                     else
                     {
-                        // if the parent has its contravariance search set to ExactOnly, we inherit that
+                        // if the parent has its contravariance search set to None, we inherit that
                         // and move on.
                         if (Parent?.Contravariance == Contravariance.None)
                             Contravariance = Contravariance.None;
@@ -231,6 +231,10 @@ namespace Rezolver
                 select accseq.Concat(new[] { item }));
         }
 
+        /// <summary>
+        /// Implementation of <see cref="IEnumerable{T}.GetEnumerator"/>
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<Type> GetEnumerator()
         {
             return Run(_type).GetEnumerator();
@@ -244,6 +248,12 @@ namespace Rezolver
         private readonly Type _type;
         private readonly ITargetContainer _rootContainer;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="TargetTypeSelector"/> type for the given
+        /// <paramref name="type"/> - with options read from the given <paramref name="rootContainer"/>.
+        /// </summary>
+        /// <param name="type">The type for which a list of search types is to be produced.</param>
+        /// <param name="rootContainer"></param>
         public TargetTypeSelector(Type type, ITargetContainer rootContainer = null)
         {
             _type = type;

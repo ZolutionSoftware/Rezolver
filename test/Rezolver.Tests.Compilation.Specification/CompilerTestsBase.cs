@@ -30,7 +30,8 @@ namespace Rezolver.Tests.Compilation.Specification
 
         protected IContainerConfig GetContainerBehaviour([CallerMemberName]string testName = null)
         {
-            var behaviour = new ContainerConfigCollection(GlobalBehaviours.ContainerBehaviour);
+            // clone our default configuration for containers.
+            var behaviour = new ContainerConfigCollection(Container.DefaultConfig);
             behaviour.UseCompiler(GetCompilerBehaviour(testName));
             return behaviour;
         }
