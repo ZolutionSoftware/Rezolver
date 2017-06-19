@@ -20,38 +20,23 @@ namespace Rezolver.Tests.Compilation.Specification
 		}
 
 		[Fact]
-		public void Container_ShouldResolveCompiler()
+		public void Configured_Container_ShouldGetCompilerAsOption()
 		{
 			var targets = CreateTargetContainer();
 			var container = CreateContainer(targets);
 			Output.WriteLine("If this test fails, then all other tests in this class will likely fail");
-			Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
+			Assert.IsType<TCompiler>(targets.GetOption<ITargetCompiler>());
 		}
 
         [Fact]
-        public void Container_ShouldInjectCompilerAsDependency()
+        public void Configured_OverridingContainer_ShouldAlsoGetCompilerAsOption()
         {
-            var targets = CreateTargetContainer();
-            targets.RegisterType<RequiresITargetCompiler>();
-            var container = CreateContainer(targets);
-            Assert.IsType<TCompiler>(container.Resolve<RequiresITargetCompiler>().Compiler);
+            Output.WriteLine("Testing that the container returned from CreateOverridingContainer can also get a compiler from options as the base container does.  If this fails, then any tests to do with overriding containers will fail.");
+            var container = CreateContainer(CreateTargetContainer());
+            var overridingTargets = CreateTargetContainer();
+            var overrideContainer = CreateOverridingContainer(container, overridingTargets);
+
+            Assert.IsType<TCompiler>(overridingTargets.GetOption<ITargetCompiler>());
         }
-
-		[Fact]
-		public void OverridingContainer_ShouldResolveSameCompiler()
-		{
-			Output.WriteLine("Testing that the container returned from CreateOverridingContainer can resolve the same compiler as the base container.  If this fails, then any tests to do with overriding containers will fail.");
-			var container = CreateContainer(CreateTargetContainer());
-			var overrideContainer = CreateOverridingContainer(container);
-
-			Assert.Same(container.Resolve<ITargetCompiler>(), overrideContainer.Resolve<ITargetCompiler>());
-		}
-
-		[Fact]
-		public void ContainerBehaviour_ShouldConfigureCompiler()
-		{
-			var container = new Container(config: GetCompilerBehaviour());
-			Assert.IsType<TCompiler>(container.Resolve<ITargetCompiler>());
-		}		
 	}
 }

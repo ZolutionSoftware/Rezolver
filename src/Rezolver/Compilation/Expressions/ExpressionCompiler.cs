@@ -18,8 +18,8 @@ namespace Rezolver.Compilation.Expressions
     /// </summary>
     /// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
     /// <seealso cref="Rezolver.Compilation.ITargetCompiler" />
-    /// <remarks>Use of this compiler by a container is enabled by applying the <see cref="Configuration.ExpressionCompilerBehaviour"/>
-    /// <see cref="Configuration.ExpressionCompilerBehaviour.Instance"/> to the container either on construction (for example, via the 
+    /// <remarks>Use of this compiler by a container is enabled by applying the <see cref="Configuration.ConfigureExpressionCompiler"/>
+    /// <see cref="Configuration.ConfigureExpressionCompiler.Instance"/> to the container either on construction (for example, via the 
     /// <see cref="Container.Container(ITargetContainer, IContainerConfig)"/> constructor) or via the 
     /// <see cref="Container.DefaultConfig"/> - which currently configures this compiler by default anyway.
     /// 
@@ -54,7 +54,7 @@ namespace Rezolver.Compilation.Expressions
     public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler
     {
         /// <summary>
-        /// Gets the default expression compiler.  It's this that the <see cref="Configuration.ExpressionCompilerBehaviour"/>
+        /// Gets the default expression compiler.  It's this that the <see cref="Configuration.ConfigureExpressionCompiler"/>
         /// registers.
         /// </summary>
         public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
@@ -119,8 +119,11 @@ namespace Rezolver.Compilation.Expressions
             target.MustNotBeNull(nameof(target));
             context.MustNotBeNull(nameof(context));
 
-            var cache = context.ResolveContext.Resolve<ExpressionBuilderCache>();
-            return cache.ResolveBuilder(target);
+            return context.GetOption<IExpressionBuilder>(target.GetType());
+
+            //var expressionBuilder = 
+            //var cache = context.ResolveContext.Resolve<ExpressionBuilderCache>();
+            //return cache.ResolveBuilder(target);
         }
 
         /// <summary>

@@ -28,10 +28,10 @@ namespace Rezolver.Configuration
         }
 
         /// <summary>
-        /// Implementation of <see cref="ITargetContainerConfig.Apply(ITargetContainer)"/>
+        /// Implementation of <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/>
         /// </summary>
         /// <param name="targets"></param>
-        public void Apply(ITargetContainer targets)
+        public void Configure(ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
             // if an option has already been set on the target container which disables automatic enumerables,

@@ -43,7 +43,7 @@ namespace Rezolver
             parent.MustNotBeNull(nameof(parent));
             _parent = parent;
 
-            (config ?? DefaultConfig).Apply(this);
+            (config ?? DefaultConfig).Configure(this);
         }
 
         /// <summary>

@@ -161,7 +161,7 @@ namespace Rezolver.Compilation.Expressions
         /// more precisely, this) compiler needing to compile it.</remarks>
         protected virtual IExpressionCompiler GetContextCompiler(IExpressionCompileContext context)
         {
-            return context.ResolveContext.Container.Resolve<IExpressionCompiler>();
+            return context.GetOption<IExpressionCompiler>();
         }
 
         /// <summary>

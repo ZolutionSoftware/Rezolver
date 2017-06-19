@@ -46,12 +46,12 @@ namespace Rezolver
         /// The configurations present in this collection by default will set up the expression target compiler and extend
         /// the automatic enumerable injection functionality so that the <see cref="OverridingContainer"/> class can produce
         /// enumerables which are made up of targets registered in both the overriding container and its inner container.</remarks>
-        public static ContainerConfigCollection DefaultConfig { get; } = new ContainerConfigCollection(new IContainerConfig[]
+        public static CombinedContainerConfig DefaultConfig { get; } = new CombinedContainerConfig(new IContainerConfig[]
         {
-            Configuration.ExpressionCompilerBehaviour.Instance,
+            Configuration.ConfigureExpressionCompiler.Instance,
             // note: this config object only applies itself to OverridingContainer objects, and only when the 
             // EnableAutoEnumerables option is set to true in the ITargetContainer.
-            Configuration.OverridingEnumerableBehaviour.Instance
+            Configuration.OverridingEnumerables.Instance
         });
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Rezolver
             if (this.GetType() != typeof(Container))
                 throw new InvalidOperationException("This constructor must not be used by derived types because applying configuration will most likely trigger calls to virtual methods on this instance.  Please use the protected constructor and apply configuration explicitly in your derived class");
 
-            (config ?? DefaultConfig).Attach(this, Targets);
+            (config ?? DefaultConfig).Configure(this, Targets);
 		}
 
         /// <summary>

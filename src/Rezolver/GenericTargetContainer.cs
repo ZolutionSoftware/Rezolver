@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -20,6 +21,20 @@ namespace Rezolver
     /// create instances of this; and the <see cref="EnumerableTargetContainer"/> (understandably) inherits from it.</remarks>
     public class GenericTargetContainer : TargetDictionaryContainer
     {
+        private class Caches
+        {
+            public readonly ConcurrentDictionary<Type, ITarget> FetchCache
+                = new ConcurrentDictionary<Type, ITarget>();
+            public readonly ConcurrentDictionary<Type, IEnumerable<ITarget>> FetchAllCache
+                = new ConcurrentDictionary<Type, IEnumerable<ITarget>>();
+        }
+
+        private Caches _caches = new Caches();
+
+        private void InvalidateCaches()
+        {
+            _caches = new Caches();
+        }
         /// <summary>
         /// Gets the open generic type definition which is common to all targets and containers within this container.
         /// </summary>
@@ -73,7 +88,10 @@ namespace Rezolver
             //then we add it to the collection of targets that are registered specifically against
             //this type.
             if (serviceType == GenericType)
+            {
                 Targets.Register(target, serviceType);
+                InvalidateCaches();
+            }
             else
             {
                 //the type MUST therefore be a closed generic over the generic type definition,
@@ -81,7 +99,21 @@ namespace Rezolver
                 if (!TypeHelpers.IsGenericType(serviceType) || serviceType.GetGenericTypeDefinition() != GenericType)
                     throw new ArgumentException($"Type must be equal to the generic type definition { GenericType } or a closed instance of that type", nameof(serviceType));
                 base.Register(target, serviceType);
+                InvalidateCaches();
             }
+        }
+
+        /// <summary>
+        /// Override of the <see cref="TargetDictionaryContainer.RegisterContainer(Type, ITargetContainer)"/> method.
+        /// 
+        /// Doesn't do anything different, except invalidate some internal caches.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="container"></param>
+        public override void RegisterContainer(Type type, ITargetContainer container)
+        {
+            base.RegisterContainer(type, container);
+            InvalidateCaches();
         }
 
         /// <summary>
@@ -100,16 +132,19 @@ namespace Rezolver
             //given type and return the result of its fetch function.
             //If we don't find one - then we return the targets that have been registered against the 
             //open generic type definition.
-            ITarget baseResult = null;
-            foreach (var searchType in new TargetTypeSelector(type))
+            return _caches.FetchCache.GetOrAdd(type, t =>
             {
-                if ((baseResult = base.Fetch(searchType)) != null)
-                    return baseResult;
-            }
+                ITarget baseResult = null;
+                foreach (var searchType in new TargetTypeSelector(t))
+                {
+                    if ((baseResult = base.Fetch(searchType)) != null)
+                        return baseResult;
+                }
 
-            //no direct match for any of the search types in our dictionary - so resort to the 
-            //targets that have been registered directly against the open generic type.
-            return Targets.Fetch(type);
+                //no direct match for any of the search types in our dictionary - so resort to the 
+                //targets that have been registered directly against the open generic type.
+                return Targets.Fetch(t);
+            });
         }
 
         /// <summary>
@@ -117,6 +152,11 @@ namespace Rezolver
         /// </summary>
         /// <param name="type">The type whose targets are to be retrieved.</param>
         public override IEnumerable<ITarget> FetchAll(Type type)
+        {
+            return _caches.FetchAllCache.GetOrAdd(type, t => FetchAllWorker(t).ToArray());
+        }
+
+        private IEnumerable<ITarget> FetchAllWorker(Type type)
         {
             bool matchAll = Root.GetOption(Options.FetchAllMatchingGenerics.Default);
             bool foundOne = false;

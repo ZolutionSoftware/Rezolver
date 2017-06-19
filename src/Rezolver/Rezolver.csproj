@@ -74,4 +74,8 @@
   <ItemGroup>
     <Folder Include="Compilation\Reflection\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="CombinedContainerConfig.cs" />
+  </ItemGroup>
 </Project>

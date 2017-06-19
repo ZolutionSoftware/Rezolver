@@ -14,21 +14,21 @@ namespace Rezolver.Configuration
     /// <remarks>
     /// Note that this class is not an <see cref="ITargetContainerConfig"/> like the <see cref="AutoEnumerables"/>,
     /// instead it is an <see cref="IContainerConfig"/> because it's only relevant for instances of <see cref="OverridingContainer"/>.</remarks>
-    public sealed class OverridingEnumerableBehaviour : IContainerConfig
+    public sealed class OverridingEnumerables : IContainerConfig
     {
         /// <summary>
-        /// The one and only instance of the <see cref="OverridingEnumerableBehaviour"/>
+        /// The one and only instance of the <see cref="OverridingEnumerables"/>
         /// </summary>
-        public static OverridingEnumerableBehaviour Instance { get; } = new OverridingEnumerableBehaviour();
+        public static OverridingEnumerables Instance { get; } = new OverridingEnumerables();
 
-        private OverridingEnumerableBehaviour() { }
+        private OverridingEnumerables() { }
 
         /// <summary>
         /// Attaches this behaviour to the container
         /// </summary>
         /// <param name="container"></param>
         /// <param name="targets"></param>
-        public void Attach(IContainer container, ITargetContainer targets)
+        public void Configure(IContainer container, ITargetContainer targets)
         {
             if (container == null) throw new ArgumentNullException(nameof(container));
             if (targets == null) throw new ArgumentNullException(nameof(targets));

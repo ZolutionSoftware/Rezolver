@@ -55,19 +55,6 @@ namespace Rezolver
         /// always will be).</remarks>
         protected ITargetContainer Targets { get; }
 
-        private Lazy<ITargetCompiler> _compiler;
-
-        private ContainerBase()
-        {
-            //only the compiler and compile context provider fromm this container are used by this container.
-            _compiler = new Lazy<ITargetCompiler>(() =>
-            {
-                if (!this.TryResolve(out ITargetCompiler compiler))
-                    throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler and ICompileContextProvider as constant services");
-                return compiler;
-            });
-        }
-
         /// <summary>
         /// Constructs a new instance of the <see cref="ContainerBase"/> class.
         /// </summary>
@@ -76,7 +63,6 @@ namespace Rezolver
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, 
         /// after construction, through the <see cref="Targets"/> property.</param>
         protected ContainerBase(ITargetContainer targets = null)
-            : this()
         {
             Targets = targets ?? new TargetContainer();
         }
@@ -243,13 +229,17 @@ namespace Rezolver
             else if (context.RequestedType != typeof(object) && TypeHelpers.IsAssignableFrom(context.RequestedType, target.GetType()))
                 return new ConstantCompiledTarget(target, target);
 
-            // TODO: Remove this by changing how compilation works, to use options from the target container instead of direct resolving
+            var compiler = Targets.GetOption<ITargetCompiler>(target.GetType());
+            if (compiler == null)
+                throw new InvalidOperationException($"No compiler has been configured in the Targets target container for a target of type { target.GetType() } - please use the SetOption API to set an ITargetCompiler for all target types, or for specific target types.");
+            return compiler.CompileTarget(target, context.New(newContainer: this), Targets);
+            //// TODO: Remove this by changing how compilation works, to use options from the target container instead of direct resolving
 
-            if (context.RequestedType == typeof(ITargetCompiler))
-                throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler as a constant service");
-            //note below - the context's container is always fixed to this container for compilation,
-            //as this container is the source of the target.
-            return _compiler.Value.CompileTarget(target, context.New(newContainer: this), Targets);
+            //if (context.RequestedType == typeof(ITargetCompiler))
+            //    throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler as a constant service");
+            ////note below - the context's container is always fixed to this container for compilation,
+            ////as this container is the source of the target.
+            //return _compiler.Value.CompileTarget(target, context.New(newContainer: this), Targets);
         }
 
         /// <summary>

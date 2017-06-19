@@ -51,7 +51,7 @@ namespace Rezolver.Configuration
         /// then the behaviour DOES NOT overwrite it.
         /// </summary>
         /// <param name="targets"></param>
-        public void Apply(ITargetContainer targets)
+        public void Configure(ITargetContainer targets)
         {
             var existing = targets.Fetch(typeof(IResolveContext));
             if (existing == null || existing.UseFallback)

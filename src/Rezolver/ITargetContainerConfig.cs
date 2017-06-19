@@ -14,13 +14,13 @@ namespace Rezolver
     /// to a target container.
     /// 
     /// Different target containers also have their own statically available default configuration collections,
-    /// of the type <see cref="TargetContainerConfigCollection"/>, which also implements this interface by
+    /// of the type <see cref="CombinedTargetContainerConfig"/>, which also implements this interface by
     /// applying multiple configurations to a target container - providing an easy way to combine multiple configurations
     /// as one.  The most commonly used and modified of these is the <see cref="TargetContainer.DefaultConfig"/>
     /// collection.
     /// </remarks>
     /// <seealso cref="TargetContainer.DefaultConfig"/>
-    /// <seealso cref="TargetContainerConfigCollection"/>
+    /// <seealso cref="CombinedTargetContainerConfig"/>
     /// <seealso cref="Configuration.AutoEnumerables"/>
     /// <seealso cref="Configuration.InjectResolveContext"/>
     public interface ITargetContainerConfig
@@ -30,6 +30,6 @@ namespace Rezolver
         /// </summary>
         /// <param name="targets">The target container to which the configuration is to be applied - will not be 
         /// null when called by the framework.</param>
-        void Apply(ITargetContainer targets);
+        void Configure(ITargetContainer targets);
     }
 }

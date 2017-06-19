@@ -34,7 +34,7 @@ namespace Rezolver
         /// <remarks>The simplest way to configure all target container instances is to add/remove configs to this collection.
         /// 
         /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.</remarks>
-        public static TargetContainerConfigCollection DefaultConfig { get; } = new TargetContainerConfigCollection(new ITargetContainerConfig[]
+        public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
             Configuration.AutoEnumerables.Instance,
             Configuration.InjectResolveContext.Instance
@@ -54,7 +54,7 @@ namespace Rezolver
             if (this.GetType() != typeof(TargetContainer))
                 throw new InvalidOperationException("Derived types must not use this constructor because it triggers virtual method calls via the configuration callbacks.  Please use the protected parameterless constructor instead");
 
-            (config ?? DefaultConfig).Apply(this);
+            (config ?? DefaultConfig).Configure(this);
         }
 
         /// <summary>

@@ -56,7 +56,7 @@ namespace Rezolver
 			: base(targets)
 		{
 			_scope = new ContainerScope(this);
-            (config ?? DefaultConfig).Attach(this, Targets);
+            (config ?? DefaultConfig).Configure(this, Targets);
 		}
 
 		#region IDisposable Support

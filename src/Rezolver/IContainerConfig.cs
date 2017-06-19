@@ -27,7 +27,7 @@ namespace Rezolver
         /// <param name="container">The container to which the behaviour is to be attached.</param>
         /// <param name="targets">The <see cref="ITargetContainer"/> for the <paramref name="container"/> to
         /// which the behaviour is to be attached.</param>
-        void Attach(IContainer container, ITargetContainer targets);
+        void Configure(IContainer container, ITargetContainer targets);
     }
 
     /// <summary>

@@ -34,7 +34,7 @@ namespace Rezolver
     /// ## Behaviour of enumerables
     /// 
     /// The behaviour of enumerables depends on whether enumerables are enabled via the <see cref="Options.EnableAutoEnumerable"/> option 
-    /// (<c>true</c> by default) and whether the <see cref="Configuration.OverridingEnumerableBehaviour"/> is applied to the container
+    /// (<c>true</c> by default) and whether the <see cref="Configuration.OverridingEnumerables"/> is applied to the container
     /// (which it is, also by default, via the <see cref="Container.DefaultConfig"/>).
     /// 
     /// If so, then any request for <c>IEnumerable&lt;T&gt;</c> will result in an enumerable which combines the one resolved by the <see cref="Inner"/>
@@ -42,7 +42,7 @@ namespace Rezolver
     /// implementation of the <see cref="OverridingTargetContainer"/> - which produces an enumerable of targets from both the base target container and
     /// the overriding one.
     /// 
-    /// If the <see cref="Configuration.OverridingEnumerableBehaviour"/> is not applied to this container, then any IEnumerable registered (or automatically built)
+    /// If the <see cref="Configuration.OverridingEnumerables"/> is not applied to this container, then any IEnumerable registered (or automatically built)
     /// in this container will override that of the <see cref="Inner"/> container.
     /// </remarks>
     public sealed class OverridingContainer : Container
@@ -71,7 +71,7 @@ namespace Rezolver
             inner.MustNotBeNull("inner");
             Inner = inner;
 
-            (config ?? DefaultConfig).Attach(this, Targets);
+            (config ?? DefaultConfig).Configure(this, Targets);
         }
         
         /// <summary>

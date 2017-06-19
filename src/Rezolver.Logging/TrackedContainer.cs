@@ -28,10 +28,11 @@ namespace Rezolver.Logging
 		protected internal ICallTracker Tracker { get; private set; }
 
 
-		public TrackedContainer(ICallTracker logger, ITargetContainer builder = null, IContainerConfig compilerConfig = null) :
-		  base(targets: builder, config: compilerConfig)
+		public TrackedContainer(ICallTracker logger, ITargetContainer targets = null, IContainerConfig compilerConfig = null) :
+		  base(targets: targets)
 		{
 			Tracker = logger;
+            (compilerConfig ?? DefaultConfig).Configure(this, Targets);
 		}
 
 		public override bool CanResolve(IResolveContext context)
