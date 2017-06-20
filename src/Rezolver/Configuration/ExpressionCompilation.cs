@@ -17,14 +17,14 @@ namespace Rezolver.Configuration
 	/// 
 	/// This is included in the <see cref="Container.DefaultConfig"/>, meaning that all containers
     /// created without a specific config will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
-	public class ConfigureExpressionCompiler : IContainerConfig<ITargetCompiler>
+	public class ExpressionCompilation : IContainerConfig<ITargetCompiler>
 	{
         /// <summary>
-        /// The one and only instance of <see cref="ConfigureExpressionCompiler"/>
+        /// The one and only instance of <see cref="ExpressionCompilation"/>
         /// </summary>
-        public static IContainerConfig<ITargetCompiler> Instance { get; } = new ConfigureExpressionCompiler();
+        public static IContainerConfig<ITargetCompiler> Instance { get; } = new ExpressionCompilation();
 
-        private ConfigureExpressionCompiler()
+        private ExpressionCompilation()
         {
 
         }
@@ -43,7 +43,7 @@ namespace Rezolver.Configuration
             // instances of that new behaviour type and this class will automatically use them.
 
 			var rezolverAssembly = TypeHelpers.GetAssembly(typeof(IContainer));
-			var thisAssembly = TypeHelpers.GetAssembly(typeof(ConfigureExpressionCompiler));
+			var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilation));
             // the well-known target types for compilation are ICompiledTarget, plus all the concrete target types in Rezolver.Targets
 			foreach (var type in rezolverAssembly.ExportedTypes.Where(t =>
                 t == typeof(ICompiledTarget) || 

@@ -16,14 +16,14 @@ namespace Rezolver
     {
         /// <summary>
         /// Replaces any existing <see cref="IContainerConfig{ITargetCompiler}" /> in the collection with the 
-        /// <see cref="ConfigureExpressionCompiler.Instance"/> from <see cref="ConfigureExpressionCompiler"/> so that
+        /// <see cref="ExpressionCompilation.Instance"/> from <see cref="ExpressionCompilation"/> so that
         /// any container to which the config collection will be applied will use the <see cref="ExpressionCompiler"/>.
         /// </summary>
         /// <param name="combined">The collection to which the behaviour is to be added.</param>
         /// <returns>The collection on which the operation is called, to allow chaining of further calls.</returns>
         public static CombinedContainerConfig UseExpressionCompiler(this CombinedContainerConfig combined)
         {
-            return combined.UseCompiler(ConfigureExpressionCompiler.Instance);
+            return combined.UseCompiler(ExpressionCompilation.Instance);
         }
 
         /// <summary>

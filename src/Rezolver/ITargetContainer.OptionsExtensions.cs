@@ -43,9 +43,9 @@ namespace Rezolver
             where TOption : class
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
             if (option == null) throw new ArgumentNullException(nameof(option));
 
+            if (serviceType == null) return SetOption<TOption>(targets, option);
             // this is cheeky - we create an instance of OptionContainer<TOption> to service
             // the type OptionContainer<TService, TOption>.  When we retrieve it in the various GetOption
             // methods, we *expect* only an OptionContainer<TOption> despite the fact that we fetch

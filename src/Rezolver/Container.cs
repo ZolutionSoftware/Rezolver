@@ -48,7 +48,7 @@ namespace Rezolver
         /// enumerables which are made up of targets registered in both the overriding container and its inner container.</remarks>
         public static CombinedContainerConfig DefaultConfig { get; } = new CombinedContainerConfig(new IContainerConfig[]
         {
-            Configuration.ConfigureExpressionCompiler.Instance,
+            Configuration.ExpressionCompilation.Instance,
             // note: this config object only applies itself to OverridingContainer objects, and only when the 
             // EnableAutoEnumerables option is set to true in the ITargetContainer.
             Configuration.OverridingEnumerables.Instance

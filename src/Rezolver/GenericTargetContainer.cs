@@ -27,6 +27,8 @@ namespace Rezolver
                 = new ConcurrentDictionary<Type, ITarget>();
             public readonly ConcurrentDictionary<Type, IEnumerable<ITarget>> FetchAllCache
                 = new ConcurrentDictionary<Type, IEnumerable<ITarget>>();
+
+            public bool Empty => FetchCache.Count == 0 && FetchAllCache.Count == 0;
         }
 
         private Caches _caches = new Caches();
