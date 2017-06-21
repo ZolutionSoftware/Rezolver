@@ -39,7 +39,7 @@ namespace Rezolver
             return targets;
         }
 
-        public static ITargetContainer SetOption<TOption>(this ITargetContainer targets, Type serviceType, TOption option)
+        public static ITargetContainer SetOption<TOption>(this ITargetContainer targets, TOption option, Type serviceType)
             where TOption : class
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));

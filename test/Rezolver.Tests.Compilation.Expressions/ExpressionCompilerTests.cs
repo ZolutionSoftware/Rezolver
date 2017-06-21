@@ -25,7 +25,7 @@ namespace Rezolver.Tests.Compilation.Expressions
 
 		protected override IContainerConfig<ITargetCompiler> GetCompilerConfig([CallerMemberName] string testName = null)
 		{
-            return ConfigureExpressionCompiler.Instance;
+            return ExpressionCompilation.Instance;
 		}
 	}
 }

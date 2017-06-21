@@ -55,7 +55,7 @@ namespace Rezolver.Tests.Examples
             // <example3>
             var container = new Container();
             // Here - the behaviour will *only* kick in for the Has2InjectableMembers type
-            container.SetOption(typeof(Has2InjectableMembers), MemberBindingBehaviour.BindAll);
+            container.SetOption(MemberBindingBehaviour.BindAll, typeof(Has2InjectableMembers));
             container.RegisterAll(
                 Target.ForType<MyService1>(),
                 Target.ForType<MyService2>()

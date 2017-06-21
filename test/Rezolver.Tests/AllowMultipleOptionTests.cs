@@ -51,7 +51,7 @@ namespace Rezolver.Tests
         public void ShouldDisallowMultipleForAnOpenGenericAndAllClosedGenerics()
         {
             var targets = new TargetContainer();
-            targets.SetOption<AllowMultiple>(typeof(Generic<>), false);
+            targets.SetOption<AllowMultiple>(false, typeof(Generic<>));
 
             RegisterTwoTargets(targets, typeof(int));
             Assert.Throws<InvalidOperationException>(() => RegisterTwoTargets(targets, typeof(Generic<>)));
@@ -62,7 +62,7 @@ namespace Rezolver.Tests
         public void ShouldAllowForSpecificClosedGeneric()
         {
             var targets = new TargetContainer();
-            targets.SetOption<AllowMultiple>(typeof(Generic<>), false);
+            targets.SetOption<AllowMultiple>(false, typeof(Generic<>));
             targets.SetOption<AllowMultiple, Generic<int>>(true);
 
             RegisterTwoTargets(targets, typeof(Generic<int>));
@@ -73,7 +73,7 @@ namespace Rezolver.Tests
         {
             var targets = new TargetContainer();
             targets.SetOption<AllowMultiple>(false);
-            targets.SetOption<AllowMultiple>(typeof(Generic<>), true);
+            targets.SetOption<AllowMultiple>(true, typeof(Generic<>));
             targets.SetOption<AllowMultiple, Generic<string>>(false);
         }
     }

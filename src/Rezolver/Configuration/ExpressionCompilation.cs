@@ -106,7 +106,7 @@ namespace Rezolver.Configuration
             //type in this assembly
             foreach (var registration in GetStandardTargetBuilders())
             {
-                targets.SetOption(registration.TargetType, registration.Instance);
+                targets.SetOption(registration.Instance, registration.TargetType);
             }
         }
     }

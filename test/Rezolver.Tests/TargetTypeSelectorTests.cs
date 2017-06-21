@@ -320,7 +320,7 @@ namespace Rezolver.Tests
         {
             var targets = new TargetContainer();
             // test shows that contravariance still works for Action<> but is disabled for all IContravariant<>
-            targets.SetOption<Options.EnableContravariance>(typeof(IContravariant<>), false);
+            targets.SetOption<Options.EnableContravariance>(false, typeof(IContravariant<>));
             var result1 = new TargetTypeSelector(typeof(IContravariant<BaseClassGrandchild>), targets).ToArray();
             var result2 = new TargetTypeSelector(typeof(Action<BaseClassGrandchild>), targets).ToArray();
 

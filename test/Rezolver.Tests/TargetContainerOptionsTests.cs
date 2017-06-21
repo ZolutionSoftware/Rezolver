@@ -11,16 +11,6 @@ namespace Rezolver.Tests
 {
     public class TargetContainerOptionsTests
     {
-        private class TestOption : ContainerOption<string>
-        {
-            //simple example of how to implement your own custom option
-
-            public static implicit operator TestOption(string value)
-            {
-                return new TestOption() { Value = value };
-            }
-        }
-
         [Fact]
         public void ShouldGetAndSetOptions()
         {
@@ -28,7 +18,7 @@ namespace Rezolver.Tests
 
             targets.SetOption<TestOption>("first")
                 .SetOption<TestOption, int>("second")
-                .SetOption<TestOption>(typeof(IEnumerable<>), "third")
+                .SetOption<TestOption>("third", typeof(IEnumerable<>))
                 .SetOption<TestOption, IEnumerable<int>>("fourth");
 
             Assert.Equal("first", targets.GetOption<TestOption>());
@@ -42,7 +32,7 @@ namespace Rezolver.Tests
         {
             var targets = new TargetContainer();
 
-            targets.SetOption<TestOption>(typeof(IEnumerable<>), "open");
+            targets.SetOption<TestOption>("open", typeof(IEnumerable<>));
 
             Assert.Equal("open", targets.GetOption<TestOption, IEnumerable<int>>());
         }
@@ -52,7 +42,7 @@ namespace Rezolver.Tests
         {
             var targets = new TargetContainer();
 
-            targets.SetOption<TestOption>(typeof(IEnumerable<>), "open");
+            targets.SetOption<TestOption>("open", typeof(IEnumerable<>));
             targets.SetOption<TestOption, IEnumerable<int>>("int");
 
             Assert.Equal("int", targets.GetOption<TestOption, IEnumerable<int>>());
@@ -118,7 +108,7 @@ namespace Rezolver.Tests
             var targets = new TargetContainer();
             // the underlying options container that's used to store the option value
             // is contravariant, so should return an option defined at the base class level :)
-            targets.SetOption<TestOption>(typeof(BaseClass), "for baseclass");
+            targets.SetOption<TestOption>("for baseclass", typeof(BaseClass));
 
             Assert.Equal("for baseclass", targets.GetOption<TestOption, BaseClassChild>());
         }

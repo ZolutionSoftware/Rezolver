@@ -9,7 +9,7 @@ namespace Rezolver.Configuration
     /// <see cref="Configure(ITargetContainer)"/> is called.
     /// </summary>
     /// <typeparam name="TOption">The type of option to be set.  Will ultimately be passed through to the 
-    /// <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, Type, TOption)"/> method when the option is set.</typeparam>
+    /// <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption, Type)"/> method when the option is set.</typeparam>
     /// <remarks>This class is most often used to modify the options which are set in the <see cref="TargetContainer.DefaultConfig"/> of the 
     /// <see cref="TargetContainer"/> class - but can, of course, be used to configure any <see cref="ITargetContainer"/>.
     /// 
@@ -36,7 +36,7 @@ namespace Rezolver.Configuration
 
         public void Configure(ITargetContainer targets)
         {
-            targets.SetOption(ServiceType, OptionFactory(targets, ServiceType));
+            targets.SetOption(OptionFactory(targets, ServiceType), ServiceType);
         }
     }
 }

@@ -537,6 +537,19 @@ namespace Rezolver.Tests
         }
 
         [Fact]
+        public void ShouldOrderAfterOptionalDependency()
+        {
+            bool? rootCalled = null, dependantCalled = false;
+
+            var root = new TestDependant1(() => rootCalled = true);
+            var dependant = new TestDependant1(() => {
+                if(rootCalled.HasValue)
+                    Assert.True(rootCalled);
+                dependantCalled = true;
+            }).After(root);
+        }
+
+        [Fact]
         public void ShouldThrowExceptionForMissingDependency()
         {
             var required = new TestDependant1();
