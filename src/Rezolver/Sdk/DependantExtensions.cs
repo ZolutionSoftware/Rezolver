@@ -10,21 +10,21 @@ namespace Rezolver.Sdk
     public static class DependantExtensions
     {
         internal static T AddObjectDependency<T>(T obj, object dep, bool required)
-            where T : IDependant
+            where T : IMutableDependant
         {
             obj.Dependencies.Add(new ObjectDependency(dep, obj, required));
             return obj;
         }
 
         internal static T AddObjectDependencies<T>(T obj, IEnumerable<object> deps, bool required)
-            where T : IDependant
+            where T : IMutableDependant
         {
             obj.Dependencies.AddRange(deps.Where(o => o != null).Select(o => new ObjectDependency(o, obj, required)));
             return obj;
         }
 
         internal static T AddTypeDependency<T>(T obj, Type dependencyType, bool required)
-            where T : IDependant
+            where T : IMutableDependant
         {
             obj.Dependencies.Add(new TypeDependency(dependencyType, obj, required));
             return obj;
@@ -41,7 +41,7 @@ namespace Rezolver.Sdk
         /// <param name="dep">The object upon which <paramref name="obj"/> is dependent upon.</param>
         /// <returns>The object this method is called on.</returns>
         public static T Requires<T, TDependency>(this T obj, TDependency dep)
-            where T : IDependant
+            where T : IMutableDependant
             where TDependency : class
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
@@ -61,7 +61,7 @@ namespace Rezolver.Sdk
         /// <param name="deps">The objects upon which <paramref name="obj"/> is dependent upon.</param>
         /// <returns>The object this method is called on.</returns>
         public static T Requires<T, TDependency>(this T obj, IEnumerable<TDependency> deps)
-            where T : IDependant
+            where T : IMutableDependant
             where TDependency : class
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
@@ -80,7 +80,7 @@ namespace Rezolver.Sdk
         /// <param name="dependencyType">The type for the dependency being added.</param>
         /// <returns></returns>
         public static T RequiresAny<T>(this T obj, Type dependencyType)
-            where T : IDependant
+            where T : IMutableDependant
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
             if (TypeHelpers.IsValueType(dependencyType))

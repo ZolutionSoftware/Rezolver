@@ -59,21 +59,5 @@ namespace Rezolver.Sdk
             }
             _list.AddRange(toAdd);
         }
-
-        /// <summary>
-        /// Identifies the objects that match the dependencies in this collection.
-        /// </summary>
-        /// <param name="objects">The objects from which dependencies are to be identified.</param>
-        /// <returns>An enumerable containing the objects (selected from <paramref name="objects"/>) which
-        /// match the dependencies in this collection.  If there are no dependency matches, the enumerable
-        /// will be empty.</returns>
-        public IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects)
-            where T:class
-        {
-            // note that we filter out duplicates by reference, as it's possible for one
-            // object to satisfy multiple dependencies
-            return _list.SelectMany(d => d.GetDependencies(objects))
-                .Distinct(ReferenceComparer<T>.Instance);
-        }
     }
 }
