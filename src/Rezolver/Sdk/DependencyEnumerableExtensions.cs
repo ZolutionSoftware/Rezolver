@@ -13,6 +13,7 @@ namespace Rezolver.Sdk
         /// <summary>
         /// Identifies the objects that match the dependencies in this collection.
         /// </summary>
+        /// <param name="metadata">The dependency metadata which describes a set of dependencies</param>
         /// <param name="objects">The objects from which dependencies are to be identified.</param>
         /// <returns>An enumerable containing the objects (selected from <paramref name="objects"/>) which
         /// match the dependencies in this collection.  If there are no dependency matches, the enumerable

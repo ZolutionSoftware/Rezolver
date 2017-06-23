@@ -31,15 +31,15 @@ namespace Rezolver.Sdk
         }
 
         /// <summary>
-        /// Adds a required dependency from the object on which this is called to <paramref name="obj"/>
+        /// Adds a required dependency from the object on which this is called to <paramref name="dep"/>
         /// 
         /// The object <paramref name="dep"/> must be present in the input collection when dependencies are resolved.
         /// </summary>
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
         /// <typeparam name="TDependency">The type for the dependency being added.</typeparam>
         /// <param name="obj">The object to which a dependency is to be added.</param>
-        /// <param name="dep">The object upon which <paramref name="obj"/> is dependent upon.</param>
-        /// <returns>The object this method is called on.</returns>
+        /// <param name="dep">The object upon which <paramref name="obj"/> is dependent.</param>
+        /// <returns>The object on which the method is called.</returns>
         public static T Requires<T, TDependency>(this T obj, TDependency dep)
             where T : IMutableDependant
             where TDependency : class
@@ -58,8 +58,8 @@ namespace Rezolver.Sdk
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
         /// <typeparam name="TDependency">The type for the dependency being added.</typeparam>
         /// <param name="obj">The object to which a dependency is to be added.</param>
-        /// <param name="deps">The objects upon which <paramref name="obj"/> is dependent upon.</param>
-        /// <returns>The object this method is called on.</returns>
+        /// <param name="deps">The objects upon which <paramref name="obj"/> is dependent.</param>
+        /// <returns>The object on which the method is called.</returns>
         public static T Requires<T, TDependency>(this T obj, IEnumerable<TDependency> deps)
             where T : IMutableDependant
             where TDependency : class
@@ -77,9 +77,69 @@ namespace Rezolver.Sdk
         /// </summary>
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
         /// <param name="obj">The object to which a dependency is to be added.</param>
-        /// <param name="dependencyType">The type for the dependency being added.</param>
-        /// <returns></returns>
+        /// <param name="dependencyType">The type of objects upon which the object is dependent.</param>
+        /// <returns>The object on which the method is called.</returns>
         public static T RequiresAny<T>(this T obj, Type dependencyType)
+            where T : IMutableDependant
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (TypeHelpers.IsValueType(dependencyType))
+                throw new ArgumentException($"{ dependencyType } is a value type - only reference types are allowed", nameof(dependencyType));
+            return AddTypeDependency(obj, dependencyType, true);
+        }
+
+        /// <summary>
+        /// Adds an optional dependency from the object on which this is called to <paramref name="dep"/>.
+        /// 
+        /// If the object <paramref name="dep"/> is present in the input collection when dependencies are resolved, then it
+        /// will be identified.
+        /// </summary>
+        /// <typeparam name="T">The type of object on which this is called.</typeparam>
+        /// <typeparam name="TDependency">The type for the dependency being added.</typeparam>
+        /// <param name="obj">The object to which a dependency is to be added.</param>
+        /// <param name="dep">The object upon which <paramref name="obj"/> is optionally dependent.</param>
+        /// <returns>The object on which the method is called.</returns>
+        public static T After<T, TDependency>(this T obj, TDependency dep)
+            where T : IMutableDependant
+            where TDependency : class
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (dep == null) throw new ArgumentNullException(nameof(dep));
+
+            return AddObjectDependency(obj, dep, false);
+        }
+
+        /// <summary>
+        /// Adds an optional dependency from the object on which this is called to all the objects in <paramref name="deps"/>.
+        /// 
+        /// Any objects in <paramref name="deps"/> which are present in the input collection when dependencies are resolved will
+        /// be identified as dependencies.  None of them will be required.
+        /// </summary>
+        /// <typeparam name="T">The type of object on which this is called.</typeparam>
+        /// <typeparam name="TDependency">The type for the dependency being added.</typeparam>
+        /// <param name="obj">The object to which a dependency is to be added.</param>
+        /// <param name="deps">The objects upon which <paramref name="obj"/> is optionally dependent.</param>
+        /// <returns>The object on which the method is called.</returns>
+        public static T After<T, TDependency>(this T obj, IEnumerable<TDependency> deps)
+            where T : IMutableDependant
+            where TDependency : class
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (deps == null) throw new ArgumentNullException(nameof(deps));
+
+            return AddObjectDependencies(obj, deps, true);
+        }
+
+        /// <summary>
+        /// Adds an optional dependency from the object on which this is called to any object of the type
+        /// <paramref name="dependencyType"/>.  Use this when only the type of the dependency is known, but the specific
+        /// instance is not important.
+        /// </summary>
+        /// <typeparam name="T">The type of object on which this is called.</typeparam>
+        /// <param name="obj">The object to which a dependency is to be added.</param>
+        /// <param name="dependencyType">The type for the dependency being added.</param>
+        /// <returns>The object on which the method is called.</returns>
+        public static T AfterAny<T>(this T obj, Type dependencyType)
             where T : IMutableDependant
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
@@ -91,7 +151,7 @@ namespace Rezolver.Sdk
         /// <summary>
         /// Shortcut method for resolving the dependencies for an <see cref="IDependant"/> from a set of objects.
         /// 
-        /// All the method does is forward the call to the <see cref="DependencyMetadataCollection.GetDependencies{T}(IEnumerable{T})"/>
+        /// All the method does is forward the call to the <see cref="DependencyEnumerableExtensions.GetDependencies{T}(IEnumerable{DependencyMetadata}, IEnumerable{T})"/>
         /// method of the <see cref="DependencyMetadataCollection"/> belonging to the passed <see cref="IDependant"/> - <paramref name="obj"/>
         /// </summary>
         /// <typeparam name="T">The type of object on which the method was called.</typeparam>

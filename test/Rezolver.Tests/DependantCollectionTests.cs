@@ -547,6 +547,25 @@ namespace Rezolver.Tests
                     Assert.True(rootCalled);
                 dependantCalled = true;
             }).After(root);
+
+            //run the test twice: 
+
+            //once with the dependency
+            RunTest(new[] { root, dependant },
+                c => Assert.True(dependantCalled),
+                () =>
+                {
+                    rootCalled = null;
+                    dependantCalled = false;
+                });
+
+            //once without (verifying that the optional dependency behaviour works)
+            RunTest(new[] { dependant },
+                c => {
+                    Assert.Null(rootCalled);
+                    Assert.True(dependantCalled);
+                },
+                () => dependantCalled = false);
         }
 
         [Fact]

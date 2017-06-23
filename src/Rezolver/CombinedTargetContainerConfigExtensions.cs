@@ -109,7 +109,7 @@ namespace Rezolver
 
         /// <summary>
         /// Adds a <see cref="Configuration.ConfigureOption{TOption}"/> callback to the configuration, which will set the option value returned by 
-        /// the <paramref name="optionValueFactory"/> for the service type <typeparamref name="TService"/> in the <see cref="ITargetContainer"/> to which 
+        /// the <paramref name="optionValueFactory"/> for the service type <paramref name="serviceType"/> in the <see cref="ITargetContainer"/> to which 
         /// the <paramref name="config"/> is applied.
         /// </summary>
         /// <typeparam name="TOption">The type of option to be set.</typeparam>

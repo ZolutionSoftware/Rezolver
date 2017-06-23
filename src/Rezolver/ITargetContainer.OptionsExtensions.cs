@@ -27,9 +27,29 @@ namespace Rezolver
     /// Ultimately an option can be of any type, but most of the built-in options use the <see cref="Options.ContainerOption{TOption}"/>
     /// type to wrap simple types (<see cref="bool"/>, <see cref="string"/>, <see cref="int"/> and so on) as a human-readably
     /// named type that differentiates that option from others of the same underlying value type.  Note that the phrase 'value type'
-    /// there doesn't mean that all options must be literal value types (i.e. <see cref="ValueType"/>).</remarks>
+    /// there doesn't mean that all options must be literal value types (i.e. <see cref="ValueType"/>).
+    /// 
+    /// Rezolver has several built-in option types - including <see cref="Options.AllowMultiple"/>, <see cref="Options.EnableAutoEnumerable"/>,
+    /// <see cref="Options.EnableContravariance"/> plus many more.  These use the <see cref="Options.ContainerOption{TOption}"/> type to enable
+    /// reading and writing simple boolean-like option values which switch behaviour on and off.
+    /// 
+    /// In addition, the <see cref="Targets.ConstructorTarget"/> and <see cref="Targets.GenericConstructorTarget"/> classes use the options 
+    /// API to discover <see cref="IMemberBindingBehaviour"/> objects to use when deciding whether to bind properties and/or fields when 
+    /// creating new objects.
+    /// 
+    /// So you really can store anything you want inside an option.</remarks>
     public static class OptionsTargetContainerExtensions
     {
+        /// <summary>
+        /// Sets the passed <paramref name="option"/> into the <paramref name="targets"/> target container.
+        /// 
+        /// The value can later be retrieved through a call to <see cref="GetOption{TOption}(ITargetContainer, TOption)"/>
+        /// or one of its overloads.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to be set.</typeparam>
+        /// <param name="targets">The target container into which the option will be set.</param>
+        /// <param name="option">The option value to be set</param>
+        /// <returns>The target container on which the method is called, to enable method chaining.</returns>
         public static ITargetContainer SetOption<TOption>(this ITargetContainer targets, TOption option)
             where TOption : class
         {
@@ -39,6 +59,20 @@ namespace Rezolver
             return targets;
         }
 
+        /// <summary>
+        /// Sets the passed <paramref name="option"/> into the <paramref name="targets"/> target container, associating
+        /// it with the given <paramref name="serviceType"/>.
+        /// 
+        /// The value can later be retrieved through a call to <see cref="GetOption{TOption, TService}(ITargetContainer, TOption)"/>
+        /// or <see cref="GetOption{TOption}(ITargetContainer, Type, TOption)"/>, passing the same type, or a derived type.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to be set.</typeparam>
+        /// <param name="targets">The target container into which the option will be set.</param>
+        /// <param name="option">The option value to be set</param>
+        /// <param name="serviceType">The type against which the option is to be set.  It's called 'serviceType' because the majority
+        /// of the time, you will used this method and its generic overload to customise behaviour for specific types.  If <c>null</c>,
+        /// then it's equivalent to calling <see cref="SetOption{TOption}(ITargetContainer, TOption)"/>.</param>
+        /// <returns>The target container on which the method is called, to enable method chaining.</returns>
         public static ITargetContainer SetOption<TOption>(this ITargetContainer targets, TOption option, Type serviceType)
             where TOption : class
         {
@@ -57,6 +91,18 @@ namespace Rezolver
             return targets;
         }
 
+        /// <summary>
+        /// Sets the passed <paramref name="option"/> into the <paramref name="targets"/> target container, associating
+        /// it with the given <typeparamref name="TService"/>.
+        /// 
+        /// The value can later be retrieved through a call to <see cref="GetOption{TOption, TService}(ITargetContainer, TOption)"/>
+        /// or <see cref="GetOption{TOption}(ITargetContainer, Type, TOption)"/>, passing the same type, or a derived type.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to be set.</typeparam>
+        /// <typeparam name="TService">The type against which the option is to be set.</typeparam>
+        /// <param name="targets">The target container into which the option will be set.</param>
+        /// <param name="option">The option value to be set</param>
+        /// <returns>The target container on which the method is called, to enable method chaining.</returns>
         public static ITargetContainer SetOption<TOption, TService>(this ITargetContainer targets, TOption option)
             where TOption : class
         {
