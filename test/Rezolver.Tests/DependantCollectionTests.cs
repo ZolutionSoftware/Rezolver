@@ -539,6 +539,10 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldOrderAfterOptionalDependency()
         {
+            // don't run the full suite of tests for optional dependencies, because all the previous tests
+            // confirm that the ordering algorithm works.   The main thing is that if a dependency is optional,
+            // then the system quite happily works when the dependency isn't there and when it is.
+
             bool? rootCalled = null, dependantCalled = false;
 
             var root = new TestDependant1(() => rootCalled = true);
