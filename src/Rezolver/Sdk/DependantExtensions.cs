@@ -170,6 +170,48 @@ namespace Rezolver.Sdk
             return obj.Dependencies.GetDependencies(objects);
         }
 
-        // TODO: Add the non-required public extensions when we need them (YAGNI): Follows/FollowsAll<> or After/AfterAll<>
+        /// <summary>
+        /// Creates a dependency for the object on which this method is invoked to objects of a particular type - either required or optional.
+        /// </summary>
+        /// <typeparam name="TDependency">The type of objects that will be the target of the dependency.</typeparam>
+        /// <param name="obj">The dependant object for which the dependency is to be created.</param>
+        /// <param name="required"><c>true</c> to make the dependency required; <c>false</c> to make it optional.</param>
+        /// <returns>A new <see cref="DependencyMetadata"/> object representing a dependency from <paramref name="obj"/> to
+        /// objects of type <typeparamref name="TDependency"/>.</returns>
+        /// <remarks>As with <see cref="CreateObjectDependency{TDependency}(IDependant, TDependency, bool)"/>, this method creates a 
+        /// new <see cref="DependencyMetadata"/> object and returns it, as opposed to the methods
+        /// <see cref="RequiresAny{T}(T, Type)"/> or <see cref="AfterAny{T}(T, Type)"/>, which create and add the dependency directly
+        /// to an <see cref="IMutableDependant"/> object.
+        /// 
+        /// This method is used most often by <see cref="IDependant"/> objects (i.e. those with read-only dependencies) which have a 
+        /// fixed set of required or optional dependencies that are known at construction-time.</remarks>
+        public static DependencyMetadata CreateTypeDependency<TDependency>(this IDependant obj, bool required = true)
+            where TDependency : class
+        {
+            return new TypeDependency(typeof(TDependency), obj, required);
+        }
+
+        /// <summary>
+        /// Creates a dependency for the object which this method is invoked to a specific instance of a particular type - either
+        /// required or optional.
+        /// </summary>
+        /// <typeparam name="TDependency">The type of the object that will be the target of the dependency.</typeparam>
+        /// <param name="obj">The dependant object for which the dependency is to be created.</param>
+        /// <param name="dependency">The object that will be the target of the dependency.</param>
+        /// <param name="required"><c>true</c> to make the dependency required; <c>false</c> to make it optional.</param>
+        /// <returns>A new <see cref="DependencyMetadata"/> object representing a dependency from <paramref name="obj"/> to
+        /// the object <paramref name="dependency"/>.</returns>
+        /// <remarks>As with <see cref="CreateTypeDependency{TDependency}(IDependant, bool)"/>, this method creates a 
+        /// new <see cref="DependencyMetadata"/> object and returns it, as opposed to the methods
+        /// <see cref="Requires{T, TDependency}(T, TDependency)"/> or <see cref="After{T, TDependency}(T, TDependency)"/>, 
+        /// which create and add the dependency directly to an <see cref="IMutableDependant"/> object.
+        /// 
+        /// This method is used most often by <see cref="IDependant"/> objects (i.e. those with read-only dependencies) which have a 
+        /// fixed set of required or optional dependencies that are known at construction-time.</remarks>
+        public static DependencyMetadata CreateObjectDependency<TDependency>(this IDependant obj, TDependency dependency, bool required = true)
+            where TDependency : class
+        {
+            return new ObjectDependency(dependency, obj, required);
+        }
     }
 }
