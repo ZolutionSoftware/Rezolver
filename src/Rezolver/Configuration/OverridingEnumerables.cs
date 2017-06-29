@@ -6,14 +6,18 @@ namespace Rezolver.Configuration
 {
     /// <summary>
     /// When applied to an <see cref="OverridingContainer"/> whose target container has been configured to 
-    /// enable automatically injected enumerables (via the <see cref="AutoEnumerables"/> configuration callback),
-    /// then this will extend enumerable support in the <see cref="OverridingContainer"/> to construct enumerables
-    /// made up of a combination of all services in the overriding container, in addition to those from the 
-    /// base container.
+    /// enable automatically injected enumerables (via the <see cref="AutoEnumerables"/> configuration callback and the
+    /// <see cref="Options.EnableAutoEnumerable"/> option), then this will extend enumerable support in the 
+    /// <see cref="OverridingContainer"/> to construct enumerables made up of a combination of all services in the 
+    /// overriden container AND those from the overriding container.
     /// </summary>
     /// <remarks>
     /// Note that this class is not an <see cref="ITargetContainerConfig"/> like the <see cref="AutoEnumerables"/>,
-    /// instead it is an <see cref="IContainerConfig"/> because it's only relevant for instances of <see cref="OverridingContainer"/>.</remarks>
+    /// instead it is an <see cref="IContainerConfig"/> because it's only relevant for instances of <see cref="OverridingContainer"/>.
+    /// 
+    /// As such, when applied to an <see cref="IContainer"/> instance, it will only auto-attach when the container is an instance
+    /// of (or derived from) <see cref="OverridingContainer"/> *and* if the <see cref="Options.EnableAutoEnumerable"/> options evaluates
+    /// to <c>true</c> when read from the <see cref="ITargetContainer"/> passed to <see cref="Configure(IContainer, ITargetContainer)"/>.</remarks>
     public sealed class OverridingEnumerables : IContainerConfig
     {
         /// <summary>
@@ -24,10 +28,13 @@ namespace Rezolver.Configuration
         private OverridingEnumerables() { }
 
         /// <summary>
-        /// Attaches this behaviour to the container
+        /// If <paramref name="container"/> is an <see cref="OverridingContainer"/>, and if the <see cref="Options.EnableAutoEnumerable"/>
+        /// option evaluates to <c>true</c> (the default) when read from <paramref name="targets"/>, then enumerable handling in the container
+        /// will be extended to combine the enumerables from both objects registered specifically in the <paramref name="container"/>, plus also those
+        /// registered in its <see cref="OverridingContainer.Inner"/> container.
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="targets"></param>
+        /// <param name="container">The container to be configured.</param>
+        /// <param name="targets">The <see cref="ITargetContainer"/> which supplies the registrations for the <paramref name="container"/></param>
         public void Configure(IContainer container, ITargetContainer targets)
         {
             if (container == null) throw new ArgumentNullException(nameof(container));

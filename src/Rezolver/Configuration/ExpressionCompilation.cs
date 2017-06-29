@@ -93,7 +93,10 @@ namespace Rezolver.Configuration
 		public virtual void Configure(IContainer container, ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
-            //extract the singleton to its own behaviour
+            // note - the singleton container is done like this because the expression compiler which uses 
+            // it Resolves it from the container during compilation.  This is to ensure that each container
+            // gets the same singleton container (including OverridingContainer), rather than a single shared one
+            // from the target container option.
             targets.RegisterObject(new SingletonTarget.SingletonContainer());
             //targets.RegisterObject(new ExpressionBuilderCache(container));
             //will be how containers pick up and use this compiler
