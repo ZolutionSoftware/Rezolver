@@ -54,7 +54,16 @@ namespace Rezolver
 #endif
 		}
 
-		internal static bool IsValueType(Type type)
+        internal static GenericParameterAttributes GetGenericParameterAttributes(Type type)
+        {
+#if DOTNET
+            return type.GetTypeInfo().GenericParameterAttributes;
+#else
+			return type.GenericParameterAttributes;
+#endif 
+        }
+        
+        internal static bool IsValueType(Type type)
 		{
 #if DOTNET
             return type.GetTypeInfo().IsValueType;
@@ -72,8 +81,17 @@ namespace Rezolver
 #endif
 		}
 
+        internal static IEnumerable<Type> GetAllBases(Type type)
+        {
+            var baseType = BaseType(type);
+            while (baseType != null)
+            {
+                yield return baseType;
+                baseType = BaseType(baseType);
+            }
+        }
 
-		internal static bool AreCompatible(Type from, Type to)
+        internal static bool AreCompatible(Type from, Type to)
 		{
 			from.MustNotBeNull("from");
 			to.MustNotBeNull("to");
@@ -84,9 +102,8 @@ namespace Rezolver
 			if (IsAssignableFrom(to, from))
 				return true;
 
-			Type nulledType = null;
-			return @from.IsNullableType(out nulledType) && IsAssignableFrom(to, nulledType);
-		}
+            return @from.IsNullableType(out Type nulledType) && IsAssignableFrom(to, nulledType);
+        }
 
 		internal static bool IsInterface(Type type)
 		{

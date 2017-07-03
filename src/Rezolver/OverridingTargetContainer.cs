@@ -9,7 +9,7 @@ using System.Linq;
 namespace Rezolver
 {
     /// <summary>
-    /// A version of <see cref="TargetContainer" /> which overrides the registrations of another
+    /// A version of <see cref="TargetContainer" /> which overrides and extends the registrations of another
     /// (the <see cref="Parent" />).
     /// </summary>
     /// <seealso cref="Rezolver.TargetContainer" />
@@ -21,7 +21,10 @@ namespace Rezolver
     /// any ancestor.
     /// 
     /// This fallback logic in the <see cref="Fetch(Type)" /> is triggered by the 
-    /// <see cref="ITarget.UseFallback" /> property.</remarks>
+    /// <see cref="ITarget.UseFallback" /> property.
+    /// 
+    /// The <see cref="FetchAll(Type)"/> method, however, returns all targets registered directly in this
+    /// container and in the parent.</remarks>
     public sealed class OverridingTargetContainer : TargetContainer
     { 
         private readonly ITargetContainer _parent;
@@ -30,18 +33,17 @@ namespace Rezolver
         /// Initializes a new instance of the <see cref="OverridingTargetContainer"/> class.
         /// </summary>
         /// <param name="parent">Required. The parent target container.</param>
-        /// <param name="behaviour">Optional.  The behaviour to attach to this target container.  If not provided, then
-        /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
-        /// class is used by default.
+        /// <param name="config">Optional.  The configuration to apply to this target container.  If null, then
+        /// the <see cref="TargetContainer.DefaultConfig"/> is used.
         /// </param>
-        public OverridingTargetContainer(ITargetContainer parent, ITargetContainerBehaviour behaviour = null)
+        public OverridingTargetContainer(ITargetContainer parent, ITargetContainerConfig config = null)
                 : base()
         {
             //note above - the class uses the non-behaviour constructor of TargetContainer to ensure that 
             parent.MustNotBeNull(nameof(parent));
             _parent = parent;
 
-            (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+            (config ?? DefaultConfig).Configure(this);
         }
 
         /// <summary>

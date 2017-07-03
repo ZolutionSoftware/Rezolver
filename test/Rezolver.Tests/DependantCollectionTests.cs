@@ -537,6 +537,42 @@ namespace Rezolver.Tests
         }
 
         [Fact]
+        public void ShouldOrderAfterOptionalDependency()
+        {
+            // don't run the full suite of tests for optional dependencies, because all the previous tests
+            // confirm that the ordering algorithm works.   The main thing is that if a dependency is optional,
+            // then the system quite happily works when the dependency isn't there and when it is.
+
+            bool? rootCalled = null, dependantCalled = false;
+
+            var root = new TestDependant1(() => rootCalled = true);
+            var dependant = new TestDependant1(() => {
+                if(rootCalled.HasValue)
+                    Assert.True(rootCalled);
+                dependantCalled = true;
+            }).After(root);
+
+            //run the test twice: 
+
+            //once with the dependency
+            RunTest(new[] { root, dependant },
+                c => Assert.True(dependantCalled),
+                () =>
+                {
+                    rootCalled = null;
+                    dependantCalled = false;
+                });
+
+            //once without (verifying that the optional dependency behaviour works)
+            RunTest(new[] { dependant },
+                c => {
+                    Assert.Null(rootCalled);
+                    Assert.True(dependantCalled);
+                },
+                () => dependantCalled = false);
+        }
+
+        [Fact]
         public void ShouldThrowExceptionForMissingDependency()
         {
             var required = new TestDependant1();

@@ -44,6 +44,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Compilation\Reflection\**" />
+    <EmbeddedResource Remove="Compilation\Reflection\**" />
+    <None Remove="Compilation\Reflection\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Targets\DelegateTarget_CreateAndRegister.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DelegateTarget_CreateAndRegister.cs</LastGenOutput>
@@ -72,6 +78,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Compilation\Reflection\" />
+    <None Include="CombinedContainerConfig.cs" />
   </ItemGroup>
 </Project>

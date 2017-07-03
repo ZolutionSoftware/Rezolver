@@ -7,9 +7,5 @@ namespace Rezolver.Tests.Types
 {
     public class AltGeneric<T> : GenericBase<T>
     {
-		public override void Foo()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

@@ -9,40 +9,6 @@ namespace Rezolver
 {
     internal static class FetchDirectITargetContainerExtensions
     {
-        private class NullContainer : IContainer
-        {
-            public static NullContainer Instance { get; } = new NullContainer();
-            private NullContainer() { }
-            public bool CanResolve(IResolveContext context)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IContainerScope CreateScope()
-            {
-                throw new NotImplementedException();
-            }
-
-            public ICompiledTarget GetCompiledTarget(IResolveContext context)
-            {
-                throw new NotImplementedException();
-            }
-
-            public object GetService(Type serviceType)
-            {
-                throw new NotImplementedException();
-            }
-
-            public object Resolve(IResolveContext context)
-            {
-                throw new NotImplementedException();
-            }
-
-            public bool TryResolve(IResolveContext context, out object result)
-            {
-                throw new NotImplementedException();
-            }
-        }
         internal static TObj FetchDirect<TObj>(this ITargetContainer targets)
         {
             return (TObj)targets.FetchDirect(typeof(TObj));
@@ -61,8 +27,8 @@ namespace Rezolver
             if (TypeHelpers.IsAssignableFrom(objectType, target.GetType()))
                 return target;
 
-            if (target is ICompiledTarget resultCompiledTarget)
-                return resultCompiledTarget.GetObject(new ResolveContext(NullContainer.Instance, objectType));
+            if (target is IDirectTarget directTarget)
+                return directTarget.GetValue();
 
             return null;
         }

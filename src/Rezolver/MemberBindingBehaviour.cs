@@ -8,6 +8,11 @@ namespace Rezolver
     /// <summary>
     /// Static accessor for the common member binding behaviours provided by Rezolver.
     /// </summary>
+    /// <remarks>The <see cref="ConstructorTarget"/> and <see cref="GenericConstructorTarget"/> classes can be provided
+    /// with an <see cref="IMemberBindingBehaviour"/> when created.  If one is not set, then instead they will attempt to 
+    /// get their behaviour via the options API (see <see cref="OptionsTargetContainerExtensions"/>) from the 
+    /// <see cref="ITargetContainer"/> in which they have been registered.
+    /// </remarks>
     public static class MemberBindingBehaviour
     {
         /// <summary>
@@ -19,8 +24,7 @@ namespace Rezolver
         /// <summary>
         /// A behaviour that doesn't bind any properties or fields on an object.
         /// 
-        /// This is the container default behaviour - configured via a <see cref="Behaviours.DefaultMemberBindingBehaviour"/>
-        /// in the <see cref="GlobalBehaviours.ContainerBehaviour"/>.
+        /// This is also the 
         /// </summary>
         /// <remarks>The implementation is an instance of the <see cref="BindNoMembersBehaviour"/></remarks>
         public static IMemberBindingBehaviour BindNone { get; } = new BindNoMembersBehaviour();

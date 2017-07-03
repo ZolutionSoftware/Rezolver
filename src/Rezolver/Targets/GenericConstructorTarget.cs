@@ -140,15 +140,14 @@ namespace Rezolver.Targets
 
         /// <summary>
         /// Constructs a new instance of the <see cref="GenericConstructorTarget"/> for the given open generic type,
-        /// which will utilise the optional <paramref name="memberBindingBehaviour"/> when it constructs its
+        /// which will utilise the optional <paramref name="memberBinding"/> when it constructs its
         /// <see cref="ConstructorTarget"/> when <see cref="Bind(ICompileContext)"/> is called.
         /// </summary>
         /// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-        /// <param name="memberBindingBehaviour">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
-        public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBindingBehaviour = null)
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the <see cref="Bind(ICompileContext)"/> method will attempt to obtain one via the options API from the 
+        /// <see cref="ICompileContext"/> - and if one is still not available, then no member binding will be performed.</param>
+        public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBinding = null)
 		{
 			genericType.MustNotBeNull(nameof(genericType));
 			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
@@ -156,7 +155,7 @@ namespace Rezolver.Targets
 			if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
 				throw new ArgumentException("The type must be a generic type definition of either a non-abstract class or value type.");
 			GenericType = genericType;
-			MemberBindingBehaviour = memberBindingBehaviour;
+			MemberBindingBehaviour = memberBinding;
 		}
 
 		/// <summary>
@@ -237,8 +236,21 @@ namespace Rezolver.Targets
 				}
 			}
 
-			//make the generic type
-			return new GenericTypeMapping(targetType, DeclaredType.MakeGenericType(finalTypeArguments));
+            try
+            {
+                //make the generic type
+                // TODO: change this from a try/catch to actually detecting the constraints and actively excluding
+                // incompatible types.  Obviously, that's difficult so it's a low priority change.
+                return new GenericTypeMapping(targetType, DeclaredType.MakeGenericType(finalTypeArguments));
+            }
+            catch(TypeLoadException tlex)
+            {
+                return new GenericTypeMapping(targetType, $"Could not construct generic type { DeclaredType } with type arguments {{{ string.Join(", ", finalTypeArguments.AsEnumerable()) }}} - TypeLoadException occurred: { tlex.Message }");
+            }
+            catch(ArgumentException aex)
+            {
+                return new GenericTypeMapping(targetType, $"One or more type arguments passed to the generic type { DeclaredType } are invalid.  The type arguments passed were {{{ string.Join(", ", finalTypeArguments.AsEnumerable()) }}}.  Exception message: { aex.Message }");
+            }
 		}
 
 		/// <summary>
@@ -305,7 +317,7 @@ namespace Rezolver.Targets
 			//check whether it's a base or an interface
 			var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
 				TypeHelpers.GetInterfaces(DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-				: DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+				: TypeHelpers.GetAllBases(DeclaredType).SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
 			if (mappedBase != null)
 			{
 				var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);

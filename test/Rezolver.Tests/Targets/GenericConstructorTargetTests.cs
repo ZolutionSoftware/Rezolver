@@ -148,6 +148,11 @@ namespace Rezolver.Tests.Targets
 			Assert.ThrowsAny<Exception>(() => target.Bind(context));
 		}
 
-		
+		[Fact]
+        public void ShouldNotSupportGenericWhichViolatesConstraints()
+        {
+            var target = new GenericConstructorTarget(typeof(ConstrainedGeneric<>));
+            Assert.False(target.SupportsType(typeof(IGeneric<string>)));
+        }
 	}
 }

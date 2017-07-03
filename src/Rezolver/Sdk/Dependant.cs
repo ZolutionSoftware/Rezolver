@@ -9,8 +9,10 @@ namespace Rezolver.Sdk
     /// Simple base class for implementations of <see cref="IDependant"/> - the <see cref="IDependant.Dependencies"/>
     /// property is implemented explictly.
     /// </summary>
-    public class Dependant : IDependant
+    public class Dependant : IMutableDependant
     {
-        DependencyMetadataCollection IDependant.Dependencies { get; } = new DependencyMetadataCollection();
+        private DependencyMetadataCollection Dependencies { get; } = new DependencyMetadataCollection();
+        DependencyMetadataCollection IMutableDependant.Dependencies => Dependencies;
+        IEnumerable<DependencyMetadata> IDependant.Dependencies => Dependencies;
     }
 }

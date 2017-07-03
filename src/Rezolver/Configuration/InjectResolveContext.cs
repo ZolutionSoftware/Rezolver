@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Rezolver.Behaviours
+namespace Rezolver.Configuration
 {
     /// <summary>
-    /// An <see cref="ITargetContainerBehaviour"/> that enables automatic resolving of the 
+    /// An <see cref="ITargetContainerConfig"/> that enables automatic resolving of the 
     /// <see cref="IResolveContext"/> created for a <see cref="IContainer.Resolve(IResolveContext)"/> operation.
     /// </summary>
     /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/> 
     /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method</remarks>
-    public sealed class ContextResolvingBehaviour : ITargetContainerBehaviour
+    public sealed class InjectResolveContext : ITargetContainerConfig
     {
         private class ResolveContextTarget : ITarget, ICompiledTarget
         {
@@ -37,20 +37,21 @@ namespace Rezolver.Behaviours
 
         private readonly ResolveContextTarget _target = new ResolveContextTarget();
 
-        private ContextResolvingBehaviour() { }
+        private InjectResolveContext() { }
         
         /// <summary>
-        /// The one and only instance of <see cref="ContextResolvingBehaviour"/>
+        /// The one and only instance of <see cref="InjectResolveContext"/>
         /// </summary>
-        public static ContextResolvingBehaviour Instance { get; } = new ContextResolvingBehaviour();
+        public static InjectResolveContext Instance { get; } = new InjectResolveContext();
         /// <summary>
-        /// Attaches this behaviour to the target container.
+        /// Attaches this behaviour to the target container, adding a registration to the <paramref name="targets"/>
+        /// for the type <see cref="IResolveContext"/>.
         /// 
         /// Note - if the <paramref name="targets"/> already has a registration for <see cref="IResolveContext"/>,
         /// then the behaviour DOES NOT overwrite it.
         /// </summary>
         /// <param name="targets"></param>
-        public void Attach(ITargetContainer targets)
+        public void Configure(ITargetContainer targets)
         {
             var existing = targets.Fetch(typeof(IResolveContext));
             if (existing == null || existing.UseFallback)

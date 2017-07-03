@@ -1,4 +1,4 @@
-﻿using Rezolver.Behaviours;
+﻿using Rezolver.Configuration;
 using Rezolver.Compilation;
 using Rezolver.Compilation.Expressions;
 using System;
@@ -23,9 +23,9 @@ namespace Rezolver.Tests.Compilation.Expressions
 
 		}
 
-		protected override IContainerBehaviour<ITargetCompiler> GetCompilerBehaviour([CallerMemberName] string testName = null)
+		protected override IContainerConfig<ITargetCompiler> GetCompilerConfig([CallerMemberName] string testName = null)
 		{
-            return ExpressionCompilerBehaviour.Instance;
+            return ExpressionCompilation.Instance;
 		}
 	}
 }

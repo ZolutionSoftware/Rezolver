@@ -33,21 +33,22 @@ namespace Rezolver
     /// 
     /// ## Behaviour of enumerables
     /// 
-    /// The behaviour of enumerables depends on whether the <see cref="Behaviours.OverridingEnumerableBehaviour"/> is applied to the container
-    /// (which it is by default via the <see cref="GlobalBehaviours.OverridingContainerBehaviour"/>).
+    /// The behaviour of enumerables depends on whether enumerables are enabled via the <see cref="Options.EnumerableInjection"/> option 
+    /// (<c>true</c> by default) and whether the <see cref="Configuration.OverridingEnumerables"/> is applied to the container
+    /// (which it is, also by default, via the <see cref="Container.DefaultConfig"/>).
     /// 
-    /// If it is, then any request for <c>IEnumerable&lt;T&gt;</c> will result in an enumerable which combines the one resolved by the <see cref="Inner"/>
+    /// If so, then any request for <c>IEnumerable&lt;T&gt;</c> will result in an enumerable which combines the one resolved by the <see cref="Inner"/>
     /// container, and then by any direct registration in this container.  This mirrors the behaviour of the <see cref="ITargetContainer.FetchAll(Type)"/>
     /// implementation of the <see cref="OverridingTargetContainer"/> - which produces an enumerable of targets from both the base target container and
     /// the overriding one.
     /// 
-    /// If the <see cref="Behaviours.OverridingEnumerableBehaviour"/> is not applied to this container, then any IEnumerable registered (or automatically built)
+    /// If the <see cref="Configuration.OverridingEnumerables"/> is not applied to this container, then any IEnumerable registered (or automatically built)
     /// in this container will override that of the <see cref="Inner"/> container.
     /// </remarks>
     public sealed class OverridingContainer : Container
     {
         /// <summary>
-        /// Gets the <see cref="IContainer"/> which this container overrides/extends.
+        /// Gets the <see cref="IContainer"/> that is overriden by this container.
         /// </summary>
         public IContainer Inner { get; }
 
@@ -62,16 +63,15 @@ namespace Rezolver
         /// (note - separate to those of the <paramref name="inner"/> container).
         /// 
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
-        /// <see cref="Targets"/>).  If not provided, then the global 
-        /// <see cref="GlobalBehaviours.OverridingContainerBehaviour"/> will be used.</param>
-        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour behaviour = null)
+        /// <param name="config">Can be null.  A configuration to apply to this container (and, potentially its 
+        /// <see cref="Targets"/>).  If not provided, then the <see cref="Container.DefaultConfig"/> will be used</param>
+        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerConfig config = null)
             : base(targets)
         {
             inner.MustNotBeNull("inner");
             Inner = inner;
 
-            (behaviour ?? GlobalBehaviours.OverridingContainerBehaviour).Attach(this, Targets);
+            (config ?? DefaultConfig).Configure(this, Targets);
         }
         
         /// <summary>
