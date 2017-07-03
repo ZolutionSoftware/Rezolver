@@ -48,13 +48,23 @@ namespace Rezolver
     public interface IResolveContext : IScopeFactory
     {
         /// <summary>
-        /// Gets thee <see cref="IResolveContext"/> from which this context was created, if any.
+        /// Gets the <see cref="IResolveContext"/> from which this context was created, if any.
         /// </summary>
         IResolveContext Previous { get; }
 
         /// <summary>
-        /// Gets the type being requested from the container
+        /// Gets the type being requested from the container via a call to its <see cref="IContainer.Resolve(IResolveContext)"/> (or 
+        /// similar) method(s).
         /// </summary>
+        /// <remarks>During any given <see cref="IContainer.Resolve(IResolveContext)"/> (or similar) operation, this
+        /// type will not necessarily equal the type being constructed at that time.
+        /// 
+        /// For example, if you inject the context into a constructor (enabled by default via the <see cref="Configuration.InjectResolveContext"/>
+        /// configuration) and instrospect it, this type will only equal a service against which that type is registered *if* that object
+        /// is being created directly for that resolve operation.
+        /// 
+        /// If it is being created in order to be injected into another object, then this property is more likely to equal that type's registered
+        /// service type.</remarks>
         Type RequestedType { get; }
 
         /// <summary>
@@ -76,7 +86,7 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="newRequestedType">New type to be resolved.</param>
 		/// <remarks>Use this method, or the generic equivalent, to resolve dependency services in a 
-		/// factory or expression.
+		/// factory or expression using the same container that's serving the current resolve operation.
 		/// 
 		/// If a scope is active then it will be honoured.</remarks>
         object Resolve(Type newRequestedType);

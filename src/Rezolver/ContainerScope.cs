@@ -219,8 +219,7 @@ namespace Rezolver
 		{
             if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 
-            object toReturn = null;
-			Container.TryResolve(new ResolveContext(this, serviceType), out toReturn);
+			Container.TryResolve(new ResolveContext(this, serviceType), out object toReturn);
 			return toReturn;
 		}
 	}

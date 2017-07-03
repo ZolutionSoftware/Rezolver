@@ -66,11 +66,11 @@ namespace Rezolver.Tests.Compilation.Specification
             return new ContainerScope(this);
         }
 
-        ICompiledTarget IContainer.FetchCompiled(IResolveContext context)
+        ICompiledTarget IContainer.GetCompiledTarget(IResolveContext context)
         {
             // the registrations only allow ObjectTargets or other objects which support ICompiledTarget or direct resolving,
             // so if it gets a result, we know we can use it.
-            return (_registrations.Fetch(context.RequestedType) as ICompiledTarget) ?? _inner.FetchCompiled(context);
+            return (_registrations.Fetch(context.RequestedType) as ICompiledTarget) ?? _inner.GetCompiledTarget(context);
         }
 
         object IServiceProvider.GetService(Type serviceType)

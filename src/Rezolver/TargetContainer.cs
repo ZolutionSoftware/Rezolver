@@ -21,28 +21,47 @@ namespace Rezolver
     /// <see cref="ITargetContainer"/> explicitly on construction.
     /// 
     /// Although you can derive from this class to extend its functionality; it's also possible to 
-    /// extend it via behaviours (see <see cref="ITargetContainerBehaviour"/>) - which is how, for example,
-    /// the framework enables automatic enumerable resolving (see <see cref="Behaviours.AutoEnumerableBehaviour"/>).
+    /// extend it via configuration (see <see cref="ITargetContainerConfig"/>) - which is how, for example,
+    /// the framework enables automatic injection of enumerables (see <see cref="Configuration.InjectEnumerables"/>) and
+    /// lists (see <see cref="Configuration.InjectLists"/>).
     /// 
-    /// For its default behaviour set, this class uses the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in
-    /// the <see cref="GlobalBehaviours"/> class.</remarks>
+    /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer
-    {
+    {        
+        /// <summary>
+        /// The default configuration used for <see cref="TargetContainer"/> objects created via the <see cref="TargetContainer.TargetContainer(ITargetContainerConfig)"/>
+        /// constructor when no configuration is explicitly passed.
+        /// </summary>
+        /// <remarks>The simplest way to configure all target container instances is to add/remove configs to this collection.
+        /// 
+        /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.</remarks>
+        public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
+        {
+            Configuration.InjectEnumerables.Instance,
+            Configuration.InjectLists.Instance,
+            Configuration.InjectResolveContext.Instance
+        });
+
         /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class.
         /// </summary>
-        /// <param name="behaviour">Optional.  The behaviour to attach to this target container.  If not provided, then
-        /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
-        /// class is used by default.
+        /// <param name="config">Optional.  The configuration to apply to this target container.  If null, then
+        /// the <see cref="DefaultConfig"/> is used.
         /// </param>
-        public TargetContainer(ITargetContainerBehaviour behaviour = null)
+        /// <remarks>Note to inheritors: this constructor will throw an <see cref="InvalidOperationException"/> if called by derived
+        /// classes.  You must instead use the <see cref="TargetContainer.TargetContainer()"/> constructor and apply configuration in your
+        /// constructor.</remarks>
+        public TargetContainer(ITargetContainerConfig config = null)
         {
-            (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+            if (this.GetType() != typeof(TargetContainer))
+                throw new InvalidOperationException("Derived types must not use this constructor because it triggers virtual method calls via the configuration callbacks.  Please use the protected parameterless constructor instead");
+
+            (config ?? DefaultConfig).Configure(this);
         }
 
         /// <summary>
         /// Creates a new instance of the <see cref="TargetContainer"/> class without attaching any
-        /// <see cref="ITargetContainerBehaviour"/> to it.  This is desirable for derived types as behaviours typically
+        /// <see cref="ITargetContainerConfig"/> to it.  This is desirable for derived types as behaviours typically
         /// will invoke methods on this target container which are declared virtual and which are, therefore, 
         /// unsafe to be called during construction.
         /// </summary>
@@ -95,7 +114,8 @@ namespace Rezolver
         /// <returns>The base implementation always creates an instance of <see cref="CreateGenericTypeDefContainer( Type,ITarget)"/></returns>
         protected virtual ITargetContainer CreateGenericTypeDefContainer(Type genericTypeDefinition, ITarget target)
         {
-            return new GenericTargetContainer(genericTypeDefinition);
+            //Note below: Root will be equal to this
+            return new GenericTargetContainer(Root, genericTypeDefinition);
         }
 
         /// <summary>

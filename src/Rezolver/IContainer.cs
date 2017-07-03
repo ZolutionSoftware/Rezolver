@@ -70,6 +70,6 @@ namespace Rezolver
         /// 
         /// As such, its use at an application level is limited.
         /// </remarks>
-        ICompiledTarget FetchCompiled(IResolveContext context);
+        ICompiledTarget GetCompiledTarget(IResolveContext context);
 	}
 }

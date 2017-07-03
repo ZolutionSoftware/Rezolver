@@ -121,7 +121,20 @@ void ForDelegate(Signature sig)
 		public static ITarget ForDelegate<<#= sig.Spec.Args #>>(Func<<#= sig.Text #>> factory, Type declaredType = null)
 		{
 			if(factory == null) throw new ArgumentNullException(nameof(factory));
+<#+
+        if(sig.Args.Length > 1)
+        {
+#>
 			return new DelegateTarget(factory, declaredType);
+<#+
+        }
+        else
+        {
+#>
+            return new NullaryDelegateTarget(factory, declaredType);
+<#+
+        }
+#>
 		}
 <#+
 }
@@ -136,7 +149,7 @@ void RegisterTargetGroup(GenericSpec spec)
 
 void RegisterTarget(Signature sig)
 {	
-if(sig.Args.Length > 1)
+    if(sig.Args.Length > 1)
 	{
 		if(sig.Args[0] == "IResolveContext")
 		{

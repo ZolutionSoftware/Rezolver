@@ -28,10 +28,11 @@ namespace Rezolver.Logging
 		protected internal ICallTracker Tracker { get; private set; }
 
 
-		public TrackedContainer(ICallTracker logger, ITargetContainer builder = null, IContainerBehaviour compilerConfig = null) :
-		  base(targets: builder, behaviour: compilerConfig)
+		public TrackedContainer(ICallTracker logger, ITargetContainer targets = null, IContainerConfig compilerConfig = null) :
+		  base(targets: targets)
 		{
 			Tracker = logger;
+            (compilerConfig ?? DefaultConfig).Configure(this, Targets);
 		}
 
 		public override bool CanResolve(IResolveContext context)
@@ -44,9 +45,9 @@ namespace Rezolver.Logging
 			return Tracker.TrackCall(this, () => new TrackedContainerScope(Tracker, base.CreateScope()));
 		}
 
-		public override ICompiledTarget FetchCompiled(IResolveContext context)
+		protected override ICompiledTarget GetCompiledTargetVirtual(IResolveContext context)
 		{
-			return Tracker.TrackCall(this, () => base.FetchCompiled(context), new { context = context });
+			return Tracker.TrackCall(this, () => base.GetCompiledTargetVirtual(context), new { context = context });
 		}
 
 		protected override object GetService(Type serviceType)
@@ -67,14 +68,9 @@ namespace Rezolver.Logging
 			return @return;
 		}
 
-		protected override ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
+		protected override ICompiledTarget GetFallbackCompiledTarget(IResolveContext context)
 		{
-			return Tracker.TrackCall(this, () => base.GetCompiledRezolveTarget(context), new { context = context });
-		}
-
-		protected override ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
-		{
-			return Tracker.TrackCall(this, () => base.GetFallbackCompiledRezolveTarget(context), new { context = context });
+			return Tracker.TrackCall(this, () => base.GetFallbackCompiledTarget(context), new { context = context });
 		}
 	}
 }

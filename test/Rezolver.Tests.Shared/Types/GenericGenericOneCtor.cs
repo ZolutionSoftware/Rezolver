@@ -12,10 +12,5 @@ namespace Rezolver.Tests.Types
 		{
 			Value = value;
 		}
-
-		public override void Foo()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

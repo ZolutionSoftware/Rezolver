@@ -31,46 +31,31 @@ namespace Rezolver.Tests.Examples
         }
 
         [Fact]
-        public void ShouldInject2MembersWithAllMembersBehaviour_FromGlobalDefault()
+        public void ShouldInject2MembersWithAllMembersBehaviour_FromGlobalOption()
         {
-            var previousDefault = GlobalBehaviours.ContainerBehaviour.OfType<IContainerBehaviour<IMemberBindingBehaviour>>().Single();
-            try
-            {
-                // <example2>
-                GlobalBehaviours.ContainerBehaviour
-                    .UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
+            // <example2>
+            var container = new Container();
+            container.SetOption(MemberBindingBehaviour.BindAll);
+            container.RegisterAll(
+                Target.ForType<MyService1>(),
+                Target.ForType<MyService2>()
+            );
+            container.RegisterType<Has2InjectableMembers>();
 
-                var container = new Container();
-                container.RegisterAll(
-                    Target.ForType<MyService1>(),
-                    Target.ForType<MyService2>()
-                );
-                container.RegisterType<Has2InjectableMembers>();
+            var result = container.Resolve<Has2InjectableMembers>();
 
-                var result = container.Resolve<Has2InjectableMembers>();
-
-                Assert.NotNull(result.Service1);
-                Assert.NotNull(result.Service2);
-                // </example2>
-            }
-            finally
-            {
-                GlobalBehaviours.ContainerBehaviour
-                    .ReplaceAnyOrAdd<IContainerBehaviour<IMemberBindingBehaviour>>(previousDefault);
-            }
+            Assert.NotNull(result.Service1);
+            Assert.NotNull(result.Service2);
+            // </example2>
         }
 
         [Fact]
-        public void ShouldInject2MembersWithAllMembersBehaviour_FromContainerDefault()
+        public void ShouldInject2MembersWithAllMembersBehaviour_FromTypeSpecificOption()
         {
             // <example3>
-            // start off with the global behaviour to ensure you have any and all other required
-            // behaviours
-            var behaviour = new ContainerBehaviourCollection(GlobalBehaviours.ContainerBehaviour);
-            // then simply use the .UseMemberBindingBehaviour extension method as before
-            behaviour.UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
-
-            var container = new Container(behaviour);
+            var container = new Container();
+            // Here - the behaviour will *only* kick in for the Has2InjectableMembers type
+            container.SetOption(MemberBindingBehaviour.BindAll, typeof(Has2InjectableMembers));
             container.RegisterAll(
                 Target.ForType<MyService1>(),
                 Target.ForType<MyService2>()

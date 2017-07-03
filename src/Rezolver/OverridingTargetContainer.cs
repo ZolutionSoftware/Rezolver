@@ -9,7 +9,7 @@ using System.Linq;
 namespace Rezolver
 {
     /// <summary>
-    /// A version of <see cref="TargetContainer" /> which overrides the registrations of another
+    /// A version of <see cref="TargetContainer" /> which overrides and extends the registrations of another
     /// (the <see cref="Parent" />).
     /// </summary>
     /// <seealso cref="Rezolver.TargetContainer" />
@@ -21,7 +21,10 @@ namespace Rezolver
     /// any ancestor.
     /// 
     /// This fallback logic in the <see cref="Fetch(Type)" /> is triggered by the 
-    /// <see cref="ITarget.UseFallback" /> property.</remarks>
+    /// <see cref="ITarget.UseFallback" /> property.
+    /// 
+    /// The <see cref="FetchAll(Type)"/> method, however, returns all targets registered directly in this
+    /// container and in the parent.</remarks>
     public sealed class OverridingTargetContainer : TargetContainer
     { 
         private readonly ITargetContainer _parent;
@@ -30,18 +33,17 @@ namespace Rezolver
         /// Initializes a new instance of the <see cref="OverridingTargetContainer"/> class.
         /// </summary>
         /// <param name="parent">Required. The parent target container.</param>
-        /// <param name="behaviour">Optional.  The behaviour to attach to this target container.  If not provided, then
-        /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
-        /// class is used by default.
+        /// <param name="config">Optional.  The configuration to apply to this target container.  If null, then
+        /// the <see cref="TargetContainer.DefaultConfig"/> is used.
         /// </param>
-        public OverridingTargetContainer(ITargetContainer parent, ITargetContainerBehaviour behaviour = null)
+        public OverridingTargetContainer(ITargetContainer parent, ITargetContainerConfig config = null)
                 : base()
         {
             //note above - the class uses the non-behaviour constructor of TargetContainer to ensure that 
             parent.MustNotBeNull(nameof(parent));
             _parent = parent;
 
-            (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+            (config ?? DefaultConfig).Configure(this);
         }
 
         /// <summary>
@@ -72,17 +74,16 @@ namespace Rezolver
 
 
         /// <summary>
-        /// Implementation of <see cref="ITargetContainer.FetchAll(Type)" />
+        /// Implementation of <see cref="ITargetContainer.FetchAll(Type)" /> which returns 
+        /// an enumerable of targets from both the base target container and this target container.
         /// </summary>
         /// <param name="type">The type whose targets are to be retrieved.</param>
         /// <returns>A non-null enumerable containing the targets that match the type, or an
         /// empty enumerable if the type is not registered.</returns>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            var result = base.FetchAll(type);
-            if (result == null || !result.Any())
-                return _parent.FetchAll(type);
-            return result;
+            return (_parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
+                (base.FetchAll(type) ?? Enumerable.Empty<ITarget>()));
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Rezolver
 		public static ITarget ForDelegate<TResult>(Func<TResult> factory, Type declaredType = null)
 		{
 			if(factory == null) throw new ArgumentNullException(nameof(factory));
-			return new DelegateTarget(factory, declaredType);
+            return new NullaryDelegateTarget(factory, declaredType);
 		}
 
 		/// <summary>Creates a <see cref="Rezolver.Targets.DelegateTarget" /> for a factory delegate which takes an 

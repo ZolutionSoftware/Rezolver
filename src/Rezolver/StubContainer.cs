@@ -20,7 +20,7 @@ namespace Rezolver
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}
 
-		public ICompiledTarget FetchCompiled(IResolveContext context)
+		public ICompiledTarget GetCompiledTarget(IResolveContext context)
 		{
 			throw new InvalidOperationException("The ResolveContext has no Container set");
 		}

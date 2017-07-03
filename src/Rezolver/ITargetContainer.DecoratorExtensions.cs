@@ -61,7 +61,7 @@ namespace Rezolver
                 if (!TypeHelpers.IsGenericTypeDefinition(decoratedType))
                     registerType = decoratedType.GetGenericTypeDefinition();
             }
-            targetContainer.RegisterContainer(registerType, new DecoratingTargetContainer(decoratorType, decoratedType));
+            targetContainer.RegisterContainer(registerType, new DecoratingTargetContainer(targetContainer, decoratorType, decoratedType));
         }
     }
 }

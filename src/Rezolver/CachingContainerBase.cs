@@ -32,33 +32,11 @@ namespace Rezolver
         /// <see cref="IContainer.Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new 
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
         /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
-        /// <remarks>This constructor does not attach any <see cref="IContainerBehaviour"/> behaviours, because behaviours typically
-        /// call methods which are declared virtual on this class - which could be unsafe.
-        /// 
-        /// If this does not apply to your derived class (which is unlikely) - use the 
-        /// <see cref="CachingContainerBase.CachingContainerBase(IContainerBehaviour, ITargetContainer)"/> constructor.</remarks>
         protected CachingContainerBase(ITargetContainer targets = null)
 			: base(targets)
 		{
 
 		}
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="CachingContainerBase"/> class.
-        /// </summary>
-        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its <see cref="Targets"/>).
-        /// If not provided, then the global <see cref="GlobalBehaviours.ContainerBehaviour"/> will be used.</param>
-        /// <param name="targets">Optional.  Contains the targets that will be used as the source of registrations for the container,
-        /// ultimately being passed to the <see cref="Targets"/> property.
-        /// 
-        /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <remarks>To create an instance without attaching behaviours, use the 
-        /// <see cref="CachingContainerBase.CachingContainerBase(ITargetContainer)"/> constructor.</remarks>
-        protected CachingContainerBase(IContainerBehaviour behaviour, ITargetContainer targets = null)
-            : base(behaviour, targets)
-        {
-
-        }
 
 		/// <summary>
 		/// Obtains an <see cref="ICompiledTarget"/> for the given <paramref name="context"/>.
@@ -70,16 +48,20 @@ namespace Rezolver
 		/// a given request.
 		/// 
 		/// The internal cache is examined first to see if an entry exists for the <see cref="IResolveContext.RequestedType"/> type and, if not, then 
-		/// the result of the base class' <see cref="ContainerBase.GetCompiledRezolveTarget(IResolveContext)"/> is cached and returned.
+		/// the result of the base class' <see cref="ContainerBase.GetCompiledTarget(IResolveContext)"/> is cached and returned.
 		/// </remarks>
-		protected override ICompiledTarget GetCompiledRezolveTarget(IResolveContext context)
+		protected override ICompiledTarget GetCompiledTargetVirtual(IResolveContext context)
 		{
+            // Implementation note: after extensive testing, we found that this approach is faster in the best
+            // case than always using GetOrAdd - that is: once a compiled target is built and cached, TryGetValue
+            // performs better than GetOrAdd.
+
             if (_entries.TryGetValue(context.RequestedType, out Lazy<ICompiledTarget> myLazy))
                 return myLazy.Value;
 
             return _entries.GetOrAdd(
                 context.RequestedType, 
-                c => new Lazy<ICompiledTarget>(() => base.GetCompiledRezolveTarget(context))).Value;
+                c => new Lazy<ICompiledTarget>(() => base.GetCompiledTargetVirtual(context))).Value;
 		}
 	}
 }

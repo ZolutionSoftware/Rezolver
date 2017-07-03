@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 using Rezolver.Compilation.Expressions;
 using Rezolver.Compilation;
 
-namespace Rezolver.Behaviours
+namespace Rezolver.Configuration
 {
 	/// <summary>
-	/// Implements the <see cref="IContainerBehaviour"/> to configure expression-based compilation for targets in containers.
+	/// Implementation of <see cref="IContainerConfig"/> which configures expression-based compilation for targets in containers.
 	/// 
-	/// The implementation registers all the targets necessary to use the expression tree-based compilation provided by 
+	/// The implementation sets all options and registers all the targets necessary to use the expression tree-based compilation provided by 
 	/// the <see cref="ExpressionCompiler"/>
 	/// 
-	/// This is included in the default <see cref="GlobalBehaviours.ContainerBehaviour"/>, meaning that all containers
-    /// created without a specific behaviour will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
-	public class ExpressionCompilerBehaviour : IContainerBehaviour<ITargetCompiler>
+	/// This is included in the <see cref="Container.DefaultConfig"/>, meaning that all containers
+    /// created without a specific config will automatically be configured to use the <see cref="ExpressionCompiler"/>.</summary>
+	public class ExpressionCompilation : IContainerConfig<ITargetCompiler>
 	{
         /// <summary>
-        /// The one and only instance of <see cref="ExpressionCompilerBehaviour"/>
+        /// The one and only instance of <see cref="ExpressionCompilation"/>
         /// </summary>
-        public static IContainerBehaviour<ITargetCompiler> Instance { get; } = new ExpressionCompilerBehaviour();
+        public static IContainerConfig<ITargetCompiler> Instance { get; } = new ExpressionCompilation();
 
-        private ExpressionCompilerBehaviour()
+        private ExpressionCompilation()
         {
 
         }
@@ -33,6 +33,7 @@ namespace Rezolver.Behaviours
 		{
 			public IExpressionBuilder Instance;
 			public Type ExpressionBuilderType;
+            public Type TargetType;
 		}
 		private static IEnumerable<ExpressionBuilderRegistration> SearchForStandardTargetBuilders()
 		{
@@ -42,7 +43,7 @@ namespace Rezolver.Behaviours
             // instances of that new behaviour type and this class will automatically use them.
 
 			var rezolverAssembly = TypeHelpers.GetAssembly(typeof(IContainer));
-			var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilerBehaviour));
+			var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilation));
             // the well-known target types for compilation are ICompiledTarget, plus all the concrete target types in Rezolver.Targets
 			foreach (var type in rezolverAssembly.ExportedTypes.Where(t =>
                 t == typeof(ICompiledTarget) || 
@@ -63,6 +64,7 @@ namespace Rezolver.Behaviours
 					{
 						yield return new ExpressionBuilderRegistration()
 						{
+                            TargetType = type,
 							ExpressionBuilderType = builderInterfaceType,
 							Instance = (IExpressionBuilder)defaultConstructor.Invoke(new object[0])
 						};
@@ -80,7 +82,7 @@ namespace Rezolver.Behaviours
 		}
 
         /// <summary>
-		/// Implements the <see cref="IContainerBehaviour.Attach(IContainer, ITargetContainer)"/> method,
+		/// Implements the <see cref="IContainerConfig.Configure(IContainer, ITargetContainer)"/> method,
 		/// registering all the targets necessary to use expression-based compilation for all the standard targets
 		/// defined in the <c>Rezolver</c> core library.
 		/// </summary>
@@ -88,31 +90,26 @@ namespace Rezolver.Behaviours
 		/// <param name="targets">Required - the target container into which the various targets will be registered.</param>
 		/// <remarks>All targets registered by this function are <see cref="ObjectTarget"/> targets backed by concrete instances
 		/// of the various components (compiler etc).</remarks>
-		public virtual void Attach(IContainer container, ITargetContainer targets)
+		public virtual void Configure(IContainer container, ITargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
-            //extract the singleton to its own behaviour
+            // note - the singleton container is done like this because the expression compiler which uses 
+            // it Resolves it from the container during compilation.  This is to ensure that each container
+            // gets the same singleton container (including OverridingContainer), rather than a single shared one
+            // from the target container option.
             targets.RegisterObject(new SingletonTarget.SingletonContainer());
-            targets.RegisterObject(new ExpressionBuilderCache(container));
+            //targets.RegisterObject(new ExpressionBuilderCache(container));
             //will be how containers pick up and use this compiler
-            targets.RegisterObject<ITargetCompiler>(ExpressionCompiler.Default);
+            targets.SetOption<ITargetCompiler>(ExpressionCompiler.Default);
             //if you're looking to re-enter the compilation process for a particular
             //target - then you should request our compiler via the type IExpressionCompiler 
-            targets.RegisterObject<IExpressionCompiler>(ExpressionCompiler.Default);
-            
-            // TODO: Consider moving this next part into its own behaviour on which others can depend so that they 
-            // can augment and decorate the standard builders.
+            targets.SetOption<IExpressionCompiler>(ExpressionCompiler.Default);
 
             //loop through all the types in the core Rezolver assembly's Rezolver.Targets namespace, searching for an implementing
             //type in this assembly
             foreach (var registration in GetStandardTargetBuilders())
             {
-                //NOTE: MUST pass the concrete type below as an argument to the declaredType parameter
-                //otherwise the object target is created as IExpressionBuilder, which is not capable of
-                //handling the type represented by ExpressionBuilderType - because it is a base interface
-                //to that type, not a derived interface.
-                if (targets.Fetch(registration.ExpressionBuilderType) == null)
-                    targets.RegisterObject(registration.Instance, declaredType: registration.ExpressionBuilderType);
+                targets.SetOption(registration.Instance, registration.TargetType);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Rezolver.Tests
 		{
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				var builder = new OverridingTargetContainer(null);
+				var targets = new OverridingTargetContainer(null);
 			});
 		}
 
@@ -21,34 +21,52 @@ namespace Rezolver.Tests
 		public void MustCopyParent()
 		{
 			var parent = new TargetContainer();
-			var childBuilder = new OverridingTargetContainer(parent);
-			Assert.Same(parent, childBuilder.Parent);
+			var overriding = new OverridingTargetContainer(parent);
+			Assert.Same(parent, overriding.Parent);
 		}
 
 		[Fact]
 		public void ShouldInheritParentRegistration()
 		{
 			var parent = new TargetContainer();
-			var child = new OverridingTargetContainer(parent);
+			var overriding = new OverridingTargetContainer(parent);
 
 			var parentTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
 			parent.Register(parentTarget);
 
-			Assert.Same(parentTarget, child.Fetch(typeof(int)));
+			Assert.Same(parentTarget, overriding.Fetch(typeof(int)));
 		}
 
 		[Fact]
 		public void ShouldOverrideParentRegistration()
 		{
 			var parent = new TargetContainer();
-			var child = new OverridingTargetContainer(parent);
+			var overriding = new OverridingTargetContainer(parent);
 
 			var parentTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
-			var childTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
+			var overrideTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
 			parent.Register(parentTarget);
-			child.Register(childTarget);
+			overriding.Register(overrideTarget);
 
-			Assert.Same(childTarget, child.Fetch(typeof(int)));
+			Assert.Same(overrideTarget, overriding.Fetch(typeof(int)));
 		}
-	}
+
+        [Fact]
+        public void FetchAllShouldReturnAllTargets()
+        {
+            var parent = new TargetContainer();
+            var overriding = new OverridingTargetContainer(parent);
+
+            var parentTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
+            parent.Register(parentTarget);
+
+            var overrideTarget = new TestTarget(typeof(int), useFallBack: false, supportsType: true);
+            overriding.Register(overrideTarget);
+
+            var fetched = overriding.FetchAll(typeof(int)).ToArray();
+            Assert.Equal(2, fetched.Length);
+            Assert.Same(parentTarget, fetched[0]);
+            Assert.Same(overrideTarget, fetched[1]);
+        }
+    }
 }

@@ -57,7 +57,21 @@ namespace Rezolver.Tests.Compilation.Specification
 			Assert.Equal("hello world", result.S);
 		}
 
-		[Fact]
+        [Fact]
+        public void ConstructorTarget_ShouldAutoInjectIResolveContext()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterType<RequiresResolveContext>();
+
+            var container = CreateContainer(targets);
+
+            var result = container.Resolve<RequiresResolveContext>();
+
+            Assert.NotNull(result.Context);
+
+        }
+
+        [Fact]
 		public void ConstructorTarget_CtorSelectedByNamedArgs()
 		{
 			Output.WriteLine("The constructor is located JIT based on a single named argument");

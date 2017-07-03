@@ -17,15 +17,15 @@ namespace Rezolver.Tests.Targets
 			this.Output = output;
 		}
 
-		protected virtual IContainer GetDefaultContainer()
+		protected virtual IContainer GetDefaultContainer(ITargetContainer targets = null)
 		{
-			return new Container();
+			return new Container(targets);
 		}
 
-		protected virtual ITargetContainer GetDefaultTargetContainer(IContainer container = null)
+		protected virtual ITargetContainer GetDefaultTargetContainer(IContainer existingContainer = null)
 		{
-			if (container is ITargetContainer)
-				return ((ITargetContainer)container);
+            if (existingContainer is ITargetContainer targets)
+                return targets;
 			return new TargetContainer();
 		}
 
@@ -43,12 +43,11 @@ namespace Rezolver.Tests.Targets
 		/// built) - with the target container that's returned being used instead.</param>
 		protected virtual ICompileContext GetCompileContext(ITarget target, IContainer container = null, ITargetContainer targets = null, Type targetType = null)
 		{
-			container = container ?? GetDefaultContainer();
 			targets = targets ?? GetDefaultTargetContainer(container);
-
+            container = container ?? GetDefaultContainer(targets);
             // to create a context we resolve the ITargetCompiler from the container.
             // this is usually an internal operation within the container itself.
-            return container.Resolve<ITargetCompiler>()
+            return targets.GetOption<ITargetCompiler>()
                 .CreateContext(new ResolveContext(container, targetType ?? target.DeclaredType), targets);
 		}
 	}
