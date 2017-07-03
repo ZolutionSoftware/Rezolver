@@ -10,7 +10,7 @@ namespace Rezolver
     /// but the intention is to use it either to pre-register targets or target containers for specific types,
     /// or to set options on a target container.
     /// 
-    /// The automatic injection of enumerables, for example, is enabled by applying the <see cref="Configuration.AutoEnumerables"/>
+    /// The automatic injection of enumerables, for example, is enabled by applying the <see cref="Configuration.InjectEnumerables"/>
     /// to a target container.
     /// 
     /// Different target containers also have their own statically available default configuration collections,
@@ -21,7 +21,7 @@ namespace Rezolver
     /// </remarks>
     /// <seealso cref="TargetContainer.DefaultConfig"/>
     /// <seealso cref="CombinedTargetContainerConfig"/>
-    /// <seealso cref="Configuration.AutoEnumerables"/>
+    /// <seealso cref="Configuration.InjectEnumerables"/>
     /// <seealso cref="Configuration.InjectResolveContext"/>
     public interface ITargetContainerConfig
     {

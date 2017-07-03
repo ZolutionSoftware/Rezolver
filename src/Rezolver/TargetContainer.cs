@@ -22,8 +22,8 @@ namespace Rezolver
     /// 
     /// Although you can derive from this class to extend its functionality; it's also possible to 
     /// extend it via configuration (see <see cref="ITargetContainerConfig"/>) - which is how, for example,
-    /// the framework enables automatic injection of enumerables (see <see cref="Configuration.AutoEnumerables"/>) and
-    /// lists (see <see cref="Configuration.AutoLists"/>).
+    /// the framework enables automatic injection of enumerables (see <see cref="Configuration.InjectEnumerables"/>) and
+    /// lists (see <see cref="Configuration.InjectLists"/>).
     /// 
     /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer
@@ -37,8 +37,8 @@ namespace Rezolver
         /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.</remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
-            Configuration.AutoEnumerables.Instance,
-            Configuration.AutoLists.Instance,
+            Configuration.InjectEnumerables.Instance,
+            Configuration.InjectLists.Instance,
             Configuration.InjectResolveContext.Instance
         });
 

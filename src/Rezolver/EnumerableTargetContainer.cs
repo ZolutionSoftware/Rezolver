@@ -20,10 +20,11 @@ namespace Rezolver
 
         protected virtual ITarget CreateListTarget(Type elementType, IEnumerable<ITarget> targets, bool asArray = false)
         {
-            if (targets.All(t => t is ICompiledTarget))
-                return PrecompiledListTarget.ForTargets(elementType, targets, asArray);
-            else
-                return new ListTarget(elementType, targets, asArray);
+            return new EnumerableTarget(targets, elementType);
+            //if (targets.All(t => t is ICompiledTarget))
+            //    return PrecompiledListTarget.ForTargets(elementType, targets, asArray);
+            //else
+            //    return new ListTarget(elementType, targets, asArray);
         }
 
         public override ITarget Fetch(Type type)

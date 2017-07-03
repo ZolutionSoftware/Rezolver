@@ -17,8 +17,8 @@ namespace Rezolver.Configuration
     /// objects to declare a (required or optional) dependency on anything which configures that option - so that it can ensure that those 
     /// options are set beforehand.
     /// 
-    /// The <see cref="AutoEnumerables"/> configuration type, for example, expresses an optional dependency on an <see cref="ITargetContainerConfig{T}"/>
-    /// which has a <typeparamref name="TOption"/> type equal to <see cref="Options.EnableAutoEnumerable"/>.</remarks>
+    /// The <see cref="InjectEnumerables"/> configuration type, for example, expresses an optional dependency on an <see cref="ITargetContainerConfig{T}"/>
+    /// which has a <typeparamref name="TOption"/> type equal to <see cref="Options.EnumerableInjection"/>.</remarks>
     public class ConfigureOption<TOption> : ITargetContainerConfig<TOption>
         where TOption: class
     {

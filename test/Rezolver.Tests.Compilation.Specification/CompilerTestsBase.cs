@@ -40,10 +40,27 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// Creates the target container for the test.
 		/// </summary>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual ITargetContainer CreateTargetContainer([CallerMemberName]string testName = null)
+        /// <param name="configOverride">An explicit <see cref="ITargetContainerConfig"/> to use to configure the 
+        /// <see cref="ITargetContainer"/>.  If not provided, then the config returned by <see cref="GetDefaultTargetContainerConfig(string)"/> 
+        /// is used, which is always a clone of the <see cref="TargetContainer.DefaultConfig"/>.</param>
+		protected virtual ITargetContainer CreateTargetContainer([CallerMemberName]string testName = null, ITargetContainerConfig configOverride = null)
 		{
-			return new TargetContainer();
+			return new TargetContainer(configOverride ?? GetDefaultTargetContainerConfig(testName));
 		}
+
+        /// <summary>
+        /// Gets the default <see cref="ITargetContainerConfig"/> to be used to configure <see cref="ITargetContainer"/> objects to be used for the tests.
+        /// 
+        /// Note that the return type is specialised for <see cref="CombinedTargetContainerConfig"/> to allow per-test alteration of the configuration.
+        /// 
+        /// The base implementation returns a new <see cref="CombinedTargetContainerConfig"/> cloned from <see cref="TargetContainer.DefaultConfig"/>
+        /// </summary>
+        /// <param name="testName"></param>
+        /// <returns></returns>
+        protected virtual CombinedTargetContainerConfig GetDefaultTargetContainerConfig([CallerMemberName]string testName = null)
+        {
+            return new CombinedTargetContainerConfig(TargetContainer.DefaultConfig.AsEnumerable());
+        }
 
 		/// <summary>
 		/// Creates the container for the test or theory from the targets created by 

@@ -21,7 +21,7 @@ namespace Rezolver
         public IResolveContext Previous { get; private set; }
 
         /// <summary>
-        /// Gets the type being requested from the container
+        /// Gets the type being requested from the container.
         /// </summary>
         public Type RequestedType { get; private set; }
 

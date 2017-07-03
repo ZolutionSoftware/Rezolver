@@ -14,7 +14,7 @@ namespace Rezolver.Tests
         {
             var configs = new CombinedTargetContainerConfig
             {
-                Configuration.AutoLists.Instance
+                Configuration.InjectLists.Instance
             };
 
             var targets = new TargetContainer(configs);
@@ -32,8 +32,8 @@ namespace Rezolver.Tests
         {
             var configs = new CombinedTargetContainerConfig
             {
-                Configuration.AutoLists.Instance,
-                Configuration.ConfigureOption.With<Options.EnableAutoLists>(false)
+                Configuration.InjectLists.Instance,
+                Configuration.ConfigureOption.With<Options.ListInjection>(false)
             };
 
             var targets = new TargetContainer(configs);

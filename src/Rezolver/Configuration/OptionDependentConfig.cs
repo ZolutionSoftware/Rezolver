@@ -25,7 +25,7 @@ namespace Rezolver.Configuration
     /// applications to omit any up-front configuration for that option except where absolutely necessary.
     /// 
     /// 
-    /// The <see cref="AutoEnumerables"/> config inherits from this class - passing <see cref="Options.EnableAutoEnumerable"/> as 
+    /// The <see cref="InjectEnumerables"/> config inherits from this class - passing <see cref="Options.EnumerableInjection"/> as 
     /// <typeparamref name="TOption"/>, with the constructor marking the dependency as optional. This ensures that it is executed after the option
     /// has been configured by any <see cref="ITargetContainerConfig{T}"/> objects specialised for the option type.</remarks>
     public abstract class OptionDependentConfig<TOption> : ITargetContainerConfig, IDependant

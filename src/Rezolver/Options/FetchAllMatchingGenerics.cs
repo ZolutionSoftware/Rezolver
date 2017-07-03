@@ -10,7 +10,7 @@ namespace Rezolver.Options
     /// built in target containers.
     /// 
     /// This ultimately affects the objects that are materialised in automatically generated enumerables
-    /// (when the <see cref="Configuration.AutoEnumerables"/> is enabled - which it is, by default)
+    /// (when the <see cref="Configuration.InjectEnumerables"/> is enabled - which it is, by default)
     /// when the element type is itself a generic type.
     /// </summary>
     /// <remarks>This option is primarily used to control the <see cref="GenericTargetContainer"/>
