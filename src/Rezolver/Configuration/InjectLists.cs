@@ -7,13 +7,14 @@ namespace Rezolver.Configuration
     /// <summary>
     /// This configuration will enable automatic injection of <see cref="List{T}"/>, <see cref="IList{T}"/> and <see cref="IReadOnlyList{T}"/>
     /// when applied to an <see cref="ITargetContainer"/>, *so long as there aren't already registrations for those types*.
-    /// 
+    /// </summary>
+    /// <remarks>
     /// If this configuration is added to a <see cref="CombinedTargetContainerConfig"/>, it can be disabled by adding 
     /// another configuration to set the <see cref="Options.ListInjection"/> option to <c>false</c> - typically via
     /// the <see cref="CombinedTargetContainerConfigExtensions.ConfigureOption{TOption}(CombinedTargetContainerConfig, TOption)"/>
     /// method (note - the order that the configs are added doesn't matter).
-    /// </summary>
-    /// <remarks>The underlying behaviour relies on registrations of <see cref="IEnumerable{T}"/> to be present when
+    /// 
+    /// The underlying behaviour relies on registrations of <see cref="IEnumerable{T}"/> to be present when
     /// the constructor for the list type is bound, as it expects to bind to the <see cref="List{T}.List(IEnumerable{T})"/> constructor.
     /// 
     /// The easiest way to achieve this is also to ensure that the
@@ -48,14 +49,8 @@ namespace Rezolver.Configuration
 
             targets.Register(target);
             targets.Register(target, typeof(IList<>));
+            // might be an argument here for a dedication implementation to prevent casting->modification
             targets.Register(target, typeof(IReadOnlyList<>));
-
-            //System.Collections.ObjectModel.Collection<int> c = new System.Collections.ObjectModel.Collection<int>();
-            //ICollection<int> c2; // implement with Collection
-            //System.Collections.ObjectModel.ReadOnlyCollection<int> c5 = new System.Collections.ObjectModel.ReadOnlyCollection<int>(null);
-            //IReadOnlyCollection<int> c3; // implement with RO Collection
-            
-
         }
     }
 }

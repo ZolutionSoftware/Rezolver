@@ -7,10 +7,10 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-    public class AutoListsConfigTests
+    public class InjectListsConfigTests
     {
         [Fact]
-        public void ShouldAddRegistrationsByDefault()
+        public void ShouldAddRegistrations()
         {
             var configs = new CombinedTargetContainerConfig
             {

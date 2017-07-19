@@ -1,8 +1,12 @@
-﻿namespace Rezolver.Options
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Rezolver.Options
 {
     /// <summary>
-    /// Boolean option which, if configured before the <see cref="Configuration.InjectLists"/> configuration is applied, 
-    /// will control whether automatic injection of <see cref="System.Collections.Generic.List{T}"/> (and related interfaces - see the documentation 
+    /// Boolean option which, if configured before the <see cref="Configuration.InjectCollections"/> configuration is applied, 
+    /// will control whether automatic injection of <see cref="System.Collections.ObjectModel.ReadOnlyCollection{T}"/> (and related interfaces - see the documentation 
     /// on that type for more) will be enabled.
     /// The <see cref="Default"/> is equivalent to <c>true</c>.
     /// </summary>
@@ -16,20 +20,20 @@
     /// <seealso cref="Configuration.InjectLists"/>
     /// <seealso cref="EnumerableInjection"/>
     /// <seealso cref="Configuration.InjectEnumerables"/>
-    public class ListInjection : ContainerOption<bool>
+    public class CollectionInjection : ContainerOption<bool>
     {
         /// <summary>
-        /// Default value for this option, equivalent to <c>true</c>
+        /// The Default setting for the <see cref="CollectionInjection"/> option - evaluates to <c>true</c>
         /// </summary>
-        public static ListInjection Default { get; } = true;
+        public static CollectionInjection Default { get; } = true;
 
         /// <summary>
-        /// Convenience operator for creating an instance of this option from a boolean.
+        /// Convenience operator for treating booleans as <see cref="CollectionInjection"/> option values.
         /// </summary>
         /// <param name="value"></param>
-        public static implicit operator ListInjection(bool value)
+        public static implicit operator CollectionInjection(bool value)
         {
-            return new ListInjection() { Value = value };
+            return new CollectionInjection() { Value = value };
         }
     }
 }

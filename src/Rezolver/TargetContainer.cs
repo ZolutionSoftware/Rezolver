@@ -34,11 +34,22 @@ namespace Rezolver
         /// </summary>
         /// <remarks>The simplest way to configure all target container instances is to add/remove configs to this collection.
         /// 
-        /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.</remarks>
+        /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.
+        /// 
+        /// ## Default configurations
+        /// 
+        /// The configurations applied by default are:
+        /// 
+        /// - <see cref="Configuration.InjectEnumerables"/>
+        /// - <see cref="Configuration.InjectLists"/>
+        /// - <see cref="Configuration.InjectCollections"/>
+        /// - <see cref="Configuration.InjectResolveContext"/>
+        /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
             Configuration.InjectEnumerables.Instance,
             Configuration.InjectLists.Instance,
+            Configuration.InjectCollections.Instance,
             Configuration.InjectResolveContext.Instance
         });
 

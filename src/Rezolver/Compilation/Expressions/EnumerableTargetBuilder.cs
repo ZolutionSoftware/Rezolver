@@ -6,39 +6,15 @@ using System.Text;
 using Rezolver.Targets;
 using System.Linq;
 using System.Reflection;
+using Rezolver.Runtime;
 
 namespace Rezolver.Compilation.Expressions
 {
     /// <summary>
     /// An implementation of <see cref="ExpressionBuilderBase{TTarget}"/> specialised for the target type <see cref="EnumerableTarget"/>.
     /// </summary>
-    /// <remarks>
-    /// 
-    /// </remarks>
     public class EnumerableTargetBuilder : ExpressionBuilderBase<EnumerableTarget>
     {
-        internal class LazyEnumerable<T> : IEnumerable<T>
-        {
-            private readonly IResolveContext _context;
-            private readonly IEnumerable<Func<IResolveContext, object>> _factories;
-
-            public LazyEnumerable(IResolveContext context, IEnumerable<Func<IResolveContext, object>> factories)
-            {
-                _context = context;
-                _factories = factories;
-            }
-
-            public IEnumerator<T> GetEnumerator()
-            {
-                return _factories.Select(f => (T)f(_context)).GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
-            }
-        }
-
         /// <summary>
         /// Builds an expression which represents an instance of <see cref="IEnumerable{T}"/> whose elements are created by the 
         /// <see cref="EnumerableTarget.Targets"/> of the passed <paramref name="target"/>.
@@ -55,16 +31,16 @@ namespace Rezolver.Compilation.Expressions
         /// 
         /// ## Lazy vs Eager loading
         /// 
-        /// The option <see cref="Options.LazyLoadedEnumerables"/> is read from the <paramref name="context"/> for the 
+        /// The option <see cref="Options.LazyEnumerables"/> is read from the <paramref name="context"/> for the 
         /// <see cref="ITarget.DeclaredType"/> of the <paramref name="target"/>.  If it is equivalent to <c>true</c> 
-        /// (the <see cref="Options.LazyLoadedEnumerables.Default"/>), then a lazily-loaded enumerable is constructed which will
+        /// (the <see cref="Options.LazyEnumerables.Default"/>), then a lazily-loaded enumerable is constructed which will
         /// create new instances of each object in the enumerable each time it is enumerated.
         /// 
         /// If the option is instead equivalent to <c>false</c>, then all instances will be created in advance, and an already-materialised
         /// enumerable is constructed.</remarks>
         protected override Expression Build(EnumerableTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            if (context.GetOption(target.DeclaredType, Options.LazyLoadedEnumerables.Default))
+            if (context.GetOption(target.DeclaredType, Options.LazyEnumerables.Default))
             {
                 var all = target.Targets.Select(t => compiler.BuildResolveLambda(t, context.NewContext(target.ElementType)));
                 return Expression.New(
@@ -76,8 +52,11 @@ namespace Rezolver.Compilation.Expressions
             }
             else
             {
-                return Expression.NewArrayInit(target.ElementType,
-                    target.Targets.Select(t => compiler.Build(t, context.NewContext(target.ElementType))));
+                return Expression.New(
+                    TypeHelpers.GetConstructors(typeof(EagerEnumerable<>).MakeGenericType(target.ElementType)).Single(),
+                    Expression.NewArrayInit(target.ElementType,
+                        target.Targets.Select(t => compiler.Build(t, context.NewContext(target.ElementType))))
+                    );
             }
         }
     }

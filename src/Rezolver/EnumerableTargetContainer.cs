@@ -4,9 +4,7 @@
 
 using Rezolver.Targets;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Rezolver
 {
@@ -16,15 +14,6 @@ namespace Rezolver
             : base(root, typeof(IEnumerable<>))
         {
 
-        }
-
-        protected virtual ITarget CreateListTarget(Type elementType, IEnumerable<ITarget> targets, bool asArray = false)
-        {
-            return new EnumerableTarget(targets, elementType);
-            //if (targets.All(t => t is ICompiledTarget))
-            //    return PrecompiledListTarget.ForTargets(elementType, targets, asArray);
-            //else
-            //    return new ListTarget(elementType, targets, asArray);
         }
 
         public override ITarget Fetch(Type type)
@@ -45,12 +34,7 @@ namespace Rezolver
 
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
-            var targets = Root.FetchAll(elementType);
-
-            // the method below has a shortcut for an enumerable of targets which are all ICompiledTarget
-            // this enables containers to bypass compilation for an IEnumerable when all the underlying
-            // targets are already able to return their objects (added to support expression compiler).
-            return CreateListTarget(elementType, targets, true);
+            return new EnumerableTarget(Root.FetchAll(elementType), elementType);
         }
 
         public override ITargetContainer CombineWith(ITargetContainer existing, Type type)
