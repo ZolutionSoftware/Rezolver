@@ -8,7 +8,7 @@
   	<title>Member Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Member Injection | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -107,8 +107,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="member-injection">Member Injection</h1>
-              
+<h1 id="member-injection">Member Injection</h1>
+
 <p>When executing a type&#39;s constructor you also have the option to inject services into the new instance&#39;s properties
 and/or fields.</p>
 <p>So - the equivalent of:</p>
@@ -129,54 +129,41 @@ ignored.  Implemented by an instance of <a class="xref" href="../../api/Rezolver
 ignored.  Implemented by an instance of <a class="xref" href="../../api/Rezolver.BindPublicFieldsBehaviour.html">BindPublicFieldsBehaviour</a>.</li>
 </ol>
 <h1 id="enabling-member-injection">Enabling member injection</h1>
-<h2 id="via-container-behaviours">Via Container behaviours</h2>
-<p>Container behaviours were introduced in 1.2, and provide a way to configure additional services used by any <a class="xref" href="../../api/Rezolver.ContainerBase.html">ContainerBase</a> derived
-object (that&#39;s all <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> implementations you&#39;re likely to use) created by your application.</p>
-<p>Container behaviours can be supplied to these container classes on construction (for example, the 
-<a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">Container(ITargetContainer, IContainerBehaviour)</a> <a class="xref" href="../../api/Rezolver.Container.html">Container</a> constructor) or, if
-not provided, then a default will be used from the <a class="xref" href="../../api/Rezolver.GlobalBehaviours.html">GlobalBehaviours</a> class.  This class has two global behaviours for
-<a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> objects:</p>
-<ol>
-<li><strong><a class="xref" href="../../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a></strong> - Behaviour to be used by the majority of containers</li>
-<li><strong><a class="xref" href="../../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_OverridingContainerBehaviour">OverridingContainerBehaviour</a></strong> - Behaviour to be used by <a class="xref" href="../../api/Rezolver.OverridingContainer.html">OverridingContainer</a></li>
-</ol>
-<p>The <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a> <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> (see above) is configured as
-the default in the first of these two container behaviours - which means that it becomes the default for all 
-<a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operations (including those of <a class="xref" href="../../api/Rezolver.OverridingContainer.html">OverridingContainer</a> objects, since they
-fall back to their overriden container if unable to resolve a particular type).</p>
-<p>If you want to change this default for containers in your application (e.g.
-to the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a> behaviour), you can use the 
-<a class="xref" href="../../api/Rezolver.ContainerBehaviourCollectionExtensions.html#Rezolver_ContainerBehaviourCollectionExtensions_UseMemberBindingBehaviour_">UseMemberBindingBehaviour</a> extension method:</p>
+<h2 id="via-container-options">Via Container Options</h2>
+<p>The simplest way to configure member injection is through the Options API, which provides a way to define metadata globally or on a per-type
+basis.  To do this, you need an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>, an interface which is implemented by all the standard container classes, in addition
+to the primary implementation types <a class="xref" href="../../api/Rezolver.TargetContainer.html">TargetContainer</a> and <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>.</p>
+<p>This short example shows how to set the default member binding behaviour for all constructed types to the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a>
+behaviour, thus enabling member injection for all publicly writeable properties and fields:</p>
 <pre><code class="lang-cs">using Rezolver;
 
 namespace MyApp
 {
     public static void Main()
     {
-        // GlobalBehaviours sits directly in the Rezolver namespace
-        GlobalBehaviours.ContainerBehaviour
-            .UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
+        var container = new Container();
+        container.SetOption(MemberBindingBehaviour.BindAll);
+        // objects created through constructor injection by this container will now also have their members injected
 
-        // all containers will now bind all members by default, unless
-        // a different IMemberBindingBehaviour is passed to a ConstructorTarget
-        // (or any of the other methods/types which create it)
+        // you can also set a specific behaviour for a type in this way
+        container.SetOption(typeof(ClassWithProperties), MemberBindingBehaviour.BindProperties);
+        // now, any instance of ClassWithProperties created by constructor injection will have only its properties injected
+
+        // also works for open generics
+        container.SetOption(typeof(GenericWithFields&lt;&gt;), MemberBindingBehaviour.BindFields);
+        // any instance of any generic based on GenericWithFields&lt;&gt; will have only its fields injected
     }
 }
-</code></pre><p>Whilst this is the simplest way to do it, your application might have multiple containers, and you therefore
-might wish to control their behaviour independently.  If so, then you can also supply a specific set of behaviours to your 
-container when you create it.</p>
-<div class="NOTE"><h5>Note</h5><p>If you do this, then it&#39;s best to clone the existing global default one first, and then
-reconfigure it, because there are other services configured in a container behaviour collection which are required,
-such as an <code>IContainerBehaviour&lt;ITargetCompiler&gt;</code>.</p>
-</div>
-<p>You&#39;ll see how to use custom container behaviours in an example further down this page.</p>
-<h2 id="via-explicit-rezolverimemberbindingbehaviour">Via Explicit <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h2>
+</code></pre><h2 id="via-explicit-rezolverimemberbindingbehaviour">Via Explicit <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h2>
 <p>Almost all of the ways in which you register types for construction by the container
 (be it via <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> factory methods like <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_ForType_">ForType</a>, registration extension methods such as those in 
 <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a>, or any of the constructors for <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or 
 <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> constructors etc) will accept an <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> which is 
-specific to the target being created - overriding any behaviour configured by container behaviors.</p>
-<p>It is this method of passing <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> that most of the examples here use.</p>
+specific to the target being created.</p>
+<p>Such explicitly provided member binding behaviours will <em>override</em> any which might otherwise be applied via the Options
+API (as shown in the last example).</p>
+<pre><code class="lang-cs">    container.RegisterType&lt;MyClass&gt;(MemberBindingBehaviour.BindAll);
+</code></pre><p>The rest of the examples in this topic will show both in action.</p>
 <hr>
 <h1 id="examples">Examples</h1>
 <h2 id="injecting-all-members">Injecting all members</h2>
@@ -188,7 +175,7 @@ specific to the target being created - overriding any behaviour configured by co
 }
 </code></pre><p>We simply setup the container to build all three types and make sure to pass the binding behaviour when registering the
 <code>Has2InjectableMembers</code> target.  We&#39;ll see how to do this using both an explicit <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>, but
-also via an <a class="xref" href="../../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a>.</p>
+also via an @Rezolver.IContainerBehaviour.</p>
 <h3 id="explicit-rezolverimemberbindingbehaviour">Explicit <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h3>
 <p>Here we&#39;ll register the <code>Has2InjectableMembers</code> type in the container with the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a> behaviour
 passed with the registration.  Doing this overrides the container&#39;s default behaviour, thus guaranteeing that the members are
@@ -210,16 +197,11 @@ properties or fields is not present in the container, then the resolve operation
 with constructors, where it&#39;s reasonable to assume all parameters are to be injected, there are no simple rules
 that can always applied to an object to determine which properties and/or fields should be auto-injected.</p>
 </div>
-<h3 id="rezolvericontainerbehaviour-global"><a class="xref" href="../../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> (Global)</h3>
-<p>In this version of the example, we&#39;ll change the container behaviour defined in <a class="xref" href="../../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a>
-so that binding all members becomes the default for all containers.</p>
-<div class="NOTE"><h5>Note</h5><p>If you&#39;re running the examples test project in Visual Studio, then it&#39;s recommended you disable parallel execution, because 
-it could cause other tests to fail when this one runs!</p>
-</div>
-<pre><code class="lang-csharp" name="Example.cs">GlobalBehaviours.ContainerBehaviour
-    .UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
-
-var container = new Container();
+<h3 id="global-option">Global Option</h3>
+<p>In this version of the example, we&#39;ll set the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a> behaviour as a global option on 
+the container itself.</p>
+<pre><code class="lang-csharp" name="Example.cs">var container = new Container();
+container.SetOption(MemberBindingBehaviour.BindAll);
 container.RegisterAll(
     Target.ForType&lt;MyService1&gt;(),
     Target.ForType&lt;MyService2&gt;()
@@ -230,16 +212,12 @@ var result = container.Resolve&lt;Has2InjectableMembers&gt;();
 
 Assert.NotNull(result.Service1);
 Assert.NotNull(result.Service2);
-</code></pre><h3 id="rezolvericontainerbehaviour-explicit"><a class="xref" href="../../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> (Explicit)</h3>
-<p>Our final demonstration of <a class="xref" href="../../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> - here we clone the current global behaviour and then replace
+</code></pre><h3 id="rezolvericontainerbehaviour-explicit">@Rezolver.IContainerBehaviour (Explicit)</h3>
+<p>Our final demonstration of @Rezolver.IContainerBehaviour - here we clone the current global behaviour and then replace
 whatever the default <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> is with the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a> behaviour.</p>
-<pre><code class="lang-csharp" name="Example.cs">// start off with the global behaviour to ensure you have any and all other required
-// behaviours
-var behaviour = new ContainerBehaviourCollection(GlobalBehaviours.ContainerBehaviour);
-// then simply use the .UseMemberBindingBehaviour extension method as before
-behaviour.UseMemberBindingBehaviour(MemberBindingBehaviour.BindAll);
-
-var container = new Container(behaviour);
+<pre><code class="lang-csharp" name="Example.cs">var container = new Container();
+// Here - the behaviour will *only* kick in for the Has2InjectableMembers type
+container.SetOption(MemberBindingBehaviour.BindAll, typeof(Has2InjectableMembers));
 container.RegisterAll(
     Target.ForType&lt;MyService1&gt;(),
     Target.ForType&lt;MyService2&gt;()
@@ -252,7 +230,7 @@ Assert.NotNull(result.Service1);
 Assert.NotNull(result.Service2);
 </code></pre><hr>
 <h2 id="custom-binding-behaviour">Custom binding behaviour</h2>
-<div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="../../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> approach shown in the previous example will work also with the the custom binding behaviour
+<div class="TIP"><h5>Tip</h5><p>The options approach shown in the previous two examples will work also with the the custom binding behaviour
 shown in this example.</p>
 </div>
 <p>If you find you need more control over which properties and/or fields you want bound on an instance, then you can, 
@@ -372,8 +350,7 @@ Assert.Null(result.ServiceProp);
 <li>Head back to the <a href="index.html">Constructor topic</a></li>
 <li>Or, see how <a href="generics.html">constructor injection works with generic types</a></li>
 </ul>
-
-            </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -381,7 +358,7 @@ Assert.Null(result.ServiceProp);
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/member-injection.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/member-injection.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

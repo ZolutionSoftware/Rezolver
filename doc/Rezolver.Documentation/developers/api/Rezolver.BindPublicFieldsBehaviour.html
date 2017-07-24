@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class BindPublicFieldsBehaviour
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,149 +108,149 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              
-              <h1 id="Rezolver_BindPublicFieldsBehaviour" data-uid="Rezolver.BindPublicFieldsBehaviour">Class BindPublicFieldsBehaviour
-              </h1>
-              <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> which binds all public instance fields
+            <article class="content wrap" id="_content" data-uid="Rezolver.BindPublicFieldsBehaviour">
+  
+  
+  <h1 id="Rezolver_BindPublicFieldsBehaviour" data-uid="Rezolver.BindPublicFieldsBehaviour" class="text-break">Class BindPublicFieldsBehaviour
+  </h1>
+  <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> which binds all public instance fields
 on new instances to services from the container.</p>
 </div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="inheritance">
-                <h5>Inheritance</h5>
-                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-                  <div class="level1"><a class="xref" href="Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a></div>
-                  <div class="level2"><span class="xref">BindPublicFieldsBehaviour</span></div>
-              </div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_GetMemberBindings_Rezolver_Compilation_ICompileContext_System_Type_">BindAllMembersBehaviour.GetMemberBindings(ICompileContext, Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_BindFields_Rezolver_Compilation_ICompileContext_System_Type_System_Collections_Generic_IEnumerable_System_Reflection_FieldInfo__">BindAllMembersBehaviour.BindFields(ICompileContext, Type, IEnumerable&lt;FieldInfo&gt;)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_BindProperties_Rezolver_Compilation_ICompileContext_System_Type_System_Collections_Generic_IEnumerable_System_Reflection_PropertyInfo__">BindAllMembersBehaviour.BindProperties(ICompileContext, Type, IEnumerable&lt;PropertyInfo&gt;)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_CreateBinding_Rezolver_Compilation_ICompileContext_System_Type_System_Reflection_FieldInfo_">BindAllMembersBehaviour.CreateBinding(ICompileContext, Type, FieldInfo)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_CreateBinding_Rezolver_Compilation_ICompileContext_System_Type_System_Reflection_PropertyInfo_">BindAllMembersBehaviour.CreateBinding(ICompileContext, Type, PropertyInfo)</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_GetBindableFields_Rezolver_Compilation_ICompileContext_System_Type_">BindAllMembersBehaviour.GetBindableFields(ICompileContext, Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
-                </div>
-              </div>
-              <h6><strong>Namespace</strong>:Rezolver</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_BindPublicFieldsBehaviour_syntax">Syntax</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class BindPublicFieldsBehaviour : BindAllMembersBehaviour, IMemberBindingBehaviour</code></pre>
-              </div>
-              <h3 id="constructors">Constructors
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_BindPublicFieldsBehaviour__ctor.md&amp;value=---%0Auid%3A%20Rezolver.BindPublicFieldsBehaviour.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/BindPublicFieldsBehaviour.cs/#L21">View Source</a>
-              </span>
-              <a id="Rezolver_BindPublicFieldsBehaviour__ctor_" data-uid="Rezolver.BindPublicFieldsBehaviour.#ctor*"></a>
-              <h4 id="Rezolver_BindPublicFieldsBehaviour__ctor" data-uid="Rezolver.BindPublicFieldsBehaviour.#ctor">BindPublicFieldsBehaviour()</h4>
-              <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.BindPublicFieldsBehaviour.html">BindPublicFieldsBehaviour</a> class.</p>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a></div>
+    <div class="level2"><span class="xref">BindPublicFieldsBehaviour</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_GetMemberBindings_Rezolver_Compilation_ICompileContext_System_Type_">BindAllMembersBehaviour.GetMemberBindings(ICompileContext, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_BindFields_Rezolver_Compilation_ICompileContext_System_Type_System_Collections_Generic_IEnumerable_System_Reflection_FieldInfo__">BindAllMembersBehaviour.BindFields(ICompileContext, Type, IEnumerable&lt;FieldInfo&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_BindProperties_Rezolver_Compilation_ICompileContext_System_Type_System_Collections_Generic_IEnumerable_System_Reflection_PropertyInfo__">BindAllMembersBehaviour.BindProperties(ICompileContext, Type, IEnumerable&lt;PropertyInfo&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_CreateBinding_Rezolver_Compilation_ICompileContext_System_Type_System_Reflection_FieldInfo_">BindAllMembersBehaviour.CreateBinding(ICompileContext, Type, FieldInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_CreateBinding_Rezolver_Compilation_ICompileContext_System_Type_System_Reflection_PropertyInfo_">BindAllMembersBehaviour.CreateBinding(ICompileContext, Type, PropertyInfo)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_GetBindableFields_Rezolver_Compilation_ICompileContext_System_Type_">BindAllMembersBehaviour.GetBindableFields(ICompileContext, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_BindPublicFieldsBehaviour_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BindPublicFieldsBehaviour : BindAllMembersBehaviour, IMemberBindingBehaviour</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_BindPublicFieldsBehaviour__ctor.md&amp;value=---%0Auid%3A%20Rezolver.BindPublicFieldsBehaviour.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/BindPublicFieldsBehaviour.cs/#L21">View Source</a>
+  </span>
+  <a id="Rezolver_BindPublicFieldsBehaviour__ctor_" data-uid="Rezolver.BindPublicFieldsBehaviour.#ctor*"></a>
+  <h4 id="Rezolver_BindPublicFieldsBehaviour__ctor" data-uid="Rezolver.BindPublicFieldsBehaviour.#ctor">BindPublicFieldsBehaviour()</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.BindPublicFieldsBehaviour.html">BindPublicFieldsBehaviour</a> class.</p>
 <p>Can only be created by Rezolver or through inheritance.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected BindPublicFieldsBehaviour()</code></pre>
-              </div>
-              <h3 id="methods">Methods
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_BindPublicFieldsBehaviour_GetBindableProperties_Rezolver_Compilation_ICompileContext_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.BindPublicFieldsBehaviour.GetBindableProperties(Rezolver.Compilation.ICompileContext%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/BindPublicFieldsBehaviour.cs/#L32">View Source</a>
-              </span>
-              <a id="Rezolver_BindPublicFieldsBehaviour_GetBindableProperties_" data-uid="Rezolver.BindPublicFieldsBehaviour.GetBindableProperties*"></a>
-              <h4 id="Rezolver_BindPublicFieldsBehaviour_GetBindableProperties_Rezolver_Compilation_ICompileContext_System_Type_" data-uid="Rezolver.BindPublicFieldsBehaviour.GetBindableProperties(Rezolver.Compilation.ICompileContext,System.Type)">GetBindableProperties(ICompileContext, Type)</h4>
-              <div class="markdown level1 summary"><p>Overrides the base class to avoid returning any properties.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected BindPublicFieldsBehaviour()</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_BindPublicFieldsBehaviour_GetBindableProperties_Rezolver_Compilation_ICompileContext_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.BindPublicFieldsBehaviour.GetBindableProperties(Rezolver.Compilation.ICompileContext%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/BindPublicFieldsBehaviour.cs/#L32">View Source</a>
+  </span>
+  <a id="Rezolver_BindPublicFieldsBehaviour_GetBindableProperties_" data-uid="Rezolver.BindPublicFieldsBehaviour.GetBindableProperties*"></a>
+  <h4 id="Rezolver_BindPublicFieldsBehaviour_GetBindableProperties_Rezolver_Compilation_ICompileContext_System_Type_" data-uid="Rezolver.BindPublicFieldsBehaviour.GetBindableProperties(Rezolver.Compilation.ICompileContext,System.Type)">GetBindableProperties(ICompileContext, Type)</h4>
+  <div class="markdown level1 summary"><p>Overrides the base class to avoid returning any properties.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">protected override sealed IEnumerable&lt;PropertyInfo&gt; GetBindableProperties(ICompileContext context, Type type)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></td>
-                    <td><span class="parametername">context</span></td>
-                    <td><p>The compile context</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override sealed IEnumerable&lt;PropertyInfo&gt; GetBindableProperties(ICompileContext context, Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The compile context</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">type</span></td>
-                    <td><p>The type to be bound.</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type to be bound.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.propertyinfo(v=vs.110).aspx">PropertyInfo</a>&gt;</td>
-                    <td><p>Always returns an empty <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a></p>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.propertyinfo(v=vs.110).aspx">PropertyInfo</a>&gt;</td>
+        <td><p>Always returns an empty <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a></p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_GetBindableProperties_Rezolver_Compilation_ICompileContext_System_Type_">BindAllMembersBehaviour.GetBindableProperties(ICompileContext, Type)</a></div>
-                        </article>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.BindAllMembersBehaviour.html#Rezolver_BindAllMembersBehaviour_GetBindableProperties_Rezolver_Compilation_ICompileContext_System_Type_">BindAllMembersBehaviour.GetBindableProperties(ICompileContext, Type)</a></div>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -258,10 +258,10 @@ on new instances to services from the container.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_BindPublicFieldsBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.BindPublicFieldsBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_BindPublicFieldsBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.BindPublicFieldsBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/BindPublicFieldsBehaviour.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/BindPublicFieldsBehaviour.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

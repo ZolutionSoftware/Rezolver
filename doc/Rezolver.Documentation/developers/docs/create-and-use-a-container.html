@@ -8,7 +8,7 @@
   	<title>Creating and using a container | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Creating and using a container | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -107,8 +107,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="creating-and-using-a-container">Creating and using a container</h1>
-              
+<h1 id="creating-and-using-a-container">Creating and using a container</h1>
+
 <p>Using Rezolver is the same as with all other IOC containers:</p>
 <ul>
 <li>Create and configure the root container</li>
@@ -217,17 +217,17 @@ this guide will highlight where you can use the functionality described below.</
 </div>
 <p>There are two primary types of behaviour in Rezolver:</p>
 <ol>
-<li><strong>Target container behaviours</strong> (via implementations of <a class="xref" href="../api/Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>)</li>
-<li><strong>Container behaviours</strong> (via implementations of <a class="xref" href="../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a>)</li>
+<li><strong>Target container behaviours</strong> (via implementations of &lt;xref:Rezolver.ITargetContainerBehaviour&gt;)</li>
+<li><strong>Container behaviours</strong> (via implementations of &lt;xref:Rezolver.IContainerBehaviour&gt;)</li>
 </ol>
 <p>Both are very similar in that they define a method called <code>Attach</code> to which is passed an 
-<a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and, in the case of <a class="xref" href="../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a>, also an
+<a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and, in the case of @Rezolver.IContainerBehaviour, also an
 <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>.  Implementations of the interfaces can add/modify service 
 registrations which are then used either directly by the container, or which provide more advanced registration
 functionality.</p>
 <p>For example, Rezolver&#39;s <a href="enumerables.html">automatic resolving of enumerables</a> is enabled by attaching the 
-<a class="xref" href="../api/Rezolver.Behaviours.AutoEnumerableBehaviour.html">AutoEnumerableBehaviour</a> to an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> (it is, therefore an 
-<a class="xref" href="../api/Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a>).</p>
+@Rezolver.Behaviours.AutoEnumerableBehaviour to an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> (it is, therefore an 
+&lt;xref:Rezolver.ITargetContainerBehaviour&gt;).</p>
 <p>Equally, Rezolver&#39;s support for <a href="constructor-injection/member-injection.html">member injection</a> can be
 controlled container-wide by attaching a @Rezolver.Behaviours.DefaultMemberBinding to the container when it
 is created.</p>
@@ -238,27 +238,27 @@ over time as new features are added and as other functionality is reimplemented 
 shown in the following lists:</p>
 <p><em>Target Container Behaviours</em></p>
 <ul>
-<li><a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer__ctor_Rezolver_ITargetContainerBehaviour_">TargetContainer(ITargetContainerBehaviour)</a></li>
-<li><a class="xref" href="../api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITargetContainerBehaviour_">OverridingTargetContainer(ITargetContainer, ITargetContainerBehaviour)</a></li>
+<li>&lt;xref:Rezolver.TargetContainer.%23ctor(Rezolver.ITargetContainerBehaviour)&gt;</li>
+<li>&lt;xref:Rezolver.OverridingTargetContainer.%23ctor(Rezolver.ITargetContainer,Rezolver.ITargetContainerBehaviour)&gt;</li>
 </ul>
 <p><em>Container Behaviours</em></p>
 <ul>
-<li><a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">Container(ITargetContainer, IContainerBehaviour)</a></li>
-<li><a class="xref" href="../api/Rezolver.ScopedContainer.html#Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">ScopedContainer(ITargetContainer, IContainerBehaviour)</a></li>
-<li><a class="xref" href="../api/Rezolver.OverridingContainer.html#Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_IContainerBehaviour_">OverridingContainer(IContainer, ITargetContainer, IContainerBehaviour)</a></li>
+<li>&lt;xref:Rezolver.Container.%23ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
+<li>&lt;xref:Rezolver.ScopedContainer.%23ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
+<li>&lt;xref:Rezolver.OverridingContainer.%23ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
 </ul>
 <p>If you look at these constructors, you&#39;ll notice that in all cases the behaviour parameters are optional - 
 this is because Rezolver has <em>default</em> behaviours that it uses for these types if no specific behaviour is
-passed on construction, and these can all be found in the <a class="xref" href="../api/Rezolver.GlobalBehaviours.html">GlobalBehaviours</a> class.</p>
+passed on construction, and these can all be found in the @Rezolver.GlobalBehaviours class.</p>
 <p>Briefly, these are all instances of special behaviour classes which are collections of other behaviours:</p>
 <ul>
-<li><strong><a class="xref" href="../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_TargetContainerBehaviour">TargetContainerBehaviour</a></strong> - A <a class="xref" href="../api/Rezolver.TargetContainerBehaviourCollection.html">TargetContainerBehaviourCollection</a> with zero
-or more <a class="xref" href="../api/Rezolver.ITargetContainerBehaviour.html">ITargetContainerBehaviour</a> objects which will be attached to all <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>
+<li><strong>@Rezolver.GlobalBehaviours.TargetContainerBehaviour</strong> - A @Rezolver.TargetContainerBehaviourCollection with zero
+or more @Rezolver.ITargetContainerBehaviour objects which will be attached to all <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>
 and <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> objects by default</li>
-<li><strong><a class="xref" href="../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a></strong> - A <a class="xref" href="../api/Rezolver.ContainerBehaviourCollection.html">ContainerBehaviourCollection</a> with zero or more
-<a class="xref" href="../api/Rezolver.IContainerBehaviour.html">IContainerBehaviour</a> objects which will be attached to all <a class="xref" href="../api/Rezolver.Container.html">Container</a> objects by default 
+<li><strong>@Rezolver.GlobalBehaviours.ContainerBehaviour</strong> - A @Rezolver.ContainerBehaviourCollection with zero or more
+@Rezolver.IContainerBehaviour objects which will be attached to all <a class="xref" href="../api/Rezolver.Container.html">Container</a> objects by default 
 (including derived types; except <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>, which gets its own global behaviour)</li>
-<li><strong><a class="xref" href="../api/Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_OverridingContainerBehaviour">OverridingContainerBehaviour</a></strong> - Same as above, but this is specifically for
+<li><strong>@Rezolver.GlobalBehaviours.OverridingContainerBehaviour</strong> - Same as above, but this is specifically for
 <a class="xref" href="../api/Rezolver.OverridingContainer.html">OverridingContainer</a>, because some of its behaviours are typically inherited from the container that
 it is overriding.</li>
 </ul>
@@ -272,8 +272,7 @@ and if you think you need to use them for something you want to achieve then ope
 <li>Read up on how to <a href="service-registration.html">register services in the container</a>.</li>
 <li>Alternatively, if you haven&#39;t already, take a look Rezolver&#39;s understanding of <a href="lifetimes/index.html">object lifetimes</a>.</li>
 </ul>
-
-            </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -281,7 +280,7 @@ and if you think you need to use them for something you want to achieve then ope
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/create-and-use-a-container.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/create-and-use-a-container.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

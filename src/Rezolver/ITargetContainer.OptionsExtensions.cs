@@ -37,7 +37,7 @@ namespace Rezolver
     /// API to discover <see cref="IMemberBindingBehaviour"/> objects to use when deciding whether to bind properties and/or fields when 
     /// creating new objects.
     /// 
-    /// So you really can store anything you want inside an option.</remarks>
+    /// So you really can use anything you want as an option.</remarks>
     public static class OptionsTargetContainerExtensions
     {
         /// <summary>
@@ -116,6 +116,14 @@ namespace Rezolver
             return targets;
         }
 
+        /// <summary>
+        /// Gets a globally-defined option of the type <typeparamref name="TOption"/> from the <paramref name="targets"/> target container,
+        /// returning the <paramref name="default"/> if the option has not been explicitly set.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to retrieve</typeparam>
+        /// <param name="targets">Required. The target container from which the option is to be read.</param>
+        /// <param name="default">The default value to return if the option has not been set.</param>
+        /// <returns>An option value which was either previously set, or the <paramref name="default"/> if not</returns>
         public static TOption GetOption<TOption>(this ITargetContainer targets, TOption @default = default(TOption))
             where TOption : class
         {
@@ -124,6 +132,33 @@ namespace Rezolver
             return optionContainer?.Option ?? @default;
         }
 
+        /// <summary>
+        /// Gets an option either specific to the <paramref name="serviceType"/>, or a global option (if <see cref="Options.EnableGlobalOptions"/> is 
+        /// enabled), of the type <typeparamref name="TOption"/> 
+        /// from the <paramref name="targets"/> target container, returning the <paramref name="default"/> if the option has not been explicitly set.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to retrieve</typeparam>
+        /// <param name="targets">Required. The target container from which the option is to be read.</param>
+        /// <param name="serviceType">A type for which the option is to be retrieved.  Note that the default behaviour is to search for
+        /// an option which is specific to this service, and then to search for more generally-defined options.  See the remarks section for more.</param>
+        /// <param name="default">The default value to return if the option has not been set.</param>
+        /// <returns>An option value which was either previously set, or the <paramref name="default"/> if not</returns>
+        /// <remarks>Options are frequently used to control how a Rezolver container interprets registrations.  Take, for example, the
+        /// <see cref="Options.AllowMultiple"/> option - which is used to control whether a target container accepts multiple registrations
+        /// for a given type.
+        /// 
+        /// When defined globally (i.e. without a service type) it determines whether multiple registrations can be performed for all types.  However, 
+        /// it can also be defined on a per-service basis - so, for example, if you want to restrict an application only to register one target for a
+        /// particular service - e.g. <c>IMyApplication</c> - then you can set the <see cref="AllowMultiple"/> option to <c>false</c> specifically against
+        /// that type, and multiple registrations will result in a runtime error.
+        /// 
+        /// When searching for service-specific options, generics are automatically processed in descending order of specificity - i.e. <c>IFoo&lt;Bar&gt;</c>
+        /// is more specific than <c>IFoo&lt;&gt;</c> - so you can set options for a specific closed generic, or its open generic.
+        /// 
+        /// ## Global fallback
+        /// 
+        /// In the absence of a service-specific option, a globally-defined option will instead be used if the <see cref="EnableGlobalOptions"/> option
+        /// is set to <c>true</c> for the <paramref name="targets"/> target container.  By default, this is enabled.</remarks>
         public static TOption GetOption<TOption>(this ITargetContainer targets, Type serviceType, TOption @default = default(TOption))
             where TOption : class
         {
@@ -141,6 +176,14 @@ namespace Rezolver
             return optionContainer?.Option ?? @default;
         }
 
+        /// <summary>
+        /// Generic equivalent of <see cref="GetOption{TOption}(ITargetContainer, Type, TOption)"/>.  See documentation on that method for more.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to retrieve</typeparam>
+        /// <typeparam name="TService">The service type for which the option is to be retrieved</typeparam>
+        /// <param name="targets">That target container from which the option is to be read.</param>
+        /// <param name="default">The default value to be returned if the option is not set.</param>
+        /// <returns>An option value which was either previously set, or the <paramref name="default"/> if not</returns>
         public static TOption GetOption<TOption, TService>(this ITargetContainer targets, TOption @default = default(TOption))
             where TOption : class
         {

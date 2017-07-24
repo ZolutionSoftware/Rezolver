@@ -35,18 +35,29 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.NotNull(result);
             Assert.Equal(0, result.Count);
         }
-        private static void RegisterTargets(ITargetContainer targets)
+
+        [Fact]
+        public void List_ShouldCreateEmpty_IReadOnlyList()
+        {
+            var container = CreateContainer(CreateTargetContainer());
+
+            var result = container.Resolve<IReadOnlyList<int>>();
+            Assert.NotNull(result);
+            Assert.Equal(0, result.Count);
+        }
+
+        private void RegisterBaseClassListAndCollTestTargets(ITargetContainer targets)
         {
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild, BaseClass>();
             targets.RegisterType<BaseClassGrandchild, BaseClass>();
         }
 
-        private IContainer Get3ItemsContainer()
+        private IContainer Get3BaseClassItemsContainer()
         {
             var targets = CreateTargetContainer();
 
-            RegisterTargets(targets);
+            RegisterBaseClassListAndCollTestTargets(targets);
             var container = CreateContainer(targets);
             return container;
         }
@@ -54,7 +65,7 @@ namespace Rezolver.Tests.Compilation.Specification
         [Fact]
         public void List_ShouldCreateWithItems_List()
         {
-            IContainer container = Get3ItemsContainer();
+            var container = Get3BaseClassItemsContainer();
             var result = container.Resolve<List<BaseClass>>();
 
             Assert.NotNull(result);
@@ -70,7 +81,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void List_ShouldCreateWithItems_IList()
         {
             // no choice but to repeat the above test, but for IList(!)
-            IContainer container = Get3ItemsContainer();
+            var container = Get3BaseClassItemsContainer();
             var result = container.Resolve<IList<BaseClass>>();
 
             // same base set of assertions as above.
@@ -92,7 +103,7 @@ namespace Rezolver.Tests.Compilation.Specification
         [Fact]
         public void List_ShouldCreateWithItems_IReadOnlyList()
         {
-            IContainer container = Get3ItemsContainer();
+            var container = Get3BaseClassItemsContainer();
             var result = container.Resolve<IReadOnlyList<BaseClass>>();
 
             // Again: same base set of assertions as above.

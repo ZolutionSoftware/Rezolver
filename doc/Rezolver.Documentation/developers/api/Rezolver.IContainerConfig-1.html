@@ -5,12 +5,12 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Interface IContainerBehaviour&lt;TContainerService&gt;
+  	<title>Interface IContainerConfig&lt;T&gt;
    | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Interface IContainerBehaviour&lt;TContainerService&gt;
+  	<meta name="title" content="Interface IContainerConfig&lt;T&gt;
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,58 +108,54 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              
-              <h1 id="Rezolver_IContainerBehaviour_1" data-uid="Rezolver.IContainerBehaviour`1">Interface IContainerBehaviour&lt;TContainerService&gt;
-              </h1>
-              <div class="markdown level0 summary"><p>Represents a behaviour for an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which configures/extends or supplies a particular 
-service (and potentially services related to <span class="typeparamref">TContainerService</span>) for the container.</p>
+            <article class="content wrap" id="_content" data-uid="Rezolver.IContainerConfig`1">
+  
+  
+  <h1 id="Rezolver_IContainerConfig_1" data-uid="Rezolver.IContainerConfig`1" class="text-break">Interface IContainerConfig&lt;T&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Marker interface for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which is responsible for configuring a specific type
+of object/behaviour/service/option for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> instances. (Determined by <span class="typeparamref">T</span>).</p>
 </div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="Rezolver.IContainerBehaviour.html#Rezolver_IContainerBehaviour_Attach_Rezolver_IContainer_Rezolver_ITargetContainer_">IContainerBehaviour.Attach(IContainer, ITargetContainer)</a>
-                </div>
-              </div>
-              <h6><strong>Namespace</strong>:Rezolver</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_IContainerBehaviour_1_syntax">Syntax</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public interface IContainerBehaviour&lt;TContainerService&gt; : IContainerBehaviour</code></pre>
-              </div>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">TContainerService</span></td>
-                    <td><p>Type of service used by the container that is managed by this behaviour.</p>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_">IContainerConfig.Configure(IContainer, ITargetContainer)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_IContainerConfig_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IContainerConfig&lt;T&gt; : IContainerConfig</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Implementation-dependent.  The type of option or service used by the container that is configured
+by this configuration object.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_IContainerBehaviour_1_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>The type <span class="typeparamref">TContainerService</span> is not exclusive (i.e. the behaviour is free to configure 
-other services) - it&#39;s just a hint to the framework as to the intention of the behaviour.  It also provides a 
-commmon way to identify implementations of the same type of behaviour in a collection.  E.g. there might be many 
-alternative behaviours for <code>IContainerBehaviour&lt;Foo&gt;</code> and you might have a piece of code which 
-replaces any of those with a different one.</p>
-<p>Some types passed for <span class="typeparamref">TContainerService</span> are well-known to Rezolver and carry expectations 
-as to what they will do (and thus will undergo validation after being run).  One example is 
-<a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> - an <code>IContainerBehaviour&lt;ITargetCompiler&gt;</code> is expected to ensure that
-a compiler can be resolved from the container after the behaviour has been attached.</p>
-<p>In closing, direct use of this stuff is not normally required for standard applications - all of the standard
-behaviours hide the complexity behind extension methods and/or friendly behaviour types.</p>
-<p>You&#39;ll only need to use it directly if you&#39;re extending some of the more advanced parts of the framework.</p>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_IContainerConfig_1_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>As with <a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a>, this marker interface is included specifically to provide
+a convenient way to expression dependencies for container-related configuration objects which depend on, or which 
+must be configured after, others of a specific type.</p>
+<p>The type parameter is completely free-form - it could be a specific service type, an option type, or something else
+entirely.</p>
+<p>Use of this interface is entirely optional; and you&apos;ll only implement it yourself (as with <a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a>)
+if you are extending Rezolver.</p>
 </div>
-                        </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -167,10 +163,10 @@ behaviours hide the complexity behind extension methods and/or friendly behaviou
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainerBehaviour_1.md&amp;value=---%0Auid%3A%20Rezolver.IContainerBehaviour%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_IContainerConfig_1.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerBehaviour.cs/#L61" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerConfig.cs/#L52" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

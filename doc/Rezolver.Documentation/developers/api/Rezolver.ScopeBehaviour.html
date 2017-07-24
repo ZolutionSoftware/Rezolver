@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Enum ScopeBehaviour
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,56 +108,56 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              
-              <h1 id="Rezolver_ScopeBehaviour" data-uid="Rezolver.ScopeBehaviour">Enum ScopeBehaviour
-              </h1>
-              <div class="markdown level0 summary"><p>Describes different ways in which objeects interact with scopes.</p>
+            <article class="content wrap" id="_content" data-uid="Rezolver.ScopeBehaviour">
+  
+  
+  <h1 id="Rezolver_ScopeBehaviour" data-uid="Rezolver.ScopeBehaviour" class="text-break">Enum ScopeBehaviour
+  </h1>
+  <div class="markdown level0 summary"><p>Describes different ways in which objeects interact with scopes.</p>
 </div>
-              <div class="markdown level0 conceptual"></div>
-              <h6><strong>Namespace</strong>:Rezolver</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_ScopeBehaviour_syntax">Syntax</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public enum ScopeBehaviour</code></pre>
-              </div>
-              <h5 id="Rezolver_ScopeBehaviour_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>Note: this enum <em>might</em> be replaced with an abstraction in the future.  If so,
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_ScopeBehaviour_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum ScopeBehaviour</code></pre>
+  </div>
+  <h5 id="Rezolver_ScopeBehaviour_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Note: this enum <em>might</em> be replaced with an abstraction in the future.  If so,
 it will not alter how regatrations are performed, but it will affect any low-level code
 which uses this enum directly.</p>
 </div>
-              <h3 id="fields">Fields
-              </h3>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                <thead>
-                <tbody>
-                  <tr>
-                    <td id="Rezolver_ScopeBehaviour_Explicit">Explicit</td>
-                    <td><p>Explicitly scoped objects act like singletons in the current scope, regardless of
+  <h3 id="fields">Fields
+  </h3>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    <thead>
+    <tbody>
+      <tr>
+        <td id="Rezolver_ScopeBehaviour_Explicit">Explicit</td>
+        <td><p>Explicitly scoped objects act like singletons in the current scope, regardless of
 whether they are disposable or not.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td id="Rezolver_ScopeBehaviour_Implicit">Implicit</td>
-                    <td><p>Implicitly scoped objects are only added to the scope 
+      </tr>
+      <tr>
+        <td id="Rezolver_ScopeBehaviour_Implicit">Implicit</td>
+        <td><p>Implicitly scoped objects are only added to the scope 
 for the purposes of disposing when the scope is disposed</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td id="Rezolver_ScopeBehaviour_None">None</td>
-                    <td><p>The object will not be tracked in any scope, regardless of whether there is one active,
+      </tr>
+      <tr>
+        <td id="Rezolver_ScopeBehaviour_None">None</td>
+        <td><p>The object will not be tracked in any scope, regardless of whether there is one active,
 or whether the object is disposable.</p>
 </td>
-                  </tr>
-                </tbody>
-              </thead></thead></table>
-                        </article>
+      </tr>
+    </tbody>
+  </thead></thead></table>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -165,10 +165,10 @@ or whether the object is disposable.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerScope.cs/#L15" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.cs/#L15" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

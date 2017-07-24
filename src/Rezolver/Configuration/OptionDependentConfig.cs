@@ -62,7 +62,7 @@ namespace Rezolver.Configuration
     /// </summary>
     /// <typeparam name="T">The type of service/behaviour/option being configured</typeparam>
     /// <typeparam name="TOption">The type of option upon which this config object depends.  The default dependency created and 
-    /// returned by this class' implementation of <see cref="Dependencies"/> will actually be dependent upon the config type 
+    /// returned by this class' implementation of <see cref="IDependant.Dependencies"/> will actually be dependent upon the config type 
     /// <see cref="ITargetContainerConfig{TOption}"/>, which is the standard contract expected by a configuration object that configures
     /// a particular option.</typeparam>
     public abstract class OptionDependentConfig<T, TOption> : OptionDependentConfig<TOption>, ITargetContainerConfig<T>

@@ -18,6 +18,9 @@ namespace Rezolver.Options
     /// <typeparam name="TOption">The underlying option value type - e.g. <see cref="bool"/>, <see cref="string"/>,
     /// <see cref="Uri"/> or whatever</typeparam>
     /// <remarks>
+    /// This type is creatable only through inheritance.
+    /// 
+    /// 
     /// Options in Rezolver are achieved by using registrations in the <see cref="ITargetContainer"/> that 
     /// is to be configured (and, in turn, which might then configure any <see cref="IContainer"/>s built from
     /// that target container).
@@ -42,10 +45,25 @@ namespace Rezolver.Options
     /// you to use it.</remarks>
     public class ContainerOption<TOption>
     {
+        /// <summary>
+        /// The underlying value wrapped by this option.
+        /// </summary>
         public TOption Value { get; protected set; }
 
+        /// <summary>
+        /// Inheritance constructor.
+        /// </summary>
         protected ContainerOption() { }
 
+        /// <summary>
+        /// Implicit casting operator to convert to the option value type from an instance of <see cref="ContainerOption{TOption}"/>.
+        /// 
+        /// All derived types are encouraged to have a similar casting operator from <typeparamref name="TOption" /> to <see cref="ContainerOption{TOption}"/>
+        /// (for example, see <see cref="EnumerableInjection"/>).
+        /// </summary>
+        /// <param name="option">The option object to be cast to <typeparamref name="TOption" /> (by reading its <see cref="Value"/> property).
+        /// 
+        /// Note that if this is <c>null</c>, then the return value will be the default for <typeparamref name="TOption" /></param>
         public static implicit operator TOption(ContainerOption<TOption> option)
         {
             return option != null ? option.Value : default(TOption);

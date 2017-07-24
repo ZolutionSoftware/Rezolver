@@ -10,7 +10,7 @@ namespace Rezolver.Configuration
     /// in an <see cref="ITargetContainer"/>.
     /// </summary>
     /// <remarks>This behaviour is added to the default configuration for all <see cref="TargetContainer"/>-derived
-    /// objects via theh <see cref="TargetContainer.DefaultConfig"/>.
+    /// objects via the <see cref="TargetContainer.DefaultConfig"/>.
     /// 
     /// To disable it, you can either remove it from that configuration object (which then disables it for all)
     /// or you can add an option configuration to it (via 
@@ -20,7 +20,22 @@ namespace Rezolver.Configuration
     /// If this behaviour is not attached to an <see cref="ITargetContainer"/>, or is disabled via the 
     /// <see cref="Options.EnumerableInjection"/> option, then only explicitly
     /// registered enumerables will be able to be resolved by any <see cref="IContainer"/> built from that 
-    /// target container.</remarks>
+    /// target container.
+    /// 
+    /// ## Lazy vs Eager evaluation
+    /// 
+    /// The enumerables created by Rezolver can be lazy or eager.  Lazy enumerables create instances as you 
+    /// enumerate them, and will create a unique set of instances *each time* they are enumerated (assuming
+    /// no Singleton or Scoped lifetimes are in play).  Eager enumerables create all their instances up-front,
+    /// and remain constant for the life of that enumerable.
+    /// 
+    /// The <see cref="Options.LazyEnumerables"/> option (default <c>true</c>) is used to control this behaviour,
+    /// and can be applied on a per-enumerable-type basis to an <see cref="ITargetContainer"/>.
+    /// 
+    /// E.g. you can set the option to <c>false</c> for
+    /// <c>IEnumerable&lt;Foo&gt;</c> - thus ensuring that all enumerables of <c>Foo</c> are eager, but leave
+    /// it at its default of <c>true</c> for all other enumerable types.
+    /// </remarks>
     public sealed class InjectEnumerables : OptionDependentConfig<Options.EnumerableInjection>
     {
         /// <summary>

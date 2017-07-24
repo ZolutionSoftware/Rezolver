@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Targets
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,55 +108,58 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              <h1 id="Rezolver_Targets" data-uid="Rezolver.Targets">Namespace Rezolver.Targets
-              </h1>
-              <div class="markdown level0 summary"></div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="markdown level0 remarks"></div>
-                <h3 id="classes">Classes
-              </h3>
-                  <h4><a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a></h4>
-                  <section><p>This target is specifically used for explicitly casting the result of one target to another type.
+            <article class="content wrap" id="_content" data-uid="Rezolver.Targets">
+  
+  <h1 id="Rezolver_Targets" data-uid="Rezolver.Targets" class="text-break">Namespace Rezolver.Targets
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a></h4>
+      <section><p>This target is specifically used for explicitly casting the result of one target to another type.
 Its use is rare, since the framework already caters for downcasting the result of targets to 
 base types.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></h4>
-                  <section><p>A target that binds to a type&#39;s constructor with zero or more arguments supplied by other <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s and, optionally
-binding to the new instance&#39;s writeable properties.</p>
+      <h4><a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></h4>
+      <section><p>A target that binds to a type&apos;s constructor with zero or more arguments supplied by other <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s and, optionally
+binding to the new instance&apos;s writeable properties.</p>
 <p>The target supports en explicitly supplied constructor, as well as just-in-time lookups for the best available constructor based on the
 available services and/or any named arguments which might been provided up front.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a></h4>
-                  <section><p>Represents the action of implementing a common <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedType">DecoratedType</a> by decorating one instance 
+      <h4><a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a></h4>
+      <section><p>Represents the action of implementing a common <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedType">DecoratedType</a> by decorating one instance 
 (produced by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedTarget">DecoratedTarget</a>) with another (<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>, which will create an 
 instance of <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratorType">DecoratorType</a>).</p>
-<p>NOTE - You shouldn&#39;t register or otherwise create instances of this target unless you absolutely 
-know what you&#39;re doing.  Rather, decorators should be registered using the extension method
+<p>NOTE - You shouldn&apos;t register or otherwise create instances of this target unless you absolutely 
+know what you&apos;re doing.  Rather, decorators should be registered using the extension method
 <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
 or its non-generic alternative because the target needs a <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>
 to work properly (the creation of which is automatically handled by these extension methods).</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a></h4>
-                  <section><p>A target that simply creates a default instance of a given type.  I.e. the same
+      <h4><a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a></h4>
+      <section><p>A target that simply creates a default instance of a given type.  I.e. the same
 as doing default(type) in C#.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which resolve objects by executing a delegate with argument injection.</p>
+      <h4><a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which resolve objects by executing a delegate with argument injection.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a></h4>
-                  <section><p>A generic target for all expressions not explicitly supported by a particular target.</p>
+      <h4><a class="xref" href="Rezolver.Targets.EnumerableTarget.html">EnumerableTarget</a></h4>
+      <section><p>A specialised target for creating instances of <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a></p>
+</section>
+      <h4><a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a></h4>
+      <section><p>A generic target for all expressions not explicitly supported by a particular target.</p>
 <p>Enables more complex behaviours to be registered and used with the more formal
 <a class="xref" href="Rezolver.ITarget.html">ITarget</a> implementations.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a></h4>
-                  <section><p>Equivalent of <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> but for open generic types.</p>
+      <h4><a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a></h4>
+      <section><p>Equivalent of <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> but for open generic types.</p>
 <p>So, this will handle the open generic MyType&lt;,&gt;, for example, whereas <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>
 would handle the closed type MyType&lt;int, string&gt;.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html">GenericConstructorTarget.GenericTypeMapping</a></h4>
-                  <section><p>Result returned from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> function.  Represents various levels of success - 
+      <h4><a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html">GenericConstructorTarget.GenericTypeMapping</a></h4>
+      <section><p>Result returned from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> function.  Represents various levels of success - 
 from a completely incompatible mapping (<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> = <code>false</code>), or a successful mapping from
 an open generic type to a closed generic type which can then be constructed (<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> = <code>true</code>
 and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> = <code>true</code>) or, a successful mapping from an open generic type to another open 
@@ -166,40 +169,40 @@ functions.  Only fully bound mappings are supported by <a class="xref" href="Rez
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> will return <code>true</code> so long as the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> is true.</p>
 <p>The caller, therefore, must ensure it is aware of the difference between open and closed generics.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.ListTarget.html">ListTarget</a></h4>
-                  <section><p>This target produces arrays (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose 
+      <h4><a class="xref" href="Rezolver.Targets.ListTarget.html">ListTarget</a></h4>
+      <section><p>This target produces arrays (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose 
 individual items are built by ITarget instances.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a></h4>
-                  <section><p>Implements <a class="xref" href="Rezolver.ITarget.html">ITarget</a> by wrapping a single instance that&#39;s already been constructed by application code.</p>
+      <h4><a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a></h4>
+      <section><p>Implements <a class="xref" href="Rezolver.ITarget.html">ITarget</a> by wrapping a single instance that&apos;s already been constructed by application code.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.OptionalParameterTarget.html">OptionalParameterTarget</a></h4>
-                  <section><p>Used specifically when binding arguments to method parameters when a parameter is optional and its
+      <h4><a class="xref" href="Rezolver.Targets.OptionalParameterTarget.html">OptionalParameterTarget</a></h4>
+      <section><p>Used specifically when binding arguments to method parameters when a parameter is optional and its
 default value is to be used when binding to it.</p>
-<p>It is highly unlikely you&#39;ll ever create one of these directly.</p>
+<p>It is highly unlikely you&apos;ll ever create one of these directly.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a></h4>
-                  <section><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically 
-(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when 
+      <h4><a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a></h4>
+      <section><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically 
+(at &apos;resolve time&apos;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when 
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is called.</p>
-<p>This is the most common way that we bind constructor parameters, for example - i.e. &#39;I want an
-<code>IService</code> instance - go get it&#39;.</p>
+<p>This is the most common way that we bind constructor parameters, for example - i.e. &apos;I want an
+<code>IService</code> instance - go get it&apos;.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a></h4>
-                  <section><p>A target that produces or fetches a single instance of an object within a lifetime scope.</p>
+      <h4><a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a></h4>
+      <section><p>A target that produces or fetches a single instance of an object within a lifetime scope.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a></h4>
-                  <section><p>A target which applies the singleton pattern to any <a class="xref" href="Rezolver.ITarget.html">ITarget</a>.</p>
+      <h4><a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a></h4>
+      <section><p>A target which applies the singleton pattern to any <a class="xref" href="Rezolver.ITarget.html">ITarget</a>.</p>
 <p>The inner target is available from the <a class="xref" href="Rezolver.Targets.SingletonTarget.html#Rezolver_Targets_SingletonTarget_InnerTarget">InnerTarget</a> property.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></h4>
-                  <section><p>Abstract base class, suggested as a starting point for implementations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>.</p>
+      <h4><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></h4>
+      <section><p>Abstract base class, suggested as a starting point for implementations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a></h4>
-                  <section><p>Wraps another target to force scoping to be ignored for the object that it produces, regardless
+      <h4><a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a></h4>
+      <section><p>Wraps another target to force scoping to be ignored for the object that it produces, regardless
 of whether that object is IDisposable or otherwise has its own scoping behaviour.</p>
 </section>
-                        </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

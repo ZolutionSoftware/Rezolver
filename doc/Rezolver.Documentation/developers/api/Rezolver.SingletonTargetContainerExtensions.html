@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class SingletonTargetContainerExtensions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,238 +108,232 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              
-              <h1 id="Rezolver_SingletonTargetContainerExtensions" data-uid="Rezolver.SingletonTargetContainerExtensions">Class SingletonTargetContainerExtensions
-              </h1>
-              <div class="markdown level0 summary"><p>Extension methods for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> interface which simplify the registration of singletons.</p>
+            <article class="content wrap" id="_content" data-uid="Rezolver.SingletonTargetContainerExtensions">
+  
+  
+  <h1 id="Rezolver_SingletonTargetContainerExtensions" data-uid="Rezolver.SingletonTargetContainerExtensions" class="text-break">Class SingletonTargetContainerExtensions
+  </h1>
+  <div class="markdown level0 summary"><p>Extension methods for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> interface which simplify the registration of singletons.</p>
 </div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="inheritance">
-                <h5>Inheritance</h5>
-                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-                  <div class="level1"><span class="xref">SingletonTargetContainerExtensions</span></div>
-              </div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
-                </div>
-              </div>
-              <h6><strong>Namespace</strong>:Rezolver</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_SingletonTargetContainerExtensions_syntax">Syntax</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static class SingletonTargetContainerExtensions</code></pre>
-              </div>
-              <h3 id="methods">Methods
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions.RegisterSingleton(Rezolver.ITargetContainer%2CSystem.Type%2CSystem.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L68">View Source</a>
-              </span>
-              <a id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton*"></a>
-              <h4 id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IMemberBindingBehaviour)">RegisterSingleton(ITargetContainer, Type, Type, IMemberBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Registers the type <span class="paramref">objectType</span> as a singleton (<a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>) in the target container,
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level1"><span class="xref">SingletonTargetContainerExtensions</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_SingletonTargetContainerExtensions_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class SingletonTargetContainerExtensions</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions.RegisterSingleton(Rezolver.ITargetContainer%2CSystem.Type%2CSystem.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L62">View Source</a>
+  </span>
+  <a id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton*"></a>
+  <h4 id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton(Rezolver.ITargetContainer,System.Type,System.Type,Rezolver.IMemberBindingBehaviour)">RegisterSingleton(ITargetContainer, Type, Type, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Registers the type <span class="paramref">objectType</span> as a singleton (<a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>) in the target container,
 either for the same service type, or for the service type passed to the <span class="paramref">serviceType</span> parameter (if provided).</p>
 <p>The instance will be built automatically with constructor injection by leveraging either the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>, depending on whether <span class="paramref">objectType</span> is a generic type or not.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td><p>The container on which the registrations will be made.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targetContainer</span></td>
+        <td><p>The container on which the registrations will be made.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">objectType</span></td>
-                    <td><p>Required.  The type of object to be created.</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">objectType</span></td>
+        <td><p>Required.  The type of object to be created.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">serviceType</span></td>
-                    <td><p>Optional.  The type against which the target will be registered in the <span class="paramref">targetContainer</span></p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>Optional.  The type against which the target will be registered in the <span class="paramref">targetContainer</span></p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
-                    <td><span class="parametername">memberBinding</span></td>
-                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
-If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
-is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
-<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on the <span class="paramref">targetContainer</span>.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions.RegisterSingleton%60%601(Rezolver.ITargetContainer%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L30">View Source</a>
-              </span>
-              <a id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton*"></a>
-              <h4 id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterSingleton&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Registers the type <span class="typeparamref">TObject</span> as a singleton (<a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>) in the target container.</p>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions.RegisterSingleton%60%601(Rezolver.ITargetContainer%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L28">View Source</a>
+  </span>
+  <a id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton*"></a>
+  <h4 id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton``1(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterSingleton&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Registers the type <span class="typeparamref">TObject</span> as a singleton (<a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>) in the target container.</p>
 <p>The instance will be built automatically with constructor injection by leveraging either the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>, depending on whether <span class="typeparamref">TObject</span> is a generic type or not.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject&gt;(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td><p>The container on which the registrations will be made.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject&gt;(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targetContainer</span></td>
+        <td><p>The container on which the registrations will be made.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
-                    <td><span class="parametername">memberBinding</span></td>
-                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
-If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
-is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
-<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on the <span class="paramref">targetContainer</span>.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">TObject</span></td>
-                    <td><p>The type to be created, and the type against which the registration will be made</p>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td><p>The type to be created, and the type against which the registration will be made</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions.RegisterSingleton%60%602(Rezolver.ITargetContainer%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L49">View Source</a>
-              </span>
-              <a id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton*"></a>
-              <h4 id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterSingleton&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
-              <div class="markdown level1 summary"><p>Registers the type <span class="typeparamref">TObject</span> as a singleton (<a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>) in the target container
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions.RegisterSingleton%60%602(Rezolver.ITargetContainer%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L45">View Source</a>
+  </span>
+  <a id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton*"></a>
+  <h4 id="Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.SingletonTargetContainerExtensions.RegisterSingleton``2(Rezolver.ITargetContainer,Rezolver.IMemberBindingBehaviour)">RegisterSingleton&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Registers the type <span class="typeparamref">TObject</span> as a singleton (<a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>) in the target container
 for the service type <span class="typeparamref">TService</span>.</p>
 <p>The instance will be built automatically with constructor injection by leveraging either the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>, depending on whether <span class="typeparamref">TObject</span> is a generic type or not.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject, TService&gt;(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-                    <td><span class="parametername">targetContainer</span></td>
-                    <td><p>The container on which the registrations will be made.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterSingleton&lt;TObject, TService&gt;(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targetContainer</span></td>
+        <td><p>The container on which the registrations will be made.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
-                    <td><span class="parametername">memberBinding</span></td>
-                    <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance.
-If not provided, then the default behaviour for the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that resolves the object will be used - which
-is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_GlobalBehaviours_ContainerBehaviour">ContainerBehaviour</a> (which, by default, is set to 
-<a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a>).</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on the <span class="paramref">targetContainer</span>.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="typeParameters">Type Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="parametername">TObject</span></td>
-                    <td><p>The type of object to be created.</p>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td><p>The type of object to be created.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><span class="parametername">TService</span></td>
-                    <td><p>The type against which the target will be registered in the <span class="paramref">targetContainer</span></p>
+      </tr>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td><p>The type against which the target will be registered in the <span class="paramref">targetContainer</span></p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-                        </article>
+      </tr>
+    </tbody>
+  </table>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -347,10 +341,10 @@ is configured via <a class="xref" href="Rezolver.GlobalBehaviours.html#Rezolver_
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_SingletonTargetContainerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.SingletonTargetContainerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.SingletonExtensions.cs/#L16" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

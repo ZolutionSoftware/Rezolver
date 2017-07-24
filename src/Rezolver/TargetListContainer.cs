@@ -158,51 +158,95 @@ namespace Rezolver
                 throw new InvalidOperationException($"Only one target can be registered for the type { RegisteredType }");
         }
 
+        /// <summary>
+        /// Implementation of <see cref="IList{T}.IndexOf(T)"/>
+        /// </summary>
+        /// <param name="item">The item whose index is to be found</param>
+        /// <returns></returns>
         public int IndexOf(ITarget item)
         {
             return ((IList<ITarget>)_targets).IndexOf(item);
         }
 
+        /// <summary>
+        /// Implementation of <see cref="IList{T}.Insert(int, T)"/>
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
         public void Insert(int index, ITarget item)
         {
             IfCanAdd(() => ((IList<ITarget>)_targets).Insert(index, item));
         }
 
+        /// <summary>
+        /// Implementation of <see cref="IList{T}.RemoveAt(int)"/>
+        /// </summary>
+        /// <param name="index"></param>
         public void RemoveAt(int index)
         {
             ((IList<ITarget>)_targets).RemoveAt(index);
         }
 
+        /// <summary>
+        /// Implementation of <see cref="ICollection{T}.Add(T)"/>
+        /// </summary>
+        /// <param name="item"></param>
         public void Add(ITarget item)
         {
             IfCanAdd(() => ((IList<ITarget>)_targets).Add(item));
         }
 
+        /// <summary>
+        /// Implementation of <see cref="ICollection{T}.Clear"/>
+        /// </summary>
         public void Clear()
         {
             ((IList<ITarget>)_targets).Clear();
         }
 
+        /// <summary>
+        /// Implementation of <see cref="ICollection{T}.Contains(T)"/>
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Contains(ITarget item)
         {
             return ((IList<ITarget>)_targets).Contains(item);
         }
 
+        /// <summary>
+        /// Implementation of <see cref="ICollection{T}.CopyTo(T[], int)"/>
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="arrayIndex"></param>
         public void CopyTo(ITarget[] array, int arrayIndex)
         {
             ((IList<ITarget>)_targets).CopyTo(array, arrayIndex);
         }
 
+        /// <summary>
+        /// Implementation of <see cref="ICollection{T}.Remove(T)"/>
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Remove(ITarget item)
         {
             return ((IList<ITarget>)_targets).Remove(item);
         }
 
+        /// <summary>
+        /// Implementation of <see cref="IEnumerable{T}.GetEnumerator"/>
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<ITarget> GetEnumerator()
         {
             return ((IList<ITarget>)_targets).GetEnumerator();
         }
 
+        /// <summary>
+        /// Implementation of <see cref="IEnumerable.GetEnumerator"/>
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IList<ITarget>)_targets).GetEnumerator();

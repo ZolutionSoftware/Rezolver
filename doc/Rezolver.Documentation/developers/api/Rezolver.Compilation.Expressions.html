@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Compilation.Expressions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.21.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,126 +108,134 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              <h1 id="Rezolver_Compilation_Expressions" data-uid="Rezolver.Compilation.Expressions">Namespace Rezolver.Compilation.Expressions
-              </h1>
-              <div class="markdown level0 summary"></div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="markdown level0 remarks"></div>
-                <h3 id="classes">Classes
-              </h3>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html">ChangeTypeTargetBuilder</a></h4>
-                  <section><p>Implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised to build expressions for the 
+            <article class="content wrap" id="_content" data-uid="Rezolver.Compilation.Expressions">
+  
+  <h1 id="Rezolver_Compilation_Expressions" data-uid="Rezolver.Compilation.Expressions" class="text-break">Namespace Rezolver.Compilation.Expressions
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html">ChangeTypeTargetBuilder</a></h4>
+      <section><p>Implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised to build expressions for the 
 <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a></p>
 <p>This always produces a conversion expression (i.e. cast or box/unbox)</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.CompiledTargetBuilder.html">CompiledTargetBuilder</a></h4>
-                  <section><p>Special compiler for <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances which are also <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instances.</p>
-<p>This build is only used when no &#39;better&#39; builder is available for the target&#39;s type.  So, the <a class="xref" href="Rezolver.Compilation.Expressions.ObjectTargetBuilder.html">ObjectTargetBuilder</a>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.CompiledTargetBuilder.html">CompiledTargetBuilder</a></h4>
+      <section><p>Special compiler for <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances which are also <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> instances.</p>
+<p>This build is only used when no &apos;better&apos; builder is available for the target&apos;s type.  So, the <a class="xref" href="Rezolver.Compilation.Expressions.ObjectTargetBuilder.html">ObjectTargetBuilder</a>
 will be used for <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> instead of this one, even though that class also implements
 <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html">ConstructorTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the target <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html">ConstructorTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the target <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.DecoratorTargetBuilder.html">DecoratorTargetBuilder</a></h4>
-                  <section><p>Specialised builder for <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> targets.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.DecoratorTargetBuilder.html">DecoratorTargetBuilder</a></h4>
+      <section><p>Specialised builder for <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> targets.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.DefaultTargetBuilder.html">DefaultTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a> target.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.DefaultTargetBuilder.html">DefaultTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a> target.</p>
 <p>Essentially, it just calls <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402751(v=vs.110).aspx">Default(Type)</a> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.DelegateTargetBuilder.html">DelegateTargetBuilder</a></h4>
-                  <section><p>Specialised builder for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class and all its derivatives.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.DelegateTargetBuilder.html">DelegateTargetBuilder</a></h4>
+      <section><p>Specialised builder for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class and all its derivatives.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html">ExpressionBuilderBase</a></h4>
-                  <section><p>Abstract starting point for implementing <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a>.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.EnumerableTargetBuilder.html">EnumerableTargetBuilder</a></h4>
+      <section><p>An implementation of <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html">ExpressionBuilderBase&lt;TTarget&gt;</a> specialised for the target type <a class="xref" href="Rezolver.Targets.EnumerableTarget.html">EnumerableTarget</a>.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html">ExpressionBuilderBase</a></h4>
+      <section><p>Abstract starting point for implementing <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a>.</p>
 <p>Note that the interface is implemented explicitly; but exposes protected abstract or virtual 
 methods for inheritors to extend.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html">ExpressionBuilderBase&lt;TTarget&gt;</a></h4>
-                  <section><p>Abstract base class for implementations of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html">IExpressionBuilder&lt;TTarget&gt;</a>.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Methods.html">ExpressionBuilderBase.Methods</a></h4>
+      <section><p>Provides access to a set of <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a> objects for common functions required
+by code produced from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s.  Also contains some factory methods for building
+expressions which bind to those methods.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html">ExpressionBuilderBase&lt;TTarget&gt;</a></h4>
+      <section><p>Abstract base class for implementations of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html">IExpressionBuilder&lt;TTarget&gt;</a>.</p>
 <p>Provide an implementation of <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</a> and then register 
 an instance in an <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> in the active container.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompileContext.html">ExpressionCompileContext</a></h4>
-                  <section><p>An implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> which is specialised for use by an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a>.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompileContext.html">ExpressionCompileContext</a></h4>
+      <section><p>An implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> which is specialised for use by an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a></h4>
-                  <section><p>Implementation of the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> interface which produces <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> objects
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a></h4>
+      <section><p>Implementation of the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> interface which produces <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> objects
 by building and compiling expression trees from the <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects which are registered.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.html">ExpressionCompilerBuildExtensions</a></h4>
-                  <section><p>Extensions for <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a>.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.html">ExpressionCompilerBuildExtensions</a></h4>
+      <section><p>Extensions for <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html">ExpressionTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression trees for the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html">ExpressionTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression trees for the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a>
 target type.</p>
 <p>This builder takes care of all expressions, including lambdas (where additional parameters beyond the standard 
 <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> are turned into local variables with injected values), producing an expression which can 
 be compiled by an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a> after a <span class="xref">Rezolver.Compilation.Expressions.TargetExpressionRewriter</span> has been used to
 expand any targets embedded in the expression.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.html">GenericConstructorTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building expressions for <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> targets.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.html">GenericConstructorTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building expressions for <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> targets.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ListTargetBuilder.html">ListTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building expressions for the <a class="xref" href="Rezolver.Targets.ListTarget.html">ListTarget</a> target.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ListTargetBuilder.html">ListTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building expressions for the <a class="xref" href="Rezolver.Targets.ListTarget.html">ListTarget</a> target.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ObjectTargetBuilder.html">ObjectTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised to build expressions for the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> target.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ObjectTargetBuilder.html">ObjectTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised to build expressions for the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> target.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html">OptionalParameterTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building an expression for the <a class="xref" href="Rezolver.Targets.OptionalParameterTarget.html">OptionalParameterTarget</a> target.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html">OptionalParameterTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building an expression for the <a class="xref" href="Rezolver.Targets.OptionalParameterTarget.html">OptionalParameterTarget</a> target.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.RedundantConvertRewriter.html">RedundantConvertRewriter</a></h4>
-                  <section><p>Removes unnecessary convert expressions from an expression.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.RedundantConvertRewriter.html">RedundantConvertRewriter</a></h4>
+      <section><p>Removes unnecessary convert expressions from an expression.</p>
 <p>An unnecessary conversion is one where the target type is equal to, or a base of, the source type.</p>
 <p>Only boxing/unboxing conversions or upcasts are left intact.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.RezolvedTargetBuilder.html">RezolvedTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> target.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.RezolvedTargetBuilder.html">RezolvedTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> target.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.ScopedTargetBuilder.html">ScopedTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building expressions for <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> targets.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ScopedTargetBuilder.html">ScopedTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building expressions for <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> targets.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.SharedExpressionKey.html">SharedExpressionKey</a></h4>
-                  <section><p>Key for a shared expression used during expression tree generation.  As a consumer of this library, you
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.SharedExpressionKey.html">SharedExpressionKey</a></h4>
+      <section><p>Key for a shared expression used during expression tree generation.  As a consumer of this library, you
 are unlikely ever to need to use it.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.SingletonTargetBuilder.html">SingletonTargetBuilder</a></h4>
-                  <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for the building the expression for a <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> target.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.SingletonTargetBuilder.html">SingletonTargetBuilder</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for the building the expression for a <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> target.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.TargetExpression.html">TargetExpression</a></h4>
-                  <section><p>An expression which represents an <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, allowing a target with a particular <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to be
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.TargetExpression.html">TargetExpression</a></h4>
+      <section><p>An expression which represents an <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, allowing a target with a particular <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to be
 used in place of a traditional expression.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.UnscopedTargetBuilder.html">UnscopedTargetBuilder</a></h4>
-                  <section><p>Builder for the <a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a>.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.UnscopedTargetBuilder.html">UnscopedTargetBuilder</a></h4>
+      <section><p>Builder for the <a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a>.</p>
 </section>
-                <h3 id="interfaces">Interfaces
-              </h3>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a></h4>
-                  <section><p>The interface for an object that produces expressions (which can be compiled to delegates)
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a></h4>
+      <section><p>The interface for an object that produces expressions (which can be compiled to delegates)
 from <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html">IExpressionBuilder&lt;TTarget&gt;</a></h4>
-                  <section><p>Interface for an object that produces expressions from instances of <span class="typeparamref">TTarget</span>.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html">IExpressionBuilder&lt;TTarget&gt;</a></h4>
+      <section><p>Interface for an object that produces expressions from instances of <span class="typeparamref">TTarget</span>.</p>
 <p>This is a generic extension to the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> interface.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html">IExpressionCompileContext</a></h4>
-                  <section><p>Extension to the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> interface which provides additional state
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html">IExpressionCompileContext</a></h4>
+      <section><p>Extension to the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> interface which provides additional state
 and functionality for the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a> and the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> implementations
 which are used by the default expression compiler, the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a> class.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a></h4>
-                  <section><p>Interface for an object which is responsible for coordinating the production of expressions for targets
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a></h4>
+      <section><p>Interface for an object which is responsible for coordinating the production of expressions for targets
 during the compilation phase.</p>
 <p>Objects implementing this are expected to be implementations of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>; this library
 provides the one implementation, too: <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.</p>
 </section>
-                        </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

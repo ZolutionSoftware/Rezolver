@@ -62,10 +62,10 @@ namespace Rezolver.Configuration
         /// <typeparam name="TService">The type of service against which the option will be set.</typeparam>
         /// <param name="optionFactory">A callback that will be used to obtain the option value to be set.</param>
         /// <returns>A new <see cref="ConfigureOption{TOption}"/> instance</returns>
-        public static ConfigureOption<TOption> With<TOption, TService>(Func<ITargetContainer, Type, TOption> callback)
+        public static ConfigureOption<TOption> With<TOption, TService>(Func<ITargetContainer, Type, TOption> optionFactory)
             where TOption : class
         {
-            return new ConfigureOption<TOption>(callback, typeof(TService));
+            return new ConfigureOption<TOption>(optionFactory, typeof(TService));
         }
     }
 }
