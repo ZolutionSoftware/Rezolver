@@ -110,8 +110,7 @@
 <h1 id="enumerables">Enumerables</h1>
 
 <p>By default, a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> (the default <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> used by all containers in the 
-Rezolver framework) comes with a behaviour enabled which allows any <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a> derivative to resolve
-an <code>IEnumerable&lt;Service&gt;</code>.</p>
+Rezolver framework) is configured to allow any <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a> derivative to resolve an <code>IEnumerable&lt;Service&gt;</code>.</p>
 <p>The contents of this enumerable will depend on how many times the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method has been called against the target type <code>Service</code>:</p>
 <ul>
@@ -119,11 +118,9 @@ method has been called against the target type <code>Service</code>:</p>
 <li>Otherwise, the enumerable will contain instances obtained from each <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> that was registered
 against that type, in the order they were registered.</li>
 </ul>
-<div class="NOTE"><h5>Note</h5><p>Automatic resolving of enumerables is a configurable behaviour which can currently be disabled when creating 
-a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> via its constructor.  It can also be explicitly opted-in (if it has been disabled)
-by calling the @Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving* extension method.</p>
-<p>Disabling the behaviour through the constructor might be removed in a future version, as we intend to move to a 
-configuration callback-based mechanism for configuring containers.</p>
+<div class="NOTE"><h5>Note</h5><p>The functionality described here depends on two target container options: <a class="xref" href="../api/Rezolver.Options.AllowMultiple.html">AllowMultiple</a> 
+and <a class="xref" href="../api/Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> - which are both configured to be equivalent to <code>true</code> by default
+for all <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
 </div>
 <p>You are not restricted in the targets you use to produce instances for an enumerable, and each one can have its
 own lifetime (scoped/singleton etc).</p>
@@ -299,11 +296,16 @@ produced from targets registered against the most-specific generic type that&#39
 next example expands on this.</p>
 </div>
 <h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
+<h3 id="all-matching-generics">All <em>matching</em> generics</h3>
+<div class="NOTE"><h5>Note</h5><p>The functionality described here represents a breaking change from 1.2 - which did not allow you to mix enumerables
+of objects from closed <em>and</em> open generic registrations.  The old behaviour can be re-enabled by setting the 
+<a class="xref" href="../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option to <c>false</c>, as shown in the next example.</p>
+</div>
 <p>Let&#39;s say that we have one open generic registration for <code>IUsesAnyService&lt;&gt;</code> to be used as a catch-all, but that
-when <code>IMyService</code> is used, we have two types that we want to use instead.</p>
-<p>In this case, we still have an open generic registration, but we want it to be superseded for certain generic types by two
-specialised registrations where the inner generic type argument is known.</p>
-<p>Given these extra generic types:</p>
+when <code>IMyService</code> is used, we have two types that we also want to use.</p>
+<p>In this case, we simply need to add one or more registration(s) for the concrete generic type, and Rezolver will 
+intelligently select all the generics that apply when building its enumerable.</p>
+<p>So, given these extra generic types:</p>
 <pre><code class="lang-csharp" name="UsesIMyService.cs">public class UsesIMyService : IUsesAnyService&lt;IMyService&gt;
 {
     public void UseTheService(IMyService service)
@@ -335,16 +337,18 @@ Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[2]);
 
 Assert.Equal(1, result2.Length);
 Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
-</code></pre><p>So, as soon as we want an <code>IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;</code>, the enumerable will use <em>only</em> the
-two explicit registrations made against the closed generic type <code>IUsesAnyService&lt;IMyService&gt;</code>, but if we
-request any other type, we only get items produced by registrations against the open generic <code>IUsesAnyService&lt;&gt;</code>.</p>
-<div class="WARNING"><h5>Warning</h5><p>There is currently <em>no</em> way to fall back on an open generic registration for given generic once you make a 
-registration for a closed generic.  The framework might, however, be extended to allow you to make an explicit 
-registration which instructs the container to fall back to a more generic registration and include any results from
-that in the enumerable.</p>
+</code></pre><p>When Rezolver matches its registrations for <code>IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;</code>, it sees the 
+two explicit registrations made against the closed generic type <code>IUsesAnyService&lt;IMyService&gt;</code> <strong><em>and</em></strong> the 
+registration against the open generic <code>IUsesAnyService&lt;&gt;</code> - hence you get an enumerable with <em>three</em> items.</p>
+<div class="TIP"><h5>Tip</h5><p>This is a common DI pattern when injecting enumerables of a generic type: one or more open generics which apply
+to &#39;all&#39; types of object, with potentially zero or more object which apply only to a specific type.  Rezolver doesn&#39;t
+need to be told that&#39;s what you want - it just figures it out for itself.</p>
 </div>
-<p>It doesn&#39;t matter what order you register the open generics and closed generics - the logic is applied on a type-by-type
-basis; but the order of an individual enumerable of a given type is, however, governed by the order of registration.</p>
+<p>The order you register open generics and closed generics doesn&#39;t matter - the logic is applied on a type-by-type
+basis (i.e. more-specific first); however, the order that objects appear in the enumerable which come from the same
+generic type registration (i.e. <code>IFoo&lt;&gt;</code> or <code>IFoo&lt;Bar&gt;</code>) is honoured.</p>
+<h3 id="best-match-only">Best match <em>only</em></h3>
+<p>(TODO)</p>
 <h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
 <div class="NOTE"><h5>Note</h5><p>At the time of writing, the <a href="decorators.html">decorators topic</a> has not been written, so this is preview of how to 
 use decorators as well as how they work in enumerables.</p>
