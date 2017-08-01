@@ -13,6 +13,9 @@
 - name: Constructor Injection
   href: constructor-injection/toc.yml
   homepage: constructor-injection/index.md
+- name: Enumerables
+  href: enumerables/toc.yml
+  homepage: enumerables.md
 - name: Objects as Services
   href: objects.md
 - name: Factory Delegates
@@ -21,8 +24,6 @@
   href: expressions.md
 - name: Decorators
   href: decorators.md
-- name: Enumerables
-  href: enumerables.md
 
 - name: Benchmarks
   href: benchmarks.md

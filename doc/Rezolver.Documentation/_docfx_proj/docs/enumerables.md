@@ -15,10 +15,18 @@ against that type, in the order they were registered.
 > and @Rezolver.Options.EnumerableInjection - which are both configured to be equivalent to `true` by default
 > for all @Rezolver.ITargetContainer instances.
 
-You are not restricted in the targets you use to produce instances for an enumerable, and each one can have its
+You are not restricted in the targets you use to produce instances for an enumerable (e.g. @Rezolver.Targets.ObjectTarget,
+@Rezolver.Targets.ConstructorTarget or @Rezolver.Targets.DelegateTarget), and each one can have its
 own lifetime (scoped/singleton etc).
 
+> [!TIP]
+> By default, Rezolver will build 'lazy' enumerables, but can be configured to build 'eager' enumerables - for
+> more on this, read the topic [Lazy vs Eager Enumerables](enumerables/lazy-vs-eager.md)
+
 ## Empty enumerable
+
+By default, you don't need to register anything against a particular type in order to be able to inject an enumerable
+of that type.  If there are no registrations, then an empty enumerable will be injected instead.
 
 Here's an example where we only register the service we're going to create, which has a single constructor that requires
 an `IEnumerable<IMyService>`.
@@ -31,9 +39,10 @@ And then the test:
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example1)]
 
-## Same `ITarget` type
+## Multiple new objects
 
-Here, we register each type one after another:
+Here, we associate three types (created by constructor injection) to a common service type, which are all then included
+in the auto-injected enumerable:
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example2)]
 
@@ -85,63 +94,6 @@ To summarise:
 
 On to generics and decorators, now...
 
-## Enumerables of open generics
-
-You can also register multiple open generics of the same type (e.g. `IFoo<>`) and then resolve an enumerable of 
-`IFoo<Bar>`, and the container will create an enumerable containing an object for each open generic registration:
-
-[!code-csharp[UsesAnyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesAnyService.cs#example)]
-[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example5)]
-
-> [!NOTE]
-> When working with generics, the enumerable handler searches for the first generic registration which has least
-> one @Rezolver.ITarget whose @Rezolver.ITarget.UseFallback is `false` - searching from least generic to most
-> generic (e.g. `Foo<Bar>` is less generic than `Foo<>`).
->
-> So if you request an `IEnumerable<Foo<Bar>>`, targets are first sought for `Foo<Bar>` and, if none are found,
-> it then searches for `Foo<>`.  The side effect of this is that your enumerable will always only contain objects
-> produced from targets registered against the most-specific generic type that's applicable for the type requested.  The
-> next example expands on this.
-
-## Mixing open/closed generics
-
-### All *matching* generics
-
-> [!NOTE]
-> The functionality described here represents a breaking change from 1.2 - which did not allow you to mix enumerables
-> of objects from closed *and* open generic registrations.  The old behaviour can be re-enabled by setting the 
-> @Rezolver.Options.FetchAllMatchingGenerics option to <c>false</c>, as shown in the next example.
-
-Let's say that we have one open generic registration for `IUsesAnyService<>` to be used as a catch-all, but that
-when `IMyService` is used, we have two types that we also want to use.
-
-In this case, we simply need to add one or more registration(s) for the concrete generic type, and Rezolver will 
-intelligently select all the generics that apply when building its enumerable.
-
-So, given these extra generic types:
-
-[!code-csharp[UsesIMyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesIMyService.cs#example)]
-
-We can do this:
-
-[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6)]
-
-When Rezolver matches its registrations for `IEnumerable<IUsesAnyService<IMyService>>`, it sees the 
-two explicit registrations made against the closed generic type `IUsesAnyService<IMyService>` ***and*** the 
-registration against the open generic `IUsesAnyService<>` - hence you get an enumerable with *three* items.
-
-> [!TIP]
-> This is a common DI pattern when injecting enumerables of a generic type: one or more open generics which apply
-> to 'all' types of object, with potentially zero or more object which apply only to a specific type.  Rezolver doesn't
-> need to be told that's what you want - it just figures it out for itself.
-
-The order you register open generics and closed generics doesn't matter - the logic is applied on a type-by-type
-basis (i.e. more-specific first); however, the order that objects appear in the enumerable which come from the same
-generic type registration (i.e. `IFoo<>` or `IFoo<Bar>`) is honoured.
-
-### Best match *only*
-
-(TODO)
 
 ## Decorators and Enumerables
 

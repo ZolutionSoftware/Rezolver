@@ -12,7 +12,7 @@ now.
 # Core types
 
 For all the built-in container types, Rezolver splits registration and resolving responsibilities between 
-two primary interfaces:
+two interfaces:
 
 ## @Rezolver.ITargetContainer
 
@@ -23,12 +23,13 @@ It is through this interface that you setup your container with registrations, w
 resolving objects.
 
 > [!TIP]
-> The primary implementation of this interface that you will use in your application is @Rezolver.TargetContainer.
+> The primary implementation of this interface that you will use in your application is @Rezolver.TargetContainer - 
+> either created implicitly by the framework or explicitly in your own code.
 
 ## @Rezolver.IContainer
 
 This is the interface through which we resolve objects.  The interface does not expose any registration 
-mechanisms at all (even if the 'standard' implementations of those classes all do) - only the ability
+mechanisms at all (even if the classes providing the 'standard' implementations all do) - only the ability
 to request objects from the container.
 
 This interface does not mandate that a container has an `ITargetContainer`, it's simply the case
@@ -146,7 +147,7 @@ bool canResolve = container.CanResolve<MyService>();
 
 * * *
 
-# Behaviours (Advanced)
+# Container Configurations and Options
 
 For those looking to customise or extend Rezolver, many of the types are overridable.  However, 
 the @Rezolver.ITargetContainer and @Rezolver.IContainer implementations mentioned above also use
@@ -154,22 +155,34 @@ another mechanism that provides extensibility without having to subclass them.
 
 > [!NOTE]
 > This is an advanced topic and not one that you should have to worry about most of the time.  The examples in
-> this guide will highlight where you can use the functionality described below.
+> this guide will highlight where you can use the functionality described below - this section is intended to be 
+> a high-level overview only. 
 
-There are two primary types of behaviour in Rezolver:
+There are two primary types of container configuration in Rezolver:
 
-1. **Target container behaviours** (via implementations of <xref:Rezolver.ITargetContainerBehaviour>)
-2. **Container behaviours** (via implementations of <xref:Rezolver.IContainerBehaviour>)
+1. **Target container configuration** (via implementations of <xref:Rezolver.ITargetContainerConfig>)
+2. **Container configuration** (via implementations of <xref:Rezolver.IContainerConfig>)
 
-Both are very similar in that they define a method called `Attach` to which is passed an 
-@Rezolver.ITargetContainer and, in the case of @Rezolver.IContainerBehaviour, also an
-@Rezolver.IContainer.  Implementations of the interfaces can add/modify service 
-registrations which are then used either directly by the container, or which provide more advanced registration
-functionality.
+Both are very similar in that they define a method called `Configure` (see @Rezolver.ITargetContainerConfig.Configure*
+in @Rezolver.ITargetContainerConfig and @Rezolver.IContainerConfig.Configure* in <xref:Rezolver.IContainerConfig>) to 
+which is passed an @Rezolver.ITargetContainer and, in the case of @Rezolver.IContainerConfig, also an
+@Rezolver.IContainer.
 
-For example, Rezolver's [automatic resolving of enumerables](enumerables.md) is enabled by attaching the 
-@Rezolver.Behaviours.AutoEnumerableBehaviour to an @Rezolver.ITargetContainer (it is, therefore an 
-<xref:Rezolver.ITargetContainerBehaviour>).
+Implementations of the interfaces can add/modify service registrations which are then used either directly by the 
+container, or which provide more advanced registration functionality.
+
+For example, Rezolver's [automatic enumerable injection](enumerables.md) is enabled by the 
+@Rezolver.Configuration.InjectEnumerables configuration when it configures an @Rezolver.ITargetContainer.  This configuration
+is actually applied to all instances of @Rezolver.TargetContainer by default (via the @Rezolver.TargetContainer.DefaultConfig
+configuration collection) - but you can also control whether enumerable injection is enabled without having to remove the 
+configuration from that collection.
+
+This is where the Options API comes in (see the @Rezolver.OptionsTargetContainerExtensions class) - which enables you to 
+get and set options values in an @Rezolver.ITargetContainer which then control certain behaviours.  In the case of 
+enumerable injection, the aforementioned configuration object reads the @Rezolver.Options.EnumerableInjection option 
+from the target container it is configuring and, if it evaluates to `false`, then it doesn't enable enumerable injection.
+
+This might sound complicated, but if you read the 
 
 Equally, Rezolver's support for [member injection](constructor-injection/member-injection.md) can be
 controlled container-wide by attaching a @Rezolver.Behaviours.DefaultMemberBinding to the container when it

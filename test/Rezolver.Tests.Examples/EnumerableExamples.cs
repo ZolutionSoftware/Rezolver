@@ -30,6 +30,7 @@ namespace Rezolver.Tests.Examples
             var expectedTypes = new[] {
                 typeof(MyService1), typeof(MyService2), typeof(MyService3)
             };
+
             foreach (var t in expectedTypes)
             {
                 container.RegisterType(t, typeof(IMyService));
@@ -136,6 +137,38 @@ namespace Rezolver.Tests.Examples
         }
 
         [Fact]
+        public void ShouldResolveEnumerableOfConstrainedGenerics()
+        {
+            // <example5b>
+            var container = new Container();
+            container.RegisterType(typeof(GenericAny<>), typeof(IGeneric<>));
+            container.RegisterType(typeof(GenericAnyIMyService<>), typeof(IGeneric<>));
+            container.RegisterType(typeof(GenericAnyMyService1<>), typeof(IGeneric<>));
+
+            var anyResult = container.Resolve<IEnumerable<IGeneric<string>>>().ToArray();
+            var myServiceResult = container.Resolve<IEnumerable<IGeneric<MyService>>>().ToArray();
+            var myService1Result = container.Resolve<IEnumerable<IGeneric<MyService1>>>().ToArray();
+
+            // only the first registration matches IGeneric<string>
+            Assert.Equal(1, anyResult.Length);
+            Assert.IsType<GenericAny<string>>(anyResult[0]);
+
+            // First and second registrations match IGeneric<MyService>
+            // Note the order: both registrations were IGeneric<> so the constrained generic
+            // appears after the non-constrained one.
+            Assert.Equal(2, myServiceResult.Length);
+            Assert.IsType<GenericAny<MyService>>(myServiceResult[0]);
+            Assert.IsType<GenericAnyIMyService<MyService>>(myServiceResult[1]);
+
+            // All registrations match and, again, all are returned in order.
+            Assert.Equal(3, myService1Result.Length);
+            Assert.IsType<GenericAny<MyService1>>(myService1Result[0]);
+            Assert.IsType<GenericAnyIMyService<MyService1>>(myService1Result[1]);
+            Assert.IsType<GenericAnyMyService1<MyService1>>(myService1Result[2]);
+            // </example5b>
+        }
+
+        [Fact]
         public void ShouldGenerateEnumerableOfAllMatchingOpenAndClosedGenerics()
         {
             // <example6>
@@ -180,9 +213,6 @@ namespace Rezolver.Tests.Examples
             Assert.Equal(2, result.Length);
             Assert.IsType<UsesIMyService>(result[0]);
             Assert.IsType<UsesIMyService2>(result[1]);
-
-            Assert.Equal(1, result2.Length);
-            Assert.IsType<UsesAnyService<MyService>>(result2[0]);
             // </example6b>
         }
 
@@ -218,7 +248,8 @@ namespace Rezolver.Tests.Examples
             container.RegisterType<MyService2>();
 
             // reversing the 'normal' order that would usually be 
-            // produced by the default IEnumerable functionality
+            // produced by the default IEnumerable functionality, to show
+            // that it's this enumerable that we resolve
             container.RegisterDelegate<IEnumerable<IMyService>>(
                 rc => new IMyService[] { rc.Resolve<MyService2>(), rc.Resolve<MyService1>() }
             );

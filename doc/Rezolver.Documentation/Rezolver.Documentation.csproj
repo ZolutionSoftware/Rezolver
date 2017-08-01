@@ -478,6 +478,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="toc.yml" />
+    <Content Include="_docfx_proj\docs\enumerables\toc.yml" />
+    <Content Include="_docfx_proj\docs\enumerables\lazy-vs-eager.md" />
+    <Content Include="_docfx_proj\docs\enumerables\generics.md" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -625,6 +628,7 @@
     <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="_docfx_themes\default\layout\_master.tmpl" />
+    <Content Include="_docfx_themes\rezolver\layout\_master.tmpl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="_docfx_proj\docs\constructor-injection\toc.yml" />

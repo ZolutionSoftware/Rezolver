@@ -122,7 +122,8 @@ against that type, in the order they were registered.</li>
 and <a class="xref" href="../api/Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> - which are both configured to be equivalent to <code>true</code> by default
 for all <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
 </div>
-<p>You are not restricted in the targets you use to produce instances for an enumerable, and each one can have its
+<p>You are not restricted in the targets you use to produce instances for an enumerable (e.g. <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>,
+<a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or @Rezolver.Targets.DelegateTarget), and each one can have its
 own lifetime (scoped/singleton etc).</p>
 <h2 id="empty-enumerable">Empty enumerable</h2>
 <p>Here&#39;s an example where we only register the service we&#39;re going to create, which has a single constructor that requires
@@ -253,10 +254,12 @@ using (var childScope = container.CreateScope())
 <li><code>[2]</code> is created once per call</li>
 </ul>
 <hr>
+<h1 id="lazy-vs-eager-enumerables">Lazy vs. Eager Enumerables</h1>
+<p>TODO</p>
 <h1 id="advanced-examples">Advanced examples</h1>
 <p>On to generics and decorators, now...</p>
 <h2 id="enumerables-of-open-generics">Enumerables of open generics</h2>
-<p>You can also register multiple open generics of the same type (e.g. <code>IFoo&lt;&gt;</code>) and then resolve an enumerable of 
+<p>You can also register multiple open generics of the same type (e.g. <code>IFoo&lt;&gt;</code>), resolve an enumerable of 
 <code>IFoo&lt;Bar&gt;</code>, and the container will create an enumerable containing an object for each open generic registration:</p>
 <pre><code class="lang-csharp" name="UsesAnyService.cs">public interface IUsesAnyService&lt;TAnyService&gt;
 {
@@ -287,22 +290,14 @@ var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&g
 Assert.Equal(2, result.Length);
 Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[0]);
 Assert.IsType&lt;UsesAnyService2&lt;IMyService&gt;&gt;(result[1]);
-</code></pre><div class="NOTE"><h5>Note</h5><p>When working with generics, the enumerable handler searches for the first generic registration which has least
-one <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> whose <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> is <code>false</code> - searching from least generic to most
-generic (e.g. <code>Foo&lt;Bar&gt;</code> is less generic than <code>Foo&lt;&gt;</code>).</p>
-<p>So if you request an <code>IEnumerable&lt;Foo&lt;Bar&gt;&gt;</code>, targets are first sought for <code>Foo&lt;Bar&gt;</code> and, if none are found,
-it then searches for <code>Foo&lt;&gt;</code>.  The side effect of this is that your enumerable will always only contain objects
-produced from targets registered against the most-specific generic type that&#39;s applicable for the type requested.  The
-next example expands on this.</p>
-</div>
-<h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
-<h3 id="all-matching-generics">All <em>matching</em> generics</h3>
+</code></pre><h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
+<h3 id="all-possible-generics">All possible generics</h3>
 <div class="NOTE"><h5>Note</h5><p>The functionality described here represents a breaking change from 1.2 - which did not allow you to mix enumerables
 of objects from closed <em>and</em> open generic registrations.  The old behaviour can be re-enabled by setting the 
 <a class="xref" href="../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option to <c>false</c>, as shown in the next example.</p>
 </div>
 <p>Let&#39;s say that we have one open generic registration for <code>IUsesAnyService&lt;&gt;</code> to be used as a catch-all, but that
-when <code>IMyService</code> is used, we have two types that we also want to use.</p>
+when <code>IMyService</code> is used, we have two other types that we also want to use.</p>
 <p>In this case, we simply need to add one or more registration(s) for the concrete generic type, and Rezolver will 
 intelligently select all the generics that apply when building its enumerable.</p>
 <p>So, given these extra generic types:</p>
@@ -341,15 +336,38 @@ Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
 two explicit registrations made against the closed generic type <code>IUsesAnyService&lt;IMyService&gt;</code> <strong><em>and</em></strong> the 
 registration against the open generic <code>IUsesAnyService&lt;&gt;</code> - hence you get an enumerable with <em>three</em> items.</p>
 <div class="TIP"><h5>Tip</h5><p>This is a common DI pattern when injecting enumerables of a generic type: one or more open generics which apply
-to &#39;all&#39; types of object, with potentially zero or more object which apply only to a specific type.  Rezolver doesn&#39;t
-need to be told that&#39;s what you want - it just figures it out for itself.</p>
+to &#39;all&#39; types of object, with potentially zero or more registrations which apply only to a specific type.  Rezolver 
+doesn&#39;t need to be told that&#39;s what you want - it just figures it out for itself.</p>
 </div>
 <p>The order you register open generics and closed generics doesn&#39;t matter - the logic is applied on a type-by-type
-basis (i.e. more-specific first); however, the order that objects appear in the enumerable which come from the same
-generic type registration (i.e. <code>IFoo&lt;&gt;</code> or <code>IFoo&lt;Bar&gt;</code>) is honoured.</p>
+basis running from most specific (less generic) to least specific (more generic); however, the order that objects 
+appear in the enumerable which come from the same generic type registration (i.e. <code>IFoo&lt;&gt;</code> or <code>IFoo&lt;Bar&gt;</code>) is honoured.</p>
 <h3 id="best-match-only">Best match <em>only</em></h3>
-<p>(TODO)</p>
-<h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
+<p>Sometimes, you might only want objects in your enumerable which were registered against the best-matched generic, so, if you
+have two open generic registrations for <code>IFoo&lt;&gt;</code> but a specific registration for <code>IFoo&lt;Bar&gt;</code>.  When requesting an 
+enumerable of <code>IFoo&lt;Baz&gt;</code>, you want the two objects registered against the open generic.  However, when you request
+an enumerable of <code>IFoo&lt;Bar&gt;</code>, you only want one object - from the specific <code>IFoo&lt;Bar&gt;</code> registration.</p>
+<p>As mentioned in the note in the previous example, to do this, we use the <a class="xref" href="../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option
+to control this globally for a container:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+// same test - we&#39;re just setting an option on the container
+// which changes how generics are matched for the FetchAll() call
+// which sits behind the automatic enumerable resolving behaviour.
+container.SetOption&lt;Options.FetchAllMatchingGenerics&gt;(false);
+
+container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+container.RegisterType&lt;UsesIMyService, IUsesAnyService&lt;IMyService&gt;&gt;();
+container.RegisterType&lt;UsesIMyService2, IUsesAnyService&lt;IMyService&gt;&gt;();
+
+// This time, this will only match the second two registrations which 
+// specialise for IUsesAnyService&lt;IMyService&gt;
+var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
+var result2 = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;MyService&gt;&gt;&gt;().ToArray();
+
+Assert.Equal(2, result.Length);
+Assert.IsType&lt;UsesIMyService&gt;(result[0]);
+Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
+</code></pre><h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
 <div class="NOTE"><h5>Note</h5><p>At the time of writing, the <a href="decorators.html">decorators topic</a> has not been written, so this is preview of how to 
 use decorators as well as how they work in enumerables.</p>
 </div>
@@ -404,7 +422,8 @@ container.RegisterType&lt;MyService1&gt;();
 container.RegisterType&lt;MyService2&gt;();
 
 // reversing the &#39;normal&#39; order that would usually be 
-// produced by the default IEnumerable functionality
+// produced by the default IEnumerable functionality, to show
+// that it&#39;s this enumerable that we resolve
 container.RegisterDelegate&lt;IEnumerable&lt;IMyService&gt;&gt;(
     rc =&gt; new IMyService[] { rc.Resolve&lt;MyService2&gt;(), rc.Resolve&lt;MyService1&gt;() }
 );
