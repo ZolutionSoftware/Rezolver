@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,5 +45,34 @@ namespace Rezolver
 			if (scope == null) throw new ArgumentNullException(nameof(scope));
 			return scope.Container.Resolve(new ResolveContext(scope, requestedType));
 		}
+
+        /// <summary>
+        /// Equivalent of <see cref="ContainerResolveExtensions.ResolveMany(IContainer, Type)"/>
+        /// but for scopes.
+        /// </summary>
+        /// <param name="scope">The scope from which objects are to be resolved.</param>
+        /// <param name="type">The type of object desired in the enumerable.</param>
+        /// <returns>An enumerable (possibly empty) containing all the objects that could
+        /// be resolve of type <paramref name="type"/></returns>
+        public static IEnumerable ResolveMany(this IContainerScope scope, Type type)
+        {
+            return (IEnumerable)Resolve(
+                scope, 
+                typeof(IEnumerable<>).MakeGenericType(
+                    type ?? throw new ArgumentNullException(nameof(type))));
+        }
+
+        /// <summary>
+        /// Equivalent of <see cref="ContainerResolveExtensions.ResolveMany{TObject}(IContainer)"/>
+        /// but for scopes.
+        /// </summary>
+        /// <typeparam name="TObject">The type of object desired in the enumerable.</typeparam>
+        /// <param name="scope">The scope from which objects are to be resolved.</param>
+        /// <returns>An enumerable (possibly empty) containing all the objects that could be 
+        /// resolved of type <typeparamref name="TObject"/></returns>
+        public static IEnumerable<TObject> ResolveMany<TObject>(this IContainerScope scope)
+        {
+            return Resolve<IEnumerable<TObject>>(scope);
+        }
 	}
 }

@@ -93,8 +93,8 @@ namespace Rezolver.Tests.Examples
             // 2) Scoped IMyService
             // 3) Transient IMyService
 
-            var fromRoot1 = container.Resolve<IEnumerable<IMyService>>().ToArray();
-            var fromRoot2 = container.Resolve<IEnumerable<IMyService>>().ToArray();
+            var fromRoot1 = container.ResolveMany<IMyService>().ToArray();
+            var fromRoot2 = container.ResolveMany<IMyService>().ToArray();
 
             Assert.Same(fromRoot1[0], fromRoot2[0]);
             // both scoped objects should be the same because we've resolved
@@ -104,14 +104,14 @@ namespace Rezolver.Tests.Examples
 
             using (var childScope = container.CreateScope())
             {
-                var fromChildScope1 = childScope.Resolve<IEnumerable<IMyService>>().ToArray();
+                var fromChildScope1 = childScope.ResolveMany<IMyService>().ToArray();
                 // singleton should be the same as before, but 
                 // the scoped object will be different
                 Assert.Same(fromRoot1[0], fromChildScope1[0]);
                 Assert.NotSame(fromRoot1[1], fromChildScope1[1]);
                 Assert.NotSame(fromRoot1[2], fromChildScope1[2]);
 
-                var fromChildScope2 = childScope.Resolve<IEnumerable<IMyService>>().ToArray();
+                var fromChildScope2 = childScope.ResolveMany<IMyService>().ToArray();
                 // the scoped object will be the same as above
                 Assert.Same(fromChildScope1[0], fromChildScope2[0]);
                 Assert.Same(fromChildScope1[1], fromChildScope2[1]);
@@ -128,7 +128,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterType(typeof(UsesAnyService<>), typeof(IUsesAnyService<>));
             container.RegisterType(typeof(UsesAnyService2<>), typeof(IUsesAnyService<>));
 
-            var result = container.Resolve<IEnumerable<IUsesAnyService<IMyService>>>().ToArray();
+            var result = container.ResolveMany<IUsesAnyService<IMyService>>().ToArray();
 
             Assert.Equal(2, result.Length);
             Assert.IsType<UsesAnyService<IMyService>>(result[0]);
@@ -145,9 +145,9 @@ namespace Rezolver.Tests.Examples
             container.RegisterType(typeof(GenericAnyIMyService<>), typeof(IGeneric<>));
             container.RegisterType(typeof(GenericAnyMyService1<>), typeof(IGeneric<>));
 
-            var anyResult = container.Resolve<IEnumerable<IGeneric<string>>>().ToArray();
-            var myServiceResult = container.Resolve<IEnumerable<IGeneric<MyService>>>().ToArray();
-            var myService1Result = container.Resolve<IEnumerable<IGeneric<MyService1>>>().ToArray();
+            var anyResult = container.ResolveMany<IGeneric<string>>().ToArray();
+            var myServiceResult = container.ResolveMany<IGeneric<MyService>>().ToArray();
+            var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
 
             // only the first registration matches IGeneric<string>
             Assert.Equal(1, anyResult.Length);
@@ -177,8 +177,8 @@ namespace Rezolver.Tests.Examples
             container.RegisterType<UsesIMyService, IUsesAnyService<IMyService>>();
             container.RegisterType<UsesIMyService2, IUsesAnyService<IMyService>>();
 
-            var result = container.Resolve<IEnumerable<IUsesAnyService<IMyService>>>().ToArray();
-            var result2 = container.Resolve<IEnumerable<IUsesAnyService<MyService>>>().ToArray();
+            var result = container.ResolveMany<IUsesAnyService<IMyService>>().ToArray();
+            var result2 = container.ResolveMany<IUsesAnyService<MyService>>().ToArray();
 
             //note the order - specific generic type matches first, followed by more general
             Assert.Equal(3, result.Length);
@@ -192,7 +192,7 @@ namespace Rezolver.Tests.Examples
         }
 
         [Fact]
-        public void ShouldResolveEnumerableOfClosedGenericsInsteadOfOpen()
+        public void ShouldResolveOnlyBestMatchBecauseOfGlobalOption()
         {
             // <example6b>
             var container = new Container();
@@ -207,13 +207,40 @@ namespace Rezolver.Tests.Examples
 
             // This time, this will only match the second two registrations which 
             // specialise for IUsesAnyService<IMyService>
-            var result = container.Resolve<IEnumerable<IUsesAnyService<IMyService>>>().ToArray();
-            var result2 = container.Resolve<IEnumerable<IUsesAnyService<MyService>>>().ToArray();
+            var result = container.ResolveMany<IUsesAnyService<IMyService>>().ToArray();
 
             Assert.Equal(2, result.Length);
             Assert.IsType<UsesIMyService>(result[0]);
             Assert.IsType<UsesIMyService2>(result[1]);
             // </example6b>
+        }
+
+        [Fact]
+        public void ShouldResolveOnlyBestMatchForOneServiceTypeBecauseOfLocalOption()
+        {
+            // <example6c>
+            var container = new Container();
+            // set this option for the IGeneric<MyService> service ONLY
+            container.SetOption<Options.FetchAllMatchingGenerics>(false, typeof(IGeneric<MyService>));
+
+            // same registrations as our constrained generics example
+            container.RegisterType(typeof(GenericAny<>), typeof(IGeneric<>));
+            container.RegisterType(typeof(GenericAnyIMyService<>), typeof(IGeneric<>));
+            container.RegisterType(typeof(GenericAnyMyService1<>), typeof(IGeneric<>));
+
+            var myServiceResult = container.ResolveMany<IGeneric<MyService>>().ToArray();
+            var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
+
+            // our first result will only contain one result - the last best-matched open generic
+            // because we've set the option on its inner service type.
+            Assert.Equal(1, myServiceResult.Length);
+            Assert.IsType<GenericAnyIMyService<MyService>>(myServiceResult[0]);
+
+            // but the second enumerable will still contain all 3 because the default value for
+            // the option is to return all matching generics
+            Assert.Equal(3, myService1Result.Length);
+            // </example6c>
+            // NOTE ABOVE - OMITTING THE INDIVIDUAL ITEM CHECKS BECAUSE IT JUST REPEATS THE CONSTRAINTS TEST
         }
 
         [Fact]
@@ -228,7 +255,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterType<MyService3, IMyService>();
 
             // create the container with these targets
-            var result = container.Resolve<IEnumerable<IMyService>>().ToArray();
+            var result = container.ResolveMany<IMyService>().ToArray();
 
             // make sure each item in the enumerable is an instance of our decorator.
             // then make sure the decorated services are correct.
@@ -254,7 +281,7 @@ namespace Rezolver.Tests.Examples
                 rc => new IMyService[] { rc.Resolve<MyService2>(), rc.Resolve<MyService1>() }
             );
 
-            var result = container.Resolve<IEnumerable<IMyService>>().ToArray();
+            var result = container.ResolveMany<IMyService>().ToArray();
 
             Assert.Equal(2, result.Length);
             Assert.IsType<MyService2>(result[0]);

@@ -160,7 +160,7 @@ namespace Rezolver
 
         private IEnumerable<ITarget> FetchAllWorker(Type type)
         {
-            bool matchAll = Root.GetOption(Options.FetchAllMatchingGenerics.Default);
+            bool matchAll = Root.GetOption(type, Options.FetchAllMatchingGenerics.Default);
             bool foundOne = false;
 
             //all generics are returned in descending order of specificity

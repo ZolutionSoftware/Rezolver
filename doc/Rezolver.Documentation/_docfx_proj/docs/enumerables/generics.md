@@ -1,7 +1,7 @@
 ﻿# Enumerables of Generics
 
 Now you've seen how Rezolver's [automatic enumerable injection works](../enumerables.md), let's move on to how 
-generics (specifically, open generic registrations) work.
+generics (specifically, open generic registrations) work in the context of enumerable injection.
 
 ## Open Generics
 
@@ -13,8 +13,8 @@ You can register multiple open generics of the same type (e.g. `IFoo<>`), resolv
 
 ## Constrained Generics
 
-When one or more constrained open generic types are registered against an open generic type, Rezolver will only attempt
-to include results from those registrations if all their target type's constraints are met.
+When one or more constrained open generic types are registered against an open generic type, Rezolver will only
+include results from registrations whose target type's constraints are met.
 
 [!code-csharp[ConstrainedGenerics.cs](../../../../../test/Rezolver.Tests.Examples/Types/ConstrainedGenerics.cs#example)]
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example5b)]
@@ -65,7 +65,7 @@ The order you register open generics and closed generics doesn't matter - the lo
 basis running from most specific to least specific; however, the order that objects 
 appear in the enumerable which come from the same generic type registration (i.e. `IFoo<>` or `IFoo<Bar>`) is honoured.
 
-### Best match *only*
+### Best match *only* (global)
 
 Sometimes, you might only want objects in your enumerable which were registered against the best-matched generic, so, if you
 have two open generic registrations for `IFoo<>` but a specific registration for `IFoo<Bar>`.  When requesting an 
@@ -76,3 +76,10 @@ As mentioned in the note in the previous example, to do this, we use the @Rezolv
 to control this globally for a container:
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6b)]
+
+### Best match *only* (per-service)
+
+We can also control this on a per-generic basis - simply set the @Rezolver.Options.FetchAllMatchingGenerics option to
+`false` for a given open generic service type, and it will be disabled only for that generic (and any any of its derivatives).
+
+[!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6c)]

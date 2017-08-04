@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -37,6 +38,29 @@ namespace Rezolver
 		{
 			return (TObject)container.Resolve(typeof(TObject));
 		}
+
+        /// <summary>
+        /// Shortcut for resolving an IEnumerable of objects of a given type.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        /// <param name="type">The type of objects you want to retrieve</param>
+        /// <returns>An enumerable (possibly empty) containing the objects which were resolved.</returns>
+        public static IEnumerable ResolveMany(this IContainer container, Type type)
+        {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            return (IEnumerable)Resolve(container, typeof(IEnumerable<>).MakeGenericType(type));
+        }
+
+        /// <summary>
+        /// Shortcut for resolving an IEnumerable of <typeparamref name="TObject"/>
+        /// </summary>
+        /// <typeparam name="TObject">The type of objects expected in the enumerable</typeparam>
+        /// <param name="container">The container.</param>
+        /// <returns>An enumerable (possibly empty) containing the objects which were resolved.</returns>
+        public static IEnumerable<TObject> ResolveMany<TObject>(this IContainer container)
+        {
+            return Resolve<IEnumerable<TObject>>(container);
+        }
 
 		/// <summary>
 		/// The same as the Resolve method with the same core parameter types, except this will not throw

@@ -23,6 +23,28 @@ own lifetime (scoped/singleton etc).
 > By default, Rezolver will build 'lazy' enumerables, but can be configured to build 'eager' enumerables - for
 > more on this, read the topic [Lazy vs Eager Enumerables](enumerables/lazy-vs-eager.md)
 
+## Resolving enumerables
+
+To resolve an enumerable from a container or through a scope, you can simply use `IEnumerable<Foo>` as the input
+type for a @Rezolver.IContainer.Resolve* call:
+
+```cs
+var enumerable = container.Resolve<IEnumerable<Foo>>();
+```
+
+However, the `ResolveMany` extension method (see <xref:Resolver.ContainerResolveExtensions.ResolveMany*> 
+and <xref:Resolve.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortut which allow you to pass
+just the element type of the enumerable to reduce the 'angle-bracket percent' of code which directly resolves
+enumerables:
+
+```cs
+// this is equivalent to resolving IEnumerable<Foo>
+var enumerable2 = container.ResolveMany<Foo>();
+```
+
+Most, if not all, the examples in this section use this shortcut - but it's worth noting that the two methods are
+absolutely equivalent.
+
 ## Empty enumerable
 
 By default, you don't need to register anything against a particular type in order to be able to inject an enumerable
