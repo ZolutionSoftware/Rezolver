@@ -1,2 +1,4 @@
-﻿- name: Lazy vs Eager
+﻿- name: Generics
+  href: generics.md
+- name: Lazy vs Eager
   href: lazy-vs-eager.md

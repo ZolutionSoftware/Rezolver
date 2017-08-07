@@ -1,7 +1,7 @@
 ﻿# Enumerables of Generics
 
 Now you've seen how Rezolver's [automatic enumerable injection works](../enumerables.md), let's move on to how 
-generics (specifically, open generic registrations) work in the context of enumerable injection.
+generics work in the context of enumerable injection.
 
 ## Open Generics
 
@@ -22,32 +22,46 @@ include results from registrations whose target type's constraints are met.
 ## Mixing open/closed generics
 
 In many applications which use DI and generics, you often have 'common' open generic registrations, such as
-those in the 'enumerables of open generics' example above, and then specific registrations for one or more 
+those in the [first example above](#open-generics), and then specific registrations for one or more 
 well-known *closed* generics.
 
 When resolving a single instance for a given generic, Rezolver will of course select the newest *most specific* 
 registration it can find.  This means that if you have registrations for both `IFoo<>` and `IFoo<Bar>` and 
 request an instance of `IFoo<Bar>`, then the second registration is used.
 
+> [!TIP]
+> Rezolver's generic type matching works on an inside-out basis, so if you request `IGeneric<IFoo<IBar>>` from
+> the container, it searches for registrations for the following types, in this order:
+> - `IGeneric<IFoo<IBar>>`
+> - `IGeneric<IFoo<>>`
+> - `IGeneric<>`
+> 
+> This search order is the same regardless of the order the registrations are made.  So, if an 
+> `IGeneric<IFoo<IBar>>` was the last to be added to the target container, it's still returned first.
+
 If, however, you request an `IEnumerable<IFoo<Bar>>`, what should Rezolver return?
 
-The answer is: it depends on your specific need.  Sometimes you might want all applicable objects to be returned,
-and sometimes you might only want the best-matched registrations to be used.
+The answer is: it depends on your specific need.  Sometimes you might want all applicable objects to be returned
+(the default behaviour), and sometimes you might only want the best-matched registrations (i.e. the first batch
+of registrations found for one of the generic types being searched, as per the above Tip callout) to be used.
 
-The good news is that it's easy to tell Rezolver which of the behaviours you want it to observe.
+The good news is that it's easy to tell Rezolver which of the behaviours you want it to use - both globally and
+on a per-service basis.
 
 ### All possible generics
 
 > [!NOTE]
-> The functionality described here represents a breaking change from 1.2 - which did not allow you to mix enumerables
-> of objects from closed *and* open generic registrations.  The old behaviour can be re-enabled by setting the 
-> @Rezolver.Options.FetchAllMatchingGenerics option to <c>false</c>, as shown in the next example.
+> The functionality described here represents a breaking change from 1.2.
+> 
+> The old behaviour can be re-enabled by setting the @Rezolver.Options.FetchAllMatchingGenerics option 
+> to <c>false</c>, as shown in the next example.
 
 Let's say that we have one open generic registration for `IUsesAnyService<>` to be used as a catch-all, but that
-when `IMyService` is used, we have two other types that we also want to use.
+we also have specific implementations we also want to use for `IUsesAnyService<IMyService>`.
 
-In this case, we simply need to add one or more registration(s) for the concrete generic type, and Rezolver will 
-intelligently select all the generics that apply when building its enumerable.
+In this case, we simply need to add one or more registration(s) for the **_concrete_** generic type in addition
+to the open generic registrations, and Rezolver will intelligently select all the generics that apply when 
+building its enumerable.
 
 So, given these extra generic types:
 
@@ -57,13 +71,16 @@ We can do this:
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6)]
 
-When Rezolver matches its registrations for `IEnumerable<IUsesAnyService<IMyService>>`, it sees the 
-two explicit registrations made against the closed generic type `IUsesAnyService<IMyService>` ***and*** the 
-registration against the open generic `IUsesAnyService<>` - hence you get an enumerable with *three* items.
+In the simplest terms, what we're seeing here is the container walking through all the possible generic service types
+that could apply for the requested type, and returning all the instances produced by all those registrations.
 
-The order you register open generics and closed generics doesn't matter - the logic is applied on a type-by-type
-basis running from most specific to least specific; however, the order that objects 
-appear in the enumerable which come from the same generic type registration (i.e. `IFoo<>` or `IFoo<Bar>`) is honoured.
+Note that the order of individual items which were registered against the same generic type (e.g. `IUsesAnyService<>`)
+is maintained, but the *most*-specific generics are being returned first.
+
+> [!NOTE]
+> **Constrained** generic implementations are *not* equal to closed generic registrations. So an explicit 
+> registration against `IFoo<Bar>` will always beat a constrained generic implementation such as
+> `MyFoo<T> : IFoo<T> where T : Bar` (see further down).
 
 ### Best match *only* (global)
 
@@ -79,7 +96,15 @@ to control this globally for a container:
 
 ### Best match *only* (per-service)
 
-We can also control this on a per-generic basis - simply set the @Rezolver.Options.FetchAllMatchingGenerics option to
-`false` for a given open generic service type, and it will be disabled only for that generic (and any any of its derivatives).
+We can also control this on a per-service basis - simply set the @Rezolver.Options.FetchAllMatchingGenerics option to
+`false` for a given service type.
+
+Here, we're using the same types that we introduced for the [constrained generics example](#constrained-generics), 
+and disabling the 'fetch all' behaviour for a specific closed generic:
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6c)]
+
+You can also set this against an open generic - which then has the same effect but for all genercis based on the same
+open generic (here we're disabling it for `IGeneric<>`)
+
+[!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6d)]

@@ -3157,6 +3157,27 @@ references:
   fullName.vb: Rezolver.ContainerResolveExtensions.Resolve(Of TObject)(Rezolver.IContainer)
   nameWithType: ContainerResolveExtensions.Resolve<TObject>(IContainer)
   nameWithType.vb: ContainerResolveExtensions.Resolve(Of TObject)(IContainer)
+- uid: Rezolver.ContainerResolveExtensions.ResolveMany(Rezolver.IContainer,System.Type)
+  name: ResolveMany(IContainer, Type)
+  href: api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_Rezolver_IContainer_System_Type_
+  commentId: M:Rezolver.ContainerResolveExtensions.ResolveMany(Rezolver.IContainer,System.Type)
+  fullName: Rezolver.ContainerResolveExtensions.ResolveMany(Rezolver.IContainer, System.Type)
+  nameWithType: ContainerResolveExtensions.ResolveMany(IContainer, Type)
+- uid: Rezolver.ContainerResolveExtensions.ResolveMany*
+  name: ResolveMany
+  href: api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_
+  commentId: Overload:Rezolver.ContainerResolveExtensions.ResolveMany
+  fullName: Rezolver.ContainerResolveExtensions.ResolveMany
+  nameWithType: ContainerResolveExtensions.ResolveMany
+- uid: Rezolver.ContainerResolveExtensions.ResolveMany``1(Rezolver.IContainer)
+  name: ResolveMany<TObject>(IContainer)
+  href: api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany__1_Rezolver_IContainer_
+  commentId: M:Rezolver.ContainerResolveExtensions.ResolveMany``1(Rezolver.IContainer)
+  name.vb: ResolveMany(Of TObject)(IContainer)
+  fullName: Rezolver.ContainerResolveExtensions.ResolveMany<TObject>(Rezolver.IContainer)
+  fullName.vb: Rezolver.ContainerResolveExtensions.ResolveMany(Of TObject)(Rezolver.IContainer)
+  nameWithType: ContainerResolveExtensions.ResolveMany<TObject>(IContainer)
+  nameWithType.vb: ContainerResolveExtensions.ResolveMany(Of TObject)(IContainer)
 - uid: Rezolver.ContainerResolveExtensions.TryResolve(Rezolver.IContainer,System.Type,System.Object@)
   name: TryResolve(IContainer, Type, out Object)
   href: api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_TryResolve_Rezolver_IContainer_System_Type_System_Object__
@@ -3361,6 +3382,27 @@ references:
   fullName.vb: Rezolver.ContainerScopeResolveExtensions.Resolve(Of TResult)(Rezolver.IContainerScope)
   nameWithType: ContainerScopeResolveExtensions.Resolve<TResult>(IContainerScope)
   nameWithType.vb: ContainerScopeResolveExtensions.Resolve(Of TResult)(IContainerScope)
+- uid: Rezolver.ContainerScopeResolveExtensions.ResolveMany(Rezolver.IContainerScope,System.Type)
+  name: ResolveMany(IContainerScope, Type)
+  href: api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_Rezolver_IContainerScope_System_Type_
+  commentId: M:Rezolver.ContainerScopeResolveExtensions.ResolveMany(Rezolver.IContainerScope,System.Type)
+  fullName: Rezolver.ContainerScopeResolveExtensions.ResolveMany(Rezolver.IContainerScope, System.Type)
+  nameWithType: ContainerScopeResolveExtensions.ResolveMany(IContainerScope, Type)
+- uid: Rezolver.ContainerScopeResolveExtensions.ResolveMany*
+  name: ResolveMany
+  href: api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_
+  commentId: Overload:Rezolver.ContainerScopeResolveExtensions.ResolveMany
+  fullName: Rezolver.ContainerScopeResolveExtensions.ResolveMany
+  nameWithType: ContainerScopeResolveExtensions.ResolveMany
+- uid: Rezolver.ContainerScopeResolveExtensions.ResolveMany``1(Rezolver.IContainerScope)
+  name: ResolveMany<TObject>(IContainerScope)
+  href: api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany__1_Rezolver_IContainerScope_
+  commentId: M:Rezolver.ContainerScopeResolveExtensions.ResolveMany``1(Rezolver.IContainerScope)
+  name.vb: ResolveMany(Of TObject)(IContainerScope)
+  fullName: Rezolver.ContainerScopeResolveExtensions.ResolveMany<TObject>(Rezolver.IContainerScope)
+  fullName.vb: Rezolver.ContainerScopeResolveExtensions.ResolveMany(Of TObject)(Rezolver.IContainerScope)
+  nameWithType: ContainerScopeResolveExtensions.ResolveMany<TObject>(IContainerScope)
+  nameWithType.vb: ContainerScopeResolveExtensions.ResolveMany(Of TObject)(IContainerScope)
 - uid: Rezolver.DecoratingTargetContainer
   name: DecoratingTargetContainer
   href: api/Rezolver.DecoratingTargetContainer.html

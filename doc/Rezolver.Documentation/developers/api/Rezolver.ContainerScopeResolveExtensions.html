@@ -159,7 +159,7 @@ interface present a similar set of functionality to <a class="xref" href="Rezolv
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_Resolve_Rezolver_IContainerScope_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.Resolve(Rezolver.IContainerScope%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L42">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L43">View Source</a>
   </span>
   <a id="Rezolver_ContainerScopeResolveExtensions_Resolve_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve*"></a>
   <h4 id="Rezolver_ContainerScopeResolveExtensions_Resolve_Rezolver_IContainerScope_System_Type_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve(Rezolver.IContainerScope,System.Type)">Resolve(IContainerScope, Type)</h4>
@@ -230,7 +230,7 @@ extension method.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_Resolve__1_Rezolver_IContainerScope_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.Resolve%60%601(Rezolver.IContainerScope)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L29">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L30">View Source</a>
   </span>
   <a id="Rezolver_ContainerScopeResolveExtensions_Resolve_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve*"></a>
   <h4 id="Rezolver_ContainerScopeResolveExtensions_Resolve__1_Rezolver_IContainerScope_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve``1(Rezolver.IContainerScope)">Resolve&lt;TResult&gt;(IContainerScope)</h4>
@@ -299,6 +299,132 @@ targets to determine whether they should interact with the scope.</p>
 the scope is set on the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> that is passed to its
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method.</p>
 </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_ResolveMany_Rezolver_IContainerScope_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.ResolveMany(Rezolver.IContainerScope%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L57">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerScopeResolveExtensions_ResolveMany_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany*"></a>
+  <h4 id="Rezolver_ContainerScopeResolveExtensions_ResolveMany_Rezolver_IContainerScope_System_Type_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany(Rezolver.IContainerScope,System.Type)">ResolveMany(IContainerScope, Type)</h4>
+  <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_Rezolver_IContainer_System_Type_">ResolveMany(IContainer, Type)</a>
+but for scopes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable ResolveMany(this IContainerScope scope, Type type)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
+        <td><span class="parametername">scope</span></td>
+        <td><p>The scope from which objects are to be resolved.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type of object desired in the enumerable.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.collections.ienumerable(v=vs.110).aspx">IEnumerable</a></td>
+        <td><p>An enumerable (possibly empty) containing all the objects that could
+be resolve of type <span class="paramref">type</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_ResolveMany__1_Rezolver_IContainerScope_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.ResolveMany%60%601(Rezolver.IContainerScope)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L73">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerScopeResolveExtensions_ResolveMany_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany*"></a>
+  <h4 id="Rezolver_ContainerScopeResolveExtensions_ResolveMany__1_Rezolver_IContainerScope_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany``1(Rezolver.IContainerScope)">ResolveMany&lt;TObject&gt;(IContainerScope)</h4>
+  <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany__1_Rezolver_IContainer_">ResolveMany&lt;TObject&gt;(IContainer)</a>
+but for scopes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TObject&gt; ResolveMany&lt;TObject&gt;(this IContainerScope scope)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
+        <td><span class="parametername">scope</span></td>
+        <td><p>The scope from which objects are to be resolved.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;TObject&gt;</span></td>
+        <td><p>An enumerable (possibly empty) containing all the objects that could be 
+resolved of type <span class="typeparamref">TObject</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td><p>The type of object desired in the enumerable.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
@@ -310,7 +436,7 @@ the scope is set on the <a class="xref" href="Rezolver.IResolveContext.html">IRe
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

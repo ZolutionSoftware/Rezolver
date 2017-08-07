@@ -220,27 +220,37 @@ namespace Rezolver.Tests.Examples
         {
             // <example6c>
             var container = new Container();
-            // set this option for the IGeneric<MyService> service ONLY
-            container.SetOption<Options.FetchAllMatchingGenerics>(false, typeof(IGeneric<MyService>));
+            // set this option for the IGeneric<MyService2> service ONLY
+            container.SetOption<Options.FetchAllMatchingGenerics>(false, typeof(IGeneric<MyService2>));
 
-            // same registrations as our constrained generics example
+            // same registrations as our constrained generics example plus an 
+            // extra for IGeneric<MyService2> which will 'win'.
             container.RegisterType(typeof(GenericAny<>), typeof(IGeneric<>));
             container.RegisterType(typeof(GenericAnyIMyService<>), typeof(IGeneric<>));
             container.RegisterType(typeof(GenericAnyMyService1<>), typeof(IGeneric<>));
+            container.RegisterType(typeof(GenericMyService2), typeof(IGeneric<MyService2>));
 
+            // will get two as before
             var myServiceResult = container.ResolveMany<IGeneric<MyService>>().ToArray();
-            var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
+            // would normally get three (via 1st, 2nd and 4th registrations), but will only
+            // get one.
+            var myService2Result = container.ResolveMany<IGeneric<MyService2>>().ToArray();
 
-            // our first result will only contain one result - the last best-matched open generic
-            // because we've set the option on its inner service type.
-            Assert.Equal(1, myServiceResult.Length);
-            Assert.IsType<GenericAnyIMyService<MyService>>(myServiceResult[0]);
+            Assert.Equal(2, myServiceResult.Length);
 
-            // but the second enumerable will still contain all 3 because the default value for
-            // the option is to return all matching generics
-            Assert.Equal(3, myService1Result.Length);
+            // but the second enumerable will only contain 1 because the option was set directly
+            // on its inner service type.
+            Assert.Equal(1, myService2Result.Length);
             // </example6c>
             // NOTE ABOVE - OMITTING THE INDIVIDUAL ITEM CHECKS BECAUSE IT JUST REPEATS THE CONSTRAINTS TEST
+        }
+
+        [Fact]
+        public void ShouldDisableAllOpenGenericsForOneType()
+        {
+            // <example6d>
+#error todo.
+            // </example6d>
         }
 
         [Fact]

@@ -119,17 +119,18 @@
 now.</p>
 <h1 id="core-types">Core types</h1>
 <p>For all the built-in container types, Rezolver splits registration and resolving responsibilities between 
-two primary interfaces:</p>
+two interfaces:</p>
 <h2 id="rezolveritargetcontainer"><a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a></h2>
 <p>This interface describes a registry of <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> objects, keyed by type, describing the type of object 
 that is to be created (and how) when a given type is requested.</p>
 <p>It is through this interface that you setup your container with registrations, which are then later used when 
 resolving objects.</p>
-<div class="TIP"><h5>Tip</h5><p>The primary implementation of this interface that you will use in your application is <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>.</p>
+<div class="TIP"><h5>Tip</h5><p>The primary implementation of this interface that you will use in your application is <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> - 
+either created implicitly by the framework or explicitly in your own code.</p>
 </div>
 <h2 id="rezolvericontainer"><a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a></h2>
 <p>This is the interface through which we resolve objects.  The interface does not expose any registration 
-mechanisms at all (even if the &#39;standard&#39; implementations of those classes all do) - only the ability
+mechanisms at all (even if the classes providing the &#39;standard&#39; implementations all do) - only the ability
 to request objects from the container.</p>
 <p>This interface does not mandate that a container has an <code>ITargetContainer</code>, it&#39;s simply the case
 that all the provided implementations which we will discuss in the rest of this documentation do
@@ -208,26 +209,35 @@ by using the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_ICon
 methods (e.g. <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve__1_Rezolver_IContainer_">CanResolve&lt;TObject&gt;(IContainer)</a>)):</p>
 <pre><code class="lang-cs">bool canResolve = container.CanResolve&lt;MyService&gt;();
 </code></pre><hr>
-<h1 id="behaviours-advanced">Behaviours (Advanced)</h1>
+<h1 id="container-configurations-and-options">Container Configurations and Options</h1>
 <p>For those looking to customise or extend Rezolver, many of the types are overridable.  However, 
 the <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a> implementations mentioned above also use
 another mechanism that provides extensibility without having to subclass them.</p>
 <div class="NOTE"><h5>Note</h5><p>This is an advanced topic and not one that you should have to worry about most of the time.  The examples in
-this guide will highlight where you can use the functionality described below.</p>
+this guide will highlight where you can use the functionality described below - this section is intended to be 
+a high-level overview only. </p>
 </div>
-<p>There are two primary types of behaviour in Rezolver:</p>
+<p>There are two primary types of container configuration in Rezolver:</p>
 <ol>
-<li><strong>Target container behaviours</strong> (via implementations of &lt;xref:Rezolver.ITargetContainerBehaviour&gt;)</li>
-<li><strong>Container behaviours</strong> (via implementations of &lt;xref:Rezolver.IContainerBehaviour&gt;)</li>
+<li><strong>Target container configuration</strong> (via implementations of <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>)</li>
+<li><strong>Container configuration</strong> (via implementations of <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>)</li>
 </ol>
-<p>Both are very similar in that they define a method called <code>Attach</code> to which is passed an 
-<a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and, in the case of @Rezolver.IContainerBehaviour, also an
-<a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>.  Implementations of the interfaces can add/modify service 
-registrations which are then used either directly by the container, or which provide more advanced registration
-functionality.</p>
-<p>For example, Rezolver&#39;s <a href="enumerables.html">automatic resolving of enumerables</a> is enabled by attaching the 
-@Rezolver.Behaviours.AutoEnumerableBehaviour to an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> (it is, therefore an 
-&lt;xref:Rezolver.ITargetContainerBehaviour&gt;).</p>
+<p>Both are very similar in that they define a method called <code>Configure</code> (see <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_">Configure</a>
+in <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> and <a class="xref" href="../api/Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_">Configure</a> in <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>) to 
+which is passed an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and, in the case of <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>, also an
+<a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>.</p>
+<p>Implementations of the interfaces can add/modify service registrations which are then used either directly by the 
+container, or which provide more advanced registration functionality.</p>
+<p>For example, Rezolver&#39;s <a href="enumerables.html">automatic enumerable injection</a> is enabled by the 
+<a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration when it configures an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.  This configuration
+is actually applied to all instances of <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> by default (via the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>
+configuration collection) - but you can also control whether enumerable injection is enabled without having to remove the 
+configuration from that collection.</p>
+<p>This is where the Options API comes in (see the <a class="xref" href="../api/Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a> class) - which enables you to 
+get and set options values in an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which then control certain behaviours.  In the case of 
+enumerable injection, the aforementioned configuration object reads the <a class="xref" href="../api/Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option 
+from the target container it is configuring and, if it evaluates to <code>false</code>, then it doesn&#39;t enable enumerable injection.</p>
+<p>This might sound complicated, but if you read the </p>
 <p>Equally, Rezolver&#39;s support for <a href="constructor-injection/member-injection.html">member injection</a> can be
 controlled container-wide by attaching a @Rezolver.Behaviours.DefaultMemberBinding to the container when it
 is created.</p>

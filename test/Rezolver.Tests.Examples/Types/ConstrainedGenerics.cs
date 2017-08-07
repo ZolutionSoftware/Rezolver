@@ -28,5 +28,13 @@ namespace Rezolver.Tests.Examples.Types
     {
 
     }
+
+    /// <summary>
+    /// Note - used in the per-service 'best match only' example
+    /// </summary>
+    public class GenericMyService2 : IGeneric<MyService2>
+    {
+
+    }
     // </example>
 }

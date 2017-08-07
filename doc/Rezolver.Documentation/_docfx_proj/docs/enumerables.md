@@ -32,8 +32,8 @@ type for a @Rezolver.IContainer.Resolve* call:
 var enumerable = container.Resolve<IEnumerable<Foo>>();
 ```
 
-However, the `ResolveMany` extension method (see <xref:Resolver.ContainerResolveExtensions.ResolveMany*> 
-and <xref:Resolve.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortut which allow you to pass
+However, the `ResolveMany` extension method (see <xref:Rezolver.ContainerResolveExtensions.ResolveMany*>
+and <xref:Rezolver.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortut which allow you to pass
 just the element type of the enumerable to reduce the 'angle-bracket percent' of code which directly resolves
 enumerables:
 

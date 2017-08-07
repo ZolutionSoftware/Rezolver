@@ -125,7 +125,24 @@ for all <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetCont
 <p>You are not restricted in the targets you use to produce instances for an enumerable (e.g. <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>,
 <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or @Rezolver.Targets.DelegateTarget), and each one can have its
 own lifetime (scoped/singleton etc).</p>
+<div class="TIP"><h5>Tip</h5><p>By default, Rezolver will build &#39;lazy&#39; enumerables, but can be configured to build &#39;eager&#39; enumerables - for
+more on this, read the topic <a href="enumerables/lazy-vs-eager.html">Lazy vs Eager Enumerables</a></p>
+</div>
+<h2 id="resolving-enumerables">Resolving enumerables</h2>
+<p>To resolve an enumerable from a container or through a scope, you can simply use <code>IEnumerable&lt;Foo&gt;</code> as the input
+type for a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call:</p>
+<pre><code class="lang-cs">var enumerable = container.Resolve&lt;IEnumerable&lt;Foo&gt;&gt;();
+</code></pre><p>However, the <code>ResolveMany</code> extension method (see <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_">ResolveMany</a>
+and <a class="xref" href="../api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_">ResolveMany</a>) provide a shortut which allow you to pass
+just the element type of the enumerable to reduce the &#39;angle-bracket percent&#39; of code which directly resolves
+enumerables:</p>
+<pre><code class="lang-cs">// this is equivalent to resolving IEnumerable&lt;Foo&gt;
+var enumerable2 = container.ResolveMany&lt;Foo&gt;();
+</code></pre><p>Most, if not all, the examples in this section use this shortcut - but it&#39;s worth noting that the two methods are
+absolutely equivalent.</p>
 <h2 id="empty-enumerable">Empty enumerable</h2>
+<p>By default, you don&#39;t need to register anything against a particular type in order to be able to inject an enumerable
+of that type.  If there are no registrations, then an empty enumerable will be injected instead.</p>
 <p>Here&#39;s an example where we only register the service we&#39;re going to create, which has a single constructor that requires
 an <code>IEnumerable&lt;IMyService&gt;</code>.</p>
 <p>First, the type <code>RequiresEnumerableOfServices</code>:</p>
@@ -143,12 +160,14 @@ container.RegisterType&lt;RequiresEnumerableOfServices&gt;();
 
 var result = container.Resolve&lt;RequiresEnumerableOfServices&gt;();
 Assert.Empty(result.Services);
-</code></pre><h2 id="same-itarget-type">Same <code>ITarget</code> type</h2>
-<p>Here, we register each type one after another:</p>
+</code></pre><h2 id="multiple-new-objects">Multiple new objects</h2>
+<p>Here, we associate three types (created by constructor injection) to a common service type, which are all then included
+in the auto-injected enumerable:</p>
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
 var expectedTypes = new[] {
     typeof(MyService1), typeof(MyService2), typeof(MyService3)
 };
+
 foreach (var t in expectedTypes)
 {
     container.RegisterType(t, typeof(IMyService));
@@ -223,8 +242,8 @@ container.RegisterType&lt;MyService3, IMyService&gt;();
 // 2) Scoped IMyService
 // 3) Transient IMyService
 
-var fromRoot1 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
-var fromRoot2 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+var fromRoot1 = container.ResolveMany&lt;IMyService&gt;().ToArray();
+var fromRoot2 = container.ResolveMany&lt;IMyService&gt;().ToArray();
 
 Assert.Same(fromRoot1[0], fromRoot2[0]);
 // both scoped objects should be the same because we&#39;ve resolved
@@ -234,14 +253,14 @@ Assert.NotSame(fromRoot1[2], fromRoot2[2]);
 
 using (var childScope = container.CreateScope())
 {
-    var fromChildScope1 = childScope.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+    var fromChildScope1 = childScope.ResolveMany&lt;IMyService&gt;().ToArray();
     // singleton should be the same as before, but 
     // the scoped object will be different
     Assert.Same(fromRoot1[0], fromChildScope1[0]);
     Assert.NotSame(fromRoot1[1], fromChildScope1[1]);
     Assert.NotSame(fromRoot1[2], fromChildScope1[2]);
 
-    var fromChildScope2 = childScope.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+    var fromChildScope2 = childScope.ResolveMany&lt;IMyService&gt;().ToArray();
     // the scoped object will be the same as above
     Assert.Same(fromChildScope1[0], fromChildScope2[0]);
     Assert.Same(fromChildScope1[1], fromChildScope2[1]);
@@ -254,120 +273,9 @@ using (var childScope = container.CreateScope())
 <li><code>[2]</code> is created once per call</li>
 </ul>
 <hr>
-<h1 id="lazy-vs-eager-enumerables">Lazy vs. Eager Enumerables</h1>
-<p>TODO</p>
 <h1 id="advanced-examples">Advanced examples</h1>
 <p>On to generics and decorators, now...</p>
-<h2 id="enumerables-of-open-generics">Enumerables of open generics</h2>
-<p>You can also register multiple open generics of the same type (e.g. <code>IFoo&lt;&gt;</code>), resolve an enumerable of 
-<code>IFoo&lt;Bar&gt;</code>, and the container will create an enumerable containing an object for each open generic registration:</p>
-<pre><code class="lang-csharp" name="UsesAnyService.cs">public interface IUsesAnyService&lt;TAnyService&gt;
-{
-    void UseTheService(TAnyService service);
-}
-
-public class UsesAnyService&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
-{
-    public void UseTheService(TAnyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public class UsesAnyService2&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
-{
-    public void UseTheService(TAnyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-</code></pre><pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
-container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
-container.RegisterType(typeof(UsesAnyService2&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
-
-var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
-
-Assert.Equal(2, result.Length);
-Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[0]);
-Assert.IsType&lt;UsesAnyService2&lt;IMyService&gt;&gt;(result[1]);
-</code></pre><h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
-<h3 id="all-possible-generics">All possible generics</h3>
-<div class="NOTE"><h5>Note</h5><p>The functionality described here represents a breaking change from 1.2 - which did not allow you to mix enumerables
-of objects from closed <em>and</em> open generic registrations.  The old behaviour can be re-enabled by setting the 
-<a class="xref" href="../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option to <c>false</c>, as shown in the next example.</p>
-</div>
-<p>Let&#39;s say that we have one open generic registration for <code>IUsesAnyService&lt;&gt;</code> to be used as a catch-all, but that
-when <code>IMyService</code> is used, we have two other types that we also want to use.</p>
-<p>In this case, we simply need to add one or more registration(s) for the concrete generic type, and Rezolver will 
-intelligently select all the generics that apply when building its enumerable.</p>
-<p>So, given these extra generic types:</p>
-<pre><code class="lang-csharp" name="UsesIMyService.cs">public class UsesIMyService : IUsesAnyService&lt;IMyService&gt;
-{
-    public void UseTheService(IMyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-public class UsesIMyService2 : IUsesAnyService&lt;IMyService&gt;
-{
-    public void UseTheService(IMyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-</code></pre><p>We can do this:</p>
-<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
-container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
-container.RegisterType&lt;UsesIMyService, IUsesAnyService&lt;IMyService&gt;&gt;();
-container.RegisterType&lt;UsesIMyService2, IUsesAnyService&lt;IMyService&gt;&gt;();
-
-var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
-var result2 = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;MyService&gt;&gt;&gt;().ToArray();
-
-//note the order - specific generic type matches first, followed by more general
-Assert.Equal(3, result.Length);
-Assert.IsType&lt;UsesIMyService&gt;(result[0]);
-Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
-Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[2]);
-
-Assert.Equal(1, result2.Length);
-Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
-</code></pre><p>When Rezolver matches its registrations for <code>IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;</code>, it sees the 
-two explicit registrations made against the closed generic type <code>IUsesAnyService&lt;IMyService&gt;</code> <strong><em>and</em></strong> the 
-registration against the open generic <code>IUsesAnyService&lt;&gt;</code> - hence you get an enumerable with <em>three</em> items.</p>
-<div class="TIP"><h5>Tip</h5><p>This is a common DI pattern when injecting enumerables of a generic type: one or more open generics which apply
-to &#39;all&#39; types of object, with potentially zero or more registrations which apply only to a specific type.  Rezolver 
-doesn&#39;t need to be told that&#39;s what you want - it just figures it out for itself.</p>
-</div>
-<p>The order you register open generics and closed generics doesn&#39;t matter - the logic is applied on a type-by-type
-basis running from most specific (less generic) to least specific (more generic); however, the order that objects 
-appear in the enumerable which come from the same generic type registration (i.e. <code>IFoo&lt;&gt;</code> or <code>IFoo&lt;Bar&gt;</code>) is honoured.</p>
-<h3 id="best-match-only">Best match <em>only</em></h3>
-<p>Sometimes, you might only want objects in your enumerable which were registered against the best-matched generic, so, if you
-have two open generic registrations for <code>IFoo&lt;&gt;</code> but a specific registration for <code>IFoo&lt;Bar&gt;</code>.  When requesting an 
-enumerable of <code>IFoo&lt;Baz&gt;</code>, you want the two objects registered against the open generic.  However, when you request
-an enumerable of <code>IFoo&lt;Bar&gt;</code>, you only want one object - from the specific <code>IFoo&lt;Bar&gt;</code> registration.</p>
-<p>As mentioned in the note in the previous example, to do this, we use the <a class="xref" href="../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option
-to control this globally for a container:</p>
-<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
-// same test - we&#39;re just setting an option on the container
-// which changes how generics are matched for the FetchAll() call
-// which sits behind the automatic enumerable resolving behaviour.
-container.SetOption&lt;Options.FetchAllMatchingGenerics&gt;(false);
-
-container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
-container.RegisterType&lt;UsesIMyService, IUsesAnyService&lt;IMyService&gt;&gt;();
-container.RegisterType&lt;UsesIMyService2, IUsesAnyService&lt;IMyService&gt;&gt;();
-
-// This time, this will only match the second two registrations which 
-// specialise for IUsesAnyService&lt;IMyService&gt;
-var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
-var result2 = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;MyService&gt;&gt;&gt;().ToArray();
-
-Assert.Equal(2, result.Length);
-Assert.IsType&lt;UsesIMyService&gt;(result[0]);
-Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
-</code></pre><h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
+<h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
 <div class="NOTE"><h5>Note</h5><p>At the time of writing, the <a href="decorators.html">decorators topic</a> has not been written, so this is preview of how to 
 use decorators as well as how they work in enumerables.</p>
 </div>
@@ -401,7 +309,7 @@ container.RegisterType&lt;MyService2, IMyService&gt;();
 container.RegisterType&lt;MyService3, IMyService&gt;();
 
 // create the container with these targets
-var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+var result = container.ResolveMany&lt;IMyService&gt;().ToArray();
 
 // make sure each item in the enumerable is an instance of our decorator.
 // then make sure the decorated services are correct.
@@ -428,7 +336,7 @@ container.RegisterDelegate&lt;IEnumerable&lt;IMyService&gt;&gt;(
     rc =&gt; new IMyService[] { rc.Resolve&lt;MyService2&gt;(), rc.Resolve&lt;MyService1&gt;() }
 );
 
-var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+var result = container.ResolveMany&lt;IMyService&gt;().ToArray();
 
 Assert.Equal(2, result.Length);
 Assert.IsType&lt;MyService2&gt;(result[0]);
