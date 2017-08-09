@@ -51,13 +51,13 @@ on a per-service basis.
 ### All possible generics
 
 > [!NOTE]
-> The functionality described here represents a breaking change from 1.2.
+> The new default functionality described here represents a breaking change from 1.2.
 > 
 > The old behaviour can be re-enabled by setting the @Rezolver.Options.FetchAllMatchingGenerics option 
-> to <c>false</c>, as shown in the next example.
+> to `false`, as shown in the next example.
 
 Let's say that we have one open generic registration for `IUsesAnyService<>` to be used as a catch-all, but that
-we also have specific implementations we also want to use for `IUsesAnyService<IMyService>`.
+we also have specific implementations we want to use for `IUsesAnyService<IMyService>` in addition to the catch-all.
 
 In this case, we simply need to add one or more registration(s) for the **_concrete_** generic type in addition
 to the open generic registrations, and Rezolver will intelligently select all the generics that apply when 

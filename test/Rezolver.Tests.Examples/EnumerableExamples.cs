@@ -237,9 +237,6 @@ namespace Rezolver.Tests.Examples
             var myService2Result = container.ResolveMany<IGeneric<MyService2>>().ToArray();
 
             Assert.Equal(2, myServiceResult.Length);
-
-            // but the second enumerable will only contain 1 because the option was set directly
-            // on its inner service type.
             Assert.Equal(1, myService2Result.Length);
             // </example6c>
             // NOTE ABOVE - OMITTING THE INDIVIDUAL ITEM CHECKS BECAUSE IT JUST REPEATS THE CONSTRAINTS TEST
@@ -249,7 +246,26 @@ namespace Rezolver.Tests.Examples
         public void ShouldDisableAllOpenGenericsForOneType()
         {
             // <example6d>
-#error todo.
+            var container = new Container();
+            container.SetOption<Options.FetchAllMatchingGenerics>(false, typeof(IGeneric<>));
+
+            // similar to the constraints example and the previous one, except this time we
+            // only have one open generic registration, and the other two that we have are closed
+            // (for IGeneric<MyService1> and IGeneric<MyService2>)
+            container.RegisterType(typeof(GenericAny<>), typeof(IGeneric<>));
+            // just reusing this open generic as a closed generic
+            container.RegisterType(typeof(GenericAnyMyService1<MyService1>), typeof(IGeneric<MyService1>));
+            container.RegisterType(typeof(GenericMyService2), typeof(IGeneric<MyService2>));
+
+            // ordinarily, both of these would return two results because of the IGeneric<> open
+            // registration.  But because the FetchAll behaviour has been disabled for all IGeneric<>
+            // types, both only get one result.
+            var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
+            var myService2Result = container.ResolveMany<IGeneric<MyService2>>().ToArray();
+
+            Assert.Equal(1, myService1Result.Length);
+            Assert.Equal(1, myService2Result.Length);
+            Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
             // </example6d>
         }
 
@@ -297,6 +313,44 @@ namespace Rezolver.Tests.Examples
             Assert.IsType<MyService2>(result[0]);
             Assert.IsType<MyService1>(result[1]);
             // </example8>
+        }
+
+        [Fact]
+        public void LazyEnumerable()
+        {
+            // <example9>
+            var container = new Container();
+            var instanceCounter = 0;
+
+            // ensures we get an enumerable with three items
+            container.RegisterType<CallsYouBackOnCreate>();
+            container.RegisterType<CallsYouBackOnCreate>();
+            container.RegisterType<CallsYouBackOnCreate>();
+
+            container.RegisterObject<Action<CallsYouBackOnCreate>>(
+                o => ++instanceCounter);
+
+            var items = container.ResolveMany<CallsYouBackOnCreate>();
+
+            var lastCounter = instanceCounter;
+            foreach(var item in items)
+            {
+                // every time we move next, a new item should be created,
+                // which, in turn, fires the delegate which increments the 
+                // counter
+                Assert.Equal(lastCounter + 1, instanceCounter);
+                lastCounter = instanceCounter;
+            }
+
+            // more importantly - if we enumerate it again, then the 
+            // objects are created again
+            foreach (var item in items)
+            {
+                Assert.Equal(lastCounter + 1, instanceCounter);
+                lastCounter = instanceCounter;
+            }
+#error TODO: the documentation for this example
+            // </example9>
         }
     }
 }

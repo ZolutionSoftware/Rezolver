@@ -16,7 +16,7 @@ against that type, in the order they were registered.
 > for all @Rezolver.ITargetContainer instances.
 
 You are not restricted in the targets you use to produce instances for an enumerable (e.g. @Rezolver.Targets.ObjectTarget,
-@Rezolver.Targets.ConstructorTarget or @Rezolver.Targets.DelegateTarget), and each one can have its
+@Rezolver.Targets.ConstructorTarget or <xref:Rezolver.Targets.DelegateTarget>), and each one can have its
 own lifetime (scoped/singleton etc).
 
 > [!TIP]
@@ -119,11 +119,7 @@ On to generics and decorators, now...
 
 ## Decorators and Enumerables
 
-> [!NOTE]
-> At the time of writing, the [decorators topic](decorators.md) has not been written, so this is preview of how to 
-> use decorators as well as how they work in enumerables.
-
-Decorators that have been registered against the element type of an enumerable will be applied to all instances 
+[Decorators](decorators.md) that have been registered against the element type of an enumerable will be applied to all instances 
 that the container produces for the enumerable.  This also applies to stacked decorators (where multiple decorators are
 applied on top of one other).
 
@@ -139,8 +135,9 @@ If more decorators were added, of course - then each element would be 're-decora
 
 ## Explicit `IEnumerable<T>` registrations
 
-Although you get `IEnumerable<T>` handling automatically, it doesn't prevent you from manually adding registrations
-which override the default behaviour.
+Although you get `IEnumerable<T>` handling automatically when the @Rezolver.Configuration.InjectEnumerables configuration 
+is applied (and not also disabled by the @Rezolver.Options.EnumerableInjection option being set to `false`), it doesn't 
+prevent you from manually adding registrations for specific `IEnumerable<>` types which override the default behaviour.
 
 For example, let's say that you have two registrations for services which share a common interface, but they have only
 been registered against their concrete type (perhaps it's historical code you can't risk changing). Your code 
@@ -152,7 +149,9 @@ use delegate registrations (note, there are *lots* of ways, this is just the mos
 * * *
 
 # Next steps
-- Recommend going to take (another) look at [decorators](decorators.md) - although, at the time of writing it might 
-not be written yet!
+- Read about how Rezolver handles building [enumerables of generics](enumerables/generics.md) from open and closed
+generic registrations.
+- Learn about Rezolver's support for [lazy and eager enumerables](enumerables/lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
+evaluated by default)
 - The [generic constructor injection](constructor-injection/generics.md) documentation contains more useful guidance 
 about open generics etc.

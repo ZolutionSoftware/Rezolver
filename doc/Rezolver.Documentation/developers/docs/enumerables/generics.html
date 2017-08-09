@@ -110,7 +110,7 @@
 <h1 id="enumerables-of-generics">Enumerables of Generics</h1>
 
 <p>Now you&#39;ve seen how Rezolver&#39;s <a href="../enumerables.html">automatic enumerable injection works</a>, let&#39;s move on to how 
-generics (specifically, open generic registrations) work in the context of enumerable injection.</p>
+generics work in the context of enumerable injection.</p>
 <h2 id="open-generics">Open Generics</h2>
 <p>You can register multiple open generics of the same type (e.g. <code>IFoo&lt;&gt;</code>), resolve an enumerable of 
 <code>IFoo&lt;Bar&gt;</code>, and the container will create an enumerable containing an object for each open generic registration:</p>
@@ -202,7 +202,7 @@ Assert.IsType&lt;GenericAnyIMyService&lt;MyService1&gt;&gt;(myService1Result[1])
 Assert.IsType&lt;GenericAnyMyService1&lt;MyService1&gt;&gt;(myService1Result[2]);
 </code></pre><h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
 <p>In many applications which use DI and generics, you often have &#39;common&#39; open generic registrations, such as
-those in the &#39;enumerables of open generics&#39; example above, and then specific registrations for one or more 
+those in the <a href="#open-generics">first example above</a>, and then specific registrations for one or more 
 well-known <em>closed</em> generics.</p>
 <p>When resolving a single instance for a given generic, Rezolver will of course select the newest <em>most specific</em> 
 registration it can find.  This means that if you have registrations for both <code>IFoo&lt;&gt;</code> and <code>IFoo&lt;Bar&gt;</code> and 
@@ -218,9 +218,11 @@ the container, it searches for registrations for the following types, in this or
 <code>IGeneric&lt;IFoo&lt;IBar&gt;&gt;</code> was the last to be added to the target container, it&#39;s still returned first.</p>
 </div>
 <p>If, however, you request an <code>IEnumerable&lt;IFoo&lt;Bar&gt;&gt;</code>, what should Rezolver return?</p>
-<p>The answer is: it depends on your specific need.  Sometimes you might want all applicable objects to be returned,
-and sometimes you might only want the best-matched registrations to be used.</p>
-<p>The good news is that it&#39;s easy to tell Rezolver which of the behaviours you want it to observe.</p>
+<p>The answer is: it depends on your specific need.  Sometimes you might want all applicable objects to be returned
+(the default behaviour), and sometimes you might only want the best-matched registrations (i.e. the first batch
+of registrations found for one of the generic types being searched, as per the above Tip callout) to be used.</p>
+<p>The good news is that it&#39;s easy to tell Rezolver which of the behaviours you want it to use - both globally and
+on a per-service basis.</p>
 <h3 id="all-possible-generics">All possible generics</h3>
 <div class="NOTE"><h5>Note</h5><p>The functionality described here represents a breaking change from 1.2.</p>
 <p>The old behaviour can be re-enabled by setting the <a class="xref" href="../../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option 
@@ -228,8 +230,9 @@ to <c>false</c>, as shown in the next example.</p>
 </div>
 <p>Let&#39;s say that we have one open generic registration for <code>IUsesAnyService&lt;&gt;</code> to be used as a catch-all, but that
 we also have specific implementations we also want to use for <code>IUsesAnyService&lt;IMyService&gt;</code>.</p>
-<p>In this case, we simply need to add one or more registration(s) for the <strong><em>concrete</em></strong> generic type, and Rezolver will 
-intelligently select all the generics that apply when building its enumerable.</p>
+<p>In this case, we simply need to add one or more registration(s) for the <strong><em>concrete</em></strong> generic type in addition
+to the open generic registrations, and Rezolver will intelligently select all the generics that apply when 
+building its enumerable.</p>
 <p>So, given these extra generic types:</p>
 <pre><code class="lang-csharp" name="UsesIMyService.cs">public class UsesIMyService : IUsesAnyService&lt;IMyService&gt;
 {
@@ -262,7 +265,7 @@ Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[2]);
 
 Assert.Equal(1, result2.Length);
 Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
-</code></pre><p>In the simplest terms, what we&#39;re seeing here is the container wlaking through all the possible generic serevice types
+</code></pre><p>In the simplest terms, what we&#39;re seeing here is the container walking through all the possible generic service types
 that could apply for the requested type, and returning all the instances produced by all those registrations.</p>
 <p>Note that the order of individual items which were registered against the same generic type (e.g. <code>IUsesAnyService&lt;&gt;</code>)
 is maintained, but the <em>most</em>-specific generics are being returned first.</p>
@@ -295,15 +298,16 @@ Assert.Equal(2, result.Length);
 Assert.IsType&lt;UsesIMyService&gt;(result[0]);
 Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
 </code></pre><h3 id="best-match-only-per-service">Best match <em>only</em> (per-service)</h3>
-<p>We can also control this on a per-generic basis - simply set the <a class="xref" href="../../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option to
-<code>false</code> for a given open generic service type, and it will be disabled only for that generic (and any any of its derivatives).</p>
-<p>Here, we&#39;re using the same types that we introduced for the constrained generics example.</p>
+<p>We can also control this on a per-service basis - simply set the <a class="xref" href="../../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option to
+<code>false</code> for a given service type.</p>
+<p>Here, we&#39;re using the same types that we introduced for the <a href="#constrained-generics">constrained generics example</a>, 
+and disabling the &#39;fetch all&#39; behaviour for a specific closed generic:</p>
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
 // set this option for the IGeneric&lt;MyService2&gt; service ONLY
 container.SetOption&lt;Options.FetchAllMatchingGenerics&gt;(false, typeof(IGeneric&lt;MyService2&gt;));
 
 // same registrations as our constrained generics example plus an 
-// extra for IGeneric&lt;MyService2&gt; so we can 
+// extra for IGeneric&lt;MyService2&gt; which will &#39;win&#39;.
 container.RegisterType(typeof(GenericAny&lt;&gt;), typeof(IGeneric&lt;&gt;));
 container.RegisterType(typeof(GenericAnyIMyService&lt;&gt;), typeof(IGeneric&lt;&gt;));
 container.RegisterType(typeof(GenericAnyMyService1&lt;&gt;), typeof(IGeneric&lt;&gt;));
@@ -313,14 +317,32 @@ container.RegisterType(typeof(GenericMyService2), typeof(IGeneric&lt;MyService2&
 var myServiceResult = container.ResolveMany&lt;IGeneric&lt;MyService&gt;&gt;().ToArray();
 // would normally get three (via 1st, 2nd and 4th registrations), but will only
 // get one.
-var myService1Result = container.ResolveMany&lt;IGeneric&lt;MyService2&gt;&gt;().ToArray();
+var myService2Result = container.ResolveMany&lt;IGeneric&lt;MyService2&gt;&gt;().ToArray();
 
-Assert.Equal(1, myServiceResult.Length);
-Assert.IsType&lt;GenericAnyIMyService&lt;MyService&gt;&gt;(myServiceResult[0]);
+Assert.Equal(2, myServiceResult.Length);
+Assert.Equal(1, myService2Result.Length);
+</code></pre><p>You can also set this against an open generic - which then has the same effect but for all genercis based on the same
+open generic (here we&#39;re disabling it for <code>IGeneric&lt;&gt;</code>)</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+container.SetOption&lt;Options.FetchAllMatchingGenerics&gt;(false, typeof(IGeneric&lt;&gt;));
 
-// but the second enumerable will still contain all 3 because the default value for
-// the option is to return all matching generics
-Assert.Equal(3, myService1Result.Length);
+// similar to the constraints example and the previous one, except this time we
+// only have one open generic registration, and the other two that we have are closed
+// (for IGeneric&lt;MyService1&gt; and IGeneric&lt;MyService2&gt;)
+container.RegisterType(typeof(GenericAny&lt;&gt;), typeof(IGeneric&lt;&gt;));
+// just reusing this open generic as a closed generic
+container.RegisterType(typeof(GenericAnyMyService1&lt;MyService1&gt;), typeof(IGeneric&lt;MyService1&gt;));
+container.RegisterType(typeof(GenericMyService2), typeof(IGeneric&lt;MyService2&gt;));
+
+// ordinarily, both of these would return two results because of the IGeneric&lt;&gt; open
+// registration.  But because the FetchAll behaviour has been disabled for all IGeneric&lt;&gt;
+// types, both only get one result.
+var myService1Result = container.ResolveMany&lt;IGeneric&lt;MyService1&gt;&gt;().ToArray();
+var myService2Result = container.ResolveMany&lt;IGeneric&lt;MyService2&gt;&gt;().ToArray();
+
+Assert.Equal(1, myService1Result.Length);
+Assert.Equal(1, myService2Result.Length);
+Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
 </code></pre></article>
           </div>
           

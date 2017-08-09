@@ -276,10 +276,7 @@ using (var childScope = container.CreateScope())
 <h1 id="advanced-examples">Advanced examples</h1>
 <p>On to generics and decorators, now...</p>
 <h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
-<div class="NOTE"><h5>Note</h5><p>At the time of writing, the <a href="decorators.html">decorators topic</a> has not been written, so this is preview of how to 
-use decorators as well as how they work in enumerables.</p>
-</div>
-<p>Decorators that have been registered against the element type of an enumerable will be applied to all instances 
+<p><a href="decorators.html">Decorators</a> that have been registered against the element type of an enumerable will be applied to all instances 
 that the container produces for the enumerable.  This also applies to stacked decorators (where multiple decorators are
 applied on top of one other).</p>
 <p>So, we have two decorator types for <code>IMyService</code>:</p>
@@ -319,8 +316,9 @@ Assert.IsType&lt;MyService2&gt;(((MyServiceDecorator1)result[1]).Inner);
 Assert.IsType&lt;MyService3&gt;(((MyServiceDecorator1)result[2]).Inner);
 </code></pre><p>If more decorators were added, of course - then each element would be &#39;re-decorated&#39; accordingly.</p>
 <h2 id="explicit-ienumerablet-registrations">Explicit <code>IEnumerable&lt;T&gt;</code> registrations</h2>
-<p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically, it doesn&#39;t prevent you from manually adding registrations
-which override the default behaviour.</p>
+<p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically when the <a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration 
+is applied (and not also disabled by the <a class="xref" href="../api/Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option being set to <code>false</code>), it doesn&#39;t 
+prevent you from manually adding registrations for specific <code>IEnumerable&lt;&gt;</code> types which override the default behaviour.</p>
 <p>For example, let&#39;s say that you have two registrations for services which share a common interface, but they have only
 been registered against their concrete type (perhaps it&#39;s historical code you can&#39;t risk changing). Your code 
 now wants an enumerable of that common interface.  Well, assuming you know what the specific registrations are - you can
@@ -344,8 +342,10 @@ Assert.IsType&lt;MyService1&gt;(result[1]);
 </code></pre><hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
-<li>Recommend going to take (another) look at <a href="decorators.html">decorators</a> - although, at the time of writing it might 
-not be written yet!</li>
+<li>Read about how Rezolver handles building <a href="enumerables/generics.html">enumerables of generics</a> from open and closed
+generic registrations.</li>
+<li>Learn about Rezolver&#39;s support for <a href="enumerables/lazy-vs-eager.html">lazy and eager enumerables</a> (note: all auto-generated enumerables are lazily 
+evaluated by default)</li>
 <li>The <a href="constructor-injection/generics.html">generic constructor injection</a> documentation contains more useful guidance 
 about open generics etc.</li>
 </ul>
