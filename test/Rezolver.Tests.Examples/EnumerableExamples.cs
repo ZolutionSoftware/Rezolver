@@ -332,6 +332,9 @@ namespace Rezolver.Tests.Examples
 
             var items = container.ResolveMany<CallsYouBackOnCreate>();
 
+            // start by asserting that no instances have been created yet
+            Assert.Equal(0, instanceCounter);
+
             var lastCounter = instanceCounter;
             foreach(var item in items)
             {
@@ -349,8 +352,85 @@ namespace Rezolver.Tests.Examples
                 Assert.Equal(lastCounter + 1, instanceCounter);
                 lastCounter = instanceCounter;
             }
-#error TODO: the documentation for this example
             // </example9>
+        }
+
+        [Fact]
+        public void EagerEnumerable_Global()
+        {
+            // <example10>
+            var container = new Container();
+            var instanceCounter = 0;
+
+            // set this option to disable lazy enumerables globally
+            container.SetOption<Options.LazyEnumerables>(false);
+
+            container.RegisterType<CallsYouBackOnCreate>();
+            container.RegisterType<CallsYouBackOnCreate>();
+            container.RegisterType<CallsYouBackOnCreate>();
+
+            container.RegisterObject<Action<CallsYouBackOnCreate>>(
+                o => ++instanceCounter);
+
+            var items = container.ResolveMany<CallsYouBackOnCreate>();
+
+            // this time all instances will be created immediately.
+            Assert.Equal(3, instanceCounter);
+
+            // and we'll just assert that the instance count never changes
+            foreach(var item in items)
+            {
+                Assert.Equal(3, instanceCounter);
+            }
+
+            foreach (var item in items)
+            {
+                Assert.Equal(3, instanceCounter);
+            }
+            // </example10>
+        }
+
+        [Fact]
+        public void EagerEnumerable_PerService()
+        {
+            // <example11>
+            // for this test we'll drop the two foreach loops and just use .ToArray()
+            var container = new Container();
+            var instanceCounter1 = 0;
+            var instanceCounter2 = 0;
+
+            // set this option to disable lazy enumerables only for 
+            // the type 'CallsYouBackOnCreate2'
+            container.SetOption<Options.LazyEnumerables, CallsYouBackOnCreate2>(false);
+
+            container.RegisterType<CallsYouBackOnCreate>();
+            container.RegisterType<CallsYouBackOnCreate>();
+            container.RegisterType<CallsYouBackOnCreate>();
+            container.RegisterObject<Action<CallsYouBackOnCreate>>(
+                o => ++instanceCounter1);
+
+            container.RegisterType<CallsYouBackOnCreate2>();
+            container.RegisterType<CallsYouBackOnCreate2>();
+            container.RegisterType<CallsYouBackOnCreate2>();
+            container.RegisterObject<Action<CallsYouBackOnCreate2>>(
+                o => ++instanceCounter2);
+
+            // will be lazy
+            var items1 = container.ResolveMany<CallsYouBackOnCreate>();
+            Assert.Equal(0, instanceCounter1);
+
+            // will be eager
+            var items2 = container.ResolveMany<CallsYouBackOnCreate2>();
+            Assert.Equal(3, instanceCounter2);
+
+            var array1a = items1.ToArray();
+            var array1b = items1.ToArray();
+            var array2a = items2.ToArray();
+            var array2b = items2.ToArray();
+
+            Assert.Equal(6, instanceCounter1);
+            Assert.Equal(3, instanceCounter2);
+            // </example11>
         }
     }
 }

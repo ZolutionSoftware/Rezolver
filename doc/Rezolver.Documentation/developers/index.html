@@ -124,8 +124,8 @@ with Asp.Net Core integration.</p>
 </li>
 <li><a href="docs/constructor-injection/generics.html">Open Generic Constructor Injection</a> (with specific closed generics taking precedence)</li>
 <li><a href="docs/enumerables.html">Enumerables</a> (empty enumerables returned by default)<ul>
-<li>Lazy and Eager enumerables - configurable on a per-type basis (new in 1.3)</li>
-<li>Enumerables of generics - from least generic (e.g. <code>IFoo&lt;Bar&gt;</code>) to most generic (<code>IFoo&lt;&gt;</code>)</li>
+<li><a href="docs/enumerables/lazy-vs-eager.html">Lazy and eager enumerables</a> - configurable on a per-type basis (new in 1.3)</li>
+<li><a href="docs/enumerables/generics.html">Enumerables of generics</a> - from least generic (e.g. <code>IFoo&lt;Bar&gt;</code>) to most generic (<code>IFoo&lt;&gt;</code>)</li>
 </ul>
 </li>
 <li><code>List&lt;T&gt;</code> injection<ul>
@@ -140,7 +140,7 @@ with Asp.Net Core integration.</p>
 <li>Non-generic &amp; generic</li>
 <li>Specialised generic (<em>where a decorator for <code>IFoo&lt;&gt;</code> is redecorated by another decorator for <code>IFoo&lt;Bar&gt;</code> only when
 <code>IFoo&lt;Bar&gt;</code> is requested</em>)</li>
-<li>Enumerables of decorated instances</li>
+<li><a href="docs/enumerables.html#decorators-and-enumerables">Enumerables of decorated instances</a></li>
 </ul>
 </li>
 <li>Contravariant generics (e.g. <code>Action&lt;IFoo&gt;</code> registration automatically used for <code>Action&lt;Foo&gt;</code>)<ul>

@@ -14,5 +14,13 @@ namespace Rezolver.Tests.Examples.Types
             callback(this);
         }
     }
+
+    public class CallsYouBackOnCreate2
+    {
+        public CallsYouBackOnCreate2(Action<CallsYouBackOnCreate2> callback)
+        {
+            callback(this);
+        }
+    }
     // </example>
 }

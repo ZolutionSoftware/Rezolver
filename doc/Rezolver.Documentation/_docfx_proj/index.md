@@ -23,8 +23,8 @@ _Linked topics provide high level overviews and examples in our developer guide 
   - [Member injection](docs/constructor-injection/member-injection.md) (extensible)
 - [Open Generic Constructor Injection](docs/constructor-injection/generics.md) (with specific closed generics taking precedence)
 - [Enumerables](docs/enumerables.md) (empty enumerables returned by default)
-  - Lazy and Eager enumerables - configurable on a per-type basis (new in 1.3)
-  - Enumerables of generics - from least generic (e.g. `IFoo<Bar>`) to most generic (`IFoo<>`)
+  - [Lazy and eager enumerables](docs/enumerables/lazy-vs-eager.md) - configurable on a per-type basis (new in 1.3)
+  - [Enumerables of generics](docs/enumerables/generics.md) - from least generic (e.g. `IFoo<Bar>`) to most generic (`IFoo<>`)
 - `List<T>` injection
   - Also `IList<T>` and `IReadOnlyList<T>`
 - `Collection<T>` injection
@@ -33,7 +33,7 @@ _Linked topics provide high level overviews and examples in our developer guide 
   - Non-generic & generic
   - Specialised generic (*where a decorator for `IFoo<>` is redecorated by another decorator for `IFoo<Bar>` only when
 `IFoo<Bar>` is requested*)
-  - Enumerables of decorated instances
+  - [Enumerables of decorated instances](docs/enumerables.md#decorators-and-enumerables)
 - Contravariant generics (e.g. `Action<IFoo>` registration automatically used for `Action<Foo>`)
   - Can be enabled and disabled globally and per-type
 - Constrained generics

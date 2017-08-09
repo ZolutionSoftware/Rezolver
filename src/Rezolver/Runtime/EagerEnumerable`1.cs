@@ -8,7 +8,7 @@ namespace Rezolver.Runtime
 {
     /// <summary>
     /// Direct implementation of <see cref="IEnumerable{T}"/> for eagerly loaded enumerables when <see cref="Options.LazyEnumerables"/>
-    /// has been disabled either globally, or for a specific type of enumerable.
+    /// has been disabled either globally, or for a specific enumerable's element type.
     /// 
     /// Rezolver uses this type instead of an array to prevent casting and modifying the contents of the enumerable.
     /// </summary>

@@ -32,7 +32,7 @@ namespace Rezolver.Compilation.Expressions
         /// ## Lazy vs Eager loading
         /// 
         /// The option <see cref="Options.LazyEnumerables"/> is read from the <paramref name="context"/> for the 
-        /// <see cref="ITarget.DeclaredType"/> of the <paramref name="target"/>.  If it is equivalent to <c>true</c> 
+        /// <see cref="EnumerableTarget.ElementType"/> of the <paramref name="target"/>.  If it is equivalent to <c>true</c> 
         /// (the <see cref="Options.LazyEnumerables.Default"/>), then a lazily-loaded enumerable is constructed which will
         /// create new instances of each object in the enumerable each time it is enumerated.
         /// 
@@ -40,7 +40,7 @@ namespace Rezolver.Compilation.Expressions
         /// enumerable is constructed.</remarks>
         protected override Expression Build(EnumerableTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            if (context.GetOption(target.DeclaredType, Options.LazyEnumerables.Default))
+            if (context.GetOption(target.ElementType, Options.LazyEnumerables.Default))
             {
                 var all = target.Targets.Select(t => compiler.BuildResolveLambda(t, context.NewContext(target.ElementType)));
                 return Expression.New(

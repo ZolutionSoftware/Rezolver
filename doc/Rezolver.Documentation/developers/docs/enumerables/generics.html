@@ -224,12 +224,12 @@ of registrations found for one of the generic types being searched, as per the a
 <p>The good news is that it&#39;s easy to tell Rezolver which of the behaviours you want it to use - both globally and
 on a per-service basis.</p>
 <h3 id="all-possible-generics">All possible generics</h3>
-<div class="NOTE"><h5>Note</h5><p>The functionality described here represents a breaking change from 1.2.</p>
+<div class="NOTE"><h5>Note</h5><p>The new default functionality described here represents a breaking change from 1.2.</p>
 <p>The old behaviour can be re-enabled by setting the <a class="xref" href="../../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option 
-to <c>false</c>, as shown in the next example.</p>
+to <code>false</code>, as shown in the next example.</p>
 </div>
 <p>Let&#39;s say that we have one open generic registration for <code>IUsesAnyService&lt;&gt;</code> to be used as a catch-all, but that
-we also have specific implementations we also want to use for <code>IUsesAnyService&lt;IMyService&gt;</code>.</p>
+we also have specific implementations we want to use for <code>IUsesAnyService&lt;IMyService&gt;</code> in addition to the catch-all.</p>
 <p>In this case, we simply need to add one or more registration(s) for the <strong><em>concrete</em></strong> generic type in addition
 to the open generic registrations, and Rezolver will intelligently select all the generics that apply when 
 building its enumerable.</p>

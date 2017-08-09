@@ -32,22 +32,19 @@ namespace Rezolver.Tests.Compilation.Specification
                 var targets = CreateTargetContainer();
 
                 targets.RegisterType<InstanceCountingType>();
+                targets.RegisterType<InstanceCountingType>();
+                targets.RegisterType<InstanceCountingType>();
 
                 var container = CreateContainer(targets);
                 var result = container.Resolve<IEnumerable<InstanceCountingType>>();
 
                 Assert.NotNull(result);
-                int expectedInstanceID = session.InitialInstanceCount;
-                // every enumeration should generate new instances.
-                foreach(var instance in result)
-                {
-                    Assert.Equal(++expectedInstanceID, instance.ThisInstanceID);
-                }
+                Assert.Equal(0, session.InstanceCount);
 
-                foreach(var instance in result)
-                {
-                    Assert.Equal(++expectedInstanceID, instance.ThisInstanceID);
-                }
+                var array1 = result.ToArray();
+                var array2 = result.ToArray();
+
+                Assert.Equal(6, session.InstanceCount);
             }
         }
 
@@ -62,23 +59,57 @@ namespace Rezolver.Tests.Compilation.Specification
                 targets.SetOption<Options.LazyEnumerables>(false);
 
                 targets.RegisterType<InstanceCountingType>();
+                targets.RegisterType<InstanceCountingType>();
+                targets.RegisterType<InstanceCountingType>();
 
                 var container = CreateContainer(targets);
                 var result = container.Resolve<IEnumerable<InstanceCountingType>>();
 
                 Assert.NotNull(result);
+                Assert.Equal(3, session.InstanceCount);
 
-                int expectedInstanceID = session.InitialInstanceCount;
+                var array1 = result.ToArray();
+                var array2 = result.ToArray();
 
-                foreach(var instance in result)
+                Assert.Equal(3, session.InstanceCount);
+            }
+        }
+
+        [Fact]
+        public void Enumerable_ShouldCreateEagerLoaded_OneTypeOnly()
+        {
+            // Demonstrating that we can control lazy enumerables on a per-type basis
+            using (var session1 = InstanceCountingType.NewSession())
+            {
+                using (var session2 = InstanceCountingType2.NewSession())
                 {
-                    Assert.Equal(++expectedInstanceID, instance.ThisInstanceID);
-                }
+                    var targets = CreateTargetContainer();
+                    targets.SetOption<Options.LazyEnumerables, InstanceCountingType2>(false);
 
-                expectedInstanceID = session.InitialInstanceCount;
-                foreach (var instance in result)
-                {
-                    Assert.Equal(++expectedInstanceID, instance.ThisInstanceID);
+                    targets.RegisterType<InstanceCountingType>();
+                    targets.RegisterType<InstanceCountingType>();
+                    targets.RegisterType<InstanceCountingType>();
+
+                    targets.RegisterType<InstanceCountingType2>();
+                    targets.RegisterType<InstanceCountingType2>();
+                    targets.RegisterType<InstanceCountingType2>();
+
+                    var container = CreateContainer(targets);
+                    var result1 = container.Resolve<IEnumerable<InstanceCountingType>>();
+                    var result2 = container.Resolve<IEnumerable<InstanceCountingType2>>();
+
+                    Assert.NotNull(result1);
+                    Assert.NotNull(result2);
+                    Assert.Equal(0, session1.InstanceCount);
+                    Assert.Equal(3, session2.InstanceCount);
+
+                    var array1a = result1.ToArray();
+                    var array1b = result1.ToArray();
+                    var array2a = result2.ToArray();
+                    var array2b = result2.ToArray();
+
+                    Assert.Equal(6, session1.InstanceCount);
+                    Assert.Equal(3, session2.InstanceCount);
                 }
             }
         }

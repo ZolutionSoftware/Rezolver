@@ -35,7 +35,7 @@ var enumerable = container.Resolve<IEnumerable<Foo>>();
 However, the `ResolveMany` extension method (see <xref:Rezolver.ContainerResolveExtensions.ResolveMany*>
 and <xref:Rezolver.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortut which allow you to pass
 just the element type of the enumerable to reduce the 'angle-bracket percent' of code which directly resolves
-enumerables:
+enumerables (which of course you won't be doing because you're not using 'service location' are you!? ;) ):
 
 ```cs
 // this is equivalent to resolving IEnumerable<Foo>
@@ -112,16 +112,11 @@ To summarise:
 
 * * *
 
-# Advanced examples
-
-On to generics and decorators, now...
-
-
 ## Decorators and Enumerables
 
-[Decorators](decorators.md) that have been registered against the element type of an enumerable will be applied to all instances 
-that the container produces for the enumerable.  This also applies to stacked decorators (where multiple decorators are
-applied on top of one other).
+[Decorators](decorators.md) that have been registered against the element type of an enumerable will be applied to all 
+instances that the container produces for the enumerable.  This also applies to stacked decorators (where multiple 
+decorators are applied on top of one other).
 
 So, we have two decorator types for `IMyService`:
 
@@ -132,6 +127,12 @@ And in this example we'll have one of those decorators being used to decorate th
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example7)]
 
 If more decorators were added, of course - then each element would be 're-decorated' accordingly.
+
+> [!TIP]
+> You can also decorate `IEnumerable<T>` instances without breaking Rezolver's automatic enumerable injection 
+> functionality.
+
+***
 
 ## Explicit `IEnumerable<T>` registrations
 
@@ -146,6 +147,11 @@ use delegate registrations (note, there are *lots* of ways, this is just the mos
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example8)]
 
+> [!WARNING]
+> As soon as you create a manual registration for a particular `IEnumerable<T>` type, Rezolver no longer has any control
+> over how that particular enumerable is produced - so none of the enumerable-related options demonstrated in this documentation 
+> will be honoured.
+
 * * *
 
 # Next steps
@@ -153,5 +159,3 @@ use delegate registrations (note, there are *lots* of ways, this is just the mos
 generic registrations.
 - Learn about Rezolver's support for [lazy and eager enumerables](enumerables/lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
 evaluated by default)
-- The [generic constructor injection](constructor-injection/generics.md) documentation contains more useful guidance 
-about open generics etc.
