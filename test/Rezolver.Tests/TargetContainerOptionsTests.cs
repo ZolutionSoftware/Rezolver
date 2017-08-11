@@ -112,5 +112,74 @@ namespace Rezolver.Tests
 
             Assert.Equal("for baseclass", targets.GetOption<TestOption, BaseClassChild>());
         }
+
+        [Fact]
+        public void GetOptions_ShouldReturnEmptyIfNoneSet()
+        {
+            var targets = new TargetContainer();
+            Assert.Empty(targets.GetOptions<TestOption>());
+        }
+
+        [Fact]
+        public void GetOptions_ShouldGetAllSetOptions()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<TestOption>("first");
+            targets.SetOption<TestOption>("second");
+            targets.SetOption<TestOption>("third");
+
+            Assert.Equal(new[] { "first", "second", "third" },
+                targets.GetOptions<TestOption>().Select(o => (string)o));
+        }
+
+        [Fact]
+        public void GetOptions_ShouldGetAllServiceSpecificOptions()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<TestOption, int>("first");
+            targets.SetOption<TestOption, int>("second");
+            targets.SetOption<TestOption, int>("third");
+
+            Assert.Equal(new[] { "first", "second", "third" },
+                targets.GetOptions<TestOption, int>().Select(o => (string)o));
+        }
+
+        [Fact]
+        public void GetOptions_ShouldGetAllGenericServiceSpecificOptions()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<TestOption, IEnumerable<int>>("specific");
+            targets.SetOption<TestOption>("generic", typeof(IEnumerable<>));
+
+            Assert.Equal(new[] { "specific", "generic" },
+                targets.GetOptions<TestOption, IEnumerable<int>>().Select(o => (string)o));
+
+            Assert.Equal(new[] { "generic" },
+                targets.GetOptions<TestOption, IEnumerable<string>>().Select(o => (string)o));
+        }
+
+        [Fact]
+        public void GetOptions_GlobalOptionsShouldBeIncludedLast()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<TestOption>("global");
+            targets.SetOption<TestOption, int>("int");
+
+            Assert.Equal(new[] { "int", "global" },
+                targets.GetOptions<TestOption, int>().Select(o => (string)o));
+        }
+
+        [Fact]
+        public void GetOptions_GlobalOptionsShouldBeExcludedIfDisabled()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<EnableGlobalOptions>(false);
+
+            targets.SetOption<TestOption>("global");
+            targets.SetOption<TestOption, int>("int");
+
+            Assert.Equal(new[] { "int" },
+                targets.GetOptions<TestOption, int>().Select(o => (string)o));
+        }
     }
 }

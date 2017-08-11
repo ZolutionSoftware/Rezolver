@@ -18,7 +18,25 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeHelpers
 	{
-		internal static bool IsPublic(Type type)
+        internal static Type MakeArrayType(Type type, int rank = 1)
+        {
+#if DOTNET
+            return type.GetTypeInfo().MakeArrayType(rank);
+#else
+            return type.MakeArrayType(rank);
+#endif
+        }
+
+        internal static Type GetElementType(Type type)
+        {
+#if DOTNET
+            return type.GetTypeInfo().GetElementType();
+#else
+            return type.GetElementType();
+#endif
+        }
+
+        internal static bool IsPublic(Type type)
 		{
 #if DOTNET
 			return type.GetTypeInfo().IsPublic;
@@ -60,7 +78,7 @@ namespace Rezolver
             return type.GetTypeInfo().GenericParameterAttributes;
 #else
 			return type.GenericParameterAttributes;
-#endif 
+#endif
         }
         
         internal static bool IsValueType(Type type)

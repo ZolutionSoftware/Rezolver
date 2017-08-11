@@ -46,7 +46,7 @@ namespace Rezolver.Configuration
         /// <param name="optionConfigurationRequired"></param>
         public OptionDependentConfig(bool optionConfigurationRequired)
         {
-            _baseDependencies = new[] { this.CreateTypeDependency<ConfigureOption<TOption>>(optionConfigurationRequired) };
+            _baseDependencies = new[] { this.CreateTypeDependency<Configure<TOption>>(optionConfigurationRequired) };
         }
 
         /// <summary>

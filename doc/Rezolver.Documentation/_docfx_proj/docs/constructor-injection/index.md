@@ -256,8 +256,6 @@ Note that the single parameter constructor defaults the `StartDate` to `DateTime
 What happens is that the named arguments contribute to the argument binding process - thus allowing us to 'cheat' and promote a constructor to being
 a better match than the one that would normally be.
 
-
-
 > [!WARNING]
 > Obviously - named argument binding is potentially very brittle - as if the parameter name changes, then the binding will no longer work.
 >

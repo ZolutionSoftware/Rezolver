@@ -29,7 +29,7 @@ namespace Rezolver
         /// Never null.  Returns the root target container.
         /// </summary>
         /// <value>If this instance is created with a root
-        /// passed to the <see cref="TargetDictionaryContainer.TargetDictionaryContainer(ITargetContainer)"/>
+        /// passed to the <see cref="TargetDictionaryContainer(ITargetContainer)"/>
         /// constructor, then it will be returned by this property.
         /// 
         /// Otherwise it will return this instance.</value>
@@ -77,8 +77,25 @@ namespace Rezolver
         }
 
         /// <summary>
+        /// Gets the type to use for registering/querying for an <see cref="ITargetContainer"/> for
+        /// for a given requested type (in the <see cref="Fetch(Type)"/>, <see cref="FetchAll(Type)"/>
+        /// or <see cref="FetchContainer(Type)"/>).
+        /// </summary>
+        /// <param name="targetType">The type of object you (presumably, eventually) want targets that can build.</param>
+        /// <returns>The base implementation always returns <paramref name="targetType"/></returns>
+        /// <remarks>This is an extension hook which allows derived types to redirect targets with particular
+        /// <see cref="ITarget.DeclaredType"/>s to be directed towards child <see cref="ITargetContainer"/> objects
+        /// which are bound to different (but, usually related) types.
+        /// 
+        /// It is through this functionality that we can push all </remarks>
+        protected virtual Type GetContainerType(Type targetType)
+        {
+
+        }
+
+        /// <summary>
         /// Obtains a child container that was previously registered by the passed
-        /// <paramref name="type"/>.
+        /// <paramref name="type"/>.  Note - the type 
         /// 
         /// Returns null if no entry is found.
         /// </summary>

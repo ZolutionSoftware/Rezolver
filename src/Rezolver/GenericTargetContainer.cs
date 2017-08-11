@@ -17,7 +17,7 @@ namespace Rezolver
     /// </summary>
     /// <seealso cref="Rezolver.TargetDictionaryContainer" />
     /// <remarks>You don't typically use this container directly - it is implicitly added to an <see cref="ITargetContainer"/>
-    /// when generic types are registered.  Indeed the <see cref="TargetContainer"/> and <see cref="DecoratingTargetContainer"/> booth
+    /// when generic types are registered.  Indeed the <see cref="TargetContainer"/> and <see cref="DecoratingTargetContainer"/> both
     /// create instances of this; and the <see cref="EnumerableTargetContainer"/> (understandably) inherits from it.</remarks>
     public class GenericTargetContainer : TargetDictionaryContainer
     {

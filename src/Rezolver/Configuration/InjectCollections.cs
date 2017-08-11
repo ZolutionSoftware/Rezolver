@@ -17,7 +17,7 @@ namespace Rezolver.Configuration
     /// 
     /// In normal operation, this configuration is applied by default to <see cref="TargetContainer"/> and <see cref="OverridingTargetContainer"/> instances via the
     /// <see cref="TargetContainer.DefaultConfig"/> combined config.  To use the <see cref="Options.CollectionInjection"/> option to disable it, you can use
-    /// the <see cref="ConfigureOption{TOption}"/> configuration to configure the <see cref="Options.CollectionInjection"/> option to <c>false</c>.  The easiest way to do
+    /// the <see cref="Configure{TOption}"/> configuration to configure the <see cref="Options.CollectionInjection"/> option to <c>false</c>.  The easiest way to do
     /// that is via the <see cref="CombinedTargetContainerConfigExtensions.ConfigureOption{TOption}(CombinedTargetContainerConfig, TOption)"/> extension method or
     /// one of its overloads.
     /// 

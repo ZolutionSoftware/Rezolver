@@ -1,6 +1,7 @@
 ﻿using Rezolver.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Rezolver
@@ -22,7 +23,7 @@ namespace Rezolver
     /// ability to actually register more than one target for a particular service in the first place is controlled by the 
     /// <see cref="Options.AllowMultiple"/> option.
     /// 
-    /// ## Types of options
+    /// **Types of options**
     /// 
     /// Ultimately an option can be of any type, but most of the built-in options use the <see cref="Options.ContainerOption{TOption}"/>
     /// type to wrap simple types (<see cref="bool"/>, <see cref="string"/>, <see cref="int"/> and so on) as a human-readably
@@ -85,9 +86,9 @@ namespace Rezolver
             // methods, we *expect* only an OptionContainer<TOption> despite the fact that we fetch
             // a target for the <TService, TOption> pair.  That's part of the reason why all this stuff is 
             // internal.
-            targets.Register(new OptionContainer<TOption>(option), 
+            targets.Register(new OptionContainer<TOption>(option),
                 typeof(IOptionContainer<,>).MakeGenericType(serviceType, typeof(TOption)));
-            
+
             return targets;
         }
 
@@ -155,7 +156,7 @@ namespace Rezolver
         /// When searching for service-specific options, generics are automatically processed in descending order of specificity - i.e. <c>IFoo&lt;Bar&gt;</c>
         /// is more specific than <c>IFoo&lt;&gt;</c> - so you can set options for a specific closed generic, or its open generic.
         /// 
-        /// ## Global fallback
+        /// **Global Fallback**
         /// 
         /// In the absence of a service-specific option, a globally-defined option will instead be used if the <see cref="EnableGlobalOptions"/> option
         /// is set to <c>true</c> for the <paramref name="targets"/> target container.  By default, this is enabled.</remarks>
@@ -169,8 +170,8 @@ namespace Rezolver
 
             var optionContainer = (IOptionContainer<TOption>)targets.FetchDirect(typeof(IOptionContainer<,>)
                 .MakeGenericType(serviceType, typeof(TOption)));
-            
-            if(optionContainer == null && useGlobalFallback)
+
+            if (optionContainer == null && useGlobalFallback)
                 optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
 
             return optionContainer?.Option ?? @default;
@@ -188,15 +189,68 @@ namespace Rezolver
             where TOption : class
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
+            return GetOption(targets, typeof(TService), @default);
+        }
 
+        /// <summary>
+        /// Gets all globally-defined options of the type <typeparamref name="TOption"/> from the <paramref name="targets"/> target container,
+        /// returning an empty enumerable if none have been set.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to retrieve</typeparam>
+        /// <param name="targets">Required. The target container from which the options are to be read.</param>
+        /// <returns>An enumerable of the type <typeparamref name="TOption"/> containing zero or more options that have been
+        /// set.</returns>
+        public static IEnumerable<TOption> GetOptions<TOption>(this ITargetContainer targets)
+            where TOption : class
+        {
+            if (targets == null) throw new ArgumentNullException(nameof(targets));
+
+            return targets.FetchAllDirect<IOptionContainer<TOption>>().Select(o => o.Option);
+        }
+
+        /// <summary>
+        /// Get all options of the type <typeparamref name="TOption"/> which have been set for the service type <paramref name="serviceType"/>
+        /// or any of its derivatives.  Globally-defined options will also be included in the results unless the <see cref="EnableGlobalOptions"/>
+        /// option has been set to <c>false</c> on the <paramref name="targets"/> target container.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to be retrieved</typeparam>
+        /// <param name="targets">Required.  The target container from which the options are to be read.</param>
+        /// <param name="serviceType">Required.  The service type for which options are to be retrieved.</param>
+        /// <returns>An enumerable of the type <typeparamref name="TOption"/> containing zero or more options that have been
+        /// set.</returns>
+        public static IEnumerable<TOption> GetOptions<TOption>(this ITargetContainer targets, Type serviceType)
+            where TOption : class
+        {
+            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
+
+            // global fallback in this instance causes all options - service-specific or not - to be included
+            // in the enumerable.
             bool useGlobalFallback = GetOption(targets, EnableGlobalOptions.Default);
 
-            var optionContainer = (IOptionContainer<TOption>)targets.FetchDirect(typeof(IOptionContainer<TService, TOption>));
+            var optionContainers = targets.FetchAllDirect(typeof(IOptionContainer<,>)
+                .MakeGenericType(serviceType, typeof(TOption))).Cast<IOptionContainer<TOption>>();
 
-            if(optionContainer == null && useGlobalFallback)
-                optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
-            
-            return optionContainer?.Option ?? @default;
+            if (useGlobalFallback)
+                optionContainers = optionContainers.Concat(targets.FetchAllDirect<IOptionContainer<TOption>>());
+
+            return optionContainers.Select(o => o.Option);
+        }
+
+        /// <summary>
+        /// Generic version of the <see cref="GetOptions{TOption}(ITargetContainer, Type)"/> method.  See the documentation on that method
+        /// for more.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to be retrieved</typeparam>
+        /// <typeparam name="TService">The service type for which options are to be retrieved.</typeparam>
+        /// <param name="targets">Required.  The target container from which the options are to be read.</param>
+        /// <returns>An enumerable of the type <typeparamref name="TOption"/> containing zero or more options that have been
+        /// set.</returns>
+        public static IEnumerable<TOption> GetOptions<TOption, TService>(this ITargetContainer targets)
+            where TOption : class
+        {
+            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            return GetOptions<TOption>(targets, typeof(TService));
         }
     }
 }

@@ -2371,104 +2371,122 @@ references:
   commentId: N:Rezolver.Configuration
   fullName: Rezolver.Configuration
   nameWithType: Rezolver.Configuration
-- uid: Rezolver.Configuration.ConfigureOption
-  name: ConfigureOption
-  href: api/Rezolver.Configuration.ConfigureOption.html
-  commentId: T:Rezolver.Configuration.ConfigureOption
-  fullName: Rezolver.Configuration.ConfigureOption
-  nameWithType: ConfigureOption
-- uid: Rezolver.Configuration.ConfigureOption.With*
-  name: With
-  href: api/Rezolver.Configuration.ConfigureOption.html#Rezolver_Configuration_ConfigureOption_With_
-  commentId: Overload:Rezolver.Configuration.ConfigureOption.With
-  fullName: Rezolver.Configuration.ConfigureOption.With
-  nameWithType: ConfigureOption.With
-- uid: Rezolver.Configuration.ConfigureOption.With``1(``0,System.Type)
-  name: With<TOption>(TOption, Type)
-  href: api/Rezolver.Configuration.ConfigureOption.html#Rezolver_Configuration_ConfigureOption_With__1___0_System_Type_
-  commentId: M:Rezolver.Configuration.ConfigureOption.With``1(``0,System.Type)
-  name.vb: With(Of TOption)(TOption, Type)
-  fullName: Rezolver.Configuration.ConfigureOption.With<TOption>(TOption, System.Type)
-  fullName.vb: Rezolver.Configuration.ConfigureOption.With(Of TOption)(TOption, System.Type)
-  nameWithType: ConfigureOption.With<TOption>(TOption, Type)
-  nameWithType.vb: ConfigureOption.With(Of TOption)(TOption, Type)
-- uid: Rezolver.Configuration.ConfigureOption.With``1(System.Func{Rezolver.ITargetContainer,System.Type,``0},System.Type)
-  name: With<TOption>(Func<ITargetContainer, Type, TOption>, Type)
-  href: api/Rezolver.Configuration.ConfigureOption.html#Rezolver_Configuration_ConfigureOption_With__1_System_Func_Rezolver_ITargetContainer_System_Type___0__System_Type_
-  commentId: M:Rezolver.Configuration.ConfigureOption.With``1(System.Func{Rezolver.ITargetContainer,System.Type,``0},System.Type)
-  name.vb: With(Of TOption)(Func(Of ITargetContainer, Type, TOption), Type)
-  fullName: Rezolver.Configuration.ConfigureOption.With<TOption>(System.Func<Rezolver.ITargetContainer, System.Type, TOption>, System.Type)
-  fullName.vb: Rezolver.Configuration.ConfigureOption.With(Of TOption)(System.Func(Of Rezolver.ITargetContainer, System.Type, TOption), System.Type)
-  nameWithType: ConfigureOption.With<TOption>(Func<ITargetContainer, Type, TOption>, Type)
-  nameWithType.vb: ConfigureOption.With(Of TOption)(Func(Of ITargetContainer, Type, TOption), Type)
-- uid: Rezolver.Configuration.ConfigureOption.With``2(``0)
-  name: With<TOption, TService>(TOption)
-  href: api/Rezolver.Configuration.ConfigureOption.html#Rezolver_Configuration_ConfigureOption_With__2___0_
-  commentId: M:Rezolver.Configuration.ConfigureOption.With``2(``0)
-  name.vb: With(Of TOption, TService)(TOption)
-  fullName: Rezolver.Configuration.ConfigureOption.With<TOption, TService>(TOption)
-  fullName.vb: Rezolver.Configuration.ConfigureOption.With(Of TOption, TService)(TOption)
-  nameWithType: ConfigureOption.With<TOption, TService>(TOption)
-  nameWithType.vb: ConfigureOption.With(Of TOption, TService)(TOption)
-- uid: Rezolver.Configuration.ConfigureOption.With``2(System.Func{Rezolver.ITargetContainer,System.Type,``0})
-  name: With<TOption, TService>(Func<ITargetContainer, Type, TOption>)
-  href: api/Rezolver.Configuration.ConfigureOption.html#Rezolver_Configuration_ConfigureOption_With__2_System_Func_Rezolver_ITargetContainer_System_Type___0__
-  commentId: M:Rezolver.Configuration.ConfigureOption.With``2(System.Func{Rezolver.ITargetContainer,System.Type,``0})
-  name.vb: With(Of TOption, TService)(Func(Of ITargetContainer, Type, TOption))
-  fullName: Rezolver.Configuration.ConfigureOption.With<TOption, TService>(System.Func<Rezolver.ITargetContainer, System.Type, TOption>)
-  fullName.vb: Rezolver.Configuration.ConfigureOption.With(Of TOption, TService)(System.Func(Of Rezolver.ITargetContainer, System.Type, TOption))
-  nameWithType: ConfigureOption.With<TOption, TService>(Func<ITargetContainer, Type, TOption>)
-  nameWithType.vb: ConfigureOption.With(Of TOption, TService)(Func(Of ITargetContainer, Type, TOption))
-- uid: Rezolver.Configuration.ConfigureOption`1
-  name: ConfigureOption<TOption>
-  href: api/Rezolver.Configuration.ConfigureOption-1.html
-  commentId: T:Rezolver.Configuration.ConfigureOption`1
-  name.vb: ConfigureOption(Of TOption)
-  fullName: Rezolver.Configuration.ConfigureOption<TOption>
-  fullName.vb: Rezolver.Configuration.ConfigureOption(Of TOption)
-  nameWithType: ConfigureOption<TOption>
-  nameWithType.vb: ConfigureOption(Of TOption)
-- uid: Rezolver.Configuration.ConfigureOption`1.#ctor(`0,System.Type)
-  name: ConfigureOption(TOption, Type)
-  href: api/Rezolver.Configuration.ConfigureOption-1.html#Rezolver_Configuration_ConfigureOption_1__ctor__0_System_Type_
-  commentId: M:Rezolver.Configuration.ConfigureOption`1.#ctor(`0,System.Type)
-  fullName: Rezolver.Configuration.ConfigureOption<TOption>.ConfigureOption(TOption, System.Type)
-  fullName.vb: Rezolver.Configuration.ConfigureOption(Of TOption).ConfigureOption(TOption, System.Type)
-  nameWithType: ConfigureOption<TOption>.ConfigureOption(TOption, Type)
-  nameWithType.vb: ConfigureOption(Of TOption).ConfigureOption(TOption, Type)
-- uid: Rezolver.Configuration.ConfigureOption`1.#ctor(System.Func{Rezolver.ITargetContainer,System.Type,`0},System.Type)
-  name: ConfigureOption(Func<ITargetContainer, Type, TOption>, Type)
-  href: api/Rezolver.Configuration.ConfigureOption-1.html#Rezolver_Configuration_ConfigureOption_1__ctor_System_Func_Rezolver_ITargetContainer_System_Type__0__System_Type_
-  commentId: M:Rezolver.Configuration.ConfigureOption`1.#ctor(System.Func{Rezolver.ITargetContainer,System.Type,`0},System.Type)
-  name.vb: ConfigureOption(Func(Of ITargetContainer, Type, TOption), Type)
-  fullName: Rezolver.Configuration.ConfigureOption<TOption>.ConfigureOption(System.Func<Rezolver.ITargetContainer, System.Type, TOption>, System.Type)
-  fullName.vb: Rezolver.Configuration.ConfigureOption(Of TOption).ConfigureOption(System.Func(Of Rezolver.ITargetContainer, System.Type, TOption), System.Type)
-  nameWithType: ConfigureOption<TOption>.ConfigureOption(Func<ITargetContainer, Type, TOption>, Type)
-  nameWithType.vb: ConfigureOption(Of TOption).ConfigureOption(Func(Of ITargetContainer, Type, TOption), Type)
-- uid: Rezolver.Configuration.ConfigureOption`1.#ctor*
-  name: ConfigureOption
-  href: api/Rezolver.Configuration.ConfigureOption-1.html#Rezolver_Configuration_ConfigureOption_1__ctor_
-  commentId: Overload:Rezolver.Configuration.ConfigureOption`1.#ctor
-  fullName: Rezolver.Configuration.ConfigureOption<TOption>.ConfigureOption
-  fullName.vb: Rezolver.Configuration.ConfigureOption(Of TOption).ConfigureOption
-  nameWithType: ConfigureOption<TOption>.ConfigureOption
-  nameWithType.vb: ConfigureOption(Of TOption).ConfigureOption
-- uid: Rezolver.Configuration.ConfigureOption`1.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.ConfigureOption-1.html#Rezolver_Configuration_ConfigureOption_1_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.ConfigureOption`1.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.ConfigureOption<TOption>.Configure(Rezolver.ITargetContainer)
-  fullName.vb: Rezolver.Configuration.ConfigureOption(Of TOption).Configure(Rezolver.ITargetContainer)
-  nameWithType: ConfigureOption<TOption>.Configure(ITargetContainer)
-  nameWithType.vb: ConfigureOption(Of TOption).Configure(ITargetContainer)
-- uid: Rezolver.Configuration.ConfigureOption`1.Configure*
+- uid: Rezolver.Configuration.Configure
   name: Configure
-  href: api/Rezolver.Configuration.ConfigureOption-1.html#Rezolver_Configuration_ConfigureOption_1_Configure_
-  commentId: Overload:Rezolver.Configuration.ConfigureOption`1.Configure
-  fullName: Rezolver.Configuration.ConfigureOption<TOption>.Configure
-  fullName.vb: Rezolver.Configuration.ConfigureOption(Of TOption).Configure
-  nameWithType: ConfigureOption<TOption>.Configure
-  nameWithType.vb: ConfigureOption(Of TOption).Configure
+  href: api/Rezolver.Configuration.Configure.html
+  commentId: T:Rezolver.Configuration.Configure
+  fullName: Rezolver.Configuration.Configure
+  nameWithType: Configure
+- uid: Rezolver.Configuration.Configure.Option*
+  name: Option
+  href: api/Rezolver.Configuration.Configure.html#Rezolver_Configuration_Configure_Option_
+  commentId: Overload:Rezolver.Configuration.Configure.Option
+  fullName: Rezolver.Configuration.Configure.Option
+  nameWithType: Configure.Option
+- uid: Rezolver.Configuration.Configure.Option``1(``0,System.Type)
+  name: Option<TOption>(TOption, Type)
+  href: api/Rezolver.Configuration.Configure.html#Rezolver_Configuration_Configure_Option__1___0_System_Type_
+  commentId: M:Rezolver.Configuration.Configure.Option``1(``0,System.Type)
+  name.vb: Option(Of TOption)(TOption, Type)
+  fullName: Rezolver.Configuration.Configure.Option<TOption>(TOption, System.Type)
+  fullName.vb: Rezolver.Configuration.Configure.Option(Of TOption)(TOption, System.Type)
+  nameWithType: Configure.Option<TOption>(TOption, Type)
+  nameWithType.vb: Configure.Option(Of TOption)(TOption, Type)
+- uid: Rezolver.Configuration.Configure.Option``1(System.Func{Rezolver.ITargetContainer,System.Type,``0},System.Type)
+  name: Option<TOption>(Func<ITargetContainer, Type, TOption>, Type)
+  href: api/Rezolver.Configuration.Configure.html#Rezolver_Configuration_Configure_Option__1_System_Func_Rezolver_ITargetContainer_System_Type___0__System_Type_
+  commentId: M:Rezolver.Configuration.Configure.Option``1(System.Func{Rezolver.ITargetContainer,System.Type,``0},System.Type)
+  name.vb: Option(Of TOption)(Func(Of ITargetContainer, Type, TOption), Type)
+  fullName: Rezolver.Configuration.Configure.Option<TOption>(System.Func<Rezolver.ITargetContainer, System.Type, TOption>, System.Type)
+  fullName.vb: Rezolver.Configuration.Configure.Option(Of TOption)(System.Func(Of Rezolver.ITargetContainer, System.Type, TOption), System.Type)
+  nameWithType: Configure.Option<TOption>(Func<ITargetContainer, Type, TOption>, Type)
+  nameWithType.vb: Configure.Option(Of TOption)(Func(Of ITargetContainer, Type, TOption), Type)
+- uid: Rezolver.Configuration.Configure.Option``2(``0)
+  name: Option<TOption, TService>(TOption)
+  href: api/Rezolver.Configuration.Configure.html#Rezolver_Configuration_Configure_Option__2___0_
+  commentId: M:Rezolver.Configuration.Configure.Option``2(``0)
+  name.vb: Option(Of TOption, TService)(TOption)
+  fullName: Rezolver.Configuration.Configure.Option<TOption, TService>(TOption)
+  fullName.vb: Rezolver.Configuration.Configure.Option(Of TOption, TService)(TOption)
+  nameWithType: Configure.Option<TOption, TService>(TOption)
+  nameWithType.vb: Configure.Option(Of TOption, TService)(TOption)
+- uid: Rezolver.Configuration.Configure.Option``2(System.Func{Rezolver.ITargetContainer,System.Type,``0})
+  name: Option<TOption, TService>(Func<ITargetContainer, Type, TOption>)
+  href: api/Rezolver.Configuration.Configure.html#Rezolver_Configuration_Configure_Option__2_System_Func_Rezolver_ITargetContainer_System_Type___0__
+  commentId: M:Rezolver.Configuration.Configure.Option``2(System.Func{Rezolver.ITargetContainer,System.Type,``0})
+  name.vb: Option(Of TOption, TService)(Func(Of ITargetContainer, Type, TOption))
+  fullName: Rezolver.Configuration.Configure.Option<TOption, TService>(System.Func<Rezolver.ITargetContainer, System.Type, TOption>)
+  fullName.vb: Rezolver.Configuration.Configure.Option(Of TOption, TService)(System.Func(Of Rezolver.ITargetContainer, System.Type, TOption))
+  nameWithType: Configure.Option<TOption, TService>(Func<ITargetContainer, Type, TOption>)
+  nameWithType.vb: Configure.Option(Of TOption, TService)(Func(Of ITargetContainer, Type, TOption))
+- uid: Rezolver.Configuration.Configure`1
+  name: Configure<TOption>
+  href: api/Rezolver.Configuration.Configure-1.html
+  commentId: T:Rezolver.Configuration.Configure`1
+  name.vb: Configure(Of TOption)
+  fullName: Rezolver.Configuration.Configure<TOption>
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption)
+  nameWithType: Configure<TOption>
+  nameWithType.vb: Configure(Of TOption)
+- uid: Rezolver.Configuration.Configure`1.#ctor(`0,System.Type)
+  name: Configure(TOption, Type)
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1__ctor__0_System_Type_
+  commentId: M:Rezolver.Configuration.Configure`1.#ctor(`0,System.Type)
+  fullName: Rezolver.Configuration.Configure<TOption>.Configure(TOption, System.Type)
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).Configure(TOption, System.Type)
+  nameWithType: Configure<TOption>.Configure(TOption, Type)
+  nameWithType.vb: Configure(Of TOption).Configure(TOption, Type)
+- uid: Rezolver.Configuration.Configure`1.#ctor(System.Func{Rezolver.ITargetContainer,System.Type,`0},System.Type)
+  name: Configure(Func<ITargetContainer, Type, TOption>, Type)
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1__ctor_System_Func_Rezolver_ITargetContainer_System_Type__0__System_Type_
+  commentId: M:Rezolver.Configuration.Configure`1.#ctor(System.Func{Rezolver.ITargetContainer,System.Type,`0},System.Type)
+  name.vb: Configure(Func(Of ITargetContainer, Type, TOption), Type)
+  fullName: Rezolver.Configuration.Configure<TOption>.Configure(System.Func<Rezolver.ITargetContainer, System.Type, TOption>, System.Type)
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).Configure(System.Func(Of Rezolver.ITargetContainer, System.Type, TOption), System.Type)
+  nameWithType: Configure<TOption>.Configure(Func<ITargetContainer, Type, TOption>, Type)
+  nameWithType.vb: Configure(Of TOption).Configure(Func(Of ITargetContainer, Type, TOption), Type)
+- uid: Rezolver.Configuration.Configure`1.#ctor*
+  name: Configure
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1__ctor_
+  commentId: Overload:Rezolver.Configuration.Configure`1.#ctor
+  fullName: Rezolver.Configuration.Configure<TOption>.Configure
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).Configure
+  nameWithType: Configure<TOption>.Configure
+  nameWithType.vb: Configure(Of TOption).Configure
+- uid: Rezolver.Configuration.Configure`1.ConfigureOption(Rezolver.ITargetContainer)
+  name: ConfigureOption(ITargetContainer)
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1_ConfigureOption_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.Configuration.Configure`1.ConfigureOption(Rezolver.ITargetContainer)
+  fullName: Rezolver.Configuration.Configure<TOption>.ConfigureOption(Rezolver.ITargetContainer)
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).ConfigureOption(Rezolver.ITargetContainer)
+  nameWithType: Configure<TOption>.ConfigureOption(ITargetContainer)
+  nameWithType.vb: Configure(Of TOption).ConfigureOption(ITargetContainer)
+- uid: Rezolver.Configuration.Configure`1.ConfigureOption*
+  name: ConfigureOption
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1_ConfigureOption_
+  commentId: Overload:Rezolver.Configuration.Configure`1.ConfigureOption
+  fullName: Rezolver.Configuration.Configure<TOption>.ConfigureOption
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).ConfigureOption
+  nameWithType: Configure<TOption>.ConfigureOption
+  nameWithType.vb: Configure(Of TOption).ConfigureOption
+- uid: Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure(Rezolver.ITargetContainer)
+  name: ITargetContainerConfig.Configure(ITargetContainer)
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1_Rezolver_ITargetContainerConfig_Configure_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure(Rezolver.ITargetContainer)
+  name.vb: Rezolver.ITargetContainerConfig.Configure(ITargetContainer)
+  fullName: Rezolver.Configuration.Configure<TOption>.Rezolver.ITargetContainerConfig.Configure(Rezolver.ITargetContainer)
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure(Rezolver.ITargetContainer)
+  nameWithType: Configure<TOption>.ITargetContainerConfig.Configure(ITargetContainer)
+  nameWithType.vb: Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure(ITargetContainer)
+- uid: Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure*
+  name: ITargetContainerConfig.Configure
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1_Rezolver_ITargetContainerConfig_Configure_
+  commentId: Overload:Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure
+  name.vb: Rezolver.ITargetContainerConfig.Configure
+  fullName: Rezolver.Configuration.Configure<TOption>.Rezolver.ITargetContainerConfig.Configure
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure
+  nameWithType: Configure<TOption>.ITargetContainerConfig.Configure
+  nameWithType.vb: Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure
 - uid: Rezolver.Configuration.ExpressionCompilation
   name: ExpressionCompilation
   href: api/Rezolver.Configuration.ExpressionCompilation.html
@@ -4988,6 +5006,21 @@ references:
   fullName.vb: Rezolver.OptionsTargetContainerExtensions.GetOption(Of TOption, TService)(Rezolver.ITargetContainer, TOption)
   nameWithType: OptionsTargetContainerExtensions.GetOption<TOption, TService>(ITargetContainer, TOption)
   nameWithType.vb: OptionsTargetContainerExtensions.GetOption(Of TOption, TService)(ITargetContainer, TOption)
+- uid: Rezolver.OptionsTargetContainerExtensions.GetOptions*
+  name: GetOptions
+  href: api/Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions_
+  commentId: Overload:Rezolver.OptionsTargetContainerExtensions.GetOptions
+  fullName: Rezolver.OptionsTargetContainerExtensions.GetOptions
+  nameWithType: OptionsTargetContainerExtensions.GetOptions
+- uid: Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer)
+  name: GetOptions<TOption>(ITargetContainer)
+  href: api/Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer)
+  name.vb: GetOptions(Of TOption)(ITargetContainer)
+  fullName: Rezolver.OptionsTargetContainerExtensions.GetOptions<TOption>(Rezolver.ITargetContainer)
+  fullName.vb: Rezolver.OptionsTargetContainerExtensions.GetOptions(Of TOption)(Rezolver.ITargetContainer)
+  nameWithType: OptionsTargetContainerExtensions.GetOptions<TOption>(ITargetContainer)
+  nameWithType.vb: OptionsTargetContainerExtensions.GetOptions(Of TOption)(ITargetContainer)
 - uid: Rezolver.OptionsTargetContainerExtensions.SetOption*
   name: SetOption
   href: api/Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_SetOption_

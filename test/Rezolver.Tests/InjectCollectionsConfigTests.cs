@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rezolver.Configuration;
+using Rezolver.Options;
 using Xunit;
 
 namespace Rezolver.Tests
@@ -17,7 +19,7 @@ namespace Rezolver.Tests
         {
             CombinedTargetContainerConfig config = new CombinedTargetContainerConfig
             {
-                Configuration.InjectCollections.Instance
+                InjectCollections.Instance
             };
 
             var targets = new TargetContainer(config);
@@ -42,11 +44,11 @@ namespace Rezolver.Tests
         public void ShouldNotAddRegistrationsIfDisabledByOption()
         {
             // note input order reversed from the preferred: tests that InjectCollections config
-            // expresses dependency on 
+            // expresses dependency on a configuration which configures the option
             CombinedTargetContainerConfig config = new CombinedTargetContainerConfig()
             {
-                Configuration.InjectCollections.Instance,
-                Configuration.ConfigureOption.With<Options.CollectionInjection>(false)
+                InjectCollections.Instance,
+                Configure.Option<CollectionInjection>(false)
             };
 
             var targets = new TargetContainer(config);

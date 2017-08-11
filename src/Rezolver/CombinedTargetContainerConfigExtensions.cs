@@ -11,7 +11,7 @@ namespace Rezolver
     public static class CombinedTargetContainerConfigExtensions
     {
         /// <summary>
-        /// Adds a <see cref="Configuration.ConfigureOption{TOption}"/> callback to the configuration, which will set the passed <paramref name="optionValue"/>
+        /// Adds a <see cref="Configuration.Configure{TOption}"/> callback to the configuration, which will set the passed <paramref name="optionValue"/>
         /// option in the <see cref="ITargetContainer"/> to which the <paramref name="config"/> is later applied.
         /// </summary>
         /// <typeparam name="TOption">The type of option to be set</typeparam>
@@ -28,7 +28,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Adds a <see cref="Configuration.ConfigureOption{TOption}"/> callback to the configuration, which will set the passed <paramref name="optionValue"/>
+        /// Adds a <see cref="Configuration.Configure{TOption}"/> callback to the configuration, which will set the passed <paramref name="optionValue"/>
         /// option for the service type <typeparamref name="TService"/> in the <see cref="ITargetContainer"/> to which the <paramref name="config"/> is later applied.
         /// </summary>
         /// <typeparam name="TOption">The type of option to be set.</typeparam>
@@ -48,7 +48,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Adds a <see cref="Configuration.ConfigureOption{TOption}"/> callback to the configuration, which will set the passed <paramref name="optionValue"/>
+        /// Adds a <see cref="Configuration.Configure{TOption}"/> callback to the configuration, which will set the passed <paramref name="optionValue"/>
         /// option for the service type <paramref name="serviceType"/> in the <see cref="ITargetContainer"/> to which the <paramref name="config"/> is later applied.
         /// </summary>
         /// <typeparam name="TOption">The type of option to be set.</typeparam>
@@ -69,7 +69,7 @@ namespace Rezolver
 
 
         /// <summary>
-        /// Adds a <see cref="Configuration.ConfigureOption{TOption}"/> callback to the configuration, which will set the option value returned by 
+        /// Adds a <see cref="Configuration.Configure{TOption}"/> callback to the configuration, which will set the option value returned by 
         /// the <paramref name="optionValueFactory"/> in the <see cref="ITargetContainer"/> to which the <paramref name="config"/> is applied.
         /// </summary>
         /// <typeparam name="TOption">The type of option to be set</typeparam>
@@ -86,7 +86,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Adds a <see cref="Configuration.ConfigureOption{TOption}"/> callback to the configuration, which will set the option value returned by 
+        /// Adds a <see cref="Configuration.Configure{TOption}"/> callback to the configuration, which will set the option value returned by 
         /// the <paramref name="optionValueFactory"/> for the service type <typeparamref name="TService"/> in the <see cref="ITargetContainer"/> to which 
         /// the <paramref name="config"/> is applied.
         /// </summary>
@@ -108,7 +108,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Adds a <see cref="Configuration.ConfigureOption{TOption}"/> callback to the configuration, which will set the option value returned by 
+        /// Adds a <see cref="Configuration.Configure{TOption}"/> callback to the configuration, which will set the option value returned by 
         /// the <paramref name="optionValueFactory"/> for the service type <paramref name="serviceType"/> in the <see cref="ITargetContainer"/> to which 
         /// the <paramref name="config"/> is applied.
         /// </summary>
@@ -132,21 +132,21 @@ namespace Rezolver
         internal static CombinedTargetContainerConfig ConfigureOptionInternal<TOption>(CombinedTargetContainerConfig config, TOption optionValue, Type serviceType = null)
             where TOption : class
         {
-            config.Add(new Configuration.ConfigureOption<TOption>(optionValue, serviceType));
+            config.Add(new Configuration.Configure<TOption>(optionValue, serviceType));
             return config;
         }
 
         internal static CombinedTargetContainerConfig ConfigureOptionInternal<TOption>(CombinedTargetContainerConfig config, Func<ITargetContainer, TOption> optionValueFactory, Type serviceType = null)
             where TOption : class
         {
-            config.Add(new Configuration.ConfigureOption<TOption>((tc, t) => optionValueFactory(tc), serviceType));
+            config.Add(new Configuration.Configure<TOption>((tc, t) => optionValueFactory(tc), serviceType));
             return config;
         }
 
         internal static CombinedTargetContainerConfig ConfigureOptionInternal<TOption>(CombinedTargetContainerConfig config, Func<ITargetContainer, Type, TOption> optionValueFactory, Type serviceType = null)
             where TOption : class
         {
-            config.Add(new Configuration.ConfigureOption<TOption>(optionValueFactory, serviceType));
+            config.Add(new Configuration.Configure<TOption>(optionValueFactory, serviceType));
             return config;
         }
     }

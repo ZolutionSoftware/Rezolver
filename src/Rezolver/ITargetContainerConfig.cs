@@ -42,7 +42,7 @@ namespace Rezolver
     /// to express dependencies for configuration objects which depend on, or which must be configured after, others of a specific type.
     /// 
     /// The type parameter is completely free-form - it could be a specific service type, an option type
-    /// (see <see cref="Configuration.ConfigureOption{TOption}"/>), or something else entirely.
+    /// (see <see cref="Configuration.Configure{TOption}"/>), or something else entirely.
     /// 
     /// Use of this interface is entirely optional; and you'll only implement it yourself (as with <see cref="ITargetContainerConfig"/>)
     /// if you are extending Rezolver.</remarks>
