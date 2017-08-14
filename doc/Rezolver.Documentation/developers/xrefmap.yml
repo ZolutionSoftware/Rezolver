@@ -1235,10 +1235,8 @@ references:
   name: IExpressionBuilder.Build
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_Rezolver_Compilation_Expressions_IExpressionBuilder_Build_
   commentId: Overload:Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver#Compilation#Expressions#IExpressionBuilder#Build
-  name.vb: Rezolver.Compilation.Expressions.IExpressionBuilder.Build
   fullName: Rezolver.Compilation.Expressions.ExpressionBuilderBase.Rezolver.Compilation.Expressions.IExpressionBuilder.Build
   nameWithType: ExpressionBuilderBase.IExpressionBuilder.Build
-  nameWithType.vb: ExpressionBuilderBase.Rezolver.Compilation.Expressions.IExpressionBuilder.Build
 - uid: Rezolver.Compilation.Expressions.ExpressionBuilderBase`1
   name: ExpressionBuilderBase<TTarget>
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html
@@ -1269,9 +1267,7 @@ references:
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Build_
   commentId: Overload:Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.Build
   fullName: Rezolver.Compilation.Expressions.ExpressionBuilderBase<TTarget>.Build
-  fullName.vb: Rezolver.Compilation.Expressions.ExpressionBuilderBase(Of TTarget).Build
   nameWithType: ExpressionBuilderBase<TTarget>.Build
-  nameWithType.vb: ExpressionBuilderBase(Of TTarget).Build
 - uid: Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.CanBuild(Rezolver.ITarget)
   name: CanBuild(ITarget)
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_Rezolver_ITarget_
@@ -1285,9 +1281,7 @@ references:
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_
   commentId: Overload:Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.CanBuild
   fullName: Rezolver.Compilation.Expressions.ExpressionBuilderBase<TTarget>.CanBuild
-  fullName.vb: Rezolver.Compilation.Expressions.ExpressionBuilderBase(Of TTarget).CanBuild
   nameWithType: ExpressionBuilderBase<TTarget>.CanBuild
-  nameWithType.vb: ExpressionBuilderBase(Of TTarget).CanBuild
 - uid: Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.Rezolver#Compilation#Expressions#IExpressionBuilder{TTarget}#Build(`0,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)
   name: IExpressionBuilder<TTarget>.Build(TTarget, IExpressionCompileContext, IExpressionCompiler)
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Rezolver_Compilation_Expressions_IExpressionBuilder_TTarget__Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_
@@ -1301,11 +1295,8 @@ references:
   name: IExpressionBuilder<TTarget>.Build
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Rezolver_Compilation_Expressions_IExpressionBuilder_TTarget__Build_
   commentId: Overload:Rezolver.Compilation.Expressions.ExpressionBuilderBase`1.Rezolver#Compilation#Expressions#IExpressionBuilder{TTarget}#Build
-  name.vb: Rezolver.Compilation.Expressions.IExpressionBuilder<TTarget>.Build
   fullName: Rezolver.Compilation.Expressions.ExpressionBuilderBase<TTarget>.Rezolver.Compilation.Expressions.IExpressionBuilder<TTarget>.Build
-  fullName.vb: Rezolver.Compilation.Expressions.ExpressionBuilderBase(Of TTarget).Rezolver.Compilation.Expressions.IExpressionBuilder<TTarget>.Build
   nameWithType: ExpressionBuilderBase<TTarget>.IExpressionBuilder<TTarget>.Build
-  nameWithType.vb: ExpressionBuilderBase(Of TTarget).Rezolver.Compilation.Expressions.IExpressionBuilder<TTarget>.Build
 - uid: Rezolver.Compilation.Expressions.ExpressionCompileContext
   name: ExpressionCompileContext
   href: api/Rezolver.Compilation.Expressions.ExpressionCompileContext.html
@@ -1687,9 +1678,7 @@ references:
   href: api/Rezolver.Compilation.Expressions.IExpressionBuilder-1.html#Rezolver_Compilation_Expressions_IExpressionBuilder_1_Build_
   commentId: Overload:Rezolver.Compilation.Expressions.IExpressionBuilder`1.Build
   fullName: Rezolver.Compilation.Expressions.IExpressionBuilder<TTarget>.Build
-  fullName.vb: Rezolver.Compilation.Expressions.IExpressionBuilder(Of TTarget).Build
   nameWithType: IExpressionBuilder<TTarget>.Build
-  nameWithType.vb: IExpressionBuilder(Of TTarget).Build
 - uid: Rezolver.Compilation.Expressions.IExpressionCompileContext
   name: IExpressionCompileContext
   href: api/Rezolver.Compilation.Expressions.IExpressionCompileContext.html
@@ -2659,9 +2648,7 @@ references:
   href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1__ctor_
   commentId: Overload:Rezolver.Configuration.OptionDependentConfig`1.#ctor
   fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.OptionDependentConfig
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).OptionDependentConfig
   nameWithType: OptionDependentConfig<TOption>.OptionDependentConfig
-  nameWithType.vb: OptionDependentConfig(Of TOption).OptionDependentConfig
 - uid: Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.ITargetContainer)
   name: Configure(ITargetContainer)
   href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_ITargetContainer_
@@ -2675,9 +2662,7 @@ references:
   href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_
   commentId: Overload:Rezolver.Configuration.OptionDependentConfig`1.Configure
   fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Configure
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Configure
   nameWithType: OptionDependentConfig<TOption>.Configure
-  nameWithType.vb: OptionDependentConfig(Of TOption).Configure
 - uid: Rezolver.Configuration.OptionDependentConfig`1.Dependencies
   name: Dependencies
   href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies
@@ -2691,9 +2676,7 @@ references:
   href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies_
   commentId: Overload:Rezolver.Configuration.OptionDependentConfig`1.Dependencies
   fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Dependencies
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Dependencies
   nameWithType: OptionDependentConfig<TOption>.Dependencies
-  nameWithType.vb: OptionDependentConfig(Of TOption).Dependencies
 - uid: Rezolver.Configuration.OptionDependentConfig`2
   name: OptionDependentConfig<T, TOption>
   href: api/Rezolver.Configuration.OptionDependentConfig-2.html
@@ -4664,11 +4647,8 @@ references:
   name: Implicit
   href: api/Rezolver.Options.AllowMultiple.html#Rezolver_Options_AllowMultiple_op_Implicit_
   commentId: Overload:Rezolver.Options.AllowMultiple.op_Implicit
-  name.vb: Widening
   fullName: Rezolver.Options.AllowMultiple.Implicit
-  fullName.vb: Rezolver.Options.AllowMultiple.Widening
   nameWithType: AllowMultiple.Implicit
-  nameWithType.vb: AllowMultiple.Widening
 - uid: Rezolver.Options.CollectionInjection
   name: CollectionInjection
   href: api/Rezolver.Options.CollectionInjection.html
@@ -4782,11 +4762,8 @@ references:
   name: Implicit
   href: api/Rezolver.Options.EnableContravariance.html#Rezolver_Options_EnableContravariance_op_Implicit_
   commentId: Overload:Rezolver.Options.EnableContravariance.op_Implicit
-  name.vb: Widening
   fullName: Rezolver.Options.EnableContravariance.Implicit
-  fullName.vb: Rezolver.Options.EnableContravariance.Widening
   nameWithType: EnableContravariance.Implicit
-  nameWithType.vb: EnableContravariance.Widening
 - uid: Rezolver.Options.EnableGlobalOptions
   name: EnableGlobalOptions
   href: api/Rezolver.Options.EnableGlobalOptions.html
@@ -4854,11 +4831,8 @@ references:
   name: Implicit
   href: api/Rezolver.Options.EnumerableInjection.html#Rezolver_Options_EnumerableInjection_op_Implicit_
   commentId: Overload:Rezolver.Options.EnumerableInjection.op_Implicit
-  name.vb: Widening
   fullName: Rezolver.Options.EnumerableInjection.Implicit
-  fullName.vb: Rezolver.Options.EnumerableInjection.Widening
   nameWithType: EnumerableInjection.Implicit
-  nameWithType.vb: EnumerableInjection.Widening
 - uid: Rezolver.Options.FetchAllMatchingGenerics
   name: FetchAllMatchingGenerics
   href: api/Rezolver.Options.FetchAllMatchingGenerics.html
@@ -4890,11 +4864,8 @@ references:
   name: Implicit
   href: api/Rezolver.Options.FetchAllMatchingGenerics.html#Rezolver_Options_FetchAllMatchingGenerics_op_Implicit_
   commentId: Overload:Rezolver.Options.FetchAllMatchingGenerics.op_Implicit
-  name.vb: Widening
   fullName: Rezolver.Options.FetchAllMatchingGenerics.Implicit
-  fullName.vb: Rezolver.Options.FetchAllMatchingGenerics.Widening
   nameWithType: FetchAllMatchingGenerics.Implicit
-  nameWithType.vb: FetchAllMatchingGenerics.Widening
 - uid: Rezolver.Options.LazyEnumerables
   name: LazyEnumerables
   href: api/Rezolver.Options.LazyEnumerables.html
@@ -5021,6 +4992,24 @@ references:
   fullName.vb: Rezolver.OptionsTargetContainerExtensions.GetOptions(Of TOption)(Rezolver.ITargetContainer)
   nameWithType: OptionsTargetContainerExtensions.GetOptions<TOption>(ITargetContainer)
   nameWithType.vb: OptionsTargetContainerExtensions.GetOptions(Of TOption)(ITargetContainer)
+- uid: Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer,System.Type)
+  name: GetOptions<TOption>(ITargetContainer, Type)
+  href: api/Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_
+  commentId: M:Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer,System.Type)
+  name.vb: GetOptions(Of TOption)(ITargetContainer, Type)
+  fullName: Rezolver.OptionsTargetContainerExtensions.GetOptions<TOption>(Rezolver.ITargetContainer, System.Type)
+  fullName.vb: Rezolver.OptionsTargetContainerExtensions.GetOptions(Of TOption)(Rezolver.ITargetContainer, System.Type)
+  nameWithType: OptionsTargetContainerExtensions.GetOptions<TOption>(ITargetContainer, Type)
+  nameWithType.vb: OptionsTargetContainerExtensions.GetOptions(Of TOption)(ITargetContainer, Type)
+- uid: Rezolver.OptionsTargetContainerExtensions.GetOptions``2(Rezolver.ITargetContainer)
+  name: GetOptions<TOption, TService>(ITargetContainer)
+  href: api/Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.OptionsTargetContainerExtensions.GetOptions``2(Rezolver.ITargetContainer)
+  name.vb: GetOptions(Of TOption, TService)(ITargetContainer)
+  fullName: Rezolver.OptionsTargetContainerExtensions.GetOptions<TOption, TService>(Rezolver.ITargetContainer)
+  fullName.vb: Rezolver.OptionsTargetContainerExtensions.GetOptions(Of TOption, TService)(Rezolver.ITargetContainer)
+  nameWithType: OptionsTargetContainerExtensions.GetOptions<TOption, TService>(ITargetContainer)
+  nameWithType.vb: OptionsTargetContainerExtensions.GetOptions(Of TOption, TService)(ITargetContainer)
 - uid: Rezolver.OptionsTargetContainerExtensions.SetOption*
   name: SetOption
   href: api/Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_SetOption_
@@ -5563,9 +5552,7 @@ references:
   href: api/Rezolver.Runtime.LazyEnumerable-1.html#Rezolver_Runtime_LazyEnumerable_1__ctor_
   commentId: Overload:Rezolver.Runtime.LazyEnumerable`1.#ctor
   fullName: Rezolver.Runtime.LazyEnumerable<T>.LazyEnumerable
-  fullName.vb: Rezolver.Runtime.LazyEnumerable(Of T).LazyEnumerable
   nameWithType: LazyEnumerable<T>.LazyEnumerable
-  nameWithType.vb: LazyEnumerable(Of T).LazyEnumerable
 - uid: Rezolver.Runtime.LazyEnumerable`1.GetEnumerator
   name: GetEnumerator()
   href: api/Rezolver.Runtime.LazyEnumerable-1.html#Rezolver_Runtime_LazyEnumerable_1_GetEnumerator
@@ -5579,9 +5566,7 @@ references:
   href: api/Rezolver.Runtime.LazyEnumerable-1.html#Rezolver_Runtime_LazyEnumerable_1_GetEnumerator_
   commentId: Overload:Rezolver.Runtime.LazyEnumerable`1.GetEnumerator
   fullName: Rezolver.Runtime.LazyEnumerable<T>.GetEnumerator
-  fullName.vb: Rezolver.Runtime.LazyEnumerable(Of T).GetEnumerator
   nameWithType: LazyEnumerable<T>.GetEnumerator
-  nameWithType.vb: LazyEnumerable(Of T).GetEnumerator
 - uid: Rezolver.Runtime.LazyEnumerable`1.System#Collections#IEnumerable#GetEnumerator
   name: IEnumerable.GetEnumerator()
   href: api/Rezolver.Runtime.LazyEnumerable-1.html#Rezolver_Runtime_LazyEnumerable_1_System_Collections_IEnumerable_GetEnumerator
@@ -5595,11 +5580,8 @@ references:
   name: IEnumerable.GetEnumerator
   href: api/Rezolver.Runtime.LazyEnumerable-1.html#Rezolver_Runtime_LazyEnumerable_1_System_Collections_IEnumerable_GetEnumerator_
   commentId: Overload:Rezolver.Runtime.LazyEnumerable`1.System#Collections#IEnumerable#GetEnumerator
-  name.vb: System.Collections.IEnumerable.GetEnumerator
   fullName: Rezolver.Runtime.LazyEnumerable<T>.System.Collections.IEnumerable.GetEnumerator
-  fullName.vb: Rezolver.Runtime.LazyEnumerable(Of T).System.Collections.IEnumerable.GetEnumerator
   nameWithType: LazyEnumerable<T>.IEnumerable.GetEnumerator
-  nameWithType.vb: LazyEnumerable(Of T).System.Collections.IEnumerable.GetEnumerator
 - uid: Rezolver.ScopeBehaviour
   name: ScopeBehaviour
   href: api/Rezolver.ScopeBehaviour.html
@@ -6947,18 +6929,6 @@ references:
   commentId: Overload:Rezolver.TargetContainer.RegisterContainer
   fullName: Rezolver.TargetContainer.RegisterContainer
   nameWithType: TargetContainer.RegisterContainer
-- uid: Rezolver.TargetContainer.RegisterContainerDirect(System.Type,Rezolver.ITargetContainer)
-  name: RegisterContainerDirect(Type, ITargetContainer)
-  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_RegisterContainerDirect_System_Type_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.TargetContainer.RegisterContainerDirect(System.Type,Rezolver.ITargetContainer)
-  fullName: Rezolver.TargetContainer.RegisterContainerDirect(System.Type, Rezolver.ITargetContainer)
-  nameWithType: TargetContainer.RegisterContainerDirect(Type, ITargetContainer)
-- uid: Rezolver.TargetContainer.RegisterContainerDirect*
-  name: RegisterContainerDirect
-  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_RegisterContainerDirect_
-  commentId: Overload:Rezolver.TargetContainer.RegisterContainerDirect
-  fullName: Rezolver.TargetContainer.RegisterContainerDirect
-  nameWithType: TargetContainer.RegisterContainerDirect
 - uid: Rezolver.TargetDictionaryContainer
   name: TargetDictionaryContainer
   href: api/Rezolver.TargetDictionaryContainer.html
@@ -8707,10 +8677,8 @@ references:
   name: IEnumerable.GetEnumerator
   href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector_System_Collections_IEnumerable_GetEnumerator_
   commentId: Overload:Rezolver.TargetTypeSelector.System#Collections#IEnumerable#GetEnumerator
-  name.vb: System.Collections.IEnumerable.GetEnumerator
   fullName: Rezolver.TargetTypeSelector.System.Collections.IEnumerable.GetEnumerator
   nameWithType: TargetTypeSelector.IEnumerable.GetEnumerator
-  nameWithType.vb: TargetTypeSelector.System.Collections.IEnumerable.GetEnumerator
 - uid: Rezolver.UnresolvedICompiledTargetExtensions
   name: UnresolvedICompiledTargetExtensions
   href: api/Rezolver.UnresolvedICompiledTargetExtensions.html

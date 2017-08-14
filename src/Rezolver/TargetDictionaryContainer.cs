@@ -22,7 +22,7 @@ namespace Rezolver
     /// </remarks>
     public class TargetDictionaryContainer : ITargetContainer
     {
-        private readonly Dictionary<Type, ITargetContainer> _targets
+        private readonly Dictionary<Type, ITargetContainer> _targetContainers
           = new Dictionary<Type, ITargetContainer>();
 
         /// <summary>
@@ -77,23 +77,6 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Gets the type to use for registering/querying for an <see cref="ITargetContainer"/> for
-        /// for a given requested type (in the <see cref="Fetch(Type)"/>, <see cref="FetchAll(Type)"/>
-        /// or <see cref="FetchContainer(Type)"/>).
-        /// </summary>
-        /// <param name="targetType">The type of object you (presumably, eventually) want targets that can build.</param>
-        /// <returns>The base implementation always returns <paramref name="targetType"/></returns>
-        /// <remarks>This is an extension hook which allows derived types to redirect targets with particular
-        /// <see cref="ITarget.DeclaredType"/>s to be directed towards child <see cref="ITargetContainer"/> objects
-        /// which are bound to different (but, usually related) types.
-        /// 
-        /// It is through this functionality that we can push all </remarks>
-        protected virtual Type GetContainerType(Type targetType)
-        {
-
-        }
-
-        /// <summary>
         /// Obtains a child container that was previously registered by the passed
         /// <paramref name="type"/>.  Note - the type 
         /// 
@@ -104,7 +87,7 @@ namespace Rezolver
         public virtual ITargetContainer FetchContainer(Type type)
         {
             type.MustNotBeNull(nameof(type));
-            _targets.TryGetValue(type, out ITargetContainer toReturn);
+            _targetContainers.TryGetValue(type, out ITargetContainer toReturn);
             return toReturn;
         }
 
@@ -125,7 +108,7 @@ namespace Rezolver
             type.MustNotBeNull(nameof(type));
             container.MustNotBeNull(nameof(container));
 
-            _targets.TryGetValue(type, out ITargetContainer existing);
+            _targetContainers.TryGetValue(type, out ITargetContainer existing);
             //if there is already another container registered, we attempt to combine the two, prioritising
             //the new container over the old one but trying the reverse operation if that fails.
             if (existing != null)
@@ -136,13 +119,13 @@ namespace Rezolver
                 //operation fails.
                 try
                 {
-                    _targets[type] = container.CombineWith(existing, type);
+                    _targetContainers[type] = container.CombineWith(existing, type);
                 }
                 catch (NotSupportedException)
                 {
                     try
                     {
-                        _targets[type] = existing.CombineWith(container, type);
+                        _targetContainers[type] = existing.CombineWith(container, type);
                     }
                     catch (NotSupportedException)
                     {
@@ -151,7 +134,7 @@ namespace Rezolver
                 }
             }
             else //no existing container - simply add it in.
-                _targets[type] = container;
+                _targetContainers[type] = container;
         }
 
         /// <summary>
@@ -160,7 +143,7 @@ namespace Rezolver
         /// <param name="target">The target to be registered</param>
         /// <param name="serviceType"></param>
         /// <remarks>This implementation creates an <see cref="ITargetContainer"/> for the <paramref name="serviceType"/> 
-        /// with a call to the protected method <see cref="CreateContainer(Type, ITarget)"/> if one doesn't exist 
+        /// with a call to the protected method <see cref="AutoRegisterContainer(Type, ITarget)"/> if one doesn't exist 
         /// (it calls <see cref="FetchContainer(Type)"/> to check for existence),
         /// and then chains to its <see cref="ITargetContainer.Register(ITarget, Type)"/> method.</remarks>
         public virtual void Register(ITarget target, Type serviceType = null)
@@ -168,11 +151,14 @@ namespace Rezolver
             target.MustNotBeNull(nameof(target));
             serviceType = serviceType ?? target.DeclaredType;
 
-            ITargetContainer container = FetchContainer(serviceType);
-            if (container == null)
-                container = CreateContainer(serviceType, target);
+            ITargetContainer container = EnsureContainer(serviceType, target);
 
             container.Register(target, serviceType);
+        }
+
+        protected ITargetContainer EnsureContainer(Type serviceType, ITarget target = null)
+        {
+            return FetchContainer(serviceType) ?? AutoRegisterContainer(serviceType, target);
         }
 
         /// <summary>
@@ -185,7 +171,7 @@ namespace Rezolver
         /// Can be null.  Note - the function is not expected to add this target to the new
         /// container.</param>
         /// <returns></returns>
-        protected virtual ITargetContainer CreateContainer(Type serviceType, ITarget target)
+        protected virtual ITargetContainer AutoRegisterContainer(Type serviceType, ITarget target)
         {
             var created = new TargetListContainer(Root, serviceType);
 

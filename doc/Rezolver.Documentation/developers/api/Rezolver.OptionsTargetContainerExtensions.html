@@ -163,7 +163,7 @@ registrations (both <a class="xref" href="Rezolver.ITarget.html">ITarget</a> and
 is enabled by attaching the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> to the target container.  Whereas, the 
 ability to actually register more than one target for a particular service in the first place is controlled by the 
 <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a> option.</p>
-<h2 id="types-of-options">Types of options</h2>
+<p><strong>Types of options</strong></p>
 <p>Ultimately an option can be of any type, but most of the built-in options use the <a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a>
 type to wrap simple types (<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.int32(v=vs.110).aspx">Int32</a> and so on) as a human-readably
 named type that differentiates that option from others of the same underlying value type.  Note that the phrase &apos;value type&apos;
@@ -342,7 +342,7 @@ particular service - e.g. <code>IMyApplication</code> - then you can set the <a 
 that type, and multiple registrations will result in a runtime error.</p>
 <p>When searching for service-specific options, generics are automatically processed in descending order of specificity - i.e. <code>IFoo&lt;Bar&gt;</code>
 is more specific than <code>IFoo&lt;&gt;</code> - so you can set options for a specific closed generic, or its open generic.</p>
-<h2 id="global-fallback">Global fallback</h2>
+<p><strong>Global Fallback</strong></p>
 <p>In the absence of a service-specific option, a globally-defined option will instead be used if the <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a> option
 is set to <code>true</code> for the <span class="paramref">targets</span> target container.  By default, this is enabled.</p>
 </div>
@@ -432,7 +432,9 @@ is set to <code>true</code> for the <span class="paramref">targets</span> target
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer)">GetOptions&lt;TOption&gt;(ITargetContainer)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets all globally-defined options of the type <span class="typeparamref">TOption</span> from the <span class="paramref">targets</span> target container,
+returning an empty enumerable if none have been set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -451,7 +453,8 @@ is set to <code>true</code> for the <span class="paramref">targets</span> target
       <tr>
         <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
-        <td></td>
+        <td><p>Required. The target container from which the options are to be read.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -466,7 +469,9 @@ is set to <code>true</code> for the <span class="paramref">targets</span> target
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TOption&gt;</td>
-        <td></td>
+        <td><p>An enumerable of the type <span class="typeparamref">TOption</span> containing zero or more options that have been
+set.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -481,7 +486,156 @@ is set to <code>true</code> for the <span class="paramref">targets</span> target
     <tbody>
       <tr>
         <td><span class="parametername">TOption</span></td>
-        <td></td>
+        <td><p>The type of option to retrieve</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%601(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L221">View Source</a>
+  </span>
+  <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
+  <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer,System.Type)">GetOptions&lt;TOption&gt;(ITargetContainer, Type)</h4>
+  <div class="markdown level1 summary"><p>Get all options of the type <span class="typeparamref">TOption</span> which have been set for the service type <span class="paramref">serviceType</span>
+or any of its derivatives.  Globally-defined options will also be included in the results unless the <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a>
+option has been set to <code>false</code> on the <span class="paramref">targets</span> target container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TOption&gt; GetOptions&lt;TOption&gt;(this ITargetContainer targets, Type serviceType)where TOption : class</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td><p>Required.  The target container from which the options are to be read.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>Required.  The service type for which options are to be retrieved.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TOption&gt;</td>
+        <td><p>An enumerable of the type <span class="typeparamref">TOption</span> containing zero or more options that have been
+set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TOption</span></td>
+        <td><p>The type of option to be retrieved</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%602(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L249">View Source</a>
+  </span>
+  <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
+  <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``2(Rezolver.ITargetContainer)">GetOptions&lt;TOption, TService&gt;(ITargetContainer)</h4>
+  <div class="markdown level1 summary"><p>Generic version of the <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_">GetOptions&lt;TOption&gt;(ITargetContainer, Type)</a> method.  See the documentation on that method
+for more.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TOption&gt; GetOptions&lt;TOption, TService&gt;(this ITargetContainer targets)where TOption : class</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td><p>Required.  The target container from which the options are to be read.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TOption&gt;</td>
+        <td><p>An enumerable of the type <span class="typeparamref">TOption</span> containing zero or more options that have been
+set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TOption</span></td>
+        <td><p>The type of option to be retrieved</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td><p>The service type for which options are to be retrieved.</p>
+</td>
       </tr>
     </tbody>
   </table>
