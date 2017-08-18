@@ -181,5 +181,15 @@ namespace Rezolver.Tests
             Assert.Equal(new[] { "int" },
                 targets.GetOptions<TestOption, int>().Select(o => (string)o));
         }
+
+        [Fact]
+        public void GetOptions_ShouldGetArrayOptionForAnyArrayType()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<TestOption, Array>("array");
+            Assert.Equal("array", targets.GetOption<TestOption, int[]>());
+            Assert.Equal("array", targets.GetOption<TestOption, IServiceProvider[]>());
+            Assert.Equal("array", targets.GetOption<TestOption, IEnumerable<string>[]>());
+        }
     }
 }

@@ -7,6 +7,16 @@ using System.Text;
 namespace Rezolver
 {
     /// <summary>
+    /// Used as a marker service type for GetOption when a service type is any generic.
+    /// 
+    /// Allows options to be defined for any generic type instead of specific generics.
+    /// </summary>
+    public interface IOptionForAnyGeneric
+    {
+
+    }
+
+    /// <summary>
     /// Contains extension methods for getting and setting container options which are used to control the behaviour, chiefly,
     /// of the various well-known <see cref="ITargetContainer"/> implementations.
     /// </summary>
@@ -170,6 +180,12 @@ namespace Rezolver
 
             var optionContainer = (IOptionContainer<TOption>)targets.FetchDirect(typeof(IOptionContainer<,>)
                 .MakeGenericType(serviceType, typeof(TOption)));
+
+            if(optionContainer == null && TypeHelpers.IsGenericType(serviceType))
+            {
+#error look at this - try to see if you can make it fit (need a SetOption method that makes sense)
+                optionContainer = targets.FetchDirect<IAnyGenericOptionContainer<TOption>>();
+            }
 
             if (optionContainer == null && useGlobalFallback)
                 optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();

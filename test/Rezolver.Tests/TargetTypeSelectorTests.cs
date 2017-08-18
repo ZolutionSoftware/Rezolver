@@ -132,12 +132,12 @@ namespace Rezolver.Tests
         public void ShouldHandleNestedGenerics(Type type, Type[] expected)
         {
             var result = new TargetTypeSelector(type).ToArray();
-            LogExpected(expected);
+            LogExpectedOrder(expected);
             LogActual(result);
             Assert.Equal(expected, result);
         }
 
-        public static TheoryData<Type, Type[]> ContravariantTypes = new TheoryData<Type, Type[]>
+        public static TheoryData<Type, Type[], Type[]> ContravariantTypes = new TheoryData<Type, Type[], Type[]>
         {
             {
                 typeof(IContravariant<BaseClass>),
@@ -145,7 +145,8 @@ namespace Rezolver.Tests
                     typeof(IContravariant<BaseClass>),
                     typeof(IContravariant<object>),
                     typeof(IContravariant<>)
-                }
+                },
+                null
             },
             {
                 typeof(IContravariant<BaseClassGrandchild>),
@@ -156,7 +157,8 @@ namespace Rezolver.Tests
                     typeof(IContravariant<BaseClass>),
                     typeof(IContravariant<object>),
                     typeof(IContravariant<>)
-                }
+                },
+                null
             },
             // Action delegate type
             {
@@ -168,7 +170,8 @@ namespace Rezolver.Tests
                     typeof(Action<BaseClass>),
                     typeof(Action<object>),
                     typeof(Action<>)
-                }
+                },
+                null
             },
             // Two-parameter contravariance
             {
@@ -192,24 +195,64 @@ namespace Rezolver.Tests
                     typeof(Action<object, BaseClass>),
                     typeof(Action<object, object>),
                     typeof(Action<,>)
-                }
+                },
+                null
+            },
+            // Arrays as contravariant types
+            {
+                typeof(Action<BaseClass[]>),
+                new[]
+                {
+                    typeof(Action<BaseClass[]>),
+                    typeof(Action<object[]>),
+                    typeof(Action<IList<BaseClass>>),
+                    typeof(Action<IList<object>>),
+                    typeof(Action<IList>),
+                    typeof(Action<Array>),
+                    typeof(Action<object>),
+                    typeof(Action<>)
+                },
+                typeof(BaseClass).MakeArrayType().GetInterfaces().SelectMany(t => t.IsGenericType ? new[] { t, t.GetGenericTypeDefinition() } : new[] { t })
+                .Concat(
+                    typeof(Object).MakeArrayType().GetInterfaces().SelectMany(t => t.IsGenericType ? new[] { t, t.GetGenericTypeDefinition() } : new[] { t })
+                ).Select(t => typeof(Action<>).MakeGenericType(t)).ToArray()
             }
         };
 
         [Theory]
         [MemberData(nameof(ContravariantTypes))]
-        public void ShouldReturnCorrectCombinationForContravariant(Type type, Type[] expected)
+        public void ShouldReturnCorrectCombinationForContravariant(Type type, Type[] expectedOrder, Type[] expectedInAnyOrder)
         {
             var result = new TargetTypeSelector(type).ToArray();
-            LogExpected(expected);
+            LogExpectedOrder(expectedOrder);
+            LogOthers(expectedInAnyOrder);
+
             LogActual(result);
             // assert that instances of each closed generic search type can be assigned to the search type 
             // - this is double-checking our type compatibility assertions before checking that the results 
             // are the ones we expect.
-            Assert.All(expected.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
+            Assert.All(result.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
                 t => type.IsAssignableFrom(t));
-            Assert.Equal(expected, result);
 
+            // check that the the types whose order was specified are actually in the specified order
+            Assert.Equal(expectedOrder, result.Where(rt => expectedOrder.Contains(rt)));
+
+            HashSet<Type> expectedSet = new HashSet<Type>(expectedOrder.Concat(expectedInAnyOrder ?? Enumerable.Empty<Type>()));
+            HashSet<Type> resultSet = new HashSet<Type>(result);
+
+            HashSet<Type> expectedMissing = new HashSet<Type>(expectedSet);
+            HashSet<Type> resultsNotExpected = new HashSet<Type>(resultSet);
+
+            expectedMissing.ExceptWith(resultSet);
+            resultsNotExpected.ExceptWith(expectedSet);
+
+            if(expectedMissing.Count != 0)
+                LogTypes(expectedMissing.ToArray(), "Missing expected types");
+            if(resultsNotExpected.Count != 0)
+                LogTypes(resultsNotExpected.ToArray(), "Unexpected result types");
+
+            // if this fails, the previous two logging calls should output the types which are missing/extra
+            Assert.True(expectedSet.SetEquals(resultSet));
         }
 
         public static TheoryData<Type, Type[]> NestedContravariantTypes = new TheoryData<Type, Type[]>
@@ -268,33 +311,11 @@ namespace Rezolver.Tests
         public void ShouldReturnCorrectCombinationForNestedContravariant(Type type, Type[] expected)
         {
             var result = new TargetTypeSelector(type).ToArray();
-            LogExpected(expected);
+            LogExpectedOrder(expected);
             LogActual(result);
             Assert.All(expected.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
                 t => t.IsAssignableFrom(type));
             Assert.Equal(expected, result);
-
-            //// standard contra
-            //Action<BaseClassGrandchild> m = (Action<BaseClass>)null;
-            //// double contra (effectively becomes co)
-            //Action<Action<BaseClass>> m2 = (Action<Action<BaseClassGrandchild>>)null;
-            //// covariance mixed with contra.  Note: contra search direction wins.
-            //Action<Func<BaseClassGrandchild>> m3 = (Action<Func<BaseClass>>)null;
-            //// double contra with co mixed in different positions - again, same as straight double contra.
-            //Action<Action<Func<BaseClass>>> m4a = (Action<Action<Func<BaseClassGrandchild>>>)null;
-            //Action<Func<Action<BaseClass>>> m4b = (Action<Func<Action<BaseClassGrandchild>>>)null;
-            //Func<Action<Action<BaseClass>>> m4c = (Func<Action<Action<BaseClassGrandchild>>>)null;
-            //// taking it to extremes
-            //Action<Func<Func<Func<Action<BaseClass>>>>> m5 = (Action<Func<Func<Func<Action<BaseClassGrandchild>>>>>)null;
-            //Action<Func<Func<Func<Action<Action<BaseClassGrandchild>>>>>> m6 = (Action<Func<Func<Func<Action<Action<BaseClass>>>>>>)null;
-
-            //// 'odd' contravariance behaves normally
-            //// 'even' contravariance is reversed, so IContra<> <--> Contra<> and BaseClass <--> BaseClassGrandchild
-            //// alternately as we descend through the varying levels of contra-ness.  I'm yet to fully grasp exactly why,
-            //// except when I do a proper worked example it always makes sense.
-            //Action<Contravariant<BaseClass>> n1 = (Action<IContravariant<BaseClassGrandchild>>)null;
-            //Action<Contravariant<Action<BaseClassGrandchild>>> n2 = (Action<IContravariant<Action<BaseClass>>>)null;
-            //Action<Contravariant<IContravariant<BaseClassGrandchild>>> n3 = (Action<IContravariant<Contravariant<BaseClass>>>)null;
         }
 
         [Fact]
@@ -366,9 +387,15 @@ namespace Rezolver.Tests
             LogTypes(result, "Actual");
         }
 
-        private void LogExpected(Type[] expected)
+        private void LogExpectedOrder(Type[] expected)
         {
-            LogTypes(expected, "Expected");
+            LogTypes(expected, "Expected (Specified Relative Order)");
+        }
+
+        private void LogOthers(Type[] anyExpected)
+        {
+            if(anyExpected != null)
+                LogTypes(anyExpected, "Expected (Order Not Specified)");
         }
     }
 }

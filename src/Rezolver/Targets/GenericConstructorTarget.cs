@@ -317,7 +317,7 @@ namespace Rezolver.Targets
 			//check whether it's a base or an interface
 			var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
 				TypeHelpers.GetInterfaces(DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-				: TypeHelpers.GetAllBases(DeclaredType).SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+				: DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
 			if (mappedBase != null)
 			{
 				var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);

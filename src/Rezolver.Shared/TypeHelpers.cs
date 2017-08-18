@@ -18,12 +18,37 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeHelpers
 	{
-        internal static Type MakeArrayType(Type type, int rank = 1)
+        internal static bool IsArray(Type type)
         {
 #if DOTNET
-            return type.GetTypeInfo().MakeArrayType(rank);
+            return type.GetTypeInfo().IsArray;
 #else
-            return type.MakeArrayType(rank);
+            return type.IsArray;
+#endif
+        }
+
+        internal static int GetArrayRank(Type type)
+        {
+#if DOTNET
+            return type.GetTypeInfo().GetArrayRank();
+#else
+            return type.GetArrayRank();
+#endif
+        }
+
+        /// <summary>
+        /// Note - will use non-rank overload of underlying MakeArrayType if rank is null
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="rank"></param>
+        /// <returns></returns>
+        internal static Type MakeArrayType(Type type, int? rank = null)
+        {
+#if DOTNET
+            return rank != null ? type.GetTypeInfo().MakeArrayType(rank.Value) : type.GetTypeInfo().MakeArrayType();
+#else
+            
+            return rank != null ? type.MakeArrayType(rank.Value) : type.MakeArrayType();
 #endif
         }
 
@@ -33,6 +58,15 @@ namespace Rezolver
             return type.GetTypeInfo().GetElementType();
 #else
             return type.GetElementType();
+#endif
+        }
+
+        internal static bool IsSubclassOf(Type type, Type superClass)
+        {
+#if DOTNET
+            return type.GetTypeInfo().IsSubclassOf(superClass);
+#else
+            return type.IsSubclassOf(superClass);
 #endif
         }
 
@@ -52,7 +86,6 @@ namespace Rezolver
 			return type.ContainsGenericParameters;
 #endif
 		}
-
 
 		internal static bool IsGenericType(Type type)
 		{
@@ -98,16 +131,6 @@ namespace Rezolver
 			return type.BaseType;
 #endif
 		}
-
-        internal static IEnumerable<Type> GetAllBases(Type type)
-        {
-            var baseType = BaseType(type);
-            while (baseType != null)
-            {
-                yield return baseType;
-                baseType = BaseType(baseType);
-            }
-        }
 
         internal static bool AreCompatible(Type from, Type to)
 		{

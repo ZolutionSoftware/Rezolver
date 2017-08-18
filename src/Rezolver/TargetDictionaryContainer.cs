@@ -44,6 +44,12 @@ namespace Rezolver
             Root = root ?? this;
         }
 
+        //private ITargetContainerHandler GetHandler(Type type)
+        //{
+        //    // TODO: add lookup cache.
+        //    return Root.GetOptions<ITargetContainerHandler>(type).FirstOrDefault(h => h.Handles(type));
+        //}
+
         /// <summary>
         /// Implementation of <see cref="ITargetContainer.Fetch(Type)"/>.
         /// </summary>
@@ -87,7 +93,10 @@ namespace Rezolver
         public virtual ITargetContainer FetchContainer(Type type)
         {
             type.MustNotBeNull(nameof(type));
-            _targetContainers.TryGetValue(type, out ITargetContainer toReturn);
+            // delegate to an ITargetContainerHandler if there is one.
+            //var toReturn = GetHandler(type)?.GetContainer(this, type);
+            //if(toReturn == null)
+                _targetContainers.TryGetValue(type, out ITargetContainer toReturn);
             return toReturn;
         }
 

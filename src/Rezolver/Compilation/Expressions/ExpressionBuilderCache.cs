@@ -62,7 +62,7 @@ namespace Rezolver.Compilation.Expressions
             //because it has no bases which implement ITarget
             yield return targetType;
             //return all bases which can be treated as ITarget
-            foreach (var baseT in TypeHelpers.GetAllBases(targetType).Where(t => TypeHelpers.IsAssignableFrom(typeof(ITarget), t)))
+            foreach (var baseT in targetType.GetAllBases().Where(t => TypeHelpers.IsAssignableFrom(typeof(ITarget), t)))
             {
                 yield return baseT;
             }

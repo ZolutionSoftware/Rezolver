@@ -9,4 +9,9 @@
     {
 
     }
+
+    internal interface IAnyGenericOptionContainer<out TOption> : IOptionContainer<IOptionForAnyGeneric, TOption>
+    {
+
+    }
 }

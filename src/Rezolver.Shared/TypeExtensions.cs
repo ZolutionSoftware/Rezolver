@@ -22,6 +22,67 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeExtensions
 	{
+        internal static IEnumerable<Type> GetAllBases(this Type type)
+        {
+            var baseType = TypeHelpers.BaseType(type);
+            while (baseType != null)
+            {
+                yield return baseType;
+                baseType = TypeHelpers.BaseType(baseType);
+            }
+        }
+
+        private static Type MakeVectorType(Type elementType, int ignored)
+        {
+            return TypeHelpers.MakeArrayType(elementType);
+        }
+
+        private static Type MakeArrayType(Type elementType, int rank)
+        {
+            return TypeHelpers.MakeArrayType(elementType, rank);
+        }
+
+        /// <summary>
+        /// Note - no verification.  if the type is not an array type, then bad
+        /// things happen.  This method automatically handles a vector/multi-dim
+        /// array type mismatch between vectors (0-based 1 dimensional array) and
+        /// rank 1 multidimensional arrays as described here in this SO: 
+        /// https://stackoverflow.com/q/45693868 
+        /// (answered by GOAT Skeet of course).
+        /// 
+        /// Note that the function only returns down to object[]: Array and Object
+        /// are excluded.
+        /// </summary>
+        /// <param name="arrayType"></param>
+        /// <returns></returns>
+        internal static IEnumerable<Type> GetBaseArrayTypes(this Type arrayType)
+        {
+            var elemType = TypeHelpers.GetElementType(arrayType);
+            if (elemType == typeof(object)) return Enumerable.Empty<Type>();
+            var rank = TypeHelpers.GetArrayRank(arrayType);
+            Func<Type, int, Type> typeFac = rank == 1 ? (Func<Type, int, Type>)MakeVectorType : MakeArrayType;
+            List<Type> toReturn = new List<Type>();
+            while(elemType != typeof(object))
+            {
+                elemType = TypeHelpers.BaseType(elemType);
+                toReturn.Add(typeFac(elemType, rank));
+            }
+            return toReturn;
+        }
+
+        internal static IEnumerable<Type> GetInterfaceArrayTypes(this Type interfaceArrayType)
+        {
+            var elemType = TypeHelpers.GetElementType(interfaceArrayType);
+            var rank = TypeHelpers.GetArrayRank(interfaceArrayType);
+            Func<Type, int, Type> typeFac = rank == 1 ? (Func<Type, int, Type>)MakeVectorType : MakeArrayType;
+            List<Type> toReturn = new List<Type>();
+            foreach(var iFaceType in TypeHelpers.GetInterfaces(elemType))
+            {
+                toReturn.Add(typeFac(iFaceType, rank));
+            }
+            return toReturn;
+        }
+
         internal static bool IsContravariantTypeParameter(this Type type)
         {
             return type.IsGenericParameter &&
