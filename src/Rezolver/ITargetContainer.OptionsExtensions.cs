@@ -128,6 +128,27 @@ namespace Rezolver
         }
 
         /// <summary>
+        /// Sets an option which will apply to any service type which is generic (either closed or open).
+        /// 
+        /// This is a *very* special case which is reserved only for internal functionality at the moment.
+        /// </summary>
+        /// <typeparam name="TOption">The type of option to be set.</typeparam>
+        /// <param name="targets">The target container into which the option is to be set.</param>
+        /// <param name="option">The option value to be set</param>
+        /// <returns>The target container on which the method is called, to enabled method chaining.</returns>
+        internal static ITargetContainer SetGenericServiceOption<TOption>(this ITargetContainer targets, TOption option)
+            where TOption: class
+        {
+            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (option == null) throw new ArgumentNullException(nameof(option));
+
+            targets.Register(new OptionContainer<TOption>(option),
+                typeof(IAnyGenericOptionContainer<TOption>));
+
+            return targets;
+        }
+
+        /// <summary>
         /// Gets a globally-defined option of the type <typeparamref name="TOption"/> from the <paramref name="targets"/> target container,
         /// returning the <paramref name="default"/> if the option has not been explicitly set.
         /// </summary>
@@ -181,11 +202,10 @@ namespace Rezolver
             var optionContainer = (IOptionContainer<TOption>)targets.FetchDirect(typeof(IOptionContainer<,>)
                 .MakeGenericType(serviceType, typeof(TOption)));
 
+            // currently internal-only option container which allows us to set options
+            // that take effect only for generic types (closed/open classes, structs or interfaces)
             if(optionContainer == null && TypeHelpers.IsGenericType(serviceType))
-            {
-#error look at this - try to see if you can make it fit (need a SetOption method that makes sense)
                 optionContainer = targets.FetchDirect<IAnyGenericOptionContainer<TOption>>();
-            }
 
             if (optionContainer == null && useGlobalFallback)
                 optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
