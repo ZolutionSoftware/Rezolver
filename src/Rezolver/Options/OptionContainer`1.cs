@@ -28,8 +28,10 @@ namespace Rezolver.Options
             // and other generic functionality of the target containers - 
             return typeof(IOptionContainer<TOption>) == type
                 || (TypeHelpers.IsGenericType(type)
-                    && typeof(IOptionContainer<,>).Equals(type.GetGenericTypeDefinition())
-                    && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[1]);
+                    && (typeof(IOptionContainer<,>).Equals(type.GetGenericTypeDefinition())
+                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[1])
+                    || (typeof(IAnyGenericOptionContainer<>).Equals(type.GetGenericTypeDefinition())
+                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[0]));
         }
     }
 }

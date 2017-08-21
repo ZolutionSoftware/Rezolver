@@ -60,15 +60,41 @@ namespace Rezolver.Tests
             }
         }
 
+        public class ArrayTypeResolver : ITargetContainerTypeResolver
+        {
+            public Type GetContainerType(Type serviceType)
+            {
+                if (TypeHelpers.IsArray(serviceType))
+                    return typeof(Array);
+                return null;
+            }
+        }
+
+        protected TargetContainer GetArrayEnabledContainer()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<ITargetContainerTypeResolver, Array>(new ArrayTypeResolver());
+            var arrayContainer = new ArrayTargetContainer(targets);
+            targets.RegisterContainer(typeof(Array), arrayContainer);
+            return targets;
+        }
+
         [Fact]
         public void ShouldFetchArrayTarget()
         {
-            var targets = new TargetContainer();
-            var arrayContainer = new ArrayTargetContainer(targets);
-            targets.RegisterContainer(typeof(Array), arrayContainer);
-            var a = new int[0];
+            var targets = GetArrayEnabledContainer();
             var result = targets.Fetch(typeof(int[]));
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void ShouldFetchExplicitlyRegisteredArray()
+        {
+            var targets = GetArrayEnabledContainer();
+            var myArray = Target.ForObject(new[] { "hello world" });
+            targets.Register(myArray);
+            var result = targets.Fetch(typeof(string[]));
+            Assert.Same(myArray, result);
         }
     }
 }

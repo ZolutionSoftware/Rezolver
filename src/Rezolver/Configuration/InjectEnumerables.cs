@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Rezolver.Sdk;
+using System.Linq;
 
 namespace Rezolver.Configuration
 {
@@ -22,7 +24,7 @@ namespace Rezolver.Configuration
     /// registered enumerables will be able to be resolved by any <see cref="IContainer"/> built from that 
     /// target container.
     /// 
-    /// ## Lazy vs Eager evaluation
+    /// #### Lazy vs Eager evaluation
     /// 
     /// The enumerables created by Rezolver can be lazy or eager.  Lazy enumerables create instances as you 
     /// enumerate them, and will create a unique set of instances *each time* they are enumerated (assuming
@@ -42,8 +44,10 @@ namespace Rezolver.Configuration
         /// The one and only instance of the <see cref="InjectEnumerables"/> type.
         /// </summary>
         public static InjectEnumerables Instance { get; } = new InjectEnumerables();
+
         private InjectEnumerables() : base(false)
         {
+            
         }
 
         /// <summary>

@@ -2,6 +2,8 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Options;
+using Rezolver.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,41 +12,17 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
     /// <summary>
-    /// An interface used by <see cref="TargetDictionaryContainer"/> (via the options API)
-    /// to identify the container type for targets with a specific <see cref="ITarget.DeclaredType"/>.
-    /// </summary>
-    public interface ITargetContainerTypeResolver
-    {
-        /// <summary>
-        /// For operations such as <see cref="TargetDictionaryContainer.Fetch(Type)"/> and 
-        /// <see cref="TargetDictionaryContainer.FetchContainer(Type)"/>, the type requested might sometimes
-        /// need to be redirected to another for the purposes of fetching the correct <see cref="ITargetContainer"/>
-        /// for a given type of service.  If this method returns a non-null type, then the calling container
-        /// will use that type instead of the original one passed when trying to locate a container for the
-        /// service type.
-        /// </summary>
-        /// <param name="serviceType">The service type (equal to the <see cref="ITarget.DeclaredType"/> of 
-        /// any <see cref="ITarget"/> objects that might have been registered).</param>
-        /// <returns>A type that should be used to look up a container, if different from the <paramref name="serviceType"/>,
-        /// otherwise <c>null</c>.</returns>
-        Type GetContainerType(Type serviceType);
-    }
-
-    public interface ITargetContainerFactory
-    {
-        ITargetContainer CreateContainer(Type serviceType, ITarget target, ITargetContainer targets, ITargetContainer rootTargets);
-    }
-
-    /// <summary>
     /// An <see cref="ITargetContainer"/> implementation that stores and retrieves 
-    /// <see cref="ITarget"/> and <see cref="ITargetContainer"/> by type.
+    /// <see cref="ITarget"/> and <see cref="ITargetContainer"/> by service type.
     /// </summary>
     /// <remarks>
-    /// This type is not thread-safe
+    /// This class stores <see cref="ITarget"/> instances inside child <see cref="ITargetContainer"/> instances that are registered
+    /// against types equal, or related, to the <see cref="ITarget.DeclaredType"/> of the target.
     /// 
-    /// Note that for generic type, a special container is registered first against the 
-    /// open generic version of the type, with concrete (closed) generics being registered within
-    /// that.
+    /// When <see cref="Register(ITarget, Type)"/> is called, an <see cref="ITargetContainer"/> is looked up which will 'own' that target.
+    /// If one is not found, then one will be created and automatically registered (via <see cref="EnsureContainer(Type)"/>.
+    /// 
+    /// With a (possibly new) child target container in hand, the registration is then delegated to that target container.
     /// </remarks>
     public class TargetDictionaryContainer : ITargetContainer
     {
@@ -62,9 +40,13 @@ namespace Rezolver
         protected ITargetContainer Root { get; }
 
         /// <summary>
-        /// Constructs a new <see cref="TargetDictionaryContainer"/> optionally setting 
+        /// Constructs a new <see cref="TargetDictionaryContainer"/> optionally setting the <see cref="Root"/> target container.
         /// </summary>
-        /// <param name="root">If this container belongs to another, then pass it here.</param>
+        /// <param name="root">If this container belongs to one overarching root container (typically an instance of 
+        /// <see cref="TargetContainer"/> or <see cref="OverridingTargetContainer"/>), then pass it here.</param>
+        /// <remarks>The importance of the <paramref name="root"/> target container is to enable code to be able to reach all 
+        /// registrations for all services rather than only those which are stored within this container, because this type is used
+        /// both as a root, but also for other more specialised target containers.</remarks>
         public TargetDictionaryContainer(ITargetContainer root = null)
         {
             Root = root ?? this;
@@ -103,18 +85,19 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Obtains a child container that was previously registered by the passed
-        /// <paramref name="type"/>.  Note - the type 
+        /// Obtains the child container which owns the given <paramref name="serviceType"/> on behalf
+        /// of this target container.  
+        /// 
+        /// Note - the type is mapped through the <see cref="GetTargetContainerType(Type)"/> method first.
         /// 
         /// Returns null if no entry is found.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public virtual ITargetContainer FetchContainer(Type type)
+        /// <param name="serviceType">The service type whose owning <see cref="ITargetContainer"/> is sought.</param>
+        /// <returns>The target container which manages the given service type, if one is registered - otherwise <c>null</c>.</returns>
+        public virtual ITargetContainer FetchContainer(Type serviceType)
         {
-            type.MustNotBeNull(nameof(type));
-#error TODO: re-read the ITargetContainerTypeResolver option to see if the type needs redirecting.
-            _targetContainers.TryGetValue(type, out ITargetContainer toReturn);
+            serviceType.MustNotBeNull(nameof(serviceType));
+            _targetContainers.TryGetValue(GetTargetContainerType(serviceType), out ITargetContainer toReturn);
             return toReturn;
         }
 
@@ -134,7 +117,6 @@ namespace Rezolver
         {
             type.MustNotBeNull(nameof(type));
             container.MustNotBeNull(nameof(container));
-
             _targetContainers.TryGetValue(type, out ITargetContainer existing);
             //if there is already another container registered, we attempt to combine the two, prioritising
             //the new container over the old one but trying the reverse operation if that fails.
@@ -168,40 +150,40 @@ namespace Rezolver
         /// Implementation of <see cref="ITargetContainer.Register(ITarget, Type)"/>.
         /// </summary>
         /// <param name="target">The target to be registered</param>
-        /// <param name="serviceType"></param>
-        /// <remarks>This implementation creates an <see cref="ITargetContainer"/> for the <paramref name="serviceType"/> 
-        /// with a call to the protected method <see cref="AutoRegisterContainer(Type, ITarget)"/> if one doesn't exist 
-        /// (it calls <see cref="FetchContainer(Type)"/> to check for existence),
-        /// and then chains to its <see cref="ITargetContainer.Register(ITarget, Type)"/> method.</remarks>
+        /// <param name="serviceType">The service type against which the <paramref name="target"/> is to be registered, if 
+        /// different from the target's <see cref="ITarget.DeclaredType"/>.</param>
+        /// <remarks>This implementation creates a child <see cref="ITargetContainer"/> for the <paramref name="serviceType"/> 
+        /// with a call to the protected method <see cref="EnsureContainer(Type)"/> if one doesn't already exist.
+        /// 
+        /// The registration is then delegated to that child container's own implementation of
+        /// <see cref="ITargetContainer.Register(ITarget, Type)"/>.</remarks>
         public virtual void Register(ITarget target, Type serviceType = null)
         {
             target.MustNotBeNull(nameof(target));
             serviceType = serviceType ?? target.DeclaredType;
 
-            ITargetContainer container = EnsureContainer(serviceType, target);
+            ITargetContainer container = EnsureContainer(serviceType);
 
             container.Register(target, serviceType);
         }
 
         /// <summary>
         /// Called to make sure that an <see cref="ITargetContainer"/> has been registered which can act as
-        /// owner to the passed <paramref name="serviceType"/> so that a target or target container can be
-        /// registered.
-        /// 
-        /// The base implementation tries to get an <see cref="ITargetContainerTypeResolver"/> via the options API
-        /// (from itself) to see if a different container type should be used, or if the original service type should
-        /// be used.
+        /// owner to targets whose <see cref="ITarget.DeclaredType"/> is equal to the passed <paramref name="serviceType"/> 
+        /// so that a target or target container can be registered.
         /// </summary>
         /// <param name="serviceType">Required. The service type against which a target registration is to be made (and for
         /// which a target container is required.</param>
-        /// <param name="target">Optional. The target that is to be registered, if relevant.</param>
-        /// <returns>The returned container will either already have been registered in this container, or might have
-        /// been created and registered anew via the method <see cref="AutoRegisterContainer(Type, ITarget)"/>.</returns>
-        protected ITargetContainer EnsureContainer(Type serviceType, ITarget target = null)
+        /// <returns>A child target container into which targets, or another child target container, can be registered.</returns>
+        /// <remarks>
+        /// An existing container is returned if <see cref="FetchContainer(Type)"/> returns it.  If not, then a new container 
+        /// is created and registered via the <see cref="AutoRegisterContainer(Type)"/> method, and returned.
+        /// 
+        /// Note that the <paramref name="serviceType"/> will possibly be mapped to a different container type via any
+        /// <see cref="ITargetContainerTypeResolver"/> that's registered via the options API.</remarks>
+        protected ITargetContainer EnsureContainer(Type serviceType)
         {
-            var typeResolver = this.GetOption<ITargetContainerTypeResolver>(serviceType);
-            var redirectedType = typeResolver?.GetContainerType(serviceType) ?? serviceType;
-            return FetchContainer(redirectedType) ?? AutoRegisterContainer(redirectedType, target);
+            return FetchContainer(serviceType) ?? AutoRegisterContainer(GetTargetContainerType(serviceType));
         }
 
         /// <summary>
@@ -209,20 +191,39 @@ namespace Rezolver
         /// instance most suited for the passed target.  The base implementation 
         /// always creates a <see cref="TargetListContainer"/>, capable of storing multiple targets
         /// against a single type.</summary>
-        /// <param name="serviceType"></param>
-        /// <param name="target">The initial target for which the container is being created.
-        /// Can be null.  Note - the function is not expected to add this target to the new
-        /// container.</param>
+        /// <param name="targetContainerType">The type that the target container is to be registered under.
+        /// 
+        /// Note that this type will *not* be remapped by the <see cref="GetTargetContainerType(Type)"/> method - 
+        /// it will be used as-is.</param>
         /// <returns></returns>
-        protected virtual ITargetContainer AutoRegisterContainer(Type serviceType, ITarget target)
+        protected virtual ITargetContainer AutoRegisterContainer(Type targetContainerType)
         {
-            var created = new TargetListContainer(Root, serviceType);
-
-            RegisterContainer(serviceType, created);
+            var created = CreateContainer(targetContainerType);
+            RegisterContainer(targetContainerType, created);
             return created;
         }
 
+        /// <summary>
+        /// Called to get the type that's to be used to fetch a child <see cref="ITargetContainer"/> for targets registered
+        /// against a given <paramref name="serviceType"/>.
+        /// </summary>
+        /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a 
+        /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="Fetch(Type)"/>.</param>
+        /// <returns>The base implementation always returns the <paramref name="serviceType"/></returns>
+        protected virtual Type GetTargetContainerType(Type serviceType)
+        {
+            return serviceType;
+        }
 
+        /// <summary>
+        /// Called to create a new container instance which will be 
+        /// </summary>
+        /// <param name="targetContainerType"></param>
+        /// <returns></returns>
+        protected virtual ITargetContainer CreateContainer(Type targetContainerType)
+        {
+            return new TargetListContainer(Root, targetContainerType);
+        }
 
         /// <summary>
         /// Not supported by default

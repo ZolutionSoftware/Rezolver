@@ -18,6 +18,16 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeHelpers
 	{
+        internal static IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(Type type, bool inherit=false)
+            where TAttribute : Attribute
+        {
+#if DOTNET
+            return type.GetTypeInfo().GetCustomAttributes<TAttribute>(inherit);
+#else
+            return type.GetCustomAttributes<TAttribute>(inherit);
+#endif
+        } 
+
         internal static bool IsArray(Type type)
         {
 #if DOTNET
