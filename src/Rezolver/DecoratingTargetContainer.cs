@@ -26,10 +26,10 @@ namespace Rezolver
     /// which will ultimately create instances of <see cref="DecoratorType"/></remarks>
     public class DecoratingTargetContainer : ITargetContainer
     {
-        /// <summary>
-        /// Gets the type which will be used to decorate the instances produced by targets in this decorator target.
-        /// </summary>
-        public Type DecoratorType { get; }
+        ///// <summary>
+        ///// Gets the type which will be used to decorate the instances produced by targets in this decorator target.
+        ///// </summary>
+        //public Type DecoratorType { get; }
 
         /// <summary>
         /// Gets the type that's being decorated - is also the type under which this decorating container is registered
@@ -41,18 +41,41 @@ namespace Rezolver
 
         private ITargetContainer Root { get; }
 
+        private DecoratingTargetFactory DecoratorFactory { get; }
+
+        private DecoratingTargetContainer(ITargetContainer root, Type decoratedType)
+        {
+            Root = root ?? throw new ArgumentNullException(nameof(root));
+            DecoratedType = decoratedType ?? throw new ArgumentNullException(nameof(decoratedType));
+        }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="DecoratingTargetContainer"/> class.
+        /// Initializes a new instance of the <see cref="DecoratingTargetContainer"/> class to decorate instances
+        /// of <paramref name="decoratedType"/> with new instances of <paramref name="decoratorType"/> which are
+        /// created via constructor injection.
         /// </summary>
         /// <param name="root">Required.  The root <see cref="ITargetContainer"/> to which this decorating
         /// container will be registered.</param>
         /// <param name="decoratorType">Type of the decorator.</param>
         /// <param name="decoratedType">Type being decorated.</param>
         public DecoratingTargetContainer(ITargetContainer root, Type decoratorType, Type decoratedType)
+            : this(root, decoratedType)
         {
-            Root = root ?? throw new ArgumentNullException(nameof(root));
-            DecoratorType = decoratorType;
-            DecoratedType = decoratedType;
+            if(decoratorType == null) throw new ArgumentNullException(nameof(decoratorType));
+            DecoratorFactory = (ta, ty) => Target.ForType(decoratorType);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="decoratorTarget"></param>
+        /// <param name="decoratedType"></param>
+        public DecoratingTargetContainer(ITargetContainer root, ITarget decoratorTarget, Type decoratedType)
+            : this(root, decoratedType)
+        {
+            if (decoratorTarget == null) throw new ArgumentNullException(nameof(decoratorTarget));
+            DecoratorFactory = (ta, ty) => decoratorTarget;
         }
 
         private void EnsureInnerContainer()
@@ -70,6 +93,11 @@ namespace Rezolver
             }
             else
                 Inner = new TargetListContainer(Root, DecoratedType);
+        }
+
+        private DecoratorTarget CreateDecoratorTarget(ITarget decorated, Type type)
+        {
+            return new DecoratorTarget(DecoratorFactory, decorated, type);
         }
 
         /// <summary>
@@ -105,7 +133,7 @@ namespace Rezolver
             if (ShouldDecorate(type))
             {
                 var result = Inner.Fetch(type);
-                return result != null ? new DecoratorTarget(DecoratorType, result, type) : null;
+                return result != null ? CreateDecoratorTarget(result, type) : null;
             }
             else
                 return Inner.Fetch(type);
@@ -130,7 +158,7 @@ namespace Rezolver
             if (Inner == null)
                 return Enumerable.Empty<ITarget>();
             if (ShouldDecorate(type))
-                return Inner.FetchAll(type).Select(t => new DecoratorTarget(DecoratorType, t, type));
+                return Inner.FetchAll(type).Select(t => CreateDecoratorTarget(t, type));
             else
                 return Inner.FetchAll(type);
         }

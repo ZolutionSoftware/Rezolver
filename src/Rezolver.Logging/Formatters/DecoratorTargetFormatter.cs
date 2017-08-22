@@ -14,7 +14,7 @@ namespace Rezolver.Logging.Formatters
     {
 		public override string Format(DecoratingTargetContainer obj, string format = null, ObjectFormatterCollection formatters = null)
 		{
-			return string.Format(formatters, "{{ {0} Decorating {1} }}", obj.DecoratorType, obj.DecoratedType);
+			return string.Format(formatters, "{{ {0} Decorator }}", obj.DecoratedType);
 		}
 	}
 }

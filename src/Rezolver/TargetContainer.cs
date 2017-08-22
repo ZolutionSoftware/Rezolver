@@ -106,7 +106,9 @@ namespace Rezolver
 
 
         /// <summary>
-        /// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/>
+        /// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/>,
+        /// overriding the base version to extend special support for open generic types and for 
+        /// <see cref="ITargetContainerTypeResolver"/> options.
         /// </summary>
         /// <param name="type"></param>
         /// <param name="container"></param>
@@ -128,6 +130,12 @@ namespace Rezolver
             base.RegisterContainer(type, container);
         }
 
+        /// <summary>
+        /// Overrides <see cref="TargetDictionaryContainer.CreateContainer(Type)"/> to provide special support 
+        /// for open generic types and to support <see cref="ITargetContainerFactory"/> options.
+        /// </summary>
+        /// <param name="targetContainerType"></param>
+        /// <returns></returns>
         protected override ITargetContainer CreateContainer(Type targetContainerType)
         {
             if (TypeHelpers.IsGenericTypeDefinition(targetContainerType))

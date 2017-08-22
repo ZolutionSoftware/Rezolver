@@ -74,7 +74,7 @@ namespace Rezolver
 
         private static void RegisterDecoratorDelegateInternal(ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
         {
-            
+            targetContainer.RegisterContainer(decoratedType, new DecoratingTargetContainer(targetContainer, Target.ForDelegate(decoratorDelegate, decoratedType), decoratedType));
         }
     }
 }
