@@ -87,9 +87,7 @@ namespace Rezolver
         /// <summary>
         /// Obtains the child container which owns the given <paramref name="serviceType"/> on behalf
         /// of this target container.  
-        /// 
-        /// Note - the type is mapped through the <see cref="GetTargetContainerType(Type)"/> method first.
-        /// 
+        ///
         /// Returns null if no entry is found.
         /// </summary>
         /// <param name="serviceType">The service type whose owning <see cref="ITargetContainer"/> is sought.</param>

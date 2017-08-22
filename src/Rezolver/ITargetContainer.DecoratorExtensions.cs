@@ -31,6 +31,14 @@ namespace Rezolver
             RegisterDecoratorInternal(targetContainer, typeof(TDecorator), typeof(TDecorated));
 		}
 
+        public static void RegisterDecoratorDelegate<TDecorated>(this ITargetContainer targetContainer, Func<TDecorated, TDecorated> decoratorDelegate)
+        {
+            targetContainer.MustNotBeNull(nameof(targetContainer));
+            decoratorDelegate.MustNotBeNull(nameof(decoratorDelegate));
+
+
+        }
+
         /// <summary>
         /// Registers a decorator container which will cause all instances of <paramref name="decoratedType" /> to be decorated with
         /// the type <paramref name="decoratorType" />.
@@ -62,6 +70,11 @@ namespace Rezolver
                     registerType = decoratedType.GetGenericTypeDefinition();
             }
             targetContainer.RegisterContainer(registerType, new DecoratingTargetContainer(targetContainer, decoratorType, decoratedType));
+        }
+
+        private static void RegisterDecoratorDelegateInternal(ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
+        {
+            
         }
     }
 }

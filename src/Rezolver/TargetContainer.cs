@@ -82,6 +82,7 @@ namespace Rezolver
         {
 
         }
+
         private static bool ShouldUseGenericTypeDef(Type serviceType)
         {
             return TypeHelpers.IsGenericType(serviceType) && !TypeHelpers.IsGenericTypeDefinition(serviceType);
@@ -92,7 +93,7 @@ namespace Rezolver
         /// against a given <paramref name="serviceType"/>.
         /// </summary>
         /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a 
-        /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="Fetch(Type)"/>.</param>
+        /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="ITargetContainer.Fetch(Type)"/>.</param>
         /// <returns>The redirected type, or the <paramref name="serviceType"/> if no type redirection is necessary.</returns>
         protected override Type GetTargetContainerType(Type serviceType)
         {
@@ -104,7 +105,11 @@ namespace Rezolver
         }
 
 
-
+        /// <summary>
+        /// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="container"></param>
         public override void RegisterContainer(Type type, ITargetContainer container)
         {
             // for explicit container registrations of a generic type, we must ensure that the container
@@ -114,7 +119,7 @@ namespace Rezolver
                 EnsureContainer(type).RegisterContainer(type, container);
                 return;
             }
-            else
+            else //should we be looking up a container type for the passed type?  I think so.
             {
 
             }
