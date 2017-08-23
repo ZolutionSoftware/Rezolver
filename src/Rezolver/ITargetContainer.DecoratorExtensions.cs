@@ -27,16 +27,42 @@ namespace Rezolver
 		/// <param name="targetContainer">The container into which the decorator will be registered.</param>
 		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainer targetContainer)
 		{
-			targetContainer.MustNotBeNull(nameof(targetContainer));
-            RegisterDecoratorInternal(targetContainer, typeof(TDecorator), typeof(TDecorated));
+            RegisterDecoratorInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),
+                typeof(TDecorator), 
+                typeof(TDecorated));
 		}
 
+        /// <summary>
+        /// Registers a decorator container which will cause all instances of the type <typeparamref name="TDecorated"/> produced by the 
+        /// container to be intercepted and replaced by the result of calling the passed <paramref name="decoratorDelegate"/> with the
+        /// original instance.
+        /// </summary>
+        /// <typeparam name="TDecorated">The type of object whose creation is being decorated by the delegate.</typeparam>
+        /// <param name="targetContainer">The container into which the decorator will be registered.</param>
+        /// <param name="decoratorDelegate">The delegate to be executed every time an instance of <typeparamref name="TDecorated"/>
+        /// is produced by the container, and whose result will be used in place of the original object (which is fed into the delegate).</param>
+        /// <remarks>
+        /// Whilst this overload uses the term 'Decorator' in its name, it is of course entirely possible that the delegate won't actually
+        /// create a decorating instance for the input object.
+        /// 
+        /// As a result, it's better to think of this as decorating Rezolver's own process of getting an object, which may or may not result in
+        /// a decorated instance - depending on what the delegate actually does.
+        /// 
+        /// What this *does* allow, however, is decorating objects which otherwise can't be decorated by constructor injection - e.g. Arrays,
+        /// delegate types, primitive objects (e.g. <see cref="int"/>) and so on.
+        /// </remarks>
         public static void RegisterDecoratorDelegate<TDecorated>(this ITargetContainer targetContainer, Func<TDecorated, TDecorated> decoratorDelegate)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
-            decoratorDelegate.MustNotBeNull(nameof(decoratorDelegate));
+            RegisterDecoratorDelegateInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),
+                decoratorDelegate ?? throw new ArgumentNullException(nameof(decoratorDelegate)),
+                typeof(TDecorated));
+        }
 
-
+        public static void RegisterDecoratorDelegate(this ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
+        {
+            RegisterDecoratorDelegateInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),
+                decoratorDelegate ?? throw new ArgumentNullException(nameof(decoratorDelegate)),
+                decoratedType ?? throw new ArgumentNullException(nameof(decoratedType)));
         }
 
         /// <summary>
@@ -51,10 +77,9 @@ namespace Rezolver
         /// <param name="decoratedType">The type which will be decorated by <paramref name="decoratorType" />.</param>
         public static void RegisterDecorator(this ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
-            decoratorType.MustNotBeNull(nameof(decoratorType));
-            decoratedType.MustNotBeNull(nameof(decoratedType));
-            RegisterDecoratorInternal(targetContainer, decoratorType, decoratedType);
+            RegisterDecoratorInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),
+                decoratorType ?? throw new ArgumentNullException(nameof(decoratorType)),
+                decoratedType ?? throw new ArgumentNullException(nameof(decoratedType)));
         }
 
         private static void RegisterDecoratorInternal(ITargetContainer targetContainer, Type decoratorType, Type decoratedType)

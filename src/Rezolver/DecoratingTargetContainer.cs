@@ -15,9 +15,8 @@ namespace Rezolver
     /// Implements service decoration in an <see cref="ITargetContainer"/>, producing instances of the
     /// <see cref="DecoratorTarget"/> when <see cref="Fetch(Type)"/> or <see cref="FetchAll(Type)"/> are called.
     /// 
-    /// The best way to add a decorator to your target container is to use the extension method 
-    /// <see cref="DecoratorTargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(ITargetContainer)"/>
-    /// or its non-generic equivalent.
+    /// The best way to add a decorator to your target container is to use the extension methods in
+    /// <see cref="DecoratorTargetContainerExtensions"/> - which provide shortcuts for many decoration patterns.
     /// </summary>
     /// <remarks>This class does not implement <see cref="ITarget"/>, rather
     /// it's an <see cref="ITargetContainer"/> into which other targets can be added,
@@ -26,11 +25,6 @@ namespace Rezolver
     /// which will ultimately create instances of <see cref="DecoratorType"/></remarks>
     public class DecoratingTargetContainer : ITargetContainer
     {
-        ///// <summary>
-        ///// Gets the type which will be used to decorate the instances produced by targets in this decorator target.
-        ///// </summary>
-        //public Type DecoratorType { get; }
-
         /// <summary>
         /// Gets the type that's being decorated - is also the type under which this decorating container is registered
         /// in the <see cref="Root"/>
@@ -66,9 +60,11 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// 
+        /// Create a new instance of the <see cref="DecoratingTargetContainer"/> class to decorate 
+        /// instances of <paramref name="decoratedType"/> with instances produced by the <paramref name="decoratorTarget"/>.
         /// </summary>
-        /// <param name="root"></param>
+        /// <param name="root">Required.  The root <see cref="ITargetContainer"/> to which this decorating
+        /// container will be registered.</param>
         /// <param name="decoratorTarget"></param>
         /// <param name="decoratedType"></param>
         public DecoratingTargetContainer(ITargetContainer root, ITarget decoratorTarget, Type decoratedType)
@@ -78,11 +74,23 @@ namespace Rezolver
             DecoratorFactory = (ta, ty) => decoratorTarget;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="factory"></param>
+        /// <param name="decoratedType"></param>
+        public DecoratingTargetContainer(ITargetContainer root, DecoratingTargetFactory factory, Type decoratedType)
+            : this(root, decoratedType)
+        {
+            DecoratorFactory = factory ?? throw new ArgumentNullException(nameof(factory));
+        }
+
         private void EnsureInnerContainer()
         {
             if (Inner != null) return;
             //similar logic to the main TargetContainer class here - if the type we're decorating is a generic 
-            //then we fire the GenericTargetContainer factory.  Otherwise, we'll use a TargetListContainer
+            //then we create a GenericTargetContainer, otherwise, we'll use a TargetListContainer
             if (TypeHelpers.IsGenericType(DecoratedType))
             {
                 Inner = new GenericTargetContainer(
@@ -97,7 +105,7 @@ namespace Rezolver
 
         private DecoratorTarget CreateDecoratorTarget(ITarget decorated, Type type)
         {
-            return new DecoratorTarget(DecoratorFactory, decorated, type);
+            return new DecoratorTarget(DecoratorFactory(decorated, type), decorated, type);
         }
 
         /// <summary>
