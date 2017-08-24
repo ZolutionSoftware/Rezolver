@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-    public class TargetContainerOptionsTests
+    public class TargetContainer_OptionsTests
     {
         [Fact]
         public void ShouldGetAndSetOptions()

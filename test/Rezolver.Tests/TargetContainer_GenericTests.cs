@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-    public class TargetContainerGenericTests
+    public class TargetContainer_GenericTests
     {
         [Fact]
         public void ShouldSupportRegisteringOpenGenericAndFetchingAsClosed()

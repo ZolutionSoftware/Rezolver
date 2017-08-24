@@ -39,7 +39,6 @@ namespace Rezolver
 
         public override ITargetContainer CombineWith(ITargetContainer existing, Type type)
         {
-            // caters for the situation where our behaviour extension method EnableEnumerableResolving() is called more than once.
             if (existing is EnumerableTargetContainer) return existing;
             return base.CombineWith(existing, type);
         }

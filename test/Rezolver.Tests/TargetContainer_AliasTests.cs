@@ -6,8 +6,8 @@ using Xunit;
 
 namespace Rezolver.Tests
 {
-	public class AliasRegistrationTests
-	{
+	public class TargetContainer_AliasTests
+    {
 		[Fact]
 		public void ShouldRegisterAlias()
 		{
