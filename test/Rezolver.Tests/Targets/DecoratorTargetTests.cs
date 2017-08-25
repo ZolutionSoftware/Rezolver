@@ -18,7 +18,7 @@ namespace Rezolver.Tests.Targets
 		}
 
 		[Fact]
-		public void ShouldNotAllowAnyNullConstructoArguments()
+		public void ShouldNotAllowAnyNullConstructorArguments()
 		{
             Assert.Throws<ArgumentNullException>("decoratorTarget", () => new DecoratorTarget(null, new TestTarget(), typeof(Decorated)));
             Assert.Throws<ArgumentNullException>("decoratedTarget", () => new DecoratorTarget(Target.ForType<Decorator>(), null, typeof(Decorated)));

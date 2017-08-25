@@ -64,7 +64,7 @@ namespace Rezolver.Sdk
             // x is less than y if y depends on x
             // y is less than x if x depends on y
             // if there's no dependency relationship, the one with the fewest dependencies wins
-            // an exception occurs if they are codependant
+            // an exception occurs if they are codependent
             if (xdeps.Contains(y))
             {
                 if (ydeps.Contains(x))

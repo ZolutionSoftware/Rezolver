@@ -57,7 +57,7 @@ namespace Rezolver.Sdk
 
             if (Required && count == 0)
             {
-                string msg = $"Owning object { Owner } requires at least one object of type { Type }";
+                string msg = $"{ Owner } requires at least one object of type { Type }";
                 if (allSkipped.Count != 0)
                     msg = $"{ msg } - { allSkipped.Count } matching object(s) ignored because they also have an identical type dependency which matches the owner.";
 

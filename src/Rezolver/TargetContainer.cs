@@ -42,14 +42,15 @@ namespace Rezolver
         /// The configurations applied by default are:
         /// 
         /// - <see cref="Configuration.InjectEnumerables"/>
+        /// - <see cref="Configuration.InjectArrays"/>
         /// - <see cref="Configuration.InjectLists"/>
         /// - <see cref="Configuration.InjectCollections"/>
         /// - <see cref="Configuration.InjectResolveContext"/>
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
-            //Configuration.GenericTypes.Instance,
             Configuration.InjectEnumerables.Instance,
+            Configuration.InjectArrays.Instance,
             Configuration.InjectLists.Instance,
             Configuration.InjectCollections.Instance,
             Configuration.InjectResolveContext.Instance

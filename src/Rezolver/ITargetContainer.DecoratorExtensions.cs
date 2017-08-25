@@ -84,22 +84,35 @@ namespace Rezolver
 
         private static void RegisterDecoratorInternal(ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
         {
+            targetContainer.RegisterContainer(
+                GetCorrectDecoratorTargetType(decoratedType), 
+                new DecoratingTargetContainer(
+                    targetContainer, 
+                    decoratorType, 
+                    decoratedType));
+        }
+
+        private static Type GetCorrectDecoratorTargetType(Type decoratedType)
+        {
             //decorators for generics are always registered against the open generic type.
             //the decorator, however, will only create a decorated target when the type requested
             //equals the type it's decorating; and if that happens to be the open generic, then it'll
             //be all types.
-            Type registerType = decoratedType;
-            if (TypeHelpers.IsGenericType(decoratedType))
-            {
-                if (!TypeHelpers.IsGenericTypeDefinition(decoratedType))
-                    registerType = decoratedType.GetGenericTypeDefinition();
-            }
-            targetContainer.RegisterContainer(registerType, new DecoratingTargetContainer(targetContainer, decoratorType, decoratedType));
+            return (TypeHelpers.IsGenericType(decoratedType) && !TypeHelpers.IsGenericTypeDefinition(decoratedType)) 
+                ? decoratedType.GetGenericTypeDefinition() 
+                : decoratedType;
         }
 
         private static void RegisterDecoratorDelegateInternal(ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
         {
-            targetContainer.RegisterContainer(decoratedType, new DecoratingTargetContainer(targetContainer, Target.ForDelegate(decoratorDelegate, decoratedType), decoratedType));
+            targetContainer.RegisterContainer(
+                GetCorrectDecoratorTargetType(decoratedType), 
+                new DecoratingTargetContainer(
+                    targetContainer, 
+                    Target.ForDelegate(
+                        decoratorDelegate, 
+                        decoratedType), 
+                    decoratedType));
         }
     }
 }
