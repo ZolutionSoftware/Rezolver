@@ -10,7 +10,7 @@ namespace Rezolver
     /// <summary>
     /// Inheriting from TargetDictionary allows us to support specific 
     /// </summary>
-    public class ArrayTargetContainer : TargetDictionaryContainer
+    internal class ArrayTargetContainer : TargetDictionaryContainer
     {
         public ArrayTargetContainer(ITargetContainer root)
             : base(root)

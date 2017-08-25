@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Extensions for <see cref="ITargetContainer"/> which simplify the registration of decorators (via the
-	/// <see cref="DecoratingTargetContainer"/> pseudo-target)
-	/// </summary>
+    /// <summary>
+    /// Extensions for <see cref="ITargetContainer"/> which simplify the registration of decorators (via the
+    /// <see cref="DecoratingTargetContainer"/> pseudo-target)
+    /// </summary>
     public static class DecoratorTargetContainerExtensions
     {
-		/// <summary>
-		/// Registers a decorator container which will cause all instances of <typeparamref name="TDecorated"/> to be decorated with
-		/// the type <typeparamref name="TDecorator"/>.
-		/// 
-		/// Any existing registrations for <typeparamref name="TDecorated"/> will be decorated correctly, and subsequent registrations 
-		/// of <typeparamref name="TDecorated"/> will also be decorated as expected.
-		/// </summary>
-		/// <typeparam name="TDecorator">The type to be used as the decorator implementation</typeparam>
-		/// <typeparam name="TDecorated">The type which will be decorated by <typeparamref name="TDecorator"/>.</typeparam>
-		/// <param name="targetContainer">The container into which the decorator will be registered.</param>
-		public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainer targetContainer)
-		{
+        /// <summary>
+        /// Registers a decorator container which will cause all instances of <typeparamref name="TDecorated"/> to be decorated with
+        /// the type <typeparamref name="TDecorator"/>.
+        /// 
+        /// Any existing registrations for <typeparamref name="TDecorated"/> will be decorated correctly, and subsequent registrations 
+        /// of <typeparamref name="TDecorated"/> will also be decorated as expected.
+        /// </summary>
+        /// <typeparam name="TDecorator">The type to be used as the decorator implementation</typeparam>
+        /// <typeparam name="TDecorated">The type which will be decorated by <typeparamref name="TDecorator"/>.</typeparam>
+        /// <param name="targetContainer">The container into which the decorator will be registered.</param>
+        public static void RegisterDecorator<TDecorator, TDecorated>(this ITargetContainer targetContainer)
+        {
             RegisterDecoratorInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),
-                typeof(TDecorator), 
+                typeof(TDecorator),
                 typeof(TDecorated));
-		}
+        }
 
         /// <summary>
         /// Registers a decorator container which will cause all instances of the type <typeparamref name="TDecorated"/> produced by the 
@@ -51,14 +51,14 @@ namespace Rezolver
         /// What this *does* allow, however, is decorating objects which otherwise can't be decorated by constructor injection - e.g. Arrays,
         /// delegate types, primitive objects (e.g. <see cref="int"/>) and so on.
         /// </remarks>
-        public static void RegisterDecoratorDelegate<TDecorated>(this ITargetContainer targetContainer, Func<TDecorated, TDecorated> decoratorDelegate)
+        public static void RegisterDecorator<TDecorated>(this ITargetContainer targetContainer, Func<TDecorated, TDecorated> decoratorDelegate)
         {
             RegisterDecoratorDelegateInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),
                 decoratorDelegate ?? throw new ArgumentNullException(nameof(decoratorDelegate)),
                 typeof(TDecorated));
         }
 
-        public static void RegisterDecoratorDelegate(this ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
+        public static void RegisterDecorator(this ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
         {
             RegisterDecoratorDelegateInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),
                 decoratorDelegate ?? throw new ArgumentNullException(nameof(decoratorDelegate)),
@@ -82,15 +82,8 @@ namespace Rezolver
                 decoratedType ?? throw new ArgumentNullException(nameof(decoratedType)));
         }
 
-        private static void RegisterDecoratorInternal(ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
-        {
-            targetContainer.RegisterContainer(
-                GetCorrectDecoratorTargetType(decoratedType), 
-                new DecoratingTargetContainer(
-                    targetContainer, 
-                    decoratorType, 
-                    decoratedType));
-        }
+
+        #region private decorator methods
 
         private static Type GetCorrectDecoratorTargetType(Type decoratedType)
         {
@@ -98,21 +91,32 @@ namespace Rezolver
             //the decorator, however, will only create a decorated target when the type requested
             //equals the type it's decorating; and if that happens to be the open generic, then it'll
             //be all types.
-            return (TypeHelpers.IsGenericType(decoratedType) && !TypeHelpers.IsGenericTypeDefinition(decoratedType)) 
-                ? decoratedType.GetGenericTypeDefinition() 
+            return (TypeHelpers.IsGenericType(decoratedType) && !TypeHelpers.IsGenericTypeDefinition(decoratedType))
+                ? decoratedType.GetGenericTypeDefinition()
                 : decoratedType;
+        }
+        private static void RegisterDecoratorInternal(ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
+        {
+            targetContainer.RegisterContainer(
+                GetCorrectDecoratorTargetType(decoratedType),
+                new DecoratingTargetContainer(
+                    targetContainer,
+                    decoratorType,
+                    decoratedType));
         }
 
         private static void RegisterDecoratorDelegateInternal(ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
         {
             targetContainer.RegisterContainer(
-                GetCorrectDecoratorTargetType(decoratedType), 
+                GetCorrectDecoratorTargetType(decoratedType),
                 new DecoratingTargetContainer(
-                    targetContainer, 
+                    targetContainer,
                     Target.ForDelegate(
-                        decoratorDelegate, 
-                        decoratedType), 
+                        decoratorDelegate,
+                        decoratedType),
                     decoratedType));
         }
+
+        #endregion
     }
 }

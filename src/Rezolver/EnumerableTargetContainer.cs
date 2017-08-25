@@ -32,6 +32,15 @@ namespace Rezolver
             if (result != null)
                 return result;
 
+            // (Bit of a hack, this - need a better solution)
+            // if the root is an OverridingTargetContainer, then 
+            if(Root is OverridingTargetContainer overridingContainer)
+            {
+                result = overridingContainer.Parent.Fetch(type);
+                if (!(result?.UseFallback ?? true))
+                    return result;
+            }
+
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
             return new EnumerableTarget(Root.FetchAll(elementType), elementType);
