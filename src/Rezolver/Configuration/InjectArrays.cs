@@ -54,6 +54,10 @@ namespace Rezolver.Configuration
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 
+            // REVIEW: should this also check that EnableEnumerableInjection is true?
+            // At the moment, it's just dependent upon the Enumerable config; but it actually needs it to
+            // be *enabled* too.
+
             if (!targets.GetOption(Options.EnableArrayInjection.Default))
                 return;
 

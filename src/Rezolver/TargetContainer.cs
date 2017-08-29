@@ -122,9 +122,11 @@ namespace Rezolver
                 EnsureContainer(type).RegisterContainer(type, container);
                 return;
             }
-            else //should we be looking up a container type for the passed type?  I think so.
+            else
             {
-
+                // should we be looking up a container type for the passed type?  I think so,
+                // but all the tests I've created so far seem to suggest that it's not actually
+                // required...
             }
 
 

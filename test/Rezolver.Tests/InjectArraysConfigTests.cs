@@ -10,7 +10,7 @@ namespace Rezolver.Tests
 {
     public class InjectArraysConfigTests
     {
-        
+
 
         protected TargetContainer GetArrayEnabledContainer()
         {
@@ -21,22 +21,44 @@ namespace Rezolver.Tests
             });
         }
 
-        [Fact]
-        public void ShouldFetchArrayTarget()
+        public static TheoryData<Type> FetchArrayTargetTypes => new TheoryData<Type>{
+            {
+                typeof(int)
+            },
+            {
+                typeof(string)
+            },
+            {
+                typeof(Types.BaseClass)
+            },
+            {
+                typeof(Types.Generic<int>)
+            }
+        };
+
+        [Theory]
+        [MemberData(nameof(FetchArrayTargetTypes))]
+        public void ShouldFetchArrayTarget(Type fetchType)
         {
+            // targets should always be returned for array types even when no
+            // targets are registered either for the array type, or for the element type
             var targets = GetArrayEnabledContainer();
-            var result = targets.Fetch(typeof(int[]));
+            var result = targets.Fetch(fetchType.MakeArrayType());
             Assert.NotNull(result);
         }
 
-        [Fact]
-        public void ShouldFetchExplicitlyRegisteredArray()
+        [Theory]
+        [MemberData(nameof(FetchArrayTargetTypes))]
+        public void ShouldFetchExplicitlyRegisteredArrayTarget(Type fetchType)
         {
             var targets = GetArrayEnabledContainer();
-            var myArray = Target.ForObject(new[] { "hello world" });
+            var arrayType = fetchType.MakeArrayType();
+            var myArray = Target.ForObject(Array.CreateInstance(fetchType, 1), arrayType);
             targets.Register(myArray);
-            var result = targets.Fetch(typeof(string[]));
+            var result = targets.Fetch(arrayType);
             Assert.Same(myArray, result);
         }
+
+        
     }
 }

@@ -32,12 +32,19 @@ namespace Rezolver
             if (result != null)
                 return result;
 
-            // (Bit of a hack, this - need a better solution)
+            // TODO: (Bit of a hack, this - need a better solution)
+            // TODO: Solution might be simply to have a subclassed EnumerableTargetContainer that is registered when
+            // the target container is an OverridingTargetContainer.
+
             // if the root is an OverridingTargetContainer, then 
             if(Root is OverridingTargetContainer overridingContainer)
             {
                 result = overridingContainer.Parent.Fetch(type);
-                if (!(result?.UseFallback ?? true))
+                // if the root result is an enumerable target; then we won't use it, because
+                // the one we will return below will be *more* correct than that one (because
+                // it will contain all the individual targets registered for the element type, 
+                // but not include those which are registered directly in the overriding container.
+                if (!(result is EnumerableTarget) && !(result?.UseFallback ?? true))
                     return result;
             }
 
