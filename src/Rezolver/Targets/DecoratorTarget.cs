@@ -55,35 +55,6 @@ namespace Rezolver.Targets
 		public Type DecoratedType { get; }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="DecoratorTarget"/> type, whose <see cref="InnerTarget"/> will be
-        /// produced by the <paramref name="decoratorFactory"/> (which will be passed the <paramref name="decoratedTarget"/>
-        /// and <paramref name="decoratedType"/> respectively.
-        /// </summary>
-        /// <param name="decoratorFactory">Factory delegate which will be called to get an instance of <see cref="ITarget"/>
-        /// to be stored in the <see cref="InnerTarget"/>.</param>
-        /// <param name="decoratedTarget">The target that is to be decorated.</param>
-        /// <param name="decoratedType">the common service type of the <paramref name="decoratedTarget"/> and the decorator
-        /// target produced by the <paramref name="decoratorFactory"/>.  This will typically be the service type that was 
-        /// requested from a container.</param>
-        //public DecoratorTarget(DecoratingTargetFactory decoratorFactory, ITarget decoratedTarget, Type decoratedType)
-        //{
-        //    decoratorFactory.MustNotBeNull(nameof(decoratorFactory));
-        //    decoratedTarget.MustNotBeNull(nameof(decoratedTarget));
-        //    decoratedType.MustNotBeNull(nameof(decoratedType));
-
-        //    if (!decoratedTarget.SupportsType(decoratedType))
-        //        throw new ArgumentException("The decorated target doesn't support the decorated type", nameof(decoratedType));
-
-        //    DecoratedTarget = decoratedTarget;
-        //    DecoratedType = decoratedType;
-
-        //    InnerTarget = decoratorFactory(DecoratedTarget, DecoratedType);
-
-        //    if (!InnerTarget.SupportsType(decoratedType))
-        //        throw new ArgumentException("The decorating target produced by the decoratorFactory is not compatible with the decorated type", nameof(decoratedType));
-        //}
-
-        /// <summary>
         /// Constructs a new instance of the <see cref="DecoratorTarget"/> type when the target that create the decorator is already known.
         /// </summary>
         /// <param name="decoratorTarget"></param>

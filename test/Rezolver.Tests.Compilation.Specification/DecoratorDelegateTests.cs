@@ -120,6 +120,39 @@ namespace Rezolver.Tests.Compilation.Specification
             },
         };
 
+        private static Func<string[], string[]> AppendToStringArray(string value)
+        {
+            return (string[] input) =>
+            {
+                string[] newArray = new string[input.Length + 1];
+                Array.Copy(input, newArray, input.Length);
+                newArray[input.Length] = value;
+                return newArray;
+            };
+        }
+
+        public static DecoratorTheoryDataWithResult ArrayDecorations => new DecoratorTheoryDataWithResult()
+        {
+            {
+                "after",
+                new[] { "hello", "world"},
+                t =>
+                {
+                    t.RegisterObject("hello");
+                    t.RegisterDecorator<string[]>(AppendToStringArray("world"));
+                }
+            },
+            {
+                "before",
+                new[] { "hello", "world"},
+                t =>
+                {
+                    t.RegisterDecorator<string[]>(AppendToStringArray("world"));
+                    t.RegisterObject("hello");
+                }
+            }
+        };
+
 
         [Theory]
         [MemberData(nameof(IntDecorations))]
@@ -128,7 +161,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
             setup(targets);
             var container = CreateContainer(targets);
-
+            
             Assert.Equal(expected, container.Resolve<int>());
         }
 
@@ -144,23 +177,16 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void DecoratorDelegate_ShouldDecorateArrayAndIEnumerable()
+        [Theory]
+        [MemberData(nameof(ArrayDecorations))]
+        public void DecoratorDelegate_ShouldDecorateArrayOfStrings(string name, string[] expected, SetupTargets setup)
         {
             var targets = CreateTargetContainer();
-            targets.RegisterObject(2);
-            targets.RegisterDecorator<IEnumerable<int>>(ii => new[] { 1 }.Concat(ii));
-            targets.RegisterDecorator<int[]>(iii =>
-            {
-                var toReturn = new int[iii.Length + 1];
-                Array.Copy(iii, toReturn, iii.Length);
-                toReturn[2] = 2;
-                return toReturn;
-            });
-
+            setup(targets);
             var container = CreateContainer(targets);
 
-            var result = container.Resolve<int[]>();
+            var result = container.Resolve<string[]>();
+            Assert.Equal(expected, result);
         }
     }
 }
