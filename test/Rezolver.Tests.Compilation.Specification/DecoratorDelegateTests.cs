@@ -181,6 +181,11 @@ namespace Rezolver.Tests.Compilation.Specification
         [MemberData(nameof(ArrayDecorations))]
         public void DecoratorDelegate_ShouldDecorateArrayOfStrings(string name, string[] expected, SetupTargets setup)
         {
+            // The reason these tests fail is because the DecoratingTargetContainer is neither registered correctly for the
+            // array type (see GetCorrectDecoratorTargetType in <root>\src\Rezolver\ITargetContainer.DecoratorExtensions.cs)
+            // nor does it create its inner container correctly.
+            // The first method does not honour the ITargetContainerTypeResolve option; and neither methods honour the
+            // ITargetContainerFactory option.
             var targets = CreateTargetContainer();
             setup(targets);
             var container = CreateContainer(targets);

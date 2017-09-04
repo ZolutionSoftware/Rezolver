@@ -115,20 +115,17 @@ namespace Rezolver
         /// <param name="container"></param>
         public override void RegisterContainer(Type type, ITargetContainer container)
         {
-            // for explicit container registrations of a generic type, we must ensure that the container
-            // exists for the open generic.
-            if (ShouldUseGenericTypeDef(type))
+            // for explicit container registrations inside a TargetConttainer, some container registrations
+            // have to be delegated to child containers - e.g. where a container for a generic type must
+            // be registered inside another which is registered against the open generic.
+            // Easy way to check: see if GetTargetContainerType returns a difference type to the one passed,
+            // and then autoregistering the container type if it does.  The EnsureContainer function takes
+            // care of everything else.
+            if (GetTargetContainerType(type) != type)
             {
                 EnsureContainer(type).RegisterContainer(type, container);
                 return;
             }
-            else
-            {
-                // should we be looking up a container type for the passed type?  I think so,
-                // but all the tests I've created so far seem to suggest that it's not actually
-                // required...
-            }
-
 
             base.RegisterContainer(type, container);
         }
