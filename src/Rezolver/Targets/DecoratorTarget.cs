@@ -19,7 +19,7 @@ namespace Rezolver.Targets
     /// <returns>An <see cref="ITarget"/> which, when compiled and executed correctly, will produce an instance of
     /// the decorator, with the instance produced by the <paramref name="decoratedTarget" /> as the decorated object
     /// inside of it.</returns>
-    public delegate ITarget DecoratingTargetFactory(ITarget decoratedTarget, Type decoratedType);
+    internal delegate ITarget DecoratingTargetFactory(ITarget decoratedTarget, Type decoratedType);
 
 	/// <summary>
 	/// Represents the action of implementing a common <see cref="DecoratedType"/> by decorating one instance 

@@ -80,27 +80,19 @@ namespace Rezolver
         /// <param name="root"></param>
         /// <param name="factory"></param>
         /// <param name="decoratedType"></param>
-        public DecoratingTargetContainer(ITargetContainer root, DecoratingTargetFactory factory, Type decoratedType)
+        internal DecoratingTargetContainer(ITargetContainer root, DecoratingTargetFactory factory, Type decoratedType)
             : this(root, decoratedType)
         {
             DecoratorFactory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
-        private void EnsureInnerContainer()
+        private ITargetContainer EnsureInner()
         {
-            if (Inner != null) return;
-            //similar logic to the main TargetContainer class here - if the type we're decorating is a generic 
-            //then we create a GenericTargetContainer, otherwise, we'll use a TargetListContainer
-            if (TypeHelpers.IsGenericType(DecoratedType))
-            {
-                Inner = new GenericTargetContainer(
-                    Root,
-                    TypeHelpers.IsGenericTypeDefinition(DecoratedType) ?
-                    DecoratedType
-                    : DecoratedType.GetGenericTypeDefinition());
-            }
-            else
-                Inner = new TargetListContainer(Root, DecoratedType);
+            // This reuses the same logic that TargetContainer employs via these extension methods
+            return Inner ?? 
+                (Inner = Root.CreateChildContainer(
+                            Root.GetChildContainerType(DecoratedType),
+                            Root));
         }
 
         private DecoratorTarget CreateDecoratorTarget(ITarget decorated, Type type)
@@ -149,10 +141,14 @@ namespace Rezolver
 
         private bool ShouldDecorate(Type type)
         {
+            // not ideal this - perhaps the decorator container should have this filter 
+            // passed to it on construction.
             return type == DecoratedType 
                 || (TypeHelpers.IsGenericType(type)
                     && TypeHelpers.IsGenericTypeDefinition(DecoratedType)
-                    && type.GetGenericTypeDefinition() == DecoratedType);
+                    && type.GetGenericTypeDefinition() == DecoratedType)
+                || (DecoratedType == typeof(Array) 
+                    && TypeHelpers.IsArray(type));
         }
 
         /// <summary>
@@ -185,9 +181,7 @@ namespace Rezolver
         /// multiple decorators registered against it.</remarks>
         public void Register(ITarget target, Type serviceType = null)
         {
-            EnsureInnerContainer();
-
-            Inner.Register(target, serviceType);
+            EnsureInner().Register(target, serviceType);
         }
 
         /// <summary>
@@ -198,8 +192,7 @@ namespace Rezolver
         /// around the inner target container and passes the call on to that.</remarks>
         public ITargetContainer FetchContainer(Type type)
         {
-            EnsureInnerContainer();
-            return Inner.FetchContainer(type);
+            return EnsureInner().FetchContainer(type);
         }
 
         /// <summary>
@@ -211,8 +204,7 @@ namespace Rezolver
         /// <param name="container">The container.</param>
         public void RegisterContainer(Type type, ITargetContainer container)
         {
-            EnsureInnerContainer();
-            Inner.RegisterContainer(type, container);
+            EnsureInner().RegisterContainer(type, container);
         }
     }
 }

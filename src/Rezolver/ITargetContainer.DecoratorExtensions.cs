@@ -85,20 +85,10 @@ namespace Rezolver
 
         #region private decorator methods
 
-        private static Type GetCorrectDecoratorTargetType(Type decoratedType)
-        {
-            // decorators for generics are always registered against the open generic type.
-            // the decorator, however, will only create a decorated target when the type requested
-            // equals the type it's decorating; and if that happens to be the open generic, then it'll
-            // be all types.
-            return (TypeHelpers.IsGenericType(decoratedType) && !TypeHelpers.IsGenericTypeDefinition(decoratedType))
-                ? decoratedType.GetGenericTypeDefinition()
-                : decoratedType;
-        }
         private static void RegisterDecoratorInternal(ITargetContainer targetContainer, Type decoratorType, Type decoratedType)
         {
             targetContainer.RegisterContainer(
-                GetCorrectDecoratorTargetType(decoratedType),
+                targetContainer.GetChildContainerType(decoratedType),
                 new DecoratingTargetContainer(
                     targetContainer,
                     decoratorType,
@@ -108,7 +98,7 @@ namespace Rezolver
         private static void RegisterDecoratorDelegateInternal(ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
         {
             targetContainer.RegisterContainer(
-                GetCorrectDecoratorTargetType(decoratedType),
+                targetContainer.GetChildContainerType(decoratedType),
                 new DecoratingTargetContainer(
                     targetContainer,
                     Target.ForDelegate(

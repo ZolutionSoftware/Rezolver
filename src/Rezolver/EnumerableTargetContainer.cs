@@ -44,6 +44,8 @@ namespace Rezolver
                 // the one we will return below will be *more* correct than that one (because
                 // it will contain all the individual targets registered for the element type, 
                 // but not include those which are registered directly in the overriding container.
+                // This is to allow IEnumerable Decorators from overriden containers to be used when no
+                // specific IEnumerable registration exists in an overriding container.
                 if (!(result is EnumerableTarget) && !(result?.UseFallback ?? true))
                     return result;
             }

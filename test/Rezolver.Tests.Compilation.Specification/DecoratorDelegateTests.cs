@@ -139,7 +139,7 @@ namespace Rezolver.Tests.Compilation.Specification
                 t =>
                 {
                     t.RegisterObject("hello");
-                    t.RegisterDecorator<string[]>(AppendToStringArray("world"));
+                    t.RegisterDecorator(AppendToStringArray("world"));
                 }
             },
             {
@@ -147,8 +147,56 @@ namespace Rezolver.Tests.Compilation.Specification
                 new[] { "hello", "world"},
                 t =>
                 {
-                    t.RegisterDecorator<string[]>(AppendToStringArray("world"));
+                    t.RegisterDecorator(AppendToStringArray("world"));
                     t.RegisterObject("hello");
+                }
+            },
+            {
+                "append..toupper (after)",
+                new[] { "HELLO", "WORLD" },
+                t =>
+                {
+                    t.RegisterObject("hello");
+                    t.RegisterDecorator(AppendToStringArray("world"));
+                    t.RegisterDecorator((string[] ss) =>{
+                        for(var f = 0; f<ss.Length; f++)
+                        {
+                            ss[f] = ss[f].ToUpperInvariant();
+                        }
+                        return ss;
+                    });
+                }
+            },
+            {
+                "append..toupper (before)",
+                new[] { "HELLO", "WORLD" },
+                t =>
+                {
+                    t.RegisterDecorator(AppendToStringArray("world"));
+                    t.RegisterDecorator((string[] ss) =>{
+                        for(var f = 0; f<ss.Length; f++)
+                        {
+                            ss[f] = ss[f].ToUpperInvariant();
+                        }
+                        return ss;
+                    });
+                    t.RegisterObject("hello");
+                }
+            },
+            {
+                "append..toupper (split)",
+                new[] { "HELLO", "WORLD" },
+                t =>
+                {
+                    t.RegisterDecorator(AppendToStringArray("world"));
+                    t.RegisterObject("hello");
+                    t.RegisterDecorator((string[] ss) =>{
+                        for(var f = 0; f<ss.Length; f++)
+                        {
+                            ss[f] = ss[f].ToUpperInvariant();
+                        }
+                        return ss;
+                    });
                 }
             }
         };
@@ -181,11 +229,6 @@ namespace Rezolver.Tests.Compilation.Specification
         [MemberData(nameof(ArrayDecorations))]
         public void DecoratorDelegate_ShouldDecorateArrayOfStrings(string name, string[] expected, SetupTargets setup)
         {
-            // The reason these tests fail is because the DecoratingTargetContainer is neither registered correctly for the
-            // array type (see GetCorrectDecoratorTargetType in <root>\src\Rezolver\ITargetContainer.DecoratorExtensions.cs)
-            // nor does it create its inner container correctly.
-            // The first method does not honour the ITargetContainerTypeResolve option; and neither methods honour the
-            // ITargetContainerFactory option.
             var targets = CreateTargetContainer();
             setup(targets);
             var container = CreateContainer(targets);

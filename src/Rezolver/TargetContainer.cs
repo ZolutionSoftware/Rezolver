@@ -39,7 +39,7 @@ namespace Rezolver
         /// 
         /// #### Default configurations
         /// 
-        /// The configurations applied by default are:
+        /// In addition to some internal configurations, the configurations applied by default are:
         /// 
         /// - <see cref="Configuration.InjectEnumerables"/>
         /// - <see cref="Configuration.InjectArrays"/>
@@ -49,6 +49,8 @@ namespace Rezolver
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
+            new Configuration.Configure<ITargetContainerFactory>(DefaultTargetContainerFactory.Instance),
+            new Configuration.Configure<ITargetContainerTypeResolver>(DefaultTargetContainerTypeResolver.Instance),
             Configuration.InjectEnumerables.Instance,
             Configuration.InjectArrays.Instance,
             Configuration.InjectLists.Instance,
@@ -84,11 +86,6 @@ namespace Rezolver
 
         }
 
-        private static bool ShouldUseGenericTypeDef(Type serviceType)
-        {
-            return TypeHelpers.IsGenericType(serviceType) && !TypeHelpers.IsGenericTypeDefinition(serviceType);
-        }
-
         /// <summary>
         /// Called to get the type that's to be used to fetch a child <see cref="ITargetContainer"/> for targets registered
         /// against a given <paramref name="serviceType"/>.
@@ -98,11 +95,8 @@ namespace Rezolver
         /// <returns>The redirected type, or the <paramref name="serviceType"/> if no type redirection is necessary.</returns>
         protected override Type GetTargetContainerType(Type serviceType)
         {
-            if (ShouldUseGenericTypeDef(serviceType))
-                return serviceType.GetGenericTypeDefinition();
-
-            var typeResolver = this.GetOption<ITargetContainerTypeResolver>(serviceType);
-            return typeResolver?.GetContainerType(serviceType) ?? base.GetTargetContainerType(serviceType);
+            // NOTE - shouldn't require descending to the base class because of the default type resolver option
+            return this.GetChildContainerType(serviceType, Root) ?? base.GetTargetContainerType(serviceType);
         }
 
 
@@ -115,7 +109,7 @@ namespace Rezolver
         /// <param name="container"></param>
         public override void RegisterContainer(Type type, ITargetContainer container)
         {
-            // for explicit container registrations inside a TargetConttainer, some container registrations
+            // for explicit container registrations inside a TargetContainer, some container registrations
             // have to be delegated to child containers - e.g. where a container for a generic type must
             // be registered inside another which is registered against the open generic.
             // Easy way to check: see if GetTargetContainerType returns a difference type to the one passed,
@@ -138,11 +132,8 @@ namespace Rezolver
         /// <returns></returns>
         protected override ITargetContainer CreateContainer(Type targetContainerType)
         {
-            if (TypeHelpers.IsGenericTypeDefinition(targetContainerType))
-                return new GenericTargetContainer(Root, targetContainerType);
-            var factory = this.GetOption<ITargetContainerFactory>(targetContainerType);
-            //REVIEW: Support a default ITargetContainerFactory supplied on construction?  Or rely on Global option?
-            return factory?.CreateContainer(targetContainerType, this, Root) ?? base.CreateContainer(targetContainerType);
+            // NOTE - shouldn't require descending to the base class because of the default target factory option
+            return this.CreateChildContainer(targetContainerType, Root) ?? base.CreateContainer(targetContainerType);
         }
 
         /// <summary>

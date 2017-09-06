@@ -17,13 +17,10 @@ namespace Rezolver.Compilation.Expressions
 	/// </summary>
 	public class RezolvedTargetBuilder : ExpressionBuilderBase<ResolvedTarget>
 	{
-		
-
         private static object DynamicResolve(IResolveContext context, Type newType, Func<IResolveContext, object> fallback)
         {
             //assumes context is already prepared with the correct type set
-            object toReturn;
-            if (!context.Container.TryResolve(context, out toReturn))
+            if (!context.Container.TryResolve(context, out object toReturn))
                 toReturn = fallback(context);
             return toReturn;
         }

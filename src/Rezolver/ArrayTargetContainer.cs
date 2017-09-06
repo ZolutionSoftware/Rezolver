@@ -8,10 +8,37 @@ using System.Text;
 namespace Rezolver
 {
     /// <summary>
-    /// Inheriting from TargetDictionary allows us to support specific 
+    /// Inheriting from TargetDictionary allows the container to support direct registrations
+    /// for concrete array types.
     /// </summary>
     internal class ArrayTargetContainer : TargetDictionaryContainer
     {
+        internal class ArrayTarget : DelegateTarget
+        {
+            public ArrayTarget(Type arrayType, Type elementType)
+                : base(
+                        LinqToArrayMethod.MakeGenericMethod(elementType).CreateDelegate(
+                            typeof(Func<,>).MakeGenericType(
+                                typeof(IEnumerable<>).MakeGenericType(elementType),
+                                arrayType)
+                        ),
+                        arrayType
+                      )
+            {
+
+            }
+
+            public static ArrayTarget Create(Type arrayType)
+            {
+                // Now, technically arrays are covariant and therefore
+                // should contain any object whose type is equal to or derived from
+                // the desired element type.  Need to figure that one out.
+                Type elementType = TypeHelpers.GetElementType(arrayType);
+
+                return new ArrayTarget(arrayType, elementType);
+            }
+        }
+
         public ArrayTargetContainer(ITargetContainer root)
             : base(root)
         {
@@ -26,27 +53,26 @@ namespace Rezolver
             if (!type.IsArray)
                 throw new ArgumentException($"This target container only supports array types - { type } is not an array type");
 
-            var baseResult = base.Fetch(type);
-            if (baseResult != null && !baseResult.UseFallback)
-                return baseResult;
+            var result = base.Fetch(type);
+            if (result != null && !result.UseFallback)
+                return result;
 
             // check the array rank - if it's greater than 1, then we can't do anything
             if (type.GetArrayRank() != 1)
                 throw new ArgumentException($"Arrays of rank 2 cannot be injected automatically - { type } has a rank of { type.GetArrayRank() }");
 
-            // cheating: wrapping IEnumerable injection with a delegate bound directly to the Linq ToArray method.
+            // TODO: see also EnumerableTargetContainer's Fetch method
+            // TODO: look at subclassing a version of this which 'knows' about the 
+            // overriding container so that we can get rid of the forking here.
+            if(Root is OverridingTargetContainer overridingContainer)
+            {
+                // if the 
+                result = overridingContainer.Parent.Fetch(type);
+                if (!(result is ArrayTarget) && !(result?.UseFallback ?? true))
+                    return result;
+            }
 
-            Type elementType = TypeHelpers.GetElementType(type);
-            // Now, technically arrays are covariant and therefore
-            // should contain any object whose type is equal to or derived from
-            // the desired element type.  Need to figure that one out.
-
-            var delegateType = typeof(Func<,>).MakeGenericType(
-                typeof(IEnumerable<>).MakeGenericType(elementType),
-                type
-                );
-
-            return new DelegateTarget(LinqToArrayMethod.MakeGenericMethod(elementType).CreateDelegate(delegateType), type);
+            return ArrayTarget.Create(type);
         }
     }
 }
