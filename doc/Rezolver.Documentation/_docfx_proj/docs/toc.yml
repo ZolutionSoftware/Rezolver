@@ -16,6 +16,9 @@
 - name: Enumerables
   href: enumerables/toc.yml
   homepage: enumerables.md
+- name: Arrays, Lists & Collections
+  href: arrays-lists-collections/toc.yml
+  homepage: arrays-lists-collections/index.md
 - name: Objects as Services
   href: objects.md
 - name: Factory Delegates
@@ -23,7 +26,7 @@
 - name: Expression Trees
   href: expressions.md
 - name: Decorators
-  href: decorators.md
-
+  href: decorators/toc.yml
+  homepage: decorators.md
 - name: Benchmarks
   href: benchmarks.md

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class InjectLists
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -120,13 +120,13 @@ when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITarget
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-    <div class="level1"><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.ListInjection&gt;</span></div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableListInjection.html">EnableListInjection</a>&gt;</div>
     <div class="level2"><span class="xref">InjectLists</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">OptionDependentConfig&lt;ListInjection&gt;.Dependencies</a>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">OptionDependentConfig&lt;EnableListInjection&gt;.Dependencies</a>
     </div>
     <div>
       <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -154,11 +154,11 @@ when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITarget
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_Configuration_InjectLists_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class InjectLists : OptionDependentConfig&lt;ListInjection&gt;, ITargetContainerConfig, IDependant</code></pre>
+    <pre><code class="lang-csharp hljs">public class InjectLists : OptionDependentConfig&lt;EnableListInjection&gt;, ITargetContainerConfig, IDependant</code></pre>
   </div>
   <h5 id="Rezolver_Configuration_InjectLists_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>If this configuration is added to a <a class="xref" href="Rezolver.CombinedTargetContainerConfig.html">CombinedTargetContainerConfig</a>, it can be disabled by adding 
-another configuration to set the <a class="xref" href="Rezolver.Options.ListInjection.html">ListInjection</a> option to <code>false</code> - typically via
+another configuration to set the <a class="xref" href="Rezolver.Options.EnableListInjection.html">EnableListInjection</a> option to <code>false</code> - typically via
 the <a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a>
 method (note - the order that the configs are added doesn&apos;t matter).</p>
 <p>The underlying behaviour relies on registrations of <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> to be present when
@@ -207,12 +207,13 @@ the constructor for the list type is bound, as it expects to bind to the <a clas
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Configuration_InjectLists_Configure_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectLists.Configure(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectLists.cs/#L38">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectLists.cs/#L39">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectLists_Configure_" data-uid="Rezolver.Configuration.InjectLists.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectLists_Configure_Rezolver_ITargetContainer_" data-uid="Rezolver.Configuration.InjectLists.Configure(Rezolver.ITargetContainer)">Configure(ITargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Configures the passed <span class="paramref">targets</span> to enable auto injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a> and <a class="xref" href="https://msdn.microsoft.com/en-us/library/5y536ey6(v=vs.110).aspx">IList&lt;T&gt;</a>
-by registering a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a> for both types.</p>
+  <div class="markdown level1 summary"><p>Configures the passed <code data-dev-comment-type="paramref" class="paramref">targets</code> to enable auto injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/5y536ey6(v=vs.110).aspx">IList&lt;T&gt;</a>
+and <a class="xref" href="https://msdn.microsoft.com/en-us/library/hh192385(v=vs.110).aspx">IReadOnlyList&lt;T&gt;</a> by registering a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for 
+<a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a> for all three types - so long as none of them already have a registration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -237,7 +238,7 @@ by registering a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.ListInjection&gt;.Configure(Rezolver.ITargetContainer)</span></div>
+  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableListInjection&gt;.Configure(Rezolver.ITargetContainer)</span></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_GetDependencies__2___0_System_Collections_Generic_IEnumerable___1__">DependantExtensions.GetDependencies&lt;T, TDependency&gt;(T, IEnumerable&lt;TDependency&gt;)</a>
@@ -250,7 +251,7 @@ by registering a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
-      <div><a class="xref" href="Rezolver.Options.ListInjection.html">ListInjection</a></div>
+      <div><a class="xref" href="Rezolver.Options.EnableListInjection.html">EnableListInjection</a></div>
       <div><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></div>
   </div>
 </article>

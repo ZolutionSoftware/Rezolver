@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" />
-  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -25,6 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,8 +46,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -112,7 +113,6 @@
     <Content Include="developers\api\Rezolver.BindPublicFieldsBehaviour.html" />
     <Content Include="developers\api\Rezolver.BindPublicPropertiesBehaviour.html" />
     <Content Include="developers\api\Rezolver.CachingContainerBase.html" />
-    <Content Include="developers\api\Rezolver.ChildTargetContainer.html" />
     <Content Include="developers\api\Rezolver.CombinedContainerConfig.html" />
     <Content Include="developers\api\Rezolver.CombinedContainerConfigExtensions.html" />
     <Content Include="developers\api\Rezolver.CombinedTargetContainerConfig.html" />
@@ -156,10 +156,11 @@
     <Content Include="developers\api\Rezolver.Compilation.ITargetCompiler.html" />
     <Content Include="developers\api\Rezolver.Compilation.TargetCompilerExtensions.html" />
     <Content Include="developers\api\Rezolver.Compilation.UnresolvedTypeCompiledTarget.html" />
-    <Content Include="developers\api\Rezolver.Configuration.ConfigureOption-1.html" />
-    <Content Include="developers\api\Rezolver.Configuration.ConfigureOption.html" />
+    <Content Include="developers\api\Rezolver.Configuration.Configure-1.html" />
+    <Content Include="developers\api\Rezolver.Configuration.Configure.html" />
     <Content Include="developers\api\Rezolver.Configuration.ExpressionCompilation.html" />
     <Content Include="developers\api\Rezolver.Configuration.html" />
+    <Content Include="developers\api\Rezolver.Configuration.InjectArrays.html" />
     <Content Include="developers\api\Rezolver.Configuration.InjectCollections.html" />
     <Content Include="developers\api\Rezolver.Configuration.InjectEnumerables.html" />
     <Content Include="developers\api\Rezolver.Configuration.InjectLists.html" />
@@ -187,6 +188,7 @@
     <Content Include="developers\api\Rezolver.IContainerConfig.html" />
     <Content Include="developers\api\Rezolver.IContainerScope.html" />
     <Content Include="developers\api\Rezolver.IMemberBindingBehaviour.html" />
+    <Content Include="developers\api\Rezolver.IOptionForAnyGeneric.html" />
     <Content Include="developers\api\Rezolver.IResolveContext.html" />
     <Content Include="developers\api\Rezolver.IScopedContainer.html" />
     <Content Include="developers\api\Rezolver.IScopeFactory.html" />
@@ -194,6 +196,8 @@
     <Content Include="developers\api\Rezolver.ITargetContainer.html" />
     <Content Include="developers\api\Rezolver.ITargetContainerConfig-1.html" />
     <Content Include="developers\api\Rezolver.ITargetContainerConfig.html" />
+    <Content Include="developers\api\Rezolver.ITargetContainerFactory.html" />
+    <Content Include="developers\api\Rezolver.ITargetContainerTypeResolver.html" />
     <Content Include="developers\api\Rezolver.MemberBinding.html" />
     <Content Include="developers\api\Rezolver.MemberBindingBehaviour.html" />
     <Content Include="developers\api\Rezolver.MethodBinding.html" />
@@ -203,6 +207,7 @@
     <Content Include="developers\api\Rezolver.Options.AllowMultiple.html" />
     <Content Include="developers\api\Rezolver.Options.CollectionInjection.html" />
     <Content Include="developers\api\Rezolver.Options.ContainerOption-1.html" />
+    <Content Include="developers\api\Rezolver.Options.EnableArrayInjection.html" />
     <Content Include="developers\api\Rezolver.Options.EnableContravariance.html" />
     <Content Include="developers\api\Rezolver.Options.EnableGlobalOptions.html" />
     <Content Include="developers\api\Rezolver.Options.EnumerableInjection.html" />
@@ -259,14 +264,21 @@
     <Content Include="developers\api\Rezolver.TargetTypeSelector.html" />
     <Content Include="developers\api\Rezolver.UnresolvedICompiledTargetExtensions.html" />
     <Content Include="developers\api\toc.html" />
+    <Content Include="developers\docs\arrays-lists-collections\arrays.html" />
+    <Content Include="developers\docs\arrays-lists-collections\collections.html" />
+    <Content Include="developers\docs\arrays-lists-collections\index.html" />
+    <Content Include="developers\docs\arrays-lists-collections\lists.html" />
     <Content Include="developers\docs\benchmarks.html" />
     <Content Include="developers\docs\constructor-injection\generics.html" />
     <Content Include="developers\docs\constructor-injection\index.html" />
     <Content Include="developers\docs\constructor-injection\member-injection.html" />
     <Content Include="developers\docs\create-and-use-a-container.html" />
     <Content Include="developers\docs\decorators.html" />
+    <Content Include="developers\docs\decorators\delegates.html" />
     <Content Include="developers\docs\delegates.html" />
     <Content Include="developers\docs\enumerables.html" />
+    <Content Include="developers\docs\enumerables\generics.html" />
+    <Content Include="developers\docs\enumerables\lazy-vs-eager.html" />
     <Content Include="developers\docs\expressions.html" />
     <Content Include="developers\docs\index.html" />
     <Content Include="developers\docs\lifetimes\container-scopes.html" />
@@ -477,10 +489,17 @@
     <None Include="Properties\PublishProfiles\ZSA01 - Web Deploy - Pre.pubxml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="toc.yml" />
     <Content Include="_docfx_proj\docs\enumerables\toc.yml" />
     <Content Include="_docfx_proj\docs\enumerables\lazy-vs-eager.md" />
     <Content Include="_docfx_proj\docs\enumerables\generics.md" />
+    <Content Include="_docfx_proj\docs\arrays-lists-collections\arrays.md" />
+    <Content Include="_docfx_proj\docs\arrays-lists-collections\toc.yml" />
+    <Content Include="_docfx_proj\docs\arrays-lists-collections\lists.md" />
+    <Content Include="_docfx_proj\docs\arrays-lists-collections\collections.md" />
+    <Content Include="_docfx_proj\docs\arrays-lists-collections\index.md" />
+    <Content Include="toc.yml" />
+    <Content Include="_docfx_proj\docs\decorators\toc.yml" />
+    <Content Include="_docfx_proj\docs\decorators\delegates.md" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -689,11 +708,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\..\packages\docfx.console.2.21.1\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.21.1\build\docfx.console.targets'))" />
+    <Error Condition="!Exists('..\..\packages\docfx.console.2.24.0\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.24.0\build\docfx.console.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.3.2\build\Microsoft.Net.Compilers.props'))" />
   </Target>
-  <Import Project="..\..\packages\docfx.console.2.21.1\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.21.1\build\docfx.console.targets')" />
+  <Import Project="..\..\packages\docfx.console.2.24.0\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.24.0\build\docfx.console.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

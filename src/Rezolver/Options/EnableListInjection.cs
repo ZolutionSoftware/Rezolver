@@ -10,26 +10,26 @@
     /// The injection behaviour controlled by this option most commonly piggybacks off of the behaviour that's enabled by the 
     /// <see cref="Configuration.InjectEnumerables"/> configuration.
     /// 
-    /// However, although this option is therefore related to the <see cref="EnumerableInjection"/> option, the two are independent.
+    /// However, although this option is therefore related to the <see cref="EnableEnumerableInjection"/> option, the two are independent.
     /// 
     /// If you disable automatic enumerable injection, it does not automatically disable automatic list injection.</remarks>
     /// <seealso cref="Configuration.InjectLists"/>
-    /// <seealso cref="EnumerableInjection"/>
+    /// <seealso cref="EnableEnumerableInjection"/>
     /// <seealso cref="Configuration.InjectEnumerables"/>
-    public class ListInjection : ContainerOption<bool>
+    public class EnableListInjection : ContainerOption<bool>
     {
         /// <summary>
         /// Default value for this option, equivalent to <c>true</c>
         /// </summary>
-        public static ListInjection Default { get; } = true;
+        public static EnableListInjection Default { get; } = true;
 
         /// <summary>
         /// Convenience operator for creating an instance of this option from a boolean.
         /// </summary>
         /// <param name="value"></param>
-        public static implicit operator ListInjection(bool value)
+        public static implicit operator EnableListInjection(bool value)
         {
-            return new ListInjection() { Value = value };
+            return new EnableListInjection() { Value = value };
         }
     }
 }

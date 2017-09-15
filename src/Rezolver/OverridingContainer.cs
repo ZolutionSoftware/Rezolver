@@ -33,7 +33,7 @@ namespace Rezolver
     /// 
     /// ## Behaviour of enumerables
     /// 
-    /// The behaviour of enumerables depends on whether enumerables are enabled via the <see cref="Options.EnumerableInjection"/> option 
+    /// The behaviour of enumerables depends on whether enumerables are enabled via the <see cref="Options.EnableEnumerableInjection"/> option 
     /// (<c>true</c> by default) and whether the <see cref="Configuration.OverridingEnumerables"/> is applied to the container
     /// (which it is, also by default, via the <see cref="Container.DefaultConfig"/>).
     /// 

@@ -10,7 +10,7 @@ namespace Rezolver.Configuration
     /// </summary>
     /// <remarks>
     /// If this configuration is added to a <see cref="CombinedTargetContainerConfig"/>, it can be disabled by adding 
-    /// another configuration to set the <see cref="Options.ListInjection"/> option to <c>false</c> - typically via
+    /// another configuration to set the <see cref="Options.EnableListInjection"/> option to <c>false</c> - typically via
     /// the <see cref="CombinedTargetContainerConfigExtensions.ConfigureOption{TOption}(CombinedTargetContainerConfig, TOption)"/>
     /// method (note - the order that the configs are added doesn't matter).
     /// 
@@ -20,9 +20,9 @@ namespace Rezolver.Configuration
     /// The easiest way to achieve this is also to ensure that the
     /// <see cref="InjectEnumerables"/> configuration is enabled (which it is, by default) - which guarantees that any
     /// <see cref="IEnumerable{T}"/> can be resolved - even if empty.</remarks>
-    /// <seealso cref="Options.ListInjection"/>
+    /// <seealso cref="Options.EnableListInjection"/>
     /// <seealso cref="InjectEnumerables"/>
-    public class InjectLists : OptionDependentConfig<Options.ListInjection>
+    public class InjectLists : OptionDependentConfig<Options.EnableListInjection>
     {
         /// <summary>
         /// The one and only instance of <see cref="InjectLists"/>
@@ -31,15 +31,16 @@ namespace Rezolver.Configuration
         private InjectLists() : base(false) { }
 
         /// <summary>
-        /// Configures the passed <paramref name="targets"/> to enable auto injection of <see cref="List{T}"/> and <see cref="IList{T}"/>
-        /// by registering a <see cref="Targets.GenericConstructorTarget"/> for <see cref="List{T}"/> for both types.
+        /// Configures the passed <paramref name="targets"/> to enable auto injection of <see cref="List{T}"/>, <see cref="IList{T}"/>
+        /// and <see cref="IReadOnlyList{T}"/> by registering a <see cref="Targets.GenericConstructorTarget"/> for 
+        /// <see cref="List{T}"/> for all three types - so long as none of them already have a registration.
         /// </summary>
         /// <param name="targets"></param>
         public override void Configure(ITargetContainer targets)
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 
-            if (!targets.GetOption(Options.ListInjection.Default))
+            if (!targets.GetOption(Options.EnableListInjection.Default))
                 return;
 
             if (targets.Fetch(typeof(List<>)) != null || targets.Fetch(typeof(IList<>)) != null || targets.Fetch(typeof(IReadOnlyList<>)) != null)

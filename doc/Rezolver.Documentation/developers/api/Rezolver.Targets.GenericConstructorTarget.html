@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class GenericConstructorTarget
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -136,7 +136,7 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
       <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ToString">TargetBase.ToString()</a>
     </div>
     <div>
       <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
@@ -175,7 +175,7 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
   <a id="Rezolver_Targets_GenericConstructorTarget__ctor_" data-uid="Rezolver.Targets.GenericConstructorTarget.#ctor*"></a>
   <h4 id="Rezolver_Targets_GenericConstructorTarget__ctor_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Targets.GenericConstructorTarget.#ctor(System.Type,Rezolver.IMemberBindingBehaviour)">GenericConstructorTarget(Type, IMemberBindingBehaviour)</h4>
   <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for the given open generic type,
-which will utilise the optional <span class="paramref">memberBinding</span> when it constructs its
+which will utilise the optional <code data-dev-comment-type="paramref" class="paramref">memberBinding</code> when it constructs its
 <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> when <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> is called.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -322,7 +322,7 @@ will be constructed.</p>
   <div class="markdown level1 summary"><p>Obtains an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (usually a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>) which will create 
 an instance of a generic type (whose definition is equal to <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_GenericType">GenericType</a>) with 
 generic arguments set correctly according to the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> of 
-the <span class="paramref">context</span>.</p>
+the <code data-dev-comment-type="paramref" class="paramref">context</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -366,7 +366,7 @@ the <span class="paramref">context</span>.</p>
   <div class="markdown level1 remarks"><p>The process of binding a requested type to the concrete type can be very complex, when
 inheritance chains and interface implementation maps are taken into account.</p>
 <p>At the simplest end of the spectrum, if <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_GenericType">GenericType</a> is <code>MyGeneric&lt;&gt;</code> and
-the <span class="paramref">context</span>&apos;s <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> is <code>MyGeneric&lt;int&gt;</code>,
+the <code data-dev-comment-type="paramref" class="paramref">context</code>&apos;s <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> is <code>MyGeneric&lt;int&gt;</code>,
 then this function merely has to insert the <code>int</code> type as the generic parameter to the <code>MyGeneric&lt;&gt;</code>
 type definition, bake a new type and create an auto-bound <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>.</p>
 <p>Consider what happens, however, when the inheritance chain is more complex:</p>
@@ -397,7 +397,7 @@ type will almost always need to be a generic type with at least as many type arg
   </span>
   <a id="Rezolver_Targets_GenericConstructorTarget_MapType_" data-uid="Rezolver.Targets.GenericConstructorTarget.MapType*"></a>
   <h4 id="Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_" data-uid="Rezolver.Targets.GenericConstructorTarget.MapType(System.Type)">MapType(Type)</h4>
-  <div class="markdown level1 summary"><p>Maps the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_DeclaredType">DeclaredType</a> open generic type to the <span class="paramref">targetType</span>.</p>
+  <div class="markdown level1 summary"><p>Maps the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_DeclaredType">DeclaredType</a> open generic type to the <code data-dev-comment-type="paramref" class="paramref">targetType</code>.</p>
 <p>Examine the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> of the result to check whether the
 result was successful.</p>
 </div>

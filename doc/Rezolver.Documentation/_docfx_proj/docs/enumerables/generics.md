@@ -104,7 +104,7 @@ and disabling the 'fetch all' behaviour for a specific closed generic:
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6c)]
 
-You can also set this against an open generic - which then has the same effect but for all genercis based on the same
+You can also set this against an open generic - which then has the same effect but for all generics based on the same
 open generic (here we're disabling it for `IGeneric<>`)
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6d)]

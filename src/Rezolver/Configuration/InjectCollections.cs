@@ -12,12 +12,12 @@ namespace Rezolver.Configuration
     /// 
     /// Out of the box, such collections will be seeded by any objects that have been registered against the element type.
     /// </summary>
-    /// <remarks>As with <see cref="InjectLists"/> this configuration object has a partner option - <see cref="Options.CollectionInjection"/> - which can be used
+    /// <remarks>As with <see cref="InjectLists"/> this configuration object has a partner option - <see cref="Options.EnableCollectionInjection"/> - which can be used
     /// to control whether collection injection is actually enabled by this configuration.
     /// 
     /// In normal operation, this configuration is applied by default to <see cref="TargetContainer"/> and <see cref="OverridingTargetContainer"/> instances via the
-    /// <see cref="TargetContainer.DefaultConfig"/> combined config.  To use the <see cref="Options.CollectionInjection"/> option to disable it, you can use
-    /// the <see cref="Configure{TOption}"/> configuration to configure the <see cref="Options.CollectionInjection"/> option to <c>false</c>.  The easiest way to do
+    /// <see cref="TargetContainer.DefaultConfig"/> combined config.  To use the <see cref="Options.EnableCollectionInjection"/> option to disable it, you can use
+    /// the <see cref="Configure{TOption}"/> configuration to configure the <see cref="Options.EnableCollectionInjection"/> option to <c>false</c>.  The easiest way to do
     /// that is via the <see cref="CombinedTargetContainerConfigExtensions.ConfigureOption{TOption}(CombinedTargetContainerConfig, TOption)"/> extension method or
     /// one of its overloads.
     /// 
@@ -27,7 +27,7 @@ namespace Rezolver.Configuration
     /// the target container MUST also be able to inject an instance of <see cref="IList{T}"/>.  The best way to do this is to ensure the <see cref="InjectLists"/> and 
     /// <see cref="InjectEnumerables"/> are both enabled (which they are, by default).
     /// </remarks>
-    public class InjectCollections : OptionDependentConfig<Options.CollectionInjection>
+    public class InjectCollections : OptionDependentConfig<Options.EnableCollectionInjection>
     {
         /// <summary>
         /// The one and only instance of the <see cref="InjectCollections"/> configuration.
@@ -40,14 +40,14 @@ namespace Rezolver.Configuration
 
         /// <summary>
         /// Adds registrations for <see cref="Collection{T}"/> and <see cref="ReadOnlyCollection{T}"/> to the <paramref name="targets"/> (including
-        /// their primary interfaces) so none of the types are already registered.
+        /// their primary interfaces) so long as none of the types are already registered.
         /// </summary>
         /// <param name="targets"></param>
         public override void Configure(ITargetContainer targets)
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 
-            if (!targets.GetOption(Options.CollectionInjection.Default))
+            if (!targets.GetOption(Options.EnableCollectionInjection.Default))
                 return;
 
             if (targets.Fetch(typeof(Collection<>)) != null

@@ -73,7 +73,7 @@ namespace Rezolver
         /// or is not a closed generic type whose generic type definition is <see cref="GenericType"/>.</exception>
         /// <remarks>Notes to overriders: When <paramref name="serviceType"/> is a closed generic type, this function
         /// creates an <see cref="ITargetContainer" /> for that <paramref name="serviceType" />
-        /// by calling the protected method <see cref="TargetDictionaryContainer.AutoRegisterContainer(Type, ITarget)" /> if one doesn't exist
+        /// by calling the protected method <see cref="TargetDictionaryContainer.AutoRegisterContainer(Type)" /> if one doesn't exist
         /// (it calls <see cref="TargetDictionaryContainer.FetchContainer(Type)" /> to check for existence),
         /// and then chains to its <see cref="ITargetContainer.Register(ITarget, Type)" /> method.</remarks>
         public override void Register(ITarget target, Type serviceType = null)

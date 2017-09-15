@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class OptionsTargetContainerExtensions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -168,7 +168,7 @@ ability to actually register more than one target for a particular service in th
 type to wrap simple types (<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.int32(v=vs.110).aspx">Int32</a> and so on) as a human-readably
 named type that differentiates that option from others of the same underlying value type.  Note that the phrase &apos;value type&apos;
 there doesn&apos;t mean that all options must be literal value types (i.e. <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.valuetype(v=vs.110).aspx">ValueType</a>).</p>
-<p>Rezolver has several built-in option types - including <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a>, <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a>,
+<p>Rezolver has several built-in option types - including <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a>, <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>,
 <a class="xref" href="Rezolver.Options.EnableContravariance.html">EnableContravariance</a> plus many more.  These use the <a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a> type to enable
 reading and writing simple boolean-like option values which switch behaviour on and off.</p>
 <p>In addition, the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> classes use the options 
@@ -183,12 +183,12 @@ creating new objects.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOption%60%601(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L128">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L159">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption``1(Rezolver.ITargetContainer,``0)">GetOption&lt;TOption&gt;(ITargetContainer, TOption)</h4>
-  <div class="markdown level1 summary"><p>Gets a globally-defined option of the type <span class="typeparamref">TOption</span> from the <span class="paramref">targets</span> target container,
-returning the <span class="paramref">default</span> if the option has not been explicitly set.</p>
+  <div class="markdown level1 summary"><p>Gets a globally-defined option of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> from the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container,
+returning the <code data-dev-comment-type="paramref" class="paramref">default</code> if the option has not been explicitly set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -230,7 +230,7 @@ returning the <span class="paramref">default</span> if the option has not been e
     <tbody>
       <tr>
         <td><span class="xref">TOption</span></td>
-        <td><p>An option value which was either previously set, or the <span class="paramref">default</span> if not</p>
+        <td><p>An option value which was either previously set, or the <code data-dev-comment-type="paramref" class="paramref">default</code> if not</p>
 </td>
       </tr>
     </tbody>
@@ -256,13 +256,13 @@ returning the <span class="paramref">default</span> if the option has not been e
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer_System_Type___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOption%60%601(Rezolver.ITargetContainer%2CSystem.Type%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L163">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L194">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer_System_Type___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption``1(Rezolver.ITargetContainer,System.Type,``0)">GetOption&lt;TOption&gt;(ITargetContainer, Type, TOption)</h4>
-  <div class="markdown level1 summary"><p>Gets an option either specific to the <span class="paramref">serviceType</span>, or a global option (if <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a> is 
-enabled), of the type <span class="typeparamref">TOption</span> 
-from the <span class="paramref">targets</span> target container, returning the <span class="paramref">default</span> if the option has not been explicitly set.</p>
+  <div class="markdown level1 summary"><p>Gets an option either specific to the <code data-dev-comment-type="paramref" class="paramref">serviceType</code>, or a global option (if <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a> is 
+enabled), of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> 
+from the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container, returning the <code data-dev-comment-type="paramref" class="paramref">default</code> if the option has not been explicitly set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -311,7 +311,7 @@ an option which is specific to this service, and then to search for more general
     <tbody>
       <tr>
         <td><span class="xref">TOption</span></td>
-        <td><p>An option value which was either previously set, or the <span class="paramref">default</span> if not</p>
+        <td><p>An option value which was either previously set, or the <code data-dev-comment-type="paramref" class="paramref">default</code> if not</p>
 </td>
       </tr>
     </tbody>
@@ -344,14 +344,14 @@ that type, and multiple registrations will result in a runtime error.</p>
 is more specific than <code>IFoo&lt;&gt;</code> - so you can set options for a specific closed generic, or its open generic.</p>
 <p><strong>Global Fallback</strong></p>
 <p>In the absence of a service-specific option, a globally-defined option will instead be used if the <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a> option
-is set to <code>true</code> for the <span class="paramref">targets</span> target container.  By default, this is enabled.</p>
+is set to <code>true</code> for the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container.  By default, this is enabled.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOption__2_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOption%60%602(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L188">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L224">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOption__2_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption``2(Rezolver.ITargetContainer,``0)">GetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</h4>
@@ -397,7 +397,7 @@ is set to <code>true</code> for the <span class="paramref">targets</span> target
     <tbody>
       <tr>
         <td><span class="xref">TOption</span></td>
-        <td><p>An option value which was either previously set, or the <span class="paramref">default</span> if not</p>
+        <td><p>An option value which was either previously set, or the <code data-dev-comment-type="paramref" class="paramref">default</code> if not</p>
 </td>
       </tr>
     </tbody>
@@ -428,11 +428,11 @@ is set to <code>true</code> for the <span class="paramref">targets</span> target
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%601(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L203">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L239">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer)">GetOptions&lt;TOption&gt;(ITargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Gets all globally-defined options of the type <span class="typeparamref">TOption</span> from the <span class="paramref">targets</span> target container,
+  <div class="markdown level1 summary"><p>Gets all globally-defined options of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> from the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container,
 returning an empty enumerable if none have been set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -469,7 +469,7 @@ returning an empty enumerable if none have been set.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TOption&gt;</td>
-        <td><p>An enumerable of the type <span class="typeparamref">TOption</span> containing zero or more options that have been
+        <td><p>An enumerable of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> containing zero or more options that have been
 set.</p>
 </td>
       </tr>
@@ -496,13 +496,13 @@ set.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%601(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L221">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L257">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer,System.Type)">GetOptions&lt;TOption&gt;(ITargetContainer, Type)</h4>
-  <div class="markdown level1 summary"><p>Get all options of the type <span class="typeparamref">TOption</span> which have been set for the service type <span class="paramref">serviceType</span>
+  <div class="markdown level1 summary"><p>Get all options of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> which have been set for the service type <code data-dev-comment-type="paramref" class="paramref">serviceType</code>
 or any of its derivatives.  Globally-defined options will also be included in the results unless the <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a>
-option has been set to <code>false</code> on the <span class="paramref">targets</span> target container.</p>
+option has been set to <code>false</code> on the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -544,7 +544,7 @@ option has been set to <code>false</code> on the <span class="paramref">targets<
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TOption&gt;</td>
-        <td><p>An enumerable of the type <span class="typeparamref">TOption</span> containing zero or more options that have been
+        <td><p>An enumerable of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> containing zero or more options that have been
 set.</p>
 </td>
       </tr>
@@ -571,7 +571,7 @@ set.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%602(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L249">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L285">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``2(Rezolver.ITargetContainer)">GetOptions&lt;TOption, TService&gt;(ITargetContainer)</h4>
@@ -612,7 +612,7 @@ for more.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TOption&gt;</td>
-        <td><p>An enumerable of the type <span class="typeparamref">TOption</span> containing zero or more options that have been
+        <td><p>An enumerable of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> containing zero or more options that have been
 set.</p>
 </td>
       </tr>
@@ -644,11 +644,11 @@ set.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.SetOption%60%601(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L54">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L64">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_SetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption``1(Rezolver.ITargetContainer,``0)">SetOption&lt;TOption&gt;(ITargetContainer, TOption)</h4>
-  <div class="markdown level1 summary"><p>Sets the passed <span class="paramref">option</span> into the <span class="paramref">targets</span> target container.</p>
+  <div class="markdown level1 summary"><p>Sets the passed <code data-dev-comment-type="paramref" class="paramref">option</code> into the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container.</p>
 <p>The value can later be retrieved through a call to <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer___0_">GetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>
 or one of its overloads.</p>
 </div>
@@ -718,12 +718,12 @@ or one of its overloads.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.SetOption%60%601(Rezolver.ITargetContainer%2C%60%600%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L77">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L87">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_SetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_System_Type_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption``1(Rezolver.ITargetContainer,``0,System.Type)">SetOption&lt;TOption&gt;(ITargetContainer, TOption, Type)</h4>
-  <div class="markdown level1 summary"><p>Sets the passed <span class="paramref">option</span> into the <span class="paramref">targets</span> target container, associating
-it with the given <span class="paramref">serviceType</span>.</p>
+  <div class="markdown level1 summary"><p>Sets the passed <code data-dev-comment-type="paramref" class="paramref">option</code> into the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container, associating
+it with the given <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.</p>
 <p>The value can later be retrieved through a call to <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__2_Rezolver_ITargetContainer___0_">GetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</a>
 or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer_System_Type___0_">GetOption&lt;TOption&gt;(ITargetContainer, Type, TOption)</a>, passing the same type, or a derived type.</p>
 </div>
@@ -801,12 +801,12 @@ then it&apos;s equivalent to calling <a class="xref" href="Rezolver.OptionsTarge
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_SetOption__2_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.SetOption%60%602(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L107">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L117">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_SetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_SetOption__2_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption``2(Rezolver.ITargetContainer,``0)">SetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</h4>
-  <div class="markdown level1 summary"><p>Sets the passed <span class="paramref">option</span> into the <span class="paramref">targets</span> target container, associating
-it with the given <span class="typeparamref">TService</span>.</p>
+  <div class="markdown level1 summary"><p>Sets the passed <code data-dev-comment-type="paramref" class="paramref">option</code> into the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container, associating
+it with the given <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code>.</p>
 <p>The value can later be retrieved through a call to <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__2_Rezolver_ITargetContainer___0_">GetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</a>
 or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer_System_Type___0_">GetOption&lt;TOption&gt;(ITargetContainer, Type, TOption)</a>, passing the same type, or a derived type.</p>
 </div>
@@ -887,7 +887,7 @@ or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L42" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L52" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

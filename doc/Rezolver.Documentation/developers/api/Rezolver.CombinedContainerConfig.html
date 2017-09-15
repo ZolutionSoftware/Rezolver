@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class CombinedContainerConfig
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -121,13 +121,16 @@ in the correct order.</p>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-    <div class="level1"><span class="xref">Rezolver.Sdk.DependantCollection&lt;Rezolver.IContainerConfig&gt;</span></div>
+    <div class="level1"><a class="xref" href="Rezolver.Sdk.DependantCollection-1.html">DependantCollection</a>&lt;<a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a>&gt;</div>
     <div class="level2"><span class="xref">CombinedContainerConfig</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
       <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html#Rezolver_Sdk_DependantCollection_1_Ordered">DependantCollection&lt;IContainerConfig&gt;.Ordered</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html#Rezolver_Sdk_DependantCollection_1_Clone__1">DependantCollection&lt;IContainerConfig&gt;.Clone&lt;TDerived&gt;()</a>
     </div>
     <div>
       <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html#Rezolver_Sdk_DependantCollection_1_Replace__0__0_">DependantCollection&lt;IContainerConfig&gt;.Replace(IContainerConfig, IContainerConfig)</a>
@@ -298,7 +301,7 @@ enumerable to seed the underlying collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Rezolver.IContainerConfig[]</span></td>
+        <td><a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a>[]</td>
         <td><span class="parametername">behaviours</span></td>
         <td><p>The behaviours to be added to the collection on construction.</p>
 </td>
@@ -333,7 +336,7 @@ enumerable to seed the underlying collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;Rezolver.IContainerConfig&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a>&gt;</td>
         <td><span class="parametername">behaviours</span></td>
         <td><p>The behaviours to be added to the collection on construction.</p>
 </td>
@@ -344,15 +347,47 @@ enumerable to seed the underlying collection.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_CombinedContainerConfig_Clone.md&amp;value=---%0Auid%3A%20Rezolver.CombinedContainerConfig.Clone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CombinedContainerConfig.cs/#L63">View Source</a>
+  </span>
+  <a id="Rezolver_CombinedContainerConfig_Clone_" data-uid="Rezolver.CombinedContainerConfig.Clone*"></a>
+  <h4 id="Rezolver_CombinedContainerConfig_Clone" data-uid="Rezolver.CombinedContainerConfig.Clone">Clone()</h4>
+  <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.CombinedContainerConfig.html">CombinedContainerConfig</a> type, using the passed 
+behaviours to seed the underlying collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CombinedContainerConfig Clone()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.CombinedContainerConfig.html">CombinedContainerConfig</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_CombinedContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CombinedContainerConfig.cs/#L66">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/CombinedContainerConfig.cs/#L73">View Source</a>
   </span>
   <a id="Rezolver_CombinedContainerConfig_Configure_" data-uid="Rezolver.CombinedContainerConfig.Configure*"></a>
   <h4 id="Rezolver_CombinedContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Applies the behaviours in this collection to the passed <span class="paramref">container</span> and 
-<span class="paramref">targets</span>.</p>
+  <div class="markdown level1 summary"><p>Applies the behaviours in this collection to the passed <code data-dev-comment-type="paramref" class="paramref">container</code> and 
+<code data-dev-comment-type="paramref" class="paramref">targets</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -378,7 +413,7 @@ enumerable to seed the underlying collection.</p>
       <tr>
         <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
-        <td><p>The target container used by the <span class="paramref">container</span> for its registrations.</p>
+        <td><p>The target container used by the <code data-dev-comment-type="paramref" class="paramref">container</code> for its registrations.</p>
 </td>
       </tr>
     </tbody>

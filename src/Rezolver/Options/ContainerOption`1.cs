@@ -59,7 +59,7 @@ namespace Rezolver.Options
         /// Implicit casting operator to convert to the option value type from an instance of <see cref="ContainerOption{TOption}"/>.
         /// 
         /// All derived types are encouraged to have a similar casting operator from <typeparamref name="TOption" /> to <see cref="ContainerOption{TOption}"/>
-        /// (for example, see <see cref="EnumerableInjection"/>).
+        /// (for example, see <see cref="EnableEnumerableInjection"/>).
         /// </summary>
         /// <param name="option">The option object to be cast to <typeparamref name="TOption" /> (by reading its <see cref="Value"/> property).
         /// 

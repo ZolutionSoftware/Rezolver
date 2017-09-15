@@ -17,41 +17,41 @@ namespace Rezolver.Tests.Examples.Types
     /// <seealso cref="Rezolver.BindAllMembersBehaviour" />
     public class AttributeBindingBehaviour : BindAllMembersBehaviour
     {
-		protected override IEnumerable<FieldInfo> GetBindableFields(
+        protected override IEnumerable<FieldInfo> GetBindableFields(
             ICompileContext context, Type type)
-		{
-			//filter the fields to those which have an InjectAttribute defined
-			return base.GetBindableFields(context, type)
-				.Where(f => f.IsDefined(typeof(InjectAttribute)));
-		}
+        {
+            //filter the fields to those which have an InjectAttribute defined
+            return base.GetBindableFields(context, type)
+                .Where(f => f.IsDefined(typeof(InjectAttribute)));
+        }
 
-		protected override IEnumerable<PropertyInfo> GetBindableProperties(
+        protected override IEnumerable<PropertyInfo> GetBindableProperties(
             ICompileContext context, Type type)
-		{
-			return base.GetBindableProperties(context, type)
-				.Where(f => f.IsDefined(typeof(InjectAttribute)));
-		}
+        {
+            return base.GetBindableProperties(context, type)
+                .Where(f => f.IsDefined(typeof(InjectAttribute)));
+        }
 
 
-		protected override MemberBinding CreateBinding(
+        protected override MemberBinding CreateBinding(
             ICompileContext context, Type type, FieldInfo field)
-		{
-			//the base method merely creates a new MemberBinding, bound to a new ResolvedTarget
-			//whose type is set to the field type.
-			//This is similar except we read the InjectAttribute's ResolveType, and use that
-			//type if it's not null.
-			var attr = field.GetCustomAttribute<InjectAttribute>();
-			return new MemberBinding(field, new ResolvedTarget(attr.Type ?? field.FieldType));
-		}
+        {
+            //the base method merely creates a new MemberBinding, bound to a new ResolvedTarget
+            //whose type is set to the field type.
+            //This is similar except we read the InjectAttribute's ResolveType, and use that
+            //type if it's not null.
+            var attr = field.GetCustomAttribute<InjectAttribute>();
+            return new MemberBinding(field, new ResolvedTarget(attr.Type ?? field.FieldType));
+        }
 
-		protected override MemberBinding CreateBinding(
+        protected override MemberBinding CreateBinding(
             ICompileContext context, Type type, PropertyInfo prop)
-		{
-			//identical to above
-			var attr = prop.GetCustomAttribute<InjectAttribute>();
-			return new MemberBinding(prop,
-				new ResolvedTarget(attr.Type ?? prop.PropertyType));
-		}
-	}
-	//</example>
+        {
+            //identical to above
+            var attr = prop.GetCustomAttribute<InjectAttribute>();
+            return new MemberBinding(prop,
+                new ResolvedTarget(attr.Type ?? prop.PropertyType));
+        }
+    }
+    //</example>
 }

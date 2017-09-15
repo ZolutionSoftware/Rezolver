@@ -7,7 +7,7 @@ namespace Rezolver.Configuration
     /// <summary>
     /// When applied to an <see cref="OverridingContainer"/> whose target container has been configured to 
     /// enable automatically injected enumerables (via the <see cref="InjectEnumerables"/> configuration callback and the
-    /// <see cref="Options.EnumerableInjection"/> option), then this will extend enumerable support in the 
+    /// <see cref="Options.EnableEnumerableInjection"/> option), then this will extend enumerable support in the 
     /// <see cref="OverridingContainer"/> to construct enumerables made up of a combination of all services in the 
     /// overriden container AND those from the overriding container.
     /// </summary>
@@ -16,7 +16,7 @@ namespace Rezolver.Configuration
     /// instead it is an <see cref="IContainerConfig"/> because it's only relevant for instances of <see cref="OverridingContainer"/>.
     /// 
     /// As such, when applied to an <see cref="IContainer"/> instance, it will only auto-attach when the container is an instance
-    /// of (or derived from) <see cref="OverridingContainer"/> *and* if the <see cref="Options.EnumerableInjection"/> options evaluates
+    /// of (or derived from) <see cref="OverridingContainer"/> *and* if the <see cref="Options.EnableEnumerableInjection"/> options evaluates
     /// to <c>true</c> when read from the <see cref="ITargetContainer"/> passed to <see cref="Configure(IContainer, ITargetContainer)"/>.</remarks>
     public sealed class OverridingEnumerables : IContainerConfig
     {
@@ -28,7 +28,7 @@ namespace Rezolver.Configuration
         private OverridingEnumerables() { }
 
         /// <summary>
-        /// If <paramref name="container"/> is an <see cref="OverridingContainer"/>, and if the <see cref="Options.EnumerableInjection"/>
+        /// If <paramref name="container"/> is an <see cref="OverridingContainer"/>, and if the <see cref="Options.EnableEnumerableInjection"/>
         /// option evaluates to <c>true</c> (the default) when read from <paramref name="targets"/>, then enumerable handling in the container
         /// will be extended to combine the enumerables from both objects registered specifically in the <paramref name="container"/>, plus also those
         /// registered in its <see cref="OverridingContainer.Inner"/> container.
@@ -40,7 +40,7 @@ namespace Rezolver.Configuration
             if (container == null) throw new ArgumentNullException(nameof(container));
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 
-            if (container is OverridingContainer && targets.GetOption(Options.EnumerableInjection.Default))
+            if (container is OverridingContainer && targets.GetOption(Options.EnableEnumerableInjection.Default))
             {
                 targets.RegisterContainer(typeof(IEnumerable<>),
                     new ConcatenatingEnumerableContainer(container, targets));

@@ -40,7 +40,7 @@ namespace Rezolver
     /// named type that differentiates that option from others of the same underlying value type.  Note that the phrase 'value type'
     /// there doesn't mean that all options must be literal value types (i.e. <see cref="ValueType"/>).
     /// 
-    /// Rezolver has several built-in option types - including <see cref="Options.AllowMultiple"/>, <see cref="Options.EnumerableInjection"/>,
+    /// Rezolver has several built-in option types - including <see cref="Options.AllowMultiple"/>, <see cref="Options.EnableEnumerableInjection"/>,
     /// <see cref="Options.EnableContravariance"/> plus many more.  These use the <see cref="Options.ContainerOption{TOption}"/> type to enable
     /// reading and writing simple boolean-like option values which switch behaviour on and off.
     /// 

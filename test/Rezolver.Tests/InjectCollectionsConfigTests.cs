@@ -48,7 +48,7 @@ namespace Rezolver.Tests
             CombinedTargetContainerConfig config = new CombinedTargetContainerConfig()
             {
                 InjectCollections.Instance,
-                Configure.Option<CollectionInjection>(false)
+                Configure.Option<EnableCollectionInjection>(false)
             };
 
             var targets = new TargetContainer(config);

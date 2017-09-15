@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class OptionDependentConfig&lt;TOption&gt;
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -123,6 +123,7 @@ that target container.</p>
     <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
     <div class="level1"><span class="xref">OptionDependentConfig&lt;TOption&gt;</span></div>
   </div>
+      <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectArrays.html">InjectArrays</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a></div>
@@ -181,11 +182,11 @@ a aprticular option.</p>
 a single option type (see the extension methods in the <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a> class), then inheriting from this
 abstract class instead of directly implementing <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> and <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a> is a good idea.</p>
 <p>The default implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">Dependencies</a> will return a single dependency on the type <a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a>
-specialised for the option type <span class="typeparamref">TOption</span>.</p>
+specialised for the option type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code>.</p>
 <p>You can also specify that the dependency is not <em>required</em> in cases where an option has a reasonable default value - thus allowing
 applications to omit any up-front configuration for that option except where absolutely necessary.</p>
-<p>The <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> config inherits from this class - passing <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> as 
-<span class="typeparamref">TOption</span>, with the constructor marking the dependency as optional. This ensures that it is executed after the option
+<p>The <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> config inherits from this class - passing <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> as 
+<code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code>, with the constructor marking the dependency as optional. This ensures that it is executed after the option
 has been configured by any <a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a> objects specialised for the option type.</p>
 </div>
   <h3 id="constructors">Constructors
@@ -200,7 +201,7 @@ has been configured by any <a class="xref" href="Rezolver.ITargetContainerConfig
   <a id="Rezolver_Configuration_OptionDependentConfig_1__ctor_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.#ctor*"></a>
   <h4 id="Rezolver_Configuration_OptionDependentConfig_1__ctor_System_Boolean_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.#ctor(System.Boolean)">OptionDependentConfig(Boolean)</h4>
   <div class="markdown level1 summary"><p>Constructs a new instance of the type <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a> which starts off with a required or optional
-dependency (controlled by the argument passed <span class="paramref">optionConfigurationRequired</span> parameter)</p>
+dependency (controlled by the argument passed <code data-dev-comment-type="paramref" class="paramref">optionConfigurationRequired</code> parameter)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -236,7 +237,7 @@ dependency (controlled by the argument passed <span class="paramref">optionConfi
   <a id="Rezolver_Configuration_OptionDependentConfig_1_Dependencies_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.Dependencies*"></a>
   <h4 id="Rezolver_Configuration_OptionDependentConfig_1_Dependencies" data-uid="Rezolver.Configuration.OptionDependentConfig`1.Dependencies">Dependencies</h4>
   <div class="markdown level1 summary"><p>The base implementation returns an enumerable containing a single dependency on the type <a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a>
-specialised for the type <span class="typeparamref">TOption</span>.</p>
+specialised for the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -253,7 +254,7 @@ specialised for the type <span class="typeparamref">TOption</span>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;Rezolver.Sdk.DependencyMetadata&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

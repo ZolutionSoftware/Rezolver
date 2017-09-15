@@ -8,7 +8,7 @@
   	<title>Member Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Member Injection | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -175,7 +175,7 @@ API (as shown in the last example).</p>
 }
 </code></pre><p>We simply setup the container to build all three types and make sure to pass the binding behaviour when registering the
 <code>Has2InjectableMembers</code> target.  We&#39;ll see how to do this using both an explicit <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>, but
-also via an @Rezolver.IContainerBehaviour.</p>
+also via the Options API.</p>
 <h3 id="explicit-rezolverimemberbindingbehaviour">Explicit <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h3>
 <p>Here we&#39;ll register the <code>Has2InjectableMembers</code> type in the container with the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a> behaviour
 passed with the registration.  Doing this overrides the container&#39;s default behaviour, thus guaranteeing that the members are
@@ -212,9 +212,9 @@ var result = container.Resolve&lt;Has2InjectableMembers&gt;();
 
 Assert.NotNull(result.Service1);
 Assert.NotNull(result.Service2);
-</code></pre><h3 id="rezolvericontainerbehaviour-explicit">@Rezolver.IContainerBehaviour (Explicit)</h3>
-<p>Our final demonstration of @Rezolver.IContainerBehaviour - here we clone the current global behaviour and then replace
-whatever the default <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> is with the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a> behaviour.</p>
+</code></pre><h3 id="service-specific-option">Service-specific option</h3>
+<p>But what if we only want instances of one type (or any of its derivatives) to have their members injected?</p>
+<p>Well, instead of setting the option globally, we can associate it with a particular service type:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 // Here - the behaviour will *only* kick in for the Has2InjectableMembers type
 container.SetOption(MemberBindingBehaviour.BindAll, typeof(Has2InjectableMembers));
@@ -228,7 +228,10 @@ var result = container.Resolve&lt;Has2InjectableMembers&gt;();
 
 Assert.NotNull(result.Service1);
 Assert.NotNull(result.Service2);
-</code></pre><hr>
+</code></pre><p>Clearly, in this case we might just as well use an explicitly-provided member binding behaviour, as shown two examples 
+above, however this facility is useful if you have a whole hierarchy of objects with a common interface or
+base whose properties and/or fields should be auto-injected.</p>
+<hr>
 <h2 id="custom-binding-behaviour">Custom binding behaviour</h2>
 <div class="TIP"><h5>Tip</h5><p>The options approach shown in the previous two examples will work also with the the custom binding behaviour
 shown in this example.</p>
@@ -282,49 +285,49 @@ public class InjectAttribute : Attribute
 }
 </code></pre><p>Finally, our binding behaviour - which extends the aforementioned <a class="xref" href="../../api/Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a> as that class has plenty of
 extension points:</p>
-<pre><code class="lang-csharp" name="AttributeBindingBehaviour.cs">   /// &lt;summary&gt;
-   /// Class AttributeBindingBehaviour - we reuse the BindAllMembersBehaviour class
-   /// because it has numerous virtual hooks we can use to customise behaviour, and takes care
-   /// of reflecting the target type for us.
-   /// &lt;/summary&gt;
-   /// &lt;seealso cref=&quot;Rezolver.BindAllMembersBehaviour&quot; /&gt;
-   public class AttributeBindingBehaviour : BindAllMembersBehaviour
-   {
-	protected override IEnumerable&lt;FieldInfo&gt; GetBindableFields(
-           ICompileContext context, Type type)
-	{
-		//filter the fields to those which have an InjectAttribute defined
-		return base.GetBindableFields(context, type)
-			.Where(f =&gt; f.IsDefined(typeof(InjectAttribute)));
-	}
+<pre><code class="lang-csharp" name="AttributeBindingBehaviour.cs">/// &lt;summary&gt;
+/// Class AttributeBindingBehaviour - we reuse the BindAllMembersBehaviour class
+/// because it has numerous virtual hooks we can use to customise behaviour, and takes care
+/// of reflecting the target type for us.
+/// &lt;/summary&gt;
+/// &lt;seealso cref=&quot;Rezolver.BindAllMembersBehaviour&quot; /&gt;
+public class AttributeBindingBehaviour : BindAllMembersBehaviour
+{
+    protected override IEnumerable&lt;FieldInfo&gt; GetBindableFields(
+        ICompileContext context, Type type)
+    {
+        //filter the fields to those which have an InjectAttribute defined
+        return base.GetBindableFields(context, type)
+            .Where(f =&gt; f.IsDefined(typeof(InjectAttribute)));
+    }
 
-	protected override IEnumerable&lt;PropertyInfo&gt; GetBindableProperties(
-           ICompileContext context, Type type)
-	{
-		return base.GetBindableProperties(context, type)
-			.Where(f =&gt; f.IsDefined(typeof(InjectAttribute)));
-	}
+    protected override IEnumerable&lt;PropertyInfo&gt; GetBindableProperties(
+        ICompileContext context, Type type)
+    {
+        return base.GetBindableProperties(context, type)
+            .Where(f =&gt; f.IsDefined(typeof(InjectAttribute)));
+    }
 
 
-	protected override MemberBinding CreateBinding(
-           ICompileContext context, Type type, FieldInfo field)
-	{
-		//the base method merely creates a new MemberBinding, bound to a new ResolvedTarget
-		//whose type is set to the field type.
-		//This is similar except we read the InjectAttribute&#39;s ResolveType, and use that
-		//type if it&#39;s not null.
-		var attr = field.GetCustomAttribute&lt;InjectAttribute&gt;();
-		return new MemberBinding(field, new ResolvedTarget(attr.Type ?? field.FieldType));
-	}
+    protected override MemberBinding CreateBinding(
+        ICompileContext context, Type type, FieldInfo field)
+    {
+        //the base method merely creates a new MemberBinding, bound to a new ResolvedTarget
+        //whose type is set to the field type.
+        //This is similar except we read the InjectAttribute&#39;s ResolveType, and use that
+        //type if it&#39;s not null.
+        var attr = field.GetCustomAttribute&lt;InjectAttribute&gt;();
+        return new MemberBinding(field, new ResolvedTarget(attr.Type ?? field.FieldType));
+    }
 
-	protected override MemberBinding CreateBinding(
-           ICompileContext context, Type type, PropertyInfo prop)
-	{
-		//identical to above
-		var attr = prop.GetCustomAttribute&lt;InjectAttribute&gt;();
-		return new MemberBinding(prop,
-			new ResolvedTarget(attr.Type ?? prop.PropertyType));
-	}
+    protected override MemberBinding CreateBinding(
+        ICompileContext context, Type type, PropertyInfo prop)
+    {
+        //identical to above
+        var attr = prop.GetCustomAttribute&lt;InjectAttribute&gt;();
+        return new MemberBinding(prop,
+            new ResolvedTarget(attr.Type ?? prop.PropertyType));
+    }
 }
 </code></pre><p>With that in place, we can then test:</p>
 <pre><code class="lang-csharp" name="Example.cs">var container = new Container();
@@ -343,7 +346,10 @@ Assert.IsType&lt;MyService1&gt;(result.InjectedServiceField);
 Assert.IsType&lt;MyService6&gt;(result.InjectedServiceProp);
 Assert.Null(result.ServiceField);
 Assert.Null(result.ServiceProp);
-</code></pre><p>Hopefully this example will inspire you to create your own custom binding behaviour :)</p>
+</code></pre><div class="TIP"><h5>Tip</h5><p>You can, of course, then enable member injection for all constructor-injected types (including open generics) simply by registering 
+this behaviour as a global option, <a href="#global-option">as shown earlier in this topic</a>.</p>
+</div>
+<p>Hopefully this example will inspire you to create your own custom binding behaviour :)</p>
 <hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>

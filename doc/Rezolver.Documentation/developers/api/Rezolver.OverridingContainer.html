@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class OverridingContainer
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -214,7 +214,7 @@ in the overridden container by virtue of the fact that the overriding container 
 
 <hr>
 <h2 id="behaviour-of-enumerables">Behaviour of enumerables</h2>
-<p>The behaviour of enumerables depends on whether enumerables are enabled via the <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option 
+<p>The behaviour of enumerables depends on whether enumerables are enabled via the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option 
 (<code>true</code> by default) and whether the <a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html">OverridingEnumerables</a> is applied to the container
 (which it is, also by default, via the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a>).</p>
 <p>If so, then any request for <code>IEnumerable&lt;T&gt;</code> will result in an enumerable which combines the one resolved by the <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_Inner">Inner</a>
@@ -265,7 +265,7 @@ their dependencies from this container.</p>
         <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
         <td><p>Optional. Contains the targets that will be used as the source of registrations for this container
-(note - separate to those of the <span class="paramref">inner</span> container).</p>
+(note - separate to those of the <code data-dev-comment-type="paramref" class="paramref">inner</code> container).</p>
 <p>If not provided, then a new <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> will be created.</p>
 </td>
       </tr>
@@ -322,7 +322,7 @@ their dependencies from this container.</p>
   </span>
   <a id="Rezolver_OverridingContainer_CanResolve_" data-uid="Rezolver.OverridingContainer.CanResolve*"></a>
   <h4 id="Rezolver_OverridingContainer_CanResolve_Rezolver_IResolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.IResolveContext)">CanResolve(IResolveContext)</h4>
-  <div class="markdown level1 summary"><p>Called to determine if this container is able to resolve the type specified in the passed <span class="paramref">context</span>.</p>
+  <div class="markdown level1 summary"><p>Called to determine if this container is able to resolve the type specified in the passed <code data-dev-comment-type="paramref" class="paramref">context</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -451,6 +451,12 @@ is how dependency chaining from this container to the inner container is achieve
   </div>
   <div>
       <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Func___0___0__">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(ITargetContainer, Func&lt;TDecorated, TDecorated&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Delegate_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Delegate, Type)</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Type, Type)</a>

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class TargetDictionaryContainer
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -114,7 +114,7 @@
   <h1 id="Rezolver_TargetDictionaryContainer" data-uid="Rezolver.TargetDictionaryContainer" class="text-break">Class TargetDictionaryContainer
   </h1>
   <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves 
-<a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by type.</p>
+<a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by service type.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -155,10 +155,11 @@
     <pre><code class="lang-csharp hljs">public class TargetDictionaryContainer : ITargetContainer</code></pre>
   </div>
   <h5 id="Rezolver_TargetDictionaryContainer_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>This type is not thread-safe</p>
-<p>Note that for generic type, a special container is registered first against the 
-open generic version of the type, with concrete (closed) generics being registered within
-that.</p>
+  <div class="markdown level0 remarks"><p>This class stores <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances inside child <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> instances that are registered
+against types equal, or related, to the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target.</p>
+<p>When <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> is called, an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> is looked up which will &apos;own&apos; that target.
+If one is not found, then one will be created and automatically registered (via <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_EnsureContainer_System_Type_">EnsureContainer(Type)</a>.</p>
+<p>With a (possibly new) child target container in hand, the registration is then delegated to that target container.</p>
 </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -167,11 +168,11 @@ that.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer__ctor_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.%23ctor(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L42">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L50">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer__ctor_" data-uid="Rezolver.TargetDictionaryContainer.#ctor*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetDictionaryContainer.#ctor(Rezolver.ITargetContainer)">TargetDictionaryContainer(ITargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Constructs a new <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a> optionally setting </p>
+  <div class="markdown level1 summary"><p>Constructs a new <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a> optionally setting the <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Root">Root</a> target container.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -191,11 +192,17 @@ that.</p>
       <tr>
         <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
         <td><span class="parametername">root</span></td>
-        <td><p>If this container belongs to another, then pass it here.</p>
+        <td><p>If this container belongs to one overarching root container (typically an instance of 
+<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> or <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>), then pass it here.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Rezolver_TargetDictionaryContainer__ctor_Rezolver_ITargetContainer__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The importance of the <code data-dev-comment-type="paramref" class="paramref">root</code> target container is to enable code to be able to reach all 
+registrations for all services rather than only those which are stored within this container, because this type is used
+both as a root, but also for other more specialised target containers.</p>
+</div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -203,7 +210,7 @@ that.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_Root.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.Root%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L36">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L40">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_Root_" data-uid="Rezolver.TargetDictionaryContainer.Root*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer_Root" data-uid="Rezolver.TargetDictionaryContainer.Root">Root</h4>
@@ -237,10 +244,64 @@ constructor, then it will be returned by this property.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_AutoRegisterContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.AutoRegisterContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L197">View Source</a>
+  </span>
+  <a id="Rezolver_TargetDictionaryContainer_AutoRegisterContainer_" data-uid="Rezolver.TargetDictionaryContainer.AutoRegisterContainer*"></a>
+  <h4 id="Rezolver_TargetDictionaryContainer_AutoRegisterContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.AutoRegisterContainer(System.Type)">AutoRegisterContainer(Type)</h4>
+  <div class="markdown level1 summary"><p>Called by <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> to create and register the container 
+instance most suited for the passed target.  The base implementation 
+always creates a <a class="xref" href="Rezolver.TargetListContainer.html">TargetListContainer</a>, capable of storing multiple targets
+against a single type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual ITargetContainer AutoRegisterContainer(Type targetContainerType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">targetContainerType</span></td>
+        <td><p>The type that the target container is to be registered under.</p>
+<p>Note that this type will <em>not</em> be remapped by the <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_GetTargetContainerType_System_Type_">GetTargetContainerType(Type)</a> method - 
+it will be used as-is.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L187">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L232">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_CombineWith_" data-uid="Rezolver.TargetDictionaryContainer.CombineWith*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
@@ -292,22 +353,19 @@ constructor, then it will be returned by this property.</p>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.CreateContainer(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.CreateContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L171">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L221">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_CreateContainer_" data-uid="Rezolver.TargetDictionaryContainer.CreateContainer*"></a>
-  <h4 id="Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_" data-uid="Rezolver.TargetDictionaryContainer.CreateContainer(System.Type,Rezolver.ITarget)">CreateContainer(Type, ITarget)</h4>
-  <div class="markdown level1 summary"><p>Called by <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> to create and register the container 
-instance most suited for the passed target.  The base implementation 
-always creates a <a class="xref" href="Rezolver.TargetListContainer.html">TargetListContainer</a>, capable of storing multiple targets
-against a single type.</p>
+  <h4 id="Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.CreateContainer(System.Type)">CreateContainer(Type)</h4>
+  <div class="markdown level1 summary"><p>Called to create a new container instance which will be </p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual ITargetContainer CreateContainer(Type serviceType, ITarget target)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual ITargetContainer CreateContainer(Type targetContainerType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -321,16 +379,8 @@ against a single type.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-        <td><span class="parametername">serviceType</span></td>
+        <td><span class="parametername">targetContainerType</span></td>
         <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The initial target for which the container is being created.
-Can be null.  Note - the function is not expected to add this target to the new
-container.</p>
-</td>
       </tr>
     </tbody>
   </table>
@@ -351,10 +401,69 @@ container.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_EnsureContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.EnsureContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L182">View Source</a>
+  </span>
+  <a id="Rezolver_TargetDictionaryContainer_EnsureContainer_" data-uid="Rezolver.TargetDictionaryContainer.EnsureContainer*"></a>
+  <h4 id="Rezolver_TargetDictionaryContainer_EnsureContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.EnsureContainer(System.Type)">EnsureContainer(Type)</h4>
+  <div class="markdown level1 summary"><p>Called to make sure that an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> has been registered which can act as
+owner to targets whose <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> is equal to the passed <code data-dev-comment-type="paramref" class="paramref">serviceType</code> 
+so that a target or target container can be registered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ITargetContainer EnsureContainer(Type serviceType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>Required. The service type against which a target registration is to be made (and for
+which a target container is required.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><p>A child target container into which targets, or another child target container, can be registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetDictionaryContainer_EnsureContainer_System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>An existing container is returned if <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">FetchContainer(Type)</a> returns it.  If not, then a new container 
+is created and registered via the <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_AutoRegisterContainer_System_Type_">AutoRegisterContainer(Type)</a> method, and returned.</p>
+<p>Note that the <code data-dev-comment-type="paramref" class="paramref">serviceType</code> will possibly be mapped to a different container type via any
+<a class="xref" href="Rezolver.ITargetContainerTypeResolver.html">ITargetContainerTypeResolver</a> that&apos;s registered via the options API.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L57">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L65">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_Fetch_" data-uid="Rezolver.TargetDictionaryContainer.Fetch*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer_Fetch_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.Fetch(System.Type)">Fetch(Type)</h4>
@@ -395,7 +504,7 @@ container.</p>
       <tr>
         <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
         <td><p>A single target representing the last target registered against the 
-<span class="paramref">type</span>, or, null if no target is found.</p>
+<code data-dev-comment-type="paramref" class="paramref">type</code>, or, null if no target is found.</p>
 </td>
       </tr>
     </tbody>
@@ -413,7 +522,7 @@ use a parent container&apos;s result for the same type.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L71">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L79">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_FetchAll_" data-uid="Rezolver.TargetDictionaryContainer.FetchAll*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer_FetchAll_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
@@ -466,18 +575,18 @@ empty enumerable if the type is not registered.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L87">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L95">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_FetchContainer_" data-uid="Rezolver.TargetDictionaryContainer.FetchContainer*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.FetchContainer(System.Type)">FetchContainer(Type)</h4>
-  <div class="markdown level1 summary"><p>Obtains a child container that was previously registered by the passed
-<span class="paramref">type</span>.  Note - the type </p>
+  <div class="markdown level1 summary"><p>Obtains the child container which owns the given <code data-dev-comment-type="paramref" class="paramref">serviceType</code> on behalf
+of this target container.  </p>
 <p>Returns null if no entry is found.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual ITargetContainer FetchContainer(Type type)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual ITargetContainer FetchContainer(Type serviceType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -491,8 +600,9 @@ empty enumerable if the type is not registered.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-        <td><span class="parametername">type</span></td>
-        <td></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>The service type whose owning <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> is sought.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -507,7 +617,8 @@ empty enumerable if the type is not registered.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-        <td></td>
+        <td><p>The target container which manages the given service type, if one is registered - otherwise <code>null</code>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -515,10 +626,62 @@ empty enumerable if the type is not registered.</p>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_System_Type_">ITargetContainer.FetchContainer(Type)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_GetTargetContainerType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.GetTargetContainerType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L211">View Source</a>
+  </span>
+  <a id="Rezolver_TargetDictionaryContainer_GetTargetContainerType_" data-uid="Rezolver.TargetDictionaryContainer.GetTargetContainerType*"></a>
+  <h4 id="Rezolver_TargetDictionaryContainer_GetTargetContainerType_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.GetTargetContainerType(System.Type)">GetTargetContainerType(Type)</h4>
+  <div class="markdown level1 summary"><p>Called to get the type that&apos;s to be used to fetch a child <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> for targets registered
+against a given <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual Type GetTargetContainerType(Type serviceType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>The service type - usually pulled from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of a 
+<a class="xref" href="Rezolver.ITarget.html">ITarget</a> that is to be registered, or the service type passed to <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Fetch_System_Type_">Fetch(Type)</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><p>The base implementation always returns the <code data-dev-comment-type="paramref" class="paramref">serviceType</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L149">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L158">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_Register_" data-uid="Rezolver.TargetDictionaryContainer.Register*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.TargetDictionaryContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
@@ -548,24 +711,26 @@ empty enumerable if the type is not registered.</p>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
-        <td></td>
+        <td><p>The service type against which the <code data-dev-comment-type="paramref" class="paramref">target</code> is to be registered, if 
+different from the target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">ITargetContainer.Register(ITarget, Type)</a></div>
   <h5 id="Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This implementation creates an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> for the <span class="paramref">serviceType</span> 
-with a call to the protected method <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_Rezolver_ITarget_">CreateContainer(Type, ITarget)</a> if one doesn&apos;t exist 
-(it calls <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">FetchContainer(Type)</a> to check for existence),
-and then chains to its <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method.</p>
+  <div class="markdown level1 remarks"><p>This implementation creates a child <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> for the <code data-dev-comment-type="paramref" class="paramref">serviceType</code> 
+with a call to the protected method <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_EnsureContainer_System_Type_">EnsureContainer(Type)</a> if one doesn&apos;t already exist.</p>
+<p>The registration is then delegated to that child container&apos;s own implementation of
+<a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer.RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L106">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L114">View Source</a>
   </span>
   <a id="Rezolver_TargetDictionaryContainer_RegisterContainer_" data-uid="Rezolver.TargetDictionaryContainer.RegisterContainer*"></a>
   <h4 id="Rezolver_TargetDictionaryContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetDictionaryContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
@@ -617,6 +782,12 @@ instances into which the &apos;standard&apos; targets are registered.</p>
   </div>
   <div>
       <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Func___0___0__">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(ITargetContainer, Func&lt;TDecorated, TDecorated&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Delegate_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Delegate, Type)</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Type, Type)</a>
@@ -749,7 +920,7 @@ instances into which the &apos;standard&apos; targets are registered.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_TargetDictionaryContainer.md&amp;value=---%0Auid%3A%20Rezolver.TargetDictionaryContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L23" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/TargetDictionaryContainer.cs/#L27" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

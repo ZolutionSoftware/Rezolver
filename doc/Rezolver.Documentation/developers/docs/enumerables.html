@@ -8,7 +8,7 @@
   	<title>Enumerables | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Enumerables | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -119,7 +119,7 @@ method has been called against the target type <code>Service</code>:</p>
 against that type, in the order they were registered.</li>
 </ul>
 <div class="NOTE"><h5>Note</h5><p>The functionality described here depends on two target container options: <a class="xref" href="../api/Rezolver.Options.AllowMultiple.html">AllowMultiple</a> 
-and <a class="xref" href="../api/Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> - which are both configured to be equivalent to <code>true</code> by default
+and @Rezolver.Options.EnumerableInjection - which are both configured to be equivalent to <code>true</code> by default
 for all <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
 </div>
 <p>You are not restricted in the targets you use to produce instances for an enumerable (e.g. <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>,
@@ -132,10 +132,10 @@ more on this, read the topic <a href="enumerables/lazy-vs-eager.html">Lazy vs Ea
 <p>To resolve an enumerable from a container or through a scope, you can simply use <code>IEnumerable&lt;Foo&gt;</code> as the input
 type for a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call:</p>
 <pre><code class="lang-cs">var enumerable = container.Resolve&lt;IEnumerable&lt;Foo&gt;&gt;();
-</code></pre><p>However, the <code>ResolveMany</code> extension method (see <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_">ResolveMany</a>
+</code></pre><p>However, the <code>ResolveMany</code> extension methods (see <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_">ResolveMany</a>
 and <a class="xref" href="../api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_">ResolveMany</a>) provide a shortut which allow you to pass
 just the element type of the enumerable to reduce the &#39;angle-bracket percent&#39; of code which directly resolves
-enumerables (which of course you won&#39;t be doing because you&#39;re not using &#39;service location&#39; are you!? ;) ):</p>
+enumerables (which of course you won&#39;t be doing because you&#39;re not using &#39;service location&#39; are you!? <span class="emoji" shortcode="wink">😉</span> ):</p>
 <pre><code class="lang-cs">// this is equivalent to resolving IEnumerable&lt;Foo&gt;
 var enumerable2 = container.ResolveMany&lt;Foo&gt;();
 </code></pre><p>Most, if not all, the examples in this section use this shortcut - but it&#39;s worth noting that the two methods are
@@ -274,7 +274,7 @@ using (var childScope = container.CreateScope())
 </ul>
 <hr>
 <h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
-<p><a href="decorators.html">Decorators</a> that have been registered against the element type of an enumerable will be applied to all 
+<p><a href="decorators.html">Decorators</a> that have been registered against the <strong>element type</strong> of an enumerable will be applied to all 
 instances that the container produces for the enumerable.  This also applies to stacked decorators (where multiple 
 decorators are applied on top of one other).</p>
 <p>So, we have two decorator types for <code>IMyService</code>:</p>
@@ -314,12 +314,12 @@ Assert.IsType&lt;MyService2&gt;(((MyServiceDecorator1)result[1]).Inner);
 Assert.IsType&lt;MyService3&gt;(((MyServiceDecorator1)result[2]).Inner);
 </code></pre><p>If more decorators were added, of course - then each element would be &#39;re-decorated&#39; accordingly.</p>
 <div class="TIP"><h5>Tip</h5><p>You can also decorate <code>IEnumerable&lt;T&gt;</code> instances without breaking Rezolver&#39;s automatic enumerable injection 
-functionality.</p>
+functionality - see the <a href="decorators.html">Decorators section</a> for more.</p>
 </div>
 <hr>
 <h2 id="explicit-ienumerablet-registrations">Explicit <code>IEnumerable&lt;T&gt;</code> registrations</h2>
 <p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically when the <a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration 
-is applied (and not also disabled by the <a class="xref" href="../api/Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option being set to <code>false</code>), it doesn&#39;t 
+is applied (and not also disabled by the @Rezolver.Options.EnumerableInjection option being set to <code>false</code>), it doesn&#39;t 
 prevent you from manually adding registrations for specific <code>IEnumerable&lt;&gt;</code> types which override the default behaviour.</p>
 <p>For example, let&#39;s say that you have two registrations for services which share a common interface, but they have only
 been registered against their concrete type (perhaps it&#39;s historical code you can&#39;t risk changing). Your code 

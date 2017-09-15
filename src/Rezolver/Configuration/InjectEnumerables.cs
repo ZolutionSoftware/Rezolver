@@ -17,10 +17,10 @@ namespace Rezolver.Configuration
     /// To disable it, you can either remove it from that configuration object (which then disables it for all)
     /// or you can add an option configuration to it (via 
     /// <see cref="CombinedTargetContainerConfigExtensions.ConfigureOption{TOption}(CombinedTargetContainerConfig, TOption)"/> 
-    /// or similar) for the <see cref="Options.EnumerableInjection"/> option, setting it to <c>false</c>.
+    /// or similar) for the <see cref="Options.EnableEnumerableInjection"/> option, setting it to <c>false</c>.
     /// 
     /// If this behaviour is not attached to an <see cref="ITargetContainer"/>, or is disabled via the 
-    /// <see cref="Options.EnumerableInjection"/> option, then only explicitly
+    /// <see cref="Options.EnableEnumerableInjection"/> option, then only explicitly
     /// registered enumerables will be able to be resolved by any <see cref="IContainer"/> built from that 
     /// target container.
     /// 
@@ -38,7 +38,7 @@ namespace Rezolver.Configuration
     /// <c>IEnumerable&lt;Foo&gt;</c> - thus ensuring that all enumerables of <c>Foo</c> are eager, but leave
     /// it at its default of <c>true</c> for all other enumerable types.
     /// </remarks>
-    public sealed class InjectEnumerables : OptionDependentConfig<Options.EnumerableInjection>
+    public sealed class InjectEnumerables : OptionDependentConfig<Options.EnableEnumerableInjection>
     {
         /// <summary>
         /// The one and only instance of the <see cref="InjectEnumerables"/> type.
@@ -57,7 +57,7 @@ namespace Rezolver.Configuration
         /// <remarks>
         /// This implementation registers a special target container (via <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/>)
         /// for <see cref="IEnumerable{T}"/> in passed <paramref name="targets"/>
-        /// if the <see cref="Options.EnumerableInjection"/> option evaluates to <c>true</c> when read from <paramref name="targets"/>.
+        /// if the <see cref="Options.EnableEnumerableInjection"/> option evaluates to <c>true</c> when read from <paramref name="targets"/>.
         /// 
         /// This is the default value for that option anyway, so, as the remarks section on the class states, all that's required to enable
         /// the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <see cref="ITargetContainer"/></remarks>
@@ -66,7 +66,7 @@ namespace Rezolver.Configuration
             targets.MustNotBeNull(nameof(targets));
             // if an option has already been set on the target container which disables automatic enumerables,
             // then do not apply the configuration.
-            if (!targets.GetOption(Options.EnumerableInjection.Default))
+            if (!targets.GetOption(Options.EnableEnumerableInjection.Default))
                 return;
             // we can make an IDependant config which is specialised to be dependant on a particular boolean option
             // then we can make a reusable 'ConfigureOption' configuration object, which can be wrapped up behind an

@@ -1,4 +1,4 @@
-﻿# Generic Constructor Injection
+﻿# Open Generic Constructor Injection
 
 > [!TIP]
 > Before reading this you should read through the section on [constructor injection](index.md)

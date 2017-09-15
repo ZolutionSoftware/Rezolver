@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -187,9 +187,9 @@ interface present a similar set of functionality to <a class="xref" href="Rezolv
       <h4><a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a></h4>
       <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
 <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
-<p>The best way to add a decorator to your target container is to use the extension method 
-<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
-or its non-generic equivalent.</p>
+<p>The best way to add a decorator to your target container is to use the extension methods in
+<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a> - which provide simple shortcuts for creating 
+decoration registrations.</p>
 </section>
       <h4><a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a></h4>
       <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which simplify the registration of decorators (via the
@@ -284,7 +284,7 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
 </section>
       <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves 
-<a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by type.</p>
+<a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by service type.</p>
 </section>
       <h4><a class="xref" href="Rezolver.TargetListContainer.html">TargetListContainer</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that stores multiple targets in a list.</p>
@@ -315,7 +315,7 @@ as the source of their registrations).</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainerConfig-1.html">IContainerConfig&lt;T&gt;</a></h4>
       <section><p>Marker interface for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which is responsible for configuring a specific type
-of object/behaviour/service/option for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> instances. (Determined by <span class="typeparamref">T</span>).</p>
+of object/behaviour/service/option for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> instances. (Determined by <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>).</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></h4>
       <section><p>This is an <a class="xref" href="Rezolver.IContainer.html">IContainer</a>-like object (resolving functionality is provided through the extension methods
@@ -326,6 +326,10 @@ of this scope.</p>
 </section>
       <h4><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h4>
       <section><p>Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.IOptionForAnyGeneric.html">IOptionForAnyGeneric</a></h4>
+      <section><p>Used as a marker service type for GetOption when a service type is any generic.</p>
+<p>Allows options to be defined for any generic type instead of specific generics.</p>
 </section>
       <h4><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></h4>
       <section><p>Captures the state for a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> 
@@ -355,7 +359,16 @@ that the targets are registered against.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a></h4>
       <section><p>Marker interface for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which is responsible for configuring a specific type
-of object/behaviour/service/option. (Determined by <span class="typeparamref">T</span>).</p>
+of object/behaviour/service/option. (Determined by <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>).</p>
+</section>
+      <h4><a class="xref" href="Rezolver.ITargetContainerFactory.html">ITargetContainerFactory</a></h4>
+      <section><p>A target container option used by <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> to create a new instance of
+an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to store target registrations for a specific type (or types
+relating to a specific type).</p>
+</section>
+      <h4><a class="xref" href="Rezolver.ITargetContainerTypeResolver.html">ITargetContainerTypeResolver</a></h4>
+      <section><p>An interface used by <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> (via the options API)
+to identify the container type for targets with a specific <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
 </section>
     <h3 id="enums">Enums
   </h3>

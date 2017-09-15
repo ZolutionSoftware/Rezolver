@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class InjectEnumerables
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -121,13 +121,13 @@ in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-    <div class="level1"><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnumerableInjection&gt;</span></div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>&gt;</div>
     <div class="level2"><span class="xref">InjectEnumerables</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">OptionDependentConfig&lt;EnumerableInjection&gt;.Dependencies</a>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">OptionDependentConfig&lt;EnableEnumerableInjection&gt;.Dependencies</a>
     </div>
     <div>
       <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
@@ -155,7 +155,7 @@ in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_Configuration_InjectEnumerables_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class InjectEnumerables : OptionDependentConfig&lt;EnumerableInjection&gt;, ITargetContainerConfig, IDependant</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class InjectEnumerables : OptionDependentConfig&lt;EnableEnumerableInjection&gt;, ITargetContainerConfig, IDependant</code></pre>
   </div>
   <h5 id="Rezolver_Configuration_InjectEnumerables_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>This behaviour is added to the default configuration for all <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>-derived
@@ -163,12 +163,12 @@ objects via the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_Tar
 <p>To disable it, you can either remove it from that configuration object (which then disables it for all)
 or you can add an option configuration to it (via 
 <a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a> 
-or similar) for the <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option, setting it to <code>false</code>.</p>
+or similar) for the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option, setting it to <code>false</code>.</p>
 <p>If this behaviour is not attached to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, or is disabled via the 
-<a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option, then only explicitly
+<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option, then only explicitly
 registered enumerables will be able to be resolved by any <a class="xref" href="Rezolver.IContainer.html">IContainer</a> built from that 
 target container.</p>
-<h2 id="lazy-vs-eager-evaluation">Lazy vs Eager evaluation</h2>
+<h4 id="lazy-vs-eager-evaluation">Lazy vs Eager evaluation</h4>
 <p>The enumerables created by Rezolver can be lazy or eager.  Lazy enumerables create instances as you 
 enumerate them, and will create a unique set of instances <em>each time</em> they are enumerated (assuming
 no Singleton or Scoped lifetimes are in play).  Eager enumerables create all their instances up-front,
@@ -186,7 +186,7 @@ it at its default of <code>true</code> for all other enumerable types.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L44">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L46">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectEnumerables_Instance_" data-uid="Rezolver.Configuration.InjectEnumerables.Instance*"></a>
   <h4 id="Rezolver_Configuration_InjectEnumerables_Instance" data-uid="Rezolver.Configuration.InjectEnumerables.Instance">Instance</h4>
@@ -219,7 +219,7 @@ it at its default of <code>true</code> for all other enumerable types.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L60">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L64">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectEnumerables_Configure_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_ITargetContainer_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.ITargetContainer)">Configure(ITargetContainer)</h4>
@@ -248,11 +248,11 @@ it at its default of <code>true</code> for all other enumerable types.</p>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnumerableInjection&gt;.Configure(Rezolver.ITargetContainer)</span></div>
+  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableEnumerableInjection&gt;.Configure(Rezolver.ITargetContainer)</span></div>
   <h5 id="Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_ITargetContainer__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This implementation registers a special target container (via <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>)
-for <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> in passed <span class="paramref">targets</span>
-if the <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option evaluates to <code>true</code> when read from <span class="paramref">targets</span>.</p>
+for <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> in passed <code data-dev-comment-type="paramref" class="paramref">targets</code>
+if the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option evaluates to <code>true</code> when read from <code data-dev-comment-type="paramref" class="paramref">targets</code>.</p>
 <p>This is the default value for that option anyway, so, as the remarks section on the class states, all that&apos;s required to enable
 the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></p>
 </div>
@@ -277,7 +277,7 @@ the enumerable resolving behaviour is simply to make sure this configuration obj
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L39" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L41" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

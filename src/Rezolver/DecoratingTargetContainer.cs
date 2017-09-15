@@ -16,13 +16,20 @@ namespace Rezolver
     /// <see cref="DecoratorTarget"/> when <see cref="Fetch(Type)"/> or <see cref="FetchAll(Type)"/> are called.
     /// 
     /// The best way to add a decorator to your target container is to use the extension methods in
-    /// <see cref="DecoratorTargetContainerExtensions"/> - which provide shortcuts for many decoration patterns.
+    /// <see cref="DecoratorTargetContainerExtensions"/> - which provide simple shortcuts for creating 
+    /// decoration registrations.
     /// </summary>
     /// <remarks>This class does not implement <see cref="ITarget"/>, rather
     /// it's an <see cref="ITargetContainer"/> into which other targets can be added,
     /// and when <see cref="Fetch(Type)"/> or <see cref="FetchAll(Type)"/> are called, a temporary
     /// <see cref="DecoratorTarget"/> is created which wraps around the targets that have been registered within and
-    /// which will ultimately create instances of <see cref="DecoratorType"/></remarks>
+    /// which will ultimately execute the decoration.
+    /// 
+    /// Currently, it is possible to decorate with:
+    /// 
+    /// - An auto-injected instance of a decorator type
+    /// - A decorator delegate which both receives and returns an instance of the decorated type.
+    /// </remarks>
     public class DecoratingTargetContainer : ITargetContainer
     {
         /// <summary>

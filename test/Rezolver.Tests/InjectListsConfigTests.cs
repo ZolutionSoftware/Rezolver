@@ -33,7 +33,7 @@ namespace Rezolver.Tests
             var configs = new CombinedTargetContainerConfig
             {
                 Configuration.InjectLists.Instance,
-                Configuration.Configure.Option<Options.ListInjection>(false)
+                Configuration.Configure.Option<Options.EnableListInjection>(false)
             };
 
             var targets = new TargetContainer(configs);

@@ -73,6 +73,21 @@ namespace Rezolver.Sdk
         }
 
         /// <summary>
+        /// Creates a new instance of the collection type <typeparamref name="TDerived"/> whose items
+        /// are cloned from this collection's items.
+        /// </summary>
+        /// <typeparam name="TDerived">The type of collection to be created from this one.</typeparam>
+        /// <returns>A new instance of the type <typeparamref name="TDerived"/> whose items are cloned
+        /// from this collection.</returns>
+        protected TDerived Clone<TDerived>()
+            where TDerived : DependantCollection<T>, new()
+        {
+            var toReturn = new TDerived();
+            toReturn.AddAll(this);
+            return toReturn;
+        }
+
+        /// <summary>
         /// Replaces the <paramref name="original"/> object with the passed <paramref name="replacement"/> object, if
         /// <paramref name="original"/> is found within the collection.  The original object is returned if it is found
         /// and the replacement operation succeeds.

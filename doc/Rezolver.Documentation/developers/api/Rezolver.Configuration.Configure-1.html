@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class Configure&lt;TOption&gt;
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -177,7 +177,7 @@
 objects to declare a (required or optional) dependency on anything which configures that option - so that it can ensure that those 
 options are set beforehand.</p>
 <p>The <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration type, for example, expresses an optional dependency on an <a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a>
-which has a <span class="typeparamref">TOption</span> type equal to <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a>.</p>
+which has a <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> type equal to <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>.</p>
 </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -192,7 +192,7 @@ which has a <span class="typeparamref">TOption</span> type equal to <a class="xr
   <h4 id="Rezolver_Configuration_Configure_1__ctor__0_System_Type_" data-uid="Rezolver.Configuration.Configure`1.#ctor(`0,System.Type)">Configure(TOption, Type)</h4>
   <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a> class which, when 
 <a class="xref" href="Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_Rezolver_ITargetContainer_">Configure(ITargetContainer)</a> is called with a particular <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>,
-will set the option to the <span class="paramref">optionValue</span>, optionally for the given <span class="paramref">serviceType</span></p>
+will set the option to the <code data-dev-comment-type="paramref" class="paramref">optionValue</code>, optionally for the given <code data-dev-comment-type="paramref" class="paramref">serviceType</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -235,7 +235,7 @@ are read in a service-specific manner)</p>
   <h4 id="Rezolver_Configuration_Configure_1__ctor_System_Func_Rezolver_ITargetContainer_System_Type__0__System_Type_" data-uid="Rezolver.Configuration.Configure`1.#ctor(System.Func{Rezolver.ITargetContainer,System.Type,`0},System.Type)">Configure(Func&lt;ITargetContainer, Type, TOption&gt;, Type)</h4>
   <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a> class which, when 
 <a class="xref" href="Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_Rezolver_ITargetContainer_">Configure(ITargetContainer)</a> is called with a particular <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>,
-will set the option to the value returned by <span class="paramref">optionFactory</span>, optionally for the given <span class="paramref">serviceType</span></p>
+will set the option to the value returned by <code data-dev-comment-type="paramref" class="paramref">optionFactory</code>, optionally for the given <code data-dev-comment-type="paramref" class="paramref">serviceType</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -279,7 +279,7 @@ are read in a service-specific manner)</p>
   <a id="Rezolver_Configuration_Configure_1_ConfigureOption_" data-uid="Rezolver.Configuration.Configure`1.ConfigureOption*"></a>
   <h4 id="Rezolver_Configuration_Configure_1_ConfigureOption_Rezolver_ITargetContainer_" data-uid="Rezolver.Configuration.Configure`1.ConfigureOption(Rezolver.ITargetContainer)">ConfigureOption(ITargetContainer)</h4>
   <div class="markdown level1 summary"><p>Sets the option value (either passed as a constant
-reference on construction, or obtained via a callback) in the <span class="paramref">targets</span> target container.</p>
+reference on construction, or obtained via a callback) in the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container.</p>
 <p>This is used as the implementation of <a class="xref" href="Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_Rezolver_ITargetContainer_">Configure(ITargetContainer)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

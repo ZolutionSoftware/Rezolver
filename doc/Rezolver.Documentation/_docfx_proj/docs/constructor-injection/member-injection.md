@@ -87,7 +87,7 @@ Given this type:
 
 We simply setup the container to build all three types and make sure to pass the binding behaviour when registering the
 `Has2InjectableMembers` target.  We'll see how to do this using both an explicit @Rezolver.IMemberBindingBehaviour, but
-also via an @Rezolver.IContainerBehaviour.
+also via the Options API.
 
 ### Explicit @Rezolver.IMemberBindingBehaviour
 
@@ -112,12 +112,17 @@ the container itself.
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example2)]
 
-### @Rezolver.IContainerBehaviour (Explicit)
+### Service-specific option
 
-Our final demonstration of @Rezolver.IContainerBehaviour - here we clone the current global behaviour and then replace
-whatever the default @Rezolver.IMemberBindingBehaviour is with the @Rezolver.MemberBindingBehaviour.BindAll behaviour.
+But what if we only want instances of one type (or any of its derivatives) to have their members injected?
+
+Well, instead of setting the option globally, we can associate it with a particular service type:
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example3)]
+
+Clearly, in this case we might just as well use an explicitly-provided member binding behaviour, as shown two examples 
+above, however this facility is useful if you have a whole hierarchy of objects with a common interface or
+base whose properties and/or fields should be auto-injected.
 
 * * *
 
@@ -157,6 +162,10 @@ extension points:
 With that in place, we can then test:
 
 [!code-csharp[Example.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example5)]
+
+> [!TIP]
+> You can, of course, then enable member injection for all constructor-injected types (including open generics) simply by registering 
+> this behaviour as a global option, [as shown earlier in this topic](#global-option).
 
 Hopefully this example will inspire you to create your own custom binding behaviour :)
 

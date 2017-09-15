@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class MultipleTargetContainerExtensions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -187,7 +187,7 @@ via a variable number of <a class="xref" href="Rezolver.ITarget.html">ITarget</a
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Rezolver.ITarget[]</span></td>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a>[]</td>
         <td><span class="parametername">targets</span></td>
         <td><p>The targets to be registered.</p>
 </td>
@@ -205,7 +205,7 @@ via a variable number of <a class="xref" href="Rezolver.ITarget.html">ITarget</a
   <h4 id="Rezolver_MultipleTargetContainerExtensions_RegisterAll_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__" data-uid="Rezolver.MultipleTargetContainerExtensions.RegisterAll(Rezolver.ITargetContainer,System.Collections.Generic.IEnumerable{Rezolver.ITarget})">RegisterAll(ITargetContainer, IEnumerable&lt;ITarget&gt;)</h4>
   <div class="markdown level1 summary"><p>Batch-registers multiple targets against their <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
 <p>This is the same as calling <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> for each of the 
-<span class="paramref">targets</span>, except the type cannot be overriden from the target&apos;s DeclaredType.</p>
+<code data-dev-comment-type="paramref" class="paramref">targets</code>, except the type cannot be overriden from the target&apos;s DeclaredType.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -229,7 +229,7 @@ via a variable number of <a class="xref" href="Rezolver.ITarget.html">ITarget</a
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;Rezolver.ITarget&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td><span class="parametername">targets</span></td>
         <td><p>The targets to be registered</p>
 </td>
@@ -271,10 +271,10 @@ with the different targets.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;Rezolver.ITarget&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td><span class="parametername">targets</span></td>
         <td><p>The targets to be registered - all must support a common service type (potentially
-passed in the <span class="paramref">commonServiceType</span> argument.</p>
+passed in the <code data-dev-comment-type="paramref" class="paramref">commonServiceType</code> argument.</p>
 </td>
       </tr>
       <tr>

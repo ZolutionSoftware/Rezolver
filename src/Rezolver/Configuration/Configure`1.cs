@@ -20,7 +20,7 @@ namespace Rezolver.Configuration
     /// options are set beforehand.
     /// 
     /// The <see cref="InjectEnumerables"/> configuration type, for example, expresses an optional dependency on an <see cref="ITargetContainerConfig{T}"/>
-    /// which has a <typeparamref name="TOption"/> type equal to <see cref="Options.EnumerableInjection"/>.</remarks>
+    /// which has a <typeparamref name="TOption"/> type equal to <see cref="Options.EnableEnumerableInjection"/>.</remarks>
     public class Configure<TOption> : ITargetContainerConfig<TOption>
         where TOption: class
     {

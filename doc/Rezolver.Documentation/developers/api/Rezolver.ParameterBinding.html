@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ParameterBinding
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -220,7 +220,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Rezolver.ParameterBinding[]</span></td>
+        <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
         <td></td>
       </tr>
     </tbody>
@@ -332,7 +332,7 @@
   </span>
   <a id="Rezolver_ParameterBinding_BindMethod_" data-uid="Rezolver.ParameterBinding.BindMethod*"></a>
   <h4 id="Rezolver_ParameterBinding_BindMethod_System_Reflection_MethodBase_Rezolver_ParameterBinding___" data-uid="Rezolver.ParameterBinding.BindMethod(System.Reflection.MethodBase,Rezolver.ParameterBinding[])">BindMethod(MethodBase, ParameterBinding[])</h4>
-  <div class="markdown level1 summary"><p>Binds the method using explicit bindings for each parameter supplied in the <span class="paramref">suppliedBindings</span> array,
+  <div class="markdown level1 summary"><p>Binds the method using explicit bindings for each parameter supplied in the <code data-dev-comment-type="paramref" class="paramref">suppliedBindings</code> array,
 or defaults (which will be resolved from the compile or run-time container) if not present.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -357,7 +357,7 @@ or defaults (which will be resolved from the compile or run-time container) if n
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Rezolver.ParameterBinding[]</span></td>
+        <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
         <td><span class="parametername">suppliedBindings</span></td>
         <td><p>Optional.  The supplied bindings for the parameters of the method.  Any parameters
 not matched from this array will be automatically bound with default (resolved from the container).</p>
@@ -375,7 +375,7 @@ not matched from this array will be automatically bound with default (resolved f
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Rezolver.ParameterBinding[]</span></td>
+        <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
         <td></td>
       </tr>
     </tbody>
@@ -389,7 +389,7 @@ not matched from this array will be automatically bound with default (resolved f
   </span>
   <a id="Rezolver_ParameterBinding_BindMethod_" data-uid="Rezolver.ParameterBinding.BindMethod*"></a>
   <h4 id="Rezolver_ParameterBinding_BindMethod_System_Reflection_MethodBase_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__" data-uid="Rezolver.ParameterBinding.BindMethod(System.Reflection.MethodBase,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget})">BindMethod(MethodBase, IDictionary&lt;String, ITarget&gt;)</h4>
-  <div class="markdown level1 summary"><p>Matches named targets in <span class="paramref">args</span> to parameters on the passed <span class="paramref">method</span>,
+  <div class="markdown level1 summary"><p>Matches named targets in <code data-dev-comment-type="paramref" class="paramref">args</code> to parameters on the passed <code data-dev-comment-type="paramref" class="paramref">method</code>,
 creating default <a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>s (which will be resolved from the compile or run-time container),
 for any parameters for which named targets cannot be found.</p>
 </div>
@@ -414,7 +414,7 @@ for any parameters for which named targets cannot be found.</p>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary&lt;System.String, Rezolver.ITarget&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/s4ys34ea(v=vs.110).aspx">IDictionary</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td><span class="parametername">args</span></td>
         <td></td>
       </tr>
@@ -430,7 +430,7 @@ for any parameters for which named targets cannot be found.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Rezolver.ParameterBinding[]</span></td>
+        <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
         <td></td>
       </tr>
     </tbody>
@@ -444,8 +444,8 @@ for any parameters for which named targets cannot be found.</p>
   </span>
   <a id="Rezolver_ParameterBinding_BindOverload_" data-uid="Rezolver.ParameterBinding.BindOverload*"></a>
   <h4 id="Rezolver_ParameterBinding_BindOverload_System_Reflection_MethodBase___System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__System_Reflection_MethodBase__" data-uid="Rezolver.ParameterBinding.BindOverload(System.Reflection.MethodBase[],System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},System.Reflection.MethodBase@)">BindOverload(MethodBase[], IDictionary&lt;String, ITarget&gt;, out MethodBase)</h4>
-  <div class="markdown level1 summary"><p>Searches for a method in the <span class="paramref">methods</span> collection whose parameters can be filled by the targets provided in the <span class="paramref">args</span>
-dictionary, returning the parameter bindings, and passing out the resolved target method in <span class="paramref">resolvedMethod</span> if found.</p>
+  <div class="markdown level1 summary"><p>Searches for a method in the <code data-dev-comment-type="paramref" class="paramref">methods</code> collection whose parameters can be filled by the targets provided in the <code data-dev-comment-type="paramref" class="paramref">args</code>
+dictionary, returning the parameter bindings, and passing out the resolved target method in <code data-dev-comment-type="paramref" class="paramref">resolvedMethod</code> if found.</p>
 <p>Note - if no match can be found, or if more than one method could be bound, then an InvalidOperationException will occur.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -464,13 +464,13 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Reflection.MethodBase[]</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodbase(v=vs.110).aspx">MethodBase</a>[]</td>
         <td><span class="parametername">methods</span></td>
         <td><p>The methods.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary&lt;System.String, Rezolver.ITarget&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/s4ys34ea(v=vs.110).aspx">IDictionary</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td><span class="parametername">args</span></td>
         <td><p>The arguments.</p>
 </td>
@@ -493,7 +493,7 @@ dictionary, returning the parameter bindings, and passing out the resolved targe
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Rezolver.ParameterBinding[]</span></td>
+        <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
         <td><p>ParameterBinding[].</p>
 </td>
       </tr>
@@ -544,7 +544,7 @@ cannot either resolve a target at compile time or from the <a class="xref" href=
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Rezolver.ParameterBinding[]</span></td>
+        <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
         <td></td>
       </tr>
     </tbody>

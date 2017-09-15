@@ -8,7 +8,7 @@
   	<title>Enumerables of Generics | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Enumerables of Generics | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -321,7 +321,7 @@ var myService2Result = container.ResolveMany&lt;IGeneric&lt;MyService2&gt;&gt;()
 
 Assert.Equal(2, myServiceResult.Length);
 Assert.Equal(1, myService2Result.Length);
-</code></pre><p>You can also set this against an open generic - which then has the same effect but for all genercis based on the same
+</code></pre><p>You can also set this against an open generic - which then has the same effect but for all generics based on the same
 open generic (here we&#39;re disabling it for <code>IGeneric&lt;&gt;</code>)</p>
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
 container.SetOption&lt;Options.FetchAllMatchingGenerics&gt;(false, typeof(IGeneric&lt;&gt;));

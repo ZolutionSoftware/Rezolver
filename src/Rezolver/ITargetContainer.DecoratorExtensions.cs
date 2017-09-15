@@ -58,6 +58,18 @@ namespace Rezolver
                 typeof(TDecorated));
         }
 
+        /// <summary>
+        /// Registers a delegate to be executed every time an instance of <paramref name="decoratedType"/> is produced by the container.
+        /// 
+        /// This is ultimately the same as the <see cref="RegisterDecorator{TDecorated}(ITargetContainer, Func{TDecorated, TDecorated})"/> method
+        /// except this allows you to pass delegates with more parameters than the one that that overload provides.
+        /// 
+        /// The delegate's return type must be equal to <paramref name="decoratedType"/>
+        /// </summary>
+        /// <param name="targetContainer">The container into which the decorator will be registered.</param>
+        /// <param name="decoratorDelegate">The delegate to be executed every time an instance of <paramref name="decoratedType"/>
+        /// is produced by the container, and whose result will be used in place of the original object (which is fed into the delegate).</param>
+        /// <param name="decoratedType">The type of object whose creation is being decorated by the delegate.</param>
         public static void RegisterDecorator(this ITargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
         {
             RegisterDecoratorDelegateInternal(targetContainer ?? throw new ArgumentNullException(nameof(targetContainer)),

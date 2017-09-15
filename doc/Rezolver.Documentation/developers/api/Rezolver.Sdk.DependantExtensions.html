@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class DependantExtensions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -162,8 +162,8 @@
   </span>
   <a id="Rezolver_Sdk_DependantExtensions_After_" data-uid="Rezolver.Sdk.DependantExtensions.After*"></a>
   <h4 id="Rezolver_Sdk_DependantExtensions_After__2___0___1_" data-uid="Rezolver.Sdk.DependantExtensions.After``2(``0,``1)">After&lt;T, TDependency&gt;(T, TDependency)</h4>
-  <div class="markdown level1 summary"><p>Adds an optional dependency from the object on which this is called to <span class="paramref">dep</span>.</p>
-<p>If the object <span class="paramref">dep</span> is present in the input collection when dependencies are resolved, then it
+  <div class="markdown level1 summary"><p>Adds an optional dependency from the object on which this is called to <code data-dev-comment-type="paramref" class="paramref">dep</code>.</p>
+<p>If the object <code data-dev-comment-type="paramref" class="paramref">dep</code> is present in the input collection when dependencies are resolved, then it
 will be identified.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -190,7 +190,7 @@ will be identified.</p>
       <tr>
         <td><span class="xref">TDependency</span></td>
         <td><span class="parametername">dep</span></td>
-        <td><p>The object upon which <span class="paramref">obj</span> is optionally dependent.</p>
+        <td><p>The object upon which <code data-dev-comment-type="paramref" class="paramref">obj</code> is optionally dependent.</p>
 </td>
       </tr>
     </tbody>
@@ -241,8 +241,8 @@ will be identified.</p>
   </span>
   <a id="Rezolver_Sdk_DependantExtensions_After_" data-uid="Rezolver.Sdk.DependantExtensions.After*"></a>
   <h4 id="Rezolver_Sdk_DependantExtensions_After__2___0_System_Collections_Generic_IEnumerable___1__" data-uid="Rezolver.Sdk.DependantExtensions.After``2(``0,System.Collections.Generic.IEnumerable{``1})">After&lt;T, TDependency&gt;(T, IEnumerable&lt;TDependency&gt;)</h4>
-  <div class="markdown level1 summary"><p>Adds an optional dependency from the object on which this is called to all the objects in <span class="paramref">deps</span>.</p>
-<p>Any objects in <span class="paramref">deps</span> which are present in the input collection when dependencies are resolved will
+  <div class="markdown level1 summary"><p>Adds an optional dependency from the object on which this is called to all the objects in <code data-dev-comment-type="paramref" class="paramref">deps</code>.</p>
+<p>Any objects in <code data-dev-comment-type="paramref" class="paramref">deps</code> which are present in the input collection when dependencies are resolved will
 be identified as dependencies.  None of them will be required.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -267,9 +267,9 @@ be identified as dependencies.  None of them will be required.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;TDependency&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TDependency&gt;</td>
         <td><span class="parametername">deps</span></td>
-        <td><p>The objects upon which <span class="paramref">obj</span> is optionally dependent.</p>
+        <td><p>The objects upon which <code data-dev-comment-type="paramref" class="paramref">obj</code> is optionally dependent.</p>
 </td>
       </tr>
     </tbody>
@@ -321,7 +321,7 @@ be identified as dependencies.  None of them will be required.</p>
   <a id="Rezolver_Sdk_DependantExtensions_AfterAny_" data-uid="Rezolver.Sdk.DependantExtensions.AfterAny*"></a>
   <h4 id="Rezolver_Sdk_DependantExtensions_AfterAny__1___0_System_Type_" data-uid="Rezolver.Sdk.DependantExtensions.AfterAny``1(``0,System.Type)">AfterAny&lt;T&gt;(T, Type)</h4>
   <div class="markdown level1 summary"><p>Adds an optional dependency from the object on which this is called to any object of the type
-<span class="paramref">dependencyType</span>.  Use this when only the type of the dependency is known, but the specific
+<code data-dev-comment-type="paramref" class="paramref">dependencyType</code>.  Use this when only the type of the dependency is known, but the specific
 instance is not important.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -443,8 +443,8 @@ required or optional.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a></td>
-        <td><p>A new <a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a> object representing a dependency from <span class="paramref">obj</span> to
-the object <span class="paramref">dependency</span>.</p>
+        <td><p>A new <a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a> object representing a dependency from <code data-dev-comment-type="paramref" class="paramref">obj</code> to
+the object <code data-dev-comment-type="paramref" class="paramref">dependency</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -524,8 +524,8 @@ fixed set of required or optional dependencies that are known at construction-ti
     <tbody>
       <tr>
         <td><a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a></td>
-        <td><p>A new <a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a> object representing a dependency from <span class="paramref">obj</span> to
-objects of type <span class="typeparamref">TDependency</span>.</p>
+        <td><p>A new <a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a> object representing a dependency from <code data-dev-comment-type="paramref" class="paramref">obj</code> to
+objects of type <code data-dev-comment-type="typeparamref" class="typeparamref">TDependency</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -565,7 +565,7 @@ fixed set of required or optional dependencies that are known at construction-ti
   <h4 id="Rezolver_Sdk_DependantExtensions_GetDependencies__2___0_System_Collections_Generic_IEnumerable___1__" data-uid="Rezolver.Sdk.DependantExtensions.GetDependencies``2(``0,System.Collections.Generic.IEnumerable{``1})">GetDependencies&lt;T, TDependency&gt;(T, IEnumerable&lt;TDependency&gt;)</h4>
   <div class="markdown level1 summary"><p>Shortcut method for resolving the dependencies for an <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a> from a set of objects.</p>
 <p>All the method does is forward the call to the <a class="xref" href="Rezolver.Sdk.DependencyEnumerableExtensions.html#Rezolver_Sdk_DependencyEnumerableExtensions_GetDependencies__1_System_Collections_Generic_IEnumerable_Rezolver_Sdk_DependencyMetadata__System_Collections_Generic_IEnumerable___0__">GetDependencies&lt;T&gt;(IEnumerable&lt;DependencyMetadata&gt;, IEnumerable&lt;T&gt;)</a>
-method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.html">DependencyMetadataCollection</a> belonging to the passed <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a> - <span class="paramref">obj</span></p>
+method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.html">DependencyMetadataCollection</a> belonging to the passed <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a> - <code data-dev-comment-type="paramref" class="paramref">obj</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -589,10 +589,10 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;TDependency&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TDependency&gt;</td>
         <td><span class="parametername">objects</span></td>
         <td><p>Required - the range of objects from which dependencies are to be located.</p>
-<p>Generally speaking, it&apos;s typical for <span class="paramref">obj</span> to be a member of this range.</p>
+<p>Generally speaking, it&apos;s typical for <code data-dev-comment-type="paramref" class="paramref">obj</code> to be a member of this range.</p>
 </td>
       </tr>
     </tbody>
@@ -607,7 +607,7 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;TDependency&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TDependency&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -642,8 +642,8 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
   </span>
   <a id="Rezolver_Sdk_DependantExtensions_Requires_" data-uid="Rezolver.Sdk.DependantExtensions.Requires*"></a>
   <h4 id="Rezolver_Sdk_DependantExtensions_Requires__2___0___1_" data-uid="Rezolver.Sdk.DependantExtensions.Requires``2(``0,``1)">Requires&lt;T, TDependency&gt;(T, TDependency)</h4>
-  <div class="markdown level1 summary"><p>Adds a required dependency from the object on which this is called to <span class="paramref">dep</span></p>
-<p>The object <span class="paramref">dep</span> must be present in the input collection when dependencies are resolved.</p>
+  <div class="markdown level1 summary"><p>Adds a required dependency from the object on which this is called to <code data-dev-comment-type="paramref" class="paramref">dep</code></p>
+<p>The object <code data-dev-comment-type="paramref" class="paramref">dep</code> must be present in the input collection when dependencies are resolved.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -669,7 +669,7 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
       <tr>
         <td><span class="xref">TDependency</span></td>
         <td><span class="parametername">dep</span></td>
-        <td><p>The object upon which <span class="paramref">obj</span> is dependent.</p>
+        <td><p>The object upon which <code data-dev-comment-type="paramref" class="paramref">obj</code> is dependent.</p>
 </td>
       </tr>
     </tbody>
@@ -720,8 +720,8 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
   </span>
   <a id="Rezolver_Sdk_DependantExtensions_Requires_" data-uid="Rezolver.Sdk.DependantExtensions.Requires*"></a>
   <h4 id="Rezolver_Sdk_DependantExtensions_Requires__2___0_System_Collections_Generic_IEnumerable___1__" data-uid="Rezolver.Sdk.DependantExtensions.Requires``2(``0,System.Collections.Generic.IEnumerable{``1})">Requires&lt;T, TDependency&gt;(T, IEnumerable&lt;TDependency&gt;)</h4>
-  <div class="markdown level1 summary"><p>Adds a required dependency from the object on which this is called to all the objects in <span class="paramref">deps</span></p>
-<p>Every object in <span class="paramref">deps</span> must be present in the input collection when dependencies are resolved.</p>
+  <div class="markdown level1 summary"><p>Adds a required dependency from the object on which this is called to all the objects in <code data-dev-comment-type="paramref" class="paramref">deps</code></p>
+<p>Every object in <code data-dev-comment-type="paramref" class="paramref">deps</code> must be present in the input collection when dependencies are resolved.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -745,9 +745,9 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;TDependency&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;TDependency&gt;</td>
         <td><span class="parametername">deps</span></td>
-        <td><p>The objects upon which <span class="paramref">obj</span> is dependent.</p>
+        <td><p>The objects upon which <code data-dev-comment-type="paramref" class="paramref">obj</code> is dependent.</p>
 </td>
       </tr>
     </tbody>
@@ -799,7 +799,7 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
   <a id="Rezolver_Sdk_DependantExtensions_RequiresAny_" data-uid="Rezolver.Sdk.DependantExtensions.RequiresAny*"></a>
   <h4 id="Rezolver_Sdk_DependantExtensions_RequiresAny__1___0_System_Type_" data-uid="Rezolver.Sdk.DependantExtensions.RequiresAny``1(``0,System.Type)">RequiresAny&lt;T&gt;(T, Type)</h4>
   <div class="markdown level1 summary"><p>Adds a required dependency from the object on which this is called to at least one object of the type
-<span class="paramref">dependencyType</span>.  Use this when only the type of the dependency is known, but the specific
+<code data-dev-comment-type="paramref" class="paramref">dependencyType</code>.  Use this when only the type of the dependency is known, but the specific
 instance is not important.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

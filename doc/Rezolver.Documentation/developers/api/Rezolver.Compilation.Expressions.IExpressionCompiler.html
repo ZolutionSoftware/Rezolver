@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface IExpressionCompiler
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -153,7 +153,7 @@ implementation resolves <a class="xref" href="Rezolver.Compilation.Expressions.I
   </span>
   <a id="Rezolver_Compilation_Expressions_IExpressionCompiler_Build_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.Build*"></a>
   <h4 id="Rezolver_Compilation_Expressions_IExpressionCompiler_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext)">Build(ITarget, IExpressionCompileContext)</h4>
-  <div class="markdown level1 summary"><p>Gets an unoptimised expression containing the logic required to create or fetch an instance of the <span class="paramref">target</span>&apos;s
+  <div class="markdown level1 summary"><p>Gets an unoptimised expression containing the logic required to create or fetch an instance of the <code data-dev-comment-type="paramref" class="paramref">target</code>&apos;s
 <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> when invoked for a particular <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>.</p>
 <p>Use this method if you want the raw expression for a target (possibly when integrating it into your own expressions during custom
 compilation).</p>
@@ -224,7 +224,7 @@ produced by the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressi
 lambda expression which can be compiled into a delegate and executed; or quoted inside 
 another expression as a callback.</p>
 <p>The <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html#Rezolver_Compilation_Expressions_IExpressionCompileContext_ResolveContextParameterExpression">ResolveContextParameterExpression</a> of the 
-<span class="paramref">context</span> will be used to define the single parameter for the lambda that 
+<code data-dev-comment-type="paramref" class="paramref">context</code> will be used to define the single parameter for the lambda that 
 is created.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -269,7 +269,7 @@ ResolveContext expression etc) that have been used in the generation of the expr
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Linq.Expressions.Expression&lt;System.Func&lt;Rezolver.IResolveContext, System.Object&gt;&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb335710(v=vs.110).aspx">Expression</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
         <td><p>A lambda expression which, when compiled and executed, will produce an object 
 consistent with the <a class="xref" href="Rezolver.ITarget.html">ITarget</a> from which the code was produced.</p>
 </td>

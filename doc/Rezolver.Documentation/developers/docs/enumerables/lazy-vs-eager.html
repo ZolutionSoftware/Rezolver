@@ -8,7 +8,7 @@
   	<title>Lazy vs. Eager Enumerables | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Lazy vs. Eager Enumerables | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -229,7 +229,7 @@ every time enumeration occurs.</li>
 <p>In the context of this example, clearly it seems odd that we&#39;d want an enumerable that keeps generating new instances every
 time we enumerate it.  In the real-world, however, most of the time we inject enumerables, the receiving object will 
 enumerate once.  Equally, if the receiver does expect to enumerate multiple times and wants to <em>guarantee</em> that only the 
-correct number of items will ever be produced exactly once, then a simply <code>.ToArray()</code> call will do the trick.</p>
+correct number of items will ever be produced exactly once, then a simple <code>.ToArray()</code> call will do the trick.</p>
 <h2 id="eager-enumerable-global">Eager enumerable (global)</h2>
 <p>As with many other Rezolver behaviours, lazy/eager enumerable creation is controlled by an option which can be set 
 on an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> either globally (which affects all enumerables) or on a per-type basis (see next).</p>
@@ -340,6 +340,8 @@ instantly grab a chunk of memory for those instances, whereas a lazily evaluated
 <p>That said, there are of course reasons why you&#39;d still want to use an eager enumerable.  Perhaps the objects are singletons
 and/or are &#39;hard&#39; to create - in which case you might as well expend a bit of extra effort up front to create them so
 you don&#39;t have to do it later.</p>
+<hr>
+<p><a href="../enumerables.html">Back to the root enumerables documentation</a></p>
 </article>
           </div>
           

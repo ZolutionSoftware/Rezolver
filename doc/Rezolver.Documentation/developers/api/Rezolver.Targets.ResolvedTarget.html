@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ResolvedTarget
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -138,7 +138,7 @@
       <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ToString">TargetBase.ToString()</a>
     </div>
     <div>
       <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
@@ -197,8 +197,8 @@ place.  The expressions compiler, again, detects this - allowing compiled code f
   </span>
   <a id="Rezolver_Targets_ResolvedTarget__ctor_" data-uid="Rezolver.Targets.ResolvedTarget.#ctor*"></a>
   <h4 id="Rezolver_Targets_ResolvedTarget__ctor_System_Type_Rezolver_ITarget_" data-uid="Rezolver.Targets.ResolvedTarget.#ctor(System.Type,Rezolver.ITarget)">ResolvedTarget(Type, ITarget)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> for the given <span class="paramref">type</span> which will attempt to 
-resolve a value at compile time and/or resolve-time and, if it can&apos;t, will either use the <span class="paramref">fallbackTarget</span>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> for the given <code data-dev-comment-type="paramref" class="paramref">type</code> which will attempt to 
+resolve a value at compile time and/or resolve-time and, if it can&apos;t, will either use the <code data-dev-comment-type="paramref" class="paramref">fallbackTarget</code>
 or will throw an exception.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -227,7 +227,7 @@ or will throw an exception.</p>
         <td><span class="parametername">fallbackTarget</span></td>
         <td><p>Optional.  The target to be used if the value cannot be resolved at either compile time or 
 resolve-time.  An <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a> is thrown if this target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a>
-function returns <code>false</code> when called with the <span class="paramref">type</span>.</p>
+function returns <code>false</code> when called with the <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -395,7 +395,7 @@ for this instance, who wish to perform some form of up-front optimisations.</p>
     </tbody>
   </table>
   <h5 id="Rezolver_Targets_ResolvedTarget_Bind_Rezolver_Compilation_ICompileContext__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The target that is returned depends both on the <span class="paramref">context</span> passed and also whether 
+  <div class="markdown level1 remarks"><p>The target that is returned depends both on the <code data-dev-comment-type="paramref" class="paramref">context</code> passed and also whether 
 a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_ResolvedTarget_FallbackTarget">FallbackTarget</a> has been provided to this target.</p>
 </div>
   <h3 id="extensionmethods">Extension Methods</h3>

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class AliasTargetContainerExtensions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -203,8 +203,8 @@ different types.</p>
   </table>
   <h5 id="Rezolver_AliasTargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Use this when it&apos;s important that a given target type is always served through the same compiled target, even when the consumer
-expects it to be of a different type.  A very common scenario is when you have a singleton instance of the <span class="paramref">originalType</span>, 
-and need to serve that same instance for <span class="paramref">aliasType</span>.  If you register the same singleton for both types, you get two 
+expects it to be of a different type.  A very common scenario is when you have a singleton instance of the <code data-dev-comment-type="paramref" class="paramref">originalType</code>, 
+and need to serve that same instance for <code data-dev-comment-type="paramref" class="paramref">aliasType</code>.  If you register the same singleton for both types, you get two 
 separate singletons for each type, whereas if you create an alias, both will be served by the same alias.</p>
 </div>
   <span class="small pull-right mobile-hide">

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface ITargetContainer
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -147,7 +147,7 @@ are <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> and
   <a id="Rezolver_ITargetContainer_CombineWith_" data-uid="Rezolver.ITargetContainer.CombineWith*"></a>
   <h4 id="Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
   <div class="markdown level1 summary"><p>If supported by the implementation, this gets the container built from combining this container with 
-an <span class="paramref">existing</span> container as part of a registration inside another <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+an <code data-dev-comment-type="paramref" class="paramref">existing</code> container as part of a registration inside another <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -259,14 +259,14 @@ same type.  This behaviour is used to implement open generics and decorators, an
     <tbody>
       <tr>
         <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-        <td><p>The target for the given <span class="paramref">type</span>, or null if no target is found.</p>
+        <td><p>The target for the given <code data-dev-comment-type="paramref" class="paramref">type</code>, or null if no target is found.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Rezolver_ITargetContainer_Fetch_System_Type__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The target you receive from this method depends entirely on the implementation.</p>
-<p>It could be the last target to be registered against the <span class="paramref">type</span> or the first, or 
+<p>It could be the last target to be registered against the <code data-dev-comment-type="paramref" class="paramref">type</code> or the first, or 
 another target entirely.</p>
 <p>As mentioned in the documentation for the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method - the only guarantee is that if
 at least one target has been registered for the same type, then this method should return a valid target.</p>
@@ -280,7 +280,7 @@ at least one target has been registered for the same type, then this method shou
   </span>
   <a id="Rezolver_ITargetContainer_FetchAll_" data-uid="Rezolver.ITargetContainer.FetchAll*"></a>
   <h4 id="Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ITargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
-  <div class="markdown level1 summary"><p>Retrieves an enumerable of all targets that have been registered for a particular <span class="paramref">type</span>.  </p>
+  <div class="markdown level1 summary"><p>Retrieves an enumerable of all targets that have been registered for a particular <code data-dev-comment-type="paramref" class="paramref">type</code>.  </p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -316,14 +316,14 @@ at least one target has been registered for the same type, then this method shou
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
-        <td><p>An enumerable containing all the targets that have been registered against the given <span class="paramref">type</span>, or, 
+        <td><p>An enumerable containing all the targets that have been registered against the given <code data-dev-comment-type="paramref" class="paramref">type</code>, or, 
 an empty enumerable if no targets have been registered.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Rezolver_ITargetContainer_FetchAll_System_Type__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>As with <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a>, the only guarantee is that if a target has been registered for the <span class="paramref">type</span>
+  <div class="markdown level1 remarks"><p>As with <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a>, the only guarantee is that if a target has been registered for the <code data-dev-comment-type="paramref" class="paramref">type</code>
 through a call to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a>, then the returned enumerable will contain at least one valid target.</p>
 </div>
   <span class="small pull-right mobile-hide">
@@ -335,7 +335,7 @@ through a call to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_
   </span>
   <a id="Rezolver_ITargetContainer_FetchContainer_" data-uid="Rezolver.ITargetContainer.FetchContainer*"></a>
   <h4 id="Rezolver_ITargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.ITargetContainer.FetchContainer(System.Type)">FetchContainer(Type)</h4>
-  <div class="markdown level1 summary"><p>Retrieves an existing container registered against the given <span class="paramref">type</span>, or null if not found.</p>
+  <div class="markdown level1 summary"><p>Retrieves an existing container registered against the given <code data-dev-comment-type="paramref" class="paramref">type</code>, or null if not found.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -383,8 +383,8 @@ through a call to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_
   </span>
   <a id="Rezolver_ITargetContainer_Register_" data-uid="Rezolver.ITargetContainer.Register*"></a>
   <h4 id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ITargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
-  <div class="markdown level1 summary"><p>Registers a target, either for the <span class="paramref">serviceType</span> specified or, if null, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
-of the <span class="paramref">target</span>.</p>
+  <div class="markdown level1 summary"><p>Registers a target, either for the <code data-dev-comment-type="paramref" class="paramref">serviceType</code> specified or, if null, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+of the <code data-dev-comment-type="paramref" class="paramref">target</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -411,7 +411,7 @@ of the <span class="paramref">target</span>.</p>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td><p>Optional.  The type the target is to be registered against, if different
-from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <span class="paramref">target</span>.  If provided, then the <span class="paramref">target</span>
+from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <code data-dev-comment-type="paramref" class="paramref">target</code>.  If provided, then the <code data-dev-comment-type="paramref" class="paramref">target</code>
 must be compatible with this type.</p>
 </td>
       </tr>
@@ -436,7 +436,7 @@ and a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetConta
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
-        <td><p>If <span class="paramref">serviceType</span> is non-null and the <span class="paramref">target</span>&apos;s
+        <td><p>If <code data-dev-comment-type="paramref" class="paramref">serviceType</code> is non-null and the <code data-dev-comment-type="paramref" class="paramref">target</code>&apos;s
 <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a> method returns <code>false</code> for that type.</p>
 </td>
       </tr>
@@ -451,9 +451,9 @@ and a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetConta
   </span>
   <a id="Rezolver_ITargetContainer_RegisterContainer_" data-uid="Rezolver.ITargetContainer.RegisterContainer*"></a>
   <h4 id="Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.ITargetContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Registers a container against a given <span class="paramref">type</span>.</p>
+  <div class="markdown level1 summary"><p>Registers a container against a given <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
 <p>If a container already exists against this type, then the existing container&apos;s 
-<a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> method is called with the <span class="paramref">container</span> as the 
+<a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> method is called with the <code data-dev-comment-type="paramref" class="paramref">container</code> as the 
 argument, and the resulting container will replace the existing one.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -492,6 +492,12 @@ argument, and the resulting container will replace the existing one.</p>
   </div>
   <div>
       <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Func___0___0__">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(ITargetContainer, Func&lt;TDecorated, TDecorated&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Delegate_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Delegate, Type)</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Type, Type)</a>

@@ -32,10 +32,10 @@ type for a @Rezolver.IContainer.Resolve* call:
 var enumerable = container.Resolve<IEnumerable<Foo>>();
 ```
 
-However, the `ResolveMany` extension method (see <xref:Rezolver.ContainerResolveExtensions.ResolveMany*>
+However, the `ResolveMany` extension methods (see <xref:Rezolver.ContainerResolveExtensions.ResolveMany*>
 and <xref:Rezolver.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortut which allow you to pass
 just the element type of the enumerable to reduce the 'angle-bracket percent' of code which directly resolves
-enumerables (which of course you won't be doing because you're not using 'service location' are you!? ;) ):
+enumerables (which of course you won't be doing because you're not using 'service location' are you!? :wink: ):
 
 ```cs
 // this is equivalent to resolving IEnumerable<Foo>
@@ -114,7 +114,7 @@ To summarise:
 
 ## Decorators and Enumerables
 
-[Decorators](decorators.md) that have been registered against the element type of an enumerable will be applied to all 
+[Decorators](decorators.md) that have been registered against the **element type** of an enumerable will be applied to all 
 instances that the container produces for the enumerable.  This also applies to stacked decorators (where multiple 
 decorators are applied on top of one other).
 
@@ -130,7 +130,7 @@ If more decorators were added, of course - then each element would be 're-decora
 
 > [!TIP]
 > You can also decorate `IEnumerable<T>` instances without breaking Rezolver's automatic enumerable injection 
-> functionality.
+> functionality - see the [Decorators section](decorators.md) for more.
 
 ***
 

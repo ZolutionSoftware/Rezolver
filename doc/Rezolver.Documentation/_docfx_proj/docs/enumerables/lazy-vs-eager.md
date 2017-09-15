@@ -101,7 +101,7 @@ every time enumeration occurs.
 In the context of this example, clearly it seems odd that we'd want an enumerable that keeps generating new instances every
 time we enumerate it.  In the real-world, however, most of the time we inject enumerables, the receiving object will 
 enumerate once.  Equally, if the receiver does expect to enumerate multiple times and wants to *guarantee* that only the 
-correct number of items will ever be produced exactly once, then a simply `.ToArray()` call will do the trick.
+correct number of items will ever be produced exactly once, then a simple `.ToArray()` call will do the trick.
 
 ## Eager enumerable (global)
 
@@ -167,3 +167,7 @@ instantly grab a chunk of memory for those instances, whereas a lazily evaluated
 That said, there are of course reasons why you'd still want to use an eager enumerable.  Perhaps the objects are singletons
 and/or are 'hard' to create - in which case you might as well expend a bit of extra effort up front to create them so
 you don't have to do it later.
+
+***
+
+[Back to the root enumerables documentation](../enumerables.md)

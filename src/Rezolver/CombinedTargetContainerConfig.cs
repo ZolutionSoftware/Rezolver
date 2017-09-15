@@ -24,7 +24,7 @@ namespace Rezolver
 
         /// <summary>
         /// Constructs a new instance of the <see cref="CombinedTargetContainerConfig"/> type, using the passed
-        /// behaviours to seed the underlying collection.
+        /// configurations to seed the underlying collection.
         /// </summary>
         /// <param name="configs">The behaviours to be added to the collection on construction.</param>
         public CombinedTargetContainerConfig(IEnumerable<ITargetContainerConfig> configs)
@@ -35,7 +35,7 @@ namespace Rezolver
 
         /// <summary>
         /// Constructs a new instance of the <see cref="CombinedTargetContainerConfig"/> type, using the passed 
-        /// behaviours to seed the underlying collection.
+        /// configurations to seed the underlying collection.
         /// </summary>
         /// <param name="configs">The behaviours to be added to the collection on construction.</param>
         public CombinedTargetContainerConfig(params ITargetContainerConfig[] configs)
@@ -45,12 +45,18 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Applies each behaviour in the collection to the passed <paramref name="targets"/>.
+        /// Creates a clone of this combined configuration collection and returns it.
         /// </summary>
-        /// <param name="targets">The target container to which the behaviours in this collection are to be attached.</param>
-        /// <remarks>The implementation runs through each behaviour that has been added to the collection, in dependency 
-        /// order, calling its <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> method, passing the 
-        /// <paramref name="targets"/> to each.</remarks>
+        /// <returns>A new instance of <see cref="CombinedTargetContainerConfig"/> whose items are identical
+        /// to the collection on which the method is called.</returns>
+        public CombinedTargetContainerConfig Clone() => base.Clone<CombinedTargetContainerConfig>();
+
+        /// <summary>
+        /// Applies each configuration in this collection to the passed <paramref name="targets"/> <see cref="ITargetContainer"/>.
+        /// </summary>
+        /// <param name="targets">The target container to which the configurations in this collection are to be applied.</param>
+        /// <remarks>The implementation runs through each configuration that has been added to the collection, in dependency 
+        /// order, calling its <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> method.</remarks>
         public void Configure(ITargetContainer targets)
         {
             foreach (var config in Ordered)

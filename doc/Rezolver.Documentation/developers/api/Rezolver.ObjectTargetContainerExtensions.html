@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ObjectTargetContainerExtensions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -196,14 +196,14 @@ target.</p>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">declaredType</span></td>
         <td><p>Type to be set as the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>
-that is created for <span class="paramref">obj</span>, if different from the object&apos;s type.</p>
+that is created for <code data-dev-comment-type="paramref" class="paramref">obj</code>, if different from the object&apos;s type.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td><p>The service type against which this object is to be registered, if different
-from <span class="paramref">declaredType</span> (or the object&apos;s type).</p>
+from <code data-dev-comment-type="paramref" class="paramref">declaredType</code> (or the object&apos;s type).</p>
 </td>
       </tr>
       <tr>
@@ -215,7 +215,7 @@ from <span class="paramref">declaredType</span> (or the object&apos;s type).</p>
     </tbody>
   </table>
   <h5 id="Rezolver_ObjectTargetContainerExtensions_RegisterObject_Rezolver_ITargetContainer_System_Object_System_Type_System_Type_Rezolver_ScopeBehaviour__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p><code>null</code> objects are implicitly treated as <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> if <span class="paramref">declaredType</span> is not passed.</p>
+  <div class="markdown level1 remarks"><p><code>null</code> objects are implicitly treated as <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> if <code data-dev-comment-type="paramref" class="paramref">declaredType</code> is not passed.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -260,14 +260,14 @@ target.</p>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">declaredType</span></td>
         <td><p>Type to be set as the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> that is
-created for <span class="paramref">obj</span>, if different from <span class="typeparamref">T</span>.</p>
+created for <code data-dev-comment-type="paramref" class="paramref">obj</code>, if different from <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td><p>The service type against which this object is to be registered, if different
-from <span class="typeparamref">T</span>.</p>
+from <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
 </td>
       </tr>
       <tr>
@@ -290,14 +290,14 @@ from <span class="typeparamref">T</span>.</p>
       <tr>
         <td><span class="parametername">T</span></td>
         <td><p>Type of the object - will be used as the service type for registration if
-<span class="paramref">serviceType</span> is not provied.</p>
+<code data-dev-comment-type="paramref" class="paramref">serviceType</code> is not provied.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Rezolver_ObjectTargetContainerExtensions_RegisterObject__1_Rezolver_ITargetContainer___0_System_Type_System_Type_Rezolver_ScopeBehaviour__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>By default, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> that is created is
-fixed to <span class="typeparamref">T</span> - use the <span class="paramref">declaredType</span> parameter to override this if <span class="typeparamref">T</span>
+fixed to <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> - use the <code data-dev-comment-type="paramref" class="paramref">declaredType</code> parameter to override this if <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>
 is a less specific type than the one for which you wish to create a registration.</p>
 </div>
 </article>

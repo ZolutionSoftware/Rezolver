@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class OverridingEnumerables
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -115,7 +115,7 @@
   </h1>
   <div class="markdown level0 summary"><p>When applied to an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> whose target container has been configured to 
 enable automatically injected enumerables (via the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration callback and the
-<a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option), then this will extend enumerable support in the 
+<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option), then this will extend enumerable support in the 
 <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> to construct enumerables made up of a combination of all services in the 
 overriden container AND those from the overriding container.</p>
 </div>
@@ -159,7 +159,7 @@ overriden container AND those from the overriding container.</p>
   <div class="markdown level0 remarks"><p>Note that this class is not an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> like the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a>,
 instead it is an <a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a> because it&apos;s only relevant for instances of <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a>.</p>
 <p>As such, when applied to an <a class="xref" href="Rezolver.IContainer.html">IContainer</a> instance, it will only auto-attach when the container is an instance
-of (or derived from) <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> <em>and</em> if the <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> options evaluates
+of (or derived from) <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> <em>and</em> if the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> options evaluates
 to <code>true</code> when read from the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> passed to <a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html#Rezolver_Configuration_OverridingEnumerables_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_">Configure(IContainer, ITargetContainer)</a>.</p>
 </div>
   <h3 id="properties">Properties
@@ -206,9 +206,9 @@ to <code>true</code> when read from the <a class="xref" href="Rezolver.ITargetCo
   </span>
   <a id="Rezolver_Configuration_OverridingEnumerables_Configure_" data-uid="Rezolver.Configuration.OverridingEnumerables.Configure*"></a>
   <h4 id="Rezolver_Configuration_OverridingEnumerables_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.Configuration.OverridingEnumerables.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
-  <div class="markdown level1 summary"><p>If <span class="paramref">container</span> is an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a>, and if the <a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a>
-option evaluates to <code>true</code> (the default) when read from <span class="paramref">targets</span>, then enumerable handling in the container
-will be extended to combine the enumerables from both objects registered specifically in the <span class="paramref">container</span>, plus also those
+  <div class="markdown level1 summary"><p>If <code data-dev-comment-type="paramref" class="paramref">container</code> is an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a>, and if the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>
+option evaluates to <code>true</code> (the default) when read from <code data-dev-comment-type="paramref" class="paramref">targets</code>, then enumerable handling in the container
+will be extended to combine the enumerables from both objects registered specifically in the <code data-dev-comment-type="paramref" class="paramref">container</code>, plus also those
 registered in its <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_Inner">Inner</a> container.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -235,7 +235,7 @@ registered in its <a class="xref" href="Rezolver.OverridingContainer.html#Rezolv
       <tr>
         <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
-        <td><p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which supplies the registrations for the <span class="paramref">container</span></p>
+        <td><p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which supplies the registrations for the <code data-dev-comment-type="paramref" class="paramref">container</code></p>
 </td>
       </tr>
     </tbody>

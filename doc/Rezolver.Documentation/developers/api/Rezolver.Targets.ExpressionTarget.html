@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ExpressionTarget
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -139,7 +139,7 @@
       <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ToString">TargetBase.ToString()</a>
     </div>
     <div>
       <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
@@ -202,7 +202,7 @@ therefore, some rewriting of the expression is likely to be required.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func&lt;Rezolver.Compilation.ICompileContext, System.Linq.Expressions.Expression&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a>&gt;</td>
         <td><span class="parametername">expressionFactory</span></td>
         <td><p>Required. The factory delegate that a compiler should call to get the expression to use when 
 compiling this target.</p>
@@ -212,7 +212,7 @@ compiling this target.</p>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">declaredType</span></td>
         <td><p>Required. Static type of all expressions that will be
-returned by <span class="paramref">expressionFactory</span>.</p>
+returned by <code data-dev-comment-type="paramref" class="paramref">expressionFactory</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -259,8 +259,8 @@ an explicit type or when this target is used as a value inside another target).<
     </tbody>
   </table>
   <h5 id="Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p><span class="paramref">declaredType</span> will automatically be determined if not provided
-    by examining the type of the <span class="paramref">expression</span>.  For lambdas, the type will
+  <div class="markdown level1 remarks"><p><code data-dev-comment-type="paramref" class="paramref">declaredType</code> will automatically be determined if not provided
+    by examining the type of the <code data-dev-comment-type="paramref" class="paramref">expression</code>.  For lambdas, the type will
     be derived from the Type of the lambda&apos;s body.  For all other expressions, the type is
     taken directly from the Type property of the expression itself.</p>
 </div>
@@ -361,7 +361,7 @@ from the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_T
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func&lt;Rezolver.Compilation.ICompileContext, System.Linq.Expressions.Expression&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

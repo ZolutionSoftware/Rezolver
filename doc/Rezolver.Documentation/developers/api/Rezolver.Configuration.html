@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Configuration
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -135,6 +135,11 @@ the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.ht
 <p>This is included in the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a>, meaning that all containers
 created without a specific config will automatically be configured to use the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.Configuration.InjectArrays.html">InjectArrays</a></h4>
+      <section><p>Configuration (enabled by default in the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a> configuration collection)
+which enables the automatic injection of arrays by converting automatically injected enumerables into array
+instances via the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb298736(v=vs.110).aspx">ToArray&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</a> method from Linq.</p>
+</section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></h4>
       <section><p>Applying this configuration to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> will enable automatic injection of collection types such as 
 <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132397(v=vs.110).aspx">Collection&lt;T&gt;</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/92t2ye13(v=vs.110).aspx">ICollection&lt;T&gt;</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a>
@@ -161,12 +166,12 @@ that target container.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-2.html">OptionDependentConfig&lt;T, TOption&gt;</a></h4>
       <section><p>Extension to the <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a> generic which can be used by config types which also want to target
-a specific type for configuration (<span class="typeparamref">T</span>)</p>
+a specific type for configuration (<code data-dev-comment-type="typeparamref" class="typeparamref">T</code>)</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html">OverridingEnumerables</a></h4>
       <section><p>When applied to an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> whose target container has been configured to 
 enable automatically injected enumerables (via the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration callback and the
-<a class="xref" href="Rezolver.Options.EnumerableInjection.html">EnumerableInjection</a> option), then this will extend enumerable support in the 
+<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option), then this will extend enumerable support in the 
 <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> to construct enumerables made up of a combination of all services in the 
 overriden container AND those from the overriding container.</p>
 </section>

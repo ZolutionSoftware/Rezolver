@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class DependencyMetadata
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.21.1.0">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -278,7 +278,7 @@ is called, an exception will occur.</p>
   <a id="Rezolver_Sdk_DependencyMetadata_GetDependencies_" data-uid="Rezolver.Sdk.DependencyMetadata.GetDependencies*"></a>
   <h4 id="Rezolver_Sdk_DependencyMetadata_GetDependencies__1_System_Collections_Generic_IEnumerable___0__" data-uid="Rezolver.Sdk.DependencyMetadata.GetDependencies``1(System.Collections.Generic.IEnumerable{``0})">GetDependencies&lt;T&gt;(IEnumerable&lt;T&gt;)</h4>
   <div class="markdown level1 summary"><p>Called to select the dependencies which match this dependency metadata from the 
-<span class="paramref">objects</span> passed.</p>
+<code data-dev-comment-type="paramref" class="paramref">objects</code> passed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -296,7 +296,7 @@ is called, an exception will occur.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span></td>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;T&gt;</td>
         <td><span class="parametername">objects</span></td>
         <td><p>Required.  The objects which are to be searched for dependencies which
 match this dependency metadata.</p>
@@ -314,8 +314,8 @@ match this dependency metadata.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span></td>
-        <td><p>A filtered enumerable containing any objects from <span class="paramref">objects</span> which match
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;T&gt;</td>
+        <td><p>A filtered enumerable containing any objects from <code data-dev-comment-type="paramref" class="paramref">objects</code> which match
 this dependency metadata.</p>
 </td>
       </tr>
@@ -349,8 +349,8 @@ this dependency metadata.</p>
       <tr>
         <td><a class="xref" href="Rezolver.Sdk.DependencyException.html">DependencyException</a></td>
         <td><p>Most commonly thrown if a required dependency is not 
-present in <span class="paramref">objects</span>, but other reasons are possible.</p>
-<p>Basically - if you get one of these, then there&apos;s something wrong with the <span class="paramref">objects</span>
+present in <code data-dev-comment-type="paramref" class="paramref">objects</code>, but other reasons are possible.</p>
+<p>Basically - if you get one of these, then there&apos;s something wrong with the <code data-dev-comment-type="paramref" class="paramref">objects</code>
 which prevents dependencies from being obtained by this dependency metadata.</p>
 </td>
       </tr>
