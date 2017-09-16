@@ -36,11 +36,11 @@ namespace Rezolver.Tests.Examples
         }
 
         [Fact]
-        public void ShouldCollectionsOfThreeItems()
+        public void ShouldCreateCollectionsOfThreeItems()
         {
             // <example2>
             var container = new Container();
-            container.RegisterType<MyService, IMyService>();
+            container.RegisterType<MyService1, IMyService>();
             container.RegisterType<MyService2, IMyService>();
             container.RegisterType<MyService3, IMyService>();
 
@@ -59,23 +59,26 @@ namespace Rezolver.Tests.Examples
             Assert.Equal(3, result3.Count);
             Assert.Equal(3, result4.Count);
 
-            Assert.IsType<MyService>(result1[0]);
+            Assert.IsType<MyService1>(result1[0]);
             Assert.IsType<MyService2>(result1[1]);
             Assert.IsType<MyService3>(result1[2]);
-            Assert.IsType<MyService>(result2.First());
+
+            Assert.IsType<MyService1>(result2.First());
             Assert.IsType<MyService2>(result2.Skip(1).First());
             Assert.IsType<MyService3>(result2.Skip(2).First());
-            Assert.IsType<MyService>(result3[0]);
+
+            Assert.IsType<MyService1>(result3[0]);
             Assert.IsType<MyService2>(result3[1]);
             Assert.IsType<MyService3>(result3[2]);
-            Assert.IsType<MyService>(result4.First());
+
+            Assert.IsType<MyService1>(result4.First());
             Assert.IsType<MyService2>(result4.Skip(1).First());
             Assert.IsType<MyService3>(result4.Skip(2).First());
             // </example2>
         }
 
         [Fact]
-        public void ShouldDisableCollectionInjection()
+        public void ShouldDisableAutoCollectionInjection()
         {
             // <example3>
             var targets = new TargetContainer(

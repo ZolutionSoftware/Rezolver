@@ -13,7 +13,7 @@ container.
 > The functionality described in this section does not supersede your ability to create
 > explicit registrations for these types.
 
-By default Rezolver also has the ability to automatically build and inject other types
+By default Rezolver has the ability to automatically build and inject the following types
 which are commonly used to represent series of objects:
 
 - Arrays
@@ -26,7 +26,8 @@ which are commonly used to represent series of objects:
 ## Requires `IEnumerable<T>` Injection
 
 The key thing to note about Rezolver's implementation of these is that they all, in 
-some way, rely upon the injection of `IEnumerable<T>` mentioned at the start of this topic.
+some way, rely upon the injection of `IEnumerable<T>` mentioned at the start of this topic
+and, in some cases, rely on each other.
 
 ***
 

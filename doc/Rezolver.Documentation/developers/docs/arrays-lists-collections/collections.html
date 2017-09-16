@@ -127,6 +127,7 @@ to create the collection instances.</p>
 <p>Therefore, if you disable automatic list injection, automatic collection injection will only 
 work if you specifically add registrations for the corresponding <code>IList&lt;T&gt;</code> types.</p>
 </div>
+<h1 id="examples">Examples</h1>
 <p>The following two examples are the same as the first two for <code>IEnumerable&lt;T&gt;</code>, and identical 
 to those used for <a href="arrays.html">arrays</a> and <a href="lists.html">lists</a>.</p>
 <p>Empty collections:</p>
@@ -149,7 +150,7 @@ Assert.Equal(0, result3.Count);
 Assert.Equal(0, result4.Count);
 </code></pre><p>Collections after registrations have been added:</p>
 <pre><code class="lang-csharp" name="CollectionExamples.cs">var container = new Container();
-container.RegisterType&lt;MyService, IMyService&gt;();
+container.RegisterType&lt;MyService1, IMyService&gt;();
 container.RegisterType&lt;MyService2, IMyService&gt;();
 container.RegisterType&lt;MyService3, IMyService&gt;();
 
@@ -168,16 +169,19 @@ Assert.Equal(3, result2.Count);
 Assert.Equal(3, result3.Count);
 Assert.Equal(3, result4.Count);
 
-Assert.IsType&lt;MyService&gt;(result1[0]);
+Assert.IsType&lt;MyService1&gt;(result1[0]);
 Assert.IsType&lt;MyService2&gt;(result1[1]);
 Assert.IsType&lt;MyService3&gt;(result1[2]);
-Assert.IsType&lt;MyService&gt;(result2.First());
+
+Assert.IsType&lt;MyService1&gt;(result2.First());
 Assert.IsType&lt;MyService2&gt;(result2.Skip(1).First());
 Assert.IsType&lt;MyService3&gt;(result2.Skip(2).First());
-Assert.IsType&lt;MyService&gt;(result3[0]);
+
+Assert.IsType&lt;MyService1&gt;(result3[0]);
 Assert.IsType&lt;MyService2&gt;(result3[1]);
 Assert.IsType&lt;MyService3&gt;(result3[2]);
-Assert.IsType&lt;MyService&gt;(result4.First());
+
+Assert.IsType&lt;MyService1&gt;(result4.First());
 Assert.IsType&lt;MyService2&gt;(result4.Skip(1).First());
 Assert.IsType&lt;MyService3&gt;(result4.Skip(2).First());
 </code></pre><h1 id="disabling-collection-injection">Disabling Collection Injection</h1>

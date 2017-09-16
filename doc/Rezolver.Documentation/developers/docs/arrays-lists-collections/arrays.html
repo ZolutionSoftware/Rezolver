@@ -109,11 +109,18 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="automatic-creationinjection-of-arrays">Automatic creation/injection of arrays</h1>
 
-<p>Arrays of objects can be injected automatically by Rezolver just the same as <code>IEnumerable&lt;T&gt;</code>
-instances.  Therefore, if you read through the <a href="../enumerables.html">enumerables documentation</a>,
+<p>As with all IOC containers, you can create registrations for array types just as you would
+any type, e.g:</p>
+<pre><code class="lang-cs">// registers a constant integer array 
+container.RegisterObject(new int[] { 1, 2, 3 });
+</code></pre><p>However, arrays of objects can also be injected automatically by Rezolver just the same as 
+<code>IEnumerable&lt;T&gt;</code> instances - i.e. by building them dynamically from the registrations present
+against the array&#39;s element type.</p>
+<p>As a result, if you read through the <a href="../enumerables.html">enumerables documentation</a>,
 all of the examples there can be repeated with the corresponding array type - e.g. <code>int[]</code>
 instead of <code>IEnumerable&lt;int&gt;</code>.</p>
-<p>By default, also, an empty container (or one which has not had any specific registrations
+<h1 id="examples">Examples</h1>
+<p>By default, an empty container (or one which has not had any specific registrations
 for the array&#39;s element type) will automatically build an empty array:</p>
 <pre><code class="lang-csharp" name="ArrayExamples.cs">// this is fundamentally identical to the first example in the 
 // enumerables section
@@ -127,7 +134,7 @@ Assert.Equal(0, result.Length);
 </code></pre><p>And, as you would expect, as soon as you start registering objects of a particular type,
 you can inject an array of that type:</p>
 <pre><code class="lang-csharp" name="ArrayExamples.cs">var container = new Container();
-container.RegisterType&lt;MyService, IMyService&gt;();
+container.RegisterType&lt;MyService1, IMyService&gt;();
 container.RegisterType&lt;MyService2, IMyService&gt;();
 container.RegisterType&lt;MyService3, IMyService&gt;();
 
@@ -135,24 +142,27 @@ var result = container.Resolve&lt;IMyService[]&gt;();
 
 Assert.NotNull(result);
 Assert.Equal(3, result.Length);
-Assert.IsType&lt;MyService&gt;(result[0]);
+Assert.IsType&lt;MyService1&gt;(result[0]);
 Assert.IsType&lt;MyService2&gt;(result[1]);
 Assert.IsType&lt;MyService3&gt;(result[2]);
 </code></pre><p>All the other enumerable behaviour - such as <a href="../enumerables/generics.html#open-generics">open generics</a> 
 etc also applies to arrays.</p>
+<div class="TIP"><h5>Tip</h5><p>The same is also true for <a href="lists.html">lists</a> and <a href="collections.html">collections</a>.</p>
+</div>
 <h1 id="decorating-arrays">Decorating arrays</h1>
-<div class="TIP"><h5>Tip</h5><p>Decoration of array <em><strong>elements</strong></em> is exactly the same as it is for enumerables - if you register
+<div class="NOTE"><h5>Note</h5><p>Decoration of array <em><strong>elements</strong></em> is exactly the same as it is for enumerables - if you register
 a decorator for a particular type, then it will decorate every instance of that type when
-an enumerable is produced - see <a href="../enumerables.html#decorators-and-enumerables">&#39;decorators and enumerables&#39;</a>
+regardless of whether the object is destined for an enumerable/array/collection/list - 
+see <a href="../enumerables.html#decorators-and-enumerables">&#39;decorators and enumerables&#39;</a>
 for more on this.</p>
 </div>
-<p>If you want to decorate an array instance (e.g. to pad an array with certain values, perhaps), you cannot
-to it using a decorator class - for the obvious reason that you cannot inherit from .Net&#39;s array type.</p>
+<p>If you want to decorate an array <strong>instance</strong> (e.g. to pad an array with certain values, perhaps), you cannot
+do it using a decorator class - for the obvious reason that you cannot inherit from .Net&#39;s array type.</p>
 <p>Instead, you will need to use <a href="../decorators/delegates.html">decorator delegates</a> - a delegate that 
 will be executed every time an instance of a given type is produced by the container - which will
 be passed the undecorated instance as an argument and which returns a (potentially different) instance 
 to be used in its place.</p>
-<h1 id="disabling-array-injection">Disabling Array Injection</h1>
+<h1 id="disabling-automatic-array-injection">Disabling Automatic Array Injection</h1>
 <p>As with many other Rezolver behaviours, the automatic injection of arrays can be enabled (the default)
 and disabled via an option - however, it is an option that must be applied when the container&#39;s 
 <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> is created, and before some of the core configurations have been applied
@@ -162,7 +172,7 @@ to it.</p>
 (or <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a>) to which you pass a specific <a class="xref" href="../../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>
 in which you add a configuration object that will set the <a class="xref" href="../../api/Rezolver.Options.EnableArrayInjection.html">EnableArrayInjection</a>
 option to <code>false</code>.</p>
-<div class="TIP"><h5>Tip</h5><p>You can of course supply an empty <a class="xref" href="../../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> to the <a class="xref" href="../../api/Rezolver.TargetContainer.html">TargetContainer</a>
+<div class="NOTE"><h5>Note</h5><p>You can of course supply an empty <a class="xref" href="../../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> to the <a class="xref" href="../../api/Rezolver.TargetContainer.html">TargetContainer</a>
 on construction, but this will also disable other configurations such as enumerable injection, 
 contravariance and so on.</p>
 </div>

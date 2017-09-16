@@ -31,7 +31,7 @@ namespace Rezolver.Tests.Examples
         {
             // <example2>
             var container = new Container();
-            container.RegisterType<MyService, IMyService>();
+            container.RegisterType<MyService1, IMyService>();
             container.RegisterType<MyService2, IMyService>();
             container.RegisterType<MyService3, IMyService>();
 
@@ -39,7 +39,7 @@ namespace Rezolver.Tests.Examples
 
             Assert.NotNull(result);
             Assert.Equal(3, result.Length);
-            Assert.IsType<MyService>(result[0]);
+            Assert.IsType<MyService1>(result[0]);
             Assert.IsType<MyService2>(result[1]);
             Assert.IsType<MyService3>(result[2]);
             // </example2>

@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Markdown File | Rezolver IOC </title>
+  	<title>Automatic List Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Markdown File | Rezolver IOC ">
+  	<meta name="title" content="Automatic List Injection | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -107,9 +107,90 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="markdown-file">Markdown File</h1>
+<h1 id="automatic-list-injection">Automatic List Injection</h1>
 
-<h1 id="see-also">See Also</h1>
+<p>There are three primary types related to generic lists that are commonly used in 
+.Net projects:</p>
+<ul>
+<li><a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a></li>
+<li><a class="xref" href="https://msdn.microsoft.com/en-us/library/5y536ey6(v=vs.110).aspx">IList&lt;T&gt;</a></li>
+<li><a class="xref" href="https://msdn.microsoft.com/en-us/library/hh192385(v=vs.110).aspx">IReadOnlyList&lt;T&gt;</a></li>
+</ul>
+<p>In addition to being able to add explicit registrations for specific closed generic list 
+types, Rezolver supports the automatic creation and injection of these types in the same way that
+<a href="../enumerables.html">enumerables</a> are also supported.</p>
+<div class="NOTE"><h5>Note</h5><p>For all three types, Rezolver creates/injects an instance of <code>List&lt;T&gt;</code> by 
+binding to the
+<a class="xref" href="https://msdn.microsoft.com/en-us/library/fkbw11z0(v=vs.110).aspx">List&lt;T&gt;(IEnumerable&lt;T&gt;)</a>
+constructor - which means that <a href="../enumerables.html">enumerable injection</a> must be enabled
+unless you intend to take control of all of your <code>IEnumerable&lt;T&gt;</code> registrations.</p>
+<p>Unfortunately, this also means that an instance of <code>IReadOnlyList&lt;T&gt;</code> can be cross-cast 
+to <code>List&lt;T&gt;</code> or <code>IList&lt;T&gt;</code> in order to make modifications to it - this will be changed
+in a future release.</p>
+</div>
+<h1 id="examples">Examples</h1>
+<p>Because all the automatic <code>IEnumerable&lt;T&gt;</code> functionality supported 
+by Rezolver also flows through to these list types (e.g. open generics etc), not many
+examples are required - we&#39;ll just cover the basics (as is the case in the <a href="arrays.html">arrays</a>
+documentation), and then the rest you can learn from the 
+<a href="../enumerables.html">enumerables documentation</a>.</p>
+<p>So - an empty container can automatically inject an empty list instance:</p>
+<pre><code class="lang-csharp" name="ListExamples.cs">var container = new Container();
+
+var result1 = container.Resolve&lt;List&lt;IMyService&gt;&gt;();
+var result2 = container.Resolve&lt;IList&lt;IMyService&gt;&gt;();
+var result3 = container.Resolve&lt;IReadOnlyList&lt;IMyService&gt;&gt;();
+
+Assert.NotNull(result1);
+Assert.NotNull(result2);
+Assert.NotNull(result3);
+
+Assert.Equal(0, result1.Count);
+Assert.Equal(0, result2.Count);
+Assert.Equal(0, result3.Count);
+</code></pre><p>And, after adding three registrations for <code>IMyService</code>, any list that is created will contain
+three instances created from those registrations:</p>
+<pre><code class="lang-csharp" name="ListExamples.cs">var container = new Container();
+
+container.RegisterType&lt;MyService1, IMyService&gt;();
+container.RegisterType&lt;MyService2, IMyService&gt;();
+container.RegisterType&lt;MyService3, IMyService&gt;();
+
+var result1 = container.Resolve&lt;List&lt;IMyService&gt;&gt;();
+var result2 = container.Resolve&lt;IList&lt;IMyService&gt;&gt;();
+var result3 = container.Resolve&lt;IReadOnlyList&lt;IMyService&gt;&gt;();
+
+Assert.NotNull(result1);
+Assert.NotNull(result2);
+Assert.NotNull(result3);
+
+Assert.Equal(3, result1.Count);
+Assert.Equal(3, result2.Count);
+Assert.Equal(3, result3.Count);
+
+Assert.IsType&lt;MyService1&gt;(result1[0]);
+Assert.IsType&lt;MyService2&gt;(result1[1]);
+Assert.IsType&lt;MyService3&gt;(result1[2]);
+
+Assert.IsType&lt;MyService1&gt;(result2[0]);
+Assert.IsType&lt;MyService2&gt;(result2[1]);
+Assert.IsType&lt;MyService3&gt;(result2[2]);
+
+Assert.IsType&lt;MyService1&gt;(result3[0]);
+Assert.IsType&lt;MyService2&gt;(result3[1]);
+Assert.IsType&lt;MyService3&gt;(result3[2]);
+</code></pre><h1 id="disabling-automatic-list-injection">Disabling Automatic List Injection</h1>
+<p>First, you should look at how <a href="arrays.html#disabling-array-injection">to disable array injection</a> as 
+the process to do it for lists is exactly the same - except it&#39;s a different option:</p>
+<pre><code class="lang-csharp" name="ListExamples.cs">var container = new Container(
+    new TargetContainer(
+        TargetContainer.DefaultConfig
+        .Clone()
+        .ConfigureOption&lt;Options.EnableListInjection&gt;(false)));
+
+Assert.Throws&lt;InvalidOperationException&gt;(
+    () =&gt; container.Resolve&lt;List&lt;IMyService&gt;&gt;());
+</code></pre><h1 id="see-also">See Also</h1>
 <ul>
 <li><a href="../enumerables.html">Enumerables</a></li>
 <li><a href="arrays.html">Arrays</a></li>

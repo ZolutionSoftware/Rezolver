@@ -21,6 +21,8 @@ created by default if no registrations are present.
 > Therefore, if you disable automatic list injection, automatic collection injection will only 
 > work if you specifically add registrations for the corresponding `IList<T>` types.
 
+# Examples
+
 The following two examples are the same as the first two for `IEnumerable<T>`, and identical 
 to those used for [arrays](arrays.md) and [lists](lists.md).
 
