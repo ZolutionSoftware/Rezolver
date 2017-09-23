@@ -159,3 +159,4 @@ use delegate registrations (note, there are *lots* of ways, this is just the mos
 generic registrations.
 - Learn about Rezolver's support for [lazy and eager enumerables](enumerables/lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
 evaluated by default)
+- Rezolver also supports [arrays, lists and collection injection](arrays-lists-collections/index.md)

@@ -23,8 +23,7 @@ when *you* need it, so hopefully what's presented here will help you.
 Hopefully, when you get to the stage of wanting to use it, you should just naturally
 expect it to work, and it will! :wink:
 
-
-## Ordered Enumerables
+## Injecting `IComparer<T>`
 
 Let's say that in addition to Rezolver's own enumerables functionality, our application 
 wants to be able to inject explicitly ordered enumerables.  For that, we'll need the
@@ -53,7 +52,7 @@ ordered enumerable is pretty simple:
 
 [!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example1)]
 
-So far, so 'open generic' - we can now get ordered enumerables which 'work' for any of the
+So far, so 'open generic' - we can now get ordered enumerables which work for any of the
 built-in .Net types that `Comparer<T>.Default` also works for.  Now we need to extend it
 for custom types.
 
@@ -86,22 +85,14 @@ respectively:
 - `IComparer<Square>`
 - `IComparer<Circle>`
 
-We know that an instance of our `ShapeAreaComparer` can be assigned to variables of all 
-these types, because `IComparer<T>` is contravariant, as demonstrated by this snippet:
+Without a contravariance-aware container, this would cause us a problem, because we'd
+need to register the `ShapeAreaComparer` type for each and every specialisation of 
+`IComparer<T>` applicable for every `I2DShape`-implementation present in our application.
 
-```cs
-// create an instance of the comparer, which implements IComparer<I2DShape>
-var comparer = new ShapeAreaComparer(Comparer<double>.Default);
-
-// can be used for all of these:
-IComparer<Rectangle> a = comparer;
-IComparer<Square> b = comparer;
-IComparer<Circle> c = comparer;
-```
-
-And Rezolver knows this too - which means that all we have to do is to register the
-type `ShapeAreaComparer` as `IComparer<I2DShape>`, and Rezolver will automatically use that comparer
-whenever it is compatible with a requested type.
+Thanakfully, Rezolver is aware of the contravariance of `T` in `IComparer<T>`, which 
+means that all we have to do is to register the type `ShapeAreaComparer` as 
+`IComparer<I2DShape>`, and Rezolver will automatically use it whenever it is compatible 
+with a given `T`.
 
 The following example breaks this into two demonstrations - one explicit set of 
 assertions which verify the `ShapeAreaComparer` is being used for any compatible comparer
@@ -159,3 +150,155 @@ affect the logic) and use it.
 >
 > The bug is being tracked on [issue #54](https://github.com/ZolutionSoftware/Rezolver/issues/54)
 
+So note that we are creating an explicit registration for `IComparer<Rectangle>` which then
+supersedes our `IComparer<I2DShape>` registration for `Rectangle`, but it also kicks
+in for `Square` as well - because `Rectangle` is 'closer' to `Square` than `I2DShape` is.
+
+## Contravariance with Enumerables
+
+If you have read through the [documentation on enumerables of generics](enumerables/generics.md)
+then you will already be aware of Rezolver's powerful auto-enumerable functionality, and you
+can probably already guess how it works when requesting enumerables of contravariant generics.
+
+In short - the best-to-worst matching algorithm that's used to identify the best generic
+registration for the type that is 'closest' to the requested type just expands out when 
+contravariance comes into play.  *Every* registration that matches the 
+given type will be returned - in order of best to worst, as demonstrated by this example
+which builds on our `I2DShape` types to configure the container to write shape information
+to a `StringBuilder`:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example5)]
+
+> [!TIP]
+> `object` is always considered last in a contravariant search, after a type's other bases
+> or interfaces, because `object` is ubiquitous and technically applies to all instances.
+> 
+> Also, while bases are walked in order of inheritance, from least to most derived, the 
+> order that interfaces are considered is less well-defined.  Rezolver applies a trivial
+> sort on the list of interfaces of the type such that generic interfaces appear before 
+> non-generic interfaces; and any 'derived' interfaces before those that they 'inherit'.
+
+## Disabling Contravariance (Advanced)
+
+> [!WARNING]
+> If you need to start playing around with how contravariance works naturally within the
+> container to make things work for your application then, assuming it's not to avoid
+> a bug in Rezolver, you should consider instead whether your design is correct.
+> 
+> Generally, if you've written a delegate or interface type with a contravariant parameter
+> and are subsequently injecting instances of it, then the way that Rezolver will locate
+> registrations for that type should be correct as per the registrations you add to
+> the container.  So, in most cases, if you're getting unexpected results it's likely you've
+> missed something in your registrations.
+
+As with much of the rest of the built-in functionality in Rezolver, it's possible to disable
+contravariance by setting an option on the @Rezolver.ITargetContainer which underpins your
+@Rezolver.IContainer (which, if you're using either @Rezolver.Container or 
+@Rezolver.ScopedContainer is the container itself).
+
+The option is @Rezolver.Options.EnableContravariance, which has a 
+@Rezolver.Options.EnableContravariance.Default value that is, unsurprisingly, equivalent 
+to `true`.
+
+You can set the option to `true` or `false`:
+
+- Globally
+- Against a specific closed generic, e.g. `Foo<Bar>`, to control contravariance for that 
+specific type
+- Against an open generic, e.g. `Foo<>`, to control contravariance for *any* generic type
+based on it
+- Against a non-generic type, e.g. `Bar`, to control contravariance when that type, or any
+of its derivatives, is supplied as a type argument to *any* contravariant type parameter.
+
+> [!NOTE]
+> When you disable contravariance using any of the following methods, Rezolver will expect
+> registrations for the associaed concrete generic types that your application requests.
+
+Disabling contravariance is something you might do when resolving 
+multiple instances of a contravariant type, as in the previous delegate example, so we'll
+build on that with additional delegates for the `Square` type.
+
+We'll show five different ways to disable contravariance such that we only get one delegate
+when we request an array of `Action<Square, StringBuilder>` (which simply reuses the container's
+`IEnumerable<>` functionality.
+
+**Note**: We're using this method in these examples:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example_registershapedelegates)]
+
+***
+
+### Disabling for generics
+
+When you disable per-generic, if that type has one or more contravariant type parameters,
+then you are instructing Rezolver to suspend contravariant searches for any of those type
+parameters either for a specific closed version of that generic, or for any.
+
+> [!TIP]
+> If a generic type doesn't have contravariant parameters, and you disable 
+> contravariance for it, you are telling Rezolver to suspend contravariance when that type
+> is passed as an argument to *another generic's* contravariant type parameter - as
+> shown in the [next section](#disabling-for-type-arguments).
+
+In the first example, we'll disable contravariance for 
+`Action<Square, StringBuilder>` - which means we only get one delegate in our array:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example6)]
+
+We can also disable it for all `Action<,>` delegates:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example7)]
+
+***
+
+### Disabling for type arguments
+
+The previous two examples show how we can control Rezolver's contravariance for
+specific generic types.  But sometimes you might want to suspend contravariance for
+a type, or any of its derivatives or implementations, for *any* generic to which they are
+passed as type arguments.
+
+So, the next example shows how we can disable contravariance for the `Square` type, which 
+means that when *any* concrete generic is requested, if `Square` is passed into a 
+contravariant type parameter, the contravariance for that parameter will be ignored:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example8)]
+
+Any we can also do the same for *any* type which has the `I2DShape` interface:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example9)]
+
+### Disabling globally
+
+Finally, the simplest of all: disabling contravariance for all types:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example10)]
+
+### Caution: Changing to 'Opt-in'
+
+As will have become apparent, Rezolver uses an opt-out model by default for contravariance
+simply because a generic type parameter is either contravariant or it isn't; and if it 
+_**is**_ then the container should adapt accordingly.
+
+If you want *selective* contravariance for only certain types in your application,
+then you will typically switch it off globally and then start setting the 
+@Rezolver.Options.EnableContravariance option to `true` for those types you want to 
+have opted in.
+
+But, in almost all cases, you will need to set it to `true` for more types than you 
+initially thought - as contravariance has been switched off not only for the generics
+but also for all the types which are being passed as type arguments.
+
+So, our final example shows how we can re-enable contravariance *only* for the 
+`Action<Square, StringBuilder>` delegate type - which actually involves re-enabling it
+for the `Square` type also:
+
+[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example11)]
+
+# Summary
+
+Rezolver's support for contravariance is comprehensive - including support for nesting 
+contravariant types within others (examples not included because it gets very complicated
+very quickly, but you can see the test cases for this in the standard Rezolver test suite).
+
+So if you start working with contravariant types, then you should find Rezolver *just works*.

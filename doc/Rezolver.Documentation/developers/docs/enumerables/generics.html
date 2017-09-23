@@ -143,7 +143,8 @@ var result = container.ResolveMany&lt;IUsesAnyService&lt;IMyService&gt;&gt;().To
 Assert.Equal(2, result.Length);
 Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[0]);
 Assert.IsType&lt;UsesAnyService2&lt;IMyService&gt;&gt;(result[1]);
-</code></pre><h2 id="constrained-generics">Constrained Generics</h2>
+</code></pre><hr>
+<h2 id="constrained-generics">Constrained Generics</h2>
 <p>When one or more constrained open generic types are registered against an open generic type, Rezolver will only
 include results from registrations whose target type&#39;s constraints are met.</p>
 <pre><code class="lang-csharp" name="ConstrainedGenerics.cs">public interface IGeneric&lt;T&gt;
@@ -200,7 +201,8 @@ Assert.Equal(3, myService1Result.Length);
 Assert.IsType&lt;GenericAny&lt;MyService1&gt;&gt;(myService1Result[0]);
 Assert.IsType&lt;GenericAnyIMyService&lt;MyService1&gt;&gt;(myService1Result[1]);
 Assert.IsType&lt;GenericAnyMyService1&lt;MyService1&gt;&gt;(myService1Result[2]);
-</code></pre><h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
+</code></pre><hr>
+<h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
 <p>In many applications which use DI and generics, you often have &#39;common&#39; open generic registrations, such as
 those in the <a href="#open-generics">first example above</a>, and then specific registrations for one or more 
 well-known <em>closed</em> generics.</p>
@@ -273,6 +275,7 @@ is maintained, but the <em>most</em>-specific generics are being returned first.
 registration against <code>IFoo&lt;Bar&gt;</code> will always beat a constrained generic implementation such as
 <code>MyFoo&lt;T&gt; : IFoo&lt;T&gt; where T : Bar</code> (see further down).</p>
 </div>
+<hr>
 <h3 id="best-match-only-global">Best match <em>only</em> (global)</h3>
 <p>Sometimes, you might only want objects in your enumerable which were registered against the best-matched generic, so, if you
 have two open generic registrations for <code>IFoo&lt;&gt;</code> but a specific registration for <code>IFoo&lt;Bar&gt;</code>.  When requesting an 
@@ -297,7 +300,8 @@ var result = container.ResolveMany&lt;IUsesAnyService&lt;IMyService&gt;&gt;().To
 Assert.Equal(2, result.Length);
 Assert.IsType&lt;UsesIMyService&gt;(result[0]);
 Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
-</code></pre><h3 id="best-match-only-per-service">Best match <em>only</em> (per-service)</h3>
+</code></pre><hr>
+<h3 id="best-match-only-per-service">Best match <em>only</em> (per-service)</h3>
 <p>We can also control this on a per-service basis - simply set the <a class="xref" href="../../api/Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> option to
 <code>false</code> for a given service type.</p>
 <p>Here, we&#39;re using the same types that we introduced for the <a href="#constrained-generics">constrained generics example</a>, 
@@ -343,7 +347,24 @@ var myService2Result = container.ResolveMany&lt;IGeneric&lt;MyService2&gt;&gt;()
 Assert.Equal(1, myService1Result.Length);
 Assert.Equal(1, myService2Result.Length);
 Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
-</code></pre></article>
+</code></pre><hr>
+<h1 id="contravariance">Contravariance</h1>
+<p>Rezolver also supports generic contravariance which, in the case of 
+enumerables, means getting multiple results from any and all registrations that 
+match a particular type argument&#39;s bases or interfaces, in descending order of &#39;distance&#39;
+from the requested type.</p>
+<p>For more on this, including concrete examples, see the <a href="#next-steps">next steps</a> section
+below.</p>
+<hr>
+<h1 id="next-steps">Next steps</h1>
+<ul>
+<li>Learn about Rezolver&#39;s support for <a href="lazy-vs-eager.html">lazy and eager enumerables</a> (note: all auto-generated enumerables are lazily 
+evaluated by default)</li>
+<li>As <a href="#contravariance">mentioned above</a>, by default, Rezolver handles contravariant 
+generic type parameters - see this in action with enumerables 
+<a href="../contravariance.html">in the section dedicated to generic contravariance</a></li>
+</ul>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

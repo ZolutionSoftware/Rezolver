@@ -9,7 +9,7 @@ namespace Rezolver.Options
     /// parameters will be matched to registrations of bases/interfaces of the associated
     /// type.
     /// 
-    /// This option can be applied globally or on a per-service basis see the remarks section
+    /// This option can be applied globally or on a per-service basis. See the remarks section
     /// for more.
     /// 
     /// The <see cref="Default"/> (unset) is equivalent to <c>true</c>, meaning that contravariance

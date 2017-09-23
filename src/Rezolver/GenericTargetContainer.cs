@@ -128,10 +128,10 @@ namespace Rezolver
             //given type and return the result of its fetch function.
             //If we don't find one - then we return the targets that have been registered against the 
             //open generic type definition.
-            return _caches.FetchCache.GetOrAdd(type, t =>
+            return _caches.FetchCache.GetOrAdd(type, t => 
             {
                 ITarget baseResult = null;
-                foreach (var searchType in new TargetTypeSelector(t))
+                foreach (var searchType in new TargetTypeSelector(t, Root))
                 {
                     if ((baseResult = base.Fetch(searchType)) != null)
                         return baseResult;
@@ -158,7 +158,7 @@ namespace Rezolver
             bool foundOne = false;
 
             //all generics are returned in descending order of specificity
-            foreach (var searchType in new TargetTypeSelector(type).Distinct())
+            foreach (var searchType in new TargetTypeSelector(type, Root).Distinct())
             {
                 foreach (var result in base.FetchAll(searchType))
                 {

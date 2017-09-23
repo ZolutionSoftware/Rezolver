@@ -18,7 +18,7 @@ namespace Rezolver.Options
     /// <typeparam name="TOption">The underlying option value type - e.g. <see cref="bool"/>, <see cref="string"/>,
     /// <see cref="Uri"/> or whatever</typeparam>
     /// <remarks>
-    /// This type is creatable only through inheritance.
+    /// **This type is creatable only through inheritance.**
     /// 
     /// 
     /// Options in Rezolver are achieved by using registrations in the <see cref="ITargetContainer"/> that 
@@ -43,6 +43,7 @@ namespace Rezolver.Options
     /// (e.g. <see cref="OptionsTargetContainerExtensions.GetOption{TOption}(ITargetContainer, TOption)"/>
     /// or <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>) do **not** require
     /// you to use it.</remarks>
+    [System.Diagnostics.DebuggerDisplay("Value = {Value}")]
     public class ContainerOption<TOption>
     {
         /// <summary>
@@ -67,6 +68,15 @@ namespace Rezolver.Options
         public static implicit operator TOption(ContainerOption<TOption> option)
         {
             return option != null ? option.Value : default(TOption);
+        }
+    
+        /// <summary>
+        /// Provides a textual representation of the value of this option and its underlying type.
+        /// </summary>
+        /// <returns>A string in the form <code>"{Value} ({typeof(TOption)})"</code></returns>
+        public override string ToString()
+        {
+            return $"{Value} ({typeof(TOption)})";
         }
     }
 }

@@ -313,6 +313,7 @@ namespace Rezolver.Tests
             var result = new TargetTypeSelector(type).ToArray();
             LogExpectedOrder(expected);
             LogActual(result);
+            // verify that the expected types are compatible with the target type
             Assert.All(expected.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
                 t => t.IsAssignableFrom(type));
             Assert.Equal(expected, result);
@@ -342,6 +343,7 @@ namespace Rezolver.Tests
             var targets = new TargetContainer();
             // test shows that contravariance still works for Action<> but is disabled for all IContravariant<>
             targets.SetOption<Options.EnableContravariance>(false, typeof(IContravariant<>));
+            Assert.False(targets.GetOption(typeof(IContravariant<>), Options.EnableContravariance.Default).Value);
             var result1 = new TargetTypeSelector(typeof(IContravariant<BaseClassGrandchild>), targets).ToArray();
             var result2 = new TargetTypeSelector(typeof(Action<BaseClassGrandchild>), targets).ToArray();
 
@@ -364,6 +366,23 @@ namespace Rezolver.Tests
                     typeof(Action<>)
                 },
                 result2);
+        }
+
+        [Fact]
+        public void ShouldDisableContravarianceForClosedGeneric()
+        {
+            var targets = new TargetContainer();
+            targets.SetOption<Options.EnableContravariance, IContravariant<BaseClassGrandchild>>(false);
+
+            var result = new TargetTypeSelector(typeof(IContravariant<BaseClassGrandchild>), targets).ToArray();
+
+            Assert.Equal(
+                new[]
+                {
+                    typeof(IContravariant<BaseClassGrandchild>),
+                    typeof(IContravariant<>)
+                },
+                result);
         }
 
         private void LogTypes(Type[] types, string header)

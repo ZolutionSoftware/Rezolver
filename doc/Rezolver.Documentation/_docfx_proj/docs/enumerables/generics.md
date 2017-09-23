@@ -11,6 +11,8 @@ You can register multiple open generics of the same type (e.g. `IFoo<>`), resolv
 [!code-csharp[UsesAnyService.cs](../../../../../test/Rezolver.Tests.Examples/Types/UsesAnyService.cs#example)]
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example5)]
 
+***
+
 ## Constrained Generics
 
 When one or more constrained open generic types are registered against an open generic type, Rezolver will only
@@ -18,6 +20,8 @@ include results from registrations whose target type's constraints are met.
 
 [!code-csharp[ConstrainedGenerics.cs](../../../../../test/Rezolver.Tests.Examples/Types/ConstrainedGenerics.cs#example)]
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example5b)]
+
+***
 
 ## Mixing open/closed generics
 
@@ -82,6 +86,8 @@ is maintained, but the *most*-specific generics are being returned first.
 > registration against `IFoo<Bar>` will always beat a constrained generic implementation such as
 > `MyFoo<T> : IFoo<T> where T : Bar` (see further down).
 
+***
+
 ### Best match *only* (global)
 
 Sometimes, you might only want objects in your enumerable which were registered against the best-matched generic, so, if you
@@ -93,6 +99,8 @@ As mentioned in the note in the previous example, to do this, we use the @Rezolv
 to control this globally for a container:
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6b)]
+
+***
 
 ### Best match *only* (per-service)
 
@@ -108,3 +116,25 @@ You can also set this against an open generic - which then has the same effect b
 open generic (here we're disabling it for `IGeneric<>`)
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6d)]
+
+***
+
+# Contravariance
+
+Rezolver also supports generic contravariance which, in the case of 
+enumerables, means getting multiple results from any and all registrations that 
+match a particular type argument's bases or interfaces, in descending order of 'distance'
+from the requested type.
+
+For more on this, including concrete examples, see the [next steps](#next-steps) section
+below.
+
+***
+
+# Next steps
+
+- Learn about Rezolver's support for [lazy and eager enumerables](lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
+evaluated by default)
+- As [mentioned above](#contravariance), by default, Rezolver handles contravariant 
+generic type parameters - see this in action with enumerables 
+[in the section dedicated to generic contravariance](../contravariance.md)

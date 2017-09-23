@@ -160,5 +160,174 @@ namespace Rezolver.Tests.Examples
                 container.Resolve<IOrderedEnumerable<Rectangle>>());
             // </example4>
         }
+
+        [Fact]
+        public void EnumerablesOfContravariantTypeShouldMatchAllApplicable()
+        {
+            // <example5>
+            var container = new Container();
+
+            container.RegisterObject<Action<Rectangle, StringBuilder>>(
+                (r, sb) => sb.AppendLine($"Length: { r.Length }, Height: { r.Height }"));
+            container.RegisterObject<Action<I2DShape, StringBuilder>>(
+                (s, sb) => sb.AppendLine($"Area: { s.CalcArea() }"));
+            container.RegisterObject<Action<object, StringBuilder>>(
+                (o, sb) => sb.AppendLine($"Type: { o.GetType() }"));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            Square square = new Square(7);
+            int count = 0;
+            foreach(var action in container.ResolveMany<Action<Square, StringBuilder>>())
+            {
+                action(square, stringBuilder);
+                count++;
+            }
+
+            Assert.Equal(3, count);
+            Assert.Equal(
+                "Length: 7, Height: 7\r\nArea: 49\r\nType: Rezolver.Tests.Examples.Types.Square\r\n",
+                stringBuilder.ToString());
+            // </example5>
+        }
+
+        // <example_registershapedelegates>
+        private static void RegisterShapeDelegates(Container container)
+        {
+            container.RegisterObject<Action<Square, StringBuilder>>(
+                (sq, sb) => sb.AppendLine($"Square of size: { sq.Height }"));
+            container.RegisterObject<Action<Rectangle, StringBuilder>>(
+                (r, sb) => sb.AppendLine($"Length: { r.Length }, Height: { r.Height }"));
+            container.RegisterObject<Action<I2DShape, StringBuilder>>(
+                (s, sb) => sb.AppendLine($"Area: { s.CalcArea() }"));
+            container.RegisterObject<Action<object, StringBuilder>>(
+                (o, sb) => sb.AppendLine($"Type: { o.GetType() }"));
+        }
+        // </example_registershapedelegates>
+
+        [Fact]
+        public void DisablingContravarianceForSpecificActionTypeShouldYieldOneResult()
+        {
+            // <example6>
+            var container = new Container();
+
+            // set the option to disable contravariance
+            container.SetOption<Options.EnableContravariance, Action<Square, StringBuilder>>(false);
+
+            RegisterShapeDelegates(container);
+
+            // this time we'll just resolve an array, which uses the enumerable functionality
+            // behind the scenes.
+            StringBuilder stringBuilder = new StringBuilder();
+            Square square = new Square(7);
+
+            var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
+
+            Assert.Equal(1, squareResult.Length);
+            squareResult[0](square, stringBuilder);
+
+            Assert.Equal("Square of size: 7\r\n", stringBuilder.ToString());
+            // </example6>
+        }
+
+        [Fact]
+        public void DisablingContravariantForAllActionTypesShouldYieldOneResult()
+        {
+            // <example7>
+            var container = new Container();
+
+            // set the option to disable contravariance for all Action<,> types
+            container.SetOption<Options.EnableContravariance>(false, typeof(Action<,>));
+
+            RegisterShapeDelegates(container);
+
+            var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
+            var rectResult = container.Resolve<Action<Rectangle, StringBuilder>[]>();
+            var shapeResult = container.Resolve<Action<I2DShape, StringBuilder>[]>();
+
+            Assert.Equal(1, squareResult.Length);
+            Assert.Equal(1, rectResult.Length);
+            Assert.Equal(1, shapeResult.Length);
+            // </example7>
+        }
+
+        [Fact]
+        public void DisablingContravarianceForTypeArgumentShouldYieldOneResult()
+        {
+            // <example8>
+            var container = new Container();
+
+            // set the option to disable contravariance for the Square type only
+            container.SetOption<Options.EnableContravariance, Square>(false);
+
+            RegisterShapeDelegates(container);
+
+            var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
+            
+            Assert.Equal(1, squareResult.Length);
+            // </example8>
+        }
+
+        [Fact]
+        public void DisablingContravarianceForInterfaceOfTypeArgumentShouldYieldOneResult()
+        {
+            // <example9>
+            var container = new Container();
+
+            // set the option to disable contravariance for any type which implements I2DShape
+            container.SetOption<Options.EnableContravariance, I2DShape>(false);
+
+            RegisterShapeDelegates(container);
+
+            var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
+            var rectResult = container.Resolve<Action<Rectangle, StringBuilder>[]>();
+            var shapeResult = container.Resolve<Action<I2DShape, StringBuilder>[]>();
+
+            Assert.Equal(1, squareResult.Length);
+            Assert.Equal(1, rectResult.Length);
+            Assert.Equal(1, shapeResult.Length);
+            // </example9>
+        }
+
+        [Fact]
+        public void DisablingContravarianceGloballyShouldYieldOneResult()
+        {
+            // <example10>
+            var container = new Container();
+
+            // set the option to disable contravariance completely
+            container.SetOption<Options.EnableContravariance>(false);
+
+            RegisterShapeDelegates(container);
+
+            var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
+            var rectResult = container.Resolve<Action<Rectangle, StringBuilder>[]>();
+            var shapeResult = container.Resolve<Action<I2DShape, StringBuilder>[]>();
+
+            Assert.Equal(1, squareResult.Length);
+            Assert.Equal(1, rectResult.Length);
+            Assert.Equal(1, shapeResult.Length);
+            // </example10>
+        }
+
+        [Fact]
+        public void DisablingContravarianceGloballyButEnablingItForOneTypeShouldYieldFourResults()
+        {
+            // <example11>
+            var container = new Container();
+
+            // set the option to disable contravariance completely
+            container.SetOption<Options.EnableContravariance>(false);
+
+            //re-enable for the Action<Square, StringBuilder> type *AND* the Square type
+            container.SetOption<Options.EnableContravariance, Action<Square, StringBuilder>>(true);
+            container.SetOption<Options.EnableContravariance, Square>(true);
+
+            RegisterShapeDelegates(container);
+
+            var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
+
+            Assert.Equal(4, squareResult.Length);
+            // </example11>
+        }
     }
 }

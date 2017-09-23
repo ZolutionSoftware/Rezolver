@@ -77,7 +77,7 @@ namespace Rezolver
                     {
                         if (x.IsConstructedGenericType)
                         {
-                            if(y.IsConstructedGenericType)
+                            if (y.IsConstructedGenericType)
                             {
                                 return 0;
                             }
@@ -105,7 +105,7 @@ namespace Rezolver
                 }
                 else
                 {
-                    if(TypeHelpers.IsGenericType(y)) //place nongeneric types after generic types.
+                    if (TypeHelpers.IsGenericType(y)) //place nongeneric types after generic types.
                     {
                         return 1;
                     }
@@ -127,13 +127,68 @@ namespace Rezolver
         }
         private class SearchParams
         {
+            private static bool? GetInternalContravarianceOverride(Type type)
+            {
+                var attribute = TypeHelpers.GetCustomAttributes<Runtime.ContravarianceAttribute>(type).SingleOrDefault();
+
+                return attribute?.Enable;
+            }
+
             public SearchParams Parent { get; }
             public Type Type { get; }
             public Type TypeParameter { get; }
 
+            /// <summary>
+            /// <c>true</c> if contravariance (and covariance when it's implemented) are to be allowed
+            /// for this search.  This acts as a master gate for all variance - e.g. even if a type parameter
+            /// is contravariant, setting this to <c>false</c> will prevent contravariant searching.
+            /// 
+            /// Further checks are then performed for the individual types of variant searching to detect if they're
+            /// to be used.
+            /// </summary>
             public bool EnableVariance { get; }
 
+            /// <summary>
+            /// If Contravariant type searches are enabled, this controls the types
+            /// which are to be considered.
+            /// </summary>
             public Contravariance Contravariance { get; }
+
+            private readonly ITargetContainer _rootTargetContainer;
+            public ITargetContainer RootTargetContainer
+            {
+                get
+                {
+                    return _rootTargetContainer ?? Parent?.RootTargetContainer;
+                }
+            }
+
+            private readonly bool? _forceContravariance;
+            /// <summary>
+            /// If <c>null</c>, enabling of contravariance for the search type is determined 
+            /// by a target container option (or internal attribute for internal types).
+            /// 
+            /// If not null, contravariant searches are only performed for the search type
+            /// if it is <c>true</c>.
+            /// </summary>
+            /// <remarks>This is required for when options are sought from a target container
+            /// because the <see cref="Options.IOptionContainer{TService, TOption}"/> interface
+            /// is contravariant and allows us to set option on a per-service bases, contravariant
+            /// searching is forced to <c>true</c> for those, and is forced to <c>false</c>
+            /// for <see cref="Options.IOptionContainer{TOption}"/>, to avoid endless recursion into the
+            /// options API.
+            /// 
+            /// This is demonstrated by the paradox created when using the 
+            /// <see cref="Options.EnableContravariance"/> option to disable contravariance for a
+            /// type and any of its derivatives or implementations - that option lookup *requires*
+            /// contravariance for that type to be enabled in order to work!</remarks>
+            public bool? ForceContravariance
+            {
+                get
+                {
+                    return _forceContravariance ?? Parent?.ForceContravariance;
+                }
+            }
 
             public IEnumerable<Type> TypeParameterChain
             {
@@ -152,15 +207,49 @@ namespace Rezolver
                 }
             }
 
+            public SearchParams(Type type)
+            {
+                Type = type;
+            }
+
+            /// <summary>
+            /// Constructor used for the top-level 
+            /// </summary>
+            /// <param name="type"></param>
+            /// <param name="owner"></param>
+            public SearchParams(Type type, TargetTypeSelector owner)
+                : this(type)
+            {
+                _rootTargetContainer = owner?._rootContainer;
+                // variance always starts off enabled.
+                EnableVariance = true;
+
+                bool enableContravariance = true;
+
+                _forceContravariance = GetInternalContravarianceOverride(Type);
+                if (_forceContravariance == null)
+                {
+                    if (RootTargetContainer != null)
+                        enableContravariance = RootTargetContainer?.GetOption(
+                            Type, Options.EnableContravariance.Default);
+                }
+                else
+                    enableContravariance = _forceContravariance.Value;
+
+                if(enableContravariance)
+                    Contravariance = Contravariance.BasesAndInterfaces;
+                else
+                    Contravariance = Contravariance.None;
+            }
+
             public SearchParams(Type type,
                 Type typeParameter = null,
                 SearchParams parent = null,
                 Contravariance? contravariantSearchType = null)
+                : this(type)
             {
                 Parent = parent;
-                Type = type;
                 TypeParameter = typeParameter;
-
                 // We enable variance if we have no parent
                 // Or if we have a variant type parameter and
                 // the parent hasn't disabled variance.
@@ -169,29 +258,49 @@ namespace Rezolver
 
                 if (EnableVariance)
                 {
+                    bool enableContravariance;
+                    if (ForceContravariance == null)
+                    {
+                        //start off always enabled
+                        enableContravariance = true;
+                        var overridenContravariance = GetInternalContravarianceOverride(Type);
+
+                        if (overridenContravariance != null)
+                        {
+                            // once it's forced, all child searches will avoid testing the EnableContravariance option
+                            _forceContravariance = overridenContravariance;
+                            enableContravariance = overridenContravariance.Value;
+                        }
+                        else if (RootTargetContainer != null)
+                            enableContravariance = RootTargetContainer.GetOption(
+                                Type, Options.EnableContravariance.Default);
+                    }
+                    else
+                        enableContravariance = ForceContravariance.Value;
+
                     if (contravariantSearchType != null)
                         Contravariance = contravariantSearchType.Value;
                     else
                     {
-                        // if the parent has its contravariance search set to None, we inherit that
-                        // and move on.
-                        if (Parent?.Contravariance == Contravariance.None)
+                        if (!enableContravariance)
                             Contravariance = Contravariance.None;
                         else
                         {
-                            var numContras = TypeParameterChain.Count(t => t.IsContravariantTypeParameter());
-                            if (numContras <= 1 || (numContras % 2) == 1)
-                                Contravariance = Contravariance.BasesAndInterfaces;
+                            // if the parent has its contravariance search set to None, we inherit that
+                            // and move on.
+                            if (Parent?.Contravariance == Contravariance.None)
+                                Contravariance = Contravariance.None;
                             else
-                                Contravariance = Contravariance.Derived;
+                            {
+                                var numContras = TypeParameterChain.Count(t => t.IsContravariantTypeParameter());
+                                if (numContras <= 1 || (numContras % 2) == 1)
+                                    Contravariance = Contravariance.BasesAndInterfaces;
+                                else
+                                    Contravariance = Contravariance.Derived;
+                            }
                         }
                     }
                 }
-            }
-
-            public static implicit operator SearchParams(Type t)
-            {
-                return new SearchParams(t);
             }
 
             public bool TypeParameterIsVariant
@@ -246,10 +355,6 @@ namespace Rezolver
 
             if (TypeHelpers.IsGenericType(search.Type) && !TypeHelpers.IsGenericTypeDefinition(search.Type))
             {
-                bool enableContravariance = true;
-                if (_rootContainer != null)
-                    enableContravariance = _rootContainer.GetOption(search.Type, Options.EnableContravariance.Default);
-
                 //for every generic type, there is at least two versions - the closed and the open
                 //when you consider, also, that a generic parameter might also be a generic, with multiple
                 //versions - you can see that things can get icky.  
@@ -258,8 +363,7 @@ namespace Rezolver
                     (arg, param) => new SearchParams(
                         arg,
                         param,
-                        search,
-                        !enableContravariance ? Contravariance.None : (Contravariance?)null)
+                        search)
                     );
                 var typeParamSearchLists = argSearches.Select(t => Run(t).ToArray()).ToArray();
                 var genericType = search.Type.GetGenericTypeDefinition();
@@ -339,7 +443,7 @@ namespace Rezolver
                         && !TypeHelpers.IsValueType(search.Type)
                         && search.Type != typeof(object))
                     {
-                        if(!explicitlyAddedBases.Contains(typeof(object)))
+                        if (!explicitlyAddedBases.Contains(typeof(object)))
                             explicitlyAddedBases.Add(typeof(object));
                         // note - disable interfaces when recursing into the base
                         // note also - ignore 'object'
@@ -412,7 +516,7 @@ namespace Rezolver
         /// <returns></returns>
         public IEnumerator<Type> GetEnumerator()
         {
-            return Run(_type).Distinct().GetEnumerator();
+            return Run(new SearchParams(_type, this)).Distinct().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -428,7 +532,8 @@ namespace Rezolver
         /// <paramref name="type"/> - with options read from the given <paramref name="rootContainer"/>.
         /// </summary>
         /// <param name="type">The type for which a list of search types is to be produced.</param>
-        /// <param name="rootContainer"></param>
+        /// <param name="rootContainer">The root target container providing options which alter
+        /// how the target types are selected</param>
         public TargetTypeSelector(Type type, ITargetContainer rootContainer = null)
         {
             _type = type;
