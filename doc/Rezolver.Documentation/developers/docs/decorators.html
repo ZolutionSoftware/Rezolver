@@ -111,6 +111,10 @@
 
 <p>The <a href="https://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> is a key part of many software projects, 
 and Rezolver offers first-class support for implementing it either non-generically, or generically.</p>
+<div class="NOTE"><h5>Note</h5><p>If you&#39;re looking for how to register and use decorator delegates - there is a 
+<a href="decorators/delegates.html">separate topic in this section</a>
+dedicated to those.</p>
+</div>
 <h2 id="registering-decorators-in-rezolver">Registering decorators in Rezolver</h2>
 <p>Registration of Decorators in Rezolver is done through the overloaded extension method 
 <a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a>.  There is a generic and non-generic version
@@ -200,7 +204,8 @@ container.RegisterMultiple(serviceTargets, typeof(IMyService));
 var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;();
 
 Assert.All(serviceTypes.Zip(result, (t, s) =&gt; (type: t, service: s)),
-    ts =&gt; {
+    ts =&gt;
+    {
         var decorator = Assert.IsType&lt;MyServiceDecorator1&gt;(ts.service);
         var innerDecorator = Assert.IsType&lt;MyServiceDecorator2&gt;(decorator.Inner);
         Assert.IsType(ts.type, innerDecorator.Inner);
@@ -296,7 +301,12 @@ var reredecorated = Assert.IsType&lt;UsesAnyServiceDecorator2&lt;MyService2&gt;&
 
 var redecorated = Assert.IsType&lt;UsesMyService2Decorator&gt;(reredecorated.Inner);
 var decorated = Assert.IsType&lt;UsesAnyServiceDecorator&lt;MyService2&gt;&gt;(redecorated.Inner);
-</code></pre></article>
+</code></pre><hr>
+<h1 id="next-steps">Next steps</h1>
+<ul>
+<li>Read about Rezolver&#39;s other implementation of decoration - <a href="decorators/delegates.html">decorator delegates</a>.</li>
+</ul>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

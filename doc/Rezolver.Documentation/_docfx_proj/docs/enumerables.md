@@ -129,8 +129,8 @@ And in this example we'll have one of those decorators being used to decorate th
 If more decorators were added, of course - then each element would be 're-decorated' accordingly.
 
 > [!TIP]
-> You can also decorate `IEnumerable<T>` instances without breaking Rezolver's automatic enumerable injection 
-> functionality - see the [Decorators section](decorators.md) for more.
+> You can also decorate instances of`IEnumerable<T>`, `IList<T>`, `ICollection<T>` - plus any other supported
+> collection types.  [Read about this now](decorators/collections.md).
 
 ***
 

@@ -313,8 +313,8 @@ Assert.IsType&lt;MyService&gt;(((MyServiceDecorator1)result[0]).Inner);
 Assert.IsType&lt;MyService2&gt;(((MyServiceDecorator1)result[1]).Inner);
 Assert.IsType&lt;MyService3&gt;(((MyServiceDecorator1)result[2]).Inner);
 </code></pre><p>If more decorators were added, of course - then each element would be &#39;re-decorated&#39; accordingly.</p>
-<div class="TIP"><h5>Tip</h5><p>You can also decorate <code>IEnumerable&lt;T&gt;</code> instances without breaking Rezolver&#39;s automatic enumerable injection 
-functionality - see the <a href="decorators.html">Decorators section</a> for more.</p>
+<div class="TIP"><h5>Tip</h5><p>You can also decorate instances of<code>IEnumerable&lt;T&gt;</code>, <code>IList&lt;T&gt;</code>, <code>ICollection&lt;T&gt;</code> - plus any other supported
+collection types.  <a href="decorators/collections.html">Read about this now</a>.</p>
 </div>
 <hr>
 <h2 id="explicit-ienumerablet-registrations">Explicit <code>IEnumerable&lt;T&gt;</code> registrations</h2>

@@ -80,5 +80,25 @@ namespace Rezolver.Tests.Examples
                 () => container.Resolve<List<IMyService>>());
             // </example3>
         }
+
+        [Fact]
+        public void ShouldDecorateListWithDisposableListDecorator()
+        {
+            // <example10>
+            var container = new Container();
+            container.RegisterDecorator(typeof(DisposableListDecorator<>), typeof(IList<>));
+
+            // Note above - we only register the decorator, the underlying List<>
+            // is always created by Rezolver from its own default behaviour
+
+            var list = container.Resolve<IList<object>>();
+
+            var toDispose = new DisposableType();
+            list.Add(toDispose);
+            list.Clear(); //disposes here
+
+            Assert.True(toDispose.Disposed);
+            // </example10>
+        }
     }
 }

@@ -9,10 +9,6 @@
 > * * *
 > The current status of Rezolver's performance is 'Average', which is fair, because of the results
 > of the Child Container tests, which we are working on improving.
-> 
-> This page will continue to be maintained with our own copies of the results in order to flesh out
-> the reasons behind any deficiencies in Rezolver, both in terms of features and performance, as
-> well as keeping everyone updated on our progress in improving performance.
 
 Benchmarking an IOC container obviously has pitfalls.  In a web environment, for example, 
 it's highly unlikely you'll hit the kind of traffic levels required for your choice of container

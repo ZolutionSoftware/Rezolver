@@ -277,7 +277,7 @@ respectively:</p>
 <p>Without a contravariance-aware container, this would cause us a problem, because we&#39;d
 need to register the <code>ShapeAreaComparer</code> type for each and every specialisation of 
 <code>IComparer&lt;T&gt;</code> applicable for every <code>I2DShape</code>-implementation present in our application.</p>
-<p>Thanakfully, Rezolver is aware of the contravariance of <code>T</code> in <code>IComparer&lt;T&gt;</code>, which 
+<p>Thankfully, Rezolver is aware of the contravariance of <code>T</code> in <code>IComparer&lt;T&gt;</code>, which 
 means that all we have to do is to register the type <code>ShapeAreaComparer</code> as 
 <code>IComparer&lt;I2DShape&gt;</code>, and Rezolver will automatically use it whenever it is compatible 
 with a given <code>T</code>.</p>
@@ -487,7 +487,7 @@ based on it</li>
 of its derivatives, is supplied as a type argument to <em>any</em> contravariant type parameter.</li>
 </ul>
 <div class="NOTE"><h5>Note</h5><p>When you disable contravariance using any of the following methods, Rezolver will expect
-registrations for the associaed concrete generic types that your application requests.</p>
+registrations for the associated concrete generic types that your application requests.</p>
 </div>
 <p>Disabling contravariance is something you might do when resolving 
 multiple instances of a contravariant type, as in the previous delegate example, so we&#39;ll
@@ -571,7 +571,7 @@ RegisterShapeDelegates(container);
 var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
 
 Assert.Equal(1, squareResult.Length);
-</code></pre><p>Any we can also do the same for <em>any</em> type which has the <code>I2DShape</code> interface:</p>
+</code></pre><p>And we can also do the same for <em>any</em> type which has the <code>I2DShape</code> interface:</p>
 <pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
 
 // set the option to disable contravariance for any type which implements I2DShape

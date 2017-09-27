@@ -501,6 +501,7 @@
     <Content Include="_docfx_proj\docs\decorators\toc.yml" />
     <Content Include="_docfx_proj\docs\decorators\delegates.md" />
     <Content Include="_docfx_proj\docs\contravariance.md" />
+    <Content Include="_docfx_proj\docs\decorators\collections.md" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
