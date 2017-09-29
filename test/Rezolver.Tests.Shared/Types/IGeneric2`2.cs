@@ -11,6 +11,5 @@ namespace Rezolver.Tests.Types
 	public interface IGeneric2<Ta, Tb> : IGeneric<Ta>
 	{
 		Tb ValueB { get; }
-		void Foo2();
 	}
 }

@@ -1,8 +1,7 @@
-﻿# Enumerables
+﻿# Automatic Enumerable Injection
 
 By default, a @Rezolver.TargetContainer (the default @Rezolver.ITargetContainer used by all containers in the 
-Rezolver framework) comes with a behaviour enabled which allows any @Rezolver.ContainerBase derivative to resolve
-an `IEnumerable<Service>`.
+Rezolver framework) is configured to allow any @Rezolver.ContainerBase derivative to resolve an `IEnumerable<Service>`.
 
 The contents of this enumerable will depend on how many times the @Rezolver.ITargetContainer.Register*
 method has been called against the target type `Service`:
@@ -12,17 +11,44 @@ method has been called against the target type `Service`:
 against that type, in the order they were registered.
 
 > [!NOTE]
-> Automatic resolving of enumerables is a configurable behaviour which can currently be disabled when creating 
-> a @Rezolver.TargetContainer via its constructor.  It can also be explicitly opted-in (if it has been disabled)
-> by calling the @Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving* extension method.
-> 
-> Disabling the behaviour through the constructor might be removed in a future version, as we intend to move to a 
-> configuration callback-based mechanism for configuring containers.
+> The functionality described here depends on two target container options: @Rezolver.Options.AllowMultiple 
+> and @Rezolver.Options.EnumerableInjection - which are both configured to be equivalent to `true` by default
+> for all @Rezolver.ITargetContainer instances.
 
-You are not restricted in the targets you use to produce instances for an enumerable, and each one can have its
+You are not restricted in the targets you use to produce instances for an enumerable (e.g. @Rezolver.Targets.ObjectTarget,
+@Rezolver.Targets.ConstructorTarget or <xref:Rezolver.Targets.DelegateTarget>), and each one can have its
 own lifetime (scoped/singleton etc).
 
+> [!TIP]
+> By default, Rezolver will build 'lazy' enumerables, but can be configured to build 'eager' enumerables - for
+> more on this, read the topic [Lazy vs Eager Enumerables](enumerables/lazy-vs-eager.md)
+
+## Resolving enumerables
+
+To resolve an enumerable from a container or through a scope, you can simply use `IEnumerable<Foo>` as the input
+type for a @Rezolver.IContainer.Resolve* call:
+
+```cs
+var enumerable = container.Resolve<IEnumerable<Foo>>();
+```
+
+However, the `ResolveMany` extension methods (see <xref:Rezolver.ContainerResolveExtensions.ResolveMany*>
+and <xref:Rezolver.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortut which allow you to pass
+just the element type of the enumerable to reduce the 'angle-bracket percent' of code which directly resolves
+enumerables (which of course you won't be doing because you're not using 'service location' are you!? :wink: ):
+
+```cs
+// this is equivalent to resolving IEnumerable<Foo>
+var enumerable2 = container.ResolveMany<Foo>();
+```
+
+Most, if not all, the examples in this section use this shortcut - but it's worth noting that the two methods are
+absolutely equivalent.
+
 ## Empty enumerable
+
+By default, you don't need to register anything against a particular type in order to be able to inject an enumerable
+of that type.  If there are no registrations, then an empty enumerable will be injected instead.
 
 Here's an example where we only register the service we're going to create, which has a single constructor that requires
 an `IEnumerable<IMyService>`.
@@ -35,9 +61,10 @@ And then the test:
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example1)]
 
-## Same `ITarget` type
+## Multiple new objects
 
-Here, we register each type one after another:
+Here, we associate three types (created by constructor injection) to a common service type, which are all then included
+in the auto-injected enumerable:
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example2)]
 
@@ -85,66 +112,11 @@ To summarise:
 
 * * *
 
-# Advanced examples
-
-On to generics and decorators, now...
-
-## Enumerables of open generics
-
-You can also register multiple open generics of the same type (e.g. `IFoo<>`) and then resolve an enumerable of 
-`IFoo<Bar>`, and the container will create an enumerable containing an object for each open generic registration:
-
-[!code-csharp[UsesAnyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesAnyService.cs#example)]
-[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example5)]
-
-> [!NOTE]
-> When working with generics, the enumerable handler searches for the first generic registration which has least
-> one @Rezolver.ITarget whose @Rezolver.ITarget.UseFallback is `false` - searching from least generic to most
-> generic (e.g. `Foo<Bar>` is less generic than `Foo<>`).
->
-> So if you request an `IEnumerable<Foo<Bar>>`, targets are first sought for `Foo<Bar>` and, if none are found,
-> it then searches for `Foo<>`.  The side effect of this is that your enumerable will always only contain objects
-> produced from targets registered against the most-specific generic type that's applicable for the type requested.  The
-> next example expands on this.
-
-## Mixing open/closed generics
-
-Let's say that we have one open generic registration for `IUsesAnyService<>` to be used as a catch-all, but that
-when `IMyService` is used, we have two types that we want to use instead.
-
-In this case, we still have an open generic registration, but we want it to be superseded for certain generic types by two
-specialised registrations where the inner generic type argument is known.
-
-Given these extra generic types:
-
-[!code-csharp[UsesIMyService.cs](../../../../test/Rezolver.Tests.Examples/Types/UsesIMyService.cs#example)]
-
-We can do this:
-
-[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6)]
-
-So, as soon as we want an `IEnumerable<IUsesAnyService<IMyService>>`, the enumerable will use *only* the
-two explicit registrations made against the closed generic type `IUsesAnyService<IMyService>`, but if we
-request any other type, we only get items produced by registrations against the open generic `IUsesAnyService<>`.
-
-> [!WARNING]
-> There is currently *no* way to fall back on an open generic registration for given generic once you make a 
-> registration for a closed generic.  The framework might, however, be extended to allow you to make an explicit 
-> registration which instructs the container to fall back to a more generic registration and include any results from
-> that in the enumerable.
-
-It doesn't matter what order you register the open generics and closed generics - the logic is applied on a type-by-type
-basis; but the order of an individual enumerable of a given type is, however, governed by the order of registration.
-
 ## Decorators and Enumerables
 
-> [!NOTE]
-> At the time of writing, the [decorators topic](decorators.md) has not been written, so this is preview of how to 
-> use decorators as well as how they work in enumerables.
-
-Decorators that have been registered against the element type of an enumerable will be applied to all instances 
-that the container produces for the enumerable.  This also applies to stacked decorators (where multiple decorators are
-applied on top of one other).
+[Decorators](decorators.md) that have been registered against the **element type** of an enumerable will be applied to all 
+instances that the container produces for the enumerable.  This also applies to stacked decorators (where multiple 
+decorators are applied on top of one other).
 
 So, we have two decorator types for `IMyService`:
 
@@ -156,10 +128,17 @@ And in this example we'll have one of those decorators being used to decorate th
 
 If more decorators were added, of course - then each element would be 're-decorated' accordingly.
 
+> [!TIP]
+> You can also decorate instances of`IEnumerable<T>`, `IList<T>`, `ICollection<T>` - plus any other supported
+> collection types.  [Read about this now](decorators/collections.md).
+
+***
+
 ## Explicit `IEnumerable<T>` registrations
 
-Although you get `IEnumerable<T>` handling automatically, it doesn't prevent you from manually adding registrations
-which override the default behaviour.
+Although you get `IEnumerable<T>` handling automatically when the @Rezolver.Configuration.InjectEnumerables configuration 
+is applied (and not also disabled by the @Rezolver.Options.EnumerableInjection option being set to `false`), it doesn't 
+prevent you from manually adding registrations for specific `IEnumerable<>` types which override the default behaviour.
 
 For example, let's say that you have two registrations for services which share a common interface, but they have only
 been registered against their concrete type (perhaps it's historical code you can't risk changing). Your code 
@@ -168,10 +147,58 @@ use delegate registrations (note, there are *lots* of ways, this is just the mos
 
 [!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example8)]
 
+> [!WARNING]
+> As soon as you create a manual registration for a particular `IEnumerable<T>` type, Rezolver no longer has any control
+> over how that particular enumerable is produced - so none of the enumerable-related options demonstrated in this documentation 
+> will be honoured.
+
+***
+
+## Disabling Enumerable Injection
+
+As with much of the built-in functionality in Rezolver, you can control whether enumerables are automatically 
+built or not through the use of options and configuration.
+
+In the case of enumerable injection, it is a feature that is enabled by an @Rezolver.ITargetContainerConfig
+that is added by default to a set of configuration objects in the @Rezolver.TargetContainer.DefaultConfig 
+collection which is applied, by default, to all new instances of the @Rezolver.TargetContainer class (which
+is, in turn, used by both the main container types - @Rezolver.Container and <xref:Rezolver.ScopedContainer>).
+
+This means that, to disable it, you have to either remove that config (it's the 
+@Rezolver.Configuration.InjectEnumerables configuration singleton) from the collection, or set the 
+@Rezolver.Options.EnableEnumerableInjection option to `false` on the target container before the configuration
+is applied.
+
+You also have another choice, in that you can either do this directly on the @Rezolver.TargetContainer.DefaultConfig
+collection, which will affect *all* instances of @Rezolver.TargetContainer, or you can 
+@Rezolver.CombinedTargetContainerConfig.Clone* the collection and apply it only to a single target container.
+
+It's the second of these options that the example shows, below:
+
+[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example12)]
+
+Notice that we're explicitly creating a @Rezolver.TargetContainer and passing a cloned config to it; passing
+the result to the @Rezolver.Container constructor.
+
+> [!TIP]
+> Many other examples throughout this documentation show options simply being set directly on the container.
+> In those cases, it's because the options are used by logic within Rezolver to make decisions.
+> Enumerable injection, however, is configured at the point a new @Rezolver.TargetContainer is *created*, 
+> because the configuration is applied by one of its constructors; hence the different approach is required in
+> order to ensure the option is set *before* the configuration gets applied.  The 
+> @Rezolver.Configuration.InjectEnumerables configuration looks for the @Rezolver.Options.EnableEnumerableInjection
+> option and, if it's `false` it disables itself.
+
+> [!WARNING]
+> If you disable automatic enumerable injection then the other 
+> [automatic collection-type injection behaviour](arrays-lists-collections/index.md) will only work when you 
+> explicitly register the correct `IEnumerable<T>` for it.
+
 * * *
 
 # Next steps
-- Recommend going to take (another) look at [decorators](decorators.md) - although, at the time of writing it might 
-not be written yet!
-- The [generic constructor injection](constructor-injection/generics.md) documentation contains more useful guidance 
-about open generics etc.
+- Read about how Rezolver handles building [enumerables of generics](enumerables/generics.md) from open and closed
+generic registrations.
+- Learn about Rezolver's support for [lazy and eager enumerables](enumerables/lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
+evaluated by default)
+- Rezolver also supports [arrays, lists and collection injection](arrays-lists-collections/index.md)

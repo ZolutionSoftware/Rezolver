@@ -1,0 +1,37 @@
+﻿using System;
+
+namespace Rezolver.Options
+{
+    internal class OptionContainer<TOption> : IDirectTarget, ITarget, IOptionContainer<TOption>
+    {
+        public TOption Option { get; }
+
+        bool ITarget.UseFallback => false;
+
+        Type ITarget.DeclaredType => typeof(OptionContainer<TOption>);
+
+        ScopeBehaviour ITarget.ScopeBehaviour => ScopeBehaviour.None;
+
+        ScopePreference ITarget.ScopePreference => ScopePreference.Current;
+
+        public OptionContainer(TOption option)
+        {
+            Option = option;
+        }
+
+        object IDirectTarget.GetValue() => this;
+
+        bool ITarget.SupportsType(Type type)
+        {
+            // yes - this is a bit weird.  The whole type compatibility thing here is subverted,
+            // so we can register an option against a service, taking advantage of the contravariance
+            // and other generic functionality of the target containers - 
+            return typeof(IOptionContainer<TOption>) == type
+                || (TypeHelpers.IsGenericType(type)
+                    && (typeof(IOptionContainer<,>).Equals(type.GetGenericTypeDefinition())
+                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[1])
+                    || (typeof(IAnyGenericOptionContainer<>).Equals(type.GetGenericTypeDefinition())
+                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[0]));
+        }
+    }
+}

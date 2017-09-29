@@ -1,1 +1,2554 @@
-{"homepages":[],"source_base_path":"E:/Github/Rezolver/doc/Rezolver.Documentation","xrefmap":"xrefmap.yml","files":[{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.TargetContainerBehaviourCollection.yml","output":{".html":{"relative_path":"api/Rezolver.TargetContainerBehaviourCollection.html","hash":"j6LfMgdzS3PSQQ/0AImNQg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.OptionalParameterTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.OptionalParameterTarget.html","hash":"I96KtbgfGFLS/bzvI6M8WQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.ResolvedTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.ResolvedTarget.html","hash":"vNi12xe3uL0N6buZVtprvQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Behaviours.DefaultMemberBindingBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.Behaviours.DefaultMemberBindingBehaviour.html","hash":"+xiYINKWIo+z4PdDapojFw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ConstructorTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html","hash":"IHmhin/ODNrtIWc7jOKVgA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html","hash":"253VfKivJ3DfMzVjLb5Ggw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.IExpressionBuilder.html","hash":"pMSZsfD7MtxwUrHN6RLiGg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.RezolvedTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.RezolvedTargetBuilder.html","hash":"JO80unyyP1LCGPAtJmvGhA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ListTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ListTargetBuilder.html","hash":"mE+nbD5UxIm82ICua/dPQw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ScopedTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ScopedTargetBuilder.html","hash":"IdY0DEPIG9/eCqLHTdO5zg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.html","hash":"CZvrbj0wvhUp8XnZe40h8g=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerBase.DirectResolveCompiledTarget.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerBase.DirectResolveCompiledTarget.html","hash":"+N1z4a8GtBfNk+EVs2Mzfw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerScopeResolveExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerScopeResolveExtensions.html","hash":"dri1ihB/ODqpkNWg0uCfhQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.DecoratingTargetContainer.yml","output":{".html":{"relative_path":"api/Rezolver.DecoratingTargetContainer.html","hash":"lF0e8OPpQfk+YghWMBgO4w=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IContainerBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.IContainerBehaviour.html","hash":"rjR2biyjQJBxtkGFsT3QnA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IContainerScope.yml","output":{".html":{"relative_path":"api/Rezolver.IContainerScope.html","hash":"oXwGX3dCGwPoOGmDz3VuEA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ObjectTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.ObjectTargetContainerExtensions.html","hash":"pLWHjSepVW+WyX/tcnAp8Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.OverridingContainer.yml","output":{".html":{"relative_path":"api/Rezolver.OverridingContainer.html","hash":"lm1gW8ivlQ4lcr420cw2iw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.DependencyMetadata.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.DependencyMetadata.html","hash":"lP8nPHCh+27bymP2LyUeLw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.DependencyMetadataCollection.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.DependencyMetadataCollection.html","hash":"FY0mGcVAu3z0ndQIS83gQQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.DelegateTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.DelegateTarget.html","hash":"eCSi2JffvNkY3sZoTlring=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.ExpressionTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.ExpressionTarget.html","hash":"hR8bs/L4ycGrbN6yfl0j7Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Behaviours.yml","output":{".html":{"relative_path":"api/Rezolver.Behaviours.html","hash":"cl+Vm/b+e/oJrCB53LfQQA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.html","hash":"Nmmx225yMFFGYrMllhnedg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerBehaviourCollection.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerBehaviourCollection.html","hash":"xcYF3xfEwzJqtXkIXLeOXw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.GenericTargetContainer.yml","output":{".html":{"relative_path":"api/Rezolver.GenericTargetContainer.html","hash":"2iN9Q/QKpPX66fB+vQVHLw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IMemberBindingBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.IMemberBindingBehaviour.html","hash":"PpbXK2yvI7cXK9S6/dJK+g=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IResolveContext.yml","output":{".html":{"relative_path":"api/Rezolver.IResolveContext.html","hash":"gz1lOmokMb9kWZHMg6CUDQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.DecoratorTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.DecoratorTargetContainerExtensions.html","hash":"k6FiLzDvKyV4ITJtGiMpgw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IContainer.yml","output":{".html":{"relative_path":"api/Rezolver.IContainer.html","hash":"7B0kjto2Lce9X51wNK7joA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ITarget.yml","output":{".html":{"relative_path":"api/Rezolver.ITarget.html","hash":"HyQ4KBUYlsHErJ/Lf2E15Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ITargetContainer.yml","output":{".html":{"relative_path":"api/Rezolver.ITargetContainer.html","hash":"uP5BFoCeO5pfN0NhdlcI0A=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ScopeBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.ScopeBehaviour.html","hash":"B4YgouNU1QoY4g+DloIqKg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ScopedContainer.yml","output":{".html":{"relative_path":"api/Rezolver.ScopedContainer.html","hash":"/MPDCX/1UE/O86NC1OYRYA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.TargetContainer.yml","output":{".html":{"relative_path":"api/Rezolver.TargetContainer.html","hash":"Evr2au2oJK0kzwbqDlRMzQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ConstructorBinding.yml","output":{".html":{"relative_path":"api/Rezolver.ConstructorBinding.html","hash":"gpTdrtZEHzMDMExlONqosQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerScope.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerScope.html","hash":"ILKUkvwo8NNtI/F4p7zIpA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ExpressionFunctions.yml","output":{".html":{"relative_path":"api/Rezolver.ExpressionFunctions.html","hash":"BfN9Wvn/NuQeuXPzuq+VLw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ExpressionTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.ExpressionTargetContainerExtensions.html","hash":"/FcWEGqWR4Kb8NksghMzAQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.MemberBindingBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.MemberBindingBehaviour.html","hash":"nv6BpQ3xK0fpOKDLwPQ6Kw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.MethodBinding.yml","output":{".html":{"relative_path":"api/Rezolver.MethodBinding.html","hash":"disnUGNLoFVp4g6CbnSWsw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ScopedTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.ScopedTargetContainerExtensions.html","hash":"tNY1rq6NvgH4Y2D8Y0pebg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ScopePreference.yml","output":{".html":{"relative_path":"api/Rezolver.ScopePreference.html","hash":"/ruYvQg7BRdCJL6h+tmjWQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.TargetDictionaryContainer.yml","output":{".html":{"relative_path":"api/Rezolver.TargetDictionaryContainer.html","hash":"U8sVC2V/jGXUWJECWO72fw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.TargetListContainer.yml","output":{".html":{"relative_path":"api/Rezolver.TargetListContainer.html","hash":"5EUK/qCc5UVwqsG7yrObeg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.ScopedTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.ScopedTarget.html","hash":"5cnFeHiUTfe2GkeIZY2fKA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.SingletonTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.SingletonTarget.html","hash":"DBI6m0NHjDEKsgHfG0SsTA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.BindNoMembersBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.BindNoMembersBehaviour.html","hash":"b6WL3KtwlsVyduJllIQDqA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ChildTargetContainer.yml","output":{".html":{"relative_path":"api/Rezolver.ChildTargetContainer.html","hash":"Uv9XI0hnbWKzo0h9Oi4HVQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.BindAllMembersBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.BindAllMembersBehaviour.html","hash":"PGv3X1ASNmP5kvrkTwKoAw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.DelegateTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.DelegateTargetBuilder.html","hash":"pYmJnzU7QhF8d5h3jVja2A=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html","hash":"mldgGB7k413pIZ9eBFfA1Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ObjectTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ObjectTargetBuilder.html","hash":"sqxO2Qx1352/9WocXUXJ6Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.SharedExpressionKey.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.SharedExpressionKey.html","hash":"/JXjWbiUFCzBzdfuXX4n2A=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.ICompileContext.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.ICompileContext.html","hash":"D1jxgxRS37q4Ackr5UxKuQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Container.yml","output":{".html":{"relative_path":"api/Rezolver.Container.html","hash":"B7S3w6D8j+ixBvkzyKfxhQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerBehaviourCollectionExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerBehaviourCollectionExtensions.html","hash":"O89cuBEH5X/qNrGyfncRog=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.ObjectTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.ObjectTarget.html","hash":"eLYkMqB4AOpwEsW83M9raA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.AliasTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.AliasTargetContainerExtensions.html","hash":"R0MgNUPdQiXaKmuHEQI+EQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.CompileContext.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.CompileContext.html","hash":"Dsk8YNG2b49BRTiKDKmZCw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.DefaultTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.DefaultTargetBuilder.html","hash":"+BO5M8b46eEYDtz2BxWAZQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.html","hash":"pSXMwToaf4abDztCbSkPNA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.OverridingTargetContainer.yml","output":{".html":{"relative_path":"api/Rezolver.OverridingTargetContainer.html","hash":"mWS1N3stVGZ1R5SxgRVlLg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ParameterBinding.yml","output":{".html":{"relative_path":"api/Rezolver.ParameterBinding.html","hash":"X2kbqNAJrYvkhAFrhbLDdA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.IDependant.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.IDependant.html","hash":"aGyTxu/97ixjyW9WB5HsSQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.html","hash":"dMR5VEJTgnqY7qVeXxsiOw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html","hash":"Y/QtR+HWtNvFX5I8rhZWxQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.GenericConstructorTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.GenericConstructorTarget.html","hash":"slsZxfqbbcOrvz0LC1SjVA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.html","hash":"ey5nTEhFcsLDfxdJN9WQNg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.yml","output":{".html":{"relative_path":"api/Rezolver.html","hash":"FbsY4dll+IFStxqpDM2MXg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Behaviours.AutoEnumerableBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.Behaviours.AutoEnumerableBehaviour.html","hash":"vOSfyJb1D3V0kbXYeecB6A=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.MemberBinding.yml","output":{".html":{"relative_path":"api/Rezolver.MemberBinding.html","hash":"c+sno0+GA40MmZwNfJEnpg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.Dependant.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.Dependant.html","hash":"ly6qyh89FPRWq3Ixs/x59w=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.DependantCollection-1.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.DependantCollection-1.html","hash":"BF693c7EZCmlABrN9HuQcw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.ChangeTypeTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.ChangeTypeTarget.html","hash":"ZL6QCROp40/mcSkkl6f4yQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerResolveExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerResolveExtensions.html","hash":"xqpDKIvXWJ148W5gx7vjPQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IScopedContainer.yml","output":{".html":{"relative_path":"api/Rezolver.IScopedContainer.html","hash":"iEeKnWvXMgrl7cnwrArEbw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IScopeFactory.yml","output":{".html":{"relative_path":"api/Rezolver.IScopeFactory.html","hash":"F06mEN5Y9TMjX00a1vYzhQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.RegisterTypeTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.RegisterTypeTargetContainerExtensions.html","hash":"rw8lEqs9KPzbzpSoMXJhFA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ResolveContext.yml","output":{".html":{"relative_path":"api/Rezolver.ResolveContext.html","hash":"Vp7VyuqpzRsVnHYqPyQPBw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.SingletonTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.SingletonTargetContainerExtensions.html","hash":"kxUS7r0AjUFARlUjBW5mTg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Target.yml","output":{".html":{"relative_path":"api/Rezolver.Target.html","hash":"MtYfUz82kMIqpz27nevvcA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.ListTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.ListTarget.html","hash":"OUHK/tjTywMhZwmXKertGA=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md","output":{".html":{"relative_path":"docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html","hash":"3G1i7S6tq9hpeCYP29Cz4w=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/lifetimes/container-scopes.md","output":{".html":{"relative_path":"docs/lifetimes/container-scopes.html","hash":"Y9oNj553rjAdFv5h35IvFg=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/lifetimes/index.md","output":{".html":{"relative_path":"docs/lifetimes/index.html","hash":"Mud7M9qq6BvnUcWPZ3EMMQ=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/lifetimes/scoped.md","output":{".html":{"relative_path":"docs/lifetimes/scoped.html","hash":"EP+aJ3cy3y9idY//bKMIJw=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/lifetimes/singleton.md","output":{".html":{"relative_path":"docs/lifetimes/singleton.html","hash":"e9CwJqqBm32xMfp5zz3ibQ=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/lifetimes/transient.md","output":{".html":{"relative_path":"docs/lifetimes/transient.html","hash":"vQnSLkl5YssugqpWAaW8WA=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/api/index.md","output":{".html":{"relative_path":"api/index.html","hash":"tf87/JDOMbzAXZgcP8HfWw=="}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/exampleunittest.PNG","output":{"resource":{"relative_path":"images/exampleunittest.PNG"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/01-Singleton.png","output":{"resource":{"relative_path":"images/benchmark-results/01-Singleton.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/02-Transient.png","output":{"resource":{"relative_path":"images/benchmark-results/02-Transient.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/03-Combined.png","output":{"resource":{"relative_path":"images/benchmark-results/03-Combined.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/04-Complex.png","output":{"resource":{"relative_path":"images/benchmark-results/04-Complex.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/05-Property.png","output":{"resource":{"relative_path":"images/benchmark-results/05-Property.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/06-Generics.png","output":{"resource":{"relative_path":"images/benchmark-results/06-Generics.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/07-IEnumerable.png","output":{"resource":{"relative_path":"images/benchmark-results/07-IEnumerable.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/09-Child-Container.png","output":{"resource":{"relative_path":"images/benchmark-results/09-Child-Container.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/11-Prepare-And-Register.png","output":{"resource":{"relative_path":"images/benchmark-results/11-Prepare-And-Register.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/12-Prepare-And-Register-And-Simple-Resolve.png","output":{"resource":{"relative_path":"images/benchmark-results/12-Prepare-And-Register-And-Simple-Resolve.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/Overview_Advanced_Fast.png","output":{"resource":{"relative_path":"images/benchmark-results/Overview_Advanced_Fast.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/Overview_Advanced_Slow.png","output":{"resource":{"relative_path":"images/benchmark-results/Overview_Advanced_Slow.png"}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.html","hash":"krrDAfOjEO+9zCfXbulK3Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.RedundantConvertRewriter.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.RedundantConvertRewriter.html","hash":"kJvD4HmXk8XsrBy+ym33tA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.UnscopedTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.UnscopedTargetBuilder.html","hash":"c86ln7vysWdolbfscQtHPQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.TargetCompilerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.TargetCompilerExtensions.html","hash":"ocPFJlPj7kxUEEs/Q/cnJg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerScopeExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerScopeExtensions.html","hash":"4Ogt7/XZZMMIN/3KXSu4VA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.GlobalBehaviours.yml","output":{".html":{"relative_path":"api/Rezolver.GlobalBehaviours.html","hash":"kZyxMdeDtJrZdgIMm7JZiA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ICompiledTarget.yml","output":{".html":{"relative_path":"api/Rezolver.ICompiledTarget.html","hash":"xVFEqEmI8dP2A4dmbPdBFA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.MethodCallExtractor.yml","output":{".html":{"relative_path":"api/Rezolver.MethodCallExtractor.html","hash":"m0I9cVfbm7kWQ30+2Lo7CA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.MultipleTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.MultipleTargetContainerExtensions.html","hash":"TqWrEY8+UyupncWywqI61Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.DependantExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.DependantExtensions.html","hash":"1Rv0roy88iU2G+H5HuAlJQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Sdk.DependencyException.yml","output":{".html":{"relative_path":"api/Rezolver.Sdk.DependencyException.html","hash":"KB1Z9GSqg6+Sj1SvyGS8ow=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.DecoratorTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.DecoratorTarget.html","hash":"0eC8uK0mDxvEB/qY71wqtw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.DefaultTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.DefaultTarget.html","hash":"QO9Xe4LVb69A9X9QYn17PQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html","hash":"vJpfECwKAOp1hUTV942Xlw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.html","hash":"c7YFg1FXBRPN4sLqK+pGsw=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionCompiler.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.IExpressionCompiler.html","hash":"GbvjegV4PXyJrY2vn71x1A=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.SingletonTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.SingletonTargetBuilder.html","hash":"o9B4Wme6azpJcw75hJCrmQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerBase.MissingCompiledTarget.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerBase.MissingCompiledTarget.html","hash":"P6HH3cIyp/1VL0z+9ia3Dw=="}},"is_incremental":false,"version":""},{"type":"Toc","source_relative_path":"_docfx_proj/docs/toc.yml","output":{".html":{"relative_path":"docs/toc.html","hash":"OwR9SUcs/UFqLWUa8MJn3g=="}},"is_incremental":false,"version":""},{"type":"Toc","source_relative_path":"_docfx_proj/obj/api/toc.yml","output":{".html":{"relative_path":"api/toc.html","hash":"FRf7dgw/hTU5XiG9pD47tw=="}},"is_incremental":false,"version":""},{"type":"Toc","source_relative_path":"_docfx_proj/toc.yml","output":{".html":{"relative_path":"toc.html","hash":"8gfaaQbUXpBRKd6LW5fcKQ=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/index.md","output":{".html":{"relative_path":"docs/index.html","hash":"7HgiLeI3N+xNwE3yZOclLw=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/objects.md","output":{".html":{"relative_path":"docs/objects.html","hash":"OeCbSVfDUxXw+8u5dCkSaw=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/constructor-injection/member-injection.md","output":{".html":{"relative_path":"docs/constructor-injection/member-injection.html","hash":"gv+qYWZMtpDN1TKlW5C1LQ=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/nuget-packages/rezolver.md","output":{".html":{"relative_path":"docs/nuget-packages/rezolver.html","hash":"yDsfCpFOP8k3Cu8DcEaf4g=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md","output":{".html":{"relative_path":"docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html","hash":"LCosquVpsrCJQSJZulLtpA=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/benchmarks.md","output":{".html":{"relative_path":"docs/benchmarks.html","hash":"sIZlq52xqtPg0wfj3PwlmQ=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/create-and-use-a-container.md","output":{".html":{"relative_path":"docs/create-and-use-a-container.html","hash":"dS+F9+DCeFBnoKW7DQEPfA=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/decorators.md","output":{".html":{"relative_path":"docs/decorators.html","hash":"DJmdmXFJWoY++oVW+wafmw=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/delegates.md","output":{".html":{"relative_path":"docs/delegates.html","hash":"6bECZT3SygxYXeP1HfOR5w=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/enumerables.md","output":{".html":{"relative_path":"docs/enumerables.html","hash":"osRUUQDvgNB0rSDjdoybyA=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/expressions.md","output":{".html":{"relative_path":"docs/expressions.html","hash":"plac3AMy9XQ2GvawDmVtjw=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/service-registration.md","output":{".html":{"relative_path":"docs/service-registration.html","hash":"LyuYvNoCSQ2hRncdcXCE6w=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/constructor-injection/generics.md","output":{".html":{"relative_path":"docs/constructor-injection/generics.html","hash":"LCZKDfz70VwD3CJ1zcrUWg=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/constructor-injection/index.md","output":{".html":{"relative_path":"docs/constructor-injection/index.html","hash":"M3W7tanY0fBbW2JS2fPpPw=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/index.md","output":{".html":{"relative_path":"index.html","hash":"0C2x4ItDR8DIEVDBOZ5XOg=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/nuget-packages/index.md","output":{".html":{"relative_path":"docs/nuget-packages/index.html","hash":"q5/Q3wHaQsW02JsXPZDSdw=="}},"is_incremental":false,"version":""},{"type":"Conceptual","source_relative_path":"_docfx_proj/docs/nuget-packages/rezolver.configuration.md","output":{".html":{"relative_path":"docs/nuget-packages/rezolver.configuration.html","hash":"/20H4Hht/6mN1yAIBAULkg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.ConstructorTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.ConstructorTarget.html","hash":"gx/MtsZRhcw76d1qkBfmnA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.TargetBase.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.TargetBase.html","hash":"+2cvYNdX5d+jLfLDKOhnPg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Targets.UnscopedTarget.yml","output":{".html":{"relative_path":"api/Rezolver.Targets.UnscopedTarget.html","hash":"VP378Quw4NbYTw3nT5oPHQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.BindPublicFieldsBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.BindPublicFieldsBehaviour.html","hash":"tNswcC0CJWZ/D4LKiOC7EA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.CachingContainerBase.yml","output":{".html":{"relative_path":"api/Rezolver.CachingContainerBase.html","hash":"pG6hoVXADpEMYSRSutrzmg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.CompiledTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.CompiledTargetBuilder.html","hash":"6XS7gLuoRxB20w/tMuP4Rg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionCompiler.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ExpressionCompiler.html","hash":"huonXBbhvy/I4cLrR+yLhg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionBuilder-1.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.IExpressionBuilder-1.html","hash":"Ra8IB9+eIdVAqPjC5wJMWQ=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html","hash":"R4XV1/2TbvIsVn7Gtorv2Q=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.TargetExpression.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.TargetExpression.html","hash":"9JQXZ8d+/ifwMHRUDDzhTw=="}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/Overview_Basic_Fast.png","output":{"resource":{"relative_path":"images/benchmark-results/Overview_Basic_Fast.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/Overview_Basic_Slow.png","output":{"resource":{"relative_path":"images/benchmark-results/Overview_Basic_Slow.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/Overview_Prepare_Fast.png","output":{"resource":{"relative_path":"images/benchmark-results/Overview_Prepare_Fast.png"}},"is_incremental":false,"version":""},{"type":"Resource","source_relative_path":"_docfx_proj/images/benchmark-results/Overview_Prepare_Slow.png","output":{"resource":{"relative_path":"images/benchmark-results/Overview_Prepare_Slow.png"}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Behaviours.ExpressionCompilerBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.Behaviours.ExpressionCompilerBehaviour.html","hash":"wzeIqiHy24vOS93CpMBRkA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.BindPublicPropertiesBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.BindPublicPropertiesBehaviour.html","hash":"N2FKO+Q/tOHKYu9T6vAZNA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.DecoratorTargetBuilder.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.DecoratorTargetBuilder.html","hash":"48W1sacnsAjPOx03O2JXew=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.CompileStackEntry.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.CompileStackEntry.html","hash":"zgYd24Ir+X0me4XiEapEqA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionCompileContext.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.ExpressionCompileContext.html","hash":"jLlHPKYxoR5LlE/9CUnyeA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionCompileContext.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.Expressions.IExpressionCompileContext.html","hash":"mJhKGEWYYcqNQpZYgFLVeg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.Compilation.ITargetCompiler.yml","output":{".html":{"relative_path":"api/Rezolver.Compilation.ITargetCompiler.html","hash":"C/eO5h1Ri6StFWpzZ8B2nA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ContainerBase.yml","output":{".html":{"relative_path":"api/Rezolver.ContainerBase.html","hash":"xNIqYOJJZzFB1xkUieYREA=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.DelegateTargetContainerExtensions.yml","output":{".html":{"relative_path":"api/Rezolver.DelegateTargetContainerExtensions.html","hash":"IywQ5NE1So5QQC7vVq/qdg=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.IContainerBehaviour-1.yml","output":{".html":{"relative_path":"api/Rezolver.IContainerBehaviour-1.html","hash":"Nit107fp2SdfA17I8VyG5A=="}},"is_incremental":false,"version":""},{"type":"ManagedReference","source_relative_path":"_docfx_proj/obj/api/Rezolver.ITargetContainerBehaviour.yml","output":{".html":{"relative_path":"api/Rezolver.ITargetContainerBehaviour.html","hash":"b8o//mswUx+1atYg0Nal5Q=="}},"is_incremental":false,"version":""},{"type":"Resource","output":{"resource":{"relative_path":"index.json"}},"is_incremental":false}],"version_info":{}}
+{
+  "homepages": [],
+  "source_base_path": "E:/Github/Rezolver/doc/Rezolver.Documentation",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "L6rXCwm7zjQYAO+Oth//wQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/arrays-lists-collections/arrays.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/arrays-lists-collections/arrays.html",
+          "hash": "/+sdVTaMoDxSfEXCJxan5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/arrays-lists-collections/collections.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/arrays-lists-collections/collections.html",
+          "hash": "K36N67M91YwFc2PVLwF1ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/arrays-lists-collections/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/arrays-lists-collections/index.html",
+          "hash": "8wRbkVORcyISPU31IBt/VA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/arrays-lists-collections/lists.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/arrays-lists-collections/lists.html",
+          "hash": "Hz5IokeuSz45gBcR6EKLsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/benchmarks.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/benchmarks.html",
+          "hash": "rXJOcK4ArcQVCv4xi2ZM2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/constructor-injection/generics.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/constructor-injection/generics.html",
+          "hash": "MnnI7OqWC5QVltSyE1glCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/constructor-injection/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/constructor-injection/index.html",
+          "hash": "tMMswNWEVc4ydul2P8tlHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/constructor-injection/member-injection.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/constructor-injection/member-injection.html",
+          "hash": "AwU4pekG447Jp3br+epG0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/contravariance.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/contravariance.html",
+          "hash": "/ALI9btllPq/BOAGZXDh4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/create-and-use-a-container.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/create-and-use-a-container.html",
+          "hash": "xXuhfmoQN1eINbQMS9sD8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/decorators.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/decorators.html",
+          "hash": "RYDnOTMZ0VQ/Dg5qSPDnIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/decorators/collections.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/decorators/collections.html",
+          "hash": "u9MkjmXHg1jayG0qDYXUAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/decorators/delegates.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/decorators/delegates.html",
+          "hash": "xstQ/IRPA/nwL9E2to15jQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/delegates.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/delegates.html",
+          "hash": "RJ+lMrnJsdF00nio3rxrJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/enumerables.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/enumerables.html",
+          "hash": "2EUq3+IU3Dk+gQm2maS5XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/enumerables/generics.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/enumerables/generics.html",
+          "hash": "MDnMffWeLNGHRxxNjWE4aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/enumerables/lazy-vs-eager.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/enumerables/lazy-vs-eager.html",
+          "hash": "H+6Y+87Dgb41aKrerI9GaA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/expressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/expressions.html",
+          "hash": "HDDnh4YOJlWtaJ95C6wCwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/index.html",
+          "hash": "bLSlZapjkd6yx4LCSOmmGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/lifetimes/container-scopes.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/lifetimes/container-scopes.html",
+          "hash": "NueLUq1ypmlP0Z3OO5faTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/lifetimes/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/lifetimes/index.html",
+          "hash": "oOtI2F9AjHhcBuWhgFdc0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/lifetimes/scoped.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/lifetimes/scoped.html",
+          "hash": "CtIxNxWlntX2O8EfXTLIeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/lifetimes/singleton.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/lifetimes/singleton.html",
+          "hash": "SdGrWTTQkTe0TacWkihtmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/lifetimes/transient.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/lifetimes/transient.html",
+          "hash": "XPEHKPqPW6ku3Yz3LB6k4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/nuget-packages/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/nuget-packages/index.html",
+          "hash": "b2XM6GP7JcbrJDgeHp4ebQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/nuget-packages/rezolver.configuration.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/nuget-packages/rezolver.configuration.html",
+          "hash": "TrWOaNmSBHDWEOG+xdcURg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/nuget-packages/rezolver.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/nuget-packages/rezolver.html",
+          "hash": "+9yZZpu7aAmAgBHPPvIiPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html",
+          "hash": "K4tWJvbCo/YGXnhXlZb27w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html",
+          "hash": "bJ7gQu7HTCKtKgTszxPp/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/objects.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/objects.html",
+          "hash": "U7ucosMwwPH9LrO+mmGTMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/service-registration.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/service-registration.html",
+          "hash": "/XOnZvMELUfCXoc5+yJTAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "_docfx_proj/docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html",
+          "hash": "mBZ8syLGL6olhcx8DSjF+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/01-Singleton.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/01-Singleton.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/02-Transient.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/02-Transient.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/03-Combined.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/03-Combined.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/04-Complex.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/04-Complex.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/05-Property.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/05-Property.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/06-Generics.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/06-Generics.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/07-IEnumerable.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/07-IEnumerable.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/09-Child-Container.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/09-Child-Container.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/11-Prepare-And-Register.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/11-Prepare-And-Register.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/12-Prepare-And-Register-And-Simple-Resolve.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/12-Prepare-And-Register-And-Simple-Resolve.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/Overview_Advanced_Fast.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/Overview_Advanced_Fast.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/Overview_Advanced_Slow.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/Overview_Advanced_Slow.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/Overview_Basic_Fast.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/Overview_Basic_Fast.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/Overview_Basic_Slow.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/Overview_Basic_Slow.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/Overview_Prepare_Fast.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/Overview_Prepare_Fast.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/benchmark-results/Overview_Prepare_Slow.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/benchmark-results/Overview_Prepare_Slow.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "_docfx_proj/images/exampleunittest.PNG",
+      "output": {
+        "resource": {
+          "relative_path": "images/exampleunittest.PNG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "83tUKCXgnfYlDIAhT1Susg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.AliasTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.AliasTargetContainerExtensions.html",
+          "hash": "Jqviw/RtAlA5g4tNcYI+IA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.BindAllMembersBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.BindAllMembersBehaviour.html",
+          "hash": "+JlKUb20lZgVWLqPShQckA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.BindNoMembersBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.BindNoMembersBehaviour.html",
+          "hash": "L2ceVMo4DZvEn+W3X0xPbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.BindPublicFieldsBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.BindPublicFieldsBehaviour.html",
+          "hash": "MqKJowRZIH/JMweLMvtK6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.BindPublicPropertiesBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.BindPublicPropertiesBehaviour.html",
+          "hash": "A8gzqR9KlGo5lJX2u+k6Uw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.CachingContainerBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.CachingContainerBase.html",
+          "hash": "ENfP41ti7rn0AwvLnUBLIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.CombinedContainerConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.CombinedContainerConfig.html",
+          "hash": "Q1lYKOAraZrafffDuM+uIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.CombinedContainerConfigExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.CombinedContainerConfigExtensions.html",
+          "hash": "mtj7QyPo5dWTuKKKeHWLlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.CombinedTargetContainerConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.CombinedTargetContainerConfig.html",
+          "hash": "VBFp3xzR+LnMy6AJRckCOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.CombinedTargetContainerConfigExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.CombinedTargetContainerConfigExtensions.html",
+          "hash": "KEYkCmmp2PWamA9DW5rLFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.CompileContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.CompileContext.html",
+          "hash": "xFHwC9rHAZWhZQbrwTHwww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.CompileStackEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.CompileStackEntry.html",
+          "hash": "yOeNSav7k3GRpDzhlaO+EQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.ConstantCompiledTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.ConstantCompiledTarget.html",
+          "hash": "ij3zgFMpHV7eFwSZ9V1K3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.DelegatingCompiledTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.DelegatingCompiledTarget.html",
+          "hash": "NO/iV1YtHT1fJHbX+70B9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html",
+          "hash": "jflLBoGfsmhKmHTJeZb6Mg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.CompiledTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.CompiledTargetBuilder.html",
+          "hash": "M+I4rIYB1sXKWp6pc6PVCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ConstructorTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html",
+          "hash": "SO1Ifsc2rOXXrnrX9kZOZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.DecoratorTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.DecoratorTargetBuilder.html",
+          "hash": "jPKWQ9/FN6vbDvMY1tOCDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.DefaultTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.DefaultTargetBuilder.html",
+          "hash": "dDjaWBXwXjXbhPNiAAan3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.DelegateTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.DelegateTargetBuilder.html",
+          "hash": "gI8fwX3EOSd6O1Iv2HVo9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.EnumerableTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.EnumerableTargetBuilder.html",
+          "hash": "a9osDY3JEVJXz5PTnw45zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html",
+          "hash": "aAXKzqQ1IkHltIQXj2aSRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.Methods.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.Methods.html",
+          "hash": "g3O77cvNL8a+4mdMwd2EhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.html",
+          "hash": "IhpY1GhrQW+DLbzcEc9ZJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionCompileContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ExpressionCompileContext.html",
+          "hash": "3P0ceGnMZqDfa7aaEgFdcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionCompiler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ExpressionCompiler.html",
+          "hash": "nwUanGCBXYbbxm/3TQsieA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.html",
+          "hash": "NU+/Yru6eja1ZcwU8AJlAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ExpressionTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html",
+          "hash": "20DNKPEKmbBLXxJ0RYQvNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.html",
+          "hash": "yEuHk4tc/2bWT/IHIAbeOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionBuilder-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.IExpressionBuilder-1.html",
+          "hash": "iMDeAvUQMj17buUoCPha5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.IExpressionBuilder.html",
+          "hash": "/3BroZRGHOFuTKmYRuA4RQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionCompileContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.IExpressionCompileContext.html",
+          "hash": "zengHeQDXd7/t+0hTIp6Ow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.IExpressionCompiler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.IExpressionCompiler.html",
+          "hash": "ZGP5uHWAZxhxyPfgsm+0Zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ListTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ListTargetBuilder.html",
+          "hash": "A4bYR3NM04go12h8cEiT1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ObjectTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ObjectTargetBuilder.html",
+          "hash": "QZ6oaV+S31g3SPyNWQ4lww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html",
+          "hash": "Cydi3tVXLUGEdhNa+XyyIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.RedundantConvertRewriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.RedundantConvertRewriter.html",
+          "hash": "IVPAX4BEu6mKb2C45EXJhA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.RezolvedTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.RezolvedTargetBuilder.html",
+          "hash": "R/F3sAj7YZmcsJrgZ0RmsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.ScopedTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.ScopedTargetBuilder.html",
+          "hash": "SDZsVmp0HUv9Twc3mU6z1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.SharedExpressionKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.SharedExpressionKey.html",
+          "hash": "XL3sCP0apzd8+sQh6KqZwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.SingletonTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.SingletonTargetBuilder.html",
+          "hash": "AebaBm1tpxSDF63sxGZi0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.TargetExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.TargetExpression.html",
+          "hash": "70rPIQxU2oMJpyzq9Hp3/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.UnscopedTargetBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.UnscopedTargetBuilder.html",
+          "hash": "lZJoLlxYhbL0UE/YaCq+9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.Expressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.Expressions.html",
+          "hash": "3FI6xSBjIb5jIWIkFy9PJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.ICompileContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.ICompileContext.html",
+          "hash": "N5x71vtALX5Dx9VGsgPO5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.ITargetCompiler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.ITargetCompiler.html",
+          "hash": "WiSR71+aNhjCf1FbT7SBag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.TargetCompilerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.TargetCompilerExtensions.html",
+          "hash": "yjfOrAjAUnEXceGbl79uWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.UnresolvedTypeCompiledTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.UnresolvedTypeCompiledTarget.html",
+          "hash": "/uLI/Og14/2J2SUkfNJAgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Compilation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Compilation.html",
+          "hash": "imbKx7EkRGyFQeBN3LRjOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.Configure-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.Configure-1.html",
+          "hash": "RJUDc7sqF70rBilBmEaN4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.Configure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.Configure.html",
+          "hash": "RMPfWoR9nq+4cY/WrrQ13Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.ExpressionCompilation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.ExpressionCompilation.html",
+          "hash": "aasRrfpkFVA5zlpHpxbxEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.InjectArrays.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.InjectArrays.html",
+          "hash": "b9ywskaNp3jQDQU+7hW1uA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.InjectCollections.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.InjectCollections.html",
+          "hash": "OehOMi3SNqPxjMTWi1b4Yw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.InjectEnumerables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.InjectEnumerables.html",
+          "hash": "TeBfX8+0zP4HyqBJFqapvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.InjectLists.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.InjectLists.html",
+          "hash": "93CEjfHSfJoF9uwCiMPygg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.InjectResolveContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.InjectResolveContext.html",
+          "hash": "c9VXapS5ddsYJdo1REbhVQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.OptionDependentConfig-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.OptionDependentConfig-1.html",
+          "hash": "W6uL0CqXcP3j9hC2H66lwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.OptionDependentConfig-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.OptionDependentConfig-2.html",
+          "hash": "3PVNtmTzIPDfQ3IhpASFFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.OverridingEnumerables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.OverridingEnumerables.html",
+          "hash": "92ML5Geie4Vl8fQwxM5dIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Configuration.html",
+          "hash": "MM/3z4HeJVreHBMd8y4b5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ConstructorBinding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ConstructorBinding.html",
+          "hash": "G8ljgLT876gIXuzWzDWkiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Container.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Container.html",
+          "hash": "Xu/padZGGarCgTgNiadWFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ContainerBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ContainerBase.html",
+          "hash": "h7ScbYkR2fSjwUIzM5Ibfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ContainerResolveExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ContainerResolveExtensions.html",
+          "hash": "tr34dG+erwc4NbIkE6NorQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ContainerScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ContainerScope.html",
+          "hash": "o0m2HYh805Dn5IsSir1Vpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ContainerScopeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ContainerScopeExtensions.html",
+          "hash": "lHkF5Drnn3aq+7u+1PjI3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ContainerScopeResolveExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ContainerScopeResolveExtensions.html",
+          "hash": "wvJxfeWSp9T1db6cP3OwEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.DecoratingTargetContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.DecoratingTargetContainer.html",
+          "hash": "gkT53Rp+WNgbBg13/gbW0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.DecoratorTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.DecoratorTargetContainerExtensions.html",
+          "hash": "q4Ec6+Jhj0HXH6FO0VTrEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.DelegateTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.DelegateTargetContainerExtensions.html",
+          "hash": "iu75y7UYJe5shBkoqa8pmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ExpressionFunctions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ExpressionFunctions.html",
+          "hash": "yIsGuVofy4hpnyk6LdZWQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ExpressionTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ExpressionTargetContainerExtensions.html",
+          "hash": "wsOLP3qLsyfpJg/J0MxHLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.GenericTargetContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.GenericTargetContainer.html",
+          "hash": "tsVESiudz3eU5tEDzskSdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ICompiledTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ICompiledTarget.html",
+          "hash": "flifbO1U+S0PuMAKudzjBA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IContainer.html",
+          "hash": "ajNpLN4pm9GGVTbmjbBvwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IContainerConfig-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IContainerConfig-1.html",
+          "hash": "wXHgIJnLSre0u6ZVrDYxlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IContainerConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IContainerConfig.html",
+          "hash": "a+zZZT/PSDTdk7vmb5W2HQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IContainerScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IContainerScope.html",
+          "hash": "WKDTkb1BvwLxi3+/rbw7+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IMemberBindingBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IMemberBindingBehaviour.html",
+          "hash": "wXtIkQhZik2qR/I3sCfi8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IOptionForAnyGeneric.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IOptionForAnyGeneric.html",
+          "hash": "Tqu2cA2DiDF7b5WVIWjFVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IResolveContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IResolveContext.html",
+          "hash": "+JOqyAHlEWXLo1cwXW9F8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IScopeFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IScopeFactory.html",
+          "hash": "Htwrlo5q1v4keRzuTEcgsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.IScopedContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.IScopedContainer.html",
+          "hash": "0LACG3/+cNxvlwEDUBBW7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ITarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ITarget.html",
+          "hash": "VEaypDWrR5QAvCzMIB77ew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ITargetContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ITargetContainer.html",
+          "hash": "JJMnNgVOFs9iYpEMJbq9wQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ITargetContainerConfig-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ITargetContainerConfig-1.html",
+          "hash": "7/1BKhjvplcFyuVWqwX/WQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ITargetContainerConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ITargetContainerConfig.html",
+          "hash": "vOHhJE2tqf0an1CNJGrocA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ITargetContainerFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ITargetContainerFactory.html",
+          "hash": "2aUZ5ULSo8ziiaNzXmjG8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ITargetContainerTypeResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ITargetContainerTypeResolver.html",
+          "hash": "kaNSkElI+Mm1BSugEXzVfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.MemberBinding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.MemberBinding.html",
+          "hash": "QYTeb/GF3RefhDV05tPxPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.MemberBindingBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.MemberBindingBehaviour.html",
+          "hash": "hkAkwXcs7/HapFwOIIEYjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.MethodBinding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.MethodBinding.html",
+          "hash": "beSBiB5Ws71gskaWZJiIQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.MethodCallExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.MethodCallExtractor.html",
+          "hash": "KZ9dzs1ZzJDYOyrVLZ+O+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.MultipleTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.MultipleTargetContainerExtensions.html",
+          "hash": "dJpP02LNwm/ySAXV7TSz8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ObjectTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ObjectTargetContainerExtensions.html",
+          "hash": "z7M40xdTSyyarBIAfTdSrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.AllowMultiple.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.AllowMultiple.html",
+          "hash": "dQ7EByvnmTadyz2326EeVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.ContainerOption-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.ContainerOption-1.html",
+          "hash": "dsonBB6f+2i3yLc7MTulmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.EnableArrayInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.EnableArrayInjection.html",
+          "hash": "uYMcMXftdGwGuyI5qB2seQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.EnableCollectionInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.EnableCollectionInjection.html",
+          "hash": "DSpDVYjh/d7dCKAeCOJ9ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.EnableContravariance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.EnableContravariance.html",
+          "hash": "gTn2pmONjHunI3CEIyWxvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.EnableEnumerableInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.EnableEnumerableInjection.html",
+          "hash": "uID7Lwz4C1ph4H/hCWxUsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.EnableGlobalOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.EnableGlobalOptions.html",
+          "hash": "BhOC5Y5y5dnEGxYdljz2Qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.EnableListInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.EnableListInjection.html",
+          "hash": "skkFY1+ofizwVc/qn//O8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.FetchAllMatchingGenerics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.FetchAllMatchingGenerics.html",
+          "hash": "lxliQR/CZ+yj1OZcS2PD0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.LazyEnumerables.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.LazyEnumerables.html",
+          "hash": "Hcd4veRmpHiRdPbsKb1lmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Options.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Options.html",
+          "hash": "9D9yFwUZmnzwpaaDkqCFyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.OptionsTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.OptionsTargetContainerExtensions.html",
+          "hash": "Xy8VxizrG2UlwxQVcjZhxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.OverridingContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.OverridingContainer.html",
+          "hash": "tO9eqTi9LuhTGRPhn6eaFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.OverridingTargetContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.OverridingTargetContainer.html",
+          "hash": "ULO9zDj8duyjonwcIVJ1zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ParameterBinding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ParameterBinding.html",
+          "hash": "hl1PYS9WekpY5EGVKWMWug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.RegisterTypeTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.RegisterTypeTargetContainerExtensions.html",
+          "hash": "yxWKmDgNvNYImiO9pH6oFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ResolveContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ResolveContext.html",
+          "hash": "GyXwwvVjk4txDPNctvPPhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Runtime.EagerEnumerable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Runtime.EagerEnumerable-1.html",
+          "hash": "5m0XzrWEkaetUq5i+qhqTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Runtime.LazyEnumerable-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Runtime.LazyEnumerable-1.html",
+          "hash": "zxuiVZ1L+5Yj7WoghSMZRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Runtime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Runtime.html",
+          "hash": "HzSLbrpTZ2lEcfrRAb6IFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ScopeBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ScopeBehaviour.html",
+          "hash": "1U6r20dpK3s7QqwPqIQFoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ScopePreference.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ScopePreference.html",
+          "hash": "WWL5ydkIuJoimnr+nNGnvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ScopedContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ScopedContainer.html",
+          "hash": "cLRFG1iCAn4sNkFQ3tcEJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.ScopedTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.ScopedTargetContainerExtensions.html",
+          "hash": "ZSsb6rEpXTMUpwJvBUUGvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.Dependant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.Dependant.html",
+          "hash": "2Y1tDGz2m3bBVBQokaKuuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.DependantCollection-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.DependantCollection-1.html",
+          "hash": "4MW7k7njWQdUQRKYzrl0Rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.DependantExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.DependantExtensions.html",
+          "hash": "vw89BRF6M1PDDMKLgSI6MQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.DependencyEnumerableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.DependencyEnumerableExtensions.html",
+          "hash": "CJSt3cUlOn+FehQcGrQaOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.DependencyException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.DependencyException.html",
+          "hash": "uZ/EJpnAKSLfZUqzBKX8VA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.DependencyMetadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.DependencyMetadata.html",
+          "hash": "lym0zGtkmyiiJnUAK8nAeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.DependencyMetadataCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.DependencyMetadataCollection.html",
+          "hash": "dOaW4XayhTky0or0wHAUUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.IDependant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.IDependant.html",
+          "hash": "cerf81UX4wDfJ+4UH9W+Kw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.IMutableDependant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.IMutableDependant.html",
+          "hash": "S7K9dtF6H8it9s7TUW+0fw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Sdk.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Sdk.html",
+          "hash": "a2/dU7svYobcHjiPF69aDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.SingletonTargetContainerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.SingletonTargetContainerExtensions.html",
+          "hash": "PHG0uSdrN5WevBq0Vmyyzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Target.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Target.html",
+          "hash": "hbH6N/HCcsxHnEvdW1aheA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.TargetContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.TargetContainer.html",
+          "hash": "zSbN08qz/APkFzX6zTCJRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.TargetDictionaryContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.TargetDictionaryContainer.html",
+          "hash": "6klhYZRWZAqoTXiJdQzZLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.TargetListContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.TargetListContainer.html",
+          "hash": "HqYPolGr8XvDuVBnbO8cWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.TargetTypeSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.TargetTypeSelector.html",
+          "hash": "ulgxy+6NwDyiveT+tm4JgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.ChangeTypeTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.ChangeTypeTarget.html",
+          "hash": "msMg61VIH0Kh9wPqa/wo/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.ConstructorTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.ConstructorTarget.html",
+          "hash": "lrHCOtNOVw0NUU/H4GxdHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.DecoratorTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.DecoratorTarget.html",
+          "hash": "TGtfepPV/7TBWvKCLoEudg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.DefaultTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.DefaultTarget.html",
+          "hash": "er9Uz4fkMzcqH4IpcfprAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.DelegateTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.DelegateTarget.html",
+          "hash": "thIOKHgJm6YM1mjpLxG3dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.EnumerableTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.EnumerableTarget.html",
+          "hash": "s9GLAje4WV+L1Ji3mKHdtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.ExpressionTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.ExpressionTarget.html",
+          "hash": "I6tzJKG1aFcGNKGXyYABfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html",
+          "hash": "fvtOjAOJJkcThZ6WK7dYMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.GenericConstructorTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.GenericConstructorTarget.html",
+          "hash": "qXNHni2Y0cO1FgQ3bpr6FA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.ListTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.ListTarget.html",
+          "hash": "SxP0pQ9k/AzoNPQk6ovCSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.ObjectTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.ObjectTarget.html",
+          "hash": "2qFdqMbUO4ALEM1sZ3S7PQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.OptionalParameterTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.OptionalParameterTarget.html",
+          "hash": "bRU9TBHYT7ZqpZ3GNpX4og=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.ResolvedTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.ResolvedTarget.html",
+          "hash": "nwXJ3CycuTk7m6bTCVywDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.ScopedTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.ScopedTarget.html",
+          "hash": "J8T9Y19WTa+npB0ejgaO4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.SingletonTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.SingletonTarget.html",
+          "hash": "fqe6bA6aP5n7nJq4GZ+m6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.TargetBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.TargetBase.html",
+          "hash": "s2WnCnWlMHnxVwfyCglfjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.UnscopedTarget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.UnscopedTarget.html",
+          "hash": "LmHrb9ib3AhewsyYsLCN+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.Targets.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.Targets.html",
+          "hash": "/K7OEJT9Kp/K475+hQ82Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.UnresolvedICompiledTargetExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.UnresolvedICompiledTargetExtensions.html",
+          "hash": "mzD1WT9k/Pzm3GEOpeYmIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "_docfx_proj/obj/api/Rezolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Rezolver.html",
+          "hash": "2UxpjhEhOrg+HvUMrAVlsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "_docfx_proj/obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "qogbXT54LiFrGDBRzSC1hQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "_docfx_proj/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "MfCEQW0gLF+peCNJnTSpRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "RestApiDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

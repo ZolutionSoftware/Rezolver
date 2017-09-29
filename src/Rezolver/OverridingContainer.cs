@@ -17,7 +17,7 @@ namespace Rezolver
     /// e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application for example) or more.
     /// </summary>
     /// <remarks>When overriding another <see cref="IContainer"/>, you are overriding the <see cref="ICompiledTarget"/> objects that
-    /// will be returned when <see cref="IContainer.FetchCompiled(IResolveContext)"/> is called on that container and, therefore,
+    /// will be returned when <see cref="IContainer.GetCompiledTarget(IResolveContext)"/> is called on that container and, therefore,
     /// the compiled target which is executed when the <see cref="IContainer.Resolve(IResolveContext)"/> method is called.
     /// 
     /// This has the side effect of overriding automatically resolved arguments (bound to a <see cref="ResolvedTarget"/>) compiled 
@@ -28,10 +28,29 @@ namespace Rezolver
     /// In essence, when resolving an instance as a dependency the <see cref="ResolvedTarget"/> does something like this:
     /// 
     /// <code>resolveContext.Container == compileContext.Container ? (execute compile-time target) : resolveContext.Container.Resolve(type)</code>
+    /// 
+    /// ---
+    /// 
+    /// ## Behaviour of enumerables
+    /// 
+    /// The behaviour of enumerables depends on whether enumerables are enabled via the <see cref="Options.EnableEnumerableInjection"/> option 
+    /// (<c>true</c> by default) and whether the <see cref="Configuration.OverridingEnumerables"/> is applied to the container
+    /// (which it is, also by default, via the <see cref="Container.DefaultConfig"/>).
+    /// 
+    /// If so, then any request for <c>IEnumerable&lt;T&gt;</c> will result in an enumerable which combines the one resolved by the <see cref="Inner"/>
+    /// container, and then by any direct registration in this container.  This mirrors the behaviour of the <see cref="ITargetContainer.FetchAll(Type)"/>
+    /// implementation of the <see cref="OverridingTargetContainer"/> - which produces an enumerable of targets from both the base target container and
+    /// the overriding one.
+    /// 
+    /// If the <see cref="Configuration.OverridingEnumerables"/> is not applied to this container, then any IEnumerable registered (or automatically built)
+    /// in this container will override that of the <see cref="Inner"/> container.
     /// </remarks>
     public sealed class OverridingContainer : Container
     {
-        private readonly IContainer _inner;
+        /// <summary>
+        /// Gets the <see cref="IContainer"/> that is overriden by this container.
+        /// </summary>
+        public IContainer Inner { get; }
 
         /// <summary>
         /// Creates a new instance of the <see cref="OverridingContainer"/>
@@ -44,16 +63,17 @@ namespace Rezolver
         /// (note - separate to those of the <paramref name="inner"/> container).
         /// 
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
-        /// <param name="behaviour">Can be null.  A behaviour to attach to this container (and, potentially its 
-        /// <see cref="Targets"/>).  If not provided, then the global 
-        /// <see cref="GlobalBehaviours.OverridingContainerBehaviour"/> will be used.</param>
-        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerBehaviour behaviour = null)
+        /// <param name="config">Can be null.  A configuration to apply to this container (and, potentially its 
+        /// <see cref="Targets"/>).  If not provided, then the <see cref="Container.DefaultConfig"/> will be used</param>
+        public OverridingContainer(IContainer inner, ITargetContainer targets = null, IContainerConfig config = null)
             : base(targets)
         {
             inner.MustNotBeNull("inner");
-            _inner = inner;
-        }
+            Inner = inner;
 
+            (config ?? DefaultConfig).Configure(this, Targets);
+        }
+        
         /// <summary>
         /// Called to determine if this container is able to resolve the type specified in the passed <paramref name="context"/>.
         /// </summary>
@@ -62,7 +82,7 @@ namespace Rezolver
         /// <see cref="IResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
         public override bool CanResolve(IResolveContext context)
         {
-            return base.CanResolve(context) || _inner.CanResolve(context);
+            return base.CanResolve(context) || Inner.CanResolve(context);
         }
 
         /// <summary>
@@ -71,9 +91,9 @@ namespace Rezolver
         /// </summary>
         /// <param name="context">Required.  The <see cref="IResolveContext"/>.</param>
         /// <returns></returns>
-        protected override ICompiledTarget GetFallbackCompiledRezolveTarget(IResolveContext context)
+        protected override ICompiledTarget GetFallbackCompiledTarget(IResolveContext context)
         {
-            return _inner.FetchCompiled(context);
+            return Inner.GetCompiledTarget(context);
         }
     }
 }

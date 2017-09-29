@@ -18,11 +18,10 @@ namespace Rezolver.Compilation.Expressions
     /// </summary>
     /// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
     /// <seealso cref="Rezolver.Compilation.ITargetCompiler" />
-    /// <remarks>Use of this compiler by a container is enabled by attaching the <see cref="Behaviours.ExpressionCompilerBehaviour"/>
-    /// <see cref="Behaviours.ExpressionCompilerBehaviour.Instance"/> to the container either on construction (for example, via the 
-    /// <see cref="Container.Container(ITargetContainer, IContainerBehaviour)"/> or
-    /// <see cref="Container.Container(IContainerBehaviour)"/> constructors) or via the <see cref="GlobalBehaviours.ContainerBehaviour"/>
-    /// global behaviour, which currently includes the behaviour by default.
+    /// <remarks>Use of this compiler by a container is enabled by applying the <see cref="Configuration.ExpressionCompilation"/>
+    /// <see cref="Configuration.ExpressionCompilation.Instance"/> to the container either on construction (for example, via the 
+    /// <see cref="Container.Container(ITargetContainer, IContainerConfig)"/> constructor) or via the 
+    /// <see cref="Container.DefaultConfig"/> - which currently configures this compiler by default anyway.
     /// 
     /// This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a 
     /// given <see cref="ITarget" /> from the <see cref="IExpressionCompileContext" />.
@@ -55,7 +54,7 @@ namespace Rezolver.Compilation.Expressions
     public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler
     {
         /// <summary>
-        /// Gets the default expression compiler.  It's this that the <see cref="Behaviours.ExpressionCompilerBehaviour"/>
+        /// Gets the default expression compiler.  It's this that the <see cref="Configuration.ExpressionCompilation"/>
         /// registers.
         /// </summary>
         public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
@@ -120,8 +119,11 @@ namespace Rezolver.Compilation.Expressions
             target.MustNotBeNull(nameof(target));
             context.MustNotBeNull(nameof(context));
 
-            var cache = context.ResolveContext.Resolve<ExpressionBuilderCache>();
-            return cache.ResolveBuilder(target);
+            return context.GetOption<IExpressionBuilder>(target.GetType());
+
+            //var expressionBuilder = 
+            //var cache = context.ResolveContext.Resolve<ExpressionBuilderCache>();
+            //return cache.ResolveBuilder(target);
         }
 
         /// <summary>

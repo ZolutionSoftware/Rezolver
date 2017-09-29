@@ -3,6 +3,11 @@
 The [decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern) is a key part of many software projects, 
 and Rezolver offers first-class support for implementing it either non-generically, or generically.
 
+> [!NOTE]
+> If you're looking for how to register and use decorator delegates - there is a 
+> [separate topic in this section](decorators/delegates.md)
+> dedicated to those.
+
 ## Registering decorators in Rezolver
 
 Registration of Decorators in Rezolver is done through the overloaded extension method 
@@ -115,3 +120,8 @@ be decorated by decorators 1 and 3, in that order.
 The following example demonstrates the `IFoo<Bar>` scenario, for completeness:
 
 [!code-csharp[DecoratorExamples.cs](../../../../test/Rezolver.Tests.Examples/DecoratorExamples.cs#example6)]
+
+***
+
+# Next steps
+- Read about Rezolver's other implementation of decoration - [decorator delegates](decorators/delegates.md).

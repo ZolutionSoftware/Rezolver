@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ResolvedTarget
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,68 +108,68 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              
-              <h1 id="Rezolver_Targets_ResolvedTarget" data-uid="Rezolver.Targets.ResolvedTarget">Class ResolvedTarget
-              </h1>
-              <div class="markdown level0 summary"><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically 
-(at &#39;resolve time&#39;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when 
+            <article class="content wrap" id="_content" data-uid="Rezolver.Targets.ResolvedTarget">
+  
+  
+  <h1 id="Rezolver_Targets_ResolvedTarget" data-uid="Rezolver.Targets.ResolvedTarget" class="text-break">Class ResolvedTarget
+  </h1>
+  <div class="markdown level0 summary"><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically 
+(at &apos;resolve time&apos;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when 
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is called.</p>
-<p>This is the most common way that we bind constructor parameters, for example - i.e. &#39;I want an
-<code>IService</code> instance - go get it&#39;.</p>
+<p>This is the most common way that we bind constructor parameters, for example - i.e. &apos;I want an
+<code>IService</code> instance - go get it&apos;.</p>
 </div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="inheritance">
-                <h5>Inheritance</h5>
-                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-                  <div class="level1"><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></div>
-                  <div class="level2"><span class="xref">ResolvedTarget</span></div>
-              </div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_UseFallback">TargetBase.UseFallback</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
-                </div>
-              </div>
-              <h6><strong>Namespace</strong>:Rezolver.Targets</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_Targets_ResolvedTarget_syntax">Syntax</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class ResolvedTarget : TargetBase, ITarget</code></pre>
-              </div>
-              <h5 id="Rezolver_Targets_ResolvedTarget_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>Represents an object that will be resolved from the container when its <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> is executed,
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></div>
+    <div class="level2"><span class="xref">ResolvedTarget</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_UseFallback">TargetBase.UseFallback</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ToString">TargetBase.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Targets_ResolvedTarget_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ResolvedTarget : TargetBase, ITarget</code></pre>
+  </div>
+  <h5 id="Rezolver_Targets_ResolvedTarget_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Represents an object that will be resolved from the container when its <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> is executed,
 or when the target is used perhaps by another <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (e.g. - a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> with a
 constructor parameter bound to one of these).</p>
-<p>So, in essence, a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> represents an automatic call to a container&#39;s 
+<p>So, in essence, a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> represents an automatic call to a container&apos;s 
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method, for the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_ResolvedTarget_DeclaredType">DeclaredType</a>.</p>
 <p>In practise - an <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> might take advantage of the fact that, during compilation, targets
 can be discovered directly from the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> that is passed to 
@@ -180,241 +180,241 @@ choosing to compile all the expressions for all targets required for an operatio
 which results in very fast execution times for all resolve operations.</p>
 <p>Not only this, but the behaviour can be extended still further by realising that a <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a>
 on which a resolve operation is invoked might not be the same container for which this <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> was 
-first compiled.  In this case - it&#39;s possible that the other container has alternative registrations for a given service
+first compiled.  In this case - it&apos;s possible that the other container has alternative registrations for a given service
 type which the application expects to take precedence over those which were originally resolved when compilation took 
 place.  The expressions compiler, again, detects this - allowing compiled code from a root container to detect an 
-&#39;overriding&#39; container and to dynamically resolve a different dependency in this situation.</p>
-<p>It&#39;s this behaviour which is almost unique to the Rezolver framework out of the box.</p>
+&apos;overriding&apos; container and to dynamically resolve a different dependency in this situation.</p>
+<p>It&apos;s this behaviour which is almost unique to the Rezolver framework out of the box.</p>
 </div>
-              <h3 id="constructors">Constructors
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget__ctor_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.%23ctor(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ResolvedTarget.cs/#L87">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ResolvedTarget__ctor_" data-uid="Rezolver.Targets.ResolvedTarget.#ctor*"></a>
-              <h4 id="Rezolver_Targets_ResolvedTarget__ctor_System_Type_Rezolver_ITarget_" data-uid="Rezolver.Targets.ResolvedTarget.#ctor(System.Type,Rezolver.ITarget)">ResolvedTarget(Type, ITarget)</h4>
-              <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> for the given <span class="paramref">type</span> which will attempt to 
-resolve a value at compile time and/or resolve-time and, if it can&#39;t, will either use the <span class="paramref">fallbackTarget</span>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget__ctor_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.%23ctor(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ResolvedTarget.cs/#L87">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_ResolvedTarget__ctor_" data-uid="Rezolver.Targets.ResolvedTarget.#ctor*"></a>
+  <h4 id="Rezolver_Targets_ResolvedTarget__ctor_System_Type_Rezolver_ITarget_" data-uid="Rezolver.Targets.ResolvedTarget.#ctor(System.Type,Rezolver.ITarget)">ResolvedTarget(Type, ITarget)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> for the given <code data-dev-comment-type="paramref" class="paramref">type</code> which will attempt to 
+resolve a value at compile time and/or resolve-time and, if it can&apos;t, will either use the <code data-dev-comment-type="paramref" class="paramref">fallbackTarget</code>
 or will throw an exception.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ResolvedTarget(Type type, ITarget fallbackTarget = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">type</span></td>
-                    <td><p>Required.  The type to be resolved</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolvedTarget(Type type, ITarget fallbackTarget = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>Required.  The type to be resolved</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td><span class="parametername">fallbackTarget</span></td>
-                    <td><p>Optional.  The target to be used if the value cannot be resolved at either compile time or 
-resolve-time.  An <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a> is thrown if this target&#39;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a>
-function returns <code>false</code> when called with the <span class="paramref">type</span>.</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">fallbackTarget</span></td>
+        <td><p>Optional.  The target to be used if the value cannot be resolved at either compile time or 
+resolve-time.  An <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a> is thrown if this target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a>
+function returns <code>false</code> when called with the <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h3 id="properties">Properties
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ResolvedTarget.cs/#L51">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ResolvedTarget_DeclaredType_" data-uid="Rezolver.Targets.ResolvedTarget.DeclaredType*"></a>
-              <h4 id="Rezolver_Targets_ResolvedTarget_DeclaredType" data-uid="Rezolver.Targets.ResolvedTarget.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"><p>The type that is to be resolved from the container at resolve-time.</p>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ResolvedTarget.cs/#L51">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_ResolvedTarget_DeclaredType_" data-uid="Rezolver.Targets.ResolvedTarget.DeclaredType*"></a>
+  <h4 id="Rezolver_Targets_ResolvedTarget_DeclaredType" data-uid="Rezolver.Targets.ResolvedTarget.DeclaredType">DeclaredType</h4>
+  <div class="markdown level1 summary"><p>The type that is to be resolved from the container at resolve-time.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_FallbackTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.FallbackTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ResolvedTarget.cs/#L76">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ResolvedTarget_FallbackTarget_" data-uid="Rezolver.Targets.ResolvedTarget.FallbackTarget*"></a>
-              <h4 id="Rezolver_Targets_ResolvedTarget_FallbackTarget" data-uid="Rezolver.Targets.ResolvedTarget.FallbackTarget">FallbackTarget</h4>
-              <div class="markdown level1 summary"><p>Gets the target that this <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> will fallback to if a satisfactory target cannot be found
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_FallbackTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.FallbackTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ResolvedTarget.cs/#L76">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_ResolvedTarget_FallbackTarget_" data-uid="Rezolver.Targets.ResolvedTarget.FallbackTarget*"></a>
+  <h4 id="Rezolver_Targets_ResolvedTarget_FallbackTarget" data-uid="Rezolver.Targets.ResolvedTarget.FallbackTarget">FallbackTarget</h4>
+  <div class="markdown level1 summary"><p>Gets the target that this <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> will fallback to if a satisfactory target cannot be found
 at compile time or resolve-time.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public ITarget FallbackTarget { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_Targets_ResolvedTarget_FallbackTarget_remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property is also used to determine whether this will be 
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ITarget FallbackTarget { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Targets_ResolvedTarget_FallbackTarget_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> property is also used to determine whether this will be 
 used.  If the target resolved from the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> has its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a>
 property set to true, and this property is non-null for this target, then this target will be used.</p>
 <p>Note also that extension containers such as <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> also have the ability to override
 the use of this fallback if they successfully resolve the type.</p>
 </div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ResolvedTarget.cs/#L57">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ResolvedTarget_ScopeBehaviour_" data-uid="Rezolver.Targets.ResolvedTarget.ScopeBehaviour*"></a>
-              <h4 id="Rezolver_Targets_ResolvedTarget_ScopeBehaviour" data-uid="Rezolver.Targets.ResolvedTarget.ScopeBehaviour">ScopeBehaviour</h4>
-              <div class="markdown level1 summary"><p>Always returns <a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_None">None</a></p>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ResolvedTarget.cs/#L57">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_ResolvedTarget_ScopeBehaviour_" data-uid="Rezolver.Targets.ResolvedTarget.ScopeBehaviour*"></a>
+  <h4 id="Rezolver_Targets_ResolvedTarget_ScopeBehaviour" data-uid="Rezolver.Targets.ResolvedTarget.ScopeBehaviour">ScopeBehaviour</h4>
+  <div class="markdown level1 summary"><p>Always returns <a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_None">None</a></p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public override ScopeBehaviour ScopeBehaviour { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
-                    <td><p>The scope behaviour.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ScopeBehaviour ScopeBehaviour { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
+        <td><p>The scope behaviour.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a></div>
-              <h3 id="methods">Methods
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_Bind_Rezolver_Compilation_ICompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.Bind(Rezolver.Compilation.ICompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ResolvedTarget.cs/#L107">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_ResolvedTarget_Bind_" data-uid="Rezolver.Targets.ResolvedTarget.Bind*"></a>
-              <h4 id="Rezolver_Targets_ResolvedTarget_Bind_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.Targets.ResolvedTarget.Bind(Rezolver.Compilation.ICompileContext)">Bind(ICompileContext)</h4>
-              <div class="markdown level1 summary"><p>Attempts to obtain the target that this <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> resolves to for the given <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.</p>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a></div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget_Bind_Rezolver_Compilation_ICompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget.Bind(Rezolver.Compilation.ICompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ResolvedTarget.cs/#L107">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_ResolvedTarget_Bind_" data-uid="Rezolver.Targets.ResolvedTarget.Bind*"></a>
+  <h4 id="Rezolver_Targets_ResolvedTarget_Bind_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.Targets.ResolvedTarget.Bind(Rezolver.Compilation.ICompileContext)">Bind(ICompileContext)</h4>
+  <div class="markdown level1 summary"><p>Attempts to obtain the target that this <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> resolves to for the given <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.</p>
 <p>This function should be used by <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> implementations when producing the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>
 for this instance, who wish to perform some form of up-front optimisations.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public virtual ITarget Bind(ICompileContext context)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></td>
-                    <td><span class="parametername">context</span></td>
-                    <td><p>The context from which a target is to be resolved.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ITarget Bind(ICompileContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context from which a target is to be resolved.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="returns">Returns</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-                    <td><p>The target resolved by this target - could be the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_ResolvedTarget_FallbackTarget">FallbackTarget</a>, could be null.</p>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>The target resolved by this target - could be the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_ResolvedTarget_FallbackTarget">FallbackTarget</a>, could be null.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_Targets_ResolvedTarget_Bind_Rezolver_Compilation_ICompileContext__remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>The target that is returned depends both on the <span class="paramref">context</span> passed and also whether 
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Targets_ResolvedTarget_Bind_Rezolver_Compilation_ICompileContext__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The target that is returned depends both on the <code data-dev-comment-type="paramref" class="paramref">context</code> passed and also whether 
 a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_ResolvedTarget_FallbackTarget">FallbackTarget</a> has been provided to this target.</p>
 </div>
-              <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Unscoped_Rezolver_ITarget_">Target.Unscoped(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_">Target.As(ITarget, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
-              </div>
-                        </article>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Unscoped_Rezolver_ITarget_">Target.Unscoped(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_">Target.As(ITarget, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
+  </div>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -422,10 +422,10 @@ a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html#Rezolver_Targets_Re
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_ResolvedTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ResolvedTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ResolvedTarget.cs/#L46" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/ResolvedTarget.cs/#L46" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

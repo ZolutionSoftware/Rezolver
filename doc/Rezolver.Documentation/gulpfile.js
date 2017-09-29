@@ -62,9 +62,9 @@ var vendor = {
 };
 
 var devSitemap = {
-    src: ['./developers/**/*.html'],
+    src: ['./developers/**/*.html', '!./developers/**/toc.html'],
     dest: './developers',
-    siteUrl: 'http://rezolver.co.uk'
+    siteUrl: 'http://rezolver.co.uk/developers'
 };
 
 gulp.task('sitemap', function () {

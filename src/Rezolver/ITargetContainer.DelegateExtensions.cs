@@ -6,6 +6,7 @@ using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Rezolver
@@ -31,7 +32,13 @@ namespace Rezolver
 		{
 			targetContainer.MustNotBeNull(nameof(targetContainer));
 			factory.MustNotBeNull(nameof(factory));
-            ITarget toRegister = new DelegateTarget(factory, declaredType);
+
+            ITarget toRegister = null;
+            if (factory.GetMethodInfo().GetParameters()?.Length > 0)
+                toRegister = new DelegateTarget(factory, declaredType);
+            else
+                toRegister = new NullaryDelegateTarget(factory, declaredType);
+
             if (scopeBehaviour == ScopeBehaviour.Explicit) toRegister = toRegister.Scoped();
             else if (scopeBehaviour == ScopeBehaviour.None) toRegister = toRegister.Unscoped();
             targetContainer.Register(toRegister);

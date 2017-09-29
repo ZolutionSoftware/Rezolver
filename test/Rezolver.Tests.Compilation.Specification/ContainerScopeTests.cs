@@ -37,9 +37,10 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			using (var scope = container.CreateScope())
 			{
-				results = scope.Resolve<IEnumerable<Disposable>>();
+                // have to materialise the enumerable because it will likely be lazily-built.
+				results = scope.Resolve<IEnumerable<Disposable>>().ToArray();
 				Assert.NotNull(results);
-				//don't really need to asser this because IEnumerable tests do it.
+				// don't really need to assert this because IEnumerable tests do it.
 				Assert.Equal(3, results.Count());
 			}
 

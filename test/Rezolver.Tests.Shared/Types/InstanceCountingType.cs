@@ -8,7 +8,14 @@ namespace Rezolver.Tests.Types
 {
 	public interface ITestSession : IDisposable
 	{
+        /// <summary>
+        /// The number of instances that had already been created when this session was created
+        /// </summary>
 		int InitialInstanceCount { get; }
+        /// <summary>
+        /// The number of instances created in this session
+        /// </summary>
+        int InstanceCount { get; }
 	}
 
 	public interface IInstanceCountingType
@@ -32,7 +39,12 @@ namespace Rezolver.Tests.Types
 			/// <summary>
 			/// The <see cref="InitialInstanceCount"/> as it was then this session was constructed
 			/// </summary>
-			public int InitialInstanceCount { get; private set; }
+			public int InitialInstanceCount { get; }
+            /// <summary>
+            /// The number of instances produced in this session
+            /// </summary>
+            public int InstanceCount => _instanceCount - InitialInstanceCount;
+
 			public TestSession(object locker)
 			{
 				_locker = locker;
@@ -40,10 +52,7 @@ namespace Rezolver.Tests.Types
 				InitialInstanceCount = _instanceCount;
 			}
 
-			public void Dispose()
-			{
-				Monitor.Exit(_locker);
-			}
+			public void Dispose() => Monitor.Exit(_locker);
 		}
 
 
@@ -76,9 +85,8 @@ namespace Rezolver.Tests.Types
 			if (!Monitor.IsEntered(_locker))
 				throw new InvalidOperationException("You must start a new disposable session with a call to NewSession");
 
-			ThisInstanceID = ++_instanceCount;
+            ThisInstanceID = ++_instanceCount;
 		}
-
 	}
 
 	/// <summary>
@@ -98,4 +106,9 @@ namespace Rezolver.Tests.Types
 	{
 
 	}
+
+    public sealed class InstanceCountingType2 : InstanceCountingTypeBase<InstanceCountingType2>
+    {
+
+    }
 }

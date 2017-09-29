@@ -190,10 +190,8 @@ namespace Rezolver
         /// for the type <paramref name="type"/>.
         /// </summary>
         /// <param name="type">The type whose constructor is to be bound by the target.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
         /// is created; otherwise a <see cref="ConstructorTarget"/> is created.</remarks>
         public static ITarget ForType(
@@ -211,10 +209,8 @@ namespace Rezolver
         /// <param name="namedArgs">Optional.  A dictionary of targets that are to be bound to the type's
         /// constructor by name and type.  If <paramref name="type"/> is a generic type definition, then
         /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
         /// is created; otherwise a <see cref="ConstructorTarget"/> is created.</remarks>
         public static ITarget ForType(
@@ -244,10 +240,8 @@ namespace Rezolver
         /// for the type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type whose constructor is to be bound by the target.</typeparam>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
         /// is created; otherwise a <see cref="ConstructorTarget"/> is created.</remarks>
         public static ITarget ForType<T>(IMemberBindingBehaviour memberBinding = null)
@@ -265,10 +259,8 @@ namespace Rezolver
         /// 
         /// If <typeparamref name="T"/> is a generic type definition, then
         /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget" />
         /// is created; otherwise a <see cref="ConstructorTarget" /> is created.</remarks>
         public static ITarget ForType<T>(
@@ -289,10 +281,8 @@ namespace Rezolver
         /// 
         /// If <paramref name="type"/> is a generic type definition, then
         /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
         /// is created; otherwise a <see cref="ConstructorTarget"/> is created.
         /// </remarks>
@@ -319,10 +309,8 @@ namespace Rezolver
         /// 
         /// If <typeparamref name="T"/> is a generic type definition, then
         /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
         /// is created; otherwise a <see cref="ConstructorTarget"/> is created.
         /// </remarks>
@@ -341,10 +329,8 @@ namespace Rezolver
         /// Creates a <see cref="ConstructorTarget"/> for the given constructor.
         /// </summary>
         /// <param name="constructor">Required.  The constructor to be bound by the target.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         public static ITarget ForConstructor(
             ConstructorInfo constructor,
             IMemberBindingBehaviour memberBinding = null)
@@ -358,10 +344,8 @@ namespace Rezolver
         /// <param name="constructor">Required.  The constructor to be bound by the target.</param>
         /// <param name="parameterBindings">Can be null/empty.  An array of <see cref="ParameterBinding"/> 
         /// objects containing targets to be bound to somme or all of the constructor parameters.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         public static ITarget ForConstructor(
             ConstructorInfo constructor,
             ParameterBinding[] parameterBindings,
@@ -379,10 +363,8 @@ namespace Rezolver
         /// <param name="constructor">Required.  The constructor to be bound by the target.</param>
         /// <param name="namedArgs">Can be null.  A dictionary of targets that are to be bound to the
         /// constructor by name and <see cref="ITarget.DeclaredType"/>.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         public static ITarget ForConstructor(
             ConstructorInfo constructor,
             IDictionary<string, ITarget> namedArgs,
@@ -401,10 +383,8 @@ namespace Rezolver
         /// <param name="namedArgs">Optional.  An object whose publicly readable members which are of the 
         /// type <see cref="ITarget"/> (or a type which implements it) are to be bound to the constructor 
         /// by name and <see cref="ITarget.DeclaredType"/>.</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
-        /// If not provided, then the default behaviour for the <see cref="IContainer"/> that resolves the object will be used - which
-        /// is configured via <see cref="GlobalBehaviours.ContainerBehaviour"/> (which, by default, is set to 
-        /// <see cref="MemberBindingBehaviour.BindNone"/>).</param>
+        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
+        /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         public static ITarget ForConstructor(
             ConstructorInfo constructor,
             object namedArgs,

@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class InjectEnumerables
+   | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class InjectEnumerables
+   | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  	<script>
+  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  	
+  	  ga('create', 'UA-92764222-1', 'auto');
+  	  ga('send', 'pageview');
+  	
+  	</script></head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Rezolver.Configuration.InjectEnumerables">
+  
+  
+  <h1 id="Rezolver_Configuration_InjectEnumerables" data-uid="Rezolver.Configuration.InjectEnumerables" class="text-break">Class InjectEnumerables
+  </h1>
+  <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which enables automatic handling of fetching
+targets for <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> based on all the targets registered for a given <code>T</code>
+in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>&gt;</div>
+    <div class="level2"><span class="xref">InjectEnumerables</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">OptionDependentConfig&lt;EnableEnumerableInjection&gt;.Dependencies</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Configuration.html">Rezolver.Configuration</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Configuration_InjectEnumerables_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class InjectEnumerables : OptionDependentConfig&lt;EnableEnumerableInjection&gt;, ITargetContainerConfig, IDependant</code></pre>
+  </div>
+  <h5 id="Rezolver_Configuration_InjectEnumerables_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This behaviour is added to the default configuration for all <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>-derived
+objects via the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>.</p>
+<p>To disable it, you can either remove it from that configuration object (which then disables it for all)
+or you can add an option configuration to it (via 
+<a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a> 
+or similar) for the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option, setting it to <code>false</code>.</p>
+<p>If this behaviour is not attached to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, or is disabled via the 
+<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option, then only explicitly
+registered enumerables will be able to be resolved by any <a class="xref" href="Rezolver.IContainer.html">IContainer</a> built from that 
+target container.</p>
+<h4 id="lazy-vs-eager-evaluation">Lazy vs Eager evaluation</h4>
+<p>The enumerables created by Rezolver can be lazy or eager.  Lazy enumerables create instances as you 
+enumerate them, and will create a unique set of instances <em>each time</em> they are enumerated (assuming
+no Singleton or Scoped lifetimes are in play).  Eager enumerables create all their instances up-front,
+and remain constant for the life of that enumerable.</p>
+<p>The <a class="xref" href="Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a> option (default <code>true</code>) is used to control this behaviour,
+and can be applied on a per-enumerable-type basis to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>E.g. you can set the option to <code>false</code> for
+<code>IEnumerable&lt;Foo&gt;</code> - thus ensuring that all enumerables of <code>Foo</code> are eager, but leave
+it at its default of <code>true</code> for all other enumerable types.</p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L46">View Source</a>
+  </span>
+  <a id="Rezolver_Configuration_InjectEnumerables_Instance_" data-uid="Rezolver.Configuration.InjectEnumerables.Instance*"></a>
+  <h4 id="Rezolver_Configuration_InjectEnumerables_Instance" data-uid="Rezolver.Configuration.InjectEnumerables.Instance">Instance</h4>
+  <div class="markdown level1 summary"><p>The one and only instance of the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static InjectEnumerables Instance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L64">View Source</a>
+  </span>
+  <a id="Rezolver_Configuration_InjectEnumerables_Configure_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure*"></a>
+  <h4 id="Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_ITargetContainer_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.ITargetContainer)">Configure(ITargetContainer)</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_ITargetContainer_">Configure(ITargetContainer)</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Configure(ITargetContainer targets)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableEnumerableInjection&gt;.Configure(Rezolver.ITargetContainer)</span></div>
+  <h5 id="Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_ITargetContainer__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This implementation registers a special target container (via <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>)
+for <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> in passed <code data-dev-comment-type="paramref" class="paramref">targets</code>
+if the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option evaluates to <code>true</code> when read from <code data-dev-comment-type="paramref" class="paramref">targets</code>.</p>
+<p>This is the default value for that option anyway, so, as the remarks section on the class states, all that&apos;s required to enable
+the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_GetDependencies__2___0_System_Collections_Generic_IEnumerable___1__">DependantExtensions.GetDependencies&lt;T, TDependency&gt;(T, IEnumerable&lt;TDependency&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_CreateTypeDependency__1_Rezolver_Sdk_IDependant_System_Boolean_">DependantExtensions.CreateTypeDependency&lt;TDependency&gt;(IDependant, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_CreateObjectDependency__1_Rezolver_Sdk_IDependant___0_System_Boolean_">DependantExtensions.CreateObjectDependency&lt;TDependency&gt;(IDependant, TDependency, Boolean)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Configuration/InjectEnumerables.cs/#L41" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

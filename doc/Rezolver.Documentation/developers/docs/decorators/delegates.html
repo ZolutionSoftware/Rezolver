@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Decorating with delegates | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Decorating with delegates | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  	<script>
+  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  	
+  	  ga('create', 'UA-92764222-1', 'auto');
+  	  ga('send', 'pageview');
+  	
+  	</script></head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="decorating-with-delegates">Decorating with delegates</h1>
+
+<p>If you&#39;ve read about Rezolver&#39;s support for the <a href="../decorators.html">decorator pattern</a> (including
+<a href="collections.html">collection decoration</a>) then you&#39;ll know that
+you have most of the functionality you could ever need to implement the decorator design pattern.</p>
+<p>There are some types, however, whose registrations cannot be decorated by a constructor-injected instance - 
+in particular:</p>
+<ul>
+<li>Value types (since you cannot inherit from them)</li>
+<li>Arrays</li>
+<li>Delegate types</li>
+</ul>
+<p>Plus, there are some types - e.g. <code>IEnumerable&lt;T&gt;</code> - where a more natural method of decoration is method-based
+instead of class-based.</p>
+<p>For this, Rezolver provides the ability to register delegates that decorate a specific concrete (i.e. 
+<em>non</em>-generic) type.  The delegate will be executed, passing the undecorated result as an argument, and 
+its return value used in place of the original result.</p>
+<h1 id="decorating-an-int">Decorating an <code>int</code></h1>
+<p>Our first example simply shows how decorate all <code>int</code> objects produced by the container so that they are 
+doubled.  It&#39;s not a particularly real-world example - but it&#39;s a simple way to show how this works.</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
+container.RegisterDecorator((int i) =&gt; i * 2);
+container.RegisterObject(10);
+
+Assert.Equal(20, container.Resolve&lt;int&gt;());
+</code></pre><div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="../../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> is overloaded for the delegate types 
+<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func&lt;T, TResult&gt;</a> and <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a> - the second of which allows any delegate to be registered as a 
+decorator, subject to parameter and return type checks.</p>
+<hr>
+<p>Additional generic overloads will be added in the future to simplify the registration of delegates of any
+arity, e.g. <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534303(v=vs.110).aspx">Func&lt;T1, T2, T3, T4, TResult&gt;</a>, but for now you just have to create them directly - e.g:</p>
+<p><code>new Func&lt;A, B, C, D&gt;((a, b, c, d) =&gt; a.foo(b, c, d))</code>;</p>
+</div>
+<h2 id="integration-with-ienumerablet">Integration with <code>IEnumerable&lt;T&gt;</code></h2>
+<p><a href="../enumerables.html#decorators-and-enumerables">As shown in the enumerables documentation</a>, enumerables of a 
+given type will honour any and all decorators which are registered for that type when they are created, so if we
+extend the above example and produce an <code>IEnumerable&lt;int&gt;</code> from multiple <code>int</code> registrations, then each one
+will be doubled in the enumerable that&#39;s created:</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
+container.RegisterDecorator((int i) =&gt; i * 2);
+container.RegisterObject(10);
+container.RegisterObject(20);
+container.RegisterObject(30);
+
+Assert.Equal(
+    new[] { 20, 40, 60 },
+    container.ResolveMany&lt;int&gt;());
+</code></pre><h1 id="decorating-a-delegate">Decorating a delegate</h1>
+<p>If you are injecting delegates in your application, then you can stack decorator delegates to implement the 
+chain of responsibility pattern.</p>
+<p>This example implements a number classifier as a single delegate (<code>Action&lt;int&gt;</code>) composed of many others.
+As numbers are passed to the delegate, they are placed into one of four sets.</p>
+<p>One of the decorator delegates accepts both the original delegate <em>and</em> an extra dependency (<code>IPrimeChecker</code>),
+thus showing how decorator delegates support the same argument injection that&#39;s supported by Rezolver&#39;s standard
+<a href="../delegates.html">delegate registrations</a>. Here&#39;s the code for <code>IPrimeChecker</code> and a basic implementation:</p>
+<pre><code class="lang-csharp" name="IPrimeChecker.cs">public interface IPrimeChecker
+{
+    bool IsPrime(int i);
+}
+
+public class PrimesUnder20Checker : IPrimeChecker
+{
+    static readonly HashSet&lt;int&gt; PrimesUnderTwenty =
+        new HashSet&lt;int&gt;(new[]
+        {
+            2, 3, 5, 7, 11, 13, 17, 19
+        });
+
+    public bool IsPrime(int i)
+    {
+        if (i == 0 || i == 1)
+            return false;
+        else if (i &gt; 1 &amp;&amp; i &lt; 20)
+            return PrimesUnderTwenty.Contains(i);
+        else
+            throw new ArgumentOutOfRangeException(nameof(i));
+    }
+}
+</code></pre><p>And here&#39;s the test:</p>
+<pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
+
+// create some &#39;bags&#39; into which we&#39;ll sort some numbers
+HashSet&lt;int&gt; productsOf5 = new HashSet&lt;int&gt;();  // numbers with 5 as a factor will go in here
+HashSet&lt;int&gt; primeNumbers = new HashSet&lt;int&gt;(); // prime numbers will go in here
+HashSet&lt;int&gt; evenNumbers = new HashSet&lt;int&gt;();  // even numbers go in here
+HashSet&lt;int&gt; otherNumbers = new HashSet&lt;int&gt;(); // any other numbers go in here
+
+// base delegate simply adds the number it gets to the &#39;otherNumbers&#39; bag
+container.RegisterObject&lt;Action&lt;int&gt;&gt;(i =&gt; otherNumbers.Add(i));
+
+// now decorate with our even-number detector
+container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(next =&gt;
+    i =&gt;
+    {
+        if (i != 0 &amp;&amp; (i % 2) == 0)
+            evenNumbers.Add(i);
+        else
+            next(i);
+    });
+
+// prime number detector (demonstrates other delegate types as decorators)
+container.RegisterType&lt;PrimesUnder20Checker, IPrimeChecker&gt;();
+container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(
+    new Func&lt;Action&lt;int&gt;, IPrimeChecker, Action&lt;int&gt;&gt;(
+        (next, primeChecker) =&gt;
+            i =&gt;
+            {
+                if (primeChecker.IsPrime(i))
+                    primeNumbers.Add(i);
+                else
+                    next(i);
+            }));
+
+// and finally our numbers with 5 as a factor (includes 5)
+// basically identical to the even numbers detector above
+container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(next =&gt;
+    i =&gt;
+    {
+        if (i != 0 &amp;&amp; (i % 5) == 0)
+            productsOf5.Add(i);
+        else
+            next(i);
+    });
+
+var sort = container.Resolve&lt;Action&lt;int&gt;&gt;();
+
+foreach (var number in Enumerable.Range(0, 20))
+{
+    sort(number);
+}
+
+// check the results
+Assert.Equal(
+    new[] { 5, 10, 15 },
+    productsOf5.OrderBy(i =&gt; i));
+
+Assert.Equal(
+    new[] { 2, 3, 7, 11, 13, 17, 19 },
+    primeNumbers.OrderBy(i =&gt; i));
+
+Assert.Equal(
+    new[] { 4, 6, 8, 12, 14, 16, 18 },
+    evenNumbers.OrderBy(i =&gt; i));
+
+Assert.Equal(
+    new[] { 0, 1, 9 },
+    otherNumbers.OrderBy(i =&gt; i));
+</code></pre><div class="NOTE"><h5>Note</h5><p>Unfortunately, although decorator classes support generic types, Rezolver cannot currently bind to generic 
+methods - as there&#39;s no &#39;nice&#39; way to pass an open generic method around.  We&#39;re looking into it, though - and
+in the meantime it&#39;s possible to add support in yourself by extending Rezolver, if you like...<span class="emoji" shortcode="wink">😉</span></p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/decorators/delegates.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

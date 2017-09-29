@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Rezolver
@@ -21,8 +22,123 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeExtensions
 	{
+        internal static IEnumerable<Type> GetAllBases(this Type type)
+        {
+            var baseType = TypeHelpers.BaseType(type);
+            while (baseType != null)
+            {
+                yield return baseType;
+                baseType = TypeHelpers.BaseType(baseType);
+            }
+        }
 
-		internal static bool CanBeNull(this Type type)
+        private static Type MakeVectorType(Type elementType, int ignored)
+        {
+            return TypeHelpers.MakeArrayType(elementType);
+        }
+
+        private static Type MakeArrayType(Type elementType, int rank)
+        {
+            return TypeHelpers.MakeArrayType(elementType, rank);
+        }
+
+        /// <summary>
+        /// Note - no verification.  if the type is not an array type, then bad
+        /// things happen.  This method automatically handles a vector/multi-dim
+        /// array type mismatch between vectors (0-based 1 dimensional array) and
+        /// rank 1 multidimensional arrays as described here in this SO: 
+        /// https://stackoverflow.com/q/45693868 
+        /// (answered by GOAT Skeet of course).
+        /// 
+        /// Note that the function only returns down to object[]: Array and Object
+        /// are excluded.
+        /// </summary>
+        /// <param name="arrayType"></param>
+        /// <returns></returns>
+        internal static IEnumerable<Type> GetBaseArrayTypes(this Type arrayType)
+        {
+            var elemType = TypeHelpers.GetElementType(arrayType);
+            if (elemType == typeof(object)) return Enumerable.Empty<Type>();
+            var rank = TypeHelpers.GetArrayRank(arrayType);
+            Func<Type, int, Type> typeFac = rank == 1 ? (Func<Type, int, Type>)MakeVectorType : MakeArrayType;
+            List<Type> toReturn = new List<Type>();
+            while(elemType != typeof(object))
+            {
+                elemType = TypeHelpers.BaseType(elemType);
+                toReturn.Add(typeFac(elemType, rank));
+            }
+            return toReturn;
+        }
+
+        internal static IEnumerable<Type> GetInterfaceArrayTypes(this Type interfaceArrayType)
+        {
+            var elemType = TypeHelpers.GetElementType(interfaceArrayType);
+            var rank = TypeHelpers.GetArrayRank(interfaceArrayType);
+            Func<Type, int, Type> typeFac = rank == 1 ? (Func<Type, int, Type>)MakeVectorType : MakeArrayType;
+            List<Type> toReturn = new List<Type>();
+            foreach(var iFaceType in TypeHelpers.GetInterfaces(elemType))
+            {
+                toReturn.Add(typeFac(iFaceType, rank));
+            }
+            return toReturn;
+        }
+
+        internal static bool IsContravariantTypeParameter(this Type type)
+        {
+            return type.IsGenericParameter &&
+                (TypeHelpers.GetGenericParameterAttributes(type) & GenericParameterAttributes.Contravariant)
+                == GenericParameterAttributes.Contravariant;
+        }
+
+        internal static bool IsCovariantTypeParameter(this Type type)
+        {
+            return type.IsGenericParameter &&
+                (TypeHelpers.GetGenericParameterAttributes(type) & GenericParameterAttributes.Covariant)
+                == GenericParameterAttributes.Covariant;
+        }
+
+        internal static bool IsVariantTypeParameter(this Type type)
+        {
+            switch (TypeHelpers.GetGenericParameterAttributes(type)
+                       & GenericParameterAttributes.VarianceMask)
+            {
+                case GenericParameterAttributes.Contravariant:
+                case GenericParameterAttributes.Covariant:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        internal static string CSharpLikeTypeName(this Type type)
+        {
+            StringBuilder sb = new StringBuilder();
+            CSharpLikeTypeName(type, sb);
+            return sb.ToString();
+        }
+
+        internal static void CSharpLikeTypeName(this Type t, StringBuilder sb)
+        {
+            if (sb == null) sb = new StringBuilder();
+            sb.Append(t.Name);
+            if (TypeHelpers.IsGenericType(t))
+            {
+                sb.Append("<");
+                bool moreThanOne = false;
+                foreach (var tP in TypeHelpers.GetGenericArguments(t))
+                {
+                    if (moreThanOne)
+                        sb.Append(", ");
+
+                    CSharpLikeTypeName(tP, sb);
+
+                    moreThanOne = true;
+                }
+                sb.Append(">");
+            }
+        }
+
+        internal static bool CanBeNull(this Type type)
 		{
 			return !TypeHelpers.IsValueType(type) || IsNullableType(type);
 		}
@@ -104,17 +220,6 @@ namespace Rezolver
 
 			elementType = TypeHelpers.GetGenericArguments(type)[0];
 			return true;
-		}
-
-		internal static IEnumerable<Type> GetAllBases(this Type t)
-		{
-			t.MustNotBeNull("t");
-			var baseType = TypeHelpers.BaseType(t);
-			while (baseType != null)
-			{
-				yield return baseType;
-				baseType = TypeHelpers.BaseType(baseType);
-			}
 		}
 	}
 

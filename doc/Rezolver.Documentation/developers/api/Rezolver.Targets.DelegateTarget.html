@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class DelegateTarget
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,259 +108,259 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              
-              <h1 id="Rezolver_Targets_DelegateTarget" data-uid="Rezolver.Targets.DelegateTarget">Class DelegateTarget
-              </h1>
-              <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which resolve objects by executing a delegate with argument injection.</p>
+            <article class="content wrap" id="_content" data-uid="Rezolver.Targets.DelegateTarget">
+  
+  
+  <h1 id="Rezolver_Targets_DelegateTarget" data-uid="Rezolver.Targets.DelegateTarget" class="text-break">Class DelegateTarget
+  </h1>
+  <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which resolve objects by executing a delegate with argument injection.</p>
 </div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="inheritance">
-                <h5>Inheritance</h5>
-                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-                  <div class="level1"><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></div>
-                  <div class="level2"><span class="xref">DelegateTarget</span></div>
-              </div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_UseFallback">TargetBase.UseFallback</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
-                </div>
-                <div>
-                  <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
-                </div>
-              </div>
-              <h6><strong>Namespace</strong>:Rezolver.Targets</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_Targets_DelegateTarget_syntax">Syntax</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class DelegateTarget : TargetBase, ITarget</code></pre>
-              </div>
-              <h5 id="Rezolver_Targets_DelegateTarget_remarks"><strong>Remarks</strong></h5>
-              <div class="markdown level0 remarks"><p>The delegate must be non-void and can have any number of parameters.</p>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></div>
+    <div class="level2"><span class="xref">DelegateTarget</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_UseFallback">TargetBase.UseFallback</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ToString">TargetBase.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Targets_DelegateTarget_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DelegateTarget : TargetBase, ITarget</code></pre>
+  </div>
+  <h5 id="Rezolver_Targets_DelegateTarget_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The delegate must be non-void and can have any number of parameters.</p>
 <p>A compiler must ensure that any parameters for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_Factory">Factory</a> are automatically 
 resolved from the container, and that a parameter of the type <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> 
 will receive the context passed to the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a>
 method call for which this target is being compiled and/or executed.</p>
 </div>
-              <h3 id="constructors">Constructors
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DelegateTarget__ctor_System_Delegate_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.%23ctor(System.Delegate%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DelegateTarget.cs/#L65">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_DelegateTarget__ctor_" data-uid="Rezolver.Targets.DelegateTarget.#ctor*"></a>
-              <h4 id="Rezolver_Targets_DelegateTarget__ctor_System_Delegate_System_Type_" data-uid="Rezolver.Targets.DelegateTarget.#ctor(System.Delegate,System.Type)">DelegateTarget(Delegate, Type)</h4>
-              <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class.</p>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_DelegateTarget__ctor_System_Delegate_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.%23ctor(System.Delegate%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/DelegateTarget.cs/#L65">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_DelegateTarget__ctor_" data-uid="Rezolver.Targets.DelegateTarget.#ctor*"></a>
+  <h4 id="Rezolver_Targets_DelegateTarget__ctor_System_Delegate_System_Type_" data-uid="Rezolver.Targets.DelegateTarget.#ctor(System.Delegate,System.Type)">DelegateTarget(Delegate, Type)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public DelegateTarget(Delegate factory, Type declaredType = null)</code></pre>
-              </div>
-              <h5 class="parameters">Parameters</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
-                    <td><span class="parametername">factory</span></td>
-                    <td><p>Required - the factory delegate.  Must have a return type and can take
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DelegateTarget(Delegate factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required - the factory delegate.  Must have a return type and can take
 0 or more parameters.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><span class="parametername">declaredType</span></td>
-                    <td><p>Optional - type that will be set into the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_DeclaredType">DeclaredType</a> for the target;
-if not provided, then it will be derived from the <span class="paramref">factory</span>&#39;s return type</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional - type that will be set into the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_DeclaredType">DeclaredType</a> for the target;
+if not provided, then it will be derived from the <code data-dev-comment-type="paramref" class="paramref">factory</code>&apos;s return type</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="exceptions">Exceptions</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Condition</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
-                    <td><p>If the <span class="paramref">factory</span> represents a void delegate or if
-<span class="paramref">declaredType</span> is passed but the type is not compatible with the return type of
-<span class="paramref">factory</span>.</p>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
+        <td><p>If the <code data-dev-comment-type="paramref" class="paramref">factory</code> represents a void delegate or if
+<code data-dev-comment-type="paramref" class="paramref">declaredType</code> is passed but the type is not compatible with the return type of
+<code data-dev-comment-type="paramref" class="paramref">factory</code>.</p>
 </td>
-                  </tr>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
-                    <td><p>If <span class="paramref">factory</span> is null</p>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
+        <td><p>If <code data-dev-comment-type="paramref" class="paramref">factory</code> is null</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <h3 id="properties">Properties
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DelegateTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DelegateTarget.cs/#L46">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_DelegateTarget_DeclaredType_" data-uid="Rezolver.Targets.DelegateTarget.DeclaredType*"></a>
-              <h4 id="Rezolver_Targets_DelegateTarget_DeclaredType" data-uid="Rezolver.Targets.DelegateTarget.DeclaredType">DeclaredType</h4>
-              <div class="markdown level1 summary"><p>Gets the declared type of object that is constructed by this target, either set on 
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_DelegateTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/DelegateTarget.cs/#L46">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_DelegateTarget_DeclaredType_" data-uid="Rezolver.Targets.DelegateTarget.DeclaredType*"></a>
+  <h4 id="Rezolver_Targets_DelegateTarget_DeclaredType" data-uid="Rezolver.Targets.DelegateTarget.DeclaredType">DeclaredType</h4>
+  <div class="markdown level1 summary"><p>Gets the declared type of object that is constructed by this target, either set on 
 construction or derived from the return type of the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_Factory">Factory</a></p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 class="overrides">Overrides</h5>
-              <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DelegateTarget_Factory.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.Factory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DelegateTarget.cs/#L29">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_DelegateTarget_Factory_" data-uid="Rezolver.Targets.DelegateTarget.Factory*"></a>
-              <h4 id="Rezolver_Targets_DelegateTarget_Factory" data-uid="Rezolver.Targets.DelegateTarget.Factory">Factory</h4>
-              <div class="markdown level1 summary"><p>Gets the factory delegate that will be invoked when this target is compiled and executed</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_DelegateTarget_Factory.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.Factory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/DelegateTarget.cs/#L29">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_DelegateTarget_Factory_" data-uid="Rezolver.Targets.DelegateTarget.Factory*"></a>
+  <h4 id="Rezolver_Targets_DelegateTarget_Factory" data-uid="Rezolver.Targets.DelegateTarget.Factory">Factory</h4>
+  <div class="markdown level1 summary"><p>Gets the factory delegate that will be invoked when this target is compiled and executed</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Delegate Factory { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
-                    <td><p>The factory.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Delegate Factory { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
+        <td><p>The factory.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DelegateTarget_FactoryMethod.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.FactoryMethod%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DelegateTarget.cs/#L38">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_DelegateTarget_FactoryMethod_" data-uid="Rezolver.Targets.DelegateTarget.FactoryMethod*"></a>
-              <h4 id="Rezolver_Targets_DelegateTarget_FactoryMethod" data-uid="Rezolver.Targets.DelegateTarget.FactoryMethod">FactoryMethod</h4>
-              <div class="markdown level1 summary"><p>Gets the MethodInfo for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_Factory">Factory</a> delegate.</p>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_DelegateTarget_FactoryMethod.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget.FactoryMethod%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/DelegateTarget.cs/#L38">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_DelegateTarget_FactoryMethod_" data-uid="Rezolver.Targets.DelegateTarget.FactoryMethod*"></a>
+  <h4 id="Rezolver_Targets_DelegateTarget_FactoryMethod" data-uid="Rezolver.Targets.DelegateTarget.FactoryMethod">FactoryMethod</h4>
+  <div class="markdown level1 summary"><p>Gets the MethodInfo for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_Factory">Factory</a> delegate.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public MethodInfo FactoryMethod { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h5 id="Rezolver_Targets_DelegateTarget_FactoryMethod_remarks">Remarks</h5>
-              <div class="markdown level1 remarks"><p>Whilst this can be easily obtained from the delegate yourself (by using the 
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MethodInfo FactoryMethod { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Targets_DelegateTarget_FactoryMethod_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Whilst this can be easily obtained from the delegate yourself (by using the 
 <a class="xref" href="https://msdn.microsoft.com/en-us/library/hh875135(v=vs.110).aspx">GetMethodInfo(Delegate)</a> extension method) however, this 
 class also uses it to determine the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_DeclaredType">DeclaredType</a> of the target or whether the delegate 
 is actually compatible with the one supplied on construction, therefore if you need to introspect 
 the delegate, you might as well use this.</p>
 </div>
-              <h3 id="extensionmethods">Extension Methods</h3>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Unscoped_Rezolver_ITarget_">Target.Unscoped(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_">Target.As(ITarget, Type)</a>
-              </div>
-              <div>
-                  <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
-              </div>
-                        </article>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Unscoped_Rezolver_ITarget_">Target.Unscoped(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_">Target.As(ITarget, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
+  </div>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -368,10 +368,10 @@ the delegate, you might as well use this.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DelegateTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_DelegateTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DelegateTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DelegateTarget.cs/#L23" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/DelegateTarget.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

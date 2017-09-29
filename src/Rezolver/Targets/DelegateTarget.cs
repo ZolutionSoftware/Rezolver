@@ -65,18 +65,18 @@ namespace Rezolver.Targets
         public DelegateTarget(Delegate factory, Type declaredType = null)
 		{
 			factory.MustNotBeNull(nameof(factory));
-			FactoryMethod = factory.GetMethodInfo();
-			FactoryMethod.MustNot(m => FactoryMethod.ReturnType == null || FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
-			FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
+            FactoryMethod = factory.GetMethodInfo();
+            FactoryMethod.MustNot(m => FactoryMethod.ReturnType == null || FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
+            FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
 
-			if (declaredType != null)
-			{
-				if (!TypeHelpers.AreCompatible(FactoryMethod.ReturnType, declaredType) && !TypeHelpers.AreCompatible(declaredType, FactoryMethod.ReturnType))
-					throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, FactoryMethod.ReturnType), nameof(declaredType));
-			}
+            if (declaredType != null)
+            {
+                if (!TypeHelpers.AreCompatible(FactoryMethod.ReturnType, declaredType) && !TypeHelpers.AreCompatible(declaredType, FactoryMethod.ReturnType))
+                    throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, FactoryMethod.ReturnType), nameof(declaredType));
+            }
 
-			_declaredType = declaredType;
-			Factory = factory;
+            _declaredType = declaredType;
+            Factory = factory;
 		}
 	}
 }

@@ -8,7 +8,7 @@
   	<title>Decorators | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Decorators | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -107,10 +107,14 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="decorators">Decorators</h1>
-              
+<h1 id="decorators">Decorators</h1>
+
 <p>The <a href="https://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> is a key part of many software projects, 
 and Rezolver offers first-class support for implementing it either non-generically, or generically.</p>
+<div class="NOTE"><h5>Note</h5><p>If you&#39;re looking for how to register and use decorator delegates - there is a 
+<a href="decorators/delegates.html">separate topic in this section</a>
+dedicated to those.</p>
+</div>
 <h2 id="registering-decorators-in-rezolver">Registering decorators in Rezolver</h2>
 <p>Registration of Decorators in Rezolver is done through the overloaded extension method 
 <a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a>.  There is a generic and non-generic version
@@ -200,7 +204,8 @@ container.RegisterMultiple(serviceTargets, typeof(IMyService));
 var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;();
 
 Assert.All(serviceTypes.Zip(result, (t, s) =&gt; (type: t, service: s)),
-    ts =&gt; {
+    ts =&gt;
+    {
         var decorator = Assert.IsType&lt;MyServiceDecorator1&gt;(ts.service);
         var innerDecorator = Assert.IsType&lt;MyServiceDecorator2&gt;(decorator.Inner);
         Assert.IsType(ts.type, innerDecorator.Inner);
@@ -296,8 +301,12 @@ var reredecorated = Assert.IsType&lt;UsesAnyServiceDecorator2&lt;MyService2&gt;&
 
 var redecorated = Assert.IsType&lt;UsesMyService2Decorator&gt;(reredecorated.Inner);
 var decorated = Assert.IsType&lt;UsesAnyServiceDecorator&lt;MyService2&gt;&gt;(redecorated.Inner);
-</code></pre>
-            </article>
+</code></pre><hr>
+<h1 id="next-steps">Next steps</h1>
+<ul>
+<li>Read about Rezolver&#39;s other implementation of decoration - <a href="decorators/delegates.html">decorator delegates</a>.</li>
+</ul>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -305,7 +314,7 @@ var decorated = Assert.IsType&lt;UsesAnyServiceDecorator&lt;MyService2&gt;&gt;(r
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/decorators.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/decorators.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -144,6 +144,10 @@ resolve the instance, we should get an `InvalidOperationException` explaining th
 
 * * *
 
+> [!TIP]
+> This next bit isn't essential knowledge unless you're looking to understand how child container-like functionality is 
+> achieved in Rezolver. If that term means nothing to you, then it's suggested you skip it until you need it :)
+
 ## Why we allow partial matches
 
 As mentioned in the intro to the last example - it's probably not obvious why we would want to allow binding to a constructor in a container
@@ -191,10 +195,6 @@ for `Requires2MyServices`
 
 This solution is similar to the previous one, except this time we're not overriding the container, but overriding the *target container* used 
 by a container.
-
-> [!NOTE]
-> The choice of name 'OverridingTargetContainer' is deliberate, despite the overriding behaviour shown here, because it is more a parent-child
-> relationship than in the previous example.
 
 In order to do this, however, we have to change how we create our container.  Until now, we've simply been creating a new @Rezolver.Container
 instance and registering targets via its own implementation of @Rezolver.ITargetContainer (which, as mentioned elsewhere, wraps its
@@ -248,6 +248,10 @@ Note that the single parameter constructor defaults the `StartDate` to `DateTime
 `DateTime` which is `DateTime.UtcNow.AddDays(1)` to create a date in the future:
 
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example7)]
+
+> [!NOTE]
+> Technically speaking we should really be generating a new `DateTime` at the point at which the object is actually created,
+> that could easily be achieved by replacing `Target.ForObject` with a call to `Target.ForDelegate` (see ['Factory Delegates'](../delegates.md))
 
 What happens is that the named arguments contribute to the argument binding process - thus allowing us to 'cheat' and promote a constructor to being
 a better match than the one that would normally be.

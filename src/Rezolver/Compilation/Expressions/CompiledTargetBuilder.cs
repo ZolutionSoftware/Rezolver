@@ -29,8 +29,8 @@ namespace Rezolver.Compilation.Expressions
         {
             return Expression.Call(
                     Expression.Constant(target),
-                    ICompiledTarget_GetObject_Method,
-                    CallResolveContext_New(context.ResolveContextParameterExpression,
+                    Methods.ICompiledTarget_GetObject_Method,
+                    Methods.CallResolveContext_New(context.ResolveContextParameterExpression,
                         Expression.Constant(context.TargetType))
                 );
 

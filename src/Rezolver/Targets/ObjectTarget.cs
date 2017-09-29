@@ -12,7 +12,7 @@ namespace Rezolver.Targets
 	/// <summary>
 	/// Implements <see cref="ITarget"/> by wrapping a single instance that's already been constructed by application code.
 	/// </summary>
-	public class ObjectTarget : TargetBase, ICompiledTarget
+	public class ObjectTarget : TargetBase, ICompiledTarget, IDirectTarget
 	{
         
         /// <summary>
@@ -85,6 +85,8 @@ namespace Rezolver.Targets
 				return context.Scope.GetRootScope().Resolve(context, r => Value, ScopeBehaviour);
 			}
 		}
+
+        object IDirectTarget.GetValue() => Value;
 
         ITarget ICompiledTarget.SourceTarget => this;
 	}

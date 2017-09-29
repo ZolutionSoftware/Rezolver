@@ -1,4 +1,4 @@
-﻿# Generic Constructor Injection
+﻿# Open Generic Constructor Injection
 
 > [!TIP]
 > Before reading this you should read through the section on [constructor injection](index.md)
@@ -184,8 +184,8 @@ The same techniques that are shown in our [member injection documentation](membe
 @Rezolver.IMemberBindingBehaviour to the @Rezolver.Targets.GenericConstructorTarget when it is created (either by the constructors or the 
 aforementioned factory methods), then that behaviour will be used when the constructor is bound.
 
-Equally, container-specific <xref:Rezolver.IMemberBindingBehaviour>s injected via <xref:Rezolver.IContainerBehaviour>s will
-also be used as normal.
+Equally, container-specific <xref:Rezolver.IMemberBindingBehaviour>s that are set through the options API will 
+also be used automatically.
 
 Refer to the topic for detailed examples on how to use member binding.
 

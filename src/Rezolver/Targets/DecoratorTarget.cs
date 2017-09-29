@@ -9,10 +9,21 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Targets
 {
+    /// <summary>
+    /// Delegate type that is passed to the <see cref="DecoratorTarget"/> on construction to obtain
+    /// a reference to an <see cref="ITarget"/> which, when compiled and executed, will produce an instance
+    /// of the decorator object.
+    /// </summary>
+    /// <param name="decoratedTarget">The target whose result is to be decorated</param>
+    /// <param name="decoratedType">The type being decorated.</param>
+    /// <returns>An <see cref="ITarget"/> which, when compiled and executed correctly, will produce an instance of
+    /// the decorator, with the instance produced by the <paramref name="decoratedTarget" /> as the decorated object
+    /// inside of it.</returns>
+    internal delegate ITarget DecoratingTargetFactory(ITarget decoratedTarget, Type decoratedType);
+
 	/// <summary>
 	/// Represents the action of implementing a common <see cref="DecoratedType"/> by decorating one instance 
-	/// (produced by <see cref="DecoratedTarget"/>) with another (<see cref="InnerTarget"/>, which will create an 
-	/// instance of <see cref="DecoratorType"/>).
+	/// (produced by <see cref="DecoratedTarget"/>) with another (<see cref="InnerTarget"/>).
 	/// 
 	/// NOTE - You shouldn't register or otherwise create instances of this target unless you absolutely 
 	/// know what you're doing.  Rather, decorators should be registered using the extension method
@@ -23,28 +34,14 @@ namespace Rezolver.Targets
 	/// <seealso cref="TargetBase" />
 	public class DecoratorTarget : TargetBase
 	{
-		/// <summary>
-		/// Always returns <see cref="DecoratorType"/>
-		/// </summary>
-		public override Type DeclaredType
-		{
-			get
-			{
-				return DecoratorType;
-			}
-		}
+        /// <summary>
+        /// The type of object returned by the decorator target
+        /// </summary>
+        public override Type DeclaredType => InnerTarget.DeclaredType;
 
 		/// <summary>
-		/// Gets the type which is decorating the instance produced by the 
-		/// <see cref="DecoratedTarget"/> for the common service type <see cref="DecoratedType"/>
+		/// Gets the target which will create an instance of the decorator
 		/// </summary>
-		public Type DecoratorType { get; }
-		/// <summary>
-		/// Gets the target which will create an instance of the <see cref="DecoratorType"/>
-		/// </summary>
-		/// <remarks>The constructor currently auto-initialises this to a just-in-time-bound <see cref="ConstructorTarget"/>
-		/// targetting the <see cref="DecoratorType"/> by using the <see cref="Target.ForType(Type, IMemberBindingBehaviour)"/>
-		/// method.</remarks>
 		public ITarget InnerTarget { get; }
 		/// <summary>
 		/// Gets the target whose instance will be wrapped (decorated) by the one produced by 
@@ -53,40 +50,32 @@ namespace Rezolver.Targets
 		public ITarget DecoratedTarget { get; }
 		/// <summary>
 		/// Gets the underlying type (e.g. a common service interface or base) that is being implemented
-		/// through decoration.
+		/// by decoration.
 		/// </summary>
 		public Type DecoratedType { get; }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Targets.DecoratorTarget"/> type, initialising the <see cref="InnerTarget"/>
-        /// to a just-in-time-bound <see cref="ConstructorTarget"/> for the <paramref name="decoratorType"/>.
+        /// Constructs a new instance of the <see cref="DecoratorTarget"/> type when the target that create the decorator is already known.
         /// </summary>
-        /// <param name="decoratorType">The type which is decorating the <paramref name="decoratedType"/></param>
-        /// <param name="decoratedTarget">The target which is being decorated</param>
-        /// <param name="decoratedType">The common type which is being decorated - e.g. <c>IService</c> when 
-        /// the <paramref name="decoratedTarget"/> is bound to the type <c>MyService : IService</c> and
-        /// the <paramref name="decoratorType"/> is set to <c>MyServiceDecorator : IService</c>.</param>
-        public DecoratorTarget(Type decoratorType, ITarget decoratedTarget, Type decoratedType)
-		{
-			decoratorType.MustNotBeNull(nameof(decoratorType));
-			decoratedTarget.MustNotBeNull(nameof(decoratedTarget));
-			decoratedType.MustNotBeNull(nameof(decoratedType));
+        /// <param name="decoratorTarget"></param>
+        /// <param name="decoratedTarget"></param>
+        /// <param name="decoratedType"></param>
+        public DecoratorTarget(ITarget decoratorTarget, ITarget decoratedTarget, Type decoratedType)
+        {
+            decoratorTarget.MustNotBeNull(nameof(decoratorTarget));
+            decoratedTarget.MustNotBeNull(nameof(decoratedTarget));
+            decoratedType.MustNotBeNull(nameof(decoratedType));
 
-			if (!decoratedTarget.SupportsType(decoratedType))
-				throw new ArgumentException("The decorated target doesn't support the decorated type", nameof(decoratedType));
+            if (!decoratorTarget.SupportsType(decoratedType))
+                throw new ArgumentException($"The type passed ({decoratedType}) is not compatible with the decoratorTarget {decoratorTarget}", nameof(decoratedType));
 
-			DecoratorType = decoratorType;
-			DecoratedTarget = decoratedTarget;
-			DecoratedType = decoratedType;
-            //TODO: Allow a constructor to be supplied explicitly and potentially with parameter bindings
-            //TODO: Allow other targets to implement this - for example, you could have a delegate/expression 
-            //do it just by injecting the decorated instance as an argument.
-			InnerTarget = Target.ForType(DecoratorType);
+            if(!decoratedTarget.SupportsType(decoratedType))
+                throw new ArgumentException($"The type passed ({decoratedType}) is not compatible with the decoratedTarget {decoratedTarget}", nameof(decoratedType));
 
-			if (!InnerTarget.SupportsType(decoratedType))
-				throw new ArgumentException("The decorator type is not compatible with the decorated type", nameof(decoratedType));
-
-		}
+            DecoratedTarget = decoratedTarget;
+            DecoratedType = decoratedType;
+            InnerTarget = decoratorTarget;
+        }
 
 		/// <summary>
 		/// Overrides <see cref="TargetBase.SupportsType(Type)"/> to forward the call to <see cref="InnerTarget"/>.

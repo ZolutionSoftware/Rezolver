@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D4FCB75-E5DF-4E2D-9A23-BE53FF3B0FB6}"
 	ProjectSection(SolutionItems) = preProject
@@ -79,12 +79,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOCScript", "IOCScript", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.IOCScript.Codegen", "src\IOCScript\Rezolver.IOCScript.Codegen\Rezolver.IOCScript.Codegen.csproj", "{1218A304-E417-4E37-8272-6C60703556EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.IOCScript", "src\IOCScript\Rezolver.IOCScript\Rezolver.IOCScript.csproj", "{B1063100-5EC8-486E-B6D2-53B2509540B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.IOCScript", "src\IOCScript\Rezolver.IOCScript\Rezolver.IOCScript.csproj", "{B1063100-5EC8-486E-B6D2-53B2509540B5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1218A304-E417-4E37-8272-6C60703556EA} = {1218A304-E417-4E37-8272-6C60703556EA}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.IOCScript.Tests", "test\Rezolver.IOCScript.Tests\Rezolver.IOCScript.Tests.csproj", "{3EB2EE85-37BB-408F-8137-48AB235E62C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.IOCScript.Tests", "test\Rezolver.IOCScript.Tests\Rezolver.IOCScript.Tests.csproj", "{3EB2EE85-37BB-408F-8137-48AB235E62C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

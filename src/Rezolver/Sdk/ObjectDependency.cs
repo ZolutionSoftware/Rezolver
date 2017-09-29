@@ -28,7 +28,7 @@ namespace Rezolver.Sdk
             }
 
             if (Required && !found)
-                throw new DependencyException($"Object { Owner } has a required dependency on { Obj } which was not found");
+                throw new DependencyException($"{ Owner } has a required dependency on { Obj } which was not found");
         }
     }
 }

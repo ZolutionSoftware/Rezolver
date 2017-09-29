@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class GenericConstructorTarget.GenericTypeMapping
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,12 +108,12 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              
-              <h1 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping">Class GenericConstructorTarget.GenericTypeMapping
-              </h1>
-              <div class="markdown level0 summary"><p>Result returned from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> function.  Represents various levels of success - 
+            <article class="content wrap" id="_content" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping">
+  
+  
+  <h1 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping" class="text-break">Class GenericConstructorTarget.GenericTypeMapping
+  </h1>
+  <div class="markdown level0 summary"><p>Result returned from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> function.  Represents various levels of success - 
 from a completely incompatible mapping (<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> = <code>false</code>), or a successful mapping from
 an open generic type to a closed generic type which can then be constructed (<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> = <code>true</code>
 and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> = <code>true</code>) or, a successful mapping from an open generic type to another open 
@@ -123,218 +123,218 @@ functions.  Only fully bound mappings are supported by <a class="xref" href="Rez
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> will return <code>true</code> so long as the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> is true.</p>
 <p>The caller, therefore, must ensure it is aware of the difference between open and closed generics.</p>
 </div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="inheritance">
-                <h5>Inheritance</h5>
-                  <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-                  <div class="level1"><span class="xref">GenericConstructorTarget.GenericTypeMapping</span></div>
-              </div>
-              <div class="inheritedMembers">
-                <h5>Inherited Members</h5>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
-                </div>
-                <div>
-                  <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
-                </div>
-              </div>
-              <h6><strong>Namespace</strong>:Rezolver.Targets</h6>
-              <h6><strong>Assembly</strong>:Rezolver.dll</h6>
-              <h5 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_syntax">Syntax</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public class GenericTypeMapping</code></pre>
-              </div>
-              <h3 id="properties">Properties
-              </h3>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_BindErrorMessage.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.BindErrorMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/GenericConstructorTarget.cs/#L70">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_BindErrorMessage_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.BindErrorMessage*"></a>
-              <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_BindErrorMessage" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.BindErrorMessage">BindErrorMessage</h4>
-              <div class="markdown level1 summary"><p>Gets a string describing the reason why the type could not be mapped.  Can be used for exceptions, etc.</p>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level1"><span class="xref">GenericConstructorTarget.GenericTypeMapping</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GenericTypeMapping</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_BindErrorMessage.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.BindErrorMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L70">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_BindErrorMessage_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.BindErrorMessage*"></a>
+  <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_BindErrorMessage" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.BindErrorMessage">BindErrorMessage</h4>
+  <div class="markdown level1 summary"><p>Gets a string describing the reason why the type could not be mapped.  Can be used for exceptions, etc.</p>
 <p>Note that this can be set even if <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> is <code>true</code> - because mappings exist between
-open generic types so that a target&#39;s <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> returns <code>true</code>, but the
-<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> function throws an exception for the same type, since you can&#39;t create
+open generic types so that a target&apos;s <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> returns <code>true</code>, but the
+<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> function throws an exception for the same type, since you can&apos;t create
 an instance of an open generic.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public string BindErrorMessage { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a></td>
-                    <td><p>The binding error message.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BindErrorMessage { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a></td>
+        <td><p>The binding error message.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.IsFullyBound%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/GenericConstructorTarget.cs/#L103">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.IsFullyBound*"></a>
-              <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.IsFullyBound">IsFullyBound</h4>
-              <div class="markdown level1 summary"><p>If true, then the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type">Type</a> is a fully closed generic type that can be constructed (and therefore would
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.IsFullyBound%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L103">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.IsFullyBound*"></a>
+  <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.IsFullyBound">IsFullyBound</h4>
+  <div class="markdown level1 summary"><p>If true, then the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type">Type</a> is a fully closed generic type that can be constructed (and therefore would
 be successfully bound by the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method, which uses the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> 
 method).  If this is <code>false</code> but <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> is <code>true</code>, then while the target is technically
-compatible with the requested type, you can&#39;t create an instance.  The target will, however, be able to mapped to
+compatible with the requested type, you can&apos;t create an instance.  The target will, however, be able to mapped to
 a closed generic type based on the same <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type">Type</a>.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public bool IsFullyBound { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.RequestedType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/GenericConstructorTarget.cs/#L75">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.RequestedType*"></a>
-              <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.RequestedType">RequestedType</h4>
-              <div class="markdown level1 summary"><p>The type requested for mapping.  If this is an open generic, then the best result for this mapping will be
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsFullyBound { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.RequestedType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L75">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.RequestedType*"></a>
+  <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.RequestedType">RequestedType</h4>
+  <div class="markdown level1 summary"><p>The type requested for mapping.  If this is an open generic, then the best result for this mapping will be
 that <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> is <code>true</code> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>false</code>.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Type RequestedType { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Success%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/GenericConstructorTarget.cs/#L94">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Success*"></a>
-              <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Success">Success</h4>
-              <div class="markdown level1 summary"><p>Gets a value indicating whether the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a><br>was successfully mapped to the requested type.  If so, and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>true</code>, then an 
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type RequestedType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Success%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L94">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Success*"></a>
+  <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Success">Success</h4>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a><br>was successfully mapped to the requested type.  If so, and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>true</code>, then an 
 instance of <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type">Type</a> will be compatible with the type that was requested.</p>
-<p>If <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>false</code>, then you can&#39;t create an instance of <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type">Type</a> because it&#39;s
+<p>If <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>false</code>, then you can&apos;t create an instance of <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type">Type</a> because it&apos;s
 an open generic - but you will be able to bind the same target to a closed generic of the same <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type">Type</a>.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public bool Success { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-                    <td><p><code>true</code> if success; otherwise, <code>false</code>.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Success { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><p><code>true</code> if success; otherwise, <code>false</code>.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="small pull-right mobile-hide">
-                <span class="divider">|</span>
-                <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-              </span>
-              <span class="small pull-right mobile-hide">
-                <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/GenericConstructorTarget.cs/#L84">View Source</a>
-              </span>
-              <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Type*"></a>
-              <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Type">Type</h4>
-              <div class="markdown level1 summary"><p>If <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> = <code>true</code>, gets the generic type to be used for the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType">RequestedType</a>.</p>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L84">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type_" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Type*"></a>
+  <h4 id="Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Type" data-uid="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.Type">Type</h4>
+  <div class="markdown level1 summary"><p>If <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_Success">Success</a> = <code>true</code>, gets the generic type to be used for the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_RequestedType">RequestedType</a>.</p>
 <p>Note that this could be either an open or closed generic - the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> offers a quick means
 by which to determine this.  If <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>true</code>, then the mapping will succeed when 
 encountered by the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method.</p>
 </div>
-              <div class="markdown level1 conceptual"></div>
-              <h5 class="decalaration">Declaration</h5>
-              <div class="codewrapper">
-                <pre><code class="lang-csharp hljs">public Type Type { get; }</code></pre>
-              </div>
-              <h5 class="propertyValue">Property Value</h5>
-              <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                  <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-                    <td><p>The type.</p>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type Type { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><p>The type.</p>
 </td>
-                  </tr>
-                </tbody>
-              </table>
-                        </article>
+      </tr>
+    </tbody>
+  </table>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -342,10 +342,10 @@ encountered by the <a class="xref" href="Rezolver.Targets.GenericConstructorTarg
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/dev/apiSpec/new?filename=Rezolver_Targets_GenericConstructorTarget_GenericTypeMapping.md&amp;value=---%0Auid%3A%20Rezolver.Targets.GenericConstructorTarget.GenericTypeMapping%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/GenericConstructorTarget.cs/#L59" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/src/Rezolver/Targets/GenericConstructorTarget.cs/#L59" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

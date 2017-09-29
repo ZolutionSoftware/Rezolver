@@ -8,7 +8,7 @@
   	<title>Constructor Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Constructor Injection | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -107,8 +107,8 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="constructor-injection">Constructor Injection</h1>
-              
+<h1 id="constructor-injection">Constructor Injection</h1>
+
 <p>The most basic, fundamental feature of any IOC container is the ability to create instances of services through a 
 constructor, automatically injecting arguments into that constructor from the services which have been registered in
 the container.</p>
@@ -350,6 +350,9 @@ var exception = Assert.Throws&lt;InvalidOperationException&gt;(
 // couldn&#39;t be resolved
 Assert.Contains(&quot;MyService3&quot;, exception.Message);
 </code></pre><hr>
+<div class="TIP"><h5>Tip</h5><p>This next bit isn&#39;t essential knowledge unless you&#39;re looking to understand how child container-like functionality is 
+achieved in Rezolver. If that term means nothing to you, then it&#39;s suggested you skip it until you need it :)</p>
+</div>
 <h2 id="why-we-allow-partial-matches">Why we allow partial matches</h2>
 <p>As mentioned in the intro to the last example - it&#39;s probably not obvious why we would want to allow binding to a constructor in a container
 which can&#39;t actually fulfil that constructor&#39;s requirements!</p>
@@ -403,9 +406,6 @@ for <code>Requires2MyServices</code></li>
 <h3 id="example---rezolveroverridingtargetcontainer">Example - <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a></h3>
 <p>This solution is similar to the previous one, except this time we&#39;re not overriding the container, but overriding the <em>target container</em> used 
 by a container.</p>
-<div class="NOTE"><h5>Note</h5><p>The choice of name &#39;OverridingTargetContainer&#39; is deliberate, despite the overriding behaviour shown here, because it is more a parent-child
-relationship than in the previous example.</p>
-</div>
 <p>In order to do this, however, we have to change how we create our container.  Until now, we&#39;ve simply been creating a new <a class="xref" href="../../api/Rezolver.Container.html">Container</a>
 instance and registering targets via its own implementation of <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> (which, as mentioned elsewhere, wraps its
 <a class="xref" href="../../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> property).</p>
@@ -487,7 +487,10 @@ var result = container.Resolve&lt;RequiresIMyServiceAndDateTime&gt;();
 
 // if the datetime was used, then StartDate will be in the future
 Assert.True(result.StartDate &gt; DateTime.UtcNow);
-</code></pre><p>What happens is that the named arguments contribute to the argument binding process - thus allowing us to &#39;cheat&#39; and promote a constructor to being
+</code></pre><div class="NOTE"><h5>Note</h5><p>Technically speaking we should really be generating a new <code>DateTime</code> at the point at which the object is actually created,
+that could easily be achieved by replacing <code>Target.ForObject</code> with a call to <code>Target.ForDelegate</code> (see <a href="../delegates.html">&#39;Factory Delegates&#39;</a>)</p>
+</div>
+<p>What happens is that the named arguments contribute to the argument binding process - thus allowing us to &#39;cheat&#39; and promote a constructor to being
 a better match than the one that would normally be.</p>
 <div class="WARNING"><h5>Warning</h5><p>Obviously - named argument binding is potentially very brittle - as if the parameter name changes, then the binding will no longer work.</p>
 <p>In the future, we will also add the ability to supply an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> to a <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> whose registrations
@@ -561,8 +564,7 @@ Assert.NotNull(result.Service);
 <li>See how <a href="generics.html">constructor injection works with generic types</a></li>
 <li>Learn how to <a href="member-injection.html">enable member injection</a> (injecting services into properties and/or fields)</li>
 </ul>
-
-            </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -570,7 +572,7 @@ Assert.NotNull(result.Service);
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

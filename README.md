@@ -1,7 +1,7 @@
 Rezolver
 ========
 
-Rezolver is a high performance, portable (.NetStandard 1.1), open-source IOC container built in pre-Brexit UK, with love :)
+Rezolver is a high performance, portable (.NetStandard 1.1), open-source IOC container.
 
 > You can get the [Rezolver Package from Nuget](https://www.nuget.org/packages/Rezolver/), and for more 
 > packages, head over to the [packages documentation](http://rezolver.co.uk/developers/docs/nuget-packages/index.html).
@@ -9,17 +9,7 @@ Rezolver is a high performance, portable (.NetStandard 1.1), open-source IOC con
 More information, including API reference and developer how-tos, is available also on the
 [Rezolver website](http://rezolver.co.uk).
 
-> **Note -** writing docs takes a while(!) so if there's something you're looking for and can't find it
-> on the website, then see if you can find examples in one of the [test projects](test/readme.md) - as nearly all
-> the functionality is covered in there :)
-
 [Follow us on twitter](https://twitter.com/RezolverIOC) for code or documentation updates/release notifications etc.
-
-## Benchmarks
-
-[Check out some benchmarks results for Rezolver](http://rezolver.co.uk/developers/docs/benchmarks.html).
-It finishes around top 10 in *almost* everything that's tested - and the speed will only improve
-over time. 
 
 ## Features
 
@@ -41,6 +31,8 @@ over time.
 - [Singletons](http://rezolver.co.uk/developers/docs/lifetimes/singleton.html)
 - [Objects as services](http://rezolver.co.uk/developers/docs/objects.html)
 - [Scoped objects](http://rezolver.co.uk/developers/docs/lifetimes/scoped.html) (i.e. 'singleton per scope')
+  - *Note*: Scope creation (outside of Asp.Net Core) is currently manual via the `Rezolver.IScopeFactory.CreateScope` method.  Facilities will be added
+to have implicitly created scopes tied to things such as the current ExecutionContext etc.
 - No 'prepare' phase - you can register targets in a container after you start using it
   - *Note - services which have already been used cannot yet be replaced*
 - Extensible compiler framework
@@ -67,30 +59,28 @@ Here's a bit more detail on some of the bigger things that have been planned for
 - [ ] Traditional Asp.Net and Web API integration
 - [ ] Low-level logging
   - *this was already in development, but due to recent changes needs reworking*
+- [x] Auto-injected `List<T>` (and `IList<T>`, `IReadOnlyList<T>`)
+- [x] Auto-injected `Collection<T>` (and `ICollection<T>`, `ReadOnlyCollection<T>`, `IReadOnlyCollection<T>`)
 - [ ] Auto-injected factories e.g. register `IService` and request a `Func<IService>`
+- [ ] Auto-injected Lazy objects
 - [ ] Reflection-based compiler (faster first-call vs expression compiler)
   - [ ] Mixed compiler - uses reflection until expression tree is built asynchronously
 - [ ] Statically compiled container - turns container into a module that you can reference
 and use with signficantly less startup/compilation cost.
-- [ ] Container 'storage' API for singletons and scopes
-  - Will allow singletons to operate per-container and allow for more exotic scoping scenarios
 - [ ] Self registration of non-abstract classes - e.g. request `MyService` without registering it
 first.
   - [ ] Just-in-time API extracted from this to provide a base on which to build interception and automocking
-- [ ] Auto-built WCF client 'experiment' (just gotta try :) )
 - [ ] Conditional targets with caching support in `CachingContainerBase`
 - [ ] Mutable containers - *without* speed penalties
+- [ ] Auto-built WCF client 'experiment' (just gotta try :) )
 
-### For [rezolver.co.uk](http://rezolver.co.uk)
+## Benchmarks
 
-- [x] Styling of the footer (where'd that green come from!?)
-- [x] Full documentation of all targets
-- [x] Results of benchmarking via https://github.com/danielpalme/IocPerformance (*hint* - only child containers letting it down at the moment, otherwise v.quick) - [here](http://rezolver.co.uk/developers/docs/benchmarks.html)
-  - [x] *Daniel Palme has now included Rezolver in his stock list of containers - thanks Daniel!*
-- [x] Scoping documentation
-- [ ] Snazzier homepage ;)
-- [ ] Compilation walkthrough
-- [ ] Experimental examples
+Rezolver has now been incorporated into @DanielPalme's [excellent IOCPerformance benchmark](http://www.palmmedia.de/Blog/2011/8/30/ioc-container-benchmark-performance-comparison).
+
+Read [our own notes on Rezolver's performance in this benchmark](http://rezolver.co.uk/developers/docs/benchmarks.html), which provide some context on the areas where it can be improved.
+
+> Hint: Unless you're regularly using child containers, Rezolver's performance is right up there with the fastest.
 
 # Contributing
 

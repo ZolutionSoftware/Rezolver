@@ -17,13 +17,10 @@ namespace Rezolver.Compilation.Expressions
 	/// </summary>
 	public class RezolvedTargetBuilder : ExpressionBuilderBase<ResolvedTarget>
 	{
-		
-
         private static object DynamicResolve(IResolveContext context, Type newType, Func<IResolveContext, object> fallback)
         {
             //assumes context is already prepared with the correct type set
-            object toReturn;
-            if (!context.Container.TryResolve(context, out toReturn))
+            if (!context.Container.TryResolve(context, out object toReturn))
                 toReturn = fallback(context);
             return toReturn;
         }
@@ -65,7 +62,7 @@ namespace Rezolver.Compilation.Expressions
             //TODO: This should be a shared expression
             var currentContainer = context.CurrentContainerExpression;
 			var declaredTypeExpr = Expression.Constant(target.DeclaredType, typeof(Type));
-            var newContext = CallResolveContext_New(context.ResolveContextParameterExpression, declaredTypeExpr);
+            var newContext = Methods.CallResolveContext_New(context.ResolveContextParameterExpression, declaredTypeExpr);
             /* new version */
             Expression staticExpr;
 
@@ -80,7 +77,7 @@ namespace Rezolver.Compilation.Expressions
                 //this should generate a missing dependency exception if executed
                 //or, might actually yield a result if registrations have been added
                 //after the expression is compiled.
-                staticExpr = CallIContainer_Resolve(currentContainer, newContext);
+                staticExpr = Methods.CallIContainer_Resolve(currentContainer, newContext);
             }
 
 
@@ -92,8 +89,8 @@ namespace Rezolver.Compilation.Expressions
                 () => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), this.GetType());
 
             Expression useContextRezolverIfCanExpr = Expression.Condition(
-                CallIContainer_CanResolve(context.ContextContainerPropertyExpression, newContext),
-                Expression.Convert(CallIContainer_Resolve(context.ContextContainerPropertyExpression, newContext), target.DeclaredType),
+                Methods.CallIContainer_CanResolve(context.ContextContainerPropertyExpression, newContext),
+                Expression.Convert(Methods.CallIContainer_Resolve(context.ContextContainerPropertyExpression, newContext), target.DeclaredType),
                 staticExpr
               );
 

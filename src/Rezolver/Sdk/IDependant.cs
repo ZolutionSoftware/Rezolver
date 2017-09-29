@@ -11,6 +11,6 @@ namespace Rezolver.Sdk
         /// <summary>
         /// Contains all dependency metadata for this object.
         /// </summary>
-        DependencyMetadataCollection Dependencies { get; }
+        IEnumerable<DependencyMetadata> Dependencies { get; }
     }
 }

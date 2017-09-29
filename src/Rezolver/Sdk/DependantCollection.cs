@@ -73,6 +73,21 @@ namespace Rezolver.Sdk
         }
 
         /// <summary>
+        /// Creates a new instance of the collection type <typeparamref name="TDerived"/> whose items
+        /// are cloned from this collection's items.
+        /// </summary>
+        /// <typeparam name="TDerived">The type of collection to be created from this one.</typeparam>
+        /// <returns>A new instance of the type <typeparamref name="TDerived"/> whose items are cloned
+        /// from this collection.</returns>
+        protected TDerived Clone<TDerived>()
+            where TDerived : DependantCollection<T>, new()
+        {
+            var toReturn = new TDerived();
+            toReturn.AddAll(this);
+            return toReturn;
+        }
+
+        /// <summary>
         /// Replaces the <paramref name="original"/> object with the passed <paramref name="replacement"/> object, if
         /// <paramref name="original"/> is found within the collection.  The original object is returned if it is found
         /// and the replacement operation succeeds.
@@ -131,6 +146,37 @@ namespace Rezolver.Sdk
                 insertIndex = toRemoveIndices[f - 1].index;
                 RemoveAt(insertIndex);
             }
+            if (insertIndex < 0 || insertIndex == Count)
+                Add(replacement);
+            else
+                Insert(insertIndex, replacement);
+        }
+
+        /// <summary>
+        /// Replaces any objects of the type <typeparamref name="TOriginal"/> with a single object
+        /// obtained by calling the <paramref name="replacementCallback"/> callback.  Note - the replacement will be 
+        /// inserted at the first index at which a matching object was found.  If none is found, then the replacement 
+        /// will be added to the end of the collection.
+        /// </summary>
+        /// <typeparam name="TOriginal">The type of object to be removed.  Note that any object whose type is equal to, derived from,
+        /// or which implements the type will be removed.</typeparam>
+        /// <param name="replacementCallback">Callback to be executed to get the object that will replace any existing entries
+        /// of the given type.  The callback will be passed an enumerable containing any existing entries.  Note that this
+        /// enumerable will *never* be null, but might be empty.</param>
+        public void ReplaceAnyOrAdd<TOriginal>(Func<IEnumerable<T>, T> replacementCallback)
+            where TOriginal : T
+        {
+            if (replacementCallback == null) throw new ArgumentNullException(nameof(replacementCallback));
+            var toRemoveIndices = this.Select((o, i) => new { obj = o, index = i })
+                .Where(o => o.obj is TOriginal)
+                .ToArray();
+            var insertIndex = -1;
+            for (var f = toRemoveIndices.Length; f > 0; f--)
+            {
+                insertIndex = toRemoveIndices[f - 1].index;
+                RemoveAt(insertIndex);
+            }
+            var replacement = replacementCallback(toRemoveIndices.Select(r => r.obj));
             if (insertIndex < 0 || insertIndex == Count)
                 Add(replacement);
             else

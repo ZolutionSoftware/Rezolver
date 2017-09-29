@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,28 +22,62 @@ namespace Rezolver
     /// <see cref="ITargetContainer"/> explicitly on construction.
     /// 
     /// Although you can derive from this class to extend its functionality; it's also possible to 
-    /// extend it via behaviours (see <see cref="ITargetContainerBehaviour"/>) - which is how, for example,
-    /// the framework enables automatic enumerable resolving (see <see cref="Behaviours.AutoEnumerableBehaviour"/>).
+    /// extend it via configuration (see <see cref="ITargetContainerConfig"/>) - which is how, for example,
+    /// the framework enables automatic injection of enumerables (see <see cref="Configuration.InjectEnumerables"/>) and
+    /// lists (see <see cref="Configuration.InjectLists"/>).
     /// 
-    /// For its default behaviour set, this class uses the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in
-    /// the <see cref="GlobalBehaviours"/> class.</remarks>
+    /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer
     {
         /// <summary>
+        /// The default configuration used for <see cref="TargetContainer"/> objects created via the <see cref="TargetContainer.TargetContainer(ITargetContainerConfig)"/>
+        /// constructor when no configuration is explicitly passed.
+        /// </summary>
+        /// <remarks>The simplest way to configure all target container instances is to add/remove configs to this collection.
+        /// 
+        /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.
+        /// 
+        /// #### Default configurations
+        /// 
+        /// In addition to some internal configurations, the configurations applied by default are:
+        /// 
+        /// - <see cref="Configuration.InjectEnumerables"/>
+        /// - <see cref="Configuration.InjectArrays"/>
+        /// - <see cref="Configuration.InjectLists"/>
+        /// - <see cref="Configuration.InjectCollections"/>
+        /// - <see cref="Configuration.InjectResolveContext"/>
+        /// </remarks>
+        public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
+        {
+            new Configuration.Configure<ITargetContainerFactory>(DefaultTargetContainerFactory.Instance),
+            new Configuration.Configure<ITargetContainerTypeResolver>(DefaultTargetContainerTypeResolver.Instance),
+            Configuration.InjectEnumerables.Instance,
+            Configuration.InjectArrays.Instance,
+            Configuration.InjectLists.Instance,
+            Configuration.InjectCollections.Instance,
+            Configuration.InjectResolveContext.Instance
+        });
+
+        /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class.
         /// </summary>
-        /// <param name="behaviour">Optional.  The behaviour to attach to this target container.  If not provided, then
-        /// the <see cref="GlobalBehaviours.TargetContainerBehaviour"/> in the <see cref="GlobalBehaviours"/>
-        /// class is used by default.
+        /// <param name="config">Optional.  The configuration to apply to this target container.  If null, then
+        /// the <see cref="DefaultConfig"/> is used.
         /// </param>
-        public TargetContainer(ITargetContainerBehaviour behaviour = null)
+        /// <remarks>Note to inheritors: this constructor will throw an <see cref="InvalidOperationException"/> if called by derived
+        /// classes.  You must instead use the <see cref="TargetContainer.TargetContainer()"/> constructor and apply configuration in your
+        /// constructor.</remarks>
+        public TargetContainer(ITargetContainerConfig config = null)
         {
-            (behaviour ?? GlobalBehaviours.TargetContainerBehaviour).Attach(this);
+            if (this.GetType() != typeof(TargetContainer))
+                throw new InvalidOperationException("Derived types must not use this constructor because it triggers virtual method calls via the configuration callbacks.  Please use the protected parameterless constructor instead");
+
+            (config ?? DefaultConfig).Configure(this);
         }
 
         /// <summary>
         /// Creates a new instance of the <see cref="TargetContainer"/> class without attaching any
-        /// <see cref="ITargetContainerBehaviour"/> to it.  This is desirable for derived types as behaviours typically
+        /// <see cref="ITargetContainerConfig"/> to it.  This is desirable for derived types as behaviours typically
         /// will invoke methods on this target container which are declared virtual and which are, therefore, 
         /// unsafe to be called during construction.
         /// </summary>
@@ -52,63 +87,53 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Called to create and register a container for the given <paramref name="serviceType"/> and
-        /// <paramref name="target"/>.
-        /// 
-        /// This class overrides the base version (<see cref="TargetDictionaryContainer.CreateContainer(Type, ITarget)"/>)
-        /// to create a specialised container for generic types (<see cref="GenericTargetContainer"/>) if <paramref name="serviceType"/>
-        /// if a generic type or generic type definition.
+        /// Called to get the type that's to be used to fetch a child <see cref="ITargetContainer"/> for targets registered
+        /// against a given <paramref name="serviceType"/>.
         /// </summary>
-        /// <param name="serviceType">The type for which a container is to be created and registered.</param>
-        /// <param name="target">Optional.  The target that will be added to the container that is returned.</param>
-        /// <returns>An <see cref="ITargetContainer"/> in which the passed <paramref name="target"/> will
-        /// be registered.</returns>
-        /// <remarks>
-        /// The main caller for this method will be the base Register method, which will create a 
-        /// new container for a target that's being registered against a new type.
-        /// 
-        /// It is, however, also called by this class' implementation of <see cref="RegisterContainer(Type, ITargetContainer)"/>
-        /// when the type is a generic type - as all generics must have a container registered against their generic type
-        /// definitions as a starting point.</remarks>
-        protected override ITargetContainer CreateContainer(Type serviceType, ITarget target)
+        /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a 
+        /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="ITargetContainer.Fetch(Type)"/>.</param>
+        /// <returns>The redirected type, or the <paramref name="serviceType"/> if no type redirection is necessary.</returns>
+        protected override Type GetTargetContainerType(Type serviceType)
         {
-            if (TypeHelpers.IsGenericType(serviceType))
-            {
-                if (!TypeHelpers.IsGenericTypeDefinition(serviceType))
-                    serviceType = serviceType.GetGenericTypeDefinition();
-                //TODO: consider changing this functionality to use a factory registered within the target container itself.
-                var created = CreateGenericTypeDefContainer(serviceType, target);
-                //bypass the generic type detection in our override of RegisterContainer.
-                RegisterContainerDirect(serviceType, created);
-                return created;
-            }
-            else
-                return base.CreateContainer(serviceType, target);
+            // NOTE - shouldn't require descending to the base class because of the default type resolver option
+            return this.GetChildContainerType(serviceType, Root) ?? base.GetTargetContainerType(serviceType);
         }
 
-        /// <summary>
-        /// Called by <see cref="CreateContainer(Type,ITarget)"/> to create a container suitable for handling targets 
-        /// that are registered against generic types.
-        /// </summary>
-        /// <param name="genericTypeDefinition">Will be an open generic type (generic type definition)</param>
-        /// <param name="target">Optional.  The initial target for which the container is being constructed</param>
-        /// <returns>The base implementation always creates an instance of <see cref="CreateGenericTypeDefContainer( Type,ITarget)"/></returns>
-        protected virtual ITargetContainer CreateGenericTypeDefContainer(Type genericTypeDefinition, ITarget target)
-        {
-            return new GenericTargetContainer(genericTypeDefinition);
-        }
 
         /// <summary>
-        /// Retrieves 
+        /// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/>,
+        /// overriding the base version to extend special support for open generic types and for 
+        /// <see cref="ITargetContainerTypeResolver"/> options.
         /// </summary>
         /// <param name="type"></param>
-        /// <returns></returns>
-        public override ITargetContainer FetchContainer(Type type)
+        /// <param name="container"></param>
+        public override void RegisterContainer(Type type, ITargetContainer container)
         {
-            if (TypeHelpers.IsGenericType(type) && !TypeHelpers.IsGenericTypeDefinition(type))
-                return base.FetchContainer(type.GetGenericTypeDefinition());
+            // for explicit container registrations inside a TargetContainer, some container registrations
+            // have to be delegated to child containers - e.g. where a container for a generic type must
+            // be registered inside another which is registered against the open generic.
+            // Easy way to check: see if GetTargetContainerType returns a difference type to the one passed,
+            // and then autoregistering the container type if it does.  The EnsureContainer function takes
+            // care of everything else.
+            if (GetTargetContainerType(type) != type)
+            {
+                EnsureContainer(type).RegisterContainer(type, container);
+                return;
+            }
 
-            return base.FetchContainer(type);
+            base.RegisterContainer(type, container);
+        }
+
+        /// <summary>
+        /// Overrides <see cref="TargetDictionaryContainer.CreateContainer(Type)"/> to provide special support 
+        /// for open generic types and to support <see cref="ITargetContainerFactory"/> options.
+        /// </summary>
+        /// <param name="targetContainerType"></param>
+        /// <returns></returns>
+        protected override ITargetContainer CreateContainer(Type targetContainerType)
+        {
+            // NOTE - shouldn't require descending to the base class because of the default target factory option
+            return this.CreateChildContainer(targetContainerType, Root) ?? base.CreateContainer(targetContainerType);
         }
 
         /// <summary>
@@ -125,54 +150,6 @@ namespace Rezolver
                 throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, serviceType), nameof(target));
 
             base.Register(target, serviceType);
-        }
-        /// <summary>
-        /// Overrides the base method so that if <paramref name="type"/> is a generic type,
-        /// then the container will be registered inside another which will be registered
-        /// for the generic type definition first.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="container"></param>
-        public override void RegisterContainer(Type type, ITargetContainer container)
-        {
-            //containers registered under generic types must always start with a generic target
-            //container if one isn't already registered.
-            if (TypeHelpers.IsGenericType(type))
-            {
-                //if it's not a generic type definition,
-                //we need to ensure that we have a container for the type's generic
-                //type definition
-                if (!TypeHelpers.IsGenericTypeDefinition(type))
-                {
-                    //make sure we definitely have a container for the generic type definition
-                    ITargetContainer genericTypeDefContainer = EnsureContainer(type.GetGenericTypeDefinition());
-
-                    genericTypeDefContainer.RegisterContainer(type, container);
-
-                    return;
-                }
-            }
-            //because the container is being registered directly against a generic type definition,
-            //we register it directly.
-            RegisterContainerDirect(type, container);
-        }
-
-        private ITargetContainer EnsureContainer(Type type)
-        {
-            return FetchContainer(type) ?? CreateContainer(type, null);
-        }
-
-        /// <summary>
-        /// Version of <see cref="RegisterContainer(Type, ITargetContainer)"/> which does not interrogate the 
-        /// <paramref name="type"/> to see if it's generic - simply registers the passed container directly
-        /// against the passed type (it just chains through directly to the 
-        /// <see cref="TargetDictionaryContainer.RegisterContainer(Type, ITargetContainer)"/> method non-virtually.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="container"></param>
-        protected virtual void RegisterContainerDirect(Type type, ITargetContainer container)
-        {
-            base.RegisterContainer(type, container);
         }
     }
 }

@@ -5,10 +5,10 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Enumerables | Rezolver IOC </title>
+  	<title>Automatic Enumerable Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Enumerables | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="title" content="Automatic Enumerable Injection | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -107,11 +107,10 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-              <h1 id="enumerables">Enumerables</h1>
-              
+<h1 id="automatic-enumerable-injection">Automatic Enumerable Injection</h1>
+
 <p>By default, a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> (the default <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> used by all containers in the 
-Rezolver framework) comes with a behaviour enabled which allows any <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a> derivative to resolve
-an <code>IEnumerable&lt;Service&gt;</code>.</p>
+Rezolver framework) is configured to allow any <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a> derivative to resolve an <code>IEnumerable&lt;Service&gt;</code>.</p>
 <p>The contents of this enumerable will depend on how many times the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method has been called against the target type <code>Service</code>:</p>
 <ul>
@@ -119,15 +118,31 @@ method has been called against the target type <code>Service</code>:</p>
 <li>Otherwise, the enumerable will contain instances obtained from each <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> that was registered
 against that type, in the order they were registered.</li>
 </ul>
-<div class="NOTE"><h5>Note</h5><p>Automatic resolving of enumerables is a configurable behaviour which can currently be disabled when creating 
-a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> via its constructor.  It can also be explicitly opted-in (if it has been disabled)
-by calling the @Rezolver.EnumerableTargetBuilderExtensions.EnableEnumerableResolving* extension method.</p>
-<p>Disabling the behaviour through the constructor might be removed in a future version, as we intend to move to a 
-configuration callback-based mechanism for configuring containers.</p>
+<div class="NOTE"><h5>Note</h5><p>The functionality described here depends on two target container options: <a class="xref" href="../api/Rezolver.Options.AllowMultiple.html">AllowMultiple</a> 
+and @Rezolver.Options.EnumerableInjection - which are both configured to be equivalent to <code>true</code> by default
+for all <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
 </div>
-<p>You are not restricted in the targets you use to produce instances for an enumerable, and each one can have its
+<p>You are not restricted in the targets you use to produce instances for an enumerable (e.g. <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>,
+<a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a>), and each one can have its
 own lifetime (scoped/singleton etc).</p>
+<div class="TIP"><h5>Tip</h5><p>By default, Rezolver will build &#39;lazy&#39; enumerables, but can be configured to build &#39;eager&#39; enumerables - for
+more on this, read the topic <a href="enumerables/lazy-vs-eager.html">Lazy vs Eager Enumerables</a></p>
+</div>
+<h2 id="resolving-enumerables">Resolving enumerables</h2>
+<p>To resolve an enumerable from a container or through a scope, you can simply use <code>IEnumerable&lt;Foo&gt;</code> as the input
+type for a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call:</p>
+<pre><code class="lang-cs">var enumerable = container.Resolve&lt;IEnumerable&lt;Foo&gt;&gt;();
+</code></pre><p>However, the <code>ResolveMany</code> extension methods (see <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_">ResolveMany</a>
+and <a class="xref" href="../api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_">ResolveMany</a>) provide a shortut which allow you to pass
+just the element type of the enumerable to reduce the &#39;angle-bracket percent&#39; of code which directly resolves
+enumerables (which of course you won&#39;t be doing because you&#39;re not using &#39;service location&#39; are you!? <span class="emoji" shortcode="wink">😉</span> ):</p>
+<pre><code class="lang-cs">// this is equivalent to resolving IEnumerable&lt;Foo&gt;
+var enumerable2 = container.ResolveMany&lt;Foo&gt;();
+</code></pre><p>Most, if not all, the examples in this section use this shortcut - but it&#39;s worth noting that the two methods are
+absolutely equivalent.</p>
 <h2 id="empty-enumerable">Empty enumerable</h2>
+<p>By default, you don&#39;t need to register anything against a particular type in order to be able to inject an enumerable
+of that type.  If there are no registrations, then an empty enumerable will be injected instead.</p>
 <p>Here&#39;s an example where we only register the service we&#39;re going to create, which has a single constructor that requires
 an <code>IEnumerable&lt;IMyService&gt;</code>.</p>
 <p>First, the type <code>RequiresEnumerableOfServices</code>:</p>
@@ -145,12 +160,14 @@ container.RegisterType&lt;RequiresEnumerableOfServices&gt;();
 
 var result = container.Resolve&lt;RequiresEnumerableOfServices&gt;();
 Assert.Empty(result.Services);
-</code></pre><h2 id="same-itarget-type">Same <code>ITarget</code> type</h2>
-<p>Here, we register each type one after another:</p>
+</code></pre><h2 id="multiple-new-objects">Multiple new objects</h2>
+<p>Here, we associate three types (created by constructor injection) to a common service type, which are all then included
+in the auto-injected enumerable:</p>
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
 var expectedTypes = new[] {
     typeof(MyService1), typeof(MyService2), typeof(MyService3)
 };
+
 foreach (var t in expectedTypes)
 {
     container.RegisterType(t, typeof(IMyService));
@@ -225,8 +242,8 @@ container.RegisterType&lt;MyService3, IMyService&gt;();
 // 2) Scoped IMyService
 // 3) Transient IMyService
 
-var fromRoot1 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
-var fromRoot2 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+var fromRoot1 = container.ResolveMany&lt;IMyService&gt;().ToArray();
+var fromRoot2 = container.ResolveMany&lt;IMyService&gt;().ToArray();
 
 Assert.Same(fromRoot1[0], fromRoot2[0]);
 // both scoped objects should be the same because we&#39;ve resolved
@@ -236,14 +253,14 @@ Assert.NotSame(fromRoot1[2], fromRoot2[2]);
 
 using (var childScope = container.CreateScope())
 {
-    var fromChildScope1 = childScope.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+    var fromChildScope1 = childScope.ResolveMany&lt;IMyService&gt;().ToArray();
     // singleton should be the same as before, but 
     // the scoped object will be different
     Assert.Same(fromRoot1[0], fromChildScope1[0]);
     Assert.NotSame(fromRoot1[1], fromChildScope1[1]);
     Assert.NotSame(fromRoot1[2], fromChildScope1[2]);
 
-    var fromChildScope2 = childScope.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+    var fromChildScope2 = childScope.ResolveMany&lt;IMyService&gt;().ToArray();
     // the scoped object will be the same as above
     Assert.Same(fromChildScope1[0], fromChildScope2[0]);
     Assert.Same(fromChildScope1[1], fromChildScope2[1]);
@@ -256,104 +273,10 @@ using (var childScope = container.CreateScope())
 <li><code>[2]</code> is created once per call</li>
 </ul>
 <hr>
-<h1 id="advanced-examples">Advanced examples</h1>
-<p>On to generics and decorators, now...</p>
-<h2 id="enumerables-of-open-generics">Enumerables of open generics</h2>
-<p>You can also register multiple open generics of the same type (e.g. <code>IFoo&lt;&gt;</code>) and then resolve an enumerable of 
-<code>IFoo&lt;Bar&gt;</code>, and the container will create an enumerable containing an object for each open generic registration:</p>
-<pre><code class="lang-csharp" name="UsesAnyService.cs">public interface IUsesAnyService&lt;TAnyService&gt;
-{
-    void UseTheService(TAnyService service);
-}
-
-public class UsesAnyService&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
-{
-    public void UseTheService(TAnyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public class UsesAnyService2&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
-{
-    public void UseTheService(TAnyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-</code></pre><pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
-container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
-container.RegisterType(typeof(UsesAnyService2&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
-
-var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
-
-Assert.Equal(2, result.Length);
-Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[0]);
-Assert.IsType&lt;UsesAnyService2&lt;IMyService&gt;&gt;(result[1]);
-</code></pre><div class="NOTE"><h5>Note</h5><p>When working with generics, the enumerable handler searches for the first generic registration which has least
-one <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> whose <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_UseFallback">UseFallback</a> is <code>false</code> - searching from least generic to most
-generic (e.g. <code>Foo&lt;Bar&gt;</code> is less generic than <code>Foo&lt;&gt;</code>).</p>
-<p>So if you request an <code>IEnumerable&lt;Foo&lt;Bar&gt;&gt;</code>, targets are first sought for <code>Foo&lt;Bar&gt;</code> and, if none are found,
-it then searches for <code>Foo&lt;&gt;</code>.  The side effect of this is that your enumerable will always only contain objects
-produced from targets registered against the most-specific generic type that&#39;s applicable for the type requested.  The
-next example expands on this.</p>
-</div>
-<h2 id="mixing-openclosed-generics">Mixing open/closed generics</h2>
-<p>Let&#39;s say that we have one open generic registration for <code>IUsesAnyService&lt;&gt;</code> to be used as a catch-all, but that
-when <code>IMyService</code> is used, we have two types that we want to use instead.</p>
-<p>In this case, we still have an open generic registration, but we want it to be superseded for certain generic types by two
-specialised registrations where the inner generic type argument is known.</p>
-<p>Given these extra generic types:</p>
-<pre><code class="lang-csharp" name="UsesIMyService.cs">public class UsesIMyService : IUsesAnyService&lt;IMyService&gt;
-{
-    public void UseTheService(IMyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-public class UsesIMyService2 : IUsesAnyService&lt;IMyService&gt;
-{
-    public void UseTheService(IMyService service)
-    {
-        throw new NotImplementedException();
-    }
-}
-</code></pre><p>We can do this:</p>
-<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
-// register our open generic
-container.RegisterType(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
-// register our two specialisations for IMyService
-container.RegisterType&lt;UsesIMyService, IUsesAnyService&lt;IMyService&gt;&gt;();
-container.RegisterType&lt;UsesIMyService2, IUsesAnyService&lt;IMyService&gt;&gt;();
-
-// will use the UsesIMyService and UsesIMyService2 specialised registrations
-var result = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;&gt;().ToArray();
-// will use the open generic registration - array of one
-var result2 = container.Resolve&lt;IEnumerable&lt;IUsesAnyService&lt;MyService&gt;&gt;&gt;().ToArray();
-
-Assert.Equal(2, result.Length);
-Assert.IsType&lt;UsesIMyService&gt;(result[0]);
-Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
-
-Assert.Equal(1, result2.Length);
-Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
-</code></pre><p>So, as soon as we want an <code>IEnumerable&lt;IUsesAnyService&lt;IMyService&gt;&gt;</code>, the enumerable will use <em>only</em> the
-two explicit registrations made against the closed generic type <code>IUsesAnyService&lt;IMyService&gt;</code>, but if we
-request any other type, we only get items produced by registrations against the open generic <code>IUsesAnyService&lt;&gt;</code>.</p>
-<div class="WARNING"><h5>Warning</h5><p>There is currently <em>no</em> way to fall back on an open generic registration for given generic once you make a 
-registration for a closed generic.  The framework might, however, be extended to allow you to make an explicit 
-registration which instructs the container to fall back to a more generic registration and include any results from
-that in the enumerable.</p>
-</div>
-<p>It doesn&#39;t matter what order you register the open generics and closed generics - the logic is applied on a type-by-type
-basis; but the order of an individual enumerable of a given type is, however, governed by the order of registration.</p>
 <h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
-<div class="NOTE"><h5>Note</h5><p>At the time of writing, the <a href="decorators.html">decorators topic</a> has not been written, so this is preview of how to 
-use decorators as well as how they work in enumerables.</p>
-</div>
-<p>Decorators that have been registered against the element type of an enumerable will be applied to all instances 
-that the container produces for the enumerable.  This also applies to stacked decorators (where multiple decorators are
-applied on top of one other).</p>
+<p><a href="decorators.html">Decorators</a> that have been registered against the <strong>element type</strong> of an enumerable will be applied to all 
+instances that the container produces for the enumerable.  This also applies to stacked decorators (where multiple 
+decorators are applied on top of one other).</p>
 <p>So, we have two decorator types for <code>IMyService</code>:</p>
 <pre><code class="lang-csharp" name="MyServiceDecorators.cs">public class MyServiceDecorator1 : IMyService
 {
@@ -381,7 +304,7 @@ container.RegisterType&lt;MyService2, IMyService&gt;();
 container.RegisterType&lt;MyService3, IMyService&gt;();
 
 // create the container with these targets
-var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+var result = container.ResolveMany&lt;IMyService&gt;().ToArray();
 
 // make sure each item in the enumerable is an instance of our decorator.
 // then make sure the decorated services are correct.
@@ -390,9 +313,14 @@ Assert.IsType&lt;MyService&gt;(((MyServiceDecorator1)result[0]).Inner);
 Assert.IsType&lt;MyService2&gt;(((MyServiceDecorator1)result[1]).Inner);
 Assert.IsType&lt;MyService3&gt;(((MyServiceDecorator1)result[2]).Inner);
 </code></pre><p>If more decorators were added, of course - then each element would be &#39;re-decorated&#39; accordingly.</p>
+<div class="TIP"><h5>Tip</h5><p>You can also decorate instances of<code>IEnumerable&lt;T&gt;</code>, <code>IList&lt;T&gt;</code>, <code>ICollection&lt;T&gt;</code> - plus any other supported
+collection types.  <a href="decorators/collections.html">Read about this now</a>.</p>
+</div>
+<hr>
 <h2 id="explicit-ienumerablet-registrations">Explicit <code>IEnumerable&lt;T&gt;</code> registrations</h2>
-<p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically, it doesn&#39;t prevent you from manually adding registrations
-which override the default behaviour.</p>
+<p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically when the <a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration 
+is applied (and not also disabled by the @Rezolver.Options.EnumerableInjection option being set to <code>false</code>), it doesn&#39;t 
+prevent you from manually adding registrations for specific <code>IEnumerable&lt;&gt;</code> types which override the default behaviour.</p>
 <p>For example, let&#39;s say that you have two registrations for services which share a common interface, but they have only
 been registered against their concrete type (perhaps it&#39;s historical code you can&#39;t risk changing). Your code 
 now wants an enumerable of that common interface.  Well, assuming you know what the specific registrations are - you can
@@ -400,25 +328,71 @@ use delegate registrations (note, there are <em>lots</em> of ways, this is just 
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
 container.RegisterType&lt;MyService1&gt;();
 container.RegisterType&lt;MyService2&gt;();
-container.RegisterDelegate&lt;IEnumerable&lt;IMyService&gt;&gt;(
-    rc =&gt; new IMyService[] { rc.Resolve&lt;MyService1&gt;(), rc.Resolve&lt;MyService2&gt;()
-});
 
-var result = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+// reversing the &#39;normal&#39; order that would usually be 
+// produced by the default IEnumerable functionality, to show
+// that it&#39;s this enumerable that we resolve
+container.RegisterDelegate&lt;IEnumerable&lt;IMyService&gt;&gt;(
+    rc =&gt; new IMyService[] { rc.Resolve&lt;MyService2&gt;(), rc.Resolve&lt;MyService1&gt;() }
+);
+
+var result = container.ResolveMany&lt;IMyService&gt;().ToArray();
 
 Assert.Equal(2, result.Length);
-Assert.IsType&lt;MyService1&gt;(result[0]);
-Assert.IsType&lt;MyService2&gt;(result[1]);
-</code></pre><hr>
+Assert.IsType&lt;MyService2&gt;(result[0]);
+Assert.IsType&lt;MyService1&gt;(result[1]);
+</code></pre><div class="WARNING"><h5>Warning</h5><p>As soon as you create a manual registration for a particular <code>IEnumerable&lt;T&gt;</code> type, Rezolver no longer has any control
+over how that particular enumerable is produced - so none of the enumerable-related options demonstrated in this documentation 
+will be honoured.</p>
+</div>
+<hr>
+<h2 id="disabling-enumerable-injection">Disabling Enumerable Injection</h2>
+<p>As with much of the built-in functionality in Rezolver, you can control whether enumerables are automatically 
+built or not through the use of options and configuration.</p>
+<p>In the case of enumerable injection, it is a feature that is enabled by an <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>
+that is added by default to a set of configuration objects in the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a> 
+collection which is applied, by default, to all new instances of the <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> class (which
+is, in turn, used by both the main container types - <a class="xref" href="../api/Rezolver.Container.html">Container</a> and <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a>).</p>
+<p>This means that, to disable it, you have to either remove that config (it&#39;s the 
+<a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration singleton) from the collection, or set the 
+<a class="xref" href="../api/Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option to <code>false</code> on the target container before the configuration
+is applied.</p>
+<p>You also have another choice, in that you can either do this directly on the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>
+collection, which will affect <em>all</em> instances of <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>, or you can 
+<a class="xref" href="../api/Rezolver.CombinedTargetContainerConfig.html#Rezolver_CombinedTargetContainerConfig_Clone_">Clone</a> the collection and apply it only to a single target container.</p>
+<p>It&#39;s the second of these options that the example shows, below:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var config = TargetContainer.DefaultConfig.Clone();
+config.ConfigureOption&lt;Options.EnableEnumerableInjection&gt;(false);
+
+// pass our custom config to a new target container which, in turn,
+// we pass to the constructor of the Container class
+var container = new Container(new TargetContainer(config));
+
+Assert.Throws&lt;InvalidOperationException&gt;(() =&gt; container.ResolveMany&lt;int&gt;());
+</code></pre><p>Notice that we&#39;re explicitly creating a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> and passing a cloned config to it; passing
+the result to the <a class="xref" href="../api/Rezolver.Container.html">Container</a> constructor.</p>
+<div class="TIP"><h5>Tip</h5><p>Many other examples throughout this documentation show options simply being set directly on the container.
+In those cases, it&#39;s because the options are used by logic within Rezolver to make decisions.
+Enumerable injection, however, is configured at the point a new <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> is <em>created</em>, 
+because the configuration is applied by one of its constructors; hence the different approach is required in
+order to ensure the option is set <em>before</em> the configuration gets applied.  The 
+<a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration looks for the <a class="xref" href="../api/Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>
+option and, if it&#39;s <code>false</code> it disables itself.</p>
+</div>
+<div class="WARNING"><h5>Warning</h5><p>If you disable automatic enumerable injection then the other 
+<a href="arrays-lists-collections/index.html">automatic collection-type injection behaviour</a> will only work when you 
+explicitly register the correct <code>IEnumerable&lt;T&gt;</code> for it.</p>
+</div>
+<hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
-<li>Recommend going to take (another) look at <a href="decorators.html">decorators</a> - although, at the time of writing it might 
-not be written yet!</li>
-<li>The <a href="constructor-injection/generics.html">generic constructor injection</a> documentation contains more useful guidance 
-about open generics etc.</li>
+<li>Read about how Rezolver handles building <a href="enumerables/generics.html">enumerables of generics</a> from open and closed
+generic registrations.</li>
+<li>Learn about Rezolver&#39;s support for <a href="enumerables/lazy-vs-eager.html">lazy and eager enumerables</a> (note: all auto-generated enumerables are lazily 
+evaluated by default)</li>
+<li>Rezolver also supports <a href="arrays-lists-collections/index.html">arrays, lists and collection injection</a></li>
 </ul>
-
-            </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -426,7 +400,7 @@ about open generics etc.</li>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

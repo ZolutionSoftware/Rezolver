@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Compilation
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.16.2.2">
+  	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -90,7 +90,7 @@
           </div>
         </div>
       </header>
-      <div role="main" class="container body-content">
+      <div class="container body-content">
         
         <div id="search-results">
           <div class="search-list"></div>
@@ -108,17 +108,17 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content">
-              
-              <h1 id="Rezolver_Compilation" data-uid="Rezolver.Compilation">Namespace Rezolver.Compilation
-              </h1>
-              <div class="markdown level0 summary"></div>
-              <div class="markdown level0 conceptual"></div>
-              <div class="markdown level0 remarks"></div>
-                <h3 id="classes">Classes
-              </h3>
-                  <h4><a class="xref" href="Rezolver.Compilation.CompileContext.html">CompileContext</a></h4>
-                  <section><p>Core implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.  A root context (i.e. where <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ParentContext">ParentContext</a> is
+            <article class="content wrap" id="_content" data-uid="Rezolver.Compilation">
+  
+  <h1 id="Rezolver_Compilation" data-uid="Rezolver.Compilation" class="text-break">Namespace Rezolver.Compilation
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Rezolver.Compilation.CompileContext.html">CompileContext</a></h4>
+      <section><p>Core implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>.  A root context (i.e. where <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ParentContext">ParentContext</a> is
 <code>null</code>; created via the <a class="xref" href="Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext__ctor_Rezolver_IResolveContext_Rezolver_ITargetContainer_System_Type_">CompileContext(IResolveContext, ITargetContainer, Type)</a>
 constructor) is the starting point for all shared state, such as the <a class="xref" href="Rezolver.Container.html">Container</a> and the compilation
 stack.</p>
@@ -128,27 +128,39 @@ so that new registrations can be added without interfering with upstream contain
 <p>Note that many of the interface members are implemented explicitly - therefore most of your interaction with 
 this type is through its implementation of <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.CompileStackEntry.html">CompileStackEntry</a></h4>
-                  <section><p>Represents an entry in the compilation stack of a <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>,
+      <h4><a class="xref" href="Rezolver.Compilation.CompileStackEntry.html">CompileStackEntry</a></h4>
+      <section><p>Represents an entry in the compilation stack of a <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>,
 recording both a target that is being compiled, and the type for which it is being compiled.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.TargetCompilerExtensions.html">TargetCompilerExtensions</a></h4>
-                  <section><p>Extensions for the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> interface.</p>
+      <h4><a class="xref" href="Rezolver.Compilation.ConstantCompiledTarget.html">ConstantCompiledTarget</a></h4>
+      <section><p>An implementation of <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> which simply wraps an instance and a known target.</p>
 </section>
-                <h3 id="interfaces">Interfaces
-              </h3>
-                  <h4><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></h4>
-                  <section><p>Tracks state and provides services during the compilation phase in which <a class="xref" href="Rezolver.ITarget.html">ITarget</a> targets
+      <h4><a class="xref" href="Rezolver.Compilation.DelegatingCompiledTarget.html">DelegatingCompiledTarget</a></h4>
+      <section><p>A reusable implementation of <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> for when the compiled code
+for an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> can be represented by a delegate.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Compilation.TargetCompilerExtensions.html">TargetCompilerExtensions</a></h4>
+      <section><p>Extensions for the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> interface.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Compilation.UnresolvedTypeCompiledTarget.html">UnresolvedTypeCompiledTarget</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> that can be used when a type could not be resolved.</p>
+<p>Implementations of both <a class="xref" href="Rezolver.Compilation.UnresolvedTypeCompiledTarget.html#Rezolver_Compilation_UnresolvedTypeCompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> and <a class="xref" href="Rezolver.Compilation.UnresolvedTypeCompiledTarget.html#Rezolver_Compilation_UnresolvedTypeCompiledTarget_SourceTarget">SourceTarget</a> will throw an exception
+if called/read.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></h4>
+      <section><p>Tracks state and provides services during the compilation phase in which <a class="xref" href="Rezolver.ITarget.html">ITarget</a> targets
 are compiled into <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> targets, which produce actual instances of objects.</p>
 <p>Instances of this interface are created by calling the 
 <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_">CreateContext(IResolveContext, ITargetContainer)</a> method of the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>
 which is registered in a container.</p>
 </section>
-                  <h4><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a></h4>
-                  <section><p>An object that produces <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s given a 
+      <h4><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a></h4>
+      <section><p>An object that produces <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s given a 
 particular <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> - for which it also acts as a factory.</p>
 </section>
-                        </article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
