@@ -11,7 +11,8 @@ In addition to being able to add explicit registrations for specific closed gene
 types, Rezolver supports the automatic creation and injection of these types in the same way that
 [enumerables](../enumerables.md) are also supported.
 
-> [!NOTE] For all three types, Rezolver creates/injects an instance of `List<T>` by 
+> [!NOTE]
+> For all three types, Rezolver creates/injects an instance of `List<T>` by 
 > binding to the
 > @System.Collections.Generic.List`1.%23ctor(System.Collections.Generic.IEnumerable{`0})
 > constructor - which means that [enumerable injection](../enumerables.md) must be enabled
@@ -40,7 +41,7 @@ three instances created from those registrations:
 
 # Disabling Automatic List Injection
 
-First, you should look at how [to disable array injection](arrays.md#disabling-array-injection) as 
+First, you should look at how [to disable array injection](arrays.md#disabling-automatic-array-injection) as 
 the process to do it for lists is exactly the same - except it's a different option:
 
 [!code-csharp[ListExamples.cs](../../../../../test/Rezolver.Tests.Examples/ListExamples.cs#example3)]

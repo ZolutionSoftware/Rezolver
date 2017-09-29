@@ -25,17 +25,21 @@ _Linked topics provide high level overviews and examples in our developer guide 
 - [Enumerables](docs/enumerables.md) (empty enumerables returned by default)
   - [Lazy and eager enumerables](docs/enumerables/lazy-vs-eager.md) - configurable on a per-type basis (new in 1.3)
   - [Enumerables of generics](docs/enumerables/generics.md) - from least generic (e.g. `IFoo<Bar>`) to most generic (`IFoo<>`)
-- `List<T>` injection
+- [Array injection](docs/arrays-lists-collections/arrays.md)
+- [`List<T>` injection](docs/arrays-lists-collections/lists.md)
   - Also `IList<T>` and `IReadOnlyList<T>`
-- `Collection<T>` injection
+- [`Collection<T>` injection](docs/arrays-lists-collections/collections.md)
   - Also `ICollection<T>`, `ReadOnlyCollection<T>` and `IReadOnlyCollection<T>`
 - [Decorators](docs/decorators.md)
-  - Non-generic & generic
+  - Non-generic & generic constructor injection
   - Specialised generic (*where a decorator for `IFoo<>` is redecorated by another decorator for `IFoo<Bar>` only when
 `IFoo<Bar>` is requested*)
   - [Enumerables of decorated instances](docs/enumerables.md#decorators-and-enumerables)
-- Contravariant generics (e.g. `Action<IFoo>` registration automatically used for `Action<Foo>`)
+  - [Decorator Delegates](docs/decorators/delegates.md)
+  - Can decorate any of the built-in enumerable/collection types
+- [Generic Contravariance](docs/contravariance.md) (e.g. `Action<IFoo>` registration automatically used for `Action<Foo>`)
   - Can be enabled and disabled globally and per-type
+  - Enumerables and collections automatically include all contravariant matches
 - Constrained generics
 - Child containers (overriding registrations in one container with those of another)
   - Child registration containers (lower-level overriding of registrations for similar but sibling containers)
@@ -61,7 +65,6 @@ _<small> * If a topic isn't linked, it's probably because we're still working on
 ## Quick Links
 
 - [Developer Guide](docs/index.md)
-- [Benchmarks](docs/benchmarks.md)
 - [Nuget Packages](docs/nuget-packages/index.md)
 - [API Reference](api/index.md)
 - [Release History (On Github)](https://github.com/ZolutionSoftware/Rezolver/releases)

@@ -1,4 +1,4 @@
-﻿# Enumerables
+﻿# Automatic Enumerable Injection
 
 By default, a @Rezolver.TargetContainer (the default @Rezolver.ITargetContainer used by all containers in the 
 Rezolver framework) is configured to allow any @Rezolver.ContainerBase derivative to resolve an `IEnumerable<Service>`.
@@ -151,6 +151,48 @@ use delegate registrations (note, there are *lots* of ways, this is just the mos
 > As soon as you create a manual registration for a particular `IEnumerable<T>` type, Rezolver no longer has any control
 > over how that particular enumerable is produced - so none of the enumerable-related options demonstrated in this documentation 
 > will be honoured.
+
+***
+
+## Disabling Enumerable Injection
+
+As with much of the built-in functionality in Rezolver, you can control whether enumerables are automatically 
+built or not through the use of options and configuration.
+
+In the case of enumerable injection, it is a feature that is enabled by an @Rezolver.ITargetContainerConfig
+that is added by default to a set of configuration objects in the @Rezolver.TargetContainer.DefaultConfig 
+collection which is applied, by default, to all new instances of the @Rezolver.TargetContainer class (which
+is, in turn, used by both the main container types - @Rezolver.Container and <xref:Rezolver.ScopedContainer>).
+
+This means that, to disable it, you have to either remove that config (it's the 
+@Rezolver.Configuration.InjectEnumerables configuration singleton) from the collection, or set the 
+@Rezolver.Options.EnableEnumerableInjection option to `false` on the target container before the configuration
+is applied.
+
+You also have another choice, in that you can either do this directly on the @Rezolver.TargetContainer.DefaultConfig
+collection, which will affect *all* instances of @Rezolver.TargetContainer, or you can 
+@Rezolver.CombinedTargetContainerConfig.Clone* the collection and apply it only to a single target container.
+
+It's the second of these options that the example shows, below:
+
+[!code-csharp[EnumerableExamples.cs](../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example12)]
+
+Notice that we're explicitly creating a @Rezolver.TargetContainer and passing a cloned config to it; passing
+the result to the @Rezolver.Container constructor.
+
+> [!TIP]
+> Many other examples throughout this documentation show options simply being set directly on the container.
+> In those cases, it's because the options are used by logic within Rezolver to make decisions.
+> Enumerable injection, however, is configured at the point a new @Rezolver.TargetContainer is *created*, 
+> because the configuration is applied by one of its constructors; hence the different approach is required in
+> order to ensure the option is set *before* the configuration gets applied.  The 
+> @Rezolver.Configuration.InjectEnumerables configuration looks for the @Rezolver.Options.EnableEnumerableInjection
+> option and, if it's `false` it disables itself.
+
+> [!WARNING]
+> If you disable automatic enumerable injection then the other 
+> [automatic collection-type injection behaviour](arrays-lists-collections/index.md) will only work when you 
+> explicitly register the correct `IEnumerable<T>` for it.
 
 * * *
 

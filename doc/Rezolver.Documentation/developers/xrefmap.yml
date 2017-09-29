@@ -3565,6 +3565,15 @@ references:
   commentId: Overload:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator
   fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator
   nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.ITargetContainer,System.Delegate)
+  name: RegisterDecorator<TDecorated>(ITargetContainer, Delegate)
+  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Delegate_
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.ITargetContainer,System.Delegate)
+  name.vb: RegisterDecorator(Of TDecorated)(ITargetContainer, Delegate)
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(Rezolver.ITargetContainer, System.Delegate)
+  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(Rezolver.ITargetContainer, System.Delegate)
+  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(ITargetContainer, Delegate)
+  nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(ITargetContainer, Delegate)
 - uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.ITargetContainer,System.Func{``0,``0})
   name: RegisterDecorator<TDecorated>(ITargetContainer, Func<TDecorated, TDecorated>)
   href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Func___0___0__
@@ -4829,6 +4838,22 @@ references:
   fullName.vb: Rezolver.Options.ContainerOption(Of TOption).Widening
   nameWithType: ContainerOption<TOption>.Implicit
   nameWithType.vb: ContainerOption(Of TOption).Widening
+- uid: Rezolver.Options.ContainerOption`1.ToString
+  name: ToString()
+  href: api/Rezolver.Options.ContainerOption-1.html#Rezolver_Options_ContainerOption_1_ToString
+  commentId: M:Rezolver.Options.ContainerOption`1.ToString
+  fullName: Rezolver.Options.ContainerOption<TOption>.ToString()
+  fullName.vb: Rezolver.Options.ContainerOption(Of TOption).ToString()
+  nameWithType: ContainerOption<TOption>.ToString()
+  nameWithType.vb: ContainerOption(Of TOption).ToString()
+- uid: Rezolver.Options.ContainerOption`1.ToString*
+  name: ToString
+  href: api/Rezolver.Options.ContainerOption-1.html#Rezolver_Options_ContainerOption_1_ToString_
+  commentId: Overload:Rezolver.Options.ContainerOption`1.ToString
+  fullName: Rezolver.Options.ContainerOption<TOption>.ToString
+  fullName.vb: Rezolver.Options.ContainerOption(Of TOption).ToString
+  nameWithType: ContainerOption<TOption>.ToString
+  nameWithType.vb: ContainerOption(Of TOption).ToString
 - uid: Rezolver.Options.ContainerOption`1.Value
   name: Value
   href: api/Rezolver.Options.ContainerOption-1.html#Rezolver_Options_ContainerOption_1_Value

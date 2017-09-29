@@ -142,7 +142,7 @@ arity, e.g. <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534
 </div>
 <h2 id="integration-with-ienumerablet">Integration with <code>IEnumerable&lt;T&gt;</code></h2>
 <p><a href="../enumerables.html#decorators-and-enumerables">As shown in the enumerables documentation</a>, enumerables of a 
-given type will honour any and all decorators which are registered for that when they are created, so if we
+given type will honour any and all decorators which are registered for that type when they are created, so if we
 extend the above example and produce an <code>IEnumerable&lt;int&gt;</code> from multiple <code>int</code> registrations, then each one
 will be doubled in the enumerable that&#39;s created:</p>
 <pre><code class="lang-csharp" name="DecoratorExamples.cs">var container = new Container();
@@ -198,7 +198,7 @@ HashSet&lt;int&gt; otherNumbers = new HashSet&lt;int&gt;(); // any other numbers
 container.RegisterObject&lt;Action&lt;int&gt;&gt;(i =&gt; otherNumbers.Add(i));
 
 // now decorate with our even-number detector
-container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(next =&gt; 
+container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(next =&gt;
     i =&gt;
     {
         if (i != 0 &amp;&amp; (i % 2) == 0)
@@ -211,7 +211,7 @@ container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(next =&gt;
 container.RegisterType&lt;PrimesUnder20Checker, IPrimeChecker&gt;();
 container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(
     new Func&lt;Action&lt;int&gt;, IPrimeChecker, Action&lt;int&gt;&gt;(
-        (next, primeChecker) =&gt; 
+        (next, primeChecker) =&gt;
             i =&gt;
             {
                 if (primeChecker.IsPrime(i))
@@ -220,9 +220,9 @@ container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(
                     next(i);
             }));
 
-// and finally our pnumbers with 5 as a factor (includes 5)
+// and finally our numbers with 5 as a factor (includes 5)
 // basically identical to the even numbers detector above
-container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(next =&gt; 
+container.RegisterDecorator&lt;Action&lt;int&gt;&gt;(next =&gt;
     i =&gt;
     {
         if (i != 0 &amp;&amp; (i % 5) == 0)
@@ -254,7 +254,11 @@ Assert.Equal(
 Assert.Equal(
     new[] { 0, 1, 9 },
     otherNumbers.OrderBy(i =&gt; i));
-</code></pre></article>
+</code></pre><div class="NOTE"><h5>Note</h5><p>Unfortunately, although decorator classes support generic types, Rezolver cannot currently bind to generic 
+methods - as there&#39;s no &#39;nice&#39; way to pass an open generic method around.  We&#39;re looking into it, though - and
+in the meantime it&#39;s possible to add support in yourself by extending Rezolver, if you like...<span class="emoji" shortcode="wink">😉</span></p>
+</div>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

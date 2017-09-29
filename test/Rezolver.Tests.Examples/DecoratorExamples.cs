@@ -188,7 +188,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterObject<Action<int>>(i => otherNumbers.Add(i));
 
             // now decorate with our even-number detector
-            container.RegisterDecorator<Action<int>>(next => 
+            container.RegisterDecorator<Action<int>>(next =>
                 i =>
                 {
                     if (i != 0 && (i % 2) == 0)
@@ -201,7 +201,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterType<PrimesUnder20Checker, IPrimeChecker>();
             container.RegisterDecorator<Action<int>>(
                 new Func<Action<int>, IPrimeChecker, Action<int>>(
-                    (next, primeChecker) => 
+                    (next, primeChecker) =>
                         i =>
                         {
                             if (primeChecker.IsPrime(i))
@@ -212,7 +212,7 @@ namespace Rezolver.Tests.Examples
 
             // and finally our numbers with 5 as a factor (includes 5)
             // basically identical to the even numbers detector above
-            container.RegisterDecorator<Action<int>>(next => 
+            container.RegisterDecorator<Action<int>>(next =>
                 i =>
                 {
                     if (i != 0 && (i % 5) == 0)

@@ -60,3 +60,8 @@ thus showing how decorator delegates support the same argument injection that's 
 And here's the test:
 
 [!code-csharp[DecoratorExamples.cs](../../../../../test/Rezolver.Tests.Examples/DecoratorExamples.cs#example12)]
+
+> [!NOTE]
+> Unfortunately, although decorator classes support generic types, Rezolver cannot currently bind to generic 
+> methods - as there's no 'nice' way to pass an open generic method around.  We're looking into it, though - and
+> in the meantime it's possible to add support in yourself by extending Rezolver, if you like...:wink:

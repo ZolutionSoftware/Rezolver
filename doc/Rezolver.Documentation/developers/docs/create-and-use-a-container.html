@@ -146,24 +146,37 @@ classes most of the time - which derive most of their functionality from this ab
 services and then resolving them, is to create an instance of the <a class="xref" href="../api/Rezolver.Container.html">Container</a> type.  Or, if you want your root
 container to act as a global lifetime scope for <a href="lifetimes/scoped.html">explicitly scoped objects</a> then you
 can also use <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a>:</p>
-<pre><code class="lang-cs">void Foo()
-{
-    //create a standard non-scoping container
-    var container = new Container();
-    //or create a scoped container:
-    var container = new ScopedContainer();
+<pre><code class="lang-cs">// create a standard non-scoping container
+var container = new Container();
+
+// or create a scoped container:
+var container = new ScopedContainer();
 </code></pre><p><em>All code samples assume you have added a <code>using</code> statement (<code>imports</code> in VB) for the <code>Rezolver</code> namespace.</em></p>
-<p>Once you have a local reference to either of these classes, you can start registering services in the container,
-and resolving objects from it.</p>
+<p>Once you have a local reference to either of these classes, you can start registering services via the 
+container&#39;s <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> implementation, and resolving objects from it.</p>
 <h2 id="registering-services">Registering services</h2>
 <p>As mentioned above, with our default implementations of <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>, registration of services ultimately 
-means adding targets to a container&#39;s <a class="xref" href="../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> target container, associating them with service 
-types which we will later resolve.</p>
+means adding targets to the container&#39;s <a class="xref" href="../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> target container, associating them with service 
+types which we will later resolve.  </p>
 <p>The core registration method for this is the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> and an optional type against which the registration is to be made.</p>
-<p>There&#39;s too much to cover in a few sub headings here for this - 
-<a href="service-registration.html">the service registration topic</a> has more detail, and links to the different types of
-registration you can perform.</p>
+<p>Here&#39;s an example where we register the type <code>Foo</code> to be created whenever an instance of <code>IFoo</code> is requested,
+directly via a container&#39;s own implementation of <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>:</p>
+<pre><code class="lang-cs">var container = new Container();
+container.RegisterType&lt;Foo, IFoo&gt;();
+</code></pre><p>Or, if you create a dedicated <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> that you specifically want the <a class="xref" href="../api/Rezolver.Container.html">Container</a> to
+use, only a small change is required:</p>
+<pre><code class="lang-cs">var targets = new TargetContainer();
+targets.RegisterType&lt;Foo, IFoo&gt;();
+
+var container = new Container(targets);
+</code></pre><div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_">RegisterType</a> overload instructs the container to build
+an instance via <a href="constructor-injection/index.html">constructor injection</a>.</p>
+</div>
+<p>There&#39;s too many types of registrations to cover in a few sub headings here for this - 
+<a href="service-registration.html">the service registration topic</a> has more detail, with links to all the other 
+different types of registration you can perform.</p>
+<p>Moreover, you can browse the different topics from the table of contents on the left (or top on mobile).</p>
 <h2 id="resolving-services">Resolving services</h2>
 <p>Resolving objects from your container is done through the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method which, you&#39;ll
 notice, accepts an <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> as its single parameter, and returns an <code>Object</code>.  Again, if 
@@ -222,8 +235,9 @@ a high-level overview only. </p>
 <li><strong>Target container configuration</strong> (via implementations of <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>)</li>
 <li><strong>Container configuration</strong> (via implementations of <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>)</li>
 </ol>
-<p>Both are very similar in that they define a method called <code>Configure</code> (see <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_">Configure</a>
-in <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> and <a class="xref" href="../api/Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_">Configure</a> in <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>) to 
+<p>Both are very similar in that they define a method called <code>Configure</code> (see 
+<a class="xref" href="../api/Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_">ITargetContainerConfig.Configure</a> and 
+<a class="xref" href="../api/Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_">IContainerConfig.Configure</a>) to 
 which is passed an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and, in the case of <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>, also an
 <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>.</p>
 <p>Implementations of the interfaces can add/modify service registrations which are then used either directly by the 
@@ -232,50 +246,11 @@ container, or which provide more advanced registration functionality.</p>
 <a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration when it configures an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.  This configuration
 is actually applied to all instances of <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> by default (via the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>
 configuration collection) - but you can also control whether enumerable injection is enabled without having to remove the 
-configuration from that collection.</p>
-<p>This is where the Options API comes in (see the <a class="xref" href="../api/Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a> class) - which enables you to 
-get and set options values in an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which then control certain behaviours.  In the case of 
-enumerable injection, the aforementioned configuration object reads the @Rezolver.Options.EnumerableInjection option 
-from the target container it is configuring and, if it evaluates to <code>false</code>, then it doesn&#39;t enable enumerable injection.</p>
-<p>This might sound complicated, but if you read the </p>
-<p>Equally, Rezolver&#39;s support for <a href="constructor-injection/member-injection.html">member injection</a> can be
-controlled container-wide by attaching a @Rezolver.Behaviours.DefaultMemberBinding to the container when it
-is created.</p>
-<div class="TIP"><h5>Tip</h5><p>At the moment, the functionality that&#39;s controlled by these behaviours is limited, but it will increase
-over time as new features are added and as other functionality is reimplemented to take advantage of them.</p>
-</div>
-<p>The various types of target container and container have constructors which accept optional behaviours, as 
-shown in the following lists:</p>
-<p><em>Target Container Behaviours</em></p>
-<ul>
-<li>&lt;xref:Rezolver.TargetContainer.%23ctor(Rezolver.ITargetContainerBehaviour)&gt;</li>
-<li>&lt;xref:Rezolver.OverridingTargetContainer.%23ctor(Rezolver.ITargetContainer,Rezolver.ITargetContainerBehaviour)&gt;</li>
-</ul>
-<p><em>Container Behaviours</em></p>
-<ul>
-<li>&lt;xref:Rezolver.Container.%23ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
-<li>&lt;xref:Rezolver.ScopedContainer.%23ctor(Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
-<li>&lt;xref:Rezolver.OverridingContainer.%23ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.IContainerBehaviour)&gt;</li>
-</ul>
-<p>If you look at these constructors, you&#39;ll notice that in all cases the behaviour parameters are optional - 
-this is because Rezolver has <em>default</em> behaviours that it uses for these types if no specific behaviour is
-passed on construction, and these can all be found in the @Rezolver.GlobalBehaviours class.</p>
-<p>Briefly, these are all instances of special behaviour classes which are collections of other behaviours:</p>
-<ul>
-<li><strong>@Rezolver.GlobalBehaviours.TargetContainerBehaviour</strong> - A @Rezolver.TargetContainerBehaviourCollection with zero
-or more @Rezolver.ITargetContainerBehaviour objects which will be attached to all <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>
-and <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> objects by default</li>
-<li><strong>@Rezolver.GlobalBehaviours.ContainerBehaviour</strong> - A @Rezolver.ContainerBehaviourCollection with zero or more
-@Rezolver.IContainerBehaviour objects which will be attached to all <a class="xref" href="../api/Rezolver.Container.html">Container</a> objects by default 
-(including derived types; except <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>, which gets its own global behaviour)</li>
-<li><strong>@Rezolver.GlobalBehaviours.OverridingContainerBehaviour</strong> - Same as above, but this is specifically for
-<a class="xref" href="../api/Rezolver.OverridingContainer.html">OverridingContainer</a>, because some of its behaviours are typically inherited from the container that
-it is overriding.</li>
-</ul>
-<p>These collections can be modified (add/remove/replace/clear) at any stage of the application&#39;s lifetime, and they 
-will take effect the next time a new container or target container is created.</p>
-<p>There is much more to be covered about behaviours in the future.  For now - use them where this guide shows you can,
-and if you think you need to use them for something you want to achieve then open an issue on Github.</p>
+configuration from that collection, <a href="enumerables.html#disabling-enumerable-injection">as is shown in the last enumerable example</a>.</p>
+<p>There is much more to be covered about configuration and options.  For now - use them where this guide shows you can
+(e.g. to <a href="contravariance.html#disabling-contravariance-advanced">control contravariance</a> or 
+<a href="constructor-injection/member-injection.html">member binding behaviour</a> etc), and if you want to be able to control
+something else this way, and can&#39;t, then just open an issue on Github.</p>
 <hr>
 <h1 id="next-steps">Next Steps</h1>
 <ul>

@@ -322,8 +322,8 @@ var result = Assert.IsType&lt;GenericEnumerableNullableService&lt;int&gt;&gt;(
 <p>The same techniques that are shown in our <a href="member-injection.html">member injection documentation</a> also work for generic types - if you supply an
 <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> to the <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> when it is created (either by the constructors or the 
 aforementioned factory methods), then that behaviour will be used when the constructor is bound.</p>
-<p>Equally, container-specific <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>s injected via &lt;xref:Rezolver.IContainerBehaviour&gt;s will
-also be used as normal.</p>
+<p>Equally, container-specific <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>s that are set through the options API will 
+also be used automatically.</p>
 <p>Refer to the topic for detailed examples on how to use member binding.</p>
 <hr>
 <h1 id="next-steps">Next Steps</h1>

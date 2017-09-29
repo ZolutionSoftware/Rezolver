@@ -432,5 +432,20 @@ namespace Rezolver.Tests.Examples
             Assert.Equal(3, instanceCounter2);
             // </example11>
         }
+
+        [Fact]
+        public void ShouldDisableEnumerables()
+        {
+            // <example12>
+            var config = TargetContainer.DefaultConfig.Clone();
+            config.ConfigureOption<Options.EnableEnumerableInjection>(false);
+
+            // pass our custom config to a new target container which, in turn,
+            // we pass to the constructor of the Container class
+            var container = new Container(new TargetContainer(config));
+
+            Assert.Throws<InvalidOperationException>(() => container.ResolveMany<int>());
+            // </example12>
+        }
     }
 }

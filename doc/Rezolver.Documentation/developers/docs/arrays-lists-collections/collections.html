@@ -185,7 +185,7 @@ Assert.IsType&lt;MyService1&gt;(result4.First());
 Assert.IsType&lt;MyService2&gt;(result4.Skip(1).First());
 Assert.IsType&lt;MyService3&gt;(result4.Skip(2).First());
 </code></pre><h1 id="disabling-collection-injection">Disabling Collection Injection</h1>
-<p>First, you should look at how <a href="arrays.html#disabling-array-injection">to disable array injection</a> as the process
+<p>First, you should look at how <a href="arrays.html#disabling-automatic-array-injection">to disable array injection</a> as the process
 to do it for collections is exactly the same - except it&#39;s a different option:</p>
 <pre><code class="lang-csharp" name="CollectionExamples.cs">var targets = new TargetContainer(
     TargetContainer.DefaultConfig

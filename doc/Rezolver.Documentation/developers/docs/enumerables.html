@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Enumerables | Rezolver IOC </title>
+  	<title>Automatic Enumerable Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Enumerables | Rezolver IOC ">
+  	<meta name="title" content="Automatic Enumerable Injection | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.24.0.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
@@ -107,7 +107,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="enumerables">Enumerables</h1>
+<h1 id="automatic-enumerable-injection">Automatic Enumerable Injection</h1>
 
 <p>By default, a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> (the default <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> used by all containers in the 
 Rezolver framework) is configured to allow any <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a> derivative to resolve an <code>IEnumerable&lt;Service&gt;</code>.</p>
@@ -344,6 +344,44 @@ Assert.IsType&lt;MyService1&gt;(result[1]);
 </code></pre><div class="WARNING"><h5>Warning</h5><p>As soon as you create a manual registration for a particular <code>IEnumerable&lt;T&gt;</code> type, Rezolver no longer has any control
 over how that particular enumerable is produced - so none of the enumerable-related options demonstrated in this documentation 
 will be honoured.</p>
+</div>
+<hr>
+<h2 id="disabling-enumerable-injection">Disabling Enumerable Injection</h2>
+<p>As with much of the built-in functionality in Rezolver, you can control whether enumerables are automatically 
+built or not through the use of options and configuration.</p>
+<p>In the case of enumerable injection, it is a feature that is enabled by an <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>
+that is added by default to a set of configuration objects in the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a> 
+collection which is applied, by default, to all new instances of the <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> class (which
+is, in turn, used by both the main container types - <a class="xref" href="../api/Rezolver.Container.html">Container</a> and <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a>).</p>
+<p>This means that, to disable it, you have to either remove that config (it&#39;s the 
+<a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration singleton) from the collection, or set the 
+<a class="xref" href="../api/Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option to <code>false</code> on the target container before the configuration
+is applied.</p>
+<p>You also have another choice, in that you can either do this directly on the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>
+collection, which will affect <em>all</em> instances of <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>, or you can 
+<a class="xref" href="../api/Rezolver.CombinedTargetContainerConfig.html#Rezolver_CombinedTargetContainerConfig_Clone_">Clone</a> the collection and apply it only to a single target container.</p>
+<p>It&#39;s the second of these options that the example shows, below:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var config = TargetContainer.DefaultConfig.Clone();
+config.ConfigureOption&lt;Options.EnableEnumerableInjection&gt;(false);
+
+// pass our custom config to a new target container which, in turn,
+// we pass to the constructor of the Container class
+var container = new Container(new TargetContainer(config));
+
+Assert.Throws&lt;InvalidOperationException&gt;(() =&gt; container.ResolveMany&lt;int&gt;());
+</code></pre><p>Notice that we&#39;re explicitly creating a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> and passing a cloned config to it; passing
+the result to the <a class="xref" href="../api/Rezolver.Container.html">Container</a> constructor.</p>
+<div class="TIP"><h5>Tip</h5><p>Many other examples throughout this documentation show options simply being set directly on the container.
+In those cases, it&#39;s because the options are used by logic within Rezolver to make decisions.
+Enumerable injection, however, is configured at the point a new <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> is <em>created</em>, 
+because the configuration is applied by one of its constructors; hence the different approach is required in
+order to ensure the option is set <em>before</em> the configuration gets applied.  The 
+<a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration looks for the <a class="xref" href="../api/Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>
+option and, if it&#39;s <code>false</code> it disables itself.</p>
+</div>
+<div class="WARNING"><h5>Warning</h5><p>If you disable automatic enumerable injection then the other 
+<a href="arrays-lists-collections/index.html">automatic collection-type injection behaviour</a> will only work when you 
+explicitly register the correct <code>IEnumerable&lt;T&gt;</code> for it.</p>
 </div>
 <hr>
 <h1 id="next-steps">Next steps</h1>

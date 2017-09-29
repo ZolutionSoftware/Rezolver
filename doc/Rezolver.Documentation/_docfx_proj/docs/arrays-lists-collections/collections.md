@@ -36,7 +36,7 @@ Collections after registrations have been added:
 
 # Disabling Collection Injection
 
-First, you should look at how [to disable array injection](arrays.md#disabling-array-injection) as the process
+First, you should look at how [to disable array injection](arrays.md#disabling-automatic-array-injection) as the process
 to do it for collections is exactly the same - except it's a different option:
 
 [!code-csharp[CollectionExamples.cs](../../../../../test/Rezolver.Tests.Examples/CollectionExamples.cs#example3)]

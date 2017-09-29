@@ -128,23 +128,27 @@ with Asp.Net Core integration.</p>
 <li><a href="docs/enumerables/generics.html">Enumerables of generics</a> - from least generic (e.g. <code>IFoo&lt;Bar&gt;</code>) to most generic (<code>IFoo&lt;&gt;</code>)</li>
 </ul>
 </li>
-<li><code>List&lt;T&gt;</code> injection<ul>
+<li><a href="docs/arrays-lists-collections/arrays.html">Array injection</a></li>
+<li><a href="docs/arrays-lists-collections/lists.html"><code>List&lt;T&gt;</code> injection</a><ul>
 <li>Also <code>IList&lt;T&gt;</code> and <code>IReadOnlyList&lt;T&gt;</code></li>
 </ul>
 </li>
-<li><code>Collection&lt;T&gt;</code> injection<ul>
+<li><a href="docs/arrays-lists-collections/collections.html"><code>Collection&lt;T&gt;</code> injection</a><ul>
 <li>Also <code>ICollection&lt;T&gt;</code>, <code>ReadOnlyCollection&lt;T&gt;</code> and <code>IReadOnlyCollection&lt;T&gt;</code></li>
 </ul>
 </li>
 <li><a href="docs/decorators.html">Decorators</a><ul>
-<li>Non-generic &amp; generic</li>
+<li>Non-generic &amp; generic constructor injection</li>
 <li>Specialised generic (<em>where a decorator for <code>IFoo&lt;&gt;</code> is redecorated by another decorator for <code>IFoo&lt;Bar&gt;</code> only when
 <code>IFoo&lt;Bar&gt;</code> is requested</em>)</li>
 <li><a href="docs/enumerables.html#decorators-and-enumerables">Enumerables of decorated instances</a></li>
+<li><a href="docs/decorators/delegates.html">Decorator Delegates</a></li>
+<li>Can decorate any of the built-in enumerable/collection types</li>
 </ul>
 </li>
-<li>Contravariant generics (e.g. <code>Action&lt;IFoo&gt;</code> registration automatically used for <code>Action&lt;Foo&gt;</code>)<ul>
+<li><a href="docs/contravariance.html">Generic Contravariance</a> (e.g. <code>Action&lt;IFoo&gt;</code> registration automatically used for <code>Action&lt;Foo&gt;</code>)<ul>
 <li>Can be enabled and disabled globally and per-type</li>
+<li>Enumerables and collections automatically include all contravariant matches</li>
 </ul>
 </li>
 <li>Constrained generics</li>
@@ -183,7 +187,6 @@ with Asp.Net Core integration.</p>
 <h2 id="quick-links">Quick Links</h2>
 <ul>
 <li><a href="docs/index.html">Developer Guide</a></li>
-<li><a href="docs/benchmarks.html">Benchmarks</a></li>
 <li><a href="docs/nuget-packages/index.html">Nuget Packages</a></li>
 <li><a href="api/index.html">API Reference</a></li>
 <li><a href="https://github.com/ZolutionSoftware/Rezolver/releases">Release History (On Github)</a></li>
