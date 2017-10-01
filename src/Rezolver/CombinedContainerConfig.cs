@@ -56,10 +56,9 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="CombinedContainerConfig"/> type, using the passed 
-        /// behaviours to seed the underlying collection.
+        /// Clones the configuration in this instance into a new instance of the <see cref="CombinedContainerConfig"/> 
+        /// type.
         /// </summary>
-        /// <param name="configs">The behaviours to be added to the collection on construction.</param>
         public CombinedContainerConfig Clone() => base.Clone<CombinedContainerConfig>();
 
         /// <summary>

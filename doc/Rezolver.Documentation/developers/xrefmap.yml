@@ -5365,30 +5365,6 @@ references:
   commentId: Overload:Rezolver.OverridingTargetContainer.Parent
   fullName: Rezolver.OverridingTargetContainer.Parent
   nameWithType: OverridingTargetContainer.Parent
-- uid: Rezolver.OverridingTargetContainer.Register(Rezolver.ITarget,System.Type)
-  name: Register(ITarget, Type)
-  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Register_Rezolver_ITarget_System_Type_
-  commentId: M:Rezolver.OverridingTargetContainer.Register(Rezolver.ITarget,System.Type)
-  fullName: Rezolver.OverridingTargetContainer.Register(Rezolver.ITarget, System.Type)
-  nameWithType: OverridingTargetContainer.Register(ITarget, Type)
-- uid: Rezolver.OverridingTargetContainer.Register*
-  name: Register
-  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Register_
-  commentId: Overload:Rezolver.OverridingTargetContainer.Register
-  fullName: Rezolver.OverridingTargetContainer.Register
-  nameWithType: OverridingTargetContainer.Register
-- uid: Rezolver.OverridingTargetContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)
-  name: RegisterContainer(Type, ITargetContainer)
-  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.OverridingTargetContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)
-  fullName: Rezolver.OverridingTargetContainer.RegisterContainer(System.Type, Rezolver.ITargetContainer)
-  nameWithType: OverridingTargetContainer.RegisterContainer(Type, ITargetContainer)
-- uid: Rezolver.OverridingTargetContainer.RegisterContainer*
-  name: RegisterContainer
-  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_RegisterContainer_
-  commentId: Overload:Rezolver.OverridingTargetContainer.RegisterContainer
-  fullName: Rezolver.OverridingTargetContainer.RegisterContainer
-  nameWithType: OverridingTargetContainer.RegisterContainer
 - uid: Rezolver.ParameterBinding
   name: ParameterBinding
   href: api/Rezolver.ParameterBinding.html

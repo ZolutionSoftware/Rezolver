@@ -12,6 +12,6 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ZolutionSoftware/Rezolver</RepositoryUrl>
     <VersionPrefix>1.3.0</VersionPrefix>
-    <VersionSuffix>beta</VersionSuffix>
+    <VersionSuffix></VersionSuffix>
   </PropertyGroup>
 </Project>

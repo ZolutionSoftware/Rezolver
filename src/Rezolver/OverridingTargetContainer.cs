@@ -26,10 +26,8 @@ namespace Rezolver
     /// The <see cref="FetchAll(Type)"/> method, however, returns all targets registered directly in this
     /// container and in the parent.</remarks>
     public sealed class OverridingTargetContainer : TargetContainer
-    { 
+    {
         private readonly ITargetContainer _parent;
-        private readonly bool _configured = false;
-        private bool _hasRegistrations = true;
         /// <summary>
         /// Initializes a new instance of the <see cref="OverridingTargetContainer"/> class.
         /// </summary>
@@ -45,7 +43,6 @@ namespace Rezolver
             _parent = parent;
 
             (config ?? DefaultConfig).Configure(this);
-            _configured = true;
         }
 
         /// <summary>
@@ -55,18 +52,6 @@ namespace Rezolver
         public ITargetContainer Parent
         {
             get { return _parent; }
-        }
-
-        public override void Register(ITarget target, Type serviceType = null)
-        {
-            base.Register(target, serviceType);
-            if (_configured && !_hasRegistrations) _hasRegistrations = true;
-        }
-
-        public override void RegisterContainer(Type type, ITargetContainer container)
-        {
-            base.RegisterContainer(type, container);
-            if (_configured && !_hasRegistrations) _hasRegistrations = true;
         }
 
         /// <summary>
@@ -79,7 +64,7 @@ namespace Rezolver
         /// </returns>
         public override ITarget Fetch(Type type)
         {
-            var result = _hasRegistrations ? base.Fetch(type) : null;
+            var result = base.Fetch(type);
             //ascend the tree of target containers looking for a type match.
             if ((result == null || result.UseFallback))
                 return _parent.Fetch(type);
@@ -97,7 +82,7 @@ namespace Rezolver
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
             return (_parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
-                (_hasRegistrations ? base.FetchAll(type) : null) ?? Enumerable.Empty<ITarget>());
+                base.FetchAll(type) ?? Enumerable.Empty<ITarget>());
         }
     }
 }
