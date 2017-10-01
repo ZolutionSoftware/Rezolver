@@ -14,7 +14,7 @@ After adding the package, configuring your Asp.Net website to use Rezolver as th
 Replace the default `ConfigureServices` function in your application's `Startup.cs` file with
 this one:
 
-[!code-csharp[Startup.cs](../../../../../Examples/Rezolver.Examples.AspnetCore/Startup.cs#example)]
+[!code-csharp[Startup.cs](../../../../../Examples/Rezolver.Examples.AspnetCore.1.1/Startup.cs#example)]
 
 This returns a new service provider to the Asp.Net Core stack - thus replacing the default service provider
 that's already built.

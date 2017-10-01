@@ -50,6 +50,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="GenericGenerator.t4">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GenericGenerator.cs</LastGenOutput>
+    </None>
     <None Update="Targets\DelegateTarget_CreateAndRegister.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DelegateTarget_CreateAndRegister.cs</LastGenOutput>
@@ -61,6 +65,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="GenericGenerator.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericGenerator.t4</DependentUpon>
+    </Compile>
     <Compile Update="Targets\DelegateTarget_CreateAndRegister.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

@@ -33,11 +33,25 @@ namespace Rezolver.Compilation
 	/// </remarks>
 	public class CompileContext : ICompileContext, ITargetContainer
 	{
-		/// <summary>
-		/// Gets the parent context from which this context was created, if applicable.
-		/// </summary>
-		/// <value>The parent context.</value>
-		public ICompileContext ParentContext { get; }
+        /// <summary>
+        /// This is used to prevent stuff like enumerables being added to every single overriding target
+        /// container that's created for every entry in the compilation stack.  It sidesteps a bug introduced
+        /// by the enumerable behaviour detecting OverridingTargetContainer Root containers which leads
+        /// to an endless loop when Rezolver is used with Asp.Net Core.
+        /// 
+        /// Clearly there is another underlying issue here which needs to be addressed but I can't isolate the
+        /// exact cause, except to say that very deep compilation stacks appear to be a problem.  I can't tell
+        /// if it is simply a loop that will eventually finish but which is having to do too much work; or if there
+        /// is a simple bit of logic that can be used to fix it.  In the meantime, preventing compilation context
+        /// target containers from having their own enumerable containers seems to fix the problem, without 
+        /// breaking any tests.
+        /// </summary>
+        private static readonly CombinedTargetContainerConfig _emptyConfig = new CombinedTargetContainerConfig();
+        /// <summary>
+        /// Gets the parent context from which this context was created, if applicable.
+        /// </summary>
+        /// <value>The parent context.</value>
+        public ICompileContext ParentContext { get; }
 
         private readonly IResolveContext _resolveContext;
         /// <summary>
@@ -100,7 +114,7 @@ namespace Rezolver.Compilation
 		{
 			parentContext.MustNotBeNull(nameof(parentContext));
 			ParentContext = parentContext;
-			DependencyTargetContainer = new OverridingTargetContainer(parentContext);
+			DependencyTargetContainer = new OverridingTargetContainer(parentContext, _emptyConfig);
 			_targetType = targetType;
             _resolveContext = parentContext.ResolveContext.New(newRequestedType: targetType);
 			ScopeBehaviourOverride = scopeBehaviourOverride;
@@ -129,7 +143,7 @@ namespace Rezolver.Compilation
 		{
 			resolveContext.MustNotBeNull(nameof(resolveContext));
 			dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
-			DependencyTargetContainer = new OverridingTargetContainer(dependencyTargetContainer);
+			DependencyTargetContainer = new OverridingTargetContainer(dependencyTargetContainer, _emptyConfig);
             _resolveContext = resolveContext;
 			_targetType = targetType;
 			_compileStack = new Stack<CompileStackEntry>(30);

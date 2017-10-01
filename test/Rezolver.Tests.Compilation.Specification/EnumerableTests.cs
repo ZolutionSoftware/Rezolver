@@ -144,5 +144,17 @@ namespace Rezolver.Tests.Compilation.Specification
                 Assert.Equal(1, i.DisposedCount);
             });
         }
+
+        [Fact]
+        public void Enumerable_ShouldWorkFRomScopedContainer()
+        {
+            var container = new ScopedContainer();
+            using (var scope = container.CreateScope())
+            {
+                var result = scope.Resolve<IEnumerable<Action<BaseClassChild>>>();
+
+                Assert.Empty(result);
+            }
+        }
     }
 }

@@ -118,20 +118,15 @@ its lifetime.</p>
 <p>After adding the package, configuring your Asp.Net website to use Rezolver as the DI container is simple:</p>
 <p>Replace the default <code>ConfigureServices</code> function in your application&#39;s <code>Startup.cs</code> file with
 this one:</p>
-<pre><code class="lang-csharp" name="Startup.cs">// This method gets called by the runtime. Use this method to add services to the container.
-public IServiceProvider ConfigureServices(IServiceCollection services)
+<pre><code class="lang-csharp" name="Startup.cs">      public void ConfigureContainer(ITargetContainer container)
 {
-	// Add framework services.
-	services.AddMvc();
+	//by declaring this method - even if empty - you trigger the 
+	//creation of the ITargetContainer which will ultimately
+	//be used to create the IContainer that will be used
+	//as the application&#39;s container.
 
-	//create the Rezolver container from the services, without making any additional
-	//registrations
-	var container = services.CreateRezolverContainer();
-	//use IContainer/ITargetContainer methods and extensions here to add extra registrations, e.g.
-	//decorators or your own application&#39;s registrations.
-
-	//IContainers implement the IServiceProvider interface natively - so can simply be returned.
-	return container;
+	//Here you can perform additional registrations/configuration on the
+	//ITargetContainer here.
 }
 </code></pre><p>This returns a new service provider to the Asp.Net Core stack - thus replacing the default service provider
 that&#39;s already built.</p>
@@ -147,7 +142,7 @@ than the MS DI container does through its <code>ServiceRegistrations</code> clas
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

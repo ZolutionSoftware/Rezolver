@@ -119,9 +119,9 @@ method that&#39;s now available, as shown:</p>
        public static void Main(string[] args)
        {
 		var host = new WebHostBuilder()
-               .UseKestrel()				
 			//add the Rezolver container to the host builder
 			.UseRezolver()
+               .UseKestrel()				
                .UseContentRoot(Directory.GetCurrentDirectory())
                .UseIISIntegration()
                .UseStartup&lt;Startup&gt;()
@@ -133,7 +133,7 @@ method that&#39;s now available, as shown:</p>
 </code></pre><p>Then we need to tell the Asp.Net Core stack that you want an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> to be created
 in order to construct the <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> that will be used as the DI container.</p>
 <p>We do this in your application&#39;s <code>startup.cs</code> - simply by declaring a single method:</p>
-<pre><code class="lang-csharp" name="Startup.cs">public void ConfigureContainer(ITargetContainer container)
+<pre><code class="lang-csharp" name="Startup.cs">      public void ConfigureContainer(ITargetContainer container)
 {
 	//by declaring this method - even if empty - you trigger the 
 	//creation of the ITargetContainer which will ultimately
@@ -152,7 +152,7 @@ in order to construct the <a class="xref" href="../../api/Rezolver.IContainer.ht
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/dev/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

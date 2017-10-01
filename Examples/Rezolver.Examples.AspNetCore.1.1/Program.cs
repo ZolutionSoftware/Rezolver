@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Rezolver.Logging;
 using Microsoft.Extensions.Logging;
 
 namespace Rezolver.Examples.AspNetCore._1._1
@@ -15,9 +14,9 @@ namespace Rezolver.Examples.AspNetCore._1._1
         public static void Main(string[] args)
         {
 			var host = new WebHostBuilder()
-                .UseKestrel()				
 				//add the Rezolver container to the host builder
 				.UseRezolver()
+                .UseKestrel()				
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
