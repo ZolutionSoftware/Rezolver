@@ -27,5 +27,3 @@ Read [our own notes on Rezolver's performance in this benchmark](http://rezolver
 # Contributing
 
 Feel free to fork this repo, build from the source, and submit pull requests for new functionality or bugfixes!
-
-The solution is now an msbuild-based VS2017 solution.
