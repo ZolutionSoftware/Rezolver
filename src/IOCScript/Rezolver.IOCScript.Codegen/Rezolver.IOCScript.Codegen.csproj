@@ -55,6 +55,8 @@
       <Listener>True</Listener>
       <Visitor>True</Visitor>
     </Antlr4>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,13 +3,18 @@
 Rezolver is a [fast](docs/benchmarks.md), efficient, extensible, [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container 
 with Asp.Net Core integration.
 
-The nuget package is built for the following .Net Versions:
+The nuget package has binaries targeted to these .Net versions/standards:
 
 - .Net Standard 1.1
 - .Net 4.5.1
 - .Net 4.6
 
-This site contains API documentation and developer guides for getting the most out of it.  
+This site contains all the API documentation and Developer Guides you'll ever to get you up and running using
+Rezolver.  
+
+## 1.3 Released!
+
+See the [release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
 
 ## Features
 

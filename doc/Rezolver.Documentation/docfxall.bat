@@ -1,6 +1,6 @@
 @ECHO OFF
 REM This is here because MSBuild integration in VS is currently broken when SDK 2.0 tools are installed.
-"../../packages/docfx.console.2.24.0/tools/docfx.exe"
+REM YOU MIGHT NEED TO set PATH=%PATH%;"e:\github\rezolver\packages\docfx.console.2.24.0/tools"
 
-REM @docfx metadata -f
-REM @docfx build -f docfx.json
+@docfx metadata -f
+@docfx build -f docfx.json
