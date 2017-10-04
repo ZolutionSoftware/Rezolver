@@ -82,7 +82,7 @@ namespace Rezolver.Targets
 				return Value;
 			else {
 				//whatever scoping we're doing, we MUST use the root scope.
-				return context.Scope.GetRootScope().Resolve(context, r => Value, ScopeBehaviour);
+				return context.Scope.GetRootScope().Resolve(context, this, r => Value, ScopeBehaviour);
 			}
 		}
 

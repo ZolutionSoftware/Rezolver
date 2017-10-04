@@ -21,33 +21,33 @@ namespace Rezolver.Targets
 	{
         internal class SingletonContainer
         {
-            private readonly ConcurrentDictionary<Type, Lazy<object>> _cached =
-                new ConcurrentDictionary<Type, Lazy<object>>();
+            private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
+                new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
 
-            private readonly ConcurrentDictionary<Type, ICompiledTarget> _cachedCompiled =
-                new ConcurrentDictionary<Type, ICompiledTarget>();
+            private readonly ConcurrentDictionary<TypeAndTargetId, ICompiledTarget> _cachedCompiled =
+                new ConcurrentDictionary<TypeAndTargetId, ICompiledTarget>();
 
-            private readonly ConcurrentDictionary<Type, object> _cachedObjects =
-                new ConcurrentDictionary<Type, object>();
+            private readonly ConcurrentDictionary<TypeAndTargetId, object> _cachedObjects =
+                new ConcurrentDictionary<TypeAndTargetId, object>();
 
-            public ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
+            public ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, ITarget target, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext: ICompileContext
             {
-                return _cachedCompiled.GetOrAdd(context.TargetType, t => compiledTargetFactory(context));
+                return _cachedCompiled.GetOrAdd(new TypeAndTargetId(context.TargetType, target), t => compiledTargetFactory(context));
             }
 
-            public Lazy<object> GetLazy(IResolveContext context, Func<IResolveContext, object> lazyFactory)
+            public Lazy<object> GetLazy(IResolveContext context, ITarget target, Func<IResolveContext, object> lazyFactory)
             {
-                return _cached.GetOrAdd(context.RequestedType, c => new Lazy<object>(() => lazyFactory(context)));
+                return _cached.GetOrAdd(new TypeAndTargetId(context.RequestedType, target), c => new Lazy<object>(() => lazyFactory(context)));
             }
 
-            public object GetObject<TCompileContext>(TCompileContext context, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
+            public object GetObject<TCompileContext>(TCompileContext context, ITarget target, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
-                return _cachedObjects.GetOrAdd(context.TargetType, c =>
+                return _cachedObjects.GetOrAdd(new TypeAndTargetId(context.TargetType, target), c =>
                 {
-                    var compiled = GetCompiled(context, compiledTargetFactory);
-                    return GetLazy(context.ResolveContext, rc => compiled.GetObject(rc)).Value;
+                    var compiled = GetCompiled(context, target, compiledTargetFactory);
+                    return GetLazy(context.ResolveContext, target, rc => compiled.GetObject(rc)).Value;
                 });
             }
         }

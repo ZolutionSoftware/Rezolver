@@ -38,6 +38,10 @@ namespace Rezolver
 	/// </remarks>
 	public interface ITarget
 	{
+        /// <summary>
+        /// Unique Id for this target
+        /// </summary>
+        Guid Id { get; }
 		/// <summary>
 		/// If <c>true</c>, then the consumer should consider falling back to a more suitable target if available, as
 		/// the object produced from this target is most likely a default of some kind - e.g. empty enumerable, default

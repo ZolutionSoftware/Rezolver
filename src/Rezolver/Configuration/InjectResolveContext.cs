@@ -14,6 +14,7 @@ namespace Rezolver.Configuration
     {
         private class ResolveContextTarget : ITarget, ICompiledTarget
         {
+            public Guid Id { get; } = Guid.NewGuid();
             public bool UseFallback => false;
 
             public Type DeclaredType => typeof(IResolveContext);

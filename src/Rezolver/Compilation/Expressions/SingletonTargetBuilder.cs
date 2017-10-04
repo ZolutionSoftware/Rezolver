@@ -30,7 +30,7 @@ namespace Rezolver.Compilation.Expressions
         {
             var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
 
-            return Expression.Constant(holder.GetObject(context,
+            return Expression.Constant(holder.GetObject(context, target,
                 c => compiler.CompileTarget(
                     target.InnerTarget,
                     c.NewContext(

@@ -66,23 +66,25 @@ namespace Rezolver.Compilation.Expressions
                 MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
 
             /// <summary>
-            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, ITarget, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// method for help in generating scope-interfacing code.
             /// </summary>
             public static MethodInfo IContainerScope_Resolve_Method =>
                 MethodCallExtractor.ExtractCalledMethod(
                     (IContainerScope s) => s.Resolve(
                         (IResolveContext)null,
+                        (ITarget)null,
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, ITarget, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// extension method.
             /// </summary>
             public static MethodInfo ResolveContextExtensions_Resolve_Method =>
                 MethodCallExtractor.ExtractCalledMethod(
-                    (IResolveContext rc) => rc.Resolve((Func<IResolveContext, object>)null,
+                    (IResolveContext rc) => rc.Resolve((ITarget)null,
+                        (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
 
@@ -269,6 +271,7 @@ namespace Rezolver.Compilation.Expressions
                     Expression.Call(
                         Methods.ResolveContextExtensions_Resolve_Method,
                         newContextExpr,
+                        Expression.Constant(target),
                         Expression.Constant(lambda),
                         Expression.Constant(scopeBehaviour)
                     ),

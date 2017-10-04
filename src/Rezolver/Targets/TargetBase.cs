@@ -14,6 +14,13 @@ namespace Rezolver.Targets
 	/// </summary>
 	public abstract class TargetBase : ITarget
 	{
+        /// <summary>
+        /// Implementation of <see cref="ITarget.Id"/>.  Unique Id for this target.
+        /// 
+        /// Always initialised to a new <see cref="Guid"/> using <see cref="Guid.NewGuid"/>
+        /// </summary>
+        public Guid Id { get; } = Guid.NewGuid();
+
 		/// <summary>
 		/// Implementation of <see cref="ITarget.UseFallback"/>
 		/// 
