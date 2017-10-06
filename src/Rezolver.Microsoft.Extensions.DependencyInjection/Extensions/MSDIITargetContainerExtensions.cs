@@ -33,15 +33,13 @@ namespace Rezolver
 			//the scope as the actual scope factory that will be used.
 			targets.RegisterExpression(context => new RezolverContainerScopeFactory(context), typeof(IServiceScopeFactory));
 
-			foreach (var group in services.GroupBy(s => s.ServiceType))
-			{
-				var toRegister = group.Select(s => CreateTargetFromService(s)).Where(t => t != null).ToArray();
-
-				if (toRegister.Length == 1)
-					targets.Register(toRegister[0], group.Key);
-				else if (toRegister.Length > 1)
-					targets.RegisterMultiple(toRegister, group.Key);
-			}
+            foreach(var serviceAndTarget in services.Select(s => new {
+                serviceType = s.ServiceType,
+                target = CreateTargetFromService(s)
+            }).Where(st => st.target != null))
+            {
+                targets.Register(serviceAndTarget.target, serviceAndTarget.serviceType);
+            }
 		}
 
 		private static ITarget CreateTargetFromService(ServiceDescriptor service)

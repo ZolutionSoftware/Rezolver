@@ -12,20 +12,29 @@ namespace Microsoft.Extensions.DependencyInjection
 	/// </summary>
 	public static class RezolverServiceCollectionExtensions
 	{
-		/// <summary>
-		/// Creates a new default <see cref="ScopedContainer"/> and registers the services in <paramref name="services"/>
-		/// as targets.
-		/// </summary>
-		/// <param name="services">The services to be registered.</param>
-		/// <returns>An <see cref="IContainer"/> instance</returns>
-		/// <exception cref="ArgumentNullException">If <paramref name="services"/> is null.</exception>
-		public static IContainer CreateRezolverContainer(this IServiceCollection services)
+        /// <summary>
+        /// Creates a new default <see cref="ScopedContainer"/> and registers the services in <paramref name="services"/>
+        /// as targets.
+        /// </summary>
+        /// <param name="services">The services to be registered.</param>
+        /// <returns>An <see cref="IContainer"/> instance</returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="services"/> is null.</exception>
+        /// <remarks>The <see cref="Rezolver.Options.LazyEnumerables"/> option (is set to <c>false</c> by this method,
+        /// because v2.0 of .Net Core 2 seems to expect all enumerables to be eagerly loaded - getting clarification
+        /// on this from the team at https://github.com/aspnet/DependencyInjection/issues/589</remarks>
+        public static IContainer CreateRezolverContainer(this IServiceCollection services)
 		{
 			if (services == null) throw new ArgumentNullException(nameof(services));
 
-			var r = new ScopedContainer();
-			r.Populate(services);
-			return r;
+            var targetContainer = new TargetContainer(
+                TargetContainer.DefaultConfig
+                .Clone()
+                .ConfigureOption<Rezolver.Options.LazyEnumerables>(false)
+                );
+
+			var c = new ScopedContainer(targetContainer);
+			c.Populate(services);
+			return c;
 		}
 
 		/// <summary>
