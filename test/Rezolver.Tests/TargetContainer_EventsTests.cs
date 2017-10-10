@@ -3,68 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rezolver.Events;
 using Xunit;
 
 namespace Rezolver.Tests
 {
-    public sealed class TestEvent
+    public class TargetRegisteredEventHandler : ITargetContainerEventHandler<TargetRegisteredEvent>
     {
-        public string Message { get; }
-        public TestEvent(string message)
+        public List<(ITargetContainer, TargetRegisteredEvent)> HandledEvents { get; } = new List<(ITargetContainer, TargetRegisteredEvent)>();
+
+        public (ITargetContainer, TargetRegisteredEvent) LastEvent {  get { return HandledEvents[HandledEvents.Count - 1]; } }
+        public void Handle(ITargetContainer source, TargetRegisteredEvent e)
         {
-            Message = message;
-        }
-    }
-
-    public interface ITargetContainerEventHandler<in TEvent>
-    {
-        void Handle(ITargetContainer source, TEvent e);
-    }
-
-    public class TestEventHandler1 : ITargetContainerEventHandler<TestEvent>
-    {
-        public List<string> ReceivedMessages { get; } = new List<string>();
-
-        public void Handle(ITargetContainer source, TestEvent e) => ReceivedMessages.Add(e.Message);
-    }
-
-    public class TestEventHandler2 : ITargetContainerEventHandler<TestEvent>
-    {
-        public List<TestEvent> ReceivedEvents { get; } = new List<TestEvent>();
-
-        public void Handle(ITargetContainer source, TestEvent e) => ReceivedEvents.Add(e);
-    }
-    public static class TargetContainerEventExtensions
-    {
-        public static void RegisterEventHandler<TEvent>(this ITargetContainer container, ITargetContainerEventHandler<TEvent> handler)
-        {
-            container.SetOption(handler);
-        }
-
-        public static IEnumerable<ITargetContainerEventHandler<TEvent>> GetEventHandlers<TEvent>(this ITargetContainer container, TEvent e = default(TEvent))
-        {
-            return container.GetOptions<ITargetContainerEventHandler<TEvent>>();
+            HandledEvents.Add((source, e));
         }
     }
 
     public class TargetContainer_EventsTests
     {
         [Fact]
-        public void ShouldGetEventHandlers()
+        public void ShouldReceiveNotificationOfTargetAdded()
         {
             // Arrange
             ITargetContainer targetContainer = new TargetContainer();
-            var handler1 = new TestEventHandler1();
-            var handler2 = new TestEventHandler2();
-
-            targetContainer.RegisterEventHandler(handler1);
-            targetContainer.RegisterEventHandler(handler2);
+            var handler = new TargetRegisteredEventHandler();
+            targetContainer.RegisterEventHandler(handler);
 
             // Act
-            var handlers = targetContainer.GetEventHandlers<TestEvent>();
+            var target = Target.ForObject(1);
+            targetContainer.Register(target);
 
             // Assert
-            Assert.Equal(new ITargetContainerEventHandler<TestEvent>[] { handler1, handler2 }, handlers);
+            Assert.Same(targetContainer, handler.LastEvent.Item1);
+            Assert.Same(target, handler.LastEvent.Item2.Target);
+            Assert.Equal(typeof(int), handler.LastEvent.Item2.ServiceType);
         }
 
         // So: the idea is to use event handlers - defined as options in the target container - as a way to 'tack-on' the necessary information

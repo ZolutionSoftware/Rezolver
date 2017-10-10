@@ -98,9 +98,9 @@ namespace Rezolver
             // registered first.
             // TODO: allow caching of per-type lookups.  Throw cache away if the list changes.
             ITarget temp;
-            for (var f = Count-1; f >= 0; f--)
+            for (var f = Count; f != 0; f--)
             {
-                temp = _targets[f];
+                temp = _targets[f-1];
                 if (temp.SupportsType(type))
                     return temp;
             }
