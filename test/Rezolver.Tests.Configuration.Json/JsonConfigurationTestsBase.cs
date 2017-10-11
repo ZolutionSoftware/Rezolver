@@ -443,11 +443,13 @@ namespace Rezolver.Tests.Configuration.Json
     [Fact]
     public void BindConstructorOfNetworkCredentials()
     {
-      //binding a constructor explicitly - using a type from the .Net framework
+      // binding a constructor explicitly - using a type from the .Net framework
+      // NOTE - This test can break when switching to different versions of the .Net runtimes, because
+      // the location of the NetworkCredential Type floats around.
       string json = @"{
 			""rezolve"" : [ 
 			{
-				""System.Net.NetworkCredential"": {
+				""System.Net.NetworkCredential, System.Net.Primitives"": {
 					""$construct"": ""$auto"",
 					""$args"": {
 						""$sig"": [ ""System.String"", ""System.String"" ],

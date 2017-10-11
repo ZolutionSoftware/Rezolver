@@ -259,11 +259,11 @@ container.RegisterType&lt;UsesIMyService2, IUsesAnyService&lt;IMyService&gt;&gt;
 var result = container.ResolveMany&lt;IUsesAnyService&lt;IMyService&gt;&gt;().ToArray();
 var result2 = container.ResolveMany&lt;IUsesAnyService&lt;MyService&gt;&gt;().ToArray();
 
-//note the order - specific generic type matches first, followed by more general
+//Note - enumerable is in registration order, regardless of open/closed generic
 Assert.Equal(3, result.Length);
-Assert.IsType&lt;UsesIMyService&gt;(result[0]);
-Assert.IsType&lt;UsesIMyService2&gt;(result[1]);
-Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[2]);
+Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[0]);
+Assert.IsType&lt;UsesIMyService&gt;(result[1]);
+Assert.IsType&lt;UsesIMyService2&gt;(result[2]);
 
 Assert.Equal(1, result2.Length);
 Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
@@ -372,7 +372,7 @@ generic type parameters - see this in action with enumerables
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/generics.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/#56/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/generics.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

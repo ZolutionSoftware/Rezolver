@@ -78,7 +78,13 @@ namespace Rezolver.Sdk
 
         public IEnumerator<T> GetEnumerator()
         {
-            return Objects.OrderBy(b => b, this).GetEnumerator();
+            // force generation of dependency map in the rare case that there was only one thing in the
+            // enumerable
+            foreach (var result in Objects.OrderBy(b => b, this))
+            {
+                GetDependencyMap(result);
+                yield return result;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

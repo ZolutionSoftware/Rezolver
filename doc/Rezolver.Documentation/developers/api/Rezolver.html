@@ -282,6 +282,10 @@ from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> names
 <p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s, is also Generic type aware,
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.TargetContainerEventExtensions.html">TargetContainerEventExtensions</a></h4>
+      <section><p>Contains the extension <a class="xref" href="Rezolver.TargetContainerEventExtensions.html#Rezolver_TargetContainerEventExtensions_RegisterEventHandler__1_Rezolver_ITargetContainer_Rezolver_ITargetContainerEventHandler___0__">RegisterEventHandler&lt;TEvent&gt;(ITargetContainer, ITargetContainerEventHandler&lt;TEvent&gt;)</a> 
+which allows a caller to receive notifications about events happening inside a particular target container.</p>
+</section>
       <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves 
 <a class="xref" href="Rezolver.ITarget.html">ITarget</a> and <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by service type.</p>
@@ -360,6 +364,10 @@ that the targets are registered against.</p>
       <h4><a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a></h4>
       <section><p>Marker interface for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which is responsible for configuring a specific type
 of object/behaviour/service/option. (Determined by <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>).</p>
+</section>
+      <h4><a class="xref" href="Rezolver.ITargetContainerEventHandler-1.html">ITargetContainerEventHandler&lt;TEvent&gt;</a></h4>
+      <section><p>Interface for an object which handles an event of a particular type (<code data-dev-comment-type="typeparamref" class="typeparamref">TEvent</code>)
+raised from an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITargetContainerFactory.html">ITargetContainerFactory</a></h4>
       <section><p>A target container option used by <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> to create a new instance of

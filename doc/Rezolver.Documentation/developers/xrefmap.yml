@@ -3334,15 +3334,15 @@ references:
   commentId: Overload:Rezolver.ContainerScope.Parent
   fullName: Rezolver.ContainerScope.Parent
   nameWithType: ContainerScope.Parent
-- uid: Rezolver.ContainerScope.Rezolver#IContainerScope#Resolve(Rezolver.IResolveContext,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
-  name: IContainerScope.Resolve(IResolveContext, Func<IResolveContext, Object>, ScopeBehaviour)
-  href: api/Rezolver.ContainerScope.html#Rezolver_ContainerScope_Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_
-  commentId: M:Rezolver.ContainerScope.Rezolver#IContainerScope#Resolve(Rezolver.IResolveContext,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
-  name.vb: Rezolver.IContainerScope.Resolve(IResolveContext, Func(Of IResolveContext, Object), ScopeBehaviour)
-  fullName: Rezolver.ContainerScope.Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, System.Func<Rezolver.IResolveContext, System.Object>, Rezolver.ScopeBehaviour)
-  fullName.vb: Rezolver.ContainerScope.Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, System.Func(Of Rezolver.IResolveContext, System.Object), Rezolver.ScopeBehaviour)
-  nameWithType: ContainerScope.IContainerScope.Resolve(IResolveContext, Func<IResolveContext, Object>, ScopeBehaviour)
-  nameWithType.vb: ContainerScope.Rezolver.IContainerScope.Resolve(IResolveContext, Func(Of IResolveContext, Object), ScopeBehaviour)
+- uid: Rezolver.ContainerScope.Rezolver#IContainerScope#Resolve(Rezolver.IResolveContext,Rezolver.ITarget,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
+  name: IContainerScope.Resolve(IResolveContext, ITarget, Func<IResolveContext, Object>, ScopeBehaviour)
+  href: api/Rezolver.ContainerScope.html#Rezolver_ContainerScope_Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_Rezolver_ITarget_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_
+  commentId: M:Rezolver.ContainerScope.Rezolver#IContainerScope#Resolve(Rezolver.IResolveContext,Rezolver.ITarget,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
+  name.vb: Rezolver.IContainerScope.Resolve(IResolveContext, ITarget, Func(Of IResolveContext, Object), ScopeBehaviour)
+  fullName: Rezolver.ContainerScope.Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, Rezolver.ITarget, System.Func<Rezolver.IResolveContext, System.Object>, Rezolver.ScopeBehaviour)
+  fullName.vb: Rezolver.ContainerScope.Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, Rezolver.ITarget, System.Func(Of Rezolver.IResolveContext, System.Object), Rezolver.ScopeBehaviour)
+  nameWithType: ContainerScope.IContainerScope.Resolve(IResolveContext, ITarget, Func<IResolveContext, Object>, ScopeBehaviour)
+  nameWithType.vb: ContainerScope.Rezolver.IContainerScope.Resolve(IResolveContext, ITarget, Func(Of IResolveContext, Object), ScopeBehaviour)
 - uid: Rezolver.ContainerScope.Rezolver#IContainerScope#Resolve*
   name: IContainerScope.Resolve
   href: api/Rezolver.ContainerScope.html#Rezolver_ContainerScope_Rezolver_IContainerScope_Resolve_
@@ -3673,6 +3673,54 @@ references:
   fullName.vb: Rezolver.DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, TResult)(Rezolver.ITargetContainer, System.Func(Of T1, T2, T3, T4, T5, TResult), System.Type, Rezolver.ScopeBehaviour)
   nameWithType: DelegateTargetContainerExtensions.RegisterDelegate<T1, T2, T3, T4, T5, TResult>(ITargetContainer, Func<T1, T2, T3, T4, T5, TResult>, Type, ScopeBehaviour)
   nameWithType.vb: DelegateTargetContainerExtensions.RegisterDelegate(Of T1, T2, T3, T4, T5, TResult)(ITargetContainer, Func(Of T1, T2, T3, T4, T5, TResult), Type, ScopeBehaviour)
+- uid: Rezolver.Events
+  name: Rezolver.Events
+  href: api/Rezolver.Events.html
+  commentId: N:Rezolver.Events
+  fullName: Rezolver.Events
+  nameWithType: Rezolver.Events
+- uid: Rezolver.Events.TargetRegisteredEvent
+  name: TargetRegisteredEvent
+  href: api/Rezolver.Events.TargetRegisteredEvent.html
+  commentId: T:Rezolver.Events.TargetRegisteredEvent
+  fullName: Rezolver.Events.TargetRegisteredEvent
+  nameWithType: TargetRegisteredEvent
+- uid: Rezolver.Events.TargetRegisteredEvent.#ctor(Rezolver.ITarget,System.Type)
+  name: TargetRegisteredEvent(ITarget, Type)
+  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent__ctor_Rezolver_ITarget_System_Type_
+  commentId: M:Rezolver.Events.TargetRegisteredEvent.#ctor(Rezolver.ITarget,System.Type)
+  fullName: Rezolver.Events.TargetRegisteredEvent.TargetRegisteredEvent(Rezolver.ITarget, System.Type)
+  nameWithType: TargetRegisteredEvent.TargetRegisteredEvent(ITarget, Type)
+- uid: Rezolver.Events.TargetRegisteredEvent.#ctor*
+  name: TargetRegisteredEvent
+  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent__ctor_
+  commentId: Overload:Rezolver.Events.TargetRegisteredEvent.#ctor
+  fullName: Rezolver.Events.TargetRegisteredEvent.TargetRegisteredEvent
+  nameWithType: TargetRegisteredEvent.TargetRegisteredEvent
+- uid: Rezolver.Events.TargetRegisteredEvent.ServiceType
+  name: ServiceType
+  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_ServiceType
+  commentId: P:Rezolver.Events.TargetRegisteredEvent.ServiceType
+  fullName: Rezolver.Events.TargetRegisteredEvent.ServiceType
+  nameWithType: TargetRegisteredEvent.ServiceType
+- uid: Rezolver.Events.TargetRegisteredEvent.ServiceType*
+  name: ServiceType
+  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_ServiceType_
+  commentId: Overload:Rezolver.Events.TargetRegisteredEvent.ServiceType
+  fullName: Rezolver.Events.TargetRegisteredEvent.ServiceType
+  nameWithType: TargetRegisteredEvent.ServiceType
+- uid: Rezolver.Events.TargetRegisteredEvent.Target
+  name: Target
+  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_Target
+  commentId: P:Rezolver.Events.TargetRegisteredEvent.Target
+  fullName: Rezolver.Events.TargetRegisteredEvent.Target
+  nameWithType: TargetRegisteredEvent.Target
+- uid: Rezolver.Events.TargetRegisteredEvent.Target*
+  name: Target
+  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_Target_
+  commentId: Overload:Rezolver.Events.TargetRegisteredEvent.Target
+  fullName: Rezolver.Events.TargetRegisteredEvent.Target
+  nameWithType: TargetRegisteredEvent.Target
 - uid: Rezolver.ExpressionFunctions
   name: ExpressionFunctions
   href: api/Rezolver.ExpressionFunctions.html
@@ -4015,15 +4063,15 @@ references:
   commentId: Overload:Rezolver.IContainerScope.Parent
   fullName: Rezolver.IContainerScope.Parent
   nameWithType: IContainerScope.Parent
-- uid: Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
-  name: Resolve(IResolveContext, Func<IResolveContext, Object>, ScopeBehaviour)
-  href: api/Rezolver.IContainerScope.html#Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_
-  commentId: M:Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
-  name.vb: Resolve(IResolveContext, Func(Of IResolveContext, Object), ScopeBehaviour)
-  fullName: Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, System.Func<Rezolver.IResolveContext, System.Object>, Rezolver.ScopeBehaviour)
-  fullName.vb: Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, System.Func(Of Rezolver.IResolveContext, System.Object), Rezolver.ScopeBehaviour)
-  nameWithType: IContainerScope.Resolve(IResolveContext, Func<IResolveContext, Object>, ScopeBehaviour)
-  nameWithType.vb: IContainerScope.Resolve(IResolveContext, Func(Of IResolveContext, Object), ScopeBehaviour)
+- uid: Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext,Rezolver.ITarget,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
+  name: Resolve(IResolveContext, ITarget, Func<IResolveContext, Object>, ScopeBehaviour)
+  href: api/Rezolver.IContainerScope.html#Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_Rezolver_ITarget_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_
+  commentId: M:Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext,Rezolver.ITarget,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)
+  name.vb: Resolve(IResolveContext, ITarget, Func(Of IResolveContext, Object), ScopeBehaviour)
+  fullName: Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, Rezolver.ITarget, System.Func<Rezolver.IResolveContext, System.Object>, Rezolver.ScopeBehaviour)
+  fullName.vb: Rezolver.IContainerScope.Resolve(Rezolver.IResolveContext, Rezolver.ITarget, System.Func(Of Rezolver.IResolveContext, System.Object), Rezolver.ScopeBehaviour)
+  nameWithType: IContainerScope.Resolve(IResolveContext, ITarget, Func<IResolveContext, Object>, ScopeBehaviour)
+  nameWithType.vb: IContainerScope.Resolve(IResolveContext, ITarget, Func(Of IResolveContext, Object), ScopeBehaviour)
 - uid: Rezolver.IContainerScope.Resolve*
   name: Resolve
   href: api/Rezolver.IContainerScope.html#Rezolver_IContainerScope_Resolve_
@@ -4219,6 +4267,18 @@ references:
   commentId: Overload:Rezolver.ITarget.DeclaredType
   fullName: Rezolver.ITarget.DeclaredType
   nameWithType: ITarget.DeclaredType
+- uid: Rezolver.ITarget.Id
+  name: Id
+  href: api/Rezolver.ITarget.html#Rezolver_ITarget_Id
+  commentId: P:Rezolver.ITarget.Id
+  fullName: Rezolver.ITarget.Id
+  nameWithType: ITarget.Id
+- uid: Rezolver.ITarget.Id*
+  name: Id
+  href: api/Rezolver.ITarget.html#Rezolver_ITarget_Id_
+  commentId: Overload:Rezolver.ITarget.Id
+  fullName: Rezolver.ITarget.Id
+  nameWithType: ITarget.Id
 - uid: Rezolver.ITarget.ScopeBehaviour
   name: ScopeBehaviour
   href: api/Rezolver.ITarget.html#Rezolver_ITarget_ScopeBehaviour
@@ -4372,6 +4432,31 @@ references:
   fullName.vb: Rezolver.ITargetContainerConfig(Of T)
   nameWithType: ITargetContainerConfig<T>
   nameWithType.vb: ITargetContainerConfig(Of T)
+- uid: Rezolver.ITargetContainerEventHandler`1
+  name: ITargetContainerEventHandler<TEvent>
+  href: api/Rezolver.ITargetContainerEventHandler-1.html
+  commentId: T:Rezolver.ITargetContainerEventHandler`1
+  name.vb: ITargetContainerEventHandler(Of TEvent)
+  fullName: Rezolver.ITargetContainerEventHandler<TEvent>
+  fullName.vb: Rezolver.ITargetContainerEventHandler(Of TEvent)
+  nameWithType: ITargetContainerEventHandler<TEvent>
+  nameWithType.vb: ITargetContainerEventHandler(Of TEvent)
+- uid: Rezolver.ITargetContainerEventHandler`1.Handle(Rezolver.ITargetContainer,`0)
+  name: Handle(ITargetContainer, TEvent)
+  href: api/Rezolver.ITargetContainerEventHandler-1.html#Rezolver_ITargetContainerEventHandler_1_Handle_Rezolver_ITargetContainer__0_
+  commentId: M:Rezolver.ITargetContainerEventHandler`1.Handle(Rezolver.ITargetContainer,`0)
+  fullName: Rezolver.ITargetContainerEventHandler<TEvent>.Handle(Rezolver.ITargetContainer, TEvent)
+  fullName.vb: Rezolver.ITargetContainerEventHandler(Of TEvent).Handle(Rezolver.ITargetContainer, TEvent)
+  nameWithType: ITargetContainerEventHandler<TEvent>.Handle(ITargetContainer, TEvent)
+  nameWithType.vb: ITargetContainerEventHandler(Of TEvent).Handle(ITargetContainer, TEvent)
+- uid: Rezolver.ITargetContainerEventHandler`1.Handle*
+  name: Handle
+  href: api/Rezolver.ITargetContainerEventHandler-1.html#Rezolver_ITargetContainerEventHandler_1_Handle_
+  commentId: Overload:Rezolver.ITargetContainerEventHandler`1.Handle
+  fullName: Rezolver.ITargetContainerEventHandler<TEvent>.Handle
+  fullName.vb: Rezolver.ITargetContainerEventHandler(Of TEvent).Handle
+  nameWithType: ITargetContainerEventHandler<TEvent>.Handle
+  nameWithType.vb: ITargetContainerEventHandler(Of TEvent).Handle
 - uid: Rezolver.ITargetContainerFactory
   name: ITargetContainerFactory
   href: api/Rezolver.ITargetContainerFactory.html
@@ -7155,6 +7240,27 @@ references:
   commentId: Overload:Rezolver.TargetContainer.RegisterContainer
   fullName: Rezolver.TargetContainer.RegisterContainer
   nameWithType: TargetContainer.RegisterContainer
+- uid: Rezolver.TargetContainerEventExtensions
+  name: TargetContainerEventExtensions
+  href: api/Rezolver.TargetContainerEventExtensions.html
+  commentId: T:Rezolver.TargetContainerEventExtensions
+  fullName: Rezolver.TargetContainerEventExtensions
+  nameWithType: TargetContainerEventExtensions
+- uid: Rezolver.TargetContainerEventExtensions.RegisterEventHandler*
+  name: RegisterEventHandler
+  href: api/Rezolver.TargetContainerEventExtensions.html#Rezolver_TargetContainerEventExtensions_RegisterEventHandler_
+  commentId: Overload:Rezolver.TargetContainerEventExtensions.RegisterEventHandler
+  fullName: Rezolver.TargetContainerEventExtensions.RegisterEventHandler
+  nameWithType: TargetContainerEventExtensions.RegisterEventHandler
+- uid: Rezolver.TargetContainerEventExtensions.RegisterEventHandler``1(Rezolver.ITargetContainer,Rezolver.ITargetContainerEventHandler{``0})
+  name: RegisterEventHandler<TEvent>(ITargetContainer, ITargetContainerEventHandler<TEvent>)
+  href: api/Rezolver.TargetContainerEventExtensions.html#Rezolver_TargetContainerEventExtensions_RegisterEventHandler__1_Rezolver_ITargetContainer_Rezolver_ITargetContainerEventHandler___0__
+  commentId: M:Rezolver.TargetContainerEventExtensions.RegisterEventHandler``1(Rezolver.ITargetContainer,Rezolver.ITargetContainerEventHandler{``0})
+  name.vb: RegisterEventHandler(Of TEvent)(ITargetContainer, ITargetContainerEventHandler(Of TEvent))
+  fullName: Rezolver.TargetContainerEventExtensions.RegisterEventHandler<TEvent>(Rezolver.ITargetContainer, Rezolver.ITargetContainerEventHandler<TEvent>)
+  fullName.vb: Rezolver.TargetContainerEventExtensions.RegisterEventHandler(Of TEvent)(Rezolver.ITargetContainer, Rezolver.ITargetContainerEventHandler(Of TEvent))
+  nameWithType: TargetContainerEventExtensions.RegisterEventHandler<TEvent>(ITargetContainer, ITargetContainerEventHandler<TEvent>)
+  nameWithType.vb: TargetContainerEventExtensions.RegisterEventHandler(Of TEvent)(ITargetContainer, ITargetContainerEventHandler(Of TEvent))
 - uid: Rezolver.TargetDictionaryContainer
   name: TargetDictionaryContainer
   href: api/Rezolver.TargetDictionaryContainer.html
@@ -8759,6 +8865,18 @@ references:
   commentId: Overload:Rezolver.Targets.TargetBase.DeclaredType
   fullName: Rezolver.Targets.TargetBase.DeclaredType
   nameWithType: TargetBase.DeclaredType
+- uid: Rezolver.Targets.TargetBase.Id
+  name: Id
+  href: api/Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_Id
+  commentId: P:Rezolver.Targets.TargetBase.Id
+  fullName: Rezolver.Targets.TargetBase.Id
+  nameWithType: TargetBase.Id
+- uid: Rezolver.Targets.TargetBase.Id*
+  name: Id
+  href: api/Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_Id_
+  commentId: Overload:Rezolver.Targets.TargetBase.Id
+  fullName: Rezolver.Targets.TargetBase.Id
+  nameWithType: TargetBase.Id
 - uid: Rezolver.Targets.TargetBase.ScopeBehaviour
   name: ScopeBehaviour
   href: api/Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour
