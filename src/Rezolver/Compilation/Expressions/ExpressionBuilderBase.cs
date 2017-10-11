@@ -254,12 +254,14 @@ namespace Rezolver.Compilation.Expressions
             {
                 return Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IContainerScope)));
             }, typeof(ExpressionBuilderBase));
-
-            var newContextExpr = scopePreference == ScopePreference.Current ? (Expression)context.ResolveContextParameterExpression
-                : Methods.CallResolveContext_New(
+            
+            // have to force the creation of a new IResolveContext whose RequestedType type is equal to the type
+            // that we sought for compilation - so that the instance can be tracked correctly.
+            var newContextExpr = Methods.CallResolveContext_New(
                     context.ResolveContextParameterExpression,
                     Expression.Constant(builtExpression.Type),
                             Expression.Default(typeof(IContainer)),
+                            scopePreference == ScopePreference.Current ? (Expression)Expression.Default(typeof(IContainerScope)) : 
                             Expression.Call(Methods.IContainerScope_GetRootScope_Method,
                                 context.ContextScopePropertyExpression)
                     );

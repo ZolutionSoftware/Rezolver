@@ -180,11 +180,11 @@ namespace Rezolver.Tests.Examples
             var result = container.ResolveMany<IUsesAnyService<IMyService>>().ToArray();
             var result2 = container.ResolveMany<IUsesAnyService<MyService>>().ToArray();
 
-            //note the order - specific generic type matches first, followed by more general
+            //Note - enumerable is in registration order, regardless of open/closed generic
             Assert.Equal(3, result.Length);
-            Assert.IsType<UsesIMyService>(result[0]);
-            Assert.IsType<UsesIMyService2>(result[1]);
-            Assert.IsType<UsesAnyService<IMyService>>(result[2]);
+            Assert.IsType<UsesAnyService<IMyService>>(result[0]);
+            Assert.IsType<UsesIMyService>(result[1]);
+            Assert.IsType<UsesIMyService2>(result[2]);
 
             Assert.Equal(1, result2.Length);
             Assert.IsType<UsesAnyService<MyService>>(result2[0]);

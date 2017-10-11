@@ -82,9 +82,9 @@ namespace Rezolver.Tests.Compilation.Specification
                 action(input2, output2);
             }
 
-            // note that the order is established as most specific to most generic
-            Assert.Equal(new[] { nameof(HandleChild), nameof(HandleBase) }, output1);
-            Assert.Equal(new[] { nameof(HandleGrandchild), nameof(HandleChild), nameof(HandleBase) }, output2);
+            // CHANGE FOR #59: Ordering is now strictly registration order.
+            Assert.Equal(new[] { nameof(HandleBase), nameof(HandleChild)  }, output1);
+            Assert.Equal(new[] { nameof(HandleBase), nameof(HandleChild), nameof(HandleGrandchild) }, output2);
         }
         
     }

@@ -213,6 +213,7 @@ namespace Rezolver
 
 			if (behaviour == ScopeBehaviour.Explicit)
 			{
+                // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
                 if (_explicitlyScopedObjects.TryGetValue(new TypeAndTargetId(context.RequestedType, target.Id), out Lazy<ScopedObject> lazy))
                     return lazy.Value.Object;
 
