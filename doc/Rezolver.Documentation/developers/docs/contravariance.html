@@ -371,8 +371,9 @@ are the same.</p>
         return result;
     }
 }
-</code></pre><p>Note that it has a dependency on <code>IComparer&lt;I2DShape&gt;</code> - which explicitly targets our
-catch-all <code>ShapeAreaComparer</code> as per the original setup.</p>
+</code></pre><p>Note that it has a dependency on two other comparers: <code>IComparer&lt;I2DShape&gt;</code> - which explicitly targets our
+catch-all <code>ShapeAreaComparer</code> as per the original setup - and <code>IComparer&lt;double&gt;</code>  so we can compare lengths
+and highlights (which will use the &#39;catch-all&#39; <code>DefaultComparerWrapper&lt;T&gt;</code>).</p>
 <p>Now we just add the registration (shown in the example being added <em>before</em> our catch-all
 just to highlight the fact that the order in which these registrations are added doesn&#39;t 
 affect the logic) and use it.</p>
@@ -424,10 +425,8 @@ in for <code>Square</code> as well - because <code>Rectangle</code> is &#39;clos
 <p>If you have read through the <a href="enumerables/generics.html">documentation on enumerables of generics</a>
 then you will already be aware of Rezolver&#39;s powerful auto-enumerable functionality, and you
 can probably already guess how it works when requesting enumerables of contravariant generics.</p>
-<p>In short - the best-to-worst matching algorithm that&#39;s used to identify the best generic
-registration for the type that is &#39;closest&#39; to the requested type just expands out when 
-contravariance comes into play.  <em>Every</em> registration that matches the 
-given type will be returned - in order of best to worst, as demonstrated by this example
+<p>For an enumerable of a generic with one or more contravariant type parameters, <em>every</em> registration 
+that matches the given type will be returned - in registration order, as demonstrated by this example
 which builds on our <code>I2DShape</code> types to configure the container to write shape information
 to a <code>StringBuilder</code>:</p>
 <pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
@@ -559,8 +558,8 @@ specific generic types.  But sometimes you might want to suspend contravariance 
 a type, or any of its derivatives or implementations, for <em>any</em> generic to which they are
 passed as type arguments.</p>
 <p>So, the next example shows how we can disable contravariance for the <code>Square</code> type, which 
-means that when <em>any</em> concrete generic is requested, if <code>Square</code> is passed into a 
-contravariant type parameter, the contravariance for that parameter will be ignored:</p>
+means that when <em>any</em> concrete generic is requested, if <code>Square</code> is passed as the type argument
+to a contravariant type parameter, the contravariance for that parameter will be ignored:</p>
 <pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
 
 // set the option to disable contravariance for the Square type only

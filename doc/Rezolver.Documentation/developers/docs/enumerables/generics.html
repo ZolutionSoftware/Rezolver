@@ -268,11 +268,15 @@ Assert.IsType&lt;UsesIMyService2&gt;(result[2]);
 Assert.Equal(1, result2.Length);
 Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
 </code></pre><p>In the simplest terms, what we&#39;re seeing here is the container walking through all the possible generic service types
-that could apply for the requested type, and returning all the instances produced by all those registrations.</p>
-<p>Note that the order of individual items which were registered against the same generic type (e.g. <code>IUsesAnyService&lt;&gt;</code>)
-is maintained, but the <em>most</em>-specific generics are being returned first.</p>
-<div class="NOTE"><h5>Note</h5><p><strong>Constrained</strong> generic implementations are <em>not</em> equal to closed generic registrations. So an explicit 
-registration against <code>IFoo&lt;Bar&gt;</code> will always beat a constrained generic implementation such as
+that could apply for the requested type, and returning all the instances produced by all those registrations, in
+the order that those registrations were made.  So, if an open generic registration is made after a series of closed 
+generic registrations, the open registration will still be last in the enumerable.</p>
+<div class="NOTE"><h5>Note</h5><p>This is not the same as when resolving a single instance - which will return the last, best-matched registration
+for the generic type.  So if one or more closed generic registrations exist for the exact type requested, then 
+the one that was added last will be used for the single instance.</p>
+<hr>
+<p>Also note that <strong>Constrained</strong> generic implementations are <em>not</em> equal to closed generic registrations. So an 
+explicit registration against <code>IFoo&lt;Bar&gt;</code> will always beat a constrained generic implementation such as
 <code>MyFoo&lt;T&gt; : IFoo&lt;T&gt; where T : Bar</code> (see further down).</p>
 </div>
 <hr>

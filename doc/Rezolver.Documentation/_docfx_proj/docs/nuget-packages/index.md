@@ -15,18 +15,5 @@ All the core nuget packages support the .NetStandard 1.1 profile (don't know wha
 ## List of packages
 
 - [Rezolver](rezolver.md)
-- <strike>[Rezolver.Configuration](rezolver.configuration.md)</strike> (needs verifying)
 - [Rezolver.Microsoft.Extensions.DependencyInjection](rezolver.microsoft.extensions.dependencyinjection.md)
 - [Rezolver.Microsoft.AspNetCore.Hosting](rezolver.microsoft.aspnetcore.hosting.md)
-
-
-## Versioning
-
-Our versioning approach is the same as recommended by Nuget.org - semantic versioning - where:
-
-1. A major version bump (`x.y.z.w` -> `(++x).y.z.w`) indicates a breaking change
-2. A minor version bump (`x.y.z.w` => `x.(++y).z.w`) indicates new functionality that *shouldn't* be a breaking change
-3. A build version bump (`x.y.x.w` => `x.y.(++z).w`) indicates small new functionality or bugfixes
-4. A revision bump (`x.y.z.w` => `x.y.z.(++w)`) indicates a cock-up on our part that had to be corrected :)
-
-Obviously, we try to keep the latter to a minimum!

@@ -264,19 +264,27 @@ namespace Rezolver
 		/// <returns></returns>
 		internal static MethodInfo GetMethod(Type type, string methodName)
 		{
-#if DOTNET
-			//can't use GetDeclaredMethod because it does public and non-public methods, instance and static.
-			try
-			{
-				return type.GetTypeInfo().DeclaredMethods.Where(m => m.IsPublic && !m.IsStatic && m.Name == methodName).SingleOrDefault();
-			}
-			catch(InvalidOperationException ioex)
-			{
-				throw new InvalidOperationException($"More than one method on the type {type} found with the name {methodName}", ioex);
-			}
-#else
-			return type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
-#endif
+            return GetMethod(type, methodName, true, false);
 		}
-	}
+
+        internal static MethodInfo GetMethod(Type type, string methodName, bool isPublic, bool isStatic)
+        {
+#if DOTNET
+            //can't use GetDeclaredMethod because it does public and non-public methods, instance and static.
+            try
+            {
+                return type.GetTypeInfo().DeclaredMethods.Where(m => m.IsPublic == isPublic && m.IsStatic == isStatic && m.Name == methodName).SingleOrDefault();
+            }
+            catch (InvalidOperationException ioex)
+            {
+                throw new InvalidOperationException($"More than one method on the type {type} found with the name {methodName}", ioex);
+            }
+#else
+            BindingFlags flags = isPublic ? BindingFlags.Public : BindingFlags.NonPublic;
+            flags |= isStatic ? BindingFlags.Static : BindingFlags.Instance;
+            flags |= BindingFlags.DeclaredOnly;
+			return type.GetMethod(methodName, flags);
+#endif
+        }
+    }
 }

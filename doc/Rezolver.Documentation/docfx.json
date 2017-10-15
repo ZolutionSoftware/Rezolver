@@ -7,11 +7,23 @@
             "rezolver.csproj"
           ],
           "cwd": "../../src/Rezolver"
+        },
+        {
+          "files": [
+            "rezolver.microsoft.aspnetcore.hosting.csproj"
+          ],
+          "cwd": "../../src/Rezolver.Microsoft.AspNetCore.Hosting"
+        },
+        {
+          "files": [
+            "rezolver.microsoft.extensions.dependencyinjection.csproj"
+          ],
+          "cwd": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection"
         }
       ],
       "dest": "_docfx_proj/obj/api",
       "properties": {
-        "TargetFramework": "net46"
+        "TargetFramework": "netstandard2.0"
       }
     }
   ],

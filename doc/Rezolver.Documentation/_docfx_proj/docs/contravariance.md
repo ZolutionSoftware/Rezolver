@@ -126,8 +126,9 @@ For this we need a new `RectangleComparer`:
 
 [!code-csharp[RectangleComparer.cs](../../../../test/Rezolver.Tests.Examples/Types/RectangleComparer.cs#example)]
 
-Note that it has a dependency on `IComparer<I2DShape>` - which explicitly targets our
-catch-all `ShapeAreaComparer` as per the original setup.
+Note that it has a dependency on two other comparers: `IComparer<I2DShape>` - which explicitly targets our
+catch-all `ShapeAreaComparer` as per the original setup - and `IComparer<double>`  so we can compare lengths
+and highlights (which will use the 'catch-all' `DefaultComparerWrapper<T>`).
 
 Now we just add the registration (shown in the example being added *before* our catch-all
 just to highlight the fact that the order in which these registrations are added doesn't 
@@ -160,10 +161,8 @@ If you have read through the [documentation on enumerables of generics](enumerab
 then you will already be aware of Rezolver's powerful auto-enumerable functionality, and you
 can probably already guess how it works when requesting enumerables of contravariant generics.
 
-In short - the best-to-worst matching algorithm that's used to identify the best generic
-registration for the type that is 'closest' to the requested type just expands out when 
-contravariance comes into play.  *Every* registration that matches the 
-given type will be returned - in order of best to worst, as demonstrated by this example
+For an enumerable of a generic with one or more contravariant type parameters, *every* registration 
+that matches the given type will be returned - in registration order, as demonstrated by this example
 which builds on our `I2DShape` types to configure the container to write shape information
 to a `StringBuilder`:
 
@@ -259,8 +258,8 @@ a type, or any of its derivatives or implementations, for *any* generic to which
 passed as type arguments.
 
 So, the next example shows how we can disable contravariance for the `Square` type, which 
-means that when *any* concrete generic is requested, if `Square` is passed into a 
-contravariant type parameter, the contravariance for that parameter will be ignored:
+means that when *any* concrete generic is requested, if `Square` is passed as the type argument
+to a contravariant type parameter, the contravariance for that parameter will be ignored:
 
 [!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example8)]
 

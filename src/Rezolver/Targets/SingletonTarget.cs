@@ -61,7 +61,7 @@ namespace Rezolver.Targets
 		/// <summary>
 		/// Always returns <see cref="ScopeBehaviour.Explicit"/>.
 		/// </summary>
-		public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Explicit;
+		public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Implicit;
 
         /// <summary>
         /// Always returns <see cref="ScopePreference.Root"/>

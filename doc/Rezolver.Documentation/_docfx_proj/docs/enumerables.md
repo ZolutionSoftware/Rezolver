@@ -12,8 +12,8 @@ against that type, in the order they were registered.
 
 > [!NOTE]
 > The functionality described here depends on two target container options: @Rezolver.Options.AllowMultiple 
-> and @Rezolver.Options.EnumerableInjection - which are both configured to be equivalent to `true` by default
-> for all @Rezolver.ITargetContainer instances.
+> and @Rezolver.Options.EnableEnumerableInjection - which are both configured to be equivalent to `true` by 
+> default for all @Rezolver.ITargetContainer instances.
 
 You are not restricted in the targets you use to produce instances for an enumerable (e.g. @Rezolver.Targets.ObjectTarget,
 @Rezolver.Targets.ConstructorTarget or <xref:Rezolver.Targets.DelegateTarget>), and each one can have its
@@ -22,6 +22,11 @@ own lifetime (scoped/singleton etc).
 > [!TIP]
 > By default, Rezolver will build 'lazy' enumerables, but can be configured to build 'eager' enumerables - for
 > more on this, read the topic [Lazy vs Eager Enumerables](enumerables/lazy-vs-eager.md)
+
+> [!WARNING]
+> In an Asp.Net Core 2.0 application, however, eager enumerables are the default until the fix for 
+> [this issue in the aspnet/DependencyInjection repo](https://github.com/aspnet/DependencyInjection/issues/589)
+> has been pushed to an official package release.
 
 ## Resolving enumerables
 
@@ -33,7 +38,7 @@ var enumerable = container.Resolve<IEnumerable<Foo>>();
 ```
 
 However, the `ResolveMany` extension methods (see <xref:Rezolver.ContainerResolveExtensions.ResolveMany*>
-and <xref:Rezolver.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortut which allow you to pass
+and <xref:Rezolver.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortcut which allow you to pass
 just the element type of the enumerable to reduce the 'angle-bracket percent' of code which directly resolves
 enumerables (which of course you won't be doing because you're not using 'service location' are you!? :wink: ):
 
@@ -193,6 +198,14 @@ the result to the @Rezolver.Container constructor.
 > If you disable automatic enumerable injection then the other 
 > [automatic collection-type injection behaviour](arrays-lists-collections/index.md) will only work when you 
 > explicitly register the correct `IEnumerable<T>` for it.
+
+# Order of enumerables
+
+> [!NOTE]
+> This is new in 1.3.1
+
+The order that an enumerable returns its items is **always** equal to the order in which the underlying registrations
+were made.
 
 * * *
 

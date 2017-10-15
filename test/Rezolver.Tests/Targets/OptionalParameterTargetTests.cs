@@ -20,27 +20,27 @@ namespace Rezolver.Tests.Targets
 
 		//this target is pretty basic - all it does is wrap the parameter's default value
 
-		public void TestMethod_NoOptional(string msg)
+		internal void TestMethod_NoOptional(string msg)
 		{
 		}
 
 		static MethodInfo TestMethod_NoOptional_Info
-			= TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_NoOptional));
+			= TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_NoOptional), false, false);
 
-		public void TestMethod_OptionalStringWithDefault(string msg = "hello world")
+		internal void TestMethod_OptionalStringWithDefault(string msg = "hello world")
 		{
 		}
 
 		static MethodInfo TestMethod_OptionalStringWithDefault_Info 
-			= TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_OptionalStringWithDefault));
+			= TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_OptionalStringWithDefault), false, false);
 
-		public void TestMethod_OptionalIntWithNoDefault([Optional]int value)
+		internal void TestMethod_OptionalIntWithNoDefault([Optional]int value)
 		{
 
 		}
 
 		static MethodInfo TestMethod_OptionalIntWithNoDefault_Info
-			 = TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_OptionalIntWithNoDefault));
+			 = TypeHelpers.GetMethod(typeof(OptionalParameterTargetTests), nameof(TestMethod_OptionalIntWithNoDefault), false, false);
 
 		[Fact]
 		public void ShouldNotAllowNullParameter()

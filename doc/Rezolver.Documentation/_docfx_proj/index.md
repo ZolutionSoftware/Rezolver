@@ -3,18 +3,23 @@
 Rezolver is a [fast](docs/benchmarks.md), efficient, extensible, [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container 
 with Asp.Net Core integration.
 
-The nuget package has binaries targeted to these .Net versions/standards:
+The nuget package has binaries specifically targeted to these .Net versions/standards:
 
+- .Net Standard 2.0
 - .Net Standard 1.1
 - .Net 4.5.1
 - .Net 4.6
 
-This site contains all the API documentation and Developer Guides you'll ever to get you up and running using
-Rezolver.  
+## Asp.Net Core Support
 
-## 1.3 Released!
+Asp.Net Core Support (v2.0 and v1.1) is provided by the 
+[Rezolver.Microsoft.AspNetCore.Hosting package](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md),
+supported by the [Rezolver.Microsoft.Extensions.DependencyInjection package](docs/nuget-packages/Rezolver.Microsoft.Extensions.DependencyInjection.md)
+which provides an implementation of the new .Net Core DI container abstraction.
 
-See the [release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
+## 1.3.1 Released!
+
+Adds .Net Standard 2.0 and more. See the [release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
 
 ## Features
 
@@ -59,11 +64,7 @@ _Linked topics provide high level overviews and examples in our developer guide 
 - Extensible compiler framework
   - Expression tree compiler used by default
 - Extensible 'targets'
-  - Can write your own code which produces objects when Rezolver matches it to a request type
-- Direct Asp.Net Core integration via extensions to the [Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) and 
-[Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) packages via nuget packages (click the links to go to our package docs)
-- Extensible configuration framework *(under review)*
-  - Json configuration *(under review)*
+  - Can write your own code which produces objects when Rezolver matches it to a requested type
 
 _<small> * If a topic isn't linked, it's probably because we're still working on the documentation, or because it's covered in the parent topic</small>_
 

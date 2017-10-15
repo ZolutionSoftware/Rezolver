@@ -36,12 +36,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver.Microsoft.AspNetCore.Hosting\Rezolver.Microsoft.AspNetCore.Hosting.csproj" />
-    <ProjectReference Include="..\..\src\Rezolver.Microsoft.Extensions.DependencyInjection\Rezolver.Microsoft.Extensions.DependencyInjection.csproj" />
-    <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
+    <PackageReference Include="Rezolver.Microsoft.AspNetCore.Hosting" Version="1.3.0" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">

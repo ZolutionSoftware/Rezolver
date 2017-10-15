@@ -11,43 +11,35 @@ using System;
 
 namespace Rezolver
 {
+    /// <summary>
+    /// Implementation of the <see cref="IServiceProviderFactory{TContainerBuilder}"/> interface.
+    /// Providing a more flexible way to configure your web application to use Rezolver.
+    /// </summary>
 	internal class RezolverServiceProviderFactory : IServiceProviderFactory<ITargetContainer>
 	{
 		private RezolverOptions _options;
 
-		public RezolverServiceProviderFactory(IOptions<RezolverOptions> options)
-		{
-			_options = options.Value;
-		}
+        /// <summary>
+        /// Creates a new instance of the 
+        /// </summary>
+        /// <param name="options"></param>
+		public RezolverServiceProviderFactory(IOptions<RezolverOptions> options) 
+            => _options = options.Value;
 
-		public ITargetContainer CreateBuilder(IServiceCollection services)
+        public ITargetContainer CreateBuilder(IServiceCollection services)
 		{
-			var toReturn = CreateDefaultTargetContainer(services);
+			var toReturn = CreateTargetContainer(services);
 			toReturn.Populate(services);
 			return toReturn;
 		}
 		
-		public IServiceProvider CreateServiceProvider(ITargetContainer containerBuilder)
-		{
-			return CreateDefaultContainer(containerBuilder);
-		}
+		public IServiceProvider CreateServiceProvider(ITargetContainer containerBuilder) 
+            => CreateDefaultContainer(containerBuilder);
 
-		protected virtual ITargetContainer CreateDefaultTargetContainer(IServiceCollection services)
-		{
-			//if (_options.Tracking.CallTracker != null)
-			//	throw new NotImplementedException("Call tracking stuff currently doesn't work - it's on the way");
-			//	//return new TrackedTargetContainer(_options.Tracking.CallTracker);
-			//else
-				return new TargetContainer();
-		}
+		protected ITargetContainer CreateTargetContainer(IServiceCollection services) 
+            => new TargetContainer(_options.TargetContainerConfig);
 
-		protected virtual IContainer CreateDefaultContainer(ITargetContainer targetContainer)
-		{
-			//if (_options.Tracking.CallTracker != null)
-			//	throw new NotImplementedException("Call tracking stuff currently doesn't work - it's on the way");
-			//	//return new TrackedContainerScope(_options.Tracking.CallTracker, new ContainerScope(new Container(targetContainer)));
-			//else
-				return new ScopedContainer(targetContainer);
-		}
+		protected IContainer CreateDefaultContainer(ITargetContainer targetContainer)
+            => new ScopedContainer(targetContainer, _options.ContainerConfig);
 	}
 }

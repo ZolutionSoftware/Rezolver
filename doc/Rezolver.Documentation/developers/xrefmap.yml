@@ -1,6 +1,90 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
+- uid: Microsoft.AspNetCore.Hosting
+  name: Microsoft.AspNetCore.Hosting
+  href: api/Microsoft.AspNetCore.Hosting.html
+  commentId: N:Microsoft.AspNetCore.Hosting
+  fullName: Microsoft.AspNetCore.Hosting
+  nameWithType: Microsoft.AspNetCore.Hosting
+- uid: Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions
+  name: RezolverServiceProviderWebHostBuilderExtensions
+  href: api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html
+  commentId: T:Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions
+  fullName: Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions
+  nameWithType: RezolverServiceProviderWebHostBuilderExtensions
+- uid: Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Action{Rezolver.RezolverOptions})
+  name: UseRezolver(IWebHostBuilder, Action<RezolverOptions>)
+  href: api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html#Microsoft_AspNetCore_Hosting_RezolverServiceProviderWebHostBuilderExtensions_UseRezolver_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_Action_Rezolver_RezolverOptions__
+  commentId: M:Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Action{Rezolver.RezolverOptions})
+  name.vb: UseRezolver(IWebHostBuilder, Action(Of RezolverOptions))
+  fullName: Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(Microsoft.AspNetCore.Hosting.IWebHostBuilder, System.Action<Rezolver.RezolverOptions>)
+  fullName.vb: Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(Microsoft.AspNetCore.Hosting.IWebHostBuilder, System.Action(Of Rezolver.RezolverOptions))
+  nameWithType: RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(IWebHostBuilder, Action<RezolverOptions>)
+  nameWithType.vb: RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(IWebHostBuilder, Action(Of RezolverOptions))
+- uid: Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver*
+  name: UseRezolver
+  href: api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html#Microsoft_AspNetCore_Hosting_RezolverServiceProviderWebHostBuilderExtensions_UseRezolver_
+  commentId: Overload:Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver
+  fullName: Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver
+  nameWithType: RezolverServiceProviderWebHostBuilderExtensions.UseRezolver
+- uid: Microsoft.Extensions.DependencyInjection
+  name: Microsoft.Extensions.DependencyInjection
+  href: api/Microsoft.Extensions.DependencyInjection.html
+  commentId: N:Microsoft.Extensions.DependencyInjection
+  fullName: Microsoft.Extensions.DependencyInjection
+  nameWithType: Microsoft.Extensions.DependencyInjection
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions
+  name: RezolverServiceCollectionExtensions
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html
+  commentId: T:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions
+  nameWithType: RezolverServiceCollectionExtensions
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name: CreateRezolverContainer(IServiceCollection)
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions_CreateRezolverContainer_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  commentId: M:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType: RezolverServiceCollectionExtensions.CreateRezolverContainer(IServiceCollection)
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer*
+  name: CreateRezolverContainer
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions_CreateRezolverContainer_
+  commentId: Overload:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.CreateRezolverContainer
+  nameWithType: RezolverServiceCollectionExtensions.CreateRezolverContainer
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets(Microsoft.Extensions.DependencyInjection.IServiceCollection,Rezolver.ITargetContainer)
+  name: RegisterTargets(IServiceCollection, ITargetContainer)
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions_RegisterTargets_Microsoft_Extensions_DependencyInjection_IServiceCollection_Rezolver_ITargetContainer_
+  commentId: M:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets(Microsoft.Extensions.DependencyInjection.IServiceCollection,Rezolver.ITargetContainer)
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets(Microsoft.Extensions.DependencyInjection.IServiceCollection, Rezolver.ITargetContainer)
+  nameWithType: RezolverServiceCollectionExtensions.RegisterTargets(IServiceCollection, ITargetContainer)
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets*
+  name: RegisterTargets
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions_RegisterTargets_
+  commentId: Overload:Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.RegisterTargets
+  nameWithType: RezolverServiceCollectionExtensions.RegisterTargets
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions
+  name: RezolverServiceProviderServiceCollectionExtensions
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.html
+  commentId: T:Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions
+  nameWithType: RezolverServiceProviderServiceCollectionExtensions
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Rezolver.RezolverOptions})
+  name: AddRezolver(IServiceCollection, Action<RezolverOptions>)
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceProviderServiceCollectionExtensions_AddRezolver_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Rezolver_RezolverOptions__
+  commentId: M:Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Rezolver.RezolverOptions})
+  name.vb: AddRezolver(IServiceCollection, Action(Of RezolverOptions))
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Rezolver.RezolverOptions>)
+  fullName.vb: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Rezolver.RezolverOptions))
+  nameWithType: RezolverServiceProviderServiceCollectionExtensions.AddRezolver(IServiceCollection, Action<RezolverOptions>)
+  nameWithType.vb: RezolverServiceProviderServiceCollectionExtensions.AddRezolver(IServiceCollection, Action(Of RezolverOptions))
+- uid: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver*
+  name: AddRezolver
+  href: api/Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceProviderServiceCollectionExtensions_AddRezolver_
+  commentId: Overload:Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver
+  fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver
+  nameWithType: RezolverServiceProviderServiceCollectionExtensions.AddRezolver
 - uid: Rezolver
   name: Rezolver
   href: api/Rezolver.html
@@ -4766,6 +4850,24 @@ references:
   commentId: Overload:Rezolver.MethodCallExtractor.VisitNew
   fullName: Rezolver.MethodCallExtractor.VisitNew
   nameWithType: MethodCallExtractor.VisitNew
+- uid: Rezolver.MSDIITargetContainerExtensions
+  name: MSDIITargetContainerExtensions
+  href: api/Rezolver.MSDIITargetContainerExtensions.html
+  commentId: T:Rezolver.MSDIITargetContainerExtensions
+  fullName: Rezolver.MSDIITargetContainerExtensions
+  nameWithType: MSDIITargetContainerExtensions
+- uid: Rezolver.MSDIITargetContainerExtensions.Populate(Rezolver.ITargetContainer,Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name: Populate(ITargetContainer, IServiceCollection)
+  href: api/Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_Rezolver_ITargetContainer_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  commentId: M:Rezolver.MSDIITargetContainerExtensions.Populate(Rezolver.ITargetContainer,Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  fullName: Rezolver.MSDIITargetContainerExtensions.Populate(Rezolver.ITargetContainer, Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType: MSDIITargetContainerExtensions.Populate(ITargetContainer, IServiceCollection)
+- uid: Rezolver.MSDIITargetContainerExtensions.Populate*
+  name: Populate
+  href: api/Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_
+  commentId: Overload:Rezolver.MSDIITargetContainerExtensions.Populate
+  fullName: Rezolver.MSDIITargetContainerExtensions.Populate
+  nameWithType: MSDIITargetContainerExtensions.Populate
 - uid: Rezolver.MultipleTargetContainerExtensions
   name: MultipleTargetContainerExtensions
   href: api/Rezolver.MultipleTargetContainerExtensions.html
@@ -5762,6 +5864,48 @@ references:
   fullName.vb: Rezolver.ResolveContext.TryResolve(Of TResult)(ByRef TResult)
   nameWithType: ResolveContext.TryResolve<TResult>(out TResult)
   nameWithType.vb: ResolveContext.TryResolve(Of TResult)(ByRef TResult)
+- uid: Rezolver.RezolverOptions
+  name: RezolverOptions
+  href: api/Rezolver.RezolverOptions.html
+  commentId: T:Rezolver.RezolverOptions
+  fullName: Rezolver.RezolverOptions
+  nameWithType: RezolverOptions
+- uid: Rezolver.RezolverOptions.#ctor
+  name: RezolverOptions()
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions__ctor
+  commentId: M:Rezolver.RezolverOptions.#ctor
+  fullName: Rezolver.RezolverOptions.RezolverOptions()
+  nameWithType: RezolverOptions.RezolverOptions()
+- uid: Rezolver.RezolverOptions.#ctor*
+  name: RezolverOptions
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions__ctor_
+  commentId: Overload:Rezolver.RezolverOptions.#ctor
+  fullName: Rezolver.RezolverOptions.RezolverOptions
+  nameWithType: RezolverOptions.RezolverOptions
+- uid: Rezolver.RezolverOptions.ContainerConfig
+  name: ContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_ContainerConfig
+  commentId: P:Rezolver.RezolverOptions.ContainerConfig
+  fullName: Rezolver.RezolverOptions.ContainerConfig
+  nameWithType: RezolverOptions.ContainerConfig
+- uid: Rezolver.RezolverOptions.ContainerConfig*
+  name: ContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_ContainerConfig_
+  commentId: Overload:Rezolver.RezolverOptions.ContainerConfig
+  fullName: Rezolver.RezolverOptions.ContainerConfig
+  nameWithType: RezolverOptions.ContainerConfig
+- uid: Rezolver.RezolverOptions.TargetContainerConfig
+  name: TargetContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_TargetContainerConfig
+  commentId: P:Rezolver.RezolverOptions.TargetContainerConfig
+  fullName: Rezolver.RezolverOptions.TargetContainerConfig
+  nameWithType: RezolverOptions.TargetContainerConfig
+- uid: Rezolver.RezolverOptions.TargetContainerConfig*
+  name: TargetContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_TargetContainerConfig_
+  commentId: Overload:Rezolver.RezolverOptions.TargetContainerConfig
+  fullName: Rezolver.RezolverOptions.TargetContainerConfig
+  nameWithType: RezolverOptions.TargetContainerConfig
 - uid: Rezolver.Runtime
   name: Rezolver.Runtime
   href: api/Rezolver.Runtime.html

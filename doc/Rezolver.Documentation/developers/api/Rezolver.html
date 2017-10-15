@@ -229,6 +229,11 @@ strings of reflection code).</p>
 <p>For example: <pre><code>MethodCallExtractor.ExtractCalledMethod(() => Console.WriteLine(&quot;foo&quot;))</code></pre></p>
 <p>Will return the MethodInfo for the <code>WriteLine</code> method of the <code>Console</code> class.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.MSDIITargetContainerExtensions.html">MSDIITargetContainerExtensions</a></h4>
+      <section><p>Provides the <a class="xref" href="Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_Rezolver_ITargetContainer_Microsoft_Extensions_DependencyInjection_IServiceCollection_">Populate(ITargetContainer, IServiceCollection)</a> extension method which allows
+easy importing of all registrations in an <code>IServiceCollection</code> from <code>Microsoft.Extensions.DependencyInjection</code>
+into a Rezolver <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+</section>
       <h4><a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html">MultipleTargetContainerExtensions</a></h4>
       <section><p>Extensions for registering multiple targets individually and against the same type</p>
 </section>
@@ -258,6 +263,9 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
 </section>
       <h4><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></h4>
       <section><p>Standard implementation of <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></p>
+</section>
+      <h4><a class="xref" href="Rezolver.RezolverOptions.html">RezolverOptions</a></h4>
+      <section><p>Options for using Rezolver as the DI container for Asp.Net Core web applications.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></h4>
       <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the

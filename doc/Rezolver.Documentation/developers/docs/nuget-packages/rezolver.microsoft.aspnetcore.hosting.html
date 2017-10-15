@@ -109,41 +109,151 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="rezolvermicrosoftaspnetcorehosting-package">Rezolver.Microsoft.AspNetCore.Hosting Package</h1>
 
-<p><a href="https://www.nuget.org/packages/Rezolver.Microsoft.AspNetCore.Hosting">See package page on nuget</a>.</p>
 <p>This builds on the <a href="rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a>
 package to enable the integration of Rezolver into your Asp.Net Core site somewhat earlier in its startup phase.</p>
-<p>After adding the package, open your site&#39;s <code>program.cs</code> and add a call to the <code>UseRezolver()</code> extension
-method that&#39;s now available, as shown:</p>
+<p><a href="https://www.nuget.org/packages/Rezolver.Microsoft.AspNetCore.Hosting">See package page on nuget</a>.</p>
+<p>Rezolver integration is available for both Asp.Net Core 1.1 and 2.0, with the Asp.Net Core 2.0 
+integration offering more flexibility as it allows you to perform configuration on the container(s) that
+are created before any registrations are made.</p>
+<h1 id="aspnet-core-20">Asp.Net Core 2.0</h1>
+<p>Version <code>2.0</code> of the package supports Asp.Net Core 2.0.</p>
+<h2 id="programcs-changes">Program.cs changes</h2>
+<p>After adding the package, change your <code>program.cs</code> file so it looks like this:</p>
 <pre><code class="lang-csharp" name="Example.cs">public class Program
-   {
-       public static void Main(string[] args)
-       {
-		var host = new WebHostBuilder()
-			//add the Rezolver container to the host builder
-			.UseRezolver()
-               .UseKestrel()				
-               .UseContentRoot(Directory.GetCurrentDirectory())
-               .UseIISIntegration()
-               .UseStartup&lt;Startup&gt;()
-               .Build();
-
-           host.Run();
-       }
-   }
-</code></pre><p>Then we need to tell the Asp.Net Core stack that you want an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> to be created
-in order to construct the <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> that will be used as the DI container.</p>
-<p>We do this in your application&#39;s <code>startup.cs</code> - simply by declaring a single method:</p>
-<pre><code class="lang-csharp" name="Startup.cs">      public void ConfigureContainer(ITargetContainer container)
 {
-	//by declaring this method - even if empty - you trigger the 
-	//creation of the ITargetContainer which will ultimately
-	//be used to create the IContainer that will be used
-	//as the application&#39;s container.
+    public static void Main(string[] args)
+    {
+        BuildWebHost(args).Run();
+    }
 
-	//Here you can perform additional registrations/configuration on the
-	//ITargetContainer here.
+    public static IWebHost BuildWebHost(string[] args) =&gt;
+        WebHost.CreateDefaultBuilder(args)
+            .UseRezolver()
+            .UseStartup&lt;Startup&gt;()
+            .Build();
+
+    // NOTE - you can also pass a configuration callback to UseRezolver(), e.g:
+
+    /*  
+     *  .UseRezolver(o =&gt;
+     *  {
+     *      // Example of disabling contravariance
+     *      o.TargetContainerConfig.ConfigureOption&lt;EnableContravariance&gt;(false);
+     *
+     *      // you can also add configuration to the container configuration via 
+     *      // the ContainerConfig property (e.g. change compilers).
+     *  })
+     */
 }
-</code></pre><p>And that&#39;s it - your application is configured.</p>
+</code></pre><p>So, at the most basic level you just call the 
+<a class="xref" href="../../api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html#Microsoft_AspNetCore_Hosting_RezolverServiceProviderWebHostBuilderExtensions_UseRezolver_">UseRezolver</a> method, and that&#39;s
+enough.</p>
+<p>If you&#39;ve been reading some of the topics on this site - say, about <a href="../contravariance.html">contravariance</a>
+or <a href="../enumerables/lazy-vs-eager.html">lazy and eager enumerables</a> then you&#39;ll have seen how we can use options
+to control complex behaviours in Rezolver containers.  That&#39;s what is shown in the alternative call
+to <code>UseRezolver</code> in the commented code.  you can also pass a configuration callback gthat will be called
+to modify the <a class="xref" href="../../api/Rezolver.RezolverOptions.html">RezolverOptions</a> that will be used to create both the <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> that
+forms the basis of the registrations, and the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> that will ultimately create the objects
+for the application.</p>
+<div class="NOTE"><h5>Note</h5><p>Please note that lazy enumerables are currently switched off in Rezolver&#39;s integration with Asp.Net Core
+because of a mis-specification of a test by the Dependency Injection team.</p>
+<p>The specification is something
+which a DI container should pass if it&#39;s intending to be used with Asp.Net Core - and unfortunately there
+was one test that failed when Rezolver was using lazy enumerables - which is its default behaviour.
+<a href="https://github.com/aspnet/DependencyInjection/issues/589">An issue was raised</a> on the Git repo and has 
+been fixed, but it&#39;ll take a few more days/weeks before we see it in the wild.</p>
+<p>We can say that if you <em>need</em> lazy enumerables, then you should be able to re-enable them and your application
+will work.</p>
+</div>
+<h2 id="startupcs-changes">Startup.cs changes</h2>
+<p>Now we need to tell the Asp.Net Core stack that you want an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> to be created
+in order to construct the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> that will be used as the DI container.</p>
+<p>The <em>simplest</em> way to do this is to add a single method (it can be empty) called <code>ConfigureContainer</code>, which 
+accepts a single parameter of the type <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<pre><code class="lang-csharp" name="Startup.cs">public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // you need AddOptions if you intend to use the configuration callback
+        // in your call to UseRezolver() in program.cs
+        services.AddOptions();
+
+        services.AddMvc();
+    }
+
+    // Adding this method (even if empty) is enough to trigger the use of Rezolver
+    // as the Asp.Net Core 2 Application&#39;s DI container.
+    public void ConfigureContainer(ITargetContainer targets)
+    {
+        // The targets passed here will be used to create the ScopedContainer.
+
+        // Perform additional Rezolver-specific registrations (e.g. Decoration) here.
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseBrowserLink();
+        }
+        else
+        {
+            app.UseExceptionHandler(&quot;/Home/Error&quot;);
+        }
+
+        app.UseStaticFiles();
+
+        app.UseMvc(routes =&gt;
+        {
+            routes.MapRoute(
+                name: &quot;default&quot;,
+                template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+        });
+    }
+}
+</code></pre><div class="NOTE"><h5>Note</h5><p>Note the call to <code>AddOptions()</code> in the <code>ConfigureServices</code> method.  As the comment in the code says,
+you need this if you intend to use configuration callbacks in your <code>UseRezolver</code> method call in <code>program.cs</code>.</p>
+</div>
+<p>By adding that <code>ConfigureContainer</code> method, a new Rezolver <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> will be created and populated
+from the <code>IServiceCollection</code> that contains all the service registrations for the application.</p>
+<p>As the comment states, inside that method you can also perform more configuration or registrations on the 
+<a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>, such as decorators, expressions etc which are not supported by Microsoft&#39;s DI
+abstractions, before the target container is passed to a new <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> that will then be
+used as the application&#39;s <code>IServiceProvider</code>.</p>
+<p>And that&#39;s it - your application is configured.</p>
+<h1 id="aspnet-core-11">Asp.Net Core 1.1</h1>
+<p>Version <code>1.3</code> is the latest version of the package that supports Asp.Net Core 1.1.  The setup is fundamentally
+identical, except the <code>UseRezolver</code> method does not accept any callbacks.</p>
+<pre><code class="lang-csharp" name="Example.cs">public class Program
+{
+    public static void Main(string[] args)
+    {
+        var host = new WebHostBuilder()
+            //add the Rezolver container to the host builder
+            .UseRezolver()
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
+            .UseStartup&lt;Startup&gt;()
+            .Build();
+
+        host.Run();
+    }
+}
+</code></pre><p>The <code>startup.cs</code>, however, is the same as for Asp.Net Core 2.0 - add the <code>ConfigureContainer(ITargetContainer)</code>
+method and Rezolver will be used as the container for your application.</p>
+<hr>
+<p>Clearly, we recommmend moving to Asp.Net Core 2.0 ASAP as it has more features, is faster, and is generally 
+<em>way</em> cooler than 1.1! <span class="emoji" shortcode="wink">😉</span></p>
 </article>
           </div>
           

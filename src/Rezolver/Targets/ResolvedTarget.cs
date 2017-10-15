@@ -40,8 +40,6 @@ namespace Rezolver.Targets
 	/// type which the application expects to take precedence over those which were originally resolved when compilation took 
 	/// place.  The expressions compiler, again, detects this - allowing compiled code from a root container to detect an 
 	/// 'overriding' container and to dynamically resolve a different dependency in this situation.
-	/// 
-	/// It's this behaviour which is almost unique to the Rezolver framework out of the box.
 	/// </remarks>
 	public class ResolvedTarget : TargetBase
 	{
