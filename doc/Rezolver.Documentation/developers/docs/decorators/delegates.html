@@ -134,11 +134,8 @@ container.RegisterObject(10);
 Assert.Equal(20, container.Resolve&lt;int&gt;());
 </code></pre><div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="../../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> is overloaded for the delegate types 
 <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func&lt;T, TResult&gt;</a> and <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a> - the second of which allows any delegate to be registered as a 
-decorator, subject to parameter and return type checks.</p>
-<hr>
-<p>Additional generic overloads will be added in the future to simplify the registration of delegates of any
-arity, e.g. <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb534303(v=vs.110).aspx">Func&lt;T1, T2, T3, T4, TResult&gt;</a>, but for now you just have to create them directly - e.g:</p>
-<p><code>new Func&lt;A, B, C, D&gt;((a, b, c, d) =&gt; a.foo(b, c, d))</code>;</p>
+decorator, subject to parameter and return type checks.  The framework will inject arguments to any 
+parameters the delegate has, with a parameter of the decorated type receiving the undecorated instance.</p>
 </div>
 <h2 id="integration-with-ienumerablet">Integration with <code>IEnumerable&lt;T&gt;</code></h2>
 <p><a href="../enumerables.html#decorators-and-enumerables">As shown in the enumerables documentation</a>, enumerables of a 
@@ -155,11 +152,12 @@ Assert.Equal(
     new[] { 20, 40, 60 },
     container.ResolveMany&lt;int&gt;());
 </code></pre><h1 id="decorating-a-delegate">Decorating a delegate</h1>
-<p>If you are injecting delegates in your application, then you can stack decorator delegates to implement the 
-chain of responsibility pattern.</p>
-<p>This example implements a number classifier as a single delegate (<code>Action&lt;int&gt;</code>) composed of many others.
-As numbers are passed to the delegate, they are placed into one of four sets.</p>
-<p>One of the decorator delegates accepts both the original delegate <em>and</em> an extra dependency (<code>IPrimeChecker</code>),
+<p>If you are injecting delegates in your application, then the only way you can decorate them is with another 
+delegate - you can&#39;t use classes.</p>
+<p>In this example, we implement a number classifier as a single delegate (<code>Action&lt;int&gt;</code>) composed of many others.
+As numbers are passed to the delegate, they are placed into one of four sets.  This example showws how you might
+implement the chain of responsibility purely via the container itself, with delegates.</p>
+<p>One of the decorator delegates accepts both the original delegate <em>and</em> an extra depeSndency (<code>IPrimeChecker</code>),
 thus showing how decorator delegates support the same argument injection that&#39;s supported by Rezolver&#39;s standard
 <a href="../delegates.html">delegate registrations</a>. Here&#39;s the code for <code>IPrimeChecker</code> and a basic implementation:</p>
 <pre><code class="lang-csharp" name="IPrimeChecker.cs">public interface IPrimeChecker
@@ -266,7 +264,7 @@ in the meantime it&#39;s possible to add support in yourself by extending Rezolv
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/decorators/delegates.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/#56/doc/Rezolver.Documentation/_docfx_proj/docs/decorators/delegates.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

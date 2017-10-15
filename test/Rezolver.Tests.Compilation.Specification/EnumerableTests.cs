@@ -146,7 +146,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void Enumerable_ShouldWorkFRomScopedContainer()
+        public void Enumerable_ShouldWorkFromScopedContainer()
         {
             var container = new ScopedContainer();
             using (var scope = container.CreateScope())
@@ -155,6 +155,38 @@ namespace Rezolver.Tests.Compilation.Specification
 
                 Assert.Empty(result);
             }
+        }
+
+        [Fact]
+        public void Enumerable_ShouldCreateUniqueSingletons()
+        {
+            var container = new Container();
+            container.RegisterSingleton<BaseClass>();
+            container.RegisterSingleton<BaseClassChild, BaseClass>();
+            container.RegisterSingleton<BaseClassGrandchild, BaseClass>();
+
+
+            var last = container.Resolve<BaseClass>();
+            var result = container.ResolveMany<BaseClass>().ToArray();
+            Assert.NotSame(result[0], result[1]);
+            Assert.NotSame(result[1], result[2]);
+            Assert.Same(last, result[2]);
+        }
+
+        [Fact]
+        public void Enumerable_ShouldCreateUniqueScopeds()
+        {
+            var container = new ScopedContainer();
+            container.RegisterScoped<BaseClass>();
+            container.RegisterScoped<BaseClassChild, BaseClass>();
+            container.RegisterScoped<BaseClassGrandchild, BaseClass>();
+
+
+            var last = container.Resolve<BaseClass>();
+            var result = container.ResolveMany<BaseClass>().ToArray();
+            Assert.NotSame(result[0], result[1]);
+            Assert.NotSame(result[1], result[2]);
+            Assert.Same(last, result[2]);
         }
     }
 }

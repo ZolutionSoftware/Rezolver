@@ -150,6 +150,7 @@ namespace Rezolver
                 throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, serviceType), nameof(target));
 
             base.Register(target, serviceType);
+            this.RaiseEvent(new Events.TargetRegisteredEvent(target, serviceType ?? target.DeclaredType));
         }
     }
 }

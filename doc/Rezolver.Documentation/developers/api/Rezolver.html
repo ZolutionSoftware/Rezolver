@@ -229,6 +229,11 @@ strings of reflection code).</p>
 <p>For example: <pre><code>MethodCallExtractor.ExtractCalledMethod(() => Console.WriteLine(&quot;foo&quot;))</code></pre></p>
 <p>Will return the MethodInfo for the <code>WriteLine</code> method of the <code>Console</code> class.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.MSDIITargetContainerExtensions.html">MSDIITargetContainerExtensions</a></h4>
+      <section><p>Provides the <a class="xref" href="Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_Rezolver_ITargetContainer_Microsoft_Extensions_DependencyInjection_IServiceCollection_">Populate(ITargetContainer, IServiceCollection)</a> extension method which allows
+easy importing of all registrations in an <code>IServiceCollection</code> from <code>Microsoft.Extensions.DependencyInjection</code>
+into a Rezolver <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+</section>
       <h4><a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html">MultipleTargetContainerExtensions</a></h4>
       <section><p>Extensions for registering multiple targets individually and against the same type</p>
 </section>
@@ -259,6 +264,9 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
       <h4><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></h4>
       <section><p>Standard implementation of <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></p>
 </section>
+      <h4><a class="xref" href="Rezolver.RezolverOptions.html">RezolverOptions</a></h4>
+      <section><p>Options for using Rezolver as the DI container for Asp.Net Core web applications.</p>
+</section>
       <h4><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></h4>
       <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the
 <a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer_Scope">Scope</a> that&apos;s created along with it.</p>
@@ -281,6 +289,10 @@ from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> names
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> classes - <a class="xref" href="Rezolver.Container.html">Container</a> and <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a>.</p>
 <p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s, is also Generic type aware,
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.TargetContainerEventExtensions.html">TargetContainerEventExtensions</a></h4>
+      <section><p>Contains the extension <a class="xref" href="Rezolver.TargetContainerEventExtensions.html#Rezolver_TargetContainerEventExtensions_RegisterEventHandler__1_Rezolver_ITargetContainer_Rezolver_ITargetContainerEventHandler___0__">RegisterEventHandler&lt;TEvent&gt;(ITargetContainer, ITargetContainerEventHandler&lt;TEvent&gt;)</a> 
+which allows a caller to receive notifications about events happening inside a particular target container.</p>
 </section>
       <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves 
@@ -360,6 +372,10 @@ that the targets are registered against.</p>
       <h4><a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a></h4>
       <section><p>Marker interface for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which is responsible for configuring a specific type
 of object/behaviour/service/option. (Determined by <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>).</p>
+</section>
+      <h4><a class="xref" href="Rezolver.ITargetContainerEventHandler-1.html">ITargetContainerEventHandler&lt;TEvent&gt;</a></h4>
+      <section><p>Interface for an object which handles an event of a particular type (<code data-dev-comment-type="typeparamref" class="typeparamref">TEvent</code>)
+raised from an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITargetContainerFactory.html">ITargetContainerFactory</a></h4>
       <section><p>A target container option used by <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> to create a new instance of

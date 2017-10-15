@@ -27,12 +27,8 @@ doubled.  It's not a particularly real-world example - but it's a simple way to 
 > [!TIP]
 > The @Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator* is overloaded for the delegate types 
 > @System.Func`2 and @System.Delegate - the second of which allows any delegate to be registered as a 
-> decorator, subject to parameter and return type checks.
-> ***
-> Additional generic overloads will be added in the future to simplify the registration of delegates of any
-> arity, e.g. @System.Func`5, but for now you just have to create them directly - e.g:
-> 
-> `new Func<A, B, C, D>((a, b, c, d) => a.foo(b, c, d))`;
+> decorator, subject to parameter and return type checks.  The framework will inject arguments to any 
+> parameters the delegate has, with a parameter of the decorated type receiving the undecorated instance.
 
 ## Integration with `IEnumerable<T>`
 
@@ -45,13 +41,14 @@ will be doubled in the enumerable that's created:
 
 # Decorating a delegate
 
-If you are injecting delegates in your application, then you can stack decorator delegates to implement the 
-chain of responsibility pattern.
+If you are injecting delegates in your application, then the only way you can decorate them is with another 
+delegate - you can't use classes.
 
-This example implements a number classifier as a single delegate (`Action<int>`) composed of many others.
-As numbers are passed to the delegate, they are placed into one of four sets.
+In this example, we implement a number classifier as a single delegate (`Action<int>`) composed of many others.
+As numbers are passed to the delegate, they are placed into one of four sets.  This example showws how you might
+implement the chain of responsibility purely via the container itself, with delegates.
 
-One of the decorator delegates accepts both the original delegate *and* an extra dependency (`IPrimeChecker`),
+One of the decorator delegates accepts both the original delegate *and* an extra depeSndency (`IPrimeChecker`),
 thus showing how decorator delegates support the same argument injection that's supported by Rezolver's standard
 [delegate registrations](../delegates.md). Here's the code for `IPrimeChecker` and a basic implementation:
 

@@ -8,7 +8,7 @@ namespace Rezolver.Runtime
 {
     /// <summary>
     /// Internal hack to prevent stack overflows when the <see cref="OptionsTargetContainerExtensions"/>
-    /// options accessors recurse.
+    /// options accessors recurse for other options lookups.
     /// </summary>
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Delegate, AllowMultiple = false, Inherited = false)]
     internal class ContravarianceAttribute : Attribute

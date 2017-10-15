@@ -104,16 +104,20 @@
 
 <p>Rezolver is a <a href="docs/benchmarks.html">fast</a>, efficient, extensible, <a href="https://github.com/ZolutionSoftware/Rezolver">open source</a> IOC container 
 with Asp.Net Core integration.</p>
-<p>The nuget package has binaries targeted to these .Net versions/standards:</p>
+<p>The nuget package has binaries specifically targeted to these .Net versions/standards:</p>
 <ul>
+<li>.Net Standard 2.0</li>
 <li>.Net Standard 1.1</li>
 <li>.Net 4.5.1</li>
 <li>.Net 4.6</li>
 </ul>
-<p>This site contains all the API documentation and Developer Guides you&#39;ll ever to get you up and running using
-Rezolver.  </p>
-<h2 id="13-released">1.3 Released!</h2>
-<p>See the <a href="https://github.com/ZolutionSoftware/Rezolver/releases">release notes on Github</a>.</p>
+<h2 id="aspnet-core-support">Asp.Net Core Support</h2>
+<p>Asp.Net Core Support (v2.0 and v1.1) is provided by the 
+<a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting package</a>,
+supported by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection package</a>
+which provides an implementation of the new .Net Core DI container abstraction.</p>
+<h2 id="131-released">1.3.1 Released!</h2>
+<p>Adds .Net Standard 2.0 and more. See the <a href="https://github.com/ZolutionSoftware/Rezolver/releases">release notes on Github</a>.</p>
 <h2 id="features">Features</h2>
 <p><em>Linked topics provide high level overviews and examples in our developer guide - click on them to find out more! (*)</em></p>
 <ul>
@@ -176,13 +180,7 @@ Rezolver.  </p>
 </ul>
 </li>
 <li>Extensible &#39;targets&#39;<ul>
-<li>Can write your own code which produces objects when Rezolver matches it to a request type</li>
-</ul>
-</li>
-<li>Direct Asp.Net Core integration via extensions to the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Microsoft.Extensions.DependencyInjection</a> and 
-<a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Microsoft.AspNetCore.Hosting</a> packages via nuget packages (click the links to go to our package docs)</li>
-<li>Extensible configuration framework <em>(under review)</em><ul>
-<li>Json configuration <em>(under review)</em></li>
+<li>Can write your own code which produces objects when Rezolver matches it to a requested type</li>
 </ul>
 </li>
 </ul>
@@ -202,7 +200,7 @@ Rezolver.  </p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/#56/doc/Rezolver.Documentation/_docfx_proj/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

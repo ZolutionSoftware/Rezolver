@@ -7,6 +7,8 @@ namespace Rezolver.Tests
 {
 	public class TestTarget : ITarget
 	{
+        public Guid Id { get; } = Guid.NewGuid();
+
 		private Type _declaredType;
 		public Type DeclaredType
 		{

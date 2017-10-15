@@ -119,8 +119,8 @@ method has been called against the target type <code>Service</code>:</p>
 against that type, in the order they were registered.</li>
 </ul>
 <div class="NOTE"><h5>Note</h5><p>The functionality described here depends on two target container options: <a class="xref" href="../api/Rezolver.Options.AllowMultiple.html">AllowMultiple</a> 
-and @Rezolver.Options.EnumerableInjection - which are both configured to be equivalent to <code>true</code> by default
-for all <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
+and <a class="xref" href="../api/Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> - which are both configured to be equivalent to <code>true</code> by 
+default for all <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> instances.</p>
 </div>
 <p>You are not restricted in the targets you use to produce instances for an enumerable (e.g. <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>,
 <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a>), and each one can have its
@@ -128,12 +128,16 @@ own lifetime (scoped/singleton etc).</p>
 <div class="TIP"><h5>Tip</h5><p>By default, Rezolver will build &#39;lazy&#39; enumerables, but can be configured to build &#39;eager&#39; enumerables - for
 more on this, read the topic <a href="enumerables/lazy-vs-eager.html">Lazy vs Eager Enumerables</a></p>
 </div>
+<div class="WARNING"><h5>Warning</h5><p>In an Asp.Net Core 2.0 application, however, eager enumerables are the default until the fix for 
+<a href="https://github.com/aspnet/DependencyInjection/issues/589">this issue in the aspnet/DependencyInjection repo</a>
+has been pushed to an official package release.</p>
+</div>
 <h2 id="resolving-enumerables">Resolving enumerables</h2>
 <p>To resolve an enumerable from a container or through a scope, you can simply use <code>IEnumerable&lt;Foo&gt;</code> as the input
 type for a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call:</p>
 <pre><code class="lang-cs">var enumerable = container.Resolve&lt;IEnumerable&lt;Foo&gt;&gt;();
 </code></pre><p>However, the <code>ResolveMany</code> extension methods (see <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_">ResolveMany</a>
-and <a class="xref" href="../api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_">ResolveMany</a>) provide a shortut which allow you to pass
+and <a class="xref" href="../api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_">ResolveMany</a>) provide a shortcut which allow you to pass
 just the element type of the enumerable to reduce the &#39;angle-bracket percent&#39; of code which directly resolves
 enumerables (which of course you won&#39;t be doing because you&#39;re not using &#39;service location&#39; are you!? <span class="emoji" shortcode="wink">😉</span> ):</p>
 <pre><code class="lang-cs">// this is equivalent to resolving IEnumerable&lt;Foo&gt;
@@ -383,6 +387,11 @@ option and, if it&#39;s <code>false</code> it disables itself.</p>
 <a href="arrays-lists-collections/index.html">automatic collection-type injection behaviour</a> will only work when you 
 explicitly register the correct <code>IEnumerable&lt;T&gt;</code> for it.</p>
 </div>
+<h1 id="order-of-enumerables">Order of enumerables</h1>
+<div class="NOTE"><h5>Note</h5><p>This is new in 1.3.1</p>
+</div>
+<p>The order that an enumerable returns its items is <strong>always</strong> equal to the order in which the underlying registrations
+were made.</p>
 <hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
@@ -400,7 +409,7 @@ evaluated by default)</li>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/#56/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

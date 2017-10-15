@@ -14,6 +14,7 @@ namespace Rezolver.Tests.Types
     /// </summary>
     public class CustomTargetAndCompiledTarget : ITarget, ICompiledTarget
     {
+        public Guid Id { get; } = Guid.NewGuid();
         public bool UseFallback => false;
 
         public Type DeclaredType => _obj.GetType() ?? typeof(object);

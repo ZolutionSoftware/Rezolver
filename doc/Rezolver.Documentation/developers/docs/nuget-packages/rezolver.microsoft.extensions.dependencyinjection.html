@@ -114,19 +114,27 @@
 on top of this one to enable integration of Rezolver into your Asp.Net core website at an earlier stage of 
 its lifetime.</p>
 </div>
-<p>This package provides Rezolver&#39;s implementation of the Microsoft DI Container which drives the new Asp.Net Core stack.</p>
+<p>This package provides Rezolver&#39;s implementation of the Microsoft DI Container which drives the new Asp.Net 
+Core stack.</p>
 <p>After adding the package, configuring your Asp.Net website to use Rezolver as the DI container is simple:</p>
 <p>Replace the default <code>ConfigureServices</code> function in your application&#39;s <code>Startup.cs</code> file with
 this one:</p>
-<pre><code class="lang-csharp" name="Startup.cs">      public void ConfigureContainer(ITargetContainer container)
+<pre><code class="lang-csharp" name="StartupDIOnly.cs">// This method gets called by the runtime. Use this method to add services to the container.
+public IServiceProvider ConfigureServices(IServiceCollection services)
 {
-	//by declaring this method - even if empty - you trigger the 
-	//creation of the ITargetContainer which will ultimately
-	//be used to create the IContainer that will be used
-	//as the application&#39;s container.
+    // Add framework services.
+    services.AddMvc();
 
-	//Here you can perform additional registrations/configuration on the
-	//ITargetContainer here.
+    //create the Rezolver container from the services, without making any additional
+    //registrations
+    return services.CreateRezolverContainer();
+
+    // Or you can separate the process, allowing you to configure the underlying
+    // target container, or the container or whatever:
+
+    // ITargetContainer targets = new TargetContainer();
+    // targets.Populate(services);
+    // return new ScopedContainer(targets);
 }
 </code></pre><p>This returns a new service provider to the Asp.Net Core stack - thus replacing the default service provider
 that&#39;s already built.</p>
@@ -134,6 +142,11 @@ that&#39;s already built.</p>
 on the <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> object that&#39;s returned by the <code>CreateRezolverContainer</code> function called here,
 since the Rezolver container supports more functionality (e.g. expressions, decorators, custom targets, and more) 
 than the MS DI container does through its <code>ServiceRegistrations</code> class.</p>
+<p>An alternative to calling that one-shot method is shown in the comments at the end of the function.</p>
+<p>As the tips says at the top of this page, however, the <a href="rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core Hosting package</a>
+is probably the best way to integrate Rezolver into your application.  That uses this package, but uses
+additional extension points in the Asp.Net Core stack to integrate Rezolver at an earlier stage in the application
+lifecycle.</p>
 </article>
           </div>
           
@@ -142,7 +155,7 @@ than the MS DI container does through its <code>ServiceRegistrations</code> clas
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/#56/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

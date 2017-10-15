@@ -76,14 +76,17 @@ We can do this:
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example6)]
 
 In the simplest terms, what we're seeing here is the container walking through all the possible generic service types
-that could apply for the requested type, and returning all the instances produced by all those registrations.
-
-Note that the order of individual items which were registered against the same generic type (e.g. `IUsesAnyService<>`)
-is maintained, but the *most*-specific generics are being returned first.
+that could apply for the requested type, and returning all the instances produced by all those registrations, in
+the order that those registrations were made.  So, if an open generic registration is made after a series of closed 
+generic registrations, the open registration will still be last in the enumerable.
 
 > [!NOTE]
-> **Constrained** generic implementations are *not* equal to closed generic registrations. So an explicit 
-> registration against `IFoo<Bar>` will always beat a constrained generic implementation such as
+> This is not the same as when resolving a single instance - which will return the last, best-matched registration
+> for the generic type.  So if one or more closed generic registrations exist for the exact type requested, then 
+> the one that was added last will be used for the single instance.
+> ***
+> Also note that **Constrained** generic implementations are *not* equal to closed generic registrations. So an 
+> explicit registration against `IFoo<Bar>` will always beat a constrained generic implementation such as
 > `MyFoo<T> : IFoo<T> where T : Bar` (see further down).
 
 ***

@@ -2,9 +2,9 @@
   <Import Project="../../common.props" />
   <PropertyGroup>
     <AssemblyName>Rezolver.Microsoft.Extensions.DependencyInjection</AssemblyName>
-    <AssemblyTitle>Rezolver .Net Core IServiceProvider implementation</AssemblyTitle>
+    <AssemblyTitle>Rezolver .Net Core 2 IServiceProvider implementation</AssemblyTitle>
     <Description>Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)</Description>
-    <TargetFrameworks>netstandard1.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <PackageId>Rezolver.Microsoft.Extensions.DependencyInjection</PackageId>
@@ -14,6 +14,8 @@
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
+    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionSuffix></VersionSuffix>
   </PropertyGroup>
 
   <Import Project="..\Rezolver.Shared.props" />
@@ -23,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
-    <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
-  </PropertyGroup>
 </Project>

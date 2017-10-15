@@ -49,7 +49,7 @@ namespace Rezolver.Runtime
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return _factories.Select(f => (T)f(_context)).GetEnumerator();
+            return _factories.Select(f => (T)f(_context.New(typeof(T)))).GetEnumerator();
         }
 
         /// <summary>

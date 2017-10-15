@@ -11,26 +11,28 @@ using System.Threading.Tasks;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Provides the <see cref="AddRezolver(IServiceCollection)"/> extension method which adds the 
+    /// Provides the <see cref="AddRezolver(IServiceCollection, Action{RezolverOptions})"/> extension method which adds the 
     /// <c>IServiceProviderFactory</c> service registration for the <see cref="ITargetContainer"/> service provider builder.
     /// </summary>
     public static class RezolverServiceProviderServiceCollectionExtensions
     {
         /// <summary>
         /// Adds a Rezolver service provider factory to the service collection.  Used by the
-        /// <see cref="Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(AspNetCore.Hosting.IWebHostBuilder)"/>
+        /// <see cref="Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver(AspNetCore.Hosting.IWebHostBuilder, Action{RezolverOptions})"/>
         /// extension method.
         /// </summary>
-        /// <param name="services">The services to be configured.</param>
-        public static IServiceCollection AddRezolver(this IServiceCollection services/*, Action<LoggingCallTrackerOptions> configureCallTrackingOptionsCallback = null*/)
+        /// <param name="services">Required. The services to be configured.</param>
+        /// <param name="configureRezolverOptions">Optional. Configuration callback to be applied to the <see cref="RezolverOptions"/>
+        /// instance that configures the <see cref="ITargetContainer"/> and <see cref="IContainer"/> creation process.
+        /// 
+        /// Note - in order for this to be applied, your application will also need to call the 
+        /// <see cref="OptionsServiceCollectionExtensions.AddOptions(IServiceCollection)"/> extension method (usually in your 
+        /// application's ConfigureServices method).</param>
+        public static IServiceCollection AddRezolver(this IServiceCollection services, Action<RezolverOptions> configureRezolverOptions = null)
 		{
+            if (configureRezolverOptions != null)
+                services.Configure(configureRezolverOptions);
 
-			//if(configureCallTrackingOptionsCallback != null)
-			//{
-			//	//call tracking is being configured, so register the call tracker and the configuration callback
-			//	services.Configure(configureCallTrackingOptionsCallback);
-			//	services.AddSingleton<ICallTracker, LoggingCallTracker>();
-			//}
 			return services.AddSingleton<IServiceProviderFactory<ITargetContainer>, RezolverServiceProviderFactory>();
 		}
 	}

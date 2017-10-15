@@ -33,7 +33,7 @@ namespace Rezolver.Tests.Targets
 		}
 
 		[Theory]
-		[MemberData("TheoryTypes")]
+		[MemberData(nameof(TheoryTypes))]
 		public void DeclaredTypeShouldEqualConstructedType(Type expectedType)
 		{
 			Output.WriteLine($"Expected type is { expectedType }");
@@ -55,7 +55,7 @@ namespace Rezolver.Tests.Targets
 		}
 
 		[Theory]
-		[MemberData("TheoryTypes")]
+		[MemberData(nameof(TheoryTypes))]
 		public void ValueShouldReturnCorrectDefault(Type expectedType)
 		{
 			Output.WriteLine($"Expected type is { expectedType }");
@@ -64,7 +64,7 @@ namespace Rezolver.Tests.Targets
 		}
 
 		[Theory]
-		[MemberData("TheoryTypes")]
+		[MemberData(nameof(TheoryTypes))]
 		public void CompiledTargetImplementationShouldReturnCorrectDefault(Type expectedType)
 		{
 			Output.WriteLine($"Expected type is { expectedType }");

@@ -66,23 +66,25 @@ namespace Rezolver.Compilation.Expressions
                 MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
 
             /// <summary>
-            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, ITarget, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// method for help in generating scope-interfacing code.
             /// </summary>
             public static MethodInfo IContainerScope_Resolve_Method =>
                 MethodCallExtractor.ExtractCalledMethod(
                     (IContainerScope s) => s.Resolve(
                         (IResolveContext)null,
+                        (ITarget)null,
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, ITarget, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// extension method.
             /// </summary>
             public static MethodInfo ResolveContextExtensions_Resolve_Method =>
                 MethodCallExtractor.ExtractCalledMethod(
-                    (IResolveContext rc) => rc.Resolve((Func<IResolveContext, object>)null,
+                    (IResolveContext rc) => rc.Resolve((ITarget)null,
+                        (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
 
@@ -252,12 +254,14 @@ namespace Rezolver.Compilation.Expressions
             {
                 return Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IContainerScope)));
             }, typeof(ExpressionBuilderBase));
-
-            var newContextExpr = scopePreference == ScopePreference.Current ? (Expression)context.ResolveContextParameterExpression
-                : Methods.CallResolveContext_New(
+            
+            // have to force the creation of a new IResolveContext whose RequestedType type is equal to the type
+            // that we sought for compilation - so that the instance can be tracked correctly.
+            var newContextExpr = Methods.CallResolveContext_New(
                     context.ResolveContextParameterExpression,
                     Expression.Constant(builtExpression.Type),
                             Expression.Default(typeof(IContainer)),
+                            scopePreference == ScopePreference.Current ? (Expression)Expression.Default(typeof(IContainerScope)) : 
                             Expression.Call(Methods.IContainerScope_GetRootScope_Method,
                                 context.ContextScopePropertyExpression)
                     );
@@ -269,6 +273,7 @@ namespace Rezolver.Compilation.Expressions
                     Expression.Call(
                         Methods.ResolveContextExtensions_Resolve_Method,
                         newContextExpr,
+                        Expression.Constant(target),
                         Expression.Constant(lambda),
                         Expression.Constant(scopeBehaviour)
                     ),

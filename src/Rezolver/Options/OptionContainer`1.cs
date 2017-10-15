@@ -4,6 +4,7 @@ namespace Rezolver.Options
 {
     internal class OptionContainer<TOption> : IDirectTarget, ITarget, IOptionContainer<TOption>
     {
+        public Guid Id { get; } = Guid.NewGuid();
         public TOption Option { get; }
 
         bool ITarget.UseFallback => false;

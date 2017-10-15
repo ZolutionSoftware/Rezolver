@@ -5,15 +5,43 @@
 using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Rezolver.Events;
 
 namespace Rezolver
 {
-    internal class EnumerableTargetContainer : GenericTargetContainer
+    internal class EnumerableTargetContainer : GenericTargetContainer, ITargetContainerEventHandler<TargetRegisteredEvent>
     {
-        public EnumerableTargetContainer(ITargetContainer root) 
+        private class TargetOrderTracker
+        {
+            private Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(ReferenceComparer<ITarget>.Instance);
+            private int _counter = 0;
+
+            public int? GetOrder(ITarget target)
+            {
+                if (_dictionary.TryGetValue(target, out var order))
+                    return order;
+                return null;
+            }
+
+            public int Track(ITarget target)
+            {
+                if (!_dictionary.TryGetValue(target, out var result))
+                    _dictionary[target] = result = ++_counter;
+                return result;
+            }
+        }
+
+        private readonly TargetOrderTracker _tracker;
+
+        public EnumerableTargetContainer(ITargetContainer root)
             : base(root, typeof(IEnumerable<>))
         {
-
+            _tracker = root.GetOption<TargetOrderTracker>();
+            if (_tracker == null)
+                root.SetOption(_tracker = new TargetOrderTracker());
+            // REVIEW: add an option which controls whether enumerables use strict registration order or per-generic order?
+            root.RegisterEventHandler(this);
         }
 
         public override ITarget Fetch(Type type)
@@ -37,7 +65,7 @@ namespace Rezolver
             // the target container is an OverridingTargetContainer.
 
             // if the root is an OverridingTargetContainer, then 
-            if(Root is OverridingTargetContainer overridingContainer)
+            if (Root is OverridingTargetContainer overridingContainer)
             {
                 result = overridingContainer.Parent.Fetch(type);
                 // if the root result is an enumerable target; then we won't use it, because
@@ -52,13 +80,19 @@ namespace Rezolver
 
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
-            return new EnumerableTarget(Root.FetchAll(elementType), elementType);
+            return new EnumerableTarget(Root.FetchAll(elementType)
+                .OrderBy(t => _tracker.GetOrder(t) ?? int.MaxValue), elementType);
         }
 
         public override ITargetContainer CombineWith(ITargetContainer existing, Type type)
         {
             if (existing is EnumerableTargetContainer) return existing;
             return base.CombineWith(existing, type);
+        }
+
+        public void Handle(ITargetContainer source, TargetRegisteredEvent e)
+        {
+            _tracker.Track(e.Target);
         }
     }
 }

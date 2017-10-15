@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net46</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Rezolver.Tests.Shared</AssemblyName>
     <PackageId>Rezolver.Tests.Shared</PackageId>
     <RootNamespace>Rezolver.Tests</RootNamespace>
@@ -9,21 +9,9 @@
   
   <Import Project="..\..\src\Rezolver.Shared.props " />
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
-    <Reference Include="System.Runtime" />
-    <Reference Include="System.Linq" />
-    <Reference Include="System.Linq.Expressions" />
-    <Reference Include="System.Reflection" />
-    <Reference Include="System.Reflection.Extensions" />
-    <Reference Include="System.Reflection.Primitives" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
-    <PackageReference Include="xunit" Version="2.2.0" />
-    <PackageReference Include="xunit.runner.console" Version="2.2.0" />
+    <PackageReference Include="xunit" Version="2.3.0" />
   </ItemGroup>
 
 </Project>

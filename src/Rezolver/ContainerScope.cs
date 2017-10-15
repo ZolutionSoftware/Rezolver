@@ -16,15 +16,28 @@ namespace Rezolver
         /// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
         /// </summary>
         //private ConcurrentDictionary<IResolveContext, Lazy<object>> _explicitlyScopedObjects;
-        private ConcurrentDictionary<Type, Lazy<object>> _explicitlyScopedObjects;
+        private ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>> _explicitlyScopedObjects;
 
         /// <summary>
         /// implicitly scoped objects will always be IDisposable
         /// </summary>
-        private ConcurrentBag<IDisposable> _implicitlyScopedObjects
-			= new ConcurrentBag<IDisposable>();
+        private ConcurrentBag<ScopedObject> _implicitlyScopedObjects
+			= new ConcurrentBag<ScopedObject>();
 		private LockedList<IContainerScope> _childScopes
 			= new LockedList<IContainerScope>();
+
+        private struct ScopedObject
+        {
+            private static int _order = 0;
+
+            public int Id { get; }
+            public object Object { get; }
+            public ScopedObject(object obj)
+            {
+                Id = _order++;
+                Object = obj;
+            }
+        }
 
 		private bool _disposed = false;
 		private bool _disposing = false;
@@ -61,8 +74,8 @@ namespace Rezolver
         private void InitScopeContainers()
         {
             //_explicitlyScopedObjects = new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
-            _explicitlyScopedObjects = new ConcurrentDictionary<Type, Lazy<object>>();
-            _implicitlyScopedObjects = new ConcurrentBag<IDisposable>();
+            _explicitlyScopedObjects = new ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>>();
+            _implicitlyScopedObjects = new ConcurrentBag<ScopedObject>();
             _childScopes = new LockedList<IContainerScope>();
         }
 
@@ -163,28 +176,28 @@ namespace Rezolver
 				{
 					using (var listLock = _childScopes.Lock())
 					{
-						//dispose all child scopes first
-						foreach (var scope in _childScopes)
-						{
-							scope.Dispose();
-						}
+                        // dispose child scopes in reverse order of creation
+                        for(var f = _childScopes.Count; f>0; f--)
+                        {
+                            _childScopes[f-1].Dispose();
+                        }
 					}
 
 					//note that explicitly scoped objects might not actually be IDisposable :)
                     
 					var allExplicitObjects = _explicitlyScopedObjects.Skip(0).ToArray()
-						.Select(l => l.Value.Value).OfType<IDisposable>();
+						.Where(l => l.Value.Value.Object is IDisposable)
+                        .Select(l => l.Value.Value);
 					var allImplicitObjects = _implicitlyScopedObjects.Skip(0).ToArray();
 
                     //deref all used collections 
                     FreeScopeContainers();
 
-					foreach (var obj in allExplicitObjects.Concat(allImplicitObjects))
-					{
-						obj.Dispose();
-					}
-
-					
+                    foreach (var obj in allExplicitObjects.Concat(allImplicitObjects)
+                        .OrderByDescending(so => so.Id))
+                    {
+                        ((IDisposable)obj.Object).Dispose();
+                    }
 				}
 				finally
 				{
@@ -194,22 +207,24 @@ namespace Rezolver
 			}
 		}
 
-		object IContainerScope.Resolve(IResolveContext context, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
+		object IContainerScope.Resolve(IResolveContext context, ITarget target, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
 		{
 			if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 
 			if (behaviour == ScopeBehaviour.Explicit)
 			{
-                if (_explicitlyScopedObjects.TryGetValue(context.RequestedType, out Lazy<object> lazy))
-                    return lazy.Value;
+                // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
+                if (_explicitlyScopedObjects.TryGetValue(new TypeAndTargetId(context.RequestedType, target.Id), out Lazy<ScopedObject> lazy))
+                    return lazy.Value.Object;
 
                 //use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
-                return _explicitlyScopedObjects.GetOrAdd(context.RequestedType, k => new Lazy<object>(() => factory(context))).Value;
+                return _explicitlyScopedObjects.GetOrAdd(new TypeAndTargetId(context.RequestedType, target.Id), k => new Lazy<ScopedObject>(() => new ScopedObject(factory(context)))).Value.Object;
 			}
 			else if (behaviour == ScopeBehaviour.Implicit)
 			{
 				var result = factory(context);
-				if (result is IDisposable) _implicitlyScopedObjects.Add((IDisposable)result);
+                // don't *ever* track scopes as disposable objects 
+				if (result is IDisposable && !(result is IContainerScope)) _implicitlyScopedObjects.Add(new ScopedObject(result));
 				return result;
 			}
 			return factory(context);

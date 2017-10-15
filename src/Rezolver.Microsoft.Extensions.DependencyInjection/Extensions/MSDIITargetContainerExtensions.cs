@@ -26,22 +26,20 @@ namespace Rezolver
 		public static void Populate(this ITargetContainer targets, IServiceCollection services)
 		{
 			if (targets == null) throw new ArgumentNullException(nameof(targets));
-			//register service provider - ensuring that it's marked as unscoped because the lifetimes of
-			//containers which are also scopes are managed by the code that creates them, not by the containers themselves
-			targets.RegisterExpression(context => (IServiceProvider)context.Container);
+            //register service provider - ensuring that it's marked as unscoped because the lifetimes of
+            //containers which are also scopes are managed by the code that creates them, not by the containers themselves
+            targets.Register(Target.ForExpression(context => (IServiceProvider)context.Container).Unscoped());
 			//register scope factory - uses the context as a scope factory (it will choose between the container or
 			//the scope as the actual scope factory that will be used.
 			targets.RegisterExpression(context => new RezolverContainerScopeFactory(context), typeof(IServiceScopeFactory));
 
-			foreach (var group in services.GroupBy(s => s.ServiceType))
-			{
-				var toRegister = group.Select(s => CreateTargetFromService(s)).Where(t => t != null).ToArray();
-
-				if (toRegister.Length == 1)
-					targets.Register(toRegister[0], group.Key);
-				else if (toRegister.Length > 1)
-					targets.RegisterMultiple(toRegister, group.Key);
-			}
+            foreach(var serviceAndTarget in services.Select(s => new {
+                serviceType = s.ServiceType,
+                target = CreateTargetFromService(s)
+            }).Where(st => st.target != null))
+            {
+                targets.Register(serviceAndTarget.target, serviceAndTarget.serviceType);
+            }
 		}
 
 		private static ITarget CreateTargetFromService(ServiceDescriptor service)

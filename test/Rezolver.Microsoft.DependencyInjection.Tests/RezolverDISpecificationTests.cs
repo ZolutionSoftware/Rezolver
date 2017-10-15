@@ -8,13 +8,21 @@ using Rezolver.Compilation.Expressions;
 
 namespace Rezolver.Microsoft.Extensions.DependencyInjection.Tests
 {
-  public class RezolverDISpecificationTests : DependencyInjectionSpecificationTests
-  {
-    protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
+    public class RezolverDISpecificationTests : DependencyInjectionSpecificationTests
     {
-      var container = new ScopedContainer();
-      container.Populate(serviceCollection);
-      return container;
+        protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
+        {
+            //Just proving my comments on https://github.com/aspnet/DependencyInjection/issues/589
+            var config = TargetContainer
+                .DefaultConfig
+                .Clone()
+                .ConfigureOption<Options.LazyEnumerables>(false);
+
+            var container = new ScopedContainer(
+                new TargetContainer(config));
+
+            container.Populate(serviceCollection);
+            return container;
+        }
     }
-  }
 }
