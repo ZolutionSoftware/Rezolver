@@ -3,7 +3,7 @@
 Rezolver
 ========
 
-Rezolver is a high performance, portable (.NetStandard 1.1), open-source IOC container.
+Rezolver is a high performance, portable (.NetStandard 1.1 & 2.0), open-source IOC container.
 
 > You can get the [Rezolver Package from Nuget](https://www.nuget.org/packages/Rezolver/), and for more 
 > packages, head over to the [packages documentation](http://rezolver.co.uk/developers/docs/nuget-packages/index.html).
@@ -15,6 +15,16 @@ For more information, including API reference and developer how-tos, head on ove
 
 [![Work in Progress](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ZolutionSoftware/Rezolver) 
 [![Items ready to go](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready)](http://waffle.io/ZolutionSoftware/Rezolver)
+
+## 1.3 & 1.3.1 Features
+
+- Support for Asp.Net Core 2.0
+- Contravariance
+- Decorator Delegates
+- List, Collection and Array injection
+- ... Plus loads of bug fixes and other enhancements :)
+
+All these features are documented [on our website](http://rezolver.co.uk).
 
 ## Performance
 
