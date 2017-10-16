@@ -18,6 +18,8 @@ For more information, including API reference and developer how-tos, head on ove
 
 ## 1.3 & 1.3.1 Features
 
+> For the full list of changes, check out [the version history](https://github.com/ZolutionSoftware/Rezolver/releases).
+
 - Support for Asp.Net Core 2.0
 - Contravariance
 - Decorator Delegates
