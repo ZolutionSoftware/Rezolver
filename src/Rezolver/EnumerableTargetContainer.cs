@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Rezolver.Events;
+using Rezolver.Runtime;
 
 namespace Rezolver
 {
@@ -33,6 +34,7 @@ namespace Rezolver
         }
 
         private readonly TargetOrderTracker _tracker;
+        private readonly KnownTypesIndex _targetKnownTypes;
 
         public EnumerableTargetContainer(ITargetContainer root)
             : base(root, typeof(IEnumerable<>))
@@ -40,7 +42,8 @@ namespace Rezolver
             _tracker = root.GetOption<TargetOrderTracker>();
             if (_tracker == null)
                 root.SetOption(_tracker = new TargetOrderTracker());
-            // REVIEW: add an option which controls whether enumerables use strict registration order or per-generic order?
+            _targetKnownTypes = root.FetchDirect<KnownTypesIndex>();
+
             root.RegisterEventHandler(this);
         }
 
@@ -80,7 +83,10 @@ namespace Rezolver
 
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
-            return new EnumerableTarget(Root.FetchAll(elementType)
+            // we need to find all the targets which have types that are covariantly compatible with elementType
+            return new EnumerableTarget(_targetKnownTypes.GetKnownTypesCompatibleWith(elementType)
+                .SelectMany(t => Root.FetchAll(t))
+                .Distinct(TargetIdentityComparer.Instance) //don't duplicate targets
                 .OrderBy(t => _tracker.GetOrder(t) ?? int.MaxValue), elementType);
         }
 
@@ -93,6 +99,7 @@ namespace Rezolver
         public void Handle(ITargetContainer source, TargetRegisteredEvent e)
         {
             _tracker.Track(e.Target);
+            _targetKnownTypes?.Add(typeof(IEnumerable<>).MakeGenericType(e.ServiceType));
         }
     }
 }

@@ -49,6 +49,8 @@ namespace Rezolver
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
+            // must be registered as a direct instance registration
+            new Configuration.DelegatedTargetContainerConfig(targets => targets.RegisterObject(new KnownTypesIndex(targets))),
             new Configuration.Configure<ITargetContainerFactory>(DefaultTargetContainerFactory.Instance),
             new Configuration.Configure<ITargetContainerTypeResolver>(DefaultTargetContainerTypeResolver.Instance),
             Configuration.InjectEnumerables.Instance,
@@ -118,10 +120,12 @@ namespace Rezolver
             if (GetTargetContainerType(type) != type)
             {
                 EnsureContainer(type).RegisterContainer(type, container);
+                this.RaiseEvent(new Events.TargetContainerRegisteredEvent(container, type));
                 return;
             }
 
             base.RegisterContainer(type, container);
+            this.RaiseEvent(new Events.TargetContainerRegisteredEvent(container, type));
         }
 
         /// <summary>

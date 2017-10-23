@@ -17,7 +17,9 @@ namespace Rezolver
 
             if (ShouldUseGenericTypeDef(targets, serviceType))
                 return serviceType.GetGenericTypeDefinition();
-
+            //temporary
+            if (serviceType == typeof(KnownTypesIndex))
+                return serviceType;
             return root.GetOption<ITargetContainerTypeResolver>(serviceType)?.GetContainerType(serviceType);
         }
         
