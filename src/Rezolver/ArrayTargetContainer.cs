@@ -39,7 +39,7 @@ namespace Rezolver
             }
         }
 
-        public ArrayTargetContainer(ITargetContainer root)
+        public ArrayTargetContainer(IRootTargetContainer root)
             : base(root)
         {
 

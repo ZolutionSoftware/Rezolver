@@ -56,8 +56,8 @@ namespace Rezolver
         /// </summary>
         /// <param name="targets">The target container to which the configurations in this collection are to be applied.</param>
         /// <remarks>The implementation runs through each configuration that has been added to the collection, in dependency 
-        /// order, calling its <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> method.</remarks>
-        public void Configure(ITargetContainer targets)
+        /// order, calling its <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/> method.</remarks>
+        public void Configure(IRootTargetContainer targets)
         {
             foreach (var config in Ordered)
             {

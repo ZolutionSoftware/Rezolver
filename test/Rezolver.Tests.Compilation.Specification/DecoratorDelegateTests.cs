@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-using SetupTargets = System.Action<Rezolver.ITargetContainer>;
+using SetupTargets = System.Action<Rezolver.IRootTargetContainer>;
 
 namespace Rezolver.Tests.Compilation.Specification
 {

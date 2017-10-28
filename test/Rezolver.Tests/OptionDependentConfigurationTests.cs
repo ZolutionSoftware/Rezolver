@@ -14,15 +14,15 @@ namespace Rezolver.Tests
     {
         public class ConfiguredByTestOptionConfig : Configuration.OptionDependentConfig<TestOption>
         {
-            private readonly Action<ITargetContainer> _verify;
+            private readonly Action<IRootTargetContainer> _verify;
 
-            public ConfiguredByTestOptionConfig(Action<ITargetContainer> verify, bool required)
+            public ConfiguredByTestOptionConfig(Action<IRootTargetContainer> verify, bool required)
                 : base(required)
             {
                 _verify = verify;
             }
 
-            public override void Configure(ITargetContainer targets)
+            public override void Configure(IRootTargetContainer targets)
             {
                 _verify(targets);
                 targets.RegisterObject(this);
@@ -35,10 +35,11 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldConfigureAfterOptionSet()
         {
-            CombinedTargetContainerConfig coll = new CombinedTargetContainerConfig();
-
-            // add the dependant first
-            coll.Add(new ConfiguredByTestOptionConfig(t => Assert.Equal("configured!", t.GetOption<TestOption>()), true));
+            CombinedTargetContainerConfig coll = new CombinedTargetContainerConfig
+            {
+                // add the dependant first
+                new ConfiguredByTestOptionConfig(t => Assert.Equal("configured!", t.GetOption<TestOption>()), true)
+            };
             // then add the config that configures the option :)
             coll.ConfigureOption<TestOption>("configured!");
 
@@ -50,16 +51,17 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldConfigureAfterAllOptionsSet()
         {
-            CombinedTargetContainerConfig coll = new CombinedTargetContainerConfig();
-
-            coll.Add(new ConfiguredByTestOptionConfig(t =>
+            CombinedTargetContainerConfig coll = new CombinedTargetContainerConfig
             {
-                Assert.Equal("global configured!", t.GetOption<TestOption>());
-                Assert.Equal("IEnumerable configured!", t.GetOption<TestOption>(typeof(IEnumerable<>)));
-                Assert.Equal("IEnumerable<string> configured!", t.GetOption<TestOption, IEnumerable<string>>());
-                Assert.Equal("IEnumerable configured!", t.GetOption<TestOption, IEnumerable<double>>());
-                Assert.Equal("global configured!", t.GetOption<TestOption, int>());
-            }, true));
+                new ConfiguredByTestOptionConfig(t =>
+                {
+                    Assert.Equal("global configured!", t.GetOption<TestOption>());
+                    Assert.Equal("IEnumerable configured!", t.GetOption<TestOption>(typeof(IEnumerable<>)));
+                    Assert.Equal("IEnumerable<string> configured!", t.GetOption<TestOption, IEnumerable<string>>());
+                    Assert.Equal("IEnumerable configured!", t.GetOption<TestOption, IEnumerable<double>>());
+                    Assert.Equal("global configured!", t.GetOption<TestOption, int>());
+                }, true)
+            };
 
             coll.ConfigureOption<TestOption, IEnumerable<string>>("IEnumerable<string> configured!");
             coll.ConfigureOption<TestOption>(typeof(IEnumerable<>), "IEnumerable configured!");

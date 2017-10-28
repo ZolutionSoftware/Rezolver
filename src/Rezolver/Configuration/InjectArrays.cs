@@ -43,14 +43,14 @@ namespace Rezolver.Configuration
         }
 
         /// <summary>
-        /// Implements the <see cref="OptionDependentConfig{TOption}.Configure(ITargetContainer)"/> abstract method
+        /// Implements the <see cref="OptionDependentConfig{TOption}.Configure(IRootTargetContainer)"/> abstract method
         /// by configuring the passed <paramref name="targets"/> so it can produce targets for any array type, regardless
         /// of whether a single object has been registered for the array's element type.
         /// 
         /// After enabling, the ability to register specific targets for concrete array types will still be present.
         /// </summary>
         /// <param name="targets"></param>
-        public override void Configure(ITargetContainer targets)
+        public override void Configure(IRootTargetContainer targets)
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 

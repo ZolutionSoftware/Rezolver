@@ -43,7 +43,7 @@ namespace Rezolver.Tests.Compilation.Specification
         /// <param name="configOverride">An explicit <see cref="ITargetContainerConfig"/> to use to configure the 
         /// <see cref="ITargetContainer"/>.  If not provided, then the config returned by <see cref="GetDefaultTargetContainerConfig(string)"/> 
         /// is used, which is always a clone of the <see cref="TargetContainer.DefaultConfig"/>.</param>
-		protected virtual ITargetContainer CreateTargetContainer([CallerMemberName]string testName = null, ITargetContainerConfig configOverride = null)
+		protected virtual IRootTargetContainer CreateTargetContainer([CallerMemberName]string testName = null, ITargetContainerConfig configOverride = null)
 		{
 			return new TargetContainer(configOverride ?? GetDefaultTargetContainerConfig(testName));
 		}
@@ -72,7 +72,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// </summary>
 		/// <param name="targets">The targets to be used for the container.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual IContainer CreateContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
+		protected virtual IContainer CreateContainer(IRootTargetContainer targets, [CallerMemberName]string testName = null)
 		{
 			return new Container(targets, GetContainerConfig(testName));
 		}
@@ -86,7 +86,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// </summary>
 		/// <param name="targets">The targets.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual IScopedContainer CreateScopedContainer(ITargetContainer targets, [CallerMemberName]string testName = null)
+		protected virtual IScopedContainer CreateScopedContainer(IRootTargetContainer targets, [CallerMemberName]string testName = null)
 		{
 			return new ScopedContainer(targets, GetContainerConfig(testName));
 		}
@@ -100,7 +100,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// <param name="baseContainer">The base container.</param>
 		/// <param name="newTargets">The new targets.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual OverridingContainer CreateOverridingContainer(IContainer baseContainer, ITargetContainer newTargets = null, [CallerMemberName]string testName = null)
+		protected virtual OverridingContainer CreateOverridingContainer(IContainer baseContainer, IRootTargetContainer newTargets = null, [CallerMemberName]string testName = null)
 		{
 			return new OverridingContainer(baseContainer, newTargets, GetContainerConfig(testName));
 		}

@@ -11,7 +11,7 @@ using Rezolver.Runtime;
 
 namespace Rezolver
 {
-    internal class EnumerableTargetContainer : GenericTargetContainer, ITargetContainerEventHandler<TargetRegisteredEvent>
+    internal class EnumerableTargetContainer : GenericTargetContainer
     {
         private class TargetOrderTracker
         {
@@ -34,17 +34,18 @@ namespace Rezolver
         }
 
         private readonly TargetOrderTracker _tracker;
-        private readonly KnownTypesIndex _targetKnownTypes;
 
-        public EnumerableTargetContainer(ITargetContainer root)
+        public EnumerableTargetContainer(IRootTargetContainer root)
             : base(root, typeof(IEnumerable<>))
         {
-            _tracker = root.GetOption<TargetOrderTracker>();
-            if (_tracker == null)
-                root.SetOption(_tracker = new TargetOrderTracker());
-            _targetKnownTypes = root.FetchDirect<KnownTypesIndex>();
+            _tracker = new TargetOrderTracker();
+            Root.TargetRegistered += Root_TargetRegistered;
+        }
 
-            root.RegisterEventHandler(this);
+        private void Root_TargetRegistered(object sender, TargetRegisteredEventArgs e)
+        {
+            _tracker.Track(e.Target);
+            Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
         }
 
         public override ITarget Fetch(Type type)
@@ -83,8 +84,10 @@ namespace Rezolver
 
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
-            // we need to find all the targets which have types that are covariantly compatible with elementType
-            return new EnumerableTarget(_targetKnownTypes.GetKnownTypesCompatibleWith(elementType)
+            // we need to find all the targets which have types which compatible with elementType
+            // for that we use the ICovariantTypeIndex implementation of the Root target container.
+            return new EnumerableTarget(new[] { elementType }
+                .Concat(Root.GetKnownCompatibleTypes(elementType))
                 .SelectMany(t => Root.FetchAll(t))
                 .Distinct(TargetIdentityComparer.Instance) //don't duplicate targets
                 .OrderBy(t => _tracker.GetOrder(t) ?? int.MaxValue), elementType);
@@ -94,12 +97,6 @@ namespace Rezolver
         {
             if (existing is EnumerableTargetContainer) return existing;
             return base.CombineWith(existing, type);
-        }
-
-        public void Handle(ITargetContainer source, TargetRegisteredEvent e)
-        {
-            _tracker.Track(e.Target);
-            _targetKnownTypes?.Add(typeof(IEnumerable<>).MakeGenericType(e.ServiceType));
         }
     }
 }

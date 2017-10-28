@@ -82,7 +82,7 @@ namespace Rezolver.Configuration
 		}
 
         /// <summary>
-		/// Implements the <see cref="IContainerConfig.Configure(IContainer, ITargetContainer)"/> method,
+		/// Implements the <see cref="IContainerConfig.Configure(IContainer, IRootTargetContainer)"/> method,
 		/// registering all the targets necessary to use expression-based compilation for all the standard targets
 		/// defined in the <c>Rezolver</c> core library.
 		/// </summary>
@@ -90,7 +90,7 @@ namespace Rezolver.Configuration
 		/// <param name="targets">Required - the target container into which the various targets will be registered.</param>
 		/// <remarks>All targets registered by this function are <see cref="ObjectTarget"/> targets backed by concrete instances
 		/// of the various components (compiler etc).</remarks>
-		public virtual void Configure(IContainer container, ITargetContainer targets)
+		public virtual void Configure(IContainer container, IRootTargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
             // note - the singleton container is done like this because the expression compiler which uses 

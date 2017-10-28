@@ -14,22 +14,31 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldSupportRegisteringOpenGenericAndFetchingAsClosed()
         {
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var target = Target.ForType(typeof(Generic<>));
             targets.Register(target, typeof(IGeneric<>));
-            ///this should be trivial
+
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<>));
-            Assert.Same(target, fetched);
             var fetchedClosed = targets.Fetch(typeof(IGeneric<int>));
+
+            // Assert
+            Assert.Same(target, fetched);
             Assert.Same(target, fetchedClosed);
         }
 
         [Fact]
         public void ShouldSupportRegisteringSpecialisationOfGeneric()
         {
+            // Assert
             ITargetContainer targets = new TargetContainer();
             targets.RegisterType(typeof(Generic<>), typeof(IGeneric<>));
+
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<int>));
+
+            // Assert
             Assert.NotNull(fetched);
             Assert.False(fetched.UseFallback);
         }
@@ -37,12 +46,17 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldFavourSpecialisationOfGenericInt()
         {
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var notExpected = Target.ForType(typeof(Generic<>));
             var expected = Target.ForType(typeof(AltGeneric<int>));
             targets.Register(notExpected, typeof(IGeneric<>));
             targets.Register(expected, typeof(IGeneric<int>));
+
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<int>));
+
+            // Assert
             Assert.NotSame(notExpected, fetched);
             Assert.Same(expected, fetched);
         }
@@ -50,27 +64,37 @@ namespace Rezolver.Tests
         [Fact]
         public void ShouldSupportRegisteringAndRetrievingGenericWithGenericParameter()
         {
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var target = Target.ForType(typeof(Generic<>));
             targets.Register(target, typeof(IGeneric<>));
+
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<IGeneric<int>>));
+
+            // Assert
             Assert.Same(target, fetched);
         }
 
         [Fact]
         public void ShouldSupportRegisteringAndRetrievingGenericWithAsymmetricGenericBase()
         {
-            //can't think what else to call this scenario!
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var target = Target.ForType(typeof(NestedGenericA<>));
             targets.Register(target, typeof(IGeneric<>).MakeGenericType(typeof(IEnumerable<>)));
+
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<IEnumerable<int>>));
+
+            // Assert
             Assert.Same(target, fetched);
         }
 
         [Fact]
         public void ShouldFavourGenericSpecialisationOfGeneric()
         {
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var target = Target.ForType(typeof(Generic<>));
 
@@ -80,9 +104,13 @@ namespace Rezolver.Tests
 
             targets.Register(target, typeof(IGeneric<>));
             targets.Register(target2, typeof(IGeneric<>).MakeGenericType(typeof(IEnumerable<>)));
+
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<IEnumerable<int>>));
-            Assert.Same(target2, fetched);
             var fetched2 = targets.Fetch(typeof(IGeneric<int>));
+
+            // Assert
+            Assert.Same(target2, fetched);
             Assert.Same(target, fetched2);
         }
 
@@ -110,27 +138,57 @@ namespace Rezolver.Tests
 
             // the actual handling of creating an instance is tested in the compiler spec tests
             // covering the ConstructorTarget
+            
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var target = new TestTarget(tTarget, false, true, ScopeBehaviour.None);
             targets.Register(target);
+
+            // Act
             var fetched = targets.Fetch(toFetch);
 
+            // Assert
+            Assert.Same(target, fetched);
+        }
+
+        public static TheoryData<string, Type, Type> CovariantTypeData = new TheoryData<string, Type, Type>
+        {
+            { "Func<string> -> Func<object>", typeof(Func<string>), typeof(Func<object>) },
+            { "Func<string> -> Func<IEnumerable<char>>", typeof(Func<string>), typeof(Func<IEnumerable<char>>) }
+        };
+
+        [Theory]
+        [MemberData(nameof(CovariantTypeData))]
+        public void ShouldFetchCovariant(string name, Type tTarget, Type toFetch)
+        {
+            // Arrange
+            ITargetContainer targets = new TargetContainer();
+            var target = new TestTarget(tTarget, false, true, ScopeBehaviour.None);
+            targets.Register(target);
+
+            // Act
+            var fetched = targets.Fetch(toFetch);
+
+            // Assert
             Assert.Same(target, fetched);
         }
 
         [Fact]
         public void ShouldNotFetchConstrainedGenericForIncompatibleType()
         {
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var expected = Target.ForType(typeof(Generic<>));
             var notexpected = Target.ForType(typeof(ConstrainedGeneric<>));
             targets.Register(expected, typeof(IGeneric<>));
             targets.Register(notexpected, typeof(IGeneric<>));
 
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<string>));
-            Assert.Same(expected, fetched);
-
             var all = targets.FetchAll(typeof(IGeneric<string>));
+
+            // Assert
+            Assert.Same(expected, fetched);
             Assert.Single(all, expected);
         }
 
@@ -142,22 +200,20 @@ namespace Rezolver.Tests
             // an unconstrained open generic is registered *after* one with constraints, then
             // that will win for any single-service Fetch.
 
-            // When #24 is done, it should be possible to make it so that open generics with 
-            // base/interface restrictions are registered against partially closed generics.
-            // Might get a bit tricky if a type parameter has multiple interfaces, or when a constraint
-            // references another type parameter.
-
+            // Arrange
             ITargetContainer targets = new TargetContainer();
             var openTarget = Target.ForType(typeof(Generic<>));
             var constrainedTarget = Target.ForType(typeof(ConstrainedGeneric<>));
             targets.Register(openTarget, typeof(IGeneric<>));
             targets.Register(constrainedTarget, typeof(IGeneric<>));
 
+            // Act
             var fetched = targets.Fetch(typeof(IGeneric<BaseClassChild>));
-            Assert.Same(constrainedTarget, fetched);
-
-            //but now - this should return both as they both apply
+            // this should return both as they both apply
             var all = targets.FetchAll(typeof(IGeneric<BaseClassChild>));
+
+            // Assert
+            Assert.Same(constrainedTarget, fetched);
             Assert.Equal(new[] { openTarget, constrainedTarget }, all);
         }
     }

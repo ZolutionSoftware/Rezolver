@@ -3,10 +3,10 @@
 namespace Rezolver
 {
     /// <summary>
-    /// A configuration callback for instances of <see cref="ITargetContainer"/>.
+    /// A configuration callback for instances of <see cref="IRootTargetContainer"/>.
     /// </summary>
     /// <remarks>
-    /// Clearly, this callback interface can be used to perform any action on an <see cref="ITargetContainer"/>,
+    /// Clearly, this callback interface can be used to perform any action on an <see cref="IRootTargetContainer"/>,
     /// but the intention is to use it either to pre-register targets or target containers for specific types,
     /// or to set options on a target container.
     /// 
@@ -26,11 +26,11 @@ namespace Rezolver
     public interface ITargetContainerConfig
     {
         /// <summary>
-        /// Called to apply this configuration to the given <paramref name="targets"/>.
+        /// Called to apply this configuration to the given <paramref name="rootTargets"/>.
         /// </summary>
-        /// <param name="targets">The target container to which the configuration is to be applied - will not be 
+        /// <param name="rootTargets">The target container to which the configuration is to be applied - will not be 
         /// null when called by the framework.</param>
-        void Configure(ITargetContainer targets);
+        void Configure(IRootTargetContainer rootTargets);
     }
 
     /// <summary>

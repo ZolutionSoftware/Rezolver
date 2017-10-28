@@ -43,7 +43,7 @@ namespace Rezolver.Configuration
         /// their primary interfaces) so long as none of the types are already registered.
         /// </summary>
         /// <param name="targets"></param>
-        public override void Configure(ITargetContainer targets)
+        public override void Configure(IRootTargetContainer targets)
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 

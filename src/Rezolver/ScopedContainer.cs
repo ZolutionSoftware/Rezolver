@@ -52,7 +52,7 @@ namespace Rezolver
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
         /// <param name="config">Can be null.  A configuration to apply to this container (and, potentially its 
         /// <see cref="Targets"/>).  If not provided, then the <see cref="Container.DefaultConfig"/> will be used</param>
-        public ScopedContainer(ITargetContainer targets = null, IContainerConfig config = null)
+        public ScopedContainer(IRootTargetContainer targets = null, IContainerConfig config = null)
 			: base(targets)
 		{
 			_scope = new ContainerScope(this);

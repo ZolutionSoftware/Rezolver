@@ -51,7 +51,7 @@ namespace Rezolver.Configuration
         }
 
         /// <summary>
-        /// Implementation of <see cref="OptionDependentConfig{TOption}.Configure(ITargetContainer)"/>
+        /// Implementation of <see cref="OptionDependentConfig{TOption}.Configure(IRootTargetContainer)"/>
         /// </summary>
         /// <param name="targets"></param>
         /// <remarks>
@@ -60,8 +60,8 @@ namespace Rezolver.Configuration
         /// if the <see cref="Options.EnableEnumerableInjection"/> option evaluates to <c>true</c> when read from <paramref name="targets"/>.
         /// 
         /// This is the default value for that option anyway, so, as the remarks section on the class states, all that's required to enable
-        /// the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <see cref="ITargetContainer"/></remarks>
-        public override void Configure(ITargetContainer targets)
+        /// the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <see cref="IRootTargetContainer"/></remarks>
+        public override void Configure(IRootTargetContainer targets)
         {
             targets.MustNotBeNull(nameof(targets));
             // if an option has already been set on the target container which disables automatic enumerables,

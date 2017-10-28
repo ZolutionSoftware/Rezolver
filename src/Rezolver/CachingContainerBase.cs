@@ -32,7 +32,7 @@ namespace Rezolver
         /// <see cref="IContainer.Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new 
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available 
         /// to inherited types, after construction, through the <see cref="Targets"/> property.</param>
-        protected CachingContainerBase(ITargetContainer targets = null)
+        protected CachingContainerBase(IRootTargetContainer targets = null)
 			: base(targets)
 		{
 

@@ -33,11 +33,11 @@ namespace Rezolver
         /// Never null.  Returns the root target container.
         /// </summary>
         /// <value>If this instance is created with a root
-        /// passed to the <see cref="TargetDictionaryContainer(ITargetContainer)"/>
+        /// passed to the <see cref="TargetDictionaryContainer(IRootTargetContainer)"/>
         /// constructor, then it will be returned by this property.
         /// 
         /// Otherwise it will return this instance.</value>
-        protected ITargetContainer Root { get; }
+        protected virtual IRootTargetContainer Root { get; }
 
         /// <summary>
         /// Constructs a new <see cref="TargetDictionaryContainer"/> optionally setting the <see cref="Root"/> target container.
@@ -47,9 +47,14 @@ namespace Rezolver
         /// <remarks>The importance of the <paramref name="root"/> target container is to enable code to be able to reach all 
         /// registrations for all services rather than only those which are stored within this container, because this type is used
         /// both as a root, but also for other more specialised target containers.</remarks>
-        public TargetDictionaryContainer(ITargetContainer root = null)
+        public TargetDictionaryContainer(IRootTargetContainer root)
         {
-            Root = root ?? this;
+            Root = root;
+        }
+
+        internal TargetDictionaryContainer()
+        {
+
         }
 
         /// <summary>

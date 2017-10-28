@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Rezolver.Runtime;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Rezolver
@@ -11,26 +13,30 @@ namespace Rezolver
             return TypeHelpers.IsGenericType(serviceType) && !TypeHelpers.IsGenericTypeDefinition(serviceType);
         }
 
-        internal static Type GetChildContainerType(this ITargetContainer targets, Type serviceType, ITargetContainer root = null)
+        internal static Type GetChildContainerType(this ITargetContainer targets, Type serviceType, IRootTargetContainer root)
         {
-            if (root == null) root = targets;
-
             if (ShouldUseGenericTypeDef(targets, serviceType))
                 return serviceType.GetGenericTypeDefinition();
-            //temporary
-            if (serviceType == typeof(KnownTypesIndex))
-                return serviceType;
+
             return root.GetOption<ITargetContainerTypeResolver>(serviceType)?.GetContainerType(serviceType);
         }
-        
-        internal static ITargetContainer CreateChildContainer(this ITargetContainer targets, Type targetContainerType, ITargetContainer root = null)
-        {
-            if (root == null) root = targets;
 
+        internal static Type GetChildContainerType(this IRootTargetContainer targets, Type serviceType)
+        {
+            return GetChildContainerType(targets, serviceType, targets);
+        }
+        
+        internal static ITargetContainer CreateChildContainer(this ITargetContainer targets, Type targetContainerType, IRootTargetContainer root)
+        {
             if (TypeHelpers.IsGenericTypeDefinition(targetContainerType))
                 return new GenericTargetContainer(root, targetContainerType);
 
             return root.GetOption<ITargetContainerFactory>(targetContainerType)?.CreateContainer(targetContainerType, targets, root);
+        }
+
+        internal static ITargetContainer CreateChildContainer(this IRootTargetContainer targets, Type targetContainerType)
+        {
+            return CreateChildContainer(targets, targetContainerType, targets);
         }
     }
 }

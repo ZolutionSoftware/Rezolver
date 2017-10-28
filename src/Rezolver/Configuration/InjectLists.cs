@@ -36,7 +36,7 @@ namespace Rezolver.Configuration
         /// <see cref="List{T}"/> for all three types - so long as none of them already have a registration.
         /// </summary>
         /// <param name="targets"></param>
-        public override void Configure(ITargetContainer targets)
+        public override void Configure(IRootTargetContainer targets)
         {
             if (targets == null) throw new ArgumentNullException(nameof(targets));
 

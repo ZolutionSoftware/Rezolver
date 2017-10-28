@@ -67,7 +67,7 @@ namespace Rezolver
         /// should declare your own constructor with the same signature which chains instead to the <see cref="Container.Container(ITargetContainer)"/> 
         /// protected constructor; and then you should apply the configuration yourself in that constructor (falling back to 
         /// <see cref="DefaultConfig"/> if null).</remarks>
-        public Container(ITargetContainer targets = null, IContainerConfig config = null)
+        public Container(IRootTargetContainer targets = null, IContainerConfig config = null)
 			: base(targets)
 		{
             if (this.GetType() != typeof(Container))
@@ -87,7 +87,7 @@ namespace Rezolver
         /// 
         /// In order to apply configuration, derived types must declare their own constructor which accepts an <see cref="IContainerConfig"/>, and
         /// apply it (or the <see cref="DefaultConfig"/> as a default) after performing all initialisation.</remarks>
-        protected Container(ITargetContainer targets)
+        protected Container(IRootTargetContainer targets)
             : base(targets)
 		{
 

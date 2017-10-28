@@ -53,7 +53,7 @@ namespace Rezolver.Configuration
         /// Abstract implementation of the <see cref="ITargetContainerConfig"/> interface
         /// </summary>
         /// <param name="targets"></param>
-        public abstract void Configure(ITargetContainer targets);
+        public abstract void Configure(IRootTargetContainer targets);
     }
 
     /// <summary>

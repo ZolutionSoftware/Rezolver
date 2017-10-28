@@ -51,7 +51,7 @@ namespace Rezolver
         /// will be registered.</param>
         /// <param name="genericType">Required. The generic type definition that all targets and subcontainers registered
         /// to the new container will have in common.</param>
-        public GenericTargetContainer(ITargetContainer root, Type genericType)
+        public GenericTargetContainer(IRootTargetContainer root, Type genericType)
             : base(root ?? throw new ArgumentNullException(nameof(root)))
         {
             GenericType = genericType ?? throw new ArgumentNullException(nameof(genericType));

@@ -43,7 +43,12 @@ namespace Rezolver.Tests
             LogActual(result);
 
             // Assert
-            Assert.Equal(new[] { typeof(Func<IEnumerable<char>>), typeof(Func<string>), typeof(Func<>) }, result);
+            Assert.Equal(new[] {
+                typeof(Func<IEnumerable<char>>),
+                typeof(Func<string>),
+                typeof(Func<>).MakeGenericType(typeof(IEnumerable<>)),
+                typeof(Func<>)
+            }, result);
         }
     }
 }

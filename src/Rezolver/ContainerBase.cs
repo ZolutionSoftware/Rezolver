@@ -11,6 +11,7 @@ using Rezolver.Compilation;
 using Rezolver.Targets;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using Rezolver.Events;
 
 namespace Rezolver
 {
@@ -36,7 +37,7 @@ namespace Rezolver
     /// registered as sub target containers within an <see cref="ITargetContainer"/> via its 
     /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method.
     /// </remarks>
-    public class ContainerBase : IContainer, ITargetContainer
+    public class ContainerBase : IContainer, IRootTargetContainer
     {
         /// <summary>
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
@@ -53,7 +54,7 @@ namespace Rezolver
         /// adding more registrations, then there's no guarantee that new dependencies will be picked up - especially 
         /// if the <see cref="CachingContainerBase"/> is being used as your application's container (which it nearly 
         /// always will be).</remarks>
-        protected ITargetContainer Targets { get; }
+        protected IRootTargetContainer Targets { get; }
 
         /// <summary>
         /// Constructs a new instance of the <see cref="ContainerBase"/> class.
@@ -62,9 +63,35 @@ namespace Rezolver
         /// when <see cref="Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new 
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available to inherited types, 
         /// after construction, through the <see cref="Targets"/> property.</param>
-        protected ContainerBase(ITargetContainer targets = null)
+        protected ContainerBase(IRootTargetContainer targets = null)
         {
             Targets = targets ?? new TargetContainer();
+        }
+
+        event EventHandler<TargetRegisteredEventArgs> IRootTargetContainer.TargetRegistered
+        {
+            add
+            {
+                Targets.TargetRegistered += value;
+            }
+
+            remove
+            {
+                Targets.TargetRegistered -= value;
+            }
+        }
+
+        event EventHandler<TargetContainerRegisteredEventArgs> IRootTargetContainer.TargetContainerRegistered
+        {
+            add
+            {
+                Targets.TargetContainerRegistered += value;
+            }
+
+            remove
+            {
+                Targets.TargetContainerRegistered -= value;
+            }
         }
 
 
@@ -233,13 +260,6 @@ namespace Rezolver
             if (compiler == null)
                 throw new InvalidOperationException($"No compiler has been configured in the Targets target container for a target of type { target.GetType() } - please use the SetOption API to set an ITargetCompiler for all target types, or for specific target types.");
             return compiler.CompileTarget(target, context.New(newContainer: this), Targets);
-            //// TODO: Remove this by changing how compilation works, to use options from the target container instead of direct resolving
-
-            //if (context.RequestedType == typeof(ITargetCompiler))
-            //    throw new InvalidOperationException("Compilation is not correctly configured for this container.  Please attach a behaviour to this container which registers ITargetCompiler as a constant service");
-            ////note below - the context's container is always fixed to this container for compilation,
-            ////as this container is the source of the target.
-            //return _compiler.Value.CompileTarget(target, context.New(newContainer: this), Targets);
         }
 
         /// <summary>
@@ -321,6 +341,21 @@ namespace Rezolver
         void ITargetContainer.RegisterContainer(Type type, ITargetContainer container)
         {
             Targets.RegisterContainer(type, container);
+        }
+
+        void ICovariantTypeIndex.AddKnownType(Type serviceType)
+        {
+            Targets.AddKnownType(serviceType);
+        }
+
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType)
+        {
+            return Targets.GetKnownCovariantTypes(serviceType);
+        }
+
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType)
+        {
+            return Targets.GetKnownCompatibleTypes(serviceType);
         }
 
         #endregion

@@ -2,7 +2,9 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Events;
 using Rezolver.Runtime;
+using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +29,28 @@ namespace Rezolver
     /// lists (see <see cref="Configuration.InjectLists"/>).
     /// 
     /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
-    public class TargetContainer : TargetDictionaryContainer
+    public class TargetContainer : TargetDictionaryContainer, IRootTargetContainer
     {
+        private readonly CovariantTypeIndex _typeIndex;
+
+        public event EventHandler<TargetRegisteredEventArgs> TargetRegistered;
+        public event EventHandler<TargetContainerRegisteredEventArgs> TargetContainerRegistered;
+
+        void ICovariantTypeIndex.AddKnownType(Type serviceType)
+        {
+            _typeIndex.AddKnownType(serviceType);
+        }
+
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType)
+        {
+            return _typeIndex.GetKnownCovariantTypes(serviceType);
+        }
+
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType)
+        {
+            return _typeIndex.GetKnownCompatibleTypes(serviceType);
+        }
+
         /// <summary>
         /// The default configuration used for <see cref="TargetContainer"/> objects created via the <see cref="TargetContainer.TargetContainer(ITargetContainerConfig)"/>
         /// constructor when no configuration is explicitly passed.
@@ -49,8 +71,6 @@ namespace Rezolver
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
-            // must be registered as a direct instance registration
-            new Configuration.DelegatedTargetContainerConfig(targets => targets.RegisterObject(new KnownTypesIndex(targets))),
             new Configuration.Configure<ITargetContainerFactory>(DefaultTargetContainerFactory.Instance),
             new Configuration.Configure<ITargetContainerTypeResolver>(DefaultTargetContainerTypeResolver.Instance),
             Configuration.InjectEnumerables.Instance,
@@ -59,6 +79,11 @@ namespace Rezolver
             Configuration.InjectCollections.Instance,
             Configuration.InjectResolveContext.Instance
         });
+
+        /// <summary>
+        /// Always returns this instance.
+        /// </summary>
+        protected override IRootTargetContainer Root => this;
 
         /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class.
@@ -70,6 +95,7 @@ namespace Rezolver
         /// classes.  You must instead use the <see cref="TargetContainer.TargetContainer()"/> constructor and apply configuration in your
         /// constructor.</remarks>
         public TargetContainer(ITargetContainerConfig config = null)
+            : this()
         {
             if (this.GetType() != typeof(TargetContainer))
                 throw new InvalidOperationException("Derived types must not use this constructor because it triggers virtual method calls via the configuration callbacks.  Please use the protected parameterless constructor instead");
@@ -84,8 +110,9 @@ namespace Rezolver
         /// unsafe to be called during construction.
         /// </summary>
         protected TargetContainer()
+            : base()
         {
-
+            _typeIndex = new CovariantTypeIndex(this);
         }
 
         /// <summary>
@@ -120,12 +147,12 @@ namespace Rezolver
             if (GetTargetContainerType(type) != type)
             {
                 EnsureContainer(type).RegisterContainer(type, container);
-                this.RaiseEvent(new Events.TargetContainerRegisteredEvent(container, type));
+                TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
                 return;
             }
 
             base.RegisterContainer(type, container);
-            this.RaiseEvent(new Events.TargetContainerRegisteredEvent(container, type));
+            TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
         }
 
         /// <summary>
@@ -154,7 +181,7 @@ namespace Rezolver
                 throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, serviceType), nameof(target));
 
             base.Register(target, serviceType);
-            this.RaiseEvent(new Events.TargetRegisteredEvent(target, serviceType ?? target.DeclaredType));
+            TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
         }
     }
 }

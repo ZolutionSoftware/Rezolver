@@ -16,7 +16,10 @@ namespace Rezolver
     /// </summary>
     /// <remarks>It's *highly unlikely* that you will ever need to use this type directly in an application.
     /// 
-    /// It's public because it could be useful to developers of components which extend Rezolver.</remarks>
+    /// It's public because it could be useful to developers of components which extend Rezolver.
+    /// 
+    /// Internally, the <see cref="GenericTargetContainer"/> uses this exclusively to perform searches for 
+    /// compatible target types if a requested type is generic.</remarks>
     public partial class TargetTypeSelector : IEnumerable<Type>
     {
         // NOTE TO SELF!
@@ -31,24 +34,19 @@ namespace Rezolver
         /// The root-most <see cref="ITargetContainer"/> containing registrations to be sought,
         /// and the source of any configuration options.
         /// </summary>
-        public ITargetContainer RootTargets { get; }
-
-        private KnownTypesIndex KnownTypes { get; }
+        public IRootTargetContainer RootTargets { get; }
 
         /// <summary>
         /// Creates a new instance of the <see cref="TargetTypeSelector"/> type for the given
-        /// <paramref name="type"/> - with options read from the given <paramref name="targetsRoot"/>.
+        /// <paramref name="type"/>.
         /// </summary>
         /// <param name="type">The type for which a list of search types is to be produced.</param>
-        /// <param name="targetsRoot">The root target container providing options which alter
-        /// how the target types are selected</param>
-        public TargetTypeSelector(Type type, ITargetContainer targetsRoot = null)
+        /// <param name="rootTargets">The root target container</param>
+        public TargetTypeSelector(Type type, IRootTargetContainer rootTargets = null)
         {
             Type = type;
-            RootTargets = targetsRoot;
-            KnownTypes = RootTargets?.FetchDirect<KnownTypesIndex>();
+            RootTargets = rootTargets;
         }
-
 
         private IEnumerable<Type> Run(TargetTypeSelectorParams search)
         {
@@ -70,11 +68,14 @@ namespace Rezolver
             if (TypeHelpers.IsGenericType(search.Type) && !TypeHelpers.IsGenericTypeDefinition(search.Type))
             {
                 // now return any covariant matches if applicable
+                // NOTE - if the search is for a type parameter, then we don't perform this operation
+                // as we're only interested in materialising covariant types which we know *should* materialise
+                // at least one target match.
                 if (search.TypeParameter == null &&
                     !TypeHelpers.IsValueType(search.Type) &&
-                    KnownTypes != null)
+                    RootTargets != null)
                 {
-                    foreach (var covariantMatch in KnownTypes.GetKnownTypesCompatibleWith(search.Type))
+                    foreach (var covariantMatch in RootTargets.GetKnownCovariantTypes(search.Type))
                     {
                         yield return covariantMatch;
                     }

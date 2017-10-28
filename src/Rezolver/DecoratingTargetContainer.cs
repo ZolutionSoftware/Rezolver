@@ -40,11 +40,11 @@ namespace Rezolver
 
         private ITargetContainer Inner { get; set; }
 
-        private ITargetContainer Root { get; }
+        private IRootTargetContainer Root { get; }
 
         private DecoratingTargetFactory DecoratorFactory { get; }
 
-        private DecoratingTargetContainer(ITargetContainer root, Type decoratedType)
+        private DecoratingTargetContainer(IRootTargetContainer root, Type decoratedType)
         {
             Root = root ?? throw new ArgumentNullException(nameof(root));
             DecoratedType = decoratedType ?? throw new ArgumentNullException(nameof(decoratedType));
@@ -59,7 +59,7 @@ namespace Rezolver
         /// container will be registered.</param>
         /// <param name="decoratorType">Type of the decorator.</param>
         /// <param name="decoratedType">Type being decorated.</param>
-        public DecoratingTargetContainer(ITargetContainer root, Type decoratorType, Type decoratedType)
+        public DecoratingTargetContainer(IRootTargetContainer root, Type decoratorType, Type decoratedType)
             : this(root, decoratedType)
         {
             if(decoratorType == null) throw new ArgumentNullException(nameof(decoratorType));
@@ -74,7 +74,7 @@ namespace Rezolver
         /// container will be registered.</param>
         /// <param name="decoratorTarget"></param>
         /// <param name="decoratedType"></param>
-        public DecoratingTargetContainer(ITargetContainer root, ITarget decoratorTarget, Type decoratedType)
+        public DecoratingTargetContainer(IRootTargetContainer root, ITarget decoratorTarget, Type decoratedType)
             : this(root, decoratedType)
         {
             if (decoratorTarget == null) throw new ArgumentNullException(nameof(decoratorTarget));
@@ -87,7 +87,7 @@ namespace Rezolver
         /// <param name="root"></param>
         /// <param name="factory"></param>
         /// <param name="decoratedType"></param>
-        internal DecoratingTargetContainer(ITargetContainer root, DecoratingTargetFactory factory, Type decoratedType)
+        internal DecoratingTargetContainer(IRootTargetContainer root, DecoratingTargetFactory factory, Type decoratedType)
             : this(root, decoratedType)
         {
             DecoratorFactory = factory ?? throw new ArgumentNullException(nameof(factory));

@@ -29,7 +29,7 @@ namespace Rezolver.Configuration
 
         /// <summary>
         /// Constructs a new instance of the <see cref="Configure{TOption}"/> class which, when 
-        /// <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> is called with a particular <see cref="ITargetContainer"/>,
+        /// <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/> is called with a particular <see cref="ITargetContainer"/>,
         /// will set the option to the <paramref name="optionValue"/>, optionally for the given <paramref name="serviceType"/>
         /// </summary>
         /// <param name="optionValue">The value to set the option to when the configuration is applied to the target container</param>
@@ -44,7 +44,7 @@ namespace Rezolver.Configuration
 
         /// <summary>
         /// Constructs a new instance of the <see cref="Configure{TOption}"/> class which, when 
-        /// <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> is called with a particular <see cref="ITargetContainer"/>,
+        /// <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/> is called with a particular <see cref="ITargetContainer"/>,
         /// will set the option to the value returned by <paramref name="optionFactory"/>, optionally for the given <paramref name="serviceType"/>
         /// </summary>
         /// <param name="optionFactory">The factory to be executed to obtain the option value</param>
@@ -57,11 +57,11 @@ namespace Rezolver.Configuration
         }
 
         /// <summary>
-        /// Implementation of <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> - uses the
+        /// Implementation of <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/> - uses the
         /// <see cref="ConfigureOption(ITargetContainer)"/> method.
         /// </summary>
         /// <param name="targets">The target container into which the option is to be set.</param>
-        void ITargetContainerConfig.Configure(ITargetContainer targets)
+        void ITargetContainerConfig.Configure(IRootTargetContainer targets)
         {
             // note - the explicit implementation is required because 
             // otherwise the method name is the same as the enclosing class

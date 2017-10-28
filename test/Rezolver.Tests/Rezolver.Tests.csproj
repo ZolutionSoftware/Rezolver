@@ -20,7 +20,6 @@
   <Import Project="..\..\src\Rezolver.Shared.props " />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver.Logging\Rezolver.Logging.csproj" />
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
     <ProjectReference Include="..\Rezolver.Tests.Shared\Rezolver.Tests.Shared.csproj" />
   </ItemGroup>

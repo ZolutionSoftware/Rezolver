@@ -30,14 +30,7 @@ namespace Rezolver
         /// </summary>
         public Contravariance Contravariance { get; }
 
-        private readonly ITargetContainer _rootTargets;
-        public ITargetContainer RootTargets
-        {
-            get
-            {
-                return _rootTargets ?? Parent?.RootTargets;
-            }
-        }
+        public ITargetContainer RootTargets { get; }
 
         private readonly bool? _forceContravariance;
         /// <summary>
@@ -119,7 +112,7 @@ namespace Rezolver
         public TargetTypeSelectorParams(Type type, TargetTypeSelector owner)
             : this(type)
         {
-            _rootTargets = owner?.RootTargets;
+            RootTargets = owner?.RootTargets;
             // variance always starts off enabled.
             EnableVariance = true;
 
@@ -129,7 +122,7 @@ namespace Rezolver
             if (_forceContravariance == null)
             {
                 if (RootTargets != null)
-                    enableContravariance = RootTargets?.GetOption(
+                    enableContravariance = RootTargets.GetOption(
                         Type, Options.EnableContravariance.Default);
             }
             else
@@ -148,6 +141,7 @@ namespace Rezolver
             : this(type)
         {
             Parent = parent;
+            RootTargets = parent?.RootTargets;
             TypeParameter = typeParameter;
             // We enable variance if we have no parent
             // Or if we have a variant type parameter and

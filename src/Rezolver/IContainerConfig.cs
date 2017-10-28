@@ -16,7 +16,7 @@ namespace Rezolver
     /// constructor).  If one is not passed then the <see cref="Container.DefaultConfig"/> is used.
     /// 
     /// The built-in config implementations register services or set options in the target container passed
-    /// to <see cref="Configure(IContainer, ITargetContainer)"/>.
+    /// to <see cref="Configure(IContainer, IRootTargetContainer)"/>.
     /// </remarks>
     /// <seealso cref="ITargetContainerConfig"/>
     /// <seealso cref="Configuration.ExpressionCompilation"/>
@@ -30,7 +30,7 @@ namespace Rezolver
         /// <param name="container">The container to which the configuration is to be applied.</param>
         /// <param name="targets">The <see cref="ITargetContainer"/> that is being used by the <paramref name="container"/>
         /// for its registrations and options.</param>
-        void Configure(IContainer container, ITargetContainer targets);
+        void Configure(IContainer container, IRootTargetContainer targets);
     }
 
     /// <summary>

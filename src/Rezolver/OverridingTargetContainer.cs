@@ -38,9 +38,7 @@ namespace Rezolver
         public OverridingTargetContainer(ITargetContainer parent, ITargetContainerConfig config = null)
                 : base()
         {
-            //note above - the class uses the non-behaviour constructor of TargetContainer to ensure that 
-            parent.MustNotBeNull(nameof(parent));
-            _parent = parent;
+            _parent = parent ?? throw new ArgumentNullException(nameof(parent));
 
             (config ?? DefaultConfig).Configure(this);
         }

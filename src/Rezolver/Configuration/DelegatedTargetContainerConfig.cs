@@ -6,13 +6,13 @@ namespace Rezolver.Configuration
 {
     internal class DelegatedTargetContainerConfig : ITargetContainerConfig
     {
-        private readonly Action<ITargetContainer> _configure;
+        private readonly Action<IRootTargetContainer> _configure;
 
-        public DelegatedTargetContainerConfig(Action<ITargetContainer> configure)
+        public DelegatedTargetContainerConfig(Action<IRootTargetContainer> configure)
         {
             _configure = configure;
         }
-        void ITargetContainerConfig.Configure(ITargetContainer targets)
+        void ITargetContainerConfig.Configure(IRootTargetContainer targets)
         {
             _configure(targets);
         }
