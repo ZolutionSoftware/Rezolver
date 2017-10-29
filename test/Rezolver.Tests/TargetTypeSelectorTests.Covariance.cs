@@ -52,7 +52,7 @@ namespace Rezolver.Tests
         }
 
         [Fact]
-        public void Covariant_ShouldIncludeAllDerivedRegistrations()
+        public void Covariant_ShouldIncludeAllDerivedRegistrations_MostRecentToLeast()
         {
             // Arrange
             var targets = new TargetContainer();
@@ -66,11 +66,13 @@ namespace Rezolver.Tests
             LogActual(result);
 
             // Assert
+            // here, the order of the covariant types is determined by the order of registration.
+            // the selector processes them in reverse chronological order.
             Assert.Equal(new[]
             {
                 typeof(ICovariant<BaseClass>),
-                typeof(ICovariant<BaseClassChild>),
                 typeof(ICovariant<BaseClassGrandchild>),
+                typeof(ICovariant<BaseClassChild>),
                 typeof(ICovariant<>)
             }, result);
         }

@@ -47,9 +47,10 @@ namespace Rezolver
         /// <param name="serviceType">The type to be added to the index.</param>
         void AddKnownType(Type serviceType);
         /// <summary>
-        /// This method returns all types that have been added via the <see cref="AddKnownType(Type)"/> method which are 
-        /// of the same generic type but which have one or more type arguments that are reference compatible to those in the 
-        /// passed <paramref name="serviceType"/>.  So, if you pass `Func&lt;Base&gt;` then you might get back `Func&lt;Derived&gt;`
+        /// This method returns all types, in order of most to least recently added - that have been added via the 
+        /// <see cref="AddKnownType(Type)"/> method and which are of the same generic type but which have one or 
+        /// more type arguments that are reference compatible to those in the passed <paramref name="serviceType"/>.
+        /// So, if you pass `Func&lt;Base&gt;` then you might get back `Func&lt;Derived&gt;`
         /// if it has been added.
         /// </summary>
         /// <param name="serviceType">The type for which covariantly compatible known types are sought.</param>
@@ -63,10 +64,14 @@ namespace Rezolver
         /// 
         /// This method is suited for use when you are searching for targets for a covariant type parameter - such as looking for
         /// targets which can be included in an `IEnumerable&lt;T&gt;` (which is exactly what Rezolver does for enumerables).
+        /// 
+        /// In this case, the order is most to least recent covariants, followed by most to least recent
+        /// derived types.
         /// </summary>
         /// <param name="serviceType">The type for which all assignment-compatible known types are sought.</param>
         /// <returns>A non-null (possibly empty) enumerable of types which have been previously been added to the index
-        /// via a call to <see cref="AddKnownType(Type)"/> and which are covariantly compatible with <paramref name="serviceType"/>.</returns>
+        /// via a call to <see cref="AddKnownType(Type)"/> and which are covariantly compatible with <paramref name="serviceType"/>
+        /// either directly or by inheritance.</returns>
         IEnumerable<Type> GetKnownCompatibleTypes(Type serviceType);
     }
 }

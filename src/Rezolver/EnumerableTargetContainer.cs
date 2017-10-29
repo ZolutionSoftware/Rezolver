@@ -84,13 +84,24 @@ namespace Rezolver
 
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
-            // we need to find all the targets which have types which compatible with elementType
-            // for that we use the ICovariantTypeIndex implementation of the Root target container.
-            return new EnumerableTarget(new[] { elementType }
-                .Concat(Root.GetKnownCompatibleTypes(elementType))
-                .SelectMany(t => Root.FetchAll(t))
-                .Distinct(TargetIdentityComparer.Instance) //don't duplicate targets
-                .OrderBy(t => _tracker.GetOrder(t) ?? int.MaxValue), elementType);
+            bool enableCovariance = Root.GetOption(elementType, Options.EnableEnumerableCovariance.Default);
+
+            if (enableCovariance)
+            {
+                // we need to find all the targets which have types which compatible with elementType
+                // for that we use the ICovariantTypeIndex implementation of the Root target container.
+                return new EnumerableTarget(new[] { elementType }
+                    .Concat(Root.GetKnownCompatibleTypes(elementType))
+                    .SelectMany(t => Root.FetchAll(t))
+                    .Distinct(TargetIdentityComparer.Instance) //don't duplicate targets
+                    .OrderBy(t => _tracker.GetOrder(t) ?? int.MaxValue), elementType);
+            }
+            else
+            {
+                return new EnumerableTarget(Root.FetchAll(elementType)
+                    .Distinct(TargetIdentityComparer.Instance) //don't duplicate targets
+                    .OrderBy(t => _tracker.GetOrder(t) ?? int.MaxValue), elementType);
+            }
         }
 
         public override ITargetContainer CombineWith(ITargetContainer existing, Type type)

@@ -15,7 +15,8 @@ namespace Rezolver
     /// Implementation of the <see cref="IServiceProviderFactory{TContainerBuilder}"/> interface.
     /// Providing a more flexible way to configure your web application to use Rezolver.
     /// </summary>
-	internal class RezolverServiceProviderFactory : IServiceProviderFactory<IRootTargetContainer>
+	internal class RezolverServiceProviderFactory 
+        : IServiceProviderFactory<IRootTargetContainer>, IServiceProviderFactory<ITargetContainer>
 	{
 		private RezolverOptions _options;
 
@@ -41,5 +42,17 @@ namespace Rezolver
 
 		protected IContainer CreateDefaultContainer(IRootTargetContainer targets)
             => new ScopedContainer(targets, _options.ContainerConfig);
-	}
+
+        ITargetContainer IServiceProviderFactory<ITargetContainer>.CreateBuilder(IServiceCollection services)
+        {
+            return CreateBuilder(services);
+        }
+
+        public IServiceProvider CreateServiceProvider(ITargetContainer containerBuilder)
+        {
+            if (!(containerBuilder is IRootTargetContainer rootTargets))
+                throw new ArgumentException($"ITargetContainer of type { containerBuilder.GetType() } is not supported.  Type must implement IRootTargetContainer", nameof(containerBuilder));
+            return CreateServiceProvider(rootTargets);
+        }
+    }
 }

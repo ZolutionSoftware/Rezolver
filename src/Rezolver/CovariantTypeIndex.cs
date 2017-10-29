@@ -75,7 +75,7 @@ namespace Rezolver
         /// <param name="serviceType"></param>
         public IEnumerable<Type> GetKnownCovariantTypes(Type serviceType)
         {
-            return CovariantLookup.TryGetValue(serviceType, out var result) ? result : Enumerable.Empty<Type>();
+            return CovariantLookup.TryGetValue(serviceType, out var result) ? result.Reverse() : Enumerable.Empty<Type>();
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace Rezolver
         {
             IEnumerable<Type> toReturn = Enumerable.Empty<Type>();
             if (CovariantLookup.TryGetValue(serviceType, out var result))
-                toReturn = toReturn.Concat(result);
+                toReturn = toReturn.Concat(result.Reverse());
             if (CompatibleLookup.TryGetValue(serviceType, out result))
-                toReturn = toReturn.Concat(result);
+                toReturn = toReturn.Concat(result.Reverse());
             return toReturn;
         }
 

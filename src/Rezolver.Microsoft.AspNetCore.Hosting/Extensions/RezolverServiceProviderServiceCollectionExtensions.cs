@@ -33,7 +33,8 @@ namespace Microsoft.Extensions.DependencyInjection
             if (configureRezolverOptions != null)
                 services.Configure(configureRezolverOptions);
 
-			return services.AddSingleton<IServiceProviderFactory<IRootTargetContainer>, RezolverServiceProviderFactory>();
+			return services.AddSingleton<IServiceProviderFactory<IRootTargetContainer>, RezolverServiceProviderFactory>()
+                .AddSingleton<IServiceProviderFactory<ITargetContainer>, RezolverServiceProviderFactory>();
 		}
 	}
 }

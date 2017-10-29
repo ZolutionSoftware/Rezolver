@@ -1,4 +1,5 @@
-﻿using Rezolver.Tests.Types;
+﻿using Rezolver.Targets;
+using Rezolver.Tests.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,92 @@ namespace Rezolver.Tests
 
             // Assert
             Assert.Equal(3, fetched.Length);
+        }
+
+        [Fact]
+        public void Covariant_Enumerable_ShouldContainAllMatches()
+        {
+            // Arrange
+            var targets = new TargetContainer();
+            var baseTarget = Target.ForType<BaseClass>();
+            var childTarget = Target.ForType<BaseClassChild>();
+            var grandChildTarget = Target.ForType<BaseClassGrandchild>();
+            targets.Register(baseTarget);
+            targets.Register(childTarget);
+            targets.Register(grandChildTarget);
+
+            // Act
+            var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<BaseClass>)));
+
+            // Assert
+            Assert.Equal(new[] { baseTarget, childTarget, grandChildTarget }, enumerableTarget.Targets);
+        }
+
+        [Fact]
+        public void Covariant_Enumerable_ShouldContainAllMatches_NestedCovariant()
+        {
+            // Arrange
+            var targets = new TargetContainer();
+            var baseTarget = Target.ForType<Covariant<BaseClass>>();
+            var childTarget = Target.ForType<Covariant<BaseClassChild>>();
+            var grandChildTarget = Target.ForType<Covariant<BaseClassGrandchild>>();
+            targets.Register(baseTarget, typeof(ICovariant<BaseClass>));
+            targets.Register(childTarget, typeof(ICovariant<BaseClassChild>));
+            targets.Register(grandChildTarget, typeof(ICovariant<BaseClassGrandchild>));
+
+            // Act
+            var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<ICovariant<BaseClass>>)));
+
+            // Assert
+            Assert.Equal(new[] { baseTarget, childTarget, grandChildTarget }, enumerableTarget.Targets);
+        }
+
+        [Fact]
+        public void Covariant_Enumerable_ShouldContainOneMatchBecauseOptionDisablesEnumerableCovariance()
+        {
+            // Arrange
+            var targets = new TargetContainer();
+            targets.SetOption<Options.EnableEnumerableCovariance>(false);
+            var baseTarget = Target.ForType<BaseClass>();
+            var childTarget = Target.ForType<BaseClassChild>();
+            var grandChildTarget = Target.ForType<BaseClassGrandchild>();
+            targets.Register(baseTarget);
+            targets.Register(childTarget);
+            targets.Register(grandChildTarget);
+
+            // Act
+            var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<BaseClass>)));
+
+            // Assert
+            Assert.Equal(new[] { baseTarget }, enumerableTarget.Targets);
+        }
+
+        [Fact]
+        public void Covariant_Enumerable_ShouldContainOneMatchBecauseOptionDisablesEnumerableCovarianceForThatEnumerable()
+        {
+            // Arrange
+            var targets = new TargetContainer();
+            targets.SetOption<Options.EnableEnumerableCovariance, BaseClass>(false);
+            var baseTarget = Target.ForType<BaseClass>();
+            var childTarget = Target.ForType<BaseClassChild>();
+            var grandChildTarget = Target.ForType<BaseClassGrandchild>();
+            var nestedbaseTarget = Target.ForType<Covariant<BaseClass>>();
+            var nestedchildTarget = Target.ForType<Covariant<BaseClassChild>>();
+            var nestedgrandChildTarget = Target.ForType<Covariant<BaseClassGrandchild>>();
+            targets.Register(baseTarget);
+            targets.Register(childTarget);
+            targets.Register(grandChildTarget);
+            targets.Register(nestedbaseTarget, typeof(ICovariant<BaseClass>));
+            targets.Register(nestedchildTarget, typeof(ICovariant<BaseClassChild>));
+            targets.Register(nestedgrandChildTarget, typeof(ICovariant<BaseClassGrandchild>));
+
+            // Act
+            var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<BaseClass>)));
+            var nestedEnumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<ICovariant<BaseClass>>)));
+
+            // Assert
+            Assert.Equal(new[] { baseTarget }, enumerableTarget.Targets);
+            Assert.Equal(new[] { nestedbaseTarget, nestedchildTarget, nestedgrandChildTarget }, nestedEnumerableTarget.Targets);
         }
     }
 }

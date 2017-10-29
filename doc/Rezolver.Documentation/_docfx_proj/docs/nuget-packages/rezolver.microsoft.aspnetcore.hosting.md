@@ -52,6 +52,12 @@ in order to construct the @Rezolver.ScopedContainer that will be used as the DI 
 The *simplest* way to do this is to add a single method (it can be empty) called `ConfigureContainer`, which 
 accepts a single parameter of the type <xref:Rezolver.IRootTargetContainer>.
 
+> [!INFO]
+> The @Rezolver.IRootTargetContainer interface was added in Rezolver 1.3.2 to accommodate covariance
+> and is now the interface used for 'top-level' target containers.  You can still declare your method
+> as `ConfigureContainer<ITargetContainer>` without losing any functionality - so projects which are
+> upgrading from v2.0.x of the Hosting package will still work without any code changes.
+
 [!code-csharp[Startup.cs](../../../../../Examples/Rezolver.Examples.AspNetCore.2.0/Startup.cs#example)]
 
 > [!NOTE]
@@ -78,10 +84,6 @@ identical, except the `UseRezolver` method does not accept any callbacks.
 The `startup.cs` is similar to what's required for Asp.Net Core 2.0 - except your `ConfigureContainer`
 method should accept an `ITargetContainer` - i.e. `ConfigureContainer(ITargetContainer)`
 and then Rezolver will be used as the container for your application.
-
-> [!INFO]
-> The @Rezolver.IRootTargetContainer interface was added in Rezolver 1.4 to accommodate covariance
-> and is now the interface used for 'top-level' target containers.
 
 ***
 
