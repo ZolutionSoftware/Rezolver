@@ -27,7 +27,7 @@ If you've been reading some of the topics on this site - say, about [contravaria
 or [lazy and eager enumerables](../enumerables/lazy-vs-eager.md) then you'll have seen how we can use options
 to control complex behaviours in Rezolver containers.  That's what is shown in the alternative call
 to `UseRezolver` in the commented code.  you can also pass a configuration callback gthat will be called
-to modify the @Rezolver.RezolverOptions that will be used to create both the @Rezolver.ITargetContainer that
+to modify the @Rezolver.RezolverOptions that will be used to create both the @Rezolver.IRootTargetContainer that
 forms the basis of the registrations, and the @Rezolver.ScopedContainer that will ultimately create the objects
 for the application.
 
@@ -46,11 +46,11 @@ for the application.
 
 ## Startup.cs changes
 
-Now we need to tell the Asp.Net Core stack that you want an @Rezolver.ITargetContainer to be created
+Now we need to tell the Asp.Net Core stack that you want an @Rezolver.IRootTargetContainer to be created
 in order to construct the @Rezolver.ScopedContainer that will be used as the DI container.
 
 The *simplest* way to do this is to add a single method (it can be empty) called `ConfigureContainer`, which 
-accepts a single parameter of the type <xref:Rezolver.ITargetContainer>.
+accepts a single parameter of the type <xref:Rezolver.IRootTargetContainer>.
 
 [!code-csharp[Startup.cs](../../../../../Examples/Rezolver.Examples.AspNetCore.2.0/Startup.cs#example)]
 
@@ -62,7 +62,7 @@ By adding that `ConfigureContainer` method, a new Rezolver @Rezolver.ScopedConta
 from the `IServiceCollection` that contains all the service registrations for the application.
 
 As the comment states, inside that method you can also perform more configuration or registrations on the 
-@Rezolver.ITargetContainer, such as decorators, expressions etc which are not supported by Microsoft's DI
+@Rezolver.IRootTargetContainer, such as decorators, expressions etc which are not supported by Microsoft's DI
 abstractions, before the target container is passed to a new @Rezolver.ScopedContainer that will then be
 used as the application's `IServiceProvider`.
 
@@ -75,8 +75,13 @@ identical, except the `UseRezolver` method does not accept any callbacks.
 
 [!code-csharp[Example.cs](../../../../../Examples/Rezolver.Examples.AspNetCore.1.1/Program.cs#example)]
 
-The `startup.cs`, however, is the same as for Asp.Net Core 2.0 - add the `ConfigureContainer(ITargetContainer)`
-method and Rezolver will be used as the container for your application.
+The `startup.cs` is similar to what's required for Asp.Net Core 2.0 - except your `ConfigureContainer`
+method should accept an `ITargetContainer` - i.e. `ConfigureContainer(ITargetContainer)`
+and then Rezolver will be used as the container for your application.
+
+> [!INFO]
+> The @Rezolver.IRootTargetContainer interface was added in Rezolver 1.4 to accommodate covariance
+> and is now the interface used for 'top-level' target containers.
 
 ***
 
