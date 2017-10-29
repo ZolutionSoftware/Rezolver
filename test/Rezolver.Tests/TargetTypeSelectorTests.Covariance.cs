@@ -50,5 +50,29 @@ namespace Rezolver.Tests
                 typeof(Func<>)
             }, result);
         }
+
+        [Fact]
+        public void Covariant_ShouldIncludeAllDerivedRegistrations()
+        {
+            // Arrange
+            var targets = new TargetContainer();
+            targets.RegisterType<Covariant<BaseClass>, ICovariant<BaseClass>>();
+            targets.RegisterType<Covariant<BaseClassChild>, ICovariant<BaseClassChild>>();
+            targets.RegisterType<Covariant<BaseClassGrandchild>, ICovariant<BaseClassGrandchild>>();
+
+            // Act
+            var result = new TargetTypeSelector(typeof(ICovariant<BaseClass>), targets).ToArray();
+
+            LogActual(result);
+
+            // Assert
+            Assert.Equal(new[]
+            {
+                typeof(ICovariant<BaseClass>),
+                typeof(ICovariant<BaseClassChild>),
+                typeof(ICovariant<BaseClassGrandchild>),
+                typeof(ICovariant<>)
+            }, result);
+        }
     }
 }

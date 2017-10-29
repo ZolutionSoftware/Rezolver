@@ -114,65 +114,6 @@ namespace Rezolver.Tests
             Assert.Same(target, fetched2);
         }
 
-        public static TheoryData<Type, Type> ContravariantTypeData = new TheoryData<Type, Type>
-        {
-            // Target Type                                  // Type to Fetch
-
-            // Contravariant Interface
-            { typeof(IContravariant<BaseClass>),            typeof(IContravariant<BaseClassChild>) },
-            { typeof(IContravariant<BaseClass>),            typeof(IContravariant<BaseClassGrandchild>) },
-            // Contravariant Delegate
-            { typeof(Action<BaseClass>),                    typeof(Action<BaseClassChild>) },
-            { typeof(Action<BaseClass>),                    typeof(Action<BaseClassGrandchild>) },
-            // Generic base/interface matching contravariant parameter
-            { typeof(IContravariant<IGeneric<string>>),     typeof(IContravariant<Generic<string>>) },
-            { typeof(IContravariant<IContravariant<IContravariant<object>>>), typeof(IContravariant<IContravariant<IContravariant<string>>>) }   
-        };
-
-        [Theory]
-        [MemberData(nameof(ContravariantTypeData))]
-        public void ShouldFetchContravariant(Type tTarget, Type toFetch)
-        {
-            // this theory specifically tests that if we register a target for a generic which
-            // has contravariant type parameters, then it will be found automatically.
-
-            // the actual handling of creating an instance is tested in the compiler spec tests
-            // covering the ConstructorTarget
-            
-            // Arrange
-            ITargetContainer targets = new TargetContainer();
-            var target = new TestTarget(tTarget, false, true, ScopeBehaviour.None);
-            targets.Register(target);
-
-            // Act
-            var fetched = targets.Fetch(toFetch);
-
-            // Assert
-            Assert.Same(target, fetched);
-        }
-
-        public static TheoryData<string, Type, Type> CovariantTypeData = new TheoryData<string, Type, Type>
-        {
-            { "Func<string> -> Func<object>", typeof(Func<string>), typeof(Func<object>) },
-            { "Func<string> -> Func<IEnumerable<char>>", typeof(Func<string>), typeof(Func<IEnumerable<char>>) }
-        };
-
-        [Theory]
-        [MemberData(nameof(CovariantTypeData))]
-        public void ShouldFetchCovariant(string name, Type tTarget, Type toFetch)
-        {
-            // Arrange
-            ITargetContainer targets = new TargetContainer();
-            var target = new TestTarget(tTarget, false, true, ScopeBehaviour.None);
-            targets.Register(target);
-
-            // Act
-            var fetched = targets.Fetch(toFetch);
-
-            // Assert
-            Assert.Same(target, fetched);
-        }
-
         [Fact]
         public void ShouldNotFetchConstrainedGenericForIncompatibleType()
         {
@@ -184,11 +125,11 @@ namespace Rezolver.Tests
             targets.Register(notexpected, typeof(IGeneric<>));
 
             // Act
-            var fetched = targets.Fetch(typeof(IGeneric<string>));
+            var single = targets.Fetch(typeof(IGeneric<string>));
             var all = targets.FetchAll(typeof(IGeneric<string>));
 
             // Assert
-            Assert.Same(expected, fetched);
+            Assert.Same(expected, single);
             Assert.Single(all, expected);
         }
 
