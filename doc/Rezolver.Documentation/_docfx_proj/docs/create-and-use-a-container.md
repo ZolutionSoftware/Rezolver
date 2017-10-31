@@ -202,7 +202,7 @@ configuration collection) - but you can also control whether enumerable injectio
 configuration from that collection, [as is shown in the last enumerable example](enumerables.md#disabling-enumerable-injection).
 
 There is much more to be covered about configuration and options.  For now - use them where this guide shows you can
-(e.g. to [control contravariance](contravariance.md#disabling-contravariance-advanced) or 
+(e.g. to [control contravariance](variance/contravariance.md#disabling-contravariance-advanced) or 
 [member binding behaviour](constructor-injection/member-injection.md) etc), and if you want to be able to control
 something else this way, and can't, then just open an issue on Github.
 

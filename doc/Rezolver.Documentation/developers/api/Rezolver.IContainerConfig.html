@@ -128,29 +128,29 @@ as the source of their registrations).</p>
 for new container instances - since some configuration (setting of options etc) only applies to
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> and not <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>A configuration instance can be passed to any of the provided <a class="xref" href="Rezolver.Container.html">Container</a>-derived types on 
-construction (see the <a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerConfig_">Container(ITargetContainer, IContainerConfig)</a> 
+construction (see the <see cref="!:Container.Container(ITargetContainer, IContainerConfig)"></see> 
 constructor).  If one is not passed then the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a> is used.</p>
 <p>The built-in config implementations register services or set options in the target container passed
-to <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_">Configure(IContainer, ITargetContainer)</a>.</p>
+to <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_">Configure(IContainer, IRootTargetContainer)</a>.</p>
 </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig.Configure(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig.Configure(Rezolver.IContainer%2CRezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerConfig.cs/#L33">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/IContainerConfig.cs/#L33">View Source</a>
   </span>
   <a id="Rezolver_IContainerConfig_Configure_" data-uid="Rezolver.IContainerConfig.Configure*"></a>
-  <h4 id="Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
+  <h4 id="Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_" data-uid="Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)">Configure(IContainer, IRootTargetContainer)</h4>
   <div class="markdown level1 summary"><p>Performs the configuration represented by this insteance on the <code data-dev-comment-type="paramref" class="paramref">container</code> and its
 <code data-dev-comment-type="paramref" class="paramref">targets</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void Configure(IContainer container, ITargetContainer targets)</code></pre>
+    <pre><code class="lang-csharp hljs">void Configure(IContainer container, IRootTargetContainer targets)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -169,7 +169,7 @@ to <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfi
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
         <td><p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that is being used by the <code data-dev-comment-type="paramref" class="paramref">container</code>
 for its registrations and options.</p>
@@ -191,10 +191,10 @@ for its registrations and options.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainerConfig.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_IContainerConfig.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerConfig.cs/#L24" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/IContainerConfig.cs/#L24" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

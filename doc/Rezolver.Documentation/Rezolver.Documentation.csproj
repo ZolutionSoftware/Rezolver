@@ -514,8 +514,9 @@
     <Content Include="toc.yml" />
     <Content Include="_docfx_proj\docs\decorators\toc.yml" />
     <Content Include="_docfx_proj\docs\decorators\delegates.md" />
-    <Content Include="_docfx_proj\docs\contravariance.md" />
+    <Content Include="_docfx_proj\docs\variance\contravariance.md" />
     <Content Include="_docfx_proj\docs\decorators\collections.md" />
+    <Content Include="_docfx_proj\docs\variance\covariance.md" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -669,6 +670,8 @@
     <Content Include="_docfx_proj\docs\constructor-injection\toc.yml" />
     <Content Include="_docfx_proj\docs\constructor-injection\member-injection.md" />
     <Content Include="_docfx_proj\docs\constructor-injection\generics.md" />
+    <Content Include="_docfx_proj\docs\variance\toc.yml" />
+    <Content Include="_docfx_proj\docs\variance\index.md" />
     <None Include="_docfx_proj\images\exampleunittest.PNG" />
     <Content Include="mstile-144x144.png" />
     <Content Include="mstile-150x150.png" />

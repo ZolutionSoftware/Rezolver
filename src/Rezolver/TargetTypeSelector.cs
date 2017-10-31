@@ -75,7 +75,8 @@ namespace Rezolver
                     !TypeHelpers.IsValueType(search.Type) &&
                     RootTargets != null)
                 {
-                    foreach (var covariantMatch in RootTargets.GetKnownCovariantTypes(search.Type))
+                    foreach (var covariantMatch in RootTargets.GetKnownCovariantTypes(search.Type)
+                        .SelectMany(t => Run(new TargetTypeSelectorParams(t, parent: search))))
                     {
                         yield return covariantMatch;
                     }

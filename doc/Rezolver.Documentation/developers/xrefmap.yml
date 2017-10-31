@@ -304,12 +304,12 @@ references:
   commentId: T:Rezolver.CachingContainerBase
   fullName: Rezolver.CachingContainerBase
   nameWithType: CachingContainerBase
-- uid: Rezolver.CachingContainerBase.#ctor(Rezolver.ITargetContainer)
-  name: CachingContainerBase(ITargetContainer)
-  href: api/Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase__ctor_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.CachingContainerBase.#ctor(Rezolver.ITargetContainer)
-  fullName: Rezolver.CachingContainerBase.CachingContainerBase(Rezolver.ITargetContainer)
-  nameWithType: CachingContainerBase.CachingContainerBase(ITargetContainer)
+- uid: Rezolver.CachingContainerBase.#ctor(Rezolver.IRootTargetContainer)
+  name: CachingContainerBase(IRootTargetContainer)
+  href: api/Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase__ctor_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.CachingContainerBase.#ctor(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.CachingContainerBase.CachingContainerBase(Rezolver.IRootTargetContainer)
+  nameWithType: CachingContainerBase.CachingContainerBase(IRootTargetContainer)
 - uid: Rezolver.CachingContainerBase.#ctor*
   name: CachingContainerBase
   href: api/Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase__ctor_
@@ -382,12 +382,12 @@ references:
   commentId: Overload:Rezolver.CombinedContainerConfig.Clone
   fullName: Rezolver.CombinedContainerConfig.Clone
   nameWithType: CombinedContainerConfig.Clone
-- uid: Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  name: Configure(IContainer, ITargetContainer)
-  href: api/Rezolver.CombinedContainerConfig.html#Rezolver_CombinedContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  fullName: Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer, Rezolver.ITargetContainer)
-  nameWithType: CombinedContainerConfig.Configure(IContainer, ITargetContainer)
+- uid: Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  name: Configure(IContainer, IRootTargetContainer)
+  href: api/Rezolver.CombinedContainerConfig.html#Rezolver_CombinedContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  fullName: Rezolver.CombinedContainerConfig.Configure(Rezolver.IContainer, Rezolver.IRootTargetContainer)
+  nameWithType: CombinedContainerConfig.Configure(IContainer, IRootTargetContainer)
 - uid: Rezolver.CombinedContainerConfig.Configure*
   name: Configure
   href: api/Rezolver.CombinedContainerConfig.html#Rezolver_CombinedContainerConfig_Configure_
@@ -475,12 +475,12 @@ references:
   commentId: Overload:Rezolver.CombinedTargetContainerConfig.Clone
   fullName: Rezolver.CombinedTargetContainerConfig.Clone
   nameWithType: CombinedTargetContainerConfig.Clone
-- uid: Rezolver.CombinedTargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.CombinedTargetContainerConfig.html#Rezolver_CombinedTargetContainerConfig_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.CombinedTargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.CombinedTargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  nameWithType: CombinedTargetContainerConfig.Configure(ITargetContainer)
+- uid: Rezolver.CombinedTargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.CombinedTargetContainerConfig.html#Rezolver_CombinedTargetContainerConfig_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.CombinedTargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.CombinedTargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: CombinedTargetContainerConfig.Configure(IRootTargetContainer)
 - uid: Rezolver.CombinedTargetContainerConfig.Configure*
   name: Configure
   href: api/Rezolver.CombinedTargetContainerConfig.html#Rezolver_CombinedTargetContainerConfig_Configure_
@@ -2577,15 +2577,15 @@ references:
   fullName.vb: Rezolver.Configuration.Configure(Of TOption).ConfigureOption
   nameWithType: Configure<TOption>.ConfigureOption
   nameWithType.vb: Configure(Of TOption).ConfigureOption
-- uid: Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure(Rezolver.ITargetContainer)
-  name: ITargetContainerConfig.Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1_Rezolver_ITargetContainerConfig_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure(Rezolver.ITargetContainer)
-  name.vb: Rezolver.ITargetContainerConfig.Configure(ITargetContainer)
-  fullName: Rezolver.Configuration.Configure<TOption>.Rezolver.ITargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  fullName.vb: Rezolver.Configuration.Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  nameWithType: Configure<TOption>.ITargetContainerConfig.Configure(ITargetContainer)
-  nameWithType.vb: Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure(ITargetContainer)
+- uid: Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure(Rezolver.IRootTargetContainer)
+  name: ITargetContainerConfig.Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1_Rezolver_ITargetContainerConfig_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure(Rezolver.IRootTargetContainer)
+  name.vb: Rezolver.ITargetContainerConfig.Configure(IRootTargetContainer)
+  fullName: Rezolver.Configuration.Configure<TOption>.Rezolver.ITargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.Configuration.Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: Configure<TOption>.ITargetContainerConfig.Configure(IRootTargetContainer)
+  nameWithType.vb: Configure(Of TOption).Rezolver.ITargetContainerConfig.Configure(IRootTargetContainer)
 - uid: Rezolver.Configuration.Configure`1.Rezolver#ITargetContainerConfig#Configure*
   name: ITargetContainerConfig.Configure
   href: api/Rezolver.Configuration.Configure-1.html#Rezolver_Configuration_Configure_1_Rezolver_ITargetContainerConfig_Configure_
@@ -2601,12 +2601,12 @@ references:
   commentId: T:Rezolver.Configuration.ExpressionCompilation
   fullName: Rezolver.Configuration.ExpressionCompilation
   nameWithType: ExpressionCompilation
-- uid: Rezolver.Configuration.ExpressionCompilation.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  name: Configure(IContainer, ITargetContainer)
-  href: api/Rezolver.Configuration.ExpressionCompilation.html#Rezolver_Configuration_ExpressionCompilation_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.ExpressionCompilation.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.ExpressionCompilation.Configure(Rezolver.IContainer, Rezolver.ITargetContainer)
-  nameWithType: ExpressionCompilation.Configure(IContainer, ITargetContainer)
+- uid: Rezolver.Configuration.ExpressionCompilation.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  name: Configure(IContainer, IRootTargetContainer)
+  href: api/Rezolver.Configuration.ExpressionCompilation.html#Rezolver_Configuration_ExpressionCompilation_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.ExpressionCompilation.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.ExpressionCompilation.Configure(Rezolver.IContainer, Rezolver.IRootTargetContainer)
+  nameWithType: ExpressionCompilation.Configure(IContainer, IRootTargetContainer)
 - uid: Rezolver.Configuration.ExpressionCompilation.Configure*
   name: Configure
   href: api/Rezolver.Configuration.ExpressionCompilation.html#Rezolver_Configuration_ExpressionCompilation_Configure_
@@ -2631,12 +2631,12 @@ references:
   commentId: T:Rezolver.Configuration.InjectArrays
   fullName: Rezolver.Configuration.InjectArrays
   nameWithType: InjectArrays
-- uid: Rezolver.Configuration.InjectArrays.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.InjectArrays.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.InjectArrays.Configure(Rezolver.ITargetContainer)
-  nameWithType: InjectArrays.Configure(ITargetContainer)
+- uid: Rezolver.Configuration.InjectArrays.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.InjectArrays.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.InjectArrays.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: InjectArrays.Configure(IRootTargetContainer)
 - uid: Rezolver.Configuration.InjectArrays.Configure*
   name: Configure
   href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_Configure_
@@ -2673,12 +2673,12 @@ references:
   commentId: T:Rezolver.Configuration.InjectCollections
   fullName: Rezolver.Configuration.InjectCollections
   nameWithType: InjectCollections
-- uid: Rezolver.Configuration.InjectCollections.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.InjectCollections.html#Rezolver_Configuration_InjectCollections_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.InjectCollections.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.InjectCollections.Configure(Rezolver.ITargetContainer)
-  nameWithType: InjectCollections.Configure(ITargetContainer)
+- uid: Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.InjectCollections.html#Rezolver_Configuration_InjectCollections_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: InjectCollections.Configure(IRootTargetContainer)
 - uid: Rezolver.Configuration.InjectCollections.Configure*
   name: Configure
   href: api/Rezolver.Configuration.InjectCollections.html#Rezolver_Configuration_InjectCollections_Configure_
@@ -2703,12 +2703,12 @@ references:
   commentId: T:Rezolver.Configuration.InjectEnumerables
   fullName: Rezolver.Configuration.InjectEnumerables
   nameWithType: InjectEnumerables
-- uid: Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.InjectEnumerables.html#Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.ITargetContainer)
-  nameWithType: InjectEnumerables.Configure(ITargetContainer)
+- uid: Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.InjectEnumerables.html#Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: InjectEnumerables.Configure(IRootTargetContainer)
 - uid: Rezolver.Configuration.InjectEnumerables.Configure*
   name: Configure
   href: api/Rezolver.Configuration.InjectEnumerables.html#Rezolver_Configuration_InjectEnumerables_Configure_
@@ -2733,12 +2733,12 @@ references:
   commentId: T:Rezolver.Configuration.InjectLists
   fullName: Rezolver.Configuration.InjectLists
   nameWithType: InjectLists
-- uid: Rezolver.Configuration.InjectLists.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.InjectLists.html#Rezolver_Configuration_InjectLists_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.InjectLists.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.InjectLists.Configure(Rezolver.ITargetContainer)
-  nameWithType: InjectLists.Configure(ITargetContainer)
+- uid: Rezolver.Configuration.InjectLists.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.InjectLists.html#Rezolver_Configuration_InjectLists_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.InjectLists.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.InjectLists.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: InjectLists.Configure(IRootTargetContainer)
 - uid: Rezolver.Configuration.InjectLists.Configure*
   name: Configure
   href: api/Rezolver.Configuration.InjectLists.html#Rezolver_Configuration_InjectLists_Configure_
@@ -2763,12 +2763,12 @@ references:
   commentId: T:Rezolver.Configuration.InjectResolveContext
   fullName: Rezolver.Configuration.InjectResolveContext
   nameWithType: InjectResolveContext
-- uid: Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.InjectResolveContext.html#Rezolver_Configuration_InjectResolveContext_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.ITargetContainer)
-  nameWithType: InjectResolveContext.Configure(ITargetContainer)
+- uid: Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.InjectResolveContext.html#Rezolver_Configuration_InjectResolveContext_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: InjectResolveContext.Configure(IRootTargetContainer)
 - uid: Rezolver.Configuration.InjectResolveContext.Configure*
   name: Configure
   href: api/Rezolver.Configuration.InjectResolveContext.html#Rezolver_Configuration_InjectResolveContext_Configure_
@@ -2812,14 +2812,14 @@ references:
   fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).OptionDependentConfig
   nameWithType: OptionDependentConfig<TOption>.OptionDependentConfig
   nameWithType.vb: OptionDependentConfig(Of TOption).OptionDependentConfig
-- uid: Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Configure(Rezolver.ITargetContainer)
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Configure(Rezolver.ITargetContainer)
-  nameWithType: OptionDependentConfig<TOption>.Configure(ITargetContainer)
-  nameWithType.vb: OptionDependentConfig(Of TOption).Configure(ITargetContainer)
+- uid: Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Configure(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Configure(Rezolver.IRootTargetContainer)
+  nameWithType: OptionDependentConfig<TOption>.Configure(IRootTargetContainer)
+  nameWithType.vb: OptionDependentConfig(Of TOption).Configure(IRootTargetContainer)
 - uid: Rezolver.Configuration.OptionDependentConfig`1.Configure*
   name: Configure
   href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_
@@ -2875,12 +2875,12 @@ references:
   commentId: T:Rezolver.Configuration.OverridingEnumerables
   fullName: Rezolver.Configuration.OverridingEnumerables
   nameWithType: OverridingEnumerables
-- uid: Rezolver.Configuration.OverridingEnumerables.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  name: Configure(IContainer, ITargetContainer)
-  href: api/Rezolver.Configuration.OverridingEnumerables.html#Rezolver_Configuration_OverridingEnumerables_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Configuration.OverridingEnumerables.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  fullName: Rezolver.Configuration.OverridingEnumerables.Configure(Rezolver.IContainer, Rezolver.ITargetContainer)
-  nameWithType: OverridingEnumerables.Configure(IContainer, ITargetContainer)
+- uid: Rezolver.Configuration.OverridingEnumerables.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  name: Configure(IContainer, IRootTargetContainer)
+  href: api/Rezolver.Configuration.OverridingEnumerables.html#Rezolver_Configuration_OverridingEnumerables_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.OverridingEnumerables.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.OverridingEnumerables.Configure(Rezolver.IContainer, Rezolver.IRootTargetContainer)
+  nameWithType: OverridingEnumerables.Configure(IContainer, IRootTargetContainer)
 - uid: Rezolver.Configuration.OverridingEnumerables.Configure*
   name: Configure
   href: api/Rezolver.Configuration.OverridingEnumerables.html#Rezolver_Configuration_OverridingEnumerables_Configure_
@@ -2956,18 +2956,18 @@ references:
   commentId: T:Rezolver.Container
   fullName: Rezolver.Container
   nameWithType: Container
-- uid: Rezolver.Container.#ctor(Rezolver.ITargetContainer)
-  name: Container(ITargetContainer)
-  href: api/Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.Container.#ctor(Rezolver.ITargetContainer)
-  fullName: Rezolver.Container.Container(Rezolver.ITargetContainer)
-  nameWithType: Container.Container(ITargetContainer)
-- uid: Rezolver.Container.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerConfig)
-  name: Container(ITargetContainer, IContainerConfig)
-  href: api/Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerConfig_
-  commentId: M:Rezolver.Container.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerConfig)
-  fullName: Rezolver.Container.Container(Rezolver.ITargetContainer, Rezolver.IContainerConfig)
-  nameWithType: Container.Container(ITargetContainer, IContainerConfig)
+- uid: Rezolver.Container.#ctor(Rezolver.IRootTargetContainer)
+  name: Container(IRootTargetContainer)
+  href: api/Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Container.#ctor(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Container.Container(Rezolver.IRootTargetContainer)
+  nameWithType: Container.Container(IRootTargetContainer)
+- uid: Rezolver.Container.#ctor(Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)
+  name: Container(IRootTargetContainer, IContainerConfig)
+  href: api/Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_
+  commentId: M:Rezolver.Container.#ctor(Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)
+  fullName: Rezolver.Container.Container(Rezolver.IRootTargetContainer, Rezolver.IContainerConfig)
+  nameWithType: Container.Container(IRootTargetContainer, IContainerConfig)
 - uid: Rezolver.Container.#ctor*
   name: Container
   href: api/Rezolver.Container.html#Rezolver_Container__ctor_
@@ -2992,12 +2992,12 @@ references:
   commentId: T:Rezolver.ContainerBase
   fullName: Rezolver.ContainerBase
   nameWithType: ContainerBase
-- uid: Rezolver.ContainerBase.#ctor(Rezolver.ITargetContainer)
-  name: ContainerBase(ITargetContainer)
-  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.ContainerBase.#ctor(Rezolver.ITargetContainer)
-  fullName: Rezolver.ContainerBase.ContainerBase(Rezolver.ITargetContainer)
-  nameWithType: ContainerBase.ContainerBase(ITargetContainer)
+- uid: Rezolver.ContainerBase.#ctor(Rezolver.IRootTargetContainer)
+  name: ContainerBase(IRootTargetContainer)
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.ContainerBase.#ctor(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.ContainerBase.ContainerBase(Rezolver.IRootTargetContainer)
+  nameWithType: ContainerBase.ContainerBase(IRootTargetContainer)
 - uid: Rezolver.ContainerBase.#ctor*
   name: ContainerBase
   href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase__ctor_
@@ -3100,6 +3100,70 @@ references:
   commentId: Overload:Rezolver.ContainerBase.Resolve
   fullName: Rezolver.ContainerBase.Resolve
   nameWithType: ContainerBase.Resolve
+- uid: Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#AddKnownType(System.Type)
+  name: ICovariantTypeIndex.AddKnownType(Type)
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_
+  commentId: M:Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#AddKnownType(System.Type)
+  name.vb: Rezolver.ICovariantTypeIndex.AddKnownType(Type)
+  fullName: Rezolver.ContainerBase.Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)
+  nameWithType: ContainerBase.ICovariantTypeIndex.AddKnownType(Type)
+  nameWithType.vb: ContainerBase.Rezolver.ICovariantTypeIndex.AddKnownType(Type)
+- uid: Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#AddKnownType*
+  name: ICovariantTypeIndex.AddKnownType
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_AddKnownType_
+  commentId: Overload:Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#AddKnownType
+  name.vb: Rezolver.ICovariantTypeIndex.AddKnownType
+  fullName: Rezolver.ContainerBase.Rezolver.ICovariantTypeIndex.AddKnownType
+  nameWithType: ContainerBase.ICovariantTypeIndex.AddKnownType
+  nameWithType.vb: ContainerBase.Rezolver.ICovariantTypeIndex.AddKnownType
+- uid: Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes(System.Type)
+  name: ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_
+  commentId: M:Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes(System.Type)
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+  fullName: Rezolver.ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  nameWithType: ContainerBase.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+  nameWithType.vb: ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+- uid: Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes*
+  name: ICovariantTypeIndex.GetKnownCompatibleTypes
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_
+  commentId: Overload:Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+  fullName: Rezolver.ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+  nameWithType: ContainerBase.ICovariantTypeIndex.GetKnownCompatibleTypes
+  nameWithType.vb: ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+- uid: Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes(System.Type)
+  name: ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_
+  commentId: M:Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes(System.Type)
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+  fullName: Rezolver.ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  nameWithType: ContainerBase.ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+  nameWithType.vb: ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+- uid: Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes*
+  name: ICovariantTypeIndex.GetKnownCovariantTypes
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_
+  commentId: Overload:Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+  fullName: Rezolver.ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+  nameWithType: ContainerBase.ICovariantTypeIndex.GetKnownCovariantTypes
+  nameWithType.vb: ContainerBase.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+- uid: Rezolver.ContainerBase.Rezolver#IRootTargetContainer#TargetContainerRegistered
+  name: IRootTargetContainer.TargetContainerRegistered
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetContainerRegistered
+  commentId: E:Rezolver.ContainerBase.Rezolver#IRootTargetContainer#TargetContainerRegistered
+  name.vb: Rezolver.IRootTargetContainer.TargetContainerRegistered
+  fullName: Rezolver.ContainerBase.Rezolver.IRootTargetContainer.TargetContainerRegistered
+  nameWithType: ContainerBase.IRootTargetContainer.TargetContainerRegistered
+  nameWithType.vb: ContainerBase.Rezolver.IRootTargetContainer.TargetContainerRegistered
+- uid: Rezolver.ContainerBase.Rezolver#IRootTargetContainer#TargetRegistered
+  name: IRootTargetContainer.TargetRegistered
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetRegistered
+  commentId: E:Rezolver.ContainerBase.Rezolver#IRootTargetContainer#TargetRegistered
+  name.vb: Rezolver.IRootTargetContainer.TargetRegistered
+  fullName: Rezolver.ContainerBase.Rezolver.IRootTargetContainer.TargetRegistered
+  nameWithType: ContainerBase.IRootTargetContainer.TargetRegistered
+  nameWithType.vb: ContainerBase.Rezolver.IRootTargetContainer.TargetRegistered
 - uid: Rezolver.ContainerBase.Rezolver#ITargetContainer#CombineWith(Rezolver.ITargetContainer,System.Type)
   name: ITargetContainer.CombineWith(ITargetContainer, Type)
   href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_
@@ -3517,24 +3581,66 @@ references:
   fullName.vb: Rezolver.ContainerScopeResolveExtensions.ResolveMany(Of TObject)(Rezolver.IContainerScope)
   nameWithType: ContainerScopeResolveExtensions.ResolveMany<TObject>(IContainerScope)
   nameWithType.vb: ContainerScopeResolveExtensions.ResolveMany(Of TObject)(IContainerScope)
+- uid: Rezolver.CovariantTypeIndex
+  name: CovariantTypeIndex
+  href: api/Rezolver.CovariantTypeIndex.html
+  commentId: T:Rezolver.CovariantTypeIndex
+  fullName: Rezolver.CovariantTypeIndex
+  nameWithType: CovariantTypeIndex
+- uid: Rezolver.CovariantTypeIndex.AddKnownType(System.Type)
+  name: AddKnownType(Type)
+  href: api/Rezolver.CovariantTypeIndex.html#Rezolver_CovariantTypeIndex_AddKnownType_System_Type_
+  commentId: M:Rezolver.CovariantTypeIndex.AddKnownType(System.Type)
+  fullName: Rezolver.CovariantTypeIndex.AddKnownType(System.Type)
+  nameWithType: CovariantTypeIndex.AddKnownType(Type)
+- uid: Rezolver.CovariantTypeIndex.AddKnownType*
+  name: AddKnownType
+  href: api/Rezolver.CovariantTypeIndex.html#Rezolver_CovariantTypeIndex_AddKnownType_
+  commentId: Overload:Rezolver.CovariantTypeIndex.AddKnownType
+  fullName: Rezolver.CovariantTypeIndex.AddKnownType
+  nameWithType: CovariantTypeIndex.AddKnownType
+- uid: Rezolver.CovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  name: GetKnownCompatibleTypes(Type)
+  href: api/Rezolver.CovariantTypeIndex.html#Rezolver_CovariantTypeIndex_GetKnownCompatibleTypes_System_Type_
+  commentId: M:Rezolver.CovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  fullName: Rezolver.CovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  nameWithType: CovariantTypeIndex.GetKnownCompatibleTypes(Type)
+- uid: Rezolver.CovariantTypeIndex.GetKnownCompatibleTypes*
+  name: GetKnownCompatibleTypes
+  href: api/Rezolver.CovariantTypeIndex.html#Rezolver_CovariantTypeIndex_GetKnownCompatibleTypes_
+  commentId: Overload:Rezolver.CovariantTypeIndex.GetKnownCompatibleTypes
+  fullName: Rezolver.CovariantTypeIndex.GetKnownCompatibleTypes
+  nameWithType: CovariantTypeIndex.GetKnownCompatibleTypes
+- uid: Rezolver.CovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  name: GetKnownCovariantTypes(Type)
+  href: api/Rezolver.CovariantTypeIndex.html#Rezolver_CovariantTypeIndex_GetKnownCovariantTypes_System_Type_
+  commentId: M:Rezolver.CovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  fullName: Rezolver.CovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  nameWithType: CovariantTypeIndex.GetKnownCovariantTypes(Type)
+- uid: Rezolver.CovariantTypeIndex.GetKnownCovariantTypes*
+  name: GetKnownCovariantTypes
+  href: api/Rezolver.CovariantTypeIndex.html#Rezolver_CovariantTypeIndex_GetKnownCovariantTypes_
+  commentId: Overload:Rezolver.CovariantTypeIndex.GetKnownCovariantTypes
+  fullName: Rezolver.CovariantTypeIndex.GetKnownCovariantTypes
+  nameWithType: CovariantTypeIndex.GetKnownCovariantTypes
 - uid: Rezolver.DecoratingTargetContainer
   name: DecoratingTargetContainer
   href: api/Rezolver.DecoratingTargetContainer.html
   commentId: T:Rezolver.DecoratingTargetContainer
   fullName: Rezolver.DecoratingTargetContainer
   nameWithType: DecoratingTargetContainer
-- uid: Rezolver.DecoratingTargetContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITarget,System.Type)
-  name: DecoratingTargetContainer(ITargetContainer, ITarget, Type)
-  href: api/Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer__ctor_Rezolver_ITargetContainer_Rezolver_ITarget_System_Type_
-  commentId: M:Rezolver.DecoratingTargetContainer.#ctor(Rezolver.ITargetContainer,Rezolver.ITarget,System.Type)
-  fullName: Rezolver.DecoratingTargetContainer.DecoratingTargetContainer(Rezolver.ITargetContainer, Rezolver.ITarget, System.Type)
-  nameWithType: DecoratingTargetContainer.DecoratingTargetContainer(ITargetContainer, ITarget, Type)
-- uid: Rezolver.DecoratingTargetContainer.#ctor(Rezolver.ITargetContainer,System.Type,System.Type)
-  name: DecoratingTargetContainer(ITargetContainer, Type, Type)
-  href: api/Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer__ctor_Rezolver_ITargetContainer_System_Type_System_Type_
-  commentId: M:Rezolver.DecoratingTargetContainer.#ctor(Rezolver.ITargetContainer,System.Type,System.Type)
-  fullName: Rezolver.DecoratingTargetContainer.DecoratingTargetContainer(Rezolver.ITargetContainer, System.Type, System.Type)
-  nameWithType: DecoratingTargetContainer.DecoratingTargetContainer(ITargetContainer, Type, Type)
+- uid: Rezolver.DecoratingTargetContainer.#ctor(Rezolver.IRootTargetContainer,Rezolver.ITarget,System.Type)
+  name: DecoratingTargetContainer(IRootTargetContainer, ITarget, Type)
+  href: api/Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer__ctor_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type_
+  commentId: M:Rezolver.DecoratingTargetContainer.#ctor(Rezolver.IRootTargetContainer,Rezolver.ITarget,System.Type)
+  fullName: Rezolver.DecoratingTargetContainer.DecoratingTargetContainer(Rezolver.IRootTargetContainer, Rezolver.ITarget, System.Type)
+  nameWithType: DecoratingTargetContainer.DecoratingTargetContainer(IRootTargetContainer, ITarget, Type)
+- uid: Rezolver.DecoratingTargetContainer.#ctor(Rezolver.IRootTargetContainer,System.Type,System.Type)
+  name: DecoratingTargetContainer(IRootTargetContainer, Type, Type)
+  href: api/Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer__ctor_Rezolver_IRootTargetContainer_System_Type_System_Type_
+  commentId: M:Rezolver.DecoratingTargetContainer.#ctor(Rezolver.IRootTargetContainer,System.Type,System.Type)
+  fullName: Rezolver.DecoratingTargetContainer.DecoratingTargetContainer(Rezolver.IRootTargetContainer, System.Type, System.Type)
+  nameWithType: DecoratingTargetContainer.DecoratingTargetContainer(IRootTargetContainer, Type, Type)
 - uid: Rezolver.DecoratingTargetContainer.#ctor*
   name: DecoratingTargetContainer
   href: api/Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer__ctor_
@@ -3631,51 +3737,51 @@ references:
   commentId: T:Rezolver.DecoratorTargetContainerExtensions
   fullName: Rezolver.DecoratorTargetContainerExtensions
   nameWithType: DecoratorTargetContainerExtensions
-- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainer,System.Delegate,System.Type)
-  name: RegisterDecorator(ITargetContainer, Delegate, Type)
-  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Delegate_System_Type_
-  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainer,System.Delegate,System.Type)
-  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainer, System.Delegate, System.Type)
-  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Delegate, Type)
-- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainer,System.Type,System.Type)
-  name: RegisterDecorator(ITargetContainer, Type, Type)
-  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Type_System_Type_
-  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainer,System.Type,System.Type)
-  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.ITargetContainer, System.Type, System.Type)
-  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Type, Type)
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.IRootTargetContainer,System.Delegate,System.Type)
+  name: RegisterDecorator(IRootTargetContainer, Delegate, Type)
+  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_IRootTargetContainer_System_Delegate_System_Type_
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.IRootTargetContainer,System.Delegate,System.Type)
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.IRootTargetContainer, System.Delegate, System.Type)
+  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator(IRootTargetContainer, Delegate, Type)
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.IRootTargetContainer,System.Type,System.Type)
+  name: RegisterDecorator(IRootTargetContainer, Type, Type)
+  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_IRootTargetContainer_System_Type_System_Type_
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.IRootTargetContainer,System.Type,System.Type)
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Rezolver.IRootTargetContainer, System.Type, System.Type)
+  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator(IRootTargetContainer, Type, Type)
 - uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator*
   name: RegisterDecorator
   href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_
   commentId: Overload:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator
   fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator
   nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator
-- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.ITargetContainer,System.Delegate)
-  name: RegisterDecorator<TDecorated>(ITargetContainer, Delegate)
-  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Delegate_
-  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.ITargetContainer,System.Delegate)
-  name.vb: RegisterDecorator(Of TDecorated)(ITargetContainer, Delegate)
-  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(Rezolver.ITargetContainer, System.Delegate)
-  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(Rezolver.ITargetContainer, System.Delegate)
-  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(ITargetContainer, Delegate)
-  nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(ITargetContainer, Delegate)
-- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.ITargetContainer,System.Func{``0,``0})
-  name: RegisterDecorator<TDecorated>(ITargetContainer, Func<TDecorated, TDecorated>)
-  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Func___0___0__
-  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.ITargetContainer,System.Func{``0,``0})
-  name.vb: RegisterDecorator(Of TDecorated)(ITargetContainer, Func(Of TDecorated, TDecorated))
-  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(Rezolver.ITargetContainer, System.Func<TDecorated, TDecorated>)
-  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(Rezolver.ITargetContainer, System.Func(Of TDecorated, TDecorated))
-  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(ITargetContainer, Func<TDecorated, TDecorated>)
-  nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(ITargetContainer, Func(Of TDecorated, TDecorated))
-- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``2(Rezolver.ITargetContainer)
-  name: RegisterDecorator<TDecorator, TDecorated>(ITargetContainer)
-  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``2(Rezolver.ITargetContainer)
-  name.vb: RegisterDecorator(Of TDecorator, TDecorated)(ITargetContainer)
-  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorator, TDecorated>(Rezolver.ITargetContainer)
-  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorator, TDecorated)(Rezolver.ITargetContainer)
-  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorator, TDecorated>(ITargetContainer)
-  nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorator, TDecorated)(ITargetContainer)
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.IRootTargetContainer,System.Delegate)
+  name: RegisterDecorator<TDecorated>(IRootTargetContainer, Delegate)
+  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_IRootTargetContainer_System_Delegate_
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.IRootTargetContainer,System.Delegate)
+  name.vb: RegisterDecorator(Of TDecorated)(IRootTargetContainer, Delegate)
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(Rezolver.IRootTargetContainer, System.Delegate)
+  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(Rezolver.IRootTargetContainer, System.Delegate)
+  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(IRootTargetContainer, Delegate)
+  nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(IRootTargetContainer, Delegate)
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.IRootTargetContainer,System.Func{``0,``0})
+  name: RegisterDecorator<TDecorated>(IRootTargetContainer, Func<TDecorated, TDecorated>)
+  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_IRootTargetContainer_System_Func___0___0__
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``1(Rezolver.IRootTargetContainer,System.Func{``0,``0})
+  name.vb: RegisterDecorator(Of TDecorated)(IRootTargetContainer, Func(Of TDecorated, TDecorated))
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(Rezolver.IRootTargetContainer, System.Func<TDecorated, TDecorated>)
+  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(Rezolver.IRootTargetContainer, System.Func(Of TDecorated, TDecorated))
+  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorated>(IRootTargetContainer, Func<TDecorated, TDecorated>)
+  nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorated)(IRootTargetContainer, Func(Of TDecorated, TDecorated))
+- uid: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``2(Rezolver.IRootTargetContainer)
+  name: RegisterDecorator<TDecorator, TDecorated>(IRootTargetContainer)
+  href: api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator``2(Rezolver.IRootTargetContainer)
+  name.vb: RegisterDecorator(Of TDecorator, TDecorated)(IRootTargetContainer)
+  fullName: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator<TDecorator, TDecorated>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorator, TDecorated)(Rezolver.IRootTargetContainer)
+  nameWithType: DecoratorTargetContainerExtensions.RegisterDecorator<TDecorator, TDecorated>(IRootTargetContainer)
+  nameWithType.vb: DecoratorTargetContainerExtensions.RegisterDecorator(Of TDecorator, TDecorated)(IRootTargetContainer)
 - uid: Rezolver.DelegateTargetContainerExtensions
   name: DelegateTargetContainerExtensions
   href: api/Rezolver.DelegateTargetContainerExtensions.html
@@ -3763,6 +3869,90 @@ references:
   commentId: N:Rezolver.Events
   fullName: Rezolver.Events
   nameWithType: Rezolver.Events
+- uid: Rezolver.Events.TargetContainerRegisteredEvent
+  name: TargetContainerRegisteredEvent
+  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html
+  commentId: T:Rezolver.Events.TargetContainerRegisteredEvent
+  fullName: Rezolver.Events.TargetContainerRegisteredEvent
+  nameWithType: TargetContainerRegisteredEvent
+- uid: Rezolver.Events.TargetContainerRegisteredEvent.#ctor(Rezolver.ITargetContainer,System.Type)
+  name: TargetContainerRegisteredEvent(ITargetContainer, Type)
+  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent__ctor_Rezolver_ITargetContainer_System_Type_
+  commentId: M:Rezolver.Events.TargetContainerRegisteredEvent.#ctor(Rezolver.ITargetContainer,System.Type)
+  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainerRegisteredEvent(Rezolver.ITargetContainer, System.Type)
+  nameWithType: TargetContainerRegisteredEvent.TargetContainerRegisteredEvent(ITargetContainer, Type)
+- uid: Rezolver.Events.TargetContainerRegisteredEvent.#ctor*
+  name: TargetContainerRegisteredEvent
+  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent__ctor_
+  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEvent.#ctor
+  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainerRegisteredEvent
+  nameWithType: TargetContainerRegisteredEvent.TargetContainerRegisteredEvent
+- uid: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
+  name: TargetContainer
+  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_TargetContainer
+  commentId: P:Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
+  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
+  nameWithType: TargetContainerRegisteredEvent.TargetContainer
+- uid: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer*
+  name: TargetContainer
+  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_TargetContainer_
+  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
+  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
+  nameWithType: TargetContainerRegisteredEvent.TargetContainer
+- uid: Rezolver.Events.TargetContainerRegisteredEvent.Type
+  name: Type
+  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_Type
+  commentId: P:Rezolver.Events.TargetContainerRegisteredEvent.Type
+  fullName: Rezolver.Events.TargetContainerRegisteredEvent.Type
+  nameWithType: TargetContainerRegisteredEvent.Type
+- uid: Rezolver.Events.TargetContainerRegisteredEvent.Type*
+  name: Type
+  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_Type_
+  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEvent.Type
+  fullName: Rezolver.Events.TargetContainerRegisteredEvent.Type
+  nameWithType: TargetContainerRegisteredEvent.Type
+- uid: Rezolver.Events.TargetContainerRegisteredEventArgs
+  name: TargetContainerRegisteredEventArgs
+  href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html
+  commentId: T:Rezolver.Events.TargetContainerRegisteredEventArgs
+  fullName: Rezolver.Events.TargetContainerRegisteredEventArgs
+  nameWithType: TargetContainerRegisteredEventArgs
+- uid: Rezolver.Events.TargetContainerRegisteredEventArgs.#ctor(Rezolver.ITargetContainer,System.Type)
+  name: TargetContainerRegisteredEventArgs(ITargetContainer, Type)
+  href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html#Rezolver_Events_TargetContainerRegisteredEventArgs__ctor_Rezolver_ITargetContainer_System_Type_
+  commentId: M:Rezolver.Events.TargetContainerRegisteredEventArgs.#ctor(Rezolver.ITargetContainer,System.Type)
+  fullName: Rezolver.Events.TargetContainerRegisteredEventArgs.TargetContainerRegisteredEventArgs(Rezolver.ITargetContainer, System.Type)
+  nameWithType: TargetContainerRegisteredEventArgs.TargetContainerRegisteredEventArgs(ITargetContainer, Type)
+- uid: Rezolver.Events.TargetContainerRegisteredEventArgs.#ctor*
+  name: TargetContainerRegisteredEventArgs
+  href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html#Rezolver_Events_TargetContainerRegisteredEventArgs__ctor_
+  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEventArgs.#ctor
+  fullName: Rezolver.Events.TargetContainerRegisteredEventArgs.TargetContainerRegisteredEventArgs
+  nameWithType: TargetContainerRegisteredEventArgs.TargetContainerRegisteredEventArgs
+- uid: Rezolver.Events.TargetContainerRegisteredEventArgs.Container
+  name: Container
+  href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html#Rezolver_Events_TargetContainerRegisteredEventArgs_Container
+  commentId: P:Rezolver.Events.TargetContainerRegisteredEventArgs.Container
+  fullName: Rezolver.Events.TargetContainerRegisteredEventArgs.Container
+  nameWithType: TargetContainerRegisteredEventArgs.Container
+- uid: Rezolver.Events.TargetContainerRegisteredEventArgs.Container*
+  name: Container
+  href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html#Rezolver_Events_TargetContainerRegisteredEventArgs_Container_
+  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEventArgs.Container
+  fullName: Rezolver.Events.TargetContainerRegisteredEventArgs.Container
+  nameWithType: TargetContainerRegisteredEventArgs.Container
+- uid: Rezolver.Events.TargetContainerRegisteredEventArgs.Type
+  name: Type
+  href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html#Rezolver_Events_TargetContainerRegisteredEventArgs_Type
+  commentId: P:Rezolver.Events.TargetContainerRegisteredEventArgs.Type
+  fullName: Rezolver.Events.TargetContainerRegisteredEventArgs.Type
+  nameWithType: TargetContainerRegisteredEventArgs.Type
+- uid: Rezolver.Events.TargetContainerRegisteredEventArgs.Type*
+  name: Type
+  href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html#Rezolver_Events_TargetContainerRegisteredEventArgs_Type_
+  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEventArgs.Type
+  fullName: Rezolver.Events.TargetContainerRegisteredEventArgs.Type
+  nameWithType: TargetContainerRegisteredEventArgs.Type
 - uid: Rezolver.Events.TargetRegisteredEvent
   name: TargetRegisteredEvent
   href: api/Rezolver.Events.TargetRegisteredEvent.html
@@ -3805,6 +3995,48 @@ references:
   commentId: Overload:Rezolver.Events.TargetRegisteredEvent.Target
   fullName: Rezolver.Events.TargetRegisteredEvent.Target
   nameWithType: TargetRegisteredEvent.Target
+- uid: Rezolver.Events.TargetRegisteredEventArgs
+  name: TargetRegisteredEventArgs
+  href: api/Rezolver.Events.TargetRegisteredEventArgs.html
+  commentId: T:Rezolver.Events.TargetRegisteredEventArgs
+  fullName: Rezolver.Events.TargetRegisteredEventArgs
+  nameWithType: TargetRegisteredEventArgs
+- uid: Rezolver.Events.TargetRegisteredEventArgs.#ctor(Rezolver.ITarget,System.Type)
+  name: TargetRegisteredEventArgs(ITarget, Type)
+  href: api/Rezolver.Events.TargetRegisteredEventArgs.html#Rezolver_Events_TargetRegisteredEventArgs__ctor_Rezolver_ITarget_System_Type_
+  commentId: M:Rezolver.Events.TargetRegisteredEventArgs.#ctor(Rezolver.ITarget,System.Type)
+  fullName: Rezolver.Events.TargetRegisteredEventArgs.TargetRegisteredEventArgs(Rezolver.ITarget, System.Type)
+  nameWithType: TargetRegisteredEventArgs.TargetRegisteredEventArgs(ITarget, Type)
+- uid: Rezolver.Events.TargetRegisteredEventArgs.#ctor*
+  name: TargetRegisteredEventArgs
+  href: api/Rezolver.Events.TargetRegisteredEventArgs.html#Rezolver_Events_TargetRegisteredEventArgs__ctor_
+  commentId: Overload:Rezolver.Events.TargetRegisteredEventArgs.#ctor
+  fullName: Rezolver.Events.TargetRegisteredEventArgs.TargetRegisteredEventArgs
+  nameWithType: TargetRegisteredEventArgs.TargetRegisteredEventArgs
+- uid: Rezolver.Events.TargetRegisteredEventArgs.Target
+  name: Target
+  href: api/Rezolver.Events.TargetRegisteredEventArgs.html#Rezolver_Events_TargetRegisteredEventArgs_Target
+  commentId: P:Rezolver.Events.TargetRegisteredEventArgs.Target
+  fullName: Rezolver.Events.TargetRegisteredEventArgs.Target
+  nameWithType: TargetRegisteredEventArgs.Target
+- uid: Rezolver.Events.TargetRegisteredEventArgs.Target*
+  name: Target
+  href: api/Rezolver.Events.TargetRegisteredEventArgs.html#Rezolver_Events_TargetRegisteredEventArgs_Target_
+  commentId: Overload:Rezolver.Events.TargetRegisteredEventArgs.Target
+  fullName: Rezolver.Events.TargetRegisteredEventArgs.Target
+  nameWithType: TargetRegisteredEventArgs.Target
+- uid: Rezolver.Events.TargetRegisteredEventArgs.Type
+  name: Type
+  href: api/Rezolver.Events.TargetRegisteredEventArgs.html#Rezolver_Events_TargetRegisteredEventArgs_Type
+  commentId: P:Rezolver.Events.TargetRegisteredEventArgs.Type
+  fullName: Rezolver.Events.TargetRegisteredEventArgs.Type
+  nameWithType: TargetRegisteredEventArgs.Type
+- uid: Rezolver.Events.TargetRegisteredEventArgs.Type*
+  name: Type
+  href: api/Rezolver.Events.TargetRegisteredEventArgs.html#Rezolver_Events_TargetRegisteredEventArgs_Type_
+  commentId: Overload:Rezolver.Events.TargetRegisteredEventArgs.Type
+  fullName: Rezolver.Events.TargetRegisteredEventArgs.Type
+  nameWithType: TargetRegisteredEventArgs.Type
 - uid: Rezolver.ExpressionFunctions
   name: ExpressionFunctions
   href: api/Rezolver.ExpressionFunctions.html
@@ -3919,12 +4151,12 @@ references:
   commentId: T:Rezolver.GenericTargetContainer
   fullName: Rezolver.GenericTargetContainer
   nameWithType: GenericTargetContainer
-- uid: Rezolver.GenericTargetContainer.#ctor(Rezolver.ITargetContainer,System.Type)
-  name: GenericTargetContainer(ITargetContainer, Type)
-  href: api/Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer__ctor_Rezolver_ITargetContainer_System_Type_
-  commentId: M:Rezolver.GenericTargetContainer.#ctor(Rezolver.ITargetContainer,System.Type)
-  fullName: Rezolver.GenericTargetContainer.GenericTargetContainer(Rezolver.ITargetContainer, System.Type)
-  nameWithType: GenericTargetContainer.GenericTargetContainer(ITargetContainer, Type)
+- uid: Rezolver.GenericTargetContainer.#ctor(Rezolver.IRootTargetContainer,System.Type)
+  name: GenericTargetContainer(IRootTargetContainer, Type)
+  href: api/Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer__ctor_Rezolver_IRootTargetContainer_System_Type_
+  commentId: M:Rezolver.GenericTargetContainer.#ctor(Rezolver.IRootTargetContainer,System.Type)
+  fullName: Rezolver.GenericTargetContainer.GenericTargetContainer(Rezolver.IRootTargetContainer, System.Type)
+  nameWithType: GenericTargetContainer.GenericTargetContainer(IRootTargetContainer, Type)
 - uid: Rezolver.GenericTargetContainer.#ctor*
   name: GenericTargetContainer
   href: api/Rezolver.GenericTargetContainer.html#Rezolver_GenericTargetContainer__ctor_
@@ -4084,12 +4316,12 @@ references:
   commentId: T:Rezolver.IContainerConfig
   fullName: Rezolver.IContainerConfig
   nameWithType: IContainerConfig
-- uid: Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  name: Configure(IContainer, ITargetContainer)
-  href: api/Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)
-  fullName: Rezolver.IContainerConfig.Configure(Rezolver.IContainer, Rezolver.ITargetContainer)
-  nameWithType: IContainerConfig.Configure(IContainer, ITargetContainer)
+- uid: Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  name: Configure(IContainer, IRootTargetContainer)
+  href: api/Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)
+  fullName: Rezolver.IContainerConfig.Configure(Rezolver.IContainer, Rezolver.IRootTargetContainer)
+  nameWithType: IContainerConfig.Configure(IContainer, IRootTargetContainer)
 - uid: Rezolver.IContainerConfig.Configure*
   name: Configure
   href: api/Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_
@@ -4162,6 +4394,48 @@ references:
   commentId: Overload:Rezolver.IContainerScope.Resolve
   fullName: Rezolver.IContainerScope.Resolve
   nameWithType: IContainerScope.Resolve
+- uid: Rezolver.ICovariantTypeIndex
+  name: ICovariantTypeIndex
+  href: api/Rezolver.ICovariantTypeIndex.html
+  commentId: T:Rezolver.ICovariantTypeIndex
+  fullName: Rezolver.ICovariantTypeIndex
+  nameWithType: ICovariantTypeIndex
+- uid: Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)
+  name: AddKnownType(Type)
+  href: api/Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_
+  commentId: M:Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)
+  fullName: Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)
+  nameWithType: ICovariantTypeIndex.AddKnownType(Type)
+- uid: Rezolver.ICovariantTypeIndex.AddKnownType*
+  name: AddKnownType
+  href: api/Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_
+  commentId: Overload:Rezolver.ICovariantTypeIndex.AddKnownType
+  fullName: Rezolver.ICovariantTypeIndex.AddKnownType
+  nameWithType: ICovariantTypeIndex.AddKnownType
+- uid: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  name: GetKnownCompatibleTypes(Type)
+  href: api/Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_
+  commentId: M:Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  fullName: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  nameWithType: ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+- uid: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes*
+  name: GetKnownCompatibleTypes
+  href: api/Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_
+  commentId: Overload:Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+  fullName: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+  nameWithType: ICovariantTypeIndex.GetKnownCompatibleTypes
+- uid: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  name: GetKnownCovariantTypes(Type)
+  href: api/Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_
+  commentId: M:Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  fullName: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  nameWithType: ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+- uid: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes*
+  name: GetKnownCovariantTypes
+  href: api/Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_
+  commentId: Overload:Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+  fullName: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+  nameWithType: ICovariantTypeIndex.GetKnownCovariantTypes
 - uid: Rezolver.IMemberBindingBehaviour
   name: IMemberBindingBehaviour
   href: api/Rezolver.IMemberBindingBehaviour.html
@@ -4297,6 +4571,24 @@ references:
   fullName.vb: Rezolver.IResolveContext.TryResolve(Of TResult)(ByRef TResult)
   nameWithType: IResolveContext.TryResolve<TResult>(out TResult)
   nameWithType.vb: IResolveContext.TryResolve(Of TResult)(ByRef TResult)
+- uid: Rezolver.IRootTargetContainer
+  name: IRootTargetContainer
+  href: api/Rezolver.IRootTargetContainer.html
+  commentId: T:Rezolver.IRootTargetContainer
+  fullName: Rezolver.IRootTargetContainer
+  nameWithType: IRootTargetContainer
+- uid: Rezolver.IRootTargetContainer.TargetContainerRegistered
+  name: TargetContainerRegistered
+  href: api/Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_TargetContainerRegistered
+  commentId: E:Rezolver.IRootTargetContainer.TargetContainerRegistered
+  fullName: Rezolver.IRootTargetContainer.TargetContainerRegistered
+  nameWithType: IRootTargetContainer.TargetContainerRegistered
+- uid: Rezolver.IRootTargetContainer.TargetRegistered
+  name: TargetRegistered
+  href: api/Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_TargetRegistered
+  commentId: E:Rezolver.IRootTargetContainer.TargetRegistered
+  fullName: Rezolver.IRootTargetContainer.TargetRegistered
+  nameWithType: IRootTargetContainer.TargetRegistered
 - uid: Rezolver.IScopedContainer
   name: IScopedContainer
   href: api/Rezolver.IScopedContainer.html
@@ -4495,12 +4787,12 @@ references:
   commentId: T:Rezolver.ITargetContainerConfig
   fullName: Rezolver.ITargetContainerConfig
   nameWithType: ITargetContainerConfig
-- uid: Rezolver.ITargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  name: Configure(ITargetContainer)
-  href: api/Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.ITargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  fullName: Rezolver.ITargetContainerConfig.Configure(Rezolver.ITargetContainer)
-  nameWithType: ITargetContainerConfig.Configure(ITargetContainer)
+- uid: Rezolver.ITargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.ITargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.ITargetContainerConfig.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: ITargetContainerConfig.Configure(IRootTargetContainer)
 - uid: Rezolver.ITargetContainerConfig.Configure*
   name: Configure
   href: api/Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_
@@ -5159,6 +5451,42 @@ references:
   fullName.vb: Rezolver.Options.EnableContravariance.Widening
   nameWithType: EnableContravariance.Implicit
   nameWithType.vb: EnableContravariance.Widening
+- uid: Rezolver.Options.EnableEnumerableCovariance
+  name: EnableEnumerableCovariance
+  href: api/Rezolver.Options.EnableEnumerableCovariance.html
+  commentId: T:Rezolver.Options.EnableEnumerableCovariance
+  fullName: Rezolver.Options.EnableEnumerableCovariance
+  nameWithType: EnableEnumerableCovariance
+- uid: Rezolver.Options.EnableEnumerableCovariance.Default
+  name: Default
+  href: api/Rezolver.Options.EnableEnumerableCovariance.html#Rezolver_Options_EnableEnumerableCovariance_Default
+  commentId: P:Rezolver.Options.EnableEnumerableCovariance.Default
+  fullName: Rezolver.Options.EnableEnumerableCovariance.Default
+  nameWithType: EnableEnumerableCovariance.Default
+- uid: Rezolver.Options.EnableEnumerableCovariance.Default*
+  name: Default
+  href: api/Rezolver.Options.EnableEnumerableCovariance.html#Rezolver_Options_EnableEnumerableCovariance_Default_
+  commentId: Overload:Rezolver.Options.EnableEnumerableCovariance.Default
+  fullName: Rezolver.Options.EnableEnumerableCovariance.Default
+  nameWithType: EnableEnumerableCovariance.Default
+- uid: Rezolver.Options.EnableEnumerableCovariance.op_Implicit(System.Boolean)~Rezolver.Options.EnableEnumerableCovariance
+  name: Implicit(Boolean to EnableEnumerableCovariance)
+  href: api/Rezolver.Options.EnableEnumerableCovariance.html#Rezolver_Options_EnableEnumerableCovariance_op_Implicit_System_Boolean__Rezolver_Options_EnableEnumerableCovariance
+  commentId: M:Rezolver.Options.EnableEnumerableCovariance.op_Implicit(System.Boolean)~Rezolver.Options.EnableEnumerableCovariance
+  name.vb: Widening(Boolean to EnableEnumerableCovariance)
+  fullName: Rezolver.Options.EnableEnumerableCovariance.Implicit(System.Boolean to Rezolver.Options.EnableEnumerableCovariance)
+  fullName.vb: Rezolver.Options.EnableEnumerableCovariance.Widening(System.Boolean to Rezolver.Options.EnableEnumerableCovariance)
+  nameWithType: EnableEnumerableCovariance.Implicit(Boolean to EnableEnumerableCovariance)
+  nameWithType.vb: EnableEnumerableCovariance.Widening(Boolean to EnableEnumerableCovariance)
+- uid: Rezolver.Options.EnableEnumerableCovariance.op_Implicit*
+  name: Implicit
+  href: api/Rezolver.Options.EnableEnumerableCovariance.html#Rezolver_Options_EnableEnumerableCovariance_op_Implicit_
+  commentId: Overload:Rezolver.Options.EnableEnumerableCovariance.op_Implicit
+  name.vb: Widening
+  fullName: Rezolver.Options.EnableEnumerableCovariance.Implicit
+  fullName.vb: Rezolver.Options.EnableEnumerableCovariance.Widening
+  nameWithType: EnableEnumerableCovariance.Implicit
+  nameWithType.vb: EnableEnumerableCovariance.Widening
 - uid: Rezolver.Options.EnableEnumerableInjection
   name: EnableEnumerableInjection
   href: api/Rezolver.Options.EnableEnumerableInjection.html
@@ -5450,12 +5778,12 @@ references:
   commentId: T:Rezolver.OverridingContainer
   fullName: Rezolver.OverridingContainer
   nameWithType: OverridingContainer
-- uid: Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.IContainerConfig)
-  name: OverridingContainer(IContainer, ITargetContainer, IContainerConfig)
-  href: api/Rezolver.OverridingContainer.html#Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_ITargetContainer_Rezolver_IContainerConfig_
-  commentId: M:Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.ITargetContainer,Rezolver.IContainerConfig)
-  fullName: Rezolver.OverridingContainer.OverridingContainer(Rezolver.IContainer, Rezolver.ITargetContainer, Rezolver.IContainerConfig)
-  nameWithType: OverridingContainer.OverridingContainer(IContainer, ITargetContainer, IContainerConfig)
+- uid: Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)
+  name: OverridingContainer(IContainer, IRootTargetContainer, IContainerConfig)
+  href: api/Rezolver.OverridingContainer.html#Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_
+  commentId: M:Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)
+  fullName: Rezolver.OverridingContainer.OverridingContainer(Rezolver.IContainer, Rezolver.IRootTargetContainer, Rezolver.IContainerConfig)
+  nameWithType: OverridingContainer.OverridingContainer(IContainer, IRootTargetContainer, IContainerConfig)
 - uid: Rezolver.OverridingContainer.#ctor*
   name: OverridingContainer
   href: api/Rezolver.OverridingContainer.html#Rezolver_OverridingContainer__ctor_
@@ -6062,12 +6390,12 @@ references:
   commentId: T:Rezolver.ScopedContainer
   fullName: Rezolver.ScopedContainer
   nameWithType: ScopedContainer
-- uid: Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerConfig)
-  name: ScopedContainer(ITargetContainer, IContainerConfig)
-  href: api/Rezolver.ScopedContainer.html#Rezolver_ScopedContainer__ctor_Rezolver_ITargetContainer_Rezolver_IContainerConfig_
-  commentId: M:Rezolver.ScopedContainer.#ctor(Rezolver.ITargetContainer,Rezolver.IContainerConfig)
-  fullName: Rezolver.ScopedContainer.ScopedContainer(Rezolver.ITargetContainer, Rezolver.IContainerConfig)
-  nameWithType: ScopedContainer.ScopedContainer(ITargetContainer, IContainerConfig)
+- uid: Rezolver.ScopedContainer.#ctor(Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)
+  name: ScopedContainer(IRootTargetContainer, IContainerConfig)
+  href: api/Rezolver.ScopedContainer.html#Rezolver_ScopedContainer__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_
+  commentId: M:Rezolver.ScopedContainer.#ctor(Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)
+  fullName: Rezolver.ScopedContainer.ScopedContainer(Rezolver.IRootTargetContainer, Rezolver.IContainerConfig)
+  nameWithType: ScopedContainer.ScopedContainer(IRootTargetContainer, IContainerConfig)
 - uid: Rezolver.ScopedContainer.#ctor*
   name: ScopedContainer
   href: api/Rezolver.ScopedContainer.html#Rezolver_ScopedContainer__ctor_
@@ -7384,6 +7712,78 @@ references:
   commentId: Overload:Rezolver.TargetContainer.RegisterContainer
   fullName: Rezolver.TargetContainer.RegisterContainer
   nameWithType: TargetContainer.RegisterContainer
+- uid: Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#AddKnownType(System.Type)
+  name: ICovariantTypeIndex.AddKnownType(Type)
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_
+  commentId: M:Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#AddKnownType(System.Type)
+  name.vb: Rezolver.ICovariantTypeIndex.AddKnownType(Type)
+  fullName: Rezolver.TargetContainer.Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)
+  nameWithType: TargetContainer.ICovariantTypeIndex.AddKnownType(Type)
+  nameWithType.vb: TargetContainer.Rezolver.ICovariantTypeIndex.AddKnownType(Type)
+- uid: Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#AddKnownType*
+  name: ICovariantTypeIndex.AddKnownType
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_AddKnownType_
+  commentId: Overload:Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#AddKnownType
+  name.vb: Rezolver.ICovariantTypeIndex.AddKnownType
+  fullName: Rezolver.TargetContainer.Rezolver.ICovariantTypeIndex.AddKnownType
+  nameWithType: TargetContainer.ICovariantTypeIndex.AddKnownType
+  nameWithType.vb: TargetContainer.Rezolver.ICovariantTypeIndex.AddKnownType
+- uid: Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes(System.Type)
+  name: ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_
+  commentId: M:Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes(System.Type)
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+  fullName: Rezolver.TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)
+  nameWithType: TargetContainer.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+  nameWithType.vb: TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)
+- uid: Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes*
+  name: ICovariantTypeIndex.GetKnownCompatibleTypes
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_
+  commentId: Overload:Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+  fullName: Rezolver.TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+  nameWithType: TargetContainer.ICovariantTypeIndex.GetKnownCompatibleTypes
+  nameWithType.vb: TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes
+- uid: Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes(System.Type)
+  name: ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_
+  commentId: M:Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes(System.Type)
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+  fullName: Rezolver.TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)
+  nameWithType: TargetContainer.ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+  nameWithType.vb: TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(Type)
+- uid: Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes*
+  name: ICovariantTypeIndex.GetKnownCovariantTypes
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_
+  commentId: Overload:Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes
+  name.vb: Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+  fullName: Rezolver.TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+  nameWithType: TargetContainer.ICovariantTypeIndex.GetKnownCovariantTypes
+  nameWithType.vb: TargetContainer.Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes
+- uid: Rezolver.TargetContainer.Root
+  name: Root
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Root
+  commentId: P:Rezolver.TargetContainer.Root
+  fullName: Rezolver.TargetContainer.Root
+  nameWithType: TargetContainer.Root
+- uid: Rezolver.TargetContainer.Root*
+  name: Root
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Root_
+  commentId: Overload:Rezolver.TargetContainer.Root
+  fullName: Rezolver.TargetContainer.Root
+  nameWithType: TargetContainer.Root
+- uid: Rezolver.TargetContainer.TargetContainerRegistered
+  name: TargetContainerRegistered
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_TargetContainerRegistered
+  commentId: E:Rezolver.TargetContainer.TargetContainerRegistered
+  fullName: Rezolver.TargetContainer.TargetContainerRegistered
+  nameWithType: TargetContainer.TargetContainerRegistered
+- uid: Rezolver.TargetContainer.TargetRegistered
+  name: TargetRegistered
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_TargetRegistered
+  commentId: E:Rezolver.TargetContainer.TargetRegistered
+  fullName: Rezolver.TargetContainer.TargetRegistered
+  nameWithType: TargetContainer.TargetRegistered
 - uid: Rezolver.TargetContainerEventExtensions
   name: TargetContainerEventExtensions
   href: api/Rezolver.TargetContainerEventExtensions.html
@@ -7411,12 +7811,12 @@ references:
   commentId: T:Rezolver.TargetDictionaryContainer
   fullName: Rezolver.TargetDictionaryContainer
   nameWithType: TargetDictionaryContainer
-- uid: Rezolver.TargetDictionaryContainer.#ctor(Rezolver.ITargetContainer)
-  name: TargetDictionaryContainer(ITargetContainer)
-  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer__ctor_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.TargetDictionaryContainer.#ctor(Rezolver.ITargetContainer)
-  fullName: Rezolver.TargetDictionaryContainer.TargetDictionaryContainer(Rezolver.ITargetContainer)
-  nameWithType: TargetDictionaryContainer.TargetDictionaryContainer(ITargetContainer)
+- uid: Rezolver.TargetDictionaryContainer.#ctor(Rezolver.IRootTargetContainer)
+  name: TargetDictionaryContainer(IRootTargetContainer)
+  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer__ctor_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.TargetDictionaryContainer.#ctor(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.TargetDictionaryContainer.TargetDictionaryContainer(Rezolver.IRootTargetContainer)
+  nameWithType: TargetDictionaryContainer.TargetDictionaryContainer(IRootTargetContainer)
 - uid: Rezolver.TargetDictionaryContainer.#ctor*
   name: TargetDictionaryContainer
   href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer__ctor_
@@ -9165,12 +9565,12 @@ references:
   commentId: T:Rezolver.TargetTypeSelector
   fullName: Rezolver.TargetTypeSelector
   nameWithType: TargetTypeSelector
-- uid: Rezolver.TargetTypeSelector.#ctor(System.Type,Rezolver.ITargetContainer)
-  name: TargetTypeSelector(Type, ITargetContainer)
-  href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector__ctor_System_Type_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.TargetTypeSelector.#ctor(System.Type,Rezolver.ITargetContainer)
-  fullName: Rezolver.TargetTypeSelector.TargetTypeSelector(System.Type, Rezolver.ITargetContainer)
-  nameWithType: TargetTypeSelector.TargetTypeSelector(Type, ITargetContainer)
+- uid: Rezolver.TargetTypeSelector.#ctor(System.Type,Rezolver.IRootTargetContainer)
+  name: TargetTypeSelector(Type, IRootTargetContainer)
+  href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector__ctor_System_Type_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.TargetTypeSelector.#ctor(System.Type,Rezolver.IRootTargetContainer)
+  fullName: Rezolver.TargetTypeSelector.TargetTypeSelector(System.Type, Rezolver.IRootTargetContainer)
+  nameWithType: TargetTypeSelector.TargetTypeSelector(Type, IRootTargetContainer)
 - uid: Rezolver.TargetTypeSelector.#ctor*
   name: TargetTypeSelector
   href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector__ctor_
@@ -9189,6 +9589,18 @@ references:
   commentId: Overload:Rezolver.TargetTypeSelector.GetEnumerator
   fullName: Rezolver.TargetTypeSelector.GetEnumerator
   nameWithType: TargetTypeSelector.GetEnumerator
+- uid: Rezolver.TargetTypeSelector.RootTargets
+  name: RootTargets
+  href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector_RootTargets
+  commentId: P:Rezolver.TargetTypeSelector.RootTargets
+  fullName: Rezolver.TargetTypeSelector.RootTargets
+  nameWithType: TargetTypeSelector.RootTargets
+- uid: Rezolver.TargetTypeSelector.RootTargets*
+  name: RootTargets
+  href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector_RootTargets_
+  commentId: Overload:Rezolver.TargetTypeSelector.RootTargets
+  fullName: Rezolver.TargetTypeSelector.RootTargets
+  nameWithType: TargetTypeSelector.RootTargets
 - uid: Rezolver.TargetTypeSelector.System#Collections#IEnumerable#GetEnumerator
   name: IEnumerable.GetEnumerator()
   href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector_System_Collections_IEnumerable_GetEnumerator
@@ -9205,6 +9617,18 @@ references:
   fullName: Rezolver.TargetTypeSelector.System.Collections.IEnumerable.GetEnumerator
   nameWithType: TargetTypeSelector.IEnumerable.GetEnumerator
   nameWithType.vb: TargetTypeSelector.System.Collections.IEnumerable.GetEnumerator
+- uid: Rezolver.TargetTypeSelector.Type
+  name: Type
+  href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector_Type
+  commentId: P:Rezolver.TargetTypeSelector.Type
+  fullName: Rezolver.TargetTypeSelector.Type
+  nameWithType: TargetTypeSelector.Type
+- uid: Rezolver.TargetTypeSelector.Type*
+  name: Type
+  href: api/Rezolver.TargetTypeSelector.html#Rezolver_TargetTypeSelector_Type_
+  commentId: Overload:Rezolver.TargetTypeSelector.Type
+  fullName: Rezolver.TargetTypeSelector.Type
+  nameWithType: TargetTypeSelector.Type
 - uid: Rezolver.UnresolvedICompiledTargetExtensions
   name: UnresolvedICompiledTargetExtensions
   href: api/Rezolver.UnresolvedICompiledTargetExtensions.html

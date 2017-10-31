@@ -150,7 +150,7 @@
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_ContainerBase_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ContainerBase : IContainer, IScopeFactory, IServiceProvider, ITargetContainer</code></pre>
+    <pre><code class="lang-csharp hljs">public class ContainerBase : IContainer, IScopeFactory, IServiceProvider, IRootTargetContainer, ITargetContainer, ICovariantTypeIndex</code></pre>
   </div>
   <h5 id="Rezolver_ContainerBase_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>This class also implements <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by proxying the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> that are
@@ -173,19 +173,19 @@ registered as sub target containers within an <a class="xref" href="Rezolver.ITa
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.%23ctor(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase__ctor_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.%23ctor(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L65">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L66">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase__ctor_" data-uid="Rezolver.ContainerBase.#ctor*"></a>
-  <h4 id="Rezolver_ContainerBase__ctor_Rezolver_ITargetContainer_" data-uid="Rezolver.ContainerBase.#ctor(Rezolver.ITargetContainer)">ContainerBase(ITargetContainer)</h4>
+  <h4 id="Rezolver_ContainerBase__ctor_Rezolver_IRootTargetContainer_" data-uid="Rezolver.ContainerBase.#ctor(Rezolver.IRootTargetContainer)">ContainerBase(IRootTargetContainer)</h4>
   <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected ContainerBase(ITargetContainer targets = null)</code></pre>
+    <pre><code class="lang-csharp hljs">protected ContainerBase(IRootTargetContainer targets = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -198,7 +198,7 @@ registered as sub target containers within an <a class="xref" href="Rezolver.ITa
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
         <td><p>Optional.  The target container whose registrations will be used for dependency lookup 
 when <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> (and other operations) is called.  If not provided, a new 
@@ -212,10 +212,10 @@ after construction, through the <a class="xref" href="Rezolver.ContainerBase.htm
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Targets.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Targets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Targets.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Targets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L56">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L57">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Targets_" data-uid="Rezolver.ContainerBase.Targets*"></a>
   <h4 id="Rezolver_ContainerBase_Targets" data-uid="Rezolver.ContainerBase.Targets">Targets</h4>
@@ -225,7 +225,7 @@ instances.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected ITargetContainer Targets { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">protected IRootTargetContainer Targets { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -237,7 +237,7 @@ instances.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -257,10 +257,10 @@ always will be).</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_CanResolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.CanResolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_CanResolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.CanResolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L145">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L172">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_CanResolve_" data-uid="Rezolver.ContainerBase.CanResolve*"></a>
   <h4 id="Rezolver_ContainerBase_CanResolve_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.CanResolve(Rezolver.IResolveContext)">CanResolve(IResolveContext)</h4>
@@ -310,10 +310,10 @@ if, the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase
       <div><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_">IContainer.CanResolve(IResolveContext)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L118">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L145">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_CreateScope_" data-uid="Rezolver.ContainerBase.CreateScope*"></a>
   <h4 id="Rezolver_ContainerBase_CreateScope" data-uid="Rezolver.ContainerBase.CreateScope">CreateScope()</h4>
@@ -345,10 +345,10 @@ if, the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase
       <div><a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">IScopeFactory.CreateScope()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_GetCompiledTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetCompiledTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_GetCompiledTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetCompiledTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L132">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L159">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_GetCompiledTarget_" data-uid="Rezolver.ContainerBase.GetCompiledTarget*"></a>
   <h4 id="Rezolver_ContainerBase_GetCompiledTarget_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.GetCompiledTarget(Rezolver.IResolveContext)">GetCompiledTarget(IResolveContext)</h4>
@@ -401,10 +401,10 @@ the behaviour of the <a class="xref" href="Rezolver.Compilation.UnresolvedTypeCo
       <div><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_GetCompiledTarget_Rezolver_IResolveContext_">IContainer.GetCompiledTarget(IResolveContext)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_GetCompiledTargetVirtual_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetCompiledTargetVirtual(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_GetCompiledTargetVirtual_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetCompiledTargetVirtual(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L205">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L232">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_GetCompiledTargetVirtual_" data-uid="Rezolver.ContainerBase.GetCompiledTargetVirtual*"></a>
   <h4 id="Rezolver_ContainerBase_GetCompiledTargetVirtual_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.GetCompiledTargetVirtual(Rezolver.IResolveContext)">GetCompiledTargetVirtual(IResolveContext)</h4>
@@ -490,10 +490,10 @@ method of the resolved compiler.  The result of that operation is then returned 
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_GetFallbackCompiledTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetFallbackCompiledTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_GetFallbackCompiledTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetFallbackCompiledTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L255">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L275">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_GetFallbackCompiledTarget_" data-uid="Rezolver.ContainerBase.GetFallbackCompiledTarget*"></a>
   <h4 id="Rezolver_ContainerBase_GetFallbackCompiledTarget_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.GetFallbackCompiledTarget(Rezolver.IResolveContext)">GetFallbackCompiledTarget(IResolveContext)</h4>
@@ -545,10 +545,10 @@ operation where the search for a valid target either fails or is inconclusive (e
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_GetService_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetService(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_GetService_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.GetService(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L273">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L293">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_GetService_" data-uid="Rezolver.ContainerBase.GetService*"></a>
   <h4 id="Rezolver_ContainerBase_GetService_System_Type_" data-uid="Rezolver.ContainerBase.GetService(System.Type)">GetService(Type)</h4>
@@ -596,10 +596,10 @@ operation where the search for a valid target either fails or is inconclusive (e
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L295">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L315">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Register_" data-uid="Rezolver.ContainerBase.Register*"></a>
   <h4 id="Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ContainerBase.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
@@ -645,10 +645,10 @@ list of class members.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Resolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Resolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L80">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L107">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Resolve_" data-uid="Rezolver.ContainerBase.Resolve*"></a>
   <h4 id="Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_" data-uid="Rezolver.ContainerBase.Resolve(Rezolver.IResolveContext)">Resolve(IResolveContext)</h4>
@@ -699,10 +699,10 @@ list of class members.</p>
       <div><a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">IContainer.Resolve(IResolveContext)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_TryResolve_Rezolver_IResolveContext_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.TryResolve(Rezolver.IResolveContext%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_TryResolve_Rezolver_IResolveContext_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.TryResolve(Rezolver.IResolveContext%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L96">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L123">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_TryResolve_" data-uid="Rezolver.ContainerBase.TryResolve*"></a>
   <h4 id="Rezolver_ContainerBase_TryResolve_Rezolver_IResolveContext_System_Object__" data-uid="Rezolver.ContainerBase.TryResolve(Rezolver.IResolveContext,System.Object@)">TryResolve(IResolveContext, out Object)</h4>
@@ -763,10 +763,204 @@ if not.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ICovariantTypeIndex%23AddKnownType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L311">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L346">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_AddKnownType_" data-uid="Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#AddKnownType*"></a>
+  <h4 id="Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#AddKnownType(System.Type)">ICovariantTypeIndex.AddKnownType(Type)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ICovariantTypeIndex.AddKnownType(Type serviceType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">ICovariantTypeIndex.AddKnownType(Type)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ICovariantTypeIndex%23GetKnownCompatibleTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L356">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_" data-uid="Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes*"></a>
+  <h4 id="Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes(System.Type)">ICovariantTypeIndex.GetKnownCompatibleTypes(Type)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;Type&gt; ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_">ICovariantTypeIndex.GetKnownCompatibleTypes(Type)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ICovariantTypeIndex%23GetKnownCovariantTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L351">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_" data-uid="Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes*"></a>
+  <h4 id="Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes(System.Type)">ICovariantTypeIndex.GetKnownCovariantTypes(Type)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;Type&gt; ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_">ICovariantTypeIndex.GetKnownCovariantTypes(Type)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetContainerRegistered.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23IRootTargetContainer%23TargetContainerRegistered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L84">View Source</a>
+  </span>
+  <h4 id="Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetContainerRegistered" data-uid="Rezolver.ContainerBase.Rezolver#IRootTargetContainer#TargetContainerRegistered">IRootTargetContainer.TargetContainerRegistered</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event EventHandler&lt;TargetContainerRegisteredEventArgs&gt; IRootTargetContainer.TargetContainerRegistered</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/db0etb8x(v=vs.110).aspx">EventHandler</a>&lt;<a class="xref" href="Rezolver.Events.TargetContainerRegisteredEventArgs.html">TargetContainerRegisteredEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_TargetContainerRegistered">IRootTargetContainer.TargetContainerRegistered</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetRegistered.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23IRootTargetContainer%23TargetRegistered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L71">View Source</a>
+  </span>
+  <h4 id="Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetRegistered" data-uid="Rezolver.ContainerBase.Rezolver#IRootTargetContainer#TargetRegistered">IRootTargetContainer.TargetRegistered</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event EventHandler&lt;TargetRegisteredEventArgs&gt; IRootTargetContainer.TargetRegistered</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/db0etb8x(v=vs.110).aspx">EventHandler</a>&lt;<a class="xref" href="Rezolver.Events.TargetRegisteredEventArgs.html">TargetRegisteredEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_TargetRegistered">IRootTargetContainer.TargetRegistered</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L331">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#CombineWith*"></a>
   <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#CombineWith(Rezolver.ITargetContainer,System.Type)">ITargetContainer.CombineWith(ITargetContainer, Type)</h4>
@@ -817,10 +1011,10 @@ if not.</p>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L301">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L321">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#Fetch*"></a>
   <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#Fetch(System.Type)">ITargetContainer.Fetch(Type)</h4>
@@ -866,10 +1060,10 @@ if not.</p>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">ITargetContainer.Fetch(Type)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L306">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L326">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchAll*"></a>
   <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchAll(System.Type)">ITargetContainer.FetchAll(Type)</h4>
@@ -915,10 +1109,10 @@ if not.</p>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">ITargetContainer.FetchAll(Type)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L316">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L336">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchContainer*"></a>
   <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#FetchContainer(System.Type)">ITargetContainer.FetchContainer(Type)</h4>
@@ -964,10 +1158,10 @@ if not.</p>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_System_Type_">ITargetContainer.FetchContainer(Type)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.Rezolver%23ITargetContainer%23RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L321">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L341">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#RegisterContainer*"></a>
   <h4 id="Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.ContainerBase.Rezolver#ITargetContainer#RegisterContainer(System.Type,Rezolver.ITargetContainer)">ITargetContainer.RegisterContainer(Type, ITargetContainer)</h4>
@@ -1003,10 +1197,10 @@ if not.</p>
       <div><a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ITargetContainer.RegisterContainer(Type, ITargetContainer)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.System%23IServiceProvider%23GetService(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase.System%23IServiceProvider%23GetService(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L260">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L280">View Source</a>
   </span>
   <a id="Rezolver_ContainerBase_System_IServiceProvider_GetService_" data-uid="Rezolver.ContainerBase.System#IServiceProvider#GetService*"></a>
   <h4 id="Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_" data-uid="Rezolver.ContainerBase.System#IServiceProvider#GetService(System.Type)">IServiceProvider.GetService(Type)</h4>
@@ -1082,19 +1276,19 @@ if not.</p>
       <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type_">AliasTargetContainerExtensions.RegisterAlias(ITargetContainer, Type, Type)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_ITargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(ITargetContainer)</a>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Func___0___0__">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(ITargetContainer, Func&lt;TDecorated, TDecorated&gt;)</a>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_IRootTargetContainer_System_Func___0___0__">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(IRootTargetContainer, Func&lt;TDecorated, TDecorated&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_ITargetContainer_System_Delegate_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(ITargetContainer, Delegate)</a>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_IRootTargetContainer_System_Delegate_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(IRootTargetContainer, Delegate)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Delegate_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Delegate, Type)</a>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_IRootTargetContainer_System_Delegate_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(IRootTargetContainer, Delegate, Type)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_ITargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(ITargetContainer, Type, Type)</a>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_IRootTargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(IRootTargetContainer, Type, Type)</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate(ITargetContainer, Delegate, Type, ScopeBehaviour)</a>
@@ -1227,10 +1421,10 @@ if not.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerBase.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ContainerBase.md&amp;value=---%0Auid%3A%20Rezolver.ContainerBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerBase.cs/#L39" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ContainerBase.cs/#L40" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

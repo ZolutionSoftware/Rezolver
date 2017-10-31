@@ -352,21 +352,27 @@ Assert.Equal(1, myService1Result.Length);
 Assert.Equal(1, myService2Result.Length);
 Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
 </code></pre><hr>
-<h1 id="contravariance">Contravariance</h1>
+<h1 id="generic-variance">Generic Variance</h1>
+<h2 id="covariance">Covariance</h2>
+<p>Since <code>IEnumerable&lt;T&gt;</code> is a covariant interface, Rezolver&#39;s support for covariance will ensure that any registration
+which is compatible with a given <code>T</code> is included in the returned enumerable, in the order that the original
+registrations were made.</p>
+<h2 id="contravariance">Contravariance</h2>
 <p>Rezolver also supports generic contravariance which, in the case of 
 enumerables, means getting multiple results from any and all registrations that 
-match a particular type argument&#39;s bases or interfaces, in descending order of &#39;distance&#39;
-from the requested type.</p>
-<p>For more on this, including concrete examples, see the <a href="#next-steps">next steps</a> section
+match a particular type argument&#39;s bases or interfaces, again, in the order that the original registrations
+were made.</p>
+<p>For links to more topics on both of these, including concrete examples, see the <a href="#next-steps">next steps</a> section
 below.</p>
 <hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>Learn about Rezolver&#39;s support for <a href="lazy-vs-eager.html">lazy and eager enumerables</a> (note: all auto-generated enumerables are lazily 
 evaluated by default)</li>
-<li>As <a href="#contravariance">mentioned above</a>, by default, Rezolver handles contravariant 
-generic type parameters - see this in action with enumerables 
-<a href="../contravariance.html">in the section dedicated to generic contravariance</a></li>
+<li>The <a href="../variance/covariance.html">covariance</a> section includes examples of how covariance works within Rezolver&#39;s
+enumerable support.</li>
+<li>By default, also, Rezolver handles contravariant generic type parameters - see this in action with enumerables 
+<a href="../variance/contravariance.html">in the section dedicated to generic contravariance</a></li>
 </ul>
 </article>
           </div>
@@ -376,7 +382,7 @@ generic type parameters - see this in action with enumerables
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/generics.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/generics.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

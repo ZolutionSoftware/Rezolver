@@ -1,18 +1,138 @@
 ﻿# Generic Contravariance
 
-> [!TIP]
-> If you don't know anything about generic variance in .Net then you should read through
-> the [MSDN topic 'Covariance and Contravariance in Generics'](https://docs.microsoft.com/en-us/dotnet/standard/generics/covariance-and-contravariance)
-> as it explains these concepts in far greater detail than we can!
+Generic contravariance in .Net is where an instance of a generic type featuring a less derived type 
+as a type argument can be assigned to a reference to a the same generic, but with a more derived
+type argument.  Contravariant type parameters are declared using the `in` modifier in the generic
+declaration.
+
+Commonly used contravariant generics are any of the `System.Action<>` delegate derivatives, or interface
+types such as the @System.Collections.Generic.IComparer`1 interface (used in the examples below).
+
+Here are some examples of legal assignments which take advantage of contravariance:
+
+```cs
+Action<string> a
+    = new Action<object>(o => Console.WriteLine(o));
+IComparer<string> b
+    = Comparer<object>.Default;
+```
+
+When a generic interface or delegate declares a contravariant type parameter, it restricts that
+type to being used as a method *parameter* - i.e. it becomes an 'input' type, hence the `in` modifier.
+
+# In Rezolver
 
 When a generic type is requested from the container, Rezolver builds a search list of all 
 the possible instances of that generic type which could satisfy that request, returning an 
 instance produced by the registration that was made against the best-matching version of
-that generic (and, in the case of [enumerables](enumerables.md), potentially more instances
-in order of best-to-worst match).
+that generic (and, in the case of [enumerables](../enumerables.md), potentially more instances
+in registration order).
 
 The same is also true when the requested type has one or more contravariant type parameters - 
 in which case bases or interfaces of the corresponding type argument are also sought.
+
+The important thing to note here is that, just as with [covariance](covariance.md), it's the 
+type that an @Rezolver.ITarget is *registered* against that matters - not the implementing type.
+
+So, given these types:
+
+```cs
+interface IContravariant<in T>
+{
+  void Foo(T t);
+}
+
+class MyBase {}
+
+class MyDerived : MyBase {}
+
+class AcceptsMyBase : IContravariant<MyBase>
+{
+  void Foo(MyBase t)
+  {
+    
+  }
+}
+```
+
+`AcceptsMyBase` will be used to create instances of `IContravariant<MyDerived>` if it is registered
+against the contravariant interface type `IContravariant<MyBase>`:
+
+```cs
+container.RegisterType<AcceptsMyBase, IContravariant<MyBase>>();
+
+// gets an instance of AcceptsMyBase
+var result = container.Resolve<IContravariant<MyDerived>();
+```
+
+## Type Precedence is King
+
+In nearly all cases (including for [covariance](covariance.md)), Rezolver uses the 
+*most recently registered* target to provide the result for a particular service type.  
+
+For requests for generic types which have one or more contravariant type parameters, however, 
+this is not the case.
+
+For these, Rezolver instead looks for an exact match and, if it doesn't find one,
+it then walks 'up' the type hierarchies of each contravariant type parameter looking for a hit,
+prioritising non-`object` base types over interfaces, and interfaces over the `object` base
+type.
+
+So, given a type hierarchy like this:
+
+```cs
+interface IBase
+{
+}
+
+class Base : IBase
+{
+}
+
+interface IDerived : IBase
+{
+}
+
+class Derived : Base, IDerived
+{
+}
+```
+
+If a request is made for an `Action<Derived>`, Rezolver will search for registrations for these types:
+
+- `Action<Derived>`
+- `Action<Base>`
+- `Action<IDerived>`
+- `Action<IBase>`
+- `Action<object>`
+- `Action<>` *I.e. an 'open' generic registration*
+
+The first `ITarget` to be retrieved from the container's `ITargetContainer` for one of these types will 'win'.
+
+Also, generic interfaces are given precedence over non-generic interfaces; with consideration given 
+to interfaces which 'inherit' other interfaces (not a technically correct phrase, but we all know what 
+it means).
+
+### Array Types
+
+For generic types to which an array type is passed to a contravariant type argument, the picture gets more
+complicated - as the dynamically built `Array` type for a given element type also brings with it several interfaces.
+
+The search list for an array type, like the one above, then, starts getting very complex very quickly, e.g:
+
+- `Action<Derived[]>`
+- `Action<IList<Derived>>`
+- `Action<IEnumerable<Derived>>`
+- `...`
+- `Action<Base[]>`
+- `Action<IList<Base>>`
+- `...`
+- `Action<IEnumerable>`
+- `Action<Array>`
+- `Action<object>`
+
+The above list is, by no means, exhaustive - but you should be able to get the picture.  Notice that the `Array` base
+type, like the `object` type before, is included as one of the last types, since it is ubiquitous to all arrays.
 
 # Examples
 
@@ -35,22 +155,23 @@ we're going to have to have a default comparer that can be used, whilst allowing
 comparers for known types to be registered in addition.
 
 The most natural way to do this is to try to wrap the @System.Linq.Enumerable.OrderBy*
-extension method, but Rezolver cannot (currently) bind to generic methods, but we can 
-instead write a class which implements `IOrderedEnumerable<T>` by wrapping around 
-`OrderBy`:
+extension method, but Rezolver cannot (currently) bind to generic methods
 
-[!code-csharp[OrderedEnumerableWrapper.cs](../../../../test/Rezolver.Tests.Examples/Types/OrderedEnumerableWrapper.cs#example)]
+Instead, we can quite easily write a class which implements `IOrderedEnumerable<T>` 
+by wrapping around the `OrderBy` extension method:
+
+[!code-csharp[OrderedEnumerableWrapper.cs](../../../../../test/Rezolver.Tests.Examples/Types/OrderedEnumerableWrapper.cs#example)]
 
 The generic class accepts an enumerable (automatically injected by Rezolver) and an 
 `IComparer<T>` - the default version of which will wrap around the `Comparer<T>.Default`
 property:
 
-[!code-csharp[DefaultComparerWrapper`1.cs](../../../../test/Rezolver.Tests.Examples/Types/DefaultComparerWrapper`1.cs#example)]
+[!code-csharp[DefaultComparerWrapper`1.cs](../../../../../test/Rezolver.Tests.Examples/Types/DefaultComparerWrapper`1.cs#example)]
 
 Now - if we configure the container correctly and resolve the correct types, getting an 
 ordered enumerable is pretty simple:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example1)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example1)]
 
 So far, so 'open generic' - we can now get ordered enumerables which work for any of the
 built-in .Net types that `Comparer<T>.Default` also works for.  Now we need to extend it
@@ -60,11 +181,11 @@ Let's use a similar example to the one used on MSDN for the
 @System.Collections.Generic.Comparer`1 type - and introduce some types which represent 
 2D geometries:
 
-[!code-csharp[Shapes.cs](../../../../test/Rezolver.Tests.Examples/Types/Shapes.cs#example)]
+[!code-csharp[Shapes.cs](../../../../../test/Rezolver.Tests.Examples/Types/Shapes.cs#example)]
 
 And let's introduce an `IComparer<T>` which sorts these objects by their area:
 
-[!code-csharp[ShapeAreaComparer.cs](../../../../test/Rezolver.Tests.Examples/Types/ShapeAreaComparer.cs#example)]
+[!code-csharp[ShapeAreaComparer.cs](../../../../../test/Rezolver.Tests.Examples/Types/ShapeAreaComparer.cs#example)]
 
 Clearly, with this in place it would be trivial to register shape instances as `I2DShape` 
 and register the `ShapeAreaComparer` as the comparer for the type `IComparer<I2DShape>` -
@@ -99,7 +220,7 @@ assertions which verify the `ShapeAreaComparer` is being used for any compatible
 type, and another which verifies that ordered enumerables of concrete shape types are being
 created correctly:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example2)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example2)]
 
 > [!NOTE]
 > In the example, it would make sense for `ShapeAreaComparer` to be registered as a singleton,
@@ -124,7 +245,7 @@ are the same.
 
 For this we need a new `RectangleComparer`:
 
-[!code-csharp[RectangleComparer.cs](../../../../test/Rezolver.Tests.Examples/Types/RectangleComparer.cs#example)]
+[!code-csharp[RectangleComparer.cs](../../../../../test/Rezolver.Tests.Examples/Types/RectangleComparer.cs#example)]
 
 Note that it has a dependency on two other comparers: `IComparer<I2DShape>` - which explicitly targets our
 catch-all `ShapeAreaComparer` as per the original setup - and `IComparer<double>`  so we can compare lengths
@@ -140,7 +261,7 @@ affect the logic) and use it.
 > yield the wrong result (as would be the case if we only used our original 
 > `ShapeAreaComparer`)
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example3)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example3)]
 
 > [!WARNING]
 > Eager readers will have noticed that the `RectangleComparer` is effectively a 
@@ -157,7 +278,7 @@ in for `Square` as well - because `Rectangle` is 'closer' to `Square` than `I2DS
 
 ## Contravariance with Enumerables
 
-If you have read through the [documentation on enumerables of generics](enumerables/generics.md)
+If you have read through the [documentation on enumerables of generics](../enumerables/generics.md)
 then you will already be aware of Rezolver's powerful auto-enumerable functionality, and you
 can probably already guess how it works when requesting enumerables of contravariant generics.
 
@@ -166,7 +287,7 @@ that matches the given type will be returned - in registration order, as demonst
 which builds on our `I2DShape` types to configure the container to write shape information
 to a `StringBuilder`:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example5)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example5)]
 
 > [!TIP]
 > `object` is always considered last in a contravariant search, after a type's other bases
@@ -223,7 +344,7 @@ when we request an array of `Action<Square, StringBuilder>` (which simply reuses
 
 **Note**: We're using this method in these examples:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example_registershapedelegates)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example_registershapedelegates)]
 
 ***
 
@@ -242,11 +363,11 @@ parameters either for a specific closed version of that generic, or for any.
 In the first example, we'll disable contravariance for 
 `Action<Square, StringBuilder>` - which means we only get one delegate in our array:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example6)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example6)]
 
 We can also disable it for all `Action<,>` delegates:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example7)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example7)]
 
 ***
 
@@ -261,17 +382,17 @@ So, the next example shows how we can disable contravariance for the `Square` ty
 means that when *any* concrete generic is requested, if `Square` is passed as the type argument
 to a contravariant type parameter, the contravariance for that parameter will be ignored:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example8)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example8)]
 
 And we can also do the same for *any* type which has the `I2DShape` interface:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example9)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example9)]
 
 ### Disabling globally
 
 Finally, the simplest of all: disabling contravariance for all types:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example10)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example10)]
 
 ### Caution: Changing to 'Opt-in'
 
@@ -292,7 +413,7 @@ So, our final example shows how we can re-enable contravariance *only* for the
 `Action<Square, StringBuilder>` delegate type - which actually involves re-enabling it
 for the `Square` type also:
 
-[!code-csharp[ContravarianceExamples.cs](../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example11)]
+[!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example11)]
 
 # Summary
 

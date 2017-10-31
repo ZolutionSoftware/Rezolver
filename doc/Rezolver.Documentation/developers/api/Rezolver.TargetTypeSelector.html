@@ -115,7 +115,7 @@
   </h1>
   <div class="markdown level0 summary"><p>Given a type, this produces an enumerable of all types to be sought from an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
 whose targets might produce a compatible instance.</p>
-<p>In particular, this class is reponsible for handling generic type matching, including variance.</p>
+<p>In particular, this class is responsible for handling generic type matching, including variance.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -154,26 +154,29 @@ whose targets might produce a compatible instance.</p>
     <pre><code class="lang-csharp hljs">public class TargetTypeSelector : IEnumerable&lt;Type&gt;, IEnumerable</code></pre>
   </div>
   <h5 id="Rezolver_TargetTypeSelector_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>It&apos;s not likely that you will use this type directly.</p>
+  <div class="markdown level0 remarks"><p>It&apos;s <em>highly unlikely</em> that you will ever need to use this type directly in an application.</p>
+<p>It&apos;s public because it could be useful to developers of components which extend Rezolver.</p>
+<p>Internally, the <a class="xref" href="Rezolver.GenericTargetContainer.html">GenericTargetContainer</a> uses this exclusively to perform searches for 
+compatible target types if a requested type is generic.</p>
 </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_TargetTypeSelector__ctor_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.%23ctor(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_TargetTypeSelector__ctor_System_Type_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.%23ctor(System.Type%2CRezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/TargetTypeSelector.cs/#L537">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/TargetTypeSelector.cs/#L45">View Source</a>
   </span>
   <a id="Rezolver_TargetTypeSelector__ctor_" data-uid="Rezolver.TargetTypeSelector.#ctor*"></a>
-  <h4 id="Rezolver_TargetTypeSelector__ctor_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetTypeSelector.#ctor(System.Type,Rezolver.ITargetContainer)">TargetTypeSelector(Type, ITargetContainer)</h4>
+  <h4 id="Rezolver_TargetTypeSelector__ctor_System_Type_Rezolver_IRootTargetContainer_" data-uid="Rezolver.TargetTypeSelector.#ctor(System.Type,Rezolver.IRootTargetContainer)">TargetTypeSelector(Type, IRootTargetContainer)</h4>
   <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.TargetTypeSelector.html">TargetTypeSelector</a> type for the given
-<code data-dev-comment-type="paramref" class="paramref">type</code> - with options read from the given <code data-dev-comment-type="paramref" class="paramref">rootContainer</code>.</p>
+<code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TargetTypeSelector(Type type, ITargetContainer rootContainer = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public TargetTypeSelector(Type type, IRootTargetContainer rootTargets = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -192,11 +195,75 @@ whose targets might produce a compatible instance.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
-        <td><span class="parametername">rootContainer</span></td>
-        <td><p>The root target container providing options which alter
-how the target types are selected</p>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
+        <td><span class="parametername">rootTargets</span></td>
+        <td><p>The root target container</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_TargetTypeSelector_RootTargets.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.RootTargets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/TargetTypeSelector.cs/#L37">View Source</a>
+  </span>
+  <a id="Rezolver_TargetTypeSelector_RootTargets_" data-uid="Rezolver.TargetTypeSelector.RootTargets*"></a>
+  <h4 id="Rezolver_TargetTypeSelector_RootTargets" data-uid="Rezolver.TargetTypeSelector.RootTargets">RootTargets</h4>
+  <div class="markdown level1 summary"><p>The root-most <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> containing registrations to be sought,
+and the source of any configuration options.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRootTargetContainer RootTargets { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_TargetTypeSelector_Type.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/TargetTypeSelector.cs/#L32">View Source</a>
+  </span>
+  <a id="Rezolver_TargetTypeSelector_Type_" data-uid="Rezolver.TargetTypeSelector.Type*"></a>
+  <h4 id="Rezolver_TargetTypeSelector_Type" data-uid="Rezolver.TargetTypeSelector.Type">Type</h4>
+  <div class="markdown level1 summary"><p>The type for which compatible targets are sought.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type Type { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -204,10 +271,10 @@ how the target types are selected</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_TargetTypeSelector_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_TargetTypeSelector_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/TargetTypeSelector.cs/#L517">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/TargetTypeSelector.cs/#L230">View Source</a>
   </span>
   <a id="Rezolver_TargetTypeSelector_GetEnumerator_" data-uid="Rezolver.TargetTypeSelector.GetEnumerator*"></a>
   <h4 id="Rezolver_TargetTypeSelector_GetEnumerator" data-uid="Rezolver.TargetTypeSelector.GetEnumerator">GetEnumerator()</h4>
@@ -239,10 +306,10 @@ how the target types are selected</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_TargetTypeSelector_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_TargetTypeSelector_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/TargetTypeSelector.cs/#L522">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/TargetTypeSelector.cs/#L235">View Source</a>
   </span>
   <a id="Rezolver_TargetTypeSelector_System_Collections_IEnumerable_GetEnumerator_" data-uid="Rezolver.TargetTypeSelector.System#Collections#IEnumerable#GetEnumerator*"></a>
   <h4 id="Rezolver_TargetTypeSelector_System_Collections_IEnumerable_GetEnumerator" data-uid="Rezolver.TargetTypeSelector.System#Collections#IEnumerable#GetEnumerator">IEnumerable.GetEnumerator()</h4>
@@ -277,10 +344,10 @@ how the target types are selected</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_TargetTypeSelector.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_TargetTypeSelector.md&amp;value=---%0Auid%3A%20Rezolver.TargetTypeSelector%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/TargetTypeSelector.cs/#L17" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/TargetTypeSelector.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

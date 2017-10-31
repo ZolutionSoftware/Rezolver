@@ -175,10 +175,10 @@ the target container MUST also be able to inject an instance of <a class="xref" 
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectCollections.cs/#L35">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Configuration/InjectCollections.cs/#L35">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectCollections_Instance_" data-uid="Rezolver.Configuration.InjectCollections.Instance*"></a>
   <h4 id="Rezolver_Configuration_InjectCollections_Instance" data-uid="Rezolver.Configuration.InjectCollections.Instance">Instance</h4>
@@ -208,20 +208,20 @@ the target container MUST also be able to inject an instance of <a class="xref" 
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Configure_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Configure(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectCollections.cs/#L46">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Configuration/InjectCollections.cs/#L46">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectCollections_Configure_" data-uid="Rezolver.Configuration.InjectCollections.Configure*"></a>
-  <h4 id="Rezolver_Configuration_InjectCollections_Configure_Rezolver_ITargetContainer_" data-uid="Rezolver.Configuration.InjectCollections.Configure(Rezolver.ITargetContainer)">Configure(ITargetContainer)</h4>
+  <h4 id="Rezolver_Configuration_InjectCollections_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
   <div class="markdown level1 summary"><p>Adds registrations for <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132397(v=vs.110).aspx">Collection&lt;T&gt;</a> and <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a> to the <code data-dev-comment-type="paramref" class="paramref">targets</code> (including
 their primary interfaces) so long as none of the types are already registered.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Configure(ITargetContainer targets)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void Configure(IRootTargetContainer targets)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -234,14 +234,14 @@ their primary interfaces) so long as none of the types are already registered.</
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableCollectionInjection&gt;.Configure(Rezolver.ITargetContainer)</span></div>
+  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableCollectionInjection&gt;.Configure(Rezolver.IRootTargetContainer)</span></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_GetDependencies__2___0_System_Collections_Generic_IEnumerable___1__">DependantExtensions.GetDependencies&lt;T, TDependency&gt;(T, IEnumerable&lt;TDependency&gt;)</a>
@@ -260,10 +260,10 @@ their primary interfaces) so long as none of the types are already registered.</
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectCollections.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Configuration_InjectCollections.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectCollections.cs/#L30" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Configuration/InjectCollections.cs/#L30" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

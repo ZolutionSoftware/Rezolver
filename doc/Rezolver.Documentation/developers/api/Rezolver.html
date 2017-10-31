@@ -184,6 +184,10 @@ operation.</p>
       <section><p>Extensions for <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a> so that instances of that
 interface present a similar set of functionality to <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.CovariantTypeIndex.html">CovariantTypeIndex</a></h4>
+      <section><p>Implementation of <a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a> used internally by <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>
+and <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> in their implementation of the same interface.</p>
+</section>
       <h4><a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a></h4>
       <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
 <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
@@ -306,7 +310,7 @@ custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html">ITarget<
       <h4><a class="xref" href="Rezolver.TargetTypeSelector.html">TargetTypeSelector</a></h4>
       <section><p>Given a type, this produces an enumerable of all types to be sought from an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
 whose targets might produce a compatible instance.</p>
-<p>In particular, this class is reponsible for handling generic type matching, including variance.</p>
+<p>In particular, this class is responsible for handling generic type matching, including variance.</p>
 </section>
       <h4><a class="xref" href="Rezolver.UnresolvedICompiledTargetExtensions.html">UnresolvedICompiledTargetExtensions</a></h4>
       <section><p>Contains an extension to test the validity of <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> objects.</p>
@@ -336,6 +340,11 @@ and scoped singleton functionality for any object.</p>
 <p>Implementations of this interface must, in their implementation of <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a>, create a child scope
 of this scope.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a></h4>
+      <section><p>For any type <code>T</code>, there exists a list of zero or more other types with which
+it is compatible when covariance is supported.  This index provides the mechanism
+by which Rezolver can perform this reverse lookup.</p>
+</section>
       <h4><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h4>
       <section><p>Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.</p>
 </section>
@@ -348,6 +357,13 @@ of this scope.</p>
 (or <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a>), including the container on which
 the operation is invoked, any <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> that might be active for the call (if different), and the 
 type that is being resolved from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></h4>
+      <section><p>Interface for the root-most target container, which typically &apos;owns&apos; all the top-level registrations 
+required by an application.</p>
+<p>This builds on the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> interface by adding the <a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a>
+interface too, as well as events which allow an application to listen for target and target container registrations
+within the root.</p>
 </section>
       <h4><a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a></h4>
       <section><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that also has a <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_Scope">Scope</a> attached to it.</p>
@@ -367,7 +383,7 @@ that the targets are registered against.</p>
 <p>This is where all your service registrations will ultimately go.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a></h4>
-      <section><p>A configuration callback for instances of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+      <section><p>A configuration callback for instances of <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a></h4>
       <section><p>Marker interface for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which is responsible for configuring a specific type

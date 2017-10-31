@@ -25,8 +25,9 @@
   href: delegates.md
 - name: Expression Trees
   href: expressions.md
-- name: Generic Contravariance
-  href: contravariance.md
+- name: Generic (Co/Contra)variance
+  href: variance/toc.yml
+  homepage: variance/index.md
 - name: Decorators
   href: decorators/toc.yml
   homepage: decorators.md

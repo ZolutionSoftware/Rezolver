@@ -122,14 +122,23 @@ open generic (here we're disabling it for `IGeneric<>`)
 
 ***
 
-# Contravariance
+# Generic Variance
+
+## Covariance
+
+Since `IEnumerable<T>` is a covariant interface, Rezolver's support for covariance will ensure that any registration
+which is compatible with a given `T` is included in the returned enumerable, in the order that the original
+registrations were made.
+
+## Contravariance
 
 Rezolver also supports generic contravariance which, in the case of 
 enumerables, means getting multiple results from any and all registrations that 
-match a particular type argument's bases or interfaces, in descending order of 'distance'
-from the requested type.
+match a particular type argument's bases or interfaces, again, in the order that the original registrations
+were made.
 
-For more on this, including concrete examples, see the [next steps](#next-steps) section
+
+For links to more topics on both of these, including concrete examples, see the [next steps](#next-steps) section
 below.
 
 ***
@@ -138,6 +147,7 @@ below.
 
 - Learn about Rezolver's support for [lazy and eager enumerables](lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
 evaluated by default)
-- As [mentioned above](#contravariance), by default, Rezolver handles contravariant 
-generic type parameters - see this in action with enumerables 
-[in the section dedicated to generic contravariance](../contravariance.md)
+- The [covariance](../variance/covariance.md) section includes examples of how covariance works within Rezolver's
+enumerable support.
+- By default, also, Rezolver handles contravariant generic type parameters - see this in action with enumerables 
+[in the section dedicated to generic contravariance](../variance/contravariance.md)

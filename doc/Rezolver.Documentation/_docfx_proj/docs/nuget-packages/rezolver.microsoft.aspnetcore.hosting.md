@@ -23,10 +23,10 @@ So, at the most basic level you just call the
 @Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver* method, and that's
 enough.
 
-If you've been reading some of the topics on this site - say, about [contravariance](../contravariance.md)
+If you've been reading some of the topics on this site - say, about [contravariance](../variance/contravariance.md)
 or [lazy and eager enumerables](../enumerables/lazy-vs-eager.md) then you'll have seen how we can use options
 to control complex behaviours in Rezolver containers.  That's what is shown in the alternative call
-to `UseRezolver` in the commented code.  you can also pass a configuration callback gthat will be called
+to `UseRezolver` in the commented code.  you can also pass a configuration callback that will be called
 to modify the @Rezolver.RezolverOptions that will be used to create both the @Rezolver.IRootTargetContainer that
 forms the basis of the registrations, and the @Rezolver.ScopedContainer that will ultimately create the objects
 for the application.
@@ -35,7 +35,7 @@ for the application.
 > Please note that lazy enumerables are currently switched off in Rezolver's integration with Asp.Net Core
 > because of a mis-specification of a test by the Dependency Injection team.
 > 
-> The specification is something
+> The [specification test](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection.Specification.Tests/) is something
 > which a DI container should pass if it's intending to be used with Asp.Net Core - and unfortunately there
 > was one test that failed when Rezolver was using lazy enumerables - which is its default behaviour.
 > [An issue was raised](https://github.com/aspnet/DependencyInjection/issues/589) on the Git repo and has 

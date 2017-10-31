@@ -252,7 +252,7 @@ Assert.True(toDispose.Disposed);
 </code></pre><p>As with all decorators, they stack and they will honour the order in which they are registered.</p>
 <h1 id="decorating-ienumerablet">Decorating <code>IEnumerable&lt;T&gt;</code></h1>
 <p>Decorating <code>IEnumerable&lt;T&gt;</code> can be done in a similar way to that shown in the example in the 
-<a href="../contravariance.html#injecting-icomparert">contravariance topic in which <code>IOrderedEnumerable&lt;T&gt;</code> is configured</a> -
+<a href="../variance/contravariance.html#injecting-icomparert">contravariance topic in which <code>IOrderedEnumerable&lt;T&gt;</code> is configured</a> -
 simply change the registration of the <code>OrderedEnumerableWrapper&lt;T&gt;</code> from this:</p>
 <pre><code class="lang-cs">container.RegisterType(typeof(OrderedEnumerableWrapper&lt;&gt;), typeof(IOrderedEnumerable&lt;&gt;));
 </code></pre><p>To this:</p>
@@ -277,7 +277,7 @@ object&#39;s constructor or whatever).</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/decorators/collections.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/doc/Rezolver.Documentation/_docfx_proj/docs/decorators/collections.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -25,40 +25,58 @@ Adds .Net Standard 2.0 and more. See the [release notes on Github](https://githu
 
 _Linked topics provide high level overviews and examples in our developer guide - click on them to find out more! (*)_
 
-- [Constructor Injection](docs/constructor-injection/index.md)
+### Core Features
+
+- #### [Constructor Injection](docs/constructor-injection/index.md)
   - Multiple constructors supported
   - 'Intelligent' constructor discovery based on registered services
   - Named argument binding
   - Parameters with default arguments are supported
   - [Member injection](docs/constructor-injection/member-injection.md) (extensible)
-- [Open Generic Constructor Injection](docs/constructor-injection/generics.md) (with specific closed generics taking precedence)
-- [Enumerables](docs/enumerables.md) (empty enumerables returned by default)
+- #### [Open Generic Constructor Injection](docs/constructor-injection/generics.md) 
+  - Specific closed generics take precedence
+- #### [Factory Delegates](docs/delegates.md)
+  - Argument injection
+  - Explicit resolving supported inside factory bodies
+- #### [Factory Expressions](docs/expressions.md)
+  - Argument injection
+  - Explicit resolving as above
+- #### [Singletons](docs/lifetimes/singleton.md)
+- #### [Constant services](docs/objects.md)
+- #### [Hierarchical lifetime scoping](docs/lifetimes/container-scopes.md)
+- #### [Scoped objects](docs/lifetimes/scoped.md) (i.e. 'singleton per scope')
+
+### Enumerables, Arrays and Collections
+
+- #### [Enumerables](docs/enumerables.md) 
+  - Empty enumerables returned by default
   - [Lazy and eager enumerables](docs/enumerables/lazy-vs-eager.md) - configurable on a per-type basis (new in 1.3)
-  - [Enumerables of generics](docs/enumerables/generics.md) - from least generic (e.g. `IFoo<Bar>`) to most generic (`IFoo<>`)
-- [Array injection](docs/arrays-lists-collections/arrays.md)
-- [`List<T>` injection](docs/arrays-lists-collections/lists.md)
+  - [Enumerables of generics](docs/enumerables/generics.md)
+- #### [Array injection](docs/arrays-lists-collections/arrays.md)
+- #### [`List<T>` injection](docs/arrays-lists-collections/lists.md)
   - Also `IList<T>` and `IReadOnlyList<T>`
-- [`Collection<T>` injection](docs/arrays-lists-collections/collections.md)
+- #### [`Collection<T>` injection](docs/arrays-lists-collections/collections.md)
   - Also `ICollection<T>`, `ReadOnlyCollection<T>` and `IReadOnlyCollection<T>`
-- [Decorators](docs/decorators.md)
+
+### Advanced
+
+- #### [Generic Variance](docs/variance/index.md)
+  - [Generic Contravariance](docs/variance/contravariance.md) (`Action<IFoo>` resolved for `Action<Foo>`)
+  - [Generic Covariance](docs/variance/covariance.md) (`Func<Foo>` resolved for `Func<IFoo>`)
+  - *Can be enabled and disabled globally and per-type*
+  - *Enumerables and collections automatically include all generic variant matches*
+- #### [Decorators](docs/decorators.md)
   - Non-generic & generic constructor injection
   - Specialised generic (*where a decorator for `IFoo<>` is redecorated by another decorator for `IFoo<Bar>` only when
 `IFoo<Bar>` is requested*)
   - [Enumerables of decorated instances](docs/enumerables.md#decorators-and-enumerables)
   - [Decorator Delegates](docs/decorators/delegates.md)
   - Can decorate any of the built-in enumerable/collection types
-- [Generic Contravariance](docs/contravariance.md) (e.g. `Action<IFoo>` registration automatically used for `Action<Foo>`)
-  - Can be enabled and disabled globally and per-type
-  - Enumerables and collections automatically include all contravariant matches
-- Constrained generics
-- Child containers (overriding registrations in one container with those of another)
-  - Child registration containers (lower-level overriding of registrations for similar but sibling containers)
-- [Hierarchical lifetime scoping](docs/lifetimes/container-scopes.md)
-- [Delegates](docs/delegates.md) and [Expressions](docs/expressions.md) as factories, with argument injection
-  - Explicit resolving supported inside factory/expression bodies
-- [Singletons](docs/lifetimes/singleton.md)
-- [Objects as services](docs/objects.md)
-- [Scoped objects](docs/lifetimes/scoped.md) (i.e. 'singleton per scope')
+- #### Constrained generics
+- #### Child containers
+  - Including child registration containers (lower-level overriding of registrations for similar but sibling containers)
+
+### Other
 - No 'prepare' phase - you can register targets in a container after you start using it
   - *Note - services which have already been used cannot yet be replaced, but high-performance mutable containers are on their way*
 - Extensible compiler framework
