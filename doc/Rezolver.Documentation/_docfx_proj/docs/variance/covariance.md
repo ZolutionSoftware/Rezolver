@@ -92,14 +92,21 @@ with delegates:
 > Notice that with delegates, you typically register the delegate directly against its actual type - the 
 > 'service type' for the registration is exactly the same as the delegate type itself.
 
-
 ## Enumerables
 
 Single-service scenarios like the `MyBase`/`MyDerived` example above are less common in the IOC world.  The
 most common example is with `IEnumerable<T>` functionality - where an application has several registrations
 for concrete types which all happen to share a common base or interface, and your application wants to be able
-to resolve them all automatically by that base or interface (without requiring that they are registered 
-against it).
+to resolve them all automatically by that base or interface whilst still also needing to be able to resolve
+them by their concrete types.
+
+Clearly, without covariance, this could be achieved by creating two separate registrations for the same type - 
+one for the conorete type and one for the common base/interface.
+
+However, since `IEnumerable<T>` is covariant, any registration that implements or is derived from the `T`
+really should be *automatically* identified and included in the enumerable.
+
+
 
 Rezolver's automatic [enumerable handling](../enumerables.md) supports this without any effort from you:
 

@@ -25,11 +25,9 @@ namespace Rezolver.Tests
             Assert.Equal(new[]
             {
                 typeof(Func<BaseClassChild, BaseClass>),
-                typeof(Func<BaseClassChild, BaseClassChild>),
                 typeof(Func<BaseClass, BaseClass>),
                 typeof(Func<BaseClass, BaseClassChild>),
                 typeof(Func<object, BaseClass>),
-                typeof(Func<object, BaseClassChild>),
                 typeof(Func<,>)
             },
             result);

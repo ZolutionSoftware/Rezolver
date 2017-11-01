@@ -60,7 +60,11 @@ namespace Rezolver
             //using an iterator method is not the best for performance, but fetching type
             //registrations from a container builder is an operation that, so long as a caching
             //resolver is used, shouldn't be repeated often
-            yield return search.Type;
+
+            List<Type> toReturn = new List<Type>(20)
+            {
+                search.Type
+            };
 
             // these get added after all other bases and interfaces have been added.
             List<Type> explicitlyAddedBases = new List<Type>();
@@ -75,11 +79,7 @@ namespace Rezolver
                     !TypeHelpers.IsValueType(search.Type) &&
                     RootTargets != null)
                 {
-                    foreach (var covariantMatch in RootTargets.GetKnownCovariantTypes(search.Type)
-                        .SelectMany(t => Run(new TargetTypeSelectorParams(t, parent: search))))
-                    {
-                        yield return covariantMatch;
-                    }
+                    toReturn.AddRange(RootTargets.GetKnownCovariantTypes(search.Type));
                 }
 
                 //for every generic type, there is at least two versions - the closed and the open
@@ -99,10 +99,17 @@ namespace Rezolver
                 // Note: the first result will be equal to search.Type, hence Skip(1)
                 foreach (var combination in typeParamSearchLists.Permutate().Skip(1))
                 {
-                    yield return genericType.MakeGenericType(combination.ToArray());
+                    var compatibleType = genericType.MakeGenericType(combination.ToArray());
+                    toReturn.Add(compatibleType);
+                    if(search.TypeParameter == null &&
+                        !TypeHelpers.IsValueType(search.Type) &&
+                        RootTargets != null)
+                    {
+                        toReturn.AddRange(RootTargets.GetKnownCovariantTypes(compatibleType));
+                    }
                 }
 
-                yield return genericType;
+                toReturn.Add(genericType);
             }
 
             bool isArray = TypeHelpers.IsArray(search.Type);
@@ -159,12 +166,9 @@ namespace Rezolver
                             }
                             // loop through the bases, constructing array types for each and adding them
                             // note we skip the first because it'll be the search type.
-                            foreach (var t in allArrayTypes.Skip(1)
+                            toReturn.AddRange(allArrayTypes.Skip(1)
                                 .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases)))
-                                .Where(tt => !explicitlyAddedBases.Contains(tt)))
-                            {
-                                yield return t;
-                            }
+                                .Where(tt => !explicitlyAddedBases.Contains(tt)));
                         }
 
                         //if it's a class then iterate the bases
@@ -176,14 +180,9 @@ namespace Rezolver
                                 explicitlyAddedBases.Add(typeof(object));
                             // note - disable interfaces when recursing into the base
                             // note also - ignore 'object'
-                            foreach (var t in
+                            toReturn.AddRange(
                                 Run(new TargetTypeSelectorParams(TypeHelpers.BaseType(search.Type), search.TypeParameter, search.Parent, Contravariance.Bases))
-                                .Where(tt => !explicitlyAddedBases.Contains(tt)))
-                            {
-                                // note above: Contravariant searching is set to 'Bases' only because only the top-level call deals with interfaces - 
-                                // and it deals with them LAST.
-                                yield return t;
-                            }
+                                .Where(tt => !explicitlyAddedBases.Contains(tt)));
                         }
                     }
 
@@ -195,32 +194,24 @@ namespace Rezolver
                             if (isArray)
                             {
                                 //have to include all the interfaces of all the array types that are compatible per array covariance
-                                foreach (var t in allArrayTypes
+                                toReturn.AddRange(allArrayTypes
                                     .SelectMany(t => TypeHelpers.GetInterfaces(t)
                                     .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases))))
                                     .OrderBy(t => t, DescendingTypeOrder.Instance)
-                                    .Where(tt => !explicitlyAddedBases.Contains(tt)))
-                                {
-                                    yield return t;
-                                }
-
+                                    .Where(tt => !explicitlyAddedBases.Contains(tt)));
                             }
                             else
                             {
-                                foreach (var i in TypeHelpers.GetInterfaces(search.Type)
+                                toReturn.AddRange(TypeHelpers.GetInterfaces(search.Type)
                                     .SelectMany(t => Run(new TargetTypeSelectorParams(t, search.TypeParameter, search.Parent, Contravariance.Bases)))
-                                    .Where(tt => !explicitlyAddedBases.Contains(tt)))
-                                {
-                                    yield return i;
-                                }
+                                    .Where(tt => !explicitlyAddedBases.Contains(tt)));
                             }
                         }
                     }
-                    foreach (var t in explicitlyAddedBases)
-                        yield return t;
+                    toReturn.AddRange(explicitlyAddedBases);
                 }
             }
-
+            return toReturn;
         }
 
         /// <summary>
