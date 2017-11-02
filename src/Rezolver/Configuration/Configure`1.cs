@@ -6,7 +6,7 @@ namespace Rezolver.Configuration
 {
     /// <summary>
     /// An <see cref="ITargetContainerConfig"/> implementation specialised for setting options in an <see cref="ITargetContainer"/> when
-    /// <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> is called.
+    /// <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/> is called.
     /// 
     /// This class' implementation of that method is actually handled by the <see cref="ConfigureOption(ITargetContainer)"/> method.
     /// </summary>
@@ -72,7 +72,7 @@ namespace Rezolver.Configuration
         /// Sets the option value (either passed as a constant
         /// reference on construction, or obtained via a callback) in the <paramref name="targets"/> target container.
         /// 
-        /// This is used as the implementation of <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/>.
+        /// This is used as the implementation of <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/>.
         /// </summary>
         /// <param name="targets">The target container into which the option is to be set.</param>
         public void ConfigureOption(ITargetContainer targets)

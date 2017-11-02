@@ -123,18 +123,6 @@ be disabled) except to request types which have type arguments specified for par
 the <a href="https://docs.microsoft.com/en-us/dotnet/standard/generics/covariance-and-contravariance">MSDN topic &#39;Covariance and Contravariance in Generics&#39;</a>
 as it explains these concepts in far greater detail than we can!</p>
 </div>
-<h1 id="mixed-variance-not-yet-supported">Mixed Variance Not (<em>yet</em>) Supported</h1>
-<p>At present, mixed variance - that is, combinations of contravariance and covariance in the same generic type
-is not yet supported.</p>
-<p>This means that while .Net allows you to do this:</p>
-<pre><code class="lang-cs">Func&lt;string, object&gt; f
-  = new Func&lt;object, string&gt;(o =&gt; o.ToString());
-</code></pre><p>Rezolver will not be able to resolve a <code>Func&lt;string, object&gt;</code> from a <code>Func&lt;object, string&gt;</code> registration.</p>
-<p>You <em>can</em>, however, resolve a <code>Func&lt;object, object&gt;</code> in this scenario or, indeed a <code>Func&lt;string, string&gt;</code> - it&#39;s
-types which mix combinations of both covariant and contravariant type arguments which won&#39;t find a match (so - 
-all-covariant or all-contravariant combinations also work).</p>
-<p>There are some failing tests in the current codebase which track this functionality, and we&#39;ll look at getting
-it implemented soon.</p>
 </article>
           </div>
           

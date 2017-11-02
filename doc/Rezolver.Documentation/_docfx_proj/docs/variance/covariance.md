@@ -72,8 +72,12 @@ previous code block.
 
 ## Last-registered wins
 
+> [!NOTE]
+> If a registration exists for the exact type requested, then covariance is ignored in favour of the 
+> most-recently registered exact match.
+
 Just as with all other registrations (except [contravariance](contravariance.md)), the registration that 
-serves a request for a particular service type which is matched covariantly is the one that was registered 
+serves a request for a particular service type *which is matched covariantly* is the one that was registered 
 most recently.
 
 So a `Func<MyBase>` registration will supersede a `Func<MyDerived>` registration for a 
@@ -94,19 +98,47 @@ with delegates:
 
 ## Enumerables
 
-Single-service scenarios like the `MyBase`/`MyDerived` example above are less common in the IOC world.  The
-most common example is with `IEnumerable<T>` functionality - where an application has several registrations
-for concrete types which all happen to share a common base or interface, and your application wants to be able
-to resolve them all automatically by that base or interface whilst still also needing to be able to resolve
-them by their concrete types.
+Single-service scenarios like the `MyBase`/`MyDerived` example above are less common with covariance in the 
+IOC world.  The most common example is with `IEnumerable<T>` functionality - where an application has several 
+registrations for concrete types which all happen to share a common base or interface, and your application 
+wants to be able to resolve them all automatically by that base or interface whilst still also needing to 
+be able to resolve them by their concrete types.
 
 Clearly, without covariance, this could be achieved by creating two separate registrations for the same type - 
-one for the conorete type and one for the common base/interface.
+one against the concrete type and one against the common base/interface.
 
-However, since `IEnumerable<T>` is covariant, any registration that implements or is derived from the `T`
+However, since `IEnumerable<T>` is covariant, any registration whose type is reference compatible with the `T`
 really should be *automatically* identified and included in the enumerable.
-
-
 
 Rezolver's automatic [enumerable handling](../enumerables.md) supports this without any effort from you:
 
+[!code-csharp[CovarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/CovarianceExamples.cs#example2)]
+
+### Nested Generic Covariance
+
+This can be extended even further when the element type of an enumerable is itself a generic which
+contains one or more covariant type parameters.
+
+This is similar to the above example, except this time we have a series of concrete `Func<out T>` registrations:
+
+[!code-csharp[CovarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/CovarianceExamples.cs#example3)]
+
+### Nested Generic Contravariance
+
+You might be wondering why we'd have an example about contravariance in the section about covariance - well
+an enumerable of `Action<T>`, for example, can still match covariantly:
+
+[!code-csharp[CovarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/CovarianceExamples.cs#example4)]
+
+> [!TIP]
+> When you start combining different types of variance you very quickly encounter counter-intuitive scenarios.
+> In this case, try not to be distracted by the fact that the types in the `Action<>` delegate appear to be
+> going the 'wrong way' up or down a type hierarchy.
+> 
+> Remember that variance is all about _**reference-compatibility**_, not specifically about whether two types share
+> a common base or interface.  So, since an instance of `Action<MyService>` is reference compatible with a
+> variable of type `Action<IMyService>`, this means that an `IEnumerable<MyService>` can also contain an
+> instance of `Action<IMyService>`.
+> ***
+> If you're already familiar with the term 'reference compatible' then this will be of no surprise to you
+> after learning that Rezolver supports generic variance :wink:

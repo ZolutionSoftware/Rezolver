@@ -353,17 +353,49 @@ Assert.Equal(1, myService2Result.Length);
 Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
 </code></pre><hr>
 <h1 id="generic-variance">Generic Variance</h1>
+<p>Rezolver&#39;s support for <a href="../variance/index.html">generic variance</a> means that enumerables of generics will 
+automatically include all concrete-generic registrations (i.e. <code>T&lt;A&gt;</code> as opposed to <code>T&lt;&gt;</code>) which are 
+reference compatible with the element type of the enumerable by way of generic covariance or contravariance.</p>
 <h2 id="covariance">Covariance</h2>
-<p>Since <code>IEnumerable&lt;T&gt;</code> is a covariant interface, Rezolver&#39;s support for covariance will ensure that any registration
-which is compatible with a given <code>T</code> is included in the returned enumerable, in the order that the original
-registrations were made.</p>
+<p>Say you have a series of <code>Func&lt;out T&gt;</code> registrations for concrete types - e.g. <code>Func&lt;Foo1&gt;</code>, <code>Func&lt;Foo2&gt;</code> and 
+so on, with <code>Foo1</code> and <code>Foo2</code> and the rest all supporting the <code>IFoo</code> interface.</p>
+<p>Rezolver will automatically be able to resolve an <code>IEnumerable&lt;Func&lt;IFoo&gt;&gt;</code> containing <em>all</em> matching 
+registrations, since each of those registrations is compatible with <code>Func&lt;IFoo&gt;</code> via generic covariance:</p>
+<pre><code class="lang-cs">interface IFoo {}
+
+class Foo1 : IFoo {}
+class Foo2 : IFoo {}
+
+// ...
+
+container.RegisterObject&lt;Func&lt;Foo1&gt;&gt;(() =&gt; new Foo1());
+container.RegisterObject&lt;Func&lt;Foo2&gt;&gt;(() =&gt; new Foo2());
+
+var funcs = container.ResolveMany&lt;Func&lt;IFoo&gt;&gt;();
+// will contain the two delegates registered above
+</code></pre><p>You can read more about this, including examples, in the 
+<a href="../variance/covariance.html#enumerables">dedicated section on covariance</a>.</p>
+<h3 id="disabling-enumerable-covariance">Disabling Enumerable Covariance</h3>
+<p>As with much of Rezolver&#39;s functionality, you can control whether the automatically generated enumerables
+handle covariance as described above with a simple option - the <a class="xref" href="../../api/Rezolver.Options.EnableEnumerableCovariance.html">EnableEnumerableCovariance</a>
+option.</p>
+<p>It can be used to disable enumerable covariance for all enumerables, or for enumerables of specific types:</p>
+<div class="TIP"><h5>Tip</h5><p>Both these snippets assume the <code>Rezolver.Options</code> namespace has been imported into the current file via
+a <code>using</code> directive (<code>imports</code> in VB).</p>
+</div>
+<pre><code class="lang-cs">container.SetOption&lt;EnableEnumerableCovariance&gt;(false);
+</code></pre><p>Disables it globally, while:</p>
+<pre><code class="lang-cs">container.SetOption&lt;EnableEnumerableCovariance, IFoo&gt;(false);
+</code></pre><p>Disables it only for enumerables of the type <code>IFoo</code>.</p>
 <h2 id="contravariance">Contravariance</h2>
-<p>Rezolver also supports generic contravariance which, in the case of 
-enumerables, means getting multiple results from any and all registrations that 
-match a particular type argument&#39;s bases or interfaces, again, in the order that the original registrations
-were made.</p>
-<p>For links to more topics on both of these, including concrete examples, see the <a href="#next-steps">next steps</a> section
-below.</p>
+<p>Generic types which are compatible with each other via contravariance will also be included in any 
+<code>IEnumerable&lt;T&gt;</code> with which they&#39;d usually be compatible.  For example:</p>
+<pre><code class="lang-cs">container.RegisterObject&lt;Action&lt;IFoo&gt;&gt;(o =&gt; Console.WriteLine(&quot;interface&quot;));
+container.RegisterObject&lt;Action&lt;object&gt;&gt;(o =&gt; Console.WriteLine(&quot;object&quot;));
+
+var actions = container.ResolveMany&lt;Action&lt;Foo1&gt;&gt;();
+// will contain the two delegates registered above
+</code></pre><p>Again, this is covered in more depth in the <a href="../variance/covariance.html#enumerables">section on covariance</a>.</p>
 <hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>

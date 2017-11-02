@@ -64,7 +64,7 @@ namespace Rezolver
         /// If not provided, then the <see cref="DefaultConfig"/> will be used.</param>
         /// <remarks>Note to inheritors - this constructor throws an <see cref="InvalidOperationException"/> if used by a derived class,
         /// because the application of configuration to the container will likely cause virtual methods to be called.  Instead, you 
-        /// should declare your own constructor with the same signature which chains instead to the <see cref="Container.Container(ITargetContainer)"/> 
+        /// should declare your own constructor with the same signature which chains instead to the <see cref="Container.Container(IRootTargetContainer)"/> 
         /// protected constructor; and then you should apply the configuration yourself in that constructor (falling back to 
         /// <see cref="DefaultConfig"/> if null).</remarks>
         public Container(IRootTargetContainer targets = null, IContainerConfig config = null)

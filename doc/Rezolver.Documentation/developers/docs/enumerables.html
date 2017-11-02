@@ -277,6 +277,13 @@ using (var childScope = container.CreateScope())
 <li><code>[2]</code> is created once per call</li>
 </ul>
 <hr>
+<h2 id="automatic-covariance">Automatic Covariance</h2>
+<p>Since the <code>T</code> type parameter in <code>IEnumerable&lt;T&gt;</code> is a covariant, Rezolver automatically resolves all types
+which are reference compatible with the <code>T</code> that you specify.  So, resolving an <code>IEnumerable&lt;IFoo&gt;</code> will 
+result in an enumerable containing <em>all</em> objects produced from registrations made against types which 
+implement <code>IFoo</code> (the registrations do not need to have been made explicitly against the <code>IFoo</code> interface).</p>
+<p>A concrete example of this can be found in the <a href="variance/covariance.html#enumerables">section on covariance</a>.</p>
+<hr>
 <h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
 <p><a href="decorators.html">Decorators</a> that have been registered against the <strong>element type</strong> of an enumerable will be applied to all 
 instances that the container produces for the enumerable.  This also applies to stacked decorators (where multiple 

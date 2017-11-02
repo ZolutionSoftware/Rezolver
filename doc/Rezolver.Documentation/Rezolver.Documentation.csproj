@@ -672,6 +672,7 @@
     <Content Include="_docfx_proj\docs\constructor-injection\generics.md" />
     <Content Include="_docfx_proj\docs\variance\toc.yml" />
     <Content Include="_docfx_proj\docs\variance\index.md" />
+    <Content Include="_docfx_proj\docs\variance\mixed.md" />
     <None Include="_docfx_proj\images\exampleunittest.PNG" />
     <Content Include="mstile-144x144.png" />
     <Content Include="mstile-150x150.png" />

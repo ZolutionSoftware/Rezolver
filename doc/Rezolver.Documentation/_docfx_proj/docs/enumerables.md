@@ -115,7 +115,18 @@ To summarise:
 - `[1]` is created once per enclosing scope (remember - the container itself is a scope in this example)
 - `[2]` is created once per call
 
-* * *
+***
+
+## Automatic Covariance
+
+Since the `T` type parameter in `IEnumerable<T>` is a covariant, Rezolver automatically resolves all types
+which are reference compatible with the `T` that you specify.  So, resolving an `IEnumerable<IFoo>` will 
+result in an enumerable containing *all* objects produced from registrations made against types which 
+implement `IFoo` (the registrations do not need to have been made explicitly against the `IFoo` interface).
+
+A concrete example of this can be found in the [section on covariance](variance/covariance.md#enumerables).
+
+***
 
 ## Decorators and Enumerables
 

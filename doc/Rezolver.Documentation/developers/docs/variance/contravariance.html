@@ -548,6 +548,8 @@ or interfaces, because <code>object</code> is ubiquitous and technically applies
 order that interfaces are considered is less well-defined.  Rezolver applies a trivial
 sort on the list of interfaces of the type such that generic interfaces appear before 
 non-generic interfaces; and any &#39;derived&#39; interfaces before those that they &#39;inherit&#39;.</p>
+<p>Finally, for array types, the <code>Array</code> runtime type is also always considered after all other
+applicable types - except <code>object</code>.</p>
 </div>
 <h2 id="disabling-contravariance-advanced">Disabling Contravariance (Advanced)</h2>
 <div class="WARNING"><h5>Warning</h5><p>If you need to start playing around with how contravariance works naturally within the

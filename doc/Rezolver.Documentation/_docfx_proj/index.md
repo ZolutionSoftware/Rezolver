@@ -17,7 +17,9 @@ Asp.Net Core Support (v2.0 and v1.1) is provided by the
 supported by the [Rezolver.Microsoft.Extensions.DependencyInjection package](docs/nuget-packages/Rezolver.Microsoft.Extensions.DependencyInjection.md)
 which provides an implementation of the new .Net Core DI container abstraction.
 
-## 1.3.1 Released!
+## 1.3.2 Released!
+
+Adds [Generic Covariance](docs/variance/covariance.md) and Mixed Variance
 
 Adds .Net Standard 2.0 and more. See the [release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
 

@@ -297,6 +297,9 @@ to a `StringBuilder`:
 > order that interfaces are considered is less well-defined.  Rezolver applies a trivial
 > sort on the list of interfaces of the type such that generic interfaces appear before 
 > non-generic interfaces; and any 'derived' interfaces before those that they 'inherit'.
+> 
+> Finally, for array types, the `Array` runtime type is also always considered after all other
+> applicable types - except `object`.
 
 ## Disabling Contravariance (Advanced)
 

@@ -20,7 +20,7 @@ namespace Rezolver.Compilation.Expressions
     /// <seealso cref="Rezolver.Compilation.ITargetCompiler" />
     /// <remarks>Use of this compiler by a container is enabled by applying the <see cref="Configuration.ExpressionCompilation"/>
     /// <see cref="Configuration.ExpressionCompilation.Instance"/> to the container either on construction (for example, via the 
-    /// <see cref="Container.Container(ITargetContainer, IContainerConfig)"/> constructor) or via the 
+    /// <see cref="Container.Container(IRootTargetContainer, IContainerConfig)"/> constructor) or via the 
     /// <see cref="Container.DefaultConfig"/> - which currently configures this compiler by default anyway.
     /// 
     /// This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a 

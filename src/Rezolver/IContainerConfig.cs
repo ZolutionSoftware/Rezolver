@@ -12,7 +12,7 @@ namespace Rezolver
     /// <see cref="IContainer"/> and not <see cref="ITargetContainer"/>.
     /// 
     /// A configuration instance can be passed to any of the provided <see cref="Container"/>-derived types on 
-    /// construction (see the <see cref="Container.Container(ITargetContainer, IContainerConfig)"/> 
+    /// construction (see the <see cref="Container.Container(IRootTargetContainer, IContainerConfig)"/> 
     /// constructor).  If one is not passed then the <see cref="Container.DefaultConfig"/> is used.
     /// 
     /// The built-in config implementations register services or set options in the target container passed

@@ -7,7 +7,7 @@ namespace Rezolver.Configuration
 {
     /// <summary>
     /// Abstract base class for an <see cref="ITargetContainerConfig"/> that is dependent upon a particular type of option
-    /// having been set in an <see cref="ITargetContainer"/> before being able to <see cref="Configure(ITargetContainer)"/>
+    /// having been set in an <see cref="ITargetContainer"/> before being able to <see cref="Configure(IRootTargetContainer)"/>
     /// that target container.
     /// </summary>
     /// <typeparam name="TOption">The type of option upon which this config object depends.  The default dependency created and 
