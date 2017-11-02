@@ -121,6 +121,11 @@ now.</p>
 <p>For all the built-in container types, Rezolver splits registration and resolving responsibilities between 
 two interfaces:</p>
 <h2 id="rezolveritargetcontainer"><a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a></h2>
+<div class="NOTE"><h5>Note</h5><p>You&#39;ll notice that the constructors for the <a class="xref" href="../api/Rezolver.Container.html">Container</a> and <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a> types (see next)
+actually accept an instance of <a class="xref" href="../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>.  This is a new interface added in v1.3.2 which
+marks a target container as a &#39;top-level&#39; one - and supports functionality such as 
+<a href="variance/covariance.html">covariance</a>.  <code>IRootTargetContainer</code> also implies the <code>ITargetContainer</code> interface.</p>
+</div>
 <p>This interface describes a registry of <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> objects, keyed by type, describing the type of object 
 that is to be created (and how) when a given type is requested.</p>
 <p>It is through this interface that you setup your container with registrations, which are then later used when 
@@ -132,7 +137,7 @@ either created implicitly by the framework or explicitly in your own code.</p>
 <p>This is the interface through which we resolve objects.  The interface does not expose any registration 
 mechanisms at all (even if the classes providing the &#39;standard&#39; implementations all do) - only the ability
 to request objects from the container.</p>
-<p>This interface does not mandate that a container has an <code>ITargetContainer</code>, it&#39;s simply the case
+<p>This interface does not mandate that a container has an <code>IRootTargetContainer</code>, it&#39;s simply the case
 that all the provided implementations which we will discuss in the rest of this documentation do
 use that interface as the source of their service registrations.</p>
 <div class="TIP"><h5>Tip</h5><p>The primary implementation of this interface is <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a>, an abstract class which also 

@@ -170,12 +170,11 @@ will work.</p>
 in order to construct the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> that will be used as the DI container.</p>
 <p>The <em>simplest</em> way to do this is to add a single method (it can be empty) called <code>ConfigureContainer</code>, which 
 accepts a single parameter of the type <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>.</p>
-<blockquote><p>[!INFO]
-The <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> interface was added in Rezolver 1.3.2 to accommodate covariance
+<div class="NOTE"><h5>Note</h5><p>The <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> interface was added in Rezolver 1.3.2 to accommodate covariance
 and is now the interface used for &#39;top-level&#39; target containers.  You can still declare your method
 as <code>ConfigureContainer&lt;ITargetContainer&gt;</code> without losing any functionality - so projects which are
 upgrading from v2.0.x of the Hosting package will still work without any code changes.</p>
-</blockquote>
+</div>
 <pre><code class="lang-csharp" name="Startup.cs">public class Startup
 {
     public Startup(IConfiguration configuration)

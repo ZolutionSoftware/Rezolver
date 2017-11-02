@@ -124,6 +124,9 @@ might be useful to some.</p>
 <p>The <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> interface supplies service registrations when using the default
 container types <a class="xref" href="../api/Rezolver.Container.html">Container</a> and <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a>.  All the target container does is to provide a means
 to register and look up <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> instances which have been registered against specific types.</p>
+<div class="NOTE"><h5>Note</h5><p>These two container types actually require an <a class="xref" href="../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> - an interface which is implemented
+by the standard target container: <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>.</p>
+</div>
 <h2 id="registering-via-extension-methods">Registering via extension methods</h2>
 <p>The majority of your work with the Rezolver framework will use extension methods to create and add targets to
 an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which will ultimately drive the <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a> that you will use to create instances.</p>
@@ -148,7 +151,7 @@ of this site:</p>
 which that target is to be registered.</p>
 <p>If the optional type is not provided, then the target&#39;s <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> is used as the default
 registration type:</p>
-<div class="NOTE"><h5>Note</h5><p>In the next example, we&#39;re using the <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>.
+<div class="TIP"><h5>Tip</h5><p>In the next example, we&#39;re using the <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>.
 We have <a href="objects.html">more in-depth documentation about <code>ObjectTarget</code></a> if you want to know more.</p>
 </div>
 <pre><code class="lang-csharp" name="TargetContainerExamples.cs">var targets = new TargetContainer();
@@ -159,7 +162,7 @@ Assert.IsType&lt;ObjectTarget&gt;(target);
 </code></pre><p>So, here, the target container defaults to using <code>System.String</code> as the registration type for the target
 because that&#39;s its <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.  We can also provide any base or interface of the target&#39;s type
 as a valid type, too:</p>
-<div class="NOTE"><h5>Note</h5><p>This time we&#39;re creating a <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> via one of its static factory functions.
+<div class="TIP"><h5>Tip</h5><p>This time we&#39;re creating a <a class="xref" href="../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> via one of its static factory functions.
 Again, this target <a href="constructor-injection/index.html">is covered in more depth here</a>.</p>
 </div>
 <pre><code class="lang-csharp" name="TargetContainerExamples.cs">var targets = new TargetContainer();
@@ -173,68 +176,9 @@ Assert.IsType&lt;ConstructorTarget&gt;(target);
 // int is obviously not compatible with IMyService.
 Assert.Throws&lt;ArgumentException&gt;(
     () =&gt; targets.Register(Target.ForObject(50), typeof(IMyService)));
-</code></pre><h3 id="how-type-compatiblity-is-verified">How type compatiblity is verified</h3>
-<p>The type(s) against which you can register a target is dependant upon the <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target,
-but, instead of performing the compatibility checks itself, the target container uses the <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_">SupportsType</a> 
-method of the target being registered.</p>
-<p>Here&#39;s just a few example types and the types against which we could register them, given the correct <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> 
-implementation:</p>
-<table>
-<thead>
-<tr>
-<th>ITarget.DeclaredType</th>
-<th>Can be registered as</th>
-<th>With Targets</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>int</code></td>
-<td><code>object</code></td>
-<td>Any</td>
-</tr>
-<tr>
-<td><code>int</code></td>
-<td><code>int?</code></td>
-<td>Any</td>
-</tr>
-<tr>
-<td><code>int</code></td>
-<td><code>IFormattable</code></td>
-<td>Any</td>
-</tr>
-<tr>
-<td><code>string</code></td>
-<td><code>IEnumerable&lt;char&gt;</code></td>
-<td>Any</td>
-</tr>
-<tr>
-<td><code>MyService : IService</code></td>
-<td><code>IService</code></td>
-<td>Any</td>
-</tr>
-<tr>
-<td><code>MyService&lt;int&gt; : IService&lt;int&gt;</code></td>
-<td><code>IService&lt;int&gt;</code></td>
-<td>Any</td>
-</tr>
-<tr>
-<td><code>MyService&lt;T&gt;</code></td>
-<td><code>MyService&lt;T&gt;</code></td>
-<td><a class="xref" href="../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a></td>
-</tr>
-<tr>
-<td><code>MyService&lt;T&gt;</code></td>
-<td><code>MyService&lt;string&gt;</code></td>
-<td><a class="xref" href="../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a></td>
-</tr>
-<tr>
-<td><code>MyService&lt;T&gt; : IService&lt;OtherService, T&gt;</code></td>
-<td><code>IService&lt;OtherService, int&gt;</code></td>
-<td><a class="xref" href="../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a></td>
-</tr>
-</tbody>
-</table>
+</code></pre><hr>
+<div class="NOTE"><h5>Note</h5><p><strong>THE DOCUMENTATION AFTER THIS POINT IS PRIMARILY AIMED AT DEVELOPER WHO ARE LOOKING TO EXTEND REZOLVER</strong></p>
+</div>
 <h1 id="retrieving-registrations">Retrieving registrations</h1>
 <p>As illustrated by earlier examples, you can interrogate the registrations in an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> through two methods:</p>
 <ul>
@@ -243,7 +187,9 @@ implementation:</p>
 </ul>
 <p>These same methods are used by the standard container classes when determining how to resolve an instance (or instances) for
 a given type.</p>
-<div class="NOTE"><h5>Note</h5><p>There is currently no way to remove a registration from a <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<div class="NOTE"><h5>Note</h5><p>There is currently no way to remove a registration from a <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.  You can, however, create
+an <a class="xref" href="../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> to override the registrations of another, and pass <em>that</em> as the target
+container to a new <a class="xref" href="../api/Rezolver.Container.html">Container</a> or <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a>.</p>
 </div>
 <h1 id="target-types">Target types</h1>
 <p>The different ways in which Rezolver can create/obtain objects for your application, then, are pretty much all handled 

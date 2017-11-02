@@ -52,7 +52,7 @@ in order to construct the @Rezolver.ScopedContainer that will be used as the DI 
 The *simplest* way to do this is to add a single method (it can be empty) called `ConfigureContainer`, which 
 accepts a single parameter of the type <xref:Rezolver.IRootTargetContainer>.
 
-> [!INFO]
+> [!NOTE]
 > The @Rezolver.IRootTargetContainer interface was added in Rezolver 1.3.2 to accommodate covariance
 > and is now the interface used for 'top-level' target containers.  You can still declare your method
 > as `ConfigureContainer<ITargetContainer>` without losing any functionality - so projects which are

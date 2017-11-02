@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/create-and-use-a-container.html",
-          "hash": "KXy39eWOUSps5dGQN9jlXA=="
+          "hash": "D+poEoCqbCpYlHl3HfW3Ow=="
         }
       },
       "is_incremental": false,
@@ -234,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/index.html",
-          "hash": "g/5vaCwSMH416Pfp4dDfBQ=="
+          "hash": "VNAGkVR4/jKFtTkGNsWStQ=="
         }
       },
       "is_incremental": false,
@@ -246,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/lifetimes/container-scopes.html",
-          "hash": "VyzbkiUiaQZT0mmm6lIziA=="
+          "hash": "C1VojAHRuSsF5LUyytsE1Q=="
         }
       },
       "is_incremental": false,
@@ -342,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html",
-          "hash": "O/GB3KMO9JMWY/z4Edg3oQ=="
+          "hash": "dbKfaoayKIiQoL+GZpRJvA=="
         }
       },
       "is_incremental": false,
@@ -378,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/service-registration.html",
-          "hash": "vfhtpAOffwp7ikiDXCpuNA=="
+          "hash": "lZnURZwRbSHrr/HBtgl2lw=="
         }
       },
       "is_incremental": false,
@@ -390,7 +390,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/toc.html",
-          "hash": "3njYCXyJVXB4njqcnQojTQ=="
+          "hash": "U3j/EH6BA1IJk+/eJF2p1g=="
         }
       },
       "is_incremental": false,
@@ -402,7 +402,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/variance/contravariance.html",
-          "hash": "eT09y4V08qnlqJCmB1UaIA=="
+          "hash": "FU1s69TXzdQ2nEzSP/Ht5w=="
         }
       },
       "is_incremental": false,
@@ -426,7 +426,19 @@
       "output": {
         ".html": {
           "relative_path": "docs/variance/index.html",
-          "hash": "EMJSp6lwvWBtsc+rhFgXig=="
+          "hash": "Po+62UGDdBDX9cspg+aSew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/variance/mixed.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/variance/mixed.html",
+          "hash": "hhyXrBKS/I/YlZo9zPxiSw=="
         }
       },
       "is_incremental": false,
@@ -625,7 +637,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "l0jVvM2Tsgfuhal4N3/J/Q=="
+          "hash": "RiJkr8zB4/Z78PPMJEgesw=="
         }
       },
       "is_incremental": false,
@@ -2752,6 +2764,11 @@
         "incrementalPhase": "build"
       },
       "processors": {
+        "RestApiDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -2762,16 +2779,11 @@
           "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "RestApiDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor RestApiDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         }

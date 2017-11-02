@@ -7,10 +7,14 @@ It supports these transparently - i.e. you don't need to do anything special to 
 be disabled) except to request types which have type arguments specified for parameters declared as either
 `in` or `out` as per normal generic variance rules.
 
+Rezolver also supports any combination of variance for type parameters of variant types - i.e. a 
+[mixture of covariance and contravariance](mixed.md).
+
 Follow the links above or below to see examples of variance in action in Rezolver.
 
 - [Contravariance](contravariance.md)
 - [Covariance](covariance.md)
+- [Mixed Variance](mixed.md)
 
 > [!TIP]
 > If you don't know anything about generic variance in .Net then you should read through

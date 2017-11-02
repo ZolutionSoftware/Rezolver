@@ -289,18 +289,6 @@ to a `StringBuilder`:
 
 [!code-csharp[ContravarianceExamples.cs](../../../../../test/Rezolver.Tests.Examples/ContravarianceExamples.cs#example5)]
 
-> [!TIP]
-> `object` is always considered last in a contravariant search, after a type's other bases
-> or interfaces, because `object` is ubiquitous and technically applies to all instances.
-> 
-> Also, while bases are walked in order of inheritance, from least to most derived, the 
-> order that interfaces are considered is less well-defined.  Rezolver applies a trivial
-> sort on the list of interfaces of the type such that generic interfaces appear before 
-> non-generic interfaces; and any 'derived' interfaces before those that they 'inherit'.
-> 
-> Finally, for array types, the `Array` runtime type is also always considered after all other
-> applicable types - except `object`.
-
 ## Disabling Contravariance (Advanced)
 
 > [!WARNING]

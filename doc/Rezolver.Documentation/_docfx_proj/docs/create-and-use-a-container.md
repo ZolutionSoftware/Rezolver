@@ -16,6 +16,12 @@ two interfaces:
 
 ## @Rezolver.ITargetContainer
 
+> [!NOTE]
+> You'll notice that the constructors for the @Rezolver.Container and @Rezolver.ScopedContainer types (see next)
+> actually accept an instance of @Rezolver.IRootTargetContainer.  This is a new interface added in v1.3.2 which
+> marks a target container as a 'top-level' one - and supports functionality such as 
+> [covariance](variance/covariance.md).  `IRootTargetContainer` also implies the `ITargetContainer` interface.
+
 This interface describes a registry of @Rezolver.ITarget objects, keyed by type, describing the type of object 
 that is to be created (and how) when a given type is requested.
 
@@ -32,7 +38,7 @@ This is the interface through which we resolve objects.  The interface does not 
 mechanisms at all (even if the classes providing the 'standard' implementations all do) - only the ability
 to request objects from the container.
 
-This interface does not mandate that a container has an `ITargetContainer`, it's simply the case
+This interface does not mandate that a container has an `IRootTargetContainer`, it's simply the case
 that all the provided implementations which we will discuss in the rest of this documentation do
 use that interface as the source of their service registrations.
 
