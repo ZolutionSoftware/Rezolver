@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Rezolver.Targets
     /// <summary>
     /// A specialised target for creating instances of <see cref="IEnumerable{T}"/>
     /// </summary>
-    public class EnumerableTarget : TargetBase
+    public class EnumerableTarget : TargetBase, IEnumerable<ITarget>
     {
         /// <summary>
         /// Always returns a concrete version of the <see cref="IEnumerable{T}"/> interface type, with
@@ -51,6 +52,24 @@ namespace Rezolver.Targets
 
             if (!targets.All(t => t != null && t.SupportsType(elementType)))
                 throw new ArgumentException($"All targets must be non-null and support the type { elementType }", nameof(targets));
+        }
+
+        /// <summary>
+        /// Implementation of <see cref="IEnumerable{T}.GetEnumerator"/> (through the <see cref="Targets"/> property).
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator<ITarget> GetEnumerator()
+        {
+            return Targets.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Implementation of <see cref="IEnumerable.GetEnumerator"/>
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return Targets.GetEnumerator();
         }
     }
 }

@@ -18,6 +18,16 @@ namespace Rezolver
             private Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(ReferenceComparer<ITarget>.Instance);
             private int _counter = 0;
 
+            public TargetOrderTracker(IRootTargetContainer root)
+            {
+                root.TargetRegistered += Root_TargetRegistered1;
+            }
+
+            private void Root_TargetRegistered1(object sender, TargetRegisteredEventArgs e)
+            {
+                Track(e.Target);
+            }
+
             public int? GetOrder(ITarget target)
             {
                 if (_dictionary.TryGetValue(target, out var order))
@@ -38,13 +48,23 @@ namespace Rezolver
         public EnumerableTargetContainer(IRootTargetContainer root)
             : base(root, typeof(IEnumerable<>))
         {
-            _tracker = new TargetOrderTracker();
-            Root.TargetRegistered += Root_TargetRegistered;
+            _tracker = root.GetOption<TargetOrderTracker>();
+            if (_tracker == null)
+            {
+                // this is the first enumerable container in the root
+                // so create the tracker and register our own event handler
+                // for adding enumerable types.
+                root.SetOption(_tracker = new TargetOrderTracker(Root));
+                Root.TargetRegistered += Root_TargetRegistered;
+            }
         }
 
         private void Root_TargetRegistered(object sender, TargetRegisteredEventArgs e)
         {
-            _tracker.Track(e.Target);
+            // this container enables the production of IEnumerables of any type for which 
+            // targets are registered (and indeed empty enumerables for those which aren't).  
+            // So, every time a target is registered we make sure to its IEnumerable variant
+            // as a known type.
             Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
         }
 

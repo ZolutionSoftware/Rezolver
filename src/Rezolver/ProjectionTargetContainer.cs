@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Targets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,59 +12,77 @@ namespace Rezolver
     /// 
     /// Effectively, this daisy chains one enumerable into another via something
     /// similar to a Linq Select.
-    /// 
-    /// Note - the implementation requires that the target for the source enumerable is returned
-    /// from the <see cref="Root"/> as an <see cref="Targets.EnumerableTarget"/>.
     /// </summary>
-    public class ProjectionTargetContainer
+    public class ProjectionTargetContainer : ITargetContainer
     {
-        public ITargetContainer Inner { get; private set; }
         public IRootTargetContainer Root { get; }
+        public Type SourceElementType { get; }
+        public Type OutputElementType { get; }
+        private Func<IRootTargetContainer, ITarget, ITarget> ImplementationTargetFactory { get; }
+        //private Func<ITarget, Type> ImplementationTypeSelector { get; }
         public Type SourceEnumerableType { get; }
         public Type OutputEnumerableType { get; }
-        private Func<ITarget, ITarget> TargetProjection { get; }
-        public ProjectionTargetContainer(IRootTargetContainer root, Type sourceEnumerableType, Type outputEnumerableType, Func<ITarget, ITarget> targetProjection)
+
+        public ProjectionTargetContainer(
+            IRootTargetContainer root,
+            Type sourceElementType,
+            Type outputElementType,
+            Func<IRootTargetContainer, ITarget, ITarget> implementationTargetFactory)
+            : this(root, sourceElementType, outputElementType)
+        {
+            ImplementationTargetFactory = implementationTargetFactory ?? throw new ArgumentNullException(nameof(implementationTargetFactory));
+        }
+
+        private ProjectionTargetContainer(IRootTargetContainer root, Type sourceElementType, Type outputElementType)
         {
             Root = root;
-            SourceEnumerableType = sourceEnumerableType;
-            TargetProjection = targetProjection;
-        }
+            SourceElementType = sourceElementType;
+            OutputElementType = outputElementType;
+            SourceEnumerableType = typeof(IEnumerable<>).MakeGenericType(sourceElementType);
+            OutputEnumerableType = typeof(IEnumerable<>).MakeGenericType(outputElementType);
 
-        private ITargetContainer EnsureInner()
-        {
-
-        }
-
-        public ITargetContainer CombineWith(ITargetContainer existing, Type type)
-        {
-            if (Inner != null)
-                throw new InvalidOperationException("Projection already has an inner target container");
-            Inner = existing;
+            Root.AddKnownType(OutputEnumerableType);
         }
 
         public ITarget Fetch(Type type)
         {
-            return Inner.Fetch(type);
-        }
+            if (!TypeHelpers.IsGenericType(type))
+                throw new ArgumentException("Only IEnumerable<T> is supported by this container", nameof(type));
+            Type genericType = type.GetGenericTypeDefinition();
+            if (genericType != typeof(IEnumerable<>))
+                throw new ArgumentException("Only IEnumerable<T> is supported by this container", nameof(type));
 
-        public IEnumerable<ITarget> FetchAll(Type type)
-        {
-            return Inner.FetchAll(type);
-        }
+            var input = Root.Fetch(SourceEnumerableType);
 
-        public ITargetContainer FetchContainer(Type type)
-        {
-            return Inner.FetchContainer(type);
+            if (!(input is IEnumerable<ITarget> targets))
+                throw new InvalidOperationException($"Projection of { OutputEnumerableType } requires { SourceEnumerableType } to result in an IEnumerable<ITarget> result from the root target container.  Cannot build projection.");
+
+            return new EnumerableTarget(targets.Select(t => new ProjectionTarget(t, ImplementationTargetFactory(Root, t), SourceElementType)), OutputElementType);
         }
 
         public void Register(ITarget target, Type serviceType = null)
         {
-            Inner.Register(target, serviceType);
+            throw new NotSupportedException();
+        }
+
+        public IEnumerable<ITarget> FetchAll(Type type)
+        {
+            return new[] { Fetch(type) };
+        }
+
+        public ITargetContainer CombineWith(ITargetContainer existing, Type type)
+        {
+            throw new NotSupportedException();
+        }
+
+        public ITargetContainer FetchContainer(Type type)
+        {
+            throw new NotSupportedException();
         }
 
         public void RegisterContainer(Type type, ITargetContainer container)
         {
-            Inner.RegisterContainer(type, container);
+            throw new NotSupportedException();
         }
     }
 }
