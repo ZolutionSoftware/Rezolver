@@ -73,7 +73,7 @@ namespace Rezolver.Compilation.Expressions
                 MethodCallExtractor.ExtractCalledMethod(
                     (IContainerScope s) => s.Resolve(
                         (IResolveContext)null,
-                        (ITarget)null,
+                        Guid.Empty,
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
@@ -83,7 +83,7 @@ namespace Rezolver.Compilation.Expressions
             /// </summary>
             public static MethodInfo ResolveContextExtensions_Resolve_Method =>
                 MethodCallExtractor.ExtractCalledMethod(
-                    (IResolveContext rc) => rc.Resolve((ITarget)null,
+                    (IResolveContext rc) => rc.Resolve(Guid.Empty,
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
@@ -266,6 +266,8 @@ namespace Rezolver.Compilation.Expressions
                                 context.ContextScopePropertyExpression)
                     );
 
+            var @override = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType) ;
+
             builtExpression = Expression.Condition(
                 compareExpr,
                 builtExpression, //if null scope, just use the built expression as-is
@@ -273,7 +275,7 @@ namespace Rezolver.Compilation.Expressions
                     Expression.Call(
                         Methods.ResolveContextExtensions_Resolve_Method,
                         newContextExpr,
-                        Expression.Constant(target),
+                        Expression.Constant(@override ?? target.Id),
                         Expression.Constant(lambda),
                         Expression.Constant(scopeBehaviour)
                     ),

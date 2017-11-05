@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Rezolver.Runtime;
 using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,8 @@ namespace Rezolver.Compilation.Expressions
         protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
-
-            return Expression.Constant(holder.GetObject(context, target,
+            var keyTarget = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+            return Expression.Constant(holder.GetObject(context, keyTarget ?? target.Id,
                 c => compiler.CompileTarget(
                     target.InnerTarget,
                     c.NewContext(

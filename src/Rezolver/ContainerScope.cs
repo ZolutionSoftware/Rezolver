@@ -207,24 +207,26 @@ namespace Rezolver
 			}
 		}
 
-		object IContainerScope.Resolve(IResolveContext context, ITarget target, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
+		object IContainerScope.Resolve(IResolveContext context, Guid targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
 		{
 			if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 
 			if (behaviour == ScopeBehaviour.Explicit)
 			{
                 // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
-                if (_explicitlyScopedObjects.TryGetValue(new TypeAndTargetId(context.RequestedType, target.Id), out Lazy<ScopedObject> lazy))
+                if (_explicitlyScopedObjects.TryGetValue(new TypeAndTargetId(context.RequestedType, targetId), out Lazy<ScopedObject> lazy))
                     return lazy.Value.Object;
 
                 //use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
-                return _explicitlyScopedObjects.GetOrAdd(new TypeAndTargetId(context.RequestedType, target.Id), k => new Lazy<ScopedObject>(() => new ScopedObject(factory(context)))).Value.Object;
+                return _explicitlyScopedObjects.GetOrAdd(new TypeAndTargetId(context.RequestedType, targetId), 
+                    k => new Lazy<ScopedObject>(() => new ScopedObject(factory(context)))).Value.Object;
 			}
 			else if (behaviour == ScopeBehaviour.Implicit)
 			{
 				var result = factory(context);
                 // don't *ever* track scopes as disposable objects 
-				if (result is IDisposable && !(result is IContainerScope)) _implicitlyScopedObjects.Add(new ScopedObject(result));
+				if (result is IDisposable && !(result is IContainerScope))
+                    _implicitlyScopedObjects.Add(new ScopedObject(result));
 				return result;
 			}
 			return factory(context);
@@ -232,7 +234,8 @@ namespace Rezolver
 
 		object IServiceProvider.GetService(Type serviceType)
 		{
-            if (Disposed) throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
+            if (Disposed)
+                throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
 
 			Container.TryResolve(new ResolveContext(this, serviceType), out object toReturn);
 			return toReturn;

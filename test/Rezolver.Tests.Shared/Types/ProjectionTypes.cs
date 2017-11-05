@@ -15,17 +15,33 @@ namespace Rezolver.Tests.Types
 
     public class From2 : From { }
 
-    public interface ITo { }
+    public interface ITo {
+        From From { get; }
+    }
 
-    public interface ITo<out TFrom> : ITo { }
+    public interface ITo<out TFrom> : ITo
+        where TFrom : From
+    {
+        new TFrom From { get; }
+    }
 
     public class To : ITo
     {
+        public From From { get; }
 
+        public To(From from)
+        {
+            From = from;
+        }
     }
 
     public class To<TFrom> : To, ITo<TFrom>
+        where TFrom : From
     {
-
+        public new TFrom From { get => (TFrom)base.From; }
+        public To(TFrom from)
+            : base(from)
+        {
+        }
     }
 }

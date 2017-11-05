@@ -39,6 +39,7 @@ namespace Rezolver.Compilation.Expressions
 			//pattern over the common decorated type, then the decorated instance should be resolved when constructor
 			//arguments are resolved.
 			newContext.Register(target.DecoratedTarget, target.DecoratedType);
+            // TODO: Do the same target anchoring that SingletonTargetBuilder is doing.
 			return compiler.Build(target.InnerTarget, newContext);
 		}
 	}

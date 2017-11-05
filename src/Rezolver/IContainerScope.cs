@@ -85,14 +85,14 @@ namespace Rezolver
 		/// </summary>
 		/// <param name="context">The resolve context - please note that the container
 		/// that's present on this is the actual container that should be used to resolve objects.</param>
-        /// <param name="target">The registered target from which the object is built.</param>
+        /// <param name="targetId">Id of the target that 'sources' this object; used to mark the object in the scope.</param>
 		/// <param name="factory">The factory to be executed</param>
 		/// <param name="behaviour">The scope behaviour that the factory should be executed with.</param>
 		/// <remarks>This function is the primary workhorse of all scopes and is primarily an infrastructure
         /// method supporting targets and compiled targets - i.e. not a method that an application should
         /// be calling.
         /// </remarks>
-		object Resolve(IResolveContext context, ITarget target, Func<IResolveContext, object> factory, ScopeBehaviour behaviour);
+		object Resolve(IResolveContext context, Guid targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour);
 		//REVIEW: The enum solution for this method works fine for now, but offers no scope for extending it outside of the Rezolver codebase.
 		//The more extensible solution would be to have an interface which represents the behaviour so that the logic for that behaviour can be abstracted away
 		//The difficulty with this being that it means the underlying storage containers for scoped objects used by the scope needs to exposed to implementations

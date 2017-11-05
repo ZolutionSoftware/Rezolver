@@ -21,7 +21,7 @@ namespace Rezolver.Tests
             using (var scope = new ContainerScope(new Container()))
             {
                 disposable = scope.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(scope, typeof(Disposable)),
                     c => new Disposable(),
                     ScopeBehaviour.Implicit);
@@ -39,7 +39,7 @@ namespace Rezolver.Tests
             using (var scope = new ContainerScope(new Container()))
             {
                 disposable = scope.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(scope, typeof(Disposable)),
                     c => new Disposable(),
                     ScopeBehaviour.Explicit);
@@ -60,7 +60,7 @@ namespace Rezolver.Tests
                 using (var childScope = scope.CreateScope())
                 {
                     inner1 = childScope.Resolve<Disposable>(
-                        new TestTarget(),
+                        new TestTarget().Id,
                         new ResolveContext(childScope, typeof(Disposable)),
                         factory,
                         ScopeBehaviour.Implicit);
@@ -72,7 +72,7 @@ namespace Rezolver.Tests
                 using (var childScope = scope.CreateScope())
                 {
                     inner2 = childScope.Resolve<Disposable>(
-                        new TestTarget(),
+                        new TestTarget().Id,
                         new ResolveContext(childScope, typeof(Disposable)),
                         factory,
                         ScopeBehaviour.Implicit);
@@ -92,7 +92,7 @@ namespace Rezolver.Tests
                 Func<IResolveContext, object> factory = c => new NoCtor();
                 var target = new TestTarget();
                 var result = scope.Resolve<NoCtor>(
-                    target,
+                    target.Id,
                     new ResolveContext(scope, typeof(NoCtor)),
                     factory,
                     ScopeBehaviour.Explicit);
@@ -100,7 +100,7 @@ namespace Rezolver.Tests
                 Assert.NotNull(result);
 
                 var result2 = scope.Resolve<NoCtor>(
-                    target,
+                    target.Id,
                     new ResolveContext(scope, typeof(NoCtor)),
                     factory,
                     ScopeBehaviour.Explicit);
@@ -117,7 +117,7 @@ namespace Rezolver.Tests
                 Func<IResolveContext, object> factory = c => new NoCtor();
 
                 var result = scope.Resolve<NoCtor>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(scope, typeof(NoCtor)),
                     factory,
                     ScopeBehaviour.Explicit);
@@ -127,7 +127,7 @@ namespace Rezolver.Tests
                 using (var childScope = scope.CreateScope())
                 {
                     var result2 = childScope.Resolve<NoCtor>(
-                        new TestTarget(),
+                        new TestTarget().Id,
                         new ResolveContext(childScope, typeof(NoCtor)),
                         factory,
                         ScopeBehaviour.Explicit);
@@ -145,13 +145,13 @@ namespace Rezolver.Tests
             {
                 Func<IResolveContext, object> factory = c => new Disposable();
                 explicitlyScoped = scope.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(scope, typeof(Disposable)),
                     factory,
                     ScopeBehaviour.Explicit);
 
                 implicitlyScoped = scope.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(scope, typeof(Disposable)),
                     factory,
                     ScopeBehaviour.Implicit);
@@ -175,25 +175,25 @@ namespace Rezolver.Tests
                 var sibling = parent.CreateScope();
 
                 parentObj = parent.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(parent, typeof(Disposable)),
                     factory,
                     ScopeBehaviour.Implicit);
 
                 childObj = child.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(child, typeof(Disposable)),
                     factory,
                     ScopeBehaviour.Implicit);
 
                 grandChildObj = grandChild.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(grandChild, typeof(Disposable)),
                     factory,
                     ScopeBehaviour.Implicit);
 
                 siblingObj = sibling.Resolve<Disposable>(
-                    new TestTarget(),
+                    new TestTarget().Id,
                     new ResolveContext(sibling, typeof(Disposable)),
                     factory,
                     ScopeBehaviour.Implicit);

@@ -23,8 +23,8 @@ namespace Rezolver
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
-            if (!(obj is TypeAndTargetId)) return false;
-            return Equals((TypeAndTargetId)obj);
+            if (!(obj is TypeAndTargetId ttObj)) return false;
+            return Equals(ttObj);
         }
         public bool Equals(TypeAndTargetId other)
         {
