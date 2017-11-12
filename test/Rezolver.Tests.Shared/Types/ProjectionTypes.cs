@@ -44,4 +44,20 @@ namespace Rezolver.Tests.Types
         {
         }
     }
+
+    public class ToDecorator<TFrom> : ITo<TFrom>
+        where TFrom : From
+    {
+
+        public ToDecorator(ITo<TFrom> inner)
+        {
+            Inner = inner;
+        }
+
+        public ITo<TFrom> Inner { get; }
+
+        public TFrom From => Inner.From;
+
+        From ITo.From => From;
+    }
 }

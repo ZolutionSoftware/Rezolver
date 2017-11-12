@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Collections;
 
 namespace Rezolver
 {
@@ -65,10 +66,19 @@ namespace Rezolver
 		/// <param name="target">The target whose value will be written to the member.</param>
 		public MemberBinding(MemberInfo member, ITarget target)
 		{
-			member.MustNotBeNull(nameof(member));
-			target.MustNotBeNull(nameof(target));
-			Member = member;
-			Target = target;
+			Member = member ?? throw new ArgumentNullException(nameof(member));
+            Target = target ?? throw new ArgumentNullException(nameof(target));
 		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="resolveType"></param>
+        public MemberBinding(MemberInfo member, Type resolveType = null)
+        {
+            Member = member ?? throw new ArgumentNullException(nameof(member));
+            Target = Rezolver.Target.Resolved(resolveType ?? MemberType);
+        }
 	}
 }

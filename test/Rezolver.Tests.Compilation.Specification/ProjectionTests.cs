@@ -142,11 +142,11 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterProjection<From, ITo>();
 
             // Act
-            using(var scope = container.CreateScope())
+            using (var scope = container.CreateScope())
             {
                 var result = scope.ResolveMany<ITo>();
 
-            // Assert
+                // Assert
                 List<ITo> firstResults = new List<ITo>();
                 Assert.All(result, r =>
                 {
@@ -157,6 +157,39 @@ namespace Rezolver.Tests.Compilation.Specification
 
                 Assert.All(result, r => Assert.Contains(r, firstResults));
             }
+        }
+
+        [Fact]
+        public void Projection_ShouldProject_WithDecoratedRegistration()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            var container = CreateContainer(targets);
+
+            targets.RegisterType<From1>();
+            targets.RegisterType<From2>();
+            targets.RegisterType(typeof(To<>), typeof(ITo<>));
+            targets.RegisterDecorator(typeof(ToDecorator<>), typeof(ITo<>));
+            targets.RegisterProjection(typeof(From), typeof(ITo), (r, t) => typeof(ITo<>).MakeGenericType(t.DeclaredType));
+
+            // Act
+            var result = container.ResolveMany<ITo>();
+
+            // Assert
+            Assert.Collection(result,
+                new Action<ITo>[]
+                {
+                    r =>
+                    {
+                        var decorator = Assert.IsType<ToDecorator<From1>>(r);
+                        Assert.IsType<To<From1>>(decorator.Inner);
+                    },
+                    r =>
+                    {
+                        var decorator = Assert.IsType<ToDecorator<From2>>(r);
+                        Assert.IsType<To<From2>>(decorator.Inner);
+                    }
+                });
         }
     }
 }

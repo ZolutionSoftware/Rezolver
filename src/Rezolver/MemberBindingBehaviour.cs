@@ -16,7 +16,8 @@ namespace Rezolver
     public static class MemberBindingBehaviour
     {
         /// <summary>
-        /// A behaviour that binds all publicly writeable properties and fields on an object after construction.
+        /// A behaviour that binds all publicly writeable properties and fields on an object after construction,
+        /// include all read-only properties which can be initialised as collections via a public Add method.
         /// </summary>
         /// <remarks>The implementation is an instance of the <see cref="BindAllMembersBehaviour"/></remarks>
         public static IMemberBindingBehaviour BindAll { get; } = new BindAllMembersBehaviour();
@@ -30,7 +31,8 @@ namespace Rezolver
         public static IMemberBindingBehaviour BindNone { get; } = new BindNoMembersBehaviour();
 
         /// <summary>
-        /// A behaviour which binds only publicly writeable properties on an object after construction.
+        /// A behaviour which binds only publicly writeable properties, and read-only collection properties, 
+        /// on an object after construction.
         /// </summary>
         public static IMemberBindingBehaviour BindProperties { get; } = new BindPublicPropertiesBehaviour();
 

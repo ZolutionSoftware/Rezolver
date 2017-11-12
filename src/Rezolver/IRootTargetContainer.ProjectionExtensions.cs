@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +56,7 @@ namespace Rezolver
                     throw new InvalidOperationException($"Implementation type returned for projection from { fromType } to { toType } for target { t } returned null");
                 // REVIEW: Cache the .ForType result on a per-type basis? It's container-agnostic.
                 var target = r.Fetch(implementationType);
-                return target != null && !target.UseFallback ? target : Target.ForType(implementationType);
+                return new TargetProjection(target != null && !target.UseFallback ? target : Target.ForType(implementationType), implementationType);
             });
         }
 
@@ -74,9 +75,17 @@ namespace Rezolver
 
         private static void RegisterProjectionInternal(this IRootTargetContainer targets, Type fromType, Type toType, Func<IRootTargetContainer, ITarget, ITarget> implementationTargetFactory)
         {
-            targets.RegisterContainer(
-                typeof(IEnumerable<>).MakeGenericType(toType),
-                new ProjectionTargetContainer(targets, fromType, toType, implementationTargetFactory));
+            RegisterProjectionInternal(targets, fromType, toType, (r, t) =>
+                {
+                    var target = implementationTargetFactory(r, t);
+                    return new TargetProjection(target, target.DeclaredType);
+                });
+        }
+
+        private static void RegisterProjectionInternal(this IRootTargetContainer targets, Type fromType, Type toType, Func<IRootTargetContainer, ITarget, TargetProjection> projectionFactory)
+        {
+            targets.RegisterContainer(typeof(IEnumerable<>).MakeGenericType(toType),
+                new ProjectionTargetContainer(targets, fromType, toType, projectionFactory));
         }
     }
 }

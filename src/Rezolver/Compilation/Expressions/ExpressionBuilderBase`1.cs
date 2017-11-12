@@ -40,7 +40,6 @@ namespace Rezolver.Compilation.Expressions
 	/// of this class without exposing the behaviour to external callers yourself is via the interface.
 	/// </remarks>
 	public abstract class ExpressionBuilderBase<TTarget> : ExpressionBuilderBase, IExpressionBuilder<TTarget>
-		//where TTarget : ITarget
 	{
 		/// <summary>
 		/// Overrides the abstract <see cref="ExpressionBuilderBase.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)" /> (and seals it from

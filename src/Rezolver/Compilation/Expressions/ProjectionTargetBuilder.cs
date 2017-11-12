@@ -14,8 +14,8 @@ namespace Rezolver.Compilation.Expressions
         protected override Expression Build(ProjectionTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             // functionally the same as the DecoratorTargetBuilder
-            var newContext = context.NewContext();
-            newContext.Register(target.InputTarget, target.ProjectedType ?? target.InputTarget.DeclaredType);
+            var newContext = context.NewContext(target.ImplementationType);
+            newContext.Register(target.InputTarget, target.InputType ?? target.InputTarget.DeclaredType);
 
             // projection target acts as an anchor for the target it wraps - this allows a single registered
             // target which is either a singleton or scoped to be reused for multiple input targets.

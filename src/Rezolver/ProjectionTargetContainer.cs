@@ -1,4 +1,5 @@
-﻿using Rezolver.Targets;
+﻿using Rezolver.Runtime;
+using Rezolver.Targets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -19,20 +20,21 @@ namespace Rezolver
         public IRootTargetContainer Root { get; }
         public Type SourceElementType { get; }
         public Type OutputElementType { get; }
-        private Func<IRootTargetContainer, ITarget, ITarget> ImplementationTargetFactory { get; }
+        private Func<IRootTargetContainer, ITarget, TargetProjection> TargetProjectionFactory { get; }
         public Type SourceEnumerableType { get; }
         public Type OutputEnumerableType { get; }
 
         private readonly ConcurrentDictionary<Type, EnumerableTarget> _cache = new ConcurrentDictionary<Type, EnumerableTarget>();
 
-        public ProjectionTargetContainer(
+
+        internal ProjectionTargetContainer(
             IRootTargetContainer root,
             Type sourceElementType,
             Type outputElementType,
-            Func<IRootTargetContainer, ITarget, ITarget> implementationTargetFactory)
+            Func<IRootTargetContainer, ITarget, TargetProjection> targetProjectionFactory)
             : this(root, sourceElementType, outputElementType)
         {
-            ImplementationTargetFactory = implementationTargetFactory ?? throw new ArgumentNullException(nameof(implementationTargetFactory));
+            TargetProjectionFactory = targetProjectionFactory ?? throw new ArgumentNullException(nameof(targetProjectionFactory));
         }
 
         private ProjectionTargetContainer(IRootTargetContainer root, Type sourceElementType, Type outputElementType)
@@ -46,15 +48,18 @@ namespace Rezolver
             Root.AddKnownType(OutputEnumerableType);
         }
 
+        /// <summary>
+        /// Implementation of <see cref="ITargetContainer.Fetch(Type)"/> - always produces an <see cref="EnumerableTarget"/>
+        /// which, when compiled, will produce an enumerable of <see cref="OutputEnumerableType"/>.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public ITarget Fetch(Type type)
         {
             return _cache.GetOrAdd(type, t =>
             {
-                if (!TypeHelpers.IsGenericType(type))
-                    throw new ArgumentException("Only IEnumerable<T> is supported by this container", nameof(type));
-                Type genericType = type.GetGenericTypeDefinition();
-                if (genericType != typeof(IEnumerable<>))
-                    throw new ArgumentException("Only IEnumerable<T> is supported by this container", nameof(type));
+                if (type != OutputEnumerableType)
+                    throw new ArgumentException($"This projection container only supports the type { OutputEnumerableType }", nameof(type));
 
                 var input = Root.Fetch(SourceEnumerableType);
 
@@ -62,11 +67,12 @@ namespace Rezolver
                     throw new InvalidOperationException($"Projection of { OutputEnumerableType } requires { SourceEnumerableType } to result in an IEnumerable<ITarget> result from the root target container.  Cannot build projection.");
 
                 return new EnumerableTarget(
-                    targets.Select(tgt => new ProjectionTarget(
-                        tgt, 
-                        ImplementationTargetFactory(Root, tgt), 
+                    targets.Select(tgt => new { input = tgt, projection = TargetProjectionFactory(Root, tgt) })
+                    .Select(tp => new ProjectionTarget(
+                        tp.input, 
                         SourceElementType, 
-                        OutputElementType)), 
+                        OutputElementType,
+                        tp.projection)), 
                     OutputElementType);
             });
         }
@@ -78,7 +84,7 @@ namespace Rezolver
         /// <param name="serviceType"></param>
         public void Register(ITarget target, Type serviceType = null)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("A projection cannot be overriden");
         }
 
         /// <summary>
@@ -119,7 +125,7 @@ namespace Rezolver
         /// <param name="container"></param>
         public void RegisterContainer(Type type, ITargetContainer container)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("A projection cannot register other containers");
         }
     }
 }

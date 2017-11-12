@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -22,6 +23,23 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeExtensions
 	{
+        internal class BindableCollectionType
+        {
+            public Type Type { get; }
+            public MethodInfo AddMethod { get; }
+            public Type ElementType { get; }
+
+            public BindableCollectionType(Type type, MethodInfo addMethod, Type elementType)
+            {
+                Type = type;
+                AddMethod = addMethod;
+                ElementType = elementType;
+            }
+        }
+
+        private static readonly ConcurrentDictionary<Type, BindableCollectionType> _collectionTypeCache 
+            = new ConcurrentDictionary<Type, BindableCollectionType>();
+
         internal static IEnumerable<Type> GetAllBases(this Type type)
         {
             var baseType = TypeHelpers.BaseType(type);
@@ -40,6 +58,43 @@ namespace Rezolver
         private static Type MakeArrayType(Type elementType, int rank)
         {
             return TypeHelpers.MakeArrayType(elementType, rank);
+        }
+
+        /// <summary>
+        /// Returns a non-null result if the <paramref name="type"/> supports IEnumerable&lt;T&gt;
+        /// and has a public Add method which returns void and which takes a single parameter of
+        /// the type equal to the IEnumerable element type.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        internal static bool IsBindableCollectionType(this Type type)
+        {
+            return GetBindableCollectionTypeInfo(type) != null;
+        }
+
+        internal static BindableCollectionType GetBindableCollectionTypeInfo(this Type type)
+        {
+            return _collectionTypeCache.GetOrAdd(type, t => {
+                Type enumElemType;
+                MethodInfo addMethod;
+                var allAddMethods = t.GetRuntimeMethods()
+                    .Where(mi => mi.IsPublic && mi.Name == "Add" && mi.ReturnType == typeof(void))
+                    .Select(mi => new { Method = mi, Parameters = mi.GetParameters() });
+
+                foreach (var i in TypeHelpers.GetInterfaces(t)
+                    .Where(iface => TypeHelpers.IsGenericType(iface) && iface.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
+                {
+                    enumElemType = TypeHelpers.GetGenericArguments(i)[0];
+                    addMethod = allAddMethods.Where(
+                        m => (m.Parameters?.Length ?? 0) == 1 && m.Parameters[0].ParameterType == enumElemType)
+                        .Select(m => m.Method)
+                        .SingleOrDefault();
+
+                    if (addMethod != null)
+                        return new BindableCollectionType(t, addMethod, enumElemType);
+                }
+                return null;
+            });
         }
 
         /// <summary>
