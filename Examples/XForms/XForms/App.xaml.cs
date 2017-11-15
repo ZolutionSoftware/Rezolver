@@ -59,19 +59,19 @@ namespace XForms
                 Targets.RegisterType<ItemsPage>();
                 Targets.RegisterType<AboutPage>();
 
-                Targets.RegisterObject<Action<NavifItemsPage>>(p =>
+                Targets.RegisterObject<Action<NavigationPage<ItemsPage>>>(p =>
                 {
                     p.Title = "Browse";
                     p.Icon = Device.OnPlatform("tab_feed.png", null, null);
                 });
 
-                Targets.RegisterObject<Action<AboutPage>>(p =>
+                Targets.RegisterObject<Action<NavigationPage<AboutPage>>>(p =>
                 {
                     p.Title = "About";
                     p.Icon = Device.OnPlatform("tab_about.png", null, null);
                 });
-
-                Targets.RegisterProjection<Page, PageBuilder>((r, t) => typeof(PageBuilder<>).MakeGenericType(t.DeclaredType));
+                Targets.RegisterType(typeof(PageBuilder<>));
+                Targets.RegisterProjection<Page, NavigationPage>((r, t) => typeof(NavigationPage<>).MakeGenericType(t.DeclaredType));
 
                 Container = new Container(Targets, ContainerConfig);
             }

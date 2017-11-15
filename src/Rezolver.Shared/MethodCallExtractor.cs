@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -65,7 +66,13 @@ namespace Rezolver
 
         public static MemberInfo ExtractMemberAccess<TInstance, TMember>(Expression<Func<TInstance, TMember>> expr)
         {
-            return new MethodCallExtractor(expr).Member;
+            var extractor = new MethodCallExtractor(expr);
+            if(extractor.Member != null)
+            {
+                if (expr.Body == extractor.MemberExpression && extractor.MemberExpression.Expression == expr.Parameters[0])
+                    return extractor.Member;
+            }
+            return null;
         }
 
         /// <summary>
