@@ -11,53 +11,60 @@ using static Rezolver.TypeExtensions;
 
 namespace Rezolver.Tests.Compilation.Specification
 {
-    public interface IBuilder<T>
-    {
-        T Build();
-    }
-
-    public interface IMemberBindingsBuilder<TInstance> : IBuilder<IMemberBindingBehaviour>
+    public interface IMemberBindingsBuilder<TInstance>
     {
         MemberBindingBuilder<TInstance, TMember> Bind<TMember>(Expression<Func<TInstance, TMember>> memberBindingExpression);
+        IMemberBindingBehaviour Build();
     }
 
-    public class MemberBindingBuilder<TInstance, TMember> : IBuilder<MemberBinding>, IBuilder<IMemberBindingBehaviour>
+    internal interface IMemberBindingBuilder
     {
-        private static readonly BindableCollectionType BindableCollectionType = typeof(TMember).GetBindableCollectionTypeInfo();
+        MemberInfo Member { get; }
+        MemberBinding Build();
+    }
 
-        private readonly System.Reflection.MemberInfo _member;
-        private readonly MemberBindingsBuilder<TInstance> _parent;
-        private Func<MemberBinding> _bindingFactory;
+    public class MemberBindingBuilder<TInstance, TMember> : IMemberBindingBuilder
+    {
+        private static readonly BindableCollectionType CollectionTypeInfo = typeof(TMember).GetBindableCollectionTypeInfo();
+        private Func<MemberBinding> BindingFactory;
 
-        internal MemberBindingBuilder(MemberInfo member, MemberBindingsBuilder<TInstance> parent)
+        public MemberInfo Member { get; private set; }
+        public IMemberBindingsBuilder<TInstance> Parent { get; private set; }
+
+        internal MemberBindingBuilder(MemberInfo member, IMemberBindingsBuilder<TInstance> parent)
         {
-            _member = member;
-            _parent = parent;
+            Parent = parent;
+            Member = member;
         }
 
-        public IMemberBindingsBuilder<TInstance> SetFactory(Func<MemberBinding> factory)
+        internal IMemberBindingsBuilder<TInstance> SetFactory(Func<MemberBinding> factory)
         {
-            if (_bindingFactory != null)
+            if (BindingFactory != null)
                 throw new InvalidOperationException("Binding factory has already been set");
 
-            _bindingFactory = factory;
-            return _parent;
+            BindingFactory = factory;
+            return Parent;
+        }
+
+        MemberBinding IMemberBindingBuilder.Build()
+        {
+            return BindingFactory?.Invoke() ?? new MemberBinding(Member);
         }
 
         public IMemberBindingsBuilder<TInstance> ToType<TTarget>()
             where TTarget : TMember
         {
-            return SetFactory(() => new MemberBinding(_member, typeof(TTarget)));
+            return SetFactory(() => new MemberBinding(Member, typeof(TTarget)));
         }
 
         public IMemberBindingsBuilder<TInstance> ToType(Type type)
         {
-            return SetFactory(() => new MemberBinding(_member, type));
+            return SetFactory(() => new MemberBinding(Member, type));
         }
 
         public IMemberBindingsBuilder<TInstance> ToTarget(ITarget target)
         {
-            return SetFactory(() => new MemberBinding(_member, target));
+            return SetFactory(() => new MemberBinding(Member, target));
         }
 
         public IMemberBindingsBuilder<TInstance> AsCollection()
@@ -80,46 +87,52 @@ namespace Rezolver.Tests.Compilation.Specification
 
         private void ValidateCollectionType()
         {
-            if (BindableCollectionType == null)
+            if (CollectionTypeInfo == null)
                 throw new InvalidOperationException($"The type { typeof(TMember) } is not a type suitable for collection initialisation.");
         }
 
         private IMemberBindingsBuilder<TInstance> AsCollectionInternal(Type elementType)
-            => AsCollectionInternal(Target.Resolved(typeof(IEnumerable<>).MakeGenericType(elementType ?? BindableCollectionType.ElementType)));
+            => AsCollectionInternal(Target.Resolved(typeof(IEnumerable<>).MakeGenericType(elementType ?? CollectionTypeInfo.ElementType)));
 
         private IMemberBindingsBuilder<TInstance> AsCollectionInternal(ITarget target)
-            => SetFactory(() => new ListMemberBinding(_member, target, BindableCollectionType.ElementType, BindableCollectionType.AddMethod));
+            => SetFactory(() => new ListMemberBinding(Member, target, CollectionTypeInfo.ElementType, CollectionTypeInfo.AddMethod));
 
         public MemberBindingBuilder<TInstance, TNextMember> Bind<TNextMember>(Expression<Func<TInstance, TNextMember>> memberBindingExpression)
-            => _parent.Bind(memberBindingExpression ?? throw new ArgumentNullException(nameof(memberBindingExpression)));
-
-        IMemberBindingBehaviour IBuilder<IMemberBindingBehaviour>.Build() => _parent.Build();
-
-        MemberBinding IBuilder<MemberBinding>.Build() => _bindingFactory?.Invoke() ?? new MemberBinding(_member);
+            => Parent.Bind(memberBindingExpression ?? throw new ArgumentNullException(nameof(memberBindingExpression)));
     }
 
     public class MemberBindingsBuilder<TInstance> : IMemberBindingsBuilder<TInstance>
     {
-        private Dictionary<MemberInfo, IBuilder<MemberBinding>> _bindingBuilders;
+        private readonly Dictionary<MemberInfo, IMemberBindingBuilder> _bindingBuilders = new Dictionary<MemberInfo, IMemberBindingBuilder>();
 
-        public MemberBindingsBuilder()
+        private void AddBinding(IMemberBindingBuilder builder)
         {
-            _bindingBuilders = new Dictionary<MemberInfo, IBuilder<MemberBinding>>();
+            if (_bindingBuilders.ContainsKey(builder.Member))
+                throw new ArgumentException($"Member { builder.Member.Name } has already been bound", nameof(builder));
+            _bindingBuilders[builder.Member] = builder;
         }
+
+        public IMemberBindingBehaviour Build() => new BindSpecificMembersBehaviour(_bindingBuilders.Values.Select(b => b.Build()));
 
         public MemberBindingBuilder<TInstance, TMember> Bind<TMember>(Expression<Func<TInstance, TMember>> memberBindingExpression)
         {
             var member = MethodCallExtractor.ExtractMemberAccess(memberBindingExpression);
             if (member == null)
                 throw new ArgumentException($"The expression {{{ memberBindingExpression }}} must have a member access expression as its body, and it must be a member belonging to the type { typeof(TInstance) }", nameof(memberBindingExpression));
-            if (_bindingBuilders.ContainsKey(member))
-                throw new ArgumentException($"The member represented by the expression {{{ memberBindingExpression }}} has already been bound", nameof(memberBindingExpression));
-            var toReturn = new MemberBindingBuilder<TInstance, TMember>(member, this);
-            _bindingBuilders[member] = toReturn;
-            return toReturn; ;
-        }
 
-        public IMemberBindingBehaviour Build() => new BindSpecificMembersBehaviour(_bindingBuilders.Values.Select(b => b.Build()));
+            var toAdd = new MemberBindingBuilder<TInstance, TMember>(member, this);
+
+            try
+            {
+                AddBinding(toAdd);
+            }
+            catch(ArgumentException aex)
+            {
+                throw new ArgumentException($"The member '{ member }', represented by the expression {{{ memberBindingExpression }}} has already been bound", nameof(memberBindingExpression), aex);
+            }
+
+            return toAdd;
+        }
     }
     public static class ExtraRegistrationExtensions
     {
@@ -134,41 +147,81 @@ namespace Rezolver.Tests.Compilation.Specification
     public partial class CompilerTestsBase
     {
         [Fact]
-        public void Constructor_ShouldAutoBindCollectionMember()
+        public void Members_ShouldBindAll()
         {
             // Arrange
             var targets = CreateTargetContainer();
-            targets.RegisterObject(10);
-            targets.RegisterType<HasCollectionMember>(MemberBindingBehaviour.BindAll);
+            targets.RegisterObject(10);             //single int property
+            targets.RegisterObject("hello world");  //single string property
+            targets.RegisterObject(30m);            //List decimal property
+            targets.RegisterObject(40m);
+            DateTime now = DateTime.UtcNow;         //Bind to collection of datetimes
+            targets.RegisterObject(now);            
+            targets.RegisterObject(now.AddDays(1));
+            targets.RegisterType<HasMembers>(MemberBindingBehaviour.BindAll);
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasMembers>();
+
+            // Assert
+            Assert.Equal(10, result.BindableInt);
+            Assert.Equal("hello world", result.BindableString);
+            // never bound because it's read only enumerable
+            Assert.Equal(new[] { 1.0, 2.0, 3.0 }, result.ReadOnlyDoubles);
+            Assert.Equal(new[] { 30m, 40m }, result.BindableListOfDecimals);
+            Assert.Equal(new[] { now, now.AddDays(1) }, result.CollectionBindableListOfDateTimes);
+
+            // this is failing because it's binding to the IEnumerable<Decimal>, int constructor of List<T>
+            // see #67
+        }
+
+        [Fact]
+        public void Members_ExplicitBinding_ShouldBindNoneByDefault()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            // note - by forcibly calling this overload, we'll trigger a BindSpecificMembersBehaviour to be
+            // created with no member bindings
+            targets.RegisterType((Action<MemberBindingsBuilder<HasMembers>>)null);
 
             var container = CreateContainer(targets);
 
             // Act
-            var result = container.Resolve<HasCollectionMember>();
+            var result = container.Resolve<HasMembers>();
 
             // Assert
-            Assert.Equal(new[] { 10 }, result.Numbers);
+            Assert.Equal(0, result.BindableInt);
+            Assert.Null(result.BindableString);
+            // never bound because it's read only enumerable
+            Assert.Equal(new[] { 1.0, 2.0, 3.0 }, result.ReadOnlyDoubles);
+            Assert.Null(result.BindableListOfDecimals);
+            Assert.Equal(new DateTime[0], result.CollectionBindableListOfDateTimes);
         }
 
 
         [Fact]
-        public void Constructor_ShouldExplicitlyBindCollectionMember()
+        public void Members_ShouldExplicitlyBindCollectionMember()
         {
             // Arrange
-            var targets = CreateTargetContainer();
-            targets.RegisterObject(10);
-            targets.RegisterType<HasCollectionMember>(f => 
-                f.Bind(hcm => hcm.Numbers)
-                .Bind(hcm => hcm.Numbers).AsCollection()
-                .Bind(hcm => hcm.Numbers).ToType<System.Collections.ObjectModel.ReadOnlyCollection<int>>());
+            // This time, going to disable List injection and force the decimals into 
+            // being resolved as enumerables so the collection binder can do its thang.
+            var config = TargetContainer.DefaultConfig.Clone();
+            config.ConfigureOption<Options.EnableCollectionInjection>(false);
+            var targets = CreateTargetContainer(configOverride: config);
 
+            targets.RegisterObject(10m);
+            targets.RegisterObject(20m);
+
+            targets.RegisterType<HasMembers>(b => b.Bind(hm => hm.BindableListOfDecimals).AsCollection());
+            
             var container = CreateContainer(targets);
 
             // Act
-            var result = container.Resolve<HasCollectionMember>();
+            var result = container.Resolve<HasMembers>();
 
             // Assert
-            Assert.Equal(new[] { 10 }, result.Numbers);
+            Assert.Equal(new[] { 10m, 20m }, result.BindableListOfDecimals);
 
         }
     }

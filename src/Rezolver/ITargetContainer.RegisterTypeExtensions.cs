@@ -11,12 +11,12 @@ using System.Text;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Extensions for <see cref="ITargetContainer"/> to provide shortcuts for the simplest cases of registering
-	/// <see cref="ConstructorTarget"/> and <see cref="GenericConstructorTarget"/> targets.
-	/// </summary>
-	public static partial class RegisterTypeTargetContainerExtensions
-	{
+    /// <summary>
+    /// Extensions for <see cref="ITargetContainer"/> to provide shortcuts for the simplest cases of registering
+    /// <see cref="ConstructorTarget"/> and <see cref="GenericConstructorTarget"/> targets.
+    /// </summary>
+    public static partial class RegisterTypeTargetContainerExtensions
+    {
         /// <summary>
         /// Registers an instance of <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via constructor injection.  
         /// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
@@ -30,9 +30,9 @@ namespace Rezolver
         /// <remarks>This is equivalent to creating either a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/> via
         /// the <see cref="Target.ForType{T}(IMemberBindingBehaviour)"/> static method and then registering it.</remarks>
         public static void RegisterType<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
-		{
-			RegisterType(targetContainer, typeof(TObject), memberBinding: memberBinding);
-		}
+        {
+            RegisterType(targetContainer, typeof(TObject), memberBinding: memberBinding);
+        }
 
         /// <summary>
         /// Registers an instance of <typeparamref name="TObject"/> for the service type <typeparamref name="TService"/> to be created by 
@@ -50,10 +50,10 @@ namespace Rezolver
         /// the <see cref="Target.ForType{T}(IMemberBindingBehaviour)"/> static method and then registering it against
         /// the type <typeparamref name="TService"/>.</remarks>
         public static void RegisterType<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
-		where TObject : TService
-		{
-			RegisterType(targetContainer, typeof(TObject), serviceType: typeof(TService), memberBinding: memberBinding);
-		}
+        where TObject : TService
+        {
+            RegisterType(targetContainer, typeof(TObject), serviceType: typeof(TService), memberBinding: memberBinding);
+        }
 
         /// <summary>
         /// Registers an instance of <paramref name="objectType"/> (optionally for the service type <paramref name="serviceType"/>) to be 
@@ -71,15 +71,15 @@ namespace Rezolver
         /// the <see cref="Target.ForType(Type, IMemberBindingBehaviour)"/> static method and then registering it against
         /// the type <paramref name="serviceType"/> or <paramref name="objectType"/>.</remarks>
         public static void RegisterType(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
-		{
-			targetContainer.MustNotBeNull(nameof(targetContainer));
-			objectType.MustNotBeNull(nameof(objectType));
-			RegisterTypeInternal(targetContainer, objectType, serviceType, memberBinding);
-		}
+        {
+            targetContainer.MustNotBeNull(nameof(targetContainer));
+            objectType.MustNotBeNull(nameof(objectType));
+            RegisterTypeInternal(targetContainer, objectType, serviceType, memberBinding);
+        }
 
-		internal static void RegisterTypeInternal(ITargetContainer targetContainer, Type objectType, Type serviceType, IMemberBindingBehaviour memberBinding)
-		{
-			targetContainer.Register(Target.ForType(objectType, memberBinding), serviceType: serviceType);
-		}
-	}
+        internal static void RegisterTypeInternal(ITargetContainer targetContainer, Type objectType, Type serviceType, IMemberBindingBehaviour memberBinding)
+        {
+            targetContainer.Register(Target.ForType(objectType, memberBinding), serviceType: serviceType);
+        }
+    }
 }

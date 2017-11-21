@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Rezolver.Configuration
@@ -46,8 +47,15 @@ namespace Rezolver.Configuration
             if (targets.Fetch(typeof(List<>)) != null || targets.Fetch(typeof(IList<>)) != null || targets.Fetch(typeof(IReadOnlyList<>)) != null)
                 return;
 
+            var ctor = TypeHelpers.GetConstructors(typeof(List<>))
+                .SingleOrDefault(c =>
+                {
+                    var parms = c.GetParameters();
+                    return parms.Length == 1
+                        && TypeHelpers.IsGenericType(parms[0].ParameterType)
+                        && parms[0].ParameterType.GetGenericTypeDefinition() == typeof(IEnumerable<>);
+                });
             var target = Target.ForType(typeof(List<>));
-
             targets.Register(target);
             targets.Register(target, typeof(IList<>));
             // might be an argument here for a dedication implementation to prevent casting->modification
