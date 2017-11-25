@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Tests.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,21 +16,59 @@ namespace Rezolver.Tests
 		[Fact]
 		public void ShouldExtractMethodFromCallExpression()
 		{
-			MethodInfo mi = MethodCallExtractor.ExtractCalledMethod((object o) => o.GetHashCode());
+            // Arrange
 			MethodInfo expected = TypeHelpers.GetMethod(typeof(object), ("GetHashCode"));
+
+            // Act
+			MethodInfo mi = Extract.Method((object o) => o.GetHashCode());
+
+            // Assert
 			Assert.Equal(expected, mi);
 		}
 
 		[Fact]
 		public void ShouldExtractConstructor()
 		{
-			var ctor = MethodCallExtractor.ExtractConstructorCall(() => new string('c', 10));
+            // Arrange
 			var expected = TypeHelpers.GetConstructors(typeof(string)).SingleOrDefault(c =>
 			{
 				var parms = c.GetParameters();
 				return parms.Length == 2 && parms[0].ParameterType == typeof(char) && parms[1].ParameterType == typeof(int);
 			});
+
+            // Act
+			var ctor = Extract.Constructor(() => new string('c', 10));
+
+            // Assert
 			Assert.Equal(expected, ctor);
 		}
+
+        [Fact]
+        public void ShouldExtractGenericConstructor()
+        {
+            // Arrange
+            var p1Type = typeof(GenericTwoCtors<>).GetGenericArguments()[0];
+            var expected = TypeHelpers.GetConstructors(typeof(GenericTwoCtors<>))
+                .SingleOrDefault(c => new[] { p1Type, typeof(int) }.SequenceEqual(c.GetParameters().Select(p => p.ParameterType)));
+
+            // Act
+            var ctor = Extract.GenericConstructor(() => new Types.GenericTwoCtors<string>("", 0));
+
+            // Assert
+            Assert.Equal(expected, ctor);
+        }
+
+        [Fact]
+        public void ShouldExtractGenericMethod()
+        {
+            // Arrange
+            var expected = TypeHelpers.GetMethod(typeof(List<>), "Add");
+
+            // Act
+            var addMethod = Extract.GenericTypeMethod((List<object> l) => l.Add(null));
+
+            // Assert
+            Assert.Equal(expected, addMethod);
+        }
 	}
 }

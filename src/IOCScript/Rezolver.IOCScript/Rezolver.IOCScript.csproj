@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Antlr4.Runtime" Version="4.6.1-beta002" />
+    <PackageReference Include="Antlr4.Runtime" Version="4.6.4" />
   </ItemGroup>
 </Project>

@@ -326,7 +326,8 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Creates a <see cref="ConstructorTarget"/> for the given constructor.
+        /// Creates a <see cref="ConstructorTarget"/> for the given constructor, or a <see cref="GenericConstructorTarget"/> if the 
+        /// constructor belongs to a generic type definition ('open generic type').
         /// </summary>
         /// <param name="constructor">Required.  The constructor to be bound by the target.</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
@@ -339,11 +340,13 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Creates a <see cref="ConstructorTarget"/> for the given constructor.
+        /// Creates a <see cref="ConstructorTarget"/> for the given constructor, or a <see cref="GenericConstructorTarget"/> if the 
+        /// constructor belongs to a generic type definition ('open generic type').
         /// </summary>
         /// <param name="constructor">Required.  The constructor to be bound by the target.</param>
         /// <param name="parameterBindings">Can be null/empty.  An array of <see cref="ParameterBinding"/> 
-        /// objects containing targets to be bound to somme or all of the constructor parameters.</param>
+        /// objects containing targets to be bound to somme or all of the constructor parameters.  **Must not be supplied if <paramref name="constructor"/>
+        /// is a constructor belonging to an open generic type,**</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         public static ITarget ForConstructor(
@@ -353,16 +356,25 @@ namespace Rezolver
         {
             if (constructor == null)
                 throw new ArgumentNullException(nameof(constructor));
+            if (TypeHelpers.IsGenericTypeDefinition(constructor.DeclaringType))
+            {
+                if (parameterBindings?.Length > 0)
+                    throw new ArgumentException("You cannot currently supply parameter bindings for generic constructors", nameof(parameterBindings));
 
+                return new GenericConstructorTarget(constructor, memberBinding);
+            }
+            
             return new ConstructorTarget(constructor, parameterBindings, memberBinding);
         }
 
         /// <summary>
-        /// Creates a <see cref="ConstructorTarget"/> for the given constructor.
+        /// Creates a <see cref="ConstructorTarget"/> for the given constructor, or a <see cref="GenericConstructorTarget"/> if the 
+        /// constructor belongs to a generic type definition ('open generic type').
         /// </summary>
         /// <param name="constructor">Required.  The constructor to be bound by the target.</param>
         /// <param name="namedArgs">Can be null.  A dictionary of targets that are to be bound to the
-        /// constructor by name and <see cref="ITarget.DeclaredType"/>.</param>
+        /// constructor by name and <see cref="ITarget.DeclaredType"/>.  **Must not be supplied if <paramref name="constructor"/>
+        /// is a constructor belonging to an open generic type,**</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         public static ITarget ForConstructor(
@@ -372,17 +384,28 @@ namespace Rezolver
         {
             if (constructor == null)
                 throw new ArgumentNullException(nameof(constructor));
+
+            if (TypeHelpers.IsGenericTypeDefinition(constructor.DeclaringType))
+            {
+                if (namedArgs?.Count > 0)
+                    throw new ArgumentException("You cannot current supply named argument bindings for open generic constructors", nameof(namedArgs));
+
+                return new GenericConstructorTarget(constructor, memberBinding);
+            }
+
             var bindings = ParameterBinding.BindMethod(constructor, namedArgs ?? _emptyArgsDictionary);
             return new ConstructorTarget(constructor, bindings, memberBinding);
         }
 
         /// <summary>
-        /// Creates a <see cref="ConstructorTarget"/> for the given constructor.
+        /// Creates a <see cref="ConstructorTarget"/> for the given constructor, or a <see cref="GenericConstructorTarget"/> if the 
+        /// constructor belongs to a generic type definition ('open generic type').
         /// </summary>
         /// <param name="constructor">Required.  The constructor to be bound by the target.</param>
         /// <param name="namedArgs">Optional.  An object whose publicly readable members which are of the 
         /// type <see cref="ITarget"/> (or a type which implements it) are to be bound to the constructor 
-        /// by name and <see cref="ITarget.DeclaredType"/>.</param>
+        /// by name and <see cref="ITarget.DeclaredType"/>.  **Must not be supplied if <paramref name="constructor"/>
+        /// is a constructor belonging to an open generic type,**</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
         public static ITarget ForConstructor(
@@ -392,6 +415,15 @@ namespace Rezolver
         {
             if (constructor == null)
                 throw new ArgumentNullException(nameof(constructor));
+
+            if (TypeHelpers.IsGenericTypeDefinition(constructor.DeclaringType))
+            {
+                if(namedArgs != null)
+                    throw new ArgumentException("You cannot current supply named argument bindings for open generic constructors", nameof(namedArgs));
+
+                return new GenericConstructorTarget(constructor, memberBinding);
+            }
+
             var bindings = ParameterBinding.BindMethod(constructor, namedArgs.ToMemberValueDictionary<ITarget>());
             return new ConstructorTarget(constructor, bindings, memberBinding);
         }

@@ -46,7 +46,7 @@ namespace Rezolver
         }
         
         internal static readonly MethodInfo LinqToArrayMethod 
-            = MethodCallExtractor.ExtractCalledMethod(() => Enumerable.ToArray<int>(null)).GetGenericMethodDefinition();
+            = Extract.Method(() => Enumerable.ToArray<int>(null)).GetGenericMethodDefinition();
 
         public override ITarget Fetch(Type type)
         {

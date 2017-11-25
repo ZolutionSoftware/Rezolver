@@ -13,12 +13,12 @@ namespace System.Reflection
     {
         public static IEnumerable<PropertyInfo> Writable(this IEnumerable<PropertyInfo> properties)
         {
-            return properties.Where(PropertyInfoExtensions.IsWritable);
+            return properties.Where(RzPropertyInfoExtensions.IsWritable);
         }
 
         public static IEnumerable<PropertyInfo> PubliclyWritable(this IEnumerable<PropertyInfo> properties)
         {
-            return properties.Where(PropertyInfoExtensions.IsPubliclyWritable);
+            return properties.Where(RzPropertyInfoExtensions.IsPubliclyWritable);
         }
 
         /// <summary>
@@ -28,12 +28,12 @@ namespace System.Reflection
         /// <returns></returns>
         public static IEnumerable<PropertyInfo> Readable(this IEnumerable<PropertyInfo> properties)
         {
-            return properties.Where(PropertyInfoExtensions.IsReadable);
+            return properties.Where(RzPropertyInfoExtensions.IsReadable);
         }
 
         public static IEnumerable<PropertyInfo> PubliclyReadable(this IEnumerable<PropertyInfo> properties)
         {
-            return properties.Where(PropertyInfoExtensions.IsPubliclyReadable);
+            return properties.Where(RzPropertyInfoExtensions.IsPubliclyReadable);
         }
     }
 }

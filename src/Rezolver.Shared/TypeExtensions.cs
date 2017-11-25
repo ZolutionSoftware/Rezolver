@@ -225,7 +225,7 @@ namespace Rezolver
 		/// <returns></returns>
 		internal static FieldInfo[] GetInstanceFields(this Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return type.GetTypeInfo().DeclaredFields.Where(f => !f.IsStatic).ToArray();
 #else
 			return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -234,7 +234,7 @@ namespace Rezolver
 
 		internal static PropertyInfo[] GetInstanceProperties(this Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return type.GetTypeInfo().DeclaredProperties.Where(p => 
 				(p.GetMethod != null && !p.GetMethod.IsStatic) ||
 				(p.SetMethod != null && !p.SetMethod.IsStatic)).ToArray();
@@ -246,7 +246,7 @@ namespace Rezolver
 
 		internal static PropertyInfo[] GetStaticProperties(this Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return type.GetTypeInfo().DeclaredProperties.Where(p => 
 				(p.GetMethod != null && p.GetMethod.IsStatic) ||
 				(p.SetMethod != null && p.SetMethod.IsStatic)).ToArray();
@@ -257,7 +257,7 @@ namespace Rezolver
 
 		internal static FieldInfo[] GetStaticFields(this Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return type.GetTypeInfo().DeclaredFields.Where(f => f.IsStatic).ToArray();
 #else
 			return type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);

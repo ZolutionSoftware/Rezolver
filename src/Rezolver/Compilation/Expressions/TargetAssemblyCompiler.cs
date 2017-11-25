@@ -16,7 +16,7 @@ namespace Rezolver.Compilation.Expressions
 	//after which time, I will then derive this compiler from the expression generating one, throw away
 	//a lot of the code found here and just hook in the core expression generation stuff with the assembly
 	//generation stuff.
-#if SUSPENDED && !DOTNET
+#if SUSPENDED && !MAXCOMPAT
 	/// <summary>
 	/// Implementation of the <see cref="ITargetCompiler"/> which compiles dynamic code to an assembly (which can, potentially, be saved to disk).
 	/// 

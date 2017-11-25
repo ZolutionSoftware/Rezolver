@@ -18,10 +18,12 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeHelpers
 	{
+        
+
         internal static IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(Type type, bool inherit=false)
             where TAttribute : Attribute
         {
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().GetCustomAttributes<TAttribute>(inherit);
 #else
             return type.GetCustomAttributes<TAttribute>(inherit);
@@ -30,7 +32,7 @@ namespace Rezolver
 
         internal static bool IsArray(Type type)
         {
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsArray;
 #else
             return type.IsArray;
@@ -39,7 +41,7 @@ namespace Rezolver
 
         internal static int GetArrayRank(Type type)
         {
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().GetArrayRank();
 #else
             return type.GetArrayRank();
@@ -54,7 +56,7 @@ namespace Rezolver
         /// <returns></returns>
         internal static Type MakeArrayType(Type type, int? rank = null)
         {
-#if DOTNET
+#if MAXCOMPAT
             return rank != null ? type.GetTypeInfo().MakeArrayType(rank.Value) : type.GetTypeInfo().MakeArrayType();
 #else
             
@@ -64,7 +66,7 @@ namespace Rezolver
 
         internal static Type GetElementType(Type type)
         {
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().GetElementType();
 #else
             return type.GetElementType();
@@ -73,7 +75,7 @@ namespace Rezolver
 
         internal static bool IsSubclassOf(Type type, Type superClass)
         {
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsSubclassOf(superClass);
 #else
             return type.IsSubclassOf(superClass);
@@ -82,7 +84,7 @@ namespace Rezolver
 
         internal static bool IsPublic(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return type.GetTypeInfo().IsPublic;
 #else
 			return type.IsPublic;
@@ -90,7 +92,7 @@ namespace Rezolver
 		}
 		internal static bool ContainsGenericParameters(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return type.GetTypeInfo().ContainsGenericParameters;
 #else
 			return type.ContainsGenericParameters;
@@ -99,7 +101,7 @@ namespace Rezolver
 
 		internal static bool IsGenericType(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsGenericType;
 #else
 			return type.IsGenericType;
@@ -108,7 +110,7 @@ namespace Rezolver
 
 		internal static bool IsGenericTypeDefinition(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsGenericTypeDefinition;
 #else
 			return type.IsGenericTypeDefinition;
@@ -117,7 +119,7 @@ namespace Rezolver
 
         internal static GenericParameterAttributes GetGenericParameterAttributes(Type type)
         {
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().GenericParameterAttributes;
 #else
 			return type.GenericParameterAttributes;
@@ -126,7 +128,7 @@ namespace Rezolver
         
         internal static bool IsValueType(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsValueType;
 #else
 			return type.IsValueType;
@@ -135,7 +137,7 @@ namespace Rezolver
 
 		internal static Type BaseType(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().BaseType;
 #else
 			return type.BaseType;
@@ -158,7 +160,7 @@ namespace Rezolver
 
 		internal static bool IsInterface(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsInterface;
 #else
 			return type.IsInterface;
@@ -167,7 +169,7 @@ namespace Rezolver
 
 		internal static IEnumerable<Type> GetInterfaces(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().ImplementedInterfaces;
 #else
 			return type.GetInterfaces();
@@ -176,7 +178,7 @@ namespace Rezolver
 
 		internal static Type[] GetGenericArguments(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			//the new TypeInfo system doesn't return parameters and arguments for Generic Types and their Definitions via the same
 			//property as before.  So we need to know whether it's a generic type or generic type definition in order to get the
 			//correct list.
@@ -188,7 +190,7 @@ namespace Rezolver
 
 		internal static bool IsAbstract(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsAbstract;
 #else
 			return type.IsAbstract;
@@ -197,7 +199,7 @@ namespace Rezolver
 
 		internal static bool IsClass(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().IsClass;
 #else
 			return type.IsClass;
@@ -206,7 +208,7 @@ namespace Rezolver
 
 		internal static bool IsAssignableFrom(Type to, Type from)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return to.GetTypeInfo().IsAssignableFrom(from.GetTypeInfo());
 #else
 			return to.IsAssignableFrom(from);
@@ -215,7 +217,7 @@ namespace Rezolver
 
 		internal static Assembly GetAssembly(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
             return type.GetTypeInfo().Assembly;
 #else
 			return type.Assembly;
@@ -230,7 +232,7 @@ namespace Rezolver
 		/// <returns></returns>
 		internal static ConstructorInfo GetConstructor(Type type, Type[] types)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return GetConstructors(type).Where(c => c.GetParameters().Select(p => p.ParameterType).SequenceEqual(types)).SingleOrDefault();
 #else
 			return type.GetConstructor(types);
@@ -244,12 +246,21 @@ namespace Rezolver
 		/// <returns></returns>
 		internal static ConstructorInfo[] GetConstructors(Type type)
 		{
-#if DOTNET
+#if MAXCOMPAT
 			return type.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic).Cast<ConstructorInfo>().ToArray();
 #else
 			return type.GetConstructors();
 #endif
 		}
+
+        internal static ConstructorInfo[] GetAllConstructors(Type type)
+        {
+#if MAXCOMPAT
+            return type.GetTypeInfo().DeclaredConstructors.ToArray();
+#else
+            return type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+#endif
+        }
 
 		/// <summary>
 		/// Gets a public instance method whose name matches that passed - regardless
@@ -269,7 +280,7 @@ namespace Rezolver
 
         internal static MethodInfo GetMethod(Type type, string methodName, bool isPublic, bool isStatic)
         {
-#if DOTNET
+#if MAXCOMPAT
             //can't use GetDeclaredMethod because it does public and non-public methods, instance and static.
             try
             {
@@ -284,6 +295,15 @@ namespace Rezolver
             flags |= isStatic ? BindingFlags.Static : BindingFlags.Instance;
             flags |= BindingFlags.DeclaredOnly;
 			return type.GetMethod(methodName, flags);
+#endif
+        }
+
+        internal static MethodInfo[] GetAllMethods(Type type)
+        {
+#if MAXCOMPAT
+            return type.GetTypeInfo().DeclaredMethods.ToArray();
+#else
+            return type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
 #endif
         }
     }

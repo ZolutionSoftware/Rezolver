@@ -95,7 +95,7 @@ namespace Rezolver.Compilation.Expressions
             }
         }
 
-        private static readonly MethodInfo AddToCollection_Method = MethodCallExtractor.ExtractCalledMethod(() => AddToCollection<int>(null, null)).GetGenericMethodDefinition();
+        private static readonly MethodInfo AddToCollection_Method = Extract.Method(() => AddToCollection<int>(null, null)).GetGenericMethodDefinition();
 
         private Expression GenerateListBindingExpression(Expression targetObj, ListMemberBinding listBinding, IExpressionCompileContext context, IExpressionCompiler compiler)
         {

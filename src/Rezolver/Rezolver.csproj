@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
-    <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
+    <DefineConstants>$(DefineConstants);MAXCOMPAT</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>

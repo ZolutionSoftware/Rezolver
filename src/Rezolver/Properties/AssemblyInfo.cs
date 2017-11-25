@@ -7,7 +7,7 @@ using System.Security;
 
 [assembly: AllowPartiallyTrustedCallers]
 [assembly: SecurityTransparent]
-#if !DOTNET
+#if !MAXCOMPAT
 [assembly: SecurityRules(SecurityRuleSet.Level2,SkipVerificationInFullTrust=true)]
 #endif
 

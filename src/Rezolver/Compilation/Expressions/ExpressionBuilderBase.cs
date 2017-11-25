@@ -34,43 +34,42 @@ namespace Rezolver.Compilation.Expressions
             /// Gets a <see cref="MethodInfo"/> for the <see cref="IDirectTarget.GetValue"/> method.
             /// </summary>
             public static MethodInfo IDirectTarget_GetValue_Method =>
-            MethodCallExtractor.ExtractCalledMethod((IDirectTarget t) => t.GetValue());
+            Extract.Method((IDirectTarget t) => t.GetValue());
 
             /// <summary>
             /// Gets a <see cref="MethodInfo"/> for the <see cref="ICompiledTarget.GetObject(IResolveContext)"/>
             /// method.
             /// </summary>
             public static MethodInfo ICompiledTarget_GetObject_Method =>
-                MethodCallExtractor.ExtractCalledMethod((ICompiledTarget t) => t.GetObject(null));
+                Extract.Method((ICompiledTarget t) => t.GetObject(null));
 
             /// <summary>
             /// Gets a <see cref="MethodInfo"/> for the <see cref="ContainerScopeExtensions.GetRootScope(IContainerScope)"/>
             /// extension method.
             /// </summary>
             public static MethodInfo IContainerScope_GetRootScope_Method =>
-                MethodCallExtractor.ExtractCalledMethod(
-                    (IContainerScope s) => s.GetRootScope());
+                Extract.Method((IContainerScope s) => s.GetRootScope());
 
             /// <summary>
             /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(IResolveContext)"/>
             /// method
             /// </summary>
             public static MethodInfo IContainer_CanResolve_Method =>
-                MethodCallExtractor.ExtractCalledMethod(
+                Extract.Method(
                     (IContainer c) => c.CanResolve((IResolveContext)null));
 
             /// <summary>
             /// Gets a <see cref="MethodInfo"/> for the <see cref="IContainer.Resolve(IResolveContext)"/> method
             /// </summary>
             public static MethodInfo IContainer_Resolve_Method =>
-                MethodCallExtractor.ExtractCalledMethod((IContainer c) => c.Resolve(null));
+                Extract.Method((IContainer c) => c.Resolve(null));
 
             /// <summary>
             /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, ITarget, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// method for help in generating scope-interfacing code.
             /// </summary>
             public static MethodInfo IContainerScope_Resolve_Method =>
-                MethodCallExtractor.ExtractCalledMethod(
+                Extract.Method(
                     (IContainerScope s) => s.Resolve(
                         (IResolveContext)null,
                         Guid.Empty,
@@ -82,7 +81,7 @@ namespace Rezolver.Compilation.Expressions
             /// extension method.
             /// </summary>
             public static MethodInfo ResolveContextExtensions_Resolve_Method =>
-                MethodCallExtractor.ExtractCalledMethod(
+                Extract.Method(
                     (IResolveContext rc) => rc.Resolve(Guid.Empty,
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
@@ -93,7 +92,7 @@ namespace Rezolver.Compilation.Expressions
             /// </summary>
             /// <value>The type of the resolve context create new method.</value>
             public static MethodInfo IResolveContext_New_Method =>
-                MethodCallExtractor.ExtractCalledMethod((IResolveContext r) => r.New(null, null, null));
+                Extract.Method((IResolveContext r) => r.New(null, null, null));
 
             /// <summary>
             /// Emits a <see cref="MethodCallExpression"/> which represents calling the

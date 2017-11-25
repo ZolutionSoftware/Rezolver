@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
+using System.Reflection;
 
 namespace Rezolver.Runtime
 {
@@ -47,6 +48,10 @@ namespace Rezolver.Runtime
         /// <value>The type.</value>
         public Type Type { get; }
         /// <summary>
+        /// If a specific constructor is to be used, then this is it.
+        /// </summary>
+        public ConstructorInfo Constructor { get; }
+        /// <summary>
         /// Gets a value indicating whether the <see cref="Targets.GenericConstructorTarget.DeclaredType"/> of the 
         /// <see cref="Targets.GenericConstructorTarget"/>  
         /// was successfully mapped to the requested type.  If so, and <see cref="IsFullyBound"/> is <c>true</c>, then an 
@@ -68,10 +73,11 @@ namespace Rezolver.Runtime
         /// </summary>
         public bool IsFullyBound { get { return Success ? Type.IsConstructedGenericType : false; } }
 
-        internal GenericTypeMapping(Type requestedType, Type type, string bindErrorMessage = null)
+        internal GenericTypeMapping(Type requestedType, Type type, ConstructorInfo constructor = null, string bindErrorMessage = null)
         {
             RequestedType = requestedType;
             Type = type;
+            Constructor = constructor;
             BindErrorMessage = bindErrorMessage;
         }
 

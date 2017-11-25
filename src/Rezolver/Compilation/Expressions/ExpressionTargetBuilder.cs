@@ -67,8 +67,8 @@ namespace Rezolver.Compilation.Expressions
             /// </summary>
             private static readonly MethodInfo[] RezolveMethods =
             {
-                MethodCallExtractor.ExtractCalledMethod((IResolveContext rc) => rc.Resolve<int>()).GetGenericMethodDefinition(),
-                MethodCallExtractor.ExtractCalledMethod((IResolveContext rc) => rc.Resolve(typeof(int)))
+                Extract.Method((IResolveContext rc) => rc.Resolve<int>()).GetGenericMethodDefinition(),
+                Extract.Method((IResolveContext rc) => rc.Resolve(typeof(int)))
             };
 
             /// <summary>
@@ -78,12 +78,12 @@ namespace Rezolver.Compilation.Expressions
                         {
                 //rewrites to (ResolveContext.Resolve<T>()) of the ResolveContextExpression of the current compile context
                 new MethodCallRewrite(
-                    MethodCallExtractor.ExtractCalledMethod(() => ExpressionFunctions.Resolve<int>()).GetGenericMethodDefinition(),
+                    Extract.Method(() => ExpressionFunctions.Resolve<int>()).GetGenericMethodDefinition(),
                     (t, c) => Expression.Call(t._context.ResolveContextParameterExpression, RezolveMethods[0].MakeGenericMethod(c.Method.GetGenericArguments()[0]), c.Arguments)
                 ),
                 //rewrites to (ResolveContext.Resolve(t)) of the ResolveContextExpression of the current compile context
                 new MethodCallRewrite(
-                    MethodCallExtractor.ExtractCalledMethod(() => ExpressionFunctions.Resolve(typeof(int))),
+                    Extract.Method(() => ExpressionFunctions.Resolve(typeof(int))),
                     (t, c) => Expression.Call(t._context.ResolveContextParameterExpression, RezolveMethods[1], c.Arguments)
                 )
             };

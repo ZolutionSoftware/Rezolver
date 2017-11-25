@@ -26,7 +26,7 @@ namespace Rezolver.Compilation.Expressions
         }
 
         private static readonly MethodInfo DynamicResolveMethod =
-            MethodCallExtractor.ExtractCalledMethod(() => DynamicResolve(null, null, null));
+            Extract.Method(() => DynamicResolve(null, null, null));
 
         private MethodCallExpression CallDynamicResolve(Expression resolveContext, Expression type, Expression fallback)
         {

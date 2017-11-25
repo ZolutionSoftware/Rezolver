@@ -86,9 +86,11 @@ namespace Rezolver.Tests
                     typeof(Action<object>),
                     typeof(Action<>)
                 },
-                typeof(BaseClass).MakeArrayType().GetInterfaces().SelectMany(t => t.IsGenericType ? new[] { t, t.GetGenericTypeDefinition() } : new[] { t })
+                TypeHelpers.GetInterfaces(typeof(BaseClass).MakeArrayType()).SelectMany(
+                    t => TypeHelpers.IsGenericType(t) ? new[] { t, t.GetGenericTypeDefinition() } : new[] { t })
                 .Concat(
-                    typeof(Object).MakeArrayType().GetInterfaces().SelectMany(t => t.IsGenericType ? new[] { t, t.GetGenericTypeDefinition() } : new[] { t })
+                    TypeHelpers.GetInterfaces(typeof(Object).MakeArrayType()).SelectMany(
+                        t => TypeHelpers.IsGenericType(t) ? new[] { t, t.GetGenericTypeDefinition() } : new[] { t })
                 ).Select(t => typeof(Action<>).MakeGenericType(t)).ToArray()
             }
         };
@@ -109,8 +111,8 @@ namespace Rezolver.Tests
             // assert that instances of each closed generic search type can be assigned to the search type 
             // - this is double-checking our type compatibility assertions before checking that the results 
             // are the ones we expect.
-            Assert.All(result.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
-                t => type.IsAssignableFrom(t));
+            Assert.All(result.Where(t => !TypeHelpers.IsGenericTypeDefinition(t) && !TypeHelpers.ContainsGenericParameters(t)),
+                t => TypeHelpers.IsAssignableFrom(type, t));
 
             // check that the the types whose order was specified are actually in the specified order
             Assert.Equal(expectedOrder, result.Where(rt => expectedOrder.Contains(rt)));
@@ -196,8 +198,8 @@ namespace Rezolver.Tests
             // Assert
 
             // verify that the expected types are compatible with the target type
-            Assert.All(expected.Where(t => !t.IsGenericTypeDefinition && !t.ContainsGenericParameters),
-                t => t.IsAssignableFrom(type));
+            Assert.All(expected.Where(t => !TypeHelpers.IsGenericTypeDefinition(t) && !TypeHelpers.ContainsGenericParameters(t)),
+                t => TypeHelpers.IsAssignableFrom(t, type));
             Assert.Equal(expected, result);
         }
 

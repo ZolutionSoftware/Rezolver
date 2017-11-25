@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using Rezolver.Compilation;
 using Rezolver.Runtime;
+using System.Reflection;
 
 namespace Rezolver.Targets
 {
@@ -19,52 +20,62 @@ namespace Rezolver.Targets
     /// </summary>
     /// <seealso cref="TargetBase" />
     public partial class GenericConstructorTarget : TargetBase
-	{
-		/// <summary>
-		/// base interface only for <see cref="ITypeArgGenericMismatch{TFrom, TFromParent, TTo, TToParent}"/>
-		/// just to simplify type testing
-		/// </summary>
-		private interface ITypeArgGenericMismatch { }
-		/// <summary>
-		/// Used purely to carry diagnostic information when type arguments aren't mapped successfully
-		/// </summary>
-		/// <typeparam name="TFrom">The type argument mapped from a target's <see cref="DeclaredType"/> corresponding to the argument that can't be mapped</typeparam>
-		/// <typeparam name="TFromParent">The generic type which declares the type parameter <typeparamref name="TFrom"/></typeparam>
-		/// <typeparam name="TTo">The type argument in the type for which a match was sought</typeparam>
-		/// <typeparam name="TToParent">The generic type which declared the type parameter <typeparamref name="TTo"/></typeparam>
-		private interface ITypeArgGenericMismatch<TFrom, TFromParent, TTo, TToParent> : ITypeArgGenericMismatch
-		{
+    {
+        /// <summary>
+        /// base interface only for <see cref="ITypeArgGenericMismatch{TFrom, TFromParent, TTo, TToParent}"/>
+        /// just to simplify type testing
+        /// </summary>
+        private interface ITypeArgGenericMismatch { }
+        /// <summary>
+        /// Used purely to carry diagnostic information when type arguments aren't mapped successfully
+        /// </summary>
+        /// <typeparam name="TFrom">The type argument mapped from a target's <see cref="DeclaredType"/> corresponding to the argument that can't be mapped</typeparam>
+        /// <typeparam name="TFromParent">The generic type which declares the type parameter <typeparamref name="TFrom"/></typeparam>
+        /// <typeparam name="TTo">The type argument in the type for which a match was sought</typeparam>
+        /// <typeparam name="TToParent">The generic type which declared the type parameter <typeparamref name="TTo"/></typeparam>
+        private interface ITypeArgGenericMismatch<TFrom, TFromParent, TTo, TToParent> : ITypeArgGenericMismatch
+        {
 
-		}
+        }
 
-		/// <summary>
-		/// Another diagnostic-only interface.  Used for TFromParent and TToParent type arguments in the 
-		/// <see cref="ITypeArgGenericMismatch{TFrom, TFromParent, TTo, TToParent}"/> type when a type parameter
-		/// wasn't generic.
-		/// </summary>
-		private interface INotGeneric { }
+        /// <summary>
+        /// Another diagnostic-only interface.  Used for TFromParent and TToParent type arguments in the 
+        /// <see cref="ITypeArgGenericMismatch{TFrom, TFromParent, TTo, TToParent}"/> type when a type parameter
+        /// wasn't generic.
+        /// </summary>
+        private interface INotGeneric { }
 
-		private static Type[] EmptyTypes = new Type[0];
+        private static Type[] EmptyTypes = new Type[0];
 
-		/// <summary>
-		/// Gets the generic type definition from which generic types are to be built and instances of which 
-		/// will be constructed.
-		/// </summary>
-		public Type GenericType { get; private set; }
+        private readonly Type _genericType;
+        /// <summary>
+        /// Gets the generic type definition from which generic types are to be built and instances of which 
+        /// will be constructed.
+        /// </summary>
+        /// <remarks></remarks>
+        public Type GenericType { get => GenericTypeConstructor?.DeclaringType ?? _genericType; }
 
-		/// <summary>
-		/// Gets the member binding behaviour to be used when creating an instance.  The rules for this are the same as for
+        /// <summary>
+        /// If supplied on construction, then this is a constructor declared on the <see cref="GenericType"/> which is to be
+        /// used for every instance that is created.
+        /// </summary>
+        /// <remarks>When set, the <see cref="GenericType"/> is derived from the <see cref="MemberInfo.DeclaringType"/> of this
+        /// reference.</remarks>
+        public ConstructorInfo GenericTypeConstructor { get; }
+
+        /// <summary>
+        /// Gets the member binding behaviour to be used when creating an instance.  The rules for this are the same as for
         /// <see cref="ConstructorTarget.MemberBindingBehaviour"/>.
-		/// </summary>
-		public IMemberBindingBehaviour MemberBindingBehaviour { get; private set; }
+        /// </summary>
+        public IMemberBindingBehaviour MemberBindingBehaviour { get; private set; }
 
-		/// <summary>
-		/// Implementation of the abstract base property.  Will return the unbound generic type passed to this object on construction.
-		/// </summary>
-		public override System.Type DeclaredType
-		{
-			get { return GenericType; }
-		}
+        /// <summary>
+        /// Implementation of the abstract base property.  Will return the unbound generic type passed to this object on construction.
+        /// </summary>
+        public override System.Type DeclaredType
+        {
+            get { return GenericType; }
+        }
 
 
         /// <summary>
@@ -72,46 +83,70 @@ namespace Rezolver.Targets
         /// which will utilise the optional <paramref name="memberBinding"/> when it constructs its
         /// <see cref="ConstructorTarget"/> when <see cref="Bind(ICompileContext)"/> is called.
         /// </summary>
-        /// <param name="genericType">The type of the object that is to be built (open generic of course)</param>
-        /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance.
+        /// <param name="genericType">Required. The type of the object that is to be built (open generic of course)</param>
+        /// <param name="memberBinding">Optional. Provides an explicit member injection behaviour to be used when creating the instance.
         /// If not provided, then the <see cref="Bind(ICompileContext)"/> method will attempt to obtain one via the options API from the 
         /// <see cref="ICompileContext"/> - and if one is still not available, then no member binding will be performed.</param>
         public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBinding = null)
-		{
-			genericType.MustNotBeNull(nameof(genericType));
-			if (!TypeHelpers.IsGenericTypeDefinition(genericType))
-				throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Use ConstructorTarget for closed generics.");
-			if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
-				throw new ArgumentException("The type must be a generic type definition of either a non-abstract class or value type.");
-			GenericType = genericType;
-			MemberBindingBehaviour = memberBinding;
-		}
+        {
+            if (!TypeHelpers.IsGenericTypeDefinition(genericType ?? throw new ArgumentNullException(nameof(genericType))))
+                throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Use ConstructorTarget for closed generics.");
+            if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
+                throw new ArgumentException("The type must be a generic type definition of either a non-abstract class or value type.");
+            _genericType = genericType;
+            MemberBindingBehaviour = memberBinding;
+        }
 
-		/// <summary>
-		/// Override - introduces additional logic to cope with generic types not generally supported by the majority of other targets.
-		/// 
-		/// This uses the <see cref="MapType(Type)"/> function to determine success, but only checks the <see cref="GenericTypeMapping.Success"/>
-		/// flag.  As a result, this method will return true if an open generic base or interface of <see cref="DeclaredType"/>
-		/// </summary>
-		/// <param name="type"></param>
-		/// <returns></returns>
-		public override bool SupportsType(Type type)
-		{
-			//note - the base test will return true for any generic base or interface of DeclaredType - including where
-			//an open generic is passed which is the same a DeclaredType.
-			if (base.SupportsType(type))
-				return true;
-			return MapType(type).Success;
-		}
+        /// <summary>
+        /// Constructs a new instance of the <see cref="GenericConstructorTarget"/> type.
+        /// </summary>
+        /// <param name="genericConstructor">Required. The constructor on a generic type definition that will be used for
+        /// each concrete generic instance produced by this target.  Must be a member of a generic type definition that is
+        /// neither an abstract class or interface.</param>
+        /// <param name="memberBinding">Optional. Provides an explicit member injection behaviour to be used when creating the instance.
+        /// If not provided, then the <see cref="Bind(ICompileContext)"/> method will attempt to obtain one via the options API from the 
+        /// <see cref="ICompileContext"/> - and if one is still not available, then no member binding will be performed.</param>
+        public GenericConstructorTarget(ConstructorInfo genericConstructor, IMemberBindingBehaviour memberBinding = null)
+        {
+            if (genericConstructor == null)
+                throw new ArgumentNullException(nameof(genericConstructor));
 
-		/// <summary>
-		/// Maps the <see cref="DeclaredType"/> open generic type to the <paramref name="targetType"/>.
-		/// 
-		/// Examine the <see cref="GenericTypeMapping.Success"/> of the result to check whether the
-		/// result was successful.
-		/// </summary>
-		/// <param name="targetType">Type of the target.</param>
-		public GenericTypeMapping MapType(Type targetType)
+            Type genericType = genericConstructor.DeclaringType;
+            if (!TypeHelpers.IsGenericTypeDefinition(genericType))
+                throw new ArgumentException($"The supplied constructor { genericConstructor } does not belong to an open generic type.  Use ConstructorTarget for non-generic constructors");
+
+            if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
+                throw new ArgumentException($"The type which owns the given constructor ({ genericConstructor }) must be a generic type definition of either a non-abstract class or value type.");
+
+            GenericTypeConstructor = genericConstructor;
+            MemberBindingBehaviour = memberBinding;
+        }
+
+        /// <summary>
+        /// Override - introduces additional logic to cope with generic types not generally supported by the majority of other targets.
+        /// 
+        /// This uses the <see cref="MapType(Type)"/> function to determine success, but only checks the <see cref="GenericTypeMapping.Success"/>
+        /// flag.  As a result, this method will return true if an open generic base or interface of <see cref="DeclaredType"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public override bool SupportsType(Type type)
+        {
+            //note - the base test will return true for any generic base or interface of DeclaredType - including where
+            //an open generic is passed which is the same a DeclaredType.
+            if (base.SupportsType(type))
+                return true;
+            return MapType(type).Success;
+        }
+
+        /// <summary>
+        /// Maps the <see cref="DeclaredType"/> open generic type to the <paramref name="targetType"/>.
+        /// 
+        /// Examine the <see cref="GenericTypeMapping.Success"/> of the result to check whether the
+        /// result was successful.
+        /// </summary>
+        /// <param name="targetType">Type of the target.</param>
+        public GenericTypeMapping MapType(Type targetType)
         {
             if (!TypeHelpers.IsGenericType(targetType))
                 return new GenericTypeMapping(targetType, GetMappingError_DeclaredTypeCannotBeMapped(DeclaredType, targetType));
@@ -145,16 +180,18 @@ namespace Rezolver.Targets
                     //type, even though SupportsType would return true.
                     //TODO: change dis to deep search for *ANY* open generics
                     if (TypeHelpers.ContainsGenericParameters(targetType))
-                        return new GenericTypeMapping(targetType, DeclaredType, GetMappingError_OpenGenericResult(DeclaredType, targetType));
+                        return new GenericTypeMapping(targetType, DeclaredType, bindErrorMessage: GetMappingError_OpenGenericResult(DeclaredType, targetType));
                     else
                         return new GenericTypeMapping(targetType, GetMappingError_NotEnoughTypeInformation(DeclaredType, targetType));
                 }
             }
 
+            Type targetGeneric;
+            ConstructorInfo mappedConstructor = null;
             try
             {
                 //make the generic type
-                return new GenericTypeMapping(targetType, DeclaredType.MakeGenericType(finalTypeArguments));
+                targetGeneric = DeclaredType.MakeGenericType(finalTypeArguments);
             }
             catch (TypeLoadException tlex)
             {
@@ -164,6 +201,16 @@ namespace Rezolver.Targets
             {
                 return new GenericTypeMapping(targetType, GetMappingError_InvalidTypeArguments(DeclaredType, finalTypeArguments, aex));
             }
+
+            // now, if we have a constructor, we have to get the correct version for this generic type
+            if(GenericTypeConstructor != null)
+            {
+                mappedConstructor = GenericTypeConstructor.ToGenericTypeCtor(targetGeneric);
+                if (mappedConstructor == null)
+                    return new GenericTypeMapping(targetType, targetGeneric, bindErrorMessage: $"Could not map the constructor { GenericTypeConstructor } on the type { targetGeneric }");
+            }
+
+            return new GenericTypeMapping(targetType, targetGeneric, mappedConstructor);
         }
 
         /// <summary>
@@ -206,111 +253,115 @@ namespace Rezolver.Targets
         /// type will almost always need to be a generic type with at least as many type arguments as the <see cref="GenericType"/>.
         /// </remarks>
         public ITarget Bind(ICompileContext context)
-		{
-			context.MustNotBeNull(nameof(context));
+        {
+            context.MustNotBeNull(nameof(context));
 
-			//always create a constructor target from new
-			//basically this class simply acts as a factory for other constructor targets.
+            //always create a constructor target from new
+            //basically this class simply acts as a factory for other constructor targets.
 
-			var expectedType = context.TargetType;
-			if (expectedType == null)
-				throw new ArgumentException("GenericConstructorTarget requires a concrete type to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", nameof(context));
-			var mapTypeResult = MapType(context.TargetType);
-			//if the mapping fails, or the mapping is not fully bound to a closed generic, throw an exception
-			if (!mapTypeResult.Success || !mapTypeResult.IsFullyBound)
-				throw new ArgumentException(mapTypeResult.BindErrorMessage, nameof(context));
-			//construct the constructortarget
-			return Target.ForType(mapTypeResult.Type, MemberBindingBehaviour);
-		}
+            var expectedType = context.TargetType;
+            if (expectedType == null)
+                throw new ArgumentException("GenericConstructorTarget requires a concrete type to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", nameof(context));
+            var mapTypeResult = MapType(context.TargetType);
+            //if the mapping fails, or the mapping is not fully bound to a closed generic, throw an exception
+            if (!mapTypeResult.Success || !mapTypeResult.IsFullyBound)
+                throw new ArgumentException(mapTypeResult.BindErrorMessage, nameof(context));
 
-		private Type[] MapGenericParameters(Type requestedType)
-		{
-			var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
-			Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(DeclaredType);
-			//check whether it's a base or an interface
-			var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
-				TypeHelpers.GetInterfaces(DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-				: DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
-			if (mappedBase != null)
-			{
-				var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);
-				var typeParamPositions = TypeHelpers.GetGenericArguments(DeclaredType)
-					.Select(t =>
-					{
-						var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
+            //construct the constructortarget
+            if (mapTypeResult.Constructor != null)
+                return Target.ForConstructor(mapTypeResult.Constructor, MemberBindingBehaviour);
+            else
+                return Target.ForType(mapTypeResult.Type, MemberBindingBehaviour);
+        }
 
-						//todo: if mapping is null, then we need to examine the generic constraints on t (or possibly its base or interfaces), which also works
-						// - there's currently a GenericConstructorTargets test containing the ValidWideningGeneric type - which should be able to be supported.  If we're clever.
+        private Type[] MapGenericParameters(Type requestedType)
+        {
+            var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
+            Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(DeclaredType);
+            //check whether it's a base or an interface
+            var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
+                TypeHelpers.GetInterfaces(DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
+                : DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+            if (mappedBase != null)
+            {
+                var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);
+                var typeParamPositions = TypeHelpers.GetGenericArguments(DeclaredType)
+                    .Select(t =>
+                    {
+                        var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
 
-						return new
-						{
-							DeclaredTypeParamPosition = t.GenericParameterPosition,
-							Type = t,
-							//the projection here allows us to get the index of the base interface's generic type parameter
-							//It is required because using the GenericParameterPosition property simply returns the index of the 
-							//type in our declared type, as the type is passed down into the interfaces from the open generic
-							//but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
-							//to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
-							Mapping = mapping
-						};
-					}).OrderBy(r => r.Mapping != null ? r.Mapping[0].Index : int.MinValue).ToArray();
+                        //todo: if mapping is null, then we need to examine the generic constraints on t (or possibly its base or interfaces), which also works
+                        // - there's currently a GenericConstructorTargets test containing the ValidWideningGeneric type - which should be able to be supported.  If we're clever.
 
-				var suppliedTypeArguments = TypeHelpers.GetGenericArguments(requestedType);
-				Type suppliedArg = null;
-				foreach (var typeParam in typeParamPositions.Where(p => p.Mapping != null))
-				{
-					//now, just because we've found a mapping, doesn't actually mean that we have success.
-					//consider a declared type of IFoo<IEnumerable<T>> and a requested type of IFoo<T> - 
-					//in this case it's not possible to map, because it only works if the T in the second IFoo<>
-					//is IEnumerable<T>.
-					//When it's the other way around - i.e. declared is IFoo<T> and requested is IFoo<IEnumerable<T>>, 
-					//then it's possible to map, but we can only create if we are ultimmately given a concrete
-					//IEnumerable<T> as the inner argument.
-					suppliedArg = suppliedTypeArguments[typeParam.Mapping[0].Index];
-					foreach (var mapping in typeParam.Mapping.Skip(1))
-					{
-						//so if the next parameter is not a generic type, then we can't get the arguments
-						if (!TypeHelpers.IsGenericType(suppliedArg))
-						{
-							suppliedArg = typeof(ITypeArgGenericMismatch<,,,>).MakeGenericType(
-								mapping.BaseTypeArgument, 
-								mapping.BaseType ?? typeof(INotGeneric), 
-								suppliedArg, 
-								suppliedArg.DeclaringType ?? typeof(INotGeneric));
-							break;
-						}
-						else
-							suppliedArg = TypeHelpers.GetGenericArguments(suppliedArg)[mapping.Index];
-					}
-					finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
-				}
-			}
-			else
-				return null; //means that no mappings exist - because the types are not even compatible
+                        return new
+                        {
+                            DeclaredTypeParamPosition = t.GenericParameterPosition,
+                            Type = t,
+                            //the projection here allows us to get the index of the base interface's generic type parameter
+                            //It is required because using the GenericParameterPosition property simply returns the index of the 
+                            //type in our declared type, as the type is passed down into the interfaces from the open generic
+                            //but closes them over those very types.  Thus, the <T> from an open generic class Foo<T> is passed down
+                            //to IFoo<T> almost as if it were a proper type, and the <T> in IFoo<> is actually equal to the <T> from Foo<T>.
+                            Mapping = mapping
+                        };
+                    }).OrderBy(r => r.Mapping != null ? r.Mapping[0].Index : int.MinValue).ToArray();
 
-			//note - some arguments might get left as generic parameters in failed scenarios
-			return finalTypeArguments;
-		}
+                var suppliedTypeArguments = TypeHelpers.GetGenericArguments(requestedType);
+                Type suppliedArg = null;
+                foreach (var typeParam in typeParamPositions.Where(p => p.Mapping != null))
+                {
+                    //now, just because we've found a mapping, doesn't actually mean that we have success.
+                    //consider a declared type of IFoo<IEnumerable<T>> and a requested type of IFoo<T> - 
+                    //in this case it's not possible to map, because it only works if the T in the second IFoo<>
+                    //is IEnumerable<T>.
+                    //When it's the other way around - i.e. declared is IFoo<T> and requested is IFoo<IEnumerable<T>>, 
+                    //then it's possible to map, but we can only create if we are ultimmately given a concrete
+                    //IEnumerable<T> as the inner argument.
+                    suppliedArg = suppliedTypeArguments[typeParam.Mapping[0].Index];
+                    foreach (var mapping in typeParam.Mapping.Skip(1))
+                    {
+                        //so if the next parameter is not a generic type, then we can't get the arguments
+                        if (!TypeHelpers.IsGenericType(suppliedArg))
+                        {
+                            suppliedArg = typeof(ITypeArgGenericMismatch<,,,>).MakeGenericType(
+                                mapping.BaseTypeArgument,
+                                mapping.BaseType ?? typeof(INotGeneric),
+                                suppliedArg,
+                                suppliedArg.DeclaringType ?? typeof(INotGeneric));
+                            break;
+                        }
+                        else
+                            suppliedArg = TypeHelpers.GetGenericArguments(suppliedArg)[mapping.Index];
+                    }
+                    finalTypeArguments[typeParam.DeclaredTypeParamPosition] = suppliedArg;
+                }
+            }
+            else
+                return null; //means that no mappings exist - because the types are not even compatible
 
-		private class GenericParameterMapping
-		{
-			/// <summary>
-			/// Gets or sets the index of the mapper parameter in the array of type parameters for <see cref="BaseType"/>
-			/// </summary>
-			/// <value>The index.</value>
-			public int Index { get; set; }
-			/// <summary>
-			/// Gets or sets the type argument in <see cref="BaseType"/> represented by this mapping.
-			/// </summary>
-			/// <value>The base type parameter.</value>
-			public Type BaseTypeArgument { get; set; }
-			/// <summary>
-			/// Gets or sets the type to which this mapping relates.  The type will be a base or interface of the <see cref="DeclaredType"/>
-			/// </summary>
-			/// <value>The type of the base.</value>
-			public Type BaseType { get; set; }
-			public Type TargetParameter { get; set; }
-		}
+            //note - some arguments might get left as generic parameters in failed scenarios
+            return finalTypeArguments;
+        }
+
+        private class GenericParameterMapping
+        {
+            /// <summary>
+            /// Gets or sets the index of the mapper parameter in the array of type parameters for <see cref="BaseType"/>
+            /// </summary>
+            /// <value>The index.</value>
+            public int Index { get; set; }
+            /// <summary>
+            /// Gets or sets the type argument in <see cref="BaseType"/> represented by this mapping.
+            /// </summary>
+            /// <value>The base type parameter.</value>
+            public Type BaseTypeArgument { get; set; }
+            /// <summary>
+            /// Gets or sets the type to which this mapping relates.  The type will be a base or interface of the <see cref="DeclaredType"/>
+            /// </summary>
+            /// <value>The type of the base.</value>
+            public Type BaseType { get; set; }
+            public Type TargetParameter { get; set; }
+        }
 
         /// <summary>
         /// Returns a series of type parameter indexes from the baseType parameter which can be used to derive
@@ -321,26 +372,26 @@ namespace Rezolver.Targets
         /// <param name="targetTypeParameter"></param>
         /// <returns></returns>
         private GenericParameterMapping[] DeepSearchTypeParameterMapping(Stack<GenericParameterMapping> previousTypeParameterPositions, Type baseTypeParameter, Type targetTypeParameter)
-		{
-			if (baseTypeParameter == targetTypeParameter)
-				return previousTypeParameterPositions.ToArray();
-			if (previousTypeParameterPositions == null)
-				previousTypeParameterPositions = new Stack<GenericParameterMapping>();
-			if (TypeHelpers.IsGenericType(baseTypeParameter))
-			{
-				var args = TypeHelpers.GetGenericArguments(baseTypeParameter);
-				GenericParameterMapping[] result = null;
-				for (int f = 0; f < args.Length; f++)
-				{
-					previousTypeParameterPositions.Push(new GenericParameterMapping() { BaseType = baseTypeParameter, BaseTypeArgument = args[f], Index = f, TargetParameter = targetTypeParameter });
-					result = DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
-					previousTypeParameterPositions.Pop();
-					if (result != null)
-						return result;
-				}
-			}
-			return null;
-		}
+        {
+            if (baseTypeParameter == targetTypeParameter)
+                return previousTypeParameterPositions.ToArray();
+            if (previousTypeParameterPositions == null)
+                previousTypeParameterPositions = new Stack<GenericParameterMapping>();
+            if (TypeHelpers.IsGenericType(baseTypeParameter))
+            {
+                var args = TypeHelpers.GetGenericArguments(baseTypeParameter);
+                GenericParameterMapping[] result = null;
+                for (int f = 0; f < args.Length; f++)
+                {
+                    previousTypeParameterPositions.Push(new GenericParameterMapping() { BaseType = baseTypeParameter, BaseTypeArgument = args[f], Index = f, TargetParameter = targetTypeParameter });
+                    result = DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
+                    previousTypeParameterPositions.Pop();
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
+        }
 
         #region mapping error message generators
         private static string GetMappingError_InvalidTypeArguments(Type genericType, Type[] finalTypeArguments, ArgumentException aex)

@@ -116,7 +116,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
         public MemberBindingBuilder<TInstance, TMember> Bind<TMember>(Expression<Func<TInstance, TMember>> memberBindingExpression)
         {
-            var member = MethodCallExtractor.ExtractMemberAccess(memberBindingExpression);
+            var member = Extract.Member(memberBindingExpression);
             if (member == null)
                 throw new ArgumentException($"The expression {{{ memberBindingExpression }}} must have a member access expression as its body, and it must be a member belonging to the type { typeof(TInstance) }", nameof(memberBindingExpression));
 
@@ -195,7 +195,7 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.Null(result.BindableString);
             // never bound because it's read only enumerable
             Assert.Equal(new[] { 1.0, 2.0, 3.0 }, result.ReadOnlyDoubles);
-            Assert.Null(result.BindableListOfDecimals);
+            Assert.Empty(result.BindableListOfDecimals);
             Assert.Equal(new DateTime[0], result.CollectionBindableListOfDateTimes);
         }
 
