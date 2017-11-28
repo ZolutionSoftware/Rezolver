@@ -34,7 +34,7 @@ namespace System.Reflection
         {
             if (TypeHelpers.IsGenericType(ctor.DeclaringType))
             {
-#if true
+#if MAXCOMPAT
                 // THIS IS THE ONLY WAY I CAN FIND TO DO THIS WHEN MethodHandle IS NOT AVAILABLE
                 var position = Array.IndexOf(
                     TypeHelpers.GetAllConstructors(ctor.DeclaringType),
@@ -43,12 +43,15 @@ namespace System.Reflection
                 {
                     return TypeHelpers.GetAllConstructors(ctor.DeclaringType.GetGenericTypeDefinition())[position];
                 }
+                else
+                    throw new ArgumentException($"{ctor.DeclaringType}{ctor} could not be found in the list of all constructors for its own type!", nameof(ctor));
 #else
                 // BETTER WAY:
                 return (ConstructorInfo)MethodBase.GetMethodFromHandle(ctor.MethodHandle,
                     ctor.DeclaringType.GetGenericTypeDefinition().TypeHandle);
 #endif
             }
+
             return null;
         }
 
@@ -79,7 +82,7 @@ namespace System.Reflection
         {
             if (TypeHelpers.IsGenericType(targetGenericType) && targetGenericType.GetGenericTypeDefinition() == ctor.DeclaringType)
             {
-#if true
+#if MAXCOMPAT
                 // THIS IS THE ONLY WAY I CAN FIND TO DO THIS WHEN MethodHandle IS NOT AVAILABLE
                 var position = Array.IndexOf(
                     TypeHelpers.GetAllConstructors(ctor.DeclaringType),

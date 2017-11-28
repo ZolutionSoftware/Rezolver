@@ -25,6 +25,8 @@ namespace Rezolver.Configuration
     /// <seealso cref="InjectEnumerables"/>
     public class InjectLists : OptionDependentConfig<Options.EnableListInjection>
     {
+        private static readonly System.Reflection.ConstructorInfo _listCtor = Extract.GenericConstructor((IEnumerable<object> o) => new List<object>(o));
+
         /// <summary>
         /// The one and only instance of <see cref="InjectLists"/>
         /// </summary>
@@ -46,8 +48,10 @@ namespace Rezolver.Configuration
 
             if (targets.Fetch(typeof(List<>)) != null || targets.Fetch(typeof(IList<>)) != null || targets.Fetch(typeof(IReadOnlyList<>)) != null)
                 return;
-
-            var target = Target.ForConstructor(Extract.GenericConstructor((IEnumerable<object> o) => new List<object>(o)));
+            var targetCtor = _listCtor;
+            if (targetCtor == null) throw new InvalidOperationException("Couldn't locate List constructor");
+            if (targetCtor.GetParameters()?.Length != 1) throw new InvalidOperationException($"Expression extractor returned incorrect construction {targetCtor} for { targetCtor.DeclaringType }");
+            var target = Target.ForConstructor(targetCtor);
             targets.Register(target);
             targets.Register(target, typeof(IList<>));
             // might be an argument here for a dedication implementation to prevent casting->modification

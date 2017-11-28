@@ -207,7 +207,7 @@ namespace Rezolver.Targets
             {
                 mappedConstructor = GenericTypeConstructor.ToGenericTypeCtor(targetGeneric);
                 if (mappedConstructor == null)
-                    return new GenericTypeMapping(targetType, targetGeneric, bindErrorMessage: $"Could not map the constructor { GenericTypeConstructor } on the type { targetGeneric }");
+                    return new GenericTypeMapping(targetType, targetGeneric, bindErrorMessage: $"Could not map the constructor { GenericTypeConstructor } from the type { GenericType } to the type { targetGeneric }");
             }
 
             return new GenericTypeMapping(targetType, targetGeneric, mappedConstructor);
@@ -269,7 +269,9 @@ namespace Rezolver.Targets
 
             //construct the constructortarget
             if (mapTypeResult.Constructor != null)
+            {
                 return Target.ForConstructor(mapTypeResult.Constructor, MemberBindingBehaviour);
+            }
             else
                 return Target.ForType(mapTypeResult.Type, MemberBindingBehaviour);
         }
@@ -393,7 +395,7 @@ namespace Rezolver.Targets
             return null;
         }
 
-        #region mapping error message generators
+#region mapping error message generators
         private static string GetMappingError_InvalidTypeArguments(Type genericType, Type[] finalTypeArguments, ArgumentException aex)
         {
             return $"One or more type arguments passed to the generic type { genericType } are invalid.  The type arguments passed were {{{ string.Join(", ", finalTypeArguments.AsEnumerable()) }}}.  Exception message: { aex.Message }";
@@ -438,6 +440,6 @@ namespace Rezolver.Targets
         {
             return $"The type { genericType } cannot be mapped to non-generic type { requestedType }";
         }
-        #endregion
+#endregion
     }
 }
