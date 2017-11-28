@@ -27,6 +27,15 @@ namespace Rezolver.Configuration
     {
         private static readonly System.Reflection.ConstructorInfo _listCtor = Extract.GenericConstructor((IEnumerable<object> o) => new List<object>(o));
 
+        static InjectLists()
+        {
+#if MAXCOMPAT
+            // SEE https://stackoverflow.com/questions/47445250/get-generic-constructor-from-closed-version-net-standard-1-1
+            if (_listCtor == null) throw new InvalidOperationException("Couldn't locate List constructor");
+            if (_listCtor.GetParameters()?.Length != 1) throw new InvalidOperationException($"Expression extractor returned incorrect construction {_listCtor} for { _listCtor.DeclaringType }");
+#endif
+        }
+
         /// <summary>
         /// The one and only instance of <see cref="InjectLists"/>
         /// </summary>
@@ -48,10 +57,8 @@ namespace Rezolver.Configuration
 
             if (targets.Fetch(typeof(List<>)) != null || targets.Fetch(typeof(IList<>)) != null || targets.Fetch(typeof(IReadOnlyList<>)) != null)
                 return;
-            var targetCtor = _listCtor;
-            if (targetCtor == null) throw new InvalidOperationException("Couldn't locate List constructor");
-            if (targetCtor.GetParameters()?.Length != 1) throw new InvalidOperationException($"Expression extractor returned incorrect construction {targetCtor} for { targetCtor.DeclaringType }");
-            var target = Target.ForConstructor(targetCtor);
+            
+            var target = Target.ForConstructor(_listCtor);
             targets.Register(target);
             targets.Register(target, typeof(IList<>));
             // might be an argument here for a dedication implementation to prevent casting->modification

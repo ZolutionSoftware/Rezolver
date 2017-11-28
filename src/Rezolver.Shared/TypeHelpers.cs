@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Collections.Concurrent;
 
 namespace Rezolver
 {
@@ -247,16 +248,19 @@ namespace Rezolver
 		internal static ConstructorInfo[] GetConstructors(Type type)
 		{
 #if MAXCOMPAT
-			return type.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic).Cast<ConstructorInfo>().ToArray();
+			return GetAllConstructors(type).Where(c => c.IsPublic).ToArray();
 #else
 			return type.GetConstructors();
 #endif
 		}
-
+#if MAXCOMPAT
+        // SEE https://stackoverflow.com/questions/47445250/get-generic-constructor-from-closed-version-net-standard-1-1
+        private static readonly ConcurrentDictionary<Type, ConstructorInfo[]> _allConstructors = new ConcurrentDictionary<Type, ConstructorInfo[]>();
+#endif
         internal static ConstructorInfo[] GetAllConstructors(Type type)
         {
 #if MAXCOMPAT
-            return type.GetTypeInfo().DeclaredConstructors.ToArray();
+            return _allConstructors.GetOrAdd(type, t => t.GetTypeInfo().DeclaredConstructors.ToArray());
 #else
             return type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
 #endif
@@ -284,7 +288,7 @@ namespace Rezolver
             //can't use GetDeclaredMethod because it does public and non-public methods, instance and static.
             try
             {
-                return type.GetTypeInfo().DeclaredMethods.Where(m => m.IsPublic == isPublic && m.IsStatic == isStatic && m.Name == methodName).SingleOrDefault();
+                return GetAllMethods(type).Where(m => m.IsPublic == isPublic && m.IsStatic == isStatic && m.Name == methodName).SingleOrDefault();
             }
             catch (InvalidOperationException ioex)
             {
@@ -298,10 +302,13 @@ namespace Rezolver
 #endif
         }
 
+#if MAXCOMPAT
+        private static readonly ConcurrentDictionary<Type, MethodInfo[]> _allMethods = new ConcurrentDictionary<Type, MethodInfo[]>();
+#endif
         internal static MethodInfo[] GetAllMethods(Type type)
         {
 #if MAXCOMPAT
-            return type.GetTypeInfo().DeclaredMethods.ToArray();
+            return _allMethods.GetOrAdd(type, t => t.GetTypeInfo().DeclaredMethods.ToArray());
 #else
             return type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
 #endif

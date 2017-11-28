@@ -36,6 +36,7 @@ namespace System.Reflection
             {
 #if MAXCOMPAT
                 // THIS IS THE ONLY WAY I CAN FIND TO DO THIS WHEN MethodHandle IS NOT AVAILABLE
+                // See https://stackoverflow.com/questions/47445250/get-generic-constructor-from-closed-version-net-standard-1-1
                 var position = Array.IndexOf(
                     TypeHelpers.GetAllConstructors(ctor.DeclaringType),
                     ctor);
@@ -43,8 +44,6 @@ namespace System.Reflection
                 {
                     return TypeHelpers.GetAllConstructors(ctor.DeclaringType.GetGenericTypeDefinition())[position];
                 }
-                else
-                    throw new ArgumentException($"{ctor.DeclaringType}{ctor} could not be found in the list of all constructors for its own type!", nameof(ctor));
 #else
                 // BETTER WAY:
                 return (ConstructorInfo)MethodBase.GetMethodFromHandle(ctor.MethodHandle,
