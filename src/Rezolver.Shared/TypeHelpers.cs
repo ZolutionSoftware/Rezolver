@@ -254,6 +254,7 @@ namespace Rezolver
 #endif
 		}
 #if MAXCOMPAT
+        // This is to ensure consistent results of constructor info references and ordering under .Net Standard 1.1
         // SEE https://stackoverflow.com/questions/47445250/get-generic-constructor-from-closed-version-net-standard-1-1
         private static readonly ConcurrentDictionary<Type, ConstructorInfo[]> _allConstructors = new ConcurrentDictionary<Type, ConstructorInfo[]>();
 #endif
@@ -285,7 +286,6 @@ namespace Rezolver
         internal static MethodInfo GetMethod(Type type, string methodName, bool isPublic, bool isStatic)
         {
 #if MAXCOMPAT
-            //can't use GetDeclaredMethod because it does public and non-public methods, instance and static.
             try
             {
                 return GetAllMethods(type).Where(m => m.IsPublic == isPublic && m.IsStatic == isStatic && m.Name == methodName).SingleOrDefault();
@@ -303,6 +303,8 @@ namespace Rezolver
         }
 
 #if MAXCOMPAT
+        // This is to ensure consistent results of constructor info references and ordering under .Net Standard 1.1
+        // SEE https://stackoverflow.com/questions/47445250/get-generic-constructor-from-closed-version-net-standard-1-1
         private static readonly ConcurrentDictionary<Type, MethodInfo[]> _allMethods = new ConcurrentDictionary<Type, MethodInfo[]>();
 #endif
         internal static MethodInfo[] GetAllMethods(Type type)

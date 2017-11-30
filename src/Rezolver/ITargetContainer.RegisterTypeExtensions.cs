@@ -18,7 +18,7 @@ namespace Rezolver
     public static partial class RegisterTypeTargetContainerExtensions
     {
         /// <summary>
-        /// Registers an instance of <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via constructor injection.  
+        /// Registers the type <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via constructor injection.  
         /// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
         /// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(IResolveContext)"/> is first called.
         /// </summary>
@@ -35,7 +35,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Registers an instance of <typeparamref name="TObject"/> for the service type <typeparamref name="TService"/> to be created by 
+        /// Registers the type <typeparamref name="TObject"/> for the service type <typeparamref name="TService"/> to be created by 
         /// an <see cref="IContainer"/> via constructor injection.  
         /// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
         /// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(IResolveContext)"/> is first called.
@@ -56,8 +56,8 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Registers an instance of <paramref name="objectType"/> (optionally for the service type <paramref name="serviceType"/>) to be 
-        /// created by  an <see cref="IContainer"/> via constructor injection.  
+        /// Registers the type <paramref name="objectType"/> (optionally for the service type <paramref name="serviceType"/>) to be 
+        /// created by an <see cref="IContainer"/> via constructor injection.  
         /// The registration will auto-bind a constructor based on the services available in the <see cref="ITargetContainer"/> and 
         /// <see cref="IContainer"/> available at the time <see cref="IContainer.Resolve(IResolveContext)"/> is first called.
         /// </summary>
@@ -75,6 +75,41 @@ namespace Rezolver
             targetContainer.MustNotBeNull(nameof(targetContainer));
             objectType.MustNotBeNull(nameof(objectType));
             RegisterTypeInternal(targetContainer, objectType, serviceType, memberBinding);
+        }
+
+        /// <summary>
+        /// Register the type <typeparamref name="TObject"/> to be created by the container via constructor injection, with an <see cref="IMemberBindingBehaviour"/>
+        /// that's built from an <see cref="IMemberBindingBehaviourBuilder{TInstance}"/> that's configure by a callback you provide.
+        /// </summary>
+        /// <typeparam name="TObject">The type to be registered and created.</typeparam>
+        /// <param name="targets">The target container on which the registration is to be performed.</param>
+        /// <param name="configureMemberBinding">A callback that will be invoked with a new <see cref="IMemberBindingBehaviourBuilder{TInstance}"/>
+        /// object that you can use to configure a custom member binding behaviour for the type <typeparamref name="TObject"/>.  The
+        /// <see cref="IMemberBindingBehaviourBuilder{TInstance}.BuildBehaviour"/> method will be called after executing your callback to 
+        /// obtain the final <see cref="IMemberBindingBehaviour"/>.</param>
+        public static void RegisterType<TObject>(this ITargetContainer targets, Action<IMemberBindingBehaviourBuilder<TObject>> configureMemberBinding)
+        {
+            RegisterType<TObject, TObject>(targets, configureMemberBinding);
+        }
+
+        /// <summary>
+        /// Same as the <see cref="RegisterType{TObject}(ITargetContainer, Action{IMemberBindingBehaviourBuilder{TObject}})"/> method, except this 
+        /// creates a registration for <typeparamref name="TService"/> that will be implemented by instances of the type <typeparamref name="TObject"/>,
+        /// created via constructor injection.
+        /// </summary>
+        /// <typeparam name="TObject"></typeparam>
+        /// <typeparam name="TService"></typeparam>
+        /// <param name="targets">The target container on which the registration is to be performed.</param>
+        /// <param name="configureMemberBinding">A callback that will be invoked with a new <see cref="IMemberBindingBehaviourBuilder{TInstance}"/>
+        /// object that you can use to configure a custom member binding behaviour for the type <typeparamref name="TObject"/>.  The
+        /// <see cref="IMemberBindingBehaviourBuilder{TInstance}.BuildBehaviour"/> method will be called after executing your callback to 
+        /// obtain the final <see cref="IMemberBindingBehaviour"/>.</param>
+        public static void RegisterType<TObject, TService>(this ITargetContainer targets, Action<IMemberBindingBehaviourBuilder<TObject>> configureMemberBinding)
+            where TObject : TService
+        {
+            var factory = MemberBindingBehaviour.For<TObject>();
+            configureMemberBinding?.Invoke(factory);
+            targets.RegisterType<TObject, TService>(factory.BuildBehaviour());
         }
 
         internal static void RegisterTypeInternal(ITargetContainer targetContainer, Type objectType, Type serviceType, IMemberBindingBehaviour memberBinding)

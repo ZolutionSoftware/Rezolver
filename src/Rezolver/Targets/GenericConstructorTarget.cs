@@ -261,7 +261,7 @@ namespace Rezolver.Targets
 
             var expectedType = context.TargetType;
             if (expectedType == null)
-                throw new ArgumentException("GenericConstructorTarget requires a concrete type to be passed in the CompileContext - by definition it cannot simply create a default instance of the target type.", nameof(context));
+                throw new ArgumentException("GenericConstructorTarget requires a concrete TargetType to be passed in the CompileContext.", nameof(context));
             var mapTypeResult = MapType(context.TargetType);
             //if the mapping fails, or the mapping is not fully bound to a closed generic, throw an exception
             if (!mapTypeResult.Success || !mapTypeResult.IsFullyBound)
@@ -269,9 +269,7 @@ namespace Rezolver.Targets
 
             //construct the constructortarget
             if (mapTypeResult.Constructor != null)
-            {
                 return Target.ForConstructor(mapTypeResult.Constructor, MemberBindingBehaviour);
-            }
             else
                 return Target.ForType(mapTypeResult.Type, MemberBindingBehaviour);
         }
