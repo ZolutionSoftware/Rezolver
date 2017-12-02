@@ -192,6 +192,7 @@ namespace Rezolver
         /// <param name="type">The type whose constructor is to be bound by the target.</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
+        /// <returns>A new target for the type <paramref name="type"/></returns>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
         /// is created; otherwise a <see cref="ConstructorTarget"/> is created.</remarks>
         public static ITarget ForType(
@@ -211,6 +212,7 @@ namespace Rezolver
         /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
+        /// <returns>A new target for the type <paramref name="type"/></returns>
         /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
         /// is created; otherwise a <see cref="ConstructorTarget"/> is created.</remarks>
         public static ITarget ForType(
@@ -236,17 +238,32 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Creates a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/>
-        /// for the type <typeparamref name="T"/>.
+        /// Creates a <see cref="ConstructorTarget"/> for the type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type whose constructor is to be bound by the target.</typeparam>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
-        /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
-        /// is created; otherwise a <see cref="ConstructorTarget"/> is created.</remarks>
+        /// <returns>A new target for the type <typeparamref name="T"/></returns>
         public static ITarget ForType<T>(IMemberBindingBehaviour memberBinding = null)
         {
             return ForType<T>(namedArgs: null, memberBinding: memberBinding);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ConstructorTarget"/> for the type <typeparamref name="T"/> with 
+        /// an <see cref="IMemberBindingBehaviour"/> built from an <see cref="IMemberBindingBehaviourBuilder{TInstance}"/> 
+        /// that's configured by the <paramref name="configureMemberBinding"/> callback.
+        /// </summary>
+        /// <typeparam name="T">The type of object to be created by the target</typeparam>
+        /// <param name="configureMemberBinding">Will be called with a new instance of 
+        /// <see cref="IMemberBindingBehaviourBuilder{TInstance}"/> for you to configure any
+        /// member bindings you wish to add to the target.</param>
+        /// <returns>A new target for the type <typeparamref name="T"/></returns>
+        public static ITarget ForType<T>(Action<IMemberBindingBehaviourBuilder<T>> configureMemberBinding)
+        {
+            var builder = MemberBindingBehaviour.For<T>();
+            configureMemberBinding?.Invoke(builder);
+            return ForType<T>(builder.BuildBehaviour());
         }
 
         /// <summary>
@@ -261,13 +278,36 @@ namespace Rezolver
         /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
-        /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget" />
-        /// is created; otherwise a <see cref="ConstructorTarget" /> is created.</remarks>
+        /// <returns>A new target for the type <typeparamref name="T"/></returns>
         public static ITarget ForType<T>(
             IDictionary<string, ITarget> namedArgs,
             IMemberBindingBehaviour memberBinding = null)
         {
             return ForType(typeof(T), namedArgs, memberBinding);
+        }
+
+        /// <summary>
+        /// Same as <see cref="ForType{T}(IDictionary{string, ITarget}, IMemberBindingBehaviour)"/> except this allows you to
+        /// build a custom member binding behaviour using the fluent API exposed by the <see cref="IMemberBindingBehaviourBuilder{TInstance}"/>
+        /// interface
+        /// </summary>
+        /// <typeparam name="T">The type whose constructor is to be bound by the target.</typeparam>
+        /// <param name="namedArgs">Can be null. A dictionary of targets that are to be bound to the type's
+        /// constructor by name and <see cref="ITarget.DeclaredType"/>.
+        /// 
+        /// If <typeparamref name="T"/> is a generic type definition, then
+        /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
+        /// <param name="configureMemberBinding">Will be called with a new instance of 
+        /// <see cref="IMemberBindingBehaviourBuilder{TInstance}"/> for you to configure any
+        /// member bindings you wish to add to the target.</param>
+        /// <returns>A new target for the type <typeparamref name="T"/></returns>
+        public static ITarget ForType<T>(
+            IDictionary<string, ITarget> namedArgs,
+            Action<IMemberBindingBehaviourBuilder<T>> configureMemberBinding)
+        {
+            var builder = MemberBindingBehaviour.For<T>();
+            configureMemberBinding?.Invoke(builder);
+            return ForType<T>(namedArgs, builder.BuildBehaviour());
         }
 
         /// <summary>
@@ -288,7 +328,7 @@ namespace Rezolver
         /// </remarks>
         /// <example>This example shows how to provide an ObjectTarget for the parameter 'param1' when creating a
         /// ConstructorTarget for the type 'MyType':
-        ///<code>Target.ForType(typeof(MyType), namedArguments: new { param1 = new ObjectTarget(&quot; Hello World&quot;) });</code>
+        /// <code>Target.ForType(typeof(MyType), namedArguments: new { param1 = new ObjectTarget(&quot; Hello World&quot;) });</code>
         /// </example>
         public static ITarget ForType(
             Type type,
@@ -302,18 +342,13 @@ namespace Rezolver
         /// Creates a <see cref="ConstructorTarget"/> or <see cref="GenericConstructorTarget"/>
         /// for the type <typeparamref name="T"/>.
         /// </summary>
-        /// <typeparam name="T">The type whose constructor is to be bound by the target.</typeparam>
+        /// <typeparam name="T">The type whose constructor is to be bound by the created target.</typeparam>
         /// <param name="namedArgs">Optional.  An object whose publicly readable members which are of the 
         /// type <see cref="ITarget"/> (or a type which implements it) are to be bound to the type's constructor 
-        /// by name and <see cref="ITarget.DeclaredType"/>.
-        /// 
-        /// If <typeparamref name="T"/> is a generic type definition, then
-        /// this parameter must be null, or an <see cref="ArgumentException"/> will be thrown.</param>
+        /// by name and <see cref="ITarget.DeclaredType"/>.</param>
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on any target container in which the target is subsequently registered.</param>
-        /// <remarks>If the type is a generic type definition, then a <see cref="GenericConstructorTarget"/>
-        /// is created; otherwise a <see cref="ConstructorTarget"/> is created.
-        /// </remarks>
+        /// <returns>A new target for the type <typeparamref name="T"/></returns>
         /// <example>This example shows how to provide an ObjectTarget for the parameter 'param1' when creating a
         /// ConstructorTarget for the type 'MyType':
         /// <code>Target.ForType&lt;MyType&gt;(namedArguments: new { param1 = new ObjectTarget(&quot;Hello World&quot;) });</code>
@@ -323,6 +358,27 @@ namespace Rezolver
             IMemberBindingBehaviour memberBinding = null)
         {
             return ForType(typeof(T), namedArgs, memberBinding);
+        }
+
+        /// <summary>
+        /// Same as <see cref="ForType{T}(object, IMemberBindingBehaviour)"/> except this lets you build a custom <see cref="IMemberBindingBehaviour"/>
+        /// using the fluent API offered by the <see cref="IMemberBindingBehaviourBuilder{TInstance}"/> interface.
+        /// </summary>
+        /// <typeparam name="T">The type whose constructor is to be bound by the created target.</typeparam>
+        /// <param name="namedArgs">Optional.  An objeect whose publicly readable members which are of the type
+        /// <see cref="ITarget"/> (or a type which implements it) are to be bound to the type's constructor by name
+        /// and <see cref="ITarget.DeclaredType"/>.</param>
+        /// <param name="configureMemberBinding">Will be called with a new instance of 
+        /// <see cref="IMemberBindingBehaviourBuilder{TInstance}"/> for you to configure any
+        /// member bindings you wish to add to the target.</param>
+        /// <returns>A new target for the type <typeparamref name="T"/></returns>
+        public static ITarget ForType<T>(
+            object namedArgs,
+            Action<IMemberBindingBehaviourBuilder<T>> configureMemberBinding)
+        {
+            var builder = MemberBindingBehaviour.For<T>();
+            configureMemberBinding?.Invoke(builder);
+            return ForType(typeof(T), namedArgs, builder.BuildBehaviour());
         }
 
         /// <summary>

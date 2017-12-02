@@ -87,5 +87,63 @@ namespace Rezolver.Tests.Compilation.Specification
             // Assert
             Assert.Equal(new[] { 10m, 20m }, result.BindableListOfDecimals);
         }
+
+
+        [Fact]
+        public void Members_ShouldAutoBindCompliantCustomCollectionMember()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterObject(1);
+            targets.RegisterObject(2);
+            targets.RegisterObject(3);
+            targets.RegisterType<HasCustomCollection>(MemberBindingBehaviour.BindAll);
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasCustomCollection>();
+
+            // Assert
+            Assert.Equal(Enumerable.Range(1, 3), result.Integers);
+        }
+
+        [Fact]
+        public void Members_ShouldExplicitlyBindCustomCollection()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterObject(1);
+            targets.RegisterObject(2);
+            targets.RegisterObject(3);
+            // can do .AsCollection or not, is doesn't matter
+            targets.RegisterType<HasCustomCollection>(b => b.Bind(hcc => hcc.Integers));
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasCustomCollection>();
+
+            // Assert
+            Assert.Equal(Enumerable.Range(1, 3), result.Integers);
+        }
+
+        [Fact]
+        public void Members_ShouldBindToCollectionWithExplicitItems()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterType<HasCollectionMember>(b => 
+                b.Bind(c => c.Numbers).AsCollection(
+                    Target.ForObject(1),
+                    Target.ForObject(2),
+                    Target.ForObject(3)));
+
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasCollectionMember>();
+
+            // Assert
+            Assert.Equal(Enumerable.Range(1, 3), result.Numbers);
+        }
     }
 }

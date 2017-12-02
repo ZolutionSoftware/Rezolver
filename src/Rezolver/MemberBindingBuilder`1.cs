@@ -45,10 +45,31 @@ namespace Rezolver
             BindingFactory = factory;
             return Parent;
         }
+        private static ITarget CreateResolvedEnumerableTarget(Type elementType = null)
+        {
+            return Target.Resolved(typeof(IEnumerable<>).MakeGenericType(elementType ?? CollectionTypeInfo.ElementType));
+        }
+
+        private MemberBinding DefaultBindingFactory()
+        {
+            // if the member is a property that's read-only, then we allow collection binding if it's a collection type
+            if (Member is PropertyInfo prop)
+            {
+                if (!prop.IsPubliclyWritable())
+                {
+                    if (CollectionTypeInfo != null)
+                        return new ListMemberBinding(Member, CreateResolvedEnumerableTarget(), CollectionTypeInfo.ElementType, CollectionTypeInfo.AddMethod);
+                    else
+                        throw new InvalidOperationException($"The member { Member.DeclaringType }.{ Member } is not publicly writable and is not suitable for collection initialisation");
+                }
+            }
+            // otherwise just build a default binding
+            return new MemberBinding(Member);
+        }
 
         MemberBinding IMemberBindingBuilder.BuildBinding()
         {
-            return BindingFactory?.Invoke() ?? new MemberBinding(Member);
+            return BindingFactory?.Invoke() ?? DefaultBindingFactory();
         }
 
         /// <summary>
@@ -113,6 +134,19 @@ namespace Rezolver
         }
 
         /// <summary>
+        /// Explicitly sets the member to be bound as a collection initialiser using the targets passed in
+        /// the <paramref name="elementTargets"/> argument.
+        /// 
+        /// </summary>
+        /// <param name="elementTargets"></param>
+        /// <returns></returns>
+        public IMemberBindingBehaviourBuilder<TInstance> AsCollection(params ITarget[] elementTargets)
+        {
+            ValidateCollectionType();
+            return AsCollectionInternal(new Targets.EnumerableTarget(elementTargets, CollectionTypeInfo.ElementType));
+        }
+
+        /// <summary>
         /// Explicitly sets the member to be bound as a collection initialiser - i.e. instead of resolving an
         /// instance of the member type, Rezolver will resolve an enumerable of the type <typeparamref name="TElement"/>,
         /// which is then added to the collection after construction using a publicly available `Add` method on the
@@ -150,7 +184,8 @@ namespace Rezolver
         }
 
         private IMemberBindingBehaviourBuilder<TInstance> AsCollectionInternal(Type elementType)
-            => AsCollectionInternal(Target.Resolved(typeof(IEnumerable<>).MakeGenericType(elementType ?? CollectionTypeInfo.ElementType)));
+            => AsCollectionInternal(CreateResolvedEnumerableTarget(elementType));
+
 
         private IMemberBindingBehaviourBuilder<TInstance> AsCollectionInternal(ITarget target)
             => SetFactory(() => new ListMemberBinding(Member, target, CollectionTypeInfo.ElementType, CollectionTypeInfo.AddMethod));
