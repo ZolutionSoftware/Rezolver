@@ -116,6 +116,17 @@ namespace Rezolver
         }
 
         /// <summary>
+        /// Sets the binding for the member to a constant service - equivalent to
+        /// calling <see cref="ToTarget(ITarget)"/> with an <see cref="Targets.ObjectTarget"/>
+        /// </summary>
+        /// <param name="obj">The value to be bound to the member</param>
+        /// <returns></returns>
+        public IMemberBindingBehaviourBuilder<TInstance> ToObject(TMember obj)
+        {
+            return ToTarget(Target.ForObject(obj));
+        }
+
+        /// <summary>
         /// Explicitly sets the member to be bound as a collection initialiser - i.e. instead of resolving an
         /// instance of the member type, Rezolver will resolve an enumerable of an element type, which is then
         /// added to the collection after construction using a publicly available `Add` method on the member type.
@@ -144,6 +155,18 @@ namespace Rezolver
         {
             ValidateCollectionType();
             return AsCollectionInternal(new Targets.EnumerableTarget(elementTargets, CollectionTypeInfo.ElementType));
+        }
+
+        /// <summary>
+        /// This binds a collection member to an enumerable whose elements are resolved at resolve-time
+        /// via the types provided.  In effect, multiple resolve operations are performed and the results
+        /// are then fed into the collection.
+        /// </summary>
+        /// <param name="elementTypes">The types of each individual element</param>
+        /// <returns></returns>
+        public IMemberBindingBehaviourBuilder<TInstance> AsCollection(params Type[] elementTypes)
+        {
+            return AsCollection(elementTypes.Select(et => Target.Resolved(et)).ToArray());
         }
 
         /// <summary>

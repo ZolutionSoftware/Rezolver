@@ -145,5 +145,48 @@ namespace Rezolver.Tests.Compilation.Specification
             // Assert
             Assert.Equal(Enumerable.Range(1, 3), result.Numbers);
         }
+
+        [Fact]
+        public void Members_ShouldExplicitlyBindCollection_Covariantly()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterType<BaseClass>();
+            targets.RegisterType<BaseClassChild>();
+            targets.RegisterType<BaseClassGrandchild>();
+            targets.RegisterType<HasCollectionOfBaseClass>(b =>
+                b.Bind(o => o.Collection));
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasCollectionOfBaseClass>();
+
+            // Assert
+            Assert.Equal(3, result.Collection.Count);
+            Assert.IsType<BaseClass>(result.Collection[0]);
+            Assert.IsType<BaseClassChild>(result.Collection[1]);
+            Assert.IsType<BaseClassGrandchild>(result.Collection[2]);
+        }
+
+        [Fact]
+        public void Members_ShouldExplicitlyBindCollection_WithExplicitTypes()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterType<BaseClass>();
+            targets.RegisterType<BaseClassChild>();
+            targets.RegisterType<BaseClassGrandchild>();
+            targets.RegisterType<HasCollectionOfBaseClass>(b =>
+                b.Bind(o => o.Collection).AsCollection(typeof(BaseClassChild), typeof(BaseClassGrandchild)));
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasCollectionOfBaseClass>();
+
+            // Assert
+            Assert.Equal(2, result.Collection.Count);
+            Assert.IsType<BaseClassChild>(result.Collection[0]);
+            Assert.IsType<BaseClassGrandchild>(result.Collection[1]);
+        }
     }
 }

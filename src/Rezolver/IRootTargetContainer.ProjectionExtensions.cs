@@ -9,16 +9,52 @@ namespace Rezolver
 {
     public static partial class RootTargetContainerExtensions
     {
+        /// <summary>
+        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/> 
+        /// from elements of an input enumerable of type <typeparamref name="TFrom"/> using constructor injection
+        /// to create each instance of <typeparamref name="TTo"/>.
+        /// 
+        /// The same as calling <see cref="RegisterProjection(IRootTargetContainer, Type, Type, Type)"/> with 
+        /// <typeparamref name="TTo"/> used as the argument to both `TTo` and `TImplementation` type parameters.
+        /// </summary>
+        /// <typeparam name="TFrom">The type of the enumerable that provides the source of the projection</typeparam>
+        /// <typeparam name="TTo">The type of the enumerable that will be the output of the projection</typeparam>
+        /// <param name="targets"></param>
         public static void RegisterProjection<TFrom, TTo>(this IRootTargetContainer targets)
         {
             RegisterProjection<TFrom, TTo, TTo>(targets);
         }
 
+        /// <summary>
+        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/> 
+        /// from elements of an input enumerable of type <typeparamref name="TFrom"/> using constructor injection
+        /// to create each instance of <typeparamref name="TImplementation"/>.
+        /// </summary>
+        /// <typeparam name="TFrom">The type of the enumerable that provides the source of the projection</typeparam>
+        /// <typeparam name="TTo">The type of the enumerable that will be the output of the projection</typeparam>
+        /// <typeparam name="TImplementation">The type to be created for each element.</typeparam>
+        /// <param name="targets"></param>
+        /// <remarks>
+        /// This is like hot-wiring the Linq <see cref="Enumerable.Select{TSource, TResult}(IEnumerable{TSource}, Func{TSource, TResult})"/>
+        /// directly into the container.
+        /// 
+        /// Typically each instance of the implementation type <typeparamref name="TImplementation"/> will require an 
+        /// instance of type <typeparamref name="TFrom"/> to be passed into its constructor - the framework 
+        /// takes care of passing the individual elements in for each instance of <typeparamref name="TImplementation"/> 
+        /// that it creates.</remarks>
         public static void RegisterProjection<TFrom, TTo, TImplementation>(this IRootTargetContainer targets)
+            where TImplementation : TTo
         {
             RegisterProjection(targets, typeof(TFrom), typeof(TTo), typeof(TImplementation));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TFrom"></typeparam>
+        /// <typeparam name="TTo"></typeparam>
+        /// <param name="targets"></param>
+        /// <param name="implementationTypeSelector"></param>
         public static void RegisterProjection<TFrom, TTo>(this IRootTargetContainer targets, Func<IRootTargetContainer, ITarget, Type> implementationTypeSelector)
         {
             RegisterProjection(targets, typeof(TFrom), typeof(TTo), implementationTypeSelector);
