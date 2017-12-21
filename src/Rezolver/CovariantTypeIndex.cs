@@ -123,7 +123,8 @@ namespace Rezolver
                         )
                         .Select(tap =>
                             // when a type argument is covariant, then we can safely include all its bases and interfaces
-                            tap.typeParam.IsCovariantTypeParameter() ? GetAllCompatibleTypes(tap.typeArg) : new[] { tap.typeArg }
+                            // but only 
+                            !KnownTypes.Contains(tap.typeArg) && tap.typeParam.IsCovariantTypeParameter() ? GetAllCompatibleTypes(tap.typeArg) : new[] { tap.typeArg }
                         )
                         .Permutate()
                         .Select(typeArgs =>
