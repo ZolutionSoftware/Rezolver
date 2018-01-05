@@ -162,7 +162,10 @@ namespace Rezolver.Tests
         {
 
         }
-        public interface IFoo : IFooBase<IFoo>
+
+        public interface IFooFoo { }
+
+        public interface IFoo : IFooBase<IFoo>, IFooFoo
         {
 
         }
@@ -182,7 +185,7 @@ namespace Rezolver.Tests
             targets.RegisterObject<IFoo>(null, serviceType: typeof(IFooBase<IFoo>));
 
             // Act
-            var fetched = targets.Fetch(typeof(IFoo));
+            var fetched = targets.Fetch(typeof(IFooBase<IFooFoo>));
 
             // Assert
             Assert.NotNull(fetched);

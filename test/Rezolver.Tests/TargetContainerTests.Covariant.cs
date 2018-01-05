@@ -150,6 +150,12 @@ namespace Rezolver.Tests
             var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<BaseClass>)));
             var nestedEnumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<ICovariant<BaseClass>>)));
 
+            // NEW PROBLEM!
+            // This test fails on 161 because the new derived type tracking in the covariant type index is not mapping
+            // Covariant<BaseClassChild> (for example) to ICovariant<BaseClass> - but it should be.  It has *nothing* to 
+            // do with the EnableEnumerableCovariance option being set to false (try taking out line 135) and running - 
+            // the nestedEnumerableTarget Targets enumerable still only contains one item, when it should contain three.
+
             // Assert
             Assert.Equal(new[] { baseTarget }, enumerableTarget.Targets);
             Assert.Equal(new[] { nestedbaseTarget, nestedchildTarget, nestedgrandChildTarget }, nestedEnumerableTarget.Targets);

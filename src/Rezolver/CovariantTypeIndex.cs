@@ -38,11 +38,12 @@ namespace Rezolver
 
             if (KnownTypes.Add(serviceType))
             {
+                Stack<Type> derivedTypeStack = new Stack<Type>(new[] { serviceType });
                 if (TypeHelpers.IsArray(serviceType))
                 {
                     var elementType = TypeHelpers.GetElementType(serviceType);
 
-                    foreach(var type in GetGenericCovariants(elementType)
+                    foreach(var type in GetGenericCovariants(elementType, derivedTypeStack)
                         .Select(t => TypeHelpers.MakeArrayType(t)))
                     {
                         AddCovariantEntry(serviceType, type);
@@ -56,7 +57,7 @@ namespace Rezolver
                 }
                 else
                 {
-                    foreach (var type in GetGenericCovariants(serviceType))
+                    foreach (var type in GetGenericCovariants(serviceType, derivedTypeStack))
                     {
                         AddCovariantEntry(serviceType, type);
                     }
@@ -107,7 +108,7 @@ namespace Rezolver
         /// Func&lt;IEnumerable&lt;IComparable&lt;char&gt;&gt;&gt;
         /// 
         /// and so on.</remarks>
-        private IEnumerable<Type> GetGenericCovariants(Type type)
+        private IEnumerable<Type> GetGenericCovariants(Type type, Stack<Type> derivedTypeStack)
         {
             // if this type is a closed generic type whose generic type definition has one or
             // more covariant arguments, then we descend each covariant argument's type hierarchy,
@@ -122,9 +123,9 @@ namespace Rezolver
                             (ta, tp) => new { typeArg = ta, typeParam = tp }
                         )
                         .Select(tap =>
-                            // when a type argument is covariant, then we can safely include all its bases and interfaces
-                            // but only 
-                            !KnownTypes.Contains(tap.typeArg) && tap.typeParam.IsCovariantTypeParameter() ? GetAllCompatibleTypes(tap.typeArg) : new[] { tap.typeArg }
+                            // when a type argument is passed to a covariant parameter, then we can 
+                            // safely include all its bases and interfaces
+                            !KnownTypes.Contains(tap.typeArg) && tap.typeParam.IsCovariantTypeParameter() ? GetAllCompatibleTypes(tap.typeArg, derivedTypeStack) : new[] { tap.typeArg }
                         )
                         .Permutate()
                         .Select(typeArgs =>
@@ -161,24 +162,51 @@ namespace Rezolver
         /// variants of the same generic which use more derived types for any covariant generic parameters.
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="derivedTypeStack">A state stack which is used to prevent descending into the type
+        /// hierarchies of type arguments to covariant type parameters which are equal to a type that is
+        /// inheriting/implementing the generic.</param>
         /// <returns></returns>
-        private IEnumerable<Type> GetAllCompatibleTypes(Type type)
+        /// <remarks><code>class MyClass : IEnumerable&lt;MyClass&gt;</code> is an example of a type for which
+        /// the <paramref name="derivedTypeStack"/> parameter is required.</remarks>
+        private IEnumerable<Type> GetAllCompatibleTypes(Type type, Stack<Type> derivedTypeStack)
         {
-            IEnumerable<Type> toReturn = Enumerable.Empty<Type>();
+            List<Type> toReturn = new List<Type>();
 
             if (TypeHelpers.IsArray(type))
             {
-                toReturn = toReturn.Concat(
-                    GetAllCompatibleTypes(TypeHelpers.GetElementType(type))
-                    .Select(t => TypeHelpers.MakeArrayType(type)));
+                foreach(var t in GetAllCompatibleTypes(TypeHelpers.GetElementType(type), derivedTypeStack))
+                {
+                    toReturn.Add(TypeHelpers.MakeArrayType(t));
+                }
             }
 
-            // if the type is generic, then this will generate any covariant permutations
-            // of its type arguments.
-            toReturn = toReturn.Concat(GetGenericCovariants(type));
-            toReturn = toReturn.Concat(GetTypeHierarchy(type).SelectMany(t => new[] { t }.Concat(GetGenericCovariants(t))));
+            // if the type is generic, then this will generate any covariant 
+            // permutations of its type arguments.
+            foreach(var t in GetGenericCovariants(type, derivedTypeStack)) //<-- HERE pass the stack and prevent covariants being generated when type arg is equal to one in the stack
+            {
+                toReturn.Add(t);
+            }
 
-            return toReturn;
+            // HERE - Need to push the source type into a stack (which might be passed in) which will prevent us from using any
+            // derived type as a type argument to any covariant type parameters.
+            derivedTypeStack.Push(type);
+            foreach(var t in GetTypeHierarchy(type))
+            {
+                toReturn.Add(t);
+                if (!derivedTypeStack.Contains(t))
+                {
+                    derivedTypeStack.Push(t);
+                    foreach (var tco in GetGenericCovariants(t, derivedTypeStack))
+                    {
+                        toReturn.Add(tco);
+                    }
+                    derivedTypeStack.Pop();
+                }
+            }
+
+            derivedTypeStack.Pop();
+
+            return toReturn.AsReadOnly();
         }
 
         private void AddCovariantEntry(Type type, Type covariantMatch)
