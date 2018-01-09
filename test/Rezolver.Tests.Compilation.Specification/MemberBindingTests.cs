@@ -88,6 +88,43 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.Equal(new[] { 10m, 20m }, result.BindableListOfDecimals);
         }
 
+        [Fact]
+        public void Members_ShouldAutoBindIListMember()
+        {
+            // issue #69
+
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterObject(1);
+            targets.RegisterObject(2);
+            targets.RegisterObject(3);
+            targets.RegisterType<HasIListMember>(MemberBindingBehaviour.BindAll);
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasIListMember>();
+
+            // Assert
+            Assert.Equal(Enumerable.Range(1, 3), result.ListOfInts);
+        }
+
+        [Fact]
+        public void Members_ShouldExplicitlyBindIListMember()
+        {
+            // issue #69
+
+            // Arrange
+            var targets = CreateTargetContainer();
+
+            targets.RegisterType<HasIListMember>(m => m.Bind(o => o.ListOfInts).AsCollection(Target.ForObject(1), Target.ForObject(2), Target.ForObject(3)));
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasIListMember>();
+
+            // Assert
+            Assert.Equal(Enumerable.Range(1, 3), result.ListOfInts);
+        }
 
         [Fact]
         public void Members_ShouldAutoBindCompliantCustomCollectionMember()

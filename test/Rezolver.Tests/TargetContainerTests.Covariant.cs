@@ -70,6 +70,70 @@ namespace Rezolver.Tests
         }
 
         [Fact]
+        public void Covariant_ShouldRegister_TypeWhichReferencesItselfInImplementedCovariant_NoEnumerable()
+        {
+            // Tests an bug with covariance when a type inherits an interface in which it passes itself 
+            // as the argument to a covariant type parameter. This results in a stack overflow unless
+            // explicitly handled.
+            // This simplified, less real-world, scenario takes enumerables out of the equation.
+
+            // Arrange
+            var config = TargetContainer.DefaultConfig.Clone();
+            config.Remove(Configuration.InjectEnumerables.Instance);
+            var targets = new TargetContainer();
+            targets.RegisterObject<ISelfReferencingCovariant>(null, serviceType: typeof(ICovariant<ISelfReferencingCovariant>));
+
+            // Act
+            var fetched = targets.Fetch(typeof(ICovariant<ISelfReferencingCovariantBaseInterface>));
+
+            // Assert
+            Assert.NotNull(fetched);
+            Assert.False(fetched.UseFallback);
+        }        
+
+        [Fact]
+        public void Covariant_ShouldRegister_TypeWhichReferencesItselfInImplementedCovariant_Complex()
+        {
+            // This is inspired by an error that I'm getting in Xamarin when I attempt to register
+            // pages in the container - it immediately goes into an endless loop as it attempts
+            // to produce the known list of covariant types
+
+            // Arrange
+            var targets = new TargetContainer();
+            targets.RegisterType<GenericArg>();
+
+            // Act
+            var fetched = targets.Fetch(typeof(GenericArg));
+
+            // Assert
+            Assert.NotNull(fetched);
+            Assert.False(fetched.UseFallback);
+        }
+
+        [Fact]
+        public void Covariant_ShouldFetchNestedCovariant_CovariantIndexBug()
+        {
+            // As part of the work done to solve stack overflows when covariance is enabled and
+            // a type is registered which implements a generic interface or inherits a generic
+            // base into which it passes itself; I then introduced a bug whereby covariant compatibility
+            // detection would depend on the order in which types were registered in the target container.
+            // This test specifically verifies that that erroneous behaviour has not regressed.
+
+            // Arrange
+            var targets = new TargetContainer();
+            var grandChildTarget = Target.ForType<BaseClassGrandchild>();
+            var nestedgrandChildTarget = Target.ForType<Covariant<BaseClassGrandchild>>();
+
+            targets.Register(grandChildTarget);
+            targets.Register(nestedgrandChildTarget, typeof(ICovariant<BaseClassGrandchild>));
+
+            //Act
+            var match = targets.Fetch(typeof(ICovariant<BaseClass>));
+
+            Assert.Same(nestedgrandChildTarget, match);
+        }
+
+        [Fact]
         public void Covariant_Enumerable_ShouldContainAllMatches()
         {
             // Arrange
@@ -155,6 +219,7 @@ namespace Rezolver.Tests
             // Covariant<BaseClassChild> (for example) to ICovariant<BaseClass> - but it should be.  It has *nothing* to 
             // do with the EnableEnumerableCovariance option being set to false (try taking out line 135) and running - 
             // the nestedEnumerableTarget Targets enumerable still only contains one item, when it should contain three.
+            // The problem is fixed if we move the registration of the ICovariant targets BEFORE the non-generic ones!
 
             // Assert
             Assert.Equal(new[] { baseTarget }, enumerableTarget.Targets);
