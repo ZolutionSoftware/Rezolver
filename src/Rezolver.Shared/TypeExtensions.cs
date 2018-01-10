@@ -77,7 +77,8 @@ namespace Rezolver
             return _collectionTypeCache.GetOrAdd(type, t => {
                 Type enumElemType;
                 MethodInfo addMethod;
-                var allAddMethods = t.GetRuntimeMethods()
+               
+                var allAddMethods = t.GetAllMethods()
                     .Where(mi => mi.IsPublic && mi.Name == "Add" && mi.ReturnType == typeof(void))
                     .Select(mi => new { Method = mi, Parameters = mi.GetParameters() });
 
@@ -219,15 +220,17 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Gets all public instance fields declared on the type.
+		/// Gets all public instance fields for the type.  
 		/// </summary>
 		/// <param name="type"></param>
 		/// <returns></returns>
 		internal static FieldInfo[] GetInstanceFields(this Type type)
 		{
 #if MAXCOMPAT
-			return type.GetTypeInfo().DeclaredFields.Where(f => !f.IsStatic).ToArray();
+			return type.GetAllFields().Where(f => !f.IsStatic).ToArray();
 #else
+            // it's better to use the old GetFields API even though the above
+            // line also works when !MAXCOMPAT
 			return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 #endif
 		}
@@ -235,7 +238,7 @@ namespace Rezolver
 		internal static PropertyInfo[] GetInstanceProperties(this Type type)
 		{
 #if MAXCOMPAT
-			return type.GetTypeInfo().DeclaredProperties.Where(p => 
+			return type.GetAllProperties().Where(p => 
 				(p.GetMethod != null && !p.GetMethod.IsStatic) ||
 				(p.SetMethod != null && !p.SetMethod.IsStatic)).ToArray();
 #else
@@ -276,6 +279,54 @@ namespace Rezolver
 			elementType = TypeHelpers.GetGenericArguments(type)[0];
 			return true;
 		}
+
+        private static IEnumerable<Type> SelfAndBases(Type type)
+        {
+            List<Type> toReturn = new List<Type> { type };
+
+            if (!TypeHelpers.IsInterface(type))
+                toReturn.AddRange(type.GetAllBases());
+            else
+                toReturn.AddRange(TypeHelpers.GetInterfaces(type));
+
+            return toReturn;
+        }
+
+        /// <summary>
+        /// Different to GetRuntimeProperties - this will return every single available property on a type.  If the type is a 
+        /// class then it will return properties declared on the class itself plus any of its bases (same as GetRuntimeProperties).
+        /// If the type is an interface, then it'll return all properties on that interface and any other that it inherits (not
+        /// the same as GetRuntimeProperties).
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        internal static IEnumerable<PropertyInfo> GetAllProperties(this Type type)
+        {
+            if (!TypeHelpers.IsInterface(type))
+                return type.GetRuntimeProperties();
+            else
+            {
+                return SelfAndBases(type).SelectMany(t => t.GetRuntimeProperties());
+            }
+        }
+
+        internal static IEnumerable<FieldInfo> GetAllFields(this Type type)
+        {
+            if (!TypeHelpers.IsInterface(type))
+                return type.GetRuntimeFields();
+
+            return Enumerable.Empty<FieldInfo>();
+        }
+
+        internal static IEnumerable<MethodInfo> GetAllMethods(this Type type)
+        {
+            if (!TypeHelpers.IsInterface(type))
+                return type.GetRuntimeMethods();
+            else
+            {
+                return SelfAndBases(type).SelectMany(t => t.GetRuntimeMethods());
+            }
+        }
 	}
 
 

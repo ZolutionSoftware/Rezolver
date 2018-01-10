@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    public class HasIListMember
+    public class HasIListMember<T>
     {
-        public IList<int> ListOfInts { get; }
+        public IList<T> Children { get; }
 
         public HasIListMember()
         {
-            ListOfInts = new List<int>();
+            Children = new List<T>();
         }
     }
 }

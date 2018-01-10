@@ -9,14 +9,40 @@ namespace Rezolver
 {
     public class BindSpecificMembersBehaviour : BindAllMembersBehaviour
     {
-        // TODO: Change this to one which accepts all bindings up front, and then use a dictionary to store each by the member that is bound.
-        private Dictionary<MemberInfo, MemberBinding> _members;
+        //required because members don't, apparently, hash the same in some versions of .Net
+        private struct MemberInfoKey : IEquatable<MemberInfoKey>
+        {
+            public MemberInfo Member { get; }
+            public MemberInfoKey(MemberInfo member)
+            {
+                Member = member;
+            }
+
+            public bool Equals(MemberInfoKey other)
+            {
+                return Member == other.Member ||
+                    (Member.DeclaringType == other.Member.DeclaringType && Member.Name == other.Member.Name);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if(obj is MemberInfoKey key)
+                    return Equals(key);
+                return false;
+            }
+
+            public override int GetHashCode()
+            {
+                return Member.DeclaringType.GetHashCode() ^ Member.Name.GetHashCode();
+            }
+        }
+        private Dictionary<MemberInfoKey, MemberBinding> _members;
         public BindSpecificMembersBehaviour(IEnumerable<MemberInfo> members)
         {
             if (members == null)
                 throw new ArgumentNullException(nameof(members));
 
-            _members = members.ToDictionary(m => m, m => (MemberBinding)null);
+            _members = members.ToDictionary(m => new MemberInfoKey(m), m => (MemberBinding)null);
         }
 
         public BindSpecificMembersBehaviour(IEnumerable<MemberBinding> memberBindings)
@@ -24,22 +50,22 @@ namespace Rezolver
             if (memberBindings == null)
                 throw new ArgumentNullException(nameof(memberBindings));
 
-            _members = memberBindings.ToDictionary(b => b.Member);
+            _members = memberBindings.ToDictionary(b => new MemberInfoKey(b.Member));
         }
 
         protected override bool ShouldBind(PropertyInfo pi)
         {
-            return _members.ContainsKey(pi);
+            return _members.ContainsKey(new MemberInfoKey(pi));
         }
 
         protected override bool ShouldBind(FieldInfo fi)
         {
-            return _members.ContainsKey(fi);
+            return _members.ContainsKey(new MemberInfoKey(fi));
         }
 
         protected override MemberBinding CreateBinding(ICompileContext context, Type type, FieldInfo field)
         {
-            if (_members.TryGetValue(field, out var binding))
+            if (_members.TryGetValue(new MemberInfoKey(field), out var binding))
                 return binding;
 
             return base.CreateBinding(context, type, field);
@@ -47,7 +73,7 @@ namespace Rezolver
 
         protected override MemberBinding CreateBinding(ICompileContext context, Type type, PropertyInfo prop)
         {
-            if (_members.TryGetValue(prop, out var binding))
+            if (_members.TryGetValue(new MemberInfoKey(prop), out var binding))
                 return binding;
 
             return base.CreateBinding(context, type, prop);

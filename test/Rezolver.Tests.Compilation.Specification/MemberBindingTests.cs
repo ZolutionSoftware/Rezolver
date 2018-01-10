@@ -63,6 +63,35 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.Equal(new DateTime[0], result.CollectionBindableListOfDateTimes);
         }
 
+        [Fact]
+        public void Members_ShouldBindAll_OfBase()
+        {
+            // Same as Members_ShouldBindAll but this does it on a derived type
+
+            //Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterObject(10);             //single int property
+            targets.RegisterObject("hello world");  //single string property
+            targets.RegisterObject(30m);            //List decimal property
+            targets.RegisterObject(40m);
+            DateTime now = DateTime.UtcNow;         //Bind to collection of datetimes
+            targets.RegisterObject(now);
+            targets.RegisterObject(now.AddDays(1));
+            targets.RegisterType<HasMembersChild>(MemberBindingBehaviour.BindAll);
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasMembersChild>();
+
+            // Assert
+            Assert.Equal(10, result.BindableInt);
+            Assert.Equal("hello world", result.BindableString);
+            // never bound because it's read only enumerable
+            Assert.Equal(new[] { 1.0, 2.0, 3.0 }, result.ReadOnlyDoubles);
+            Assert.Equal(new[] { 30m, 40m }, result.BindableListOfDecimals);
+            Assert.Equal(new[] { now, now.AddDays(1) }, result.CollectionBindableListOfDateTimes);
+        }
+
 
         [Fact]
         public void Members_ShouldExplicitlyBindCollectionMember()
@@ -98,14 +127,14 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterObject(1);
             targets.RegisterObject(2);
             targets.RegisterObject(3);
-            targets.RegisterType<HasIListMember>(MemberBindingBehaviour.BindAll);
+            targets.RegisterType<HasIListMember<int>>(MemberBindingBehaviour.BindAll);
             var container = CreateContainer(targets);
 
             // Act
-            var result = container.Resolve<HasIListMember>();
+            var result = container.Resolve<HasIListMember<int>>();
 
             // Assert
-            Assert.Equal(Enumerable.Range(1, 3), result.ListOfInts);
+            Assert.Equal(Enumerable.Range(1, 3), result.Children);
         }
 
         [Fact]
@@ -116,14 +145,36 @@ namespace Rezolver.Tests.Compilation.Specification
             // Arrange
             var targets = CreateTargetContainer();
 
-            targets.RegisterType<HasIListMember>(m => m.Bind(o => o.ListOfInts).AsCollection(Target.ForObject(1), Target.ForObject(2), Target.ForObject(3)));
+            targets.RegisterType<HasIListMember<int>>(m => m.Bind(o => o.Children).AsCollection(Target.ForObject(1), Target.ForObject(2), Target.ForObject(3)));
             var container = CreateContainer(targets);
 
             // Act
-            var result = container.Resolve<HasIListMember>();
+            var result = container.Resolve<HasIListMember<int>>();
 
             // Assert
-            Assert.Equal(Enumerable.Range(1, 3), result.ListOfInts);
+            Assert.Equal(Enumerable.Range(1, 3), result.Children);
+        }
+
+        [Fact]
+        public void Members_ShouldExplicitlyBindIListMember_ResolvingDerivedTypes()
+        {
+            // issue #69 still, but might affect more than just IList
+
+            // Arrange
+            var targets = CreateTargetContainer();
+
+            targets.RegisterType<BaseClassChild>();
+            targets.RegisterType<BaseClassGrandchild>();
+            targets.RegisterType<HasIListMember<BaseClass>>(m => m.Bind(o => o.Children).AsCollection(typeof(BaseClassChild), typeof(BaseClassGrandchild)));
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasIListMember<BaseClass>>();
+
+            // Assert
+            Assert.Equal(2, result.Children.Count);
+            Assert.IsType<BaseClassChild>(result.Children[0]);
+            Assert.IsType<BaseClassGrandchild>(result.Children[1]);
         }
 
         [Fact]

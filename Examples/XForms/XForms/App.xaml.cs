@@ -37,6 +37,8 @@ namespace XForms
 
                 Targets.RegisterType<TabbedPage>(mb => mb
                     .Bind(p => p.Children).AsCollection(typeof(ItemsPage), typeof(AboutPage)));
+
+                Targets.Register(Target.ForType<NavigationPage>(new { root = Target.Resolved<TabbedPage>() }));
                 
                 Container = new Container(Targets, ContainerConfig);
             }
@@ -45,7 +47,7 @@ namespace XForms
 
         public static void SetMainPage()
         {
-            Current.MainPage = Container.Resolve<TabbedPage>();
+            Current.MainPage = Container.Resolve<NavigationPage>();
         }
     }
 }

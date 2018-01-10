@@ -19,8 +19,6 @@ namespace Rezolver
 	/// </summary>
 	internal static class TypeHelpers
 	{
-        
-
         internal static IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(Type type, bool inherit=false)
             where TAttribute : Attribute
         {
