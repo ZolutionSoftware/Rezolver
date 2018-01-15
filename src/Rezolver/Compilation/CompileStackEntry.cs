@@ -13,7 +13,7 @@ namespace Rezolver.Compilation
 	/// Represents an entry in the compilation stack of a <see cref="ICompileContext"/>,
 	/// recording both a target that is being compiled, and the type for which it is being compiled.
 	/// </summary> 
-	public class CompileStackEntry : IEquatable<CompileStackEntry>
+	public struct CompileStackEntry : IEquatable<CompileStackEntry>
 	{
 		/// <summary>
 		/// Gets the target being compiled.
@@ -46,7 +46,6 @@ namespace Rezolver.Compilation
 		/// being equal between this instance and the <paramref name="other"/> instance.</remarks>
 		public bool Equals(CompileStackEntry other)
 		{
-			if (other == null) return false;
 			return object.ReferenceEquals(Target, other.Target) && TargetType.Equals(other.TargetType);
 		}
 		/// <summary>
@@ -55,7 +54,10 @@ namespace Rezolver.Compilation
 		/// <param name="obj">The object to compare with the current object.</param>
 		public override bool Equals(object obj)
 		{
-			return Equals(obj as CompileStackEntry);
+            if (obj is CompileStackEntry se)
+                return Equals(se);
+            else
+                return false;
 		}
 		/// <summary>
 		/// Returns a hash code for this instance.

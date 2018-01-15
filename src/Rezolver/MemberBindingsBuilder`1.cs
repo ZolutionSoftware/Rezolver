@@ -20,7 +20,8 @@ namespace Rezolver
     /// allow you to chain further member customisations via a fluent API.
     /// 
     /// You can't create an instance of this class directly - the framework creates an instance for you, either returning it (in the case
-    /// of <see cref="MemberBindingBehaviour.For{TInstance}"/>) or passing it as an argument to a callback (in the case of <see cref="Target."/>
+    /// of <see cref="MemberBindingBehaviour.For{TInstance}"/>) or passing it as an argument to a callback (in the case of 
+    /// <see cref="Target.ForType{T}(Action{IMemberBindingBehaviourBuilder{T}})"/>, for example.
     /// </remarks>
     public class MemberBindingBehaviourBuilder<TInstance> : IMemberBindingBehaviourBuilder<TInstance>
     {

@@ -17,7 +17,8 @@ namespace Rezolver
     public interface IRootTargetContainer : ITargetContainer, ICovariantTypeIndex
     {
         /// <summary>
-        /// Raised when a target has been registered to this root container.
+        /// Raised when a target has been registered in this root container (possibly as a child within a
+        /// target container that was previously registered).
         /// </summary>
         event EventHandler<Events.TargetRegisteredEventArgs> TargetRegistered;
         /// <summary>

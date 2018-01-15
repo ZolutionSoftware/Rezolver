@@ -170,8 +170,8 @@ namespace Rezolver
         /// Register a generic type by constructor (represented by the model expression <paramref name="newExpr"/>).
         /// Note - a concrete generic is used as an *example* - the equivalent open generic constructor is located
         /// and registered against the open generic of the type you actually invoke this method for; e.g. if 
-        /// <typeparamref name="TObject"/> is `MyGeneric&lt;Foo, Bar&gt;` , then a target bound to the equivalent 
-        /// constructor on the open generic `MyGeneric&lt;,&gt;` will be what is actually registered.
+        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt;, then a target bound to the equivalent 
+        /// constructor on the open generic MyGeneric&lt;,&gt; will be what is actually registered.
         /// </summary>
         /// <typeparam name="TObject">Must be a generic type.  It doesn't matter what the type arguments are, however,
         /// as the target that is created will be for the generic type definition of this type.</typeparam>
@@ -201,10 +201,10 @@ namespace Rezolver
         /// as an implementation of another open generic based on <typeparamref name="TService"/>.
         /// Note - a concrete generic is used as an *example* - the equivalent open generic constructor is located
         /// and registered against the open generic of the type you actually invoke this method for; e.g. if 
-        /// <typeparamref name="TObject"/> is `MyGeneric&lt;Foo, Bar&gt;` , then a target bound to the equivalent 
-        /// constructor on the open generic `MyGeneric&lt;,&gt;` will be what is actually registered.
-        /// Also, if <typeparamref name="TService"/> is `IMyGeneric&lt;Foo, Bar&gt;`, then the service type that
-        /// the new target is registered against will be `IMyGeneric&lt;,&gt;`.
+        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt; , then a target bound to the equivalent 
+        /// constructor on the open generic MyGeneric&lt;,&gt; will be what is actually registered.
+        /// Also, if <typeparamref name="TService"/> is IMyGeneric&lt;Foo, Bar&gt;, then the service type that
+        /// the new target is registered against will be IMyGeneric&lt;,&gt;.
         /// </summary>
         /// <typeparam name="TObject">Must be a generic type.  It doesn't matter what the type arguments are, however,
         /// as the target that is created will be for the generic type definition of this type.</typeparam>

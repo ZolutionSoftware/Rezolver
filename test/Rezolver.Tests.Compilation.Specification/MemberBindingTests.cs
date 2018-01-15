@@ -64,6 +64,21 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
+        public void Members_ExplicitBinding_ShouldAutoBind_WhenOnlyMemberProvided()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            var prop = Extract.Member((HasMembers hm) => hm.BindableInt);
+            targets.RegisterObject(10);
+            targets.RegisterType<HasMembers>(new BindSpecificMembersBehaviour(new[] { prop }));
+            var container = CreateContainer(targets);
+
+            // Act
+            var result = container.Resolve<HasMembers>();
+            Assert.Equal(10, result.BindableInt);
+        }
+
+        [Fact]
         public void Members_ShouldBindAll_OfBase()
         {
             // Same as Members_ShouldBindAll but this does it on a derived type

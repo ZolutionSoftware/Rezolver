@@ -33,7 +33,14 @@ namespace Rezolver
     {
         private readonly CovariantTypeIndex _typeIndex;
 
+        /// <summary>
+        /// Implementation of the <see cref="IRootTargetContainer.TargetRegistered"/> event
+        /// </summary>
         public event EventHandler<TargetRegisteredEventArgs> TargetRegistered;
+
+        /// <summary>
+        /// Implementation of the <see cref="IRootTargetContainer.TargetContainerRegistered"/> event
+        /// </summary>
         public event EventHandler<TargetContainerRegisteredEventArgs> TargetContainerRegistered;
 
         void ICovariantTypeIndex.AddKnownType(Type serviceType)
