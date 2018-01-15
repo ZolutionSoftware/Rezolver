@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Compilation.Expressions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -136,7 +137,7 @@ will be used for <a class="xref" href="Rezolver.Targets.ObjectTarget.html">Objec
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.DefaultTargetBuilder.html">DefaultTargetBuilder</a></h4>
       <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a> target.</p>
-<p>Essentially, it just calls <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402751(v=vs.110).aspx">Default(Type)</a> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
+<p>Essentially, it just calls <span class="xref">System.Linq.Expressions.Expression.Default(System.Type)</span> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.DelegateTargetBuilder.html">DelegateTargetBuilder</a></h4>
       <section><p>Specialised builder for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class and all its derivatives.</p>
@@ -189,6 +190,8 @@ expand any targets embedded in the expression.</p>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html">OptionalParameterTargetBuilder</a></h4>
       <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building an expression for the <a class="xref" href="Rezolver.Targets.OptionalParameterTarget.html">OptionalParameterTarget</a> target.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ProjectionTargetBuilder.html">ProjectionTargetBuilder</a></h4>
+      <section></section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.RedundantConvertRewriter.html">RedundantConvertRewriter</a></h4>
       <section><p>Removes unnecessary convert expressions from an expression.</p>
 <p>An unnecessary conversion is one where the target type is equal to, or a base of, the source type.</p>

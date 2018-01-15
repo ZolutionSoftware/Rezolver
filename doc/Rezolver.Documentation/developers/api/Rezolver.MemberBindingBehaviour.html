@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class MemberBindingBehaviour
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -113,7 +114,10 @@
   
   <h1 id="Rezolver_MemberBindingBehaviour" data-uid="Rezolver.MemberBindingBehaviour" class="text-break">Class MemberBindingBehaviour
   </h1>
-  <div class="markdown level0 summary"><p>Static accessor for the common member binding behaviours provided by Rezolver.</p>
+  <div class="markdown level0 summary"><p>Static accessor for the common member binding behaviours provided by Rezolver, also provides
+an entry point to build custom binding behaviours using the fluent API exposed by 
+<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> and <a class="xref" href="Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder&lt;TInstance, TMember&gt;</a> - 
+via the <a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_For__1">For&lt;TInstance&gt;()</a> method.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -124,25 +128,25 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+      <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+      <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+      <span class="xref">System.Object.GetType()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+      <span class="xref">System.Object.MemberwiseClone()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
@@ -161,14 +165,15 @@ get their behaviour via the options API (see <a class="xref" href="Rezolver.Opti
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindAll.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindAll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindAll.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindAll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/MemberBindingBehaviour.cs/#L22">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingBehaviour.cs/#L26">View Source</a>
   </span>
   <a id="Rezolver_MemberBindingBehaviour_BindAll_" data-uid="Rezolver.MemberBindingBehaviour.BindAll*"></a>
   <h4 id="Rezolver_MemberBindingBehaviour_BindAll" data-uid="Rezolver.MemberBindingBehaviour.BindAll">BindAll</h4>
-  <div class="markdown level1 summary"><p>A behaviour that binds all publicly writeable properties and fields on an object after construction.</p>
+  <div class="markdown level1 summary"><p>A behaviour that binds all publicly writeable properties and fields on an object after construction,
+include all read-only properties which can be initialised as collections via a public Add method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -195,10 +200,10 @@ get their behaviour via the options API (see <a class="xref" href="Rezolver.Opti
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindFields.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindFields%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindFields.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindFields%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/MemberBindingBehaviour.cs/#L40">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingBehaviour.cs/#L45">View Source</a>
   </span>
   <a id="Rezolver_MemberBindingBehaviour_BindFields_" data-uid="Rezolver.MemberBindingBehaviour.BindFields*"></a>
   <h4 id="Rezolver_MemberBindingBehaviour_BindFields" data-uid="Rezolver.MemberBindingBehaviour.BindFields">BindFields</h4>
@@ -226,10 +231,10 @@ get their behaviour via the options API (see <a class="xref" href="Rezolver.Opti
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindNone.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindNone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindNone.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindNone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/MemberBindingBehaviour.cs/#L30">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingBehaviour.cs/#L34">View Source</a>
   </span>
   <a id="Rezolver_MemberBindingBehaviour_BindNone_" data-uid="Rezolver.MemberBindingBehaviour.BindNone*"></a>
   <h4 id="Rezolver_MemberBindingBehaviour_BindNone" data-uid="Rezolver.MemberBindingBehaviour.BindNone">BindNone</h4>
@@ -261,14 +266,15 @@ get their behaviour via the options API (see <a class="xref" href="Rezolver.Opti
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindProperties.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindProperties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_BindProperties.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.BindProperties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/MemberBindingBehaviour.cs/#L35">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingBehaviour.cs/#L40">View Source</a>
   </span>
   <a id="Rezolver_MemberBindingBehaviour_BindProperties_" data-uid="Rezolver.MemberBindingBehaviour.BindProperties*"></a>
   <h4 id="Rezolver_MemberBindingBehaviour_BindProperties" data-uid="Rezolver.MemberBindingBehaviour.BindProperties">BindProperties</h4>
-  <div class="markdown level1 summary"><p>A behaviour which binds only publicly writeable properties on an object after construction.</p>
+  <div class="markdown level1 summary"><p>A behaviour which binds only publicly writeable properties, and read-only collection properties, 
+on an object after construction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -290,6 +296,56 @@ get their behaviour via the options API (see <a class="xref" href="Rezolver.Opti
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviour_For__1.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour.For%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingBehaviour.cs/#L53">View Source</a>
+  </span>
+  <a id="Rezolver_MemberBindingBehaviour_For_" data-uid="Rezolver.MemberBindingBehaviour.For*"></a>
+  <h4 id="Rezolver_MemberBindingBehaviour_For__1" data-uid="Rezolver.MemberBindingBehaviour.For``1">For&lt;TInstance&gt;()</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> which provides a way to build your own custom
+binding behaviour via a fluent API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IMemberBindingBehaviourBuilder&lt;TInstance&gt; For&lt;TInstance&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;TInstance&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TInstance</span></td>
+        <td><p>The type for which you want to build a custom member binding behaviour.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
@@ -298,10 +354,10 @@ get their behaviour via the options API (see <a class="xref" href="Rezolver.Opti
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_MemberBindingBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/MemberBindingBehaviour.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingBehaviour.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

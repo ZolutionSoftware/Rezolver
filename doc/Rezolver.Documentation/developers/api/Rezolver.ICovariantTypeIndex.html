@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface ICovariantTypeIndex
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -151,10 +152,10 @@ base/interface compatibility.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ICovariantTypeIndex.cs/#L48">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L48">View Source</a>
   </span>
   <a id="Rezolver_ICovariantTypeIndex_AddKnownType_" data-uid="Rezolver.ICovariantTypeIndex.AddKnownType*"></a>
   <h4 id="Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_" data-uid="Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)">AddKnownType(Type)</h4>
@@ -188,10 +189,10 @@ when called with one of these compatible types.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ICovariantTypeIndex.cs/#L75">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L75">View Source</a>
   </span>
   <a id="Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes*"></a>
   <h4 id="Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)">GetKnownCompatibleTypes(Type)</h4>
@@ -236,7 +237,7 @@ derived types.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
         <td><p>A non-null (possibly empty) enumerable of types which have been previously been added to the index
 via a call to <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">AddKnownType(Type)</a> and which are covariantly compatible with <code data-dev-comment-type="paramref" class="paramref">serviceType</code>
 either directly or by inheritance.</p>
@@ -246,10 +247,10 @@ either directly or by inheritance.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ICovariantTypeIndex.cs/#L59">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L59">View Source</a>
   </span>
   <a id="Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes*"></a>
   <h4 id="Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)">GetKnownCovariantTypes(Type)</h4>
@@ -292,7 +293,7 @@ if it has been added.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
         <td><p>A non-null (possibly empty) enumerable of types which have been previously been added to the index
 via a call to <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">AddKnownType(Type)</a> and which are covariantly compatible with <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.</p>
 </td>
@@ -307,10 +308,10 @@ via a call to <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_I
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_ICovariantTypeIndex.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/ICovariantTypeIndex.cs/#L38" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L38" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

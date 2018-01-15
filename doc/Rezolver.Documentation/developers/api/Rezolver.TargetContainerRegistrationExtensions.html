@@ -1,0 +1,743 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class TargetContainerRegistrationExtensions
+   | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class TargetContainerRegistrationExtensions
+   | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.29.1.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  	<script>
+  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  	
+  	  ga('create', 'UA-92764222-1', 'auto');
+  	  ga('send', 'pageview');
+  	
+  	</script></head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Rezolver.TargetContainerRegistrationExtensions">
+  
+  
+  <h1 id="Rezolver_TargetContainerRegistrationExtensions" data-uid="Rezolver.TargetContainerRegistrationExtensions" class="text-break">Class TargetContainerRegistrationExtensions
+  </h1>
+  <div class="markdown level0 summary"><p>Contains registration extensions for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> type</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level1"><span class="xref">TargetContainerRegistrationExtensions</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class TargetContainerRegistrationExtensions</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor(Rezolver.ITargetContainer%2CSystem.Reflection.ConstructorInfo%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L26">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor(Rezolver.ITargetContainer,System.Reflection.ConstructorInfo,Rezolver.IMemberBindingBehaviour)">RegisterConstructor(ITargetContainer, ConstructorInfo, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Registers a type by constructor alone.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterConstructor(this ITargetContainer targets, ConstructorInfo constructor, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo(v=vs.110).aspx">ConstructorInfo</a></td>
+        <td><span class="parametername">constructor</span></td>
+        <td><p>The constructor to be bound. The <a class="xref" href="https://msdn.microsoft.com/en-us/library/0x9d77ht(v=vs.110).aspx">DeclaringType</a> will be used
+as the service type to be registered against.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBindingBehaviour</span></td>
+        <td><p>Optional. If you wish to bind members on the new instance, passing a member binding
+behaviour here.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the <code data-dev-comment-type="paramref" class="paramref">constructor</code> belongs to an open generic type, then a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+will be created and registered.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor(Rezolver.ITargetContainer%2CSystem.Reflection.ConstructorInfo%2CSystem.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L46">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor(Rezolver.ITargetContainer,System.Reflection.ConstructorInfo,System.Type,Rezolver.IMemberBindingBehaviour)">RegisterConstructor(ITargetContainer, ConstructorInfo, Type, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Registers a type by constructor against the service type <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterConstructor(this ITargetContainer targets, ConstructorInfo constructor, Type serviceType, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo(v=vs.110).aspx">ConstructorInfo</a></td>
+        <td><span class="parametername">constructor</span></td>
+        <td><p>The constructor to be bound.  The <a class="xref" href="https://msdn.microsoft.com/en-us/library/0x9d77ht(v=vs.110).aspx">DeclaringType</a> must
+be compatible with the <code data-dev-comment-type="paramref" class="paramref">serviceType</code> otherwise an exception will occur.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>The type against which the registration will be made.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBindingBehaviour</span></td>
+        <td><p>Optional. If you wish to bind members on the new instance, passing a member binding
+behaviour here.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_System_Type_Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the <code data-dev-comment-type="paramref" class="paramref">constructor</code> belongs to an open generic type, then a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+will be created and registered.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor%60%601(Rezolver.ITargetContainer%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L67">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)">RegisterConstructor&lt;TObject&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Register a type by constructor (represented by the expression <code data-dev-comment-type="paramref" class="paramref">newExpr</code>).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterConstructor&lt;TObject&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">newExpr</span></td>
+        <td><p>A lambda expression whose <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> is a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a>
+which identifies the constructor that is to be used to create the instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBindingBehaviour</span></td>
+        <td><p>Optional. If you wish to bind members on the new instance, passing a member binding
+behaviour here.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note that you can achieve a similar result by simply registering an expression which
+represents a call to a type&apos;s constructor.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor%60%601(Rezolver.ITargetContainer%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CSystem.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L96">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">RegisterConstructor&lt;TObject&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Register a type by constructor (represented by the expression <code data-dev-comment-type="paramref" class="paramref">newExpr</code>).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterConstructor&lt;TObject&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt; configureMemberBinding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">newExpr</span></td>
+        <td><p>A lambda expression whose <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> is a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a>
+which identifies the constructor that is to be used to create the instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code>.  An exception
+will be thrown if the lambda does not follow this pattern.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">configureMemberBinding</span></td>
+        <td><p>A callback which configures a custom member binding via the
+<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> interface.  A new builder will be created and passed to this
+callback.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note that you can achieve a similar result by simply registering an expression which
+represents a call to a type&apos;s constructor.</p>
+<p><strong>Generic constructors</strong>
+If you wish to register an open generic type by constructor through the use of an expression, then you
+need to use the </p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor%60%602(Rezolver.ITargetContainer%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L126">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)">RegisterConstructor&lt;TObject, TService&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Register a type by constructor (represented by the expression <code data-dev-comment-type="paramref" class="paramref">newExpr</code>)
+to be created when <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code> is requested from the container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterConstructor&lt;TObject, TService&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, IMemberBindingBehaviour memberBindingBehaviour = null)where TObject : TService</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">newExpr</span></td>
+        <td><p>A lambda expression whose <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> is a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a>
+which identifies the constructor that is to be used to create the instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBindingBehaviour</span></td>
+        <td><p>Optional. If you wish to bind members on the new instance, passing a member binding
+behaviour here.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td><p>The type whose constructor is to be called</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td><p>The service against which the registration is to be made.  An exception
+will be thrown if the lambda does not follow this pattern.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note that you can achieve a similar result by simply registering an expression which
+represents a call to a type&apos;s constructor.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor%60%602(Rezolver.ITargetContainer%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CSystem.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L154">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">RegisterConstructor&lt;TObject, TService&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Register a type by constructor (represented by the expression <code data-dev-comment-type="paramref" class="paramref">newExpr</code>)
+to be created when <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code> is requested from the container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterConstructor&lt;TObject, TService&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt; configureMemberBinding)where TObject : TService</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">newExpr</span></td>
+        <td><p>A lambda expression whose <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> is a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a>
+which identifies the constructor that is to be used to create the instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">configureMemberBinding</span></td>
+        <td><p>A callback which configures a custom member binding via the
+<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> interface.  A new builder will be created and passed to this
+callback.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td><p>The type whose constructor is to be called</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td><p>The service against which the registration is to be made.  An exception
+will be thrown if the lambda does not follow this pattern.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0____remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note that you can achieve a similar result by simply registering an expression which
+represents a call to a type&apos;s constructor.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor%60%601(Rezolver.ITargetContainer%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L185">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)">RegisterGenericConstructor&lt;TObject&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Register a generic type by constructor (represented by the model expression <code data-dev-comment-type="paramref" class="paramref">newExpr</code>).
+Note - a concrete generic is used as an <em>example</em> - the equivalent open generic constructor is located
+and registered against the open generic of the type you actually invoke this method for; e.g. if 
+<code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code> is <code>MyGeneric&amp;lt;Foo, Bar&gt;</code> , then a target bound to the equivalent 
+constructor on the open generic <code>MyGeneric&amp;lt;,&gt;</code> will be what is actually registered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterGenericConstructor&lt;TObject&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">newExpr</span></td>
+        <td><p>A lambda expression whose <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> is a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a>
+which identifies the constructor that is to be used to create the instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBindingBehaviour</span></td>
+        <td><p>Optional. If you wish to bind members on the new instance, passing a member binding
+behaviour here.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td><p>Must be a generic type.  It doesn&apos;t matter what the type arguments are, however,
+as the target that is created will be for the generic type definition of this type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note that you can achieve a similar result by simply registering an expression which
+represents a call to a type&apos;s constructor.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor%60%602(Rezolver.ITargetContainer%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L219">View Source</a>
+  </span>
+  <a id="Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor*"></a>
+  <h4 id="Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)">RegisterGenericConstructor&lt;TObject, TService&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Register a generic type by constructor (represented by the model expression <code data-dev-comment-type="paramref" class="paramref">newExpr</code>)
+as an implementation of another open generic based on <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code>.
+Note - a concrete generic is used as an <em>example</em> - the equivalent open generic constructor is located
+and registered against the open generic of the type you actually invoke this method for; e.g. if 
+<code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code> is <code>MyGeneric&amp;lt;Foo, Bar&gt;</code> , then a target bound to the equivalent 
+constructor on the open generic <code>MyGeneric&amp;lt;,&gt;</code> will be what is actually registered.
+Also, if <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code> is <code>IMyGeneric&amp;lt;Foo, Bar&gt;</code>, then the service type that
+the new target is registered against will be <code>IMyGeneric&amp;lt;,&gt;</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RegisterGenericConstructor&lt;TObject, TService&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, IMemberBindingBehaviour memberBindingBehaviour = null)where TObject : TService</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TObject&gt;&gt;</td>
+        <td><span class="parametername">newExpr</span></td>
+        <td><p>A lambda expression whose <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> is a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a>
+which identifies the constructor that is to be used to create the instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBindingBehaviour</span></td>
+        <td><p>Optional. If you wish to bind members on the new instance, passing a member binding
+behaviour here.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TObject</span></td>
+        <td><p>Must be a generic type.  It doesn&apos;t matter what the type arguments are, however,
+as the target that is created will be for the generic type definition of this type.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td><p>Must also be a generic type that is a base or interface of <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note that you can achieve a similar result by simply registering an expression which
+represents a call to a type&apos;s constructor.</p>
+</div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainerRegistrationExtensions.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainerRegistrationExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.ConstructorExtensions.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

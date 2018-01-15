@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Configuration
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -142,17 +143,17 @@ instances via the <a class="xref" href="https://msdn.microsoft.com/en-us/library
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></h4>
       <section><p>Applying this configuration to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> will enable automatic injection of collection types such as 
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132397(v=vs.110).aspx">Collection&lt;T&gt;</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/92t2ye13(v=vs.110).aspx">ICollection&lt;T&gt;</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a>
+<a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132397(v=vs.110).aspx">Collection&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.ICollection&lt;T&gt;</span>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a>
 and <a class="xref" href="https://msdn.microsoft.com/en-us/library/hh881542(v=vs.110).aspx">IReadOnlyCollection&lt;T&gt;</a> (so long as there are no registrations for these types in the target container when the configuration is applied).</p>
 <p>Out of the box, such collections will be seeded by any objects that have been registered against the element type.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which enables automatic handling of fetching
-targets for <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> based on all the targets registered for a given <code>T</code>
+targets for <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> based on all the targets registered for a given <code>T</code>
 in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a></h4>
-      <section><p>This configuration will enable automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/5y536ey6(v=vs.110).aspx">IList&lt;T&gt;</a> and <a class="xref" href="https://msdn.microsoft.com/en-us/library/hh192385(v=vs.110).aspx">IReadOnlyList&lt;T&gt;</a>
+      <section><p>This configuration will enable automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span> and <span class="xref">System.Collections.Generic.IReadOnlyList&lt;T&gt;</span>
 when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, <em>so long as there aren&apos;t already registrations for those types</em>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectResolveContext.html">InjectResolveContext</a></h4>

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -137,6 +138,8 @@ on new instances to services from the container.</p>
       <section><p>An <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> which binds all non-indexer publicly writeable instance 
 properties on new instances to services from the container.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.BindSpecificMembersBehaviour.html">BindSpecificMembersBehaviour</a></h4>
+      <section></section>
       <h4><a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a></h4>
       <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
 <p>Only creatable through inheritance.</p>
@@ -216,22 +219,31 @@ in place of static code.</p>
       <section><p>A special type of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which stores targets (and potentially other containers)
 which are specifically keyed either to a particular open generic type or a closed generic built from it.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.ListMemberBinding.html">ListMemberBinding</a></h4>
+      <section><p>Represents a binding (i.e. like that produced by <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>) to a property
+via dynamic collection initialiser.</p>
+</section>
       <h4><a class="xref" href="Rezolver.MemberBinding.html">MemberBinding</a></h4>
       <section><p>Represents the binding of an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> to a property or field of a given type.</p>
 <p>Not to be confused with the type of the same name from the System.Linq.Expressions namespace, although
 they are technically equivalent.</p>
 </section>
       <h4><a class="xref" href="Rezolver.MemberBindingBehaviour.html">MemberBindingBehaviour</a></h4>
-      <section><p>Static accessor for the common member binding behaviours provided by Rezolver.</p>
+      <section><p>Static accessor for the common member binding behaviours provided by Rezolver, also provides
+an entry point to build custom binding behaviours using the fluent API exposed by 
+<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> and <a class="xref" href="Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder&lt;TInstance, TMember&gt;</a> - 
+via the <a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_For__1">For&lt;TInstance&gt;()</a> method.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.MemberBindingBehaviourBuilder-1.html">MemberBindingBehaviourBuilder&lt;TInstance&gt;</a></h4>
+      <section><p>Class for building custom <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> for instances of <code data-dev-comment-type="typeparamref" class="typeparamref">TInstance</code>,
+default implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a>.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder&lt;TInstance, TMember&gt;</a></h4>
+      <section><p>Builds individual <a class="xref" href="Rezolver.MemberBinding.html">MemberBinding</a> objects for the <a class="xref" href="Rezolver.MemberBindingBehaviourBuilder-1.html">MemberBindingBehaviourBuilder&lt;TInstance&gt;</a> class.</p>
+<p>Created through the <a class="xref" href="Rezolver.MemberBindingBehaviourBuilder-1.html#Rezolver_MemberBindingBehaviourBuilder_1_Bind__1_System_Linq_Expressions_Expression_System_Func__0___0___">Bind&lt;TMember&gt;(Expression&lt;Func&lt;TInstance, TMember&gt;&gt;)</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.MethodBinding.html">MethodBinding</a></h4>
       <section><p>Represents a binding to a method whose arguments will be supplied by <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.MethodCallExtractor.html">MethodCallExtractor</a></h4>
-      <section><p>Used to help grab method and constructor info from expressions (which is easier than writing long
-strings of reflection code).</p>
-<p>For example: <pre><code>MethodCallExtractor.ExtractCalledMethod(() => Console.WriteLine(&quot;foo&quot;))</code></pre></p>
-<p>Will return the MethodInfo for the <code>WriteLine</code> method of the <code>Console</code> class.</p>
 </section>
       <h4><a class="xref" href="Rezolver.MSDIITargetContainerExtensions.html">MSDIITargetContainerExtensions</a></h4>
       <section><p>Provides the <a class="xref" href="Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_Rezolver_ITargetContainer_Microsoft_Extensions_DependencyInjection_IServiceCollection_">Populate(ITargetContainer, IServiceCollection)</a> extension method which allows
@@ -261,6 +273,11 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
       <h4><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a></h4>
       <section><p>Represents a binding between a method parameter and an <a class="xref" href="Rezolver.ITarget.html">ITarget</a></p>
 </section>
+      <h4><a class="xref" href="Rezolver.ProjectionTargetContainer.html">ProjectionTargetContainer</a></h4>
+      <section><p>Implements projections of IEnumerables from one type to another</p>
+<p>Effectively, this daisy chains one enumerable into another via something
+similar to a Linq Select.</p>
+</section>
       <h4><a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a></h4>
       <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to provide shortcuts for the simplest cases of registering
 <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> targets.</p>
@@ -271,6 +288,8 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
       <h4><a class="xref" href="Rezolver.RezolverOptions.html">RezolverOptions</a></h4>
       <section><p>Options for using Rezolver as the DI container for Asp.Net Core web applications.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.RootTargetContainerExtensions.html">RootTargetContainerExtensions</a></h4>
+      <section></section>
       <h4><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></h4>
       <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the
 <a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer_Scope">Scope</a> that&apos;s created along with it.</p>
@@ -294,9 +313,8 @@ from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> names
 <p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s, is also Generic type aware,
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
 </section>
-      <h4><a class="xref" href="Rezolver.TargetContainerEventExtensions.html">TargetContainerEventExtensions</a></h4>
-      <section><p>Contains the extension <a class="xref" href="Rezolver.TargetContainerEventExtensions.html#Rezolver_TargetContainerEventExtensions_RegisterEventHandler__1_Rezolver_ITargetContainer_Rezolver_ITargetContainerEventHandler___0__">RegisterEventHandler&lt;TEvent&gt;(ITargetContainer, ITargetContainerEventHandler&lt;TEvent&gt;)</a> 
-which allows a caller to receive notifications about events happening inside a particular target container.</p>
+      <h4><a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html">TargetContainerRegistrationExtensions</a></h4>
+      <section><p>Contains registration extensions for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> type</p>
 </section>
       <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves 
@@ -348,6 +366,8 @@ by which Rezolver can perform this reverse lookup.</p>
       <h4><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h4>
       <section><p>Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a></h4>
+      <section></section>
       <h4><a class="xref" href="Rezolver.IOptionForAnyGeneric.html">IOptionForAnyGeneric</a></h4>
       <section><p>Used as a marker service type for GetOption when a service type is any generic.</p>
 <p>Allows options to be defined for any generic type instead of specific generics.</p>

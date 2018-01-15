@@ -381,8 +381,69 @@
     <Content Include="_docfx_proj\images\benchmark-results\Overview_Prepare_Fast.png" />
     <Content Include="_docfx_proj\images\benchmark-results\Overview_Prepare_Slow.png" />
     <Content Include="_docfx_proj\md-styles.css" />
+    <Content Include="_docfx_themes\default\common.js" />
+    <Content Include="_docfx_themes\default\conceptual.extension.js" />
+    <Content Include="_docfx_themes\default\conceptual.html.primary.js" />
+    <Content Include="_docfx_themes\default\conceptual.html.primary.tmpl" />
+    <Content Include="_docfx_themes\default\favicon.ico" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="_docfx_themes\default\layout\_master.tmpl" />
+    <Content Include="_docfx_themes\default\logo.svg" />
+    <Content Include="_docfx_themes\default\ManagedReference.common.js" />
+    <Content Include="_docfx_themes\default\ManagedReference.extension.js" />
+    <Content Include="_docfx_themes\default\ManagedReference.html.primary.js" />
+    <Content Include="_docfx_themes\default\ManagedReference.html.primary.tmpl" />
+    <Content Include="_docfx_themes\default\partials\affix.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\breadcrumb.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\class.header.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\class.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\classSubtitle.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\customMREFContent.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\enum.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\footer.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\head.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\li.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\logo.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\namespace.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\namespaceSubtitle.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\navbar.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\rest.child.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\rest.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\scripts.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\searchResults.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\title.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\toc.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\_affix.liquid" />
+    <Content Include="_docfx_themes\default\partials\_breadcrumb.liquid" />
+    <Content Include="_docfx_themes\default\partials\_footer.liquid" />
+    <Content Include="_docfx_themes\default\partials\_head.liquid" />
+    <Content Include="_docfx_themes\default\partials\_logo.liquid" />
+    <Content Include="_docfx_themes\default\partials\_navbar.liquid" />
+    <Content Include="_docfx_themes\default\partials\_scripts.liquid" />
+    <Content Include="_docfx_themes\default\partials\_toc.liquid" />
+    <Content Include="_docfx_themes\default\RestApi.common.js" />
+    <Content Include="_docfx_themes\default\RestApi.extension.js" />
+    <Content Include="_docfx_themes\default\RestApi.html.primary.js" />
+    <Content Include="_docfx_themes\default\RestApi.html.primary.tmpl" />
+    <Content Include="_docfx_themes\default\search-stopwords.json" />
+    <Content Include="_docfx_themes\default\styles\docfx.css" />
+    <Content Include="_docfx_themes\default\styles\docfx.js" />
+    <Content Include="_docfx_themes\default\styles\docfx.vendor.css" />
+    <Content Include="_docfx_themes\default\styles\docfx.vendor.js" />
+    <Content Include="_docfx_themes\default\styles\lunr.js" />
+    <Content Include="_docfx_themes\default\styles\lunr.min.js" />
+    <Content Include="_docfx_themes\default\styles\main.css" />
+    <Content Include="_docfx_themes\default\styles\main.js" />
+    <Content Include="_docfx_themes\default\styles\search-worker.js" />
     <Content Include="_docfx_themes\default\toc.extension.js" />
+    <Content Include="_docfx_themes\default\toc.html.js" />
+    <Content Include="_docfx_themes\default\toc.html.tmpl" />
+    <Content Include="_docfx_themes\default\token.json" />
+    <Content Include="_docfx_themes\default\UniversalReference.html.primary.js" />
     <Content Include="_docfx_themes\rezolver\styles\fonts\fontawesome-webfont.svg" />
     <Content Include="_docfx_themes\rezolver\styles\main.css" />
     <Content Include="_docfx_themes\rezolver\styles\main.less" />
@@ -426,32 +487,12 @@
     <Content Include="_docfx_themes\rezolver\styles\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.md" />
     <Content Include="articles\toc.md" />
     <Content Include="articles\intro.md" />
     <Content Include="api\index.md" />
     <None Include="docfxall.bat" />
+    <Content Include="index.md" />
     <None Include="Properties\PublishExclude.props" />
-    <Content Include="_docfx_themes\default\common.js" />
-    <Content Include="_docfx_themes\default\conceptual.extension.js" />
-    <Content Include="_docfx_themes\default\conceptual.html.primary.js" />
-    <Content Include="_docfx_themes\default\favicon.ico" />
-    <Content Include="_docfx_themes\default\logo.svg" />
-    <Content Include="_docfx_themes\default\ManagedReference.common.js" />
-    <Content Include="_docfx_themes\default\ManagedReference.extension.js" />
-    <Content Include="_docfx_themes\default\ManagedReference.html.primary.js" />
-    <Content Include="_docfx_themes\default\RestApi.common.js" />
-    <Content Include="_docfx_themes\default\RestApi.extension.js" />
-    <Content Include="_docfx_themes\default\RestApi.html.primary.js" />
-    <Content Include="_docfx_themes\default\styles\docfx.css" />
-    <Content Include="_docfx_themes\default\styles\docfx.js" />
-    <Content Include="_docfx_themes\default\styles\docfx.vendor.css" />
-    <Content Include="_docfx_themes\default\styles\docfx.vendor.js" />
-    <Content Include="_docfx_themes\default\styles\lunr.min.js" />
-    <Content Include="_docfx_themes\default\styles\main.css" />
-    <Content Include="_docfx_themes\default\styles\main.js" />
-    <Content Include="_docfx_themes\default\styles\search-worker.js" />
-    <Content Include="_docfx_themes\default\toc.html.js" />
     <None Include=".gitignore" />
     <Content Include="android-chrome-144x144.png" />
     <Content Include="android-chrome-192x192.png" />
@@ -511,12 +552,12 @@
     <Content Include="_docfx_proj\docs\arrays-lists-collections\lists.md" />
     <Content Include="_docfx_proj\docs\arrays-lists-collections\collections.md" />
     <Content Include="_docfx_proj\docs\arrays-lists-collections\index.md" />
-    <Content Include="toc.yml" />
     <Content Include="_docfx_proj\docs\decorators\toc.yml" />
     <Content Include="_docfx_proj\docs\decorators\delegates.md" />
     <Content Include="_docfx_proj\docs\variance\contravariance.md" />
     <Content Include="_docfx_proj\docs\decorators\collections.md" />
     <Content Include="_docfx_proj\docs\variance\covariance.md" />
+    <Content Include="toc.yml" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -619,52 +660,17 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="_docfx_themes\default\conceptual.html.primary.tmpl" />
-    <Content Include="_docfx_themes\default\ManagedReference.html.primary.tmpl" />
-    <Content Include="_docfx_themes\default\partials\affix.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\breadcrumb.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\class.header.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\class.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\classSubtitle.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\customMREFContent.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\enum.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\footer.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\head.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\li.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\logo.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\namespace.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\namespaceSubtitle.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\navbar.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\rest.child.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\rest.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\scripts.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\searchResults.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\title.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\toc.tmpl.partial" />
-    <Content Include="_docfx_themes\default\RestApi.html.primary.tmpl" />
-    <Content Include="_docfx_themes\default\search-stopwords.json" />
-    <Content Include="_docfx_themes\default\toc.html.tmpl" />
-    <Content Include="_docfx_themes\default\token.json" />
     <Content Include="_docfx_themes\rezolver\partials\head.tmpl.partial" />
     <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="_docfx_themes\rezolver\styles\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="_docfx_themes\rezolver\partials\browsericons.tmpl.partial" />
-    <Content Include="_docfx_themes\default\partials\_affix.liquid" />
-    <Content Include="_docfx_themes\default\partials\_breadcrumb.liquid" />
-    <Content Include="_docfx_themes\default\partials\_footer.liquid" />
-    <Content Include="_docfx_themes\default\partials\_head.liquid" />
-    <Content Include="_docfx_themes\default\partials\_logo.liquid" />
-    <Content Include="_docfx_themes\default\partials\_navbar.liquid" />
-    <Content Include="_docfx_themes\default\partials\_scripts.liquid" />
-    <Content Include="_docfx_themes\default\partials\_toc.liquid" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="_docfx_themes\default\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="_docfx_themes\default\layout\_master.tmpl" />
     <Content Include="_docfx_themes\rezolver\layout\_master.tmpl" />
+    <Content Include="_docfx_themes\default\partials\uref\class.header.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\uref\class.tmpl.partial" />
+    <Content Include="_docfx_themes\default\partials\uref\parameters.tmpl.partial" />
+    <Content Include="_docfx_themes\default\UniversalReference.html.primary.tmpl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="_docfx_proj\docs\constructor-injection\toc.yml" />
@@ -728,11 +734,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\docfx.console.2.24.0\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.24.0\build\docfx.console.targets'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\..\packages\docfx.console.2.29.1\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.29.1\build\docfx.console.targets'))" />
   </Target>
-  <Import Project="..\..\packages\docfx.console.2.24.0\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.24.0\build\docfx.console.targets')" />
+  <Import Project="..\..\packages\docfx.console.2.29.1\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.29.1\build\docfx.console.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

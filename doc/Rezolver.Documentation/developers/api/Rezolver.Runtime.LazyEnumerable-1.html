@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class LazyEnumerable&lt;T&gt;
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -113,7 +114,7 @@
   
   <h1 id="Rezolver_Runtime_LazyEnumerable_1" data-uid="Rezolver.Runtime.LazyEnumerable`1" class="text-break">Class LazyEnumerable&lt;T&gt;
   </h1>
-  <div class="markdown level0 summary"><p>Can be used as an implementation of <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> when injecting enumerables from
+  <div class="markdown level0 summary"><p>Can be used as an implementation of <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> when injecting enumerables from
 one or more registered targets.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -122,28 +123,33 @@ one or more registered targets.</p>
     <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
     <div class="level1"><span class="xref">LazyEnumerable&lt;T&gt;</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</div>
+    <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.collections.ienumerable(v=vs.110).aspx">IEnumerable</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+      <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+      <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+      <span class="xref">System.Object.GetType()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+      <span class="xref">System.Object.MemberwiseClone()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Runtime.html">Rezolver.Runtime</a></h6>
@@ -169,7 +175,7 @@ one or more registered targets.</p>
     </tbody>
   </table>
   <h5 id="Rezolver_Runtime_LazyEnumerable_1_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Objects are not expected to take a dependency on this type - but <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a>.  The 
+  <div class="markdown level0 remarks"><p>Objects are not expected to take a dependency on this type - but <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span>.  The 
 default compiler, <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>, constructs an instance of this
 when building an <a class="xref" href="Rezolver.Targets.EnumerableTarget.html">EnumerableTarget</a> (via the <a class="xref" href="Rezolver.Compilation.Expressions.EnumerableTargetBuilder.html">EnumerableTargetBuilder</a>
 expression builder).</p>
@@ -179,17 +185,17 @@ expression builder).</p>
 by setting the <a class="xref" href="Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a> option to <code>false</code> in the underlying <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
 used by the container.</p>
 <p>You can also switch to eagerly loaded enumerables on a per-type basis - by setting the <a class="xref" href="Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a>
-option to <code>false</code> against the specific type of enumerable you want to be eagerly loaded - e.g. for an eagerly loaded <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> of
+option to <code>false</code> against the specific type of enumerable you want to be eagerly loaded - e.g. for an eagerly loaded <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> of
 type <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, then you would set the <a class="xref" href="Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a> to <code>false</code> for the type <code>IEnumerable&lt;string&gt;</code></p>
 </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1__ctor_Rezolver_IResolveContext_System_Collections_Generic_IEnumerable_System_Func_Rezolver_IResolveContext_System_Object___.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601.%23ctor(Rezolver.IResolveContext%2CSystem.Collections.Generic.IEnumerable%7BSystem.Func%7BRezolver.IResolveContext%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1__ctor_Rezolver_IResolveContext_System_Collections_Generic_IEnumerable_System_Func_Rezolver_IResolveContext_System_Object___.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601.%23ctor(Rezolver.IResolveContext%2CSystem.Collections.Generic.IEnumerable%7BSystem.Func%7BRezolver.IResolveContext%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L40">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L40">View Source</a>
   </span>
   <a id="Rezolver_Runtime_LazyEnumerable_1__ctor_" data-uid="Rezolver.Runtime.LazyEnumerable`1.#ctor*"></a>
   <h4 id="Rezolver_Runtime_LazyEnumerable_1__ctor_Rezolver_IResolveContext_System_Collections_Generic_IEnumerable_System_Func_Rezolver_IResolveContext_System_Object___" data-uid="Rezolver.Runtime.LazyEnumerable`1.#ctor(Rezolver.IResolveContext,System.Collections.Generic.IEnumerable{System.Func{Rezolver.IResolveContext,System.Object}})">LazyEnumerable(IResolveContext, IEnumerable&lt;Func&lt;IResolveContext, Object&gt;&gt;)</h4>
@@ -216,7 +222,7 @@ type <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.strin
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb549151(v=vs.110).aspx">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a>&gt;&gt;</td>
         <td><span class="parametername">factories</span></td>
         <td></td>
       </tr>
@@ -226,14 +232,14 @@ type <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.strin
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L50">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L50">View Source</a>
   </span>
   <a id="Rezolver_Runtime_LazyEnumerable_1_GetEnumerator_" data-uid="Rezolver.Runtime.LazyEnumerable`1.GetEnumerator*"></a>
   <h4 id="Rezolver_Runtime_LazyEnumerable_1_GetEnumerator" data-uid="Rezolver.Runtime.LazyEnumerable`1.GetEnumerator">GetEnumerator()</h4>
-  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://msdn.microsoft.com/en-us/library/s793z9y2(v=vs.110).aspx">GetEnumerator()</a></p>
+  <div class="markdown level1 summary"><p>Implementation of <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator()</span></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -250,25 +256,23 @@ type <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.strin
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/78dfe2yb(v=vs.110).aspx">IEnumerator</a>&lt;T&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerator</span>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/s793z9y2(v=vs.110).aspx">IEnumerable&lt;T&gt;.GetEnumerator()</a></div>
   <h3 id="eii">Explicit Interface Implementations
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L59">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L59">View Source</a>
   </span>
   <a id="Rezolver_Runtime_LazyEnumerable_1_System_Collections_IEnumerable_GetEnumerator_" data-uid="Rezolver.Runtime.LazyEnumerable`1.System#Collections#IEnumerable#GetEnumerator*"></a>
   <h4 id="Rezolver_Runtime_LazyEnumerable_1_System_Collections_IEnumerable_GetEnumerator" data-uid="Rezolver.Runtime.LazyEnumerable`1.System#Collections#IEnumerable#GetEnumerator">IEnumerable.GetEnumerator()</h4>
-  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://msdn.microsoft.com/en-us/library/5zae5365(v=vs.110).aspx">GetEnumerator()</a></p>
+  <div class="markdown level1 summary"><p>Implementation of <span class="xref">System.Collections.IEnumerable.GetEnumerator()</span></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -290,8 +294,13 @@ type <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.strin
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/5zae5365(v=vs.110).aspx">IEnumerable.GetEnumerator()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span>
+  </div>
+  <div>
+      <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.collections.ienumerable(v=vs.110).aspx">IEnumerable</a>
+  </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
       <div><a class="xref" href="Rezolver.Runtime.EagerEnumerable-1.html">EagerEnumerable</a>&lt;T&gt;</div>
@@ -304,10 +313,10 @@ type <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.strin
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Runtime_LazyEnumerable_1.md&amp;value=---%0Auid%3A%20Rezolver.Runtime.LazyEnumerable%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L30" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Runtime/LazyEnumerable`1.cs/#L30" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class Dependant
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -122,28 +123,33 @@ property is implemented explictly.</p>
     <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
     <div class="level1"><span class="xref">Dependant</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Rezolver.Sdk.IMutableDependant.html">IMutableDependant</a></div>
+    <div><a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+      <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+      <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+      <span class="xref">System.Object.GetType()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+      <span class="xref">System.Object.MemberwiseClone()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Sdk.html">Rezolver.Sdk</a></h6>
@@ -156,10 +162,10 @@ property is implemented explictly.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Sdk_Dependant_Rezolver_Sdk_IDependant_Dependencies.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.Dependant.Rezolver%23Sdk%23IDependant%23Dependencies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Sdk_Dependant_Rezolver_Sdk_IDependant_Dependencies.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.Dependant.Rezolver%23Sdk%23IDependant%23Dependencies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Sdk/Dependant.cs/#L16">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Sdk/Dependant.cs/#L16">View Source</a>
   </span>
   <a id="Rezolver_Sdk_Dependant_Rezolver_Sdk_IDependant_Dependencies_" data-uid="Rezolver.Sdk.Dependant.Rezolver#Sdk#IDependant#Dependencies*"></a>
   <h4 id="Rezolver_Sdk_Dependant_Rezolver_Sdk_IDependant_Dependencies" data-uid="Rezolver.Sdk.Dependant.Rezolver#Sdk#IDependant#Dependencies">IDependant.Dependencies</h4>
@@ -179,19 +185,17 @@ property is implemented explictly.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable</a>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Rezolver.Sdk.IDependant.html#Rezolver_Sdk_IDependant_Dependencies">IDependant.Dependencies</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Sdk_Dependant_Rezolver_Sdk_IMutableDependant_Dependencies.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.Dependant.Rezolver%23Sdk%23IMutableDependant%23Dependencies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Sdk_Dependant_Rezolver_Sdk_IMutableDependant_Dependencies.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.Dependant.Rezolver%23Sdk%23IMutableDependant%23Dependencies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Sdk/Dependant.cs/#L15">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Sdk/Dependant.cs/#L15">View Source</a>
   </span>
   <a id="Rezolver_Sdk_Dependant_Rezolver_Sdk_IMutableDependant_Dependencies_" data-uid="Rezolver.Sdk.Dependant.Rezolver#Sdk#IMutableDependant#Dependencies*"></a>
   <h4 id="Rezolver_Sdk_Dependant_Rezolver_Sdk_IMutableDependant_Dependencies" data-uid="Rezolver.Sdk.Dependant.Rezolver#Sdk#IMutableDependant#Dependencies">IMutableDependant.Dependencies</h4>
@@ -216,8 +220,13 @@ property is implemented explictly.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Rezolver.Sdk.IMutableDependant.html#Rezolver_Sdk_IMutableDependant_Dependencies">IMutableDependant.Dependencies</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.IMutableDependant.html">IMutableDependant</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_Requires__2___0___1_">DependantExtensions.Requires&lt;T, TDependency&gt;(T, TDependency)</a>
@@ -254,10 +263,10 @@ property is implemented explictly.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/xamarin-forms-example/apiSpec/new?filename=Rezolver_Sdk_Dependant.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.Dependant%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Sdk_Dependant.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.Dependant%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/xamarin-forms-example/src/Rezolver/Sdk/Dependant.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Sdk/Dependant.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
