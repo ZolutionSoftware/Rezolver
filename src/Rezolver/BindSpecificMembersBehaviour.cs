@@ -55,7 +55,7 @@ namespace Rezolver
             if (members == null)
                 throw new ArgumentNullException(nameof(members));
 
-            _members = members.ToDictionary(m => new MemberInfoKey(m), m => (MemberBinding)null);
+            _members = members.ToDictionary(m => new MemberInfoKey(m), m => new MemberBinding(m));
         }
 
         /// <summary>
@@ -95,8 +95,9 @@ namespace Rezolver
         /// Overrides the base to return bindings only for those members that were passed on construction.
         /// </summary>
         /// <param name="context">The current compile context</param>
-        /// <param name="type">The </param>
-        /// <param name="field"></param>
+        /// <param name="type">The type whose members are being bound (note this could be a type that's
+        /// derived from the one on which the <paramref name="field"/> is declared.</param>
+        /// <param name="field">The field being bound.</param>
         /// <returns>The binding to be applied to passed <paramref name="field"/> if it's a known field,
         /// otherwise <c>null</c></returns>
         protected override MemberBinding CreateBinding(ICompileContext context, Type type, FieldInfo field)
@@ -107,6 +108,15 @@ namespace Rezolver
             return null;
         }
 
+        /// <summary>
+        /// Overrides the base to return bindings only for those members that were passed on construction.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="type">The type whose members are being bound (note this could be a type that's
+        /// derived from the one on which the property identified by <paramref name="prop"/> is declared.</param>
+        /// <param name="prop">The property being bound.</param>
+        /// <returns>The binding to be applied to the passed <paramref name="prop"/> if it's a known
+        /// property, otherwise <c>null</c></returns>
         protected override MemberBinding CreateBinding(ICompileContext context, Type type, PropertyInfo prop)
         {
             if (_members.TryGetValue(new MemberInfoKey(prop), out var binding))
