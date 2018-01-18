@@ -17,11 +17,36 @@ namespace Rezolver
     /// </summary>
     public class ProjectionTargetContainer : ITargetContainer
     {
+        /// <summary>
+        /// The ultimate root target container to which this target container belongs.
+        /// </summary>
         public IRootTargetContainer Root { get; }
+        /// <summary>
+        /// Element type of the <see cref="IEnumerable{T}"/> whose elements will be projected into a
+        /// new enumerable type.  Note - this is always equal to the type argument that's present in the
+        /// <see cref="SourceEnumerableType"/>.
+        /// </summary>
         public Type SourceElementType { get; }
+        /// <summary>
+        /// Element type of the <see cref="IEnumerable{T}"/> that is to be projected from the source 
+        /// enumerable.
+        /// </summary>
         public Type OutputElementType { get; }
         private Func<IRootTargetContainer, ITarget, TargetProjection> TargetProjectionFactory { get; }
+
+        /// <summary>
+        /// The concrete type of the <see cref="IEnumerable{T}"/> instance that will feed the projection 
+        /// to an instance of the <see cref="OutputEnumerableType"/>.
+        /// 
+        /// The single type argument is available through the <see cref="SourceElementType"/> property.
+        /// </summary>
         public Type SourceEnumerableType { get; }
+
+        /// <summary>
+        /// The concrete type of the <see cref="IEnumerable{T}"/> that's projected from the source enumerable.
+        /// 
+        /// The single type argument is available through the <see cref="OutputElementType"/> property.
+        /// </summary>
         public Type OutputEnumerableType { get; }
 
         private readonly ConcurrentDictionary<Type, EnumerableTarget> _cache = new ConcurrentDictionary<Type, EnumerableTarget>();

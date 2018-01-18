@@ -23,7 +23,7 @@ namespace Rezolver.Events
         public Type Type { get; }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="TargetRegisteredEvent"/>
+        /// Constructs a new instance of the <see cref="TargetRegisteredEventArgs"/>
         /// </summary>
         /// <param name="target"></param>
         /// <param name="type"></param>

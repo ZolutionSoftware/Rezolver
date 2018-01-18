@@ -21,6 +21,9 @@ namespace Rezolver
 	/// </summary>
 	/// <remarks>You typically don't create this type directly - instead, other targets such as <see cref="ConstructorTarget"/>
 	/// will create it as needed through the use of an <see cref="IMemberBindingBehaviour"/> object.
+    /// 
+    /// However, the two constructors allow you either to create a binding to a specific target, or to
+    /// create a binding that will automatically resolve the member type from the container.
 	/// </remarks>
 	public class MemberBinding
 	{
@@ -60,7 +63,8 @@ namespace Rezolver
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="MemberBinding"/> class.
+		/// Creates a new instance of the <see cref="MemberBinding"/> class which will seek to bind
+        /// the given <paramref name="member"/> with the result of the given <paramref name="target"/>.
 		/// </summary>
 		/// <param name="member">The member to be bound.</param>
 		/// <param name="target">The target whose value will be written to the member.</param>
@@ -71,10 +75,14 @@ namespace Rezolver
 		}
 
         /// <summary>
-        /// 
+        /// Creates a new instance of the <see cref="MemberBinding"/> class which will auto-bind 
+        /// the <paramref name="member"/> by resolving an instance of the member's type, or 
+        /// to the type passed in the <paramref name="resolveType"/> parameter.
         /// </summary>
-        /// <param name="member"></param>
-        /// <param name="resolveType"></param>
+        /// <param name="member">The member to be bound.</param>
+        /// <param name="resolveType">If not <c>null</c> then this will be the type that'll
+        /// be resolved from the container.  Otherwise, the member's type will be resolved from the
+        /// container.</param>
         public MemberBinding(MemberInfo member, Type resolveType = null)
         {
             Member = member ?? throw new ArgumentNullException(nameof(member));
